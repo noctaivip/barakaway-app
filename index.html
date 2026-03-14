@@ -212,6 +212,27 @@ margin:0 10px;
 .qr{
 margin-top:20px;
 }
+
+.install-box{
+text-align:center;
+margin-top:20px;
+}
+
+.install-btn{
+background:#2d7a46;
+color:white;
+border:none;
+padding:12px 22px;
+font-size:15px;
+border-radius:8px;
+cursor:pointer;
+display:none;
+}
+
+.install-btn:hover{
+background:#256338;
+}
+
 </style>
 </head>
 <body>
@@ -236,6 +257,12 @@ Ramadan Mubarak 2026 — May Allah accept your fasting, your prayers, and your c
 Helping one family at a time<br>
 After the goal is completed, the next one will open
 </p>
+
+<div class="install-box">
+<button id="installBtn" class="install-btn">
+Install App
+</button>
+</div>
 
 <div class="section intro">
 <p><strong>We do not ask people.</strong><br>
@@ -483,6 +510,35 @@ var qr=document.getElementById("qr");
 qr.src="https://api.qrserver.com/v1/create-qr-code/?size=220x220&data="+wallet;
 
 loadTransactions();
+
+</script>
+<script>
+
+let deferredPrompt;
+
+window.addEventListener("beforeinstallprompt", (e) => {
+
+e.preventDefault();
+
+deferredPrompt = e;
+
+document.getElementById("installBtn").style.display = "inline-block";
+
+});
+
+document.getElementById("installBtn").addEventListener("click", async () => {
+
+if (!deferredPrompt) return;
+
+deferredPrompt.prompt();
+
+await deferredPrompt.userChoice;
+
+deferredPrompt = null;
+
+document.getElementById("installBtn").style.display = "none";
+
+});
 
 </script>
 </body>
