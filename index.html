@@ -232,7 +232,20 @@ display:none;
 .install-btn:hover{
 background:#256338;
 }
+.share-btn{
+background:#3a3a3a;
+color:white;
+border:none;
+padding:12px 22px;
+font-size:15px;
+border-radius:8px;
+cursor:pointer;
+margin-left:10px;
+}
 
+.share-btn:hover{
+background:#222;
+}
 </style>
 </head>
 <body>
@@ -261,6 +274,9 @@ After the goal is completed, the next one will open
 <div class="install-box">
 <button id="installBtn" class="install-btn">
 Install App
+</button>
+<button onclick="shareApp()" class="share-btn">
+Share App
 </button>
 </div>
 
@@ -539,6 +555,29 @@ deferredPrompt = null;
 document.getElementById("installBtn").style.display = "none";
 
 });
+
+</script>
+<script>
+
+function shareApp(){
+
+if (navigator.share) {
+
+navigator.share({
+title: "One Dollar Exit",
+text: "Help Muslim families through charity.",
+url: "https://onedollarexit.com"
+});
+
+} else {
+
+navigator.clipboard.writeText("https://onedollarexit.com");
+
+alert("Link copied");
+
+}
+
+}
 
 </script>
 </body>
