@@ -583,6 +583,66 @@ alert("Link copied");
 }
 
 </script>
+<script>
+
+let deferredPrompt;
+const installBtn = document.getElementById("installBtn");
+
+window.addEventListener("beforeinstallprompt", (e) => {
+
+e.preventDefault();
+
+deferredPrompt = e;
+
+if (installBtn) {
+installBtn.style.display = "inline-block";
+}
+
+});
+
+if (window.matchMedia('(display-mode: standalone)').matches) {
+
+if (installBtn) {
+installBtn.style.display = "none";
+}
+
+}
+
+installBtn?.addEventListener("click", async () => {
+
+if (!deferredPrompt) return;
+
+deferredPrompt.prompt();
+
+await deferredPrompt.userChoice;
+
+deferredPrompt = null;
+
+installBtn.style.display = "none";
+
+});
+
+function shareApp(){
+
+if (navigator.share) {
+
+navigator.share({
+title: "One Dollar Exit",
+text: "Help Muslim families through charity.",
+url: "https://onedollarexit.com"
+});
+
+} else {
+
+navigator.clipboard.writeText("https://onedollarexit.com");
+
+alert("Link copied");
+
+}
+
+}
+
+</script>
 </body>
 <script>
 if ("serviceWorker" in navigator) {
