@@ -5,6 +5,7 @@ In the name of Allah, the Most Merciful, the Most Compassionate
 <!DOCTYPE html>
 <html lang="ru">
 <head>
+<script defer data-domain="onedollarexit.com" src="https://plausible.io/js/script.js"></script>
 <link rel="icon" type="image/png" href="/favicon.png">
 <link rel="manifest" href="/manifest.json">
 <meta name="theme-color" content="#2d7a46">
@@ -584,64 +585,66 @@ alert("Link copied");
 
 </script>
 <script>
-
 let deferredPrompt;
 const installBtn = document.getElementById("installBtn");
 
-window.addEventListener("beforeinstallprompt", (e) => {
-
-e.preventDefault();
-
-deferredPrompt = e;
-
-if (installBtn) {
-installBtn.style.display = "inline-block";
+function trackEvent(name) {
+  if (typeof plausible === "function") {
+    plausible(name);
+  }
 }
 
+window.addEventListener("beforeinstallprompt", (e) => {
+  e.preventDefault();
+  deferredPrompt = e;
+
+  if (installBtn) {
+    installBtn.style.display = "inline-block";
+  }
+
+  trackEvent("Install Prompt Shown");
 });
 
-if (window.matchMedia('(display-mode: standalone)').matches) {
-
-if (installBtn) {
-installBtn.style.display = "none";
-}
-
+if (window.matchMedia("(display-mode: standalone)").matches) {
+  if (installBtn) {
+    installBtn.style.display = "none";
+  }
 }
 
 installBtn?.addEventListener("click", async () => {
+  trackEvent("Install Button Click");
 
-if (!deferredPrompt) return;
+  if (!deferredPrompt) return;
 
-deferredPrompt.prompt();
+  deferredPrompt.prompt();
+  const choiceResult = await deferredPrompt.userChoice;
 
-await deferredPrompt.userChoice;
+  if (choiceResult.outcome === "accepted") {
+    trackEvent("Install Accepted");
+    installBtn.style.display = "none";
+  } else {
+    trackEvent("Install Dismissed");
+  }
 
-deferredPrompt = null;
-
-installBtn.style.display = "none";
-
+  deferredPrompt = null;
 });
 
-function shareApp(){
+function shareApp() {
+  trackEvent("Share Button Click");
 
-if (navigator.share) {
+  const shareData = {
+    title: "One Dollar Exit",
+    text: "Help Muslim families through charity.",
+    url: "https://onedollarexit.com"
+  };
 
-navigator.share({
-title: "One Dollar Exit",
-text: "Help Muslim families through charity.",
-url: "https://onedollarexit.com"
-});
-
-} else {
-
-navigator.clipboard.writeText("https://onedollarexit.com");
-
-alert("Link copied");
-
+  if (navigator.share) {
+    navigator.share(shareData);
+  } else {
+    navigator.clipboard.writeText(shareData.url);
+    alert("Link copied");
+  }
 }
-
-}
-
 </script>
 </body>
 <script>
