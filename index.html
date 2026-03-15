@@ -545,15 +545,31 @@ document.getElementById("installBtn").style.display = "inline-block";
 
 document.getElementById("installBtn").addEventListener("click", async () => {
 
+localStorage.setItem(
+"installClicks",
+(Number(localStorage.getItem("installClicks"))||0)+1
+);
+
 if (!deferredPrompt) return;
 
 deferredPrompt.prompt();
 
-await deferredPrompt.userChoice;
+const choiceResult = await deferredPrompt.userChoice;
+
+if (choiceResult.outcome === "accepted") {
+localStorage.setItem(
+"installAccepted",
+(Number(localStorage.getItem("installAccepted"))||0)+1
+);
+document.getElementById("installBtn").style.display = "none";
+} else {
+localStorage.setItem(
+"installDismissed",
+(Number(localStorage.getItem("installDismissed"))||0)+1
+);
+}
 
 deferredPrompt = null;
-
-document.getElementById("installBtn").style.display = "none";
 
 });
 
@@ -561,6 +577,11 @@ document.getElementById("installBtn").style.display = "none";
 <script>
 
 function shareApp(){
+
+localStorage.setItem(
+"shareClicks",
+(Number(localStorage.getItem("shareClicks"))||0)+1
+);
 
 if (navigator.share) {
 
@@ -573,7 +594,6 @@ url: "https://onedollarexit.com"
 } else {
 
 navigator.clipboard.writeText("https://onedollarexit.com");
-
 alert("Link copied");
 
 }
