@@ -1,18 +1,73 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Stats — Hidden Sadaqa</title>
+
+<title>Project Statistics — Hidden Sadaqa</title>
+
 <style>
-body{margin:0;font-family:system-ui;background:#f5f7f8;color:#222;}
-.container{max-width:1200px;margin:auto;padding:20px;}
-iframe{width:100%;height:90vh;border:none;border-radius:12px;background:white;}
+
+body{
+margin:0;
+font-family:system-ui;
+background:#f5f7f8;
+color:#222;
+}
+
+.container{
+max-width:1100px;
+margin:auto;
+padding:40px 20px;
+}
+
+h1{
+font-size:32px;
+margin-bottom:30px;
+}
+
+.stat{
+background:white;
+padding:20px;
+margin-bottom:15px;
+border-radius:10px;
+box-shadow:0 4px 10px rgba(0,0,0,0.05);
+font-size:18px;
+}
+
 </style>
+
 </head>
+
 <body>
+
 <div class="container">
-  <iframe plausible-embed src="PASTE_YOUR_PLAUSIBLE_SHARED_OR_EMBED_LINK_HERE"></iframe>
+
+<h1>Project Statistics</h1>
+
+<div class="stat">Install Button Click: <span id="installClicks">0</span></div>
+
+<div class="stat">Install Accepted: <span id="installAccepted">0</span></div>
+
+<div class="stat">Install Dismissed: <span id="installDismissed">0</span></div>
+
+<div class="stat">Share Button Click: <span id="shareClicks">0</span></div>
+
 </div>
+
+<script>
+
+function getStat(name){
+return localStorage.getItem(name) || 0
+}
+
+document.getElementById("installClicks").innerText = getStat("installClicks")
+document.getElementById("installAccepted").innerText = getStat("installAccepted")
+document.getElementById("installDismissed").innerText = getStat("installDismissed")
+document.getElementById("shareClicks").innerText = getStat("shareClicks")
+
+</script>
+
 </body>
 </html>
