@@ -1,73 +1,63 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
 <title>Project Statistics — Hidden Sadaqa</title>
-
 <style>
-
 body{
 margin:0;
 font-family:system-ui;
 background:#f5f7f8;
 color:#222;
 }
-
 .container{
-max-width:1100px;
+max-width:1200px;
 margin:auto;
-padding:40px 20px;
+padding:30px 20px;
 }
-
 h1{
 font-size:32px;
-margin-bottom:30px;
+margin-bottom:20px;
 }
-
-.stat{
+iframe{
+width:100%;
+height:90vh;
+border:none;
+border-radius:12px;
 background:white;
-padding:20px;
-margin-bottom:15px;
-border-radius:10px;
-box-shadow:0 4px 10px rgba(0,0,0,0.05);
-font-size:18px;
+box-shadow:0 6px 16px rgba(0,0,0,0.05);
 }
-
 </style>
-
 </head>
-
 <body>
+<div style="max-width:700px;margin:80px auto;text-align:center;font-family:system-ui,Arial,sans-serif">
 
-<div class="container">
+<h1 style="font-size:32px;margin-bottom:20px">
+Project Statistics
+</h1>
 
-<h1>Project Statistics</h1>
+<p style="font-size:16px;color:#555;line-height:1.6;margin-bottom:30px">
+This page provides access to the live public statistics of the Hidden Sadaqa project.
+All visits and activity on the website are transparently recorded and displayed
+through our analytics dashboard.
+</p>
 
-<div class="stat">Install Button Click: <span id="installClicks">0</span></div>
-
-<div class="stat">Install Accepted: <span id="installAccepted">0</span></div>
-
-<div class="stat">Install Dismissed: <span id="installDismissed">0</span></div>
-
-<div class="stat">Share Button Click: <span id="shareClicks">0</span></div>
+<a href="https://onedollarexit.goatcounter.com/" target="_blank"
+style="
+display:inline-block;
+padding:14px 28px;
+background:#2d7a46;
+color:white;
+text-decoration:none;
+border-radius:8px;
+font-size:16px;
+font-weight:600;
+box-shadow:0 4px 10px rgba(0,0,0,0.1);
+">
+View Live Statistics
+</a>
 
 </div>
-
-<script>
-
-function getStat(name){
-return localStorage.getItem(name) || 0
-}
-
-document.getElementById("installClicks").innerText = getStat("installClicks")
-document.getElementById("installAccepted").innerText = getStat("installAccepted")
-document.getElementById("installDismissed").innerText = getStat("installDismissed")
-document.getElementById("shareClicks").innerText = getStat("shareClicks")
-
-</script>
-
 </body>
 </html>
