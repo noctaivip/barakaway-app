@@ -530,76 +530,72 @@ loadTransactions();
 
 </script>
 <script>
+let deferredPrompt = null;
+const installBtn = document.getElementById("installBtn");
 
-let deferredPrompt;
+function trackEvent(name) {
+  if (typeof plausible === "function") {
+    plausible(name);
+  }
+}
 
 window.addEventListener("beforeinstallprompt", (e) => {
+  e.preventDefault();
+  deferredPrompt = e;
 
-e.preventDefault();
+  if (installBtn) {
+    installBtn.style.display = "inline-block";
+  }
 
-deferredPrompt = e;
-
-document.getElementById("installBtn").style.display = "inline-block";
-
+  trackEvent("Install Prompt Shown");
 });
 
-document.getElementById("installBtn").addEventListener("click", async () => {
+window.addEventListener("appinstalled", () => {
+  trackEvent("Install Accepted");
 
-localStorage.setItem(
-"installClicks",
-(Number(localStorage.getItem("installClicks"))||0)+1
-);
+  if (installBtn) {
+    installBtn.style.display = "none";
+  }
 
-if (!deferredPrompt) return;
-
-deferredPrompt.prompt();
-
-const choiceResult = await deferredPrompt.userChoice;
-
-if (choiceResult.outcome === "accepted") {
-localStorage.setItem(
-"installAccepted",
-(Number(localStorage.getItem("installAccepted"))||0)+1
-);
-document.getElementById("installBtn").style.display = "none";
-} else {
-localStorage.setItem(
-"installDismissed",
-(Number(localStorage.getItem("installDismissed"))||0)+1
-);
-}
-
-deferredPrompt = null;
-
+  deferredPrompt = null;
 });
 
-</script>
-<script>
+if (window.matchMedia("(display-mode: standalone)").matches) {
+  if (installBtn) {
+    installBtn.style.display = "none";
+  }
+}
 
-function shareApp(){
+installBtn?.addEventListener("click", async () => {
+  trackEvent("Install Button Click");
 
-localStorage.setItem(
-"shareClicks",
-(Number(localStorage.getItem("shareClicks"))||0)+1
-);
+  if (!deferredPrompt) return;
 
-if (navigator.share) {
+  deferredPrompt.prompt();
 
-navigator.share({
-title: "One Dollar Exit",
-text: "Help Muslim families through charity.",
-url: "https://onedollarexit.com"
+  const choiceResult = await deferredPrompt.userChoice;
+
+  if (choiceResult.outcome === "dismissed") {
+    trackEvent("Install Dismissed");
+  }
 });
 
-} else {
+function shareApp() {
+  trackEvent("Share Button Click");
 
-navigator.clipboard.writeText("https://onedollarexit.com");
-alert("Link copied");
+  const shareData = {
+    title: "Hidden Sadaqa",
+    text: "Help Muslim families through charity.",
+    url: "https://onedollarexit.com"
+  };
 
+  if (navigator.share) {
+    navigator.share(shareData);
+  } else {
+    navigator.clipboard.writeText(shareData.url);
+    alert("Link copied");
+  }
 }
-
-}
-
 </script>
 <script>
 let deferredPrompt;
