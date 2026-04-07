@@ -251,6 +251,61 @@ margin-left:10px;
 .share-btn:hover{
 background:#222;
 }
+
+.donation-dropdown{
+background:#f4f8f5;
+border:1px solid #d8e7dc;
+border-radius:14px;
+padding:0;
+overflow:hidden;
+box-shadow:0 6px 18px rgba(45,122,70,0.08);
+}
+
+.donation-dropdown summary{
+list-style:none;
+cursor:pointer;
+padding:20px 22px;
+background:linear-gradient(135deg,#2d7a46,#256338);
+color:white;
+display:flex;
+align-items:center;
+justify-content:space-between;
+gap:16px;
+font-size:20px;
+font-weight:700;
+}
+
+.donation-dropdown summary::-webkit-details-marker{
+display:none;
+}
+
+.donation-summary-text{
+display:flex;
+flex-direction:column;
+gap:4px;
+}
+
+.donation-summary-note{
+font-size:13px;
+font-weight:500;
+opacity:0.9;
+letter-spacing:0.2px;
+}
+
+.donation-icon{
+font-size:24px;
+line-height:1;
+transition:transform 0.2s ease;
+}
+
+.donation-dropdown[open] .donation-icon{
+transform:rotate(180deg);
+}
+
+.donation-dropdown-content{
+padding:22px;
+}
+
 </style>
 </head>
 <body>
@@ -387,8 +442,16 @@ The collected amount and updates are published weekly.
 </div>
 
 <div class="section">
-<h2>Donation</h2>
+<details class="donation-dropdown">
+<summary>
+<span class="donation-summary-text">
+<span>Donation</span>
+<span class="donation-summary-note">Open wallet address and QR for USDT (TRC20)</span>
+</span>
+<span class="donation-icon">▾</span>
+</summary>
 
+<div class="donation-dropdown-content">
 <p>
 All donations are sent to one public address.
 </p>
@@ -424,6 +487,8 @@ TH6Lae54SaHndgBaNFhXEot7aYCh6GNvvs
 <img id="qr">
 </div>
 </div>
+</div>
+</details>
 </div>
 
 <div class="section">
