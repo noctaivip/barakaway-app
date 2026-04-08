@@ -307,6 +307,17 @@ transform:rotate(180deg);
 padding:22px;
 }
 
+
+.mobile-dropdown summary{list-style:none;cursor:pointer;}
+.mobile-dropdown summary::-webkit-details-marker{display:none;}
+.mobile-dropdown-title{display:none;}
+@media (max-width:640px){
+.mobile-dropdown{border:1px solid #dbe7df;border-radius:14px;overflow:hidden;margin-bottom:18px;background:#f8fbf9;}
+.mobile-dropdown-title{display:flex;justify-content:space-between;padding:16px 18px;background:linear-gradient(180deg,#f6fbf7,#edf5f0);border-left:4px solid #2d7a46;font-weight:700;}
+.mobile-dropdown-content{padding:16px;}
+.mobile-dropdown-content h2{display:none;}
+}
+
 </style>
 </head>
 <body>
@@ -360,7 +371,7 @@ padding:22px;
 </p>
 </div>
 
-<div class="section">
+<details class="mobile-dropdown" open><summary class="mobile-dropdown-title">Прозрачность ▾</summary><div class="mobile-dropdown-content"><div class="section">
 <h2>Прозрачность</h2>
 <div class="verification">
 <p>
@@ -382,10 +393,9 @@ padding:22px;
 Проверить транзакции в Tronscan
 </a>
 </p>
-</div>
-</div>
+</div></div></details>
 
-<div class="section">
+<details class="mobile-dropdown" open><summary class="mobile-dropdown-title">Проект только начинается ▾</summary><div class="mobile-dropdown-content"><div class="section">
 <h2>Проект только начинается</h2>
 <p>
 Этот проект только начинает свою работу.
@@ -395,7 +405,7 @@ padding:22px;
 Сейчас открыт первый сбор помощи.
 Все пожертвования и обновления публикуются на сайте.
 </p>
-</div>
+</div></div></details>
 
 <div class="section">
 <h2>Аят</h2>
@@ -500,7 +510,7 @@ TH6Lae54SaHndgBaNFhXEot7aYCh6GNvvs
 </div>
 </div>
 
-<div class="section">
+<details class="mobile-dropdown" open><summary class="mobile-dropdown-title">Если вы знаете нуждающуюся семью ▾</summary><div class="mobile-dropdown-content"><div class="section">
 <h2>Если вы знаете нуждающуюся семью</h2>
 <p>
 Если вы знаете семью,
@@ -528,10 +538,9 @@ TH6Lae54SaHndgBaNFhXEot7aYCh6GNvvs
 значит сайт или сообщение поддельные.
 </p>
 </div>
-</div>
+</div></div></details>
 
-
-<div class="section">
+<div class="section>
 
 <div style="
 background:#f7f9f8;
@@ -546,7 +555,9 @@ text-align:center;
 </p>
 
 <a href="names-ru.html" style="
-display:inline-block;
+display:block;
+width:fit-content;
+margin:0 auto 10px auto;
 padding:12px 20px;
 background:#2d7a46;
 color:white;
