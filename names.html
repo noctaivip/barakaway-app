@@ -149,6 +149,11 @@ margin:0 auto;
 text-align:center;
 color:#444;
 font-size:16px;
+font-weight:700;
+min-height:72px;
+display:flex;
+align-items:center;
+justify-content:center;
 }
 
 .controls{
@@ -312,6 +317,7 @@ margin-bottom:4px;
 font-size:13px;
 color:#666;
 line-height:1.45;
+font-weight:700;
 }
 
 .link{
@@ -470,6 +476,7 @@ This transforms reading into a real connection with Allah. On the screen below, 
 
 <div class="nav-buttons">
 <button class="light" id="prevBtn">← Previous</button>
+<button class="light" id="resetBtn">↺ Reset</button>
 <button class="light" id="nextBtn">Next →</button>
 </div>
 
@@ -545,22 +552,38 @@ function renderCurrent(){
 }
 
 function nextName(){
-  currentIndex = (currentIndex + 1) % names.length;
+  if (currentIndex >= names.length - 1) {
+    stopAuto();
+    return;
+  }
+  currentIndex += 1;
   renderCurrent();
   renderGrid(searchInput.value);
 }
 
 function prevName(){
-  currentIndex = (currentIndex - 1 + names.length) % names.length;
+  if (currentIndex <= 0) {
+    return;
+  }
+  currentIndex -= 1;
   renderCurrent();
   renderGrid(searchInput.value);
 }
 
 function startAuto(){
   stopAuto();
+  if (currentIndex >= names.length - 1) {
+    return;
+  }
   const seconds = parseInt(speedRange.value, 10);
-  autoTimer = setInterval(nextName, seconds * 1000);
-  playStatus.textContent = `Autoplay: ` + seconds + `s`;
+  autoTimer = setInterval(() => {
+    if (currentIndex >= names.length - 1) {
+      stopAuto();
+      return;
+    }
+    nextName();
+  }, seconds * 1000);
+  playStatus.textContent = "Autoplay: " + seconds + "s";
 }
 
 function stopAuto(){
@@ -575,6 +598,12 @@ document.getElementById("playBtn").addEventListener("click", startAuto);
 document.getElementById("pauseBtn").addEventListener("click", stopAuto);
 document.getElementById("nextBtn").addEventListener("click", () => { stopAuto(); nextName(); });
 document.getElementById("prevBtn").addEventListener("click", () => { stopAuto(); prevName(); });
+document.getElementById("resetBtn").addEventListener("click", () => {
+  stopAuto();
+  currentIndex = 0;
+  renderCurrent();
+  renderGrid(searchInput.value);
+});
 
 speedRange.addEventListener("input", () => {
   speedValue.textContent = speedRange.value;
