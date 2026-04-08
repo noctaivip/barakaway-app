@@ -407,16 +407,16 @@ padding:22px;
 </p>
 </div></div></details>
 
-<div class="section">
+<details class="mobile-dropdown" open><summary class="mobile-dropdown-title">Аят ▾</summary><div class="mobile-dropdown-content"><div class="section">
 <h2>Аят</h2>
 <div class="quote">
 «Пример тех, кто расходует своё имущество на пути Аллаха,
 подобен зерну, из которого выросло семь колосьев,
 и в каждом колосе — по сто зёрен».
 </div>
-</div>
+</div></div></details>
 
-<div class="section">
+<details class="mobile-dropdown" open><summary class="mobile-dropdown-title">Текущая помощь ▾</summary><div class="mobile-dropdown-content"><div class="section">
 <h2>Текущая помощь</h2>
 <p>
 Сейчас помощь направлена одной мусульманской семье.
@@ -451,7 +451,7 @@ padding:22px;
 <p class="small">
 Сумма и обновления проекта публикуются на сайте раз в неделю.
 </p>
-</div>
+</div></div></details>
 
 <div class="section">
 <details class="donation-dropdown">
@@ -503,12 +503,12 @@ TH6Lae54SaHndgBaNFhXEot7aYCh6GNvvs
 </details>
 </div>
 
-<div class="section">
+<details class="mobile-dropdown" open><summary class="mobile-dropdown-title">Последние пожертвования ▾</summary><div class="mobile-dropdown-content"><div class="section">
 <h2>Последние пожертвования</h2>
 <div class="transactions" id="transactions">
 Загрузка данных блокчейна...
 </div>
-</div>
+</div></div></details>
 
 <details class="mobile-dropdown" open><summary class="mobile-dropdown-title">Если вы знаете нуждающуюся семью ▾</summary><div class="mobile-dropdown-content"><div class="section">
 <h2>Если вы знаете нуждающуюся семью</h2>
@@ -540,7 +540,7 @@ TH6Lae54SaHndgBaNFhXEot7aYCh6GNvvs
 </div>
 </div></div></details>
 
-<div class="section>
+<div class="section">
 
 <div style="
 background:#f7f9f8;
@@ -721,5 +721,16 @@ if ("serviceWorker" in navigator) {
   navigator.serviceWorker.register("/service-worker.js");
 }
 </script>
+
+<script>
+document.addEventListener("DOMContentLoaded", function () {
+  if (window.matchMedia("(max-width: 640px)").matches) {
+    document.querySelectorAll(".mobile-dropdown").forEach(function (el) {
+      el.removeAttribute("open");
+    });
+  }
+});
+</script>
+
 </body>
 </html>

@@ -405,16 +405,16 @@ All donations and updates will be published on this site.
 </p>
 </div></div></details>
 
-<div class="section">
+<details class="mobile-dropdown" open><summary class="mobile-dropdown-title">Verse ▾</summary><div class="mobile-dropdown-content"><div class="section">
 <h2>Verse</h2>
 <div class="quote">
 "The example of those who spend their wealth in the way of Allah
 is like a seed which grows seven ears,
 in every ear a hundred grains."
 </div>
-</div>
+</div></div></details>
 
-<div class="section">
+<details class="mobile-dropdown" open><summary class="mobile-dropdown-title">Current help ▾</summary><div class="mobile-dropdown-content"><div class="section">
 <h2>Current help</h2>
 <p>
 Help is currently directed to one Muslim family.
@@ -449,7 +449,7 @@ All donations are directed to helping the family.
 <p class="small">
 The collected amount and updates are published weekly.
 </p>
-</div>
+</div></div></details>
 
 <div class="section">
 <details class="donation-dropdown">
@@ -501,12 +501,12 @@ TH6Lae54SaHndgBaNFhXEot7aYCh6GNvvs
 </details>
 </div>
 
-<div class="section">
+<details class="mobile-dropdown" open><summary class="mobile-dropdown-title">Latest donations ▾</summary><div class="mobile-dropdown-content"><div class="section">
 <h2>Latest donations</h2>
 <div class="transactions" id="transactions">
 Loading blockchain data...
 </div>
-</div>
+</div></div></details>
 
 <details class="mobile-dropdown" open><summary class="mobile-dropdown-title">If you know a family in need ▾</summary><div class="mobile-dropdown-content"><div class="section">
 <h2>If you know a family in need</h2>
@@ -537,7 +537,7 @@ the message or site is fake.
 </div>
 </div></div></details>
 
-<div class="section>
+<div class="section">
 
 <div style="
 background:#f7f9f8;
@@ -718,5 +718,16 @@ if ("serviceWorker" in navigator) {
   navigator.serviceWorker.register("/service-worker.js");
 }
 </script>
+
+<script>
+document.addEventListener("DOMContentLoaded", function () {
+  if (window.matchMedia("(max-width: 640px)").matches) {
+    document.querySelectorAll(".mobile-dropdown").forEach(function (el) {
+      el.removeAttribute("open");
+    });
+  }
+});
+</script>
+
 </body>
 </html>
