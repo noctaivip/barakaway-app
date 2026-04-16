@@ -246,7 +246,7 @@ function renderCategory(cat){
   const found = DATA.categories.find(c => c[0] === cat);
   const title = found ? found[1] : '';
   const intro = DATA.intros[cat] || '';
-  panel.innerHTML = '<div class="category-title">' + escapeHtml(title) + '</div><p class="category-intro">' + intro + '</p>';
+  panel.innerHTML = '<div class="category-title">' + escapeHtml(title) + '</div>';
   const matches = Object.values(DATA.items).filter(item => item.cats.includes(cat));
   if(!matches.length){
     cards.innerHTML = '<div class="empty">' + escapeHtml(DATA.empty) + '</div>';
