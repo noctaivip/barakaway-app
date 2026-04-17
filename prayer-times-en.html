@@ -298,7 +298,33 @@ function saveSettings(){ const s={method:methodSelect.value,school:schoolSelect.
 function applySettingsToUI(){ const s=getSettings(); schoolSelect.value=s.school; timeFormatSelect.value=s.timeFormat; leadSelect.value=s.lead; tuneFajr.value=s.tune.fajr; tuneDhuhr.value=s.tune.dhuhr; tuneAsr.value=s.tune.asr; tuneMaghrib.value=s.tune.maghrib; tuneIsha.value=s.tune.isha; document.querySelectorAll('.prayer-toggle').forEach(el=>el.checked=!!s.enabled[el.dataset.prayer]); syncToggleAll(); }
 function syncToggleAll(){ toggleAll.checked=[...document.querySelectorAll('.prayer-toggle')].every(t=>t.checked); }
 function getPrayerToggleState(){ const m={}; document.querySelectorAll('.prayer-toggle').forEach(el=>m[el.dataset.prayer]=el.checked); return m; }
-function showToast(message){ alert(message); }
+function showToast(message){
+  let toast = document.getElementById('appToast');
+  if(!toast){
+    toast = document.createElement('div');
+    toast.id = 'appToast';
+    toast.style.position = 'fixed';
+    toast.style.left = '50%';
+    toast.style.bottom = '18px';
+    toast.style.transform = 'translateX(-50%)';
+    toast.style.maxWidth = 'min(92vw, 640px)';
+    toast.style.padding = '12px 16px';
+    toast.style.borderRadius = '14px';
+    toast.style.background = 'rgba(31,42,34,0.94)';
+    toast.style.color = '#fff';
+    toast.style.fontSize = '14px';
+    toast.style.fontWeight = '700';
+    toast.style.lineHeight = '1.45';
+    toast.style.boxShadow = '0 14px 34px rgba(0,0,0,0.22)';
+    toast.style.zIndex = '9999';
+    toast.style.textAlign = 'center';
+    document.body.appendChild(toast);
+  }
+  toast.textContent = message;
+  toast.style.display = 'block';
+  clearTimeout(window.__appToastTimer);
+  window.__appToastTimer = setTimeout(()=>{ toast.style.display = 'none'; }, 4200);
+}
 function formatTimeDisplay(time24){ if(!time24) return '—'; const s=getSettings(); if(s.timeFormat==='24') return time24; const [h,m]=time24.split(':').map(Number); const suffix=h>=12?'PM':'AM'; const hour=((h+11)%12)+1; return `${hour}:${String(m).padStart(2,'0')} ${suffix}`; }
 function parseTodayTimeToDate(timeStr){ const n=new Date(); const clean=String(timeStr).split(' ')[0]; const [h,m]=clean.split(':').map(Number); return new Date(n.getFullYear(),n.getMonth(),n.getDate(),h||0,m||0,0); }
 function timingsToTuneString(s){ return [0,s.tune.fajr||0,0,s.tune.dhuhr||0,s.tune.asr||0,s.tune.maghrib||0,0,s.tune.isha||0,0].join(','); }
@@ -310,12 +336,62 @@ function getNextPrayer(t){ const seq=['Fajr','Dhuhr','Asr','Maghrib','Isha']; co
 function updateNextPrayerPanel(){ if(!state.timingsRaw) return; const next=getNextPrayer(state.timingsRaw); const names={Fajr:UI.prayer_fajr,Dhuhr:UI.prayer_dhuhr,Asr:UI.prayer_asr,Maghrib:UI.prayer_maghrib,Isha:UI.prayer_isha}; nextPrayerName.textContent=names[next.key]||next.key; nextPrayerTimeText.textContent=`${UI.at_label} ${formatTimeDisplay(state.timingsRaw[next.key])}`; const tick=()=>{ const now=new Date(); let diff=next.time-now; if(diff<0) diff=0; const h=Math.floor(diff/3600000), m=Math.floor((diff%3600000)/60000), s=Math.floor((diff%60000)/1000); countdown.textContent=`${String(h).padStart(2,'0')}:${String(m).padStart(2,'0')}:${String(s).padStart(2,'0')}`; }; if(state.nextPrayerTimer) clearInterval(state.nextPrayerTimer); tick(); state.nextPrayerTimer=setInterval(()=>{ tick(); const cur=getNextPrayer(state.timingsRaw); if(cur.key!==next.key||cur.time.getTime()!==next.time.getTime()){ updateNextPrayerPanel(); buildPrayerCards(state.timingsRaw); } },1000); }
 function updateDates(meta){ gregorianDate.textContent=meta?.gregorian||'—'; hijriDate.textContent=meta?.hijri||'—'; methodName.textContent=state.methodName||'—'; timezoneName.textContent=state.timezone||Intl.DateTimeFormat().resolvedOptions().timeZone||'—'; }
 function storeLocation(){ localStorage.setItem('prayer_city',state.city||''); localStorage.setItem('prayer_country',state.country||''); localStorage.setItem('prayer_lat',state.lat||''); localStorage.setItem('prayer_lon',state.lon||''); localStorage.setItem('prayer_location_name',state.locationName||''); }
+
+function clearStoredCoordinates(){
+  state.lat='';
+  state.lon='';
+  localStorage.removeItem('prayer_lat');
+  localStorage.removeItem('prayer_lon');
+}
+async function fallbackToManualLocation(){
+  const city = cityInput.value.trim() || state.city || localStorage.getItem('prayer_city') || '';
+  const country = countryInput.value.trim() || state.country || localStorage.getItem('prayer_country') || '';
+  if(city && country){
+    cityInput.value = city;
+    countryInput.value = country;
+    state.city = city;
+    state.country = country;
+    state.currentMode = 'city';
+    showToast('Using manual city search from the entered fields.');
+    await fetchByCity();
+    return true;
+  }
+  return false;
+}
 function getQueryParamsBase(){ const s=saveSettings(); return new URLSearchParams({method:s.method,school:s.school,tune:timingsToTuneString(s)}); }
 function normalizeTimings(t){ const keys=['Fajr','Sunrise','Dhuhr','Asr','Maghrib','Isha']; const out={}; keys.forEach(k=>out[k]=String(t[k]||'').split(' ')[0]); return out; }
 function extractDateMeta(d){ return {gregorian:`${d.gregorian.weekday.en}, ${d.gregorian.date} ${d.gregorian.month.en} ${d.gregorian.year}`,hijri:`${d.hijri.weekday.en} · ${d.hijri.day} ${d.hijri.month.en} ${d.hijri.year}`}; }
 async function fetchByCity(){ const city=cityInput.value.trim(), country=countryInput.value.trim(); if(!city||!country){ showToast(UI.city_country_required); return; } const p=getQueryParamsBase(); p.set('city',city); p.set('country',country); const r=await fetch(`https://api.aladhan.com/v1/timingsByCity?${p.toString()}`); const j=await r.json(); if(j.code!==200) throw new Error(j.data||'API error'); state.currentMode='city'; state.city=city; state.country=country; state.methodName=j.data.meta.method.name; state.timezone=j.data.meta.timezone; state.locationName=`${city}, ${country}`; state.timingsRaw=normalizeTimings(j.data.timings); setLocationUI(state.locationName, UI.manual_location_sub); updateDates(extractDateMeta(j.data.date)); buildPrayerCards(state.timingsRaw); updateNextPrayerPanel(); scheduleNotifications(); storeLocation(); }
 async function fetchByCoordinates(lat,lon,displayName=''){ const p=getQueryParamsBase(); p.set('latitude',lat); p.set('longitude',lon); const r=await fetch(`https://api.aladhan.com/v1/timings?${p.toString()}`); const j=await r.json(); if(j.code!==200) throw new Error(j.data||'API error'); state.currentMode='coords'; state.lat=String(lat); state.lon=String(lon); state.methodName=j.data.meta.method.name; state.timezone=j.data.meta.timezone; state.locationName=displayName||UI.detected_location; state.timingsRaw=normalizeTimings(j.data.timings); setLocationUI(state.locationName, `${lat.toFixed(4)}, ${lon.toFixed(4)}`); updateDates(extractDateMeta(j.data.date)); buildPrayerCards(state.timingsRaw); updateNextPrayerPanel(); scheduleNotifications(); storeLocation(); }
-async function detectLocation(){ if(!navigator.geolocation){ showToast(UI.geolocation_not_supported); return; } navigator.geolocation.getCurrentPosition(async pos=>{ const lat=pos.coords.latitude, lon=pos.coords.longitude; try{ const r=await fetch(`https://nominatim.openstreetmap.org/reverse?format=jsonv2&lat=${lat}&lon=${lon}`); const j=await r.json(); const a=j.address||{}; const city=a.city||a.town||a.village||a.county||''; const country=a.country||''; cityInput.value=city; countryInput.value=country; state.city=city; state.country=country; await fetchByCoordinates(lat,lon,[city,country].filter(Boolean).join(', ')||UI.detected_location);}catch(_){ await fetchByCoordinates(lat,lon,UI.detected_location);} }, err=>showToast(UI.location_error+': '+err.message), {enableHighAccuracy:true,timeout:12000,maximumAge:300000}); }
+async function detectLocation(){
+  if(!navigator.geolocation){
+    showToast(UI.geolocation_not_supported);
+    return;
+  }
+  navigator.geolocation.getCurrentPosition(async pos=>{
+    const lat=pos.coords.latitude, lon=pos.coords.longitude;
+    try{
+      const r=await fetch(`https://nominatim.openstreetmap.org/reverse?format=jsonv2&lat=${lat}&lon=${lon}`);
+      const j=await r.json();
+      const a=j.address||{};
+      const city=a.city||a.town||a.village||a.county||'';
+      const country=a.country||'';
+      cityInput.value=city;
+      countryInput.value=country;
+      state.city=city;
+      state.country=country;
+      await fetchByCoordinates(lat,lon,[city,country].filter(Boolean).join(', ')||UI.detected_location);
+    }catch(_){
+      await fetchByCoordinates(lat,lon,UI.detected_location);
+    }
+  }, async err=>{
+    clearStoredCoordinates();
+    const usedManual = await fallbackToManualLocation().catch(()=>false);
+    if(!usedManual){
+      showToast('Location error: ' + err.message + '. Geolocation is blocked in the browser or PWA. Allow Location for the site or load by country and city.');
+    }
+  }, {enableHighAccuracy:true,timeout:12000,maximumAge:300000});
+}
 async function suggestCities(){ const city=cityInput.value.trim(), country=countryInput.value.trim(); if(city.length<3) return; try{ const r=await fetch(`https://nominatim.openstreetmap.org/search?format=jsonv2&limit=6&q=${encodeURIComponent([city,country].filter(Boolean).join(', '))}`); const data=await r.json(); citySuggestions.innerHTML=''; data.forEach(item=>{ const o=document.createElement('option'); o.value=item.name||item.display_name; o.label=item.display_name; citySuggestions.appendChild(o);}); }catch(_){} }
 async function requestNotificationPermission(){ if(!('Notification' in window)){ showToast(UI.notification_not_supported); updatePermissionBadge(); return; } const result=await Notification.requestPermission(); updatePermissionBadge(); showToast(result==='granted'?UI.notification_granted_msg:UI.notification_denied_msg); if(result==='granted') scheduleNotifications(); }
 function clearNotificationSchedules(){ state.notificationTimeouts.forEach(id=>clearTimeout(id)); state.notificationTimeouts=[]; }
