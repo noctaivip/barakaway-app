@@ -1,0 +1,669 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Qibla</title>
+<style>
+
+body{
+  margin:0;
+  font-family:system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
+  background:#f5f7f8;
+  color:#1f2a22;
+  line-height:1.6;
+}
+.container{
+  max-width:980px;
+  margin:0 auto;
+  background:#fff;
+  padding:40px 28px 44px;
+  box-shadow:0 6px 16px rgba(0,0,0,0.05);
+}
+h1{
+  text-align:center;
+  font-size:40px;
+  margin:0 0 10px;
+  letter-spacing:-0.02em;
+}
+.subtitle{
+  text-align:center;
+  color:#666;
+  margin:0 0 22px;
+  letter-spacing:1.2px;
+  font-size:13px;
+  text-transform:uppercase;
+}
+.hero{
+  display:grid;
+  grid-template-columns:1.15fr 0.85fr;
+  gap:18px;
+  margin-bottom:24px;
+}
+.panel{
+  background:#f7faf8;
+  border:1px solid #e3ece6;
+  border-radius:20px;
+  padding:20px;
+  box-shadow:0 4px 10px rgba(0,0,0,0.03);
+}
+.section{ margin-top:28px; }
+.section-title{
+  font-size:24px;
+  font-weight:800;
+  margin:0 0 16px;
+  padding-left:12px;
+  border-left:4px solid #2d7a46;
+}
+.muted{ color:#5c6d63; }
+.meta-grid{
+  display:grid;
+  grid-template-columns:repeat(2,minmax(0,1fr));
+  gap:12px;
+  margin-top:14px;
+}
+.meta-item{
+  background:#fff;
+  border:1px solid #e5ece7;
+  border-radius:16px;
+  padding:14px;
+}
+.meta-label{
+  font-size:11px;
+  text-transform:uppercase;
+  letter-spacing:1.1px;
+  color:#6d7d74;
+  margin-bottom:6px;
+  font-weight:800;
+}
+.meta-value{
+  font-size:16px;
+  font-weight:700;
+  color:#1f2a22;
+}
+.form-grid{
+  display:grid;
+  grid-template-columns:repeat(2,minmax(0,1fr));
+  gap:14px;
+}
+.field{
+  display:flex;
+  flex-direction:column;
+  gap:6px;
+}
+.field label{
+  font-size:12px;
+  font-weight:800;
+  text-transform:uppercase;
+  letter-spacing:1px;
+  color:#64756b;
+}
+.input{
+  width:100%;
+  box-sizing:border-box;
+  min-height:48px;
+  border:1px solid #dfe7e1;
+  border-radius:14px;
+  padding:12px 14px;
+  font-size:15px;
+  color:#1f2a22;
+  background:#fff;
+  outline:none;
+}
+.input:focus{ border-color:#2d7a46; }
+.btn-row{
+  display:flex;
+  flex-wrap:wrap;
+  gap:10px;
+  margin-top:14px;
+}
+.btn{
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  min-height:46px;
+  padding:0 16px;
+  border-radius:14px;
+  border:1px solid #dfe7e1;
+  background:#fff;
+  color:#1f2a22;
+  font-weight:800;
+  font-size:14px;
+  cursor:pointer;
+}
+.btn.primary{
+  background:#2d7a46;
+  color:#fff;
+  border-color:#2d7a46;
+}
+.btn.secondary{
+  background:#eef5f1;
+  color:#2d7a46;
+  border-color:#dfe9e3;
+}
+.badge-row{
+  display:flex;
+  flex-wrap:wrap;
+  gap:10px;
+  margin-top:14px;
+}
+.badge{
+  display:inline-flex;
+  align-items:center;
+  min-height:34px;
+  padding:6px 12px;
+  border-radius:999px;
+  border:1px solid #dfe9e3;
+  background:#eef5f1;
+  color:#2d7a46;
+  font-size:12px;
+  font-weight:800;
+}
+.badge.warn{
+  background:#fff7e8;
+  border-color:#f1dfb4;
+  color:#8b5d00;
+}
+.badge.error{
+  background:#fff0f0;
+  border-color:#f0c7c7;
+  color:#9d2e2e;
+}
+.qibla-stage{
+  position:relative;
+  min-height:480px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  overflow:hidden;
+}
+.compass-wrap{
+  position:relative;
+  width:360px;
+  height:360px;
+}
+.compass-base{
+  position:absolute;
+  inset:0;
+  border-radius:50%;
+  background:radial-gradient(circle at center, #ffffff 0%, #f4faf6 55%, #e7f1eb 100%);
+  border:1px solid #dfe9e3;
+  box-shadow:inset 0 0 0 12px rgba(255,255,255,0.6), 0 14px 30px rgba(25,58,41,0.08);
+}
+.compass-ring{
+  position:absolute;
+  inset:18px;
+  border:1px dashed #cfe0d5;
+  border-radius:50%;
+}
+.compass-ring.secondary{
+  inset:54px;
+  border-style:solid;
+  opacity:0.5;
+}
+.cardinal{
+  position:absolute;
+  left:50%;
+  top:50%;
+  transform-origin:center center;
+  font-size:12px;
+  font-weight:800;
+  color:#61736a;
+  letter-spacing:1px;
+}
+.cardinal.n{ transform:translate(-50%,-165px); }
+.cardinal.e{ transform:translate(150px,-50%); }
+.cardinal.s{ transform:translate(-50%,150px); }
+.cardinal.w{ transform:translate(-165px,-50%); }
+.direction-arrow{
+  position:absolute;
+  left:50%;
+  top:50%;
+  width:14px;
+  height:170px;
+  transform-origin:50% 86%;
+  transform:translate(-50%,-86%) rotate(0deg);
+}
+.direction-arrow::before{
+  content:"";
+  position:absolute;
+  top:0;
+  left:50%;
+  transform:translateX(-50%);
+  width:0;
+  height:0;
+  border-left:18px solid transparent;
+  border-right:18px solid transparent;
+  border-bottom:118px solid #2d7a46;
+  filter:drop-shadow(0 10px 16px rgba(45,122,70,0.22));
+}
+.direction-arrow::after{
+  content:"";
+  position:absolute;
+  bottom:-4px;
+  left:50%;
+  transform:translateX(-50%);
+  width:26px;
+  height:26px;
+  background:#173224;
+  border:5px solid #fff;
+  border-radius:50%;
+  box-shadow:0 4px 10px rgba(0,0,0,0.16);
+}
+.north-arrow{
+  position:absolute;
+  left:50%;
+  top:50%;
+  width:8px;
+  height:126px;
+  transform-origin:50% 86%;
+  transform:translate(-50%,-86%) rotate(0deg);
+  opacity:0.55;
+}
+.north-arrow::before{
+  content:"";
+  position:absolute;
+  top:0;
+  left:50%;
+  transform:translateX(-50%);
+  width:0;
+  height:0;
+  border-left:10px solid transparent;
+  border-right:10px solid transparent;
+  border-bottom:70px solid #1f2a22;
+}
+.north-arrow::after{
+  content:"";
+  position:absolute;
+  bottom:0;
+  left:50%;
+  transform:translateX(-50%);
+  width:8px;
+  height:54px;
+  background:#1f2a22;
+  border-radius:999px;
+}
+.kaaba-dot{
+  position:absolute;
+  left:50%;
+  top:50%;
+  transform:translate(-50%,-50%);
+  width:18px;
+  height:18px;
+  background:#2d7a46;
+  border-radius:50%;
+  box-shadow:0 0 0 10px rgba(45,122,70,0.14);
+}
+.precision-text{
+  text-align:center;
+  margin-top:18px;
+  font-size:14px;
+  color:#5d6f64;
+}
+.note-box{
+  margin-top:14px;
+  background:#f7faf8;
+  border:1px solid #e4ece6;
+  border-radius:16px;
+  padding:16px;
+  color:#52645a;
+  font-size:14px;
+}
+.steps{
+  display:grid;
+  gap:12px;
+}
+.step{
+  background:#fff;
+  border:1px solid #e4ece6;
+  border-radius:16px;
+  padding:16px;
+}
+.step strong{
+  display:block;
+  margin-bottom:6px;
+  font-size:15px;
+}
+.link{
+  text-align:center;
+  margin-top:38px;
+}
+.link a{
+  color:#2d7a46;
+  text-decoration:none;
+  font-weight:800;
+}
+@media (max-width:900px){
+  .hero{ grid-template-columns:1fr; }
+}
+@media (max-width:700px){
+  .container{ padding:24px 14px 30px; }
+  h1{ font-size:32px; }
+  .subtitle{ font-size:12px; margin-bottom:18px; }
+  .form-grid,.meta-grid{ grid-template-columns:1fr; }
+  .btn-row .btn{ width:100%; }
+  .qibla-stage{ min-height:360px; }
+  .compass-wrap{ width:280px; height:280px; }
+  .cardinal.n{ transform:translate(-50%,-128px); }
+  .cardinal.e{ transform:translate(115px,-50%); }
+  .cardinal.s{ transform:translate(-50%,115px); }
+  .cardinal.w{ transform:translate(-130px,-50%); }
+  .direction-arrow{ height:132px; }
+  .direction-arrow::before{
+    border-left-width:15px;
+    border-right-width:15px;
+    border-bottom-width:92px;
+  }
+  .north-arrow{ height:100px; }
+}
+
+</style>
+</head>
+<body>
+<div class="container">
+  <h1>Qibla</h1>
+  <div class="hero">
+    <div class="panel">
+      <div class="form-grid">
+        <div class="field">
+          <label for="countryInput">Country</label>
+          <input id="countryInput" class="input" placeholder="Example: Uzbekistan">
+        </div>
+        <div class="field">
+          <label for="cityInput">City</label>
+          <input id="cityInput" class="input" list="citySuggestions" placeholder="Example: Tashkent">
+          <datalist id="citySuggestions"></datalist>
+        </div>
+      </div>
+
+      <div class="btn-row">
+        <button class="btn primary" id="searchCityBtn">Find by City</button>
+        <button class="btn secondary" id="detectBtn">Detect Automatically</button>
+        <button class="btn" id="resetHeadingBtn">Reset Direction</button>
+      </div>
+
+      <div class="meta-grid">
+        <div class="meta-item">
+          <div class="meta-label">Location</div>
+          <div class="meta-value" id="locationName">Qibla Page</div>
+        </div>
+        <div class="meta-item">
+          <div class="meta-label">Coordinates</div>
+          <div class="meta-value" id="coordsText">—</div>
+        </div>
+        <div class="meta-item">
+          <div class="meta-label">Direction to the Kaaba</div>
+          <div class="meta-value" id="qiblaAngleText">—</div>
+        </div>
+        <div class="meta-item">
+          <div class="meta-label">Approximate distance</div>
+          <div class="meta-value" id="distanceText">—</div>
+        </div>
+      </div>
+
+      <div class="badge-row">
+        <span class="badge" id="sensorBadge">Waiting for location</span>
+        <span class="badge warn" id="hintBadge">For the most accurate result, keep the device flat</span>
+      </div>
+
+      <div class="note-box">The page supports two modes: automatic location detection and manual search by country and city. If the device supports orientation sensors, the compass will rotate with the phone. If not, the page still shows the precise qibla angle in degrees from north.</div>
+    </div>
+
+    <div class="panel qibla-stage">
+      <div class="compass-wrap">
+        <div class="compass-base"></div>
+        <div class="compass-ring"></div>
+        <div class="compass-ring secondary"></div>
+
+        <div class="cardinal n">N</div>
+        <div class="cardinal e">E</div>
+        <div class="cardinal s">S</div>
+        <div class="cardinal w">W</div>
+
+        <div class="north-arrow" id="northArrow"></div>
+        <div class="direction-arrow" id="qiblaArrow"></div>
+        <div class="kaaba-dot"></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="link"><a href="home.html">Back to Home</a></div>
+</div>
+
+<script>
+const UI = {"status_default": "Waiting for location", "status_sensor": "Direction sensor active", "status_manual": "Manual mode", "not_supported": "Direction sensor not supported", "need_permission": "On iPhone, motion sensor permission may be required", "unknown": "Not selected", "detect_error": "Could not detect location", "city_required": "Enter both country and city.", "load_error": "Could not load the city location"};
+
+const state = {
+  lat: localStorage.getItem('qibla_lat') || '',
+  lon: localStorage.getItem('qibla_lon') || '',
+  city: localStorage.getItem('qibla_city') || '',
+  country: localStorage.getItem('qibla_country') || '',
+  locationName: localStorage.getItem('qibla_location_name') || '',
+  headingOffset: 0,
+  lastHeading: null,
+  deviceOrientationAttached: false
+};
+
+function toRadians(deg) { return deg * Math.PI / 180; }
+function toDegrees(rad) { return rad * 180 / Math.PI; }
+
+function computeQibla(lat, lon) {
+  const kaabaLat = 21.4225;
+  const kaabaLon = 39.8262;
+  const phi1 = toRadians(lat);
+  const phi2 = toRadians(kaabaLat);
+  const dLon = toRadians(kaabaLon - lon);
+
+  const y = Math.sin(dLon);
+  const x = Math.cos(phi1) * Math.tan(phi2) - Math.sin(phi1) * Math.cos(dLon);
+
+  let bearing = toDegrees(Math.atan2(y, x));
+  bearing = (bearing + 360) % 360;
+
+  const R = 6371;
+  const dLat = toRadians(kaabaLat - lat);
+  const dLon2 = toRadians(kaabaLon - lon);
+  const a = Math.sin(dLat / 2) ** 2 + Math.cos(phi1) * Math.cos(phi2) * Math.sin(dLon2 / 2) ** 2;
+  const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
+  const distanceKm = R * c;
+
+  return { bearing, distanceKm };
+}
+
+function setLocationUI() {
+  const name = state.locationName || UI.unknown;
+  document.getElementById('locationName').textContent = name;
+  if (state.lat && state.lon) {
+    document.getElementById('coordsText').textContent = `${Number(state.lat).toFixed(4)}, ${Number(state.lon).toFixed(4)}`;
+    const q = computeQibla(Number(state.lat), Number(state.lon));
+    document.getElementById('qiblaAngleText').textContent = q.bearing.toFixed(1) + '°';
+    document.getElementById('distanceText').textContent = Math.round(q.distanceKm).toLocaleString() + ' km';
+    rotateStaticQibla(q.bearing);
+  } else {
+    document.getElementById('coordsText').textContent = '—';
+    document.getElementById('qiblaAngleText').textContent = '—';
+    document.getElementById('distanceText').textContent = '—';
+  }
+}
+
+function rotateStaticQibla(bearing) {
+  const arrow = document.getElementById('qiblaArrow');
+  arrow.style.transform = `translate(-50%,-86%) rotate(${bearing}deg)`;
+}
+
+function saveLocation() {
+  localStorage.setItem('qibla_lat', state.lat || '');
+  localStorage.setItem('qibla_lon', state.lon || '');
+  localStorage.setItem('qibla_city', state.city || '');
+  localStorage.setItem('qibla_country', state.country || '');
+  localStorage.setItem('qibla_location_name', state.locationName || '');
+}
+
+function alertMsg(msg) {
+  alert(msg);
+}
+
+async function suggestCities() {
+  const city = document.getElementById('cityInput').value.trim();
+  const country = document.getElementById('countryInput').value.trim();
+  if (city.length < 3) return;
+  try {
+    const query = [city, country].filter(Boolean).join(', ');
+    const res = await fetch(`https://nominatim.openstreetmap.org/search?format=jsonv2&limit=6&q=${encodeURIComponent(query)}`);
+    const data = await res.json();
+    const datalist = document.getElementById('citySuggestions');
+    datalist.innerHTML = '';
+    data.forEach(item => {
+      const option = document.createElement('option');
+      option.value = item.name || item.display_name;
+      option.label = item.display_name;
+      datalist.appendChild(option);
+    });
+  } catch (_) {}
+}
+
+async function searchByCity() {
+  const city = document.getElementById('cityInput').value.trim();
+  const country = document.getElementById('countryInput').value.trim();
+  if (!city || !country) {
+    alertMsg(UI.city_required);
+    return;
+  }
+  try {
+    const query = encodeURIComponent([city, country].join(', '));
+    const res = await fetch(`https://nominatim.openstreetmap.org/search?format=jsonv2&limit=1&q=${query}`);
+    const data = await res.json();
+    if (!data || !data.length) throw new Error('Not found');
+    const item = data[0];
+    state.lat = item.lat;
+    state.lon = item.lon;
+    state.city = city;
+    state.country = country;
+    state.locationName = `${city}, ${country}`;
+    saveLocation();
+    setLocationUI();
+    await initOrientationIfPossible();
+    document.getElementById('sensorBadge').textContent = UI.status_manual;
+    document.getElementById('sensorBadge').className = 'badge';
+  } catch (e) {
+    alertMsg(UI.load_error);
+  }
+}
+
+async function detectLocation() {
+  if (!navigator.geolocation) {
+    alertMsg(UI.detect_error);
+    return;
+  }
+  navigator.geolocation.getCurrentPosition(async (pos) => {
+    const lat = pos.coords.latitude;
+    const lon = pos.coords.longitude;
+    state.lat = String(lat);
+    state.lon = String(lon);
+
+    try {
+      const res = await fetch(`https://nominatim.openstreetmap.org/reverse?format=jsonv2&lat=${lat}&lon=${lon}`);
+      const data = await res.json();
+      const addr = data.address || {};
+      const city = addr.city || addr.town || addr.village || addr.county || '';
+      const country = addr.country || '';
+      state.city = city;
+      state.country = country;
+      state.locationName = [city, country].filter(Boolean).join(', ') || UI.unknown;
+      document.getElementById('cityInput').value = city;
+      document.getElementById('countryInput').value = country;
+    } catch (_) {
+      state.locationName = UI.unknown;
+    }
+
+    saveLocation();
+    setLocationUI();
+    await initOrientationIfPossible();
+  }, () => {
+    alertMsg(UI.detect_error);
+  }, {
+    enableHighAccuracy: true,
+    timeout: 12000,
+    maximumAge: 300000
+  });
+}
+
+function getHeadingFromEvent(event) {
+  if (typeof event.webkitCompassHeading === 'number') {
+    return event.webkitCompassHeading;
+  }
+  if (typeof event.alpha === 'number') {
+    return 360 - event.alpha;
+  }
+  return null;
+}
+
+function handleOrientation(event) {
+  if (!state.lat || !state.lon) return;
+  const heading = getHeadingFromEvent(event);
+  if (heading == null || Number.isNaN(heading)) return;
+
+  state.lastHeading = heading;
+  const q = computeQibla(Number(state.lat), Number(state.lon));
+  const relative = (q.bearing - heading + state.headingOffset + 360) % 360;
+
+  document.getElementById('northArrow').style.transform = `translate(-50%,-86%) rotate(${-heading + state.headingOffset}deg)`;
+  document.getElementById('qiblaArrow').style.transform = `translate(-50%,-86%) rotate(${relative}deg)`;
+
+  document.getElementById('sensorBadge').textContent = UI.status_sensor;
+  document.getElementById('sensorBadge').className = 'badge';
+}
+
+async function initOrientationIfPossible() {
+  try {
+    if (typeof DeviceOrientationEvent !== 'undefined' &&
+        typeof DeviceOrientationEvent.requestPermission === 'function') {
+      const result = await DeviceOrientationEvent.requestPermission();
+      if (result !== 'granted') {
+        document.getElementById('sensorBadge').textContent = UI.need_permission;
+        document.getElementById('sensorBadge').className = 'badge warn';
+        return;
+      }
+    }
+
+    if (!state.deviceOrientationAttached) {
+      window.addEventListener('deviceorientationabsolute', handleOrientation, true);
+      window.addEventListener('deviceorientation', handleOrientation, true);
+      state.deviceOrientationAttached = true;
+    }
+  } catch (_) {
+    document.getElementById('sensorBadge').textContent = UI.not_supported;
+    document.getElementById('sensorBadge').className = 'badge error';
+  }
+}
+
+function resetDirection() {
+  if (state.lastHeading == null) {
+    state.headingOffset = 0;
+  } else {
+    state.headingOffset = state.lastHeading;
+  }
+  if (state.lat && state.lon) {
+    const q = computeQibla(Number(state.lat), Number(state.lon));
+    rotateStaticQibla(q.bearing);
+  }
+}
+
+function bootstrap() {
+  document.getElementById('cityInput').addEventListener('input', suggestCities);
+  document.getElementById('searchCityBtn').addEventListener('click', searchByCity);
+  document.getElementById('detectBtn').addEventListener('click', detectLocation);
+  document.getElementById('resetHeadingBtn').addEventListener('click', resetDirection);
+
+  document.getElementById('cityInput').value = state.city || '';
+  document.getElementById('countryInput').value = state.country || '';
+  setLocationUI();
+  if (state.lat && state.lon) {
+    initOrientationIfPossible();
+  }
+}
+
+bootstrap();
+</script>
+</body>
+</html>
