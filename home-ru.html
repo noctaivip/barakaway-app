@@ -368,6 +368,7 @@ font-weight:700;
 }
 
 
+
 .mobile-top-controls{display:none;}
 
 @media(max-width:700px){
@@ -375,42 +376,101 @@ font-weight:700;
   .mobile-top-controls{
     display:block;
     position:fixed;
-    top:60px; /* опустили ниже бегущей строки */
+    top:30px;
     left:0;
     right:0;
     z-index:1000;
+    pointer-events:none;
   }
 
   .icon-btn{
     position:absolute;
-    width:44px;
-    height:44px;
+    width:46px;
+    height:46px;
     border-radius:50%;
-    background:#ffffff;
-    box-shadow:0 4px 12px rgba(0,0,0,0.12);
+    border:1px solid rgba(255,255,255,0.34);
+    background:rgba(255,255,255,0.58);
+    backdrop-filter:blur(12px);
+    -webkit-backdrop-filter:blur(12px);
+    box-shadow:
+      0 10px 24px rgba(18,34,24,0.10),
+      inset 0 1px 0 rgba(255,255,255,0.42);
     display:flex;
     align-items:center;
     justify-content:center;
-    font-size:20px;
+    padding:0;
     cursor:pointer;
+    overflow:hidden;
+    pointer-events:auto;
   }
 
   .icon-btn.left{left:12px;}
   .icon-btn.right{right:12px;}
 
-  /* скрываем старые текстовые кнопки */
+  .icon-btn svg{
+    width:22px;
+    height:22px;
+    fill:#2d7a46;
+    position:relative;
+    z-index:2;
+  }
+
+  .icon-btn .ripple{
+    position:absolute;
+    inset:0;
+    border-radius:50%;
+    transform:scale(0);
+    background:radial-gradient(circle, rgba(45,122,70,0.22) 0%, rgba(45,122,70,0.10) 38%, rgba(45,122,70,0.00) 70%);
+    opacity:0;
+    z-index:1;
+  }
+
+  .icon-btn:active .ripple{
+    animation:mobileRipple .42s ease-out;
+  }
+
+  @keyframes mobileRipple{
+    0%{
+      transform:scale(0.15);
+      opacity:1;
+    }
+    100%{
+      transform:scale(2.2);
+      opacity:0;
+    }
+  }
+
+  .icon-btn:active{
+    transform:scale(0.96);
+  }
+
   .lang-change,
   .install-box{
     display:none;
   }
 }
 
+
 </style>
 </head>
 <body>
 
+
 <div class="mobile-top-controls">
-  <div class="icon-btn left" onclick="changeLanguageChoice()">🌐</div>
+  <button class="icon-btn left" onclick="changeLanguageChoice()" aria-label="Change language">
+    <svg viewBox="0 0 24 24" aria-hidden="true">
+      <path d="M12 2a10 10 0 100 20 10 10 0 000-20zm6.92 9h-3.02a15.6 15.6 0 00-1.33-5.01A8.03 8.03 0 0118.92 11zM12 4.04c.89 1.08 1.97 3.22 2.28 6.96H9.72C10.03 7.26 11.11 5.12 12 4.04zM4.99 13h3.02a15.6 15.6 0 001.33 5.01A8.03 8.03 0 014.99 13zM8.1 11H5.08a8.03 8.03 0 014.35-5.01A15.6 15.6 0 008.1 11zm1.62 2h4.56c-.31 3.74-1.39 5.88-2.28 6.96-.89-1.08-1.97-3.22-2.28-6.96zm5.18 5.01A15.6 15.6 0 0015.9 13h3.02a8.03 8.03 0 01-4.02 5.01z"/>
+    </svg>
+    <span class="ripple"></span>
+  </button>
+  <button class="icon-btn right" onclick="shareApp()" aria-label="Share app">
+    <svg viewBox="0 0 24 24" aria-hidden="true">
+      <path d="M18 16a2.99 2.99 0 00-2.39 1.2l-6.7-3.35a3.1 3.1 0 000-1.7l6.7-3.35A3 3 0 1014 6a3.1 3.1 0 00.08.68l-6.7 3.35a3 3 0 100 4.94l6.7 3.35A3 3 0 1018 16z"/>
+    </svg>
+    <span class="ripple"></span>
+  </button>
+</div>
+
   <div class="icon-btn right" onclick="shareApp()">📤</div>
 </div>
 
