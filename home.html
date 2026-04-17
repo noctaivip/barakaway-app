@@ -832,6 +832,19 @@ function isStandaloneMode(){
   return window.matchMedia("(display-mode: standalone)").matches || window.navigator.standalone === true;
 }
 
+function isAndroid(){
+  return /Android/i.test(navigator.userAgent || "");
+}
+
+function isIOS(){
+  return /iPhone|iPad|iPod/i.test(navigator.userAgent || "");
+}
+
+function isInAppBrowser(){
+  const ua = navigator.userAgent || "";
+  return /(Telegram|FBAN|FBAV|Instagram|Line|wv)/i.test(ua);
+}
+
 function markAppInstalled(){
   localStorage.setItem(installStateKey, "1");
 }
@@ -851,21 +864,40 @@ function updateInstallButtonVisibility(){
   }
 }
 
+function openCurrentPageInExternalBrowser(){
+  const url = window.location.href;
+  if (isAndroid()) {
+    const cleaned = url.replace(/^https?:\/\//, "");
+    window.location.href = "intent://" + cleaned + "#Intent;scheme=https;package=com.android.chrome;end";
+    return true;
+  }
+  return false;
+}
+
 async function installApp(){
-  if (!deferredInstallPrompt) {
+  if (deferredInstallPrompt) {
+    try {
+      await deferredInstallPrompt.prompt();
+      const choiceResult = await deferredInstallPrompt.userChoice;
+      if (choiceResult && choiceResult.outcome === "accepted") {
+        markAppInstalled();
+        updateInstallButtonVisibility();
+      }
+    } catch (error) {
+    } finally {
+      deferredInstallPrompt = null;
+    }
     return;
   }
 
-  try {
-    await deferredInstallPrompt.prompt();
-    const choiceResult = await deferredInstallPrompt.userChoice;
-    if (choiceResult && choiceResult.outcome === "accepted") {
-      markAppInstalled();
-      updateInstallButtonVisibility();
-    }
-  } catch (error) {
-  } finally {
-    deferredInstallPrompt = null;
+  if (isInAppBrowser() && isAndroid()) {
+    openCurrentPageInExternalBrowser();
+    return;
+  }
+
+  if (isIOS()) {
+    // iOS Safari does not support beforeinstallprompt for PWA install.
+    return;
   }
 }
 
@@ -912,7 +944,6 @@ async function copyShareLink(){
     }
   } catch (error) {
     window.prompt("Copy the app link manually:", url);
-
   }
 }
 
