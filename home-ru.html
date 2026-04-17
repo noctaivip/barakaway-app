@@ -518,28 +518,46 @@ h1{
     overflow:hidden;
   }
 
-  .mobile-promo-line{
-    text-align:center;
-    font-size:22px;
-    font-weight:800;
-    letter-spacing:-0.03em;
-    color:#1f2a22;
-    opacity:1;
-    transform:translateY(0) scale(1);
-    transition:
-      opacity 0.45s ease,
-      transform 0.45s ease,
-      color 0.45s ease;
-  }
+.mobile-promo-line{
+  text-align:center;
+  font-size:24px;
+  font-weight:800;
+  letter-spacing:-0.04em;
 
-  .mobile-promo-line.is-hidden{
-    opacity:0;
-    transform:translateY(8px) scale(0.985);
-  }
+  background:linear-gradient(180deg,#1f2a22 0%, #2d7a46 100%);
+  -webkit-background-clip:text;
+  -webkit-text-fill-color:transparent;
 
-  .mobile-promo-line.is-brand{
-    color:#2d7a46;
-  }
+  opacity:1;
+  transform:translateY(0) scale(1);
+
+  transition:
+    opacity 0.45s ease,
+    transform 0.45s ease,
+    filter 0.45s ease;
+}
+
+.mobile-promo-line.is-hidden{
+  opacity:0;
+  transform:translateY(12px) scale(0.96);
+  filter:blur(4px);
+}
+
+.mobile-promo-line.is-brand{
+  background:linear-gradient(180deg,#2d7a46 0%, #4caf6a 100%);
+  -webkit-background-clip:text;
+  -webkit-text-fill-color:transparent;
+  filter:drop-shadow(0 4px 12px rgba(45,122,70,0.25));
+}
+}
+@keyframes promoBreath{
+  0%{ transform:scale(1); }
+  50%{ transform:scale(1.02); }
+  100%{ transform:scale(1); }
+}
+
+.mobile-promo-line{
+  animation:promoBreath 4s ease-in-out infinite;
 }
 </style>
 </head>
