@@ -7,7 +7,32 @@ In the name of Allah, the Most Merciful, the Most Compassionate
 <head>
 
 <script data-goatcounter="https://onedollarexit.goatcounter.com/count"
-async src="//gc.zgo.at/count.js"></script>
+async src="//gc.zgo.at/count.js">
+function shareApp(){
+  const shareData = {
+    title: "Hidden Sadaqa",
+    text: "Hidden Sadaqa",
+    url: window.location.origin ? window.location.origin + window.location.pathname : window.location.href
+  };
+
+  if (navigator.share) {
+    navigator.share(shareData).catch(function(){});
+    return;
+  }
+
+  if (navigator.clipboard && window.location.href) {
+    navigator.clipboard.writeText(window.location.href).then(function(){
+      alert("Ссылка на приложение скопирована.");
+    }).catch(function(){
+      prompt("Скопируй ссылку вручную:", window.location.href);
+    });
+    return;
+  }
+
+  prompt("Скопируй ссылку вручную:", window.location.href);
+}
+
+</script>
 
 <link rel="icon" type="image/png" href="/favicon.png">
 <link rel="manifest" href="/manifest.json">
@@ -44,6 +69,7 @@ animation:ramadanMove 18s linear infinite;
 }
 
 body{
+position:relative;
 margin:0;
 font-family:system-ui;
 background:#f5f7f8;
@@ -375,8 +401,8 @@ font-weight:700;
 
   .mobile-top-controls{
     display:block;
-    position:fixed;
-    top:30px;
+    position:absolute;
+    top:60px;
     left:0;
     right:0;
     z-index:1000;
@@ -447,6 +473,10 @@ font-weight:700;
   .lang-change,
   .install-box{
     display:none;
+  }
+
+  .container{
+    padding-top:94px;
   }
 }
 
@@ -525,4 +555,29 @@ function changeLanguageChoice(){
   sessionStorage.setItem("forceLanguageSelect", "1");
   window.location.href = "index.html";
 }
+
+function shareApp(){
+  const shareData = {
+    title: "Hidden Sadaqa",
+    text: "Hidden Sadaqa",
+    url: window.location.origin ? window.location.origin + window.location.pathname : window.location.href
+  };
+
+  if (navigator.share) {
+    navigator.share(shareData).catch(function(){});
+    return;
+  }
+
+  if (navigator.clipboard && window.location.href) {
+    navigator.clipboard.writeText(window.location.href).then(function(){
+      alert("Ссылка на приложение скопирована.");
+    }).catch(function(){
+      prompt("Скопируй ссылку вручную:", window.location.href);
+    });
+    return;
+  }
+
+  prompt("Скопируй ссылку вручную:", window.location.href);
+}
+
 </script>
