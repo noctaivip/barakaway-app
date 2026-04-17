@@ -6,33 +6,7 @@ In the name of Allah, the Most Merciful, the Most Compassionate
 <html lang="ru">
 <head>
 
-<script data-goatcounter="https://onedollarexit.goatcounter.com/count"
-async src="//gc.zgo.at/count.js">
-function shareApp(){
-  const shareData = {
-    title: "Hidden Sadaqa",
-    text: "Hidden Sadaqa",
-    url: window.location.origin ? window.location.origin + window.location.pathname : window.location.href
-  };
-
-  if (navigator.share) {
-    navigator.share(shareData).catch(function(){});
-    return;
-  }
-
-  if (navigator.clipboard && window.location.href) {
-    navigator.clipboard.writeText(window.location.href).then(function(){
-      alert("Ссылка на приложение скопирована.");
-    }).catch(function(){
-      prompt("Скопируй ссылку вручную:", window.location.href);
-    });
-    return;
-  }
-
-  prompt("Скопируй ссылку вручную:", window.location.href);
-}
-
-</script>
+<script data-goatcounter="https://onedollarexit.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
 
 <link rel="icon" type="image/png" href="/favicon.png">
 <link rel="manifest" href="/manifest.json">
@@ -247,7 +221,7 @@ margin-top:20px;
 .install-box{
 text-align:center;
 margin-top:20px;
-display:none;
+display:block;
 }
 
 .install-box.is-visible{
@@ -673,7 +647,7 @@ h1{
 </div>
 
 <div class="install-box" id="installBox">
-<button id="installBtn" class="install-btn">Установить приложение</button>
+<button id="installBtn" class="install-btn" type="button">Установить приложение</button>
 </div>
 <br/>
 <br/>
@@ -709,31 +683,6 @@ function changeLanguageChoice(){
   sessionStorage.setItem("forceLanguageSelect", "1");
   window.location.href = "index.html";
 }
-
-function shareApp(){
-  const shareData = {
-    title: "Hidden Sadaqa",
-    text: "Hidden Sadaqa",
-    url: window.location.origin ? window.location.origin + window.location.pathname : window.location.href
-  };
-
-  if (navigator.share) {
-    navigator.share(shareData).catch(function(){});
-    return;
-  }
-
-  if (navigator.clipboard && window.location.href) {
-    navigator.clipboard.writeText(window.location.href).then(function(){
-      alert("Ссылка на приложение скопирована.");
-    }).catch(function(){
-      prompt("Скопируй ссылку вручную:", window.location.href);
-    });
-    return;
-  }
-
-  prompt("Скопируй ссылку вручную:", window.location.href);
-}
-
 </script>
 <script>
 (function(){
