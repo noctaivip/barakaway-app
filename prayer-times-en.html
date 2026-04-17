@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="ru">
+<html lang="en">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -8,7 +8,7 @@
 <meta name="theme-color" content="#2d7a46">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="default">
-<title>Время молитв</title>
+<title>Prayer Times</title>
 <style>
 body{
   margin:0;
@@ -98,84 +98,6 @@ h1{
 .note-box{margin-top:14px;background:#f7faf8;border:1px solid #e4ece6;border-radius:16px;padding:16px;color:#52645a;font-size:14px;}
 .link{text-align:center;margin-top:38px;}
 .link a{color:#2d7a46;text-decoration:none;font-weight:800;}
-.month-grid{
-  display:grid;
-  grid-template-columns:repeat(7,minmax(0,1fr));
-  gap:8px;
-}
-.month-day,.month-head{
-  border-radius:14px;
-  padding:10px 8px;
-  text-align:center;
-}
-.month-head{
-  background:#eef5f1;
-  border:1px solid #dfe9e3;
-  font-size:12px;
-  font-weight:800;
-  color:#567064;
-  text-transform:uppercase;
-}
-.month-day{
-  background:#fafcfa;
-  border:1px solid #e4ece6;
-  min-height:72px;
-  display:flex;
-  flex-direction:column;
-  justify-content:flex-start;
-  align-items:center;
-  gap:4px;
-}
-.month-day.today{
-  border-color:#2d7a46;
-  background:#f2faf5;
-  box-shadow:0 6px 14px rgba(45,122,70,0.08);
-}
-.month-num{font-size:13px;font-weight:800;color:#1f2a22;}
-.month-fajr,.month-maghrib{font-size:11px;color:#65766d;}
-.jumuah-grid{
-  display:grid;
-  grid-template-columns:repeat(3,minmax(0,1fr));
-  gap:14px;
-}
-.jumuah-box{
-  background:#fafcfa;
-  border:1px solid #e4ece6;
-  border-radius:18px;
-  padding:18px;
-}
-.jumuah-time{
-  font-size:26px;
-  font-weight:900;
-  color:#2d7a46;
-  margin-top:6px;
-}
-.home-widget{
-  background:#f2faf5;
-  border:1px solid #dce8e1;
-  border-radius:18px;
-  padding:18px;
-}
-.home-widget-code{
-  margin-top:12px;
-  background:#1f2a22;
-  color:#eaf4ee;
-  border-radius:16px;
-  padding:16px;
-  font-family:ui-monospace,SFMono-Regular,Menlo,monospace;
-  font-size:13px;
-  line-height:1.55;
-  overflow:auto;
-  white-space:pre-wrap;
-}
-@media (max-width:900px){
-  .qibla-wrap,.jumuah-grid{grid-template-columns:1fr;}
-}
-@media (max-width:700px){
-  .month-grid{grid-template-columns:repeat(2,minmax(0,1fr));}
-  .qibla-compass{width:200px;height:200px;}
-}
-
 @media (max-width:900px){
   .hero{grid-template-columns:1fr;}
   .prayer-grid{grid-template-columns:repeat(2,minmax(0,1fr));}
@@ -195,70 +117,72 @@ h1{
 </head>
 <body>
 <div class="container">
-  <h1>Время молитв</h1>
+  <h1>Prayer Times</h1>
+  <p class="subtitle">auto-detect · city & country · filters · notifications · accurate schedule</p>
 
   <div class="hero">
     <div class="panel">
-      <div class="big-location" id="locationName">Время молитв</div>
-      <div class="muted" id="locationSub">Настрой страну и город или используй автоопределение</div>
+      <div class="big-location" id="locationName">Prayer Times</div>
+      <div class="muted" id="locationSub">Set country and city or use auto-detect</div>
       <div class="meta-grid">
-        <div class="meta-item"><div class="meta-label">Григорианская дата</div><div class="meta-value" id="gregorianDate">—</div></div>
-        <div class="meta-item"><div class="meta-label">Хиджра</div><div class="meta-value" id="hijriDate">—</div></div>
-        <div class="meta-item"><div class="meta-label">Метод расчёта</div><div class="meta-value" id="methodName">—</div></div>
-        <div class="meta-item"><div class="meta-label">Часовой пояс</div><div class="meta-value" id="timezoneName">—</div></div>
+        <div class="meta-item"><div class="meta-label">Gregorian Date</div><div class="meta-value" id="gregorianDate">—</div></div>
+        <div class="meta-item"><div class="meta-label">Hijri Date</div><div class="meta-value" id="hijriDate">—</div></div>
+        <div class="meta-item"><div class="meta-label">Calculation Method</div><div class="meta-value" id="methodName">—</div></div>
+        <div class="meta-item"><div class="meta-label">Time Zone</div><div class="meta-value" id="timezoneName">—</div></div>
       </div>
     </div>
     <div class="panel next-prayer">
-      <div class="meta-label">Следующий намаз</div>
+      <div class="meta-label">Next Prayer</div>
       <div class="next-name" id="nextPrayerName">—</div>
       <div class="countdown" id="countdown">--:--:--</div>
       <div class="countdown-note" id="nextPrayerTimeText">—</div>
       <div class="status-bar">
-        <span class="badge" id="permissionBadge">Разрешение не выдано</span>
-        <span class="badge warn" id="engineBadge">Локальные напоминания</span>
+        <span class="badge" id="permissionBadge">Permission not granted</span>
+        <span class="badge warn" id="engineBadge">Local reminders</span>
       </div>
     </div>
   </div>
 
   <div class="section">
-    <div class="section-title">Локация и поиск</div>
+    <div class="section-title">Location & Search</div>
     <div class="panel">
       <div class="form-grid">
         <div class="field">
-          <label for="countryInput">Страна</label>
-          <input id="countryInput" class="input" placeholder="Например: Uzbekistan">
+          <label for="countryInput">Country</label>
+          <input id="countryInput" class="input" placeholder="Example: Uzbekistan">
         </div>
         <div class="field">
-          <label for="cityInput">Город</label>
-          <input id="cityInput" class="input" list="citySuggestions" placeholder="Например: Tashkent">
+          <label for="cityInput">City</label>
+          <input id="cityInput" class="input" list="citySuggestions" placeholder="Example: Tashkent">
           <datalist id="citySuggestions"></datalist>
         </div>
       </div>
       <div class="btn-row">
-        <button class="btn primary" id="searchCityBtn">Загрузить по городу</button>
-        <button class="btn secondary" id="detectBtn">Определить автоматически</button>
-        <button class="btn" id="refreshBtn">Обновить</button>
+        <button class="btn primary" id="searchCityBtn">Load by City</button>
+        <button class="btn secondary" id="detectBtn">Detect Automatically</button>
+        <button class="btn" id="refreshBtn">Refresh</button>
       </div>
+      <div class="note-box">The page supports two modes: manual search by country and city, or automatic device geolocation. For manual mode, enter country and city and load the prayer times. For auto mode, the app tries to detect coordinates and resolve the nearest city.</div>
     </div>
   </div>
 
   <div class="section">
-    <div class="section-title">Фильтры и точность</div>
+    <div class="section-title">Filters & Accuracy</div>
     <div class="panel">
       <div class="form-grid-3">
         <div class="field">
-          <label for="methodSelect">Метод расчёта</label>
+          <label for="methodSelect">Calculation Method</label>
           <select id="methodSelect" class="select"></select>
         </div>
         <div class="field">
-          <label for="schoolSelect">Мазхаб для Асра</label>
+          <label for="schoolSelect">Asr School</label>
           <select id="schoolSelect" class="select">
-            <option value="0">Стандартный (Шафии / Малик / Ханбали)</option>
-            <option value="1">Ханафи</option>
+            <option value="0">Standard (Shafi / Maliki / Hanbali)</option>
+            <option value="1">Hanafi</option>
           </select>
         </div>
         <div class="field">
-          <label for="timeFormatSelect">Формат времени</label>
+          <label for="timeFormatSelect">Time Format</label>
           <select id="timeFormatSelect" class="select">
             <option value="24">24h</option>
             <option value="12">12h</option>
@@ -266,7 +190,7 @@ h1{
         </div>
       </div>
       <div class="section" style="margin-top:18px;">
-        <div class="meta-label">Тонкая настройка минут</div>
+        <div class="meta-label">Fine Tune Minutes</div>
         <div class="tune-grid">
           <div class="field"><label for="tuneFajr">Fajr</label><input id="tuneFajr" class="number" type="number" min="-20" max="20" value="0"></div>
           <div class="field"><label for="tuneDhuhr">Dhuhr</label><input id="tuneDhuhr" class="number" type="number" min="-20" max="20" value="0"></div>
@@ -276,41 +200,41 @@ h1{
         </div>
       </div>
       <div class="btn-row">
-        <button class="btn primary" id="applyFiltersBtn">Применить фильтры</button>
-        <button class="btn" id="resetFiltersBtn">Сбросить к базовым</button>
+        <button class="btn primary" id="applyFiltersBtn">Apply Filters</button>
+        <button class="btn" id="resetFiltersBtn">Reset to Default</button>
       </div>
     </div>
   </div>
 
   <div class="section">
-    <div class="section-title">Сегодняшний график</div>
+    <div class="section-title">Today’s Schedule</div>
     <div id="prayerGrid" class="prayer-grid"></div>
   </div>
 
   <div class="section">
-    <div class="section-title">Уведомления</div>
+    <div class="section-title">Notifications</div>
     <div class="panel">
       <div class="notify-grid">
         <div>
           <div class="field">
-            <label for="leadSelect">Напомнить заранее</label>
+            <label for="leadSelect">Alert Before</label>
             <select id="leadSelect" class="select">
-              <option value="0">Точно в момент намаза</option>
-              <option value="5">5 минут</option>
-              <option value="10">10 минут</option>
-              <option value="15">15 минут</option>
-              <option value="20">20 минут</option>
-              <option value="30">30 минут</option>
+              <option value="0">Exactly at prayer time</option>
+              <option value="5">5 minutes</option>
+              <option value="10">10 minutes</option>
+              <option value="15">15 minutes</option>
+              <option value="20">20 minutes</option>
+              <option value="30">30 minutes</option>
             </select>
           </div>
           <div class="btn-row">
-            <button class="btn primary" id="permissionBtn">Разрешить уведомления</button>
-            <button class="btn" id="saveNotifBtn">Сохранить уведомления</button>
-            <button class="btn secondary" id="testNotifBtn">Тест уведомления</button>
+            <button class="btn primary" id="permissionBtn">Enable Notifications</button>
+            <button class="btn" id="saveNotifBtn">Save Notifications</button>
+            <button class="btn secondary" id="testNotifBtn">Test Notification</button>
           </div>
         </div>
         <div class="notify-list">
-          <div class="toggle-row"><strong>Все пять намазов</strong><label class="switch"><input type="checkbox" id="toggleAll"><span class="slider"></span></label></div>
+          <div class="toggle-row"><strong>All five prayers</strong><label class="switch"><input type="checkbox" id="toggleAll"><span class="slider"></span></label></div>
           <div class="toggle-row"><strong>Fajr</strong><label class="switch"><input type="checkbox" class="prayer-toggle" data-prayer="Fajr"><span class="slider"></span></label></div>
           <div class="toggle-row"><strong>Dhuhr</strong><label class="switch"><input type="checkbox" class="prayer-toggle" data-prayer="Dhuhr"><span class="slider"></span></label></div>
           <div class="toggle-row"><strong>Asr</strong><label class="switch"><input type="checkbox" class="prayer-toggle" data-prayer="Asr"><span class="slider"></span></label></div>
@@ -318,20 +242,11 @@ h1{
           <div class="toggle-row"><strong>Isha</strong><label class="switch"><input type="checkbox" class="prayer-toggle" data-prayer="Isha"><span class="slider"></span></label></div>
         </div>
       </div>
-    </div>
-  </div>
-  <div class="section">
-    <div class="section-title">Джума</div>
-    <div class="panel">
-      <div class="jumuah-grid">
-        <div class="jumuah-box"><div class="meta-label">Рекомендуемое окно прибытия</div><div class="jumuah-time" id="jumuahTimeBox">12:30–13:30</div></div>
-        <div class="jumuah-box"><div class="meta-label">Подготовка</div><div class="muted">Гусль, чистая одежда, суры и салауат</div></div>
-        <div class="jumuah-box"><div class="meta-label">Напоминание</div><div class="muted">С пятницы активируй отдельное уведомление</div></div>
-      </div>
+      <div class="note-box">This page already supports local prayer reminders per prayer, advance timing selection, and saved device preferences. For fully guaranteed alerts when the web app is completely closed, a later upgrade can add push architecture with a service worker and server-side subscription.</div>
     </div>
   </div>
 
-  <div class="link"><a href="home-ru.html">Вернуться на главную</a></div>
+  <div class="link"><a href="home.html">Back to Home</a></div>
 </div>
 
 <script>
@@ -375,7 +290,7 @@ const qiblaDirectionText = document.getElementById('qiblaDirectionText');
 const qiblaNeedle = document.getElementById('qiblaNeedle');
 const monthGrid = document.getElementById('monthGrid');
 const homeWidgetPreview = document.getElementById('homeWidgetPreview');
-const UI = {"notification_not_supported": "Уведомления недоступны", "notification_enabled": "Уведомления включены", "notification_denied": "Уведомления заблокированы", "notification_default": "Разрешение не выдано", "local_reminder_engine": "Локальные напоминания", "location_unknown": "Локация не выбрана", "location_hint": "Выбери страну и город или используй автоопределение", "manual_location_sub": "Загружено по выбранному городу", "detected_location": "Определённая локация", "city_country_required": "Укажи и страну, и город.", "geolocation_not_supported": "Геолокация не поддерживается этим устройством", "location_error": "Ошибка определения локации", "notification_granted_msg": "Разрешение на уведомления выдано.", "notification_denied_msg": "Уведомления не разрешены.", "time_for": "Сейчас время", "starts_in": "через", "minutes": "мин", "enable_notifications_first": "Сначала включи уведомления.", "test_notification_title": "Тестовое уведомление", "test_notification_body": "Локальные напоминания для времени молитв работают.", "notifications_saved": "Настройки уведомлений сохранены.", "load_error": "Не удалось загрузить время молитв", "prayer_fajr": "Фаджр", "prayer_sunrise": "Восход", "prayer_dhuhr": "Зухр", "prayer_asr": "Аср", "prayer_maghrib": "Магриб", "prayer_isha": "Иша", "source_time": "Исходное время", "at_label": "в", "notification_title": "Напоминание"};
+const UI = {"notification_not_supported": "Notifications unavailable", "notification_enabled": "Notifications enabled", "notification_denied": "Notifications blocked", "notification_default": "Permission not granted", "local_reminder_engine": "Local reminders", "location_unknown": "Location not selected", "location_hint": "Choose country and city or use auto-detect", "manual_location_sub": "Loaded for the selected city", "detected_location": "Detected location", "city_country_required": "Enter both country and city.", "geolocation_not_supported": "Geolocation is not supported on this device", "location_error": "Location error", "notification_granted_msg": "Notification permission granted.", "notification_denied_msg": "Notifications were not allowed.", "time_for": "It is now time for", "starts_in": "starts in", "minutes": "min", "enable_notifications_first": "Enable notifications first.", "test_notification_title": "Test notification", "test_notification_body": "Prayer time local reminders are working.", "notifications_saved": "Notification settings saved.", "load_error": "Could not load prayer times", "prayer_fajr": "Fajr", "prayer_sunrise": "Sunrise", "prayer_dhuhr": "Dhuhr", "prayer_asr": "Asr", "prayer_maghrib": "Maghrib", "prayer_isha": "Isha", "source_time": "Source time", "at_label": "at", "notification_title": "Reminder"};
 const state = { currentMode:'city', city:localStorage.getItem('prayer_city')||'', country:localStorage.getItem('prayer_country')||'', lat:localStorage.getItem('prayer_lat')||'', lon:localStorage.getItem('prayer_lon')||'', locationName:localStorage.getItem('prayer_location_name')||'', timingsRaw:null, methodName:'', timezone:'', nextPrayerTimer:null, notificationTimeouts:[] };
 const SETTINGS_KEY='prayer_page_settings_v1';
 function getSettings(){ const d={method:'3',school:'0',timeFormat:'24',lead:'10',tune:{fajr:0,dhuhr:0,asr:0,maghrib:0,isha:0},enabled:{Fajr:true,Dhuhr:true,Asr:true,Maghrib:true,Isha:true}}; try{ const p=JSON.parse(localStorage.getItem(SETTINGS_KEY)||'{}'); return {...d,...p,tune:{...d.tune,...(p.tune||{})},enabled:{...d.enabled,...(p.enabled||{})}} }catch(_){ return d } }
@@ -411,79 +326,6 @@ function applyFiltersAndReload(){ saveSettings(); if(state.currentMode==='coords
 function resetFilters(){ localStorage.removeItem(SETTINGS_KEY); applySettingsToUI(); loadMethods().then(()=>{ methodSelect.value='3'; applyFiltersAndReload(); }); }
 function restoreLastLocationInputs(){ cityInput.value=state.city||''; countryInput.value=state.country||''; }
 async function bootstrap(){ await loadMethods(); applySettingsToUI(); restoreLastLocationInputs(); updatePermissionBadge(); engineBadge.textContent=UI.local_reminder_engine; searchCityBtn.addEventListener('click',()=>fetchByCity().catch(e=>showToast(UI.load_error+': '+e.message))); detectBtn.addEventListener('click',detectLocation); refreshBtn.addEventListener('click',()=>{ if(state.currentMode==='coords'&&state.lat&&state.lon){ fetchByCoordinates(Number(state.lat),Number(state.lon),state.locationName||UI.detected_location).catch(e=>showToast(UI.load_error+': '+e.message)); } else { fetchByCity().catch(e=>showToast(UI.load_error+': '+e.message)); } }); cityInput.addEventListener('input',suggestCities); permissionBtn.addEventListener('click',requestNotificationPermission); saveNotifBtn.addEventListener('click',()=>{ saveSettings(); syncToggleAll(); scheduleNotifications(); showToast(UI.notifications_saved); }); testNotifBtn.addEventListener('click',testNotification); applyFiltersBtn.addEventListener('click',applyFiltersAndReload); resetFiltersBtn.addEventListener('click',resetFilters); toggleAll.addEventListener('change',handleToggleAll); document.querySelectorAll('.prayer-toggle').forEach(el=>el.addEventListener('change',syncToggleAll)); if(state.lat&&state.lon){ fetchByCoordinates(Number(state.lat),Number(state.lon),state.locationName||UI.detected_location).catch(()=>{ if(state.city&&state.country) fetchByCity().catch(()=>setLocationUI(UI.location_unknown,UI.location_hint)); }); } else if(state.city&&state.country){ fetchByCity().catch(()=>setLocationUI(UI.location_unknown,UI.location_hint)); } else { setLocationUI(UI.location_unknown,UI.location_hint); } }
-
-function toRadians(deg){ return deg * Math.PI / 180; }
-function toDegrees(rad){ return rad * 180 / Math.PI; }
-function computeQibla(lat, lon){
-  const kaabaLat = 21.4225, kaabaLon = 39.8262;
-  const phi1 = toRadians(lat), phi2 = toRadians(kaabaLat), dLon = toRadians(kaabaLon - lon);
-  const y = Math.sin(dLon);
-  const x = Math.cos(phi1) * Math.tan(phi2) - Math.sin(phi1) * Math.cos(dLon);
-  let brng = toDegrees(Math.atan2(y, x));
-  brng = (brng + 360) % 360;
-  const R = 6371;
-  const dLat = toRadians(kaabaLat - lat), dLonDist = toRadians(kaabaLon - lon);
-  const a = Math.sin(dLat/2)**2 + Math.cos(phi1) * Math.cos(phi2) * Math.sin(dLonDist/2)**2;
-  const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a));
-  return { angle: brng, distanceKm: R * c };
-}
-function updateQibla(){
-  if(!qiblaAngle || !qiblaDistance || !qiblaDirectionText || !qiblaNeedle){
-    return;
-  }
-  if(!state.lat || !state.lon){
-    qiblaAngle.textContent='—';
-    qiblaDistance.textContent='—';
-    qiblaDirectionText.textContent='Направление к Каабе: —';
-    qiblaNeedle.style.transform='translate(-50%,-88%) rotate(0deg)';
-    return;
-  }
-  const q = computeQibla(Number(state.lat), Number(state.lon));
-  qiblaAngle.textContent = q.angle.toFixed(1) + '°';
-  qiblaDistance.textContent = Math.round(q.distanceKm).toLocaleString() + ' km';
-  qiblaDirectionText.textContent = 'Направление к Каабе: ' + q.angle.toFixed(1) + '°';
-  qiblaNeedle.style.transform = 'translate(-50%,-88%) rotate(' + q.angle + 'deg)';
-}
-function renderMonthView(){
-  if(!monthGrid) return;
-  const heads = ["Пн", "Вт", "Ср", "Чт", "Пт", "Сб", "Вс"];
-  const now = new Date(), year = now.getFullYear(), month = now.getMonth();
-  const daysInMonth = new Date(year, month + 1, 0).getDate();
-  monthGrid.innerHTML = heads.map(h => `<div class="month-head">${h}</div>`).join('');
-  for(let d=1; d<=daysInMonth; d++) {
-    const isToday = d === now.getDate();
-    const fajr = state.timingsRaw ? formatTimeDisplay(state.timingsRaw.Fajr) : '—';
-    const maghrib = state.timingsRaw ? formatTimeDisplay(state.timingsRaw.Maghrib) : '—';
-    monthGrid.innerHTML += `<div class="month-day${isToday ? ' today' : ''}"><div class="month-num">${d}</div><div class="month-fajr">Fajr ${fajr}</div><div class="month-maghrib">Maghrib ${maghrib}</div></div>`;
-  }
-}
-function updateJumuahBox(){
-  if(!state.timingsRaw || !jumuahTimeBox) return;
-  const dhuhr = state.timingsRaw.Dhuhr || '12:30';
-  const dt = parseTodayTimeToDate(dhuhr);
-  const start = new Date(dt.getTime() - 20 * 60000);
-  const end = new Date(dt.getTime() + 40 * 60000);
-  const fmt = d => formatTimeDisplay(String(d.getHours()).padStart(2,'0') + ':' + String(d.getMinutes()).padStart(2,'0'));
-  jumuahTimeBox.textContent = fmt(start) + '–' + fmt(end);
-}
-function updateHomeWidgetPreview(){
-  if(!homeWidgetPreview) return;
-  const name = nextPrayerName.textContent || '—';
-  const time = nextPrayerTimeText.textContent || '—';
-  const count = countdown.textContent || '--:--:--';
-  homeWidgetPreview.textContent = `<div class="home-prayer-widget">\n  <div class="label">Следующий намаз</div>\n  <div class="name>${name}</div>\n  <div class="time">${time}</div>\n  <div class="countdown">${count}</div>\n</div>`;
-}
-const __oldBuildPrayerCards = buildPrayerCards;
-buildPrayerCards = function(t){ __oldBuildPrayerCards(t); renderMonthView(); updateJumuahBox(); updateHomeWidgetPreview(); };
-const __oldSetLocationUI = setLocationUI;
-setLocationUI = function(name, sub){ __oldSetLocationUI(name, sub); updateQibla(); };
-const __oldFetchByCoordinates = fetchByCoordinates;
-fetchByCoordinates = async function(lat, lon, displayName=''){ await __oldFetchByCoordinates(lat, lon, displayName); updateQibla(); renderMonthView(); updateJumuahBox(); updateHomeWidgetPreview(); };
-const __oldFetchByCity = fetchByCity;
-fetchByCity = async function(){ await __oldFetchByCity(); updateQibla(); renderMonthView(); updateJumuahBox(); updateHomeWidgetPreview(); };
-const __oldUpdateNextPrayerPanel = updateNextPrayerPanel;
-updateNextPrayerPanel = function(){ __oldUpdateNextPrayerPanel(); updateHomeWidgetPreview(); };
-
 bootstrap();
 </script>
 </body>
