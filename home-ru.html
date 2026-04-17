@@ -852,40 +852,22 @@ function updateInstallButtonVisibility(){
   }
 }
 
-  if (deferredInstallPrompt) {
-    installBox.style.display = "block";
-  } else {
-    installBox.style.display = "none";
-  }
-}
-
 async function installApp(){
-  if (deferredInstallPrompt) {
-    deferredInstallPrompt.prompt();
-
-    try {
-      const choiceResult = await deferredInstallPrompt.userChoice;
-      if (choiceResult.outcome === "accepted") {
-        markAppInstalled();
-      }
-    } catch (e) {}
-
-    deferredInstallPrompt = null;
+  if (!deferredInstallPrompt) {
+    return;
   }
-}
-
-  const promptEvent = deferredInstallPrompt;
-  deferredInstallPrompt = null;
-  promptEvent.prompt();
 
   try {
-    const choiceResult = await promptEvent.userChoice;
+    await deferredInstallPrompt.prompt();
+    const choiceResult = await deferredInstallPrompt.userChoice;
     if (choiceResult && choiceResult.outcome === "accepted") {
       markAppInstalled();
+      updateInstallButtonVisibility();
     }
-  } catch (error) {}
-
-  updateInstallButtonVisibility();
+  } catch (error) {
+  } finally {
+    deferredInstallPrompt = null;
+  }
 }
 
 function openShareOverlay(){
@@ -931,6 +913,7 @@ async function copyShareLink(){
     }
   } catch (error) {
     window.prompt("Скопируй ссылку вручную:", url);
+
   }
 }
 
