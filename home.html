@@ -491,6 +491,55 @@ font-weight:700;
   color:#1f2a22;
   transition:opacity 0.6s ease;
 }
+.mobile-promo-ad{
+  display:none;
+}
+
+@media(max-width:700px){
+
+  .mobile-promo-ad{
+    display:block;
+    margin:22px 0 18px 0;
+  }
+
+  .mobile-promo-inner{
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    min-height:74px;
+    padding:18px 20px;
+    border-radius:24px;
+    background:linear-gradient(180deg,#ffffff 0%, #fbfdfc 100%);
+    border:1.5px solid #dfe8e2;
+    box-shadow:
+      0 10px 24px rgba(19,40,28,0.05),
+      inset 0 1px 0 rgba(255,255,255,0.92);
+    overflow:hidden;
+  }
+
+  .mobile-promo-line{
+    text-align:center;
+    font-size:22px;
+    font-weight:800;
+    letter-spacing:-0.03em;
+    color:#1f2a22;
+    opacity:1;
+    transform:translateY(0) scale(1);
+    transition:
+      opacity 0.45s ease,
+      transform 0.45s ease,
+      color 0.45s ease;
+  }
+
+  .mobile-promo-line.is-hidden{
+    opacity:0;
+    transform:translateY(8px) scale(0.985);
+  }
+
+  .mobile-promo-line.is-brand{
+    color:#2d7a46;
+  }
+}
 </style>
 </head>
 <body>
@@ -556,8 +605,10 @@ Share App
 <a href="why-anonymous.html">Why anonymous</a>
 </div>
 
-<div class="promo-text-block">
-  <div class="promo-text" id="promoText">Все услуги рядом</div>
+<div class="mobile-promo-ad">
+  <div class="mobile-promo-inner">
+    <div class="mobile-promo-line" id="mobilePromoText">All services nearby</div>
+  </div>
 </div>
 
 <script>
@@ -592,23 +643,33 @@ function shareApp(){
 }
 
 </script>
-<script>
-const texts = [
-  "Все услуги рядом",
-  "TasksLocal"
-];
+(function(){
+  const promo = document.getElementById("mobilePromoText");
+  if (!promo) return;
+  if (window.innerWidth > 700) return;
 
-let index = 0;
-const el = document.getElementById("promoText");
+  const promoTexts = [
+    { text: "All services nearby", brand: false },
+    { text: "TasksLocal", brand: true }
+  ];
 
-setInterval(() => {
-  el.style.opacity = "0";
+  let promoIndex = 0;
 
-  setTimeout(() => {
-    index = (index + 1) % texts.length;
-    el.textContent = texts[index];
-    el.style.opacity = "1";
-  }, 400);
+  setInterval(() => {
+    promo.classList.add("is-hidden");
 
-}, 3000);
-</script>
+    setTimeout(() => {
+      promoIndex = (promoIndex + 1) % promoTexts.length;
+      promo.textContent = promoTexts[promoIndex].text;
+
+      if (promoTexts[promoIndex].brand) {
+        promo.classList.add("is-brand");
+      } else {
+        promo.classList.remove("is-brand");
+      }
+
+      promo.classList.remove("is-hidden");
+    }, 420);
+
+  }, 2800);
+})();
