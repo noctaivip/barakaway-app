@@ -793,6 +793,27 @@ Month of Shawwal - 6 days of fasting, charity, and gratitude. May Allah accept y
   </div>
 </div>
 
+
+<div class="share-overlay" id="shareOverlay" aria-hidden="true">
+  <div class="share-sheet" role="dialog" aria-modal="true" aria-labelledby="shareTitle">
+    <div class="share-handle"></div>
+    <div class="share-title" id="shareTitle">Share app</div>
+    <div class="share-subtitle">Choose how you want to share this app</div>
+    <div class="share-grid">
+      <button class="share-action share-telegram" type="button" data-share="telegram"><div class="share-icon">T</div><span>Telegram</span></button>
+      <button class="share-action share-whatsapp" type="button" data-share="whatsapp"><div class="share-icon">W</div><span>WhatsApp</span></button>
+      <button class="share-action share-facebook" type="button" data-share="facebook"><div class="share-icon">f</div><span>Facebook</span></button>
+      <button class="share-action share-x" type="button" data-share="x"><div class="share-icon">X</div><span>X</span></button>
+      <button class="share-action share-linkedin" type="button" data-share="linkedin"><div class="share-icon">in</div><span>LinkedIn</span></button>
+      <button class="share-action share-email" type="button" data-share="email"><div class="share-icon">@</div><span>Email</span></button>
+      <button class="share-action share-copy" type="button" data-share="copy"><div class="share-icon">⧉</div><span>Copy link</span></button>
+      <button class="share-action share-more" type="button" data-share="more"><div class="share-icon">⋯</div><span>More</span></button>
+    </div>
+    <div class="share-copy-msg" id="shareCopyMsg">App link copied.</div>
+    <button class="share-close" id="shareCloseBtn" type="button">Close</button>
+  </div>
+</div>
+
 <script>
 function changeLanguageChoice(){
   localStorage.removeItem("siteLanguage");
@@ -800,30 +821,208 @@ function changeLanguageChoice(){
   window.location.href = "index.html";
 }
 
-function shareApp(){
+const installStateKey = "hiddenSadaqaAppInstalled";
+let deferredInstallPrompt = null;
+
+function getShareUrl(){
+  return window.location.href;
+}
+
+function isStandaloneMode(){
+  return window.matchMedia("(display-mode: standalone)").matches || window.navigator.standalone === true;
+}
+
+function markAppInstalled(){
+  localStorage.setItem(installStateKey, "1");
+}
+
+function isAppMarkedInstalled(){
+  return localStorage.getItem(installStateKey) === "1";
+}
+
+function updateInstallButtonVisibility(){
+  const installBox = document.getElementById("installBox");
+  const installBtn = document.getElementById("installBtn");
+  if (!installBox || !installBtn) return;
+
+  if (isStandaloneMode() || isAppMarkedInstalled()) {
+    installBox.style.display = "none";
+    return;
+  }
+
+  if (deferredInstallPrompt) {
+    installBox.style.display = "block";
+  } else {
+    installBox.style.display = "none";
+  }
+}
+
+async function installApp(){
+  if (!deferredInstallPrompt) {
+    updateInstallButtonVisibility();
+    return;
+  }
+
+  const promptEvent = deferredInstallPrompt;
+  deferredInstallPrompt = null;
+  promptEvent.prompt();
+
+  try {
+    const choiceResult = await promptEvent.userChoice;
+    if (choiceResult && choiceResult.outcome === "accepted") {
+      markAppInstalled();
+    }
+  } catch (error) {}
+
+  updateInstallButtonVisibility();
+}
+
+function openShareOverlay(){
+  const overlay = document.getElementById("shareOverlay");
+  const copyMsg = document.getElementById("shareCopyMsg");
+  if (!overlay) return;
+  overlay.classList.add("open");
+  overlay.setAttribute("aria-hidden", "false");
+  if (copyMsg) copyMsg.classList.remove("show");
+}
+
+function closeShareOverlay(){
+  const overlay = document.getElementById("shareOverlay");
+  if (!overlay) return;
+  overlay.classList.remove("open");
+  overlay.setAttribute("aria-hidden", "true");
+}
+
+async function copyShareLink(){
+  const url = getShareUrl();
+  const copyMsg = document.getElementById("shareCopyMsg");
+
+  try {
+    if (navigator.clipboard && window.isSecureContext) {
+      await navigator.clipboard.writeText(url);
+    } else {
+      const helper = document.createElement("textarea");
+      helper.value = url;
+      helper.setAttribute("readonly", "readonly");
+      helper.style.position = "absolute";
+      helper.style.left = "-9999px";
+      document.body.appendChild(helper);
+      helper.select();
+      document.execCommand("copy");
+      document.body.removeChild(helper);
+    }
+
+    if (copyMsg) {
+      copyMsg.classList.add("show");
+      setTimeout(function(){
+        copyMsg.classList.remove("show");
+      }, 2200);
+    }
+  } catch (error) {
+    window.prompt("Copy the app link manually:", url);
+  }
+}
+
+function openShareTarget(type){
+  const url = encodeURIComponent(getShareUrl());
+  const text = encodeURIComponent("Hidden Sadaqa");
+  let shareTarget = "";
+
+  if (type === "telegram") shareTarget = "https://t.me/share/url?url=" + url + "&text=" + text;
+  if (type === "whatsapp") shareTarget = "https://wa.me/?text=" + text + "%20" + url;
+  if (type === "facebook") shareTarget = "https://www.facebook.com/sharer/sharer.php?u=" + url;
+  if (type === "x") shareTarget = "https://twitter.com/intent/tweet?text=" + text + "&url=" + url;
+  if (type === "linkedin") shareTarget = "https://www.linkedin.com/sharing/share-offsite/?url=" + url;
+  if (type === "email") shareTarget = "mailto:?subject=Hidden%20Sadaqa&body=" + text + "%0A" + url;
+
+  if (shareTarget) {
+    window.open(shareTarget, "_blank", "noopener,noreferrer");
+  }
+}
+
+async function shareApp(){
   const shareData = {
     title: "Hidden Sadaqa",
     text: "Hidden Sadaqa",
-    url: window.location.origin ? window.location.origin + window.location.pathname : window.location.href
+    url: getShareUrl()
   };
 
   if (navigator.share) {
-    navigator.share(shareData).catch(function(){});
-    return;
+    try {
+      await navigator.share(shareData);
+      return;
+    } catch (error) {}
   }
 
-  if (navigator.clipboard && window.location.href) {
-    navigator.clipboard.writeText(window.location.href).then(function(){
-      alert("App link copied.");
-    }).catch(function(){
-      prompt("Copy the app link manually:", window.location.href);
-    });
-    return;
-  }
-
-  prompt("Copy the app link manually:", window.location.href);
+  openShareOverlay();
 }
 
+window.addEventListener("beforeinstallprompt", function(event){
+  event.preventDefault();
+  deferredInstallPrompt = event;
+  updateInstallButtonVisibility();
+});
+
+window.addEventListener("appinstalled", function(){
+  markAppInstalled();
+  deferredInstallPrompt = null;
+  updateInstallButtonVisibility();
+});
+
+window.addEventListener("DOMContentLoaded", function(){
+  const installBtn = document.getElementById("installBtn");
+  const shareOverlay = document.getElementById("shareOverlay");
+  const shareCloseBtn = document.getElementById("shareCloseBtn");
+
+  if (installBtn) {
+    installBtn.addEventListener("click", installApp);
+  }
+
+  if (shareCloseBtn) {
+    shareCloseBtn.addEventListener("click", closeShareOverlay);
+  }
+
+  if (shareOverlay) {
+    shareOverlay.addEventListener("click", function(event){
+      if (event.target === shareOverlay) {
+        closeShareOverlay();
+      }
+    });
+  }
+
+  document.querySelectorAll("[data-share]").forEach(function(button){
+    button.addEventListener("click", async function(){
+      const shareType = button.getAttribute("data-share");
+
+      if (shareType === "copy") {
+        await copyShareLink();
+        return;
+      }
+
+      if (shareType === "more") {
+        if (navigator.share) {
+          try {
+            await navigator.share({ title: "Hidden Sadaqa", text: "Hidden Sadaqa", url: getShareUrl() });
+            closeShareOverlay();
+            return;
+          } catch (error) {}
+        }
+
+        await copyShareLink();
+        return;
+      }
+
+      openShareTarget(shareType);
+      closeShareOverlay();
+    });
+  });
+
+  updateInstallButtonVisibility();
+
+  setTimeout(function(){
+    updateInstallButtonVisibility();
+  }, 1200);
+});
 </script>
 <script>
 (function(){
@@ -857,3 +1056,6 @@ function shareApp(){
   }, 2800);
 })();
 </script>
+
+</body>
+</html>
