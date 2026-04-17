@@ -794,3 +794,67 @@ h1{
   </div>
 </div>
 
+<script>
+function changeLanguageChoice(){
+  localStorage.removeItem("siteLanguage");
+  sessionStorage.setItem("forceLanguageSelect", "1");
+  window.location.href = "index.html";
+}
+
+function shareApp(){
+  const shareData = {
+    title: "Hidden Sadaqa",
+    text: "Hidden Sadaqa",
+    url: window.location.origin ? window.location.origin + window.location.pathname : window.location.href
+  };
+
+  if (navigator.share) {
+    navigator.share(shareData).catch(function(){});
+    return;
+  }
+
+  if (navigator.clipboard && window.location.href) {
+    navigator.clipboard.writeText(window.location.href).then(function(){
+      alert("Ссылка на приложение скопирована.");
+    }).catch(function(){
+      prompt("Скопируй ссылку вручную:", window.location.href);
+    });
+    return;
+  }
+
+  prompt("Скопируй ссылку вручную:", window.location.href);
+}
+
+</script>
+<script>
+(function(){
+  const promo = document.getElementById("mobilePromoText");
+  if (!promo) return;
+  if (window.innerWidth > 700) return;
+
+  const promoTexts = [
+    { text: "Все услуги рядом", brand: false },
+    { text: "TasksLocal", brand: true }
+  ];
+
+  let promoIndex = 0;
+
+  setInterval(() => {
+    promo.classList.add("is-hidden");
+
+    setTimeout(() => {
+      promoIndex = (promoIndex + 1) % promoTexts.length;
+      promo.textContent = promoTexts[promoIndex].text;
+
+      if (promoTexts[promoIndex].brand) {
+        promo.classList.add("is-brand");
+      } else {
+        promo.classList.remove("is-brand");
+      }
+
+      promo.classList.remove("is-hidden");
+    }, 420);
+
+  }, 2800);
+})();
+</script>
