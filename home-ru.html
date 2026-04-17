@@ -480,7 +480,18 @@ font-weight:700;
   }
 }
 
+.promo-text-block{
+  margin-top:28px;
+  padding:18px;
+  text-align:center;
+}
 
+.promo-text{
+  font-size:18px;
+  font-weight:700;
+  color:#1f2a22;
+  transition:opacity 0.6s ease;
+}
 </style>
 </head>
 <body>
@@ -546,6 +557,10 @@ font-weight:700;
 <a href="why-anonymous-ru.html">Почему анонимно</a>
 </div>
 
+<div class="promo-text-block">
+  <div class="promo-text" id="promoText">Все услуги рядом</div>
+</div>
+
 <script>
 function changeLanguageChoice(){
   localStorage.removeItem("siteLanguage");
@@ -577,4 +592,24 @@ function shareApp(){
   prompt("Скопируй ссылку вручную:", window.location.href);
 }
 
+</script>
+<script>
+const texts = [
+  "Все услуги рядом",
+  "TasksLocal"
+];
+
+let index = 0;
+const el = document.getElementById("promoText");
+
+setInterval(() => {
+  el.style.opacity = "0";
+
+  setTimeout(() => {
+    index = (index + 1) % texts.length;
+    el.textContent = texts[index];
+    el.style.opacity = "1";
+  }, 400);
+
+}, 3000);
 </script>
