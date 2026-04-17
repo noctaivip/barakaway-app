@@ -247,6 +247,11 @@ margin-top:20px;
 .install-box{
 text-align:center;
 margin-top:20px;
+display:none;
+}
+
+.install-box.is-visible{
+display:block;
 }
 
 .install-btn{
@@ -255,32 +260,28 @@ color:white;
 border:none;
 padding:12px 22px;
 font-size:15px;
-border-radius:8px;
+border-radius:10px;
 cursor:pointer;
-display:none;
+display:inline-block;
+min-width:230px;
+box-shadow:0 10px 22px rgba(45,122,70,0.16);
 }
 
 .install-btn:hover{
 background:#256338;
 }
 
-.install-box[data-install-ready="0"] .share-btn{
-margin-left:0;
+.install-btn:active{
+transform:scale(0.985);
 }
 
 @media(max-width:700px){
   .install-box{
-    display:block;
     margin-top:14px;
   }
 
-  .install-btn,
-  .share-btn{
-    min-width:210px;
-  }
-
-  .install-box[data-install-ready="0"] .share-btn{
-    margin-left:5px;
+  .install-btn{
+    min-width:230px;
   }
 }
 
@@ -671,13 +672,8 @@ h1{
 <a href="#" onclick="changeLanguageChoice(); return false;">Сменить язык</a>
 </div>
 
-<div class="install-box">
-<button id="installBtn" class="install-btn">
-Установить приложение
-</button>
-<button onclick="shareApp()" class="share-btn">
-Поделиться приложением
-</button>
+<div class="install-box" id="installBox">
+<button id="installBtn" class="install-btn">Установить приложение</button>
 </div>
 <br/>
 <br/>
