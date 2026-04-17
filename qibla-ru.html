@@ -223,6 +223,8 @@ h1{
   height:170px;
   transform-origin:50% 86%;
   transform:translate(-50%,-86%) rotate(0deg);
+  transition:transform 0.12s linear;
+  will-change:transform;
 }
 .direction-arrow::before{
   content:"";
@@ -374,8 +376,8 @@ h1{
       </div>
 
       <div class="badge-row">
-        <span class="badge" id="sensorBadge">Статичное направление киблы</span>
-        <span class="badge warn" id="hintBadge">Стрелка показывает рассчитанное направление к Каабе от выбранной локации</span>
+        <span class="badge" id="sensorBadge">Живое направление киблы</span>
+        <span class="badge warn" id="hintBadge">Стрелка обновляется при движении телефона и всегда показывает сторону Киблы</span>
       </div>
 
       </div>
@@ -411,7 +413,10 @@ const state = {
   locationName: localStorage.getItem('qibla_location_name') || '',
   headingOffset: 0,
   lastHeading: null,
-  deviceOrientationAttached: false
+  deviceOrientationAttached: false,
+  smoothHeading: null,
+  animationFrame: null,
+  targetArrowAngle: null
 };
 
 function toRadians(deg) { return deg * Math.PI / 180; }
@@ -456,9 +461,14 @@ function setLocationUI() {
   }
 }
 
-function rotateStaticQibla(bearing) {
+function renderArrow(angle) {
   const arrow = document.getElementById('qiblaArrow');
-  arrow.style.transform = `translate(-50%,-86%) rotate(${bearing}deg)`;
+  arrow.style.transform = `translate(-50%,-86%) rotate(${angle}deg)`;
+}
+
+function rotateStaticQibla(bearing) {
+  state.targetArrowAngle = bearing;
+  renderArrow(bearing);
 }
 
 function saveLocation() {
@@ -512,10 +522,97 @@ async function searchByCity() {
     state.locationName = `${city}, ${country}`;
     saveLocation();
     setLocationUI();
-        document.getElementById('sensorBadge').textContent = 'Статичное направление киблы';
+    await initOrientationIfPossible();
+    await initOrientationIfPossible();
+    document.getElementById('sensorBadge').textContent = 'Ручной режим';
     document.getElementById('sensorBadge').className = 'badge';
   } catch (e) {
     alertMsg(UI.load_error);
+  }
+}
+
+
+function normalizeAngle(angle) {
+  let a = angle % 360;
+  if (a < 0) a += 360;
+  return a;
+}
+
+function shortestAngleDelta(from, to) {
+  let diff = normalizeAngle(to) - normalizeAngle(from);
+  if (diff > 180) diff -= 360;
+  if (diff < -180) diff += 360;
+  return diff;
+}
+
+function getHeadingFromEvent(event) {
+  if (typeof event.webkitCompassHeading === 'number') {
+    return event.webkitCompassHeading;
+  }
+  if (typeof event.alpha === 'number') {
+    return 360 - event.alpha;
+  }
+  return null;
+}
+
+function handleOrientation(event) {
+  if (!state.lat || !state.lon) return;
+  const rawHeading = getHeadingFromEvent(event);
+  if (rawHeading == null || Number.isNaN(rawHeading)) return;
+
+  if (state.smoothHeading == null) {
+    state.smoothHeading = rawHeading;
+  } else {
+    const delta = shortestAngleDelta(state.smoothHeading, rawHeading);
+    state.smoothHeading = normalizeAngle(state.smoothHeading + delta * 0.18);
+  }
+
+  state.lastHeading = state.smoothHeading;
+
+  const q = computeQibla(Number(state.lat), Number(state.lon));
+  const relative = normalizeAngle(q.bearing - state.smoothHeading + state.headingOffset);
+  state.targetArrowAngle = relative;
+
+  document.getElementById('sensorBadge').textContent = 'Компас активен';
+  document.getElementById('sensorBadge').className = 'badge';
+}
+
+function animateArrow() {
+  if (state.targetArrowAngle != null) {
+    const arrow = document.getElementById('qiblaArrow');
+    const current = arrow.dataset.currentAngle ? Number(arrow.dataset.currentAngle) : state.targetArrowAngle;
+    const delta = shortestAngleDelta(current, state.targetArrowAngle);
+    const next = normalizeAngle(current + delta * 0.22);
+    arrow.dataset.currentAngle = String(next);
+    renderArrow(next);
+  }
+  state.animationFrame = requestAnimationFrame(animateArrow);
+}
+
+async function initOrientationIfPossible() {
+  try {
+    if (typeof DeviceOrientationEvent !== 'undefined' &&
+        typeof DeviceOrientationEvent.requestPermission === 'function') {
+      const result = await DeviceOrientationEvent.requestPermission();
+      if (result !== 'granted') {
+        document.getElementById('sensorBadge').textContent = UI.need_permission;
+        document.getElementById('sensorBadge').className = 'badge warn';
+        return;
+      }
+    }
+
+    if (!state.deviceOrientationAttached) {
+      window.addEventListener('deviceorientationabsolute', handleOrientation, true);
+      window.addEventListener('deviceorientation', handleOrientation, true);
+      state.deviceOrientationAttached = true;
+    }
+
+    if (!state.animationFrame) {
+      state.animationFrame = requestAnimationFrame(animateArrow);
+    }
+  } catch (_) {
+    document.getElementById('sensorBadge').textContent = UI.not_supported;
+    document.getElementById('sensorBadge').className = 'badge error';
   }
 }
 
@@ -557,9 +654,16 @@ async function detectLocation() {
 }
 
 function resetDirection() {
+  if (state.lastHeading == null) {
+    state.headingOffset = 0;
+  } else {
+    state.headingOffset = state.lastHeading;
+  }
   if (state.lat && state.lon) {
     const q = computeQibla(Number(state.lat), Number(state.lon));
-    rotateStaticQibla(q.bearing);
+    const base = state.lastHeading == null ? q.bearing : normalizeAngle(q.bearing - state.lastHeading + state.headingOffset);
+    state.targetArrowAngle = base;
+    renderArrow(base);
     alertMsg('Направление киблы обновлено.');
   }
 }
@@ -575,6 +679,7 @@ function bootstrap() {
   setLocationUI();
   if (state.lat && state.lon) {
     setLocationUI();
+    initOrientationIfPossible();
   }
 }
 
