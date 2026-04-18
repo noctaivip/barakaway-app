@@ -1116,46 +1116,49 @@ window.addEventListener("DOMContentLoaded", function(){
     const buttons = [...grid.querySelectorAll('.app-menu-btn')];
     if (!buttons.length) return;
 
-    if (localStorage.getItem('hs_guide_seen') === '1') return;
-
     grid.classList.add('is-guided');
     let index = 0;
+    let stopped = false;
 
     function activate(i){
       buttons.forEach(b => b.classList.remove('mobile-guide-active'));
       buttons[i].classList.add('mobile-guide-active');
     }
 
-    function run(){
-      activate(index);
-      setTimeout(()=>{
-        buttons[index].classList.remove('mobile-guide-active');
-        index++;
-        if(index < buttons.length){
-          setTimeout(run, 250);
-        }else{
-          finish();
-        }
-      }, 900);
-    }
-
     function finish(){
+      buttons.forEach(b => b.classList.remove('mobile-guide-active'));
       grid.classList.remove('is-guided');
-      localStorage.setItem('hs_guide_seen','1');
     }
 
     function stop(){
-      grid.classList.remove('is-guided');
-      buttons.forEach(b => b.classList.remove('mobile-guide-active'));
-      localStorage.setItem('hs_guide_seen','1');
+      if (stopped) return;
+      stopped = true;
+      finish();
     }
 
-    buttons.forEach(btn=>{
-      btn.addEventListener('touchstart', stop, {passive:true});
+    function run(){
+      if (stopped) return;
+      activate(index);
+
+      setTimeout(() => {
+        if (stopped) return;
+        buttons[index].classList.remove('mobile-guide-active');
+        index++;
+
+        if (index < buttons.length) {
+          setTimeout(run, 110);
+        } else {
+          finish();
+        }
+      }, 240);
+    }
+
+    buttons.forEach(btn => {
+      btn.addEventListener('touchstart', stop, { passive:true });
       btn.addEventListener('click', stop);
     });
 
-    setTimeout(run, 600);
+    setTimeout(run, 180);
   }
 
   document.addEventListener('DOMContentLoaded', initPremiumGuide);
