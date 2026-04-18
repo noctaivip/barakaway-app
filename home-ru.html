@@ -6,8 +6,7 @@ In the name of Allah, the Most Merciful, the Most Compassionate
 <html lang="ru">
 <head>
 
-<script data-goatcounter="https://onedollarexit.goatcounter.com/count"
-async src="//gc.zgo.at/count.js"></script>
+<script data-goatcounter="https://onedollarexit.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
 
 <link rel="icon" type="image/png" href="/favicon.png">
 <link rel="manifest" href="/manifest.json">
@@ -44,6 +43,7 @@ animation:ramadanMove 18s linear infinite;
 }
 
 body{
+position:relative;
 margin:0;
 font-family:system-ui;
 background:#f5f7f8;
@@ -62,7 +62,7 @@ box-shadow:0 6px 16px rgba(0,0,0,0.05);
 h1{
 text-align:center;
 font-size:36px;
-margin-bottom:5px;
+margin-bottom:0px;
 }
 
 .subtitle{
@@ -221,6 +221,7 @@ margin-top:20px;
 .install-box{
 text-align:center;
 margin-top:20px;
+display:block;
 }
 
 .install-btn{
@@ -229,13 +230,29 @@ color:white;
 border:none;
 padding:12px 22px;
 font-size:15px;
-border-radius:8px;
+border-radius:10px;
 cursor:pointer;
-display:none;
+display:inline-block;
+min-width:230px;
+box-shadow:0 10px 22px rgba(45,122,70,0.16);
 }
 
 .install-btn:hover{
 background:#256338;
+}
+
+.install-btn:active{
+transform:scale(0.985);
+}
+
+@media(max-width:700px){
+  .install-box{
+    margin-top:14px;
+  }
+
+  .install-btn{
+    min-width:230px;
+  }
 }
 
 .share-btn{
@@ -319,29 +336,68 @@ max-width:420px;
 margin:0 auto;
 }
 .app-menu-btn{
-display:block;
-text-align:center;
-padding:18px 22px;
-border-radius:18px;
-background:white;
-border:2px solid #dbe6de;
-box-shadow:0 8px 20px rgba(0,0,0,0.04);
-text-decoration:none;
-color:#1f2a22;
-font-size:22px;
-font-weight:700;
-transition:all .18s ease;
+  display:block;
+  text-align:center;
+
+  padding:18px 22px;
+  border-radius:22px;
+
+  background:
+    linear-gradient(180deg,#ffffff 0%, #fbfdfc 100%);
+
+  border:1.5px solid rgba(33,94,56,0.52);
+  
+  box-shadow:
+    0 10px 24px rgba(15,24,18,0.05),
+    0 4px 12px rgba(45,122,70,0.08),
+    inset 0 1px 0 rgba(255,255,255,0.92);
+
+  text-decoration:none;
+  color:#1f2a22;
+
+  font-size:22px;
+  font-weight:700;
+  letter-spacing:-0.015em;
+
+  transition:
+    transform 0.18s ease,
+    box-shadow 0.18s ease,
+    border-color 0.18s ease,
+    background 0.18s ease;
+
+  transform:translateZ(0);
+  -webkit-tap-highlight-color:transparent;
 }
 .app-menu-btn:hover{
-transform:translateY(-1px);
-border-color:#2d7a46;
-box-shadow:0 10px 24px rgba(45,122,70,0.10);
+  transform:translateY(-2px);
+
+  border-color:rgba(45,122,70,0.72);
+
+  box-shadow:
+    0 16px 30px rgba(15,24,18,0.07),
+    0 8px 18px rgba(45,122,70,0.14),
+    inset 0 1px 0 rgba(255,255,255,0.96);
+}
+.app-menu-btn:active{
+  transform:translateY(0) scale(0.985);
+
+  box-shadow:
+    0 8px 18px rgba(15,24,18,0.05),
+    0 3px 10px rgba(45,122,70,0.08),
+    inset 0 1px 0 rgba(255,255,255,0.9);
 }
 .app-menu-btn.primary{
-background:#2d7a46;
-color:white;
-border-color:#2d7a46;
+  background:
+    linear-gradient(180deg,#ffffff 0%, #fbfdfc 100%);
+  color:#1f2a22;
+  border-color:rgba(45,122,70,0.42);
+
+  box-shadow:
+    0 10px 24px rgba(15,24,18,0.05),
+    0 4px 12px rgba(45,122,70,0.08),
+    inset 0 1px 0 rgba(255,255,255,0.92);
 }
+
 @media(max-width:640px){
   .app-menu-grid{
     max-width:100%;
@@ -351,6 +407,7 @@ border-color:#2d7a46;
     font-size:18px;
     padding:16px 18px;
     border-radius:16px;
+	transform:translateZ(0);
   }
 }
 
@@ -367,9 +424,330 @@ text-decoration:none;
 font-weight:700;
 }
 
+
+
+.mobile-top-controls{display:none;}
+
+@media(max-width:700px){
+h1{
+  margin-top:-3px;
+  margin-bottom:3px;
+}
+  .mobile-top-controls{
+    display:block;
+    position:absolute;
+    top:30px;
+    left:0;
+    right:0;
+    z-index:1000;
+    pointer-events:none;
+  }
+
+  .icon-btn{
+    position:absolute;
+    width:46px;
+    height:46px;
+    border-radius:50%;
+    border:1px solid rgba(255,255,255,0.34);
+    background:rgba(255,255,255,0.58);
+    backdrop-filter:blur(12px);
+    -webkit-backdrop-filter:blur(12px);
+    box-shadow:
+      0 10px 24px rgba(18,34,24,0.10),
+      inset 0 1px 0 rgba(255,255,255,0.42);
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    padding:0;
+    cursor:pointer;
+    overflow:hidden;
+    pointer-events:auto;
+  }
+
+  .icon-btn.left{left:12px;}
+  .icon-btn.right{right:12px;}
+
+  .icon-btn svg{
+    width:22px;
+    height:22px;
+    fill:#2d7a46;
+    position:relative;
+    z-index:2;
+  }
+
+  .icon-btn .ripple{
+    position:absolute;
+    inset:0;
+    border-radius:50%;
+    transform:scale(0);
+    background:radial-gradient(circle, rgba(45,122,70,0.22) 0%, rgba(45,122,70,0.10) 38%, rgba(45,122,70,0.00) 70%);
+    opacity:0;
+    z-index:1;
+  }
+
+  .icon-btn:active .ripple{
+    animation:mobileRipple .42s ease-out;
+  }
+
+  @keyframes mobileRipple{
+    0%{
+      transform:scale(0.15);
+      opacity:1;
+    }
+    100%{
+      transform:scale(2.2);
+      opacity:0;
+    }
+  }
+
+  .icon-btn:active{
+    transform:scale(0.96);
+  }
+
+  .lang-change{
+    display:none;
+  }
+
+  .container{
+    padding-top:94px;
+  }
+}
+
+.promo-text-block{
+  margin-top:28px;
+  padding:18px;
+  text-align:center;
+}
+
+.promo-text{
+  font-size:18px;
+  font-weight:700;
+  color:#1f2a22;
+  transition:opacity 0.6s ease;
+}
+.mobile-promo-ad{
+  display:none;
+}
+
+@media(max-width:700px){
+
+.app-menu-btn{
+  font-size:18px;
+  padding:17px 18px;
+  border-radius:20px;
+
+  border:1.5px solid rgba(45,122,70,0.40);
+
+  box-shadow:
+    0 8px 18px rgba(15,24,18,0.045),
+    0 3px 8px rgba(45,122,70,0.07),
+    inset 0 1px 0 rgba(255,255,255,0.92);
+}
+.app-menu-btn:active{
+  transform:scale(0.985);
+}
+  .mobile-promo-ad{
+    display:block;
+    margin:22px 0 18px 0;
+  }
+
+  .mobile-promo-inner{
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    min-height:74px;
+    padding:18px 20px;
+    border-radius:24px;
+    background:linear-gradient(180deg,#ffffff 0%, #fbfdfc 100%);
+    border:1.5px solid #dfe8e2;
+    box-shadow:
+      0 10px 24px rgba(19,40,28,0.05),
+      inset 0 1px 0 rgba(255,255,255,0.92);
+    overflow:hidden;
+  }
+
+.mobile-promo-line{
+  text-align:center;
+  font-size:24px;
+  font-weight:800;
+  letter-spacing:-0.04em;
+
+  background:linear-gradient(180deg,#1f2a22 0%, #2d7a46 100%);
+  -webkit-background-clip:text;
+  -webkit-text-fill-color:transparent;
+
+  opacity:1;
+  transform:translateY(0) scale(1);
+
+  transition:
+    opacity 0.45s ease,
+    transform 0.45s ease,
+    filter 0.45s ease;
+}
+
+.mobile-promo-line.is-hidden{
+  opacity:0;
+  transform:translateY(12px) scale(0.96);
+  filter:blur(4px);
+}
+
+.mobile-promo-line.is-brand{
+  background:linear-gradient(180deg,#2d7a46 0%, #4caf6a 100%);
+  -webkit-background-clip:text;
+  -webkit-text-fill-color:transparent;
+  filter:drop-shadow(0 4px 12px rgba(45,122,70,0.25));
+}
+}
+@keyframes promoBreath{
+  0%{ transform:scale(1); }
+  50%{ transform:scale(1.02); }
+  100%{ transform:scale(1); }
+}
+
+.mobile-promo-line{
+  animation:promoBreath 4s ease-in-out infinite;
+}
+
+.share-overlay{
+  display:none;
+  position:fixed;
+  inset:0;
+  background:rgba(15,24,18,0.45);
+  backdrop-filter:blur(6px);
+  -webkit-backdrop-filter:blur(6px);
+  z-index:3000;
+  padding:20px;
+  box-sizing:border-box;
+  align-items:flex-end;
+  justify-content:center;
+}
+.share-overlay.open{display:flex;}
+.share-sheet{
+  width:min(100%,520px);
+  background:linear-gradient(180deg,#ffffff 0%, #fbfdfc 100%);
+  border:1px solid #dfe8e2;
+  border-radius:28px 28px 20px 20px;
+  box-shadow:0 20px 50px rgba(18,34,24,0.20);
+  padding:18px 18px 20px;
+}
+.share-handle{
+  width:56px;
+  height:5px;
+  border-radius:999px;
+  background:#d8e4dc;
+  margin:0 auto 14px;
+}
+.share-title{
+  text-align:center;
+  font-size:20px;
+  font-weight:800;
+  letter-spacing:-0.02em;
+  margin-bottom:6px;
+  color:#1f2a22;
+}
+.share-subtitle{
+  text-align:center;
+  font-size:14px;
+  color:#607066;
+  margin-bottom:16px;
+}
+.share-grid{
+  display:grid;
+  grid-template-columns:repeat(3,minmax(0,1fr));
+  gap:12px;
+}
+.share-action{
+  appearance:none;
+  border:none;
+  background:#f7faf8;
+  border:1px solid #e1ebe4;
+  border-radius:20px;
+  padding:14px 8px;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  justify-content:center;
+  gap:10px;
+  cursor:pointer;
+  box-shadow:0 8px 20px rgba(19,40,28,0.04), inset 0 1px 0 rgba(255,255,255,0.92);
+}
+.share-action:active{transform:scale(0.98);}
+.share-icon{
+  width:46px;
+  height:46px;
+  border-radius:50%;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-size:22px;
+  font-weight:800;
+  color:#fff;
+}
+.share-action span{
+  font-size:13px;
+  font-weight:700;
+  color:#1f2a22;
+  text-align:center;
+  line-height:1.25;
+}
+.share-copy-msg{
+  display:none;
+  margin-top:14px;
+  text-align:center;
+  font-size:13px;
+  font-weight:700;
+  color:#2d7a46;
+}
+.share-copy-msg.show{display:block;}
+.share-close{
+  margin-top:14px;
+  width:100%;
+  min-height:48px;
+  border-radius:16px;
+  border:1px solid #dfe8e2;
+  background:#ffffff;
+  font-size:15px;
+  font-weight:800;
+  color:#1f2a22;
+  cursor:pointer;
+}
+.share-telegram .share-icon{background:#27A7E7;}
+.share-whatsapp .share-icon{background:#25D366;}
+.share-facebook .share-icon{background:#1877F2;}
+.share-x .share-icon{background:#111111;}
+.share-linkedin .share-icon{background:#0A66C2;}
+.share-email .share-icon{background:#6B7280;}
+.share-copy .share-icon{background:#2d7a46;}
+.share-more .share-icon{background:#8B5CF6;}
+@media(max-width:700px){
+  .share-overlay{padding:10px;}
+  .share-sheet{width:100%;border-radius:26px 26px 18px 18px;padding:16px 14px 16px;}
+  .share-grid{grid-template-columns:repeat(3,minmax(0,1fr));gap:10px;}
+  .share-action{border-radius:18px;padding:12px 6px;}
+  .share-icon{width:42px;height:42px;font-size:20px;}
+  .share-action span{font-size:12px;}
+}
+
 </style>
 </head>
 <body>
+
+
+<div class="mobile-top-controls">
+  <button class="icon-btn left" onclick="changeLanguageChoice()" aria-label="Change language">
+    <svg viewBox="0 0 24 24" aria-hidden="true">
+      <path d="M12 2a10 10 0 100 20 10 10 0 000-20zm6.92 9h-3.02a15.6 15.6 0 00-1.33-5.01A8.03 8.03 0 0118.92 11zM12 4.04c.89 1.08 1.97 3.22 2.28 6.96H9.72C10.03 7.26 11.11 5.12 12 4.04zM4.99 13h3.02a15.6 15.6 0 001.33 5.01A8.03 8.03 0 014.99 13zM8.1 11H5.08a8.03 8.03 0 014.35-5.01A15.6 15.6 0 008.1 11zm1.62 2h4.56c-.31 3.74-1.39 5.88-2.28 6.96-.89-1.08-1.97-3.22-2.28-6.96zm5.18 5.01A15.6 15.6 0 0015.9 13h3.02a8.03 8.03 0 01-4.02 5.01z"/>
+    </svg>
+    <span class="ripple"></span>
+  </button>
+  <button class="icon-btn right" onclick="shareApp()" aria-label="Share app">
+    <svg viewBox="0 0 24 24" aria-hidden="true">
+      <path d="M18 16a2.99 2.99 0 00-2.39 1.2l-6.7-3.35a3.1 3.1 0 000-1.7l6.7-3.35A3 3 0 1014 6a3.1 3.1 0 00.08.68l-6.7 3.35a3 3 0 100 4.94l6.7 3.35A3 3 0 1018 16z"/>
+    </svg>
+    <span class="ripple"></span>
+  </button>
+</div>
+
 <div class="ramadan-wrapper">
 <div class="ramadan-bar">
 <div class="ramadan-text">
@@ -385,24 +763,20 @@ font-weight:700;
 <a href="#" onclick="changeLanguageChoice(); return false;">Сменить язык</a>
 </div>
 
-<div class="install-box">
-<button id="installBtn" class="install-btn">
-Установить приложение
-</button>
-<button onclick="shareApp()" class="share-btn">
-Поделиться приложением
-</button>
+<div class="install-box" id="installBox">
+<button id="installBtn" class="install-btn" type="button">Установить приложение</button>
 </div>
 <br/>
 <br/>
 <div class="app-menu">
   <div class="app-menu-grid">
     <a class="app-menu-btn primary" href="names-ru.html">99 имён Аллаха</a>
-    <a class="app-menu-btn" href="duas-ru.html">Мольбы пророка ﷺ</a>
-    <a class="app-menu-btn" href="azkar-ru.html">Азкары</a>
+    <a class="app-menu-btn" href="prophets-duas-ru.html">Мольбы пророка ﷺ</a>
+    <a class="app-menu-btn" href="adhkar-ru.html">Азкары</a>
     <a class="app-menu-btn" href="quran-ru.html">Коран</a>
     <a class="app-menu-btn" href="prayer-times-ru.html">Время молитв</a>
-    <a class="app-menu-btn" href="hidden-sadaqa">Скрытая садака</a>
+    <a class="app-menu-btn" href="hidden-sadaqa-ru">Скрытая садака</a>
+	<a class="app-menu-btn" href="qibla-ru.html">Кибла</a>
     <a class="app-menu-btn" href="articles-ru.html">Статьи</a>
   </div>
 </div>
@@ -410,16 +784,303 @@ font-weight:700;
 
 <div class="link" style="margin-top:34px;">
 <a href="about-ru.html">О проекте</a>
-<a href="project-principles-ru.html">Принципы проекта</a>
+<a href="principles-ru.html">Принципы проекта</a>
 <a href="why-anonymous-ru.html">Почему анонимно</a>
 </div>
 
+<div class="mobile-promo-ad">
+  <div class="mobile-promo-inner">
+    <div class="mobile-promo-line" id="mobilePromoText">Все услуги рядом</div>
+  </div>
+</div>
 
->
+
+<div class="share-overlay" id="shareOverlay" aria-hidden="true">
+  <div class="share-sheet" role="dialog" aria-modal="true" aria-labelledby="shareTitle">
+    <div class="share-handle"></div>
+    <div class="share-title" id="shareTitle">Поделиться приложением</div>
+    <div class="share-subtitle">Выберите способ, как поделиться приложением</div>
+    <div class="share-grid">
+      <button class="share-action share-telegram" type="button" data-share="telegram"><div class="share-icon">T</div><span>Telegram</span></button>
+      <button class="share-action share-whatsapp" type="button" data-share="whatsapp"><div class="share-icon">W</div><span>WhatsApp</span></button>
+      <button class="share-action share-facebook" type="button" data-share="facebook"><div class="share-icon">f</div><span>Facebook</span></button>
+      <button class="share-action share-x" type="button" data-share="x"><div class="share-icon">X</div><span>X</span></button>
+      <button class="share-action share-linkedin" type="button" data-share="linkedin"><div class="share-icon">in</div><span>LinkedIn</span></button>
+      <button class="share-action share-email" type="button" data-share="email"><div class="share-icon">@</div><span>Email</span></button>
+      <button class="share-action share-copy" type="button" data-share="copy"><div class="share-icon">⧉</div><span>Копировать ссылку</span></button>
+      <button class="share-action share-more" type="button" data-share="more"><div class="share-icon">⋯</div><span>Ещё</span></button>
+    </div>
+    <div class="share-copy-msg" id="shareCopyMsg">Ссылка на приложение скопирована.</div>
+    <button class="share-close" id="shareCloseBtn" type="button">Закрыть</button>
+  </div>
+</div>
+
 <script>
 function changeLanguageChoice(){
   localStorage.removeItem("siteLanguage");
   sessionStorage.setItem("forceLanguageSelect", "1");
   window.location.href = "index.html";
 }
+
+const installStateKey = "hiddenSadaqaAppInstalled";
+let deferredInstallPrompt = null;
+
+function getShareUrl(){
+  return window.location.href;
+}
+
+function isStandaloneMode(){
+  return window.matchMedia("(display-mode: standalone)").matches || window.navigator.standalone === true;
+}
+
+function isAndroid(){
+  return /Android/i.test(navigator.userAgent || "");
+}
+
+function isIOS(){
+  return /iPhone|iPad|iPod/i.test(navigator.userAgent || "");
+}
+
+function isInAppBrowser(){
+  const ua = navigator.userAgent || "";
+  return /(Telegram|FBAN|FBAV|Instagram|Line|wv)/i.test(ua);
+}
+
+function markAppInstalled(){
+  localStorage.setItem(installStateKey, "1");
+}
+
+function isAppMarkedInstalled(){
+  return localStorage.getItem(installStateKey) === "1";
+}
+
+function updateInstallButtonVisibility(){
+  const installBox = document.getElementById("installBox");
+  if (!installBox) return;
+
+  if (isStandaloneMode() || isAppMarkedInstalled()) {
+    installBox.style.display = "none";
+  } else {
+    installBox.style.display = "block";
+  }
+}
+
+function openCurrentPageInExternalBrowser(){
+  const url = window.location.href;
+  if (isAndroid()) {
+    const cleaned = url.replace(/^https?:\/\//, "");
+    window.location.href = "intent://" + cleaned + "#Intent;scheme=https;package=com.android.chrome;end";
+    return true;
+  }
+  return false;
+}
+
+async function installApp(){
+  if (deferredInstallPrompt) {
+    try {
+      await deferredInstallPrompt.prompt();
+      const choiceResult = await deferredInstallPrompt.userChoice;
+      if (choiceResult && choiceResult.outcome === "accepted") {
+        markAppInstalled();
+        updateInstallButtonVisibility();
+      }
+    } catch (error) {
+    } finally {
+      deferredInstallPrompt = null;
+    }
+    return;
+  }
+
+  if (isInAppBrowser() && isAndroid()) {
+    openCurrentPageInExternalBrowser();
+    return;
+  }
+
+  if (isIOS()) {
+    // iOS Safari does not support beforeinstallprompt for PWA install.
+    return;
+  }
+}
+
+function openShareOverlay(){
+  const overlay = document.getElementById("shareOverlay");
+  const copyMsg = document.getElementById("shareCopyMsg");
+  if (!overlay) return;
+  overlay.classList.add("open");
+  overlay.setAttribute("aria-hidden", "false");
+  if (copyMsg) copyMsg.classList.remove("show");
+}
+
+function closeShareOverlay(){
+  const overlay = document.getElementById("shareOverlay");
+  if (!overlay) return;
+  overlay.classList.remove("open");
+  overlay.setAttribute("aria-hidden", "true");
+}
+
+async function copyShareLink(){
+  const url = getShareUrl();
+  const copyMsg = document.getElementById("shareCopyMsg");
+
+  try {
+    if (navigator.clipboard && window.isSecureContext) {
+      await navigator.clipboard.writeText(url);
+    } else {
+      const helper = document.createElement("textarea");
+      helper.value = url;
+      helper.setAttribute("readonly", "readonly");
+      helper.style.position = "absolute";
+      helper.style.left = "-9999px";
+      document.body.appendChild(helper);
+      helper.select();
+      document.execCommand("copy");
+      document.body.removeChild(helper);
+    }
+
+    if (copyMsg) {
+      copyMsg.classList.add("show");
+      setTimeout(function(){
+        copyMsg.classList.remove("show");
+      }, 2200);
+    }
+  } catch (error) {
+    window.prompt("Скопируй ссылку вручную:", url);
+  }
+}
+
+function openShareTarget(type){
+  const url = encodeURIComponent(getShareUrl());
+  const text = encodeURIComponent("Hidden Sadaqa");
+  let shareTarget = "";
+
+  if (type === "telegram") shareTarget = "https://t.me/share/url?url=" + url + "&text=" + text;
+  if (type === "whatsapp") shareTarget = "https://wa.me/?text=" + text + "%20" + url;
+  if (type === "facebook") shareTarget = "https://www.facebook.com/sharer/sharer.php?u=" + url;
+  if (type === "x") shareTarget = "https://twitter.com/intent/tweet?text=" + text + "&url=" + url;
+  if (type === "linkedin") shareTarget = "https://www.linkedin.com/sharing/share-offsite/?url=" + url;
+  if (type === "email") shareTarget = "mailto:?subject=Hidden%20Sadaqa&body=" + text + "%0A" + url;
+
+  if (shareTarget) {
+    window.open(shareTarget, "_blank", "noopener,noreferrer");
+  }
+}
+
+async function shareApp(){
+  const shareData = {
+    title: "Hidden Sadaqa",
+    text: "Hidden Sadaqa",
+    url: getShareUrl()
+  };
+
+  if (navigator.share) {
+    try {
+      await navigator.share(shareData);
+      return;
+    } catch (error) {}
+  }
+
+  openShareOverlay();
+}
+
+window.addEventListener("beforeinstallprompt", function(event){
+  event.preventDefault();
+  deferredInstallPrompt = event;
+  updateInstallButtonVisibility();
+});
+
+window.addEventListener("appinstalled", function(){
+  markAppInstalled();
+  deferredInstallPrompt = null;
+  updateInstallButtonVisibility();
+});
+
+window.addEventListener("DOMContentLoaded", function(){
+  const installBtn = document.getElementById("installBtn");
+  const shareOverlay = document.getElementById("shareOverlay");
+  const shareCloseBtn = document.getElementById("shareCloseBtn");
+
+  if (installBtn) {
+    installBtn.addEventListener("click", installApp);
+  }
+
+  if (shareCloseBtn) {
+    shareCloseBtn.addEventListener("click", closeShareOverlay);
+  }
+
+  if (shareOverlay) {
+    shareOverlay.addEventListener("click", function(event){
+      if (event.target === shareOverlay) {
+        closeShareOverlay();
+      }
+    });
+  }
+
+  document.querySelectorAll("[data-share]").forEach(function(button){
+    button.addEventListener("click", async function(){
+      const shareType = button.getAttribute("data-share");
+
+      if (shareType === "copy") {
+        await copyShareLink();
+        return;
+      }
+
+      if (shareType === "more") {
+        if (navigator.share) {
+          try {
+            await navigator.share({ title: "Hidden Sadaqa", text: "Hidden Sadaqa", url: getShareUrl() });
+            closeShareOverlay();
+            return;
+          } catch (error) {}
+        }
+
+        await copyShareLink();
+        return;
+      }
+
+      openShareTarget(shareType);
+      closeShareOverlay();
+    });
+  });
+
+  updateInstallButtonVisibility();
+
+  setTimeout(function(){
+    updateInstallButtonVisibility();
+  }, 1200);
+});
 </script>
+<script>
+(function(){
+  const promo = document.getElementById("mobilePromoText");
+  if (!promo) return;
+  if (window.innerWidth > 700) return;
+
+  const promoTexts = [
+    { text: "Все услуги рядом", brand: false },
+    { text: "TasksLocal", brand: true }
+  ];
+
+  let promoIndex = 0;
+
+  setInterval(() => {
+    promo.classList.add("is-hidden");
+
+    setTimeout(() => {
+      promoIndex = (promoIndex + 1) % promoTexts.length;
+      promo.textContent = promoTexts[promoIndex].text;
+
+      if (promoTexts[promoIndex].brand) {
+        promo.classList.add("is-brand");
+      } else {
+        promo.classList.remove("is-brand");
+      }
+
+      promo.classList.remove("is-hidden");
+    }, 420);
+
+  }, 2800);
+})();
+</script>
+
+</body>
+</html>
