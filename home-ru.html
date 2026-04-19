@@ -750,6 +750,20 @@ h1{
   animation: premiumPulse 1.4s ease;
 }
 
+
+.install-help-overlay{display:none;position:fixed;inset:0;background:rgba(15,24,18,0.46);backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px);z-index:3200;padding:16px;box-sizing:border-box;align-items:center;justify-content:center}
+.install-help-overlay.open{display:flex}
+.install-help-sheet{width:min(100%,520px);background:linear-gradient(180deg,#ffffff 0%, #fbfdfc 100%);border:1px solid #dfe8e2;border-radius:28px;box-shadow:0 24px 54px rgba(18,34,24,0.22);padding:22px 20px 18px}
+.install-help-title{text-align:center;font-size:24px;font-weight:800;color:#1f2a22;margin-bottom:10px}
+.install-help-text{text-align:center;font-size:15px;color:#55655c;margin-bottom:16px}
+.install-help-steps{margin:0;padding-left:22px;color:#1f2a22;font-size:15px}
+.install-help-steps li{margin:8px 0}
+.install-help-actions{display:flex;justify-content:center;gap:10px;flex-wrap:wrap;margin-top:18px}
+.install-help-primary,.install-help-secondary{min-height:46px;padding:12px 18px;border-radius:14px;border:none;font-size:15px;font-weight:800;cursor:pointer}
+.install-help-primary{background:#2d7a46;color:#fff;box-shadow:0 10px 22px rgba(45,122,70,0.18)}
+.install-help-secondary{background:#eef5f1;color:#2d7a46}
+.install-help-close{margin-top:10px;width:100%;min-height:46px;border-radius:14px;border:1px solid #dfe8e2;background:#fff;color:#1f2a22;font-size:15px;font-weight:800;cursor:pointer}
+
 </style>
 </head>
 <body>
@@ -851,239 +865,48 @@ h1{
   </div>
 </div>
 
+<div class="install-help-overlay" id="installHelpOverlay" aria-hidden="true">
+  <div class="install-help-sheet" role="dialog" aria-modal="true" aria-labelledby="installHelpTitle">
+    <div class="install-help-title" id="installHelpTitle">Установить приложение</div>
+    <div class="install-help-text">Если системное окно установки не появилось, используйте действия ниже.</div>
+    <ol class="install-help-steps">
+      <li>На Android откройте страницу во внешнем браузере и установите приложение там.</li>
+      <li>На iPhone откройте страницу в Safari.</li>
+      <li>Затем выберите «Поделиться» → «На экран Домой».</li>
+    </ol>
+    <div class="install-help-actions">
+      <button class="install-help-primary" id="installHelpPrimaryBtn" type="button">Открыть в браузере</button>
+      <button class="install-help-secondary" id="installHelpCopyBtn" type="button">Скопировать ссылку</button>
+    </div>
+    <button class="install-help-close" id="installHelpCloseBtn" type="button">Закрыть</button>
+  </div>
+</div>
+
 <script>
-function changeLanguageChoice(){
-  localStorage.removeItem("siteLanguage");
-  sessionStorage.setItem("forceLanguageSelect", "1");
-  window.location.href = "index.html";
-}
-
-const installStateKey = "hiddenSadaqaAppInstalled";
-let deferredInstallPrompt = null;
-
-function getShareUrl(){
-  return window.location.href;
-}
-
-function isStandaloneMode(){
-  return window.matchMedia("(display-mode: standalone)").matches || window.navigator.standalone === true;
-}
-
-function isAndroid(){
-  return /Android/i.test(navigator.userAgent || "");
-}
-
-function isIOS(){
-  return /iPhone|iPad|iPod/i.test(navigator.userAgent || "");
-}
-
-function isInAppBrowser(){
-  const ua = navigator.userAgent || "";
-  return /(Telegram|FBAN|FBAV|Instagram|Line|wv)/i.test(ua);
-}
-
-function markAppInstalled(){
-  localStorage.setItem(installStateKey, "1");
-}
-
-function isAppMarkedInstalled(){
-  return localStorage.getItem(installStateKey) === "1";
-}
-
-function updateInstallButtonVisibility(){
-  const installBox = document.getElementById("installBox");
-  if (!installBox) return;
-
-  if (isStandaloneMode() || isAppMarkedInstalled()) {
-    installBox.style.display = "none";
-  } else {
-    installBox.style.display = "block";
-  }
-}
-
-function openCurrentPageInExternalBrowser(){
-  const url = window.location.href;
-  if (isAndroid()) {
-    const cleaned = url.replace(/^https?:\/\//, "");
-    window.location.href = "intent://" + cleaned + "#Intent;scheme=https;package=com.android.chrome;end";
-    return true;
-  }
-  return false;
-}
-
-async function installApp(){
-  if (deferredInstallPrompt) {
-    try {
-      await deferredInstallPrompt.prompt();
-      const choiceResult = await deferredInstallPrompt.userChoice;
-      if (choiceResult && choiceResult.outcome === "accepted") {
-        markAppInstalled();
-        updateInstallButtonVisibility();
-      }
-    } catch (error) {
-    } finally {
-      deferredInstallPrompt = null;
-    }
-    return;
-  }
-
-  if (isInAppBrowser() && isAndroid()) {
-    openCurrentPageInExternalBrowser();
-    return;
-  }
-
-  if (isIOS()) {
-    // iOS Safari does not support beforeinstallprompt for PWA install.
-    return;
-  }
-}
-
-function openShareOverlay(){
-  const overlay = document.getElementById("shareOverlay");
-  const copyMsg = document.getElementById("shareCopyMsg");
-  if (!overlay) return;
-  overlay.classList.add("open");
-  overlay.setAttribute("aria-hidden", "false");
-  if (copyMsg) copyMsg.classList.remove("show");
-}
-
-function closeShareOverlay(){
-  const overlay = document.getElementById("shareOverlay");
-  if (!overlay) return;
-  overlay.classList.remove("open");
-  overlay.setAttribute("aria-hidden", "true");
-}
-
-async function copyShareLink(){
-  const url = getShareUrl();
-  const copyMsg = document.getElementById("shareCopyMsg");
-
-  try {
-    if (navigator.clipboard && window.isSecureContext) {
-      await navigator.clipboard.writeText(url);
-    } else {
-      const helper = document.createElement("textarea");
-      helper.value = url;
-      helper.setAttribute("readonly", "readonly");
-      helper.style.position = "absolute";
-      helper.style.left = "-9999px";
-      document.body.appendChild(helper);
-      helper.select();
-      document.execCommand("copy");
-      document.body.removeChild(helper);
-    }
-
-    if (copyMsg) {
-      copyMsg.classList.add("show");
-      setTimeout(function(){
-        copyMsg.classList.remove("show");
-      }, 2200);
-    }
-  } catch (error) {
-    window.prompt("Скопируй ссылку вручную:", url);
-  }
-}
-
-function openShareTarget(type){
-  const url = encodeURIComponent(getShareUrl());
-  const text = encodeURIComponent("Hidden Sadaqa");
-  let shareTarget = "";
-
-  if (type === "telegram") shareTarget = "https://t.me/share/url?url=" + url + "&text=" + text;
-  if (type === "whatsapp") shareTarget = "https://wa.me/?text=" + text + "%20" + url;
-  if (type === "facebook") shareTarget = "https://www.facebook.com/sharer/sharer.php?u=" + url;
-  if (type === "x") shareTarget = "https://twitter.com/intent/tweet?text=" + text + "&url=" + url;
-  if (type === "linkedin") shareTarget = "https://www.linkedin.com/sharing/share-offsite/?url=" + url;
-  if (type === "email") shareTarget = "mailto:?subject=Hidden%20Sadaqa&body=" + text + "%0A" + url;
-
-  if (shareTarget) {
-    window.open(shareTarget, "_blank", "noopener,noreferrer");
-  }
-}
-
-async function shareApp(){
-  const shareData = {
-    title: "Hidden Sadaqa",
-    text: "Hidden Sadaqa",
-    url: getShareUrl()
-  };
-
-  if (navigator.share) {
-    try {
-      await navigator.share(shareData);
-      return;
-    } catch (error) {}
-  }
-
-  openShareOverlay();
-}
-
-window.addEventListener("beforeinstallprompt", function(event){
-  event.preventDefault();
-  deferredInstallPrompt = event;
-  updateInstallButtonVisibility();
-});
-
-window.addEventListener("appinstalled", function(){
-  markAppInstalled();
-  deferredInstallPrompt = null;
-  updateInstallButtonVisibility();
-});
-
-window.addEventListener("DOMContentLoaded", function(){
-  const installBtn = document.getElementById("installBtn");
-  const shareOverlay = document.getElementById("shareOverlay");
-  const shareCloseBtn = document.getElementById("shareCloseBtn");
-
-  if (installBtn) {
-    installBtn.addEventListener("click", installApp);
-  }
-
-  if (shareCloseBtn) {
-    shareCloseBtn.addEventListener("click", closeShareOverlay);
-  }
-
-  if (shareOverlay) {
-    shareOverlay.addEventListener("click", function(event){
-      if (event.target === shareOverlay) {
-        closeShareOverlay();
-      }
-    });
-  }
-
-  document.querySelectorAll("[data-share]").forEach(function(button){
-    button.addEventListener("click", async function(){
-      const shareType = button.getAttribute("data-share");
-
-      if (shareType === "copy") {
-        await copyShareLink();
-        return;
-      }
-
-      if (shareType === "more") {
-        if (navigator.share) {
-          try {
-            await navigator.share({ title: "Hidden Sadaqa", text: "Hidden Sadaqa", url: getShareUrl() });
-            closeShareOverlay();
-            return;
-          } catch (error) {}
-        }
-
-        await copyShareLink();
-        return;
-      }
-
-      openShareTarget(shareType);
-      closeShareOverlay();
-    });
-  });
-
-  updateInstallButtonVisibility();
-
-  setTimeout(function(){
-    updateInstallButtonVisibility();
-  }, 1200);
-});
+function changeLanguageChoice(){localStorage.removeItem("siteLanguage");sessionStorage.setItem("forceLanguageSelect","1");window.location.href="index.html";}
+let deferredInstallPrompt=null;let installVisibilityInFlight=false;
+function getShareUrl(){return window.location.href;}
+function isStandaloneMode(){return window.matchMedia("(display-mode: standalone)").matches||window.navigator.standalone===true;}
+function isAndroid(){return /Android/i.test(navigator.userAgent||"");}
+function isIOS(){return /iPhone|iPad|iPod/i.test(navigator.userAgent||"");}
+function isInAppBrowser(){const ua=navigator.userAgent||"";return /(Telegram|FBAN|FBAV|Instagram|Line|wv)/i.test(ua);}
+async function hasInstalledRelatedApp(){if(typeof navigator.getInstalledRelatedApps!=="function") return false;try{const apps=await navigator.getInstalledRelatedApps();return Array.isArray(apps)&&apps.length>0;}catch(e){return false;}}
+async function updateInstallButtonVisibility(){if(installVisibilityInFlight) return;installVisibilityInFlight=true;const box=document.getElementById("installBox"),btn=document.getElementById("installBtn");if(!box||!btn){installVisibilityInFlight=false;return;}let hide=isStandaloneMode()?true:await hasInstalledRelatedApp();box.style.display=hide?"none":"block";btn.textContent="Установить приложение";installVisibilityInFlight=false;}
+function openCurrentPageInExternalBrowser(){const url=window.location.href;if(isAndroid()){const cleaned=url.replace(/^https?:\/\//,"");window.location.href="intent://"+cleaned+"#Intent;scheme=https;package=com.android.chrome;end";return true;}if(!isIOS()){window.open(url,"_blank","noopener,noreferrer");return true;}return false;}
+function openInstallHelp(){const o=document.getElementById("installHelpOverlay");if(!o) return;o.classList.add("open");o.setAttribute("aria-hidden","false");}
+function closeInstallHelp(){const o=document.getElementById("installHelpOverlay");if(!o) return;o.classList.remove("open");o.setAttribute("aria-hidden","true");}
+async function copyCurrentLink(){const url=getShareUrl(),msg=document.getElementById("shareCopyMsg");try{if(navigator.clipboard&&window.isSecureContext){await navigator.clipboard.writeText(url);}else{const t=document.createElement("textarea");t.value=url;t.setAttribute("readonly","readonly");t.style.position="absolute";t.style.left="-9999px";document.body.appendChild(t);t.select();document.execCommand("copy");document.body.removeChild(t);}if(msg){msg.textContent="Ссылка на приложение скопирована.";msg.classList.add("show");setTimeout(function(){msg.classList.remove("show");},2200);}}catch(e){window.prompt("Скопируйте ссылку и откройте её во внешнем браузере:",url);}}
+async function installApp(){if(deferredInstallPrompt){try{await deferredInstallPrompt.prompt();const c=await deferredInstallPrompt.userChoice;if(c&&c.outcome==="accepted") setTimeout(updateInstallButtonVisibility,300);}catch(e){}finally{deferredInstallPrompt=null;}return;}if(isStandaloneMode()){updateInstallButtonVisibility();return;}if(isInAppBrowser()){if(isAndroid()){const opened=openCurrentPageInExternalBrowser();if(!opened) openInstallHelp();return;}openInstallHelp();return;}if(isIOS()){openInstallHelp();return;}openInstallHelp();}
+function openShareOverlay(){const o=document.getElementById("shareOverlay"),m=document.getElementById("shareCopyMsg");if(!o) return;o.classList.add("open");o.setAttribute("aria-hidden","false");if(m) m.classList.remove("show");}
+function closeShareOverlay(){const o=document.getElementById("shareOverlay");if(!o) return;o.classList.remove("open");o.setAttribute("aria-hidden","true");}
+async function copyShareLink(){const url=getShareUrl(),msg=document.getElementById("shareCopyMsg");try{if(navigator.clipboard&&window.isSecureContext){await navigator.clipboard.writeText(url);}else{const t=document.createElement("textarea");t.value=url;t.setAttribute("readonly","readonly");t.style.position="absolute";t.style.left="-9999px";document.body.appendChild(t);t.select();document.execCommand("copy");document.body.removeChild(t);}if(msg){msg.classList.add("show");setTimeout(function(){msg.classList.remove("show");},2200);}}catch(e){window.prompt("Скопируйте ссылку и откройте её во внешнем браузере:",url);}}
+function openShareTarget(type){const url=encodeURIComponent(getShareUrl()),text=encodeURIComponent("Hidden Sadaqa");let target="";if(type==="telegram") target="https://t.me/share/url?url="+url+"&text="+text;if(type==="whatsapp") target="https://wa.me/?text="+text+"%20"+url;if(type==="facebook") target="https://www.facebook.com/sharer/sharer.php?u="+url;if(type==="x") target="https://twitter.com/intent/tweet?text="+text+"&url="+url;if(type==="linkedin") target="https://www.linkedin.com/sharing/share-offsite/?url="+url;if(type==="email") target="mailto:?subject=Hidden%20Sadaqa&body="+text+"%0A"+url;if(target) window.open(target,"_blank","noopener,noreferrer");}
+async function shareApp(){const data={title:"Hidden Sadaqa",text:"Hidden Sadaqa",url:getShareUrl()};if(navigator.share){try{await navigator.share(data);return;}catch(e){}}openShareOverlay();}
+window.addEventListener("beforeinstallprompt",function(e){e.preventDefault();deferredInstallPrompt=e;updateInstallButtonVisibility();});
+window.addEventListener("appinstalled",function(){deferredInstallPrompt=null;updateInstallButtonVisibility();});
+window.addEventListener("pageshow",function(){updateInstallButtonVisibility();});
+document.addEventListener("visibilitychange",function(){if(!document.hidden) updateInstallButtonVisibility();});
+window.addEventListener("DOMContentLoaded",function(){const installBtn=document.getElementById("installBtn"),shareOverlay=document.getElementById("shareOverlay"),shareCloseBtn=document.getElementById("shareCloseBtn"),helpOverlay=document.getElementById("installHelpOverlay"),helpClose=document.getElementById("installHelpCloseBtn"),helpPrimary=document.getElementById("installHelpPrimaryBtn"),helpCopy=document.getElementById("installHelpCopyBtn");if(installBtn) installBtn.addEventListener("click",installApp);if(shareCloseBtn) shareCloseBtn.addEventListener("click",closeShareOverlay);if(shareOverlay) shareOverlay.addEventListener("click",function(e){if(e.target===shareOverlay) closeShareOverlay();});if(helpClose) helpClose.addEventListener("click",closeInstallHelp);if(helpOverlay) helpOverlay.addEventListener("click",function(e){if(e.target===helpOverlay) closeInstallHelp();});if(helpPrimary) helpPrimary.addEventListener("click",function(){const opened=openCurrentPageInExternalBrowser();if(!opened) copyCurrentLink();});if(helpCopy) helpCopy.addEventListener("click",copyCurrentLink);document.querySelectorAll("[data-share]").forEach(function(button){button.addEventListener("click",async function(){const type=button.getAttribute("data-share");if(type==="copy"){await copyShareLink();return;}if(type==="more"){if(navigator.share){try{await navigator.share({title:"Hidden Sadaqa",text:"Hidden Sadaqa",url:getShareUrl()});closeShareOverlay();return;}catch(e){}}await copyShareLink();return;}openShareTarget(type);closeShareOverlay();});});updateInstallButtonVisibility();setTimeout(updateInstallButtonVisibility,1200);});
 </script>
 <script>
 (function(){
