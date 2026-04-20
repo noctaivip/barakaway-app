@@ -1,0 +1,120 @@
+<!--
+بِسْمِ ٱللَّٰهِ ٱلرَّحْمَـٰنِ ٱلرَّحِيمِ
+In the name of Allah, the Most Merciful, the Most Compassionate
+-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Language Selection</title>
+
+<style>
+body{
+margin:0;
+font-family:system-ui;
+background:#f5f7f8;
+display:flex;
+align-items:center;
+justify-content:center;
+height:100vh;
+}
+
+.container{
+background:white;
+padding:40px 30px;
+border-radius:16px;
+box-shadow:0 6px 20px rgba(0,0,0,0.08);
+text-align:center;
+max-width:400px;
+width:90%;
+}
+
+h1{
+margin-bottom:10px;
+}
+
+p{
+color:#666;
+margin-bottom:30px;
+}
+
+.btn{
+display:block;
+width:100%;
+padding:16px;
+margin-bottom:12px;
+border:none;
+border-radius:12px;
+font-size:18px;
+font-weight:bold;
+cursor:pointer;
+transition:0.2s;
+}
+
+.btn-en{
+background:#2d7a46;
+color:white;
+}
+
+.btn-ru{
+background:#eaeaea;
+color:#222;
+}
+
+.btn-uz{
+background:#e6f4ea;
+color:#1f2a22;
+}
+
+.btn:hover{
+transform:translateY(-1px);
+}
+</style>
+</head>
+
+<body>
+
+<div class="container">
+<h1>Select Language</h1>
+<p>Choose your language to continue</p>
+
+<button class="btn btn-en" onclick="setLang('en')">English</button>
+<button class="btn btn-ru" onclick="setLang('ru')">Русский</button>
+<button class="btn btn-uz" onclick="setLang('uz')">O‘zbekcha</button>
+</div>
+
+<script>
+function setLang(lang){
+  localStorage.setItem("siteLanguage", lang);
+  sessionStorage.removeItem("forceLanguageSelect");
+
+  if(lang === "en"){
+    window.location.href = "home-en.html";
+  } else if(lang === "ru"){
+    window.location.href = "home-ru.html";
+  } else {
+    window.location.href = "home-uz.html";
+  }
+}
+
+const force = sessionStorage.getItem("forceLanguageSelect");
+
+if(force === "1"){
+  sessionStorage.removeItem("forceLanguageSelect");
+} else {
+  const savedLang = localStorage.getItem("siteLanguage");
+  if(savedLang){
+    if(savedLang === "en"){
+      window.location.href = "home-en.html";
+    } else if(savedLang === "ru"){
+      window.location.href = "home-ru.html";
+    } else {
+      window.location.href = "home-uz.html";
+    }
+  }
+}
+</script>
+
+</body>
+</html>
