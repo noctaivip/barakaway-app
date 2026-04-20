@@ -605,10 +605,16 @@ function renderGrid(filter=""){
       <div class="chip-mean">${item[meanKey]}</div>
     `;
     card.addEventListener("click", () => {
-      currentIndex = idx;
-      renderCurrent();
-      renderGrid(searchInput.value);
-    });
+  currentIndex = idx;
+  renderCurrent();
+  renderGrid(searchInput.value);
+
+  // Плавный скролл к верхнему блоку с именем
+  document.querySelector(".player-card").scrollIntoView({
+    behavior: "smooth",
+    block: "start"
+  });
+});
     namesGrid.appendChild(card);
   });
 }
