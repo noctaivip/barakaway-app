@@ -1,0 +1,692 @@
+<!DOCTYPE html>
+<html lang="ur" dir="rtl">
+<head>
+
+<script data-goatcounter="https://onedollarexit.goatcounter.com/count"
+async src="//gc.zgo.at/count.js"></script>
+
+<link rel="icon" type="image/png" href="/favicon.png">
+<link rel="manifest" href="/manifest.json">
+<meta name="theme-color" content="#2d7a46">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>اللہ کے 99 نام — BarakaWay</title>
+
+<style>
+body{
+margin:0;
+font-family:system-ui;
+background:#f5f7f8;
+color:#222;
+line-height:1.7;
+}
+
+.container{
+max-width:850px;
+margin:auto;
+background:white;
+padding:40px 30px;
+box-shadow:0 6px 16px rgba(0,0,0,0.05);
+}
+
+h1{
+text-align:center;
+font-size:36px;
+margin-bottom:8px;
+}
+
+.subtitle{
+text-align:center;
+color:#666;
+margin-bottom:10px;
+letter-spacing:2px;
+font-size:14px;
+text-transform:uppercase;
+}
+
+.language-switch{
+text-align:center;
+margin-top:8px;
+margin-bottom:22px;
+font-size:13px;
+}
+
+.language-switch a{
+text-decoration:none;
+color:#666;
+margin:0 6px;
+}
+
+.language-switch a.active{
+font-weight:bold;
+color:#000;
+}
+
+.lead{
+background:#fafafa;
+padding:22px;
+border-radius:10px;
+margin-bottom:30px;
+}
+
+.section{
+margin-bottom:35px;
+}
+
+.section h2{
+font-size:22px;
+border-left:4px solid #2d7a46;
+padding-left:12px;
+margin-bottom:15px;
+}
+
+.player-card{
+position:relative;
+overflow:visible;
+background:
+ radial-gradient(circle at 50% -18%, rgba(255,255,255,0.98) 0%, rgba(255,255,255,0) 42%),
+ linear-gradient(180deg,#fbfefd 0%, #eef6f1 45%, #e4efe8 100%);
+border:2px solid rgba(45,122,70,0.30);
+border-radius:32px;
+padding:40px 32px 34px;
+box-shadow:
+ 0 42px 92px rgba(16,40,26,0.12),
+ 0 20px 44px rgba(45,122,70,0.16),
+ 0 0 0 1px rgba(45,122,70,0.08),
+ inset 0 1px 0 rgba(255,255,255,0.96);
+}
+
+.player-card::before{
+content:"";
+position:absolute;
+left:14px;
+right:14px;
+top:0;
+height:5px;
+border-radius:0 0 999px 999px;
+background:linear-gradient(90deg,
+ rgba(45,122,70,0.05) 0%,
+ rgba(45,122,70,0.88) 25%,
+ rgba(120,200,150,1) 50%,
+ rgba(45,122,70,0.88) 75%,
+ rgba(45,122,70,0.05) 100%);
+}
+
+.player-card::after{
+content:"";
+position:absolute;
+inset:10px;
+border-radius:24px;
+border:1px solid rgba(255,255,255,0.74);
+box-shadow:
+ inset 0 0 34px rgba(255,255,255,0.42),
+ 0 0 0 1px rgba(45,122,70,0.10);
+pointer-events:none;
+}
+
+.player-card{
+outline:1px solid rgba(45,122,70,0.10);
+}
+
+.player-top,
+.arabic,
+.translit,
+.meaning,
+.desc,
+.controls,
+.nav-buttons,
+.manual-note,
+.search-box{
+position:relative;
+z-index:1;
+}
+
+.player-top{
+display:flex;
+justify-content:space-between;
+align-items:center;
+gap:16px;
+margin-bottom:18px;
+flex-wrap:wrap;
+}
+
+.badge{
+display:inline-flex;
+align-items:center;
+justify-content:center;
+padding:8px 14px;
+border-radius:999px;
+background:#2d7a46;
+color:white;
+font-size:13px;
+font-weight:700;
+}
+
+.status{
+font-size:13px;
+color:#5d6b61;
+}
+
+.arabic{
+text-align:center;
+font-size:44px;
+font-weight:700;
+line-height:1.5;
+margin:10px 0 6px 0;
+direction:rtl;
+}
+
+.translit{
+text-align:center;
+font-size:30px;
+font-weight:700;
+margin-bottom:10px;
+}
+
+.meaning{
+text-align:center;
+font-size:22px;
+color:#2d7a46;
+font-weight:700;
+margin-bottom:12px;
+}
+
+.desc{
+max-width:680px;
+margin:0 auto;
+text-align:center;
+color:#444;
+font-size:16px;
+font-weight:700;
+min-height:72px;
+display:flex;
+align-items:center;
+justify-content:center;
+}
+
+.controls{
+display:flex;
+justify-content:center;
+align-items:end;
+gap:12px;
+flex-wrap:wrap;
+margin-top:26px;
+}
+
+.control-group{
+display:flex;
+flex-direction:column;
+gap:6px;
+align-items:flex-start;
+}
+
+.control-label{
+font-size:12px;
+color:#66726b;
+font-weight:600;
+}
+
+.sec-box{
+display:flex;
+align-items:center;
+gap:10px;
+background:white;
+padding:10px 14px;
+border-radius:12px;
+border:1px solid #dde8e0;
+}
+
+input[type="range"]{
+width:140px;
+accent-color:#2d7a46;
+}
+
+.seconds-value{
+font-weight:700;
+color:#2d7a46;
+min-width:44px;
+text-align:center;
+}
+
+.nav-buttons{
+display:flex;
+justify-content:center;
+gap:10px;
+flex-wrap:wrap;
+margin-top:12px;
+}
+
+button{
+padding:12px 18px;
+border:none;
+background:#2d7a46;
+color:white;
+border-radius:10px;
+cursor:pointer;
+font-size:15px;
+font-weight:600;
+}
+
+button:hover{
+background:#256338;
+}
+
+button.secondary{
+background:#3a3a3a;
+}
+
+button.secondary:hover{
+background:#222;
+}
+
+button.light{
+background:#eef5f1;
+color:#2d7a46;
+border:1px solid #d4e2d8;
+}
+
+button.light:hover{
+background:#e3eee7;
+}
+
+.play-btn{
+display:inline-flex;
+align-items:center;
+gap:10px;
+}
+
+.manual-note{
+text-align:center;
+font-size:13px;
+color:#6a756f;
+margin-top:16px;
+}
+
+.search-box{
+margin-top:24px;
+}
+
+.search-box input{
+width:100%;
+padding:14px 16px;
+border-radius:12px;
+border:1px solid #d7e2da;
+font-size:15px;
+box-sizing:border-box;
+}
+
+.names-grid{
+display:grid;
+grid-template-columns:repeat(auto-fill,minmax(200px,1fr));
+gap:14px;
+margin-top:20px;
+}
+
+.name-chip{
+background:#fafafa;
+border:1px solid #edf1ee;
+border-radius:14px;
+padding:14px 14px 12px 14px;
+cursor:pointer;
+transition:all .18s ease;
+}
+
+.name-chip:hover{
+transform:translateY(-2px);
+box-shadow:0 8px 20px rgba(0,0,0,0.06);
+}
+
+.name-chip.active{
+border-color:#2d7a46;
+box-shadow:0 8px 20px rgba(45,122,70,0.12);
+background:#f4f9f6;
+}
+
+.name-chip .chip-num{
+font-size:12px;
+font-weight:700;
+color:#2d7a46;
+margin-bottom:4px;
+}
+
+.name-chip .chip-ar{
+font-size:24px;
+direction:rtl;
+text-align:right;
+margin-bottom:6px;
+}
+
+.name-chip .chip-tr{
+font-weight:700;
+margin-bottom:4px;
+}
+
+.name-chip .chip-mean{
+font-size:13px;
+color:#666;
+line-height:1.45;
+font-weight:700;
+}
+
+.link{
+text-align:center;
+margin-top:34px;
+}
+
+.link a{
+color:#2d7a46;
+text-decoration:none;
+font-weight:bold;
+margin:0 10px;
+}
+
+@media(max-width:640px){
+.container{padding:30px 18px;}
+.player-card{
+  border-radius:26px;
+  padding:30px 18px 28px;
+  border:2px solid rgba(45,122,70,0.34);
+  box-shadow:
+    0 28px 64px rgba(16,40,26,0.12),
+    0 14px 30px rgba(45,122,70,0.12),
+    0 0 0 2px rgba(45,122,70,0.10),
+    inset 0 1px 0 rgba(255,255,255,0.94);
+}
+.player-card::before{
+  left:10px;
+  right:10px;
+}
+.player-card::after{
+  inset:6px;
+  border-radius:20px;
+  border:1px solid rgba(255,255,255,0.82);
+  box-shadow:
+    inset 0 0 24px rgba(255,255,255,0.34),
+    0 0 0 1px rgba(45,122,70,0.12);
+}
+.arabic{font-size:36px;}
+.translit{font-size:26px;}
+.meaning{font-size:20px;}
+.desc{
+  font-size:15px;
+  min-height:64px;
+}
+.names-grid{grid-template-columns:1fr;}
+}
+
+.dropdown-block{
+margin-bottom:35px;
+border:1px solid #dfe8e2;
+border-radius:18px;
+background:#fbfdfc;
+overflow:hidden;
+box-shadow:0 8px 22px rgba(0,0,0,0.04);
+}
+.dropdown-block summary{
+list-style:none;
+cursor:pointer;
+padding:20px 22px;
+display:flex;
+align-items:center;
+justify-content:space-between;
+gap:16px;
+font-size:22px;
+font-weight:700;
+border-left:4px solid #2d7a46;
+background:linear-gradient(180deg,#f7fbf8,#eef5f1);
+}
+.dropdown-block summary::-webkit-details-marker{
+display:none;
+}
+.dropdown-block summary:hover{
+background:linear-gradient(180deg,#f1f8f3,#e7f1ea);
+}
+.dropdown-title{
+display:flex;
+align-items:center;
+gap:12px;
+}
+.dropdown-arrow{
+font-size:16px;
+color:#2d7a46;
+transition:transform .2s ease;
+flex:0 0 auto;
+}
+.dropdown-block[open] .dropdown-arrow{
+transform:rotate(180deg);
+}
+.dropdown-content{
+padding:22px;
+border-top:1px solid #e4ebe6;
+background:white;
+}
+
+</style>
+</head>
+<body>
+
+<div class="container">
+<h1>اللہ کے 99 نام</h1>
+
+<div class="section">
+
+<div class="player-card">
+<div class="player-top">
+<div class="badge" id="nameCounter">نام 1 / 99</div>
+</div>
+
+<div class="arabic" id="nameArabic"></div>
+<div class="translit" id="nameTranslit"></div>
+<div class="meaning" id="nameMeaning"></div>
+<div class="desc" id="nameDesc"></div>
+
+<div class="controls">
+<div class="control-group">
+<div class="control-label">ہر نام کے لیے سیکنڈ</div>
+<div class="sec-box">
+<input id="speedRange" type="range" min="1" max="10" value="3">
+<div class="seconds-value"><span id="speedValue">3</span>s</div>
+</div>
+</div>
+
+<div class="control-group">
+<div class="control-label">خودکار اسکرول</div>
+<div style="display:flex;gap:10px;flex-wrap:wrap;">
+<button class="play-btn" id="playBtn">▶ شروع</button>
+<button class="secondary" id="pauseBtn">❚❚ توقف</button>
+</div>
+</div>
+</div>
+
+<div class="nav-buttons">
+<button class="light" id="prevBtn">← پیچھے</button>
+<button class="light" id="resetBtn">↺</button>
+<button class="light" id="nextBtn">آگے →</button>
+</div>
+
+<div class="manual-note" id="playStatus">خودکار اسکرول بند ہے۔</div>
+</div>
+</div>
+
+<details class="dropdown-block">
+<summary><span class="dropdown-title">تمام 99 نام</span><span class="dropdown-arrow">▾</span></summary>
+<div class="dropdown-content">
+<div class="search-box">
+<input id="searchInput" type="text" placeholder="نام یا مفہوم کے ذریعے تلاش کریں...">
+</div>
+<div class="names-grid" id="namesGrid"></div>
+</div>
+</details>
+
+<details class="dropdown-block">
+<summary><span class="dropdown-title">اللہ کے ناموں کے ذریعے کیسے دعا کی جائے</span><span class="dropdown-arrow">▾</span></summary>
+<div class="dropdown-content">
+
+
+<p>
+اللہ کا ہر نام اس کی ایک صفت کو ظاہر کرتا ہے۔ اور انسان اسی صفت کے ذریعے اس سے دعا کر سکتا ہے۔
+</p>
+
+<p>
+اہم بات صرف نام کا تلفظ کرنا نہیں، بلکہ اس کے معنی کو سمجھنا ہے — اور پھر اسی کے مطابق دعا کرنا ہے۔
+</p>
+
+<p>
+یہ چند مثالیں ہیں:
+</p>
+
+<div class="quote">
+<p>
+<strong>یا رحمن</strong> — مجھ پر اپنی رحمت نازل فرما اور میرے معاملات درست فرما  
+<br><br>
+<strong>یا رحیم</strong> — میری مشکلات آسان فرما اور مجھے میرے نفس کے حوالے نہ کر  
+<br><br>
+<strong>یا سلام</strong> — مجھے سکون، حفاظت اور اندرونی اطمینان عطا فرما  
+<br><br>
+<strong>یا غفار</strong> — میرے گناہوں کو بخش دے اور میرے دل کو پاک فرما  
+<br><br>
+<strong>یا رزاق</strong> — مجھے حلال رزق عطا فرما اور محتاجی دور فرما  
+</p>
+</div>
+
+<p>
+تم ایک ایک کر کے ان ناموں کے ذریعے گزر سکتے ہو، اور ہر نام کو اپنی ذاتی دعا میں بدل سکتے ہو۔
+</p>
+
+<p>
+اس طرح پڑھنا صرف علم نہیں رہتا — بلکہ اللہ کی طرف ایک زندہ رجوع بن جاتا ہے۔ اب نیچے اسکرین پر ہر نام کے نیچے عام وضاحت کے بجائے ایک مختصر مناسب دعا ظاہر ہوتی ہے، اور خود اصطلاحات کو بھی قرآنی اور تفسیری معنی کے قریب تر اور زیادہ مضبوط کر دیا گیا ہے۔
+</p>
+
+
+</div>
+</details>
+
+<div class="link">
+<a href="home-ur.html">ہوم پیج پر واپس جائیں</a>
+</div>
+
+</div>
+
+<script>
+const names = [{"num": 1, "ar": "ٱلرَّحْمَٰنُ", "tr": "Ar-Rahman", "en_mean": "The Universally Merciful", "ru_mean": "نہایت مہربان", "en_desc": "Ya Rahman, cover me with Your mercy and correct my affairs.", "ru_desc": "یا رحمن، مجھے اپنی رحمت میں ڈھانپ لے اور میرے معاملات درست فرما۔"}, {"num": 2, "ar": "ٱلرَّحِيمُ", "tr": "Ar-Raheem", "en_mean": "The Especially Merciful", "ru_mean": "خاص طور پر رحم فرمانے والا", "en_desc": "Ya Raheem, ease my hardships and do not leave me to myself.", "ru_desc": "یا رحیم، میری سختیاں آسان فرما اور مجھے میرے حال پر نہ چھوڑ۔"}, {"num": 3, "ar": "ٱلْمَلِكُ", "tr": "Al-Malik", "en_mean": "The Sovereign", "ru_mean": "بادشاہ", "en_desc": "Ya Malik, rule my life by Your guidance and make my heart obedient to You.", "ru_desc": "یا مالک، میری زندگی کو اپنی ہدایت کے مطابق چلا اور میرے دل کو اپنا فرمانبردار بنا دے۔"}, {"num": 4, "ar": "ٱلْقُدُّوسُ", "tr": "Al-Quddus", "en_mean": "The Most Holy", "ru_mean": "نہایت پاک", "en_desc": "Ya Quddus, purify my heart, my intentions, and my deeds.", "ru_desc": "یا قدوس، میرے دل، میری نیتوں اور میرے اعمال کو پاک فرما۔"}, {"num": 5, "ar": "ٱلسَّلَامُ", "tr": "As-Salam", "en_mean": "The Giver of Peace and Safety", "ru_mean": "سلامتی اور امن عطا فرمانے والا", "en_desc": "Ya Salam, grant me peace, safety, and inner calm.", "ru_desc": "یا سلام، مجھے امن، حفاظت اور اندرونی سکون عطا فرما۔"}, {"num": 6, "ar": "ٱلْمُؤْمِنُ", "tr": "Al-Mu’min", "en_mean": "The Giver of Faith and Security", "ru_mean": "ایمان اور امن دینے والا", "en_desc": "Ya Mu’min, give my heart security, faith, and reassurance.", "ru_desc": "یا مؤمن، میرے دل کو حفاظت، ایمان اور اطمینان عطا فرما۔"}, {"num": 7, "ar": "ٱلْمُهَيْمِنُ", "tr": "Al-Muhaymin", "en_mean": "The Watchful Protector", "ru_mean": "نگہبان اور محافظ", "en_desc": "Ya Muhaymin, protect me, my family, and all that You entrusted to me.", "ru_desc": "یا مہیمن، میری، میرے اہلِ خانہ کی، اور ہر اس چیز کی حفاظت فرما جو تو نے میرے سپرد کی ہے۔"}, {"num": 8, "ar": "ٱلْعَزِيزُ", "tr": "Al-Aziz", "en_mean": "The Almighty", "ru_mean": "غالب اور زبردست", "en_desc": "Ya Aziz, strengthen me with dignity and keep me firm in truth.", "ru_desc": "یا عزیز، مجھے عزت کے ساتھ مضبوط فرما اور حق پر ثابت قدم رکھ۔"}, {"num": 9, "ar": "ٱلْجَبَّارُ", "tr": "Al-Jabbar", "en_mean": "The Compeller and Restorer", "ru_mean": "زخم بھرنے والا اور غالب", "en_desc": "Ya Jabbar, mend what is broken in my heart and my life.", "ru_desc": "یا جبار، میرے دل اور میری زندگی کی ہر ٹوٹی ہوئی چیز کو درست فرما۔"}, {"num": 10, "ar": "ٱلْمُتَكَبِّرُ", "tr": "Al-Mutakabbir", "en_mean": "The Supremely Exalted", "ru_mean": "نہایت بلند و بالا", "en_desc": "Ya Mutakabbir, protect me from arrogance and fill me with humility before You.", "ru_desc": "یا متکبر، مجھے تکبر سے بچا اور اپنے سامنے عاجزی سے بھر دے۔"}, {"num": 11, "ar": "ٱلْخَالِقُ", "tr": "Al-Khaliq", "en_mean": "The Creator", "ru_mean": "پیدا کرنے والا", "en_desc": "Ya Khaliq, create in me a better character and a better future.", "ru_desc": "یا خالق، میرے اندر بہتر اخلاق اور بہتر مستقبل پیدا فرما۔"}, {"num": 12, "ar": "ٱلْبَارِئُ", "tr": "Al-Bari’", "en_mean": "The Originator", "ru_mean": "عدم سے پیدا کرنے والا", "en_desc": "Ya Bari’, set my life in right order and bring good out of disorder.", "ru_desc": "یا باری، میری زندگی کو درست ترتیب دے اور بے ترتیبی سے خیر پیدا فرما۔"}, {"num": 13, "ar": "ٱلْمُصَوِّرُ", "tr": "Al-Musawwir", "en_mean": "The Fashioner", "ru_mean": "صورت بنانے والا", "en_desc": "Ya Musawwir, beautify my character and shape my life in the best way.", "ru_desc": "یا مصور، میرے اخلاق کو خوبصورت بنا اور میری زندگی کو بہترین انداز میں سنوار دے۔"}, {"num": 14, "ar": "ٱلْغَفَّارُ", "tr": "Al-Ghaffar", "en_mean": "The Constant Forgiver", "ru_mean": "بار بار بخشنے والا", "en_desc": "Ya Ghaffar, forgive me again and again, and cover my sins.", "ru_desc": "یا غفار، مجھے بار بار بخش دے اور میرے گناہوں پر پردہ ڈال دے۔"}, {"num": 15, "ar": "ٱلْقَهَّارُ", "tr": "Al-Qahhar", "en_mean": "The All-Dominant", "ru_mean": "سب پر غالب", "en_desc": "Ya Qahhar, subdue my ego, my desires, and everything that pulls me away from You.", "ru_desc": "یا قہار، میرے نفس، میری خواہشات اور ہر اس چیز کو قابو میں کر دے جو مجھے تجھ سے دور کرتی ہے۔"}, {"num": 16, "ar": "ٱلْوَهَّابُ", "tr": "Al-Wahhab", "en_mean": "The Bestower", "ru_mean": "بہت زیادہ عطا کرنے والا", "en_desc": "Ya Wahhab, grant me blessings that bring me closer to You.", "ru_desc": "یا وہاب، مجھے ایسی نعمتیں عطا فرما جو مجھے تیرے قریب کر دیں۔"}, {"num": 17, "ar": "ٱلرَّزَّاقُ", "tr": "Ar-Razzaq", "en_mean": "The Provider", "ru_mean": "رزق دینے والا", "en_desc": "Ya Razzaq, provide me with halal sustenance and remove my need.", "ru_desc": "یا رزاق، مجھے حلال رزق عطا فرما اور میری محتاجی دور کر دے۔"}, {"num": 18, "ar": "ٱلْفَتَّاحُ", "tr": "Al-Fattah", "en_mean": "The Opener", "ru_mean": "کھولنے والا", "en_desc": "Ya Fattah, open for me the doors of mercy, relief, and success.", "ru_desc": "یا فتاح، میرے لیے رحمت، آسانی اور کامیابی کے دروازے کھول دے۔"}, {"num": 19, "ar": "ٱلْعَلِيمُ", "tr": "Al-‘Alim", "en_mean": "The All-Knowing", "ru_mean": "سب کچھ جاننے والا", "en_desc": "Ya ‘Alim, grant me beneficial knowledge and protect me from ignorance.", "ru_desc": "یا علیم، مجھے نفع بخش علم عطا فرما اور جہالت سے بچا۔"}, {"num": 20, "ar": "ٱلْقَابِضُ", "tr": "Al-Qabid", "en_mean": "The Withholder", "ru_mean": "روک لینے والا", "en_desc": "Ya Qabid, hold back from me what would harm my faith and my heart.", "ru_desc": "یا قابض، مجھ سے وہ چیز دور رکھ جو میرے ایمان اور میرے دل کو نقصان پہنچائے۔"}, {"num": 21, "ar": "ٱلْبَاسِطُ", "tr": "Al-Basit", "en_mean": "The Expander", "ru_mean": "کشادگی دینے والا", "en_desc": "Ya Basit, expand my chest, my provision, and my hope.", "ru_desc": "یا باسط، میرا سینہ، میرا رزق اور میری امید وسیع فرما۔"}, {"num": 22, "ar": "ٱلْخَافِضُ", "tr": "Al-Khafid", "en_mean": "The Reducer", "ru_mean": "پست کرنے والا", "en_desc": "Ya Khafid, lower my pride and save me from arrogance.", "ru_desc": "یا خافض، میری گھمنڈ کو پست کر دے اور مجھے تکبر سے بچا۔"}, {"num": 23, "ar": "ٱلرَّافِعُ", "tr": "Ar-Rafi’", "en_mean": "The Exalter", "ru_mean": "بلند کرنے والا", "en_desc": "Ya Rafi’, raise me in faith, character, and honor.", "ru_desc": "یا رافع، مجھے ایمان، اخلاق اور عزت میں بلند فرما۔"}, {"num": 24, "ar": "ٱلْمُعِزُّ", "tr": "Al-Mu’izz", "en_mean": "The Giver of Honor", "ru_mean": "عزت دینے والا", "en_desc": "Ya Mu’izz, honor me through obedience to You and truth.", "ru_desc": "یا معز، اپنی اطاعت اور حق کے ذریعے مجھے عزت عطا فرما۔"}, {"num": 25, "ar": "ٱلْمُذِلُّ", "tr": "Al-Mudhill", "en_mean": "The Humiliator", "ru_mean": "ذلت دینے والا", "en_desc": "Ya Mudhill, keep me far from humiliation through sin and wrongdoing.", "ru_desc": "یا مذل، مجھے گناہ اور ظلم کے ذریعے آنے والی ذلت سے محفوظ رکھ۔"}, {"num": 26, "ar": "ٱلسَّمِيعُ", "tr": "As-Sami’", "en_mean": "The All-Hearing", "ru_mean": "سب کچھ سننے والا", "en_desc": "Ya Sami’, hear my dua, my weakness, and my hidden pain.", "ru_desc": "یا سمیع، میری دعا، میری کمزوری اور میری پوشیدہ تکلیف کو سن لے۔"}, {"num": 27, "ar": "ٱلْبَصِيرُ", "tr": "Al-Basir", "en_mean": "The All-Seeing", "ru_mean": "سب کچھ دیکھنے والا", "en_desc": "Ya Basir, see my state and guide me to what is right.", "ru_desc": "یا بصیر، میرا حال دیکھ اور مجھے صحیح راستے کی طرف رہنمائی فرما۔"}, {"num": 28, "ar": "ٱلْحَكَمُ", "tr": "Al-Hakam", "en_mean": "The Judge", "ru_mean": "فیصلہ فرمانے والا", "en_desc": "Ya Hakam, judge my affairs with truth and guide me through confusion.", "ru_desc": "یا حکم، میرے معاملات کا حق کے ساتھ فیصلہ فرما اور مجھے الجھن سے نکال۔"}, {"num": 29, "ar": "ٱلْعَدْلُ", "tr": "Al-‘Adl", "en_mean": "The Utterly Just", "ru_mean": "کامل انصاف والا", "en_desc": "Ya ‘Adl, place justice in my life and protect me from wrongdoing.", "ru_desc": "یا عدل، میری زندگی میں انصاف قائم فرما اور مجھے ظلم سے بچا۔"}, {"num": 30, "ar": "ٱللَّطِيفُ", "tr": "Al-Latif", "en_mean": "The Most Gentle", "ru_mean": "نہایت مہربان اور باریک بین", "en_desc": "Ya Latif, be gentle with me in what I see and what I do not see.", "ru_desc": "یا لطیف، میرے ساتھ نرمی فرما ان چیزوں میں بھی جو میں دیکھتا ہوں اور ان میں بھی جو میں نہیں دیکھتا۔"}, {"num": 31, "ar": "ٱلْخَبِيرُ", "tr": "Al-Khabir", "en_mean": "The All-Aware", "ru_mean": "ہر چیز سے باخبر", "en_desc": "Ya Khabir, guide me in what is hidden from my understanding.", "ru_desc": "یا خبیر، ان باتوں میں میری رہنمائی فرما جو میری سمجھ سے پوشیدہ ہیں۔"}, {"num": 32, "ar": "ٱلْحَلِيمُ", "tr": "Al-Halim", "en_mean": "The Forbearing", "ru_mean": "بردبار", "en_desc": "Ya Halim, treat me with forbearance and do not punish me for my haste.", "ru_desc": "یا حلیم، میرے ساتھ بردباری فرما اور میری جلد بازی پر مجھے سزا نہ دے۔"}, {"num": 33, "ar": "ٱلْعَظِيمُ", "tr": "Al-‘Azim", "en_mean": "The Magnificent", "ru_mean": "نہایت عظیم", "en_desc": "Ya ‘Azim, fill my heart with reverence for Your greatness.", "ru_desc": "یا عظیم، میرے دل کو اپنی عظمت کے خوف اور تعظیم سے بھر دے۔"}, {"num": 34, "ar": "ٱلْغَفُورُ", "tr": "Al-Ghafur", "en_mean": "The Great Forgiver", "ru_mean": "بہت بخشنے والا", "en_desc": "Ya Ghafur, forgive my major sins and accept my repentance.", "ru_desc": "یا غفور، میرے بڑے گناہ معاف فرما اور میری توبہ قبول کر۔"}, {"num": 35, "ar": "ٱلشَّكُورُ", "tr": "Ash-Shakur", "en_mean": "The Appreciative", "ru_mean": "قدردان اور بڑھا کر اجر دینے والا", "en_desc": "Ya Shakur, accept my small deeds and multiply their reward.", "ru_desc": "یا شکور، میرے چھوٹے اعمال قبول فرما اور ان کا اجر کئی گنا بڑھا دے۔"}, {"num": 36, "ar": "ٱلْعَلِيُّ", "tr": "Al-‘Aliyy", "en_mean": "The Most High", "ru_mean": "سب سے بلند", "en_desc": "Ya ‘Aliyy, raise my soul above what lowers me.", "ru_desc": "یا علی، میری روح کو ان چیزوں سے بلند کر دے جو مجھے گرا دیتی ہیں۔"}, {"num": 37, "ar": "ٱلْكَبِيرُ", "tr": "Al-Kabir", "en_mean": "The Most Great", "ru_mean": "نہایت بڑا", "en_desc": "Ya Kabir, make the dunya small in my eyes and Your pleasure great.", "ru_desc": "یا کبیر، دنیا کو میری نظر میں چھوٹا کر دے اور اپنی رضا کو بہت بڑا بنا دے۔"}, {"num": 38, "ar": "ٱلْحَفِيظُ", "tr": "Al-Hafiz", "en_mean": "The Preserver", "ru_mean": "حفاظت کرنے والا", "en_desc": "Ya Hafiz, preserve my faith, my family, and my end.", "ru_desc": "یا حفیظ، میرے ایمان، میرے اہلِ خانہ اور میرے انجام کی حفاظت فرما۔"}, {"num": 39, "ar": "ٱلْمُقِيتُ", "tr": "Al-Muqit", "en_mean": "The Sustainer", "ru_mean": "قوت اور غذا دینے والا", "en_desc": "Ya Muqit, sustain me with strength, patience, and enough provision.", "ru_desc": "یا مقیت، مجھے قوت، صبر اور کافی رزق کے ساتھ قائم رکھ۔"}, {"num": 40, "ar": "ٱلْحَسِيبُ", "tr": "Al-Hasib", "en_mean": "The Sufficient Reckoner", "ru_mean": "کافی ہونے والا", "en_desc": "Ya Hasib, be sufficient for me in every worry and affair.", "ru_desc": "یا حسیب، ہر فکر اور ہر معاملے میں میرے لیے کافی ہو جا۔"}, {"num": 41, "ar": "ٱلْجَلِيلُ", "tr": "Al-Jalil", "en_mean": "The Majestic", "ru_mean": "جلال والا", "en_desc": "Ya Jalil, fill my heart with reverence for Your majesty.", "ru_desc": "یا جلیل، میرے دل کو اپنے جلال کی تعظیم سے بھر دے۔"}, {"num": 42, "ar": "ٱلْكَرِيمُ", "tr": "Al-Karim", "en_mean": "The Most Generous", "ru_mean": "نہایت کریم", "en_desc": "Ya Karim, be generous to me with forgiveness, ease, and blessing.", "ru_desc": "یا کریم، مجھ پر بخشش، آسانی اور برکت کے ساتھ کرم فرما۔"}, {"num": 43, "ar": "ٱلرَّقِيبُ", "tr": "Ar-Raqib", "en_mean": "The Watchful", "ru_mean": "نگران", "en_desc": "Ya Raqib, watch over me and keep me away from secret sins.", "ru_desc": "یا رقیب، مجھ پر نگاہ رکھ اور مجھے پوشیدہ گناہوں سے بچا۔"}, {"num": 44, "ar": "ٱلْمُجِيبُ", "tr": "Al-Mujib", "en_mean": "The Responsive", "ru_mean": "دعا قبول کرنے والا", "en_desc": "Ya Mujib, answer my dua and do not turn me away disappointed.", "ru_desc": "یا مجیب، میری دعا قبول فرما اور مجھے نامراد واپس نہ لوٹا۔"}, {"num": 45, "ar": "ٱلْوَاسِعُ", "tr": "Al-Wasi’", "en_mean": "The All-Encompassing", "ru_mean": "سب کو گھیرنے والا", "en_desc": "Ya Wasi’, expand for me mercy, understanding, and relief.", "ru_desc": "یا واسع، میرے لیے رحمت، سمجھ اور آسانی کو وسیع فرما۔"}, {"num": 46, "ar": "ٱلْحَكِيمُ", "tr": "Al-Hakim", "en_mean": "The All-Wise", "ru_mean": "نہایت حکمت والا", "en_desc": "Ya Hakim, give me wisdom and right decisions.", "ru_desc": "یا حکیم، مجھے حکمت اور درست فیصلے عطا فرما۔"}, {"num": 47, "ar": "ٱلْوَدُودُ", "tr": "Al-Wadud", "en_mean": "The Most Loving", "ru_mean": "بہت محبت کرنے والا", "en_desc": "Ya Wadud, fill my heart with love, mercy, and goodness.", "ru_desc": "یا ودود، میرے دل کو محبت، رحمت اور بھلائی سے بھر دے۔"}, {"num": 48, "ar": "ٱلْمَجِيدُ", "tr": "Al-Majid", "en_mean": "The Most Glorious", "ru_mean": "نہایت بزرگی والا", "en_desc": "Ya Majid, honor me with noble character and righteous deeds.", "ru_desc": "یا مجید، مجھے اعلیٰ اخلاق اور نیک اعمال کے ساتھ عزت عطا فرما۔"}, {"num": 49, "ar": "ٱلْبَاعِثُ", "tr": "Al-Ba’ith", "en_mean": "The Resurrector", "ru_mean": "اٹھانے والا", "en_desc": "Ya Ba’ith, revive my heart with faith and sincere worship.", "ru_desc": "یا باعث، میرے دل کو ایمان اور خالص عبادت کے ساتھ زندہ کر دے۔"}, {"num": 50, "ar": "ٱلشَّهِيدُ", "tr": "Ash-Shahid", "en_mean": "The Witness", "ru_mean": "گواہ", "en_desc": "Ya Shahid, be my witness in truth and protect me from hypocrisy.", "ru_desc": "یا شہید، حق میں میرا گواہ بن اور مجھے نفاق سے بچا۔"}, {"num": 51, "ar": "ٱلْحَقُّ", "tr": "Al-Haqq", "en_mean": "The Truth", "ru_mean": "برحق", "en_desc": "Ya Haqq, keep me firm upon truth in belief, word, and action.", "ru_desc": "یا حق، مجھے ایمان، قول اور عمل میں حق پر ثابت قدم رکھ۔"}, {"num": 52, "ar": "ٱلْوَكِيلُ", "tr": "Al-Wakil", "en_mean": "The Trustee", "ru_mean": "کارساز", "en_desc": "Ya Wakil, manage my affairs in the best way, for I rely upon You.", "ru_desc": "یا وکیل، میرے معاملات بہترین طریقے سے سنبھال لے، کیونکہ میں تجھ پر بھروسہ کرتا ہوں۔"}, {"num": 53, "ar": "ٱلْقَوِيُّ", "tr": "Al-Qawiyy", "en_mean": "The All-Strong", "ru_mean": "نہایت طاقتور", "en_desc": "Ya Qawiyy, strengthen me against weakness, fear, and sin.", "ru_desc": "یا قوی، مجھے کمزوری، خوف اور گناہ کے مقابلے میں مضبوط فرما۔"}, {"num": 54, "ar": "ٱلْمَتِينُ", "tr": "Al-Matin", "en_mean": "The Firm", "ru_mean": "بہت مضبوط", "en_desc": "Ya Matin, make me firm in patience, worship, and obedience.", "ru_desc": "یا متین، مجھے صبر، عبادت اور اطاعت میں ثابت قدم کر دے۔"}, {"num": 55, "ar": "ٱلْوَلِيُّ", "tr": "Al-Waliyy", "en_mean": "The Protecting Friend", "ru_mean": "دوست اور مددگار", "en_desc": "Ya Waliyy, be my protector, supporter, and nearest helper.", "ru_desc": "یا ولی، میرا محافظ، میرا مددگار اور میرا قریب ترین سہارا بن جا۔"}, {"num": 56, "ar": "ٱلْحَمِيدُ", "tr": "Al-Hamid", "en_mean": "The Praiseworthy", "ru_mean": "تمام تعریف کے لائق", "en_desc": "Ya Hamid, make me among those whose lives are worthy of praise before You.", "ru_desc": "یا حمید، مجھے ان لوگوں میں شامل فرما جن کی زندگیاں تیرے سامنے قابلِ تعریف ہوں۔"}, {"num": 57, "ar": "ٱلْمُحْصِي", "tr": "Al-Muhsi", "en_mean": "The All-Enumerating", "ru_mean": "ہر چیز کو شمار کرنے والا", "en_desc": "Ya Muhsi, record for me mercy and erase from me what brings blame.", "ru_desc": "یا محصی، میرے لیے رحمت لکھ دے اور وہ چیزیں مٹا دے جو ملامت کا سبب بنتی ہیں۔"}, {"num": 58, "ar": "ٱلْمُبْدِئُ", "tr": "Al-Mubdi’", "en_mean": "The Originator of All", "ru_mean": "ابتداء کرنے والا", "en_desc": "Ya Mubdi’, begin for me a new opening full of obedience and good.", "ru_desc": "یا مبدئ، میرے لیے اطاعت اور خیر سے بھرا ہوا نیا آغاز فرما۔"}, {"num": 59, "ar": "ٱلْمُعِيدُ", "tr": "Al-Mu’id", "en_mean": "The Restorer", "ru_mean": "لوٹانے والا", "en_desc": "Ya Mu’id, return to me what is good, and restore what I lost with better.", "ru_desc": "یا معید، مجھے وہ چیز واپس عطا فرما جو خیر ہے، اور جو میں نے کھو دیا ہے اس سے بہتر عطا فرما۔"}, {"num": 60, "ar": "ٱلْمُحْيِي", "tr": "Al-Muhyi", "en_mean": "The Giver of Life", "ru_mean": "زندگی دینے والا", "en_desc": "Ya Muhyi, give life to my heart after heedlessness.", "ru_desc": "یا محیی، غفلت کے بعد میرے دل کو زندگی عطا فرما۔"}, {"num": 61, "ar": "ٱلْمُمِيتُ", "tr": "Al-Mumit", "en_mean": "The Creator of Death", "ru_mean": "موت دینے والا", "en_desc": "Ya Mumit, give me a good ending and take me only when You are pleased with me.", "ru_desc": "یا ممیت، مجھے اچھا انجام عطا فرما اور مجھے اسی وقت اٹھا جب تو مجھ سے راضی ہو۔"}, {"num": 62, "ar": "ٱلْحَيُّ", "tr": "Al-Hayy", "en_mean": "The Ever-Living", "ru_mean": "ہمیشہ زندہ", "en_desc": "Ya Hayy, keep my heart alive with remembrance of You.", "ru_desc": "یا حی، اپنے ذکر کے ذریعے میرے دل کو زندہ رکھ۔"}, {"num": 63, "ar": "ٱلْقَيُّومُ", "tr": "Al-Qayyum", "en_mean": "The Self-Subsisting", "ru_mean": "خود قائم اور سب کو قائم رکھنے والا", "en_desc": "Ya Qayyum, sustain me, support me, and do not let me collapse.", "ru_desc": "یا قیوم، مجھے سنبھال، مجھے سہارا دے، اور مجھے گرنے نہ دے۔"}, {"num": 64, "ar": "ٱلْوَاجِدُ", "tr": "Al-Wajid", "en_mean": "The Finder", "ru_mean": "پانے والا", "en_desc": "Ya Wajid, let me find what is good, and let me find You near me in every hardship.", "ru_desc": "یا واجد، مجھے وہ چیز عطا فرما جو خیر ہے، اور ہر سختی میں مجھے اپنا قرب محسوس کرا۔"}, {"num": 65, "ar": "ٱلْمَاجِدُ", "tr": "Al-Majid", "en_mean": "The Noble and Glorious", "ru_mean": "بزرگی والا", "en_desc": "Ya Majid, ennoble my heart and make my path honorable before You.", "ru_desc": "یا ماجد، میرے دل کو باوقار بنا اور میرے راستے کو اپنے سامنے باعزت فرما۔"}, {"num": 66, "ar": "ٱلْوَاحِدُ", "tr": "Al-Wahid", "en_mean": "The One", "ru_mean": "ایک", "en_desc": "Ya Wahid, unite my heart upon You alone and remove divided attachments from me.", "ru_desc": "یا واحد، میرے دل کو صرف اپنی طرف جمع فرما اور بٹی ہوئی وابستگیاں مجھ سے دور کر دے۔"}, {"num": 67, "ar": "ٱلْأَحَدُ", "tr": "Al-Ahad", "en_mean": "The Unique", "ru_mean": "یکتا", "en_desc": "Ya Ahad, make my worship sincere for You alone.", "ru_desc": "یا احد، میری عبادت کو صرف اپنے لیے خالص بنا دے۔"}, {"num": 68, "ar": "ٱلصَّمَدُ", "tr": "As-Samad", "en_mean": "The Eternal Refuge", "ru_mean": "جس کے سب محتاج ہیں", "en_desc": "Ya Samad, I turn to You with all my needs, so do not leave me in need of creation.", "ru_desc": "یا صمد، میں اپنی تمام حاجتوں کے ساتھ تیری طرف رجوع کرتا ہوں، مجھے مخلوق کا محتاج نہ چھوڑ۔"}, {"num": 69, "ar": "ٱلْقَادِرُ", "tr": "Al-Qadir", "en_mean": "The All-Powerful", "ru_mean": "قدرت رکھنے والا", "en_desc": "Ya Qadir, You are able over all things, so make possible what is good for me.", "ru_desc": "یا قادر، تو ہر چیز پر قادر ہے، اس لیے میرے لیے وہ چیز ممکن فرما جو میرے حق میں خیر ہو۔"}, {"num": 70, "ar": "ٱلْمُقْتَدِرُ", "tr": "Al-Muqtadir", "en_mean": "The Absolutely Powerful", "ru_mean": "مطلق قدرت والا", "en_desc": "Ya Muqtadir, decree for me what is right and protect me from what harms me.", "ru_desc": "یا مقتدر، میرے لیے درست فیصلہ فرما اور مجھے نقصان دینے والی چیز سے محفوظ رکھ۔"}, {"num": 71, "ar": "ٱلْمُقَدِّمُ", "tr": "Al-Muqaddim", "en_mean": "The Expediter", "ru_mean": "آگے بڑھانے والا", "en_desc": "Ya Muqaddim, bring me forward in what pleases You.", "ru_desc": "یا مقدم، مجھے ان چیزوں میں آگے بڑھا جو تجھے پسند ہیں۔"}, {"num": 72, "ar": "ٱلْمُؤَخِّرُ", "tr": "Al-Mu’akhkhir", "en_mean": "The Delayer", "ru_mean": "پیچھے کرنے والا", "en_desc": "Ya Mu’akhkhir, delay from me what is not good, and keep me patient with Your timing.", "ru_desc": "یا مؤخر، مجھ سے وہ چیز دور رکھ جو خیر نہیں، اور اپنے وقت پر مجھے صبر عطا فرما۔"}, {"num": 73, "ar": "ٱلْأَوَّلُ", "tr": "Al-Awwal", "en_mean": "The First", "ru_mean": "اول", "en_desc": "Ya Awwal, let my beginning be with Your guidance and blessing.", "ru_desc": "یا اول، میرا آغاز اپنی ہدایت اور برکت کے ساتھ فرما۔"}, {"num": 74, "ar": "ٱلْآخِرُ", "tr": "Al-Akhir", "en_mean": "The Last", "ru_mean": "آخر", "en_desc": "Ya Akhir, grant me a blessed ending and the best final outcome.", "ru_desc": "یا آخر، مجھے بابرکت انجام اور بہترین آخری نتیجہ عطا فرما۔"}, {"num": 75, "ar": "ٱلظَّاهِرُ", "tr": "Az-Zahir", "en_mean": "The Manifest", "ru_mean": "ظاہر", "en_desc": "Ya Zahir, show me the signs of truth clearly.", "ru_desc": "یا ظاہر، مجھے حق کی نشانیاں واضح طور پر دکھا دے۔"}, {"num": 76, "ar": "ٱلْبَاطِنُ", "tr": "Al-Batin", "en_mean": "The Hidden", "ru_mean": "باطن", "en_desc": "Ya Batin, know my hidden pain and heal what no one sees.", "ru_desc": "یا باطن، میری پوشیدہ تکلیف کو جان اور اس چیز کو شفا دے جو کوئی نہیں دیکھتا۔"}, {"num": 77, "ar": "ٱلْوَالِي", "tr": "Al-Wali", "en_mean": "The Governor", "ru_mean": "کارفرما", "en_desc": "Ya Wali, manage my affairs better than I could ever manage them myself.", "ru_desc": "یا والی، میرے معاملات مجھ سے بہتر طریقے سے سنبھال لے۔"}, {"num": 78, "ar": "ٱلْمُتَعَالِي", "tr": "Al-Muta’ali", "en_mean": "The Most Exalted", "ru_mean": "نہایت بلند", "en_desc": "Ya Muta’ali, raise me above sin, pettiness, and low desires.", "ru_desc": "یا متعالی، مجھے گناہ، حقارت اور ادنیٰ خواہشات سے اوپر اٹھا دے۔"}, {"num": 79, "ar": "ٱلْبَرُّ", "tr": "Al-Barr", "en_mean": "The Source of All Goodness", "ru_mean": "ساری بھلائی کا سرچشمہ", "en_desc": "Ya Barr, shower me with goodness and make me a source of good for others.", "ru_desc": "یا بر، مجھ پر بھلائی کی بارش فرما اور مجھے دوسروں کے لیے خیر کا ذریعہ بنا۔"}, {"num": 80, "ar": "ٱلتَّوَّابُ", "tr": "At-Tawwab", "en_mean": "The Acceptor of Repentance", "ru_mean": "توبہ قبول کرنے والا", "en_desc": "Ya Tawwab, accept my repentance and bring me back to You beautifully.", "ru_desc": "یا تواب، میری توبہ قبول فرما اور مجھے خوبصورتی کے ساتھ اپنی طرف واپس لے آ۔"}, {"num": 81, "ar": "ٱلْمُنْتَقِمُ", "tr": "Al-Muntaqim", "en_mean": "The Avenger", "ru_mean": "بدلہ لینے والا", "en_desc": "Ya Muntaqim, grant justice against oppression and protect me from ظلم.", "ru_desc": "یا منتقم، ظلم کے مقابلے میں انصاف قائم فرما اور مجھے ظلم سے بچا۔"}, {"num": 82, "ar": "ٱلْعَفُوُّ", "tr": "Al-‘Afuww", "en_mean": "The Pardoner", "ru_mean": "گناہ مٹا دینے والا", "en_desc": "Ya ‘Afuww, erase my sins completely and leave no trace of them upon me.", "ru_desc": "یا عفو، میرے گناہوں کو مکمل طور پر مٹا دے اور ان کا کوئی نشان باقی نہ رہنے دے۔"}, {"num": 83, "ar": "ٱلرَّؤُوفُ", "tr": "Ar-Ra’uf", "en_mean": "The Most Kind", "ru_mean": "نہایت شفیق", "en_desc": "Ya Ra’uf, treat me with tenderness, gentleness, and mercy.", "ru_desc": "یا رؤوف، میرے ساتھ نرمی، شفقت اور رحمت کا معاملہ فرما۔"}, {"num": 84, "ar": "مَالِكُ ٱلْمُلْكِ", "tr": "Malik-ul-Mulk", "en_mean": "Owner of All Sovereignty", "ru_mean": "تمام بادشاہی کا مالک", "en_desc": "Ya Malik-ul-Mulk, grant me only what is good from Your dominion and keep false power away from my heart.", "ru_desc": "یا مالک الملک، اپنی بادشاہی میں سے میرے لیے صرف خیر عطا فرما اور جھوٹی اقتدار پسندی کو میرے دل سے دور رکھ۔"}, {"num": 85, "ar": "ذُو ٱلْجَلَالِ وَٱلْإِكْرَامِ", "tr": "Dhul-Jalali wal-Ikram", "en_mean": "Lord of Majesty and Honor", "ru_mean": "جلال اور اکرام والا", "en_desc": "Ya Dhul-Jalali wal-Ikram, honor me with Your closeness and noble character.", "ru_desc": "یا ذوالجلال والاکرام، مجھے اپنے قرب اور اعلیٰ اخلاق کے ساتھ عزت عطا فرما۔"}, {"num": 86, "ar": "ٱلْمُقْسِطُ", "tr": "Al-Muqsit", "en_mean": "The Equitable", "ru_mean": "انصاف سے تقسیم کرنے والا", "en_desc": "Ya Muqsit, place fairness and balance in my life and my decisions.", "ru_desc": "یا مقسط، میری زندگی اور میرے فیصلوں میں انصاف اور توازن قائم فرما۔"}, {"num": 87, "ar": "ٱلْجَامِعُ", "tr": "Al-Jami’", "en_mean": "The Gatherer", "ru_mean": "جمع کرنے والا", "en_desc": "Ya Jami’, gather my scattered heart and unite my affairs upon good.", "ru_desc": "یا جامع، میرے بکھرے دل کو جمع کر دے اور میرے معاملات کو خیر پر اکٹھا کر دے۔"}, {"num": 88, "ar": "ٱلْغَنِيُّ", "tr": "Al-Ghani", "en_mean": "The Self-Sufficient", "ru_mean": "بے نیاز", "en_desc": "Ya Ghani, enrich my heart with contentment and free me from desperate need.", "ru_desc": "یا غنی، میرے دل کو قناعت سے مالا مال کر دے اور مجھے ذلیل محتاجی سے آزاد کر دے۔"}, {"num": 89, "ar": "ٱلْمُغْنِي", "tr": "Al-Mughni", "en_mean": "The Enricher", "ru_mean": "مالدار بنانے والا", "en_desc": "Ya Mughni, grant me sufficient halal provision and inner richness.", "ru_desc": "یا مغنی، مجھے کافی حلال رزق اور اندرونی غنا عطا فرما۔"}, {"num": 90, "ar": "ٱلْمَانِعُ", "tr": "Al-Mani’", "en_mean": "The Preventer", "ru_mean": "روکنے والا", "en_desc": "Ya Mani’, prevent from me what would harm my faith, my home, and my future.", "ru_desc": "یا مانع، مجھ سے وہ چیز روک دے جو میرے ایمان، میرے گھر اور میرے مستقبل کو نقصان پہنچائے۔"}, {"num": 91, "ar": "ٱلضَّارُ", "tr": "Ad-Darr", "en_mean": "The Dispenser of Affliction", "ru_mean": "آزمائش پہنچانے والا", "en_desc": "Ya Darr, keep harmful trials away from me and make me patient in what You decree.", "ru_desc": "یا ضار، نقصان دہ آزمائشیں مجھ سے دور رکھ اور اپنے فیصلے پر مجھے صبر عطا فرما۔"}, {"num": 92, "ar": "ٱلنَّافِعُ", "tr": "An-Nafi’", "en_mean": "The Bestower of Benefit", "ru_mean": "نفع دینے والا", "en_desc": "Ya Nafi’, bring me benefit in my religion, my life, and my family.", "ru_desc": "یا نافع، میرے دین، میری زندگی اور میرے اہلِ خانہ میں میرے لیے نفع پیدا فرما۔"}, {"num": 93, "ar": "ٱلنُّورُ", "tr": "An-Nur", "en_mean": "The Light", "ru_mean": "نور", "en_desc": "Ya Nur, illuminate my path and bring me out of darkness.", "ru_desc": "یا نور، میرے راستے کو روشن فرما اور مجھے تاریکی سے نکال دے۔"}, {"num": 94, "ar": "ٱلْهَادِي", "tr": "Al-Hadi", "en_mean": "The Guide", "ru_mean": "ہدایت دینے والا", "en_desc": "Ya Hadi, guide me to the straight path and keep me firm upon it.", "ru_desc": "یا ہادی، مجھے سیدھے راستے کی ہدایت دے اور اس پر ثابت قدم رکھ۔"}, {"num": 95, "ar": "ٱلْبَدِيعُ", "tr": "Al-Badi’", "en_mean": "The Incomparable Originator", "ru_mean": "بے مثال پیدا کرنے والا", "en_desc": "Ya Badi’, open for me beautiful outcomes I could not have imagined.", "ru_desc": "یا بدیع، میرے لیے ایسے خوبصورت نتائج کھول دے جن کا میں نے تصور بھی نہ کیا ہو۔"}, {"num": 96, "ar": "ٱلْبَاقِي", "tr": "Al-Baqi", "en_mean": "The Everlasting", "ru_mean": "ہمیشہ باقی رہنے والا", "en_desc": "Ya Baqi, make what I do for You lasting and accepted.", "ru_desc": "یا باقی، جو کچھ میں تیرے لیے کرتا ہوں اسے باقی رہنے والا اور قبول شدہ بنا دے۔"}, {"num": 97, "ar": "ٱلْوَارِثُ", "tr": "Al-Warith", "en_mean": "The Inheritor", "ru_mean": "سب کا وارث", "en_desc": "Ya Warith, leave for me what is truly beneficial when all else fades.", "ru_desc": "یا وارث، جب سب کچھ مٹ جائے تو میرے لیے وہ چیز باقی رکھ جو حقیقی طور پر نفع بخش ہو۔"}, {"num": 98, "ar": "ٱلرَّشِيدُ", "tr": "Ar-Rashid", "en_mean": "The Guide to the Right Way", "ru_mean": "درست رہنمائی دینے والا", "en_desc": "Ya Rashid, direct me to what is right and keep me from misguidance.", "ru_desc": "یا رشید، مجھے درست راستے کی طرف رہنمائی فرما اور گمراہی سے بچا۔"}, {"num": 99, "ar": "ٱلصَّبُورُ", "tr": "As-Sabur", "en_mean": "The Most Patient", "ru_mean": "نہایت صبر والا", "en_desc": "Ya Sabur, give me patience without complaint and firmness without despair.", "ru_desc": "یا صبور، مجھے بغیر شکوے کے صبر اور بغیر مایوسی کے ثابت قدمی عطا فرما۔"}];
+const meanKey = "ru_mean";
+const descKey = "ru_desc";
+let currentIndex = 0;
+let autoTimer = null;
+
+const nameArabic = document.getElementById("nameArabic");
+const nameTranslit = document.getElementById("nameTranslit");
+const nameMeaning = document.getElementById("nameMeaning");
+const nameDesc = document.getElementById("nameDesc");
+const nameCounter = document.getElementById("nameCounter");
+const playStatus = document.getElementById("playStatus");
+const speedRange = document.getElementById("speedRange");
+const speedValue = document.getElementById("speedValue");
+const namesGrid = document.getElementById("namesGrid");
+const searchInput = document.getElementById("searchInput");
+
+function renderGrid(filter=""){
+  namesGrid.innerHTML = "";
+  const q = filter.trim().toLowerCase();
+  names.forEach((item, idx) => {
+    const hay = `${item.tr} ${item[meanKey]} ${item[descKey]} ${item.ar}`.toLowerCase();
+    if (q && !hay.includes(q)) return;
+    const card = document.createElement("div");
+    card.className = "name-chip" + (idx === currentIndex ? " active" : "");
+    card.innerHTML = `
+      <div class="chip-num">#${item.num}</div>
+      <div class="chip-ar">${item.ar}</div>
+      <div class="chip-tr">${item.tr}</div>
+      <div class="chip-mean">${item[meanKey]}</div>
+    `;
+    card.addEventListener("click", () => {
+  currentIndex = idx;
+  renderCurrent();
+  renderGrid(searchInput.value);
+
+  document.querySelector(".player-card").scrollIntoView({
+    behavior: "smooth",
+    block: "start"
+  });
+});
+    namesGrid.appendChild(card);
+  });
+}
+
+function renderCurrent(){
+  const item = names[currentIndex];
+  nameArabic.textContent = item.ar;
+  nameTranslit.textContent = item.tr;
+  nameMeaning.textContent = item[meanKey];
+  nameDesc.textContent = item[descKey];
+  nameCounter.textContent = `نام ${item.num} / 99`;
+}
+
+function nextName(){
+  if (currentIndex >= names.length - 1) {
+    stopAuto();
+    return;
+  }
+  currentIndex += 1;
+  renderCurrent();
+  renderGrid(searchInput.value);
+}
+
+function prevName(){
+  if (currentIndex <= 0) {
+    return;
+  }
+  currentIndex -= 1;
+  renderCurrent();
+  renderGrid(searchInput.value);
+}
+
+function startAuto(){
+  stopAuto();
+  if (currentIndex >= names.length - 1) {
+    return;
+  }
+  const seconds = parseInt(speedRange.value, 10);
+  autoTimer = setInterval(() => {
+    if (currentIndex >= names.length - 1) {
+      stopAuto();
+      return;
+    }
+    nextName();
+  }, seconds * 1000);
+  playStatus.textContent = "خودکار اسکرول: " + seconds + "s";
+}
+
+function stopAuto(){
+  if (autoTimer) {
+    clearInterval(autoTimer);
+    autoTimer = null;
+  }
+  playStatus.textContent = "آپ پیچھے/آگے کے بٹنوں سے دستی طور پر پڑھ سکتے ہیں، یا 1 سے 10 سیکنڈ تک خودکار اسکرول چلا سکتے ہیں۔";
+}
+
+document.getElementById("playBtn").addEventListener("click", startAuto);
+document.getElementById("pauseBtn").addEventListener("click", stopAuto);
+document.getElementById("nextBtn").addEventListener("click", () => { stopAuto(); nextName(); });
+document.getElementById("prevBtn").addEventListener("click", () => { stopAuto(); prevName(); });
+document.getElementById("resetBtn").addEventListener("click", () => {
+  stopAuto();
+  currentIndex = 0;
+  renderCurrent();
+  renderGrid(searchInput.value);
+});
+
+speedRange.addEventListener("input", () => {
+  speedValue.textContent = speedRange.value;
+  if (autoTimer) startAuto();
+});
+
+searchInput.addEventListener("input", () => renderGrid(searchInput.value));
+
+renderCurrent();
+renderGrid();
+</script>
+
+</body>
+</html>
