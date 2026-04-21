@@ -407,7 +407,7 @@ h1{
 </div>
 
 <script>
-const UI = {"status_default": "Joylashuv kutilmoqda", "status_sensor": "Sensor faol", "status_manual": "Qo‘lda rejim", "not_supported": "Sensor qo‘llab-quvvatlanmaydi", "need_permission": "iPhone’da harakat sensoriga ruxsat talab qilinishi mumkin", "unknown": "Tanlanmagan", "detect_error": "Joylashuvni aniqlab bo‘lmadi", "city_required": "Mamlakat va shaharni kiriting", "load_error": "Shahar bo‘yicha joylashuvni yuklab bo‘lmadi"};
+const UI = {"status_default": "Joylashuv kutilmoqda", "status_sensor": "Kompas faol", "status_manual": "Qo‘lda rejim", "not_supported": "Yo‘nalish sensori qo‘llab-quvvatlanmaydi", "need_permission": "iPhone’da harakat sensoriga ruxsat talab qilinishi mumkin", "unknown": "Tanlanmagan", "detect_error": "Joylashuvni aniqlab bo‘lmadi", "city_required": "Mamlakat va shaharni kiriting", "load_error": "Shahar bo‘yicha joylashuvni yuklab bo‘lmadi", "accuracy_good": "Kompas faol · yuqori aniqlik", "accuracy_medium": "Kompas faol · o‘rta aniqlik", "accuracy_low": "Kompas faol · kalibrovka kerak", "tilt_hint": "Telefonni tik ushlang va metall hamda magnitlardan uzoq tuting", "calibration_hint": "Agar strelka xato ko‘rsatsa, kompasni sakkizlik harakati bilan kalibrlang va tanangizni sekin buring", "geolocation_accuracy": "GPS aniqligi", "heading_unavailable": "Bu qurilmada ishonchli kompas yo‘q. Statik qibla yo‘nalishi ko‘rsatilmoqda"};
 
 const state = {
   lat: localStorage.getItem('qibla_lat') || '',
@@ -417,10 +417,15 @@ const state = {
   locationName: localStorage.getItem('qibla_location_name') || '',
   headingOffset: 0,
   lastHeading: null,
+  lastRawHeading: null,
+  lastCompassAccuracy: null,
   deviceOrientationAttached: false,
   smoothHeading: null,
   animationFrame: null,
-  targetArrowAngle: null
+  targetArrowAngle: null,
+  lastOrientationSource: null,
+  geolocationAccuracy: null,
+  watchId: null
 };
 
 function toRadians(deg) { return deg * Math.PI / 180; }
@@ -456,7 +461,8 @@ function setLocationUI() {
     document.getElementById('coordsText').textContent = `${Number(state.lat).toFixed(4)}, ${Number(state.lon).toFixed(4)}`;
     const q = computeQibla(Number(state.lat), Number(state.lon));
     document.getElementById('qiblaAngleText').textContent = q.bearing.toFixed(1) + '°';
-    document.getElementById('distanceText').textContent = Math.round(q.distanceKm).toLocaleString() + ' km';
+    const geoText = state.geolocationAccuracy != null ? ` · ${UI.geolocation_accuracy}: ±${Math.round(state.geolocationAccuracy)} m` : '';
+    document.getElementById('distanceText').textContent = Math.round(q.distanceKm).toLocaleString() + ' km' + geoText;
     rotateStaticQibla(q.bearing);
   } else {
     document.getElementById('coordsText').textContent = '—';
@@ -524,11 +530,11 @@ async function searchByCity() {
     state.city = city;
     state.country = country;
     state.locationName = `${city}, ${country}`;
+    state.geolocationAccuracy = null;
     saveLocation();
     setLocationUI();
     await initOrientationIfPossible();
-    await initOrientationIfPossible();
-    document.getElementById('sensorBadge').textContent = 'Qo‘lda rejim';
+    document.getElementById('sensorBadge').textContent = UI.status_manual;
     document.getElementById('sensorBadge').className = 'badge';
   } catch (e) {
     alertMsg(UI.load_error);
@@ -549,14 +555,64 @@ function shortestAngleDelta(from, to) {
   return diff;
 }
 
+function getScreenOrientationAngle() {
+  if (screen.orientation && typeof screen.orientation.angle === 'number') {
+    return screen.orientation.angle;
+  }
+  if (typeof window.orientation === 'number') {
+    return window.orientation;
+  }
+  return 0;
+}
+
 function getHeadingFromEvent(event) {
   if (typeof event.webkitCompassHeading === 'number') {
-    return event.webkitCompassHeading;
+    state.lastOrientationSource = 'webkitCompassHeading';
+    state.lastCompassAccuracy = typeof event.webkitCompassAccuracy === 'number' ? event.webkitCompassAccuracy : null;
+    return normalizeAngle(event.webkitCompassHeading);
   }
+
   if (typeof event.alpha === 'number') {
-    return 360 - event.alpha;
+    if (event.absolute === false && event.type !== 'deviceorientationabsolute') {
+      return null;
+    }
+    const screenAngle = getScreenOrientationAngle();
+    state.lastOrientationSource = event.type === 'deviceorientationabsolute' ? 'deviceorientationabsolute' : 'deviceorientation';
+    state.lastCompassAccuracy = null;
+    return normalizeAngle(360 - event.alpha - screenAngle);
   }
+
   return null;
+}
+
+function updateSensorBadge() {
+  const badge = document.getElementById('sensorBadge');
+  const hint = document.getElementById('hintBadge');
+
+  if (state.lastHeading == null) {
+    badge.textContent = UI.heading_unavailable;
+    badge.className = 'badge warn';
+    hint.textContent = UI.calibration_hint;
+    return;
+  }
+
+  if (typeof state.lastCompassAccuracy === 'number') {
+    if (state.lastCompassAccuracy <= 15) {
+      badge.textContent = UI.accuracy_good;
+      badge.className = 'badge';
+    } else if (state.lastCompassAccuracy <= 35) {
+      badge.textContent = UI.accuracy_medium;
+      badge.className = 'badge warn';
+    } else {
+      badge.textContent = UI.accuracy_low;
+      badge.className = 'badge error';
+    }
+  } else {
+    badge.textContent = UI.status_sensor;
+    badge.className = 'badge';
+  }
+
+  hint.textContent = UI.tilt_hint;
 }
 
 function handleOrientation(event) {
@@ -564,21 +620,32 @@ function handleOrientation(event) {
   const rawHeading = getHeadingFromEvent(event);
   if (rawHeading == null || Number.isNaN(rawHeading)) return;
 
+  const tooFlat = typeof event.beta === 'number' && typeof event.gamma === 'number' &&
+    Math.abs(event.beta) > 75 && Math.abs(event.gamma) < 20;
+
+  if (tooFlat) {
+    document.getElementById('hintBadge').textContent = UI.tilt_hint;
+    document.getElementById('hintBadge').className = 'badge warn';
+  } else {
+    document.getElementById('hintBadge').textContent = UI.calibration_hint;
+    document.getElementById('hintBadge').className = 'badge warn';
+  }
+
   if (state.smoothHeading == null) {
     state.smoothHeading = rawHeading;
   } else {
     const delta = shortestAngleDelta(state.smoothHeading, rawHeading);
-    state.smoothHeading = normalizeAngle(state.smoothHeading + delta * 0.18);
+    state.smoothHeading = normalizeAngle(state.smoothHeading + delta * 0.12);
   }
 
+  state.lastRawHeading = rawHeading;
   state.lastHeading = state.smoothHeading;
 
   const q = computeQibla(Number(state.lat), Number(state.lon));
   const relative = normalizeAngle(q.bearing - state.smoothHeading + state.headingOffset);
   state.targetArrowAngle = relative;
 
-  document.getElementById('sensorBadge').textContent = 'Kompas faol';
-  document.getElementById('sensorBadge').className = 'badge';
+  updateSensorBadge();
 }
 
 function animateArrow() {
@@ -595,8 +662,13 @@ function animateArrow() {
 
 async function initOrientationIfPossible() {
   try {
-    if (typeof DeviceOrientationEvent !== 'undefined' &&
-        typeof DeviceOrientationEvent.requestPermission === 'function') {
+    if (typeof DeviceOrientationEvent === 'undefined') {
+      document.getElementById('sensorBadge').textContent = UI.not_supported;
+      document.getElementById('sensorBadge').className = 'badge error';
+      return;
+    }
+
+    if (typeof DeviceOrientationEvent.requestPermission === 'function') {
       const result = await DeviceOrientationEvent.requestPermission();
       if (result !== 'granted') {
         document.getElementById('sensorBadge').textContent = UI.need_permission;
@@ -608,12 +680,17 @@ async function initOrientationIfPossible() {
     if (!state.deviceOrientationAttached) {
       window.addEventListener('deviceorientationabsolute', handleOrientation, true);
       window.addEventListener('deviceorientation', handleOrientation, true);
+      window.addEventListener('orientationchange', () => {
+        state.smoothHeading = null;
+      }, true);
       state.deviceOrientationAttached = true;
     }
 
     if (!state.animationFrame) {
       state.animationFrame = requestAnimationFrame(animateArrow);
     }
+
+    updateSensorBadge();
   } catch (_) {
     document.getElementById('sensorBadge').textContent = UI.not_supported;
     document.getElementById('sensorBadge').className = 'badge error';
@@ -625,11 +702,13 @@ async function detectLocation() {
     alertMsg(UI.detect_error);
     return;
   }
-  navigator.geolocation.getCurrentPosition(async (pos) => {
+
+  const onSuccess = async (pos) => {
     const lat = pos.coords.latitude;
     const lon = pos.coords.longitude;
     state.lat = String(lat);
     state.lon = String(lon);
+    state.geolocationAccuracy = typeof pos.coords.accuracy === 'number' ? pos.coords.accuracy : null;
 
     try {
       const res = await fetch(`https://nominatim.openstreetmap.org/reverse?format=jsonv2&lat=${lat}&lon=${lon}`);
@@ -648,27 +727,36 @@ async function detectLocation() {
 
     saveLocation();
     setLocationUI();
-  }, () => {
+    await initOrientationIfPossible();
+  };
+
+  navigator.geolocation.getCurrentPosition(onSuccess, () => {
     alertMsg(UI.detect_error);
   }, {
     enableHighAccuracy: true,
-    timeout: 12000,
-    maximumAge: 300000
+    timeout: 15000,
+    maximumAge: 0
   });
+
+  if (state.watchId == null && navigator.geolocation.watchPosition) {
+    state.watchId = navigator.geolocation.watchPosition(onSuccess, () => {}, {
+      enableHighAccuracy: true,
+      timeout: 15000,
+      maximumAge: 3000
+    });
+  }
 }
 
 function resetDirection() {
-  if (state.lastHeading == null) {
-    state.headingOffset = 0;
-  } else {
-    state.headingOffset = state.lastHeading;
-  }
+  state.headingOffset = 0;
+  state.smoothHeading = null;
   if (state.lat && state.lon) {
     const q = computeQibla(Number(state.lat), Number(state.lon));
-    const base = state.lastHeading == null ? q.bearing : normalizeAngle(q.bearing - state.lastHeading + state.headingOffset);
+    const base = state.lastHeading == null ? q.bearing : normalizeAngle(q.bearing - state.lastHeading);
     state.targetArrowAngle = base;
     renderArrow(base);
-    alertMsg('Qibla yo‘nalishi yangilandi.');
+    document.getElementById('hintBadge').textContent = UI.calibration_hint;
+    alertMsg('Kompas qayta tiklandi. Maksimal aniqlik uchun telefonni sakkizlik harakati bilan kalibrlang.');
   }
 }
 
