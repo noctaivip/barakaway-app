@@ -1,3 +1,7 @@
+<!--
+بِسْمِ ٱللَّٰهِ ٱلرَّحْمَـٰنِ ٱلرَّحِيمِ
+In the name of Allah, the Most Merciful, the Most Compassionate
+-->
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -85,10 +89,143 @@ transform:translateY(-1px);
 .btn-disabled:hover{
 transform:none;
 }
+
+
+.theme-toggle{
+position:fixed;
+top:18px;
+left:50%;
+transform:translateX(-50%);
+display:inline-flex;
+align-items:center;
+gap:10px;
+padding:8px 14px;
+background:rgba(255,255,255,0.92);
+border:1px solid rgba(0,0,0,0.08);
+border-radius:999px;
+box-shadow:0 6px 18px rgba(0,0,0,0.08);
+z-index:1000;
+backdrop-filter:blur(8px);
+}
+
+.theme-toggle-label{
+font-size:14px;
+font-weight:600;
+color:#222;
+}
+
+.theme-switch{
+position:relative;
+width:52px;
+height:30px;
+appearance:none;
+background:#d8dde3;
+border-radius:999px;
+outline:none;
+cursor:pointer;
+transition:0.25s;
+}
+
+.theme-switch::before{
+content:"";
+position:absolute;
+top:3px;
+left:3px;
+width:24px;
+height:24px;
+border-radius:50%;
+background:#fff;
+box-shadow:0 2px 6px rgba(0,0,0,0.18);
+transition:0.25s;
+}
+
+.theme-switch:checked{
+background:#2d7a46;
+}
+
+.theme-switch:checked::before{
+transform:translateX(22px);
+}
+
+body,
+.container,
+p,
+.note{
+transition:background 0.25s,color 0.25s,box-shadow 0.25s,border-color 0.25s;
+}
+
+body.dark-mode{
+background:#101418;
+}
+
+body.dark-mode .theme-toggle{
+background:rgba(21,27,34,0.94);
+border-color:rgba(255,255,255,0.08);
+box-shadow:0 8px 24px rgba(0,0,0,0.35);
+}
+
+body.dark-mode .theme-toggle-label{
+color:#f3f5f7;
+}
+
+body.dark-mode .container{
+background:#171d24;
+box-shadow:0 10px 28px rgba(0,0,0,0.35);
+}
+
+body.dark-mode h1{
+color:#f5f7fa;
+}
+
+body.dark-mode p,
+body.dark-mode .note{
+color:#b9c0c8;
+}
+
+body.dark-mode .btn-ru{
+background:#2a3138;
+color:#f3f5f7;
+}
+
+body.dark-mode .btn-uz{
+background:#1d3327;
+color:#dff4e6;
+}
+
+body.dark-mode .btn-ar{
+background:#1c2940;
+color:#dfe9ff;
+}
+
+body.dark-mode .btn-id{
+background:#3b2a1f;
+color:#ffe7cf;
+}
+
+body.dark-mode .btn-ur{
+background:#30213d;
+color:#f1dcff;
+}
+
+body.dark-mode .btn-hi{
+background:#1f3326;
+color:#dcffe8;
+}
+
+body.dark-mode .btn-disabled{
+background:#222a31;
+color:#6f7882;
+}
+
 </style>
 </head>
 
 <body>
+
+<div class="theme-toggle">
+  <span class="theme-toggle-label">Dark mode</span>
+  <input type="checkbox" class="theme-switch" id="themeSwitch" aria-label="Toggle dark mode">
+</div>
 
 <div class="container">
 <h1>Select Language</h1>
@@ -131,6 +268,24 @@ function setLang(lang){
     window.location.href = "home-hi.html";
   }
 }
+
+const themeSwitch = document.getElementById("themeSwitch");
+const savedTheme = localStorage.getItem("siteTheme");
+
+if(savedTheme === "dark"){
+  document.body.classList.add("dark-mode");
+  themeSwitch.checked = true;
+}
+
+themeSwitch.addEventListener("change", function(){
+  if(this.checked){
+    document.body.classList.add("dark-mode");
+    localStorage.setItem("siteTheme", "dark");
+  } else {
+    document.body.classList.remove("dark-mode");
+    localStorage.setItem("siteTheme", "light");
+  }
+});
 
 const force = sessionStorage.getItem("forceLanguageSelect");
 
