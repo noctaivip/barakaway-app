@@ -6,6 +6,18 @@ In the name of Allah, the Most Merciful, the Most Compassionate
 <html lang="id">
 <head>
 
+<script>
+(function(){
+  const savedTheme = localStorage.getItem('siteTheme');
+  if(savedTheme === 'light'){
+    document.documentElement.classList.add('light-mode');
+  } else {
+    document.documentElement.classList.add('dark-mode');
+    localStorage.setItem('siteTheme','dark');
+  }
+})();
+</script>
+
 <script data-goatcounter="https://onedollarexit.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
 
 <link rel="icon" type="image/png" href="/favicon.png">
@@ -301,7 +313,8 @@ transform:scale(0.985);
 
 @media(max-width:700px){
   .install-box{
-    margin-top:14px;
+    display:none !important;
+    margin-top:0;
   }
 
   .install-btn{
@@ -987,6 +1000,234 @@ html.light-mode .theme-switch{
 
 html.dark-mode .theme-switch::before{left:20px;}
 html.light-mode .theme-switch::before{left:3px;}
+
+/* HOME HERO BRAND + PRAYER WIDGET */
+.brand-prayer-hero{
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  gap:14px;
+  margin:4px 0 14px;
+}
+
+.brand-signature{
+  display:inline-flex;
+  align-items:baseline;
+  justify-content:center;
+  gap:0;
+  font-weight:900;
+  letter-spacing:-0.045em;
+  line-height:1;
+  margin-top:-2px;
+}
+
+.brand-signature .brand-letter-accent{
+  color:#4caf6a;
+}
+
+.brand-signature .brand-letter-main{
+  color:inherit;
+}
+
+html.dark-mode .brand-signature .brand-letter-main{color:#f5f7fa;}
+html.light-mode .brand-signature .brand-letter-main{color:#1f2a22;}
+
+.brand-signature{
+  font-size:44px;
+}
+
+.home-prayer-widget{
+  width:min(100%, 430px);
+  border-radius:24px;
+  padding:18px 18px 16px;
+  text-decoration:none;
+  transition:background .25s,border-color .25s,box-shadow .25s,transform .18s ease;
+  border:1.5px solid transparent;
+  display:block;
+}
+
+html.dark-mode .home-prayer-widget{
+  background:linear-gradient(180deg,#1d242c 0%, #1a2128 100%);
+  border-color:rgba(77, 173, 111, 0.28);
+  box-shadow:0 12px 28px rgba(0,0,0,0.22), 0 4px 12px rgba(45,122,70,0.12), inset 0 1px 0 rgba(255,255,255,0.04);
+}
+
+html.light-mode .home-prayer-widget{
+  background:linear-gradient(180deg,#ffffff 0%, #fbfdfc 100%);
+  border-color:rgba(33,94,56,0.22);
+  box-shadow:0 12px 28px rgba(15,24,18,0.06), 0 4px 12px rgba(45,122,70,0.08), inset 0 1px 0 rgba(255,255,255,0.96);
+}
+
+.home-prayer-widget:hover{
+  transform:translateY(-2px);
+}
+
+.home-prayer-top{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:12px;
+  margin-bottom:10px;
+}
+
+.home-prayer-kicker{
+  font-size:11px;
+  font-weight:800;
+  text-transform:uppercase;
+  letter-spacing:1.2px;
+}
+
+html.dark-mode .home-prayer-kicker{color:#a8b8c8;}
+html.light-mode .home-prayer-kicker{color:#6b7b70;}
+
+.home-prayer-location{
+  font-size:12px;
+  font-weight:700;
+  text-align:right;
+}
+
+html.dark-mode .home-prayer-location{color:#d7e3ee;}
+html.light-mode .home-prayer-location{color:#355043;}
+
+.home-prayer-main{
+  display:flex;
+  align-items:flex-end;
+  justify-content:space-between;
+  gap:12px;
+}
+
+.home-prayer-name{
+  font-size:26px;
+  font-weight:900;
+  line-height:1;
+  margin-bottom:6px;
+  color:#4caf6a;
+}
+
+.home-prayer-time{
+  font-size:34px;
+  font-weight:900;
+  line-height:1;
+}
+
+html.dark-mode .home-prayer-time{color:#f5f7fa;}
+html.light-mode .home-prayer-time{color:#1f2a22;}
+
+.home-prayer-meta{
+  font-size:13px;
+  margin-top:8px;
+}
+
+html.dark-mode .home-prayer-meta{color:#c7d3de;}
+html.light-mode .home-prayer-meta{color:#607066;}
+
+.home-prayer-countdown{
+  font-size:15px;
+  font-weight:800;
+  white-space:nowrap;
+  padding:10px 12px;
+  border-radius:14px;
+}
+
+html.dark-mode .home-prayer-countdown{
+  background:#162e23;
+  color:#dff4e6;
+  border:1px solid rgba(76,175,106,0.24);
+}
+
+html.light-mode .home-prayer-countdown{
+  background:#eef7f1;
+  color:#2d7a46;
+  border:1px solid #d7e8dc;
+}
+
+.home-prayer-countdown{
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  justify-content:center;
+  gap:4px;
+  min-width:104px;
+}
+
+.home-prayer-countdown-label{
+  font-size:10px;
+  line-height:1;
+  font-weight:800;
+  letter-spacing:0.08em;
+  text-transform:uppercase;
+  opacity:0.88;
+}
+
+.home-prayer-note{
+  margin-top:10px;
+  font-size:12px;
+  font-weight:700;
+  text-align:center;
+}
+
+html.dark-mode .home-prayer-note{color:#93a5b6;}
+html.light-mode .home-prayer-note{color:#708177;}
+
+@media(max-width:700px){
+  .brand-prayer-hero{
+    gap:12px;
+    margin:0 0 12px;
+  }
+  .brand-signature{
+    font-size:29px;
+    margin-top:0;
+    transform:translateY(-2px);
+  }
+  .home-prayer-widget{
+    width:100%;
+    padding:14px 14px 13px;
+    border-radius:20px;
+  }
+  .home-prayer-top{
+    margin-bottom:8px;
+  }
+  .home-prayer-main{
+    align-items:center;
+  }
+  .home-prayer-name{
+    font-size:22px;
+    margin-bottom:4px;
+  }
+  .home-prayer-time{
+    font-size:30px;
+  }
+  .home-prayer-meta{
+    font-size:12px;
+    margin-top:6px;
+  }
+  .home-prayer-countdown{
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    justify-content:center;
+    gap:3px;
+    min-width:92px;
+    font-size:13px;
+    padding:9px 10px;
+    border-radius:12px;
+  }
+  .home-prayer-location{
+    font-size:11px;
+  }
+  .home-prayer-countdown-label{
+    font-size:10px;
+    line-height:1;
+    font-weight:800;
+    letter-spacing:0.08em;
+    text-transform:uppercase;
+    opacity:0.88;
+  }
+  .home-prayer-note{
+    text-align:center;
+  }
+}
+
 </style>
 <script src="/theme-init.js"></script>
 <link rel="stylesheet" href="/theme.css">
@@ -994,19 +1235,18 @@ html.light-mode .theme-switch::before{left:3px;}
 </head>
 <body>
 
-
 <div class="mobile-top-controls">
-  <button class="icon-btn left" onclick="changeLanguageChoice()" aria-label="Change language">
+  <button class="icon-btn left" onclick="changeLanguageChoice()" aria-label="Ganti bahasa">
     <svg viewBox="0 0 24 24" aria-hidden="true">
       <path d="M12 2a10 10 0 100 20 10 10 0 000-20zm6.92 9h-3.02a15.6 15.6 0 00-1.33-5.01A8.03 8.03 0 0118.92 11zM12 4.04c.89 1.08 1.97 3.22 2.28 6.96H9.72C10.03 7.26 11.11 5.12 12 4.04zM4.99 13h3.02a15.6 15.6 0 001.33 5.01A8.03 8.03 0 014.99 13zM8.1 11H5.08a8.03 8.03 0 014.35-5.01A15.6 15.6 0 008.1 11zm1.62 2h4.56c-.31 3.74-1.39 5.88-2.28 6.96-.89-1.08-1.97-3.22-2.28-6.96zm5.18 5.01A15.6 15.6 0 0015.9 13h3.02a8.03 8.03 0 01-4.02 5.01z"/>
     </svg>
     <span class="ripple"></span>
   </button>
   <div class="theme-toggle-center">
-    <span class="theme-toggle-label">Light mode</span>
-    <input type="checkbox" class="theme-switch" id="themeSwitch" aria-label="Toggle theme">
+    <span class="theme-toggle-label">Mode terang</span>
+    <input type="checkbox" class="theme-switch" id="themeSwitch" aria-label="Ganti tema">
   </div>
-  <button class="icon-btn right" onclick="shareApp()" aria-label="Share app">
+  <button class="icon-btn right" onclick="shareApp()" aria-label="Bagikan aplikasi">
     <svg viewBox="0 0 24 24" aria-hidden="true">
       <path d="M18 16a2.99 2.99 0 00-2.39 1.2l-6.7-3.35a3.1 3.1 0 000-1.7l6.7-3.35A3 3 0 1014 6a3.1 3.1 0 00.08.68l-6.7 3.35a3 3 0 100 4.94l6.7 3.35A3 3 0 1018 16z"/>
     </svg>
@@ -1023,7 +1263,34 @@ Jaga amalmu di bulan Dzulqa’dah, kurangi yang tidak perlu dan perbanyak dzikir
 </div>
 
 <div class="container">
-<h1>BarakaWay</h1>
+
+<div class="brand-prayer-hero">
+  <div class="brand-signature" aria-label="BarakaWay">
+    <span class="brand-letter-accent">B</span><span class="brand-letter-main">araka</span><span class="brand-letter-accent">W</span><span class="brand-letter-main">ay</span>
+  </div>
+
+  <a class="home-prayer-widget" href="prayer-times-id.html" aria-label="Buka halaman waktu salat">
+    <div class="home-prayer-top">
+      <div class="home-prayer-kicker">Salat berikutnya</div>
+      <div class="home-prayer-location" id="homePrayerLocation">Tashkent, Uzbekistan</div>
+    </div>
+
+    <div class="home-prayer-main">
+      <div>
+        <div class="home-prayer-name" id="homePrayerName">Фаджр</div>
+        <div class="home-prayer-time" id="homePrayerTime">--:--</div>
+        <div class="home-prayer-meta" id="homePrayerMeta">Загрузка времени молитв...</div>
+      </div>
+      <div class="home-prayer-countdown">
+        <div class="home-prayer-countdown-label">Dalam</div>
+        <div id="homePrayerCountdown">--:--:--</div>
+      </div>
+    </div>
+
+    <div class="home-prayer-note">Ketuk untuk membuka jadwal lengkap</div>
+  </a>
+</div>
+
 
 <div class="lang-change">
 <a href="#" onclick="changeLanguageChoice(); return false;">Ganti bahasa</a>
@@ -1032,21 +1299,18 @@ Jaga amalmu di bulan Dzulqa’dah, kurangi yang tidak perlu dan perbanyak dzikir
 <div class="install-box" id="installBox">
 <button id="installBtn" class="install-btn" type="button">Instal aplikasi</button>
 </div>
-<br/>
-<br/>
+
 <div class="app-menu">
   <div class="app-menu-grid">
     <a class="app-menu-btn primary" href="names-id.html">99 Nama Allah</a>
-    <a class="app-menu-btn" href="prophets-duas-id.html">Doa Nabi ﷺ</a>
+	<a class="app-menu-btn" href="qibla-id.html">Kiblat</a>
     <a class="app-menu-btn" href="adhkar-id.html">Dzikir</a>
     <a class="app-menu-btn" href="quran-id.html">Al-Qur’an</a>
-    <a class="app-menu-btn" href="prayer-times-id.html">Waktu shalat</a>
+    <a class="app-menu-btn" href="prophets-duas-id.html">Doa Nabi ﷺ</a>
     <a class="app-menu-btn" href="hidden-sadaqa-id.html">Sedekah tersembunyi</a>
-	<a class="app-menu-btn" href="qibla-id.html">Kiblat</a>
     <a class="app-menu-btn" href="articles-id.html">Artikel</a>
   </div>
 </div>
-
 
 <div class="link" style="margin-top:34px;">
 <a href="about-id.html">Tentang proyek</a>
@@ -1083,7 +1347,7 @@ Jaga amalmu di bulan Dzulqa’dah, kurangi yang tidak perlu dan perbanyak dzikir
       <button class="share-action share-copy" type="button" data-share="copy"><div class="share-icon">⧉</div><span>Salin tautan</span></button>
       <button class="share-action share-more" type="button" data-share="more"><div class="share-icon">⋯</div><span>Lainnya</span></button>
     </div>
-    <div class="share-copy-msg" id="shareCopyMsg">Tautan aplikasi telah disalin</div>
+    <div class="share-copy-msg" id="shareCopyMsg">Tautan aplikasi disalin.</div>
     <button class="share-close" id="shareCloseBtn" type="button">Tutup</button>
   </div>
 </div>
@@ -1118,11 +1382,11 @@ async function updateInstallButtonVisibility(){if(installVisibilityInFlight) ret
 function openCurrentPageInExternalBrowser(){const url=window.location.href;if(isAndroid()){const cleaned=url.replace(/^https?:\/\//,"");window.location.href="intent://"+cleaned+"#Intent;scheme=https;package=com.android.chrome;end";return true;}if(!isIOS()){window.open(url,"_blank","noopener,noreferrer");return true;}return false;}
 function openInstallHelp(){const o=document.getElementById("installHelpOverlay");if(!o) return;o.classList.add("open");o.setAttribute("aria-hidden","false");}
 function closeInstallHelp(){const o=document.getElementById("installHelpOverlay");if(!o) return;o.classList.remove("open");o.setAttribute("aria-hidden","true");}
-async function copyCurrentLink(){const url=getShareUrl(),msg=document.getElementById("shareCopyMsg");try{if(navigator.clipboard&&window.isSecureContext){await navigator.clipboard.writeText(url);}else{const t=document.createElement("textarea");t.value=url;t.setAttribute("readonly","readonly");t.style.position="absolute";t.style.left="-9999px";document.body.appendChild(t);t.select();document.execCommand("copy");document.body.removeChild(t);}if(msg){msg.textContent="Tautan aplikasi telah disalin";msg.classList.add("show");setTimeout(function(){msg.classList.remove("show");},2200);}}catch(e){window.prompt("Salin tautan dan buka di browser eksternal:",url);}}
+async function copyCurrentLink(){const url=getShareUrl(),msg=document.getElementById("shareCopyMsg");try{if(navigator.clipboard&&window.isSecureContext){await navigator.clipboard.writeText(url);}else{const t=document.createElement("textarea");t.value=url;t.setAttribute("readonly","readonly");t.style.position="absolute";t.style.left="-9999px";document.body.appendChild(t);t.select();document.execCommand("copy");document.body.removeChild(t);}if(msg){msg.textContent="Tautan aplikasi disalin.";msg.classList.add("show");setTimeout(function(){msg.classList.remove("show");},2200);}}catch(e){window.prompt("Salin tautannya dan buka di browser eksternal:",url);}}
 async function installApp(){if(deferredInstallPrompt){try{await deferredInstallPrompt.prompt();const c=await deferredInstallPrompt.userChoice;if(c&&c.outcome==="accepted") setTimeout(updateInstallButtonVisibility,300);}catch(e){}finally{deferredInstallPrompt=null;}return;}if(isStandaloneMode()){updateInstallButtonVisibility();return;}if(isInAppBrowser()){if(isAndroid()){const opened=openCurrentPageInExternalBrowser();if(!opened) openInstallHelp();return;}openInstallHelp();return;}if(isIOS()){openInstallHelp();return;}openInstallHelp();}
 function openShareOverlay(){const o=document.getElementById("shareOverlay"),m=document.getElementById("shareCopyMsg");if(!o) return;o.classList.add("open");o.setAttribute("aria-hidden","false");if(m) m.classList.remove("show");}
 function closeShareOverlay(){const o=document.getElementById("shareOverlay");if(!o) return;o.classList.remove("open");o.setAttribute("aria-hidden","true");}
-async function copyShareLink(){const url=getShareUrl(),msg=document.getElementById("shareCopyMsg");try{if(navigator.clipboard&&window.isSecureContext){await navigator.clipboard.writeText(url);}else{const t=document.createElement("textarea");t.value=url;t.setAttribute("readonly","readonly");t.style.position="absolute";t.style.left="-9999px";document.body.appendChild(t);t.select();document.execCommand("copy");document.body.removeChild(t);}if(msg){msg.classList.add("show");setTimeout(function(){msg.classList.remove("show");},2200);}}catch(e){window.prompt("Salin tautan dan buka di browser eksternal:",url);}}
+async function copyShareLink(){const url=getShareUrl(),msg=document.getElementById("shareCopyMsg");try{if(navigator.clipboard&&window.isSecureContext){await navigator.clipboard.writeText(url);}else{const t=document.createElement("textarea");t.value=url;t.setAttribute("readonly","readonly");t.style.position="absolute";t.style.left="-9999px";document.body.appendChild(t);t.select();document.execCommand("copy");document.body.removeChild(t);}if(msg){msg.classList.add("show");setTimeout(function(){msg.classList.remove("show");},2200);}}catch(e){window.prompt("Salin tautannya dan buka di browser eksternal:",url);}}
 function openShareTarget(type){const url=encodeURIComponent(getShareUrl()),text=encodeURIComponent("BarakaWay");let target="";if(type==="telegram") target="https://t.me/share/url?url="+url+"&text="+text;if(type==="whatsapp") target="https://wa.me/?text="+text+"%20"+url;if(type==="facebook") target="https://www.facebook.com/sharer/sharer.php?u="+url;if(type==="x") target="https://twitter.com/intent/tweet?text="+text+"&url="+url;if(type==="linkedin") target="https://www.linkedin.com/sharing/share-offsite/?url="+url;if(type==="email") target="mailto:?subject=Hidden%20Sadaqa&body="+text+"%0A"+url;if(target) window.open(target,"_blank","noopener,noreferrer");}
 async function shareApp(){const data={title:"BarakaWay",text:"BarakaWay",url:getShareUrl()};if(navigator.share){try{await navigator.share(data);return;}catch(e){}}openShareOverlay();}
 window.addEventListener("beforeinstallprompt",function(e){e.preventDefault();deferredInstallPrompt=e;updateInstallButtonVisibility();});
@@ -1138,7 +1402,7 @@ window.addEventListener("DOMContentLoaded",function(){const installBtn=document.
   if (window.innerWidth > 700) return;
 
   const promoTexts = [
-    { text: "Semua layanan di sekitar Anda", brand: false },
+    { text: "Все услуги рядом", brand: false },
     { text: "TasksLocal", brand: true }
   ];
 
@@ -1163,7 +1427,6 @@ window.addEventListener("DOMContentLoaded",function(){const installBtn=document.
   }, 2800);
 })();
 </script>
-
 
 <script>
 (function(){
@@ -1237,7 +1500,7 @@ window.addEventListener("DOMContentLoaded",function(){const installBtn=document.
     document.documentElement.classList.add(theme + '-mode');
     localStorage.setItem('siteTheme', theme);
     switchEl.checked = theme === 'light';
-    label.textContent = theme === 'dark' ? 'Light mode' : 'Dark mode';
+    label.textContent = theme === 'dark' ? 'Mode terang' : 'Mode gelap';
   }
 
   const savedTheme = localStorage.getItem('siteTheme') || 'dark';
@@ -1248,6 +1511,115 @@ window.addEventListener("DOMContentLoaded",function(){const installBtn=document.
   });
 })();
 </script>
+
+<script>
+(function(){
+  const elName = document.getElementById('homePrayerName');
+  const elTime = document.getElementById('homePrayerTime');
+  const elMeta = document.getElementById('homePrayerMeta');
+  const elCountdown = document.getElementById('homePrayerCountdown');
+  const elLocation = document.getElementById('homePrayerLocation');
+
+  if(!elName || !elTime || !elMeta || !elCountdown || !elLocation) return;
+
+  const UI = {
+    names: {Fajr:'Subuh', Dhuhr:'Dzuhur', Asr:'Ashar', Maghrib:'Maghrib', Isha:'Isya'},
+    at: 'pukul',
+    startsIn: 'dalam',
+    loading: 'Memuat waktu salat...',
+    fallbackLocation: 'Tashkent, Uzbekistan'
+  };
+
+  let nextPrayerTimer = null;
+
+  function getPrayerSettings(){
+    try{
+      return JSON.parse(localStorage.getItem('prayer_page_settings_v1') || '{}');
+    }catch(_){
+      return {};
+    }
+  }
+
+  function parseTodayTimeToDate(timeStr){
+    const n = new Date();
+    const clean = String(timeStr || '').split(' ')[0];
+    const parts = clean.split(':').map(Number);
+    return new Date(n.getFullYear(), n.getMonth(), n.getDate(), parts[0] || 0, parts[1] || 0, 0);
+  }
+
+  function getNextPrayer(t){
+    const seq = ['Fajr','Dhuhr','Asr','Maghrib','Isha'];
+    const now = new Date();
+    for(const key of seq){
+      const d = parseTodayTimeToDate(t[key]);
+      if(d > now) return {key, time:d};
+    }
+    const tf = parseTodayTimeToDate(t.Fajr);
+    tf.setDate(tf.getDate() + 1);
+    return {key:'Fajr', time:tf};
+  }
+
+  function setCountdown(target){
+    const tick = () => {
+      const now = new Date();
+      let diff = target - now;
+      if(diff < 0) diff = 0;
+      const h = Math.floor(diff / 3600000);
+      const m = Math.floor((diff % 3600000) / 60000);
+      const s = Math.floor((diff % 60000) / 1000);
+      elCountdown.textContent = `${String(h).padStart(2,'0')}:${String(m).padStart(2,'0')}:${String(s).padStart(2,'0')}`;
+    };
+    if(nextPrayerTimer) clearInterval(nextPrayerTimer);
+    tick();
+    nextPrayerTimer = setInterval(tick, 1000);
+  }
+
+  async function fetchPrayerWidget(){
+    try{
+      const city = (localStorage.getItem('prayer_city') || 'Tashkent').trim();
+      const country = (localStorage.getItem('prayer_country') || 'Uzbekistan').trim();
+      const settings = getPrayerSettings();
+      const method = settings.method || '2';
+      const school = settings.school || '1';
+      const date = new Date();
+      const dd = String(date.getDate()).padStart(2,'0');
+      const mm = String(date.getMonth() + 1).padStart(2,'0');
+      const yyyy = date.getFullYear();
+      const params = new URLSearchParams({
+        city,
+        country,
+        method,
+        school,
+        tune: '0,0,0,0,0,0,0,0,0'
+      });
+      const url = `https://api.aladhan.com/v1/timingsByCity/${dd}-${mm}-${yyyy}?${params.toString()}`;
+      const res = await fetch(url);
+      const json = await res.json();
+      const timings = json?.data?.timings;
+      if(!timings) throw new Error('No timings');
+
+      const locationText = `${city}${country ? ', ' + country : ''}`;
+      elLocation.textContent = locationText || UI.fallbackLocation;
+
+      const next = getNextPrayer(timings);
+      const prayerName = UI.names[next.key] || next.key;
+      elName.textContent = prayerName;
+      elTime.textContent = String(timings[next.key] || '--:--').slice(0,5);
+      elMeta.textContent = '';
+      setCountdown(next.time);
+    }catch(_){
+      elLocation.textContent = UI.fallbackLocation;
+      elName.textContent = 'Subuh';
+      elTime.textContent = '--:--';
+      elMeta.textContent = UI.loading;
+      elCountdown.textContent = '--:--:--';
+    }
+  }
+
+  fetchPrayerWidget();
+})();
+</script>
+
 <script src="/theme-toggle.js"></script>
 </body>
 </html>
