@@ -764,6 +764,66 @@ h1{
 .install-help-secondary{background:#eef5f1;color:#2d7a46}
 .install-help-close{margin-top:10px;width:100%;min-height:46px;border-radius:14px;border:1px solid #dfe8e2;background:#fff;color:#1f2a22;font-size:15px;font-weight:800;cursor:pointer}
 
+/* THEME TOGGLE CENTER */
+.theme-toggle-center{
+  position:absolute;
+  left:50%;
+  transform:translateX(-50%);
+  display:flex;
+  align-items:center;
+  gap:8px;
+  pointer-events:auto;
+}
+
+.theme-toggle-label{
+  font-size:12px;
+  font-weight:700;
+  color:#2d7a46;
+  white-space:nowrap;
+}
+
+.theme-switch{
+  width:42px;
+  height:24px;
+  appearance:none;
+  background:#2d7a46;
+  border-radius:999px;
+  position:relative;
+  cursor:pointer;
+}
+
+.theme-switch::before{
+  content:"";
+  position:absolute;
+  top:3px;
+  left:20px;
+  width:18px;
+  height:18px;
+  background:#fff;
+  border-radius:50%;
+  transition:0.25s;
+}
+
+/* LIGHT MODE */
+body.light-mode{
+  background:#f5f7f8;
+}
+
+body.light-mode .container{
+  background:#fff;
+}
+
+body.light-mode .theme-switch{
+  background:#ccc;
+}
+
+body.light-mode .theme-switch::before{
+  left:3px;
+}
+
+body.light-mode .theme-toggle-label{
+  color:#111;
+}
 </style>
 </head>
 <body>
@@ -774,6 +834,10 @@ h1{
     <svg viewBox="0 0 24 24" aria-hidden="true">
       <path d="M12 2a10 10 0 100 20 10 10 0 000-20zm6.92 9h-3.02a15.6 15.6 0 00-1.33-5.01A8.03 8.03 0 0118.92 11zM12 4.04c.89 1.08 1.97 3.22 2.28 6.96H9.72C10.03 7.26 11.11 5.12 12 4.04zM4.99 13h3.02a15.6 15.6 0 001.33 5.01A8.03 8.03 0 014.99 13zM8.1 11H5.08a8.03 8.03 0 014.35-5.01A15.6 15.6 0 008.1 11zm1.62 2h4.56c-.31 3.74-1.39 5.88-2.28 6.96-.89-1.08-1.97-3.22-2.28-6.96zm5.18 5.01A15.6 15.6 0 0015.9 13h3.02a8.03 8.03 0 01-4.02 5.01z"/>
     </svg>
+	<div class="theme-toggle-center">
+  <span class="theme-toggle-label">Light mode</span>
+  <input type="checkbox" class="theme-switch" id="themeSwitch">
+</div>
     <span class="ripple"></span>
   </button>
   <button class="icon-btn right" onclick="shareApp()" aria-label="Share app">
@@ -1002,6 +1066,43 @@ window.addEventListener("DOMContentLoaded",function(){const installBtn=document.
   document.addEventListener('DOMContentLoaded', initPremiumGuide);
 })();
 </script>
+<script>
+(function(){
+  const switchEl = document.getElementById("themeSwitch");
+  const label = document.querySelector(".theme-toggle-label");
 
+  if(!switchEl) return;
+
+  const saved = localStorage.getItem("siteTheme");
+
+  if(saved === "light"){
+    document.body.classList.add("light-mode");
+    switchEl.checked = true;
+  } else {
+    localStorage.setItem("siteTheme","dark");
+  }
+
+  function updateLabel(){
+    if(document.body.classList.contains("light-mode")){
+      label.textContent = "Dark mode";
+    } else {
+      label.textContent = "Light mode";
+    }
+  }
+
+  updateLabel();
+
+  switchEl.addEventListener("change", function(){
+    if(this.checked){
+      document.body.classList.add("light-mode");
+      localStorage.setItem("siteTheme","light");
+    } else {
+      document.body.classList.remove("light-mode");
+      localStorage.setItem("siteTheme","dark");
+    }
+    updateLabel();
+  });
+})();
+</script>
 </body>
 </html>
