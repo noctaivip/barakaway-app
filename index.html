@@ -13,18 +13,20 @@ In the name of Allah, the Most Merciful, the Most Compassionate
 body{
 margin:0;
 font-family:system-ui;
-background:#f5f7f8;
+background:#101418;
 display:flex;
 align-items:center;
 justify-content:center;
 height:100vh;
+padding:88px 16px 24px;
+box-sizing:border-box;
 }
 
 .container{
-background:white;
+background:#171d24;
 padding:40px 30px;
 border-radius:16px;
-box-shadow:0 6px 20px rgba(0,0,0,0.08);
+box-shadow:0 10px 28px rgba(0,0,0,0.35);
 text-align:center;
 max-width:400px;
 width:90%;
@@ -32,10 +34,11 @@ width:90%;
 
 h1{
 margin-bottom:10px;
+color:#f5f7fa;
 }
 
 p{
-color:#666;
+color:#b9c0c8;
 margin-bottom:30px;
 }
 
@@ -53,17 +56,17 @@ transition:0.2s;
 }
 
 .btn-en{background:#2d7a46;color:white;}
-.btn-ru{background:#eaeaea;color:#222;}
-.btn-uz{background:#e6f4ea;color:#1f2a22;}
-.btn-ar{background:#f0f5ff;color:#1a2a4a;}
-.btn-id{background:#fff3e8;color:#7a3e00;}
-.btn-ur{background:#f3e8ff;color:#3a1a4a;}
-.btn-hi{background:#f0fff4;color:#1a4a2a;}
+.btn-ru{background:#2a3138;color:#f3f5f7;}
+.btn-uz{background:#1d3327;color:#dff4e6;}
+.btn-ar{background:#1c2940;color:#dfe9ff;}
+.btn-id{background:#3b2a1f;color:#ffe7cf;}
+.btn-ur{background:#30213d;color:#f1dcff;}
+.btn-hi{background:#1f3326;color:#dcffe8;}
 
 /* NEW DISABLED LANGS */
 .btn-disabled{
-background:#f2f2f2;
-color:#999;
+background:#222a31;
+color:#6f7882;
 cursor:not-allowed;
 position:relative;
 }
@@ -74,12 +77,12 @@ right:14px;
 top:50%;
 transform:translateY(-50%);
 font-size:12px;
-color:#bbb;
+color:#88919b;
 }
 
 .note{
 font-size:13px;
-color:#888;
+color:#b9c0c8;
 margin-top:10px;
 }
 
@@ -90,28 +93,29 @@ transform:translateY(-1px);
 transform:none;
 }
 
-
 .theme-toggle{
 position:fixed;
-top:18px;
+top:16px;
 left:50%;
 transform:translateX(-50%);
 display:inline-flex;
 align-items:center;
 gap:10px;
-padding:8px 14px;
-background:rgba(255,255,255,0.92);
-border:1px solid rgba(0,0,0,0.08);
+padding:10px 16px;
+background:rgba(21,27,34,0.94);
+border:1px solid rgba(255,255,255,0.08);
 border-radius:999px;
-box-shadow:0 6px 18px rgba(0,0,0,0.08);
+box-shadow:0 8px 24px rgba(0,0,0,0.35);
 z-index:1000;
-backdrop-filter:blur(8px);
+backdrop-filter:blur(10px);
+-webkit-backdrop-filter:blur(10px);
 }
 
 .theme-toggle-label{
 font-size:14px;
 font-weight:600;
-color:#222;
+color:#f3f5f7;
+white-space:nowrap;
 }
 
 .theme-switch{
@@ -119,18 +123,19 @@ position:relative;
 width:52px;
 height:30px;
 appearance:none;
-background:#d8dde3;
+background:#2d7a46;
 border-radius:999px;
 outline:none;
 cursor:pointer;
 transition:0.25s;
+flex:0 0 auto;
 }
 
 .theme-switch::before{
 content:"";
 position:absolute;
 top:3px;
-left:3px;
+left:25px;
 width:24px;
 height:24px;
 border-radius:50%;
@@ -139,92 +144,152 @@ box-shadow:0 2px 6px rgba(0,0,0,0.18);
 transition:0.25s;
 }
 
-.theme-switch:checked{
-background:#2d7a46;
-}
-
-.theme-switch:checked::before{
-transform:translateX(22px);
-}
-
 body,
 .container,
 p,
-.note{
+.note,
+h1{
 transition:background 0.25s,color 0.25s,box-shadow 0.25s,border-color 0.25s;
 }
 
-body.dark-mode{
-background:#101418;
+body.light-mode{
+background:#f5f7f8;
 }
 
-body.dark-mode .theme-toggle{
-background:rgba(21,27,34,0.94);
-border-color:rgba(255,255,255,0.08);
-box-shadow:0 8px 24px rgba(0,0,0,0.35);
+body.light-mode .theme-toggle{
+background:rgba(255,255,255,0.94);
+border-color:rgba(0,0,0,0.08);
+box-shadow:0 6px 18px rgba(0,0,0,0.08);
 }
 
-body.dark-mode .theme-toggle-label{
-color:#f3f5f7;
+body.light-mode .theme-toggle-label{
+color:#222;
 }
 
-body.dark-mode .container{
-background:#171d24;
-box-shadow:0 10px 28px rgba(0,0,0,0.35);
+body.light-mode .theme-switch{
+background:#d8dde3;
 }
 
-body.dark-mode h1{
-color:#f5f7fa;
+body.light-mode .theme-switch::before{
+left:3px;
 }
 
-body.dark-mode p,
-body.dark-mode .note{
-color:#b9c0c8;
+body.light-mode .container{
+background:white;
+box-shadow:0 6px 20px rgba(0,0,0,0.08);
 }
 
-body.dark-mode .btn-ru{
-background:#2a3138;
-color:#f3f5f7;
+body.light-mode h1{
+color:#111827;
 }
 
-body.dark-mode .btn-uz{
-background:#1d3327;
-color:#dff4e6;
+body.light-mode p,
+body.light-mode .note{
+color:#666;
 }
 
-body.dark-mode .btn-ar{
-background:#1c2940;
-color:#dfe9ff;
+body.light-mode .btn-ru{
+background:#eaeaea;
+color:#222;
 }
 
-body.dark-mode .btn-id{
-background:#3b2a1f;
-color:#ffe7cf;
+body.light-mode .btn-uz{
+background:#e6f4ea;
+color:#1f2a22;
 }
 
-body.dark-mode .btn-ur{
-background:#30213d;
-color:#f1dcff;
+body.light-mode .btn-ar{
+background:#f0f5ff;
+color:#1a2a4a;
 }
 
-body.dark-mode .btn-hi{
-background:#1f3326;
-color:#dcffe8;
+body.light-mode .btn-id{
+background:#fff3e8;
+color:#7a3e00;
 }
 
-body.dark-mode .btn-disabled{
-background:#222a31;
-color:#6f7882;
+body.light-mode .btn-ur{
+background:#f3e8ff;
+color:#3a1a4a;
 }
 
+body.light-mode .btn-hi{
+background:#f0fff4;
+color:#1a4a2a;
+}
+
+body.light-mode .btn-disabled{
+background:#f2f2f2;
+color:#999;
+}
+
+body.light-mode .btn-disabled::after{
+color:#bbb;
+}
+
+@media (max-width: 640px){
+  body{
+    height:auto;
+    min-height:100vh;
+    align-items:flex-start;
+    padding:84px 14px 20px;
+  }
+
+  .theme-toggle{
+    top:12px;
+    padding:8px 12px;
+    gap:8px;
+  }
+
+  .theme-toggle-label{
+    font-size:13px;
+  }
+
+  .theme-switch{
+    width:48px;
+    height:28px;
+  }
+
+  .theme-switch::before{
+    width:22px;
+    height:22px;
+    top:3px;
+    left:23px;
+  }
+
+  body.light-mode .theme-switch::before{
+    left:3px;
+  }
+
+  .container{
+    width:100%;
+    max-width:400px;
+    padding:32px 20px 24px;
+    border-radius:18px;
+  }
+
+  h1{
+    margin-top:0;
+    font-size:28px;
+  }
+
+  p{
+    margin-bottom:24px;
+  }
+
+  .btn{
+    font-size:17px;
+    padding:15px;
+  }
+}
 </style>
 </head>
 
 <body>
 
 <div class="theme-toggle">
-  <span class="theme-toggle-label">Dark mode</span>
-  <input type="checkbox" class="theme-switch" id="themeSwitch" aria-label="Toggle dark mode">
+  <span class="theme-toggle-label">Light mode</span>
+  <input type="checkbox" class="theme-switch" id="themeSwitch" aria-label="Toggle light mode">
 </div>
 
 <div class="container">
@@ -272,18 +337,20 @@ function setLang(lang){
 const themeSwitch = document.getElementById("themeSwitch");
 const savedTheme = localStorage.getItem("siteTheme");
 
-if(savedTheme === "dark"){
-  document.body.classList.add("dark-mode");
+if(savedTheme === "light"){
+  document.body.classList.add("light-mode");
   themeSwitch.checked = true;
+} else {
+  localStorage.setItem("siteTheme", "dark");
 }
 
 themeSwitch.addEventListener("change", function(){
   if(this.checked){
-    document.body.classList.add("dark-mode");
-    localStorage.setItem("siteTheme", "dark");
-  } else {
-    document.body.classList.remove("dark-mode");
+    document.body.classList.add("light-mode");
     localStorage.setItem("siteTheme", "light");
+  } else {
+    document.body.classList.remove("light-mode");
+    localStorage.setItem("siteTheme", "dark");
   }
 });
 
