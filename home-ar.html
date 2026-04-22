@@ -779,6 +779,10 @@ h1{
     </svg>
     <span class="ripple"></span>
   </button>
+  <div class="theme-toggle-center">
+  <span class="theme-toggle-label">Light mode</span>
+  <input type="checkbox" class="theme-switch" id="themeSwitch" aria-label="Toggle theme">
+</div>
   <button class="icon-btn right" onclick="shareApp()" aria-label="مشاركة التطبيق">
     <svg viewBox="0 0 24 24" aria-hidden="true">
       <path d="M18 16a2.99 2.99 0 00-2.39 1.2l-6.7-3.35a3.1 3.1 0 000-1.7l6.7-3.35A3 3 0 1014 6a3.1 3.1 0 00.08.68l-6.7 3.35a3 3 0 100 4.94l6.7 3.35A3 3 0 1018 16z"/>
@@ -998,7 +1002,29 @@ window.addEventListener("DOMContentLoaded",function(){const installBtn=document.
   document.addEventListener('DOMContentLoaded', initPremiumGuide);
 })();
 </script>
+<script>
+(function(){
+  const switchEl = document.getElementById("themeSwitch");
+  const label = document.querySelector(".theme-toggle-label");
 
+  if(!switchEl || !label) return;
+
+  function applyTheme(theme){
+    document.documentElement.classList.remove('light-mode','dark-mode');
+    document.documentElement.classList.add(theme + '-mode');
+    localStorage.setItem('siteTheme', theme);
+    switchEl.checked = theme === 'light';
+    label.textContent = theme === 'dark' ? 'Light mode' : 'Dark mode';
+  }
+
+  const savedTheme = localStorage.getItem('siteTheme') || 'dark';
+  applyTheme(savedTheme);
+
+  switchEl.addEventListener('change', function(){
+    applyTheme(this.checked ? 'light' : 'dark');
+  });
+})();
+</script>
 </body>
 </html>
 
