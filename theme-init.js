@@ -1,10 +1,10 @@
-(function () {
-  const savedTheme = localStorage.getItem("siteTheme");
+(function(){
+  let savedTheme = localStorage.getItem('siteTheme');
 
-  if (savedTheme === "light") {
-    document.documentElement.classList.add("light-mode");
-  } else {
-    document.documentElement.classList.add("dark-mode");
-    localStorage.setItem("siteTheme", "dark");
+  if(!savedTheme){
+    savedTheme = 'dark';
+    localStorage.setItem('siteTheme', savedTheme);
   }
+
+  document.documentElement.classList.add(savedTheme + '-mode');
 })();
