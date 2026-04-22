@@ -313,7 +313,8 @@ transform:scale(0.985);
 
 @media(max-width:700px){
   .install-box{
-    margin-top:14px;
+    display:none !important;
+    margin-top:0;
   }
 
   .install-btn{
@@ -1140,10 +1141,29 @@ html.light-mode .home-prayer-countdown{
   border:1px solid #d7e8dc;
 }
 
+.home-prayer-countdown{
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  justify-content:center;
+  gap:4px;
+  min-width:104px;
+}
+
+.home-prayer-countdown-label{
+  font-size:10px;
+  line-height:1;
+  font-weight:800;
+  letter-spacing:0.08em;
+  text-transform:uppercase;
+  opacity:0.88;
+}
+
 .home-prayer-note{
   margin-top:10px;
   font-size:12px;
   font-weight:700;
+  text-align:center;
 }
 
 html.dark-mode .home-prayer-note{color:#93a5b6;}
@@ -1182,12 +1202,29 @@ html.light-mode .home-prayer-note{color:#708177;}
     margin-top:6px;
   }
   .home-prayer-countdown{
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    justify-content:center;
+    gap:3px;
+    min-width:92px;
     font-size:13px;
     padding:9px 10px;
     border-radius:12px;
   }
   .home-prayer-location{
     font-size:11px;
+  }
+  .home-prayer-countdown-label{
+    font-size:10px;
+    line-height:1;
+    font-weight:800;
+    letter-spacing:0.08em;
+    text-transform:uppercase;
+    opacity:0.88;
+  }
+  .home-prayer-note{
+    text-align:center;
   }
 }
 
@@ -1244,7 +1281,10 @@ html.light-mode .home-prayer-note{color:#708177;}
         <div class="home-prayer-time" id="homePrayerTime">--:--</div>
         <div class="home-prayer-meta" id="homePrayerMeta">Загрузка времени молитв...</div>
       </div>
-      <div class="home-prayer-countdown" id="homePrayerCountdown">--:--:--</div>
+      <div class="home-prayer-countdown">
+        <div class="home-prayer-countdown-label">Через</div>
+        <div id="homePrayerCountdown">--:--:--</div>
+      </div>
     </div>
 
     <div class="home-prayer-note">Нажми, чтобы открыть полное расписание</div>
@@ -1259,17 +1299,15 @@ html.light-mode .home-prayer-note{color:#708177;}
 <div class="install-box" id="installBox">
 <button id="installBtn" class="install-btn" type="button">Установить приложение</button>
 </div>
-<br/>
-<br/>
+
 <div class="app-menu">
   <div class="app-menu-grid">
     <a class="app-menu-btn primary" href="names-ru.html">99 имён Аллаха</a>
-    <a class="app-menu-btn" href="prophets-duas-ru.html">Мольбы пророка ﷺ</a>
+	<a class="app-menu-btn" href="qibla-ru.html">Кибла</a>
     <a class="app-menu-btn" href="adhkar-ru.html">Азкары</a>
     <a class="app-menu-btn" href="quran-ru.html">Коран</a>
-    <a class="app-menu-btn" href="prayer-times-ru.html">Время молитв</a>
+    <a class="app-menu-btn" href="prophets-duas-ru.html">Мольбы пророка ﷺ</a>
     <a class="app-menu-btn" href="hidden-sadaqa-ru.html">Скрытая садака</a>
-    <a class="app-menu-btn" href="qibla-ru.html">Кибла</a>
     <a class="app-menu-btn" href="articles-ru.html">Статьи</a>
   </div>
 </div>
@@ -1567,7 +1605,7 @@ window.addEventListener("DOMContentLoaded",function(){const installBtn=document.
       const prayerName = UI.names[next.key] || next.key;
       elName.textContent = prayerName;
       elTime.textContent = String(timings[next.key] || '--:--').slice(0,5);
-      elMeta.textContent = `${UI.at} ${String(timings[next.key] || '--:--').slice(0,5)} · ${UI.startsIn}`;
+      elMeta.textContent = '';
       setCountdown(next.time);
     }catch(_){
       elLocation.textContent = UI.fallbackLocation;
