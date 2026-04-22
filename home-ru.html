@@ -887,20 +887,33 @@ html.light-mode .share-close{
 
 /* PREMIUM MOBILE GUIDE */
 .mobile-guide-active{
-  border-color: rgba(45,122,70,0.9) !important;
-  background: linear-gradient(180deg,#ffffff 0%, #f3faf6 100%) !important;
+  position:relative;
+  border-color: rgba(45,122,70,0.95) !important;
+
   box-shadow:
-    0 20px 40px rgba(0,0,0,0.08),
-    0 12px 28px rgba(45,122,70,0.18),
-    0 0 0 3px rgba(45,122,70,0.15),
-    inset 0 1px 0 rgba(255,255,255,0.9);
-  transform: translateY(-3px) scale(1.015);
-  transition: all 0.35s ease;
+    0 0 0 2px rgba(45,122,70,0.6),
+    0 0 12px rgba(45,122,70,0.45),
+    0 0 24px rgba(45,122,70,0.25);
+
+  transform: translateY(-2px) scale(1.01);
+  transition: all 0.3s ease;
 }
 @keyframes premiumPulse {
-  0% { box-shadow: 0 0 0 0 rgba(45,122,70,0.25); }
-  70% { box-shadow: 0 0 0 12px rgba(45,122,70,0); }
-  100% { box-shadow: 0 0 0 0 rgba(45,122,70,0); }
+  0% {
+    box-shadow:
+      0 0 0 0 rgba(45,122,70,0.6),
+      0 0 0 rgba(45,122,70,0.0);
+  }
+  70% {
+    box-shadow:
+      0 0 0 6px rgba(45,122,70,0.0),
+      0 0 18px rgba(45,122,70,0.45);
+  }
+  100% {
+    box-shadow:
+      0 0 0 0 rgba(45,122,70,0.0),
+      0 0 0 rgba(45,122,70,0.0);
+  }
 }
 .mobile-guide-active{
   animation: premiumPulse 1.4s ease;
