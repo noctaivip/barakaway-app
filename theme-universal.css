@@ -500,42 +500,24 @@ html.light-mode .surah-link:hover .surah-card{
   transition:border-color .18s ease, box-shadow .18s ease, transform .18s ease !important;
 }
 
-/* ===== QURAN SURAH PAGES — STRONG FIX ===== */
-/* internal surah pages only */
+
+/* ===== QURAN SURAH PAGES FIX ===== */
+/* Scoped to internal surah pages: audio panel + ayah cards */
 
 html.dark-mode .master-audio-wrap{
-  background:#d7dddb !important;
-  border:1px solid #c7cfcb !important;
+  background:var(--surface) !important;
+  border:1px solid var(--border) !important;
   box-shadow:none !important;
 }
 
 html.dark-mode .master-audio-title{
-  color:#30483a !important;
+  color:#ffffff !important;
 }
 
 html.dark-mode .ayah-card{
-  background:#121c27 !important;
-  border:1px solid rgba(214,224,232,0.78) !important;
+  background:var(--surface) !important;
+  border:1px solid var(--border) !important;
   box-shadow:none !important;
-}
-
-html.dark-mode .ayah-toolbar{
-  align-items:start !important;
-}
-
-html.dark-mode .ayah-index{
-  background:#2d7a46 !important;
-  color:#ffffff !important;
-}
-
-html.dark-mode .play-btn{
-  background:#2d7a46 !important;
-  color:#ffffff !important;
-  border:none !important;
-}
-
-html.dark-mode .play-btn.is-playing{
-  background:#1f5e34 !important;
 }
 
 html.dark-mode .ayah-arabic{
@@ -543,19 +525,17 @@ html.dark-mode .ayah-arabic{
 }
 
 html.dark-mode .ayah-translit{
-  color:#748b82 !important;
-  opacity:1 !important;
+  color:#b8c7d6 !important;
 }
 
 html.dark-mode .ayah-meaning{
-  color:#6f7f8d !important;
-  opacity:1 !important;
+  color:#e6edf3 !important;
 }
 
 html.dark-mode .loading{
-  background:#16202a !important;
-  border:1px solid #223041 !important;
-  color:#e6edf3 !important;
+  background:var(--surface) !important;
+  border:1px solid var(--border) !important;
+  color:var(--text) !important;
 }
 
 html.dark-mode .error{
@@ -565,28 +545,125 @@ html.dark-mode .error{
 }
 
 html.dark-mode .intro{
+  background:var(--surface-2) !important;
+  border:1px solid var(--border) !important;
+  color:var(--text) !important;
+  box-shadow:none !important;
+}
+
+html.dark-mode .section h5,
+html.dark-mode .section center{
+  color:var(--text-soft) !important;
+}
+
+/* Mobile readability inside surah pages */
+@media (max-width:700px){
+  html.dark-mode .ayah-translit{
+    color:#c3d2df !important;
+  }
+
+  html.dark-mode .ayah-meaning{
+    color:#edf4fa !important;
+  }
+}
+
+/* ===== QURAN SURAH PAGES — SCOPED FIX ===== */
+/* Works only after body gets class="surah-page" via the PowerShell script */
+
+html.dark-mode body.surah-page .master-audio-wrap{
+  background:#d7dddb !important;
+  border:1px solid #c7cfcb !important;
+  box-shadow:none !important;
+}
+
+html.dark-mode body.surah-page .master-audio-title{
+  color:#30483a !important;
+}
+
+html.dark-mode body.surah-page .ayah-card{
+  background:#121c27 !important;
+  border:1px solid rgba(214,224,232,0.42) !important;
+  box-shadow:none !important;
+}
+
+html.dark-mode body.surah-page .ayah-toolbar{
+  grid-template-columns:auto 1fr !important;
+  align-items:start !important;
+}
+
+html.dark-mode body.surah-page .ayah-index{
+  width:auto !important;
+  min-width:unset !important;
+  height:auto !important;
+  border-radius:0 !important;
+  background:transparent !important;
+  color:#d7904f !important;
+  display:block !important;
+  padding:0 !important;
+  font-weight:500 !important;
+  font-size:18px !important;
+  line-height:1 !important;
+  box-shadow:none !important;
+}
+
+html.dark-mode body.surah-page .play-btn{
+  background:#2d7a46 !important;
+  color:#ffffff !important;
+  border:none !important;
+}
+
+html.dark-mode body.surah-page .play-btn.is-playing{
+  background:#1f5e34 !important;
+}
+
+html.dark-mode body.surah-page .ayah-arabic{
+  color:#ffffff !important;
+}
+
+html.dark-mode body.surah-page .ayah-translit{
+  color:#80968d !important;
+  opacity:1 !important;
+}
+
+html.dark-mode body.surah-page .ayah-meaning{
+  color:#6f7f8d !important;
+  opacity:1 !important;
+}
+
+html.dark-mode body.surah-page .loading{
+  background:#16202a !important;
+  border:1px solid #223041 !important;
+  color:#e6edf3 !important;
+}
+
+html.dark-mode body.surah-page .error{
+  background:#2a1616 !important;
+  border:1px solid #5a2a2a !important;
+  color:#ffb4b4 !important;
+}
+
+html.dark-mode body.surah-page .intro{
   background:#13202b !important;
   border:1px solid #1f2f3d !important;
   color:#edf4fa !important;
   box-shadow:none !important;
 }
 
-html.dark-mode .section h5,
-html.dark-mode .section center{
+html.dark-mode body.surah-page .section h5,
+html.dark-mode body.surah-page .section h5 center{
   color:#c3d2df !important;
 }
 
-/* lighter ayah frame feel on mobile */
 @media (max-width:700px){
-  html.dark-mode .ayah-card{
-    border:1px solid rgba(214,224,232,0.88) !important;
+  html.dark-mode body.surah-page .ayah-index{
+    font-size:16px !important;
   }
 
-  html.dark-mode .ayah-translit{
+  html.dark-mode body.surah-page .ayah-translit{
     color:#80968d !important;
   }
 
-  html.dark-mode .ayah-meaning{
+  html.dark-mode body.surah-page .ayah-meaning{
     color:#5d6d7b !important;
   }
 }
