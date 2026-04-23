@@ -1,0 +1,247 @@
+<!--
+بِسْمِ ٱللَّٰهِ ٱلرَّحْمَـٰنِ ٱلرَّحِيمِ
+In the name of Allah, the Most Merciful, the Most Compassionate
+-->
+<!DOCTYPE html>
+<html lang="kz">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Фәтх — BarakaWay</title>
+<style>
+body { margin:0; font-family:system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif; background:#f5f7f8; color:#1f2a22; line-height:1.7; }
+.container { max-width:980px; margin:0 auto; background:white; padding:40px 28px 44px; box-shadow:0 6px 16px rgba(0,0,0,0.05); }
+h1 { text-align:center; font-size:38px; margin:0 0 8px; }
+.subtitle { text-align:center; color:#666; margin:0 0 8px; letter-spacing:1.5px; font-size:14px; text-transform:uppercase; }
+.language-switch { text-align:center; margin:8px 0 28px; font-size:13px; }
+.language-switch a { text-decoration:none; color:#666; margin:0 6px; }
+.language-switch a.active { font-weight:700; color:#000; }
+.intro { max-width:760px; margin:0 auto 26px; text-align:center; color:#555; }
+.master-audio-wrap { background:#eef5f1; border:1px solid #dfe9e3; border-radius:16px; padding:18px; margin:0 auto 26px; max-width:760px; }
+.master-audio-title { font-size:15px; font-weight:700; margin-bottom:12px; color:#2b4a35; }
+.master-audio-actions { display:flex; gap:10px; flex-wrap:wrap; }
+.master-btn { display:inline-flex; align-items:center; justify-content:center; min-height:42px; padding:10px 16px; border:none; border-radius:10px; background:#2d7a46; color:white; font-size:14px; font-weight:700; cursor:pointer; }
+.master-btn.secondary { background:#3a3a3a; }
+.section { margin-top:30px; }
+.section h2 { font-size:22px; border-left:4px solid #2d7a46; padding-left:12px; margin:0 0 16px; }
+.ayah-list { display:grid; gap:16px; }
+.ayah-card { background:#fafafa; border:1px solid #e5ece7; border-radius:18px; padding:18px; box-shadow:0 4px 10px rgba(0,0,0,0.03); }
+.ayah-toolbar { display:grid; grid-template-columns:42px 1fr; align-items:center; gap:12px; margin-bottom:16px; }
+.ayah-index { width:42px; height:42px; border-radius:999px; background:#2d7a46; color:white; display:flex; align-items:center; justify-content:center; font-weight:700; font-size:15px; }
+.play-btn { justify-self:end; display:inline-flex; align-items:center; justify-content:center; min-height:42px; padding:10px 14px; border:none; background:#2d7a46; color:white; border-radius:10px; cursor:pointer; font-size:14px; font-weight:700; white-space:nowrap; }
+.play-btn.is-playing { background:#1f5e34; }
+.ayah-arabic { font-size:40px; line-height:1.9; text-align:right; font-weight:700; margin:0 0 10px; word-break:break-word; }
+.ayah-translit { font-size:16px; color:#3d5345; font-style:italic; margin:0 0 10px; }
+.ayah-meaning { font-size:17px; color:#222; margin:0; }
+.note { background:#eef5f1; padding:20px; border-radius:12px; color:#415449; }
+.link { text-align:center; margin-top:34px; }
+.link a { color:#2d7a46; text-decoration:none; font-weight:700; }
+.loading, .error { max-width:760px; margin:0 auto 20px; background:#fafafa; border:1px solid #e5ece7; border-radius:16px; padding:18px; color:#415449; }
+.error { border-color:#e6caca; background:#fff8f8; color:#7a2d2d; }
+.hidden { display:none; }
+@media (max-width:700px) {
+  .container { padding:28px 16px 34px; }
+  h1 { font-size:32px; }
+  .ayah-toolbar { grid-template-columns:38px 1fr; gap:10px; }
+  .ayah-index { width:38px; height:38px; font-size:14px; }
+  .play-btn { width:100%; justify-self:stretch; }
+  .ayah-arabic { font-size:31px; line-height:1.8; }
+  .ayah-meaning { font-size:16px; }
+  .master-btn { width:100%; }
+}
+</style>
+<script src="/theme-init.js"></script>
+<link rel="stylesheet" href="/theme.css">
+<link rel="stylesheet" href="/theme-universal.css">
+</head>
+<body>
+<div class="container">
+<h1>Фәтх</h1>
+<h2><center>الفتح</center></h2>
+<p class="subtitle">Фәтх · Сүре 48 · 29 аят · Мединалық</p>
+
+<div class="master-audio-wrap">
+  <div class="master-audio-title">Дыбыстау · Фәтх</div>
+  <div class="master-audio-actions">
+    <button class="master-btn" type="button" onclick="playAllAyahs()">Барлық аяттарды қосу</button>
+    <button class="master-btn secondary" type="button" onclick="stopCurrentAyah()">Тоқтату</button>
+  </div>
+</div>
+
+<div id="loading" class="loading">Фәтх сүресінің барлық 29 аятын жүктеу…</div>
+<div id="error" class="error hidden">Сүрені жүктеу мүмкін болмады. Интернет байланысын тексеріп, бетті жаңартып көр.</div>
+
+<div class="section">
+  <h5><center>Аса қамқор, ерекше мейірімді Алланың атымен</center></h5>
+  <div class="ayah-list" id="ayahList"></div>
+</div>
+
+<div class="link"><a href="../quran-kz.html">Құранға оралу</a></div>
+</div>
+
+<script>
+const SURAH_NUMBER = 48;
+const translationKey = "kazakh_altai";
+const translitEdition = "en.transliteration";
+
+const labels = {
+  playAyah: "Аят",
+  stopAyah: "Тоқта",
+};
+
+let currentAudio = null;
+let currentButton = null;
+
+function pad3(n) {
+  return String(n).padStart(3, "0");
+}
+
+function audioUrl(ayahNumber) {
+  return `https://verses.quran.foundation/AbdulBaset/Mujawwad/mp3/${pad3(SURAH_NUMBER)}${pad3(ayahNumber)}.mp3`;
+}
+
+function resetButton(button) {
+  if (!button) return;
+  button.classList.remove("is-playing");
+  button.textContent = button.getAttribute("data-default-label");
+}
+
+function stopCurrentAyah() {
+  if (currentAudio) {
+    currentAudio.pause();
+    currentAudio.currentTime = 0;
+    currentAudio = null;
+  }
+  if (currentButton) {
+    resetButton(currentButton);
+    currentButton = null;
+  }
+}
+
+function playAyah(id, button) {
+  const audio = document.getElementById(id);
+  if (!audio) return;
+
+  if (currentAudio && currentAudio !== audio) stopCurrentAyah();
+
+  if (currentAudio === audio && !audio.paused) {
+    stopCurrentAyah();
+    return;
+  }
+
+  currentAudio = audio;
+  currentButton = button;
+  button.classList.add("is-playing");
+  button.textContent = button.getAttribute("data-playing-label");
+
+  audio.currentTime = 0;
+  audio.play().catch(() => {
+    resetButton(button);
+    currentAudio = null;
+    currentButton = null;
+  });
+
+  audio.onended = () => {
+    if (currentButton === button) {
+      resetButton(button);
+      currentButton = null;
+    }
+    if (currentAudio === audio) currentAudio = null;
+  };
+}
+
+function playAllAyahs() {
+  const audios = Array.from(document.querySelectorAll(".ayah-audio"));
+  const buttons = Array.from(document.querySelectorAll(".play-btn"));
+  let index = 0;
+  stopCurrentAyah();
+
+  function playNext() {
+    if (index >= audios.length) return;
+    const audio = audios[index];
+    const button = buttons[index];
+    currentAudio = audio;
+    currentButton = button;
+    button.classList.add("is-playing");
+    button.textContent = button.getAttribute("data-playing-label");
+    audio.currentTime = 0;
+    audio.play().catch(() => {
+      resetButton(button);
+      currentAudio = null;
+      currentButton = null;
+    });
+    audio.onended = () => {
+      resetButton(button);
+      index += 1;
+      playNext();
+    };
+  }
+  playNext();
+}
+
+function renderAyahs(arData, tlData, kzData) {
+  const list = document.getElementById("ayahList");
+  list.innerHTML = "";
+
+  const arAyahs = arData?.data?.ayahs || [];
+  const tlAyahs = tlData?.data?.ayahs || [];
+  const kzAyahs = kzData?.result || [];
+  const count = Math.min(arAyahs.length, tlAyahs.length, kzAyahs.length);
+
+  for (let i = 0; i < count; i++) {
+    const arabic = arAyahs[i];
+    const translit = tlAyahs[i];
+    const kz = kzAyahs[i];
+    const n = arabic.numberInSurah;
+
+    const article = document.createElement("article");
+    article.className = "ayah-card";
+    article.innerHTML = `
+      <div class="ayah-toolbar">
+        <div class="ayah-index">${n}</div>
+        <button
+          class="play-btn"
+          type="button"
+          data-default-label="▶ ${labels.playAyah} ${n}"
+          data-playing-label="■ ${labels.stopAyah} ${n}"
+          onclick="playAyah('ayah-${n}', this)"
+        >▶ ${labels.playAyah} ${n}</button>
+      </div>
+
+      <audio class="ayah-audio" id="ayah-${n}" preload="none" src="${audioUrl(n)}"></audio>
+
+      <div class="ayah-arabic">${arabic.text || ""}</div>
+      <div class="ayah-translit">${translit.text || ""}</div>
+      <div class="ayah-meaning">${kz.translation || ""}</div>
+    `;
+    list.appendChild(article);
+  }
+
+  document.getElementById("loading").classList.add("hidden");
+}
+
+async function loadSurah() {
+  try {
+    const [arRes, tlRes, kzRes] = await Promise.all([
+      fetch(`https://api.alquran.cloud/v1/surah/${SURAH_NUMBER}/quran-uthmani`),
+      fetch(`https://api.alquran.cloud/v1/surah/${SURAH_NUMBER}/${translitEdition}`),
+      fetch(`https://quranenc.com/api/v1/translation/sura/${translationKey}/${SURAH_NUMBER}`)
+    ]);
+
+    const [arData, tlData, kzData] = await Promise.all([
+      arRes.json(),
+      tlRes.json(),
+      kzRes.json()
+    ]);
+
+    renderAyahs(arData, tlData, kzData);
+  } catch (e) {
+    document.getElementById("loading").classList.add("hidden");
+    document.getElementById("error").classList.remove("hidden");
+  }
+}
+
+loadSurah();
+</script>
+</body>
+</html>
