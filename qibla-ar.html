@@ -491,6 +491,59 @@ html.dark-mode .kaaba-dot{
     0 0 22px rgba(92,207,130,0.20);
 }
 
+
+/* qibla premium compass */
+html.dark-mode .qibla-stage{
+  background:
+    radial-gradient(circle at 50% 50%, rgba(59,130,246,0.06) 0%, rgba(59,130,246,0.00) 52%),
+    linear-gradient(180deg, rgba(18,34,44,0.22) 0%, rgba(8,19,27,0.10) 100%);
+  border-radius:28px;
+}
+html.dark-mode .compass-wrap{
+  filter: drop-shadow(0 26px 44px rgba(0,0,0,0.42));
+}
+html.dark-mode .compass-base{
+  background:
+    radial-gradient(circle at 50% 38%, #22323a 0%, #18262d 38%, #111c22 68%, #0c151b 100%);
+  border:1px solid rgba(156,191,173,0.18);
+  box-shadow:
+    inset 0 0 0 10px rgba(214,231,221,0.05),
+    inset 0 16px 32px rgba(255,255,255,0.03),
+    inset 0 -22px 34px rgba(0,0,0,0.30),
+    0 28px 48px rgba(0,0,0,0.34),
+    0 0 0 1px rgba(255,255,255,0.02);
+}
+html.dark-mode .compass-ring{
+  border-color:rgba(154,182,168,0.18);
+}
+html.dark-mode .compass-ring.secondary{
+  border-color:rgba(154,182,168,0.14);
+}
+html.dark-mode .cardinal{
+  color:#b7cdc1;
+  text-shadow:0 1px 0 rgba(0,0,0,0.35);
+}
+html.dark-mode .direction-arrow::before{
+  border-bottom-color:#4cb070;
+  filter:drop-shadow(0 14px 20px rgba(76,176,112,0.22));
+}
+html.dark-mode .direction-arrow::after{
+  background:#081117;
+  border-color:#a7d6b5;
+  box-shadow:
+    0 0 0 8px rgba(76,176,112,0.10),
+    0 8px 20px rgba(0,0,0,0.35);
+}
+html.dark-mode .kaaba-dot{
+  background:#67d88f;
+  box-shadow:
+    0 0 0 10px rgba(103,216,143,0.12),
+    0 0 26px rgba(103,216,143,0.22);
+}
+html.dark-mode .precision-text{
+  color:#a9c0b4;
+}
+
 </style>
 <script src="/theme-init.js"></script>
 <link rel="stylesheet" href="/theme.css">
@@ -584,7 +637,10 @@ const state = {
   targetArrowAngle: null,
   lastOrientationSource: null,
   geolocationAccuracy: null,
-  watchId: null
+  watchId: null,
+  headingHistory: [],
+  sensorTimeoutId: null,
+  orientationReady: false,
 };
 
 function toRadians(deg) { return deg * Math.PI / 180; }
@@ -724,15 +780,56 @@ function getScreenOrientationAngle() {
   return 0;
 }
 
+
+function circularMean(angles) {
+  if (!angles.length) return null;
+  let sumSin = 0;
+  let sumCos = 0;
+  for (const angle of angles) {
+    const r = toRadians(angle);
+    sumSin += Math.sin(r);
+    sumCos += Math.cos(r);
+  }
+  return normalizeAngle(toDegrees(Math.atan2(sumSin / angles.length, sumCos / angles.length)));
+}
+
+function pushHeadingSample(angle) {
+  state.headingHistory.push(normalizeAngle(angle));
+  if (state.headingHistory.length > 10) state.headingHistory.shift();
+  return circularMean(state.headingHistory);
+}
+
+function clearSensorTimeout() {
+  if (state.sensorTimeoutId != null) {
+    clearTimeout(state.sensorTimeoutId);
+    state.sensorTimeoutId = null;
+  }
+}
+
+function startSensorTimeout() {
+  clearSensorTimeout();
+  state.sensorTimeoutId = setTimeout(() => {
+    if (!state.orientationReady) {
+      const badge = document.getElementById('sensorBadge');
+      const hint = document.getElementById('hintBadge');
+      badge.textContent = UI.heading_unavailable;
+      badge.className = 'badge error';
+      hint.textContent = UI.calibration_hint;
+      hint.className = 'badge warn';
+    }
+  }, 2200);
+}
+
 function getHeadingFromEvent(event) {
-  if (typeof event.webkitCompassHeading === 'number') {
+  if (typeof event.webkitCompassHeading === 'number' && !Number.isNaN(event.webkitCompassHeading)) {
     state.lastOrientationSource = 'webkitCompassHeading';
     state.lastCompassAccuracy = typeof event.webkitCompassAccuracy === 'number' ? event.webkitCompassAccuracy : null;
     return normalizeAngle(event.webkitCompassHeading);
   }
 
-  if (typeof event.alpha === 'number') {
-    if (event.absolute === false && event.type !== 'deviceorientationabsolute') {
+  if (typeof event.alpha === 'number' && !Number.isNaN(event.alpha)) {
+    const isAbsoluteEvent = event.absolute === true || event.type === 'deviceorientationabsolute';
+    if (!isAbsoluteEvent) {
       return null;
     }
     const screenAngle = getScreenOrientationAngle();
@@ -779,6 +876,9 @@ function handleOrientation(event) {
   const rawHeading = getHeadingFromEvent(event);
   if (rawHeading == null || Number.isNaN(rawHeading)) return;
 
+  state.orientationReady = true;
+  clearSensorTimeout();
+
   const tooFlat = typeof event.beta === 'number' && typeof event.gamma === 'number' &&
     Math.abs(event.beta) > 75 && Math.abs(event.gamma) < 20;
 
@@ -790,11 +890,16 @@ function handleOrientation(event) {
     document.getElementById('hintBadge').className = 'badge warn';
   }
 
+  const averagedHeading = pushHeadingSample(rawHeading);
+
   if (state.smoothHeading == null) {
-    state.smoothHeading = rawHeading;
+    state.smoothHeading = averagedHeading;
   } else {
-    const delta = shortestAngleDelta(state.smoothHeading, rawHeading);
-    state.smoothHeading = normalizeAngle(state.smoothHeading + delta * 0.12);
+    const factor = typeof state.lastCompassAccuracy === 'number'
+      ? (state.lastCompassAccuracy <= 15 ? 0.22 : state.lastCompassAccuracy <= 35 ? 0.16 : 0.10)
+      : 0.16;
+    const delta = shortestAngleDelta(state.smoothHeading, averagedHeading);
+    state.smoothHeading = normalizeAngle(state.smoothHeading + delta * factor);
   }
 
   state.lastRawHeading = rawHeading;
@@ -821,9 +926,13 @@ function animateArrow() {
 
 async function initOrientationIfPossible() {
   try {
+    state.orientationReady = false;
+    startSensorTimeout();
+
     if (typeof DeviceOrientationEvent === 'undefined') {
       document.getElementById('sensorBadge').textContent = UI.not_supported;
       document.getElementById('sensorBadge').className = 'badge error';
+      clearSensorTimeout();
       return;
     }
 
@@ -832,6 +941,7 @@ async function initOrientationIfPossible() {
       if (result !== 'granted') {
         document.getElementById('sensorBadge').textContent = UI.need_permission;
         document.getElementById('sensorBadge').className = 'badge warn';
+        clearSensorTimeout();
         return;
       }
     }
@@ -841,6 +951,23 @@ async function initOrientationIfPossible() {
       window.addEventListener('deviceorientation', handleOrientation, true);
       window.addEventListener('orientationchange', () => {
         state.smoothHeading = null;
+        state.headingHistory = [];
+      }, true);
+      document.addEventListener('visibilitychange', () => {
+        if (!document.hidden && state.lat && state.lon) {
+          state.smoothHeading = null;
+          state.headingHistory = [];
+          state.orientationReady = false;
+          startSensorTimeout();
+        }
+      }, true);
+      window.addEventListener('pageshow', () => {
+        if (state.lat && state.lon) {
+          state.smoothHeading = null;
+          state.headingHistory = [];
+          state.orientationReady = false;
+          startSensorTimeout();
+        }
       }, true);
       state.deviceOrientationAttached = true;
     }
@@ -853,6 +980,7 @@ async function initOrientationIfPossible() {
   } catch (_) {
     document.getElementById('sensorBadge').textContent = UI.not_supported;
     document.getElementById('sensorBadge').className = 'badge error';
+    clearSensorTimeout();
   }
 }
 
