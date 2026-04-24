@@ -2013,6 +2013,53 @@ html.light-mode .today-static-action{
   border-color:rgba(45,122,70,0.13);
 }
 
+
+.today-goal-action{
+  cursor:pointer;
+  position:relative;
+  overflow:hidden;
+}
+.today-goal-action::after{
+  content:"";
+  position:absolute;
+  inset:0;
+  opacity:var(--goal-red-opacity,0);
+  background:linear-gradient(135deg,rgba(178,34,34,0.06),rgba(255,38,38,0.26));
+  pointer-events:none;
+  transition:opacity .45s ease;
+}
+.today-goal-action > *{
+  position:relative;
+  z-index:1;
+}
+html.dark-mode .today-goal-action{
+  background:linear-gradient(135deg,#1e1d24 0%, #1b2028 50%, #2a1717 100%);
+  border-color:rgba(255,86,86,0.16);
+}
+html.light-mode .today-goal-action{
+  background:linear-gradient(135deg,#ffffff 0%, #fffafa 52%, #fff1f1 100%);
+  border-color:rgba(210,68,68,0.14);
+}
+.today-goal-action.goal-urgent{
+  animation:goalPulse 1.4s ease-in-out infinite;
+}
+.today-goal-action.goal-done{
+  --goal-red-opacity:0 !important;
+  animation:none !important;
+}
+html.dark-mode .today-goal-action.goal-done{
+  background:linear-gradient(135deg,#17261d 0%, #17262a 52%, #143126 100%);
+  border-color:rgba(102,198,128,0.32);
+}
+html.light-mode .today-goal-action.goal-done{
+  background:linear-gradient(135deg,#f7fff9 0%, #ffffff 52%, #eaf8ef 100%);
+  border-color:rgba(45,122,70,0.22);
+}
+@keyframes goalPulse{
+  0%,100%{box-shadow:0 12px 24px rgba(0,0,0,0.14),0 0 0 rgba(210,68,68,0);}
+  50%{box-shadow:0 12px 24px rgba(0,0,0,0.14),0 0 22px rgba(210,68,68,0.28);}
+}
+
 /* FIXED BOTTOM APP NAVIGATION */
 .bottom-app-nav{
   position:fixed;
@@ -2250,9 +2297,13 @@ Jaga amalmu di bulan Dzulqa’dah, kurangi yang tidak perlu dan perbanyak dzikir
         <div class="today-counter-track"><div class="today-counter-fill" id="allahNameCounterFill"></div></div>
       </div>
     </div>
-    <div class="today-action today-static-action" aria-label="Tujuan harian">
-      <div class="today-action-top"><div class="today-action-icon">🎯</div><div class="today-action-arrow">•</div></div>
-      <div><div class="today-action-title">Tujuan harian</div><div class="today-action-text" id="dailyPracticeText">Satu amal tenang karena Allah sebelum hari berakhir.</div></div>
+    <div class="today-action today-goal-action" id="dailyGoalCard" role="button" tabindex="0" aria-label="Tujuan harian">
+      <div class="today-action-top"><div class="today-action-icon">🎯</div><div class="today-action-arrow" id="dailyGoalStatus">•</div></div>
+      <div>
+        <div class="today-action-title">Tujuan harian</div>
+        <div class="today-action-text" id="dailyPracticeText">Lakukan satu kebaikan diam-diam tanpa pamer</div>
+        <div class="today-action-text" style="opacity:.6;margin-top:4px;">tandai saat selesai</div>
+      </div>
     </div>
   </div>
 </section>
@@ -2700,6 +2751,60 @@ window.addEventListener("DOMContentLoaded",function(){const installBtn=document.
 })();
 </script>
 
+
+
+<script>
+(function(){
+  const goalCard = document.getElementById('dailyGoalCard');
+  const goalStatus = document.getElementById('dailyGoalStatus');
+  if(!goalCard || !goalStatus) return;
+
+  function localDateKey(date){
+    const y = date.getFullYear();
+    const m = String(date.getMonth() + 1).padStart(2, '0');
+    const d = String(date.getDate()).padStart(2, '0');
+    return y + '-' + m + '-' + d;
+  }
+
+  function updateGoalState(){
+    const now = new Date();
+    const key = 'barakaway_daily_goal_id_' + localDateKey(now);
+    const done = localStorage.getItem(key) === '1';
+
+    goalCard.classList.toggle('goal-done', done);
+    goalCard.classList.toggle('goal-urgent', !done && now.getHours() >= 18);
+    goalStatus.textContent = done ? '✓' : '•';
+
+    if(done){
+      goalCard.style.setProperty('--goal-red-opacity', '0');
+      goalCard.setAttribute('aria-label', 'Selesai');
+      return;
+    }
+
+    const minutes = now.getHours() * 60 + now.getMinutes();
+    const opacity = Math.max(0.06, Math.min(0.88, minutes / 1440));
+    goalCard.style.setProperty('--goal-red-opacity', opacity.toFixed(2));
+    goalCard.setAttribute('aria-label', 'Tujuan harian');
+  }
+
+  goalCard.addEventListener('click', function(){
+    const key = 'barakaway_daily_goal_id_' + localDateKey(new Date());
+    const done = localStorage.getItem(key) === '1';
+    localStorage.setItem(key, done ? '0' : '1');
+    updateGoalState();
+  });
+
+  goalCard.addEventListener('keydown', function(e){
+    if(e.key === 'Enter' || e.key === ' '){
+      e.preventDefault();
+      goalCard.click();
+    }
+  });
+
+  updateGoalState();
+  setInterval(updateGoalState, 60000);
+})();
+</script>
 
 <nav class="bottom-app-nav" aria-label="Navigasi bawah aplikasi">
   <div class="bottom-app-nav-inner">
