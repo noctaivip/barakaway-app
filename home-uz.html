@@ -295,7 +295,6 @@ color:#2f6f4a;
 opacity:0.88;
 }
 
-
 .qr{
 margin-top:20px;
 }
@@ -583,7 +582,6 @@ html.light-mode .app-menu-btn:active{
   }
 }
 
-
 .lang-change{
 text-align:center;
 margin-top:14px;
@@ -631,15 +629,15 @@ h1{
   }
 
   html.dark-mode .icon-btn{
-    border:1px solid rgba(255,255,255,0.12);
-    background:rgba(21,27,34,0.84);
-    box-shadow:0 10px 24px rgba(0,0,0,0.18), inset 0 1px 0 rgba(255,255,255,0.04);
+    border:1px solid rgba(214,184,98,0.18);
+    background:linear-gradient(180deg,rgba(22,29,37,0.92) 0%, rgba(18,24,31,0.88) 100%);
+    box-shadow:0 12px 30px rgba(0,0,0,0.22), 0 0 0 1px rgba(76,175,106,0.08), inset 0 1px 0 rgba(255,255,255,0.05);
   }
 
   html.light-mode .icon-btn{
-    border:1px solid rgba(255,255,255,0.34);
-    background:rgba(255,255,255,0.58);
-    box-shadow:0 10px 24px rgba(18,34,24,0.10), inset 0 1px 0 rgba(255,255,255,0.42);
+    border:1px solid rgba(214,184,98,0.18);
+    background:linear-gradient(180deg,rgba(255,255,255,0.72) 0%, rgba(248,251,248,0.66) 100%);
+    box-shadow:0 12px 28px rgba(18,34,24,0.10), 0 0 0 1px rgba(45,122,70,0.05), inset 0 1px 0 rgba(255,255,255,0.46);
   }
 
   .icon-btn.left{left:12px;}
@@ -1086,15 +1084,35 @@ html.dark-mode .theme-switch::before{left:20px;}
 html.light-mode .theme-switch::before{left:3px;}
 
 /* HOME HERO BRAND + PRAYER WIDGET */
+
+/* HOME HERO BRAND + PRAYER WIDGET */
 .brand-prayer-hero{
+  position:relative;
   display:flex;
   flex-direction:column;
   align-items:center;
-  gap:14px;
-  margin:4px 0 14px;
+  gap:16px;
+  margin:2px 0 18px;
+  padding:22px 22px 18px;
+  border-radius:30px;
+  overflow:hidden;
+}
+
+html.dark-mode .brand-prayer-hero{
+  background:linear-gradient(180deg,#111a23 0%, #0f1821 100%);
+  border:1px solid rgba(53,88,73,0.36);
+  box-shadow:0 18px 36px rgba(0,0,0,0.22), inset 0 1px 0 rgba(255,255,255,0.03);
+}
+
+html.light-mode .brand-prayer-hero{
+  background:linear-gradient(180deg,#ffffff 0%, #f7faf8 100%);
+  border:1px solid rgba(45,122,70,0.12);
+  box-shadow:0 16px 30px rgba(21,34,24,0.06), inset 0 1px 0 rgba(255,255,255,0.92);
 }
 
 .brand-signature{
+  position:relative;
+  z-index:1;
   display:inline-flex;
   align-items:baseline;
   justify-content:center;
@@ -1103,103 +1121,146 @@ html.light-mode .theme-switch::before{left:3px;}
   letter-spacing:-0.045em;
   line-height:1;
   margin-top:-2px;
+  background:none;
+  border:none;
+  padding:0;
+  cursor:default;
+  font-family:inherit;
+}
+.brand-signature.install-trigger{
+  cursor:pointer;
+}
+.brand-install-hint{
+  display:none;
+  margin-top:-4px;
+  font-size:12px;
+  font-weight:800;
+  letter-spacing:0.02em;
+  color:#4caf6a;
+  text-align:center;
+  cursor:pointer;
+  user-select:none;
+}
+.brand-install-hint.is-visible{
+  display:block;
 }
 
 .brand-signature .brand-letter-accent{
-  color:#4caf6a;
+  color:#66c680;
 }
 
 .brand-signature .brand-letter-main{
   color:inherit;
 }
 
-html.dark-mode .brand-signature .brand-letter-main{color:#f5f7fa;}
-html.light-mode .brand-signature .brand-letter-main{color:#1f2a22;}
+html.dark-mode .brand-signature .brand-letter-main{color:#f8fbfd;}
+html.light-mode .brand-signature .brand-letter-main{color:#18211b;}
 
 .brand-signature{
   font-size:44px;
 }
+.brand-signature.install-trigger:focus-visible,
+.brand-install-hint:focus-visible{
+  outline:2px solid #4caf6a;
+  outline-offset:6px;
+  border-radius:12px;
+}
 
 .home-prayer-widget{
-  width:min(100%, 430px);
+  position:relative;
+  z-index:1;
+  width:min(100%, 520px);
   border-radius:24px;
-  padding:18px 18px 16px;
+  padding:20px 20px 17px;
   text-decoration:none;
   transition:background .25s,border-color .25s,box-shadow .25s,transform .18s ease;
   border:1.5px solid transparent;
   display:block;
+  overflow:hidden;
 }
 
 html.dark-mode .home-prayer-widget{
-  background:linear-gradient(180deg,#1d242c 0%, #1a2128 100%);
-  border-color:rgba(77, 173, 111, 0.28);
-  box-shadow:0 12px 28px rgba(0,0,0,0.22), 0 4px 12px rgba(45,122,70,0.12), inset 0 1px 0 rgba(255,255,255,0.04);
+  background:linear-gradient(135deg,#121f2a 0%, #182533 48%, #173127 100%);
+  border-color:rgba(107,170,132,0.34);
+  box-shadow:
+    0 16px 32px rgba(0,0,0,0.28),
+    inset 0 1px 0 rgba(255,255,255,0.04);
 }
 
 html.light-mode .home-prayer-widget{
-  background:linear-gradient(180deg,#ffffff 0%, #fbfdfc 100%);
-  border-color:rgba(33,94,56,0.22);
-  box-shadow:0 12px 28px rgba(15,24,18,0.06), 0 4px 12px rgba(45,122,70,0.08), inset 0 1px 0 rgba(255,255,255,0.96);
+  background:linear-gradient(135deg,#ffffff 0%, #fbfdfc 48%, #eef6f0 100%);
+  border-color:rgba(45,122,70,0.18);
+  box-shadow:
+    0 14px 28px rgba(15,24,18,0.08),
+    inset 0 1px 0 rgba(255,255,255,0.98);
 }
 
 .home-prayer-widget:hover{
   transform:translateY(-2px);
 }
 
+.home-prayer-top,
+.home-prayer-main,
+.home-prayer-note{
+  position:relative;
+  z-index:1;
+}
+
 .home-prayer-top{
   display:flex;
-  align-items:center;
+  align-items:flex-start;
   justify-content:space-between;
   gap:12px;
-  margin-bottom:10px;
+  margin-bottom:12px;
 }
 
 .home-prayer-kicker{
   font-size:11px;
-  font-weight:800;
+  font-weight:900;
   text-transform:uppercase;
-  letter-spacing:1.2px;
+  letter-spacing:1.8px;
 }
 
-html.dark-mode .home-prayer-kicker{color:#a8b8c8;}
-html.light-mode .home-prayer-kicker{color:#6b7b70;}
+html.dark-mode .home-prayer-kicker{color:#d7c07a;}
+html.light-mode .home-prayer-kicker{color:#8d6b16;}
 
 .home-prayer-location{
   font-size:12px;
-  font-weight:700;
+  font-weight:800;
   text-align:right;
 }
 
-html.dark-mode .home-prayer-location{color:#d7e3ee;}
+html.dark-mode .home-prayer-location{color:#eef3f7;}
 html.light-mode .home-prayer-location{color:#355043;}
 
 .home-prayer-main{
   display:flex;
   align-items:flex-end;
   justify-content:space-between;
-  gap:12px;
+  gap:14px;
 }
 
 .home-prayer-name{
-  font-size:26px;
+  font-size:30px;
   font-weight:900;
   line-height:1;
-  margin-bottom:6px;
-  color:#4caf6a;
+  margin-bottom:8px;
+  color:#66c680;
 }
 
 .home-prayer-time{
-  font-size:34px;
+  font-size:42px;
   font-weight:900;
-  line-height:1;
+  line-height:0.95;
+  letter-spacing:-0.04em;
 }
 
-html.dark-mode .home-prayer-time{color:#f5f7fa;}
-html.light-mode .home-prayer-time{color:#1f2a22;}
+html.dark-mode .home-prayer-time{color:#ffffff;}
+html.light-mode .home-prayer-time{color:#1a221c;}
 
 .home-prayer-meta{
   font-size:13px;
-  margin-top:8px;
+  margin-top:10px;
 }
 
 html.dark-mode .home-prayer-meta{color:#c7d3de;}
@@ -1207,94 +1268,95 @@ html.light-mode .home-prayer-meta{color:#607066;}
 
 .home-prayer-countdown{
   font-size:15px;
-  font-weight:800;
+  font-weight:900;
   white-space:nowrap;
-  padding:10px 12px;
-  border-radius:14px;
-}
-
-html.dark-mode .home-prayer-countdown{
-  background:#162e23;
-  color:#dff4e6;
-  border:1px solid rgba(76,175,106,0.24);
-}
-
-html.light-mode .home-prayer-countdown{
-  background:#eef7f1;
-  color:#2d7a46;
-  border:1px solid #d7e8dc;
-}
-
-.home-prayer-countdown{
+  padding:12px 14px;
+  border-radius:16px;
   display:flex;
   flex-direction:column;
   align-items:center;
   justify-content:center;
   gap:4px;
-  min-width:104px;
+  min-width:116px;
+}
+
+html.dark-mode .home-prayer-countdown{
+  background:linear-gradient(180deg,#163521 0%, #14301f 100%);
+  color:#f3fff7;
+  border:1px solid rgba(124,187,148,0.24);
+  box-shadow:inset 0 1px 0 rgba(255,255,255,0.04);
+}
+
+html.light-mode .home-prayer-countdown{
+  background:linear-gradient(180deg,#f0faf3 0%, #e8f5ec 100%);
+  color:#2d7a46;
+  border:1px solid #d7e8dc;
+  box-shadow:inset 0 1px 0 rgba(255,255,255,0.80);
 }
 
 .home-prayer-countdown-label{
   font-size:10px;
   line-height:1;
-  font-weight:800;
-  letter-spacing:0.08em;
+  font-weight:900;
+  letter-spacing:0.11em;
   text-transform:uppercase;
   opacity:0.88;
 }
 
 .home-prayer-note{
-  margin-top:10px;
+  margin-top:12px;
   font-size:12px;
-  font-weight:700;
+  font-weight:800;
   text-align:center;
 }
 
-html.dark-mode .home-prayer-note{color:#93a5b6;}
+html.dark-mode .home-prayer-note{color:#c0cad4;}
 html.light-mode .home-prayer-note{color:#708177;}
 
 @media(max-width:700px){
   .brand-prayer-hero{
     gap:12px;
     margin:0 0 12px;
+    padding:18px 14px 14px;
+    border-radius:24px;
   }
   .brand-signature{
     font-size:29px;
     margin-top:0;
     transform:translateY(-2px);
   }
+  .brand-install-hint{
+    margin-top:-2px;
+    font-size:11px;
+  }
   .home-prayer-widget{
     width:100%;
-    padding:14px 14px 13px;
+    padding:16px 14px 14px;
     border-radius:20px;
   }
   .home-prayer-top{
-    margin-bottom:8px;
+    margin-bottom:10px;
   }
   .home-prayer-main{
     align-items:center;
+    gap:10px;
   }
   .home-prayer-name{
-    font-size:22px;
-    margin-bottom:4px;
+    font-size:24px;
+    margin-bottom:5px;
   }
   .home-prayer-time{
-    font-size:30px;
+    font-size:34px;
   }
   .home-prayer-meta{
     font-size:12px;
-    margin-top:6px;
+    margin-top:7px;
   }
   .home-prayer-countdown{
-    display:flex;
-    flex-direction:column;
-    align-items:center;
-    justify-content:center;
-    gap:3px;
-    min-width:92px;
+    min-width:96px;
     font-size:13px;
-    padding:9px 10px;
-    border-radius:12px;
+    padding:10px 10px;
+    border-radius:14px;
   }
   .home-prayer-location{
     font-size:11px;
@@ -1302,7 +1364,7 @@ html.light-mode .home-prayer-note{color:#708177;}
   .home-prayer-countdown-label{
     font-size:10px;
     line-height:1;
-    font-weight:800;
+    font-weight:900;
     letter-spacing:0.08em;
     text-transform:uppercase;
     opacity:0.88;
@@ -1311,7 +1373,6 @@ html.light-mode .home-prayer-note{color:#708177;}
     text-align:center;
   }
 }
-
 
 .support-project-btn{
   position:relative;
@@ -1377,6 +1438,81 @@ html.light-mode .support-project-btn:hover{
 .support-project-btn:active{
   transform:translateY(0) scale(0.988);
 }
+@media(max-width:700px){
+  .support-project-btn{
+    width:90%;
+    max-width:320px;
+    min-width:0;
+    padding:14px 18px;
+    border-radius:16px;
+    font-size:15px;
+    margin:0 auto;
+    display:flex;
+  }
+}
+
+@media(max-width:700px){
+  .brand-prayer-hero{
+    gap:12px;
+    margin:0 0 12px;
+  }
+  .brand-signature{
+    font-size:29px;
+    margin-top:0;
+    transform:translateY(-2px);
+  }
+  .brand-install-hint{
+    margin-top:-2px;
+    font-size:11px;
+  }
+  .home-prayer-widget{
+    width:100%;
+    padding:14px 14px 13px;
+    border-radius:20px;
+  }
+  .home-prayer-top{
+    margin-bottom:8px;
+  }
+  .home-prayer-main{
+    align-items:center;
+  }
+  .home-prayer-name{
+    font-size:22px;
+    margin-bottom:4px;
+  }
+  .home-prayer-time{
+    font-size:30px;
+  }
+  .home-prayer-meta{
+    font-size:12px;
+    margin-top:6px;
+  }
+  .home-prayer-countdown{
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    justify-content:center;
+    gap:3px;
+    min-width:92px;
+    font-size:13px;
+    padding:9px 10px;
+    border-radius:12px;
+  }
+  .home-prayer-location{
+    font-size:11px;
+  }
+  .home-prayer-countdown-label{
+    font-size:10px;
+    line-height:1;
+    font-weight:800;
+    letter-spacing:0.08em;
+    text-transform:uppercase;
+    opacity:0.88;
+  }
+  .home-prayer-note{
+    text-align:center;
+  }
+}
 
 </style>
 <script src="/theme-init.js"></script>
@@ -1415,9 +1551,9 @@ Zulqa’da oyida amallaringni asra, ortiqchasini kamaytir va zikrni ko‘paytir 
 <div class="container">
 
 <div class="brand-prayer-hero">
-  <div class="brand-signature" aria-label="BarakaWay">
+  <button class="brand-signature" id="brandInstallTrigger" type="button" aria-label="BarakaWay">
     <span class="brand-letter-accent">B</span><span class="brand-letter-main">araka</span><span class="brand-letter-accent">W</span><span class="brand-letter-main">ay</span>
-  </div>
+  </button>
 
   <a class="home-prayer-widget" href="prayer-times-uz.html" aria-label="Namoz vaqtlari sahifasini ochish">
     <div class="home-prayer-top">
