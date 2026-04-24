@@ -1027,6 +1027,49 @@ html.light-mode .install-help-steps{color:#1f2a22}
 html.dark-mode .install-help-close{border:1px solid #2a3138;background:#1d242c;color:#f3f6f9}
 html.light-mode .install-help-close{border:1px solid #dfe8e2;background:#fff;color:#1f2a22}
 
+
+/* DESKTOP THEME TOGGLE ONLY */
+.desktop-theme-toggle{
+  display:flex;
+  justify-content:center;
+  margin:18px auto 4px;
+  width:100%;
+  pointer-events:auto;
+}
+
+.desktop-theme-toggle-inner{
+  display:inline-flex;
+  align-items:center;
+  gap:10px;
+  padding:10px 14px;
+  border-radius:999px;
+  transition:background .25s ease,border-color .25s ease,box-shadow .25s ease;
+}
+
+html.dark-mode .desktop-theme-toggle-inner{
+  background:linear-gradient(180deg,rgba(22,29,37,0.94) 0%,rgba(18,24,31,0.90) 100%);
+  border:1px solid rgba(214,184,98,0.18);
+  box-shadow:0 12px 30px rgba(0,0,0,0.22), inset 0 1px 0 rgba(255,255,255,0.05);
+}
+
+html.light-mode .desktop-theme-toggle-inner{
+  background:linear-gradient(180deg,rgba(255,255,255,0.96) 0%,rgba(248,251,248,0.92) 100%);
+  border:1px solid rgba(45,122,70,0.16);
+  box-shadow:0 12px 26px rgba(18,34,24,0.08), inset 0 1px 0 rgba(255,255,255,0.80);
+}
+
+.desktop-theme-toggle .theme-toggle-label{
+  font-size:13px;
+  font-weight:800;
+  letter-spacing:-0.01em;
+}
+
+@media(max-width:700px){
+  .desktop-theme-toggle{
+    display:none !important;
+  }
+}
+
 /* THEME TOGGLE CENTER */
 .theme-toggle-center{
   position:absolute;
@@ -2203,6 +2246,14 @@ html.light-mode .bottom-app-nav-item.active{
 </head>
 <body>
 
+<div class="desktop-theme-toggle" aria-label="Переключатель темы для компьютерной версии">
+  <div class="desktop-theme-toggle-inner">
+    <span class="theme-toggle-label">Light mode</span>
+    <input type="checkbox" class="theme-switch" id="desktopThemeSwitch" aria-label="Toggle theme">
+  </div>
+</div>
+
+
 <div class="mobile-top-controls">
   <button class="icon-btn left" onclick="changeLanguageChoice()" aria-label="Change language">
     <svg viewBox="0 0 24 24" aria-hidden="true">
@@ -2507,24 +2558,32 @@ window.addEventListener("DOMContentLoaded",function(){const installBtn=document.
 </script>
 <script>
 (function(){
-  const switchEl = document.getElementById("themeSwitch");
-  const label = document.querySelector(".theme-toggle-label");
+  const switches = document.querySelectorAll('.theme-switch');
+  const labels = document.querySelectorAll('.theme-toggle-label');
 
-  if(!switchEl || !label) return;
+  if(!switches.length || !labels.length) return;
 
   function applyTheme(theme){
     document.documentElement.classList.remove('light-mode','dark-mode');
     document.documentElement.classList.add(theme + '-mode');
     localStorage.setItem('siteTheme', theme);
-    switchEl.checked = theme === 'light';
-    label.textContent = theme === 'dark' ? 'Light mode' : 'Dark mode';
+
+    switches.forEach(function(switchEl){
+      switchEl.checked = theme === 'light';
+    });
+
+    labels.forEach(function(label){
+      label.textContent = theme === 'dark' ? 'Light mode' : 'Dark mode';
+    });
   }
 
   const savedTheme = localStorage.getItem('siteTheme') || 'dark';
   applyTheme(savedTheme);
 
-  switchEl.addEventListener('change', function(){
-    applyTheme(this.checked ? 'light' : 'dark');
+  switches.forEach(function(switchEl){
+    switchEl.addEventListener('change', function(){
+      applyTheme(this.checked ? 'light' : 'dark');
+    });
   });
 })();
 </script>
