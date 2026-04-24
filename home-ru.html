@@ -1964,6 +1964,56 @@ html.light-mode .about-project-actions a{
 }
 
 
+.today-counter-action,
+.today-static-action{
+  cursor:pointer;
+  text-align:left;
+  font-family:inherit;
+}
+.today-static-action{
+  cursor:default;
+}
+.today-counter-track{
+  width:100%;
+  height:7px;
+  margin-top:10px;
+  border-radius:999px;
+  overflow:hidden;
+}
+html.dark-mode .today-counter-track{
+  background:rgba(255,255,255,0.08);
+}
+html.light-mode .today-counter-track{
+  background:rgba(45,122,70,0.12);
+}
+.today-counter-fill{
+  width:0%;
+  height:100%;
+  border-radius:999px;
+  transition:width .22s ease;
+  background:linear-gradient(90deg,#2d7a46,#66c680);
+}
+.today-counter-action:focus-visible{
+  outline:2px solid #66c680;
+  outline-offset:4px;
+}
+html.dark-mode .today-counter-action{
+  background:linear-gradient(135deg,#202016 0%, #17212a 48%, #143126 100%);
+  border-color:rgba(215,192,122,0.28);
+}
+html.light-mode .today-counter-action{
+  background:linear-gradient(135deg,#fffaf0 0%, #ffffff 48%, #eef7f1 100%);
+  border-color:rgba(141,107,22,0.18);
+}
+html.dark-mode .today-static-action{
+  background:linear-gradient(135deg,#151f29 0%, #17212a 48%, #1e2b22 100%);
+  border-color:rgba(102,198,128,0.18);
+}
+html.light-mode .today-static-action{
+  background:linear-gradient(135deg,#ffffff 0%, #fbfdfc 48%, #f1f7ed 100%);
+  border-color:rgba(45,122,70,0.13);
+}
+
 /* FIXED BOTTOM APP NAVIGATION */
 .bottom-app-nav{
   position:fixed;
@@ -1983,15 +2033,28 @@ html.light-mode .about-project-actions a{
 }
 
 html.dark-mode .bottom-app-nav{
-  background:linear-gradient(180deg,rgba(18,27,34,0.88) 0%,rgba(11,18,23,0.96) 100%);
-  border-top:1px solid rgba(124,187,148,0.16);
-  box-shadow:0 -14px 34px rgba(0,0,0,0.30), inset 0 1px 0 rgba(255,255,255,0.04);
+  background:linear-gradient(180deg,rgba(20,38,29,0.92) 0%,rgba(10,22,16,0.97) 100%);
+  border-top:1px solid rgba(102,198,128,0.30);
+  box-shadow:0 -14px 34px rgba(0,0,0,0.34), inset 0 1px 0 rgba(255,255,255,0.05);
 }
 
 html.light-mode .bottom-app-nav{
-  background:linear-gradient(180deg,rgba(255,255,255,0.88) 0%,rgba(247,250,248,0.96) 100%);
-  border-top:1px solid rgba(45,122,70,0.12);
-  box-shadow:0 -14px 34px rgba(18,34,24,0.10), inset 0 1px 0 rgba(255,255,255,0.88);
+  background:linear-gradient(180deg,rgba(243,251,246,0.92) 0%,rgba(232,246,238,0.97) 100%);
+  border-top:1px solid rgba(45,122,70,0.22);
+  box-shadow:0 -14px 34px rgba(18,34,24,0.12), inset 0 1px 0 rgba(255,255,255,0.92);
+}
+
+
+.bottom-app-nav::before{
+  content:"";
+  position:absolute;
+  top:0;
+  left:50%;
+  transform:translateX(-50%);
+  width:min(850px,100%);
+  height:3px;
+  background:linear-gradient(90deg,rgba(45,122,70,0),rgba(102,198,128,0.88),rgba(215,192,122,0.72),rgba(45,122,70,0));
+  pointer-events:none;
 }
 
 .bottom-app-nav-inner{
@@ -2165,28 +2228,33 @@ html.light-mode .bottom-app-nav-item.active{
 <button id="installBtn" class="install-btn" type="button">Установить приложение</button>
 </div>
 
-<section class="today-hub" aria-label="День мусульманина">
+<section class="today-hub" aria-label="Сегодня в BarakaWay">
   <div class="today-hub-head">
     <div class="today-hub-kicker">Сегодня в BarakaWay</div>
-    <h2 class="today-hub-title">Спокойный день, построенный вокруг намаза, зикра и скрытого добра.</h2>
+    <h2 class="today-hub-title">Ежедневный исламский ритм без повторов и лишнего шума.</h2>
+    <div class="today-hub-subtitle">Статья дня, актуальный азкар, имя Аллаха для запоминания и маленькая цель на сегодня.</div>
   </div>
   <div class="today-hub-grid">
-    <a class="today-action" href="prayer-times-ru.html">
-      <div class="today-action-top"><div class="today-action-icon">🕌</div><div class="today-action-arrow">→</div></div>
-      <div><div class="today-action-title">Следующий намаз</div><div class="today-action-text">Время, расписание и быстрый переход.</div></div>
+    <a class="today-action" id="dailyArticleLink" href="articles-ru.html">
+      <div class="today-action-top"><div class="today-action-icon">📝</div><div class="today-action-arrow">→</div></div>
+      <div><div class="today-action-title">Полезная статья</div><div class="today-action-text" id="dailyArticleTitle">Открыть статью дня.</div></div>
     </a>
     <a class="today-action" href="adhkar-ru.html">
       <div class="today-action-top"><div class="today-action-icon">🌿</div><div class="today-action-arrow">→</div></div>
-      <div><div class="today-action-title">Азкар дня</div><div class="today-action-text">Утро, вечер и защита сердца.</div></div>
+      <div><div class="today-action-title" id="currentAdhkarTitle">Азкар сейчас</div><div class="today-action-text" id="currentAdhkarText">Подходящий азкар по времени дня.</div></div>
     </a>
-    <a class="today-action" href="quran-ru.html">
-      <div class="today-action-top"><div class="today-action-icon">📖</div><div class="today-action-arrow">→</div></div>
-      <div><div class="today-action-title">Аят сегодня</div><div class="today-action-text">Коран как ежедневная опора.</div></div>
-    </a>
-    <a class="today-action" href="hidden-sadaqa-ru.html">
-      <div class="today-action-top"><div class="today-action-icon">🤲</div><div class="today-action-arrow">→</div></div>
-      <div><div class="today-action-title">Скрытая садака</div><div class="today-action-text">Добро без имени, показухи и шума.</div></div>
-    </a>
+    <div class="today-action today-counter-action" id="allahNameCounterCard" role="button" tabindex="0" aria-label="Счётчик повторения имени Аллаха">
+      <div class="today-action-top"><div class="today-action-icon">☝️</div><div class="today-action-arrow" id="allahNameCounterValue">0/100</div></div>
+      <div>
+        <div class="today-action-title" id="allahNameToday">Имя Аллаха</div>
+        <div class="today-action-text">Нажимай на карточку и повторяй 100 раз.</div>
+        <div class="today-counter-track"><div class="today-counter-fill" id="allahNameCounterFill"></div></div>
+      </div>
+    </div>
+    <div class="today-action today-static-action" aria-label="Дневная цель">
+      <div class="today-action-top"><div class="today-action-icon">🎯</div><div class="today-action-arrow">•</div></div>
+      <div><div class="today-action-title">Дневная цель</div><div class="today-action-text" id="dailyPracticeText">Один спокойный поступок ради Аллаха до конца дня.</div></div>
+    </div>
   </div>
 </section>
 
@@ -2560,6 +2628,122 @@ window.addEventListener("DOMContentLoaded",function(){const installBtn=document.
 })();
 </script>
 
+
+<script>
+(function(){
+  const todayKey = new Date().toISOString().slice(0,10);
+  const dayNumber = Math.floor(Date.now() / 86400000);
+
+  const articles = [
+    {title:'Что такое садака', url:'islamic_articles-ru/001-ru.html'},
+    {title:'Разница между закятом и садака', url:'islamic_articles-ru/002-ru.html'},
+    {title:'Почему скрытая благотворительность важна', url:'islamic_articles-ru/003-ru.html'},
+    {title:'Помощь нуждающимся семьям', url:'islamic_articles-ru/004-ru.html'},
+    {title:'Почему даже один доллар имеет значение', url:'islamic_articles-ru/005-ru.html'},
+    {title:'Садака для жилья и помощи с жильём', url:'islamic_articles-ru/006-ru.html'},
+    {title:'Лучшие виды садака в исламе', url:'islamic_articles-ru/007-ru.html'},
+    {title:'Милостыня в месяц Рамадан', url:'islamic_articles-ru/008-ru.html'},
+    {title:'Милостыня в Коране', url:'islamic_articles-ru/009-ru.html'},
+    {title:'Как одна садака изменила жизнь семьи', url:'islamic_articles-ru/010-ru.html'},
+    {title:'Почему помощь семьям важна', url:'islamic_articles-ru/011-ru.html'},
+    {title:'Маленькая помощь — большие изменения', url:'islamic_articles-ru/012-ru.html'},
+    {title:'Награда за садака', url:'islamic_articles-ru/013-ru.html'},
+    {title:'Садака и очищение имущества', url:'islamic_articles-ru/014-ru.html'},
+    {title:'Почему мусульмане дают милостыню', url:'islamic_articles-ru/015-ru.html'},
+    {title:'Забота о бедных в исламе', url:'islamic_articles-ru/016-ru.html'},
+    {title:'Ответственность мусульман помогать другим', url:'islamic_articles-ru/017-ru.html'},
+    {title:'Справедливость и милосердие в исламе', url:'islamic_articles-ru/018-ru.html'},
+    {title:'Как благотворительность приносит надежду семьям', url:'islamic_articles-ru/019-ru.html'},
+    {title:'Помощь детям через садака', url:'islamic_articles-ru/020-ru.html'},
+    {title:'Помощь вдовам в исламе', url:'islamic_articles-ru/021-ru.html'},
+    {title:'Срочная помощь в исламе', url:'islamic_articles-ru/022-ru.html'},
+    {title:'Помощь едой в исламе', url:'islamic_articles-ru/023-ru.html'},
+    {title:'Куда идут ваши пожертвования', url:'islamic_articles-ru/024-ru.html'},
+    {title:'Статья дня №25', url:'islamic_articles-ru/025-ru.html'},
+    {title:'Статья дня №26', url:'islamic_articles-ru/026-ru.html'},
+    {title:'Статья дня №27', url:'islamic_articles-ru/027-ru.html'},
+    {title:'Статья дня №28', url:'islamic_articles-ru/028-ru.html'},
+    {title:'Статья дня №29', url:'islamic_articles-ru/029-ru.html'},
+    {title:'Статья дня №30', url:'islamic_articles-ru/030-ru.html'}
+  ];
+
+  const names = [
+    'Ар-Рахман','Ар-Рахим','Аль-Малик','Аль-Куддус','Ас-Салям','Аль-Му’мин','Аль-Мухаймин','Аль-Азиз','Аль-Джаббар','Аль-Мутакаббир',
+    'Аль-Халик','Аль-Бари','Аль-Мусаввир','Аль-Гаффар','Аль-Каххар','Аль-Ваххаб','Ар-Раззак','Аль-Фаттах','Аль-Алим','Аль-Кабид',
+    'Аль-Басит','Аль-Хафид','Ар-Рафи','Аль-Муизз','Аль-Музилль','Ас-Сами','Аль-Басир','Аль-Хакам','Аль-Адль','Аль-Латиф',
+    'Аль-Хабир','Аль-Халим','Аль-Азым','Аль-Гафур','Аш-Шакур','Аль-Алий','Аль-Кабир','Аль-Хафиз','Аль-Мукит','Аль-Хасиб'
+  ];
+
+  const goals = [
+    'Перед одним важным делом обнови намерение.',
+    'Сделай одно добро тихо, без слов и показухи.',
+    'Прочитай короткий материал и сохрани один вывод.',
+    'Попроси прощения у Аллаха 33 раза спокойно.',
+    'Убери одно лишнее действие, которое крадёт время.',
+    'Сделай дуа за родителей и близких.',
+    'Поблагодари Аллаха за одну конкретную милость.'
+  ];
+
+  const article = articles[dayNumber % articles.length];
+  const articleLink = document.getElementById('dailyArticleLink');
+  const articleTitle = document.getElementById('dailyArticleTitle');
+  if(articleLink && articleTitle){
+    articleLink.href = article.url;
+    articleTitle.textContent = article.title;
+  }
+
+  const hour = new Date().getHours();
+  const currentAdhkarTitle = document.getElementById('currentAdhkarTitle');
+  const currentAdhkarText = document.getElementById('currentAdhkarText');
+  if(currentAdhkarTitle && currentAdhkarText){
+    if(hour >= 4 && hour < 11){
+      currentAdhkarTitle.textContent = 'Утренний азкар';
+      currentAdhkarText.textContent = 'Лучшее время закрепить утреннюю защиту.';
+    }else if(hour >= 16 && hour < 22){
+      currentAdhkarTitle.textContent = 'Вечерний азкар';
+      currentAdhkarText.textContent = 'Вечерняя защита перед окончанием дня.';
+    }else{
+      currentAdhkarTitle.textContent = 'Следующий азкар';
+      currentAdhkarText.textContent = hour < 4 ? 'Ближайший — утренний азкар после Фаджра.' : 'Ближайший — вечерний азкар ближе к Магрибу.';
+    }
+  }
+
+  const name = names[dayNumber % names.length];
+  const nameEl = document.getElementById('allahNameToday');
+  const card = document.getElementById('allahNameCounterCard');
+  const valueEl = document.getElementById('allahNameCounterValue');
+  const fillEl = document.getElementById('allahNameCounterFill');
+  const storageKey = 'barakaway_name_counter_' + todayKey;
+  let count = Math.max(0, Math.min(100, parseInt(localStorage.getItem(storageKey) || '0', 10) || 0));
+
+  function renderCounter(){
+    if(nameEl) nameEl.textContent = name;
+    if(valueEl) valueEl.textContent = count + '/100';
+    if(fillEl) fillEl.style.width = count + '%';
+    if(card) card.setAttribute('aria-label', name + ': ' + count + ' из 100 повторений');
+  }
+
+  function incrementCounter(){
+    count = count >= 100 ? 0 : count + 1;
+    localStorage.setItem(storageKey, String(count));
+    renderCounter();
+  }
+
+  if(card){
+    card.addEventListener('click', incrementCounter);
+    card.addEventListener('keydown', function(e){
+      if(e.key === 'Enter' || e.key === ' '){
+        e.preventDefault();
+        incrementCounter();
+      }
+    });
+  }
+  renderCounter();
+
+  const practice = document.getElementById('dailyPracticeText');
+  if(practice) practice.textContent = goals[dayNumber % goals.length];
+})();
+</script>
 
 <nav class="bottom-app-nav" aria-label="Нижнее меню приложения">
   <div class="bottom-app-nav-inner">
