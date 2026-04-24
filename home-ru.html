@@ -1404,6 +1404,87 @@ html.light-mode .home-prayer-arrow{
   outline-offset:5px;
 }
 
+.home-prayer-actions{
+  position:relative;
+  z-index:2;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  gap:10px;
+  margin-top:12px;
+}
+
+.home-prayer-note{
+  margin-top:0;
+}
+
+.home-prayer-share-btn{
+  position:relative;
+  z-index:3;
+  width:44px;
+  height:44px;
+  min-width:44px;
+  border-radius:999px;
+  border:1px solid transparent;
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  padding:0;
+  margin:0;
+  cursor:pointer;
+  transition:transform .18s ease, background .25s ease, border-color .25s ease, box-shadow .25s ease;
+}
+
+.home-prayer-share-btn svg{
+  width:20px;
+  height:20px;
+  fill:currentColor;
+}
+
+html.dark-mode .home-prayer-share-btn{
+  background:linear-gradient(135deg,rgba(215,192,122,.18),rgba(102,198,128,.12));
+  border-color:rgba(215,192,122,.32);
+  color:#f7dc7a;
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.04), 0 8px 18px rgba(0,0,0,.18);
+}
+
+html.light-mode .home-prayer-share-btn{
+  background:linear-gradient(135deg,#fff8e7,#eef8f1);
+  border-color:rgba(141,107,22,.24);
+  color:#8d6b16;
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.86), 0 8px 18px rgba(15,24,18,.06);
+}
+
+.home-prayer-share-btn:hover{
+  transform:translateY(-1px) scale(1.04);
+}
+
+.home-prayer-share-btn:active{
+  transform:scale(.96);
+}
+
+.home-prayer-share-btn:focus-visible{
+  outline:2px solid #d7c07a;
+  outline-offset:4px;
+}
+
+@media(max-width:700px){
+  .home-prayer-actions{
+    gap:8px;
+    margin-top:11px;
+  }
+  .home-prayer-note{
+    min-width:0;
+    flex:1;
+    padding:10px 12px;
+  }
+  .home-prayer-share-btn{
+    width:42px;
+    height:42px;
+    min-width:42px;
+  }
+}
+
 @media(max-width:700px){
   .brand-prayer-hero{
     gap:12px;
@@ -1645,7 +1726,7 @@ html.light-mode .support-project-btn:hover{
   <button class="brand-signature" id="brandInstallTrigger" type="button" aria-label="BarakaWay">
     <span class="brand-letter-accent">B</span><span class="brand-letter-main">araka</span><span class="brand-letter-accent">W</span><span class="brand-letter-main">ay</span>
   </button>
-  <a class="home-prayer-widget" href="prayer-times-ru.html" aria-label="Открыть страницу времени молитв">
+  <div class="home-prayer-widget" role="link" tabindex="0" onclick="openPrayerTimesPage(event)" onkeydown="openPrayerTimesPageFromKeyboard(event)" aria-label="Открыть страницу времени молитв">
     <div class="home-prayer-top">
       <div class="home-prayer-kicker">Следующий намаз</div>
       <div class="home-prayer-location" id="homePrayerLocation">Ташкент, Узбекистан</div>
@@ -1663,8 +1744,15 @@ html.light-mode .support-project-btn:hover{
       </div>
     </div>
 
-    <div class="home-prayer-note"><span>Полное расписание</span><span class="home-prayer-arrow" aria-hidden="true">→</span></div>
-  </a>
+    <div class="home-prayer-actions">
+      <div class="home-prayer-note"><span>Полное расписание</span><span class="home-prayer-arrow" aria-hidden="true">→</span></div>
+      <button class="home-prayer-share-btn" type="button" onclick="sharePrayerTimes(event)" aria-label="Поделиться временами намазов" title="Поделиться временами намазов">
+        <svg viewBox="0 0 24 24" aria-hidden="true">
+          <path d="M18 16.08c-.76 0-1.44.3-1.96.77L8.91 12.7c.05-.23.09-.46.09-.7s-.04-.47-.09-.7l7.05-4.11A2.99 2.99 0 1 0 15 5c0 .24.04.47.09.7L8.04 9.81A3 3 0 1 0 8.04 14.2l7.12 4.18c-.04.2-.06.41-.06.62a2.9 2.9 0 1 0 2.9-2.92z"/>
+        </svg>
+      </button>
+    </div>
+  </div>
 </div>
 
 
@@ -1739,6 +1827,8 @@ html.light-mode .support-project-btn:hover{
 
 <script>
 function changeLanguageChoice(){localStorage.removeItem("siteLanguage");sessionStorage.setItem("forceLanguageSelect","1");window.location.href="index.html";}
+function openPrayerTimesPage(event){if(event&&event.target&&event.target.closest&&event.target.closest(".home-prayer-share-btn")) return;window.location.href="prayer-times-ru.html";}
+function openPrayerTimesPageFromKeyboard(event){if(event.key==="Enter"||event.key===" "){event.preventDefault();openPrayerTimesPage(event);}}
 let deferredInstallPrompt=null;let installVisibilityInFlight=false;
 function getShareUrl(){return window.location.href;}
 function isStandaloneMode(){return window.matchMedia("(display-mode: standalone)").matches||window.navigator.standalone===true;}
@@ -1757,6 +1847,7 @@ function closeShareOverlay(){const o=document.getElementById("shareOverlay");if(
 async function copyShareLink(){const url=getShareUrl(),msg=document.getElementById("shareCopyMsg");try{if(navigator.clipboard&&window.isSecureContext){await navigator.clipboard.writeText(url);}else{const t=document.createElement("textarea");t.value=url;t.setAttribute("readonly","readonly");t.style.position="absolute";t.style.left="-9999px";document.body.appendChild(t);t.select();document.execCommand("copy");document.body.removeChild(t);}if(msg){msg.classList.add("show");setTimeout(function(){msg.classList.remove("show");},2200);}}catch(e){window.prompt("Скопируйте ссылку и откройте её во внешнем браузере:",url);}}
 function openShareTarget(type){const url=encodeURIComponent(getShareUrl()),text=encodeURIComponent("BarakaWay");let target="";if(type==="telegram") target="https://t.me/share/url?url="+url+"&text="+text;if(type==="whatsapp") target="https://wa.me/?text="+text+"%20"+url;if(type==="facebook") target="https://www.facebook.com/sharer/sharer.php?u="+url;if(type==="x") target="https://twitter.com/intent/tweet?text="+text+"&url="+url;if(type==="linkedin") target="https://www.linkedin.com/sharing/share-offsite/?url="+url;if(type==="email") target="mailto:?subject=Hidden%20Sadaqa&body="+text+"%0A"+url;if(target) window.open(target,"_blank","noopener,noreferrer");}
 async function shareApp(){const data={title:"BarakaWay",text:"BarakaWay",url:getShareUrl()};if(navigator.share){try{await navigator.share(data);return;}catch(e){}}openShareOverlay();}
+async function sharePrayerTimes(event){if(event){event.preventDefault();event.stopPropagation();}const text=typeof window.buildPrayerTimesShareText==="function"?window.buildPrayerTimesShareText():"BarakaWay\nВремена намазов";if(navigator.share){try{await navigator.share({title:"Времена намазов",text:text});return;}catch(e){}}try{if(navigator.clipboard&&window.isSecureContext){await navigator.clipboard.writeText(text);}else{const t=document.createElement("textarea");t.value=text;t.setAttribute("readonly","readonly");t.style.position="absolute";t.style.left="-9999px";document.body.appendChild(t);t.select();document.execCommand("copy");document.body.removeChild(t);}alert("Времена намазов скопированы. Теперь можно отправить их в мессенджере.");}catch(e){window.prompt("Скопируйте времена намазов:",text);}}
 window.addEventListener("beforeinstallprompt",function(e){e.preventDefault();deferredInstallPrompt=e;updateInstallButtonVisibility();});
 window.addEventListener("appinstalled",function(){deferredInstallPrompt=null;updateInstallButtonVisibility();});
 window.addEventListener("pageshow",function(){updateInstallButtonVisibility();});
@@ -1899,6 +1990,7 @@ window.addEventListener("DOMContentLoaded",function(){const installBtn=document.
   };
 
   let nextPrayerTimer = null;
+  window.homePrayerShareState = {timings:null, location:UI.fallbackLocation, date:'', city:'Tashkent', country:'Uzbekistan'};
 
   function getPrayerSettings(){
     try{
@@ -1947,6 +2039,8 @@ window.addEventListener("DOMContentLoaded",function(){const installBtn=document.
       const city = (localStorage.getItem('prayer_city') || 'Tashkent').trim();
       const country = (localStorage.getItem('prayer_country') || 'Uzbekistan').trim();
       const settings = getPrayerSettings();
+      window.homePrayerShareState.city = city || 'Tashkent';
+      window.homePrayerShareState.country = country || 'Uzbekistan';
       const method = settings.method || '2';
       const school = settings.school || '1';
       const date = new Date();
@@ -1968,6 +2062,9 @@ window.addEventListener("DOMContentLoaded",function(){const installBtn=document.
 
       const locationText = `${city}${country ? ', ' + country : ''}`;
       elLocation.textContent = locationText || UI.fallbackLocation;
+      window.homePrayerShareState.timings = timings;
+      window.homePrayerShareState.location = locationText || UI.fallbackLocation;
+      window.homePrayerShareState.date = `${dd}.${mm}.${yyyy}`;
 
       const next = getNextPrayer(timings);
       const prayerName = UI.names[next.key] || next.key;
@@ -1983,6 +2080,26 @@ window.addEventListener("DOMContentLoaded",function(){const installBtn=document.
       elCountdown.textContent = '--:--:--';
     }
   }
+
+  window.buildPrayerTimesShareText = function(){
+    const state = window.homePrayerShareState || {};
+    const timings = state.timings || {};
+    const clean = (value) => String(value || '--:--').split(' ')[0].slice(0,5);
+    return [
+      'BarakaWay',
+      'Времена намазов',
+      `${state.location || UI.fallbackLocation}${state.date ? ' — ' + state.date : ''}`,
+      '',
+      `Фаджр: ${clean(timings.Fajr)}`,
+      `Восход: ${clean(timings.Sunrise)}`,
+      `Зухр: ${clean(timings.Dhuhr)}`,
+      `Аср: ${clean(timings.Asr)}`,
+      `Магриб: ${clean(timings.Maghrib)}`,
+      `Иша: ${clean(timings.Isha)}`,
+      '',
+      window.location.origin ? window.location.origin + '/prayer-times-ru.html' : window.location.href
+    ].join('\n');
+  };
 
   fetchPrayerWidget();
 })();
