@@ -1,4 +1,4 @@
-﻿<!--
+<!--
 بِسْمِ ٱللَّٰهِ ٱلرَّحْمَـٰنِ ٱلرَّحِيمِ
 In the name of Allah, the Most Merciful, the Most Compassionate
 -->
@@ -2013,6 +2013,53 @@ html.light-mode .today-static-action{
   border-color:rgba(45,122,70,0.13);
 }
 
+
+.today-goal-action{
+  cursor:pointer;
+  position:relative;
+  overflow:hidden;
+}
+.today-goal-action::after{
+  content:"";
+  position:absolute;
+  inset:0;
+  opacity:var(--goal-red-opacity,0);
+  background:linear-gradient(135deg,rgba(178,34,34,0.06),rgba(255,38,38,0.26));
+  pointer-events:none;
+  transition:opacity .45s ease;
+}
+.today-goal-action > *{
+  position:relative;
+  z-index:1;
+}
+html.dark-mode .today-goal-action{
+  background:linear-gradient(135deg,#1e1d24 0%, #1b2028 50%, #2a1717 100%);
+  border-color:rgba(255,86,86,0.16);
+}
+html.light-mode .today-goal-action{
+  background:linear-gradient(135deg,#ffffff 0%, #fffafa 52%, #fff1f1 100%);
+  border-color:rgba(210,68,68,0.14);
+}
+.today-goal-action.goal-urgent{
+  animation:goalPulse 1.4s ease-in-out infinite;
+}
+.today-goal-action.goal-done{
+  --goal-red-opacity:0 !important;
+  animation:none !important;
+}
+html.dark-mode .today-goal-action.goal-done{
+  background:linear-gradient(135deg,#17261d 0%, #17262a 52%, #143126 100%);
+  border-color:rgba(102,198,128,0.32);
+}
+html.light-mode .today-goal-action.goal-done{
+  background:linear-gradient(135deg,#f7fff9 0%, #ffffff 52%, #eaf8ef 100%);
+  border-color:rgba(45,122,70,0.22);
+}
+@keyframes goalPulse{
+  0%,100%{box-shadow:0 12px 24px rgba(0,0,0,0.14),0 0 0 rgba(210,68,68,0);}
+  50%{box-shadow:0 12px 24px rgba(0,0,0,0.14),0 0 22px rgba(210,68,68,0.28);}
+}
+
 /* FIXED BOTTOM APP NAVIGATION */
 .bottom-app-nav{
   position:fixed;
@@ -2178,7 +2225,7 @@ html.light-mode .bottom-app-nav-item.active{
 <div class="ramadan-wrapper">
 <div class="ramadan-bar">
 <div class="ramadan-text">
-Zilkade ayında amellerini koru, fazlalıkları azalt ve zikri artır — bu, önündeki en önemli günlere hazırlıktır
+Сохрани свои действия в месяц Зуль-Ка‘да, сократи лишнее и усили зикр - это подготовка к самым важным дням впереди
 </div>
 </div>
 </div>
@@ -2191,25 +2238,25 @@ Zilkade ayında amellerini koru, fazlalıkları azalt ve zikri artır — bu, ö
   </button>
   <div class="home-prayer-widget" role="link" tabindex="0" onclick="openPrayerTimesPage(event)" onkeydown="openPrayerTimesPageFromKeyboard(event)" aria-label="Открыть страницу времени молитв">
     <div class="home-prayer-top">
-      <div class="home-prayer-kicker">Sonraki namaz</div>
-      <div class="home-prayer-location" id="homePrayerLocation">Taşkent, Özbekistan</div>
+      <div class="home-prayer-kicker">Следующий намаз</div>
+      <div class="home-prayer-location" id="homePrayerLocation">Ташкент, Узбекистан</div>
     </div>
 
     <div class="home-prayer-main">
       <div>
-        <div class="home-prayer-name" id="homePrayerName">Fajr</div>
+        <div class="home-prayer-name" id="homePrayerName">Фаджр</div>
         <div class="home-prayer-time" id="homePrayerTime">--:--</div>
-        <div class="home-prayer-meta" id="homePrayerMeta">Namaz vakitleri yükleniyor...</div>
+        <div class="home-prayer-meta" id="homePrayerMeta">Загрузка времени молитв...</div>
       </div>
       <div class="home-prayer-countdown">
-        <div class="home-prayer-countdown-label">Kalan süre</div>
+        <div class="home-prayer-countdown-label">Через</div>
         <div id="homePrayerCountdown">--:--:--</div>
       </div>
     </div>
 
     <div class="home-prayer-actions">
-      <div class="home-prayer-note"><span>Tüm vakitler</span><span class="home-prayer-arrow" aria-hidden="true">→</span></div>
-      <button class="home-prayer-share-btn" type="button" onclick="sharePrayerTimes(event)" aria-label="Namaz vakitlerini paylaş" title="Namaz vakitlerini paylaş">
+      <div class="home-prayer-note"><span>Полное расписание</span><span class="home-prayer-arrow" aria-hidden="true">→</span></div>
+      <button class="home-prayer-share-btn" type="button" onclick="sharePrayerTimes(event)" aria-label="Поделиться временами намазов" title="Поделиться временами намазов">
         <svg viewBox="0 0 24 24" aria-hidden="true">
           <path d="M18 16.08c-.76 0-1.44.3-1.96.77L8.91 12.7c.05-.23.09-.46.09-.7s-.04-.47-.09-.7l7.05-4.11A2.99 2.99 0 1 0 15 5c0 .24.04.47.09.7L8.04 9.81A3 3 0 1 0 8.04 14.2l7.12 4.18c-.04.2-.06.41-.06.62a2.9 2.9 0 1 0 2.9-2.92z"/>
         </svg>
@@ -2220,39 +2267,43 @@ Zilkade ayında amellerini koru, fazlalıkları azalt ve zikri artır — bu, ö
 
 
 <div class="lang-change">
-<a href="#" onclick="changeLanguageChoice(); return false;">Dili değiştir</a>
+<a href="#" onclick="changeLanguageChoice(); return false;">Сменить язык</a>
 </div>
 
 <div class="install-box" id="installBox">
-<button id="installBtn" class="install-btn" type="button">Uygulamayı yükle</button>
+<button id="installBtn" class="install-btn" type="button">Установить приложение</button>
 </div>
 
 
 <section class="today-hub" aria-label="Bugün BarakaWay’de">
   <div class="today-hub-head">
     <div class="today-hub-kicker">Bugün BarakaWay’de</div>
-    <h2 class="today-hub-title">Her gün — yeni bir fayda, yeni bir zikir ve Allah’a ﷻ doğru küçük bir adım</h2>
+    <h2 class="today-hub-title">Her gün yeni bir fayda, yeni bir zikir ve Allah’a ﷻ bir adım daha yakın.</h2>
   </div>
   <div class="today-hub-grid">
     <a class="today-action" id="dailyArticleLink" href="articles-tr.html">
       <div class="today-action-top"><div class="today-action-icon">📝</div><div class="today-action-arrow">→</div></div>
-      <div><div class="today-action-title">Faydalı makale</div><div class="today-action-text" id="dailyArticleTitle">Bugünün makalesini aç.</div></div>
+      <div><div class="today-action-title">Faydalı makale</div><div class="today-action-text" id="dailyArticleTitle">Günün makalesini aç.</div></div>
     </a>
     <a class="today-action" href="adhkar-tr.html">
       <div class="today-action-top"><div class="today-action-icon">🌿</div><div class="today-action-arrow">→</div></div>
-      <div><div class="today-action-title" id="currentAdhkarTitle">Şu anki zikir</div><div class="today-action-text" id="currentAdhkarText">Günün bu vaktine uygun zikir.</div></div>
+      <div><div class="today-action-title" id="currentAdhkarTitle">Şu anki zikir</div><div class="today-action-text" id="currentAdhkarText">Günün vaktine uygun zikir.</div></div>
     </a>
     <div class="today-action today-counter-action" id="allahNameCounterCard" role="button" tabindex="0" aria-label="Allah’ın ismini tekrar sayacı">
       <div class="today-action-top"><div class="today-action-icon">☝️</div><div class="today-action-arrow" id="allahNameCounterValue">0/100</div></div>
       <div>
         <div class="today-action-title" id="allahNameToday">Allah’ın ismi</div>
-        <div class="today-action-text">Karta dokun ve 100 kez tekrar et.</div>
+        <div class="today-action-text">Anlamını oku ve 100 tekrar için karta dokun.</div>
         <div class="today-counter-track"><div class="today-counter-fill" id="allahNameCounterFill"></div></div>
       </div>
     </div>
-    <div class="today-action today-static-action" aria-label="Günlük hedef">
-      <div class="today-action-top"><div class="today-action-icon">🎯</div><div class="today-action-arrow">•</div></div>
-      <div><div class="today-action-title">Günlük hedef</div><div class="today-action-text" id="dailyPracticeText">Gün bitmeden Allah için sessiz bir amel.</div></div>
+    <div class="today-action today-goal-action" id="dailyGoalCard" role="button" tabindex="0" aria-label="Günlük hedef">
+      <div class="today-action-top"><div class="today-action-icon">🎯</div><div class="today-action-arrow" id="dailyGoalStatus">•</div></div>
+      <div>
+        <div class="today-action-title">Günlük hedef</div>
+        <div class="today-action-text" id="dailyPracticeText">Sessizce, sözsüz ve gösterişsiz bir iyilik yap</div>
+        <div class="today-action-text" style="opacity:.6;margin-top:4px;">yapınca işaretle</div>
+      </div>
     </div>
   </div>
 </section>
@@ -2265,28 +2316,28 @@ Zilkade ayında amellerini koru, fazlalıkları azalt ve zikri artır — bu, ö
 <div class="premium-resource-grid">
   <a class="premium-resource-card" href="names-tr.html">
     <div class="premium-resource-icon">☝️</div>
-    <div><div class="premium-resource-title">99 names</div><div class="premium-resource-text">Anlamlar, tefekkür ve imanı güçlendirme.</div></div>
+    <div><div class="premium-resource-title">99 names</div><div class="premium-resource-text">Смыслы, размышление и укрепление имана.</div></div>
   </a>
   <a class="premium-resource-card" href="qibla-tr.html">
     <div class="premium-resource-icon">🧭</div>
-    <div><div class="premium-resource-title">Qibla</div><div class="premium-resource-text">Namaz için hızlı yön.</div></div>
+    <div><div class="premium-resource-title">Qibla</div><div class="premium-resource-text">Быстрое направление для молитвы.</div></div>
   </a>
   <a class="premium-resource-card" href="prophets-duas-tr.html">
     <div class="premium-resource-icon">🤲</div>
-    <div><div class="premium-resource-title">Duas</div><div class="premium-resource-text">Anlam ve edep ile dualar.</div></div>
+    <div><div class="premium-resource-title">Duas</div><div class="premium-resource-text">Дуа с правильным смыслом и уважением.</div></div>
   </a>
   <a class="premium-resource-card" href="articles-tr.html">
     <div class="premium-resource-icon">✨</div>
-    <div><div class="premium-resource-title">Articles</div><div class="premium-resource-text">Gürültüsüz kısa faydalı okumalar.</div></div>
+    <div><div class="premium-resource-title">Articles</div><div class="premium-resource-text">Короткие полезные материалы без лишнего шума.</div></div>
   </a>
 </div>
 
 <div class="about-project-card">
   <div class="about-project-title">BarakaWay hakkında</div>
-  <div class="about-project-text">Proje, prensipler ve anonimliğin nedeni tek bir sakin güven bloğunda toplandı. Kullanıcı ana ekranda dağınık bağlantılar olmadan fikri anlar.</div>
+  <div class="about-project-text">Proje hakkında, принципы и причина анонимности собраны в один спокойный доверительный блок. Пользователь понимает идею без лишних отдельных ссылок на главном экране.</div>
   <div class="about-project-actions">
     <a href="about-tr.html">Proje hakkında</a>
-    <a href="principles-tr.html">Prensipler</a>
+    <a href="principles-tr.html">İlkeler</a>
     <a href="why-anonymous-tr.html">Neden anonim</a>
   </div>
 </div>
@@ -2299,7 +2350,7 @@ Zilkade ayında amellerini koru, fazlalıkları azalt ve zikri artır — bu, ö
   <div class="share-sheet" role="dialog" aria-modal="true" aria-labelledby="shareTitle">
     <div class="share-handle"></div>
     <div class="share-title" id="shareTitle">Uygulamayı paylaş</div>
-    <div class="share-subtitle">Paylaşmak için yöntem seçin</div>
+    <div class="share-subtitle">Uygulamayı nasıl paylaşacağınızı seçin</div>
     <div class="share-grid">
       <button class="share-action share-telegram" type="button" data-share="telegram"><div class="share-icon">T</div><span>Telegram</span></button>
       <button class="share-action share-whatsapp" type="button" data-share="whatsapp"><div class="share-icon">W</div><span>WhatsApp</span></button>
@@ -2307,26 +2358,26 @@ Zilkade ayında amellerini koru, fazlalıkları azalt ve zikri artır — bu, ö
       <button class="share-action share-x" type="button" data-share="x"><div class="share-icon">X</div><span>X</span></button>
       <button class="share-action share-linkedin" type="button" data-share="linkedin"><div class="share-icon">in</div><span>LinkedIn</span></button>
       <button class="share-action share-email" type="button" data-share="email"><div class="share-icon">@</div><span>Email</span></button>
-      <button class="share-action share-copy" type="button" data-share="copy"><div class="share-icon">⧉</div><span>Bağlantıyı kopyala</span></button>
-      <button class="share-action share-more" type="button" data-share="more"><div class="share-icon">⋯</div><span>Daha fazla</span></button>
+      <button class="share-action share-copy" type="button" data-share="copy"><div class="share-icon">⧉</div><span>Копировать ссылку</span></button>
+      <button class="share-action share-more" type="button" data-share="more"><div class="share-icon">⋯</div><span>Ещё</span></button>
     </div>
-    <div class="share-copy-msg" id="shareCopyMsg">Bağlantı kopyalandı</div>
+    <div class="share-copy-msg" id="shareCopyMsg">Ссылка на приложение скопирована.</div>
     <button class="share-close" id="shareCloseBtn" type="button">Kapat</button>
   </div>
 </div>
 
 <div class="install-help-overlay" id="installHelpOverlay" aria-hidden="true">
   <div class="install-help-sheet" role="dialog" aria-modal="true" aria-labelledby="installHelpTitle">
-    <div class="install-help-title" id="installHelpTitle">Uygulamayı yükle</div>
-    <div class="install-help-text">Kurulum penceresi görünmezse aşağıdaki adımları kullanın.</div>
+    <div class="install-help-title" id="installHelpTitle">Установить приложение</div>
+    <div class="install-help-text">Если системное окно установки не появилось, используйте действия ниже.</div>
     <ol class="install-help-steps">
-      <li>Android’de sayfayı harici tarayıcıda açın ve oradan yükleyin.</li>
-      <li>iPhone’da sayfayı Safari’de açın.</li>
-      <li>Ardından “Paylaş” → “Ana ekrana ekle” seçin.</li>
+      <li>На Android откройте страницу во внешнем браузере и установите приложение там.</li>
+      <li>На iPhone откройте страницу в Safari.</li>
+      <li>Затем выберите «Поделиться» → «На экран Домой».</li>
     </ol>
     <div class="install-help-actions">
-      <button class="install-help-primary" id="installHelpPrimaryBtn" type="button">Tarayıcıda aç</button>
-      <button class="install-help-secondary" id="installHelpCopyBtn" type="button">Bağlantıyı kopyala</button>
+      <button class="install-help-primary" id="installHelpPrimaryBtn" type="button">Открыть в браузере</button>
+      <button class="install-help-secondary" id="installHelpCopyBtn" type="button">Скопировать ссылку</button>
     </div>
     <button class="install-help-close" id="installHelpCloseBtn" type="button">Kapat</button>
   </div>
@@ -2343,18 +2394,18 @@ function isAndroid(){return /Android/i.test(navigator.userAgent||"");}
 function isIOS(){return /iPhone|iPad|iPod/i.test(navigator.userAgent||"");}
 function isInAppBrowser(){const ua=navigator.userAgent||"";return /(Telegram|FBAN|FBAV|Instagram|Line|wv)/i.test(ua);}
 async function hasInstalledRelatedApp(){if(typeof navigator.getInstalledRelatedApps!=="function") return false;try{const apps=await navigator.getInstalledRelatedApps();return Array.isArray(apps)&&apps.length>0;}catch(e){return false;}}
-async function updateInstallButtonVisibility(){if(installVisibilityInFlight) return;installVisibilityInFlight=true;const box=document.getElementById("installBox"),btn=document.getElementById("installBtn"),brandTrigger=document.getElementById("brandInstallTrigger"),brandHint=document.getElementById("brandInstallHint");if(!box||!btn){installVisibilityInFlight=false;return;}let hide=isStandaloneMode()?true:await hasInstalledRelatedApp();box.style.display=hide?"none":"block";btn.textContent="Uygulamayı yükle";if(brandTrigger){brandTrigger.classList.toggle("install-trigger",!hide);}if(brandHint){brandHint.classList.toggle("is-visible",!hide&&window.innerWidth<=700);}installVisibilityInFlight=false;}
+async function updateInstallButtonVisibility(){if(installVisibilityInFlight) return;installVisibilityInFlight=true;const box=document.getElementById("installBox"),btn=document.getElementById("installBtn"),brandTrigger=document.getElementById("brandInstallTrigger"),brandHint=document.getElementById("brandInstallHint");if(!box||!btn){installVisibilityInFlight=false;return;}let hide=isStandaloneMode()?true:await hasInstalledRelatedApp();box.style.display=hide?"none":"block";btn.textContent="Установить приложение";if(brandTrigger){brandTrigger.classList.toggle("install-trigger",!hide);}if(brandHint){brandHint.classList.toggle("is-visible",!hide&&window.innerWidth<=700);}installVisibilityInFlight=false;}
 function openCurrentPageInExternalBrowser(){const url=window.location.href;if(isAndroid()){const cleaned=url.replace(/^https?:\/\//,"");window.location.href="intent://"+cleaned+"#Intent;scheme=https;package=com.android.chrome;end";return true;}if(!isIOS()){window.open(url,"_blank","noopener,noreferrer");return true;}return false;}
 function openInstallHelp(){const o=document.getElementById("installHelpOverlay");if(!o) return;o.classList.add("open");o.setAttribute("aria-hidden","false");}
 function closeInstallHelp(){const o=document.getElementById("installHelpOverlay");if(!o) return;o.classList.remove("open");o.setAttribute("aria-hidden","true");}
-async function copyCurrentLink(){const url=getShareUrl(),msg=document.getElementById("shareCopyMsg");try{if(navigator.clipboard&&window.isSecureContext){await navigator.clipboard.writeText(url);}else{const t=document.createElement("textarea");t.value=url;t.setAttribute("readonly","readonly");t.style.position="absolute";t.style.left="-9999px";document.body.appendChild(t);t.select();document.execCommand("copy");document.body.removeChild(t);}if(msg){msg.textContent="Bağlantı kopyalandı";msg.classList.add("show");setTimeout(function(){msg.classList.remove("show");},2200);}}catch(e){window.prompt("Скопируйте ссылку и откройте её во внешнем браузере:",url);}}
+async function copyCurrentLink(){const url=getShareUrl(),msg=document.getElementById("shareCopyMsg");try{if(navigator.clipboard&&window.isSecureContext){await navigator.clipboard.writeText(url);}else{const t=document.createElement("textarea");t.value=url;t.setAttribute("readonly","readonly");t.style.position="absolute";t.style.left="-9999px";document.body.appendChild(t);t.select();document.execCommand("copy");document.body.removeChild(t);}if(msg){msg.textContent="Ссылка на приложение скопирована.";msg.classList.add("show");setTimeout(function(){msg.classList.remove("show");},2200);}}catch(e){window.prompt("Скопируйте ссылку и откройте её во внешнем браузере:",url);}}
 async function installApp(){if(deferredInstallPrompt){try{await deferredInstallPrompt.prompt();const c=await deferredInstallPrompt.userChoice;if(c&&c.outcome==="accepted") setTimeout(updateInstallButtonVisibility,300);}catch(e){}finally{deferredInstallPrompt=null;}return;}if(isStandaloneMode()){updateInstallButtonVisibility();return;}if(isInAppBrowser()){if(isAndroid()){const opened=openCurrentPageInExternalBrowser();if(!opened) openInstallHelp();return;}openInstallHelp();return;}if(isIOS()){openInstallHelp();return;}openInstallHelp();}
 function openShareOverlay(){const o=document.getElementById("shareOverlay"),m=document.getElementById("shareCopyMsg");if(!o) return;o.classList.add("open");o.setAttribute("aria-hidden","false");if(m) m.classList.remove("show");}
 function closeShareOverlay(){const o=document.getElementById("shareOverlay");if(!o) return;o.classList.remove("open");o.setAttribute("aria-hidden","true");}
 async function copyShareLink(){const url=getShareUrl(),msg=document.getElementById("shareCopyMsg");try{if(navigator.clipboard&&window.isSecureContext){await navigator.clipboard.writeText(url);}else{const t=document.createElement("textarea");t.value=url;t.setAttribute("readonly","readonly");t.style.position="absolute";t.style.left="-9999px";document.body.appendChild(t);t.select();document.execCommand("copy");document.body.removeChild(t);}if(msg){msg.classList.add("show");setTimeout(function(){msg.classList.remove("show");},2200);}}catch(e){window.prompt("Скопируйте ссылку и откройте её во внешнем браузере:",url);}}
 function openShareTarget(type){const url=encodeURIComponent(getShareUrl()),text=encodeURIComponent("BarakaWay");let target="";if(type==="telegram") target="https://t.me/share/url?url="+url+"&text="+text;if(type==="whatsapp") target="https://wa.me/?text="+text+"%20"+url;if(type==="facebook") target="https://www.facebook.com/sharer/sharer.php?u="+url;if(type==="x") target="https://twitter.com/intent/tweet?text="+text+"&url="+url;if(type==="linkedin") target="https://www.linkedin.com/sharing/share-offsite/?url="+url;if(type==="email") target="mailto:?subject=Hidden%20Sadaqa&body="+text+"%0A"+url;if(target) window.open(target,"_blank","noopener,noreferrer");}
 async function shareApp(){const data={title:"BarakaWay",text:"BarakaWay",url:getShareUrl()};if(navigator.share){try{await navigator.share(data);return;}catch(e){}}openShareOverlay();}
-async function sharePrayerTimes(event){if(event){event.preventDefault();event.stopPropagation();}const text=typeof window.buildPrayerTimesShareText==="function"?window.buildPrayerTimesShareText():"BarakaWay\nNamaz vakitleri";if(navigator.share){try{await navigator.share({title:"Namaz vakitleri",text:text});return;}catch(e){}}try{if(navigator.clipboard&&window.isSecureContext){await navigator.clipboard.writeText(text);}else{const t=document.createElement("textarea");t.value=text;t.setAttribute("readonly","readonly");t.style.position="absolute";t.style.left="-9999px";document.body.appendChild(t);t.select();document.execCommand("copy");document.body.removeChild(t);}alert("Namaz vakitleri kopyalandı. Artık mesajlaşma uygulamasında gönderebilirsiniz.");}catch(e){window.prompt("Namaz vakitlerini kopyalayın:",text);}}
+async function sharePrayerTimes(event){if(event){event.preventDefault();event.stopPropagation();}const text=typeof window.buildPrayerTimesShareText==="function"?window.buildPrayerTimesShareText():"BarakaWay\nВремена намазов";if(navigator.share){try{await navigator.share({title:"Времена намазов",text:text});return;}catch(e){}}try{if(navigator.clipboard&&window.isSecureContext){await navigator.clipboard.writeText(text);}else{const t=document.createElement("textarea");t.value=text;t.setAttribute("readonly","readonly");t.style.position="absolute";t.style.left="-9999px";document.body.appendChild(t);t.select();document.execCommand("copy");document.body.removeChild(t);}alert("Времена намазов скопированы. Теперь можно отправить их в мессенджере.");}catch(e){window.prompt("Скопируйте времена намазов:",text);}}
 window.addEventListener("beforeinstallprompt",function(e){e.preventDefault();deferredInstallPrompt=e;updateInstallButtonVisibility();});
 window.addEventListener("appinstalled",function(){deferredInstallPrompt=null;updateInstallButtonVisibility();});
 window.addEventListener("pageshow",function(){updateInstallButtonVisibility();});
@@ -2489,11 +2540,11 @@ window.addEventListener("DOMContentLoaded",function(){const installBtn=document.
   if(!elName || !elTime || !elMeta || !elCountdown || !elLocation) return;
 
   const UI = {
-    names: {Fajr:'Fajr', Dhuhr:'Зухр', Asr:'Аср', Maghrib:'Магриб', Isha:'Иша'},
+    names: {Fajr:'Фаджр', Dhuhr:'Зухр', Asr:'Аср', Maghrib:'Магриб', Isha:'Иша'},
     at: 'в',
     startsIn: 'через',
-    loading: 'Namaz vakitleri yükleniyor...',
-    fallbackLocation: 'Taşkent, Özbekistan'
+    loading: 'Загрузка времени молитв...',
+    fallbackLocation: 'Ташкент, Узбекистан'
   };
 
   let nextPrayerTimer = null;
@@ -2581,7 +2632,7 @@ window.addEventListener("DOMContentLoaded",function(){const installBtn=document.
       setCountdown(next.time);
     }catch(_){
       elLocation.textContent = UI.fallbackLocation;
-      elName.textContent = 'Fajr';
+      elName.textContent = 'Фаджр';
       elTime.textContent = '--:--';
       elMeta.textContent = UI.loading;
       elCountdown.textContent = '--:--:--';
@@ -2594,11 +2645,11 @@ window.addEventListener("DOMContentLoaded",function(){const installBtn=document.
     const clean = (value) => String(value || '--:--').split(' ')[0].slice(0,5);
     return [
       'BarakaWay',
-      "Namaz vakitleri",
+      "Времена намазов",
       `${state.location || UI.fallbackLocation}${state.date ? ' — ' + state.date : ''}`,
       '',
-      `Fajr: ${clean(timings.Fajr)}`,
-      `Güneş: ${clean(timings.Sunrise)}`,
+      `Фаджр: ${clean(timings.Fajr)}`,
+      `Восход: ${clean(timings.Sunrise)}`,
       `Зухр: ${clean(timings.Dhuhr)}`,
       `Аср: ${clean(timings.Asr)}`,
       `Магриб: ${clean(timings.Maghrib)}`,
@@ -2613,52 +2664,271 @@ window.addEventListener("DOMContentLoaded",function(){const installBtn=document.
 </script>
 
 
+<script>
+(function(){
+  function getLocalDateKey(date){
+    const year = date.getFullYear();
+    const month = String(date.getMonth() + 1).padStart(2,'0');
+    const day = String(date.getDate()).padStart(2,'0');
+    return year + '-' + month + '-' + day;
+  }
+
+  function getDaysSince(dateString){
+    const start = new Date(dateString + 'T00:00:00');
+    const now = new Date();
+    const today = new Date(now.getFullYear(), now.getMonth(), now.getDate());
+    return Math.max(0, Math.floor((today - start) / 86400000));
+  }
+
+  const today = new Date();
+  const todayKey = getLocalDateKey(today);
+  const hour = today.getHours();
+
+  /*
+    Система статьи дня:
+    1) Добавляешь новую статью в массив articles в конец списка.
+    2) Увеличивать отдельный счётчик не нужно.
+    3) Если новая статья добавлена сегодня и очередь уже дошла до конца старого списка,
+       она появится сразу. Если новых статей нет — ротация продолжит показывать старые статьи.
+    Для полного автоматического обнаружения новых файлов нужен отдельный JSON/manifest или backend.
+  */
+  const articleStartDate = '2026-04-24';
+  const articles = [
+    {title:'Что такое садака', url:'islamic_articles-tr/001-tr.html'},
+    {title:'Разница между закятом и садака', url:'islamic_articles-tr/002-tr.html'},
+    {title:'Почему скрытая благотворительность важна', url:'islamic_articles-tr/003-tr.html'},
+    {title:'Помощь нуждающимся семьям', url:'islamic_articles-tr/004-tr.html'},
+    {title:'Почему даже один доллар имеет значение', url:'islamic_articles-tr/005-tr.html'},
+    {title:'Sadaka для жилья и помощи с жильём', url:'islamic_articles-tr/006-tr.html'},
+    {title:'Лучшие виды садака в исламе', url:'islamic_articles-tr/007-tr.html'},
+    {title:'Милостыня в месяц Рамадан', url:'islamic_articles-tr/008-tr.html'},
+    {title:'Милостыня в Kur’anе', url:'islamic_articles-tr/009-tr.html'},
+    {title:'Как одна садака изменила жизнь семьи', url:'islamic_articles-tr/010-tr.html'},
+    {title:'Почему помощь семьям важна', url:'islamic_articles-tr/011-tr.html'},
+    {title:'Маленькая помощь — большие изменения', url:'islamic_articles-tr/012-tr.html'},
+    {title:'Награда за садака', url:'islamic_articles-tr/013-tr.html'},
+    {title:'Sadaka и очищение имущества', url:'islamic_articles-tr/014-tr.html'},
+    {title:'Почему мусульмане дают милостыню', url:'islamic_articles-tr/015-tr.html'},
+    {title:'Забота о бедных в исламе', url:'islamic_articles-tr/016-tr.html'},
+    {title:'Ответственность мусульман помогать другим', url:'islamic_articles-tr/017-tr.html'},
+    {title:'Справедливость и милосердие в исламе', url:'islamic_articles-tr/018-tr.html'},
+    {title:'Как благотворительность приносит надежду семьям', url:'islamic_articles-tr/019-tr.html'},
+    {title:'Помощь детям через садака', url:'islamic_articles-tr/020-tr.html'},
+    {title:'Помощь вдовам в исламе', url:'islamic_articles-tr/021-tr.html'},
+    {title:'Срочная помощь в исламе', url:'islamic_articles-tr/022-tr.html'},
+    {title:'Помощь едой в исламе', url:'islamic_articles-tr/023-tr.html'},
+    {title:'Куда идут ваши пожертвования', url:'islamic_articles-tr/024-tr.html'},
+    {title:'Günün yazısı №25', url:'islamic_articles-tr/025-tr.html'},
+    {title:'Günün yazısı №26', url:'islamic_articles-tr/026-tr.html'},
+    {title:'Günün yazısı №27', url:'islamic_articles-tr/027-tr.html'},
+    {title:'Günün yazısı №28', url:'islamic_articles-tr/028-tr.html'},
+    {title:'Günün yazısı №29', url:'islamic_articles-tr/029-tr.html'},
+    {title:'Günün yazısı №30', url:'islamic_articles-tr/030-tr.html'}
+  ];
+
+  const names = [
+    {name:'Ар-Рахман', meaning:'Всемилостивый: Его милость охватывает всё творение.'},
+    {name:'Ар-Рахим', meaning:'Особо Милующий: проявляет особую милость к верующим.'},
+    {name:'Аль-Малик', meaning:'Владыка: истинный Царь и Полновластный Господь.'},
+    {name:'Аль-Куддус', meaning:'Святой: абсолютно чистый от любого недостатка.'},
+    {name:'Ас-Салям', meaning:'Источник мира и безопасности, свободный от несовершенства.'},
+    {name:'Аль-Му’мин', meaning:'Дарующий безопасность и подтверждающий истину.'},
+    {name:'Аль-Мухаймин', meaning:'Хранитель и Наблюдающий за всем.'},
+    {name:'Аль-Азиз', meaning:'Могущественный и Непобедимый, обладающий полной силой.'},
+    {name:'Аль-Джаббар', meaning:'Восстанавливающий, Исправляющий и Обладающий властью.'},
+    {name:'Аль-Мутакаббир', meaning:'Величественный: Ему одному принадлежит истинное величие.'},
+    {name:'Аль-Халик', meaning:'Творец: создаёт всё по совершенной мудрости.'},
+    {name:'Аль-Бари', meaning:'Создающий без образца и приводящий творение к бытию.'},
+    {name:'Аль-Мусаввир', meaning:'Придающий форму каждому созданию.'},
+    {name:'Аль-Гаффар', meaning:'Многократно Прощающий грехи кающимся.'},
+    {name:'Аль-Каххар', meaning:'Всепокоряющий: всё находится под Его властью.'},
+    {name:'Аль-Ваххаб', meaning:'Дарующий без счёта и без нужды в ответе.'},
+    {name:'Ар-Раззак', meaning:'Наделяющий пропитанием каждое создание.'},
+    {name:'Аль-Фаттах', meaning:'Открывающий двери милости, знания и решения.'},
+    {name:'Аль-Алим', meaning:'Всезнающий: знает явное, скрытое и будущее.'},
+    {name:'Аль-Кабид', meaning:'Сдерживающий по мудрости то, что должно быть сдержано.'},
+    {name:'Аль-Басит', meaning:'Расширяющий милость, удел и возможности.'},
+    {name:'Аль-Хафид', meaning:'Унижающий тех, кого унижает по справедливости.'},
+    {name:'Ар-Рафи', meaning:'Возвышающий тех, кого возвышает по мудрости.'},
+    {name:'Аль-Муизз', meaning:'Дарующий честь и силу тому, кому пожелает.'},
+    {name:'Аль-Музилль', meaning:'Лишающий чести тех, кто заслужил унижение.'},
+    {name:'Ас-Сами', meaning:'Всеслышащий: слышит каждую мольбу и каждое слово.'},
+    {name:'Аль-Басир', meaning:'Всевидящий: видит всё явное и скрытое.'},
+    {name:'Аль-Хакам', meaning:'Судья: выносит совершенное и справедливое решение.'},
+    {name:'Аль-Адль', meaning:'Справедливый: Его решения свободны от ظلمa.'},
+    {name:'Аль-Латиф', meaning:'Тонко Милующий: ведёт к благу мягко и незаметно.'}
+  ];
+
+  const goals = [
+    'Sessizce, sözsüz ve gösterişsiz bir iyilik yap.',
+    'Перед важным делом обнови намерение ради Аллаха ﷻ.',
+    'Помоги одному человеку так, чтобы никто не заметил.',
+    'Попроси прощения у Аллаха ﷻ 33 раза спокойно.',
+    'Сделай дуа за родителей и близких.',
+    'Убери одно лишнее действие, которое крадёт время.',
+    'Поблагодари Аллаха ﷻ за одну конкретную милость.'
+  ];
+
+  const articleDay = getDaysSince(articleStartDate);
+  const articleIndex = articles.length ? articleDay % articles.length : 0;
+  const article = articles[articleIndex];
+  const articleLink = document.getElementById('dailyArticleLink');
+  const articleTitle = document.getElementById('dailyArticleTitle');
+  if(article && articleLink && articleTitle){
+    articleLink.href = article.url;
+    articleTitle.textContent = article.title;
+  }
+
+  const adhkarLink = document.getElementById('currentAdhkarLink');
+  const currentAdhkarTitle = document.getElementById('currentAdhkarTitle');
+  const currentAdhkarText = document.getElementById('currentAdhkarText');
+  if(currentAdhkarTitle && currentAdhkarText){
+    if(hour >= 4 && hour < 11){
+      currentAdhkarTitle.textContent = 'Sabah zikri';
+      currentAdhkarText.textContent = 'Откроется сразу раздел утренних азкаров.';
+      if(adhkarLink) adhkarLink.href = 'adhkar-tr.html#morning';
+    }else if(hour >= 16 && hour < 22){
+      currentAdhkarTitle.textContent = 'Akşam zikri';
+      currentAdhkarText.textContent = 'Откроется сразу раздел вечерних азкаров.';
+      if(adhkarLink) adhkarLink.href = 'adhkar-tr.html#evening';
+    }else if(hour < 4){
+      currentAdhkarTitle.textContent = 'Sonraki zikir';
+      currentAdhkarText.textContent = 'Ближайший — утренний азкар после Фаджра.';
+      if(adhkarLink) adhkarLink.href = 'adhkar-tr.html#morning';
+    }else{
+      currentAdhkarTitle.textContent = 'Sonraki zikir';
+      currentAdhkarText.textContent = 'Ближайший — вечерний азкар ближе к Магрибу.';
+      if(adhkarLink) adhkarLink.href = 'adhkar-tr.html#evening';
+    }
+  }
+
+  const name = names[articleDay % names.length];
+  const nameEl = document.getElementById('allahNameToday');
+  const meaningEl = document.getElementById('allahNameMeaning');
+  const card = document.getElementById('allahNameCounterCard');
+  const valueEl = document.getElementById('allahNameCounterValue');
+  const fillEl = document.getElementById('allahNameCounterFill');
+  const storageKey = 'barakaway_name_counter_tr_' + todayKey;
+  let count = Math.max(0, Math.min(100, parseInt(localStorage.getItem(storageKey) || '0', 10) || 0));
+
+  function renderCounter(){
+    if(nameEl) nameEl.textContent = name.name;
+    if(meaningEl) meaningEl.textContent = name.meaning;
+    if(valueEl) valueEl.textContent = count + '/100';
+    if(fillEl) fillEl.style.width = count + '%';
+    if(card) card.setAttribute('aria-label', name.name + ': ' + count + ' из 100 повторений. ' + name.meaning);
+  }
+
+  function incrementCounter(){
+    count = count >= 100 ? 100 : count + 1;
+    localStorage.setItem(storageKey, String(count));
+    renderCounter();
+  }
+
+  if(card){
+    card.addEventListener('click', incrementCounter);
+    card.addEventListener('keydown', function(e){
+      if(e.key === 'Enter' || e.key === ' '){
+        e.preventDefault();
+        incrementCounter();
+      }
+    });
+  }
+  renderCounter();
+
+  const practice = document.getElementById('dailyPracticeText');
+  const goalCard = document.getElementById('dailyGoalCard');
+  const goalStatus = document.getElementById('dailyGoalStatus');
+  const goalKey = 'barakaway_daily_goal_done_tr_' + todayKey;
+  let goalDone = localStorage.getItem(goalKey) === '1';
+
+  if(practice) practice.textContent = goals[articleDay % goals.length];
+
+  function renderGoal(){
+    if(!goalCard) return;
+    goalCard.classList.toggle('goal-done', goalDone);
+    if(goalDone){
+      goalCard.style.setProperty('--goal-red-opacity','0');
+      goalCard.classList.remove('goal-urgent');
+      if(goalStatus) goalStatus.textContent = '✓';
+      return;
+    }
+
+    const minutesNow = hour * 60 + today.getMinutes();
+    const progress = Math.min(1, Math.max(0, minutesNow / 1440));
+    const redOpacity = (0.05 + progress * 0.82).toFixed(2);
+    goalCard.style.setProperty('--goal-red-opacity', redOpacity);
+    goalCard.classList.toggle('goal-urgent', hour >= 18);
+    if(goalStatus) goalStatus.textContent = hour >= 18 ? '!' : '•';
+  }
+
+  function completeGoal(){
+    goalDone = true;
+    localStorage.setItem(goalKey,'1');
+    renderGoal();
+  }
+
+  if(goalCard){
+    goalCard.addEventListener('click', completeGoal);
+    goalCard.addEventListener('keydown', function(e){
+      if(e.key === 'Enter' || e.key === ' '){
+        e.preventDefault();
+        completeGoal();
+      }
+    });
+  }
+
+  renderGoal();
+})();
+</script>
+
+
 
 <script>
 (function(){
   const todayKey = new Date().toISOString().slice(0,10);
   const dayNumber = Math.floor(Date.now() / 86400000);
   const articles = [
-    {title:'Günün makalesi #1', url:'islamic_articles-tr/001-tr.html'},
-    {title:'Günün makalesi #2', url:'islamic_articles-tr/002-tr.html'},
-    {title:'Günün makalesi #3', url:'islamic_articles-tr/003-tr.html'},
-    {title:'Günün makalesi #4', url:'islamic_articles-tr/004-tr.html'},
-    {title:'Günün makalesi #5', url:'islamic_articles-tr/005-tr.html'},
-    {title:'Günün makalesi #6', url:'islamic_articles-tr/006-tr.html'},
-    {title:'Günün makalesi #7', url:'islamic_articles-tr/007-tr.html'},
-    {title:'Günün makalesi #8', url:'islamic_articles-tr/008-tr.html'},
-    {title:'Günün makalesi #9', url:'islamic_articles-tr/009-tr.html'},
-    {title:'Günün makalesi #10', url:'islamic_articles-tr/010-tr.html'},
-    {title:'Günün makalesi #11', url:'islamic_articles-tr/011-tr.html'},
-    {title:'Günün makalesi #12', url:'islamic_articles-tr/012-tr.html'},
-    {title:'Günün makalesi #13', url:'islamic_articles-tr/013-tr.html'},
-    {title:'Günün makalesi #14', url:'islamic_articles-tr/014-tr.html'},
-    {title:'Günün makalesi #15', url:'islamic_articles-tr/015-tr.html'},
-    {title:'Günün makalesi #16', url:'islamic_articles-tr/016-tr.html'},
-    {title:'Günün makalesi #17', url:'islamic_articles-tr/017-tr.html'},
-    {title:'Günün makalesi #18', url:'islamic_articles-tr/018-tr.html'},
-    {title:'Günün makalesi #19', url:'islamic_articles-tr/019-tr.html'},
-    {title:'Günün makalesi #20', url:'islamic_articles-tr/020-tr.html'},
-    {title:'Günün makalesi #21', url:'islamic_articles-tr/021-tr.html'},
-    {title:'Günün makalesi #22', url:'islamic_articles-tr/022-tr.html'},
-    {title:'Günün makalesi #23', url:'islamic_articles-tr/023-tr.html'},
-    {title:'Günün makalesi #24', url:'islamic_articles-tr/024-tr.html'},
-    {title:'Günün makalesi #25', url:'islamic_articles-tr/025-tr.html'},
-    {title:'Günün makalesi #26', url:'islamic_articles-tr/026-tr.html'},
-    {title:'Günün makalesi #27', url:'islamic_articles-tr/027-tr.html'},
-    {title:'Günün makalesi #28', url:'islamic_articles-tr/028-tr.html'},
-    {title:'Günün makalesi #29', url:'islamic_articles-tr/029-tr.html'},
-    {title:'Günün makalesi #30', url:'islamic_articles-tr/030-tr.html'}
+    {title:'Günün yazısı №1', url:'islamic_articles-tr/001-tr.html'},
+    {title:'Günün yazısı №2', url:'islamic_articles-tr/002-tr.html'},
+    {title:'Günün yazısı №3', url:'islamic_articles-tr/003-tr.html'},
+    {title:'Günün yazısı №4', url:'islamic_articles-tr/004-tr.html'},
+    {title:'Günün yazısı №5', url:'islamic_articles-tr/005-tr.html'},
+    {title:'Günün yazısı №6', url:'islamic_articles-tr/006-tr.html'},
+    {title:'Günün yazısı №7', url:'islamic_articles-tr/007-tr.html'},
+    {title:'Günün yazısı №8', url:'islamic_articles-tr/008-tr.html'},
+    {title:'Günün yazısı №9', url:'islamic_articles-tr/009-tr.html'},
+    {title:'Günün yazısı №10', url:'islamic_articles-tr/010-tr.html'},
+    {title:'Günün yazısı №11', url:'islamic_articles-tr/011-tr.html'},
+    {title:'Günün yazısı №12', url:'islamic_articles-tr/012-tr.html'},
+    {title:'Günün yazısı №13', url:'islamic_articles-tr/013-tr.html'},
+    {title:'Günün yazısı №14', url:'islamic_articles-tr/014-tr.html'},
+    {title:'Günün yazısı №15', url:'islamic_articles-tr/015-tr.html'},
+    {title:'Günün yazısı №16', url:'islamic_articles-tr/016-tr.html'},
+    {title:'Günün yazısı №17', url:'islamic_articles-tr/017-tr.html'},
+    {title:'Günün yazısı №18', url:'islamic_articles-tr/018-tr.html'},
+    {title:'Günün yazısı №19', url:'islamic_articles-tr/019-tr.html'},
+    {title:'Günün yazısı №20', url:'islamic_articles-tr/020-tr.html'},
+    {title:'Günün yazısı №21', url:'islamic_articles-tr/021-tr.html'},
+    {title:'Günün yazısı №22', url:'islamic_articles-tr/022-tr.html'},
+    {title:'Günün yazısı №23', url:'islamic_articles-tr/023-tr.html'},
+    {title:'Günün yazısı №24', url:'islamic_articles-tr/024-tr.html'},
+    {title:'Günün yazısı №25', url:'islamic_articles-tr/025-tr.html'},
+    {title:'Günün yazısı №26', url:'islamic_articles-tr/026-tr.html'},
+    {title:'Günün yazısı №27', url:'islamic_articles-tr/027-tr.html'},
+    {title:'Günün yazısı №28', url:'islamic_articles-tr/028-tr.html'},
+    {title:'Günün yazısı №29', url:'islamic_articles-tr/029-tr.html'},
+    {title:'Günün yazısı №30', url:'islamic_articles-tr/030-tr.html'}
   ];
-  const names = ['Ar-Rahman', 'Ar-Rahim', 'Al-Malik', 'Al-Quddus', 'As-Salam', 'Al-Mu’min', 'Al-Muhaymin', 'Al-Aziz', 'Al-Jabbar', 'Al-Mutakabbir', 'Al-Khaliq', 'Al-Bari', 'Al-Musawwir', 'Al-Ghaffar', 'Al-Qahhar', 'Al-Wahhab', 'Ar-Razzaq', 'Al-Fattah', 'Al-Alim', 'Al-Qabid', 'Al-Basit', 'Al-Khafid', 'Ar-Rafi', 'Al-Muizz', 'Al-Mudhill', 'As-Sami', 'Al-Basir', 'Al-Hakam', 'Al-Adl', 'Al-Latif', 'Al-Khabir', 'Al-Halim', 'Al-Azim', 'Al-Ghafur', 'Ash-Shakur', 'Al-Ali', 'Al-Kabir', 'Al-Hafiz', 'Al-Muqit', 'Al-Hasib'];
+  const names = ['Ар-Рахман', 'Ар-Рахим', 'Аль-Малик', 'Аль-Куддус', 'Ас-Салям', 'Аль-Му’мин', 'Аль-Мухаймин', 'Аль-Азиз', 'Аль-Джаббар', 'Аль-Мутакаббир', 'Аль-Халик', 'Аль-Бари', 'Аль-Мусаввир', 'Аль-Гаффар', 'Аль-Каххар', 'Аль-Ваххаб', 'Ар-Раззак', 'Аль-Фаттах', 'Аль-Алим', 'Аль-Кабид', 'Аль-Басит', 'Аль-Хафид', 'Ар-Рафи', 'Аль-Муизз', 'Аль-Музилль', 'Ас-Сами', 'Аль-Басир', 'Аль-Хакам', 'Аль-Адль', 'Аль-Латиф', 'Аль-Хабир', 'Аль-Халим', 'Аль-Азым', 'Аль-Гафур', 'Аш-Шакур', 'Аль-Алий', 'Аль-Кабир', 'Аль-Хафиз', 'Аль-Мукит', 'Аль-Хасиб'];
   const goals = [
-    'Bir önemli işten önce niyetini yenile.',
-    'Bir iyiliği sessizce, gösterişsiz yap.',
-    'Kısa bir metin oku ve bir ders çıkar.',
-    'Allah’tan sakin şekilde 33 kez bağışlanma dile.',
-    'Zamanını çalan bir boş işi bırak.',
-    'Anne-baban ve sevdiklerin için dua et.',
-    'Allah’ın belirli bir nimeti için şükret.'
+    'Перед одним важным делом обнови намерение.',
+    'Sessizce, sözsüz ve gösterişsiz bir iyilik yap.',
+    'Прочитай короткий материал и сохрани один вывод.',
+    'Попроси прощения у Аллаха 33 раза спокойно.',
+    'Убери одно лишнее действие, которое крадёт время.',
+    'Сделай дуа за родителей и близких.',
+    'Поблагодари Аллаха за одну конкретную милость.'
   ];
   const article = articles[dayNumber % articles.length];
   const articleLink = document.getElementById('dailyArticleLink');
@@ -2668,22 +2938,22 @@ window.addEventListener("DOMContentLoaded",function(){const installBtn=document.
   const currentAdhkarTitle = document.getElementById('currentAdhkarTitle');
   const currentAdhkarText = document.getElementById('currentAdhkarText');
   if(currentAdhkarTitle && currentAdhkarText){
-    if(hour >= 4 && hour < 11){ currentAdhkarTitle.textContent = 'Sabah zikri'; currentAdhkarText.textContent = 'Sabah korumasını güçlendirmek için en iyi vakit.'; }
-    else if(hour >= 16 && hour < 22){ currentAdhkarTitle.textContent = 'Akşam zikri'; currentAdhkarText.textContent = 'Gün bitmeden akşam koruması.'; }
-    else{ currentAdhkarTitle.textContent = 'Sonraki zikir'; currentAdhkarText.textContent = hour < 4 ? 'Sonraki — Fecirden sonra sabah zikri.' : 'Sonraki — Magrib’e yakın akşam zikri.'; }
+    if(hour >= 4 && hour < 11){ currentAdhkarTitle.textContent = 'Sabah zikri'; currentAdhkarText.textContent = 'Лучшее время закрепить утреннюю защиту.'; }
+    else if(hour >= 16 && hour < 22){ currentAdhkarTitle.textContent = 'Akşam zikri'; currentAdhkarText.textContent = 'Вечерняя защита перед окончанием дня.'; }
+    else{ currentAdhkarTitle.textContent = 'Sonraki zikir'; currentAdhkarText.textContent = hour < 4 ? 'Ближайший — утренний азкар после Фаджра.' : 'Ближайший — вечерний азкар ближе к Магрибу.'; }
   }
   const name = names[dayNumber % names.length];
   const nameEl = document.getElementById('allahNameToday');
   const card = document.getElementById('allahNameCounterCard');
   const valueEl = document.getElementById('allahNameCounterValue');
   const fillEl = document.getElementById('allahNameCounterFill');
-  const storageKey = 'barakaway_name_counter_tr_' + todayKey;
+  const storageKey = 'barakaway_name_counter_tr_ru_' + todayKey;
   let count = Math.max(0, Math.min(100, parseInt(localStorage.getItem(storageKey) || '0', 10) || 0));
   function renderCounter(){
     if(nameEl) nameEl.textContent = name;
     if(valueEl) valueEl.textContent = count + '/100';
     if(fillEl) fillEl.style.width = count + '%';
-    if(card) card.setAttribute('aria-label', name + ': ' + count + ' 100 tekrardan');
+    if(card) card.setAttribute('aria-label', name + ': ' + count + ' из 100 повторений');
   }
   function incrementCounter(){
     count = count >= 100 ? 0 : count + 1;
@@ -2701,7 +2971,61 @@ window.addEventListener("DOMContentLoaded",function(){const installBtn=document.
 </script>
 
 
-<nav class="bottom-app-nav" aria-label="Uygulama alt menüsü">
+
+<script>
+(function(){
+  const goalCard = document.getElementById('dailyGoalCard');
+  const goalStatus = document.getElementById('dailyGoalStatus');
+  if(!goalCard || !goalStatus) return;
+
+  function localDateKey(date){
+    const y = date.getFullYear();
+    const m = String(date.getMonth() + 1).padStart(2, '0');
+    const d = String(date.getDate()).padStart(2, '0');
+    return y + '-' + m + '-' + d;
+  }
+
+  function updateGoalState(){
+    const now = new Date();
+    const key = 'barakaway_daily_goal_ru_' + localDateKey(now);
+    const done = localStorage.getItem(key) === '1';
+
+    goalCard.classList.toggle('goal-done', done);
+    goalCard.classList.toggle('goal-urgent', !done && now.getHours() >= 18);
+    goalStatus.textContent = done ? '✓' : '•';
+
+    if(done){
+      goalCard.style.setProperty('--goal-red-opacity', '0');
+      goalCard.setAttribute('aria-label', 'Выполнено');
+      return;
+    }
+
+    const minutes = now.getHours() * 60 + now.getMinutes();
+    const opacity = Math.max(0.06, Math.min(0.88, minutes / 1440));
+    goalCard.style.setProperty('--goal-red-opacity', opacity.toFixed(2));
+    goalCard.setAttribute('aria-label', 'Günlük hedef');
+  }
+
+  goalCard.addEventListener('click', function(){
+    const key = 'barakaway_daily_goal_ru_' + localDateKey(new Date());
+    const done = localStorage.getItem(key) === '1';
+    localStorage.setItem(key, done ? '0' : '1');
+    updateGoalState();
+  });
+
+  goalCard.addEventListener('keydown', function(e){
+    if(e.key === 'Enter' || e.key === ' '){
+      e.preventDefault();
+      goalCard.click();
+    }
+  });
+
+  updateGoalState();
+  setInterval(updateGoalState, 60000);
+})();
+</script>
+
+<nav class="bottom-app-nav" aria-label="Нижнее меню приложения">
   <div class="bottom-app-nav-inner">
     <a class="bottom-app-nav-item active" href="home-tr.html" aria-current="page"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 10.8 12 4l8 6.8v9.4A1.8 1.8 0 0 1 18.2 22h-4.7v-6.4h-3V22H5.8A1.8 1.8 0 0 1 4 20.2v-9.4z"/></svg><span class="bottom-app-nav-label">Bugün</span></a>
     <a class="bottom-app-nav-item" href="prayer-times-tr.html"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2.4 5.2 7.8v2.7a7.2 7.2 0 0 0-2.7 5.6V22h19v-5.9a7.2 7.2 0 0 0-2.7-5.6V7.8L12 2.4zm0 2.7 4.7 3.7v.5a7.1 7.1 0 0 0-9.4 0v-.5L12 5.1zM5.5 16.1a6.5 6.5 0 0 1 13 0V20h-3.1v-3.5a3.4 3.4 0 0 0-6.8 0V20H5.5v-3.9z"/></svg><span class="bottom-app-nav-label">Namaz</span></a>

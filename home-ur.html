@@ -1,4 +1,4 @@
-﻿<!--
+<!--
 بِسْمِ ٱللَّٰهِ ٱلرَّحْمَـٰنِ ٱلرَّحِيمِ
 In the name of Allah, the Most Merciful, the Most Compassionate
 -->
@@ -2013,6 +2013,53 @@ html.light-mode .today-static-action{
   border-color:rgba(45,122,70,0.13);
 }
 
+
+.today-goal-action{
+  cursor:pointer;
+  position:relative;
+  overflow:hidden;
+}
+.today-goal-action::after{
+  content:"";
+  position:absolute;
+  inset:0;
+  opacity:var(--goal-red-opacity,0);
+  background:linear-gradient(135deg,rgba(178,34,34,0.06),rgba(255,38,38,0.26));
+  pointer-events:none;
+  transition:opacity .45s ease;
+}
+.today-goal-action > *{
+  position:relative;
+  z-index:1;
+}
+html.dark-mode .today-goal-action{
+  background:linear-gradient(135deg,#1e1d24 0%, #1b2028 50%, #2a1717 100%);
+  border-color:rgba(255,86,86,0.16);
+}
+html.light-mode .today-goal-action{
+  background:linear-gradient(135deg,#ffffff 0%, #fffafa 52%, #fff1f1 100%);
+  border-color:rgba(210,68,68,0.14);
+}
+.today-goal-action.goal-urgent{
+  animation:goalPulse 1.4s ease-in-out infinite;
+}
+.today-goal-action.goal-done{
+  --goal-red-opacity:0 !important;
+  animation:none !important;
+}
+html.dark-mode .today-goal-action.goal-done{
+  background:linear-gradient(135deg,#17261d 0%, #17262a 52%, #143126 100%);
+  border-color:rgba(102,198,128,0.32);
+}
+html.light-mode .today-goal-action.goal-done{
+  background:linear-gradient(135deg,#f7fff9 0%, #ffffff 52%, #eaf8ef 100%);
+  border-color:rgba(45,122,70,0.22);
+}
+@keyframes goalPulse{
+  0%,100%{box-shadow:0 12px 24px rgba(0,0,0,0.14),0 0 0 rgba(210,68,68,0);}
+  50%{box-shadow:0 12px 24px rgba(0,0,0,0.14),0 0 22px rgba(210,68,68,0.28);}
+}
+
 /* FIXED BOTTOM APP NAVIGATION */
 .bottom-app-nav{
   position:fixed;
@@ -2157,17 +2204,17 @@ html.light-mode .bottom-app-nav-item.active{
 <body>
 
 <div class="mobile-top-controls">
-  <button class="icon-btn left" onclick="changeLanguageChoice()" aria-label="زبان تبدیل کریں">
+  <button class="icon-btn left" onclick="changeLanguageChoice()" aria-label="Change language">
     <svg viewBox="0 0 24 24" aria-hidden="true">
       <path d="M12 2a10 10 0 100 20 10 10 0 000-20zm6.92 9h-3.02a15.6 15.6 0 00-1.33-5.01A8.03 8.03 0 0118.92 11zM12 4.04c.89 1.08 1.97 3.22 2.28 6.96H9.72C10.03 7.26 11.11 5.12 12 4.04zM4.99 13h3.02a15.6 15.6 0 001.33 5.01A8.03 8.03 0 014.99 13zM8.1 11H5.08a8.03 8.03 0 014.35-5.01A15.6 15.6 0 008.1 11zm1.62 2h4.56c-.31 3.74-1.39 5.88-2.28 6.96-.89-1.08-1.97-3.22-2.28-6.96zm5.18 5.01A15.6 15.6 0 0015.9 13h3.02a8.03 8.03 0 01-4.02 5.01z"/>
     </svg>
     <span class="ripple"></span>
   </button>
   <div class="theme-toggle-center">
-    <span class="theme-toggle-label">لائٹ موڈ</span>
-    <input type="checkbox" class="theme-switch" id="themeSwitch" aria-label="تھیم تبدیل کریں">
+    <span class="theme-toggle-label">Light mode</span>
+    <input type="checkbox" class="theme-switch" id="themeSwitch" aria-label="Toggle theme">
   </div>
-  <button class="icon-btn right" onclick="shareApp()" aria-label="ایپ شیئر کریں">
+  <button class="icon-btn right" onclick="shareApp()" aria-label="Share app">
     <svg viewBox="0 0 24 24" aria-hidden="true">
       <path d="M18 16a2.99 2.99 0 00-2.39 1.2l-6.7-3.35a3.1 3.1 0 000-1.7l6.7-3.35A3 3 0 1014 6a3.1 3.1 0 00.08.68l-6.7 3.35a3 3 0 100 4.94l6.7 3.35A3 3 0 1018 16z"/>
     </svg>
@@ -2178,7 +2225,7 @@ html.light-mode .bottom-app-nav-item.active{
 <div class="ramadan-wrapper">
 <div class="ramadan-bar">
 <div class="ramadan-text">
-اپنے اعمال کو ذوالقعدہ کے مہینے میں محفوظ رکھو، غیر ضروری چیزیں کم کرو اور ذکر بڑھاؤ — یہ آنے والے سب سے اہم دنوں کی تیاری ہے
+Сохрани свои действия в месяц Зуль-Ка‘да, сократи лишнее и усили зикр - это подготовка к самым важным дням впереди
 </div>
 </div>
 </div>
@@ -2186,30 +2233,30 @@ html.light-mode .bottom-app-nav-item.active{
 <div class="container">
 
 <div class="brand-prayer-hero">
-  <button class="brand-signature" id="brandInstallTrigger" type="button" dir="ltr" style="unicode-bidi:isolate;" aria-label="BarakaWay">
+  <button class="brand-signature" id="brandInstallTrigger" type="button" aria-label="BarakaWay">
     <span class="brand-letter-accent">B</span><span class="brand-letter-main">araka</span><span class="brand-letter-accent">W</span><span class="brand-letter-main">ay</span>
   </button>
-  <div class="home-prayer-widget" role="link" tabindex="0" onclick="openPrayerTimesPage(event)" onkeydown="openPrayerTimesPageFromKeyboard(event)" aria-label="نماز کے اوقات کا صفحہ کھولیں">
+  <div class="home-prayer-widget" role="link" tabindex="0" onclick="openPrayerTimesPage(event)" onkeydown="openPrayerTimesPageFromKeyboard(event)" aria-label="Открыть страницу времени молитв">
     <div class="home-prayer-top">
-      <div class="home-prayer-kicker">اگلی نماز</div>
-      <div class="home-prayer-location" id="homePrayerLocation">تاشقند، ازبکستان</div>
+      <div class="home-prayer-kicker">Следующий намаз</div>
+      <div class="home-prayer-location" id="homePrayerLocation">Ташкент, Узбекистан</div>
     </div>
 
     <div class="home-prayer-main">
       <div>
-        <div class="home-prayer-name" id="homePrayerName">فجر</div>
+        <div class="home-prayer-name" id="homePrayerName">Фаджр</div>
         <div class="home-prayer-time" id="homePrayerTime">--:--</div>
-        <div class="home-prayer-meta" id="homePrayerMeta">نماز کے اوقات لوڈ ہو رہے ہیں...</div>
+        <div class="home-prayer-meta" id="homePrayerMeta">Загрузка времени молитв...</div>
       </div>
       <div class="home-prayer-countdown">
-        <div class="home-prayer-countdown-label">بعد</div>
+        <div class="home-prayer-countdown-label">Через</div>
         <div id="homePrayerCountdown">--:--:--</div>
       </div>
     </div>
 
     <div class="home-prayer-actions">
-      <div class="home-prayer-note"><span>مکمل اوقات</span><span class="home-prayer-arrow" aria-hidden="true">→</span></div>
-      <button class="home-prayer-share-btn" type="button" onclick="sharePrayerTimes(event)" aria-label="نماز کے اوقات شیئر کریں" title="نماز کے اوقات شیئر کریں">
+      <div class="home-prayer-note"><span>Полное расписание</span><span class="home-prayer-arrow" aria-hidden="true">→</span></div>
+      <button class="home-prayer-share-btn" type="button" onclick="sharePrayerTimes(event)" aria-label="Поделиться временами намазов" title="Поделиться временами намазов">
         <svg viewBox="0 0 24 24" aria-hidden="true">
           <path d="M18 16.08c-.76 0-1.44.3-1.96.77L8.91 12.7c.05-.23.09-.46.09-.7s-.04-.47-.09-.7l7.05-4.11A2.99 2.99 0 1 0 15 5c0 .24.04.47.09.7L8.04 9.81A3 3 0 1 0 8.04 14.2l7.12 4.18c-.04.2-.06.41-.06.62a2.9 2.9 0 1 0 2.9-2.92z"/>
         </svg>
@@ -2220,18 +2267,18 @@ html.light-mode .bottom-app-nav-item.active{
 
 
 <div class="lang-change">
-<a href="#" onclick="changeLanguageChoice(); return false;">زبان تبدیل کریں</a>
+<a href="#" onclick="changeLanguageChoice(); return false;">Сменить язык</a>
 </div>
 
 <div class="install-box" id="installBox">
-<button id="installBtn" class="install-btn" type="button">ایپ انسٹال کریں</button>
+<button id="installBtn" class="install-btn" type="button">Установить приложение</button>
 </div>
 
 
 <section class="today-hub" aria-label="آج BarakaWay میں">
   <div class="today-hub-head">
     <div class="today-hub-kicker">آج BarakaWay میں</div>
-    <h2 class="today-hub-title">ہر دن — نئی بھلائی، نیا ذکر اور اللہ ﷻ کے قریب ایک چھوٹا قدم</h2>
+    <h2 class="today-hub-title">ہر دن نیا فائدہ، نیا ذکر، اور اللہ ﷻ کے قریب ایک چھوٹا قدم۔</h2>
   </div>
   <div class="today-hub-grid">
     <a class="today-action" id="dailyArticleLink" href="articles-ur.html">
@@ -2240,19 +2287,23 @@ html.light-mode .bottom-app-nav-item.active{
     </a>
     <a class="today-action" href="adhkar-ur.html">
       <div class="today-action-top"><div class="today-action-icon">🌿</div><div class="today-action-arrow">→</div></div>
-      <div><div class="today-action-title" id="currentAdhkarTitle">ابھی کا ذکر</div><div class="today-action-text" id="currentAdhkarText">دن کے اس وقت کے مطابق ذکر۔</div></div>
+      <div><div class="today-action-title" id="currentAdhkarTitle">اس وقت کا ذکر</div><div class="today-action-text" id="currentAdhkarText">دن کے وقت کے مطابق مناسب اذکار۔</div></div>
     </a>
     <div class="today-action today-counter-action" id="allahNameCounterCard" role="button" tabindex="0" aria-label="اللہ کے نام کی تکرار کا کاؤنٹر">
       <div class="today-action-top"><div class="today-action-icon">☝️</div><div class="today-action-arrow" id="allahNameCounterValue">0/100</div></div>
       <div>
         <div class="today-action-title" id="allahNameToday">اللہ کا نام</div>
-        <div class="today-action-text">کارڈ دبائیں اور 100 بار دہرائیں۔</div>
+        <div class="today-action-text">معنی پڑھیں اور 100 بار دہرانے کے لیے کارڈ دبائیں۔</div>
         <div class="today-counter-track"><div class="today-counter-fill" id="allahNameCounterFill"></div></div>
       </div>
     </div>
-    <div class="today-action today-static-action" aria-label="روزانہ مقصد">
-      <div class="today-action-top"><div class="today-action-icon">🎯</div><div class="today-action-arrow">•</div></div>
-      <div><div class="today-action-title">روزانہ مقصد</div><div class="today-action-text" id="dailyPracticeText">دن ختم ہونے سے پہلے اللہ کے لیے ایک خاموش عمل۔</div></div>
+    <div class="today-action today-goal-action" id="dailyGoalCard" role="button" tabindex="0" aria-label="روزانہ ہدف">
+      <div class="today-action-top"><div class="today-action-icon">🎯</div><div class="today-action-arrow" id="dailyGoalStatus">•</div></div>
+      <div>
+        <div class="today-action-title">روزانہ ہدف</div>
+        <div class="today-action-text" id="dailyPracticeText">ایک نیکی خاموشی سے، بغیر بات اور دکھاوے کے کرو</div>
+        <div class="today-action-text" style="opacity:.6;margin-top:4px;">کر لو تو نشان لگا دیں</div>
+      </div>
     </div>
   </div>
 </section>
@@ -2265,34 +2316,34 @@ html.light-mode .bottom-app-nav-item.active{
 <div class="premium-resource-grid">
   <a class="premium-resource-card" href="names-ur.html">
     <div class="premium-resource-icon">☝️</div>
-    <div><div class="premium-resource-title">99 names</div><div class="premium-resource-text">معانی، غور و فکر اور ایمان کی مضبوطی۔</div></div>
+    <div><div class="premium-resource-title">99 names</div><div class="premium-resource-text">Смыслы, размышление и укрепление имана.</div></div>
   </a>
   <a class="premium-resource-card" href="qibla-ur.html">
     <div class="premium-resource-icon">🧭</div>
-    <div><div class="premium-resource-title">Qibla</div><div class="premium-resource-text">نماز کے لیے فوری سمت۔</div></div>
+    <div><div class="premium-resource-title">Qibla</div><div class="premium-resource-text">Быстрое направление для молитвы.</div></div>
   </a>
   <a class="premium-resource-card" href="prophets-duas-ur.html">
     <div class="premium-resource-icon">🤲</div>
-    <div><div class="premium-resource-title">Duas</div><div class="premium-resource-text">درست معنی اور ادب کے ساتھ دعائیں۔</div></div>
+    <div><div class="premium-resource-title">Duas</div><div class="premium-resource-text">Дуа с правильным смыслом и уважением.</div></div>
   </a>
   <a class="premium-resource-card" href="articles-ur.html">
     <div class="premium-resource-icon">✨</div>
-    <div><div class="premium-resource-title">Articles</div><div class="premium-resource-text">بغیر شور کے مختصر مفید مواد۔</div></div>
+    <div><div class="premium-resource-title">Articles</div><div class="premium-resource-text">Короткие полезные материалы без лишнего шума.</div></div>
   </a>
 </div>
 
 <div class="about-project-card">
   <div class="about-project-title">BarakaWay کے بارے میں</div>
-  <div class="about-project-text">پروجیکٹ، اصول اور گمنامی کی وجہ ایک پرسکون اعتماد والے بلاک میں جمع ہیں۔ صارف مرکزی اسکرین پر بکھرے لنکس کے بغیر خیال سمجھتا ہے۔</div>
+  <div class="about-project-text">پروجیکٹ کے بارے میں, принципы и причина анонимности собраны в один спокойный доверительный блок. Пользователь понимает идею без лишних отдельных ссылок на главном экране.</div>
   <div class="about-project-actions">
     <a href="about-ur.html">پروجیکٹ کے بارے میں</a>
     <a href="principles-ur.html">اصول</a>
-    <a href="why-anonymous-ur.html">گمنامی کیوں</a>
+    <a href="why-anonymous-ur.html">گمنام کیوں</a>
   </div>
 </div>
 
 <div class="home-primary-support">
-  <a href="support-project-ur.html" class="support-project-btn"><span class="support-project-btn-shine"></span><span class="support-project-btn-text">پروجیکٹ کی حمایت کریں</span></a>
+  <a href="support-project-ur.html" class="support-project-btn"><span class="support-project-btn-shine"></span><span class="support-project-btn-text">پروجیکٹ کی مدد کریں</span></a>
 </div>
 
 <div class="share-overlay" id="shareOverlay" aria-hidden="true">
@@ -2307,26 +2358,26 @@ html.light-mode .bottom-app-nav-item.active{
       <button class="share-action share-x" type="button" data-share="x"><div class="share-icon">X</div><span>X</span></button>
       <button class="share-action share-linkedin" type="button" data-share="linkedin"><div class="share-icon">in</div><span>LinkedIn</span></button>
       <button class="share-action share-email" type="button" data-share="email"><div class="share-icon">@</div><span>Email</span></button>
-      <button class="share-action share-copy" type="button" data-share="copy"><div class="share-icon">⧉</div><span>لنک کاپی کریں</span></button>
-      <button class="share-action share-more" type="button" data-share="more"><div class="share-icon">⋯</div><span>مزید</span></button>
+      <button class="share-action share-copy" type="button" data-share="copy"><div class="share-icon">⧉</div><span>Копировать ссылку</span></button>
+      <button class="share-action share-more" type="button" data-share="more"><div class="share-icon">⋯</div><span>Ещё</span></button>
     </div>
-    <div class="share-copy-msg" id="shareCopyMsg">ایپ کا لنک کاپی ہو گیا۔</div>
+    <div class="share-copy-msg" id="shareCopyMsg">Ссылка на приложение скопирована.</div>
     <button class="share-close" id="shareCloseBtn" type="button">بند کریں</button>
   </div>
 </div>
 
 <div class="install-help-overlay" id="installHelpOverlay" aria-hidden="true">
   <div class="install-help-sheet" role="dialog" aria-modal="true" aria-labelledby="installHelpTitle">
-    <div class="install-help-title" id="installHelpTitle">ایپ انسٹال کریں</div>
-    <div class="install-help-text">اگر سسٹم کی انسٹال ونڈو ظاہر نہ ہو تو نیچے دیے گئے اقدامات استعمال کریں۔</div>
+    <div class="install-help-title" id="installHelpTitle">Установить приложение</div>
+    <div class="install-help-text">Если системное окно установки не появилось, используйте действия ниже.</div>
     <ol class="install-help-steps">
-      <li>Android پر صفحہ بیرونی براؤزر میں کھولیں اور وہاں سے ایپ انسٹال کریں۔</li>
-      <li>iPhone پر صفحہ Safari میں کھولیں۔</li>
-      <li>پھر “Share” → “Add to Home Screen” منتخب کریں۔</li>
+      <li>На Android откройте страницу во внешнем браузере и установите приложение там.</li>
+      <li>На iPhone откройте страницу в Safari.</li>
+      <li>Затем выберите «Поделиться» → «На экран Домой».</li>
     </ol>
     <div class="install-help-actions">
-      <button class="install-help-primary" id="installHelpPrimaryBtn" type="button">براؤزر میں کھولیں</button>
-      <button class="install-help-secondary" id="installHelpCopyBtn" type="button">لنک کاپی کریں</button>
+      <button class="install-help-primary" id="installHelpPrimaryBtn" type="button">Открыть в браузере</button>
+      <button class="install-help-secondary" id="installHelpCopyBtn" type="button">Скопировать ссылку</button>
     </div>
     <button class="install-help-close" id="installHelpCloseBtn" type="button">بند کریں</button>
   </div>
@@ -2343,23 +2394,23 @@ function isAndroid(){return /Android/i.test(navigator.userAgent||"");}
 function isIOS(){return /iPhone|iPad|iPod/i.test(navigator.userAgent||"");}
 function isInAppBrowser(){const ua=navigator.userAgent||"";return /(Telegram|FBAN|FBAV|Instagram|Line|wv)/i.test(ua);}
 async function hasInstalledRelatedApp(){if(typeof navigator.getInstalledRelatedApps!=="function") return false;try{const apps=await navigator.getInstalledRelatedApps();return Array.isArray(apps)&&apps.length>0;}catch(e){return false;}}
-async function updateInstallButtonVisibility(){if(installVisibilityInFlight) return;installVisibilityInFlight=true;const box=document.getElementById("installBox"),btn=document.getElementById("installBtn");if(!box||!btn){installVisibilityInFlight=false;return;}let hide=isStandaloneMode()?true:await hasInstalledRelatedApp();box.style.display=hide?"none":"block";btn.textContent="ایپ انسٹال کریں";installVisibilityInFlight=false;}
+async function updateInstallButtonVisibility(){if(installVisibilityInFlight) return;installVisibilityInFlight=true;const box=document.getElementById("installBox"),btn=document.getElementById("installBtn"),brandTrigger=document.getElementById("brandInstallTrigger"),brandHint=document.getElementById("brandInstallHint");if(!box||!btn){installVisibilityInFlight=false;return;}let hide=isStandaloneMode()?true:await hasInstalledRelatedApp();box.style.display=hide?"none":"block";btn.textContent="Установить приложение";if(brandTrigger){brandTrigger.classList.toggle("install-trigger",!hide);}if(brandHint){brandHint.classList.toggle("is-visible",!hide&&window.innerWidth<=700);}installVisibilityInFlight=false;}
 function openCurrentPageInExternalBrowser(){const url=window.location.href;if(isAndroid()){const cleaned=url.replace(/^https?:\/\//,"");window.location.href="intent://"+cleaned+"#Intent;scheme=https;package=com.android.chrome;end";return true;}if(!isIOS()){window.open(url,"_blank","noopener,noreferrer");return true;}return false;}
 function openInstallHelp(){const o=document.getElementById("installHelpOverlay");if(!o) return;o.classList.add("open");o.setAttribute("aria-hidden","false");}
 function closeInstallHelp(){const o=document.getElementById("installHelpOverlay");if(!o) return;o.classList.remove("open");o.setAttribute("aria-hidden","true");}
-async function copyCurrentLink(){const url=getShareUrl(),msg=document.getElementById("shareCopyMsg");try{if(navigator.clipboard&&window.isSecureContext){await navigator.clipboard.writeText(url);}else{const t=document.createElement("textarea");t.value=url;t.setAttribute("readonly","readonly");t.style.position="absolute";t.style.left="-9999px";document.body.appendChild(t);t.select();document.execCommand("copy");document.body.removeChild(t);}if(msg){msg.textContent="ایپ کا لنک کاپی ہو گیا۔";msg.classList.add("show");setTimeout(function(){msg.classList.remove("show");},2200);}}catch(e){window.prompt("لنک کاپی کریں اور بیرونی براؤزر میں کھولیں:",url);}}
+async function copyCurrentLink(){const url=getShareUrl(),msg=document.getElementById("shareCopyMsg");try{if(navigator.clipboard&&window.isSecureContext){await navigator.clipboard.writeText(url);}else{const t=document.createElement("textarea");t.value=url;t.setAttribute("readonly","readonly");t.style.position="absolute";t.style.left="-9999px";document.body.appendChild(t);t.select();document.execCommand("copy");document.body.removeChild(t);}if(msg){msg.textContent="Ссылка на приложение скопирована.";msg.classList.add("show");setTimeout(function(){msg.classList.remove("show");},2200);}}catch(e){window.prompt("Скопируйте ссылку и откройте её во внешнем браузере:",url);}}
 async function installApp(){if(deferredInstallPrompt){try{await deferredInstallPrompt.prompt();const c=await deferredInstallPrompt.userChoice;if(c&&c.outcome==="accepted") setTimeout(updateInstallButtonVisibility,300);}catch(e){}finally{deferredInstallPrompt=null;}return;}if(isStandaloneMode()){updateInstallButtonVisibility();return;}if(isInAppBrowser()){if(isAndroid()){const opened=openCurrentPageInExternalBrowser();if(!opened) openInstallHelp();return;}openInstallHelp();return;}if(isIOS()){openInstallHelp();return;}openInstallHelp();}
 function openShareOverlay(){const o=document.getElementById("shareOverlay"),m=document.getElementById("shareCopyMsg");if(!o) return;o.classList.add("open");o.setAttribute("aria-hidden","false");if(m) m.classList.remove("show");}
 function closeShareOverlay(){const o=document.getElementById("shareOverlay");if(!o) return;o.classList.remove("open");o.setAttribute("aria-hidden","true");}
-async function copyShareLink(){const url=getShareUrl(),msg=document.getElementById("shareCopyMsg");try{if(navigator.clipboard&&window.isSecureContext){await navigator.clipboard.writeText(url);}else{const t=document.createElement("textarea");t.value=url;t.setAttribute("readonly","readonly");t.style.position="absolute";t.style.left="-9999px";document.body.appendChild(t);t.select();document.execCommand("copy");document.body.removeChild(t);}if(msg){msg.classList.add("show");setTimeout(function(){msg.classList.remove("show");},2200);}}catch(e){window.prompt("لنک کاپی کریں اور بیرونی براؤزر میں کھولیں:",url);}}
+async function copyShareLink(){const url=getShareUrl(),msg=document.getElementById("shareCopyMsg");try{if(navigator.clipboard&&window.isSecureContext){await navigator.clipboard.writeText(url);}else{const t=document.createElement("textarea");t.value=url;t.setAttribute("readonly","readonly");t.style.position="absolute";t.style.left="-9999px";document.body.appendChild(t);t.select();document.execCommand("copy");document.body.removeChild(t);}if(msg){msg.classList.add("show");setTimeout(function(){msg.classList.remove("show");},2200);}}catch(e){window.prompt("Скопируйте ссылку и откройте её во внешнем браузере:",url);}}
 function openShareTarget(type){const url=encodeURIComponent(getShareUrl()),text=encodeURIComponent("BarakaWay");let target="";if(type==="telegram") target="https://t.me/share/url?url="+url+"&text="+text;if(type==="whatsapp") target="https://wa.me/?text="+text+"%20"+url;if(type==="facebook") target="https://www.facebook.com/sharer/sharer.php?u="+url;if(type==="x") target="https://twitter.com/intent/tweet?text="+text+"&url="+url;if(type==="linkedin") target="https://www.linkedin.com/sharing/share-offsite/?url="+url;if(type==="email") target="mailto:?subject=Hidden%20Sadaqa&body="+text+"%0A"+url;if(target) window.open(target,"_blank","noopener,noreferrer");}
 async function shareApp(){const data={title:"BarakaWay",text:"BarakaWay",url:getShareUrl()};if(navigator.share){try{await navigator.share(data);return;}catch(e){}}openShareOverlay();}
-async function sharePrayerTimes(event){if(event){event.preventDefault();event.stopPropagation();}const text=typeof window.buildPrayerTimesShareText==="function"?window.buildPrayerTimesShareText():"BarakaWay\nنماز کے اوقات";if(navigator.share){try{await navigator.share({title:"نماز کے اوقات",text:text});return;}catch(e){}}try{if(navigator.clipboard&&window.isSecureContext){await navigator.clipboard.writeText(text);}else{const t=document.createElement("textarea");t.value=text;t.setAttribute("readonly","readonly");t.style.position="absolute";t.style.left="-9999px";document.body.appendChild(t);t.select();document.execCommand("copy");document.body.removeChild(t);}alert("نماز کے اوقات کاپی ہو گئے۔ اب آپ انہیں میسنجر میں بھیج سکتے ہیں۔");}catch(e){window.prompt("نماز کے اوقات کاپی کریں:",text);}}
+async function sharePrayerTimes(event){if(event){event.preventDefault();event.stopPropagation();}const text=typeof window.buildPrayerTimesShareText==="function"?window.buildPrayerTimesShareText():"BarakaWay\nВремена намазов";if(navigator.share){try{await navigator.share({title:"Времена намазов",text:text});return;}catch(e){}}try{if(navigator.clipboard&&window.isSecureContext){await navigator.clipboard.writeText(text);}else{const t=document.createElement("textarea");t.value=text;t.setAttribute("readonly","readonly");t.style.position="absolute";t.style.left="-9999px";document.body.appendChild(t);t.select();document.execCommand("copy");document.body.removeChild(t);}alert("Времена намазов скопированы. Теперь можно отправить их в мессенджере.");}catch(e){window.prompt("Скопируйте времена намазов:",text);}}
 window.addEventListener("beforeinstallprompt",function(e){e.preventDefault();deferredInstallPrompt=e;updateInstallButtonVisibility();});
 window.addEventListener("appinstalled",function(){deferredInstallPrompt=null;updateInstallButtonVisibility();});
 window.addEventListener("pageshow",function(){updateInstallButtonVisibility();});
 document.addEventListener("visibilitychange",function(){if(!document.hidden) updateInstallButtonVisibility();});
-window.addEventListener("DOMContentLoaded",function(){const installBtn=document.getElementById("installBtn"),shareOverlay=document.getElementById("shareOverlay"),shareCloseBtn=document.getElementById("shareCloseBtn"),helpOverlay=document.getElementById("installHelpOverlay"),helpClose=document.getElementById("installHelpCloseBtn"),helpPrimary=document.getElementById("installHelpPrimaryBtn"),helpCopy=document.getElementById("installHelpCopyBtn");if(installBtn) installBtn.addEventListener("click",installApp);if(shareCloseBtn) shareCloseBtn.addEventListener("click",closeShareOverlay);if(shareOverlay) shareOverlay.addEventListener("click",function(e){if(e.target===shareOverlay) closeShareOverlay();});if(helpClose) helpClose.addEventListener("click",closeInstallHelp);if(helpOverlay) helpOverlay.addEventListener("click",function(e){if(e.target===helpOverlay) closeInstallHelp();});if(helpPrimary) helpPrimary.addEventListener("click",function(){const opened=openCurrentPageInExternalBrowser();if(!opened) copyCurrentLink();});if(helpCopy) helpCopy.addEventListener("click",copyCurrentLink);document.querySelectorAll("[data-share]").forEach(function(button){button.addEventListener("click",async function(){const type=button.getAttribute("data-share");if(type==="copy"){await copyShareLink();return;}if(type==="more"){if(navigator.share){try{await navigator.share({title:"BarakaWay",text:"BarakaWay",url:getShareUrl()});closeShareOverlay();return;}catch(e){}}await copyShareLink();return;}openShareTarget(type);closeShareOverlay();});});updateInstallButtonVisibility();setTimeout(updateInstallButtonVisibility,1200);});
+window.addEventListener("DOMContentLoaded",function(){const installBtn=document.getElementById("installBtn"),brandInstallTrigger=document.getElementById("brandInstallTrigger"),brandInstallHint=document.getElementById("brandInstallHint"),shareOverlay=document.getElementById("shareOverlay"),shareCloseBtn=document.getElementById("shareCloseBtn"),helpOverlay=document.getElementById("installHelpOverlay"),helpClose=document.getElementById("installHelpCloseBtn"),helpPrimary=document.getElementById("installHelpPrimaryBtn"),helpCopy=document.getElementById("installHelpCopyBtn");if(installBtn) installBtn.addEventListener("click",installApp);if(brandInstallTrigger) brandInstallTrigger.addEventListener("click",function(){if(window.innerWidth<=700&&!isStandaloneMode()) installApp();});if(brandInstallHint){brandInstallHint.addEventListener("click",installApp);brandInstallHint.addEventListener("keydown",function(e){if(e.key==="Enter"||e.key===" "){e.preventDefault();installApp();}});}if(shareCloseBtn) shareCloseBtn.addEventListener("click",closeShareOverlay);if(shareOverlay) shareOverlay.addEventListener("click",function(e){if(e.target===shareOverlay) closeShareOverlay();});if(helpClose) helpClose.addEventListener("click",closeInstallHelp);if(helpOverlay) helpOverlay.addEventListener("click",function(e){if(e.target===helpOverlay) closeInstallHelp();});if(helpPrimary) helpPrimary.addEventListener("click",function(){const opened=openCurrentPageInExternalBrowser();if(!opened) copyCurrentLink();});if(helpCopy) helpCopy.addEventListener("click",copyCurrentLink);document.querySelectorAll("[data-share]").forEach(function(button){button.addEventListener("click",async function(){const type=button.getAttribute("data-share");if(type==="copy"){await copyShareLink();return;}if(type==="more"){if(navigator.share){try{await navigator.share({title:"BarakaWay",text:"BarakaWay",url:getShareUrl()});closeShareOverlay();return;}catch(e){}}await copyShareLink();return;}openShareTarget(type);closeShareOverlay();});});updateInstallButtonVisibility();setTimeout(updateInstallButtonVisibility,1200);window.addEventListener("resize",updateInstallButtonVisibility);});
 </script>
 <script>
 (function(){
@@ -2466,7 +2517,7 @@ window.addEventListener("DOMContentLoaded",function(){const installBtn=document.
     document.documentElement.classList.add(theme + '-mode');
     localStorage.setItem('siteTheme', theme);
     switchEl.checked = theme === 'light';
-    label.textContent = theme === 'dark' ? 'لائٹ موڈ' : 'ڈارک موڈ';
+    label.textContent = theme === 'dark' ? 'Light mode' : 'Dark mode';
   }
 
   const savedTheme = localStorage.getItem('siteTheme') || 'dark';
@@ -2489,11 +2540,11 @@ window.addEventListener("DOMContentLoaded",function(){const installBtn=document.
   if(!elName || !elTime || !elMeta || !elCountdown || !elLocation) return;
 
   const UI = {
-    names: {Fajr:'فجر', Dhuhr:'ظہر', Asr:'عصر', Maghrib:'مغرب', Isha:'عشاء'},
-    at: 'بوقت',
-    startsIn: 'بعد',
-    loading: 'نماز کے اوقات لوڈ ہو رہے ہیں...',
-    fallbackLocation: 'تاشقند، ازبکستان'
+    names: {Fajr:'Фаджр', Dhuhr:'Зухр', Asr:'Аср', Maghrib:'Магриб', Isha:'Иша'},
+    at: 'в',
+    startsIn: 'через',
+    loading: 'Загрузка времени молитв...',
+    fallbackLocation: 'Ташкент, Узбекистан'
   };
 
   let nextPrayerTimer = null;
@@ -2581,7 +2632,7 @@ window.addEventListener("DOMContentLoaded",function(){const installBtn=document.
       setCountdown(next.time);
     }catch(_){
       elLocation.textContent = UI.fallbackLocation;
-      elName.textContent = 'فجر';
+      elName.textContent = 'Фаджр';
       elTime.textContent = '--:--';
       elMeta.textContent = UI.loading;
       elCountdown.textContent = '--:--:--';
@@ -2594,15 +2645,15 @@ window.addEventListener("DOMContentLoaded",function(){const installBtn=document.
     const clean = (value) => String(value || '--:--').split(' ')[0].slice(0,5);
     return [
       'BarakaWay',
-      "نماز کے اوقات",
+      "Времена намазов",
       `${state.location || UI.fallbackLocation}${state.date ? ' — ' + state.date : ''}`,
       '',
-      `فجر: ${clean(timings.Fajr)}`,
-      `طلوع آفتاب: ${clean(timings.Sunrise)}`,
-      `ظہر: ${clean(timings.Dhuhr)}`,
-      `عصر: ${clean(timings.Asr)}`,
-      `مغرب: ${clean(timings.Maghrib)}`,
-      `عشاء: ${clean(timings.Isha)}`,
+      `Фаджр: ${clean(timings.Fajr)}`,
+      `Восход: ${clean(timings.Sunrise)}`,
+      `Зухр: ${clean(timings.Dhuhr)}`,
+      `Аср: ${clean(timings.Asr)}`,
+      `Магриб: ${clean(timings.Maghrib)}`,
+      `Иша: ${clean(timings.Isha)}`,
       '',
       window.location.origin ? window.location.origin + '/prayer-times-ur.html' : window.location.href
     ].join('\n');
@@ -2613,52 +2664,271 @@ window.addEventListener("DOMContentLoaded",function(){const installBtn=document.
 </script>
 
 
+<script>
+(function(){
+  function getLocalDateKey(date){
+    const year = date.getFullYear();
+    const month = String(date.getMonth() + 1).padStart(2,'0');
+    const day = String(date.getDate()).padStart(2,'0');
+    return year + '-' + month + '-' + day;
+  }
+
+  function getDaysSince(dateString){
+    const start = new Date(dateString + 'T00:00:00');
+    const now = new Date();
+    const today = new Date(now.getFullYear(), now.getMonth(), now.getDate());
+    return Math.max(0, Math.floor((today - start) / 86400000));
+  }
+
+  const today = new Date();
+  const todayKey = getLocalDateKey(today);
+  const hour = today.getHours();
+
+  /*
+    Система статьи дня:
+    1) Добавляешь новую статью в массив articles в конец списка.
+    2) Увеличивать отдельный счётчик не нужно.
+    3) Если новая статья добавлена сегодня и очередь уже дошла до конца старого списка,
+       она появится сразу. Если новых статей нет — ротация продолжит показывать старые статьи.
+    Для полного автоматического обнаружения новых файлов нужен отдельный JSON/manifest или backend.
+  */
+  const articleStartDate = '2026-04-24';
+  const articles = [
+    {title:'Что такое садака', url:'islamic_articles-ur/001-ur.html'},
+    {title:'Разница между закятом и садака', url:'islamic_articles-ur/002-ur.html'},
+    {title:'Почему скрытая благотворительность важна', url:'islamic_articles-ur/003-ur.html'},
+    {title:'Помощь нуждающимся семьям', url:'islamic_articles-ur/004-ur.html'},
+    {title:'Почему даже один доллар имеет значение', url:'islamic_articles-ur/005-ur.html'},
+    {title:'صدقہ для жилья и помощи с жильём', url:'islamic_articles-ur/006-ur.html'},
+    {title:'Лучшие виды садака в исламе', url:'islamic_articles-ur/007-ur.html'},
+    {title:'Милостыня в месяц Рамадан', url:'islamic_articles-ur/008-ur.html'},
+    {title:'Милостыня в قرآنе', url:'islamic_articles-ur/009-ur.html'},
+    {title:'Как одна садака изменила жизнь семьи', url:'islamic_articles-ur/010-ur.html'},
+    {title:'Почему помощь семьям важна', url:'islamic_articles-ur/011-ur.html'},
+    {title:'Маленькая помощь — большие изменения', url:'islamic_articles-ur/012-ur.html'},
+    {title:'Награда за садака', url:'islamic_articles-ur/013-ur.html'},
+    {title:'صدقہ и очищение имущества', url:'islamic_articles-ur/014-ur.html'},
+    {title:'Почему мусульмане дают милостыню', url:'islamic_articles-ur/015-ur.html'},
+    {title:'Забота о бедных в исламе', url:'islamic_articles-ur/016-ur.html'},
+    {title:'Ответственность мусульман помогать другим', url:'islamic_articles-ur/017-ur.html'},
+    {title:'Справедливость и милосердие в исламе', url:'islamic_articles-ur/018-ur.html'},
+    {title:'Как благотворительность приносит надежду семьям', url:'islamic_articles-ur/019-ur.html'},
+    {title:'Помощь детям через садака', url:'islamic_articles-ur/020-ur.html'},
+    {title:'Помощь вдовам в исламе', url:'islamic_articles-ur/021-ur.html'},
+    {title:'Срочная помощь в исламе', url:'islamic_articles-ur/022-ur.html'},
+    {title:'Помощь едой в исламе', url:'islamic_articles-ur/023-ur.html'},
+    {title:'Куда идут ваши пожертвования', url:'islamic_articles-ur/024-ur.html'},
+    {title:'آج کا مضمون №25', url:'islamic_articles-ur/025-ur.html'},
+    {title:'آج کا مضمون №26', url:'islamic_articles-ur/026-ur.html'},
+    {title:'آج کا مضمون №27', url:'islamic_articles-ur/027-ur.html'},
+    {title:'آج کا مضمون №28', url:'islamic_articles-ur/028-ur.html'},
+    {title:'آج کا مضمون №29', url:'islamic_articles-ur/029-ur.html'},
+    {title:'آج کا مضمون №30', url:'islamic_articles-ur/030-ur.html'}
+  ];
+
+  const names = [
+    {name:'Ар-Рахман', meaning:'Всемилостивый: Его милость охватывает всё творение.'},
+    {name:'Ар-Рахим', meaning:'Особо Милующий: проявляет особую милость к верующим.'},
+    {name:'Аль-Малик', meaning:'Владыка: истинный Царь и Полновластный Господь.'},
+    {name:'Аль-Куддус', meaning:'Святой: абсолютно чистый от любого недостатка.'},
+    {name:'Ас-Салям', meaning:'Источник мира и безопасности, свободный от несовершенства.'},
+    {name:'Аль-Му’мин', meaning:'Дарующий безопасность и подтверждающий истину.'},
+    {name:'Аль-Мухаймин', meaning:'Хранитель и Наблюдающий за всем.'},
+    {name:'Аль-Азиз', meaning:'Могущественный и Непобедимый, обладающий полной силой.'},
+    {name:'Аль-Джаббар', meaning:'Восстанавливающий, Исправляющий и Обладающий властью.'},
+    {name:'Аль-Мутакаббир', meaning:'Величественный: Ему одному принадлежит истинное величие.'},
+    {name:'Аль-Халик', meaning:'Творец: создаёт всё по совершенной мудрости.'},
+    {name:'Аль-Бари', meaning:'Создающий без образца и приводящий творение к бытию.'},
+    {name:'Аль-Мусаввир', meaning:'Придающий форму каждому созданию.'},
+    {name:'Аль-Гаффар', meaning:'Многократно Прощающий грехи кающимся.'},
+    {name:'Аль-Каххар', meaning:'Всепокоряющий: всё находится под Его властью.'},
+    {name:'Аль-Ваххаб', meaning:'Дарующий без счёта и без нужды в ответе.'},
+    {name:'Ар-Раззак', meaning:'Наделяющий пропитанием каждое создание.'},
+    {name:'Аль-Фаттах', meaning:'Открывающий двери милости, знания и решения.'},
+    {name:'Аль-Алим', meaning:'Всезнающий: знает явное, скрытое и будущее.'},
+    {name:'Аль-Кабид', meaning:'Сдерживающий по мудрости то, что должно быть сдержано.'},
+    {name:'Аль-Басит', meaning:'Расширяющий милость, удел и возможности.'},
+    {name:'Аль-Хафид', meaning:'Унижающий тех, кого унижает по справедливости.'},
+    {name:'Ар-Рафи', meaning:'Возвышающий тех, кого возвышает по мудрости.'},
+    {name:'Аль-Муизз', meaning:'Дарующий честь и силу тому, кому пожелает.'},
+    {name:'Аль-Музилль', meaning:'Лишающий чести тех, кто заслужил унижение.'},
+    {name:'Ас-Сами', meaning:'Всеслышащий: слышит каждую мольбу и каждое слово.'},
+    {name:'Аль-Басир', meaning:'Всевидящий: видит всё явное и скрытое.'},
+    {name:'Аль-Хакам', meaning:'Судья: выносит совершенное и справедливое решение.'},
+    {name:'Аль-Адль', meaning:'Справедливый: Его решения свободны от ظلمa.'},
+    {name:'Аль-Латиф', meaning:'Тонко Милующий: ведёт к благу мягко и незаметно.'}
+  ];
+
+  const goals = [
+    'ایک نیکی خاموشی سے، بغیر بات اور دکھاوے کے کرو.',
+    'Перед важным делом обнови намерение ради Аллаха ﷻ.',
+    'Помоги одному человеку так, чтобы никто не заметил.',
+    'Попроси прощения у Аллаха ﷻ 33 раза спокойно.',
+    'Сделай дуа за родителей и близких.',
+    'Убери одно лишнее действие, которое крадёт время.',
+    'Поблагодари Аллаха ﷻ за одну конкретную милость.'
+  ];
+
+  const articleDay = getDaysSince(articleStartDate);
+  const articleIndex = articles.length ? articleDay % articles.length : 0;
+  const article = articles[articleIndex];
+  const articleLink = document.getElementById('dailyArticleLink');
+  const articleTitle = document.getElementById('dailyArticleTitle');
+  if(article && articleLink && articleTitle){
+    articleLink.href = article.url;
+    articleTitle.textContent = article.title;
+  }
+
+  const adhkarLink = document.getElementById('currentAdhkarLink');
+  const currentAdhkarTitle = document.getElementById('currentAdhkarTitle');
+  const currentAdhkarText = document.getElementById('currentAdhkarText');
+  if(currentAdhkarTitle && currentAdhkarText){
+    if(hour >= 4 && hour < 11){
+      currentAdhkarTitle.textContent = 'صبح کے اذکار';
+      currentAdhkarText.textContent = 'Откроется сразу раздел утренних азкаров.';
+      if(adhkarLink) adhkarLink.href = 'adhkar-ur.html#morning';
+    }else if(hour >= 16 && hour < 22){
+      currentAdhkarTitle.textContent = 'شام کے اذکار';
+      currentAdhkarText.textContent = 'Откроется сразу раздел вечерних азкаров.';
+      if(adhkarLink) adhkarLink.href = 'adhkar-ur.html#evening';
+    }else if(hour < 4){
+      currentAdhkarTitle.textContent = 'اگلا ذکر';
+      currentAdhkarText.textContent = 'Ближайший — утренний азкар после Фаджра.';
+      if(adhkarLink) adhkarLink.href = 'adhkar-ur.html#morning';
+    }else{
+      currentAdhkarTitle.textContent = 'اگلا ذکر';
+      currentAdhkarText.textContent = 'Ближайший — вечерний азкар ближе к Магрибу.';
+      if(adhkarLink) adhkarLink.href = 'adhkar-ur.html#evening';
+    }
+  }
+
+  const name = names[articleDay % names.length];
+  const nameEl = document.getElementById('allahNameToday');
+  const meaningEl = document.getElementById('allahNameMeaning');
+  const card = document.getElementById('allahNameCounterCard');
+  const valueEl = document.getElementById('allahNameCounterValue');
+  const fillEl = document.getElementById('allahNameCounterFill');
+  const storageKey = 'barakaway_name_counter_ur_' + todayKey;
+  let count = Math.max(0, Math.min(100, parseInt(localStorage.getItem(storageKey) || '0', 10) || 0));
+
+  function renderCounter(){
+    if(nameEl) nameEl.textContent = name.name;
+    if(meaningEl) meaningEl.textContent = name.meaning;
+    if(valueEl) valueEl.textContent = count + '/100';
+    if(fillEl) fillEl.style.width = count + '%';
+    if(card) card.setAttribute('aria-label', name.name + ': ' + count + ' из 100 повторений. ' + name.meaning);
+  }
+
+  function incrementCounter(){
+    count = count >= 100 ? 100 : count + 1;
+    localStorage.setItem(storageKey, String(count));
+    renderCounter();
+  }
+
+  if(card){
+    card.addEventListener('click', incrementCounter);
+    card.addEventListener('keydown', function(e){
+      if(e.key === 'Enter' || e.key === ' '){
+        e.preventDefault();
+        incrementCounter();
+      }
+    });
+  }
+  renderCounter();
+
+  const practice = document.getElementById('dailyPracticeText');
+  const goalCard = document.getElementById('dailyGoalCard');
+  const goalStatus = document.getElementById('dailyGoalStatus');
+  const goalKey = 'barakaway_daily_goal_done_ur_' + todayKey;
+  let goalDone = localStorage.getItem(goalKey) === '1';
+
+  if(practice) practice.textContent = goals[articleDay % goals.length];
+
+  function renderGoal(){
+    if(!goalCard) return;
+    goalCard.classList.toggle('goal-done', goalDone);
+    if(goalDone){
+      goalCard.style.setProperty('--goal-red-opacity','0');
+      goalCard.classList.remove('goal-urgent');
+      if(goalStatus) goalStatus.textContent = '✓';
+      return;
+    }
+
+    const minutesNow = hour * 60 + today.getMinutes();
+    const progress = Math.min(1, Math.max(0, minutesNow / 1440));
+    const redOpacity = (0.05 + progress * 0.82).toFixed(2);
+    goalCard.style.setProperty('--goal-red-opacity', redOpacity);
+    goalCard.classList.toggle('goal-urgent', hour >= 18);
+    if(goalStatus) goalStatus.textContent = hour >= 18 ? '!' : '•';
+  }
+
+  function completeGoal(){
+    goalDone = true;
+    localStorage.setItem(goalKey,'1');
+    renderGoal();
+  }
+
+  if(goalCard){
+    goalCard.addEventListener('click', completeGoal);
+    goalCard.addEventListener('keydown', function(e){
+      if(e.key === 'Enter' || e.key === ' '){
+        e.preventDefault();
+        completeGoal();
+      }
+    });
+  }
+
+  renderGoal();
+})();
+</script>
+
+
 
 <script>
 (function(){
   const todayKey = new Date().toISOString().slice(0,10);
   const dayNumber = Math.floor(Date.now() / 86400000);
   const articles = [
-    {title:'آج کا مضمون #1', url:'islamic_articles-ur/001-ur.html'},
-    {title:'آج کا مضمون #2', url:'islamic_articles-ur/002-ur.html'},
-    {title:'آج کا مضمون #3', url:'islamic_articles-ur/003-ur.html'},
-    {title:'آج کا مضمون #4', url:'islamic_articles-ur/004-ur.html'},
-    {title:'آج کا مضمون #5', url:'islamic_articles-ur/005-ur.html'},
-    {title:'آج کا مضمون #6', url:'islamic_articles-ur/006-ur.html'},
-    {title:'آج کا مضمون #7', url:'islamic_articles-ur/007-ur.html'},
-    {title:'آج کا مضمون #8', url:'islamic_articles-ur/008-ur.html'},
-    {title:'آج کا مضمون #9', url:'islamic_articles-ur/009-ur.html'},
-    {title:'آج کا مضمون #10', url:'islamic_articles-ur/010-ur.html'},
-    {title:'آج کا مضمون #11', url:'islamic_articles-ur/011-ur.html'},
-    {title:'آج کا مضمون #12', url:'islamic_articles-ur/012-ur.html'},
-    {title:'آج کا مضمون #13', url:'islamic_articles-ur/013-ur.html'},
-    {title:'آج کا مضمون #14', url:'islamic_articles-ur/014-ur.html'},
-    {title:'آج کا مضمون #15', url:'islamic_articles-ur/015-ur.html'},
-    {title:'آج کا مضمون #16', url:'islamic_articles-ur/016-ur.html'},
-    {title:'آج کا مضمون #17', url:'islamic_articles-ur/017-ur.html'},
-    {title:'آج کا مضمون #18', url:'islamic_articles-ur/018-ur.html'},
-    {title:'آج کا مضمون #19', url:'islamic_articles-ur/019-ur.html'},
-    {title:'آج کا مضمون #20', url:'islamic_articles-ur/020-ur.html'},
-    {title:'آج کا مضمون #21', url:'islamic_articles-ur/021-ur.html'},
-    {title:'آج کا مضمون #22', url:'islamic_articles-ur/022-ur.html'},
-    {title:'آج کا مضمون #23', url:'islamic_articles-ur/023-ur.html'},
-    {title:'آج کا مضمون #24', url:'islamic_articles-ur/024-ur.html'},
-    {title:'آج کا مضمون #25', url:'islamic_articles-ur/025-ur.html'},
-    {title:'آج کا مضمون #26', url:'islamic_articles-ur/026-ur.html'},
-    {title:'آج کا مضمون #27', url:'islamic_articles-ur/027-ur.html'},
-    {title:'آج کا مضمون #28', url:'islamic_articles-ur/028-ur.html'},
-    {title:'آج کا مضمون #29', url:'islamic_articles-ur/029-ur.html'},
-    {title:'آج کا مضمون #30', url:'islamic_articles-ur/030-ur.html'}
+    {title:'آج کا مضمون №1', url:'islamic_articles-ur/001-ur.html'},
+    {title:'آج کا مضمون №2', url:'islamic_articles-ur/002-ur.html'},
+    {title:'آج کا مضمون №3', url:'islamic_articles-ur/003-ur.html'},
+    {title:'آج کا مضمون №4', url:'islamic_articles-ur/004-ur.html'},
+    {title:'آج کا مضمون №5', url:'islamic_articles-ur/005-ur.html'},
+    {title:'آج کا مضمون №6', url:'islamic_articles-ur/006-ur.html'},
+    {title:'آج کا مضمون №7', url:'islamic_articles-ur/007-ur.html'},
+    {title:'آج کا مضمون №8', url:'islamic_articles-ur/008-ur.html'},
+    {title:'آج کا مضمون №9', url:'islamic_articles-ur/009-ur.html'},
+    {title:'آج کا مضمون №10', url:'islamic_articles-ur/010-ur.html'},
+    {title:'آج کا مضمون №11', url:'islamic_articles-ur/011-ur.html'},
+    {title:'آج کا مضمون №12', url:'islamic_articles-ur/012-ur.html'},
+    {title:'آج کا مضمون №13', url:'islamic_articles-ur/013-ur.html'},
+    {title:'آج کا مضمون №14', url:'islamic_articles-ur/014-ur.html'},
+    {title:'آج کا مضمون №15', url:'islamic_articles-ur/015-ur.html'},
+    {title:'آج کا مضمون №16', url:'islamic_articles-ur/016-ur.html'},
+    {title:'آج کا مضمون №17', url:'islamic_articles-ur/017-ur.html'},
+    {title:'آج کا مضمون №18', url:'islamic_articles-ur/018-ur.html'},
+    {title:'آج کا مضمون №19', url:'islamic_articles-ur/019-ur.html'},
+    {title:'آج کا مضمون №20', url:'islamic_articles-ur/020-ur.html'},
+    {title:'آج کا مضمون №21', url:'islamic_articles-ur/021-ur.html'},
+    {title:'آج کا مضمون №22', url:'islamic_articles-ur/022-ur.html'},
+    {title:'آج کا مضمون №23', url:'islamic_articles-ur/023-ur.html'},
+    {title:'آج کا مضمون №24', url:'islamic_articles-ur/024-ur.html'},
+    {title:'آج کا مضمون №25', url:'islamic_articles-ur/025-ur.html'},
+    {title:'آج کا مضمون №26', url:'islamic_articles-ur/026-ur.html'},
+    {title:'آج کا مضمون №27', url:'islamic_articles-ur/027-ur.html'},
+    {title:'آج کا مضمون №28', url:'islamic_articles-ur/028-ur.html'},
+    {title:'آج کا مضمون №29', url:'islamic_articles-ur/029-ur.html'},
+    {title:'آج کا مضمون №30', url:'islamic_articles-ur/030-ur.html'}
   ];
-  const names = ['Ar-Rahman', 'Ar-Rahim', 'Al-Malik', 'Al-Quddus', 'As-Salam', 'Al-Mu’min', 'Al-Muhaymin', 'Al-Aziz', 'Al-Jabbar', 'Al-Mutakabbir', 'Al-Khaliq', 'Al-Bari', 'Al-Musawwir', 'Al-Ghaffar', 'Al-Qahhar', 'Al-Wahhab', 'Ar-Razzaq', 'Al-Fattah', 'Al-Alim', 'Al-Qabid', 'Al-Basit', 'Al-Khafid', 'Ar-Rafi', 'Al-Muizz', 'Al-Mudhill', 'As-Sami', 'Al-Basir', 'Al-Hakam', 'Al-Adl', 'Al-Latif', 'Al-Khabir', 'Al-Halim', 'Al-Azim', 'Al-Ghafur', 'Ash-Shakur', 'Al-Ali', 'Al-Kabir', 'Al-Hafiz', 'Al-Muqit', 'Al-Hasib'];
+  const names = ['Ар-Рахман', 'Ар-Рахим', 'Аль-Малик', 'Аль-Куддус', 'Ас-Салям', 'Аль-Му’мин', 'Аль-Мухаймин', 'Аль-Азиз', 'Аль-Джаббар', 'Аль-Мутакаббир', 'Аль-Халик', 'Аль-Бари', 'Аль-Мусаввир', 'Аль-Гаффар', 'Аль-Каххар', 'Аль-Ваххаб', 'Ар-Раззак', 'Аль-Фаттах', 'Аль-Алим', 'Аль-Кабид', 'Аль-Басит', 'Аль-Хафид', 'Ар-Рафи', 'Аль-Муизз', 'Аль-Музилль', 'Ас-Сами', 'Аль-Басир', 'Аль-Хакам', 'Аль-Адль', 'Аль-Латиф', 'Аль-Хабир', 'Аль-Халим', 'Аль-Азым', 'Аль-Гафур', 'Аш-Шакур', 'Аль-Алий', 'Аль-Кабир', 'Аль-Хафиз', 'Аль-Мукит', 'Аль-Хасиб'];
   const goals = [
-    'ایک اہم کام سے پہلے نیت درست کریں۔',
-    'ایک نیکی خاموشی سے، دکھاوے کے بغیر کریں۔',
-    'ایک مختصر مضمون پڑھیں اور ایک سبق محفوظ کریں۔',
-    'اللہ سے 33 بار سکون سے مغفرت مانگیں۔',
-    'ایک فضول عمل چھوڑیں جو وقت لیتا ہے۔',
-    'والدین اور قریبی لوگوں کے لیے دعا کریں۔',
-    'اللہ کی ایک خاص نعمت کا شکر ادا کریں۔'
+    'Перед одним важным делом обнови намерение.',
+    'ایک نیکی خاموشی سے، بغیر بات اور دکھاوے کے کرو.',
+    'Прочитай короткий материал и сохрани один вывод.',
+    'Попроси прощения у Аллаха 33 раза спокойно.',
+    'Убери одно лишнее действие, которое крадёт время.',
+    'Сделай дуа за родителей и близких.',
+    'Поблагодари Аллаха за одну конкретную милость.'
   ];
   const article = articles[dayNumber % articles.length];
   const articleLink = document.getElementById('dailyArticleLink');
@@ -2668,22 +2938,22 @@ window.addEventListener("DOMContentLoaded",function(){const installBtn=document.
   const currentAdhkarTitle = document.getElementById('currentAdhkarTitle');
   const currentAdhkarText = document.getElementById('currentAdhkarText');
   if(currentAdhkarTitle && currentAdhkarText){
-    if(hour >= 4 && hour < 11){ currentAdhkarTitle.textContent = 'صبح کے اذکار'; currentAdhkarText.textContent = 'صبح کی حفاظت مضبوط کرنے کا بہترین وقت۔'; }
-    else if(hour >= 16 && hour < 22){ currentAdhkarTitle.textContent = 'شام کے اذکار'; currentAdhkarText.textContent = 'دن ختم ہونے سے پہلے شام کی حفاظت۔'; }
-    else{ currentAdhkarTitle.textContent = 'اگلا ذکر'; currentAdhkarText.textContent = hour < 4 ? 'اگلا — فجر کے بعد صبح کے اذکار۔' : 'اگلا — مغرب کے قریب شام کے اذکار۔'; }
+    if(hour >= 4 && hour < 11){ currentAdhkarTitle.textContent = 'صبح کے اذکار'; currentAdhkarText.textContent = 'Лучшее время закрепить утреннюю защиту.'; }
+    else if(hour >= 16 && hour < 22){ currentAdhkarTitle.textContent = 'شام کے اذکار'; currentAdhkarText.textContent = 'Вечерняя защита перед окончанием дня.'; }
+    else{ currentAdhkarTitle.textContent = 'اگلا ذکر'; currentAdhkarText.textContent = hour < 4 ? 'Ближайший — утренний азкар после Фаджра.' : 'Ближайший — вечерний азкар ближе к Магрибу.'; }
   }
   const name = names[dayNumber % names.length];
   const nameEl = document.getElementById('allahNameToday');
   const card = document.getElementById('allahNameCounterCard');
   const valueEl = document.getElementById('allahNameCounterValue');
   const fillEl = document.getElementById('allahNameCounterFill');
-  const storageKey = 'barakaway_name_counter_ur_' + todayKey;
+  const storageKey = 'barakaway_name_counter_ur_ru_' + todayKey;
   let count = Math.max(0, Math.min(100, parseInt(localStorage.getItem(storageKey) || '0', 10) || 0));
   function renderCounter(){
     if(nameEl) nameEl.textContent = name;
     if(valueEl) valueEl.textContent = count + '/100';
     if(fillEl) fillEl.style.width = count + '%';
-    if(card) card.setAttribute('aria-label', name + ': ' + count + ' 100 تکرار میں سے');
+    if(card) card.setAttribute('aria-label', name + ': ' + count + ' из 100 повторений');
   }
   function incrementCounter(){
     count = count >= 100 ? 0 : count + 1;
@@ -2701,7 +2971,61 @@ window.addEventListener("DOMContentLoaded",function(){const installBtn=document.
 </script>
 
 
-<nav class="bottom-app-nav" aria-label="ایپ کا نچلا مینو">
+
+<script>
+(function(){
+  const goalCard = document.getElementById('dailyGoalCard');
+  const goalStatus = document.getElementById('dailyGoalStatus');
+  if(!goalCard || !goalStatus) return;
+
+  function localDateKey(date){
+    const y = date.getFullYear();
+    const m = String(date.getMonth() + 1).padStart(2, '0');
+    const d = String(date.getDate()).padStart(2, '0');
+    return y + '-' + m + '-' + d;
+  }
+
+  function updateGoalState(){
+    const now = new Date();
+    const key = 'barakaway_daily_goal_ru_' + localDateKey(now);
+    const done = localStorage.getItem(key) === '1';
+
+    goalCard.classList.toggle('goal-done', done);
+    goalCard.classList.toggle('goal-urgent', !done && now.getHours() >= 18);
+    goalStatus.textContent = done ? '✓' : '•';
+
+    if(done){
+      goalCard.style.setProperty('--goal-red-opacity', '0');
+      goalCard.setAttribute('aria-label', 'Выполнено');
+      return;
+    }
+
+    const minutes = now.getHours() * 60 + now.getMinutes();
+    const opacity = Math.max(0.06, Math.min(0.88, minutes / 1440));
+    goalCard.style.setProperty('--goal-red-opacity', opacity.toFixed(2));
+    goalCard.setAttribute('aria-label', 'روزانہ ہدف');
+  }
+
+  goalCard.addEventListener('click', function(){
+    const key = 'barakaway_daily_goal_ru_' + localDateKey(new Date());
+    const done = localStorage.getItem(key) === '1';
+    localStorage.setItem(key, done ? '0' : '1');
+    updateGoalState();
+  });
+
+  goalCard.addEventListener('keydown', function(e){
+    if(e.key === 'Enter' || e.key === ' '){
+      e.preventDefault();
+      goalCard.click();
+    }
+  });
+
+  updateGoalState();
+  setInterval(updateGoalState, 60000);
+})();
+</script>
+
+<nav class="bottom-app-nav" aria-label="Нижнее меню приложения">
   <div class="bottom-app-nav-inner">
     <a class="bottom-app-nav-item active" href="home-ur.html" aria-current="page"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 10.8 12 4l8 6.8v9.4A1.8 1.8 0 0 1 18.2 22h-4.7v-6.4h-3V22H5.8A1.8 1.8 0 0 1 4 20.2v-9.4z"/></svg><span class="bottom-app-nav-label">آج</span></a>
     <a class="bottom-app-nav-item" href="prayer-times-ur.html"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2.4 5.2 7.8v2.7a7.2 7.2 0 0 0-2.7 5.6V22h19v-5.9a7.2 7.2 0 0 0-2.7-5.6V7.8L12 2.4zm0 2.7 4.7 3.7v.5a7.1 7.1 0 0 0-9.4 0v-.5L12 5.1zM5.5 16.1a6.5 6.5 0 0 1 13 0V20h-3.1v-3.5a3.4 3.4 0 0 0-6.8 0V20H5.5v-3.9z"/></svg><span class="bottom-app-nav-label">نماز</span></a>
