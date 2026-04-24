@@ -1,4 +1,4 @@
-﻿<!--
+<!--
 بِسْمِ ٱللَّٰهِ ٱلرَّحْمَـٰنِ ٱلرَّحِيمِ
 In the name of Allah, the Most Merciful, the Most Compassionate
 -->
@@ -2014,6 +2014,53 @@ html.light-mode .today-static-action{
   border-color:rgba(45,122,70,0.13);
 }
 
+
+.today-goal-action{
+  cursor:pointer;
+  position:relative;
+  overflow:hidden;
+}
+.today-goal-action::after{
+  content:"";
+  position:absolute;
+  inset:0;
+  opacity:var(--goal-red-opacity,0);
+  background:linear-gradient(135deg,rgba(178,34,34,0.06),rgba(255,38,38,0.26));
+  pointer-events:none;
+  transition:opacity .45s ease;
+}
+.today-goal-action > *{
+  position:relative;
+  z-index:1;
+}
+html.dark-mode .today-goal-action{
+  background:linear-gradient(135deg,#1e1d24 0%, #1b2028 50%, #2a1717 100%);
+  border-color:rgba(255,86,86,0.16);
+}
+html.light-mode .today-goal-action{
+  background:linear-gradient(135deg,#ffffff 0%, #fffafa 52%, #fff1f1 100%);
+  border-color:rgba(210,68,68,0.14);
+}
+.today-goal-action.goal-urgent{
+  animation:goalPulse 1.4s ease-in-out infinite;
+}
+.today-goal-action.goal-done{
+  --goal-red-opacity:0 !important;
+  animation:none !important;
+}
+html.dark-mode .today-goal-action.goal-done{
+  background:linear-gradient(135deg,#17261d 0%, #17262a 52%, #143126 100%);
+  border-color:rgba(102,198,128,0.32);
+}
+html.light-mode .today-goal-action.goal-done{
+  background:linear-gradient(135deg,#f7fff9 0%, #ffffff 52%, #eaf8ef 100%);
+  border-color:rgba(45,122,70,0.22);
+}
+@keyframes goalPulse{
+  0%,100%{box-shadow:0 12px 24px rgba(0,0,0,0.14),0 0 0 rgba(210,68,68,0);}
+  50%{box-shadow:0 12px 24px rgba(0,0,0,0.14),0 0 22px rgba(210,68,68,0.28);}
+}
+
 /* FIXED BOTTOM APP NAVIGATION */
 .bottom-app-nav{
   position:fixed;
@@ -2231,28 +2278,32 @@ html.light-mode .bottom-app-nav-item.active{
 <section class="today-hub" aria-label="Сегодня в BarakaWay">
   <div class="today-hub-head">
     <div class="today-hub-kicker">Сегодня в BarakaWay</div>
-    <h2 class="today-hub-title">Каждый день - новая польза, новый зикр и маленький шаг ближе к Аллаху ﷻ</h2>
+    <h2 class="today-hub-title">Открывай BarakaWay каждый день — здесь тебя ждёт новая польза для сердца, знаний и дел ради Аллаха ﷻ</h2>
   </div>
   <div class="today-hub-grid">
     <a class="today-action" id="dailyArticleLink" href="articles-ru.html">
       <div class="today-action-top"><div class="today-action-icon">📝</div><div class="today-action-arrow">→</div></div>
-      <div><div class="today-action-title">Полезная статья</div><div class="today-action-text" id="dailyArticleTitle">Открыть статью дня.</div></div>
+      <div><div class="today-action-title">Полезная статья</div><div class="today-action-text" id="dailyArticleTitle">Сегодняшняя статья откроется автоматически.</div></div>
     </a>
-    <a class="today-action" href="adhkar-ru.html">
+    <a class="today-action" id="currentAdhkarLink" href="adhkar-ru.html">
       <div class="today-action-top"><div class="today-action-icon">🌿</div><div class="today-action-arrow">→</div></div>
-      <div><div class="today-action-title" id="currentAdhkarTitle">Азкар сейчас</div><div class="today-action-text" id="currentAdhkarText">Подходящий азкар по времени дня.</div></div>
+      <div><div class="today-action-title" id="currentAdhkarTitle">Азкар сейчас</div><div class="today-action-text" id="currentAdhkarText">Откроется нужный раздел азкаров по времени дня.</div></div>
     </a>
     <div class="today-action today-counter-action" id="allahNameCounterCard" role="button" tabindex="0" aria-label="Счётчик повторения имени Аллаха">
       <div class="today-action-top"><div class="today-action-icon">☝️</div><div class="today-action-arrow" id="allahNameCounterValue">0/100</div></div>
       <div>
         <div class="today-action-title" id="allahNameToday">Имя Аллаха</div>
-        <div class="today-action-text">Нажимай на карточку и повторяй 100 раз.</div>
+        <div class="today-action-text" id="allahNameMeaning">Сегодня заучиваем смысл этого имени.</div>
         <div class="today-counter-track"><div class="today-counter-fill" id="allahNameCounterFill"></div></div>
       </div>
     </div>
-    <div class="today-action today-static-action" aria-label="Дневная цель">
-      <div class="today-action-top"><div class="today-action-icon">🎯</div><div class="today-action-arrow">•</div></div>
-      <div><div class="today-action-title">Дневная цель</div><div class="today-action-text" id="dailyPracticeText">Один спокойный поступок ради Аллаха до конца дня.</div></div>
+    <div class="today-action today-goal-action" id="dailyGoalCard" role="button" tabindex="0" aria-label="Дневная цель">
+      <div class="today-action-top"><div class="today-action-icon">🎯</div><div class="today-action-arrow" id="dailyGoalStatus">•</div></div>
+      <div>
+        <div class="today-action-title">Дневная цель</div>
+        <div class="today-action-text">Сделай одно добро тихо, без слов и показухи</div>
+        <div class="today-action-text" style="opacity:.6;margin-top:4px;">отметь, когда сделаешь</div>
+      </div>
     </div>
   </div>
 </section>
@@ -2630,9 +2681,33 @@ window.addEventListener("DOMContentLoaded",function(){const installBtn=document.
 
 <script>
 (function(){
-  const todayKey = new Date().toISOString().slice(0,10);
-  const dayNumber = Math.floor(Date.now() / 86400000);
+  function getLocalDateKey(date){
+    const year = date.getFullYear();
+    const month = String(date.getMonth() + 1).padStart(2,'0');
+    const day = String(date.getDate()).padStart(2,'0');
+    return year + '-' + month + '-' + day;
+  }
 
+  function getDaysSince(dateString){
+    const start = new Date(dateString + 'T00:00:00');
+    const now = new Date();
+    const today = new Date(now.getFullYear(), now.getMonth(), now.getDate());
+    return Math.max(0, Math.floor((today - start) / 86400000));
+  }
+
+  const today = new Date();
+  const todayKey = getLocalDateKey(today);
+  const hour = today.getHours();
+
+  /*
+    Система статьи дня:
+    1) Добавляешь новую статью в массив articles в конец списка.
+    2) Увеличивать отдельный счётчик не нужно.
+    3) Если новая статья добавлена сегодня и очередь уже дошла до конца старого списка,
+       она появится сразу. Если новых статей нет — ротация продолжит показывать старые статьи.
+    Для полного автоматического обнаружения новых файлов нужен отдельный JSON/manifest или backend.
+  */
+  const articleStartDate = '2026-04-24';
   const articles = [
     {title:'Что такое садака', url:'islamic_articles-ru/001-ru.html'},
     {title:'Разница между закятом и садака', url:'islamic_articles-ru/002-ru.html'},
@@ -2667,48 +2742,84 @@ window.addEventListener("DOMContentLoaded",function(){const installBtn=document.
   ];
 
   const names = [
-    'Ар-Рахман','Ар-Рахим','Аль-Малик','Аль-Куддус','Ас-Салям','Аль-Му’мин','Аль-Мухаймин','Аль-Азиз','Аль-Джаббар','Аль-Мутакаббир',
-    'Аль-Халик','Аль-Бари','Аль-Мусаввир','Аль-Гаффар','Аль-Каххар','Аль-Ваххаб','Ар-Раззак','Аль-Фаттах','Аль-Алим','Аль-Кабид',
-    'Аль-Басит','Аль-Хафид','Ар-Рафи','Аль-Муизз','Аль-Музилль','Ас-Сами','Аль-Басир','Аль-Хакам','Аль-Адль','Аль-Латиф',
-    'Аль-Хабир','Аль-Халим','Аль-Азым','Аль-Гафур','Аш-Шакур','Аль-Алий','Аль-Кабир','Аль-Хафиз','Аль-Мукит','Аль-Хасиб'
+    {name:'Ар-Рахман', meaning:'Всемилостивый: Его милость охватывает всё творение.'},
+    {name:'Ар-Рахим', meaning:'Особо Милующий: проявляет особую милость к верующим.'},
+    {name:'Аль-Малик', meaning:'Владыка: истинный Царь и Полновластный Господь.'},
+    {name:'Аль-Куддус', meaning:'Святой: абсолютно чистый от любого недостатка.'},
+    {name:'Ас-Салям', meaning:'Источник мира и безопасности, свободный от несовершенства.'},
+    {name:'Аль-Му’мин', meaning:'Дарующий безопасность и подтверждающий истину.'},
+    {name:'Аль-Мухаймин', meaning:'Хранитель и Наблюдающий за всем.'},
+    {name:'Аль-Азиз', meaning:'Могущественный и Непобедимый, обладающий полной силой.'},
+    {name:'Аль-Джаббар', meaning:'Восстанавливающий, Исправляющий и Обладающий властью.'},
+    {name:'Аль-Мутакаббир', meaning:'Величественный: Ему одному принадлежит истинное величие.'},
+    {name:'Аль-Халик', meaning:'Творец: создаёт всё по совершенной мудрости.'},
+    {name:'Аль-Бари', meaning:'Создающий без образца и приводящий творение к бытию.'},
+    {name:'Аль-Мусаввир', meaning:'Придающий форму каждому созданию.'},
+    {name:'Аль-Гаффар', meaning:'Многократно Прощающий грехи кающимся.'},
+    {name:'Аль-Каххар', meaning:'Всепокоряющий: всё находится под Его властью.'},
+    {name:'Аль-Ваххаб', meaning:'Дарующий без счёта и без нужды в ответе.'},
+    {name:'Ар-Раззак', meaning:'Наделяющий пропитанием каждое создание.'},
+    {name:'Аль-Фаттах', meaning:'Открывающий двери милости, знания и решения.'},
+    {name:'Аль-Алим', meaning:'Всезнающий: знает явное, скрытое и будущее.'},
+    {name:'Аль-Кабид', meaning:'Сдерживающий по мудрости то, что должно быть сдержано.'},
+    {name:'Аль-Басит', meaning:'Расширяющий милость, удел и возможности.'},
+    {name:'Аль-Хафид', meaning:'Унижающий тех, кого унижает по справедливости.'},
+    {name:'Ар-Рафи', meaning:'Возвышающий тех, кого возвышает по мудрости.'},
+    {name:'Аль-Муизз', meaning:'Дарующий честь и силу тому, кому пожелает.'},
+    {name:'Аль-Музилль', meaning:'Лишающий чести тех, кто заслужил унижение.'},
+    {name:'Ас-Сами', meaning:'Всеслышащий: слышит каждую мольбу и каждое слово.'},
+    {name:'Аль-Басир', meaning:'Всевидящий: видит всё явное и скрытое.'},
+    {name:'Аль-Хакам', meaning:'Судья: выносит совершенное и справедливое решение.'},
+    {name:'Аль-Адль', meaning:'Справедливый: Его решения свободны от ظلمa.'},
+    {name:'Аль-Латиф', meaning:'Тонко Милующий: ведёт к благу мягко и незаметно.'}
   ];
 
   const goals = [
-    'Перед одним важным делом обнови намерение.',
     'Сделай одно добро тихо, без слов и показухи.',
-    'Прочитай короткий материал и сохрани один вывод.',
-    'Попроси прощения у Аллаха 33 раза спокойно.',
-    'Убери одно лишнее действие, которое крадёт время.',
+    'Перед важным делом обнови намерение ради Аллаха ﷻ.',
+    'Помоги одному человеку так, чтобы никто не заметил.',
+    'Попроси прощения у Аллаха ﷻ 33 раза спокойно.',
     'Сделай дуа за родителей и близких.',
-    'Поблагодари Аллаха за одну конкретную милость.'
+    'Убери одно лишнее действие, которое крадёт время.',
+    'Поблагодари Аллаха ﷻ за одну конкретную милость.'
   ];
 
-  const article = articles[dayNumber % articles.length];
+  const articleDay = getDaysSince(articleStartDate);
+  const articleIndex = articles.length ? articleDay % articles.length : 0;
+  const article = articles[articleIndex];
   const articleLink = document.getElementById('dailyArticleLink');
   const articleTitle = document.getElementById('dailyArticleTitle');
-  if(articleLink && articleTitle){
+  if(article && articleLink && articleTitle){
     articleLink.href = article.url;
     articleTitle.textContent = article.title;
   }
 
-  const hour = new Date().getHours();
+  const adhkarLink = document.getElementById('currentAdhkarLink');
   const currentAdhkarTitle = document.getElementById('currentAdhkarTitle');
   const currentAdhkarText = document.getElementById('currentAdhkarText');
   if(currentAdhkarTitle && currentAdhkarText){
     if(hour >= 4 && hour < 11){
       currentAdhkarTitle.textContent = 'Утренний азкар';
-      currentAdhkarText.textContent = 'Лучшее время закрепить утреннюю защиту.';
+      currentAdhkarText.textContent = 'Откроется сразу раздел утренних азкаров.';
+      if(adhkarLink) adhkarLink.href = 'adhkar-ru.html#morning';
     }else if(hour >= 16 && hour < 22){
       currentAdhkarTitle.textContent = 'Вечерний азкар';
-      currentAdhkarText.textContent = 'Вечерняя защита перед окончанием дня.';
+      currentAdhkarText.textContent = 'Откроется сразу раздел вечерних азкаров.';
+      if(adhkarLink) adhkarLink.href = 'adhkar-ru.html#evening';
+    }else if(hour < 4){
+      currentAdhkarTitle.textContent = 'Следующий азкар';
+      currentAdhkarText.textContent = 'Ближайший — утренний азкар после Фаджра.';
+      if(adhkarLink) adhkarLink.href = 'adhkar-ru.html#morning';
     }else{
       currentAdhkarTitle.textContent = 'Следующий азкар';
-      currentAdhkarText.textContent = hour < 4 ? 'Ближайший — утренний азкар после Фаджра.' : 'Ближайший — вечерний азкар ближе к Магрибу.';
+      currentAdhkarText.textContent = 'Ближайший — вечерний азкар ближе к Магрибу.';
+      if(adhkarLink) adhkarLink.href = 'adhkar-ru.html#evening';
     }
   }
 
-  const name = names[dayNumber % names.length];
+  const name = names[articleDay % names.length];
   const nameEl = document.getElementById('allahNameToday');
+  const meaningEl = document.getElementById('allahNameMeaning');
   const card = document.getElementById('allahNameCounterCard');
   const valueEl = document.getElementById('allahNameCounterValue');
   const fillEl = document.getElementById('allahNameCounterFill');
@@ -2716,14 +2827,15 @@ window.addEventListener("DOMContentLoaded",function(){const installBtn=document.
   let count = Math.max(0, Math.min(100, parseInt(localStorage.getItem(storageKey) || '0', 10) || 0));
 
   function renderCounter(){
-    if(nameEl) nameEl.textContent = name;
+    if(nameEl) nameEl.textContent = name.name;
+    if(meaningEl) meaningEl.textContent = name.meaning;
     if(valueEl) valueEl.textContent = count + '/100';
     if(fillEl) fillEl.style.width = count + '%';
-    if(card) card.setAttribute('aria-label', name + ': ' + count + ' из 100 повторений');
+    if(card) card.setAttribute('aria-label', name.name + ': ' + count + ' из 100 повторений. ' + name.meaning);
   }
 
   function incrementCounter(){
-    count = count >= 100 ? 0 : count + 1;
+    count = count >= 100 ? 100 : count + 1;
     localStorage.setItem(storageKey, String(count));
     renderCounter();
   }
@@ -2740,7 +2852,48 @@ window.addEventListener("DOMContentLoaded",function(){const installBtn=document.
   renderCounter();
 
   const practice = document.getElementById('dailyPracticeText');
-  if(practice) practice.textContent = goals[dayNumber % goals.length];
+  const goalCard = document.getElementById('dailyGoalCard');
+  const goalStatus = document.getElementById('dailyGoalStatus');
+  const goalKey = 'barakaway_daily_goal_done_' + todayKey;
+  let goalDone = localStorage.getItem(goalKey) === '1';
+
+  if(practice) practice.textContent = goals[articleDay % goals.length];
+
+  function renderGoal(){
+    if(!goalCard) return;
+    goalCard.classList.toggle('goal-done', goalDone);
+    if(goalDone){
+      goalCard.style.setProperty('--goal-red-opacity','0');
+      goalCard.classList.remove('goal-urgent');
+      if(goalStatus) goalStatus.textContent = '✓';
+      return;
+    }
+
+    const minutesNow = hour * 60 + today.getMinutes();
+    const progress = Math.min(1, Math.max(0, minutesNow / 1440));
+    const redOpacity = (0.05 + progress * 0.82).toFixed(2);
+    goalCard.style.setProperty('--goal-red-opacity', redOpacity);
+    goalCard.classList.toggle('goal-urgent', hour >= 18);
+    if(goalStatus) goalStatus.textContent = hour >= 18 ? '!' : '•';
+  }
+
+  function completeGoal(){
+    goalDone = true;
+    localStorage.setItem(goalKey,'1');
+    renderGoal();
+  }
+
+  if(goalCard){
+    goalCard.addEventListener('click', completeGoal);
+    goalCard.addEventListener('keydown', function(e){
+      if(e.key === 'Enter' || e.key === ' '){
+        e.preventDefault();
+        completeGoal();
+      }
+    });
+  }
+
+  renderGoal();
 })();
 </script>
 
