@@ -1,0 +1,413 @@
+﻿<!--
+بِسْمِ ٱللَّٰهِ ٱلرَّحْمَـٰنِ ٱلرَّحِيمِ
+In the name of Allah, the Most Merciful, the Most Compassionate
+-->
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>শক্তিশালী ও নির্ভরযোগ্য আজকার</title>
+<style>
+body{
+  margin:0;
+  font-family:system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
+  background:#f5f7f8;
+  color:#1f2a22;
+  line-height:1.7;
+}
+.container{
+  max-width:980px;
+  margin:0 auto;
+  background:white;
+  padding:40px 28px 44px;
+  box-shadow:0 6px 16px rgba(0,0,0,0.05);
+}
+h1{
+  text-align:center;
+  font-size:40px;
+  margin:0 0 10px;
+  letter-spacing:-0.02em;
+}
+.subtitle{
+  text-align:center;
+  color:#666;
+  margin:0 0 12px;
+  letter-spacing:1.4px;
+  font-size:13px;
+  text-transform:uppercase;
+}
+.note{
+  max-width:860px;
+  margin:0 auto 28px;
+  text-align:center;
+  color:#4d5d53;
+  font-size:17px;
+}
+.controls{
+  margin:0 auto 28px;
+  max-width:860px;
+}
+.quick-nav{
+  display:flex;
+  flex-wrap:wrap;
+  gap:10px;
+  justify-content:center;
+}
+.quick-btn{
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  min-height:40px;
+  padding:10px 14px;
+  border-radius:999px;
+  border:1px solid #dfe9e3;
+  background:#eef5f1;
+  color:#2d7a46;
+  font-weight:700;
+  font-size:13px;
+  cursor:pointer;
+  white-space:nowrap;
+  -webkit-tap-highlight-color: transparent;
+}
+.quick-btn.active{
+  background:#2d7a46;
+  color:white;
+  border-color:#2d7a46;
+}
+.category-panel{
+  background:#eef5f1;
+  border:1px solid #dfe9e3;
+  border-radius:18px;
+  padding:18px;
+  margin-bottom:22px;
+}
+.category-title{
+  font-size:24px;
+  font-weight:800;
+  margin:0 0 8px;
+  color:#1f2a22;
+}
+.category-intro{
+  margin:0;
+  color:#43564b;
+}
+.card{
+  background:#fafafa;
+  border:1px solid #e5ece7;
+  border-radius:20px;
+  padding:22px;
+  box-shadow:0 4px 10px rgba(0,0,0,0.03);
+  margin-bottom:18px;
+}
+.head{
+  display:flex;
+  align-items:flex-start;
+  justify-content:space-between;
+  gap:14px;
+  margin-bottom:16px;
+}
+.idx{
+  min-width:44px;
+  width:44px;
+  height:44px;
+  border-radius:999px;
+  background:#2d7a46;
+  color:white;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-weight:800;
+  font-size:15px;
+}
+.meta{flex:1}
+.title{
+  font-size:19px;
+  font-weight:800;
+  color:#1f2a22;
+  margin:0 0 5px;
+}
+.ref{
+  font-size:13px;
+  color:#5a6b60;
+}
+.ar{
+  font-size:35px;
+  line-height:1.95;
+  text-align:right;
+  font-weight:700;
+  margin:0 0 14px;
+  word-break:break-word;
+}
+.label{
+  font-size:12px;
+  font-weight:800;
+  letter-spacing:1.2px;
+  text-transform:uppercase;
+  color:#6a7a70;
+  margin-bottom:6px;
+}
+.translit{
+  font-size:16px;
+  color:#3d5345;
+  font-style:italic;
+  margin:0 0 14px;
+}
+.meaning{
+  font-size:17px;
+  color:#222;
+  margin:0 0 14px;
+}
+.when{
+  font-size:16px;
+  color:#2b4a35;
+  margin:0 0 14px;
+}
+.chips{
+  display:flex;
+  flex-wrap:wrap;
+  gap:8px;
+  margin-top:12px;
+}
+.chip{
+  display:inline-flex;
+  align-items:center;
+  min-height:30px;
+  padding:6px 10px;
+  border-radius:999px;
+  background:#eef5f1;
+  border:1px solid #dfe9e3;
+  color:#2d7a46;
+  font-size:12px;
+  font-weight:800;
+}
+.link{
+  text-align:center;
+  margin-top:38px;
+}
+.link a{
+  color:#2d7a46;
+  text-decoration:none;
+  font-weight:800;
+}
+.empty{
+  background:#fafafa;
+  border:1px dashed #dfe9e3;
+  border-radius:18px;
+  padding:18px;
+  color:#52645a;
+}
+@media (max-width:700px){
+  .container{padding:24px 14px 30px;}
+  h1{font-size:31px;}
+  .subtitle{font-size:12px;letter-spacing:1px;}
+  .note{font-size:15px;margin-bottom:22px;}
+  .controls{margin-bottom:22px;}
+  .quick-nav{
+    display:flex;
+    flex-direction:column;
+    gap:10px;
+  }
+  .quick-btn{
+    display:block;
+    width:100%;
+    text-align:center;
+
+    padding:14px 16px;
+
+    border-radius:14px;
+    border:1.5px solid #e2e8e4;
+
+    background:#ffffff;
+    color:#1f2a22;
+
+    font-weight:700;
+    font-size:14px;
+
+    box-shadow:0 4px 10px rgba(0,0,0,0.04);
+  }
+  .category-panel{padding:16px;margin-bottom:18px;}
+  .category-title{font-size:21px;}
+  .head{align-items:center;}
+  .idx{
+    min-width:38px;
+    width:38px;
+    height:38px;
+    font-size:14px;
+  }
+  .title{font-size:16px;}
+  .ref{font-size:12px;}
+  .card{padding:18px;margin-bottom:16px;}
+  .ar{font-size:26px;line-height:1.8;}
+  .translit,.meaning,.when,.category-intro{font-size:15px;}
+  .chips{gap:6px;}
+  .chip{font-size:11px;padding:5px 9px;min-height:28px;}
+}
+
+
+/* theme overrides */
+html.dark-mode body{
+  background:#0b1418;
+  color:#edf5f0;
+}
+html.light-mode body{
+  background:#f5f7f8;
+  color:#1f2a22;
+}
+html.dark-mode .container{
+  background:#0f1c22;
+  box-shadow:0 20px 60px rgba(0,0,0,0.38);
+}
+html.dark-mode h1{
+  color:#ffffff;
+}
+html.dark-mode .subtitle{
+  color:#c0d0c7;
+}
+html.dark-mode .note{
+  color:#d5e1db;
+}
+html.dark-mode .quick-btn{
+  background:#15262d;
+  border-color:#274139;
+  color:#dff1e8;
+}
+html.dark-mode .quick-btn.active{
+  background:#2d7a46;
+  color:#ffffff;
+  border-color:#2d7a46;
+}
+html.dark-mode .category-panel{
+  background:#15262d;
+  border-color:#274139;
+}
+html.dark-mode .category-title{
+  color:#ffffff;
+}
+html.dark-mode .category-intro{
+  color:#d4e0da;
+}
+html.dark-mode .card{
+  background:#132129;
+  border-color:#233942;
+  box-shadow:0 10px 28px rgba(0,0,0,0.22);
+}
+html.dark-mode .title{
+  color:#ffffff;
+}
+html.dark-mode .ref{
+  color:#b3c6bd;
+}
+html.dark-mode .ar{
+  color:#ffffff;
+}
+html.dark-mode .label{
+  color:#c1d1c9;
+}
+html.dark-mode .translit{
+  color:#d4e3dc;
+}
+html.dark-mode .meaning{
+  color:#ffffff;
+}
+html.dark-mode .when{
+  color:#eef6f2;
+}
+html.dark-mode .chip{
+  background:#182c33;
+  border-color:#2b4840;
+  color:#e5f4ed;
+}
+html.dark-mode .empty{
+  background:#132129;
+  border-color:#2b4048;
+  color:#dce7e1;
+}
+html.dark-mode .link a{
+  color:#47b36b;
+}
+@media (max-width:700px){
+  html.dark-mode .quick-btn{
+    border-color:#274139;
+    background:#15262d;
+    color:#e5f4ed;
+    box-shadow:0 4px 10px rgba(0,0,0,0.12);
+  }
+}
+
+</style>
+
+<script>
+const DATA = {"categories": [["morning","সকালের আজকার"],["evening","সন্ধ্যার আজকার"],["after_asr","আসরের পরের আজকার"],["before_maghrib","মাগরিবের আগের আজকার"],["after_fajr_maghrib","ফজরের পর ও মাগরিবের পরের আজকার"],["after_prayer","নামাজের পরের আজকার"],["before_sleep","ঘুমের আগের আজকার"],["general","অন্যান্য শক্তিশালী আজকার"]],"intros": {"morning": "সকালের আজকার ফজরের পর এবং সকাল সময়ে পড়া হয়। এটি দৈনন্দিন সুরক্ষার সবচেয়ে শক্তিশালী অংশগুলোর একটি।","evening": "সন্ধ্যার আজকার দিনের দ্বিতীয় অর্ধাংশ এবং রাতের জন্য সুরক্ষার প্রধান অংশ।","after_asr": "অনেকের জন্য সন্ধ্যার আজকার পড়ার একটি বাস্তবসম্মত সময় হলো আসরের নামাজের পর থেকে সূর্যাস্তের আগ পর্যন্ত।","before_maghrib": "মাগরিবের ঠিক আগের সংকীর্ণ সময়ের জন্য সম্পূর্ণ আলাদা কোনো নির্দিষ্ট স্বতন্ত্র সেট নেই, তবে সূর্যাস্তের আগে সন্ধ্যার আজকার শেষ করার জন্য এটি একটি ভালো সময়।","after_fajr_maghrib": "এখানে সেই যিকরগুলো সংকলিত হয়েছে, যেগুলো বিশেষভাবে ফজরের পর এবং মাগরিবের পর গুরুত্ব পায়।","after_prayer": "এগুলো সেই আজকার, যা ফরজ নামাজের পরে পড়া হয়।","before_sleep": "এগুলো শক্তিশালী আজকার, যা সুরক্ষা ও প্রশান্তির জন্য ঘুমের আগে পড়া হয়।","general": "এগুলো শক্তিশালী আজকার, যা দিনের একটিমাত্র নির্দিষ্ট সময়ের সঙ্গে সীমাবদ্ধ নয়।"},"labels": {"tr": "উচ্চারণ","mean": "অনুবাদ","when": "কখন পড়বেন"},"empty": "এই বিভাগের জন্য এখন আলাদা কোনো ব্লক নেই।","items": {"ayat": {"id": "ayat","ar": "اللَّهُ لَا إِلَٰهَ إِلَّا هُوَ الْحَيُّ الْقَيُّومُ ۚ لَا تَأْخُذُهُ سِنَةٌ وَلَا نَوْمٌ ۚ لَهُ مَا فِي السَّمَاوَاتِ وَمَا فِي الْأَرْضِ ۗ مَنْ ذَا الَّذِي يَشْفَعُ عِنْدَهُ إِلَّا بِإِذْنِهِ ۚ يَعْلَمُ مَا بَيْنَ أَيْدِيهِمْ وَمَا خَلْفَهُمْ ۖ وَلَا يُحِيطُونَ بِشَيْءٍ مِنْ عِلْمِهِ إِلَّا بِمَا شَاءَ ۚ وَسِعَ كُرْسِيُّهُ السَّمَاوَاتِ وَالْأَرْضَ ۖ وَلَا يَئُودُهُ حِفْظُهُمَا ۚ وَهُوَ الْعَلِيُّ الْعَظِيمُ","tr": "Allahu la ilaha illa Huwa, Al-Hayyul-Qayyum. La ta'khudhuhu sinatun wa la nawm. Lahu ma fis-samawati wa ma fil-ard. Man dhal-ladhi yashfa'u 'indahu illa bi-idhnih. Ya'lamu ma bayna aydihim wa ma khalfahum, wa la yuhituna bi shay'in min 'ilmihi illa bima sha'. Wasi'a kursiyyuhus-samawati wal-ard, wa la ya'uduhu hifdhuhuma, wa Huwal-'Aliyyul-'Azim.","cats": ["morning","evening","after_prayer","before_sleep"],"title": "আয়াতুল কুরসি","ref": "উৎস: কুরআন ২:২৫৫","meaning": "আল্লাহ — তিনি ছাড়া ইবাদতের যোগ্য কোনো উপাস্য নেই; তিনি চিরঞ্জীব, সবকিছুর ধারক ও রক্ষক। তন্দ্রা বা নিদ্রা তাঁকে স্পর্শ করে না। আসমানসমূহে ও জমিনে যা কিছু আছে, সবই তাঁর। তাঁর অনুমতি ছাড়া তাঁর কাছে কে সুপারিশ করতে পারে? তিনি জানেন যা তাদের সামনে এবং যা তাদের পেছনে। তারা তাঁর জ্ঞান থেকে কিছুই আয়ত্ত করতে পারে না, তবে তিনি যা চান তা ছাড়া। তাঁর কুরসি আসমানসমূহ ও জমিনকে পরিবেষ্টন করেছে, এবং এগুলোর সংরক্ষণ তাঁকে ক্লান্ত করে না। তিনি সর্বোচ্চ, মহান।","when": "ফজরের পর, ফরজ নামাজের পর এবং ঘুমের আগে।","chips": ["সকাল","নামাজের পর","ঘুমের আগে"]},"ikhlas": {"id": "ikhlas","ar": "قُلْ هُوَ اللَّهُ أَحَدٌ ۝ اللَّهُ الصَّمَدُ ۝ لَمْ يَلِدْ وَلَمْ يُولَدْ ۝ وَلَمْ يَكُن لَّهُ كُفُوًا أَحَدٌ","tr": "Qul Huwa Allahu Ahad. Allahus-Samad. Lam yalid wa lam yulad. Wa lam yakun lahu kufuwan ahad.","cats": ["morning","evening","after_asr","before_maghrib","before_sleep"],"title": "সূরা আল-ইখলাস","ref": "উৎস: কুরআন ১১২","meaning": "বলুন: তিনি আল্লাহ, একক। আল্লাহ অমুখাপেক্ষী। তিনি কাউকে জন্ম দেননি এবং তাঁকেও জন্ম দেওয়া হয়নি। আর তাঁর সমতুল্য কেউ নেই।","when": "সকালে ৩ বার, সন্ধ্যায় ৩ বার এবং ঘুমের আগে শেষ দুই সূরার সঙ্গে পড়বেন।","chips": ["সকাল","সন্ধ্যা","ঘুমের আগে"]},"falaq": {"id": "falaq","ar": "قُلْ أَعُوذُ بِرَبِّ الْفَلَقِ ۝ مِن شَرِّ مَا خَلَقَ ۝ وَمِن شَرِّ غَاسِقٍ إِذَا وَقَبَ ۝ وَمِن شَرِّ النَّفَّاثَاتِ فِي الْعُقَدِ ۝ وَمِن شَرِّ حَاسِدٍ إِذَا حَسَدَ","tr": "Qul a'udhu bi rabbil-falaq. Min sharri ma khalaq. Wa min sharri ghasiqin idha waqab. Wa min sharrin-naffathati fil-'uqad. Wa min sharri hasidin idha hasad.","cats": ["morning","evening","after_asr","before_maghrib","before_sleep"],"title": "সূরা আল-ফালাক","ref": "উৎস: কুরআন ১১৩","meaning": "বলুন: আমি আশ্রয় প্রার্থনা করছি ভোরের রবের কাছে—তিনি যা সৃষ্টি করেছেন তার অনিষ্ট থেকে, রাতের অনিষ্ট থেকে যখন তা নেমে আসে, গিরায় ফুঁদানকারীদের অনিষ্ট থেকে এবং হিংসুকের অনিষ্ট থেকে যখন সে হিংসা করে।","when": "সকালে ৩ বার, সন্ধ্যায় ৩ বার এবং ঘুমের আগে পড়বেন।","chips": ["সকাল","সন্ধ্যা","ঘুমের আগে"]},"nas": {"id": "nas","ar": "قُلْ أَعُوذُ بِرَبِّ النَّاسِ ۝ مَلِكِ النَّاسِ ۝ إِلَٰهِ النَّاسِ ۝ مِن شَرِّ الْوَسْوَاسِ الْخَنَّاسِ ۝ الَّذِي يُوَسْوِسُ فِي صُدُورِ النَّاسِ ۝ مِنَ الْجِنَّةِ وَالنَّاسِ","tr": "Qul a'udhu bi rabbin-nas. Malikin-nas. Ilahin-nas. Min sharril-waswasil-khannas. Alladhi yuwaswisu fi sudurin-nas. Minal-jinnati wan-nas.","cats": ["morning","evening","after_asr","before_maghrib","before_sleep"],"title": "সূরা আন-নাস","ref": "উৎস: কুরআন ১১৪","meaning": "বলুন: আমি আশ্রয় প্রার্থনা করছি মানুষের রবের কাছে, মানুষের বাদশাহর কাছে, মানুষের ইলাহর কাছে—কুমন্ত্রণা দানকারী, আল্লাহর স্মরণে সরে যাওয়া শয়তানের অনিষ্ট থেকে, যে মানুষের অন্তরে কুমন্ত্রণা দেয়, সে জিনদের মধ্য থেকে হোক বা মানুষের মধ্য থেকে।","when": "সকালে ৩ বার, সন্ধ্যায় ৩ বার এবং ঘুমের আগে পড়বেন।","chips": ["সকাল","সন্ধ্যা","ঘুমের আগে"]},"bismillah_harm": {"id": "bismillah_harm","ar": "بِسْمِ اللَّهِ الَّذِي لَا يَضُرُّ مَعَ اسْمِهِ شَيْءٌ فِي الْأَرْضِ وَلَا فِي السَّمَاءِ وَهُوَ السَّمِيعُ الْعَلِيمُ","tr": "Bismillahil-ladhi la yadurru ma'a ismihi shay'un fil-ardi wa la fis-sama', wa Huwas-Sami'ul-'Alim.","cats": ["morning","evening","after_asr","before_maghrib"],"title": "হঠাৎ ক্ষতি থেকে সুরক্ষা","ref": "উৎস: আবু দাউদ / আত-তিরমিজি","meaning": "আল্লাহর নামে, যার নামের সঙ্গে জমিনে বা আসমানে কোনো কিছু ক্ষতি করতে পারে না; আর তিনি সর্বশ্রোতা, সর্বজ্ঞ।","when": "সকালে ৩ বার এবং সন্ধ্যায় ৩ বার পড়বেন।","chips": ["সকাল","সন্ধ্যা"]},"sayyidul_istighfar": {"id": "sayyidul_istighfar","ar": "اللَّهُمَّ أَنْتَ رَبِّي لَا إِلَٰهَ إِلَّا أَنْتَ، خَلَقْتَنِي وَأَنَا عَبْدُكَ، وَأَنَا عَلَى عَهْدِكَ وَوَعْدِكَ مَا اسْتَطَعْتُ، أَعُوذُ بِكَ مِن شَرِّ مَا صَنَعْتُ، أَبُوءُ لَكَ بِنِعْمَتِكَ عَلَيَّ، وَأَبُوءُ بِذَنْبِي، فَاغْفِرْ لِي، فَإِنَّهُ لَا يَغْفِرُ الذُّنُوبَ إِلَّا أَنْتَ","tr": "Allahumma anta Rabbi la ilaha illa Anta, khalaqtani wa ana 'abduka, wa ana 'ala 'ahdika wa wa'dika mastata'tu, a'udhu bika min sharri ma sana'tu, abu'u laka bini'matika 'alayya, wa abu'u bidhanbi, faghfir li, fa innahu la yaghfirudh-dhunuba illa Anta.","cats": ["morning","evening","after_asr","before_maghrib","general"],"title": "সাইয়্যিদুল ইস্তিগফার","ref": "উৎস: সহিহ আল-বুখারি ৬৩০৬","meaning": "হে আল্লাহ, তুমি আমার রব; তুমি ছাড়া ইবাদতের যোগ্য কোনো উপাস্য নেই। তুমি আমাকে সৃষ্টি করেছ, আর আমি তোমার বান্দা। আমি সাধ্য অনুযায়ী তোমার অঙ্গীকার ও প্রতিশ্রুতির ওপর থাকার চেষ্টা করছি। আমি আমার কৃতকর্মের অনিষ্ট থেকে তোমার আশ্রয় চাই। তুমি আমার প্রতি যে নিয়ামত দিয়েছ, তা আমি স্বীকার করছি, এবং আমার গুনাহও স্বীকার করছি। অতএব আমাকে ক্ষমা করো, কারণ তুমি ছাড়া গুনাহ ক্ষমা করার কেউ নেই।","when": "সকাল ও সন্ধ্যায়।","chips": ["সকাল","সন্ধ্যা","ইস্তিগফার"]},"special_fajr_maghrib": {"id": "special_fajr_maghrib","ar": "لَا إِلَهَ إِلَّا اللَّهُ وَحْدَهُ لَا شَرِيكَ لَهُ، لَهُ الْمُلْكُ وَلَهُ الْحَمْدُ، يُحْيِي وَيُمِيتُ، وَهُوَ عَلَى كُلِّ شَيْءٍ قَدِيرٌ","tr": "La ilaha illa Allah wahdahu la sharika lah, lahul-mulku wa lahul-hamd, yuhyi wa yumit, wa Huwa 'ala kulli shay'in qadir.","cats": ["after_fajr_maghrib"],"title": "ফজরের পর ও মাগরিবের পর বিশেষ যিকর — ১০ বার","ref": "উৎস: Hisn al-Muslim / আত-তিরমিজি / আহমাদ","meaning": "আল্লাহ ছাড়া ইবাদতের যোগ্য কোনো উপাস্য নেই; তিনি এক, তাঁর কোনো শরিক নেই। রাজত্ব তাঁরই এবং প্রশংসা তাঁরই। তিনি জীবন দান করেন এবং মৃত্যু দেন; আর তিনি সবকিছুর ওপর ক্ষমতাবান।","when": "ফজরের পরপরই এবং মাগরিবের পরপরই — ১০ বার করে।","chips": ["ফজরের পর","মাগরিবের পর"]},"la100": {"id": "la100","ar": "لَا إِلَهَ إِلَّا اللَّهُ وَحْدَهُ لَا شَرِيكَ لَهُ، لَهُ الْمُلْكُ وَلَهُ الْحَمْدُ، وَهُوَ عَلَى كُلِّ شَيْءٍ قَدِيرٌ","tr": "La ilaha illa Allah wahdahu la sharika lah, lahul-mulku wa lahul-hamd, wa Huwa 'ala kulli shay'in qadir.","cats": ["general"],"title": "তাওহীদের যিকর — ১০০ বার","ref": "উৎস: সহিহ আল-বুখারি ৬৪০৩","meaning": "আল্লাহ ছাড়া ইবাদতের যোগ্য কোনো উপাস্য নেই; তিনি এক, তাঁর কোনো শরিক নেই। রাজত্ব তাঁরই এবং প্রশংসা তাঁরই; আর তিনি সবকিছুর ওপর ক্ষমতাবান।","when": "দিনের মধ্যে ১০০ বার।","chips": ["প্রতিদিন","শক্তিশালী যিকর"]},"anxiety": {"id": "anxiety","ar": "اللَّهُمَّ إِنِّي أَعُوذُ بِكَ مِنَ الْهَمِّ وَالْحُزْنِ، وَالْعَجْزِ وَالْكَسَلِ، وَالْبُخْلِ وَالْجُبْنِ، وَضَلَعِ الدَّيْنِ وَغَلَبَةِ الرِّجَالِ","tr": "Allahumma inni a'udhu bika minal-hammi wal-huzn, wal-'ajzi wal-kasal, wal-bukhli wal-jubn, wa dala'id-dayn, wa ghalabatir-rijal.","cats": ["general"],"title": "উদ্বেগ, দুঃখ ও ঋণ থেকে","ref": "উৎস: আন-নাসায়ি / আল-বুখারি","meaning": "হে আল্লাহ, নিশ্চয়ই আমি তোমার আশ্রয় চাই উদ্বেগ ও দুঃখ থেকে, অক্ষমতা ও অলসতা থেকে, কৃপণতা ও কাপুরুষতা থেকে, ঋণের বোঝা থেকে এবং মানুষের দ্বারা পরাভূত হওয়া থেকে।","when": "নিয়মিত, বিশেষ করে উদ্বেগ, সংকট ও ঋণের সময়।","chips": ["উদ্বেগ","ঋণ","সুরক্ষা"]},"halal": {"id": "halal","ar": "اللَّهُمَّ اكْفِنِي بِحَلَالِكَ عَنْ حَرَامِكَ، وَأَغْنِنِي بِفَضْلِكَ عَمَّنْ سِوَاكَ","tr": "Allahumm-akfini bihalalika 'an haramika, wa aghnini bifadlika 'amman siwaka.","cats": ["general"],"title": "হালাল রিজিক সম্পর্কে","ref": "উৎস: আত-তিরমিজি","meaning": "হে আল্লাহ, তোমার হালালকে আমার জন্য তোমার হারাম থেকে যথেষ্ট করে দাও, এবং তোমার অনুগ্রহে আমাকে এমনভাবে সমৃদ্ধ করো যাতে আমি তোমাকে ছাড়া কারও মুখাপেক্ষী না হই।","when": "নিয়মিত, বিশেষ করে আর্থিক সংকটের সময়।","chips": ["রিজিক","হালাল","প্রাচুর্য"]},"after_prayer_dhikr": {"id": "after_prayer_dhikr","ar": "أَسْتَغْفِرُ اللَّهَ، أَسْتَغْفِرُ اللَّهَ، أَسْتَغْفِرُ اللَّهَ. اللَّهُمَّ أَنْتَ السَّلَامُ وَمِنْكَ السَّلَامُ، تَبَارَكْتَ يَا ذَا الْجَلَالِ وَالْإِكْرَامِ","tr": "Astaghfirullah, Astaghfirullah, Astaghfirullah. Allahumma Antas-Salam wa minkas-Salam, tabarakta ya Dhal-Jalali wal-Ikram.","cats": ["after_prayer"],"title": "নামাজের পর যিকর","ref": "উৎস: সহিহ মুসলিম / সালাম ফেরানোর পর","meaning": "তিনবার আল্লাহর কাছে ক্ষমা চাইবেন, তারপর বলবেন: “হে আল্লাহ, তুমি শান্তি; আর তোমার কাছ থেকেই শান্তি। তুমি বরকতময়, হে মহিমা ও সম্মানের অধিকারী।”","when": "ফরজ নামাজের পরপরই।","chips": ["নামাজের পর","ইস্তিগফার"]},"tasbih_fatimah": {"id": "tasbih_fatimah","ar": "سُبْحَانَ اللَّهِ ٣٣، الْحَمْدُ لِلَّهِ ٣٣، اللَّهُ أَكْبَرُ ٣٣","tr": "SubhanAllah 33 times, Alhamdulillah 33 times, Allahu Akbar 33 times.","cats": ["after_prayer","before_sleep"],"title": "তাসবিহে ফাতিমা","ref": "উৎস: সহিহ আল-বুখারি / সহিহ মুসলিম","meaning": "সুবহানাল্লাহ — ৩৩ বার, আলহামদুলিল্লাহ — ৩৩ বার, আল্লাহু আকবার — ৩৩ বার।","when": "নামাজের পর এবং ঘুমের আগে।","chips": ["নামাজের পর","ঘুমের আগে"]},"sleep_dua": {"id": "sleep_dua","ar": "بِاسْمِكَ اللَّهُمَّ أَمُوتُ وَأَحْيَا","tr": "Bismika Allahumma amutu wa ahya.","cats": ["before_sleep"],"title": "ঘুমের আগের দোয়া","ref": "উৎস: সহিহ আল-বুখারি","meaning": "তোমার নামে, হে আল্লাহ, আমি মৃত্যুবরণ করি এবং জীবন লাভ করি।","when": "ঘুমানোর ঠিক আগে।","chips": ["ঘুম","প্রশান্তি","সুরক্ষা"]}}};
+function escapeHtml(str){
+  return String(str).replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;").replace(/"/g,"&quot;").replace(/'/g,"&#39;");
+}
+function renderCategory(cat){
+  const panel = document.getElementById('categoryPanel');
+  const cards = document.getElementById('cards');
+  const found = DATA.categories.find(c => c[0] === cat);
+  const title = found ? found[1] : '';
+  const intro = DATA.intros[cat] || '';
+  panel.innerHTML = '<div class="category-title">' + escapeHtml(title) + '</div>';
+  const matches = Object.values(DATA.items).filter(item => item.cats.includes(cat));
+  if(!matches.length){
+    cards.innerHTML = '<div class="empty">' + escapeHtml(DATA.empty) + '</div>';
+    return;
+  }
+  let out = '';
+  matches.forEach((item, index) => {
+    let chips = '';
+    (item.chips || []).forEach(chip => {
+      chips += '<span class="chip">' + escapeHtml(chip) + '</span>';
+    });
+    out += '<div class="card">'
+        + '<div class="head"><div class="idx">' + (index+1) + '</div><div class="meta"><div class="title">' + escapeHtml(item.title) + '</div><div class="ref">' + escapeHtml(item.ref) + '</div></div></div>'
+        + '<div class="ar">' + item.ar + '</div>'
+        + '<div class="label">' + escapeHtml(DATA.labels.tr) + '</div>'
+        + '<div class="translit">' + escapeHtml(item.tr) + '</div>'
+        + '<div class="label">' + escapeHtml(DATA.labels.mean) + '</div>'
+        + '<p class="meaning">' + escapeHtml(item.meaning) + '</p>'
+        + '<div class="label">' + escapeHtml(DATA.labels.when) + '</div>'
+        + '<p class="when">' + escapeHtml(item.when) + '</p>'
+        + '<div class="chips">' + chips + '</div>'
+        + '</div>';
+  });
+  cards.innerHTML = out;
+}
+function setCategory(cat){
+  document.querySelectorAll('.quick-btn').forEach(btn => {
+    btn.classList.toggle('active', btn.dataset.cat === cat);
+  });
+  renderCategory(cat);
+}
+document.addEventListener('DOMContentLoaded', () => {
+  const quickNav = document.getElementById('quickNav');
+  quickNav.innerHTML = DATA.categories.map(c => '<button class="quick-btn" type="button" data-cat="' + c[0] + '" onclick="setCategory(\'' + c[0] + '\')">' + escapeHtml(c[1]) + '</button>').join('');
+  setCategory(DATA.categories[0][0]);
+});
+</script>
+
+<script src="/theme-init.js"></script>
+<link rel="stylesheet" href="/theme.css">
+<link rel="stylesheet" href="/theme-universal.css">
+</head>
+<body>
+<div class="container">
+  <h1>শক্তিশালী ও নির্ভরযোগ্য আজকার</h1>
+
+  <div class="controls">
+    
+    <div id="quickNav" class="quick-nav"></div>
+  </div>
+
+  <div id="categoryPanel" class="category-panel"></div>
+  <div id="cards"></div>
+
+  <div class="link"><a href="home-bn.html">মূল পৃষ্ঠায় ফিরে যান</a></div>
+</div>
+</body>
+</html>
+
+
+
+
