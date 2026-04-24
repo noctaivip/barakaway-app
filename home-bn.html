@@ -1313,6 +1313,103 @@ html.light-mode .home-prayer-countdown{
 html.dark-mode .home-prayer-note{color:#c0cad4;}
 html.light-mode .home-prayer-note{color:#708177;}
 
+/* PRAYER WIDGET CLICK AFFORDANCE */
+.home-prayer-widget{
+  cursor:pointer;
+}
+
+.home-prayer-widget::after{
+  content:"";
+  position:absolute;
+  inset:0;
+  border-radius:inherit;
+  background:linear-gradient(120deg, transparent 58%, rgba(255,255,255,0.075));
+  opacity:0;
+  pointer-events:none;
+  transition:opacity .25s ease;
+}
+
+.home-prayer-widget:hover::after{
+  opacity:1;
+}
+
+.home-prayer-widget:hover{
+  transform:translateY(-3px) scale(1.01);
+}
+
+.home-prayer-widget:active{
+  transform:translateY(0) scale(.988);
+}
+
+.home-prayer-note{
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  gap:8px;
+  width:auto;
+  min-width:196px;
+  margin-left:auto;
+  margin-right:auto;
+  padding:10px 14px;
+  border-radius:999px;
+  letter-spacing:-0.01em;
+  transition:background .25s ease,border-color .25s ease,color .25s ease,transform .18s ease,box-shadow .25s ease;
+}
+
+html.dark-mode .home-prayer-note{
+  background:linear-gradient(135deg,rgba(215,192,122,.16),rgba(102,198,128,.11));
+  border:1px solid rgba(215,192,122,.30);
+  color:#f4e4a8;
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.04);
+}
+
+html.light-mode .home-prayer-note{
+  background:linear-gradient(135deg,#fff8e7,#eef8f1);
+  border:1px solid rgba(141,107,22,.22);
+  color:#6f5311;
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.86);
+}
+
+.home-prayer-arrow{
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  width:22px;
+  height:22px;
+  border-radius:50%;
+  font-size:16px;
+  line-height:1;
+  transition:transform .2s ease,background .25s ease,color .25s ease;
+}
+
+html.dark-mode .home-prayer-arrow{
+  background:rgba(215,192,122,.18);
+  color:#f7dc7a;
+}
+
+html.light-mode .home-prayer-arrow{
+  background:rgba(141,107,22,.10);
+  color:#8d6b16;
+}
+
+.home-prayer-widget:hover .home-prayer-note{
+  transform:translateY(-1px);
+}
+
+.home-prayer-widget:hover .home-prayer-arrow{
+  transform:translateX(4px);
+}
+
+html[dir="rtl"] .home-prayer-widget:hover .home-prayer-arrow{
+  transform:translateX(-4px);
+}
+
+.home-prayer-widget:focus-visible{
+  outline:2px solid #d7c07a;
+  outline-offset:5px;
+}
+
+
 @media(max-width:700px){
   .brand-prayer-hero{
     gap:12px;
@@ -1572,7 +1669,7 @@ html.light-mode .support-project-btn:hover{
       </div>
     </div>
 
-    <div class="home-prayer-note">পূর্ণ সময়সূচি খুলতে চাপুন</div>
+    <div class="home-prayer-note"><span>সম্পূর্ণ সময়সূচি</span><span class="home-prayer-arrow" aria-hidden="true">→</span></div>
   </a>
 </div>
 
