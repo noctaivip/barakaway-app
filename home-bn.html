@@ -1687,8 +1687,6 @@ html.light-mode .support-project-btn:hover{
   }
 }
 
-
-
 /* PREMIUM TODAY HUB + REFINED HOME NAVIGATION */
 .today-hub{
   margin:22px 0 24px;
@@ -1965,6 +1963,56 @@ html.light-mode .about-project-actions a{
 }
 
 
+.today-counter-action,
+.today-static-action{
+  cursor:pointer;
+  text-align:left;
+  font-family:inherit;
+}
+.today-static-action{
+  cursor:default;
+}
+.today-counter-track{
+  width:100%;
+  height:7px;
+  margin-top:10px;
+  border-radius:999px;
+  overflow:hidden;
+}
+html.dark-mode .today-counter-track{
+  background:rgba(255,255,255,0.08);
+}
+html.light-mode .today-counter-track{
+  background:rgba(45,122,70,0.12);
+}
+.today-counter-fill{
+  width:0%;
+  height:100%;
+  border-radius:999px;
+  transition:width .22s ease;
+  background:linear-gradient(90deg,#2d7a46,#66c680);
+}
+.today-counter-action:focus-visible{
+  outline:2px solid #66c680;
+  outline-offset:4px;
+}
+html.dark-mode .today-counter-action{
+  background:linear-gradient(135deg,#202016 0%, #17212a 48%, #143126 100%);
+  border-color:rgba(215,192,122,0.28);
+}
+html.light-mode .today-counter-action{
+  background:linear-gradient(135deg,#fffaf0 0%, #ffffff 48%, #eef7f1 100%);
+  border-color:rgba(141,107,22,0.18);
+}
+html.dark-mode .today-static-action{
+  background:linear-gradient(135deg,#151f29 0%, #17212a 48%, #1e2b22 100%);
+  border-color:rgba(102,198,128,0.18);
+}
+html.light-mode .today-static-action{
+  background:linear-gradient(135deg,#ffffff 0%, #fbfdfc 48%, #f1f7ed 100%);
+  border-color:rgba(45,122,70,0.13);
+}
+
 /* FIXED BOTTOM APP NAVIGATION */
 .bottom-app-nav{
   position:fixed;
@@ -1984,15 +2032,28 @@ html.light-mode .about-project-actions a{
 }
 
 html.dark-mode .bottom-app-nav{
-  background:linear-gradient(180deg,rgba(18,27,34,0.88) 0%,rgba(11,18,23,0.96) 100%);
-  border-top:1px solid rgba(124,187,148,0.16);
-  box-shadow:0 -14px 34px rgba(0,0,0,0.30), inset 0 1px 0 rgba(255,255,255,0.04);
+  background:linear-gradient(180deg,rgba(20,38,29,0.92) 0%,rgba(10,22,16,0.97) 100%);
+  border-top:1px solid rgba(102,198,128,0.30);
+  box-shadow:0 -14px 34px rgba(0,0,0,0.34), inset 0 1px 0 rgba(255,255,255,0.05);
 }
 
 html.light-mode .bottom-app-nav{
-  background:linear-gradient(180deg,rgba(255,255,255,0.88) 0%,rgba(247,250,248,0.96) 100%);
-  border-top:1px solid rgba(45,122,70,0.12);
-  box-shadow:0 -14px 34px rgba(18,34,24,0.10), inset 0 1px 0 rgba(255,255,255,0.88);
+  background:linear-gradient(180deg,rgba(243,251,246,0.92) 0%,rgba(232,246,238,0.97) 100%);
+  border-top:1px solid rgba(45,122,70,0.22);
+  box-shadow:0 -14px 34px rgba(18,34,24,0.12), inset 0 1px 0 rgba(255,255,255,0.92);
+}
+
+
+.bottom-app-nav::before{
+  content:"";
+  position:absolute;
+  top:0;
+  left:50%;
+  transform:translateX(-50%);
+  width:min(850px,100%);
+  height:3px;
+  background:linear-gradient(90deg,rgba(45,122,70,0),rgba(102,198,128,0.88),rgba(215,192,122,0.72),rgba(45,122,70,0));
+  pointer-events:none;
 }
 
 .bottom-app-nav-inner{
@@ -2166,28 +2227,33 @@ html.light-mode .bottom-app-nav-item.active{
 <button id="installBtn" class="install-btn" type="button">অ্যাপ ইনস্টল করুন</button>
 </div>
 
-<section class="today-hub" aria-label="মুসলিম দিনের কেন্দ্র">
+
+<section class="today-hub" aria-label="আজ BarakaWay-এ">
   <div class="today-hub-head">
     <div class="today-hub-kicker">আজ BarakaWay-এ</div>
-    <h2 class="today-hub-title">নামাজ, যিকির, কুরআন ও গোপন কল্যাণকে ঘিরে শান্ত একটি দিন।</h2>
+    <h2 class="today-hub-title">প্রতিদিন — নতুন উপকার, নতুন যিকির এবং আল্লাহর ﷻ কাছে এক ছোট পদক্ষেপ</h2>
   </div>
   <div class="today-hub-grid">
-    <a class="today-action" href="prayer-times-bn.html">
-      <div class="today-action-top"><div class="today-action-icon">🕌</div><div class="today-action-arrow">→</div></div>
-      <div><div class="today-action-title">পরবর্তী নামাজ</div><div class="today-action-text">সময়, সময়সূচি ও দ্রুত প্রবেশ।</div></div>
+    <a class="today-action" id="dailyArticleLink" href="articles-bn.html">
+      <div class="today-action-top"><div class="today-action-icon">📝</div><div class="today-action-arrow">→</div></div>
+      <div><div class="today-action-title">উপকারী লেখা</div><div class="today-action-text" id="dailyArticleTitle">আজকের লেখা খুলুন।</div></div>
     </a>
     <a class="today-action" href="adhkar-bn.html">
       <div class="today-action-top"><div class="today-action-icon">🌿</div><div class="today-action-arrow">→</div></div>
-      <div><div class="today-action-title">আজকের আজকার</div><div class="today-action-text">সকাল, সন্ধ্যা ও হৃদয়ের সুরক্ষা।</div></div>
+      <div><div class="today-action-title" id="currentAdhkarTitle">এখনকার আজকার</div><div class="today-action-text" id="currentAdhkarText">দিনের এই সময়ের জন্য উপযুক্ত আজকার।</div></div>
     </a>
-    <a class="today-action" href="quran-bn.html">
-      <div class="today-action-top"><div class="today-action-icon">📖</div><div class="today-action-arrow">→</div></div>
-      <div><div class="today-action-title">আজকের আয়াত</div><div class="today-action-text">কুরআন প্রতিদিনের ভরসা।</div></div>
-    </a>
-    <a class="today-action" href="hidden-sadaqa-bn.html">
-      <div class="today-action-top"><div class="today-action-icon">🤲</div><div class="today-action-arrow">→</div></div>
-      <div><div class="today-action-title">গোপন সদকা</div><div class="today-action-text">নাম, প্রদর্শন ও শব্দ ছাড়া কল্যাণ।</div></div>
-    </a>
+    <div class="today-action today-counter-action" id="allahNameCounterCard" role="button" tabindex="0" aria-label="আল্লাহর নাম পুনরাবৃত্তির কাউন্টার">
+      <div class="today-action-top"><div class="today-action-icon">☝️</div><div class="today-action-arrow" id="allahNameCounterValue">0/100</div></div>
+      <div>
+        <div class="today-action-title" id="allahNameToday">আল্লাহর নাম</div>
+        <div class="today-action-text">কার্ডে চাপ দিন এবং ১০০ বার পড়ুন।</div>
+        <div class="today-counter-track"><div class="today-counter-fill" id="allahNameCounterFill"></div></div>
+      </div>
+    </div>
+    <div class="today-action today-static-action" aria-label="দৈনিক লক্ষ্য">
+      <div class="today-action-top"><div class="today-action-icon">🎯</div><div class="today-action-arrow">•</div></div>
+      <div><div class="today-action-title">দৈনিক লক্ষ্য</div><div class="today-action-text" id="dailyPracticeText">দিন শেষ হওয়ার আগে আল্লাহর জন্য একটি নীরব কাজ।</div></div>
+    </div>
   </div>
 </section>
 
@@ -2199,31 +2265,19 @@ html.light-mode .bottom-app-nav-item.active{
 <div class="premium-resource-grid">
   <a class="premium-resource-card" href="names-bn.html">
     <div class="premium-resource-icon">☝️</div>
-    <div>
-      <div class="premium-resource-title">আল্লাহর ৯৯ নাম</div>
-      <div class="premium-resource-text">অর্থ, চিন্তা ও ঈমান শক্ত করা।</div>
-    </div>
+    <div><div class="premium-resource-title">99 names</div><div class="premium-resource-text">অর্থ, চিন্তা ও ঈমান শক্ত করা।</div></div>
   </a>
   <a class="premium-resource-card" href="qibla-bn.html">
     <div class="premium-resource-icon">🧭</div>
-    <div>
-      <div class="premium-resource-title">কিবলা</div>
-      <div class="premium-resource-text">নামাজের জন্য দ্রুত দিকনির্দেশ।</div>
-    </div>
+    <div><div class="premium-resource-title">Qibla</div><div class="premium-resource-text">নামাজের জন্য দ্রুত দিকনির্দেশ।</div></div>
   </a>
   <a class="premium-resource-card" href="prophets-duas-bn.html">
     <div class="premium-resource-icon">🤲</div>
-    <div>
-      <div class="premium-resource-title">নবী ﷺ-এর দোয়া</div>
-      <div class="premium-resource-text">সঠিক অর্থ ও সম্মানের সঙ্গে দোয়া।</div>
-    </div>
+    <div><div class="premium-resource-title">Duas</div><div class="premium-resource-text">সঠিক অর্থ ও সম্মানের সঙ্গে দোয়া।</div></div>
   </a>
   <a class="premium-resource-card" href="articles-bn.html">
     <div class="premium-resource-icon">✨</div>
-    <div>
-      <div class="premium-resource-title">প্রবন্ধ</div>
-      <div class="premium-resource-text">অতিরিক্ত শব্দ ছাড়া সংক্ষিপ্ত উপকারী লেখা।</div>
-    </div>
+    <div><div class="premium-resource-title">Articles</div><div class="premium-resource-text">অতিরিক্ত শব্দ ছাড়া সংক্ষিপ্ত উপকারী লেখা।</div></div>
   </a>
 </div>
 
@@ -2238,10 +2292,7 @@ html.light-mode .bottom-app-nav-item.active{
 </div>
 
 <div class="home-primary-support">
-  <a href="support-project-bn.html" class="support-project-btn">
-    <span class="support-project-btn-shine"></span>
-    <span class="support-project-btn-text">প্রকল্পকে সমর্থন করুন</span>
-  </a>
+  <a href="support-project-bn.html" class="support-project-btn"><span class="support-project-btn-shine"></span><span class="support-project-btn-text">প্রকল্পকে সমর্থন করুন</span></a>
 </div>
 
 <div class="share-overlay" id="shareOverlay" aria-hidden="true">
@@ -2561,28 +2612,102 @@ window.addEventListener("DOMContentLoaded",function(){const installBtn=document.
 })();
 </script>
 
-<nav class="bottom-app-nav" aria-label="Primary navigation">
+
+
+<script>
+(function(){
+  const todayKey = new Date().toISOString().slice(0,10);
+  const dayNumber = Math.floor(Date.now() / 86400000);
+  const articles = [
+    {title:'দিনের লেখা #1', url:'islamic_articles-bn/001-bn.html'},
+    {title:'দিনের লেখা #2', url:'islamic_articles-bn/002-bn.html'},
+    {title:'দিনের লেখা #3', url:'islamic_articles-bn/003-bn.html'},
+    {title:'দিনের লেখা #4', url:'islamic_articles-bn/004-bn.html'},
+    {title:'দিনের লেখা #5', url:'islamic_articles-bn/005-bn.html'},
+    {title:'দিনের লেখা #6', url:'islamic_articles-bn/006-bn.html'},
+    {title:'দিনের লেখা #7', url:'islamic_articles-bn/007-bn.html'},
+    {title:'দিনের লেখা #8', url:'islamic_articles-bn/008-bn.html'},
+    {title:'দিনের লেখা #9', url:'islamic_articles-bn/009-bn.html'},
+    {title:'দিনের লেখা #10', url:'islamic_articles-bn/010-bn.html'},
+    {title:'দিনের লেখা #11', url:'islamic_articles-bn/011-bn.html'},
+    {title:'দিনের লেখা #12', url:'islamic_articles-bn/012-bn.html'},
+    {title:'দিনের লেখা #13', url:'islamic_articles-bn/013-bn.html'},
+    {title:'দিনের লেখা #14', url:'islamic_articles-bn/014-bn.html'},
+    {title:'দিনের লেখা #15', url:'islamic_articles-bn/015-bn.html'},
+    {title:'দিনের লেখা #16', url:'islamic_articles-bn/016-bn.html'},
+    {title:'দিনের লেখা #17', url:'islamic_articles-bn/017-bn.html'},
+    {title:'দিনের লেখা #18', url:'islamic_articles-bn/018-bn.html'},
+    {title:'দিনের লেখা #19', url:'islamic_articles-bn/019-bn.html'},
+    {title:'দিনের লেখা #20', url:'islamic_articles-bn/020-bn.html'},
+    {title:'দিনের লেখা #21', url:'islamic_articles-bn/021-bn.html'},
+    {title:'দিনের লেখা #22', url:'islamic_articles-bn/022-bn.html'},
+    {title:'দিনের লেখা #23', url:'islamic_articles-bn/023-bn.html'},
+    {title:'দিনের লেখা #24', url:'islamic_articles-bn/024-bn.html'},
+    {title:'দিনের লেখা #25', url:'islamic_articles-bn/025-bn.html'},
+    {title:'দিনের লেখা #26', url:'islamic_articles-bn/026-bn.html'},
+    {title:'দিনের লেখা #27', url:'islamic_articles-bn/027-bn.html'},
+    {title:'দিনের লেখা #28', url:'islamic_articles-bn/028-bn.html'},
+    {title:'দিনের লেখা #29', url:'islamic_articles-bn/029-bn.html'},
+    {title:'দিনের লেখা #30', url:'islamic_articles-bn/030-bn.html'}
+  ];
+  const names = ['Ar-Rahman', 'Ar-Rahim', 'Al-Malik', 'Al-Quddus', 'As-Salam', 'Al-Mu’min', 'Al-Muhaymin', 'Al-Aziz', 'Al-Jabbar', 'Al-Mutakabbir', 'Al-Khaliq', 'Al-Bari', 'Al-Musawwir', 'Al-Ghaffar', 'Al-Qahhar', 'Al-Wahhab', 'Ar-Razzaq', 'Al-Fattah', 'Al-Alim', 'Al-Qabid', 'Al-Basit', 'Al-Khafid', 'Ar-Rafi', 'Al-Muizz', 'Al-Mudhill', 'As-Sami', 'Al-Basir', 'Al-Hakam', 'Al-Adl', 'Al-Latif', 'Al-Khabir', 'Al-Halim', 'Al-Azim', 'Al-Ghafur', 'Ash-Shakur', 'Al-Ali', 'Al-Kabir', 'Al-Hafiz', 'Al-Muqit', 'Al-Hasib'];
+  const goals = [
+    'একটি গুরুত্বপূর্ণ কাজের আগে নিয়ত নতুন করুন।',
+    'একটি ভালো কাজ নীরবে করুন, প্রদর্শন ছাড়া।',
+    'একটি ছোট লেখা পড়ুন এবং একটি শিক্ষা রাখুন।',
+    'আল্লাহর কাছে ৩৩ বার শান্তভাবে ক্ষমা চান।',
+    'সময় নষ্ট করে এমন একটি কাজ ছেড়ে দিন।',
+    'বাবা-মা ও প্রিয়জনদের জন্য দোয়া করুন।',
+    'আল্লাহর একটি নির্দিষ্ট নিয়ামতের জন্য শুকরিয়া আদায় করুন।'
+  ];
+  const article = articles[dayNumber % articles.length];
+  const articleLink = document.getElementById('dailyArticleLink');
+  const articleTitle = document.getElementById('dailyArticleTitle');
+  if(articleLink && articleTitle){ articleLink.href = article.url; articleTitle.textContent = article.title; }
+  const hour = new Date().getHours();
+  const currentAdhkarTitle = document.getElementById('currentAdhkarTitle');
+  const currentAdhkarText = document.getElementById('currentAdhkarText');
+  if(currentAdhkarTitle && currentAdhkarText){
+    if(hour >= 4 && hour < 11){ currentAdhkarTitle.textContent = 'সকালের আজকার'; currentAdhkarText.textContent = 'সকালের সুরক্ষা দৃঢ় করার সেরা সময়।'; }
+    else if(hour >= 16 && hour < 22){ currentAdhkarTitle.textContent = 'সন্ধ্যার আজকার'; currentAdhkarText.textContent = 'দিন শেষ হওয়ার আগে সন্ধ্যার সুরক্ষা।'; }
+    else{ currentAdhkarTitle.textContent = 'পরবর্তী আজকার'; currentAdhkarText.textContent = hour < 4 ? 'পরবর্তী — ফজরের পর সকালের আজকার।' : 'পরবর্তী — মাগরিবের কাছে সন্ধ্যার আজকার।'; }
+  }
+  const name = names[dayNumber % names.length];
+  const nameEl = document.getElementById('allahNameToday');
+  const card = document.getElementById('allahNameCounterCard');
+  const valueEl = document.getElementById('allahNameCounterValue');
+  const fillEl = document.getElementById('allahNameCounterFill');
+  const storageKey = 'barakaway_name_counter_bn_' + todayKey;
+  let count = Math.max(0, Math.min(100, parseInt(localStorage.getItem(storageKey) || '0', 10) || 0));
+  function renderCounter(){
+    if(nameEl) nameEl.textContent = name;
+    if(valueEl) valueEl.textContent = count + '/100';
+    if(fillEl) fillEl.style.width = count + '%';
+    if(card) card.setAttribute('aria-label', name + ': ' + count + ' ১০০ বার পড়ার মধ্যে');
+  }
+  function incrementCounter(){
+    count = count >= 100 ? 0 : count + 1;
+    localStorage.setItem(storageKey, String(count));
+    renderCounter();
+  }
+  if(card){
+    card.addEventListener('click', incrementCounter);
+    card.addEventListener('keydown', function(e){ if(e.key === 'Enter' || e.key === ' '){ e.preventDefault(); incrementCounter(); } });
+  }
+  renderCounter();
+  const practice = document.getElementById('dailyPracticeText');
+  if(practice) practice.textContent = goals[dayNumber % goals.length];
+})();
+</script>
+
+
+<nav class="bottom-app-nav" aria-label="অ্যাপের নিচের মেনু">
   <div class="bottom-app-nav-inner">
-    <a class="bottom-app-nav-item active" href="home-bn.html">
-      <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3.2 3.5 10v10.2c0 .5.4.9.9.9h5.2v-6.4h4.8v6.4h5.2c.5 0 .9-.4.9-.9V10L12 3.2zm0 2.6 6.5 5.2v8.1h-2.1v-6.4H7.6v6.4H5.5V11L12 5.8z"/></svg>
-      <span class="bottom-app-nav-label">আজ</span>
-    </a>
-    <a class="bottom-app-nav-item" href="prayer-times-bn.html">
-      <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2.4 5.2 7.8v2.7a7.2 7.2 0 0 0-2.7 5.6V22h19v-5.9a7.2 7.2 0 0 0-2.7-5.6V7.8L12 2.4zm0 2.7 4.7 3.7v.5a7.1 7.1 0 0 0-9.4 0v-.5L12 5.1zM5.5 16.1a6.5 6.5 0 0 1 13 0V20h-3.1v-3.5a3.4 3.4 0 0 0-6.8 0V20H5.5v-3.9z"/></svg>
-      <span class="bottom-app-nav-label">নামাজ</span>
-    </a>
-    <a class="bottom-app-nav-item" href="quran-bn.html">
-      <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5.2 3.2A2.2 2.2 0 0 0 3 5.4v14.4c0 .6.4 1 1 1h6.2c1 0 1.8.3 2.4.9.3.3.9.3 1.2 0 .6-.6 1.4-.9 2.4-.9H22c.6 0 1-.4 1-1V5.4a2.2 2.2 0 0 0-2.2-2.2h-4.6c-1.3 0-2.4.4-3.2 1.1-.8-.7-1.9-1.1-3.2-1.1H5.2zM5 5.4c0-.1.1-.2.2-.2h4.6c1.1 0 1.8.4 2.2 1v12.7c-.6-.2-1.2-.3-1.8-.3H5V5.4zm9 13.5V6.2c.4-.6 1.1-1 2.2-1h4.6c.1 0 .2.1.2.2v13.2h-4.8c-.7 0-1.5.1-2.2.3z"/></svg>
-      <span class="bottom-app-nav-label">কুরআন</span>
-    </a>
-    <a class="bottom-app-nav-item" href="adhkar-bn.html">
-      <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3.2c3.9 1.7 6.5 4.8 6.5 8.4 0 4.4-3.3 8-7.4 8.7-.7.1-1.3-.4-1.3-1.1v-1.7C6.8 16.6 5 14.4 5 11.7 5 8.1 8 5 12 3.2zm0 2.3c-3.1 1.6-5 3.8-5 6.2 0 2.1 1.7 3.7 4.2 4.2.5.1.8.5.8 1v1.2c2.7-.8 4.5-3.3 4.5-6.5 0-2.4-1.7-4.6-4.5-6.1z"/></svg>
-      <span class="bottom-app-nav-label">আজকার</span>
-    </a>
-    <a class="bottom-app-nav-item" href="hidden-sadaqa-bn.html">
-      <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 21.2c-.3 0-.6-.1-.8-.3C6.1 16.2 3 13.4 3 9.5A4.4 4.4 0 0 1 7.5 5c1.8 0 3.4 1 4.5 2.4C13.1 6 14.7 5 16.5 5A4.4 4.4 0 0 1 21 9.5c0 3.9-3.1 6.7-8.2 11.4-.2.2-.5.3-.8.3zM7.5 7A2.4 2.4 0 0 0 5 9.5c0 2.7 2.2 4.9 7 9.3 4.8-4.4 7-6.6 7-9.3A2.4 2.4 0 0 0 16.5 7c-1.5 0-2.8 1.2-3.6 2.7-.2.3-.5.5-.9.5s-.7-.2-.9-.5C10.3 8.2 9 7 7.5 7z"/></svg>
-      <span class="bottom-app-nav-label">সদকা</span>
-    </a>
+    <a class="bottom-app-nav-item active" href="home-bn.html" aria-current="page"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 10.8 12 4l8 6.8v9.4A1.8 1.8 0 0 1 18.2 22h-4.7v-6.4h-3V22H5.8A1.8 1.8 0 0 1 4 20.2v-9.4z"/></svg><span class="bottom-app-nav-label">আজ</span></a>
+    <a class="bottom-app-nav-item" href="prayer-times-bn.html"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2.4 5.2 7.8v2.7a7.2 7.2 0 0 0-2.7 5.6V22h19v-5.9a7.2 7.2 0 0 0-2.7-5.6V7.8L12 2.4zm0 2.7 4.7 3.7v.5a7.1 7.1 0 0 0-9.4 0v-.5L12 5.1zM5.5 16.1a6.5 6.5 0 0 1 13 0V20h-3.1v-3.5a3.4 3.4 0 0 0-6.8 0V20H5.5v-3.9z"/></svg><span class="bottom-app-nav-label">নামাজ</span></a>
+    <a class="bottom-app-nav-item" href="quran-bn.html"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5.2 3.2A2.2 2.2 0 0 0 3 5.4v14.4c0 .6.4 1 1 1h6.2c1 0 1.8.3 2.4.9.3.3.9.3 1.2 0 .6-.6 1.4-.9 2.4-.9H22c.6 0 1-.4 1-1V5.4a2.2 2.2 0 0 0-2.2-2.2h-4.6c-1.3 0-2.4.4-3.2 1.1-.8-.7-1.9-1.1-3.2-1.1H5.2zM5 5.4c0-.1.1-.2.2-.2h4.6c1.1 0 1.8.4 2.2 1v12.7c-.6-.2-1.2-.3-1.8-.3H5V5.4zm9 13.5V6.2c.4-.6 1.1-1 2.2-1h4.6c.1 0 .2.1.2.2v13.2h-4.8c-.7 0-1.5.1-2.2.3z"/></svg><span class="bottom-app-nav-label">কুরআন</span></a>
+    <a class="bottom-app-nav-item" href="adhkar-bn.html"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3.2c3.9 1.7 6.5 4.8 6.5 8.4 0 4.4-3.3 8-7.4 8.7-.7.1-1.3-.4-1.3-1.1v-1.7C6.8 16.6 5 14.4 5 11.7 5 8.1 8 5 12 3.2zm0 2.3c-3.1 1.6-5 3.8-5 6.2 0 2.1 1.7 3.7 4.2 4.2.5.1.8.5.8 1v1.2c2.7-.8 4.5-3.3 4.5-6.5 0-2.4-1.7-4.6-4.5-6.1z"/></svg><span class="bottom-app-nav-label">আজকার</span></a>
+    <a class="bottom-app-nav-item" href="hidden-sadaqa-bn.html"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 21.2c-.3 0-.6-.1-.8-.3C6.1 16.2 3 13.4 3 9.5A4.4 4.4 0 0 1 7.5 5c1.8 0 3.4 1 4.5 2.4C13.1 6 14.7 5 16.5 5A4.4 4.4 0 0 1 21 9.5c0 3.9-3.1 6.7-8.2 11.4-.2.2-.5.3-.8.3zM7.5 7A2.4 2.4 0 0 0 5 9.5c0 2.7 2.2 4.9 7 9.3 4.8-4.4 7-6.6 7-9.3A2.4 2.4 0 0 0 16.5 7c-1.5 0-2.8 1.2-3.6 2.7-.2.3-.5.5-.9.5s-.7-.2-.9-.5C10.3 8.2 9 7 7.5 7z"/></svg><span class="bottom-app-nav-label">সদকা</span></a>
   </div>
 </nav>
 

@@ -1687,8 +1687,6 @@ html.light-mode .support-project-btn:hover{
   }
 }
 
-
-
 /* PREMIUM TODAY HUB + REFINED HOME NAVIGATION */
 .today-hub{
   margin:22px 0 24px;
@@ -1965,6 +1963,56 @@ html.light-mode .about-project-actions a{
 }
 
 
+.today-counter-action,
+.today-static-action{
+  cursor:pointer;
+  text-align:left;
+  font-family:inherit;
+}
+.today-static-action{
+  cursor:default;
+}
+.today-counter-track{
+  width:100%;
+  height:7px;
+  margin-top:10px;
+  border-radius:999px;
+  overflow:hidden;
+}
+html.dark-mode .today-counter-track{
+  background:rgba(255,255,255,0.08);
+}
+html.light-mode .today-counter-track{
+  background:rgba(45,122,70,0.12);
+}
+.today-counter-fill{
+  width:0%;
+  height:100%;
+  border-radius:999px;
+  transition:width .22s ease;
+  background:linear-gradient(90deg,#2d7a46,#66c680);
+}
+.today-counter-action:focus-visible{
+  outline:2px solid #66c680;
+  outline-offset:4px;
+}
+html.dark-mode .today-counter-action{
+  background:linear-gradient(135deg,#202016 0%, #17212a 48%, #143126 100%);
+  border-color:rgba(215,192,122,0.28);
+}
+html.light-mode .today-counter-action{
+  background:linear-gradient(135deg,#fffaf0 0%, #ffffff 48%, #eef7f1 100%);
+  border-color:rgba(141,107,22,0.18);
+}
+html.dark-mode .today-static-action{
+  background:linear-gradient(135deg,#151f29 0%, #17212a 48%, #1e2b22 100%);
+  border-color:rgba(102,198,128,0.18);
+}
+html.light-mode .today-static-action{
+  background:linear-gradient(135deg,#ffffff 0%, #fbfdfc 48%, #f1f7ed 100%);
+  border-color:rgba(45,122,70,0.13);
+}
+
 /* FIXED BOTTOM APP NAVIGATION */
 .bottom-app-nav{
   position:fixed;
@@ -1984,15 +2032,28 @@ html.light-mode .about-project-actions a{
 }
 
 html.dark-mode .bottom-app-nav{
-  background:linear-gradient(180deg,rgba(18,27,34,0.88) 0%,rgba(11,18,23,0.96) 100%);
-  border-top:1px solid rgba(124,187,148,0.16);
-  box-shadow:0 -14px 34px rgba(0,0,0,0.30), inset 0 1px 0 rgba(255,255,255,0.04);
+  background:linear-gradient(180deg,rgba(20,38,29,0.92) 0%,rgba(10,22,16,0.97) 100%);
+  border-top:1px solid rgba(102,198,128,0.30);
+  box-shadow:0 -14px 34px rgba(0,0,0,0.34), inset 0 1px 0 rgba(255,255,255,0.05);
 }
 
 html.light-mode .bottom-app-nav{
-  background:linear-gradient(180deg,rgba(255,255,255,0.88) 0%,rgba(247,250,248,0.96) 100%);
-  border-top:1px solid rgba(45,122,70,0.12);
-  box-shadow:0 -14px 34px rgba(18,34,24,0.10), inset 0 1px 0 rgba(255,255,255,0.88);
+  background:linear-gradient(180deg,rgba(243,251,246,0.92) 0%,rgba(232,246,238,0.97) 100%);
+  border-top:1px solid rgba(45,122,70,0.22);
+  box-shadow:0 -14px 34px rgba(18,34,24,0.12), inset 0 1px 0 rgba(255,255,255,0.92);
+}
+
+
+.bottom-app-nav::before{
+  content:"";
+  position:absolute;
+  top:0;
+  left:50%;
+  transform:translateX(-50%);
+  width:min(850px,100%);
+  height:3px;
+  background:linear-gradient(90deg,rgba(45,122,70,0),rgba(102,198,128,0.88),rgba(215,192,122,0.72),rgba(45,122,70,0));
+  pointer-events:none;
 }
 
 .bottom-app-nav-inner{
@@ -2166,28 +2227,33 @@ Zilkade ayında amellerini koru, fazlalıkları azalt ve zikri artır — bu, ö
 <button id="installBtn" class="install-btn" type="button">Uygulamayı yükle</button>
 </div>
 
-<section class="today-hub" aria-label="Müslüman günü">
+
+<section class="today-hub" aria-label="Bugün BarakaWay’de">
   <div class="today-hub-head">
     <div class="today-hub-kicker">Bugün BarakaWay’de</div>
-    <h2 class="today-hub-title">Namaz, zikir, Kur’an ve gizli iyilik etrafında sakin bir gün.</h2>
+    <h2 class="today-hub-title">Her gün — yeni bir fayda, yeni bir zikir ve Allah’a ﷻ doğru küçük bir adım</h2>
   </div>
   <div class="today-hub-grid">
-    <a class="today-action" href="prayer-times-tr.html">
-      <div class="today-action-top"><div class="today-action-icon">🕌</div><div class="today-action-arrow">→</div></div>
-      <div><div class="today-action-title">Sonraki namaz</div><div class="today-action-text">Vakit, takvim ve hızlı erişim.</div></div>
+    <a class="today-action" id="dailyArticleLink" href="articles-tr.html">
+      <div class="today-action-top"><div class="today-action-icon">📝</div><div class="today-action-arrow">→</div></div>
+      <div><div class="today-action-title">Faydalı makale</div><div class="today-action-text" id="dailyArticleTitle">Bugünün makalesini aç.</div></div>
     </a>
     <a class="today-action" href="adhkar-tr.html">
       <div class="today-action-top"><div class="today-action-icon">🌿</div><div class="today-action-arrow">→</div></div>
-      <div><div class="today-action-title">Günün zikri</div><div class="today-action-text">Sabah, akşam ve kalbin korunması.</div></div>
+      <div><div class="today-action-title" id="currentAdhkarTitle">Şu anki zikir</div><div class="today-action-text" id="currentAdhkarText">Günün bu vaktine uygun zikir.</div></div>
     </a>
-    <a class="today-action" href="quran-tr.html">
-      <div class="today-action-top"><div class="today-action-icon">📖</div><div class="today-action-arrow">→</div></div>
-      <div><div class="today-action-title">Bugünün ayeti</div><div class="today-action-text">Günlük dayanak olarak Kur’an.</div></div>
-    </a>
-    <a class="today-action" href="hidden-sadaqa-tr.html">
-      <div class="today-action-top"><div class="today-action-icon">🤲</div><div class="today-action-arrow">→</div></div>
-      <div><div class="today-action-title">Gizli sadaka</div><div class="today-action-text">İsim, gösteriş ve gürültü olmadan iyilik.</div></div>
-    </a>
+    <div class="today-action today-counter-action" id="allahNameCounterCard" role="button" tabindex="0" aria-label="Allah’ın ismini tekrar sayacı">
+      <div class="today-action-top"><div class="today-action-icon">☝️</div><div class="today-action-arrow" id="allahNameCounterValue">0/100</div></div>
+      <div>
+        <div class="today-action-title" id="allahNameToday">Allah’ın ismi</div>
+        <div class="today-action-text">Karta dokun ve 100 kez tekrar et.</div>
+        <div class="today-counter-track"><div class="today-counter-fill" id="allahNameCounterFill"></div></div>
+      </div>
+    </div>
+    <div class="today-action today-static-action" aria-label="Günlük hedef">
+      <div class="today-action-top"><div class="today-action-icon">🎯</div><div class="today-action-arrow">•</div></div>
+      <div><div class="today-action-title">Günlük hedef</div><div class="today-action-text" id="dailyPracticeText">Gün bitmeden Allah için sessiz bir amel.</div></div>
+    </div>
   </div>
 </section>
 
@@ -2199,31 +2265,19 @@ Zilkade ayında amellerini koru, fazlalıkları azalt ve zikri artır — bu, ö
 <div class="premium-resource-grid">
   <a class="premium-resource-card" href="names-tr.html">
     <div class="premium-resource-icon">☝️</div>
-    <div>
-      <div class="premium-resource-title">Allah’ın 99 ismi</div>
-      <div class="premium-resource-text">Anlamlar, tefekkür ve imanı güçlendirme.</div>
-    </div>
+    <div><div class="premium-resource-title">99 names</div><div class="premium-resource-text">Anlamlar, tefekkür ve imanı güçlendirme.</div></div>
   </a>
   <a class="premium-resource-card" href="qibla-tr.html">
     <div class="premium-resource-icon">🧭</div>
-    <div>
-      <div class="premium-resource-title">Kıble</div>
-      <div class="premium-resource-text">Namaz için hızlı yön.</div>
-    </div>
+    <div><div class="premium-resource-title">Qibla</div><div class="premium-resource-text">Namaz için hızlı yön.</div></div>
   </a>
   <a class="premium-resource-card" href="prophets-duas-tr.html">
     <div class="premium-resource-icon">🤲</div>
-    <div>
-      <div class="premium-resource-title">Peygamberin duaları ﷺ</div>
-      <div class="premium-resource-text">Anlam ve edep ile dualar.</div>
-    </div>
+    <div><div class="premium-resource-title">Duas</div><div class="premium-resource-text">Anlam ve edep ile dualar.</div></div>
   </a>
   <a class="premium-resource-card" href="articles-tr.html">
     <div class="premium-resource-icon">✨</div>
-    <div>
-      <div class="premium-resource-title">Makaleler</div>
-      <div class="premium-resource-text">Gürültüsüz kısa faydalı okumalar.</div>
-    </div>
+    <div><div class="premium-resource-title">Articles</div><div class="premium-resource-text">Gürültüsüz kısa faydalı okumalar.</div></div>
   </a>
 </div>
 
@@ -2238,10 +2292,7 @@ Zilkade ayında amellerini koru, fazlalıkları azalt ve zikri artır — bu, ö
 </div>
 
 <div class="home-primary-support">
-  <a href="support-project-tr.html" class="support-project-btn">
-    <span class="support-project-btn-shine"></span>
-    <span class="support-project-btn-text">Projeyi destekle</span>
-  </a>
+  <a href="support-project-tr.html" class="support-project-btn"><span class="support-project-btn-shine"></span><span class="support-project-btn-text">Projeyi destekle</span></a>
 </div>
 
 <div class="share-overlay" id="shareOverlay" aria-hidden="true">
@@ -2561,28 +2612,102 @@ window.addEventListener("DOMContentLoaded",function(){const installBtn=document.
 })();
 </script>
 
-<nav class="bottom-app-nav" aria-label="Primary navigation">
+
+
+<script>
+(function(){
+  const todayKey = new Date().toISOString().slice(0,10);
+  const dayNumber = Math.floor(Date.now() / 86400000);
+  const articles = [
+    {title:'Günün makalesi #1', url:'islamic_articles-tr/001-tr.html'},
+    {title:'Günün makalesi #2', url:'islamic_articles-tr/002-tr.html'},
+    {title:'Günün makalesi #3', url:'islamic_articles-tr/003-tr.html'},
+    {title:'Günün makalesi #4', url:'islamic_articles-tr/004-tr.html'},
+    {title:'Günün makalesi #5', url:'islamic_articles-tr/005-tr.html'},
+    {title:'Günün makalesi #6', url:'islamic_articles-tr/006-tr.html'},
+    {title:'Günün makalesi #7', url:'islamic_articles-tr/007-tr.html'},
+    {title:'Günün makalesi #8', url:'islamic_articles-tr/008-tr.html'},
+    {title:'Günün makalesi #9', url:'islamic_articles-tr/009-tr.html'},
+    {title:'Günün makalesi #10', url:'islamic_articles-tr/010-tr.html'},
+    {title:'Günün makalesi #11', url:'islamic_articles-tr/011-tr.html'},
+    {title:'Günün makalesi #12', url:'islamic_articles-tr/012-tr.html'},
+    {title:'Günün makalesi #13', url:'islamic_articles-tr/013-tr.html'},
+    {title:'Günün makalesi #14', url:'islamic_articles-tr/014-tr.html'},
+    {title:'Günün makalesi #15', url:'islamic_articles-tr/015-tr.html'},
+    {title:'Günün makalesi #16', url:'islamic_articles-tr/016-tr.html'},
+    {title:'Günün makalesi #17', url:'islamic_articles-tr/017-tr.html'},
+    {title:'Günün makalesi #18', url:'islamic_articles-tr/018-tr.html'},
+    {title:'Günün makalesi #19', url:'islamic_articles-tr/019-tr.html'},
+    {title:'Günün makalesi #20', url:'islamic_articles-tr/020-tr.html'},
+    {title:'Günün makalesi #21', url:'islamic_articles-tr/021-tr.html'},
+    {title:'Günün makalesi #22', url:'islamic_articles-tr/022-tr.html'},
+    {title:'Günün makalesi #23', url:'islamic_articles-tr/023-tr.html'},
+    {title:'Günün makalesi #24', url:'islamic_articles-tr/024-tr.html'},
+    {title:'Günün makalesi #25', url:'islamic_articles-tr/025-tr.html'},
+    {title:'Günün makalesi #26', url:'islamic_articles-tr/026-tr.html'},
+    {title:'Günün makalesi #27', url:'islamic_articles-tr/027-tr.html'},
+    {title:'Günün makalesi #28', url:'islamic_articles-tr/028-tr.html'},
+    {title:'Günün makalesi #29', url:'islamic_articles-tr/029-tr.html'},
+    {title:'Günün makalesi #30', url:'islamic_articles-tr/030-tr.html'}
+  ];
+  const names = ['Ar-Rahman', 'Ar-Rahim', 'Al-Malik', 'Al-Quddus', 'As-Salam', 'Al-Mu’min', 'Al-Muhaymin', 'Al-Aziz', 'Al-Jabbar', 'Al-Mutakabbir', 'Al-Khaliq', 'Al-Bari', 'Al-Musawwir', 'Al-Ghaffar', 'Al-Qahhar', 'Al-Wahhab', 'Ar-Razzaq', 'Al-Fattah', 'Al-Alim', 'Al-Qabid', 'Al-Basit', 'Al-Khafid', 'Ar-Rafi', 'Al-Muizz', 'Al-Mudhill', 'As-Sami', 'Al-Basir', 'Al-Hakam', 'Al-Adl', 'Al-Latif', 'Al-Khabir', 'Al-Halim', 'Al-Azim', 'Al-Ghafur', 'Ash-Shakur', 'Al-Ali', 'Al-Kabir', 'Al-Hafiz', 'Al-Muqit', 'Al-Hasib'];
+  const goals = [
+    'Bir önemli işten önce niyetini yenile.',
+    'Bir iyiliği sessizce, gösterişsiz yap.',
+    'Kısa bir metin oku ve bir ders çıkar.',
+    'Allah’tan sakin şekilde 33 kez bağışlanma dile.',
+    'Zamanını çalan bir boş işi bırak.',
+    'Anne-baban ve sevdiklerin için dua et.',
+    'Allah’ın belirli bir nimeti için şükret.'
+  ];
+  const article = articles[dayNumber % articles.length];
+  const articleLink = document.getElementById('dailyArticleLink');
+  const articleTitle = document.getElementById('dailyArticleTitle');
+  if(articleLink && articleTitle){ articleLink.href = article.url; articleTitle.textContent = article.title; }
+  const hour = new Date().getHours();
+  const currentAdhkarTitle = document.getElementById('currentAdhkarTitle');
+  const currentAdhkarText = document.getElementById('currentAdhkarText');
+  if(currentAdhkarTitle && currentAdhkarText){
+    if(hour >= 4 && hour < 11){ currentAdhkarTitle.textContent = 'Sabah zikri'; currentAdhkarText.textContent = 'Sabah korumasını güçlendirmek için en iyi vakit.'; }
+    else if(hour >= 16 && hour < 22){ currentAdhkarTitle.textContent = 'Akşam zikri'; currentAdhkarText.textContent = 'Gün bitmeden akşam koruması.'; }
+    else{ currentAdhkarTitle.textContent = 'Sonraki zikir'; currentAdhkarText.textContent = hour < 4 ? 'Sonraki — Fecirden sonra sabah zikri.' : 'Sonraki — Magrib’e yakın akşam zikri.'; }
+  }
+  const name = names[dayNumber % names.length];
+  const nameEl = document.getElementById('allahNameToday');
+  const card = document.getElementById('allahNameCounterCard');
+  const valueEl = document.getElementById('allahNameCounterValue');
+  const fillEl = document.getElementById('allahNameCounterFill');
+  const storageKey = 'barakaway_name_counter_tr_' + todayKey;
+  let count = Math.max(0, Math.min(100, parseInt(localStorage.getItem(storageKey) || '0', 10) || 0));
+  function renderCounter(){
+    if(nameEl) nameEl.textContent = name;
+    if(valueEl) valueEl.textContent = count + '/100';
+    if(fillEl) fillEl.style.width = count + '%';
+    if(card) card.setAttribute('aria-label', name + ': ' + count + ' 100 tekrardan');
+  }
+  function incrementCounter(){
+    count = count >= 100 ? 0 : count + 1;
+    localStorage.setItem(storageKey, String(count));
+    renderCounter();
+  }
+  if(card){
+    card.addEventListener('click', incrementCounter);
+    card.addEventListener('keydown', function(e){ if(e.key === 'Enter' || e.key === ' '){ e.preventDefault(); incrementCounter(); } });
+  }
+  renderCounter();
+  const practice = document.getElementById('dailyPracticeText');
+  if(practice) practice.textContent = goals[dayNumber % goals.length];
+})();
+</script>
+
+
+<nav class="bottom-app-nav" aria-label="Uygulama alt menüsü">
   <div class="bottom-app-nav-inner">
-    <a class="bottom-app-nav-item active" href="home-tr.html">
-      <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3.2 3.5 10v10.2c0 .5.4.9.9.9h5.2v-6.4h4.8v6.4h5.2c.5 0 .9-.4.9-.9V10L12 3.2zm0 2.6 6.5 5.2v8.1h-2.1v-6.4H7.6v6.4H5.5V11L12 5.8z"/></svg>
-      <span class="bottom-app-nav-label">Bugün</span>
-    </a>
-    <a class="bottom-app-nav-item" href="prayer-times-tr.html">
-      <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2.4 5.2 7.8v2.7a7.2 7.2 0 0 0-2.7 5.6V22h19v-5.9a7.2 7.2 0 0 0-2.7-5.6V7.8L12 2.4zm0 2.7 4.7 3.7v.5a7.1 7.1 0 0 0-9.4 0v-.5L12 5.1zM5.5 16.1a6.5 6.5 0 0 1 13 0V20h-3.1v-3.5a3.4 3.4 0 0 0-6.8 0V20H5.5v-3.9z"/></svg>
-      <span class="bottom-app-nav-label">Namaz</span>
-    </a>
-    <a class="bottom-app-nav-item" href="quran-tr.html">
-      <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5.2 3.2A2.2 2.2 0 0 0 3 5.4v14.4c0 .6.4 1 1 1h6.2c1 0 1.8.3 2.4.9.3.3.9.3 1.2 0 .6-.6 1.4-.9 2.4-.9H22c.6 0 1-.4 1-1V5.4a2.2 2.2 0 0 0-2.2-2.2h-4.6c-1.3 0-2.4.4-3.2 1.1-.8-.7-1.9-1.1-3.2-1.1H5.2zM5 5.4c0-.1.1-.2.2-.2h4.6c1.1 0 1.8.4 2.2 1v12.7c-.6-.2-1.2-.3-1.8-.3H5V5.4zm9 13.5V6.2c.4-.6 1.1-1 2.2-1h4.6c.1 0 .2.1.2.2v13.2h-4.8c-.7 0-1.5.1-2.2.3z"/></svg>
-      <span class="bottom-app-nav-label">Kur’an</span>
-    </a>
-    <a class="bottom-app-nav-item" href="adhkar-tr.html">
-      <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3.2c3.9 1.7 6.5 4.8 6.5 8.4 0 4.4-3.3 8-7.4 8.7-.7.1-1.3-.4-1.3-1.1v-1.7C6.8 16.6 5 14.4 5 11.7 5 8.1 8 5 12 3.2zm0 2.3c-3.1 1.6-5 3.8-5 6.2 0 2.1 1.7 3.7 4.2 4.2.5.1.8.5.8 1v1.2c2.7-.8 4.5-3.3 4.5-6.5 0-2.4-1.7-4.6-4.5-6.1z"/></svg>
-      <span class="bottom-app-nav-label">Zikirler</span>
-    </a>
-    <a class="bottom-app-nav-item" href="hidden-sadaqa-tr.html">
-      <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 21.2c-.3 0-.6-.1-.8-.3C6.1 16.2 3 13.4 3 9.5A4.4 4.4 0 0 1 7.5 5c1.8 0 3.4 1 4.5 2.4C13.1 6 14.7 5 16.5 5A4.4 4.4 0 0 1 21 9.5c0 3.9-3.1 6.7-8.2 11.4-.2.2-.5.3-.8.3zM7.5 7A2.4 2.4 0 0 0 5 9.5c0 2.7 2.2 4.9 7 9.3 4.8-4.4 7-6.6 7-9.3A2.4 2.4 0 0 0 16.5 7c-1.5 0-2.8 1.2-3.6 2.7-.2.3-.5.5-.9.5s-.7-.2-.9-.5C10.3 8.2 9 7 7.5 7z"/></svg>
-      <span class="bottom-app-nav-label">Sadaka</span>
-    </a>
+    <a class="bottom-app-nav-item active" href="home-tr.html" aria-current="page"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 10.8 12 4l8 6.8v9.4A1.8 1.8 0 0 1 18.2 22h-4.7v-6.4h-3V22H5.8A1.8 1.8 0 0 1 4 20.2v-9.4z"/></svg><span class="bottom-app-nav-label">Bugün</span></a>
+    <a class="bottom-app-nav-item" href="prayer-times-tr.html"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2.4 5.2 7.8v2.7a7.2 7.2 0 0 0-2.7 5.6V22h19v-5.9a7.2 7.2 0 0 0-2.7-5.6V7.8L12 2.4zm0 2.7 4.7 3.7v.5a7.1 7.1 0 0 0-9.4 0v-.5L12 5.1zM5.5 16.1a6.5 6.5 0 0 1 13 0V20h-3.1v-3.5a3.4 3.4 0 0 0-6.8 0V20H5.5v-3.9z"/></svg><span class="bottom-app-nav-label">Namaz</span></a>
+    <a class="bottom-app-nav-item" href="quran-tr.html"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5.2 3.2A2.2 2.2 0 0 0 3 5.4v14.4c0 .6.4 1 1 1h6.2c1 0 1.8.3 2.4.9.3.3.9.3 1.2 0 .6-.6 1.4-.9 2.4-.9H22c.6 0 1-.4 1-1V5.4a2.2 2.2 0 0 0-2.2-2.2h-4.6c-1.3 0-2.4.4-3.2 1.1-.8-.7-1.9-1.1-3.2-1.1H5.2zM5 5.4c0-.1.1-.2.2-.2h4.6c1.1 0 1.8.4 2.2 1v12.7c-.6-.2-1.2-.3-1.8-.3H5V5.4zm9 13.5V6.2c.4-.6 1.1-1 2.2-1h4.6c.1 0 .2.1.2.2v13.2h-4.8c-.7 0-1.5.1-2.2.3z"/></svg><span class="bottom-app-nav-label">Kur’an</span></a>
+    <a class="bottom-app-nav-item" href="adhkar-tr.html"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3.2c3.9 1.7 6.5 4.8 6.5 8.4 0 4.4-3.3 8-7.4 8.7-.7.1-1.3-.4-1.3-1.1v-1.7C6.8 16.6 5 14.4 5 11.7 5 8.1 8 5 12 3.2zm0 2.3c-3.1 1.6-5 3.8-5 6.2 0 2.1 1.7 3.7 4.2 4.2.5.1.8.5.8 1v1.2c2.7-.8 4.5-3.3 4.5-6.5 0-2.4-1.7-4.6-4.5-6.1z"/></svg><span class="bottom-app-nav-label">Zikirler</span></a>
+    <a class="bottom-app-nav-item" href="hidden-sadaqa-tr.html"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 21.2c-.3 0-.6-.1-.8-.3C6.1 16.2 3 13.4 3 9.5A4.4 4.4 0 0 1 7.5 5c1.8 0 3.4 1 4.5 2.4C13.1 6 14.7 5 16.5 5A4.4 4.4 0 0 1 21 9.5c0 3.9-3.1 6.7-8.2 11.4-.2.2-.5.3-.8.3zM7.5 7A2.4 2.4 0 0 0 5 9.5c0 2.7 2.2 4.9 7 9.3 4.8-4.4 7-6.6 7-9.3A2.4 2.4 0 0 0 16.5 7c-1.5 0-2.8 1.2-3.6 2.7-.2.3-.5.5-.9.5s-.7-.2-.9-.5C10.3 8.2 9 7 7.5 7z"/></svg><span class="bottom-app-nav-label">Sadaka</span></a>
   </div>
 </nav>
 
