@@ -1,4 +1,4 @@
-﻿<!--
+<!--
 بِسْمِ ٱللَّٰهِ ٱلرَّحْمَـٰنِ ٱلرَّحِيمِ
 In the name of Allah, the Most Merciful, the Most Compassionate
 -->
@@ -1028,7 +1028,6 @@ html.dark-mode .install-help-close{border:1px solid #2a3138;background:#1d242c;c
 html.light-mode .install-help-close{border:1px solid #dfe8e2;background:#fff;color:#1f2a22}
 
 
-
 /* DESKTOP TOP ACTIONS ONLY */
 .desktop-top-actions{
   display:grid;
@@ -1906,6 +1905,52 @@ html.light-mode .today-action-title{color:#172019;}
 }
 html.dark-mode .today-action-text{color:#aebbb5;}
 html.light-mode .today-action-text{color:#647268;}
+.today-ayah-text{
+  display:flex;
+  flex-direction:column;
+  gap:7px;
+  font-weight:650;
+}
+.today-ayah-ref{
+  display:inline-flex;
+  width:max-content;
+  padding:3px 8px;
+  border-radius:999px;
+  font-size:10px;
+  line-height:1.2;
+  font-weight:950;
+  letter-spacing:0.04em;
+}
+html.dark-mode .today-ayah-ref{
+  background:rgba(215,192,122,0.14);
+  color:#f1d889;
+  border:1px solid rgba(215,192,122,0.24);
+}
+html.light-mode .today-ayah-ref{
+  background:#fff7e4;
+  color:#7b5b13;
+  border:1px solid rgba(141,107,22,0.18);
+}
+.today-ayah-line{
+  font-size:13px;
+  line-height:1.42;
+  font-weight:850;
+}
+html.dark-mode .today-ayah-line{color:#eef6f0;}
+html.light-mode .today-ayah-line{color:#172019;}
+.today-ayah-task-label{
+  display:inline-block;
+  margin-right:5px;
+  font-weight:950;
+}
+html.dark-mode .today-ayah-task-label{color:#d7c07a;}
+html.light-mode .today-ayah-task-label{color:#8d6b16;}
+.today-ayah-task{
+  font-size:12px;
+  line-height:1.38;
+  font-weight:650;
+}
+
 .home-section-title{
   margin:28px 0 14px;
   display:flex;
@@ -2158,36 +2203,117 @@ html.light-mode .today-goal-action.goal-done{
   50%{box-shadow:0 12px 24px rgba(0,0,0,0.14),0 0 22px rgba(210,68,68,0.28);}
 }
 
-/* FIXED BOTTOM APP NAVIGATION */
+
+
+/* MICRO KNOWLEDGE DAY — REQUIRED FIFTH DAILY TASK */
+.today-micro-wrap{
+  padding:0 16px 18px;
+}
+.today-micro-action{
+  width:100%;
+  min-height:118px;
+  box-sizing:border-box;
+}
+.today-micro-question{
+  font-size:13px;
+  line-height:1.4;
+  font-weight:500;
+  opacity:0.85;
+}
+html.dark-mode.today-micro-question{color:#f4f7f3;}
+html.light-mode.today-micro-question{color:#172019;}
+.micro-options{
+  display:grid;
+  grid-template-columns:repeat(3,minmax(0,1fr));
+  gap:8px;
+  margin-top:12px;
+}
+.micro-option{
+  width:100%;
+  min-height:38px;
+  margin:0;
+  padding:8px 10px;
+  border-radius:14px;
+  border:1px solid transparent;
+  font-size:12px;
+  font-weight:900;
+  line-height:1.2;
+  cursor:pointer;
+  transition:transform .16s ease, background .25s ease, border-color .25s ease, color .25s ease, opacity .25s ease;
+}
+html.dark-mode .micro-option{
+  background:rgba(102,198,128,.11);
+  border-color:rgba(102,198,128,.18);
+  color:#e7f7ed;
+}
+html.light-mode .micro-option{
+  background:#eff8f2;
+  border-color:rgba(45,122,70,.14);
+  color:#2d7a46;
+}
+.micro-option:active{transform:scale(.98);}
+.today-micro-action.task-done .micro-option,
+.today-micro-action.micro-answered .micro-option{
+  pointer-events:none;
+  opacity:.58;
+}
+.micro-answer-box{
+  display:none;
+  margin-top:12px;
+  padding:12px 13px;
+  border-radius:18px;
+  font-size:12px;
+  line-height:1.45;
+  font-weight:750;
+}
+html.dark-mode .micro-answer-box{
+  background:rgba(102,198,128,.11);
+  border:1px solid rgba(102,198,128,.18);
+  color:#dff6e7;
+}
+html.light-mode .micro-answer-box{
+  background:#f0faf3;
+  border:1px solid rgba(45,122,70,.14);
+  color:#244b32;
+}
+.micro-answer-box.show{display:block;}
+.micro-answer-box strong{font-weight:950;}
+@media(max-width:700px){
+  .today-micro-wrap{padding:0 12px 15px;}
+  .today-micro-action{border-radius:22px;padding:14px;}
+  .micro-options{grid-template-columns:1fr;gap:7px;}
+  .micro-option{min-height:36px;}
+}
+
+/* FIXED BOTTOM APP NAVIGATION — PREMIUM SVG APP STYLE */
 .bottom-app-nav{
   position:fixed;
   left:0;
   right:0;
   bottom:0;
   z-index:2100;
-  min-height:76px;
-  padding:8px max(10px, env(safe-area-inset-left)) calc(8px + env(safe-area-inset-bottom)) max(10px, env(safe-area-inset-right));
+  min-height:82px;
+  padding:10px max(12px, env(safe-area-inset-left)) calc(10px + env(safe-area-inset-bottom)) max(12px, env(safe-area-inset-right));
   display:flex;
   align-items:center;
   justify-content:center;
   box-sizing:border-box;
-  backdrop-filter:blur(18px);
-  -webkit-backdrop-filter:blur(18px);
+  backdrop-filter:blur(22px) saturate(1.28);
+  -webkit-backdrop-filter:blur(22px) saturate(1.28);
   transition:background .25s,border-color .25s,box-shadow .25s;
 }
 
 html.dark-mode .bottom-app-nav{
-  background:linear-gradient(180deg,rgba(20,38,29,0.92) 0%,rgba(10,22,16,0.97) 100%);
+  background:linear-gradient(180deg,rgba(20,38,29,0.86) 0%,rgba(9,20,15,0.98) 100%);
   border-top:1px solid rgba(102,198,128,0.30);
-  box-shadow:0 -14px 34px rgba(0,0,0,0.34), inset 0 1px 0 rgba(255,255,255,0.05);
+  box-shadow:0 -18px 42px rgba(0,0,0,0.40), inset 0 1px 0 rgba(255,255,255,0.06);
 }
 
 html.light-mode .bottom-app-nav{
-  background:linear-gradient(180deg,rgba(243,251,246,0.92) 0%,rgba(232,246,238,0.97) 100%);
-  border-top:1px solid rgba(45,122,70,0.22);
-  box-shadow:0 -14px 34px rgba(18,34,24,0.12), inset 0 1px 0 rgba(255,255,255,0.92);
+  background:linear-gradient(180deg,rgba(253,255,254,0.92) 0%,rgba(232,246,238,0.98) 100%);
+  border-top:1px solid rgba(45,122,70,0.24);
+  box-shadow:0 -18px 42px rgba(18,34,24,0.14), inset 0 1px 0 rgba(255,255,255,0.96);
 }
-
 
 .bottom-app-nav::before{
   content:"";
@@ -2197,7 +2323,7 @@ html.light-mode .bottom-app-nav{
   transform:translateX(-50%);
   width:min(850px,100%);
   height:3px;
-  background:linear-gradient(90deg,rgba(45,122,70,0),rgba(102,198,128,0.88),rgba(215,192,122,0.72),rgba(45,122,70,0));
+  background:linear-gradient(90deg,rgba(45,122,70,0),rgba(102,198,128,0.86),rgba(215,192,122,0.76),rgba(45,122,70,0));
   pointer-events:none;
 }
 
@@ -2206,33 +2332,48 @@ html.light-mode .bottom-app-nav{
   display:grid;
   grid-template-columns:repeat(5,1fr);
   align-items:center;
-  gap:2px;
+  gap:6px;
 }
 
 .bottom-app-nav-item{
   position:relative;
   min-width:0;
-  min-height:58px;
-  border-radius:18px;
+  min-height:62px;
+  border-radius:22px;
   display:flex;
   flex-direction:column;
   align-items:center;
   justify-content:center;
-  gap:4px;
+  gap:5px;
   text-decoration:none;
   font-size:11px;
-  line-height:1.1;
-  font-weight:800;
-  letter-spacing:-0.02em;
+  line-height:1.05;
+  font-weight:900;
+  letter-spacing:-0.025em;
   -webkit-tap-highlight-color:transparent;
-  transition:background .22s ease,color .22s ease,transform .16s ease,box-shadow .22s ease;
+  transition:background .22s ease, color .22s ease, transform .16s ease, box-shadow .22s ease, border-color .22s ease;
+  border:1px solid transparent;
+}
+
+.bottom-app-nav-icon{
+  width:30px;
+  height:30px;
+  border-radius:14px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  transition:background .22s ease, transform .18s ease, box-shadow .22s ease;
 }
 
 .bottom-app-nav-item svg{
-  width:23px;
-  height:23px;
-  fill:currentColor;
-  transition:transform .18s ease,opacity .22s ease;
+  width:21px;
+  height:21px;
+  fill:none;
+  stroke:currentColor;
+  stroke-width:2.05;
+  stroke-linecap:round;
+  stroke-linejoin:round;
+  transition:transform .18s ease,opacity .22s ease,stroke-width .18s ease;
 }
 
 .bottom-app-nav-label{
@@ -2243,54 +2384,235 @@ html.light-mode .bottom-app-nav{
   white-space:nowrap;
 }
 
-html.dark-mode .bottom-app-nav-item{
-  color:#98a7b2;
-}
-
-html.light-mode .bottom-app-nav-item{
-  color:#6a756d;
-}
+html.dark-mode .bottom-app-nav-item{color:#9aacb5;}
+html.light-mode .bottom-app-nav-item{color:#66746b;}
 
 html.dark-mode .bottom-app-nav-item.active{
-  color:#f5fff8;
-  background:linear-gradient(135deg,rgba(45,122,70,0.44),rgba(102,198,128,0.18));
-  box-shadow:inset 0 1px 0 rgba(255,255,255,0.06), 0 8px 18px rgba(0,0,0,0.20);
+  color:#ffffff;
+  background:linear-gradient(135deg,rgba(45,122,70,0.52),rgba(102,198,128,0.18));
+  border-color:rgba(102,198,128,0.22);
+  box-shadow:inset 0 1px 0 rgba(255,255,255,0.08),0 10px 22px rgba(0,0,0,0.24);
 }
 
 html.light-mode .bottom-app-nav-item.active{
-  color:#1f6e3d;
-  background:linear-gradient(135deg,#eef8f1,#ffffff);
-  box-shadow:inset 0 1px 0 rgba(255,255,255,0.96), 0 8px 18px rgba(15,24,18,0.07);
+  color:#ffffff;
+  background:linear-gradient(135deg,#2d7a46 0%,#4caf6a 100%);
+  border-color:rgba(45,122,70,0.18);
+  box-shadow:inset 0 1px 0 rgba(255,255,255,0.18),0 12px 24px rgba(45,122,70,0.20);
 }
 
-.bottom-app-nav-item:active{
-  transform:scale(0.96);
+html.dark-mode .bottom-app-nav-item.active .bottom-app-nav-icon{
+  background:rgba(255,255,255,0.09);
+  box-shadow:inset 0 1px 0 rgba(255,255,255,0.06);
 }
 
-.bottom-app-nav-item.active svg{
-  transform:translateY(-1px) scale(1.04);
+html.light-mode .bottom-app-nav-item.active .bottom-app-nav-icon{
+  background:rgba(255,255,255,0.18);
+  box-shadow:inset 0 1px 0 rgba(255,255,255,0.22);
 }
 
-.container{
-  padding-bottom:118px;
+.bottom-app-nav-item:hover{transform:translateY(-1px);}
+html.dark-mode .bottom-app-nav-item:hover:not(.active){background:rgba(255,255,255,0.045);color:#d8efe1;}
+html.light-mode .bottom-app-nav-item:hover:not(.active){background:rgba(45,122,70,0.07);color:#24663a;}
+.bottom-app-nav-item:active{transform:scale(0.96);}
+.bottom-app-nav-item.active svg{transform:translateY(-1px) scale(1.05);stroke-width:2.25;}
+
+.container{padding-bottom:122px;}
+
+@media(max-width:700px){
+  .container{padding-bottom:122px;}
+  .bottom-app-nav{min-height:78px;padding-top:8px;}
+  .bottom-app-nav-inner{gap:4px;}
+  .bottom-app-nav-item{min-height:58px;border-radius:18px;font-size:10.5px;}
+  .bottom-app-nav-icon{width:28px;height:28px;border-radius:13px;}
+  .bottom-app-nav-item svg{width:20px;height:20px;}
+}
+.today-daily-task{
+  position:relative;
+  overflow:hidden;
+}
+
+.today-daily-task::after{
+  content:"";
+  position:absolute;
+  inset:0;
+  opacity:var(--task-red-opacity,0);
+  background:linear-gradient(135deg,rgba(178,34,34,0.04),rgba(210,38,38,0.28));
+  pointer-events:none;
+  transition:opacity .45s ease;
+}
+
+.today-daily-task > *{
+  position:relative;
+  z-index:1;
+}
+
+.today-daily-task.task-done .today-task-status{
+  color:#66c680 !important;
+  font-size:22px;
+}
+
+html.dark-mode .today-daily-task.task-done{
+  background:linear-gradient(135deg,#17261d 0%,#17262a 52%,#143126 100%) !important;
+  border-color:rgba(102,198,128,.38) !important;
+}
+
+html.light-mode .today-daily-task.task-done{
+  background:linear-gradient(135deg,#f7fff9 0%,#ffffff 52%,#eaf8ef 100%) !important;
+  border-color:rgba(45,122,70,.28) !important;
+}
+
+.today-daily-task.task-urgent:not(.task-done){
+  animation:goalPulse 1.4s ease-in-out infinite;
+}
+
+.today-daily-task.task-done .today-counter-track{
+  display:none;
+}
+
+
+/* TAHAJJUD ALARM — COMPACT BAR */
+.tahajjud-alarm-bar{
+  margin:-4px 0 18px;
+  padding:13px 15px;
+  border-radius:22px;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:12px;
+  transition:background .25s,border-color .25s,box-shadow .25s,transform .18s ease;
+  border:1.5px solid transparent;
+}
+
+html.dark-mode .tahajjud-alarm-bar{
+  background:linear-gradient(135deg,#201d2a 0%, #171f29 52%, #142b24 100%);
+  border-color:rgba(215,192,122,0.28);
+  box-shadow:0 12px 24px rgba(0,0,0,0.20), inset 0 1px 0 rgba(255,255,255,0.04);
+}
+
+html.light-mode .tahajjud-alarm-bar{
+  background:linear-gradient(135deg,#fffaf0 0%, #ffffff 52%, #eef7f1 100%);
+  border-color:rgba(141,107,22,0.18);
+  box-shadow:0 12px 24px rgba(15,24,18,0.05), inset 0 1px 0 rgba(255,255,255,0.96);
+}
+
+.tahajjud-alarm-left{
+  display:flex;
+  align-items:center;
+  gap:11px;
+  min-width:0;
+}
+
+.tahajjud-alarm-icon{
+  width:38px;
+  height:38px;
+  min-width:38px;
+  border-radius:15px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-size:20px;
+}
+
+html.dark-mode .tahajjud-alarm-icon{
+  background:rgba(215,192,122,0.13);
+}
+
+html.light-mode .tahajjud-alarm-icon{
+  background:#fff4d8;
+}
+
+.tahajjud-alarm-title{
+  font-size:14px;
+  line-height:1.15;
+  font-weight:900;
+  letter-spacing:-0.025em;
+}
+
+html.dark-mode .tahajjud-alarm-title{color:#f5f8f6;}
+html.light-mode .tahajjud-alarm-title{color:#172019;}
+
+.tahajjud-alarm-meta{
+  margin-top:3px;
+  font-size:11px;
+  line-height:1.25;
+  font-weight:700;
+}
+
+html.dark-mode .tahajjud-alarm-meta{color:#aebbb5;}
+html.light-mode .tahajjud-alarm-meta{color:#647268;}
+
+.tahajjud-switch{
+  position:relative;
+  width:54px;
+  height:30px;
+  min-width:54px;
+  display:inline-flex;
+  align-items:center;
+}
+
+.tahajjud-switch input{
+  opacity:0;
+  width:0;
+  height:0;
+}
+
+.tahajjud-slider{
+  position:absolute;
+  cursor:pointer;
+  inset:0;
+  border-radius:999px;
+  transition:background .25s ease, box-shadow .25s ease;
+}
+
+html.dark-mode .tahajjud-slider{
+  background:#303a44;
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.05);
+}
+
+html.light-mode .tahajjud-slider{
+  background:#d7ded9;
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.6);
+}
+
+.tahajjud-slider::before{
+  content:"";
+  position:absolute;
+  height:24px;
+  width:24px;
+  left:3px;
+  top:3px;
+  border-radius:50%;
+  background:#fff;
+  transition:transform .25s ease;
+  box-shadow:0 4px 10px rgba(0,0,0,.18);
+}
+
+.tahajjud-switch input:checked + .tahajjud-slider{
+  background:#2d7a46;
+  box-shadow:0 0 0 3px rgba(45,122,70,.14);
+}
+
+.tahajjud-switch input:checked + .tahajjud-slider::before{
+  transform:translateX(24px);
 }
 
 @media(max-width:700px){
-  .container{
-    padding-bottom:118px;
+  .tahajjud-alarm-bar{
+    margin:-2px 0 16px;
+    padding:12px 13px;
+    border-radius:20px;
   }
-  .bottom-app-nav{
-    min-height:74px;
-    padding-top:7px;
+  .tahajjud-alarm-title{
+    font-size:13px;
   }
-  .bottom-app-nav-item{
-    min-height:56px;
-    border-radius:16px;
+  .tahajjud-alarm-meta{
     font-size:10.5px;
   }
-  .bottom-app-nav-item svg{
-    width:22px;
-    height:22px;
+  .tahajjud-alarm-icon{
+    width:36px;
+    height:36px;
+    min-width:36px;
   }
 }
 
@@ -2300,8 +2622,9 @@ html.light-mode .bottom-app-nav-item.active{
 <link rel="stylesheet" href="/theme-universal.css">
 </head>
 <body>
+
 <div class="mobile-top-controls">
-  <button class="icon-btn left" onclick="changeLanguageChoice()" aria-label="تغيير اللغة">
+  <button class="icon-btn left" onclick="changeLanguageChoice()" aria-label="Change language">
     <svg viewBox="0 0 24 24" aria-hidden="true">
       <path d="M12 2a10 10 0 100 20 10 10 0 000-20zm6.92 9h-3.02a15.6 15.6 0 00-1.33-5.01A8.03 8.03 0 0118.92 11zM12 4.04c.89 1.08 1.97 3.22 2.28 6.96H9.72C10.03 7.26 11.11 5.12 12 4.04zM4.99 13h3.02a15.6 15.6 0 001.33 5.01A8.03 8.03 0 014.99 13zM8.1 11H5.08a8.03 8.03 0 014.35-5.01A15.6 15.6 0 008.1 11zm1.62 2h4.56c-.31 3.74-1.39 5.88-2.28 6.96-.89-1.08-1.97-3.22-2.28-6.96zm5.18 5.01A15.6 15.6 0 0015.9 13h3.02a8.03 8.03 0 01-4.02 5.01z"/>
     </svg>
@@ -2309,9 +2632,9 @@ html.light-mode .bottom-app-nav-item.active{
   </button>
   <div class="theme-toggle-center">
     <span class="theme-toggle-label">الوضع الفاتح</span>
-    <input type="checkbox" class="theme-switch" id="themeSwitch" aria-label="تبديل النمط">
+    <input type="checkbox" class="theme-switch" id="themeSwitch" aria-label="Toggle theme">
   </div>
-  <button class="icon-btn right" onclick="shareApp()" aria-label="مشاركة التطبيق">
+  <button class="icon-btn right" onclick="shareApp()" aria-label="Share app">
     <svg viewBox="0 0 24 24" aria-hidden="true">
       <path d="M18 16a2.99 2.99 0 00-2.39 1.2l-6.7-3.35a3.1 3.1 0 000-1.7l6.7-3.35A3 3 0 1014 6a3.1 3.1 0 00.08.68l-6.7 3.35a3 3 0 100 4.94l6.7 3.35A3 3 0 1018 16z"/>
     </svg>
@@ -2326,6 +2649,8 @@ html.light-mode .bottom-app-nav-item.active{
 </div>
 </div>
 </div>
+</div>
+
 
 
 <div class="desktop-top-actions" aria-label="Desktop quick actions">
@@ -2339,7 +2664,7 @@ html.light-mode .bottom-app-nav-item.active{
   </div>
   <div class="desktop-action-right">
     <div class="desktop-theme-toggle-inner">
-      <span class="theme-toggle-label">Light mode</span>
+      <span class="theme-toggle-label">الوضع الفاتح</span>
       <input type="checkbox" class="theme-switch" id="desktopThemeSwitch" aria-label="Toggle theme">
     </div>
   </div>
@@ -2348,7 +2673,7 @@ html.light-mode .bottom-app-nav-item.active{
 <div class="container">
 
 <div class="brand-prayer-hero">
-  <button class="brand-signature" id="brandInstallTrigger" type="button" dir="ltr" style="unicode-bidi:isolate;" aria-label="BarakaWay">
+  <button class="brand-signature" id="brandInstallTrigger" type="button" aria-label="BarakaWay">
     <span class="brand-letter-accent">B</span><span class="brand-letter-main">araka</span><span class="brand-letter-accent">W</span><span class="brand-letter-main">ay</span>
   </button>
   <div class="home-prayer-widget" role="link" tabindex="0" onclick="openPrayerTimesPage(event)" onkeydown="openPrayerTimesPageFromKeyboard(event)" aria-label="فتح صفحة مواقيت الصلاة">
@@ -2379,66 +2704,115 @@ html.light-mode .bottom-app-nav-item.active{
     </div>
   </div>
 </div>
+
+<div class="tahajjud-alarm-bar" id="tahajjudAlarmBar" aria-label="منبّه صلاة التهجد">
+  <div class="tahajjud-alarm-left">
+    <div class="tahajjud-alarm-icon" aria-hidden="true">🌙</div>
+    <div>
+      <div class="tahajjud-alarm-title">تفعيل منبّه صلاة التهجد</div>
+      <div class="tahajjud-alarm-meta" id="tahajjudAlarmMeta">قبل الفجر بـ 60 دقيقة</div>
+    </div>
+  </div>
+  <label class="tahajjud-switch" aria-label="تفعيل أو إيقاف منبّه التهجد">
+    <input type="checkbox" id="tahajjudAlarmToggle">
+    <span class="tahajjud-slider"></span>
+  </label>
+</div>
 <section class="today-hub" aria-label="اليوم في BarakaWay">
   <div class="today-hub-head">
     <div class="today-hub-kicker">اليوم في BarakaWay</div>
-    <h2 class="today-hub-title">كل يوم — فائدة جديدة وذكر جديد وخطوة صغيرة أقرب إلى الله ﷻ</h2>
+    <h2 class="today-hub-title">كل يوم خطوة جديدة أقرب إلى الله ﷻ</h2>
   </div>
+
   <div class="today-hub-grid">
-    <a class="today-action" id="dailyArticleLink" href="articles-ar.html">
-      <div class="today-action-top"><div class="today-action-icon">📝</div><div class="today-action-arrow">→</div></div>
-      <div><div class="today-action-title">مقالة نافعة</div><div class="today-action-text" id="dailyArticleTitle">افتح مقالة اليوم.</div></div>
-    </a>
-    <a class="today-action" href="adhkar-ar.html">
-      <div class="today-action-top"><div class="today-action-icon">🌿</div><div class="today-action-arrow">→</div></div>
-      <div><div class="today-action-title" id="currentAdhkarTitle">ذكر الآن</div><div class="today-action-text" id="currentAdhkarText">الذكر المناسب لهذا الوقت من اليوم.</div></div>
-    </a>
-    <div class="today-action today-counter-action" id="allahNameCounterCard" role="button" tabindex="0" aria-label="عداد تكرار اسم الله">
-      <div class="today-action-top"><div class="today-action-icon">☝️</div><div class="today-action-arrow" id="allahNameCounterValue">0/100</div></div>
+    <a class="today-action today-daily-task" id="dailyArticleLink" href="javascript:void(0)" role="button" aria-label="آية اليوم مع تطبيق عملي" data-task-key="article">
+      <div class="today-action-top">
+        <div class="today-action-icon">📖</div>
+        <div class="today-action-arrow today-task-status" id="dailyArticleStatus">→</div>
+      </div>
       <div>
-        <div class="today-action-title" id="allahNameToday">اسم الله</div>
-        <div class="today-action-text">اضغط على البطاقة وكرره 100 مرة.</div>
+        <div class="today-action-title">آية اليوم</div>
+        <div class="today-action-text" id="dailyArticleTitle">جاري تحميل آية اليوم...</div>
+      </div>
+    </a>
+
+    <a class="today-action today-daily-task" id="currentAdhkarLink" href="javascript:void(0)" role="button" aria-label="اختبار اليوم" data-task-key="adhkar">
+      <div class="today-action-top">
+        <div class="today-action-icon">🌿</div>
+        <div class="today-action-arrow today-task-status" id="currentAdhkarStatus">→</div>
+      </div>
+      <div>
+        <div class="today-action-title" id="currentAdhkarTitle">اختبار اليوم</div>
+        <div class="today-action-text" id="currentAdhkarText">جاري تحميل مهمة اليوم...</div>
+      </div>
+    </a>
+
+    <div class="today-action today-daily-task today-counter-action" id="allahNameCounterCard" role="button" tabindex="0" data-task-key="name" aria-label="عدّاد تكرار اسم من أسماء الله">
+      <div class="today-action-top">
+        <div class="today-action-icon">☝️</div>
+        <div class="today-action-arrow today-task-status" id="allahNameCounterValue">0/100</div>
+      </div>
+      <div>
+        <div class="today-action-title" id="allahNameToday">اسم من أسماء الله</div>
+        <div class="today-action-text" id="allahNameMeaning">اليوم نحفظ معنى هذا الاسم.</div>
         <div class="today-counter-track"><div class="today-counter-fill" id="allahNameCounterFill"></div></div>
       </div>
     </div>
-    <div class="today-action today-goal-action" id="dailyGoalCard" role="button" tabindex="0" aria-label="هدف اليوم">
-      <div class="today-action-top"><div class="today-action-icon">🎯</div><div class="today-action-arrow" id="dailyGoalStatus">•</div></div>
+
+    <div class="today-action today-daily-task today-goal-action" id="dailyGoalCard" role="button" tabindex="0" data-task-key="goal" aria-label="هدف اليوم">
+      <div class="today-action-top">
+        <div class="today-action-icon">🎯</div>
+        <div class="today-action-arrow today-task-status" id="dailyGoalStatus">•</div>
+      </div>
       <div>
         <div class="today-action-title">هدف اليوم</div>
-        <div class="today-action-text" id="dailyPracticeText">افعل خيراً واحداً بهدوء بلا رياء</div>
-        <div class="today-action-text" style="opacity:.6;margin-top:4px;">علّم عند الإنجاز</div>
+        <div class="today-action-text" id="dailyPracticeText">افعل خيراً واحداً بهدوء بلا كلام ولا رياء.</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="today-micro-wrap">
+    <div class="today-action today-daily-task today-micro-action" id="dailyMicroKnowledgeCard" role="button" tabindex="0" data-task-key="micro" aria-label="المعرفة الصغيرة لليوم">
+      <div class="today-action-top">
+        <div class="today-action-icon">🧠</div>
+        <div class="today-action-arrow today-task-status" id="dailyMicroKnowledgeStatus">?</div>
+      </div>
+      <div>
+        <div class="today-action-title">المعرفة الصغيرة لليوم</div>
+        <div class="today-micro-question" id="dailyMicroQuestion">جاري تحميل السؤال...</div>
+        <div class="micro-options" id="dailyMicroOptions"></div>
+        <div class="micro-answer-box" id="dailyMicroAnswer"></div>
       </div>
     </div>
   </div>
 </section>
-
 <div class="home-section-title">
   <h2>وصول سريع</h2>
   <div class="home-section-note">الأقسام الأساسية</div>
 </div>
 
 <div class="premium-resource-grid">
-  <a class="premium-resource-card" href="names-ar.html">
+  <a class="premium-resource-card" href="names-ru.html">
     <div class="premium-resource-icon">☝️</div>
-    <div><div class="premium-resource-title">99 names</div><div class="premium-resource-text">المعاني والتأمل وتقوية الإيمان.</div></div>
+    <div><div class="premium-resource-title">الأسماء الحسنى</div><div class="premium-resource-text">معانٍ وتأملات وتقوية للإيمان.</div></div>
   </a>
   <a class="premium-resource-card" href="qibla-ar.html">
     <div class="premium-resource-icon">🧭</div>
-    <div><div class="premium-resource-title">Qibla</div><div class="premium-resource-text">اتجاه سريع للصلاة.</div></div>
+    <div><div class="premium-resource-title">القبلة</div><div class="premium-resource-text">اتجاه سريع للصلاة.</div></div>
   </a>
   <a class="premium-resource-card" href="prophets-duas-ar.html">
     <div class="premium-resource-icon">🤲</div>
-    <div><div class="premium-resource-title">Duas</div><div class="premium-resource-text">أدعية بمعنى صحيح وأدب.</div></div>
+    <div><div class="premium-resource-title">الدعاء</div><div class="premium-resource-text">أدعية بمعنى صحيح وأدب.</div></div>
   </a>
   <a class="premium-resource-card" href="articles-ar.html">
     <div class="premium-resource-icon">✨</div>
-    <div><div class="premium-resource-title">Articles</div><div class="premium-resource-text">مواد قصيرة نافعة بلا ضجيج.</div></div>
+    <div><div class="premium-resource-title">المقالات</div><div class="premium-resource-text">مواد قصيرة نافعة بلا ضجيج.</div></div>
   </a>
 </div>
 
 <div class="about-project-card">
-  <div class="about-project-title">حول BarakaWay</div>
-  <div class="about-project-text">تم جمع المشروع والمبادئ وسبب المجهولية في كتلة واحدة هادئة تبني الثقة. يفهم المستخدم الفكرة دون روابط كثيرة متفرقة في الشاشة الرئيسية.</div>
+  <div class="about-project-title">عن BarakaWay</div>
+  <div class="about-project-text">تم جمع فكرة المشروع ومبادئه وسبب المجهولية في كتلة هادئة تبني الثقة، حتى يفهم المستخدم المعنى دون روابط متفرقة كثيرة في الشاشة الرئيسية.</div>
   <div class="about-project-actions">
     <a href="about-ar.html">عن المشروع</a>
     <a href="principles-ar.html">المبادئ</a>
@@ -2447,7 +2821,7 @@ html.light-mode .bottom-app-nav-item.active{
 </div>
 
 <div class="home-primary-support">
-  <a href="support-project-ar.html" class="support-project-btn"><span class="support-project-btn-shine"></span><span class="support-project-btn-text">دعم المشروع</span></a>
+  <a href="support-project-ru.html" class="support-project-btn"><span class="support-project-btn-shine"></span><span class="support-project-btn-text">دعم المشروع</span></a>
 </div>
 
 <div class="share-overlay" id="shareOverlay" aria-hidden="true">
@@ -2498,23 +2872,23 @@ function isAndroid(){return /Android/i.test(navigator.userAgent||"");}
 function isIOS(){return /iPhone|iPad|iPod/i.test(navigator.userAgent||"");}
 function isInAppBrowser(){const ua=navigator.userAgent||"";return /(Telegram|FBAN|FBAV|Instagram|Line|wv)/i.test(ua);}
 async function hasInstalledRelatedApp(){if(typeof navigator.getInstalledRelatedApps!=="function") return false;try{const apps=await navigator.getInstalledRelatedApps();return Array.isArray(apps)&&apps.length>0;}catch(e){return false;}}
-async function updateInstallButtonVisibility(){if(installVisibilityInFlight) return;installVisibilityInFlight=true;const box=document.getElementById("installBox"),btn=document.getElementById("installBtn");if(!box||!btn){installVisibilityInFlight=false;return;}let hide=isStandaloneMode()?true:await hasInstalledRelatedApp();box.style.display=hide?"none":"block";btn.textContent="تثبيت التطبيق";installVisibilityInFlight=false;}
+async function updateInstallButtonVisibility(){if(installVisibilityInFlight) return;installVisibilityInFlight=true;const box=document.getElementById("installBox"),btn=document.getElementById("installBtn"),brandTrigger=document.getElementById("brandInstallTrigger"),brandHint=document.getElementById("brandInstallHint");if(!box||!btn){installVisibilityInFlight=false;return;}let hide=isStandaloneMode()?true:await hasInstalledRelatedApp();box.style.display=hide?"none":"block";btn.textContent="تثبيت التطبيق";if(brandTrigger){brandTrigger.classList.toggle("install-trigger",!hide);}if(brandHint){brandHint.classList.toggle("is-visible",!hide&&window.innerWidth<=700);}installVisibilityInFlight=false;}
 function openCurrentPageInExternalBrowser(){const url=window.location.href;if(isAndroid()){const cleaned=url.replace(/^https?:\/\//,"");window.location.href="intent://"+cleaned+"#Intent;scheme=https;package=com.android.chrome;end";return true;}if(!isIOS()){window.open(url,"_blank","noopener,noreferrer");return true;}return false;}
 function openInstallHelp(){const o=document.getElementById("installHelpOverlay");if(!o) return;o.classList.add("open");o.setAttribute("aria-hidden","false");}
 function closeInstallHelp(){const o=document.getElementById("installHelpOverlay");if(!o) return;o.classList.remove("open");o.setAttribute("aria-hidden","true");}
-async function copyCurrentLink(){const url=getShareUrl(),msg=document.getElementById("shareCopyMsg");try{if(navigator.clipboard&&window.isSecureContext){await navigator.clipboard.writeText(url);}else{const t=document.createElement("textarea");t.value=url;t.setAttribute("readonly","readonly");t.style.position="absolute";t.style.left="-9999px";document.body.appendChild(t);t.select();document.execCommand("copy");document.body.removeChild(t);}if(msg){msg.textContent="تم نسخ رابط التطبيق.";msg.classList.add("show");setTimeout(function(){msg.classList.remove("show");},2200);}}catch(e){window.prompt("انسخ الرابط وافتحه في متصفح خارجي:",url);}}
+async function copyCurrentLink(){const url=getShareUrl(),msg=document.getElementById("shareCopyMsg");try{if(navigator.clipboard&&window.isSecureContext){await navigator.clipboard.writeText(url);}else{const t=document.createElement("textarea");t.value=url;t.setAttribute("readonly","readonly");t.style.position="absolute";t.style.left="-9999px";document.body.appendChild(t);t.select();document.execCommand("copy");document.body.removeChild(t);}if(msg){msg.textContent="تم نسخ رابط التطبيق.";msg.classList.add("show");setTimeout(function(){msg.classList.remove("show");},2200);}}catch(e){window.prompt("انسخ الرابط وافتحه في المتصفح الخارجي:",url);}}
 async function installApp(){if(deferredInstallPrompt){try{await deferredInstallPrompt.prompt();const c=await deferredInstallPrompt.userChoice;if(c&&c.outcome==="accepted") setTimeout(updateInstallButtonVisibility,300);}catch(e){}finally{deferredInstallPrompt=null;}return;}if(isStandaloneMode()){updateInstallButtonVisibility();return;}if(isInAppBrowser()){if(isAndroid()){const opened=openCurrentPageInExternalBrowser();if(!opened) openInstallHelp();return;}openInstallHelp();return;}if(isIOS()){openInstallHelp();return;}openInstallHelp();}
 function openShareOverlay(){const o=document.getElementById("shareOverlay"),m=document.getElementById("shareCopyMsg");if(!o) return;o.classList.add("open");o.setAttribute("aria-hidden","false");if(m) m.classList.remove("show");}
 function closeShareOverlay(){const o=document.getElementById("shareOverlay");if(!o) return;o.classList.remove("open");o.setAttribute("aria-hidden","true");}
-async function copyShareLink(){const url=getShareUrl(),msg=document.getElementById("shareCopyMsg");try{if(navigator.clipboard&&window.isSecureContext){await navigator.clipboard.writeText(url);}else{const t=document.createElement("textarea");t.value=url;t.setAttribute("readonly","readonly");t.style.position="absolute";t.style.left="-9999px";document.body.appendChild(t);t.select();document.execCommand("copy");document.body.removeChild(t);}if(msg){msg.classList.add("show");setTimeout(function(){msg.classList.remove("show");},2200);}}catch(e){window.prompt("انسخ الرابط وافتحه في متصفح خارجي:",url);}}
+async function copyShareLink(){const url=getShareUrl(),msg=document.getElementById("shareCopyMsg");try{if(navigator.clipboard&&window.isSecureContext){await navigator.clipboard.writeText(url);}else{const t=document.createElement("textarea");t.value=url;t.setAttribute("readonly","readonly");t.style.position="absolute";t.style.left="-9999px";document.body.appendChild(t);t.select();document.execCommand("copy");document.body.removeChild(t);}if(msg){msg.classList.add("show");setTimeout(function(){msg.classList.remove("show");},2200);}}catch(e){window.prompt("انسخ الرابط وافتحه في المتصفح الخارجي:",url);}}
 function openShareTarget(type){const url=encodeURIComponent(getShareUrl()),text=encodeURIComponent("BarakaWay");let target="";if(type==="telegram") target="https://t.me/share/url?url="+url+"&text="+text;if(type==="whatsapp") target="https://wa.me/?text="+text+"%20"+url;if(type==="facebook") target="https://www.facebook.com/sharer/sharer.php?u="+url;if(type==="x") target="https://twitter.com/intent/tweet?text="+text+"&url="+url;if(type==="linkedin") target="https://www.linkedin.com/sharing/share-offsite/?url="+url;if(type==="email") target="mailto:?subject=Hidden%20Sadaqa&body="+text+"%0A"+url;if(target) window.open(target,"_blank","noopener,noreferrer");}
 async function shareApp(){const data={title:"BarakaWay",text:"BarakaWay",url:getShareUrl()};if(navigator.share){try{await navigator.share(data);return;}catch(e){}}openShareOverlay();}
-async function sharePrayerTimes(event){if(event){event.preventDefault();event.stopPropagation();}const text=typeof window.buildPrayerTimesShareText==="function"?window.buildPrayerTimesShareText():"BarakaWay\nمواقيت الصلاة";if(navigator.share){try{await navigator.share({title:"مواقيت الصلاة",text:text});return;}catch(e){}}try{if(navigator.clipboard&&window.isSecureContext){await navigator.clipboard.writeText(text);}else{const t=document.createElement("textarea");t.value=text;t.setAttribute("readonly","readonly");t.style.position="absolute";t.style.left="-9999px";document.body.appendChild(t);t.select();document.execCommand("copy");document.body.removeChild(t);}alert("تم نسخ مواقيت الصلاة. يمكنك الآن إرسالها عبر تطبيق المراسلة.");}catch(e){window.prompt("انسخ مواقيت الصلاة:",text);}}
+async function sharePrayerTimes(event){if(event){event.preventDefault();event.stopPropagation();}const text=typeof window.buildPrayerTimesShareText==="function"?window.buildPrayerTimesShareText():"BarakaWay\nمواقيت الصلاة";if(navigator.share){try{await navigator.share({title:"مواقيت الصلاة",text:text});return;}catch(e){}}try{if(navigator.clipboard&&window.isSecureContext){await navigator.clipboard.writeText(text);}else{const t=document.createElement("textarea");t.value=text;t.setAttribute("readonly","readonly");t.style.position="absolute";t.style.left="-9999px";document.body.appendChild(t);t.select();document.execCommand("copy");document.body.removeChild(t);}alert("تم نسخ مواقيت الصلاة. يمكنك الآن إرسالها في تطبيق المراسلة.");}catch(e){window.prompt("انسخ مواقيت الصلاة:",text);}}
 window.addEventListener("beforeinstallprompt",function(e){e.preventDefault();deferredInstallPrompt=e;updateInstallButtonVisibility();});
 window.addEventListener("appinstalled",function(){deferredInstallPrompt=null;updateInstallButtonVisibility();});
 window.addEventListener("pageshow",function(){updateInstallButtonVisibility();});
 document.addEventListener("visibilitychange",function(){if(!document.hidden) updateInstallButtonVisibility();});
-window.addEventListener("DOMContentLoaded",function(){const installBtn=document.getElementById("installBtn"),shareOverlay=document.getElementById("shareOverlay"),shareCloseBtn=document.getElementById("shareCloseBtn"),helpOverlay=document.getElementById("installHelpOverlay"),helpClose=document.getElementById("installHelpCloseBtn"),helpPrimary=document.getElementById("installHelpPrimaryBtn"),helpCopy=document.getElementById("installHelpCopyBtn");if(installBtn) installBtn.addEventListener("click",installApp);if(shareCloseBtn) shareCloseBtn.addEventListener("click",closeShareOverlay);if(shareOverlay) shareOverlay.addEventListener("click",function(e){if(e.target===shareOverlay) closeShareOverlay();});if(helpClose) helpClose.addEventListener("click",closeInstallHelp);if(helpOverlay) helpOverlay.addEventListener("click",function(e){if(e.target===helpOverlay) closeInstallHelp();});if(helpPrimary) helpPrimary.addEventListener("click",function(){const opened=openCurrentPageInExternalBrowser();if(!opened) copyCurrentLink();});if(helpCopy) helpCopy.addEventListener("click",copyCurrentLink);document.querySelectorAll("[data-share]").forEach(function(button){button.addEventListener("click",async function(){const type=button.getAttribute("data-share");if(type==="copy"){await copyShareLink();return;}if(type==="more"){if(navigator.share){try{await navigator.share({title:"BarakaWay",text:"BarakaWay",url:getShareUrl()});closeShareOverlay();return;}catch(e){}}await copyShareLink();return;}openShareTarget(type);closeShareOverlay();});});updateInstallButtonVisibility();setTimeout(updateInstallButtonVisibility,1200);});
+window.addEventListener("DOMContentLoaded",function(){const installBtn=document.getElementById("installBtn"),brandInstallTrigger=document.getElementById("brandInstallTrigger"),brandInstallHint=document.getElementById("brandInstallHint"),shareOverlay=document.getElementById("shareOverlay"),shareCloseBtn=document.getElementById("shareCloseBtn"),helpOverlay=document.getElementById("installHelpOverlay"),helpClose=document.getElementById("installHelpCloseBtn"),helpPrimary=document.getElementById("installHelpPrimaryBtn"),helpCopy=document.getElementById("installHelpCopyBtn");if(installBtn) installBtn.addEventListener("click",installApp);if(brandInstallTrigger) brandInstallTrigger.addEventListener("click",function(){if(window.innerWidth<=700&&!isStandaloneMode()) installApp();});if(brandInstallHint){brandInstallHint.addEventListener("click",installApp);brandInstallHint.addEventListener("keydown",function(e){if(e.key==="Enter"||e.key===" "){e.preventDefault();installApp();}});}if(shareCloseBtn) shareCloseBtn.addEventListener("click",closeShareOverlay);if(shareOverlay) shareOverlay.addEventListener("click",function(e){if(e.target===shareOverlay) closeShareOverlay();});if(helpClose) helpClose.addEventListener("click",closeInstallHelp);if(helpOverlay) helpOverlay.addEventListener("click",function(e){if(e.target===helpOverlay) closeInstallHelp();});if(helpPrimary) helpPrimary.addEventListener("click",function(){const opened=openCurrentPageInExternalBrowser();if(!opened) copyCurrentLink();});if(helpCopy) helpCopy.addEventListener("click",copyCurrentLink);document.querySelectorAll("[data-share]").forEach(function(button){button.addEventListener("click",async function(){const type=button.getAttribute("data-share");if(type==="copy"){await copyShareLink();return;}if(type==="more"){if(navigator.share){try{await navigator.share({title:"BarakaWay",text:"BarakaWay",url:getShareUrl()});closeShareOverlay();return;}catch(e){}}await copyShareLink();return;}openShareTarget(type);closeShareOverlay();});});updateInstallButtonVisibility();setTimeout(updateInstallButtonVisibility,1200);window.addEventListener("resize",updateInstallButtonVisibility);});
 </script>
 <script>
 (function(){
@@ -2523,7 +2897,7 @@ window.addEventListener("DOMContentLoaded",function(){const installBtn=document.
   if (window.innerWidth > 700) return;
 
   const promoTexts = [
-    { text: "Все услуги рядом", brand: false },
+    { text: "كل شيء قريب", brand: false },
     { text: "TasksLocal", brand: true }
   ];
 
@@ -2626,7 +3000,7 @@ window.addEventListener("DOMContentLoaded",function(){const installBtn=document.
     });
 
     labels.forEach(function(label){
-      label.textContent = theme === 'dark' ? 'Light mode' : 'Dark mode';
+      label.textContent = theme === 'dark' ? 'الوضع الفاتح' : 'Dark mode';
     });
   }
 
@@ -2653,7 +3027,7 @@ window.addEventListener("DOMContentLoaded",function(){const installBtn=document.
 
   const UI = {
     names: {Fajr:'الفجر', Dhuhr:'الظهر', Asr:'العصر', Maghrib:'المغرب', Isha:'العشاء'},
-    at: 'الساعة',
+    at: 'في',
     startsIn: 'بعد',
     loading: 'جاري تحميل مواقيت الصلاة...',
     fallbackLocation: 'طشقند، أوزبكستان'
@@ -2776,53 +3150,736 @@ window.addEventListener("DOMContentLoaded",function(){const installBtn=document.
 </script>
 
 
+<script>
+(function(){
+  function getLocalDateKey(date){
+    const year = date.getFullYear();
+    const month = String(date.getMonth() + 1).padStart(2,'0');
+    const day = String(date.getDate()).padStart(2,'0');
+    return year + '-' + month + '-' + day;
+  }
+
+  function getDaysSince(dateString){
+    const start = new Date(dateString + 'T00:00:00');
+    const now = new Date();
+    const today = new Date(now.getFullYear(), now.getMonth(), now.getDate());
+    return Math.max(0, Math.floor((today - start) / 86400000));
+  }
+
+  const today = new Date();
+  const todayKey = getLocalDateKey(today);
+  const hour = today.getHours();
+
+  /* Daily article rotation system. */
+  const articleStartDate = '2026-04-24';
+  const articles = [
+    {
+        "title": "ما هي الصدقة",
+        "url": "islamic_articles-ar/001-ar.html"
+    },
+    {
+        "title": "الفرق بين الزكاة والصدقة",
+        "url": "islamic_articles-ar/002-ar.html"
+    },
+    {
+        "title": "لماذا الصدقة الخفية مهمة",
+        "url": "islamic_articles-ar/003-ar.html"
+    },
+    {
+        "title": "مساعدة الأسر المحتاجة",
+        "url": "islamic_articles-ar/004-ar.html"
+    },
+    {
+        "title": "لماذا حتى دولار واحد له أثر",
+        "url": "islamic_articles-ar/005-ar.html"
+    },
+    {
+        "title": "الصدقة للسكن ومساعدة السكن",
+        "url": "islamic_articles-ar/006-ar.html"
+    },
+    {
+        "title": "دور النية في الصدقة",
+        "url": "islamic_articles-ar/007-ar.html"
+    },
+    {
+        "title": "البركة في العطاء",
+        "url": "islamic_articles-ar/008-ar.html"
+    },
+    {
+        "title": "كيف تساعد بانتظام دون ضجيج",
+        "url": "islamic_articles-ar/009-ar.html"
+    },
+    {
+        "title": "كرامة المحتاج في الإسلام",
+        "url": "islamic_articles-ar/010-ar.html"
+    },
+    {
+        "title": "إطعام المحتاجين",
+        "url": "islamic_articles-ar/011-ar.html"
+    },
+    {
+        "title": "الصدقة الجارية",
+        "url": "islamic_articles-ar/012-ar.html"
+    },
+    {
+        "title": "مساعدة الطلاب",
+        "url": "islamic_articles-ar/013-ar.html"
+    },
+    {
+        "title": "مساعدة المرضى",
+        "url": "islamic_articles-ar/014-ar.html"
+    },
+    {
+        "title": "العطاء في الأيام المباركة",
+        "url": "islamic_articles-ar/015-ar.html"
+    },
+    {
+        "title": "رعاية الفقراء في الإسلام",
+        "url": "islamic_articles-ar/016-ar.html"
+    },
+    {
+        "title": "مسؤولية المسلمين في مساعدة الآخرين",
+        "url": "islamic_articles-ar/017-ar.html"
+    },
+    {
+        "title": "العدل والرحمة في الإسلام",
+        "url": "islamic_articles-ar/018-ar.html"
+    },
+    {
+        "title": "كيف تجلب الصدقة الأمل للأسر",
+        "url": "islamic_articles-ar/019-ar.html"
+    },
+    {
+        "title": "مساعدة الأطفال بالصدقة",
+        "url": "islamic_articles-ar/020-ar.html"
+    },
+    {
+        "title": "مساعدة الأرامل في الإسلام",
+        "url": "islamic_articles-ar/021-ar.html"
+    },
+    {
+        "title": "المساعدة العاجلة في الإسلام",
+        "url": "islamic_articles-ar/022-ar.html"
+    },
+    {
+        "title": "الإطعام في الإسلام",
+        "url": "islamic_articles-ar/023-ar.html"
+    },
+    {
+        "title": "أين تذهب تبرعاتك",
+        "url": "islamic_articles-ar/024-ar.html"
+    },
+    {
+        "title": "مقال اليوم رقم 25",
+        "url": "islamic_articles-ar/025-ar.html"
+    },
+    {
+        "title": "مقال اليوم رقم 26",
+        "url": "islamic_articles-ar/026-ar.html"
+    },
+    {
+        "title": "مقال اليوم رقم 27",
+        "url": "islamic_articles-ar/027-ar.html"
+    },
+    {
+        "title": "مقال اليوم رقم 28",
+        "url": "islamic_articles-ar/028-ar.html"
+    },
+    {
+        "title": "مقال اليوم رقم 29",
+        "url": "islamic_articles-ar/029-ar.html"
+    },
+    {
+        "title": "مقال اليوم رقم 30",
+        "url": "islamic_articles-ar/030-ar.html"
+    }
+];
+
+  const names = [
+    {
+        "name": "الرحمن",
+        "meaning": "واسع الرحمة التي شملت كل الخلق."
+    },
+    {
+        "name": "الرحيم",
+        "meaning": "كثير الرحمة بعباده المؤمنين."
+    },
+    {
+        "name": "الملك",
+        "meaning": "المالك الحق والمدبر لكل شيء."
+    },
+    {
+        "name": "القدوس",
+        "meaning": "المنزه عن كل نقص."
+    },
+    {
+        "name": "السلام",
+        "meaning": "مصدر السلامة والأمان."
+    },
+    {
+        "name": "المؤمن",
+        "meaning": "الذي يهب الأمن ويصدق وعده."
+    },
+    {
+        "name": "المهيمن",
+        "meaning": "الرقيب الحافظ على كل شيء."
+    },
+    {
+        "name": "العزيز",
+        "meaning": "الغالب الذي لا يُغلب."
+    },
+    {
+        "name": "الجبار",
+        "meaning": "يجبر الكسر ويقهر الظالمين."
+    },
+    {
+        "name": "المتكبر",
+        "meaning": "له الكبرياء والعظمة وحده."
+    },
+    {
+        "name": "الخالق",
+        "meaning": "خلق كل شيء بحكمة."
+    },
+    {
+        "name": "البارئ",
+        "meaning": "أوجد الخلق على غير مثال سابق."
+    },
+    {
+        "name": "المصور",
+        "meaning": "أعطى كل مخلوق صورته."
+    },
+    {
+        "name": "الغفار",
+        "meaning": "كثير المغفرة للتائبين."
+    },
+    {
+        "name": "القهار",
+        "meaning": "كل شيء خاضع لسلطانه."
+    },
+    {
+        "name": "الوهاب",
+        "meaning": "يعطي بلا حساب."
+    },
+    {
+        "name": "الرزاق",
+        "meaning": "يرزق كل مخلوق."
+    },
+    {
+        "name": "الفتاح",
+        "meaning": "يفتح أبواب الرحمة والعلم والفرج."
+    },
+    {
+        "name": "العليم",
+        "meaning": "يعلم الظاهر والباطن."
+    },
+    {
+        "name": "القابض",
+        "meaning": "يقبض بحكمة."
+    },
+    {
+        "name": "الباسط",
+        "meaning": "يبسط الرزق والرحمة."
+    },
+    {
+        "name": "الخافض",
+        "meaning": "يخفض من شاء بعدله."
+    },
+    {
+        "name": "الرافع",
+        "meaning": "يرفع من شاء بفضله."
+    },
+    {
+        "name": "المعز",
+        "meaning": "يعز من أطاعه."
+    },
+    {
+        "name": "المذل",
+        "meaning": "يذل من تكبر وخالف الحق."
+    },
+    {
+        "name": "السميع",
+        "meaning": "يسمع كل دعاء وكل صوت."
+    },
+    {
+        "name": "البصير",
+        "meaning": "يرى كل شيء."
+    },
+    {
+        "name": "الحكم",
+        "meaning": "حكمه عدل وحكمة."
+    },
+    {
+        "name": "العدل",
+        "meaning": "لا يظلم أحداً."
+    },
+    {
+        "name": "اللطيف",
+        "meaning": "يوصل الخير بلطف خفي."
+    },
+    {
+        "name": "الخبير",
+        "meaning": "يعلم دقائق الأمور."
+    },
+    {
+        "name": "الحليم",
+        "meaning": "يمهل ولا يعجل بالعقوبة."
+    },
+    {
+        "name": "العظيم",
+        "meaning": "له العظمة الكاملة."
+    },
+    {
+        "name": "الغفور",
+        "meaning": "يغفر الذنوب لمن تاب."
+    },
+    {
+        "name": "الشكور",
+        "meaning": "يثيب على القليل كثيراً."
+    },
+    {
+        "name": "العلي",
+        "meaning": "عالٍ فوق خلقه قدراً وقهراً."
+    },
+    {
+        "name": "الكبير",
+        "meaning": "أكبر من كل شيء."
+    },
+    {
+        "name": "الحفيظ",
+        "meaning": "يحفظ خلقه وأعمالهم."
+    },
+    {
+        "name": "المقيت",
+        "meaning": "يوصل الأقوات ويدبرها."
+    },
+    {
+        "name": "الحسيب",
+        "meaning": "كافٍ لعباده ومحاسب لهم."
+    }
+];
+
+  const goals = [
+    "افعل خيراً واحداً بهدوء بلا كلام ولا رياء.",
+    "جدّد نيتك لله ﷻ قبل عمل مهم.",
+    "ساعد شخصاً واحداً دون أن يشعر الناس.",
+    "استغفر الله ﷻ ثلاثاً وثلاثين مرة بهدوء.",
+    "ادعُ لوالديك وأهلك.",
+    "اترك فعلاً زائداً يسرق وقتك.",
+    "اشكر الله ﷻ على نعمة واحدة محددة."
+];
+
+  const articleDay = getDaysSince(articleStartDate);
+  const articleIndex = articles.length ? articleDay % articles.length : 0;
+  const article = articles[articleIndex];
+  const articleLink = document.getElementById('dailyArticleLink');
+  const articleTitle = document.getElementById('dailyArticleTitle');
+  if(article && articleLink && articleTitle){
+    articleLink.href = article.url;
+    articleTitle.textContent = article.title;
+  }
+
+  const adhkarLink = document.getElementById('currentAdhkarLink');
+  const currentAdhkarTitle = document.getElementById('currentAdhkarTitle');
+  const currentAdhkarText = document.getElementById('currentAdhkarText');
+  if(currentAdhkarTitle && currentAdhkarText){
+    if(hour >= 4 && hour < 11){
+      currentAdhkarTitle.textContent = 'أذكار الصباح';
+      currentAdhkarText.textContent = 'سيفتح قسم أذكار الصباح مباشرة.';
+      if(adhkarLink) adhkarLink.href = 'adhkar-ru.html#morning';
+    }else if(hour >= 16 && hour < 22){
+      currentAdhkarTitle.textContent = 'أذكار المساء';
+      currentAdhkarText.textContent = 'سيفتح قسم أذكار المساء مباشرة.';
+      if(adhkarLink) adhkarLink.href = 'adhkar-ru.html#evening';
+    }else if(hour < 4){
+      currentAdhkarTitle.textContent = 'الذكر التالي';
+      currentAdhkarText.textContent = 'الأقرب — أذكار الصباح بعد الفجر.';
+      if(adhkarLink) adhkarLink.href = 'adhkar-ru.html#morning';
+    }else{
+      currentAdhkarTitle.textContent = 'الذكر التالي';
+      currentAdhkarText.textContent = 'الأقرب — أذكار المساء قرب المغرب.';
+      if(adhkarLink) adhkarLink.href = 'adhkar-ru.html#evening';
+    }
+  }
+
+  const name = names[articleDay % names.length];
+  const nameEl = document.getElementById('allahNameToday');
+  const meaningEl = document.getElementById('allahNameMeaning');
+  const card = document.getElementById('allahNameCounterCard');
+  const valueEl = document.getElementById('allahNameCounterValue');
+  const fillEl = document.getElementById('allahNameCounterFill');
+  const storageKey = 'barakaway_name_counter_' + todayKey;
+  let count = Math.max(0, Math.min(100, parseInt(localStorage.getItem(storageKey) || '0', 10) || 0));
+
+  function renderCounter(){
+    if(nameEl) nameEl.textContent = name.name;
+    if(meaningEl) meaningEl.textContent = name.meaning;
+    if(valueEl) valueEl.textContent = count + '/100';
+    if(fillEl) fillEl.style.width = count + '%';
+    if(card) card.setAttribute('aria-label', name.name + ': ' + count + ' من 100 تكرار. ' + name.meaning);
+  }
+
+  function incrementCounter(){
+    count = count >= 100 ? 100 : count + 1;
+    localStorage.setItem(storageKey, String(count));
+    renderCounter();
+  }
+
+  if(card){
+    card.addEventListener('click', incrementCounter);
+    card.addEventListener('keydown', function(e){
+      if(e.key === 'Enter' || e.key === ' '){
+        e.preventDefault();
+        incrementCounter();
+      }
+    });
+  }
+  renderCounter();
+
+  const practice = document.getElementById('dailyPracticeText');
+  const goalCard = document.getElementById('dailyGoalCard');
+  const goalStatus = document.getElementById('dailyGoalStatus');
+  const goalKey = 'barakaway_daily_goal_done_' + todayKey;
+  let goalDone = localStorage.getItem(goalKey) === '1';
+
+  if(practice) practice.textContent = goals[articleDay % goals.length];
+
+  function renderGoal(){
+    if(!goalCard) return;
+    goalCard.classList.toggle('goal-done', goalDone);
+    if(goalDone){
+      goalCard.style.setProperty('--goal-red-opacity','0');
+      goalCard.classList.remove('goal-urgent');
+      if(goalStatus) goalStatus.textContent = '✓';
+      return;
+    }
+
+    const minutesNow = hour * 60 + today.getMinutes();
+    const progress = Math.min(1, Math.max(0, minutesNow / 1440));
+    const redOpacity = (0.05 + progress * 0.82).toFixed(2);
+    goalCard.style.setProperty('--goal-red-opacity', redOpacity);
+    goalCard.classList.toggle('goal-urgent', hour >= 18);
+    if(goalStatus) goalStatus.textContent = hour >= 18 ? '!' : '•';
+  }
+
+  function completeGoal(){
+    goalDone = true;
+    localStorage.setItem(goalKey,'1');
+    renderGoal();
+  }
+
+  if(goalCard){
+    goalCard.addEventListener('click', completeGoal);
+    goalCard.addEventListener('keydown', function(e){
+      if(e.key === 'Enter' || e.key === ' '){
+        e.preventDefault();
+        completeGoal();
+      }
+    });
+  }
+
+  renderGoal();
+})();
+</script>
+
+
 
 <script>
 (function(){
   const todayKey = new Date().toISOString().slice(0,10);
   const dayNumber = Math.floor(Date.now() / 86400000);
   const articles = [
-    {title:'مقالة اليوم رقم 1', url:'islamic_articles-ar/001-ar.html'},
-    {title:'مقالة اليوم رقم 2', url:'islamic_articles-ar/002-ar.html'},
-    {title:'مقالة اليوم رقم 3', url:'islamic_articles-ar/003-ar.html'},
-    {title:'مقالة اليوم رقم 4', url:'islamic_articles-ar/004-ar.html'},
-    {title:'مقالة اليوم رقم 5', url:'islamic_articles-ar/005-ar.html'},
-    {title:'مقالة اليوم رقم 6', url:'islamic_articles-ar/006-ar.html'},
-    {title:'مقالة اليوم رقم 7', url:'islamic_articles-ar/007-ar.html'},
-    {title:'مقالة اليوم رقم 8', url:'islamic_articles-ar/008-ar.html'},
-    {title:'مقالة اليوم رقم 9', url:'islamic_articles-ar/009-ar.html'},
-    {title:'مقالة اليوم رقم 10', url:'islamic_articles-ar/010-ar.html'},
-    {title:'مقالة اليوم رقم 11', url:'islamic_articles-ar/011-ar.html'},
-    {title:'مقالة اليوم رقم 12', url:'islamic_articles-ar/012-ar.html'},
-    {title:'مقالة اليوم رقم 13', url:'islamic_articles-ar/013-ar.html'},
-    {title:'مقالة اليوم رقم 14', url:'islamic_articles-ar/014-ar.html'},
-    {title:'مقالة اليوم رقم 15', url:'islamic_articles-ar/015-ar.html'},
-    {title:'مقالة اليوم رقم 16', url:'islamic_articles-ar/016-ar.html'},
-    {title:'مقالة اليوم رقم 17', url:'islamic_articles-ar/017-ar.html'},
-    {title:'مقالة اليوم رقم 18', url:'islamic_articles-ar/018-ar.html'},
-    {title:'مقالة اليوم رقم 19', url:'islamic_articles-ar/019-ar.html'},
-    {title:'مقالة اليوم رقم 20', url:'islamic_articles-ar/020-ar.html'},
-    {title:'مقالة اليوم رقم 21', url:'islamic_articles-ar/021-ar.html'},
-    {title:'مقالة اليوم رقم 22', url:'islamic_articles-ar/022-ar.html'},
-    {title:'مقالة اليوم رقم 23', url:'islamic_articles-ar/023-ar.html'},
-    {title:'مقالة اليوم رقم 24', url:'islamic_articles-ar/024-ar.html'},
-    {title:'مقالة اليوم رقم 25', url:'islamic_articles-ar/025-ar.html'},
-    {title:'مقالة اليوم رقم 26', url:'islamic_articles-ar/026-ar.html'},
-    {title:'مقالة اليوم رقم 27', url:'islamic_articles-ar/027-ar.html'},
-    {title:'مقالة اليوم رقم 28', url:'islamic_articles-ar/028-ar.html'},
-    {title:'مقالة اليوم رقم 29', url:'islamic_articles-ar/029-ar.html'},
-    {title:'مقالة اليوم رقم 30', url:'islamic_articles-ar/030-ar.html'}
-  ];
-  const names = ['Ar-Rahman', 'Ar-Rahim', 'Al-Malik', 'Al-Quddus', 'As-Salam', 'Al-Mu’min', 'Al-Muhaymin', 'Al-Aziz', 'Al-Jabbar', 'Al-Mutakabbir', 'Al-Khaliq', 'Al-Bari', 'Al-Musawwir', 'Al-Ghaffar', 'Al-Qahhar', 'Al-Wahhab', 'Ar-Razzaq', 'Al-Fattah', 'Al-Alim', 'Al-Qabid', 'Al-Basit', 'Al-Khafid', 'Ar-Rafi', 'Al-Muizz', 'Al-Mudhill', 'As-Sami', 'Al-Basir', 'Al-Hakam', 'Al-Adl', 'Al-Latif', 'Al-Khabir', 'Al-Halim', 'Al-Azim', 'Al-Ghafur', 'Ash-Shakur', 'Al-Ali', 'Al-Kabir', 'Al-Hafiz', 'Al-Muqit', 'Al-Hasib'];
+    {
+        "title": "ما هي الصدقة",
+        "url": "islamic_articles-ar/001-ar.html"
+    },
+    {
+        "title": "الفرق بين الزكاة والصدقة",
+        "url": "islamic_articles-ar/002-ar.html"
+    },
+    {
+        "title": "لماذا الصدقة الخفية مهمة",
+        "url": "islamic_articles-ar/003-ar.html"
+    },
+    {
+        "title": "مساعدة الأسر المحتاجة",
+        "url": "islamic_articles-ar/004-ar.html"
+    },
+    {
+        "title": "لماذا حتى دولار واحد له أثر",
+        "url": "islamic_articles-ar/005-ar.html"
+    },
+    {
+        "title": "الصدقة للسكن ومساعدة السكن",
+        "url": "islamic_articles-ar/006-ar.html"
+    },
+    {
+        "title": "دور النية في الصدقة",
+        "url": "islamic_articles-ar/007-ar.html"
+    },
+    {
+        "title": "البركة في العطاء",
+        "url": "islamic_articles-ar/008-ar.html"
+    },
+    {
+        "title": "كيف تساعد بانتظام دون ضجيج",
+        "url": "islamic_articles-ar/009-ar.html"
+    },
+    {
+        "title": "كرامة المحتاج في الإسلام",
+        "url": "islamic_articles-ar/010-ar.html"
+    },
+    {
+        "title": "إطعام المحتاجين",
+        "url": "islamic_articles-ar/011-ar.html"
+    },
+    {
+        "title": "الصدقة الجارية",
+        "url": "islamic_articles-ar/012-ar.html"
+    },
+    {
+        "title": "مساعدة الطلاب",
+        "url": "islamic_articles-ar/013-ar.html"
+    },
+    {
+        "title": "مساعدة المرضى",
+        "url": "islamic_articles-ar/014-ar.html"
+    },
+    {
+        "title": "العطاء في الأيام المباركة",
+        "url": "islamic_articles-ar/015-ar.html"
+    },
+    {
+        "title": "رعاية الفقراء في الإسلام",
+        "url": "islamic_articles-ar/016-ar.html"
+    },
+    {
+        "title": "مسؤولية المسلمين في مساعدة الآخرين",
+        "url": "islamic_articles-ar/017-ar.html"
+    },
+    {
+        "title": "العدل والرحمة في الإسلام",
+        "url": "islamic_articles-ar/018-ar.html"
+    },
+    {
+        "title": "كيف تجلب الصدقة الأمل للأسر",
+        "url": "islamic_articles-ar/019-ar.html"
+    },
+    {
+        "title": "مساعدة الأطفال بالصدقة",
+        "url": "islamic_articles-ar/020-ar.html"
+    },
+    {
+        "title": "مساعدة الأرامل في الإسلام",
+        "url": "islamic_articles-ar/021-ar.html"
+    },
+    {
+        "title": "المساعدة العاجلة في الإسلام",
+        "url": "islamic_articles-ar/022-ar.html"
+    },
+    {
+        "title": "الإطعام في الإسلام",
+        "url": "islamic_articles-ar/023-ar.html"
+    },
+    {
+        "title": "أين تذهب تبرعاتك",
+        "url": "islamic_articles-ar/024-ar.html"
+    },
+    {
+        "title": "مقال اليوم رقم 25",
+        "url": "islamic_articles-ar/025-ar.html"
+    },
+    {
+        "title": "مقال اليوم رقم 26",
+        "url": "islamic_articles-ar/026-ar.html"
+    },
+    {
+        "title": "مقال اليوم رقم 27",
+        "url": "islamic_articles-ar/027-ar.html"
+    },
+    {
+        "title": "مقال اليوم رقم 28",
+        "url": "islamic_articles-ar/028-ar.html"
+    },
+    {
+        "title": "مقال اليوم رقم 29",
+        "url": "islamic_articles-ar/029-ar.html"
+    },
+    {
+        "title": "مقال اليوم رقم 30",
+        "url": "islamic_articles-ar/030-ar.html"
+    }
+];
+  const names = [
+    {
+        "name": "الرحمن",
+        "meaning": "واسع الرحمة التي شملت كل الخلق."
+    },
+    {
+        "name": "الرحيم",
+        "meaning": "كثير الرحمة بعباده المؤمنين."
+    },
+    {
+        "name": "الملك",
+        "meaning": "المالك الحق والمدبر لكل شيء."
+    },
+    {
+        "name": "القدوس",
+        "meaning": "المنزه عن كل نقص."
+    },
+    {
+        "name": "السلام",
+        "meaning": "مصدر السلامة والأمان."
+    },
+    {
+        "name": "المؤمن",
+        "meaning": "الذي يهب الأمن ويصدق وعده."
+    },
+    {
+        "name": "المهيمن",
+        "meaning": "الرقيب الحافظ على كل شيء."
+    },
+    {
+        "name": "العزيز",
+        "meaning": "الغالب الذي لا يُغلب."
+    },
+    {
+        "name": "الجبار",
+        "meaning": "يجبر الكسر ويقهر الظالمين."
+    },
+    {
+        "name": "المتكبر",
+        "meaning": "له الكبرياء والعظمة وحده."
+    },
+    {
+        "name": "الخالق",
+        "meaning": "خلق كل شيء بحكمة."
+    },
+    {
+        "name": "البارئ",
+        "meaning": "أوجد الخلق على غير مثال سابق."
+    },
+    {
+        "name": "المصور",
+        "meaning": "أعطى كل مخلوق صورته."
+    },
+    {
+        "name": "الغفار",
+        "meaning": "كثير المغفرة للتائبين."
+    },
+    {
+        "name": "القهار",
+        "meaning": "كل شيء خاضع لسلطانه."
+    },
+    {
+        "name": "الوهاب",
+        "meaning": "يعطي بلا حساب."
+    },
+    {
+        "name": "الرزاق",
+        "meaning": "يرزق كل مخلوق."
+    },
+    {
+        "name": "الفتاح",
+        "meaning": "يفتح أبواب الرحمة والعلم والفرج."
+    },
+    {
+        "name": "العليم",
+        "meaning": "يعلم الظاهر والباطن."
+    },
+    {
+        "name": "القابض",
+        "meaning": "يقبض بحكمة."
+    },
+    {
+        "name": "الباسط",
+        "meaning": "يبسط الرزق والرحمة."
+    },
+    {
+        "name": "الخافض",
+        "meaning": "يخفض من شاء بعدله."
+    },
+    {
+        "name": "الرافع",
+        "meaning": "يرفع من شاء بفضله."
+    },
+    {
+        "name": "المعز",
+        "meaning": "يعز من أطاعه."
+    },
+    {
+        "name": "المذل",
+        "meaning": "يذل من تكبر وخالف الحق."
+    },
+    {
+        "name": "السميع",
+        "meaning": "يسمع كل دعاء وكل صوت."
+    },
+    {
+        "name": "البصير",
+        "meaning": "يرى كل شيء."
+    },
+    {
+        "name": "الحكم",
+        "meaning": "حكمه عدل وحكمة."
+    },
+    {
+        "name": "العدل",
+        "meaning": "لا يظلم أحداً."
+    },
+    {
+        "name": "اللطيف",
+        "meaning": "يوصل الخير بلطف خفي."
+    },
+    {
+        "name": "الخبير",
+        "meaning": "يعلم دقائق الأمور."
+    },
+    {
+        "name": "الحليم",
+        "meaning": "يمهل ولا يعجل بالعقوبة."
+    },
+    {
+        "name": "العظيم",
+        "meaning": "له العظمة الكاملة."
+    },
+    {
+        "name": "الغفور",
+        "meaning": "يغفر الذنوب لمن تاب."
+    },
+    {
+        "name": "الشكور",
+        "meaning": "يثيب على القليل كثيراً."
+    },
+    {
+        "name": "العلي",
+        "meaning": "عالٍ فوق خلقه قدراً وقهراً."
+    },
+    {
+        "name": "الكبير",
+        "meaning": "أكبر من كل شيء."
+    },
+    {
+        "name": "الحفيظ",
+        "meaning": "يحفظ خلقه وأعمالهم."
+    },
+    {
+        "name": "المقيت",
+        "meaning": "يوصل الأقوات ويدبرها."
+    },
+    {
+        "name": "الحسيب",
+        "meaning": "كافٍ لعباده ومحاسب لهم."
+    }
+];
   const goals = [
-    'جدّد نيتك قبل عمل مهم واحد.',
-    'افعل خيراً واحداً بهدوء بلا رياء.',
-    'اقرأ مادة قصيرة واحفظ فائدة واحدة.',
-    'استغفر الله 33 مرة بهدوء.',
-    'اترك عملاً زائداً يسرق الوقت.',
-    'ادعُ لوالديك وأحبابك.',
-    'اشكر الله على نعمة محددة.'
-  ];
+    "افعل خيراً واحداً بهدوء بلا كلام ولا رياء.",
+    "جدّد نيتك لله ﷻ قبل عمل مهم.",
+    "ساعد شخصاً واحداً دون أن يشعر الناس.",
+    "استغفر الله ﷻ ثلاثاً وثلاثين مرة بهدوء.",
+    "ادعُ لوالديك وأهلك.",
+    "اترك فعلاً زائداً يسرق وقتك.",
+    "اشكر الله ﷻ على نعمة واحدة محددة."
+];
   const article = articles[dayNumber % articles.length];
   const articleLink = document.getElementById('dailyArticleLink');
   const articleTitle = document.getElementById('dailyArticleTitle');
@@ -2833,7 +3890,7 @@ window.addEventListener("DOMContentLoaded",function(){const installBtn=document.
   if(currentAdhkarTitle && currentAdhkarText){
     if(hour >= 4 && hour < 11){ currentAdhkarTitle.textContent = 'أذكار الصباح'; currentAdhkarText.textContent = 'أفضل وقت لتثبيت حماية الصباح.'; }
     else if(hour >= 16 && hour < 22){ currentAdhkarTitle.textContent = 'أذكار المساء'; currentAdhkarText.textContent = 'حماية المساء قبل نهاية اليوم.'; }
-    else{ currentAdhkarTitle.textContent = 'الذكر التالي'; currentAdhkarText.textContent = hour < 4 ? 'التالي — أذكار الصباح بعد الفجر.' : 'التالي — أذكار المساء قرب المغرب.'; }
+    else{ currentAdhkarTitle.textContent = 'الذكر التالي'; currentAdhkarText.textContent = hour < 4 ? 'الأقرب — أذكار الصباح بعد الفجر.' : 'الأقرب — أذكار المساء قرب المغرب.'; }
   }
   const name = names[dayNumber % names.length];
   const nameEl = document.getElementById('allahNameToday');
@@ -2843,10 +3900,10 @@ window.addEventListener("DOMContentLoaded",function(){const installBtn=document.
   const storageKey = 'barakaway_name_counter_ar_' + todayKey;
   let count = Math.max(0, Math.min(100, parseInt(localStorage.getItem(storageKey) || '0', 10) || 0));
   function renderCounter(){
-    if(nameEl) nameEl.textContent = name;
+    if(nameEl) nameEl.textContent = (typeof name === 'object' ? name.name : name);
     if(valueEl) valueEl.textContent = count + '/100';
     if(fillEl) fillEl.style.width = count + '%';
-    if(card) card.setAttribute('aria-label', name + ': ' + count + ' من 100 تكرار');
+    if(card) card.setAttribute('aria-label', (typeof name === 'object' ? name.name : name) + ': ' + count + ' من 100 تكرار');
   }
   function incrementCounter(){
     count = count >= 100 ? 0 : count + 1;
@@ -2889,7 +3946,7 @@ window.addEventListener("DOMContentLoaded",function(){const installBtn=document.
 
     if(done){
       goalCard.style.setProperty('--goal-red-opacity', '0');
-      goalCard.setAttribute('aria-label', 'تم');
+      goalCard.setAttribute('aria-label', 'تم الإنجاز');
       return;
     }
 
@@ -2902,7 +3959,11 @@ window.addEventListener("DOMContentLoaded",function(){const installBtn=document.
   goalCard.addEventListener('click', function(){
     const key = 'barakaway_daily_goal_ar_' + localDateKey(new Date());
     const done = localStorage.getItem(key) === '1';
-    localStorage.setItem(key, done ? '0' : '1');
+    if(localStorage.getItem(key) === '1'){
+      updateGoalState();
+      return;
+    }
+    localStorage.setItem(key, '1');
     updateGoalState();
   });
 
@@ -2917,9 +3978,1026 @@ window.addEventListener("DOMContentLoaded",function(){const installBtn=document.
   setInterval(updateGoalState, 60000);
 })();
 </script>
+<script>
+(function(){
+  const TASK_PREFIX = "barakaway_today_ru_";
+
+  function localDateKey(date){
+    const y = date.getFullYear();
+    const m = String(date.getMonth() + 1).padStart(2, "0");
+    const d = String(date.getDate()).padStart(2, "0");
+    return y + "-" + m + "-" + d;
+  }
+
+  function todayKey(){
+    return localDateKey(new Date());
+  }
+
+  function taskKey(name){
+    return TASK_PREFIX + todayKey() + "_" + name;
+  }
+
+  function isDone(name){
+    return localStorage.getItem(taskKey(name)) === "1";
+  }
+
+  function setDone(name){
+    localStorage.setItem(taskKey(name), "1");
+  }
+
+  function redOpacity(){
+    const now = new Date();
+    const minutes = now.getHours() * 60 + now.getMinutes();
+    return Math.max(0.10, Math.min(0.90, minutes / 1440)).toFixed(2);
+  }
+
+  function applyTaskState(card, statusEl, name, openSymbol){
+    if(!card) return;
+
+    const done = isDone(name);
+
+    card.classList.toggle("task-done", done);
+    card.classList.toggle("goal-done", done);
+    card.classList.toggle("task-urgent", !done && new Date().getHours() >= 18);
+
+    card.style.setProperty("--task-red-opacity", done ? "0" : redOpacity());
+    card.style.setProperty("--goal-red-opacity", done ? "0" : redOpacity());
+
+    if(statusEl){
+      statusEl.textContent = done ? "✓" : openSymbol;
+    }
+
+    card.setAttribute("aria-disabled", done ? "true" : "false");
+  }
+
+  const articleCard = document.getElementById("dailyArticleLink");
+  const articleStatus = document.getElementById("dailyArticleStatus");
+
+  const adhkarCard = document.getElementById("currentAdhkarLink");
+  const adhkarStatus = document.getElementById("currentAdhkarStatus");
+
+  const nameCard = document.getElementById("allahNameCounterCard");
+  const nameStatus = document.getElementById("allahNameCounterValue");
+  const nameFill = document.getElementById("allahNameCounterFill");
+
+  const goalCard = document.getElementById("dailyGoalCard");
+  const goalStatus = document.getElementById("dailyGoalStatus");
+
+  function renderAll(){
+    applyTaskState(articleCard, articleStatus, "article", "→");
+    applyTaskState(adhkarCard, adhkarStatus, "adhkar", "→");
+    applyTaskState(goalCard, goalStatus, "goal", "•");
+
+    if(nameCard){
+      const done = isDone("name");
+      let count = Math.max(0, Math.min(100, parseInt(localStorage.getItem(TASK_PREFIX + todayKey() + "_name_count") || "0", 10) || 0));
+
+      if(done){
+        count = 100;
+        nameCard.classList.add("task-done","goal-done");
+        nameCard.classList.remove("task-urgent");
+        nameCard.style.setProperty("--task-red-opacity","0");
+        nameCard.style.setProperty("--goal-red-opacity","0");
+        if(nameStatus) nameStatus.textContent = "✓";
+        if(nameFill) nameFill.style.width = "100%";
+        nameCard.setAttribute("aria-disabled","true");
+      }else{
+        nameCard.classList.remove("task-done","goal-done");
+        nameCard.classList.toggle("task-urgent", new Date().getHours() >= 18);
+        nameCard.style.setProperty("--task-red-opacity", redOpacity());
+        nameCard.style.setProperty("--goal-red-opacity", redOpacity());
+        if(nameStatus) nameStatus.textContent = count + "/100";
+        if(nameFill) nameFill.style.width = count + "%";
+        nameCard.setAttribute("aria-disabled","false");
+      }
+    }
+  }
+
+  if(articleCard){
+    articleCard.addEventListener("click", function(e){
+      if(isDone("article")){
+        e.preventDefault();
+        return;
+      }
+      setDone("article");
+      renderAll();
+    }, true);
+  }
+
+  if(adhkarCard){
+    adhkarCard.addEventListener("click", function(e){
+      if(isDone("adhkar")){
+        e.preventDefault();
+        return;
+      }
+      setDone("adhkar");
+      renderAll();
+    }, true);
+  }
+
+  if(goalCard){
+    goalCard.addEventListener("click", function(e){
+      if(isDone("goal")){
+        e.preventDefault();
+        return;
+      }
+      setDone("goal");
+      renderAll();
+    });
+
+    goalCard.addEventListener("keydown", function(e){
+      if(e.key === "Enter" || e.key === " "){
+        e.preventDefault();
+        if(!isDone("goal")){
+          setDone("goal");
+          renderAll();
+        }
+      }
+    });
+  }
+
+  if(nameCard){
+    nameCard.addEventListener("click", function(e){
+      if(isDone("name")){
+        e.preventDefault();
+        return;
+      }
+
+      let count = Math.max(0, Math.min(100, parseInt(localStorage.getItem(TASK_PREFIX + todayKey() + "_name_count") || "0", 10) || 0));
+      count = Math.min(100, count + 1);
+      localStorage.setItem(TASK_PREFIX + todayKey() + "_name_count", String(count));
+
+      if(count >= 100){
+        setDone("name");
+      }
+
+      renderAll();
+    });
+
+    nameCard.addEventListener("keydown", function(e){
+      if(e.key === "Enter" || e.key === " "){
+        e.preventDefault();
+        nameCard.click();
+      }
+    });
+  }
+
+  renderAll();
+  setInterval(renderAll, 60000);
+})();
+</script>
+
+<script>
+(function(){
+  const ayahActions = [
+    {
+        "ref": "2:83",
+        "ayah": "وقولوا للناس حسناً.",
+        "task": "اليوم قل ثلاث عبارات هادئة وطيبة لمن حولك."
+    },
+    {
+        "ref": "2:152",
+        "ayah": "فاذكروني أذكركم.",
+        "task": "اليوم اذكر الله عشر مرات خلال اليوم."
+    },
+    {
+        "ref": "2:153",
+        "ayah": "إن الله مع الصابرين.",
+        "task": "اليوم لا ترد بحدة ولو استفزك أحد."
+    },
+    {
+        "ref": "2:195",
+        "ayah": "إن الله يحب المحسنين.",
+        "task": "اليوم افعل خيراً واحداً بهدوء دون انتظار مدح."
+    },
+    {
+        "ref": "2:222",
+        "ayah": "إن الله يحب التوابين.",
+        "task": "اليوم استغفر الله بهدوء عن ذنب واحد."
+    },
+    {
+        "ref": "2:263",
+        "ayah": "قول معروف ومغفرة خير من صدقة يتبعها أذى.",
+        "task": "اليوم لا تذكّر أحداً بمساعدتك."
+    },
+    {
+        "ref": "2:286",
+        "ayah": "لا يكلف الله نفساً إلا وسعها.",
+        "task": "اليوم افعل ما تستطيع بهدوء دون ضغط زائد."
+    },
+    {
+        "ref": "3:134",
+        "ayah": "والكاظمين الغيظ والعافين عن الناس.",
+        "task": "إذا غضبت فاصمت عشر ثوانٍ لله."
+    },
+    {
+        "ref": "13:28",
+        "ayah": "ألا بذكر الله تطمئن القلوب.",
+        "task": "اليوم عند القلق قل ذكراً قصيراً."
+    },
+    {
+        "ref": "14:7",
+        "ayah": "لئن شكرتم لأزيدنكم.",
+        "task": "اليوم اذكر خمس نعم من الله في حياتك."
+    }
+];
+
+  const HISTORY_KEY = 'barakaway_ayah_history_ru_v1';
+  const TODAY_KEY = 'barakaway_ayah_today_ru_v1';
+
+  function localDateKey(date){
+    const y = date.getFullYear();
+    const m = String(date.getMonth() + 1).padStart(2, '0');
+    const d = String(date.getDate()).padStart(2, '0');
+    return y + '-' + m + '-' + d;
+  }
+
+  function daysBetween(a, b){
+    const start = new Date(a + 'T00:00:00');
+    const end = new Date(b + 'T00:00:00');
+    return Math.floor((end - start) / 86400000);
+  }
+
+  function safeJsonParse(value, fallback){
+    try{
+      return JSON.parse(value);
+    }catch(e){
+      return fallback;
+    }
+  }
+
+  function pickAyahForToday(){
+    const today = localDateKey(new Date());
+    const START_KEY = 'barakaway_linear_program_start_ru_v1';
+    let start = localStorage.getItem(START_KEY);
+    if(!start){
+      start = today;
+      localStorage.setItem(START_KEY, start);
+    }
+    const dayNumber = Math.max(0, daysBetween(start, today));
+    const index = ayahActions.length ? (dayNumber % ayahActions.length) : 0;
+    localStorage.setItem(TODAY_KEY, JSON.stringify({date:today, index:index, mode:'linear', day:dayNumber + 1}));
+    return ayahActions[index];
+  }
+
+  function renderAyahCard(){
+    const ayah = pickAyahForToday();
+    const card = document.getElementById('dailyArticleLink');
+    const text = document.getElementById('dailyArticleTitle');
+    const title = card ? card.querySelector('.today-action-title') : null;
+
+    if(card){
+      card.href = 'javascript:void(0)';
+      card.setAttribute('role', 'button');
+      card.setAttribute('aria-label', 'آية اليوم: ' + ayah.ref + '. ' + ayah.task);
+    }
+
+    if(title){
+      title.textContent = 'آية اليوم';
+    }
+
+    if(text){
+      const escapeHtml = function(value){
+        return String(value)
+          .replace(/&/g, '&amp;')
+          .replace(/</g, '&lt;')
+          .replace(/>/g, '&gt;')
+          .replace(/"/g, '&quot;')
+          .replace(/'/g, '&#039;');
+      };
+
+      text.innerHTML =
+        '<div class="today-ayah-text">' +
+          '<div><span class="today-ayah-ref">' + escapeHtml(ayah.ref) + '</span></div>' +
+          '<div class="today-ayah-line">' + escapeHtml(ayah.ayah) + '</div>' +
+          '<div class="today-ayah-task"><span class="today-ayah-task-label">المهمة:</span>' + escapeHtml(ayah.task) + '</div>' +
+        '</div>';
+    }
+  }
+
+  renderAyahCard();
+
+  const card = document.getElementById('dailyArticleLink');
+  if(card){
+    card.addEventListener('click', function(event){
+      event.preventDefault();
+    }, true);
+    card.addEventListener('keydown', function(event){
+      if(event.key === 'Enter' || event.key === ' '){
+        event.preventDefault();
+        card.click();
+      }
+    });
+  }
+})();
+</script>
+
+
+<script>
+(function(){
+  const challenges = [
+    "اليوم ابدأ بالسلام على خمسة أشخاص.",
+    "اليوم ابتسم لعشرة أشخاص ابتغاء وجه الله.",
+    "اليوم قل بسم الله قبل كل عمل مهم.",
+    "اليوم لا تقاطع من يتحدث إليك.",
+    "اليوم لا ترد بحدة ولو استفزك أحد.",
+    "اليوم أمسك لسانك عن شكوى واحدة.",
+    "اليوم ادعُ لشخص يضايقك.",
+    "اليوم ساعد شخصاً واحداً دون شرح أو رياء.",
+    "اليوم لا تتحدث عن أحد في غيبته.",
+    "اليوم قل كلمة طيبة لثلاثة أشخاص."
+];
+  const TODAY_KEY = 'barakaway_daily_challenge_today_ru';
+  const HISTORY_KEY = 'barakaway_daily_challenge_history_ru';
+
+  function localDateKey(date){
+    const y = date.getFullYear();
+    const m = String(date.getMonth() + 1).padStart(2, '0');
+    const d = String(date.getDate()).padStart(2, '0');
+    return y + '-' + m + '-' + d;
+  }
+
+  function daysBetween(a, b){
+    const da = new Date(a + 'T00:00:00');
+    const db = new Date(b + 'T00:00:00');
+    return Math.round((db - da) / 86400000);
+  }
+
+  function safeJsonParse(value, fallback){
+    try{return JSON.parse(value);}catch(e){return fallback;}
+  }
+
+  function pickChallengeForToday(){
+    const today = localDateKey(new Date());
+    const START_KEY = 'barakaway_linear_program_start_ru_v1';
+    let start = localStorage.getItem(START_KEY);
+    if(!start){
+      start = today;
+      localStorage.setItem(START_KEY, start);
+    }
+    const dayNumber = Math.max(0, daysBetween(start, today));
+    const index = challenges.length ? (dayNumber % challenges.length) : 0;
+    localStorage.setItem(TODAY_KEY, JSON.stringify({date:today, index:index, mode:'linear', day:dayNumber + 1}));
+    return {index:index, text:challenges[index]};
+  }
+
+  function renderChallenge(){
+    const selected = pickChallengeForToday();
+    const card = document.getElementById('currentAdhkarLink');
+    const title = document.getElementById('currentAdhkarTitle');
+    const text = document.getElementById('currentAdhkarText');
+
+    if(card){
+      card.href = 'javascript:void(0)';
+      card.setAttribute('role', 'button');
+      card.setAttribute('aria-label', 'اختبار اليوم. ' + selected.text);
+    }
+    if(title) title.textContent = 'اختبار اليوم';
+    if(text) text.textContent = selected.text;
+  }
+
+  renderChallenge();
+  document.addEventListener('DOMContentLoaded', renderChallenge);
+  window.addEventListener('pageshow', renderChallenge);
+})();
+</script>
+
+
+<script>
+(function(){
+  const MICRO_QUESTIONS = [
+  {
+    "q": "كم عدد أركان الإسلام؟",
+    "options": [
+      "4",
+      "5",
+      "6"
+    ],
+    "correct": 1,
+    "meaning": "أركان الإسلام أساس العمل الظاهر للمسلم."
+  },
+  {
+    "q": "أول أركان الإسلام هو…",
+    "options": [
+      "الشهادة",
+      "الصوم",
+      "الزكاة"
+    ],
+    "correct": 0,
+    "meaning": "الشهادة مدخل الإسلام وأصل الإيمان."
+  },
+  {
+    "q": "كم صلاة مفروضة في اليوم؟",
+    "options": [
+      "3",
+      "5",
+      "7"
+    ],
+    "correct": 1,
+    "meaning": "الصلوات الخمس عمود يوم المسلم."
+  },
+  {
+    "q": "الصوم في رمضان هو…",
+    "options": [
+      "ركن من الإسلام",
+      "عادة فقط",
+      "اختيار بلا معنى"
+    ],
+    "correct": 0,
+    "meaning": "صوم رمضان عبادة عظيمة وركن من أركان الإسلام."
+  },
+  {
+    "q": "الزكاة تساعد…",
+    "options": [
+      "المحتاجين",
+      "الأغنياء فقط",
+      "لا أحد"
+    ],
+    "correct": 0,
+    "meaning": "المال في الإسلام مرتبط بالمسؤولية والرحمة."
+  },
+  {
+    "q": "أفضل الذكر هو…",
+    "options": [
+      "لا إله إلا الله",
+      "كلمة قاسية",
+      "جدال"
+    ],
+    "correct": 0,
+    "meaning": "هذه كلمة التوحيد وأصل الإيمان."
+  },
+  {
+    "q": "سبحان الله تعني…",
+    "options": [
+      "تنزيه الله",
+      "أنا متعب",
+      "شكراً لك"
+    ],
+    "correct": 0,
+    "meaning": "المؤمن ينزه الله عن كل نقص."
+  },
+  {
+    "q": "الله أكبر تعني…",
+    "options": [
+      "الله أعظم",
+      "أنا على حق",
+      "إلى اللقاء"
+    ],
+    "correct": 0,
+    "meaning": "تذكّر أن الله أكبر من كل شيء."
+  },
+  {
+    "q": "المسلم ينبغي أن يكون…",
+    "options": [
+      "صادقاً",
+      "كاذباً",
+      "قاسياً"
+    ],
+    "correct": 0,
+    "meaning": "الصدق من حسن الخلق."
+  },
+  {
+    "q": "إذا أخطأت فالأفضل أن…",
+    "options": [
+      "تصلح الخطأ",
+      "تتكبر",
+      "تلوم الجميع"
+    ],
+    "correct": 0,
+    "meaning": "الإصلاح أفضل من التبرير."
+  }
+];
+  const TASK_PREFIX = "barakaway_today_ru_";
+  const MICRO_TODAY_KEY = "barakaway_micro_question_today_ru_v1";
+  const MICRO_HISTORY_KEY = "barakaway_micro_question_history_ru_v1";
+  const MICRO_ANSWER_PREFIX = "barakaway_micro_answer_ar_";
+
+  function localDateKey(date){
+    const y = date.getFullYear();
+    const m = String(date.getMonth() + 1).padStart(2, "0");
+    const d = String(date.getDate()).padStart(2, "0");
+    return y + "-" + m + "-" + d;
+  }
+
+  function todayKey(){
+    return localDateKey(new Date());
+  }
+
+  function daysBetween(a, b){
+    const da = new Date(a + "T00:00:00");
+    const db = new Date(b + "T00:00:00");
+    return Math.round((db - da) / 86400000);
+  }
+
+  function safeJsonParse(value, fallback){
+    try{return JSON.parse(value);}catch(e){return fallback;}
+  }
+
+  function taskKey(name){
+    return TASK_PREFIX + todayKey() + "_" + name;
+  }
+
+  function markDone(name){
+    localStorage.setItem(taskKey(name), "1");
+  }
+
+  function isDone(name){
+    return localStorage.getItem(taskKey(name)) === "1";
+  }
+
+  function redOpacity(){
+    const now = new Date();
+    const minutes = now.getHours() * 60 + now.getMinutes();
+    return Math.max(0.10, Math.min(0.90, minutes / 1440)).toFixed(2);
+  }
+
+  function pickQuestionForToday(){
+    const today = todayKey();
+    const START_KEY = 'barakaway_linear_program_start_ru_v1';
+    let start = localStorage.getItem(START_KEY);
+    if(!start){
+      start = today;
+      localStorage.setItem(START_KEY, start);
+    }
+    const dayNumber = Math.max(0, daysBetween(start, today));
+    const index = MICRO_QUESTIONS.length ? (dayNumber % MICRO_QUESTIONS.length) : 0;
+    localStorage.setItem(MICRO_TODAY_KEY, JSON.stringify({date:today, index:index, mode:'linear', day:dayNumber + 1}));
+    return {index:index, item:MICRO_QUESTIONS[index]};
+  }
+
+  function getAnswerState(){
+    return safeJsonParse(localStorage.getItem(MICRO_ANSWER_PREFIX + todayKey()), null);
+  }
+
+  function setAnswerState(index, selected){
+    localStorage.setItem(MICRO_ANSWER_PREFIX + todayKey(), JSON.stringify({date:todayKey(), index:index, selected:selected}));
+    markDone("micro");
+  }
+
+  function setCardState(card, status, done){
+    if(!card) return;
+    card.classList.toggle("task-done", done);
+    card.classList.toggle("goal-done", done);
+    card.classList.toggle("micro-answered", done);
+    card.classList.toggle("task-urgent", !done && new Date().getHours() >= 18);
+    card.style.setProperty("--task-red-opacity", done ? "0" : redOpacity());
+    card.style.setProperty("--goal-red-opacity", done ? "0" : redOpacity());
+    card.setAttribute("aria-disabled", done ? "true" : "false");
+    if(status) status.textContent = done ? "✓" : "?";
+  }
+
+  function renderMicroQuestion(){
+    const selected = pickQuestionForToday();
+    const q = selected.item;
+    const answerState = getAnswerState();
+    const done = isDone("micro") || (answerState && answerState.date === todayKey());
+
+    const card = document.getElementById("dailyMicroKnowledgeCard");
+    const status = document.getElementById("dailyMicroKnowledgeStatus");
+    const questionEl = document.getElementById("dailyMicroQuestion");
+    const optionsEl = document.getElementById("dailyMicroOptions");
+    const answerEl = document.getElementById("dailyMicroAnswer");
+
+    if(!card || !questionEl || !optionsEl || !answerEl) return;
+
+    questionEl.textContent = q.q;
+    optionsEl.innerHTML = "";
+
+    q.options.forEach(function(option, optionIndex){
+      const btn = document.createElement("button");
+      btn.type = "button";
+      btn.className = "micro-option";
+      btn.textContent = option;
+      btn.disabled = !!done;
+      btn.addEventListener("click", function(event){
+        event.preventDefault();
+        event.stopPropagation();
+        if(isDone("micro")) return;
+        setAnswerState(selected.index, optionIndex);
+        renderMicroQuestion();
+      });
+      optionsEl.appendChild(btn);
+    });
+
+    if(done){
+      const chosen = answerState && Number.isInteger(answerState.selected) ? answerState.selected : q.correct;
+      const correctText = q.options[q.correct];
+      const chosenText = q.options[chosen] || "";
+      const prefix = chosen === q.correct ? "صحيح." : "الإجابة الصحيحة:";
+      answerEl.innerHTML = "<strong>" + prefix + "</strong> " + correctText + "<br><strong>المعنى:</strong> " + q.meaning;
+      answerEl.classList.add("show");
+      markDone("micro");
+    }else{
+      answerEl.innerHTML = "";
+      answerEl.classList.remove("show");
+    }
+
+    setCardState(card, status, !!done);
+  }
+
+  function enforceNameCounterLock(){
+    const card = document.getElementById("allahNameCounterCard");
+    const status = document.getElementById("allahNameCounterValue");
+    const fill = document.getElementById("allahNameCounterFill");
+    if(!card) return;
+
+    const nameCountKey = TASK_PREFIX + todayKey() + "_name_count";
+    const legacyKeys = ["barakaway_name_counter_" + todayKey(), "barakaway_name_counter_ar_" + todayKey()];
+
+    function readNumber(key){
+      return Math.max(0, Math.min(100, parseInt(localStorage.getItem(key) || "0", 10) || 0));
+    }
+
+    function readCount(){
+      let count = readNumber(nameCountKey);
+      legacyKeys.forEach(function(key){count = Math.max(count, readNumber(key));});
+      return count;
+    }
+
+    function writeCount(count){
+      const safe = Math.max(0, Math.min(100, count));
+      localStorage.setItem(nameCountKey, String(safe));
+      legacyKeys.forEach(function(key){localStorage.setItem(key, String(safe));});
+      if(safe >= 100) markDone("name");
+    }
+
+    function render(){
+      let count = readCount();
+      const done = isDone("name") || count >= 100;
+      if(done){
+        count = 100;
+        writeCount(100);
+        markDone("name");
+        card.classList.add("task-done", "goal-done");
+        card.classList.remove("task-urgent");
+        card.style.setProperty("--task-red-opacity", "0");
+        card.style.setProperty("--goal-red-opacity", "0");
+        card.setAttribute("aria-disabled", "true");
+        if(status) status.textContent = "✓";
+        if(fill) fill.style.width = "100%";
+        return;
+      }
+      card.classList.remove("task-done", "goal-done");
+      card.classList.toggle("task-urgent", new Date().getHours() >= 18);
+      card.setAttribute("aria-disabled", "false");
+      if(status) status.textContent = count + "/100";
+      if(fill) fill.style.width = count + "%";
+    }
+
+    function oneClick(event){
+      if(event){
+        event.preventDefault();
+        event.stopImmediatePropagation();
+        event.stopPropagation();
+      }
+      if(isDone("name") || readCount() >= 100){
+        render();
+        return;
+      }
+      writeCount(readCount() + 1);
+      render();
+    }
+
+    if(card.dataset.finalNameCounterLock !== "1"){
+      card.dataset.finalNameCounterLock = "1";
+      card.addEventListener("click", oneClick, true);
+      card.addEventListener("keydown", function(event){
+        if(event.key === "Enter" || event.key === " ") oneClick(event);
+      }, true);
+    }
+    render();
+  }
+
+  renderMicroQuestion();
+  enforceNameCounterLock();
+  document.addEventListener("DOMContentLoaded", function(){
+    renderMicroQuestion();
+    enforceNameCounterLock();
+  });
+  window.addEventListener("pageshow", function(){
+    renderMicroQuestion();
+    enforceNameCounterLock();
+  });
+  setInterval(function(){
+    renderMicroQuestion();
+    enforceNameCounterLock();
+  }, 1500);
+})();
+</script>
+
+
+<script>
+(function(){
+  const TOGGLE_KEY = 'barakaway_tahajjud_alarm_enabled_ru_v1';
+  const ALERTED_KEY_PREFIX = 'barakaway_tahajjud_alarm_alerted_ru_';
+  const OFFSET_MINUTES = 60;
+
+  const toggle = document.getElementById('tahajjudAlarmToggle');
+  const meta = document.getElementById('tahajjudAlarmMeta');
+  let alarmTimer = null;
+  let metaTimer = null;
+
+  if(!toggle || !meta) return;
+
+  function localDateKey(date){
+    const y = date.getFullYear();
+    const m = String(date.getMonth() + 1).padStart(2, '0');
+    const d = String(date.getDate()).padStart(2, '0');
+    return y + '-' + m + '-' + d;
+  }
+
+  function parseTimeToDate(value){
+    const clean = String(value || '').replace(/[^\d:]/g, '').trim();
+    const parts = clean.split(':').map(Number);
+    if(!Number.isFinite(parts[0]) || !Number.isFinite(parts[1])) return null;
+    const d = new Date();
+    d.setHours(parts[0], parts[1], 0, 0);
+    return d;
+  }
+
+  function getFajrDate(){
+    const timings = window.homePrayerShareState && window.homePrayerShareState.timings;
+    if(!timings || !timings.Fajr) return null;
+
+    const fajr = parseTimeToDate(timings.Fajr);
+    if(!fajr) return null;
+
+    const now = new Date();
+    if(fajr <= now){
+      fajr.setDate(fajr.getDate() + 1);
+    }
+    return fajr;
+  }
+
+  function getAlarmDate(){
+    const fajr = getFajrDate();
+    if(!fajr) return null;
+    return new Date(fajr.getTime() - OFFSET_MINUTES * 60000);
+  }
+
+  function formatTime(date){
+    return String(date.getHours()).padStart(2,'0') + ':' + String(date.getMinutes()).padStart(2,'0');
+  }
+
+  function playTahajjudSound(){
+    try{
+      const AudioContext = window.AudioContext || window.webkitAudioContext;
+      if(!AudioContext) return;
+      const ctx = new AudioContext();
+      const gain = ctx.createGain();
+      gain.gain.setValueAtTime(0.0001, ctx.currentTime);
+      gain.gain.exponentialRampToValueAtTime(0.16, ctx.currentTime + 0.04);
+      gain.gain.exponentialRampToValueAtTime(0.0001, ctx.currentTime + 1.8);
+      gain.connect(ctx.destination);
+
+      [0, 0.55, 1.1].forEach(function(delay){
+        const osc = ctx.createOscillator();
+        osc.type = 'sine';
+        osc.frequency.setValueAtTime(620, ctx.currentTime + delay);
+        osc.connect(gain);
+        osc.start(ctx.currentTime + delay);
+        osc.stop(ctx.currentTime + delay + 0.32);
+      });
+    }catch(e){}
+  }
+
+  function notifyTahajjud(){
+    const fajr = getFajrDate();
+    const body = fajr
+      ? 'باقي على الفجر نحو 60 دقيقة. هذا وقت التهجد والدعاء والذكر الهادئ.'
+      : 'وقت صلاة التهجد والدعاء والذكر الهادئ.';
+
+    playTahajjudSound();
+
+    if('Notification' in window && Notification.permission === 'granted'){
+      new Notification('🌙 BarakaWay — التهجد', { body: body });
+    }else{
+      alert('🌙 BarakaWay\\n\\n' + body);
+    }
+  }
+
+  function updateMeta(){
+    const enabled = localStorage.getItem(TOGGLE_KEY) === '1';
+    const alarm = getAlarmDate();
+    const fajr = getFajrDate();
+
+    if(!enabled){
+      meta.textContent = 'قبل الفجر بـ 60 دقيقة';
+      return;
+    }
+
+    if(!alarm || !fajr){
+      meta.textContent = 'تم التفعيل. يجري تحميل وقت الفجر...';
+      return;
+    }
+
+    meta.textContent = 'تم التفعيل: ' + formatTime(alarm) + ' · الفجر ' + formatTime(fajr);
+  }
+
+  function scheduleAlarm(){
+    if(alarmTimer) clearTimeout(alarmTimer);
+    updateMeta();
+
+    if(localStorage.getItem(TOGGLE_KEY) !== '1') return;
+
+    const alarm = getAlarmDate();
+    if(!alarm) return;
+
+    const now = new Date();
+    const delay = alarm.getTime() - now.getTime();
+    const key = ALERTED_KEY_PREFIX + localDateKey(alarm);
+
+    if(delay <= 0){
+      return;
+    }
+
+    alarmTimer = setTimeout(function(){
+      if(localStorage.getItem(TOGGLE_KEY) !== '1') return;
+      if(localStorage.getItem(key) === '1') return;
+      localStorage.setItem(key, '1');
+      notifyTahajjud();
+      scheduleAlarm();
+    }, Math.min(delay, 2147483647));
+  }
+
+  toggle.checked = localStorage.getItem(TOGGLE_KEY) === '1';
+  updateMeta();
+  scheduleAlarm();
+
+  toggle.addEventListener('change', async function(){
+    localStorage.setItem(TOGGLE_KEY, toggle.checked ? '1' : '0');
+
+    if(toggle.checked && 'Notification' in window && Notification.permission === 'default'){
+      try{ await Notification.requestPermission(); }catch(e){}
+    }
+
+    updateMeta();
+    scheduleAlarm();
+  });
+
+  if(metaTimer) clearInterval(metaTimer);
+  metaTimer = setInterval(function(){
+    updateMeta();
+    scheduleAlarm();
+  }, 60000);
+
+  window.addEventListener('pageshow', function(){
+    updateMeta();
+    scheduleAlarm();
+  });
+})();
+</script>
 
 <script src="/theme-toggle.js"></script>
 <script src="/bottom-nav.js"></script>
+
+<script>
+(function(){
+  const TASK_PREFIX = "barakaway_today_ru_";
+
+  function localDateKey(date){
+    const y = date.getFullYear();
+    const m = String(date.getMonth() + 1).padStart(2, "0");
+    const d = String(date.getDate()).padStart(2, "0");
+    return y + "-" + m + "-" + d;
+  }
+
+  function todayKey(){
+    return localDateKey(new Date());
+  }
+
+  function taskDoneKey(){
+    return TASK_PREFIX + todayKey() + "_name";
+  }
+
+  function taskCountKey(){
+    return TASK_PREFIX + todayKey() + "_name_count";
+  }
+
+  function legacyCountKeys(){
+    return [
+      "barakaway_name_counter_" + todayKey(),
+      "barakaway_name_counter_ar_" + todayKey()
+    ];
+  }
+
+  function readNumber(key){
+    return Math.max(0, Math.min(100, parseInt(localStorage.getItem(key) || "0", 10) || 0));
+  }
+
+  function isNameDone(){
+    return localStorage.getItem(taskDoneKey()) === "1" || readNameCount() >= 100;
+  }
+
+  function setNameDone(){
+    localStorage.setItem(taskDoneKey(), "1");
+    localStorage.setItem(taskCountKey(), "100");
+    legacyCountKeys().forEach(function(key){
+      localStorage.setItem(key, "100");
+    });
+  }
+
+  function readNameCount(){
+    let count = readNumber(taskCountKey());
+    legacyCountKeys().forEach(function(key){
+      count = Math.max(count, readNumber(key));
+    });
+    return Math.max(0, Math.min(100, count));
+  }
+
+  function writeNameCount(count){
+    const safeCount = Math.max(0, Math.min(100, count));
+    localStorage.setItem(taskCountKey(), String(safeCount));
+    legacyCountKeys().forEach(function(key){
+      localStorage.setItem(key, String(safeCount));
+    });
+    if(safeCount >= 100){
+      setNameDone();
+    }
+  }
+
+  function renderNameCounter(){
+    const card = document.getElementById("allahNameCounterCard");
+    const status = document.getElementById("allahNameCounterValue");
+    const fill = document.getElementById("allahNameCounterFill");
+    const nameEl = document.getElementById("allahNameToday");
+    const meaningEl = document.getElementById("allahNameMeaning");
+
+    if(!card) return;
+
+    let count = readNameCount();
+    const done = isNameDone();
+
+    if(done){
+      count = 100;
+      setNameDone();
+      card.classList.add("task-done", "goal-done");
+      card.classList.remove("task-urgent");
+      card.style.setProperty("--task-red-opacity", "0");
+      card.style.setProperty("--goal-red-opacity", "0");
+      card.setAttribute("aria-disabled", "true");
+      card.setAttribute("aria-label", "اكتمل اسم الله لهذا اليوم. انتهى التكرار.");
+      if(status) status.textContent = "✓";
+      if(fill) fill.style.width = "100%";
+      return;
+    }
+
+    card.classList.remove("task-done", "goal-done");
+    card.classList.toggle("task-urgent", new Date().getHours() >= 18);
+    card.setAttribute("aria-disabled", "false");
+
+    if(status) status.textContent = count + "/100";
+    if(fill) fill.style.width = count + "%";
+
+    const labelName = nameEl ? nameEl.textContent.trim() : "اسم من أسماء الله";
+    const labelMeaning = meaningEl ? meaningEl.textContent.trim() : "";
+    card.setAttribute("aria-label", labelName + ": " + count + " من 100 تكرار. " + labelMeaning);
+  }
+
+  function completeOneNameClick(event){
+    const card = document.getElementById("allahNameCounterCard");
+    if(!card) return;
+
+    if(event){
+      event.preventDefault();
+      event.stopImmediatePropagation();
+      event.stopPropagation();
+    }
+
+    if(isNameDone()){
+      renderNameCounter();
+      return;
+    }
+
+    const nextCount = Math.min(100, readNameCount() + 1);
+    writeNameCount(nextCount);
+    renderNameCounter();
+  }
+
+  function bindNameCounterLock(){
+    const card = document.getElementById("allahNameCounterCard");
+    if(!card || card.dataset.nameCounterLocked === "1") return;
+
+    card.dataset.nameCounterLocked = "1";
+
+    card.addEventListener("click", function(event){
+      completeOneNameClick(event);
+    }, true);
+
+    card.addEventListener("keydown", function(event){
+      if(event.key === "Enter" || event.key === " "){
+        completeOneNameClick(event);
+      }
+    }, true);
+
+    renderNameCounter();
+  }
+
+  bindNameCounterLock();
+  setInterval(renderNameCounter, 1000);
+})();
+</script>
+
 </body>
 </html>
 
