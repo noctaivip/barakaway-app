@@ -3,7 +3,7 @@
 In the name of Allah, the Most Merciful, the Most Compassionate
 -->
 <!DOCTYPE html>
-<html lang="ur" dir="rtl">
+<html lang="ur">
 <head>
 
 <script>
@@ -1028,7 +1028,6 @@ html.dark-mode .install-help-close{border:1px solid #2a3138;background:#1d242c;c
 html.light-mode .install-help-close{border:1px solid #dfe8e2;background:#fff;color:#1f2a22}
 
 
-
 /* DESKTOP TOP ACTIONS ONLY */
 .desktop-top-actions{
   display:grid;
@@ -1906,6 +1905,52 @@ html.light-mode .today-action-title{color:#172019;}
 }
 html.dark-mode .today-action-text{color:#aebbb5;}
 html.light-mode .today-action-text{color:#647268;}
+.today-ayah-text{
+  display:flex;
+  flex-direction:column;
+  gap:7px;
+  font-weight:650;
+}
+.today-ayah-ref{
+  display:inline-flex;
+  width:max-content;
+  padding:3px 8px;
+  border-radius:999px;
+  font-size:10px;
+  line-height:1.2;
+  font-weight:950;
+  letter-spacing:0.04em;
+}
+html.dark-mode .today-ayah-ref{
+  background:rgba(215,192,122,0.14);
+  color:#f1d889;
+  border:1px solid rgba(215,192,122,0.24);
+}
+html.light-mode .today-ayah-ref{
+  background:#fff7e4;
+  color:#7b5b13;
+  border:1px solid rgba(141,107,22,0.18);
+}
+.today-ayah-line{
+  font-size:13px;
+  line-height:1.42;
+  font-weight:850;
+}
+html.dark-mode .today-ayah-line{color:#eef6f0;}
+html.light-mode .today-ayah-line{color:#172019;}
+.today-ayah-task-label{
+  display:inline-block;
+  margin-right:5px;
+  font-weight:950;
+}
+html.dark-mode .today-ayah-task-label{color:#d7c07a;}
+html.light-mode .today-ayah-task-label{color:#8d6b16;}
+.today-ayah-task{
+  font-size:12px;
+  line-height:1.38;
+  font-weight:650;
+}
+
 .home-section-title{
   margin:28px 0 14px;
   display:flex;
@@ -2158,36 +2203,117 @@ html.light-mode .today-goal-action.goal-done{
   50%{box-shadow:0 12px 24px rgba(0,0,0,0.14),0 0 22px rgba(210,68,68,0.28);}
 }
 
-/* FIXED BOTTOM APP NAVIGATION */
+
+
+/* MICRO KNOWLEDGE DAY — REQUIRED FIFTH DAILY TASK */
+.today-micro-wrap{
+  padding:0 16px 18px;
+}
+.today-micro-action{
+  width:100%;
+  min-height:118px;
+  box-sizing:border-box;
+}
+.today-micro-question{
+  font-size:13px;
+  line-height:1.4;
+  font-weight:500;
+  opacity:0.85;
+}
+html.dark-mode.today-micro-question{color:#f4f7f3;}
+html.light-mode.today-micro-question{color:#172019;}
+.micro-options{
+  display:grid;
+  grid-template-columns:repeat(3,minmax(0,1fr));
+  gap:8px;
+  margin-top:12px;
+}
+.micro-option{
+  width:100%;
+  min-height:38px;
+  margin:0;
+  padding:8px 10px;
+  border-radius:14px;
+  border:1px solid transparent;
+  font-size:12px;
+  font-weight:900;
+  line-height:1.2;
+  cursor:pointer;
+  transition:transform .16s ease, background .25s ease, border-color .25s ease, color .25s ease, opacity .25s ease;
+}
+html.dark-mode .micro-option{
+  background:rgba(102,198,128,.11);
+  border-color:rgba(102,198,128,.18);
+  color:#e7f7ed;
+}
+html.light-mode .micro-option{
+  background:#eff8f2;
+  border-color:rgba(45,122,70,.14);
+  color:#2d7a46;
+}
+.micro-option:active{transform:scale(.98);}
+.today-micro-action.task-done .micro-option,
+.today-micro-action.micro-answered .micro-option{
+  pointer-events:none;
+  opacity:.58;
+}
+.micro-answer-box{
+  display:none;
+  margin-top:12px;
+  padding:12px 13px;
+  border-radius:18px;
+  font-size:12px;
+  line-height:1.45;
+  font-weight:750;
+}
+html.dark-mode .micro-answer-box{
+  background:rgba(102,198,128,.11);
+  border:1px solid rgba(102,198,128,.18);
+  color:#dff6e7;
+}
+html.light-mode .micro-answer-box{
+  background:#f0faf3;
+  border:1px solid rgba(45,122,70,.14);
+  color:#244b32;
+}
+.micro-answer-box.show{display:block;}
+.micro-answer-box strong{font-weight:950;}
+@media(max-width:700px){
+  .today-micro-wrap{padding:0 12px 15px;}
+  .today-micro-action{border-radius:22px;padding:14px;}
+  .micro-options{grid-template-columns:1fr;gap:7px;}
+  .micro-option{min-height:36px;}
+}
+
+/* FIXED BOTTOM APP NAVIGATION — PREMIUM SVG APP STYLE */
 .bottom-app-nav{
   position:fixed;
   left:0;
   right:0;
   bottom:0;
   z-index:2100;
-  min-height:76px;
-  padding:8px max(10px, env(safe-area-inset-left)) calc(8px + env(safe-area-inset-bottom)) max(10px, env(safe-area-inset-right));
+  min-height:82px;
+  padding:10px max(12px, env(safe-area-inset-left)) calc(10px + env(safe-area-inset-bottom)) max(12px, env(safe-area-inset-right));
   display:flex;
   align-items:center;
   justify-content:center;
   box-sizing:border-box;
-  backdrop-filter:blur(18px);
-  -webkit-backdrop-filter:blur(18px);
+  backdrop-filter:blur(22px) saturate(1.28);
+  -webkit-backdrop-filter:blur(22px) saturate(1.28);
   transition:background .25s,border-color .25s,box-shadow .25s;
 }
 
 html.dark-mode .bottom-app-nav{
-  background:linear-gradient(180deg,rgba(20,38,29,0.92) 0%,rgba(10,22,16,0.97) 100%);
+  background:linear-gradient(180deg,rgba(20,38,29,0.86) 0%,rgba(9,20,15,0.98) 100%);
   border-top:1px solid rgba(102,198,128,0.30);
-  box-shadow:0 -14px 34px rgba(0,0,0,0.34), inset 0 1px 0 rgba(255,255,255,0.05);
+  box-shadow:0 -18px 42px rgba(0,0,0,0.40), inset 0 1px 0 rgba(255,255,255,0.06);
 }
 
 html.light-mode .bottom-app-nav{
-  background:linear-gradient(180deg,rgba(243,251,246,0.92) 0%,rgba(232,246,238,0.97) 100%);
-  border-top:1px solid rgba(45,122,70,0.22);
-  box-shadow:0 -14px 34px rgba(18,34,24,0.12), inset 0 1px 0 rgba(255,255,255,0.92);
+  background:linear-gradient(180deg,rgba(253,255,254,0.92) 0%,rgba(232,246,238,0.98) 100%);
+  border-top:1px solid rgba(45,122,70,0.24);
+  box-shadow:0 -18px 42px rgba(18,34,24,0.14), inset 0 1px 0 rgba(255,255,255,0.96);
 }
-
 
 .bottom-app-nav::before{
   content:"";
@@ -2197,7 +2323,7 @@ html.light-mode .bottom-app-nav{
   transform:translateX(-50%);
   width:min(850px,100%);
   height:3px;
-  background:linear-gradient(90deg,rgba(45,122,70,0),rgba(102,198,128,0.88),rgba(215,192,122,0.72),rgba(45,122,70,0));
+  background:linear-gradient(90deg,rgba(45,122,70,0),rgba(102,198,128,0.86),rgba(215,192,122,0.76),rgba(45,122,70,0));
   pointer-events:none;
 }
 
@@ -2206,33 +2332,48 @@ html.light-mode .bottom-app-nav{
   display:grid;
   grid-template-columns:repeat(5,1fr);
   align-items:center;
-  gap:2px;
+  gap:6px;
 }
 
 .bottom-app-nav-item{
   position:relative;
   min-width:0;
-  min-height:58px;
-  border-radius:18px;
+  min-height:62px;
+  border-radius:22px;
   display:flex;
   flex-direction:column;
   align-items:center;
   justify-content:center;
-  gap:4px;
+  gap:5px;
   text-decoration:none;
   font-size:11px;
-  line-height:1.1;
-  font-weight:800;
-  letter-spacing:-0.02em;
+  line-height:1.05;
+  font-weight:900;
+  letter-spacing:-0.025em;
   -webkit-tap-highlight-color:transparent;
-  transition:background .22s ease,color .22s ease,transform .16s ease,box-shadow .22s ease;
+  transition:background .22s ease, color .22s ease, transform .16s ease, box-shadow .22s ease, border-color .22s ease;
+  border:1px solid transparent;
+}
+
+.bottom-app-nav-icon{
+  width:30px;
+  height:30px;
+  border-radius:14px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  transition:background .22s ease, transform .18s ease, box-shadow .22s ease;
 }
 
 .bottom-app-nav-item svg{
-  width:23px;
-  height:23px;
-  fill:currentColor;
-  transition:transform .18s ease,opacity .22s ease;
+  width:21px;
+  height:21px;
+  fill:none;
+  stroke:currentColor;
+  stroke-width:2.05;
+  stroke-linecap:round;
+  stroke-linejoin:round;
+  transition:transform .18s ease,opacity .22s ease,stroke-width .18s ease;
 }
 
 .bottom-app-nav-label{
@@ -2243,54 +2384,235 @@ html.light-mode .bottom-app-nav{
   white-space:nowrap;
 }
 
-html.dark-mode .bottom-app-nav-item{
-  color:#98a7b2;
-}
-
-html.light-mode .bottom-app-nav-item{
-  color:#6a756d;
-}
+html.dark-mode .bottom-app-nav-item{color:#9aacb5;}
+html.light-mode .bottom-app-nav-item{color:#66746b;}
 
 html.dark-mode .bottom-app-nav-item.active{
-  color:#f5fff8;
-  background:linear-gradient(135deg,rgba(45,122,70,0.44),rgba(102,198,128,0.18));
-  box-shadow:inset 0 1px 0 rgba(255,255,255,0.06), 0 8px 18px rgba(0,0,0,0.20);
+  color:#ffffff;
+  background:linear-gradient(135deg,rgba(45,122,70,0.52),rgba(102,198,128,0.18));
+  border-color:rgba(102,198,128,0.22);
+  box-shadow:inset 0 1px 0 rgba(255,255,255,0.08),0 10px 22px rgba(0,0,0,0.24);
 }
 
 html.light-mode .bottom-app-nav-item.active{
-  color:#1f6e3d;
-  background:linear-gradient(135deg,#eef8f1,#ffffff);
-  box-shadow:inset 0 1px 0 rgba(255,255,255,0.96), 0 8px 18px rgba(15,24,18,0.07);
+  color:#ffffff;
+  background:linear-gradient(135deg,#2d7a46 0%,#4caf6a 100%);
+  border-color:rgba(45,122,70,0.18);
+  box-shadow:inset 0 1px 0 rgba(255,255,255,0.18),0 12px 24px rgba(45,122,70,0.20);
 }
 
-.bottom-app-nav-item:active{
-  transform:scale(0.96);
+html.dark-mode .bottom-app-nav-item.active .bottom-app-nav-icon{
+  background:rgba(255,255,255,0.09);
+  box-shadow:inset 0 1px 0 rgba(255,255,255,0.06);
 }
 
-.bottom-app-nav-item.active svg{
-  transform:translateY(-1px) scale(1.04);
+html.light-mode .bottom-app-nav-item.active .bottom-app-nav-icon{
+  background:rgba(255,255,255,0.18);
+  box-shadow:inset 0 1px 0 rgba(255,255,255,0.22);
 }
 
-.container{
-  padding-bottom:118px;
+.bottom-app-nav-item:hover{transform:translateY(-1px);}
+html.dark-mode .bottom-app-nav-item:hover:not(.active){background:rgba(255,255,255,0.045);color:#d8efe1;}
+html.light-mode .bottom-app-nav-item:hover:not(.active){background:rgba(45,122,70,0.07);color:#24663a;}
+.bottom-app-nav-item:active{transform:scale(0.96);}
+.bottom-app-nav-item.active svg{transform:translateY(-1px) scale(1.05);stroke-width:2.25;}
+
+.container{padding-bottom:122px;}
+
+@media(max-width:700px){
+  .container{padding-bottom:122px;}
+  .bottom-app-nav{min-height:78px;padding-top:8px;}
+  .bottom-app-nav-inner{gap:4px;}
+  .bottom-app-nav-item{min-height:58px;border-radius:18px;font-size:10.5px;}
+  .bottom-app-nav-icon{width:28px;height:28px;border-radius:13px;}
+  .bottom-app-nav-item svg{width:20px;height:20px;}
+}
+.today-daily-task{
+  position:relative;
+  overflow:hidden;
+}
+
+.today-daily-task::after{
+  content:"";
+  position:absolute;
+  inset:0;
+  opacity:var(--task-red-opacity,0);
+  background:linear-gradient(135deg,rgba(178,34,34,0.04),rgba(210,38,38,0.28));
+  pointer-events:none;
+  transition:opacity .45s ease;
+}
+
+.today-daily-task > *{
+  position:relative;
+  z-index:1;
+}
+
+.today-daily-task.task-done .today-task-status{
+  color:#66c680 !important;
+  font-size:22px;
+}
+
+html.dark-mode .today-daily-task.task-done{
+  background:linear-gradient(135deg,#17261d 0%,#17262a 52%,#143126 100%) !important;
+  border-color:rgba(102,198,128,.38) !important;
+}
+
+html.light-mode .today-daily-task.task-done{
+  background:linear-gradient(135deg,#f7fff9 0%,#ffffff 52%,#eaf8ef 100%) !important;
+  border-color:rgba(45,122,70,.28) !important;
+}
+
+.today-daily-task.task-urgent:not(.task-done){
+  animation:goalPulse 1.4s ease-in-out infinite;
+}
+
+.today-daily-task.task-done .today-counter-track{
+  display:none;
+}
+
+
+/* TAHAJJUD ALARM — COMPACT BAR */
+.tahajjud-alarm-bar{
+  margin:-4px 0 18px;
+  padding:13px 15px;
+  border-radius:22px;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:12px;
+  transition:background .25s,border-color .25s,box-shadow .25s,transform .18s ease;
+  border:1.5px solid transparent;
+}
+
+html.dark-mode .tahajjud-alarm-bar{
+  background:linear-gradient(135deg,#201d2a 0%, #171f29 52%, #142b24 100%);
+  border-color:rgba(215,192,122,0.28);
+  box-shadow:0 12px 24px rgba(0,0,0,0.20), inset 0 1px 0 rgba(255,255,255,0.04);
+}
+
+html.light-mode .tahajjud-alarm-bar{
+  background:linear-gradient(135deg,#fffaf0 0%, #ffffff 52%, #eef7f1 100%);
+  border-color:rgba(141,107,22,0.18);
+  box-shadow:0 12px 24px rgba(15,24,18,0.05), inset 0 1px 0 rgba(255,255,255,0.96);
+}
+
+.tahajjud-alarm-left{
+  display:flex;
+  align-items:center;
+  gap:11px;
+  min-width:0;
+}
+
+.tahajjud-alarm-icon{
+  width:38px;
+  height:38px;
+  min-width:38px;
+  border-radius:15px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-size:20px;
+}
+
+html.dark-mode .tahajjud-alarm-icon{
+  background:rgba(215,192,122,0.13);
+}
+
+html.light-mode .tahajjud-alarm-icon{
+  background:#fff4d8;
+}
+
+.tahajjud-alarm-title{
+  font-size:14px;
+  line-height:1.15;
+  font-weight:900;
+  letter-spacing:-0.025em;
+}
+
+html.dark-mode .tahajjud-alarm-title{color:#f5f8f6;}
+html.light-mode .tahajjud-alarm-title{color:#172019;}
+
+.tahajjud-alarm-meta{
+  margin-top:3px;
+  font-size:11px;
+  line-height:1.25;
+  font-weight:700;
+}
+
+html.dark-mode .tahajjud-alarm-meta{color:#aebbb5;}
+html.light-mode .tahajjud-alarm-meta{color:#647268;}
+
+.tahajjud-switch{
+  position:relative;
+  width:54px;
+  height:30px;
+  min-width:54px;
+  display:inline-flex;
+  align-items:center;
+}
+
+.tahajjud-switch input{
+  opacity:0;
+  width:0;
+  height:0;
+}
+
+.tahajjud-slider{
+  position:absolute;
+  cursor:pointer;
+  inset:0;
+  border-radius:999px;
+  transition:background .25s ease, box-shadow .25s ease;
+}
+
+html.dark-mode .tahajjud-slider{
+  background:#303a44;
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.05);
+}
+
+html.light-mode .tahajjud-slider{
+  background:#d7ded9;
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.6);
+}
+
+.tahajjud-slider::before{
+  content:"";
+  position:absolute;
+  height:24px;
+  width:24px;
+  left:3px;
+  top:3px;
+  border-radius:50%;
+  background:#fff;
+  transition:transform .25s ease;
+  box-shadow:0 4px 10px rgba(0,0,0,.18);
+}
+
+.tahajjud-switch input:checked + .tahajjud-slider{
+  background:#2d7a46;
+  box-shadow:0 0 0 3px rgba(45,122,70,.14);
+}
+
+.tahajjud-switch input:checked + .tahajjud-slider::before{
+  transform:translateX(24px);
 }
 
 @media(max-width:700px){
-  .container{
-    padding-bottom:118px;
+  .tahajjud-alarm-bar{
+    margin:-2px 0 16px;
+    padding:12px 13px;
+    border-radius:20px;
   }
-  .bottom-app-nav{
-    min-height:74px;
-    padding-top:7px;
+  .tahajjud-alarm-title{
+    font-size:13px;
   }
-  .bottom-app-nav-item{
-    min-height:56px;
-    border-radius:16px;
+  .tahajjud-alarm-meta{
     font-size:10.5px;
   }
-  .bottom-app-nav-item svg{
-    width:22px;
-    height:22px;
+  .tahajjud-alarm-icon{
+    width:36px;
+    height:36px;
+    min-width:36px;
   }
 }
 
@@ -2300,6 +2622,7 @@ html.light-mode .bottom-app-nav-item.active{
 <link rel="stylesheet" href="/theme-universal.css">
 </head>
 <body>
+
 <div class="mobile-top-controls">
   <button class="icon-btn left" onclick="changeLanguageChoice()" aria-label="Change language">
     <svg viewBox="0 0 24 24" aria-hidden="true">
@@ -2322,19 +2645,21 @@ html.light-mode .bottom-app-nav-item.active{
 <div class="ramadan-wrapper">
 <div class="ramadan-bar">
 <div class="ramadan-text">
-Сохрани свои действия в месяц Зуль-Ка‘да, сократи лишнее и усили зикр - это подготовка к самым важным дням впереди
+ذوالقعدہ کے مہینے میں اپنے اعمال محفوظ رکھو، فضول چیزیں کم کرو اور ذکر کو مضبوط کرو — یہ آنے والے اہم دنوں کی تیاری ہے
 </div>
 </div>
 </div>
+</div>
+
 
 
 <div class="desktop-top-actions" aria-label="Desktop quick actions">
   <div class="desktop-action-left">
-    <a class="desktop-action-pill" href="#" onclick="changeLanguageChoice(); return false;">Сменить язык</a>
+    <a class="desktop-action-pill" href="#" onclick="changeLanguageChoice(); return false;">زبان تبدیل کریں</a>
   </div>
   <div class="desktop-action-center">
     <div class="install-box" id="installBox">
-      <button id="installBtn" class="install-btn" type="button">Установить приложение</button>
+      <button id="installBtn" class="install-btn" type="button">ایپ انسٹال کریں</button>
     </div>
   </div>
   <div class="desktop-action-right">
@@ -2351,27 +2676,27 @@ html.light-mode .bottom-app-nav-item.active{
   <button class="brand-signature" id="brandInstallTrigger" type="button" aria-label="BarakaWay">
     <span class="brand-letter-accent">B</span><span class="brand-letter-main">araka</span><span class="brand-letter-accent">W</span><span class="brand-letter-main">ay</span>
   </button>
-  <div class="home-prayer-widget" role="link" tabindex="0" onclick="openPrayerTimesPage(event)" onkeydown="openPrayerTimesPageFromKeyboard(event)" aria-label="Открыть страницу времени молитв">
+  <div class="home-prayer-widget" role="link" tabindex="0" onclick="openPrayerTimesPage(event)" onkeydown="openPrayerTimesPageFromKeyboard(event)" aria-label="نماز کے اوقات کا صفحہ کھولیں">
     <div class="home-prayer-top">
-      <div class="home-prayer-kicker">Следующий намаз</div>
-      <div class="home-prayer-location" id="homePrayerLocation">Ташкент, Узбекистан</div>
+      <div class="home-prayer-kicker">اگلی نماز</div>
+      <div class="home-prayer-location" id="homePrayerLocation">تاشقند، ازبکستان</div>
     </div>
 
     <div class="home-prayer-main">
       <div>
-        <div class="home-prayer-name" id="homePrayerName">Фаджр</div>
+        <div class="home-prayer-name" id="homePrayerName">فجر</div>
         <div class="home-prayer-time" id="homePrayerTime">--:--</div>
-        <div class="home-prayer-meta" id="homePrayerMeta">Загрузка времени молитв...</div>
+        <div class="home-prayer-meta" id="homePrayerMeta">نماز کے اوقات لوڈ ہو رہے ہیں...</div>
       </div>
       <div class="home-prayer-countdown">
-        <div class="home-prayer-countdown-label">Через</div>
+        <div class="home-prayer-countdown-label">باقی</div>
         <div id="homePrayerCountdown">--:--:--</div>
       </div>
     </div>
 
     <div class="home-prayer-actions">
-      <div class="home-prayer-note"><span>Полное расписание</span><span class="home-prayer-arrow" aria-hidden="true">→</span></div>
-      <button class="home-prayer-share-btn" type="button" onclick="sharePrayerTimes(event)" aria-label="Поделиться временами намазов" title="Поделиться временами намазов">
+      <div class="home-prayer-note"><span>مکمل شیڈول</span><span class="home-prayer-arrow" aria-hidden="true">→</span></div>
+      <button class="home-prayer-share-btn" type="button" onclick="sharePrayerTimes(event)" aria-label="نماز کے اوقات شیئر کریں" title="نماز کے اوقات شیئر کریں">
         <svg viewBox="0 0 24 24" aria-hidden="true">
           <path d="M18 16.08c-.76 0-1.44.3-1.96.77L8.91 12.7c.05-.23.09-.46.09-.7s-.04-.47-.09-.7l7.05-4.11A2.99 2.99 0 1 0 15 5c0 .24.04.47.09.7L8.04 9.81A3 3 0 1 0 8.04 14.2l7.12 4.18c-.04.2-.06.41-.06.62a2.9 2.9 0 1 0 2.9-2.92z"/>
         </svg>
@@ -2379,39 +2704,88 @@ html.light-mode .bottom-app-nav-item.active{
     </div>
   </div>
 </div>
+
+<div class="tahajjud-alarm-bar" id="tahajjudAlarmBar" aria-label="تہجد نماز کا الارم">
+  <div class="tahajjud-alarm-left">
+    <div class="tahajjud-alarm-icon" aria-hidden="true">🌙</div>
+    <div>
+      <div class="tahajjud-alarm-title">تہجد نماز کا الارم آن کریں</div>
+      <div class="tahajjud-alarm-meta" id="tahajjudAlarmMeta">فجر سے 60 منٹ پہلے</div>
+    </div>
+  </div>
+  <label class="tahajjud-switch" aria-label="تہجد کا الارم آن یا آف کریں">
+    <input type="checkbox" id="tahajjudAlarmToggle">
+    <span class="tahajjud-slider"></span>
+  </label>
+</div>
 <section class="today-hub" aria-label="آج BarakaWay میں">
   <div class="today-hub-head">
     <div class="today-hub-kicker">آج BarakaWay میں</div>
-    <h2 class="today-hub-title">ہر دن نیا فائدہ، نیا ذکر، اور اللہ ﷻ کے قریب ایک چھوٹا قدم۔</h2>
+    <h2 class="today-hub-title">ہر دن اللہ ﷻ کے قریب ایک نیا قدم</h2>
   </div>
+
   <div class="today-hub-grid">
-    <a class="today-action" id="dailyArticleLink" href="articles-ur.html">
-      <div class="today-action-top"><div class="today-action-icon">📝</div><div class="today-action-arrow">→</div></div>
-      <div><div class="today-action-title">مفید مضمون</div><div class="today-action-text" id="dailyArticleTitle">آج کا مضمون کھولیں۔</div></div>
+    <a class="today-action today-daily-task" id="dailyArticleLink" href="javascript:void(0)" role="button" aria-label="عمل کے ساتھ آج کی آیت" data-task-key="article">
+      <div class="today-action-top">
+        <div class="today-action-icon">📖</div>
+        <div class="today-action-arrow today-task-status" id="dailyArticleStatus">→</div>
+      </div>
+      <div>
+        <div class="today-action-title">آج کی آیت</div>
+        <div class="today-action-text" id="dailyArticleTitle">آج کی آیت لوڈ ہو رہی ہے...</div>
+      </div>
     </a>
-    <a class="today-action" href="adhkar-ur.html">
-      <div class="today-action-top"><div class="today-action-icon">🌿</div><div class="today-action-arrow">→</div></div>
-      <div><div class="today-action-title" id="currentAdhkarTitle">اس وقت کا ذکر</div><div class="today-action-text" id="currentAdhkarText">دن کے وقت کے مطابق مناسب اذکار۔</div></div>
+
+    <a class="today-action today-daily-task" id="currentAdhkarLink" href="javascript:void(0)" role="button" aria-label="آج کا عمل" data-task-key="adhkar">
+      <div class="today-action-top">
+        <div class="today-action-icon">🌿</div>
+        <div class="today-action-arrow today-task-status" id="currentAdhkarStatus">→</div>
+      </div>
+      <div>
+        <div class="today-action-title" id="currentAdhkarTitle">آج کا عمل</div>
+        <div class="today-action-text" id="currentAdhkarText">آج کا عمل لوڈ ہو رہا ہے...</div>
+      </div>
     </a>
-    <div class="today-action today-counter-action" id="allahNameCounterCard" role="button" tabindex="0" aria-label="اللہ کے نام کی تکرار کا کاؤنٹر">
-      <div class="today-action-top"><div class="today-action-icon">☝️</div><div class="today-action-arrow" id="allahNameCounterValue">0/100</div></div>
+
+    <div class="today-action today-daily-task today-counter-action" id="allahNameCounterCard" role="button" tabindex="0" data-task-key="name" aria-label="اللہ کے نام کا تکرار کاؤنٹر">
+      <div class="today-action-top">
+        <div class="today-action-icon">☝️</div>
+        <div class="today-action-arrow today-task-status" id="allahNameCounterValue">0/100</div>
+      </div>
       <div>
         <div class="today-action-title" id="allahNameToday">اللہ کا نام</div>
-        <div class="today-action-text">معنی پڑھیں اور 100 بار دہرانے کے لیے کارڈ دبائیں۔</div>
+        <div class="today-action-text" id="allahNameMeaning">آج ہم اس نام کا معنی یاد کرتے ہیں۔</div>
         <div class="today-counter-track"><div class="today-counter-fill" id="allahNameCounterFill"></div></div>
       </div>
     </div>
-    <div class="today-action today-goal-action" id="dailyGoalCard" role="button" tabindex="0" aria-label="روزانہ ہدف">
-      <div class="today-action-top"><div class="today-action-icon">🎯</div><div class="today-action-arrow" id="dailyGoalStatus">•</div></div>
+
+    <div class="today-action today-daily-task today-goal-action" id="dailyGoalCard" role="button" tabindex="0" data-task-key="goal" aria-label="آج کا مقصد">
+      <div class="today-action-top">
+        <div class="today-action-icon">🎯</div>
+        <div class="today-action-arrow today-task-status" id="dailyGoalStatus">•</div>
+      </div>
       <div>
-        <div class="today-action-title">روزانہ ہدف</div>
-        <div class="today-action-text" id="dailyPracticeText">ایک نیکی خاموشی سے، بغیر بات اور دکھاوے کے کرو</div>
-        <div class="today-action-text" style="opacity:.6;margin-top:4px;">کر لو تو نشان لگا دیں</div>
+        <div class="today-action-title">آج کا مقصد</div>
+        <div class="today-action-text" id="dailyPracticeText">ایک نیکی خاموشی سے، بغیر دکھاوے کے کرو۔</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="today-micro-wrap">
+    <div class="today-action today-daily-task today-micro-action" id="dailyMicroKnowledgeCard" role="button" tabindex="0" data-task-key="micro" aria-label="آج کا مختصر علم">
+      <div class="today-action-top">
+        <div class="today-action-icon">🧠</div>
+        <div class="today-action-arrow today-task-status" id="dailyMicroKnowledgeStatus">?</div>
+      </div>
+      <div>
+        <div class="today-action-title">آج کا مختصر علم</div>
+        <div class="today-micro-question" id="dailyMicroQuestion">سوال لوڈ ہو رہا ہے...</div>
+        <div class="micro-options" id="dailyMicroOptions"></div>
+        <div class="micro-answer-box" id="dailyMicroAnswer"></div>
       </div>
     </div>
   </div>
 </section>
-
 <div class="home-section-title">
   <h2>فوری رسائی</h2>
   <div class="home-section-note">اہم حصے</div>
@@ -2420,34 +2794,34 @@ html.light-mode .bottom-app-nav-item.active{
 <div class="premium-resource-grid">
   <a class="premium-resource-card" href="names-ur.html">
     <div class="premium-resource-icon">☝️</div>
-    <div><div class="premium-resource-title">99 names</div><div class="premium-resource-text">Смыслы, размышление и укрепление имана.</div></div>
+    <div><div class="premium-resource-title">99 نام</div><div class="premium-resource-text">معانی، غور و فکر اور ایمان کی مضبوطی۔</div></div>
   </a>
   <a class="premium-resource-card" href="qibla-ur.html">
     <div class="premium-resource-icon">🧭</div>
-    <div><div class="premium-resource-title">Qibla</div><div class="premium-resource-text">Быстрое направление для молитвы.</div></div>
+    <div><div class="premium-resource-title">قبلہ</div><div class="premium-resource-text">نماز کے لیے فوری سمت۔</div></div>
   </a>
   <a class="premium-resource-card" href="prophets-duas-ur.html">
     <div class="premium-resource-icon">🤲</div>
-    <div><div class="premium-resource-title">Duas</div><div class="premium-resource-text">Дуа с правильным смыслом и уважением.</div></div>
+    <div><div class="premium-resource-title">دعا</div><div class="premium-resource-text">صحیح معنی اور ادب کے ساتھ دعا۔</div></div>
   </a>
   <a class="premium-resource-card" href="articles-ur.html">
     <div class="premium-resource-icon">✨</div>
-    <div><div class="premium-resource-title">Articles</div><div class="premium-resource-text">Короткие полезные материалы без лишнего шума.</div></div>
+    <div><div class="premium-resource-title">مضامین</div><div class="premium-resource-text">غیر ضروری شور کے بغیر مختصر مفید مواد۔</div></div>
   </a>
 </div>
 
 <div class="about-project-card">
   <div class="about-project-title">BarakaWay کے بارے میں</div>
-  <div class="about-project-text">پروجیکٹ کے بارے میں, принципы и причина анонимности собраны в один спокойный доверительный блок. Пользователь понимает идею без лишних отдельных ссылок на главном экране.</div>
+  <div class="about-project-text">منصوبے، اصولوں اور گمنامی کی وجہ کو ایک پرسکون اور قابل اعتماد بلاک میں جمع کیا گیا ہے۔ صارف مرکزی اسکرین پر غیر ضروری الگ لنکس کے بغیر خیال سمجھ لیتا ہے۔</div>
   <div class="about-project-actions">
-    <a href="about-ur.html">پروجیکٹ کے بارے میں</a>
+    <a href="about-ur.html">منصوبے کے بارے میں</a>
     <a href="principles-ur.html">اصول</a>
-    <a href="why-anonymous-ur.html">گمنام کیوں</a>
+    <a href="why-anonymous-ur.html">گمنامی کیوں</a>
   </div>
 </div>
 
 <div class="home-primary-support">
-  <a href="support-project-ur.html" class="support-project-btn"><span class="support-project-btn-shine"></span><span class="support-project-btn-text">پروجیکٹ کی مدد کریں</span></a>
+  <a href="support-project-ur.html" class="support-project-btn"><span class="support-project-btn-shine"></span><span class="support-project-btn-text">منصوبے کی مدد کریں</span></a>
 </div>
 
 <div class="share-overlay" id="shareOverlay" aria-hidden="true">
@@ -2462,26 +2836,26 @@ html.light-mode .bottom-app-nav-item.active{
       <button class="share-action share-x" type="button" data-share="x"><div class="share-icon">X</div><span>X</span></button>
       <button class="share-action share-linkedin" type="button" data-share="linkedin"><div class="share-icon">in</div><span>LinkedIn</span></button>
       <button class="share-action share-email" type="button" data-share="email"><div class="share-icon">@</div><span>Email</span></button>
-      <button class="share-action share-copy" type="button" data-share="copy"><div class="share-icon">⧉</div><span>Копировать ссылку</span></button>
-      <button class="share-action share-more" type="button" data-share="more"><div class="share-icon">⋯</div><span>Ещё</span></button>
+      <button class="share-action share-copy" type="button" data-share="copy"><div class="share-icon">⧉</div><span>لنک کاپی کریں</span></button>
+      <button class="share-action share-more" type="button" data-share="more"><div class="share-icon">⋯</div><span>مزید</span></button>
     </div>
-    <div class="share-copy-msg" id="shareCopyMsg">Ссылка на приложение скопирована.</div>
+    <div class="share-copy-msg" id="shareCopyMsg">ایپ کا لنک کاپی ہو گیا۔</div>
     <button class="share-close" id="shareCloseBtn" type="button">بند کریں</button>
   </div>
 </div>
 
 <div class="install-help-overlay" id="installHelpOverlay" aria-hidden="true">
   <div class="install-help-sheet" role="dialog" aria-modal="true" aria-labelledby="installHelpTitle">
-    <div class="install-help-title" id="installHelpTitle">Установить приложение</div>
-    <div class="install-help-text">Если системное окно установки не появилось, используйте действия ниже.</div>
+    <div class="install-help-title" id="installHelpTitle">ایپ انسٹال کریں</div>
+    <div class="install-help-text">اگر انسٹالیشن کی سسٹم ونڈو ظاہر نہ ہو تو نیچے دیے گئے طریقے استعمال کریں۔</div>
     <ol class="install-help-steps">
-      <li>На Android откройте страницу во внешнем браузере и установите приложение там.</li>
-      <li>На iPhone откройте страницу в Safari.</li>
-      <li>Затем выберите «Поделиться» → «На экран Домой».</li>
+      <li>Android پر صفحہ بیرونی براؤزر میں کھولیں اور وہاں ایپ انسٹال کریں۔</li>
+      <li>iPhone پر صفحہ Safari میں کھولیں۔</li>
+      <li>پھر Share → Add to Home Screen منتخب کریں۔</li>
     </ol>
     <div class="install-help-actions">
-      <button class="install-help-primary" id="installHelpPrimaryBtn" type="button">Открыть в браузере</button>
-      <button class="install-help-secondary" id="installHelpCopyBtn" type="button">Скопировать ссылку</button>
+      <button class="install-help-primary" id="installHelpPrimaryBtn" type="button">براؤزر میں کھولیں</button>
+      <button class="install-help-secondary" id="installHelpCopyBtn" type="button">لنک کاپی کریں</button>
     </div>
     <button class="install-help-close" id="installHelpCloseBtn" type="button">بند کریں</button>
   </div>
@@ -2498,18 +2872,18 @@ function isAndroid(){return /Android/i.test(navigator.userAgent||"");}
 function isIOS(){return /iPhone|iPad|iPod/i.test(navigator.userAgent||"");}
 function isInAppBrowser(){const ua=navigator.userAgent||"";return /(Telegram|FBAN|FBAV|Instagram|Line|wv)/i.test(ua);}
 async function hasInstalledRelatedApp(){if(typeof navigator.getInstalledRelatedApps!=="function") return false;try{const apps=await navigator.getInstalledRelatedApps();return Array.isArray(apps)&&apps.length>0;}catch(e){return false;}}
-async function updateInstallButtonVisibility(){if(installVisibilityInFlight) return;installVisibilityInFlight=true;const box=document.getElementById("installBox"),btn=document.getElementById("installBtn"),brandTrigger=document.getElementById("brandInstallTrigger"),brandHint=document.getElementById("brandInstallHint");if(!box||!btn){installVisibilityInFlight=false;return;}let hide=isStandaloneMode()?true:await hasInstalledRelatedApp();box.style.display=hide?"none":"block";btn.textContent="Установить приложение";if(brandTrigger){brandTrigger.classList.toggle("install-trigger",!hide);}if(brandHint){brandHint.classList.toggle("is-visible",!hide&&window.innerWidth<=700);}installVisibilityInFlight=false;}
+async function updateInstallButtonVisibility(){if(installVisibilityInFlight) return;installVisibilityInFlight=true;const box=document.getElementById("installBox"),btn=document.getElementById("installBtn"),brandTrigger=document.getElementById("brandInstallTrigger"),brandHint=document.getElementById("brandInstallHint");if(!box||!btn){installVisibilityInFlight=false;return;}let hide=isStandaloneMode()?true:await hasInstalledRelatedApp();box.style.display=hide?"none":"block";btn.textContent="ایپ انسٹال کریں";if(brandTrigger){brandTrigger.classList.toggle("install-trigger",!hide);}if(brandHint){brandHint.classList.toggle("is-visible",!hide&&window.innerWidth<=700);}installVisibilityInFlight=false;}
 function openCurrentPageInExternalBrowser(){const url=window.location.href;if(isAndroid()){const cleaned=url.replace(/^https?:\/\//,"");window.location.href="intent://"+cleaned+"#Intent;scheme=https;package=com.android.chrome;end";return true;}if(!isIOS()){window.open(url,"_blank","noopener,noreferrer");return true;}return false;}
 function openInstallHelp(){const o=document.getElementById("installHelpOverlay");if(!o) return;o.classList.add("open");o.setAttribute("aria-hidden","false");}
 function closeInstallHelp(){const o=document.getElementById("installHelpOverlay");if(!o) return;o.classList.remove("open");o.setAttribute("aria-hidden","true");}
-async function copyCurrentLink(){const url=getShareUrl(),msg=document.getElementById("shareCopyMsg");try{if(navigator.clipboard&&window.isSecureContext){await navigator.clipboard.writeText(url);}else{const t=document.createElement("textarea");t.value=url;t.setAttribute("readonly","readonly");t.style.position="absolute";t.style.left="-9999px";document.body.appendChild(t);t.select();document.execCommand("copy");document.body.removeChild(t);}if(msg){msg.textContent="Ссылка на приложение скопирована.";msg.classList.add("show");setTimeout(function(){msg.classList.remove("show");},2200);}}catch(e){window.prompt("Скопируйте ссылку и откройте её во внешнем браузере:",url);}}
+async function copyCurrentLink(){const url=getShareUrl(),msg=document.getElementById("shareCopyMsg");try{if(navigator.clipboard&&window.isSecureContext){await navigator.clipboard.writeText(url);}else{const t=document.createElement("textarea");t.value=url;t.setAttribute("readonly","readonly");t.style.position="absolute";t.style.left="-9999px";document.body.appendChild(t);t.select();document.execCommand("copy");document.body.removeChild(t);}if(msg){msg.textContent="ایپ کا لنک کاپی ہو گیا۔";msg.classList.add("show");setTimeout(function(){msg.classList.remove("show");},2200);}}catch(e){window.prompt("لنک کاپی ہو گیا۔",url);}}
 async function installApp(){if(deferredInstallPrompt){try{await deferredInstallPrompt.prompt();const c=await deferredInstallPrompt.userChoice;if(c&&c.outcome==="accepted") setTimeout(updateInstallButtonVisibility,300);}catch(e){}finally{deferredInstallPrompt=null;}return;}if(isStandaloneMode()){updateInstallButtonVisibility();return;}if(isInAppBrowser()){if(isAndroid()){const opened=openCurrentPageInExternalBrowser();if(!opened) openInstallHelp();return;}openInstallHelp();return;}if(isIOS()){openInstallHelp();return;}openInstallHelp();}
 function openShareOverlay(){const o=document.getElementById("shareOverlay"),m=document.getElementById("shareCopyMsg");if(!o) return;o.classList.add("open");o.setAttribute("aria-hidden","false");if(m) m.classList.remove("show");}
 function closeShareOverlay(){const o=document.getElementById("shareOverlay");if(!o) return;o.classList.remove("open");o.setAttribute("aria-hidden","true");}
-async function copyShareLink(){const url=getShareUrl(),msg=document.getElementById("shareCopyMsg");try{if(navigator.clipboard&&window.isSecureContext){await navigator.clipboard.writeText(url);}else{const t=document.createElement("textarea");t.value=url;t.setAttribute("readonly","readonly");t.style.position="absolute";t.style.left="-9999px";document.body.appendChild(t);t.select();document.execCommand("copy");document.body.removeChild(t);}if(msg){msg.classList.add("show");setTimeout(function(){msg.classList.remove("show");},2200);}}catch(e){window.prompt("Скопируйте ссылку и откройте её во внешнем браузере:",url);}}
+async function copyShareLink(){const url=getShareUrl(),msg=document.getElementById("shareCopyMsg");try{if(navigator.clipboard&&window.isSecureContext){await navigator.clipboard.writeText(url);}else{const t=document.createElement("textarea");t.value=url;t.setAttribute("readonly","readonly");t.style.position="absolute";t.style.left="-9999px";document.body.appendChild(t);t.select();document.execCommand("copy");document.body.removeChild(t);}if(msg){msg.classList.add("show");setTimeout(function(){msg.classList.remove("show");},2200);}}catch(e){window.prompt("لنک کاپی ہو گیا۔",url);}}
 function openShareTarget(type){const url=encodeURIComponent(getShareUrl()),text=encodeURIComponent("BarakaWay");let target="";if(type==="telegram") target="https://t.me/share/url?url="+url+"&text="+text;if(type==="whatsapp") target="https://wa.me/?text="+text+"%20"+url;if(type==="facebook") target="https://www.facebook.com/sharer/sharer.php?u="+url;if(type==="x") target="https://twitter.com/intent/tweet?text="+text+"&url="+url;if(type==="linkedin") target="https://www.linkedin.com/sharing/share-offsite/?url="+url;if(type==="email") target="mailto:?subject=Hidden%20Sadaqa&body="+text+"%0A"+url;if(target) window.open(target,"_blank","noopener,noreferrer");}
 async function shareApp(){const data={title:"BarakaWay",text:"BarakaWay",url:getShareUrl()};if(navigator.share){try{await navigator.share(data);return;}catch(e){}}openShareOverlay();}
-async function sharePrayerTimes(event){if(event){event.preventDefault();event.stopPropagation();}const text=typeof window.buildPrayerTimesShareText==="function"?window.buildPrayerTimesShareText():"BarakaWay\nВремена намазов";if(navigator.share){try{await navigator.share({title:"Времена намазов",text:text});return;}catch(e){}}try{if(navigator.clipboard&&window.isSecureContext){await navigator.clipboard.writeText(text);}else{const t=document.createElement("textarea");t.value=text;t.setAttribute("readonly","readonly");t.style.position="absolute";t.style.left="-9999px";document.body.appendChild(t);t.select();document.execCommand("copy");document.body.removeChild(t);}alert("Времена намазов скопированы. Теперь можно отправить их в мессенджере.");}catch(e){window.prompt("Скопируйте времена намазов:",text);}}
+async function sharePrayerTimes(event){if(event){event.preventDefault();event.stopPropagation();}const text=typeof window.buildPrayerTimesShareText==="function"?window.buildPrayerTimesShareText():"BarakaWay\nنماز کے اوقات";if(navigator.share){try{await navigator.share({title:"نماز کے اوقات",text:text});return;}catch(e){}}try{if(navigator.clipboard&&window.isSecureContext){await navigator.clipboard.writeText(text);}else{const t=document.createElement("textarea");t.value=text;t.setAttribute("readonly","readonly");t.style.position="absolute";t.style.left="-9999px";document.body.appendChild(t);t.select();document.execCommand("copy");document.body.removeChild(t);}alert("نماز کے اوقات کاپی ہو گئے۔ اب انہیں میسنجر میں بھیج سکتے ہیں۔");}catch(e){window.prompt("نماز کے اوقات کاپی کریں:",text);}}
 window.addEventListener("beforeinstallprompt",function(e){e.preventDefault();deferredInstallPrompt=e;updateInstallButtonVisibility();});
 window.addEventListener("appinstalled",function(){deferredInstallPrompt=null;updateInstallButtonVisibility();});
 window.addEventListener("pageshow",function(){updateInstallButtonVisibility();});
@@ -2523,7 +2897,7 @@ window.addEventListener("DOMContentLoaded",function(){const installBtn=document.
   if (window.innerWidth > 700) return;
 
   const promoTexts = [
-    { text: "Все услуги рядом", brand: false },
+    { text: "تمام خدمات قریب", brand: false },
     { text: "TasksLocal", brand: true }
   ];
 
@@ -2652,11 +3026,11 @@ window.addEventListener("DOMContentLoaded",function(){const installBtn=document.
   if(!elName || !elTime || !elMeta || !elCountdown || !elLocation) return;
 
   const UI = {
-    names: {Fajr:'Фаджр', Dhuhr:'Зухр', Asr:'Аср', Maghrib:'Магриб', Isha:'Иша'},
-    at: 'в',
-    startsIn: 'через',
-    loading: 'Загрузка времени молитв...',
-    fallbackLocation: 'Ташкент, Узбекистан'
+    names: {Fajr:'فجر', Dhuhr:'ظہر', Asr:'عصر', Maghrib:'مغرب', Isha:'عشاء'},
+    at: 'وقت',
+    startsIn: 'باقی',
+    loading: 'نماز کے اوقات لوڈ ہو رہے ہیں...',
+    fallbackLocation: 'تاشقند، ازبکستان'
   };
 
   let nextPrayerTimer = null;
@@ -2744,7 +3118,7 @@ window.addEventListener("DOMContentLoaded",function(){const installBtn=document.
       setCountdown(next.time);
     }catch(_){
       elLocation.textContent = UI.fallbackLocation;
-      elName.textContent = 'Фаджр';
+      elName.textContent = 'فجر';
       elTime.textContent = '--:--';
       elMeta.textContent = UI.loading;
       elCountdown.textContent = '--:--:--';
@@ -2757,15 +3131,15 @@ window.addEventListener("DOMContentLoaded",function(){const installBtn=document.
     const clean = (value) => String(value || '--:--').split(' ')[0].slice(0,5);
     return [
       'BarakaWay',
-      "Времена намазов",
+      "نماز کے اوقات",
       `${state.location || UI.fallbackLocation}${state.date ? ' — ' + state.date : ''}`,
       '',
-      `Фаджр: ${clean(timings.Fajr)}`,
-      `Восход: ${clean(timings.Sunrise)}`,
-      `Зухр: ${clean(timings.Dhuhr)}`,
-      `Аср: ${clean(timings.Asr)}`,
-      `Магриб: ${clean(timings.Maghrib)}`,
-      `Иша: ${clean(timings.Isha)}`,
+      `فجر: ${clean(timings.Fajr)}`,
+      `طلوع آفتاب: ${clean(timings.Sunrise)}`,
+      `ظہر: ${clean(timings.Dhuhr)}`,
+      `عصر: ${clean(timings.Asr)}`,
+      `مغرب: ${clean(timings.Maghrib)}`,
+      `عشاء: ${clean(timings.Isha)}`,
       '',
       window.location.origin ? window.location.origin + '/prayer-times-ur.html' : window.location.href
     ].join('\n');
@@ -2786,99 +3160,81 @@ window.addEventListener("DOMContentLoaded",function(){const installBtn=document.
   }
 
   function getDaysSince(dateString){
-    const start = new Date(dateString + 'T00:00:00');
-    const now = new Date();
-    const today = new Date(now.getFullYear(), now.getMonth(), now.getDate());
-    return Math.max(0, Math.floor((today - start) / 86400000));
-  }
-
-  const today = new Date();
-  const todayKey = getLocalDateKey(today);
-  const hour = today.getHours();
-
-  /*
-    Система статьи дня:
-    1) Добавляешь новую статью в массив articles в конец списка.
-    2) Увеличивать отдельный счётчик не нужно.
-    3) Если новая статья добавлена сегодня и очередь уже дошла до конца старого списка,
-       она появится сразу. Если новых статей нет — ротация продолжит показывать старые статьи.
-    Для полного автоматического обнаружения новых файлов нужен отдельный JSON/manifest или backend.
-  */
-  const articleStartDate = '2026-04-24';
+    const start = new Date(dateString + 'T00:00:00'آج اللہ کے لیے ایک چھوٹا نیک عمل خاموشی سے کرو۔ '2026-04-24';
   const articles = [
-    {title:'Что такое садака', url:'islamic_articles-ur/001-ur.html'},
-    {title:'Разница между закятом и садака', url:'islamic_articles-ur/002-ur.html'},
-    {title:'Почему скрытая благотворительность важна', url:'islamic_articles-ur/003-ur.html'},
-    {title:'Помощь нуждающимся семьям', url:'islamic_articles-ur/004-ur.html'},
-    {title:'Почему даже один доллар имеет значение', url:'islamic_articles-ur/005-ur.html'},
-    {title:'صدقہ для жилья и помощи с жильём', url:'islamic_articles-ur/006-ur.html'},
-    {title:'Лучшие виды садака в исламе', url:'islamic_articles-ur/007-ur.html'},
-    {title:'Милостыня в месяц Рамадан', url:'islamic_articles-ur/008-ur.html'},
-    {title:'Милостыня в قرآنе', url:'islamic_articles-ur/009-ur.html'},
-    {title:'Как одна садака изменила жизнь семьи', url:'islamic_articles-ur/010-ur.html'},
-    {title:'Почему помощь семьям важна', url:'islamic_articles-ur/011-ur.html'},
-    {title:'Маленькая помощь — большие изменения', url:'islamic_articles-ur/012-ur.html'},
-    {title:'Награда за садака', url:'islamic_articles-ur/013-ur.html'},
-    {title:'صدقہ и очищение имущества', url:'islamic_articles-ur/014-ur.html'},
-    {title:'Почему мусульмане дают милостыню', url:'islamic_articles-ur/015-ur.html'},
-    {title:'Забота о бедных в исламе', url:'islamic_articles-ur/016-ur.html'},
-    {title:'Ответственность мусульман помогать другим', url:'islamic_articles-ur/017-ur.html'},
-    {title:'Справедливость и милосердие в исламе', url:'islamic_articles-ur/018-ur.html'},
-    {title:'Как благотворительность приносит надежду семьям', url:'islamic_articles-ur/019-ur.html'},
-    {title:'Помощь детям через садака', url:'islamic_articles-ur/020-ur.html'},
-    {title:'Помощь вдовам в исламе', url:'islamic_articles-ur/021-ur.html'},
-    {title:'Срочная помощь в исламе', url:'islamic_articles-ur/022-ur.html'},
-    {title:'Помощь едой в исламе', url:'islamic_articles-ur/023-ur.html'},
-    {title:'Куда идут ваши пожертвования', url:'islamic_articles-ur/024-ur.html'},
-    {title:'آج کا مضمون №25', url:'islamic_articles-ur/025-ur.html'},
-    {title:'آج کا مضمون №26', url:'islamic_articles-ur/026-ur.html'},
-    {title:'آج کا مضمون №27', url:'islamic_articles-ur/027-ur.html'},
-    {title:'آج کا مضمون №28', url:'islamic_articles-ur/028-ur.html'},
-    {title:'آج کا مضمون №29', url:'islamic_articles-ur/029-ur.html'},
-    {title:'آج کا مضمون №30', url:'islamic_articles-ur/030-ur.html'}
+    {title:'صدقہ کیا ہے', url:'islamic_articles-ur/001-ur.html'},
+    {title:'زکوٰۃ اور صدقہ میں فرق', url:'islamic_articles-ur/002-ur.html'},
+    {title:'پوشیدہ خیرات کیوں اہم ہے', url:'islamic_articles-ur/003-ur.html'},
+    {title:'ضرورت مند خاندانوں کی مدد', url:'islamic_articles-ur/004-ur.html'},
+    {title:'ایک ڈالر بھی کیوں اہم ہے', url:'islamic_articles-ur/005-ur.html'},
+    {title:'رہائش اور گھر کی مدد کے لیے صدقہ', url:'islamic_articles-ur/006-ur.html'},
+    {title:'اسلام میں صدقہ کی بہترین اقسام', url:'islamic_articles-ur/007-ur.html'},
+    {title:'رمضان میں خیرات', url:'islamic_articles-ur/008-ur.html'},
+    {title:'قرآن میں صدقہ', url:'islamic_articles-ur/009-ur.html'},
+    {title:'ایک صدقہ نے خاندان کی زندگی کیسے بدلی', url:'islamic_articles-ur/010-ur.html'},
+    {title:'خاندانوں کی مدد کیوں اہم ہے', url:'islamic_articles-ur/011-ur.html'},
+    {title:'چھوٹی مدد — بڑی تبدیلیاں', url:'islamic_articles-ur/012-ur.html'},
+    {title:'صدقہ کا اجر', url:'islamic_articles-ur/013-ur.html'},
+    {title:'صدقہ اور مال کی پاکیزگی', url:'islamic_articles-ur/014-ur.html'},
+    {title:'مسلمان صدقہ کیوں دیتے ہیں', url:'islamic_articles-ur/015-ur.html'},
+    {title:'اسلام میں غریبوں کا خیال', url:'islamic_articles-ur/016-ur.html'},
+    {title:'دوسروں کی مدد کرنا مسلمانوں کی ذمہ داری', url:'islamic_articles-ur/017-ur.html'},
+    {title:'اسلام میں عدل اور رحمت', url:'islamic_articles-ur/018-ur.html'},
+    {title:'خیرات خاندانوں کو امید کیسے دیتی ہے', url:'islamic_articles-ur/019-ur.html'},
+    {title:'صدقہ کے ذریعے بچوں کی مدد', url:'islamic_articles-ur/020-ur.html'},
+    {title:'اسلام میں بیواؤں کی مدد', url:'islamic_articles-ur/021-ur.html'},
+    {title:'اسلام میں فوری مدد', url:'islamic_articles-ur/022-ur.html'},
+    {title:'اسلام میں کھانے کی مدد', url:'islamic_articles-ur/023-ur.html'},
+    {title:'آپ کے عطیات کہاں جاتے ہیں', url:'islamic_articles-ur/024-ur.html'},
+    {title:'آج کا مضمون نمبر 25', url:'islamic_articles-ur/025-ur.html'},
+    {title:'آج کا مضمون نمبر 26', url:'islamic_articles-ur/026-ur.html'},
+    {title:'آج کا مضمون نمبر 27', url:'islamic_articles-ur/027-ur.html'},
+    {title:'آج کا مضمون نمبر 28', url:'islamic_articles-ur/028-ur.html'},
+    {title:'آج کا مضمون نمبر 29', url:'islamic_articles-ur/029-ur.html'},
+    {title:'آج کا مضمون نمبر 30', url:'islamic_articles-ur/030-ur.html'}
   ];
 
   const names = [
-    {name:'Ар-Рахман', meaning:'Всемилостивый: Его милость охватывает всё творение.'},
-    {name:'Ар-Рахим', meaning:'Особо Милующий: проявляет особую милость к верующим.'},
-    {name:'Аль-Малик', meaning:'Владыка: истинный Царь и Полновластный Господь.'},
-    {name:'Аль-Куддус', meaning:'Святой: абсолютно чистый от любого недостатка.'},
-    {name:'Ас-Салям', meaning:'Источник мира и безопасности, свободный от несовершенства.'},
-    {name:'Аль-Му’мин', meaning:'Дарующий безопасность и подтверждающий истину.'},
-    {name:'Аль-Мухаймин', meaning:'Хранитель и Наблюдающий за всем.'},
-    {name:'Аль-Азиз', meaning:'Могущественный и Непобедимый, обладающий полной силой.'},
-    {name:'Аль-Джаббар', meaning:'Восстанавливающий, Исправляющий и Обладающий властью.'},
-    {name:'Аль-Мутакаббир', meaning:'Величественный: Ему одному принадлежит истинное величие.'},
-    {name:'Аль-Халик', meaning:'Творец: создаёт всё по совершенной мудрости.'},
-    {name:'Аль-Бари', meaning:'Создающий без образца и приводящий творение к бытию.'},
-    {name:'Аль-Мусаввир', meaning:'Придающий форму каждому созданию.'},
-    {name:'Аль-Гаффар', meaning:'Многократно Прощающий грехи кающимся.'},
-    {name:'Аль-Каххар', meaning:'Всепокоряющий: всё находится под Его властью.'},
-    {name:'Аль-Ваххаб', meaning:'Дарующий без счёта и без нужды в ответе.'},
-    {name:'Ар-Раззак', meaning:'Наделяющий пропитанием каждое создание.'},
-    {name:'Аль-Фаттах', meaning:'Открывающий двери милости, знания и решения.'},
-    {name:'Аль-Алим', meaning:'Всезнающий: знает явное, скрытое и будущее.'},
-    {name:'Аль-Кабид', meaning:'Сдерживающий по мудрости то, что должно быть сдержано.'},
-    {name:'Аль-Басит', meaning:'Расширяющий милость, удел и возможности.'},
-    {name:'Аль-Хафид', meaning:'Унижающий тех, кого унижает по справедливости.'},
-    {name:'Ар-Рафи', meaning:'Возвышающий тех, кого возвышает по мудрости.'},
-    {name:'Аль-Муизз', meaning:'Дарующий честь и силу тому, кому пожелает.'},
-    {name:'Аль-Музилль', meaning:'Лишающий чести тех, кто заслужил унижение.'},
-    {name:'Ас-Сами', meaning:'Всеслышащий: слышит каждую мольбу и каждое слово.'},
-    {name:'Аль-Басир', meaning:'Всевидящий: видит всё явное и скрытое.'},
-    {name:'Аль-Хакам', meaning:'Судья: выносит совершенное и справедливое решение.'},
-    {name:'Аль-Адль', meaning:'Справедливый: Его решения свободны от ظلمa.'},
-    {name:'Аль-Латиф', meaning:'Тонко Милующий: ведёт к благу мягко и незаметно.'}
+    {name:'الرَّحْمٰن', meaning:'اسلامی یاد دہانی اور مفید عمل'},
+    {name:'الرَّحِيم', meaning:'اسلامی یاد دہانی اور مفید عمل'},
+    {name:'الْمَلِك', meaning:'اسلامی یاد دہانی اور مفید عمل'},
+    {name:'الْقُدُّوس', meaning:'اسلامی یاد دہانی اور مفید عمل'},
+    {name:'السَّلَام', meaning:'اسلامی یاد دہانی اور مفید عمل'},
+    {name:'اسلامی یاد دہانی اور مفید عمل', meaning:'اسلامی یاد دہانی اور مفید عمل'},
+    {name:'اسلامی یاد دہانی اور مفید عمل', meaning:'اسلامی یاد دہانی اور مفید عمل'},
+    {name:'الْعَزِيز', meaning:'اسلامی یاد دہانی اور مفید عمل'},
+    {name:'الْجَبَّار', meaning:'اسلامی یاد دہانی اور مفید عمل'},
+    {name:'الْمُتَكَبِّر', meaning:'اسلامی یاد دہانی اور مفید عمل'},
+    {name:'الْخَالِق', meaning:'اسلامی یاد دہانی اور مفید عمل'},
+    {name:'الْبَارِئ', meaning:'اسلامی یاد دہانی اور مفید عمل'},
+    {name:'اسلامی یاد دہانی اور مفید عمل', meaning:'ہر مخلوق کو صورت دینے والا۔'},
+    {name:'الْغَفَّار', meaning:'بار بار توبہ کرنے والوں کو معاف کرنے والا۔'},
+    {name:'الْقَهَّار', meaning:'اسلامی یاد دہانی اور مفید عمل'},
+    {name:'الْوَهَّاب', meaning:'اسلامی یاد دہانی اور مفید عمل'},
+    {name:'الرَّزَّاق', meaning:'ہر مخلوق کو رزق دینے والا۔'},
+    {name:'الْفَتَّاح', meaning:'اسلامی یاد دہانی اور مفید عمل'},
+    {name:'الْعَلِيم', meaning:'اسلامی یاد دہانی اور مفید عمل'},
+    {name:'الْقَابِض', meaning:'اسلامی یاد دہانی اور مفید عمل'},
+    {name:'الْبَاسِط', meaning:'اسلامی یاد دہانی اور مفید عمل'},
+    {name:'الْخَافِض', meaning:'اسلامی یاد دہانی اور مفید عمل'},
+    {name:'الرَّافِع', meaning:'اسلامی یاد دہانی اور مفید عمل'},
+    {name:'الْمُعِزّ', meaning:'اسلامی یاد دہانی اور مفید عمل'},
+    {name:'الْمُذِلّ', meaning:'جسے پستی کا حق ہو اس سے عزت چھیننے والا۔'},
+    {name:'السَّمِيع', meaning:'اسلامی یاد دہانی اور مفید عمل'},
+    {name:'الْبَصِير', meaning:'اسلامی یاد دہانی اور مفید عمل'},
+    {name:'الْحَكَم', meaning:'اسلامی یاد دہانی اور مفید عمل'},
+    {name:'الْعَدْل', meaning:'اسلامی یاد دہانی اور مفید عمل'},
+    {name:'اللَّطِيف', meaning:'اسلامی یاد دہانی اور مفید عمل'}
   ];
 
   const goals = [
-    'ایک نیکی خاموشی سے، بغیر بات اور دکھاوے کے کرو.',
-    'Перед важным делом обнови намерение ради Аллаха ﷻ.',
-    'Помоги одному человеку так, чтобы никто не заметил.',
-    'Попроси прощения у Аллаха ﷻ 33 раза спокойно.',
-    'Сделай дуа за родителей и близких.',
-    'Убери одно лишнее действие, которое крадёт время.',
-    'Поблагодари Аллаха ﷻ за одну конкретную милость.'
+    'ایک نیکی خاموشی سے، بغیر دکھاوے کے کرو۔',
+    'اہم کام سے پہلے نیت اللہ ﷻ کے لیے تازہ کرو۔',
+    'ایک شخص کی مدد اس طرح کرو کہ کوئی نہ دیکھے۔',
+    'اللہ ﷻ سے سکون کے ساتھ 33 بار مغفرت مانگو۔',
+    'والدین اور قریبی لوگوں کے لیے دعا کرو۔',
+    'ایک غیر ضروری کام چھوڑ دو جو وقت چراتا ہے۔',
+    'اللہ ﷻ کی ایک خاص نعمت پر شکر ادا کرو۔'
   ];
 
   const articleDay = getDaysSince(articleStartDate);
@@ -2897,19 +3253,19 @@ window.addEventListener("DOMContentLoaded",function(){const installBtn=document.
   if(currentAdhkarTitle && currentAdhkarText){
     if(hour >= 4 && hour < 11){
       currentAdhkarTitle.textContent = 'صبح کے اذکار';
-      currentAdhkarText.textContent = 'Откроется сразу раздел утренних азкаров.';
+      currentAdhkarText.textContent = 'صبح کے اذکار کا حصہ فوراً کھلے گا۔';
       if(adhkarLink) adhkarLink.href = 'adhkar-ur.html#morning';
     }else if(hour >= 16 && hour < 22){
       currentAdhkarTitle.textContent = 'شام کے اذکار';
-      currentAdhkarText.textContent = 'Откроется сразу раздел вечерних азкаров.';
+      currentAdhkarText.textContent = 'شام کے اذکار کا حصہ فوراً کھلے گا۔';
       if(adhkarLink) adhkarLink.href = 'adhkar-ur.html#evening';
     }else if(hour < 4){
       currentAdhkarTitle.textContent = 'اگلا ذکر';
-      currentAdhkarText.textContent = 'Ближайший — утренний азкар после Фаджра.';
+      currentAdhkarText.textContent = 'قریب ترین — فجر کے بعد صبح کے اذکار۔';
       if(adhkarLink) adhkarLink.href = 'adhkar-ur.html#morning';
     }else{
       currentAdhkarTitle.textContent = 'اگلا ذکر';
-      currentAdhkarText.textContent = 'Ближайший — вечерний азкар ближе к Магрибу.';
+      currentAdhkarText.textContent = 'قریب ترین — مغرب کے قریب شام کے اذکار۔';
       if(adhkarLink) adhkarLink.href = 'adhkar-ur.html#evening';
     }
   }
@@ -2920,7 +3276,7 @@ window.addEventListener("DOMContentLoaded",function(){const installBtn=document.
   const card = document.getElementById('allahNameCounterCard');
   const valueEl = document.getElementById('allahNameCounterValue');
   const fillEl = document.getElementById('allahNameCounterFill');
-  const storageKey = 'barakaway_name_counter_ur_' + todayKey;
+  const storageKey = 'barakaway_name_counter_' + todayKey;
   let count = Math.max(0, Math.min(100, parseInt(localStorage.getItem(storageKey) || '0', 10) || 0));
 
   function renderCounter(){
@@ -2928,7 +3284,7 @@ window.addEventListener("DOMContentLoaded",function(){const installBtn=document.
     if(meaningEl) meaningEl.textContent = name.meaning;
     if(valueEl) valueEl.textContent = count + '/100';
     if(fillEl) fillEl.style.width = count + '%';
-    if(card) card.setAttribute('aria-label', name.name + ': ' + count + ' из 100 повторений. ' + name.meaning);
+    if(card) card.setAttribute('aria-label', name.name + ': ' + count + ' 100 تکرار میں سے۔ ' + name.meaning);
   }
 
   function incrementCounter(){
@@ -2951,7 +3307,7 @@ window.addEventListener("DOMContentLoaded",function(){const installBtn=document.
   const practice = document.getElementById('dailyPracticeText');
   const goalCard = document.getElementById('dailyGoalCard');
   const goalStatus = document.getElementById('dailyGoalStatus');
-  const goalKey = 'barakaway_daily_goal_done_ur_' + todayKey;
+  const goalKey = 'barakaway_daily_goal_done_' + todayKey;
   let goalDone = localStorage.getItem(goalKey) === '1';
 
   if(practice) practice.textContent = goals[articleDay % goals.length];
@@ -3001,46 +3357,46 @@ window.addEventListener("DOMContentLoaded",function(){const installBtn=document.
   const todayKey = new Date().toISOString().slice(0,10);
   const dayNumber = Math.floor(Date.now() / 86400000);
   const articles = [
-    {title:'آج کا مضمون №1', url:'islamic_articles-ur/001-ur.html'},
-    {title:'آج کا مضمون №2', url:'islamic_articles-ur/002-ur.html'},
-    {title:'آج کا مضمون №3', url:'islamic_articles-ur/003-ur.html'},
-    {title:'آج کا مضمون №4', url:'islamic_articles-ur/004-ur.html'},
-    {title:'آج کا مضمون №5', url:'islamic_articles-ur/005-ur.html'},
-    {title:'آج کا مضمون №6', url:'islamic_articles-ur/006-ur.html'},
-    {title:'آج کا مضمون №7', url:'islamic_articles-ur/007-ur.html'},
-    {title:'آج کا مضمون №8', url:'islamic_articles-ur/008-ur.html'},
-    {title:'آج کا مضمون №9', url:'islamic_articles-ur/009-ur.html'},
-    {title:'آج کا مضمون №10', url:'islamic_articles-ur/010-ur.html'},
-    {title:'آج کا مضمون №11', url:'islamic_articles-ur/011-ur.html'},
-    {title:'آج کا مضمون №12', url:'islamic_articles-ur/012-ur.html'},
-    {title:'آج کا مضمون №13', url:'islamic_articles-ur/013-ur.html'},
-    {title:'آج کا مضمون №14', url:'islamic_articles-ur/014-ur.html'},
-    {title:'آج کا مضمون №15', url:'islamic_articles-ur/015-ur.html'},
-    {title:'آج کا مضمون №16', url:'islamic_articles-ur/016-ur.html'},
-    {title:'آج کا مضمون №17', url:'islamic_articles-ur/017-ur.html'},
-    {title:'آج کا مضمون №18', url:'islamic_articles-ur/018-ur.html'},
-    {title:'آج کا مضمون №19', url:'islamic_articles-ur/019-ur.html'},
-    {title:'آج کا مضمون №20', url:'islamic_articles-ur/020-ur.html'},
-    {title:'آج کا مضمون №21', url:'islamic_articles-ur/021-ur.html'},
-    {title:'آج کا مضمون №22', url:'islamic_articles-ur/022-ur.html'},
-    {title:'آج کا مضمون №23', url:'islamic_articles-ur/023-ur.html'},
-    {title:'آج کا مضمون №24', url:'islamic_articles-ur/024-ur.html'},
-    {title:'آج کا مضمون №25', url:'islamic_articles-ur/025-ur.html'},
-    {title:'آج کا مضمون №26', url:'islamic_articles-ur/026-ur.html'},
-    {title:'آج کا مضمون №27', url:'islamic_articles-ur/027-ur.html'},
-    {title:'آج کا مضمون №28', url:'islamic_articles-ur/028-ur.html'},
-    {title:'آج کا مضمون №29', url:'islamic_articles-ur/029-ur.html'},
-    {title:'آج کا مضمون №30', url:'islamic_articles-ur/030-ur.html'}
+    {title:'آج کا مضمون نمبر 1', url:'islamic_articles-ur/001-ur.html'},
+    {title:'آج کا مضمون نمبر 2', url:'islamic_articles-ur/002-ur.html'},
+    {title:'آج کا مضمون نمبر 3', url:'islamic_articles-ur/003-ur.html'},
+    {title:'آج کا مضمون نمبر 4', url:'islamic_articles-ur/004-ur.html'},
+    {title:'آج کا مضمون نمبر 5', url:'islamic_articles-ur/005-ur.html'},
+    {title:'آج کا مضمون نمبر 6', url:'islamic_articles-ur/006-ur.html'},
+    {title:'آج کا مضمون نمبر 7', url:'islamic_articles-ur/007-ur.html'},
+    {title:'آج کا مضمون نمبر 8', url:'islamic_articles-ur/008-ur.html'},
+    {title:'آج کا مضمون نمبر 9', url:'islamic_articles-ur/009-ur.html'},
+    {title:'آج کا مضمون نمبر 10', url:'islamic_articles-ur/010-ur.html'},
+    {title:'آج کا مضمون نمبر 11', url:'islamic_articles-ur/011-ur.html'},
+    {title:'آج کا مضمون نمبر 12', url:'islamic_articles-ur/012-ur.html'},
+    {title:'آج کا مضمون نمبر 13', url:'islamic_articles-ur/013-ur.html'},
+    {title:'آج کا مضمون نمبر 14', url:'islamic_articles-ur/014-ur.html'},
+    {title:'آج کا مضمون نمبر 15', url:'islamic_articles-ur/015-ur.html'},
+    {title:'آج کا مضمون نمبر 16', url:'islamic_articles-ur/016-ur.html'},
+    {title:'آج کا مضمون نمبر 17', url:'islamic_articles-ur/017-ur.html'},
+    {title:'آج کا مضمون نمبر 18', url:'islamic_articles-ur/018-ur.html'},
+    {title:'آج کا مضمون نمبر 19', url:'islamic_articles-ur/019-ur.html'},
+    {title:'آج کا مضمون نمبر 20', url:'islamic_articles-ur/020-ur.html'},
+    {title:'آج کا مضمون نمبر 21', url:'islamic_articles-ur/021-ur.html'},
+    {title:'آج کا مضمون نمبر 22', url:'islamic_articles-ur/022-ur.html'},
+    {title:'آج کا مضمون نمبر 23', url:'islamic_articles-ur/023-ur.html'},
+    {title:'آج کا مضمون نمبر 24', url:'islamic_articles-ur/024-ur.html'},
+    {title:'آج کا مضمون نمبر 25', url:'islamic_articles-ur/025-ur.html'},
+    {title:'آج کا مضمون نمبر 26', url:'islamic_articles-ur/026-ur.html'},
+    {title:'آج کا مضمون نمبر 27', url:'islamic_articles-ur/027-ur.html'},
+    {title:'آج کا مضمون نمبر 28', url:'islamic_articles-ur/028-ur.html'},
+    {title:'آج کا مضمون نمبر 29', url:'islamic_articles-ur/029-ur.html'},
+    {title:'آج کا مضمون نمبر 30', url:'islamic_articles-ur/030-ur.html'}
   ];
-  const names = ['Ар-Рахман', 'Ар-Рахим', 'Аль-Малик', 'Аль-Куддус', 'Ас-Салям', 'Аль-Му’мин', 'Аль-Мухаймин', 'Аль-Азиз', 'Аль-Джаббар', 'Аль-Мутакаббир', 'Аль-Халик', 'Аль-Бари', 'Аль-Мусаввир', 'Аль-Гаффар', 'Аль-Каххар', 'Аль-Ваххаб', 'Ар-Раззак', 'Аль-Фаттах', 'Аль-Алим', 'Аль-Кабид', 'Аль-Басит', 'Аль-Хафид', 'Ар-Рафи', 'Аль-Муизз', 'Аль-Музилль', 'Ас-Сами', 'Аль-Басир', 'Аль-Хакам', 'Аль-Адль', 'Аль-Латиф', 'Аль-Хабир', 'Аль-Халим', 'Аль-Азым', 'Аль-Гафур', 'Аш-Шакур', 'Аль-Алий', 'Аль-Кабир', 'Аль-Хафиз', 'Аль-Мукит', 'Аль-Хасиб'];
+  const names = ['الرَّحْمٰن', 'الرَّحِيم', 'الْمَلِك', 'الْقُدُّوس', 'السَّلَام', 'اسلامی یاد دہانی اور مفید عمل', 'اسلامی یاد دہانی اور مفید عمل', 'الْعَزِيز', 'الْجَبَّار', 'الْمُتَكَبِّر', 'الْخَالِق', 'الْبَارِئ', 'اسلامی یاد دہانی اور مفید عمل', 'الْغَفَّار', 'الْقَهَّار', 'الْوَهَّاب', 'الرَّزَّاق', 'الْفَتَّاح', 'الْعَلِيم', 'الْقَابِض', 'الْبَاسِط', 'الْخَافِض', 'الرَّافِع', 'الْمُعِزّ', 'الْمُذِلّ', 'السَّمِيع', 'الْبَصِير', 'الْحَكَم', 'الْعَدْل', 'اللَّطِيف', 'اسلامی یاد دہانی اور مفید عمل', 'اسلامی یاد دہانی اور مفید عمل', 'اسلامی یاد دہانی اور مفید عمل', 'اسلامی یاد دہانی اور مفید عمل', 'اسلامی یاد دہانی اور مفید عمل', 'اسلامی یاد دہانی اور مفید عمل', 'اسلامی یاد دہانی اور مفید عمل', 'اسلامی یاد دہانی اور مفید عمل', 'اسلامی یاد دہانی اور مفید عمل', 'اسلامی یاد دہانی اور مفید عمل'];
   const goals = [
-    'Перед одним важным делом обнови намерение.',
-    'ایک نیکی خاموشی سے، بغیر بات اور دکھاوے کے کرو.',
-    'Прочитай короткий материал и сохрани один вывод.',
-    'Попроси прощения у Аллаха 33 раза спокойно.',
-    'Убери одно лишнее действие, которое крадёт время.',
-    'Сделай дуа за родителей и близких.',
-    'Поблагодари Аллаха за одну конкретную милость.'
+    'ایک اہم کام سے پہلے نیت تازہ کرو۔',
+    'ایک نیکی خاموشی سے، بغیر دکھاوے کے کرو۔',
+    'اللہ ﷻ کے لیے ایک نیک کام کرو — خاموشی سے، اخلاص کے ساتھ، تعریف کی امید کے بغیر۔',
+    'اللہ سے سکون کے ساتھ 33 بار مغفرت مانگو۔',
+    'ایک غیر ضروری کام چھوڑ دو جو وقت چراتا ہے۔',
+    'والدین اور قریبی لوگوں کے لیے دعا کرو۔',
+    'اللہ کی ایک خاص نعمت پر شکر ادا کرو۔'
   ];
   const article = articles[dayNumber % articles.length];
   const articleLink = document.getElementById('dailyArticleLink');
@@ -3050,22 +3406,22 @@ window.addEventListener("DOMContentLoaded",function(){const installBtn=document.
   const currentAdhkarTitle = document.getElementById('currentAdhkarTitle');
   const currentAdhkarText = document.getElementById('currentAdhkarText');
   if(currentAdhkarTitle && currentAdhkarText){
-    if(hour >= 4 && hour < 11){ currentAdhkarTitle.textContent = 'صبح کے اذکار'; currentAdhkarText.textContent = 'Лучшее время закрепить утреннюю защиту.'; }
-    else if(hour >= 16 && hour < 22){ currentAdhkarTitle.textContent = 'شام کے اذکار'; currentAdhkarText.textContent = 'Вечерняя защита перед окончанием дня.'; }
-    else{ currentAdhkarTitle.textContent = 'اگلا ذکر'; currentAdhkarText.textContent = hour < 4 ? 'Ближайший — утренний азкар после Фаджра.' : 'Ближайший — вечерний азкар ближе к Магрибу.'; }
+    if(hour >= 4 && hour < 11){ currentAdhkarTitle.textContent = 'صبح کے اذکار'; currentAdhkarText.textContent = 'صبح کی حفاظت مضبوط کرنے کا بہترین وقت۔'; }
+    else if(hour >= 16 && hour < 22){ currentAdhkarTitle.textContent = 'شام کے اذکار'; currentAdhkarText.textContent = 'دن کے اختتام سے پہلے شام کی حفاظت۔'; }
+    else{ currentAdhkarTitle.textContent = 'اگلا ذکر'; currentAdhkarText.textContent = hour < 4 ? 'قریب ترین — فجر کے بعد صبح کے اذکار۔' : 'قریب ترین — مغرب کے قریب شام کے اذکار۔'; }
   }
   const name = names[dayNumber % names.length];
   const nameEl = document.getElementById('allahNameToday');
   const card = document.getElementById('allahNameCounterCard');
   const valueEl = document.getElementById('allahNameCounterValue');
   const fillEl = document.getElementById('allahNameCounterFill');
-  const storageKey = 'barakaway_name_counter_ur_ru_' + todayKey;
+  const storageKey = 'barakaway_name_counter_ur_' + todayKey;
   let count = Math.max(0, Math.min(100, parseInt(localStorage.getItem(storageKey) || '0', 10) || 0));
   function renderCounter(){
     if(nameEl) nameEl.textContent = name;
     if(valueEl) valueEl.textContent = count + '/100';
     if(fillEl) fillEl.style.width = count + '%';
-    if(card) card.setAttribute('aria-label', name + ': ' + count + ' из 100 повторений');
+    if(card) card.setAttribute('aria-label', name + ': ' + count + ' اسلامی یاد دہانی اور مفید عمل');
   }
   function incrementCounter(){
     count = count >= 100 ? 0 : count + 1;
@@ -3099,7 +3455,7 @@ window.addEventListener("DOMContentLoaded",function(){const installBtn=document.
 
   function updateGoalState(){
     const now = new Date();
-    const key = 'barakaway_daily_goal_ru_' + localDateKey(now);
+    const key = 'barakaway_daily_goal_ur_' + localDateKey(now);
     const done = localStorage.getItem(key) === '1';
 
     goalCard.classList.toggle('goal-done', done);
@@ -3108,20 +3464,24 @@ window.addEventListener("DOMContentLoaded",function(){const installBtn=document.
 
     if(done){
       goalCard.style.setProperty('--goal-red-opacity', '0');
-      goalCard.setAttribute('aria-label', 'Выполнено');
+      goalCard.setAttribute('aria-label', 'مکمل');
       return;
     }
 
     const minutes = now.getHours() * 60 + now.getMinutes();
     const opacity = Math.max(0.06, Math.min(0.88, minutes / 1440));
     goalCard.style.setProperty('--goal-red-opacity', opacity.toFixed(2));
-    goalCard.setAttribute('aria-label', 'روزانہ ہدف');
+    goalCard.setAttribute('aria-label', 'آج کا مقصد');
   }
 
   goalCard.addEventListener('click', function(){
-    const key = 'barakaway_daily_goal_ru_' + localDateKey(new Date());
+    const key = 'barakaway_daily_goal_ur_' + localDateKey(new Date());
     const done = localStorage.getItem(key) === '1';
-    localStorage.setItem(key, done ? '0' : '1');
+    if(localStorage.getItem(key) === '1'){
+      updateGoalState();
+      return;
+    }
+    localStorage.setItem(key, '1');
     updateGoalState();
   });
 
@@ -3136,9 +3496,2987 @@ window.addEventListener("DOMContentLoaded",function(){const installBtn=document.
   setInterval(updateGoalState, 60000);
 })();
 </script>
+<script>
+(function(){
+  const TASK_PREFIX = "barakaway_today_ur_";
+
+  function localDateKey(date){
+    const y = date.getFullYear();
+    const m = String(date.getMonth() + 1).padStart(2, "0");
+    const d = String(date.getDate()).padStart(2, "0");
+    return y + "-" + m + "-" + d;
+  }
+
+  function todayKey(){
+    return localDateKey(new Date());
+  }
+
+  function taskKey(name){
+    return TASK_PREFIX + todayKey() + "_" + name;
+  }
+
+  function isDone(name){
+    return localStorage.getItem(taskKey(name)) === "1";
+  }
+
+  function setDone(name){
+    localStorage.setItem(taskKey(name), "1");
+  }
+
+  function redOpacity(){
+    const now = new Date();
+    const minutes = now.getHours() * 60 + now.getMinutes();
+    return Math.max(0.10, Math.min(0.90, minutes / 1440)).toFixed(2);
+  }
+
+  function applyTaskState(card, statusEl, name, openSymbol){
+    if(!card) return;
+
+    const done = isDone(name);
+
+    card.classList.toggle("task-done", done);
+    card.classList.toggle("goal-done", done);
+    card.classList.toggle("task-urgent", !done && new Date().getHours() >= 18);
+
+    card.style.setProperty("--task-red-opacity", done ? "0" : redOpacity());
+    card.style.setProperty("--goal-red-opacity", done ? "0" : redOpacity());
+
+    if(statusEl){
+      statusEl.textContent = done ? "✓" : openSymbol;
+    }
+
+    card.setAttribute("aria-disabled", done ? "true" : "false");
+  }
+
+  const articleCard = document.getElementById("dailyArticleLink");
+  const articleStatus = document.getElementById("dailyArticleStatus");
+
+  const adhkarCard = document.getElementById("currentAdhkarLink");
+  const adhkarStatus = document.getElementById("currentAdhkarStatus");
+
+  const nameCard = document.getElementById("allahNameCounterCard");
+  const nameStatus = document.getElementById("allahNameCounterValue");
+  const nameFill = document.getElementById("allahNameCounterFill");
+
+  const goalCard = document.getElementById("dailyGoalCard");
+  const goalStatus = document.getElementById("dailyGoalStatus");
+
+  function renderAll(){
+    applyTaskState(articleCard, articleStatus, "article", "→");
+    applyTaskState(adhkarCard, adhkarStatus, "adhkar", "→");
+    applyTaskState(goalCard, goalStatus, "goal", "•");
+
+    if(nameCard){
+      const done = isDone("name");
+      let count = Math.max(0, Math.min(100, parseInt(localStorage.getItem(TASK_PREFIX + todayKey() + "_name_count") || "0", 10) || 0));
+
+      if(done){
+        count = 100;
+        nameCard.classList.add("task-done","goal-done");
+        nameCard.classList.remove("task-urgent");
+        nameCard.style.setProperty("--task-red-opacity","0");
+        nameCard.style.setProperty("--goal-red-opacity","0");
+        if(nameStatus) nameStatus.textContent = "✓";
+        if(nameFill) nameFill.style.width = "100%";
+        nameCard.setAttribute("aria-disabled","true");
+      }else{
+        nameCard.classList.remove("task-done","goal-done");
+        nameCard.classList.toggle("task-urgent", new Date().getHours() >= 18);
+        nameCard.style.setProperty("--task-red-opacity", redOpacity());
+        nameCard.style.setProperty("--goal-red-opacity", redOpacity());
+        if(nameStatus) nameStatus.textContent = count + "/100";
+        if(nameFill) nameFill.style.width = count + "%";
+        nameCard.setAttribute("aria-disabled","false");
+      }
+    }
+  }
+
+  if(articleCard){
+    articleCard.addEventListener("click", function(e){
+      if(isDone("article")){
+        e.preventDefault();
+        return;
+      }
+      setDone("article");
+      renderAll();
+    }, true);
+  }
+
+  if(adhkarCard){
+    adhkarCard.addEventListener("click", function(e){
+      if(isDone("adhkar")){
+        e.preventDefault();
+        return;
+      }
+      setDone("adhkar");
+      renderAll();
+    }, true);
+  }
+
+  if(goalCard){
+    goalCard.addEventListener("click", function(e){
+      if(isDone("goal")){
+        e.preventDefault();
+        return;
+      }
+      setDone("goal");
+      renderAll();
+    });
+
+    goalCard.addEventListener("keydown", function(e){
+      if(e.key === "Enter" || e.key === " "){
+        e.preventDefault();
+        if(!isDone("goal")){
+          setDone("goal");
+          renderAll();
+        }
+      }
+    });
+  }
+
+  if(nameCard){
+    nameCard.addEventListener("click", function(e){
+      if(isDone("name")){
+        e.preventDefault();
+        return;
+      }
+
+      let count = Math.max(0, Math.min(100, parseInt(localStorage.getItem(TASK_PREFIX + todayKey() + "_name_count") || "0", 10) || 0));
+      count = Math.min(100, count + 1);
+      localStorage.setItem(TASK_PREFIX + todayKey() + "_name_count", String(count));
+
+      if(count >= 100){
+        setDone("name");
+      }
+
+      renderAll();
+    });
+
+    nameCard.addEventListener("keydown", function(e){
+      if(e.key === "Enter" || e.key === " "){
+        e.preventDefault();
+        nameCard.click();
+      }
+    });
+  }
+
+  renderAll();
+  setInterval(renderAll, 60000);
+})();
+</script>
+
+<script>
+(function(){
+  const ayahActions = [
+    {
+        "ref": "2:83",
+        "ayah": "لوگوں سے اچھی بات کہو۔",
+        "task": "آج اپنے آس پاس کے لوگوں سے تین نرم اور اچھی باتیں کہو۔"
+    },
+    {
+        "ref": "2:152",
+        "ayah": "مجھے یاد کرو، میں تمہیں یاد کروں گا۔",
+        "task": "آج دن بھر اللہ کو دس بار یاد کرو۔"
+    },
+    {
+        "ref": "2:153",
+        "ayah": "اللہ صبر کرنے والوں کے ساتھ ہے۔",
+        "task": "آج اکسانے پر بھی سخت جواب نہ دو۔"
+    },
+    {
+        "ref": "2:195",
+        "ayah": "اللہ نیکی کرنے والوں سے محبت کرتا ہے۔",
+        "task": "آج تعریف کی امید کے بغیر خاموشی سے ایک نیکی کرو۔"
+    },
+    {
+        "ref": "2:222",
+        "ayah": "اللہ توبہ کرنے والوں سے محبت کرتا ہے۔",
+        "task": "آج اپنے ایک گناہ پر سکون سے اللہ سے معافی مانگو۔"
+    },
+    {
+        "ref": "2:263",
+        "ayah": "اچھی بات اور معافی اس صدقہ سے بہتر ہے جس میں تکلیف ہو۔",
+        "task": "آج کسی کو اپنی مدد یاد نہ دلاؤ۔"
+    },
+    {
+        "ref": "2:286",
+        "ayah": "اللہ کسی جان پر اس کی طاقت سے زیادہ بوجھ نہیں ڈالتا۔",
+        "task": "آج خود پر حد سے زیادہ دباؤ نہ ڈالو، جو ممکن ہو سکون سے کرو۔"
+    },
+    {
+        "ref": "3:17",
+        "ayah": "صبر کرنے والے، سچے اور فرمانبردار اچھے لوگوں میں شمار ہوتے ہیں۔",
+        "task": "آج وہاں سچ کا انتخاب کرو جہاں بہانہ آسان تھا۔"
+    },
+    {
+        "ref": "3:134",
+        "ayah": "وہ غصہ روک لیتے ہیں اور لوگوں کو معاف کرتے ہیں۔",
+        "task": "اگر غصہ آئے تو اللہ کے لیے دس سیکنڈ خاموش رہو۔"
+    },
+    {
+        "ref": "3:139",
+        "ayah": "کمزور نہ پڑو اور غم نہ کرو۔",
+        "task": "آج اپنے بارے میں ناامیدی کے الفاظ نہ کہو۔"
+    },
+    {
+        "ref": "3:146",
+        "ayah": "اللہ صبر کرنے والوں سے محبت کرتا ہے۔",
+        "task": "اسلامی یاد دہانی اور مفید عمل"
+    },
+    {
+        "ref": "3:159",
+        "ayah": "اسلامی یاد دہانی اور مفید عمل",
+        "task": "اسلامی یاد دہانی اور مفید عمل"
+    },
+    {
+        "ref": "3:173",
+        "ayah": "اللہ کی یاد دل کو سکون دیتی ہے۔",
+        "task": "اللہ کی یاد دل کو سکون دیتی ہے۔"
+    },
+    {
+        "ref": "4:36",
+        "ayah": "اسلامی یاد دہانی اور مفید عمل",
+        "task": "اسلامی یاد دہانی اور مفید عمل"
+    },
+    {
+        "ref": "4:58",
+        "ayah": "اسلامی یاد دہانی اور مفید عمل",
+        "task": "اسلامی یاد دہانی اور مفید عمل"
+    },
+    {
+        "ref": "4:86",
+        "ayah": "اسلامی یاد دہانی اور مفید عمل",
+        "task": "اسلامی یاد دہانی اور مفید عمل"
+    },
+    {
+        "ref": "4:135",
+        "ayah": "اسلامی یاد دہانی اور مفید عمل",
+        "task": "اسلامی یاد دہانی اور مفید عمل"
+    },
+    {
+        "ref": "5:2",
+        "ayah": "اسلامی یاد دہانی اور مفید عمل",
+        "task": "اسلامی یاد دہانی اور مفید عمل"
+    },
+    {
+        "ref": "5:8",
+        "ayah": "اسلامی یاد دہانی اور مفید عمل",
+        "task": "اسلامی یاد دہانی اور مفید عمل"
+    },
+    {
+        "ref": "5:13",
+        "ayah": "اسلامی یاد دہانی اور مفید عمل",
+        "task": "اسلامی یاد دہانی اور مفید عمل"
+    },
+    {
+        "ref": "6:141",
+        "ayah": "اسلامی یاد دہانی اور مفید عمل",
+        "task": "اسلامی یاد دہانی اور مفید عمل"
+    },
+    {
+        "ref": "6:152",
+        "ayah": "اسلامی یاد دہانی اور مفید عمل",
+        "task": "اسلامی یاد دہانی اور مفید عمل"
+    },
+    {
+        "ref": "7:31",
+        "ayah": "اسلامی یاد دہانی اور مفید عمل",
+        "task": "اسلامی یاد دہانی اور مفید عمل"
+    },
+    {
+        "ref": "7:56",
+        "ayah": "اللہ کی یاد دل کو سکون دیتی ہے۔",
+        "task": "اسلامی یاد دہانی اور مفید عمل"
+    },
+    {
+        "ref": "7:199",
+        "ayah": "اسلامی یاد دہانی اور مفید عمل",
+        "task": "اسلامی یاد دہانی اور مفید عمل"
+    },
+    {
+        "ref": "8:46",
+        "ayah": "اسلامی یاد دہانی اور مفید عمل",
+        "task": "اسلامی یاد دہانی اور مفید عمل"
+    },
+    {
+        "ref": "9:51",
+        "ayah": "اللہ کی یاد دل کو سکون دیتی ہے۔",
+        "task": "اللہ کی یاد دل کو سکون دیتی ہے۔"
+    },
+    {
+        "ref": "9:119",
+        "ayah": "اسلامی یاد دہانی اور مفید عمل",
+        "task": "اسلامی یاد دہانی اور مفید عمل"
+    },
+    {
+        "ref": "10:62",
+        "ayah": "اللہ کی یاد دل کو سکون دیتی ہے۔",
+        "task": "دعا"
+    },
+    {
+        "ref": "11:115",
+        "ayah": "اللہ کی یاد دل کو سکون دیتی ہے۔",
+        "task": "اسلامی یاد دہانی اور مفید عمل"
+    },
+    {
+        "ref": "12:18",
+        "ayah": "اسلامی یاد دہانی اور مفید عمل",
+        "task": "اسلامی یاد دہانی اور مفید عمل"
+    },
+    {
+        "ref": "12:87",
+        "ayah": "اللہ کی یاد دل کو سکون دیتی ہے۔",
+        "task": "اسلامی یاد دہانی اور مفید عمل"
+    },
+    {
+        "ref": "13:28",
+        "ayah": "اللہ کی یاد دل کو سکون دیتی ہے۔",
+        "task": "ذکر"
+    },
+    {
+        "ref": "14:7",
+        "ayah": "اسلامی یاد دہانی اور مفید عمل",
+        "task": "اللہ کی یاد دل کو سکون دیتی ہے۔"
+    },
+    {
+        "ref": "15:85",
+        "ayah": "اسلامی یاد دہانی اور مفید عمل",
+        "task": "اسلامی یاد دہانی اور مفید عمل"
+    },
+    {
+        "ref": "16:90",
+        "ayah": "اللہ کی یاد دل کو سکون دیتی ہے۔",
+        "task": "اسلامی یاد دہانی اور مفید عمل"
+    },
+    {
+        "ref": "16:96",
+        "ayah": "اللہ کی یاد دل کو سکون دیتی ہے۔",
+        "task": "اسلامی یاد دہانی اور مفید عمل"
+    },
+    {
+        "ref": "16:125",
+        "ayah": "اسلامی یاد دہانی اور مفید عمل",
+        "task": "اسلامی یاد دہانی اور مفید عمل"
+    },
+    {
+        "ref": "17:23",
+        "ayah": "اسلامی یاد دہانی اور مفید عمل",
+        "task": "اسلامی یاد دہانی اور مفید عمل"
+    },
+    {
+        "ref": "17:26",
+        "ayah": "اسلامی یاد دہانی اور مفید عمل",
+        "task": "اسلامی یاد دہانی اور مفید عمل"
+    },
+    {
+        "ref": "17:27",
+        "ayah": "اسلامی یاد دہانی اور مفید عمل",
+        "task": "اسلامی یاد دہانی اور مفید عمل"
+    },
+    {
+        "ref": "17:36",
+        "ayah": "اسلامی یاد دہانی اور مفید عمل",
+        "task": "اسلامی یاد دہانی اور مفید عمل"
+    },
+    {
+        "ref": "17:37",
+        "ayah": "اسلامی یاد دہانی اور مفید عمل",
+        "task": "اسلامی یاد دہانی اور مفید عمل"
+    },
+    {
+        "ref": "18:10",
+        "ayah": "اسلامی یاد دہانی اور مفید عمل",
+        "task": "اللہ کی یاد دل کو سکون دیتی ہے۔"
+    },
+    {
+        "ref": "18:28",
+        "ayah": "اسلامی یاد دہانی اور مفید عمل",
+        "task": "اسلامی یاد دہانی اور مفید عمل"
+    },
+    {
+        "ref": "20:14",
+        "ayah": "اسلامی یاد دہانی اور مفید عمل",
+        "task": "نماز کے اوقات"
+    },
+    {
+        "ref": "20:44",
+        "ayah": "اسلامی یاد دہانی اور مفید عمل",
+        "task": "اسلامی یاد دہانی اور مفید عمل"
+    },
+    {
+        "ref": "20:114",
+        "ayah": "اسلامی یاد دہانی اور مفید عمل",
+        "task": "اللہ کی یاد دل کو سکون دیتی ہے۔"
+    },
+    {
+        "ref": "21:35",
+        "ayah": "اسلامی یاد دہانی اور مفید عمل",
+        "task": "اسلامی یاد دہانی اور مفید عمل"
+    },
+    {
+        "ref": "21:90",
+        "ayah": "اسلامی یاد دہانی اور مفید عمل",
+        "task": "اسلامی یاد دہانی اور مفید عمل"
+    },
+    {
+        "ref": "22:37",
+        "ayah": "اللہ کی یاد دل کو سکون دیتی ہے۔",
+        "task": "اسلامی یاد دہانی اور مفید عمل"
+    },
+    {
+        "ref": "23:1-2",
+        "ayah": "اسلامی یاد دہانی اور مفید عمل",
+        "task": "نماز کے اوقات"
+    },
+    {
+        "ref": "23:3",
+        "ayah": "اسلامی یاد دہانی اور مفید عمل",
+        "task": "اسلامی یاد دہانی اور مفید عمل"
+    },
+    {
+        "ref": "24:22",
+        "ayah": "اسلامی یاد دہانی اور مفید عمل",
+        "task": "اسلامی یاد دہانی اور مفید عمل"
+    },
+    {
+        "ref": "24:30",
+        "ayah": "اسلامی یاد دہانی اور مفید عمل",
+        "task": "اسلامی یاد دہانی اور مفید عمل"
+    },
+    {
+        "ref": "25:63",
+        "ayah": "اسلامی یاد دہانی اور مفید عمل",
+        "task": "اسلامی یاد دہانی اور مفید عمل"
+    },
+    {
+        "ref": "25:67",
+        "ayah": "اسلامی یاد دہانی اور مفید عمل",
+        "task": "اسلامی یاد دہانی اور مفید عمل"
+    },
+    {
+        "ref": "28:77",
+        "ayah": "اللہ کی یاد دل کو سکون دیتی ہے۔",
+        "task": "اسلامی یاد دہانی اور مفید عمل"
+    },
+    {
+        "ref": "29:45",
+        "ayah": "اسلامی یاد دہانی اور مفید عمل",
+        "task": "نماز کے اوقات"
+    },
+    {
+        "ref": "29:69",
+        "ayah": "اسلامی یاد دہانی اور مفید عمل",
+        "task": "اسلامی یاد دہانی اور مفید عمل"
+    },
+    {
+        "ref": "31:14",
+        "ayah": "اسلامی یاد دہانی اور مفید عمل",
+        "task": "اللہ کی یاد دل کو سکون دیتی ہے۔"
+    },
+    {
+        "ref": "31:17",
+        "ayah": "اسلامی یاد دہانی اور مفید عمل",
+        "task": "اسلامی یاد دہانی اور مفید عمل"
+    },
+    {
+        "ref": "31:18",
+        "ayah": "اسلامی یاد دہانی اور مفید عمل",
+        "task": "اسلامی یاد دہانی اور مفید عمل"
+    },
+    {
+        "ref": "31:19",
+        "ayah": "اسلامی یاد دہانی اور مفید عمل",
+        "task": "اسلامی یاد دہانی اور مفید عمل"
+    },
+    {
+        "ref": "33:35",
+        "ayah": "اللہ کی یاد دل کو سکون دیتی ہے۔",
+        "task": "ذکر"
+    },
+    {
+        "ref": "33:41",
+        "ayah": "اللہ کی یاد دل کو سکون دیتی ہے۔",
+        "task": "ذکر"
+    },
+    {
+        "ref": "33:70",
+        "ayah": "اسلامی یاد دہانی اور مفید عمل",
+        "task": "اسلامی یاد دہانی اور مفید عمل"
+    },
+    {
+        "ref": "39:10",
+        "ayah": "اسلامی یاد دہانی اور مفید عمل",
+        "task": "اسلامی یاد دہانی اور مفید عمل"
+    },
+    {
+        "ref": "39:53",
+        "ayah": "اللہ کی یاد دل کو سکون دیتی ہے۔",
+        "task": "اسلامی یاد دہانی اور مفید عمل"
+    },
+    {
+        "ref": "40:60",
+        "ayah": "اسلامی یاد دہانی اور مفید عمل",
+        "task": "دعا"
+    },
+    {
+        "ref": "41:34",
+        "ayah": "اسلامی یاد دہانی اور مفید عمل",
+        "task": "اسلامی یاد دہانی اور مفید عمل"
+    },
+    {
+        "ref": "42:36",
+        "ayah": "اللہ کی یاد دل کو سکون دیتی ہے۔",
+        "task": "اسلامی یاد دہانی اور مفید عمل"
+    },
+    {
+        "ref": "42:37",
+        "ayah": "اسلامی یاد دہانی اور مفید عمل",
+        "task": "اسلامی یاد دہانی اور مفید عمل"
+    },
+    {
+        "ref": "42:40",
+        "ayah": "اللہ کی یاد دل کو سکون دیتی ہے۔",
+        "task": "اسلامی یاد دہانی اور مفید عمل"
+    },
+    {
+        "ref": "45:15",
+        "ayah": "اسلامی یاد دہانی اور مفید عمل",
+        "task": "اسلامی یاد دہانی اور مفید عمل"
+    },
+    {
+        "ref": "47:7",
+        "ayah": "اللہ کی یاد دل کو سکون دیتی ہے۔",
+        "task": "اسلامی یاد دہانی اور مفید عمل"
+    },
+    {
+        "ref": "49:10",
+        "ayah": "اسلامی یاد دہانی اور مفید عمل",
+        "task": "اسلامی یاد دہانی اور مفید عمل"
+    },
+    {
+        "ref": "49:11",
+        "ayah": "اسلامی یاد دہانی اور مفید عمل",
+        "task": "اسلامی یاد دہانی اور مفید عمل"
+    },
+    {
+        "ref": "49:12",
+        "ayah": "اسلامی یاد دہانی اور مفید عمل",
+        "task": "اسلامی یاد دہانی اور مفید عمل"
+    },
+    {
+        "ref": "50:18",
+        "ayah": "اسلامی یاد دہانی اور مفید عمل",
+        "task": "اسلامی یاد دہانی اور مفید عمل"
+    },
+    {
+        "ref": "51:56",
+        "ayah": "اسلامی یاد دہانی اور مفید عمل",
+        "task": "اللہ کی یاد دل کو سکون دیتی ہے۔"
+    },
+    {
+        "ref": "57:20",
+        "ayah": "اسلامی یاد دہانی اور مفید عمل",
+        "task": "اسلامی یاد دہانی اور مفید عمل"
+    },
+    {
+        "ref": "57:23",
+        "ayah": "اسلامی یاد دہانی اور مفید عمل",
+        "task": "اسلامی یاد دہانی اور مفید عمل"
+    },
+    {
+        "ref": "59:18",
+        "ayah": "اسلامی یاد دہانی اور مفید عمل",
+        "task": "اسلامی یاد دہانی اور مفید عمل"
+    },
+    {
+        "ref": "64:16",
+        "ayah": "اللہ کی یاد دل کو سکون دیتی ہے۔",
+        "task": "اسلامی یاد دہانی اور مفید عمل"
+    },
+    {
+        "ref": "65:2-3",
+        "ayah": "اللہ کی یاد دل کو سکون دیتی ہے۔",
+        "task": "اسلامی یاد دہانی اور مفید عمل"
+    },
+    {
+        "ref": "65:7",
+        "ayah": "اللہ کی یاد دل کو سکون دیتی ہے۔",
+        "task": "اسلامی یاد دہانی اور مفید عمل"
+    },
+    {
+        "ref": "67:2",
+        "ayah": "اسلامی یاد دہانی اور مفید عمل",
+        "task": "نماز کے اوقات"
+    },
+    {
+        "ref": "70:5",
+        "ayah": "اسلامی یاد دہانی اور مفید عمل",
+        "task": "اسلامی یاد دہانی اور مفید عمل"
+    },
+    {
+        "ref": "73:8",
+        "ayah": "اسلامی یاد دہانی اور مفید عمل",
+        "task": "اللہ کی یاد دل کو سکون دیتی ہے۔"
+    },
+    {
+        "ref": "74:7",
+        "ayah": "اسلامی یاد دہانی اور مفید عمل",
+        "task": "اللہ کی یاد دل کو سکون دیتی ہے۔"
+    },
+    {
+        "ref": "76:8-9",
+        "ayah": "اللہ کی یاد دل کو سکون دیتی ہے۔",
+        "task": "اسلامی یاد دہانی اور مفید عمل"
+    },
+    {
+        "ref": "87:14-15",
+        "ayah": "اسلامی یاد دہانی اور مفید عمل",
+        "task": "اسلامی یاد دہانی اور مفید عمل"
+    },
+    {
+        "ref": "90:17",
+        "ayah": "اسلامی یاد دہانی اور مفید عمل",
+        "task": "اسلامی یاد دہانی اور مفید عمل"
+    },
+    {
+        "ref": "92:5-7",
+        "ayah": "اسلامی یاد دہانی اور مفید عمل",
+        "task": "اسلامی یاد دہانی اور مفید عمل"
+    },
+    {
+        "ref": "93:10",
+        "ayah": "اسلامی یاد دہانی اور مفید عمل",
+        "task": "اسلامی یاد دہانی اور مفید عمل"
+    },
+    {
+        "ref": "93:11",
+        "ayah": "اسلامی یاد دہانی اور مفید عمل",
+        "task": "اللہ کی یاد دل کو سکون دیتی ہے۔"
+    },
+    {
+        "ref": "94:5",
+        "ayah": "اسلامی یاد دہانی اور مفید عمل",
+        "task": "اسلامی یاد دہانی اور مفید عمل"
+    },
+    {
+        "ref": "94:6",
+        "ayah": "اسلامی یاد دہانی اور مفید عمل",
+        "task": "اسلامی یاد دہانی اور مفید عمل"
+    },
+    {
+        "ref": "95:4",
+        "ayah": "اسلامی یاد دہانی اور مفید عمل",
+        "task": "اسلامی یاد دہانی اور مفید عمل"
+    }
+];
+
+  const HISTORY_KEY = 'barakaway_ayah_history_ur_v1';
+  const TODAY_KEY = 'barakaway_ayah_today_ur_v1';
+
+  function localDateKey(date){
+    const y = date.getFullYear();
+    const m = String(date.getMonth() + 1).padStart(2, '0');
+    const d = String(date.getDate()).padStart(2, '0');
+    return y + '-' + m + '-' + d;
+  }
+
+  function daysBetween(a, b){
+    const start = new Date(a + 'T00:00:00');
+    const end = new Date(b + 'T00:00:00');
+    return Math.floor((end - start) / 86400000);
+  }
+
+  function safeJsonParse(value, fallback){
+    try{
+      return JSON.parse(value);
+    }catch(e){
+      return fallback;
+    }
+  }
+
+  function pickAyahForToday(){
+    const today = localDateKey(new Date());
+    const START_KEY = 'barakaway_linear_program_start_ur_v1';
+    let start = localStorage.getItem(START_KEY);
+    if(!start){
+      start = today;
+      localStorage.setItem(START_KEY, start);
+    }
+    const dayNumber = Math.max(0, daysBetween(start, today));
+    const index = ayahActions.length ? (dayNumber % ayahActions.length) : 0;
+    localStorage.setItem(TODAY_KEY, JSON.stringify({date:today, index:index, mode:'linear', day:dayNumber + 1}));
+    return ayahActions[index];
+  }
+
+  function renderAyahCard(){
+    const ayah = pickAyahForToday();
+    const card = document.getElementById('dailyArticleLink');
+    const text = document.getElementById('dailyArticleTitle');
+    const title = card ? card.querySelector('.today-action-title') : null;
+
+    if(card){
+      card.href = 'javascript:void(0)';
+      card.setAttribute('role', 'button');
+      card.setAttribute('aria-label', 'آج کی آیت: ' + ayah.ref + '. ' + ayah.task);
+    }
+
+    if(title){
+      title.textContent = 'آج کی آیت';
+    }
+
+    if(text){
+      const escapeHtml = function(value){
+        return String(value)
+          .replace(/&/g, '&amp;')
+          .replace(/</g, '&lt;')
+          .replace(/>/g, '&gt;')
+          .replace(/"/g, '&quot;')
+          .replace(/'/g, '&#039;');
+      };
+
+      text.innerHTML =
+        '<div class="today-ayah-text">' +
+          '<div><span class="today-ayah-ref">' + escapeHtml(ayah.ref) + '</span></div>' +
+          '<div class="today-ayah-line">' + escapeHtml(ayah.ayah) + '</div>' +
+          '<div class="today-ayah-task"><span class="today-ayah-task-label">آج اللہ کے لیے ایک چھوٹا نیک عمل خاموشی سے کرو۔</span>' + escapeHtml(ayah.task) + '</div>' +
+        '</div>';
+    }
+  }
+
+  renderAyahCard();
+
+  const card = document.getElementById('dailyArticleLink');
+  if(card){
+    card.addEventListener('click', function(event){
+      event.preventDefault();
+    }, true);
+    card.addEventListener('keydown', function(event){
+      if(event.key === 'Enter' || event.key === ' '){
+        event.preventDefault();
+        card.click();
+      }
+    });
+  }
+})();
+</script>
+
+
+<script>
+(function(){
+  const challenges = [
+    "اسلامی یاد دہانی اور مفید عمل",
+    "اللہ کی یاد دل کو سکون دیتی ہے۔",
+    "اسلامی یاد دہانی اور مفید عمل",
+    "اسلامی یاد دہانی اور مفید عمل",
+    "اسلامی یاد دہانی اور مفید عمل",
+    "زبان",
+    "دعا",
+    "اسلامی یاد دہانی اور مفید عمل",
+    "اسلامی یاد دہانی اور مفید عمل",
+    "اللہ کی یاد دل کو سکون دیتی ہے۔",
+    "اللہ کی یاد دل کو سکون دیتی ہے۔",
+    "اسلامی یاد دہانی اور مفید عمل",
+    "اسلامی یاد دہانی اور مفید عمل",
+    "اسلامی یاد دہانی اور مفید عمل",
+    "اسلامی یاد دہانی اور مفید عمل",
+    "اسلامی یاد دہانی اور مفید عمل",
+    "اسلامی یاد دہانی اور مفید عمل",
+    "اسلامی یاد دہانی اور مفید عمل",
+    "اسلامی یاد دہانی اور مفید عمل",
+    "اسلامی یاد دہانی اور مفید عمل",
+    "اسلامی یاد دہانی اور مفید عمل",
+    "اسلامی یاد دہانی اور مفید عمل",
+    "اسلامی یاد دہانی اور مفید عمل",
+    "اسلامی یاد دہانی اور مفید عمل",
+    "اسلامی یاد دہانی اور مفید عمل",
+    "اسلامی یاد دہانی اور مفید عمل",
+    "دعا",
+    "دعا",
+    "اسلامی یاد دہانی اور مفید عمل",
+    "اسلامی یاد دہانی اور مفید عمل",
+    "اسلامی یاد دہانی اور مفید عمل",
+    "اسلامی یاد دہانی اور مفید عمل",
+    "خرابی پیش آئی۔",
+    "اسلامی یاد دہانی اور مفید عمل",
+    "اسلامی یاد دہانی اور مفید عمل",
+    "اسلامی یاد دہانی اور مفید عمل",
+    "نماز کے اوقات",
+    "آج کی آیت ہمیں اللہ کی یاد، صبر اور نیکی کی طرف بلاتی ہے۔",
+    "اللہ کی یاد دل کو سکون دیتی ہے۔",
+    "اسلامی یاد دہانی اور مفید عمل",
+    "اسلامی یاد دہانی اور مفید عمل",
+    "اسلامی یاد دہانی اور مفید عمل",
+    "دعا",
+    "اسلامی یاد دہانی اور مفید عمل",
+    "اسلامی یاد دہانی اور مفید عمل",
+    "ذکر",
+    "اسلامی یاد دہانی اور مفید عمل",
+    "خرابی پیش آئی۔",
+    "اسلامی یاد دہانی اور مفید عمل",
+    "اسلامی یاد دہانی اور مفید عمل",
+    "اسلامی یاد دہانی اور مفید عمل",
+    "اسلامی یاد دہانی اور مفید عمل",
+    "اسلامی یاد دہانی اور مفید عمل",
+    "اللہ کی یاد دل کو سکون دیتی ہے۔",
+    "اللہ کی یاد دل کو سکون دیتی ہے۔",
+    "اسلامی یاد دہانی اور مفید عمل",
+    "اسلامی یاد دہانی اور مفید عمل",
+    "اسلامی یاد دہانی اور مفید عمل",
+    "خرابی پیش آئی۔",
+    "دعا",
+    "اسلامی یاد دہانی اور مفید عمل",
+    "اسلامی یاد دہانی اور مفید عمل",
+    "اسلامی یاد دہانی اور مفید عمل",
+    "اسلامی یاد دہانی اور مفید عمل",
+    "اسلامی یاد دہانی اور مفید عمل",
+    "اسلامی یاد دہانی اور مفید عمل",
+    "اسلامی یاد دہانی اور مفید عمل",
+    "اسلامی یاد دہانی اور مفید عمل",
+    "اسلامی یاد دہانی اور مفید عمل",
+    "اسلامی یاد دہانی اور مفید عمل",
+    "اللہ کی یاد دل کو سکون دیتی ہے۔",
+    "اسلامی یاد دہانی اور مفید عمل",
+    "اسلامی یاد دہانی اور مفید عمل",
+    "اسلامی یاد دہانی اور مفید عمل",
+    "دعا",
+    "اسلامی یاد دہانی اور مفید عمل",
+    "اسلامی یاد دہانی اور مفید عمل",
+    "اللہ کی یاد دل کو سکون دیتی ہے۔",
+    "اسلامی یاد دہانی اور مفید عمل",
+    "اسلامی یاد دہانی اور مفید عمل",
+    "اسلامی یاد دہانی اور مفید عمل",
+    "اسلامی یاد دہانی اور مفید عمل",
+    "اسلامی یاد دہانی اور مفید عمل",
+    "نماز کے اوقات",
+    "اسلامی یاد دہانی اور مفید عمل",
+    "اسلامی یاد دہانی اور مفید عمل",
+    "اسلامی یاد دہانی اور مفید عمل",
+    "اسلامی یاد دہانی اور مفید عمل",
+    "اللہ کی یاد دل کو سکون دیتی ہے۔",
+    "اسلامی یاد دہانی اور مفید عمل",
+    "اسلامی یاد دہانی اور مفید عمل",
+    "اسلامی یاد دہانی اور مفید عمل",
+    "اسلامی یاد دہانی اور مفید عمل",
+    "اسلامی یاد دہانی اور مفید عمل",
+    "اسلامی یاد دہانی اور مفید عمل",
+    "اسلامی یاد دہانی اور مفید عمل",
+    "دعا",
+    "اسلامی یاد دہانی اور مفید عمل",
+    "اسلامی یاد دہانی اور مفید عمل",
+    "اسلامی یاد دہانی اور مفید عمل",
+    "اسلامی یاد دہانی اور مفید عمل",
+    "اسلامی یاد دہانی اور مفید عمل",
+    "اللہ کی یاد دل کو سکون دیتی ہے۔",
+    "اسلامی یاد دہانی اور مفید عمل",
+    "اسلامی یاد دہانی اور مفید عمل",
+    "اسلامی یاد دہانی اور مفید عمل",
+    "اسلامی یاد دہانی اور مفید عمل",
+    "دعا",
+    "اسلامی یاد دہانی اور مفید عمل",
+    "اسلامی یاد دہانی اور مفید عمل",
+    "خرابی پیش آئی۔",
+    "اسلامی یاد دہانی اور مفید عمل",
+    "اللہ کی یاد دل کو سکون دیتی ہے۔",
+    "اسلامی یاد دہانی اور مفید عمل",
+    "اسلامی یاد دہانی اور مفید عمل",
+    "اللہ کی یاد دل کو سکون دیتی ہے۔",
+    "اللہ کی یاد دل کو سکون دیتی ہے۔",
+    "اسلامی یاد دہانی اور مفید عمل",
+    "اسلامی یاد دہانی اور مفید عمل",
+    "اسلامی یاد دہانی اور مفید عمل",
+    "اسلامی یاد دہانی اور مفید عمل"
+];
+  const TODAY_KEY = 'barakaway_daily_challenge_today_ur';
+  const HISTORY_KEY = 'barakaway_daily_challenge_history_ur';
+
+  function localDateKey(date){
+    const y = date.getFullYear();
+    const m = String(date.getMonth() + 1).padStart(2, '0');
+    const d = String(date.getDate()).padStart(2, '0');
+    return y + '-' + m + '-' + d;
+  }
+
+  function daysBetween(a, b){
+    const da = new Date(a + 'T00:00:00');
+    const db = new Date(b + 'T00:00:00');
+    return Math.round((db - da) / 86400000);
+  }
+
+  function safeJsonParse(value, fallback){
+    try{return JSON.parse(value);}catch(e){return fallback;}
+  }
+
+  function pickChallengeForToday(){
+    const today = localDateKey(new Date());
+    const START_KEY = 'barakaway_linear_program_start_ur_v1';
+    let start = localStorage.getItem(START_KEY);
+    if(!start){
+      start = today;
+      localStorage.setItem(START_KEY, start);
+    }
+    const dayNumber = Math.max(0, daysBetween(start, today));
+    const index = challenges.length ? (dayNumber % challenges.length) : 0;
+    localStorage.setItem(TODAY_KEY, JSON.stringify({date:today, index:index, mode:'linear', day:dayNumber + 1}));
+    return {index:index, text:challenges[index]};
+  }
+
+  function renderChallenge(){
+    const selected = pickChallengeForToday();
+    const card = document.getElementById('currentAdhkarLink');
+    const title = document.getElementById('currentAdhkarTitle');
+    const text = document.getElementById('currentAdhkarText');
+
+    if(card){
+      card.href = 'javascript:void(0)';
+      card.setAttribute('role', 'button');
+      card.setAttribute('aria-label', 'آج کا عمل. ' + selected.text);
+    }
+    if(title) title.textContent = 'آج کا عمل';
+    if(text) text.textContent = selected.text;
+  }
+
+  renderChallenge();
+  document.addEventListener('DOMContentLoaded', renderChallenge);
+  window.addEventListener('pageshow', renderChallenge);
+})();
+</script>
+
+
+<script>
+(function(){
+  const MICRO_QUESTIONS = [
+  {
+    "q": "اسلامی یاد دہانی اور مفید عمل",
+    "options": [
+      "4",
+      "5",
+      "6"
+    ],
+    "correct": 1,
+    "meaning": "اسلامی یاد دہانی اور مفید عمل"
+  },
+  {
+    "q": "اسلامی یاد دہانی اور مفید عمل",
+    "options": [
+      "اسلامی یاد دہانی اور مفید عمل",
+      "اسلامی یاد دہانی اور مفید عمل",
+      "اسلامی یاد دہانی اور مفید عمل"
+    ],
+    "correct": 0,
+    "meaning": "اسلامی یاد دہانی اور مفید عمل"
+  },
+  {
+    "q": "نماز کے اوقات",
+    "options": [
+      "3",
+      "5",
+      "6"
+    ],
+    "correct": 1,
+    "meaning": "نماز کے اوقات"
+  },
+  {
+    "q": "نماز کے اوقات",
+    "options": [
+      "مغرب",
+      "فجر",
+      "عشاء"
+    ],
+    "correct": 1,
+    "meaning": "اسلامی یاد دہانی اور مفید عمل"
+  },
+  {
+    "q": "نماز کے اوقات",
+    "options": [
+      "مغرب",
+      "ظہر",
+      "عصر"
+    ],
+    "correct": 0,
+    "meaning": "اسلامی یاد دہانی اور مفید عمل"
+  },
+  {
+    "q": "نماز کے اوقات",
+    "options": [
+      "اسلامی یاد دہانی اور مفید عمل",
+      "اسلامی یاد دہانی اور مفید عمل",
+      "اسلامی یاد دہانی اور مفید عمل"
+    ],
+    "correct": 0,
+    "meaning": "اسلامی یاد دہانی اور مفید عمل"
+  },
+  {
+    "q": "نماز کے اوقات",
+    "options": [
+      "اسلامی یاد دہانی اور مفید عمل",
+      "اسلامی یاد دہانی اور مفید عمل",
+      "اسلامی یاد دہانی اور مفید عمل"
+    ],
+    "correct": 0,
+    "meaning": "نماز کے اوقات"
+  },
+  {
+    "q": "اسلامی یاد دہانی اور مفید عمل",
+    "options": [
+      "3",
+      "4",
+      "6"
+    ],
+    "correct": 1,
+    "meaning": "اسلامی یاد دہانی اور مفید عمل"
+  },
+  {
+    "q": "اسلامی یاد دہانی اور مفید عمل",
+    "options": [
+      "اسلامی یاد دہانی اور مفید عمل",
+      "اسلامی یاد دہانی اور مفید عمل",
+      "اسلامی یاد دہانی اور مفید عمل"
+    ],
+    "correct": 0,
+    "meaning": "اللہ کی یاد دل کو سکون دیتی ہے۔"
+  },
+  {
+    "q": "اسلامی یاد دہانی اور مفید عمل",
+    "options": [
+      "ہاں",
+      "نہیں",
+      "اسلامی یاد دہانی اور مفید عمل"
+    ],
+    "correct": 1,
+    "meaning": "اسلامی یاد دہانی اور مفید عمل"
+  },
+  {
+    "q": "اسلامی یاد دہانی اور مفید عمل",
+    "options": [
+      "اللہ کی یاد دل کو سکون دیتی ہے۔",
+      "اسلامی یاد دہانی اور مفید عمل",
+      "اسلامی یاد دہانی اور مفید عمل"
+    ],
+    "correct": 0,
+    "meaning": "اللہ کی یاد دل کو سکون دیتی ہے۔"
+  },
+  {
+    "q": "اسلامی یاد دہانی اور مفید عمل",
+    "options": [
+      "اللہ کی یاد دل کو سکون دیتی ہے۔",
+      "اسلامی یاد دہانی اور مفید عمل",
+      "اسلامی یاد دہانی اور مفید عمل"
+    ],
+    "correct": 0,
+    "meaning": "اللہ کی یاد دل کو سکون دیتی ہے۔"
+  },
+  {
+    "q": "اسلامی یاد دہانی اور مفید عمل",
+    "options": [
+      "اللہ کی یاد دل کو سکون دیتی ہے۔",
+      "اسلامی یاد دہانی اور مفید عمل",
+      "اسلامی یاد دہانی اور مفید عمل"
+    ],
+    "correct": 0,
+    "meaning": "اللہ کی یاد دل کو سکون دیتی ہے۔"
+  },
+  {
+    "q": "اسلامی یاد دہانی اور مفید عمل",
+    "options": [
+      "اسلامی یاد دہانی اور مفید عمل",
+      "اسلامی یاد دہانی اور مفید عمل",
+      "اسلامی یاد دہانی اور مفید عمل"
+    ],
+    "correct": 0,
+    "meaning": "دعا"
+  },
+  {
+    "q": "اسلامی یاد دہانی اور مفید عمل",
+    "options": [
+      "اسلامی یاد دہانی اور مفید عمل",
+      "اسلامی یاد دہانی اور مفید عمل",
+      "اسلامی یاد دہانی اور مفید عمل"
+    ],
+    "correct": 1,
+    "meaning": "اسلامی یاد دہانی اور مفید عمل"
+  },
+  {
+    "q": "اسلامی یاد دہانی اور مفید عمل",
+    "options": [
+      "اسلامی یاد دہانی اور مفید عمل",
+      "اسلامی یاد دہانی اور مفید عمل",
+      "اللہ کی یاد دل کو سکون دیتی ہے۔"
+    ],
+    "correct": 2,
+    "meaning": "اللہ کی یاد دل کو سکون دیتی ہے۔"
+  },
+  {
+    "q": "اللہ کی یاد دل کو سکون دیتی ہے۔",
+    "options": [
+      "ہاں",
+      "نہیں",
+      "اسلامی یاد دہانی اور مفید عمل"
+    ],
+    "correct": 0,
+    "meaning": "اسلامی یاد دہانی اور مفید عمل"
+  },
+  {
+    "q": "اللہ کی یاد دل کو سکون دیتی ہے۔",
+    "options": [
+      "ہاں",
+      "نہیں",
+      "اسلامی یاد دہانی اور مفید عمل"
+    ],
+    "correct": 0,
+    "meaning": "اللہ کی یاد دل کو سکون دیتی ہے۔"
+  },
+  {
+    "q": "اسلامی یاد دہانی اور مفید عمل",
+    "options": [
+      "ہاں",
+      "نہیں",
+      "اسلامی یاد دہانی اور مفید عمل"
+    ],
+    "correct": 1,
+    "meaning": "اسلامی یاد دہانی اور مفید عمل"
+  },
+  {
+    "q": "اسلامی یاد دہانی اور مفید عمل",
+    "options": [
+      "اسلامی یاد دہانی اور مفید عمل",
+      "اسلامی یاد دہانی اور مفید عمل",
+      "اسلامی یاد دہانی اور مفید عمل"
+    ],
+    "correct": 0,
+    "meaning": "اسلامی یاد دہانی اور مفید عمل"
+  },
+  {
+    "q": "اسلامی یاد دہانی اور مفید عمل",
+    "options": [
+      "اسلامی یاد دہانی اور مفید عمل",
+      "اسلامی یاد دہانی اور مفید عمل",
+      "نماز کے اوقات"
+    ],
+    "correct": 0,
+    "meaning": "زبان"
+  },
+  {
+    "q": "اسلامی یاد دہانی اور مفید عمل",
+    "options": [
+      "اسلامی یاد دہانی اور مفید عمل",
+      "اسلامی یاد دہانی اور مفید عمل",
+      "اسلامی یاد دہانی اور مفید عمل"
+    ],
+    "correct": 1,
+    "meaning": "اللہ کی یاد دل کو سکون دیتی ہے۔"
+  },
+  {
+    "q": "اسلامی یاد دہانی اور مفید عمل",
+    "options": [
+      "اسلامی یاد دہانی اور مفید عمل",
+      "اسلامی یاد دہانی اور مفید عمل",
+      "اسلامی یاد دہانی اور مفید عمل"
+    ],
+    "correct": 0,
+    "meaning": "اسلامی یاد دہانی اور مفید عمل"
+  },
+  {
+    "q": "اسلامی یاد دہانی اور مفید عمل",
+    "options": [
+      "اسلامی یاد دہانی اور مفید عمل",
+      "اسلامی یاد دہانی اور مفید عمل",
+      "اسلامی یاد دہانی اور مفید عمل"
+    ],
+    "correct": 0,
+    "meaning": "اللہ کی یاد دل کو سکون دیتی ہے۔"
+  },
+  {
+    "q": "اسلامی یاد دہانی اور مفید عمل",
+    "options": [
+      "اسلامی یاد دہانی اور مفید عمل",
+      "اللہ کی یاد دل کو سکون دیتی ہے۔",
+      "اسلامی یاد دہانی اور مفید عمل"
+    ],
+    "correct": 1,
+    "meaning": "اللہ کی یاد دل کو سکون دیتی ہے۔"
+  },
+  {
+    "q": "اسلامی یاد دہانی اور مفید عمل",
+    "options": [
+      "اسلامی یاد دہانی اور مفید عمل",
+      "اسلامی یاد دہانی اور مفید عمل",
+      "اسلامی یاد دہانی اور مفید عمل"
+    ],
+    "correct": 0,
+    "meaning": "اسلامی یاد دہانی اور مفید عمل"
+  },
+  {
+    "q": "اسلامی یاد دہانی اور مفید عمل",
+    "options": [
+      "اسلامی یاد دہانی اور مفید عمل",
+      "اسلامی یاد دہانی اور مفید عمل",
+      "اسلامی یاد دہانی اور مفید عمل"
+    ],
+    "correct": 0,
+    "meaning": "اسلامی یاد دہانی اور مفید عمل"
+  },
+  {
+    "q": "اسلامی یاد دہانی اور مفید عمل",
+    "options": [
+      "اسلامی یاد دہانی اور مفید عمل",
+      "اسلامی یاد دہانی اور مفید عمل",
+      "اسلامی یاد دہانی اور مفید عمل"
+    ],
+    "correct": 0,
+    "meaning": "اسلامی یاد دہانی اور مفید عمل"
+  },
+  {
+    "q": "اسلامی یاد دہانی اور مفید عمل",
+    "options": [
+      "اسلامی یاد دہانی اور مفید عمل",
+      "اسلامی یاد دہانی اور مفید عمل",
+      "اسلامی یاد دہانی اور مفید عمل"
+    ],
+    "correct": 0,
+    "meaning": "اسلامی یاد دہانی اور مفید عمل"
+  },
+  {
+    "q": "اسلامی یاد دہانی اور مفید عمل",
+    "options": [
+      "اللہ کی یاد دل کو سکون دیتی ہے۔",
+      "اسلامی یاد دہانی اور مفید عمل",
+      "اسلامی یاد دہانی اور مفید عمل"
+    ],
+    "correct": 0,
+    "meaning": "اسلامی یاد دہانی اور مفید عمل"
+  },
+  {
+    "q": "اسلامی یاد دہانی اور مفید عمل",
+    "options": [
+      "اسلامی یاد دہانی اور مفید عمل",
+      "اسلامی یاد دہانی اور مفید عمل",
+      "اسلامی یاد دہانی اور مفید عمل"
+    ],
+    "correct": 0,
+    "meaning": "نماز کے اوقات"
+  },
+  {
+    "q": "اسلامی یاد دہانی اور مفید عمل",
+    "options": [
+      "اللہ کی یاد دل کو سکون دیتی ہے۔",
+      "اسلامی یاد دہانی اور مفید عمل",
+      "اسلامی یاد دہانی اور مفید عمل"
+    ],
+    "correct": 0,
+    "meaning": "اسلامی یاد دہانی اور مفید عمل"
+  },
+  {
+    "q": "اسلامی یاد دہانی اور مفید عمل",
+    "options": [
+      "4",
+      "5",
+      "6"
+    ],
+    "correct": 2,
+    "meaning": "اللہ کی یاد دل کو سکون دیتی ہے۔"
+  },
+  {
+    "q": "اسلامی یاد دہانی اور مفید عمل",
+    "options": [
+      "ہاں",
+      "نہیں",
+      "اسلامی یاد دہانی اور مفید عمل"
+    ],
+    "correct": 0,
+    "meaning": "اسلامی یاد دہانی اور مفید عمل"
+  },
+  {
+    "q": "اسلامی یاد دہانی اور مفید عمل",
+    "options": [
+      "ہاں",
+      "نہیں",
+      "اسلامی یاد دہانی اور مفید عمل"
+    ],
+    "correct": 0,
+    "meaning": "اسلامی یاد دہانی اور مفید عمل"
+  },
+  {
+    "q": "اسلامی یاد دہانی اور مفید عمل",
+    "options": [
+      "ہاں",
+      "نہیں",
+      "اسلامی یاد دہانی اور مفید عمل"
+    ],
+    "correct": 0,
+    "meaning": "اللہ کی یاد دل کو سکون دیتی ہے۔"
+  },
+  {
+    "q": "اسلامی یاد دہانی اور مفید عمل",
+    "options": [
+      "ہاں",
+      "نہیں",
+      "اسلامی یاد دہانی اور مفید عمل"
+    ],
+    "correct": 0,
+    "meaning": "اسلامی یاد دہانی اور مفید عمل"
+  },
+  {
+    "q": "اسلامی یاد دہانی اور مفید عمل",
+    "options": [
+      "اسلامی یاد دہانی اور مفید عمل",
+      "اسلامی یاد دہانی اور مفید عمل",
+      "اسلامی یاد دہانی اور مفید عمل"
+    ],
+    "correct": 0,
+    "meaning": "اللہ کی یاد دل کو سکون دیتی ہے۔"
+  },
+  {
+    "q": "اللہ کی یاد دل کو سکون دیتی ہے۔",
+    "options": [
+      "ہاں",
+      "نہیں",
+      "اسلامی یاد دہانی اور مفید عمل"
+    ],
+    "correct": 0,
+    "meaning": "اسلامی یاد دہانی اور مفید عمل"
+  },
+  {
+    "q": "اسلامی یاد دہانی اور مفید عمل",
+    "options": [
+      "اسلامی یاد دہانی اور مفید عمل",
+      "اسلامی یاد دہانی اور مفید عمل",
+      "اسلامی یاد دہانی اور مفید عمل"
+    ],
+    "correct": 0,
+    "meaning": "اسلامی یاد دہانی اور مفید عمل"
+  },
+  {
+    "q": "اسلامی یاد دہانی اور مفید عمل",
+    "options": [
+      "اسلامی یاد دہانی اور مفید عمل",
+      "اسلامی یاد دہانی اور مفید عمل",
+      "اسلامی یاد دہانی اور مفید عمل"
+    ],
+    "correct": 0,
+    "meaning": "اللہ کی یاد دل کو سکون دیتی ہے۔"
+  },
+  {
+    "q": "اسلامی یاد دہانی اور مفید عمل",
+    "options": [
+      "اسلامی یاد دہانی اور مفید عمل",
+      "اسلامی یاد دہانی اور مفید عمل",
+      "اسلامی یاد دہانی اور مفید عمل"
+    ],
+    "correct": 0,
+    "meaning": "اسلامی یاد دہانی اور مفید عمل"
+  },
+  {
+    "q": "اسلامی یاد دہانی اور مفید عمل",
+    "options": [
+      "اسلامی یاد دہانی اور مفید عمل",
+      "اسلامی یاد دہانی اور مفید عمل",
+      "اسلامی یاد دہانی اور مفید عمل"
+    ],
+    "correct": 0,
+    "meaning": "اسلامی یاد دہانی اور مفید عمل"
+  },
+  {
+    "q": "اسلامی یاد دہانی اور مفید عمل",
+    "options": [
+      "اللہ کی یاد دل کو سکون دیتی ہے۔",
+      "اسلامی یاد دہانی اور مفید عمل",
+      "اسلامی یاد دہانی اور مفید عمل"
+    ],
+    "correct": 0,
+    "meaning": "اللہ کی یاد دل کو سکون دیتی ہے۔"
+  },
+  {
+    "q": "اسلامی یاد دہانی اور مفید عمل",
+    "options": [
+      "نہیں",
+      "ہاں",
+      "اسلامی یاد دہانی اور مفید عمل"
+    ],
+    "correct": 0,
+    "meaning": "اسلامی یاد دہانی اور مفید عمل"
+  },
+  {
+    "q": "اسلامی یاد دہانی اور مفید عمل",
+    "options": [
+      "اسلامی یاد دہانی اور مفید عمل",
+      "اسلامی یاد دہانی اور مفید عمل",
+      "اسلامی یاد دہانی اور مفید عمل"
+    ],
+    "correct": 0,
+    "meaning": "اسلامی یاد دہانی اور مفید عمل"
+  },
+  {
+    "q": "خرابی پیش آئی۔",
+    "options": [
+      "نہیں",
+      "ہاں",
+      "اسلامی یاد دہانی اور مفید عمل"
+    ],
+    "correct": 0,
+    "meaning": "اسلامی یاد دہانی اور مفید عمل"
+  },
+  {
+    "q": "اسلامی یاد دہانی اور مفید عمل",
+    "options": [
+      "اسلامی یاد دہانی اور مفید عمل",
+      "اسلامی یاد دہانی اور مفید عمل",
+      "اسلامی یاد دہانی اور مفید عمل"
+    ],
+    "correct": 0,
+    "meaning": "اسلامی یاد دہانی اور مفید عمل"
+  },
+  {
+    "q": "اسلامی یاد دہانی اور مفید عمل",
+    "options": [
+      "اسلامی یاد دہانی اور مفید عمل",
+      "اسلامی یاد دہانی اور مفید عمل",
+      "اسلامی یاد دہانی اور مفید عمل"
+    ],
+    "correct": 0,
+    "meaning": "اسلامی یاد دہانی اور مفید عمل"
+  },
+  {
+    "q": "اسلامی یاد دہانی اور مفید عمل",
+    "options": [
+      "اسلامی یاد دہانی اور مفید عمل",
+      "اسلامی یاد دہانی اور مفید عمل",
+      "اسلامی یاد دہانی اور مفید عمل"
+    ],
+    "correct": 0,
+    "meaning": "اللہ کی یاد دل کو سکون دیتی ہے۔"
+  },
+  {
+    "q": "اسلامی یاد دہانی اور مفید عمل",
+    "options": [
+      "اسلامی یاد دہانی اور مفید عمل",
+      "اسلامی یاد دہانی اور مفید عمل",
+      "اسلامی یاد دہانی اور مفید عمل"
+    ],
+    "correct": 0,
+    "meaning": "اسلامی یاد دہانی اور مفید عمل"
+  },
+  {
+    "q": "اسلامی یاد دہانی اور مفید عمل",
+    "options": [
+      "اللہ کی یاد دل کو سکون دیتی ہے۔",
+      "اسلامی یاد دہانی اور مفید عمل",
+      "اسلامی یاد دہانی اور مفید عمل"
+    ],
+    "correct": 0,
+    "meaning": "ذکر"
+  },
+  {
+    "q": "اسلامی یاد دہانی اور مفید عمل",
+    "options": [
+      "اللہ کی یاد دل کو سکون دیتی ہے۔",
+      "اسلامی یاد دہانی اور مفید عمل",
+      "اسلامی یاد دہانی اور مفید عمل"
+    ],
+    "correct": 0,
+    "meaning": "اسلامی یاد دہانی اور مفید عمل"
+  },
+  {
+    "q": "اسلامی یاد دہانی اور مفید عمل",
+    "options": [
+      "نہیں",
+      "ہاں",
+      "اسلامی یاد دہانی اور مفید عمل"
+    ],
+    "correct": 0,
+    "meaning": "اسلامی یاد دہانی اور مفید عمل"
+  },
+  {
+    "q": "اسلامی یاد دہانی اور مفید عمل",
+    "options": [
+      "اسلامی یاد دہانی اور مفید عمل",
+      "اسلامی یاد دہانی اور مفید عمل",
+      "اسلامی یاد دہانی اور مفید عمل"
+    ],
+    "correct": 0,
+    "meaning": "اسلامی یاد دہانی اور مفید عمل"
+  },
+  {
+    "q": "اسلامی یاد دہانی اور مفید عمل",
+    "options": [
+      "اسلامی یاد دہانی اور مفید عمل",
+      "اسلامی یاد دہانی اور مفید عمل",
+      "اسلامی یاد دہانی اور مفید عمل"
+    ],
+    "correct": 0,
+    "meaning": "اسلامی یاد دہانی اور مفید عمل"
+  },
+  {
+    "q": "اسلامی یاد دہانی اور مفید عمل",
+    "options": [
+      "نہیں",
+      "ہاں",
+      "اسلامی یاد دہانی اور مفید عمل"
+    ],
+    "correct": 0,
+    "meaning": "اسلامی یاد دہانی اور مفید عمل"
+  },
+  {
+    "q": "خرابی پیش آئی۔",
+    "options": [
+      "اسلامی یاد دہانی اور مفید عمل",
+      "اسلامی یاد دہانی اور مفید عمل",
+      "اسلامی یاد دہانی اور مفید عمل"
+    ],
+    "correct": 0,
+    "meaning": "خرابی پیش آئی۔"
+  },
+  {
+    "q": "اسلامی یاد دہانی اور مفید عمل",
+    "options": [
+      "اللہ کی یاد دل کو سکون دیتی ہے۔",
+      "اسلامی یاد دہانی اور مفید عمل",
+      "اسلامی یاد دہانی اور مفید عمل"
+    ],
+    "correct": 0,
+    "meaning": "اللہ کی یاد دل کو سکون دیتی ہے۔"
+  },
+  {
+    "q": "اسلامی یاد دہانی اور مفید عمل",
+    "options": [
+      "اسلامی یاد دہانی اور مفید عمل",
+      "اسلامی یاد دہانی اور مفید عمل",
+      "اسلامی یاد دہانی اور مفید عمل"
+    ],
+    "correct": 0,
+    "meaning": "اسلامی یاد دہانی اور مفید عمل"
+  },
+  {
+    "q": "اسلامی یاد دہانی اور مفید عمل",
+    "options": [
+      "نہیں",
+      "ہاں",
+      "اسلامی یاد دہانی اور مفید عمل"
+    ],
+    "correct": 0,
+    "meaning": "اسلامی یاد دہانی اور مفید عمل"
+  },
+  {
+    "q": "اسلامی یاد دہانی اور مفید عمل",
+    "options": [
+      "اسلامی یاد دہانی اور مفید عمل",
+      "اسلامی یاد دہانی اور مفید عمل",
+      "اسلامی یاد دہانی اور مفید عمل"
+    ],
+    "correct": 0,
+    "meaning": "اسلامی یاد دہانی اور مفید عمل"
+  },
+  {
+    "q": "اسلامی یاد دہانی اور مفید عمل",
+    "options": [
+      "اسلامی یاد دہانی اور مفید عمل",
+      "اسلامی یاد دہانی اور مفید عمل",
+      "اسلامی یاد دہانی اور مفید عمل"
+    ],
+    "correct": 0,
+    "meaning": "اسلامی یاد دہانی اور مفید عمل"
+  },
+  {
+    "q": "اسلامی یاد دہانی اور مفید عمل",
+    "options": [
+      "ہاں",
+      "نہیں",
+      "اسلامی یاد دہانی اور مفید عمل"
+    ],
+    "correct": 0,
+    "meaning": "اسلامی یاد دہانی اور مفید عمل"
+  },
+  {
+    "q": "اسلامی یاد دہانی اور مفید عمل",
+    "options": [
+      "اسلامی یاد دہانی اور مفید عمل",
+      "اسلامی یاد دہانی اور مفید عمل",
+      "اسلامی یاد دہانی اور مفید عمل"
+    ],
+    "correct": 0,
+    "meaning": "اللہ کی یاد دل کو سکون دیتی ہے۔"
+  },
+  {
+    "q": "اسلامی یاد دہانی اور مفید عمل",
+    "options": [
+      "اسلامی یاد دہانی اور مفید عمل",
+      "اسلامی یاد دہانی اور مفید عمل",
+      "اسلامی یاد دہانی اور مفید عمل"
+    ],
+    "correct": 0,
+    "meaning": "اللہ کی یاد دل کو سکون دیتی ہے۔"
+  },
+  {
+    "q": "اسلامی یاد دہانی اور مفید عمل",
+    "options": [
+      "اسلامی یاد دہانی اور مفید عمل",
+      "اسلامی یاد دہانی اور مفید عمل",
+      "اسلامی یاد دہانی اور مفید عمل"
+    ],
+    "correct": 0,
+    "meaning": "اسلامی یاد دہانی اور مفید عمل"
+  },
+  {
+    "q": "اسلامی یاد دہانی اور مفید عمل",
+    "options": [
+      "اسلامی یاد دہانی اور مفید عمل",
+      "اسلامی یاد دہانی اور مفید عمل",
+      "اسلامی یاد دہانی اور مفید عمل"
+    ],
+    "correct": 0,
+    "meaning": "اللہ کی یاد دل کو سکون دیتی ہے۔"
+  },
+  {
+    "q": "اسلامی یاد دہانی اور مفید عمل",
+    "options": [
+      "اللہ کی یاد دل کو سکون دیتی ہے۔",
+      "اسلامی یاد دہانی اور مفید عمل",
+      "اسلامی یاد دہانی اور مفید عمل"
+    ],
+    "correct": 0,
+    "meaning": "اسلامی یاد دہانی اور مفید عمل"
+  },
+  {
+    "q": "اسلامی یاد دہانی اور مفید عمل",
+    "options": [
+      "اسلامی یاد دہانی اور مفید عمل",
+      "اسلامی یاد دہانی اور مفید عمل",
+      "اسلامی یاد دہانی اور مفید عمل"
+    ],
+    "correct": 0,
+    "meaning": "اسلامی یاد دہانی اور مفید عمل"
+  },
+  {
+    "q": "اسلامی یاد دہانی اور مفید عمل",
+    "options": [
+      "اسلامی یاد دہانی اور مفید عمل",
+      "اسلامی یاد دہانی اور مفید عمل",
+      "اسلامی یاد دہانی اور مفید عمل"
+    ],
+    "correct": 0,
+    "meaning": "اللہ کی یاد دل کو سکون دیتی ہے۔"
+  },
+  {
+    "q": "اسلامی یاد دہانی اور مفید عمل",
+    "options": [
+      "اسلامی یاد دہانی اور مفید عمل",
+      "اسلامی یاد دہانی اور مفید عمل",
+      "اسلامی یاد دہانی اور مفید عمل"
+    ],
+    "correct": 0,
+    "meaning": "اسلامی یاد دہانی اور مفید عمل"
+  },
+  {
+    "q": "اسلامی یاد دہانی اور مفید عمل",
+    "options": [
+      "اسلامی یاد دہانی اور مفید عمل",
+      "اسلامی یاد دہانی اور مفید عمل",
+      "اسلامی یاد دہانی اور مفید عمل"
+    ],
+    "correct": 0,
+    "meaning": "اسلامی یاد دہانی اور مفید عمل"
+  },
+  {
+    "q": "اسلامی یاد دہانی اور مفید عمل",
+    "options": [
+      "اسلامی یاد دہانی اور مفید عمل",
+      "نماز کے اوقات",
+      "اسلامی یاد دہانی اور مفید عمل"
+    ],
+    "correct": 0,
+    "meaning": "ذکر"
+  },
+  {
+    "q": "اسلامی یاد دہانی اور مفید عمل",
+    "options": [
+      "اسلامی یاد دہانی اور مفید عمل",
+      "اسلامی یاد دہانی اور مفید عمل",
+      "اسلامی یاد دہانی اور مفید عمل"
+    ],
+    "correct": 0,
+    "meaning": "اللہ کی یاد دل کو سکون دیتی ہے۔"
+  },
+  {
+    "q": "اسلامی یاد دہانی اور مفید عمل",
+    "options": [
+      "اسلامی یاد دہانی اور مفید عمل",
+      "اسلامی یاد دہانی اور مفید عمل",
+      "اسلامی یاد دہانی اور مفید عمل"
+    ],
+    "correct": 0,
+    "meaning": "اسلامی یاد دہانی اور مفید عمل"
+  },
+  {
+    "q": "اسلامی یاد دہانی اور مفید عمل",
+    "options": [
+      "اسلامی یاد دہانی اور مفید عمل",
+      "اسلامی یاد دہانی اور مفید عمل",
+      "اسلامی یاد دہانی اور مفید عمل"
+    ],
+    "correct": 0,
+    "meaning": "اسلامی یاد دہانی اور مفید عمل"
+  },
+  {
+    "q": "اسلامی یاد دہانی اور مفید عمل",
+    "options": [
+      "نہیں",
+      "ہاں",
+      "اسلامی یاد دہانی اور مفید عمل"
+    ],
+    "correct": 0,
+    "meaning": "اسلامی یاد دہانی اور مفید عمل"
+  },
+  {
+    "q": "اسلامی یاد دہانی اور مفید عمل",
+    "options": [
+      "اسلامی یاد دہانی اور مفید عمل",
+      "اسلامی یاد دہانی اور مفید عمل",
+      "اسلامی یاد دہانی اور مفید عمل"
+    ],
+    "correct": 0,
+    "meaning": "اسلامی یاد دہانی اور مفید عمل"
+  },
+  {
+    "q": "اسلامی یاد دہانی اور مفید عمل",
+    "options": [
+      "اسلامی یاد دہانی اور مفید عمل",
+      "اسلامی یاد دہانی اور مفید عمل",
+      "اسلامی یاد دہانی اور مفید عمل"
+    ],
+    "correct": 0,
+    "meaning": "اسلامی یاد دہانی اور مفید عمل"
+  },
+  {
+    "q": "اسلامی یاد دہانی اور مفید عمل",
+    "options": [
+      "اسلامی یاد دہانی اور مفید عمل",
+      "اسلامی یاد دہانی اور مفید عمل",
+      "اسلامی یاد دہانی اور مفید عمل"
+    ],
+    "correct": 0,
+    "meaning": "اسلامی یاد دہانی اور مفید عمل"
+  },
+  {
+    "q": "اسلامی یاد دہانی اور مفید عمل",
+    "options": [
+      "نہیں",
+      "ہاں",
+      "اسلامی یاد دہانی اور مفید عمل"
+    ],
+    "correct": 0,
+    "meaning": "اسلامی یاد دہانی اور مفید عمل"
+  },
+  {
+    "q": "اسلامی یاد دہانی اور مفید عمل",
+    "options": [
+      "اسلامی یاد دہانی اور مفید عمل",
+      "اسلامی یاد دہانی اور مفید عمل",
+      "اسلامی یاد دہانی اور مفید عمل"
+    ],
+    "correct": 0,
+    "meaning": "اسلامی یاد دہانی اور مفید عمل"
+  },
+  {
+    "q": "اسلامی یاد دہانی اور مفید عمل",
+    "options": [
+      "نہیں",
+      "ہاں",
+      "اسلامی یاد دہانی اور مفید عمل"
+    ],
+    "correct": 0,
+    "meaning": "اسلامی یاد دہانی اور مفید عمل"
+  },
+  {
+    "q": "اسلامی یاد دہانی اور مفید عمل",
+    "options": [
+      "اسلامی یاد دہانی اور مفید عمل",
+      "اسلامی یاد دہانی اور مفید عمل",
+      "اسلامی یاد دہانی اور مفید عمل"
+    ],
+    "correct": 0,
+    "meaning": "اسلامی یاد دہانی اور مفید عمل"
+  },
+  {
+    "q": "اسلامی یاد دہانی اور مفید عمل",
+    "options": [
+      "اسلامی یاد دہانی اور مفید عمل",
+      "اسلامی یاد دہانی اور مفید عمل",
+      "اسلامی یاد دہانی اور مفید عمل"
+    ],
+    "correct": 0,
+    "meaning": "اللہ کی یاد دل کو سکون دیتی ہے۔"
+  },
+  {
+    "q": "اسلامی یاد دہانی اور مفید عمل",
+    "options": [
+      "ہاں",
+      "نہیں",
+      "اسلامی یاد دہانی اور مفید عمل"
+    ],
+    "correct": 0,
+    "meaning": "اسلامی یاد دہانی اور مفید عمل"
+  },
+  {
+    "q": "اسلامی یاد دہانی اور مفید عمل",
+    "options": [
+      "اسلامی یاد دہانی اور مفید عمل",
+      "اسلامی یاد دہانی اور مفید عمل",
+      "اسلامی یاد دہانی اور مفید عمل"
+    ],
+    "correct": 0,
+    "meaning": "اسلامی یاد دہانی اور مفید عمل"
+  },
+  {
+    "q": "زبان",
+    "options": [
+      "اسلامی یاد دہانی اور مفید عمل",
+      "اسلامی یاد دہانی اور مفید عمل",
+      "اسلامی یاد دہانی اور مفید عمل"
+    ],
+    "correct": 0,
+    "meaning": "زبان"
+  },
+  {
+    "q": "اسلامی یاد دہانی اور مفید عمل",
+    "options": [
+      "اسلامی یاد دہانی اور مفید عمل",
+      "اسلامی یاد دہانی اور مفید عمل",
+      "اسلامی یاد دہانی اور مفید عمل"
+    ],
+    "correct": 0,
+    "meaning": "اسلامی یاد دہانی اور مفید عمل"
+  },
+  {
+    "q": "اسلامی یاد دہانی اور مفید عمل",
+    "options": [
+      "اسلامی یاد دہانی اور مفید عمل",
+      "اسلامی یاد دہانی اور مفید عمل",
+      "اسلامی یاد دہانی اور مفید عمل"
+    ],
+    "correct": 0,
+    "meaning": "اسلامی یاد دہانی اور مفید عمل"
+  },
+  {
+    "q": "اسلامی یاد دہانی اور مفید عمل",
+    "options": [
+      "اسلامی یاد دہانی اور مفید عمل",
+      "اسلامی یاد دہانی اور مفید عمل",
+      "اسلامی یاد دہانی اور مفید عمل"
+    ],
+    "correct": 0,
+    "meaning": "اسلامی یاد دہانی اور مفید عمل"
+  },
+  {
+    "q": "آج کا مختصر سوال کیا ہے؟",
+    "options": [
+      "اسلامی یاد دہانی اور مفید عمل",
+      "اسلامی یاد دہانی اور مفید عمل",
+      "اسلامی یاد دہانی اور مفید عمل"
+    ],
+    "correct": 0,
+    "meaning": "اسلامی یاد دہانی اور مفید عمل"
+  },
+  {
+    "q": "اسلامی یاد دہانی اور مفید عمل",
+    "options": [
+      "اسلامی یاد دہانی اور مفید عمل",
+      "اسلامی یاد دہانی اور مفید عمل",
+      "اسلامی یاد دہانی اور مفید عمل"
+    ],
+    "correct": 0,
+    "meaning": "اللہ کی یاد دل کو سکون دیتی ہے۔"
+  },
+  {
+    "q": "اسلامی یاد دہانی اور مفید عمل",
+    "options": [
+      "اسلامی یاد دہانی اور مفید عمل",
+      "اسلامی یاد دہانی اور مفید عمل",
+      "اسلامی یاد دہانی اور مفید عمل"
+    ],
+    "correct": 0,
+    "meaning": "اسلامی یاد دہانی اور مفید عمل"
+  },
+  {
+    "q": "اسلامی یاد دہانی اور مفید عمل",
+    "options": [
+      "اسلامی یاد دہانی اور مفید عمل",
+      "اسلامی یاد دہانی اور مفید عمل",
+      "اسلامی یاد دہانی اور مفید عمل"
+    ],
+    "correct": 0,
+    "meaning": "اسلامی یاد دہانی اور مفید عمل"
+  },
+  {
+    "q": "اسلامی یاد دہانی اور مفید عمل",
+    "options": [
+      "اللہ کی یاد دل کو سکون دیتی ہے۔",
+      "اسلامی یاد دہانی اور مفید عمل",
+      "نہیں"
+    ],
+    "correct": 0,
+    "meaning": "اللہ کی یاد دل کو سکون دیتی ہے۔"
+  },
+  {
+    "q": "اسلامی یاد دہانی اور مفید عمل",
+    "options": [
+      "اسلامی یاد دہانی اور مفید عمل",
+      "اسلامی یاد دہانی اور مفید عمل",
+      "اسلامی یاد دہانی اور مفید عمل"
+    ],
+    "correct": 0,
+    "meaning": "اسلامی یاد دہانی اور مفید عمل"
+  },
+  {
+    "q": "اسلامی یاد دہانی اور مفید عمل",
+    "options": [
+      "اسلامی یاد دہانی اور مفید عمل",
+      "اسلامی یاد دہانی اور مفید عمل",
+      "اسلامی یاد دہانی اور مفید عمل"
+    ],
+    "correct": 0,
+    "meaning": "اسلامی یاد دہانی اور مفید عمل"
+  },
+  {
+    "q": "نماز کے اوقات",
+    "options": [
+      "اسلامی یاد دہانی اور مفید عمل",
+      "اسلامی یاد دہانی اور مفید عمل",
+      "اسلامی یاد دہانی اور مفید عمل"
+    ],
+    "correct": 0,
+    "meaning": "نماز کے اوقات"
+  },
+  {
+    "q": "اسلامی یاد دہانی اور مفید عمل",
+    "options": [
+      "اسلامی یاد دہانی اور مفید عمل",
+      "اسلامی یاد دہانی اور مفید عمل",
+      "اسلامی یاد دہانی اور مفید عمل"
+    ],
+    "correct": 0,
+    "meaning": "اسلامی یاد دہانی اور مفید عمل"
+  },
+  {
+    "q": "اسلامی یاد دہانی اور مفید عمل",
+    "options": [
+      "اسلامی یاد دہانی اور مفید عمل",
+      "اسلامی یاد دہانی اور مفید عمل",
+      "اسلامی یاد دہانی اور مفید عمل"
+    ],
+    "correct": 0,
+    "meaning": "اسلامی یاد دہانی اور مفید عمل"
+  },
+  {
+    "q": "اسلامی یاد دہانی اور مفید عمل",
+    "options": [
+      "اسلامی یاد دہانی اور مفید عمل",
+      "اسلامی یاد دہانی اور مفید عمل",
+      "اسلامی یاد دہانی اور مفید عمل"
+    ],
+    "correct": 0,
+    "meaning": "اسلامی یاد دہانی اور مفید عمل"
+  },
+  {
+    "q": "نماز کے اوقات",
+    "options": [
+      "اسلامی یاد دہانی اور مفید عمل",
+      "اسلامی یاد دہانی اور مفید عمل",
+      "اسلامی یاد دہانی اور مفید عمل"
+    ],
+    "correct": 0,
+    "meaning": "نماز کے اوقات"
+  },
+  {
+    "q": "نماز کے اوقات",
+    "options": [
+      "نہیں",
+      "ہاں",
+      "اسلامی یاد دہانی اور مفید عمل"
+    ],
+    "correct": 0,
+    "meaning": "نماز کے اوقات"
+  },
+  {
+    "q": "خرابی پیش آئی۔",
+    "options": [
+      "اسلامی یاد دہانی اور مفید عمل",
+      "اسلامی یاد دہانی اور مفید عمل",
+      "اسلامی یاد دہانی اور مفید عمل"
+    ],
+    "correct": 0,
+    "meaning": "اسلامی یاد دہانی اور مفید عمل"
+  },
+  {
+    "q": "اسلامی یاد دہانی اور مفید عمل",
+    "options": [
+      "اسلامی یاد دہانی اور مفید عمل",
+      "اسلامی یاد دہانی اور مفید عمل",
+      "اسلامی یاد دہانی اور مفید عمل"
+    ],
+    "correct": 0,
+    "meaning": "اسلامی یاد دہانی اور مفید عمل"
+  },
+  {
+    "q": "اسلامی یاد دہانی اور مفید عمل",
+    "options": [
+      "اسلامی یاد دہانی اور مفید عمل",
+      "اسلامی یاد دہانی اور مفید عمل",
+      "اسلامی یاد دہانی اور مفید عمل"
+    ],
+    "correct": 0,
+    "meaning": "اسلامی یاد دہانی اور مفید عمل"
+  },
+  {
+    "q": "اسلامی یاد دہانی اور مفید عمل",
+    "options": [
+      "اسلامی یاد دہانی اور مفید عمل",
+      "اسلامی یاد دہانی اور مفید عمل",
+      "اسلامی یاد دہانی اور مفید عمل"
+    ],
+    "correct": 0,
+    "meaning": "اسلامی یاد دہانی اور مفید عمل"
+  },
+  {
+    "q": "اسلامی یاد دہانی اور مفید عمل",
+    "options": [
+      "نہیں",
+      "ہاں",
+      "اسلامی یاد دہانی اور مفید عمل"
+    ],
+    "correct": 0,
+    "meaning": "اسلامی یاد دہانی اور مفید عمل"
+  },
+  {
+    "q": "اسلامی یاد دہانی اور مفید عمل",
+    "options": [
+      "اسلامی یاد دہانی اور مفید عمل",
+      "اسلامی یاد دہانی اور مفید عمل",
+      "اسلامی یاد دہانی اور مفید عمل"
+    ],
+    "correct": 0,
+    "meaning": "اسلامی یاد دہانی اور مفید عمل"
+  },
+  {
+    "q": "اسلامی یاد دہانی اور مفید عمل",
+    "options": [
+      "اسلامی یاد دہانی اور مفید عمل",
+      "اسلامی یاد دہانی اور مفید عمل",
+      "اسلامی یاد دہانی اور مفید عمل"
+    ],
+    "correct": 0,
+    "meaning": "اسلامی یاد دہانی اور مفید عمل"
+  },
+  {
+    "q": "اسلامی یاد دہانی اور مفید عمل",
+    "options": [
+      "آج کا مضمون",
+      "اسلامی یاد دہانی اور مفید عمل",
+      "اسلامی یاد دہانی اور مفید عمل"
+    ],
+    "correct": 0,
+    "meaning": "اللہ کی یاد دل کو سکون دیتی ہے۔"
+  },
+  {
+    "q": "اسلامی یاد دہانی اور مفید عمل",
+    "options": [
+      "اللہ کی یاد دل کو سکون دیتی ہے۔",
+      "اسلامی یاد دہانی اور مفید عمل",
+      "اسلامی یاد دہانی اور مفید عمل"
+    ],
+    "correct": 0,
+    "meaning": "اسلامی یاد دہانی اور مفید عمل"
+  },
+  {
+    "q": "اللہ کی یاد دل کو سکون دیتی ہے۔",
+    "options": [
+      "نہیں",
+      "ہاں",
+      "اسلامی یاد دہانی اور مفید عمل"
+    ],
+    "correct": 0,
+    "meaning": "اللہ کی یاد دل کو سکون دیتی ہے۔"
+  },
+  {
+    "q": "اللہ کی یاد دل کو سکون دیتی ہے۔",
+    "options": [
+      "اسلامی یاد دہانی اور مفید عمل",
+      "اسلامی یاد دہانی اور مفید عمل",
+      "اسلامی یاد دہانی اور مفید عمل"
+    ],
+    "correct": 0,
+    "meaning": "اسلامی یاد دہانی اور مفید عمل"
+  },
+  {
+    "q": "اللہ کی یاد دل کو سکون دیتی ہے۔",
+    "options": [
+      "اسلامی یاد دہانی اور مفید عمل",
+      "آج کا مضمون",
+      "اسلامی یاد دہانی اور مفید عمل"
+    ],
+    "correct": 0,
+    "meaning": "اسلامی یاد دہانی اور مفید عمل"
+  },
+  {
+    "q": "اللہ کی یاد دل کو سکون دیتی ہے۔",
+    "options": [
+      "اسلامی یاد دہانی اور مفید عمل",
+      "اسلامی یاد دہانی اور مفید عمل",
+      "اسلامی یاد دہانی اور مفید عمل"
+    ],
+    "correct": 0,
+    "meaning": "اسلامی یاد دہانی اور مفید عمل"
+  },
+  {
+    "q": "اسلامی یاد دہانی اور مفید عمل",
+    "options": [
+      "ذکر",
+      "اسلامی یاد دہانی اور مفید عمل",
+      "اسلامی یاد دہانی اور مفید عمل"
+    ],
+    "correct": 0,
+    "meaning": "اللہ کی یاد دل کو سکون دیتی ہے۔"
+  },
+  {
+    "q": "ذکر",
+    "options": [
+      "اسلامی یاد دہانی اور مفید عمل",
+      "اسلامی یاد دہانی اور مفید عمل",
+      "اسلامی یاد دہانی اور مفید عمل"
+    ],
+    "correct": 0,
+    "meaning": "اسلامی یاد دہانی اور مفید عمل"
+  },
+  {
+    "q": "اللہ کی یاد دل کو سکون دیتی ہے۔",
+    "options": [
+      "اللہ کی یاد دل کو سکون دیتی ہے۔",
+      "اسلامی یاد دہانی اور مفید عمل",
+      "اسلامی یاد دہانی اور مفید عمل"
+    ],
+    "correct": 0,
+    "meaning": "اللہ کی یاد دل کو سکون دیتی ہے۔"
+  },
+  {
+    "q": "اللہ کی یاد دل کو سکون دیتی ہے۔",
+    "options": [
+      "اللہ کی یاد دل کو سکون دیتی ہے۔",
+      "اسلامی یاد دہانی اور مفید عمل",
+      "اسلامی یاد دہانی اور مفید عمل"
+    ],
+    "correct": 0,
+    "meaning": "اللہ کی یاد دل کو سکون دیتی ہے۔"
+  },
+  {
+    "q": "اسلامی یاد دہانی اور مفید عمل",
+    "options": [
+      "اللہ کی یاد دل کو سکون دیتی ہے۔",
+      "اسلامی یاد دہانی اور مفید عمل",
+      "اسلامی یاد دہانی اور مفید عمل"
+    ],
+    "correct": 0,
+    "meaning": "اسلامی یاد دہانی اور مفید عمل"
+  },
+  {
+    "q": "اسلامی یاد دہانی اور مفید عمل",
+    "options": [
+      "اسلامی یاد دہانی اور مفید عمل",
+      "اسلامی یاد دہانی اور مفید عمل",
+      "اسلامی یاد دہانی اور مفید عمل"
+    ],
+    "correct": 0,
+    "meaning": "اسلامی یاد دہانی اور مفید عمل"
+  },
+  {
+    "q": "اسلامی یاد دہانی اور مفید عمل",
+    "options": [
+      "اسلامی یاد دہانی اور مفید عمل",
+      "اسلامی یاد دہانی اور مفید عمل",
+      "اسلامی یاد دہانی اور مفید عمل"
+    ],
+    "correct": 0,
+    "meaning": "اسلامی یاد دہانی اور مفید عمل"
+  },
+  {
+    "q": "اسلامی یاد دہانی اور مفید عمل",
+    "options": [
+      "اسلامی یاد دہانی اور مفید عمل",
+      "اسلامی یاد دہانی اور مفید عمل",
+      "اسلامی یاد دہانی اور مفید عمل"
+    ],
+    "correct": 0,
+    "meaning": "اسلامی یاد دہانی اور مفید عمل"
+  },
+  {
+    "q": "اسلامی یاد دہانی اور مفید عمل",
+    "options": [
+      "نہیں",
+      "ہاں",
+      "اسلامی یاد دہانی اور مفید عمل"
+    ],
+    "correct": 0,
+    "meaning": "اسلامی یاد دہانی اور مفید عمل"
+  },
+  {
+    "q": "اسلامی یاد دہانی اور مفید عمل",
+    "options": [
+      "نہیں",
+      "ہاں",
+      "اسلامی یاد دہانی اور مفید عمل"
+    ],
+    "correct": 0,
+    "meaning": "اسلامی یاد دہانی اور مفید عمل"
+  },
+  {
+    "q": "اسلامی یاد دہانی اور مفید عمل",
+    "options": [
+      "اسلامی یاد دہانی اور مفید عمل",
+      "اسلامی یاد دہانی اور مفید عمل",
+      "اسلامی یاد دہانی اور مفید عمل"
+    ],
+    "correct": 0,
+    "meaning": "اسلامی یاد دہانی اور مفید عمل"
+  },
+  {
+    "q": "اسلامی یاد دہانی اور مفید عمل",
+    "options": [
+      "اسلامی یاد دہانی اور مفید عمل",
+      "اسلامی یاد دہانی اور مفید عمل",
+      "اسلامی یاد دہانی اور مفید عمل"
+    ],
+    "correct": 0,
+    "meaning": "اسلامی یاد دہانی اور مفید عمل"
+  },
+  {
+    "q": "اسلامی یاد دہانی اور مفید عمل",
+    "options": [
+      "اسلامی یاد دہانی اور مفید عمل",
+      "اسلامی یاد دہانی اور مفید عمل",
+      "اسلامی یاد دہانی اور مفید عمل"
+    ],
+    "correct": 0,
+    "meaning": "اسلامی یاد دہانی اور مفید عمل"
+  },
+  {
+    "q": "اسلامی یاد دہانی اور مفید عمل",
+    "options": [
+      "اسلامی یاد دہانی اور مفید عمل",
+      "اسلامی یاد دہانی اور مفید عمل",
+      "اسلامی یاد دہانی اور مفید عمل"
+    ],
+    "correct": 0,
+    "meaning": "اللہ کی یاد دل کو سکون دیتی ہے۔"
+  },
+  {
+    "q": "اسلامی یاد دہانی اور مفید عمل",
+    "options": [
+      "اسلامی یاد دہانی اور مفید عمل",
+      "اسلامی یاد دہانی اور مفید عمل",
+      "اسلامی یاد دہانی اور مفید عمل"
+    ],
+    "correct": 0,
+    "meaning": "اسلامی یاد دہانی اور مفید عمل"
+  },
+  {
+    "q": "اسلامی یاد دہانی اور مفید عمل",
+    "options": [
+      "اسلامی یاد دہانی اور مفید عمل",
+      "اسلامی یاد دہانی اور مفید عمل",
+      "اسلامی یاد دہانی اور مفید عمل"
+    ],
+    "correct": 0,
+    "meaning": "اسلامی یاد دہانی اور مفید عمل"
+  },
+  {
+    "q": "اسلامی یاد دہانی اور مفید عمل",
+    "options": [
+      "اسلامی یاد دہانی اور مفید عمل",
+      "اسلامی یاد دہانی اور مفید عمل",
+      "اسلامی یاد دہانی اور مفید عمل"
+    ],
+    "correct": 0,
+    "meaning": "اسلامی یاد دہانی اور مفید عمل"
+  },
+  {
+    "q": "اسلامی یاد دہانی اور مفید عمل",
+    "options": [
+      "نہیں",
+      "ہاں",
+      "اسلامی یاد دہانی اور مفید عمل"
+    ],
+    "correct": 0,
+    "meaning": "اسلامی یاد دہانی اور مفید عمل"
+  },
+  {
+    "q": "اسلامی یاد دہانی اور مفید عمل",
+    "options": [
+      "اسلامی یاد دہانی اور مفید عمل",
+      "اسلامی یاد دہانی اور مفید عمل",
+      "اسلامی یاد دہانی اور مفید عمل"
+    ],
+    "correct": 0,
+    "meaning": "اسلامی یاد دہانی اور مفید عمل"
+  },
+  {
+    "q": "اسلامی یاد دہانی اور مفید عمل",
+    "options": [
+      "اسلامی یاد دہانی اور مفید عمل",
+      "اسلامی یاد دہانی اور مفید عمل",
+      "اسلامی یاد دہانی اور مفید عمل"
+    ],
+    "correct": 0,
+    "meaning": "اسلامی یاد دہانی اور مفید عمل"
+  },
+  {
+    "q": "اسلامی یاد دہانی اور مفید عمل",
+    "options": [
+      "اسلامی یاد دہانی اور مفید عمل",
+      "اسلامی یاد دہانی اور مفید عمل",
+      "اسلامی یاد دہانی اور مفید عمل"
+    ],
+    "correct": 0,
+    "meaning": "اسلامی یاد دہانی اور مفید عمل"
+  },
+  {
+    "q": "اسلامی یاد دہانی اور مفید عمل",
+    "options": [
+      "اسلامی یاد دہانی اور مفید عمل",
+      "اسلامی یاد دہانی اور مفید عمل",
+      "اسلامی یاد دہانی اور مفید عمل"
+    ],
+    "correct": 0,
+    "meaning": "اسلامی یاد دہانی اور مفید عمل"
+  },
+  {
+    "q": "اسلامی یاد دہانی اور مفید عمل",
+    "options": [
+      "اسلامی یاد دہانی اور مفید عمل",
+      "اسلامی یاد دہانی اور مفید عمل",
+      "اسلامی یاد دہانی اور مفید عمل"
+    ],
+    "correct": 0,
+    "meaning": "اسلامی یاد دہانی اور مفید عمل"
+  },
+  {
+    "q": "اللہ کی یاد دل کو سکون دیتی ہے۔",
+    "options": [
+      "اسلامی یاد دہانی اور مفید عمل",
+      "اسلامی یاد دہانی اور مفید عمل",
+      "اسلامی یاد دہانی اور مفید عمل"
+    ],
+    "correct": 0,
+    "meaning": "اسلامی یاد دہانی اور مفید عمل"
+  },
+  {
+    "q": "اسلامی یاد دہانی اور مفید عمل",
+    "options": [
+      "اسلامی یاد دہانی اور مفید عمل",
+      "اسلامی یاد دہانی اور مفید عمل",
+      "اسلامی یاد دہانی اور مفید عمل"
+    ],
+    "correct": 0,
+    "meaning": "اللہ کی یاد دل کو سکون دیتی ہے۔"
+  },
+  {
+    "q": "دعا",
+    "options": [
+      "ہاں",
+      "نہیں",
+      "اسلامی یاد دہانی اور مفید عمل"
+    ],
+    "correct": 0,
+    "meaning": "اسلامی یاد دہانی اور مفید عمل"
+  },
+  {
+    "q": "زبان",
+    "options": [
+      "ہاں",
+      "نہیں",
+      "اسلامی یاد دہانی اور مفید عمل"
+    ],
+    "correct": 0,
+    "meaning": "اللہ کی یاد دل کو سکون دیتی ہے۔"
+  },
+  {
+    "q": "اسلامی یاد دہانی اور مفید عمل",
+    "options": [
+      "اللہ کی یاد دل کو سکون دیتی ہے۔",
+      "اسلامی یاد دہانی اور مفید عمل",
+      "اسلامی یاد دہانی اور مفید عمل"
+    ],
+    "correct": 0,
+    "meaning": "اللہ کی یاد دل کو سکون دیتی ہے۔"
+  },
+  {
+    "q": "اسلامی یاد دہانی اور مفید عمل",
+    "options": [
+      "اسلامی یاد دہانی اور مفید عمل",
+      "اسلامی یاد دہانی اور مفید عمل",
+      "اسلامی یاد دہانی اور مفید عمل"
+    ],
+    "correct": 0,
+    "meaning": "اسلامی یاد دہانی اور مفید عمل"
+  },
+  {
+    "q": "اسلامی یاد دہانی اور مفید عمل",
+    "options": [
+      "اللہ کی یاد دل کو سکون دیتی ہے۔",
+      "اسلامی یاد دہانی اور مفید عمل",
+      "اسلامی یاد دہانی اور مفید عمل"
+    ],
+    "correct": 0,
+    "meaning": "اللہ کی یاد دل کو سکون دیتی ہے۔"
+  },
+  {
+    "q": "اسلامی یاد دہانی اور مفید عمل",
+    "options": [
+      "اسلامی یاد دہانی اور مفید عمل",
+      "اسلامی یاد دہانی اور مفید عمل",
+      "اسلامی یاد دہانی اور مفید عمل"
+    ],
+    "correct": 0,
+    "meaning": "اسلامی یاد دہانی اور مفید عمل"
+  },
+  {
+    "q": "خرابی پیش آئی۔",
+    "options": [
+      "اسلامی یاد دہانی اور مفید عمل",
+      "اسلامی یاد دہانی اور مفید عمل",
+      "اسلامی یاد دہانی اور مفید عمل"
+    ],
+    "correct": 0,
+    "meaning": "اسلامی یاد دہانی اور مفید عمل"
+  }
+];
+  const TASK_PREFIX = "barakaway_today_ur_";
+  const MICRO_TODAY_KEY = "barakaway_micro_question_today_ur_v1";
+  const MICRO_HISTORY_KEY = "barakaway_micro_question_history_ur_v1";
+  const MICRO_ANSWER_PREFIX = "barakaway_micro_answer_ur_";
+
+  function localDateKey(date){
+    const y = date.getFullYear();
+    const m = String(date.getMonth() + 1).padStart(2, "0");
+    const d = String(date.getDate()).padStart(2, "0");
+    return y + "-" + m + "-" + d;
+  }
+
+  function todayKey(){
+    return localDateKey(new Date());
+  }
+
+  function daysBetween(a, b){
+    const da = new Date(a + "T00:00:00");
+    const db = new Date(b + "T00:00:00");
+    return Math.round((db - da) / 86400000);
+  }
+
+  function safeJsonParse(value, fallback){
+    try{return JSON.parse(value);}catch(e){return fallback;}
+  }
+
+  function taskKey(name){
+    return TASK_PREFIX + todayKey() + "_" + name;
+  }
+
+  function markDone(name){
+    localStorage.setItem(taskKey(name), "1");
+  }
+
+  function isDone(name){
+    return localStorage.getItem(taskKey(name)) === "1";
+  }
+
+  function redOpacity(){
+    const now = new Date();
+    const minutes = now.getHours() * 60 + now.getMinutes();
+    return Math.max(0.10, Math.min(0.90, minutes / 1440)).toFixed(2);
+  }
+
+  function pickQuestionForToday(){
+    const today = todayKey();
+    const START_KEY = 'barakaway_linear_program_start_ur_v1';
+    let start = localStorage.getItem(START_KEY);
+    if(!start){
+      start = today;
+      localStorage.setItem(START_KEY, start);
+    }
+    const dayNumber = Math.max(0, daysBetween(start, today));
+    const index = MICRO_QUESTIONS.length ? (dayNumber % MICRO_QUESTIONS.length) : 0;
+    localStorage.setItem(MICRO_TODAY_KEY, JSON.stringify({date:today, index:index, mode:'linear', day:dayNumber + 1}));
+    return {index:index, item:MICRO_QUESTIONS[index]};
+  }
+
+  function getAnswerState(){
+    return safeJsonParse(localStorage.getItem(MICRO_ANSWER_PREFIX + todayKey()), null);
+  }
+
+  function setAnswerState(index, selected){
+    localStorage.setItem(MICRO_ANSWER_PREFIX + todayKey(), JSON.stringify({date:todayKey(), index:index, selected:selected}));
+    markDone("micro");
+  }
+
+  function setCardState(card, status, done){
+    if(!card) return;
+    card.classList.toggle("task-done", done);
+    card.classList.toggle("goal-done", done);
+    card.classList.toggle("micro-answered", done);
+    card.classList.toggle("task-urgent", !done && new Date().getHours() >= 18);
+    card.style.setProperty("--task-red-opacity", done ? "0" : redOpacity());
+    card.style.setProperty("--goal-red-opacity", done ? "0" : redOpacity());
+    card.setAttribute("aria-disabled", done ? "true" : "false");
+    if(status) status.textContent = done ? "✓" : "?";
+  }
+
+  function renderMicroQuestion(){
+    const selected = pickQuestionForToday();
+    const q = selected.item;
+    const answerState = getAnswerState();
+    const done = isDone("micro") || (answerState && answerState.date === todayKey());
+
+    const card = document.getElementById("dailyMicroKnowledgeCard");
+    const status = document.getElementById("dailyMicroKnowledgeStatus");
+    const questionEl = document.getElementById("dailyMicroQuestion");
+    const optionsEl = document.getElementById("dailyMicroOptions");
+    const answerEl = document.getElementById("dailyMicroAnswer");
+
+    if(!card || !questionEl || !optionsEl || !answerEl) return;
+
+    questionEl.textContent = q.q;
+    optionsEl.innerHTML = "";
+
+    q.options.forEach(function(option, optionIndex){
+      const btn = document.createElement("button");
+      btn.type = "button";
+      btn.className = "micro-option";
+      btn.textContent = option;
+      btn.disabled = !!done;
+      btn.addEventListener("click", function(event){
+        event.preventDefault();
+        event.stopPropagation();
+        if(isDone("micro")) return;
+        setAnswerState(selected.index, optionIndex);
+        renderMicroQuestion();
+      });
+      optionsEl.appendChild(btn);
+    });
+
+    if(done){
+      const chosen = answerState && Number.isInteger(answerState.selected) ? answerState.selected : q.correct;
+      const correctText = q.options[q.correct];
+      const chosenText = q.options[chosen] || "";
+      const prefix = chosen === q.correct ? "اسلامی یاد دہانی اور مفید عمل" : "اسلامی یاد دہانی اور مفید عمل";
+      answerEl.innerHTML = "<strong>" + prefix + "</strong> " + correctText + "اسلامی یاد دہانی اور مفید عمل " + q.meaning;
+      answerEl.classList.add("show");
+      markDone("micro");
+    }else{
+      answerEl.innerHTML = "";
+      answerEl.classList.remove("show");
+    }
+
+    setCardState(card, status, !!done);
+  }
+
+  function enforceNameCounterLock(){
+    const card = document.getElementById("allahNameCounterCard");
+    const status = document.getElementById("allahNameCounterValue");
+    const fill = document.getElementById("allahNameCounterFill");
+    if(!card) return;
+
+    const nameCountKey = TASK_PREFIX + todayKey() + "_name_count";
+    const legacyKeys = ["barakaway_name_counter_" + todayKey(), "barakaway_name_counter_ur_" + todayKey()];
+
+    function readNumber(key){
+      return Math.max(0, Math.min(100, parseInt(localStorage.getItem(key) || "0", 10) || 0));
+    }
+
+    function readCount(){
+      let count = readNumber(nameCountKey);
+      legacyKeys.forEach(function(key){count = Math.max(count, readNumber(key));});
+      return count;
+    }
+
+    function writeCount(count){
+      const safe = Math.max(0, Math.min(100, count));
+      localStorage.setItem(nameCountKey, String(safe));
+      legacyKeys.forEach(function(key){localStorage.setItem(key, String(safe));});
+      if(safe >= 100) markDone("name");
+    }
+
+    function render(){
+      let count = readCount();
+      const done = isDone("name") || count >= 100;
+      if(done){
+        count = 100;
+        writeCount(100);
+        markDone("name");
+        card.classList.add("task-done", "goal-done");
+        card.classList.remove("task-urgent");
+        card.style.setProperty("--task-red-opacity", "0");
+        card.style.setProperty("--goal-red-opacity", "0");
+        card.setAttribute("aria-disabled", "true");
+        if(status) status.textContent = "✓";
+        if(fill) fill.style.width = "100%";
+        return;
+      }
+      card.classList.remove("task-done", "goal-done");
+      card.classList.toggle("task-urgent", new Date().getHours() >= 18);
+      card.setAttribute("aria-disabled", "false");
+      if(status) status.textContent = count + "/100";
+      if(fill) fill.style.width = count + "%";
+    }
+
+    function oneClick(event){
+      if(event){
+        event.preventDefault();
+        event.stopImmediatePropagation();
+        event.stopPropagation();
+      }
+      if(isDone("name") || readCount() >= 100){
+        render();
+        return;
+      }
+      writeCount(readCount() + 1);
+      render();
+    }
+
+    if(card.dataset.finalNameCounterLock !== "1"){
+      card.dataset.finalNameCounterLock = "1";
+      card.addEventListener("click", oneClick, true);
+      card.addEventListener("keydown", function(event){
+        if(event.key === "Enter" || event.key === " ") oneClick(event);
+      }, true);
+    }
+    render();
+  }
+
+  renderMicroQuestion();
+  enforceNameCounterLock();
+  document.addEventListener("DOMContentLoaded", function(){
+    renderMicroQuestion();
+    enforceNameCounterLock();
+  });
+  window.addEventListener("pageshow", function(){
+    renderMicroQuestion();
+    enforceNameCounterLock();
+  });
+  setInterval(function(){
+    renderMicroQuestion();
+    enforceNameCounterLock();
+  }, 1500);
+})();
+</script>
+
+
+<script>
+(function(){
+  const TOGGLE_KEY = 'barakaway_tahajjud_alarm_enabled_ur_v1';
+  const ALERTED_KEY_PREFIX = 'barakaway_tahajjud_alarm_alerted_ur_';
+  const OFFSET_MINUTES = 60;
+
+  const toggle = document.getElementById('tahajjudAlarmToggle');
+  const meta = document.getElementById('tahajjudAlarmMeta');
+  let alarmTimer = null;
+  let metaTimer = null;
+
+  if(!toggle || !meta) return;
+
+  function localDateKey(date){
+    const y = date.getFullYear();
+    const m = String(date.getMonth() + 1).padStart(2, '0');
+    const d = String(date.getDate()).padStart(2, '0');
+    return y + '-' + m + '-' + d;
+  }
+
+  function parseTimeToDate(value){
+    const clean = String(value || '').replace(/[^\d:]/g, '').trim();
+    const parts = clean.split(':').map(Number);
+    if(!Number.isFinite(parts[0]) || !Number.isFinite(parts[1])) return null;
+    const d = new Date();
+    d.setHours(parts[0], parts[1], 0, 0);
+    return d;
+  }
+
+  function getFajrDate(){
+    const timings = window.homePrayerShareState && window.homePrayerShareState.timings;
+    if(!timings || !timings.Fajr) return null;
+
+    const fajr = parseTimeToDate(timings.Fajr);
+    if(!fajr) return null;
+
+    const now = new Date();
+    if(fajr <= now){
+      fajr.setDate(fajr.getDate() + 1);
+    }
+    return fajr;
+  }
+
+  function getAlarmDate(){
+    const fajr = getFajrDate();
+    if(!fajr) return null;
+    return new Date(fajr.getTime() - OFFSET_MINUTES * 60000);
+  }
+
+  function formatTime(date){
+    return String(date.getHours()).padStart(2,'0') + ':' + String(date.getMinutes()).padStart(2,'0');
+  }
+
+  function playTahajjudSound(){
+    try{
+      const AudioContext = window.AudioContext || window.webkitAudioContext;
+      if(!AudioContext) return;
+      const ctx = new AudioContext();
+      const gain = ctx.createGain();
+      gain.gain.setValueAtTime(0.0001, ctx.currentTime);
+      gain.gain.exponentialRampToValueAtTime(0.16, ctx.currentTime + 0.04);
+      gain.gain.exponentialRampToValueAtTime(0.0001, ctx.currentTime + 1.8);
+      gain.connect(ctx.destination);
+
+      [0, 0.55, 1.1].forEach(function(delay){
+        const osc = ctx.createOscillator();
+        osc.type = 'sine';
+        osc.frequency.setValueAtTime(620, ctx.currentTime + delay);
+        osc.connect(gain);
+        osc.start(ctx.currentTime + delay);
+        osc.stop(ctx.currentTime + delay + 0.32);
+      });
+    }catch(e){}
+  }
+
+  function notifyTahajjud(){
+    const fajr = getFajrDate();
+    const body = fajr
+      ? 'نماز کے اوقات'
+      : 'نماز کے اوقات';
+
+    playTahajjudSound();
+
+    if('Notification' in window && Notification.permission === 'granted'){
+      new Notification('اسلامی یاد دہانی اور مفید عمل', { body: body });
+    }else{
+      alert('🌙 BarakaWay\\n\\n' + body);
+    }
+  }
+
+  function updateMeta(){
+    const enabled = localStorage.getItem(TOGGLE_KEY) === '1';
+    const alarm = getAlarmDate();
+    const fajr = getFajrDate();
+
+    if(!enabled){
+      meta.textContent = 'فجر سے 60 منٹ پہلے';
+      return;
+    }
+
+    if(!alarm || !fajr){
+      meta.textContent = 'اسلامی یاد دہانی اور مفید عمل';
+      return;
+    }
+
+    meta.textContent = 'اسلامی یاد دہانی اور مفید عمل ' + formatTime(alarm) + ' · فجر ' + formatTime(fajr);
+  }
+
+  function scheduleAlarm(){
+    if(alarmTimer) clearTimeout(alarmTimer);
+    updateMeta();
+
+    if(localStorage.getItem(TOGGLE_KEY) !== '1') return;
+
+    const alarm = getAlarmDate();
+    if(!alarm) return;
+
+    const now = new Date();
+    const delay = alarm.getTime() - now.getTime();
+    const key = ALERTED_KEY_PREFIX + localDateKey(alarm);
+
+    if(delay <= 0){
+      return;
+    }
+
+    alarmTimer = setTimeout(function(){
+      if(localStorage.getItem(TOGGLE_KEY) !== '1') return;
+      if(localStorage.getItem(key) === '1') return;
+      localStorage.setItem(key, '1');
+      notifyTahajjud();
+      scheduleAlarm();
+    }, Math.min(delay, 2147483647));
+  }
+
+  toggle.checked = localStorage.getItem(TOGGLE_KEY) === '1';
+  updateMeta();
+  scheduleAlarm();
+
+  toggle.addEventListener('change', async function(){
+    localStorage.setItem(TOGGLE_KEY, toggle.checked ? '1' : '0');
+
+    if(toggle.checked && 'Notification' in window && Notification.permission === 'default'){
+      try{ await Notification.requestPermission(); }catch(e){}
+    }
+
+    updateMeta();
+    scheduleAlarm();
+  });
+
+  if(metaTimer) clearInterval(metaTimer);
+  metaTimer = setInterval(function(){
+    updateMeta();
+    scheduleAlarm();
+  }, 60000);
+
+  window.addEventListener('pageshow', function(){
+    updateMeta();
+    scheduleAlarm();
+  });
+})();
+</script>
 
 <script src="/theme-toggle.js"></script>
 <script src="/bottom-nav.js"></script>
+
+<script>
+(function(){
+  const TASK_PREFIX = "barakaway_today_ur_";
+
+  function localDateKey(date){
+    const y = date.getFullYear();
+    const m = String(date.getMonth() + 1).padStart(2, "0");
+    const d = String(date.getDate()).padStart(2, "0");
+    return y + "-" + m + "-" + d;
+  }
+
+  function todayKey(){
+    return localDateKey(new Date());
+  }
+
+  function taskDoneKey(){
+    return TASK_PREFIX + todayKey() + "_name";
+  }
+
+  function taskCountKey(){
+    return TASK_PREFIX + todayKey() + "_name_count";
+  }
+
+  function legacyCountKeys(){
+    return [
+      "barakaway_name_counter_" + todayKey(),
+      "barakaway_name_counter_ur_" + todayKey()
+    ];
+  }
+
+  function readNumber(key){
+    return Math.max(0, Math.min(100, parseInt(localStorage.getItem(key) || "0", 10) || 0));
+  }
+
+  function isNameDone(){
+    return localStorage.getItem(taskDoneKey()) === "1" || readNameCount() >= 100;
+  }
+
+  function setNameDone(){
+    localStorage.setItem(taskDoneKey(), "1");
+    localStorage.setItem(taskCountKey(), "100");
+    legacyCountKeys().forEach(function(key){
+      localStorage.setItem(key, "100");
+    });
+  }
+
+  function readNameCount(){
+    let count = readNumber(taskCountKey());
+    legacyCountKeys().forEach(function(key){
+      count = Math.max(count, readNumber(key));
+    });
+    return Math.max(0, Math.min(100, count));
+  }
+
+  function writeNameCount(count){
+    const safeCount = Math.max(0, Math.min(100, count));
+    localStorage.setItem(taskCountKey(), String(safeCount));
+    legacyCountKeys().forEach(function(key){
+      localStorage.setItem(key, String(safeCount));
+    });
+    if(safeCount >= 100){
+      setNameDone();
+    }
+  }
+
+  function renderNameCounter(){
+    const card = document.getElementById("allahNameCounterCard");
+    const status = document.getElementById("allahNameCounterValue");
+    const fill = document.getElementById("allahNameCounterFill");
+    const nameEl = document.getElementById("allahNameToday");
+    const meaningEl = document.getElementById("allahNameMeaning");
+
+    if(!card) return;
+
+    let count = readNameCount();
+    const done = isNameDone();
+
+    if(done){
+      count = 100;
+      setNameDone();
+      card.classList.add("task-done", "goal-done");
+      card.classList.remove("task-urgent");
+      card.style.setProperty("--task-red-opacity", "0");
+      card.style.setProperty("--goal-red-opacity", "0");
+      card.setAttribute("aria-disabled", "true");
+      card.setAttribute("aria-label", "آج اللہ کے لیے ایک چھوٹا نیک عمل خاموشی سے کرو۔");
+      if(status) status.textContent = "✓";
+      if(fill) fill.style.width = "100%";
+      return;
+    }
+
+    card.classList.remove("task-done", "goal-done");
+    card.classList.toggle("task-urgent", new Date().getHours() >= 18);
+    card.setAttribute("aria-disabled", "false");
+
+    if(status) status.textContent = count + "/100";
+    if(fill) fill.style.width = count + "%";
+
+    const labelName = nameEl ? nameEl.textContent.trim() : "اللہ کا نام";
+    const labelMeaning = meaningEl ? meaningEl.textContent.trim() : "";
+    card.setAttribute("aria-label", labelName + ": " + count + " 100 تکرار میں سے۔ " + labelMeaning);
+  }
+
+  function completeOneNameClick(event){
+    const card = document.getElementById("allahNameCounterCard");
+    if(!card) return;
+
+    if(event){
+      event.preventDefault();
+      event.stopImmediatePropagation();
+      event.stopPropagation();
+    }
+
+    if(isNameDone()){
+      renderNameCounter();
+      return;
+    }
+
+    const nextCount = Math.min(100, readNameCount() + 1);
+    writeNameCount(nextCount);
+    renderNameCounter();
+  }
+
+  function bindNameCounterLock(){
+    const card = document.getElementById("allahNameCounterCard");
+    if(!card || card.dataset.nameCounterLocked === "1") return;
+
+    card.dataset.nameCounterLocked = "1";
+
+    card.addEventListener("click", function(event){
+      completeOneNameClick(event);
+    }, true);
+
+    card.addEventListener("keydown", function(event){
+      if(event.key === "Enter" || event.key === " "){
+        completeOneNameClick(event);
+      }
+    }, true);
+
+    renderNameCounter();
+  }
+
+  bindNameCounterLock();
+  setInterval(renderNameCounter, 1000);
+})();
+</script>
+
 </body>
 </html>
 
