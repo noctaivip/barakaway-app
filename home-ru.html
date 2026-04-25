@@ -4181,6 +4181,154 @@ window.addEventListener("DOMContentLoaded",function(){const installBtn=document.
 
 <script src="/theme-toggle.js"></script>
 <script src="/bottom-nav.js"></script>
+
+<script>
+(function(){
+  const TASK_PREFIX = "barakaway_today_ru_";
+
+  function localDateKey(date){
+    const y = date.getFullYear();
+    const m = String(date.getMonth() + 1).padStart(2, "0");
+    const d = String(date.getDate()).padStart(2, "0");
+    return y + "-" + m + "-" + d;
+  }
+
+  function todayKey(){
+    return localDateKey(new Date());
+  }
+
+  function taskDoneKey(){
+    return TASK_PREFIX + todayKey() + "_name";
+  }
+
+  function taskCountKey(){
+    return TASK_PREFIX + todayKey() + "_name_count";
+  }
+
+  function legacyCountKeys(){
+    return [
+      "barakaway_name_counter_" + todayKey(),
+      "barakaway_name_counter_ru_" + todayKey()
+    ];
+  }
+
+  function readNumber(key){
+    return Math.max(0, Math.min(100, parseInt(localStorage.getItem(key) || "0", 10) || 0));
+  }
+
+  function isNameDone(){
+    return localStorage.getItem(taskDoneKey()) === "1" || readNameCount() >= 100;
+  }
+
+  function setNameDone(){
+    localStorage.setItem(taskDoneKey(), "1");
+    localStorage.setItem(taskCountKey(), "100");
+    legacyCountKeys().forEach(function(key){
+      localStorage.setItem(key, "100");
+    });
+  }
+
+  function readNameCount(){
+    let count = readNumber(taskCountKey());
+    legacyCountKeys().forEach(function(key){
+      count = Math.max(count, readNumber(key));
+    });
+    return Math.max(0, Math.min(100, count));
+  }
+
+  function writeNameCount(count){
+    const safeCount = Math.max(0, Math.min(100, count));
+    localStorage.setItem(taskCountKey(), String(safeCount));
+    legacyCountKeys().forEach(function(key){
+      localStorage.setItem(key, String(safeCount));
+    });
+    if(safeCount >= 100){
+      setNameDone();
+    }
+  }
+
+  function renderNameCounter(){
+    const card = document.getElementById("allahNameCounterCard");
+    const status = document.getElementById("allahNameCounterValue");
+    const fill = document.getElementById("allahNameCounterFill");
+    const nameEl = document.getElementById("allahNameToday");
+    const meaningEl = document.getElementById("allahNameMeaning");
+
+    if(!card) return;
+
+    let count = readNameCount();
+    const done = isNameDone();
+
+    if(done){
+      count = 100;
+      setNameDone();
+      card.classList.add("task-done", "goal-done");
+      card.classList.remove("task-urgent");
+      card.style.setProperty("--task-red-opacity", "0");
+      card.style.setProperty("--goal-red-opacity", "0");
+      card.setAttribute("aria-disabled", "true");
+      card.setAttribute("aria-label", "Имя Аллаха выполнено сегодня. Повторение завершено.");
+      if(status) status.textContent = "✓";
+      if(fill) fill.style.width = "100%";
+      return;
+    }
+
+    card.classList.remove("task-done", "goal-done");
+    card.classList.toggle("task-urgent", new Date().getHours() >= 18);
+    card.setAttribute("aria-disabled", "false");
+
+    if(status) status.textContent = count + "/100";
+    if(fill) fill.style.width = count + "%";
+
+    const labelName = nameEl ? nameEl.textContent.trim() : "Имя Аллаха";
+    const labelMeaning = meaningEl ? meaningEl.textContent.trim() : "";
+    card.setAttribute("aria-label", labelName + ": " + count + " из 100 повторений. " + labelMeaning);
+  }
+
+  function completeOneNameClick(event){
+    const card = document.getElementById("allahNameCounterCard");
+    if(!card) return;
+
+    if(event){
+      event.preventDefault();
+      event.stopImmediatePropagation();
+      event.stopPropagation();
+    }
+
+    if(isNameDone()){
+      renderNameCounter();
+      return;
+    }
+
+    const nextCount = Math.min(100, readNameCount() + 1);
+    writeNameCount(nextCount);
+    renderNameCounter();
+  }
+
+  function bindNameCounterLock(){
+    const card = document.getElementById("allahNameCounterCard");
+    if(!card || card.dataset.nameCounterLocked === "1") return;
+
+    card.dataset.nameCounterLocked = "1";
+
+    card.addEventListener("click", function(event){
+      completeOneNameClick(event);
+    }, true);
+
+    card.addEventListener("keydown", function(event){
+      if(event.key === "Enter" || event.key === " "){
+        completeOneNameClick(event);
+      }
+    }, true);
+
+    renderNameCounter();
+  }
+
+  bindNameCounterLock();
+  setInterval(renderNameCounter, 1000);
+})();
+</script>
+
 </body>
 </html>
 
