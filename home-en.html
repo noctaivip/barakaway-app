@@ -1027,6 +1027,7 @@ html.light-mode .install-help-steps{color:#1f2a22}
 html.dark-mode .install-help-close{border:1px solid #2a3138;background:#1d242c;color:#f3f6f9}
 html.light-mode .install-help-close{border:1px solid #dfe8e2;background:#fff;color:#1f2a22}
 
+
 /* DESKTOP TOP ACTIONS ONLY */
 .desktop-top-actions{
   display:grid;
@@ -1904,6 +1905,52 @@ html.light-mode .today-action-title{color:#172019;}
 }
 html.dark-mode .today-action-text{color:#aebbb5;}
 html.light-mode .today-action-text{color:#647268;}
+.today-ayah-text{
+  display:flex;
+  flex-direction:column;
+  gap:7px;
+  font-weight:650;
+}
+.today-ayah-ref{
+  display:inline-flex;
+  width:max-content;
+  padding:3px 8px;
+  border-radius:999px;
+  font-size:10px;
+  line-height:1.2;
+  font-weight:950;
+  letter-spacing:0.04em;
+}
+html.dark-mode .today-ayah-ref{
+  background:rgba(215,192,122,0.14);
+  color:#f1d889;
+  border:1px solid rgba(215,192,122,0.24);
+}
+html.light-mode .today-ayah-ref{
+  background:#fff7e4;
+  color:#7b5b13;
+  border:1px solid rgba(141,107,22,0.18);
+}
+.today-ayah-line{
+  font-size:13px;
+  line-height:1.42;
+  font-weight:850;
+}
+html.dark-mode .today-ayah-line{color:#eef6f0;}
+html.light-mode .today-ayah-line{color:#172019;}
+.today-ayah-task-label{
+  display:inline-block;
+  margin-right:5px;
+  font-weight:950;
+}
+html.dark-mode .today-ayah-task-label{color:#d7c07a;}
+html.light-mode .today-ayah-task-label{color:#8d6b16;}
+.today-ayah-task{
+  font-size:12px;
+  line-height:1.38;
+  font-weight:650;
+}
+
 .home-section-title{
   margin:28px 0 14px;
   display:flex;
@@ -2156,36 +2203,117 @@ html.light-mode .today-goal-action.goal-done{
   50%{box-shadow:0 12px 24px rgba(0,0,0,0.14),0 0 22px rgba(210,68,68,0.28);}
 }
 
-/* FIXED BOTTOM APP NAVIGATION */
+
+
+/* MICRO KNOWLEDGE DAY — REQUIRED FIFTH DAILY TASK */
+.today-micro-wrap{
+  padding:0 16px 18px;
+}
+.today-micro-action{
+  width:100%;
+  min-height:118px;
+  box-sizing:border-box;
+}
+.today-micro-question{
+  font-size:13px;
+  line-height:1.4;
+  font-weight:500;
+  opacity:0.85;
+}
+html.dark-mode.today-micro-question{color:#f4f7f3;}
+html.light-mode.today-micro-question{color:#172019;}
+.micro-options{
+  display:grid;
+  grid-template-columns:repeat(3,minmax(0,1fr));
+  gap:8px;
+  margin-top:12px;
+}
+.micro-option{
+  width:100%;
+  min-height:38px;
+  margin:0;
+  padding:8px 10px;
+  border-radius:14px;
+  border:1px solid transparent;
+  font-size:12px;
+  font-weight:900;
+  line-height:1.2;
+  cursor:pointer;
+  transition:transform .16s ease, background .25s ease, border-color .25s ease, color .25s ease, opacity .25s ease;
+}
+html.dark-mode .micro-option{
+  background:rgba(102,198,128,.11);
+  border-color:rgba(102,198,128,.18);
+  color:#e7f7ed;
+}
+html.light-mode .micro-option{
+  background:#eff8f2;
+  border-color:rgba(45,122,70,.14);
+  color:#2d7a46;
+}
+.micro-option:active{transform:scale(.98);}
+.today-micro-action.task-done .micro-option,
+.today-micro-action.micro-answered .micro-option{
+  pointer-events:none;
+  opacity:.58;
+}
+.micro-answer-box{
+  display:none;
+  margin-top:12px;
+  padding:12px 13px;
+  border-radius:18px;
+  font-size:12px;
+  line-height:1.45;
+  font-weight:750;
+}
+html.dark-mode .micro-answer-box{
+  background:rgba(102,198,128,.11);
+  border:1px solid rgba(102,198,128,.18);
+  color:#dff6e7;
+}
+html.light-mode .micro-answer-box{
+  background:#f0faf3;
+  border:1px solid rgba(45,122,70,.14);
+  color:#244b32;
+}
+.micro-answer-box.show{display:block;}
+.micro-answer-box strong{font-weight:950;}
+@media(max-width:700px){
+  .today-micro-wrap{padding:0 12px 15px;}
+  .today-micro-action{border-radius:22px;padding:14px;}
+  .micro-options{grid-template-columns:1fr;gap:7px;}
+  .micro-option{min-height:36px;}
+}
+
+/* FIXED BOTTOM APP NAVIGATION — PREMIUM SVG APP STYLE */
 .bottom-app-nav{
   position:fixed;
   left:0;
   right:0;
   bottom:0;
   z-index:2100;
-  min-height:76px;
-  padding:8px max(10px, env(safe-area-inset-left)) calc(8px + env(safe-area-inset-bottom)) max(10px, env(safe-area-inset-right));
+  min-height:82px;
+  padding:10px max(12px, env(safe-area-inset-left)) calc(10px + env(safe-area-inset-bottom)) max(12px, env(safe-area-inset-right));
   display:flex;
   align-items:center;
   justify-content:center;
   box-sizing:border-box;
-  backdrop-filter:blur(18px);
-  -webkit-backdrop-filter:blur(18px);
+  backdrop-filter:blur(22px) saturate(1.28);
+  -webkit-backdrop-filter:blur(22px) saturate(1.28);
   transition:background .25s,border-color .25s,box-shadow .25s;
 }
 
 html.dark-mode .bottom-app-nav{
-  background:linear-gradient(180deg,rgba(20,38,29,0.92) 0%,rgba(10,22,16,0.97) 100%);
+  background:linear-gradient(180deg,rgba(20,38,29,0.86) 0%,rgba(9,20,15,0.98) 100%);
   border-top:1px solid rgba(102,198,128,0.30);
-  box-shadow:0 -14px 34px rgba(0,0,0,0.34), inset 0 1px 0 rgba(255,255,255,0.05);
+  box-shadow:0 -18px 42px rgba(0,0,0,0.40), inset 0 1px 0 rgba(255,255,255,0.06);
 }
 
 html.light-mode .bottom-app-nav{
-  background:linear-gradient(180deg,rgba(243,251,246,0.92) 0%,rgba(232,246,238,0.97) 100%);
-  border-top:1px solid rgba(45,122,70,0.22);
-  box-shadow:0 -14px 34px rgba(18,34,24,0.12), inset 0 1px 0 rgba(255,255,255,0.92);
+  background:linear-gradient(180deg,rgba(253,255,254,0.92) 0%,rgba(232,246,238,0.98) 100%);
+  border-top:1px solid rgba(45,122,70,0.24);
+  box-shadow:0 -18px 42px rgba(18,34,24,0.14), inset 0 1px 0 rgba(255,255,255,0.96);
 }
-
 
 .bottom-app-nav::before{
   content:"";
@@ -2195,7 +2323,7 @@ html.light-mode .bottom-app-nav{
   transform:translateX(-50%);
   width:min(850px,100%);
   height:3px;
-  background:linear-gradient(90deg,rgba(45,122,70,0),rgba(102,198,128,0.88),rgba(215,192,122,0.72),rgba(45,122,70,0));
+  background:linear-gradient(90deg,rgba(45,122,70,0),rgba(102,198,128,0.86),rgba(215,192,122,0.76),rgba(45,122,70,0));
   pointer-events:none;
 }
 
@@ -2204,33 +2332,48 @@ html.light-mode .bottom-app-nav{
   display:grid;
   grid-template-columns:repeat(5,1fr);
   align-items:center;
-  gap:2px;
+  gap:6px;
 }
 
 .bottom-app-nav-item{
   position:relative;
   min-width:0;
-  min-height:58px;
-  border-radius:18px;
+  min-height:62px;
+  border-radius:22px;
   display:flex;
   flex-direction:column;
   align-items:center;
   justify-content:center;
-  gap:4px;
+  gap:5px;
   text-decoration:none;
   font-size:11px;
-  line-height:1.1;
-  font-weight:800;
-  letter-spacing:-0.02em;
+  line-height:1.05;
+  font-weight:900;
+  letter-spacing:-0.025em;
   -webkit-tap-highlight-color:transparent;
-  transition:background .22s ease,color .22s ease,transform .16s ease,box-shadow .22s ease;
+  transition:background .22s ease, color .22s ease, transform .16s ease, box-shadow .22s ease, border-color .22s ease;
+  border:1px solid transparent;
+}
+
+.bottom-app-nav-icon{
+  width:30px;
+  height:30px;
+  border-radius:14px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  transition:background .22s ease, transform .18s ease, box-shadow .22s ease;
 }
 
 .bottom-app-nav-item svg{
-  width:23px;
-  height:23px;
-  fill:currentColor;
-  transition:transform .18s ease,opacity .22s ease;
+  width:21px;
+  height:21px;
+  fill:none;
+  stroke:currentColor;
+  stroke-width:2.05;
+  stroke-linecap:round;
+  stroke-linejoin:round;
+  transition:transform .18s ease,opacity .22s ease,stroke-width .18s ease;
 }
 
 .bottom-app-nav-label{
@@ -2241,55 +2384,48 @@ html.light-mode .bottom-app-nav{
   white-space:nowrap;
 }
 
-html.dark-mode .bottom-app-nav-item{
-  color:#98a7b2;
-}
-
-html.light-mode .bottom-app-nav-item{
-  color:#6a756d;
-}
+html.dark-mode .bottom-app-nav-item{color:#9aacb5;}
+html.light-mode .bottom-app-nav-item{color:#66746b;}
 
 html.dark-mode .bottom-app-nav-item.active{
-  color:#f5fff8;
-  background:linear-gradient(135deg,rgba(45,122,70,0.44),rgba(102,198,128,0.18));
-  box-shadow:inset 0 1px 0 rgba(255,255,255,0.06), 0 8px 18px rgba(0,0,0,0.20);
+  color:#ffffff;
+  background:linear-gradient(135deg,rgba(45,122,70,0.52),rgba(102,198,128,0.18));
+  border-color:rgba(102,198,128,0.22);
+  box-shadow:inset 0 1px 0 rgba(255,255,255,0.08),0 10px 22px rgba(0,0,0,0.24);
 }
 
 html.light-mode .bottom-app-nav-item.active{
-  color:#1f6e3d;
-  background:linear-gradient(135deg,#eef8f1,#ffffff);
-  box-shadow:inset 0 1px 0 rgba(255,255,255,0.96), 0 8px 18px rgba(15,24,18,0.07);
+  color:#ffffff;
+  background:linear-gradient(135deg,#2d7a46 0%,#4caf6a 100%);
+  border-color:rgba(45,122,70,0.18);
+  box-shadow:inset 0 1px 0 rgba(255,255,255,0.18),0 12px 24px rgba(45,122,70,0.20);
 }
 
-.bottom-app-nav-item:active{
-  transform:scale(0.96);
+html.dark-mode .bottom-app-nav-item.active .bottom-app-nav-icon{
+  background:rgba(255,255,255,0.09);
+  box-shadow:inset 0 1px 0 rgba(255,255,255,0.06);
 }
 
-.bottom-app-nav-item.active svg{
-  transform:translateY(-1px) scale(1.04);
+html.light-mode .bottom-app-nav-item.active .bottom-app-nav-icon{
+  background:rgba(255,255,255,0.18);
+  box-shadow:inset 0 1px 0 rgba(255,255,255,0.22);
 }
 
-.container{
-  padding-bottom:118px;
-}
+.bottom-app-nav-item:hover{transform:translateY(-1px);}
+html.dark-mode .bottom-app-nav-item:hover:not(.active){background:rgba(255,255,255,0.045);color:#d8efe1;}
+html.light-mode .bottom-app-nav-item:hover:not(.active){background:rgba(45,122,70,0.07);color:#24663a;}
+.bottom-app-nav-item:active{transform:scale(0.96);}
+.bottom-app-nav-item.active svg{transform:translateY(-1px) scale(1.05);stroke-width:2.25;}
+
+.container{padding-bottom:122px;}
 
 @media(max-width:700px){
-  .container{
-    padding-bottom:118px;
-  }
-  .bottom-app-nav{
-    min-height:74px;
-    padding-top:7px;
-  }
-  .bottom-app-nav-item{
-    min-height:56px;
-    border-radius:16px;
-    font-size:10.5px;
-  }
-  .bottom-app-nav-item svg{
-    width:22px;
-    height:22px;
-  }
+  .container{padding-bottom:122px;}
+  .bottom-app-nav{min-height:78px;padding-top:8px;}
+  .bottom-app-nav-inner{gap:4px;}
+  .bottom-app-nav-item{min-height:58px;border-radius:18px;font-size:10.5px;}
+  .bottom-app-nav-icon{width:28px;height:28px;border-radius:13px;}
+  .bottom-app-nav-item svg{width:20px;height:20px;}
 }
 .today-daily-task{
   position:relative;
@@ -2309,12 +2445,6 @@ html.light-mode .bottom-app-nav-item.active{
 .today-daily-task > *{
   position:relative;
   z-index:1;
-}
-
-.today-daily-task.task-done{
-  --task-red-opacity:0 !important;
-  pointer-events:none;
-  cursor:default;
 }
 
 .today-daily-task.task-done .today-task-status{
@@ -2339,6 +2469,153 @@ html.light-mode .today-daily-task.task-done{
 .today-daily-task.task-done .today-counter-track{
   display:none;
 }
+
+
+/* TAHAJJUD ALARM — COMPACT BAR */
+.tahajjud-alarm-bar{
+  margin:-4px 0 18px;
+  padding:13px 15px;
+  border-radius:22px;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:12px;
+  transition:background .25s,border-color .25s,box-shadow .25s,transform .18s ease;
+  border:1.5px solid transparent;
+}
+
+html.dark-mode .tahajjud-alarm-bar{
+  background:linear-gradient(135deg,#201d2a 0%, #171f29 52%, #142b24 100%);
+  border-color:rgba(215,192,122,0.28);
+  box-shadow:0 12px 24px rgba(0,0,0,0.20), inset 0 1px 0 rgba(255,255,255,0.04);
+}
+
+html.light-mode .tahajjud-alarm-bar{
+  background:linear-gradient(135deg,#fffaf0 0%, #ffffff 52%, #eef7f1 100%);
+  border-color:rgba(141,107,22,0.18);
+  box-shadow:0 12px 24px rgba(15,24,18,0.05), inset 0 1px 0 rgba(255,255,255,0.96);
+}
+
+.tahajjud-alarm-left{
+  display:flex;
+  align-items:center;
+  gap:11px;
+  min-width:0;
+}
+
+.tahajjud-alarm-icon{
+  width:38px;
+  height:38px;
+  min-width:38px;
+  border-radius:15px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-size:20px;
+}
+
+html.dark-mode .tahajjud-alarm-icon{
+  background:rgba(215,192,122,0.13);
+}
+
+html.light-mode .tahajjud-alarm-icon{
+  background:#fff4d8;
+}
+
+.tahajjud-alarm-title{
+  font-size:14px;
+  line-height:1.15;
+  font-weight:900;
+  letter-spacing:-0.025em;
+}
+
+html.dark-mode .tahajjud-alarm-title{color:#f5f8f6;}
+html.light-mode .tahajjud-alarm-title{color:#172019;}
+
+.tahajjud-alarm-meta{
+  margin-top:3px;
+  font-size:11px;
+  line-height:1.25;
+  font-weight:700;
+}
+
+html.dark-mode .tahajjud-alarm-meta{color:#aebbb5;}
+html.light-mode .tahajjud-alarm-meta{color:#647268;}
+
+.tahajjud-switch{
+  position:relative;
+  width:54px;
+  height:30px;
+  min-width:54px;
+  display:inline-flex;
+  align-items:center;
+}
+
+.tahajjud-switch input{
+  opacity:0;
+  width:0;
+  height:0;
+}
+
+.tahajjud-slider{
+  position:absolute;
+  cursor:pointer;
+  inset:0;
+  border-radius:999px;
+  transition:background .25s ease, box-shadow .25s ease;
+}
+
+html.dark-mode .tahajjud-slider{
+  background:#303a44;
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.05);
+}
+
+html.light-mode .tahajjud-slider{
+  background:#d7ded9;
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.6);
+}
+
+.tahajjud-slider::before{
+  content:"";
+  position:absolute;
+  height:24px;
+  width:24px;
+  left:3px;
+  top:3px;
+  border-radius:50%;
+  background:#fff;
+  transition:transform .25s ease;
+  box-shadow:0 4px 10px rgba(0,0,0,.18);
+}
+
+.tahajjud-switch input:checked + .tahajjud-slider{
+  background:#2d7a46;
+  box-shadow:0 0 0 3px rgba(45,122,70,.14);
+}
+
+.tahajjud-switch input:checked + .tahajjud-slider::before{
+  transform:translateX(24px);
+}
+
+@media(max-width:700px){
+  .tahajjud-alarm-bar{
+    margin:-2px 0 16px;
+    padding:12px 13px;
+    border-radius:20px;
+  }
+  .tahajjud-alarm-title{
+    font-size:13px;
+  }
+  .tahajjud-alarm-meta{
+    font-size:10.5px;
+  }
+  .tahajjud-alarm-icon{
+    width:36px;
+    height:36px;
+    min-width:36px;
+  }
+}
+
 </style>
 <script src="/theme-init.js"></script>
 <link rel="stylesheet" href="/theme.css">
@@ -2428,54 +2705,70 @@ Protect your actions in the month of Dhul-Qa‘dah, reduce what is unnecessary, 
 <section class="today-hub" aria-label="Today in BarakaWay">
   <div class="today-hub-head">
     <div class="today-hub-kicker">Today in BarakaWay</div>
-    <h2 class="today-hub-title">Every day — new benefit, new dhikr and one small step closer to Allah ﷻ</h2>
+    <h2 class="today-hub-title">Every day, one new step closer to Allah ﷻ</h2>
   </div>
+
   <div class="today-hub-grid">
-  <a class="today-action today-daily-task" id="dailyArticleLink" href="articles-en.html" data-task-key="article">
-    <div class="today-action-top">
-      <div class="today-action-icon">📝</div>
-      <div class="today-action-arrow today-task-status" id="dailyArticleStatus">→</div>
-    </div>
-    <div>
-      <div class="today-action-title">Useful article</div>
-      <div class="today-action-text" id="dailyArticleTitle">Open today’s article.</div>
-    </div>
-  </a>
+    <a class="today-action today-daily-task" id="dailyArticleLink" href="javascript:void(0)" role="button" aria-label="Ayah of the day with practice" data-task-key="article">
+      <div class="today-action-top">
+        <div class="today-action-icon">📖</div>
+        <div class="today-action-arrow today-task-status" id="dailyArticleStatus">→</div>
+      </div>
+      <div>
+        <div class="today-action-title">Ayah of the day</div>
+        <div class="today-action-text" id="dailyArticleTitle">Loading today’s ayah...</div>
+      </div>
+    </a>
 
-  <a class="today-action today-daily-task" id="currentAdhkarLink" href="adhkar-en.html" data-task-key="adhkar">
-    <div class="today-action-top">
-      <div class="today-action-icon">🌿</div>
-      <div class="today-action-arrow today-task-status" id="currentAdhkarStatus">→</div>
-    </div>
-    <div>
-      <div class="today-action-title" id="currentAdhkarTitle">Adhkar now</div>
-      <div class="today-action-text" id="currentAdhkarText">The right adhkar for this time of day.</div>
-    </div>
-  </a>
+    <a class="today-action today-daily-task" id="currentAdhkarLink" href="javascript:void(0)" role="button" aria-label="Challenge of the day" data-task-key="adhkar">
+      <div class="today-action-top">
+        <div class="today-action-icon">🌿</div>
+        <div class="today-action-arrow today-task-status" id="currentAdhkarStatus">→</div>
+      </div>
+      <div>
+        <div class="today-action-title" id="currentAdhkarTitle">Challenge of the day</div>
+        <div class="today-action-text" id="currentAdhkarText">Loading today’s task...</div>
+      </div>
+    </a>
 
-  <div class="today-action today-daily-task today-counter-action" id="allahNameCounterCard" role="button" tabindex="0" data-task-key="name" aria-label="Counter for repeating the name of Allah">
-    <div class="today-action-top">
-      <div class="today-action-icon">☝️</div>
-      <div class="today-action-arrow today-task-status" id="allahNameCounterValue">0/100</div>
+    <div class="today-action today-daily-task today-counter-action" id="allahNameCounterCard" role="button" tabindex="0" data-task-key="name" aria-label="Counter for repeating the name of Allah">
+      <div class="today-action-top">
+        <div class="today-action-icon">☝️</div>
+        <div class="today-action-arrow today-task-status" id="allahNameCounterValue">0/100</div>
+      </div>
+      <div>
+        <div class="today-action-title" id="allahNameToday">Name of Allah</div>
+        <div class="today-action-text" id="allahNameMeaning">Today we learn the meaning of this name.</div>
+        <div class="today-counter-track"><div class="today-counter-fill" id="allahNameCounterFill"></div></div>
+      </div>
     </div>
-    <div>
-      <div class="today-action-title" id="allahNameToday">Name of Allah</div>
-      <div class="today-action-text">Tap the card and repeat it 100 times.</div>
-      <div class="today-counter-track"><div class="today-counter-fill" id="allahNameCounterFill"></div></div>
+
+    <div class="today-action today-daily-task today-goal-action" id="dailyGoalCard" role="button" tabindex="0" data-task-key="goal" aria-label="Daily goal">
+      <div class="today-action-top">
+        <div class="today-action-icon">🎯</div>
+        <div class="today-action-arrow today-task-status" id="dailyGoalStatus">•</div>
+      </div>
+      <div>
+        <div class="today-action-title">Daily goal</div>
+        <div class="today-action-text" id="dailyPracticeText">Do one good deed quietly, without words or display.</div>
+      </div>
     </div>
   </div>
 
-  <div class="today-action today-daily-task today-goal-action" id="dailyGoalCard" role="button" tabindex="0" data-task-key="goal">
-    <div class="today-action-top">
-      <div class="today-action-icon">🎯</div>
-      <div class="today-action-arrow today-task-status" id="dailyGoalStatus">•</div>
-    </div>
-    <div>
-      <div class="today-action-title">Daily goal</div>
-      <div class="today-action-text">Complete today’s small useful action.</div>
+  <div class="today-micro-wrap">
+    <div class="today-action today-daily-task today-micro-action" id="dailyMicroKnowledgeCard" role="button" tabindex="0" data-task-key="micro" aria-label="Micro-knowledge of the day">
+      <div class="today-action-top">
+        <div class="today-action-icon">🧠</div>
+        <div class="today-action-arrow today-task-status" id="dailyMicroKnowledgeStatus">?</div>
+      </div>
+      <div>
+        <div class="today-action-title">Micro-knowledge of the day</div>
+        <div class="today-micro-question" id="dailyMicroQuestion">Loading question...</div>
+        <div class="micro-options" id="dailyMicroOptions"></div>
+        <div class="micro-answer-box" id="dailyMicroAnswer"></div>
+      </div>
     </div>
   </div>
-</div>
 </section>
 
 <div class="home-section-title">
@@ -2589,8 +2882,8 @@ window.addEventListener("DOMContentLoaded",function(){const installBtn=document.
   if (window.innerWidth > 700) return;
 
   const promoTexts = [
-    { text: "Все услуги рядом", brand: false },
-    { text: "TasksLocal", brand: true }
+    { text: "All sections nearby", brand: false },
+    { text: "BarakaWay", brand: true }
   ];
 
   let promoIndex = 0;
@@ -3079,6 +3372,168 @@ window.addEventListener("DOMContentLoaded",function(){const installBtn=document.
 
   renderAll();
   setInterval(renderAll, 60000);
+})();
+</script>
+
+
+<script>
+(function(){
+  const PREFIX = "barakaway_today_en_";
+  const dateKey = (function(){
+    const d = new Date();
+    return d.getFullYear()+"-"+String(d.getMonth()+1).padStart(2,"0")+"-"+String(d.getDate()).padStart(2,"0");
+  })();
+  const dayNumber = Math.floor((new Date(new Date().getFullYear(), new Date().getMonth(), new Date().getDate()) - new Date(2024,0,1)) / 86400000);
+
+  const ayahs = [
+    {ref:"2:153", ayah:"Seek help through patience and prayer.", task:"Today, when pressure comes, pause and pray before reacting."},
+    {ref:"2:186", ayah:"I am near. I answer the call of the caller when he calls upon Me.", task:"Today, make one sincere dua without rushing."},
+    {ref:"3:159", ayah:"Be gentle with them.", task:"Today, speak more gently than usual to someone close to you."},
+    {ref:"4:58", ayah:"Return trusts to their owners.", task:"Today, do not delay something that was trusted to you."},
+    {ref:"5:8", ayah:"Be just; that is closer to taqwa.", task:"Today, do not judge anyone before knowing the situation."},
+    {ref:"16:90", ayah:"Allah commands justice, excellence and giving to relatives.", task:"Today, choose fairness in one small matter."},
+    {ref:"17:23", ayah:"Do not say even uff to your parents.", task:"Today, answer your parents with patience and respect."},
+    {ref:"23:1-2", ayah:"Successful are the believers, those who are humble in their prayer.", task:"Today, remove haste and distraction from at least one prayer."},
+    {ref:"24:30", ayah:"Tell the believing men to lower their gaze.", task:"Today, protect your gaze from what pollutes the heart."},
+    {ref:"49:12", ayah:"Do not backbite one another.", task:"Today, stop one sentence that could harm someone absent."},
+    {ref:"94:5", ayah:"With hardship comes ease.", task:"Today, do not speak hopelessly about yourself."},
+    {ref:"103:1-3", ayah:"Except those who believe, do righteous deeds, and advise each other to truth and patience.", task:"Today, advise with mercy, not superiority."}
+  ];
+
+  const names = [
+    {name:"Ar-Rahman", meaning:"The Most Merciful: His mercy covers all creation."},
+    {name:"Ar-Rahim", meaning:"The Especially Merciful: He grants special mercy to the believers."},
+    {name:"Al-Malik", meaning:"The Sovereign: the true King and absolute Owner."},
+    {name:"Al-Quddus", meaning:"The Holy: completely pure from every imperfection."},
+    {name:"As-Salam", meaning:"The Source of peace and safety, free from all deficiency."},
+    {name:"Al-Mu’min", meaning:"The Giver of security and confirmer of truth."},
+    {name:"Al-Aziz", meaning:"The Mighty and Unconquerable, possessing complete strength."}
+  ];
+
+  const challenges = [
+    "Today, do not answer irritation with irritation at home.",
+    "Today, help someone without being reminded.",
+    "Today, do not share another person’s private matter.",
+    "Today, leave one sin for Allah, even if nobody sees it.",
+    "Today, read Al-Fatihah more slowly than usual.",
+    "Today, be fair even to someone you do not like.",
+    "Today, make dua for someone who helped you before.",
+    "Today, do not send a message while angry.",
+    "Today, be the first to reconcile in a small conflict.",
+    "Today, do not underestimate another person’s effort."
+  ];
+
+  const goals = [
+    "Do one good deed quietly, without words or display.",
+    "Renew your intention before one important action.",
+    "Ask Allah for forgiveness calmly 33 times.",
+    "Remove one useless action that steals your time.",
+    "Make dua for your parents and loved ones.",
+    "Thank Allah for one specific blessing.",
+    "Read one short benefit and keep one lesson."
+  ];
+
+  const questions = [
+    {q:"What does sincerity mean in a good deed?", options:["Doing it for Allah", "Doing it for people", "Doing it for praise"], answer:0, explain:"A deed is strongest when its intention is for Allah, not for attention."},
+    {q:"Which action protects the tongue?", options:["Speaking less and better", "Arguing more", "Mocking others"], answer:0, explain:"Guarding the tongue starts with reducing useless and harmful speech."},
+    {q:"What should come before reacting in anger?", options:["Pause and remember Allah", "Send the message quickly", "Raise the voice"], answer:0, explain:"A pause breaks the heat of anger and protects the heart."},
+    {q:"What is closer to taqwa?", options:["Justice", "Favoritism", "Suspicion"], answer:0, explain:"The Qur’an directly connects justice with taqwa."}
+  ];
+
+  function pick(list){ return list[Math.abs(dayNumber) % list.length]; }
+  function doneKey(name){ return PREFIX + dateKey + "_" + name; }
+  function isDone(name){ return localStorage.getItem(doneKey(name)) === "1"; }
+  function setDone(name){ localStorage.setItem(doneKey(name), "1"); }
+
+  function renderAyah(){
+    const item = pick(ayahs);
+    const title = document.getElementById("dailyArticleTitle");
+    const link = document.getElementById("dailyArticleLink");
+    if(title){ title.innerHTML = '<div class="today-ayah-line"><span class="today-ayah-ref">'+item.ref+'</span><span class="today-ayah-text">'+item.ayah+'</span></div><div class="today-ayah-task"><span class="today-ayah-task-label">Practice:</span> '+item.task+'</div>'; }
+    if(link){ link.setAttribute("href", "javascript:void(0)"); }
+  }
+
+  function renderName(){
+    const item = pick(names);
+    const n = document.getElementById("allahNameToday");
+    const m = document.getElementById("allahNameMeaning");
+    if(n) n.textContent = item.name;
+    if(m) m.textContent = item.meaning;
+  }
+
+  function renderChallenge(){
+    const t = document.getElementById("currentAdhkarTitle");
+    const x = document.getElementById("currentAdhkarText");
+    const l = document.getElementById("currentAdhkarLink");
+    if(t) t.textContent = "Challenge of the day";
+    if(x) x.textContent = pick(challenges);
+    if(l) l.setAttribute("href", "javascript:void(0)");
+  }
+
+  function renderGoal(){
+    const x = document.getElementById("dailyPracticeText");
+    if(x) x.textContent = pick(goals);
+  }
+
+  function renderMicro(){
+    const card = document.getElementById("dailyMicroKnowledgeCard");
+    const qEl = document.getElementById("dailyMicroQuestion");
+    const opts = document.getElementById("dailyMicroOptions");
+    const ans = document.getElementById("dailyMicroAnswer");
+    const status = document.getElementById("dailyMicroKnowledgeStatus");
+    if(!card || !qEl || !opts || !ans) return;
+    const item = pick(questions);
+    qEl.textContent = item.q;
+    opts.innerHTML = "";
+    ans.textContent = "";
+    item.options.forEach(function(text, i){
+      const b = document.createElement("button");
+      b.type = "button";
+      b.textContent = text;
+      b.addEventListener("click", function(e){
+        e.stopPropagation();
+        const correct = i === item.answer;
+        ans.textContent = correct ? "Correct. " + item.explain : "Not exactly. " + item.explain;
+        ans.classList.add("show");
+        setDone("micro");
+        if(status) status.textContent = "✓";
+        card.classList.add("task-done","goal-done");
+      });
+      opts.appendChild(b);
+    });
+    if(isDone("micro")){
+      if(status) status.textContent = "✓";
+      card.classList.add("task-done","goal-done");
+      ans.textContent = item.explain;
+      ans.classList.add("show");
+    }else if(status){ status.textContent = "?"; }
+  }
+
+  function initTahajjud(){
+    const bar = document.getElementById("tahajjudAlarmBar");
+    const toggle = document.getElementById("tahajjudAlarmToggle");
+    const meta = document.getElementById("tahajjudAlarmMeta");
+    if(!bar || !toggle) return;
+    const key = "barakaway_tahajjud_alarm_en";
+    toggle.checked = localStorage.getItem(key) === "1";
+    if(meta) meta.textContent = toggle.checked ? "Alarm enabled — 60 minutes before Fajr" : "60 minutes before Fajr";
+    toggle.addEventListener("change", function(){
+      localStorage.setItem(key, toggle.checked ? "1" : "0");
+      if(meta) meta.textContent = toggle.checked ? "Alarm enabled — 60 minutes before Fajr" : "60 minutes before Fajr";
+      if(toggle.checked && "Notification" in window && Notification.permission === "default"){
+        Notification.requestPermission().catch(function(){});
+      }
+    });
+  }
+
+  document.addEventListener("DOMContentLoaded", function(){
+    renderAyah();
+    renderName();
+    renderChallenge();
+    renderGoal();
+    renderMicro();
+    initTahajjud();
+  });
 })();
 </script>
 
