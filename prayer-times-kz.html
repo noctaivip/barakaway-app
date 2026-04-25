@@ -1,4 +1,4 @@
-﻿<!--
+<!--
 بِسْمِ ٱللَّٰهِ ٱلرَّحْمَـٰنِ ٱلرَّحِيمِ
 In the name of Allah, the Most Merciful, the Most Compassionate
 -->
@@ -267,6 +267,208 @@ html.dark-mode .slider{
   background:#31404b;
 }
 
+
+/* MOBILE COMPACT PRAYER PAGE UPDATE */
+.prayer-now-next{
+  width:100%;
+}
+.current-prayer-box{
+  display:none;
+}
+.next-prayer-box{
+  text-align:center;
+}
+@media (max-width:700px){
+  .container{
+    display:flex;
+    flex-direction:column;
+    padding:14px 10px 92px;
+  }
+  h1{
+    order:1;
+    font-size:24px;
+    margin:0 0 10px;
+  }
+  .hero{
+    order:2;
+    display:flex;
+    flex-direction:column;
+    gap:10px;
+    margin-bottom:10px;
+  }
+  .hero > .panel:first-child{
+    display:none !important;
+  }
+  .panel.next-prayer{
+    min-height:0;
+    padding:12px;
+    border-radius:18px;
+  }
+  .prayer-now-next{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:8px;
+    align-items:stretch;
+  }
+  .current-prayer-box,
+  .next-prayer-box{
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    justify-content:center;
+    min-height:76px;
+    padding:10px 8px;
+    border:1px solid var(--border);
+    border-radius:16px;
+    background:var(--card-bg);
+    text-align:center;
+  }
+  html.dark-mode .current-prayer-box,
+  html.dark-mode .next-prayer-box{
+    background:#1d2721;
+    border-color:#2d7a46;
+  }
+  .next-name{
+    font-size:20px;
+    line-height:1.1;
+    margin:4px 0 2px;
+  }
+  .countdown{
+    font-size:24px;
+    margin:10px 0 4px;
+  }
+  .countdown-note{
+    font-size:11px;
+    line-height:1.25;
+  }
+  .status-bar{
+    margin-top:8px;
+    gap:6px;
+    justify-content:center;
+  }
+  .badge{
+    min-height:24px;
+    padding:3px 8px;
+    font-size:10px;
+  }
+  .today-section{
+    order:3;
+    margin-top:8px;
+  }
+  .location-section{
+    order:4;
+    margin-top:12px;
+  }
+  .filters-section{
+    order:5;
+    margin-top:12px;
+  }
+  .notifications-section{
+    order:6;
+    margin-top:12px;
+  }
+  .section-title{
+    font-size:15px;
+    margin:0 0 8px;
+    padding-left:8px;
+    border-left-width:3px;
+  }
+  .today-section .section-title{
+    font-size:14px;
+  }
+  .prayer-grid{
+    grid-template-columns:repeat(5,minmax(0,1fr)) !important;
+    gap:6px;
+  }
+  .prayer-card{
+    padding:8px 4px;
+    border-radius:12px;
+    min-height:72px;
+    text-align:center;
+  }
+  .prayer-card[data-prayer="Sunrise"]{
+    display:none !important;
+  }
+  .prayer-top{
+    display:block;
+  }
+  .prayer-name{
+    font-size:11px;
+    line-height:1.1;
+  }
+  .prayer-top .badge{
+    display:none;
+  }
+  .prayer-time{
+    font-size:16px;
+    margin:6px 0 2px;
+    line-height:1.05;
+  }
+  .prayer-meta{
+    font-size:9px;
+    line-height:1.2;
+  }
+  .location-section .panel,
+  .filters-section .panel,
+  .notifications-section .panel{
+    padding:10px;
+    border-radius:16px;
+  }
+  .form-grid,
+  .form-grid-3,
+  .tune-grid{
+    gap:8px;
+  }
+  .field{
+    gap:4px;
+  }
+  .field label,
+  .meta-label{
+    font-size:9px;
+    letter-spacing:.7px;
+  }
+  .input,.select,.number{
+    min-height:36px;
+    border-radius:10px;
+    padding:8px 10px;
+    font-size:12px;
+  }
+  .btn-row{
+    gap:6px;
+    margin-top:8px;
+  }
+  .btn-row .btn,
+  .btn{
+    width:auto;
+    flex:1 1 auto;
+    min-height:34px;
+    padding:0 10px;
+    border-radius:10px;
+    font-size:11px;
+  }
+  .notify-grid{
+    gap:10px;
+  }
+  .toggle-row{
+    padding:8px 10px;
+    border-radius:12px;
+  }
+  .toggle-row strong{
+    font-size:12px;
+  }
+  .switch{
+    width:42px;
+    height:24px;
+  }
+  .slider:before{
+    height:18px;
+    width:18px;
+  }
+  .switch input:checked + .slider:before{
+    transform:translateX(18px);
+  }
+}
+
 </style>
 <script src="/theme-init.js"></script>
 <link rel="stylesheet" href="/theme.css">
@@ -279,7 +481,7 @@ html.dark-mode .slider{
   <div class="hero">
     <div class="panel">
       <div class="big-location" id="locationName">Намаз уақыттары</div>
-      <div class="muted" id="locationSub">Ел мен қаланы таңда немесе автоматты анықтауды қолдан</div>
+      <div class="muted" id="locationSub">Ел мен қаланы таңдаңыз немесе автоанықтауды қолданыңыз</div>
       <div class="meta-grid">
         <div class="meta-item"><div class="meta-label">Григориан күні</div><div class="meta-value" id="gregorianDate">—</div></div>
         <div class="meta-item"><div class="meta-label">Хижра</div><div class="meta-value" id="hijriDate">—</div></div>
@@ -288,18 +490,27 @@ html.dark-mode .slider{
       </div>
     </div>
     <div class="panel next-prayer">
-      <div class="meta-label">Келесі намаз</div>
-      <div class="next-name" id="nextPrayerName">—</div>
+      <div class="prayer-now-next">
+        <div class="current-prayer-box">
+          <div class="meta-label">Қазір</div>
+          <div class="next-name current-name" id="currentPrayerName">—</div>
+          <div class="countdown-note" id="currentPrayerTimeText">—</div>
+        </div>
+        <div class="next-prayer-box">
+          <div class="meta-label">Келесі намаз</div>
+          <div class="next-name" id="nextPrayerName">—</div>
+          <div class="countdown-note" id="nextPrayerTimeText">—</div>
+        </div>
+      </div>
       <div class="countdown" id="countdown">--:--:--</div>
-      <div class="countdown-note" id="nextPrayerTimeText">—</div>
       <div class="status-bar">
         <span class="badge" id="permissionBadge">Рұқсат берілмеген</span>
-        <span class="badge warn" id="engineBadge">Жергілікті еске салғыштар</span>
+        <span class="badge warn" id="engineBadge">Жергілікті ескертулер</span>
       </div>
     </div>
   </div>
 
-  <div class="section">
+  <div class="section location-section">
     <div class="section-title">Орналасу және іздеу</div>
     <div class="panel">
       <div class="form-grid">
@@ -321,7 +532,7 @@ html.dark-mode .slider{
     </div>
   </div>
 
-  <div class="section">
+  <div class="section filters-section">
     <div class="section-title">Сүзгілер және дәлдік</div>
     <div class="panel">
       <div class="form-grid-3">
@@ -330,7 +541,7 @@ html.dark-mode .slider{
           <select id="methodSelect" class="select"></select>
         </div>
         <div class="field">
-          <label for="schoolSelect">Аср үшін мазхаб</label>
+          <label for="schoolSelect">Аср үшін мәзһаб</label>
           <select id="schoolSelect" class="select">
             <option value="0">Стандартты (Шафиғи / Мәлики / Ханбали)</option>
             <option value="1">Ханафи</option>
@@ -345,7 +556,7 @@ html.dark-mode .slider{
         </div>
       </div>
       <div class="section" style="margin-top:18px;">
-        <div class="meta-label">Минуттарды дәл баптау</div>
+        <div class="meta-label">Минутты дәлдеу</div>
         <div class="tune-grid">
           <div class="field"><label for="tuneFajr">Fajr</label><input id="tuneFajr" class="number" type="number" min="-20" max="20" value="0"></div>
           <div class="field"><label for="tuneDhuhr">Dhuhr</label><input id="tuneDhuhr" class="number" type="number" min="-20" max="20" value="0"></div>
@@ -361,12 +572,12 @@ html.dark-mode .slider{
     </div>
   </div>
 
-  <div class="section">
+  <div class="section today-section">
     <div class="section-title">Бүгінгі кесте</div>
     <div id="prayerGrid" class="prayer-grid"></div>
   </div>
 
-  <div class="section">
+  <div class="section notifications-section">
     <div class="section-title">Хабарламалар</div>
     <div class="panel">
       <div class="notify-grid">
@@ -374,7 +585,7 @@ html.dark-mode .slider{
           <div class="field">
             <label for="leadSelect">Алдын ала еске салу</label>
             <select id="leadSelect" class="select">
-              <option value="0">Намаз уақытында дәл</option>
+              <option value="0">Дәл намаз уақытында</option>
               <option value="5">5 минут</option>
               <option value="10">10 минут</option>
               <option value="15">15 минут</option>
@@ -385,11 +596,11 @@ html.dark-mode .slider{
           <div class="btn-row">
             <button class="btn primary" id="permissionBtn">Хабарламаларға рұқсат беру</button>
             <button class="btn" id="saveNotifBtn">Хабарламаларды сақтау</button>
-            <button class="btn secondary" id="testNotifBtn">Сынақ хабарламасы</button>
+            <button class="btn secondary" id="testNotifBtn">Хабарлама тесті</button>
           </div>
         </div>
         <div class="notify-list">
-          <div class="toggle-row"><strong>Барлық бес намаз</strong><label class="switch"><input type="checkbox" id="toggleAll"><span class="slider"></span></label></div>
+          <div class="toggle-row"><strong>Бес намаздың бәрі</strong><label class="switch"><input type="checkbox" id="toggleAll"><span class="slider"></span></label></div>
           <div class="toggle-row"><strong>Fajr</strong><label class="switch"><input type="checkbox" class="prayer-toggle" data-prayer="Fajr"><span class="slider"></span></label></div>
           <div class="toggle-row"><strong>Dhuhr</strong><label class="switch"><input type="checkbox" class="prayer-toggle" data-prayer="Dhuhr"><span class="slider"></span></label></div>
           <div class="toggle-row"><strong>Asr</strong><label class="switch"><input type="checkbox" class="prayer-toggle" data-prayer="Asr"><span class="slider"></span></label></div>
@@ -399,15 +610,6 @@ html.dark-mode .slider{
       </div>
     </div>
   </div>
-  <div class="section">
-    <div class="section-title">Жұма</div>
-    <div class="panel">
-      <div class="jumuah-grid">
-        <div class="jumuah-box"><div class="meta-label">Ұсынылатын келу уақыты</div><div class="jumuah-time" id="jumuahTimeBox">12:30–13:30</div></div>
-        <div class="jumuah-box"><div class="meta-label">Дайындық</div><div class="muted">Ғұсыл, таза киім, сүрелер және салауат</div></div>
-        <div class="jumuah-box"><div class="meta-label">Еске салу</div><div class="muted">Жұма күні бөлек хабарламаны іске қос</div></div>
-      </div>
-    </div>
   </div>
 
 </div>
@@ -422,6 +624,8 @@ const timezoneName = document.getElementById('timezoneName');
 const nextPrayerName = document.getElementById('nextPrayerName');
 const countdown = document.getElementById('countdown');
 const nextPrayerTimeText = document.getElementById('nextPrayerTimeText');
+const currentPrayerName = document.getElementById('currentPrayerName');
+const currentPrayerTimeText = document.getElementById('currentPrayerTimeText');
 const permissionBadge = document.getElementById('permissionBadge');
 const engineBadge = document.getElementById('engineBadge');
 const countryInput = document.getElementById('countryInput');
@@ -430,10 +634,10 @@ const citySuggestions = document.getElementById('citySuggestions');
 const methodSelect = document.getElementById('methodSelect');
 const schoolSelect = document.getElementById('schoolSelect');
 const timeFormatSelect = document.getElementById('timeFormatSelect');
-const tuneФаджр = document.getElementById('tuneFajr');
+const tuneFajr = document.getElementById('tuneFajr');
 const tuneDhuhr = document.getElementById('tuneDhuhr');
 const tuneAsr = document.getElementById('tuneAsr');
-const tuneМагриб = document.getElementById('tuneMaghrib');
+const tuneMaghrib = document.getElementById('tuneMaghrib');
 const tuneIsha = document.getElementById('tuneIsha');
 const prayerGrid = document.getElementById('prayerGrid');
 const leadSelect = document.getElementById('leadSelect');
@@ -453,7 +657,7 @@ const qiblaDirectionText = document.getElementById('qiblaDirectionText');
 const qiblaNeedle = document.getElementById('qiblaNeedle');
 const monthGrid = document.getElementById('monthGrid');
 const homeWidgetPreview = document.getElementById('homeWidgetPreview');
-const UI = {"notification_not_supported": "Хабарламалар недоступны", "notification_enabled": "Хабарламалар включены", "notification_denied": "Хабарламалар заблокированы", "notification_default": "Рұқсат берілмеген", "local_reminder_engine": "Жергілікті еске салғыштар", "location_unknown": "Орналасу таңдалмаған", "location_hint": "Ел мен қаланы таңда немесе автоматты анықтауды қолдан", "manual_location_sub": "Таңдалған қала бойынша жүктелді", "detected_location": "Анықталған орналасу", "city_country_required": "Елді де, қаланы да көрсет.", "geolocation_not_supported": "Бұл құрылғы геолокацияны қолдамайды", "location_error": "Орналасуды анықтау қатесі", "notification_granted_msg": "Хабарламаларға рұқсат берілді.", "notification_denied_msg": "Хабарламалар не разрешены.", "time_for": "Қазір уақыт", "starts_in": "кейін", "minutes": "мин", "enable_notifications_first": "Алдымен хабарламаларды қос.", "test_notification_title": "Сынақ хабарламасы", "test_notification_body": "Жергілікті еске салғыштар для времени молитв работают.", "notifications_saved": "Хабарлама баптаулары сақталды.", "load_error": "Намаз уақыттарын жүктеу мүмкін болмады", "prayer_fajr": "Фаджр", "prayer_sunrise": "Күн шығуы", "prayer_dhuhr": "Зухр", "prayer_asr": "Аср", "prayer_maghrib": "Магриб", "prayer_isha": "Иша", "source_time": "Негізгі уақыт", "at_label": "сағат", "notification_title": "Еске салу"};
+const UI = {"notification_not_supported": "Хабарламалар қолжетімсіз", "notification_enabled": "Хабарламалар қосулы", "notification_denied": "Хабарламалар бұғатталған", "notification_default": "Рұқсат берілмеген", "local_reminder_engine": "Жергілікті ескертулер", "location_unknown": "Орналасу таңдалмаған", "location_hint": "Ел мен қаланы таңдаңыз немесе автоанықтауды қолданыңыз", "manual_location_sub": "Таңдалған қала бойынша жүктелді", "detected_location": "Анықталған орналасу", "city_country_required": "Ел мен қаланы көрсетіңіз.", "geolocation_not_supported": "Бұл құрылғы геолокацияны қолдамайды", "location_error": "Орналасуды анықтау қатесі", "notification_granted_msg": "Хабарламаға рұқсат берілді.", "notification_denied_msg": "Хабарламаларға рұқсат жоқ.", "time_for": "Қазір уақыты", "starts_in": "кейін", "minutes": "мин", "enable_notifications_first": "Алдымен хабарламаларды қосыңыз.", "test_notification_title": "Сынақ хабарламасы", "test_notification_body": "Намаз уақытына жергілікті ескертулер жұмыс істейді.", "notifications_saved": "Хабарлама баптаулары сақталды.", "load_error": "Намаз уақыттарын жүктеу мүмкін болмады", "prayer_fajr": "Фәжр", "prayer_sunrise": "Күн шығу", "prayer_dhuhr": "Зухр", "prayer_asr": "Аср", "prayer_maghrib": "Магриб", "prayer_isha": "Иша", "source_time": "Бастапқы уақыт", "at_label": "в", "notification_title": "Ескерту"};
 const state = { currentMode:'city', city:localStorage.getItem('prayer_city')||'', country:localStorage.getItem('prayer_country')||'', lat:localStorage.getItem('prayer_lat')||'', lon:localStorage.getItem('prayer_lon')||'', locationName:localStorage.getItem('prayer_location_name')||'', timingsRaw:null, methodName:'', timezone:'', nextPrayerTimer:null, notificationTimeouts:[] };
 const SETTINGS_KEY='prayer_page_settings_v1';
 function getSettings(){ const d={method:'3',school:'0',timeFormat:'24',lead:'10',tune:{fajr:0,dhuhr:0,asr:0,maghrib:0,isha:0},enabled:{Fajr:true,Dhuhr:true,Asr:true,Maghrib:true,Isha:true}}; try{ const p=JSON.parse(localStorage.getItem(SETTINGS_KEY)||'{}'); return {...d,...p,tune:{...d.tune,...(p.tune||{})},enabled:{...d.enabled,...(p.enabled||{})}} }catch(_){ return d } }
@@ -494,9 +698,10 @@ function timingsToTuneString(s){ return [0,s.tune.fajr||0,0,s.tune.dhuhr||0,s.tu
 async function loadMethods(){ try{ const r=await fetch('https://api.aladhan.com/v1/methods'); const j=await r.json(); methodSelect.innerHTML=''; Object.entries(j.data||{}).forEach(([id,data])=>{ const o=document.createElement('option'); o.value=String(id); o.textContent=data.name; methodSelect.appendChild(o);}); methodSelect.value=[...methodSelect.options].some(o=>o.value===getSettings().method)?getSettings().method:'3'; }catch(_){ methodSelect.innerHTML='<option value="3">Muslim World League</option><option value="4">Umm Al-Qura University, Makkah</option><option value="5">University of Islamic Sciences, Karachi</option><option value="2">Islamic Society of North America</option><option value="8">Gulf Region</option><option value="13">Diyanet, Turkey</option><option value="15">Moonsighting Committee</option><option value="16">Dubai, UAE</option>'; methodSelect.value=getSettings().method||'3'; } }
 function updatePermissionBadge(){ const b=permissionBadge; if(!('Notification' in window)){ b.textContent=UI.notification_not_supported; b.className='badge warn'; return;} const p=Notification.permission; if(p==='granted'){ b.textContent=UI.notification_enabled; b.className='badge'; } else if(p==='denied'){ b.textContent=UI.notification_denied; b.className='badge warn'; } else { b.textContent=UI.notification_default; b.className='badge warn'; } }
 function setLocationUI(name, sub){ locationName.textContent=name||UI.location_unknown; locationSub.textContent=sub||UI.location_hint; }
-function buildPrayerCards(t){ if(!prayerGrid) return; const prayers=[['Fajr',UI.prayer_fajr],['Sunrise',UI.prayer_sunrise],['Dhuhr',UI.prayer_dhuhr],['Asr',UI.prayer_asr],['Maghrib',UI.prayer_maghrib],['Isha',UI.prayer_isha]]; const next=getNextPrayer(t); prayerGrid.innerHTML=prayers.map(([key,label])=>`<div class="prayer-card${next&&next.key===key?' active':''}"><div class="prayer-top"><div class="prayer-name">${label}</div><span class="badge">${key}</span></div><div class="prayer-time">${formatTimeDisplay(t[key])}</div><div class="prayer-meta">${UI.source_time}: ${t[key]||'—'}</div></div>`).join(''); }
+function buildPrayerCards(t){ if(!prayerGrid) return; const prayers=[['Fajr',UI.prayer_fajr],['Sunrise',UI.prayer_sunrise],['Dhuhr',UI.prayer_dhuhr],['Asr',UI.prayer_asr],['Maghrib',UI.prayer_maghrib],['Isha',UI.prayer_isha]]; const next=getNextPrayer(t); prayerGrid.innerHTML=prayers.map(([key,label])=>`<div class="prayer-card${next&&next.key===key?' active':''}" data-prayer="${key}"><div class="prayer-top"><div class="prayer-name">${label}</div><span class="badge">${key}</span></div><div class="prayer-time">${formatTimeDisplay(t[key])}</div><div class="prayer-meta">${UI.source_time}: ${t[key]||'—'}</div></div>`).join(''); }
+function getCurrentPrayer(t){ const seq=['Fajr','Dhuhr','Asr','Maghrib','Isha']; const now=new Date(); let current={key:'Isha',time:parseTodayTimeToDate(t.Isha)}; current.time.setDate(current.time.getDate()-1); for(const key of seq){ const d=parseTodayTimeToDate(t[key]); if(d<=now) current={key,time:d}; } return current; }
 function getNextPrayer(t){ const seq=['Fajr','Dhuhr','Asr','Maghrib','Isha']; const now=new Date(); for(const key of seq){ const d=parseTodayTimeToDate(t[key]); if(d>now) return {key,time:d}; } const tf=parseTodayTimeToDate(t.Fajr); tf.setDate(tf.getDate()+1); return {key:'Fajr',time:tf}; }
-function updateNextPrayerPanel(){ if(!state.timingsRaw) return; const next=getNextPrayer(state.timingsRaw); const names={Fajr:UI.prayer_fajr,Dhuhr:UI.prayer_dhuhr,Asr:UI.prayer_asr,Maghrib:UI.prayer_maghrib,Isha:UI.prayer_isha}; nextPrayerName.textContent=names[next.key]||next.key; nextPrayerTimeText.textContent=`${UI.at_label} ${formatTimeDisplay(state.timingsRaw[next.key])}`; const tick=()=>{ const now=new Date(); let diff=next.time-now; if(diff<0) diff=0; const h=Math.floor(diff/3600000), m=Math.floor((diff%3600000)/60000), s=Math.floor((diff%60000)/1000); countdown.textContent=`${String(h).padStart(2,'0')}:${String(m).padStart(2,'0')}:${String(s).padStart(2,'0')}`; }; if(state.nextPrayerTimer) clearInterval(state.nextPrayerTimer); tick(); state.nextPrayerTimer=setInterval(()=>{ tick(); const cur=getNextPrayer(state.timingsRaw); if(cur.key!==next.key||cur.time.getTime()!==next.time.getTime()){ updateNextPrayerPanel(); buildPrayerCards(state.timingsRaw); } },1000); }
+function updateNextPrayerPanel(){ if(!state.timingsRaw) return; const next=getNextPrayer(state.timingsRaw); const current=getCurrentPrayer(state.timingsRaw); const names={Fajr:UI.prayer_fajr,Dhuhr:UI.prayer_dhuhr,Asr:UI.prayer_asr,Maghrib:UI.prayer_maghrib,Isha:UI.prayer_isha}; if(currentPrayerName) currentPrayerName.textContent=names[current.key]||current.key; if(currentPrayerTimeText) currentPrayerTimeText.textContent=`${UI.at_label} ${formatTimeDisplay(state.timingsRaw[current.key])}`; nextPrayerName.textContent=names[next.key]||next.key; nextPrayerTimeText.textContent=`${UI.at_label} ${formatTimeDisplay(state.timingsRaw[next.key])}`; const tick=()=>{ const now=new Date(); let diff=next.time-now; if(diff<0) diff=0; const h=Math.floor(diff/3600000), m=Math.floor((diff%3600000)/60000), s=Math.floor((diff%60000)/1000); countdown.textContent=`${String(h).padStart(2,'0')}:${String(m).padStart(2,'0')}:${String(s).padStart(2,'0')}`; }; if(state.nextPrayerTimer) clearInterval(state.nextPrayerTimer); tick(); state.nextPrayerTimer=setInterval(()=>{ tick(); const cur=getNextPrayer(state.timingsRaw); if(cur.key!==next.key||cur.time.getTime()!==next.time.getTime()){ updateNextPrayerPanel(); buildPrayerCards(state.timingsRaw); } },1000); }
 function updateDates(meta){ gregorianDate.textContent=meta?.gregorian||'—'; hijriDate.textContent=meta?.hijri||'—'; methodName.textContent=state.methodName||'—'; timezoneName.textContent=state.timezone||Intl.DateTimeFormat().resolvedOptions().timeZone||'—'; }
 function storeLocation(){ localStorage.setItem('prayer_city',state.city||''); localStorage.setItem('prayer_country',state.country||''); localStorage.setItem('prayer_lat',state.lat||''); localStorage.setItem('prayer_lon',state.lon||''); localStorage.setItem('prayer_location_name',state.locationName||''); }
 
@@ -515,7 +720,7 @@ async function fallbackToManualLocation(){
     state.city = city;
     state.country = country;
     state.currentMode = 'city';
-    showToast('Енгізілген деректер бойынша қолмен іздеуді қолданамыз.');
+    showToast('Енгізілген дерек бойынша қолмен іздеу қолданылады.');
     await fetchByCity();
     return true;
   }
@@ -551,7 +756,7 @@ async function detectLocation(){
     clearStoredCoordinates();
     const usedManual = await fallbackToManualLocation().catch(()=>false);
     if(!usedManual){
-      showToast('Орналасуды анықтау қатесі: ' + err.message + '. Браузерде немесе PWA ішінде геолокацияға рұқсат жоқ. Сайтқа Location рұқсатын бер немесе ел мен қала бойынша жүкте.');
+      showToast('Орналасуды анықтау қатесі: ' + err.message + '. Доступ к геолокации запрещён в браузере или PWA. Разреши Location для сайта или загружай по стране и городу.');
     }
   }, {enableHighAccuracy:true,timeout:12000,maximumAge:300000});
 }
@@ -588,14 +793,14 @@ function updateQibla(){
   if(!state.lat || !state.lon){
     qiblaAngle.textContent='—';
     qiblaDistance.textContent='—';
-    qiblaDirectionText.textContent='Қағбаға бағыт: —';
+    qiblaDirectionText.textContent='Қағба бағыты: —';
     qiblaNeedle.style.transform='translate(-50%,-88%) rotate(0deg)';
     return;
   }
   const q = computeQibla(Number(state.lat), Number(state.lon));
   qiblaAngle.textContent = q.angle.toFixed(1) + '°';
-  qiblaDistance.textContent = Math.round(q.distanceKm).toLocaleString() + ' км';
-  qiblaDirectionText.textContent = 'Қағбаға бағыт: ' + q.angle.toFixed(1) + '°';
+  qiblaDistance.textContent = Math.round(q.distanceKm).toLocaleString() + ' km';
+  qiblaDirectionText.textContent = 'Қағба бағыты: ' + q.angle.toFixed(1) + '°';
   qiblaNeedle.style.transform = 'translate(-50%,-88%) rotate(' + q.angle + 'deg)';
 }
 function renderMonthView(){
@@ -608,7 +813,7 @@ function renderMonthView(){
     const isToday = d === now.getDate();
     const fajr = state.timingsRaw ? formatTimeDisplay(state.timingsRaw.Fajr) : '—';
     const maghrib = state.timingsRaw ? formatTimeDisplay(state.timingsRaw.Maghrib) : '—';
-    monthGrid.innerHTML += `<div class="month-day${isToday ? ' today' : ''}"><div class="month-num">${d}</div><div class="month-fajr">Фаджр ${fajr}</div><div class="month-maghrib">Магриб ${maghrib}</div></div>`;
+    monthGrid.innerHTML += `<div class="month-day${isToday ? ' today' : ''}"><div class="month-num">${d}</div><div class="month-fajr">Fajr ${fajr}</div><div class="month-maghrib">Maghrib ${maghrib}</div></div>`;
   }
 }
 function updateJumuahBox(){

@@ -1,4 +1,4 @@
-﻿<!--
+<!--
 بِسْمِ ٱللَّٰهِ ٱلرَّحْمَـٰنِ ٱلرَّحِيمِ
 In the name of Allah, the Most Merciful, the Most Compassionate
 -->
@@ -267,6 +267,208 @@ html.dark-mode .slider{
   background:#31404b;
 }
 
+
+/* MOBILE COMPACT PRAYER PAGE UPDATE */
+.prayer-now-next{
+  width:100%;
+}
+.current-prayer-box{
+  display:none;
+}
+.next-prayer-box{
+  text-align:center;
+}
+@media (max-width:700px){
+  .container{
+    display:flex;
+    flex-direction:column;
+    padding:14px 10px 92px;
+  }
+  h1{
+    order:1;
+    font-size:24px;
+    margin:0 0 10px;
+  }
+  .hero{
+    order:2;
+    display:flex;
+    flex-direction:column;
+    gap:10px;
+    margin-bottom:10px;
+  }
+  .hero > .panel:first-child{
+    display:none !important;
+  }
+  .panel.next-prayer{
+    min-height:0;
+    padding:12px;
+    border-radius:18px;
+  }
+  .prayer-now-next{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:8px;
+    align-items:stretch;
+  }
+  .current-prayer-box,
+  .next-prayer-box{
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    justify-content:center;
+    min-height:76px;
+    padding:10px 8px;
+    border:1px solid var(--border);
+    border-radius:16px;
+    background:var(--card-bg);
+    text-align:center;
+  }
+  html.dark-mode .current-prayer-box,
+  html.dark-mode .next-prayer-box{
+    background:#1d2721;
+    border-color:#2d7a46;
+  }
+  .next-name{
+    font-size:20px;
+    line-height:1.1;
+    margin:4px 0 2px;
+  }
+  .countdown{
+    font-size:24px;
+    margin:10px 0 4px;
+  }
+  .countdown-note{
+    font-size:11px;
+    line-height:1.25;
+  }
+  .status-bar{
+    margin-top:8px;
+    gap:6px;
+    justify-content:center;
+  }
+  .badge{
+    min-height:24px;
+    padding:3px 8px;
+    font-size:10px;
+  }
+  .today-section{
+    order:3;
+    margin-top:8px;
+  }
+  .location-section{
+    order:4;
+    margin-top:12px;
+  }
+  .filters-section{
+    order:5;
+    margin-top:12px;
+  }
+  .notifications-section{
+    order:6;
+    margin-top:12px;
+  }
+  .section-title{
+    font-size:15px;
+    margin:0 0 8px;
+    padding-left:8px;
+    border-left-width:3px;
+  }
+  .today-section .section-title{
+    font-size:14px;
+  }
+  .prayer-grid{
+    grid-template-columns:repeat(5,minmax(0,1fr)) !important;
+    gap:6px;
+  }
+  .prayer-card{
+    padding:8px 4px;
+    border-radius:12px;
+    min-height:72px;
+    text-align:center;
+  }
+  .prayer-card[data-prayer="Sunrise"]{
+    display:none !important;
+  }
+  .prayer-top{
+    display:block;
+  }
+  .prayer-name{
+    font-size:11px;
+    line-height:1.1;
+  }
+  .prayer-top .badge{
+    display:none;
+  }
+  .prayer-time{
+    font-size:16px;
+    margin:6px 0 2px;
+    line-height:1.05;
+  }
+  .prayer-meta{
+    font-size:9px;
+    line-height:1.2;
+  }
+  .location-section .panel,
+  .filters-section .panel,
+  .notifications-section .panel{
+    padding:10px;
+    border-radius:16px;
+  }
+  .form-grid,
+  .form-grid-3,
+  .tune-grid{
+    gap:8px;
+  }
+  .field{
+    gap:4px;
+  }
+  .field label,
+  .meta-label{
+    font-size:9px;
+    letter-spacing:.7px;
+  }
+  .input,.select,.number{
+    min-height:36px;
+    border-radius:10px;
+    padding:8px 10px;
+    font-size:12px;
+  }
+  .btn-row{
+    gap:6px;
+    margin-top:8px;
+  }
+  .btn-row .btn,
+  .btn{
+    width:auto;
+    flex:1 1 auto;
+    min-height:34px;
+    padding:0 10px;
+    border-radius:10px;
+    font-size:11px;
+  }
+  .notify-grid{
+    gap:10px;
+  }
+  .toggle-row{
+    padding:8px 10px;
+    border-radius:12px;
+  }
+  .toggle-row strong{
+    font-size:12px;
+  }
+  .switch{
+    width:42px;
+    height:24px;
+  }
+  .slider:before{
+    height:18px;
+    width:18px;
+  }
+  .switch input:checked + .slider:before{
+    transform:translateX(18px);
+  }
+}
+
 </style>
 <script src="/theme-init.js"></script>
 <link rel="stylesheet" href="/theme.css">
@@ -279,7 +481,7 @@ html.dark-mode .slider{
   <div class="hero">
     <div class="panel">
       <div class="big-location" id="locationName">নামাজের সময়</div>
-      <div class="muted" id="locationSub">দেশ ও শহর নির্ধারণ করুন অথবা স্বয়ংক্রিয় সনাক্তকরণ ব্যবহার করুন</div>
+      <div class="muted" id="locationSub">দেশ ও শহর সেট করুন বা স্বয়ংক্রিয় শনাক্তকরণ ব্যবহার করুন</div>
       <div class="meta-grid">
         <div class="meta-item"><div class="meta-label">গ্রেগরিয়ান তারিখ</div><div class="meta-value" id="gregorianDate">—</div></div>
         <div class="meta-item"><div class="meta-label">হিজরি</div><div class="meta-value" id="hijriDate">—</div></div>
@@ -288,40 +490,49 @@ html.dark-mode .slider{
       </div>
     </div>
     <div class="panel next-prayer">
-      <div class="meta-label">পরবর্তী নামাজ</div>
-      <div class="next-name" id="nextPrayerName">—</div>
+      <div class="prayer-now-next">
+        <div class="current-prayer-box">
+          <div class="meta-label">এখন</div>
+          <div class="next-name current-name" id="currentPrayerName">—</div>
+          <div class="countdown-note" id="currentPrayerTimeText">—</div>
+        </div>
+        <div class="next-prayer-box">
+          <div class="meta-label">পরবর্তী নামাজ</div>
+          <div class="next-name" id="nextPrayerName">—</div>
+          <div class="countdown-note" id="nextPrayerTimeText">—</div>
+        </div>
+      </div>
       <div class="countdown" id="countdown">--:--:--</div>
-      <div class="countdown-note" id="nextPrayerTimeText">—</div>
       <div class="status-bar">
         <span class="badge" id="permissionBadge">অনুমতি দেওয়া হয়নি</span>
-        <span class="badge warn" id="engineBadge">লোকাল রিমাইন্ডার</span>
+        <span class="badge warn" id="engineBadge">স্থানীয় রিমাইন্ডার</span>
       </div>
     </div>
   </div>
 
-  <div class="section">
+  <div class="section location-section">
     <div class="section-title">লোকেশন ও অনুসন্ধান</div>
     <div class="panel">
       <div class="form-grid">
         <div class="field">
           <label for="countryInput">দেশ</label>
-          <input id="countryInput" class="input" placeholder="যেমন: Bangladesh">
+          <input id="countryInput" class="input" placeholder="যেমন: Uzbekistan">
         </div>
         <div class="field">
           <label for="cityInput">শহর</label>
-          <input id="cityInput" class="input" list="citySuggestions" placeholder="যেমন: Dhaka">
+          <input id="cityInput" class="input" list="citySuggestions" placeholder="যেমন: Tashkent">
           <datalist id="citySuggestions"></datalist>
         </div>
       </div>
       <div class="btn-row">
         <button class="btn primary" id="searchCityBtn">শহর অনুযায়ী লোড করুন</button>
-        <button class="btn secondary" id="detectBtn">স্বয়ংক্রিয়ভাবে সনাক্ত করুন</button>
-        <button class="btn" id="refreshBtn">আপডেট করুন</button>
+        <button class="btn secondary" id="detectBtn">স্বয়ংক্রিয় শনাক্ত করুন</button>
+        <button class="btn" id="refreshBtn">আপডেট</button>
       </div>
     </div>
   </div>
 
-  <div class="section">
+  <div class="section filters-section">
     <div class="section-title">ফিল্টার ও নির্ভুলতা</div>
     <div class="panel">
       <div class="form-grid-3">
@@ -330,14 +541,14 @@ html.dark-mode .slider{
           <select id="methodSelect" class="select"></select>
         </div>
         <div class="field">
-          <label for="schoolSelect">আসর-এর জন্য মাজহাব</label>
+          <label for="schoolSelect">আসরের জন্য মাজহাব</label>
           <select id="schoolSelect" class="select">
-            <option value="0">স্ট্যান্ডার্ড (শাফি / মালিক / হাম্বলি)</option>
+            <option value="0">স্ট্যান্ডার্ড (শাফি / মালিকি / হাম্বলি)</option>
             <option value="1">হানাফি</option>
           </select>
         </div>
         <div class="field">
-          <label for="timeFormatSelect">সময়ের ফরম্যাট</label>
+          <label for="timeFormatSelect">সময় ফরম্যাট</label>
           <select id="timeFormatSelect" class="select">
             <option value="24">24h</option>
             <option value="12">12h</option>
@@ -345,7 +556,7 @@ html.dark-mode .slider{
         </div>
       </div>
       <div class="section" style="margin-top:18px;">
-        <div class="meta-label">মিনিটের সূক্ষ্ম সমন্বয়</div>
+        <div class="meta-label">মিনিট সামঞ্জস্য</div>
         <div class="tune-grid">
           <div class="field"><label for="tuneFajr">Fajr</label><input id="tuneFajr" class="number" type="number" min="-20" max="20" value="0"></div>
           <div class="field"><label for="tuneDhuhr">Dhuhr</label><input id="tuneDhuhr" class="number" type="number" min="-20" max="20" value="0"></div>
@@ -356,25 +567,25 @@ html.dark-mode .slider{
       </div>
       <div class="btn-row">
         <button class="btn primary" id="applyFiltersBtn">ফিল্টার প্রয়োগ করুন</button>
-        <button class="btn" id="resetFiltersBtn">ডিফল্টে রিসেট করুন</button>
+        <button class="btn" id="resetFiltersBtn">ডিফল্টে ফিরুন</button>
       </div>
     </div>
   </div>
 
-  <div class="section">
+  <div class="section today-section">
     <div class="section-title">আজকের সময়সূচি</div>
     <div id="prayerGrid" class="prayer-grid"></div>
   </div>
 
-  <div class="section">
+  <div class="section notifications-section">
     <div class="section-title">নোটিফিকেশন</div>
     <div class="panel">
       <div class="notify-grid">
         <div>
           <div class="field">
-            <label for="leadSelect">আগে থেকে মনে করিয়ে দিন</label>
+            <label for="leadSelect">আগে মনে করান</label>
             <select id="leadSelect" class="select">
-              <option value="0">নামাজের ঠিক সময়ে</option>
+              <option value="0">ঠিক নামাজের সময়</option>
               <option value="5">৫ মিনিট</option>
               <option value="10">১০ মিনিট</option>
               <option value="15">১৫ মিনিট</option>
@@ -383,13 +594,13 @@ html.dark-mode .slider{
             </select>
           </div>
           <div class="btn-row">
-            <button class="btn primary" id="permissionBtn">নোটিফিকেশনের অনুমতি দিন</button>
+            <button class="btn primary" id="permissionBtn">নোটিফিকেশন অনুমতি দিন</button>
             <button class="btn" id="saveNotifBtn">নোটিফিকেশন সংরক্ষণ করুন</button>
-            <button class="btn secondary" id="testNotifBtn">নোটিফিকেশন পরীক্ষা</button>
+            <button class="btn secondary" id="testNotifBtn">নোটিফিকেশন টেস্ট</button>
           </div>
         </div>
         <div class="notify-list">
-          <div class="toggle-row"><strong>সব পাঁচ ওয়াক্ত নামাজ</strong><label class="switch"><input type="checkbox" id="toggleAll"><span class="slider"></span></label></div>
+          <div class="toggle-row"><strong>পাঁচ ওয়াক্ত সব নামাজ</strong><label class="switch"><input type="checkbox" id="toggleAll"><span class="slider"></span></label></div>
           <div class="toggle-row"><strong>Fajr</strong><label class="switch"><input type="checkbox" class="prayer-toggle" data-prayer="Fajr"><span class="slider"></span></label></div>
           <div class="toggle-row"><strong>Dhuhr</strong><label class="switch"><input type="checkbox" class="prayer-toggle" data-prayer="Dhuhr"><span class="slider"></span></label></div>
           <div class="toggle-row"><strong>Asr</strong><label class="switch"><input type="checkbox" class="prayer-toggle" data-prayer="Asr"><span class="slider"></span></label></div>
@@ -399,15 +610,6 @@ html.dark-mode .slider{
       </div>
     </div>
   </div>
-  <div class="section">
-    <div class="section-title">জুমা</div>
-    <div class="panel">
-      <div class="jumuah-grid">
-        <div class="jumuah-box"><div class="meta-label">প্রস্তাবিত আগমনের সময়</div><div class="jumuah-time" id="jumuahTimeBox">12:30–13:30</div></div>
-        <div class="jumuah-box"><div class="meta-label">প্রস্তুতি</div><div class="muted">গোসল, পরিষ্কার পোশাক, সূরা এবং দরুদ</div></div>
-        <div class="jumuah-box"><div class="meta-label">স্মরণ</div><div class="muted">শুক্রবারের জন্য আলাদা নোটিফিকেশন চালু করুন</div></div>
-      </div>
-    </div>
   </div>
 
 </div>
@@ -422,6 +624,8 @@ const timezoneName = document.getElementById('timezoneName');
 const nextPrayerName = document.getElementById('nextPrayerName');
 const countdown = document.getElementById('countdown');
 const nextPrayerTimeText = document.getElementById('nextPrayerTimeText');
+const currentPrayerName = document.getElementById('currentPrayerName');
+const currentPrayerTimeText = document.getElementById('currentPrayerTimeText');
 const permissionBadge = document.getElementById('permissionBadge');
 const engineBadge = document.getElementById('engineBadge');
 const countryInput = document.getElementById('countryInput');
@@ -453,7 +657,7 @@ const qiblaDirectionText = document.getElementById('qiblaDirectionText');
 const qiblaNeedle = document.getElementById('qiblaNeedle');
 const monthGrid = document.getElementById('monthGrid');
 const homeWidgetPreview = document.getElementById('homeWidgetPreview');
-const UI = {"notification_not_supported": "নোটিফিকেশন উপলব্ধ নয়", "notification_enabled": "নোটিফিকেশন চালু আছে", "notification_denied": "নোটিফিকেশন ব্লক করা হয়েছে", "notification_default": "অনুমতি দেওয়া হয়নি", "local_reminder_engine": "লোকাল রিমাইন্ডার", "location_unknown": "লোকেশন নির্বাচিত নয়", "location_hint": "দেশ ও শহর নির্বাচন করুন অথবা স্বয়ংক্রিয় সনাক্তকরণ ব্যবহার করুন", "manual_location_sub": "নির্বাচিত শহর অনুযায়ী লোড হয়েছে", "detected_location": "সনাক্ত করা লোকেশন", "city_country_required": "দেশ এবং শহর উভয়ই লিখুন।", "geolocation_not_supported": "এই ডিভাইসে জিওলোকেশন সমর্থিত নয়", "location_error": "লোকেশন নির্ধারণে ত্রুটি", "notification_granted_msg": "নোটিফিকেশনের অনুমতি দেওয়া হয়েছে।", "notification_denied_msg": "নোটিফিকেশনের অনুমতি নেই।", "time_for": "এখন সময়", "starts_in": "এর মধ্যে", "minutes": "মিনিট", "enable_notifications_first": "প্রথমে নোটিফিকেশন চালু করুন।", "test_notification_title": "পরীক্ষামূলক নোটিফিকেশন", "test_notification_body": "নামাজের সময়ের জন্য লোকাল রিমাইন্ডার কাজ করছে।", "notifications_saved": "নোটিফিকেশন সেটিংস সংরক্ষণ করা হয়েছে।", "load_error": "নামাজের সময় লোড করা যায়নি", "prayer_fajr": "ফজর", "prayer_sunrise": "সূর্যোদয়", "prayer_dhuhr": "যোহর", "prayer_asr": "আসর", "prayer_maghrib": "মাগরিব", "prayer_isha": "ইশা", "source_time": "মূল সময়", "at_label": "এ", "notification_title": "স্মরণ"};
+const UI = {"notification_not_supported": "নোটিফিকেশন উপলভ্য নয়", "notification_enabled": "নোটিফিকেশন চালু", "notification_denied": "নোটিফিকেশন ব্লক করা", "notification_default": "অনুমতি দেওয়া হয়নি", "local_reminder_engine": "স্থানীয় রিমাইন্ডার", "location_unknown": "লোকেশন নির্বাচিত নয়", "location_hint": "দেশ ও শহর বেছে নিন বা স্বয়ংক্রিয় শনাক্তকরণ ব্যবহার করুন", "manual_location_sub": "নির্বাচিত শহর অনুযায়ী লোড হয়েছে", "detected_location": "শনাক্তকৃত লোকেশন", "city_country_required": "দেশ ও শহর লিখুন.", "geolocation_not_supported": "এই ডিভাইস geolocation সমর্থন করে না", "location_error": "লোকেশন শনাক্তকরণ ত্রুটি", "notification_granted_msg": "নোটিফিকেশন অনুমতি দেওয়া হয়েছে.", "notification_denied_msg": "নোটিফিকেশন অনুমতি নেই.", "time_for": "এখন সময়", "starts_in": "পরে", "minutes": "মিনিট", "enable_notifications_first": "আগে নোটিফিকেশন চালু করুন.", "test_notification_title": "টেস্ট নোটিফিকেশন", "test_notification_body": "নামাজের সময়ের স্থানীয় রিমাইন্ডার কাজ করছে.", "notifications_saved": "নোটিফিকেশন সেটিংস সংরক্ষিত.", "load_error": "নামাজের সময় লোড করা যায়নি", "prayer_fajr": "ফজর", "prayer_sunrise": "সূর্যোদয়", "prayer_dhuhr": "যোহর", "prayer_asr": "আসর", "prayer_maghrib": "মাগরিব", "prayer_isha": "ইশা", "source_time": "মূল সময়", "at_label": "в", "notification_title": "রিমাইন্ডার"};
 const state = { currentMode:'city', city:localStorage.getItem('prayer_city')||'', country:localStorage.getItem('prayer_country')||'', lat:localStorage.getItem('prayer_lat')||'', lon:localStorage.getItem('prayer_lon')||'', locationName:localStorage.getItem('prayer_location_name')||'', timingsRaw:null, methodName:'', timezone:'', nextPrayerTimer:null, notificationTimeouts:[] };
 const SETTINGS_KEY='prayer_page_settings_v1';
 function getSettings(){ const d={method:'3',school:'0',timeFormat:'24',lead:'10',tune:{fajr:0,dhuhr:0,asr:0,maghrib:0,isha:0},enabled:{Fajr:true,Dhuhr:true,Asr:true,Maghrib:true,Isha:true}}; try{ const p=JSON.parse(localStorage.getItem(SETTINGS_KEY)||'{}'); return {...d,...p,tune:{...d.tune,...(p.tune||{})},enabled:{...d.enabled,...(p.enabled||{})}} }catch(_){ return d } }
@@ -494,9 +698,10 @@ function timingsToTuneString(s){ return [0,s.tune.fajr||0,0,s.tune.dhuhr||0,s.tu
 async function loadMethods(){ try{ const r=await fetch('https://api.aladhan.com/v1/methods'); const j=await r.json(); methodSelect.innerHTML=''; Object.entries(j.data||{}).forEach(([id,data])=>{ const o=document.createElement('option'); o.value=String(id); o.textContent=data.name; methodSelect.appendChild(o);}); methodSelect.value=[...methodSelect.options].some(o=>o.value===getSettings().method)?getSettings().method:'3'; }catch(_){ methodSelect.innerHTML='<option value="3">Muslim World League</option><option value="4">Umm Al-Qura University, Makkah</option><option value="5">University of Islamic Sciences, Karachi</option><option value="2">Islamic Society of North America</option><option value="8">Gulf Region</option><option value="13">Diyanet, Turkey</option><option value="15">Moonsighting Committee</option><option value="16">Dubai, UAE</option>'; methodSelect.value=getSettings().method||'3'; } }
 function updatePermissionBadge(){ const b=permissionBadge; if(!('Notification' in window)){ b.textContent=UI.notification_not_supported; b.className='badge warn'; return;} const p=Notification.permission; if(p==='granted'){ b.textContent=UI.notification_enabled; b.className='badge'; } else if(p==='denied'){ b.textContent=UI.notification_denied; b.className='badge warn'; } else { b.textContent=UI.notification_default; b.className='badge warn'; } }
 function setLocationUI(name, sub){ locationName.textContent=name||UI.location_unknown; locationSub.textContent=sub||UI.location_hint; }
-function buildPrayerCards(t){ if(!prayerGrid) return; const prayers=[['Fajr',UI.prayer_fajr],['Sunrise',UI.prayer_sunrise],['Dhuhr',UI.prayer_dhuhr],['Asr',UI.prayer_asr],['Maghrib',UI.prayer_maghrib],['Isha',UI.prayer_isha]]; const next=getNextPrayer(t); prayerGrid.innerHTML=prayers.map(([key,label])=>`<div class="prayer-card${next&&next.key===key?' active':''}"><div class="prayer-top"><div class="prayer-name">${label}</div><span class="badge">${key}</span></div><div class="prayer-time">${formatTimeDisplay(t[key])}</div><div class="prayer-meta">${UI.source_time}: ${t[key]||'—'}</div></div>`).join(''); }
+function buildPrayerCards(t){ if(!prayerGrid) return; const prayers=[['Fajr',UI.prayer_fajr],['Sunrise',UI.prayer_sunrise],['Dhuhr',UI.prayer_dhuhr],['Asr',UI.prayer_asr],['Maghrib',UI.prayer_maghrib],['Isha',UI.prayer_isha]]; const next=getNextPrayer(t); prayerGrid.innerHTML=prayers.map(([key,label])=>`<div class="prayer-card${next&&next.key===key?' active':''}" data-prayer="${key}"><div class="prayer-top"><div class="prayer-name">${label}</div><span class="badge">${key}</span></div><div class="prayer-time">${formatTimeDisplay(t[key])}</div><div class="prayer-meta">${UI.source_time}: ${t[key]||'—'}</div></div>`).join(''); }
+function getCurrentPrayer(t){ const seq=['Fajr','Dhuhr','Asr','Maghrib','Isha']; const now=new Date(); let current={key:'Isha',time:parseTodayTimeToDate(t.Isha)}; current.time.setDate(current.time.getDate()-1); for(const key of seq){ const d=parseTodayTimeToDate(t[key]); if(d<=now) current={key,time:d}; } return current; }
 function getNextPrayer(t){ const seq=['Fajr','Dhuhr','Asr','Maghrib','Isha']; const now=new Date(); for(const key of seq){ const d=parseTodayTimeToDate(t[key]); if(d>now) return {key,time:d}; } const tf=parseTodayTimeToDate(t.Fajr); tf.setDate(tf.getDate()+1); return {key:'Fajr',time:tf}; }
-function updateNextPrayerPanel(){ if(!state.timingsRaw) return; const next=getNextPrayer(state.timingsRaw); const names={Fajr:UI.prayer_fajr,Dhuhr:UI.prayer_dhuhr,Asr:UI.prayer_asr,Maghrib:UI.prayer_maghrib,Isha:UI.prayer_isha}; nextPrayerName.textContent=names[next.key]||next.key; nextPrayerTimeText.textContent=`${UI.at_label} ${formatTimeDisplay(state.timingsRaw[next.key])}`; const tick=()=>{ const now=new Date(); let diff=next.time-now; if(diff<0) diff=0; const h=Math.floor(diff/3600000), m=Math.floor((diff%3600000)/60000), s=Math.floor((diff%60000)/1000); countdown.textContent=`${String(h).padStart(2,'0')}:${String(m).padStart(2,'0')}:${String(s).padStart(2,'0')}`; }; if(state.nextPrayerTimer) clearInterval(state.nextPrayerTimer); tick(); state.nextPrayerTimer=setInterval(()=>{ tick(); const cur=getNextPrayer(state.timingsRaw); if(cur.key!==next.key||cur.time.getTime()!==next.time.getTime()){ updateNextPrayerPanel(); buildPrayerCards(state.timingsRaw); } },1000); }
+function updateNextPrayerPanel(){ if(!state.timingsRaw) return; const next=getNextPrayer(state.timingsRaw); const current=getCurrentPrayer(state.timingsRaw); const names={Fajr:UI.prayer_fajr,Dhuhr:UI.prayer_dhuhr,Asr:UI.prayer_asr,Maghrib:UI.prayer_maghrib,Isha:UI.prayer_isha}; if(currentPrayerName) currentPrayerName.textContent=names[current.key]||current.key; if(currentPrayerTimeText) currentPrayerTimeText.textContent=`${UI.at_label} ${formatTimeDisplay(state.timingsRaw[current.key])}`; nextPrayerName.textContent=names[next.key]||next.key; nextPrayerTimeText.textContent=`${UI.at_label} ${formatTimeDisplay(state.timingsRaw[next.key])}`; const tick=()=>{ const now=new Date(); let diff=next.time-now; if(diff<0) diff=0; const h=Math.floor(diff/3600000), m=Math.floor((diff%3600000)/60000), s=Math.floor((diff%60000)/1000); countdown.textContent=`${String(h).padStart(2,'0')}:${String(m).padStart(2,'0')}:${String(s).padStart(2,'0')}`; }; if(state.nextPrayerTimer) clearInterval(state.nextPrayerTimer); tick(); state.nextPrayerTimer=setInterval(()=>{ tick(); const cur=getNextPrayer(state.timingsRaw); if(cur.key!==next.key||cur.time.getTime()!==next.time.getTime()){ updateNextPrayerPanel(); buildPrayerCards(state.timingsRaw); } },1000); }
 function updateDates(meta){ gregorianDate.textContent=meta?.gregorian||'—'; hijriDate.textContent=meta?.hijri||'—'; methodName.textContent=state.methodName||'—'; timezoneName.textContent=state.timezone||Intl.DateTimeFormat().resolvedOptions().timeZone||'—'; }
 function storeLocation(){ localStorage.setItem('prayer_city',state.city||''); localStorage.setItem('prayer_country',state.country||''); localStorage.setItem('prayer_lat',state.lat||''); localStorage.setItem('prayer_lon',state.lon||''); localStorage.setItem('prayer_location_name',state.locationName||''); }
 
@@ -515,7 +720,7 @@ async function fallbackToManualLocation(){
     state.city = city;
     state.country = country;
     state.currentMode = 'city';
-    showToast('প্রবেশ করা তথ্য অনুযায়ী ম্যানুয়াল অনুসন্ধান ব্যবহার করা হচ্ছে।');
+    showToast('প্রদত্ত তথ্য অনুযায়ী ম্যানুয়াল অনুসন্ধান ব্যবহার হচ্ছে.');
     await fetchByCity();
     return true;
   }
@@ -551,7 +756,7 @@ async function detectLocation(){
     clearStoredCoordinates();
     const usedManual = await fallbackToManualLocation().catch(()=>false);
     if(!usedManual){
-      showToast('লোকেশন নির্ধারণে ত্রুটি: ' + err.message + '. ব্রাউজার বা PWA-তে জিওলোকেশন অ্যাক্সেস নিষিদ্ধ। সাইটের জন্য লোকেশন অনুমতি দিন অথবা দেশ ও শহর দিয়ে লোড করুন।');
+      showToast('লোকেশন শনাক্তকরণ ত্রুটি: ' + err.message + '. Доступ к геолокации запрещён в браузере или PWA. Разреши Location для сайта или загружай по стране и городу.');
     }
   }, {enableHighAccuracy:true,timeout:12000,maximumAge:300000});
 }
@@ -608,7 +813,7 @@ function renderMonthView(){
     const isToday = d === now.getDate();
     const fajr = state.timingsRaw ? formatTimeDisplay(state.timingsRaw.Fajr) : '—';
     const maghrib = state.timingsRaw ? formatTimeDisplay(state.timingsRaw.Maghrib) : '—';
-    monthGrid.innerHTML += `<div class="month-day${isToday ? ' today' : ''}"><div class="month-num">${d}</div><div class="month-fajr">ফজর ${fajr}</div><div class="month-maghrib">মাগরিব ${maghrib}</div></div>`;
+    monthGrid.innerHTML += `<div class="month-day${isToday ? ' today' : ''}"><div class="month-num">${d}</div><div class="month-fajr">Fajr ${fajr}</div><div class="month-maghrib">Maghrib ${maghrib}</div></div>`;
   }
 }
 function updateJumuahBox(){
