@@ -2491,19 +2491,19 @@ html.light-mode .today-daily-task.task-done{
 <div class="premium-resource-grid">
   <a class="premium-resource-card" href="names-ru.html">
     <div class="premium-resource-icon">☝️</div>
-    <div><div class="premium-resource-title">99 names</div><div class="premium-resource-text">Смыслы, размышление и укрепление имана.</div></div>
+    <div><div class="premium-resource-title">99 имён</div><div class="premium-resource-text">Смыслы, размышление и укрепление имана.</div></div>
   </a>
   <a class="premium-resource-card" href="qibla-ru.html">
     <div class="premium-resource-icon">🧭</div>
-    <div><div class="premium-resource-title">Qibla</div><div class="premium-resource-text">Быстрое направление для молитвы.</div></div>
+    <div><div class="premium-resource-title">Кибла</div><div class="premium-resource-text">Быстрое направление для молитвы.</div></div>
   </a>
   <a class="premium-resource-card" href="prophets-duas-ru.html">
     <div class="premium-resource-icon">🤲</div>
-    <div><div class="premium-resource-title">Duas</div><div class="premium-resource-text">Дуа с правильным смыслом и уважением.</div></div>
+    <div><div class="premium-resource-title">Дуа</div><div class="premium-resource-text">Дуа с правильным смыслом и уважением.</div></div>
   </a>
   <a class="premium-resource-card" href="articles-ru.html">
     <div class="premium-resource-icon">✨</div>
-    <div><div class="premium-resource-title">Articles</div><div class="premium-resource-text">Короткие полезные материалы без лишнего шума.</div></div>
+    <div><div class="premium-resource-title">Статьи</div><div class="premium-resource-text">Короткие полезные материалы без лишнего шума.</div></div>
   </a>
 </div>
 
@@ -3192,7 +3192,11 @@ window.addEventListener("DOMContentLoaded",function(){const installBtn=document.
   goalCard.addEventListener('click', function(){
     const key = 'barakaway_daily_goal_ru_' + localDateKey(new Date());
     const done = localStorage.getItem(key) === '1';
-    localStorage.setItem(key, done ? '0' : '1');
+    if(localStorage.getItem(key) === '1'){
+      updateGoalState();
+      return;
+    }
+    localStorage.setItem(key, '1');
     updateGoalState();
   });
 
