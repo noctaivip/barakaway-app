@@ -2299,7 +2299,48 @@ html.light-mode .bottom-app-nav-item:hover:not(.active){background:rgba(45,122,7
   .bottom-app-nav-icon{width:28px;height:28px;border-radius:13px;}
   .bottom-app-nav-item svg{width:20px;height:20px;}
 }
+.today-daily-task{
+  position:relative;
+  overflow:hidden;
+}
 
+.today-daily-task::after{
+  content:"";
+  position:absolute;
+  inset:0;
+  opacity:var(--task-red-opacity,0);
+  background:linear-gradient(135deg,rgba(178,34,34,0.04),rgba(210,38,38,0.28));
+  pointer-events:none;
+  transition:opacity .45s ease;
+}
+
+.today-daily-task > *{
+  position:relative;
+  z-index:1;
+}
+
+.today-daily-task.task-done .today-task-status{
+  color:#66c680 !important;
+  font-size:22px;
+}
+
+html.dark-mode .today-daily-task.task-done{
+  background:linear-gradient(135deg,#17261d 0%,#17262a 52%,#143126 100%) !important;
+  border-color:rgba(102,198,128,.38) !important;
+}
+
+html.light-mode .today-daily-task.task-done{
+  background:linear-gradient(135deg,#f7fff9 0%,#ffffff 52%,#eaf8ef 100%) !important;
+  border-color:rgba(45,122,70,.28) !important;
+}
+
+.today-daily-task.task-urgent:not(.task-done){
+  animation:goalPulse 1.4s ease-in-out infinite;
+}
+
+.today-daily-task.task-done .today-counter-track{
+  display:none;
+}
 </style>
 <script src="/theme-init.js"></script>
 <link rel="stylesheet" href="/theme.css">
@@ -2388,41 +2429,60 @@ html.light-mode .bottom-app-nav-item:hover:not(.active){background:rgba(45,122,7
     </div>
   </div>
 </div>
-
-
 <section class="today-hub" aria-label="Сегодня в BarakaWay">
   <div class="today-hub-head">
     <div class="today-hub-kicker">Сегодня в BarakaWay</div>
     <h2 class="today-hub-title">Каждый день - новая польза, новый зикр и маленький шаг ближе к Аллаху ﷻ</h2>
   </div>
+
   <div class="today-hub-grid">
-    <a class="today-action" id="dailyArticleLink" href="articles-ru.html">
-      <div class="today-action-top"><div class="today-action-icon">📝</div><div class="today-action-arrow">→</div></div>
-      <div><div class="today-action-title">Полезная статья</div><div class="today-action-text" id="dailyArticleTitle">Открыть статью дня.</div></div>
+    <a class="today-action today-daily-task" id="dailyArticleLink" href="articles-ru.html" data-task-key="article">
+      <div class="today-action-top">
+        <div class="today-action-icon">📝</div>
+        <div class="today-action-arrow today-task-status" id="dailyArticleStatus">→</div>
+      </div>
+      <div>
+        <div class="today-action-title">Полезная статья</div>
+        <div class="today-action-text" id="dailyArticleTitle">Открыть статью дня.</div>
+      </div>
     </a>
-    <a class="today-action" href="adhkar-ru.html">
-      <div class="today-action-top"><div class="today-action-icon">🌿</div><div class="today-action-arrow">→</div></div>
-      <div><div class="today-action-title" id="currentAdhkarTitle">Азкар сейчас</div><div class="today-action-text" id="currentAdhkarText">Подходящий азкар по времени дня.</div></div>
+
+    <a class="today-action today-daily-task" id="currentAdhkarLink" href="adhkar-ru.html" data-task-key="adhkar">
+      <div class="today-action-top">
+        <div class="today-action-icon">🌿</div>
+        <div class="today-action-arrow today-task-status" id="currentAdhkarStatus">→</div>
+      </div>
+      <div>
+        <div class="today-action-title" id="currentAdhkarTitle">Азкар сейчас</div>
+        <div class="today-action-text" id="currentAdhkarText">Подходящий азкар по времени дня.</div>
+      </div>
     </a>
-    <div class="today-action today-counter-action" id="allahNameCounterCard" role="button" tabindex="0" aria-label="Счётчик повторения имени Аллаха">
-      <div class="today-action-top"><div class="today-action-icon">☝️</div><div class="today-action-arrow" id="allahNameCounterValue">0/100</div></div>
+
+    <div class="today-action today-daily-task today-counter-action" id="allahNameCounterCard" role="button" tabindex="0" data-task-key="name" aria-label="Счётчик повторения имени Аллаха">
+      <div class="today-action-top">
+        <div class="today-action-icon">☝️</div>
+        <div class="today-action-arrow today-task-status" id="allahNameCounterValue">0/100</div>
+      </div>
       <div>
         <div class="today-action-title" id="allahNameToday">Имя Аллаха</div>
-        <div class="today-action-text">Нажимай на карточку и повторяй 100 раз.</div>
+        <div class="today-action-text" id="allahNameMeaning">Сегодня заучиваем смысл этого имени.</div>
         <div class="today-counter-track"><div class="today-counter-fill" id="allahNameCounterFill"></div></div>
       </div>
     </div>
-    <div class="today-action today-goal-action" id="dailyGoalCard" role="button" tabindex="0" aria-label="Дневная цель">
-      <div class="today-action-top"><div class="today-action-icon">🎯</div><div class="today-action-arrow" id="dailyGoalStatus">•</div></div>
+
+    <div class="today-action today-daily-task today-goal-action" id="dailyGoalCard" role="button" tabindex="0" data-task-key="goal" aria-label="Дневная цель">
+      <div class="today-action-top">
+        <div class="today-action-icon">🎯</div>
+        <div class="today-action-arrow today-task-status" id="dailyGoalStatus">•</div>
+      </div>
       <div>
         <div class="today-action-title">Дневная цель</div>
-        <div class="today-action-text" id="dailyPracticeText">Сделай одно добро тихо, без слов и показухи</div>
+        <div class="today-action-text" id="dailyPracticeText">Сделай одно добро тихо, без слов и показухи.</div>
         <div class="today-action-text" style="opacity:.6;margin-top:4px;">отметь, когда сделаешь</div>
       </div>
     </div>
   </div>
 </section>
-
 <div class="home-section-title">
   <h2>Быстрый доступ</h2>
   <div class="home-section-note">Основные разделы</div>
@@ -3047,7 +3107,7 @@ window.addEventListener("DOMContentLoaded",function(){const installBtn=document.
   const goals = [
     'Перед одним важным делом обнови намерение.',
     'Сделай одно добро тихо, без слов и показухи.',
-    'Прочитай короткий материал и сохрани один вывод.',
+    'Сделай одно хорошее дело ради Аллаха ﷻ - тихо, искренне, без ожидания похвалы.',
     'Попроси прощения у Аллаха 33 раза спокойно.',
     'Убери одно лишнее действие, которое крадёт время.',
     'Сделай дуа за родителей и близких.',
@@ -3147,7 +3207,174 @@ window.addEventListener("DOMContentLoaded",function(){const installBtn=document.
   setInterval(updateGoalState, 60000);
 })();
 </script>
+<script>
+(function(){
+  const TASK_PREFIX = "barakaway_today_ru_";
 
+  function localDateKey(date){
+    const y = date.getFullYear();
+    const m = String(date.getMonth() + 1).padStart(2, "0");
+    const d = String(date.getDate()).padStart(2, "0");
+    return y + "-" + m + "-" + d;
+  }
+
+  function todayKey(){
+    return localDateKey(new Date());
+  }
+
+  function taskKey(name){
+    return TASK_PREFIX + todayKey() + "_" + name;
+  }
+
+  function isDone(name){
+    return localStorage.getItem(taskKey(name)) === "1";
+  }
+
+  function setDone(name){
+    localStorage.setItem(taskKey(name), "1");
+  }
+
+  function redOpacity(){
+    const now = new Date();
+    const minutes = now.getHours() * 60 + now.getMinutes();
+    return Math.max(0.10, Math.min(0.90, minutes / 1440)).toFixed(2);
+  }
+
+  function applyTaskState(card, statusEl, name, openSymbol){
+    if(!card) return;
+
+    const done = isDone(name);
+
+    card.classList.toggle("task-done", done);
+    card.classList.toggle("goal-done", done);
+    card.classList.toggle("task-urgent", !done && new Date().getHours() >= 18);
+
+    card.style.setProperty("--task-red-opacity", done ? "0" : redOpacity());
+    card.style.setProperty("--goal-red-opacity", done ? "0" : redOpacity());
+
+    if(statusEl){
+      statusEl.textContent = done ? "✓" : openSymbol;
+    }
+
+    card.setAttribute("aria-disabled", done ? "true" : "false");
+  }
+
+  const articleCard = document.getElementById("dailyArticleLink");
+  const articleStatus = document.getElementById("dailyArticleStatus");
+
+  const adhkarCard = document.getElementById("currentAdhkarLink");
+  const adhkarStatus = document.getElementById("currentAdhkarStatus");
+
+  const nameCard = document.getElementById("allahNameCounterCard");
+  const nameStatus = document.getElementById("allahNameCounterValue");
+  const nameFill = document.getElementById("allahNameCounterFill");
+
+  const goalCard = document.getElementById("dailyGoalCard");
+  const goalStatus = document.getElementById("dailyGoalStatus");
+
+  function renderAll(){
+    applyTaskState(articleCard, articleStatus, "article", "→");
+    applyTaskState(adhkarCard, adhkarStatus, "adhkar", "→");
+    applyTaskState(goalCard, goalStatus, "goal", "•");
+
+    if(nameCard){
+      const done = isDone("name");
+      let count = Math.max(0, Math.min(100, parseInt(localStorage.getItem(TASK_PREFIX + todayKey() + "_name_count") || "0", 10) || 0));
+
+      if(done){
+        count = 100;
+        nameCard.classList.add("task-done","goal-done");
+        nameCard.classList.remove("task-urgent");
+        nameCard.style.setProperty("--task-red-opacity","0");
+        nameCard.style.setProperty("--goal-red-opacity","0");
+        if(nameStatus) nameStatus.textContent = "✓";
+        if(nameFill) nameFill.style.width = "100%";
+        nameCard.setAttribute("aria-disabled","true");
+      }else{
+        nameCard.classList.remove("task-done","goal-done");
+        nameCard.classList.toggle("task-urgent", new Date().getHours() >= 18);
+        nameCard.style.setProperty("--task-red-opacity", redOpacity());
+        nameCard.style.setProperty("--goal-red-opacity", redOpacity());
+        if(nameStatus) nameStatus.textContent = count + "/100";
+        if(nameFill) nameFill.style.width = count + "%";
+        nameCard.setAttribute("aria-disabled","false");
+      }
+    }
+  }
+
+  if(articleCard){
+    articleCard.addEventListener("click", function(e){
+      if(isDone("article")){
+        e.preventDefault();
+        return;
+      }
+      setDone("article");
+      renderAll();
+    }, true);
+  }
+
+  if(adhkarCard){
+    adhkarCard.addEventListener("click", function(e){
+      if(isDone("adhkar")){
+        e.preventDefault();
+        return;
+      }
+      setDone("adhkar");
+      renderAll();
+    }, true);
+  }
+
+  if(goalCard){
+    goalCard.addEventListener("click", function(e){
+      if(isDone("goal")){
+        e.preventDefault();
+        return;
+      }
+      setDone("goal");
+      renderAll();
+    });
+
+    goalCard.addEventListener("keydown", function(e){
+      if(e.key === "Enter" || e.key === " "){
+        e.preventDefault();
+        if(!isDone("goal")){
+          setDone("goal");
+          renderAll();
+        }
+      }
+    });
+  }
+
+  if(nameCard){
+    nameCard.addEventListener("click", function(e){
+      if(isDone("name")){
+        e.preventDefault();
+        return;
+      }
+
+      let count = Math.max(0, Math.min(100, parseInt(localStorage.getItem(TASK_PREFIX + todayKey() + "_name_count") || "0", 10) || 0));
+      count = Math.min(100, count + 1);
+      localStorage.setItem(TASK_PREFIX + todayKey() + "_name_count", String(count));
+
+      if(count >= 100){
+        setDone("name");
+      }
+
+      renderAll();
+    });
+
+    nameCard.addEventListener("keydown", function(e){
+      if(e.key === "Enter" || e.key === " "){
+        e.preventDefault();
+        nameCard.click();
+      }
+    });
+  }
+
+  renderAll();
+  setInterval(renderAll, 60000);
+})();
+</script>
 <script src="/theme-toggle.js"></script>
 <script src="/bottom-nav.js"></script>
 </body>
