@@ -1028,7 +1028,6 @@ html.dark-mode .install-help-close{border:1px solid #2a3138;background:#1d242c;c
 html.light-mode .install-help-close{border:1px solid #dfe8e2;background:#fff;color:#1f2a22}
 
 
-
 /* DESKTOP TOP ACTIONS ONLY */
 .desktop-top-actions{
   display:grid;
@@ -1906,6 +1905,52 @@ html.light-mode .today-action-title{color:#172019;}
 }
 html.dark-mode .today-action-text{color:#aebbb5;}
 html.light-mode .today-action-text{color:#647268;}
+.today-ayah-text{
+  display:flex;
+  flex-direction:column;
+  gap:7px;
+  font-weight:650;
+}
+.today-ayah-ref{
+  display:inline-flex;
+  width:max-content;
+  padding:3px 8px;
+  border-radius:999px;
+  font-size:10px;
+  line-height:1.2;
+  font-weight:950;
+  letter-spacing:0.04em;
+}
+html.dark-mode .today-ayah-ref{
+  background:rgba(215,192,122,0.14);
+  color:#f1d889;
+  border:1px solid rgba(215,192,122,0.24);
+}
+html.light-mode .today-ayah-ref{
+  background:#fff7e4;
+  color:#7b5b13;
+  border:1px solid rgba(141,107,22,0.18);
+}
+.today-ayah-line{
+  font-size:13px;
+  line-height:1.42;
+  font-weight:850;
+}
+html.dark-mode .today-ayah-line{color:#eef6f0;}
+html.light-mode .today-ayah-line{color:#172019;}
+.today-ayah-task-label{
+  display:inline-block;
+  margin-right:5px;
+  font-weight:950;
+}
+html.dark-mode .today-ayah-task-label{color:#d7c07a;}
+html.light-mode .today-ayah-task-label{color:#8d6b16;}
+.today-ayah-task{
+  font-size:12px;
+  line-height:1.38;
+  font-weight:650;
+}
+
 .home-section-title{
   margin:28px 0 14px;
   display:flex;
@@ -2158,36 +2203,117 @@ html.light-mode .today-goal-action.goal-done{
   50%{box-shadow:0 12px 24px rgba(0,0,0,0.14),0 0 22px rgba(210,68,68,0.28);}
 }
 
-/* FIXED BOTTOM APP NAVIGATION */
+
+
+/* MICRO KNOWLEDGE DAY — REQUIRED FIFTH DAILY TASK */
+.today-micro-wrap{
+  padding:0 16px 18px;
+}
+.today-micro-action{
+  width:100%;
+  min-height:118px;
+  box-sizing:border-box;
+}
+.today-micro-question{
+  font-size:13px;
+  line-height:1.4;
+  font-weight:500;
+  opacity:0.85;
+}
+html.dark-mode.today-micro-question{color:#f4f7f3;}
+html.light-mode.today-micro-question{color:#172019;}
+.micro-options{
+  display:grid;
+  grid-template-columns:repeat(3,minmax(0,1fr));
+  gap:8px;
+  margin-top:12px;
+}
+.micro-option{
+  width:100%;
+  min-height:38px;
+  margin:0;
+  padding:8px 10px;
+  border-radius:14px;
+  border:1px solid transparent;
+  font-size:12px;
+  font-weight:900;
+  line-height:1.2;
+  cursor:pointer;
+  transition:transform .16s ease, background .25s ease, border-color .25s ease, color .25s ease, opacity .25s ease;
+}
+html.dark-mode .micro-option{
+  background:rgba(102,198,128,.11);
+  border-color:rgba(102,198,128,.18);
+  color:#e7f7ed;
+}
+html.light-mode .micro-option{
+  background:#eff8f2;
+  border-color:rgba(45,122,70,.14);
+  color:#2d7a46;
+}
+.micro-option:active{transform:scale(.98);}
+.today-micro-action.task-done .micro-option,
+.today-micro-action.micro-answered .micro-option{
+  pointer-events:none;
+  opacity:.58;
+}
+.micro-answer-box{
+  display:none;
+  margin-top:12px;
+  padding:12px 13px;
+  border-radius:18px;
+  font-size:12px;
+  line-height:1.45;
+  font-weight:750;
+}
+html.dark-mode .micro-answer-box{
+  background:rgba(102,198,128,.11);
+  border:1px solid rgba(102,198,128,.18);
+  color:#dff6e7;
+}
+html.light-mode .micro-answer-box{
+  background:#f0faf3;
+  border:1px solid rgba(45,122,70,.14);
+  color:#244b32;
+}
+.micro-answer-box.show{display:block;}
+.micro-answer-box strong{font-weight:950;}
+@media(max-width:700px){
+  .today-micro-wrap{padding:0 12px 15px;}
+  .today-micro-action{border-radius:22px;padding:14px;}
+  .micro-options{grid-template-columns:1fr;gap:7px;}
+  .micro-option{min-height:36px;}
+}
+
+/* FIXED BOTTOM APP NAVIGATION — PREMIUM SVG APP STYLE */
 .bottom-app-nav{
   position:fixed;
   left:0;
   right:0;
   bottom:0;
   z-index:2100;
-  min-height:76px;
-  padding:8px max(10px, env(safe-area-inset-left)) calc(8px + env(safe-area-inset-bottom)) max(10px, env(safe-area-inset-right));
+  min-height:82px;
+  padding:10px max(12px, env(safe-area-inset-left)) calc(10px + env(safe-area-inset-bottom)) max(12px, env(safe-area-inset-right));
   display:flex;
   align-items:center;
   justify-content:center;
   box-sizing:border-box;
-  backdrop-filter:blur(18px);
-  -webkit-backdrop-filter:blur(18px);
+  backdrop-filter:blur(22px) saturate(1.28);
+  -webkit-backdrop-filter:blur(22px) saturate(1.28);
   transition:background .25s,border-color .25s,box-shadow .25s;
 }
 
 html.dark-mode .bottom-app-nav{
-  background:linear-gradient(180deg,rgba(20,38,29,0.92) 0%,rgba(10,22,16,0.97) 100%);
+  background:linear-gradient(180deg,rgba(20,38,29,0.86) 0%,rgba(9,20,15,0.98) 100%);
   border-top:1px solid rgba(102,198,128,0.30);
-  box-shadow:0 -14px 34px rgba(0,0,0,0.34), inset 0 1px 0 rgba(255,255,255,0.05);
+  box-shadow:0 -18px 42px rgba(0,0,0,0.40), inset 0 1px 0 rgba(255,255,255,0.06);
 }
 
 html.light-mode .bottom-app-nav{
-  background:linear-gradient(180deg,rgba(243,251,246,0.92) 0%,rgba(232,246,238,0.97) 100%);
-  border-top:1px solid rgba(45,122,70,0.22);
-  box-shadow:0 -14px 34px rgba(18,34,24,0.12), inset 0 1px 0 rgba(255,255,255,0.92);
+  background:linear-gradient(180deg,rgba(253,255,254,0.92) 0%,rgba(232,246,238,0.98) 100%);
+  border-top:1px solid rgba(45,122,70,0.24);
+  box-shadow:0 -18px 42px rgba(18,34,24,0.14), inset 0 1px 0 rgba(255,255,255,0.96);
 }
-
 
 .bottom-app-nav::before{
   content:"";
@@ -2197,7 +2323,7 @@ html.light-mode .bottom-app-nav{
   transform:translateX(-50%);
   width:min(850px,100%);
   height:3px;
-  background:linear-gradient(90deg,rgba(45,122,70,0),rgba(102,198,128,0.88),rgba(215,192,122,0.72),rgba(45,122,70,0));
+  background:linear-gradient(90deg,rgba(45,122,70,0),rgba(102,198,128,0.86),rgba(215,192,122,0.76),rgba(45,122,70,0));
   pointer-events:none;
 }
 
@@ -2206,33 +2332,48 @@ html.light-mode .bottom-app-nav{
   display:grid;
   grid-template-columns:repeat(5,1fr);
   align-items:center;
-  gap:2px;
+  gap:6px;
 }
 
 .bottom-app-nav-item{
   position:relative;
   min-width:0;
-  min-height:58px;
-  border-radius:18px;
+  min-height:62px;
+  border-radius:22px;
   display:flex;
   flex-direction:column;
   align-items:center;
   justify-content:center;
-  gap:4px;
+  gap:5px;
   text-decoration:none;
   font-size:11px;
-  line-height:1.1;
-  font-weight:800;
-  letter-spacing:-0.02em;
+  line-height:1.05;
+  font-weight:900;
+  letter-spacing:-0.025em;
   -webkit-tap-highlight-color:transparent;
-  transition:background .22s ease,color .22s ease,transform .16s ease,box-shadow .22s ease;
+  transition:background .22s ease, color .22s ease, transform .16s ease, box-shadow .22s ease, border-color .22s ease;
+  border:1px solid transparent;
+}
+
+.bottom-app-nav-icon{
+  width:30px;
+  height:30px;
+  border-radius:14px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  transition:background .22s ease, transform .18s ease, box-shadow .22s ease;
 }
 
 .bottom-app-nav-item svg{
-  width:23px;
-  height:23px;
-  fill:currentColor;
-  transition:transform .18s ease,opacity .22s ease;
+  width:21px;
+  height:21px;
+  fill:none;
+  stroke:currentColor;
+  stroke-width:2.05;
+  stroke-linecap:round;
+  stroke-linejoin:round;
+  transition:transform .18s ease,opacity .22s ease,stroke-width .18s ease;
 }
 
 .bottom-app-nav-label{
@@ -2243,54 +2384,235 @@ html.light-mode .bottom-app-nav{
   white-space:nowrap;
 }
 
-html.dark-mode .bottom-app-nav-item{
-  color:#98a7b2;
-}
-
-html.light-mode .bottom-app-nav-item{
-  color:#6a756d;
-}
+html.dark-mode .bottom-app-nav-item{color:#9aacb5;}
+html.light-mode .bottom-app-nav-item{color:#66746b;}
 
 html.dark-mode .bottom-app-nav-item.active{
-  color:#f5fff8;
-  background:linear-gradient(135deg,rgba(45,122,70,0.44),rgba(102,198,128,0.18));
-  box-shadow:inset 0 1px 0 rgba(255,255,255,0.06), 0 8px 18px rgba(0,0,0,0.20);
+  color:#ffffff;
+  background:linear-gradient(135deg,rgba(45,122,70,0.52),rgba(102,198,128,0.18));
+  border-color:rgba(102,198,128,0.22);
+  box-shadow:inset 0 1px 0 rgba(255,255,255,0.08),0 10px 22px rgba(0,0,0,0.24);
 }
 
 html.light-mode .bottom-app-nav-item.active{
-  color:#1f6e3d;
-  background:linear-gradient(135deg,#eef8f1,#ffffff);
-  box-shadow:inset 0 1px 0 rgba(255,255,255,0.96), 0 8px 18px rgba(15,24,18,0.07);
+  color:#ffffff;
+  background:linear-gradient(135deg,#2d7a46 0%,#4caf6a 100%);
+  border-color:rgba(45,122,70,0.18);
+  box-shadow:inset 0 1px 0 rgba(255,255,255,0.18),0 12px 24px rgba(45,122,70,0.20);
 }
 
-.bottom-app-nav-item:active{
-  transform:scale(0.96);
+html.dark-mode .bottom-app-nav-item.active .bottom-app-nav-icon{
+  background:rgba(255,255,255,0.09);
+  box-shadow:inset 0 1px 0 rgba(255,255,255,0.06);
 }
 
-.bottom-app-nav-item.active svg{
-  transform:translateY(-1px) scale(1.04);
+html.light-mode .bottom-app-nav-item.active .bottom-app-nav-icon{
+  background:rgba(255,255,255,0.18);
+  box-shadow:inset 0 1px 0 rgba(255,255,255,0.22);
 }
 
-.container{
-  padding-bottom:118px;
+.bottom-app-nav-item:hover{transform:translateY(-1px);}
+html.dark-mode .bottom-app-nav-item:hover:not(.active){background:rgba(255,255,255,0.045);color:#d8efe1;}
+html.light-mode .bottom-app-nav-item:hover:not(.active){background:rgba(45,122,70,0.07);color:#24663a;}
+.bottom-app-nav-item:active{transform:scale(0.96);}
+.bottom-app-nav-item.active svg{transform:translateY(-1px) scale(1.05);stroke-width:2.25;}
+
+.container{padding-bottom:122px;}
+
+@media(max-width:700px){
+  .container{padding-bottom:122px;}
+  .bottom-app-nav{min-height:78px;padding-top:8px;}
+  .bottom-app-nav-inner{gap:4px;}
+  .bottom-app-nav-item{min-height:58px;border-radius:18px;font-size:10.5px;}
+  .bottom-app-nav-icon{width:28px;height:28px;border-radius:13px;}
+  .bottom-app-nav-item svg{width:20px;height:20px;}
+}
+.today-daily-task{
+  position:relative;
+  overflow:hidden;
+}
+
+.today-daily-task::after{
+  content:"";
+  position:absolute;
+  inset:0;
+  opacity:var(--task-red-opacity,0);
+  background:linear-gradient(135deg,rgba(178,34,34,0.04),rgba(210,38,38,0.28));
+  pointer-events:none;
+  transition:opacity .45s ease;
+}
+
+.today-daily-task > *{
+  position:relative;
+  z-index:1;
+}
+
+.today-daily-task.task-done .today-task-status{
+  color:#66c680 !important;
+  font-size:22px;
+}
+
+html.dark-mode .today-daily-task.task-done{
+  background:linear-gradient(135deg,#17261d 0%,#17262a 52%,#143126 100%) !important;
+  border-color:rgba(102,198,128,.38) !important;
+}
+
+html.light-mode .today-daily-task.task-done{
+  background:linear-gradient(135deg,#f7fff9 0%,#ffffff 52%,#eaf8ef 100%) !important;
+  border-color:rgba(45,122,70,.28) !important;
+}
+
+.today-daily-task.task-urgent:not(.task-done){
+  animation:goalPulse 1.4s ease-in-out infinite;
+}
+
+.today-daily-task.task-done .today-counter-track{
+  display:none;
+}
+
+
+/* TAHAJJUD ALARM — COMPACT BAR */
+.tahajjud-alarm-bar{
+  margin:-4px 0 18px;
+  padding:13px 15px;
+  border-radius:22px;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:12px;
+  transition:background .25s,border-color .25s,box-shadow .25s,transform .18s ease;
+  border:1.5px solid transparent;
+}
+
+html.dark-mode .tahajjud-alarm-bar{
+  background:linear-gradient(135deg,#201d2a 0%, #171f29 52%, #142b24 100%);
+  border-color:rgba(215,192,122,0.28);
+  box-shadow:0 12px 24px rgba(0,0,0,0.20), inset 0 1px 0 rgba(255,255,255,0.04);
+}
+
+html.light-mode .tahajjud-alarm-bar{
+  background:linear-gradient(135deg,#fffaf0 0%, #ffffff 52%, #eef7f1 100%);
+  border-color:rgba(141,107,22,0.18);
+  box-shadow:0 12px 24px rgba(15,24,18,0.05), inset 0 1px 0 rgba(255,255,255,0.96);
+}
+
+.tahajjud-alarm-left{
+  display:flex;
+  align-items:center;
+  gap:11px;
+  min-width:0;
+}
+
+.tahajjud-alarm-icon{
+  width:38px;
+  height:38px;
+  min-width:38px;
+  border-radius:15px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-size:20px;
+}
+
+html.dark-mode .tahajjud-alarm-icon{
+  background:rgba(215,192,122,0.13);
+}
+
+html.light-mode .tahajjud-alarm-icon{
+  background:#fff4d8;
+}
+
+.tahajjud-alarm-title{
+  font-size:14px;
+  line-height:1.15;
+  font-weight:900;
+  letter-spacing:-0.025em;
+}
+
+html.dark-mode .tahajjud-alarm-title{color:#f5f8f6;}
+html.light-mode .tahajjud-alarm-title{color:#172019;}
+
+.tahajjud-alarm-meta{
+  margin-top:3px;
+  font-size:11px;
+  line-height:1.25;
+  font-weight:700;
+}
+
+html.dark-mode .tahajjud-alarm-meta{color:#aebbb5;}
+html.light-mode .tahajjud-alarm-meta{color:#647268;}
+
+.tahajjud-switch{
+  position:relative;
+  width:54px;
+  height:30px;
+  min-width:54px;
+  display:inline-flex;
+  align-items:center;
+}
+
+.tahajjud-switch input{
+  opacity:0;
+  width:0;
+  height:0;
+}
+
+.tahajjud-slider{
+  position:absolute;
+  cursor:pointer;
+  inset:0;
+  border-radius:999px;
+  transition:background .25s ease, box-shadow .25s ease;
+}
+
+html.dark-mode .tahajjud-slider{
+  background:#303a44;
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.05);
+}
+
+html.light-mode .tahajjud-slider{
+  background:#d7ded9;
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.6);
+}
+
+.tahajjud-slider::before{
+  content:"";
+  position:absolute;
+  height:24px;
+  width:24px;
+  left:3px;
+  top:3px;
+  border-radius:50%;
+  background:#fff;
+  transition:transform .25s ease;
+  box-shadow:0 4px 10px rgba(0,0,0,.18);
+}
+
+.tahajjud-switch input:checked + .tahajjud-slider{
+  background:#2d7a46;
+  box-shadow:0 0 0 3px rgba(45,122,70,.14);
+}
+
+.tahajjud-switch input:checked + .tahajjud-slider::before{
+  transform:translateX(24px);
 }
 
 @media(max-width:700px){
-  .container{
-    padding-bottom:118px;
+  .tahajjud-alarm-bar{
+    margin:-2px 0 16px;
+    padding:12px 13px;
+    border-radius:20px;
   }
-  .bottom-app-nav{
-    min-height:74px;
-    padding-top:7px;
+  .tahajjud-alarm-title{
+    font-size:13px;
   }
-  .bottom-app-nav-item{
-    min-height:56px;
-    border-radius:16px;
+  .tahajjud-alarm-meta{
     font-size:10.5px;
   }
-  .bottom-app-nav-item svg{
-    width:22px;
-    height:22px;
+  .tahajjud-alarm-icon{
+    width:36px;
+    height:36px;
+    min-width:36px;
   }
 }
 
@@ -2300,6 +2622,7 @@ html.light-mode .bottom-app-nav-item.active{
 <link rel="stylesheet" href="/theme-universal.css">
 </head>
 <body>
+
 <div class="mobile-top-controls">
   <button class="icon-btn left" onclick="changeLanguageChoice()" aria-label="Change language">
     <svg viewBox="0 0 24 24" aria-hidden="true">
@@ -2322,19 +2645,21 @@ html.light-mode .bottom-app-nav-item.active{
 <div class="ramadan-wrapper">
 <div class="ramadan-bar">
 <div class="ramadan-text">
-Сохрани свои действия в месяц Зуль-Ка‘да, сократи лишнее и усили зикр - это подготовка к самым важным дням впереди
+Zul-Qa’da oyida amallaringizni saqlang, ortiqcha ishlarni kamaytiring va zikrni kuchaytiring — bu oldindagi eng muhim kunlarga tayyorgarlikdir
 </div>
 </div>
 </div>
+</div>
+
 
 
 <div class="desktop-top-actions" aria-label="Desktop quick actions">
   <div class="desktop-action-left">
-    <a class="desktop-action-pill" href="#" onclick="changeLanguageChoice(); return false;">Сменить язык</a>
+    <a class="desktop-action-pill" href="#" onclick="changeLanguageChoice(); return false;">Tilni almashtirish</a>
   </div>
   <div class="desktop-action-center">
     <div class="install-box" id="installBox">
-      <button id="installBtn" class="install-btn" type="button">Установить приложение</button>
+      <button id="installBtn" class="install-btn" type="button">Ilovani o‘rnatish</button>
     </div>
   </div>
   <div class="desktop-action-right">
@@ -2351,27 +2676,27 @@ html.light-mode .bottom-app-nav-item.active{
   <button class="brand-signature" id="brandInstallTrigger" type="button" aria-label="BarakaWay">
     <span class="brand-letter-accent">B</span><span class="brand-letter-main">araka</span><span class="brand-letter-accent">W</span><span class="brand-letter-main">ay</span>
   </button>
-  <div class="home-prayer-widget" role="link" tabindex="0" onclick="openPrayerTimesPage(event)" onkeydown="openPrayerTimesPageFromKeyboard(event)" aria-label="Открыть страницу времени молитв">
+  <div class="home-prayer-widget" role="link" tabindex="0" onclick="openPrayerTimesPage(event)" onkeydown="openPrayerTimesPageFromKeyboard(event)" aria-label="Namoz vaqtlari sahifasini ochish">
     <div class="home-prayer-top">
-      <div class="home-prayer-kicker">Следующий намаз</div>
-      <div class="home-prayer-location" id="homePrayerLocation">Ташкент, Узбекистан</div>
+      <div class="home-prayer-kicker">Keyingi namoz</div>
+      <div class="home-prayer-location" id="homePrayerLocation">Toshkent, O‘zbekiston</div>
     </div>
 
     <div class="home-prayer-main">
       <div>
-        <div class="home-prayer-name" id="homePrayerName">Фаджр</div>
+        <div class="home-prayer-name" id="homePrayerName">Bomdod</div>
         <div class="home-prayer-time" id="homePrayerTime">--:--</div>
-        <div class="home-prayer-meta" id="homePrayerMeta">Загрузка времени молитв...</div>
+        <div class="home-prayer-meta" id="homePrayerMeta">Namoz vaqtlari yuklanmoqda...</div>
       </div>
       <div class="home-prayer-countdown">
-        <div class="home-prayer-countdown-label">Через</div>
+        <div class="home-prayer-countdown-label">Qolgan vaqt</div>
         <div id="homePrayerCountdown">--:--:--</div>
       </div>
     </div>
 
     <div class="home-prayer-actions">
-      <div class="home-prayer-note"><span>Полное расписание</span><span class="home-prayer-arrow" aria-hidden="true">→</span></div>
-      <button class="home-prayer-share-btn" type="button" onclick="sharePrayerTimes(event)" aria-label="Поделиться временами намазов" title="Поделиться временами намазов">
+      <div class="home-prayer-note"><span>To‘liq jadval</span><span class="home-prayer-arrow" aria-hidden="true">→</span></div>
+      <button class="home-prayer-share-btn" type="button" onclick="sharePrayerTimes(event)" aria-label="Namoz vaqtlarini ulashish" title="Namoz vaqtlarini ulashish">
         <svg viewBox="0 0 24 24" aria-hidden="true">
           <path d="M18 16.08c-.76 0-1.44.3-1.96.77L8.91 12.7c.05-.23.09-.46.09-.7s-.04-.47-.09-.7l7.05-4.11A2.99 2.99 0 1 0 15 5c0 .24.04.47.09.7L8.04 9.81A3 3 0 1 0 8.04 14.2l7.12 4.18c-.04.2-.06.41-.06.62a2.9 2.9 0 1 0 2.9-2.92z"/>
         </svg>
@@ -2379,39 +2704,88 @@ html.light-mode .bottom-app-nav-item.active{
     </div>
   </div>
 </div>
+
+<div class="tahajjud-alarm-bar" id="tahajjudAlarmBar" aria-label="Tahajjud namozi uchun budilnik">
+  <div class="tahajjud-alarm-left">
+    <div class="tahajjud-alarm-icon" aria-hidden="true">🌙</div>
+    <div>
+      <div class="tahajjud-alarm-title">Tahajjud namozi uchun budilnikni yoqish</div>
+      <div class="tahajjud-alarm-meta" id="tahajjudAlarmMeta">Bomdoddan 60 daqiqa oldin</div>
+    </div>
+  </div>
+  <label class="tahajjud-switch" aria-label="Tahajjud budilnigini yoqish yoki o‘chirish">
+    <input type="checkbox" id="tahajjudAlarmToggle">
+    <span class="tahajjud-slider"></span>
+  </label>
+</div>
 <section class="today-hub" aria-label="Bugun BarakaWay’da">
   <div class="today-hub-head">
     <div class="today-hub-kicker">Bugun BarakaWay’da</div>
-    <h2 class="today-hub-title">Har kuni yangi foyda, yangi zikr va Allohga ﷻ bir qadam yaqinlik.</h2>
+    <h2 class="today-hub-title">Har kuni Allohga ﷻ bir qadam yaqinroq</h2>
   </div>
+
   <div class="today-hub-grid">
-    <a class="today-action" id="dailyArticleLink" href="articles-uz.html">
-      <div class="today-action-top"><div class="today-action-icon">📝</div><div class="today-action-arrow">→</div></div>
-      <div><div class="today-action-title">Foydali maqola</div><div class="today-action-text" id="dailyArticleTitle">Kun maqolasini ochish.</div></div>
-    </a>
-    <a class="today-action" href="adhkar-uz.html">
-      <div class="today-action-top"><div class="today-action-icon">🌿</div><div class="today-action-arrow">→</div></div>
-      <div><div class="today-action-title" id="currentAdhkarTitle">Hozirgi zikr</div><div class="today-action-text" id="currentAdhkarText">Kunning vaqtiga mos zikr.</div></div>
-    </a>
-    <div class="today-action today-counter-action" id="allahNameCounterCard" role="button" tabindex="0" aria-label="Alloh ismini takrorlash hisoblagichi">
-      <div class="today-action-top"><div class="today-action-icon">☝️</div><div class="today-action-arrow" id="allahNameCounterValue">0/100</div></div>
+    <a class="today-action today-daily-task" id="dailyArticleLink" href="javascript:void(0)" role="button" aria-label="Kun oyati va amaliy topshiriq" data-task-key="article">
+      <div class="today-action-top">
+        <div class="today-action-icon">📖</div>
+        <div class="today-action-arrow today-task-status" id="dailyArticleStatus">→</div>
+      </div>
       <div>
-        <div class="today-action-title" id="allahNameToday">Allohning ismi</div>
-        <div class="today-action-text">Ma’nosini o‘qi va 100 marta takrorlash uchun kartani bos.</div>
+        <div class="today-action-title">Kun oyati</div>
+        <div class="today-action-text" id="dailyArticleTitle">Kun oyati yuklanmoqda...</div>
+      </div>
+    </a>
+
+    <a class="today-action today-daily-task" id="currentAdhkarLink" href="javascript:void(0)" role="button" aria-label="Kun sinovi" data-task-key="adhkar">
+      <div class="today-action-top">
+        <div class="today-action-icon">🌿</div>
+        <div class="today-action-arrow today-task-status" id="currentAdhkarStatus">→</div>
+      </div>
+      <div>
+        <div class="today-action-title" id="currentAdhkarTitle">Kun sinovi</div>
+        <div class="today-action-text" id="currentAdhkarText">Kun topshirig‘i yuklanmoqda...</div>
+      </div>
+    </a>
+
+    <div class="today-action today-daily-task today-counter-action" id="allahNameCounterCard" role="button" tabindex="0" data-task-key="name" aria-label="Alloh ismini takrorlash hisoblagichi">
+      <div class="today-action-top">
+        <div class="today-action-icon">☝️</div>
+        <div class="today-action-arrow today-task-status" id="allahNameCounterValue">0/100</div>
+      </div>
+      <div>
+        <div class="today-action-title" id="allahNameToday">Alloh ismi</div>
+        <div class="today-action-text" id="allahNameMeaning">Bugun shu ismning ma’nosini o‘rganamiz.</div>
         <div class="today-counter-track"><div class="today-counter-fill" id="allahNameCounterFill"></div></div>
       </div>
     </div>
-    <div class="today-action today-goal-action" id="dailyGoalCard" role="button" tabindex="0" aria-label="Kunlik maqsad">
-      <div class="today-action-top"><div class="today-action-icon">🎯</div><div class="today-action-arrow" id="dailyGoalStatus">•</div></div>
+
+    <div class="today-action today-daily-task today-goal-action" id="dailyGoalCard" role="button" tabindex="0" data-task-key="goal" aria-label="Kunlik maqsad">
+      <div class="today-action-top">
+        <div class="today-action-icon">🎯</div>
+        <div class="today-action-arrow today-task-status" id="dailyGoalStatus">•</div>
+      </div>
       <div>
         <div class="today-action-title">Kunlik maqsad</div>
-        <div class="today-action-text" id="dailyPracticeText">Bir yaxshilikni jim, so‘zsiz va ko‘z-ko‘zsiz qil</div>
-        <div class="today-action-text" style="opacity:.6;margin-top:4px;">bajarganingda belgila</div>
+        <div class="today-action-text" id="dailyPracticeText">Bir yaxshilikni sokin, so‘zsiz va ko‘z-ko‘z qilmasdan qil.</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="today-micro-wrap">
+    <div class="today-action today-daily-task today-micro-action" id="dailyMicroKnowledgeCard" role="button" tabindex="0" data-task-key="micro" aria-label="Kun mikro-bilimi">
+      <div class="today-action-top">
+        <div class="today-action-icon">🧠</div>
+        <div class="today-action-arrow today-task-status" id="dailyMicroKnowledgeStatus">?</div>
+      </div>
+      <div>
+        <div class="today-action-title">Kun mikro-bilimi</div>
+        <div class="today-micro-question" id="dailyMicroQuestion">Savol yuklanmoqda...</div>
+        <div class="micro-options" id="dailyMicroOptions"></div>
+        <div class="micro-answer-box" id="dailyMicroAnswer"></div>
       </div>
     </div>
   </div>
 </section>
-
 <div class="home-section-title">
   <h2>Tezkor kirish</h2>
   <div class="home-section-note">Asosiy bo‘limlar</div>
@@ -2420,25 +2794,25 @@ html.light-mode .bottom-app-nav-item.active{
 <div class="premium-resource-grid">
   <a class="premium-resource-card" href="names-uz.html">
     <div class="premium-resource-icon">☝️</div>
-    <div><div class="premium-resource-title">99 names</div><div class="premium-resource-text">Смыслы, размышление и укрепление имана.</div></div>
+    <div><div class="premium-resource-title">99 ism</div><div class="premium-resource-text">Ma’nolar, tafakkur va imonni mustahkamlash.</div></div>
   </a>
   <a class="premium-resource-card" href="qibla-uz.html">
     <div class="premium-resource-icon">🧭</div>
-    <div><div class="premium-resource-title">Qibla</div><div class="premium-resource-text">Быстрое направление для молитвы.</div></div>
+    <div><div class="premium-resource-title">Qibla</div><div class="premium-resource-text">Namoz uchun yo‘nalishni tez aniqlash.</div></div>
   </a>
   <a class="premium-resource-card" href="prophets-duas-uz.html">
     <div class="premium-resource-icon">🤲</div>
-    <div><div class="premium-resource-title">Duas</div><div class="premium-resource-text">Дуа с правильным смыслом и уважением.</div></div>
+    <div><div class="premium-resource-title">Duolar</div><div class="premium-resource-text">To‘g‘ri ma’no va hurmat bilan duolar.</div></div>
   </a>
   <a class="premium-resource-card" href="articles-uz.html">
     <div class="premium-resource-icon">✨</div>
-    <div><div class="premium-resource-title">Articles</div><div class="premium-resource-text">Короткие полезные материалы без лишнего шума.</div></div>
+    <div><div class="premium-resource-title">Maqolalar</div><div class="premium-resource-text">Ortiqcha shovqinsiz qisqa foydali materiallar.</div></div>
   </a>
 </div>
 
 <div class="about-project-card">
   <div class="about-project-title">BarakaWay haqida</div>
-  <div class="about-project-text">Loyiha haqida, принципы и причина анонимности собраны в один спокойный доверительный блок. Пользователь понимает идею без лишних отдельных ссылок на главном экране.</div>
+  <div class="about-project-text">Loyiha haqida, tamoyillar va anonimlik sababi bitta sokin, ishonchli blokda jamlangan. Foydalanuvchi asosiy ekranda ortiqcha havolalarsiz g‘oyani tushunadi.</div>
   <div class="about-project-actions">
     <a href="about-uz.html">Loyiha haqida</a>
     <a href="principles-uz.html">Tamoyillar</a>
@@ -2462,26 +2836,26 @@ html.light-mode .bottom-app-nav-item.active{
       <button class="share-action share-x" type="button" data-share="x"><div class="share-icon">X</div><span>X</span></button>
       <button class="share-action share-linkedin" type="button" data-share="linkedin"><div class="share-icon">in</div><span>LinkedIn</span></button>
       <button class="share-action share-email" type="button" data-share="email"><div class="share-icon">@</div><span>Email</span></button>
-      <button class="share-action share-copy" type="button" data-share="copy"><div class="share-icon">⧉</div><span>Копировать ссылку</span></button>
-      <button class="share-action share-more" type="button" data-share="more"><div class="share-icon">⋯</div><span>Ещё</span></button>
+      <button class="share-action share-copy" type="button" data-share="copy"><div class="share-icon">⧉</div><span>Havolani nusxalash</span></button>
+      <button class="share-action share-more" type="button" data-share="more"><div class="share-icon">⋯</div><span>Yana</span></button>
     </div>
-    <div class="share-copy-msg" id="shareCopyMsg">Ссылка на приложение скопирована.</div>
+    <div class="share-copy-msg" id="shareCopyMsg">Ilova havolasi nusxalandi.</div>
     <button class="share-close" id="shareCloseBtn" type="button">Yopish</button>
   </div>
 </div>
 
 <div class="install-help-overlay" id="installHelpOverlay" aria-hidden="true">
   <div class="install-help-sheet" role="dialog" aria-modal="true" aria-labelledby="installHelpTitle">
-    <div class="install-help-title" id="installHelpTitle">Установить приложение</div>
-    <div class="install-help-text">Если системное окно установки не появилось, используйте действия ниже.</div>
+    <div class="install-help-title" id="installHelpTitle">Ilovani o‘rnatish</div>
+    <div class="install-help-text">Agar o‘rnatish oynasi chiqmasa, quyidagi amallardan foydalaning.</div>
     <ol class="install-help-steps">
-      <li>На Android откройте страницу во внешнем браузере и установите приложение там.</li>
-      <li>На iPhone откройте страницу в Safari.</li>
-      <li>Затем выберите «Поделиться» → «На экран Домой».</li>
+      <li>Android’da sahifani tashqi brauzerda oching va ilovani o‘sha yerda o‘rnating.</li>
+      <li>iPhone’da sahifani Safari’da oching.</li>
+      <li>Keyin «Ulashish» → «Bosh ekranga qo‘shish» ni tanlang.</li>
     </ol>
     <div class="install-help-actions">
-      <button class="install-help-primary" id="installHelpPrimaryBtn" type="button">Открыть в браузере</button>
-      <button class="install-help-secondary" id="installHelpCopyBtn" type="button">Скопировать ссылку</button>
+      <button class="install-help-primary" id="installHelpPrimaryBtn" type="button">Brauzerda ochish</button>
+      <button class="install-help-secondary" id="installHelpCopyBtn" type="button">Havolani nusxalash</button>
     </div>
     <button class="install-help-close" id="installHelpCloseBtn" type="button">Yopish</button>
   </div>
@@ -2498,18 +2872,18 @@ function isAndroid(){return /Android/i.test(navigator.userAgent||"");}
 function isIOS(){return /iPhone|iPad|iPod/i.test(navigator.userAgent||"");}
 function isInAppBrowser(){const ua=navigator.userAgent||"";return /(Telegram|FBAN|FBAV|Instagram|Line|wv)/i.test(ua);}
 async function hasInstalledRelatedApp(){if(typeof navigator.getInstalledRelatedApps!=="function") return false;try{const apps=await navigator.getInstalledRelatedApps();return Array.isArray(apps)&&apps.length>0;}catch(e){return false;}}
-async function updateInstallButtonVisibility(){if(installVisibilityInFlight) return;installVisibilityInFlight=true;const box=document.getElementById("installBox"),btn=document.getElementById("installBtn"),brandTrigger=document.getElementById("brandInstallTrigger"),brandHint=document.getElementById("brandInstallHint");if(!box||!btn){installVisibilityInFlight=false;return;}let hide=isStandaloneMode()?true:await hasInstalledRelatedApp();box.style.display=hide?"none":"block";btn.textContent="Установить приложение";if(brandTrigger){brandTrigger.classList.toggle("install-trigger",!hide);}if(brandHint){brandHint.classList.toggle("is-visible",!hide&&window.innerWidth<=700);}installVisibilityInFlight=false;}
+async function updateInstallButtonVisibility(){if(installVisibilityInFlight) return;installVisibilityInFlight=true;const box=document.getElementById("installBox"),btn=document.getElementById("installBtn"),brandTrigger=document.getElementById("brandInstallTrigger"),brandHint=document.getElementById("brandInstallHint");if(!box||!btn){installVisibilityInFlight=false;return;}let hide=isStandaloneMode()?true:await hasInstalledRelatedApp();box.style.display=hide?"none":"block";btn.textContent="Ilovani o‘rnatish";if(brandTrigger){brandTrigger.classList.toggle("install-trigger",!hide);}if(brandHint){brandHint.classList.toggle("is-visible",!hide&&window.innerWidth<=700);}installVisibilityInFlight=false;}
 function openCurrentPageInExternalBrowser(){const url=window.location.href;if(isAndroid()){const cleaned=url.replace(/^https?:\/\//,"");window.location.href="intent://"+cleaned+"#Intent;scheme=https;package=com.android.chrome;end";return true;}if(!isIOS()){window.open(url,"_blank","noopener,noreferrer");return true;}return false;}
 function openInstallHelp(){const o=document.getElementById("installHelpOverlay");if(!o) return;o.classList.add("open");o.setAttribute("aria-hidden","false");}
 function closeInstallHelp(){const o=document.getElementById("installHelpOverlay");if(!o) return;o.classList.remove("open");o.setAttribute("aria-hidden","true");}
-async function copyCurrentLink(){const url=getShareUrl(),msg=document.getElementById("shareCopyMsg");try{if(navigator.clipboard&&window.isSecureContext){await navigator.clipboard.writeText(url);}else{const t=document.createElement("textarea");t.value=url;t.setAttribute("readonly","readonly");t.style.position="absolute";t.style.left="-9999px";document.body.appendChild(t);t.select();document.execCommand("copy");document.body.removeChild(t);}if(msg){msg.textContent="Ссылка на приложение скопирована.";msg.classList.add("show");setTimeout(function(){msg.classList.remove("show");},2200);}}catch(e){window.prompt("Скопируйте ссылку и откройте её во внешнем браузере:",url);}}
+async function copyCurrentLink(){const url=getShareUrl(),msg=document.getElementById("shareCopyMsg");try{if(navigator.clipboard&&window.isSecureContext){await navigator.clipboard.writeText(url);}else{const t=document.createElement("textarea");t.value=url;t.setAttribute("readonly","readonly");t.style.position="absolute";t.style.left="-9999px";document.body.appendChild(t);t.select();document.execCommand("copy");document.body.removeChild(t);}if(msg){msg.textContent="Ilova havolasi nusxalandi.";msg.classList.add("show");setTimeout(function(){msg.classList.remove("show");},2200);}}catch(e){window.prompt("Havolani nusxalang va uni tashqi brauzerda oching:",url);}}
 async function installApp(){if(deferredInstallPrompt){try{await deferredInstallPrompt.prompt();const c=await deferredInstallPrompt.userChoice;if(c&&c.outcome==="accepted") setTimeout(updateInstallButtonVisibility,300);}catch(e){}finally{deferredInstallPrompt=null;}return;}if(isStandaloneMode()){updateInstallButtonVisibility();return;}if(isInAppBrowser()){if(isAndroid()){const opened=openCurrentPageInExternalBrowser();if(!opened) openInstallHelp();return;}openInstallHelp();return;}if(isIOS()){openInstallHelp();return;}openInstallHelp();}
 function openShareOverlay(){const o=document.getElementById("shareOverlay"),m=document.getElementById("shareCopyMsg");if(!o) return;o.classList.add("open");o.setAttribute("aria-hidden","false");if(m) m.classList.remove("show");}
 function closeShareOverlay(){const o=document.getElementById("shareOverlay");if(!o) return;o.classList.remove("open");o.setAttribute("aria-hidden","true");}
-async function copyShareLink(){const url=getShareUrl(),msg=document.getElementById("shareCopyMsg");try{if(navigator.clipboard&&window.isSecureContext){await navigator.clipboard.writeText(url);}else{const t=document.createElement("textarea");t.value=url;t.setAttribute("readonly","readonly");t.style.position="absolute";t.style.left="-9999px";document.body.appendChild(t);t.select();document.execCommand("copy");document.body.removeChild(t);}if(msg){msg.classList.add("show");setTimeout(function(){msg.classList.remove("show");},2200);}}catch(e){window.prompt("Скопируйте ссылку и откройте её во внешнем браузере:",url);}}
+async function copyShareLink(){const url=getShareUrl(),msg=document.getElementById("shareCopyMsg");try{if(navigator.clipboard&&window.isSecureContext){await navigator.clipboard.writeText(url);}else{const t=document.createElement("textarea");t.value=url;t.setAttribute("readonly","readonly");t.style.position="absolute";t.style.left="-9999px";document.body.appendChild(t);t.select();document.execCommand("copy");document.body.removeChild(t);}if(msg){msg.classList.add("show");setTimeout(function(){msg.classList.remove("show");},2200);}}catch(e){window.prompt("Havolani nusxalang va uni tashqi brauzerda oching:",url);}}
 function openShareTarget(type){const url=encodeURIComponent(getShareUrl()),text=encodeURIComponent("BarakaWay");let target="";if(type==="telegram") target="https://t.me/share/url?url="+url+"&text="+text;if(type==="whatsapp") target="https://wa.me/?text="+text+"%20"+url;if(type==="facebook") target="https://www.facebook.com/sharer/sharer.php?u="+url;if(type==="x") target="https://twitter.com/intent/tweet?text="+text+"&url="+url;if(type==="linkedin") target="https://www.linkedin.com/sharing/share-offsite/?url="+url;if(type==="email") target="mailto:?subject=Hidden%20Sadaqa&body="+text+"%0A"+url;if(target) window.open(target,"_blank","noopener,noreferrer");}
 async function shareApp(){const data={title:"BarakaWay",text:"BarakaWay",url:getShareUrl()};if(navigator.share){try{await navigator.share(data);return;}catch(e){}}openShareOverlay();}
-async function sharePrayerTimes(event){if(event){event.preventDefault();event.stopPropagation();}const text=typeof window.buildPrayerTimesShareText==="function"?window.buildPrayerTimesShareText():"BarakaWay\nВремена намазов";if(navigator.share){try{await navigator.share({title:"Времена намазов",text:text});return;}catch(e){}}try{if(navigator.clipboard&&window.isSecureContext){await navigator.clipboard.writeText(text);}else{const t=document.createElement("textarea");t.value=text;t.setAttribute("readonly","readonly");t.style.position="absolute";t.style.left="-9999px";document.body.appendChild(t);t.select();document.execCommand("copy");document.body.removeChild(t);}alert("Времена намазов скопированы. Теперь можно отправить их в мессенджере.");}catch(e){window.prompt("Скопируйте времена намазов:",text);}}
+async function sharePrayerTimes(event){if(event){event.preventDefault();event.stopPropagation();}const text=typeof window.buildPrayerTimesShareText==="function"?window.buildPrayerTimesShareText():"BarakaWay\nNamoz vaqtlari";if(navigator.share){try{await navigator.share({title:"Namoz vaqtlari",text:text});return;}catch(e){}}try{if(navigator.clipboard&&window.isSecureContext){await navigator.clipboard.writeText(text);}else{const t=document.createElement("textarea");t.value=text;t.setAttribute("readonly","readonly");t.style.position="absolute";t.style.left="-9999px";document.body.appendChild(t);t.select();document.execCommand("copy");document.body.removeChild(t);}alert("Namoz vaqtlari nusxalandi. Endi ularni messenjerda yuborishingiz mumkin.");}catch(e){window.prompt("Namoz vaqtlarini nusxalang:",text);}}
 window.addEventListener("beforeinstallprompt",function(e){e.preventDefault();deferredInstallPrompt=e;updateInstallButtonVisibility();});
 window.addEventListener("appinstalled",function(){deferredInstallPrompt=null;updateInstallButtonVisibility();});
 window.addEventListener("pageshow",function(){updateInstallButtonVisibility();});
@@ -2523,7 +2897,7 @@ window.addEventListener("DOMContentLoaded",function(){const installBtn=document.
   if (window.innerWidth > 700) return;
 
   const promoTexts = [
-    { text: "Все услуги рядом", brand: false },
+    { text: "Barcha foydali xizmatlar yoningizda", brand: false },
     { text: "TasksLocal", brand: true }
   ];
 
@@ -2652,11 +3026,11 @@ window.addEventListener("DOMContentLoaded",function(){const installBtn=document.
   if(!elName || !elTime || !elMeta || !elCountdown || !elLocation) return;
 
   const UI = {
-    names: {Fajr:'Фаджр', Dhuhr:'Зухр', Asr:'Аср', Maghrib:'Магриб', Isha:'Иша'},
-    at: 'в',
-    startsIn: 'через',
-    loading: 'Загрузка времени молитв...',
-    fallbackLocation: 'Ташкент, Узбекистан'
+    names: {Fajr:'Bomdod', Dhuhr:'Peshin', Asr:'Asr', Maghrib:'Shom', Isha:'Xufton'},
+    at: 'soat',
+    startsIn: 'qoldi',
+    loading: 'Namoz vaqtlari yuklanmoqda...',
+    fallbackLocation: 'Toshkent, O‘zbekiston'
   };
 
   let nextPrayerTimer = null;
@@ -2744,7 +3118,7 @@ window.addEventListener("DOMContentLoaded",function(){const installBtn=document.
       setCountdown(next.time);
     }catch(_){
       elLocation.textContent = UI.fallbackLocation;
-      elName.textContent = 'Фаджр';
+      elName.textContent = 'Bomdod';
       elTime.textContent = '--:--';
       elMeta.textContent = UI.loading;
       elCountdown.textContent = '--:--:--';
@@ -2757,15 +3131,15 @@ window.addEventListener("DOMContentLoaded",function(){const installBtn=document.
     const clean = (value) => String(value || '--:--').split(' ')[0].slice(0,5);
     return [
       'BarakaWay',
-      "Времена намазов",
+      "Namoz vaqtlari",
       `${state.location || UI.fallbackLocation}${state.date ? ' — ' + state.date : ''}`,
       '',
-      `Фаджр: ${clean(timings.Fajr)}`,
-      `Восход: ${clean(timings.Sunrise)}`,
-      `Зухр: ${clean(timings.Dhuhr)}`,
-      `Аср: ${clean(timings.Asr)}`,
-      `Магриб: ${clean(timings.Maghrib)}`,
-      `Иша: ${clean(timings.Isha)}`,
+      `Bomdod: ${clean(timings.Fajr)}`,
+      `Quyosh chiqishi: ${clean(timings.Sunrise)}`,
+      `Peshin: ${clean(timings.Dhuhr)}`,
+      `Asr: ${clean(timings.Asr)}`,
+      `Shom: ${clean(timings.Maghrib)}`,
+      `Xufton: ${clean(timings.Isha)}`,
       '',
       window.location.origin ? window.location.origin + '/prayer-times-uz.html' : window.location.href
     ].join('\n');
@@ -2797,39 +3171,39 @@ window.addEventListener("DOMContentLoaded",function(){const installBtn=document.
   const hour = today.getHours();
 
   /*
-    Система статьи дня:
-    1) Добавляешь новую статью в массив articles в конец списка.
-    2) Увеличивать отдельный счётчик не нужно.
-    3) Если новая статья добавлена сегодня и очередь уже дошла до конца старого списка,
-       она появится сразу. Если новых статей нет — ротация продолжит показывать старые статьи.
-    Для полного автоматического обнаружения новых файлов нужен отдельный JSON/manifest или backend.
+    Kun maqolasi tizimi:
+    1) Yangi maqolani articles massivining oxiriga qo‘shing.
+    2) Alohida hisoblagichni oshirish shart emas.
+    3) Agar yangi maqola bugun qo‘shilgan bo‘lsa va navbat eski ro‘yxat oxiriga yetgan bo‘lsa,
+       u darhol ko‘rinadi. Yangi maqola bo‘lmasa, rotatsiya eski maqolalarni ko‘rsatishda davom etadi.
+    Yangi fayllarni to‘liq avtomatik aniqlash uchun alohida JSON/manifest yoki backend kerak.
   */
   const articleStartDate = '2026-04-24';
   const articles = [
-    {title:'Что такое садака', url:'islamic_articles-uz/001-uz.html'},
-    {title:'Разница между закятом и садака', url:'islamic_articles-uz/002-uz.html'},
-    {title:'Почему скрытая благотворительность важна', url:'islamic_articles-uz/003-uz.html'},
-    {title:'Помощь нуждающимся семьям', url:'islamic_articles-uz/004-uz.html'},
-    {title:'Почему даже один доллар имеет значение', url:'islamic_articles-uz/005-uz.html'},
-    {title:'Sadaqa для жилья и помощи с жильём', url:'islamic_articles-uz/006-uz.html'},
-    {title:'Лучшие виды садака в исламе', url:'islamic_articles-uz/007-uz.html'},
-    {title:'Милостыня в месяц Рамадан', url:'islamic_articles-uz/008-uz.html'},
-    {title:'Милостыня в Qur’onе', url:'islamic_articles-uz/009-uz.html'},
-    {title:'Как одна садака изменила жизнь семьи', url:'islamic_articles-uz/010-uz.html'},
-    {title:'Почему помощь семьям важна', url:'islamic_articles-uz/011-uz.html'},
-    {title:'Маленькая помощь — большие изменения', url:'islamic_articles-uz/012-uz.html'},
-    {title:'Награда за садака', url:'islamic_articles-uz/013-uz.html'},
-    {title:'Sadaqa и очищение имущества', url:'islamic_articles-uz/014-uz.html'},
-    {title:'Почему мусульмане дают милостыню', url:'islamic_articles-uz/015-uz.html'},
-    {title:'Забота о бедных в исламе', url:'islamic_articles-uz/016-uz.html'},
-    {title:'Ответственность мусульман помогать другим', url:'islamic_articles-uz/017-uz.html'},
-    {title:'Справедливость и милосердие в исламе', url:'islamic_articles-uz/018-uz.html'},
-    {title:'Как благотворительность приносит надежду семьям', url:'islamic_articles-uz/019-uz.html'},
-    {title:'Помощь детям через садака', url:'islamic_articles-uz/020-uz.html'},
-    {title:'Помощь вдовам в исламе', url:'islamic_articles-uz/021-uz.html'},
-    {title:'Срочная помощь в исламе', url:'islamic_articles-uz/022-uz.html'},
-    {title:'Помощь едой в исламе', url:'islamic_articles-uz/023-uz.html'},
-    {title:'Куда идут ваши пожертвования', url:'islamic_articles-uz/024-uz.html'},
+    {title:'Sadaqa nima?', url:'islamic_articles-uz/001-uz.html'},
+    {title:'Zakot va sadaqa farqi', url:'islamic_articles-uz/002-uz.html'},
+    {title:'Nega yashirin xayriya muhim', url:'islamic_articles-uz/003-uz.html'},
+    {title:'Muhtoj oilalarga yordam', url:'islamic_articles-uz/004-uz.html'},
+    {title:'Nega hatto bir dollar ham ahamiyatli', url:'islamic_articles-uz/005-uz.html'},
+    {title:'Uy-joy va boshpana uchun sadaqa', url:'islamic_articles-uz/006-uz.html'},
+    {title:'Islomda sadaqaning eng yaxshi turlari', url:'islamic_articles-uz/007-uz.html'},
+    {title:'Ramazon oyida sadaqa', url:'islamic_articles-uz/008-uz.html'},
+    {title:'Qur’onda sadaqa', url:'islamic_articles-uz/009-uz.html'},
+    {title:'Bir sadaqa oilaning hayotini qanday o‘zgartirdi', url:'islamic_articles-uz/010-uz.html'},
+    {title:'Nega oilalarga yordam muhim', url:'islamic_articles-uz/011-uz.html'},
+    {title:'Kichik yordam — katta o‘zgarish', url:'islamic_articles-uz/012-uz.html'},
+    {title:'Sadaqaning ajri', url:'islamic_articles-uz/013-uz.html'},
+    {title:'Sadaqa va molni poklash', url:'islamic_articles-uz/014-uz.html'},
+    {title:'Nega musulmonlar sadaqa beradi', url:'islamic_articles-uz/015-uz.html'},
+    {title:'Islomda kambag‘allarga g‘amxo‘rlik', url:'islamic_articles-uz/016-uz.html'},
+    {title:'Musulmonning boshqalarga yordam berish mas’uliyati', url:'islamic_articles-uz/017-uz.html'},
+    {title:'Islomda adolat va rahm-shafqat', url:'islamic_articles-uz/018-uz.html'},
+    {title:'Xayriya oilalarga qanday umid beradi', url:'islamic_articles-uz/019-uz.html'},
+    {title:'Bolalarga sadaqa orqali yordam', url:'islamic_articles-uz/020-uz.html'},
+    {title:'Islomda bevalarga yordam', url:'islamic_articles-uz/021-uz.html'},
+    {title:'Islomda shoshilinch yordam', url:'islamic_articles-uz/022-uz.html'},
+    {title:'Islomda oziq-ovqat bilan yordam', url:'islamic_articles-uz/023-uz.html'},
+    {title:'Xayriyalaringiz qayerga ketadi', url:'islamic_articles-uz/024-uz.html'},
     {title:'Kun maqolasi №25', url:'islamic_articles-uz/025-uz.html'},
     {title:'Kun maqolasi №26', url:'islamic_articles-uz/026-uz.html'},
     {title:'Kun maqolasi №27', url:'islamic_articles-uz/027-uz.html'},
@@ -2838,47 +3212,16 @@ window.addEventListener("DOMContentLoaded",function(){const installBtn=document.
     {title:'Kun maqolasi №30', url:'islamic_articles-uz/030-uz.html'}
   ];
 
-  const names = [
-    {name:'Ар-Рахман', meaning:'Всемилостивый: Его милость охватывает всё творение.'},
-    {name:'Ар-Рахим', meaning:'Особо Милующий: проявляет особую милость к верующим.'},
-    {name:'Аль-Малик', meaning:'Владыка: истинный Царь и Полновластный Господь.'},
-    {name:'Аль-Куддус', meaning:'Святой: абсолютно чистый от любого недостатка.'},
-    {name:'Ас-Салям', meaning:'Источник мира и безопасности, свободный от несовершенства.'},
-    {name:'Аль-Му’мин', meaning:'Дарующий безопасность и подтверждающий истину.'},
-    {name:'Аль-Мухаймин', meaning:'Хранитель и Наблюдающий за всем.'},
-    {name:'Аль-Азиз', meaning:'Могущественный и Непобедимый, обладающий полной силой.'},
-    {name:'Аль-Джаббар', meaning:'Восстанавливающий, Исправляющий и Обладающий властью.'},
-    {name:'Аль-Мутакаббир', meaning:'Величественный: Ему одному принадлежит истинное величие.'},
-    {name:'Аль-Халик', meaning:'Творец: создаёт всё по совершенной мудрости.'},
-    {name:'Аль-Бари', meaning:'Создающий без образца и приводящий творение к бытию.'},
-    {name:'Аль-Мусаввир', meaning:'Придающий форму каждому созданию.'},
-    {name:'Аль-Гаффар', meaning:'Многократно Прощающий грехи кающимся.'},
-    {name:'Аль-Каххар', meaning:'Всепокоряющий: всё находится под Его властью.'},
-    {name:'Аль-Ваххаб', meaning:'Дарующий без счёта и без нужды в ответе.'},
-    {name:'Ар-Раззак', meaning:'Наделяющий пропитанием каждое создание.'},
-    {name:'Аль-Фаттах', meaning:'Открывающий двери милости, знания и решения.'},
-    {name:'Аль-Алим', meaning:'Всезнающий: знает явное, скрытое и будущее.'},
-    {name:'Аль-Кабид', meaning:'Сдерживающий по мудрости то, что должно быть сдержано.'},
-    {name:'Аль-Басит', meaning:'Расширяющий милость, удел и возможности.'},
-    {name:'Аль-Хафид', meaning:'Унижающий тех, кого унижает по справедливости.'},
-    {name:'Ар-Рафи', meaning:'Возвышающий тех, кого возвышает по мудрости.'},
-    {name:'Аль-Муизз', meaning:'Дарующий честь и силу тому, кому пожелает.'},
-    {name:'Аль-Музилль', meaning:'Лишающий чести тех, кто заслужил унижение.'},
-    {name:'Ас-Сами', meaning:'Всеслышащий: слышит каждую мольбу и каждое слово.'},
-    {name:'Аль-Басир', meaning:'Всевидящий: видит всё явное и скрытое.'},
-    {name:'Аль-Хакам', meaning:'Судья: выносит совершенное и справедливое решение.'},
-    {name:'Аль-Адль', meaning:'Справедливый: Его решения свободны от ظلمa.'},
-    {name:'Аль-Латиф', meaning:'Тонко Милующий: ведёт к благу мягко и незаметно.'}
-  ];
+  const names = ["Ar-Rahmon", "Ar-Rahim", "Al-Malik", "Al-Quddus", "As-Salom", "Al-Mu’min", "Al-Muhaymin", "Al-Aziz", "Al-Jabbor", "Al-Mutakabbir", "Al-Xoliq", "Al-Bori’", "Al-Musavvir", "Al-G‘affor", "Al-Qahhor", "Al-Vahhob", "Ar-Razzoq", "Al-Fattoh", "Al-Alim", "Al-Qobid", "Al-Bosit", "Al-Xofid", "Ar-Rofi’", "Al-Mu’izz", "Al-Muzill", "As-Sami’", "Al-Basir", "Al-Hakam", "Al-Adl", "Al-Latif"];
 
   const goals = [
-    'Bir yaxshilikni jim, so‘zsiz va ko‘z-ko‘zsiz qil.',
-    'Перед важным делом обнови намерение ради Аллаха ﷻ.',
-    'Помоги одному человеку так, чтобы никто не заметил.',
-    'Попроси прощения у Аллаха ﷻ 33 раза спокойно.',
-    'Сделай дуа за родителей и близких.',
-    'Убери одно лишнее действие, которое крадёт время.',
-    'Поблагодари Аллаха ﷻ за одну конкретную милость.'
+    'Bir yaxshilikni sokin, so‘zsiz va ko‘z-ko‘z qilmasdan qil.',
+    'Muhim ish oldidan niyatingni Alloh ﷻ uchun yangila.',
+    'Bir kishiga hech kim sezmaydigan tarzda yordam ber.',
+    'Alloh ﷻdan 33 marta sokin istig‘for so‘ra.',
+    'Ota-onang va yaqinlaring uchun duo qil.',
+    'Vaqtingni o‘g‘irlayotgan bitta ortiqcha odatni kamaytir.',
+    'Alloh ﷻ bergan bitta aniq ne’mat uchun shukr qil.'
   ];
 
   const articleDay = getDaysSince(articleStartDate);
@@ -2896,20 +3239,20 @@ window.addEventListener("DOMContentLoaded",function(){const installBtn=document.
   const currentAdhkarText = document.getElementById('currentAdhkarText');
   if(currentAdhkarTitle && currentAdhkarText){
     if(hour >= 4 && hour < 11){
-      currentAdhkarTitle.textContent = 'Tonggi zikr';
-      currentAdhkarText.textContent = 'Откроется сразу раздел утренних азкаров.';
+      currentAdhkarTitle.textContent = 'Tonggi azkor';
+      currentAdhkarText.textContent = 'Darhol tonggi azkor bo‘limi ochiladi.';
       if(adhkarLink) adhkarLink.href = 'adhkar-uz.html#morning';
     }else if(hour >= 16 && hour < 22){
-      currentAdhkarTitle.textContent = 'Kechki zikr';
-      currentAdhkarText.textContent = 'Откроется сразу раздел вечерних азкаров.';
+      currentAdhkarTitle.textContent = 'Kechki azkor';
+      currentAdhkarText.textContent = 'Darhol kechki azkor bo‘limi ochiladi.';
       if(adhkarLink) adhkarLink.href = 'adhkar-uz.html#evening';
     }else if(hour < 4){
-      currentAdhkarTitle.textContent = 'Keyingi zikr';
-      currentAdhkarText.textContent = 'Ближайший — утренний азкар после Фаджра.';
+      currentAdhkarTitle.textContent = 'Keyingi azkor';
+      currentAdhkarText.textContent = 'Eng yaqini — Bomdoddan keyingi tonggi azkor.';
       if(adhkarLink) adhkarLink.href = 'adhkar-uz.html#morning';
     }else{
-      currentAdhkarTitle.textContent = 'Keyingi zikr';
-      currentAdhkarText.textContent = 'Ближайший — вечерний азкар ближе к Магрибу.';
+      currentAdhkarTitle.textContent = 'Keyingi azkor';
+      currentAdhkarText.textContent = 'Eng yaqini — Shomga yaqin kechki azkor.';
       if(adhkarLink) adhkarLink.href = 'adhkar-uz.html#evening';
     }
   }
@@ -2920,7 +3263,7 @@ window.addEventListener("DOMContentLoaded",function(){const installBtn=document.
   const card = document.getElementById('allahNameCounterCard');
   const valueEl = document.getElementById('allahNameCounterValue');
   const fillEl = document.getElementById('allahNameCounterFill');
-  const storageKey = 'barakaway_name_counter_uz_' + todayKey;
+  const storageKey = 'barakaway_name_counter_' + todayKey;
   let count = Math.max(0, Math.min(100, parseInt(localStorage.getItem(storageKey) || '0', 10) || 0));
 
   function renderCounter(){
@@ -2928,7 +3271,7 @@ window.addEventListener("DOMContentLoaded",function(){const installBtn=document.
     if(meaningEl) meaningEl.textContent = name.meaning;
     if(valueEl) valueEl.textContent = count + '/100';
     if(fillEl) fillEl.style.width = count + '%';
-    if(card) card.setAttribute('aria-label', name.name + ': ' + count + ' из 100 повторений. ' + name.meaning);
+    if(card) card.setAttribute('aria-label', name.name + ': ' + count + ' 100 takrordan. ' + name.meaning);
   }
 
   function incrementCounter(){
@@ -2951,7 +3294,7 @@ window.addEventListener("DOMContentLoaded",function(){const installBtn=document.
   const practice = document.getElementById('dailyPracticeText');
   const goalCard = document.getElementById('dailyGoalCard');
   const goalStatus = document.getElementById('dailyGoalStatus');
-  const goalKey = 'barakaway_daily_goal_done_uz_' + todayKey;
+  const goalKey = 'barakaway_daily_goal_done_' + todayKey;
   let goalDone = localStorage.getItem(goalKey) === '1';
 
   if(practice) practice.textContent = goals[articleDay % goals.length];
@@ -3001,30 +3344,30 @@ window.addEventListener("DOMContentLoaded",function(){const installBtn=document.
   const todayKey = new Date().toISOString().slice(0,10);
   const dayNumber = Math.floor(Date.now() / 86400000);
   const articles = [
-    {title:'Kun maqolasi №1', url:'islamic_articles-uz/001-uz.html'},
-    {title:'Kun maqolasi №2', url:'islamic_articles-uz/002-uz.html'},
-    {title:'Kun maqolasi №3', url:'islamic_articles-uz/003-uz.html'},
-    {title:'Kun maqolasi №4', url:'islamic_articles-uz/004-uz.html'},
-    {title:'Kun maqolasi №5', url:'islamic_articles-uz/005-uz.html'},
-    {title:'Kun maqolasi №6', url:'islamic_articles-uz/006-uz.html'},
-    {title:'Kun maqolasi №7', url:'islamic_articles-uz/007-uz.html'},
-    {title:'Kun maqolasi №8', url:'islamic_articles-uz/008-uz.html'},
-    {title:'Kun maqolasi №9', url:'islamic_articles-uz/009-uz.html'},
-    {title:'Kun maqolasi №10', url:'islamic_articles-uz/010-uz.html'},
-    {title:'Kun maqolasi №11', url:'islamic_articles-uz/011-uz.html'},
-    {title:'Kun maqolasi №12', url:'islamic_articles-uz/012-uz.html'},
-    {title:'Kun maqolasi №13', url:'islamic_articles-uz/013-uz.html'},
-    {title:'Kun maqolasi №14', url:'islamic_articles-uz/014-uz.html'},
-    {title:'Kun maqolasi №15', url:'islamic_articles-uz/015-uz.html'},
-    {title:'Kun maqolasi №16', url:'islamic_articles-uz/016-uz.html'},
-    {title:'Kun maqolasi №17', url:'islamic_articles-uz/017-uz.html'},
-    {title:'Kun maqolasi №18', url:'islamic_articles-uz/018-uz.html'},
-    {title:'Kun maqolasi №19', url:'islamic_articles-uz/019-uz.html'},
-    {title:'Kun maqolasi №20', url:'islamic_articles-uz/020-uz.html'},
-    {title:'Kun maqolasi №21', url:'islamic_articles-uz/021-uz.html'},
-    {title:'Kun maqolasi №22', url:'islamic_articles-uz/022-uz.html'},
-    {title:'Kun maqolasi №23', url:'islamic_articles-uz/023-uz.html'},
-    {title:'Kun maqolasi №24', url:'islamic_articles-uz/024-uz.html'},
+    {title:'Sadaqa nima?', url:'islamic_articles-uz/001-uz.html'},
+    {title:'Zakot va sadaqa farqi', url:'islamic_articles-uz/002-uz.html'},
+    {title:'Nega yashirin xayriya muhim', url:'islamic_articles-uz/003-uz.html'},
+    {title:'Muhtoj oilalarga yordam', url:'islamic_articles-uz/004-uz.html'},
+    {title:'Nega hatto bir dollar ham ahamiyatli', url:'islamic_articles-uz/005-uz.html'},
+    {title:'Uy-joy va boshpana uchun sadaqa', url:'islamic_articles-uz/006-uz.html'},
+    {title:'Islomda sadaqaning eng yaxshi turlari', url:'islamic_articles-uz/007-uz.html'},
+    {title:'Ramazon oyida sadaqa', url:'islamic_articles-uz/008-uz.html'},
+    {title:'Qur’onda sadaqa', url:'islamic_articles-uz/009-uz.html'},
+    {title:'Bir sadaqa oilaning hayotini qanday o‘zgartirdi', url:'islamic_articles-uz/010-uz.html'},
+    {title:'Nega oilalarga yordam muhim', url:'islamic_articles-uz/011-uz.html'},
+    {title:'Kichik yordam — katta o‘zgarish', url:'islamic_articles-uz/012-uz.html'},
+    {title:'Sadaqaning ajri', url:'islamic_articles-uz/013-uz.html'},
+    {title:'Sadaqa va molni poklash', url:'islamic_articles-uz/014-uz.html'},
+    {title:'Nega musulmonlar sadaqa beradi', url:'islamic_articles-uz/015-uz.html'},
+    {title:'Islomda kambag‘allarga g‘amxo‘rlik', url:'islamic_articles-uz/016-uz.html'},
+    {title:'Musulmonning boshqalarga yordam berish mas’uliyati', url:'islamic_articles-uz/017-uz.html'},
+    {title:'Islomda adolat va rahm-shafqat', url:'islamic_articles-uz/018-uz.html'},
+    {title:'Xayriya oilalarga qanday umid beradi', url:'islamic_articles-uz/019-uz.html'},
+    {title:'Bolalarga sadaqa orqali yordam', url:'islamic_articles-uz/020-uz.html'},
+    {title:'Islomda bevalarga yordam', url:'islamic_articles-uz/021-uz.html'},
+    {title:'Islomda shoshilinch yordam', url:'islamic_articles-uz/022-uz.html'},
+    {title:'Islomda oziq-ovqat bilan yordam', url:'islamic_articles-uz/023-uz.html'},
+    {title:'Xayriyalaringiz qayerga ketadi', url:'islamic_articles-uz/024-uz.html'},
     {title:'Kun maqolasi №25', url:'islamic_articles-uz/025-uz.html'},
     {title:'Kun maqolasi №26', url:'islamic_articles-uz/026-uz.html'},
     {title:'Kun maqolasi №27', url:'islamic_articles-uz/027-uz.html'},
@@ -3032,15 +3375,37 @@ window.addEventListener("DOMContentLoaded",function(){const installBtn=document.
     {title:'Kun maqolasi №29', url:'islamic_articles-uz/029-uz.html'},
     {title:'Kun maqolasi №30', url:'islamic_articles-uz/030-uz.html'}
   ];
-  const names = ['Ар-Рахман', 'Ар-Рахим', 'Аль-Малик', 'Аль-Куддус', 'Ас-Салям', 'Аль-Му’мин', 'Аль-Мухаймин', 'Аль-Азиз', 'Аль-Джаббар', 'Аль-Мутакаббир', 'Аль-Халик', 'Аль-Бари', 'Аль-Мусаввир', 'Аль-Гаффар', 'Аль-Каххар', 'Аль-Ваххаб', 'Ар-Раззак', 'Аль-Фаттах', 'Аль-Алим', 'Аль-Кабид', 'Аль-Басит', 'Аль-Хафид', 'Ар-Рафи', 'Аль-Муизз', 'Аль-Музилль', 'Ас-Сами', 'Аль-Басир', 'Аль-Хакам', 'Аль-Адль', 'Аль-Латиф', 'Аль-Хабир', 'Аль-Халим', 'Аль-Азым', 'Аль-Гафур', 'Аш-Шакур', 'Аль-Алий', 'Аль-Кабир', 'Аль-Хафиз', 'Аль-Мукит', 'Аль-Хасиб'];
-  const goals = [
-    'Перед одним важным делом обнови намерение.',
-    'Bir yaxshilikni jim, so‘zsiz va ko‘z-ko‘zsiz qil.',
-    'Прочитай короткий материал и сохрани один вывод.',
-    'Попроси прощения у Аллаха 33 раза спокойно.',
-    'Убери одно лишнее действие, которое крадёт время.',
-    'Сделай дуа за родителей и близких.',
-    'Поблагодари Аллаха за одну конкретную милость.'
+  const names = [
+    {name:'Ar-Rahmon', meaning:'Mehribon: Uning rahmati barcha maxluqotni qamrab oladi.'},
+    {name:'Ar-Rahim', meaning:'Rahmli: mo‘minlarga alohida rahmat ko‘rsatadi.'},
+    {name:'Al-Malik', meaning:'Podshoh: haqiqiy Hukmdor va mutlaq Egadir.'},
+    {name:'Al-Quddus', meaning:'Muqaddas: har qanday nuqsondan pokdir.'},
+    {name:'As-Salom', meaning:'Tinchlik va omonlik manbai, kamchilikdan pokdir.'},
+    {name:'Al-Mu’min', meaning:'Omonlik beruvchi va haqiqatni tasdiqlovchi.'},
+    {name:'Al-Muhaymin', meaning:'Himoya qiluvchi va hamma narsani kuzatuvchi.'},
+    {name:'Al-Aziz', meaning:'Qudratli va yengilmas, to‘liq kuch egasi.'},
+    {name:'Al-Jabbor', meaning:'Tiklovchi, isloh qiluvchi va qudrat egasi.'},
+    {name:'Al-Mutakabbir', meaning:'Ulug‘vor: haqiqiy ulug‘lik faqat Unga xos.'},
+    {name:'Al-Xoliq', meaning:'Yaratuvchi: hamma narsani mukammal hikmat bilan yaratadi.'},
+    {name:'Al-Bori’', meaning:'Namunasiz yaratib, mavjudotga borliq beradi.'},
+    {name:'Al-Musavvir', meaning:'Har bir maxluqqa shakl beruvchi.'},
+    {name:'Al-G‘affor', meaning:'Tavba qiluvchilarning gunohlarini ko‘p kechiruvchi.'},
+    {name:'Al-Qahhor', meaning:'Hamma narsani O‘z hukmiga bo‘ysundiruvchi.'},
+    {name:'Al-Vahhob', meaning:'Hisobsiz va javob kutmasdan ato etuvchi.'},
+    {name:'Ar-Razzoq', meaning:'Har bir maxluqqa rizq beruvchi.'},
+    {name:'Al-Fattoh', meaning:'Rahmat, ilm va yechim eshiklarini ochuvchi.'},
+    {name:'Al-Alim', meaning:'Hamma narsani biluvchi: oshkorni, yashirinni va kelajakni biladi.'},
+    {name:'Al-Qobid', meaning:'Hikmat bilan lozim bo‘lgan narsani tor qiluvchi.'},
+    {name:'Al-Bosit', meaning:'Rahmat, rizq va imkoniyatlarni kengaytiruvchi.'},
+    {name:'Al-Xofid', meaning:'Adolat bilan kimni past qilsa, past qiluvchi.'},
+    {name:'Ar-Rofi’', meaning:'Hikmat bilan kimni ko‘tarsa, yuksaltiruvchi.'},
+    {name:'Al-Mu’izz', meaning:'Istagan bandasiga izzat va quvvat beruvchi.'},
+    {name:'Al-Muzill', meaning:'Loyiq bo‘lganlardan izzatni oluvchi.'},
+    {name:'As-Sami’', meaning:'Hamma narsani eshituvchi: har bir duo va so‘zni eshitadi.'},
+    {name:'Al-Basir', meaning:'Hamma narsani ko‘ruvchi: oshkor va yashirinni ko‘radi.'},
+    {name:'Al-Hakam', meaning:'Hukm qiluvchi: mukammal va adolatli hukm chiqaradi.'},
+    {name:'Al-Adl', meaning:'Adolatli: Uning qarorlari zulmdan pokdir.'},
+    {name:'Al-Latif', meaning:'Nozik mehribon: bandani yaxshilikka muloyim va sezilmas yo‘l bilan yetaklaydi.'}
   ];
   const article = articles[dayNumber % articles.length];
   const articleLink = document.getElementById('dailyArticleLink');
@@ -3050,22 +3415,22 @@ window.addEventListener("DOMContentLoaded",function(){const installBtn=document.
   const currentAdhkarTitle = document.getElementById('currentAdhkarTitle');
   const currentAdhkarText = document.getElementById('currentAdhkarText');
   if(currentAdhkarTitle && currentAdhkarText){
-    if(hour >= 4 && hour < 11){ currentAdhkarTitle.textContent = 'Tonggi zikr'; currentAdhkarText.textContent = 'Лучшее время закрепить утреннюю защиту.'; }
-    else if(hour >= 16 && hour < 22){ currentAdhkarTitle.textContent = 'Kechki zikr'; currentAdhkarText.textContent = 'Вечерняя защита перед окончанием дня.'; }
-    else{ currentAdhkarTitle.textContent = 'Keyingi zikr'; currentAdhkarText.textContent = hour < 4 ? 'Ближайший — утренний азкар после Фаджра.' : 'Ближайший — вечерний азкар ближе к Магрибу.'; }
+    if(hour >= 4 && hour < 11){ currentAdhkarTitle.textContent = 'Tonggi azkor'; currentAdhkarText.textContent = 'Tonggi himoyani mustahkamlash uchun eng yaxshi vaqt.'; }
+    else if(hour >= 16 && hour < 22){ currentAdhkarTitle.textContent = 'Kechki azkor'; currentAdhkarText.textContent = 'Kun yakunidan oldingi kechki himoya.'; }
+    else{ currentAdhkarTitle.textContent = 'Keyingi azkor'; currentAdhkarText.textContent = hour < 4 ? 'Eng yaqini — Bomdoddan keyingi tonggi azkor.' : 'Eng yaqini — Shomga yaqin kechki azkor.'; }
   }
   const name = names[dayNumber % names.length];
   const nameEl = document.getElementById('allahNameToday');
   const card = document.getElementById('allahNameCounterCard');
   const valueEl = document.getElementById('allahNameCounterValue');
   const fillEl = document.getElementById('allahNameCounterFill');
-  const storageKey = 'barakaway_name_counter_uz_ru_' + todayKey;
+  const storageKey = 'barakaway_name_counter_uz_' + todayKey;
   let count = Math.max(0, Math.min(100, parseInt(localStorage.getItem(storageKey) || '0', 10) || 0));
   function renderCounter(){
     if(nameEl) nameEl.textContent = name;
     if(valueEl) valueEl.textContent = count + '/100';
     if(fillEl) fillEl.style.width = count + '%';
-    if(card) card.setAttribute('aria-label', name + ': ' + count + ' из 100 повторений');
+    if(card) card.setAttribute('aria-label', name + ': ' + count + ' 100 takrordan');
   }
   function incrementCounter(){
     count = count >= 100 ? 0 : count + 1;
@@ -3099,7 +3464,7 @@ window.addEventListener("DOMContentLoaded",function(){const installBtn=document.
 
   function updateGoalState(){
     const now = new Date();
-    const key = 'barakaway_daily_goal_ru_' + localDateKey(now);
+    const key = 'barakaway_daily_goal_uz_' + localDateKey(now);
     const done = localStorage.getItem(key) === '1';
 
     goalCard.classList.toggle('goal-done', done);
@@ -3108,7 +3473,7 @@ window.addEventListener("DOMContentLoaded",function(){const installBtn=document.
 
     if(done){
       goalCard.style.setProperty('--goal-red-opacity', '0');
-      goalCard.setAttribute('aria-label', 'Выполнено');
+      goalCard.setAttribute('aria-label', 'Bajarildi');
       return;
     }
 
@@ -3119,9 +3484,13 @@ window.addEventListener("DOMContentLoaded",function(){const installBtn=document.
   }
 
   goalCard.addEventListener('click', function(){
-    const key = 'barakaway_daily_goal_ru_' + localDateKey(new Date());
+    const key = 'barakaway_daily_goal_uz_' + localDateKey(new Date());
     const done = localStorage.getItem(key) === '1';
-    localStorage.setItem(key, done ? '0' : '1');
+    if(localStorage.getItem(key) === '1'){
+      updateGoalState();
+      return;
+    }
+    localStorage.setItem(key, '1');
     updateGoalState();
   });
 
@@ -3136,9 +3505,1637 @@ window.addEventListener("DOMContentLoaded",function(){const installBtn=document.
   setInterval(updateGoalState, 60000);
 })();
 </script>
+<script>
+(function(){
+  const TASK_PREFIX = "barakaway_today_uz_";
+
+  function localDateKey(date){
+    const y = date.getFullYear();
+    const m = String(date.getMonth() + 1).padStart(2, "0");
+    const d = String(date.getDate()).padStart(2, "0");
+    return y + "-" + m + "-" + d;
+  }
+
+  function todayKey(){
+    return localDateKey(new Date());
+  }
+
+  function taskKey(name){
+    return TASK_PREFIX + todayKey() + "_" + name;
+  }
+
+  function isDone(name){
+    return localStorage.getItem(taskKey(name)) === "1";
+  }
+
+  function setDone(name){
+    localStorage.setItem(taskKey(name), "1");
+  }
+
+  function redOpacity(){
+    const now = new Date();
+    const minutes = now.getHours() * 60 + now.getMinutes();
+    return Math.max(0.10, Math.min(0.90, minutes / 1440)).toFixed(2);
+  }
+
+  function applyTaskState(card, statusEl, name, openSymbol){
+    if(!card) return;
+
+    const done = isDone(name);
+
+    card.classList.toggle("task-done", done);
+    card.classList.toggle("goal-done", done);
+    card.classList.toggle("task-urgent", !done && new Date().getHours() >= 18);
+
+    card.style.setProperty("--task-red-opacity", done ? "0" : redOpacity());
+    card.style.setProperty("--goal-red-opacity", done ? "0" : redOpacity());
+
+    if(statusEl){
+      statusEl.textContent = done ? "✓" : openSymbol;
+    }
+
+    card.setAttribute("aria-disabled", done ? "true" : "false");
+  }
+
+  const articleCard = document.getElementById("dailyArticleLink");
+  const articleStatus = document.getElementById("dailyArticleStatus");
+
+  const adhkarCard = document.getElementById("currentAdhkarLink");
+  const adhkarStatus = document.getElementById("currentAdhkarStatus");
+
+  const nameCard = document.getElementById("allahNameCounterCard");
+  const nameStatus = document.getElementById("allahNameCounterValue");
+  const nameFill = document.getElementById("allahNameCounterFill");
+
+  const goalCard = document.getElementById("dailyGoalCard");
+  const goalStatus = document.getElementById("dailyGoalStatus");
+
+  function renderAll(){
+    applyTaskState(articleCard, articleStatus, "article", "→");
+    applyTaskState(adhkarCard, adhkarStatus, "adhkar", "→");
+    applyTaskState(goalCard, goalStatus, "goal", "•");
+
+    if(nameCard){
+      const done = isDone("name");
+      let count = Math.max(0, Math.min(100, parseInt(localStorage.getItem(TASK_PREFIX + todayKey() + "_name_count") || "0", 10) || 0));
+
+      if(done){
+        count = 100;
+        nameCard.classList.add("task-done","goal-done");
+        nameCard.classList.remove("task-urgent");
+        nameCard.style.setProperty("--task-red-opacity","0");
+        nameCard.style.setProperty("--goal-red-opacity","0");
+        if(nameStatus) nameStatus.textContent = "✓";
+        if(nameFill) nameFill.style.width = "100%";
+        nameCard.setAttribute("aria-disabled","true");
+      }else{
+        nameCard.classList.remove("task-done","goal-done");
+        nameCard.classList.toggle("task-urgent", new Date().getHours() >= 18);
+        nameCard.style.setProperty("--task-red-opacity", redOpacity());
+        nameCard.style.setProperty("--goal-red-opacity", redOpacity());
+        if(nameStatus) nameStatus.textContent = count + "/100";
+        if(nameFill) nameFill.style.width = count + "%";
+        nameCard.setAttribute("aria-disabled","false");
+      }
+    }
+  }
+
+  if(articleCard){
+    articleCard.addEventListener("click", function(e){
+      if(isDone("article")){
+        e.preventDefault();
+        return;
+      }
+      setDone("article");
+      renderAll();
+    }, true);
+  }
+
+  if(adhkarCard){
+    adhkarCard.addEventListener("click", function(e){
+      if(isDone("adhkar")){
+        e.preventDefault();
+        return;
+      }
+      setDone("adhkar");
+      renderAll();
+    }, true);
+  }
+
+  if(goalCard){
+    goalCard.addEventListener("click", function(e){
+      if(isDone("goal")){
+        e.preventDefault();
+        return;
+      }
+      setDone("goal");
+      renderAll();
+    });
+
+    goalCard.addEventListener("keydown", function(e){
+      if(e.key === "Enter" || e.key === " "){
+        e.preventDefault();
+        if(!isDone("goal")){
+          setDone("goal");
+          renderAll();
+        }
+      }
+    });
+  }
+
+  if(nameCard){
+    nameCard.addEventListener("click", function(e){
+      if(isDone("name")){
+        e.preventDefault();
+        return;
+      }
+
+      let count = Math.max(0, Math.min(100, parseInt(localStorage.getItem(TASK_PREFIX + todayKey() + "_name_count") || "0", 10) || 0));
+      count = Math.min(100, count + 1);
+      localStorage.setItem(TASK_PREFIX + todayKey() + "_name_count", String(count));
+
+      if(count >= 100){
+        setDone("name");
+      }
+
+      renderAll();
+    });
+
+    nameCard.addEventListener("keydown", function(e){
+      if(e.key === "Enter" || e.key === " "){
+        e.preventDefault();
+        nameCard.click();
+      }
+    });
+  }
+
+  renderAll();
+  setInterval(renderAll, 60000);
+})();
+</script>
+
+<script>
+(function(){
+  const ayahActions = [
+    {
+        "ref": "2:83",
+        "ayah": "Odamlarga yaxshi so‘z ayting.",
+        "task": "Bugun yoningdagi odamlarga uchta sokin va yaxshi gap ayt."
+    },
+    {
+        "ref": "2:152",
+        "ayah": "Meni eslang, Men ham sizlarni eslayman.",
+        "task": "Bugun kun davomida Allohni o‘n marta zikr qil."
+    },
+    {
+        "ref": "2:153",
+        "ayah": "Albatta, Alloh sabr qiluvchilar bilan birgadir.",
+        "task": "Bugun hech kimga qo‘pol javob bermaslikka harakat qil."
+    },
+    {
+        "ref": "2:195",
+        "ayah": "Alloh yaxshilik qiluvchilarni sevadi.",
+        "task": "Bugun bitta yaxshilikni jim, maqtov kutmasdan qil."
+    },
+    {
+        "ref": "2:222",
+        "ayah": "Alloh tavba qiluvchilarni sevadi.",
+        "task": "Bugun bitta gunohing uchun sokin tavba qil."
+    },
+    {
+        "ref": "2:263",
+        "ayah": "Yaxshi so‘z va kechirim ranjituvchi sadaqadan yaxshiroqdir.",
+        "task": "Bugun qilgan yordamingni hech kimga eslatma."
+    },
+    {
+        "ref": "2:286",
+        "ayah": "Alloh hech bir jonni imkonidan ortiq yuklamaydi.",
+        "task": "Bugun o‘zingga ortiqcha yuk olma, qo‘lingdan kelganini sokin bajar."
+    },
+    {
+        "ref": "3:17",
+        "ayah": "Sabrli, rostgo‘y va itoatkorlar munosiblar qatorida zikr qilinadi.",
+        "task": "Bugun oqlanish oson bo‘lgan joyda ham rostlikni tanla."
+    },
+    {
+        "ref": "3:134",
+        "ayah": "Ular g‘azabini yutadi va odamlarni kechiradi.",
+        "task": "Jahling chiqsa, Alloh uchun o‘n soniya sukut qil."
+    },
+    {
+        "ref": "3:139",
+        "ayah": "Zaiflashmang va g‘amgin bo‘lmang.",
+        "task": "Bugun o‘zing haqida umidsiz so‘z aytma."
+    },
+    {
+        "ref": "3:146",
+        "ayah": "Alloh sabr qiluvchilarni sevadi.",
+        "task": "Bugun bitta noqulaylikni shikoyatsiz qabul qil."
+    },
+    {
+        "ref": "3:159",
+        "ayah": "Ularga yumshoq bo‘l.",
+        "task": "Bugun yaqin inson bilan odatdagidan yumshoqroq gaplash."
+    },
+    {
+        "ref": "3:173",
+        "ayah": "Bizga Alloh kifoya, U eng yaxshi vakildir.",
+        "task": "Bugun xavotir paytida bir marta: menga Alloh kifoya, deb ayt."
+    },
+    {
+        "ref": "4:36",
+        "ayah": "Ota-onaga, qarindoshlarga, yetimlarga, miskinlarga va qo‘shnilarga yaxshilik qiling.",
+        "task": "Bugun bir qarindosh yoki qo‘shniga g‘amxo‘rlik qil."
+    },
+    {
+        "ref": "4:58",
+        "ayah": "Omonatlarni egalariga qaytaring.",
+        "task": "Bugun senga ishonib topshirilgan narsani kechiktirma."
+    },
+    {
+        "ref": "4:86",
+        "ayah": "Salomga undan yaxshiroq yoki o‘xshash javob bering.",
+        "task": "Bugun salomga iliqroq va e’tiborliroq javob ber."
+    },
+    {
+        "ref": "4:135",
+        "ayah": "Adolatda sobit turing.",
+        "task": "Bugun mayda suhbatda ham adolatsiz bo‘lma."
+    },
+    {
+        "ref": "5:2",
+        "ayah": "Yaxshilik va taqvoda bir-biringizga yordam bering.",
+        "task": "Bugun bir kishiga yaxshi ishda yordam ber."
+    },
+    {
+        "ref": "5:8",
+        "ayah": "Adolatli bo‘ling, bu taqvoga yaqinroqdir.",
+        "task": "Bugun vaziyatni bilmasdan hukm qilma."
+    },
+    {
+        "ref": "5:13",
+        "ayah": "Ularni kechir va bag‘rikeng bo‘l.",
+        "task": "Bugun bitta mayda ginani qo‘yib yubor."
+    },
+    {
+        "ref": "6:141",
+        "ayah": "Isrof qilmang.",
+        "task": "Bugun bitta ortiqcha xarajatdan voz kech."
+    },
+    {
+        "ref": "6:152",
+        "ayah": "Yaqiningizga qarshi bo‘lsa ham adolatli gapiring.",
+        "task": "Bugun bitta noqulay joyda ham rost gapir."
+    },
+    {
+        "ref": "7:31",
+        "ayah": "Yenglar va ichinglar, lekin isrof qilmanglar.",
+        "task": "Bugun ovqat yoki xaridda me’yordan oshma."
+    },
+    {
+        "ref": "7:56",
+        "ayah": "Allohning rahmati yaxshilik qiluvchilarga yaqindir.",
+        "task": "Bugun birovga foyda keltiradigan bitta ish qil."
+    },
+    {
+        "ref": "7:199",
+        "ayah": "Kechirimli bo‘l, yaxshilikka buyur va johillardan yuz o‘gir.",
+        "task": "Bugun bo‘sh tortishuvga kirmagin."
+    },
+    {
+        "ref": "8:46",
+        "ayah": "Sabr qiling.",
+        "task": "Bugun odamning gapini bo‘lma, oxirigacha tingla."
+    },
+    {
+        "ref": "9:51",
+        "ayah": "Bizga faqat Alloh yozgani yetadi.",
+        "task": "Bugun qo‘rqqaningda: hammasi Allohning iznida, deb esla."
+    },
+    {
+        "ref": "9:119",
+        "ayah": "Rostgo‘ylar bilan bo‘ling.",
+        "task": "Bugun yolg‘onni hatto jim turib ham qo‘llab-quvvatlama."
+    },
+    {
+        "ref": "10:62",
+        "ayah": "Allohga yaqin bandalar uchun qo‘rquv ham, g‘am ham yo‘q.",
+        "task": "Bugun bitta xavotirli fikrni duo bilan almashtir."
+    },
+    {
+        "ref": "11:115",
+        "ayah": "Sabr qil, Alloh yaxshilik qiluvchilarning ajrini zoye qilmaydi.",
+        "task": "Bugun bitta foydali ishni oxiriga yetkaz."
+    },
+    {
+        "ref": "12:18",
+        "ayah": "Go‘zal sabr.",
+        "task": "Bugun noto‘g‘ri tushunilgan bo‘lsang ham keskin javob berma."
+    },
+    {
+        "ref": "12:87",
+        "ayah": "Allohning rahmatidan noumid bo‘lmang.",
+        "task": "Bugun 'men uddalay olmayman' degan gapni aytma."
+    },
+    {
+        "ref": "13:28",
+        "ayah": "Qalblar Allohni zikr qilish bilan xotirjam bo‘ladi.",
+        "task": "Bugun bezovtalik paytida qisqa zikr qil."
+    },
+    {
+        "ref": "14:7",
+        "ayah": "Shukr qilsangiz, sizlarga ziyoda qilaman.",
+        "task": "Bugun hayotingdagi beshta ne’matni sanab chiq."
+    },
+    {
+        "ref": "15:85",
+        "ayah": "Go‘zal kechirim bilan kechir.",
+        "task": "Bugun bitta mayda narsani eslatmasdan kechir."
+    },
+    {
+        "ref": "16:90",
+        "ayah": "Alloh adolatni, yaxshilikni va yaqinlarga yordamni buyuradi.",
+        "task": "Bugun yaqiningga ta’na qilmasdan yordam ber."
+    },
+    {
+        "ref": "16:96",
+        "ayah": "Alloh huzuridagisi abadiyroqdir.",
+        "task": "Bugun odamlar uchun emas, oxirat savobi uchun bitta ish tanla."
+    },
+    {
+        "ref": "16:125",
+        "ayah": "Hikmat va go‘zal nasihat bilan chaqir.",
+        "task": "Bugun din haqida qo‘pol bahslashma."
+    },
+    {
+        "ref": "17:23",
+        "ayah": "Ota-onaga hatto norozilik so‘zini ham aytma.",
+        "task": "Bugun ota-ona yoki kattaga yumshoq so‘z ayt."
+    },
+    {
+        "ref": "17:26",
+        "ayah": "Qarindosh, miskin va yo‘lovchining haqqini ber.",
+        "task": "Bugun muhtoj yoki yaqining bilan foydali narsani bo‘lish."
+    },
+    {
+        "ref": "17:27",
+        "ayah": "Isrof qiluvchilar shaytonlarning birodarlaridir.",
+        "task": "Bugun bitta ma’nosiz sarfdan voz kech."
+    },
+    {
+        "ref": "17:36",
+        "ayah": "Bilmagan narsangga ergashma.",
+        "task": "Bugun tekshirilmagan xabarni yuborma."
+    },
+    {
+        "ref": "17:37",
+        "ayah": "Yer yuzida kibr bilan yurma.",
+        "task": "Bugun maqtanma va boshqani kamsitma."
+    },
+    {
+        "ref": "18:10",
+        "ayah": "Robbimiz, bizga O‘zingdan rahmat ato et.",
+        "task": "Bugun muhim ish oldidan Allohdan to‘g‘ri yo‘l so‘ra."
+    },
+    {
+        "ref": "18:28",
+        "ayah": "Robbiga duo qiluvchilar bilan sabrli bo‘l.",
+        "task": "Bugun yaxshi muhit yoki foydali eslatmaga vaqt ajrat."
+    },
+    {
+        "ref": "20:14",
+        "ayah": "Meni eslash uchun namozni ado et.",
+        "task": "Bugun bitta namozni shoshilmasdan o‘qi."
+    },
+    {
+        "ref": "20:44",
+        "ayah": "U bilan yumshoq gapiring.",
+        "task": "Bugun qiyin odam bilan ham yumshoq gapir."
+    },
+    {
+        "ref": "20:114",
+        "ayah": "Robbim, ilmimni ziyoda qil.",
+        "task": "Bugun Alloh uchun bitta foydali narsani o‘rgan."
+    },
+    {
+        "ref": "21:35",
+        "ayah": "Sizlarni yomonlik va yaxshilik bilan sinaymiz.",
+        "task": "Bugun bitta sinovdan shikoyat qilma, hikmat so‘ra."
+    },
+    {
+        "ref": "21:90",
+        "ayah": "Ular yaxshilikka shoshilar va umid hamda qo‘rquv bilan duo qilar edi.",
+        "task": "Bugun bitta yaxshilikni kechiktirma."
+    },
+    {
+        "ref": "22:37",
+        "ayah": "Allohga sizlarning taqvolaringiz yetadi.",
+        "task": "Bugun bitta ishni ko‘z-ko‘zsiz, ixlos bilan qil."
+    },
+    {
+        "ref": "23:1-2",
+        "ayah": "Namozida xushu’ qilgan mo‘minlar najot topdi.",
+        "task": "Bugun hech bo‘lmasa bitta namozda shoshilish va chalg‘ishni kamaytir."
+    },
+    {
+        "ref": "23:3",
+        "ayah": "Ular behuda narsadan yuz o‘giradi.",
+        "task": "Bugun bitta behuda scroll yoki gapni to‘xtat."
+    },
+    {
+        "ref": "24:22",
+        "ayah": "Kechirsinlar va bag‘rikeng bo‘lsinlar.",
+        "task": "Bugun qalbingdagi bitta mayda ginani qo‘yib yubor."
+    },
+    {
+        "ref": "24:30",
+        "ayah": "Mo‘minlarga ayt: ko‘zlarini tiysinlar.",
+        "task": "Bugun qalbni xira qiladigan narsadan nazaringni saqla."
+    },
+    {
+        "ref": "25:63",
+        "ayah": "Rahmonning bandalari yerda kamtar yuradi.",
+        "task": "Bugun so‘z va amalda kamtar bo‘l."
+    },
+    {
+        "ref": "25:67",
+        "ayah": "Ular isrof ham, baxillik ham qilmaydi.",
+        "task": "Bugun xarid yoki ovqatda me’yorni tanla."
+    },
+    {
+        "ref": "28:77",
+        "ayah": "Alloh senga yaxshilik qilgani kabi sen ham yaxshilik qil.",
+        "task": "Bugun o‘zingda bor narsa bilan bir kishiga yordam ber."
+    },
+    {
+        "ref": "29:45",
+        "ayah": "Namoz fahsh va yomonlikdan qaytaradi.",
+        "task": "Bugun namoz oldidan u seni nimadan qaytarishi kerakligini esla."
+    },
+    {
+        "ref": "29:69",
+        "ayah": "Biz uchun harakat qilganlarni yo‘llarimizga hidoyat qilamiz.",
+        "task": "Bugun o‘zingni tuzatish sari bitta kichik qadam qo‘y."
+    },
+    {
+        "ref": "31:14",
+        "ayah": "Menga va ota-onangga shukr qil.",
+        "task": "Bugun Allohga shukr qil va ota-onangga yaxshi gap ayt."
+    },
+    {
+        "ref": "31:17",
+        "ayah": "Senga yetgan narsaga sabr qil.",
+        "task": "Bugun kechikish yoki noqulaylik sabab jahlingni chiqarmagin."
+    },
+    {
+        "ref": "31:18",
+        "ayah": "Odamlardan yuz o‘girma va kibr bilan yurma.",
+        "task": "Bugun insonni diqqat bilan tingla, ustunlik ko‘rsatma."
+    },
+    {
+        "ref": "31:19",
+        "ayah": "Mo‘tadil bo‘l va ovozingni pasaytir.",
+        "task": "Bugun odatdagidan pastroq va sokinroq gapir."
+    },
+    {
+        "ref": "33:35",
+        "ayah": "Allohni ko‘p zikr qiluvchilarga mag‘firat va ulug‘ ajr tayyorlangan.",
+        "task": "Bugun 33 marta zikrni sokin va ongli qil."
+    },
+    {
+        "ref": "33:41",
+        "ayah": "Allohni ko‘p zikr qiling.",
+        "task": "Bugun zikr uchun uchta qisqa vaqt belgila."
+    },
+    {
+        "ref": "33:70",
+        "ayah": "To‘g‘ri so‘z ayting.",
+        "task": "Bugun ikki ma’noli gapirma, rost va aniq ayt."
+    },
+    {
+        "ref": "39:10",
+        "ayah": "Sabr qiluvchilarga ajr hisob-kitobsiz beriladi.",
+        "task": "Bugun bitta narsaga g‘azabsiz sabr qil."
+    },
+    {
+        "ref": "39:53",
+        "ayah": "Allohning rahmatidan noumid bo‘lmang.",
+        "task": "Bugun kechirim so‘ra va o‘zingni sindirmasdan qayta boshla."
+    },
+    {
+        "ref": "40:60",
+        "ayah": "Menga duo qiling, Men javob beraman.",
+        "task": "Bugun o‘z so‘zlaring bilan bitta shaxsiy duo qil."
+    },
+    {
+        "ref": "41:34",
+        "ayah": "Yomonlikni yaxshiroq narsa bilan qaytar.",
+        "task": "Bugun yoqimsiz gapga yaxshilik bilan javob ber."
+    },
+    {
+        "ref": "42:36",
+        "ayah": "Alloh huzuridagisi yaxshiroq va abadiyroqdir.",
+        "task": "Bugun bo‘sh lazzat o‘rniga oxiratga foydali narsani tanla."
+    },
+    {
+        "ref": "42:37",
+        "ayah": "G‘azablanganlarida kechiradilar.",
+        "task": "Bugun g‘azab paytida so‘z bilan jazolama."
+    },
+    {
+        "ref": "42:40",
+        "ayah": "Kim kechirsa va isloh qilsa, uning ajri Alloh huzuridadir.",
+        "task": "Bugun yarashish yoki ichki kechirim sari qadam qo‘y."
+    },
+    {
+        "ref": "45:15",
+        "ayah": "Kim yaxshilik qilsa, o‘zi uchun qiladi.",
+        "task": "Bugun yaxshilik qil va minnat kutma."
+    },
+    {
+        "ref": "47:7",
+        "ayah": "Agar Allohning diniga yordam bersangiz, U sizlarga yordam beradi.",
+        "task": "Bugun foydali islomiy ishni so‘z yoki amal bilan qo‘llab-quvvatla."
+    },
+    {
+        "ref": "49:10",
+        "ayah": "Mo‘minlar birodardir, birodarlaringizni yarashtiring.",
+        "task": "Bugun odamlar orasidagi nizoni kuchaytirma."
+    },
+    {
+        "ref": "49:11",
+        "ayah": "Bir qavm boshqasini masxara qilmasin.",
+        "task": "Bugun odamni kamsitadigan hazil qilma."
+    },
+    {
+        "ref": "49:12",
+        "ayah": "Ko‘p gumonlardan saqlaning va g‘iybat qilmang.",
+        "task": "Bugun hech kimni ortidan muhokama qilma."
+    },
+    {
+        "ref": "50:18",
+        "ayah": "Inson biror so‘z aytmaydi, yonida kuzatuvchi bo‘lmasin.",
+        "task": "Bugun xabar yuborishdan oldin so‘zlaringni tekshir."
+    },
+    {
+        "ref": "51:56",
+        "ayah": "Jin va insonlarni faqat Menga ibodat qilishlari uchun yaratdim.",
+        "task": "Bugun oddiy ishni ham Alloh uchun niyat bilan qil."
+    },
+    {
+        "ref": "57:20",
+        "ayah": "Dunyo hayoti vaqtinchalik foydalanishdir.",
+        "task": "Bugun dunyoviy mayda narsa uchun ortiqcha tashvishlanma."
+    },
+    {
+        "ref": "57:23",
+        "ayah": "Yo‘qotgan narsangizga haddan tashqari qayg‘urmang va berilganiga kibr qilmang.",
+        "task": "Bugun muvozanatni saqla: vahimasiz va g‘urursiz."
+    },
+    {
+        "ref": "59:18",
+        "ayah": "Har bir jon ertaga nima tayyorlaganiga qarasin.",
+        "task": "Bugun uxlashdan oldin kuningdagi bitta amalni bahola."
+    },
+    {
+        "ref": "64:16",
+        "ayah": "Allohdan imkoningiz qadar qo‘rqing.",
+        "task": "Bugun mukammal emas, qo‘lingdan kelganini ixlos bilan qil."
+    },
+    {
+        "ref": "65:2-3",
+        "ayah": "Kim Allohdan qo‘rqsa, U unga chiqish yo‘lini va kutilmagan rizqni beradi.",
+        "task": "Bugun qiyinchilikda halol yo‘lni tanla."
+    },
+    {
+        "ref": "65:7",
+        "ayah": "Alloh berganidan ortiq yuklamaydi.",
+        "task": "Bugun o‘z imkoningni boshqalarniki bilan solishtirma."
+    },
+    {
+        "ref": "67:2",
+        "ayah": "U hayot va o‘limni kim amalda yaxshiroq ekanini sinash uchun yaratdi.",
+        "task": "Bugun bitta kichik ishni yaxshila: so‘z, namoz yoki yordam."
+    },
+    {
+        "ref": "70:5",
+        "ayah": "Go‘zal sabr bilan sabr qil.",
+        "task": "Bugun shikoyatsiz va keskinliksiz sabr qil."
+    },
+    {
+        "ref": "73:8",
+        "ayah": "Robbing nomini zikr qil va butunlay Unga yuzlan.",
+        "task": "Bugun Allohga yuzlanish uchun bir daqiqa ajrat."
+    },
+    {
+        "ref": "74:7",
+        "ayah": "Robbing uchun sabr qil.",
+        "task": "Bugun bitta noqulaylikka aynan Alloh uchun sabr qil."
+    },
+    {
+        "ref": "76:8-9",
+        "ayah": "Ular Alloh muhabbati uchun ovqat beradi, mukofot va tashakkur kutmaydi.",
+        "task": "Bugun javob kutmasdan kimdadir yordam qil."
+    },
+    {
+        "ref": "87:14-15",
+        "ayah": "Poklangan, Robbini zikr qilgan va namoz o‘qigan kishi najot topdi.",
+        "task": "Bugun ish oldidan niyatingni pokla."
+    },
+    {
+        "ref": "90:17",
+        "ayah": "Sabr va rahm-shafqatni tavsiya qiluvchilardan bo‘lish.",
+        "task": "Bugun bir kishini yumshoq so‘z bilan qo‘llab-quvvatla."
+    },
+    {
+        "ref": "92:5-7",
+        "ayah": "Kim bersa va taqvoli bo‘lsa, Biz unga oson yo‘lni yengillashtiramiz.",
+        "task": "Bugun ozgina ber: pul, vaqt yoki e’tibor."
+    },
+    {
+        "ref": "93:10",
+        "ayah": "So‘raganni quvma.",
+        "task": "Bugun yordam so‘raganga keskin javob bermagin."
+    },
+    {
+        "ref": "93:11",
+        "ayah": "Robbing ne’mati haqida so‘zla.",
+        "task": "Bugun Allohning bitta ne’matini eslab, shukr qil."
+    },
+    {
+        "ref": "94:5",
+        "ayah": "Qiyinchilik bilan birga yengillik bor.",
+        "task": "Bugun bitta qiyinchilik sabab taslim bo‘lma."
+    },
+    {
+        "ref": "94:6",
+        "ayah": "Albatta, qiyinchilik bilan birga yengillik bor.",
+        "task": "Bugun og‘ir bo‘lganda buni o‘zingga takrorla."
+    },
+    {
+        "ref": "95:4",
+        "ayah": "Biz insonni eng go‘zal suratda yaratdik.",
+        "task": "Bugun o‘zingni so‘z bilan kamsitma, qadringni saqla."
+    }
+];
+
+  const HISTORY_KEY = 'barakaway_ayah_history_uz_v1';
+  const TODAY_KEY = 'barakaway_ayah_today_uz_v1';
+
+  function localDateKey(date){
+    const y = date.getFullYear();
+    const m = String(date.getMonth() + 1).padStart(2, '0');
+    const d = String(date.getDate()).padStart(2, '0');
+    return y + '-' + m + '-' + d;
+  }
+
+  function daysBetween(a, b){
+    const start = new Date(a + 'T00:00:00');
+    const end = new Date(b + 'T00:00:00');
+    return Math.floor((end - start) / 86400000);
+  }
+
+  function safeJsonParse(value, fallback){
+    try{
+      return JSON.parse(value);
+    }catch(e){
+      return fallback;
+    }
+  }
+
+  function pickAyahForToday(){
+    const today = localDateKey(new Date());
+    const START_KEY = 'barakaway_linear_program_start_uz_v1';
+    let start = localStorage.getItem(START_KEY);
+    if(!start){
+      start = today;
+      localStorage.setItem(START_KEY, start);
+    }
+    const dayNumber = Math.max(0, daysBetween(start, today));
+    const index = ayahActions.length ? (dayNumber % ayahActions.length) : 0;
+    localStorage.setItem(TODAY_KEY, JSON.stringify({date:today, index:index, mode:'linear', day:dayNumber + 1}));
+    return ayahActions[index];
+  }
+
+  function renderAyahCard(){
+    const ayah = pickAyahForToday();
+    const card = document.getElementById('dailyArticleLink');
+    const text = document.getElementById('dailyArticleTitle');
+    const title = card ? card.querySelector('.today-action-title') : null;
+
+    if(card){
+      card.href = 'javascript:void(0)';
+      card.setAttribute('role', 'button');
+      card.setAttribute('aria-label', 'Kun oyati: ' + ayah.ref + '. ' + ayah.task);
+    }
+
+    if(title){
+      title.textContent = 'Kun oyati';
+    }
+
+    if(text){
+      const escapeHtml = function(value){
+        return String(value)
+          .replace(/&/g, '&amp;')
+          .replace(/</g, '&lt;')
+          .replace(/>/g, '&gt;')
+          .replace(/"/g, '&quot;')
+          .replace(/'/g, '&#039;');
+      };
+
+      text.innerHTML =
+        '<div class="today-ayah-text">' +
+          '<div><span class="today-ayah-ref">' + escapeHtml(ayah.ref) + '</span></div>' +
+          '<div class="today-ayah-line">' + escapeHtml(ayah.ayah) + '</div>' +
+          '<div class="today-ayah-task"><span class="today-ayah-task-label">Vazifa:</span>' + escapeHtml(ayah.task) + '</div>' +
+        '</div>';
+    }
+  }
+
+  renderAyahCard();
+
+  const card = document.getElementById('dailyArticleLink');
+  if(card){
+    card.addEventListener('click', function(event){
+      event.preventDefault();
+    }, true);
+    card.addEventListener('keydown', function(event){
+      if(event.key === 'Enter' || event.key === ' '){
+        event.preventDefault();
+        card.click();
+      }
+    });
+  }
+})();
+</script>
+
+
+<script>
+(function(){
+  const challenges = [
+    "Bugun besh kishiga birinchi bo‘lib salom ber.",
+    "Bugun Alloh uchun o‘n kishiga tabassum qil.",
+    "Bugun har bir muhim ish oldidan Bismillah de.",
+    "Bugun suhbatdoshning gapini biror marta bo‘lma.",
+    "Bugun qo‘zg‘atsalar ham qo‘pol javob berma.",
+    "Bugun tilingni bitta shikoyatdan tiy.",
+    "Bugun seni bezovta qilgan inson uchun duo qil.",
+    "Bugun bir kishiga izohsiz va ko‘z-ko‘zsiz yordam ber.",
+    "Bugun hech kimni ortidan muhokama qilma.",
+    "Bugun Allohga uchta aniq ne’mat uchun shukr qil.",
+    "Bugun Allohdan 33 marta sokin istig‘for so‘ra.",
+    "Bugun nutqingdan bitta zararli so‘zni olib tashla.",
+    "Bugun ota-onangga yoki yaqiningga yaxshi so‘z ayt.",
+    "Bugun suhbatda g‘alaba uchun bahslashma.",
+    "Bugun tinchlik uchun bitta mayda narsada yon ber.",
+    "Bugun bitta yaxshilikni hech kim bilmaydigan tarzda qil.",
+    "Bugun kun bo‘yi ovozingni baland ko‘tarma.",
+    "Bugun uxlashdan oldin bitta xato ishingni eslab, kechirim so‘ra.",
+    "Bugun imoningni susaytiradigan narsaga qaramagin.",
+    "Bugun bitta qisqa surani ma’nosini his qilib o‘qi.",
+    "Bugun shikoyat qilging kelganda Alhamdulillah de.",
+    "Bugun g‘azabda darhol javob berma — o‘n soniya kut.",
+    "Bugun aybdor bo‘lsang, birinchi bo‘lib kechirim so‘ra.",
+    "Bugun hikoyalaringda oshirib yuborma.",
+    "Bugun bitta ish oldidan niyatingni tekshir.",
+    "Bugun yo‘ldan yoki uydan boshqalarga halaqit beradigan bitta narsani olib tashla.",
+    "Bugun vafot etgan musulmonlar uchun duo qil.",
+    "Bugun hasad qilma — ne’mati bor inson uchun duo qil.",
+    "Bugun ortiqcha narsaga pul sarflama.",
+    "Bugun sendan zaifroq insonga yumshoqroq bo‘l.",
+    "Bugun odatda bahslashadigan joyda bir marta sukut qil.",
+    "Bugun yashirish oson bo‘lgan mayda joyda ham rost gapir.",
+    "Bugun odamlarning ko‘rinishi, daromadi yoki xatosini hukm qilma.",
+    "Bugun imkoning bo‘lsa kichik sadaqa qil.",
+    "Bugun Payg‘ambarimiz ﷺga o‘n marta salovat ayt.",
+    "Bugun bitta foydali ishni kechiktirma.",
+    "Bugun bir namozda salomdan keyin shoshilma.",
+    "Bugun bitta qisqa oyat tarjimasini o‘qi.",
+    "Bugun o‘zingga eslat: Alloh meni hozir ko‘rib turibdi.",
+    "Bugun bir suhbatda ortiqcha gapirma.",
+    "Bugun hech bo‘lmasa bitta ibora bilan kimningdir kunini yengillashtir.",
+    "Bugun hayotingni boshqalarniki bilan solishtirma.",
+    "Bugun ummating uchun duo qil.",
+    "Bugun kinoya bilan javob berma.",
+    "Bugun navbatda, yo‘lda yoki kutishda sabr ko‘rsat.",
+    "Bugun sokin zikr uchun telefonni 10 daqiqaga chetga qo‘y.",
+    "Bugun odatda e’tibordan chetda qoladigan insonga yaxshi so‘z ayt.",
+    "Bugun boshqalarning xatosini qidirma.",
+    "Bugun bitta gunohni eslab, unga qaytmaslikka qaror qil.",
+    "Bugun bitta ishni omonatdek puxta bajar.",
+    "Bugun yaxshi ishing bilan maqtanma.",
+    "Bugun charchagan bo‘lsang ham uyda tabassum qil.",
+    "Bugun yomonlikka yomonlik bilan javob berma.",
+    "Bugun Alloh uchun bitta mayda ginani kechir.",
+    "Bugun Allohning bitta ismining ma’nosini o‘rgan.",
+    "Bugun yomon fikr sezsang Astag‘firullah de.",
+    "Bugun bo‘sh tortishuvda qatnashma.",
+    "Bugun bir kishining kayfiyatini ko‘tar.",
+    "Bugun boshqaning xatosi ustidan kulma.",
+    "Bugun ish yoki o‘qish boshlanishidan oldin duo qil.",
+    "Bugun vaqt borasida halol bo‘l: kechikib boshqaning vaqtini olma.",
+    "Bugun bitta majburiy ishda dangasalik qilma.",
+    "Bugun senga yaxshilik qilgan kishiga minnatdorlik bildir.",
+    "Bugun g‘amxo‘rlik qilish mumkin bo‘lsa, menga baribir dema.",
+    "Bugun bitta foydasiz tomoshadan saqlan.",
+    "Bugun tahoratni sokin va diqqat bilan qil.",
+    "Bugun La ilaha illallohni 20 marta ongli ayt.",
+    "Bugun uyda jahlli javob berma.",
+    "Bugun eslatmasiz yordam ber.",
+    "Bugun birovning sirini aytma.",
+    "Bugun hech kim ko‘rmasa ham Alloh uchun bitta gunohni tark et.",
+    "Bugun Fotiha surasini odatdagidan sekinroq o‘qi.",
+    "Bugun vaziyatni to‘liq bilmasdan ayblama.",
+    "Bugun yoqtirmagan insoningga ham adolatli bo‘l.",
+    "Bugun ilgari senga yordam bergan inson uchun duo qil.",
+    "Bugun ovqat, uy yoki oila haqida yomon gapirma.",
+    "Bugun atrofingdagi bitta joyni poklik uchun tartibga keltir.",
+    "Bugun reja qilganingda InshaAlloh de.",
+    "Bugun muhtoj insonni sezmagandek bo‘lma.",
+    "Bugun intizom uchun bitta ortiqcha rohatdan voz kech.",
+    "Bugun yaqiningga minnat kutmasdan yaxshilik qil.",
+    "Bugun nazaringni haromdan saqla.",
+    "Bugun g‘azabda xabar yuborma.",
+    "Bugun bitta namozdan keyin odatdagidan uzunroq duo qil.",
+    "Bugun mayda kelishmovchilikda birinchi yarashadigan odam bo‘l.",
+    "Bugun katta yoshli insonning gapini bo‘lma.",
+    "Bugun o‘zing haqida kerakligidan ortiq gapirma.",
+    "Bugun o‘limni bir marta esla va bitta niyatni to‘g‘rila.",
+    "Bugun bir kishiga: Alloh sizga yaxshilik bilan qaytarsin, deb ayt.",
+    "Bugun boshqaning mehnatini qadrsizlantirma.",
+    "Bugun amal bilan yordam bera olmasang, so‘z bilan yordam ber.",
+    "Bugun qiyin rostlik o‘rniga oson yolg‘onni tanlama.",
+    "Bugun din ilmi sari bitta kichik qadam qo‘y.",
+    "Bugun bitta hadis o‘qi va uni qanday qo‘llashni o‘yla.",
+    "Bugun ota-ona yoki kattalar bilan mayda narsa uchun bahslashma.",
+    "Bugun bola yoki zaif insonga jahlingni chiqarmagin.",
+    "Bugun ertalab va kechqurun mag‘firat so‘rab duo qil.",
+    "Bugun yaxshilikka sovuqlik bilan javob berma.",
+    "Bugun ovqatdan oldin Bismillah, keyin Alhamdulillah de.",
+    "Bugun so‘zlaring bilan kimningdir g‘amiga sabab bo‘lma.",
+    "Bugun bitta ishni omonat uchun o‘z vaqtida bajar.",
+    "Bugun odamlarni bir-biri bilan solishtirma.",
+    "Bugun rizq Allohdan ekanini eslab, ortiqcha xavotirlanma.",
+    "Bugun bitta zararli odatni hech bo‘lmasa bir kunga tark et.",
+    "Bugun Ixlos surasini uch marta ongli o‘qi.",
+    "Bugun ob-havo, sharoit yoki odamlardan shikoyat qilma.",
+    "Bugun kam gaplashadigan insoningga birinchi salom ber.",
+    "Bugun hasad qilgan insoning uchun duo qil.",
+    "Bugun haq bo‘lsang ham keskin so‘z aytma.",
+    "Bugun xulqing bilan birovga xotirjamlik ber.",
+    "Bugun xatoni oqlama, sokin tan ol.",
+    "Bugun yomon fikrni A’uzu billah so‘zi bilan qaytar.",
+    "Bugun Allohga sog‘lik uchun shukr qil.",
+    "Bugun uyda so‘ralmasdan yordam ber.",
+    "Bugun internetdagi bitta bo‘sh bahsga vaqt sarflama.",
+    "Bugun bitta amalni Alloh uchun qil va hech kimga aytma.",
+    "Bugun uxlashdan oldin o‘zingdan so‘ra: Alloh uchun nima qildim?",
+    "Bugun bitta noqulaylikni shikoyatsiz qabul qil.",
+    "Bugun boshqalarning kamchiligiga qarama — o‘zingni tuzatish bilan shug‘ullan.",
+    "Bugun boshqa odam jim bo‘lsa ham birinchi bo‘lib yaxshi gap ayt.",
+    "Bugun bitta kichik foydali ishni oxiriga yetkaz."
+];
+  const TODAY_KEY = 'barakaway_daily_challenge_today_uz';
+  const HISTORY_KEY = 'barakaway_daily_challenge_history_uz';
+
+  function localDateKey(date){
+    const y = date.getFullYear();
+    const m = String(date.getMonth() + 1).padStart(2, '0');
+    const d = String(date.getDate()).padStart(2, '0');
+    return y + '-' + m + '-' + d;
+  }
+
+  function daysBetween(a, b){
+    const da = new Date(a + 'T00:00:00');
+    const db = new Date(b + 'T00:00:00');
+    return Math.round((db - da) / 86400000);
+  }
+
+  function safeJsonParse(value, fallback){
+    try{return JSON.parse(value);}catch(e){return fallback;}
+  }
+
+  function pickChallengeForToday(){
+    const today = localDateKey(new Date());
+    const START_KEY = 'barakaway_linear_program_start_uz_v1';
+    let start = localStorage.getItem(START_KEY);
+    if(!start){
+      start = today;
+      localStorage.setItem(START_KEY, start);
+    }
+    const dayNumber = Math.max(0, daysBetween(start, today));
+    const index = challenges.length ? (dayNumber % challenges.length) : 0;
+    localStorage.setItem(TODAY_KEY, JSON.stringify({date:today, index:index, mode:'linear', day:dayNumber + 1}));
+    return {index:index, text:challenges[index]};
+  }
+
+  function renderChallenge(){
+    const selected = pickChallengeForToday();
+    const card = document.getElementById('currentAdhkarLink');
+    const title = document.getElementById('currentAdhkarTitle');
+    const text = document.getElementById('currentAdhkarText');
+
+    if(card){
+      card.href = 'javascript:void(0)';
+      card.setAttribute('role', 'button');
+      card.setAttribute('aria-label', 'Kun sinovi. ' + selected.text);
+    }
+    if(title) title.textContent = 'Kun sinovi';
+    if(text) text.textContent = selected.text;
+  }
+
+  renderChallenge();
+  document.addEventListener('DOMContentLoaded', renderChallenge);
+  window.addEventListener('pageshow', renderChallenge);
+})();
+</script>
+
+
+<script>
+(function(){
+  const MICRO_QUESTIONS = [
+  {
+    "q": "Islomning nechta ustuni bor?",
+    "options": [
+      "4",
+      "5",
+      "6"
+    ],
+    "correct": 1,
+    "meaning": "Islomning besh ustuni musulmon hayotining amaliy asosidir."
+  },
+  {
+    "q": "Islomning birinchi ustuni nima?",
+    "options": [
+      "Shahodat",
+      "Ro‘za",
+      "Zakot"
+    ],
+    "correct": 0,
+    "meaning": "Shahodat — iymon guvohligi va Islomga kirish asosidir."
+  },
+  {
+    "q": "Bir kunda nechta farz namoz bor?",
+    "options": [
+      "3",
+      "5",
+      "6"
+    ],
+    "correct": 1,
+    "meaning": "Besh vaqt namoz inson kunini Alloh bilan bog‘laydi."
+  },
+  {
+    "q": "Qaysi namoz tongda o‘qiladi?",
+    "options": [
+      "Shom",
+      "Bomdod",
+      "Xufton"
+    ],
+    "correct": 1,
+    "meaning": "Bomdod kunni ibodat bilan boshlaydi."
+  },
+  {
+    "q": "Quyosh botganidan keyin qaysi namoz o‘qiladi?",
+    "options": [
+      "Shom",
+      "Peshin",
+      "Asr"
+    ],
+    "correct": 0,
+    "meaning": "Shom namozi quyosh botganidan keyin boshlanadi."
+  },
+  {
+    "q": "Musulmon namozda qaysi tomonga yuzlanadi?",
+    "options": [
+      "Ka’baga",
+      "Quyoshga",
+      "Istalgan devorga"
+    ],
+    "correct": 0,
+    "meaning": "Qibla musulmonlarni yagona ibodat yo‘nalishida birlashtiradi."
+  },
+  {
+    "q": "Namozdan oldin nima kerak?",
+    "options": [
+      "Tahorat",
+      "Ovqat",
+      "Uyqu"
+    ],
+    "correct": 0,
+    "meaning": "Poklik namozning muhim shartidir."
+  },
+  {
+    "q": "Hanafiy mazhabida tahoratning nechta farzi bor?",
+    "options": [
+      "3",
+      "4",
+      "6"
+    ],
+    "correct": 1,
+    "meaning": "Bu asoslar tahoratni haqiqiy qiladi."
+  },
+  {
+    "q": "Niyat qayerda bo‘ladi?",
+    "options": [
+      "Qalbda",
+      "Kiyimda",
+      "Ovozda"
+    ],
+    "correct": 0,
+    "meaning": "Alloh niyatni so‘zsiz ham biladi."
+  },
+  {
+    "q": "Ataylab yolg‘on gapirish mumkinmi?",
+    "options": [
+      "Ha",
+      "Yo‘q",
+      "Sababsiz ba’zan"
+    ],
+    "correct": 1,
+    "meaning": "Rostgo‘ylik iymon va ishonchni mustahkamlaydi."
+  },
+  {
+    "q": "Bismillah nimani anglatadi?",
+    "options": [
+      "Alloh nomi bilan",
+      "Rahmat",
+      "Xayr"
+    ],
+    "correct": 0,
+    "meaning": "Musulmon ishni Alloh nomi bilan boshlaydi."
+  },
+  {
+    "q": "Alhamdulillah nimani anglatadi?",
+    "options": [
+      "Allohga hamd bo‘lsin",
+      "Men roziman",
+      "Kutaman"
+    ],
+    "correct": 0,
+    "meaning": "Shukr qalbni poklaydi va ne’matni qadrlatadi."
+  },
+  {
+    "q": "Sadaqa faqat pul bilan bo‘ladimi?",
+    "options": [
+      "Ha",
+      "Yo‘q",
+      "Faqat Ramazonda"
+    ],
+    "correct": 1,
+    "meaning": "Yaxshi so‘z, yordam va tabassum ham sadaqa bo‘lishi mumkin."
+  },
+  {
+    "q": "Ramazon oyida musulmonlar nima tutadi?",
+    "options": [
+      "Ro‘za",
+      "Savdo",
+      "Safar"
+    ],
+    "correct": 0,
+    "meaning": "Ro‘za nafsni tarbiyalaydi va taqvoni kuchaytiradi."
+  },
+  {
+    "q": "Qur’on kimning kalomi?",
+    "options": [
+      "Allohning kalomi",
+      "Shoir so‘zi",
+      "Tarix kitobi"
+    ],
+    "correct": 0,
+    "meaning": "Qur’on musulmonlar uchun hidoyat manbaidir."
+  }
+];
+  const TASK_PREFIX = "barakaway_today_uz_";
+  const MICRO_TODAY_KEY = "barakaway_micro_question_today_uz_v1";
+  const MICRO_HISTORY_KEY = "barakaway_micro_question_history_uz_v1";
+  const MICRO_ANSWER_PREFIX = "barakaway_micro_answer_uz_";
+
+  function localDateKey(date){
+    const y = date.getFullYear();
+    const m = String(date.getMonth() + 1).padStart(2, "0");
+    const d = String(date.getDate()).padStart(2, "0");
+    return y + "-" + m + "-" + d;
+  }
+
+  function todayKey(){
+    return localDateKey(new Date());
+  }
+
+  function daysBetween(a, b){
+    const da = new Date(a + "T00:00:00");
+    const db = new Date(b + "T00:00:00");
+    return Math.round((db - da) / 86400000);
+  }
+
+  function safeJsonParse(value, fallback){
+    try{return JSON.parse(value);}catch(e){return fallback;}
+  }
+
+  function taskKey(name){
+    return TASK_PREFIX + todayKey() + "_" + name;
+  }
+
+  function markDone(name){
+    localStorage.setItem(taskKey(name), "1");
+  }
+
+  function isDone(name){
+    return localStorage.getItem(taskKey(name)) === "1";
+  }
+
+  function redOpacity(){
+    const now = new Date();
+    const minutes = now.getHours() * 60 + now.getMinutes();
+    return Math.max(0.10, Math.min(0.90, minutes / 1440)).toFixed(2);
+  }
+
+  function pickQuestionForToday(){
+    const today = todayKey();
+    const START_KEY = 'barakaway_linear_program_start_uz_v1';
+    let start = localStorage.getItem(START_KEY);
+    if(!start){
+      start = today;
+      localStorage.setItem(START_KEY, start);
+    }
+    const dayNumber = Math.max(0, daysBetween(start, today));
+    const index = MICRO_QUESTIONS.length ? (dayNumber % MICRO_QUESTIONS.length) : 0;
+    localStorage.setItem(MICRO_TODAY_KEY, JSON.stringify({date:today, index:index, mode:'linear', day:dayNumber + 1}));
+    return {index:index, item:MICRO_QUESTIONS[index]};
+  }
+
+  function getAnswerState(){
+    return safeJsonParse(localStorage.getItem(MICRO_ANSWER_PREFIX + todayKey()), null);
+  }
+
+  function setAnswerState(index, selected){
+    localStorage.setItem(MICRO_ANSWER_PREFIX + todayKey(), JSON.stringify({date:todayKey(), index:index, selected:selected}));
+    markDone("micro");
+  }
+
+  function setCardState(card, status, done){
+    if(!card) return;
+    card.classList.toggle("task-done", done);
+    card.classList.toggle("goal-done", done);
+    card.classList.toggle("micro-answered", done);
+    card.classList.toggle("task-urgent", !done && new Date().getHours() >= 18);
+    card.style.setProperty("--task-red-opacity", done ? "0" : redOpacity());
+    card.style.setProperty("--goal-red-opacity", done ? "0" : redOpacity());
+    card.setAttribute("aria-disabled", done ? "true" : "false");
+    if(status) status.textContent = done ? "✓" : "?";
+  }
+
+  function renderMicroQuestion(){
+    const selected = pickQuestionForToday();
+    const q = selected.item;
+    const answerState = getAnswerState();
+    const done = isDone("micro") || (answerState && answerState.date === todayKey());
+
+    const card = document.getElementById("dailyMicroKnowledgeCard");
+    const status = document.getElementById("dailyMicroKnowledgeStatus");
+    const questionEl = document.getElementById("dailyMicroQuestion");
+    const optionsEl = document.getElementById("dailyMicroOptions");
+    const answerEl = document.getElementById("dailyMicroAnswer");
+
+    if(!card || !questionEl || !optionsEl || !answerEl) return;
+
+    questionEl.textContent = q.q;
+    optionsEl.innerHTML = "";
+
+    q.options.forEach(function(option, optionIndex){
+      const btn = document.createElement("button");
+      btn.type = "button";
+      btn.className = "micro-option";
+      btn.textContent = option;
+      btn.disabled = !!done;
+      btn.addEventListener("click", function(event){
+        event.preventDefault();
+        event.stopPropagation();
+        if(isDone("micro")) return;
+        setAnswerState(selected.index, optionIndex);
+        renderMicroQuestion();
+      });
+      optionsEl.appendChild(btn);
+    });
+
+    if(done){
+      const chosen = answerState && Number.isInteger(answerState.selected) ? answerState.selected : q.correct;
+      const correctText = q.options[q.correct];
+      const chosenText = q.options[chosen] || "";
+      const prefix = chosen === q.correct ? "To‘g‘ri." : "To‘g‘ri javob:";
+      answerEl.innerHTML = "<strong>" + prefix + "</strong> " + correctText + "<br><strong>Ma’nosi:</strong> " + q.meaning;
+      answerEl.classList.add("show");
+      markDone("micro");
+    }else{
+      answerEl.innerHTML = "";
+      answerEl.classList.remove("show");
+    }
+
+    setCardState(card, status, !!done);
+  }
+
+  function enforceNameCounterLock(){
+    const card = document.getElementById("allahNameCounterCard");
+    const status = document.getElementById("allahNameCounterValue");
+    const fill = document.getElementById("allahNameCounterFill");
+    if(!card) return;
+
+    const nameCountKey = TASK_PREFIX + todayKey() + "_name_count";
+    const legacyKeys = ["barakaway_name_counter_" + todayKey(), "barakaway_name_counter_uz_" + todayKey()];
+
+    function readNumber(key){
+      return Math.max(0, Math.min(100, parseInt(localStorage.getItem(key) || "0", 10) || 0));
+    }
+
+    function readCount(){
+      let count = readNumber(nameCountKey);
+      legacyKeys.forEach(function(key){count = Math.max(count, readNumber(key));});
+      return count;
+    }
+
+    function writeCount(count){
+      const safe = Math.max(0, Math.min(100, count));
+      localStorage.setItem(nameCountKey, String(safe));
+      legacyKeys.forEach(function(key){localStorage.setItem(key, String(safe));});
+      if(safe >= 100) markDone("name");
+    }
+
+    function render(){
+      let count = readCount();
+      const done = isDone("name") || count >= 100;
+      if(done){
+        count = 100;
+        writeCount(100);
+        markDone("name");
+        card.classList.add("task-done", "goal-done");
+        card.classList.remove("task-urgent");
+        card.style.setProperty("--task-red-opacity", "0");
+        card.style.setProperty("--goal-red-opacity", "0");
+        card.setAttribute("aria-disabled", "true");
+        if(status) status.textContent = "✓";
+        if(fill) fill.style.width = "100%";
+        return;
+      }
+      card.classList.remove("task-done", "goal-done");
+      card.classList.toggle("task-urgent", new Date().getHours() >= 18);
+      card.setAttribute("aria-disabled", "false");
+      if(status) status.textContent = count + "/100";
+      if(fill) fill.style.width = count + "%";
+    }
+
+    function oneClick(event){
+      if(event){
+        event.preventDefault();
+        event.stopImmediatePropagation();
+        event.stopPropagation();
+      }
+      if(isDone("name") || readCount() >= 100){
+        render();
+        return;
+      }
+      writeCount(readCount() + 1);
+      render();
+    }
+
+    if(card.dataset.finalNameCounterLock !== "1"){
+      card.dataset.finalNameCounterLock = "1";
+      card.addEventListener("click", oneClick, true);
+      card.addEventListener("keydown", function(event){
+        if(event.key === "Enter" || event.key === " ") oneClick(event);
+      }, true);
+    }
+    render();
+  }
+
+  renderMicroQuestion();
+  enforceNameCounterLock();
+  document.addEventListener("DOMContentLoaded", function(){
+    renderMicroQuestion();
+    enforceNameCounterLock();
+  });
+  window.addEventListener("pageshow", function(){
+    renderMicroQuestion();
+    enforceNameCounterLock();
+  });
+  setInterval(function(){
+    renderMicroQuestion();
+    enforceNameCounterLock();
+  }, 1500);
+})();
+</script>
+
+
+<script>
+(function(){
+  const TOGGLE_KEY = 'barakaway_tahajjud_alarm_enabled_uz_v1';
+  const ALERTED_KEY_PREFIX = 'barakaway_tahajjud_alarm_alerted_uz_';
+  const OFFSET_MINUTES = 60;
+
+  const toggle = document.getElementById('tahajjudAlarmToggle');
+  const meta = document.getElementById('tahajjudAlarmMeta');
+  let alarmTimer = null;
+  let metaTimer = null;
+
+  if(!toggle || !meta) return;
+
+  function localDateKey(date){
+    const y = date.getFullYear();
+    const m = String(date.getMonth() + 1).padStart(2, '0');
+    const d = String(date.getDate()).padStart(2, '0');
+    return y + '-' + m + '-' + d;
+  }
+
+  function parseTimeToDate(value){
+    const clean = String(value || '').replace(/[^\d:]/g, '').trim();
+    const parts = clean.split(':').map(Number);
+    if(!Number.isFinite(parts[0]) || !Number.isFinite(parts[1])) return null;
+    const d = new Date();
+    d.setHours(parts[0], parts[1], 0, 0);
+    return d;
+  }
+
+  function getFajrDate(){
+    const timings = window.homePrayerShareState && window.homePrayerShareState.timings;
+    if(!timings || !timings.Fajr) return null;
+
+    const fajr = parseTimeToDate(timings.Fajr);
+    if(!fajr) return null;
+
+    const now = new Date();
+    if(fajr <= now){
+      fajr.setDate(fajr.getDate() + 1);
+    }
+    return fajr;
+  }
+
+  function getAlarmDate(){
+    const fajr = getFajrDate();
+    if(!fajr) return null;
+    return new Date(fajr.getTime() - OFFSET_MINUTES * 60000);
+  }
+
+  function formatTime(date){
+    return String(date.getHours()).padStart(2,'0') + ':' + String(date.getMinutes()).padStart(2,'0');
+  }
+
+  function playTahajjudSound(){
+    try{
+      const AudioContext = window.AudioContext || window.webkitAudioContext;
+      if(!AudioContext) return;
+      const ctx = new AudioContext();
+      const gain = ctx.createGain();
+      gain.gain.setValueAtTime(0.0001, ctx.currentTime);
+      gain.gain.exponentialRampToValueAtTime(0.16, ctx.currentTime + 0.04);
+      gain.gain.exponentialRampToValueAtTime(0.0001, ctx.currentTime + 1.8);
+      gain.connect(ctx.destination);
+
+      [0, 0.55, 1.1].forEach(function(delay){
+        const osc = ctx.createOscillator();
+        osc.type = 'sine';
+        osc.frequency.setValueAtTime(620, ctx.currentTime + delay);
+        osc.connect(gain);
+        osc.start(ctx.currentTime + delay);
+        osc.stop(ctx.currentTime + delay + 0.32);
+      });
+    }catch(e){}
+  }
+
+  function notifyTahajjud(){
+    const fajr = getFajrDate();
+    const body = fajr
+      ? 'Bomdodgacha taxminan 60 daqiqa. Tahajjud namozi, duo va sokin zikr vaqti.'
+      : 'Tahajjud namozi, duo va sokin zikr vaqti.';
+
+    playTahajjudSound();
+
+    if('Notification' in window && Notification.permission === 'granted'){
+      new Notification('🌙 BarakaWay — Tahajjud', { body: body });
+    }else{
+      alert('🌙 BarakaWay\\n\\n' + body);
+    }
+  }
+
+  function updateMeta(){
+    const enabled = localStorage.getItem(TOGGLE_KEY) === '1';
+    const alarm = getAlarmDate();
+    const fajr = getFajrDate();
+
+    if(!enabled){
+      meta.textContent = 'Bomdoddan 60 daqiqa oldin';
+      return;
+    }
+
+    if(!alarm || !fajr){
+      meta.textContent = 'Yoqilgan. Bomdod vaqti yuklanmoqda...';
+      return;
+    }
+
+    meta.textContent = 'Yoqilgan: ' + formatTime(alarm) + ' · Bomdod ' + formatTime(fajr);
+  }
+
+  function scheduleAlarm(){
+    if(alarmTimer) clearTimeout(alarmTimer);
+    updateMeta();
+
+    if(localStorage.getItem(TOGGLE_KEY) !== '1') return;
+
+    const alarm = getAlarmDate();
+    if(!alarm) return;
+
+    const now = new Date();
+    const delay = alarm.getTime() - now.getTime();
+    const key = ALERTED_KEY_PREFIX + localDateKey(alarm);
+
+    if(delay <= 0){
+      return;
+    }
+
+    alarmTimer = setTimeout(function(){
+      if(localStorage.getItem(TOGGLE_KEY) !== '1') return;
+      if(localStorage.getItem(key) === '1') return;
+      localStorage.setItem(key, '1');
+      notifyTahajjud();
+      scheduleAlarm();
+    }, Math.min(delay, 2147483647));
+  }
+
+  toggle.checked = localStorage.getItem(TOGGLE_KEY) === '1';
+  updateMeta();
+  scheduleAlarm();
+
+  toggle.addEventListener('change', async function(){
+    localStorage.setItem(TOGGLE_KEY, toggle.checked ? '1' : '0');
+
+    if(toggle.checked && 'Notification' in window && Notification.permission === 'default'){
+      try{ await Notification.requestPermission(); }catch(e){}
+    }
+
+    updateMeta();
+    scheduleAlarm();
+  });
+
+  if(metaTimer) clearInterval(metaTimer);
+  metaTimer = setInterval(function(){
+    updateMeta();
+    scheduleAlarm();
+  }, 60000);
+
+  window.addEventListener('pageshow', function(){
+    updateMeta();
+    scheduleAlarm();
+  });
+})();
+</script>
 
 <script src="/theme-toggle.js"></script>
 <script src="/bottom-nav.js"></script>
+
+<script>
+(function(){
+  const TASK_PREFIX = "barakaway_today_uz_";
+
+  function localDateKey(date){
+    const y = date.getFullYear();
+    const m = String(date.getMonth() + 1).padStart(2, "0");
+    const d = String(date.getDate()).padStart(2, "0");
+    return y + "-" + m + "-" + d;
+  }
+
+  function todayKey(){
+    return localDateKey(new Date());
+  }
+
+  function taskDoneKey(){
+    return TASK_PREFIX + todayKey() + "_name";
+  }
+
+  function taskCountKey(){
+    return TASK_PREFIX + todayKey() + "_name_count";
+  }
+
+  function legacyCountKeys(){
+    return [
+      "barakaway_name_counter_" + todayKey(),
+      "barakaway_name_counter_uz_" + todayKey()
+    ];
+  }
+
+  function readNumber(key){
+    return Math.max(0, Math.min(100, parseInt(localStorage.getItem(key) || "0", 10) || 0));
+  }
+
+  function isNameDone(){
+    return localStorage.getItem(taskDoneKey()) === "1" || readNameCount() >= 100;
+  }
+
+  function setNameDone(){
+    localStorage.setItem(taskDoneKey(), "1");
+    localStorage.setItem(taskCountKey(), "100");
+    legacyCountKeys().forEach(function(key){
+      localStorage.setItem(key, "100");
+    });
+  }
+
+  function readNameCount(){
+    let count = readNumber(taskCountKey());
+    legacyCountKeys().forEach(function(key){
+      count = Math.max(count, readNumber(key));
+    });
+    return Math.max(0, Math.min(100, count));
+  }
+
+  function writeNameCount(count){
+    const safeCount = Math.max(0, Math.min(100, count));
+    localStorage.setItem(taskCountKey(), String(safeCount));
+    legacyCountKeys().forEach(function(key){
+      localStorage.setItem(key, String(safeCount));
+    });
+    if(safeCount >= 100){
+      setNameDone();
+    }
+  }
+
+  function renderNameCounter(){
+    const card = document.getElementById("allahNameCounterCard");
+    const status = document.getElementById("allahNameCounterValue");
+    const fill = document.getElementById("allahNameCounterFill");
+    const nameEl = document.getElementById("allahNameToday");
+    const meaningEl = document.getElementById("allahNameMeaning");
+
+    if(!card) return;
+
+    let count = readNameCount();
+    const done = isNameDone();
+
+    if(done){
+      count = 100;
+      setNameDone();
+      card.classList.add("task-done", "goal-done");
+      card.classList.remove("task-urgent");
+      card.style.setProperty("--task-red-opacity", "0");
+      card.style.setProperty("--goal-red-opacity", "0");
+      card.setAttribute("aria-disabled", "true");
+      card.setAttribute("aria-label", "Alloh ismi bugun bajarildi. Takrorlash yakunlandi.");
+      if(status) status.textContent = "✓";
+      if(fill) fill.style.width = "100%";
+      return;
+    }
+
+    card.classList.remove("task-done", "goal-done");
+    card.classList.toggle("task-urgent", new Date().getHours() >= 18);
+    card.setAttribute("aria-disabled", "false");
+
+    if(status) status.textContent = count + "/100";
+    if(fill) fill.style.width = count + "%";
+
+    const labelName = nameEl ? nameEl.textContent.trim() : "Alloh ismi";
+    const labelMeaning = meaningEl ? meaningEl.textContent.trim() : "";
+    card.setAttribute("aria-label", labelName + ": " + count + " 100 takrordan. " + labelMeaning);
+  }
+
+  function completeOneNameClick(event){
+    const card = document.getElementById("allahNameCounterCard");
+    if(!card) return;
+
+    if(event){
+      event.preventDefault();
+      event.stopImmediatePropagation();
+      event.stopPropagation();
+    }
+
+    if(isNameDone()){
+      renderNameCounter();
+      return;
+    }
+
+    const nextCount = Math.min(100, readNameCount() + 1);
+    writeNameCount(nextCount);
+    renderNameCounter();
+  }
+
+  function bindNameCounterLock(){
+    const card = document.getElementById("allahNameCounterCard");
+    if(!card || card.dataset.nameCounterLocked === "1") return;
+
+    card.dataset.nameCounterLocked = "1";
+
+    card.addEventListener("click", function(event){
+      completeOneNameClick(event);
+    }, true);
+
+    card.addEventListener("keydown", function(event){
+      if(event.key === "Enter" || event.key === " "){
+        completeOneNameClick(event);
+      }
+    }, true);
+
+    renderNameCounter();
+  }
+
+  bindNameCounterLock();
+  setInterval(renderNameCounter, 1000);
+})();
+</script>
+
 </body>
 </html>
 
