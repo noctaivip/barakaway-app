@@ -1905,6 +1905,52 @@ html.light-mode .today-action-title{color:#172019;}
 }
 html.dark-mode .today-action-text{color:#aebbb5;}
 html.light-mode .today-action-text{color:#647268;}
+.today-ayah-text{
+  display:flex;
+  flex-direction:column;
+  gap:7px;
+  font-weight:650;
+}
+.today-ayah-ref{
+  display:inline-flex;
+  width:max-content;
+  padding:3px 8px;
+  border-radius:999px;
+  font-size:10px;
+  line-height:1.2;
+  font-weight:950;
+  letter-spacing:0.04em;
+}
+html.dark-mode .today-ayah-ref{
+  background:rgba(215,192,122,0.14);
+  color:#f1d889;
+  border:1px solid rgba(215,192,122,0.24);
+}
+html.light-mode .today-ayah-ref{
+  background:#fff7e4;
+  color:#7b5b13;
+  border:1px solid rgba(141,107,22,0.18);
+}
+.today-ayah-line{
+  font-size:13px;
+  line-height:1.42;
+  font-weight:850;
+}
+html.dark-mode .today-ayah-line{color:#eef6f0;}
+html.light-mode .today-ayah-line{color:#172019;}
+.today-ayah-task-label{
+  display:inline-block;
+  margin-right:5px;
+  font-weight:950;
+}
+html.dark-mode .today-ayah-task-label{color:#d7c07a;}
+html.light-mode .today-ayah-task-label{color:#8d6b16;}
+.today-ayah-task{
+  font-size:12px;
+  line-height:1.38;
+  font-weight:650;
+}
+
 .home-section-title{
   margin:28px 0 14px;
   display:flex;
@@ -4198,7 +4244,21 @@ window.addEventListener("DOMContentLoaded",function(){const installBtn=document.
     }
 
     if(text){
-      text.textContent = ayah.ref + ' — ' + ayah.ayah + ' Задание: ' + ayah.task;
+      const escapeHtml = function(value){
+        return String(value)
+          .replace(/&/g, '&amp;')
+          .replace(/</g, '&lt;')
+          .replace(/>/g, '&gt;')
+          .replace(/"/g, '&quot;')
+          .replace(/'/g, '&#039;');
+      };
+
+      text.innerHTML =
+        '<div class="today-ayah-text">' +
+          '<div><span class="today-ayah-ref">' + escapeHtml(ayah.ref) + '</span></div>' +
+          '<div class="today-ayah-line">' + escapeHtml(ayah.ayah) + '</div>' +
+          '<div class="today-ayah-task"><span class="today-ayah-task-label">Задание:</span>' + escapeHtml(ayah.task) + '</div>' +
+        '</div>';
     }
   }
 
