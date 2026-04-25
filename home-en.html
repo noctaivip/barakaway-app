@@ -3482,31 +3482,64 @@ window.addEventListener("DOMContentLoaded",function(){const installBtn=document.
     const ans = document.getElementById("dailyMicroAnswer");
     const status = document.getElementById("dailyMicroKnowledgeStatus");
     if(!card || !qEl || !opts || !ans) return;
+
     const item = pick(questions);
+    const locked = isDone("micro");
+    const correctText = item.options[item.answer] || "";
+
     qEl.textContent = item.q;
     opts.innerHTML = "";
-    ans.textContent = "";
+
     item.options.forEach(function(text, i){
       const b = document.createElement("button");
       b.type = "button";
+      b.className = "micro-option";
       b.textContent = text;
+      b.disabled = locked;
+
       b.addEventListener("click", function(e){
+        e.preventDefault();
         e.stopPropagation();
+
+        if(isDone("micro")) return;
+
         const correct = i === item.answer;
-        ans.textContent = correct ? "Correct. " + item.explain : "Not exactly. " + item.explain;
-        ans.classList.add("show");
-        setDone("micro");
-        if(status) status.textContent = "✓";
-        card.classList.add("task-done","goal-done");
+
+        if(correct){
+          ans.innerHTML = "<strong>Correct.</strong> " + correctText + "<br><strong>Meaning:</strong> " + item.explain;
+          ans.classList.add("show");
+          setDone("micro");
+          if(status) status.textContent = "✓";
+          card.classList.add("task-done","goal-done","micro-answered");
+          card.setAttribute("aria-disabled", "true");
+          Array.prototype.forEach.call(opts.querySelectorAll("button"), function(btn){
+            btn.disabled = true;
+          });
+        }else{
+          ans.innerHTML = "<strong>Incorrect.</strong> Correct answer: " + correctText + "<br><strong>Meaning:</strong> " + item.explain;
+          ans.classList.add("show");
+          if(status) status.textContent = "?";
+          card.classList.remove("task-done","goal-done","micro-answered");
+          card.setAttribute("aria-disabled", "false");
+        }
       });
+
       opts.appendChild(b);
     });
-    if(isDone("micro")){
+
+    if(locked){
       if(status) status.textContent = "✓";
-      card.classList.add("task-done","goal-done");
-      ans.textContent = item.explain;
+      card.classList.add("task-done","goal-done","micro-answered");
+      card.setAttribute("aria-disabled", "true");
+      ans.innerHTML = "<strong>Correct.</strong> " + correctText + "<br><strong>Meaning:</strong> " + item.explain;
       ans.classList.add("show");
-    }else if(status){ status.textContent = "?"; }
+    }else{
+      if(status) status.textContent = "?";
+      card.classList.remove("task-done","goal-done","micro-answered");
+      card.setAttribute("aria-disabled", "false");
+      ans.innerHTML = "";
+      ans.classList.remove("show");
+    }
   }
 
   function initTahajjud(){
