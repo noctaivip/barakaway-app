@@ -3427,10 +3427,14 @@ window.addEventListener("DOMContentLoaded",function(){const installBtn=document.
   const storageKey = 'barakaway_name_counter_uz_' + todayKey;
   let count = Math.max(0, Math.min(100, parseInt(localStorage.getItem(storageKey) || '0', 10) || 0));
   function renderCounter(){
-    if(nameEl) nameEl.textContent = name;
+    const displayName = (name && typeof name === 'object') ? name.name : name;
+    const displayMeaning = (name && typeof name === 'object') ? name.meaning : '';
+    if(nameEl) nameEl.textContent = displayName || '';
+    const meaningEl = document.getElementById('allahNameMeaning');
+    if(meaningEl && displayMeaning) meaningEl.textContent = displayMeaning;
     if(valueEl) valueEl.textContent = count + '/100';
     if(fillEl) fillEl.style.width = count + '%';
-    if(card) card.setAttribute('aria-label', name + ': ' + count + ' 100 takrordan');
+    if(card) card.setAttribute('aria-label', (displayName || '') + ': ' + count + ' 100 takrordan' + (displayMeaning ? '. ' + displayMeaning : ''));
   }
   function incrementCounter(){
     count = count >= 100 ? 0 : count + 1;
