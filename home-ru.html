@@ -2515,7 +2515,7 @@ html.light-mode .today-daily-task.task-done{
 <section class="today-hub" aria-label="Сегодня в BarakaWay">
   <div class="today-hub-head">
     <div class="today-hub-kicker">Сегодня в BarakaWay</div>
-    <h2 class="today-hub-title">Каждый день - новая польза, новый зикр и маленький шаг ближе к Аллаху ﷻ</h2>
+    <h2 class="today-hub-title">Каждый день - новый шаг программы, новый аят, испытание и знание ради Аллаха ﷻ</h2>
   </div>
 
   <div class="today-hub-grid">
@@ -4010,40 +4010,16 @@ window.addEventListener("DOMContentLoaded",function(){const installBtn=document.
 
   function pickAyahForToday(){
     const today = localDateKey(new Date());
-    const savedToday = safeJsonParse(localStorage.getItem(TODAY_KEY), null);
-
-    if(savedToday && savedToday.date === today && Number.isInteger(savedToday.index) && ayahActions[savedToday.index]){
-      return ayahActions[savedToday.index];
+    const START_KEY = 'barakaway_linear_program_start_ru_v1';
+    let start = localStorage.getItem(START_KEY);
+    if(!start){
+      start = today;
+      localStorage.setItem(START_KEY, start);
     }
-
-    let history = safeJsonParse(localStorage.getItem(HISTORY_KEY), []);
-    if(!Array.isArray(history)) history = [];
-
-    history = history.filter(function(item){
-      return item &&
-        typeof item.date === 'string' &&
-        Number.isInteger(item.index) &&
-        daysBetween(item.date, today) >= 0 &&
-        daysBetween(item.date, today) < 7;
-    });
-
-    const blocked = new Set(history.map(function(item){ return item.index; }));
-    let candidates = ayahActions
-      .map(function(item, index){ return {item:item, index:index}; })
-      .filter(function(entry){ return !blocked.has(entry.index); });
-
-    if(!candidates.length){
-      candidates = ayahActions.map(function(item, index){ return {item:item, index:index}; });
-      history = [];
-    }
-
-    const selected = candidates[Math.floor(Math.random() * candidates.length)];
-    history.push({date:today, index:selected.index});
-
-    localStorage.setItem(HISTORY_KEY, JSON.stringify(history));
-    localStorage.setItem(TODAY_KEY, JSON.stringify({date:today, index:selected.index}));
-
-    return selected.item;
+    const dayNumber = Math.max(0, daysBetween(start, today));
+    const index = ayahActions.length ? (dayNumber % ayahActions.length) : 0;
+    localStorage.setItem(TODAY_KEY, JSON.stringify({date:today, index:index, mode:'linear', day:dayNumber + 1}));
+    return ayahActions[index];
   }
 
   function renderAyahCard(){
@@ -4232,29 +4208,16 @@ window.addEventListener("DOMContentLoaded",function(){const installBtn=document.
 
   function pickChallengeForToday(){
     const today = localDateKey(new Date());
-    const saved = safeJsonParse(localStorage.getItem(TODAY_KEY), null);
-    if(saved && saved.date === today && Number.isInteger(saved.index) && challenges[saved.index]){
-      return {index:saved.index, text:challenges[saved.index]};
+    const START_KEY = 'barakaway_linear_program_start_ru_v1';
+    let start = localStorage.getItem(START_KEY);
+    if(!start){
+      start = today;
+      localStorage.setItem(START_KEY, start);
     }
-
-    let history = safeJsonParse(localStorage.getItem(HISTORY_KEY), []);
-    if(!Array.isArray(history)) history = [];
-    history = history.filter(function(item){
-      return item && typeof item.date === 'string' && Number.isInteger(item.index) && daysBetween(item.date, today) >= 0 && daysBetween(item.date, today) < 7;
-    });
-
-    const blocked = new Set(history.map(function(item){return item.index;}));
-    let candidates = challenges.map(function(text, index){return {text:text, index:index};}).filter(function(item){return !blocked.has(item.index);});
-    if(!candidates.length){
-      candidates = challenges.map(function(text, index){return {text:text, index:index};});
-      history = [];
-    }
-
-    const selected = candidates[Math.floor(Math.random() * candidates.length)];
-    history.push({date:today, index:selected.index});
-    localStorage.setItem(HISTORY_KEY, JSON.stringify(history));
-    localStorage.setItem(TODAY_KEY, JSON.stringify({date:today, index:selected.index}));
-    return selected;
+    const dayNumber = Math.max(0, daysBetween(start, today));
+    const index = challenges.length ? (dayNumber % challenges.length) : 0;
+    localStorage.setItem(TODAY_KEY, JSON.stringify({date:today, index:index, mode:'linear', day:dayNumber + 1}));
+    return {index:index, text:challenges[index]};
   }
 
   function renderChallenge(){
@@ -4328,29 +4291,16 @@ window.addEventListener("DOMContentLoaded",function(){const installBtn=document.
 
   function pickQuestionForToday(){
     const today = todayKey();
-    const saved = safeJsonParse(localStorage.getItem(MICRO_TODAY_KEY), null);
-    if(saved && saved.date === today && Number.isInteger(saved.index) && MICRO_QUESTIONS[saved.index]){
-      return {index:saved.index, item:MICRO_QUESTIONS[saved.index]};
+    const START_KEY = 'barakaway_linear_program_start_ru_v1';
+    let start = localStorage.getItem(START_KEY);
+    if(!start){
+      start = today;
+      localStorage.setItem(START_KEY, start);
     }
-
-    let history = safeJsonParse(localStorage.getItem(MICRO_HISTORY_KEY), []);
-    if(!Array.isArray(history)) history = [];
-    history = history.filter(function(item){
-      return item && typeof item.date === "string" && Number.isInteger(item.index) && daysBetween(item.date, today) >= 0 && daysBetween(item.date, today) < 7;
-    });
-
-    const blocked = new Set(history.map(function(item){return item.index;}));
-    let candidates = MICRO_QUESTIONS.map(function(item, index){return {item:item, index:index};}).filter(function(item){return !blocked.has(item.index);});
-    if(!candidates.length){
-      candidates = MICRO_QUESTIONS.map(function(item, index){return {item:item, index:index};});
-      history = [];
-    }
-
-    const selected = candidates[Math.floor(Math.random() * candidates.length)];
-    history.push({date:today, index:selected.index});
-    localStorage.setItem(MICRO_HISTORY_KEY, JSON.stringify(history));
-    localStorage.setItem(MICRO_TODAY_KEY, JSON.stringify({date:today, index:selected.index}));
-    return selected;
+    const dayNumber = Math.max(0, daysBetween(start, today));
+    const index = MICRO_QUESTIONS.length ? (dayNumber % MICRO_QUESTIONS.length) : 0;
+    localStorage.setItem(MICRO_TODAY_KEY, JSON.stringify({date:today, index:index, mode:'linear', day:dayNumber + 1}));
+    return {index:index, item:MICRO_QUESTIONS[index]};
   }
 
   function getAnswerState(){
