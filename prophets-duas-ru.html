@@ -1305,6 +1305,259 @@ html.light-mode .prophet-category .nested-dua .dua-arrow{
   }
 }
 
+
+
+/* === Final second-level accordion redesign: dark black-gold, no green fill === */
+/* Main category cards remain green. Only inner second-level menu headers are changed. */
+
+.category-card > .dua-body.nested-list{
+  padding:18px 16px 18px !important;
+  gap:13px !important;
+  background:
+    radial-gradient(circle at 10% 0%,rgba(215,181,109,.10),transparent 34%),
+    linear-gradient(180deg,#0d1417 0%,#080d10 100%) !important;
+  border-top:1px solid rgba(215,181,109,.24) !important;
+}
+
+html.light-mode .category-card > .dua-body.nested-list{
+  background:
+    radial-gradient(circle at 10% 0%,rgba(181,138,54,.13),transparent 34%),
+    linear-gradient(180deg,#fffaf1 0%,#f5f8f6 100%) !important;
+}
+
+/* Second-level collapsed cards */
+.category-card > .dua-body.nested-list > .nested-dua,
+.category-card > .dua-body.nested-list > .empty-dua{
+  position:relative;
+  overflow:hidden !important;
+  border-radius:18px !important;
+  background:
+    linear-gradient(135deg,#171b1f 0%,#101417 48%,#0b1013 100%) !important;
+  border:1px solid rgba(215,181,109,.42) !important;
+  box-shadow:
+    0 10px 24px rgba(0,0,0,.34),
+    inset 0 1px 0 rgba(255,255,255,.045) !important;
+}
+
+.category-card > .dua-body.nested-list > .nested-dua + .nested-dua,
+.category-card > .dua-body.nested-list > .empty-dua + .empty-dua{
+  margin-top:2px !important;
+}
+
+/* Premium gold frame effect */
+.category-card > .dua-body.nested-list > .nested-dua::before,
+.category-card > .dua-body.nested-list > .empty-dua::before{
+  content:"";
+  display:block !important;
+  position:absolute;
+  left:0;
+  top:0;
+  bottom:0;
+  width:4px;
+  background:linear-gradient(180deg,#f0d891,#b9913d 52%,#6f5622);
+  opacity:.95;
+  pointer-events:none;
+}
+
+.category-card > .dua-body.nested-list > .nested-dua::after,
+.category-card > .dua-body.nested-list > .empty-dua::after{
+  content:"";
+  display:block !important;
+  position:absolute;
+  inset:0;
+  border-radius:18px;
+  background:
+    linear-gradient(90deg,rgba(215,181,109,.105),transparent 38%),
+    radial-gradient(circle at 100% 0%,rgba(255,255,255,.045),transparent 34%);
+  pointer-events:none;
+}
+
+/* Second-level header only */
+.category-card > .dua-body.nested-list > .nested-dua > summary.dua-head,
+.category-card > .dua-body.nested-list > .empty-dua > summary.dua-head{
+  position:relative;
+  z-index:1;
+  grid-template-columns:1fr 24px !important;
+  min-height:54px !important;
+  padding:14px 16px 14px 18px !important;
+  border-radius:18px !important;
+  background:transparent !important;
+  border:0 !important;
+}
+
+/* When second-level item opens */
+.category-card > .dua-body.nested-list > .nested-dua[open],
+.category-card > .dua-body.nested-list > .empty-dua[open]{
+  border-color:rgba(240,216,145,.68) !important;
+  background:
+    linear-gradient(135deg,#1c1b16 0%,#101417 52%,#0a0f12 100%) !important;
+  box-shadow:
+    0 14px 32px rgba(0,0,0,.44),
+    0 0 0 1px rgba(240,216,145,.10),
+    inset 0 1px 0 rgba(255,255,255,.06) !important;
+}
+
+.category-card > .dua-body.nested-list > .nested-dua[open] > summary.dua-head,
+.category-card > .dua-body.nested-list > .empty-dua[open] > summary.dua-head{
+  border-radius:18px 18px 0 0 !important;
+  border-bottom:1px solid rgba(215,181,109,.36) !important;
+  background:
+    linear-gradient(135deg,rgba(215,181,109,.14),rgba(255,255,255,.02)) !important;
+}
+
+/* Remove inner numbers completely */
+.category-card > .dua-body.nested-list > .nested-dua .dua-index,
+.category-card > .dua-body.nested-list > .empty-dua .dua-index{
+  display:none !important;
+}
+
+/* Softer, more readable typography */
+.category-card > .dua-body.nested-list > .nested-dua .dua-title,
+.category-card > .dua-body.nested-list > .empty-dua .dua-title{
+  color:#f7ead0 !important;
+  font-size:15.2px !important;
+  line-height:1.28 !important;
+  font-weight:750 !important;
+  letter-spacing:-.01em !important;
+  text-shadow:none !important;
+}
+
+.category-card > .dua-body.nested-list > .nested-dua .dua-title::before,
+.category-card > .dua-body.nested-list > .empty-dua .dua-title::before{
+  content:"";
+  display:inline-block;
+  width:6px;
+  height:6px;
+  margin-right:9px;
+  margin-bottom:2px;
+  border-radius:999px;
+  background:#d7b56d;
+  box-shadow:0 0 10px rgba(215,181,109,.52);
+  vertical-align:middle;
+}
+
+/* Arrow: premium gold, compact */
+.category-card > .dua-body.nested-list > .nested-dua .dua-arrow,
+.category-card > .dua-body.nested-list > .empty-dua .dua-arrow{
+  width:23px;
+  height:23px;
+  border-radius:999px;
+  display:flex !important;
+  align-items:center;
+  justify-content:center;
+  color:#111814 !important;
+  background:linear-gradient(180deg,#e8cc82,#b9913d);
+  box-shadow:0 6px 14px rgba(0,0,0,.24);
+  font-size:11px !important;
+  font-weight:900 !important;
+}
+
+.category-card > .dua-body.nested-list > .nested-dua[open] > summary .dua-arrow,
+.category-card > .dua-body.nested-list > .empty-dua[open] > summary .dua-arrow{
+  transform:rotate(180deg) !important;
+}
+
+/* Keep opened actual dua content as before, but visually separated from the header */
+.category-card > .dua-body.nested-list > .nested-dua > .dua-body{
+  border-radius:0 0 18px 18px !important;
+}
+
+/* Empty item content follows the dark-gold layer */
+.category-card > .dua-body.nested-list > .empty-dua > .dua-body{
+  background:#101417 !important;
+  border-radius:0 0 18px 18px !important;
+}
+
+.category-card > .dua-body.nested-list > .empty-dua .empty-note{
+  background:#15191b !important;
+  border-color:rgba(215,181,109,.24) !important;
+  color:#d8d2c4 !important;
+}
+
+/* Light mode equivalent: still not green */
+html.light-mode .category-card > .dua-body.nested-list > .nested-dua,
+html.light-mode .category-card > .dua-body.nested-list > .empty-dua{
+  background:
+    linear-gradient(135deg,#fffaf0 0%,#f8f4ea 50%,#f1f3ef 100%) !important;
+  border-color:rgba(181,138,54,.34) !important;
+  box-shadow:
+    0 10px 22px rgba(18,34,24,.08),
+    inset 0 1px 0 rgba(255,255,255,.96) !important;
+}
+
+html.light-mode .category-card > .dua-body.nested-list > .nested-dua .dua-title,
+html.light-mode .category-card > .dua-body.nested-list > .empty-dua .dua-title{
+  color:#1f241f !important;
+  text-shadow:none !important;
+}
+
+html.light-mode .category-card > .dua-body.nested-list > .nested-dua .dua-arrow,
+html.light-mode .category-card > .dua-body.nested-list > .empty-dua .dua-arrow{
+  color:#ffffff !important;
+  background:linear-gradient(180deg,#2d2a22,#111814);
+}
+
+html.light-mode .category-card > .dua-body.nested-list > .empty-dua > .dua-body{
+  background:#fffdf7 !important;
+}
+
+html.light-mode .category-card > .dua-body.nested-list > .empty-dua .empty-note{
+  background:#ffffff !important;
+  border-color:rgba(181,138,54,.22) !important;
+  color:#526158 !important;
+}
+
+@media(max-width:700px){
+  .category-card > .dua-body.nested-list{
+    padding:14px 10px 15px !important;
+    gap:12px !important;
+  }
+
+  .category-card > .dua-body.nested-list > .nested-dua,
+  .category-card > .dua-body.nested-list > .empty-dua{
+    border-radius:17px !important;
+  }
+
+  .category-card > .dua-body.nested-list > .nested-dua::after,
+  .category-card > .dua-body.nested-list > .empty-dua::after{
+    border-radius:17px;
+  }
+
+  .category-card > .dua-body.nested-list > .nested-dua > summary.dua-head,
+  .category-card > .dua-body.nested-list > .empty-dua > summary.dua-head{
+    grid-template-columns:1fr 22px !important;
+    min-height:50px !important;
+    padding:12px 12px 12px 15px !important;
+    border-radius:17px !important;
+  }
+
+  .category-card > .dua-body.nested-list > .nested-dua[open] > summary.dua-head,
+  .category-card > .dua-body.nested-list > .empty-dua[open] > summary.dua-head{
+    border-radius:17px 17px 0 0 !important;
+  }
+
+  .category-card > .dua-body.nested-list > .nested-dua .dua-title,
+  .category-card > .dua-body.nested-list > .empty-dua .dua-title{
+    font-size:14.2px !important;
+    line-height:1.25 !important;
+    font-weight:720 !important;
+  }
+
+  .category-card > .dua-body.nested-list > .nested-dua .dua-title::before,
+  .category-card > .dua-body.nested-list > .empty-dua .dua-title::before{
+    width:5px;
+    height:5px;
+    margin-right:8px;
+  }
+
+  .category-card > .dua-body.nested-list > .nested-dua .dua-arrow,
+  .category-card > .dua-body.nested-list > .empty-dua .dua-arrow{
+    width:21px;
+    height:21px;
+    font-size:10.5px !important;
+  }
+}
+
 </style>
 
 <script src="/theme-init.js"></script>
