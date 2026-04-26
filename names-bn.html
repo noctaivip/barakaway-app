@@ -40,595 +40,693 @@ async src="//gc.zgo.at/count.js"></script>
 })();
 </script>
 <style>
-body{
-margin:0;
-font-family:system-ui;
-background:#f5f7f8;
-color:#222;
-line-height:1.7;
+:root{
+  --bg:#f5f7f8;--text:#222;--card:#ffffff;--card-soft:#fafafa;--border:#dfe8e2;--border-soft:#edf1ee;--green:#2d7a46;--gold:#b4872e;--muted:#66726b;--shadow:0 18px 48px rgba(0,0,0,.08);
 }
+html.dark-mode{--bg:#101418;--text:#e9eef3;--card:#171d24;--card-soft:#141a20;--border:#2a343d;--border-soft:#243039;--green:#4caf6a;--gold:#d7b56d;--muted:#cbd5df;--shadow:0 28px 76px rgba(0,0,0,.52);}
+html.light-mode{--bg:#f5f7f8;--text:#222;--card:#fff;--card-soft:#fafafa;--border:#dfe8e2;--border-soft:#edf1ee;--green:#2d7a46;--gold:#b4872e;--muted:#66726b;--shadow:0 18px 48px rgba(0,0,0,.08);}
+*{box-sizing:border-box}
+body{margin:0;font-family:system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;background:radial-gradient(circle at 50% -12%,rgba(45,122,70,.20),transparent 34%),linear-gradient(180deg,var(--bg) 0%,#0f1519 100%);color:var(--text);line-height:1.7;min-height:100vh;}
+html.light-mode body{background:radial-gradient(circle at 50% -14%,rgba(45,122,70,.11),transparent 36%),linear-gradient(180deg,#f7faf8 0%,#eef3f0 100%);}
+.container{max-width:920px;margin:0 auto;background:transparent;padding:26px 18px 96px;box-shadow:none;}
+h1{text-align:center;font-size:30px;line-height:1.12;margin:10px 0 8px;letter-spacing:-.025em;font-weight:900;color:var(--gold);text-shadow:0 10px 30px rgba(0,0,0,.22);}
+.subtitle,.language-switch,.lead{display:none}.section{margin-bottom:28px}.section h2{font-size:20px;border-left:4px solid var(--green);padding-left:12px;margin-bottom:14px}
+.player-card{position:relative;overflow:hidden;margin:18px auto 24px;padding:22px 18px 20px;border-radius:26px;background:radial-gradient(circle at 50% 0%,rgba(45,122,70,.24),transparent 42%),linear-gradient(180deg,rgba(23,31,37,.98) 0%,rgba(16,22,28,.98) 100%);border:1px solid rgba(215,181,109,.30);box-shadow:var(--shadow)}
+html.light-mode .player-card{background:radial-gradient(circle at 50% 0%,rgba(45,122,70,.13),transparent 42%),linear-gradient(180deg,#fff 0%,#f6faf8 100%);border:1px solid rgba(180,135,46,.22)}
+.player-card::before{content:"";position:absolute;inset:0;background:linear-gradient(90deg,transparent 0%,rgba(215,181,109,.10) 50%,transparent 100%),radial-gradient(circle at 16% 12%,rgba(215,181,109,.12),transparent 24%),radial-gradient(circle at 84% 16%,rgba(45,122,70,.12),transparent 26%);pointer-events:none}.player-card::after{content:"";position:absolute;inset:9px;border-radius:20px;border:1px solid rgba(215,181,109,.18);pointer-events:none}
+.player-top,.arabic,.translit,.meaning,.desc,.controls,.nav-buttons,.manual-note,.search-box{position:relative;z-index:1}.player-top{display:flex;justify-content:center;align-items:center;gap:12px;margin-bottom:14px;flex-wrap:wrap}
+.badge{display:inline-flex;align-items:center;justify-content:center;min-height:34px;padding:7px 14px;border-radius:999px;background:linear-gradient(180deg,rgba(215,181,109,.20),rgba(45,122,70,.18));border:1px solid rgba(215,181,109,.28);color:var(--gold);font-size:13px;font-weight:800;letter-spacing:.02em}.status{font-size:13px;color:var(--muted)}
+.arabic{text-align:center;font-size:52px;font-weight:800;line-height:1.28;margin:8px 0;direction:rtl;color:var(--gold);text-shadow:0 10px 26px rgba(0,0,0,.28)}.translit{text-align:center;font-size:30px;line-height:1.2;font-weight:850;margin-bottom:6px;color:var(--text)}.meaning{text-align:center;font-size:22px;line-height:1.25;color:var(--green);font-weight:800;margin-bottom:18px}
+.desc{max-width:700px;margin:0 auto;text-align:center;color:var(--muted);font-size:16px;font-weight:700;min-height:58px;display:flex;align-items:center;justify-content:center;padding:18px;border-radius:18px;background:linear-gradient(180deg,rgba(215,181,109,.08),rgba(45,122,70,.07));border:1px solid rgba(215,181,109,.14)}
+.controls{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:18px}.control-group{display:flex;flex-direction:column;gap:8px;align-items:stretch;min-width:0}.control-label{font-size:12px;color:var(--muted);font-weight:800;letter-spacing:.02em}.sec-box{display:flex;align-items:center;gap:10px;min-height:48px;background:rgba(255,255,255,.04);padding:9px 12px;border-radius:16px;border:1px solid var(--border)}html.light-mode .sec-box{background:#fff}input[type=range]{width:100%;accent-color:var(--green)}.seconds-value{font-weight:900;color:var(--green);min-width:40px;text-align:center}.control-group>div[style]{display:grid!important;grid-template-columns:1fr 1fr;gap:8px!important}
+.nav-buttons{display:grid;grid-template-columns:1fr 54px 1fr;gap:9px;margin-top:12px}button{min-height:48px;padding:11px 14px;border:none;background:linear-gradient(180deg,#319052 0%,#2d7a46 100%);color:#fff;border-radius:16px;cursor:pointer;font-size:14px;font-weight:850;box-shadow:0 10px 22px rgba(45,122,70,.18)}button:hover{background:linear-gradient(180deg,#38a45d 0%,#2d7a46 100%)}button.secondary{background:linear-gradient(180deg,#313b43 0%,#202830 100%);border:1px solid rgba(255,255,255,.08)}html.light-mode button.secondary{background:linear-gradient(180deg,#3d4448 0%,#2b3034 100%)}button.light{background:linear-gradient(180deg,rgba(215,181,109,.12),rgba(45,122,70,.08));color:var(--text);border:1px solid rgba(215,181,109,.20);box-shadow:none}.play-btn{display:inline-flex;align-items:center;justify-content:center;gap:9px}.manual-note{text-align:center;font-size:13px;color:var(--muted);margin-top:14px;font-weight:650}
+.dropdown-block{margin-bottom:18px;border:1px solid rgba(215,181,109,.18);border-radius:24px;background:linear-gradient(180deg,rgba(23,31,37,.92),rgba(17,23,29,.92));overflow:hidden;box-shadow:var(--shadow)}html.light-mode .dropdown-block{background:linear-gradient(180deg,#fff,#f7faf8);border:1px solid rgba(180,135,46,.18)}.dropdown-block summary{list-style:none;cursor:pointer;padding:18px;display:flex;align-items:center;justify-content:space-between;gap:16px;font-size:20px;font-weight:900;position:relative;color:var(--gold);background:linear-gradient(180deg,rgba(215,181,109,.08),rgba(45,122,70,.08))}.dropdown-block summary::-webkit-details-marker{display:none}.dropdown-title{display:flex;align-items:center;gap:12px}.dropdown-arrow{font-size:16px;color:var(--green);transition:transform .2s ease;flex:0 0 auto}.dropdown-block[open] .dropdown-arrow{transform:rotate(180deg)}.dropdown-content{padding:16px;border-top:1px solid rgba(215,181,109,.14);background:rgba(0,0,0,.08)}html.light-mode .dropdown-content{background:#fff}
+.search-box{margin-top:0;margin-bottom:14px}.search-box input{width:100%;min-height:48px;padding:13px 15px;border-radius:16px;border:1px solid var(--border);font-size:15px;background:var(--card-soft);color:var(--text);outline:none}.search-box input:focus{border-color:var(--green);box-shadow:0 0 0 3px rgba(45,122,70,.12)}
+.names-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:10px;margin-top:0}.name-chip{background:linear-gradient(180deg,rgba(255,255,255,.045),rgba(255,255,255,.02));border:1px solid var(--border);border-radius:18px;padding:10px;cursor:pointer;transition:all .18s ease;min-height:120px}html.light-mode .name-chip{background:linear-gradient(180deg,#fff,#f8fbf9)}.name-chip:hover{transform:translateY(-2px);box-shadow:0 10px 24px rgba(0,0,0,.14);border-color:rgba(215,181,109,.32)}.name-chip.active{border-color:var(--gold);box-shadow:0 0 0 1px rgba(215,181,109,.28),0 12px 26px rgba(0,0,0,.16);background:linear-gradient(180deg,rgba(215,181,109,.12),rgba(45,122,70,.10))}.name-chip .chip-num{font-size:12px;font-weight:900;color:var(--gold);margin-bottom:3px}.name-chip .chip-ar{font-size:25px;line-height:1.25;direction:rtl;text-align:right;margin-bottom:7px;color:var(--gold)}.name-chip .chip-tr{font-weight:850;margin-bottom:3px;line-height:1.25;color:var(--text)}.name-chip .chip-mean{font-size:12px;color:var(--muted);line-height:1.35;font-weight:750}
+.dropdown-content p{margin:0 0 12px;color:var(--muted);font-size:15px;font-weight:650}.quote{margin:16px 0;padding:18px;border-radius:20px;background:linear-gradient(180deg,rgba(215,181,109,.10),rgba(45,122,70,.08));border:1px solid rgba(215,181,109,.18)}.quote p{margin:0;color:var(--text);font-size:15px;line-height:1.75}.quote strong{color:var(--gold)}.link{text-align:center;margin-top:34px}.link a{color:var(--green);text-decoration:none;font-weight:bold;margin:0 10px}
+@media(max-width:700px){.container{padding:20px 12px 92px}h1{font-size:25px;margin-top:6px}.player-card{border-radius:24px;padding:20px 13px 18px;margin-top:14px}.player-card::after{inset:7px;border-radius:18px}.arabic{font-size:44px}.translit{font-size:26px}.meaning{font-size:20px;margin-bottom:14px}.desc{font-size:14px;min-height:54px;padding:14px 12px}.controls{grid-template-columns:1fr;gap:10px}.sec-box{min-height:46px}.nav-buttons{grid-template-columns:1fr 50px 1fr}button{min-height:46px;padding:10px 11px;font-size:13px}.dropdown-block{border-radius:22px;margin-bottom:15px}.dropdown-block summary{padding:16px 14px;font-size:18px}.dropdown-content{padding:13px}.names-grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:9px}.name-chip{min-height:112px;border-radius:16px;padding:9px}.name-chip .chip-ar{font-size:23px}.name-chip .chip-tr{font-size:13px}.name-chip .chip-mean{font-size:11.5px}}
+@media(max-width:380px){.names-grid{grid-template-columns:1fr}}
 
-html.dark-mode body{
-  background:#101418;
-  color:#e9eef3;
-}
 
-html.light-mode body{
-  background:#f5f7f8;
-  color:#222;
-}
 
-html.dark-mode .container{
-  background:#171d24;
-}
+/* === Premium stability + readability refinements === */
 
-html.dark-mode .container{
-  box-shadow:none;
-}
-
-html.light-mode .container{
-  background:#ffffff;
-}
-
-html.light-mode .container{
-  background:#ffffff;
-}
-
-html.dark-mode body{
-  background:#101418;
-  color:#e9eef3;
-}
-
-html.light-mode body{
-  background:#f5f7f8;
-  color:#222;
-}
-
-.container{
-max-width:850px;
-margin:auto;
-background:white;
-padding:40px 30px;
-box-shadow:0 6px 16px rgba(0,0,0,0.05);
-}
-
-h1{
-text-align:center;
-font-size:36px;
-margin-bottom:8px;
-}
-
-.subtitle{
-text-align:center;
-color:#666;
-margin-bottom:10px;
-letter-spacing:2px;
-font-size:14px;
-text-transform:uppercase;
-}
-
-.language-switch{
-text-align:center;
-margin-top:8px;
-margin-bottom:22px;
-font-size:13px;
-}
-
-.language-switch a{
-text-decoration:none;
-color:#666;
-margin:0 6px;
-}
-
-.language-switch a.active{
-font-weight:bold;
-color:#000;
-}
-
-.lead{
-background:#fafafa;
-padding:22px;
-border-radius:10px;
-margin-bottom:30px;
-}
-
-.section{
-margin-bottom:35px;
-}
-
-.section h2{
-font-size:22px;
-border-left:4px solid #2d7a46;
-padding-left:12px;
-margin-bottom:15px;
-}
-
-html.dark-mode .player-card{
-  background:
-    radial-gradient(circle at 50% -18%, rgba(30,40,50,0.98) 0%, rgba(30,40,50,0) 42%),
-    linear-gradient(180deg,#141a20 0%, #10161c 45%, #0d1318 100%);
-  border:2px solid rgba(45,122,70,0.25);
-  box-shadow:
-    0 42px 92px rgba(0,0,0,0.6),
-    0 20px 44px rgba(0,0,0,0.4);
-}
-
-.player-card::before{
-content:"";
-position:absolute;
-left:14px;
-right:14px;
-top:0;
-height:5px;
-border-radius:0 0 999px 999px;
-background:linear-gradient(90deg,
- rgba(45,122,70,0.05) 0%,
- rgba(45,122,70,0.88) 25%,
- rgba(120,200,150,1) 50%,
- rgba(45,122,70,0.88) 75%,
- rgba(45,122,70,0.05) 100%);
-}
-
-.player-card::after{
-content:"";
-position:absolute;
-inset:10px;
-border-radius:24px;
-border:1px solid rgba(255,255,255,0.74);
-box-shadow:
- inset 0 0 34px rgba(255,255,255,0.42),
- 0 0 0 1px rgba(45,122,70,0.10);
-pointer-events:none;
-}
-
+/* Fixed visual rhythm: the dua/explanation area no longer changes player height */
 .player-card{
-outline:1px solid rgba(45,122,70,0.10);
-}
-
-.player-top,
-.arabic,
-.translit,
-.meaning,
-.desc,
-.controls,
-.nav-buttons,
-.manual-note,
-.search-box{
-position:relative;
-z-index:1;
-}
-
-.player-top{
-display:flex;
-justify-content:space-between;
-align-items:center;
-gap:16px;
-margin-bottom:18px;
-flex-wrap:wrap;
-}
-
-.badge{
-display:inline-flex;
-align-items:center;
-justify-content:center;
-padding:8px 14px;
-border-radius:999px;
-background:#2d7a46;
-color:white;
-font-size:13px;
-font-weight:700;
-}
-
-.status{
-font-size:13px;
-color:#5d6b61;
-}
-
-.arabic{
-text-align:center;
-font-size:44px;
-font-weight:700;
-line-height:1.5;
-margin:10px 0 6px 0;
-direction:rtl;
-}
-
-.translit{
-text-align:center;
-font-size:30px;
-font-weight:700;
-margin-bottom:10px;
-}
-
-.meaning{
-text-align:center;
-font-size:22px;
-color:#2d7a46;
-font-weight:700;
-margin-bottom:12px;
+  display:flex;
+  flex-direction:column;
 }
 
 .desc{
-max-width:680px;
-margin:0 auto;
-text-align:center;
-color:#444;
-font-size:16px;
-font-weight:700;
-min-height:72px;
-display:flex;
-align-items:center;
-justify-content:center;
+  height:92px !important;
+  min-height:92px !important;
+  max-height:92px !important;
+  overflow:hidden;
+  line-height:1.45;
+  color:#e8dcc0;
+  background:
+    linear-gradient(135deg, rgba(215,181,109,.16), rgba(45,122,70,.10)),
+    radial-gradient(circle at 50% 0%, rgba(215,181,109,.12), transparent 55%);
+  border:1px solid rgba(215,181,109,.26);
+  box-shadow:
+    inset 0 1px 0 rgba(255,255,255,.05),
+    0 14px 30px rgba(0,0,0,.16);
+}
+
+html.light-mode .desc{
+  color:#38443b;
+  background:
+    linear-gradient(135deg, rgba(180,135,46,.12), rgba(45,122,70,.08)),
+    radial-gradient(circle at 50% 0%, rgba(180,135,46,.10), transparent 55%);
+  border:1px solid rgba(180,135,46,.22);
+  box-shadow:0 12px 28px rgba(45,122,70,.08);
 }
 
 .controls{
-display:flex;
-justify-content:center;
-align-items:end;
-gap:12px;
-flex-wrap:wrap;
-margin-top:26px;
-}
-
-.control-group{
-display:flex;
-flex-direction:column;
-gap:6px;
-align-items:flex-start;
-}
-
-.control-label{
-font-size:12px;
-color:#66726b;
-font-weight:600;
-}
-
-.sec-box{
-display:flex;
-align-items:center;
-gap:10px;
-background:white;
-padding:10px 14px;
-border-radius:12px;
-border:1px solid #dde8e0;
-}
-html.dark-mode .sec-box{
-  background:#1c232a;
-  border:1px solid #2a343d;
-}
-
-html.dark-mode .dropdown-block{
-  background:#141a20;
-  border-color:#2a343d;
-}
-
-html.dark-mode .dropdown-content{
-  background:#10161c;
-}
-
-input[type="range"]{
-width:140px;
-accent-color:#2d7a46;
-}
-
-.seconds-value{
-font-weight:700;
-color:#2d7a46;
-min-width:44px;
-text-align:center;
+  margin-top:18px !important;
 }
 
 .nav-buttons{
-display:flex;
-justify-content:center;
-gap:10px;
-flex-wrap:wrap;
-margin-top:12px;
-}
-
-button{
-padding:12px 18px;
-border:none;
-background:#2d7a46;
-color:white;
-border-radius:10px;
-cursor:pointer;
-font-size:15px;
-font-weight:600;
-}
-
-button:hover{
-background:#256338;
-}
-
-button.secondary{
-background:#3a3a3a;
-}
-
-button.secondary:hover{
-background:#222;
-}
-
-button.light{
-background:#eef5f1;
-color:#2d7a46;
-border:1px solid #d4e2d8;
-}
-
-button.light:hover{
-background:#e3eee7;
-}
-
-.play-btn{
-display:inline-flex;
-align-items:center;
-gap:10px;
+  margin-top:12px !important;
 }
 
 .manual-note{
-text-align:center;
-font-size:13px;
-color:#6a756f;
-margin-top:16px;
+  height:42px;
+  min-height:42px;
+  max-height:42px;
+  overflow:hidden;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  line-height:1.35;
+  padding:0 8px;
+  opacity:.92;
 }
 
-.search-box{
-margin-top:24px;
+/* More premium player depth */
+.player-card{
+  border-color:rgba(215,181,109,.36);
+  background:
+    radial-gradient(circle at 50% -12%, rgba(215,181,109,.16), transparent 34%),
+    radial-gradient(circle at 50% 0%, rgba(45,122,70,.25), transparent 45%),
+    linear-gradient(180deg, rgba(20,30,28,.98) 0%, rgba(13,19,24,.98) 100%);
 }
 
-.search-box input{
-width:100%;
-padding:14px 16px;
-border-radius:12px;
-border:1px solid #d7e2da;
-font-size:15px;
-box-sizing:border-box;
+html.light-mode .player-card{
+  background:
+    radial-gradient(circle at 50% -12%, rgba(180,135,46,.13), transparent 34%),
+    radial-gradient(circle at 50% 0%, rgba(45,122,70,.11), transparent 45%),
+    linear-gradient(180deg,#ffffff 0%,#f5faf7 100%);
 }
 
-.names-grid{
-display:grid;
-grid-template-columns:repeat(auto-fill,minmax(200px,1fr));
-gap:14px;
-margin-top:20px;
+.arabic{
+  letter-spacing:.01em;
+  color:#e4c27a;
 }
 
+html.light-mode .arabic{
+  color:#a77927;
+}
+
+.meaning{
+  color:#79d38d;
+}
+
+html.light-mode .meaning{
+  color:#2d7a46;
+}
+
+/* Premium control blocks */
+.sec-box,
+.control-group > div[style] button,
+.nav-buttons button{
+  border-radius:18px;
+}
+
+.sec-box{
+  background:linear-gradient(180deg, rgba(255,255,255,.055), rgba(255,255,255,.02));
+  border:1px solid rgba(215,181,109,.18);
+}
+
+html.light-mode .sec-box{
+  background:linear-gradient(180deg,#ffffff,#f6faf8);
+  border:1px solid rgba(180,135,46,.16);
+}
+
+/* Distinct, readable rich section: "Как обращаться..." */
+.dropdown-block:nth-of-type(2){
+  border-color:rgba(215,181,109,.34);
+  background:
+    radial-gradient(circle at 12% 0%, rgba(215,181,109,.18), transparent 30%),
+    radial-gradient(circle at 88% 12%, rgba(45,122,70,.13), transparent 30%),
+    linear-gradient(180deg, rgba(34,27,16,.94), rgba(18,22,23,.96));
+}
+
+html.light-mode .dropdown-block:nth-of-type(2){
+  background:
+    radial-gradient(circle at 12% 0%, rgba(180,135,46,.13), transparent 32%),
+    radial-gradient(circle at 88% 12%, rgba(45,122,70,.08), transparent 32%),
+    linear-gradient(180deg,#fffaf0,#f7fbf8);
+}
+
+.dropdown-block:nth-of-type(2) summary{
+  color:#f0cf86;
+  background:
+    linear-gradient(180deg, rgba(215,181,109,.16), rgba(45,122,70,.07));
+}
+
+html.light-mode .dropdown-block:nth-of-type(2) summary{
+  color:#8e641d;
+  background:
+    linear-gradient(180deg, rgba(180,135,46,.12), rgba(45,122,70,.06));
+}
+
+.dropdown-block:nth-of-type(2) .dropdown-content{
+  padding:18px;
+  background:
+    linear-gradient(180deg, rgba(0,0,0,.10), rgba(0,0,0,.04));
+}
+
+html.light-mode .dropdown-block:nth-of-type(2) .dropdown-content{
+  background:linear-gradient(180deg,#ffffff,#fbf8ef);
+}
+
+.dropdown-block:nth-of-type(2) .dropdown-content p{
+  color:#e4d7bd;
+  font-size:15px;
+  line-height:1.72;
+  font-weight:650;
+}
+
+html.light-mode .dropdown-block:nth-of-type(2) .dropdown-content p{
+  color:#3d453f;
+}
+
+.quote{
+  position:relative;
+  overflow:hidden;
+  padding:18px 18px 18px 20px;
+  background:
+    radial-gradient(circle at 0% 0%, rgba(215,181,109,.18), transparent 36%),
+    linear-gradient(135deg, rgba(215,181,109,.12), rgba(45,122,70,.08));
+  border:1px solid rgba(215,181,109,.28);
+  box-shadow:
+    inset 0 1px 0 rgba(255,255,255,.05),
+    0 16px 36px rgba(0,0,0,.18);
+}
+
+.quote::before{
+  content:"";
+  position:absolute;
+  left:0;
+  top:14px;
+  bottom:14px;
+  width:4px;
+  border-radius:999px;
+  background:linear-gradient(180deg,#e4c27a,#4caf6a);
+}
+
+.quote p{
+  color:#f3ead8;
+  font-size:15px;
+  line-height:1.65;
+}
+
+html.light-mode .quote{
+  background:
+    radial-gradient(circle at 0% 0%, rgba(180,135,46,.15), transparent 36%),
+    linear-gradient(135deg, rgba(180,135,46,.10), rgba(45,122,70,.07));
+  border:1px solid rgba(180,135,46,.22);
+  box-shadow:0 12px 28px rgba(45,122,70,.08);
+}
+
+html.light-mode .quote p{
+  color:#2e3832;
+}
+
+.quote strong{
+  display:inline-block;
+  color:#f0cf86;
+  min-width:92px;
+  font-weight:900;
+}
+
+html.light-mode .quote strong{
+  color:#8e641d;
+}
+
+/* More compact but readable 99 names grid */
 .name-chip{
-background:#fafafa;
-border:1px solid #edf1ee;
-border-radius:14px;
-padding:14px 14px 12px 14px;
-cursor:pointer;
-transition:all .18s ease;
-}
-html.dark-mode .name-chip{
-  background:#1a2128;
-  border-color:#2a343d;
-}
-
-html.dark-mode .name-chip.active{
-  background:#1e2a23;
-}
-
-html.dark-mode .search-box input{
-  background:#1a2128;
-  border:1px solid #2a343d;
-  color:#e9eef3;
-}
-
-html.dark-mode .desc,
-html.dark-mode .manual-note,
-html.dark-mode .status{
-  color:#cbd5df;
-}
-
-html.dark-mode .dropdown-block{
-  background:#141a20;
-  border-color:#2a343d;
-  box-shadow:0 8px 22px rgba(0,0,0,0.22);
-}
-
-html.dark-mode .dropdown-block summary{
-  background:linear-gradient(180deg,#1b232b 0%, #161d24 100%);
-  color:#f5f7fa;
-  border-left-color:#2d7a46;
-}
-
-html.dark-mode .dropdown-block summary:hover{
-  background:linear-gradient(180deg,#202932 0%, #192129 100%);
-}
-
-html.dark-mode .dropdown-arrow{
-  color:#4caf6a;
-}
-
-html.dark-mode .dropdown-content{
-  background:#10161c;
-  border-top:1px solid #2a343d;
-}
-
-html.dark-mode button.light{
-  background:#1d242c;
-  color:#dff4e6;
-  border:1px solid #2a343d;
-}
-
-html.dark-mode button.light:hover{
-  background:#232b34;
-}
-
-html.dark-mode .sec-box{
-  background:#1c232a;
-  border:1px solid #2a343d;
-}
-
-html.dark-mode .search-box input{
-  background:#1a2128;
-  border:1px solid #2a343d;
-  color:#e9eef3;
-}
-
-html.dark-mode .name-chip{
-  background:#1a2128;
-  border-color:#2a343d;
-}
-
-html.dark-mode .name-chip:hover{
-  box-shadow:0 8px 20px rgba(0,0,0,0.18);
-}
-
-html.dark-mode .name-chip.active{
-  background:#1e2a23;
-  border-color:#2d7a46;
-}
-
-.name-chip:hover{
-transform:translateY(-2px);
-box-shadow:0 8px 20px rgba(0,0,0,0.06);
-}
-
-.name-chip.active{
-border-color:#2d7a46;
-box-shadow:0 8px 20px rgba(45,122,70,0.12);
-background:#f4f9f6;
-}
-
-.name-chip .chip-num{
-font-size:12px;
-font-weight:700;
-color:#2d7a46;
-margin-bottom:4px;
-}
-
-.name-chip .chip-ar{
-font-size:24px;
-direction:rtl;
-text-align:right;
-margin-bottom:6px;
-}
-
-.name-chip .chip-tr{
-font-weight:700;
-margin-bottom:4px;
+  min-height:112px;
+  border-color:rgba(215,181,109,.18);
 }
 
 .name-chip .chip-mean{
-font-size:13px;
-color:#666;
-line-height:1.45;
-font-weight:700;
+  opacity:.95;
 }
 
-.link{
-text-align:center;
-margin-top:34px;
+/* Mobile-specific fixed height so controls stay locked */
+@media(max-width:700px){
+  .desc{
+    height:104px !important;
+    min-height:104px !important;
+    max-height:104px !important;
+    font-size:14px;
+    line-height:1.42;
+    padding:13px 12px;
+  }
+
+  .manual-note{
+    height:48px;
+    min-height:48px;
+    max-height:48px;
+    font-size:12px;
+  }
+
+  .controls{
+    margin-top:14px !important;
+  }
+
+  .dropdown-block:nth-of-type(2) .dropdown-content{
+    padding:15px;
+  }
+
+  .quote{
+    padding:16px 14px 16px 17px;
+  }
+
+  .quote strong{
+    min-width:78px;
+  }
 }
 
-.link a{
-color:#2d7a46;
-text-decoration:none;
-font-weight:bold;
-margin:0 10px;
+@media(max-width:380px){
+  .desc{
+    height:116px !important;
+    min-height:116px !important;
+    max-height:116px !important;
+  }
 }
 
-@media(max-width:640px){
+
+/* === Final mobile-first stability fixes === */
+
+/* Lock the whole top name area so long meanings do not move controls */
 .player-card{
-  border-radius:26px;
-  padding:30px 18px 28px;
-  border:2px solid rgba(45,122,70,0.34);
-  box-shadow:
-    0 28px 64px rgba(0,0,0,0.6),
-    0 14px 30px rgba(0,0,0,0.4);
+  display:flex !important;
+  flex-direction:column !important;
 }
+
+.arabic{
+  height:72px !important;
+  min-height:72px !important;
+  max-height:72px !important;
+  display:flex !important;
+  align-items:center !important;
+  justify-content:center !important;
+  overflow:hidden !important;
+  margin:6px 0 4px !important;
 }
-.player-card::before{
-  left:10px;
-  right:10px;
+
+.translit{
+  height:38px !important;
+  min-height:38px !important;
+  max-height:38px !important;
+  display:flex !important;
+  align-items:center !important;
+  justify-content:center !important;
+  overflow:hidden !important;
+  margin:0 0 4px !important;
 }
-.player-card::after{
-  inset:6px;
-  border-radius:20px;
-  border:1px solid rgba(255,255,255,0.82);
-  box-shadow:
-    inset 0 0 24px rgba(255,255,255,0.34),
-    0 0 0 1px rgba(45,122,70,0.12);
+
+.meaning{
+  height:42px !important;
+  min-height:42px !important;
+  max-height:42px !important;
+  display:flex !important;
+  align-items:center !important;
+  justify-content:center !important;
+  overflow:hidden !important;
+  text-align:center !important;
+  margin:0 0 14px !important;
+  padding:0 12px !important;
+  font-size:18px !important;
+  line-height:1.18 !important;
+  color:#f4f7f2 !important;
+  text-shadow:0 8px 20px rgba(0,0,0,.32);
 }
-.arabic{font-size:36px;}
-.translit{font-size:26px;}
-.meaning{font-size:20px;}
+
+html.light-mode .meaning{
+  color:#244632 !important;
+  text-shadow:none;
+}
+
 .desc{
-  font-size:15px;
-  min-height:64px;
-}
-.names-grid{grid-template-columns:1fr;}
-}
-
-.dropdown-block{
-margin-bottom:35px;
-border:1px solid #dfe8e2;
-border-radius:18px;
-background:#fbfdfc;
-overflow:hidden;
-box-shadow:0 8px 22px rgba(0,0,0,0.04);
-}
-.dropdown-block summary{
-list-style:none;
-cursor:pointer;
-padding:20px 22px;
-display:flex;
-align-items:center;
-justify-content:space-between;
-gap:16px;
-font-size:22px;
-font-weight:700;
-position:relative;
-background:linear-gradient(180deg,#f7fbf8,#eef5f1);
+  height:104px !important;
+  min-height:104px !important;
+  max-height:104px !important;
+  overflow:hidden !important;
+  display:flex !important;
+  align-items:center !important;
+  justify-content:center !important;
+  font-size:15px !important;
+  line-height:1.42 !important;
+  color:#f4efe2 !important;
+  background:
+    linear-gradient(135deg, rgba(255,255,255,.075), rgba(45,122,70,.10)),
+    radial-gradient(circle at 50% 0%, rgba(215,181,109,.10), transparent 58%) !important;
+  border:1px solid rgba(215,181,109,.24) !important;
 }
 
-.dropdown-block summary::before{
-content:"";
-position:absolute;
-left:0;
-top:14px;
-bottom:14px;
-width:4px;
-border-radius:999px;
-background:#2d7a46;
-}
-.dropdown-block summary::-webkit-details-marker{
-display:none;
-}
-.dropdown-block summary:hover{
-background:linear-gradient(180deg,#f1f8f3,#e7f1ea);
-}
-.dropdown-title{
-display:flex;
-align-items:center;
-gap:12px;
-}
-.dropdown-arrow{
-font-size:16px;
-color:#2d7a46;
-transition:transform .2s ease;
-flex:0 0 auto;
-}
-.dropdown-block[open] .dropdown-arrow{
-transform:rotate(180deg);
-}
-.dropdown-content{
-padding:22px;
-border-top:1px solid #e4ebe6;
-background:white;
+html.light-mode .desc{
+  color:#26362d !important;
+  background:
+    linear-gradient(135deg, rgba(255,255,255,.92), rgba(45,122,70,.06)),
+    radial-gradient(circle at 50% 0%, rgba(180,135,46,.10), transparent 58%) !important;
 }
 
-html.dark-mode .player-card::after{
-  border:1px solid rgba(45,122,70,0.25);
-  box-shadow:none;
+/* Ensure control area never jumps */
+.controls{
+  margin-top:14px !important;
+  min-height:88px !important;
 }
 
-html.dark-mode .player-card{
-  box-shadow:
-    0 42px 92px rgba(0,0,0,0.6),
-    0 20px 44px rgba(0,0,0,0.4);
+.nav-buttons{
+  min-height:48px !important;
+  margin-top:12px !important;
+}
+
+.manual-note{
+  height:44px !important;
+  min-height:44px !important;
+  max-height:44px !important;
+  overflow:hidden !important;
+  display:flex !important;
+  align-items:center !important;
+  justify-content:center !important;
+  text-align:center !important;
+  line-height:1.28 !important;
+}
+
+/* Stronger contrast for the guidance section */
+.dropdown-block:nth-of-type(2){
+  background:
+    radial-gradient(circle at 50% -10%, rgba(215,181,109,.14), transparent 34%),
+    linear-gradient(180deg, rgba(18,27,25,.98), rgba(11,17,21,.98)) !important;
+  border-color:rgba(215,181,109,.28) !important;
+}
+
+.dropdown-block:nth-of-type(2) summary{
+  color:#ffffff !important;
+  background:
+    linear-gradient(135deg, rgba(45,122,70,.24), rgba(215,181,109,.10)) !important;
+  border-bottom:1px solid rgba(255,255,255,.06);
+}
+
+.dropdown-block:nth-of-type(2) .dropdown-content{
+  background:
+    linear-gradient(180deg, rgba(13,20,23,.98), rgba(14,20,18,.98)) !important;
+}
+
+.dropdown-block:nth-of-type(2) .dropdown-content p{
+  color:#f4f7f2 !important;
+  font-size:15px !important;
+  line-height:1.72 !important;
+  font-weight:650 !important;
+}
+
+.quote{
+  background:
+    linear-gradient(135deg, rgba(45,122,70,.20), rgba(255,255,255,.045)),
+    radial-gradient(circle at 0% 0%, rgba(215,181,109,.12), transparent 36%) !important;
+  border:1px solid rgba(215,181,109,.24) !important;
+}
+
+.quote p{
+  color:#ffffff !important;
+}
+
+.quote strong{
+  color:#ffffff !important;
+  background:rgba(45,122,70,.34);
+  border:1px solid rgba(215,181,109,.22);
+  border-radius:999px;
+  padding:2px 9px;
+  margin-right:4px;
+  min-width:auto !important;
+}
+
+/* Light theme contrast */
+html.light-mode .dropdown-block:nth-of-type(2){
+  background:
+    radial-gradient(circle at 50% -10%, rgba(180,135,46,.10), transparent 34%),
+    linear-gradient(180deg, #ffffff, #f4faf6) !important;
+}
+
+html.light-mode .dropdown-block:nth-of-type(2) summary{
+  color:#173522 !important;
+  background:
+    linear-gradient(135deg, rgba(45,122,70,.10), rgba(180,135,46,.08)) !important;
+}
+
+html.light-mode .dropdown-block:nth-of-type(2) .dropdown-content{
+  background:linear-gradient(180deg, #ffffff, #f7faf8) !important;
+}
+
+html.light-mode .dropdown-block:nth-of-type(2) .dropdown-content p{
+  color:#26362d !important;
+}
+
+html.light-mode .quote p{
+  color:#203127 !important;
+}
+
+html.light-mode .quote strong{
+  color:#173522 !important;
+  background:rgba(45,122,70,.10);
+  border-color:rgba(180,135,46,.18);
+}
+
+/* Mobile priority */
+@media(max-width:700px){
+  .container{
+    padding:16px 10px 92px !important;
+  }
+
+  h1{
+    font-size:23px !important;
+    margin:4px 0 8px !important;
+  }
+
+  .player-card{
+    margin:12px auto 18px !important;
+    padding:18px 12px 16px !important;
+    border-radius:22px !important;
+  }
+
+  .player-top{
+    margin-bottom:8px !important;
+  }
+
+  .arabic{
+    height:62px !important;
+    min-height:62px !important;
+    max-height:62px !important;
+    font-size:39px !important;
+    line-height:1.05 !important;
+  }
+
+  .translit{
+    height:34px !important;
+    min-height:34px !important;
+    max-height:34px !important;
+    font-size:23px !important;
+    line-height:1.05 !important;
+  }
+
+  .meaning{
+    height:42px !important;
+    min-height:42px !important;
+    max-height:42px !important;
+    font-size:15px !important;
+    line-height:1.15 !important;
+    padding:0 10px !important;
+    margin-bottom:12px !important;
+  }
+
+  .desc{
+    height:110px !important;
+    min-height:110px !important;
+    max-height:110px !important;
+    font-size:13.5px !important;
+    line-height:1.38 !important;
+    padding:12px 11px !important;
+    border-radius:16px !important;
+  }
+
+  .controls{
+    min-height:150px !important;
+    grid-template-columns:1fr !important;
+    gap:10px !important;
+    margin-top:12px !important;
+  }
+
+  .sec-box{
+    min-height:44px !important;
+  }
+
+  .nav-buttons{
+    grid-template-columns:1fr 48px 1fr !important;
+    gap:8px !important;
+    min-height:46px !important;
+  }
+
+  .manual-note{
+    height:46px !important;
+    min-height:46px !important;
+    max-height:46px !important;
+    font-size:11.8px !important;
+    padding:0 4px !important;
+  }
+
+  .dropdown-block:nth-of-type(2) summary{
+    font-size:16px !important;
+    line-height:1.25 !important;
+    padding:15px 13px !important;
+  }
+
+  .dropdown-block:nth-of-type(2) .dropdown-content{
+    padding:13px !important;
+  }
+
+  .dropdown-block:nth-of-type(2) .dropdown-content p{
+    font-size:14px !important;
+    line-height:1.62 !important;
+  }
+
+  .quote{
+    padding:14px 12px 14px 14px !important;
+    border-radius:17px !important;
+  }
+
+  .quote p{
+    font-size:13.5px !important;
+    line-height:1.58 !important;
+  }
+
+  .quote strong{
+    display:inline-block !important;
+    margin-bottom:4px !important;
+    padding:2px 8px !important;
+  }
+}
+
+@media(max-width:380px){
+  .arabic{
+    font-size:36px !important;
+  }
+
+  .translit{
+    font-size:21px !important;
+  }
+
+  .meaning{
+    font-size:14px !important;
+  }
+
+  .desc{
+    height:118px !important;
+    min-height:118px !important;
+    max-height:118px !important;
+    font-size:13px !important;
+  }
+
+  .controls{
+    min-height:150px !important;
+  }
+}
+
+
+/* === Bengali page adaptation: keep content, apply final RU stable layout === */
+html[lang="bn"] body{
+  direction:ltr;
+  text-align:left;
+}
+
+html[lang="bn"] h1,
+html[lang="bn"] .player-top,
+html[lang="bn"] .arabic,
+html[lang="bn"] .translit,
+html[lang="bn"] .meaning,
+html[lang="bn"] .desc,
+html[lang="bn"] .manual-note{
+  text-align:center !important;
+}
+
+html[lang="bn"] .arabic{
+  font-family:"Amiri","Scheherazade New","Noto Naskh Arabic","Times New Roman",serif;
+  direction:rtl;
+  letter-spacing:0 !important;
+}
+
+html[lang="bn"] .translit{
+  direction:ltr;
+}
+
+html[lang="bn"] .dropdown-block summary{
+  text-align:left;
+}
+
+html[lang="bn"] .search-box input{
+  direction:ltr;
+  text-align:left;
+}
+
+html[lang="bn"] .name-chip .chip-ar{
+  direction:rtl;
+  text-align:right;
+}
+
+html[lang="bn"] .name-chip .chip-tr,
+html[lang="bn"] .name-chip .chip-mean,
+html[lang="bn"] .name-chip .chip-num{
+  direction:ltr;
+  text-align:left;
+}
+
+html[lang="bn"] .quote p,
+html[lang="bn"] .dropdown-block:nth-of-type(2) .dropdown-content p{
+  text-align:left;
+}
+
+html[lang="bn"] .quote strong{
+  margin-right:6px;
+}
+
+@media(max-width:700px){
+  html[lang="bn"] h1{
+    font-size:22px !important;
+  }
+
+  html[lang="bn"] .meaning{
+    font-size:14px !important;
+  }
+
+  html[lang="bn"] .desc{
+    font-size:13px !important;
+  }
+
+  html[lang="bn"] .dropdown-block:nth-of-type(2) summary{
+    font-size:15px !important;
+  }
+
+  html[lang="bn"] .dropdown-block:nth-of-type(2) .dropdown-content p{
+    font-size:13.5px !important;
+  }
+
+  html[lang="bn"] .quote p{
+    font-size:13px !important;
+  }
 }
 </style>
 <script src="/theme-init.js"></script>
@@ -734,7 +832,7 @@ html.dark-mode .player-card{
 </div>
 
 <script>
-const names = [{"num": 1,"ar": "ٱلرَّحْمَٰنُ","tr": "Ar-Rahman","en_mean": "The Universally Merciful","en_desc": "Ya Rahman, cover me with Your mercy and correct my affairs.","bn_mean": "পরম দয়াময়","bn_desc": "ইয়া রহমান, আমাকে আপনার রহমতে আচ্ছাদিত করুন এবং আমার কাজগুলো সংশোধন করুন।"},{"num": 2,"ar": "ٱلرَّحِيمُ","tr": "Ar-Raheem","en_mean": "The Especially Merciful","en_desc": "Ya Raheem, ease my hardships and do not leave me to myself.","bn_mean": "বিশেষ দয়ালু","bn_desc": "ইয়া রহিম, আমার কষ্ট সহজ করুন এবং আমাকে নিজের ওপর ছেড়ে দেবেন না।"},{"num": 3,"ar": "ٱلْمَلِكُ","tr": "Al-Malik","en_mean": "The Sovereign","en_desc": "Ya Malik, rule my life by Your guidance and make my heart obedient to You.","bn_mean": "সার্বভৌম অধিপতি","bn_desc": "ইয়া মালিক, আপনার হিদায়াত দিয়ে আমার জীবন পরিচালনা করুন এবং আমার হৃদয়কে আপনার অনুগত করুন।"},{"num": 4,"ar": "ٱلْقُدُّوسُ","tr": "Al-Quddus","en_mean": "The Most Holy","en_desc": "Ya Quddus, purify my heart, my intentions, and my deeds.","bn_mean": "অতি পবিত্র","bn_desc": "ইয়া কুদ্দুস, আমার হৃদয়, নিয়ত এবং আমল পবিত্র করুন।"},{"num": 5,"ar": "ٱلسَّلَامُ","tr": "As-Salam","en_mean": "The Giver of Peace and Safety","en_desc": "Ya Salam, grant me peace, safety, and inner calm.","bn_mean": "শান্তি ও নিরাপত্তাদাতা","bn_desc": "ইয়া সালাম, আমাকে শান্তি, নিরাপত্তা এবং অন্তরের প্রশান্তি দান করুন।"},{"num": 6,"ar": "ٱلْمُؤْمِنُ","tr": "Al-Mu’min","en_mean": "The Giver of Faith and Security","en_desc": "Ya Mu’min, give my heart security, faith, and reassurance.","bn_mean": "ঈমান ও নিরাপত্তাদাতা","bn_desc": "ইয়া মু’মিন, আমার হৃদয়ে নিরাপত্তা, ঈমান এবং নিশ্চয়তা দান করুন।"},{"num": 7,"ar": "ٱلْمُهَيْمِنُ","tr": "Al-Muhaymin","en_mean": "The Watchful Protector","en_desc": "Ya Muhaymin, protect me, my family, and all that You entrusted to me.","bn_mean": "সতর্ক রক্ষক","bn_desc": "ইয়া মুহাইমিন, আমাকে, আমার পরিবারকে এবং আপনি যা আমার কাছে আমানত রেখেছেন তা রক্ষা করুন।"},{"num": 8,"ar": "ٱلْعَزِيزُ","tr": "Al-Aziz","en_mean": "The Almighty","en_desc": "Ya Aziz, strengthen me with dignity and keep me firm in truth.","bn_mean": "পরাক্রমশালী","bn_desc": "ইয়া আজিজ, আমাকে মর্যাদা দিয়ে শক্তিশালী করুন এবং সত্যের ওপর দৃঢ় রাখুন।"},{"num": 9,"ar": "ٱلْجَبَّارُ","tr": "Al-Jabbar","en_mean": "The Compeller and Restorer","en_desc": "Ya Jabbar, mend what is broken in my heart and my life.","bn_mean": "পরাক্রমে সংশোধনকারী","bn_desc": "ইয়া জাব্বার, আমার হৃদয় ও জীবনের ভাঙা অংশগুলো ঠিক করে দিন।"},{"num": 10,"ar": "ٱلْمُتَكَبِّرُ","tr": "Al-Mutakabbir","en_mean": "The Supremely Exalted","en_desc": "Ya Mutakabbir, protect me from arrogance and fill me with humility before You.","bn_mean": "সর্বোচ্চ মহিমান্বিত","bn_desc": "ইয়া মুতাকাব্বির, আমাকে অহংকার থেকে রক্ষা করুন এবং আপনার সামনে বিনয় দান করুন।"},{"num": 11,"ar": "ٱلْخَالِقُ","tr": "Al-Khaliq","en_mean": "The Creator","en_desc": "Ya Khaliq, create in me a better character and a better future.","bn_mean": "স্রষ্টা","bn_desc": "ইয়া খালিক, আমার মধ্যে উত্তম চরিত্র এবং উত্তম ভবিষ্যৎ সৃষ্টি করুন।"},{"num": 12,"ar": "ٱلْبَارِئُ","tr": "Al-Bari’","en_mean": "The Originator","en_desc": "Ya Bari’, set my life in right order and bring good out of disorder.","bn_mean": "অস্তিত্বদাতা","bn_desc": "ইয়া বারি, আমার জীবনকে সঠিক শৃঙ্খলায় আনুন এবং বিশৃঙ্খলা থেকে কল্যাণ বের করুন।"},{"num": 13,"ar": "ٱلْمُصَوِّرُ","tr": "Al-Musawwir","en_mean": "The Fashioner","en_desc": "Ya Musawwir, beautify my character and shape my life in the best way.","bn_mean": "আকৃতি দানকারী","bn_desc": "ইয়া মুসাওয়ির, আমার চরিত্র সুন্দর করুন এবং আমার জীবনকে সর্বোত্তমভাবে গঠন করুন।"},{"num": 14,"ar": "ٱلْغَفَّارُ","tr": "Al-Ghaffar","en_mean": "The Constant Forgiver","en_desc": "Ya Ghaffar, forgive me again and again, and cover my sins.","bn_mean": "বারবার ক্ষমাকারী","bn_desc": "ইয়া গাফফার, আমাকে বারবার ক্ষমা করুন এবং আমার গুনাহ ঢেকে দিন।"},{"num": 15,"ar": "ٱلْقَهَّارُ","tr": "Al-Qahhar","en_mean": "The All-Dominant","en_desc": "Ya Qahhar, subdue my ego, my desires, and everything that pulls me away from You.","bn_mean": "সর্বদময়","bn_desc": "ইয়া কাহহার, আমার নফস, কামনা এবং যা আমাকে আপনার কাছ থেকে দূরে সরায় তা দমন করুন।"},{"num": 16,"ar": "ٱلْوَهَّابُ","tr": "Al-Wahhab","en_mean": "The Bestower","en_desc": "Ya Wahhab, grant me blessings that bring me closer to You.","bn_mean": "মহাদাতা","bn_desc": "ইয়া ওয়াহহাব, আমাকে এমন বরকত দান করুন যা আমাকে আপনার নিকটবর্তী করে।"},{"num": 17,"ar": "ٱلرَّزَّاقُ","tr": "Ar-Razzaq","en_mean": "The Provider","en_desc": "Ya Razzaq, provide me with halal sustenance and remove my need.","bn_mean": "রিজিকদাতা","bn_desc": "ইয়া রাযযাক, আমাকে হালাল রিজিক দান করুন এবং আমার অভাব দূর করুন।"},{"num": 18,"ar": "ٱلْفَتَّاحُ","tr": "Al-Fattah","en_mean": "The Opener","en_desc": "Ya Fattah, open for me the doors of mercy, relief, and success.","bn_mean": "দ্বার উন্মোচনকারী","bn_desc": "ইয়া ফাত্তাহ, আমার জন্য রহমত, স্বস্তি এবং সফলতার দরজা খুলে দিন।"},{"num": 19,"ar": "ٱلْعَلِيمُ","tr": "Al-‘Alim","en_mean": "The All-Knowing","en_desc": "Ya ‘Alim, grant me beneficial knowledge and protect me from ignorance.","bn_mean": "সর্বজ্ঞ","bn_desc": "ইয়া আলিম, আমাকে উপকারী জ্ঞান দান করুন এবং অজ্ঞতা থেকে রক্ষা করুন।"},{"num": 20,"ar": "ٱلْقَابِضُ","tr": "Al-Qabid","en_mean": "The Withholder","en_desc": "Ya Qabid, hold back from me what would harm my faith and my heart.","bn_mean": "সংকুচিতকারী","bn_desc": "ইয়া কাবিদ, যা আমার ঈমান ও হৃদয়ের ক্ষতি করবে তা আমার থেকে দূরে রাখুন।"},{"num": 21,"ar": "ٱلْبَاسِطُ","tr": "Al-Basit","en_mean": "The Expander","en_desc": "Ya Basit, expand my chest, my provision, and my hope.","bn_mean": "প্রশস্তকারী","bn_desc": "ইয়া বাসিত, আমার বক্ষ, রিজিক এবং আশা প্রশস্ত করুন।"},{"num": 22,"ar": "ٱلْخَافِضُ","tr": "Al-Khafid","en_mean": "The Reducer","en_desc": "Ya Khafid, lower my pride and save me from arrogance.","bn_mean": "নম্রকারী","bn_desc": "ইয়া খাফিদ, আমার অহংকার নিচু করুন এবং আমাকে গর্ব থেকে রক্ষা করুন।"},{"num": 23,"ar": "ٱلرَّافِعُ","tr": "Ar-Rafi’","en_mean": "The Exalter","en_desc": "Ya Rafi’, raise me in faith, character, and honor.","bn_mean": "উন্নতকারী","bn_desc": "ইয়া রাফি, আমাকে ঈমান, চরিত্র এবং মর্যাদায় উন্নত করুন।"},{"num": 24,"ar": "ٱلْمُعِزُّ","tr": "Al-Mu’izz","en_mean": "The Giver of Honor","en_desc": "Ya Mu’izz, honor me through obedience to You and truth.","bn_mean": "সম্মানদাতা","bn_desc": "ইয়া মুঈয, আপনার আনুগত্য ও সত্যের মাধ্যমে আমাকে সম্মান দিন।"},{"num": 25,"ar": "ٱلْمُذِلُّ","tr": "Al-Mudhill","en_mean": "The Humiliator","en_desc": "Ya Mudhill, keep me far from humiliation through sin and wrongdoing.","bn_mean": "অপমানকারী","bn_desc": "ইয়া মুযিল, গুনাহ ও অন্যায়ের কারণে অপমান থেকে আমাকে রক্ষা করুন।"},{"num": 26,"ar": "ٱلسَّمِيعُ","tr": "As-Sami’","en_mean": "The All-Hearing","en_desc": "Ya Sami’, hear my dua, my weakness, and my hidden pain.","bn_mean": "সর্বশ্রোতা","bn_desc": "ইয়া সামি, আমার দোয়া, দুর্বলতা এবং গোপন ব্যথা শুনুন।"},{"num": 27,"ar": "ٱلْبَصِيرُ","tr": "Al-Basir","en_mean": "The All-Seeing","en_desc": "Ya Basir, see my state and guide me to what is right.","bn_mean": "সর্বদ্রষ্টা","bn_desc": "ইয়া বাসির, আমার অবস্থা দেখুন এবং আমাকে সঠিক পথে পরিচালিত করুন।"},{"num": 28,"ar": "ٱلْحَكَمُ","tr": "Al-Hakam","en_mean": "The Judge","en_desc": "Ya Hakam, judge my affairs with truth and guide me through confusion.","bn_mean": "বিচারক","bn_desc": "ইয়া হাকাম, আমার বিষয়গুলো সত্যের ভিত্তিতে বিচার করুন এবং বিভ্রান্তি থেকে পথ দেখান।"},{"num": 29,"ar": "ٱلْعَدْلُ","tr": "Al-‘Adl","en_mean": "The Utterly Just","en_desc": "Ya ‘Adl, place justice in my life and protect me from wrongdoing.","bn_mean": "সম্পূর্ণ ন্যায়পরায়ণ","bn_desc": "ইয়া আদল, আমার জীবনে ন্যায় প্রতিষ্ঠা করুন এবং অন্যায় থেকে রক্ষা করুন।"},{"num": 30,"ar": "ٱللَّطِيفُ","tr": "Al-Latif","en_mean": "The Most Gentle","en_desc": "Ya Latif, be gentle with me in what I see and what I do not see.","bn_mean": "অতি সূক্ষ্ম ও দয়ালু","bn_desc": "ইয়া লতিফ, যা আমি দেখি এবং যা দেখি না—সব বিষয়ে আমার প্রতি কোমল হোন।"},{"num": 31,"ar": "ٱلْخَبِيرُ","tr": "Al-Khabir","en_mean": "The All-Aware","en_desc": "Ya Khabir, guide me in what is hidden from my understanding.","bn_mean": "সর্বজ্ঞাত","bn_desc": "ইয়া খাবির, যা আমার বোঝার বাইরে লুকানো আছে, তাতে আমাকে পথ দেখান।"},{"num": 32,"ar": "ٱلْحَلِيمُ","tr": "Al-Halim","en_mean": "The Forbearing","en_desc": "Ya Halim, treat me with forbearance and do not punish me for my haste.","bn_mean": "সহনশীল","bn_desc": "ইয়া হালিম, আমার প্রতি সহনশীল আচরণ করুন এবং তাড়াহুড়োর জন্য আমাকে শাস্তি দেবেন না।"},{"num": 33,"ar": "ٱلْعَظِيمُ","tr": "Al-‘Azim","en_mean": "The Magnificent","en_desc": "Ya ‘Azim, fill my heart with reverence for Your greatness.","bn_mean": "মহান","bn_desc": "ইয়া আজিম, আপনার মহত্ত্বের প্রতি ভক্তি দিয়ে আমার হৃদয় পূর্ণ করুন।"},{"num": 34,"ar": "ٱلْغَفُورُ","tr": "Al-Ghafur","en_mean": "The Great Forgiver","en_desc": "Ya Ghafur, forgive my major sins and accept my repentance.","bn_mean": "মহাক্ষমাশীল","bn_desc": "ইয়া গাফুর, আমার বড় গুনাহ ক্ষমা করুন এবং আমার তাওবা কবুল করুন।"},{"num": 35,"ar": "ٱلشَّكُورُ","tr": "Ash-Shakur","en_mean": "The Appreciative","en_desc": "Ya Shakur, accept my small deeds and multiply their reward.","bn_mean": "কৃতজ্ঞতার প্রতিদানদাতা","bn_desc": "ইয়া শাকুর, আমার ছোট আমল গ্রহণ করুন এবং তার প্রতিদান বাড়িয়ে দিন।"},{"num": 36,"ar": "ٱلْعَلِيُّ","tr": "Al-‘Aliyy","en_mean": "The Most High","en_desc": "Ya ‘Aliyy, raise my soul above what lowers me.","bn_mean": "সর্বোচ্চ","bn_desc": "ইয়া আলিয়্য, যা আমাকে নিচে নামায় তার ওপর আমার আত্মাকে উন্নত করুন।"},{"num": 37,"ar": "ٱلْكَبِيرُ","tr": "Al-Kabir","en_mean": "The Most Great","en_desc": "Ya Kabir, make the dunya small in my eyes and Your pleasure great.","bn_mean": "মহামহান","bn_desc": "ইয়া কবির, দুনিয়াকে আমার চোখে ছোট এবং আপনার সন্তুষ্টিকে মহান করুন।"},{"num": 38,"ar": "ٱلْحَفِيظُ","tr": "Al-Hafiz","en_mean": "The Preserver","en_desc": "Ya Hafiz, preserve my faith, my family, and my end.","bn_mean": "সংরক্ষণকারী","bn_desc": "ইয়া হাফিজ, আমার ঈমান, পরিবার এবং শেষ পরিণতি সংরক্ষণ করুন।"},{"num": 39,"ar": "ٱلْمُقِيتُ","tr": "Al-Muqit","en_mean": "The Sustainer","en_desc": "Ya Muqit, sustain me with strength, patience, and enough provision.","bn_mean": "জীবিকা ও শক্তিদাতা","bn_desc": "ইয়া মুকিত, আমাকে শক্তি, ধৈর্য এবং যথেষ্ট রিজিক দিয়ে ধরে রাখুন।"},{"num": 40,"ar": "ٱلْحَسِيبُ","tr": "Al-Hasib","en_mean": "The Sufficient Reckoner","en_desc": "Ya Hasib, be sufficient for me in every worry and affair.","bn_mean": "যথেষ্ট হিসাবগ্রহণকারী","bn_desc": "ইয়া হাসিব, প্রতিটি দুশ্চিন্তা ও বিষয়ে আপনি আমার জন্য যথেষ্ট হোন।"},{"num": 41,"ar": "ٱلْجَلِيلُ","tr": "Al-Jalil","en_mean": "The Majestic","en_desc": "Ya Jalil, fill my heart with reverence for Your majesty.","bn_mean": "মহিমাময়","bn_desc": "ইয়া জলিল, আপনার মহিমার প্রতি সম্মান দিয়ে আমার হৃদয় পূর্ণ করুন।"},{"num": 42,"ar": "ٱلْكَرِيمُ","tr": "Al-Karim","en_mean": "The Most Generous","en_desc": "Ya Karim, be generous to me with forgiveness, ease, and blessing.","bn_mean": "অতিশয় উদার","bn_desc": "ইয়া করিম, ক্ষমা, সহজতা এবং বরকত দিয়ে আমার প্রতি উদার হোন।"},{"num": 43,"ar": "ٱلرَّقِيبُ","tr": "Ar-Raqib","en_mean": "The Watchful","en_desc": "Ya Raqib, watch over me and keep me away from secret sins.","bn_mean": "সতর্ক পর্যবেক্ষক","bn_desc": "ইয়া রাকিব, আমার ওপর নজর রাখুন এবং গোপন গুনাহ থেকে আমাকে দূরে রাখুন।"},{"num": 44,"ar": "ٱلْمُجِيبُ","tr": "Al-Mujib","en_mean": "The Responsive","en_desc": "Ya Mujib, answer my dua and do not turn me away disappointed.","bn_mean": "সাড়া দানকারী","bn_desc": "ইয়া মুজিব, আমার দোয়া কবুল করুন এবং আমাকে নিরাশ করে ফিরিয়ে দেবেন না।"},{"num": 45,"ar": "ٱلْوَاسِعُ","tr": "Al-Wasi’","en_mean": "The All-Encompassing","en_desc": "Ya Wasi’, expand for me mercy, understanding, and relief.","bn_mean": "সর্বব্যাপী","bn_desc": "ইয়া ওয়াসি, আমার জন্য রহমত, বোঝাপড়া এবং স্বস্তি প্রসারিত করুন।"},{"num": 46,"ar": "ٱلْحَكِيمُ","tr": "Al-Hakim","en_mean": "The All-Wise","en_desc": "Ya Hakim, give me wisdom and right decisions.","bn_mean": "মহাপ্রজ্ঞাবান","bn_desc": "ইয়া হাকিম, আমাকে প্রজ্ঞা এবং সঠিক সিদ্ধান্ত দান করুন।"},{"num": 47,"ar": "ٱلْوَدُودُ","tr": "Al-Wadud","en_mean": "The Most Loving","en_desc": "Ya Wadud, fill my heart with love, mercy, and goodness.","bn_mean": "অতিশয় প্রেমময়","bn_desc": "ইয়া ওয়াদুদ, আমার হৃদয়কে ভালোবাসা, রহমত এবং কল্যাণে পূর্ণ করুন।"},{"num": 48,"ar": "ٱلْمَجِيدُ","tr": "Al-Majid","en_mean": "The Most Glorious","en_desc": "Ya Majid, honor me with noble character and righteous deeds.","bn_mean": "অতিশয় গৌরবময়","bn_desc": "ইয়া মাজিদ, আমাকে মহৎ চরিত্র ও সৎ আমল দিয়ে সম্মানিত করুন।"},{"num": 49,"ar": "ٱلْبَاعِثُ","tr": "Al-Ba’ith","en_mean": "The Resurrector","en_desc": "Ya Ba’ith, revive my heart with faith and sincere worship.","bn_mean": "পুনরুত্থানকারী","bn_desc": "ইয়া বাঈস, আমার হৃদয়কে ঈমান ও আন্তরিক ইবাদতে জীবিত করুন।"},{"num": 50,"ar": "ٱلشَّهِيدُ","tr": "Ash-Shahid","en_mean": "The Witness","en_desc": "Ya Shahid, be my witness in truth and protect me from hypocrisy.","bn_mean": "সাক্ষী","bn_desc": "ইয়া শহিদ, সত্যের পথে আমার সাক্ষী হোন এবং আমাকে মুনাফিকি থেকে রক্ষা করুন।"},{"num": 51,"ar": "ٱلْحَقُّ","tr": "Al-Haqq","en_mean": "The Truth","en_desc": "Ya Haqq, keep me firm upon truth in belief, word, and action.","bn_mean": "সত্য","bn_desc": "ইয়া হক, বিশ্বাস, কথা এবং কাজে আমাকে সত্যের ওপর দৃঢ় রাখুন।"},{"num": 52,"ar": "ٱلْوَكِيلُ","tr": "Al-Wakil","en_mean": "The Trustee","en_desc": "Ya Wakil, manage my affairs in the best way, for I rely upon You.","bn_mean": "অভিভাবক ও ভরসাস্থল","bn_desc": "ইয়া ওয়াকিল, আমার বিষয়গুলো সর্বোত্তমভাবে পরিচালনা করুন, কারণ আমি আপনার ওপর ভরসা করি।"},{"num": 53,"ar": "ٱلْقَوِيُّ","tr": "Al-Qawiyy","en_mean": "The All-Strong","en_desc": "Ya Qawiyy, strengthen me against weakness, fear, and sin.","bn_mean": "সর্বশক্তিমান","bn_desc": "ইয়া কাওয়িয়্য, দুর্বলতা, ভয় এবং গুনাহের বিরুদ্ধে আমাকে শক্তিশালী করুন।"},{"num": 54,"ar": "ٱلْمَتِينُ","tr": "Al-Matin","en_mean": "The Firm","en_desc": "Ya Matin, make me firm in patience, worship, and obedience.","bn_mean": "দৃঢ় ও অটল","bn_desc": "ইয়া মাতিন, ধৈর্য, ইবাদত এবং আনুগত্যে আমাকে দৃঢ় করুন।"},{"num": 55,"ar": "ٱلْوَلِيُّ","tr": "Al-Waliyy","en_mean": "The Protecting Friend","en_desc": "Ya Waliyy, be my protector, supporter, and nearest helper.","bn_mean": "রক্ষাকারী বন্ধু","bn_desc": "ইয়া ওয়ালিয়্য, আপনি আমার রক্ষক, সহায় এবং নিকটতম সাহায্যকারী হোন।"},{"num": 56,"ar": "ٱلْحَمِيدُ","tr": "Al-Hamid","en_mean": "The Praiseworthy","en_desc": "Ya Hamid, make me among those whose lives are worthy of praise before You.","bn_mean": "প্রশংসার যোগ্য","bn_desc": "ইয়া হামিদ, আমাকে তাদের অন্তর্ভুক্ত করুন যাদের জীবন আপনার সামনে প্রশংসাযোগ্য।"},{"num": 57,"ar": "ٱلْمُحْصِي","tr": "Al-Muhsi","en_mean": "The All-Enumerating","en_desc": "Ya Muhsi, record for me mercy and erase from me what brings blame.","bn_mean": "সবকিছু গণনাকারী","bn_desc": "ইয়া মুহসি, আমার জন্য রহমত লিখে দিন এবং নিন্দার কারণগুলো মুছে দিন।"},{"num": 58,"ar": "ٱلْمُبْدِئُ","tr": "Al-Mubdi’","en_mean": "The Originator of All","en_desc": "Ya Mubdi’, begin for me a new opening full of obedience and good.","bn_mean": "প্রথমবার সৃষ্টিকারী","bn_desc": "ইয়া মুবদি, আমার জন্য আনুগত্য ও কল্যাণে পূর্ণ নতুন সূচনা খুলে দিন।"},{"num": 59,"ar": "ٱلْمُعِيدُ","tr": "Al-Mu’id","en_mean": "The Restorer","en_desc": "Ya Mu’id, return to me what is good, and restore what I lost with better.","bn_mean": "পুনরায় ফিরিয়ে আনকারী","bn_desc": "ইয়া মু’ঈদ, যা কল্যাণকর তা আমার কাছে ফিরিয়ে দিন এবং হারানো জিনিসের বদলে উত্তম কিছু দিন।"},{"num": 60,"ar": "ٱلْمُحْيِي","tr": "Al-Muhyi","en_mean": "The Giver of Life","en_desc": "Ya Muhyi, give life to my heart after heedlessness.","bn_mean": "জীবনদানকারী","bn_desc": "ইয়া মুহয়ি, উদাসীনতার পর আমার হৃদয়কে জীবিত করুন।"},{"num": 61,"ar": "ٱلْمُمِيتُ","tr": "Al-Mumit","en_mean": "The Creator of Death","en_desc": "Ya Mumit, give me a good ending and take me only when You are pleased with me.","bn_mean": "মৃত্যুদানকারী","bn_desc": "ইয়া মুমিত, আমাকে উত্তম সমাপ্তি দিন এবং কেবল তখনই আমাকে নিন যখন আপনি আমার ওপর সন্তুষ্ট।"},{"num": 62,"ar": "ٱلْحَيُّ","tr": "Al-Hayy","en_mean": "The Ever-Living","en_desc": "Ya Hayy, keep my heart alive with remembrance of You.","bn_mean": "চিরঞ্জীব","bn_desc": "ইয়া হাইয়্য, আপনার স্মরণে আমার হৃদয়কে জীবিত রাখুন।"},{"num": 63,"ar": "ٱلْقَيُّومُ","tr": "Al-Qayyum","en_mean": "The Self-Subsisting","en_desc": "Ya Qayyum, sustain me, support me, and do not let me collapse.","bn_mean": "স্বয়ংস্থিত ও সবকিছুর ধারক","bn_desc": "ইয়া কাইয়্যুম, আমাকে ধরে রাখুন, সহায়তা করুন এবং ভেঙে পড়তে দেবেন না।"},{"num": 64,"ar": "ٱلْوَاجِدُ","tr": "Al-Wajid","en_mean": "The Finder","en_desc": "Ya Wajid, let me find what is good, and let me find You near me in every hardship.","bn_mean": "যিনি খুঁজে পান","bn_desc": "ইয়া ওয়াজিদ, আমাকে কল্যাণ খুঁজে পেতে দিন এবং প্রতিটি কষ্টে আপনাকে নিকটে অনুভব করতে দিন।"},{"num": 65,"ar": "ٱلْمَاجِدُ","tr": "Al-Majid","en_mean": "The Noble and Glorious","en_desc": "Ya Majid, ennoble my heart and make my path honorable before You.","bn_mean": "মহিমান্বিত ও মর্যাদাবান","bn_desc": "ইয়া মাজিদ, আমার হৃদয়কে মর্যাদাবান করুন এবং আমার পথকে আপনার সামনে সম্মানিত করুন।"},{"num": 66,"ar": "ٱلْوَاحِدُ","tr": "Al-Wahid","en_mean": "The One","en_desc": "Ya Wahid, unite my heart upon You alone and remove divided attachments from me.","bn_mean": "একক","bn_desc": "ইয়া ওয়াহিদ, আমার হৃদয়কে শুধু আপনার ওপর একত্র করুন এবং বিভক্ত আসক্তি দূর করুন।"},{"num": 67,"ar": "ٱلْأَحَدُ","tr": "Al-Ahad","en_mean": "The Unique","en_desc": "Ya Ahad, make my worship sincere for You alone.","bn_mean": "অদ্বিতীয়","bn_desc": "ইয়া আহাদ, আমার ইবাদতকে শুধু আপনার জন্য খাঁটি করুন।"},{"num": 68,"ar": "ٱلصَّمَدُ","tr": "As-Samad","en_mean": "The Eternal Refuge","en_desc": "Ya Samad, I turn to You with all my needs, so do not leave me in need of creation.","bn_mean": "চিরস্থায়ী আশ্রয়","bn_desc": "ইয়া সামাদ, আমি আমার সব প্রয়োজন নিয়ে আপনার দিকে ফিরি; আমাকে সৃষ্টির মুখাপেক্ষী করে রাখবেন না।"},{"num": 69,"ar": "ٱلْقَادِرُ","tr": "Al-Qadir","en_mean": "The All-Powerful","en_desc": "Ya Qadir, You are able over all things, so make possible what is good for me.","bn_mean": "সর্বক্ষমতাবান","bn_desc": "ইয়া কাদির, আপনি সবকিছুর ওপর ক্ষমতাবান; যা আমার জন্য কল্যাণকর তা সম্ভব করুন।"},{"num": 70,"ar": "ٱلْمُقْتَدِرُ","tr": "Al-Muqtadir","en_mean": "The Absolutely Powerful","en_desc": "Ya Muqtadir, decree for me what is right and protect me from what harms me.","bn_mean": "পূর্ণ ক্ষমতার অধিকারী","bn_desc": "ইয়া মুক্তাদির, আমার জন্য সঠিক বিষয় নির্ধারণ করুন এবং ক্ষতিকর বিষয় থেকে রক্ষা করুন।"},{"num": 71,"ar": "ٱلْمُقَدِّمُ","tr": "Al-Muqaddim","en_mean": "The Expediter","en_desc": "Ya Muqaddim, bring me forward in what pleases You.","bn_mean": "অগ্রসরকারী","bn_desc": "ইয়া মুকাদ্দিম, যা আপনাকে সন্তুষ্ট করে তাতে আমাকে এগিয়ে দিন।"},{"num": 72,"ar": "ٱلْمُؤَخِّرُ","tr": "Al-Mu’akhkhir","en_mean": "The Delayer","en_desc": "Ya Mu’akhkhir, delay from me what is not good, and keep me patient with Your timing.","bn_mean": "বিলম্বকারী","bn_desc": "ইয়া মুয়াখখির, যা কল্যাণকর নয় তা আমার থেকে বিলম্বিত করুন এবং আপনার সময়ের প্রতি আমাকে ধৈর্যশীল করুন।"},{"num": 73,"ar": "ٱلْأَوَّلُ","tr": "Al-Awwal","en_mean": "The First","en_desc": "Ya Awwal, let my beginning be with Your guidance and blessing.","bn_mean": "প্রথম","bn_desc": "ইয়া আউয়াল, আমার শুরু হোক আপনার হিদায়াত ও বরকতের সঙ্গে।"},{"num": 74,"ar": "ٱلْآخِرُ","tr": "Al-Akhir","en_mean": "The Last","en_desc": "Ya Akhir, grant me a blessed ending and the best final outcome.","bn_mean": "শেষ","bn_desc": "ইয়া আখির, আমাকে বরকতময় শেষ এবং সর্বোত্তম পরিণতি দিন।"},{"num": 75,"ar": "ٱلظَّاهِرُ","tr": "Az-Zahir","en_mean": "The Manifest","en_desc": "Ya Zahir, show me the signs of truth clearly.","bn_mean": "প্রকাশ্য","bn_desc": "ইয়া জাহির, সত্যের নিদর্শনগুলো আমার সামনে স্পষ্ট করে দিন।"},{"num": 76,"ar": "ٱلْبَاطِنُ","tr": "Al-Batin","en_mean": "The Hidden","en_desc": "Ya Batin, know my hidden pain and heal what no one sees.","bn_mean": "অন্তর্নিহিত","bn_desc": "ইয়া বাতিন, আমার গোপন ব্যথা জানুন এবং যা কেউ দেখে না তা নিরাময় করুন।"},{"num": 77,"ar": "ٱلْوَالِي","tr": "Al-Wali","en_mean": "The Governor","en_desc": "Ya Wali, manage my affairs better than I could ever manage them myself.","bn_mean": "পরিচালক","bn_desc": "ইয়া ওয়ালি, আমার বিষয়গুলো আমার নিজের চেয়ে ভালোভাবে পরিচালনা করুন।"},{"num": 78,"ar": "ٱلْمُتَعَالِي","tr": "Al-Muta’ali","en_mean": "The Most Exalted","en_desc": "Ya Muta’ali, raise me above sin, pettiness, and low desires.","bn_mean": "সর্বোচ্চ উন্নত","bn_desc": "ইয়া মুতাআলি, আমাকে গুনাহ, তুচ্ছতা এবং নিচু কামনা থেকে উপরে তুলুন।"},{"num": 79,"ar": "ٱلْبَرُّ","tr": "Al-Barr","en_mean": "The Source of All Goodness","en_desc": "Ya Barr, shower me with goodness and make me a source of good for others.","bn_mean": "সব কল্যাণের উৎস","bn_desc": "ইয়া বার্‌র, আমাকে কল্যাণে ভরিয়ে দিন এবং আমাকে অন্যদের জন্য কল্যাণের কারণ করুন।"},{"num": 80,"ar": "ٱلتَّوَّابُ","tr": "At-Tawwab","en_mean": "The Acceptor of Repentance","en_desc": "Ya Tawwab, accept my repentance and bring me back to You beautifully.","bn_mean": "তাওবা কবুলকারী","bn_desc": "ইয়া তাওয়াব, আমার তাওবা কবুল করুন এবং সুন্দরভাবে আমাকে আপনার দিকে ফিরিয়ে আনুন।"},{"num": 81,"ar": "ٱلْمُنْتَقِمُ","tr": "Al-Muntaqim","en_mean": "The Avenger","en_desc": "Ya Muntaqim, grant justice against oppression and protect me from ظلم.","bn_mean": "প্রতিশোধগ্রহণকারী ন্যায়প্রতিষ্ঠাকারী","bn_desc": "ইয়া মুনতাকিম, অত্যাচারের বিরুদ্ধে ন্যায় প্রতিষ্ঠা করুন এবং আমাকে জুলুম থেকে রক্ষা করুন।"},{"num": 82,"ar": "ٱلْعَفُوُّ","tr": "Al-‘Afuww","en_mean": "The Pardoner","en_desc": "Ya ‘Afuww, erase my sins completely and leave no trace of them upon me.","bn_mean": "সম্পূর্ণ মার্জনাকারী","bn_desc": "ইয়া আফুয়্য, আমার গুনাহ সম্পূর্ণ মুছে দিন এবং তার কোনো চিহ্ন আমার ওপর রাখবেন না।"},{"num": 83,"ar": "ٱلرَّؤُوفُ","tr": "Ar-Ra’uf","en_mean": "The Most Kind","en_desc": "Ya Ra’uf, treat me with tenderness, gentleness, and mercy.","bn_mean": "অতিশয় কোমলদয়ালু","bn_desc": "ইয়া রউফ, আমার প্রতি কোমলতা, নম্রতা এবং রহমত দিয়ে আচরণ করুন।"},{"num": 84,"ar": "مَالِكُ ٱلْمُلْكِ","tr": "Malik-ul-Mulk","en_mean": "Owner of All Sovereignty","en_desc": "Ya Malik-ul-Mulk, grant me only what is good from Your dominion and keep false power away from my heart.","bn_mean": "সমস্ত রাজত্বের মালিক","bn_desc": "ইয়া মালিকুল মুলক, আপনার রাজত্ব থেকে শুধু কল্যাণ দিন এবং মিথ্যা ক্ষমতার লোভ আমার হৃদয় থেকে দূর করুন।"},{"num": 85,"ar": "ذُو ٱلْجَلَالِ وَٱلْإِكْرَامِ","tr": "Dhul-Jalali wal-Ikram","en_mean": "Lord of Majesty and Honor","en_desc": "Ya Dhul-Jalali wal-Ikram, honor me with Your closeness and noble character.","bn_mean": "মহিমা ও সম্মানের অধিকারী","bn_desc": "ইয়া যুল-জালালি ওয়াল-ইকরাম, আপনার নৈকট্য ও মহৎ চরিত্র দিয়ে আমাকে সম্মানিত করুন।"},{"num": 86,"ar": "ٱلْمُقْسِطُ","tr": "Al-Muqsit","en_mean": "The Equitable","en_desc": "Ya Muqsit, place fairness and balance in my life and my decisions.","bn_mean": "ন্যায়ভাগকারী","bn_desc": "ইয়া মুকসিত, আমার জীবন ও সিদ্ধান্তে ন্যায় ও ভারসাম্য স্থাপন করুন।"},{"num": 87,"ar": "ٱلْجَامِعُ","tr": "Al-Jami’","en_mean": "The Gatherer","en_desc": "Ya Jami’, gather my scattered heart and unite my affairs upon good.","bn_mean": "সমবেতকারী","bn_desc": "ইয়া জামি, আমার ছড়িয়ে থাকা হৃদয় একত্র করুন এবং আমার কাজগুলো কল্যাণে মিলিয়ে দিন।"},{"num": 88,"ar": "ٱلْغَنِيُّ","tr": "Al-Ghani","en_mean": "The Self-Sufficient","en_desc": "Ya Ghani, enrich my heart with contentment and free me from desperate need.","bn_mean": "অমুখাপেক্ষী","bn_desc": "ইয়া গনি, আমার হৃদয়কে সন্তুষ্টিতে সমৃদ্ধ করুন এবং অপমানজনক প্রয়োজন থেকে মুক্ত করুন।"},{"num": 89,"ar": "ٱلْمُغْنِي","tr": "Al-Mughni","en_mean": "The Enricher","en_desc": "Ya Mughni, grant me sufficient halal provision and inner richness.","bn_mean": "সমৃদ্ধিদাতা","bn_desc": "ইয়া মুগনি, আমাকে যথেষ্ট হালাল রিজিক এবং অন্তরের সমৃদ্ধি দান করুন।"},{"num": 90,"ar": "ٱلْمَانِعُ","tr": "Al-Mani’","en_mean": "The Preventer","en_desc": "Ya Mani’, prevent from me what would harm my faith, my home, and my future.","bn_mean": "প্রতিরোধকারী","bn_desc": "ইয়া মানি, যা আমার ঈমান, ঘর এবং ভবিষ্যতের ক্ষতি করবে তা প্রতিরোধ করুন।"},{"num": 91,"ar": "ٱلضَّارُ","tr": "Ad-Darr","en_mean": "The Dispenser of Affliction","en_desc": "Ya Darr, keep harmful trials away from me and make me patient in what You decree.","bn_mean": "পরীক্ষা প্রদানকারী","bn_desc": "ইয়া দার, ক্ষতিকর পরীক্ষা আমার থেকে দূরে রাখুন এবং আপনার সিদ্ধান্তে আমাকে ধৈর্যশীল করুন।"},{"num": 92,"ar": "ٱلنَّافِعُ","tr": "An-Nafi’","en_mean": "The Bestower of Benefit","en_desc": "Ya Nafi’, bring me benefit in my religion, my life, and my family.","bn_mean": "উপকারদানকারী","bn_desc": "ইয়া নাফি, আমার ধর্ম, জীবন এবং পরিবারে উপকার আনুন।"},{"num": 93,"ar": "ٱلنُّورُ","tr": "An-Nur","en_mean": "The Light","en_desc": "Ya Nur, illuminate my path and bring me out of darkness.","bn_mean": "নূর","bn_desc": "ইয়া নূর, আমার পথ আলোকিত করুন এবং আমাকে অন্ধকার থেকে বের করুন।"},{"num": 94,"ar": "ٱلْهَادِي","tr": "Al-Hadi","en_mean": "The Guide","en_desc": "Ya Hadi, guide me to the straight path and keep me firm upon it.","bn_mean": "পথপ্রদর্শক","bn_desc": "ইয়া হাদি, আমাকে সরল পথে পরিচালিত করুন এবং তাতে দৃঢ় রাখুন।"},{"num": 95,"ar": "ٱلْبَدِيعُ","tr": "Al-Badi’","en_mean": "The Incomparable Originator","en_desc": "Ya Badi’, open for me beautiful outcomes I could not have imagined.","bn_mean": "অতুলনীয় সৃষ্টিকারী","bn_desc": "ইয়া বাদি, আমার জন্য এমন সুন্দর পরিণতি খুলে দিন যা আমি কল্পনাও করতে পারিনি।"},{"num": 96,"ar": "ٱلْبَاقِي","tr": "Al-Baqi","en_mean": "The Everlasting","en_desc": "Ya Baqi, make what I do for You lasting and accepted.","bn_mean": "চিরস্থায়ী","bn_desc": "ইয়া বাকি, যা আমি আপনার জন্য করি তা স্থায়ী ও কবুল করুন।"},{"num": 97,"ar": "ٱلْوَارِثُ","tr": "Al-Warith","en_mean": "The Inheritor","en_desc": "Ya Warith, leave for me what is truly beneficial when all else fades.","bn_mean": "সবকিছুর উত্তরাধিকারী","bn_desc": "ইয়া ওয়ারিস, সবকিছু হারিয়ে গেলে যা সত্যিই উপকারী তা আমার জন্য রেখে দিন।"},{"num": 98,"ar": "ٱلرَّشِيدُ","tr": "Ar-Rashid","en_mean": "The Guide to the Right Way","en_desc": "Ya Rashid, direct me to what is right and keep me from misguidance.","bn_mean": "সঠিক পথে পরিচালনাকারী","bn_desc": "ইয়া রাশিদ, আমাকে সঠিক দিকে পরিচালিত করুন এবং ভ্রষ্টতা থেকে রক্ষা করুন।"},{"num": 99,"ar": "ٱلصَّبُورُ","tr": "As-Sabur","en_mean": "The Most Patient","en_desc": "Ya Sabur, give me patience without complaint and firmness without despair.","bn_mean": "অতিশয় ধৈর্যশীল","bn_desc": "ইয়া সাবুর, আমাকে অভিযোগহীন ধৈর্য এবং হতাশাহীন দৃঢ়তা দান করুন।"}];
+const names = [{"num":1,"ar":"ٱلرَّحْمَٰنُ","tr":"আর-রহমান","en_mean":"The Universally Merciful","en_desc":"Ya Rahman, cover me with Your mercy and correct my affairs.","bn_mean":"পরম দয়াময়","bn_desc":"ইয়া রহমান, আমাকে আপনার রহমতে আচ্ছাদিত করুন এবং আমার কাজগুলো সংশোধন করুন।"},{"num":2,"ar":"ٱلرَّحِيمُ","tr":"আর-রহীম","en_mean":"The Especially Merciful","en_desc":"Ya Raheem, ease my hardships and do not leave me to myself.","bn_mean":"বিশেষ দয়ালু","bn_desc":"ইয়া রহিম, আমার কষ্ট সহজ করুন এবং আমাকে নিজের ওপর ছেড়ে দেবেন না।"},{"num":3,"ar":"ٱلْمَلِكُ","tr":"আল-মালিক","en_mean":"The Sovereign","en_desc":"Ya Malik, rule my life by Your guidance and make my heart obedient to You.","bn_mean":"সার্বভৌম অধিপতি","bn_desc":"ইয়া মালিক, আপনার হিদায়াত দিয়ে আমার জীবন পরিচালনা করুন এবং আমার হৃদয়কে আপনার অনুগত করুন।"},{"num":4,"ar":"ٱلْقُدُّوسُ","tr":"আল-কুদ্দুস","en_mean":"The Most Holy","en_desc":"Ya Quddus, purify my heart, my intentions, and my deeds.","bn_mean":"অতি পবিত্র","bn_desc":"ইয়া কুদ্দুস, আমার হৃদয়, নিয়ত এবং আমল পবিত্র করুন।"},{"num":5,"ar":"ٱلسَّلَامُ","tr":"আস-সালাম","en_mean":"The Giver of Peace and Safety","en_desc":"Ya Salam, grant me peace, safety, and inner calm.","bn_mean":"শান্তি ও নিরাপত্তাদাতা","bn_desc":"ইয়া সালাম, আমাকে শান্তি, নিরাপত্তা এবং অন্তরের প্রশান্তি দান করুন।"},{"num":6,"ar":"ٱلْمُؤْمِنُ","tr":"আল-মুমিন","en_mean":"The Giver of Faith and Security","en_desc":"Ya Mu’min, give my heart security, faith, and reassurance.","bn_mean":"ঈমান ও নিরাপত্তাদাতা","bn_desc":"ইয়া মু’মিন, আমার হৃদয়ে নিরাপত্তা, ঈমান এবং নিশ্চয়তা দান করুন।"},{"num":7,"ar":"ٱلْمُهَيْمِنُ","tr":"আল-মুহাইমিন","en_mean":"The Watchful Protector","en_desc":"Ya Muhaymin, protect me, my family, and all that You entrusted to me.","bn_mean":"সতর্ক রক্ষক","bn_desc":"ইয়া মুহাইমিন, আমাকে, আমার পরিবারকে এবং আপনি যা আমার কাছে আমানত রেখেছেন তা রক্ষা করুন।"},{"num":8,"ar":"ٱلْعَزِيزُ","tr":"আল-আজিজ","en_mean":"The Almighty","en_desc":"Ya Aziz, strengthen me with dignity and keep me firm in truth.","bn_mean":"পরাক্রমশালী","bn_desc":"ইয়া আজিজ, আমাকে মর্যাদা দিয়ে শক্তিশালী করুন এবং সত্যের ওপর দৃঢ় রাখুন।"},{"num":9,"ar":"ٱلْجَبَّارُ","tr":"আল-জাব্বার","en_mean":"The Compeller and Restorer","en_desc":"Ya Jabbar, mend what is broken in my heart and my life.","bn_mean":"পরাক্রমে সংশোধনকারী","bn_desc":"ইয়া জাব্বার, আমার হৃদয় ও জীবনের ভাঙা অংশগুলো ঠিক করে দিন।"},{"num":10,"ar":"ٱلْمُتَكَبِّرُ","tr":"আল-মুতাকাব্বির","en_mean":"The Supremely Exalted","en_desc":"Ya Mutakabbir, protect me from arrogance and fill me with humility before You.","bn_mean":"সর্বোচ্চ মহিমান্বিত","bn_desc":"ইয়া মুতাকাব্বির, আমাকে অহংকার থেকে রক্ষা করুন এবং আপনার সামনে বিনয় দান করুন।"},{"num":11,"ar":"ٱلْخَالِقُ","tr":"আল-খালিক","en_mean":"The Creator","en_desc":"Ya Khaliq, create in me a better character and a better future.","bn_mean":"স্রষ্টা","bn_desc":"ইয়া খালিক, আমার মধ্যে উত্তম চরিত্র এবং উত্তম ভবিষ্যৎ সৃষ্টি করুন।"},{"num":12,"ar":"ٱلْبَارِئُ","tr":"আল-বারি","en_mean":"The Originator","en_desc":"Ya Bari’, set my life in right order and bring good out of disorder.","bn_mean":"অস্তিত্বদাতা","bn_desc":"ইয়া বারি, আমার জীবনকে সঠিক শৃঙ্খলায় আনুন এবং বিশৃঙ্খলা থেকে কল্যাণ বের করুন।"},{"num":13,"ar":"ٱلْمُصَوِّرُ","tr":"আল-মুসাওয়ির","en_mean":"The Fashioner","en_desc":"Ya Musawwir, beautify my character and shape my life in the best way.","bn_mean":"আকৃতি দানকারী","bn_desc":"ইয়া মুসাওয়ির, আমার চরিত্র সুন্দর করুন এবং আমার জীবনকে সর্বোত্তমভাবে গঠন করুন।"},{"num":14,"ar":"ٱلْغَفَّارُ","tr":"আল-গাফফার","en_mean":"The Constant Forgiver","en_desc":"Ya Ghaffar, forgive me again and again, and cover my sins.","bn_mean":"বারবার ক্ষমাকারী","bn_desc":"ইয়া গাফফার, আমাকে বারবার ক্ষমা করুন এবং আমার গুনাহ ঢেকে দিন।"},{"num":15,"ar":"ٱلْقَهَّارُ","tr":"আল-কাহহার","en_mean":"The All-Dominant","en_desc":"Ya Qahhar, subdue my ego, my desires, and everything that pulls me away from You.","bn_mean":"সর্বদময়","bn_desc":"ইয়া কাহহার, আমার নফস, কামনা এবং যা আমাকে আপনার কাছ থেকে দূরে সরায় তা দমন করুন।"},{"num":16,"ar":"ٱلْوَهَّابُ","tr":"আল-ওয়াহহাব","en_mean":"The Bestower","en_desc":"Ya Wahhab, grant me blessings that bring me closer to You.","bn_mean":"মহাদাতা","bn_desc":"ইয়া ওয়াহহাব, আমাকে এমন বরকত দান করুন যা আমাকে আপনার নিকটবর্তী করে।"},{"num":17,"ar":"ٱلرَّزَّاقُ","tr":"আর-রাযযাক","en_mean":"The Provider","en_desc":"Ya Razzaq, provide me with halal sustenance and remove my need.","bn_mean":"রিজিকদাতা","bn_desc":"ইয়া রাযযাক, আমাকে হালাল রিজিক দান করুন এবং আমার অভাব দূর করুন।"},{"num":18,"ar":"ٱلْفَتَّاحُ","tr":"আল-ফাত্তাহ","en_mean":"The Opener","en_desc":"Ya Fattah, open for me the doors of mercy, relief, and success.","bn_mean":"দ্বার উন্মোচনকারী","bn_desc":"ইয়া ফাত্তাহ, আমার জন্য রহমত, স্বস্তি এবং সফলতার দরজা খুলে দিন।"},{"num":19,"ar":"ٱلْعَلِيمُ","tr":"আল-আলিম","en_mean":"The All-Knowing","en_desc":"Ya ‘Alim, grant me beneficial knowledge and protect me from ignorance.","bn_mean":"সর্বজ্ঞ","bn_desc":"ইয়া আলিম, আমাকে উপকারী জ্ঞান দান করুন এবং অজ্ঞতা থেকে রক্ষা করুন।"},{"num":20,"ar":"ٱلْقَابِضُ","tr":"আল-কাবিদ","en_mean":"The Withholder","en_desc":"Ya Qabid, hold back from me what would harm my faith and my heart.","bn_mean":"সংকুচিতকারী","bn_desc":"ইয়া কাবিদ, যা আমার ঈমান ও হৃদয়ের ক্ষতি করবে তা আমার থেকে দূরে রাখুন।"},{"num":21,"ar":"ٱلْبَاسِطُ","tr":"আল-বাসিত","en_mean":"The Expander","en_desc":"Ya Basit, expand my chest, my provision, and my hope.","bn_mean":"প্রশস্তকারী","bn_desc":"ইয়া বাসিত, আমার বক্ষ, রিজিক এবং আশা প্রশস্ত করুন।"},{"num":22,"ar":"ٱلْخَافِضُ","tr":"আল-খাফিদ","en_mean":"The Reducer","en_desc":"Ya Khafid, lower my pride and save me from arrogance.","bn_mean":"নম্রকারী","bn_desc":"ইয়া খাফিদ, আমার অহংকার নিচু করুন এবং আমাকে গর্ব থেকে রক্ষা করুন।"},{"num":23,"ar":"ٱلرَّافِعُ","tr":"আর-রাফি","en_mean":"The Exalter","en_desc":"Ya Rafi’, raise me in faith, character, and honor.","bn_mean":"উন্নতকারী","bn_desc":"ইয়া রাফি, আমাকে ঈমান, চরিত্র এবং মর্যাদায় উন্নত করুন।"},{"num":24,"ar":"ٱلْمُعِزُّ","tr":"আল-মুইয","en_mean":"The Giver of Honor","en_desc":"Ya Mu’izz, honor me through obedience to You and truth.","bn_mean":"সম্মানদাতা","bn_desc":"ইয়া মুঈয, আপনার আনুগত্য ও সত্যের মাধ্যমে আমাকে সম্মান দিন।"},{"num":25,"ar":"ٱلْمُذِلُّ","tr":"আল-মুযিল","en_mean":"The Humiliator","en_desc":"Ya Mudhill, keep me far from humiliation through sin and wrongdoing.","bn_mean":"অপমানকারী","bn_desc":"ইয়া মুযিল, গুনাহ ও অন্যায়ের কারণে অপমান থেকে আমাকে রক্ষা করুন।"},{"num":26,"ar":"ٱلسَّمِيعُ","tr":"আস-সামি","en_mean":"The All-Hearing","en_desc":"Ya Sami’, hear my dua, my weakness, and my hidden pain.","bn_mean":"সর্বশ্রোতা","bn_desc":"ইয়া সামি, আমার দোয়া, দুর্বলতা এবং গোপন ব্যথা শুনুন।"},{"num":27,"ar":"ٱلْبَصِيرُ","tr":"আল-বাসির","en_mean":"The All-Seeing","en_desc":"Ya Basir, see my state and guide me to what is right.","bn_mean":"সর্বদ্রষ্টা","bn_desc":"ইয়া বাসির, আমার অবস্থা দেখুন এবং আমাকে সঠিক পথে পরিচালিত করুন।"},{"num":28,"ar":"ٱلْحَكَمُ","tr":"আল-হাকাম","en_mean":"The Judge","en_desc":"Ya Hakam, judge my affairs with truth and guide me through confusion.","bn_mean":"বিচারক","bn_desc":"ইয়া হাকাম, আমার বিষয়গুলো সত্যের ভিত্তিতে বিচার করুন এবং বিভ্রান্তি থেকে পথ দেখান।"},{"num":29,"ar":"ٱلْعَدْلُ","tr":"আল-আদল","en_mean":"The Utterly Just","en_desc":"Ya ‘Adl, place justice in my life and protect me from wrongdoing.","bn_mean":"সম্পূর্ণ ন্যায়পরায়ণ","bn_desc":"ইয়া আদল, আমার জীবনে ন্যায় প্রতিষ্ঠা করুন এবং অন্যায় থেকে রক্ষা করুন।"},{"num":30,"ar":"ٱللَّطِيفُ","tr":"আল-লতিফ","en_mean":"The Most Gentle","en_desc":"Ya Latif, be gentle with me in what I see and what I do not see.","bn_mean":"অতি সূক্ষ্ম ও দয়ালু","bn_desc":"ইয়া লতিফ, যা আমি দেখি এবং যা দেখি না—সব বিষয়ে আমার প্রতি কোমল হোন।"},{"num":31,"ar":"ٱلْخَبِيرُ","tr":"আল-খাবির","en_mean":"The All-Aware","en_desc":"Ya Khabir, guide me in what is hidden from my understanding.","bn_mean":"সর্বজ্ঞাত","bn_desc":"ইয়া খাবির, যা আমার বোঝার বাইরে লুকানো আছে, তাতে আমাকে পথ দেখান।"},{"num":32,"ar":"ٱلْحَلِيمُ","tr":"আল-হালিম","en_mean":"The Forbearing","en_desc":"Ya Halim, treat me with forbearance and do not punish me for my haste.","bn_mean":"সহনশীল","bn_desc":"ইয়া হালিম, আমার প্রতি সহনশীল আচরণ করুন এবং তাড়াহুড়োর জন্য আমাকে শাস্তি দেবেন না।"},{"num":33,"ar":"ٱلْعَظِيمُ","tr":"আল-আজিম","en_mean":"The Magnificent","en_desc":"Ya ‘Azim, fill my heart with reverence for Your greatness.","bn_mean":"মহান","bn_desc":"ইয়া আজিম, আপনার মহত্ত্বের প্রতি ভক্তি দিয়ে আমার হৃদয় পূর্ণ করুন।"},{"num":34,"ar":"ٱلْغَفُورُ","tr":"আল-গাফুর","en_mean":"The Great Forgiver","en_desc":"Ya Ghafur, forgive my major sins and accept my repentance.","bn_mean":"মহাক্ষমাশীল","bn_desc":"ইয়া গাফুর, আমার বড় গুনাহ ক্ষমা করুন এবং আমার তাওবা কবুল করুন।"},{"num":35,"ar":"ٱلشَّكُورُ","tr":"আশ-শাকুর","en_mean":"The Appreciative","en_desc":"Ya Shakur, accept my small deeds and multiply their reward.","bn_mean":"কৃতজ্ঞতার প্রতিদানদাতা","bn_desc":"ইয়া শাকুর, আমার ছোট আমল গ্রহণ করুন এবং তার প্রতিদান বাড়িয়ে দিন।"},{"num":36,"ar":"ٱلْعَلِيُّ","tr":"আল-আলিয়্য","en_mean":"The Most High","en_desc":"Ya ‘Aliyy, raise my soul above what lowers me.","bn_mean":"সর্বোচ্চ","bn_desc":"ইয়া আলিয়্য, যা আমাকে নিচে নামায় তার ওপর আমার আত্মাকে উন্নত করুন।"},{"num":37,"ar":"ٱلْكَبِيرُ","tr":"আল-কাবির","en_mean":"The Most Great","en_desc":"Ya Kabir, make the dunya small in my eyes and Your pleasure great.","bn_mean":"মহামহান","bn_desc":"ইয়া কবির, দুনিয়াকে আমার চোখে ছোট এবং আপনার সন্তুষ্টিকে মহান করুন।"},{"num":38,"ar":"ٱلْحَفِيظُ","tr":"আল-হাফিজ","en_mean":"The Preserver","en_desc":"Ya Hafiz, preserve my faith, my family, and my end.","bn_mean":"সংরক্ষণকারী","bn_desc":"ইয়া হাফিজ, আমার ঈমান, পরিবার এবং শেষ পরিণতি সংরক্ষণ করুন।"},{"num":39,"ar":"ٱلْمُقِيتُ","tr":"আল-মুকিত","en_mean":"The Sustainer","en_desc":"Ya Muqit, sustain me with strength, patience, and enough provision.","bn_mean":"জীবিকা ও শক্তিদাতা","bn_desc":"ইয়া মুকিত, আমাকে শক্তি, ধৈর্য এবং যথেষ্ট রিজিক দিয়ে ধরে রাখুন।"},{"num":40,"ar":"ٱلْحَسِيبُ","tr":"আল-হাসিব","en_mean":"The Sufficient Reckoner","en_desc":"Ya Hasib, be sufficient for me in every worry and affair.","bn_mean":"যথেষ্ট হিসাবগ্রহণকারী","bn_desc":"ইয়া হাসিব, প্রতিটি দুশ্চিন্তা ও বিষয়ে আপনি আমার জন্য যথেষ্ট হোন।"},{"num":41,"ar":"ٱلْجَلِيلُ","tr":"আল-জালিল","en_mean":"The Majestic","en_desc":"Ya Jalil, fill my heart with reverence for Your majesty.","bn_mean":"মহিমাময়","bn_desc":"ইয়া জলিল, আপনার মহিমার প্রতি সম্মান দিয়ে আমার হৃদয় পূর্ণ করুন।"},{"num":42,"ar":"ٱلْكَرِيمُ","tr":"আল-কারিম","en_mean":"The Most Generous","en_desc":"Ya Karim, be generous to me with forgiveness, ease, and blessing.","bn_mean":"অতিশয় উদার","bn_desc":"ইয়া করিম, ক্ষমা, সহজতা এবং বরকত দিয়ে আমার প্রতি উদার হোন।"},{"num":43,"ar":"ٱلرَّقِيبُ","tr":"আর-রাকিব","en_mean":"The Watchful","en_desc":"Ya Raqib, watch over me and keep me away from secret sins.","bn_mean":"সতর্ক পর্যবেক্ষক","bn_desc":"ইয়া রাকিব, আমার ওপর নজর রাখুন এবং গোপন গুনাহ থেকে আমাকে দূরে রাখুন।"},{"num":44,"ar":"ٱلْمُجِيبُ","tr":"আল-মুজিব","en_mean":"The Responsive","en_desc":"Ya Mujib, answer my dua and do not turn me away disappointed.","bn_mean":"সাড়া দানকারী","bn_desc":"ইয়া মুজিব, আমার দোয়া কবুল করুন এবং আমাকে নিরাশ করে ফিরিয়ে দেবেন না।"},{"num":45,"ar":"ٱلْوَاسِعُ","tr":"আল-ওয়াসি","en_mean":"The All-Encompassing","en_desc":"Ya Wasi’, expand for me mercy, understanding, and relief.","bn_mean":"সর্বব্যাপী","bn_desc":"ইয়া ওয়াসি, আমার জন্য রহমত, বোঝাপড়া এবং স্বস্তি প্রসারিত করুন।"},{"num":46,"ar":"ٱلْحَكِيمُ","tr":"আল-হাকিম","en_mean":"The All-Wise","en_desc":"Ya Hakim, give me wisdom and right decisions.","bn_mean":"মহাপ্রজ্ঞাবান","bn_desc":"ইয়া হাকিম, আমাকে প্রজ্ঞা এবং সঠিক সিদ্ধান্ত দান করুন।"},{"num":47,"ar":"ٱلْوَدُودُ","tr":"আল-ওয়াদুদ","en_mean":"The Most Loving","en_desc":"Ya Wadud, fill my heart with love, mercy, and goodness.","bn_mean":"অতিশয় প্রেমময়","bn_desc":"ইয়া ওয়াদুদ, আমার হৃদয়কে ভালোবাসা, রহমত এবং কল্যাণে পূর্ণ করুন।"},{"num":48,"ar":"ٱلْمَجِيدُ","tr":"আল-মাজিদ","en_mean":"The Most Glorious","en_desc":"Ya Majid, honor me with noble character and righteous deeds.","bn_mean":"অতিশয় গৌরবময়","bn_desc":"ইয়া মাজিদ, আমাকে মহৎ চরিত্র ও সৎ আমল দিয়ে সম্মানিত করুন।"},{"num":49,"ar":"ٱلْبَاعِثُ","tr":"আল-বাঈস","en_mean":"The Resurrector","en_desc":"Ya Ba’ith, revive my heart with faith and sincere worship.","bn_mean":"পুনরুত্থানকারী","bn_desc":"ইয়া বাঈস, আমার হৃদয়কে ঈমান ও আন্তরিক ইবাদতে জীবিত করুন।"},{"num":50,"ar":"ٱلشَّهِيدُ","tr":"আশ-শাহিদ","en_mean":"The Witness","en_desc":"Ya Shahid, be my witness in truth and protect me from hypocrisy.","bn_mean":"সাক্ষী","bn_desc":"ইয়া শহিদ, সত্যের পথে আমার সাক্ষী হোন এবং আমাকে মুনাফিকি থেকে রক্ষা করুন।"},{"num":51,"ar":"ٱلْحَقُّ","tr":"আল-হক","en_mean":"The Truth","en_desc":"Ya Haqq, keep me firm upon truth in belief, word, and action.","bn_mean":"সত্য","bn_desc":"ইয়া হক, বিশ্বাস, কথা এবং কাজে আমাকে সত্যের ওপর দৃঢ় রাখুন।"},{"num":52,"ar":"ٱلْوَكِيلُ","tr":"আল-ওয়াকিল","en_mean":"The Trustee","en_desc":"Ya Wakil, manage my affairs in the best way, for I rely upon You.","bn_mean":"অভিভাবক ও ভরসাস্থল","bn_desc":"ইয়া ওয়াকিল, আমার বিষয়গুলো সর্বোত্তমভাবে পরিচালনা করুন, কারণ আমি আপনার ওপর ভরসা করি।"},{"num":53,"ar":"ٱلْقَوِيُّ","tr":"আল-কাওয়িয়্য","en_mean":"The All-Strong","en_desc":"Ya Qawiyy, strengthen me against weakness, fear, and sin.","bn_mean":"সর্বশক্তিমান","bn_desc":"ইয়া কাওয়িয়্য, দুর্বলতা, ভয় এবং গুনাহের বিরুদ্ধে আমাকে শক্তিশালী করুন।"},{"num":54,"ar":"ٱلْمَتِينُ","tr":"আল-মাতিন","en_mean":"The Firm","en_desc":"Ya Matin, make me firm in patience, worship, and obedience.","bn_mean":"দৃঢ় ও অটল","bn_desc":"ইয়া মাতিন, ধৈর্য, ইবাদত এবং আনুগত্যে আমাকে দৃঢ় করুন।"},{"num":55,"ar":"ٱلْوَلِيُّ","tr":"আল-ওয়ালিয়্য","en_mean":"The Protecting Friend","en_desc":"Ya Waliyy, be my protector, supporter, and nearest helper.","bn_mean":"রক্ষাকারী বন্ধু","bn_desc":"ইয়া ওয়ালিয়্য, আপনি আমার রক্ষক, সহায় এবং নিকটতম সাহায্যকারী হোন।"},{"num":56,"ar":"ٱلْحَمِيدُ","tr":"আল-হামিদ","en_mean":"The Praiseworthy","en_desc":"Ya Hamid, make me among those whose lives are worthy of praise before You.","bn_mean":"প্রশংসার যোগ্য","bn_desc":"ইয়া হামিদ, আমাকে তাদের অন্তর্ভুক্ত করুন যাদের জীবন আপনার সামনে প্রশংসাযোগ্য।"},{"num":57,"ar":"ٱلْمُحْصِي","tr":"আল-মুহসি","en_mean":"The All-Enumerating","en_desc":"Ya Muhsi, record for me mercy and erase from me what brings blame.","bn_mean":"সবকিছু গণনাকারী","bn_desc":"ইয়া মুহসি, আমার জন্য রহমত লিখে দিন এবং নিন্দার কারণগুলো মুছে দিন।"},{"num":58,"ar":"ٱلْمُبْدِئُ","tr":"আল-মুবদি","en_mean":"The Originator of All","en_desc":"Ya Mubdi’, begin for me a new opening full of obedience and good.","bn_mean":"প্রথমবার সৃষ্টিকারী","bn_desc":"ইয়া মুবদি, আমার জন্য আনুগত্য ও কল্যাণে পূর্ণ নতুন সূচনা খুলে দিন।"},{"num":59,"ar":"ٱلْمُعِيدُ","tr":"আল-মুয়িদ","en_mean":"The Restorer","en_desc":"Ya Mu’id, return to me what is good, and restore what I lost with better.","bn_mean":"পুনরায় ফিরিয়ে আনকারী","bn_desc":"ইয়া মু’ঈদ, যা কল্যাণকর তা আমার কাছে ফিরিয়ে দিন এবং হারানো জিনিসের বদলে উত্তম কিছু দিন।"},{"num":60,"ar":"ٱلْمُحْيِي","tr":"আল-মুহয়ি","en_mean":"The Giver of Life","en_desc":"Ya Muhyi, give life to my heart after heedlessness.","bn_mean":"জীবনদানকারী","bn_desc":"ইয়া মুহয়ি, উদাসীনতার পর আমার হৃদয়কে জীবিত করুন।"},{"num":61,"ar":"ٱلْمُمِيتُ","tr":"আল-মুমিত","en_mean":"The Creator of Death","en_desc":"Ya Mumit, give me a good ending and take me only when You are pleased with me.","bn_mean":"মৃত্যুদানকারী","bn_desc":"ইয়া মুমিত, আমাকে উত্তম সমাপ্তি দিন এবং কেবল তখনই আমাকে নিন যখন আপনি আমার ওপর সন্তুষ্ট।"},{"num":62,"ar":"ٱلْحَيُّ","tr":"আল-হাইয়্য","en_mean":"The Ever-Living","en_desc":"Ya Hayy, keep my heart alive with remembrance of You.","bn_mean":"চিরঞ্জীব","bn_desc":"ইয়া হাইয়্য, আপনার স্মরণে আমার হৃদয়কে জীবিত রাখুন।"},{"num":63,"ar":"ٱلْقَيُّومُ","tr":"আল-কাইয়্যুম","en_mean":"The Self-Subsisting","en_desc":"Ya Qayyum, sustain me, support me, and do not let me collapse.","bn_mean":"স্বয়ংস্থিত ও সবকিছুর ধারক","bn_desc":"ইয়া কাইয়্যুম, আমাকে ধরে রাখুন, সহায়তা করুন এবং ভেঙে পড়তে দেবেন না।"},{"num":64,"ar":"ٱلْوَاجِدُ","tr":"আল-ওয়াজিদ","en_mean":"The Finder","en_desc":"Ya Wajid, let me find what is good, and let me find You near me in every hardship.","bn_mean":"যিনি খুঁজে পান","bn_desc":"ইয়া ওয়াজিদ, আমাকে কল্যাণ খুঁজে পেতে দিন এবং প্রতিটি কষ্টে আপনাকে নিকটে অনুভব করতে দিন।"},{"num":65,"ar":"ٱلْمَاجِدُ","tr":"আল-মাজিদ","en_mean":"The Noble and Glorious","en_desc":"Ya Majid, ennoble my heart and make my path honorable before You.","bn_mean":"মহিমান্বিত ও মর্যাদাবান","bn_desc":"ইয়া মাজিদ, আমার হৃদয়কে মর্যাদাবান করুন এবং আমার পথকে আপনার সামনে সম্মানিত করুন।"},{"num":66,"ar":"ٱلْوَاحِدُ","tr":"আল-ওয়াহিদ","en_mean":"The One","en_desc":"Ya Wahid, unite my heart upon You alone and remove divided attachments from me.","bn_mean":"একক","bn_desc":"ইয়া ওয়াহিদ, আমার হৃদয়কে শুধু আপনার ওপর একত্র করুন এবং বিভক্ত আসক্তি দূর করুন।"},{"num":67,"ar":"ٱلْأَحَدُ","tr":"আল-আহাদ","en_mean":"The Unique","en_desc":"Ya Ahad, make my worship sincere for You alone.","bn_mean":"অদ্বিতীয়","bn_desc":"ইয়া আহাদ, আমার ইবাদতকে শুধু আপনার জন্য খাঁটি করুন।"},{"num":68,"ar":"ٱلصَّمَدُ","tr":"আস-সামাদ","en_mean":"The Eternal Refuge","en_desc":"Ya Samad, I turn to You with all my needs, so do not leave me in need of creation.","bn_mean":"চিরস্থায়ী আশ্রয়","bn_desc":"ইয়া সামাদ, আমি আমার সব প্রয়োজন নিয়ে আপনার দিকে ফিরি; আমাকে সৃষ্টির মুখাপেক্ষী করে রাখবেন না।"},{"num":69,"ar":"ٱلْقَادِرُ","tr":"আল-কাদির","en_mean":"The All-Powerful","en_desc":"Ya Qadir, You are able over all things, so make possible what is good for me.","bn_mean":"সর্বক্ষমতাবান","bn_desc":"ইয়া কাদির, আপনি সবকিছুর ওপর ক্ষমতাবান; যা আমার জন্য কল্যাণকর তা সম্ভব করুন।"},{"num":70,"ar":"ٱلْمُقْتَدِرُ","tr":"আল-মুক্তাদির","en_mean":"The Absolutely Powerful","en_desc":"Ya Muqtadir, decree for me what is right and protect me from what harms me.","bn_mean":"পূর্ণ ক্ষমতার অধিকারী","bn_desc":"ইয়া মুক্তাদির, আমার জন্য সঠিক বিষয় নির্ধারণ করুন এবং ক্ষতিকর বিষয় থেকে রক্ষা করুন।"},{"num":71,"ar":"ٱلْمُقَدِّمُ","tr":"আল-মুকাদ্দিম","en_mean":"The Expediter","en_desc":"Ya Muqaddim, bring me forward in what pleases You.","bn_mean":"অগ্রসরকারী","bn_desc":"ইয়া মুকাদ্দিম, যা আপনাকে সন্তুষ্ট করে তাতে আমাকে এগিয়ে দিন।"},{"num":72,"ar":"ٱلْمُؤَخِّرُ","tr":"আল-মুয়াখখির","en_mean":"The Delayer","en_desc":"Ya Mu’akhkhir, delay from me what is not good, and keep me patient with Your timing.","bn_mean":"বিলম্বকারী","bn_desc":"ইয়া মুয়াখখির, যা কল্যাণকর নয় তা আমার থেকে বিলম্বিত করুন এবং আপনার সময়ের প্রতি আমাকে ধৈর্যশীল করুন।"},{"num":73,"ar":"ٱلْأَوَّلُ","tr":"আল-আউয়াল","en_mean":"The First","en_desc":"Ya Awwal, let my beginning be with Your guidance and blessing.","bn_mean":"প্রথম","bn_desc":"ইয়া আউয়াল, আমার শুরু হোক আপনার হিদায়াত ও বরকতের সঙ্গে।"},{"num":74,"ar":"ٱلْآخِرُ","tr":"আল-আখির","en_mean":"The Last","en_desc":"Ya Akhir, grant me a blessed ending and the best final outcome.","bn_mean":"শেষ","bn_desc":"ইয়া আখির, আমাকে বরকতময় শেষ এবং সর্বোত্তম পরিণতি দিন।"},{"num":75,"ar":"ٱلظَّاهِرُ","tr":"আজ-জাহির","en_mean":"The Manifest","en_desc":"Ya Zahir, show me the signs of truth clearly.","bn_mean":"প্রকাশ্য","bn_desc":"ইয়া জাহির, সত্যের নিদর্শনগুলো আমার সামনে স্পষ্ট করে দিন।"},{"num":76,"ar":"ٱلْبَاطِنُ","tr":"আল-বাতিন","en_mean":"The Hidden","en_desc":"Ya Batin, know my hidden pain and heal what no one sees.","bn_mean":"অন্তর্নিহিত","bn_desc":"ইয়া বাতিন, আমার গোপন ব্যথা জানুন এবং যা কেউ দেখে না তা নিরাময় করুন।"},{"num":77,"ar":"ٱلْوَالِي","tr":"আল-ওয়ালি","en_mean":"The Governor","en_desc":"Ya Wali, manage my affairs better than I could ever manage them myself.","bn_mean":"পরিচালক","bn_desc":"ইয়া ওয়ালি, আমার বিষয়গুলো আমার নিজের চেয়ে ভালোভাবে পরিচালনা করুন।"},{"num":78,"ar":"ٱلْمُتَعَالِي","tr":"আল-মুতাআলি","en_mean":"The Most Exalted","en_desc":"Ya Muta’ali, raise me above sin, pettiness, and low desires.","bn_mean":"সর্বোচ্চ উন্নত","bn_desc":"ইয়া মুতাআলি, আমাকে গুনাহ, তুচ্ছতা এবং নিচু কামনা থেকে উপরে তুলুন।"},{"num":79,"ar":"ٱلْبَرُّ","tr":"আল-বার্‌র","en_mean":"The Source of All Goodness","en_desc":"Ya Barr, shower me with goodness and make me a source of good for others.","bn_mean":"সব কল্যাণের উৎস","bn_desc":"ইয়া বার্‌র, আমাকে কল্যাণে ভরিয়ে দিন এবং আমাকে অন্যদের জন্য কল্যাণের কারণ করুন।"},{"num":80,"ar":"ٱلتَّوَّابُ","tr":"আত-তাওয়াব","en_mean":"The Acceptor of Repentance","en_desc":"Ya Tawwab, accept my repentance and bring me back to You beautifully.","bn_mean":"তাওবা কবুলকারী","bn_desc":"ইয়া তাওয়াব, আমার তাওবা কবুল করুন এবং সুন্দরভাবে আমাকে আপনার দিকে ফিরিয়ে আনুন।"},{"num":81,"ar":"ٱلْمُنْتَقِمُ","tr":"আল-মুনতাকিম","en_mean":"The Avenger","en_desc":"Ya Muntaqim, grant justice against oppression and protect me from ظلم.","bn_mean":"প্রতিশোধগ্রহণকারী ন্যায়প্রতিষ্ঠাকারী","bn_desc":"ইয়া মুনতাকিম, অত্যাচারের বিরুদ্ধে ন্যায় প্রতিষ্ঠা করুন এবং আমাকে জুলুম থেকে রক্ষা করুন।"},{"num":82,"ar":"ٱلْعَفُوُّ","tr":"আল-আফুও","en_mean":"The Pardoner","en_desc":"Ya ‘Afuww, erase my sins completely and leave no trace of them upon me.","bn_mean":"সম্পূর্ণ মার্জনাকারী","bn_desc":"ইয়া আফুয়্য, আমার গুনাহ সম্পূর্ণ মুছে দিন এবং তার কোনো চিহ্ন আমার ওপর রাখবেন না।"},{"num":83,"ar":"ٱلرَّؤُوفُ","tr":"আর-রউফ","en_mean":"The Most Kind","en_desc":"Ya Ra’uf, treat me with tenderness, gentleness, and mercy.","bn_mean":"অতিশয় কোমলদয়ালু","bn_desc":"ইয়া রউফ, আমার প্রতি কোমলতা, নম্রতা এবং রহমত দিয়ে আচরণ করুন।"},{"num":84,"ar":"مَالِكُ ٱلْمُلْكِ","tr":"মালিকুল মুলক","en_mean":"Owner of All Sovereignty","en_desc":"Ya Malik-ul-Mulk, grant me only what is good from Your dominion and keep false power away from my heart.","bn_mean":"সমস্ত রাজত্বের মালিক","bn_desc":"ইয়া মালিকুল মুলক, আপনার রাজত্ব থেকে শুধু কল্যাণ দিন এবং মিথ্যা ক্ষমতার লোভ আমার হৃদয় থেকে দূর করুন।"},{"num":85,"ar":"ذُو ٱلْجَلَالِ وَٱلْإِكْرَامِ","tr":"যুল-জালালি ওয়াল-ইকরাম","en_mean":"Lord of Majesty and Honor","en_desc":"Ya Dhul-Jalali wal-Ikram, honor me with Your closeness and noble character.","bn_mean":"মহিমা ও সম্মানের অধিকারী","bn_desc":"ইয়া যুল-জালালি ওয়াল-ইকরাম, আপনার নৈকট্য ও মহৎ চরিত্র দিয়ে আমাকে সম্মানিত করুন।"},{"num":86,"ar":"ٱلْمُقْسِطُ","tr":"আল-মুকসিত","en_mean":"The Equitable","en_desc":"Ya Muqsit, place fairness and balance in my life and my decisions.","bn_mean":"ন্যায়ভাগকারী","bn_desc":"ইয়া মুকসিত, আমার জীবন ও সিদ্ধান্তে ন্যায় ও ভারসাম্য স্থাপন করুন।"},{"num":87,"ar":"ٱلْجَامِعُ","tr":"আল-জামি","en_mean":"The Gatherer","en_desc":"Ya Jami’, gather my scattered heart and unite my affairs upon good.","bn_mean":"সমবেতকারী","bn_desc":"ইয়া জামি, আমার ছড়িয়ে থাকা হৃদয় একত্র করুন এবং আমার কাজগুলো কল্যাণে মিলিয়ে দিন।"},{"num":88,"ar":"ٱلْغَنِيُّ","tr":"আল-গনি","en_mean":"The Self-Sufficient","en_desc":"Ya Ghani, enrich my heart with contentment and free me from desperate need.","bn_mean":"অমুখাপেক্ষী","bn_desc":"ইয়া গনি, আমার হৃদয়কে সন্তুষ্টিতে সমৃদ্ধ করুন এবং অপমানজনক প্রয়োজন থেকে মুক্ত করুন।"},{"num":89,"ar":"ٱلْمُغْنِي","tr":"আল-মুগনি","en_mean":"The Enricher","en_desc":"Ya Mughni, grant me sufficient halal provision and inner richness.","bn_mean":"সমৃদ্ধিদাতা","bn_desc":"ইয়া মুগনি, আমাকে যথেষ্ট হালাল রিজিক এবং অন্তরের সমৃদ্ধি দান করুন।"},{"num":90,"ar":"ٱلْمَانِعُ","tr":"আল-মানি","en_mean":"The Preventer","en_desc":"Ya Mani’, prevent from me what would harm my faith, my home, and my future.","bn_mean":"প্রতিরোধকারী","bn_desc":"ইয়া মানি, যা আমার ঈমান, ঘর এবং ভবিষ্যতের ক্ষতি করবে তা প্রতিরোধ করুন।"},{"num":91,"ar":"ٱلضَّارُ","tr":"আদ-দার","en_mean":"The Dispenser of Affliction","en_desc":"Ya Darr, keep harmful trials away from me and make me patient in what You decree.","bn_mean":"পরীক্ষা প্রদানকারী","bn_desc":"ইয়া দার, ক্ষতিকর পরীক্ষা আমার থেকে দূরে রাখুন এবং আপনার সিদ্ধান্তে আমাকে ধৈর্যশীল করুন।"},{"num":92,"ar":"ٱلنَّافِعُ","tr":"আন-নাফি","en_mean":"The Bestower of Benefit","en_desc":"Ya Nafi’, bring me benefit in my religion, my life, and my family.","bn_mean":"উপকারদানকারী","bn_desc":"ইয়া নাফি, আমার ধর্ম, জীবন এবং পরিবারে উপকার আনুন।"},{"num":93,"ar":"ٱلنُّورُ","tr":"আন-নূর","en_mean":"The Light","en_desc":"Ya Nur, illuminate my path and bring me out of darkness.","bn_mean":"নূর","bn_desc":"ইয়া নূর, আমার পথ আলোকিত করুন এবং আমাকে অন্ধকার থেকে বের করুন।"},{"num":94,"ar":"ٱلْهَادِي","tr":"আল-হাদি","en_mean":"The Guide","en_desc":"Ya Hadi, guide me to the straight path and keep me firm upon it.","bn_mean":"পথপ্রদর্শক","bn_desc":"ইয়া হাদি, আমাকে সরল পথে পরিচালিত করুন এবং তাতে দৃঢ় রাখুন।"},{"num":95,"ar":"ٱلْبَدِيعُ","tr":"আল-বাদি","en_mean":"The Incomparable Originator","en_desc":"Ya Badi’, open for me beautiful outcomes I could not have imagined.","bn_mean":"অতুলনীয় সৃষ্টিকারী","bn_desc":"ইয়া বাদি, আমার জন্য এমন সুন্দর পরিণতি খুলে দিন যা আমি কল্পনাও করতে পারিনি।"},{"num":96,"ar":"ٱلْبَاقِي","tr":"আল-বাকি","en_mean":"The Everlasting","en_desc":"Ya Baqi, make what I do for You lasting and accepted.","bn_mean":"চিরস্থায়ী","bn_desc":"ইয়া বাকি, যা আমি আপনার জন্য করি তা স্থায়ী ও কবুল করুন।"},{"num":97,"ar":"ٱلْوَارِثُ","tr":"আল-ওয়ারিস","en_mean":"The Inheritor","en_desc":"Ya Warith, leave for me what is truly beneficial when all else fades.","bn_mean":"সবকিছুর উত্তরাধিকারী","bn_desc":"ইয়া ওয়ারিস, সবকিছু হারিয়ে গেলে যা সত্যিই উপকারী তা আমার জন্য রেখে দিন।"},{"num":98,"ar":"ٱلرَّشِيدُ","tr":"আর-রশিদ","en_mean":"The Guide to the Right Way","en_desc":"Ya Rashid, direct me to what is right and keep me from misguidance.","bn_mean":"সঠিক পথে পরিচালনাকারী","bn_desc":"ইয়া রাশিদ, আমাকে সঠিক দিকে পরিচালিত করুন এবং ভ্রষ্টতা থেকে রক্ষা করুন।"},{"num":99,"ar":"ٱلصَّبُورُ","tr":"আস-সবুর","en_mean":"The Most Patient","en_desc":"Ya Sabur, give me patience without complaint and firmness without despair.","bn_mean":"অতিশয় ধৈর্যশীল","bn_desc":"ইয়া সাবুর, আমাকে অভিযোগহীন ধৈর্য এবং হতাশাহীন দৃঢ়তা দান করুন।"}];
 const meanKey = "bn_mean";
 const descKey = "bn_desc";
 let currentIndex = 0;
