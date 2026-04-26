@@ -1936,10 +1936,44 @@ html.light-mode body .category-card > .dua-body.nested-list > .empty-dua .dua-ar
 
 
 
+
+<style id="fortress-actions-style">
+body .fortress-actions{width:min(100%,760px);margin:14px auto 16px;display:grid;grid-template-columns:repeat(5,1fr);gap:8px;padding:8px;border-radius:24px;border:1px solid rgba(215,181,109,.24);background:linear-gradient(180deg,rgba(255,255,255,.055),rgba(255,255,255,.018)),linear-gradient(135deg,rgba(15,55,43,.88),rgba(10,22,23,.94));box-shadow:0 16px 36px rgba(0,0,0,.28),inset 0 1px 0 rgba(255,255,255,.06)}
+body .fortress-action{appearance:none;-webkit-appearance:none;border:1px solid rgba(215,181,109,.18);min-width:0;min-height:62px;padding:8px 6px;border-radius:18px;background:linear-gradient(180deg,rgba(215,181,109,.105),rgba(255,255,255,.025));color:#f4e3b3;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:5px;cursor:pointer;font:inherit;-webkit-tap-highlight-color:transparent;transition:transform .16s ease,border-color .2s ease,background .2s ease,color .2s ease,box-shadow .2s ease}
+body .fortress-action:active{transform:scale(.96)}
+body .fortress-action.is-active{color:#ffffff;border-color:rgba(215,181,109,.46);background:linear-gradient(180deg,rgba(215,181,109,.23),rgba(31,122,69,.13));box-shadow:inset 0 1px 0 rgba(255,255,255,.08),0 8px 18px rgba(0,0,0,.20)}
+body .fortress-action-icon{width:28px;height:28px;border-radius:999px;display:flex;align-items:center;justify-content:center}
+body .fortress-action svg{width:21px;height:21px;display:block;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+body .fortress-action[data-fortress-action="favorite"].is-active svg{fill:currentColor}
+body .fortress-action-label{max-width:100%;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;font-size:10.5px;line-height:1;font-weight:850;letter-spacing:-.025em}
+body .fortress-toast{position:fixed;left:50%;bottom:96px;transform:translateX(-50%) translateY(18px);z-index:3000;max-width:min(92vw,420px);padding:11px 14px;border-radius:999px;color:#111814;background:linear-gradient(180deg,#f0d891,#c59b46);box-shadow:0 16px 36px rgba(0,0,0,.34);font-size:13px;font-weight:900;opacity:0;pointer-events:none;transition:opacity .2s ease,transform .2s ease}
+body .fortress-toast.is-visible{opacity:1;transform:translateX(-50%) translateY(0)}
+html.light-mode body .fortress-actions{background:linear-gradient(135deg,#ffffff 0%,#f3faf5 54%,#fff7df 100%);border-color:rgba(181,138,54,.26);box-shadow:0 14px 30px rgba(18,34,24,.10),inset 0 1px 0 rgba(255,255,255,.9)}
+html.light-mode body .fortress-action{color:#1f4f32;background:linear-gradient(180deg,rgba(31,122,69,.055),rgba(181,138,54,.065));border-color:rgba(31,122,69,.12)}
+html.light-mode body .fortress-action.is-active{color:#7a5b18;border-color:rgba(181,138,54,.38);background:linear-gradient(180deg,rgba(181,138,54,.18),rgba(31,122,69,.06))}
+body.reading-mode .hero-note,body.reading-mode .fortress-actions,body.reading-mode .bottom-app-nav{display:none!important}
+body.reading-mode .container{max-width:760px!important;padding-top:18px!important;padding-bottom:42px!important}
+body.reading-mode .dua-list > .category-card:not([open]){display:none!important}
+body.reading-mode .category-card[open]{border-color:rgba(215,181,109,.52)!important}
+body.reading-mode .dua-meaning{font-size:17px!important;line-height:1.7!important}
+body.reading-mode .dua-translit{font-size:16px!important;line-height:1.65!important}
+body.reading-mode .dua-arabic{font-size:22px!important;line-height:1.85!important}
+@media(max-width:700px){body .fortress-actions{margin:12px auto 14px;gap:6px;padding:7px;border-radius:20px}body .fortress-action{min-height:54px;padding:7px 3px;border-radius:15px}body .fortress-action-icon{width:24px;height:24px}body .fortress-action svg{width:18px;height:18px}body .fortress-action-label{font-size:9.2px}body.reading-mode .dua-meaning{font-size:16px!important}body.reading-mode .dua-translit{font-size:15px!important}body.reading-mode .dua-arabic{font-size:20px!important}}
+</style>
+
 </head>
 <body>
 <div class="container">
   <h1>Крепость мусульманина</h1>
+
+  <div class="fortress-actions" aria-label="Быстрые действия">
+    <button class="fortress-action" type="button" data-fortress-action="favorite" aria-label="Добавить страницу в избранное"><span class="fortress-action-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M12 3.8l2.35 4.76 5.25.76-3.8 3.7.9 5.23L12 15.78 7.3 18.25l.9-5.23-3.8-3.7 5.25-.76L12 3.8z"/></svg></span><span class="fortress-action-label">Избранное</span></button>
+    <button class="fortress-action" type="button" data-fortress-action="share" aria-label="Поделиться этой страницей"><span class="fortress-action-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M18 8a3 3 0 1 0-2.83-4H15a3 3 0 0 0 .18 1.02L8.9 8.66A3 3 0 1 0 9 15.34l6.28 3.64A3 3 0 1 0 16 17.3l-6.28-3.64a3.1 3.1 0 0 0 0-3.32l6.28-3.64A3 3 0 0 0 18 8z"/></svg></span><span class="fortress-action-label">Поделиться</span></button>
+    <button class="fortress-action" type="button" data-fortress-action="reading" aria-label="Включить режим чтения"><span class="fortress-action-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M4 5.5A2.5 2.5 0 0 1 6.5 3H20v16H6.5A2.5 2.5 0 0 0 4 21V5.5z"/><path d="M8 7h8M8 11h7M8 15h6"/></svg></span><span class="fortress-action-label">Чтение</span></button>
+    <button class="fortress-action" type="button" data-fortress-action="save" aria-label="Сохранить место чтения"><span class="fortress-action-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M6 4.5A2.5 2.5 0 0 1 8.5 2h7A2.5 2.5 0 0 1 18 4.5V22l-6-3.4L6 22V4.5z"/></svg></span><span class="fortress-action-label">Сохранить</span></button>
+    <button class="fortress-action" type="button" data-fortress-action="theme" aria-label="Переключить тему"><span class="fortress-action-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M21 12.7A8.5 8.5 0 0 1 11.3 3 7 7 0 1 0 21 12.7z"/></svg></span><span class="fortress-action-label">Тема</span></button>
+  </div>
+
 
   <div class="hero-note">
     Ежедневные дуа, мольбы Пророка <span class="salawat-symbol">ﷺ</span> и обращения для разных жизненных ситуаций.
@@ -4005,6 +4039,29 @@ html.light-mode body .category-card > .dua-body.nested-list > .empty-dua .dua-ar
 })();
 </script>
 
+
+
+<script id="fortress-actions-script">
+(function(){
+  const FAVORITE_KEY="barakaway_fortress_ru_favorite";
+  const PROGRESS_KEY="barakaway_fortress_ru_progress";
+  const READING_KEY="barakaway_fortress_ru_reading";
+  let toastTimer=null;
+  function qs(s){return document.querySelector(s)}
+  function qsa(s){return Array.from(document.querySelectorAll(s))}
+  function showToast(message){let toast=qs(".fortress-toast");if(!toast){toast=document.createElement("div");toast.className="fortress-toast";document.body.appendChild(toast)}toast.textContent=message;toast.classList.add("is-visible");clearTimeout(toastTimer);toastTimer=setTimeout(function(){toast.classList.remove("is-visible")},1800)}
+  function setActive(action,active){const btn=qs('[data-fortress-action="'+action+'"]');if(btn)btn.classList.toggle("is-active",!!active)}
+  function getOpenIndexes(){return qsa("details.dua-card").map(function(item,index){return item.open?index:null}).filter(function(index){return index!==null})}
+  function closeAll(){qsa("details.dua-card[open]").forEach(function(item){item.open=false})}
+  function saveProgress(){const data={scrollY:window.scrollY||0,openIndexes:getOpenIndexes(),savedAt:Date.now()};localStorage.setItem(PROGRESS_KEY,JSON.stringify(data));setActive("save",true);showToast("Место чтения сохранено")}
+  function restoreProgress(){const raw=localStorage.getItem(PROGRESS_KEY);if(!raw){showToast("Сначала сохраните место чтения");return false}try{const data=JSON.parse(raw);const details=qsa("details.dua-card");closeAll();if(Array.isArray(data.openIndexes)){data.openIndexes.forEach(function(index){if(details[index])details[index].open=true})}setTimeout(function(){window.scrollTo({top:data.scrollY||0,behavior:"smooth"})},80);setActive("save",true);showToast("Место чтения открыто");return true}catch(e){showToast("Не удалось открыть сохранённое место");return false}}
+  function toggleFavorite(){const next=localStorage.getItem(FAVORITE_KEY)!=="1";localStorage.setItem(FAVORITE_KEY,next?"1":"0");setActive("favorite",next);showToast(next?"Страница добавлена в избранное":"Страница убрана из избранного")}
+  async function sharePage(){const shareData={title:"Крепость мусульманина",text:"Крепость мусульманина — ежедневные дуа и мольбы.",url:window.location.href};try{if(navigator.share){await navigator.share(shareData);showToast("Открыто меню отправки")}else if(navigator.clipboard){await navigator.clipboard.writeText(window.location.href);showToast("Ссылка скопирована")}else{showToast("Скопируйте ссылку из адресной строки")}}catch(e){if(navigator.clipboard){try{await navigator.clipboard.writeText(window.location.href);showToast("Ссылка скопирована")}catch(err){showToast("Отправка отменена")}}else{showToast("Отправка отменена")}}}
+  function toggleReading(){const enabled=!document.body.classList.contains("reading-mode");document.body.classList.toggle("reading-mode",enabled);localStorage.setItem(READING_KEY,enabled?"1":"0");setActive("reading",enabled);showToast(enabled?"Режим чтения включён":"Режим чтения выключен")}
+  function toggleTheme(){const root=document.documentElement;const currentlyLight=root.classList.contains("light-mode");root.classList.remove("light-mode","dark-mode");if(currentlyLight){root.classList.add("dark-mode");localStorage.setItem("siteTheme","dark");showToast("Тёмная тема")}else{root.classList.add("light-mode");localStorage.setItem("siteTheme","light");showToast("Светлая тема")}}
+  document.addEventListener("DOMContentLoaded",function(){setActive("favorite",localStorage.getItem(FAVORITE_KEY)==="1");setActive("save",!!localStorage.getItem(PROGRESS_KEY));if(localStorage.getItem(READING_KEY)==="1"){document.body.classList.add("reading-mode");setActive("reading",true)}qsa(".fortress-action").forEach(function(btn){btn.addEventListener("click",function(){const action=btn.getAttribute("data-fortress-action");if(action==="favorite")toggleFavorite();if(action==="share")sharePage();if(action==="reading")toggleReading();if(action==="save"){const hasSaved=!!localStorage.getItem(PROGRESS_KEY);if(hasSaved&&getOpenIndexes().length===0){restoreProgress()}else{saveProgress()}}if(action==="theme")toggleTheme()})})});
+})();
+</script>
 
 <script src="/bottom-nav.js"></script>
 </body>
