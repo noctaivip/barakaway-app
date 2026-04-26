@@ -1749,67 +1749,116 @@ html.light-mode .dua-list > .category-card > summary.dua-head .dua-arrow{
 <link rel="stylesheet" href="/theme-universal.css">
 
 <style id="fortress-live-final-overrides">
-/* === LIVE FINAL OVERRIDES: loaded after external theme CSS === */
+/* === LIVE FINAL OVERRIDES: refined institutional gold accents === */
 
-/* Page title */
+/* Main page title: premium white, not gold-heavy */
 body .container > h1{
-  color:#f0d891 !important;
+  color:#ffffff !important;
   text-shadow:
-    0 1px 2px rgba(0,0,0,.55),
-    0 0 18px rgba(215,181,109,.22) !important;
+    0 1px 2px rgba(0,0,0,.58),
+    0 0 18px rgba(255,255,255,.08) !important;
+  letter-spacing:-.035em !important;
+}
+
+body .container > h1::after{
+  content:"";
+  display:block;
+  width:74px;
+  height:2px;
+  margin:10px auto 0;
+  border-radius:999px;
+  background:linear-gradient(90deg,transparent,#d7b56d,transparent);
+  opacity:.88;
 }
 
 html.light-mode body .container > h1{
+  color:#142019 !important;
+  text-shadow:none !important;
+}
+
+html.light-mode body .container > h1::after{
+  background:linear-gradient(90deg,transparent,#8a681f,transparent);
+}
+
+/* Salawat symbol ﷺ: gold accent wherever it appears in heading/description/menu */
+body .salawat-symbol{
+  color:#f0d891 !important;
+  font-weight:900 !important;
+  text-shadow:
+    0 0 12px rgba(215,181,109,.36),
+    0 1px 2px rgba(0,0,0,.45) !important;
+  display:inline-block;
+  transform:translateY(-1px);
+}
+
+html.light-mode body .salawat-symbol{
   color:#8a681f !important;
   text-shadow:none !important;
 }
 
-/* Main 9 accordion sections: keep green background, add balanced gold accents */
+/* Hero description: keep calm, only the ﷺ symbol is gold */
+body .hero-note{
+  color:#d9eadf !important;
+  text-shadow:0 1px 2px rgba(0,0,0,.28) !important;
+}
+
+html.light-mode body .hero-note{
+  color:#526158 !important;
+  text-shadow:none !important;
+}
+
+/* Main 9 accordion sections: balanced hierarchy */
 body .dua-list > .category-card > summary.dua-head .dua-title{
-  color:#fff4d7 !important;
+  color:#ffffff !important;
   font-weight:900 !important;
   text-shadow:
     0 1px 2px rgba(0,0,0,.45),
-    0 0 10px rgba(215,181,109,.16) !important;
+    0 0 8px rgba(255,255,255,.05) !important;
 }
 
+/* The small subtitles: requested gold */
 body .dua-list > .category-card > summary.dua-head .dua-small{
   color:#d7b56d !important;
   font-weight:850 !important;
   opacity:1 !important;
-  text-shadow:0 1px 2px rgba(0,0,0,.38) !important;
+  text-shadow:
+    0 1px 2px rgba(0,0,0,.38),
+    0 0 10px rgba(215,181,109,.12) !important;
 }
 
+/* Right arrows on main sections: requested gold */
 body .dua-list > .category-card > summary.dua-head .dua-arrow{
   color:#f0d891 !important;
   font-weight:900 !important;
   text-shadow:
-    0 0 12px rgba(215,181,109,.50),
+    0 0 12px rgba(215,181,109,.44),
     0 1px 2px rgba(0,0,0,.35) !important;
 }
 
-/* Prophet ﷺ symbol inherits gold tone clearly */
-body .dua-list > .category-card > summary.dua-head .dua-title,
-body .dua-list > .category-card > summary.dua-head .dua-title *{
-  color:#fff4d7 !important;
-}
-
-/* Main cards premium frame */
+/* Main card frame: subtle premium gold, not overloaded */
 body .dua-list > .category-card{
   border-color:rgba(215,181,109,.36) !important;
 }
 
 body .dua-list > .category-card > summary.dua-head{
-  border-color:rgba(215,181,109,.34) !important;
+  border-color:rgba(215,181,109,.30) !important;
 }
 
-body .dua-list > .category-card[open] > summary.dua-head .dua-title,
+body .dua-list > .category-card[open]{
+  border-color:rgba(240,216,145,.46) !important;
+  box-shadow:
+    0 22px 52px rgba(0,0,0,.50),
+    0 0 0 1px rgba(240,216,145,.10),
+    inset 0 1px 0 rgba(255,255,255,.06) !important;
+}
+
 body .dua-list > .category-card[open] > summary.dua-head .dua-small,
-body .dua-list > .category-card[open] > summary.dua-head .dua-arrow{
+body .dua-list > .category-card[open] > summary.dua-head .dua-arrow,
+body .dua-list > .category-card[open] > summary.dua-head .salawat-symbol{
   color:#f6dfa2 !important;
 }
 
-/* Inner second-level items: keep black-gold style after external CSS */
+/* Inner second-level items: preserve black-gold system after external CSS */
 body .category-card > .dua-body.nested-list > .nested-dua,
 body .category-card > .dua-body.nested-list > .empty-dua{
   background:
@@ -1836,9 +1885,8 @@ body .category-card > .dua-body.nested-list > .empty-dua .dua-arrow{
 }
 
 /* Light mode controlled */
-html.light-mode body .dua-list > .category-card > summary.dua-head .dua-title,
-html.light-mode body .dua-list > .category-card > summary.dua-head .dua-title *{
-  color:#745416 !important;
+html.light-mode body .dua-list > .category-card > summary.dua-head .dua-title{
+  color:#142019 !important;
   text-shadow:none !important;
 }
 
@@ -1871,6 +1919,11 @@ html.light-mode body .category-card > .dua-body.nested-list > .empty-dua .dua-ar
     line-height:1.15 !important;
   }
 
+  body .container > h1::after{
+    width:62px;
+    margin-top:8px;
+  }
+
   body .dua-list > .category-card > summary.dua-head .dua-title{
     font-size:15.8px !important;
   }
@@ -1881,20 +1934,22 @@ html.light-mode body .category-card > .dua-body.nested-list > .empty-dua .dua-ar
 }
 </style>
 
+
+
 </head>
 <body>
 <div class="container">
   <h1>Крепость мусульманина</h1>
 
   <div class="hero-note">
-    Ежедневные дуа, мольбы Пророка ﷺ и обращения для разных жизненных ситуаций.
+    Ежедневные дуа, мольбы Пророка <span class="salawat-symbol">ﷺ</span> и обращения для разных жизненных ситуаций.
   </div>
 
       <details class="dua-card category-card prophet-category">
         <summary class="dua-head">
           <div class="dua-index">1</div>
           <div class="dua-meta">
-            <div class="dua-title">Мольбы Пророка ﷺ</div>
+            <div class="dua-title">Мольбы Пророка <span class="salawat-symbol">ﷺ</span></div>
             <div class="dua-small">9 сильных мольб внутри</div>
           </div>
           <div class="dua-arrow">▾</div>
