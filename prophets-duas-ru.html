@@ -9,223 +9,496 @@ In the name of Allah, the Most Merciful, the Most Compassionate
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Мольбы пророка ﷺ — BarakaWay</title>
 <style>
+:root{
+  --bg:#f5f7f8;
+  --text:#1f2a22;
+  --muted:#66726b;
+  --card:#ffffff;
+  --card-soft:#f7faf8;
+  --border:#dfe9e3;
+  --border-soft:#edf3ef;
+  --green:#2d7a46;
+  --green-2:#3fa260;
+  --gold:#c79a3c;
+  --gold-soft:#fff4dc;
+  --deep:#101816;
+  --shadow:0 22px 60px rgba(16,40,26,.10);
+}
+
+html.dark-mode{
+  --bg:#101418;
+  --text:#eef5f0;
+  --muted:#cbd5df;
+  --card:#171d24;
+  --card-soft:#12191d;
+  --border:#29363a;
+  --border-soft:#243039;
+  --green:#4caf6a;
+  --green-2:#63c982;
+  --gold:#d7b56d;
+  --gold-soft:#2a2417;
+  --deep:#0d1215;
+  --shadow:0 30px 80px rgba(0,0,0,.48);
+}
+
+html.light-mode{
+  --bg:#f5f7f8;
+  --text:#1f2a22;
+  --muted:#66726b;
+  --card:#ffffff;
+  --card-soft:#f7faf8;
+  --border:#dfe9e3;
+  --border-soft:#edf3ef;
+  --green:#2d7a46;
+  --green-2:#3fa260;
+  --gold:#b4872e;
+  --gold-soft:#fff4dc;
+  --deep:#101816;
+  --shadow:0 22px 60px rgba(16,40,26,.10);
+}
+
+*{
+  box-sizing:border-box;
+}
+
 body{
   margin:0;
   font-family:system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
-  background:#f5f7f8;
-  color:#1f2a22;
+  background:
+    radial-gradient(circle at 50% -12%, rgba(45,122,70,.18), transparent 35%),
+    linear-gradient(180deg,var(--bg) 0%, #eef4f0 100%);
+  color:var(--text);
   line-height:1.7;
+  min-height:100vh;
 }
+
+html.dark-mode body{
+  background:
+    radial-gradient(circle at 50% -12%, rgba(45,122,70,.22), transparent 35%),
+    linear-gradient(180deg,#101418 0%, #0c1114 100%);
+}
+
 .container{
   max-width:980px;
   margin:0 auto;
-  background:white;
-  padding:40px 28px 44px;
-  box-shadow:0 6px 16px rgba(0,0,0,0.05);
+  background:transparent;
+  padding:28px 18px 96px;
+  box-shadow:none;
 }
+
 h1{
   text-align:center;
-  font-size:40px;
-  margin:0 0 10px;
-  letter-spacing:-0.02em;
+  font-size:34px;
+  line-height:1.12;
+  margin:4px 0 10px;
+  letter-spacing:-.03em;
+  font-weight:900;
+  color:var(--gold);
+  text-shadow:0 12px 28px rgba(0,0,0,.18);
 }
+
 .subtitle{
-  text-align:center;
-  color:#666;
-  margin:0 0 12px;
-  letter-spacing:1.6px;
-  font-size:13px;
-  text-transform:uppercase;
+  display:none;
 }
+
 .hero-note{
   max-width:860px;
-  margin:0 auto 28px;
+  margin:0 auto 22px;
   text-align:center;
-  color:#4d5d53;
-  font-size:17px;
+  color:var(--muted);
+  font-size:16px;
+  font-weight:650;
 }
+
 .hero-note strong{
-  color:#1f2a22;
+  color:var(--text);
 }
+
 .hero-panel{
   max-width:860px;
-  margin:0 auto 30px;
-  background:linear-gradient(180deg,#f4faf6 0%, #eef5f1 100%);
-  border:1px solid #dfe9e3;
-  border-radius:22px;
-  padding:22px;
+  margin:0 auto 24px;
+  background:
+    radial-gradient(circle at 10% 0%, rgba(199,154,60,.14), transparent 32%),
+    linear-gradient(180deg,var(--card) 0%, var(--card-soft) 100%);
+  border:1px solid rgba(199,154,60,.20);
+  border-radius:24px;
+  padding:18px;
+  box-shadow:var(--shadow);
 }
+
 .hero-grid{
   display:grid;
   grid-template-columns:repeat(3,minmax(0,1fr));
-  gap:12px;
+  gap:10px;
 }
+
 .hero-stat{
-  background:white;
-  border:1px solid #e5ece7;
-  border-radius:16px;
-  padding:16px;
+  background:linear-gradient(180deg,rgba(255,255,255,.06),rgba(45,122,70,.05));
+  border:1px solid var(--border);
+  border-radius:18px;
+  padding:14px;
 }
+
 .hero-stat-label{
-  font-size:12px;
+  font-size:11px;
   text-transform:uppercase;
   letter-spacing:1.1px;
-  color:#6a7a70;
-  margin-bottom:6px;
-  font-weight:700;
+  color:var(--muted);
+  margin-bottom:5px;
+  font-weight:850;
 }
+
 .hero-stat-value{
-  font-size:18px;
-  font-weight:800;
-  color:#1f2a22;
+  font-size:17px;
+  line-height:1.25;
+  font-weight:900;
+  color:var(--text);
 }
+
 .section{
-  margin-top:34px;
+  margin-top:24px;
 }
+
 .section h2{
-  font-size:23px;
-  border-left:4px solid #2d7a46;
+  font-size:22px;
+  line-height:1.2;
+  color:var(--text);
+  border-left:4px solid var(--green);
   padding-left:12px;
   margin:0 0 16px;
 }
+
 .note{
-  background:#eef5f1;
-  border:1px solid #dfe9e3;
-  padding:22px;
-  border-radius:18px;
-  color:#415449;
+  background:linear-gradient(180deg,rgba(45,122,70,.08),rgba(199,154,60,.07));
+  border:1px solid var(--border);
+  padding:18px;
+  border-radius:20px;
+  color:var(--muted);
 }
+
 .note p{
   margin:0 0 12px;
 }
+
 .note p:last-child{
   margin-bottom:0;
 }
+
 .dua-list{
   display:grid;
-  gap:18px;
-}
-.dua-card{
-  background:#fafafa;
-  border:1px solid #e5ece7;
-  border-radius:20px;
-  padding:22px;
-  box-shadow:0 4px 10px rgba(0,0,0,0.03);
-}
-.dua-head{
-  display:flex;
-  align-items:flex-start;
-  justify-content:space-between;
   gap:14px;
-  margin-bottom:16px;
 }
+
+.dua-card{
+  position:relative;
+  overflow:hidden;
+  background:
+    radial-gradient(circle at 8% 0%, rgba(199,154,60,.12), transparent 30%),
+    radial-gradient(circle at 92% 0%, rgba(45,122,70,.12), transparent 30%),
+    linear-gradient(180deg,var(--card) 0%, var(--card-soft) 100%);
+  border:1px solid rgba(199,154,60,.20);
+  border-radius:24px;
+  padding:0;
+  box-shadow:var(--shadow);
+}
+
+.dua-card::before{
+  content:"";
+  position:absolute;
+  inset:0;
+  background:linear-gradient(90deg,transparent 0%,rgba(199,154,60,.08) 50%,transparent 100%);
+  pointer-events:none;
+}
+
+.dua-card summary.dua-head{
+  list-style:none;
+  cursor:pointer;
+  display:grid;
+  grid-template-columns:46px 1fr 24px;
+  align-items:center;
+  gap:12px;
+  margin:0;
+  padding:16px;
+  position:relative;
+  z-index:1;
+  border-bottom:1px solid transparent;
+}
+
+.dua-card[open] summary.dua-head{
+  border-bottom:1px solid rgba(199,154,60,.16);
+}
+
+.dua-card summary.dua-head::-webkit-details-marker{
+  display:none;
+}
+
 .dua-index{
-  min-width:44px;
-  width:44px;
-  height:44px;
+  min-width:42px;
+  width:42px;
+  height:42px;
   border-radius:999px;
-  background:#2d7a46;
+  background:linear-gradient(180deg,var(--green-2),var(--green));
   color:white;
   display:flex;
   align-items:center;
   justify-content:center;
-  font-weight:800;
-  font-size:15px;
+  font-weight:900;
+  font-size:14px;
+  box-shadow:0 10px 24px rgba(45,122,70,.20);
 }
+
 .dua-meta{
-  flex:1;
+  min-width:0;
 }
+
 .dua-title{
-  font-size:19px;
-  font-weight:800;
-  color:#1f2a22;
-  margin:0 0 5px;
-}
-.dua-ref{
-  font-size:13px;
-  color:#5a6b60;
-}
-.dua-arabic{
-  font-size:39px;
-  line-height:1.95;
-  text-align:right;
-  font-weight:700;
-  margin:0 0 14px;
-  word-break:break-word;
-}
-.field-label{
-  font-size:12px;
-  font-weight:800;
-  letter-spacing:1.2px;
-  text-transform:uppercase;
-  color:#6a7a70;
-  margin-bottom:6px;
-}
-.dua-translit{
-  font-size:16px;
-  color:#3d5345;
-  font-style:italic;
-  margin:0 0 14px;
-}
-.dua-meaning{
   font-size:17px;
-  color:#222;
-  margin:0;
+  line-height:1.25;
+  font-weight:900;
+  color:var(--text);
+  margin:0 0 4px;
 }
+
+.dua-ref{
+  display:inline-flex;
+  max-width:100%;
+  font-size:12px;
+  line-height:1.35;
+  color:var(--muted);
+  background:linear-gradient(180deg,rgba(199,154,60,.10),rgba(45,122,70,.05));
+  border:1px solid rgba(199,154,60,.18);
+  border-radius:999px;
+  padding:5px 9px;
+  font-weight:700;
+}
+
+.dua-arrow{
+  color:var(--green);
+  font-size:16px;
+  transform:rotate(0deg);
+  transition:transform .2s ease;
+  justify-self:end;
+}
+
+.dua-card[open] .dua-arrow{
+  transform:rotate(180deg);
+}
+
+.dua-body{
+  position:relative;
+  z-index:1;
+  padding:0 16px 16px;
+}
+
+.dua-arabic{
+  font-size:25px;
+  line-height:1.85;
+  text-align:right;
+  font-weight:750;
+  margin:14px 0 14px;
+  word-break:break-word;
+  direction:rtl;
+  color:var(--gold);
+  background:
+    linear-gradient(180deg,rgba(199,154,60,.10),rgba(45,122,70,.06));
+  border:1px solid rgba(199,154,60,.16);
+  border-radius:18px;
+  padding:14px;
+}
+
+html.dark-mode .dua-arabic{
+  color:#e4c27a;
+}
+
+.field-label{
+  font-size:11px;
+  font-weight:900;
+  letter-spacing:1.1px;
+  text-transform:uppercase;
+  color:var(--gold);
+  margin:14px 0 6px;
+}
+
+.dua-translit{
+  font-size:15px;
+  line-height:1.6;
+  color:var(--muted);
+  font-style:italic;
+  margin:0 0 12px;
+  background:rgba(45,122,70,.06);
+  border:1px solid rgba(45,122,70,.12);
+  border-radius:15px;
+  padding:12px;
+}
+
+.dua-meaning{
+  font-size:16px;
+  line-height:1.65;
+  color:var(--text);
+  margin:0;
+  background:rgba(255,255,255,.04);
+  border:1px solid var(--border-soft);
+  border-radius:15px;
+  padding:12px;
+}
+
 .badges{
   display:flex;
   flex-wrap:wrap;
-  gap:8px;
-  margin-top:14px;
+  gap:7px;
+  margin-top:12px;
 }
+
 .badge{
   display:inline-flex;
   align-items:center;
-  min-height:30px;
-  padding:6px 10px;
+  min-height:28px;
+  padding:5px 9px;
   border-radius:999px;
-  background:#eef5f1;
-  border:1px solid #dfe9e3;
-  color:#2d7a46;
-  font-size:12px;
-  font-weight:800;
+  background:linear-gradient(180deg,rgba(45,122,70,.10),rgba(199,154,60,.06));
+  border:1px solid rgba(45,122,70,.14);
+  color:var(--green);
+  font-size:11px;
+  font-weight:900;
 }
+
+.page-actions{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:10px;
+  margin:24px auto 0;
+  max-width:680px;
+}
+
+.page-actions a,
+.link a{
+  min-height:46px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  text-align:center;
+  color:white;
+  background:linear-gradient(180deg,var(--green-2),var(--green));
+  text-decoration:none;
+  font-weight:900;
+  border-radius:16px;
+  padding:10px 14px;
+  box-shadow:0 12px 26px rgba(45,122,70,.20);
+}
+
+.page-actions a.secondary{
+  color:var(--text);
+  background:linear-gradient(180deg,rgba(199,154,60,.12),rgba(45,122,70,.08));
+  border:1px solid rgba(199,154,60,.20);
+  box-shadow:none;
+}
+
 .link{
   text-align:center;
   margin-top:38px;
 }
-.link a{
-  color:#2d7a46;
-  text-decoration:none;
-  font-weight:800;
-}
+
 @media (max-width:760px){
   .hero-grid{
     grid-template-columns:1fr;
   }
 }
+
 @media (max-width:700px){
   .container{
-    padding:28px 16px 34px;
+    padding:22px 10px 92px;
   }
+
   h1{
-    font-size:33px;
+    font-size:28px;
+    margin-top:2px;
   }
+
   .hero-note{
-    font-size:16px;
+    font-size:14px;
+    line-height:1.55;
+    margin-bottom:18px;
   }
-  .dua-head{
-    align-items:center;
+
+  .section{
+    margin-top:20px;
   }
+
+  .section h2{
+    font-size:19px;
+  }
+
+  .dua-list{
+    gap:12px;
+  }
+
+  .dua-card{
+    border-radius:21px;
+  }
+
+  .dua-card summary.dua-head{
+    grid-template-columns:40px 1fr 20px;
+    gap:10px;
+    padding:14px 12px;
+  }
+
+  .dua-index{
+    width:38px;
+    min-width:38px;
+    height:38px;
+    font-size:13px;
+  }
+
   .dua-title{
-    font-size:17px;
+    font-size:15.5px;
   }
+
+  .dua-ref{
+    font-size:11px;
+    border-radius:14px;
+    padding:4px 8px;
+  }
+
+  .dua-body{
+    padding:0 12px 14px;
+  }
+
   .dua-arabic{
-    font-size:30px;
-    line-height:1.85;
+    font-size:21px;
+    line-height:1.75;
+    padding:12px;
+    border-radius:16px;
   }
+
+  .field-label{
+    font-size:10.5px;
+    margin-top:12px;
+  }
+
+  .dua-translit{
+    font-size:13.5px;
+    line-height:1.5;
+    padding:10px;
+  }
+
   .dua-meaning{
-    font-size:16px;
+    font-size:14px;
+    line-height:1.55;
+    padding:10px;
+  }
+
+  .badges{
+    gap:6px;
+  }
+
+  .badge{
+    font-size:10.5px;
+    min-height:26px;
+  }
+
+  .page-actions{
+    grid-template-columns:1fr;
+    gap:8px;
   }
 }
 </style>
@@ -245,151 +518,183 @@ h1{
     <h2>Собрание дуа</h2>
     <div class="dua-list">
 
-      <article class="dua-card">
-        <div class="dua-head">
+      <details class="dua-card" open>
+        <summary class="dua-head">
           <div class="dua-index">1</div>
           <div class="dua-meta">
             <div class="dua-title">О прощении</div>
             <div class="dua-ref">Источник: Ибн Маджа 3850 / Ат-Тирмизи — дуа на Ляйлятуль-Кадр</div>
           </div>
-        </div>
+          <div class="dua-arrow">▾</div>
+        </summary>
+        <div class="dua-body">
         <div class="dua-arabic">اللَّهُمَّ إِنَّكَ عَفُوٌّ تُحِبُّ الْعَفْوَ فَاعْفُ عَنِّي</div>
         <div class="field-label">Транскрипция</div>
         <div class="dua-translit">Allahumma innaka ‘afuwwun tuhibbul-‘afwa fa‘fu ‘anni.</div>
         <div class="field-label">Перевод</div>
         <p class="dua-meaning">О Аллах, поистине, Ты — Прощающий, любишь прощение, так прости же меня.</p>
         <div class="badges"><span class="badge">Прощение</span><span class="badge">Покаяние</span></div>
-      </article>
+        </div>
+      </details>
 
-      <article class="dua-card">
-        <div class="dua-head">
+      <details class="dua-card">
+        <summary class="dua-head">
           <div class="dua-index">2</div>
           <div class="dua-meta">
             <div class="dua-title">О прощении и благополучии</div>
             <div class="dua-ref">Источник: Ибн Маджа 3871 / утреннее и вечернее дуа</div>
           </div>
-        </div>
+          <div class="dua-arrow">▾</div>
+        </summary>
+        <div class="dua-body">
         <div class="dua-arabic">اللَّهُمَّ إِنِّي أَسْأَلُكَ الْعَفْوَ وَالْعَافِيَةَ فِي الدُّنْيَا وَالْآخِرَةِ، اللَّهُمَّ إِنِّي أَسْأَلُكَ الْعَفْوَ وَالْعَافِيَةَ فِي دِينِي وَدُنْيَايَ وَأَهْلِي وَمَالِي، اللَّهُمَّ اسْتُرْ عَوْرَاتِي وَآمِنْ رَوْعَاتِي، وَاحْفَظْنِي مِنْ بَيْنِ يَدَيَّ وَمِنْ خَلْفِي وَعَنْ يَمِينِي وَعَنْ شِمَالِي وَمِنْ فَوْقِي، وَأَعُوذُ بِعَظَمَتِكَ أَنْ أُغْتَالَ مِنْ تَحْتِي</div>
         <div class="field-label">Транскрипция</div>
         <div class="dua-translit">Allahumma inni as’alukal-‘afwa wal-‘afiyata fid-dunya wal-akhirah. Allahumma inni as’alukal-‘afwa wal-‘afiyata fi dini wa dunyaya wa ahli wa mali. Allahummastur ‘awrati wa amin raw‘ati wahfazni min bayni yadayya wa min khalfi wa ‘an yamini wa ‘an shimali wa min fawqi, wa a‘udhu bi ‘azamatika an ughtala min tahti.</div>
         <div class="field-label">Перевод</div>
         <p class="dua-meaning">О Аллах, я прошу у Тебя прощения и благополучия в этом мире и в Последней жизни. О Аллах, я прошу у Тебя прощения и благополучия в моей религии, в моей мирской жизни, в моей семье и в моём имуществе. О Аллах, покрой мои недостатки, успокой мои страхи и охрани меня спереди, сзади, справа, слева и сверху, и я прибегаю к Твоему величию от того, чтобы быть внезапно погубленным снизу.</p>
         <div class="badges"><span class="badge">Благополучие</span><span class="badge">Защита</span><span class="badge">Семья и имущество</span></div>
-      </article>
+        </div>
+      </details>
 
-      <article class="dua-card">
-        <div class="dua-head">
+      <details class="dua-card">
+        <summary class="dua-head">
           <div class="dua-index">3</div>
           <div class="dua-meta">
             <div class="dua-title">О полезном знании, хорошем уделе и принятом деле</div>
             <div class="dua-ref">Источник: Ибн Маджа 925 / после утреннего намаза</div>
           </div>
-        </div>
+          <div class="dua-arrow">▾</div>
+        </summary>
+        <div class="dua-body">
         <div class="dua-arabic">اللَّهُمَّ إِنِّي أَسْأَلُكَ عِلْمًا نَافِعًا، وَرِزْقًا طَيِّبًا، وَعَمَلًا مُتَقَبَّلًا</div>
         <div class="field-label">Транскрипция</div>
         <div class="dua-translit">Allahumma inni as’aluka ‘ilman nafi‘an, wa rizqan tayyiban, wa ‘amalan mutaqabbalan.</div>
         <div class="field-label">Перевод</div>
         <p class="dua-meaning">О Аллах, прошу у Тебя полезного знания, благого удела и принятого деяния.</p>
         <div class="badges"><span class="badge">Знание</span><span class="badge">Ризк</span><span class="badge">Принятие дел</span></div>
-      </article>
+        </div>
+      </details>
 
-      <article class="dua-card">
-        <div class="dua-head">
+      <details class="dua-card">
+        <summary class="dua-head">
           <div class="dua-index">4</div>
           <div class="dua-meta">
             <div class="dua-title">О руководстве, богобоязненности, целомудрии и самодостаточности</div>
             <div class="dua-ref">Источник: Сахих Муслим / Рияд ас-Салихин 1468</div>
           </div>
-        </div>
+          <div class="dua-arrow">▾</div>
+        </summary>
+        <div class="dua-body">
         <div class="dua-arabic">اللَّهُمَّ إِنِّي أَسْأَلُكَ الْهُدَى وَالتُّقَى وَالْعَفَافَ وَالْغِنَى</div>
         <div class="field-label">Транскрипция</div>
         <div class="dua-translit">Allahumma inni as’alukal-huda wat-tuqa wal-‘afafa wal-ghina.</div>
         <div class="field-label">Перевод</div>
         <p class="dua-meaning">О Аллах, я прошу у Тебя правильного пути, богобоязненности, целомудрия и самодостаточности.</p>
         <div class="badges"><span class="badge">Руководство</span><span class="badge">Така</span><span class="badge">Самодостаточность</span></div>
-      </article>
+        </div>
+      </details>
 
-      <article class="dua-card">
-        <div class="dua-head">
+      <details class="dua-card">
+        <summary class="dua-head">
           <div class="dua-index">5</div>
           <div class="dua-meta">
             <div class="dua-title">О достаточности дозволенным и независимости от людей</div>
             <div class="dua-ref">Источник: Ат-Тирмизи / Рияд ас-Салихин 1486</div>
           </div>
-        </div>
+          <div class="dua-arrow">▾</div>
+        </summary>
+        <div class="dua-body">
         <div class="dua-arabic">اللَّهُمَّ اكْفِنِي بِحَلَالِكَ عَنْ حَرَامِكَ، وَأَغْنِنِي بِفَضْلِكَ عَمَّنْ سِوَاكَ</div>
         <div class="field-label">Транскрипция</div>
         <div class="dua-translit">Allahumm-akfini bihalalika ‘an haramika, wa aghnini bifadlika ‘amman siwaka.</div>
         <div class="field-label">Перевод</div>
         <p class="dua-meaning">О Аллах, сделай для меня достаточным дозволенное Тобой вместо запретного и обогати меня Своей милостью так, чтобы я ни в ком, кроме Тебя, не нуждался.</p>
         <div class="badges"><span class="badge">Халяльный удел</span><span class="badge">Независимость</span><span class="badge">Финансовое облегчение</span></div>
-      </article>
+        </div>
+      </details>
 
-      <article class="dua-card">
-        <div class="dua-head">
+      <details class="dua-card">
+        <summary class="dua-head">
           <div class="dua-index">6</div>
           <div class="dua-meta">
             <div class="dua-title">От тревоги, слабости и долгов</div>
             <div class="dua-ref">Источник: ан-Насаи 5449 / аль-Бухари через Хисн аль-Муслим 121</div>
           </div>
-        </div>
+          <div class="dua-arrow">▾</div>
+        </summary>
+        <div class="dua-body">
         <div class="dua-arabic">اللَّهُمَّ إِنِّي أَعُوذُ بِكَ مِنَ الْهَمِّ وَالْحَزَنِ، وَالْعَجْزِ وَالْكَسَلِ، وَالْبُخْلِ وَالْجُبْنِ، وَضَلَعِ الدَّيْنِ، وَغَلَبَةِ الرِّجَالِ</div>
         <div class="field-label">Транскрипция</div>
         <div class="dua-translit">Allahumma inni a‘udhu bika minal-hammi wal-hazan, wal-‘ajzi wal-kasal, wal-bukhli wal-jubn, wa dala‘id-dayn, wa ghalabatir-rijal.</div>
         <div class="field-label">Перевод</div>
         <p class="dua-meaning">О Аллах, прибегаю к Тебе от тревоги и печали, от слабости и лени, от скупости и трусости, от бремени долга и от притеснения людей.</p>
         <div class="badges"><span class="badge">Долги</span><span class="badge">Тревога</span><span class="badge">Защита от слабости</span></div>
-      </article>
+        </div>
+      </details>
 
-      <article class="dua-card">
-        <div class="dua-head">
+      <details class="dua-card">
+        <summary class="dua-head">
           <div class="dua-index">7</div>
           <div class="dua-meta">
             <div class="dua-title">О благе в этом мире и в ахира</div>
             <div class="dua-ref">Источник: аль-Бухари и Муслим / Рияд ас-Салихин 1467</div>
           </div>
-        </div>
+          <div class="dua-arrow">▾</div>
+        </summary>
+        <div class="dua-body">
         <div class="dua-arabic">اللَّهُمَّ آتِنَا فِي الدُّنْيَا حَسَنَةً وَفِي الْآخِرَةِ حَسَنَةً وَقِنَا عَذَابَ النَّارِ</div>
         <div class="field-label">Транскрипция</div>
         <div class="dua-translit">Allahumma atina fid-dunya hasanatan, wa fil-akhirati hasanatan, wa qina ‘adhaban-nar.</div>
         <div class="field-label">Перевод</div>
         <p class="dua-meaning">О Аллах, даруй нам благо в этом мире, благо в Последней жизни и защити нас от наказания Огня.</p>
         <div class="badges"><span class="badge">Общее благо</span><span class="badge">Дунья и Ахира</span></div>
-      </article>
+        </div>
+      </details>
 
-      <article class="dua-card">
-        <div class="dua-head">
+      <details class="dua-card">
+        <summary class="dua-head">
           <div class="dua-index">8</div>
           <div class="dua-meta">
             <div class="dua-title">О сохранении милостей и благополучия</div>
             <div class="dua-ref">Источник: Сахих Муслим / Рияд ас-Салихин 1478</div>
           </div>
-        </div>
+          <div class="dua-arrow">▾</div>
+        </summary>
+        <div class="dua-body">
         <div class="dua-arabic">اللَّهُمَّ إِنِّي أَعُوذُ بِكَ مِنْ زَوَالِ نِعْمَتِكَ، وَتَحَوُّلِ عَافِيَتِكَ، وَفُجَاءَةِ نِقْمَتِكَ، وَجَمِيعِ سَخَطِكَ</div>
         <div class="field-label">Транскрипция</div>
         <div class="dua-translit">Allahumma inni a‘udhu bika min zawali ni‘matika, wa tahawwuli ‘afiyatika, wa fuja’ati niqmatika, wa jami‘i sakhatika.</div>
         <div class="field-label">Перевод</div>
         <p class="dua-meaning">О Аллах, прибегаю к Тебе от исчезновения Твоей милости, от ухода благополучия, от внезапности Твоего наказания и от всего, что вызывает Твой гнев.</p>
         <div class="badges"><span class="badge">Сохранение милостей</span><span class="badge">Благополучие</span><span class="badge">Защита</span></div>
-      </article>
+        </div>
+      </details>
 
-      <article class="dua-card">
-        <div class="dua-head">
+      <details class="dua-card">
+        <summary class="dua-head">
           <div class="dua-index">9</div>
           <div class="dua-meta">
             <div class="dua-title">От огня, могилы и смут</div>
             <div class="dua-ref">Источник: Сахих Муслим / Рияд ас-Салихин 1423</div>
           </div>
-        </div>
+          <div class="dua-arrow">▾</div>
+        </summary>
+        <div class="dua-body">
         <div class="dua-arabic">اللَّهُمَّ إِنِّي أَعُوذُ بِكَ مِنْ عَذَابِ جَهَنَّمَ، وَمِنْ عَذَابِ الْقَبْرِ، وَمِنْ فِتْنَةِ الْمَحْيَا وَالْمَمَاتِ، وَمِنْ شَرِّ فِتْنَةِ الْمَسِيحِ الدَّجَّالِ</div>
         <div class="field-label">Транскрипция</div>
         <div class="dua-translit">Allahumma inni a‘udhu bika min ‘adhabi jahannam, wa min ‘adhabil-qabr, wa min fitnatil-mahya wal-mamat, wa min sharri fitnatil-masihid-dajjal.</div>
         <div class="field-label">Перевод</div>
         <p class="dua-meaning">О Аллах, прибегаю к Тебе от мучения Ада, от мучения могилы, от испытаний жизни и смерти и от зла смуты Масиха ад-Даджаля.</p>
         <div class="badges"><span class="badge">Защита</span><span class="badge">Ахира</span><span class="badge">Смуты</span></div>
-      </article>
+        </div>
+      </details>
 
     </div>
+  </div>
+
+  <div class="page-actions">
+    <a class="secondary" href="home-ru.html">← Вернуться на главную</a>
+    <a href="duas-ru.html">Все дуа →</a>
   </div>
 
 </div>
