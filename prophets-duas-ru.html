@@ -1932,8 +1932,6 @@ html.light-mode body .category-card > .dua-body.nested-list > .empty-dua .dua-ar
   }
 }
 </style>
-
-
 <style id="fortress-actions-style">
 body .fortress-actions{width:min(100%,680px);margin:12px auto 16px;display:flex;align-items:center;justify-content:center;gap:18px;padding:0;background:transparent!important;border:0!important;box-shadow:none!important}
 body .fortress-action{appearance:none;-webkit-appearance:none;border:0!important;background:transparent!important;box-shadow:none!important;color:#d7b56d;min-width:0;padding:2px 0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:4px;cursor:pointer;font:inherit;-webkit-tap-highlight-color:transparent;transition:transform .16s ease,color .2s ease,opacity .2s ease}
@@ -1971,11 +1969,6 @@ html.light-mode body .dua-mini-action{color:#745416;background:rgba(255,255,255,
 html.light-mode body .fortress-panel-card{background:linear-gradient(180deg,#ffffff,#f6faf7)}html.light-mode body .fortress-panel-title{color:#745416}html.light-mode body .fortress-panel-subtitle{color:#526158}html.light-mode body .fortress-favorite-row{color:#142019;background:#fffaf0}html.light-mode body .fortress-empty{color:#526158}
 @media(max-width:700px){body .fortress-actions{gap:12px;margin:10px auto 14px;justify-content:space-between;padding:0 5px}body .fortress-action-icon{width:24px;height:24px}body .fortress-action svg{width:19px;height:19px}body .fortress-action-label{font-size:9.2px}body .dua-item-actions{gap:6px;padding:7px;border-radius:15px}body .dua-mini-action{font-size:10.5px;padding:6px 8px;min-height:32px}body .fortress-panel-card{width:94vw;max-height:80vh;border-radius:22px;padding:14px}body.reading-mode .dua-meaning{font-size:16px!important}body.reading-mode .dua-translit{font-size:15px!important}body.reading-mode .dua-arabic{font-size:20px!important}}
 </style>
-
-
-
-
-
 <style id="fortress-actions-visual-fix">
 /* === FINAL: clean top icons + favorite accordion === */
 
@@ -2291,17 +2284,343 @@ html.light-mode body .fortress-favorite-content{
 }
 </style>
 
+<style id="fortress-top-header-final">
+/* === FINAL TOP HEADER: PWA-safe premium gold toolbar above title === */
+
+html body .container{
+  padding-top:14px !important;
+}
+
+/* Top icons row above title */
+html body .container > .fortress-actions{
+  width:min(100%,520px) !important;
+  margin:0 auto 10px !important;
+  padding:0 6px 8px !important;
+  display:flex !important;
+  align-items:center !important;
+  justify-content:center !important;
+  gap:21px !important;
+  background:transparent !important;
+  background-color:transparent !important;
+  background-image:none !important;
+  border:0 !important;
+  outline:0 !important;
+  box-shadow:none !important;
+  position:relative !important;
+}
+
+/* Thin top gold line above icons */
+html body .container > .fortress-actions::before{
+  content:"";
+  position:absolute;
+  left:50%;
+  top:-7px;
+  width:min(360px,72vw);
+  height:1px;
+  transform:translateX(-50%);
+  background:linear-gradient(90deg,transparent,rgba(215,181,109,.82),rgba(112,216,145,.20),rgba(215,181,109,.82),transparent);
+  opacity:.78;
+  pointer-events:none;
+}
+
+/* Second thin gold line under icons */
+html body .container > .fortress-actions::after{
+  content:"";
+  position:absolute;
+  left:50%;
+  bottom:0;
+  width:min(330px,68vw);
+  height:1px;
+  transform:translateX(-50%);
+  background:linear-gradient(90deg,transparent,rgba(215,181,109,.70),transparent);
+  opacity:.72;
+  pointer-events:none;
+}
+
+/* Kill all visible button/square backgrounds in browser and PWA */
+html body .container > .fortress-actions button.fortress-action,
+html body .fortress-actions button.fortress-action,
+html.light-mode body .container > .fortress-actions button.fortress-action,
+html.dark-mode body .container > .fortress-actions button.fortress-action{
+  appearance:none !important;
+  -webkit-appearance:none !important;
+  background:transparent !important;
+  background-color:transparent !important;
+  background-image:none !important;
+  border:0 !important;
+  border-color:transparent !important;
+  outline:0 !important;
+  box-shadow:none !important;
+  border-radius:0 !important;
+  min-width:0 !important;
+  min-height:0 !important;
+  width:auto !important;
+  height:auto !important;
+  padding:0 !important;
+  margin:0 !important;
+  display:flex !important;
+  flex-direction:column !important;
+  align-items:center !important;
+  justify-content:center !important;
+  gap:4px !important;
+  color:#d7b56d !important;
+  font:inherit !important;
+  text-decoration:none !important;
+  -webkit-tap-highlight-color:transparent !important;
+  touch-action:manipulation !important;
+}
+
+html.light-mode body .container > .fortress-actions button.fortress-action{
+  color:#8a681f !important;
+}
+
+html body .container > .fortress-actions button.fortress-action:hover,
+html body .container > .fortress-actions button.fortress-action:focus,
+html body .container > .fortress-actions button.fortress-action:focus-visible,
+html body .container > .fortress-actions button.fortress-action:active,
+html body .container > .fortress-actions button.fortress-action.is-active{
+  background:transparent !important;
+  background-color:transparent !important;
+  background-image:none !important;
+  border:0 !important;
+  outline:0 !important;
+  box-shadow:none !important;
+}
+
+html body .container > .fortress-actions button.fortress-action.is-active{
+  color:#f6dfa2 !important;
+}
+
+html.light-mode body .container > .fortress-actions button.fortress-action.is-active{
+  color:#6f4f12 !important;
+}
+
+/* Icons and labels only */
+html body .fortress-action-icon,
+html body .fortress-action-label{
+  background:transparent !important;
+  background-color:transparent !important;
+  background-image:none !important;
+  border:0 !important;
+  outline:0 !important;
+  box-shadow:none !important;
+  border-radius:0 !important;
+}
+
+html body .container > .fortress-actions .fortress-action-icon{
+  width:27px !important;
+  height:27px !important;
+  display:flex !important;
+  align-items:center !important;
+  justify-content:center !important;
+}
+
+html body .container > .fortress-actions button.fortress-action svg{
+  width:21px !important;
+  height:21px !important;
+  display:block !important;
+  stroke:currentColor !important;
+  fill:none !important;
+  stroke-width:2.12 !important;
+  stroke-linecap:round !important;
+  stroke-linejoin:round !important;
+  background:transparent !important;
+  border:0 !important;
+  box-shadow:none !important;
+  filter:drop-shadow(0 1px 4px rgba(215,181,109,.22)) !important;
+}
+
+html body .container > .fortress-actions button.fortress-action[data-fortress-action="favorite"].is-active svg,
+html body .container > .fortress-actions button.fortress-action[data-fortress-action="save"].is-active svg{
+  fill:currentColor !important;
+}
+
+html body .container > .fortress-actions .fortress-action-label{
+  font-size:10px !important;
+  line-height:1 !important;
+  font-weight:900 !important;
+  letter-spacing:-.03em !important;
+  color:currentColor !important;
+  text-shadow:0 1px 2px rgba(0,0,0,.36) !important;
+}
+
+html.light-mode body .container > .fortress-actions .fortress-action-label{
+  text-shadow:none !important;
+}
+
+/* Title directly below icons */
+html body .container > h1{
+  margin:7px 0 12px !important;
+  color:#ffffff !important;
+  text-align:center !important;
+  text-shadow:
+    0 1px 2px rgba(0,0,0,.58),
+    0 0 18px rgba(255,255,255,.08) !important;
+}
+
+/* Small gold line under title */
+html body .container > h1::after{
+  content:"";
+  display:block;
+  width:76px;
+  height:2px;
+  margin:9px auto 0;
+  border-radius:999px;
+  background:linear-gradient(90deg,transparent,#d7b56d,transparent);
+  opacity:.92;
+}
+
+html.light-mode body .container > h1{
+  color:#142019 !important;
+  text-shadow:none !important;
+}
+
+html.light-mode body .container > h1::after{
+  background:linear-gradient(90deg,transparent,#8a681f,transparent);
+}
+
+/* Keep description visually separated */
+html body .container > .hero-note{
+  margin-top:0 !important;
+}
+
+/* Per-dua icons remain icon-only, right aligned */
+html body .dua-item-actions,
+html.light-mode body .dua-item-actions,
+html.dark-mode body .dua-item-actions{
+  display:flex !important;
+  justify-content:flex-end !important;
+  align-items:center !important;
+  gap:12px !important;
+  margin:0 0 10px !important;
+  padding:0 !important;
+  background:transparent !important;
+  background-color:transparent !important;
+  background-image:none !important;
+  border:0 !important;
+  outline:0 !important;
+  box-shadow:none !important;
+  border-radius:0 !important;
+}
+
+html body button.dua-mini-action,
+html.light-mode body button.dua-mini-action,
+html.dark-mode body button.dua-mini-action{
+  appearance:none !important;
+  -webkit-appearance:none !important;
+  width:34px !important;
+  height:34px !important;
+  min-width:34px !important;
+  min-height:34px !important;
+  padding:0 !important;
+  margin:0 !important;
+  border:0 !important;
+  border-color:transparent !important;
+  outline:0 !important;
+  background:transparent !important;
+  background-color:transparent !important;
+  background-image:none !important;
+  box-shadow:none !important;
+  border-radius:999px !important;
+  display:inline-flex !important;
+  align-items:center !important;
+  justify-content:center !important;
+  color:#d7b56d !important;
+  cursor:pointer !important;
+}
+
+html.light-mode body button.dua-mini-action{
+  color:#7a5b18 !important;
+}
+
+html body button.dua-mini-action span:not(.mini-icon){
+  display:none !important;
+}
+
+html body button.dua-mini-action svg{
+  width:19px !important;
+  height:19px !important;
+  stroke:currentColor !important;
+  fill:none !important;
+  background:transparent !important;
+  border:0 !important;
+  box-shadow:none !important;
+}
+
+html body button.dua-mini-action.is-active{
+  color:#f6dfa2 !important;
+  background:transparent !important;
+  border:0 !important;
+  box-shadow:none !important;
+}
+
+html.light-mode body button.dua-mini-action.is-active{
+  color:#5e4414 !important;
+}
+
+html body button.dua-mini-action[data-dua-action="favorite"].is-active svg,
+html body button.dua-mini-action[data-dua-action="save"].is-active svg{
+  fill:currentColor !important;
+}
+
+@media(max-width:700px){
+  html body .container{
+    padding-top:12px !important;
+  }
+
+  html body .container > .fortress-actions{
+    width:100% !important;
+    gap:14px !important;
+    margin:0 auto 9px !important;
+    padding-bottom:7px !important;
+  }
+
+  html body .container > .fortress-actions::before{
+    top:-6px;
+    width:min(310px,78vw);
+  }
+
+  html body .container > .fortress-actions::after{
+    width:min(285px,72vw);
+  }
+
+  html body .container > .fortress-actions .fortress-action-icon{
+    width:23px !important;
+    height:23px !important;
+  }
+
+  html body .container > .fortress-actions button.fortress-action svg{
+    width:18.5px !important;
+    height:18.5px !important;
+  }
+
+  html body .container > .fortress-actions .fortress-action-label{
+    font-size:8.8px !important;
+  }
+
+  html body .container > h1{
+    font-size:25px !important;
+    line-height:1.14 !important;
+    margin-top:6px !important;
+    margin-bottom:11px !important;
+  }
+
+  html body .container > h1::after{
+    width:64px;
+    margin-top:8px;
+  }
+}
+</style>
 </head>
 <body>
 <div class="container">
-<h1>Крепость мусульманина</h1><div aria-label="Быстрые действия" class="fortress-actions">
+<div aria-label="Быстрые действия" class="fortress-actions">
 <button aria-label="Открыть избранные дуа" class="fortress-action" data-fortress-action="favorite" type="button"><span aria-hidden="true" class="fortress-action-icon"><svg viewbox="0 0 24 24"><path d="M12 3.8l2.35 4.76 5.25.76-3.8 3.7.9 5.23L12 15.78 7.3 18.25l.9-5.23-3.8-3.7 5.25-.76L12 3.8z"></path></svg></span><span class="fortress-action-label">Избранное</span></button>
 <button aria-label="Поделиться этой страницей" class="fortress-action" data-fortress-action="share" type="button"><span aria-hidden="true" class="fortress-action-icon"><svg viewbox="0 0 24 24"><path d="M18 8a3 3 0 1 0-2.83-4H15a3 3 0 0 0 .18 1.02L8.9 8.66A3 3 0 1 0 9 15.34l6.28 3.64A3 3 0 1 0 16 17.3l-6.28-3.64a3.1 3.1 0 0 0 0-3.32l6.28-3.64A3 3 0 0 0 18 8z"></path></svg></span><span class="fortress-action-label">Поделиться</span></button>
 <button aria-label="Включить режим чтения" class="fortress-action" data-fortress-action="reading" type="button"><span aria-hidden="true" class="fortress-action-icon"><svg viewbox="0 0 24 24"><path d="M4 5.5A2.5 2.5 0 0 1 6.5 3H20v16H6.5A2.5 2.5 0 0 0 4 21V5.5z"></path><path d="M8 7h8M8 11h7M8 15h6"></path></svg></span><span class="fortress-action-label">Чтение</span></button>
 <button aria-label="Открыть сохранённое место" class="fortress-action" data-fortress-action="save" type="button"><span aria-hidden="true" class="fortress-action-icon"><svg viewbox="0 0 24 24"><path d="M6 4.5A2.5 2.5 0 0 1 8.5 2h7A2.5 2.5 0 0 1 18 4.5V22l-6-3.4L6 22V4.5z"></path></svg></span><span class="fortress-action-label">Сохранить</span></button>
 <button aria-label="Переключить тему" class="fortress-action" data-fortress-action="theme" type="button"><span aria-hidden="true" class="fortress-action-icon"><svg viewbox="0 0 24 24"><path d="M21 12.7A8.5 8.5 0 0 1 11.3 3 7 7 0 1 0 21 12.7z"></path></svg></span><span class="fortress-action-label">Тема</span></button>
-</div>
-
+</div><h1>Крепость мусульманина</h1>
 <div class="hero-note">
     Ежедневные дуа, мольбы Пророка <span class="salawat-symbol">ﷺ</span> и обращения для разных жизненных ситуаций.
   </div>
@@ -2329,7 +2648,6 @@ html.light-mode body .fortress-favorite-content{
 <button aria-label="Поделиться этим дуа" class="dua-mini-action" data-dua-action="share" data-dua-id="prophet-dua-1" type="button"><span aria-hidden="true" class="mini-icon"><svg viewbox="0 0 24 24"><path d="M18 8a3 3 0 1 0-2.83-4H15a3 3 0 0 0 .18 1.02L8.9 8.66A3 3 0 1 0 9 15.34l6.28 3.64A3 3 0 1 0 16 17.3l-6.28-3.64a3.1 3.1 0 0 0 0-3.32l6.28-3.64A3 3 0 0 0 18 8z"></path></svg></span><span>Поделиться</span></button>
 <button aria-label="Сохранить это место" class="dua-mini-action" data-dua-action="save" data-dua-id="prophet-dua-1" type="button"><span aria-hidden="true" class="mini-icon"><svg viewbox="0 0 24 24"><path d="M6 4.5A2.5 2.5 0 0 1 8.5 2h7A2.5 2.5 0 0 1 18 4.5V22l-6-3.4L6 22V4.5z"></path></svg></span><span>Сохранить</span></button>
 </div>
-
 <div class="field-label">Перевод</div>
 <p class="dua-meaning">О Аллах, поистине, Ты — Прощающий, любишь прощение, так прости же меня.</p>
 <div class="field-label">Транскрипция</div>
@@ -2353,7 +2671,6 @@ html.light-mode body .fortress-favorite-content{
 <button aria-label="Поделиться этим дуа" class="dua-mini-action" data-dua-action="share" data-dua-id="prophet-dua-2" type="button"><span aria-hidden="true" class="mini-icon"><svg viewbox="0 0 24 24"><path d="M18 8a3 3 0 1 0-2.83-4H15a3 3 0 0 0 .18 1.02L8.9 8.66A3 3 0 1 0 9 15.34l6.28 3.64A3 3 0 1 0 16 17.3l-6.28-3.64a3.1 3.1 0 0 0 0-3.32l6.28-3.64A3 3 0 0 0 18 8z"></path></svg></span><span>Поделиться</span></button>
 <button aria-label="Сохранить это место" class="dua-mini-action" data-dua-action="save" data-dua-id="prophet-dua-2" type="button"><span aria-hidden="true" class="mini-icon"><svg viewbox="0 0 24 24"><path d="M6 4.5A2.5 2.5 0 0 1 8.5 2h7A2.5 2.5 0 0 1 18 4.5V22l-6-3.4L6 22V4.5z"></path></svg></span><span>Сохранить</span></button>
 </div>
-
 <div class="field-label">Перевод</div>
 <p class="dua-meaning">О Аллах, я прошу у Тебя прощения и благополучия в этом мире и в Последней жизни. О Аллах, я прошу у Тебя прощения и благополучия в моей религии, в моей мирской жизни, в моей семье и в моём имуществе. О Аллах, покрой мои недостатки, успокой мои страхи и охрани меня спереди, сзади, справа, слева и сверху, и я прибегаю к Твоему величию от того, чтобы быть внезапно погубленным снизу.</p>
 <div class="field-label">Транскрипция</div>
@@ -2377,7 +2694,6 @@ html.light-mode body .fortress-favorite-content{
 <button aria-label="Поделиться этим дуа" class="dua-mini-action" data-dua-action="share" data-dua-id="prophet-dua-3" type="button"><span aria-hidden="true" class="mini-icon"><svg viewbox="0 0 24 24"><path d="M18 8a3 3 0 1 0-2.83-4H15a3 3 0 0 0 .18 1.02L8.9 8.66A3 3 0 1 0 9 15.34l6.28 3.64A3 3 0 1 0 16 17.3l-6.28-3.64a3.1 3.1 0 0 0 0-3.32l6.28-3.64A3 3 0 0 0 18 8z"></path></svg></span><span>Поделиться</span></button>
 <button aria-label="Сохранить это место" class="dua-mini-action" data-dua-action="save" data-dua-id="prophet-dua-3" type="button"><span aria-hidden="true" class="mini-icon"><svg viewbox="0 0 24 24"><path d="M6 4.5A2.5 2.5 0 0 1 8.5 2h7A2.5 2.5 0 0 1 18 4.5V22l-6-3.4L6 22V4.5z"></path></svg></span><span>Сохранить</span></button>
 </div>
-
 <div class="field-label">Перевод</div>
 <p class="dua-meaning">О Аллах, прошу у Тебя полезного знания, благого удела и принятого деяния.</p>
 <div class="field-label">Транскрипция</div>
@@ -2401,7 +2717,6 @@ html.light-mode body .fortress-favorite-content{
 <button aria-label="Поделиться этим дуа" class="dua-mini-action" data-dua-action="share" data-dua-id="prophet-dua-4" type="button"><span aria-hidden="true" class="mini-icon"><svg viewbox="0 0 24 24"><path d="M18 8a3 3 0 1 0-2.83-4H15a3 3 0 0 0 .18 1.02L8.9 8.66A3 3 0 1 0 9 15.34l6.28 3.64A3 3 0 1 0 16 17.3l-6.28-3.64a3.1 3.1 0 0 0 0-3.32l6.28-3.64A3 3 0 0 0 18 8z"></path></svg></span><span>Поделиться</span></button>
 <button aria-label="Сохранить это место" class="dua-mini-action" data-dua-action="save" data-dua-id="prophet-dua-4" type="button"><span aria-hidden="true" class="mini-icon"><svg viewbox="0 0 24 24"><path d="M6 4.5A2.5 2.5 0 0 1 8.5 2h7A2.5 2.5 0 0 1 18 4.5V22l-6-3.4L6 22V4.5z"></path></svg></span><span>Сохранить</span></button>
 </div>
-
 <div class="field-label">Перевод</div>
 <p class="dua-meaning">О Аллах, я прошу у Тебя правильного пути, богобоязненности, целомудрия и самодостаточности.</p>
 <div class="field-label">Транскрипция</div>
@@ -2425,7 +2740,6 @@ html.light-mode body .fortress-favorite-content{
 <button aria-label="Поделиться этим дуа" class="dua-mini-action" data-dua-action="share" data-dua-id="prophet-dua-5" type="button"><span aria-hidden="true" class="mini-icon"><svg viewbox="0 0 24 24"><path d="M18 8a3 3 0 1 0-2.83-4H15a3 3 0 0 0 .18 1.02L8.9 8.66A3 3 0 1 0 9 15.34l6.28 3.64A3 3 0 1 0 16 17.3l-6.28-3.64a3.1 3.1 0 0 0 0-3.32l6.28-3.64A3 3 0 0 0 18 8z"></path></svg></span><span>Поделиться</span></button>
 <button aria-label="Сохранить это место" class="dua-mini-action" data-dua-action="save" data-dua-id="prophet-dua-5" type="button"><span aria-hidden="true" class="mini-icon"><svg viewbox="0 0 24 24"><path d="M6 4.5A2.5 2.5 0 0 1 8.5 2h7A2.5 2.5 0 0 1 18 4.5V22l-6-3.4L6 22V4.5z"></path></svg></span><span>Сохранить</span></button>
 </div>
-
 <div class="field-label">Перевод</div>
 <p class="dua-meaning">О Аллах, сделай для меня достаточным дозволенное Тобой вместо запретного и обогати меня Своей милостью так, чтобы я ни в ком, кроме Тебя, не нуждался.</p>
 <div class="field-label">Транскрипция</div>
@@ -2449,7 +2763,6 @@ html.light-mode body .fortress-favorite-content{
 <button aria-label="Поделиться этим дуа" class="dua-mini-action" data-dua-action="share" data-dua-id="prophet-dua-6" type="button"><span aria-hidden="true" class="mini-icon"><svg viewbox="0 0 24 24"><path d="M18 8a3 3 0 1 0-2.83-4H15a3 3 0 0 0 .18 1.02L8.9 8.66A3 3 0 1 0 9 15.34l6.28 3.64A3 3 0 1 0 16 17.3l-6.28-3.64a3.1 3.1 0 0 0 0-3.32l6.28-3.64A3 3 0 0 0 18 8z"></path></svg></span><span>Поделиться</span></button>
 <button aria-label="Сохранить это место" class="dua-mini-action" data-dua-action="save" data-dua-id="prophet-dua-6" type="button"><span aria-hidden="true" class="mini-icon"><svg viewbox="0 0 24 24"><path d="M6 4.5A2.5 2.5 0 0 1 8.5 2h7A2.5 2.5 0 0 1 18 4.5V22l-6-3.4L6 22V4.5z"></path></svg></span><span>Сохранить</span></button>
 </div>
-
 <div class="field-label">Перевод</div>
 <p class="dua-meaning">О Аллах, прибегаю к Тебе от тревоги и печали, от слабости и лени, от скупости и трусости, от бремени долга и от притеснения людей.</p>
 <div class="field-label">Транскрипция</div>
@@ -2473,7 +2786,6 @@ html.light-mode body .fortress-favorite-content{
 <button aria-label="Поделиться этим дуа" class="dua-mini-action" data-dua-action="share" data-dua-id="prophet-dua-7" type="button"><span aria-hidden="true" class="mini-icon"><svg viewbox="0 0 24 24"><path d="M18 8a3 3 0 1 0-2.83-4H15a3 3 0 0 0 .18 1.02L8.9 8.66A3 3 0 1 0 9 15.34l6.28 3.64A3 3 0 1 0 16 17.3l-6.28-3.64a3.1 3.1 0 0 0 0-3.32l6.28-3.64A3 3 0 0 0 18 8z"></path></svg></span><span>Поделиться</span></button>
 <button aria-label="Сохранить это место" class="dua-mini-action" data-dua-action="save" data-dua-id="prophet-dua-7" type="button"><span aria-hidden="true" class="mini-icon"><svg viewbox="0 0 24 24"><path d="M6 4.5A2.5 2.5 0 0 1 8.5 2h7A2.5 2.5 0 0 1 18 4.5V22l-6-3.4L6 22V4.5z"></path></svg></span><span>Сохранить</span></button>
 </div>
-
 <div class="field-label">Перевод</div>
 <p class="dua-meaning">О Аллах, даруй нам благо в этом мире, благо в Последней жизни и защити нас от наказания Огня.</p>
 <div class="field-label">Транскрипция</div>
@@ -2497,7 +2809,6 @@ html.light-mode body .fortress-favorite-content{
 <button aria-label="Поделиться этим дуа" class="dua-mini-action" data-dua-action="share" data-dua-id="prophet-dua-8" type="button"><span aria-hidden="true" class="mini-icon"><svg viewbox="0 0 24 24"><path d="M18 8a3 3 0 1 0-2.83-4H15a3 3 0 0 0 .18 1.02L8.9 8.66A3 3 0 1 0 9 15.34l6.28 3.64A3 3 0 1 0 16 17.3l-6.28-3.64a3.1 3.1 0 0 0 0-3.32l6.28-3.64A3 3 0 0 0 18 8z"></path></svg></span><span>Поделиться</span></button>
 <button aria-label="Сохранить это место" class="dua-mini-action" data-dua-action="save" data-dua-id="prophet-dua-8" type="button"><span aria-hidden="true" class="mini-icon"><svg viewbox="0 0 24 24"><path d="M6 4.5A2.5 2.5 0 0 1 8.5 2h7A2.5 2.5 0 0 1 18 4.5V22l-6-3.4L6 22V4.5z"></path></svg></span><span>Сохранить</span></button>
 </div>
-
 <div class="field-label">Перевод</div>
 <p class="dua-meaning">О Аллах, прибегаю к Тебе от исчезновения Твоей милости, от ухода благополучия, от внезапности Твоего наказания и от всего, что вызывает Твой гнев.</p>
 <div class="field-label">Транскрипция</div>
@@ -2521,7 +2832,6 @@ html.light-mode body .fortress-favorite-content{
 <button aria-label="Поделиться этим дуа" class="dua-mini-action" data-dua-action="share" data-dua-id="prophet-dua-9" type="button"><span aria-hidden="true" class="mini-icon"><svg viewbox="0 0 24 24"><path d="M18 8a3 3 0 1 0-2.83-4H15a3 3 0 0 0 .18 1.02L8.9 8.66A3 3 0 1 0 9 15.34l6.28 3.64A3 3 0 1 0 16 17.3l-6.28-3.64a3.1 3.1 0 0 0 0-3.32l6.28-3.64A3 3 0 0 0 18 8z"></path></svg></span><span>Поделиться</span></button>
 <button aria-label="Сохранить это место" class="dua-mini-action" data-dua-action="save" data-dua-id="prophet-dua-9" type="button"><span aria-hidden="true" class="mini-icon"><svg viewbox="0 0 24 24"><path d="M6 4.5A2.5 2.5 0 0 1 8.5 2h7A2.5 2.5 0 0 1 18 4.5V22l-6-3.4L6 22V4.5z"></path></svg></span><span>Сохранить</span></button>
 </div>
-
 <div class="field-label">Перевод</div>
 <p class="dua-meaning">О Аллах, прибегаю к Тебе от мучения Ада, от мучения могилы, от испытаний жизни и смерти и от зла смуты Масиха ад-Даджаля.</p>
 <div class="field-label">Транскрипция</div>
@@ -4202,8 +4512,6 @@ html.light-mode body .fortress-favorite-content{
 </div>
 </details>
 </div>
-
-
 <script>
 (function(){
   function closeAllDescendants(root){
@@ -4267,8 +4575,6 @@ html.light-mode body .fortress-favorite-content{
   });
 })();
 </script>
-
-
 <script id="fortress-actions-script">
 (function(){
   const FAVORITES_KEY="barakaway_fortress_ru_favorite_duas";const PROGRESS_KEY="barakaway_fortress_ru_saved_dua";const READING_KEY="barakaway_fortress_ru_reading";let toastTimer=null;
@@ -4347,7 +4653,6 @@ html.light-mode body .fortress-favorite-content{
 })();
 </script>
 <script src="/bottom-nav.js"></script>
-
 <div aria-hidden="true" class="fortress-panel" id="fortress-favorites-panel">
 <div class="fortress-panel-backdrop" data-panel-close="1"></div>
 <div aria-label="Избранные дуа" aria-modal="true" class="fortress-panel-card" role="dialog">
