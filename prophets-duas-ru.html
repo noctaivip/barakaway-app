@@ -2837,6 +2837,12 @@ html.light-mode body .fortress-search-status{color:#745416}
 @media(max-width:700px){html body .fortress-search-wrap{margin:8px auto 16px;padding:0 2px}html body .fortress-search-bar{grid-template-columns:minmax(0,1fr) 54px;gap:8px;padding:7px;border-radius:22px}html body .fortress-search-input{height:46px;border-radius:17px;font-size:14px;padding-left:41px;padding-right:40px}html body .fortress-search-icon{left:13px;width:18px;height:18px}html body .fortress-search-clear{right:7px;width:31px;height:31px}html body .fortress-voice-button{width:54px;height:46px;border-radius:17px}html body .fortress-search-status{font-size:11.5px;margin-top:6px}}
 </style>
 
+
+<style id="fortress-search-working-overrides">
+body .dua-search-hidden{display:none!important;}
+body.fortress-search-active .dua-card[data-search-match="1"]{border-color:rgba(246,223,162,.82)!important;box-shadow:0 18px 42px rgba(0,0,0,.42),0 0 0 1px rgba(246,223,162,.22)!important;}
+body.fortress-search-active .dua-card[data-search-match="1"] > summary.dua-head{background:linear-gradient(135deg,rgba(215,181,109,.18),rgba(45,122,70,.10))!important;}
+</style>
 </head>
 <body>
 <div class="container">
@@ -7838,171 +7844,79 @@ html.light-mode body .fortress-search-status{color:#745416}
 <button aria-label="Выйти из режима чтения" class="fortress-reading-exit" id="fortress-reading-exit" type="button">× Выйти</button>
 
 <script id="fortress-search-script">
-(function(){'use strict';
-function normalizeCore(value){
-  return (value||'').toString().toLowerCase()
-    .replace(/ё/g,'е')
-    .normalize('NFD')
-    .replace(/[\u0300-\u036f]/g,'')
-    .replace(/[\u064B-\u065F\u0670\u06D6-\u06ED]/g,'')
-    .replace(/[^\p{L}\p{N}\s'’\-]+/gu,' ')
-    .replace(/[’']/g,'')
-    .replace(/\s+/g,' ')
-    .trim();
-}
-function latinToCyrillic(value){
-  var text=' '+(value||'')+' ';
-  var pairs=[
-    ['shch','щ'],['sch','щ'],['yo','е'],['yu','ю'],['ya','я'],['ye','е'],['zh','ж'],['kh','х'],['ch','ч'],['sh','ш'],['ts','ц'],
-    ['a','а'],['b','б'],['c','к'],['d','д'],['e','е'],['f','ф'],['g','г'],['h','х'],['i','и'],['j','ж'],['k','к'],['l','л'],['m','м'],['n','н'],['o','о'],['p','п'],['q','к'],['r','р'],['s','с'],['t','т'],['u','у'],['v','в'],['w','в'],['x','кс'],['y','ы'],['z','з']
-  ];
-  pairs.forEach(function(pair){text=text.replace(new RegExp(pair[0],'g'),pair[1]);});
-  return text.trim();
-}
-function makeQueryTokenGroups(rawQuery){
-  var base=normalizeCore(rawQuery);
-  if(!base){return [];} 
-  return base.split(' ').filter(Boolean).map(function(token){
-    var variants=[token,latinToCyrillic(token)];
-    return variants.filter(function(v,i,a){return v&&a.indexOf(v)===i;});
-  });
-}
-function cardTitle(card){
-  var title=card.querySelector(':scope > summary .dua-title');
-  return title?title.textContent.trim():'Дуа';
-}
-function hasNestedList(card){return !!card.querySelector(':scope > .dua-body .nested-list');}
-function isSearchableDua(card){
-  return !!card.querySelector(':scope > .dua-body .dua-item-actions') || !hasNestedList(card);
-}
-function closestTopCategory(card){
-  var node=card.parentElement;
-  while(node&&node!==document.body){
-    if(node.classList&&node.classList.contains('category-card')&&node.parentElement&&node.parentElement.classList.contains('dua-list')){return node;}
-    node=node.parentElement;
+(function(){
+  'use strict';
+  function ready(fn){ if(document.readyState==='loading'){document.addEventListener('DOMContentLoaded',fn);}else{fn();} }
+  function unique(arr){var out=[];for(var i=0;i<arr.length;i++){if(arr[i]&&out.indexOf(arr[i])===-1){out.push(arr[i]);}}return out;}
+  function basicNormalize(value){
+    value=(value||'').toString().toLowerCase().replace(/ё/g,'е');
+    try{value=value.normalize('NFD').replace(/[\u0300-\u036f]/g,'');}catch(e){}
+    value=value.replace(/[\u064B-\u065F\u0670\u06D6-\u06ED]/g,'');
+    value=value.replace(/[.,;:!?()[\]{}«»“”"`~@#$%^&*_+=|\\/<>\n\r\t\-]+/g,' ');
+    value=value.replace(/[’']/g,'').replace(/\s+/g,' ').replace(/^\s+|\s+$/g,'');
+    return value;
   }
-  return null;
-}
-function initFortressSearch(){
-  var input=document.getElementById('fortressDuaSearchInput');
-  var clearBtn=document.getElementById('fortressDuaSearchClear');
-  var voiceBtn=document.getElementById('fortressDuaVoiceButton');
-  var status=document.getElementById('fortressDuaSearchStatus');
-  if(!input||!clearBtn||!status){return;}
-
-  var root=document.querySelector('.container');
-  if(!root){return;}
-  var topCategories=Array.prototype.slice.call(root.querySelectorAll('.dua-list > .dua-card.category-card'));
-  var allNestedCards=Array.prototype.slice.call(root.querySelectorAll('.nested-list .dua-card.nested-dua, .nested-list .dua-card.empty-dua'));
-  var searchableCards=allNestedCards.filter(isSearchableDua);
-  if(!searchableCards.length){return;}
-
-  var index=searchableCards.map(function(card){
-    var title=cardTitle(card);
-    var body=card.querySelector(':scope > .dua-body');
-    var raw=[title,body?body.textContent:'',card.getAttribute('data-dua-title')||'',card.id||''].join(' ');
-    return {card:card,text:normalizeCore(raw),title:title,category:closestTopCategory(card)};
-  });
-
-  function setHidden(el,hidden){if(el){el.classList.toggle('dua-search-hidden',!!hidden);}}
-  function resetOpenState(){
-    Array.prototype.slice.call(root.querySelectorAll('.dua-card[open]')).forEach(function(card){card.removeAttribute('open');});
+  function visualLatinToCyrillic(value){
+    var map={'a':'а','b':'в','c':'с','e':'е','h':'н','k':'к','m':'м','o':'о','p':'р','t':'т','x':'х','y':'у','A':'а','B':'в','C':'с','E':'е','H':'н','K':'к','M':'м','O':'о','P':'р','T':'т','X':'х','Y':'у'};
+    return (value||'').replace(/[abcehkmoptxyABCEHKMOPTXY]/g,function(ch){return map[ch]||ch;});
   }
-  function showAll(){
-    Array.prototype.slice.call(root.querySelectorAll('.dua-search-hidden')).forEach(function(el){el.classList.remove('dua-search-hidden');});
-    clearBtn.classList.remove('is-visible');
-    status.textContent='';
+  function translitToRu(value){
+    value=basicNormalize(value);
+    var pairs=[['shch','щ'],['sch','щ'],['yo','е'],['yu','ю'],['ya','я'],['ye','е'],['zh','ж'],['kh','х'],['ch','ч'],['sh','ш'],['ts','ц'],['a','а'],['b','б'],['c','к'],['d','д'],['e','е'],['f','ф'],['g','г'],['h','х'],['i','и'],['j','ж'],['k','к'],['l','л'],['m','м'],['n','н'],['o','о'],['p','п'],['q','к'],['r','р'],['s','с'],['t','т'],['u','у'],['v','в'],['w','в'],['x','кс'],['y','ы'],['z','з']];
+    for(var i=0;i<pairs.length;i++){value=value.split(pairs[i][0]).join(pairs[i][1]);}
+    return value;
   }
-  function cardHasVisibleMatch(card){return !!card.querySelector('.dua-card:not(.dua-search-hidden)[data-search-match="1"]');}
-  function openAncestors(card){
-    var node=card;
-    while(node&&node!==root){
-      if(node.classList&&node.classList.contains('dua-card')){node.open=true;setHidden(node,false);}
-      node=node.parentElement;
+  function keyboardEnToRu(value){
+    var en="`qwertyuiop[]asdfghjkl;'zxcvbnm,.";
+    var ru='ейцукенгшщзхъфывапролджэячсмитьбю';
+    var out=''; value=(value||'').toLowerCase();
+    for(var i=0;i<value.length;i++){var idx=en.indexOf(value.charAt(i));out+=idx>=0?ru.charAt(idx):value.charAt(i);}
+    return out;
+  }
+  function normalizeForIndex(value){return basicNormalize(visualLatinToCyrillic(value));}
+  function queryTokens(raw){
+    raw=(raw||'').toString();
+    var base=basicNormalize(raw), visual=basicNormalize(visualLatinToCyrillic(raw)), translit=basicNormalize(translitToRu(raw)), keyboard=basicNormalize(keyboardEnToRu(raw));
+    var phrases=unique([base,visual,translit,keyboard]);
+    var primary=(visual||base).split(' '), groups=[];
+    for(var i=0;i<primary.length;i++){var token=primary[i]; if(!token){continue;} var variants=[]; for(var j=0;j<phrases.length;j++){var parts=phrases[j].split(' '); if(parts[i]){variants.push(parts[i]);}} groups.push(unique(variants));}
+    return groups;
+  }
+  function hasClass(el,cls){return el&&(' '+(el.className||'')+' ').indexOf(' '+cls+' ')>-1;}
+  function getDirectBody(card){if(!card){return null;} for(var i=0;i<card.children.length;i++){if(hasClass(card.children[i],'dua-body')){return card.children[i];}} return null;}
+  function getTitle(card){var summary=card?card.getElementsByTagName('summary')[0]:null; var title=summary?summary.querySelector('.dua-title'):null; return title?title.textContent.replace(/^\s+|\s+$/g,''):'Дуа';}
+  function hasDescendantNestedList(card){var body=getDirectBody(card); return !!(body&&body.querySelector('.nested-list'));}
+  function isLeafDua(card){if(!card||!hasClass(card,'dua-card')){return false;} if(!hasClass(card,'nested-dua')&&!hasClass(card,'empty-dua')){return false;} if(card.querySelector('.dua-item-actions')){return true;} return !hasDescendantNestedList(card);}
+  function collectText(card){var body=getDirectBody(card); var text=' '+getTitle(card); if(body){text+=' '+body.textContent;} text+=' '+(card.getAttribute('data-dua-title')||'')+' '+(card.id||''); return normalizeForIndex(text);}
+  function setHidden(el,hidden){if(!el){return;} if(hidden){el.classList.add('dua-search-hidden');}else{el.classList.remove('dua-search-hidden');}}
+  function init(){
+    var input=document.getElementById('fortressDuaSearchInput'), clearBtn=document.getElementById('fortressDuaSearchClear'), voiceBtn=document.getElementById('fortressDuaVoiceButton'), status=document.getElementById('fortressDuaSearchStatus'), root=document.querySelector('.container');
+    if(!input||!clearBtn||!status||!root){return;}
+    var allCards=[], nodes=root.querySelectorAll('.dua-card'); for(var i=0;i<nodes.length;i++){allCards.push(nodes[i]);}
+    var leaves=[]; for(i=0;i<allCards.length;i++){if(isLeafDua(allCards[i])){leaves.push(allCards[i]);}}
+    var index=[]; for(i=0;i<leaves.length;i++){index.push({card:leaves[i],text:collectText(leaves[i]),title:getTitle(leaves[i])});}
+    function closeAll(){for(var a=0;a<allCards.length;a++){if(allCards[a].tagName&&allCards[a].tagName.toLowerCase()==='details'){allCards[a].removeAttribute('open');}}}
+    function resetSearch(){document.body.classList.remove('fortress-search-active'); for(var a=0;a<allCards.length;a++){setHidden(allCards[a],false); allCards[a].removeAttribute('data-search-match');} clearBtn.classList.remove('is-visible'); status.textContent=''; closeAll();}
+    function openAncestors(card){var node=card; while(node&&node!==root){if(hasClass(node,'dua-card')){setHidden(node,false); if(node.tagName&&node.tagName.toLowerCase()==='details'){node.setAttribute('open','');}} node=node.parentElement;}}
+    function matches(text,groups){for(var g=0;g<groups.length;g++){var ok=false; for(var v=0;v<groups[g].length;v++){var token=groups[g][v]; if(token&&text.indexOf(token)!==-1){ok=true;break;}} if(!ok){return false;}} return true;}
+    function applySearch(raw){
+      var groups=queryTokens(raw); if(!groups.length){resetSearch();return;}
+      document.body.classList.add('fortress-search-active'); clearBtn.classList.add('is-visible'); closeAll();
+      for(var a=0;a<allCards.length;a++){setHidden(allCards[a],true); allCards[a].removeAttribute('data-search-match');}
+      var found=[]; for(a=0;a<index.length;a++){if(matches(index[a].text,groups)){found.push(index[a].card); index[a].card.setAttribute('data-search-match','1');}}
+      if(found.length){for(a=0;a<found.length;a++){setHidden(found[a],false); if(found[a].tagName&&found[a].tagName.toLowerCase()==='details'){found[a].setAttribute('open','');} openAncestors(found[a]);} status.textContent='Найдено дуа: '+found.length;}
+      else{status.textContent='По этому запросу дуа не найдено';}
     }
+    input.addEventListener('input',function(){applySearch(input.value);}); input.addEventListener('keyup',function(){applySearch(input.value);}); input.addEventListener('change',function(){applySearch(input.value);}); input.addEventListener('search',function(){applySearch(input.value);});
+    clearBtn.addEventListener('click',function(){input.value=''; resetSearch(); input.focus();});
+    var SpeechRecognition=window.SpeechRecognition||window.webkitSpeechRecognition;
+    if(SpeechRecognition&&voiceBtn){var recognition=new SpeechRecognition(); recognition.lang='ru-RU'; recognition.interimResults=false; recognition.continuous=false; recognition.maxAlternatives=1; voiceBtn.addEventListener('click',function(){try{voiceBtn.classList.add('is-listening'); status.textContent='Говорите запрос...'; recognition.start();}catch(e){voiceBtn.classList.remove('is-listening');}}); recognition.onresult=function(event){var spoken=''; if(event&&event.results&&event.results[0]&&event.results[0][0]){spoken=event.results[0][0].transcript||'';} input.value=spoken.replace(/^\s+|\s+$/g,''); applySearch(input.value);}; recognition.onerror=function(){status.textContent='Голосовой поиск недоступен. Введите запрос вручную.';}; recognition.onend=function(){voiceBtn.classList.remove('is-listening');};}
+    else if(voiceBtn){voiceBtn.addEventListener('click',function(){status.textContent='Голосовой поиск не поддерживается этим браузером.'; input.focus();});}
   }
-  function applySearch(rawQuery){
-    var tokenGroups=makeQueryTokenGroups(rawQuery);
-    if(!tokenGroups.length){
-      searchableCards.forEach(function(card){card.removeAttribute('data-search-match');});
-      showAll();
-      return;
-    }
-
-    clearBtn.classList.add('is-visible');
-    var matched=[];
-    searchableCards.forEach(function(card){card.removeAttribute('data-search-match');});
-
-    index.forEach(function(item){
-      var ok=tokenGroups.every(function(group){
-        return group.some(function(token){return item.text.indexOf(token)!==-1;});
-      });
-      item.card.setAttribute('data-search-match',ok?'1':'0');
-      setHidden(item.card,!ok);
-      if(ok){matched.push(item.card);}
-    });
-
-    allNestedCards.forEach(function(card){
-      if(searchableCards.indexOf(card)!==-1){return;}
-      var visible=cardHasVisibleMatch(card);
-      setHidden(card,!visible);
-      if(visible){card.open=true;}else{card.removeAttribute('open');}
-    });
-
-    topCategories.forEach(function(category){
-      var visible=cardHasVisibleMatch(category);
-      setHidden(category,!visible);
-      if(visible){category.open=true;}else{category.removeAttribute('open');}
-    });
-
-    matched.forEach(function(card){openAncestors(card);card.open=true;});
-
-    if(matched.length){
-      status.textContent='Найдено дуа: '+matched.length;
-    }else{
-      status.textContent='По этому запросу дуа не найдено';
-      topCategories.forEach(function(category){setHidden(category,true);category.removeAttribute('open');});
-    }
-  }
-
-  input.addEventListener('input',function(){applySearch(input.value);});
-  input.addEventListener('search',function(){applySearch(input.value);});
-  clearBtn.addEventListener('click',function(){
-    input.value='';
-    input.focus();
-    searchableCards.forEach(function(card){card.removeAttribute('data-search-match');});
-    showAll();
-  });
-
-  var SpeechRecognition=window.SpeechRecognition||window.webkitSpeechRecognition;
-  var recognition=null;
-  if(SpeechRecognition&&voiceBtn){
-    recognition=new SpeechRecognition();
-    recognition.lang='ru-RU';
-    recognition.interimResults=false;
-    recognition.continuous=false;
-    recognition.maxAlternatives=1;
-    voiceBtn.addEventListener('click',function(){
-      try{
-        voiceBtn.classList.add('is-listening');
-        status.textContent='Говорите запрос...';
-        recognition.start();
-      }catch(e){voiceBtn.classList.remove('is-listening');}
-    });
-    recognition.onresult=function(event){
-      var spoken=event&&event.results&&event.results[0]&&event.results[0][0]?event.results[0][0].transcript:'';
-      input.value=spoken.trim();
-      applySearch(input.value);
-    };
-    recognition.onerror=function(){status.textContent='Голосовой поиск недоступен. Введите запрос вручную.';};
-    recognition.onend=function(){voiceBtn.classList.remove('is-listening');};
-  }else if(voiceBtn){
-    voiceBtn.addEventListener('click',function(){status.textContent='Голосовой поиск не поддерживается этим браузером.';input.focus();});
-  }
-}
-if(document.readyState==='loading'){document.addEventListener('DOMContentLoaded',initFortressSearch);}else{initFortressSearch();}
+  ready(init);
 })();
 </script>
+
 
 </body>
 </html>
