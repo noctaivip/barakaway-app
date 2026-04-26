@@ -1558,6 +1558,30 @@ html.light-mode .category-card > .dua-body.nested-list > .empty-dua .empty-note{
   }
 }
 
+
+
+/* === Accordion behavior and mobile separator cleanup === */
+/* Keep the long thin separator, remove the thick center pill on mobile. */
+@media(max-width:700px){
+  .dua-list > .dua-card:not(:last-child)::before{
+    display:none !important;
+    content:none !important;
+  }
+
+  .dua-list > .dua-card::after{
+    height:1px !important;
+    bottom:-15px !important;
+    left:22px !important;
+    right:22px !important;
+    opacity:.78 !important;
+    background:linear-gradient(90deg,transparent,rgba(215,181,109,.72),rgba(76,175,106,.38),transparent) !important;
+  }
+
+  .nested-list > .dua-card::before{
+    display:block !important;
+  }
+}
+
 </style>
 
 <script src="/theme-init.js"></script>
@@ -3570,6 +3594,58 @@ html.light-mode .category-card > .dua-body.nested-list > .empty-dua .empty-note{
   </div>
 
 </div>
+
+<script>
+(function(){
+  function closeDirectChildDetails(container, except){
+    if(!container) return;
+    Array.from(container.children).forEach(function(child){
+      if(child.tagName && child.tagName.toLowerCase() === 'details' && child !== except){
+        child.open = false;
+        closeAllDescendants(child);
+      }
+    });
+  }
+
+  function closeAllDescendants(root){
+    if(!root) return;
+    root.querySelectorAll('details[open]').forEach(function(item){
+      item.open = false;
+    });
+  }
+
+  document.addEventListener('DOMContentLoaded', function(){
+    var rootList = document.querySelector('.dua-list');
+
+    // Fresh state: all accordions closed after every reload / app reopen.
+    document.querySelectorAll('details.dua-card[open]').forEach(function(item){
+      item.open = false;
+    });
+
+    document.querySelectorAll('details.dua-card').forEach(function(details){
+      details.addEventListener('toggle', function(){
+        if(!details.open) {
+          closeAllDescendants(details);
+          return;
+        }
+
+        // Main level: only one main category open.
+        if(details.classList.contains('category-card') && details.parentElement === rootList){
+          closeDirectChildDetails(rootList, details);
+          return;
+        }
+
+        // Inner level: only one inner item open inside the same parent list.
+        var parentList = details.parentElement;
+        if(parentList && parentList.classList.contains('nested-list')){
+          closeDirectChildDetails(parentList, details);
+        }
+      });
+    });
+  });
+})();
+</script>
+
 <script src="/bottom-nav.js"></script>
 </body>
 </html>
