@@ -3591,18 +3591,9 @@ html.light-mode .category-card > .dua-body.nested-list > .empty-dua .empty-note{
 
 </div>
 
+
 <script>
 (function(){
-  function closeDirectChildDetails(container, except){
-    if(!container) return;
-    Array.from(container.children).forEach(function(child){
-      if(child.tagName && child.tagName.toLowerCase() === 'details' && child !== except){
-        child.open = false;
-        closeAllDescendants(child);
-      }
-    });
-  }
-
   function closeAllDescendants(root){
     if(!root) return;
     root.querySelectorAll('details[open]').forEach(function(item){
@@ -3610,37 +3601,61 @@ html.light-mode .category-card > .dua-body.nested-list > .empty-dua .empty-note{
     });
   }
 
-  document.addEventListener('DOMContentLoaded', function(){
-    var rootList = document.querySelector('.dua-list');
+  function closeSiblingDetails(items, current){
+    items.forEach(function(item){
+      if(item !== current){
+        item.open = false;
+        closeAllDescendants(item);
+      }
+    });
+  }
 
-    // Fresh state: all accordions closed after every reload / app reopen.
+  function getMainCategoryCards(){
+    var container = document.querySelector('.container');
+    if(!container) return [];
+
+    return Array.from(container.children).filter(function(child){
+      return child.tagName &&
+        child.tagName.toLowerCase() === 'details' &&
+        child.classList.contains('category-card');
+    });
+  }
+
+  document.addEventListener('DOMContentLoaded', function(){
+    // При каждом новом открытии страницы все выпадающие блоки закрыты.
     document.querySelectorAll('details.dua-card[open]').forEach(function(item){
       item.open = false;
     });
 
     document.querySelectorAll('details.dua-card').forEach(function(details){
       details.addEventListener('toggle', function(){
-        if(!details.open) {
+        if(!details.open){
           closeAllDescendants(details);
           return;
         }
 
-        // Main level: only one main category open.
-        if(details.classList.contains('category-card') && details.parentElement === rootList){
-          closeDirectChildDetails(rootList, details);
+        // Главные 9 блоков: открывается один, остальные сразу закрываются.
+        if(details.classList.contains('category-card')){
+          closeSiblingDetails(getMainCategoryCards(), details);
           return;
         }
 
-        // Inner level: only one inner item open inside the same parent list.
+        // Внутренние блоки внутри одного главного раздела: тоже открывается один.
         var parentList = details.parentElement;
         if(parentList && parentList.classList.contains('nested-list')){
-          closeDirectChildDetails(parentList, details);
+          var siblings = Array.from(parentList.children).filter(function(child){
+            return child.tagName &&
+              child.tagName.toLowerCase() === 'details' &&
+              child.classList.contains('dua-card');
+          });
+          closeSiblingDetails(siblings, details);
         }
       });
     });
   });
 })();
 </script>
+
 
 <script src="/bottom-nav.js"></script>
 </body>
