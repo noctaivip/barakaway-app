@@ -2811,6 +2811,32 @@ html.dark-mode .highlight-istikhara{
   color:#fff8e1;
 }
 </style>
+
+<style id="fortress-search-style">
+html body .fortress-search-wrap{width:min(100%,720px);margin:10px auto 18px;padding:0 4px}
+html body .fortress-search-bar{display:grid;grid-template-columns:minmax(0,1fr) 58px;align-items:center;gap:10px;padding:8px;border-radius:24px;border:1px solid rgba(215,181,109,.34);background:radial-gradient(circle at 8% 0%,rgba(215,181,109,.14),transparent 38%),linear-gradient(135deg,rgba(21,31,34,.96),rgba(10,17,20,.98));box-shadow:0 18px 42px rgba(0,0,0,.34),inset 0 1px 0 rgba(255,255,255,.055)}
+html body .fortress-search-input-shell{position:relative;min-width:0;display:flex;align-items:center}
+html body .fortress-search-icon{position:absolute;left:15px;width:19px;height:19px;color:#d7b56d;pointer-events:none}
+html body .fortress-search-input{width:100%;height:48px;border:1px solid rgba(215,181,109,.20);outline:none;border-radius:18px;padding:0 44px 0 44px;background:rgba(255,255,255,.045);color:#fff;font-size:15px;font-weight:750;letter-spacing:-.02em;box-shadow:inset 0 1px 0 rgba(255,255,255,.04)}
+html body .fortress-search-input::placeholder{color:rgba(231,219,190,.68);font-weight:700}
+html body .fortress-search-input:focus{border-color:rgba(246,223,162,.58);box-shadow:0 0 0 3px rgba(215,181,109,.11),inset 0 1px 0 rgba(255,255,255,.06)}
+html body .fortress-search-clear{position:absolute;right:9px;width:32px;height:32px;border:0;border-radius:999px;display:none;align-items:center;justify-content:center;cursor:pointer;color:#f0d891;background:rgba(215,181,109,.09);-webkit-tap-highlight-color:transparent}
+html body .fortress-search-clear.is-visible{display:flex}
+html body .fortress-search-clear svg{width:17px;height:17px;stroke:currentColor;stroke-width:2.2;fill:none;stroke-linecap:round}
+html body .fortress-voice-button{width:58px;height:48px;border:1px solid rgba(215,181,109,.34);border-radius:18px;display:flex;align-items:center;justify-content:center;cursor:pointer;color:#111814;background:linear-gradient(180deg,#f0d891,#b9913d);box-shadow:0 12px 24px rgba(0,0,0,.28),inset 0 1px 0 rgba(255,255,255,.28);-webkit-tap-highlight-color:transparent;transition:transform .16s ease,box-shadow .2s ease,filter .2s ease}
+html body .fortress-voice-button svg{width:22px;height:22px;stroke:currentColor;stroke-width:2.15;fill:none;stroke-linecap:round;stroke-linejoin:round}
+html body .fortress-voice-button:active{transform:scale(.96)}
+html body .fortress-voice-button.is-listening{filter:saturate(1.12);box-shadow:0 0 0 4px rgba(215,181,109,.16),0 0 28px rgba(240,216,145,.34),inset 0 1px 0 rgba(255,255,255,.30)}
+html body .fortress-search-status{min-height:18px;margin:7px 4px 0;color:#d7b56d;font-size:12px;font-weight:800;letter-spacing:-.02em;text-align:left;opacity:.9}
+html body .dua-search-hidden{display:none!important}
+html.light-mode body .fortress-search-bar{background:radial-gradient(circle at 8% 0%,rgba(181,138,54,.13),transparent 38%),linear-gradient(135deg,#fffaf0 0%,#f6fbf7 54%,#eef7f1 100%);border-color:rgba(181,138,54,.32);box-shadow:0 16px 34px rgba(18,34,24,.10),inset 0 1px 0 rgba(255,255,255,.96)}
+html.light-mode body .fortress-search-input{background:rgba(255,255,255,.82);border-color:rgba(181,138,54,.24);color:#142019}
+html.light-mode body .fortress-search-input::placeholder{color:rgba(82,97,88,.72)}
+html.light-mode body .fortress-search-clear{color:#745416;background:rgba(181,138,54,.10)}
+html.light-mode body .fortress-search-status{color:#745416}
+@media(max-width:700px){html body .fortress-search-wrap{margin:8px auto 16px;padding:0 2px}html body .fortress-search-bar{grid-template-columns:minmax(0,1fr) 54px;gap:8px;padding:7px;border-radius:22px}html body .fortress-search-input{height:46px;border-radius:17px;font-size:14px;padding-left:41px;padding-right:40px}html body .fortress-search-icon{left:13px;width:18px;height:18px}html body .fortress-search-clear{right:7px;width:31px;height:31px}html body .fortress-voice-button{width:54px;height:46px;border-radius:17px}html body .fortress-search-status{font-size:11.5px;margin-top:6px}}
+</style>
+
 </head>
 <body>
 <div class="container">
@@ -2820,7 +2846,19 @@ html.dark-mode .highlight-istikhara{
 <button aria-label="Включить режим чтения" class="fortress-action" data-fortress-action="reading" type="button"><span aria-hidden="true" class="fortress-action-icon"><svg viewbox="0 0 24 24"><path d="M4 5.5A2.5 2.5 0 0 1 6.5 3H20v16H6.5A2.5 2.5 0 0 0 4 21V5.5z"></path><path d="M8 7h8M8 11h7M8 15h6"></path></svg></span><span class="fortress-action-label">Чтение</span></button>
 <button aria-label="Открыть сохранённое место" class="fortress-action" data-fortress-action="save" type="button"><span aria-hidden="true" class="fortress-action-icon"><svg viewbox="0 0 24 24"><path d="M6 4.5A2.5 2.5 0 0 1 8.5 2h7A2.5 2.5 0 0 1 18 4.5V22l-6-3.4L6 22V4.5z"></path></svg></span><span class="fortress-action-label">Сохранить</span></button>
 <button aria-label="Переключить тему" class="fortress-action" data-fortress-action="theme" type="button"><span aria-hidden="true" class="fortress-action-icon"><svg viewbox="0 0 24 24"><path d="M21 12.7A8.5 8.5 0 0 1 11.3 3 7 7 0 1 0 21 12.7z"></path></svg></span><span class="fortress-action-label">Тема</span></button>
-</div><h1>Крепость мусульманина</h1>
+</div>
+<div class="fortress-search-wrap" role="search" aria-label="Поиск по дуа внутри этой страницы">
+  <div class="fortress-search-bar">
+    <div class="fortress-search-input-shell">
+      <svg aria-hidden="true" class="fortress-search-icon" viewBox="0 0 24 24"><path d="M10.8 18.1a7.3 7.3 0 1 1 0-14.6 7.3 7.3 0 0 1 0 14.6Z" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path><path d="m16.1 16.1 4.4 4.4" fill="none" stroke="currentColor" stroke-linecap="round" stroke-width="2"></path></svg>
+      <input autocomplete="off" class="fortress-search-input" id="fortressDuaSearchInput" inputmode="search" placeholder="Поиск по дуа: мечеть, дом, дорога..." type="search"/>
+      <button aria-label="Очистить поиск" class="fortress-search-clear" id="fortressDuaSearchClear" type="button"><svg viewBox="0 0 24 24"><path d="M6 6l12 12M18 6 6 18"></path></svg></button>
+    </div>
+    <button aria-label="Голосовой поиск" class="fortress-voice-button" id="fortressDuaVoiceButton" type="button"><svg viewBox="0 0 24 24"><path d="M12 14a3 3 0 0 0 3-3V6a3 3 0 0 0-6 0v5a3 3 0 0 0 3 3Z"></path><path d="M19 11a7 7 0 0 1-14 0"></path><path d="M12 18v4"></path><path d="M8 22h8"></path></svg></button>
+  </div>
+  <div aria-live="polite" class="fortress-search-status" id="fortressDuaSearchStatus"></div>
+</div>
+<h1>Крепость мусульманина</h1>
 <div class="hero-note">
     Ежедневные дуа, мольбы Пророка <span class="salawat-symbol">ﷺ</span> и обращения для разных жизненных ситуаций.
   </div>
@@ -7798,5 +7836,23 @@ html.dark-mode .highlight-istikhara{
 </div>
 </div>
 <button aria-label="Выйти из режима чтения" class="fortress-reading-exit" id="fortress-reading-exit" type="button">× Выйти</button>
+
+<script id="fortress-search-script">
+(function(){'use strict';
+function normalizeText(value){return (value||'').toString().toLowerCase().replace(/ё/g,'е').replace(/[ً-ٰٟۖ-ۭ]/g,'').replace(/[^p{L}p{N}s'-]+/gu,' ').replace(/s+/g,' ').trim();}
+function getTitle(card){var title=card.querySelector(':scope > summary .dua-title');return title?title.textContent.trim():'Дуа';}
+function initFortressSearch(){
+var input=document.getElementById('fortressDuaSearchInput');var clearBtn=document.getElementById('fortressDuaSearchClear');var voiceBtn=document.getElementById('fortressDuaVoiceButton');var status=document.getElementById('fortressDuaSearchStatus');
+var categories=Array.prototype.slice.call(document.querySelectorAll('.container > .dua-card.category-card'));var duaCards=Array.prototype.slice.call(document.querySelectorAll('.nested-list > .dua-card.nested-dua'));
+if(!input||!clearBtn||!status||!duaCards.length){return;}
+var index=duaCards.map(function(card){var body=card.querySelector(':scope > .dua-body');var title=getTitle(card);var raw=[title,body?body.textContent:card.textContent,card.getAttribute('data-dua-title')||'',card.id||''].join(' ');return{card:card,text:normalizeText(raw),title:title};});
+function showAll(){index.forEach(function(item){item.card.classList.remove('dua-search-hidden');});categories.forEach(function(category){category.classList.remove('dua-search-hidden');});status.textContent='';clearBtn.classList.remove('is-visible');}
+function applySearch(rawQuery){var query=normalizeText(rawQuery);var tokens=query?query.split(' ').filter(Boolean):[];if(!tokens.length){showAll();return;}clearBtn.classList.add('is-visible');var matchedCount=0;var firstMatch=null;index.forEach(function(item){var matched=tokens.every(function(token){return item.text.indexOf(token)!==-1;});item.card.classList.toggle('dua-search-hidden',!matched);if(matched){matchedCount+=1;if(!firstMatch){firstMatch=item.card;}item.card.open=true;}});categories.forEach(function(category){var hasVisibleChild=!!category.querySelector('.nested-dua:not(.dua-search-hidden)');category.classList.toggle('dua-search-hidden',!hasVisibleChild);if(hasVisibleChild){category.open=true;}});if(matchedCount){status.textContent='Найдено дуа: '+matchedCount;if(firstMatch&&!input.dataset.noScroll){window.requestAnimationFrame(function(){firstMatch.scrollIntoView({behavior:'smooth',block:'center'});});}}else{status.textContent='По этому запросу дуа не найдено';}input.dataset.noScroll='';}
+var searchTimer=null;input.addEventListener('input',function(){window.clearTimeout(searchTimer);searchTimer=window.setTimeout(function(){applySearch(input.value);},120);});clearBtn.addEventListener('click',function(){input.value='';input.focus();showAll();});
+var SpeechRecognition=window.SpeechRecognition||window.webkitSpeechRecognition;var recognition=null;if(SpeechRecognition&&voiceBtn){recognition=new SpeechRecognition();recognition.lang='ru-RU';recognition.interimResults=false;recognition.continuous=false;recognition.maxAlternatives=1;voiceBtn.addEventListener('click',function(){try{voiceBtn.classList.add('is-listening');status.textContent='Говорите запрос...';recognition.start();}catch(e){voiceBtn.classList.remove('is-listening');}});recognition.onresult=function(event){var spoken=event&&event.results&&event.results[0]&&event.results[0][0]?event.results[0][0].transcript:'';input.value=spoken.trim();input.dataset.noScroll='';applySearch(input.value);};recognition.onerror=function(){status.textContent='Голосовой поиск недоступен. Введите запрос вручную.';};recognition.onend=function(){voiceBtn.classList.remove('is-listening');};}else if(voiceBtn){voiceBtn.addEventListener('click',function(){status.textContent='Голосовой поиск не поддерживается этим браузером.';input.focus();});}}
+if(document.readyState==='loading'){document.addEventListener('DOMContentLoaded',initFortressSearch);}else{initFortressSearch();}
+})();
+</script>
+
 </body>
 </html>
