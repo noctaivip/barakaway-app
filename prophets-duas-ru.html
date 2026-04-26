@@ -1972,49 +1972,87 @@ html.light-mode body .fortress-panel-card{background:linear-gradient(180deg,#fff
 @media(max-width:700px){body .fortress-actions{gap:12px;margin:10px auto 14px;justify-content:space-between;padding:0 5px}body .fortress-action-icon{width:24px;height:24px}body .fortress-action svg{width:19px;height:19px}body .fortress-action-label{font-size:9.2px}body .dua-item-actions{gap:6px;padding:7px;border-radius:15px}body .dua-mini-action{font-size:10.5px;padding:6px 8px;min-height:32px}body .fortress-panel-card{width:94vw;max-height:80vh;border-radius:22px;padding:14px}body.reading-mode .dua-meaning{font-size:16px!important}body.reading-mode .dua-translit{font-size:15px!important}body.reading-mode .dua-arabic{font-size:20px!important}}
 </style>
 
-<style id="fortress-actions-visual-fix">
-/* === Final visual fix: clean icons, no square blocks === */
 
-/* Top action icons: no visible square/button background in dark or light mode */
-body .fortress-actions{
+
+<style id="fortress-actions-visual-fix">
+/* === Final clean icon-only actions: no visible boxes === */
+html body .fortress-actions{
   background:transparent !important;
+  background-color:transparent !important;
   border:0 !important;
   box-shadow:none !important;
+  outline:0 !important;
   padding:0 !important;
 }
 
-body .fortress-actions .fortress-action,
-html.light-mode body .fortress-actions .fortress-action,
-html.dark-mode body .fortress-actions .fortress-action{
+html body .fortress-actions button.fortress-action,
+html.light-mode body .fortress-actions button.fortress-action,
+html.dark-mode body .fortress-actions button.fortress-action{
+  appearance:none !important;
+  -webkit-appearance:none !important;
   background:transparent !important;
+  background-color:transparent !important;
+  background-image:none !important;
+  border:0 !important;
+  border-color:transparent !important;
+  outline:0 !important;
+  box-shadow:none !important;
+  border-radius:0 !important;
+  min-width:0 !important;
+  min-height:0 !important;
+  width:auto !important;
+  height:auto !important;
+  padding:0 !important;
+  margin:0 !important;
+  color:#7a5b18 !important;
+}
+
+html.dark-mode body .fortress-actions button.fortress-action{
+  color:#d7b56d !important;
+}
+
+html body .fortress-actions button.fortress-action:hover,
+html body .fortress-actions button.fortress-action:focus,
+html body .fortress-actions button.fortress-action:focus-visible,
+html body .fortress-actions button.fortress-action:active{
+  background:transparent !important;
+  background-color:transparent !important;
+  background-image:none !important;
+  border:0 !important;
+  outline:0 !important;
+  box-shadow:none !important;
+}
+
+html body .fortress-actions button.fortress-action.is-active{
+  background:transparent !important;
+  background-color:transparent !important;
+  border:0 !important;
+  box-shadow:none !important;
+  color:#5e4414 !important;
+}
+
+html.dark-mode body .fortress-actions button.fortress-action.is-active{
+  color:#f6dfa2 !important;
+}
+
+html body .fortress-action-icon,
+html body .fortress-action-label{
+  background:transparent !important;
+  background-color:transparent !important;
   border:0 !important;
   outline:0 !important;
   box-shadow:none !important;
   border-radius:0 !important;
-  min-height:auto !important;
-  padding:0 !important;
 }
 
-body .fortress-actions .fortress-action:focus,
-body .fortress-actions .fortress-action:focus-visible{
-  outline:0 !important;
-  box-shadow:none !important;
-}
-
-body .fortress-actions .fortress-action-icon{
+html body .fortress-actions button.fortress-action svg{
   background:transparent !important;
   border:0 !important;
   box-shadow:none !important;
 }
 
-body .fortress-actions .fortress-action-label{
-  background:transparent !important;
-  border:0 !important;
-  box-shadow:none !important;
-}
-
-/* Per-dua controls: icon-only, right side, no button block */
-body .dua-item-actions,
+/* Per-dua controls: only icons on the right side */
+html body .dua-item-actions,
 html.light-mode body .dua-item-actions,
 html.dark-mode body .dua-item-actions{
   display:flex !important;
@@ -2024,121 +2062,164 @@ html.dark-mode body .dua-item-actions{
   margin:0 0 10px !important;
   padding:0 !important;
   background:transparent !important;
+  background-color:transparent !important;
+  background-image:none !important;
   border:0 !important;
+  outline:0 !important;
   box-shadow:none !important;
   border-radius:0 !important;
 }
 
-body .dua-mini-action,
-html.light-mode body .dua-mini-action,
-html.dark-mode body .dua-mini-action{
+html body button.dua-mini-action,
+html.light-mode body button.dua-mini-action,
+html.dark-mode body button.dua-mini-action{
+  appearance:none !important;
+  -webkit-appearance:none !important;
   width:34px !important;
   height:34px !important;
   min-width:34px !important;
   min-height:34px !important;
   padding:0 !important;
+  margin:0 !important;
   border:0 !important;
+  border-color:transparent !important;
   outline:0 !important;
   background:transparent !important;
+  background-color:transparent !important;
+  background-image:none !important;
   box-shadow:none !important;
   border-radius:999px !important;
   display:inline-flex !important;
   align-items:center !important;
   justify-content:center !important;
-  color:#d7b56d !important;
+  color:#7a5b18 !important;
   cursor:pointer !important;
 }
 
-body .dua-mini-action span:not(.mini-icon){
+html.dark-mode body button.dua-mini-action{
+  color:#d7b56d !important;
+}
+
+html body button.dua-mini-action:hover,
+html body button.dua-mini-action:focus,
+html body button.dua-mini-action:focus-visible,
+html body button.dua-mini-action:active{
+  background:transparent !important;
+  background-color:transparent !important;
+  background-image:none !important;
+  border:0 !important;
+  outline:0 !important;
+  box-shadow:none !important;
+}
+
+html body button.dua-mini-action span:not(.mini-icon){
   display:none !important;
 }
 
-body .dua-mini-action .mini-icon{
+html body button.dua-mini-action .mini-icon{
   width:24px !important;
   height:24px !important;
   display:flex !important;
   align-items:center !important;
   justify-content:center !important;
+  background:transparent !important;
+  border:0 !important;
+  box-shadow:none !important;
 }
 
-body .dua-mini-action svg{
+html body button.dua-mini-action svg{
   width:19px !important;
   height:19px !important;
   stroke:currentColor !important;
   fill:none !important;
-}
-
-body .dua-mini-action:focus,
-body .dua-mini-action:focus-visible{
-  outline:0 !important;
-  box-shadow:none !important;
-}
-
-body .dua-mini-action:active{
-  transform:scale(.92);
-}
-
-body .dua-mini-action.is-active{
   background:transparent !important;
   border:0 !important;
   box-shadow:none !important;
-  color:#f6dfa2 !important;
 }
 
-body .dua-mini-action[data-dua-action="favorite"].is-active svg,
-body .dua-mini-action[data-dua-action="save"].is-active svg{
-  fill:currentColor !important;
-}
-
-/* Light mode: professional brown-gold icons without visible boxes */
-html.light-mode body .fortress-actions .fortress-action,
-html.light-mode body .dua-mini-action{
-  color:#7a5b18 !important;
-}
-
-html.light-mode body .fortress-actions .fortress-action.is-active,
-html.light-mode body .dua-mini-action.is-active{
+html body button.dua-mini-action.is-active{
+  background:transparent !important;
+  background-color:transparent !important;
+  border:0 !important;
+  box-shadow:none !important;
   color:#5e4414 !important;
 }
 
-/* Slightly better spacing inside opened dua body */
-body .nested-dua > .dua-body{
-  position:relative;
+html.dark-mode body button.dua-mini-action.is-active{
+  color:#f6dfa2 !important;
+}
+
+html body button.dua-mini-action[data-dua-action="favorite"].is-active svg,
+html body button.dua-mini-action[data-dua-action="save"].is-active svg{
+  fill:currentColor !important;
+}
+
+/* Favorites panel: full dua cards inside favorites */
+html body .fortress-favorite-full{
+  border:1px solid rgba(215,181,109,.24);
+  background:linear-gradient(180deg,rgba(215,181,109,.08),rgba(255,255,255,.02));
+  border-radius:18px;
+  padding:12px;
+  margin-bottom:12px;
+}
+
+html body .fortress-favorite-full-title{
+  color:#f6dfa2;
+  font-size:15px;
+  font-weight:950;
+  margin:0 0 10px;
+}
+
+html body .fortress-favorite-full .dua-item-actions{
+  display:none !important;
+}
+
+html.light-mode body .fortress-favorite-full{
+  background:#fffaf0;
+  border-color:rgba(181,138,54,.24);
+}
+
+html.light-mode body .fortress-favorite-full-title{
+  color:#745416;
 }
 
 @media(max-width:700px){
-  body .fortress-actions{
+  html body .fortress-actions{
     gap:14px !important;
     justify-content:center !important;
   }
 
-  body .fortress-actions .fortress-action-icon{
+  html body .fortress-actions button.fortress-action{
+    padding:0 !important;
+  }
+
+  html body .fortress-actions .fortress-action-icon{
     width:23px !important;
     height:23px !important;
   }
 
-  body .fortress-actions .fortress-action svg{
+  html body .fortress-actions button.fortress-action svg{
     width:19px !important;
     height:19px !important;
   }
 
-  body .fortress-actions .fortress-action-label{
+  html body .fortress-actions .fortress-action-label{
     font-size:9px !important;
   }
 
-  body .dua-item-actions{
+  html body .dua-item-actions{
     gap:10px !important;
     margin-bottom:8px !important;
   }
 
-  body .dua-mini-action{
+  html body button.dua-mini-action{
     width:31px !important;
     height:31px !important;
     min-width:31px !important;
     min-height:31px !important;
   }
 
-  body .dua-mini-action svg{
+  html body button.dua-mini-action svg{
     width:18px !important;
     height:18px !important;
   }
@@ -4135,7 +4216,34 @@ body .nested-dua > .dua-body{
   function openDua(id){const dua=getDua(id);if(!dua)return;closeAll();let parent=dua.parentElement;while(parent){if(parent.tagName&&parent.tagName.toLowerCase()==="details")parent.open=true;parent=parent.parentElement}dua.open=true;setTimeout(function(){dua.scrollIntoView({behavior:"smooth",block:"start"})},80)}
   function syncFavoriteState(){const favs=getFavorites();setActive("favorite",favs.length>0);qsa('[data-dua-action="favorite"]').forEach(function(btn){btn.classList.toggle("is-active",favs.includes(btn.getAttribute("data-dua-id")))})}
   function syncSaveState(){const raw=localStorage.getItem(PROGRESS_KEY);setActive("save",!!raw);qsa('[data-dua-action="save"]').forEach(function(btn){let active=false;try{active=JSON.parse(raw||"{}").id===btn.getAttribute("data-dua-id")}catch(e){}btn.classList.toggle("is-active",active)})}
-  function renderFavorites(){const list=qs("#fortress-favorites-list");if(!list)return;const favs=getFavorites();if(favs.length===0){list.innerHTML='<div class="fortress-empty">Пока нет избранных дуа. Откройте дуа и нажмите звёздочку.</div>';return}list.innerHTML="";favs.forEach(function(id){const row=document.createElement("button");row.type="button";row.className="fortress-favorite-row";row.textContent=getDuaTitle(id);row.addEventListener("click",function(){closePanel();openDua(id)});list.appendChild(row)})}
+  function renderFavorites(){
+    const list=qs("#fortress-favorites-list");
+    if(!list)return;
+    const favs=getFavorites();
+    if(favs.length===0){
+      list.innerHTML='<div class="fortress-empty">Пока нет избранных дуа. Откройте дуа и нажмите звёздочку.</div>';
+      return;
+    }
+    list.innerHTML="";
+    favs.forEach(function(id){
+      const source=getDua(id);
+      if(!source)return;
+      const title=getDuaTitle(id);
+      const body=source.querySelector(":scope > .dua-body");
+      const wrap=document.createElement("div");
+      wrap.className="fortress-favorite-full";
+      const titleNode=document.createElement("div");
+      titleNode.className="fortress-favorite-full-title";
+      titleNode.textContent=title;
+      wrap.appendChild(titleNode);
+      if(body){
+        const clone=body.cloneNode(true);
+        clone.querySelectorAll(".dua-item-actions").forEach(function(el){el.remove();});
+        wrap.appendChild(clone);
+      }
+      list.appendChild(wrap);
+    });
+  }
   function openPanel(){renderFavorites();const panel=qs("#fortress-favorites-panel");if(panel){panel.classList.add("is-open");panel.setAttribute("aria-hidden","false")}}function closePanel(){const panel=qs("#fortress-favorites-panel");if(panel){panel.classList.remove("is-open");panel.setAttribute("aria-hidden","true")}}
   function toggleFavoriteDua(id){let favs=getFavorites();if(favs.includes(id)){favs=favs.filter(function(x){return x!==id});showToast("Дуа убрано из избранного")}else{favs.push(id);showToast("Дуа добавлено в избранное")}setFavorites(favs);syncFavoriteState()}
   async function shareText(title,text,url){const data={title:title,text:text,url:url||window.location.href};try{if(navigator.share){await navigator.share(data);showToast("Открыто меню отправки")}else if(navigator.clipboard){await navigator.clipboard.writeText((text?text+"\n":"")+data.url);showToast("Ссылка скопирована")}else{showToast("Скопируйте ссылку из адресной строки")}}catch(e){showToast("Отправка отменена")}}
