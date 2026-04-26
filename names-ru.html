@@ -67,6 +67,266 @@ html.light-mode .player-card{background:radial-gradient(circle at 50% 0%,rgba(45
 @media(max-width:700px){.container{padding:20px 12px 92px}h1{font-size:25px;margin-top:6px}.player-card{border-radius:24px;padding:20px 13px 18px;margin-top:14px}.player-card::after{inset:7px;border-radius:18px}.arabic{font-size:44px}.translit{font-size:26px}.meaning{font-size:20px;margin-bottom:14px}.desc{font-size:14px;min-height:54px;padding:14px 12px}.controls{grid-template-columns:1fr;gap:10px}.sec-box{min-height:46px}.nav-buttons{grid-template-columns:1fr 50px 1fr}button{min-height:46px;padding:10px 11px;font-size:13px}.dropdown-block{border-radius:22px;margin-bottom:15px}.dropdown-block summary{padding:16px 14px;font-size:18px}.dropdown-content{padding:13px}.names-grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:9px}.name-chip{min-height:112px;border-radius:16px;padding:9px}.name-chip .chip-ar{font-size:23px}.name-chip .chip-tr{font-size:13px}.name-chip .chip-mean{font-size:11.5px}}
 @media(max-width:380px){.names-grid{grid-template-columns:1fr}}
 
+
+
+/* === Premium stability + readability refinements === */
+
+/* Fixed visual rhythm: the dua/explanation area no longer changes player height */
+.player-card{
+  display:flex;
+  flex-direction:column;
+}
+
+.desc{
+  height:92px !important;
+  min-height:92px !important;
+  max-height:92px !important;
+  overflow:hidden;
+  line-height:1.45;
+  color:#e8dcc0;
+  background:
+    linear-gradient(135deg, rgba(215,181,109,.16), rgba(45,122,70,.10)),
+    radial-gradient(circle at 50% 0%, rgba(215,181,109,.12), transparent 55%);
+  border:1px solid rgba(215,181,109,.26);
+  box-shadow:
+    inset 0 1px 0 rgba(255,255,255,.05),
+    0 14px 30px rgba(0,0,0,.16);
+}
+
+html.light-mode .desc{
+  color:#38443b;
+  background:
+    linear-gradient(135deg, rgba(180,135,46,.12), rgba(45,122,70,.08)),
+    radial-gradient(circle at 50% 0%, rgba(180,135,46,.10), transparent 55%);
+  border:1px solid rgba(180,135,46,.22);
+  box-shadow:0 12px 28px rgba(45,122,70,.08);
+}
+
+.controls{
+  margin-top:18px !important;
+}
+
+.nav-buttons{
+  margin-top:12px !important;
+}
+
+.manual-note{
+  height:42px;
+  min-height:42px;
+  max-height:42px;
+  overflow:hidden;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  line-height:1.35;
+  padding:0 8px;
+  opacity:.92;
+}
+
+/* More premium player depth */
+.player-card{
+  border-color:rgba(215,181,109,.36);
+  background:
+    radial-gradient(circle at 50% -12%, rgba(215,181,109,.16), transparent 34%),
+    radial-gradient(circle at 50% 0%, rgba(45,122,70,.25), transparent 45%),
+    linear-gradient(180deg, rgba(20,30,28,.98) 0%, rgba(13,19,24,.98) 100%);
+}
+
+html.light-mode .player-card{
+  background:
+    radial-gradient(circle at 50% -12%, rgba(180,135,46,.13), transparent 34%),
+    radial-gradient(circle at 50% 0%, rgba(45,122,70,.11), transparent 45%),
+    linear-gradient(180deg,#ffffff 0%,#f5faf7 100%);
+}
+
+.arabic{
+  letter-spacing:.01em;
+  color:#e4c27a;
+}
+
+html.light-mode .arabic{
+  color:#a77927;
+}
+
+.meaning{
+  color:#79d38d;
+}
+
+html.light-mode .meaning{
+  color:#2d7a46;
+}
+
+/* Premium control blocks */
+.sec-box,
+.control-group > div[style] button,
+.nav-buttons button{
+  border-radius:18px;
+}
+
+.sec-box{
+  background:linear-gradient(180deg, rgba(255,255,255,.055), rgba(255,255,255,.02));
+  border:1px solid rgba(215,181,109,.18);
+}
+
+html.light-mode .sec-box{
+  background:linear-gradient(180deg,#ffffff,#f6faf8);
+  border:1px solid rgba(180,135,46,.16);
+}
+
+/* Distinct, readable rich section: "Как обращаться..." */
+.dropdown-block:nth-of-type(2){
+  border-color:rgba(215,181,109,.34);
+  background:
+    radial-gradient(circle at 12% 0%, rgba(215,181,109,.18), transparent 30%),
+    radial-gradient(circle at 88% 12%, rgba(45,122,70,.13), transparent 30%),
+    linear-gradient(180deg, rgba(34,27,16,.94), rgba(18,22,23,.96));
+}
+
+html.light-mode .dropdown-block:nth-of-type(2){
+  background:
+    radial-gradient(circle at 12% 0%, rgba(180,135,46,.13), transparent 32%),
+    radial-gradient(circle at 88% 12%, rgba(45,122,70,.08), transparent 32%),
+    linear-gradient(180deg,#fffaf0,#f7fbf8);
+}
+
+.dropdown-block:nth-of-type(2) summary{
+  color:#f0cf86;
+  background:
+    linear-gradient(180deg, rgba(215,181,109,.16), rgba(45,122,70,.07));
+}
+
+html.light-mode .dropdown-block:nth-of-type(2) summary{
+  color:#8e641d;
+  background:
+    linear-gradient(180deg, rgba(180,135,46,.12), rgba(45,122,70,.06));
+}
+
+.dropdown-block:nth-of-type(2) .dropdown-content{
+  padding:18px;
+  background:
+    linear-gradient(180deg, rgba(0,0,0,.10), rgba(0,0,0,.04));
+}
+
+html.light-mode .dropdown-block:nth-of-type(2) .dropdown-content{
+  background:linear-gradient(180deg,#ffffff,#fbf8ef);
+}
+
+.dropdown-block:nth-of-type(2) .dropdown-content p{
+  color:#e4d7bd;
+  font-size:15px;
+  line-height:1.72;
+  font-weight:650;
+}
+
+html.light-mode .dropdown-block:nth-of-type(2) .dropdown-content p{
+  color:#3d453f;
+}
+
+.quote{
+  position:relative;
+  overflow:hidden;
+  padding:18px 18px 18px 20px;
+  background:
+    radial-gradient(circle at 0% 0%, rgba(215,181,109,.18), transparent 36%),
+    linear-gradient(135deg, rgba(215,181,109,.12), rgba(45,122,70,.08));
+  border:1px solid rgba(215,181,109,.28);
+  box-shadow:
+    inset 0 1px 0 rgba(255,255,255,.05),
+    0 16px 36px rgba(0,0,0,.18);
+}
+
+.quote::before{
+  content:"";
+  position:absolute;
+  left:0;
+  top:14px;
+  bottom:14px;
+  width:4px;
+  border-radius:999px;
+  background:linear-gradient(180deg,#e4c27a,#4caf6a);
+}
+
+.quote p{
+  color:#f3ead8;
+  font-size:15px;
+  line-height:1.65;
+}
+
+html.light-mode .quote{
+  background:
+    radial-gradient(circle at 0% 0%, rgba(180,135,46,.15), transparent 36%),
+    linear-gradient(135deg, rgba(180,135,46,.10), rgba(45,122,70,.07));
+  border:1px solid rgba(180,135,46,.22);
+  box-shadow:0 12px 28px rgba(45,122,70,.08);
+}
+
+html.light-mode .quote p{
+  color:#2e3832;
+}
+
+.quote strong{
+  display:inline-block;
+  color:#f0cf86;
+  min-width:92px;
+  font-weight:900;
+}
+
+html.light-mode .quote strong{
+  color:#8e641d;
+}
+
+/* More compact but readable 99 names grid */
+.name-chip{
+  min-height:112px;
+  border-color:rgba(215,181,109,.18);
+}
+
+.name-chip .chip-mean{
+  opacity:.95;
+}
+
+/* Mobile-specific fixed height so controls stay locked */
+@media(max-width:700px){
+  .desc{
+    height:104px !important;
+    min-height:104px !important;
+    max-height:104px !important;
+    font-size:14px;
+    line-height:1.42;
+    padding:13px 12px;
+  }
+
+  .manual-note{
+    height:48px;
+    min-height:48px;
+    max-height:48px;
+    font-size:12px;
+  }
+
+  .controls{
+    margin-top:14px !important;
+  }
+
+  .dropdown-block:nth-of-type(2) .dropdown-content{
+    padding:15px;
+  }
+
+  .quote{
+    padding:16px 14px 16px 17px;
+  }
+
+  .quote strong{
+    min-width:78px;
+  }
+}
+
+@media(max-width:380px){
+  .desc{
+    height:116px !important;
+    min-height:116px !important;
+    max-height:116px !important;
+  }
+}
 </style>
 <script src="/theme-init.js"></script>
 <link rel="stylesheet" href="/theme.css">
