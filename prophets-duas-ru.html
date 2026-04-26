@@ -1971,6 +1971,180 @@ html.light-mode body .dua-mini-action{color:#745416;background:rgba(255,255,255,
 html.light-mode body .fortress-panel-card{background:linear-gradient(180deg,#ffffff,#f6faf7)}html.light-mode body .fortress-panel-title{color:#745416}html.light-mode body .fortress-panel-subtitle{color:#526158}html.light-mode body .fortress-favorite-row{color:#142019;background:#fffaf0}html.light-mode body .fortress-empty{color:#526158}
 @media(max-width:700px){body .fortress-actions{gap:12px;margin:10px auto 14px;justify-content:space-between;padding:0 5px}body .fortress-action-icon{width:24px;height:24px}body .fortress-action svg{width:19px;height:19px}body .fortress-action-label{font-size:9.2px}body .dua-item-actions{gap:6px;padding:7px;border-radius:15px}body .dua-mini-action{font-size:10.5px;padding:6px 8px;min-height:32px}body .fortress-panel-card{width:94vw;max-height:80vh;border-radius:22px;padding:14px}body.reading-mode .dua-meaning{font-size:16px!important}body.reading-mode .dua-translit{font-size:15px!important}body.reading-mode .dua-arabic{font-size:20px!important}}
 </style>
+
+<style id="fortress-actions-visual-fix">
+/* === Final visual fix: clean icons, no square blocks === */
+
+/* Top action icons: no visible square/button background in dark or light mode */
+body .fortress-actions{
+  background:transparent !important;
+  border:0 !important;
+  box-shadow:none !important;
+  padding:0 !important;
+}
+
+body .fortress-actions .fortress-action,
+html.light-mode body .fortress-actions .fortress-action,
+html.dark-mode body .fortress-actions .fortress-action{
+  background:transparent !important;
+  border:0 !important;
+  outline:0 !important;
+  box-shadow:none !important;
+  border-radius:0 !important;
+  min-height:auto !important;
+  padding:0 !important;
+}
+
+body .fortress-actions .fortress-action:focus,
+body .fortress-actions .fortress-action:focus-visible{
+  outline:0 !important;
+  box-shadow:none !important;
+}
+
+body .fortress-actions .fortress-action-icon{
+  background:transparent !important;
+  border:0 !important;
+  box-shadow:none !important;
+}
+
+body .fortress-actions .fortress-action-label{
+  background:transparent !important;
+  border:0 !important;
+  box-shadow:none !important;
+}
+
+/* Per-dua controls: icon-only, right side, no button block */
+body .dua-item-actions,
+html.light-mode body .dua-item-actions,
+html.dark-mode body .dua-item-actions{
+  display:flex !important;
+  justify-content:flex-end !important;
+  align-items:center !important;
+  gap:12px !important;
+  margin:0 0 10px !important;
+  padding:0 !important;
+  background:transparent !important;
+  border:0 !important;
+  box-shadow:none !important;
+  border-radius:0 !important;
+}
+
+body .dua-mini-action,
+html.light-mode body .dua-mini-action,
+html.dark-mode body .dua-mini-action{
+  width:34px !important;
+  height:34px !important;
+  min-width:34px !important;
+  min-height:34px !important;
+  padding:0 !important;
+  border:0 !important;
+  outline:0 !important;
+  background:transparent !important;
+  box-shadow:none !important;
+  border-radius:999px !important;
+  display:inline-flex !important;
+  align-items:center !important;
+  justify-content:center !important;
+  color:#d7b56d !important;
+  cursor:pointer !important;
+}
+
+body .dua-mini-action span:not(.mini-icon){
+  display:none !important;
+}
+
+body .dua-mini-action .mini-icon{
+  width:24px !important;
+  height:24px !important;
+  display:flex !important;
+  align-items:center !important;
+  justify-content:center !important;
+}
+
+body .dua-mini-action svg{
+  width:19px !important;
+  height:19px !important;
+  stroke:currentColor !important;
+  fill:none !important;
+}
+
+body .dua-mini-action:focus,
+body .dua-mini-action:focus-visible{
+  outline:0 !important;
+  box-shadow:none !important;
+}
+
+body .dua-mini-action:active{
+  transform:scale(.92);
+}
+
+body .dua-mini-action.is-active{
+  background:transparent !important;
+  border:0 !important;
+  box-shadow:none !important;
+  color:#f6dfa2 !important;
+}
+
+body .dua-mini-action[data-dua-action="favorite"].is-active svg,
+body .dua-mini-action[data-dua-action="save"].is-active svg{
+  fill:currentColor !important;
+}
+
+/* Light mode: professional brown-gold icons without visible boxes */
+html.light-mode body .fortress-actions .fortress-action,
+html.light-mode body .dua-mini-action{
+  color:#7a5b18 !important;
+}
+
+html.light-mode body .fortress-actions .fortress-action.is-active,
+html.light-mode body .dua-mini-action.is-active{
+  color:#5e4414 !important;
+}
+
+/* Slightly better spacing inside opened dua body */
+body .nested-dua > .dua-body{
+  position:relative;
+}
+
+@media(max-width:700px){
+  body .fortress-actions{
+    gap:14px !important;
+    justify-content:center !important;
+  }
+
+  body .fortress-actions .fortress-action-icon{
+    width:23px !important;
+    height:23px !important;
+  }
+
+  body .fortress-actions .fortress-action svg{
+    width:19px !important;
+    height:19px !important;
+  }
+
+  body .fortress-actions .fortress-action-label{
+    font-size:9px !important;
+  }
+
+  body .dua-item-actions{
+    gap:10px !important;
+    margin-bottom:8px !important;
+  }
+
+  body .dua-mini-action{
+    width:31px !important;
+    height:31px !important;
+    min-width:31px !important;
+    min-height:31px !important;
+  }
+
+  body .dua-mini-action svg{
+    width:18px !important;
+    height:18px !important;
+  }
+}
+</style>
+
 </head>
 <body>
 <div class="container">
