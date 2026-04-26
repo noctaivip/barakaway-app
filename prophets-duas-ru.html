@@ -2654,6 +2654,69 @@ body .dua-subgroup-list > .nested-dua{
   }
 }
 </style>
+
+<style id="favorite-remove-fix-style">
+/* Favorite panel remove button: filled star removes dua from favorites */
+html body .fortress-favorite-accordion summary{
+  grid-template-columns:1fr 30px 24px !important;
+}
+html body .fortress-favorite-remove{
+  appearance:none !important;
+  -webkit-appearance:none !important;
+  width:30px !important;
+  height:30px !important;
+  min-width:30px !important;
+  min-height:30px !important;
+  padding:0 !important;
+  margin:0 !important;
+  border:0 !important;
+  outline:0 !important;
+  background:transparent !important;
+  background-color:transparent !important;
+  box-shadow:none !important;
+  border-radius:999px !important;
+  display:flex !important;
+  align-items:center !important;
+  justify-content:center !important;
+  color:#f6dfa2 !important;
+  cursor:pointer !important;
+  -webkit-tap-highlight-color:transparent !important;
+}
+html body .fortress-favorite-remove svg{
+  width:20px !important;
+  height:20px !important;
+  display:block !important;
+  stroke:currentColor !important;
+  fill:currentColor !important;
+  stroke-width:1.8 !important;
+  stroke-linecap:round !important;
+  stroke-linejoin:round !important;
+  filter:drop-shadow(0 2px 5px rgba(0,0,0,.26));
+}
+html body .fortress-favorite-remove:active{
+  transform:scale(.90);
+}
+html.light-mode body .fortress-favorite-remove{
+  color:#8a681f !important;
+}
+@media(max-width:700px){
+  html body .fortress-favorite-accordion summary{
+    grid-template-columns:1fr 28px 22px !important;
+    gap:8px !important;
+  }
+  html body .fortress-favorite-remove{
+    width:28px !important;
+    height:28px !important;
+    min-width:28px !important;
+    min-height:28px !important;
+  }
+  html body .fortress-favorite-remove svg{
+    width:18px !important;
+    height:18px !important;
+  }
+}
+</style>
+
 </head>
 <body>
 <div class="container">
@@ -4740,11 +4803,28 @@ body .dua-subgroup-list > .nested-dua{
       titleNode.className="fortress-favorite-title";
       titleNode.textContent=title;
 
+      const removeBtn=document.createElement("button");
+      removeBtn.type="button";
+      removeBtn.className="fortress-favorite-remove";
+      removeBtn.setAttribute("aria-label","Убрать из избранного");
+      removeBtn.setAttribute("title","Убрать из избранного");
+      removeBtn.innerHTML='<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3.8l2.35 4.76 5.25.76-3.8 3.7.9 5.23L12 15.78 7.3 18.25l.9-5.23-3.8-3.7 5.25-.76L12 3.8z"></path></svg>';
+      removeBtn.addEventListener("click",function(e){
+        e.preventDefault();
+        e.stopPropagation();
+        let current=getFavorites().filter(function(x){return x!==id});
+        setFavorites(current);
+        syncFavoriteState();
+        renderFavorites();
+        showToast("Дуа убрано из избранного");
+      });
+
       const arrow=document.createElement("span");
       arrow.className="fortress-favorite-arrow";
       arrow.textContent="⌄";
 
       summary.appendChild(titleNode);
+      summary.appendChild(removeBtn);
       summary.appendChild(arrow);
       item.appendChild(summary);
 
