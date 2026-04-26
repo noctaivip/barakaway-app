@@ -2715,9 +2715,10 @@ html.light-mode body .fortress-favorite-remove{
 }
 </style>
 
+
 <style id="dua-actions-uniform-final">
-/* Uniform per-dua actions: same standard as Prophet duas */
-body .nested-dua > .dua-body > .dua-item-actions{
+/* Final per-dua icon actions: icon-only, no broken text, same standard everywhere */
+html body .nested-dua > .dua-body > .dua-item-actions{
   display:flex !important;
   justify-content:flex-end !important;
   align-items:center !important;
@@ -2725,10 +2726,11 @@ body .nested-dua > .dua-body > .dua-item-actions{
   margin:0 0 10px !important;
   padding:0 !important;
   background:transparent !important;
+  background-color:transparent !important;
   border:0 !important;
   box-shadow:none !important;
 }
-body .nested-dua > .dua-body > .dua-item-actions .dua-mini-action{
+html body .nested-dua > .dua-body > .dua-item-actions .dua-mini-action{
   appearance:none !important;
   -webkit-appearance:none !important;
   width:34px !important;
@@ -2739,33 +2741,62 @@ body .nested-dua > .dua-body > .dua-item-actions .dua-mini-action{
   margin:0 !important;
   border:0 !important;
   background:transparent !important;
+  background-color:transparent !important;
   box-shadow:none !important;
+  border-radius:999px !important;
   display:inline-flex !important;
   align-items:center !important;
   justify-content:center !important;
   color:#d7b56d !important;
+  cursor:pointer !important;
+  -webkit-tap-highlight-color:transparent !important;
 }
 html.light-mode body .nested-dua > .dua-body > .dua-item-actions .dua-mini-action{
   color:#7a5b18 !important;
 }
-body .nested-dua > .dua-body > .dua-item-actions .dua-mini-action span:not(.mini-icon){
+html body .nested-dua > .dua-body > .dua-item-actions .dua-mini-action span:not(.mini-icon){
   display:none !important;
 }
-body .nested-dua > .dua-body > .dua-item-actions .mini-icon{
+html body .nested-dua > .dua-body > .dua-item-actions .mini-icon{
   width:24px !important;
   height:24px !important;
   display:flex !important;
   align-items:center !important;
   justify-content:center !important;
+  background:transparent !important;
+  border:0 !important;
+  box-shadow:none !important;
 }
-body .nested-dua > .dua-body > .dua-item-actions svg{
+html body .nested-dua > .dua-body > .dua-item-actions svg{
   width:19px !important;
   height:19px !important;
   fill:none !important;
   stroke:currentColor !important;
+  stroke-width:2 !important;
+  stroke-linecap:round !important;
+  stroke-linejoin:round !important;
+  background:transparent !important;
+  border:0 !important;
+  box-shadow:none !important;
 }
-body .nested-dua > .dua-body > .dua-item-actions .dua-mini-action.is-active svg{
+html body .nested-dua > .dua-body > .dua-item-actions .dua-mini-action.is-active svg{
   fill:currentColor !important;
+}
+@media(max-width:700px){
+  html body .nested-dua > .dua-body > .dua-item-actions{
+    gap:10px !important;
+    margin-bottom:8px !important;
+  }
+  html body .nested-dua > .dua-body > .dua-item-actions .dua-mini-action{
+    width:31px !important;
+    height:31px !important;
+    min-width:31px !important;
+    min-height:31px !important;
+  }
+  html body .nested-dua > .dua-body > .dua-item-actions svg{
+    width:18px !important;
+    height:18px !important;
+  }
 }
 </style>
 </head>
@@ -2799,8 +2830,11 @@ body .nested-dua > .dua-body > .dua-item-actions .dua-mini-action.is-active svg{
 </div>
 <div class="dua-arrow">▾</div>
 </summary>
-<div class="dua-body">< data-dua-actions-for="prophet-dua-1"></>
-
+<div class="dua-body"><div class="dua-item-actions" data-dua-actions-for="prophet-dua-1">
+<button aria-label="Добавить в избранное" class="dua-mini-action" data-dua-action="favorite" data-dua-id="prophet-dua-1" type="button"><span aria-hidden="true" class="mini-icon"><svg viewbox="0 0 24 24"><path d="M12 3.8l2.35 4.76 5.25.76-3.8 3.7.9 5.23L12 15.78 7.3 18.25l.9-5.23-3.8-3.7 5.25-.76L12 3.8z"></path></svg></span><span>Избранное</span></button>
+<button aria-label="Поделиться этим дуа" class="dua-mini-action" data-dua-action="share" data-dua-id="prophet-dua-1" type="button"><span aria-hidden="true" class="mini-icon"><svg viewbox="0 0 24 24"><path d="M18 8a3 3 0 1 0-2.83-4H15a3 3 0 0 0 .18 1.02L8.9 8.66A3 3 0 1 0 9 15.34l6.28 3.64A3 3 0 1 0 16 17.3l-6.28-3.64a3.1 3.1 0 0 0 0-3.32l6.28-3.64A3 3 0 0 0 18 8z"></path></svg></span><span>Поделиться</span></button>
+<button aria-label="Сохранить это место" class="dua-mini-action" data-dua-action="save" data-dua-id="prophet-dua-1" type="button"><span aria-hidden="true" class="mini-icon"><svg viewbox="0 0 24 24"><path d="M6 4.5A2.5 2.5 0 0 1 8.5 2h7A2.5 2.5 0 0 1 18 4.5V22l-6-3.4L6 22V4.5z"></path></svg></span><span>Сохранить</span></button>
+</div>
 <div class="field-label">Перевод</div>
 <p class="dua-meaning">О Аллах, поистине, Ты — Прощающий, любишь прощение, так прости же меня.</p>
 <div class="field-label">Транскрипция</div>
@@ -2818,8 +2852,11 @@ body .nested-dua > .dua-body > .dua-item-actions .dua-mini-action.is-active svg{
 </div>
 <div class="dua-arrow">▾</div>
 </summary>
-<div class="dua-body">< data-dua-actions-for="prophet-dua-2"></>
-
+<div class="dua-body"><div class="dua-item-actions" data-dua-actions-for="prophet-dua-2">
+<button aria-label="Добавить в избранное" class="dua-mini-action" data-dua-action="favorite" data-dua-id="prophet-dua-2" type="button"><span aria-hidden="true" class="mini-icon"><svg viewbox="0 0 24 24"><path d="M12 3.8l2.35 4.76 5.25.76-3.8 3.7.9 5.23L12 15.78 7.3 18.25l.9-5.23-3.8-3.7 5.25-.76L12 3.8z"></path></svg></span><span>Избранное</span></button>
+<button aria-label="Поделиться этим дуа" class="dua-mini-action" data-dua-action="share" data-dua-id="prophet-dua-2" type="button"><span aria-hidden="true" class="mini-icon"><svg viewbox="0 0 24 24"><path d="M18 8a3 3 0 1 0-2.83-4H15a3 3 0 0 0 .18 1.02L8.9 8.66A3 3 0 1 0 9 15.34l6.28 3.64A3 3 0 1 0 16 17.3l-6.28-3.64a3.1 3.1 0 0 0 0-3.32l6.28-3.64A3 3 0 0 0 18 8z"></path></svg></span><span>Поделиться</span></button>
+<button aria-label="Сохранить это место" class="dua-mini-action" data-dua-action="save" data-dua-id="prophet-dua-2" type="button"><span aria-hidden="true" class="mini-icon"><svg viewbox="0 0 24 24"><path d="M6 4.5A2.5 2.5 0 0 1 8.5 2h7A2.5 2.5 0 0 1 18 4.5V22l-6-3.4L6 22V4.5z"></path></svg></span><span>Сохранить</span></button>
+</div>
 <div class="field-label">Перевод</div>
 <p class="dua-meaning">О Аллах, я прошу у Тебя прощения и благополучия в этом мире и в Последней жизни. О Аллах, я прошу у Тебя прощения и благополучия в моей религии, в моей мирской жизни, в моей семье и в моём имуществе. О Аллах, покрой мои недостатки, успокой мои страхи и охрани меня спереди, сзади, справа, слева и сверху, и я прибегаю к Твоему величию от того, чтобы быть внезапно погубленным снизу.</p>
 <div class="field-label">Транскрипция</div>
@@ -2837,8 +2874,11 @@ body .nested-dua > .dua-body > .dua-item-actions .dua-mini-action.is-active svg{
 </div>
 <div class="dua-arrow">▾</div>
 </summary>
-<div class="dua-body">< data-dua-actions-for="prophet-dua-3"></>
-
+<div class="dua-body"><div class="dua-item-actions" data-dua-actions-for="prophet-dua-3">
+<button aria-label="Добавить в избранное" class="dua-mini-action" data-dua-action="favorite" data-dua-id="prophet-dua-3" type="button"><span aria-hidden="true" class="mini-icon"><svg viewbox="0 0 24 24"><path d="M12 3.8l2.35 4.76 5.25.76-3.8 3.7.9 5.23L12 15.78 7.3 18.25l.9-5.23-3.8-3.7 5.25-.76L12 3.8z"></path></svg></span><span>Избранное</span></button>
+<button aria-label="Поделиться этим дуа" class="dua-mini-action" data-dua-action="share" data-dua-id="prophet-dua-3" type="button"><span aria-hidden="true" class="mini-icon"><svg viewbox="0 0 24 24"><path d="M18 8a3 3 0 1 0-2.83-4H15a3 3 0 0 0 .18 1.02L8.9 8.66A3 3 0 1 0 9 15.34l6.28 3.64A3 3 0 1 0 16 17.3l-6.28-3.64a3.1 3.1 0 0 0 0-3.32l6.28-3.64A3 3 0 0 0 18 8z"></path></svg></span><span>Поделиться</span></button>
+<button aria-label="Сохранить это место" class="dua-mini-action" data-dua-action="save" data-dua-id="prophet-dua-3" type="button"><span aria-hidden="true" class="mini-icon"><svg viewbox="0 0 24 24"><path d="M6 4.5A2.5 2.5 0 0 1 8.5 2h7A2.5 2.5 0 0 1 18 4.5V22l-6-3.4L6 22V4.5z"></path></svg></span><span>Сохранить</span></button>
+</div>
 <div class="field-label">Перевод</div>
 <p class="dua-meaning">О Аллах, прошу у Тебя полезного знания, благого удела и принятого деяния.</p>
 <div class="field-label">Транскрипция</div>
@@ -2856,8 +2896,11 @@ body .nested-dua > .dua-body > .dua-item-actions .dua-mini-action.is-active svg{
 </div>
 <div class="dua-arrow">▾</div>
 </summary>
-<div class="dua-body">< data-dua-actions-for="prophet-dua-4"></>
-
+<div class="dua-body"><div class="dua-item-actions" data-dua-actions-for="prophet-dua-4">
+<button aria-label="Добавить в избранное" class="dua-mini-action" data-dua-action="favorite" data-dua-id="prophet-dua-4" type="button"><span aria-hidden="true" class="mini-icon"><svg viewbox="0 0 24 24"><path d="M12 3.8l2.35 4.76 5.25.76-3.8 3.7.9 5.23L12 15.78 7.3 18.25l.9-5.23-3.8-3.7 5.25-.76L12 3.8z"></path></svg></span><span>Избранное</span></button>
+<button aria-label="Поделиться этим дуа" class="dua-mini-action" data-dua-action="share" data-dua-id="prophet-dua-4" type="button"><span aria-hidden="true" class="mini-icon"><svg viewbox="0 0 24 24"><path d="M18 8a3 3 0 1 0-2.83-4H15a3 3 0 0 0 .18 1.02L8.9 8.66A3 3 0 1 0 9 15.34l6.28 3.64A3 3 0 1 0 16 17.3l-6.28-3.64a3.1 3.1 0 0 0 0-3.32l6.28-3.64A3 3 0 0 0 18 8z"></path></svg></span><span>Поделиться</span></button>
+<button aria-label="Сохранить это место" class="dua-mini-action" data-dua-action="save" data-dua-id="prophet-dua-4" type="button"><span aria-hidden="true" class="mini-icon"><svg viewbox="0 0 24 24"><path d="M6 4.5A2.5 2.5 0 0 1 8.5 2h7A2.5 2.5 0 0 1 18 4.5V22l-6-3.4L6 22V4.5z"></path></svg></span><span>Сохранить</span></button>
+</div>
 <div class="field-label">Перевод</div>
 <p class="dua-meaning">О Аллах, я прошу у Тебя правильного пути, богобоязненности, целомудрия и самодостаточности.</p>
 <div class="field-label">Транскрипция</div>
@@ -2875,8 +2918,11 @@ body .nested-dua > .dua-body > .dua-item-actions .dua-mini-action.is-active svg{
 </div>
 <div class="dua-arrow">▾</div>
 </summary>
-<div class="dua-body">< data-dua-actions-for="prophet-dua-5"></>
-
+<div class="dua-body"><div class="dua-item-actions" data-dua-actions-for="prophet-dua-5">
+<button aria-label="Добавить в избранное" class="dua-mini-action" data-dua-action="favorite" data-dua-id="prophet-dua-5" type="button"><span aria-hidden="true" class="mini-icon"><svg viewbox="0 0 24 24"><path d="M12 3.8l2.35 4.76 5.25.76-3.8 3.7.9 5.23L12 15.78 7.3 18.25l.9-5.23-3.8-3.7 5.25-.76L12 3.8z"></path></svg></span><span>Избранное</span></button>
+<button aria-label="Поделиться этим дуа" class="dua-mini-action" data-dua-action="share" data-dua-id="prophet-dua-5" type="button"><span aria-hidden="true" class="mini-icon"><svg viewbox="0 0 24 24"><path d="M18 8a3 3 0 1 0-2.83-4H15a3 3 0 0 0 .18 1.02L8.9 8.66A3 3 0 1 0 9 15.34l6.28 3.64A3 3 0 1 0 16 17.3l-6.28-3.64a3.1 3.1 0 0 0 0-3.32l6.28-3.64A3 3 0 0 0 18 8z"></path></svg></span><span>Поделиться</span></button>
+<button aria-label="Сохранить это место" class="dua-mini-action" data-dua-action="save" data-dua-id="prophet-dua-5" type="button"><span aria-hidden="true" class="mini-icon"><svg viewbox="0 0 24 24"><path d="M6 4.5A2.5 2.5 0 0 1 8.5 2h7A2.5 2.5 0 0 1 18 4.5V22l-6-3.4L6 22V4.5z"></path></svg></span><span>Сохранить</span></button>
+</div>
 <div class="field-label">Перевод</div>
 <p class="dua-meaning">О Аллах, сделай для меня достаточным дозволенное Тобой вместо запретного и обогати меня Своей милостью так, чтобы я ни в ком, кроме Тебя, не нуждался.</p>
 <div class="field-label">Транскрипция</div>
@@ -2894,8 +2940,11 @@ body .nested-dua > .dua-body > .dua-item-actions .dua-mini-action.is-active svg{
 </div>
 <div class="dua-arrow">▾</div>
 </summary>
-<div class="dua-body">< data-dua-actions-for="prophet-dua-6"></>
-
+<div class="dua-body"><div class="dua-item-actions" data-dua-actions-for="prophet-dua-6">
+<button aria-label="Добавить в избранное" class="dua-mini-action" data-dua-action="favorite" data-dua-id="prophet-dua-6" type="button"><span aria-hidden="true" class="mini-icon"><svg viewbox="0 0 24 24"><path d="M12 3.8l2.35 4.76 5.25.76-3.8 3.7.9 5.23L12 15.78 7.3 18.25l.9-5.23-3.8-3.7 5.25-.76L12 3.8z"></path></svg></span><span>Избранное</span></button>
+<button aria-label="Поделиться этим дуа" class="dua-mini-action" data-dua-action="share" data-dua-id="prophet-dua-6" type="button"><span aria-hidden="true" class="mini-icon"><svg viewbox="0 0 24 24"><path d="M18 8a3 3 0 1 0-2.83-4H15a3 3 0 0 0 .18 1.02L8.9 8.66A3 3 0 1 0 9 15.34l6.28 3.64A3 3 0 1 0 16 17.3l-6.28-3.64a3.1 3.1 0 0 0 0-3.32l6.28-3.64A3 3 0 0 0 18 8z"></path></svg></span><span>Поделиться</span></button>
+<button aria-label="Сохранить это место" class="dua-mini-action" data-dua-action="save" data-dua-id="prophet-dua-6" type="button"><span aria-hidden="true" class="mini-icon"><svg viewbox="0 0 24 24"><path d="M6 4.5A2.5 2.5 0 0 1 8.5 2h7A2.5 2.5 0 0 1 18 4.5V22l-6-3.4L6 22V4.5z"></path></svg></span><span>Сохранить</span></button>
+</div>
 <div class="field-label">Перевод</div>
 <p class="dua-meaning">О Аллах, прибегаю к Тебе от тревоги и печали, от слабости и лени, от скупости и трусости, от бремени долга и от притеснения людей.</p>
 <div class="field-label">Транскрипция</div>
@@ -2913,8 +2962,11 @@ body .nested-dua > .dua-body > .dua-item-actions .dua-mini-action.is-active svg{
 </div>
 <div class="dua-arrow">▾</div>
 </summary>
-<div class="dua-body">< data-dua-actions-for="prophet-dua-7"></>
-
+<div class="dua-body"><div class="dua-item-actions" data-dua-actions-for="prophet-dua-7">
+<button aria-label="Добавить в избранное" class="dua-mini-action" data-dua-action="favorite" data-dua-id="prophet-dua-7" type="button"><span aria-hidden="true" class="mini-icon"><svg viewbox="0 0 24 24"><path d="M12 3.8l2.35 4.76 5.25.76-3.8 3.7.9 5.23L12 15.78 7.3 18.25l.9-5.23-3.8-3.7 5.25-.76L12 3.8z"></path></svg></span><span>Избранное</span></button>
+<button aria-label="Поделиться этим дуа" class="dua-mini-action" data-dua-action="share" data-dua-id="prophet-dua-7" type="button"><span aria-hidden="true" class="mini-icon"><svg viewbox="0 0 24 24"><path d="M18 8a3 3 0 1 0-2.83-4H15a3 3 0 0 0 .18 1.02L8.9 8.66A3 3 0 1 0 9 15.34l6.28 3.64A3 3 0 1 0 16 17.3l-6.28-3.64a3.1 3.1 0 0 0 0-3.32l6.28-3.64A3 3 0 0 0 18 8z"></path></svg></span><span>Поделиться</span></button>
+<button aria-label="Сохранить это место" class="dua-mini-action" data-dua-action="save" data-dua-id="prophet-dua-7" type="button"><span aria-hidden="true" class="mini-icon"><svg viewbox="0 0 24 24"><path d="M6 4.5A2.5 2.5 0 0 1 8.5 2h7A2.5 2.5 0 0 1 18 4.5V22l-6-3.4L6 22V4.5z"></path></svg></span><span>Сохранить</span></button>
+</div>
 <div class="field-label">Перевод</div>
 <p class="dua-meaning">О Аллах, даруй нам благо в этом мире, благо в Последней жизни и защити нас от наказания Огня.</p>
 <div class="field-label">Транскрипция</div>
@@ -2932,8 +2984,11 @@ body .nested-dua > .dua-body > .dua-item-actions .dua-mini-action.is-active svg{
 </div>
 <div class="dua-arrow">▾</div>
 </summary>
-<div class="dua-body">< data-dua-actions-for="prophet-dua-8"></>
-
+<div class="dua-body"><div class="dua-item-actions" data-dua-actions-for="prophet-dua-8">
+<button aria-label="Добавить в избранное" class="dua-mini-action" data-dua-action="favorite" data-dua-id="prophet-dua-8" type="button"><span aria-hidden="true" class="mini-icon"><svg viewbox="0 0 24 24"><path d="M12 3.8l2.35 4.76 5.25.76-3.8 3.7.9 5.23L12 15.78 7.3 18.25l.9-5.23-3.8-3.7 5.25-.76L12 3.8z"></path></svg></span><span>Избранное</span></button>
+<button aria-label="Поделиться этим дуа" class="dua-mini-action" data-dua-action="share" data-dua-id="prophet-dua-8" type="button"><span aria-hidden="true" class="mini-icon"><svg viewbox="0 0 24 24"><path d="M18 8a3 3 0 1 0-2.83-4H15a3 3 0 0 0 .18 1.02L8.9 8.66A3 3 0 1 0 9 15.34l6.28 3.64A3 3 0 1 0 16 17.3l-6.28-3.64a3.1 3.1 0 0 0 0-3.32l6.28-3.64A3 3 0 0 0 18 8z"></path></svg></span><span>Поделиться</span></button>
+<button aria-label="Сохранить это место" class="dua-mini-action" data-dua-action="save" data-dua-id="prophet-dua-8" type="button"><span aria-hidden="true" class="mini-icon"><svg viewbox="0 0 24 24"><path d="M6 4.5A2.5 2.5 0 0 1 8.5 2h7A2.5 2.5 0 0 1 18 4.5V22l-6-3.4L6 22V4.5z"></path></svg></span><span>Сохранить</span></button>
+</div>
 <div class="field-label">Перевод</div>
 <p class="dua-meaning">О Аллах, прибегаю к Тебе от исчезновения Твоей милости, от ухода благополучия, от внезапности Твоего наказания и от всего, что вызывает Твой гнев.</p>
 <div class="field-label">Транскрипция</div>
@@ -2951,8 +3006,11 @@ body .nested-dua > .dua-body > .dua-item-actions .dua-mini-action.is-active svg{
 </div>
 <div class="dua-arrow">▾</div>
 </summary>
-<div class="dua-body">< data-dua-actions-for="prophet-dua-9"></>
-
+<div class="dua-body"><div class="dua-item-actions" data-dua-actions-for="prophet-dua-9">
+<button aria-label="Добавить в избранное" class="dua-mini-action" data-dua-action="favorite" data-dua-id="prophet-dua-9" type="button"><span aria-hidden="true" class="mini-icon"><svg viewbox="0 0 24 24"><path d="M12 3.8l2.35 4.76 5.25.76-3.8 3.7.9 5.23L12 15.78 7.3 18.25l.9-5.23-3.8-3.7 5.25-.76L12 3.8z"></path></svg></span><span>Избранное</span></button>
+<button aria-label="Поделиться этим дуа" class="dua-mini-action" data-dua-action="share" data-dua-id="prophet-dua-9" type="button"><span aria-hidden="true" class="mini-icon"><svg viewbox="0 0 24 24"><path d="M18 8a3 3 0 1 0-2.83-4H15a3 3 0 0 0 .18 1.02L8.9 8.66A3 3 0 1 0 9 15.34l6.28 3.64A3 3 0 1 0 16 17.3l-6.28-3.64a3.1 3.1 0 0 0 0-3.32l6.28-3.64A3 3 0 0 0 18 8z"></path></svg></span><span>Поделиться</span></button>
+<button aria-label="Сохранить это место" class="dua-mini-action" data-dua-action="save" data-dua-id="prophet-dua-9" type="button"><span aria-hidden="true" class="mini-icon"><svg viewbox="0 0 24 24"><path d="M6 4.5A2.5 2.5 0 0 1 8.5 2h7A2.5 2.5 0 0 1 18 4.5V22l-6-3.4L6 22V4.5z"></path></svg></span><span>Сохранить</span></button>
+</div>
 <div class="field-label">Перевод</div>
 <p class="dua-meaning">О Аллах, прибегаю к Тебе от мучения Ада, от мучения могилы, от испытаний жизни и смерти и от зла смуты Масиха ад-Даджаля.</p>
 <div class="field-label">Транскрипция</div>
@@ -3008,14 +3066,22 @@ body .nested-dua > .dua-body > .dua-item-actions .dua-mini-action.is-active svg{
 </summary>
 <div class="dua-body"><div class="nested-list"><details class="dua-card nested-dua" data-dua-id="home-exit-1" id="home-exit-1">
 <summary class="dua-head"><div class="dua-meta"><div class="dua-title">Выходя из дома — 1</div></div><div class="dua-arrow">▾</div></summary>
-<div class="dua-body">< data-dua-actions-for="home-exit-1"></>
+<div class="dua-body"><div class="dua-item-actions" data-dua-actions-for="home-exit-1">
+<button aria-label="Добавить в избранное" class="dua-mini-action" data-dua-action="favorite" data-dua-id="home-exit-1" type="button"><span aria-hidden="true" class="mini-icon"><svg viewbox="0 0 24 24"><path d="M12 3.8l2.35 4.76 5.25.76-3.8 3.7.9 5.23L12 15.78 7.3 18.25l.9-5.23-3.8-3.7 5.25-.76L12 3.8z"></path></svg></span><span>Избранное</span></button>
+<button aria-label="Поделиться этим дуа" class="dua-mini-action" data-dua-action="share" data-dua-id="home-exit-1" type="button"><span aria-hidden="true" class="mini-icon"><svg viewbox="0 0 24 24"><path d="M18 8a3 3 0 1 0-2.83-4H15a3 3 0 0 0 .18 1.02L8.9 8.66A3 3 0 1 0 9 15.34l6.28 3.64A3 3 0 1 0 16 17.3l-6.28-3.64a3.1 3.1 0 0 0 0-3.32l6.28-3.64A3 3 0 0 0 18 8z"></path></svg></span><span>Поделиться</span></button>
+<button aria-label="Сохранить это место" class="dua-mini-action" data-dua-action="save" data-dua-id="home-exit-1" type="button"><span aria-hidden="true" class="mini-icon"><svg viewbox="0 0 24 24"><path d="M6 4.5A2.5 2.5 0 0 1 8.5 2h7A2.5 2.5 0 0 1 18 4.5V22l-6-3.4L6 22V4.5z"></path></svg></span><span>Сохранить</span></button>
+</div>
 <div class="field-label">Перевод</div><p class="dua-meaning">С именем Аллаха, уповаю на Аллаха, нет мощи и силы ни у кого, кроме Аллаха.</p>
 <div class="field-label">Транскрипция</div><p class="dua-translit">Би-сми Лляхи таваккяльту ‘аля Лляхи ва ля хауля ва ля куввата илля би-Ллях.</p>
 <div class="field-label">Арабский текст</div><p class="dua-arabic">بِسْمِ اللَّهِ، تَوَكَّلْتُ عَلَى اللَّهِ، وَلَا حَوْلَ وَلَا قُوَّةَ إِلَّا بِاللَّهِ</p>
 <div class="badges"><span class="badge">Ежедневное</span></div>
 </div></details><details class="dua-card nested-dua" data-dua-id="home-exit-2" id="home-exit-2">
 <summary class="dua-head"><div class="dua-meta"><div class="dua-title">Выходя из дома — 2</div></div><div class="dua-arrow">▾</div></summary>
-<div class="dua-body">< data-dua-actions-for="home-exit-2"></>
+<div class="dua-body"><div class="dua-item-actions" data-dua-actions-for="home-exit-2">
+<button aria-label="Добавить в избранное" class="dua-mini-action" data-dua-action="favorite" data-dua-id="home-exit-2" type="button"><span aria-hidden="true" class="mini-icon"><svg viewbox="0 0 24 24"><path d="M12 3.8l2.35 4.76 5.25.76-3.8 3.7.9 5.23L12 15.78 7.3 18.25l.9-5.23-3.8-3.7 5.25-.76L12 3.8z"></path></svg></span><span>Избранное</span></button>
+<button aria-label="Поделиться этим дуа" class="dua-mini-action" data-dua-action="share" data-dua-id="home-exit-2" type="button"><span aria-hidden="true" class="mini-icon"><svg viewbox="0 0 24 24"><path d="M18 8a3 3 0 1 0-2.83-4H15a3 3 0 0 0 .18 1.02L8.9 8.66A3 3 0 1 0 9 15.34l6.28 3.64A3 3 0 1 0 16 17.3l-6.28-3.64a3.1 3.1 0 0 0 0-3.32l6.28-3.64A3 3 0 0 0 18 8z"></path></svg></span><span>Поделиться</span></button>
+<button aria-label="Сохранить это место" class="dua-mini-action" data-dua-action="save" data-dua-id="home-exit-2" type="button"><span aria-hidden="true" class="mini-icon"><svg viewbox="0 0 24 24"><path d="M6 4.5A2.5 2.5 0 0 1 8.5 2h7A2.5 2.5 0 0 1 18 4.5V22l-6-3.4L6 22V4.5z"></path></svg></span><span>Сохранить</span></button>
+</div>
 <div class="field-label">Перевод</div><p class="dua-meaning">О Аллах! Поистине, я прибегаю к Твоей защите от того, чтобы сбиться с пути или оказаться сбитым с него, от того, чтобы самому допустить ошибку, и от того, чтобы меня заставили ошибиться, от того, чтобы самому допустить несправедливость, и от того, чтобы со мной поступили несправедливо, от того, чтобы поступать подобно невежественным, и от того, чтобы [люди] поступали так со мной.</p>
 <div class="field-label">Транскрипция</div><p class="dua-translit">Аллахумма ин-ни а‘узу би-ка ан адилля ау удалла ау азилля ау узалла ау азлима ау узляма ау аджхаля ау юджхаля ‘аляйя.</p>
 <div class="field-label">Арабский текст</div><p class="dua-arabic">اللَّهُمَّ إِنِّي أَعُوذُ بِكَ أَنْ أَضِلَّ أَوْ أُضَلَّ، أَوْ أَزِلَّ أَوْ أُزَلَّ، أَوْ أَظْلِمَ أَوْ أُظْلَمَ، أَوْ أَجْهَلَ أَوْ يُجْهَلَ عَلَيَّ</p>
@@ -3030,8 +3096,11 @@ body .nested-dua > .dua-body > .dua-item-actions .dua-mini-action.is-active svg{
 </div>
 <div class="dua-arrow">▾</div>
 </summary>
-<div class="dua-body">< data-dua-actions-for="home-enter-1"></>
-
+<div class="dua-body"><div class="dua-item-actions" data-dua-actions-for="home-enter-1">
+<button aria-label="Добавить в избранное" class="dua-mini-action" data-dua-action="favorite" data-dua-id="home-enter-1" type="button"><span aria-hidden="true" class="mini-icon"><svg viewbox="0 0 24 24"><path d="M12 3.8l2.35 4.76 5.25.76-3.8 3.7.9 5.23L12 15.78 7.3 18.25l.9-5.23-3.8-3.7 5.25-.76L12 3.8z"></path></svg></span><span>Избранное</span></button>
+<button aria-label="Поделиться этим дуа" class="dua-mini-action" data-dua-action="share" data-dua-id="home-enter-1" type="button"><span aria-hidden="true" class="mini-icon"><svg viewbox="0 0 24 24"><path d="M18 8a3 3 0 1 0-2.83-4H15a3 3 0 0 0 .18 1.02L8.9 8.66A3 3 0 1 0 9 15.34l6.28 3.64A3 3 0 1 0 16 17.3l-6.28-3.64a3.1 3.1 0 0 0 0-3.32l6.28-3.64A3 3 0 0 0 18 8z"></path></svg></span><span>Поделиться</span></button>
+<button aria-label="Сохранить это место" class="dua-mini-action" data-dua-action="save" data-dua-id="home-enter-1" type="button"><span aria-hidden="true" class="mini-icon"><svg viewbox="0 0 24 24"><path d="M6 4.5A2.5 2.5 0 0 1 8.5 2h7A2.5 2.5 0 0 1 18 4.5V22l-6-3.4L6 22V4.5z"></path></svg></span><span>Сохранить</span></button>
+</div>
 <div class="field-label">Перевод</div><p class="dua-meaning">С именем Аллаха мы вошли, с именем Аллаха мы вышли и на Аллаха, Господа нашего, мы полагаемся.</p>
 <div class="field-label">Транскрипция</div><p class="dua-translit">Би-сми Лляхи валяджна ва би-сми Лляхи хараджна ва ‘аля Лляхи Рабби-на таваккяльна.</p>
 <div class="field-label">Арабский текст</div><p class="dua-arabic">بِسْمِ اللَّهِ وَلَجْنَا، وَبِسْمِ اللَّهِ خَرَجْنَا، وَعَلَى اللَّهِ رَبِّنَا تَوَكَّلْنَا</p>
@@ -3046,8 +3115,11 @@ body .nested-dua > .dua-body > .dua-item-actions .dua-mini-action.is-active svg{
 </div>
 <div class="dua-arrow">▾</div>
 </summary>
-<div class="dua-body">< data-dua-actions-for="toilet-enter-dua-1"></>
-
+<div class="dua-body"><div class="dua-item-actions" data-dua-actions-for="toilet-enter-dua-1">
+<button aria-label="Добавить в избранное" class="dua-mini-action" data-dua-action="favorite" data-dua-id="toilet-enter-dua-1" type="button"><span aria-hidden="true" class="mini-icon"><svg viewbox="0 0 24 24"><path d="M12 3.8l2.35 4.76 5.25.76-3.8 3.7.9 5.23L12 15.78 7.3 18.25l.9-5.23-3.8-3.7 5.25-.76L12 3.8z"></path></svg></span><span>Избранное</span></button>
+<button aria-label="Поделиться этим дуа" class="dua-mini-action" data-dua-action="share" data-dua-id="toilet-enter-dua-1" type="button"><span aria-hidden="true" class="mini-icon"><svg viewbox="0 0 24 24"><path d="M18 8a3 3 0 1 0-2.83-4H15a3 3 0 0 0 .18 1.02L8.9 8.66A3 3 0 1 0 9 15.34l6.28 3.64A3 3 0 1 0 16 17.3l-6.28-3.64a3.1 3.1 0 0 0 0-3.32l6.28-3.64A3 3 0 0 0 18 8z"></path></svg></span><span>Поделиться</span></button>
+<button aria-label="Сохранить это место" class="dua-mini-action" data-dua-action="save" data-dua-id="toilet-enter-dua-1" type="button"><span aria-hidden="true" class="mini-icon"><svg viewbox="0 0 24 24"><path d="M6 4.5A2.5 2.5 0 0 1 8.5 2h7A2.5 2.5 0 0 1 18 4.5V22l-6-3.4L6 22V4.5z"></path></svg></span><span>Сохранить</span></button>
+</div>
 <div class="field-label">Перевод</div>
 <p class="dua-meaning">С именем Аллаха. О Аллах! Поистине, я прибегаю к Твоей защите от злых духов обоего пола.</p>
 <div class="field-label">Транскрипция</div>
@@ -3065,8 +3137,11 @@ body .nested-dua > .dua-body > .dua-item-actions .dua-mini-action.is-active svg{
 </div>
 <div class="dua-arrow">▾</div>
 </summary>
-<div class="dua-body">< data-dua-actions-for="toilet-exit-dua-1"></>
-
+<div class="dua-body"><div class="dua-item-actions" data-dua-actions-for="toilet-exit-dua-1">
+<button aria-label="Добавить в избранное" class="dua-mini-action" data-dua-action="favorite" data-dua-id="toilet-exit-dua-1" type="button"><span aria-hidden="true" class="mini-icon"><svg viewbox="0 0 24 24"><path d="M12 3.8l2.35 4.76 5.25.76-3.8 3.7.9 5.23L12 15.78 7.3 18.25l.9-5.23-3.8-3.7 5.25-.76L12 3.8z"></path></svg></span><span>Избранное</span></button>
+<button aria-label="Поделиться этим дуа" class="dua-mini-action" data-dua-action="share" data-dua-id="toilet-exit-dua-1" type="button"><span aria-hidden="true" class="mini-icon"><svg viewbox="0 0 24 24"><path d="M18 8a3 3 0 1 0-2.83-4H15a3 3 0 0 0 .18 1.02L8.9 8.66A3 3 0 1 0 9 15.34l6.28 3.64A3 3 0 1 0 16 17.3l-6.28-3.64a3.1 3.1 0 0 0 0-3.32l6.28-3.64A3 3 0 0 0 18 8z"></path></svg></span><span>Поделиться</span></button>
+<button aria-label="Сохранить это место" class="dua-mini-action" data-dua-action="save" data-dua-id="toilet-exit-dua-1" type="button"><span aria-hidden="true" class="mini-icon"><svg viewbox="0 0 24 24"><path d="M6 4.5A2.5 2.5 0 0 1 8.5 2h7A2.5 2.5 0 0 1 18 4.5V22l-6-3.4L6 22V4.5z"></path></svg></span><span>Сохранить</span></button>
+</div>
 <div class="field-label">Перевод</div>
 <p class="dua-meaning">Прости, [о Аллах]!</p>
 <div class="field-label">Транскрипция</div>
@@ -3078,7 +3153,11 @@ body .nested-dua > .dua-body > .dua-item-actions .dua-mini-action.is-active svg{
 </details>
 <details class="dua-card nested-dua" data-dua-id="wudu-before-1" id="wudu-before-1">
 <summary class="dua-head"><div class="dua-meta"><div class="dua-title">Перед омовением (вуду)</div></div><div class="dua-arrow">▾</div></summary>
-<div class="dua-body">< data-dua-actions-for="wudu-before-1"></>
+<div class="dua-body"><div class="dua-item-actions" data-dua-actions-for="wudu-before-1">
+<button aria-label="Добавить в избранное" class="dua-mini-action" data-dua-action="favorite" data-dua-id="wudu-before-1" type="button"><span aria-hidden="true" class="mini-icon"><svg viewbox="0 0 24 24"><path d="M12 3.8l2.35 4.76 5.25.76-3.8 3.7.9 5.23L12 15.78 7.3 18.25l.9-5.23-3.8-3.7 5.25-.76L12 3.8z"></path></svg></span><span>Избранное</span></button>
+<button aria-label="Поделиться этим дуа" class="dua-mini-action" data-dua-action="share" data-dua-id="wudu-before-1" type="button"><span aria-hidden="true" class="mini-icon"><svg viewbox="0 0 24 24"><path d="M18 8a3 3 0 1 0-2.83-4H15a3 3 0 0 0 .18 1.02L8.9 8.66A3 3 0 1 0 9 15.34l6.28 3.64A3 3 0 1 0 16 17.3l-6.28-3.64a3.1 3.1 0 0 0 0-3.32l6.28-3.64A3 3 0 0 0 18 8z"></path></svg></span><span>Поделиться</span></button>
+<button aria-label="Сохранить это место" class="dua-mini-action" data-dua-action="save" data-dua-id="wudu-before-1" type="button"><span aria-hidden="true" class="mini-icon"><svg viewbox="0 0 24 24"><path d="M6 4.5A2.5 2.5 0 0 1 8.5 2h7A2.5 2.5 0 0 1 18 4.5V22l-6-3.4L6 22V4.5z"></path></svg></span><span>Сохранить</span></button>
+</div>
 <div class="field-label">Перевод</div><p class="dua-meaning">С именем Аллаха.</p>
 <div class="field-label">Транскрипция</div><p class="dua-translit">Би-сми Ллях.</p>
 <div class="field-label">Арабский текст</div><p class="dua-arabic">بِسْمِ اللَّهِ</p>
@@ -3094,21 +3173,33 @@ body .nested-dua > .dua-body > .dua-item-actions .dua-mini-action.is-active svg{
 </summary>
 <div class="dua-body"><div class="nested-list"><details class="dua-card nested-dua" data-dua-id="wudu-after-1" id="wudu-after-1">
 <summary class="dua-head"><div class="dua-meta"><div class="dua-title">После омовения (вуду) — 1</div></div><div class="dua-arrow">▾</div></summary>
-<div class="dua-body">< data-dua-actions-for="wudu-after-1"></>
+<div class="dua-body"><div class="dua-item-actions" data-dua-actions-for="wudu-after-1">
+<button aria-label="Добавить в избранное" class="dua-mini-action" data-dua-action="favorite" data-dua-id="wudu-after-1" type="button"><span aria-hidden="true" class="mini-icon"><svg viewbox="0 0 24 24"><path d="M12 3.8l2.35 4.76 5.25.76-3.8 3.7.9 5.23L12 15.78 7.3 18.25l.9-5.23-3.8-3.7 5.25-.76L12 3.8z"></path></svg></span><span>Избранное</span></button>
+<button aria-label="Поделиться этим дуа" class="dua-mini-action" data-dua-action="share" data-dua-id="wudu-after-1" type="button"><span aria-hidden="true" class="mini-icon"><svg viewbox="0 0 24 24"><path d="M18 8a3 3 0 1 0-2.83-4H15a3 3 0 0 0 .18 1.02L8.9 8.66A3 3 0 1 0 9 15.34l6.28 3.64A3 3 0 1 0 16 17.3l-6.28-3.64a3.1 3.1 0 0 0 0-3.32l6.28-3.64A3 3 0 0 0 18 8z"></path></svg></span><span>Поделиться</span></button>
+<button aria-label="Сохранить это место" class="dua-mini-action" data-dua-action="save" data-dua-id="wudu-after-1" type="button"><span aria-hidden="true" class="mini-icon"><svg viewbox="0 0 24 24"><path d="M6 4.5A2.5 2.5 0 0 1 8.5 2h7A2.5 2.5 0 0 1 18 4.5V22l-6-3.4L6 22V4.5z"></path></svg></span><span>Сохранить</span></button>
+</div>
 <div class="field-label">Перевод</div><p class="dua-meaning">Свидетельствую, что нет бога, кроме одного лишь Аллаха, у Которого нет сотоварища, и свидетельствую, что Мухаммад — Его раб и Его посланник.</p>
 <div class="field-label">Транскрипция</div><p class="dua-translit">Ашхаду ал-ля иляха илля Ллаху вахда-ху ля шарика ля-ху ва ашхаду анна Мухаммадан ‘абдуху ва расулу-ху.</p>
 <div class="field-label">Арабский текст</div><p class="dua-arabic">أَشْهَدُ أَنْ لَا إِلٰهَ إِلَّا اللَّهُ وَحْدَهُ لَا شَرِيكَ لَهُ وَأَشْهَدُ أَنَّ مُحَمَّدًا عَبْدُهُ وَرَسُولُهُ</p>
 <div class="badges"><span class="badge">Омовение</span></div>
 </div></details><details class="dua-card nested-dua" data-dua-id="wudu-after-2" id="wudu-after-2">
 <summary class="dua-head"><div class="dua-meta"><div class="dua-title">После омовения (вуду) — 2</div></div><div class="dua-arrow">▾</div></summary>
-<div class="dua-body">< data-dua-actions-for="wudu-after-2"></>
+<div class="dua-body"><div class="dua-item-actions" data-dua-actions-for="wudu-after-2">
+<button aria-label="Добавить в избранное" class="dua-mini-action" data-dua-action="favorite" data-dua-id="wudu-after-2" type="button"><span aria-hidden="true" class="mini-icon"><svg viewbox="0 0 24 24"><path d="M12 3.8l2.35 4.76 5.25.76-3.8 3.7.9 5.23L12 15.78 7.3 18.25l.9-5.23-3.8-3.7 5.25-.76L12 3.8z"></path></svg></span><span>Избранное</span></button>
+<button aria-label="Поделиться этим дуа" class="dua-mini-action" data-dua-action="share" data-dua-id="wudu-after-2" type="button"><span aria-hidden="true" class="mini-icon"><svg viewbox="0 0 24 24"><path d="M18 8a3 3 0 1 0-2.83-4H15a3 3 0 0 0 .18 1.02L8.9 8.66A3 3 0 1 0 9 15.34l6.28 3.64A3 3 0 1 0 16 17.3l-6.28-3.64a3.1 3.1 0 0 0 0-3.32l6.28-3.64A3 3 0 0 0 18 8z"></path></svg></span><span>Поделиться</span></button>
+<button aria-label="Сохранить это место" class="dua-mini-action" data-dua-action="save" data-dua-id="wudu-after-2" type="button"><span aria-hidden="true" class="mini-icon"><svg viewbox="0 0 24 24"><path d="M6 4.5A2.5 2.5 0 0 1 8.5 2h7A2.5 2.5 0 0 1 18 4.5V22l-6-3.4L6 22V4.5z"></path></svg></span><span>Сохранить</span></button>
+</div>
 <div class="field-label">Перевод</div><p class="dua-meaning">О Аллах! Причисли меня к кающимся и причисли меня к очищающимся.</p>
 <div class="field-label">Транскрипция</div><p class="dua-translit">Аллахумма дж‘аль-ни мин ат-таввабина ва дж‘аль-ни мин аль-мутахаххирин.</p>
 <div class="field-label">Арабский текст</div><p class="dua-arabic">اللَّهُمَّ اجْعَلْنِي مِنَ التَّوَّابِينَ وَاجْعَلْنِي مِنَ الْمُتَطَهِّرِينَ</p>
 <div class="badges"><span class="badge">Омовение</span></div>
 </div></details><details class="dua-card nested-dua" data-dua-id="wudu-after-3" id="wudu-after-3">
 <summary class="dua-head"><div class="dua-meta"><div class="dua-title">После омовения (вуду) — 3</div></div><div class="dua-arrow">▾</div></summary>
-<div class="dua-body">< data-dua-actions-for="wudu-after-3"></>
+<div class="dua-body"><div class="dua-item-actions" data-dua-actions-for="wudu-after-3">
+<button aria-label="Добавить в избранное" class="dua-mini-action" data-dua-action="favorite" data-dua-id="wudu-after-3" type="button"><span aria-hidden="true" class="mini-icon"><svg viewbox="0 0 24 24"><path d="M12 3.8l2.35 4.76 5.25.76-3.8 3.7.9 5.23L12 15.78 7.3 18.25l.9-5.23-3.8-3.7 5.25-.76L12 3.8z"></path></svg></span><span>Избранное</span></button>
+<button aria-label="Поделиться этим дуа" class="dua-mini-action" data-dua-action="share" data-dua-id="wudu-after-3" type="button"><span aria-hidden="true" class="mini-icon"><svg viewbox="0 0 24 24"><path d="M18 8a3 3 0 1 0-2.83-4H15a3 3 0 0 0 .18 1.02L8.9 8.66A3 3 0 1 0 9 15.34l6.28 3.64A3 3 0 1 0 16 17.3l-6.28-3.64a3.1 3.1 0 0 0 0-3.32l6.28-3.64A3 3 0 0 0 18 8z"></path></svg></span><span>Поделиться</span></button>
+<button aria-label="Сохранить это место" class="dua-mini-action" data-dua-action="save" data-dua-id="wudu-after-3" type="button"><span aria-hidden="true" class="mini-icon"><svg viewbox="0 0 24 24"><path d="M6 4.5A2.5 2.5 0 0 1 8.5 2h7A2.5 2.5 0 0 1 18 4.5V22l-6-3.4L6 22V4.5z"></path></svg></span><span>Сохранить</span></button>
+</div>
 <div class="field-label">Перевод</div><p class="dua-meaning">Пречист Ты, о Аллах, и хвала Тебе! Свидетельствую, что нет бога, кроме Тебя, прошу у Тебя прощения и приношу Тебе своё покаяние.</p>
 <div class="field-label">Транскрипция</div><p class="dua-translit">Субхана-ка Аллахумма ва би-хамди-ка! Ашхаду алля иляха илля Анта, астагфиру-ка ва атубу илай-ка.</p>
 <div class="field-label">Арабский текст</div><p class="dua-arabic">سُبْحَانَكَ اللَّهُمَّ وَبِحَمْدِكَ، أَشْهَدُ أَنْ لَا إِلٰهَ إِلَّا أَنْتَ، أَسْتَغْفِرُكَ وَأَتُوبُ إِلَيْكَ</p>
@@ -3159,8 +3250,11 @@ body .nested-dua > .dua-body > .dua-item-actions .dua-mini-action.is-active svg{
 </div>
 <div class="dua-arrow">▾</div>
 </summary>
-<div class="dua-body">< data-dua-actions-for="mosque-go-1"></>
-
+<div class="dua-body"><div class="dua-item-actions" data-dua-actions-for="mosque-go-1">
+<button aria-label="Добавить в избранное" class="dua-mini-action" data-dua-action="favorite" data-dua-id="mosque-go-1" type="button"><span aria-hidden="true" class="mini-icon"><svg viewbox="0 0 24 24"><path d="M12 3.8l2.35 4.76 5.25.76-3.8 3.7.9 5.23L12 15.78 7.3 18.25l.9-5.23-3.8-3.7 5.25-.76L12 3.8z"></path></svg></span><span>Избранное</span></button>
+<button aria-label="Поделиться этим дуа" class="dua-mini-action" data-dua-action="share" data-dua-id="mosque-go-1" type="button"><span aria-hidden="true" class="mini-icon"><svg viewbox="0 0 24 24"><path d="M18 8a3 3 0 1 0-2.83-4H15a3 3 0 0 0 .18 1.02L8.9 8.66A3 3 0 1 0 9 15.34l6.28 3.64A3 3 0 1 0 16 17.3l-6.28-3.64a3.1 3.1 0 0 0 0-3.32l6.28-3.64A3 3 0 0 0 18 8z"></path></svg></span><span>Поделиться</span></button>
+<button aria-label="Сохранить это место" class="dua-mini-action" data-dua-action="save" data-dua-id="mosque-go-1" type="button"><span aria-hidden="true" class="mini-icon"><svg viewbox="0 0 24 24"><path d="M6 4.5A2.5 2.5 0 0 1 8.5 2h7A2.5 2.5 0 0 1 18 4.5V22l-6-3.4L6 22V4.5z"></path></svg></span><span>Сохранить</span></button>
+</div>
 <div class="field-label">Перевод</div><p class="dua-meaning">О Аллах! Помести в сердце моё свет, и в язык мой свет, и в слух мой свет, и в зрение моё свет...</p>
 <div class="field-label">Транскрипция</div><p class="dua-translit">Аллахумма адж‘аль фи кальби нурa ва фи лисани нурa ва фи сам‘и нурa ва фи басари нурa...</p>
 <div class="field-label">Арабский текст</div><p class="dua-arabic">اللَّهُمَّ اجْعَلْ فِي قَلْبِي نُورًا وَفِي لِسَانِي نُورًا وَفِي سَمْعِي نُورًا وَفِي بَصَرِي نُورًا</p>
@@ -3471,8 +3565,11 @@ body .nested-dua > .dua-body > .dua-item-actions .dua-mini-action.is-active svg{
 </div>
 <div class="dua-arrow">▾</div>
 </summary>
-<div class="dua-body">< data-dua-actions-for="sleep-wake-dua-1"></>
-
+<div class="dua-body"><div class="dua-item-actions" data-dua-actions-for="sleep-wake-dua-1">
+<button aria-label="Добавить в избранное" class="dua-mini-action" data-dua-action="favorite" data-dua-id="sleep-wake-dua-1" type="button"><span aria-hidden="true" class="mini-icon"><svg viewbox="0 0 24 24"><path d="M12 3.8l2.35 4.76 5.25.76-3.8 3.7.9 5.23L12 15.78 7.3 18.25l.9-5.23-3.8-3.7 5.25-.76L12 3.8z"></path></svg></span><span>Избранное</span></button>
+<button aria-label="Поделиться этим дуа" class="dua-mini-action" data-dua-action="share" data-dua-id="sleep-wake-dua-1" type="button"><span aria-hidden="true" class="mini-icon"><svg viewbox="0 0 24 24"><path d="M18 8a3 3 0 1 0-2.83-4H15a3 3 0 0 0 .18 1.02L8.9 8.66A3 3 0 1 0 9 15.34l6.28 3.64A3 3 0 1 0 16 17.3l-6.28-3.64a3.1 3.1 0 0 0 0-3.32l6.28-3.64A3 3 0 0 0 18 8z"></path></svg></span><span>Поделиться</span></button>
+<button aria-label="Сохранить это место" class="dua-mini-action" data-dua-action="save" data-dua-id="sleep-wake-dua-1" type="button"><span aria-hidden="true" class="mini-icon"><svg viewbox="0 0 24 24"><path d="M6 4.5A2.5 2.5 0 0 1 8.5 2h7A2.5 2.5 0 0 1 18 4.5V22l-6-3.4L6 22V4.5z"></path></svg></span><span>Сохранить</span></button>
+</div>
 <div class="field-label">Перевод</div>
 <p class="dua-meaning">Хвала Аллаху, Который оживил нас после того, как умертвил нас, и к Которому [мы вернёмся после] воскрешения.</p>
 <div class="field-label">Транскрипция</div>
@@ -3489,8 +3586,11 @@ body .nested-dua > .dua-body > .dua-item-actions .dua-mini-action.is-active svg{
 </div>
 <div class="dua-arrow">▾</div>
 </summary>
-<div class="dua-body">< data-dua-actions-for="sleep-wake-dua-2"></>
-
+<div class="dua-body"><div class="dua-item-actions" data-dua-actions-for="sleep-wake-dua-2">
+<button aria-label="Добавить в избранное" class="dua-mini-action" data-dua-action="favorite" data-dua-id="sleep-wake-dua-2" type="button"><span aria-hidden="true" class="mini-icon"><svg viewbox="0 0 24 24"><path d="M12 3.8l2.35 4.76 5.25.76-3.8 3.7.9 5.23L12 15.78 7.3 18.25l.9-5.23-3.8-3.7 5.25-.76L12 3.8z"></path></svg></span><span>Избранное</span></button>
+<button aria-label="Поделиться этим дуа" class="dua-mini-action" data-dua-action="share" data-dua-id="sleep-wake-dua-2" type="button"><span aria-hidden="true" class="mini-icon"><svg viewbox="0 0 24 24"><path d="M18 8a3 3 0 1 0-2.83-4H15a3 3 0 0 0 .18 1.02L8.9 8.66A3 3 0 1 0 9 15.34l6.28 3.64A3 3 0 1 0 16 17.3l-6.28-3.64a3.1 3.1 0 0 0 0-3.32l6.28-3.64A3 3 0 0 0 18 8z"></path></svg></span><span>Поделиться</span></button>
+<button aria-label="Сохранить это место" class="dua-mini-action" data-dua-action="save" data-dua-id="sleep-wake-dua-2" type="button"><span aria-hidden="true" class="mini-icon"><svg viewbox="0 0 24 24"><path d="M6 4.5A2.5 2.5 0 0 1 8.5 2h7A2.5 2.5 0 0 1 18 4.5V22l-6-3.4L6 22V4.5z"></path></svg></span><span>Сохранить</span></button>
+</div>
 <div class="field-label">Перевод</div>
 <p class="dua-meaning">Нет бога, кроме одного лишь Аллаха, у Которого нет сотоварища. Ему принадлежит власть; хвала Ему — Он всё может. Пречист Аллах, хвала Аллаху, нет бога, кроме Аллаха, Аллах велик и нет мощи и силы ни у кого, кроме Аллаха, Высокого, Великого. Господь мой, прости меня!</p>
 <div class="field-label">Транскрипция</div>
@@ -3507,8 +3607,11 @@ body .nested-dua > .dua-body > .dua-item-actions .dua-mini-action.is-active svg{
 </div>
 <div class="dua-arrow">▾</div>
 </summary>
-<div class="dua-body">< data-dua-actions-for="sleep-wake-dua-3"></>
-
+<div class="dua-body"><div class="dua-item-actions" data-dua-actions-for="sleep-wake-dua-3">
+<button aria-label="Добавить в избранное" class="dua-mini-action" data-dua-action="favorite" data-dua-id="sleep-wake-dua-3" type="button"><span aria-hidden="true" class="mini-icon"><svg viewbox="0 0 24 24"><path d="M12 3.8l2.35 4.76 5.25.76-3.8 3.7.9 5.23L12 15.78 7.3 18.25l.9-5.23-3.8-3.7 5.25-.76L12 3.8z"></path></svg></span><span>Избранное</span></button>
+<button aria-label="Поделиться этим дуа" class="dua-mini-action" data-dua-action="share" data-dua-id="sleep-wake-dua-3" type="button"><span aria-hidden="true" class="mini-icon"><svg viewbox="0 0 24 24"><path d="M18 8a3 3 0 1 0-2.83-4H15a3 3 0 0 0 .18 1.02L8.9 8.66A3 3 0 1 0 9 15.34l6.28 3.64A3 3 0 1 0 16 17.3l-6.28-3.64a3.1 3.1 0 0 0 0-3.32l6.28-3.64A3 3 0 0 0 18 8z"></path></svg></span><span>Поделиться</span></button>
+<button aria-label="Сохранить это место" class="dua-mini-action" data-dua-action="save" data-dua-id="sleep-wake-dua-3" type="button"><span aria-hidden="true" class="mini-icon"><svg viewbox="0 0 24 24"><path d="M6 4.5A2.5 2.5 0 0 1 8.5 2h7A2.5 2.5 0 0 1 18 4.5V22l-6-3.4L6 22V4.5z"></path></svg></span><span>Сохранить</span></button>
+</div>
 <div class="field-label">Перевод</div>
 <p class="dua-meaning">Хвала Аллаху, Который уберёг [от всего дурного] моё тело, вернул мне мой дух и позволил мне поминать Его.</p>
 <div class="field-label">Транскрипция</div>
@@ -3539,8 +3642,11 @@ body .nested-dua > .dua-body > .dua-item-actions .dua-mini-action.is-active svg{
 </div>
 <div class="dua-arrow">▾</div>
 </summary>
-<div class="dua-body">< data-dua-actions-for="clothing-wearing-dua-1"></>
-
+<div class="dua-body"><div class="dua-item-actions" data-dua-actions-for="clothing-wearing-dua-1">
+<button aria-label="Добавить в избранное" class="dua-mini-action" data-dua-action="favorite" data-dua-id="clothing-wearing-dua-1" type="button"><span aria-hidden="true" class="mini-icon"><svg viewbox="0 0 24 24"><path d="M12 3.8l2.35 4.76 5.25.76-3.8 3.7.9 5.23L12 15.78 7.3 18.25l.9-5.23-3.8-3.7 5.25-.76L12 3.8z"></path></svg></span><span>Избранное</span></button>
+<button aria-label="Поделиться этим дуа" class="dua-mini-action" data-dua-action="share" data-dua-id="clothing-wearing-dua-1" type="button"><span aria-hidden="true" class="mini-icon"><svg viewbox="0 0 24 24"><path d="M18 8a3 3 0 1 0-2.83-4H15a3 3 0 0 0 .18 1.02L8.9 8.66A3 3 0 1 0 9 15.34l6.28 3.64A3 3 0 1 0 16 17.3l-6.28-3.64a3.1 3.1 0 0 0 0-3.32l6.28-3.64A3 3 0 0 0 18 8z"></path></svg></span><span>Поделиться</span></button>
+<button aria-label="Сохранить это место" class="dua-mini-action" data-dua-action="save" data-dua-id="clothing-wearing-dua-1" type="button"><span aria-hidden="true" class="mini-icon"><svg viewbox="0 0 24 24"><path d="M6 4.5A2.5 2.5 0 0 1 8.5 2h7A2.5 2.5 0 0 1 18 4.5V22l-6-3.4L6 22V4.5z"></path></svg></span><span>Сохранить</span></button>
+</div>
 <div class="field-label">Перевод</div>
 <p class="dua-meaning">Хвала Аллаху, Который одел меня в эту одежду и наделил меня ею, а сам я не [предпринял бы никаких] действий и не [обладал бы] силой, [не будь на то воли Аллаха].</p>
 <div class="field-label">Транскрипция</div>
@@ -3558,8 +3664,11 @@ body .nested-dua > .dua-body > .dua-item-actions .dua-mini-action.is-active svg{
 </div>
 <div class="dua-arrow">▾</div>
 </summary>
-<div class="dua-body">< data-dua-actions-for="clothing-new-dua-1"></>
-
+<div class="dua-body"><div class="dua-item-actions" data-dua-actions-for="clothing-new-dua-1">
+<button aria-label="Добавить в избранное" class="dua-mini-action" data-dua-action="favorite" data-dua-id="clothing-new-dua-1" type="button"><span aria-hidden="true" class="mini-icon"><svg viewbox="0 0 24 24"><path d="M12 3.8l2.35 4.76 5.25.76-3.8 3.7.9 5.23L12 15.78 7.3 18.25l.9-5.23-3.8-3.7 5.25-.76L12 3.8z"></path></svg></span><span>Избранное</span></button>
+<button aria-label="Поделиться этим дуа" class="dua-mini-action" data-dua-action="share" data-dua-id="clothing-new-dua-1" type="button"><span aria-hidden="true" class="mini-icon"><svg viewbox="0 0 24 24"><path d="M18 8a3 3 0 1 0-2.83-4H15a3 3 0 0 0 .18 1.02L8.9 8.66A3 3 0 1 0 9 15.34l6.28 3.64A3 3 0 1 0 16 17.3l-6.28-3.64a3.1 3.1 0 0 0 0-3.32l6.28-3.64A3 3 0 0 0 18 8z"></path></svg></span><span>Поделиться</span></button>
+<button aria-label="Сохранить это место" class="dua-mini-action" data-dua-action="save" data-dua-id="clothing-new-dua-1" type="button"><span aria-hidden="true" class="mini-icon"><svg viewbox="0 0 24 24"><path d="M6 4.5A2.5 2.5 0 0 1 8.5 2h7A2.5 2.5 0 0 1 18 4.5V22l-6-3.4L6 22V4.5z"></path></svg></span><span>Сохранить</span></button>
+</div>
 <div class="field-label">Перевод</div>
 <p class="dua-meaning">О Аллах, хвала Тебе! Ты одел меня в эту [одежду, и] я прошу Тебя о её благе и благе того, для чего она была изготовлена, и прибегаю к Твоей защите от её зла и зла того, для чего она была изготовлена.</p>
 <div class="field-label">Транскрипция</div>
@@ -3585,8 +3694,11 @@ body .nested-dua > .dua-body > .dua-item-actions .dua-mini-action.is-active svg{
 </div>
 <div class="dua-arrow">▾</div>
 </summary>
-<div class="dua-body">< data-dua-actions-for="clothing-new-congrats-dua-1"></>
-
+<div class="dua-body"><div class="dua-item-actions" data-dua-actions-for="clothing-new-congrats-dua-1">
+<button aria-label="Добавить в избранное" class="dua-mini-action" data-dua-action="favorite" data-dua-id="clothing-new-congrats-dua-1" type="button"><span aria-hidden="true" class="mini-icon"><svg viewbox="0 0 24 24"><path d="M12 3.8l2.35 4.76 5.25.76-3.8 3.7.9 5.23L12 15.78 7.3 18.25l.9-5.23-3.8-3.7 5.25-.76L12 3.8z"></path></svg></span><span>Избранное</span></button>
+<button aria-label="Поделиться этим дуа" class="dua-mini-action" data-dua-action="share" data-dua-id="clothing-new-congrats-dua-1" type="button"><span aria-hidden="true" class="mini-icon"><svg viewbox="0 0 24 24"><path d="M18 8a3 3 0 1 0-2.83-4H15a3 3 0 0 0 .18 1.02L8.9 8.66A3 3 0 1 0 9 15.34l6.28 3.64A3 3 0 1 0 16 17.3l-6.28-3.64a3.1 3.1 0 0 0 0-3.32l6.28-3.64A3 3 0 0 0 18 8z"></path></svg></span><span>Поделиться</span></button>
+<button aria-label="Сохранить это место" class="dua-mini-action" data-dua-action="save" data-dua-id="clothing-new-congrats-dua-1" type="button"><span aria-hidden="true" class="mini-icon"><svg viewbox="0 0 24 24"><path d="M6 4.5A2.5 2.5 0 0 1 8.5 2h7A2.5 2.5 0 0 1 18 4.5V22l-6-3.4L6 22V4.5z"></path></svg></span><span>Сохранить</span></button>
+</div>
 <div class="field-label">Перевод</div>
 <p class="dua-meaning">Да возместит тебе Аллах Всевышний, когда ты износишь [её].</p>
 <div class="field-label">Транскрипция</div>
@@ -3603,8 +3715,11 @@ body .nested-dua > .dua-body > .dua-item-actions .dua-mini-action.is-active svg{
 </div>
 <div class="dua-arrow">▾</div>
 </summary>
-<div class="dua-body">< data-dua-actions-for="clothing-new-congrats-dua-2"></>
-
+<div class="dua-body"><div class="dua-item-actions" data-dua-actions-for="clothing-new-congrats-dua-2">
+<button aria-label="Добавить в избранное" class="dua-mini-action" data-dua-action="favorite" data-dua-id="clothing-new-congrats-dua-2" type="button"><span aria-hidden="true" class="mini-icon"><svg viewbox="0 0 24 24"><path d="M12 3.8l2.35 4.76 5.25.76-3.8 3.7.9 5.23L12 15.78 7.3 18.25l.9-5.23-3.8-3.7 5.25-.76L12 3.8z"></path></svg></span><span>Избранное</span></button>
+<button aria-label="Поделиться этим дуа" class="dua-mini-action" data-dua-action="share" data-dua-id="clothing-new-congrats-dua-2" type="button"><span aria-hidden="true" class="mini-icon"><svg viewbox="0 0 24 24"><path d="M18 8a3 3 0 1 0-2.83-4H15a3 3 0 0 0 .18 1.02L8.9 8.66A3 3 0 1 0 9 15.34l6.28 3.64A3 3 0 1 0 16 17.3l-6.28-3.64a3.1 3.1 0 0 0 0-3.32l6.28-3.64A3 3 0 0 0 18 8z"></path></svg></span><span>Поделиться</span></button>
+<button aria-label="Сохранить это место" class="dua-mini-action" data-dua-action="save" data-dua-id="clothing-new-congrats-dua-2" type="button"><span aria-hidden="true" class="mini-icon"><svg viewbox="0 0 24 24"><path d="M6 4.5A2.5 2.5 0 0 1 8.5 2h7A2.5 2.5 0 0 1 18 4.5V22l-6-3.4L6 22V4.5z"></path></svg></span><span>Сохранить</span></button>
+</div>
 <div class="field-label">Перевод</div>
 <p class="dua-meaning">Носи новое, живи достойно и умри шахидом.</p>
 <div class="field-label">Транскрипция</div>
@@ -3623,8 +3738,11 @@ body .nested-dua > .dua-body > .dua-item-actions .dua-mini-action.is-active svg{
 </div>
 <div class="dua-arrow">▾</div>
 </summary>
-<div class="dua-body">< data-dua-actions-for="clothing-undressing-dua-1"></>
-
+<div class="dua-body"><div class="dua-item-actions" data-dua-actions-for="clothing-undressing-dua-1">
+<button aria-label="Добавить в избранное" class="dua-mini-action" data-dua-action="favorite" data-dua-id="clothing-undressing-dua-1" type="button"><span aria-hidden="true" class="mini-icon"><svg viewbox="0 0 24 24"><path d="M12 3.8l2.35 4.76 5.25.76-3.8 3.7.9 5.23L12 15.78 7.3 18.25l.9-5.23-3.8-3.7 5.25-.76L12 3.8z"></path></svg></span><span>Избранное</span></button>
+<button aria-label="Поделиться этим дуа" class="dua-mini-action" data-dua-action="share" data-dua-id="clothing-undressing-dua-1" type="button"><span aria-hidden="true" class="mini-icon"><svg viewbox="0 0 24 24"><path d="M18 8a3 3 0 1 0-2.83-4H15a3 3 0 0 0 .18 1.02L8.9 8.66A3 3 0 1 0 9 15.34l6.28 3.64A3 3 0 1 0 16 17.3l-6.28-3.64a3.1 3.1 0 0 0 0-3.32l6.28-3.64A3 3 0 0 0 18 8z"></path></svg></span><span>Поделиться</span></button>
+<button aria-label="Сохранить это место" class="dua-mini-action" data-dua-action="save" data-dua-id="clothing-undressing-dua-1" type="button"><span aria-hidden="true" class="mini-icon"><svg viewbox="0 0 24 24"><path d="M6 4.5A2.5 2.5 0 0 1 8.5 2h7A2.5 2.5 0 0 1 18 4.5V22l-6-3.4L6 22V4.5z"></path></svg></span><span>Сохранить</span></button>
+</div>
 <div class="field-label">Перевод</div>
 <p class="dua-meaning">С именем Аллаха.</p>
 <div class="field-label">Транскрипция</div>
