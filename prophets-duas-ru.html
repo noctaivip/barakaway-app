@@ -2871,6 +2871,107 @@ body .dua-search-hidden{display:none!important;}
 body.fortress-search-active .dua-card[data-search-match="1"]{border-color:rgba(246,223,162,.82)!important;box-shadow:0 18px 42px rgba(0,0,0,.42),0 0 0 1px rgba(246,223,162,.22)!important;}
 body.fortress-search-active .dua-card[data-search-match="1"] > summary.dua-head{background:linear-gradient(135deg,rgba(215,181,109,.18),rgba(45,122,70,.10))!important;}
 </style>
+<style id="fortress-search-morph-sticky-overrides">
+/* === Professional smart search: sticky premium mode + stronger navigation separation === */
+html body .fortress-search-nav.is-visible{
+  padding:7px 9px;
+  border-radius:999px;
+  border:1px solid rgba(246,223,162,.46);
+  background:linear-gradient(135deg,rgba(240,216,145,.22),rgba(185,145,61,.10));
+  box-shadow:0 12px 28px rgba(0,0,0,.28),inset 0 1px 0 rgba(255,255,255,.08);
+}
+html body .fortress-search-counter{
+  min-width:74px;
+  padding:0 6px;
+  color:#fff4d7!important;
+  text-shadow:0 1px 2px rgba(0,0,0,.45);
+}
+html body .fortress-search-status{
+  padding:8px 10px;
+  border-radius:16px;
+  border:1px solid rgba(215,181,109,.18);
+  background:rgba(255,255,255,.035);
+}
+body.fortress-search-active .fortress-actions{
+  position:sticky;
+  top:0;
+  z-index:3600;
+  width:min(100%,760px);
+  margin-top:0;
+  margin-bottom:0;
+  padding:9px 8px 7px;
+  border-radius:0 0 22px 22px;
+  background:linear-gradient(180deg,rgba(13,20,23,.98),rgba(13,20,23,.90))!important;
+  border:1px solid rgba(215,181,109,.18)!important;
+  border-top:0!important;
+  box-shadow:0 18px 34px rgba(0,0,0,.32)!important;
+  backdrop-filter:blur(18px) saturate(1.22);
+  -webkit-backdrop-filter:blur(18px) saturate(1.22);
+}
+body.fortress-search-active .fortress-search-wrap{
+  position:sticky;
+  top:58px;
+  z-index:3550;
+  width:min(100%,760px);
+  margin-top:0!important;
+  margin-bottom:18px!important;
+  padding:8px 6px 10px;
+  border-radius:0 0 24px 24px;
+  background:linear-gradient(180deg,rgba(13,20,23,.96),rgba(8,13,16,.92));
+  border:1px solid rgba(215,181,109,.18);
+  border-top:0;
+  box-shadow:0 18px 38px rgba(0,0,0,.34);
+  backdrop-filter:blur(18px) saturate(1.22);
+  -webkit-backdrop-filter:blur(18px) saturate(1.22);
+}
+body.fortress-search-active .fortress-search-bar{
+  box-shadow:0 14px 32px rgba(0,0,0,.30),0 0 0 1px rgba(246,223,162,.10),inset 0 1px 0 rgba(255,255,255,.055)!important;
+}
+html.light-mode body.fortress-search-active .fortress-actions{
+  background:linear-gradient(180deg,rgba(255,253,247,.98),rgba(247,251,248,.94))!important;
+  box-shadow:0 16px 32px rgba(18,34,24,.12)!important;
+}
+html.light-mode body.fortress-search-active .fortress-search-wrap{
+  background:linear-gradient(180deg,rgba(255,253,247,.98),rgba(247,251,248,.94));
+  box-shadow:0 16px 32px rgba(18,34,24,.12);
+}
+html.light-mode body .fortress-search-nav.is-visible{
+  background:linear-gradient(135deg,#fff7df,#f4ead0);
+  border-color:rgba(181,138,54,.34);
+  box-shadow:0 10px 22px rgba(18,34,24,.08),inset 0 1px 0 rgba(255,255,255,.86);
+}
+html.light-mode body .fortress-search-counter{
+  color:#745416!important;
+  text-shadow:none;
+}
+html.light-mode body .fortress-search-status{
+  background:rgba(255,255,255,.72);
+  border-color:rgba(181,138,54,.18);
+}
+@media(max-width:700px){
+  body.fortress-search-active .fortress-actions{
+    padding:7px 5px 6px;
+    border-radius:0 0 18px 18px;
+  }
+  body.fortress-search-active .fortress-search-wrap{
+    top:54px;
+    padding:7px 5px 9px;
+    border-radius:0 0 20px 20px;
+  }
+  html body .fortress-search-panel{
+    grid-template-columns:1fr!important;
+  }
+  html body .fortress-search-nav.is-visible{
+    justify-content:center!important;
+    gap:10px;
+  }
+  html body .fortress-search-status{
+    font-size:11.3px;
+    line-height:1.35;
+  }
+}
+</style>
+
 </head>
 <body>
 <div class="container">
@@ -7907,11 +8008,29 @@ body.fortress-search-active .dua-card[data-search-match="1"] > summary.dua-head{
     var out=''; value=(value||'').toLowerCase();
     for(var i=0;i<value.length;i++){var idx=en.indexOf(value.charAt(i));out+=idx>=0?ru.charAt(idx):value.charAt(i);} return out;
   }
-  function stemRu(token){
-    token=basicNormalize(token); if(token.length<=3){return token;}
-    var endings=['иями','ями','ами','его','ого','ему','ому','ыми','ими','ая','яя','ое','ее','ые','ие','ый','ий','ой','ую','юю','ах','ях','ам','ям','ом','ем','ов','ев','ей','ия','иям','иях','ию','ья','ье','ьи','ью','а','я','ы','и','е','у','ю','о'];
-    for(var i=0;i<endings.length;i++){var e=endings[i]; if(token.length-e.length>=4 && token.slice(-e.length)===e){return token.slice(0,-e.length);}}
-    return token;
+  function stripSoftTail(token){return (token||'').replace(/[ьъй]+$/g,'');}
+  function rootRu(token){
+    token=basicNormalize(token).replace(/[^а-яa-z0-9]/g,'');
+    if(token.length<=2){return token;}
+    token=stripSoftTail(token);
+    if(token.length<=3){return token;}
+    var endings=[
+      'иями','ями','ами','ого','его','ому','ему','ыми','ими','ской','цкой','ный','ная','ное','ные','ого','его',
+      'ение','ения','ению','ением','ениях','ениями','ений','енией',
+      'ость','ости','остью','остях','остями','остей',
+      'иями','ями','ами','ах','ях','ам','ям','ов','ев','ей','ью','иям','иях','ием','иях','ия','ию',
+      'ая','яя','ое','ее','ые','ие','ый','ий','ой','ую','юю','ом','ем','ою','ею','а','я','ы','и','е','у','ю','о'
+    ];
+    for(var i=0;i<endings.length;i++){
+      var e=endings[i];
+      if(token.length-e.length>=3 && token.slice(-e.length)===e){return stripSoftTail(token.slice(0,-e.length));}
+    }
+    return stripSoftTail(token);
+  }
+  function compactRoot(token){
+    var r=rootRu(token);
+    if(r.length>=5){r=r.replace(/[аеёиоуыэюя]+$/g,'');}
+    return r;
   }
   function normalizeForIndex(value){return basicNormalize(visualLatinToCyrillic(value));}
   function variantsFor(raw){
@@ -7925,7 +8044,10 @@ body.fortress-search-active .dua-card[data-search-match="1"] > summary.dua-head{
       for(var i=0;i<parts.length;i++){
         var token=parts[i]; if(!token){continue;}
         if(!groups[i]){groups[i]=[];}
-        groups[i].push(token); groups[i].push(stemRu(token));
+        groups[i].push(token);
+        groups[i].push(rootRu(token));
+        groups[i].push(compactRoot(token));
+        groups[i].push(stripSoftTail(token));
       }
     }
     var out=[]; for(var g=0;g<groups.length;g++){out.push(unique(groups[g]||[]));} return out;
@@ -7934,15 +8056,15 @@ body.fortress-search-active .dua-card[data-search-match="1"] > summary.dua-head{
   function getDirectBody(card){if(!card){return null;} for(var i=0;i<card.children.length;i++){if(hasClass(card.children[i],'dua-body')){return card.children[i];}} return null;}
   function getTitle(card){var summary=card?card.getElementsByTagName('summary')[0]:null; var title=summary?summary.querySelector('.dua-title'):null; return title?title.textContent.replace(/\s+/g,' ').replace(/^\s+|\s+$/g,''):'Дуа';}
   function hasDescendantNestedList(card){var body=getDirectBody(card); return !!(body&&body.querySelector('.nested-list'));}
-  function isLeafDua(card){if(!card||!hasClass(card,'dua-card')){return false;} if(!hasClass(card,'nested-dua')&&!hasClass(card,'empty-dua')){return false;} if(card.querySelector('.dua-item-actions')){return true;} return !hasDescendantNestedList(card);}
+  function isLeafDua(card){if(!card||!hasClass(card,'dua-card')){return false;} return !!card.querySelector('.dua-item-actions');}
   function tokenSetFromTitle(title){
     var normalized=normalizeForIndex(title), words=normalized.split(' '), bag=[normalized];
-    for(var i=0;i<words.length;i++){if(words[i]){bag.push(words[i]); bag.push(stemRu(words[i]));}}
+    for(var i=0;i<words.length;i++){if(words[i]){bag.push(words[i]); bag.push(rootRu(words[i])); bag.push(compactRoot(words[i])); bag.push(stripSoftTail(words[i]));}}
     return unique(bag).join(' ');
   }
   function setHidden(el,hidden){if(!el){return;} if(hidden){el.classList.add('dua-search-hidden');}else{el.classList.remove('dua-search-hidden');}}
   function init(){
-    var input=document.getElementById('fortressDuaSearchInput'), clearBtn=document.getElementById('fortressDuaSearchClear'), voiceBtn=document.getElementById('fortressDuaVoiceButton'), status=document.getElementById('fortressDuaSearchStatus'), root=document.querySelector('.container'), nav=document.getElementById('fortressDuaSearchNav'), prevBtn=document.getElementById('fortressDuaSearchPrev'), nextBtn=document.getElementById('fortressDuaSearchNext'), counter=document.getElementById('fortressDuaSearchCounter');
+    var input=document.getElementById('fortressDuaSearchInput'), clearBtn=document.getElementById('fortressDuaSearchClear'), voiceBtn=document.getElementById('fortressDuaVoiceButton'), status=document.getElementById('fortressDuaSearchStatus'), root=document.querySelector('.container'), nav=document.getElementById('fortressDuaSearchNav'), prevBtn=document.getElementById('fortressDuaSearchPrev'), nextBtn=document.getElementById('fortressDuaSearchNext'), counter=document.getElementById('fortressDuaSearchCounter'), searchWrap=document.querySelector('.fortress-search-wrap');
     if(!input||!clearBtn||!status||!root){return;}
     var nodes=root.querySelectorAll('.dua-card'), allCards=[], leaves=[], index=[], results=[], current=0;
     for(var i=0;i<nodes.length;i++){allCards.push(nodes[i]); if(isLeafDua(nodes[i])){leaves.push(nodes[i]);}}
@@ -7953,8 +8075,33 @@ body.fortress-search-active .dua-card[data-search-match="1"] > summary.dua-head{
     function openAncestors(card){var node=card; while(node&&node!==root){if(hasClass(node,'dua-card')){setHidden(node,false); if(node.tagName&&node.tagName.toLowerCase()==='details'){node.setAttribute('open','');}} node=node.parentElement;}}
     function resetSearch(){document.body.classList.remove('fortress-search-active'); results=[]; current=0; for(var a=0;a<allCards.length;a++){setHidden(allCards[a],false);} clearMarks(); closeAll(); clearBtn.classList.remove('is-visible'); if(nav){nav.classList.remove('is-visible');} if(counter){counter.textContent='';} status.textContent='';}
     function matches(text,groups){
-      for(var g=0;g<groups.length;g++){var ok=false; for(var v=0;v<groups[g].length;v++){var token=groups[g][v]; if(token && token.length>1 && text.indexOf(token)!==-1){ok=true;break;}} if(!ok){return false;}}
+      for(var g=0;g<groups.length;g++){
+        var ok=false;
+        for(var v=0;v<groups[g].length;v++){
+          var token=groups[g][v];
+          if(token && token.length>1 && text.indexOf(token)!==-1){ok=true;break;}
+        }
+        if(!ok){return false;}
+      }
       return true;
+    }
+    function stickyOffset(){
+      var offset=130;
+      try{
+        var actions=document.querySelector('.fortress-actions');
+        var wrap=searchWrap||document.querySelector('.fortress-search-wrap');
+        offset=(actions?actions.getBoundingClientRect().height:54)+(wrap?wrap.getBoundingClientRect().height:92)+18;
+      }catch(e){}
+      return offset;
+    }
+    function scrollToCurrent(card){
+      if(!card){return;}
+      setTimeout(function(){
+        try{
+          var top=card.getBoundingClientRect().top+window.pageYOffset-stickyOffset();
+          window.scrollTo({top:Math.max(0,top),behavior:'smooth'});
+        }catch(e){try{card.scrollIntoView({behavior:'smooth',block:'start'});}catch(x){card.scrollIntoView();}}
+      },60);
     }
     function renderCurrent(scroll){
       document.body.classList.add('fortress-search-active'); clearBtn.classList.add('is-visible'); closeAll(); hideAll(); clearMarks();
@@ -7966,7 +8113,7 @@ body.fortress-search-active .dua-card[data-search-match="1"] > summary.dua-head{
       if(prevBtn){prevBtn.disabled=results.length<2;}
       if(nextBtn){nextBtn.disabled=results.length<2;}
       status.textContent='Найдено по названиям дуа: '+results.length+' · '+(current+1)+' из '+results.length+' — '+item.title;
-      if(scroll!==false){setTimeout(function(){try{item.card.scrollIntoView({behavior:'smooth',block:'center'});}catch(e){item.card.scrollIntoView();}},40);}
+      if(scroll!==false){scrollToCurrent(item.card);}
     }
     function applySearch(raw){
       var groups=queryGroups(raw); if(!groups.length){resetSearch();return;}
