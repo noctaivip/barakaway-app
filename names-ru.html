@@ -327,6 +327,324 @@ html.light-mode .quote strong{
     max-height:116px !important;
   }
 }
+
+
+/* === Final mobile-first stability fixes === */
+
+/* Lock the whole top name area so long meanings do not move controls */
+.player-card{
+  display:flex !important;
+  flex-direction:column !important;
+}
+
+.arabic{
+  height:72px !important;
+  min-height:72px !important;
+  max-height:72px !important;
+  display:flex !important;
+  align-items:center !important;
+  justify-content:center !important;
+  overflow:hidden !important;
+  margin:6px 0 4px !important;
+}
+
+.translit{
+  height:38px !important;
+  min-height:38px !important;
+  max-height:38px !important;
+  display:flex !important;
+  align-items:center !important;
+  justify-content:center !important;
+  overflow:hidden !important;
+  margin:0 0 4px !important;
+}
+
+.meaning{
+  height:42px !important;
+  min-height:42px !important;
+  max-height:42px !important;
+  display:flex !important;
+  align-items:center !important;
+  justify-content:center !important;
+  overflow:hidden !important;
+  text-align:center !important;
+  margin:0 0 14px !important;
+  padding:0 12px !important;
+  font-size:18px !important;
+  line-height:1.18 !important;
+  color:#f4f7f2 !important;
+  text-shadow:0 8px 20px rgba(0,0,0,.32);
+}
+
+html.light-mode .meaning{
+  color:#244632 !important;
+  text-shadow:none;
+}
+
+.desc{
+  height:104px !important;
+  min-height:104px !important;
+  max-height:104px !important;
+  overflow:hidden !important;
+  display:flex !important;
+  align-items:center !important;
+  justify-content:center !important;
+  font-size:15px !important;
+  line-height:1.42 !important;
+  color:#f4efe2 !important;
+  background:
+    linear-gradient(135deg, rgba(255,255,255,.075), rgba(45,122,70,.10)),
+    radial-gradient(circle at 50% 0%, rgba(215,181,109,.10), transparent 58%) !important;
+  border:1px solid rgba(215,181,109,.24) !important;
+}
+
+html.light-mode .desc{
+  color:#26362d !important;
+  background:
+    linear-gradient(135deg, rgba(255,255,255,.92), rgba(45,122,70,.06)),
+    radial-gradient(circle at 50% 0%, rgba(180,135,46,.10), transparent 58%) !important;
+}
+
+/* Ensure control area never jumps */
+.controls{
+  margin-top:14px !important;
+  min-height:88px !important;
+}
+
+.nav-buttons{
+  min-height:48px !important;
+  margin-top:12px !important;
+}
+
+.manual-note{
+  height:44px !important;
+  min-height:44px !important;
+  max-height:44px !important;
+  overflow:hidden !important;
+  display:flex !important;
+  align-items:center !important;
+  justify-content:center !important;
+  text-align:center !important;
+  line-height:1.28 !important;
+}
+
+/* Stronger contrast for the guidance section */
+.dropdown-block:nth-of-type(2){
+  background:
+    radial-gradient(circle at 50% -10%, rgba(215,181,109,.14), transparent 34%),
+    linear-gradient(180deg, rgba(18,27,25,.98), rgba(11,17,21,.98)) !important;
+  border-color:rgba(215,181,109,.28) !important;
+}
+
+.dropdown-block:nth-of-type(2) summary{
+  color:#ffffff !important;
+  background:
+    linear-gradient(135deg, rgba(45,122,70,.24), rgba(215,181,109,.10)) !important;
+  border-bottom:1px solid rgba(255,255,255,.06);
+}
+
+.dropdown-block:nth-of-type(2) .dropdown-content{
+  background:
+    linear-gradient(180deg, rgba(13,20,23,.98), rgba(14,20,18,.98)) !important;
+}
+
+.dropdown-block:nth-of-type(2) .dropdown-content p{
+  color:#f4f7f2 !important;
+  font-size:15px !important;
+  line-height:1.72 !important;
+  font-weight:650 !important;
+}
+
+.quote{
+  background:
+    linear-gradient(135deg, rgba(45,122,70,.20), rgba(255,255,255,.045)),
+    radial-gradient(circle at 0% 0%, rgba(215,181,109,.12), transparent 36%) !important;
+  border:1px solid rgba(215,181,109,.24) !important;
+}
+
+.quote p{
+  color:#ffffff !important;
+}
+
+.quote strong{
+  color:#ffffff !important;
+  background:rgba(45,122,70,.34);
+  border:1px solid rgba(215,181,109,.22);
+  border-radius:999px;
+  padding:2px 9px;
+  margin-right:4px;
+  min-width:auto !important;
+}
+
+/* Light theme contrast */
+html.light-mode .dropdown-block:nth-of-type(2){
+  background:
+    radial-gradient(circle at 50% -10%, rgba(180,135,46,.10), transparent 34%),
+    linear-gradient(180deg, #ffffff, #f4faf6) !important;
+}
+
+html.light-mode .dropdown-block:nth-of-type(2) summary{
+  color:#173522 !important;
+  background:
+    linear-gradient(135deg, rgba(45,122,70,.10), rgba(180,135,46,.08)) !important;
+}
+
+html.light-mode .dropdown-block:nth-of-type(2) .dropdown-content{
+  background:linear-gradient(180deg, #ffffff, #f7faf8) !important;
+}
+
+html.light-mode .dropdown-block:nth-of-type(2) .dropdown-content p{
+  color:#26362d !important;
+}
+
+html.light-mode .quote p{
+  color:#203127 !important;
+}
+
+html.light-mode .quote strong{
+  color:#173522 !important;
+  background:rgba(45,122,70,.10);
+  border-color:rgba(180,135,46,.18);
+}
+
+/* Mobile priority */
+@media(max-width:700px){
+  .container{
+    padding:16px 10px 92px !important;
+  }
+
+  h1{
+    font-size:23px !important;
+    margin:4px 0 8px !important;
+  }
+
+  .player-card{
+    margin:12px auto 18px !important;
+    padding:18px 12px 16px !important;
+    border-radius:22px !important;
+  }
+
+  .player-top{
+    margin-bottom:8px !important;
+  }
+
+  .arabic{
+    height:62px !important;
+    min-height:62px !important;
+    max-height:62px !important;
+    font-size:39px !important;
+    line-height:1.05 !important;
+  }
+
+  .translit{
+    height:34px !important;
+    min-height:34px !important;
+    max-height:34px !important;
+    font-size:23px !important;
+    line-height:1.05 !important;
+  }
+
+  .meaning{
+    height:42px !important;
+    min-height:42px !important;
+    max-height:42px !important;
+    font-size:15px !important;
+    line-height:1.15 !important;
+    padding:0 10px !important;
+    margin-bottom:12px !important;
+  }
+
+  .desc{
+    height:110px !important;
+    min-height:110px !important;
+    max-height:110px !important;
+    font-size:13.5px !important;
+    line-height:1.38 !important;
+    padding:12px 11px !important;
+    border-radius:16px !important;
+  }
+
+  .controls{
+    min-height:150px !important;
+    grid-template-columns:1fr !important;
+    gap:10px !important;
+    margin-top:12px !important;
+  }
+
+  .sec-box{
+    min-height:44px !important;
+  }
+
+  .nav-buttons{
+    grid-template-columns:1fr 48px 1fr !important;
+    gap:8px !important;
+    min-height:46px !important;
+  }
+
+  .manual-note{
+    height:46px !important;
+    min-height:46px !important;
+    max-height:46px !important;
+    font-size:11.8px !important;
+    padding:0 4px !important;
+  }
+
+  .dropdown-block:nth-of-type(2) summary{
+    font-size:16px !important;
+    line-height:1.25 !important;
+    padding:15px 13px !important;
+  }
+
+  .dropdown-block:nth-of-type(2) .dropdown-content{
+    padding:13px !important;
+  }
+
+  .dropdown-block:nth-of-type(2) .dropdown-content p{
+    font-size:14px !important;
+    line-height:1.62 !important;
+  }
+
+  .quote{
+    padding:14px 12px 14px 14px !important;
+    border-radius:17px !important;
+  }
+
+  .quote p{
+    font-size:13.5px !important;
+    line-height:1.58 !important;
+  }
+
+  .quote strong{
+    display:inline-block !important;
+    margin-bottom:4px !important;
+    padding:2px 8px !important;
+  }
+}
+
+@media(max-width:380px){
+  .arabic{
+    font-size:36px !important;
+  }
+
+  .translit{
+    font-size:21px !important;
+  }
+
+  .meaning{
+    font-size:14px !important;
+  }
+
+  .desc{
+    height:118px !important;
+    min-height:118px !important;
+    max-height:118px !important;
+    font-size:13px !important;
+  }
+
+  .controls{
+    min-height:150px !important;
+  }
+}
 </style>
 <script src="/theme-init.js"></script>
 <link rel="stylesheet" href="/theme.css">
