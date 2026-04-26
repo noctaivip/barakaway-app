@@ -1974,18 +1974,30 @@ html.light-mode body .fortress-panel-card{background:linear-gradient(180deg,#fff
 
 
 
+
+
 <style id="fortress-actions-visual-fix">
-/* === Final clean icon-only actions: no visible boxes === */
+/* === FINAL: clean top icons + favorite accordion === */
+
+/* Top utility row */
 html body .fortress-actions{
   background:transparent !important;
   background-color:transparent !important;
+  background-image:none !important;
   border:0 !important;
-  box-shadow:none !important;
   outline:0 !important;
+  box-shadow:none !important;
   padding:0 !important;
+  margin:12px auto 16px !important;
+  display:flex !important;
+  align-items:center !important;
+  justify-content:center !important;
+  gap:22px !important;
 }
 
+/* Remove browser/PWA square button rendering */
 html body .fortress-actions button.fortress-action,
+html body .fortress-actions .fortress-action,
 html.light-mode body .fortress-actions button.fortress-action,
 html.dark-mode body .fortress-actions button.fortress-action{
   appearance:none !important;
@@ -2005,6 +2017,7 @@ html.dark-mode body .fortress-actions button.fortress-action{
   padding:0 !important;
   margin:0 !important;
   color:#7a5b18 !important;
+  text-decoration:none !important;
 }
 
 html.dark-mode body .fortress-actions button.fortress-action{
@@ -2039,6 +2052,7 @@ html body .fortress-action-icon,
 html body .fortress-action-label{
   background:transparent !important;
   background-color:transparent !important;
+  background-image:none !important;
   border:0 !important;
   outline:0 !important;
   box-shadow:none !important;
@@ -2049,6 +2063,16 @@ html body .fortress-actions button.fortress-action svg{
   background:transparent !important;
   border:0 !important;
   box-shadow:none !important;
+  filter:drop-shadow(0 2px 4px rgba(0,0,0,.14));
+}
+
+html body .fortress-action-label{
+  font-weight:900 !important;
+  text-shadow:none !important;
+}
+
+html.dark-mode body .fortress-action-label{
+  text-shadow:0 1px 2px rgba(0,0,0,.38) !important;
 }
 
 /* Per-dua controls: only icons on the right side */
@@ -2154,38 +2178,79 @@ html body button.dua-mini-action[data-dua-action="save"].is-active svg{
   fill:currentColor !important;
 }
 
-/* Favorites panel: full dua cards inside favorites */
-html body .fortress-favorite-full{
-  border:1px solid rgba(215,181,109,.24);
+/* Favorites panel: saved duas as inner accordions */
+html body .fortress-favorite-accordion{
+  border:1px solid rgba(215,181,109,.30);
   background:linear-gradient(180deg,rgba(215,181,109,.08),rgba(255,255,255,.02));
   border-radius:18px;
-  padding:12px;
-  margin-bottom:12px;
+  margin-bottom:10px;
+  overflow:hidden;
 }
 
-html body .fortress-favorite-full-title{
+html body .fortress-favorite-accordion summary{
+  list-style:none;
+  cursor:pointer;
+  min-height:52px;
+  padding:13px 14px;
+  display:grid;
+  grid-template-columns:1fr 24px;
+  align-items:center;
+  gap:10px;
+}
+
+html body .fortress-favorite-accordion summary::-webkit-details-marker{
+  display:none;
+}
+
+html body .fortress-favorite-title{
   color:#f6dfa2;
   font-size:15px;
   font-weight:950;
-  margin:0 0 10px;
+  line-height:1.25;
 }
 
-html body .fortress-favorite-full .dua-item-actions{
+html body .fortress-favorite-arrow{
+  width:23px;
+  height:23px;
+  border-radius:999px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  color:#111814;
+  background:linear-gradient(180deg,#e8cc82,#b9913d);
+  font-size:11px;
+  font-weight:900;
+}
+
+html body .fortress-favorite-accordion[open] .fortress-favorite-arrow{
+  transform:rotate(180deg);
+}
+
+html body .fortress-favorite-content{
+  padding:0 12px 13px;
+  border-top:1px solid rgba(215,181,109,.24);
+}
+
+html body .fortress-favorite-content .dua-item-actions{
   display:none !important;
 }
 
-html.light-mode body .fortress-favorite-full{
+html.light-mode body .fortress-favorite-accordion{
   background:#fffaf0;
-  border-color:rgba(181,138,54,.24);
+  border-color:rgba(181,138,54,.26);
 }
 
-html.light-mode body .fortress-favorite-full-title{
+html.light-mode body .fortress-favorite-title{
   color:#745416;
+}
+
+html.light-mode body .fortress-favorite-content{
+  border-top-color:rgba(181,138,54,.22);
 }
 
 @media(max-width:700px){
   html body .fortress-actions{
-    gap:14px !important;
+    gap:15px !important;
     justify-content:center !important;
   }
 
@@ -2229,15 +2294,12 @@ html.light-mode body .fortress-favorite-full-title{
 </head>
 <body>
 <div class="container">
-<div aria-label="Быстрые действия" class="fortress-actions">
+<h1>Крепость мусульманина</h1><div aria-label="Быстрые действия" class="fortress-actions">
 <button aria-label="Открыть избранные дуа" class="fortress-action" data-fortress-action="favorite" type="button"><span aria-hidden="true" class="fortress-action-icon"><svg viewbox="0 0 24 24"><path d="M12 3.8l2.35 4.76 5.25.76-3.8 3.7.9 5.23L12 15.78 7.3 18.25l.9-5.23-3.8-3.7 5.25-.76L12 3.8z"></path></svg></span><span class="fortress-action-label">Избранное</span></button>
 <button aria-label="Поделиться этой страницей" class="fortress-action" data-fortress-action="share" type="button"><span aria-hidden="true" class="fortress-action-icon"><svg viewbox="0 0 24 24"><path d="M18 8a3 3 0 1 0-2.83-4H15a3 3 0 0 0 .18 1.02L8.9 8.66A3 3 0 1 0 9 15.34l6.28 3.64A3 3 0 1 0 16 17.3l-6.28-3.64a3.1 3.1 0 0 0 0-3.32l6.28-3.64A3 3 0 0 0 18 8z"></path></svg></span><span class="fortress-action-label">Поделиться</span></button>
 <button aria-label="Включить режим чтения" class="fortress-action" data-fortress-action="reading" type="button"><span aria-hidden="true" class="fortress-action-icon"><svg viewbox="0 0 24 24"><path d="M4 5.5A2.5 2.5 0 0 1 6.5 3H20v16H6.5A2.5 2.5 0 0 0 4 21V5.5z"></path><path d="M8 7h8M8 11h7M8 15h6"></path></svg></span><span class="fortress-action-label">Чтение</span></button>
 <button aria-label="Открыть сохранённое место" class="fortress-action" data-fortress-action="save" type="button"><span aria-hidden="true" class="fortress-action-icon"><svg viewbox="0 0 24 24"><path d="M6 4.5A2.5 2.5 0 0 1 8.5 2h7A2.5 2.5 0 0 1 18 4.5V22l-6-3.4L6 22V4.5z"></path></svg></span><span class="fortress-action-label">Сохранить</span></button>
 <button aria-label="Переключить тему" class="fortress-action" data-fortress-action="theme" type="button"><span aria-hidden="true" class="fortress-action-icon"><svg viewbox="0 0 24 24"><path d="M21 12.7A8.5 8.5 0 0 1 11.3 3 7 7 0 1 0 21 12.7z"></path></svg></span><span class="fortress-action-label">Тема</span></button>
-</div>
-<div>
-<h1>Крепость мусульманина</h1>
 </div>
 
 <div class="hero-note">
@@ -4233,18 +4295,43 @@ html.light-mode body .fortress-favorite-full-title{
       if(!source)return;
       const title=getDuaTitle(id);
       const body=source.querySelector(":scope > .dua-body");
-      const wrap=document.createElement("div");
-      wrap.className="fortress-favorite-full";
+
+      const item=document.createElement("details");
+      item.className="fortress-favorite-accordion";
+      item.setAttribute("data-favorite-dua-id",id);
+
+      const summary=document.createElement("summary");
       const titleNode=document.createElement("div");
-      titleNode.className="fortress-favorite-full-title";
+      titleNode.className="fortress-favorite-title";
       titleNode.textContent=title;
-      wrap.appendChild(titleNode);
+
+      const arrow=document.createElement("span");
+      arrow.className="fortress-favorite-arrow";
+      arrow.textContent="⌄";
+
+      summary.appendChild(titleNode);
+      summary.appendChild(arrow);
+      item.appendChild(summary);
+
+      const content=document.createElement("div");
+      content.className="fortress-favorite-content";
+
       if(body){
         const clone=body.cloneNode(true);
         clone.querySelectorAll(".dua-item-actions").forEach(function(el){el.remove();});
-        wrap.appendChild(clone);
+        content.appendChild(clone);
       }
-      list.appendChild(wrap);
+
+      item.appendChild(content);
+
+      item.addEventListener("toggle",function(){
+        if(!item.open)return;
+        qsa("#fortress-favorites-list details.fortress-favorite-accordion[open]").forEach(function(other){
+          if(other!==item)other.open=false;
+        });
+      });
+
+      list.appendChild(item);
     });
   }
   function openPanel(){renderFavorites();const panel=qs("#fortress-favorites-panel");if(panel){panel.classList.add("is-open");panel.setAttribute("aria-hidden","false")}}function closePanel(){const panel=qs("#fortress-favorites-panel");if(panel){panel.classList.remove("is-open");panel.setAttribute("aria-hidden","true")}}
