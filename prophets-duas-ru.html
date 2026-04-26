@@ -8056,7 +8056,18 @@ html.light-mode body .fortress-search-status{
   function getDirectBody(card){if(!card){return null;} for(var i=0;i<card.children.length;i++){if(hasClass(card.children[i],'dua-body')){return card.children[i];}} return null;}
   function getTitle(card){var summary=card?card.getElementsByTagName('summary')[0]:null; var title=summary?summary.querySelector('.dua-title'):null; return title?title.textContent.replace(/\s+/g,' ').replace(/^\s+|\s+$/g,''):'Дуа';}
   function hasDescendantNestedList(card){var body=getDirectBody(card); return !!(body&&body.querySelector('.nested-list'));}
-  function isLeafDua(card){if(!card||!hasClass(card,'dua-card')){return false;} return !!card.querySelector('.dua-item-actions');}
+  function isLeafDua(card){
+    if(!card||!hasClass(card,'dua-card')){return false;}
+    var body=getDirectBody(card);
+    if(!body){return false;}
+    /* Search results must count only final dua cards, not section/subsection accordions.
+       A final dua card has its own direct action row and does not contain an inner nested list. */
+    if(body.querySelector('.nested-list')){return false;}
+    for(var i=0;i<body.children.length;i++){
+      if(hasClass(body.children[i],'dua-item-actions')){return true;}
+    }
+    return false;
+  }
   function tokenSetFromTitle(title){
     var normalized=normalizeForIndex(title), words=normalized.split(' '), bag=[normalized];
     for(var i=0;i<words.length;i++){if(words[i]){bag.push(words[i]); bag.push(rootRu(words[i])); bag.push(compactRoot(words[i])); bag.push(stripSoftTail(words[i]));}}
