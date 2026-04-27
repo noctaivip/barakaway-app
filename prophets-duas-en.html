@@ -8125,6 +8125,57 @@ html.light-mode body .fortress-search-status{
 </script>
 
 
+<script id="stable-dua-open-position-fix">
+(function(){
+  function closestSummary(node){
+    while(node && node !== document){
+      if(node.tagName && node.tagName.toLowerCase() === 'summary' && node.classList.contains('dua-head')) return node;
+      node = node.parentNode;
+    }
+    return null;
+  }
+
+  function closestDetails(node){
+    while(node && node !== document){
+      if(node.tagName && node.tagName.toLowerCase() === 'details' && node.classList.contains('dua-card')) return node;
+      node = node.parentNode;
+    }
+    return null;
+  }
+
+  function restoreSummaryPosition(summary, startTop){
+    if(!summary) return;
+    try{
+      var currentTop = summary.getBoundingClientRect().top;
+      var delta = currentTop - startTop;
+      if(Math.abs(delta) > 1){
+        window.scrollBy(0, delta);
+      }
+    }catch(e){}
+  }
+
+  document.addEventListener('click', function(event){
+    var summary = closestSummary(event.target);
+    if(!summary) return;
+
+    var details = closestDetails(summary);
+    if(!details) return;
+
+    /* Manual toggle keeps the clicked title visually fixed.
+       Without this, when another opened dua above is closed, browser scroll anchoring
+       can move the clicked title upward and the opened dua appears to be lost. */
+    event.preventDefault();
+
+    var startTop = summary.getBoundingClientRect().top;
+    details.open = !details.open;
+
+    requestAnimationFrame(function(){restoreSummaryPosition(summary, startTop);});
+    setTimeout(function(){restoreSummaryPosition(summary, startTop);}, 0);
+    setTimeout(function(){restoreSummaryPosition(summary, startTop);}, 80);
+    setTimeout(function(){restoreSummaryPosition(summary, startTop);}, 180);
+  }, true);
+})();
+</script>
 
 <script id="fortress-final-accordion-guard">
 (function(){
