@@ -2252,27 +2252,46 @@ const BARAKAWAY_APP_LINKS = {
       ctx.fillText('Сура Священного Корана — BarakaWay', w / 2, 595);
     }
 
-    roundRect(ctx, 210, h - 250, w - 420, 82, 28);
-    const appGrad = ctx.createLinearGradient(210, h - 250, w - 210, h - 168);
-    appGrad.addColorStop(0, '#2d7a46');
-    appGrad.addColorStop(1, '#4caf6a');
-    ctx.fillStyle = appGrad;
+    ctx.save();
+    ctx.translate(w / 2, h - 210);
+
+    const medallion = ctx.createRadialGradient(0, 0, 8, 0, 0, 88);
+    medallion.addColorStop(0, 'rgba(240,216,145,0.34)');
+    medallion.addColorStop(0.55, 'rgba(181,138,54,0.18)');
+    medallion.addColorStop(1, 'rgba(240,216,145,0)');
+    ctx.fillStyle = medallion;
+    ctx.beginPath();
+    ctx.arc(0, 0, 92, 0, Math.PI * 2);
     ctx.fill();
-    ctx.strokeStyle = 'rgba(240,216,145,0.48)';
+
+    ctx.strokeStyle = 'rgba(240,216,145,0.58)';
     ctx.lineWidth = 2;
+    ctx.beginPath();
+    ctx.arc(0, 0, 58, 0, Math.PI * 2);
     ctx.stroke();
 
-    ctx.fillStyle = '#ffffff';
-    ctx.font = '900 24px system-ui, -apple-system, Segoe UI, sans-serif';
-    ctx.fillText('Download BarakaWay App', w / 2, h - 232);
+    ctx.strokeStyle = 'rgba(240,216,145,0.38)';
+    ctx.lineWidth = 1.4;
+    for(let i = 0; i < 12; i++){
+      ctx.rotate(Math.PI / 6);
+      ctx.beginPath();
+      ctx.moveTo(0, -72);
+      ctx.quadraticCurveTo(18, -48, 0, -28);
+      ctx.quadraticCurveTo(-18, -48, 0, -72);
+      ctx.stroke();
+    }
 
-    ctx.fillStyle = '#eaf6ee';
-    ctx.font = '800 19px system-ui, -apple-system, Segoe UI, sans-serif';
-    ctx.fillText('Google Play · App Store ready', w / 2, h - 200);
+    ctx.fillStyle = '#f0d891';
+    ctx.font = '900 38px system-ui, -apple-system, Segoe UI, sans-serif';
+    ctx.textAlign = 'center';
+    ctx.textBaseline = 'middle';
+    ctx.fillText('☪', 0, 2);
+
+    ctx.restore();
 
     ctx.fillStyle = 'rgba(240,216,145,0.92)';
     ctx.font = '800 22px system-ui, -apple-system, Segoe UI, sans-serif';
-    ctx.fillText('onedollarexit.com', w / 2, h - 135);
+    ctx.fillText('BarakaWay · onedollarexit.com', w / 2, h - 118);
 
     const blob = await canvasToBlob(canvas);
     if(!blob) return null;
