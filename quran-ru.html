@@ -1988,20 +1988,7 @@ const BARAKAWAY_APP_LINKS = {
       .replaceAll('"','&quot;')
       .replaceAll("'","&#039;");
   }
-
-  
-  function appCtaHtml(){
-    return `
-      <div class="quran-share-app">
-        <div class="quran-share-app-title">BarakaWay App</div>
-        <a class="quran-share-app-link" href="${escapeHtml(BARAKAWAY_APP_LINKS.googlePlay)}" target="_blank" rel="noopener">
-          Скачать приложение
-        </a>
-      </div>
-    `;
-  }
-
-  function surahDataFromButton(btn){
+function surahDataFromButton(btn){
     return {
       number: btn.dataset.surahNumber || '',
       name: btn.dataset.surahName || 'Сура',
@@ -2213,6 +2200,12 @@ const BARAKAWAY_APP_LINKS = {
 
     ctx.textAlign = 'center';
     ctx.textBaseline = 'top';
+    ctx.fillStyle = '#f0d891';
+    ctx.font = '900 28px system-ui, -apple-system, Segoe UI, sans-serif';
+    ctx.fillText('BarakaWay App', w / 2, 122);
+
+    ctx.textAlign = 'center';
+    ctx.textBaseline = 'top';
 
     ctx.fillStyle = '#f0d891';
     ctx.font = '700 46px system-ui, -apple-system, Segoe UI, sans-serif';
@@ -2253,45 +2246,48 @@ const BARAKAWAY_APP_LINKS = {
     }
 
     ctx.save();
-    ctx.translate(w / 2, h - 210);
+    const ornamentY = h - 205;
+    const ornamentW = 560;
+    const ornamentH = 92;
+    const ornamentX = (w - ornamentW) / 2;
 
-    const medallion = ctx.createRadialGradient(0, 0, 8, 0, 0, 88);
-    medallion.addColorStop(0, 'rgba(240,216,145,0.34)');
-    medallion.addColorStop(0.55, 'rgba(181,138,54,0.18)');
-    medallion.addColorStop(1, 'rgba(240,216,145,0)');
-    ctx.fillStyle = medallion;
-    ctx.beginPath();
-    ctx.arc(0, 0, 92, 0, Math.PI * 2);
+    roundRect(ctx, ornamentX, ornamentY - ornamentH / 2, ornamentW, ornamentH, 32);
+    const ornamentBg = ctx.createLinearGradient(ornamentX, ornamentY - 46, ornamentX + ornamentW, ornamentY + 46);
+    ornamentBg.addColorStop(0, 'rgba(45,122,70,0.18)');
+    ornamentBg.addColorStop(0.5, 'rgba(240,216,145,0.16)');
+    ornamentBg.addColorStop(1, 'rgba(45,122,70,0.18)');
+    ctx.fillStyle = ornamentBg;
     ctx.fill();
-
-    ctx.strokeStyle = 'rgba(240,216,145,0.58)';
+    ctx.strokeStyle = 'rgba(240,216,145,0.50)';
     ctx.lineWidth = 2;
+    ctx.stroke();
+
+    ctx.strokeStyle = 'rgba(240,216,145,0.64)';
+    ctx.lineWidth = 2.2;
     ctx.beginPath();
-    ctx.arc(0, 0, 58, 0, Math.PI * 2);
+    ctx.moveTo(ornamentX + 52, ornamentY);
+    ctx.bezierCurveTo(ornamentX + 130, ornamentY - 54, ornamentX + 210, ornamentY + 54, ornamentX + 285, ornamentY);
+    ctx.bezierCurveTo(ornamentX + 360, ornamentY - 54, ornamentX + 430, ornamentY + 54, ornamentX + ornamentW - 52, ornamentY);
     ctx.stroke();
 
     ctx.strokeStyle = 'rgba(240,216,145,0.38)';
     ctx.lineWidth = 1.4;
-    for(let i = 0; i < 12; i++){
-      ctx.rotate(Math.PI / 6);
+    for(let i = 0; i < 9; i++){
+      const cx = ornamentX + 92 + i * 47;
       ctx.beginPath();
-      ctx.moveTo(0, -72);
-      ctx.quadraticCurveTo(18, -48, 0, -28);
-      ctx.quadraticCurveTo(-18, -48, 0, -72);
+      ctx.arc(cx, ornamentY, 22, 0, Math.PI * 2);
+      ctx.stroke();
+      ctx.beginPath();
+      ctx.arc(cx, ornamentY, 8, 0, Math.PI * 2);
       ctx.stroke();
     }
 
     ctx.fillStyle = '#f0d891';
-    ctx.font = '900 38px system-ui, -apple-system, Segoe UI, sans-serif';
+    ctx.font = '900 28px system-ui, -apple-system, Segoe UI, sans-serif';
     ctx.textAlign = 'center';
     ctx.textBaseline = 'middle';
-    ctx.fillText('☪', 0, 2);
-
+    ctx.fillText('﷽', w / 2, ornamentY + 1);
     ctx.restore();
-
-    ctx.fillStyle = 'rgba(240,216,145,0.92)';
-    ctx.font = '800 22px system-ui, -apple-system, Segoe UI, sans-serif';
-    ctx.fillText('BarakaWay · onedollarexit.com', w / 2, h - 118);
 
     const blob = await canvasToBlob(canvas);
     if(!blob) return null;
@@ -2347,8 +2343,8 @@ const BARAKAWAY_APP_LINKS = {
           <div class="quran-share-bismillah">بِسْمِ ٱللَّٰهِ ٱلرَّحْمَـٰنِ ٱلرَّحِيمِ</div>
           <div class="quran-share-main">Священный Коран</div>
           <div class="quran-share-sub">Читайте, сохраняйте и делитесь сурами Священного Корана.</div>
-          ${appCtaHtml()}
-          <div class="quran-share-limit-note"><strong>Будет создана PNG-карточка.</strong> Если браузер поддерживает отправку файлов, уйдёт именно картинка. Если нет — уйдёт текст и ссылка.</div>
+          
+          <div class="quran-share-limit-note"><strong>Будет создана PNG-карточка.</strong> Вместе с ней отправится короткая ссылка на приложение.</div>
           <div class="quran-share-actions">
             <button class="quran-share-button" type="button" data-share-confirm="page">Поделиться карточкой</button>
             <button class="quran-share-button secondary" type="button" data-quran-close="share">Закрыть</button>
@@ -2364,8 +2360,8 @@ const BARAKAWAY_APP_LINKS = {
         <div class="quran-share-arabic">${escapeHtml(data.arabic)}</div>
         <div class="quran-share-meta">${escapeHtml(data.ayahs)} · ${escapeHtml(data.meta)}</div>
         <div class="quran-share-sub">Сура Священного Корана — BarakaWay</div>
-        ${appCtaHtml()}
-        <div class="quran-share-limit-note"><strong>Будет создана PNG-карточка.</strong> Если Telegram/браузер принимает файлы, отправится красивая карточка как изображение.</div>
+        
+        <div class="quran-share-limit-note"><strong>Будет создана PNG-карточка.</strong> Вместе с ней отправится короткая ссылка на приложение.</div>
         <div class="quran-share-actions">
           <button class="quran-share-button" type="button" data-share-confirm="surah">Поделиться карточкой</button>
           <button class="quran-share-button secondary" type="button" data-quran-close="share">Закрыть</button>
