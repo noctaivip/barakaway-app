@@ -604,6 +604,14 @@ html.light-mode .quran-share-limit-note{
   background:rgba(181,138,54,.08);
   color:#526158;
 }
+</style><style id="quran-share-image-upgrade-style">
+/* === Quran Share Image Upgrade === */
+.quran-share-limit-note strong{
+  color:#f0d891;
+}
+html.light-mode .quran-share-limit-note strong{
+  color:#8a681f;
+}
 </style></head>
 <body>
 <div class="container">
@@ -1930,7 +1938,7 @@ input.addEventListener("input", function(){
     toast.textContent = message;
     toast.classList.add('is-visible');
     clearTimeout(toastTimer);
-    toastTimer = setTimeout(() => toast.classList.remove('is-visible'), 1900);
+    toastTimer = setTimeout(() => toast.classList.remove('is-visible'), 2100);
   }
 
   function absoluteUrl(href){
@@ -2080,16 +2088,172 @@ input.addEventListener("input", function(){
     }
   }
 
-  async function sharePayload(title, text, url){
-    if(navigator.share){
-      await navigator.share({title, text, url});
-      return 'shared';
+  function roundRect(ctx, x, y, w, h, r){
+    const radius = Math.min(r, w / 2, h / 2);
+    ctx.beginPath();
+    ctx.moveTo(x + radius, y);
+    ctx.arcTo(x + w, y, x + w, y + h, radius);
+    ctx.arcTo(x + w, y + h, x, y + h, radius);
+    ctx.arcTo(x, y + h, x, y, radius);
+    ctx.arcTo(x, y, x + w, y, radius);
+    ctx.closePath();
+  }
+
+  function drawCenteredText(ctx, text, x, y, maxWidth, lineHeight, options){
+    const words = String(text || '').split(' ');
+    let line = '';
+    let lines = [];
+    words.forEach(word => {
+      const test = line ? line + ' ' + word : word;
+      if(ctx.measureText(test).width > maxWidth && line){
+        lines.push(line);
+        line = word;
+      }else{
+        line = test;
+      }
+    });
+    if(line) lines.push(line);
+    lines.forEach((l, i) => ctx.fillText(l, x, y + i * lineHeight));
+    return y + lines.length * lineHeight;
+  }
+
+  function canvasToBlob(canvas){
+    return new Promise(resolve => canvas.toBlob(resolve, 'image/png', 0.96));
+  }
+
+  async function createShareImage(type, data){
+    const canvas = document.createElement('canvas');
+    const scale = 2;
+    const w = 900;
+    const h = type === 'page' ? 900 : 980;
+    canvas.width = w * scale;
+    canvas.height = h * scale;
+    canvas.style.width = w + 'px';
+    canvas.style.height = h + 'px';
+    const ctx = canvas.getContext('2d');
+    ctx.scale(scale, scale);
+
+    const gradient = ctx.createLinearGradient(0, 0, 0, h);
+    gradient.addColorStop(0, '#07110f');
+    gradient.addColorStop(0.55, '#101b17');
+    gradient.addColorStop(1, '#060a0b');
+    ctx.fillStyle = gradient;
+    ctx.fillRect(0, 0, w, h);
+
+    const glow = ctx.createRadialGradient(w * 0.5, 170, 20, w * 0.5, 170, 410);
+    glow.addColorStop(0, 'rgba(215,181,109,0.28)');
+    glow.addColorStop(1, 'rgba(215,181,109,0)');
+    ctx.fillStyle = glow;
+    ctx.fillRect(0, 0, w, h);
+
+    roundRect(ctx, 54, 62, w - 108, h - 124, 52);
+    ctx.fillStyle = 'rgba(15,24,24,0.86)';
+    ctx.fill();
+    ctx.strokeStyle = 'rgba(215,181,109,0.50)';
+    ctx.lineWidth = 2;
+    ctx.stroke();
+
+    roundRect(ctx, 92, 104, w - 184, h - 208, 44);
+    const cardGrad = ctx.createLinearGradient(92, 104, w - 92, h - 104);
+    cardGrad.addColorStop(0, '#13291d');
+    cardGrad.addColorStop(0.55, '#0f171a');
+    cardGrad.addColorStop(1, '#121016');
+    ctx.fillStyle = cardGrad;
+    ctx.fill();
+    ctx.strokeStyle = 'rgba(240,216,145,0.58)';
+    ctx.lineWidth = 2;
+    ctx.stroke();
+
+    ctx.textAlign = 'center';
+    ctx.textBaseline = 'top';
+
+    ctx.fillStyle = '#f0d891';
+    ctx.font = '700 46px system-ui, -apple-system, Segoe UI, sans-serif';
+    ctx.direction = 'rtl';
+    ctx.fillText('بِسْمِ ٱللَّٰهِ ٱلرَّحْمَـٰنِ ٱلرَّحِيمِ', w / 2, 160);
+
+    ctx.direction = 'ltr';
+    ctx.fillStyle = '#ffffff';
+
+    if(type === 'page'){
+      ctx.font = '900 58px system-ui, -apple-system, Segoe UI, sans-serif';
+      ctx.fillText('Священный Коран', w / 2, 265);
+
+      ctx.fillStyle = '#d7b56d';
+      ctx.font = '800 26px system-ui, -apple-system, Segoe UI, sans-serif';
+      drawCenteredText(ctx, 'Читайте, сохраняйте и делитесь сурами Священного Корана', w / 2, 352, 620, 36);
+
+      ctx.fillStyle = '#cbd5df';
+      ctx.font = '700 24px system-ui, -apple-system, Segoe UI, sans-serif';
+      ctx.fillText('BarakaWay', w / 2, 500);
+    }else{
+      ctx.font = '900 50px system-ui, -apple-system, Segoe UI, sans-serif';
+      drawCenteredText(ctx, '#' + data.number + ' — ' + data.name, w / 2, 260, 650, 58);
+
+      ctx.direction = 'rtl';
+      ctx.fillStyle = '#f0d891';
+      ctx.font = '900 66px system-ui, -apple-system, Segoe UI, sans-serif';
+      ctx.fillText(data.arabic || '', w / 2, 390);
+
+      ctx.direction = 'ltr';
+      ctx.fillStyle = '#d7b56d';
+      ctx.font = '850 26px system-ui, -apple-system, Segoe UI, sans-serif';
+      ctx.fillText((data.ayahs || '') + ' · ' + (data.meta || ''), w / 2, 515);
+
+      ctx.fillStyle = '#cbd5df';
+      ctx.font = '800 25px system-ui, -apple-system, Segoe UI, sans-serif';
+      ctx.fillText('Сура Священного Корана — BarakaWay', w / 2, 595);
     }
-    if(navigator.clipboard){
-      await navigator.clipboard.writeText(text + '\\n' + url);
-      return 'copied';
-    }
-    return 'none';
+
+    ctx.fillStyle = 'rgba(240,216,145,0.92)';
+    ctx.font = '800 22px system-ui, -apple-system, Segoe UI, sans-serif';
+    ctx.fillText('onedollarexit.com', w / 2, h - 160);
+
+    const blob = await canvasToBlob(canvas);
+    if(!blob) return null;
+
+    const fileName = type === 'page'
+      ? 'barakaway-quran.png'
+      : 'barakaway-surah-' + (data.number || 'quran') + '.png';
+
+    return new File([blob], fileName, { type:'image/png' });
+  }
+
+  async function shareWithImage(type, data){
+    const isPage = type === 'page';
+    const title = isPage ? 'Священный Коран — BarakaWay' : ('Сура #' + data.number + ' — ' + data.name);
+    const url = isPage ? window.location.href : absoluteUrl(data.href);
+    const text = isPage
+      ? '📖 Священный Коран — BarakaWay'
+      : '📖 Сура #' + data.number + ' — ' + data.name + '\\n' + (data.arabic || '') + '\\n' + (data.ayahs || '') + ' · ' + (data.meta || '') + '\\nBarakaWay';
+
+    try{
+      const imageFile = await createShareImage(type, data || {});
+      if(imageFile && navigator.canShare && navigator.canShare({ files:[imageFile] })){
+        await navigator.share({
+          title,
+          text,
+          files:[imageFile]
+        });
+        showToast('Карточка отправлена как изображение');
+        return;
+      }
+    }catch(err){}
+
+    try{
+      if(navigator.share){
+        await navigator.share({ title, text, url });
+        showToast('Открыто меню отправки');
+        return;
+      }
+    }catch(err){}
+
+    try{
+      if(navigator.clipboard){
+        await navigator.clipboard.writeText(text + '\\n' + url);
+        showToast('Текст и ссылка скопированы');
+      }
+    }catch(err){}
   }
 
   function shareCardHtml(type, data){
@@ -2099,9 +2263,9 @@ input.addEventListener("input", function(){
           <div class="quran-share-bismillah">بِسْمِ ٱللَّٰهِ ٱلرَّحْمَـٰنِ ٱلرَّحِيمِ</div>
           <div class="quran-share-main">Священный Коран</div>
           <div class="quran-share-sub">Читайте, сохраняйте и делитесь сурами Священного Корана.</div>
-          <div class="quran-share-limit-note">При отправке через Telegram браузер передаёт текст и ссылку. Настоящая визуальная карточка в Telegram появляется через Open Graph-превью публичной страницы.</div>
+          <div class="quran-share-limit-note"><strong>Будет создана PNG-карточка.</strong> Если браузер поддерживает отправку файлов, уйдёт именно картинка. Если нет — уйдёт текст и ссылка.</div>
           <div class="quran-share-actions">
-            <button class="quran-share-button" type="button" data-share-confirm="page">Поделиться страницей</button>
+            <button class="quran-share-button" type="button" data-share-confirm="page">Поделиться карточкой</button>
             <button class="quran-share-button secondary" type="button" data-quran-close="share">Закрыть</button>
           </div>
         </div>
@@ -2115,9 +2279,9 @@ input.addEventListener("input", function(){
         <div class="quran-share-arabic">${escapeHtml(data.arabic)}</div>
         <div class="quran-share-meta">${escapeHtml(data.ayahs)} · ${escapeHtml(data.meta)}</div>
         <div class="quran-share-sub">Сура Священного Корана — BarakaWay</div>
-        <div class="quran-share-limit-note">Будет отправлен красивый текст с названием, арабским именем и ссылкой. Полноценная картинка-карточка требует отдельного OG-изображения для страницы суры.</div>
+        <div class="quran-share-limit-note"><strong>Будет создана PNG-карточка.</strong> Если Telegram/браузер принимает файлы, отправится красивая карточка как изображение.</div>
         <div class="quran-share-actions">
-          <button class="quran-share-button" type="button" data-share-confirm="surah">Поделиться сурой</button>
+          <button class="quran-share-button" type="button" data-share-confirm="surah">Поделиться карточкой</button>
           <button class="quran-share-button secondary" type="button" data-quran-close="share">Закрыть</button>
         </div>
       </div>
@@ -2133,20 +2297,7 @@ input.addEventListener("input", function(){
 
   async function confirmShare(){
     if(!pendingShare) return;
-    const type = pendingShare.type;
-    const data = pendingShare.data || {};
-    const isPage = type === 'page';
-
-    const title = isPage ? 'Священный Коран — BarakaWay' : ('Сура #' + data.number + ' — ' + data.name);
-    const text = isPage
-      ? '📖 Священный Коран\\nЧитайте, сохраняйте и делитесь сурами Священного Корана.'
-      : '📖 Сура #' + data.number + ' — ' + data.name + '\\n' + (data.arabic || '') + '\\n' + (data.ayahs || '') + ' · ' + (data.meta || '') + '\\nBarakaWay';
-    const url = isPage ? window.location.href : absoluteUrl(data.href);
-
-    try{
-      const result = await sharePayload(title, text, url);
-      showToast(result === 'shared' ? 'Открыто меню отправки' : 'Текст и ссылка скопированы');
-    }catch(err){}
+    await shareWithImage(pendingShare.type, pendingShare.data || {});
   }
 
   document.addEventListener('click', function(e){
