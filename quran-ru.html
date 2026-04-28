@@ -502,6 +502,35 @@ html.dark-mode .surah-action.is-active{
   font-size:13px;
   font-weight:850;
 }
+.quran-share-app{
+  margin-top:16px;
+  padding:14px 12px;
+  border-radius:16px;
+  border:1px solid rgba(215,181,109,.30);
+  background:
+    linear-gradient(180deg, rgba(240,216,145,.12), rgba(181,138,54,.08));
+  text-align:center;
+}
+
+.quran-share-app-title{
+  font-size:13px;
+  font-weight:800;
+  color:#d7b56d;
+  margin-bottom:6px;
+  letter-spacing:.5px;
+  text-transform:uppercase;
+}
+
+.quran-share-app-link{
+  display:inline-block;
+  font-size:15px;
+  font-weight:900;
+  color:#ffffff;
+  text-decoration:none;
+  padding:8px 12px;
+  border-radius:999px;
+  background:linear-gradient(135deg,#2d7a46,#4caf6a);
+}
 .quran-share-actions{
   display:flex;
   gap:10px;
@@ -1960,6 +1989,18 @@ const BARAKAWAY_APP_LINKS = {
       .replaceAll("'","&#039;");
   }
 
+  
+  function appCtaHtml(){
+    return `
+      <div class="quran-share-app">
+        <div class="quran-share-app-title">BarakaWay App</div>
+        <a class="quran-share-app-link" href="${escapeHtml(BARAKAWAY_APP_LINKS.googlePlay)}" target="_blank" rel="noopener">
+          Скачать приложение
+        </a>
+      </div>
+    `;
+  }
+
   function surahDataFromButton(btn){
     return {
       number: btn.dataset.surahNumber || '',
@@ -2211,9 +2252,27 @@ const BARAKAWAY_APP_LINKS = {
       ctx.fillText('Сура Священного Корана — BarakaWay', w / 2, 595);
     }
 
+    roundRect(ctx, 210, h - 250, w - 420, 82, 28);
+    const appGrad = ctx.createLinearGradient(210, h - 250, w - 210, h - 168);
+    appGrad.addColorStop(0, '#2d7a46');
+    appGrad.addColorStop(1, '#4caf6a');
+    ctx.fillStyle = appGrad;
+    ctx.fill();
+    ctx.strokeStyle = 'rgba(240,216,145,0.48)';
+    ctx.lineWidth = 2;
+    ctx.stroke();
+
+    ctx.fillStyle = '#ffffff';
+    ctx.font = '900 24px system-ui, -apple-system, Segoe UI, sans-serif';
+    ctx.fillText('Download BarakaWay App', w / 2, h - 232);
+
+    ctx.fillStyle = '#eaf6ee';
+    ctx.font = '800 19px system-ui, -apple-system, Segoe UI, sans-serif';
+    ctx.fillText('Google Play · App Store ready', w / 2, h - 200);
+
     ctx.fillStyle = 'rgba(240,216,145,0.92)';
     ctx.font = '800 22px system-ui, -apple-system, Segoe UI, sans-serif';
-    ctx.fillText('onedollarexit.com', w / 2, h - 160);
+    ctx.fillText('onedollarexit.com', w / 2, h - 135);
 
     const blob = await canvasToBlob(canvas);
     if(!blob) return null;
@@ -2269,6 +2328,7 @@ const BARAKAWAY_APP_LINKS = {
           <div class="quran-share-bismillah">بِسْمِ ٱللَّٰهِ ٱلرَّحْمَـٰنِ ٱلرَّحِيمِ</div>
           <div class="quran-share-main">Священный Коран</div>
           <div class="quran-share-sub">Читайте, сохраняйте и делитесь сурами Священного Корана.</div>
+          ${appCtaHtml()}
           <div class="quran-share-limit-note"><strong>Будет создана PNG-карточка.</strong> Если браузер поддерживает отправку файлов, уйдёт именно картинка. Если нет — уйдёт текст и ссылка.</div>
           <div class="quran-share-actions">
             <button class="quran-share-button" type="button" data-share-confirm="page">Поделиться карточкой</button>
@@ -2285,6 +2345,7 @@ const BARAKAWAY_APP_LINKS = {
         <div class="quran-share-arabic">${escapeHtml(data.arabic)}</div>
         <div class="quran-share-meta">${escapeHtml(data.ayahs)} · ${escapeHtml(data.meta)}</div>
         <div class="quran-share-sub">Сура Священного Корана — BarakaWay</div>
+        ${appCtaHtml()}
         <div class="quran-share-limit-note"><strong>Будет создана PNG-карточка.</strong> Если Telegram/браузер принимает файлы, отправится красивая карточка как изображение.</div>
         <div class="quran-share-actions">
           <button class="quran-share-button" type="button" data-share-confirm="surah">Поделиться карточкой</button>
