@@ -556,6 +556,54 @@ html.light-mode .quran-share-meta{color:#8a681f;}
   .quran-share-main{font-size:21px;}
   .quran-share-arabic{font-size:30px;}
 }
+</style><meta content="Священный Коран — BarakaWay" property="og:title"/><meta content="Читайте, сохраняйте и делитесь сурами Священного Корана." property="og:description"/><meta content="website" property="og:type"/><meta content="https://onedollarexit.com/quran-ru.html" property="og:url"/><meta content="https://onedollarexit.com/favicon.png" property="og:image"/><style id="quran-production-favorites-remove-style">
+/* === Quran Favorites Removal + Share Refinement === */
+.quran-favorite-item{
+  grid-template-columns:1fr auto auto !important;
+}
+.quran-favorite-remove{
+  appearance:none;
+  -webkit-appearance:none;
+  width:38px;
+  height:38px;
+  border-radius:999px;
+  border:1px solid rgba(240,216,145,.42);
+  background:linear-gradient(180deg,#f0d891,#b9913d);
+  color:#111814;
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  cursor:pointer;
+  transition:transform .16s ease, opacity .2s ease;
+}
+.quran-favorite-remove:active{
+  transform:scale(.94);
+}
+.quran-favorite-remove svg{
+  width:19px;
+  height:19px;
+  fill:currentColor;
+  stroke:currentColor;
+  stroke-width:1.8;
+  stroke-linecap:round;
+  stroke-linejoin:round;
+}
+.quran-share-limit-note{
+  margin-top:12px;
+  padding:10px 12px;
+  border-radius:14px;
+  border:1px solid rgba(215,181,109,.22);
+  background:rgba(255,255,255,.045);
+  color:#cbd5df;
+  font-size:12px;
+  line-height:1.45;
+  font-weight:700;
+  text-align:center;
+}
+html.light-mode .quran-share-limit-note{
+  background:rgba(181,138,54,.08);
+  color:#526158;
+}
 </style></head>
 <body>
 <div class="container">
@@ -1833,8 +1881,6 @@ input.addEventListener("input", function(){
 </script>
 <script src="/bottom-nav.js"></script>
 </div>
-
-
 <div aria-hidden="true" class="quran-modal-backdrop" id="quran-favorites-modal">
 <div aria-labelledby="quran-favorites-title" aria-modal="true" class="quran-modal" role="dialog">
 <div class="quran-modal-head">
@@ -1846,7 +1892,6 @@ input.addEventListener("input", function(){
 </div>
 </div>
 </div>
-
 <div aria-hidden="true" class="quran-modal-backdrop" id="quran-share-modal">
 <div aria-labelledby="quran-share-title" aria-modal="true" class="quran-modal" role="dialog">
 <div class="quran-modal-head">
@@ -1864,6 +1909,7 @@ input.addEventListener("input", function(){
   const KEY_FAVORITES = STORAGE_PREFIX + 'favorites';
   const KEY_LAST_SURAH = STORAGE_PREFIX + 'lastSurah';
   let toastTimer = null;
+  let pendingShare = null;
 
   function getFavorites(){
     try { return JSON.parse(localStorage.getItem(KEY_FAVORITES) || '[]'); }
@@ -1872,10 +1918,6 @@ input.addEventListener("input", function(){
 
   function setFavorites(items){
     localStorage.setItem(KEY_FAVORITES, JSON.stringify(items));
-  }
-
-  function findFavorite(number){
-    return getFavorites().find(item => String(item.number) === String(number));
   }
 
   function showToast(message){
@@ -1895,6 +1937,15 @@ input.addEventListener("input", function(){
     return new URL(href || window.location.href, window.location.href).href;
   }
 
+  function escapeHtml(value){
+    return String(value || '')
+      .replaceAll('&','&amp;')
+      .replaceAll('<','&lt;')
+      .replaceAll('>','&gt;')
+      .replaceAll('"','&quot;')
+      .replaceAll("'","&#039;");
+  }
+
   function surahDataFromButton(btn){
     return {
       number: btn.dataset.surahNumber || '',
@@ -1909,9 +1960,8 @@ input.addEventListener("input", function(){
   function setActiveFromStorage(){
     const favorites = getFavorites();
     const favNumbers = new Set(favorites.map(item => String(item.number)));
-    const last = localStorage.getItem(KEY_LAST_SURAH);
     let lastObj = null;
-    try { lastObj = last ? JSON.parse(last) : null; } catch(err){ lastObj = null; }
+    try { lastObj = JSON.parse(localStorage.getItem(KEY_LAST_SURAH) || 'null'); } catch(err){}
 
     document.querySelectorAll('[data-surah-action="favorite"]').forEach(btn => {
       btn.classList.toggle('is-active', favNumbers.has(String(btn.dataset.surahNumber)));
@@ -1950,6 +2000,16 @@ input.addEventListener("input", function(){
     }
   }
 
+  function removeFavorite(number){
+    const favorites = getFavorites();
+    const item = favorites.find(x => String(x.number) === String(number));
+    const next = favorites.filter(x => String(x.number) !== String(number));
+    setFavorites(next);
+    renderFavorites();
+    setActiveFromStorage();
+    showToast(item ? item.name + ' удалена из избранного' : 'Сура удалена');
+  }
+
   function renderFavorites(){
     const list = document.getElementById('quran-favorites-list');
     if(!list) return;
@@ -1960,18 +2020,18 @@ input.addEventListener("input", function(){
       return;
     }
 
-    list.innerHTML = favorites.map(item => {
-      const url = absoluteUrl(item.href);
-      return `
-        <a class="quran-favorite-item" href="${item.href}">
-          <div>
-            <div class="quran-favorite-title">#${item.number} — ${item.name}</div>
-            <div class="quran-favorite-meta">${item.arabic || ''} · ${item.ayahs || ''} · ${item.meta || ''}</div>
-          </div>
-          <div class="quran-favorite-open">›</div>
+    list.innerHTML = favorites.map(item => `
+      <div class="quran-favorite-item">
+        <a href="${escapeHtml(item.href)}" style="text-decoration:none;color:inherit;min-width:0;">
+          <div class="quran-favorite-title">#${escapeHtml(item.number)} — ${escapeHtml(item.name)}</div>
+          <div class="quran-favorite-meta">${escapeHtml(item.arabic)} · ${escapeHtml(item.ayahs)} · ${escapeHtml(item.meta)}</div>
         </a>
-      `;
-    }).join('');
+        <a class="quran-favorite-open" href="${escapeHtml(item.href)}" aria-label="Открыть суру">›</a>
+        <button class="quran-favorite-remove" type="button" data-remove-favorite="${escapeHtml(item.number)}" aria-label="Удалить из избранного">
+          <svg viewBox="0 0 24 24"><path d="M12 3.6l2.45 5.05 5.55.8-4.02 3.92.95 5.53L12 16.3l-4.93 2.6.95-5.53L4 9.45l5.55-.8L12 3.6z"/></svg>
+        </button>
+      </div>
+    `).join('');
   }
 
   function toggleFavorite(data){
@@ -2020,13 +2080,13 @@ input.addEventListener("input", function(){
     }
   }
 
-  async function copyOrShare(title, text, url){
+  async function sharePayload(title, text, url){
     if(navigator.share){
       await navigator.share({title, text, url});
       return 'shared';
     }
     if(navigator.clipboard){
-      await navigator.clipboard.writeText(url);
+      await navigator.clipboard.writeText(text + '\\n' + url);
       return 'copied';
     }
     return 'none';
@@ -2039,6 +2099,7 @@ input.addEventListener("input", function(){
           <div class="quran-share-bismillah">بِسْمِ ٱللَّٰهِ ٱلرَّحْمَـٰنِ ٱلرَّحِيمِ</div>
           <div class="quran-share-main">Священный Коран</div>
           <div class="quran-share-sub">Читайте, сохраняйте и делитесь сурами Священного Корана.</div>
+          <div class="quran-share-limit-note">При отправке через Telegram браузер передаёт текст и ссылку. Настоящая визуальная карточка в Telegram появляется через Open Graph-превью публичной страницы.</div>
           <div class="quran-share-actions">
             <button class="quran-share-button" type="button" data-share-confirm="page">Поделиться страницей</button>
             <button class="quran-share-button secondary" type="button" data-quran-close="share">Закрыть</button>
@@ -2050,10 +2111,11 @@ input.addEventListener("input", function(){
     return `
       <div class="quran-share-card">
         <div class="quran-share-bismillah">بِسْمِ ٱللَّٰهِ ٱلرَّحْمَـٰنِ ٱلرَّحِيمِ</div>
-        <div class="quran-share-main">#${data.number} — ${data.name}</div>
-        <div class="quran-share-arabic">${data.arabic || ''}</div>
-        <div class="quran-share-meta">${data.ayahs || ''} · ${data.meta || ''}</div>
+        <div class="quran-share-main">#${escapeHtml(data.number)} — ${escapeHtml(data.name)}</div>
+        <div class="quran-share-arabic">${escapeHtml(data.arabic)}</div>
+        <div class="quran-share-meta">${escapeHtml(data.ayahs)} · ${escapeHtml(data.meta)}</div>
         <div class="quran-share-sub">Сура Священного Корана — BarakaWay</div>
+        <div class="quran-share-limit-note">Будет отправлен красивый текст с названием, арабским именем и ссылкой. Полноценная картинка-карточка требует отдельного OG-изображения для страницы суры.</div>
         <div class="quran-share-actions">
           <button class="quran-share-button" type="button" data-share-confirm="surah">Поделиться сурой</button>
           <button class="quran-share-button secondary" type="button" data-quran-close="share">Закрыть</button>
@@ -2061,8 +2123,6 @@ input.addEventListener("input", function(){
       </div>
     `;
   }
-
-  let pendingShare = null;
 
   function openShareCard(type, data){
     pendingShare = {type, data};
@@ -2076,19 +2136,28 @@ input.addEventListener("input", function(){
     const type = pendingShare.type;
     const data = pendingShare.data || {};
     const isPage = type === 'page';
-    const title = isPage ? 'Священный Коран — BarakaWay' : ('Сура ' + data.name + ' — BarakaWay');
+
+    const title = isPage ? 'Священный Коран — BarakaWay' : ('Сура #' + data.number + ' — ' + data.name);
     const text = isPage
-      ? 'Священный Коран: читайте, сохраняйте и делитесь сурами.'
-      : ('Сура #' + data.number + ' — ' + data.name + '. ' + (data.ayahs || '') + '.');
+      ? '📖 Священный Коран\\nЧитайте, сохраняйте и делитесь сурами Священного Корана.'
+      : '📖 Сура #' + data.number + ' — ' + data.name + '\\n' + (data.arabic || '') + '\\n' + (data.ayahs || '') + ' · ' + (data.meta || '') + '\\nBarakaWay';
     const url = isPage ? window.location.href : absoluteUrl(data.href);
 
     try{
-      const result = await copyOrShare(title, text, url);
-      showToast(result === 'shared' ? 'Открыто меню отправки' : 'Ссылка скопирована');
+      const result = await sharePayload(title, text, url);
+      showToast(result === 'shared' ? 'Открыто меню отправки' : 'Текст и ссылка скопированы');
     }catch(err){}
   }
 
   document.addEventListener('click', function(e){
+    const removeBtn = e.target.closest('[data-remove-favorite]');
+    if(removeBtn){
+      e.preventDefault();
+      e.stopPropagation();
+      removeFavorite(removeBtn.dataset.removeFavorite);
+      return;
+    }
+
     const closeBtn = e.target.closest('[data-quran-close]');
     if(closeBtn){
       e.preventDefault();
