@@ -8140,9 +8140,14 @@ html.light-mode body .fortress-search-status{
 
 <script id="fortress-actions-script">
 (function(){
-  const FAVORITES_KEY="barakaway_fortress_ru_favorite_duas";const PROGRESS_KEY="barakaway_fortress_ru_saved_dua";const READING_KEY="barakaway_fortress_ru_reading";let toastTimer=null;
+  const FAVORITES_KEY="barakaway_fortress_ru_favorite_duas";const GLOBAL_FAVORITES_KEY="barakaway_favorites_v1";const PROGRESS_KEY="barakaway_fortress_ru_saved_dua";const READING_KEY="barakaway_fortress_ru_reading";let toastTimer=null;
   function qs(s){return document.querySelector(s)}function qsa(s){return Array.from(document.querySelectorAll(s))}
   function getFavorites(){try{return JSON.parse(localStorage.getItem(FAVORITES_KEY)||"[]")}catch(e){return[]}}function setFavorites(list){localStorage.setItem(FAVORITES_KEY,JSON.stringify(Array.from(new Set(list))))}
+  function getGlobalFavorites(){try{const parsed=JSON.parse(localStorage.getItem(GLOBAL_FAVORITES_KEY)||"[]");return Array.isArray(parsed)?parsed.filter(Boolean):[]}catch(e){return[]}}
+  function itemGlobalId(id){return "/prophets-duas-ru.html::dua::"+id}
+  function writeGlobalFavorites(list){localStorage.setItem(GLOBAL_FAVORITES_KEY,JSON.stringify(Array.isArray(list)?list:[]));try{document.dispatchEvent(new CustomEvent("barakaway:favorites:changed"))}catch(e){}if(window.BarakaWayFavorites&&typeof window.BarakaWayFavorites.refreshNav==="function"){window.BarakaWayFavorites.refreshNav()}}
+  function removeGlobalFavorite(id){const gid=itemGlobalId(id);writeGlobalFavorites(getGlobalFavorites().filter(function(x){return String((x&&x.id)||"")!==gid}))}
+  function addGlobalFavorite(id){const data=getDuaShareData(id)||{};const gid=itemGlobalId(id);let list=getGlobalFavorites().filter(function(x){return String((x&&x.id)||"")!==gid});list.unshift({id:gid,title:data.title||getDuaTitle(id)||"Дуа",url:data.url||("/prophets-duas-ru.html#"+id),text:data.meaning||data.translit||data.arabic||"Сохранённое дуа",type:"Дуа",addedAt:new Date().toISOString()});writeGlobalFavorites(list)}
   function showToast(message){let toast=qs(".fortress-toast");if(!toast){toast=document.createElement("div");toast.className="fortress-toast";document.body.appendChild(toast)}toast.textContent=message;toast.classList.add("is-visible");clearTimeout(toastTimer);toastTimer=setTimeout(function(){toast.classList.remove("is-visible")},1800)}
   function setActive(action,active){const btn=qs('[data-fortress-action="'+action+'"]');if(btn)btn.classList.toggle("is-active",!!active)}
   function getDua(id){return qs('details.nested-dua[data-dua-id="'+id+'"]')}function getDuaTitle(id){const d=getDua(id);return d?(d.getAttribute("data-dua-title")||"Дуа"):"Дуа"}
@@ -8185,6 +8190,7 @@ html.light-mode body .fortress-search-status{
         e.stopPropagation();
         let current=getFavorites().filter(function(x){return x!==id});
         setFavorites(current);
+        removeGlobalFavorite(id);
         syncFavoriteState();
         renderFavorites();
         showToast("Дуа убрано из избранного");
@@ -8221,7 +8227,7 @@ html.light-mode body .fortress-search-status{
     });
   }
   function openPanel(){renderFavorites();const panel=qs("#fortress-favorites-panel");if(panel){panel.classList.add("is-open");panel.setAttribute("aria-hidden","false")}}function closePanel(){const panel=qs("#fortress-favorites-panel");if(panel){panel.classList.remove("is-open");panel.setAttribute("aria-hidden","true")}}
-  function toggleFavoriteDua(id){let favs=getFavorites();if(favs.includes(id)){favs=favs.filter(function(x){return x!==id});showToast("Дуа убрано из избранного")}else{favs.push(id);showToast("Дуа добавлено в избранное")}setFavorites(favs);syncFavoriteState()}
+  function toggleFavoriteDua(id){let favs=getFavorites();if(favs.includes(id)){favs=favs.filter(function(x){return x!==id});removeGlobalFavorite(id);showToast("Дуа убрано из избранного")}else{favs.push(id);addGlobalFavorite(id);showToast("Дуа добавлено в избранное")}setFavorites(favs);syncFavoriteState()}
   function cleanShareText(value){
     return (value||"").replace(/\s+/g," ").trim();
   }
