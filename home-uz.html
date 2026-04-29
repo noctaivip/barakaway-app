@@ -73,9 +73,10 @@ color:#222;
 }
 
 .container{
-max-width:850px;
-margin:auto;
-padding:40px 30px;
+  max-width:850px;
+  margin:auto;
+  padding:40px 30px;
+  min-height:calc(100vh - 90px);
 box-shadow:0 6px 16px rgba(0,0,0,0.05);
 transition:background .25s,color .25s,box-shadow .25s;
 }
@@ -2616,6 +2617,92 @@ html.light-mode .tahajjud-slider{
   }
 }
 
+
+/* BARAKAWAY PRO PROMO CARD */
+.baraka-pro-promo{
+  position:relative;
+  display:block;
+  margin:18px auto 10px;
+  max-width:520px;
+  padding:22px 20px 21px;
+  border-radius:28px;
+  overflow:hidden;
+  text-decoration:none;
+  border:1.5px solid transparent;
+  transition:transform .18s ease, box-shadow .25s ease, border-color .25s ease, background .25s ease;
+  -webkit-tap-highlight-color:transparent;
+}
+.baraka-pro-promo::before{
+  content:"";
+  position:absolute;
+  inset:0;
+  pointer-events:none;
+  background:linear-gradient(120deg, transparent 0%, rgba(255,255,255,.06) 43%, rgba(255,255,255,.13) 50%, rgba(255,255,255,.04) 57%, transparent 100%);
+  opacity:.62;
+}
+.baraka-pro-promo::after{
+  content:"";
+  position:absolute;
+  inset:1px;
+  border-radius:26px;
+  pointer-events:none;
+  border:1px solid rgba(255,255,255,.06);
+}
+.baraka-pro-promo > *{position:relative;z-index:1;}
+html.dark-mode .baraka-pro-promo{
+  background:linear-gradient(135deg,#171512 0%, #201a10 32%, #0f2a20 72%, #0b211a 100%);
+  border-color:rgba(224,188,82,.58);
+  box-shadow:0 20px 42px rgba(0,0,0,.34),0 0 0 1px rgba(224,188,82,.14),inset 0 1px 0 rgba(255,255,255,.08);
+}
+html.light-mode .baraka-pro-promo{
+  background:linear-gradient(135deg,#fff6d7 0%, #ffffff 38%, #edf8f0 72%, #dff1e5 100%);
+  border-color:rgba(181,139,35,.40);
+  box-shadow:0 18px 36px rgba(17,27,20,.10),0 0 0 1px rgba(45,122,70,.08),inset 0 1px 0 rgba(255,255,255,.98);
+}
+.baraka-pro-promo:hover{transform:translateY(-2px);}
+html.dark-mode .baraka-pro-promo:hover{box-shadow:0 24px 48px rgba(0,0,0,.40),0 0 0 1px rgba(224,188,82,.22),inset 0 1px 0 rgba(255,255,255,.09);}
+html.light-mode .baraka-pro-promo:hover{box-shadow:0 22px 42px rgba(17,27,20,.14),0 0 0 1px rgba(181,139,35,.13),inset 0 1px 0 rgba(255,255,255,.99);}
+.baraka-pro-top{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:13px;}
+.baraka-pro-badge{display:inline-flex;align-items:center;justify-content:center;padding:7px 11px;border-radius:999px;font-size:11px;line-height:1;font-weight:950;letter-spacing:.08em;text-transform:uppercase;}
+html.dark-mode .baraka-pro-badge{background:rgba(224,188,82,.16);color:#ffe8a2;border:1px solid rgba(224,188,82,.36);}
+html.light-mode .baraka-pro-badge{background:#fff0bc;color:#70500f;border:1px solid rgba(141,107,22,.22);}
+.baraka-pro-price{font-size:14px;font-weight:950;white-space:nowrap;letter-spacing:-.02em;}
+html.dark-mode .baraka-pro-price{color:#ffe08a;}
+html.light-mode .baraka-pro-price{color:#6f5311;}
+.baraka-pro-title{font-size:27px;line-height:1.06;font-weight:950;letter-spacing:-.047em;margin:0 0 10px;}
+html.dark-mode .baraka-pro-title{color:#fffaf0;}
+html.light-mode .baraka-pro-title{color:#172019;}
+.baraka-pro-text{font-size:14px;line-height:1.48;font-weight:760;margin:0;max-width:470px;}
+html.dark-mode .baraka-pro-text{color:#e2eadf;}
+html.light-mode .baraka-pro-text{color:#3f5147;}
+.baraka-pro-action,.baraka-pro-arrow{display:none !important;}
+@media(max-width:700px){.baraka-pro-promo{margin:17px auto 8px;padding:20px 17px 19px;border-radius:24px;width:calc(100% - 12px);box-sizing:border-box;}.baraka-pro-promo::after{border-radius:22px;}.baraka-pro-title{font-size:24px;}.baraka-pro-text{font-size:13px;}.baraka-pro-price{font-size:13px;}}
+
+/* === Home quick access upgrade === */
+.premium-resource-grid{
+  grid-template-columns:repeat(2,minmax(0,1fr));
+}
+.premium-resource-card[href="adhkar-uz.html"] .premium-resource-icon,
+.premium-resource-card[href="support-project-uz.html"] .premium-resource-icon{
+  font-size:22px;
+}
+html.dark-mode .premium-resource-card[href="adhkar-uz.html"]{
+  background:linear-gradient(135deg,#15251d 0%, #18232a 55%, #123225 100%);
+  border-color:rgba(102,198,128,.26);
+}
+html.light-mode .premium-resource-card[href="adhkar-uz.html"]{
+  background:linear-gradient(135deg,#ffffff 0%, #f8fdf9 55%, #ecf8ef 100%);
+  border-color:rgba(45,122,70,.17);
+}
+html.dark-mode .premium-resource-card[href="support-project-uz.html"]{
+  background:linear-gradient(135deg,#252014 0%, #1b222a 55%, #2e2614 100%);
+  border-color:rgba(215,192,122,.28);
+}
+html.light-mode .premium-resource-card[href="support-project-uz.html"]{
+  background:linear-gradient(135deg,#ffffff 0%, #fffdf7 55%, #fff6df 100%);
+  border-color:rgba(141,107,22,.18);
+}
+
 </style>
 <script src="/theme-init.js"></script>
 <link rel="stylesheet" href="/theme.css">
@@ -2787,43 +2874,50 @@ Zul-Qa’da oyida amallaringizni saqlang, ortiqcha ishlarni kamaytiring va zikrn
   </div>
 </section>
 <div class="home-section-title">
-  <h2>Tezkor kirish</h2>
-  <div class="home-section-note">Asosiy bo‘limlar</div>
+<h2>Tezkor kirish</h2>
+<div class="home-section-note">Asosiy bo‘limlar</div>
 </div>
-
 <div class="premium-resource-grid">
-  <a class="premium-resource-card" href="names-uz.html">
-    <div class="premium-resource-icon">☝️</div>
-    <div><div class="premium-resource-title">99 ism</div><div class="premium-resource-text">Ma’nolar, tafakkur va imonni mustahkamlash.</div></div>
-  </a>
-  <a class="premium-resource-card" href="qibla-uz.html">
-    <div class="premium-resource-icon">🧭</div>
-    <div><div class="premium-resource-title">Qibla</div><div class="premium-resource-text">Namoz uchun yo‘nalishni tez aniqlash.</div></div>
-  </a>
-  <a class="premium-resource-card" href="prophets-duas-uz.html">
-    <div class="premium-resource-icon">🤲</div>
-    <div><div class="premium-resource-title">Musulmon qal'asi</div><div class="premium-resource-text">To‘g‘ri ma’no va hurmat bilan duolar.</div></div>
-  </a>
-  <a class="premium-resource-card" href="articles-uz.html">
-    <div class="premium-resource-icon">✨</div>
-    <div><div class="premium-resource-title">Maqolalar</div><div class="premium-resource-text">Ortiqcha shovqinsiz qisqa foydali materiallar.</div></div>
-  </a>
-</div>
+<a class="premium-resource-card" href="names-uz.html">
+<div class="premium-resource-icon">☝️</div>
+<div><div class="premium-resource-title">99 ism</div><div class="premium-resource-text">Ma’nolar, tafakkur va imonni mustahkamlash.</div></div>
+</a>
+<a class="premium-resource-card" href="qibla-uz.html">
+<div class="premium-resource-icon">🧭</div>
+<div><div class="premium-resource-title">Qibla</div><div class="premium-resource-text">Namoz uchun yo‘nalishni tez aniqlash.</div></div>
+</a>
+<a class="premium-resource-card" href="prophets-duas-uz.html">
+<div class="premium-resource-icon">🤲</div>
+<div><div class="premium-resource-title">Musulmon qal’asi</div><div class="premium-resource-text">To‘g‘ri ma’no va hurmat bilan duolar.</div></div>
+</a>
+<a class="premium-resource-card" href="articles-uz.html">
+<div class="premium-resource-icon">✨</div>
+<div><div class="premium-resource-title">Maqolalar</div><div class="premium-resource-text">Ortiqcha shovqinsiz qisqa foydali materiallar.</div></div>
+</a>
 
-<div class="about-project-card">
-  <div class="about-project-title">BarakaWay haqida</div>
-  <div class="about-project-text">Loyiha haqida, tamoyillar va anonimlik sababi bitta sokin, ishonchli blokda jamlangan. Foydalanuvchi asosiy ekranda ortiqcha havolalarsiz g‘oyani tushunadi.</div>
-  <div class="about-project-actions">
-    <a href="about-uz.html">Loyiha haqida</a>
-    <a href="principles-uz.html">Tamoyillar</a>
-    <a href="why-anonymous-uz.html">Nega anonim</a>
-  </div>
+<a class="premium-resource-card" href="adhkar-uz.html">
+<div class="premium-resource-icon">🌿</div>
+<div><div class="premium-resource-title">Azkorlar</div><div class="premium-resource-text">Har kuni o‘qish uchun ertalabki va kechki zikrlar.</div></div>
+</a>
+
+<a class="premium-resource-card" href="support-project-uz.html">
+<div class="premium-resource-icon">🤍</div>
+<div><div class="premium-resource-title">Sadaqa</div><div class="premium-resource-text">Alloh roziligi uchun qo‘llab-quvvatlash, yordam va yaxshilik.</div></div>
+</a>
 </div>
 
 <div class="home-primary-support">
-  <a href="support-project-uz.html" class="support-project-btn"><span class="support-project-btn-shine"></span><span class="support-project-btn-text">Loyihani qo‘llab-quvvatlash</span></a>
+<a class="support-project-btn" href="support-project-uz.html"><span class="support-project-btn-shine"></span><span class="support-project-btn-text">Loyihani qo‘llab-quvvatlash</span></a>
 </div>
 
+<a class="baraka-pro-promo" href="pro-uz.html" aria-label="BarakaWay PRO imkoniyatlari">
+  <div class="baraka-pro-top">
+    <span class="baraka-pro-badge">PRO versiya</span>
+    <span class="baraka-pro-price">$1.99 / oy</span>
+  </div>
+  <h2 class="baraka-pro-title">BarakaWay PRO imkoniyatlari</h2>
+  <p class="baraka-pro-text">PRO-versiyani sotib olib, siz ilovaning rivojlanishi, yangi funksiyalar, yangilanishlar, barqaror ishlashi va loyiha keng tarqalishini qo‘llab-quvvatlaysiz, toki ko‘proq musulmonlar har kuni foyda olsin.</p>
+</a>
 <div class="share-overlay" id="shareOverlay" aria-hidden="true">
   <div class="share-sheet" role="dialog" aria-modal="true" aria-labelledby="shareTitle">
     <div class="share-handle"></div>
