@@ -183,7 +183,7 @@ function activeKey() {
     p === ''
   ) return 'today';
 
-  return 'today';
+  return '';
 }
 
   function injectNavStyle() {
