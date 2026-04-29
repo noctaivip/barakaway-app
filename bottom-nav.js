@@ -138,12 +138,14 @@
       var list = readFavorites().filter(function (x) { return String(x.id) !== String(item.id); });
       list.unshift(item);
       saveFavorites(list);
+	  window.dispatchEvent(new Event('barakaway:favorites-updated'));
       return item;
     },
     remove: function (idOrData) {
       var id = typeof idOrData === 'string' ? idOrData : favoriteId(idOrData);
       var list = readFavorites().filter(function (x) { return String(x.id) !== String(id); });
       saveFavorites(list);
+	  window.dispatchEvent(new Event('barakaway:favorites-updated'));
       return list;
     },
     toggle: function (data) {
@@ -217,17 +219,36 @@
   }
 
   function injectStyle() {
-    if (document.getElementById('barakaway-bottom-nav-favorites-style')) return;
-    var style = document.createElement('style');
-    style.id = 'barakaway-bottom-nav-favorites-style';
-    style.textContent = [
-      '.bottom-app-nav-item[data-nav-key="favorites"] svg{fill:none;}',
-      '.bottom-app-nav-item[data-nav-key="favorites"].has-favorites svg{fill:currentColor;}',
-      '.bottom-app-nav-item[data-nav-key="favorites"].has-favorites:not(.active) svg{color:#f0d891;}',
-      '.bottom-app-nav-item[data-nav-key="favorites"].has-favorites:not(.active) span{color:#f0d891;}'
-    ].join('\n');
-    document.head.appendChild(style);
+  if (document.getElementById('barakaway-bottom-nav-favorites-style')) return;
+
+  var style = document.createElement('style');
+  style.id = 'barakaway-bottom-nav-favorites-style';
+
+  style.textContent = `
+  /* пустое сердце */
+  .bottom-app-nav-item[data-nav-key="favorites"] svg{
+    fill: none;
+    transition: all 0.2s ease;
   }
+
+  /* есть избранное → сердце заполнено */
+  .bottom-app-nav-item[data-nav-key="favorites"].has-favorites svg{
+    fill: currentColor;
+    color: #ffffff;
+  }
+
+  /* если не активная страница — золотой акцент */
+  .bottom-app-nav-item[data-nav-key="favorites"].has-favorites:not(.active) svg{
+    color: #f0d891;
+  }
+
+  .bottom-app-nav-item[data-nav-key="favorites"].has-favorites:not(.active) span{
+    color: #f0d891;
+  }
+  `;
+
+  document.head.appendChild(style);
+}
 
   function initBottomNav() {
     injectStyle();
