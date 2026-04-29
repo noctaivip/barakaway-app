@@ -8155,5 +8155,146 @@ html.light-mode body .fortress-search-status{
   },true);
 })();
 </script>
+
+<script id="barakaway-global-favorites-sync">
+(function(){
+  "use strict";
+  var GLOBAL_KEY="barakaway_favorites_v1";
+  var PAGE_PATH="/prophets-duas-hi.html";
+  var ITEM_TYPE='दुआ';
+  var FALLBACK_TEXT='सहेजी गई दुआ';
+
+  function readGlobal(){
+    try{
+      var parsed=JSON.parse(localStorage.getItem(GLOBAL_KEY)||"[]");
+      return Array.isArray(parsed)?parsed.filter(Boolean):[];
+    }catch(e){
+      return [];
+    }
+  }
+
+  function writeGlobal(list){
+    localStorage.setItem(GLOBAL_KEY,JSON.stringify(Array.isArray(list)?list:[]));
+    try{document.dispatchEvent(new CustomEvent("barakaway:favorites:changed"));}catch(e){}
+    if(window.BarakaWayFavorites&&typeof window.BarakaWayFavorites.refreshNav==="function"){
+      window.BarakaWayFavorites.refreshNav();
+    }
+  }
+
+  function cleanText(value){
+    return String(value||"").replace(/\s+/g," ").trim();
+  }
+
+  function duaIdFromButton(btn){
+    var d=btn&&btn.closest&&btn.closest("details.nested-dua[data-dua-id]");
+    return d?d.getAttribute("data-dua-id"):"";
+  }
+
+  function globalId(id){
+    return PAGE_PATH+"::dua::"+id;
+  }
+
+  function hasGlobal(id){
+    var gid=globalId(id);
+    return readGlobal().some(function(x){return String((x&&x.id)||"")===gid;});
+  }
+
+  function getDuaData(id){
+    var d=document.querySelector('details.nested-dua[data-dua-id="'+CSS.escape(id)+'"]');
+    if(!d){
+      return {title:ITEM_TYPE,url:PAGE_PATH+"#"+id,text:FALLBACK_TEXT,type:ITEM_TYPE};
+    }
+    var title=cleanText(d.getAttribute("data-dua-title")||((d.querySelector(".dua-title")||{}).textContent)||ITEM_TYPE);
+    var meaning=cleanText(((d.querySelector(".dua-meaning")||{}).textContent)||"");
+    var translit=cleanText(((d.querySelector(".dua-translit")||{}).textContent)||"");
+    var arabic=cleanText(((d.querySelector(".dua-arabic")||{}).textContent)||"");
+    var text=meaning||translit||arabic||FALLBACK_TEXT;
+    return {title:title,url:PAGE_PATH+"#"+id,text:text,type:ITEM_TYPE};
+  }
+
+  function addGlobal(id){
+    if(!id)return;
+    var gid=globalId(id);
+    var data=getDuaData(id);
+    var list=readGlobal().filter(function(x){return String((x&&x.id)||"")!==gid;});
+    list.unshift({
+      id:gid,
+      title:data.title,
+      url:data.url,
+      text:data.text,
+      type:data.type,
+      addedAt:new Date().toISOString()
+    });
+    writeGlobal(list);
+  }
+
+  function removeGlobal(id){
+    if(!id)return;
+    var gid=globalId(id);
+    writeGlobal(readGlobal().filter(function(x){return String((x&&x.id)||"")!==gid;}));
+  }
+
+  function syncButtons(id,active){
+    if(!id)return;
+    document.querySelectorAll('details.nested-dua[data-dua-id="'+CSS.escape(id)+'"] [data-dua-action="favorite"]').forEach(function(btn){
+      btn.classList.toggle("is-active",!!active);
+      btn.setAttribute("aria-pressed",active?"true":"false");
+    });
+  }
+
+  document.addEventListener("click",function(e){
+    var removeBtn=e.target.closest&&e.target.closest(".fortress-favorite-remove");
+    if(removeBtn){
+      var holder=removeBtn.closest("[data-favorite-dua-id]");
+      var removeId=holder?holder.getAttribute("data-favorite-dua-id"):"";
+      setTimeout(function(){
+        removeGlobal(removeId);
+        syncButtons(removeId,false);
+      },0);
+      return;
+    }
+
+    var btn=e.target.closest&&e.target.closest('[data-dua-action="favorite"]');
+    if(!btn)return;
+
+    var id=duaIdFromButton(btn);
+    if(!id)return;
+
+    var beforeClass=btn.classList.contains("is-active");
+    var beforeGlobal=hasGlobal(id);
+
+    setTimeout(function(){
+      var afterClass=btn.classList.contains("is-active");
+      var active;
+
+      if(afterClass!==beforeClass){
+        active=afterClass;
+      }else{
+        active=!beforeGlobal;
+        btn.classList.toggle("is-active",active);
+        btn.setAttribute("aria-pressed",active?"true":"false");
+      }
+
+      if(active){
+        addGlobal(id);
+      }else{
+        removeGlobal(id);
+      }
+      syncButtons(id,active);
+    },70);
+  },true);
+
+  document.addEventListener("DOMContentLoaded",function(){
+    document.querySelectorAll('[data-dua-action="favorite"]').forEach(function(btn){
+      var id=duaIdFromButton(btn);
+      if(id&&hasGlobal(id)){
+        btn.classList.add("is-active");
+        btn.setAttribute("aria-pressed","true");
+      }
+    });
+  });
+})();
+</script>
+
 </body>
 </html>
