@@ -49,6 +49,25 @@ h1 { text-align:center; font-size:38px; margin:0 0 8px; }
 .loading, .error { max-width:760px; margin:0 auto 20px; background:#fafafa; border:1px solid #e5ece7; border-radius:16px; padding:18px; color:#415449; }
 .error { border-color:#e6caca; background:#fff8f8; color:#7a2d2d; }
 .hidden { display:none; }
+
+
+/* === BarakaWay Quran BN actions: global favorites + share card, RU-parity logic === */
+.quran-bn-actions{width:min(100%,720px);margin:16px auto 24px;display:grid;grid-template-columns:repeat(3,1fr);gap:10px;align-items:center}
+.quran-bn-action,.ayah-bn-action{appearance:none;-webkit-appearance:none;border:1px solid rgba(181,138,54,.28);background:linear-gradient(180deg,rgba(255,255,255,.74),rgba(215,181,109,.10));color:#9a7323;cursor:pointer;font:inherit;font-weight:900;transition:transform .16s ease,background .2s ease,color .2s ease,border-color .2s ease,box-shadow .2s ease;-webkit-tap-highlight-color:transparent}
+.quran-bn-action{min-height:58px;border-radius:18px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:5px;font-size:11px;line-height:1.05;text-align:center}
+.quran-bn-action svg,.ayah-bn-action svg{width:20px;height:20px;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;display:block}
+.quran-bn-action:hover,.ayah-bn-action:hover{transform:translateY(-1px);border-color:rgba(45,122,70,.30);box-shadow:0 10px 24px rgba(18,34,24,.10)}
+.quran-bn-action:active,.ayah-bn-action:active{transform:scale(.96)}
+.quran-bn-action.is-active,.ayah-bn-action.is-active{color:#fff;background:linear-gradient(135deg,#2d7a46,#4caf6a);border-color:rgba(45,122,70,.34)}
+.quran-bn-action.is-active[data-quran-action="favorite"] svg,.ayah-bn-action.is-active[data-ayah-action="favorite"] svg{fill:currentColor}
+.ayah-actions{display:inline-flex;align-items:center;justify-content:flex-end;gap:7px;flex-wrap:wrap}
+.ayah-bn-action{width:36px;height:36px;border-radius:999px;display:inline-flex;align-items:center;justify-content:center;padding:0;background:rgba(181,138,54,.07)}
+.ayah-toolbar{grid-template-columns:42px 1fr auto!important}
+.quran-bn-toast{position:fixed;left:50%;bottom:96px;transform:translateX(-50%) translateY(18px);z-index:3400;max-width:min(92vw,460px);padding:11px 14px;border-radius:999px;color:#111814;background:linear-gradient(180deg,#f0d891,#c59b46);box-shadow:0 16px 36px rgba(0,0,0,.28);font-size:13px;font-weight:900;opacity:0;pointer-events:none;transition:opacity .2s ease,transform .2s ease;text-align:center}
+.quran-bn-toast.is-visible{opacity:1;transform:translateX(-50%) translateY(0)}
+html.dark-mode .quran-bn-action,html.dark-mode .ayah-bn-action{background:linear-gradient(180deg,rgba(255,255,255,.045),rgba(215,181,109,.08));border-color:rgba(215,181,109,.20);color:#d7b56d}
+html.dark-mode .quran-bn-action.is-active,html.dark-mode .ayah-bn-action.is-active{color:#fff;background:linear-gradient(135deg,rgba(45,122,70,.88),rgba(76,175,106,.34))}
+@media(max-width:700px){.quran-bn-actions{gap:7px}.quran-bn-action{min-height:56px;border-radius:16px;font-size:10.5px;padding:7px 4px}.ayah-toolbar{grid-template-columns:38px 1fr!important}.ayah-actions{grid-column:1/-1;justify-content:flex-start;padding-left:50px}.ayah-bn-action{width:35px;height:35px}}
 </style>
 <script src="/theme-init.js"></script>
 <link rel="stylesheet" href="/theme.css">
@@ -228,5 +247,128 @@ async function loadSurah() {
 
 loadSurah();
 </script>
+
+<script id="quran-bn-global-favorites-and-share">
+(function(){
+  var GLOBAL_KEY='barakaway_favorites_v1';
+  var LOCAL_FAV_KEY='barakaway_quran_bn_favorites_v1';
+  var LOCAL_SAVE_KEY='barakaway_quran_bn_saved_v1';
+  var PAGE_LANG='bn';
+  var PAGE_TYPE='Quran';
+  var labels={favorite:'প্রিয়',saved:'সংরক্ষিত',share:'শেয়ার',added:'প্রিয়তে যোগ করা হয়েছে',removed:'প্রিয় থেকে সরানো হয়েছে',savedMsg:'সংরক্ষিত হয়েছে',shareMsg:'শেয়ার কার্ড প্রস্তুত',surah:'সূরা',ayah:'আয়াত',app:'BarakaWay App'};
+  var toastTimer=null;
+
+  function read(key){try{var parsed=JSON.parse(localStorage.getItem(key)||'[]');return Array.isArray(parsed)?parsed.filter(Boolean):[]}catch(e){return[]}}
+  function write(key,list){localStorage.setItem(key,JSON.stringify(Array.isArray(list)?list:[]));try{document.dispatchEvent(new CustomEvent('barakaway:favorites:changed'));}catch(e){}if(window.BarakaWayFavorites&&typeof window.BarakaWayFavorites.refreshNav==='function'){window.BarakaWayFavorites.refreshNav();}}
+  function text(sel,root){var el=(root||document).querySelector(sel);return el?(el.textContent||'').trim():''}
+  function pagePath(){return window.location.pathname||''}
+  function fileBase(){return decodeURIComponent(pagePath().split('/').pop()||'quran-bn.html')}
+  function safeUrlHash(id){return pagePath()+'#'+id}
+  function makeId(kind,n){return pagePath()+'::'+kind+'::'+(n||'surah')}
+  function localId(kind,n){return kind+'::'+(n||'surah')}
+  function getPageTitle(){return text('h1')||document.title||'Quran'}
+  function getPageMeta(){return text('.subtitle')||text('.intro')||''}
+  function getSurahNumber(){var m=(getPageMeta()+' '+getPageTitle()+' '+fileBase()).match(/(?:সূরা|sura|surah|#)?\s*(\d{1,3})/i); if(m) return m[1]; var f=fileBase().match(/^(\d{1,3})\s*-/); return f?f[1]:''}
+  function getSurahArabic(){var h2=document.querySelector('h2'); return h2?(h2.textContent||'').trim():''}
+  function itemId(x){return String((x&&x.id)||((x&&x.url||'')+'::'+(x&&x.title||'')))}
+  function showToast(msg){var t=document.getElementById('quranBnToast'); if(!t){t=document.createElement('div');t.id='quranBnToast';t.className='quran-bn-toast';document.body.appendChild(t);} t.textContent=msg; t.classList.add('is-visible'); clearTimeout(toastTimer); toastTimer=setTimeout(function(){t.classList.remove('is-visible')},1700)}
+
+  function getAyahCardFromButton(btn){return btn.closest('.ayah-card')}
+  function getAyahNumber(card){return text('.ayah-index',card).replace(/[^0-9০-৯]/g,'')||String(Array.prototype.indexOf.call(document.querySelectorAll('.ayah-card'),card)+1)}
+  function normalizeDigits(value){var map={'০':'0','১':'1','২':'2','৩':'3','৪':'4','৫':'5','৬':'6','৭':'7','৮':'8','৯':'9'};return String(value||'').replace(/[০-৯]/g,function(d){return map[d]||d})}
+  function ensureAyahId(card){var n=normalizeDigits(getAyahNumber(card)); if(!card.id) card.id='ayah-card-'+n; return card.id}
+
+  function surahData(){
+    var n=getSurahNumber();
+    return {id:makeId('surah',n),title:getPageTitle(),url:pagePath(),text:getPageMeta()||getSurahArabic(),type:labels.surah,addedAt:new Date().toISOString(),kind:'surah',number:n,arabic:getSurahArabic(),meaning:getPageMeta()};
+  }
+  function ayahData(card){
+    ensureAyahId(card);
+    var n=normalizeDigits(getAyahNumber(card));
+    var surah=getPageTitle();
+    var title=surah+' · '+labels.ayah+' '+n;
+    var meaning=text('.ayah-meaning',card);
+    var translit=text('.ayah-translit',card);
+    var arabic=text('.ayah-arabic',card);
+    return {id:makeId('ayah',n),title:title,url:safeUrlHash(card.id),text:meaning||translit||arabic,type:labels.ayah,addedAt:new Date().toISOString(),kind:'ayah',number:n,surah:surah,arabic:arabic,meaning:meaning,translit:translit};
+  }
+  function isGlobal(id){return read(GLOBAL_KEY).some(function(x){return itemId(x)===String(id)})}
+  function addGlobal(data){var list=read(GLOBAL_KEY).filter(function(x){return itemId(x)!==data.id}); list.unshift({id:data.id,title:data.title,url:data.url,text:data.text,type:data.type,addedAt:new Date().toISOString()}); write(GLOBAL_KEY,list)}
+  function removeGlobal(id){write(GLOBAL_KEY,read(GLOBAL_KEY).filter(function(x){return itemId(x)!==String(id)}))}
+  function addLocal(key,id){var list=read(key).map(String).filter(function(x){return x!==String(id)}); list.unshift(String(id)); write(key,list)}
+  function removeLocal(key,id){write(key,read(key).map(String).filter(function(x){return x!==String(id)}))}
+  function hasLocal(key,id){return read(key).map(String).indexOf(String(id))!==-1}
+
+  function syncButtons(){
+    var sd=surahData();
+    document.querySelectorAll('[data-quran-action="favorite"]').forEach(function(btn){btn.classList.toggle('is-active',isGlobal(sd.id)||hasLocal(LOCAL_FAV_KEY,localId('surah',sd.number)));btn.setAttribute('aria-pressed',btn.classList.contains('is-active')?'true':'false')});
+    document.querySelectorAll('[data-quran-action="save"]').forEach(function(btn){btn.classList.toggle('is-active',isGlobal(sd.id)||hasLocal(LOCAL_SAVE_KEY,localId('surah',sd.number)));btn.setAttribute('aria-pressed',btn.classList.contains('is-active')?'true':'false')});
+    document.querySelectorAll('.ayah-card').forEach(function(card){var d=ayahData(card); var lid=localId('ayah',d.number); card.querySelectorAll('[data-ayah-action="favorite"]').forEach(function(btn){btn.classList.toggle('is-active',isGlobal(d.id)||hasLocal(LOCAL_FAV_KEY,lid));btn.setAttribute('aria-pressed',btn.classList.contains('is-active')?'true':'false')}); card.querySelectorAll('[data-ayah-action="save"]').forEach(function(btn){btn.classList.toggle('is-active',isGlobal(d.id)||hasLocal(LOCAL_SAVE_KEY,lid));btn.setAttribute('aria-pressed',btn.classList.contains('is-active')?'true':'false')});});
+  }
+
+  function iconStar(){return '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3.6l2.45 5.05 5.55.8-4.02 3.92.95 5.53L12 16.3l-4.93 2.6.95-5.53L4 9.45l5.55-.8L12 3.6z"></path></svg>'}
+  function iconSave(){return '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 4.5A1.5 1.5 0 0 1 7.5 3h9A1.5 1.5 0 0 1 18 4.5V21l-6-3.5L6 21V4.5z"></path></svg>'}
+  function iconShare(){return '<svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="18" cy="5" r="3"></circle><circle cx="6" cy="12" r="3"></circle><circle cx="18" cy="19" r="3"></circle><path d="M8.7 10.7l6.6-4.4M8.7 13.3l6.6 4.4"></path></svg>'}
+
+  function injectControls(){
+    if(!document.querySelector('.quran-bn-actions')){
+      var wrap=document.createElement('div'); wrap.className='quran-bn-actions'; wrap.setAttribute('aria-label','Quran actions');
+      wrap.innerHTML='<button class="quran-bn-action" data-quran-action="favorite" type="button">'+iconStar()+'<span>'+labels.favorite+'</span></button><button class="quran-bn-action" data-quran-action="save" type="button">'+iconSave()+'<span>'+labels.saved+'</span></button><button class="quran-bn-action" data-quran-action="share" type="button">'+iconShare()+'<span>'+labels.share+'</span></button>';
+      var intro=document.querySelector('.intro')||document.querySelector('.subtitle')||document.querySelector('h1');
+      if(intro&&intro.parentNode) intro.parentNode.insertBefore(wrap,intro.nextSibling);
+    }
+    document.querySelectorAll('.ayah-card').forEach(function(card){ensureAyahId(card); var toolbar=card.querySelector('.ayah-toolbar'); if(!toolbar||toolbar.querySelector('.ayah-actions')) return; var actions=document.createElement('div'); actions.className='ayah-actions'; actions.innerHTML='<button class="ayah-bn-action" data-ayah-action="favorite" type="button" aria-label="'+labels.favorite+'">'+iconStar()+'</button><button class="ayah-bn-action" data-ayah-action="save" type="button" aria-label="'+labels.saved+'">'+iconSave()+'</button><button class="ayah-bn-action" data-ayah-action="share" type="button" aria-label="'+labels.share+'">'+iconShare()+'</button>'; toolbar.appendChild(actions);});
+  }
+
+  function toggleData(data,localKey,local){
+    if(isGlobal(data.id)){removeGlobal(data.id); removeLocal(localKey,local); showToast(labels.removed);} else {addGlobal(data); addLocal(localKey,local); showToast(labels.added);} syncButtons();
+  }
+  function saveData(data,local){addGlobal(data); addLocal(LOCAL_SAVE_KEY,local); showToast(labels.savedMsg); syncButtons();}
+
+  async function shareCanvas(data){
+    var canvas=drawShareCard(data); var blob=await new Promise(function(resolve){canvas.toBlob(resolve,'image/png',.95)}); var fileName=(data.kind==='ayah'?'ayah-'+data.number:'surah-'+(data.number||'quran'))+'-bn.png'; var file=blob?new File([blob],fileName,{type:'image/png'}):null;
+    if(file&&navigator.canShare&&navigator.canShare({files:[file]})){try{await navigator.share({files:[file],title:data.title,text:data.text||data.title});showToast(labels.shareMsg);return}catch(e){}}
+    var a=document.createElement('a'); a.href=canvas.toDataURL('image/png'); a.download=fileName; document.body.appendChild(a); a.click(); a.remove(); showToast(labels.shareMsg);
+  }
+
+  function drawRounded(ctx,x,y,w,h,r){ctx.beginPath();ctx.moveTo(x+r,y);ctx.arcTo(x+w,y,x+w,y+h,r);ctx.arcTo(x+w,y+h,x,y+h,r);ctx.arcTo(x,y+h,x,y,r);ctx.arcTo(x,y,x+w,y,r);ctx.closePath();}
+  function wrapByWords(ctx,text,maxWidth){var words=String(text||'').split(/\s+/).filter(Boolean),lines=[],line=''; if(!words.length) return []; words.forEach(function(word){var test=line?line+' '+word:word; if(ctx.measureText(test).width>maxWidth&&line){lines.push(line);line=word}else{line=test}}); if(line) lines.push(line); return lines;}
+  function wrapByChars(ctx,text,maxWidth){var chars=Array.from(String(text||'')),lines=[],line=''; chars.forEach(function(ch){var test=line+ch; if(ctx.measureText(test).width>maxWidth&&line){lines.push(line);line=ch}else{line=test}}); if(line) lines.push(line); return lines;}
+  function fitLines(ctx,text,maxWidth,maxLines,startSize,minSize,fontBuilder,mode){var size=startSize,lines=[]; while(size>=minSize){ctx.font=fontBuilder(size); lines=(mode==='chars'?wrapByChars:wrapByWords)(ctx,text,maxWidth); if(lines.length<=maxLines) return {size:size,lines:lines}; size-=2;} ctx.font=fontBuilder(minSize); lines=(mode==='chars'?wrapByChars:wrapByWords)(ctx,text,maxWidth); return {size:minSize,lines:lines.slice(0,maxLines)};}
+  function drawCenteredLines(ctx,lines,x,y,lineHeight){lines.forEach(function(line,i){ctx.fillText(line,x,y+i*lineHeight)}); return y+lines.length*lineHeight;}
+
+  function drawShareCard(data){
+    var W=1080,H=1350,canvas=document.createElement('canvas'),ctx=canvas.getContext('2d'); canvas.width=W; canvas.height=H;
+    var g=ctx.createLinearGradient(0,0,W,H); g.addColorStop(0,'#061610'); g.addColorStop(.55,'#10171a'); g.addColorStop(1,'#07120e'); ctx.fillStyle=g; ctx.fillRect(0,0,W,H);
+    ctx.strokeStyle='rgba(215,192,122,.70)'; ctx.lineWidth=4; drawRounded(ctx,60,55,W-120,H-110,72); ctx.stroke(); ctx.strokeStyle='rgba(215,192,122,.72)'; ctx.lineWidth=3; drawRounded(ctx,105,105,W-210,H-210,52); ctx.stroke();
+    ctx.textAlign='center'; ctx.textBaseline='middle';
+    ctx.fillStyle='#ffffff'; ctx.font='900 44px system-ui'; ctx.fillText(labels.app,W/2,245);
+    ctx.fillStyle='#f0d891'; ctx.font='700 44px serif'; ctx.direction='rtl'; ctx.fillText('بِسْمِ ٱللَّهِ ٱلرَّحْمَـٰنِ ٱلرَّحِيمِ',W/2,340); ctx.direction='ltr';
+    var isAyah=data.kind==='ayah'; var title=isAyah?(getPageTitle()+' · '+labels.ayah+' '+data.number):(('#'+(data.number||''))+' — '+getPageTitle());
+    ctx.fillStyle='#ffffff'; var titleFit=fitLines(ctx,title,820,isAyah?2:2,58,36,function(s){return '900 '+s+'px system-ui'},'words'); drawCenteredLines(ctx,titleFit.lines,W/2,470,titleFit.size*1.14);
+    var arabic=data.arabic||''; var meaning=data.meaning||data.text||'';
+    var arabicMaxLines=isAyah?6:3; var meaningMaxLines=isAyah?6:3; var arabicStart=isAyah?(arabic.length>180?46:60):66; var meaningStart=isAyah?(meaning.length>180?28:34):34;
+    var arFit=fitLines(ctx,arabic,850,arabicMaxLines,arabicStart,30,function(s){return '800 '+s+'px serif'},'words'); var textFit=fitLines(ctx,meaning,820,meaningMaxLines,meaningStart,22,function(s){return '800 '+s+'px system-ui'},'words');
+    var blockH=arFit.lines.length*arFit.size*1.34 + (meaning?34:0) + textFit.lines.length*textFit.size*1.28; var y=Math.max(570, Math.min(670, 715-blockH/2));
+    ctx.fillStyle='#f0d891'; ctx.direction='rtl'; ctx.font='800 '+arFit.size+'px serif'; drawCenteredLines(ctx,arFit.lines,W/2,y,arFit.size*1.34); ctx.direction='ltr'; y+=arFit.lines.length*arFit.size*1.34+34;
+    if(meaning){ctx.fillStyle='#d8c386'; ctx.font='800 '+textFit.size+'px system-ui'; drawCenteredLines(ctx,textFit.lines,W/2,y,textFit.size*1.28);}
+    var decoY=1125; var boxG=ctx.createLinearGradient(170,decoY-62,W-170,decoY+62); boxG.addColorStop(0,'rgba(18,70,45,.65)'); boxG.addColorStop(.5,'rgba(215,192,122,.24)'); boxG.addColorStop(1,'rgba(18,70,45,.65)'); ctx.fillStyle=boxG; drawRounded(ctx,170,decoY-62,W-340,124,40); ctx.fill(); ctx.strokeStyle='rgba(215,192,122,.78)'; ctx.lineWidth=2; ctx.stroke();
+    ctx.strokeStyle='rgba(215,192,122,.78)'; ctx.lineWidth=3; ctx.beginPath(); ctx.moveTo(260,decoY); ctx.bezierCurveTo(390,decoY-45,430,decoY+45,540,decoY); ctx.bezierCurveTo(650,decoY-45,690,decoY+45,820,decoY); ctx.stroke();
+    return canvas;
+  }
+
+  document.addEventListener('click',function(e){
+    var q=e.target.closest('[data-quran-action]');
+    if(q){e.preventDefault(); var sd=surahData(), lid=localId('surah',sd.number); var act=q.getAttribute('data-quran-action'); if(act==='favorite') toggleData(sd,LOCAL_FAV_KEY,lid); if(act==='save') saveData(sd,lid); if(act==='share') shareCanvas(sd); return;}
+    var a=e.target.closest('[data-ayah-action]');
+    if(a){e.preventDefault(); e.stopPropagation(); var card=getAyahCardFromButton(a); if(!card) return; var d=ayahData(card), lid=localId('ayah',d.number); var action=a.getAttribute('data-ayah-action'); if(action==='favorite') toggleData(d,LOCAL_FAV_KEY,lid); if(action==='save') saveData(d,lid); if(action==='share') shareCanvas(d);}
+  },true);
+
+  function boot(){injectControls(); syncButtons(); window.addEventListener('storage',syncButtons); document.addEventListener('barakaway:favorites:changed',syncButtons);}
+  if(document.readyState==='loading') document.addEventListener('DOMContentLoaded',boot); else boot();
+})();
+</script>
+
+<script src="../bottom-nav.js"></script>
 </body>
 </html>
