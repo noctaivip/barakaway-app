@@ -141,17 +141,50 @@
     { key:'learning', label:L.learning, href:file('learning'), icon:iconLearning }
   ];
 
-  function activeKey() {
-    var p = window.location.pathname.toLowerCase();
+function activeKey() {
+  var p = window.location.pathname.toLowerCase();
+  var title = (document.title || '').toLowerCase();
+  var h1 = ((document.querySelector('h1') || {}).textContent || '').toLowerCase();
+  var bodyClass = (document.body.className || '').toLowerCase();
+  var pageText = p + ' ' + title + ' ' + h1 + ' ' + bodyClass;
 
-    if (p.indexOf('favorites') !== -1 || p.indexOf('favorite') !== -1) return 'favorites';
-    if (p.indexOf('quran') !== -1 || p.indexOf('surah') !== -1) return 'quran';
-    if (p.indexOf('holiday') !== -1 || p.indexOf('holidays') !== -1 || p.indexOf('eid') !== -1 || p.indexOf('ramadan') !== -1 || p.indexOf('calendar') !== -1) return 'holidays';
-    if (p.indexOf('learning') !== -1 || p.indexOf('learn') !== -1 || p.indexOf('education') !== -1 || p.indexOf('video') !== -1) return 'learning';
-    if (p.indexOf('home') !== -1 || p.indexOf('index') !== -1 || p === '/' || p === '') return 'today';
+  if (
+    pageText.indexOf('favorites') !== -1 ||
+    pageText.indexOf('favorite') !== -1 ||
+    pageText.indexOf('favourites') !== -1 ||
+    pageText.indexOf('favourite') !== -1 ||
+    pageText.indexOf('избран') !== -1
+  ) return 'favorites';
 
-    return '';
-  }
+  if (pageText.indexOf('quran') !== -1 || pageText.indexOf('surah') !== -1 || pageText.indexOf('коран') !== -1) return 'quran';
+
+  if (
+    pageText.indexOf('holiday') !== -1 ||
+    pageText.indexOf('holidays') !== -1 ||
+    pageText.indexOf('eid') !== -1 ||
+    pageText.indexOf('ramadan') !== -1 ||
+    pageText.indexOf('calendar') !== -1 ||
+    pageText.indexOf('празд') !== -1
+  ) return 'holidays';
+
+  if (
+    pageText.indexOf('learning') !== -1 ||
+    pageText.indexOf('learn') !== -1 ||
+    pageText.indexOf('education') !== -1 ||
+    pageText.indexOf('video') !== -1 ||
+    pageText.indexOf('обуч') !== -1
+  ) return 'learning';
+
+  if (
+    pageText.indexOf('home') !== -1 ||
+    pageText.indexOf('index') !== -1 ||
+    pageText.indexOf('сегодня') !== -1 ||
+    p === '/' ||
+    p === ''
+  ) return 'today';
+
+  return 'today';
+}
 
   function injectNavStyle() {
     var old = document.getElementById('barakaway-bottom-nav-final-style');
@@ -334,7 +367,7 @@
 
     navItems.forEach(function (item) {
       var a = document.createElement('a');
-      a.className = 'bottom-app-nav-item' + (item.key === active ? ' active' : '');
+      a.className = 'bottom-app-nav-item' + (item.key === active ? ' active is-active' : '');
       a.href = item.href;
       a.dataset.nav = item.key;
       a.setAttribute('aria-label', item.label);
@@ -349,7 +382,7 @@
 
       a.addEventListener('click', function () {
         document.querySelectorAll('.bottom-app-nav-item').forEach(function (el) {
-          el.classList.remove('active');
+          el.classList.remove('active', 'is-active');
           el.removeAttribute('aria-current');
         });
 
