@@ -1,1 +1,47 @@
-<!DOCTYPE html><html lang="ru"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>Избранное — BarakaWay</title><link href="/favicon.png" rel="icon" type="image/png"><link href="/theme.css" rel="stylesheet"><link href="/theme-universal.css" rel="stylesheet"><style>body{margin:0;font-family:system-ui;background:#101418;color:#e9eef3;line-height:1.6;padding-bottom:110px}a{color:inherit}.page{max-width:850px;margin:auto;padding:34px 22px}.hero{border-radius:30px;padding:26px 22px;background:linear-gradient(135deg,#111a23,#182632 55%,#163228);border:1px solid rgba(102,198,128,.24);box-shadow:0 18px 38px rgba(0,0,0,.25)}.kicker{font-size:11px;font-weight:950;letter-spacing:.16em;text-transform:uppercase;color:#d7c07a;margin-bottom:8px}.hero h1{margin:0;font-size:34px;line-height:1.05;letter-spacing:-.05em}.hero p{margin:12px 0 0;color:#b9c8c0;font-weight:700}.grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px;margin-top:22px}.card{border-radius:24px;padding:18px;text-decoration:none;background:linear-gradient(135deg,#151f29,#18212b 55%,#162a25);border:1px solid rgba(96,147,120,.25);box-shadow:0 12px 24px rgba(0,0,0,.20)}.icon{width:42px;height:42px;border-radius:16px;display:flex;align-items:center;justify-content:center;background:rgba(215,192,122,.12);font-size:22px;margin-bottom:14px}.title{font-size:18px;font-weight:950;letter-spacing:-.035em}.text{font-size:13px;color:#aebbb5;font-weight:700;margin-top:6px}.empty{margin-top:22px;padding:20px;border-radius:24px;background:#151d25;border:1px dashed rgba(215,192,122,.28);color:#b9c8c0;font-weight:700}@media(max-width:700px){.hero h1{font-size:28px}.grid{grid-template-columns:1fr}.page{padding:24px 16px}}</style></head><body><main class="page"><section class="hero"><div class="kicker">Личное пространство</div><h1>Избранное</h1><p>Все сохранённые суры, аскары, статьи и имена Аллаха будут собираться здесь для ежедневного чтения.</p></section><section class="empty" id="favoritesEmpty">Здесь будут собираться материалы, которые пользователь отметил звёздочкой: суры, аскары, статьи, имена Аллаха и другие полезные страницы.</section><section class="grid" id="favoritesGrid" style="margin-top:14px"></section><script>(function(){function read(){try{return JSON.parse(localStorage.getItem('barakaway_favorites_v1')||'[]')}catch(e){return[]}}var grid=document.getElementById('favoritesGrid');var empty=document.getElementById('favoritesEmpty');var list=read();if(list.length){empty.style.display='none';grid.innerHTML=list.map(function(x){return '<a class="card" href="'+(x.url||'#')+'"><div class="icon">💛</div><div class="title">'+(x.title||'Избранное')+'</div><div class="text">'+(x.text||x.type||'Сохранённый материал')+'</div></a>'}).join('');}})();</script><section class="grid"></section></main><script src="/bottom-nav.js"></script></body></html>
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Избранное — BarakaWay</title>
+<link href="/favicon.png" rel="icon" type="image/png">
+<link href="/theme.css" rel="stylesheet">
+<link href="/theme-universal.css" rel="stylesheet">
+<style>
+body{margin:0;font-family:system-ui;background:#101418;color:#e9eef3;line-height:1.6;padding-bottom:118px}a{color:inherit}.page{max-width:850px;margin:auto;padding:34px 22px}.hero{border-radius:30px;padding:26px 22px;background:radial-gradient(circle at 85% 0%,rgba(240,216,145,.18),transparent 36%),linear-gradient(135deg,#111a23,#182632 55%,#163228);border:1px solid rgba(215,181,109,.28);box-shadow:0 18px 38px rgba(0,0,0,.25)}.kicker{font-size:11px;font-weight:950;letter-spacing:.16em;text-transform:uppercase;color:#d7c07a;margin-bottom:8px}.hero h1{margin:0;font-size:34px;line-height:1.05;letter-spacing:-.05em}.hero p{margin:12px 0 0;color:#b9c8c0;font-weight:700}.stats{display:flex;gap:10px;flex-wrap:wrap;margin-top:16px}.pill{border:1px solid rgba(215,181,109,.26);background:rgba(215,181,109,.08);color:#f0d891;border-radius:999px;padding:8px 12px;font-size:12px;font-weight:900}.grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px;margin-top:22px}.card{position:relative;border-radius:24px;padding:18px;text-decoration:none;background:radial-gradient(circle at 92% 0%,rgba(215,181,109,.13),transparent 36%),linear-gradient(135deg,#151f29,#18212b 55%,#162a25);border:1px solid rgba(96,147,120,.25);box-shadow:0 12px 24px rgba(0,0,0,.20);overflow:hidden}.card:hover{border-color:rgba(240,216,145,.42);transform:translateY(-1px)}.icon{width:42px;height:42px;border-radius:16px;display:flex;align-items:center;justify-content:center;background:rgba(215,192,122,.12);font-size:22px;margin-bottom:14px}.title{font-size:18px;font-weight:950;letter-spacing:-.035em;line-height:1.18;padding-right:42px}.text{font-size:13px;color:#aebbb5;font-weight:700;margin-top:6px}.type{margin-top:10px;display:inline-flex;border-radius:999px;padding:5px 9px;background:rgba(45,122,70,.16);color:#dff4e6;font-size:11px;font-weight:900}.remove{position:absolute;right:14px;top:14px;width:34px;height:34px;border-radius:999px;border:1px solid rgba(215,181,109,.28);background:rgba(215,181,109,.10);color:#f0d891;cursor:pointer;display:flex;align-items:center;justify-content:center;font-size:17px;font-weight:900}.remove:active{transform:scale(.94)}.empty{margin-top:22px;padding:22px;border-radius:24px;background:#151d25;border:1px dashed rgba(215,192,122,.28);color:#b9c8c0;font-weight:750}.empty strong{color:#f0d891}.actions{display:flex;gap:10px;flex-wrap:wrap;margin-top:16px}.action-btn{appearance:none;border:1px solid rgba(215,181,109,.28);background:linear-gradient(135deg,#2d7a46,#1d4f32);color:#fff;border-radius:999px;padding:11px 14px;font:inherit;font-size:13px;font-weight:900;cursor:pointer}.action-btn.secondary{background:rgba(255,255,255,.045);color:#f0d891}@media(max-width:700px){.hero h1{font-size:28px}.grid{grid-template-columns:1fr}.page{padding:24px 16px}.title{font-size:17px}}
+</style>
+</head>
+<body>
+<main class="page">
+<section class="hero">
+<div class="kicker">Личное пространство</div>
+<h1>Избранное</h1>
+<p>Все сохранённые суры, аскары, статьи и имена Аллаха собираются здесь для ежедневного чтения.</p>
+<div class="stats"><span class="pill" id="favoritesCount">0 сохранённых</span><span class="pill">Единое избранное BarakaWay</span></div>
+</section>
+<section class="empty" id="favoritesEmpty"><strong>Пока пусто.</strong><br>Нажмите звёздочку или флажок на нужной суре, аскаре, статье или имени Аллаха — материал появится здесь.</section>
+<section class="grid" id="favoritesGrid" style="margin-top:14px"></section>
+<div class="actions" id="favoritesActions" style="display:none"><button class="action-btn secondary" id="clearFavorites" type="button">Очистить избранное</button></div>
+</main>
+<script>
+(function(){
+  var KEY='barakaway_favorites_v1';
+  function read(){try{var list=JSON.parse(localStorage.getItem(KEY)||'[]');return Array.isArray(list)?list:[]}catch(e){return[]}}
+  function save(list){localStorage.setItem(KEY,JSON.stringify(Array.isArray(list)?list:[]));try{window.dispatchEvent(new CustomEvent('barakaway:favorites-updated'))}catch(e){}if(window.BarakaWayFavorites&&typeof window.BarakaWayFavorites.refreshNav==='function'){window.BarakaWayFavorites.refreshNav()}}
+  function esc(v){return String(v||'').replaceAll('&','&amp;').replaceAll('<','&lt;').replaceAll('>','&gt;').replaceAll('"','&quot;').replaceAll("'",'&#039;')}
+  function normalize(x){x=x||{};var url=x.url||x.href||'#';var title=x.title||x.name||'Избранное';return{ id:x.id||(url+'::'+title), title:title, url:url, text:x.text||x.meta||x.type||'Сохранённый материал', type:x.type||'Избранное' }}
+  function render(){
+    var grid=document.getElementById('favoritesGrid');var empty=document.getElementById('favoritesEmpty');var count=document.getElementById('favoritesCount');var actions=document.getElementById('favoritesActions');
+    var list=read().map(normalize);count.textContent=list.length+' сохранённых';
+    if(!list.length){empty.style.display='block';grid.innerHTML='';actions.style.display='none';return}
+    empty.style.display='none';actions.style.display='flex';
+    grid.innerHTML=list.map(function(x){return '<article class="card"><button class="remove" data-remove-id="'+esc(x.id)+'" aria-label="Удалить" type="button">×</button><a href="'+esc(x.url)+'" style="text-decoration:none;color:inherit"><div class="icon">💛</div><div class="title">'+esc(x.title)+'</div><div class="text">'+esc(x.text)+'</div><div class="type">'+esc(x.type)+'</div></a></article>'}).join('');
+  }
+  document.addEventListener('click',function(e){var rm=e.target.closest('[data-remove-id]');if(rm){e.preventDefault();e.stopPropagation();save(read().map(normalize).filter(function(x){return String(x.id)!==String(rm.getAttribute('data-remove-id'))}));render();return}if(e.target&&e.target.id==='clearFavorites'){if(confirm('Очистить всё избранное?')){save([]);render()}}},true);
+  window.addEventListener('storage',function(e){if(e.key===KEY)render()});window.addEventListener('barakaway:favorites-updated',render);
+  render();
+})();
+</script>
+<script src="/bottom-nav.js"></script>
+</body>
+</html>
