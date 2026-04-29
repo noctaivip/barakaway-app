@@ -69,6 +69,25 @@ html.dark-mode .quran-bn-action.is-active,html.dark-mode .ayah-bn-action.is-acti
 <script src="/theme-init.js"></script>
 <link rel="stylesheet" href="/theme.css">
 <link rel="stylesheet" href="/theme-universal.css">
+
+<style id="bn-ayah-actions-final-fix">
+.ayah-card{overflow:visible!important;}
+.ayah-toolbar{display:grid!important;grid-template-columns:42px 1fr!important;align-items:center!important;gap:10px 12px!important;}
+.ayah-toolbar>.ayah-index{grid-column:1!important;grid-row:1!important;}
+.ayah-toolbar>.play-btn{grid-column:2!important;grid-row:1!important;width:100%!important;justify-self:stretch!important;min-width:0!important;}
+.ayah-toolbar>.ayah-actions{grid-column:1 / -1!important;grid-row:2!important;display:grid!important;grid-template-columns:repeat(3,minmax(0,1fr))!important;gap:8px!important;margin-top:8px!important;padding-left:0!important;width:100%!important;justify-content:stretch!important;align-items:stretch!important;}
+.ayah-toolbar .ayah-bn-action{width:100%!important;min-width:0!important;height:42px!important;min-height:42px!important;border-radius:14px!important;display:inline-flex!important;align-items:center!important;justify-content:center!important;gap:6px!important;padding:0 8px!important;font-size:12px!important;line-height:1!important;white-space:nowrap!important;}
+.ayah-toolbar .ayah-bn-action svg{width:18px!important;height:18px!important;flex:0 0 auto!important;}
+.ayah-toolbar .ayah-bn-action::after{font-weight:900!important;}
+.ayah-toolbar .ayah-bn-action[data-ayah-action="share"]{order:1!important;}
+.ayah-toolbar .ayah-bn-action[data-ayah-action="save"]{order:2!important;}
+.ayah-toolbar .ayah-bn-action[data-ayah-action="favorite"]{order:3!important;}
+.ayah-toolbar .ayah-bn-action[data-ayah-action="share"]::after{content:"শেয়ার";}
+.ayah-toolbar .ayah-bn-action[data-ayah-action="save"]::after{content:"সংরক্ষণ";}
+.ayah-toolbar .ayah-bn-action[data-ayah-action="favorite"]::after{content:"প্রিয়";}
+@media(max-width:700px){.ayah-toolbar{grid-template-columns:38px 1fr!important;gap:9px 10px!important;}.ayah-toolbar>.ayah-actions{gap:7px!important;margin-top:7px!important;padding-left:0!important;}.ayah-toolbar .ayah-bn-action{height:40px!important;min-height:40px!important;border-radius:13px!important;font-size:11px!important;padding:0 5px!important;}.ayah-toolbar .ayah-bn-action svg{width:17px!important;height:17px!important;}}
+@media(max-width:380px){.ayah-toolbar .ayah-bn-action{font-size:10px!important;gap:4px!important;}}
+</style>
 </head>
 <body>
 <div class="container">
@@ -519,6 +538,16 @@ function playAllAyahs() {
 })();
 </script>
 
+
+<script id="bn-ayah-actions-final-guard">
+(function(){
+  function svgStar(){return '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3.6l2.45 5.05 5.55.8-4.02 3.92.95 5.53L12 16.3l-4.93 2.6.95-5.53L4 9.45l5.55-.8L12 3.6z"></path></svg>'}
+  function svgSave(){return '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 4.5A1.5 1.5 0 0 1 7.5 3h9A1.5 1.5 0 0 1 18 4.5V21l-6-3.5L6 21V4.5z"></path></svg>'}
+  function svgShare(){return '<svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="18" cy="5" r="3"></circle><circle cx="6" cy="12" r="3"></circle><circle cx="18" cy="19" r="3"></circle><path d="M8.7 10.7l6.6-4.4M8.7 13.3l6.6 4.4"></path></svg>'}
+  function ensure(){document.querySelectorAll('.ayah-card').forEach(function(card){var toolbar=card.querySelector('.ayah-toolbar'); if(!toolbar) return; var actions=toolbar.querySelector('.ayah-actions'); if(!actions){actions=document.createElement('div');actions.className='ayah-actions';actions.setAttribute('aria-label','Ayah actions');toolbar.appendChild(actions);} [['share','শেয়ার',svgShare],['save','সংরক্ষণ',svgSave],['favorite','প্রিয়',svgStar]].forEach(function(x){if(!actions.querySelector('[data-ayah-action="'+x[0]+'"]')){var b=document.createElement('button');b.className='ayah-bn-action';b.type='button';b.setAttribute('data-ayah-action',x[0]);b.setAttribute('aria-label',x[1]);b.innerHTML=x[2]();actions.appendChild(b);}});});}
+  document.addEventListener('DOMContentLoaded',ensure);document.addEventListener('barakaway:ayahs-rendered',ensure);setTimeout(ensure,800);
+})();
+</script>
 </body>
 </html>
 
