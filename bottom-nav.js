@@ -24,76 +24,16 @@
   var lang = detectLang();
 
   var labels = {
-    ru: {
-      today: 'Сегодня',
-      favorites: 'Избранное',
-      quran: 'Коран',
-      holidays: 'Праздники',
-      learning: 'Обучение'
-    },
-    en: {
-      today: 'Today',
-      favorites: 'Favorites',
-      quran: 'Quran',
-      holidays: 'Holidays',
-      learning: 'Learning'
-    },
-    kz: {
-      today: 'Бүгін',
-      favorites: 'Таңдаулы',
-      quran: 'Құран',
-      holidays: 'Мерекелер',
-      learning: 'Оқу'
-    },
-    uz: {
-      today: 'Bugun',
-      favorites: 'Sevimli',
-      quran: 'Qurʼon',
-      holidays: 'Bayramlar',
-      learning: 'O‘rganish'
-    },
-    tr: {
-      today: 'Bugün',
-      favorites: 'Favoriler',
-      quran: 'Kur’an',
-      holidays: 'Bayramlar',
-      learning: 'Öğrenme'
-    },
-    ar: {
-      today: 'اليوم',
-      favorites: 'المفضلة',
-      quran: 'القرآن',
-      holidays: 'الأعياد',
-      learning: 'التعلّم'
-    },
-    ur: {
-      today: 'آج',
-      favorites: 'پسندیدہ',
-      quran: 'قرآن',
-      holidays: 'اعیاد',
-      learning: 'تعلیم'
-    },
-    id: {
-      today: 'Hari ini',
-      favorites: 'Favorit',
-      quran: 'Quran',
-      holidays: 'Hari raya',
-      learning: 'Belajar'
-    },
-    bn: {
-      today: 'আজ',
-      favorites: 'প্রিয়',
-      quran: 'কুরআন',
-      holidays: 'উৎসব',
-      learning: 'শিক্ষা'
-    },
-    hi: {
-      today: 'आज',
-      favorites: 'पसंदीदा',
-      quran: 'क़ुरआन',
-      holidays: 'त्योहार',
-      learning: 'सीखना'
-    }
+    ru: { today:'Сегодня', favorites:'Избранное', quran:'Коран', holidays:'Праздники', learning:'Обучение' },
+    en: { today:'Today', favorites:'Favorites', quran:'Quran', holidays:'Holidays', learning:'Learning' },
+    kz: { today:'Бүгін', favorites:'Таңдаулы', quran:'Құран', holidays:'Мерекелер', learning:'Оқу' },
+    uz: { today:'Bugun', favorites:'Sevimli', quran:'Qurʼon', holidays:'Bayramlar', learning:'O‘rganish' },
+    tr: { today:'Bugün', favorites:'Favoriler', quran:'Kur’an', holidays:'Bayramlar', learning:'Öğrenme' },
+    ar: { today:'اليوم', favorites:'المفضلة', quran:'القرآن', holidays:'الأعياد', learning:'التعلّم' },
+    ur: { today:'آج', favorites:'پسندیدہ', quran:'قرآن', holidays:'اعیاد', learning:'تعلیم' },
+    id: { today:'Hari ini', favorites:'Favorit', quran:'Quran', holidays:'Hari raya', learning:'Belajar' },
+    bn: { today:'আজ', favorites:'প্রিয়', quran:'কুরআন', holidays:'উৎসব', learning:'শিক্ষা' },
+    hi: { today:'आज', favorites:'पसंदीदा', quran:'क़ुरआन', holidays:'त्योहार', learning:'सीखना' }
   };
 
   var L = labels[lang] || labels.ru;
@@ -102,88 +42,33 @@
     return '/' + base + '-' + lang + '.html';
   }
 
-  function readJsonKey(key, fallback) {
+  function readFavorites() {
     try {
-      var raw = localStorage.getItem(key);
-      if (!raw) return fallback;
-      return JSON.parse(raw);
+      var raw = localStorage.getItem(FAVORITES_KEY);
+      var list = raw ? JSON.parse(raw) : [];
+      return Array.isArray(list) ? list.filter(Boolean) : [];
     } catch (e) {
-      return fallback;
+      return [];
     }
   }
 
-  function writeJsonKey(key, value) {
-    localStorage.setItem(key, JSON.stringify(value));
-  }
-
-  function readFavorites() {
-    return readJsonKey(FAVORITES_KEY, []);
-  }
-
   function saveFavorites(list) {
-    writeJsonKey(FAVORITES_KEY, Array.isArray(list) ? list : []);
+    localStorage.setItem(FAVORITES_KEY, JSON.stringify(Array.isArray(list) ? list : []));
     updateNavHeart();
+  }
+
+  function hasFavorites() {
+    return readFavorites().length > 0;
   }
 
   function buildId(data) {
     return (data.url || '') + '::' + (data.title || '');
   }
 
-  function hasArrayItems(value) {
-    return Array.isArray(value) && value.length > 0;
-  }
-
-  function hasObjectContent(value) {
-    return value && typeof value === 'object' && !Array.isArray(value) && Object.keys(value).length > 0;
-  }
-
-  function hasAnySavedInLocalStorage() {
-    if (hasArrayItems(readFavorites())) return true;
-
-    var directKeys = [
-      FAVORITES_KEY,
-      'barakaway:quran:surah:' + lang + ':favorites',
-      'barakaway:quran:surah:' + lang + ':lastSaved',
-      'barakaway:adhkar:' + lang + ':saved',
-      'barakaway:askars:' + lang + ':saved',
-      'barakaway:duas:' + lang + ':saved'
-    ];
-
-    for (var i = 0; i < directKeys.length; i++) {
-      var directValue = readJsonKey(directKeys[i], null);
-      if (hasArrayItems(directValue) || hasObjectContent(directValue)) return true;
-    }
-
-    try {
-      for (var n = 0; n < localStorage.length; n++) {
-        var key = localStorage.key(n);
-        if (!key) continue;
-
-        var normalized = key.toLowerCase();
-
-        if (
-          normalized.indexOf('barakaway') === -1 ||
-          !/(favorite|favourite|saved|bookmark)/i.test(normalized)
-        ) {
-          continue;
-        }
-
-        var value = readJsonKey(key, null);
-
-        if (hasArrayItems(value)) return true;
-        if (hasObjectContent(value)) return true;
-
-        if (typeof value === 'string' && value.trim().length > 0) return true;
-      }
-    } catch (e) {}
-
-    return false;
-  }
-
   window.BarakaWayFavorites = {
     list: readFavorites,
 
-    hasAny: hasAnySavedInLocalStorage,
+    hasAny: hasFavorites,
 
     isActive: function (id) {
       return readFavorites().some(function (x) {
@@ -209,10 +94,10 @@
 
       list.unshift({
         id: id,
-        title: data.title,
-        url: data.url,
-        text: data.text,
-        type: data.type,
+        title: data.title || document.title,
+        url: data.url || window.location.pathname,
+        text: data.text || '',
+        type: data.type || '',
         addedAt: new Date().toISOString()
       });
 
@@ -250,58 +135,93 @@
   }
 
   var navItems = [
-    { key: 'today', label: L.today, href: file('home'), icon: iconToday },
-    { key: 'favorites', label: L.favorites, href: file('favorites'), icon: iconHeart },
-    { key: 'quran', label: L.quran, href: file('quran'), icon: iconQuran },
-    { key: 'holidays', label: L.holidays, href: file('holidays'), icon: iconHolidays },
-    { key: 'learning', label: L.learning, href: file('learning'), icon: iconLearning }
+    { key:'today', label:L.today, href:file('home'), icon:iconToday },
+    { key:'favorites', label:L.favorites, href:file('favorites'), icon:iconHeart },
+    { key:'quran', label:L.quran, href:file('quran'), icon:iconQuran },
+    { key:'holidays', label:L.holidays, href:file('holidays'), icon:iconHolidays },
+    { key:'learning', label:L.learning, href:file('learning'), icon:iconLearning }
   ];
 
   function activeKey() {
     var p = window.location.pathname.toLowerCase();
 
-    if (
-      p.indexOf('favorites') !== -1 ||
-      p.indexOf('favorite') !== -1 ||
-      p.indexOf('izbr') !== -1
-    ) {
-      return 'favorites';
-    }
-
+    if (p.indexOf('favorites') !== -1 || p.indexOf('favorite') !== -1) return 'favorites';
     if (p.indexOf('quran') !== -1 || p.indexOf('surah') !== -1) return 'quran';
-
-    if (
-      p.indexOf('holiday') !== -1 ||
-      p.indexOf('holidays') !== -1 ||
-      p.indexOf('eid') !== -1 ||
-      p.indexOf('ramadan') !== -1 ||
-      p.indexOf('calendar') !== -1
-    ) {
-      return 'holidays';
-    }
-
-    if (
-      p.indexOf('learning') !== -1 ||
-      p.indexOf('learn') !== -1 ||
-      p.indexOf('education') !== -1 ||
-      p.indexOf('video') !== -1
-    ) {
-      return 'learning';
-    }
-
-    if (p.indexOf('home') !== -1 || p.indexOf('index') !== -1 || p === '/' || p === '') {
-      return 'today';
-    }
+    if (p.indexOf('holiday') !== -1 || p.indexOf('holidays') !== -1 || p.indexOf('eid') !== -1 || p.indexOf('ramadan') !== -1 || p.indexOf('calendar') !== -1) return 'holidays';
+    if (p.indexOf('learning') !== -1 || p.indexOf('learn') !== -1 || p.indexOf('education') !== -1 || p.indexOf('video') !== -1) return 'learning';
+    if (p.indexOf('home') !== -1 || p.indexOf('index') !== -1 || p === '/' || p === '') return 'today';
 
     return '';
   }
 
   function injectNavStyle() {
-    if (document.getElementById('barakaway-bottom-nav-favorites-style')) return;
+    var old = document.getElementById('barakaway-bottom-nav-final-style');
+    if (old) old.remove();
 
     var style = document.createElement('style');
-    style.id = 'barakaway-bottom-nav-favorites-style';
+    style.id = 'barakaway-bottom-nav-final-style';
     style.textContent =
+      '.bottom-app-nav{' +
+        'z-index:2100 !important;' +
+      '}' +
+
+      '.bottom-app-nav-inner{' +
+        'display:grid !important;' +
+        'grid-template-columns:repeat(5,minmax(0,1fr)) !important;' +
+        'align-items:center !important;' +
+        'justify-items:center !important;' +
+      '}' +
+
+      '.bottom-app-nav-item{' +
+        'box-sizing:border-box !important;' +
+        'display:flex !important;' +
+        'flex-direction:column !important;' +
+        'align-items:center !important;' +
+        'justify-content:center !important;' +
+        'text-align:center !important;' +
+        'gap:5px !important;' +
+        'padding:0 4px !important;' +
+        'line-height:1.05 !important;' +
+        'overflow:hidden !important;' +
+      '}' +
+
+      '.bottom-app-nav-icon{' +
+        'box-sizing:border-box !important;' +
+        'display:flex !important;' +
+        'align-items:center !important;' +
+        'justify-content:center !important;' +
+        'margin:0 auto !important;' +
+        'padding:0 !important;' +
+        'flex:0 0 30px !important;' +
+      '}' +
+
+      '.bottom-app-nav-icon svg{' +
+        'display:block !important;' +
+        'margin:0 auto !important;' +
+        'position:static !important;' +
+        'transform:none !important;' +
+        'fill:none !important;' +
+        'stroke:currentColor !important;' +
+      '}' +
+
+      '.bottom-app-nav-item.active .bottom-app-nav-icon svg{' +
+        'transform:none !important;' +
+        'stroke-width:2.25 !important;' +
+      '}' +
+
+      '.bottom-app-nav-label{' +
+        'display:block !important;' +
+        'width:100% !important;' +
+        'max-width:100% !important;' +
+        'text-align:center !important;' +
+        'margin:0 auto !important;' +
+        'padding:0 !important;' +
+        'line-height:1.05 !important;' +
+        'white-space:nowrap !important;' +
+        'overflow:hidden !important;' +
+        'text-overflow:ellipsis !important;' +
+      '}' +
+
       '.bottom-app-nav-item[data-nav="favorites"] .bottom-app-nav-icon svg,' +
       '.bottom-app-nav-item[data-nav="favorites"] .bottom-app-nav-icon svg path{' +
         'stroke:#d7c07a !important;' +
@@ -328,7 +248,7 @@
     var item = document.querySelector('.bottom-app-nav-item[data-nav="favorites"]');
     if (!item) return;
 
-    if (hasAnySavedInLocalStorage()) {
+    if (hasFavorites()) {
       item.classList.add('has-favorites');
       item.setAttribute('data-favorites-state', 'filled');
     } else {
@@ -401,7 +321,7 @@
       title: btn.dataset.title || document.title,
       url: btn.dataset.url || window.location.pathname,
       text: btn.dataset.text || '',
-      type: ''
+      type: btn.dataset.type || ''
     };
   }
 
@@ -438,13 +358,8 @@
     renderBottomNav();
     initFavoritesButtons();
 
-    window.addEventListener('storage', function () {
-      updateNavHeart();
-    });
-
-    document.addEventListener('barakaway:favorites:changed', function () {
-      updateNavHeart();
-    });
+    window.addEventListener('storage', updateNavHeart);
+    document.addEventListener('barakaway:favorites:changed', updateNavHeart);
   }
 
   if (document.readyState === 'loading') {
