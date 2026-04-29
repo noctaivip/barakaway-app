@@ -340,9 +340,16 @@ function activeKey() {
         'stroke:#d7c07a !important;' +
       '}' +
 
-      '.bottom-app-nav-item[data-nav="favorites"] .bottom-app-nav-label{' +
-        'color:inherit !important;' +
-      '}';
+      '.bottom-app-nav-item[data-nav="favorites"].active,' +
+'.bottom-app-nav-item[data-nav="favorites"].is-active{' +
+  'background:linear-gradient(135deg,rgba(215,192,122,.20),rgba(58,130,82,.24)) !important;' +
+  'border:1px solid rgba(215,192,122,.45) !important;' +
+  'box-shadow:inset 0 0 0 1px rgba(255,255,255,.04),0 10px 24px rgba(0,0,0,.22) !important;' +
+'}' +
+
+'.bottom-app-nav-item[data-nav="favorites"] .bottom-app-nav-label{' +
+  'color:inherit !important;' +
+'}';
 
     document.head.appendChild(style);
   }
