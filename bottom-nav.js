@@ -67,7 +67,6 @@
 
   window.BarakaWayFavorites = {
     list: readFavorites,
-
     hasAny: hasFavorites,
 
     isActive: function (id) {
@@ -160,6 +159,7 @@
 
     var style = document.createElement('style');
     style.id = 'barakaway-bottom-nav-final-style';
+
     style.textContent =
       '.bottom-app-nav{' +
         'z-index:2100 !important;' +
@@ -179,10 +179,24 @@
         'align-items:center !important;' +
         'justify-content:center !important;' +
         'text-align:center !important;' +
-        'gap:5px !important;' +
-        'padding:0 4px !important;' +
-        'line-height:1.05 !important;' +
-        'overflow:hidden !important;' +
+        'gap:4px !important;' +
+        'height:60px !important;' +
+        'min-width:0 !important;' +
+        'width:100% !important;' +
+        'max-width:108px !important;' +
+        'padding:7px 3px 6px !important;' +
+        'border-radius:24px !important;' +
+        'line-height:1 !important;' +
+        'overflow:visible !important;' +
+      '}' +
+
+      '.bottom-app-nav-item.active{' +
+        'width:100% !important;' +
+        'max-width:108px !important;' +
+        'min-height:60px !important;' +
+        'border-radius:24px !important;' +
+        'padding:7px 5px 6px !important;' +
+        'overflow:visible !important;' +
       '}' +
 
       '.bottom-app-nav-icon{' +
@@ -190,36 +204,81 @@
         'display:flex !important;' +
         'align-items:center !important;' +
         'justify-content:center !important;' +
+        'width:26px !important;' +
+        'height:26px !important;' +
+        'min-width:26px !important;' +
+        'min-height:26px !important;' +
         'margin:0 auto !important;' +
         'padding:0 !important;' +
-        'flex:0 0 30px !important;' +
+        'flex:0 0 26px !important;' +
+        'position:static !important;' +
+        'transform:none !important;' +
       '}' +
 
       '.bottom-app-nav-icon svg{' +
         'display:block !important;' +
+        'width:22px !important;' +
+        'height:22px !important;' +
         'margin:0 auto !important;' +
         'position:static !important;' +
         'transform:none !important;' +
         'fill:none !important;' +
         'stroke:currentColor !important;' +
+        'stroke-width:2 !important;' +
+      '}' +
+
+      '.bottom-app-nav-item.active .bottom-app-nav-icon,' +
+      '.bottom-app-nav-item.active .bottom-app-nav-icon svg{' +
+        'position:static !important;' +
+        'transform:none !important;' +
       '}' +
 
       '.bottom-app-nav-item.active .bottom-app-nav-icon svg{' +
-        'transform:none !important;' +
-        'stroke-width:2.25 !important;' +
+        'stroke-width:2.15 !important;' +
       '}' +
 
       '.bottom-app-nav-label{' +
+        'box-sizing:border-box !important;' +
         'display:block !important;' +
         'width:100% !important;' +
         'max-width:100% !important;' +
         'text-align:center !important;' +
         'margin:0 auto !important;' +
         'padding:0 !important;' +
+        'font-size:11px !important;' +
         'line-height:1.05 !important;' +
         'white-space:nowrap !important;' +
-        'overflow:hidden !important;' +
-        'text-overflow:ellipsis !important;' +
+        'overflow:visible !important;' +
+        'text-overflow:clip !important;' +
+      '}' +
+
+      '@media(max-width:420px){' +
+        '.bottom-app-nav-item{' +
+          'max-width:96px !important;' +
+          'height:58px !important;' +
+          'min-height:58px !important;' +
+          'gap:3px !important;' +
+          'padding:7px 2px 6px !important;' +
+        '}' +
+        '.bottom-app-nav-item.active{' +
+          'max-width:96px !important;' +
+          'min-height:58px !important;' +
+          'padding:7px 3px 6px !important;' +
+        '}' +
+        '.bottom-app-nav-label{' +
+          'font-size:10.5px !important;' +
+        '}' +
+        '.bottom-app-nav-icon{' +
+          'width:25px !important;' +
+          'height:25px !important;' +
+          'min-width:25px !important;' +
+          'min-height:25px !important;' +
+          'flex-basis:25px !important;' +
+        '}' +
+        '.bottom-app-nav-icon svg{' +
+          'width:21px !important;' +
+          'height:21px !important;' +
+        '}' +
       '}' +
 
       '.bottom-app-nav-item[data-nav="favorites"] .bottom-app-nav-icon svg,' +
