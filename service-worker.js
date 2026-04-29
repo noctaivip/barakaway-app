@@ -1,45 +1,79 @@
-const CACHE_NAME = 'barakaway-v2';
+/* BarakaWay Service Worker
+   Development / fast-update mode for active PWA testing.
+   Goal: always prefer the newest files from the network, especially HTML/JS/CSS.
+*/
 
-const ASSETS_TO_CACHE = [
+const CACHE_VERSION = '20260429-3';
+const CACHE_NAME = `barakaway-runtime-${CACHE_VERSION}`;
+
+const APP_SHELL = [
   '/',
-  '/bottom-nav.js'
+  '/favicon.png',
+  '/manifest.json'
 ];
 
-// INSTALL
 self.addEventListener('install', event => {
   self.skipWaiting();
   event.waitUntil(
     caches.open(CACHE_NAME).then(cache => {
-      return cache.addAll(ASSETS_TO_CACHE);
+      return cache.addAll(APP_SHELL).catch(() => undefined);
     })
   );
 });
 
-// ACTIVATE (очистка старого кэша)
 self.addEventListener('activate', event => {
   event.waitUntil(
     caches.keys().then(keys => {
-      return Promise.all(
-        keys.map(key => {
-          if (key !== CACHE_NAME) {
-            return caches.delete(key);
-          }
-        })
-      );
-    })
+      return Promise.all(keys.map(key => caches.delete(key)));
+    }).then(() => self.clients.claim())
   );
-  self.clients.claim();
 });
 
-// FETCH
+function isSameOrigin(request) {
+  try {
+    return new URL(request.url).origin === self.location.origin;
+  } catch (e) {
+    return false;
+  }
+}
+
+function isFreshAsset(request) {
+  const url = new URL(request.url);
+  const path = url.pathname.toLowerCase();
+
+  return (
+    request.mode === 'navigate' ||
+    path.endsWith('.html') ||
+    path.endsWith('.js') ||
+    path.endsWith('.css') ||
+    path === '/bottom-nav.js' ||
+    path === '/service-worker.js'
+  );
+}
+
 self.addEventListener('fetch', event => {
+  const request = event.request;
+
+  if (request.method !== 'GET' || !isSameOrigin(request)) {
+    return;
+  }
+
+  if (isFreshAsset(request)) {
+    event.respondWith(
+      fetch(request, { cache: 'reload' })
+        .then(response => response)
+        .catch(() => caches.match(request))
+    );
+    return;
+  }
+
   event.respondWith(
-    fetch(event.request)
+    fetch(request)
       .then(response => {
+        const copy = response.clone();
+        caches.open(CACHE_NAME).then(cache => cache.put(request, copy)).catch(() => undefined);
         return response;
       })
-      .catch(() => {
-        return caches.match(event.request);
-      })
+      .catch(() => caches.match(request))
   );
 });
