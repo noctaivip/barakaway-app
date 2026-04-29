@@ -1,12 +1,13 @@
-﻿<!--
+<!--
 بِسْمِ ٱللَّٰهِ ٱلرَّحْمَـٰنِ ٱلرَّحِيمِ
 In the name of Allah, the Most Merciful, the Most Compassionate
 -->
 <!DOCTYPE html>
+
 <html lang="ru">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
 <title>Аль-Джинн — Hidden Sadaqa</title>
 <style>
 body { margin:0; font-family:system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif; background:#f5f7f8; color:#1f2a22; line-height:1.7; }
@@ -51,35 +52,86 @@ h1 { text-align:center; font-size:38px; margin:0 0 8px; }
 }
 </style>
 <script src="/theme-init.js"></script>
-<link rel="stylesheet" href="/theme.css">
-<link rel="stylesheet" href="/theme-universal.css">
+<link href="/theme.css" rel="stylesheet"/>
+<link href="/theme-universal.css" rel="stylesheet"/>
+
+<style id="surah-production-actions-style">
+.surah-premium-hero{text-align:center;margin:0 auto 22px;padding:18px 16px 20px;border-radius:26px;background:radial-gradient(circle at 50% 0%,rgba(215,181,109,.16),transparent 46%),linear-gradient(180deg,rgba(45,122,70,.09),rgba(215,181,109,.05));border:1px solid rgba(215,181,109,.20)}
+.surah-premium-bismillah{direction:rtl;font-size:26px;line-height:1.6;color:#b58a36;font-weight:800;margin:0 0 8px}
+.surah-premium-note{margin:0;color:#666;font-size:14px;font-weight:650}
+.surah-page-actions{width:min(100%,720px);margin:12px auto 20px;display:grid;grid-template-columns:repeat(5,1fr);gap:10px}
+.surah-page-action{appearance:none;border:1px solid rgba(181,138,54,.24);border-radius:18px;min-height:62px;padding:8px 6px;background:linear-gradient(180deg,rgba(255,255,255,.68),rgba(215,181,109,.08));color:#9a7323;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:5px;cursor:pointer;font:inherit;font-size:11px;line-height:1.05;font-weight:850;text-align:center}
+.surah-page-action svg,.ayah-action svg{width:21px;height:21px;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;display:block}
+.surah-page-action.is-active,.ayah-action.is-active{color:#fff;border-color:rgba(45,122,70,.34);background:linear-gradient(135deg,#2d7a46,#4caf6a)}
+.surah-page-action.is-active[data-surah-page-action="favorite"] svg,.ayah-action.is-active[data-ayah-action="favorite"] svg{fill:currentColor}
+.content-controls{max-width:760px;margin:0 auto 24px;display:grid;grid-template-columns:repeat(3,1fr);gap:10px;padding:12px;border-radius:20px;border:1px solid rgba(181,138,54,.20);background:linear-gradient(180deg,rgba(255,255,255,.64),rgba(215,181,109,.06))}
+.content-toggle{display:flex;align-items:center;justify-content:center;gap:8px;border-radius:14px;border:1px solid rgba(181,138,54,.16);padding:10px 8px;color:#6c541f;background:rgba(255,255,255,.60);font-size:13px;font-weight:850;cursor:pointer}
+.content-toggle input{width:17px;height:17px;accent-color:#2d7a46}
+.hide-arabic .ayah-arabic{display:none!important}.hide-translit .ayah-translit{display:none!important}.hide-meaning .ayah-meaning{display:none!important}
+.ayah-card{position:relative;overflow:hidden;border-radius:22px!important;padding:18px!important;background:radial-gradient(circle at 92% 0%,rgba(215,181,109,.13),transparent 36%),linear-gradient(180deg,#fafafa,#fff)!important;border:1px solid rgba(45,122,70,.16)!important}
+.ayah-card::before{content:"";position:absolute;left:0;top:0;bottom:0;width:4px;background:linear-gradient(180deg,#2d7a46,#d7b56d);opacity:.72}
+.ayah-actions{display:flex;align-items:center;gap:8px;margin-top:14px;padding-top:12px;border-top:1px solid rgba(181,138,54,.18)}
+.ayah-action{appearance:none;border:1px solid rgba(181,138,54,.22);background:rgba(181,138,54,.07);color:#9a7323;width:36px;height:36px;border-radius:999px;display:inline-flex;align-items:center;justify-content:center;cursor:pointer}
+.ayah-translit{color:#30513c!important;font-style:normal!important;font-weight:750;letter-spacing:.1px}
+.ayah-meaning{border-top:1px solid rgba(181,138,54,.16);padding-top:10px}
+.quran-toast{position:fixed;left:50%;bottom:96px;transform:translateX(-50%) translateY(18px);z-index:3400;max-width:min(92vw,460px);padding:11px 14px;border-radius:999px;color:#111814;background:linear-gradient(180deg,#f0d891,#c59b46);box-shadow:0 16px 36px rgba(0,0,0,.28);font-size:13px;font-weight:900;opacity:0;pointer-events:none;transition:.2s}
+.quran-toast.is-visible{opacity:1;transform:translateX(-50%) translateY(0)}
+.quran-modal-backdrop{position:fixed;inset:0;z-index:3600;display:none;align-items:center;justify-content:center;padding:18px;background:rgba(4,9,7,.68);backdrop-filter:blur(18px)}
+.quran-modal-backdrop.is-visible{display:flex}.quran-modal{width:min(100%,720px);max-height:min(86vh,760px);overflow:auto;border-radius:28px;border:1px solid rgba(215,181,109,.30);background:radial-gradient(circle at 50% 0%,rgba(215,181,109,.18),transparent 42%),linear-gradient(180deg,#121b21,#0c1316);box-shadow:0 34px 80px rgba(0,0,0,.55);color:#fff}
+.quran-modal-head{display:flex;align-items:center;justify-content:space-between;gap:14px;padding:18px 18px 12px;border-bottom:1px solid rgba(215,181,109,.20)}
+.quran-modal-title{margin:0;font-size:21px;font-weight:950;color:#f0d891}.quran-modal-close{border:1px solid rgba(215,181,109,.26);background:rgba(255,255,255,.04);color:#f0d891;width:38px;height:38px;border-radius:999px;cursor:pointer;font-size:22px}
+.quran-modal-body{padding:16px 18px 18px}.quran-favorites-list{display:grid;gap:12px}
+.quran-favorite-item{display:grid;grid-template-columns:1fr auto auto;gap:12px;align-items:center;padding:14px;border-radius:18px;border:1px solid rgba(215,181,109,.22);background:linear-gradient(180deg,rgba(255,255,255,.05),rgba(215,181,109,.06))}
+.quran-favorite-title{font-size:16px;font-weight:900;color:#fff}.quran-favorite-meta{margin-top:3px;font-size:13px;color:#cbd5df}.quran-favorite-open{color:#f0d891;font-weight:950;font-size:20px;text-decoration:none}
+.quran-favorite-remove{width:38px;height:38px;border-radius:999px;border:1px solid rgba(240,216,145,.42);background:linear-gradient(180deg,#f0d891,#b9913d);color:#111814;display:inline-flex;align-items:center;justify-content:center;cursor:pointer}
+.quran-favorite-remove svg{width:19px;height:19px;fill:currentColor;stroke:currentColor;stroke-width:1.8}.quran-empty-state{padding:20px 14px;border-radius:18px;border:1px dashed rgba(215,181,109,.32);color:#cbd5df;text-align:center;font-weight:750}
+.quran-share-card{border-radius:24px;padding:22px 18px;border:1px solid rgba(240,216,145,.38);background:radial-gradient(circle at 85% 0%,rgba(240,216,145,.20),transparent 36%),linear-gradient(135deg,#16251c,#0e171a 58%,#101014)}
+.quran-share-bismillah{direction:rtl;text-align:center;font-size:26px;line-height:1.65;color:#f0d891;font-weight:850;margin-bottom:12px}.quran-share-main{text-align:center;font-size:23px;font-weight:950;color:#fff}.quran-share-sub{margin-top:9px;text-align:center;color:#cbd5df;font-size:14px;font-weight:700}.quran-share-arabic{direction:rtl;text-align:center;margin-top:14px;font-size:34px;line-height:1.4;color:#f0d891;font-weight:900}.quran-share-meta{margin-top:10px;text-align:center;color:#d7b56d;font-size:13px;font-weight:850}
+.quran-share-limit-note{margin-top:12px;padding:10px 12px;border-radius:14px;border:1px solid rgba(215,181,109,.22);background:rgba(255,255,255,.045);color:#cbd5df;font-size:12px;line-height:1.45;font-weight:700;text-align:center}.quran-share-limit-note strong{color:#f0d891}
+.quran-share-actions{display:flex;gap:10px;justify-content:center;flex-wrap:wrap;margin-top:16px}.quran-share-button{border:1px solid rgba(215,181,109,.32);border-radius:999px;background:linear-gradient(180deg,#f0d891,#b9913d);color:#111814;padding:10px 14px;font:inherit;font-weight:950;cursor:pointer}.quran-share-button.secondary{background:rgba(255,255,255,.055);color:#f0d891}
+.quran-reading-mode .ayah-arabic{font-size:45px!important;color:#b58a36!important}.quran-reading-mode .ayah-translit,.quran-reading-mode .ayah-meaning{font-size:19px!important}
+html.dark-mode body{background:linear-gradient(180deg,var(--bg),var(--bg))!important}html.dark-mode .surah-premium-note{color:#cbd5df}html.dark-mode .ayah-card{background:radial-gradient(circle at 92% 0%,rgba(215,181,109,.14),transparent 36%),linear-gradient(180deg,rgba(21,31,35,.98),rgba(15,23,27,.98))!important;border-color:rgba(215,181,109,.18)!important}
+html.dark-mode .ayah-action,html.dark-mode .surah-page-action{background:rgba(215,181,109,.08);border-color:rgba(215,181,109,.20);color:#d7b56d}html.dark-mode .ayah-translit{color:#d7b56d!important}
+@media(max-width:700px){.surah-page-actions{gap:7px}.surah-page-action{min-height:58px;border-radius:16px;font-size:10.5px;padding:7px 4px}.content-controls{grid-template-columns:1fr;gap:8px}.surah-premium-bismillah{font-size:23px}}
+</style>
 </head>
-<body>
+<body data-surah-arabic="الجن‎‎" data-surah-meta="Джинны · Сура 72 · 28 аятов · Мекканская" data-surah-number="72" data-surah-page-key="Quran-ru/72 - al-jinn-ru.html" data-surah-title="Аль-Джинн">
 <div class="container">
 <h1>Аль-Джинн</h1>
+<div class="surah-premium-hero">
+<div class="surah-premium-bismillah">بِسْمِ ٱللَّٰهِ ٱلرَّحْمَـٰنِ ٱلرَّحِيمِ</div>
+<p class="surah-premium-note">Читайте, сохраняйте и делитесь сурами и аятами Священного Корана.</p>
+</div>
+<div aria-label="Действия суры" class="surah-page-actions">
+<button aria-label="Избранное" class="surah-page-action" data-surah-page-action="favorite" type="button"><svg viewbox="0 0 24 24"><path d="M12 3.6l2.45 5.05 5.55.8-4.02 3.92.95 5.53L12 16.3l-4.93 2.6.95-5.53L4 9.45l5.55-.8L12 3.6z"></path></svg><span class="surah-page-action-label">Избранное</span></button>
+<button aria-label="Поделиться" class="surah-page-action" data-surah-page-action="share" type="button"><svg viewbox="0 0 24 24"><circle cx="18" cy="5" r="3"></circle><circle cx="6" cy="12" r="3"></circle><circle cx="18" cy="19" r="3"></circle><path d="M8.7 10.7l6.6-4.4M8.7 13.3l6.6 4.4"></path></svg><span class="surah-page-action-label">Поделиться</span></button>
+<button aria-label="Чтение" class="surah-page-action" data-surah-page-action="reading" type="button"><svg viewbox="0 0 24 24"><path d="M4 5.5A2.5 2.5 0 0 1 6.5 3H20v17H6.5A2.5 2.5 0 0 0 4 22V5.5z"></path><path d="M8 7h8M8 11h8M8 15h5"></path></svg><span class="surah-page-action-label">Чтение</span></button>
+<button aria-label="Сохранить" class="surah-page-action" data-surah-page-action="save" type="button"><svg viewbox="0 0 24 24"><path d="M6 4.5A1.5 1.5 0 0 1 7.5 3h9A1.5 1.5 0 0 1 18 4.5V21l-6-3.5L6 21V4.5z"></path></svg><span class="surah-page-action-label">Сохранить</span></button>
+<button aria-label="Тема" class="surah-page-action" data-surah-page-action="theme" type="button"><svg viewbox="0 0 24 24"><path d="M21 14.5A8.5 8.5 0 0 1 9.5 3 9 9 0 1 0 21 14.5z"></path></svg><span class="surah-page-action-label">Тема</span></button>
+</div>
+<div aria-label="Показ текста" class="content-controls">
+<label class="content-toggle"><input checked="" data-layer-toggle="arabic" id="toggleArabic" type="checkbox"/>Арабский</label>
+<label class="content-toggle"><input checked="" data-layer-toggle="translit" id="toggleTranslit" type="checkbox"/>Транскрипция</label>
+<label class="content-toggle"><input checked="" data-layer-toggle="meaning" id="toggleMeaning" type="checkbox"/>Перевод</label>
+</div>
+
 <h2><center>الجن‎‎</center></h2>
-
 <p class="subtitle">Джинны · Сура 72 · 28 аятов · Мекканская</p>
-
 <div class="master-audio-wrap">
-  <div class="master-audio-title">Озвучка · Аль-Джинн</div>
-  <div class="master-audio-actions">
-    <button class="master-btn" type="button" onclick="playAllAyahs()">Включить все аяты</button>
-    <button class="master-btn secondary" type="button" onclick="stopCurrentAyah()">Стоп</button>
-  </div>
+<div class="master-audio-title">Озвучка · Аль-Джинн</div>
+<div class="master-audio-actions">
+<button class="master-btn" onclick="playAllAyahs()" type="button">Включить все аяты</button>
+<button class="master-btn secondary" onclick="stopCurrentAyah()" type="button">Стоп</button>
 </div>
-
-<div id="loading" class="loading">Загрузка всех 200 аятов суры Аль-Джинн…</div>
-<div id="error" class="error hidden">Не удалось загрузить суру. Проверь подключение к интернету и обнови страницу.</div>
-
+</div>
+<div class="loading" id="loading">Загрузка всех 200 аятов суры Аль-Джинн…</div>
+<div class="error hidden" id="error">Не удалось загрузить суру. Проверь подключение к интернету и обнови страницу.</div>
 <div class="section">
-  <h5><center>Во имя Аллаха, Милостивого, Милосердного</center></h5>
-  <div class="ayah-list" id="ayahList"></div>
+<h5><center>Во имя Аллаха, Милостивого, Милосердного</center></h5>
+<div class="ayah-list" id="ayahList"></div>
 </div>
-
 <div class="link"><a href="../quran-ru.html">Вернуться к Корану</a></div>
 </div>
-
 <script>
 const SURAH_NUMBER = 72;
 const translationEdition = "ru.kuliev";
@@ -180,6 +232,45 @@ function playAllAyahs() {
   playNext();
 }
 
+
+function barakaRuCyrillicTranslit(input) {
+  let s = String(input || "").trim();
+  const repl = {
+    "ā":"а","Ā":"А","ī":"и","Ī":"И","ū":"у","Ū":"У",
+    "ḥ":"х","Ḥ":"Х","ṣ":"с","Ṣ":"С","ḍ":"д","Ḍ":"Д","ṭ":"т","Ṭ":"Т",
+    "ẓ":"з","Ẓ":"З","ġ":"г","Ġ":"Г","ḫ":"х","Ḫ":"Х","ḏ":"з","Ḏ":"З",
+    "ṯ":"с","Ṯ":"С","ʿ":"ъ","ʾ":"ъ","ʼ":"ъ","`":"ъ","’":"ъ","‘":"ъ",
+    "á":"а","í":"и","ú":"у"
+  };
+  Object.keys(repl).forEach(k => { s = s.split(k).join(repl[k]); });
+  [
+    ["kh","х"],["Kh","Х"],["KH","Х"],
+    ["sh","ш"],["Sh","Ш"],["SH","Ш"],
+    ["th","с"],["Th","С"],["TH","С"],
+    ["dh","з"],["Dh","З"],["DH","З"],
+    ["gh","г"],["Gh","Г"],["GH","Г"],
+    ["ch","ч"],["Ch","Ч"],["CH","Ч"]
+  ].forEach(pair => { s = s.split(pair[0]).join(pair[1]); });
+  const mp = {
+    "a":"а","b":"б","c":"к","d":"д","e":"е","f":"ф","g":"г","h":"х","i":"и","j":"дж",
+    "k":"к","l":"л","m":"м","n":"н","o":"о","p":"п","q":"қ","r":"р","s":"с","t":"т",
+    "u":"у","v":"в","w":"у","x":"кс","y":"й","z":"з",
+    "A":"А","B":"Б","C":"К","D":"Д","E":"Е","F":"Ф","G":"Г","H":"Х","I":"И","J":"Дж",
+    "K":"К","L":"Л","M":"М","N":"Н","O":"О","P":"П","Q":"Қ","R":"Р","S":"С","T":"Т",
+    "U":"У","V":"В","W":"У","X":"Кс","Y":"Й","Z":"З"
+  };
+  return Array.from(s).map(ch => mp[ch] || ch).join("").replace(/\s+/g, " ").trim();
+}
+function barakaEscapeAttr(value) {
+  return String(value || "")
+    .replaceAll("&","&amp;")
+    .replaceAll("<","&lt;")
+    .replaceAll(">","&gt;")
+    .replaceAll('"',"&quot;")
+    .replaceAll("'","&#039;");
+}
+
+
 function renderAyahs(arData, trData, tlData) {
   const list = document.getElementById("ayahList");
   list.innerHTML = "";
@@ -191,9 +282,11 @@ function renderAyahs(arData, trData, tlData) {
     const translation = trData.data.ayahs[i];
     const translit = tlData.data.ayahs[i];
     const n = arabic.numberInSurah;
+    const translitCyr = barakaRuCyrillicTranslit(translit.text);
 
     const article = document.createElement("article");
     article.className = "ayah-card";
+    article.id = `ayah-${n}`;
     article.innerHTML = `
       <div class="ayah-toolbar">
         <div class="ayah-index">${n}</div>
@@ -209,14 +302,22 @@ function renderAyahs(arData, trData, tlData) {
       <audio class="ayah-audio" id="ayah-${n}" preload="none" src="${audioUrl(n)}"></audio>
 
       <div class="ayah-arabic">${arabic.text}</div>
-      <div class="ayah-translit">${translit.text}</div>
+      <div class="ayah-translit" data-original-translit="${barakaEscapeAttr(translit.text)}">${translitCyr}</div>
       <div class="ayah-meaning">${translation.text}</div>
+
+      <div class="ayah-actions" aria-label="Действия аята">
+        <button class="ayah-action" type="button" data-ayah-action="favorite" data-ayah-number="${n}" data-ayah-arabic="${barakaEscapeAttr(arabic.text)}" data-ayah-translit="${barakaEscapeAttr(translitCyr)}" data-ayah-meaning="${barakaEscapeAttr(translation.text)}" aria-label="Избранное"><svg viewBox="0 0 24 24"><path d="M12 3.6l2.45 5.05 5.55.8-4.02 3.92.95 5.53L12 16.3l-4.93 2.6.95-5.53L4 9.45l5.55-.8L12 3.6z"/></svg></button>
+        <button class="ayah-action" type="button" data-ayah-action="share" data-ayah-number="${n}" data-ayah-arabic="${barakaEscapeAttr(arabic.text)}" data-ayah-translit="${barakaEscapeAttr(translitCyr)}" data-ayah-meaning="${barakaEscapeAttr(translation.text)}" aria-label="Поделиться"><svg viewBox="0 0 24 24"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><path d="M8.7 10.7l6.6-4.4M8.7 13.3l6.6 4.4"/></svg></button>
+        <button class="ayah-action" type="button" data-ayah-action="save" data-ayah-number="${n}" data-ayah-arabic="${barakaEscapeAttr(arabic.text)}" data-ayah-translit="${barakaEscapeAttr(translitCyr)}" data-ayah-meaning="${barakaEscapeAttr(translation.text)}" aria-label="Сохранить"><svg viewBox="0 0 24 24"><path d="M6 4.5A1.5 1.5 0 0 1 7.5 3h9A1.5 1.5 0 0 1 18 4.5V21l-6-3.5L6 21V4.5z"/></svg></button>
+      </div>
     `;
     list.appendChild(article);
   }
 
   document.getElementById("loading").classList.add("hidden");
+  document.dispatchEvent(new CustomEvent("barakaway:ayahs-rendered"));
 }
+
 
 async function loadSurah() {
   const loading = document.getElementById("loading");
@@ -249,9 +350,52 @@ async function loadSurah() {
 
 loadSurah();
 </script>
+
+<script id="surah-production-actions-script">
+(function(){
+  const P='barakaway:quran:surah:ru:';
+  const PAGE_KEY=document.body.dataset.surahPageKey||location.pathname;
+  const SURAH_NUMBER=document.body.dataset.surahNumber||'';
+  const SURAH_TITLE=document.body.dataset.surahTitle||document.querySelector('h1')?.textContent?.trim()||'Сура';
+  const SURAH_ARABIC=document.body.dataset.surahArabic||'';
+  const SURAH_META=document.body.dataset.surahMeta||'';
+  const LOGO='../assets/barakaway-logo.png';
+  const APP='https://play.google.com/store/apps/details?id=YOUR_APP_ID';
+  let toastTimer=null,pendingShare=null;
+  function rj(k,f){try{return JSON.parse(localStorage.getItem(k)||JSON.stringify(f));}catch(e){return f;}}
+  function wj(k,v){localStorage.setItem(k,JSON.stringify(v));}
+  function toast(m){let t=document.querySelector('.quran-toast');if(!t){t=document.createElement('div');t.className='quran-toast';document.body.appendChild(t);}t.textContent=m;t.classList.add('is-visible');clearTimeout(toastTimer);toastTimer=setTimeout(()=>t.classList.remove('is-visible'),2100);}
+  function esc(v){return String(v||'').replaceAll('&','&amp;').replaceAll('<','&lt;').replaceAll('>','&gt;').replaceAll('"','&quot;').replaceAll("'","&#039;");}
+  function pageData(){return {type:'surah',key:PAGE_KEY,number:SURAH_NUMBER,title:SURAH_TITLE,arabic:SURAH_ARABIC,meta:SURAH_META,href:location.href};}
+  function ayahData(btn){const c=btn.closest('.ayah-card');return {type:'ayah',key:PAGE_KEY+'#ayah-'+(btn.dataset.ayahNumber||''),surahNumber:SURAH_NUMBER,surahTitle:SURAH_TITLE,ayahNumber:btn.dataset.ayahNumber||'',arabic:btn.dataset.ayahArabic||c?.querySelector('.ayah-arabic')?.textContent?.trim()||'',translit:btn.dataset.ayahTranslit||c?.querySelector('.ayah-translit')?.textContent?.trim()||'',meaning:btn.dataset.ayahMeaning||c?.querySelector('.ayah-meaning')?.textContent?.trim()||'',href:location.href+'#ayah-'+(btn.dataset.ayahNumber||'')};}
+  function favs(){return rj(P+'favorites',[]);}
+  function setFavs(x){wj(P+'favorites',x);}
+  function toggleFav(item){let f=favs(),e=f.some(x=>x.key===item.key);setFavs(e?f.filter(x=>x.key!==item.key):[Object.assign({savedAt:Date.now()},item)].concat(f));toast(e?'Удалено из избранного':'Добавлено в избранное');sync();}
+  function save(item){wj(P+'lastSaved',Object.assign({savedAt:Date.now()},item));toast(item.type==='ayah'?'Аят сохранён':'Сура сохранена');sync();}
+  function renderFavs(){const root=document.getElementById('quran-favorites-list');if(!root)return;let f=favs();if(!f.length){root.innerHTML='<div class="quran-empty-state">Пока нет избранного. Нажмите звезду на суре или аяте.</div>';return;}root.innerHTML=f.map(item=>{let title=item.type==='ayah'?'Сура '+esc(item.surahNumber)+', аят '+esc(item.ayahNumber):'Сура '+esc(item.number)+' — '+esc(item.title);let meta=item.type==='ayah'?esc(item.surahTitle)+' · '+esc(item.meaning).slice(0,110):esc(item.arabic)+' · '+esc(item.meta);return '<div class="quran-favorite-item"><a href="'+esc(item.href)+'" style="text-decoration:none;color:inherit;min-width:0;"><div class="quran-favorite-title">'+title+'</div><div class="quran-favorite-meta">'+meta+'</div></a><a class="quran-favorite-open" href="'+esc(item.href)+'">›</a><button class="quran-favorite-remove" type="button" data-remove-favorite="'+esc(item.key)+'"><svg viewBox="0 0 24 24"><path d="M12 3.6l2.45 5.05 5.55.8-4.02 3.92.95 5.53L12 16.3l-4.93 2.6.95-5.53L4 9.45l5.55-.8L12 3.6z"/></svg></button></div>';}).join('');}
+  function sync(){let keys=new Set(favs().map(x=>x.key)),saved=rj(P+'lastSaved',null);document.querySelectorAll('[data-surah-page-action="favorite"]').forEach(b=>b.classList.toggle('is-active',keys.has(PAGE_KEY)));document.querySelectorAll('[data-surah-page-action="save"]').forEach(b=>b.classList.toggle('is-active',saved&&saved.key===PAGE_KEY));document.querySelectorAll('[data-ayah-action="favorite"]').forEach(b=>b.classList.toggle('is-active',keys.has(ayahData(b).key)));document.querySelectorAll('[data-ayah-action="save"]').forEach(b=>b.classList.toggle('is-active',saved&&saved.key===ayahData(b).key));let reading=localStorage.getItem(P+'readingMode')==='1';document.body.classList.toggle('quran-reading-mode',reading);let rb=document.querySelector('[data-surah-page-action="reading"]');if(rb)rb.classList.toggle('is-active',reading);let tb=document.querySelector('[data-surah-page-action="theme"]');if(tb)tb.classList.toggle('is-active',document.documentElement.classList.contains('dark-mode'));}
+  function applyLayers(){let s=rj(P+'layers',{arabic:true,translit:true,meaning:true});document.body.classList.toggle('hide-arabic',!s.arabic);document.body.classList.toggle('hide-translit',!s.translit);document.body.classList.toggle('hide-meaning',!s.meaning);['Arabic','Translit','Meaning'].forEach(n=>{let el=document.getElementById('toggle'+n);if(el)el.checked=!!s[n.toLowerCase()];});}
+  function updLayer(name,checked){let s=rj(P+'layers',{arabic:true,translit:true,meaning:true});s[name]=checked;if(!s.arabic&&!s.translit&&!s.meaning){s[name]=true;toast('Нужно оставить хотя бы один слой текста');}wj(P+'layers',s);applyLayers();}
+  function openM(id){let m=document.getElementById(id);if(m){m.classList.add('is-visible');m.setAttribute('aria-hidden','false');}}
+  function closeM(id){let m=document.getElementById(id);if(m){m.classList.remove('is-visible');m.setAttribute('aria-hidden','true');}}
+  function shareHtml(item){let isA=item.type==='ayah';return '<div class="quran-share-card"><div class="quran-share-bismillah">بِسْمِ ٱللَّٰهِ ٱلرَّحْمَـٰنِ ٱلرَّحِيمِ</div><div class="quran-share-main">'+(isA?'Сура '+esc(item.surahNumber)+' · Аят '+esc(item.ayahNumber):'Сура '+esc(item.number)+' — '+esc(item.title))+'</div><div class="quran-share-arabic">'+esc(item.arabic||'')+'</div><div class="quran-share-meta">'+esc(isA?item.meaning:item.meta)+'</div><div class="quran-share-limit-note"><strong>Будет создана PNG-карточка.</strong> Вместе с ней отправится короткая ссылка на приложение.</div><div class="quran-share-actions"><button class="quran-share-button" type="button" data-share-confirm="1">Поделиться карточкой</button><button class="quran-share-button secondary" type="button" data-quran-close="share">Закрыть</button></div></div>';}
+  function openShare(item){pendingShare=item;let root=document.getElementById('quran-share-card-root');if(root)root.innerHTML=shareHtml(item);openM('quran-share-modal');}
+  async function shareItem(item){const text='📲 Скачать приложение BarakaWay — ваш ежедневный путь к барака\n\n'+APP;try{if(navigator.share){await navigator.share({title:'BarakaWay App',text:text,url:APP});toast('Открыто меню отправки');return;}}catch(e){}try{await navigator.clipboard.writeText(text);toast('Ссылка на приложение скопирована');}catch(e){}}
+  document.addEventListener('click',function(e){
+    let rm=e.target.closest('[data-remove-favorite]');if(rm){e.preventDefault();setFavs(favs().filter(x=>x.key!==rm.dataset.removeFavorite));renderFavs();sync();toast('Удалено из избранного');return;}
+    let cl=e.target.closest('[data-quran-close]');if(cl){e.preventDefault();if(cl.dataset.quranClose==='favorites')closeM('quran-favorites-modal');if(cl.dataset.quranClose==='share')closeM('quran-share-modal');return;}
+    if(e.target.classList&&e.target.classList.contains('quran-modal-backdrop')){e.preventDefault();e.target.classList.remove('is-visible');e.target.setAttribute('aria-hidden','true');return;}
+    let cf=e.target.closest('[data-share-confirm]');if(cf){e.preventDefault();if(pendingShare)shareItem(pendingShare);return;}
+    let pb=e.target.closest('[data-surah-page-action]');if(pb){e.preventDefault();e.stopPropagation();let a=pb.dataset.surahPageAction,pd=pageData();if(a==='favorite')toggleFav(pd);if(a==='share')openShare(pd);if(a==='reading'){let en=!(localStorage.getItem(P+'readingMode')==='1');localStorage.setItem(P+'readingMode',en?'1':'0');toast(en?'Режим чтения включён':'Режим чтения выключен');sync();}if(a==='save')save(pd);if(a==='theme'){let root=document.documentElement,isDark=root.classList.contains('dark-mode');root.classList.toggle('dark-mode',!isDark);root.classList.toggle('light-mode',isDark);localStorage.setItem('theme',isDark?'light':'dark');toast(isDark?'Светлая тема':'Тёмная тема');sync();}return;}
+    let ab=e.target.closest('[data-ayah-action]');if(ab){e.preventDefault();e.stopPropagation();let a=ab.dataset.ayahAction,d=ayahData(ab);if(a==='favorite')toggleFav(d);if(a==='save')save(d);if(a==='share')openShare(d);return;}
+  },true);
+  document.addEventListener('change',function(e){let t=e.target.closest('[data-layer-toggle]');if(t)updLayer(t.dataset.layerToggle,t.checked);});
+  document.addEventListener('barakaway:ayahs-rendered',function(){renderFavs();applyLayers();sync();});renderFavs();applyLayers();sync();
+})();
+</script>
 <script src="../bottom-nav.js"></script>
+
+<div aria-hidden="true" class="quran-modal-backdrop" id="quran-favorites-modal"><div aria-modal="true" class="quran-modal" role="dialog"><div class="quran-modal-head"><h2 class="quran-modal-title">Избранное</h2><button class="quran-modal-close" data-quran-close="favorites" type="button">×</button></div><div class="quran-modal-body"><div class="quran-favorites-list" id="quran-favorites-list"></div></div></div></div>
+<div aria-hidden="true" class="quran-modal-backdrop" id="quran-share-modal"><div aria-modal="true" class="quran-modal" role="dialog"><div class="quran-modal-head"><h2 class="quran-modal-title">Поделиться</h2><button class="quran-modal-close" data-quran-close="share" type="button">×</button></div><div class="quran-modal-body"><div id="quran-share-card-root"></div></div></div></div>
 </body>
 </html>
-
-
-
