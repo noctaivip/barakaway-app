@@ -3,9 +3,9 @@
 In the name of Allah, the Most Merciful, the Most Compassionate
 -->
 <!DOCTYPE html>
-<html lang="ar" dir="rtl">
-<head>
 
+<html dir="rtl" lang="ar">
+<head>
 <script>
 (function(){
   const savedTheme = localStorage.getItem('siteTheme');
@@ -17,17 +17,13 @@ In the name of Allah, the Most Merciful, the Most Compassionate
   }
 })();
 </script>
-
-<script data-goatcounter="https://onedollarexit.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
-
-<link rel="icon" type="image/png" href="/favicon.png">
-<link rel="manifest" href="/manifest.json">
-<meta name="theme-color" content="#2d7a46">
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-
+<script async="" data-goatcounter="https://onedollarexit.goatcounter.com/count" src="//gc.zgo.at/count.js"></script>
+<link href="/favicon.png" rel="icon" type="image/png"/>
+<link href="/manifest.json" rel="manifest"/>
+<meta content="#2d7a46" name="theme-color"/>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport">
 <title>BarakaWay</title>
-
 <style>
 .ramadan-wrapper{
 max-width:850px;
@@ -73,9 +69,10 @@ color:#222;
 }
 
 .container{
-max-width:850px;
-margin:auto;
-padding:40px 30px;
+  max-width:850px;
+  margin:auto;
+  padding:40px 30px;
+  min-height:calc(100vh - 90px);
 box-shadow:0 6px 16px rgba(0,0,0,0.05);
 transition:background .25s,color .25s,box-shadow .25s;
 }
@@ -2417,10 +2414,10 @@ html.light-mode .bottom-app-nav-item:hover:not(.active){background:rgba(45,122,7
 .bottom-app-nav-item:active{transform:scale(0.96);}
 .bottom-app-nav-item.active svg{transform:translateY(-1px) scale(1.05);stroke-width:2.25;}
 
-.container{padding-bottom:122px;}
+.container{padding-bottom:96px;}
 
 @media(max-width:700px){
-  .container{padding-bottom:122px;}
+  .container{padding-bottom:94px;}
   .bottom-app-nav{min-height:78px;padding-top:8px;}
   .bottom-app-nav-inner{gap:4px;}
   .bottom-app-nav-item{min-height:58px;border-radius:18px;font-size:10.5px;}
@@ -2616,32 +2613,233 @@ html.light-mode .tahajjud-slider{
   }
 }
 
+
+
+/* BARAKAWAY PRO PROMO CARD */
+.baraka-pro-promo{
+  position:relative;
+  display:block;
+  margin:18px auto 10px;
+  max-width:520px;
+  padding:22px 20px 21px;
+  border-radius:28px;
+  overflow:hidden;
+  text-decoration:none;
+  border:1.5px solid transparent;
+  transition:transform .18s ease, box-shadow .25s ease, border-color .25s ease, background .25s ease;
+  -webkit-tap-highlight-color:transparent;
+}
+.baraka-pro-promo::before{
+  content:"";
+  position:absolute;
+  inset:0;
+  pointer-events:none;
+  background:linear-gradient(120deg, transparent 0%, rgba(255,255,255,.06) 43%, rgba(255,255,255,.13) 50%, rgba(255,255,255,.04) 57%, transparent 100%);
+  opacity:.62;
+}
+.baraka-pro-promo::after{
+  content:"";
+  position:absolute;
+  inset:1px;
+  border-radius:26px;
+  pointer-events:none;
+  border:1px solid rgba(255,255,255,.06);
+}
+.baraka-pro-promo > *{position:relative;z-index:1;}
+html.dark-mode .baraka-pro-promo{
+  background:linear-gradient(135deg,#171512 0%, #201a10 32%, #0f2a20 72%, #0b211a 100%);
+  border-color:rgba(224,188,82,.58);
+  box-shadow:0 20px 42px rgba(0,0,0,.34),0 0 0 1px rgba(224,188,82,.14),inset 0 1px 0 rgba(255,255,255,.08);
+}
+html.light-mode .baraka-pro-promo{
+  background:linear-gradient(135deg,#fff6d7 0%, #ffffff 38%, #edf8f0 72%, #dff1e5 100%);
+  border-color:rgba(181,139,35,.40);
+  box-shadow:0 18px 36px rgba(17,27,20,.10),0 0 0 1px rgba(45,122,70,.08),inset 0 1px 0 rgba(255,255,255,.98);
+}
+.baraka-pro-promo:hover{transform:translateY(-2px);}
+html.dark-mode .baraka-pro-promo:hover{box-shadow:0 24px 48px rgba(0,0,0,.40),0 0 0 1px rgba(224,188,82,.22),inset 0 1px 0 rgba(255,255,255,.09);}
+html.light-mode .baraka-pro-promo:hover{box-shadow:0 22px 42px rgba(17,27,20,.14),0 0 0 1px rgba(181,139,35,.13),inset 0 1px 0 rgba(255,255,255,.99);}
+.baraka-pro-top{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:13px;}
+.baraka-pro-badge{display:inline-flex;align-items:center;justify-content:center;padding:7px 11px;border-radius:999px;font-size:11px;line-height:1;font-weight:950;letter-spacing:.08em;text-transform:uppercase;}
+html.dark-mode .baraka-pro-badge{background:rgba(224,188,82,.16);color:#ffe8a2;border:1px solid rgba(224,188,82,.36);}
+html.light-mode .baraka-pro-badge{background:#fff0bc;color:#70500f;border:1px solid rgba(141,107,22,.22);}
+.baraka-pro-price{font-size:14px;font-weight:950;white-space:nowrap;letter-spacing:-.02em;}
+html.dark-mode .baraka-pro-price{color:#ffe08a;}
+html.light-mode .baraka-pro-price{color:#6f5311;}
+.baraka-pro-title{font-size:27px;line-height:1.06;font-weight:950;letter-spacing:-.047em;margin:0 0 10px;}
+html.dark-mode .baraka-pro-title{color:#fffaf0;}
+html.light-mode .baraka-pro-title{color:#172019;}
+.baraka-pro-text{font-size:14px;line-height:1.48;font-weight:760;margin:0;max-width:470px;}
+html.dark-mode .baraka-pro-text{color:#e2eadf;}
+html.light-mode .baraka-pro-text{color:#3f5147;}
+.baraka-pro-action,.baraka-pro-arrow{display:none !important;}
+@media(max-width:700px){.baraka-pro-promo{margin:17px auto 8px;padding:20px 17px 19px;border-radius:24px;width:calc(100% - 12px);box-sizing:border-box;}.baraka-pro-promo::after{border-radius:22px;}.baraka-pro-title{font-size:24px;}.baraka-pro-text{font-size:13px;}.baraka-pro-price{font-size:13px;}}
+
 </style>
 <script src="/theme-init.js"></script>
-<link rel="stylesheet" href="/theme.css">
-<link rel="stylesheet" href="/theme-universal.css">
-</head>
+<link href="/theme.css" rel="stylesheet"/>
+<link href="/theme-universal.css" rel="stylesheet"/>
+<style id="barakaway-home-nav-upgrade-style">
+/* === Home quick access + bottom navigation upgrade === */
+.premium-resource-grid{
+  grid-template-columns:repeat(2,minmax(0,1fr));
+}
+.premium-resource-card[href="adhkar-ar.html"] .premium-resource-icon,
+.premium-resource-card[href="support-project-ar.html"] .premium-resource-icon{
+  font-size:22px;
+}
+html.dark-mode .premium-resource-card[href="adhkar-ar.html"]{
+  background:linear-gradient(135deg,#15251d 0%, #18232a 55%, #123225 100%);
+  border-color:rgba(102,198,128,.26);
+}
+html.light-mode .premium-resource-card[href="adhkar-ar.html"]{
+  background:linear-gradient(135deg,#ffffff 0%, #f8fdf9 55%, #ecf8ef 100%);
+  border-color:rgba(45,122,70,.17);
+}
+html.dark-mode .premium-resource-card[href="support-project-ar.html"]{
+  background:linear-gradient(135deg,#252014 0%, #1b222a 55%, #2e2614 100%);
+  border-color:rgba(215,192,122,.28);
+}
+html.light-mode .premium-resource-card[href="support-project-ar.html"]{
+  background:linear-gradient(135deg,#ffffff 0%, #fffdf7 55%, #fff6df 100%);
+  border-color:rgba(141,107,22,.18);
+}
+.my-saved-overlay{
+  display:none;
+  position:fixed;
+  inset:0;
+  z-index:3600;
+  align-items:flex-end;
+  justify-content:center;
+  padding:12px;
+  box-sizing:border-box;
+  backdrop-filter:blur(10px);
+  -webkit-backdrop-filter:blur(10px);
+}
+.my-saved-overlay.open{display:flex;}
+html.dark-mode .my-saved-overlay{background:rgba(5,10,8,.68);}
+html.light-mode .my-saved-overlay{background:rgba(15,24,18,.42);}
+.my-saved-sheet{
+  width:min(100%,560px);
+  max-height:82vh;
+  overflow:auto;
+  border-radius:28px 28px 20px 20px;
+  padding:18px;
+  box-sizing:border-box;
+}
+html.dark-mode .my-saved-sheet{
+  background:linear-gradient(180deg,#121b21,#0c1316);
+  border:1px solid rgba(215,181,109,.26);
+  box-shadow:0 28px 70px rgba(0,0,0,.55);
+  color:#fff;
+}
+html.light-mode .my-saved-sheet{
+  background:linear-gradient(180deg,#ffffff,#f6faf7);
+  border:1px solid rgba(45,122,70,.18);
+  box-shadow:0 28px 70px rgba(18,34,24,.22);
+  color:#111814;
+}
+.my-saved-head{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:12px;
+  margin-bottom:14px;
+}
+.my-saved-title{
+  font-size:22px;
+  font-weight:950;
+  letter-spacing:-.035em;
+}
+.my-saved-close{
+  width:40px;
+  height:40px;
+  border-radius:999px;
+  border:1px solid rgba(215,181,109,.24);
+  background:rgba(255,255,255,.06);
+  color:#d7b56d;
+  font-size:22px;
+  line-height:1;
+  cursor:pointer;
+  padding:0;
+}
+.my-saved-subtitle{
+  margin:-6px 0 14px;
+  font-size:13px;
+  line-height:1.45;
+  font-weight:700;
+}
+html.dark-mode .my-saved-subtitle{color:#b8c6bf;}
+html.light-mode .my-saved-subtitle{color:#5c6b62;}
+.my-saved-list{
+  display:grid;
+  gap:10px;
+}
+.my-saved-item{
+  display:block;
+  text-decoration:none;
+  padding:14px;
+  border-radius:18px;
+  border:1px solid transparent;
+}
+html.dark-mode .my-saved-item{
+  background:linear-gradient(135deg,rgba(255,255,255,.055),rgba(215,181,109,.06));
+  border-color:rgba(215,181,109,.18);
+  color:#fff;
+}
+html.light-mode .my-saved-item{
+  background:linear-gradient(135deg,#ffffff,#f0f8f3);
+  border-color:rgba(45,122,70,.12);
+  color:#111814;
+}
+.my-saved-item-title{
+  font-size:15px;
+  font-weight:950;
+  margin-bottom:4px;
+}
+.my-saved-item-meta{
+  font-size:12px;
+  line-height:1.4;
+  font-weight:700;
+}
+html.dark-mode .my-saved-item-meta{color:#b8c6bf;}
+html.light-mode .my-saved-item-meta{color:#617169;}
+.my-saved-empty{
+  padding:18px;
+  border-radius:18px;
+  text-align:center;
+  font-size:13px;
+  font-weight:750;
+  line-height:1.5;
+  border:1px dashed rgba(215,181,109,.28);
+}
+html.dark-mode .my-saved-empty{color:#cbd5df;}
+html.light-mode .my-saved-empty{color:#5c6b62;}
+@media(max-width:700px){
+  .premium-resource-grid{gap:10px;}
+  .my-saved-sheet{border-radius:26px 26px 18px 18px;padding:16px;}
+}
+</style>
+</meta></head>
 <body>
-
 <div class="mobile-top-controls">
-  <button class="icon-btn left" onclick="changeLanguageChoice()" aria-label="Change language">
-    <svg viewBox="0 0 24 24" aria-hidden="true">
-      <path d="M12 2a10 10 0 100 20 10 10 0 000-20zm6.92 9h-3.02a15.6 15.6 0 00-1.33-5.01A8.03 8.03 0 0118.92 11zM12 4.04c.89 1.08 1.97 3.22 2.28 6.96H9.72C10.03 7.26 11.11 5.12 12 4.04zM4.99 13h3.02a15.6 15.6 0 001.33 5.01A8.03 8.03 0 014.99 13zM8.1 11H5.08a8.03 8.03 0 014.35-5.01A15.6 15.6 0 008.1 11zm1.62 2h4.56c-.31 3.74-1.39 5.88-2.28 6.96-.89-1.08-1.97-3.22-2.28-6.96zm5.18 5.01A15.6 15.6 0 0015.9 13h3.02a8.03 8.03 0 01-4.02 5.01z"/>
-    </svg>
-    <span class="ripple"></span>
-  </button>
-  <div class="theme-toggle-center">
-    <span class="theme-toggle-label">الوضع الفاتح</span>
-    <input type="checkbox" class="theme-switch" id="themeSwitch" aria-label="Toggle theme">
-  </div>
-  <button class="icon-btn right" onclick="shareApp()" aria-label="Share app">
-    <svg viewBox="0 0 24 24" aria-hidden="true">
-      <path d="M18 16a2.99 2.99 0 00-2.39 1.2l-6.7-3.35a3.1 3.1 0 000-1.7l6.7-3.35A3 3 0 1014 6a3.1 3.1 0 00.08.68l-6.7 3.35a3 3 0 100 4.94l6.7 3.35A3 3 0 1018 16z"/>
-    </svg>
-    <span class="ripple"></span>
-  </button>
+<button aria-label="Change language" class="icon-btn left" onclick="changeLanguageChoice()">
+<svg aria-hidden="true" viewbox="0 0 24 24">
+<path d="M12 2a10 10 0 100 20 10 10 0 000-20zm6.92 9h-3.02a15.6 15.6 0 00-1.33-5.01A8.03 8.03 0 0118.92 11zM12 4.04c.89 1.08 1.97 3.22 2.28 6.96H9.72C10.03 7.26 11.11 5.12 12 4.04zM4.99 13h3.02a15.6 15.6 0 001.33 5.01A8.03 8.03 0 014.99 13zM8.1 11H5.08a8.03 8.03 0 014.35-5.01A15.6 15.6 0 008.1 11zm1.62 2h4.56c-.31 3.74-1.39 5.88-2.28 6.96-.89-1.08-1.97-3.22-2.28-6.96zm5.18 5.01A15.6 15.6 0 0015.9 13h3.02a8.03 8.03 0 01-4.02 5.01z"></path>
+</svg>
+<span class="ripple"></span>
+</button>
+<div class="theme-toggle-center">
+<span class="theme-toggle-label">الوضع الفاتح</span>
+<input aria-label="Toggle theme" class="theme-switch" id="themeSwitch" type="checkbox"/>
 </div>
-
+<button aria-label="Share app" class="icon-btn right" onclick="shareApp()">
+<svg aria-hidden="true" viewbox="0 0 24 24">
+<path d="M18 16a2.99 2.99 0 00-2.39 1.2l-6.7-3.35a3.1 3.1 0 000-1.7l6.7-3.35A3 3 0 1014 6a3.1 3.1 0 00.08.68l-6.7 3.35a3 3 0 100 4.94l6.7 3.35A3 3 0 1018 16z"></path>
+</svg>
+<span class="ripple"></span>
+</button>
+</div>
 <div class="ramadan-wrapper">
 <div class="ramadan-bar">
 <div class="ramadan-text">
@@ -2649,218 +2847,205 @@ html.light-mode .tahajjud-slider{
 </div>
 </div>
 </div>
+<div aria-label="Desktop quick actions" class="desktop-top-actions">
+<div class="desktop-action-left">
+<a class="desktop-action-pill" href="#" onclick="changeLanguageChoice(); return false;">تغيير اللغة</a>
 </div>
-
-
-
-<div class="desktop-top-actions" aria-label="Desktop quick actions">
-  <div class="desktop-action-left">
-    <a class="desktop-action-pill" href="#" onclick="changeLanguageChoice(); return false;">تغيير اللغة</a>
-  </div>
-  <div class="desktop-action-center">
-    <div class="install-box" id="installBox">
-      <button id="installBtn" class="install-btn" type="button">تثبيت التطبيق</button>
-    </div>
-  </div>
-  <div class="desktop-action-right">
-    <div class="desktop-theme-toggle-inner">
-      <span class="theme-toggle-label">الوضع الفاتح</span>
-      <input type="checkbox" class="theme-switch" id="desktopThemeSwitch" aria-label="Toggle theme">
-    </div>
-  </div>
+<div class="desktop-action-center">
+<div class="install-box" id="installBox">
+<button class="install-btn" id="installBtn" type="button">تثبيت التطبيق</button>
 </div>
-
+</div>
+<div class="desktop-action-right">
+<div class="desktop-theme-toggle-inner">
+<span class="theme-toggle-label">الوضع الفاتح</span>
+<input aria-label="Toggle theme" class="theme-switch" id="desktopThemeSwitch" type="checkbox"/>
+</div>
+</div>
+</div>
 <div class="container">
-
 <div class="brand-prayer-hero">
   <button class="brand-signature" id="brandInstallTrigger" type="button" aria-label="BarakaWay">
 <span class="brand-letter-main">Way</span><span class="brand-letter-accent">Baraka</span>
   </button>
-  <div class="home-prayer-widget" role="link" tabindex="0" onclick="openPrayerTimesPage(event)" onkeydown="openPrayerTimesPageFromKeyboard(event)" aria-label="فتح صفحة مواقيت الصلاة">
-    <div class="home-prayer-top">
-      <div class="home-prayer-kicker">الصلاة التالية</div>
-      <div class="home-prayer-location" id="homePrayerLocation">طشقند، أوزبكستان</div>
-    </div>
-
-    <div class="home-prayer-main">
-      <div>
-        <div class="home-prayer-name" id="homePrayerName">الفجر</div>
-        <div class="home-prayer-time" id="homePrayerTime">--:--</div>
-        <div class="home-prayer-meta" id="homePrayerMeta">جاري تحميل مواقيت الصلاة...</div>
-      </div>
-      <div class="home-prayer-countdown">
-        <div class="home-prayer-countdown-label">بعد</div>
-        <div id="homePrayerCountdown">--:--:--</div>
-      </div>
-    </div>
-
-    <div class="home-prayer-actions">
-      <div class="home-prayer-note"><span>عرض جميع الأوقات</span><span class="home-prayer-arrow" aria-hidden="true">→</span></div>
-      <button class="home-prayer-share-btn" type="button" onclick="sharePrayerTimes(event)" aria-label="مشاركة مواقيت الصلاة" title="مشاركة مواقيت الصلاة">
-        <svg viewBox="0 0 24 24" aria-hidden="true">
-          <path d="M18 16.08c-.76 0-1.44.3-1.96.77L8.91 12.7c.05-.23.09-.46.09-.7s-.04-.47-.09-.7l7.05-4.11A2.99 2.99 0 1 0 15 5c0 .24.04.47.09.7L8.04 9.81A3 3 0 1 0 8.04 14.2l7.12 4.18c-.04.2-.06.41-.06.62a2.9 2.9 0 1 0 2.9-2.92z"/>
-        </svg>
-      </button>
-    </div>
-  </div>
+<div aria-label="فتح صفحة مواقيت الصلاة" class="home-prayer-widget" onclick="openPrayerTimesPage(event)" onkeydown="openPrayerTimesPageFromKeyboard(event)" role="link" tabindex="0">
+<div class="home-prayer-top">
+<div class="home-prayer-kicker">الصلاة التالية</div>
+<div class="home-prayer-location" id="homePrayerLocation">طشقند، أوزبكستان</div>
 </div>
-
-<div class="tahajjud-alarm-bar" id="tahajjudAlarmBar" aria-label="منبّه صلاة التهجد">
-  <div class="tahajjud-alarm-left">
-    <div class="tahajjud-alarm-icon" aria-hidden="true">🌙</div>
-    <div>
-      <div class="tahajjud-alarm-title">تفعيل منبّه صلاة التهجد</div>
-      <div class="tahajjud-alarm-meta" id="tahajjudAlarmMeta">قبل الفجر بـ 60 دقيقة</div>
-    </div>
-  </div>
-  <label class="tahajjud-switch" aria-label="تفعيل أو إيقاف منبّه التهجد">
-    <input type="checkbox" id="tahajjudAlarmToggle">
-    <span class="tahajjud-slider"></span>
-  </label>
+<div class="home-prayer-main">
+<div>
+<div class="home-prayer-name" id="homePrayerName">الفجر</div>
+<div class="home-prayer-time" id="homePrayerTime">--:--</div>
+<div class="home-prayer-meta" id="homePrayerMeta">جاري تحميل مواقيت الصلاة...</div>
 </div>
-<section class="today-hub" aria-label="اليوم في BarakaWay">
-  <div class="today-hub-head">
-    <div class="today-hub-kicker">اليوم في BarakaWay</div>
-    <h2 class="today-hub-title">كل يوم خطوة جديدة أقرب إلى الله ﷻ</h2>
-  </div>
-
-  <div class="today-hub-grid">
-    <a class="today-action today-daily-task" id="dailyArticleLink" href="javascript:void(0)" role="button" aria-label="آية اليوم مع تطبيق عملي" data-task-key="article">
-      <div class="today-action-top">
-        <div class="today-action-icon">📖</div>
-        <div class="today-action-arrow today-task-status" id="dailyArticleStatus">→</div>
-      </div>
-      <div>
-        <div class="today-action-title">آية اليوم</div>
-        <div class="today-action-text" id="dailyArticleTitle">جاري تحميل آية اليوم...</div>
-      </div>
-    </a>
-
-    <a class="today-action today-daily-task" id="currentAdhkarLink" href="javascript:void(0)" role="button" aria-label="اختبار اليوم" data-task-key="adhkar">
-      <div class="today-action-top">
-        <div class="today-action-icon">🌿</div>
-        <div class="today-action-arrow today-task-status" id="currentAdhkarStatus">→</div>
-      </div>
-      <div>
-        <div class="today-action-title" id="currentAdhkarTitle">اختبار اليوم</div>
-        <div class="today-action-text" id="currentAdhkarText">جاري تحميل مهمة اليوم...</div>
-      </div>
-    </a>
-
-    <div class="today-action today-daily-task today-counter-action" id="allahNameCounterCard" role="button" tabindex="0" data-task-key="name" aria-label="عدّاد تكرار اسم من أسماء الله">
-      <div class="today-action-top">
-        <div class="today-action-icon">☝️</div>
-        <div class="today-action-arrow today-task-status" id="allahNameCounterValue">0/100</div>
-      </div>
-      <div>
-        <div class="today-action-title" id="allahNameToday">اسم من أسماء الله</div>
-        <div class="today-action-text" id="allahNameMeaning">اليوم نحفظ معنى هذا الاسم.</div>
-        <div class="today-counter-track"><div class="today-counter-fill" id="allahNameCounterFill"></div></div>
-      </div>
-    </div>
-
-    <div class="today-action today-daily-task today-goal-action" id="dailyGoalCard" role="button" tabindex="0" data-task-key="goal" aria-label="هدف اليوم">
-      <div class="today-action-top">
-        <div class="today-action-icon">🎯</div>
-        <div class="today-action-arrow today-task-status" id="dailyGoalStatus">•</div>
-      </div>
-      <div>
-        <div class="today-action-title">هدف اليوم</div>
-        <div class="today-action-text" id="dailyPracticeText">افعل خيراً واحداً بهدوء بلا كلام ولا رياء.</div>
-      </div>
-    </div>
-  </div>
-
-  <div class="today-micro-wrap">
-    <div class="today-action today-daily-task today-micro-action" id="dailyMicroKnowledgeCard" role="button" tabindex="0" data-task-key="micro" aria-label="المعرفة الصغيرة لليوم">
-      <div class="today-action-top">
-        <div class="today-action-icon">🧠</div>
-        <div class="today-action-arrow today-task-status" id="dailyMicroKnowledgeStatus">?</div>
-      </div>
-      <div>
-        <div class="today-action-title">المعرفة الصغيرة لليوم</div>
-        <div class="today-micro-question" id="dailyMicroQuestion">جاري تحميل السؤال...</div>
-        <div class="micro-options" id="dailyMicroOptions"></div>
-        <div class="micro-answer-box" id="dailyMicroAnswer"></div>
-      </div>
-    </div>
-  </div>
+<div class="home-prayer-countdown">
+<div class="home-prayer-countdown-label">بعد</div>
+<div id="homePrayerCountdown">--:--:--</div>
+</div>
+</div>
+<div class="home-prayer-actions">
+<div class="home-prayer-note"><span>عرض جميع الأوقات</span><span aria-hidden="true" class="home-prayer-arrow">→</span></div>
+<button aria-label="مشاركة مواقيت الصلاة" class="home-prayer-share-btn" onclick="sharePrayerTimes(event)" title="مشاركة مواقيت الصلاة" type="button">
+<svg aria-hidden="true" viewbox="0 0 24 24">
+<path d="M18 16.08c-.76 0-1.44.3-1.96.77L8.91 12.7c.05-.23.09-.46.09-.7s-.04-.47-.09-.7l7.05-4.11A2.99 2.99 0 1 0 15 5c0 .24.04.47.09.7L8.04 9.81A3 3 0 1 0 8.04 14.2l7.12 4.18c-.04.2-.06.41-.06.62a2.9 2.9 0 1 0 2.9-2.92z"></path>
+</svg>
+</button>
+</div>
+</div>
+</div>
+<div aria-label="منبّه صلاة التهجد" class="tahajjud-alarm-bar" id="tahajjudAlarmBar">
+<div class="tahajjud-alarm-left">
+<div aria-hidden="true" class="tahajjud-alarm-icon">🌙</div>
+<div>
+<div class="tahajjud-alarm-title">تفعيل منبّه صلاة التهجد</div>
+<div class="tahajjud-alarm-meta" id="tahajjudAlarmMeta">قبل الفجر بـ 60 دقيقة</div>
+</div>
+</div>
+<label aria-label="تفعيل أو إيقاف منبّه التهجد" class="tahajjud-switch">
+<input id="tahajjudAlarmToggle" type="checkbox"/>
+<span class="tahajjud-slider"></span>
+</label>
+</div>
+<section aria-label="اليوم في BarakaWay" class="today-hub">
+<div class="today-hub-head">
+<div class="today-hub-kicker">اليوم في BarakaWay</div>
+<h2 class="today-hub-title">كل يوم خطوة جديدة أقرب إلى الله ﷻ</h2>
+</div>
+<div class="today-hub-grid">
+<a aria-label="آية اليوم مع التطبيق العملي" class="today-action today-daily-task" data-task-key="article" href="javascript:void(0)" id="dailyArticleLink" role="button">
+<div class="today-action-top">
+<div class="today-action-icon">📖</div>
+<div class="today-action-arrow today-task-status" id="dailyArticleStatus">→</div>
+</div>
+<div>
+<div class="today-action-title">آية اليوم</div>
+<div class="today-action-text" id="dailyArticleTitle">جاري تحميل آية اليوم...</div>
+</div>
+</a>
+<a aria-label="اختبار اليوم" class="today-action today-daily-task" data-task-key="adhkar" href="javascript:void(0)" id="currentAdhkarLink" role="button">
+<div class="today-action-top">
+<div class="today-action-icon">🌿</div>
+<div class="today-action-arrow today-task-status" id="currentAdhkarStatus">→</div>
+</div>
+<div>
+<div class="today-action-title" id="currentAdhkarTitle">اختبار اليوم</div>
+<div class="today-action-text" id="currentAdhkarText">جاري تحميل مهمة اليوم...</div>
+</div>
+</a>
+<div aria-label="عداد تكرار اسم من أسماء الله" class="today-action today-daily-task today-counter-action" data-task-key="name" id="allahNameCounterCard" role="button" tabindex="0">
+<div class="today-action-top">
+<div class="today-action-icon">☝️</div>
+<div class="today-action-arrow today-task-status" id="allahNameCounterValue">0/100</div>
+</div>
+<div>
+<div class="today-action-title" id="allahNameToday">اسم من أسماء الله</div>
+<div class="today-action-text" id="allahNameMeaning">اليوم نحفظ معنى هذا الاسم.</div>
+<div class="today-counter-track"><div class="today-counter-fill" id="allahNameCounterFill"></div></div>
+</div>
+</div>
+<div aria-label="هدف اليوم" class="today-action today-daily-task today-goal-action" data-task-key="goal" id="dailyGoalCard" role="button" tabindex="0">
+<div class="today-action-top">
+<div class="today-action-icon">🎯</div>
+<div class="today-action-arrow today-task-status" id="dailyGoalStatus">•</div>
+</div>
+<div>
+<div class="today-action-title">هدف اليوم</div>
+<div class="today-action-text" id="dailyPracticeText">افعل خيراً واحداً بهدوء بلا كلام ولا رياء.</div>
+</div>
+</div>
+</div>
+<div class="today-micro-wrap">
+<div aria-label="المعرفة الصغيرة لليوم" class="today-action today-daily-task today-micro-action" data-task-key="micro" id="dailyMicroKnowledgeCard" role="button" tabindex="0">
+<div class="today-action-top">
+<div class="today-action-icon">🧠</div>
+<div class="today-action-arrow today-task-status" id="dailyMicroKnowledgeStatus">?</div>
+</div>
+<div>
+<div class="today-action-title">المعرفة الصغيرة لليوم</div>
+<div class="today-micro-question" id="dailyMicroQuestion">جاري تحميل السؤال...</div>
+<div class="micro-options" id="dailyMicroOptions"></div>
+<div class="micro-answer-box" id="dailyMicroAnswer"></div>
+</div>
+</div>
+</div>
 </section>
 <div class="home-section-title">
-  <h2>وصول سريع</h2>
-  <div class="home-section-note">الأقسام الأساسية</div>
+<h2>وصول سريع</h2>
+<div class="home-section-note">الأقسام الأساسية</div>
 </div>
-
 <div class="premium-resource-grid">
-  <a class="premium-resource-card" href="names-ar.html">
-    <div class="premium-resource-icon">☝️</div>
-    <div><div class="premium-resource-title">الأسماء الحسنى</div><div class="premium-resource-text">معانٍ وتأملات وتقوية للإيمان.</div></div>
-  </a>
-  <a class="premium-resource-card" href="qibla-ar.html">
-    <div class="premium-resource-icon">🧭</div>
-    <div><div class="premium-resource-title">القبلة</div><div class="premium-resource-text">اتجاه سريع للصلاة.</div></div>
-  </a>
-  <a class="premium-resource-card" href="prophets-duas-ar.html">
-    <div class="premium-resource-icon">🤲</div>
-    <div><div class="premium-resource-title">قلعة المسلمين</div><div class="premium-resource-text">أدعية بمعنى صحيح وأدب.</div></div>
-  </a>
-  <a class="premium-resource-card" href="articles-ar.html">
-    <div class="premium-resource-icon">✨</div>
-    <div><div class="premium-resource-title">المقالات</div><div class="premium-resource-text">مواد قصيرة نافعة بلا ضجيج.</div></div>
-  </a>
+<a class="premium-resource-card" href="names-ar.html">
+<div class="premium-resource-icon">☝️</div>
+<div><div class="premium-resource-title">الأسماء الحسنى</div><div class="premium-resource-text">معانٍ وتأملات وتقوية للإيمان.</div></div>
+</a>
+<a class="premium-resource-card" href="qibla-ar.html">
+<div class="premium-resource-icon">🧭</div>
+<div><div class="premium-resource-title">القبلة</div><div class="premium-resource-text">اتجاه سريع للصلاة.</div></div>
+</a>
+<a class="premium-resource-card" href="prophets-duas-ar.html">
+<div class="premium-resource-icon">🤲</div>
+<div><div class="premium-resource-title">حصن المسلم</div><div class="premium-resource-text">أدعية بمعنى صحيح وأدب.</div></div>
+</a>
+<a class="premium-resource-card" href="articles-ar.html">
+<div class="premium-resource-icon">✨</div>
+<div><div class="premium-resource-title">المقالات</div><div class="premium-resource-text">مواد قصيرة نافعة بلا ضجيج.</div></div>
+</a>
+<a class="premium-resource-card" href="adhkar-ar.html">
+<div class="premium-resource-icon">🌿</div>
+<div><div class="premium-resource-title">الأذكار</div><div class="premium-resource-text">أذكار الصباح والمساء للقراءة اليومية.</div></div>
+</a>
+<a class="premium-resource-card" href="support-project-ar.html">
+<div class="premium-resource-icon">🤍</div>
+<div><div class="premium-resource-title">الصدقة الخفية</div><div class="premium-resource-text">الصدقة في السر — لله لا للناس</div></div>
+</a>
 </div>
-
-<div class="about-project-card">
-  <div class="about-project-title">عن BarakaWay</div>
-  <div class="about-project-text">تم جمع فكرة المشروع ومبادئه وسبب المجهولية في كتلة هادئة تبني الثقة، حتى يفهم المستخدم المعنى دون روابط متفرقة كثيرة في الشاشة الرئيسية.</div>
-  <div class="about-project-actions">
-    <a href="about-ar.html">عن المشروع</a>
-    <a href="principles-ar.html">المبادئ</a>
-    <a href="why-anonymous-ar.html">لماذا مجهول</a>
-  </div>
-</div>
-
 <div class="home-primary-support">
-  <a href="support-project-ar.html" class="support-project-btn"><span class="support-project-btn-shine"></span><span class="support-project-btn-text">دعم المشروع</span></a>
+<a class="support-project-btn" href="support-project-ar.html"><span class="support-project-btn-shine"></span><span class="support-project-btn-text">دعم المشروع</span></a>
 </div>
-
-<div class="share-overlay" id="shareOverlay" aria-hidden="true">
-  <div class="share-sheet" role="dialog" aria-modal="true" aria-labelledby="shareTitle">
-    <div class="share-handle"></div>
-    <div class="share-title" id="shareTitle">مشاركة التطبيق</div>
-    <div class="share-subtitle">اختر طريقة مشاركة التطبيق</div>
-    <div class="share-grid">
-      <button class="share-action share-telegram" type="button" data-share="telegram"><div class="share-icon">T</div><span>Telegram</span></button>
-      <button class="share-action share-whatsapp" type="button" data-share="whatsapp"><div class="share-icon">W</div><span>WhatsApp</span></button>
-      <button class="share-action share-facebook" type="button" data-share="facebook"><div class="share-icon">f</div><span>Facebook</span></button>
-      <button class="share-action share-x" type="button" data-share="x"><div class="share-icon">X</div><span>X</span></button>
-      <button class="share-action share-linkedin" type="button" data-share="linkedin"><div class="share-icon">in</div><span>LinkedIn</span></button>
-      <button class="share-action share-email" type="button" data-share="email"><div class="share-icon">@</div><span>Email</span></button>
-      <button class="share-action share-copy" type="button" data-share="copy"><div class="share-icon">⧉</div><span>نسخ الرابط</span></button>
-      <button class="share-action share-more" type="button" data-share="more"><div class="share-icon">⋯</div><span>المزيد</span></button>
-    </div>
-    <div class="share-copy-msg" id="shareCopyMsg">تم نسخ رابط التطبيق.</div>
-    <button class="share-close" id="shareCloseBtn" type="button">إغلاق</button>
-  </div>
+<a aria-label="ميزات BarakaWay PRO" class="baraka-pro-promo" href="pro-ar.html">
+<div class="baraka-pro-top">
+<span class="baraka-pro-badge">نسخة PRO</span>
+<span class="baraka-pro-price">$1.99 / شهرياً</span>
 </div>
-
-<div class="install-help-overlay" id="installHelpOverlay" aria-hidden="true">
-  <div class="install-help-sheet" role="dialog" aria-modal="true" aria-labelledby="installHelpTitle">
-    <div class="install-help-title" id="installHelpTitle">تثبيت التطبيق</div>
-    <div class="install-help-text">إذا لم تظهر نافذة التثبيت التلقائية، فاستخدم الخطوات التالية.</div>
-    <ol class="install-help-steps">
-      <li>على Android افتح الصفحة في المتصفح الخارجي ثم ثبّت التطبيق من هناك.</li>
-      <li>على iPhone افتح الصفحة في Safari.</li>
-      <li>ثم اختر «مشاركة» ← «إضافة إلى الشاشة الرئيسية».</li>
-    </ol>
-    <div class="install-help-actions">
-      <button class="install-help-primary" id="installHelpPrimaryBtn" type="button">فتح في المتصفح</button>
-      <button class="install-help-secondary" id="installHelpCopyBtn" type="button">نسخ الرابط</button>
-    </div>
-    <button class="install-help-close" id="installHelpCloseBtn" type="button">إغلاق</button>
-  </div>
+<h2 class="baraka-pro-title">ميزات BarakaWay PRO</h2>
+<p class="baraka-pro-text">باشتراكك في نسخة PRO أنت تدعم تطوير التطبيق، والميزات الجديدة، والتحديثات، والعمل المستقر، وانتشار المشروع حتى ينتفع به مزيد من المسلمين كل يوم.</p>
+</a>
+<div aria-hidden="true" class="share-overlay" id="shareOverlay">
+<div aria-labelledby="shareTitle" aria-modal="true" class="share-sheet" role="dialog">
+<div class="share-handle"></div>
+<div class="share-title" id="shareTitle">مشاركة التطبيق</div>
+<div class="share-subtitle">اختر طريقة مشاركة التطبيق</div>
+<div class="share-grid">
+<button class="share-action share-telegram" data-share="telegram" type="button"><div class="share-icon">T</div><span>Telegram</span></button>
+<button class="share-action share-whatsapp" data-share="whatsapp" type="button"><div class="share-icon">W</div><span>WhatsApp</span></button>
+<button class="share-action share-facebook" data-share="facebook" type="button"><div class="share-icon">f</div><span>Facebook</span></button>
+<button class="share-action share-x" data-share="x" type="button"><div class="share-icon">X</div><span>X</span></button>
+<button class="share-action share-linkedin" data-share="linkedin" type="button"><div class="share-icon">in</div><span>LinkedIn</span></button>
+<button class="share-action share-email" data-share="email" type="button"><div class="share-icon">@</div><span>Email</span></button>
+<button class="share-action share-copy" data-share="copy" type="button"><div class="share-icon">⧉</div><span>نسخ الرابط</span></button>
+<button class="share-action share-more" data-share="more" type="button"><div class="share-icon">⋯</div><span>المزيد</span></button>
 </div>
-
+<div class="share-copy-msg" id="shareCopyMsg">تم نسخ رابط التطبيق.</div>
+<button class="share-close" id="shareCloseBtn" type="button">إغلاق</button>
+</div>
+</div>
+<div aria-hidden="true" class="install-help-overlay" id="installHelpOverlay">
+<div aria-labelledby="installHelpTitle" aria-modal="true" class="install-help-sheet" role="dialog">
+<div class="install-help-title" id="installHelpTitle">تثبيت التطبيق</div>
+<div class="install-help-text">إذا لم تظهر نافذة التثبيت التلقائية، فاستخدم الخطوات التالية.</div>
+<ol class="install-help-steps">
+<li>على Android افتح الصفحة في المتصفح الخارجي ثم ثبّت التطبيق من هناك.</li>
+<li>على iPhone افتح الصفحة في Safari.</li>
+<li>ثم اختر «مشاركة» ← «إضافة إلى الشاشة الرئيسية».</li>
+</ol>
+<div class="install-help-actions">
+<button class="install-help-primary" id="installHelpPrimaryBtn" type="button">فتح في المتصفح</button>
+<button class="install-help-secondary" id="installHelpCopyBtn" type="button">نسخ الرابط</button>
+</div>
+<button class="install-help-close" id="installHelpCloseBtn" type="button">إغلاق</button>
+</div>
+</div>
 <script>
 function changeLanguageChoice(){localStorage.removeItem("siteLanguage");sessionStorage.setItem("forceLanguageSelect","1");window.location.href="index.html";}
 function openPrayerTimesPage(event){if(event&&event.target&&event.target.closest&&event.target.closest(".home-prayer-share-btn")) return;window.location.href="prayer-times-ar.html";}
@@ -2883,7 +3068,7 @@ function closeShareOverlay(){const o=document.getElementById("shareOverlay");if(
 async function copyShareLink(){const url=getShareUrl(),msg=document.getElementById("shareCopyMsg");try{if(navigator.clipboard&&window.isSecureContext){await navigator.clipboard.writeText(url);}else{const t=document.createElement("textarea");t.value=url;t.setAttribute("readonly","readonly");t.style.position="absolute";t.style.left="-9999px";document.body.appendChild(t);t.select();document.execCommand("copy");document.body.removeChild(t);}if(msg){msg.classList.add("show");setTimeout(function(){msg.classList.remove("show");},2200);}}catch(e){window.prompt("انسخ الرابط وافتحه في المتصفح الخارجي:",url);}}
 function openShareTarget(type){const url=encodeURIComponent(getShareUrl()),text=encodeURIComponent("BarakaWay");let target="";if(type==="telegram") target="https://t.me/share/url?url="+url+"&text="+text;if(type==="whatsapp") target="https://wa.me/?text="+text+"%20"+url;if(type==="facebook") target="https://www.facebook.com/sharer/sharer.php?u="+url;if(type==="x") target="https://twitter.com/intent/tweet?text="+text+"&url="+url;if(type==="linkedin") target="https://www.linkedin.com/sharing/share-offsite/?url="+url;if(type==="email") target="mailto:?subject=Hidden%20Sadaqa&body="+text+"%0A"+url;if(target) window.open(target,"_blank","noopener,noreferrer");}
 async function shareApp(){const data={title:"BarakaWay",text:"BarakaWay",url:getShareUrl()};if(navigator.share){try{await navigator.share(data);return;}catch(e){}}openShareOverlay();}
-async function sharePrayerTimes(event){if(event){event.preventDefault();event.stopPropagation();}const text=typeof window.buildPrayerTimesShareText==="function"?window.buildPrayerTimesShareText():"BarakaWay\nمواقيت الصلاة";if(navigator.share){try{await navigator.share({title:"مواقيت الصلاة",text:text});return;}catch(e){}}try{if(navigator.clipboard&&window.isSecureContext){await navigator.clipboard.writeText(text);}else{const t=document.createElement("textarea");t.value=text;t.setAttribute("readonly","readonly");t.style.position="absolute";t.style.left="-9999px";document.body.appendChild(t);t.select();document.execCommand("copy");document.body.removeChild(t);}alert("تم نسخ مواقيت الصلاة. يمكنك الآن إرسالها في تطبيق المراسلة.");}catch(e){window.prompt("انسخ مواقيت الصلاة:",text);}}
+async function sharePrayerTimes(event){if(event){event.preventDefault();event.stopPropagation();}const text=typeof window.buildPrayerTimesShareText==="function"?window.buildPrayerTimesShareText():"BarakaWay\nمواقيت الصلاة";if(navigator.share){try{await navigator.share({title:"مواقيت الصلاة",text:text});return;}catch(e){}}try{if(navigator.clipboard&&window.isSecureContext){await navigator.clipboard.writeText(text);}else{const t=document.createElement("textarea");t.value=text;t.setAttribute("readonly","readonly");t.style.position="absolute";t.style.left="-9999px";document.body.appendChild(t);t.select();document.execCommand("copy");document.body.removeChild(t);}alert("تم نسخ مواقيت الصلاة. يمكنك الآن إرسالها في المراسلة.");}catch(e){window.prompt("انسخ مواقيت الصلاة:",text);}}
 window.addEventListener("beforeinstallprompt",function(e){e.preventDefault();deferredInstallPrompt=e;updateInstallButtonVisibility();});
 window.addEventListener("appinstalled",function(){deferredInstallPrompt=null;updateInstallButtonVisibility();});
 window.addEventListener("pageshow",function(){updateInstallButtonVisibility();});
@@ -2897,7 +3082,7 @@ window.addEventListener("DOMContentLoaded",function(){const installBtn=document.
   if (window.innerWidth > 700) return;
 
   const promoTexts = [
-    { text: "كل شيء قريب", brand: false },
+    { text: "كل الخدمات قريبة", brand: false },
     { text: "TasksLocal", brand: true }
   ];
 
@@ -2922,7 +3107,6 @@ window.addEventListener("DOMContentLoaded",function(){const installBtn=document.
   }, 2800);
 })();
 </script>
-
 <script>
 (function(){
   function initPremiumGuide(){
@@ -3014,7 +3198,6 @@ window.addEventListener("DOMContentLoaded",function(){const installBtn=document.
   });
 })();
 </script>
-
 <script>
 (function(){
   const elName = document.getElementById('homePrayerName');
@@ -3148,8 +3331,6 @@ window.addEventListener("DOMContentLoaded",function(){const installBtn=document.
   fetchPrayerWidget();
 })();
 </script>
-
-
 <script>
 (function(){
   function getLocalDateKey(date){
@@ -3580,9 +3761,6 @@ window.addEventListener("DOMContentLoaded",function(){const installBtn=document.
   renderGoal();
 })();
 </script>
-
-
-
 <script>
 (function(){
   const todayKey = new Date().toISOString().slice(0,10);
@@ -3919,9 +4097,6 @@ window.addEventListener("DOMContentLoaded",function(){const installBtn=document.
   if(practice) practice.textContent = goals[dayNumber % goals.length];
 })();
 </script>
-
-
-
 <script>
 (function(){
   const goalCard = document.getElementById('dailyGoalCard');
@@ -4146,7 +4321,6 @@ window.addEventListener("DOMContentLoaded",function(){const installBtn=document.
   setInterval(renderAll, 60000);
 })();
 </script>
-
 <script>
 (function(){
   const ayahActions = [
@@ -4291,8 +4465,6 @@ window.addEventListener("DOMContentLoaded",function(){const installBtn=document.
   }
 })();
 </script>
-
-
 <script>
 (function(){
   const challenges = [
@@ -4361,8 +4533,6 @@ window.addEventListener("DOMContentLoaded",function(){const installBtn=document.
   window.addEventListener('pageshow', renderChallenge);
 })();
 </script>
-
-
 <script>
 (function(){
   const MICRO_QUESTIONS = [
@@ -4684,8 +4854,6 @@ window.addEventListener("DOMContentLoaded",function(){const installBtn=document.
   }, 1500);
 })();
 </script>
-
-
 <script>
 (function(){
   const TOGGLE_KEY = 'barakaway_tahajjud_alarm_enabled_ar_v1';
@@ -4847,10 +5015,8 @@ window.addEventListener("DOMContentLoaded",function(){const installBtn=document.
   });
 })();
 </script>
-
 <script src="/theme-toggle.js"></script>
 <script src="/bottom-nav.js"></script>
-
 <script>
 (function(){
   const TASK_PREFIX = "barakaway_today_ar_";
@@ -4997,10 +5163,208 @@ window.addEventListener("DOMContentLoaded",function(){const installBtn=document.
   setInterval(renderNameCounter, 1000);
 })();
 </script>
+</div>
+<div aria-hidden="true" class="my-saved-overlay" id="barakaway-my-modal">
+<div aria-labelledby="barakawayMyTitle" aria-modal="true" class="my-saved-sheet" role="dialog">
+<div class="my-saved-head">
+<div class="my-saved-title" id="barakawayMyTitle">محفوظاتي</div>
+<button aria-label="إغلاق" class="my-saved-close" data-my-close="" type="button">×</button>
+</div>
+<div class="my-saved-subtitle">ستجتمع هنا السور والآيات والمواد المحفوظة. هذا القسم مهيأ للقرآن والأذكار وصفحات التطبيق القادمة.</div>
+<div class="my-saved-list" id="barakawayMyList"></div>
+</div>
+</div>
+<script id="barakaway-home-nav-upgrade-script">
+(function(){
+  const MY_LINK = "#barakaway-my";
+  const LEARNING_LINK = "learning-ar.html";
 
+  function svgBookmark(){
+    return '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 4.5A1.5 1.5 0 0 1 7.5 3h9A1.5 1.5 0 0 1 18 4.5V21l-6-3.5L6 21V4.5z"/></svg>';
+  }
+
+  function svgPlay(){
+    return '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5v14l11-7-11-7z"/><path d="M4 5v14"/></svg>';
+  }
+
+  function normalizeText(value){
+    return String(value || "").trim().toLowerCase();
+  }
+
+  function updateBottomNav(){
+    const items = document.querySelectorAll(".bottom-app-nav-item");
+    if(!items.length) return false;
+
+    items.forEach(function(item){
+      const label = item.querySelector(".bottom-app-nav-label");
+      const icon = item.querySelector(".bottom-app-nav-icon");
+      const labelText = normalizeText(label ? label.textContent : item.textContent);
+
+      if(labelText === "الأذكار"){
+        item.setAttribute("href", MY_LINK);
+        item.dataset.barakaNavRole = "my";
+        if(label) label.textContent = "محفوظاتي";
+        if(icon) icon.innerHTML = svgBookmark();
+        item.setAttribute("aria-label", "محفوظاتي: السور والآيات والمواد المحفوظة");
+        item.classList.remove("active");
+      }
+
+      if(labelText === "الصدقة"){
+        item.setAttribute("href", LEARNING_LINK);
+        item.dataset.barakaNavRole = "learning";
+        if(label) label.textContent = "التعلّم";
+        if(icon) icon.innerHTML = svgPlay();
+        item.setAttribute("aria-label", "التعلّم: فيديوهات ومواد نافعة");
+        item.classList.remove("active");
+      }
+    });
+
+    return true;
+  }
+
+  function readJson(key, fallback){
+    try{return JSON.parse(localStorage.getItem(key) || JSON.stringify(fallback));}
+    catch(e){return fallback;}
+  }
+
+  function collectSaved(){
+    const items = [];
+
+    const quranSaved = readJson("barakaway:quran:surah:ru:lastSaved", null);
+    if(quranSaved && quranSaved.href){
+      items.push({
+        title: quranSaved.type === "ayah"
+          ? "القرآن · آية محفوظة " + (quranSaved.ayahNumber || "")
+          : "القرآن · سورة محفوظة",
+        meta: quranSaved.type === "ayah"
+          ? ((quranSaved.surahTitle || "سورة") + " · " + (quranSaved.meaning || "").slice(0, 90))
+          : ((quranSaved.title || "سورة") + " · " + (quranSaved.meta || "")),
+        href: quranSaved.href
+      });
+    }
+
+    const quranFavs = readJson("barakaway:quran:surah:ru:favorites", []);
+    quranFavs.slice(0, 12).forEach(function(item){
+      if(item && item.href){
+        items.push({
+          title: "سورة محفوظة · " + (item.title || ("رقم " + (item.number || ""))),
+          meta: (item.arabic || "") + (item.meta ? " · " + item.meta : ""),
+          href: item.href
+        });
+      }
+    });
+
+    const genericKeys = [
+      "barakaway:adhkar:ru:saved",
+      "barakaway:askars:ru:saved",
+      "barakaway:duas:ru:saved"
+    ];
+
+    genericKeys.forEach(function(key){
+      const saved = readJson(key, []);
+      if(Array.isArray(saved)){
+        saved.slice(0, 8).forEach(function(item){
+          if(item && (item.href || item.url)){
+            items.push({
+              title: item.title || item.name || "مادة محفوظة",
+              meta: item.meta || item.text || "BarakaWay",
+              href: item.href || item.url
+            });
+          }
+        });
+      }
+    });
+
+    const seen = new Set();
+    return items.filter(function(item){
+      const id = item.title + "|" + item.href;
+      if(seen.has(id)) return false;
+      seen.add(id);
+      return true;
+    });
+  }
+
+  function renderMySaved(){
+    const list = document.getElementById("barakawayMyList");
+    if(!list) return;
+
+    const items = collectSaved();
+
+    if(!items.length){
+      list.innerHTML = '<div class="my-saved-empty">لا توجد مواد محفوظة هنا بعد. احفظ سورة أو آية من القرآن — وستظهر في هذا القسم.</div>';
+      return;
+    }
+
+    list.innerHTML = items.map(function(item){
+      return '<a class="my-saved-item" href="' + String(item.href || "#").replace(/"/g, "&quot;") + '">' +
+        '<div class="my-saved-item-title">' + String(item.title || "محفوظ").replace(/</g, "&lt;") + '</div>' +
+        '<div class="my-saved-item-meta">' + String(item.meta || "").replace(/</g, "&lt;") + '</div>' +
+      '</a>';
+    }).join("");
+  }
+
+  function openMySaved(event){
+    if(event){
+      event.preventDefault();
+      event.stopPropagation();
+    }
+    renderMySaved();
+    const modal = document.getElementById("barakaway-my-modal");
+    if(modal){
+      modal.classList.add("open");
+      modal.setAttribute("aria-hidden", "false");
+    }
+  }
+
+  function closeMySaved(){
+    const modal = document.getElementById("barakaway-my-modal");
+    if(modal){
+      modal.classList.remove("open");
+      modal.setAttribute("aria-hidden", "true");
+    }
+  }
+
+  document.addEventListener("click", function(event){
+    const myNav = event.target.closest('[data-baraka-nav-role="my"], a[href="#barakaway-my"]');
+    if(myNav){
+      openMySaved(event);
+      return;
+    }
+
+    if(event.target.closest("[data-my-close]")){
+      event.preventDefault();
+      closeMySaved();
+      return;
+    }
+
+    const overlay = event.target.closest("#barakaway-my-modal");
+    if(overlay && event.target === overlay){
+      closeMySaved();
+    }
+  }, true);
+
+  function boot(){
+    updateBottomNav();
+
+    const navObserver = new MutationObserver(function(){
+      updateBottomNav();
+    });
+    navObserver.observe(document.body, {childList:true, subtree:true});
+
+    let tries = 0;
+    const timer = setInterval(function(){
+      tries += 1;
+      updateBottomNav();
+      if(tries > 20) clearInterval(timer);
+    }, 250);
+  }
+
+  if(document.readyState === "loading"){
+    document.addEventListener("DOMContentLoaded", boot);
+  }else{
+    boot();
+  }
+})();
+</script>
 </body>
 </html>
-
-
-
-
