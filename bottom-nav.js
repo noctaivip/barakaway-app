@@ -142,13 +142,16 @@
   ];
 
 function activeKey() {
-  var p = window.location.pathname.toLowerCase();
+  var p = decodeURIComponent(window.location.pathname || '').toLowerCase();
+  var fileName = p.split('/').pop() || '';
   var title = (document.title || '').toLowerCase();
   var h1 = ((document.querySelector('h1') || {}).textContent || '').toLowerCase();
   var bodyClass = (document.body.className || '').toLowerCase();
-  var pageText = p + ' ' + title + ' ' + h1 + ' ' + bodyClass;
+  var pageText = p + ' ' + fileName + ' ' + title + ' ' + h1 + ' ' + bodyClass;
 
   if (
+    fileName.indexOf('favorites-') === 0 ||
+    fileName.indexOf('favorite-') === 0 ||
     pageText.indexOf('favorites') !== -1 ||
     pageText.indexOf('favorite') !== -1 ||
     pageText.indexOf('favourites') !== -1 ||
@@ -156,9 +159,15 @@ function activeKey() {
     pageText.indexOf('избран') !== -1
   ) return 'favorites';
 
-  if (pageText.indexOf('quran') !== -1 || pageText.indexOf('surah') !== -1 || pageText.indexOf('коран') !== -1) return 'quran';
+  if (
+    fileName.indexOf('quran-') === 0 ||
+    pageText.indexOf('quran') !== -1 ||
+    pageText.indexOf('surah') !== -1 ||
+    pageText.indexOf('коран') !== -1
+  ) return 'quran';
 
   if (
+    fileName.indexOf('holidays-') === 0 ||
     pageText.indexOf('holiday') !== -1 ||
     pageText.indexOf('holidays') !== -1 ||
     pageText.indexOf('eid') !== -1 ||
@@ -168,6 +177,7 @@ function activeKey() {
   ) return 'holidays';
 
   if (
+    fileName.indexOf('learning-') === 0 ||
     pageText.indexOf('learning') !== -1 ||
     pageText.indexOf('learn') !== -1 ||
     pageText.indexOf('education') !== -1 ||
@@ -176,8 +186,9 @@ function activeKey() {
   ) return 'learning';
 
   if (
+    fileName.indexOf('home-') === 0 ||
+    fileName.indexOf('index') === 0 ||
     pageText.indexOf('home') !== -1 ||
-    pageText.indexOf('index') !== -1 ||
     pageText.indexOf('сегодня') !== -1 ||
     p === '/' ||
     p === ''
