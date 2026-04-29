@@ -437,28 +437,99 @@ loadSurah();
   function loadImg(src){return new Promise(res=>{if(!src)return res(null);let im=new Image();im.onload=()=>res(im);im.onerror=()=>res(null);im.src=src;});}
   function blobFromCanvas(c){return new Promise(res=>c.toBlob(res,'image/png',0.96));}
 
+  function linesFor(ctx,text,maxW){
+    const raw=String(text||'').replace(/\s+/g,' ').trim();
+    if(!raw)return [];
+    const words=raw.split(' ');
+    const lines=[];
+    let line='';
+    for(const word of words){
+      const test=line?line+' '+word:word;
+      if(ctx.measureText(test).width>maxW&&line){
+        lines.push(line);
+        line=word;
+      }else{
+        line=test;
+      }
+    }
+    if(line)lines.push(line);
+    return lines;
+  }
+
+  function fitWrapped(ctx,text,maxW,fontFamily,weight,startSize,minSize,maxLines){
+    let size=startSize,lines=[];
+    while(size>=minSize){
+      ctx.font=weight+' '+size+'px '+fontFamily;
+      lines=linesFor(ctx,text,maxW);
+      if(!maxLines||lines.length<=maxLines)break;
+      size-=2;
+    }
+    return {size:size,lines:lines,lineHeight:Math.round(size*1.28)};
+  }
+
+  function drawCenteredLines(ctx,lines,x,y,lineHeight,maxLines){
+    const out=maxLines?lines.slice(0,maxLines):lines;
+    out.forEach(function(line,i){ctx.fillText(line,x,y+i*lineHeight);});
+    return y+out.length*lineHeight;
+  }
+
   async function makePng(item){
     const logo=await loadImg(LOGO);
-    const canvas=document.createElement('canvas'),scale=2,w=900,h=1180;
+    const isAyah=item.type==='ayah';
+    const textVolume=String(item.arabic||'').length+String(item.meaning||item.translit||'').length;
+    const isLong=isAyah&&textVolume>230;
+    const canvas=document.createElement('canvas'),scale=2,w=900,h=isLong?1380:1180;
     canvas.width=w*scale;canvas.height=h*scale;
     const ctx=canvas.getContext('2d');ctx.scale(scale,scale);
+    const fontFamily='system-ui,-apple-system,Segoe UI,sans-serif';
     const isLight=document.documentElement.classList.contains('light-mode')&&!document.documentElement.classList.contains('dark-mode');
     const p=isLight?{bg0:'#f8fbf7',bg1:'#eef5ef',bg2:'#fff8df',outer:'rgba(255,255,255,.94)',i0:'#fff',i1:'#f7fbf7',i2:'#fff7df',border:'rgba(181,138,54,.54)',strong:'rgba(138,104,31,.64)',white:'#111814',gold:'#8a681f',soft:'#b58a36'}:{bg0:'#05110d',bg1:'#0b1b18',bg2:'#050708',outer:'rgba(8,16,16,.88)',i0:'#123522',i1:'#10191b',i2:'#121016',border:'rgba(215,181,109,.60)',strong:'rgba(240,216,145,.66)',white:'#fff',gold:'#f0d891',soft:'#d7b56d'};
     let bg=ctx.createLinearGradient(0,0,0,h);bg.addColorStop(0,p.bg0);bg.addColorStop(.48,p.bg1);bg.addColorStop(1,p.bg2);ctx.fillStyle=bg;ctx.fillRect(0,0,w,h);
     roundRect(ctx,50,52,w-100,h-104,58);ctx.fillStyle=p.outer;ctx.fill();ctx.strokeStyle=p.border;ctx.lineWidth=2.4;ctx.stroke();
     roundRect(ctx,86,92,w-172,h-184,46);let cg=ctx.createLinearGradient(86,92,w-86,h-92);cg.addColorStop(0,p.i0);cg.addColorStop(.5,p.i1);cg.addColorStop(1,p.i2);ctx.fillStyle=cg;ctx.fill();ctx.strokeStyle=p.strong;ctx.lineWidth=2;ctx.stroke();
     ctx.textAlign='center';ctx.textBaseline='top';
-    if(logo)ctx.drawImage(logo,(w-150)/2,112,150,150*(logo.height/logo.width));
-    ctx.direction='ltr';ctx.fillStyle=p.white;ctx.font='900 36px system-ui,-apple-system,Segoe UI,sans-serif';ctx.fillText('BarakaWay App',w/2,300);
-    ctx.direction='rtl';ctx.fillStyle=p.gold;ctx.font='850 42px system-ui,-apple-system,Segoe UI,sans-serif';ctx.fillText('بِسْمِ ٱللَّٰهِ ٱلرَّحْمَـٰنِ ٱلرَّحِيمِ',w/2,374);
-    if(item.type==='ayah'){ctx.direction='ltr';ctx.fillStyle=p.white;ctx.font='950 48px system-ui,-apple-system,Segoe UI,sans-serif';ctx.fillText('Сура '+item.surahNumber+' · Аят '+item.ayahNumber,w/2,482);ctx.direction='rtl';ctx.fillStyle=p.gold;ctx.font='900 54px system-ui,-apple-system,Segoe UI,sans-serif';wrap(ctx,item.arabic||'',w/2,585,710,70);ctx.direction='ltr';ctx.fillStyle=p.soft;ctx.font='800 25px system-ui,-apple-system,Segoe UI,sans-serif';wrap(ctx,item.meaning||item.translit||'',w/2,760,700,36);}
-    else{ctx.direction='ltr';ctx.fillStyle=p.white;ctx.font='950 48px system-ui,-apple-system,Segoe UI,sans-serif';ctx.fillText('Сура '+item.number+' — '+item.title,w/2,500);ctx.direction='rtl';ctx.fillStyle=p.gold;ctx.font='900 68px system-ui,-apple-system,Segoe UI,sans-serif';ctx.fillText(item.arabic||'',w/2,630);ctx.direction='ltr';ctx.fillStyle=p.soft;ctx.font='850 27px system-ui,-apple-system,Segoe UI,sans-serif';ctx.fillText(item.meta||'Священный Коран',w/2,760);}
-    ornament(ctx,w,p,isLight);
+    const logoW=isLong?126:150;
+    if(logo)ctx.drawImage(logo,(w-logoW)/2,isLong?112:112,logoW,logoW*(logo.height/logo.width));
+    ctx.direction='ltr';ctx.fillStyle=p.white;ctx.font='900 '+(isLong?34:36)+'px '+fontFamily;ctx.fillText('BarakaWay App',w/2,isLong?278:300);
+    ctx.direction='rtl';ctx.fillStyle=p.gold;ctx.font='850 '+(isLong?36:42)+'px '+fontFamily;ctx.fillText('بِسْمِ ٱللَّٰهِ ٱلرَّحْمَـٰنِ ٱلرَّحِيمِ',w/2,isLong?350:374);
+
+    if(isAyah){
+      ctx.direction='ltr';ctx.fillStyle=p.white;ctx.font='950 '+(isLong?44:48)+'px '+fontFamily;
+      ctx.fillText('Сура '+item.surahNumber+' · Аят '+item.ayahNumber,w/2,isLong?452:482);
+
+      ctx.direction='rtl';ctx.fillStyle=p.gold;
+      const arabicFit=fitWrapped(ctx,item.arabic||'',710,fontFamily,'900',isLong?42:54,32,isLong?7:5);
+      ctx.font='900 '+arabicFit.size+'px '+fontFamily;
+      const arabicY=isLong?550:585;
+      const afterArabic=drawCenteredLines(ctx,arabicFit.lines,w/2,arabicY,arabicFit.lineHeight,isLong?7:5);
+
+      ctx.direction='ltr';ctx.fillStyle=p.soft;
+      const bottomLimit=(isLong?1040:910);
+      let meaningStart=afterArabic+(isLong?28:30);
+      let meaningSize=isLong?23:25;
+      let meaningFit;
+      do{
+        meaningFit=fitWrapped(ctx,item.meaning||item.translit||'',700,fontFamily,'800',meaningSize,17,0);
+        meaningSize-=2;
+      }while(meaningStart+meaningFit.lines.length*meaningFit.lineHeight>bottomLimit&&meaningSize>=17);
+      ctx.font='800 '+meaningFit.size+'px '+fontFamily;
+      drawCenteredLines(ctx,meaningFit.lines,w/2,meaningStart,meaningFit.lineHeight,0);
+    }else{
+      ctx.direction='ltr';ctx.fillStyle=p.white;ctx.font='950 48px '+fontFamily;ctx.fillText('Сура '+item.number+' — '+item.title,w/2,500);
+      ctx.direction='rtl';ctx.fillStyle=p.gold;ctx.font='900 68px '+fontFamily;ctx.fillText(item.arabic||'',w/2,630);
+      ctx.direction='ltr';ctx.fillStyle=p.soft;ctx.font='850 27px '+fontFamily;ctx.fillText(item.meta||'Священный Коран',w/2,760);
+    }
+    ornament(ctx,w,p,isLight,h);
     const blob=await blobFromCanvas(canvas);if(!blob)return null;
-    return new File([blob],item.type==='ayah'?'barakaway-surah-'+item.surahNumber+'-ayah-'+item.ayahNumber+'.png':'barakaway-surah-'+item.number+'.png',{type:'image/png'});
+    return new File([blob],isAyah?'barakaway-surah-'+item.surahNumber+'-ayah-'+item.ayahNumber+'.png':'barakaway-surah-'+item.number+'.png',{type:'image/png'});
   }
-  function wrap(ctx,text,x,y,maxW,lh){let words=String(text||'').split(' '),line='',n=0;for(const word of words){let test=line?line+' '+word:word;if(ctx.measureText(test).width>maxW&&line){ctx.fillText(line,x,y+n*lh);line=word;n++;}else line=test;}if(line)ctx.fillText(line,x,y+n*lh);}
-  function ornament(ctx,w,p,isLight){ctx.save();const y=948,ow=620,oh=112,ox=(w-ow)/2;roundRect(ctx,ox,y-oh/2,ow,oh,38);let g=ctx.createLinearGradient(ox,y-56,ox+ow,y+56);g.addColorStop(0,isLight?'rgba(45,122,70,.10)':'rgba(10,40,26,.78)');g.addColorStop(.5,isLight?'rgba(181,138,54,.14)':'rgba(240,216,145,.18)');g.addColorStop(1,isLight?'rgba(45,122,70,.10)':'rgba(10,40,26,.78)');ctx.fillStyle=g;ctx.fill();ctx.strokeStyle=p.strong;ctx.lineWidth=2;ctx.stroke();ctx.strokeStyle=isLight?'rgba(138,104,31,.58)':'rgba(240,216,145,.68)';ctx.lineWidth=2.1;ctx.beginPath();ctx.moveTo(ox+70,y);ctx.bezierCurveTo(ox+160,y-48,ox+238,y+48,ox+310,y);ctx.bezierCurveTo(ox+382,y-48,ox+460,y+48,ox+ow-70,y);ctx.stroke();ctx.restore();}
+
+  function wrap(ctx,text,x,y,maxW,lh){
+    const lines=linesFor(ctx,text,maxW);
+    return drawCenteredLines(ctx,lines,x,y,lh,0);
+  }
+
+  function ornament(ctx,w,p,isLight,hOpt){ctx.save();const y=(hOpt||1180)-232,ow=620,oh=112,ox=(w-ow)/2;roundRect(ctx,ox,y-oh/2,ow,oh,38);let g=ctx.createLinearGradient(ox,y-56,ox+ow,y+56);g.addColorStop(0,isLight?'rgba(45,122,70,.10)':'rgba(10,40,26,.78)');g.addColorStop(.5,isLight?'rgba(181,138,54,.14)':'rgba(240,216,145,.18)');g.addColorStop(1,isLight?'rgba(45,122,70,.10)':'rgba(10,40,26,.78)');ctx.fillStyle=g;ctx.fill();ctx.strokeStyle=p.strong;ctx.lineWidth=2;ctx.stroke();ctx.strokeStyle=isLight?'rgba(138,104,31,.58)':'rgba(240,216,145,.68)';ctx.lineWidth=2.1;ctx.beginPath();ctx.moveTo(ox+70,y);ctx.bezierCurveTo(ox+160,y-48,ox+238,y+48,ox+310,y);ctx.bezierCurveTo(ox+382,y-48,ox+460,y+48,ox+ow-70,y);ctx.stroke();ctx.restore();}
 
   function shareHtml(item){let isA=item.type==='ayah';return '<div class="quran-share-card">'+(LOGO?'<img class="quran-share-logo" src="'+esc(LOGO)+'" alt="BarakaWay">':'')+'<div class="quran-share-brand">BarakaWay App</div><div class="quran-share-bismillah">بِسْمِ ٱللَّٰهِ ٱلرَّحْمَـٰنِ ٱلرَّحِيمِ</div><div class="quran-share-main">'+(isA?'Сура '+esc(item.surahNumber)+' · Аят '+esc(item.ayahNumber):'Сура '+esc(item.number)+' — '+esc(item.title))+'</div><div class="quran-share-arabic">'+esc(item.arabic||'')+'</div><div class="quran-share-meta">'+esc(isA?item.meaning:item.meta)+'</div><div class="quran-share-limit-note"><strong>Будет создана PNG-карточка.</strong> Вместе с ней отправится ссылка на приложение.</div><div class="quran-share-actions"><button class="quran-share-button" type="button" data-share-confirm="1">Поделиться карточкой</button><button class="quran-share-button secondary" type="button" data-quran-close="share">Закрыть</button></div></div>';}
   function openShare(item){pendingShare=item;let root=document.getElementById('quran-share-card-root');if(root)root.innerHTML=shareHtml(item);openM('quran-share-modal');}
