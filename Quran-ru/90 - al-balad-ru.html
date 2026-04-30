@@ -186,6 +186,29 @@ html.light-mode .ayah-meaning{color:rgba(17,24,20,.72)!important;}
   .quran-reading-mode .ayah-arabic{font-size:23px!important;line-height:1.7!important;font-weight:400!important;}
 }
 </style>
+<style id="surah-quran-page-icon-sync-style">
+.surah-page-action.is-active[data-surah-page-action="favorite"] svg path,
+.surah-page-action.is-active[data-surah-page-action="save"] svg path,
+.ayah-action.is-active[data-ayah-action="save"] svg path{fill:currentColor!important;}
+.surah-page-action.is-active[data-surah-page-action="favorite"],
+.surah-page-action.is-active[data-surah-page-action="reading"],
+.surah-page-action.is-active[data-surah-page-action="save"],
+.surah-page-action.is-active[data-surah-page-action="theme"],
+.ayah-action.is-active[data-ayah-action="save"]{color:#fff!important;border-color:rgba(45,122,70,.34)!important;background:linear-gradient(135deg,#2d7a46,#4caf6a)!important;}
+</style>
+
+
+<style id="ayah-final-top-layout-style">
+.ayah-card{position:relative!important;padding-top:70px!important;}
+.ayah-index{display:none!important;}
+.ayah-toolbar{display:block!important;position:absolute!important;top:18px!important;right:18px!important;margin:0!important;padding:0!important;z-index:5!important;}
+.ayah-toolbar .play-btn,.ayah-toolbar>.play-btn{width:auto!important;min-width:auto!important;min-height:34px!important;padding:7px 11px!important;border-radius:10px!important;font-size:12.5px!important;line-height:1!important;white-space:nowrap!important;justify-self:auto!important;}
+.ayah-actions{position:absolute!important;top:18px!important;left:18px!important;display:flex!important;align-items:center!important;justify-content:flex-start!important;gap:8px!important;margin:0!important;padding:0!important;border-top:0!important;z-index:5!important;}
+.ayah-action{width:34px!important;height:34px!important;min-width:34px!important;border-radius:999px!important;}
+.ayah-action.is-active[data-ayah-action="save"] svg path,.surah-page-action.is-active[data-surah-page-action="favorite"] svg path,.surah-page-action.is-active[data-surah-page-action="save"] svg path{fill:currentColor!important;}
+.surah-page-action.is-active[data-surah-page-action="favorite"],.surah-page-action.is-active[data-surah-page-action="reading"],.surah-page-action.is-active[data-surah-page-action="save"],.surah-page-action.is-active[data-surah-page-action="theme"],.ayah-action.is-active[data-ayah-action="save"]{color:#fff!important;border-color:rgba(45,122,70,.34)!important;background:linear-gradient(135deg,#2d7a46,#4caf6a)!important;}
+@media(max-width:700px){.ayah-card{padding-top:64px!important;}.ayah-toolbar{top:16px!important;right:16px!important;}.ayah-actions{top:16px!important;left:16px!important;gap:7px!important;}.ayah-toolbar .play-btn,.ayah-toolbar>.play-btn{min-height:32px!important;padding:7px 10px!important;font-size:12px!important;}.ayah-action{width:32px!important;height:32px!important;min-width:32px!important;}}
+</style>
 </head>
 <body data-surah-arabic="البلد‎‎" data-surah-meta="Город · Сура 90 · 20 аятов · Мекканская" data-surah-number="90" data-surah-page-key="Quran-ru/90 - al-balad-ru.html" data-surah-title="Аль-Балад">
 <div class="container">
@@ -463,147 +486,44 @@ loadSurah();
 
 <script id="surah-production-actions-script">
 (function(){
-  const P='barakaway:quran:surah:ru:';
+  const P='barakaway:quran:ru:';
+  const KEY_FAVORITES=P+'favorites';
+  const KEY_LAST_SURAH=P+'lastSurah';
+  const KEY_LAST_AYAH=P+'lastAyah';
   const PAGE_KEY=document.body.dataset.surahPageKey||location.pathname;
-  const SURAH_NUMBER=document.body.dataset.surahNumber||'';
+  const SURAH_NUMBER=String(document.body.dataset.surahNumber||'');
   const SURAH_TITLE=document.body.dataset.surahTitle||document.querySelector('h1')?.textContent?.trim()||'Сура';
-  const SURAH_ARABIC=document.body.dataset.surahArabic||'';
-  const SURAH_META=document.body.dataset.surahMeta||'';
-  const LOGO='../assets/barakaway-logo.png';
-  const APP='https://play.google.com/store/apps/details?id=YOUR_APP_ID';
+  const SURAH_ARABIC=(document.body.dataset.surahArabic||'').replace('‎','');
+  const SURAH_META=document.body.dataset.surahMeta||document.querySelector('.subtitle')?.textContent?.trim()||'';
   let toastTimer=null,pendingShare=null;
-
   function rj(k,f){try{return JSON.parse(localStorage.getItem(k)||JSON.stringify(f));}catch(e){return f;}}
-  function wj(k,v){localStorage.setItem(k,JSON.stringify(v));}
-  function toast(m){let t=document.querySelector('.quran-toast');if(!t){t=document.createElement('div');t.className='quran-toast';document.body.appendChild(t);}t.textContent=m;t.classList.add('is-visible');clearTimeout(toastTimer);toastTimer=setTimeout(()=>t.classList.remove('is-visible'),2100);}
+  function wj(k,v){localStorage.setItem(k,JSON.stringify(v));try{window.dispatchEvent(new StorageEvent('storage',{key:k,newValue:JSON.stringify(v)}));}catch(e){}try{document.dispatchEvent(new CustomEvent('barakaway:quran-storage-updated',{detail:{key:k,value:v}}));}catch(e){}syncBottomFavorites();}
   function esc(v){return String(v||'').replaceAll('&','&amp;').replaceAll('<','&lt;').replaceAll('>','&gt;').replaceAll('"','&quot;').replaceAll("'","&#039;");}
-  function pageData(){return {type:'surah',key:PAGE_KEY,number:SURAH_NUMBER,title:SURAH_TITLE,arabic:SURAH_ARABIC,meta:SURAH_META,href:location.href};}
-  function ayahData(btn){const c=btn.closest('.ayah-card');const n=btn.dataset.ayahNumber||'';return {type:'ayah',key:PAGE_KEY+'#ayah-'+n,surahNumber:SURAH_NUMBER,surahTitle:SURAH_TITLE,ayahNumber:n,arabic:btn.dataset.ayahArabic||c?.querySelector('.ayah-arabic')?.textContent?.trim()||'',translit:btn.dataset.ayahTranslit||c?.querySelector('.ayah-translit')?.textContent?.trim()||'',meaning:btn.dataset.ayahMeaning||c?.querySelector('.ayah-meaning')?.textContent?.trim()||'',href:location.href.split('#')[0]+'#ayah-'+n};}
-  function favs(){return rj(P+'favorites',[]);}
-  function setFavs(x){wj(P+'favorites',x);}
-  function toggleSurahFav(){const item=pageData();let f=favs(),e=f.some(x=>x.key===item.key);setFavs(e?f.filter(x=>x.key!==item.key):[Object.assign({savedAt:Date.now()},item)].concat(f));toast(e?'Сура удалена из избранного':'Сура добавлена в избранное');sync();}
-  function saveItem(item){wj(P+'lastSaved',Object.assign({savedAt:Date.now()},item));toast(item.type==='ayah'?'Аят сохранён':'Сура сохранена');sync();}
-  function goToSaved(){let s=rj(P+'lastSaved',null);if(!s||!s.href){toast('Сохранённого места пока нет');return;} if(s.key&&s.key.startsWith(PAGE_KEY+'#ayah-')){let id=s.key.split('#').pop();let el=document.getElementById(id);if(el){el.scrollIntoView({behavior:'smooth',block:'center'});el.style.outline='2px solid rgba(240,216,145,.85)';el.style.outlineOffset='6px';setTimeout(()=>{el.style.outline='';el.style.outlineOffset='';},2400);toast('Открыт сохранённый аят');return;}} location.href=s.href;}
-  function renderFavs(){const root=document.getElementById('quran-favorites-list');if(!root)return;let f=favs();if(!f.length){root.innerHTML='<div class="quran-empty-state">Пока нет избранных сур. Нажмите звезду сверху на странице суры.</div>';return;}root.innerHTML=f.map(item=>{let title='Сура '+esc(item.number)+' — '+esc(item.title);let meta=esc(item.arabic)+' · '+esc(item.meta);return '<div class="quran-favorite-item"><a href="'+esc(item.href)+'" style="text-decoration:none;color:inherit;min-width:0;"><div class="quran-favorite-title">'+title+'</div><div class="quran-favorite-meta">'+meta+'</div></a><a class="quran-favorite-open" href="'+esc(item.href)+'">›</a><button class="quran-favorite-remove" type="button" data-remove-favorite="'+esc(item.key)+'"><svg viewBox="0 0 24 24"><path d="M12 3.6l2.45 5.05 5.55.8-4.02 3.92.95 5.53L12 16.3l-4.93 2.6.95-5.53L4 9.45l5.55-.8L12 3.6z"/></svg></button></div>';}).join('');}
-  function sync(){let keys=new Set(favs().map(x=>x.key)),saved=rj(P+'lastSaved',null);document.querySelectorAll('[data-surah-page-action="favorite"]').forEach(b=>b.classList.toggle('is-active',keys.has(PAGE_KEY)));document.querySelectorAll('[data-surah-page-action="save"]').forEach(b=>b.classList.toggle('is-active',!!saved));document.querySelectorAll('[data-ayah-action="save"]').forEach(b=>b.classList.toggle('is-active',saved&&saved.key===ayahData(b).key));let reading=localStorage.getItem(P+'readingMode')==='1';document.body.classList.toggle('quran-reading-mode',reading);let rb=document.querySelector('[data-surah-page-action="reading"]');if(rb)rb.classList.toggle('is-active',reading);let tb=document.querySelector('[data-surah-page-action="theme"]');if(tb)tb.classList.toggle('is-active',document.documentElement.classList.contains('dark-mode'));}
+  function toast(m){let t=document.querySelector('.quran-toast');if(!t){t=document.createElement('div');t.className='quran-toast';document.body.appendChild(t);}t.textContent=m;t.classList.add('is-visible');clearTimeout(toastTimer);toastTimer=setTimeout(()=>t.classList.remove('is-visible'),2100);}
+  function ayahs(){let m=String(SURAH_META).match(/(\d+)\s*аят/);return m?m[1]+' аятов':'';}
+  function meta(){let p=String(SURAH_META).split('·').map(x=>x.trim()).find(x=>/меккан|медин/i.test(x));return p?'Ниспослание: '+p:SURAH_META;}
+  function pageData(){return {number:SURAH_NUMBER,name:SURAH_TITLE,arabic:SURAH_ARABIC,ayahs:ayahs(),meta:meta(),href:PAGE_KEY||location.href,savedAt:Date.now()};}
+  function ayahData(btn){const c=btn.closest('.ayah-card');const n=btn.dataset.ayahNumber||'';return {type:'ayah',key:PAGE_KEY+'#ayah-'+n,surahNumber:SURAH_NUMBER,surahTitle:SURAH_TITLE,ayahNumber:n,arabic:btn.dataset.ayahArabic||c?.querySelector('.ayah-arabic')?.textContent?.trim()||'',translit:btn.dataset.ayahTranslit||c?.querySelector('.ayah-translit')?.textContent?.trim()||'',meaning:btn.dataset.ayahMeaning||c?.querySelector('.ayah-meaning')?.textContent?.trim()||'',href:location.href.split('#')[0]+'#ayah-'+n,savedAt:Date.now()};}
+  function favs(){return rj(KEY_FAVORITES,[]);}
+  function setFavs(x){wj(KEY_FAVORITES,x);}
+  function isFav(){return favs().some(x=>String(x.number)===String(SURAH_NUMBER));}
+  function toggleFav(){let d=pageData(),f=favs(),e=isFav();setFavs(e?f.filter(x=>String(x.number)!==String(SURAH_NUMBER)):[d].concat(f));toast(e?'Сура удалена из избранного':'Сура добавлена в избранное');renderFavs();sync();}
+  function saveSurah(){wj(KEY_LAST_SURAH,pageData());toast('Сохранено место чтения: '+SURAH_TITLE);sync();}
+  function currentSavedAyah(){let a=rj(KEY_LAST_AYAH,null);return a&&String(a.surahNumber)===String(SURAH_NUMBER)?a:null;}
+  function openSaved(){let a=currentSavedAyah();if(a&&a.key){let id=a.key.split('#').pop();let el=document.getElementById(id);if(el){el.scrollIntoView({behavior:'smooth',block:'center'});el.style.outline='2px solid rgba(240,216,145,.85)';el.style.outlineOffset='6px';setTimeout(()=>{el.style.outline='';el.style.outlineOffset='';},2400);toast('Открыт сохранённый аят');return;}if(a.href){location.href=a.href;return;}}saveSurah();}
+  function saveAyah(d){wj(KEY_LAST_AYAH,d);toast('Аят сохранён');sync();}
+  function renderFavs(){let root=document.getElementById('quran-favorites-list');if(!root)return;let f=favs();if(!f.length){root.innerHTML='<div class="quran-empty-state">Пока нет избранных сур. Нажмите звезду сверху на странице суры.</div>';return;}root.innerHTML=f.map(item=>'<div class="quran-favorite-item"><a href="'+esc(item.href)+'" style="text-decoration:none;color:inherit;min-width:0;"><div class="quran-favorite-title">#'+esc(item.number)+' — '+esc(item.name)+'</div><div class="quran-favorite-meta">'+[item.arabic,item.ayahs,item.meta].filter(Boolean).map(esc).join(' · ')+'</div></a><a class="quran-favorite-open" href="'+esc(item.href)+'">›</a><button class="quran-favorite-remove" type="button" data-remove-favorite="'+esc(item.number)+'"><svg viewBox="0 0 24 24"><path d="M12 3.6l2.45 5.05 5.55.8-4.02 3.92.95 5.53L12 16.3l-4.93 2.6.95-5.53L4 9.45l5.55-.8L12 3.6z"/></svg></button></div>').join('');}
+  function syncBottomFavorites(){let active=favs().length>0;['[data-bottom-nav="favorites"]','[data-nav="favorites"]','[data-tab="favorites"]','[href*="favorite"]','[href*="favorites"]','[href*="izbran"]'].forEach(sel=>document.querySelectorAll(sel).forEach(el=>{el.classList.toggle('is-active',active);el.classList.toggle('active',active);el.setAttribute('data-has-favorites',active?'1':'0');}));}
+  function sync(){let lastSurah=rj(KEY_LAST_SURAH,null),lastAyah=rj(KEY_LAST_AYAH,null),reading=localStorage.getItem(P+'readingMode')==='1';document.querySelectorAll('[data-surah-page-action="favorite"]').forEach(b=>b.classList.toggle('is-active',isFav()));document.querySelectorAll('[data-surah-page-action="save"]').forEach(b=>b.classList.toggle('is-active',(!!lastAyah&&String(lastAyah.surahNumber)===String(SURAH_NUMBER))||!!lastSurah&&String(lastSurah.number)===String(SURAH_NUMBER)));document.querySelectorAll('[data-ayah-action="save"]').forEach(b=>b.classList.toggle('is-active',!!lastAyah&&lastAyah.key===ayahData(b).key));document.body.classList.toggle('quran-reading-mode',reading);let rb=document.querySelector('[data-surah-page-action="reading"]');if(rb)rb.classList.toggle('is-active',reading);let tb=document.querySelector('[data-surah-page-action="theme"]');if(tb)tb.classList.toggle('is-active',document.documentElement.classList.contains('dark-mode'));syncBottomFavorites();}
   function applyLayers(){let s=rj(P+'layers',{arabic:true,translit:true,meaning:true});document.body.classList.toggle('hide-arabic',!s.arabic);document.body.classList.toggle('hide-translit',!s.translit);document.body.classList.toggle('hide-meaning',!s.meaning);['Arabic','Translit','Meaning'].forEach(n=>{let el=document.getElementById('toggle'+n);if(el)el.checked=!!s[n.toLowerCase()];});}
   function updLayer(name,checked){let s=rj(P+'layers',{arabic:true,translit:true,meaning:true});s[name]=checked;if(!s.arabic&&!s.translit&&!s.meaning){s[name]=true;toast('Нужно оставить хотя бы один слой текста');}wj(P+'layers',s);applyLayers();}
   function openM(id){let m=document.getElementById(id);if(m){m.classList.add('is-visible');m.setAttribute('aria-hidden','false');}}
   function closeM(id){let m=document.getElementById(id);if(m){m.classList.remove('is-visible');m.setAttribute('aria-hidden','true');}}
-
-  function roundRect(ctx,x,y,w,h,r){ctx.beginPath();ctx.moveTo(x+r,y);ctx.arcTo(x+w,y,x+w,y+h,r);ctx.arcTo(x+w,y+h,x,y+h,r);ctx.arcTo(x,y+h,x,y,r);ctx.arcTo(x,y,x+w,y,r);ctx.closePath();}
-  function loadImg(src){return new Promise(res=>{if(!src)return res(null);let im=new Image();im.onload=()=>res(im);im.onerror=()=>res(null);im.src=src;});}
-  function blobFromCanvas(c){return new Promise(res=>c.toBlob(res,'image/png',0.96));}
-
-  function linesFor(ctx,text,maxW){
-    const raw=String(text||'').replace(/\s+/g,' ').trim();
-    if(!raw)return [];
-    const words=raw.split(' ');
-    const lines=[];
-    let line='';
-    for(const word of words){
-      const test=line?line+' '+word:word;
-      if(ctx.measureText(test).width>maxW&&line){
-        lines.push(line);
-        line=word;
-      }else{
-        line=test;
-      }
-    }
-    if(line)lines.push(line);
-    return lines;
-  }
-
-  function fitWrapped(ctx,text,maxW,fontFamily,weight,startSize,minSize,maxLines){
-    let size=startSize,lines=[];
-    while(size>=minSize){
-      ctx.font=weight+' '+size+'px '+fontFamily;
-      lines=linesFor(ctx,text,maxW);
-      if(!maxLines||lines.length<=maxLines)break;
-      size-=2;
-    }
-    return {size:size,lines:lines,lineHeight:Math.round(size*1.28)};
-  }
-
-  function drawCenteredLines(ctx,lines,x,y,lineHeight,maxLines){
-    const out=maxLines?lines.slice(0,maxLines):lines;
-    out.forEach(function(line,i){ctx.fillText(line,x,y+i*lineHeight);});
-    return y+out.length*lineHeight;
-  }
-
-  async function makePng(item){
-    const logo=await loadImg(LOGO);
-    const isAyah=item.type==='ayah';
-    const textVolume=String(item.arabic||'').length+String(item.meaning||item.translit||'').length;
-    const isLong=isAyah&&textVolume>230;
-    const canvas=document.createElement('canvas'),scale=2,w=900,h=isLong?1380:1180;
-    canvas.width=w*scale;canvas.height=h*scale;
-    const ctx=canvas.getContext('2d');ctx.scale(scale,scale);
-    const fontFamily='system-ui,-apple-system,Segoe UI,sans-serif';
-    const isLight=document.documentElement.classList.contains('light-mode')&&!document.documentElement.classList.contains('dark-mode');
-    const p=isLight?{bg0:'#f8fbf7',bg1:'#eef5ef',bg2:'#fff8df',outer:'rgba(255,255,255,.94)',i0:'#fff',i1:'#f7fbf7',i2:'#fff7df',border:'rgba(181,138,54,.54)',strong:'rgba(138,104,31,.64)',white:'#111814',gold:'#8a681f',soft:'#b58a36'}:{bg0:'#05110d',bg1:'#0b1b18',bg2:'#050708',outer:'rgba(8,16,16,.88)',i0:'#123522',i1:'#10191b',i2:'#121016',border:'rgba(215,181,109,.60)',strong:'rgba(240,216,145,.66)',white:'#fff',gold:'#f0d891',soft:'#d7b56d'};
-    let bg=ctx.createLinearGradient(0,0,0,h);bg.addColorStop(0,p.bg0);bg.addColorStop(.48,p.bg1);bg.addColorStop(1,p.bg2);ctx.fillStyle=bg;ctx.fillRect(0,0,w,h);
-    roundRect(ctx,50,52,w-100,h-104,58);ctx.fillStyle=p.outer;ctx.fill();ctx.strokeStyle=p.border;ctx.lineWidth=2.4;ctx.stroke();
-    roundRect(ctx,86,92,w-172,h-184,46);let cg=ctx.createLinearGradient(86,92,w-86,h-92);cg.addColorStop(0,p.i0);cg.addColorStop(.5,p.i1);cg.addColorStop(1,p.i2);ctx.fillStyle=cg;ctx.fill();ctx.strokeStyle=p.strong;ctx.lineWidth=2;ctx.stroke();
-    ctx.textAlign='center';ctx.textBaseline='top';
-    const logoW=isLong?126:150;
-    if(logo)ctx.drawImage(logo,(w-logoW)/2,isLong?112:112,logoW,logoW*(logo.height/logo.width));
-    ctx.direction='ltr';ctx.fillStyle=p.white;ctx.font='900 '+(isLong?34:36)+'px '+fontFamily;ctx.fillText('BarakaWay App',w/2,isLong?278:300);
-    ctx.direction='rtl';ctx.fillStyle=p.gold;ctx.font='850 '+(isLong?36:42)+'px '+fontFamily;ctx.fillText('بِسْمِ ٱللَّٰهِ ٱلرَّحْمَـٰنِ ٱلرَّحِيمِ',w/2,isLong?350:374);
-
-    if(isAyah){
-      ctx.direction='ltr';ctx.fillStyle=p.white;ctx.font='950 '+(isLong?44:48)+'px '+fontFamily;
-      ctx.fillText('Сура '+item.surahNumber+' · Аят '+item.ayahNumber,w/2,isLong?452:482);
-
-      ctx.direction='rtl';ctx.fillStyle=p.gold;
-      const arabicFit=fitWrapped(ctx,item.arabic||'',710,fontFamily,'900',isLong?42:54,32,isLong?7:5);
-      ctx.font='900 '+arabicFit.size+'px '+fontFamily;
-      const arabicY=isLong?550:585;
-      const afterArabic=drawCenteredLines(ctx,arabicFit.lines,w/2,arabicY,arabicFit.lineHeight,isLong?7:5);
-
-      ctx.direction='ltr';ctx.fillStyle=p.soft;
-      const bottomLimit=(isLong?1040:910);
-      let meaningStart=afterArabic+(isLong?28:30);
-      let meaningSize=isLong?23:25;
-      let meaningFit;
-      do{
-        meaningFit=fitWrapped(ctx,item.meaning||item.translit||'',700,fontFamily,'800',meaningSize,17,0);
-        meaningSize-=2;
-      }while(meaningStart+meaningFit.lines.length*meaningFit.lineHeight>bottomLimit&&meaningSize>=17);
-      ctx.font='800 '+meaningFit.size+'px '+fontFamily;
-      drawCenteredLines(ctx,meaningFit.lines,w/2,meaningStart,meaningFit.lineHeight,0);
-    }else{
-      ctx.direction='ltr';ctx.fillStyle=p.white;ctx.font='950 48px '+fontFamily;ctx.fillText('Сура '+item.number+' — '+item.title,w/2,500);
-      ctx.direction='rtl';ctx.fillStyle=p.gold;ctx.font='900 68px '+fontFamily;ctx.fillText(item.arabic||'',w/2,630);
-      ctx.direction='ltr';ctx.fillStyle=p.soft;ctx.font='850 27px '+fontFamily;ctx.fillText(item.meta||'Священный Коран',w/2,760);
-    }
-    ornament(ctx,w,p,isLight,h);
-    const blob=await blobFromCanvas(canvas);if(!blob)return null;
-    return new File([blob],isAyah?'barakaway-surah-'+item.surahNumber+'-ayah-'+item.ayahNumber+'.png':'barakaway-surah-'+item.number+'.png',{type:'image/png'});
-  }
-
-  function wrap(ctx,text,x,y,maxW,lh){
-    const lines=linesFor(ctx,text,maxW);
-    return drawCenteredLines(ctx,lines,x,y,lh,0);
-  }
-
-  function ornament(ctx,w,p,isLight,hOpt){ctx.save();const y=(hOpt||1180)-232,ow=620,oh=112,ox=(w-ow)/2;roundRect(ctx,ox,y-oh/2,ow,oh,38);let g=ctx.createLinearGradient(ox,y-56,ox+ow,y+56);g.addColorStop(0,isLight?'rgba(45,122,70,.10)':'rgba(10,40,26,.78)');g.addColorStop(.5,isLight?'rgba(181,138,54,.14)':'rgba(240,216,145,.18)');g.addColorStop(1,isLight?'rgba(45,122,70,.10)':'rgba(10,40,26,.78)');ctx.fillStyle=g;ctx.fill();ctx.strokeStyle=p.strong;ctx.lineWidth=2;ctx.stroke();ctx.strokeStyle=isLight?'rgba(138,104,31,.58)':'rgba(240,216,145,.68)';ctx.lineWidth=2.1;ctx.beginPath();ctx.moveTo(ox+70,y);ctx.bezierCurveTo(ox+160,y-48,ox+238,y+48,ox+310,y);ctx.bezierCurveTo(ox+382,y-48,ox+460,y+48,ox+ow-70,y);ctx.stroke();ctx.restore();}
-
-  function shareHtml(item){let isA=item.type==='ayah';return '<div class="quran-share-card">'+(LOGO?'<img class="quran-share-logo" src="'+esc(LOGO)+'" alt="BarakaWay">':'')+'<div class="quran-share-brand">BarakaWay App</div><div class="quran-share-bismillah">بِسْمِ ٱللَّٰهِ ٱلرَّحْمَـٰنِ ٱلرَّحِيمِ</div><div class="quran-share-main">'+(isA?'Сура '+esc(item.surahNumber)+' · Аят '+esc(item.ayahNumber):'Сура '+esc(item.number)+' — '+esc(item.title))+'</div><div class="quran-share-arabic">'+esc(item.arabic||'')+'</div><div class="quran-share-meta">'+esc(isA?item.meaning:item.meta)+'</div><div class="quran-share-limit-note"><strong>Будет создана PNG-карточка.</strong> Вместе с ней отправится ссылка на приложение.</div><div class="quran-share-actions"><button class="quran-share-button" type="button" data-share-confirm="1">Поделиться карточкой</button><button class="quran-share-button secondary" type="button" data-quran-close="share">Закрыть</button></div></div>';}
-  function openShare(item){pendingShare=item;let root=document.getElementById('quran-share-card-root');if(root)root.innerHTML=shareHtml(item);openM('quran-share-modal');}
-  async function shareItem(item){const text='📲 Скачать приложение BarakaWay — ваш ежедневный путь к барака\n\n'+APP;try{let file=await makePng(item);if(file&&navigator.canShare&&navigator.canShare({files:[file]})){await navigator.share({title:'BarakaWay App',text:text,files:[file]});toast('Карточка отправлена как изображение');return;}}catch(e){}try{if(navigator.share){await navigator.share({title:'BarakaWay App',text:text});toast('Открыто меню отправки');return;}}catch(e){}try{await navigator.clipboard.writeText(text);toast('Ссылка на приложение скопирована');}catch(e){}}
-
-  document.addEventListener('click',function(e){
-    let rm=e.target.closest('[data-remove-favorite]');if(rm){e.preventDefault();setFavs(favs().filter(x=>x.key!==rm.dataset.removeFavorite));renderFavs();sync();toast('Сура удалена из избранного');return;}
-    let cl=e.target.closest('[data-quran-close]');if(cl){e.preventDefault();if(cl.dataset.quranClose==='favorites')closeM('quran-favorites-modal');if(cl.dataset.quranClose==='share')closeM('quran-share-modal');return;}
-    if(e.target.classList&&e.target.classList.contains('quran-modal-backdrop')){e.preventDefault();e.target.classList.remove('is-visible');e.target.setAttribute('aria-hidden','true');return;}
-    let cf=e.target.closest('[data-share-confirm]');if(cf){e.preventDefault();if(pendingShare)shareItem(pendingShare);return;}
-    let pb=e.target.closest('[data-surah-page-action]');if(pb){e.preventDefault();e.stopPropagation();let a=pb.dataset.surahPageAction,pd=pageData();if(a==='favorite')toggleSurahFav();if(a==='share')openShare(pd);if(a==='reading'){let en=!(localStorage.getItem(P+'readingMode')==='1');localStorage.setItem(P+'readingMode',en?'1':'0');toast(en?'Режим чтения включён':'Режим чтения выключен');sync();}if(a==='save')goToSaved();if(a==='theme'){let root=document.documentElement,isDark=root.classList.contains('dark-mode');root.classList.toggle('dark-mode',!isDark);root.classList.toggle('light-mode',isDark);localStorage.setItem('theme',isDark?'light':'dark');toast(isDark?'Светлая тема':'Тёмная тема');sync();}return;}
-    let ab=e.target.closest('[data-ayah-action]');if(ab){e.preventDefault();e.stopPropagation();let a=ab.dataset.ayahAction,d=ayahData(ab);if(a==='save')saveItem(d);if(a==='share')openShare(d);return;}
-  },true);
-  document.addEventListener('change',function(e){let t=e.target.closest('[data-layer-toggle]');if(t)updLayer(t.dataset.layerToggle,t.checked);});
-  document.addEventListener('barakaway:ayahs-rendered',function(){renderFavs();applyLayers();sync();});
-  renderFavs();applyLayers();sync();
+  function openShare(item){pendingShare=item;let root=document.getElementById('quran-share-card-root');if(root)root.innerHTML='<div class="quran-share-card"><div class="quran-share-bismillah">بِسْمِ ٱللَّٰهِ ٱلرَّحْمَـٰنِ ٱلرَّحِيمِ</div><div class="quran-share-main">'+(item.type==='ayah'?'Сура '+esc(item.surahNumber)+' · Аят '+esc(item.ayahNumber):'Сура '+esc(item.number)+' — '+esc(item.name))+'</div><div class="quran-share-arabic">'+esc(item.arabic||'')+'</div><div class="quran-share-meta">'+esc(item.meaning||item.meta||'')+'</div><div class="quran-share-actions"><button class="quran-share-button" type="button" data-share-confirm="1">Поделиться</button><button class="quran-share-button secondary" type="button" data-quran-close="share">Закрыть</button></div></div>';openM('quran-share-modal');}
+  async function shareItem(item){let text=(item.type==='ayah'?'Сура '+item.surahNumber+' · Аят '+item.ayahNumber:'Сура '+item.number+' — '+item.name)+'\n'+(item.href||location.href);try{if(navigator.share){await navigator.share({title:'BarakaWay',text:text});toast('Открыто меню отправки');return;}}catch(e){}try{await navigator.clipboard.writeText(text);toast('Ссылка скопирована');}catch(e){}}
+  document.addEventListener('click',function(e){let rm=e.target.closest('[data-remove-favorite]');if(rm){e.preventDefault();setFavs(favs().filter(x=>String(x.number)!==String(rm.dataset.removeFavorite)));renderFavs();sync();toast('Сура удалена из избранного');return;}let cl=e.target.closest('[data-quran-close]');if(cl){e.preventDefault();if(cl.dataset.quranClose==='favorites')closeM('quran-favorites-modal');if(cl.dataset.quranClose==='share')closeM('quran-share-modal');return;}if(e.target.classList&&e.target.classList.contains('quran-modal-backdrop')){e.preventDefault();e.target.classList.remove('is-visible');e.target.setAttribute('aria-hidden','true');return;}let cf=e.target.closest('[data-share-confirm]');if(cf){e.preventDefault();if(pendingShare)shareItem(pendingShare);return;}let pb=e.target.closest('[data-surah-page-action]');if(pb){e.preventDefault();e.stopPropagation();let a=pb.dataset.surahPageAction;if(a==='favorite')toggleFav();if(a==='share')openShare(pageData());if(a==='reading'){let en=!(localStorage.getItem(P+'readingMode')==='1');localStorage.setItem(P+'readingMode',en?'1':'0');toast(en?'Режим чтения включён':'Режим чтения выключен');sync();}if(a==='save')openSaved();if(a==='theme'){let root=document.documentElement,isDark=root.classList.contains('dark-mode');root.classList.toggle('dark-mode',!isDark);root.classList.toggle('light-mode',isDark);localStorage.setItem('theme',isDark?'light':'dark');toast(isDark?'Светлая тема':'Тёмная тема');sync();}return;}let ab=e.target.closest('[data-ayah-action]');if(ab){e.preventDefault();e.stopPropagation();let a=ab.dataset.ayahAction,d=ayahData(ab);if(a==='save')saveAyah(d);if(a==='share')openShare(d);return;}},true);
+  document.addEventListener('change',e=>{let t=e.target.closest('[data-layer-toggle]');if(t)updLayer(t.dataset.layerToggle,t.checked);});
+  window.addEventListener('storage',sync);document.addEventListener('barakaway:ayahs-rendered',()=>{renderFavs();applyLayers();sync();});renderFavs();applyLayers();sync();
 })();
 </script>
 <script src="../bottom-nav.js"></script>
