@@ -164,6 +164,58 @@ html.hide-meaning .meaning{display:none!important}
   .toggle-mark{width:16px;height:16px}
 }
 
+
+/* === v7: card favorite/save active state — gold icon only, no green background === */
+.card-action.is-active[data-card-action="favorite"],
+.card-action.is-active[data-card-action="save"]{
+  background:rgba(181,138,54,.07)!important;
+  color:var(--gold2)!important;
+  border-color:rgba(215,181,109,.38)!important;
+  box-shadow:0 10px 22px rgba(0,0,0,.10)!important;
+}
+.card-action.is-active[data-card-action="favorite"] svg,
+.card-action.is-active[data-card-action="save"] svg{
+  stroke:var(--gold2)!important;
+  fill:none!important;
+}
+.card-action.is-active[data-card-action="favorite"] svg path,
+.card-action.is-active[data-card-action="save"] svg path{
+  fill:var(--gold2)!important;
+  stroke:var(--gold2)!important;
+}
+html.light-mode .card-action.is-active[data-card-action="favorite"],
+html.light-mode .card-action.is-active[data-card-action="save"]{
+  color:var(--gold)!important;
+  border-color:rgba(181,138,54,.42)!important;
+}
+html.light-mode .card-action.is-active[data-card-action="favorite"] svg,
+html.light-mode .card-action.is-active[data-card-action="save"] svg{
+  stroke:var(--gold)!important;
+}
+html.light-mode .card-action.is-active[data-card-action="favorite"] svg path,
+html.light-mode .card-action.is-active[data-card-action="save"] svg path{
+  fill:var(--gold)!important;
+  stroke:var(--gold)!important;
+}
+
+
+/* === v9: hide labels with disabled transliteration / translation layers === */
+html.hide-translit .layer-translit-label,
+html.hide-translit .translit,
+html.hide-translit .translit-label{
+  display:none!important;
+}
+html.hide-meaning .layer-meaning-label,
+html.hide-meaning .meaning,
+html.hide-meaning .meaning-label{
+  display:none!important;
+}
+html.hide-arabic .layer-arabic-label,
+html.hide-arabic .ar,
+html.hide-arabic .arabic-label{
+  display:none!important;
+}
+
 </style>
 </head>
 <body>
