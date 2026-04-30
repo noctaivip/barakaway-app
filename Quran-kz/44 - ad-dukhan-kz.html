@@ -4,7 +4,7 @@ In the name of Allah, the Most Merciful, the Most Compassionate
 -->
 <!DOCTYPE html>
 
-<html lang="kz">
+<html lang="kk">
 <head>
 <meta charset="utf-8"/>
 <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
@@ -140,6 +140,118 @@ html.dark-mode .content-toggle input{accent-color:#4caf6a;filter:none!important;
 }
 html.light-mode .quran-share-brand{color:#111814;}
 </style>
+
+<style id="surah-visual-balance-fix-style">
+/* Visual balance fix: smaller gold Arabic, readable white transcription, softer translation, active saved icons */
+.ayah-arabic{
+  font-size:24px!important;
+  line-height:1.75!important;
+  font-weight:400!important;
+  color:#d7b56d!important;
+}
+.quran-reading-mode .ayah-arabic{
+  font-size:26px!important;
+  line-height:1.75!important;
+  font-weight:400!important;
+  color:#d7b56d!important;
+}
+html.dark-mode .ayah-arabic{color:#d7b56d!important;}
+html.light-mode .ayah-arabic{color:#9a7323!important;}
+.ayah-translit{
+  font-style:normal!important;
+  font-weight:400!important;
+}
+html.dark-mode .ayah-translit{color:#ffffff!important;}
+html.light-mode .ayah-translit{color:#111814!important;}
+.quran-reading-mode .ayah-translit{font-weight:400!important;}
+.ayah-meaning{
+  font-weight:400!important;
+}
+html.dark-mode .ayah-meaning{color:rgba(255,255,255,.78)!important;}
+html.light-mode .ayah-meaning{color:rgba(17,24,20,.72)!important;}
+.quran-reading-mode .ayah-meaning{font-weight:400!important;}
+.surah-page-action.is-active[data-surah-page-action="favorite"] svg path,
+.surah-page-action.is-active[data-surah-page-action="save"] svg path,
+.ayah-action.is-active[data-ayah-action="save"] svg path{
+  fill:currentColor!important;
+}
+.ayah-action.is-active[data-ayah-action="save"]{
+  color:#fff!important;
+  border-color:rgba(45,122,70,.34)!important;
+  background:linear-gradient(135deg,#2d7a46,#4caf6a)!important;
+}
+@media(max-width:700px){
+  .ayah-arabic{font-size:22px!important;line-height:1.7!important;font-weight:400!important;}
+  .quran-reading-mode .ayah-arabic{font-size:23px!important;line-height:1.7!important;font-weight:400!important;}
+}
+</style>
+
+<style id="surah-final-layout-and-favorites-fix-style">
+/* Final ayah layout: no green ayah number, actions left, play button right */
+.ayah-card{
+  position:relative!important;
+  padding-top:72px!important;
+}
+.ayah-toolbar{
+  position:absolute!important;
+  top:22px!important;
+  right:24px!important;
+  left:auto!important;
+  display:flex!important;
+  align-items:center!important;
+  justify-content:flex-end!important;
+  gap:0!important;
+  margin:0!important;
+  z-index:5!important;
+}
+.ayah-index{
+  display:none!important;
+}
+.play-btn{
+  width:auto!important;
+  min-width:92px!important;
+  min-height:38px!important;
+  padding:8px 13px!important;
+  border-radius:13px!important;
+  font-size:14px!important;
+  line-height:1!important;
+  justify-self:auto!important;
+  white-space:nowrap!important;
+}
+.ayah-actions{
+  position:absolute!important;
+  top:22px!important;
+  left:24px!important;
+  right:auto!important;
+  z-index:6!important;
+  display:flex!important;
+  align-items:center!important;
+  justify-content:flex-start!important;
+  gap:8px!important;
+  margin:0!important;
+  padding:0!important;
+  border-top:0!important;
+}
+.ayah-action{
+  width:38px!important;
+  height:38px!important;
+  min-width:38px!important;
+  min-height:38px!important;
+}
+.ayah-action.is-active[data-ayah-action="save"] svg path,
+.surah-page-action.is-active[data-surah-page-action="favorite"] svg path,
+.surah-page-action.is-active[data-surah-page-action="save"] svg path{
+  fill:currentColor!important;
+}
+@media(max-width:700px){
+  .ayah-card{padding-top:74px!important;}
+  .ayah-toolbar{top:24px!important;right:20px!important;}
+  .ayah-actions{top:24px!important;left:20px!important;}
+  .play-btn{min-width:86px!important;min-height:36px!important;font-size:13px!important;padding:8px 11px!important;border-radius:12px!important;}
+  .ayah-action{width:36px!important;height:36px!important;min-width:36px!important;min-height:36px!important;}
+}
+</style>
+
 </head>
 <body data-surah-arabic="الدخان" data-surah-meta="Духан · Сүре 44 · 59 аят · Меккелік" data-surah-number="44" data-surah-page-key="Quran-kz/44 - ad-dukhan-kz.html" data-surah-title="Духан">
 <div class="container">
@@ -250,6 +362,19 @@ function playAllAyahs() {
   playNext();
 }
 
+function barakaKzCyrillicTranslit(input) {
+  let s = String(input || "").trim();
+  const latinPairs = [["ā","aa"],["Ā","Aa"],["ī","ii"],["Ī","Ii"],["ū","uu"],["Ū","Uu"],["ḥ","h"],["Ḥ","H"],["ṣ","s"],["Ṣ","S"],["ḍ","d"],["Ḍ","D"],["ṭ","t"],["Ṭ","T"],["ẓ","z"],["Ẓ","Z"],["ġ","gh"],["Ġ","Gh"],["ḫ","kh"],["Ḫ","Kh"],["ḏ","dh"],["Ḏ","Dh"],["ṯ","th"],["Ṯ","Th"],["ʿ","'"],["ʾ","'"],["ʼ","'"],["’","'"],["‘","'"],["á","a"],["í","i"],["ú","u"]];
+  latinPairs.forEach(([a,b]) => { s = s.split(a).join(b); });
+  s = s.replace(/\b([Ww])a([bcdfghjklmnpqrstvwxyz])\2/g, "$1a$2-$2");
+  s = s.replace(/\b([Aa]l|[Ww]al|[Bb]il)([tdrszln])\2/g, "$1-$2");
+  const digraphs = [["kh","х"],["Kh","Х"],["KH","Х"],["sh","ш"],["Sh","Ш"],["SH","Ш"],["th","с"],["Th","С"],["TH","С"],["dh","з"],["Dh","З"],["DH","З"],["gh","ғ"],["Gh","Ғ"],["GH","Ғ"],["ch","ч"],["Ch","Ч"],["CH","Ч"],["aa","а"],["Aa","А"],["AA","А"],["ee","и"],["Ee","И"],["EE","И"],["ii","и"],["Ii","И"],["II","И"],["oo","у"],["Oo","У"],["OO","У"],["uu","у"],["Uu","У"],["UU","У"],["ay","ай"],["Ay","Ай"],["AY","АЙ"],["aw","ау"],["Aw","Ау"],["AW","АУ"]];
+  digraphs.forEach(([a,b]) => { s = s.split(a).join(b); });
+  const mp = {"a":"а","b":"б","c":"к","d":"д","e":"е","f":"ф","g":"г","h":"һ","i":"и","j":"ж","k":"к","l":"л","m":"м","n":"н","o":"о","p":"п","q":"қ","r":"р","s":"с","t":"т","u":"у","v":"в","w":"у","x":"кс","y":"й","z":"з","A":"А","B":"Б","C":"К","D":"Д","E":"Е","F":"Ф","G":"Г","H":"Һ","I":"И","J":"Ж","K":"К","L":"Л","M":"М","N":"Н","O":"О","P":"П","Q":"Қ","R":"Р","S":"С","T":"Т","U":"У","V":"В","W":"У","X":"Кс","Y":"Й","Z":"З"};
+  let out = Array.from(s).map(ch => mp[ch] || ch).join("").replace(/\s+/g, " ").trim();
+  out = out.replace(/(^|[.!?]\s+|\n)([а-яәіңғүұқөһ])/g, (m,p,c) => p + c.toUpperCase());
+  return out;
+}
 function barakaEscapeAttr(value) {
   return String(value || "").replaceAll("&","&amp;").replaceAll("<","&lt;").replaceAll(">","&gt;").replaceAll('"',"&quot;").replaceAll("'","&#039;");
 }
@@ -267,21 +392,22 @@ function renderAyahs(arData, tlData, kzData) {
     const kz = kzAyahs[i];
     const n = arabic.numberInSurah;
     const meaning = kz.translation || "";
+    const translitKz = barakaKzCyrillicTranslit(translit.text || "");
     const article = document.createElement("article");
     article.className = "ayah-card";
     article.id = `ayah-${n}`;
     article.innerHTML = `
       <div class="ayah-toolbar">
         <div class="ayah-index">${n}</div>
-        <button class="play-btn" type="button" data-default-label="▶ ${labels.playAyah} ${n}" data-playing-label="■ ${labels.stopAyah} ${n}" onclick="playAyah('ayah-${n}', this)">▶ ${labels.playAyah} ${n}</button>
+        <button class="play-btn" type="button" data-default-label="▶ ${labels.playAyah} ${n}" data-playing-label="■ ${labels.stopAyah} ${n}" onclick="playAyah('ayah-audio-${n}', this)">▶ ${labels.playAyah} ${n}</button>
       </div>
-      <audio class="ayah-audio" id="ayah-${n}" preload="none" src="${audioUrl(n)}"></audio>
+      <audio class="ayah-audio" id="ayah-audio-${n}" preload="none" src="${audioUrl(n)}"></audio>
       <div class="ayah-arabic">${arabic.text || ""}</div>
-      <div class="ayah-translit" data-original-translit="${barakaEscapeAttr(translit.text || "")}">${translit.text || ""}</div>
+      <div class="ayah-translit" data-original-translit="${barakaEscapeAttr(translit.text || "")}">${translitKz}</div>
       <div class="ayah-meaning">${meaning}</div>
       <div class="ayah-actions" aria-label="Аят әрекеттері">
-        <button class="ayah-action" type="button" data-ayah-action="share" data-ayah-number="${n}" data-ayah-arabic="${barakaEscapeAttr(arabic.text || "")}" data-ayah-translit="${barakaEscapeAttr(translit.text || "")}" data-ayah-meaning="${barakaEscapeAttr(meaning)}" aria-label="Бөлісу"><svg viewBox="0 0 24 24"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><path d="M8.7 10.7l6.6-4.4M8.7 13.3l6.6 4.4"/></svg></button>
-        <button class="ayah-action" type="button" data-ayah-action="save" data-ayah-number="${n}" data-ayah-arabic="${barakaEscapeAttr(arabic.text || "")}" data-ayah-translit="${barakaEscapeAttr(translit.text || "")}" data-ayah-meaning="${barakaEscapeAttr(meaning)}" aria-label="Сақтау"><svg viewBox="0 0 24 24"><path d="M6 4.5A1.5 1.5 0 0 1 7.5 3h9A1.5 1.5 0 0 1 18 4.5V21l-6-3.5L6 21V4.5z"/></svg></button>
+        <button class="ayah-action" type="button" data-ayah-action="share" data-ayah-number="${n}" data-ayah-arabic="${barakaEscapeAttr(arabic.text || "")}" data-ayah-translit="${barakaEscapeAttr(translitKz)}" data-ayah-meaning="${barakaEscapeAttr(meaning)}" aria-label="Бөлісу"><svg viewBox="0 0 24 24"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><path d="M8.7 10.7l6.6-4.4M8.7 13.3l6.6 4.4"/></svg></button>
+        <button class="ayah-action" type="button" data-ayah-action="save" data-ayah-number="${n}" data-ayah-arabic="${barakaEscapeAttr(arabic.text || "")}" data-ayah-translit="${barakaEscapeAttr(translitKz)}" data-ayah-meaning="${barakaEscapeAttr(meaning)}" aria-label="Сақтау"><svg viewBox="0 0 24 24"><path d="M6 4.5A1.5 1.5 0 0 1 7.5 3h9A1.5 1.5 0 0 1 18 4.5V21l-6-3.5L6 21V4.5z"/></svg></button>
       </div>
     `;
     list.appendChild(article);
@@ -315,7 +441,7 @@ loadSurah();
 (function(){
   const P='barakaway:quran:surah:kz:';
   const PAGE_KEY=document.body.dataset.surahPageKey||location.pathname;
-  const SURAH_NUMBER=document.body.dataset.surahNumber||'';
+  const SURAH_NUMBER = 44;
   const SURAH_TITLE=document.body.dataset.surahTitle||document.querySelector('h1')?.textContent?.trim()||'Сүре';
   const SURAH_ARABIC=document.body.dataset.surahArabic||'';
   const SURAH_META=document.body.dataset.surahMeta||'';
