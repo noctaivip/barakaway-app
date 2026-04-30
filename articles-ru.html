@@ -822,6 +822,82 @@ html.dark-mode .article.search-focus{
     linear-gradient(180deg,rgba(255,255,255,.065),rgba(215,181,109,.075)) !important;
 }
 
+
+/* === FINAL PRECISION FIX: contrast, compact navigation, exact search === */
+html.dark-mode .group-title{
+  color:#ffffff !important;
+  text-shadow:0 2px 10px rgba(0,0,0,.35);
+}
+html.dark-mode .group-desc{
+  color:rgba(226,238,232,.82) !important;
+  font-weight:760 !important;
+}
+html.dark-mode .article-main a{
+  color:#f0d891 !important;
+  text-shadow:none !important;
+}
+html.dark-mode .article-main p{
+  color:rgba(244,250,247,.88) !important;
+  font-weight:760 !important;
+}
+html.dark-mode .topic-link{
+  min-height:34px !important;
+  padding:7px 12px !important;
+  border-radius:999px !important;
+  color:#f7ead0 !important;
+  background:linear-gradient(180deg,rgba(215,181,109,.105),rgba(255,255,255,.025)) !important;
+  border-color:rgba(215,181,109,.34) !important;
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.045),0 8px 18px rgba(0,0,0,.18) !important;
+  font-size:12px !important;
+}
+html.dark-mode .topic-link:hover{
+  color:#ffffff !important;
+  background:linear-gradient(135deg,rgba(45,122,70,.28),rgba(215,181,109,.16)) !important;
+  border-color:rgba(240,216,145,.55) !important;
+}
+.topic-nav{
+  gap:8px !important;
+  margin-bottom:22px !important;
+}
+html.dark-mode details.group{
+  background:
+    radial-gradient(circle at 100% 0%,rgba(215,181,109,.11),transparent 34%),
+    linear-gradient(135deg,rgba(17,31,33,.98),rgba(26,33,30,.98)) !important;
+}
+html.dark-mode .article{
+  background:
+    linear-gradient(135deg,rgba(20,33,35,.96),rgba(42,45,35,.88)) !important;
+  border-color:rgba(215,181,109,.20) !important;
+}
+html.dark-mode .article.search-focus{
+  border-color:rgba(240,216,145,.78) !important;
+  background:
+    linear-gradient(135deg,rgba(27,42,42,.98),rgba(63,59,40,.94)) !important;
+}
+@media(max-width:720px){
+  .topic-nav{
+    display:flex !important;
+    flex-wrap:nowrap !important;
+    overflow-x:auto !important;
+    justify-content:flex-start !important;
+    gap:7px !important;
+    padding:0 2px 4px !important;
+    margin-bottom:18px !important;
+    scrollbar-width:none;
+  }
+  .topic-nav::-webkit-scrollbar{display:none;}
+  .topic-link{
+    flex:0 0 auto !important;
+    min-height:32px !important;
+    padding:7px 10px !important;
+    font-size:11px !important;
+    white-space:nowrap !important;
+  }
+  .group-title{font-size:23px !important;}
+  .group-desc{font-size:13px !important;line-height:1.55 !important;}
+  .article-main p{font-size:13px !important;line-height:1.5 !important;}
+}
+
 </style>
 </head>
 
@@ -867,16 +943,6 @@ html.dark-mode .article.search-focus{
       <button class="search-step" id="searchNext" type="button" aria-label="Следующая статья">›</button>
     </div>
   </div>
-
-  <nav class="topic-nav" aria-label="Главные разделы">
-    <a class="topic-link" href="#charity">Садака и закят</a>
-    <a class="topic-link" href="#people">Помощь людям</a>
-    <a class="topic-link" href="#worship">Поклонение</a>
-    <a class="topic-link" href="#days">Рамадан и праздники</a>
-    <a class="topic-link" href="#family">Семья и общество</a>
-    <a class="topic-link" href="#akhlaq">Нравственность</a>
-  </nav>
-
   <main class="catalog" id="catalog">
 
     <details class="group" id="charity">
@@ -1510,16 +1576,23 @@ html.dark-mode .article.search-focus{
     const q = normalize(query);
     if(!q) return true;
 
-    const searchable = normalize(searchableArticleText(article));
-    if(searchable.includes(q)) return true;
+    const clean = value => normalize(value).replace(/[ьъ]/g,'');
+    const searchable = clean(searchableArticleText(article));
+    if(searchable.includes(clean(q))) return true;
 
-    const queryWords = q.split(' ').filter(Boolean);
-    const words = articleSearchTokens(article);
-    const stems = words.map(stemRuWord);
+    const queryWords = q.split(' ').map(clean).filter(word => word.length >= 3);
+    if(!queryWords.length) return false;
+
+    const words = articleSearchTokens(article).map(clean).filter(word => word.length >= 3);
 
     return queryWords.every(qw => {
-      const qStem = stemRuWord(qw);
-      return words.some(w => w.includes(qw) || qw.includes(w)) || stems.some(st => st && qStem && (st.includes(qStem) || qStem.includes(st)));
+      const qStem = clean(stemRuWord(qw));
+      if(!qStem || qStem.length < 3) return false;
+
+      return words.some(word => {
+        const stem = clean(stemRuWord(word));
+        return word.includes(qw) || word.startsWith(qStem) || stem.startsWith(qStem) || word.includes(qStem);
+      });
     });
   }
 
@@ -1673,10 +1746,7 @@ html.dark-mode .article.search-focus{
     if(type === 'save'){
       const savedUrl = localStorage.getItem(SAVED_ARTICLE_KEY);
       if(savedUrl){
-        const savedArticle = articles.find(article => {
-          const link = article.querySelector('.article-main a');
-          return link && link.getAttribute('href') === savedUrl;
-        });
+        const savedArticle = articles.find(article => articleData(article).url === savedUrl);
         if(savedArticle){
           if(search) search.value = '';
           resetSearchView();
