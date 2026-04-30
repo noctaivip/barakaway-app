@@ -140,6 +140,32 @@ html.dark-mode .content-toggle input{accent-color:#4caf6a;filter:none!important;
 }
 html.light-mode .quran-share-brand{color:#111814;}
 </style>
+
+<style id="surah-visual-balance-fix-style">
+.ayah-arabic{font-size:24px!important;line-height:1.75!important;font-weight:400!important;color:#d7b56d!important;}
+.quran-reading-mode .ayah-arabic{font-size:26px!important;line-height:1.75!important;font-weight:400!important;color:#d7b56d!important;}
+html.dark-mode .ayah-arabic{color:#d7b56d!important;}html.light-mode .ayah-arabic{color:#9a7323!important;}
+.ayah-translit{font-style:normal!important;font-weight:400!important;}
+html.dark-mode .ayah-translit{color:#ffffff!important;}html.light-mode .ayah-translit{color:#111814!important;}
+.quran-reading-mode .ayah-translit{font-weight:400!important;}
+.ayah-meaning{font-weight:400!important;}
+html.dark-mode .ayah-meaning{color:rgba(255,255,255,.78)!important;}html.light-mode .ayah-meaning{color:rgba(17,24,20,.72)!important;}
+.quran-reading-mode .ayah-meaning{font-weight:400!important;}
+.surah-page-action.is-active[data-surah-page-action="favorite"] svg path,.surah-page-action.is-active[data-surah-page-action="save"] svg path,.ayah-action.is-active[data-ayah-action="save"] svg path{fill:currentColor!important;}
+.ayah-action.is-active[data-ayah-action="save"]{color:#fff!important;border-color:rgba(45,122,70,.34)!important;background:linear-gradient(135deg,#2d7a46,#4caf6a)!important;}
+@media(max-width:700px){.ayah-arabic{font-size:22px!important;line-height:1.7!important;font-weight:400!important;}.quran-reading-mode .ayah-arabic{font-size:23px!important;line-height:1.7!important;font-weight:400!important;}}
+</style>
+
+<style id="surah-final-layout-and-favorites-fix-style">
+.ayah-card{position:relative!important;padding-top:72px!important;}
+.ayah-toolbar{position:absolute!important;top:22px!important;right:24px!important;left:auto!important;display:flex!important;align-items:center!important;justify-content:flex-end!important;gap:0!important;margin:0!important;z-index:5!important;}
+.ayah-index{display:none!important;}
+.play-btn{width:auto!important;min-width:92px!important;min-height:38px!important;padding:8px 13px!important;border-radius:13px!important;font-size:14px!important;line-height:1!important;justify-self:auto!important;white-space:nowrap!important;}
+.ayah-actions{position:absolute!important;top:22px!important;left:24px!important;right:auto!important;z-index:6!important;display:flex!important;align-items:center!important;justify-content:flex-start!important;gap:8px!important;margin:0!important;padding:0!important;border-top:0!important;}
+.ayah-action{width:38px!important;height:38px!important;min-width:38px!important;min-height:38px!important;}
+.ayah-action.is-active[data-ayah-action="save"] svg path,.surah-page-action.is-active[data-surah-page-action="favorite"] svg path,.surah-page-action.is-active[data-surah-page-action="save"] svg path{fill:currentColor!important;}
+@media(max-width:700px){.ayah-card{padding-top:74px!important;}.ayah-toolbar{top:24px!important;right:20px!important;}.ayah-actions{top:24px!important;left:20px!important;}.play-btn{min-width:86px!important;min-height:36px!important;font-size:13px!important;padding:8px 11px!important;border-radius:12px!important;}.ayah-action{width:36px!important;height:36px!important;min-width:36px!important;min-height:36px!important;}}
+</style>
 </head>
 <body data-surah-arabic="الأنعام‎‎" data-surah-meta="The Cattle · Surah 6 · 165 Ayahs · Meccan" data-surah-number="6" data-surah-page-key="Quran-en/6 - al-anam-en.html" data-surah-title="Al-An'am">
 <div class="container">
@@ -169,8 +195,8 @@ html.light-mode .quran-share-brand{color:#111814;}
 <button class="master-btn secondary" onclick="stopCurrentAyah()" type="button">Stop</button>
 </div>
 </div>
-<div class="loading" id="loading">Loading all 200 ayahs of Al-An'am…</div>
-<div class="error hidden" id="error">The surah could not be loaded. Check your internet connection and reload the page.</div>
+<div class="loading" id="loading">Loading Al-An'am…</div>
+<div class="error hidden" id="error">Unable to load this surah. Check your internet connection and refresh the page.</div>
 <div class="section">
 <h5><center>In the name of Allah, the Most Merciful, the Most Compassionate</center></h5>
 <div class="ayah-list" id="ayahList"></div>
@@ -179,12 +205,12 @@ html.light-mode .quran-share-brand{color:#111814;}
 </div>
 <script>
 const SURAH_NUMBER = 6;
-const translationEdition = "en.asad";
+const translationEdition = "en.sahih";
 const translitEdition = "en.transliteration";
 
 const labels = {
-  playAyah: "Play ayah",
-  stopAyah: "Stop ayah",
+  playAyah: "Ayah",
+  stopAyah: "Stop",
 };
 
 let currentAudio = null;
@@ -303,7 +329,7 @@ function renderAyahs(arData, trData, tlData) {
     const translation = trData.data.ayahs[i];
     const translit = tlData.data.ayahs[i];
     const n = arabic.numberInSurah;
-    const translitCyr = typeof barakaRuCyrillicTranslit === "function" ? barakaRuCyrillicTranslit(translit.text) : translit.text;
+    const translitCyr = translit.text;
 
     const article = document.createElement("article");
     article.className = "ayah-card";

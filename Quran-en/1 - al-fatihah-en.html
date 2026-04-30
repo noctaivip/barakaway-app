@@ -140,8 +140,34 @@ html.dark-mode .content-toggle input{accent-color:#4caf6a;filter:none!important;
 }
 html.light-mode .quran-share-brand{color:#111814;}
 </style>
+
+<style id="surah-visual-balance-fix-style">
+.ayah-arabic{font-size:24px!important;line-height:1.75!important;font-weight:400!important;color:#d7b56d!important;}
+.quran-reading-mode .ayah-arabic{font-size:26px!important;line-height:1.75!important;font-weight:400!important;color:#d7b56d!important;}
+html.dark-mode .ayah-arabic{color:#d7b56d!important;}html.light-mode .ayah-arabic{color:#9a7323!important;}
+.ayah-translit{font-style:normal!important;font-weight:400!important;}
+html.dark-mode .ayah-translit{color:#ffffff!important;}html.light-mode .ayah-translit{color:#111814!important;}
+.quran-reading-mode .ayah-translit{font-weight:400!important;}
+.ayah-meaning{font-weight:400!important;}
+html.dark-mode .ayah-meaning{color:rgba(255,255,255,.78)!important;}html.light-mode .ayah-meaning{color:rgba(17,24,20,.72)!important;}
+.quran-reading-mode .ayah-meaning{font-weight:400!important;}
+.surah-page-action.is-active[data-surah-page-action="favorite"] svg path,.surah-page-action.is-active[data-surah-page-action="save"] svg path,.ayah-action.is-active[data-ayah-action="save"] svg path{fill:currentColor!important;}
+.ayah-action.is-active[data-ayah-action="save"]{color:#fff!important;border-color:rgba(45,122,70,.34)!important;background:linear-gradient(135deg,#2d7a46,#4caf6a)!important;}
+@media(max-width:700px){.ayah-arabic{font-size:22px!important;line-height:1.7!important;font-weight:400!important;}.quran-reading-mode .ayah-arabic{font-size:23px!important;line-height:1.7!important;font-weight:400!important;}}
+</style>
+
+<style id="surah-final-layout-and-favorites-fix-style">
+.ayah-card{position:relative!important;padding-top:72px!important;}
+.ayah-toolbar{position:absolute!important;top:22px!important;right:24px!important;left:auto!important;display:flex!important;align-items:center!important;justify-content:flex-end!important;gap:0!important;margin:0!important;z-index:5!important;}
+.ayah-index{display:none!important;}
+.play-btn{width:auto!important;min-width:92px!important;min-height:38px!important;padding:8px 13px!important;border-radius:13px!important;font-size:14px!important;line-height:1!important;justify-self:auto!important;white-space:nowrap!important;}
+.ayah-actions{position:absolute!important;top:22px!important;left:24px!important;right:auto!important;z-index:6!important;display:flex!important;align-items:center!important;justify-content:flex-start!important;gap:8px!important;margin:0!important;padding:0!important;border-top:0!important;}
+.ayah-action{width:38px!important;height:38px!important;min-width:38px!important;min-height:38px!important;}
+.ayah-action.is-active[data-ayah-action="save"] svg path,.surah-page-action.is-active[data-surah-page-action="favorite"] svg path,.surah-page-action.is-active[data-surah-page-action="save"] svg path{fill:currentColor!important;}
+@media(max-width:700px){.ayah-card{padding-top:74px!important;}.ayah-toolbar{top:24px!important;right:20px!important;}.ayah-actions{top:24px!important;left:20px!important;}.play-btn{min-width:86px!important;min-height:36px!important;font-size:13px!important;padding:8px 11px!important;border-radius:12px!important;}.ayah-action{width:36px!important;height:36px!important;min-width:36px!important;min-height:36px!important;}}
+</style>
 </head>
-<body data-surah-arabic="الفاتحة‎" data-surah-meta="The Opening · Surah 1 · 7 Ayahs · Meccan" data-surah-number="" data-surah-page-key="Quran-en/1 - al-fatihah-en.html" data-surah-title="Al-Fatihah">
+<body data-surah-arabic="الفاتحة‎" data-surah-meta="The Opening · Surah 1 · 7 Ayahs · Meccan" data-surah-number="1" data-surah-page-key="Quran-en/1 - al-fatihah-en.html" data-surah-title="Al-Fatihah">
 <div class="container">
 <h1>Al-Fatihah</h1>
 <div class="surah-premium-hero">
@@ -169,22 +195,22 @@ html.light-mode .quran-share-brand{color:#111814;}
 <button class="master-btn secondary" onclick="stopCurrentAyah()" type="button">Stop</button>
 </div>
 </div>
-<div class="loading" id="loading"></div>
-<div class="error hidden" id="error"></div>
+<div class="loading" id="loading">Loading Al-Fatihah…</div>
+<div class="error hidden" id="error">Unable to load this surah. Check your internet connection and refresh the page.</div>
 <div class="section">
-<h5><center></center></h5>
+<h5><center>In the name of Allah, the Most Merciful, the Most Compassionate</center></h5>
 <div class="ayah-list" id="ayahList"></div>
 </div>
 <div class="link"><a href="../quran-en.html">Back to Quran</a></div>
 </div>
 <script>
-const SURAH_NUMBER = ;
-const translationEdition = "en.asad";
+const SURAH_NUMBER = 1;
+const translationEdition = "en.sahih";
 const translitEdition = "en.transliteration";
 
 const labels = {
-  playAyah: "Play ayah",
-  stopAyah: "Stop ayah",
+  playAyah: "Ayah",
+  stopAyah: "Stop",
 };
 
 let currentAudio = null;
@@ -303,7 +329,7 @@ function renderAyahs(arData, trData, tlData) {
     const translation = trData.data.ayahs[i];
     const translit = tlData.data.ayahs[i];
     const n = arabic.numberInSurah;
-    const translitCyr = typeof barakaRuCyrillicTranslit === "function" ? barakaRuCyrillicTranslit(translit.text) : translit.text;
+    const translitCyr = translit.text;
 
     const article = document.createElement("article");
     article.className = "ayah-card";
@@ -500,7 +526,7 @@ loadSurah();
 
   function ornament(ctx,w,p,isLight,hOpt){ctx.save();const y=(hOpt||1180)-232,ow=620,oh=112,ox=(w-ow)/2;roundRect(ctx,ox,y-oh/2,ow,oh,38);let g=ctx.createLinearGradient(ox,y-56,ox+ow,y+56);g.addColorStop(0,isLight?'rgba(45,122,70,.10)':'rgba(10,40,26,.78)');g.addColorStop(.5,isLight?'rgba(181,138,54,.14)':'rgba(240,216,145,.18)');g.addColorStop(1,isLight?'rgba(45,122,70,.10)':'rgba(10,40,26,.78)');ctx.fillStyle=g;ctx.fill();ctx.strokeStyle=p.strong;ctx.lineWidth=2;ctx.stroke();ctx.strokeStyle=isLight?'rgba(138,104,31,.58)':'rgba(240,216,145,.68)';ctx.lineWidth=2.1;ctx.beginPath();ctx.moveTo(ox+70,y);ctx.bezierCurveTo(ox+160,y-48,ox+238,y+48,ox+310,y);ctx.bezierCurveTo(ox+382,y-48,ox+460,y+48,ox+ow-70,y);ctx.stroke();ctx.restore();}
 
-  function shareHtml(item){let isA=item.type==='ayah';return '<div class="quran-share-card">'+(LOGO?'<img class="quran-share-logo" src="'+esc(LOGO)+'" alt="BarakaWay">':'')+'<div class="quran-share-brand">BarakaWay App</div><div class="quran-share-bismillah">بِسْمِ ٱللَّٰهِ ٱلرَّحْمَـٰنِ ٱلرَّحِيمِ</div><div class="quran-share-main">'+(isA?'Surah '+esc(item.surahNumber)+' · Ayah '+esc(item.ayahNumber):'Surah '+esc(item.number)+' — '+esc(item.title))+'</div><div class="quran-share-arabic">'+esc(item.arabic||'')+'</div><div class="quran-share-meta">'+esc(isA?item.meaning:item.meta)+'</div><div class="quran-share-limit-note"><strong>A PNG card will be created.</strong> The app link will be shared with it.</div><div class="quran-share-actions"><button class="quran-share-button" type="button" data-share-confirm="1">Share карточкой</button><button class="quran-share-button secondary" type="button" data-quran-close="share">Close</button></div></div>';}
+  function shareHtml(item){let isA=item.type==='ayah';return '<div class="quran-share-card">'+(LOGO?'<img class="quran-share-logo" src="'+esc(LOGO)+'" alt="BarakaWay">':'')+'<div class="quran-share-brand">BarakaWay App</div><div class="quran-share-bismillah">بِسْمِ ٱللَّٰهِ ٱلرَّحْمَـٰنِ ٱلرَّحِيمِ</div><div class="quran-share-main">'+(isA?'Surah '+esc(item.surahNumber)+' · Ayah '+esc(item.ayahNumber):'Surah '+esc(item.number)+' — '+esc(item.title))+'</div><div class="quran-share-arabic">'+esc(item.arabic||'')+'</div><div class="quran-share-meta">'+esc(isA?item.meaning:item.meta)+'</div><div class="quran-share-limit-note"><strong>A PNG card will be created.</strong> The app link will be shared with it.</div><div class="quran-share-actions"><button class="quran-share-button" type="button" data-share-confirm="1">Share card</button><button class="quran-share-button secondary" type="button" data-quran-close="share">Close</button></div></div>';}
   function openShare(item){pendingShare=item;let root=document.getElementById('quran-share-card-root');if(root)root.innerHTML=shareHtml(item);openM('quran-share-modal');}
   async function shareItem(item){const text='📲 Download the BarakaWay app — your daily path to barakah\n\n'+APP;try{let file=await makePng(item);if(file&&navigator.canShare&&navigator.canShare({files:[file]})){await navigator.share({title:'BarakaWay App',text:text,files:[file]});toast('Card shared as an image');return;}}catch(e){}try{if(navigator.share){await navigator.share({title:'BarakaWay App',text:text});toast('Share menu opened');return;}}catch(e){}try{await navigator.clipboard.writeText(text);toast('App link copied');}catch(e){}}
 
