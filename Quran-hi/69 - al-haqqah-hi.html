@@ -140,22 +140,135 @@ html.dark-mode .content-toggle input{accent-color:#4caf6a;filter:none!important;
 }
 html.light-mode .quran-share-brand{color:#111814;}
 </style>
+
+
+<style id="surah-visual-balance-fix-style">
+/* Visual balance fix: smaller gold Arabic, readable white transcription, softer translation, active saved icons */
+.ayah-arabic{
+  font-size:24px!important;
+  line-height:1.75!important;
+  font-weight:400!important;
+  color:#d7b56d!important;
+}
+.quran-reading-mode .ayah-arabic{
+  font-size:26px!important;
+  line-height:1.75!important;
+  font-weight:400!important;
+  color:#d7b56d!important;
+}
+html.dark-mode .ayah-arabic{color:#d7b56d!important;}
+html.light-mode .ayah-arabic{color:#9a7323!important;}
+.ayah-translit{
+  font-style:normal!important;
+  font-weight:400!important;
+}
+html.dark-mode .ayah-translit{color:#ffffff!important;}
+html.light-mode .ayah-translit{color:#111814!important;}
+.quran-reading-mode .ayah-translit{font-weight:400!important;}
+.ayah-meaning{
+  font-weight:400!important;
+}
+html.dark-mode .ayah-meaning{color:rgba(255,255,255,.78)!important;}
+html.light-mode .ayah-meaning{color:rgba(17,24,20,.72)!important;}
+.quran-reading-mode .ayah-meaning{font-weight:400!important;}
+.surah-page-action.is-active[data-surah-page-action="favorite"] svg path,
+.surah-page-action.is-active[data-surah-page-action="save"] svg path,
+.ayah-action.is-active[data-ayah-action="save"] svg path{
+  fill:currentColor!important;
+}
+.ayah-action.is-active[data-ayah-action="save"]{
+  color:#fff!important;
+  border-color:rgba(45,122,70,.34)!important;
+  background:linear-gradient(135deg,#2d7a46,#4caf6a)!important;
+}
+@media(max-width:700px){
+  .ayah-arabic{font-size:22px!important;line-height:1.7!important;font-weight:400!important;}
+  .quran-reading-mode .ayah-arabic{font-size:23px!important;line-height:1.7!important;font-weight:400!important;}
+}
+</style>
+
+
+<style id="surah-final-layout-and-favorites-fix-style">
+/* Final ayah layout: no green ayah number, actions left, play button right */
+.ayah-card{
+  position:relative!important;
+  padding-top:72px!important;
+}
+.ayah-toolbar{
+  position:absolute!important;
+  top:22px!important;
+  right:24px!important;
+  left:auto!important;
+  display:flex!important;
+  align-items:center!important;
+  justify-content:flex-end!important;
+  gap:0!important;
+  margin:0!important;
+  z-index:5!important;
+}
+.ayah-index{
+  display:none!important;
+}
+.play-btn{
+  width:auto!important;
+  min-width:92px!important;
+  min-height:38px!important;
+  padding:8px 13px!important;
+  border-radius:13px!important;
+  font-size:14px!important;
+  line-height:1!important;
+  justify-self:auto!important;
+  white-space:nowrap!important;
+}
+.ayah-actions{
+  position:absolute!important;
+  top:22px!important;
+  left:24px!important;
+  right:auto!important;
+  z-index:6!important;
+  display:flex!important;
+  align-items:center!important;
+  justify-content:flex-start!important;
+  gap:8px!important;
+  margin:0!important;
+  padding:0!important;
+  border-top:0!important;
+}
+.ayah-action{
+  width:38px!important;
+  height:38px!important;
+  min-width:38px!important;
+  min-height:38px!important;
+}
+.ayah-action.is-active[data-ayah-action="save"] svg path,
+.surah-page-action.is-active[data-surah-page-action="favorite"] svg path,
+.surah-page-action.is-active[data-surah-page-action="save"] svg path{
+  fill:currentColor!important;
+}
+@media(max-width:700px){
+  .ayah-card{padding-top:74px!important;}
+  .ayah-toolbar{top:24px!important;right:20px!important;}
+  .ayah-actions{top:24px!important;left:20px!important;}
+  .play-btn{min-width:86px!important;min-height:36px!important;font-size:13px!important;padding:8px 11px!important;border-radius:12px!important;}
+  .ayah-action{width:36px!important;height:36px!important;min-width:36px!important;min-height:36px!important;}
+}
+</style>
 </head>
 <body data-surah-arabic="الحاقة" data-surah-meta="सत्य घटना · सूरह 69 · 52 आयतें · मक्की" data-surah-number="69" data-surah-page-key="Quran-hi/69 - al-haqqah-hi.html" data-surah-title="अल-हाक़्क़ा">
 <div class="container">
 <h1>अल-हाक़्क़ा</h1>
 <div class="surah-premium-hero">
 <div class="surah-premium-bismillah">بِسْمِ ٱللَّٰهِ ٱلرَّحْمَـٰنِ ٱلرَّحِيمِ</div>
-<p class="surah-premium-note">कुरआन की सूरहों और आयतों को पढ़ें, सहेजें और साझा करें।</p>
+<p class="surah-premium-note">क़ुरआन की सूराएँ और आयतें पढ़ें, सहेजें और साझा करें।</p>
 </div>
-<div aria-label="सूरह क्रियाएँ" class="surah-page-actions">
+<div aria-label="सूरा क्रियाएँ" class="surah-page-actions">
 <button aria-label="पसंदीदा" class="surah-page-action" data-surah-page-action="favorite" type="button"><svg viewbox="0 0 24 24"><path d="M12 3.6l2.45 5.05 5.55.8-4.02 3.92.95 5.53L12 16.3l-4.93 2.6.95-5.53L4 9.45l5.55-.8L12 3.6z"></path></svg><span class="surah-page-action-label">पसंदीदा</span></button>
 <button aria-label="साझा करें" class="surah-page-action" data-surah-page-action="share" type="button"><svg viewbox="0 0 24 24"><circle cx="18" cy="5" r="3"></circle><circle cx="6" cy="12" r="3"></circle><circle cx="18" cy="19" r="3"></circle><path d="M8.7 10.7l6.6-4.4M8.7 13.3l6.6 4.4"></path></svg><span class="surah-page-action-label">साझा करें</span></button>
-<button aria-label="पठन" class="surah-page-action" data-surah-page-action="reading" type="button"><svg viewbox="0 0 24 24"><path d="M4 5.5A2.5 2.5 0 0 1 6.5 3H20v17H6.5A2.5 2.5 0 0 0 4 22V5.5z"></path><path d="M8 7h8M8 11h8M8 15h5"></path></svg><span class="surah-page-action-label">पठन</span></button>
+<button aria-label="पढ़ना" class="surah-page-action" data-surah-page-action="reading" type="button"><svg viewbox="0 0 24 24"><path d="M4 5.5A2.5 2.5 0 0 1 6.5 3H20v17H6.5A2.5 2.5 0 0 0 4 22V5.5z"></path><path d="M8 7h8M8 11h8M8 15h5"></path></svg><span class="surah-page-action-label">पढ़ना</span></button>
 <button aria-label="सहेजें" class="surah-page-action" data-surah-page-action="save" type="button"><svg viewbox="0 0 24 24"><path d="M6 4.5A1.5 1.5 0 0 1 7.5 3h9A1.5 1.5 0 0 1 18 4.5V21l-6-3.5L6 21V4.5z"></path></svg><span class="surah-page-action-label">सहेजें</span></button>
 <button aria-label="थीम" class="surah-page-action" data-surah-page-action="theme" type="button"><svg viewbox="0 0 24 24"><path d="M21 14.5A8.5 8.5 0 0 1 9.5 3 9 9 0 1 0 21 14.5z"></path></svg><span class="surah-page-action-label">थीम</span></button>
 </div>
-<div aria-label="टेक्स्ट दिखाएँ" class="content-controls">
+<div aria-label="टेक्स्ट प्रदर्शन" class="content-controls">
 <label class="content-toggle"><input checked="" data-layer-toggle="arabic" id="toggleArabic" type="checkbox"/>अरबी</label>
 <label class="content-toggle"><input checked="" data-layer-toggle="translit" id="toggleTranslit" type="checkbox"/>लिप्यंतरण</label>
 <label class="content-toggle"><input checked="" data-layer-toggle="meaning" id="toggleMeaning" type="checkbox"/>अनुवाद</label>
@@ -169,18 +282,18 @@ html.light-mode .quran-share-brand{color:#111814;}
 <button class="master-btn secondary" onclick="stopCurrentAyah()" type="button">रोकें</button>
 </div>
 </div>
-<div class="loading" id="loading">सूरह अल-हाक़्क़ा की सभी 52 आयतें लोड हो रही हैं…</div>
-<div class="error hidden" id="error">सूरह लोड नहीं हो सकी। इंटरनेट कनेक्शन जाँचें और पेज दोबारा खोलें।</div>
+<div class="loading" id="loading">अल-हाक़्क़ा की सभी 52 आयतें लोड हो रही हैं…</div>
+<div class="error hidden" id="error">सूरा लोड नहीं हो सकी। इंटरनेट कनेक्शन जाँचें और पेज रीफ़्रेश करें।</div>
 <div class="section">
-<h5><center>अल्लाह के नाम से, जो अत्यंत कृपालु, असीम दयावान है</center></h5>
+<h5><center>अल्लाह के नाम से, जो अत्यंत कृपालु, अत्यंत दयावान है</center></h5>
 <div class="ayah-list" id="ayahList"></div>
 </div>
-<div class="link"><a href="../quran-hi.html">कुरआन पर वापस जाएँ</a></div>
+<div class="link"><a href="../quran-hi.html">क़ुरआन पर वापस जाएँ</a></div>
 </div>
 <script>
 const SURAH_NUMBER = 69;
-const translationCandidates = ["hi.hindi", "hi.farooq", "hi.omari", "en.asad"];
-const translitCandidates = ["en.transliteration", "en.asad"];
+const translationEdition = "hi.hindi";
+const translitEdition = "en.transliteration";
 
 const labels = {
   playAyah: "आयत",
@@ -190,30 +303,227 @@ const labels = {
 let currentAudio = null;
 let currentButton = null;
 
-function pad3(n) { return String(n).padStart(3, "0"); }
-function audioUrl(ayahNumber) { return `https://verses.quran.foundation/AbdulBaset/Mujawwad/mp3/${pad3(SURAH_NUMBER)}${pad3(ayahNumber)}.mp3`; }
-function resetButton(button) { if (!button) return; button.classList.remove("is-playing"); button.textContent = button.getAttribute("data-default-label"); }
-function stopCurrentAyah() { if (currentAudio) { currentAudio.pause(); currentAudio.currentTime = 0; currentAudio = null; } if (currentButton) { resetButton(currentButton); currentButton = null; } }
-function playAyah(id, button) { const audio = document.getElementById(id); if (!audio) return; if (currentAudio && currentAudio !== audio) stopCurrentAyah(); if (currentAudio === audio && !audio.paused) { stopCurrentAyah(); return; } currentAudio = audio; currentButton = button; button.classList.add("is-playing"); button.textContent = button.getAttribute("data-playing-label"); audio.currentTime = 0; audio.play().catch(() => { resetButton(button); currentAudio = null; currentButton = null; }); audio.onended = () => { if (currentButton === button) { resetButton(button); currentButton = null; } if (currentAudio === audio) currentAudio = null; }; }
-function playAllAyahs() { const audios = Array.from(document.querySelectorAll(".ayah-audio")); const buttons = Array.from(document.querySelectorAll(".play-btn")); let index = 0; stopCurrentAyah(); function playNext() { if (index >= audios.length) return; const audio = audios[index]; const button = buttons[index]; currentAudio = audio; currentButton = button; button.classList.add("is-playing"); button.textContent = button.getAttribute("data-playing-label"); audio.currentTime = 0; audio.play().catch(() => { resetButton(button); currentAudio = null; currentButton = null; }); audio.onended = () => { resetButton(button); index += 1; playNext(); }; } playNext(); }
-async function fetchFirstWorking(endpointFactory, candidates) { let lastError = null; for (const candidate of candidates) { try { const response = await fetch(endpointFactory(candidate)); if (!response.ok) throw new Error(`HTTP ${response.status}`); const data = await response.json(); if (data && data.code === 200 && data.data && data.data.ayahs && data.data.ayahs.length) return data; throw new Error("Invalid API response"); } catch (error) { lastError = error; } } throw lastError || new Error("No working edition found"); }
-function barakaEscapeAttr(value) { return String(value || "").replaceAll("&","&amp;").replaceAll("<","&lt;").replaceAll(">","&gt;").replaceAll('"',"&quot;").replaceAll("'","&#039;"); }
+function pad3(n) {
+  return String(n).padStart(3, "0");
+}
+
+function audioUrl(ayahNumber) {
+  return `https://verses.quran.foundation/AbdulBaset/Mujawwad/mp3/${pad3(SURAH_NUMBER)}${pad3(ayahNumber)}.mp3`;
+}
+
+function resetButton(button) {
+  if (!button) return;
+  button.classList.remove("is-playing");
+  button.textContent = button.getAttribute("data-default-label");
+}
+
+function stopCurrentAyah() {
+  if (currentAudio) {
+    currentAudio.pause();
+    currentAudio.currentTime = 0;
+    currentAudio = null;
+  }
+  if (currentButton) {
+    resetButton(currentButton);
+    currentButton = null;
+  }
+}
+
+function playAyah(id, button) {
+  const audio = document.getElementById(id);
+  if (!audio) return;
+
+  if (currentAudio && currentAudio !== audio) stopCurrentAyah();
+
+  if (currentAudio === audio && !audio.paused) {
+    stopCurrentAyah();
+    return;
+  }
+
+  currentAudio = audio;
+  currentButton = button;
+  button.classList.add("is-playing");
+  button.textContent = button.getAttribute("data-playing-label");
+
+  audio.currentTime = 0;
+  audio.play().catch(() => {
+    resetButton(button);
+    currentAudio = null;
+    currentButton = null;
+  });
+
+  audio.onended = () => {
+    if (currentButton === button) {
+      resetButton(button);
+      currentButton = null;
+    }
+    if (currentAudio === audio) currentAudio = null;
+  };
+}
+
+function playAllAyahs() {
+  const audios = Array.from(document.querySelectorAll(".ayah-audio"));
+  const buttons = Array.from(document.querySelectorAll(".play-btn"));
+  let index = 0;
+  stopCurrentAyah();
+
+  function playNext() {
+    if (index >= audios.length) return;
+    const audio = audios[index];
+    const button = buttons[index];
+    currentAudio = audio;
+    currentButton = button;
+    button.classList.add("is-playing");
+    button.textContent = button.getAttribute("data-playing-label");
+    audio.currentTime = 0;
+    audio.play().catch(() => {
+      resetButton(button);
+      currentAudio = null;
+      currentButton = null;
+    });
+    audio.onended = () => {
+      resetButton(button);
+      index += 1;
+      playNext();
+    };
+  }
+  playNext();
+}
+
+
+function barakaRuCyrillicTranslit(input) {
+  let s = String(input || "").trim();
+
+  // Читаемая русская транскрипция: долгие гласные пишутся как ии / уу / аа,
+  // а удвоенные согласные в начале слов разделяются дефисом: Уат-Тиини, Уаз-Зайтуун.
+  const latinPairs = [
+    ["ā","aa"],["Ā","Aa"],["ī","ii"],["Ī","Ii"],["ū","uu"],["Ū","Uu"],
+    ["ḥ","h"],["Ḥ","H"],["ṣ","s"],["Ṣ","S"],["ḍ","d"],["Ḍ","D"],["ṭ","t"],["Ṭ","T"],
+    ["ẓ","z"],["Ẓ","Z"],["ġ","gh"],["Ġ","Gh"],["ḫ","kh"],["Ḫ","Kh"],["ḏ","dh"],["Ḏ","Dh"],
+    ["ṯ","th"],["Ṯ","Th"],["ʿ","'"],["ʾ","'"],["ʼ","'"],["`","'"],["’","'"],["‘","'"],
+    ["á","a"],["í","i"],["ú","u"]
+  ];
+  latinPairs.forEach(([a,b]) => { s = s.split(a).join(b); });
+
+  s = s.replace(/\b([Ww])a([bcdfghjklmnpqrstvwxyz])\2/g, "$1a$2-$2");
+  s = s.replace(/\b([Aa]l|[Ww]al|[Bb]il)([tdrszln])\2/g, "$1-$2");
+
+  const digraphs = [
+    ["kh","х"],["Kh","Х"],["KH","Х"],
+    ["sh","ш"],["Sh","Ш"],["SH","Ш"],
+    ["th","с"],["Th","С"],["TH","С"],
+    ["dh","з"],["Dh","З"],["DH","З"],
+    ["gh","ғ"],["Gh","Ғ"],["GH","Ғ"],
+    ["ch","ч"],["Ch","Ч"],["CH","Ч"],
+    ["aa","аа"],["Aa","Аа"],["AA","АА"],
+    ["ee","ии"],["Ee","Ии"],["EE","ИИ"],
+    ["ii","ии"],["Ii","Ии"],["II","ИИ"],
+    ["oo","уу"],["Oo","Уу"],["OO","УУ"],
+    ["uu","уу"],["Uu","Уу"],["UU","УУ"],
+    ["ay","ай"],["Ay","Ай"],["AY","АЙ"],
+    ["aw","ау"],["Aw","Ау"],["AW","АУ"]
+  ];
+  digraphs.forEach(([a,b]) => { s = s.split(a).join(b); });
+
+  const mp = {
+    "a":"а","b":"б","c":"к","d":"д","e":"е","f":"ф","g":"г","h":"х","i":"и","j":"дж",
+    "k":"к","l":"л","m":"м","n":"н","o":"о","p":"п","q":"қ","r":"р","s":"с","t":"т",
+    "u":"у","v":"в","w":"у","x":"кс","y":"й","z":"з",
+    "A":"А","B":"Б","C":"К","D":"Д","E":"Е","F":"Ф","G":"Г","H":"Х","I":"И","J":"Дж",
+    "K":"К","L":"Л","M":"М","N":"Н","O":"О","P":"П","Q":"Қ","R":"Р","S":"С","T":"Т",
+    "U":"У","V":"В","W":"У","X":"Кс","Y":"Й","Z":"З"
+  };
+  let out = Array.from(s).map(ch => mp[ch] || ch).join("").replace(/\s+/g, " ").trim();
+  out = out.replace(/(^|[.!?]\s+|\n)([а-яёқғ])/g, (m,p,c) => p + c.toUpperCase());
+  return out;
+}
+function barakaEscapeAttr(value) {
+  return String(value || "")
+    .replaceAll("&","&amp;")
+    .replaceAll("<","&lt;")
+    .replaceAll(">","&gt;")
+    .replaceAll('"',"&quot;")
+    .replaceAll("'","&#039;");
+}
+
+
+
 function renderAyahs(arData, trData, tlData) {
-  const list = document.getElementById("ayahList"); list.innerHTML = "";
+  const list = document.getElementById("ayahList");
+  list.innerHTML = "";
+
   const count = Math.min(arData.data.ayahs.length, trData.data.ayahs.length, tlData.data.ayahs.length);
+
   for (let i = 0; i < count; i++) {
-    const arabic = arData.data.ayahs[i]; const translation = trData.data.ayahs[i]; const translit = tlData.data.ayahs[i]; const n = arabic.numberInSurah; const translitText = translit.text;
-    const article = document.createElement("article"); article.className = "ayah-card"; article.id = `ayah-${n}`;
+    const arabic = arData.data.ayahs[i];
+    const translation = trData.data.ayahs[i];
+    const translit = tlData.data.ayahs[i];
+    const n = arabic.numberInSurah;
+    const translitCyr = translit.text;
+
+    const article = document.createElement("article");
+    article.className = "ayah-card";
+    article.id = `ayah-${n}`;
     article.innerHTML = `
-      <div class="ayah-toolbar"><div class="ayah-index">${n}</div><button class="play-btn" type="button" data-default-label="▶ ${labels.playAyah} ${n}" data-playing-label="■ ${labels.stopAyah} ${n}" onclick="playAyah('ayah-${n}', this)">▶ ${labels.playAyah} ${n}</button></div>
+      <div class="ayah-toolbar">
+        <div class="ayah-index">${n}</div>
+        <button
+          class="play-btn"
+          type="button"
+          data-default-label="▶ ${labels.playAyah} ${n}"
+          data-playing-label="■ ${labels.stopAyah} ${n}"
+          onclick="playAyah('ayah-${n}', this)"
+        >▶ ${labels.playAyah} ${n}</button>
+      </div>
+
       <audio class="ayah-audio" id="ayah-${n}" preload="none" src="${audioUrl(n)}"></audio>
-      <div class="ayah-arabic">${arabic.text}</div><div class="ayah-translit" data-original-translit="${barakaEscapeAttr(translit.text)}">${translitText}</div><div class="ayah-meaning">${translation.text}</div>
-      <div class="ayah-actions" aria-label="आयत क्रियाएँ"><button class="ayah-action" type="button" data-ayah-action="share" data-ayah-number="${n}" data-ayah-arabic="${barakaEscapeAttr(arabic.text)}" data-ayah-translit="${barakaEscapeAttr(translitText)}" data-ayah-meaning="${barakaEscapeAttr(translation.text)}" aria-label="साझा करें"><svg viewBox="0 0 24 24"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><path d="M8.7 10.7l6.6-4.4M8.7 13.3l6.6 4.4"/></svg></button><button class="ayah-action" type="button" data-ayah-action="save" data-ayah-number="${n}" data-ayah-arabic="${barakaEscapeAttr(arabic.text)}" data-ayah-translit="${barakaEscapeAttr(translitText)}" data-ayah-meaning="${barakaEscapeAttr(translation.text)}" aria-label="सहेजें"><svg viewBox="0 0 24 24"><path d="M6 4.5A1.5 1.5 0 0 1 7.5 3h9A1.5 1.5 0 0 1 18 4.5V21l-6-3.5L6 21V4.5z"/></svg></button></div>`;
+
+      <div class="ayah-arabic">${arabic.text}</div>
+      <div class="ayah-translit" data-original-translit="${barakaEscapeAttr(translit.text)}">${translitCyr}</div>
+      <div class="ayah-meaning">${translation.text}</div>
+
+      <div class="ayah-actions" aria-label="आयत क्रियाएँ">
+        <button class="ayah-action" type="button" data-ayah-action="share" data-ayah-number="${n}" data-ayah-arabic="${barakaEscapeAttr(arabic.text)}" data-ayah-translit="${barakaEscapeAttr(translitCyr)}" data-ayah-meaning="${barakaEscapeAttr(translation.text)}" aria-label="साझा करें"><svg viewBox="0 0 24 24"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><path d="M8.7 10.7l6.6-4.4M8.7 13.3l6.6 4.4"/></svg></button>
+        <button class="ayah-action" type="button" data-ayah-action="save" data-ayah-number="${n}" data-ayah-arabic="${barakaEscapeAttr(arabic.text)}" data-ayah-translit="${barakaEscapeAttr(translitCyr)}" data-ayah-meaning="${barakaEscapeAttr(translation.text)}" aria-label="सहेजें"><svg viewBox="0 0 24 24"><path d="M6 4.5A1.5 1.5 0 0 1 7.5 3h9A1.5 1.5 0 0 1 18 4.5V21l-6-3.5L6 21V4.5z"/></svg></button>
+      </div>
+    `;
     list.appendChild(article);
   }
-  document.getElementById("loading").classList.add("hidden"); document.dispatchEvent(new CustomEvent("barakaway:ayahs-rendered"));
+
+  document.getElementById("loading").classList.add("hidden");
+  document.dispatchEvent(new CustomEvent("barakaway:ayahs-rendered"));
 }
-async function loadSurah() { const loading = document.getElementById("loading"); const error = document.getElementById("error"); try { const [arRes, trData, tlData] = await Promise.all([fetch(`https://api.alquran.cloud/v1/surah/${SURAH_NUMBER}/quran-uthmani`), fetchFirstWorking(edition => `https://api.alquran.cloud/v1/surah/${SURAH_NUMBER}/${edition}`, translationCandidates), fetchFirstWorking(edition => `https://api.alquran.cloud/v1/surah/${SURAH_NUMBER}/${edition}`, translitCandidates)]); if (!arRes.ok) throw new Error("Failed to load Arabic text"); const arData = await arRes.json(); if (arData.code !== 200) throw new Error("Invalid Arabic response"); renderAyahs(arData, trData, tlData); } catch (e) { loading.classList.add("hidden"); error.classList.remove("hidden"); console.error(e); } }
+
+
+async function loadSurah() {
+  const loading = document.getElementById("loading");
+  const error = document.getElementById("error");
+
+  try {
+    const [arRes, trRes, tlRes] = await Promise.all([
+      fetch(`https://api.alquran.cloud/v1/surah/${SURAH_NUMBER}/quran-uthmani`),
+      fetch(`https://api.alquran.cloud/v1/surah/${SURAH_NUMBER}/${translationEdition}`),
+      fetch(`https://api.alquran.cloud/v1/surah/${SURAH_NUMBER}/${translitEdition}`)
+    ]);
+
+    if (!arRes.ok || !trRes.ok || !tlRes.ok) throw new Error("Failed to load surah data");
+
+    const [arData, trData, tlData] = await Promise.all([
+      arRes.json(),
+      trRes.json(),
+      tlRes.json()
+    ]);
+
+    if (arData.code !== 200 || trData.code !== 200 || tlData.code !== 200) throw new Error("API returned an invalid response");
+
+    renderAyahs(arData, trData, tlData);
+  } catch (e) {
+    loading.classList.add("hidden");
+    error.classList.remove("hidden");
+    console.error(e);
+  }
+}
+
 loadSurah();
 </script>
 
@@ -223,7 +533,7 @@ loadSurah();
   const P='barakaway:quran:surah:hi:';
   const PAGE_KEY=document.body.dataset.surahPageKey||location.pathname;
   const SURAH_NUMBER=document.body.dataset.surahNumber||'';
-  const SURAH_TITLE=document.body.dataset.surahTitle||document.querySelector('h1')?.textContent?.trim()||'सूरह';
+  const SURAH_TITLE=document.body.dataset.surahTitle||document.querySelector('h1')?.textContent?.trim()||'सूरा';
   const SURAH_ARABIC=document.body.dataset.surahArabic||'';
   const SURAH_META=document.body.dataset.surahMeta||'';
   const LOGO='../assets/barakaway-logo.png';
@@ -235,16 +545,23 @@ loadSurah();
   function toast(m){let t=document.querySelector('.quran-toast');if(!t){t=document.createElement('div');t.className='quran-toast';document.body.appendChild(t);}t.textContent=m;t.classList.add('is-visible');clearTimeout(toastTimer);toastTimer=setTimeout(()=>t.classList.remove('is-visible'),2100);}
   function esc(v){return String(v||'').replaceAll('&','&amp;').replaceAll('<','&lt;').replaceAll('>','&gt;').replaceAll('"','&quot;').replaceAll("'","&#039;");}
   function pageData(){return {type:'surah',key:PAGE_KEY,number:SURAH_NUMBER,title:SURAH_TITLE,arabic:SURAH_ARABIC,meta:SURAH_META,href:location.href};}
+
+  const GLOBAL_FAVORITES_KEY='barakaway_favorites_v1';
+  function globalFavoriteData(){return {title:SURAH_TITLE,url:PAGE_KEY,text:SURAH_META,type:'सूरा'};}
+  function globalFavoriteId(data){return (data.url||'')+'::'+(data.title||'');}
+  function readGlobalFavorites(){try{let raw=localStorage.getItem(GLOBAL_FAVORITES_KEY);let list=raw?JSON.parse(raw):[];return Array.isArray(list)?list.filter(Boolean):[];}catch(e){return [];}}
+  function writeGlobalFavorites(list){localStorage.setItem(GLOBAL_FAVORITES_KEY,JSON.stringify(Array.isArray(list)?list:[]));try{if(window.BarakaWayFavorites&&typeof window.BarakaWayFavorites.refreshNav==='function')window.BarakaWayFavorites.refreshNav();}catch(e){}try{document.dispatchEvent(new CustomEvent('barakaway:favorites:changed'));}catch(e){}}
+  function setGlobalSurahFavorite(active){let data=globalFavoriteData(),id=globalFavoriteId(data),list=readGlobalFavorites().filter(x=>String(x.id)!==String(id));if(active){list.unshift({id:id,title:data.title,url:data.url,text:data.text,type:data.type,addedAt:new Date().toISOString()});}writeGlobalFavorites(list);}
   function ayahData(btn){const c=btn.closest('.ayah-card');const n=btn.dataset.ayahNumber||'';return {type:'ayah',key:PAGE_KEY+'#ayah-'+n,surahNumber:SURAH_NUMBER,surahTitle:SURAH_TITLE,ayahNumber:n,arabic:btn.dataset.ayahArabic||c?.querySelector('.ayah-arabic')?.textContent?.trim()||'',translit:btn.dataset.ayahTranslit||c?.querySelector('.ayah-translit')?.textContent?.trim()||'',meaning:btn.dataset.ayahMeaning||c?.querySelector('.ayah-meaning')?.textContent?.trim()||'',href:location.href.split('#')[0]+'#ayah-'+n};}
   function favs(){return rj(P+'favorites',[]);}
   function setFavs(x){wj(P+'favorites',x);}
-  function toggleSurahFav(){const item=pageData();let f=favs(),e=f.some(x=>x.key===item.key);setFavs(e?f.filter(x=>x.key!==item.key):[Object.assign({savedAt:Date.now()},item)].concat(f));toast(e?'सूरह удалена из избранного':'सूरह добавлена в избранное');sync();}
-  function saveItem(item){wj(P+'lastSaved',Object.assign({savedAt:Date.now()},item));toast(item.type==='ayah'?'आयत сохранён':'सूरह сохранена');sync();}
+  function toggleSurahFav(){const item=pageData();let f=favs(),e=f.some(x=>x.key===item.key),active=!e;setFavs(e?f.filter(x=>x.key!==item.key):[Object.assign({savedAt:Date.now()},item)].concat(f));setGlobalSurahFavorite(active);toast(e?'सूरा पसंदीदा से हटा दी गई':'सूरा पसंदीदा में जोड़ दी गई');sync();}
+  function saveItem(item){wj(P+'lastSaved',Object.assign({savedAt:Date.now()},item));toast(item.type==='ayah'?'आयत सहेजी गई':'सूरा सहेजी गई');sync();}
   function goToSaved(){let s=rj(P+'lastSaved',null);if(!s||!s.href){toast('अभी कोई सहेजा हुआ स्थान नहीं है');return;} if(s.key&&s.key.startsWith(PAGE_KEY+'#ayah-')){let id=s.key.split('#').pop();let el=document.getElementById(id);if(el){el.scrollIntoView({behavior:'smooth',block:'center'});el.style.outline='2px solid rgba(240,216,145,.85)';el.style.outlineOffset='6px';setTimeout(()=>{el.style.outline='';el.style.outlineOffset='';},2400);toast('सहेजी गई आयत खोली गई');return;}} location.href=s.href;}
-  function renderFavs(){const root=document.getElementById('quran-favorites-list');if(!root)return;let f=favs();if(!f.length){root.innerHTML='<div class="quran-empty-state">अभी कोई पसंदीदा सूरह नहीं है। सूरह पेज के ऊपर स्टार दबाएँ।</div>';return;}root.innerHTML=f.map(item=>{let title='सूरह '+esc(item.number)+' — '+esc(item.title);let meta=esc(item.arabic)+' · '+esc(item.meta);return '<div class="quran-favorite-item"><a href="'+esc(item.href)+'" style="text-decoration:none;color:inherit;min-width:0;"><div class="quran-favorite-title">'+title+'</div><div class="quran-favorite-meta">'+meta+'</div></a><a class="quran-favorite-open" href="'+esc(item.href)+'">›</a><button class="quran-favorite-remove" type="button" data-remove-favorite="'+esc(item.key)+'"><svg viewBox="0 0 24 24"><path d="M12 3.6l2.45 5.05 5.55.8-4.02 3.92.95 5.53L12 16.3l-4.93 2.6.95-5.53L4 9.45l5.55-.8L12 3.6z"/></svg></button></div>';}).join('');}
+  function renderFavs(){const root=document.getElementById('quran-favorites-list');if(!root)return;let f=favs();if(!f.length){root.innerHTML='<div class="quran-empty-state">अभी कोई पसंदीदा सूरा नहीं है। सूरा पेज पर ऊपर दिए गए सितारे को दबाएँ।</div>';return;}root.innerHTML=f.map(item=>{let title='सूरा '+esc(item.number)+' — '+esc(item.title);let meta=esc(item.arabic)+' · '+esc(item.meta);return '<div class="quran-favorite-item"><a href="'+esc(item.href)+'" style="text-decoration:none;color:inherit;min-width:0;"><div class="quran-favorite-title">'+title+'</div><div class="quran-favorite-meta">'+meta+'</div></a><a class="quran-favorite-open" href="'+esc(item.href)+'">›</a><button class="quran-favorite-remove" type="button" data-remove-favorite="'+esc(item.key)+'"><svg viewBox="0 0 24 24"><path d="M12 3.6l2.45 5.05 5.55.8-4.02 3.92.95 5.53L12 16.3l-4.93 2.6.95-5.53L4 9.45l5.55-.8L12 3.6z"/></svg></button></div>';}).join('');}
   function sync(){let keys=new Set(favs().map(x=>x.key)),saved=rj(P+'lastSaved',null);document.querySelectorAll('[data-surah-page-action="favorite"]').forEach(b=>b.classList.toggle('is-active',keys.has(PAGE_KEY)));document.querySelectorAll('[data-surah-page-action="save"]').forEach(b=>b.classList.toggle('is-active',!!saved));document.querySelectorAll('[data-ayah-action="save"]').forEach(b=>b.classList.toggle('is-active',saved&&saved.key===ayahData(b).key));let reading=localStorage.getItem(P+'readingMode')==='1';document.body.classList.toggle('quran-reading-mode',reading);let rb=document.querySelector('[data-surah-page-action="reading"]');if(rb)rb.classList.toggle('is-active',reading);let tb=document.querySelector('[data-surah-page-action="theme"]');if(tb)tb.classList.toggle('is-active',document.documentElement.classList.contains('dark-mode'));}
   function applyLayers(){let s=rj(P+'layers',{arabic:true,translit:true,meaning:true});document.body.classList.toggle('hide-arabic',!s.arabic);document.body.classList.toggle('hide-translit',!s.translit);document.body.classList.toggle('hide-meaning',!s.meaning);['Arabic','Translit','Meaning'].forEach(n=>{let el=document.getElementById('toggle'+n);if(el)el.checked=!!s[n.toLowerCase()];});}
-  function updLayer(name,checked){let s=rj(P+'layers',{arabic:true,translit:true,meaning:true});s[name]=checked;if(!s.arabic&&!s.translit&&!s.meaning){s[name]=true;toast('कम से कम एक टेक्स्ट लेयर रखनी होगी');}wj(P+'layers',s);applyLayers();}
+  function updLayer(name,checked){let s=rj(P+'layers',{arabic:true,translit:true,meaning:true});s[name]=checked;if(!s.arabic&&!s.translit&&!s.meaning){s[name]=true;toast('कम से कम एक टेक्स्ट लेयर चालू रहनी चाहिए');}wj(P+'layers',s);applyLayers();}
   function openM(id){let m=document.getElementById(id);if(m){m.classList.add('is-visible');m.setAttribute('aria-hidden','false');}}
   function closeM(id){let m=document.getElementById(id);if(m){m.classList.remove('is-visible');m.setAttribute('aria-hidden','true');}}
 
@@ -310,7 +627,7 @@ loadSurah();
 
     if(isAyah){
       ctx.direction='ltr';ctx.fillStyle=p.white;ctx.font='950 '+(isLong?44:48)+'px '+fontFamily;
-      ctx.fillText('सूरह '+item.surahNumber+' · आयत '+item.ayahNumber,w/2,isLong?452:482);
+      ctx.fillText('सूरा '+item.surahNumber+' · आयत '+item.ayahNumber,w/2,isLong?452:482);
 
       ctx.direction='rtl';ctx.fillStyle=p.gold;
       const arabicFit=fitWrapped(ctx,item.arabic||'',710,fontFamily,'900',isLong?42:54,32,isLong?7:5);
@@ -330,9 +647,9 @@ loadSurah();
       ctx.font='800 '+meaningFit.size+'px '+fontFamily;
       drawCenteredLines(ctx,meaningFit.lines,w/2,meaningStart,meaningFit.lineHeight,0);
     }else{
-      ctx.direction='ltr';ctx.fillStyle=p.white;ctx.font='950 48px '+fontFamily;ctx.fillText('सूरह '+item.number+' — '+item.title,w/2,500);
+      ctx.direction='ltr';ctx.fillStyle=p.white;ctx.font='950 48px '+fontFamily;ctx.fillText('सूरा '+item.number+' — '+item.title,w/2,500);
       ctx.direction='rtl';ctx.fillStyle=p.gold;ctx.font='900 68px '+fontFamily;ctx.fillText(item.arabic||'',w/2,630);
-      ctx.direction='ltr';ctx.fillStyle=p.soft;ctx.font='850 27px '+fontFamily;ctx.fillText(item.meta||'पवित्र कुरआन',w/2,760);
+      ctx.direction='ltr';ctx.fillStyle=p.soft;ctx.font='850 27px '+fontFamily;ctx.fillText(item.meta||'पवित्र क़ुरआन',w/2,760);
     }
     ornament(ctx,w,p,isLight,h);
     const blob=await blobFromCanvas(canvas);if(!blob)return null;
@@ -346,16 +663,16 @@ loadSurah();
 
   function ornament(ctx,w,p,isLight,hOpt){ctx.save();const y=(hOpt||1180)-232,ow=620,oh=112,ox=(w-ow)/2;roundRect(ctx,ox,y-oh/2,ow,oh,38);let g=ctx.createLinearGradient(ox,y-56,ox+ow,y+56);g.addColorStop(0,isLight?'rgba(45,122,70,.10)':'rgba(10,40,26,.78)');g.addColorStop(.5,isLight?'rgba(181,138,54,.14)':'rgba(240,216,145,.18)');g.addColorStop(1,isLight?'rgba(45,122,70,.10)':'rgba(10,40,26,.78)');ctx.fillStyle=g;ctx.fill();ctx.strokeStyle=p.strong;ctx.lineWidth=2;ctx.stroke();ctx.strokeStyle=isLight?'rgba(138,104,31,.58)':'rgba(240,216,145,.68)';ctx.lineWidth=2.1;ctx.beginPath();ctx.moveTo(ox+70,y);ctx.bezierCurveTo(ox+160,y-48,ox+238,y+48,ox+310,y);ctx.bezierCurveTo(ox+382,y-48,ox+460,y+48,ox+ow-70,y);ctx.stroke();ctx.restore();}
 
-  function shareHtml(item){let isA=item.type==='ayah';return '<div class="quran-share-card">'+(LOGO?'<img class="quran-share-logo" src="'+esc(LOGO)+'" alt="BarakaWay">':'')+'<div class="quran-share-brand">BarakaWay App</div><div class="quran-share-bismillah">بِسْمِ ٱللَّٰهِ ٱلرَّحْمَـٰنِ ٱلرَّحِيمِ</div><div class="quran-share-main">'+(isA?'सूरह '+esc(item.surahNumber)+' · आयत '+esc(item.ayahNumber):'सूरह '+esc(item.number)+' — '+esc(item.title))+'</div><div class="quran-share-arabic">'+esc(item.arabic||'')+'</div><div class="quran-share-meta">'+esc(isA?item.meaning:item.meta)+'</div><div class="quran-share-limit-note"><strong>PNG कार्ड बनाया जाएगा.</strong> इसके साथ ऐप का लिंक भेजा जाएगा।</div><div class="quran-share-actions"><button class="quran-share-button" type="button" data-share-confirm="1">साझा करें карточкой</button><button class="quran-share-button secondary" type="button" data-quran-close="share">बंद करें</button></div></div>';}
+  function shareHtml(item){let isA=item.type==='ayah';return '<div class="quran-share-card">'+(LOGO?'<img class="quran-share-logo" src="'+esc(LOGO)+'" alt="BarakaWay">':'')+'<div class="quran-share-brand">BarakaWay App</div><div class="quran-share-bismillah">بِسْمِ ٱللَّٰهِ ٱلرَّحْمَـٰنِ ٱلرَّحِيمِ</div><div class="quran-share-main">'+(isA?'सूरा '+esc(item.surahNumber)+' · आयत '+esc(item.ayahNumber):'सूरा '+esc(item.number)+' — '+esc(item.title))+'</div><div class="quran-share-arabic">'+esc(item.arabic||'')+'</div><div class="quran-share-meta">'+esc(isA?item.meaning:item.meta)+'</div><div class="quran-share-limit-note"><strong>PNG कार्ड बनाया जाएगा।</strong> इसके साथ ऐप की लिंक भेजी जाएगी।</div><div class="quran-share-actions"><button class="quran-share-button" type="button" data-share-confirm="1">कार्ड साझा करें</button><button class="quran-share-button secondary" type="button" data-quran-close="share">बंद करें</button></div></div>';}
   function openShare(item){pendingShare=item;let root=document.getElementById('quran-share-card-root');if(root)root.innerHTML=shareHtml(item);openM('quran-share-modal');}
-  async function shareItem(item){const text='📲 BarakaWay ऐप डाउनलोड करें — बरकत की ओर आपका दैनिक मार्ग\n\n'+APP;try{let file=await makePng(item);if(file&&navigator.canShare&&navigator.canShare({files:[file]})){await navigator.share({title:'BarakaWay App',text:text,files:[file]});toast('कार्ड इमेज के रूप में भेजा गया');return;}}catch(e){}try{if(navigator.share){await navigator.share({title:'BarakaWay App',text:text});toast('शेयर मेनू खुल गया');return;}}catch(e){}try{await navigator.clipboard.writeText(text);toast('ऐप लिंक कॉपी हो गया');}catch(e){}}
+  async function shareItem(item){const text='📲 BarakaWay ऐप डाउनलोड करें — बरकत की ओर आपका दैनिक रास्ता\n\n'+APP;try{let file=await makePng(item);if(file&&navigator.canShare&&navigator.canShare({files:[file]})){await navigator.share({title:'BarakaWay App',text:text,files:[file]});toast('कार्ड छवि के रूप में भेजा गया');return;}}catch(e){}try{if(navigator.share){await navigator.share({title:'BarakaWay App',text:text});toast('साझा करने का मेनू खुल गया');return;}}catch(e){}try{await navigator.clipboard.writeText(text);toast('ऐप लिंक कॉपी हो गई');}catch(e){}}
 
   document.addEventListener('click',function(e){
-    let rm=e.target.closest('[data-remove-favorite]');if(rm){e.preventDefault();setFavs(favs().filter(x=>x.key!==rm.dataset.removeFavorite));renderFavs();sync();toast('सूरह удалена из избранного');return;}
+    let rm=e.target.closest('[data-remove-favorite]');if(rm){e.preventDefault();setFavs(favs().filter(x=>x.key!==rm.dataset.removeFavorite));renderFavs();sync();toast('सूरा पसंदीदा से हटा दी गई');return;}
     let cl=e.target.closest('[data-quran-close]');if(cl){e.preventDefault();if(cl.dataset.quranClose==='favorites')closeM('quran-favorites-modal');if(cl.dataset.quranClose==='share')closeM('quran-share-modal');return;}
     if(e.target.classList&&e.target.classList.contains('quran-modal-backdrop')){e.preventDefault();e.target.classList.remove('is-visible');e.target.setAttribute('aria-hidden','true');return;}
     let cf=e.target.closest('[data-share-confirm]');if(cf){e.preventDefault();if(pendingShare)shareItem(pendingShare);return;}
-    let pb=e.target.closest('[data-surah-page-action]');if(pb){e.preventDefault();e.stopPropagation();let a=pb.dataset.surahPageAction,pd=pageData();if(a==='favorite')toggleSurahFav();if(a==='share')openShare(pd);if(a==='reading'){let en=!(localStorage.getItem(P+'readingMode')==='1');localStorage.setItem(P+'readingMode',en?'1':'0');toast(en?'पठन मोड चालू है':'पठन मोड बंद है');sync();}if(a==='save')goToSaved();if(a==='theme'){let root=document.documentElement,isDark=root.classList.contains('dark-mode');root.classList.toggle('dark-mode',!isDark);root.classList.toggle('light-mode',isDark);localStorage.setItem('theme',isDark?'light':'dark');toast(isDark?'लाइट थीम':'डार्क थीम');sync();}return;}
+    let pb=e.target.closest('[data-surah-page-action]');if(pb){e.preventDefault();e.stopPropagation();let a=pb.dataset.surahPageAction,pd=pageData();if(a==='favorite')toggleSurahFav();if(a==='share')openShare(pd);if(a==='reading'){let en=!(localStorage.getItem(P+'readingMode')==='1');localStorage.setItem(P+'readingMode',en?'1':'0');toast(en?'रीडिंग मोड चालू है':'रीडिंग मोड बंद है');sync();}if(a==='save')goToSaved();if(a==='theme'){let root=document.documentElement,isDark=root.classList.contains('dark-mode');root.classList.toggle('dark-mode',!isDark);root.classList.toggle('light-mode',isDark);localStorage.setItem('theme',isDark?'light':'dark');toast(isDark?'लाइट थीम':'डार्क थीम');sync();}return;}
     let ab=e.target.closest('[data-ayah-action]');if(ab){e.preventDefault();e.stopPropagation();let a=ab.dataset.ayahAction,d=ayahData(ab);if(a==='save')saveItem(d);if(a==='share')openShare(d);return;}
   },true);
   document.addEventListener('change',function(e){let t=e.target.closest('[data-layer-toggle]');if(t)updLayer(t.dataset.layerToggle,t.checked);});
