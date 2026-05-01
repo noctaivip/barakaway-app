@@ -12,6 +12,25 @@ In the name of Allah, the Most Merciful, the Most Compassionate
 <title>Исламские статьи — One Dollar Exit</title>
 <meta name="description" content="Исламские статьи о садака, закяте, помощи людям, поклонении, Рамадане, Курбан-байраме, семье, нравственности и практической жизни мусульманина.">
 <script src="/theme-init.js"></script>
+<script>
+(function(){
+  const root = document.documentElement;
+  const keys = ['theme','app-theme','barakaway-theme','preferred-theme','color-theme'];
+  let savedTheme = '';
+  for(const key of keys){
+    const value = localStorage.getItem(key);
+    if(value && /^(dark|light|dark-mode|light-mode)$/i.test(value)){
+      savedTheme = value.toLowerCase();
+      break;
+    }
+  }
+  if(savedTheme){
+    const isLight = savedTheme === 'light' || savedTheme === 'light-mode';
+    root.classList.toggle('light-mode', isLight);
+    root.classList.toggle('dark-mode', !isLight);
+  }
+})();
+</script>
 <link rel="stylesheet" href="/theme.css">
 <link rel="stylesheet" href="/theme-universal.css">
 
@@ -1036,6 +1055,49 @@ html.light-mode .article-go a:hover{
   .article-go-arrow{width:18px;height:18px;font-size:12px;}
 }
 
+
+/* === Premium Article of the Day action === */
+.action-day{
+  position:relative;
+  overflow:hidden;
+  border-color:rgba(240,216,145,.46) !important;
+  color:#fff4d7 !important;
+  background:
+    radial-gradient(circle at 24% 0%,rgba(255,255,255,.16),transparent 38%),
+    linear-gradient(135deg,rgba(181,138,54,.78),rgba(45,122,70,.58) 54%,rgba(9,28,21,.96)) !important;
+  box-shadow:
+    0 14px 32px rgba(0,0,0,.22),
+    inset 0 1px 0 rgba(255,255,255,.10),
+    0 0 0 1px rgba(215,181,109,.08) !important;
+}
+.action-day::before{
+  content:"";
+  position:absolute;
+  inset:1px;
+  border-radius:21px;
+  background:linear-gradient(90deg,transparent,rgba(255,255,255,.17),transparent);
+  transform:translateX(-130%);
+  transition:transform .45s ease;
+  pointer-events:none;
+}
+.action-day:hover::before{transform:translateX(130%);}
+.action-day svg{
+  color:#fff6d9;
+  filter:drop-shadow(0 8px 13px rgba(0,0,0,.26));
+}
+html.light-mode .action-day{
+  color:#183420 !important;
+  background:
+    radial-gradient(circle at 24% 0%,rgba(255,255,255,.92),transparent 40%),
+    linear-gradient(135deg,#fff5d8,#d7b56d 48%,#eaf7ee) !important;
+  border-color:rgba(181,138,54,.42) !important;
+  box-shadow:0 12px 26px rgba(18,34,24,.12), inset 0 1px 0 rgba(255,255,255,.94) !important;
+}
+html.light-mode .action-day svg{color:#1d5f36;}
+@media(max-width:720px){
+  .action-day::before{border-radius:16px;}
+}
+
 </style>
 </head>
 
@@ -1064,9 +1126,15 @@ html.light-mode .article-go a:hover{
       <svg viewBox="0 0 24 24"><path d="M6 4.5A1.5 1.5 0 0 1 7.5 3h9A1.5 1.5 0 0 1 18 4.5V21l-6-3.5L6 21V4.5z"></path></svg>
       <span class="action-label">Сохранить</span>
     </button>
-    <button class="action" data-action="theme" type="button" aria-label="Тема">
-      <svg viewBox="0 0 24 24"><path d="M21 14.5A8.5 8.5 0 0 1 9.5 3 9 9 0 1 0 21 14.5z"></path></svg>
-      <span class="action-label">Тема</span>
+    <button class="action action-day" data-action="day" type="button" aria-label="Статья дня">
+      <svg viewBox="0 0 24 24">
+        <rect x="4" y="5" width="16" height="16" rx="3"></rect>
+        <path d="M8 3v4"></path>
+        <path d="M16 3v4"></path>
+        <path d="M4 10h16"></path>
+        <path d="M12 13.1l.76 1.55 1.71.25-1.24 1.2.29 1.7L12 17l-1.52.8.29-1.7-1.24-1.2 1.71-.25L12 13.1z"></path>
+      </svg>
+      <span class="action-label">Статья дня</span>
     </button>
   </div>
 
@@ -2143,10 +2211,22 @@ html.light-mode .article-go a:hover{
       return;
     }
 
-    if(type === 'theme'){
-      root.classList.toggle('dark-mode');
-      root.classList.toggle('light-mode');
-      showToast(root.classList.contains('dark-mode') ? 'Тёмная тема включена' : 'Светлая тема включена');
+    if(type === 'day'){
+      const articleLinks = Array.from(document.querySelectorAll('.article-main > a'))
+        .filter(link => link && link.getAttribute('href'));
+      if(!articleLinks.length){
+        showToast('Статья дня пока недоступна');
+        return;
+      }
+      const now = new Date();
+      const dayStart = new Date(now.getFullYear(), now.getMonth(), now.getDate());
+      const dayNumber = Math.floor(dayStart.getTime() / 86400000);
+      const selected = articleLinks[dayNumber % articleLinks.length];
+      const targetArticle = selected.closest('.article');
+      if(targetArticle){
+        localStorage.setItem('barakaway_article_of_day', selected.getAttribute('href'));
+      }
+      window.location.href = selected.getAttribute('href');
       return;
     }
   });
