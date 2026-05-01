@@ -1065,7 +1065,9 @@ Even <strong>$1</strong> can become part of real help today.
 
   async function openShare(){
     if(shareUrl) shareUrl.textContent = pageUrl;
-    await drawShareCard();
+    try{
+      await drawShareCard();
+    }catch(e){}
     try{
       const shared = await shareCardNative();
       if(shared) return;
@@ -1104,11 +1106,20 @@ Even <strong>$1</strong> can become part of real help today.
     localStorage.setItem(READING_KEY, next ? '1' : '0');
     syncReading();
     document.getElementById('article')?.scrollIntoView({behavior:'smooth',block:'start'});
-    showToast(next ? 'Reading mode включён' : 'Reading mode выключен');
+    showToast(next ? 'Reading mode enabled' : 'Reading mode disabled');
   });
 
-  shareButton && shareButton.addEventListener('click', openShare);
-  nativeShareBtn && nativeShareBtn.addEventListener('click', function(){shareCardNative().catch(function(){showToast('Share можно через кнопку копирования ссылки')});});
+  shareButton && shareButton.addEventListener('click', function(event){
+    event.preventDefault();
+    openShare().catch(function(){
+      if(shareModal){
+        shareModal.classList.add('is-open');
+        shareModal.setAttribute('aria-hidden','false');
+      }
+      showToast('You can share by copying the link');
+    });
+  });
+  nativeShareBtn && nativeShareBtn.addEventListener('click', function(){shareCardNative().catch(function(){showToast('You can share by copying the link')});});
   copyShareBtn && copyShareBtn.addEventListener('click', copyLink);
   downloadShareBtn && downloadShareBtn.addEventListener('click', downloadShareCard);
   closeShareBtn && closeShareBtn.addEventListener('click', closeShare);
@@ -1116,7 +1127,7 @@ Even <strong>$1</strong> can become part of real help today.
   document.addEventListener('keydown', function(e){if(e.key === 'Escape') closeShare();});
 
   dayButton && dayButton.addEventListener('click', function(){
-    const articleLinks = ["islamic_articles-ru/001-en.html", "islamic_articles-ru/002-en.html", "islamic_articles-ru/003-en.html", "islamic_articles-ru/007-en.html", "islamic_articles-ru/008-en.html", "islamic_articles-ru/009-en.html", "islamic_articles-ru/013-en.html", "islamic_articles-ru/014-en.html", "islamic_articles-ru/015-en.html", "islamic_articles-ru/025-en.html", "islamic_articles-ru/027-en.html", "islamic_articles-ru/028-en.html", "islamic_articles-ru/029-en.html", "islamic_articles-ru/004-en.html", "islamic_articles-ru/005-en.html", "islamic_articles-ru/006-en.html", "islamic_articles-ru/011-en.html", "islamic_articles-ru/012-en.html", "islamic_articles-ru/019-en.html", "islamic_articles-ru/020-en.html", "islamic_articles-ru/021-en.html", "islamic_articles-ru/022-en.html", "islamic_articles-ru/023-en.html", "islamic_articles-ru/024-en.html", "islamic_articles-ru/026-en.html", "islamic_articles-ru/004-en.html", "islamic_articles-ru/016-en.html", "islamic_articles-ru/017-en.html", "islamic_articles-ru/018-en.html"];
+    const articleLinks = ["islamic_articles-en/001-en.html", "islamic_articles-en/002-en.html", "islamic_articles-en/003-en.html", "islamic_articles-en/007-en.html", "islamic_articles-en/008-en.html", "islamic_articles-en/009-en.html", "islamic_articles-en/013-en.html", "islamic_articles-en/014-en.html", "islamic_articles-en/015-en.html", "islamic_articles-en/025-en.html", "islamic_articles-en/027-en.html", "islamic_articles-en/028-en.html", "islamic_articles-en/029-en.html", "islamic_articles-en/004-en.html", "islamic_articles-en/005-en.html", "islamic_articles-en/006-en.html", "islamic_articles-en/011-en.html", "islamic_articles-en/012-en.html", "islamic_articles-en/019-en.html", "islamic_articles-en/020-en.html", "islamic_articles-en/021-en.html", "islamic_articles-en/022-en.html", "islamic_articles-en/023-en.html", "islamic_articles-en/024-en.html", "islamic_articles-en/026-en.html", "islamic_articles-en/004-en.html", "islamic_articles-en/016-en.html", "islamic_articles-en/017-en.html", "islamic_articles-en/018-en.html"];
     if(!articleLinks.length){
       showToast('Article of the day пока недоступна');
       return;
@@ -1127,7 +1138,7 @@ Even <strong>$1</strong> can become part of real help today.
     const selectedHref = articleLinks[dayNumber % articleLinks.length];
     localStorage.setItem('barakaway_article_of_day', selectedHref);
     dayButton.classList.add('is-active');
-    const targetHref = (window.location.pathname || '').includes('/islamic_articles-ru/')
+    const targetHref = (window.location.pathname || '').includes('/islamic_articles-en/')
       ? selectedHref.replace(/^islamic_articles-ru\//, '')
       : selectedHref;
     window.location.href = targetHref;
