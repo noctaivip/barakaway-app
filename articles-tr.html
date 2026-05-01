@@ -1,354 +1,2709 @@
-﻿<!--
+<!--
 بِسْمِ ٱللَّٰهِ ٱلرَّحْمَـٰنِ ٱلرَّحِيمِ
 In the name of Allah, the Most Merciful, the Most Compassionate
 -->
 <!DOCTYPE html>
-<html lang="tr">
+<html lang="tr" class="dark-mode">
 <head>
-<script defer data-domain="onedollarexit.com" src="https://plausible.io/js/script.js"></script>
+<script defer data-domain="onedollarexit.com" src="https://plausible.io/js/script.js">
+function drawPremiumShareMedallions(ctx, x, y, w, h){
+  ctx.save();
+  const r = Math.min(h * 0.38, w * 0.16);
+  const cy = y + h / 2;
+  const cx1 = x + w * 0.37;
+  const cx2 = x + w * 0.63;
+
+  const bg = ctx.createLinearGradient(x, y, x + w, y + h);
+  bg.addColorStop(0, "#062217");
+  bg.addColorStop(0.5, "#071115");
+  bg.addColorStop(1, "#12351f");
+  roundRect(ctx, x, y, w, h, 28);
+  ctx.fillStyle = bg;
+  ctx.fill();
+
+  ctx.strokeStyle = "rgba(215,181,109,.36)";
+  ctx.lineWidth = 2;
+  roundRect(ctx, x + 1, y + 1, w - 2, h - 2, 28);
+  ctx.stroke();
+
+  ctx.globalAlpha = .22;
+  ctx.strokeStyle = "#d7b56d";
+  ctx.lineWidth = 1.1;
+  for(let i = -h; i < w + h; i += 38){
+    ctx.beginPath();
+    ctx.moveTo(x + i, y + h);
+    ctx.lineTo(x + i + h, y);
+    ctx.stroke();
+    ctx.beginPath();
+    ctx.moveTo(x + i, y);
+    ctx.lineTo(x + i + h, y + h);
+    ctx.stroke();
+  }
+  ctx.globalAlpha = 1;
+
+  function medallion(cx, text){
+    const g = ctx.createRadialGradient(cx - r*.35, cy - r*.45, r*.12, cx, cy, r);
+    g.addColorStop(0, "#12351f");
+    g.addColorStop(.58, "#05090b");
+    g.addColorStop(1, "#000000");
+    ctx.beginPath();
+    ctx.arc(cx, cy, r, 0, Math.PI * 2);
+    ctx.fillStyle = g;
+    ctx.fill();
+
+    ctx.strokeStyle = "#d7b56d";
+    ctx.lineWidth = 4;
+    ctx.stroke();
+
+    ctx.beginPath();
+    ctx.arc(cx, cy, r - 10, 0, Math.PI * 2);
+    ctx.strokeStyle = "rgba(215,181,109,.48)";
+    ctx.lineWidth = 2;
+    ctx.stroke();
+
+    ctx.beginPath();
+    ctx.arc(cx, cy, r + 8, 0, Math.PI * 2);
+    ctx.setLineDash([3,5]);
+    ctx.strokeStyle = "rgba(215,181,109,.42)";
+    ctx.lineWidth = 1.4;
+    ctx.stroke();
+    ctx.setLineDash([]);
+
+    ctx.font = "700 " + Math.floor(r * .54) + "px Georgia, serif";
+    ctx.textAlign = "center";
+    ctx.textBaseline = "middle";
+    ctx.fillStyle = "#f6d98b";
+    ctx.shadowColor = "rgba(215,181,109,.35)";
+    ctx.shadowBlur = 14;
+    ctx.fillText(text, cx, cy + 1);
+    ctx.shadowBlur = 0;
+  }
+
+  medallion(cx1, "الله");
+  medallion(cx2, "محمد");
+
+  ctx.restore();
+}
+
+</script>
 <link rel="icon" type="image/png" href="/favicon.png">
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Makaleler — One Dollar Exit</title>
+<title>İslami Makaleler — One Dollar Exit</title>
+<meta name="description" content="Sadaka, zekât, insanlara yardım, ibadet, Ramazan, Kurban Bayramı, aile, ahlak ve bir Müslümanın pratik hayatı hakkında İslami makaleler.">
+<script src="/theme-init.js"></script>
+<script>
+(function(){
+  const root = document.documentElement;
+  const keys = ['siteTheme','theme','app-theme','barakaway-theme','preferred-theme','color-theme'];
+  let savedTheme = '';
+
+  for(const key of keys){
+    const value = localStorage.getItem(key);
+    if(value && /^(dark|light|dark-mode|light-mode)$/i.test(value)){
+      savedTheme = value.toLowerCase();
+      break;
+    }
+  }
+
+  if(!savedTheme){
+    savedTheme = 'dark';
+    localStorage.setItem('siteTheme','dark');
+  }
+
+  const isLight = savedTheme === 'light' || savedTheme === 'light-mode';
+  root.classList.toggle('light-mode', isLight);
+  root.classList.toggle('dark-mode', !isLight);
+})();
+</script>
+<link rel="stylesheet" href="/theme.css">
+<link rel="stylesheet" href="/theme-universal.css">
 
 <style>
+:root{
+  --bg:#f6f5ef;
+  --text:#17221c;
+  --muted:#64736a;
+  --card:#fffef9;
+  --soft:#f4f1e7;
+  --border:rgba(126,94,35,.18);
+  --gold:#b58a36;
+  --gold2:#d7b56d;
+  --green:#2d7a46;
+  --shadow:0 26px 70px rgba(28,31,24,.12);
+  --shadow2:0 14px 38px rgba(28,31,24,.08);
+}
+html.dark-mode{
+  --bg:#071115;
+  --text:#eef7f2;
+  --muted:#9dafaa;
+  --card:#101b20;
+  --soft:#14242b;
+  --border:rgba(215,181,109,.20);
+  --shadow:0 28px 70px rgba(0,0,0,.48);
+  --shadow2:0 14px 36px rgba(0,0,0,.28);
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
 body{
-margin:0;
-font-family:system-ui;
-background:#f5f7f8;
-color:#222;
-line-height:1.7;
+  margin:0;
+  font-family:system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
+  background:
+    radial-gradient(circle at 50% -10%,rgba(215,181,109,.18),transparent 36%),
+    linear-gradient(180deg,var(--bg),var(--bg));
+  color:var(--text);
+  line-height:1.65;
+  padding-bottom:96px;
 }
-
+button,input,summary{font:inherit}
 .container{
-max-width:850px;
-margin:auto;
-background:white;
-padding:40px 30px;
-box-shadow:0 6px 16px rgba(0,0,0,0.05);
-}
-
-h1{
-text-align:center;
-font-size:34px;
-margin-bottom:5px;
-}
-
-.subtitle{
-text-align:center;
-color:#666;
-margin-bottom:5px;
-letter-spacing:2px;
-font-size:14px;
-text-transform:uppercase;
-}
-
-.language-switch{
-text-align:center;
-margin-top:8px;
-margin-bottom:20px;
-font-size:13px;
-}
-
-.language-switch a{
-text-decoration:none;
-color:#666;
-margin:0 6px;
-}
-
-.language-switch a.active{
-font-weight:bold;
-color:#000;
-}
-
-.section{
-margin-top:35px;
-}
-
-.section h2{
-font-size:22px;
-border-left:4px solid #2d7a46;
-padding-left:12px;
-margin-bottom:20px;
-}
-
-.article{
-padding:18px;
-border-radius:8px;
-background:#fafafa;
-margin-bottom:15px;
-}
-
-.article a{
-text-decoration:none;
-color:#2d7a46;
-font-weight:bold;
-font-size:17px;
-}
-
-.article p{
-margin:6px 0 0 0;
-font-size:14px;
-color:#666;
-}
-
-.link{
-text-align:center;
-margin-top:30px;
-}
-
-.link a{
-color:#2d7a46;
-text-decoration:none;
-font-weight:bold;
-margin:0 10px;
-}
-
-.footer{
-text-align:center;
-margin-top:40px;
-}
-
-.footer a{
-color:#2d7a46;
-text-decoration:none;
-font-weight:bold;
-margin:0 10px;
-}
-
-.small{
-font-size:14px;
-color:#666;
-text-align:center;
-margin-top:30px;
-}
-
-/* DARK FIX */
-html.dark-mode body{
-  background:#0b1418;
-  color:#edf5f0;
+  max-width:1080px;
+  margin:0 auto;
+  background:linear-gradient(180deg,rgba(255,255,255,.76),rgba(255,255,255,.58)),var(--card);
+  padding:34px 22px 72px;
+  box-shadow:var(--shadow);
+  border:1px solid rgba(215,181,109,.18);
+  border-radius:0 0 34px 34px;
 }
 html.dark-mode .container{
-  background:#0f1c22;
-  box-shadow:0 20px 60px rgba(0,0,0,0.4);
+  background:linear-gradient(180deg,rgba(18,30,36,.98),rgba(12,22,27,.98));
 }
-html.dark-mode h1{
-  color:#ffffff;
+.hero{
+  text-align:center;
+  margin:0 auto 20px;
+  padding:24px 18px 28px;
+  border-radius:30px;
+  background:
+    radial-gradient(circle at 50% 0%,rgba(215,181,109,.20),transparent 44%),
+    linear-gradient(180deg,rgba(45,122,70,.10),rgba(215,181,109,.06));
+  border:1px solid rgba(215,181,109,.24);
 }
-html.dark-mode .subtitle{
-  color:#c0d0c7;
+.bismillah{
+  direction:rtl;
+  font-size:25px;
+  line-height:1.6;
+  color:var(--gold);
+  font-weight:650;
+  margin-bottom:8px;
 }
-html.dark-mode .section h2{
-  color:#ffffff;
-  border-left-color:#2d7a46;
+h1{
+  font-size:42px;
+  line-height:1.08;
+  margin:0 0 10px;
+  letter-spacing:-.035em;
+}
+.subtitle{
+  margin:0 auto;
+  max-width:760px;
+  color:var(--muted);
+  font-size:15px;
+  font-weight:650;
+}
+.page-actions{
+  width:min(100%,820px);
+  margin:14px auto 22px;
+  display:grid;
+  grid-template-columns:repeat(5,1fr);
+  gap:12px;
+}
+.action{
+  appearance:none;
+  border:1px solid rgba(181,138,54,.25);
+  border-radius:22px;
+  min-height:72px;
+  padding:9px 6px;
+  background:linear-gradient(180deg,rgba(255,255,255,.72),rgba(215,181,109,.08));
+  color:#8a681f;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  justify-content:center;
+  gap:6px;
+  cursor:pointer;
+  font-size:12px;
+  line-height:1.05;
+  font-weight:850;
+  transition:.18s ease;
+  text-align:center;
+  box-shadow:0 12px 28px rgba(0,0,0,.10);
+}
+html.dark-mode .action{
+  background:linear-gradient(180deg,rgba(255,255,255,.05),rgba(215,181,109,.08));
+  color:var(--gold2);
+}
+.action:hover{transform:translateY(-1px);box-shadow:0 16px 34px rgba(18,34,24,.16)}
+.action:active{transform:scale(.96)}
+.action.is-active{
+  color:#fff;
+  border-color:rgba(45,122,70,.35);
+  background:linear-gradient(135deg,#2d7a46,#4caf6a);
+}
+.action svg,.article-action svg{
+  width:25px;
+  height:25px;
+  fill:none;
+  stroke:currentColor;
+  stroke-width:2;
+  stroke-linecap:round;
+  stroke-linejoin:round;
+}
+.action.is-active[data-action="favorite"] svg{fill:currentColor}
+.action-label{max-width:100%;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+
+.search-wrap{
+  max-width:780px;
+  margin:0 auto 18px;
+  position:relative;
+}
+.search{
+  width:100%;
+  padding:16px 18px 16px 48px;
+  border:1px solid var(--border);
+  border-radius:20px;
+  background:var(--card);
+  color:var(--text);
+  outline:none;
+  box-shadow:0 8px 22px rgba(18,34,24,.05);
+  font-size:16px;
+}
+.search:focus{border-color:rgba(181,138,54,.55)}
+.search-icon{
+  position:absolute;
+  left:18px;
+  top:50%;
+  transform:translateY(-50%);
+  color:var(--gold);
+  font-weight:950;
+}
+
+.topic-nav{
+  display:flex;
+  flex-wrap:wrap;
+  gap:10px;
+  justify-content:center;
+  margin:0 auto 22px;
+}
+.topic-link{
+  text-decoration:none;
+  border:1px solid var(--border);
+  border-radius:999px;
+  background:var(--card);
+  color:var(--text);
+  padding:10px 14px;
+  min-height:42px;
+  cursor:pointer;
+  font-size:13px;
+  font-weight:850;
+  box-shadow:0 8px 20px rgba(18,34,24,.04);
+}
+.topic-link:hover{
+  background:linear-gradient(135deg,rgba(45,122,70,.16),rgba(215,181,109,.10));
+  border-color:rgba(215,181,109,.35);
+}
+.intro-panel{
+  margin:0 auto 20px;
+  padding:20px;
+  border-radius:26px;
+  background:linear-gradient(180deg,rgba(45,122,70,.08),rgba(215,181,109,.05));
+  border:1px solid rgba(215,181,109,.20);
+}
+.intro-title{
+  font-size:26px;
+  font-weight:900;
+  margin:0 0 4px;
+}
+.intro-copy{
+  margin:0;
+  color:var(--muted);
+  font-weight:650;
+}
+.topic-grid{
+  display:grid;
+  grid-template-columns:repeat(4,1fr);
+  gap:12px;
+  margin:0 0 22px;
+}
+.topic-card{
+  display:block;
+  text-decoration:none;
+  color:var(--text);
+  min-height:110px;
+  padding:16px;
+  border-radius:22px;
+  border:1px solid var(--border);
+  background:
+    radial-gradient(circle at 100% 0%,rgba(215,181,109,.12),transparent 45%),
+    linear-gradient(180deg,var(--card),var(--card));
+  box-shadow:var(--shadow2);
+}
+.topic-card strong{
+  display:block;
+  font-size:16px;
+  line-height:1.2;
+  margin-bottom:7px;
+}
+.topic-card span{
+  display:block;
+  color:var(--muted);
+  font-size:13px;
+  font-weight:650;
+  line-height:1.45;
+}
+.topic-card:hover{
+  transform:translateY(-1px);
+  border-color:rgba(215,181,109,.38);
+}
+.catalog{
+  display:grid;
+  gap:14px;
+}
+details.group{
+  border:1px solid var(--border);
+  border-radius:26px;
+  overflow:hidden;
+  background:
+    radial-gradient(circle at 96% 0%,rgba(215,181,109,.11),transparent 32%),
+    linear-gradient(180deg,var(--card),var(--card));
+  box-shadow:var(--shadow2);
+}
+details.group[open]{
+  border-color:rgba(215,181,109,.34);
+}
+summary.group-summary{
+  list-style:none;
+  cursor:pointer;
+  padding:20px 20px;
+  display:grid;
+  grid-template-columns:1fr auto;
+  align-items:center;
+  gap:12px;
+}
+summary.group-summary::-webkit-details-marker{display:none}
+.group-kicker{
+  color:var(--gold2);
+  font-size:11px;
+  font-weight:950;
+  letter-spacing:1.1px;
+  text-transform:uppercase;
+  margin-bottom:4px;
+}
+.group-title{
+  font-size:24px;
+  line-height:1.15;
+  font-weight:950;
+}
+.group-desc{
+  color:var(--muted);
+  font-size:14px;
+  font-weight:650;
+  margin-top:6px;
+  max-width:760px;
+}
+.group-count{
+  min-width:54px;
+  height:42px;
+  border-radius:17px;
+  background:linear-gradient(135deg,#2d7a46,#4caf6a);
+  color:#fff;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-size:13px;
+  font-weight:900;
+}
+.group-body{
+  padding:0 20px 20px;
+  display:grid;
+  gap:10px;
+}
+.article{
+  position:relative;
+  display:grid;
+  grid-template-columns:1fr auto;
+  gap:12px;
+  align-items:center;
+  padding:16px;
+  border-radius:20px;
+  border:1px solid rgba(181,138,54,.16);
+  background:linear-gradient(180deg,rgba(255,255,255,.50),rgba(215,181,109,.05));
 }
 html.dark-mode .article{
-  background:#132129;
-  border:1px solid #233942;
+  background:linear-gradient(180deg,rgba(255,255,255,.04),rgba(215,181,109,.05));
 }
-html.dark-mode .article a{
-  color:#3bbf6a;
-  font-weight:600;
+.article-main a{
+  text-decoration:none;
+  color:var(--text);
+  font-size:17px;
+  line-height:1.25;
+  font-weight:900;
 }
-html.dark-mode .article p{
-  color:#cfe0d8;
+.article-main a:hover{color:var(--gold2)}
+.article-main p{
+  margin:6px 0 0;
+  color:var(--muted);
+  font-size:14px;
+  font-weight:650;
 }
-html.dark-mode .small{
-  color:#cfe0d8;
+.article-meta{
+  margin-top:8px;
+  display:flex;
+  gap:7px;
+  flex-wrap:wrap;
 }
-html.dark-mode .link a,
-html.dark-mode .footer a{
-  color:#4cd37a;
+.tag{
+  display:inline-flex;
+  align-items:center;
+  min-height:25px;
+  padding:4px 8px;
+  border-radius:999px;
+  border:1px solid var(--border);
+  color:var(--green);
+  background:rgba(45,122,70,.08);
+  font-size:11px;
+  font-weight:850;
+}
+html.dark-mode .tag{color:#dff3e6}
+.article-actions{
+  display:flex;
+  gap:8px;
+}
+.article-action{
+  appearance:none;
+  border:1px solid rgba(181,138,54,.24);
+  background:rgba(181,138,54,.07);
+  color:var(--gold2);
+  width:44px;
+  height:44px;
+  border-radius:999px;
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  cursor:pointer;
+}
+.article-action:hover{background:rgba(45,122,70,.10)}
+.article-action.is-active svg{fill:currentColor}
+.empty{
+  display:none;
+  padding:20px;
+  border:1px dashed var(--border);
+  border-radius:22px;
+  text-align:center;
+  color:var(--muted);
+  font-weight:800;
+}
+.future-grid{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:12px;
+}
+.future-card{
+  border:1px dashed rgba(215,181,109,.30);
+  border-radius:22px;
+  padding:16px;
+  background:linear-gradient(180deg,rgba(45,122,70,.06),rgba(215,181,109,.05));
+}
+.future-card strong{
+  display:block;
+  font-size:16px;
+  margin-bottom:5px;
+}
+.future-card span{
+  color:var(--muted);
+  font-size:13px;
+  font-weight:650;
+}
+.footer-note{
+  text-align:center;
+  margin-top:24px;
+  color:var(--muted);
+  font-size:14px;
+  font-weight:650;
+}
+.toast{
+  position:fixed;
+  left:50%;
+  bottom:88px;
+  transform:translateX(-50%) translateY(16px);
+  z-index:3400;
+  max-width:min(92vw,460px);
+  padding:11px 14px;
+  border-radius:999px;
+  color:#111814;
+  background:linear-gradient(180deg,#f0d891,#c59b46);
+  box-shadow:0 16px 36px rgba(0,0,0,.28);
+  font-size:13px;
+  font-weight:850;
+  opacity:0;
+  pointer-events:none;
+  transition:.2s ease;
+  text-align:center;
+}
+.toast.is-visible{opacity:1;transform:translateX(-50%) translateY(0)}
+.reading-mode .article-main a{font-size:20px}
+.reading-mode .article-main p{font-size:16px}
+.reading-mode .group-desc,.reading-mode .intro-copy{font-size:17px}
+
+@media(max-width:860px){
+  .topic-grid{grid-template-columns:repeat(2,1fr)}
+  .future-grid{grid-template-columns:repeat(2,1fr)}
+}
+@media(max-width:720px){
+  body{padding-bottom:92px}
+  .container{padding:22px 12px 58px;border-radius:0}
+  .hero{border-radius:24px;padding:18px 12px 20px}
+  h1{font-size:31px}
+  .bismillah{font-size:21px}
+  .subtitle{font-size:14px}
+  .page-actions{gap:8px}
+  .action{min-height:64px;border-radius:17px;font-size:10.5px}
+  .action svg{width:22px;height:22px}
+  .topic-nav{display:grid;grid-template-columns:1fr 1fr}
+  .topic-link{text-align:center;border-radius:16px}
+  .topic-grid{grid-template-columns:1fr}
+  .future-grid{grid-template-columns:1fr}
+  summary.group-summary{padding:18px 16px}
+  .group-title{font-size:21px}
+  .group-body{padding:0 14px 16px}
+  .article{grid-template-columns:1fr;padding:15px}
+  .article-actions{justify-content:flex-start}
+}
+@media(max-width:390px){
+  .action-label{font-size:9.5px}
+  .action{min-height:60px;padding:6px 2px}
+  .topic-nav{grid-template-columns:1fr}
+}
+
+/* ARTICLE ACTION FIXES */
+.article-action[data-card-action="favorite"].is-active{
+  color:#d7b56d;
+  background:rgba(215,181,109,.16);
+  border-color:rgba(215,181,109,.58);
+}
+.article-action[data-card-action="favorite"].is-active svg{fill:currentColor;stroke:currentColor}
+.article-action[data-card-action="save"].is-active{
+  color:#fff;
+  background:linear-gradient(135deg,#2d7a46,#4caf6a);
+  border-color:rgba(45,122,70,.55);
+}
+.article.is-saved{border-color:rgba(45,122,70,.55);box-shadow:0 0 0 1px rgba(45,122,70,.22), var(--shadow2)}
+.share-modal{
+  position:fixed;inset:0;z-index:3600;display:none;align-items:center;justify-content:center;
+  padding:20px;background:rgba(0,0,0,.62);backdrop-filter:blur(10px)
+}
+.share-modal.is-open{display:flex}
+.share-panel{
+  width:min(94vw,430px);border:1px solid rgba(215,181,109,.34);border-radius:30px;overflow:hidden;
+  background:radial-gradient(circle at 50% 0%,rgba(215,181,109,.20),transparent 42%),linear-gradient(180deg,#10211b,#081217);
+  box-shadow:0 34px 90px rgba(0,0,0,.55);color:#f5fbf6
+}
+.share-card{padding:24px;text-align:center}
+.share-logo{width:76px;height:76px;object-fit:contain;margin:0 auto 10px;display:block;border-radius:22px;filter:drop-shadow(0 16px 26px rgba(0,0,0,.35))}
+.share-brand{font-size:14px;letter-spacing:.12em;text-transform:uppercase;color:#d7b56d;font-weight:950;margin-bottom:8px}
+.share-title{font-size:26px;line-height:1.18;font-weight:950;margin:0 0 10px}
+.share-text{color:#cfe0d8;font-size:15px;line-height:1.55;margin:0 0 16px}
+.share-url{direction:ltr;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;background:rgba(255,255,255,.06);border:1px solid rgba(215,181,109,.20);border-radius:16px;padding:10px 12px;color:#d7b56d;font-size:12px}
+.share-actions{display:grid;grid-template-columns:1fr 1fr;gap:10px;padding:0 24px 24px}
+.share-actions button{appearance:none;border:1px solid rgba(215,181,109,.30);border-radius:16px;padding:12px 10px;cursor:pointer;font-weight:900}
+.share-send{color:#fff;background:linear-gradient(135deg,#2d7a46,#4caf6a)}
+.share-copy,.share-close{color:#f5fbf6;background:rgba(255,255,255,.07)}
+.share-close{grid-column:1 / -1}
+@media(max-width:720px){.share-panel{border-radius:24px}.share-title{font-size:22px}}
+
+
+/* ARTICLES PAGE FINAL FIXES */
+.group-title,
+.article-main a{
+  color:var(--gold2) !important;
+}
+.article-main a:hover{
+  color:#f0d891 !important;
+}
+.group-kicker{
+  display:none !important;
+}
+.search-navigator{
+  display:none;
+  position:sticky;
+  top:10px;
+  z-index:1200;
+  width:min(100%,420px);
+  margin:0 auto 22px;
+  grid-template-columns:58px 1fr 58px;
+  align-items:center;
+  gap:10px;
+  padding:10px;
+  border:1px solid rgba(215,181,109,.28);
+  border-radius:999px;
+  background:linear-gradient(180deg,rgba(255,255,255,.92),rgba(244,241,231,.88));
+  box-shadow:0 18px 42px rgba(0,0,0,.16);
+  backdrop-filter:blur(16px);
+}
+html.dark-mode .search-navigator{
+  background:linear-gradient(180deg,rgba(16,27,32,.94),rgba(8,18,23,.90));
+  box-shadow:0 18px 42px rgba(0,0,0,.34);
+}
+.search-navigator.is-visible{
+  display:grid;
+}
+.search-step{
+  appearance:none;
+  border:1px solid rgba(215,181,109,.34);
+  border-radius:999px;
+  width:48px;
+  height:42px;
+  cursor:pointer;
+  color:#fff;
+  background:linear-gradient(135deg,#2d7a46,#4caf6a);
+  font-size:30px;
+  line-height:1;
+  font-weight:900;
+}
+.search-step:disabled{
+  opacity:.38;
+  cursor:not-allowed;
+}
+.search-counter{
+  text-align:center;
+  font-weight:950;
+  color:var(--gold2);
+  letter-spacing:.02em;
+}
+.search-focus{
+  border-color:rgba(215,181,109,.75) !important;
+  box-shadow:0 0 0 2px rgba(215,181,109,.25), var(--shadow2) !important;
+}
+.article-action[data-card-action="favorite"].is-active,
+.action[data-action="favorite"].is-active{
+  color:#d7b56d !important;
+  background:rgba(215,181,109,.14) !important;
+  border-color:rgba(215,181,109,.58) !important;
+}
+.article-action[data-card-action="favorite"].is-active svg,
+.action[data-action="favorite"].is-active svg{
+  fill:currentColor !important;
+  stroke:currentColor !important;
+}
+.article-action[data-card-action="save"].is-active{
+  color:#fff !important;
+  background:linear-gradient(135deg,#2d7a46,#4caf6a) !important;
+  border-color:rgba(45,122,70,.55) !important;
+}
+.article.is-saved{
+  border-color:rgba(45,122,70,.55) !important;
+  box-shadow:0 0 0 1px rgba(45,122,70,.22), var(--shadow2) !important;
+}
+.article-actions{
+  display:flex !important;
+  gap:8px !important;
+  flex-wrap:wrap;
+}
+.share-modal{
+  position:fixed;
+  inset:0;
+  z-index:3600;
+  display:none;
+  align-items:center;
+  justify-content:center;
+  padding:20px;
+  background:rgba(0,0,0,.62);
+  backdrop-filter:blur(10px);
+}
+.share-modal.is-open{display:flex}
+.share-panel{
+  width:min(94vw,430px);
+  border:1px solid rgba(215,181,109,.34);
+  border-radius:30px;
+  overflow:hidden;
+  background:radial-gradient(circle at 50% 0%,rgba(215,181,109,.20),transparent 42%),linear-gradient(180deg,#10211b,#081217);
+  box-shadow:0 34px 90px rgba(0,0,0,.55);
+  color:#f5fbf6;
+}
+.share-card{padding:24px;text-align:center}
+.share-logo{
+  width:76px;
+  height:76px;
+  object-fit:contain;
+  margin:0 auto 10px;
+  display:block;
+  border-radius:22px;
+  filter:drop-shadow(0 16px 26px rgba(0,0,0,.35));
+}
+.share-brand{
+  font-size:14px;
+  letter-spacing:.12em;
+  text-transform:uppercase;
+  color:#d7b56d;
+  font-weight:950;
+  margin-bottom:8px;
+}
+.share-title{font-size:26px;line-height:1.18;font-weight:950;margin:0 0 10px}
+.share-text{color:#cfe0d8;font-size:15px;line-height:1.55;margin:0 0 16px}
+.share-url{
+  direction:ltr;
+  overflow:hidden;
+  text-overflow:ellipsis;
+  white-space:nowrap;
+  background:rgba(255,255,255,.06);
+  border:1px solid rgba(215,181,109,.20);
+  border-radius:16px;
+  padding:10px 12px;
+  color:#d7b56d;
+  font-size:12px;
+}
+.share-actions{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:10px;
+  padding:0 24px 24px;
+}
+.share-actions button{
+  appearance:none;
+  border:1px solid rgba(215,181,109,.30);
+  border-radius:16px;
+  padding:12px 10px;
+  cursor:pointer;
+  font-weight:900;
+}
+.share-send{color:#fff;background:linear-gradient(135deg,#2d7a46,#4caf6a)}
+.share-copy,.share-close{color:#f5fbf6;background:rgba(255,255,255,.07)}
+.share-close{grid-column:1 / -1}
+.writing-status{
+  margin:28px auto 0;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  gap:10px;
+  min-height:58px;
+  color:var(--muted);
+  font-size:13px;
+  font-weight:800;
+  text-transform:lowercase;
+}
+.writing-dots{
+  display:inline-flex;
+  gap:5px;
+  align-items:center;
+}
+.writing-dots i{
+  width:7px;
+  height:7px;
+  border-radius:999px;
+  background:var(--gold2);
+  opacity:.35;
+  animation:writingDot 1.15s infinite ease-in-out;
+}
+.writing-dots i:nth-child(2){animation-delay:.18s}
+.writing-dots i:nth-child(3){animation-delay:.36s}
+@keyframes writingDot{
+  0%,80%,100%{transform:translateY(0);opacity:.28}
+  40%{transform:translateY(-7px);opacity:1}
+}
+@media(max-width:720px){
+  .search-navigator{
+    width:min(100%,360px);
+    top:8px;
+    grid-template-columns:52px 1fr 52px;
+  }
+  .search-step{
+    width:44px;
+    height:40px;
+  }
+  .share-panel{border-radius:24px}
+  .share-title{font-size:22px}
+}
+
+
+/* === Articles page: Profis-style fixed search and action behavior === */
+.search-panel{
+  position:sticky;
+  top:8px;
+  z-index:2200;
+  max-width:820px;
+  margin:0 auto 22px;
+  padding:10px;
+  border:1px solid rgba(215,181,109,.28);
+  border-radius:28px;
+  background:linear-gradient(180deg,rgba(255,255,255,.92),rgba(244,241,231,.86));
+  box-shadow:0 18px 44px rgba(0,0,0,.16);
+  backdrop-filter:blur(18px) saturate(1.15);
+  -webkit-backdrop-filter:blur(18px) saturate(1.15);
+}
+html.dark-mode .search-panel{
+  background:linear-gradient(180deg,rgba(15,27,32,.94),rgba(7,17,21,.91));
+  box-shadow:0 18px 44px rgba(0,0,0,.38);
+}
+.search-panel .search-wrap{
+  max-width:none !important;
+  margin:0 !important;
+}
+.search-panel .search{
+  border-radius:22px !important;
+  border-color:rgba(215,181,109,.34) !important;
+}
+.search-navigator{
+  position:relative !important;
+  top:auto !important;
+  width:100% !important;
+  max-width:none !important;
+  margin:10px 0 0 !important;
+  grid-template-columns:56px 1fr 56px !important;
+  border-radius:22px !important;
+}
+.search-navigator.is-visible{display:grid !important;}
+.search-counter{
+  font-size:13px !important;
+  line-height:1.25 !important;
+}
+.search-focus{
+  transform:translateY(-1px);
+  border-color:rgba(215,181,109,.86) !important;
+  box-shadow:0 0 0 2px rgba(215,181,109,.28),0 22px 46px rgba(0,0,0,.18) !important;
+}
+.article-action[data-card-action="favorite"].is-active,
+.action[data-action="favorite"].is-active,
+.bottom-app-nav-item[data-nav="favorites"].has-favorites{
+  color:#d7b56d !important;
+  border-color:rgba(215,181,109,.58) !important;
+}
+.article-action[data-card-action="favorite"].is-active svg,
+.action[data-action="favorite"].is-active svg,
+.bottom-app-nav-item[data-nav="favorites"].has-favorites svg{
+  fill:currentColor !important;
+  stroke:currentColor !important;
+}
+.article-action[data-card-action="save"].is-active,
+.action[data-action="save"].is-active{
+  color:#ffffff !important;
+  background:linear-gradient(135deg,#2d7a46,#4caf6a) !important;
+  border-color:rgba(45,122,70,.55) !important;
+}
+.article.is-saved{
+  border-color:rgba(45,122,70,.60) !important;
+  box-shadow:0 0 0 1px rgba(45,122,70,.24),var(--shadow2) !important;
+}
+@media(max-width:720px){
+  .search-panel{
+    top:6px;
+    border-radius:24px;
+    padding:8px;
+  }
+  .search-navigator{grid-template-columns:50px 1fr 50px !important;}
+  .search-counter{font-size:12px !important;}
+}
+
+
+/* === Targeted visual hierarchy + corrected actions/search behavior === */
+html.dark-mode .group-title{
+  color:#ffffff !important;
+  text-shadow:0 1px 2px rgba(0,0,0,.34);
+}
+html.dark-mode .group-desc{
+  color:rgba(238,247,242,.74) !important;
+  font-weight:700;
+}
+html.dark-mode .article-main p{
+  color:rgba(245,251,246,.82) !important;
+  font-weight:700;
+}
+html.dark-mode .article-main a{
+  color:#d7b56d !important;
+}
+html.dark-mode .article-main a:hover{
+  color:#f0d891 !important;
+}
+html.dark-mode .topic-link{
+  color:#ffffff !important;
+}
+html.dark-mode .article{
+  background:
+    radial-gradient(circle at 100% 0%,rgba(215,181,109,.08),transparent 38%),
+    linear-gradient(180deg,rgba(255,255,255,.045),rgba(215,181,109,.045)) !important;
+}
+html.dark-mode .article.search-focus{
+  border-color:rgba(215,181,109,.90) !important;
+  background:
+    radial-gradient(circle at 100% 0%,rgba(215,181,109,.16),transparent 40%),
+    linear-gradient(180deg,rgba(255,255,255,.065),rgba(215,181,109,.075)) !important;
+}
+
+
+/* === FINAL PRECISION FIX: contrast, compact navigation, exact search === */
+html.dark-mode .group-title{
+  color:#ffffff !important;
+  text-shadow:0 2px 10px rgba(0,0,0,.35);
+}
+html.dark-mode .group-desc{
+  color:rgba(226,238,232,.82) !important;
+  font-weight:760 !important;
+}
+html.dark-mode .article-main a{
+  color:#f0d891 !important;
+  text-shadow:none !important;
+}
+html.dark-mode .article-main p{
+  color:rgba(244,250,247,.88) !important;
+  font-weight:760 !important;
+}
+html.dark-mode .topic-link{
+  min-height:34px !important;
+  padding:7px 12px !important;
+  border-radius:999px !important;
+  color:#f7ead0 !important;
+  background:linear-gradient(180deg,rgba(215,181,109,.105),rgba(255,255,255,.025)) !important;
+  border-color:rgba(215,181,109,.34) !important;
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.045),0 8px 18px rgba(0,0,0,.18) !important;
+  font-size:12px !important;
+}
+html.dark-mode .topic-link:hover{
+  color:#ffffff !important;
+  background:linear-gradient(135deg,rgba(45,122,70,.28),rgba(215,181,109,.16)) !important;
+  border-color:rgba(240,216,145,.55) !important;
+}
+.topic-nav{
+  gap:8px !important;
+  margin-bottom:22px !important;
+}
+html.dark-mode details.group{
+  background:
+    radial-gradient(circle at 100% 0%,rgba(215,181,109,.11),transparent 34%),
+    linear-gradient(135deg,rgba(17,31,33,.98),rgba(26,33,30,.98)) !important;
+}
+html.dark-mode .article{
+  background:
+    linear-gradient(135deg,rgba(20,33,35,.96),rgba(42,45,35,.88)) !important;
+  border-color:rgba(215,181,109,.20) !important;
+}
+html.dark-mode .article.search-focus{
+  border-color:rgba(240,216,145,.78) !important;
+  background:
+    linear-gradient(135deg,rgba(27,42,42,.98),rgba(63,59,40,.94)) !important;
+}
+@media(max-width:720px){
+  .topic-nav{
+    display:flex !important;
+    flex-wrap:nowrap !important;
+    overflow-x:auto !important;
+    justify-content:flex-start !important;
+    gap:7px !important;
+    padding:0 2px 4px !important;
+    margin-bottom:18px !important;
+    scrollbar-width:none;
+  }
+  .topic-nav::-webkit-scrollbar{display:none;}
+  .topic-link{
+    flex:0 0 auto !important;
+    min-height:32px !important;
+    padding:7px 10px !important;
+    font-size:11px !important;
+    white-space:nowrap !important;
+  }
+  .group-title{font-size:23px !important;}
+  .group-desc{font-size:13px !important;line-height:1.55 !important;}
+  .article-main p{font-size:13px !important;line-height:1.5 !important;}
+}
+
+
+/* === Premium share card generator === */
+.share-panel-premium{
+  width:min(94vw,430px) !important;
+  border-radius:30px !important;
+  background:linear-gradient(180deg,#091514,#050b0e) !important;
+}
+.share-preview-shell{
+  position:relative;
+  padding:14px 14px 10px;
+  min-height:520px;
+}
+.share-generated-card{
+  display:block;
+  width:100%;
+  height:auto;
+  border-radius:24px;
+  border:1px solid rgba(215,181,109,.34);
+  box-shadow:0 24px 58px rgba(0,0,0,.46);
+  background:#071115;
+}
+.share-card-loading{
+  position:absolute;
+  inset:14px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  border-radius:24px;
+  color:#d7b56d;
+  background:linear-gradient(180deg,#10211b,#071115);
+  font-weight:900;
+}
+.share-generated-card[src] + .share-card-loading{display:none;}
+.share-actions-premium{
+  padding:4px 14px 14px !important;
+}
+@media(max-width:720px){
+  .share-panel-premium{width:min(96vw,410px) !important;border-radius:24px !important;}
+  .share-preview-shell{padding:10px 10px 8px;min-height:480px;}
+  .share-generated-card{border-radius:20px;}
+  .share-actions-premium{padding:3px 10px 10px !important;}
+}
+
+
+/* === Rich article transition CTA === */
+.article-go{
+  margin-top:12px;
+  display:flex;
+  align-items:center;
+  flex-wrap:wrap;
+}
+.article-go a{
+  position:relative;
+  isolation:isolate;
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  gap:8px;
+  min-height:34px;
+  padding:7px 14px 7px 16px;
+  border-radius:999px;
+  text-decoration:none !important;
+  font-size:11px !important;
+  line-height:1 !important;
+  font-weight:950 !important;
+  letter-spacing:.075em;
+  text-transform:uppercase;
+  color:#fff7dc !important;
+  border:1px solid rgba(240,216,145,.55);
+  background:
+    linear-gradient(135deg,rgba(45,122,70,.72),rgba(16,52,35,.92) 52%,rgba(181,138,54,.64)),
+    radial-gradient(circle at 18% 0%,rgba(255,255,255,.18),transparent 42%);
+  box-shadow:
+    0 12px 24px rgba(0,0,0,.22),
+    inset 0 1px 0 rgba(255,255,255,.12),
+    0 0 0 1px rgba(215,181,109,.08);
+  overflow:hidden;
+  transition:transform .18s ease, box-shadow .18s ease, border-color .18s ease, background .18s ease;
+}
+.article-go a::before{
+  content:"";
+  position:absolute;
+  inset:1px;
+  border-radius:999px;
+  background:linear-gradient(90deg,transparent,rgba(255,255,255,.18),transparent);
+  transform:translateX(-120%);
+  transition:transform .38s ease;
+  z-index:-1;
+}
+.article-go a:hover{
+  transform:translateY(-1px);
+  color:#ffffff !important;
+  border-color:rgba(240,216,145,.86);
+  background:
+    linear-gradient(135deg,#2d7a46,#4caf6a 55%,#b58a36),
+    radial-gradient(circle at 18% 0%,rgba(255,255,255,.20),transparent 42%);
+  box-shadow:
+    0 16px 30px rgba(0,0,0,.30),
+    0 0 22px rgba(215,181,109,.14),
+    inset 0 1px 0 rgba(255,255,255,.18);
+}
+.article-go a:hover::before{transform:translateX(120%)}
+.article-go a:active{transform:scale(.97)}
+.article-go-arrow{
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  width:19px;
+  height:19px;
+  border-radius:999px;
+  color:#102018;
+  background:linear-gradient(180deg,#f0d891,#b9913d);
+  box-shadow:0 5px 12px rgba(0,0,0,.24);
+  font-size:13px;
+  font-weight:950;
+  letter-spacing:0;
+  line-height:1;
+}
+html.light-mode .article-go a{
+  color:#14321f !important;
+  background:linear-gradient(135deg,#f8edd0,#d7b56d 52%,#ffffff);
+  border-color:rgba(181,138,54,.42);
+  box-shadow:0 10px 22px rgba(18,34,24,.10), inset 0 1px 0 rgba(255,255,255,.90);
+}
+html.light-mode .article-go a:hover{
+  color:#ffffff !important;
+  background:linear-gradient(135deg,#2d7a46,#4caf6a 58%,#b58a36);
+}
+@media(max-width:720px){
+  .article-go{margin-top:11px;}
+  .article-go a{
+    min-height:32px;
+    padding:7px 12px 7px 14px;
+    font-size:10.5px !important;
+  }
+  .article-go-arrow{width:18px;height:18px;font-size:12px;}
+}
+
+
+/* === Premium Article of the Day action === */
+.action-day{
+  position:relative;
+  overflow:hidden;
+  border-color:rgba(240,216,145,.46) !important;
+  color:#fff4d7 !important;
+  background:
+    radial-gradient(circle at 24% 0%,rgba(255,255,255,.16),transparent 38%),
+    linear-gradient(135deg,rgba(181,138,54,.78),rgba(45,122,70,.58) 54%,rgba(9,28,21,.96)) !important;
+  box-shadow:
+    0 14px 32px rgba(0,0,0,.22),
+    inset 0 1px 0 rgba(255,255,255,.10),
+    0 0 0 1px rgba(215,181,109,.08) !important;
+}
+.action-day::before{
+  content:"";
+  position:absolute;
+  inset:1px;
+  border-radius:21px;
+  background:linear-gradient(90deg,transparent,rgba(255,255,255,.17),transparent);
+  transform:translateX(-130%);
+  transition:transform .45s ease;
+  pointer-events:none;
+}
+.action-day:hover::before{transform:translateX(130%);}
+.action-day svg{
+  color:#fff6d9;
+  filter:drop-shadow(0 8px 13px rgba(0,0,0,.26));
+}
+html.light-mode .action-day{
+  color:#183420 !important;
+  background:
+    radial-gradient(circle at 24% 0%,rgba(255,255,255,.92),transparent 40%),
+    linear-gradient(135deg,#fff5d8,#d7b56d 48%,#eaf7ee) !important;
+  border-color:rgba(181,138,54,.42) !important;
+  box-shadow:0 12px 26px rgba(18,34,24,.12), inset 0 1px 0 rgba(255,255,255,.94) !important;
+}
+html.light-mode .action-day svg{color:#1d5f36;}
+@media(max-width:720px){
+  .action-day::before{border-radius:16px;}
+}
+
+
+/* === Final bookmark label + premium bottom-right article CTA === */
+.article{
+  align-items:stretch !important;
+}
+.article-main{
+  display:flex !important;
+  flex-direction:column !important;
+  min-width:0 !important;
+}
+.article-go{
+  margin-top:auto !important;
+  padding-top:14px !important;
+  display:flex !important;
+  justify-content:flex-end !important;
+  align-items:flex-end !important;
+  width:100% !important;
+}
+.article-go a{
+  min-height:38px !important;
+  padding:8px 10px 8px 18px !important;
+  border-radius:999px !important;
+  letter-spacing:.09em !important;
+  color:#fff8df !important;
+  border:1px solid rgba(240,216,145,.72) !important;
+  background:
+    radial-gradient(circle at 18% 0%,rgba(255,255,255,.24),transparent 34%),
+    linear-gradient(135deg,#123724 0%,#2d7a46 38%,#b58a36 100%) !important;
+  box-shadow:
+    0 16px 34px rgba(0,0,0,.32),
+    0 0 24px rgba(215,181,109,.12),
+    inset 0 1px 0 rgba(255,255,255,.18) !important;
+}
+.article-go a span:first-child{
+  position:relative;
+  top:.5px;
+}
+.article-go-arrow{
+  width:24px !important;
+  height:24px !important;
+  margin-left:2px !important;
+  color:#102018 !important;
+  background:linear-gradient(180deg,#fff2ba,#d7b56d 54%,#a77c2b) !important;
+  box-shadow:
+    0 7px 16px rgba(0,0,0,.30),
+    inset 0 1px 0 rgba(255,255,255,.65) !important;
+}
+.article-go a:hover{
+  transform:translateY(-2px) !important;
+  border-color:rgba(255,242,186,.92) !important;
+  background:
+    radial-gradient(circle at 18% 0%,rgba(255,255,255,.26),transparent 34%),
+    linear-gradient(135deg,#1e5938 0%,#4caf6a 46%,#d7b56d 100%) !important;
+  box-shadow:
+    0 20px 40px rgba(0,0,0,.38),
+    0 0 30px rgba(215,181,109,.20),
+    inset 0 1px 0 rgba(255,255,255,.22) !important;
+}
+html.light-mode .article-go a{
+  color:#14321f !important;
+  border-color:rgba(181,138,54,.48) !important;
+  background:
+    radial-gradient(circle at 18% 0%,rgba(255,255,255,.94),transparent 36%),
+    linear-gradient(135deg,#fff6dd 0%,#d7b56d 48%,#2d7a46 100%) !important;
+  box-shadow:
+    0 14px 30px rgba(18,34,24,.14),
+    inset 0 1px 0 rgba(255,255,255,.92) !important;
+}
+html.light-mode .article-go a:hover{
+  color:#ffffff !important;
+  background:
+    radial-gradient(circle at 18% 0%,rgba(255,255,255,.32),transparent 34%),
+    linear-gradient(135deg,#2d7a46 0%,#4caf6a 46%,#b58a36 100%) !important;
+}
+@media(max-width:720px){
+  .article-go{
+    justify-content:flex-end !important;
+    padding-top:13px !important;
+  }
+  .article-go a{
+    min-height:36px !important;
+    padding:8px 9px 8px 16px !important;
+    font-size:10.8px !important;
+  }
+  .article-go-arrow{
+    width:22px !important;
+    height:22px !important;
+  }
+}
+
+
+/* === FINAL: global theme sync + premium article CTA placement === */
+.article{
+  min-height:178px;
+  padding:20px 182px 24px 20px !important;
+  align-items:start !important;
+}
+.article-main{
+  min-width:0;
+}
+.article-actions{
+  position:absolute !important;
+  top:18px;
+  right:18px;
+  display:flex !important;
+  gap:10px !important;
+  z-index:3;
+}
+.article-go{
+  position:absolute;
+  right:18px;
+  bottom:18px;
+  margin:0 !important;
+  z-index:2;
+}
+.article-go a{
+  min-height:42px !important;
+  padding:9px 10px 9px 18px !important;
+  gap:12px !important;
+  border-radius:999px !important;
+  font-size:11px !important;
+  letter-spacing:.105em !important;
+  color:#fff8df !important;
+  border:1px solid rgba(240,216,145,.56) !important;
+  background:
+    linear-gradient(135deg,rgba(20,72,43,.98) 0%,rgba(45,122,70,.96) 46%,rgba(154,116,40,.95) 100%) !important;
+  box-shadow:
+    0 16px 34px rgba(0,0,0,.30),
+    0 0 0 1px rgba(215,181,109,.10),
+    inset 0 1px 0 rgba(255,255,255,.18),
+    inset 0 -1px 0 rgba(0,0,0,.22) !important;
+}
+.article-go a::after{
+  content:"";
+  position:absolute;
+  inset:2px;
+  border-radius:999px;
+  border:1px solid rgba(255,255,255,.08);
+  pointer-events:none;
+}
+.article-go a:hover{
+  transform:translateY(-2px) !important;
+  border-color:rgba(255,235,170,.88) !important;
+  background:
+    linear-gradient(135deg,#1f7a45 0%,#36a35e 48%,#c59b46 100%) !important;
+  box-shadow:
+    0 20px 42px rgba(0,0,0,.36),
+    0 0 26px rgba(215,181,109,.18),
+    inset 0 1px 0 rgba(255,255,255,.22) !important;
+}
+.article-go-arrow{
+  width:24px !important;
+  height:24px !important;
+  color:#17351f !important;
+  background:linear-gradient(180deg,#fff1b8,#d2a348 58%,#a87925) !important;
+  box-shadow:
+    0 8px 16px rgba(0,0,0,.26),
+    inset 0 1px 0 rgba(255,255,255,.65) !important;
+}
+html.light-mode .article-go a{
+  color:#17351f !important;
+  border-color:rgba(181,138,54,.38) !important;
+  background:
+    linear-gradient(135deg,#fff8df 0%,#e2c46e 45%,#2d7a46 100%) !important;
+  box-shadow:
+    0 14px 28px rgba(18,34,24,.12),
+    inset 0 1px 0 rgba(255,255,255,.92) !important;
+}
+html.light-mode .article-go a:hover{
+  color:#ffffff !important;
+  background:linear-gradient(135deg,#2d7a46 0%,#4caf6a 52%,#b58a36 100%) !important;
+}
+html.light-mode .article-go-arrow{
+  color:#12301d !important;
+  background:linear-gradient(180deg,#ffffff,#f0d891 58%,#c59b46) !important;
+}
+@media(max-width:720px){
+  .article{
+    display:block !important;
+    min-height:250px;
+    padding:22px 22px 94px 22px !important;
+  }
+  .article-main a{
+    display:inline-block;
+    padding-right:0;
+  }
+  .article-actions{
+    top:auto !important;
+    right:auto !important;
+    left:22px;
+    bottom:22px;
+    gap:10px !important;
+  }
+  .article-action{
+    width:48px !important;
+    height:48px !important;
+    background:rgba(255,255,255,.055) !important;
+    border-color:rgba(215,181,109,.24) !important;
+    box-shadow:0 10px 22px rgba(0,0,0,.16), inset 0 1px 0 rgba(255,255,255,.06);
+  }
+  html.light-mode .article-action{
+    background:rgba(255,255,255,.74) !important;
+    border-color:rgba(45,122,70,.16) !important;
+    box-shadow:0 10px 22px rgba(18,34,24,.08), inset 0 1px 0 rgba(255,255,255,.82);
+  }
+  .article-go{
+    right:22px;
+    bottom:23px;
+  }
+  .article-go a{
+    min-height:48px !important;
+    padding:10px 10px 10px 19px !important;
+    font-size:12px !important;
+    letter-spacing:.11em !important;
+    box-shadow:0 16px 30px rgba(18,34,24,.18), inset 0 1px 0 rgba(255,255,255,.18) !important;
+  }
+  .article-go-arrow{
+    width:28px !important;
+    height:28px !important;
+    font-size:15px !important;
+  }
+}
+@media(max-width:390px){
+  .article{
+    min-height:260px;
+    padding-left:18px !important;
+    padding-right:18px !important;
+  }
+  .article-actions{left:18px;gap:8px !important;}
+  .article-action{width:46px !important;height:46px !important;}
+  .article-go{right:18px;}
+  .article-go a{padding-left:16px !important;font-size:11px !important;}
+}
+
+
+
+/* === FINAL FIX: section article count badge without green === */
+.group-count{
+  background:
+    radial-gradient(circle at 28% 18%, rgba(255,255,255,.18), transparent 36%),
+    linear-gradient(135deg,#8f6a24 0%,#d7b56d 48%,#5a4218 100%) !important;
+  color:#111814 !important;
+  border:1px solid rgba(255,238,180,.42) !important;
+  box-shadow:
+    0 12px 26px rgba(0,0,0,.18),
+    inset 0 1px 0 rgba(255,255,255,.34) !important;
+}
+html.dark-mode .group-count{
+  color:#fff8df !important;
+  background:
+    radial-gradient(circle at 28% 18%, rgba(255,255,255,.15), transparent 36%),
+    linear-gradient(135deg,#4a3514 0%,#b58a36 48%,#2a1f0d 100%) !important;
+  border-color:rgba(240,216,145,.36) !important;
+}
+
+
+/* === FINAL SHARE CARD ORNAMENT: Allah / Muhammad medallions only inside share card === */
+.share-ornament{
+  margin:18px auto 12px;
+  width:min(100%,520px);
+  height:132px;
+  border-radius:24px;
+  position:relative;
+  overflow:hidden;
+  border:1px solid rgba(215,181,109,.34);
+  background:
+    radial-gradient(circle at 28% 50%, rgba(215,181,109,.22), transparent 34%),
+    radial-gradient(circle at 72% 50%, rgba(215,181,109,.22), transparent 34%),
+    linear-gradient(135deg, rgba(6,34,23,.96), rgba(3,10,12,.98));
+  box-shadow:
+    inset 0 1px 0 rgba(255,255,255,.07),
+    inset 0 -18px 38px rgba(0,0,0,.22),
+    0 18px 42px rgba(0,0,0,.36);
+}
+.share-ornament::before{
+  content:"";
+  position:absolute;
+  inset:0;
+  opacity:.30;
+  background-image:
+    linear-gradient(30deg, transparent 47%, rgba(215,181,109,.45) 48%, rgba(215,181,109,.45) 52%, transparent 53%),
+    linear-gradient(150deg, transparent 47%, rgba(215,181,109,.32) 48%, rgba(215,181,109,.32) 52%, transparent 53%);
+  background-size:54px 54px;
+  mask-image:linear-gradient(90deg,transparent,black 16%,black 84%,transparent);
+}
+.share-ornament::after{
+  content:"";
+  position:absolute;
+  left:50%;
+  top:50%;
+  width:1px;
+  height:82px;
+  transform:translate(-50%,-50%);
+  background:linear-gradient(180deg,transparent,rgba(215,181,109,.55),transparent);
+  box-shadow:0 0 26px rgba(215,181,109,.20);
+}
+.share-medallions{
+  position:absolute;
+  inset:0;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  gap:34px;
+  z-index:2;
+}
+.share-medallion{
+  width:92px;
+  height:92px;
+  border-radius:50%;
+  position:relative;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  color:#f6d98b;
+  background:
+    radial-gradient(circle at 34% 24%, rgba(255,255,255,.24), transparent 20%),
+    radial-gradient(circle at 50% 50%, #092019 0%, #05090b 60%, #000 100%);
+  border:2px solid rgba(215,181,109,.74);
+  box-shadow:
+    0 0 0 5px rgba(181,138,54,.20),
+    0 0 0 9px rgba(215,181,109,.12),
+    0 14px 30px rgba(0,0,0,.38),
+    inset 0 1px 0 rgba(255,255,255,.14);
+}
+.share-medallion::before{
+  content:"";
+  position:absolute;
+  inset:8px;
+  border-radius:50%;
+  border:1px solid rgba(215,181,109,.40);
+  box-shadow:inset 0 0 18px rgba(215,181,109,.10);
+}
+.share-medallion::after{
+  content:"";
+  position:absolute;
+  inset:-7px;
+  border-radius:50%;
+  border:1px dashed rgba(215,181,109,.40);
+}
+.share-arabic{
+  direction:rtl;
+  font-family:"Times New Roman", serif;
+  font-size:30px;
+  font-weight:900;
+  line-height:1;
+  color:#f5d98d;
+  text-shadow:
+    0 2px 10px rgba(0,0,0,.55),
+    0 0 18px rgba(215,181,109,.18);
+}
+.share-spark{
+  position:absolute;
+  width:18px;
+  height:18px;
+  border-radius:50%;
+  background:radial-gradient(circle,#fff8d4 0%,#f0d891 28%,rgba(240,216,145,0) 68%);
+  filter:blur(.2px);
+  opacity:.86;
+}
+.share-spark.left{left:calc(50% - 128px);top:22px}
+.share-spark.right{right:calc(50% - 128px);top:22px}
+@media(max-width:720px){
+  .share-ornament{height:116px;border-radius:21px;}
+  .share-medallions{gap:24px;}
+  .share-medallion{width:78px;height:78px;}
+  .share-arabic{font-size:25px;}
+  .share-spark.left{left:calc(50% - 108px);top:20px}
+  .share-spark.right{right:calc(50% - 108px);top:20px}
 }
 
 </style>
-<script src="/theme-init.js"></script>
-<link rel="stylesheet" href="/theme.css">
-<link rel="stylesheet" href="/theme-universal.css">
 </head>
 
 <body>
 <div class="container">
-<h1>Makaleler</h1>
-<p style="text-align:center;color:#666;max-width:600px;margin:0 auto 20px auto;">
-Bu makaleler İslam’da sadaka, zekât ve insanların hayatını nasıl değiştirebileceğini açıklar.
-Burada İslami yardımlaşmanın prensiplerini ve ihtiyaç sahibi ailelere yardımın neden bu kadar önemli olduğunu öğrenebilirsiniz.
-</p>
-<div class="section">
-<h2>İslam’da yardımlaşma</h2>
+  <section class="hero">
+    <div class="bismillah">بِسْمِ ٱللَّٰهِ ٱلرَّحْمَـٰنِ ٱلرَّحِيمِ</div>
+    <h1>İslami Makaleler</h1>
+    <p class="subtitle">Müslümanlar için pratik bir kütüphane: iman, ibadet, hayır, aile, ahlak ve önemli günler.</p>
+  </section>
 
-<div class="article">
-<a href="islamic_articles-tr/001-tr.html">Sadaka nedir</a>
-<p>Sadakanın anlamı ve İslam’da neden önemli olduğu.</p>
+  <div class="page-actions" aria-label="Sayfa işlemleri">
+    <button class="action" data-action="favorite" type="button" aria-label="Favoriler">
+      <svg viewBox="0 0 24 24"><path d="M12 3.6l2.45 5.05 5.55.8-4.02 3.92.95 5.53L12 16.3l-4.93 2.6.95-5.53L4 9.45l5.55-.8L12 3.6z"></path></svg>
+      <span class="action-label">Favoriler</span>
+    </button>
+    <button class="action" data-action="share" type="button" aria-label="Paylaş">
+      <svg viewBox="0 0 24 24"><circle cx="18" cy="5" r="3"></circle><circle cx="6" cy="12" r="3"></circle><circle cx="18" cy="19" r="3"></circle><path d="M8.7 10.7l6.6-4.4M8.7 13.3l6.6 4.4"></path></svg>
+      <span class="action-label">Paylaş</span>
+    </button>
+    <button class="action" data-action="reading" type="button" aria-label="Okuma">
+      <svg viewBox="0 0 24 24"><path d="M4 5.5A2.5 2.5 0 0 1 6.5 3H20v17H6.5A2.5 2.5 0 0 0 4 22V5.5z"></path><path d="M8 7h8M8 11h8M8 15h5"></path></svg>
+      <span class="action-label">Okuma</span>
+    </button>
+    <button class="action" data-action="save" type="button" aria-label="Yer imi">
+      <svg viewBox="0 0 24 24"><path d="M6 4.5A1.5 1.5 0 0 1 7.5 3h9A1.5 1.5 0 0 1 18 4.5V21l-6-3.5L6 21V4.5z"></path></svg>
+      <span class="action-label">Yer imi</span>
+    </button>
+    <button class="action action-day" data-action="day" type="button" aria-label="Günün makalesi">
+      <svg viewBox="0 0 24 24">
+        <rect x="4" y="5" width="16" height="16" rx="3"></rect>
+        <path d="M8 3v4"></path>
+        <path d="M16 3v4"></path>
+        <path d="M4 10h16"></path>
+        <path d="M12 13.1l.76 1.55 1.71.25-1.24 1.2.29 1.7L12 17l-1.52.8.29-1.7-1.24-1.2 1.71-.25L12 13.1z"></path>
+      </svg>
+      <span class="action-label">Günün makalesi</span>
+    </button>
+  </div>
+
+  <div class="search-panel" id="searchPanel">
+    <div class="search-wrap">
+      <span class="search-icon">⌕</span>
+      <input class="search" id="search" type="search" placeholder="Makale başlıkları ve açıklamalarında ara">
+    </div>
+    <div class="search-navigator" id="searchNavigator" aria-live="polite">
+      <button class="search-step" id="searchPrev" type="button" aria-label="Önceki makale">‹</button>
+      <div class="search-counter" id="searchCounter">Başlık ve açıklamalarda bulunan: 0 / 0</div>
+      <button class="search-step" id="searchNext" type="button" aria-label="Sonraki makale">›</button>
+    </div>
+  </div>
+  <main class="catalog" id="catalog">
+
+    <details class="group" id="charity">
+      <summary class="group-summary">
+        <div>
+          <div class="group-title">Hayır: sadaka ve zekât</div>
+          <div class="group-desc">İslami hayrın temelleri: sadakanın anlamı, zekâttan farkı, niyet, mükâfat, süreklilik ve şeffaflık.</div>
+        </div>
+        <div class="group-count">13</div>
+      </summary>
+      <div class="group-body">
+        <article class="article" data-keywords="sadaka hayır islam sadaka anlam">
+          <div class="article-main"><a href="islamic_articles-tr/001-tr.html">Sadaka nedir</a><p>Sadakanın anlamı ve İslam’da neden önemli olduğu.</p><div class="article-meta"><span class="tag">temel</span><span class="tag">sadaka</span></div><div class="article-go"><a href="islamic_articles-tr/001-tr.html" aria-label="Makaleye git"><span>AÇ</span><span aria-hidden="true" class="article-go-arrow">→</span></a></div></div>
+          <div class="article-actions">
+            <button class="article-action" data-card-action="save" type="button" aria-label="Yer imine ekle"><svg viewBox="0 0 24 24"><path d="M6 4.5A1.5 1.5 0 0 1 7.5 3h9A1.5 1.5 0 0 1 18 4.5V21l-6-3.5L6 21V4.5z"></path></svg></button>
+            <button class="article-action" data-card-action="share" type="button" aria-label="Makaleyi paylaş"><svg viewBox="0 0 24 24"><circle cx="18" cy="5" r="3"></circle><circle cx="6" cy="12" r="3"></circle><circle cx="18" cy="19" r="3"></circle><path d="M8.7 10.7l6.6-4.4M8.7 13.3l6.6 4.4"></path></svg></button>
+            <button class="article-action" data-card-action="favorite" type="button" aria-label="Favorilere ekle"><svg viewBox="0 0 24 24"><path d="M12 3.6l2.45 5.05 5.55.8-4.02 3.92.95 5.53L12 16.3l-4.93 2.6.95-5.53L4 9.45l5.55-.8L12 3.6z"></path></svg></button>
+          </div>
+        </article>
+        <article class="article" data-keywords="zekât sadaka fark farz gönüllü sadaka">
+          <div class="article-main"><a href="islamic_articles-tr/002-tr.html">Zekât ile sadaka arasındaki fark</a><p>Farz olan zekât ile gönüllü sadaka arasındaki farkı anlamak.</p><div class="article-meta"><span class="tag">zekât</span><span class="tag">sadaka</span></div><div class="article-go"><a href="islamic_articles-tr/002-tr.html" aria-label="Makaleye git"><span>AÇ</span><span aria-hidden="true" class="article-go-arrow">→</span></a></div></div>
+          <div class="article-actions">
+            <button class="article-action" data-card-action="save" type="button" aria-label="Yer imine ekle"><svg viewBox="0 0 24 24"><path d="M6 4.5A1.5 1.5 0 0 1 7.5 3h9A1.5 1.5 0 0 1 18 4.5V21l-6-3.5L6 21V4.5z"></path></svg></button>
+            <button class="article-action" data-card-action="share" type="button" aria-label="Makaleyi paylaş"><svg viewBox="0 0 24 24"><circle cx="18" cy="5" r="3"></circle><circle cx="6" cy="12" r="3"></circle><circle cx="18" cy="19" r="3"></circle><path d="M8.7 10.7l6.6-4.4M8.7 13.3l6.6 4.4"></path></svg></button>
+            <button class="article-action" data-card-action="favorite" type="button" aria-label="Favorilere ekle"><svg viewBox="0 0 24 24"><path d="M12 3.6l2.45 5.05 5.55.8-4.02 3.92.95 5.53L12 16.3l-4.93 2.6.95-5.53L4 9.45l5.55-.8L12 3.6z"></path></svg></button>
+          </div>
+        </article>
+        <article class="article" data-keywords="gizli hayır gizlice samimiyet sadaka">
+          <div class="article-main"><a href="islamic_articles-tr/003-tr.html">Gizli hayır neden önemlidir</a><p>Birçok Müslümanın sadakayı gizli vermeyi tercih etmesinin sebebi.</p><div class="article-meta"><span class="tag">samimiyet</span><span class="tag">gizli sadaka</span></div><div class="article-go"><a href="islamic_articles-tr/003-tr.html" aria-label="Makaleye git"><span>AÇ</span><span aria-hidden="true" class="article-go-arrow">→</span></a></div></div>
+          <div class="article-actions">
+            <button class="article-action" data-card-action="save" type="button" aria-label="Yer imine ekle"><svg viewBox="0 0 24 24"><path d="M6 4.5A1.5 1.5 0 0 1 7.5 3h9A1.5 1.5 0 0 1 18 4.5V21l-6-3.5L6 21V4.5z"></path></svg></button>
+            <button class="article-action" data-card-action="share" type="button" aria-label="Makaleyi paylaş"><svg viewBox="0 0 24 24"><circle cx="18" cy="5" r="3"></circle><circle cx="6" cy="12" r="3"></circle><circle cx="18" cy="19" r="3"></circle><path d="M8.7 10.7l6.6-4.4M8.7 13.3l6.6 4.4"></path></svg></button>
+            <button class="article-action" data-card-action="favorite" type="button" aria-label="Favorilere ekle"><svg viewBox="0 0 24 24"><path d="M12 3.6l2.45 5.05 5.55.8-4.02 3.92.95 5.53L12 16.3l-4.93 2.6.95-5.53L4 9.45l5.55-.8L12 3.6z"></path></svg></button>
+          </div>
+        </article>
+        <article class="article" data-keywords="türler sadaka hayır iyilik islam">
+          <div class="article-main"><a href="islamic_articles-tr/007-tr.html">İslam’da en faziletli sadaka türleri</a><p>İnsanlara gerçek fayda sağlayan yardım biçimleri.</p><div class="article-meta"><span class="tag">yardım türleri</span></div><div class="article-go"><a href="islamic_articles-tr/007-tr.html" aria-label="Makaleye git"><span>AÇ</span><span aria-hidden="true" class="article-go-arrow">→</span></a></div></div>
+          <div class="article-actions">
+            <button class="article-action" data-card-action="save" type="button" aria-label="Yer imine ekle"><svg viewBox="0 0 24 24"><path d="M6 4.5A1.5 1.5 0 0 1 7.5 3h9A1.5 1.5 0 0 1 18 4.5V21l-6-3.5L6 21V4.5z"></path></svg></button>
+            <button class="article-action" data-card-action="share" type="button" aria-label="Makaleyi paylaş"><svg viewBox="0 0 24 24"><circle cx="18" cy="5" r="3"></circle><circle cx="6" cy="12" r="3"></circle><circle cx="18" cy="19" r="3"></circle><path d="M8.7 10.7l6.6-4.4M8.7 13.3l6.6 4.4"></path></svg></button>
+            <button class="article-action" data-card-action="favorite" type="button" aria-label="Favorilere ekle"><svg viewBox="0 0 24 24"><path d="M12 3.6l2.45 5.05 5.55.8-4.02 3.92.95 5.53L12 16.3l-4.93 2.6.95-5.53L4 9.45l5.55-.8L12 3.6z"></path></svg></button>
+          </div>
+        </article>
+        <article class="article" data-keywords="ramazan sadaka sadaka hayır">
+          <div class="article-main"><a href="islamic_articles-tr/008-tr.html">Ramazan ayında sadaka</a><p>Ramazan ayında yapılan hayrın neden özel bir değeri vardır.</p><div class="article-meta"><span class="tag">ramazan</span><span class="tag">sadaka</span></div><div class="article-go"><a href="islamic_articles-tr/008-tr.html" aria-label="Makaleye git"><span>AÇ</span><span aria-hidden="true" class="article-go-arrow">→</span></a></div></div>
+          <div class="article-actions">
+            <button class="article-action" data-card-action="save" type="button" aria-label="Yer imine ekle"><svg viewBox="0 0 24 24"><path d="M6 4.5A1.5 1.5 0 0 1 7.5 3h9A1.5 1.5 0 0 1 18 4.5V21l-6-3.5L6 21V4.5z"></path></svg></button>
+            <button class="article-action" data-card-action="share" type="button" aria-label="Makaleyi paylaş"><svg viewBox="0 0 24 24"><circle cx="18" cy="5" r="3"></circle><circle cx="6" cy="12" r="3"></circle><circle cx="18" cy="19" r="3"></circle><path d="M8.7 10.7l6.6-4.4M8.7 13.3l6.6 4.4"></path></svg></button>
+            <button class="article-action" data-card-action="favorite" type="button" aria-label="Favorilere ekle"><svg viewBox="0 0 24 24"><path d="M12 3.6l2.45 5.05 5.55.8-4.02 3.92.95 5.53L12 16.3l-4.93 2.6.95-5.53L4 9.45l5.55-.8L12 3.6z"></path></svg></button>
+          </div>
+        </article>
+        <article class="article" data-keywords="kur’an sadaka cömertlik yardım ihtiyaç sahipleri">
+          <div class="article-main"><a href="islamic_articles-tr/009-tr.html">Kur’an’da sadaka</a><p>Kur’an’ın cömertliği, merhameti ve ihtiyaç sahiplerine yardımı nasıl öğrettiği.</p><div class="article-meta"><span class="tag">kur’an</span><span class="tag">cömertlik</span></div><div class="article-go"><a href="islamic_articles-tr/009-tr.html" aria-label="Makaleye git"><span>AÇ</span><span aria-hidden="true" class="article-go-arrow">→</span></a></div></div>
+          <div class="article-actions">
+            <button class="article-action" data-card-action="save" type="button" aria-label="Yer imine ekle"><svg viewBox="0 0 24 24"><path d="M6 4.5A1.5 1.5 0 0 1 7.5 3h9A1.5 1.5 0 0 1 18 4.5V21l-6-3.5L6 21V4.5z"></path></svg></button>
+            <button class="article-action" data-card-action="share" type="button" aria-label="Makaleyi paylaş"><svg viewBox="0 0 24 24"><circle cx="18" cy="5" r="3"></circle><circle cx="6" cy="12" r="3"></circle><circle cx="18" cy="19" r="3"></circle><path d="M8.7 10.7l6.6-4.4M8.7 13.3l6.6 4.4"></path></svg></button>
+            <button class="article-action" data-card-action="favorite" type="button" aria-label="Favorilere ekle"><svg viewBox="0 0 24 24"><path d="M12 3.6l2.45 5.05 5.55.8-4.02 3.92.95 5.53L12 16.3l-4.93 2.6.95-5.53L4 9.45l5.55-.8L12 3.6z"></path></svg></button>
+          </div>
+        </article>
+        <article class="article" data-keywords="mükâfat sadaka hayır islam">
+          <div class="article-main"><a href="islamic_articles-tr/013-tr.html">Sadakanın mükâfatı</a><p>İslam’da hayrın neden büyük bir mükâfatı vardır.</p><div class="article-meta"><span class="tag">mükâfat</span></div><div class="article-go"><a href="islamic_articles-tr/013-tr.html" aria-label="Makaleye git"><span>AÇ</span><span aria-hidden="true" class="article-go-arrow">→</span></a></div></div>
+          <div class="article-actions">
+            <button class="article-action" data-card-action="save" type="button" aria-label="Yer imine ekle"><svg viewBox="0 0 24 24"><path d="M6 4.5A1.5 1.5 0 0 1 7.5 3h9A1.5 1.5 0 0 1 18 4.5V21l-6-3.5L6 21V4.5z"></path></svg></button>
+            <button class="article-action" data-card-action="share" type="button" aria-label="Makaleyi paylaş"><svg viewBox="0 0 24 24"><circle cx="18" cy="5" r="3"></circle><circle cx="6" cy="12" r="3"></circle><circle cx="18" cy="19" r="3"></circle><path d="M8.7 10.7l6.6-4.4M8.7 13.3l6.6 4.4"></path></svg></button>
+            <button class="article-action" data-card-action="favorite" type="button" aria-label="Favorilere ekle"><svg viewBox="0 0 24 24"><path d="M12 3.6l2.45 5.05 5.55.8-4.02 3.92.95 5.53L12 16.3l-4.93 2.6.95-5.53L4 9.45l5.55-.8L12 3.6z"></path></svg></button>
+          </div>
+        </article>
+        <article class="article" data-keywords="sadaka arınma mal bereket bereket">
+          <div class="article-main"><a href="islamic_articles-tr/014-tr.html">Sadaka ve malın arınması</a><p>Hayrın malı neden arındırdığı ve bereket getirdiği.</p><div class="article-meta"><span class="tag">mal</span><span class="tag">bereket</span></div><div class="article-go"><a href="islamic_articles-tr/014-tr.html" aria-label="Makaleye git"><span>AÇ</span><span aria-hidden="true" class="article-go-arrow">→</span></a></div></div>
+          <div class="article-actions">
+            <button class="article-action" data-card-action="save" type="button" aria-label="Yer imine ekle"><svg viewBox="0 0 24 24"><path d="M6 4.5A1.5 1.5 0 0 1 7.5 3h9A1.5 1.5 0 0 1 18 4.5V21l-6-3.5L6 21V4.5z"></path></svg></button>
+            <button class="article-action" data-card-action="share" type="button" aria-label="Makaleyi paylaş"><svg viewBox="0 0 24 24"><circle cx="18" cy="5" r="3"></circle><circle cx="6" cy="12" r="3"></circle><circle cx="18" cy="19" r="3"></circle><path d="M8.7 10.7l6.6-4.4M8.7 13.3l6.6 4.4"></path></svg></button>
+            <button class="article-action" data-card-action="favorite" type="button" aria-label="Favorilere ekle"><svg viewBox="0 0 24 24"><path d="M12 3.6l2.45 5.05 5.55.8-4.02 3.92.95 5.53L12 16.3l-4.93 2.6.95-5.53L4 9.45l5.55-.8L12 3.6z"></path></svg></button>
+          </div>
+        </article>
+        <article class="article" data-keywords="müslümanlar neden sadaka verir anlam sadaka">
+          <div class="article-main"><a href="islamic_articles-tr/015-tr.html">Müslümanlar neden sadaka verir</a><p>İslam’da sadaka ve hayrın anlamı.</p><div class="article-meta"><span class="tag">anlam</span></div><div class="article-go"><a href="islamic_articles-tr/015-tr.html" aria-label="Makaleye git"><span>AÇ</span><span aria-hidden="true" class="article-go-arrow">→</span></a></div></div>
+          <div class="article-actions">
+            <button class="article-action" data-card-action="save" type="button" aria-label="Yer imine ekle"><svg viewBox="0 0 24 24"><path d="M6 4.5A1.5 1.5 0 0 1 7.5 3h9A1.5 1.5 0 0 1 18 4.5V21l-6-3.5L6 21V4.5z"></path></svg></button>
+            <button class="article-action" data-card-action="share" type="button" aria-label="Makaleyi paylaş"><svg viewBox="0 0 24 24"><circle cx="18" cy="5" r="3"></circle><circle cx="6" cy="12" r="3"></circle><circle cx="18" cy="19" r="3"></circle><path d="M8.7 10.7l6.6-4.4M8.7 13.3l6.6 4.4"></path></svg></button>
+            <button class="article-action" data-card-action="favorite" type="button" aria-label="Favorilere ekle"><svg viewBox="0 0 24 24"><path d="M12 3.6l2.45 5.05 5.55.8-4.02 3.92.95 5.53L12 16.3l-4.93 2.6.95-5.53L4 9.45l5.55-.8L12 3.6z"></path></svg></button>
+          </div>
+        </article>
+        <article class="article" data-keywords="küçük sadaka önemli katkı yardım sonuç">
+          <div class="article-main"><a href="islamic_articles-tr/025-tr.html">Küçük bir sadaka bile neden önemlidir</a><p>Küçük bir yardımın nasıl gerçek sonuç doğurduğu.</p><div class="article-meta"><span class="tag">küçük yardım</span></div><div class="article-go"><a href="islamic_articles-tr/025-tr.html" aria-label="Makaleye git"><span>AÇ</span><span aria-hidden="true" class="article-go-arrow">→</span></a></div></div>
+          <div class="article-actions">
+            <button class="article-action" data-card-action="save" type="button" aria-label="Yer imine ekle"><svg viewBox="0 0 24 24"><path d="M6 4.5A1.5 1.5 0 0 1 7.5 3h9A1.5 1.5 0 0 1 18 4.5V21l-6-3.5L6 21V4.5z"></path></svg></button>
+            <button class="article-action" data-card-action="share" type="button" aria-label="Makaleyi paylaş"><svg viewBox="0 0 24 24"><circle cx="18" cy="5" r="3"></circle><circle cx="6" cy="12" r="3"></circle><circle cx="18" cy="19" r="3"></circle><path d="M8.7 10.7l6.6-4.4M8.7 13.3l6.6 4.4"></path></svg></button>
+            <button class="article-action" data-card-action="favorite" type="button" aria-label="Favorilere ekle"><svg viewBox="0 0 24 24"><path d="M12 3.6l2.45 5.05 5.55.8-4.02 3.92.95 5.53L12 16.3l-4.93 2.6.95-5.53L4 9.45l5.55-.8L12 3.6z"></path></svg></button>
+          </div>
+        </article>
+        <article class="article" data-keywords="düzenli sadaka sürekli yardım disiplin kalp">
+          <div class="article-main"><a href="islamic_articles-tr/027-tr.html">Düzenli sadaka neden önemlidir</a><p>Sürekli yardımın neden daha fazla istikrar ve disiplin sağladığı.</p><div class="article-meta"><span class="tag">süreklilik</span></div><div class="article-go"><a href="islamic_articles-tr/027-tr.html" aria-label="Makaleye git"><span>AÇ</span><span aria-hidden="true" class="article-go-arrow">→</span></a></div></div>
+          <div class="article-actions">
+            <button class="article-action" data-card-action="save" type="button" aria-label="Yer imine ekle"><svg viewBox="0 0 24 24"><path d="M6 4.5A1.5 1.5 0 0 1 7.5 3h9A1.5 1.5 0 0 1 18 4.5V21l-6-3.5L6 21V4.5z"></path></svg></button>
+            <button class="article-action" data-card-action="share" type="button" aria-label="Makaleyi paylaş"><svg viewBox="0 0 24 24"><circle cx="18" cy="5" r="3"></circle><circle cx="6" cy="12" r="3"></circle><circle cx="18" cy="19" r="3"></circle><path d="M8.7 10.7l6.6-4.4M8.7 13.3l6.6 4.4"></path></svg></button>
+            <button class="article-action" data-card-action="favorite" type="button" aria-label="Favorilere ekle"><svg viewBox="0 0 24 24"><path d="M12 3.6l2.45 5.05 5.55.8-4.02 3.92.95 5.53L12 16.3l-4.93 2.6.95-5.53L4 9.45l5.55-.8L12 3.6z"></path></svg></button>
+          </div>
+        </article>
+        <article class="article" data-keywords="şeffaflık hayır güven sadaka">
+          <div class="article-main"><a href="islamic_articles-tr/028-tr.html">Hayırda şeffaflık neden önemlidir</a><p>Şeffaf yardımın güveni ve desteğin etkisini neden artırdığı.</p><div class="article-meta"><span class="tag">güven</span><span class="tag">şeffaflık</span></div><div class="article-go"><a href="islamic_articles-tr/028-tr.html" aria-label="Makaleye git"><span>AÇ</span><span aria-hidden="true" class="article-go-arrow">→</span></a></div></div>
+          <div class="article-actions">
+            <button class="article-action" data-card-action="save" type="button" aria-label="Yer imine ekle"><svg viewBox="0 0 24 24"><path d="M6 4.5A1.5 1.5 0 0 1 7.5 3h9A1.5 1.5 0 0 1 18 4.5V21l-6-3.5L6 21V4.5z"></path></svg></button>
+            <button class="article-action" data-card-action="share" type="button" aria-label="Makaleyi paylaş"><svg viewBox="0 0 24 24"><circle cx="18" cy="5" r="3"></circle><circle cx="6" cy="12" r="3"></circle><circle cx="18" cy="19" r="3"></circle><path d="M8.7 10.7l6.6-4.4M8.7 13.3l6.6 4.4"></path></svg></button>
+            <button class="article-action" data-card-action="favorite" type="button" aria-label="Favorilere ekle"><svg viewBox="0 0 24 24"><path d="M12 3.6l2.45 5.05 5.55.8-4.02 3.92.95 5.53L12 16.3l-4.93 2.6.95-5.53L4 9.45l5.55-.8L12 3.6z"></path></svg></button>
+          </div>
+        </article>
+        <article class="article" data-keywords="niyet sadaka samimiyet miktar">
+          <div class="article-main"><a href="islamic_articles-tr/029-tr.html">Sadakada niyet neden önemlidir</a><p>Samimiyetin miktardan neden daha önemli olduğu.</p><div class="article-meta"><span class="tag">niyet</span></div><div class="article-go"><a href="islamic_articles-tr/029-tr.html" aria-label="Makaleye git"><span>AÇ</span><span aria-hidden="true" class="article-go-arrow">→</span></a></div></div>
+          <div class="article-actions">
+            <button class="article-action" data-card-action="save" type="button" aria-label="Yer imine ekle"><svg viewBox="0 0 24 24"><path d="M6 4.5A1.5 1.5 0 0 1 7.5 3h9A1.5 1.5 0 0 1 18 4.5V21l-6-3.5L6 21V4.5z"></path></svg></button>
+            <button class="article-action" data-card-action="share" type="button" aria-label="Makaleyi paylaş"><svg viewBox="0 0 24 24"><circle cx="18" cy="5" r="3"></circle><circle cx="6" cy="12" r="3"></circle><circle cx="18" cy="19" r="3"></circle><path d="M8.7 10.7l6.6-4.4M8.7 13.3l6.6 4.4"></path></svg></button>
+            <button class="article-action" data-card-action="favorite" type="button" aria-label="Favorilere ekle"><svg viewBox="0 0 24 24"><path d="M12 3.6l2.45 5.05 5.55.8-4.02 3.92.95 5.53L12 16.3l-4.93 2.6.95-5.53L4 9.45l5.55-.8L12 3.6z"></path></svg></button>
+          </div>
+        </article>
+      </div>
+    </details>
+
+    <details class="group" id="people">
+      <summary class="group-summary">
+        <div>
+          <div class="group-title">İnsanlara yardım ve gerçek ihtiyaçlar</div>
+          <div class="group-desc">Barınma, yemek, çocuklar, dullar, aileler ve acil yardım — hayrın doğrudan faydaya dönüştüğü alanlar.</div>
+        </div>
+        <div class="group-count">12</div>
+      </summary>
+      <div class="group-body">
+        <article class="article" data-keywords="aileler barınma yardım ihtiyaç sahipleri">
+          <div class="article-main"><a href="islamic_articles-tr/004-tr.html">İhtiyaç sahibi ailelere yardım</a><p>Ailelerin barınma ihtiyacını desteklemenin neden en önemli yardım biçimlerinden biri olduğu.</p><div class="article-meta"><span class="tag">aileler</span><span class="tag">barınma</span></div><div class="article-go"><a href="islamic_articles-tr/004-tr.html" aria-label="Makaleye git"><span>AÇ</span><span aria-hidden="true" class="article-go-arrow">→</span></a></div></div>
+          <div class="article-actions">
+            <button class="article-action" data-card-action="save" type="button" aria-label="Yer imine ekle"><svg viewBox="0 0 24 24"><path d="M6 4.5A1.5 1.5 0 0 1 7.5 3h9A1.5 1.5 0 0 1 18 4.5V21l-6-3.5L6 21V4.5z"></path></svg></button>
+            <button class="article-action" data-card-action="share" type="button" aria-label="Makaleyi paylaş"><svg viewBox="0 0 24 24"><circle cx="18" cy="5" r="3"></circle><circle cx="6" cy="12" r="3"></circle><circle cx="18" cy="19" r="3"></circle><path d="M8.7 10.7l6.6-4.4M8.7 13.3l6.6 4.4"></path></svg></button>
+            <button class="article-action" data-card-action="favorite" type="button" aria-label="Favorilere ekle"><svg viewBox="0 0 24 24"><path d="M12 3.6l2.45 5.05 5.55.8-4.02 3.92.95 5.53L12 16.3l-4.93 2.6.95-5.53L4 9.45l5.55-.8L12 3.6z"></path></svg></button>
+          </div>
+        </article>
+        <article class="article" data-keywords="bir dolar küçük yardım bağış">
+          <div class="article-main"><a href="islamic_articles-tr/005-tr.html">Bir dolar bile neden değerlidir</a><p>Küçük bağışların bile bir insanın hayatını nasıl değiştirebileceği.</p><div class="article-meta"><span class="tag">küçük katkı</span></div><div class="article-go"><a href="islamic_articles-tr/005-tr.html" aria-label="Makaleye git"><span>AÇ</span><span aria-hidden="true" class="article-go-arrow">→</span></a></div></div>
+          <div class="article-actions">
+            <button class="article-action" data-card-action="save" type="button" aria-label="Yer imine ekle"><svg viewBox="0 0 24 24"><path d="M6 4.5A1.5 1.5 0 0 1 7.5 3h9A1.5 1.5 0 0 1 18 4.5V21l-6-3.5L6 21V4.5z"></path></svg></button>
+            <button class="article-action" data-card-action="share" type="button" aria-label="Makaleyi paylaş"><svg viewBox="0 0 24 24"><circle cx="18" cy="5" r="3"></circle><circle cx="6" cy="12" r="3"></circle><circle cx="18" cy="19" r="3"></circle><path d="M8.7 10.7l6.6-4.4M8.7 13.3l6.6 4.4"></path></svg></button>
+            <button class="article-action" data-card-action="favorite" type="button" aria-label="Favorilere ekle"><svg viewBox="0 0 24 24"><path d="M12 3.6l2.45 5.05 5.55.8-4.02 3.92.95 5.53L12 16.3l-4.93 2.6.95-5.53L4 9.45l5.55-.8L12 3.6z"></path></svg></button>
+          </div>
+        </article>
+        <article class="article" data-keywords="sadaka barınma sığınak ev yardım">
+          <div class="article-main"><a href="islamic_articles-tr/006-tr.html">Barınma ve sığınma için sadaka</a><p>İnsanlara barınma konusunda yardım etmenin neden güçlü bir hayır biçimi olduğu.</p><div class="article-meta"><span class="tag">sığınak</span><span class="tag">barınma</span></div><div class="article-go"><a href="islamic_articles-tr/006-tr.html" aria-label="Makaleye git"><span>AÇ</span><span aria-hidden="true" class="article-go-arrow">→</span></a></div></div>
+          <div class="article-actions">
+            <button class="article-action" data-card-action="save" type="button" aria-label="Yer imine ekle"><svg viewBox="0 0 24 24"><path d="M6 4.5A1.5 1.5 0 0 1 7.5 3h9A1.5 1.5 0 0 1 18 4.5V21l-6-3.5L6 21V4.5z"></path></svg></button>
+            <button class="article-action" data-card-action="share" type="button" aria-label="Makaleyi paylaş"><svg viewBox="0 0 24 24"><circle cx="18" cy="5" r="3"></circle><circle cx="6" cy="12" r="3"></circle><circle cx="18" cy="19" r="3"></circle><path d="M8.7 10.7l6.6-4.4M8.7 13.3l6.6 4.4"></path></svg></button>
+            <button class="article-action" data-card-action="favorite" type="button" aria-label="Favorilere ekle"><svg viewBox="0 0 24 24"><path d="M12 3.6l2.45 5.05 5.55.8-4.02 3.92.95 5.53L12 16.3l-4.93 2.6.95-5.53L4 9.45l5.55-.8L12 3.6z"></path></svg></button>
+          </div>
+        </article>
+        <article class="article" data-keywords="ailelere yardım önemli destek">
+          <div class="article-main"><a href="islamic_articles-tr/011-tr.html">Ailelere yardım neden önemlidir</a><p>Aileleri desteklemenin neden önemli hayır biçimlerinden biri olduğu.</p><div class="article-meta"><span class="tag">aile</span></div><div class="article-go"><a href="islamic_articles-tr/011-tr.html" aria-label="Makaleye git"><span>AÇ</span><span aria-hidden="true" class="article-go-arrow">→</span></a></div></div>
+          <div class="article-actions">
+            <button class="article-action" data-card-action="save" type="button" aria-label="Yer imine ekle"><svg viewBox="0 0 24 24"><path d="M6 4.5A1.5 1.5 0 0 1 7.5 3h9A1.5 1.5 0 0 1 18 4.5V21l-6-3.5L6 21V4.5z"></path></svg></button>
+            <button class="article-action" data-card-action="share" type="button" aria-label="Makaleyi paylaş"><svg viewBox="0 0 24 24"><circle cx="18" cy="5" r="3"></circle><circle cx="6" cy="12" r="3"></circle><circle cx="18" cy="19" r="3"></circle><path d="M8.7 10.7l6.6-4.4M8.7 13.3l6.6 4.4"></path></svg></button>
+            <button class="article-action" data-card-action="favorite" type="button" aria-label="Favorilere ekle"><svg viewBox="0 0 24 24"><path d="M12 3.6l2.45 5.05 5.55.8-4.02 3.92.95 5.53L12 16.3l-4.93 2.6.95-5.53L4 9.45l5.55-.8L12 3.6z"></path></svg></button>
+          </div>
+        </article>
+        <article class="article" data-keywords="küçük yardım büyük değişim hayat">
+          <div class="article-main"><a href="islamic_articles-tr/012-tr.html">Küçük yardım — büyük değişim</a><p>Küçük bir hayrın bile bir insanın hayatını neden değiştirebileceği.</p><div class="article-meta"><span class="tag">değişim</span></div><div class="article-go"><a href="islamic_articles-tr/012-tr.html" aria-label="Makaleye git"><span>AÇ</span><span aria-hidden="true" class="article-go-arrow">→</span></a></div></div>
+          <div class="article-actions">
+            <button class="article-action" data-card-action="save" type="button" aria-label="Yer imine ekle"><svg viewBox="0 0 24 24"><path d="M6 4.5A1.5 1.5 0 0 1 7.5 3h9A1.5 1.5 0 0 1 18 4.5V21l-6-3.5L6 21V4.5z"></path></svg></button>
+            <button class="article-action" data-card-action="share" type="button" aria-label="Makaleyi paylaş"><svg viewBox="0 0 24 24"><circle cx="18" cy="5" r="3"></circle><circle cx="6" cy="12" r="3"></circle><circle cx="18" cy="19" r="3"></circle><path d="M8.7 10.7l6.6-4.4M8.7 13.3l6.6 4.4"></path></svg></button>
+            <button class="article-action" data-card-action="favorite" type="button" aria-label="Favorilere ekle"><svg viewBox="0 0 24 24"><path d="M12 3.6l2.45 5.05 5.55.8-4.02 3.92.95 5.53L12 16.3l-4.93 2.6.95-5.53L4 9.45l5.55-.8L12 3.6z"></path></svg></button>
+          </div>
+        </article>
+        <article class="article" data-keywords="umut ailelere onur istikrar zor zamanlar">
+          <div class="article-main"><a href="islamic_articles-tr/019-tr.html">Hayır ailelere nasıl umut verir</a><p>Sadakanın onuru, istikrarı ve umudu nasıl geri kazandırdığı.</p><div class="article-meta"><span class="tag">umut</span><span class="tag">aileler</span></div><div class="article-go"><a href="islamic_articles-tr/019-tr.html" aria-label="Makaleye git"><span>AÇ</span><span aria-hidden="true" class="article-go-arrow">→</span></a></div></div>
+          <div class="article-actions">
+            <button class="article-action" data-card-action="save" type="button" aria-label="Yer imine ekle"><svg viewBox="0 0 24 24"><path d="M6 4.5A1.5 1.5 0 0 1 7.5 3h9A1.5 1.5 0 0 1 18 4.5V21l-6-3.5L6 21V4.5z"></path></svg></button>
+            <button class="article-action" data-card-action="share" type="button" aria-label="Makaleyi paylaş"><svg viewBox="0 0 24 24"><circle cx="18" cy="5" r="3"></circle><circle cx="6" cy="12" r="3"></circle><circle cx="18" cy="19" r="3"></circle><path d="M8.7 10.7l6.6-4.4M8.7 13.3l6.6 4.4"></path></svg></button>
+            <button class="article-action" data-card-action="favorite" type="button" aria-label="Favorilere ekle"><svg viewBox="0 0 24 24"><path d="M12 3.6l2.45 5.05 5.55.8-4.02 3.92.95 5.53L12 16.3l-4.93 2.6.95-5.53L4 9.45l5.55-.8L12 3.6z"></path></svg></button>
+          </div>
+        </article>
+        <article class="article" data-keywords="çocuklar yardım sadaka">
+          <div class="article-main"><a href="islamic_articles-tr/020-tr.html">Sadaka ile çocuklara yardım</a><p>Çocuklara yardımın neden en anlamlı hayır biçimlerinden biri olduğu.</p><div class="article-meta"><span class="tag">çocuklar</span></div><div class="article-go"><a href="islamic_articles-tr/020-tr.html" aria-label="Makaleye git"><span>AÇ</span><span aria-hidden="true" class="article-go-arrow">→</span></a></div></div>
+          <div class="article-actions">
+            <button class="article-action" data-card-action="save" type="button" aria-label="Yer imine ekle"><svg viewBox="0 0 24 24"><path d="M6 4.5A1.5 1.5 0 0 1 7.5 3h9A1.5 1.5 0 0 1 18 4.5V21l-6-3.5L6 21V4.5z"></path></svg></button>
+            <button class="article-action" data-card-action="share" type="button" aria-label="Makaleyi paylaş"><svg viewBox="0 0 24 24"><circle cx="18" cy="5" r="3"></circle><circle cx="6" cy="12" r="3"></circle><circle cx="18" cy="19" r="3"></circle><path d="M8.7 10.7l6.6-4.4M8.7 13.3l6.6 4.4"></path></svg></button>
+            <button class="article-action" data-card-action="favorite" type="button" aria-label="Favorilere ekle"><svg viewBox="0 0 24 24"><path d="M12 3.6l2.45 5.05 5.55.8-4.02 3.92.95 5.53L12 16.3l-4.93 2.6.95-5.53L4 9.45l5.55-.8L12 3.6z"></path></svg></button>
+          </div>
+        </article>
+        <article class="article" data-keywords="dullar islam destek sadaka">
+          <div class="article-main"><a href="islamic_articles-tr/021-tr.html">İslam’da dullara yardım</a><p>Dulları desteklemenin neden önemli ve sorumlu bir sadaka biçimi olduğu.</p><div class="article-meta"><span class="tag">dullar</span></div><div class="article-go"><a href="islamic_articles-tr/021-tr.html" aria-label="Makaleye git"><span>AÇ</span><span aria-hidden="true" class="article-go-arrow">→</span></a></div></div>
+          <div class="article-actions">
+            <button class="article-action" data-card-action="save" type="button" aria-label="Yer imine ekle"><svg viewBox="0 0 24 24"><path d="M6 4.5A1.5 1.5 0 0 1 7.5 3h9A1.5 1.5 0 0 1 18 4.5V21l-6-3.5L6 21V4.5z"></path></svg></button>
+            <button class="article-action" data-card-action="share" type="button" aria-label="Makaleyi paylaş"><svg viewBox="0 0 24 24"><circle cx="18" cy="5" r="3"></circle><circle cx="6" cy="12" r="3"></circle><circle cx="18" cy="19" r="3"></circle><path d="M8.7 10.7l6.6-4.4M8.7 13.3l6.6 4.4"></path></svg></button>
+            <button class="article-action" data-card-action="favorite" type="button" aria-label="Favorilere ekle"><svg viewBox="0 0 24 24"><path d="M12 3.6l2.45 5.05 5.55.8-4.02 3.92.95 5.53L12 16.3l-4.93 2.6.95-5.53L4 9.45l5.55-.8L12 3.6z"></path></svg></button>
+          </div>
+        </article>
+        <article class="article" data-keywords="acil yardım islam zamanında sadaka">
+          <div class="article-main"><a href="islamic_articles-tr/022-tr.html">İslam’da acil yardım</a><p>Zamanında yapılan yardımın neden güçlü sadaka biçimlerinden biri olduğu.</p><div class="article-meta"><span class="tag">acil</span></div><div class="article-go"><a href="islamic_articles-tr/022-tr.html" aria-label="Makaleye git"><span>AÇ</span><span aria-hidden="true" class="article-go-arrow">→</span></a></div></div>
+          <div class="article-actions">
+            <button class="article-action" data-card-action="save" type="button" aria-label="Yer imine ekle"><svg viewBox="0 0 24 24"><path d="M6 4.5A1.5 1.5 0 0 1 7.5 3h9A1.5 1.5 0 0 1 18 4.5V21l-6-3.5L6 21V4.5z"></path></svg></button>
+            <button class="article-action" data-card-action="share" type="button" aria-label="Makaleyi paylaş"><svg viewBox="0 0 24 24"><circle cx="18" cy="5" r="3"></circle><circle cx="6" cy="12" r="3"></circle><circle cx="18" cy="19" r="3"></circle><path d="M8.7 10.7l6.6-4.4M8.7 13.3l6.6 4.4"></path></svg></button>
+            <button class="article-action" data-card-action="favorite" type="button" aria-label="Favorilere ekle"><svg viewBox="0 0 24 24"><path d="M12 3.6l2.45 5.05 5.55.8-4.02 3.92.95 5.53L12 16.3l-4.93 2.6.95-5.53L4 9.45l5.55-.8L12 3.6z"></path></svg></button>
+          </div>
+        </article>
+        <article class="article" data-keywords="yemek doyurmak insan islam sadaka">
+          <div class="article-main"><a href="islamic_articles-tr/023-tr.html">İslam’da yemekle yardım</a><p>Bir insanı doyurmanın neden doğrudan ve güçlü bir sadaka biçimi olduğu.</p><div class="article-meta"><span class="tag">yemek</span></div><div class="article-go"><a href="islamic_articles-tr/023-tr.html" aria-label="Makaleye git"><span>AÇ</span><span aria-hidden="true" class="article-go-arrow">→</span></a></div></div>
+          <div class="article-actions">
+            <button class="article-action" data-card-action="save" type="button" aria-label="Yer imine ekle"><svg viewBox="0 0 24 24"><path d="M6 4.5A1.5 1.5 0 0 1 7.5 3h9A1.5 1.5 0 0 1 18 4.5V21l-6-3.5L6 21V4.5z"></path></svg></button>
+            <button class="article-action" data-card-action="share" type="button" aria-label="Makaleyi paylaş"><svg viewBox="0 0 24 24"><circle cx="18" cy="5" r="3"></circle><circle cx="6" cy="12" r="3"></circle><circle cx="18" cy="19" r="3"></circle><path d="M8.7 10.7l6.6-4.4M8.7 13.3l6.6 4.4"></path></svg></button>
+            <button class="article-action" data-card-action="favorite" type="button" aria-label="Favorilere ekle"><svg viewBox="0 0 24 24"><path d="M12 3.6l2.45 5.05 5.55.8-4.02 3.92.95 5.53L12 16.3l-4.93 2.6.95-5.53L4 9.45l5.55-.8L12 3.6z"></path></svg></button>
+          </div>
+        </article>
+        <article class="article" data-keywords="nereye gider bağışlar şeffaflık yardım">
+          <div class="article-main"><a href="islamic_articles-tr/024-tr.html">Bağışlarınız nereye gider</a><p>Şeffaflık, sorumluluk ve sadakanın gerçek yardıma dönüşmesi.</p><div class="article-meta"><span class="tag">sorumluluk</span></div><div class="article-go"><a href="islamic_articles-tr/024-tr.html" aria-label="Makaleye git"><span>AÇ</span><span aria-hidden="true" class="article-go-arrow">→</span></a></div></div>
+          <div class="article-actions">
+            <button class="article-action" data-card-action="save" type="button" aria-label="Yer imine ekle"><svg viewBox="0 0 24 24"><path d="M6 4.5A1.5 1.5 0 0 1 7.5 3h9A1.5 1.5 0 0 1 18 4.5V21l-6-3.5L6 21V4.5z"></path></svg></button>
+            <button class="article-action" data-card-action="share" type="button" aria-label="Makaleyi paylaş"><svg viewBox="0 0 24 24"><circle cx="18" cy="5" r="3"></circle><circle cx="6" cy="12" r="3"></circle><circle cx="18" cy="19" r="3"></circle><path d="M8.7 10.7l6.6-4.4M8.7 13.3l6.6 4.4"></path></svg></button>
+            <button class="article-action" data-card-action="favorite" type="button" aria-label="Favorilere ekle"><svg viewBox="0 0 24 24"><path d="M12 3.6l2.45 5.05 5.55.8-4.02 3.92.95 5.53L12 16.3l-4.93 2.6.95-5.53L4 9.45l5.55-.8L12 3.6z"></path></svg></button>
+          </div>
+        </article>
+        <article class="article" data-keywords="insanlar erteler yardım en iyi an sadaka">
+          <div class="article-main"><a href="islamic_articles-tr/026-tr.html">İnsanlar yardımı neden erteler</a><p>Bugün yardım etmenin en iyi anı beklemekten neden daha önemli olduğu.</p><div class="article-meta"><span class="tag">karar</span></div><div class="article-go"><a href="islamic_articles-tr/026-tr.html" aria-label="Makaleye git"><span>AÇ</span><span aria-hidden="true" class="article-go-arrow">→</span></a></div></div>
+          <div class="article-actions">
+            <button class="article-action" data-card-action="save" type="button" aria-label="Yer imine ekle"><svg viewBox="0 0 24 24"><path d="M6 4.5A1.5 1.5 0 0 1 7.5 3h9A1.5 1.5 0 0 1 18 4.5V21l-6-3.5L6 21V4.5z"></path></svg></button>
+            <button class="article-action" data-card-action="share" type="button" aria-label="Makaleyi paylaş"><svg viewBox="0 0 24 24"><circle cx="18" cy="5" r="3"></circle><circle cx="6" cy="12" r="3"></circle><circle cx="18" cy="19" r="3"></circle><path d="M8.7 10.7l6.6-4.4M8.7 13.3l6.6 4.4"></path></svg></button>
+            <button class="article-action" data-card-action="favorite" type="button" aria-label="Favorilere ekle"><svg viewBox="0 0 24 24"><path d="M12 3.6l2.45 5.05 5.55.8-4.02 3.92.95 5.53L12 16.3l-4.93 2.6.95-5.53L4 9.45l5.55-.8L12 3.6z"></path></svg></button>
+          </div>
+        </article>
+      </div>
+    </details>
+
+    <details class="group" id="stories">
+      <summary class="group-summary">
+        <div>
+          <div class="group-title">Yardım hikâyeleri</div>
+          <div class="group-desc">Küçük bir yardımın bir ailenin, çocuğun veya ihtiyaç sahibinin hayatını nasıl değiştirdiğine dair gerçek örnekler.</div>
+        </div>
+        <div class="group-count">1</div>
+      </summary>
+      <div class="group-body">
+        <article class="article" data-keywords="yardım hikayesi sadaka hayatı değiştirdi aileler">
+          <div class="article-main"><a href="islamic_articles-tr/004-tr.html">Bir sadaka bir ailenin hayatını nasıl değiştirdi</a><p>Küçük bir hayrın bile bir ailenin hayatını nasıl değiştirebileceği.</p><div class="article-meta"><span class="tag">hikâye</span></div><div class="article-go"><a href="islamic_articles-tr/004-tr.html" aria-label="Makaleye git"><span>AÇ</span><span aria-hidden="true" class="article-go-arrow">→</span></a></div></div>
+          <div class="article-actions">
+            <button class="article-action" data-card-action="save" type="button" aria-label="Yer imine ekle"><svg viewBox="0 0 24 24"><path d="M6 4.5A1.5 1.5 0 0 1 7.5 3h9A1.5 1.5 0 0 1 18 4.5V21l-6-3.5L6 21V4.5z"></path></svg></button>
+            <button class="article-action" data-card-action="share" type="button" aria-label="Makaleyi paylaş"><svg viewBox="0 0 24 24"><circle cx="18" cy="5" r="3"></circle><circle cx="6" cy="12" r="3"></circle><circle cx="18" cy="19" r="3"></circle><path d="M8.7 10.7l6.6-4.4M8.7 13.3l6.6 4.4"></path></svg></button>
+            <button class="article-action" data-card-action="favorite" type="button" aria-label="Favorilere ekle"><svg viewBox="0 0 24 24"><path d="M12 3.6l2.45 5.05 5.55.8-4.02 3.92.95 5.53L12 16.3l-4.93 2.6.95-5.53L4 9.45l5.55-.8L12 3.6z"></path></svg></button>
+          </div>
+        </article>
+      </div>
+    </details>
+
+    <details class="group" id="society">
+      <summary class="group-summary">
+        <div>
+          <div class="group-title">İslam, adalet ve toplum</div>
+          <div class="group-desc">Bir Müslümanın sosyal sorumluluğu hakkında içerikler: yoksullar, merhamet, adalet ve başkalarına yardım görevi.</div>
+        </div>
+        <div class="group-count">3</div>
+      </summary>
+      <div class="group-body">
+        <article class="article" data-keywords="yoksullar islam özen yardım iman">
+          <div class="article-main"><a href="islamic_articles-tr/016-tr.html">İslam’da yoksullara özen</a><p>İhtiyaç sahiplerine yardımın neden imanın önemli bir parçası olduğu.</p><div class="article-meta"><span class="tag">yoksullar</span><span class="tag">iman</span></div><div class="article-go"><a href="islamic_articles-tr/016-tr.html" aria-label="Makaleye git"><span>AÇ</span><span aria-hidden="true" class="article-go-arrow">→</span></a></div></div>
+          <div class="article-actions">
+            <button class="article-action" data-card-action="save" type="button" aria-label="Yer imine ekle"><svg viewBox="0 0 24 24"><path d="M6 4.5A1.5 1.5 0 0 1 7.5 3h9A1.5 1.5 0 0 1 18 4.5V21l-6-3.5L6 21V4.5z"></path></svg></button>
+            <button class="article-action" data-card-action="share" type="button" aria-label="Makaleyi paylaş"><svg viewBox="0 0 24 24"><circle cx="18" cy="5" r="3"></circle><circle cx="6" cy="12" r="3"></circle><circle cx="18" cy="19" r="3"></circle><path d="M8.7 10.7l6.6-4.4M8.7 13.3l6.6 4.4"></path></svg></button>
+            <button class="article-action" data-card-action="favorite" type="button" aria-label="Favorilere ekle"><svg viewBox="0 0 24 24"><path d="M12 3.6l2.45 5.05 5.55.8-4.02 3.92.95 5.53L12 16.3l-4.93 2.6.95-5.53L4 9.45l5.55-.8L12 3.6z"></path></svg></button>
+          </div>
+        </article>
+        <article class="article" data-keywords="müslümanların sorumluluğu başkalarına yardım">
+          <div class="article-main"><a href="islamic_articles-tr/017-tr.html">Müslümanların başkalarına yardım sorumluluğu</a><p>İhtiyaç sahiplerine yardımın neden her Müslümanın sorumluluğu olduğu.</p><div class="article-meta"><span class="tag">sorumluluk</span></div><div class="article-go"><a href="islamic_articles-tr/017-tr.html" aria-label="Makaleye git"><span>AÇ</span><span aria-hidden="true" class="article-go-arrow">→</span></a></div></div>
+          <div class="article-actions">
+            <button class="article-action" data-card-action="save" type="button" aria-label="Yer imine ekle"><svg viewBox="0 0 24 24"><path d="M6 4.5A1.5 1.5 0 0 1 7.5 3h9A1.5 1.5 0 0 1 18 4.5V21l-6-3.5L6 21V4.5z"></path></svg></button>
+            <button class="article-action" data-card-action="share" type="button" aria-label="Makaleyi paylaş"><svg viewBox="0 0 24 24"><circle cx="18" cy="5" r="3"></circle><circle cx="6" cy="12" r="3"></circle><circle cx="18" cy="19" r="3"></circle><path d="M8.7 10.7l6.6-4.4M8.7 13.3l6.6 4.4"></path></svg></button>
+            <button class="article-action" data-card-action="favorite" type="button" aria-label="Favorilere ekle"><svg viewBox="0 0 24 24"><path d="M12 3.6l2.45 5.05 5.55.8-4.02 3.92.95 5.53L12 16.3l-4.93 2.6.95-5.53L4 9.45l5.55-.8L12 3.6z"></path></svg></button>
+          </div>
+        </article>
+        <article class="article" data-keywords="adalet merhamet islam dürüstlük şefkat">
+          <div class="article-main"><a href="islamic_articles-tr/018-tr.html">İslam’da adalet ve merhamet</a><p>Bir Müslümanın hayatında dürüstlük ve şefkat arasındaki denge.</p><div class="article-meta"><span class="tag">adalet</span><span class="tag">merhamet</span></div><div class="article-go"><a href="islamic_articles-tr/018-tr.html" aria-label="Makaleye git"><span>AÇ</span><span aria-hidden="true" class="article-go-arrow">→</span></a></div></div>
+          <div class="article-actions">
+            <button class="article-action" data-card-action="save" type="button" aria-label="Yer imine ekle"><svg viewBox="0 0 24 24"><path d="M6 4.5A1.5 1.5 0 0 1 7.5 3h9A1.5 1.5 0 0 1 18 4.5V21l-6-3.5L6 21V4.5z"></path></svg></button>
+            <button class="article-action" data-card-action="share" type="button" aria-label="Makaleyi paylaş"><svg viewBox="0 0 24 24"><circle cx="18" cy="5" r="3"></circle><circle cx="6" cy="12" r="3"></circle><circle cx="18" cy="19" r="3"></circle><path d="M8.7 10.7l6.6-4.4M8.7 13.3l6.6 4.4"></path></svg></button>
+            <button class="article-action" data-card-action="favorite" type="button" aria-label="Favorilere ekle"><svg viewBox="0 0 24 24"><path d="M12 3.6l2.45 5.05 5.55.8-4.02 3.92.95 5.53L12 16.3l-4.93 2.6.95-5.53L4 9.45l5.55-.8L12 3.6z"></path></svg></button>
+          </div>
+        </article>
+      </div>
+    </details>
+  <div class="writing-status" aria-label="Yeni makale hazırlanıyor">
+    <span class="writing-text">yeni makale hazırlanıyor</span>
+    <span class="writing-dots"><i></i><i></i><i></i></span>
+  </div>
+    <details class="group" id="worship">
+      <summary class="group-summary">
+        <div>
+          <div class="group-kicker">Gelecek bölüm</div>
+          <div class="group-title">İbadet: namaz, teheccüd, dua, zikir</div>
+          <div class="group-desc">Bu bölüm teheccüd, gece namazının faydaları, dua, sabah-akşam zikirleri ve manevi disiplin hakkındaki yazılar için hazırlandı.</div>
+        </div>
+        <div class="group-count">0</div>
+      </summary>
+      <div class="group-body future-grid">
+        <div class="future-card"><strong>Teheccüd namazı</strong><span>Faydası, usulü, niyeti, vakti ve iç anlamı.</span></div>
+        <div class="future-card"><strong>Dua ve zikir</strong><span>Allah’a nasıl yönelinir, süreklilik, sabah ve akşam zikirleri.</span></div>
+        <div class="future-card"><strong>Müslümanın hayatında namaz</strong><span>Disiplin, huşu ve devamlılık hakkında pratik makaleler.</span></div>
+      </div>
+    </details>
+
+    <details class="group" id="days">
+      <summary class="group-summary">
+        <div>
+          <div class="group-kicker">Gelecek bölüm</div>
+          <div class="group-title">Ramazan, Ramazan Bayramı ve Kurban Bayramı</div>
+          <div class="group-desc">Hazırlık, yapılacaklar, kaçınılacaklar ve önemli İslami günlerde davranış hakkında pratik makaleler bölümü.</div>
+        </div>
+        <div class="group-count">0</div>
+      </summary>
+      <div class="group-body future-grid">
+        <div class="future-card"><strong>Ramazan</strong><span>Oruç, sadaka, dua, gece ibadetleri, disiplin.</span></div>
+        <div class="future-card"><strong>Ramazan Bayramı</strong><span>Hazırlık, edep, aile, şükür, ihtiyaç sahiplerine yardım.</span></div>
+        <div class="future-card"><strong>Kurban Bayramı</strong><span>Kurbanın anlamı, etin dağıtımı, davranış ve ahlak.</span></div>
+      </div>
+    </details>
+
+    <details class="group" id="family">
+      <summary class="group-summary">
+        <div>
+          <div class="group-kicker">Gelecek bölüm</div>
+          <div class="group-title">Aile, çocuklar, ebeveynler ve ümmet</div>
+          <div class="group-desc">Aile sorumluluğu, çocuk terbiyesi, ebeveyne saygı, komşular ve topluma fayda hakkında gelecek bölüm.</div>
+        </div>
+        <div class="group-count">0</div>
+      </summary>
+      <div class="group-body future-grid">
+        <div class="future-card"><strong>Ebeveynler</strong><span>Saygı, özen, şükür, İslami edep.</span></div>
+        <div class="future-card"><strong>Çocuklar</strong><span>Terbiye, bilgi, yumuşaklık, sorumluluk.</span></div>
+        <div class="future-card"><strong>Toplum</strong><span>Komşular, karşılıklı yardım, güven, adalet.</span></div>
+      </div>
+    </details>
+
+    <details class="group" id="akhlaq">
+      <summary class="group-summary">
+        <div>
+          <div class="group-kicker">Gelecek bölüm</div>
+          <div class="group-title">Ahlak, karakter ve davranış</div>
+          <div class="group-desc">Dürüstlük, sabır, şükür, tevazu, kalbin arınması ve insanlara doğru yaklaşım hakkında makaleler.</div>
+        </div>
+        <div class="group-count">0</div>
+      </summary>
+      <div class="group-body future-grid">
+        <div class="future-card"><strong>Samimiyet</strong><span>Niyet, gizli ameller, kalbi gösterişten koruma.</span></div>
+        <div class="future-card"><strong>Sabır ve şükür</strong><span>İmtihanlarda kalbi nasıl sağlam tutmalı.</span></div>
+        <div class="future-card"><strong>Müslümanın edebi</strong><span>Davranış, söz, ilişkiler, saygı ve yumuşaklık.</span></div>
+      </div>
+    </details>
+
+    <div class="empty" id="empty">Bu arama için sonuç bulunamadı.</div>
+  </main>
+
 </div>
 
-<div class="article">
-<a href="islamic_articles-tr/002-tr.html">Zekât ile sadaka arasındaki fark</a>
-<p>Farz olan zekât ile gönüllü sadaka arasındaki farkı anlamak.</p>
+
+<div class="share-modal" id="shareModal" aria-hidden="true">
+  <div class="share-panel share-panel-premium" role="dialog" aria-modal="true" aria-label="Paylaş">
+    <div class="share-preview-shell">
+      <img class="share-generated-card" id="shareGeneratedCard" alt="Gönderim için BarakaWay kartı">
+      <div class="share-card-loading" id="shareCardLoading">Kart hazırlanıyor…</div>
+    </div>
+    <div class="share-actions share-actions-premium">
+      <button class="share-send" id="shareNative" type="button">Kartı paylaş</button>
+      <button class="share-copy" id="shareCopy" type="button">Metni kopyala</button>
+      <button class="share-close" id="shareClose" type="button">Kapat</button>
+    </div>
+  </div>
 </div>
 
-<div class="article">
-<a href="islamic_articles-tr/003-tr.html">Gizli yardım neden önemlidir</a>
-<p>Neden birçok Müslüman sadakayı gizlice vermeyi tercih eder.</p>
-</div>
+<div class="toast" id="toast"></div>
 
-<div class="article">
-<a href="islamic_articles-tr/007-tr.html">İslam’da en iyi sadaka türleri</a>
-<p> İslam’da yardımlaşma может принимать разные формы, и каждое доброе дело имеет ценность.</p>
-</div>
+<script>
+(function(){
+  const root = document.documentElement;
+  const search = document.getElementById('search');
+  const groups = Array.from(document.querySelectorAll('details.group'));
+  const articles = Array.from(document.querySelectorAll('.article'));
+  const empty = document.getElementById('empty');
+  const toast = document.getElementById('toast');
 
-<div class="article">
-<a href="islamic_articles-tr/008-tr.html">Ramazan ayında sadaka</a>
-<p> Ramazan’da yapılan yardım neden özel bir değere sahiptir</p>
-</div>
+  const searchNavigator = document.getElementById('searchNavigator');
+  const searchPrev = document.getElementById('searchPrev');
+  const searchNext = document.getElementById('searchNext');
+  const searchCounter = document.getElementById('searchCounter');
 
-<div class="article">
-<a href="islamic_articles-tr/009-tr.html">Kur’an’da sadaka</a>
-<p> Kur’an’ın cömertliği, merhameti ve ihtiyaç sahiplerine yardımı nasıl öğrettiği</p>
-</div>
+  const shareModal = document.getElementById('shareModal');
+  const shareTitle = document.getElementById('shareTitle');
+  const shareText = document.getElementById('shareText');
+  const shareUrl = document.getElementById('shareUrl');
+  const shareNative = document.getElementById('shareNative');
+  const shareCopy = document.getElementById('shareCopy');
+  const shareClose = document.getElementById('shareClose');
+  const shareGeneratedCard = document.getElementById('shareGeneratedCard');
+  const shareCardLoading = document.getElementById('shareCardLoading');
 
+  const FAVORITES_KEY = 'barakaway_favorites_v1';
+  const SAVED_ARTICLE_KEY = 'barakaway_articles_saved_article_ru_v3';
+  const READING_KEY = 'barakaway_articles_reading_ru_v3';
 
-</div>
+  let currentShare = { title: document.title, text: 'BarakaWay İslami Makaleler', url: location.href, kind: 'page' };
+  let currentShareFile = null;
 
-<div class="section">
-<h2>İnsanlara yardım</h2>
-<div class="article">
-<a href="islamic_articles-tr/004-tr.html">İhtiyaç sahibi ailelere yardım</a>
-<p>Ailelere barınma desteğinin neden en önemli yardım türlerinden biri olduğu.</p>
-</div>
+  groups.forEach(group => {
+    group.addEventListener('toggle', () => {
+      if(!group.open) return;
+      groups.forEach(other => {
+        if(other !== group) other.removeAttribute('open');
+      });
+    });
+  });
+  const SHARE_LOGO_SRC = 'data:image/png;base64,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';
+  const APP_DOWNLOAD_URL = 'https://play.google.com/store/apps/details?id=YOUR_APP_ID';
+  let searchResults = [];
+  let searchIndex = 0;
 
-<div class="article">
-<a href="islamic_articles-tr/005-tr.html">Neden bir dolar bile önemlidir</a>
-<p>Küçük bağışların bile bir hayatı nasıl değiştirebileceği.</p>
-</div>
+  groups.forEach(group => group.removeAttribute('open'));
 
-<div class="article">
-<a href="islamic_articles-tr/006-tr.html">Barınma için sadaka</a>
-<p> Barınma desteğinin neden en önemli yardım türlerinden biri olduğu</p>
-</div>
+  function showToast(text){
+    if(!toast) return;
+    toast.textContent = text;
+    toast.classList.add('is-visible');
+    clearTimeout(showToast.timer);
+    showToast.timer = setTimeout(() => toast.classList.remove('is-visible'), 1600);
+  }
 
-</div>
+  function getLang(){
+    return (document.documentElement.getAttribute('lang') || 'ru').toLowerCase().split('-')[0] || 'ru';
+  }
 
-<div class="section">
-<h2>Yardım hikâyeleri</h2>
-<div class="article">
-<a href="islamic_articles-tr/004-tr.html">Bir sadakanın bir ailenin hayatını nasıl değiştirdiği</a>
-<p>Küçük bir yardımın bile bir ailenin hayatını nasıl değiştirebileceği</p>
-</div>
+  function pageFile(base){
+    return '/' + base + '-' + getLang() + '.html';
+  }
 
-<div class="article">
-<a href="islamic_articles-tr/011-tr.html">Ailelere yardım neden önemlidir</a>
-<p>Ailelere destek vermenin neden en önemli yardım türlerinden biri olduğu.</p>
-</div>
+  function readJson(key, fallback){
+    try{
+      const raw = localStorage.getItem(key);
+      const parsed = raw ? JSON.parse(raw) : fallback;
+      return parsed || fallback;
+    }catch(e){ return fallback; }
+  }
 
-<div class="article">
-<a href="islamic_articles-tr/012-tr.html">Küçük yardım — büyük değişim</a>
-<p>Küçük yardımların bile büyük değişimler yaratabileceği.</p>
-</div>
+  function readFavorites(){
+    const list = readJson(FAVORITES_KEY, []);
+    return Array.isArray(list) ? list.filter(Boolean) : [];
+  }
 
-</div>
+  function saveFavorites(list){
+    localStorage.setItem(FAVORITES_KEY, JSON.stringify(Array.isArray(list) ? list : []));
+    refreshBottomNav();
+  }
 
-<div class="section">
-<h2>Sadakanın anlamı</h2>
-<div class="article">
-<a href="islamic_articles-tr/013-tr.html">Sadakanın karşılığı</a>
-<p>İslam’da yardımın neden büyük bir karşılığı olduğu.</p>
-</div>
+  function favoriteId(data){
+    return (data.url || '') + '::' + (data.title || '');
+  }
 
-<div class="article">
-<a href="islamic_articles-tr/014-tr.html">Sadaka ve malın temizlenmesi</a>
-<p>Sadakanın malı temizleyip bereket getirmesinin nedeni.</p>
-</div>
+  function articleData(article){
+    const link = article ? article.querySelector('.article-main a') : null;
+    const desc = article ? article.querySelector('.article-main p') : null;
+    const title = link ? link.textContent.trim() : document.title;
+    const href = link ? link.getAttribute('href') : location.pathname;
+    const url = new URL(href, location.href).href;
+    const text = desc ? desc.textContent.trim() : '';
+    return { id: url + '::' + title, title, url, text, type: 'Makale' };
+  }
 
-<div class="article">
-<a href="islamic_articles-tr/015-tr.html">Müslümanlar neden sadaka verir</a>
-<p>İslam’da sadakanın anlamı.</p>
-</div>
+  function isFavorite(data){
+    const id = favoriteId(data);
+    return readFavorites().some(item => String(item.id) === String(id));
+  }
 
-</div>
+  function toggleFavorite(data){
+    const id = favoriteId(data);
+    let list = readFavorites();
+    const exists = list.some(item => String(item.id) === String(id));
 
-<div class="section">
-<h2>İslam ve insanlara yardım</h2>
-<div class="article">
-<a href="islamic_articles-tr/016-tr.html">İslam’da fakirlere destek</a>
-<p>İhtiyaç sahiplerine yardımın neden imanın önemli bir parçası olduğu</p>
-</div>
+    if(exists){
+      list = list.filter(item => String(item.id) !== String(id));
+      saveFavorites(list);
+      return false;
+    }
 
-<div class="article">
-<a href="islamic_articles-tr/017-tr.html">Müslümanların yardım sorumluluğu</a>
-<p>Yardım etmenin neden her Müslüman için bir sorumluluk olduğu</p>
-</div>
+    list.unshift({
+      id,
+      title: data.title || document.title,
+      url: data.url || location.pathname,
+      text: data.text || '',
+      type: data.type || 'Makale',
+      addedAt: new Date().toISOString()
+    });
+    saveFavorites(list);
+    return true;
+  }
 
-<div class="article">
-<a href="islamic_articles-tr/018-tr.html">İslam’da adalet ve merhamet</a>
-<p>Bir Müslümanın hayatında adalet ve merhamet dengesi</p>
-</div>
+  function refreshBottomNav(){
+    const hasFavorites = readFavorites().length > 0;
+    document.querySelectorAll('.bottom-app-nav-item[data-nav="favorites"], [data-nav="favorites"], [href*="favorites-"]').forEach(item => {
+      item.classList.toggle('has-favorites', hasFavorites);
+      item.setAttribute('data-favorites-state', hasFavorites ? 'filled' : 'empty');
+      const svg = item.querySelector('svg');
+      if(svg) svg.style.fill = hasFavorites ? 'currentColor' : '';
+    });
 
-<div class="article">
-<a href="islamic_articles-tr/019-tr.html">Yardım ailelere nasıl umut getirir</a>
-<p>Küçük bir sadakanın bile zor zamanlarda insanlara umut ve istikrar kazandırması</p>
-</div>
+    if(window.BarakaWayFavorites && typeof window.BarakaWayFavorites.refreshNav === 'function'){
+      window.BarakaWayFavorites.refreshNav();
+    }
+  }
 
-<div class="article">
-<a href="islamic_articles-tr/020-tr.html">Çocuklara yardım</a>
-<p>Çocuklara yardımın İslam’da en güçlü yardım türlerinden biri olması</p>
-</div>
+  function syncFavorites(){
+    document.querySelectorAll('[data-card-action="favorite"]').forEach(btn => {
+      const data = articleData(btn.closest('.article'));
+      const active = isFavorite(data);
+      btn.classList.toggle('is-active', active);
+      btn.setAttribute('aria-pressed', active ? 'true' : 'false');
+    });
 
-<div class="article">
-<a href="islamic_articles-tr/021-tr.html">İslam’da dul kadınlara yardım</a>
-<p>Dullara yardımın neden en önemli sorumluluklardan biri olduğu</p>
-</div>
+    const pageFavorite = document.querySelector('.action[data-action="favorite"]');
+    if(pageFavorite){
+      const active = readFavorites().length > 0;
+      pageFavorite.classList.toggle('is-active', active);
+      pageFavorite.setAttribute('aria-pressed', active ? 'true' : 'false');
+    }
+    refreshBottomNav();
+  }
 
-<div class="article">
-<a href="islamic_articles-tr/022-tr.html">Acil yardım</a>
-<p>Zamanında yardımın neden en güçlü sadaka türlerinden biri olduğu</p>
-</div>
+  function syncSaved(){
+    const savedUrl = localStorage.getItem(SAVED_ARTICLE_KEY) || '';
+    document.querySelectorAll('[data-card-action="save"]').forEach(btn => {
+      const article = btn.closest('.article');
+      const data = articleData(article);
+      const active = savedUrl === data.url;
+      btn.classList.toggle('is-active', active);
+      btn.setAttribute('aria-pressed', active ? 'true' : 'false');
+      if(article) article.classList.toggle('is-saved', active);
+    });
 
-<div class="article">
-<a href="islamic_articles-tr/023-tr.html">Yemek yardımı</a>
-<p>Birini doyurmanın neden en güçlü sadaka türlerinden biri olduğu</p>
-</div>
+    const pageSave = document.querySelector('.action[data-action="save"]');
+    if(pageSave){
+      const active = Boolean(savedUrl);
+      pageSave.classList.toggle('is-active', active);
+      pageSave.setAttribute('aria-pressed', active ? 'true' : 'false');
+    }
+  }
 
-<div class="article">
-<a href="islamic_articles-tr/024-tr.html">Bağışlarınız nereye gidiyor</a>
-<p>Şeffaflık ve sadakanın gerçek yardıma dönüşmesi</p>
-</div>
+  function canvasRoundRect(ctx,x,y,w,h,r){
+    const rr = Math.min(r, w/2, h/2);
+    ctx.beginPath();
+    ctx.moveTo(x+rr,y);
+    ctx.lineTo(x+w-rr,y);
+    ctx.quadraticCurveTo(x+w,y,x+w,y+rr);
+    ctx.lineTo(x+w,y+h-rr);
+    ctx.quadraticCurveTo(x+w,y+h,x+w-rr,y+h);
+    ctx.lineTo(x+rr,y+h);
+    ctx.quadraticCurveTo(x,y+h,x,y+h-rr);
+    ctx.lineTo(x,y+rr);
+    ctx.quadraticCurveTo(x,y,x+rr,y);
+    ctx.closePath();
+  }
 
-<div class="article">
-<a href="islamic_articles-tr/025-tr.html">Küçük sadaka neden önemlidir</a>
-<p>Küçük katkıların gerçek sonuçlar doğurması</p>
-</div>
+  function loadImage(src){
+    return new Promise((resolve,reject) => {
+      const img = new Image();
+      img.onload = () => resolve(img);
+      img.onerror = reject;
+      img.src = src;
+    });
+  }
 
-<div class="article">
-<a href="islamic_articles-tr/026-tr.html">İnsanlar neden yardımı erteler</a>
-<p>Sadakayı ertelemenin neden faydayı azalttığı</p>
-</div>
+  function wrapCanvasText(ctx, text, x, y, maxWidth, lineHeight, maxLines){
+    const words = String(text || '').split(/\s+/).filter(Boolean);
+    const lines = [];
+    let line = '';
+    words.forEach(word => {
+      const test = line ? line + ' ' + word : word;
+      if(ctx.measureText(test).width > maxWidth && line){
+        lines.push(line);
+        line = word;
+      }else{
+        line = test;
+      }
+    });
+    if(line) lines.push(line);
+    const finalLines = typeof maxLines === 'number' ? lines.slice(0, maxLines) : lines;
+    if(typeof maxLines === 'number' && lines.length > maxLines){
+      finalLines[maxLines - 1] = finalLines[maxLines - 1].replace(/[.,;:!?…]*$/,'') + '…';
+    }
+    finalLines.forEach((ln, i) => ctx.fillText(ln, x, y + i * lineHeight));
+    return finalLines.length * lineHeight;
+  }
 
-<div class="article">
-<a href="islamic_articles-tr/027-tr.html">Düzenli sadaka neden önemlidir</a>
-<p>Sürekli yardımın neden daha güçlü sonuçlar verdiği</p>
-</div>
+  function drawIslamicPattern(ctx, x, y, w, h){
+    ctx.save();
+    canvasRoundRect(ctx, x, y, w, h, 34);
+    ctx.clip();
 
-<div class="article">
-<a href="islamic_articles-tr/028-tr.html">Şeffaflık neden önemlidir</a>
-<p>Şeffaf yardımın güveni nasıl artırdığı</p>
-</div>
+    const bg = ctx.createLinearGradient(x, y, x + w, y + h);
+    bg.addColorStop(0, 'rgba(240,216,145,0.24)');
+    bg.addColorStop(0.42, 'rgba(8,64,43,0.34)');
+    bg.addColorStop(1, 'rgba(4,12,14,0.74)');
+    ctx.fillStyle = bg;
+    ctx.fillRect(x,y,w,h);
 
-<div class="article">
-<a href="islamic_articles-tr/029-tr.html">Niyet neden önemlidir</a>
-<p>Samimiyetin miktardan daha önemli olması</p>
-</div>
+    const glow = ctx.createRadialGradient(x + w * .5, y + h * .25, 10, x + w * .5, y + h * .25, w * .72);
+    glow.addColorStop(0, 'rgba(240,216,145,.20)');
+    glow.addColorStop(.55, 'rgba(45,122,70,.12)');
+    glow.addColorStop(1, 'rgba(0,0,0,0)');
+    ctx.fillStyle = glow;
+    ctx.fillRect(x,y,w,h);
 
-</div>
+    ctx.globalAlpha = .95;
+    ctx.strokeStyle = 'rgba(240,216,145,0.48)';
+    ctx.lineWidth = 2.6;
 
-<div class="small">
-Bu makaleler sadaka ve yardımlaşmanın anlamını açıklar.
-</div>
-</div>
+    const drawStar = (cx, cy, r1, r2) => {
+      ctx.beginPath();
+      for(let i=0;i<16;i++){
+        const angle = -Math.PI/2 + i * Math.PI / 8;
+        const r = i % 2 === 0 ? r1 : r2;
+        const px = cx + Math.cos(angle) * r;
+        const py = cy + Math.sin(angle) * r;
+        if(i === 0) ctx.moveTo(px, py); else ctx.lineTo(px, py);
+      }
+      ctx.closePath();
+      ctx.stroke();
+    };
+
+    for(let row=-1; row<4; row++){
+      for(let col=-1; col<7; col++){
+        const cx = x + 80 + col * 132 + (row % 2 ? 66 : 0);
+        const cy = y + 44 + row * 72;
+        drawStar(cx, cy, 40, 18);
+        ctx.beginPath();
+        ctx.arc(cx, cy, 18, 0, Math.PI * 2);
+        ctx.stroke();
+      }
+    }
+
+    ctx.globalAlpha = 1;
+    ctx.strokeStyle = 'rgba(215,181,109,0.86)';
+    ctx.lineWidth = 4;
+    ctx.beginPath();
+    for(let i=0;i<=w;i+=16){
+      const px = x + i;
+      const py = y + h * .54 + Math.sin(i/54) * 16 + Math.sin(i/26) * 5;
+      if(i===0) ctx.moveTo(px, py); else ctx.lineTo(px, py);
+    }
+    ctx.stroke();
+
+    ctx.strokeStyle = 'rgba(255,255,255,0.18)';
+    ctx.lineWidth = 2;
+    ctx.beginPath();
+    for(let i=0;i<=w;i+=18){
+      const px = x + i;
+      const py = y + h * .64 + Math.sin(i/49 + 1.3) * 14;
+      if(i===0) ctx.moveTo(px, py); else ctx.lineTo(px, py);
+    }
+    ctx.stroke();
+
+    ctx.restore();
+  }
+
+  function drawShareCardToCanvas(data, logo){
+    const canvas = document.createElement('canvas');
+    canvas.width = 1080;
+    canvas.height = 1350;
+    const ctx = canvas.getContext('2d');
+
+    const bg = ctx.createLinearGradient(0,0,1080,1350);
+    bg.addColorStop(0,'#062b1b');
+    bg.addColorStop(.45,'#0a1717');
+    bg.addColorStop(1,'#05080d');
+    ctx.fillStyle = bg;
+    ctx.fillRect(0,0,1080,1350);
+
+    const glow = ctx.createRadialGradient(540,150,20,540,150,700);
+    glow.addColorStop(0,'rgba(215,181,109,.22)');
+    glow.addColorStop(.48,'rgba(45,122,70,.13)');
+    glow.addColorStop(1,'rgba(0,0,0,0)');
+    ctx.fillStyle = glow;
+    ctx.fillRect(0,0,1080,1350);
+
+    ctx.strokeStyle = 'rgba(215,181,109,.58)';
+    ctx.lineWidth = 3;
+    canvasRoundRect(ctx,70,58,940,1234,56);
+    ctx.stroke();
+    ctx.strokeStyle = 'rgba(240,216,145,.36)';
+    ctx.lineWidth = 2;
+    canvasRoundRect(ctx,112,103,856,1144,44);
+    ctx.stroke();
+
+    if(logo){
+      ctx.save();
+      canvasRoundRect(ctx,430,120,220,220,46);
+      ctx.clip();
+      ctx.drawImage(logo,430,120,220,220);
+      ctx.restore();
+    }
+
+    ctx.textAlign = 'center';
+    ctx.fillStyle = '#f8fbf6';
+    ctx.font = '900 42px system-ui, -apple-system, Segoe UI, sans-serif';
+    ctx.fillText('BarakaWay App',540,395);
+
+    ctx.fillStyle = '#d7b56d';
+    ctx.font = '700 38px Arial, sans-serif';
+    ctx.fillText('بِسْمِ ٱللَّٰهِ ٱلرَّحْمَـٰنِ ٱلرَّحِيمِ',540,462);
+
+    const isPage = data.kind === 'page';
+    const title = isPage ? 'İslami Makaleler' : (data.title || 'İslami makale');
+    const desc = isPage
+      ? 'Müslümanlar için pratik bir kütüphane: iman, ibadet, hayır, aile, ahlak ve önemli günler.'
+      : (data.text || 'BarakaWay İslami makalesinin kısa açıklaması.');
+
+    ctx.fillStyle = '#ffffff';
+    ctx.font = '950 58px system-ui, -apple-system, Segoe UI, sans-serif';
+    const titleHeight = wrapCanvasText(ctx, title, 540, 558, 780, 68, 3);
+
+    ctx.fillStyle = '#ead08b';
+    ctx.font = '800 28px system-ui, -apple-system, Segoe UI, sans-serif';
+    const descY = 596 + titleHeight;
+    wrapCanvasText(ctx, desc, 540, descY, 760, 40, 4);
+
+    drawIslamicPattern(ctx,170,870,740,190);
+
+    ctx.fillStyle = 'rgba(255,255,255,.92)';
+    ctx.font = '900 32px system-ui, -apple-system, Segoe UI, sans-serif';
+    ctx.fillText('BarakaWay uygulamasını indir',540,1160);
+    ctx.fillStyle = 'rgba(215,181,109,.92)';
+    ctx.font = '700 24px system-ui, -apple-system, Segoe UI, sans-serif';
+    ctx.fillText('berekete giden günlük yolunuz',540,1200);
+
+    return canvas;
+  }
+
+  function canvasToBlob(canvas){
+    return new Promise(resolve => canvas.toBlob(resolve, 'image/png', 0.94));
+  }
+
+  async function renderShareCard(data){
+    if(shareGeneratedCard) shareGeneratedCard.removeAttribute('src');
+    if(shareCardLoading) shareCardLoading.style.display = 'flex';
+    currentShareFile = null;
+    try{
+      const logo = await loadImage(SHARE_LOGO_SRC);
+      const canvas = drawShareCardToCanvas(data, logo);
+      const blob = await canvasToBlob(canvas);
+      const dataUrl = canvas.toDataURL('image/png');
+      if(shareGeneratedCard) shareGeneratedCard.src = dataUrl;
+      if(blob){
+        const safeTitle = String(data.title || 'barakaway').toLowerCase().replace(/[^\p{L}0-9]+/gu,'-').replace(/^-|-$/g,'').slice(0,50) || 'barakaway-card';
+        currentShareFile = new File([blob], safeTitle + '.png', { type:'image/png' });
+      }
+    }catch(e){
+      if(shareGeneratedCard) shareGeneratedCard.alt = 'Kart görseli hazırlanamadı';
+    }finally{
+      if(shareCardLoading) shareCardLoading.style.display = 'none';
+    }
+  }
+
+  function openShareCard(data){
+    const kind = data.kind || data.type || 'article';
+    const targetUrl = data.url || location.href;
+    const cleanText = data.text || 'BarakaWay İslami makaleler için pratik kütüphane.';
+    currentShare = {
+      title: data.title || 'BarakaWay İslami Makaleler',
+      text: cleanText + '\n\nBarakaWay uygulamasını indir — berekete giden günlük yolunuz',
+      url: targetUrl,
+      kind
+    };
+    if(shareModal){
+      shareModal.classList.add('is-open');
+      shareModal.setAttribute('aria-hidden','false');
+    }
+    renderShareCard({
+      title: currentShare.title,
+      text: cleanText,
+      url: targetUrl,
+      kind
+    });
+  }
+
+  function closeShareCard(){
+    if(shareModal){
+      shareModal.classList.remove('is-open');
+      shareModal.setAttribute('aria-hidden','true');
+    }
+  }
+
+  async function shareCurrent(){
+    const payload = { title: currentShare.title, text: currentShare.text, url: currentShare.url };
+    if(currentShareFile && navigator.canShare && navigator.canShare({ files:[currentShareFile] }) && navigator.share){
+      try{
+        await navigator.share({ files:[currentShareFile], title:payload.title, text:payload.text + '\n' + payload.url });
+        closeShareCard();
+      }catch(e){}
+      return;
+    }
+    if(navigator.share){
+      try{
+        await navigator.share(payload);
+        closeShareCard();
+      }catch(e){}
+      return;
+    }
+    await copyCurrentShare();
+  }
+
+  async function copyCurrentShare(){
+    const text = currentShare.title + '\n' + currentShare.text + '\n' + currentShare.url;
+    if(navigator.clipboard){
+      await navigator.clipboard.writeText(text);
+      showToast('Bağlantı kopyalandı');
+      return;
+    }
+    showToast('Bağlantıyı manuel olarak kopyalayın');
+  }
+
+  if(shareNative) shareNative.addEventListener('click', shareCurrent);
+  if(shareCopy) shareCopy.addEventListener('click', copyCurrentShare);
+  if(shareClose) shareClose.addEventListener('click', closeShareCard);
+  if(shareModal){
+    shareModal.addEventListener('click', event => {
+      if(event.target === shareModal) closeShareCard();
+    });
+  }
+  document.addEventListener('keydown', event => {
+    if(event.key === 'Escape') closeShareCard();
+  });
+
+  function normalize(text){
+    return String(text || '')
+      .toLowerCase()
+      .replace(/ё/g,'е')
+      .replace(/[^а-яa-z0-9\s-]/gi,' ')
+      .replace(/\s+/g,' ')
+      .trim();
+  }
+
+  function stemRuWord(word){
+    let w = normalize(word).replace(/-/g,'');
+    if(w.length <= 3) return w;
+    const endings = [
+      'иями','ями','ами','ого','ему','ому','ыми','ими','ией','иям','иях','аго','его','ую','юю','ая','яя','ое','ее','ые','ие','ый','ий','ой','ем','ом','ам','ям','ах','ях','ов','ев','ия','ье','ья','ью','ой','ей','ою','ею','а','я','ы','и','у','ю','е','о'
+    ];
+    for(const ending of endings){
+      if(w.length > ending.length + 2 && w.endsWith(ending)){
+        return w.slice(0, -ending.length);
+      }
+    }
+    return w;
+  }
+
+  function articleTitle(article){
+    const link = article ? article.querySelector('.article-main a') : null;
+    return link ? link.textContent.trim() : '';
+  }
+
+  function articleDescription(article){
+    const desc = article ? article.querySelector('.article-main p') : null;
+    return desc ? desc.textContent.trim() : '';
+  }
+
+  function searchableArticleText(article){
+    return [articleTitle(article), articleDescription(article)].join(' ');
+  }
+
+  function articleSearchTokens(article){
+    return normalize(searchableArticleText(article)).split(' ').filter(Boolean);
+  }
+
+  function articleMatchesQuery(article, query){
+    const q = normalize(query);
+    if(!q) return true;
+
+    const clean = value => normalize(value).replace(/[ьъ]/g,'');
+    const searchable = clean(searchableArticleText(article));
+    if(searchable.includes(clean(q))) return true;
+
+    const queryWords = q.split(' ').map(clean).filter(word => word.length >= 3);
+    if(!queryWords.length) return false;
+
+    const words = articleSearchTokens(article).map(clean).filter(word => word.length >= 3);
+
+    return queryWords.every(qw => {
+      const qStem = clean(stemRuWord(qw));
+      if(!qStem || qStem.length < 3) return false;
+
+      return words.some(word => {
+        const stem = clean(stemRuWord(word));
+        return word.includes(qw) || word.startsWith(qStem) || stem.startsWith(qStem) || word.includes(qStem);
+      });
+    });
+  }
+
+  function clearSearchFocus(){
+    articles.forEach(article => article.classList.remove('search-focus'));
+  }
+
+  function updateSearchCounter(){
+    if(!searchCounter) return;
+    if(!searchResults.length){
+      searchCounter.textContent = 'Başlık ve açıklamalarda bulunan: 0 / 0';
+      return;
+    }
+    searchCounter.textContent = 'Başlık ve açıklamalarda bulunan: ' + (searchIndex + 1) + ' / ' + searchResults.length;
+  }
+
+  function revealResult(index){
+    if(!searchResults.length) return;
+    if(index < 0) index = searchResults.length - 1;
+    if(index >= searchResults.length) index = 0;
+    searchIndex = index;
+    clearSearchFocus();
+
+    const article = searchResults[searchIndex];
+    const group = article.closest('details.group');
+    if(group) group.open = true;
+
+    article.classList.add('search-focus');
+    updateSearchCounter();
+    if(searchPrev) searchPrev.disabled = searchResults.length <= 1;
+    if(searchNext) searchNext.disabled = searchResults.length <= 1;
+
+    requestAnimationFrame(() => {
+      article.scrollIntoView({ behavior:'smooth', block:'center' });
+    });
+  }
+
+  function resetSearchView(){
+    articles.forEach(article => {
+      article.style.display = '';
+      article.classList.remove('search-focus');
+    });
+    groups.forEach(group => {
+      group.style.display = '';
+      group.removeAttribute('open');
+    });
+    searchResults = [];
+    searchIndex = 0;
+    if(searchNavigator) searchNavigator.classList.remove('is-visible');
+    if(empty) empty.style.display = 'none';
+    updateSearchCounter();
+  }
+
+  function applySearch(){
+    const q = search ? search.value : '';
+    if(!normalize(q)){
+      resetSearchView();
+      return;
+    }
+
+    searchResults = articles.filter(article => articleMatchesQuery(article, q));
+    searchIndex = 0;
+
+    articles.forEach(article => {
+      article.style.display = searchResults.includes(article) ? '' : 'none';
+      article.classList.remove('search-focus');
+    });
+
+    groups.forEach(group => {
+      const visibleArticles = Array.from(group.querySelectorAll('.article')).filter(article => searchResults.includes(article));
+      const hasVisible = visibleArticles.length > 0;
+      group.style.display = hasVisible ? '' : 'none';
+      group.open = hasVisible;
+    });
+
+    if(searchNavigator) searchNavigator.classList.toggle('is-visible', searchResults.length > 0);
+    if(empty) empty.style.display = searchResults.length ? 'none' : 'block';
+
+    updateSearchCounter();
+    if(searchResults.length) revealResult(0);
+  }
+
+  if(search) search.addEventListener('input', applySearch);
+  if(searchPrev) searchPrev.addEventListener('click', () => revealResult(searchIndex - 1));
+  if(searchNext) searchNext.addEventListener('click', () => revealResult(searchIndex + 1));
+
+  document.addEventListener('click', function(event){
+    const cardBtn = event.target.closest('[data-card-action]');
+    if(cardBtn){
+      event.preventDefault();
+      const article = cardBtn.closest('.article');
+      const data = articleData(article);
+      const action = cardBtn.dataset.cardAction;
+
+      if(action === 'favorite'){
+        const active = toggleFavorite(data);
+        syncFavorites();
+        showToast(active ? 'Favorilere eklendi' : 'Favorilerden kaldırıldı');
+        return;
+      }
+
+      if(action === 'save'){
+        localStorage.setItem(SAVED_ARTICLE_KEY, data.url);
+        syncSaved();
+        showToast('Yer imi kaydedildi');
+        return;
+      }
+
+      if(action === 'share'){
+        openShareCard(data);
+        return;
+      }
+    }
+
+    const actionBtn = event.target.closest('.action');
+    if(!actionBtn) return;
+    const type = actionBtn.dataset.action;
+
+    if(type === 'favorite'){
+      if(readFavorites().length){
+        if(window.BarakaWayFavorites && typeof window.BarakaWayFavorites.open === 'function'){
+          window.BarakaWayFavorites.open();
+        }else{
+          window.location.href = pageFile('favorites');
+        }
+      }else{
+        showToast('Henüz favori makale yok');
+      }
+      return;
+    }
+
+    if(type === 'share'){
+      openShareCard({
+        title:'BarakaWay İslami Makaleler',
+        text:'Müslümanlar için pratik kütüphane: sadaka, zekât, insanlara yardım, ibadet, Ramazan, bayramlar ve ahlak.',
+        url:location.href,
+        kind:'page'
+      });
+      return;
+    }
+
+    if(type === 'reading'){
+      document.body.classList.toggle('reading-mode');
+      const active = document.body.classList.contains('reading-mode');
+      localStorage.setItem(READING_KEY, active ? '1' : '0');
+      actionBtn.classList.toggle('is-active', active);
+      showToast(active ? 'Okuma modu açıldı' : 'Okuma modu kapatıldı');
+      return;
+    }
+
+    if(type === 'save'){
+      const savedUrl = localStorage.getItem(SAVED_ARTICLE_KEY);
+      if(savedUrl){
+        const savedArticle = articles.find(article => articleData(article).url === savedUrl);
+        if(savedArticle){
+          if(search) search.value = '';
+          resetSearchView();
+          const group = savedArticle.closest('details.group');
+          if(group) group.open = true;
+          clearSearchFocus();
+          savedArticle.classList.add('search-focus');
+          savedArticle.scrollIntoView({ behavior:'smooth', block:'center' });
+          showToast('Yer imi bu sayfada gösterildi');
+        }else{
+          showToast('Kaydedilen makale bu sayfada bulunamadı');
+        }
+      }else{
+        showToast('Önce bir makaleyi yer imlerine ekleyin');
+      }
+      return;
+    }
+
+    if(type === 'day'){
+      const articleLinks = Array.from(document.querySelectorAll('.article-main > a'))
+        .filter(link => link && link.getAttribute('href'));
+      if(!articleLinks.length){
+        showToast('Günün makalesi henüz kullanılamıyor');
+        return;
+      }
+      const now = new Date();
+      const dayStart = new Date(now.getFullYear(), now.getMonth(), now.getDate());
+      const dayNumber = Math.floor(dayStart.getTime() / 86400000);
+      const selected = articleLinks[dayNumber % articleLinks.length];
+      const targetArticle = selected.closest('.article');
+      if(targetArticle){
+        localStorage.setItem('barakaway_article_of_day', selected.getAttribute('href'));
+      }
+      window.location.href = selected.getAttribute('href');
+      return;
+    }
+  });
+
+  if(localStorage.getItem(READING_KEY) === '1'){
+    document.body.classList.add('reading-mode');
+    const readingBtn = document.querySelector('.action[data-action="reading"]');
+    if(readingBtn) readingBtn.classList.add('is-active');
+  }
+
+  setTimeout(function(){
+    syncFavorites();
+    syncSaved();
+    refreshBottomNav();
+  }, 250);
+
+  syncFavorites();
+  syncSaved();
+  updateSearchCounter();
+})();
+</script>
+
 <script src="/bottom-nav.js"></script>
 </body>
 </html>
-
-
-
-
