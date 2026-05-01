@@ -486,6 +486,44 @@ html.dark-mode .donation p{color:rgba(244,250,247,.82)}
 .share-send{color:#fff;background:linear-gradient(135deg,#2d7a46,#4caf6a)}
 .share-copy,.share-close{color:#f5fbf6;background:rgba(255,255,255,.07)}
 .share-close{grid-column:1 / -1}
+
+.share-preview{
+  padding:14px 14px 0;
+}
+.share-canvas-wrap{
+  position:relative;
+  border-radius:26px;
+  overflow:hidden;
+  border:1px solid rgba(215,181,109,.32);
+  background:#071115;
+  box-shadow:0 24px 58px rgba(0,0,0,.42);
+}
+#shareCanvas{
+  display:block;
+  width:100%;
+  height:auto;
+  background:#071115;
+}
+.share-generated-note{
+  padding:10px 2px 0;
+  color:#cfe0d8;
+  font-size:12px;
+  line-height:1.45;
+  font-weight:750;
+  text-align:center;
+}
+.share-download{color:#f5fbf6;background:rgba(255,255,255,.07)}
+html.light-mode .share-panel{
+  background:radial-gradient(circle at 50% 0%,rgba(215,181,109,.24),transparent 42%),linear-gradient(180deg,#fff8df,#f5f0df);
+  color:#17351f;
+}
+html.light-mode .share-text,
+html.light-mode .share-generated-note{color:#53645b}
+html.light-mode .share-url{background:rgba(45,122,70,.06);color:#7b5b1d;border-color:rgba(181,138,54,.24)}
+html.light-mode .share-copy,
+html.light-mode .share-close,
+html.light-mode .share-download{color:#17351f;background:rgba(181,138,54,.10)}
+
 .reading-mode .article-content p{font-size:20px;line-height:1.86}
 .reading-mode .article-content{max-width:790px;margin:0 auto}
 @media(max-width:720px){
@@ -626,16 +664,23 @@ html.dark-mode .donation p{color:rgba(244,250,247,.82)}
 <div class="toast" id="toast" role="status" aria-live="polite"></div>
 
 <div class="share-modal" id="shareModal" aria-hidden="true">
-  <div class="share-panel" role="dialog" aria-modal="true" aria-label="Поделиться статьёй">
+  <div class="share-panel" role="dialog" aria-modal="true" aria-label="Поделиться карточкой статьи">
+    <div class="share-preview">
+      <div class="share-canvas-wrap">
+        <canvas id="shareCanvas" width="1080" height="1350" aria-label="Карточка для отправки статьи"></canvas>
+      </div>
+      <div class="share-generated-note">Карточка формируется в текущей теме сайта. Ссылка ведёт именно на эту статью.</div>
+    </div>
     <div class="share-card">
       <div class="share-brand">BarakaWay</div>
       <h3 class="share-title">Что такое садака</h3>
-      <p class="share-text">Короткая и полезная статья о значении садака, помощи людям и благотворительности в исламе.</p>
+      <p class="share-text">Статья 001 — значение благотворительности в исламе и помощь людям.</p>
       <div class="share-url" id="shareUrl">001-ru.html</div>
     </div>
     <div class="share-actions">
-      <button class="share-send" type="button" id="nativeShareBtn">Поделиться</button>
-      <button class="share-copy" type="button" id="copyShareBtn">Скопировать</button>
+      <button class="share-send" type="button" id="nativeShareBtn">Поделиться карточкой</button>
+      <button class="share-copy" type="button" id="copyShareBtn">Скопировать ссылку</button>
+      <button class="share-download" type="button" id="downloadShareBtn">Сохранить карточку</button>
       <button class="share-close" type="button" id="closeShareBtn">Закрыть</button>
     </div>
   </div>
@@ -668,6 +713,9 @@ html.dark-mode .donation p{color:rgba(244,250,247,.82)}
   const nativeShareBtn = document.getElementById('nativeShareBtn');
   const copyShareBtn = document.getElementById('copyShareBtn');
   const closeShareBtn = document.getElementById('closeShareBtn');
+  const downloadShareBtn = document.getElementById('downloadShareBtn');
+  const shareCanvas = document.getElementById('shareCanvas');
+  let currentShareBlob = null;
 
   function showToast(message){
     if(!toast) return;
@@ -753,22 +801,217 @@ html.dark-mode .donation p{color:rgba(244,250,247,.82)}
   async function copyLink(){
     try{
       await navigator.clipboard.writeText(pageUrl);
-      showToast('Ссылка скопирована');
+      showToast('Ссылка на статью скопирована');
     }catch(e){
       showToast('Скопируйте ссылку из адресной строки');
     }
   }
 
-  function openShare(){
-    if(shareUrl) shareUrl.textContent = pageUrl;
-    if(navigator.share){
-      navigator.share({title:pageTitle,text:'Что такое садака — благотворительность в исламе',url:pageUrl}).catch(function(){});
-      return;
+  function roundRect(ctx, x, y, w, h, r){
+    const radius = Math.min(r, w / 2, h / 2);
+    ctx.beginPath();
+    ctx.moveTo(x + radius, y);
+    ctx.arcTo(x + w, y, x + w, y + h, radius);
+    ctx.arcTo(x + w, y + h, x, y + h, radius);
+    ctx.arcTo(x, y + h, x, y, radius);
+    ctx.arcTo(x, y, x + w, y, radius);
+    ctx.closePath();
+  }
+
+  function wrapText(ctx, text, x, y, maxWidth, lineHeight, maxLines){
+    const words = String(text).split(/\s+/);
+    let line = '';
+    let lines = [];
+    for(let i = 0; i < words.length; i++){
+      const test = line ? line + ' ' + words[i] : words[i];
+      if(ctx.measureText(test).width > maxWidth && line){
+        lines.push(line);
+        line = words[i];
+        if(maxLines && lines.length >= maxLines) break;
+      }else{
+        line = test;
+      }
     }
+    if(line && (!maxLines || lines.length < maxLines)) lines.push(line);
+    lines.forEach(function(item, index){ctx.fillText(item, x, y + index * lineHeight);});
+    return y + lines.length * lineHeight;
+  }
+
+  function drawShareCard(){
+    if(!shareCanvas) return Promise.resolve(null);
+    const ctx = shareCanvas.getContext('2d');
+    const w = shareCanvas.width;
+    const h = shareCanvas.height;
+    const isLight = document.documentElement.classList.contains('light-mode');
+
+    ctx.clearRect(0, 0, w, h);
+
+    const bg = ctx.createLinearGradient(0, 0, w, h);
+    if(isLight){
+      bg.addColorStop(0, '#fff8df');
+      bg.addColorStop(0.46, '#f5f0df');
+      bg.addColorStop(1, '#e8f3ea');
+    }else{
+      bg.addColorStop(0, '#071115');
+      bg.addColorStop(0.48, '#0d1c20');
+      bg.addColorStop(1, '#12351f');
+    }
+    ctx.fillStyle = bg;
+    ctx.fillRect(0, 0, w, h);
+
+    ctx.save();
+    ctx.globalAlpha = isLight ? 0.16 : 0.22;
+    ctx.strokeStyle = isLight ? '#b58a36' : '#d7b56d';
+    ctx.lineWidth = 2;
+    for(let i = -h; i < w + h; i += 70){
+      ctx.beginPath(); ctx.moveTo(i, h); ctx.lineTo(i + h, 0); ctx.stroke();
+      ctx.beginPath(); ctx.moveTo(i, 0); ctx.lineTo(i + h, h); ctx.stroke();
+    }
+    ctx.restore();
+
+    const glow1 = ctx.createRadialGradient(w * .5, 0, 0, w * .5, 0, w * .62);
+    glow1.addColorStop(0, isLight ? 'rgba(215,181,109,.36)' : 'rgba(215,181,109,.30)');
+    glow1.addColorStop(1, 'rgba(215,181,109,0)');
+    ctx.fillStyle = glow1;
+    ctx.fillRect(0, 0, w, h);
+
+    const cardX = 82, cardY = 82, cardW = w - 164, cardH = h - 164;
+    roundRect(ctx, cardX, cardY, cardW, cardH, 52);
+    ctx.fillStyle = isLight ? 'rgba(255,254,249,.86)' : 'rgba(8,18,23,.86)';
+    ctx.fill();
+    ctx.lineWidth = 3;
+    ctx.strokeStyle = isLight ? 'rgba(181,138,54,.36)' : 'rgba(215,181,109,.34)';
+    ctx.stroke();
+
+    const logoCx = w / 2;
+    const logoCy = 190;
+    const logoR = 54;
+    const logoG = ctx.createLinearGradient(logoCx-logoR, logoCy-logoR, logoCx+logoR, logoCy+logoR);
+    logoG.addColorStop(0, '#d7b56d');
+    logoG.addColorStop(.48, '#2d7a46');
+    logoG.addColorStop(1, '#071115');
+    ctx.beginPath();
+    ctx.arc(logoCx, logoCy, logoR, 0, Math.PI * 2);
+    ctx.fillStyle = logoG;
+    ctx.fill();
+    ctx.lineWidth = 3;
+    ctx.strokeStyle = '#f0d891';
+    ctx.stroke();
+    ctx.font = '900 40px Georgia, serif';
+    ctx.textAlign = 'center';
+    ctx.textBaseline = 'middle';
+    ctx.fillStyle = '#fff8df';
+    ctx.fillText('B', logoCx, logoCy + 1);
+
+    ctx.textBaseline = 'alphabetic';
+    ctx.fillStyle = isLight ? '#17351f' : '#f5fbf6';
+    ctx.font = '900 48px system-ui, -apple-system, Segoe UI, sans-serif';
+    ctx.fillText('BarakaWay', w / 2, 300);
+
+    ctx.fillStyle = '#d7b56d';
+    ctx.font = '700 42px Georgia, serif';
+    ctx.direction = 'rtl';
+    ctx.fillText('بِسْمِ ٱللَّٰهِ ٱلرَّحْمَـٰنِ ٱلرَّحِيمِ', w / 2, 390);
+    ctx.direction = 'ltr';
+
+    ctx.fillStyle = isLight ? '#7b5b1d' : '#f0d891';
+    ctx.font = '900 28px system-ui, -apple-system, Segoe UI, sans-serif';
+    ctx.fillText('СТАТЬЯ 001', w / 2, 475);
+
+    ctx.fillStyle = isLight ? '#17351f' : '#ffffff';
+    ctx.font = '950 74px system-ui, -apple-system, Segoe UI, sans-serif';
+    wrapText(ctx, 'Что такое садака', w / 2, 585, 780, 82, 2);
+
+    ctx.fillStyle = isLight ? '#53645b' : '#cfe0d8';
+    ctx.font = '750 36px system-ui, -apple-system, Segoe UI, sans-serif';
+    wrapText(ctx, 'Значение благотворительности в исламе и помощь людям.', w / 2, 745, 790, 48, 3);
+
+    const ornamentY = 900;
+    roundRect(ctx, 180, ornamentY, 720, 170, 34);
+    const ornamentBg = ctx.createLinearGradient(180, ornamentY, 900, ornamentY + 170);
+    ornamentBg.addColorStop(0, '#062217');
+    ornamentBg.addColorStop(.54, '#071115');
+    ornamentBg.addColorStop(1, '#12351f');
+    ctx.fillStyle = ornamentBg;
+    ctx.fill();
+    ctx.strokeStyle = 'rgba(215,181,109,.42)';
+    ctx.lineWidth = 2;
+    ctx.stroke();
+
+    function medallion(cx, text){
+      const cy = ornamentY + 85;
+      const r = 58;
+      const g = ctx.createRadialGradient(cx - 18, cy - 22, 5, cx, cy, r);
+      g.addColorStop(0, '#12351f');
+      g.addColorStop(.6, '#05090b');
+      g.addColorStop(1, '#000000');
+      ctx.beginPath(); ctx.arc(cx, cy, r, 0, Math.PI * 2); ctx.fillStyle = g; ctx.fill();
+      ctx.lineWidth = 4; ctx.strokeStyle = '#d7b56d'; ctx.stroke();
+      ctx.beginPath(); ctx.arc(cx, cy, r - 12, 0, Math.PI * 2); ctx.lineWidth = 2; ctx.strokeStyle = 'rgba(215,181,109,.48)'; ctx.stroke();
+      ctx.fillStyle = '#f6d98b'; ctx.font = '900 34px Georgia, serif'; ctx.direction = 'rtl'; ctx.fillText(text, cx, cy + 12); ctx.direction = 'ltr';
+    }
+    medallion(w / 2 - 110, 'الله');
+    medallion(w / 2 + 110, 'محمد');
+
+    ctx.fillStyle = isLight ? '#17351f' : '#f5fbf6';
+    ctx.font = '800 24px system-ui, -apple-system, Segoe UI, sans-serif';
+    ctx.fillText('Откройте полную статью по ссылке ниже', w / 2, 1160);
+
+    ctx.fillStyle = isLight ? '#7b5b1d' : '#d7b56d';
+    ctx.font = '700 22px system-ui, -apple-system, Segoe UI, sans-serif';
+    const cleanUrl = pageUrl.replace(/^https?:\/\//, '');
+    wrapText(ctx, cleanUrl, w / 2, 1210, 780, 30, 2);
+
+    return new Promise(function(resolve){
+      shareCanvas.toBlob(function(blob){
+        currentShareBlob = blob;
+        resolve(blob);
+      }, 'image/png', 0.95);
+    });
+  }
+
+  async function shareCardNative(){
+    const blob = currentShareBlob || await drawShareCard();
+    const text = 'Статья 001 — Что такое садака. Значение благотворительности в исламе и помощь людям. ' + pageUrl;
+    if(blob && navigator.canShare && navigator.share){
+      const file = new File([blob], 'barakaway-article-001.png', {type:'image/png'});
+      if(navigator.canShare({files:[file]})){
+        await navigator.share({title:'Что такое садака', text:text, url:pageUrl, files:[file]});
+        return true;
+      }
+    }
+    if(navigator.share){
+      await navigator.share({title:'Что такое садака', text:text, url:pageUrl});
+      return true;
+    }
+    return false;
+  }
+
+  async function openShare(){
+    if(shareUrl) shareUrl.textContent = pageUrl;
+    await drawShareCard();
+    try{
+      const shared = await shareCardNative();
+      if(shared) return;
+    }catch(e){}
     if(shareModal){
       shareModal.classList.add('is-open');
       shareModal.setAttribute('aria-hidden','false');
     }
+  }
+
+  async function downloadShareCard(){
+    const blob = currentShareBlob || await drawShareCard();
+    if(!blob) return;
+    const url = URL.createObjectURL(blob);
+    const link = document.createElement('a');
+    link.href = url;
+    link.download = 'barakaway-article-001.png';
+    document.body.appendChild(link);
+    link.click();
+    link.remove();
+    setTimeout(function(){URL.revokeObjectURL(url)}, 900);
+    showToast('Карточка сохранена');
   }
 
   function closeShare(){
@@ -789,8 +1032,9 @@ html.dark-mode .donation p{color:rgba(244,250,247,.82)}
   });
 
   shareButton && shareButton.addEventListener('click', openShare);
-  nativeShareBtn && nativeShareBtn.addEventListener('click', openShare);
+  nativeShareBtn && nativeShareBtn.addEventListener('click', function(){shareCardNative().catch(function(){showToast('Поделиться можно через кнопку копирования ссылки')});});
   copyShareBtn && copyShareBtn.addEventListener('click', copyLink);
+  downloadShareBtn && downloadShareBtn.addEventListener('click', downloadShareCard);
   closeShareBtn && closeShareBtn.addEventListener('click', closeShare);
   shareModal && shareModal.addEventListener('click', function(e){if(e.target === shareModal) closeShare();});
   document.addEventListener('keydown', function(e){if(e.key === 'Escape') closeShare();});
@@ -809,6 +1053,7 @@ html.dark-mode .donation p{color:rgba(244,250,247,.82)}
   syncFavorite();
   syncReading();
   setTimeout(refreshBottomNav, 250);
+  setTimeout(drawShareCard, 350);
 })();
 </script>
 <script src="/bottom-nav.js"></script>
