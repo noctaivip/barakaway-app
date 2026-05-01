@@ -1,9 +1,9 @@
-﻿<!--
+<!--
 بِسْمِ ٱللَّٰهِ ٱلرَّحْمَـٰنِ ٱلرَّحِيمِ
 In the name of Allah, the Most Merciful, the Most Compassionate
 -->
 <!DOCTYPE html>
-<html lang="ru">
+<html lang="ru" class="dark-mode">
 <head>
 <script defer data-domain="onedollarexit.com" src="https://plausible.io/js/script.js"></script>
 <link rel="icon" type="image/png" href="/favicon.png">
@@ -11,295 +11,806 @@ In the name of Allah, the Most Merciful, the Most Compassionate
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Что такое садака — благотворительность в исламе</title>
 <meta name="description" content="Что такое садака в исламе? Значение садака, благотворительность в исламе и почему помощь людям считается важным поклонением.">
-
-<style>
-body{
-margin:0;
-font-family:system-ui;
-background:#f5f7f8;
-color:#222;
-line-height:1.7;
-}
-
-.container{
-max-width:850px;
-margin:auto;
-background:white;
-padding:40px 30px;
-box-shadow:0 6px 16px rgba(0,0,0,0.05);
-}
-
-h1{
-font-size:34px;
-margin-bottom:10px;
-}
-
-h2{
-font-size:24px;
-margin-top:35px;
-}
-
-.subtitle{
-color:#666;
-margin-bottom:30px;
-}
-
-p{
-margin:15px 0;
-}
-
-.quote{
-background:#eef5f1;
-padding:20px;
-border-radius:8px;
-font-style:italic;
-margin-top:20px;
-}
-
-.donation{
-background:#eef6ff;
-padding:25px;
-border-radius:10px;
-margin-top:40px;
-}
-
-.donation a{
-color:#2d7a46;
-font-weight:bold;
-text-decoration:none;
-}
-
-/* Ссылки на тёмном фоне */
-html.dark-mode ul li a{
-color:#8fc5ff;
-}
-
-html.dark-mode ul li a:hover{
-color:#b7dbff;
-}
-
-/* Donation блок в dark mode */
-html.dark-mode .donation{
-background:#17212b;
-color:#e9eef3;
-border:1px solid #2a3138;
-box-shadow:0 8px 24px rgba(0,0,0,0.22);
-}
-
-html.dark-mode .donation strong{
-color:#7ee0a0;
-}
-
-html.dark-mode .donation p{
-color:#d3dbe4;
-}
-
-html.dark-mode .donation-note{
-color:#b9c3cd;
-}
-
-html.dark-mode .donation-note strong{
-color:#7ee0a0;
-}
-.footer{
-margin-top:40px;
-font-size:14px;
-color:#666;
-}
-
-
-.language-switch{
-position:absolute;
-top:20px;
-right:30px;
-font-size:13px;
-}
-
-.language-switch a{
-text-decoration:none;
-padding:6px 10px;
-border-radius:6px;
-border:1px solid #ddd;
-margin-left:6px;
-color:#333;
-background:#fafafa;
-}
-
-.language-switch a.active{
-background:#2d7a46;
-color:white;
-border-color:#2d7a46;
-}
-
-.container{
-position:relative;
-}
-
-.donation-btn{
-margin-top:15px;
-}
-
-.donation-btn a{
-display:inline-block;
-background:#2d7a46;
-color:white;
-padding:12px 22px;
-border-radius:8px;
-text-decoration:none;
-font-weight:600;
-font-size:16px;
-box-shadow:0 3px 8px rgba(0,0,0,0.1);
-transition:0.2s;
-}
-
-.donation-btn a:hover{
-background:#256338;
-transform:translateY(-1px);
-}
-
-.donation-btn{
-margin-top:18px;
-}
-
-.donation-btn a{
-display:inline-block;
-background:#2d7a46;
-color:white;
-padding:14px 26px;
-border-radius:10px;
-text-decoration:none;
-font-weight:600;
-font-size:17px;
-box-shadow:0 4px 12px rgba(0,0,0,0.15);
-transition:0.2s;
-}
-
-.donation-btn a:hover{
-background:#256338;
-transform:translateY(-2px);
-}
-
-.donation-note{
-margin-top:10px;
-font-size:14px;
-color:#666;
-}
-</style>
 <script src="/theme-init.js"></script>
+<script>
+(function(){
+  const root = document.documentElement;
+  const keys = ['siteTheme','theme','app-theme','barakaway-theme','preferred-theme','color-theme'];
+
+  function normalizeTheme(value){
+    if(!value) return '';
+    value = String(value).toLowerCase();
+    if(value === 'light' || value === 'light-mode') return 'light';
+    if(value === 'dark' || value === 'dark-mode') return 'dark';
+    return '';
+  }
+
+  function readTheme(){
+    for(const key of keys){
+      const normalized = normalizeTheme(localStorage.getItem(key));
+      if(normalized) return normalized;
+    }
+    if(root.classList.contains('light-mode')) return 'light';
+    if(root.classList.contains('dark-mode')) return 'dark';
+    return 'dark';
+  }
+
+  function applyTheme(theme){
+    const isLight = theme === 'light';
+    root.classList.toggle('light-mode', isLight);
+    root.classList.toggle('dark-mode', !isLight);
+    root.setAttribute('data-theme', isLight ? 'light' : 'dark');
+  }
+
+  applyTheme(readTheme());
+
+  window.addEventListener('storage', function(event){
+    if(keys.includes(event.key)) applyTheme(readTheme());
+  });
+
+  window.BarakaWayApplyTheme = function(){
+    applyTheme(readTheme());
+  };
+})();
+</script>
 <link rel="stylesheet" href="/theme.css">
 <link rel="stylesheet" href="/theme-universal.css">
+<style>
+:root{
+  --bg:#f6f5ef;
+  --text:#17221c;
+  --muted:#64736a;
+  --card:#fffef9;
+  --soft:#f4f1e7;
+  --border:rgba(126,94,35,.18);
+  --gold:#b58a36;
+  --gold2:#d7b56d;
+  --gold3:#f0d891;
+  --green:#2d7a46;
+  --green2:#4caf6a;
+  --shadow:0 26px 70px rgba(28,31,24,.12);
+  --shadow2:0 14px 38px rgba(28,31,24,.08);
+}
+html.dark-mode{
+  --bg:#071115;
+  --text:#eef7f2;
+  --muted:#9dafaa;
+  --card:#101b20;
+  --soft:#14242b;
+  --border:rgba(215,181,109,.20);
+  --shadow:0 28px 70px rgba(0,0,0,.48);
+  --shadow2:0 14px 36px rgba(0,0,0,.28);
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+  margin:0;
+  font-family:system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
+  background:
+    radial-gradient(circle at 50% -10%,rgba(215,181,109,.18),transparent 36%),
+    linear-gradient(180deg,var(--bg),var(--bg));
+  color:var(--text);
+  line-height:1.72;
+  padding-bottom:96px;
+}
+button{font:inherit}
+a{color:inherit}
+.container{
+  max-width:1080px;
+  margin:0 auto;
+  background:linear-gradient(180deg,rgba(255,255,255,.76),rgba(255,255,255,.58)),var(--card);
+  padding:34px 22px 72px;
+  box-shadow:var(--shadow);
+  border:1px solid rgba(215,181,109,.18);
+  border-radius:0 0 34px 34px;
+}
+html.dark-mode .container{
+  background:linear-gradient(180deg,rgba(18,30,36,.98),rgba(12,22,27,.98));
+}
+.hero{
+  text-align:center;
+  margin:0 auto 20px;
+  padding:24px 18px 28px;
+  border-radius:30px;
+  background:
+    radial-gradient(circle at 50% 0%,rgba(215,181,109,.20),transparent 44%),
+    linear-gradient(180deg,rgba(45,122,70,.10),rgba(215,181,109,.06));
+  border:1px solid rgba(215,181,109,.24);
+  box-shadow:var(--shadow2);
+}
+.bismillah{
+  direction:rtl;
+  font-size:25px;
+  line-height:1.6;
+  color:var(--gold);
+  font-weight:650;
+  margin-bottom:8px;
+}
+.article-number{
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  min-height:30px;
+  padding:5px 12px;
+  border-radius:999px;
+  color:#fff8df;
+  background:linear-gradient(135deg,rgba(181,138,54,.82),rgba(45,122,70,.68));
+  border:1px solid rgba(240,216,145,.42);
+  font-size:11px;
+  font-weight:950;
+  letter-spacing:.12em;
+  text-transform:uppercase;
+  margin-bottom:12px;
+}
+h1{
+  font-size:44px;
+  line-height:1.08;
+  margin:0 0 10px;
+  letter-spacing:-.04em;
+}
+.subtitle{
+  margin:0 auto;
+  max-width:760px;
+  color:var(--muted);
+  font-size:15px;
+  font-weight:650;
+}
+.page-actions{
+  width:min(100%,820px);
+  margin:14px auto 24px;
+  display:grid;
+  grid-template-columns:repeat(4,1fr);
+  gap:12px;
+}
+.action{
+  appearance:none;
+  border:1px solid rgba(181,138,54,.25);
+  border-radius:22px;
+  min-height:72px;
+  padding:9px 6px;
+  background:linear-gradient(180deg,rgba(255,255,255,.72),rgba(215,181,109,.08));
+  color:#8a681f;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  justify-content:center;
+  gap:6px;
+  cursor:pointer;
+  font-size:12px;
+  line-height:1.05;
+  font-weight:850;
+  transition:.18s ease;
+  text-align:center;
+  box-shadow:0 12px 28px rgba(0,0,0,.10);
+}
+html.dark-mode .action{
+  background:linear-gradient(180deg,rgba(255,255,255,.05),rgba(215,181,109,.08));
+  color:var(--gold2);
+}
+.action:hover{transform:translateY(-1px);box-shadow:0 16px 34px rgba(18,34,24,.16)}
+.action:active{transform:scale(.96)}
+.action.is-active{
+  color:#fff;
+  border-color:rgba(45,122,70,.35);
+  background:linear-gradient(135deg,var(--green),var(--green2));
+}
+.action svg{
+  width:25px;
+  height:25px;
+  fill:none;
+  stroke:currentColor;
+  stroke-width:2;
+  stroke-linecap:round;
+  stroke-linejoin:round;
+}
+.action[data-action="favorite"].is-active svg{fill:currentColor;stroke:currentColor}
+.action-label{max-width:100%;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.action-day{
+  position:relative;
+  overflow:hidden;
+  border-color:rgba(240,216,145,.46) !important;
+  color:#fff4d7 !important;
+  background:
+    radial-gradient(circle at 24% 0%,rgba(255,255,255,.16),transparent 38%),
+    linear-gradient(135deg,rgba(181,138,54,.78),rgba(45,122,70,.58) 54%,rgba(9,28,21,.96)) !important;
+  box-shadow:0 14px 32px rgba(0,0,0,.22),inset 0 1px 0 rgba(255,255,255,.10),0 0 0 1px rgba(215,181,109,.08) !important;
+}
+.action-day::before{
+  content:"";
+  position:absolute;
+  inset:1px;
+  border-radius:21px;
+  background:linear-gradient(90deg,transparent,rgba(255,255,255,.17),transparent);
+  transform:translateX(-130%);
+  transition:transform .45s ease;
+  pointer-events:none;
+}
+.action-day:hover::before{transform:translateX(130%)}
+.article-shell{
+  max-width:900px;
+  margin:0 auto;
+  display:grid;
+  gap:18px;
+}
+.article-card{
+  position:relative;
+  overflow:hidden;
+  border:1px solid var(--border);
+  border-radius:30px;
+  background:
+    radial-gradient(circle at 100% 0%,rgba(215,181,109,.11),transparent 34%),
+    linear-gradient(135deg,var(--card),var(--card));
+  box-shadow:var(--shadow2);
+}
+html.dark-mode .article-card{
+  background:
+    radial-gradient(circle at 100% 0%,rgba(215,181,109,.12),transparent 34%),
+    linear-gradient(135deg,rgba(17,31,33,.98),rgba(26,33,30,.98));
+}
+.article-head{
+  padding:26px 28px 20px;
+  border-bottom:1px solid var(--border);
+  background:linear-gradient(180deg,rgba(45,122,70,.08),rgba(215,181,109,.04));
+}
+.kicker{
+  color:var(--gold2);
+  font-size:11px;
+  font-weight:950;
+  letter-spacing:1.2px;
+  text-transform:uppercase;
+  margin-bottom:8px;
+}
+.article-title{
+  font-size:34px;
+  line-height:1.13;
+  margin:0 0 10px;
+  letter-spacing:-.03em;
+  color:var(--gold2);
+}
+.article-summary{
+  margin:0;
+  color:var(--muted);
+  font-size:15px;
+  font-weight:700;
+  max-width:760px;
+}
+html.dark-mode .article-summary{color:rgba(244,250,247,.84)}
+.article-meta{
+  margin-top:14px;
+  display:flex;
+  gap:8px;
+  flex-wrap:wrap;
+}
+.tag{
+  display:inline-flex;
+  align-items:center;
+  min-height:27px;
+  padding:5px 9px;
+  border-radius:999px;
+  border:1px solid var(--border);
+  color:var(--green);
+  background:rgba(45,122,70,.08);
+  font-size:11px;
+  font-weight:850;
+}
+html.dark-mode .tag{color:#dff3e6;background:rgba(45,122,70,.12)}
+.article-content{
+  padding:28px;
+}
+.article-content p{
+  margin:0 0 18px;
+  font-size:17px;
+  color:var(--text);
+}
+html.dark-mode .article-content p{color:rgba(245,251,246,.90)}
+.article-content h2{
+  margin:34px 0 13px;
+  font-size:25px;
+  line-height:1.2;
+  color:var(--gold2);
+  letter-spacing:-.018em;
+}
+.article-content h2:first-child{margin-top:0}
+.quote{
+  margin:26px 0;
+  padding:22px;
+  border-radius:24px;
+  color:#fff8df;
+  border:1px solid rgba(240,216,145,.34);
+  background:
+    radial-gradient(circle at 100% 0%,rgba(215,181,109,.16),transparent 38%),
+    linear-gradient(135deg,rgba(20,72,43,.98),rgba(45,122,70,.74) 48%,rgba(154,116,40,.82));
+  box-shadow:0 18px 42px rgba(0,0,0,.20),inset 0 1px 0 rgba(255,255,255,.10);
+  font-size:18px;
+  line-height:1.65;
+  font-weight:750;
+}
+.read-also{
+  margin-top:32px;
+  padding:22px;
+  border-radius:26px;
+  border:1px solid var(--border);
+  background:linear-gradient(180deg,rgba(45,122,70,.07),rgba(215,181,109,.05));
+}
+.read-also-title{
+  margin:0 0 12px;
+  color:var(--gold2);
+  font-size:22px;
+  font-weight:950;
+}
+.read-also ul{
+  margin:0;
+  padding:0;
+  list-style:none;
+  display:grid;
+  gap:10px;
+}
+.read-also a{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:12px;
+  min-height:46px;
+  padding:11px 13px 11px 15px;
+  border-radius:18px;
+  text-decoration:none;
+  border:1px solid rgba(181,138,54,.18);
+  background:linear-gradient(180deg,rgba(255,255,255,.42),rgba(215,181,109,.05));
+  color:var(--text);
+  font-weight:850;
+}
+html.dark-mode .read-also a{
+  background:linear-gradient(135deg,rgba(20,33,35,.94),rgba(42,45,35,.82));
+  color:#f0d891;
+}
+.read-also a:hover{
+  transform:translateY(-1px);
+  border-color:rgba(215,181,109,.40);
+}
+.read-also span:last-child{
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  width:26px;
+  height:26px;
+  border-radius:999px;
+  color:#17351f;
+  background:linear-gradient(180deg,#fff1b8,#d2a348 58%,#a87925);
+  flex:0 0 auto;
+}
+.donation{
+  margin-top:34px;
+  padding:26px;
+  border-radius:28px;
+  border:1px solid rgba(215,181,109,.26);
+  background:
+    radial-gradient(circle at 100% 0%,rgba(215,181,109,.14),transparent 36%),
+    linear-gradient(180deg,rgba(45,122,70,.10),rgba(215,181,109,.06));
+  box-shadow:var(--shadow2);
+}
+.donation strong{
+  display:block;
+  color:var(--gold2);
+  font-size:23px;
+  line-height:1.2;
+  margin-bottom:10px;
+}
+.donation p{
+  margin:0 0 16px;
+  color:var(--muted);
+  font-weight:700;
+}
+html.dark-mode .donation p{color:rgba(244,250,247,.82)}
+.donation-btn a{
+  position:relative;
+  isolation:isolate;
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  gap:10px;
+  min-height:46px;
+  padding:11px 18px;
+  border-radius:999px;
+  text-decoration:none;
+  font-size:12px;
+  line-height:1;
+  font-weight:950;
+  letter-spacing:.08em;
+  text-transform:uppercase;
+  color:#fff8df;
+  border:1px solid rgba(240,216,145,.56);
+  background:linear-gradient(135deg,rgba(20,72,43,.98) 0%,rgba(45,122,70,.96) 46%,rgba(154,116,40,.95) 100%);
+  box-shadow:0 16px 34px rgba(0,0,0,.24),inset 0 1px 0 rgba(255,255,255,.18);
+  overflow:hidden;
+}
+.donation-btn a:hover{transform:translateY(-2px)}
+.donation-note{
+  margin-top:13px !important;
+  font-size:14px;
+}
+.footer-note{
+  text-align:center;
+  margin-top:24px;
+  color:var(--muted);
+  font-size:14px;
+  font-weight:650;
+}
+.toast{
+  position:fixed;
+  left:50%;
+  bottom:88px;
+  transform:translateX(-50%) translateY(16px);
+  z-index:3400;
+  max-width:min(92vw,460px);
+  padding:11px 14px;
+  border-radius:999px;
+  color:#111814;
+  background:linear-gradient(180deg,#f0d891,#c59b46);
+  box-shadow:0 16px 36px rgba(0,0,0,.28);
+  font-size:13px;
+  font-weight:850;
+  opacity:0;
+  pointer-events:none;
+  transition:.2s ease;
+  text-align:center;
+}
+.toast.is-visible{opacity:1;transform:translateX(-50%) translateY(0)}
+.share-modal{
+  position:fixed;
+  inset:0;
+  z-index:3600;
+  display:none;
+  align-items:center;
+  justify-content:center;
+  padding:20px;
+  background:rgba(0,0,0,.62);
+  backdrop-filter:blur(10px);
+}
+.share-modal.is-open{display:flex}
+.share-panel{
+  width:min(94vw,430px);
+  border:1px solid rgba(215,181,109,.34);
+  border-radius:30px;
+  overflow:hidden;
+  background:radial-gradient(circle at 50% 0%,rgba(215,181,109,.20),transparent 42%),linear-gradient(180deg,#10211b,#081217);
+  box-shadow:0 34px 90px rgba(0,0,0,.55);
+  color:#f5fbf6;
+}
+.share-card{padding:24px;text-align:center}
+.share-brand{font-size:14px;letter-spacing:.12em;text-transform:uppercase;color:#d7b56d;font-weight:950;margin-bottom:8px}
+.share-title{font-size:26px;line-height:1.18;font-weight:950;margin:0 0 10px}
+.share-text{color:#cfe0d8;font-size:15px;line-height:1.55;margin:0 0 16px}
+.share-url{direction:ltr;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;background:rgba(255,255,255,.06);border:1px solid rgba(215,181,109,.20);border-radius:16px;padding:10px 12px;color:#d7b56d;font-size:12px}
+.share-actions{display:grid;grid-template-columns:1fr 1fr;gap:10px;padding:0 24px 24px}
+.share-actions button{appearance:none;border:1px solid rgba(215,181,109,.30);border-radius:16px;padding:12px 10px;cursor:pointer;font-weight:900}
+.share-send{color:#fff;background:linear-gradient(135deg,#2d7a46,#4caf6a)}
+.share-copy,.share-close{color:#f5fbf6;background:rgba(255,255,255,.07)}
+.share-close{grid-column:1 / -1}
+.reading-mode .article-content p{font-size:20px;line-height:1.86}
+.reading-mode .article-content{max-width:790px;margin:0 auto}
+@media(max-width:720px){
+  body{padding-bottom:92px}
+  .container{padding:22px 12px 58px;border-radius:0}
+  .hero{border-radius:24px;padding:18px 12px 20px}
+  h1{font-size:32px}
+  .bismillah{font-size:21px}
+  .subtitle{font-size:14px}
+  .page-actions{gap:8px}
+  .action{min-height:64px;border-radius:17px;font-size:10.5px}
+  .action svg{width:22px;height:22px}
+  .article-card{border-radius:26px}
+  .article-head{padding:22px 18px 18px}
+  .article-title{font-size:27px}
+  .article-content{padding:22px 18px}
+  .article-content p{font-size:16px}
+  .article-content h2{font-size:22px}
+  .quote{padding:18px;border-radius:21px;font-size:16px}
+  .donation{padding:22px 18px;border-radius:24px}
+  .donation strong{font-size:21px}
+  .share-panel{border-radius:24px}
+  .share-title{font-size:22px}
+}
+@media(max-width:390px){
+  .action-label{font-size:9.5px}
+  .action{min-height:60px;padding:6px 2px}
+  .page-actions{gap:7px}
+}
+</style>
 </head>
-
 <body>
 <div class="container">
+  <section class="hero">
+    <div class="bismillah">بِسْمِ ٱللَّٰهِ ٱلرَّحْمَـٰنِ ٱلرَّحِيمِ</div>
+    <div class="article-number">Статья 001</div>
+    <h1>Что такое садака</h1>
+    <p class="subtitle">Значение благотворительности в исламе и помощь людям.</p>
+  </section>
 
-<h1>Что такое садака</h1>
+  <div class="page-actions" aria-label="Действия статьи">
+    <button class="action" data-action="favorite" type="button" aria-label="Избранное">
+      <svg viewBox="0 0 24 24"><path d="M12 3.6l2.45 5.05 5.55.8-4.02 3.92.95 5.53L12 16.3l-4.93 2.6.95-5.53L4 9.45l5.55-.8L12 3.6z"></path></svg>
+      <span class="action-label">Избранное</span>
+    </button>
+    <button class="action" data-action="share" type="button" aria-label="Поделиться статьёй">
+      <svg viewBox="0 0 24 24"><circle cx="18" cy="5" r="3"></circle><circle cx="6" cy="12" r="3"></circle><circle cx="18" cy="19" r="3"></circle><path d="M8.7 10.7l6.6-4.4M8.7 13.3l6.6 4.4"></path></svg>
+      <span class="action-label">Поделиться</span>
+    </button>
+    <button class="action" data-action="reading" type="button" aria-label="Режим чтения">
+      <svg viewBox="0 0 24 24"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"></path><path d="M4 4.5A2.5 2.5 0 0 1 6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5z"></path></svg>
+      <span class="action-label">Читать</span>
+    </button>
+    <button class="action action-day" data-action="day" type="button" aria-label="Статья дня">
+      <svg viewBox="0 0 24 24">
+        <rect x="4" y="5" width="16" height="16" rx="3"></rect>
+        <path d="M8 3v4"></path>
+        <path d="M16 3v4"></path>
+        <path d="M4 10h16"></path>
+        <path d="M12 13.1l.76 1.55 1.71.25-1.24 1.2.29 1.7L12 17l-1.52.8.29-1.7-1.24-1.2 1.71-.25L12 13.1z"></path>
+      </svg>
+      <span class="action-label">Статья дня</span>
+    </button>
+  </div>
 
-<p class="subtitle">
-Значение благотворительности в исламе и помощь людям.
-</p>
+  <main class="article-shell" id="article">
+    <article class="article-card">
+      <header class="article-head">
+        <div class="kicker">Садака • Благотворительность • Исламская практика</div>
+        <h2 class="article-title">Что такое садака</h2>
+        <p class="article-summary">Садака — это добровольная помощь ради довольства Аллаха, которая может выражаться не только деньгами, но и заботой, поддержкой, добрым словом и реальным облегчением для человека.</p>
+        <div class="article-meta">
+          <span class="tag">001</span>
+          <span class="tag">Садака</span>
+          <span class="tag">Благотворительность</span>
+          <span class="tag">Практическая вера</span>
+        </div>
+      </header>
 
-<p>
-Садака — это добровольная милостыня в исламе.
-Слово «садака» происходит от арабского корня, означающего искренность и правдивость.
-В исламской традиции садака — это искреннее пожертвование ради довольства Аллаха и помощи людям.
-</p>
+      <div class="article-content">
+        <p>Садака — это добровольная милостыня в исламе. Слово «садака» происходит от арабского корня, означающего искренность и правдивость. В исламской традиции садака — это искреннее пожертвование ради довольства Аллаха и помощи людям.</p>
 
-<p>
-Благотворительность в исламе не ограничивается только деньгами.
-Мусульманин может дать садака, помогая людям, кормя нуждающихся, поддерживая семьи или проявляя доброту.
-Поэтому садака считается одним из важных добрых дел в повседневной жизни.
-</p>
+        <p>Благотворительность в исламе не ограничивается только деньгами. Мусульманин может дать садака, помогая людям, кормя нуждающихся, поддерживая семьи или проявляя доброту. Поэтому садака считается одним из важных добрых дел в повседневной жизни.</p>
 
-<h2>Значение садака в исламе</h2>
+        <h2>Значение садака в исламе</h2>
 
-<p>
-Смысл садака в исламе гораздо шире, чем просто материальная помощь.
-Она отражает милосердие, заботу о других и ответственность перед обществом.
-Ислам учит, что имущество является доверием от Аллаха, и часть этого доверия заключается в помощи нуждающимся.
-</p>
+        <p>Смысл садака в исламе гораздо шире, чем просто материальная помощь. Она отражает милосердие, заботу о других и ответственность перед обществом. Ислам учит, что имущество является доверием от Аллаха, и часть этого доверия заключается в помощи нуждающимся.</p>
 
-<p>
-Помощь бедным, поддержка семей, обеспечение людей едой или жильём — всё это является садака.
-Во многих мусульманских обществах благотворительность является естественной частью веры.
-</p>
+        <p>Помощь бедным, поддержка семей, обеспечение людей едой или жильём — всё это является садака. Во многих мусульманских обществах благотворительность является естественной частью веры.</p>
 
-<div class="quote">
-«Пример тех, кто расходует своё имущество на пути Аллаха, подобен зерну, из которого выросло семь колосьев, и в каждом колосе — по сто зёрен».
+        <div class="quote">«Пример тех, кто расходует своё имущество на пути Аллаха, подобен зерну, из которого выросло семь колосьев, и в каждом колосе — по сто зёрен».</div>
+
+        <h2>Садака и помощь людям</h2>
+
+        <p>Одним из основных принципов ислама является помощь людям, оказавшимся в трудном положении. Садака позволяет поддерживать бедных, помогать семьям без жилья и облегчать жизнь людям.</p>
+
+        <p>Даже небольшая помощь может изменить ситуацию. Иногда маленькое пожертвование становится причиной облегчения для человека или семьи. Поэтому исламские учёные часто напоминают, что даже небольшая садака имеет большое значение.</p>
+
+        <h2>Разница между закятом и садакой</h2>
+
+        <p>В исламе существуют две основные формы благотворительности: закят и садака. Закят — это обязательная милостыня, которую мусульмане выплачивают раз в год при наличии определённого имущества. Садака же является добровольной и может даваться в любое время.</p>
+
+        <p>Многие мусульмане стараются регулярно давать садака, потому что это считается способом очищения имущества и помощью обществу.</p>
+
+        <h2>Почему даже небольшая помощь важна</h2>
+
+        <p>Некоторые люди считают, что благотворительность должна быть большой, чтобы иметь значение. Однако ислам напоминает, что важна искренность. Даже один доллар, пожертвованный с искренним намерением, может стать садака.</p>
+
+        <p>Маленькие пожертвования от многих людей могут изменить жизнь семьи, которая оказалась в трудной ситуации. Поэтому многие благотворительные проекты строятся на помощи большого количества людей.</p>
+
+        <section class="read-also" aria-label="Читайте также">
+          <h2 class="read-also-title">Читайте также о садака в исламе</h2>
+          <ul>
+            <li><a href="002-ru.html"><span>Разница между закятом и садака</span><span>›</span></a></li>
+            <li><a href="003-ru.html"><span>Скрытая благотворительность в исламе</span><span>›</span></a></li>
+            <li><a href="004-ru.html"><span>Как садака помогает семьям</span><span>›</span></a></li>
+            <li><a href="005-ru.html"><span>Почему даже один доллар имеет значение</span><span>›</span></a></li>
+            <li><a href="006-ru.html"><span>Садака для жилья и помощи нуждающимся</span><span>›</span></a></li>
+            <li><a href="007-ru.html"><span>Лучшие виды садака в исламе</span><span>›</span></a></li>
+          </ul>
+        </section>
+
+        <section class="donation">
+          <strong>Сделать садака и поддержать нуждающихся</strong>
+          <p>Этот проект создан для реальной помощи людям, оказавшимся в трудной ситуации. Через садака вы можете поддержать нуждающихся, помочь с базовыми потребностями и дать кому-то своевременное облегчение.</p>
+          <div class="donation-btn">
+            <a href="../hidden-sadaqa-ru.html">Сделать садака — поддержать нуждающихся</a>
+          </div>
+          <p class="donation-note">Даже <strong>$1</strong> может стать частью реальной помощи уже сегодня.</p>
+        </section>
+      </div>
+    </article>
+  </main>
+
+  <p class="footer-note">BarakaWay App — практическая библиотека исламских статей.</p>
 </div>
 
-<h2>Садака и помощь людям</h2>
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
 
-<p>
-Одним из основных принципов ислама является помощь людям, оказавшимся в трудном положении.
-Садака позволяет поддерживать бедных, помогать семьям без жилья и облегчать жизнь людям.
-</p>
-
-<p>
-Даже небольшая помощь может изменить ситуацию.
-Иногда маленькое пожертвование становится причиной облегчения для человека или семьи.
-Поэтому исламские учёные часто напоминают, что даже небольшая садака имеет большое значение.
-</p>
-
-<h2>Разница между закятом и садакой</h2>
-
-<p>
-В исламе существуют две основные формы благотворительности: закят и садака.
-Закят — это обязательная милостыня, которую мусульмане выплачивают раз в год при наличии определённого имущества.
-Садака же является добровольной и может даваться в любое время.
-</p>
-
-<p>
-Многие мусульмане стараются регулярно давать садака, потому что это считается способом очищения имущества и помощью обществу.
-</p>
-
-<h2>Почему даже небольшая помощь важна</h2>
-
-<p>
-Некоторые люди считают, что благотворительность должна быть большой, чтобы иметь значение.
-Однако ислам напоминает, что важна искренность.
-Даже один доллар, пожертвованный с искренним намерением, может стать садака.
-</p>
-
-<p>
-Маленькие пожертвования от многих людей могут изменить жизнь семьи, которая оказалась в трудной ситуации.
-Поэтому многие благотворительные проекты строятся на помощи большого количества людей.
-</p>
-
-<h2>Читайте также о садака в исламе</h2>
-
-<p>
-Если вы хотите глубже понять смысл садака и благотворительности в исламе, прочитайте следующие статьи:
-</p>
-
-<ul>
-<li><a href="002-ru.html">Разница между закятом и садака</a></li>
-<li><a href="003-ru.html">Скрытая благотворительность в исламе</a></li>
-<li><a href="004-ru.html">Как садака помогает семьям</a></li>
-<li><a href="005-ru.html">Почему даже один доллар имеет значение</a></li>
-<li><a href="006-ru.html">Садака для жилья и помощи нуждающимся</a></li>
-<li><a href="007-ru.html">Лучшие виды садака в исламе</a></li>
-</ul>
-
-<div class="donation">
-<strong>Сделать садака и поддержать нуждающихся</strong>
-
-<p>
-Этот проект создан для реальной помощи людям, оказавшимся в трудной ситуации.
-Через садака вы можете поддержать нуждающихся, помочь с базовыми потребностями и дать кому-то своевременное облегчение.
-</p>
-
-<div class="donation-btn">
-<a href="../hidden-sadaqa-ru.html">Сделать садака — поддержать нуждающихся</a>
+<div class="share-modal" id="shareModal" aria-hidden="true">
+  <div class="share-panel" role="dialog" aria-modal="true" aria-label="Поделиться статьёй">
+    <div class="share-card">
+      <div class="share-brand">BarakaWay</div>
+      <h3 class="share-title">Что такое садака</h3>
+      <p class="share-text">Короткая и полезная статья о значении садака, помощи людям и благотворительности в исламе.</p>
+      <div class="share-url" id="shareUrl">001-ru.html</div>
+    </div>
+    <div class="share-actions">
+      <button class="share-send" type="button" id="nativeShareBtn">Поделиться</button>
+      <button class="share-copy" type="button" id="copyShareBtn">Скопировать</button>
+      <button class="share-close" type="button" id="closeShareBtn">Закрыть</button>
+    </div>
+  </div>
 </div>
 
-<p class="donation-note">
-Даже <strong>$1</strong> может стать частью реальной помощи уже сегодня.
-</p>
-</div>
-</div>
-<script src="../bottom-nav.js"></script>
+<script>
+(function(){
+  const ARTICLE_ID = '001-ru';
+  const FAVORITES_KEY = 'barakaway_favorites_v1';
+  const READING_KEY = 'barakaway_articles_reading_ru_v3';
+  const pageUrl = window.location.href;
+  const pagePath = window.location.pathname || '001-ru.html';
+  const pageTitle = document.title;
+  const favoriteData = {
+    id: ARTICLE_ID,
+    title: 'Что такое садака',
+    url: pagePath,
+    text: 'Значение благотворительности в исламе и помощь людям.',
+    type: 'Статья',
+    lang: 'ru'
+  };
+
+  const toast = document.getElementById('toast');
+  const shareModal = document.getElementById('shareModal');
+  const shareUrl = document.getElementById('shareUrl');
+  const favoriteButton = document.querySelector('[data-action="favorite"]');
+  const readingButton = document.querySelector('[data-action="reading"]');
+  const shareButton = document.querySelector('[data-action="share"]');
+  const dayButton = document.querySelector('[data-action="day"]');
+  const nativeShareBtn = document.getElementById('nativeShareBtn');
+  const copyShareBtn = document.getElementById('copyShareBtn');
+  const closeShareBtn = document.getElementById('closeShareBtn');
+
+  function showToast(message){
+    if(!toast) return;
+    toast.textContent = message;
+    toast.classList.add('is-visible');
+    clearTimeout(showToast.timer);
+    showToast.timer = setTimeout(function(){toast.classList.remove('is-visible')}, 2200);
+  }
+
+  function readFavorites(){
+    try{
+      const raw = localStorage.getItem(FAVORITES_KEY);
+      const parsed = raw ? JSON.parse(raw) : [];
+      return Array.isArray(parsed) ? parsed : [];
+    }catch(e){
+      return [];
+    }
+  }
+
+  function saveFavorites(list){
+    localStorage.setItem(FAVORITES_KEY, JSON.stringify(list));
+    refreshBottomNav();
+  }
+
+  function isFavorite(){
+    return readFavorites().some(function(item){
+      return String(item.id) === ARTICLE_ID || String(item.url || '').endsWith('001-ru.html');
+    });
+  }
+
+  function toggleFavorite(){
+    let list = readFavorites();
+    const active = isFavorite();
+
+    if(active){
+      list = list.filter(function(item){
+        return String(item.id) !== ARTICLE_ID && !String(item.url || '').endsWith('001-ru.html');
+      });
+      saveFavorites(list);
+      syncFavorite();
+      showToast('Удалено из избранного');
+      return;
+    }
+
+    list.unshift(Object.assign({}, favoriteData, {addedAt:new Date().toISOString()}));
+    saveFavorites(list);
+    syncFavorite();
+    showToast('Добавлено в избранное');
+  }
+
+  function refreshBottomNav(){
+    const hasFavorites = readFavorites().length > 0;
+    document.querySelectorAll('.bottom-app-nav-item[data-nav="favorites"], [data-nav="favorites"], [href*="favorites-"]').forEach(function(item){
+      item.classList.toggle('has-favorites', hasFavorites);
+      item.setAttribute('data-favorites-state', hasFavorites ? 'filled' : 'empty');
+      const svg = item.querySelector('svg');
+      if(svg) svg.style.fill = hasFavorites ? 'currentColor' : '';
+    });
+
+    if(window.BarakaWayFavorites && typeof window.BarakaWayFavorites.refreshNav === 'function'){
+      window.BarakaWayFavorites.refreshNav();
+    }
+  }
+
+  function syncFavorite(){
+    const active = isFavorite();
+    if(favoriteButton){
+      favoriteButton.classList.toggle('is-active', active);
+      favoriteButton.setAttribute('aria-pressed', active ? 'true' : 'false');
+    }
+    refreshBottomNav();
+  }
+
+  function syncReading(){
+    const active = localStorage.getItem(READING_KEY) === '1';
+    document.documentElement.classList.toggle('reading-mode', active);
+    if(readingButton){
+      readingButton.classList.toggle('is-active', active);
+      readingButton.setAttribute('aria-pressed', active ? 'true' : 'false');
+    }
+  }
+
+  async function copyLink(){
+    try{
+      await navigator.clipboard.writeText(pageUrl);
+      showToast('Ссылка скопирована');
+    }catch(e){
+      showToast('Скопируйте ссылку из адресной строки');
+    }
+  }
+
+  function openShare(){
+    if(shareUrl) shareUrl.textContent = pageUrl;
+    if(navigator.share){
+      navigator.share({title:pageTitle,text:'Что такое садака — благотворительность в исламе',url:pageUrl}).catch(function(){});
+      return;
+    }
+    if(shareModal){
+      shareModal.classList.add('is-open');
+      shareModal.setAttribute('aria-hidden','false');
+    }
+  }
+
+  function closeShare(){
+    if(shareModal){
+      shareModal.classList.remove('is-open');
+      shareModal.setAttribute('aria-hidden','true');
+    }
+  }
+
+  favoriteButton && favoriteButton.addEventListener('click', toggleFavorite);
+
+  readingButton && readingButton.addEventListener('click', function(){
+    const next = localStorage.getItem(READING_KEY) !== '1';
+    localStorage.setItem(READING_KEY, next ? '1' : '0');
+    syncReading();
+    document.getElementById('article')?.scrollIntoView({behavior:'smooth',block:'start'});
+    showToast(next ? 'Режим чтения включён' : 'Режим чтения выключен');
+  });
+
+  shareButton && shareButton.addEventListener('click', openShare);
+  nativeShareBtn && nativeShareBtn.addEventListener('click', openShare);
+  copyShareBtn && copyShareBtn.addEventListener('click', copyLink);
+  closeShareBtn && closeShareBtn.addEventListener('click', closeShare);
+  shareModal && shareModal.addEventListener('click', function(e){if(e.target === shareModal) closeShare();});
+  document.addEventListener('keydown', function(e){if(e.key === 'Escape') closeShare();});
+
+  dayButton && dayButton.addEventListener('click', function(){
+    dayButton.classList.add('is-active');
+    showToast('Статья дня открыта');
+    document.getElementById('article')?.scrollIntoView({behavior:'smooth',block:'start'});
+  });
+
+  window.addEventListener('storage', function(event){
+    if(event.key === FAVORITES_KEY) syncFavorite();
+    if(event.key === READING_KEY) syncReading();
+  });
+
+  syncFavorite();
+  syncReading();
+  setTimeout(refreshBottomNav, 250);
+})();
+</script>
+<script src="/bottom-nav.js"></script>
 </body>
 </html>
-
-
