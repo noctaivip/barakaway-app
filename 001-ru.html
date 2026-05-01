@@ -669,7 +669,7 @@ html.light-mode .share-download{color:#17351f;background:rgba(181,138,54,.10)}
       <div class="share-canvas-wrap">
         <canvas id="shareCanvas" width="1080" height="1350" aria-label="Карточка для отправки статьи"></canvas>
       </div>
-      <div class="share-generated-note">Карточка формируется в текущей теме сайта. Ссылка отправляется отдельным текстом вместе с карточкой.</div>
+      <div class="share-generated-note">Карточка формируется в текущей теме сайта. В сообщении отправляется только одна ссылка на статью.</div>
     </div>
     <div class="share-card">
       <div class="share-brand">BarakaWay</div>
@@ -1004,18 +1004,21 @@ html.light-mode .share-download{color:#17351f;background:rgba(181,138,54,.10)}
 
   async function shareCardNative(){
     const blob = currentShareBlob || await drawShareCard();
-    const text = 'BarakaWay App\nЧто такое садака\nЗначение благотворительности в исламе и помощь людям.';
+    const text = 'BarakaWay App — Что такое садака\nЗначение благотворительности в исламе и помощь людям.\n' + pageUrl;
+
     if(blob && navigator.canShare && navigator.share){
       const file = new File([blob], 'barakaway-article-001.png', {type:'image/png'});
       if(navigator.canShare({files:[file]})){
-        await navigator.share({title:'BarakaWay App', text:text, url:pageUrl, files:[file]});
+        await navigator.share({title:'BarakaWay App', text:text, files:[file]});
         return true;
       }
     }
+
     if(navigator.share){
-      await navigator.share({title:'BarakaWay App', text:text, url:pageUrl});
+      await navigator.share({title:'BarakaWay App', text:text});
       return true;
     }
+
     return false;
   }
 
