@@ -1098,6 +1098,96 @@ html.light-mode .action-day svg{color:#1d5f36;}
   .action-day::before{border-radius:16px;}
 }
 
+
+/* === Final bookmark label + premium bottom-right article CTA === */
+.article{
+  align-items:stretch !important;
+}
+.article-main{
+  display:flex !important;
+  flex-direction:column !important;
+  min-width:0 !important;
+}
+.article-go{
+  margin-top:auto !important;
+  padding-top:14px !important;
+  display:flex !important;
+  justify-content:flex-end !important;
+  align-items:flex-end !important;
+  width:100% !important;
+}
+.article-go a{
+  min-height:38px !important;
+  padding:8px 10px 8px 18px !important;
+  border-radius:999px !important;
+  letter-spacing:.09em !important;
+  color:#fff8df !important;
+  border:1px solid rgba(240,216,145,.72) !important;
+  background:
+    radial-gradient(circle at 18% 0%,rgba(255,255,255,.24),transparent 34%),
+    linear-gradient(135deg,#123724 0%,#2d7a46 38%,#b58a36 100%) !important;
+  box-shadow:
+    0 16px 34px rgba(0,0,0,.32),
+    0 0 24px rgba(215,181,109,.12),
+    inset 0 1px 0 rgba(255,255,255,.18) !important;
+}
+.article-go a span:first-child{
+  position:relative;
+  top:.5px;
+}
+.article-go-arrow{
+  width:24px !important;
+  height:24px !important;
+  margin-left:2px !important;
+  color:#102018 !important;
+  background:linear-gradient(180deg,#fff2ba,#d7b56d 54%,#a77c2b) !important;
+  box-shadow:
+    0 7px 16px rgba(0,0,0,.30),
+    inset 0 1px 0 rgba(255,255,255,.65) !important;
+}
+.article-go a:hover{
+  transform:translateY(-2px) !important;
+  border-color:rgba(255,242,186,.92) !important;
+  background:
+    radial-gradient(circle at 18% 0%,rgba(255,255,255,.26),transparent 34%),
+    linear-gradient(135deg,#1e5938 0%,#4caf6a 46%,#d7b56d 100%) !important;
+  box-shadow:
+    0 20px 40px rgba(0,0,0,.38),
+    0 0 30px rgba(215,181,109,.20),
+    inset 0 1px 0 rgba(255,255,255,.22) !important;
+}
+html.light-mode .article-go a{
+  color:#14321f !important;
+  border-color:rgba(181,138,54,.48) !important;
+  background:
+    radial-gradient(circle at 18% 0%,rgba(255,255,255,.94),transparent 36%),
+    linear-gradient(135deg,#fff6dd 0%,#d7b56d 48%,#2d7a46 100%) !important;
+  box-shadow:
+    0 14px 30px rgba(18,34,24,.14),
+    inset 0 1px 0 rgba(255,255,255,.92) !important;
+}
+html.light-mode .article-go a:hover{
+  color:#ffffff !important;
+  background:
+    radial-gradient(circle at 18% 0%,rgba(255,255,255,.32),transparent 34%),
+    linear-gradient(135deg,#2d7a46 0%,#4caf6a 46%,#b58a36 100%) !important;
+}
+@media(max-width:720px){
+  .article-go{
+    justify-content:flex-end !important;
+    padding-top:13px !important;
+  }
+  .article-go a{
+    min-height:36px !important;
+    padding:8px 9px 8px 16px !important;
+    font-size:10.8px !important;
+  }
+  .article-go-arrow{
+    width:22px !important;
+    height:22px !important;
+  }
+}
+
 </style>
 </head>
 
@@ -1122,9 +1212,9 @@ html.light-mode .action-day svg{color:#1d5f36;}
       <svg viewBox="0 0 24 24"><path d="M4 5.5A2.5 2.5 0 0 1 6.5 3H20v17H6.5A2.5 2.5 0 0 0 4 22V5.5z"></path><path d="M8 7h8M8 11h8M8 15h5"></path></svg>
       <span class="action-label">Чтение</span>
     </button>
-    <button class="action" data-action="save" type="button" aria-label="Сохранить">
+    <button class="action" data-action="save" type="button" aria-label="Закладка">
       <svg viewBox="0 0 24 24"><path d="M6 4.5A1.5 1.5 0 0 1 7.5 3h9A1.5 1.5 0 0 1 18 4.5V21l-6-3.5L6 21V4.5z"></path></svg>
-      <span class="action-label">Сохранить</span>
+      <span class="action-label">Закладка</span>
     </button>
     <button class="action action-day" data-action="day" type="button" aria-label="Статья дня">
       <svg viewBox="0 0 24 24">
@@ -1163,7 +1253,7 @@ html.light-mode .action-day svg{color:#1d5f36;}
         <article class="article" data-keywords="садака благотворительность ислам милостыня смысл">
           <div class="article-main"><a href="islamic_articles-ru/001-ru.html">Что такое садака</a><p>Смысл садака и почему она важна в исламе.</p><div class="article-meta"><span class="tag">основа</span><span class="tag">садака</span></div><div class="article-go"><a href="islamic_articles-ru/001-ru.html" aria-label="Перейти к статье"><span>ПЕРЕЙТИ</span><span aria-hidden="true" class="article-go-arrow">→</span></a></div></div>
           <div class="article-actions">
-            <button class="article-action" data-card-action="save" type="button" aria-label="Сохранить статью"><svg viewBox="0 0 24 24"><path d="M6 4.5A1.5 1.5 0 0 1 7.5 3h9A1.5 1.5 0 0 1 18 4.5V21l-6-3.5L6 21V4.5z"></path></svg></button>
+            <button class="article-action" data-card-action="save" type="button" aria-label="Добавить в закладку"><svg viewBox="0 0 24 24"><path d="M6 4.5A1.5 1.5 0 0 1 7.5 3h9A1.5 1.5 0 0 1 18 4.5V21l-6-3.5L6 21V4.5z"></path></svg></button>
             <button class="article-action" data-card-action="share" type="button" aria-label="Поделиться статьёй"><svg viewBox="0 0 24 24"><circle cx="18" cy="5" r="3"></circle><circle cx="6" cy="12" r="3"></circle><circle cx="18" cy="19" r="3"></circle><path d="M8.7 10.7l6.6-4.4M8.7 13.3l6.6 4.4"></path></svg></button>
             <button class="article-action" data-card-action="favorite" type="button" aria-label="В избранное"><svg viewBox="0 0 24 24"><path d="M12 3.6l2.45 5.05 5.55.8-4.02 3.92.95 5.53L12 16.3l-4.93 2.6.95-5.53L4 9.45l5.55-.8L12 3.6z"></path></svg></button>
           </div>
@@ -1171,7 +1261,7 @@ html.light-mode .action-day svg{color:#1d5f36;}
         <article class="article" data-keywords="закят садака разница обязательная добровольная милостыня">
           <div class="article-main"><a href="islamic_articles-ru/002-ru.html">Разница между закятом и садакой</a><p>Понимание разницы между обязательным закятом и добровольной милостыней.</p><div class="article-meta"><span class="tag">закят</span><span class="tag">садака</span></div><div class="article-go"><a href="islamic_articles-ru/002-ru.html" aria-label="Перейти к статье"><span>ПЕРЕЙТИ</span><span aria-hidden="true" class="article-go-arrow">→</span></a></div></div>
           <div class="article-actions">
-            <button class="article-action" data-card-action="save" type="button" aria-label="Сохранить статью"><svg viewBox="0 0 24 24"><path d="M6 4.5A1.5 1.5 0 0 1 7.5 3h9A1.5 1.5 0 0 1 18 4.5V21l-6-3.5L6 21V4.5z"></path></svg></button>
+            <button class="article-action" data-card-action="save" type="button" aria-label="Добавить в закладку"><svg viewBox="0 0 24 24"><path d="M6 4.5A1.5 1.5 0 0 1 7.5 3h9A1.5 1.5 0 0 1 18 4.5V21l-6-3.5L6 21V4.5z"></path></svg></button>
             <button class="article-action" data-card-action="share" type="button" aria-label="Поделиться статьёй"><svg viewBox="0 0 24 24"><circle cx="18" cy="5" r="3"></circle><circle cx="6" cy="12" r="3"></circle><circle cx="18" cy="19" r="3"></circle><path d="M8.7 10.7l6.6-4.4M8.7 13.3l6.6 4.4"></path></svg></button>
             <button class="article-action" data-card-action="favorite" type="button" aria-label="В избранное"><svg viewBox="0 0 24 24"><path d="M12 3.6l2.45 5.05 5.55.8-4.02 3.92.95 5.53L12 16.3l-4.93 2.6.95-5.53L4 9.45l5.55-.8L12 3.6z"></path></svg></button>
           </div>
@@ -1179,7 +1269,7 @@ html.light-mode .action-day svg{color:#1d5f36;}
         <article class="article" data-keywords="скрытая благотворительность тайно искренность садака">
           <div class="article-main"><a href="islamic_articles-ru/003-ru.html">Почему скрытая благотворительность важна</a><p>Почему многие мусульмане предпочитают давать милостыню тайно.</p><div class="article-meta"><span class="tag">искренность</span><span class="tag">тайная садака</span></div><div class="article-go"><a href="islamic_articles-ru/003-ru.html" aria-label="Перейти к статье"><span>ПЕРЕЙТИ</span><span aria-hidden="true" class="article-go-arrow">→</span></a></div></div>
           <div class="article-actions">
-            <button class="article-action" data-card-action="save" type="button" aria-label="Сохранить статью"><svg viewBox="0 0 24 24"><path d="M6 4.5A1.5 1.5 0 0 1 7.5 3h9A1.5 1.5 0 0 1 18 4.5V21l-6-3.5L6 21V4.5z"></path></svg></button>
+            <button class="article-action" data-card-action="save" type="button" aria-label="Добавить в закладку"><svg viewBox="0 0 24 24"><path d="M6 4.5A1.5 1.5 0 0 1 7.5 3h9A1.5 1.5 0 0 1 18 4.5V21l-6-3.5L6 21V4.5z"></path></svg></button>
             <button class="article-action" data-card-action="share" type="button" aria-label="Поделиться статьёй"><svg viewBox="0 0 24 24"><circle cx="18" cy="5" r="3"></circle><circle cx="6" cy="12" r="3"></circle><circle cx="18" cy="19" r="3"></circle><path d="M8.7 10.7l6.6-4.4M8.7 13.3l6.6 4.4"></path></svg></button>
             <button class="article-action" data-card-action="favorite" type="button" aria-label="В избранное"><svg viewBox="0 0 24 24"><path d="M12 3.6l2.45 5.05 5.55.8-4.02 3.92.95 5.53L12 16.3l-4.93 2.6.95-5.53L4 9.45l5.55-.8L12 3.6z"></path></svg></button>
           </div>
@@ -1187,7 +1277,7 @@ html.light-mode .action-day svg{color:#1d5f36;}
         <article class="article" data-keywords="виды садака благотворительность добро ислам">
           <div class="article-main"><a href="islamic_articles-ru/007-ru.html">Лучшие виды садака в исламе</a><p>Формы благотворительности, которые дают реальную пользу людям.</p><div class="article-meta"><span class="tag">виды помощи</span></div><div class="article-go"><a href="islamic_articles-ru/007-ru.html" aria-label="Перейти к статье"><span>ПЕРЕЙТИ</span><span aria-hidden="true" class="article-go-arrow">→</span></a></div></div>
           <div class="article-actions">
-            <button class="article-action" data-card-action="save" type="button" aria-label="Сохранить статью"><svg viewBox="0 0 24 24"><path d="M6 4.5A1.5 1.5 0 0 1 7.5 3h9A1.5 1.5 0 0 1 18 4.5V21l-6-3.5L6 21V4.5z"></path></svg></button>
+            <button class="article-action" data-card-action="save" type="button" aria-label="Добавить в закладку"><svg viewBox="0 0 24 24"><path d="M6 4.5A1.5 1.5 0 0 1 7.5 3h9A1.5 1.5 0 0 1 18 4.5V21l-6-3.5L6 21V4.5z"></path></svg></button>
             <button class="article-action" data-card-action="share" type="button" aria-label="Поделиться статьёй"><svg viewBox="0 0 24 24"><circle cx="18" cy="5" r="3"></circle><circle cx="6" cy="12" r="3"></circle><circle cx="18" cy="19" r="3"></circle><path d="M8.7 10.7l6.6-4.4M8.7 13.3l6.6 4.4"></path></svg></button>
             <button class="article-action" data-card-action="favorite" type="button" aria-label="В избранное"><svg viewBox="0 0 24 24"><path d="M12 3.6l2.45 5.05 5.55.8-4.02 3.92.95 5.53L12 16.3l-4.93 2.6.95-5.53L4 9.45l5.55-.8L12 3.6z"></path></svg></button>
           </div>
@@ -1195,7 +1285,7 @@ html.light-mode .action-day svg{color:#1d5f36;}
         <article class="article" data-keywords="рамадан милостыня садака благотворительность">
           <div class="article-main"><a href="islamic_articles-ru/008-ru.html">Милостыня в месяц Рамадан</a><p>Почему благотворительность в Рамадан имеет особую ценность.</p><div class="article-meta"><span class="tag">рамадан</span><span class="tag">садака</span></div><div class="article-go"><a href="islamic_articles-ru/008-ru.html" aria-label="Перейти к статье"><span>ПЕРЕЙТИ</span><span aria-hidden="true" class="article-go-arrow">→</span></a></div></div>
           <div class="article-actions">
-            <button class="article-action" data-card-action="save" type="button" aria-label="Сохранить статью"><svg viewBox="0 0 24 24"><path d="M6 4.5A1.5 1.5 0 0 1 7.5 3h9A1.5 1.5 0 0 1 18 4.5V21l-6-3.5L6 21V4.5z"></path></svg></button>
+            <button class="article-action" data-card-action="save" type="button" aria-label="Добавить в закладку"><svg viewBox="0 0 24 24"><path d="M6 4.5A1.5 1.5 0 0 1 7.5 3h9A1.5 1.5 0 0 1 18 4.5V21l-6-3.5L6 21V4.5z"></path></svg></button>
             <button class="article-action" data-card-action="share" type="button" aria-label="Поделиться статьёй"><svg viewBox="0 0 24 24"><circle cx="18" cy="5" r="3"></circle><circle cx="6" cy="12" r="3"></circle><circle cx="18" cy="19" r="3"></circle><path d="M8.7 10.7l6.6-4.4M8.7 13.3l6.6 4.4"></path></svg></button>
             <button class="article-action" data-card-action="favorite" type="button" aria-label="В избранное"><svg viewBox="0 0 24 24"><path d="M12 3.6l2.45 5.05 5.55.8-4.02 3.92.95 5.53L12 16.3l-4.93 2.6.95-5.53L4 9.45l5.55-.8L12 3.6z"></path></svg></button>
           </div>
@@ -1203,7 +1293,7 @@ html.light-mode .action-day svg{color:#1d5f36;}
         <article class="article" data-keywords="коран милостыня щедрость помощь нуждающимся">
           <div class="article-main"><a href="islamic_articles-ru/009-ru.html">Милостыня в Коране</a><p>Как Коран учит щедрости, милосердию и помощи нуждающимся.</p><div class="article-meta"><span class="tag">коран</span><span class="tag">щедрость</span></div><div class="article-go"><a href="islamic_articles-ru/009-ru.html" aria-label="Перейти к статье"><span>ПЕРЕЙТИ</span><span aria-hidden="true" class="article-go-arrow">→</span></a></div></div>
           <div class="article-actions">
-            <button class="article-action" data-card-action="save" type="button" aria-label="Сохранить статью"><svg viewBox="0 0 24 24"><path d="M6 4.5A1.5 1.5 0 0 1 7.5 3h9A1.5 1.5 0 0 1 18 4.5V21l-6-3.5L6 21V4.5z"></path></svg></button>
+            <button class="article-action" data-card-action="save" type="button" aria-label="Добавить в закладку"><svg viewBox="0 0 24 24"><path d="M6 4.5A1.5 1.5 0 0 1 7.5 3h9A1.5 1.5 0 0 1 18 4.5V21l-6-3.5L6 21V4.5z"></path></svg></button>
             <button class="article-action" data-card-action="share" type="button" aria-label="Поделиться статьёй"><svg viewBox="0 0 24 24"><circle cx="18" cy="5" r="3"></circle><circle cx="6" cy="12" r="3"></circle><circle cx="18" cy="19" r="3"></circle><path d="M8.7 10.7l6.6-4.4M8.7 13.3l6.6 4.4"></path></svg></button>
             <button class="article-action" data-card-action="favorite" type="button" aria-label="В избранное"><svg viewBox="0 0 24 24"><path d="M12 3.6l2.45 5.05 5.55.8-4.02 3.92.95 5.53L12 16.3l-4.93 2.6.95-5.53L4 9.45l5.55-.8L12 3.6z"></path></svg></button>
           </div>
@@ -1211,7 +1301,7 @@ html.light-mode .action-day svg{color:#1d5f36;}
         <article class="article" data-keywords="награда садака благотворительность ислам">
           <div class="article-main"><a href="islamic_articles-ru/013-ru.html">Награда за садака</a><p>Почему благотворительность имеет огромную награду в исламе.</p><div class="article-meta"><span class="tag">награда</span></div><div class="article-go"><a href="islamic_articles-ru/013-ru.html" aria-label="Перейти к статье"><span>ПЕРЕЙТИ</span><span aria-hidden="true" class="article-go-arrow">→</span></a></div></div>
           <div class="article-actions">
-            <button class="article-action" data-card-action="save" type="button" aria-label="Сохранить статью"><svg viewBox="0 0 24 24"><path d="M6 4.5A1.5 1.5 0 0 1 7.5 3h9A1.5 1.5 0 0 1 18 4.5V21l-6-3.5L6 21V4.5z"></path></svg></button>
+            <button class="article-action" data-card-action="save" type="button" aria-label="Добавить в закладку"><svg viewBox="0 0 24 24"><path d="M6 4.5A1.5 1.5 0 0 1 7.5 3h9A1.5 1.5 0 0 1 18 4.5V21l-6-3.5L6 21V4.5z"></path></svg></button>
             <button class="article-action" data-card-action="share" type="button" aria-label="Поделиться статьёй"><svg viewBox="0 0 24 24"><circle cx="18" cy="5" r="3"></circle><circle cx="6" cy="12" r="3"></circle><circle cx="18" cy="19" r="3"></circle><path d="M8.7 10.7l6.6-4.4M8.7 13.3l6.6 4.4"></path></svg></button>
             <button class="article-action" data-card-action="favorite" type="button" aria-label="В избранное"><svg viewBox="0 0 24 24"><path d="M12 3.6l2.45 5.05 5.55.8-4.02 3.92.95 5.53L12 16.3l-4.93 2.6.95-5.53L4 9.45l5.55-.8L12 3.6z"></path></svg></button>
           </div>
@@ -1219,7 +1309,7 @@ html.light-mode .action-day svg{color:#1d5f36;}
         <article class="article" data-keywords="садака очищение имущества благословение барака">
           <div class="article-main"><a href="islamic_articles-ru/014-ru.html">Садака и очищение имущества</a><p>Почему благотворительность очищает имущество и приносит благословение.</p><div class="article-meta"><span class="tag">имущество</span><span class="tag">барака</span></div><div class="article-go"><a href="islamic_articles-ru/014-ru.html" aria-label="Перейти к статье"><span>ПЕРЕЙТИ</span><span aria-hidden="true" class="article-go-arrow">→</span></a></div></div>
           <div class="article-actions">
-            <button class="article-action" data-card-action="save" type="button" aria-label="Сохранить статью"><svg viewBox="0 0 24 24"><path d="M6 4.5A1.5 1.5 0 0 1 7.5 3h9A1.5 1.5 0 0 1 18 4.5V21l-6-3.5L6 21V4.5z"></path></svg></button>
+            <button class="article-action" data-card-action="save" type="button" aria-label="Добавить в закладку"><svg viewBox="0 0 24 24"><path d="M6 4.5A1.5 1.5 0 0 1 7.5 3h9A1.5 1.5 0 0 1 18 4.5V21l-6-3.5L6 21V4.5z"></path></svg></button>
             <button class="article-action" data-card-action="share" type="button" aria-label="Поделиться статьёй"><svg viewBox="0 0 24 24"><circle cx="18" cy="5" r="3"></circle><circle cx="6" cy="12" r="3"></circle><circle cx="18" cy="19" r="3"></circle><path d="M8.7 10.7l6.6-4.4M8.7 13.3l6.6 4.4"></path></svg></button>
             <button class="article-action" data-card-action="favorite" type="button" aria-label="В избранное"><svg viewBox="0 0 24 24"><path d="M12 3.6l2.45 5.05 5.55.8-4.02 3.92.95 5.53L12 16.3l-4.93 2.6.95-5.53L4 9.45l5.55-.8L12 3.6z"></path></svg></button>
           </div>
@@ -1227,7 +1317,7 @@ html.light-mode .action-day svg{color:#1d5f36;}
         <article class="article" data-keywords="почему мусульмане дают милостыню смысл садака">
           <div class="article-main"><a href="islamic_articles-ru/015-ru.html">Почему мусульмане дают милостыню</a><p>Смысл садака и благотворительности в исламе.</p><div class="article-meta"><span class="tag">смысл</span></div><div class="article-go"><a href="islamic_articles-ru/015-ru.html" aria-label="Перейти к статье"><span>ПЕРЕЙТИ</span><span aria-hidden="true" class="article-go-arrow">→</span></a></div></div>
           <div class="article-actions">
-            <button class="article-action" data-card-action="save" type="button" aria-label="Сохранить статью"><svg viewBox="0 0 24 24"><path d="M6 4.5A1.5 1.5 0 0 1 7.5 3h9A1.5 1.5 0 0 1 18 4.5V21l-6-3.5L6 21V4.5z"></path></svg></button>
+            <button class="article-action" data-card-action="save" type="button" aria-label="Добавить в закладку"><svg viewBox="0 0 24 24"><path d="M6 4.5A1.5 1.5 0 0 1 7.5 3h9A1.5 1.5 0 0 1 18 4.5V21l-6-3.5L6 21V4.5z"></path></svg></button>
             <button class="article-action" data-card-action="share" type="button" aria-label="Поделиться статьёй"><svg viewBox="0 0 24 24"><circle cx="18" cy="5" r="3"></circle><circle cx="6" cy="12" r="3"></circle><circle cx="18" cy="19" r="3"></circle><path d="M8.7 10.7l6.6-4.4M8.7 13.3l6.6 4.4"></path></svg></button>
             <button class="article-action" data-card-action="favorite" type="button" aria-label="В избранное"><svg viewBox="0 0 24 24"><path d="M12 3.6l2.45 5.05 5.55.8-4.02 3.92.95 5.53L12 16.3l-4.93 2.6.95-5.53L4 9.45l5.55-.8L12 3.6z"></path></svg></button>
           </div>
@@ -1235,7 +1325,7 @@ html.light-mode .action-day svg{color:#1d5f36;}
         <article class="article" data-keywords="маленькая садака важна вклад помощь результат">
           <div class="article-main"><a href="islamic_articles-ru/025-ru.html">Почему даже маленькая садака важна</a><p>Как небольшая помощь создаёт реальный результат.</p><div class="article-meta"><span class="tag">маленькая помощь</span></div><div class="article-go"><a href="islamic_articles-ru/025-ru.html" aria-label="Перейти к статье"><span>ПЕРЕЙТИ</span><span aria-hidden="true" class="article-go-arrow">→</span></a></div></div>
           <div class="article-actions">
-            <button class="article-action" data-card-action="save" type="button" aria-label="Сохранить статью"><svg viewBox="0 0 24 24"><path d="M6 4.5A1.5 1.5 0 0 1 7.5 3h9A1.5 1.5 0 0 1 18 4.5V21l-6-3.5L6 21V4.5z"></path></svg></button>
+            <button class="article-action" data-card-action="save" type="button" aria-label="Добавить в закладку"><svg viewBox="0 0 24 24"><path d="M6 4.5A1.5 1.5 0 0 1 7.5 3h9A1.5 1.5 0 0 1 18 4.5V21l-6-3.5L6 21V4.5z"></path></svg></button>
             <button class="article-action" data-card-action="share" type="button" aria-label="Поделиться статьёй"><svg viewBox="0 0 24 24"><circle cx="18" cy="5" r="3"></circle><circle cx="6" cy="12" r="3"></circle><circle cx="18" cy="19" r="3"></circle><path d="M8.7 10.7l6.6-4.4M8.7 13.3l6.6 4.4"></path></svg></button>
             <button class="article-action" data-card-action="favorite" type="button" aria-label="В избранное"><svg viewBox="0 0 24 24"><path d="M12 3.6l2.45 5.05 5.55.8-4.02 3.92.95 5.53L12 16.3l-4.93 2.6.95-5.53L4 9.45l5.55-.8L12 3.6z"></path></svg></button>
           </div>
@@ -1243,7 +1333,7 @@ html.light-mode .action-day svg{color:#1d5f36;}
         <article class="article" data-keywords="регулярная садака постоянная помощь дисциплина сердца">
           <div class="article-main"><a href="islamic_articles-ru/027-ru.html">Почему важна регулярная садака</a><p>Почему постоянная помощь даёт больше стабильности и дисциплины.</p><div class="article-meta"><span class="tag">регулярность</span></div><div class="article-go"><a href="islamic_articles-ru/027-ru.html" aria-label="Перейти к статье"><span>ПЕРЕЙТИ</span><span aria-hidden="true" class="article-go-arrow">→</span></a></div></div>
           <div class="article-actions">
-            <button class="article-action" data-card-action="save" type="button" aria-label="Сохранить статью"><svg viewBox="0 0 24 24"><path d="M6 4.5A1.5 1.5 0 0 1 7.5 3h9A1.5 1.5 0 0 1 18 4.5V21l-6-3.5L6 21V4.5z"></path></svg></button>
+            <button class="article-action" data-card-action="save" type="button" aria-label="Добавить в закладку"><svg viewBox="0 0 24 24"><path d="M6 4.5A1.5 1.5 0 0 1 7.5 3h9A1.5 1.5 0 0 1 18 4.5V21l-6-3.5L6 21V4.5z"></path></svg></button>
             <button class="article-action" data-card-action="share" type="button" aria-label="Поделиться статьёй"><svg viewBox="0 0 24 24"><circle cx="18" cy="5" r="3"></circle><circle cx="6" cy="12" r="3"></circle><circle cx="18" cy="19" r="3"></circle><path d="M8.7 10.7l6.6-4.4M8.7 13.3l6.6 4.4"></path></svg></button>
             <button class="article-action" data-card-action="favorite" type="button" aria-label="В избранное"><svg viewBox="0 0 24 24"><path d="M12 3.6l2.45 5.05 5.55.8-4.02 3.92.95 5.53L12 16.3l-4.93 2.6.95-5.53L4 9.45l5.55-.8L12 3.6z"></path></svg></button>
           </div>
@@ -1251,7 +1341,7 @@ html.light-mode .action-day svg{color:#1d5f36;}
         <article class="article" data-keywords="прозрачность благотворительность доверие садака">
           <div class="article-main"><a href="islamic_articles-ru/028-ru.html">Почему прозрачность важна в благотворительности</a><p>Почему прозрачная помощь усиливает доверие и эффективность поддержки.</p><div class="article-meta"><span class="tag">доверие</span><span class="tag">прозрачность</span></div><div class="article-go"><a href="islamic_articles-ru/028-ru.html" aria-label="Перейти к статье"><span>ПЕРЕЙТИ</span><span aria-hidden="true" class="article-go-arrow">→</span></a></div></div>
           <div class="article-actions">
-            <button class="article-action" data-card-action="save" type="button" aria-label="Сохранить статью"><svg viewBox="0 0 24 24"><path d="M6 4.5A1.5 1.5 0 0 1 7.5 3h9A1.5 1.5 0 0 1 18 4.5V21l-6-3.5L6 21V4.5z"></path></svg></button>
+            <button class="article-action" data-card-action="save" type="button" aria-label="Добавить в закладку"><svg viewBox="0 0 24 24"><path d="M6 4.5A1.5 1.5 0 0 1 7.5 3h9A1.5 1.5 0 0 1 18 4.5V21l-6-3.5L6 21V4.5z"></path></svg></button>
             <button class="article-action" data-card-action="share" type="button" aria-label="Поделиться статьёй"><svg viewBox="0 0 24 24"><circle cx="18" cy="5" r="3"></circle><circle cx="6" cy="12" r="3"></circle><circle cx="18" cy="19" r="3"></circle><path d="M8.7 10.7l6.6-4.4M8.7 13.3l6.6 4.4"></path></svg></button>
             <button class="article-action" data-card-action="favorite" type="button" aria-label="В избранное"><svg viewBox="0 0 24 24"><path d="M12 3.6l2.45 5.05 5.55.8-4.02 3.92.95 5.53L12 16.3l-4.93 2.6.95-5.53L4 9.45l5.55-.8L12 3.6z"></path></svg></button>
           </div>
@@ -1259,7 +1349,7 @@ html.light-mode .action-day svg{color:#1d5f36;}
         <article class="article" data-keywords="намерение садака искренность сумма">
           <div class="article-main"><a href="islamic_articles-ru/029-ru.html">Почему намерение важно в садака</a><p>Почему искренность важнее суммы.</p><div class="article-meta"><span class="tag">намерение</span></div><div class="article-go"><a href="islamic_articles-ru/029-ru.html" aria-label="Перейти к статье"><span>ПЕРЕЙТИ</span><span aria-hidden="true" class="article-go-arrow">→</span></a></div></div>
           <div class="article-actions">
-            <button class="article-action" data-card-action="save" type="button" aria-label="Сохранить статью"><svg viewBox="0 0 24 24"><path d="M6 4.5A1.5 1.5 0 0 1 7.5 3h9A1.5 1.5 0 0 1 18 4.5V21l-6-3.5L6 21V4.5z"></path></svg></button>
+            <button class="article-action" data-card-action="save" type="button" aria-label="Добавить в закладку"><svg viewBox="0 0 24 24"><path d="M6 4.5A1.5 1.5 0 0 1 7.5 3h9A1.5 1.5 0 0 1 18 4.5V21l-6-3.5L6 21V4.5z"></path></svg></button>
             <button class="article-action" data-card-action="share" type="button" aria-label="Поделиться статьёй"><svg viewBox="0 0 24 24"><circle cx="18" cy="5" r="3"></circle><circle cx="6" cy="12" r="3"></circle><circle cx="18" cy="19" r="3"></circle><path d="M8.7 10.7l6.6-4.4M8.7 13.3l6.6 4.4"></path></svg></button>
             <button class="article-action" data-card-action="favorite" type="button" aria-label="В избранное"><svg viewBox="0 0 24 24"><path d="M12 3.6l2.45 5.05 5.55.8-4.02 3.92.95 5.53L12 16.3l-4.93 2.6.95-5.53L4 9.45l5.55-.8L12 3.6z"></path></svg></button>
           </div>
@@ -1279,7 +1369,7 @@ html.light-mode .action-day svg{color:#1d5f36;}
         <article class="article" data-keywords="семьи жилье помощь нуждающимся">
           <div class="article-main"><a href="islamic_articles-ru/004-ru.html">Помощь нуждающимся семьям</a><p>Почему поддержка семей с жильём является одной из важнейших форм помощи.</p><div class="article-meta"><span class="tag">семьи</span><span class="tag">жильё</span></div><div class="article-go"><a href="islamic_articles-ru/004-ru.html" aria-label="Перейти к статье"><span>ПЕРЕЙТИ</span><span aria-hidden="true" class="article-go-arrow">→</span></a></div></div>
           <div class="article-actions">
-            <button class="article-action" data-card-action="save" type="button" aria-label="Сохранить статью"><svg viewBox="0 0 24 24"><path d="M6 4.5A1.5 1.5 0 0 1 7.5 3h9A1.5 1.5 0 0 1 18 4.5V21l-6-3.5L6 21V4.5z"></path></svg></button>
+            <button class="article-action" data-card-action="save" type="button" aria-label="Добавить в закладку"><svg viewBox="0 0 24 24"><path d="M6 4.5A1.5 1.5 0 0 1 7.5 3h9A1.5 1.5 0 0 1 18 4.5V21l-6-3.5L6 21V4.5z"></path></svg></button>
             <button class="article-action" data-card-action="share" type="button" aria-label="Поделиться статьёй"><svg viewBox="0 0 24 24"><circle cx="18" cy="5" r="3"></circle><circle cx="6" cy="12" r="3"></circle><circle cx="18" cy="19" r="3"></circle><path d="M8.7 10.7l6.6-4.4M8.7 13.3l6.6 4.4"></path></svg></button>
             <button class="article-action" data-card-action="favorite" type="button" aria-label="В избранное"><svg viewBox="0 0 24 24"><path d="M12 3.6l2.45 5.05 5.55.8-4.02 3.92.95 5.53L12 16.3l-4.93 2.6.95-5.53L4 9.45l5.55-.8L12 3.6z"></path></svg></button>
           </div>
@@ -1287,7 +1377,7 @@ html.light-mode .action-day svg{color:#1d5f36;}
         <article class="article" data-keywords="один доллар маленькая помощь пожертвование">
           <div class="article-main"><a href="islamic_articles-ru/005-ru.html">Почему даже один доллар имеет значение</a><p>Как даже небольшие пожертвования могут изменить чью-то жизнь.</p><div class="article-meta"><span class="tag">малый вклад</span></div><div class="article-go"><a href="islamic_articles-ru/005-ru.html" aria-label="Перейти к статье"><span>ПЕРЕЙТИ</span><span aria-hidden="true" class="article-go-arrow">→</span></a></div></div>
           <div class="article-actions">
-            <button class="article-action" data-card-action="save" type="button" aria-label="Сохранить статью"><svg viewBox="0 0 24 24"><path d="M6 4.5A1.5 1.5 0 0 1 7.5 3h9A1.5 1.5 0 0 1 18 4.5V21l-6-3.5L6 21V4.5z"></path></svg></button>
+            <button class="article-action" data-card-action="save" type="button" aria-label="Добавить в закладку"><svg viewBox="0 0 24 24"><path d="M6 4.5A1.5 1.5 0 0 1 7.5 3h9A1.5 1.5 0 0 1 18 4.5V21l-6-3.5L6 21V4.5z"></path></svg></button>
             <button class="article-action" data-card-action="share" type="button" aria-label="Поделиться статьёй"><svg viewBox="0 0 24 24"><circle cx="18" cy="5" r="3"></circle><circle cx="6" cy="12" r="3"></circle><circle cx="18" cy="19" r="3"></circle><path d="M8.7 10.7l6.6-4.4M8.7 13.3l6.6 4.4"></path></svg></button>
             <button class="article-action" data-card-action="favorite" type="button" aria-label="В избранное"><svg viewBox="0 0 24 24"><path d="M12 3.6l2.45 5.05 5.55.8-4.02 3.92.95 5.53L12 16.3l-4.93 2.6.95-5.53L4 9.45l5.55-.8L12 3.6z"></path></svg></button>
           </div>
@@ -1295,7 +1385,7 @@ html.light-mode .action-day svg{color:#1d5f36;}
         <article class="article" data-keywords="садака жилье убежище дом помощь">
           <div class="article-main"><a href="islamic_articles-ru/006-ru.html">Садака для жилья и убежища</a><p>Почему помощь людям с жильём — одна из сильных форм благотворительности.</p><div class="article-meta"><span class="tag">убежище</span><span class="tag">жильё</span></div><div class="article-go"><a href="islamic_articles-ru/006-ru.html" aria-label="Перейти к статье"><span>ПЕРЕЙТИ</span><span aria-hidden="true" class="article-go-arrow">→</span></a></div></div>
           <div class="article-actions">
-            <button class="article-action" data-card-action="save" type="button" aria-label="Сохранить статью"><svg viewBox="0 0 24 24"><path d="M6 4.5A1.5 1.5 0 0 1 7.5 3h9A1.5 1.5 0 0 1 18 4.5V21l-6-3.5L6 21V4.5z"></path></svg></button>
+            <button class="article-action" data-card-action="save" type="button" aria-label="Добавить в закладку"><svg viewBox="0 0 24 24"><path d="M6 4.5A1.5 1.5 0 0 1 7.5 3h9A1.5 1.5 0 0 1 18 4.5V21l-6-3.5L6 21V4.5z"></path></svg></button>
             <button class="article-action" data-card-action="share" type="button" aria-label="Поделиться статьёй"><svg viewBox="0 0 24 24"><circle cx="18" cy="5" r="3"></circle><circle cx="6" cy="12" r="3"></circle><circle cx="18" cy="19" r="3"></circle><path d="M8.7 10.7l6.6-4.4M8.7 13.3l6.6 4.4"></path></svg></button>
             <button class="article-action" data-card-action="favorite" type="button" aria-label="В избранное"><svg viewBox="0 0 24 24"><path d="M12 3.6l2.45 5.05 5.55.8-4.02 3.92.95 5.53L12 16.3l-4.93 2.6.95-5.53L4 9.45l5.55-.8L12 3.6z"></path></svg></button>
           </div>
@@ -1303,7 +1393,7 @@ html.light-mode .action-day svg{color:#1d5f36;}
         <article class="article" data-keywords="помощь семьям важна поддержка">
           <div class="article-main"><a href="islamic_articles-ru/011-ru.html">Почему помощь семьям важна</a><p>Почему поддержка семей является одной из важных форм благотворительности.</p><div class="article-meta"><span class="tag">семья</span></div><div class="article-go"><a href="islamic_articles-ru/011-ru.html" aria-label="Перейти к статье"><span>ПЕРЕЙТИ</span><span aria-hidden="true" class="article-go-arrow">→</span></a></div></div>
           <div class="article-actions">
-            <button class="article-action" data-card-action="save" type="button" aria-label="Сохранить статью"><svg viewBox="0 0 24 24"><path d="M6 4.5A1.5 1.5 0 0 1 7.5 3h9A1.5 1.5 0 0 1 18 4.5V21l-6-3.5L6 21V4.5z"></path></svg></button>
+            <button class="article-action" data-card-action="save" type="button" aria-label="Добавить в закладку"><svg viewBox="0 0 24 24"><path d="M6 4.5A1.5 1.5 0 0 1 7.5 3h9A1.5 1.5 0 0 1 18 4.5V21l-6-3.5L6 21V4.5z"></path></svg></button>
             <button class="article-action" data-card-action="share" type="button" aria-label="Поделиться статьёй"><svg viewBox="0 0 24 24"><circle cx="18" cy="5" r="3"></circle><circle cx="6" cy="12" r="3"></circle><circle cx="18" cy="19" r="3"></circle><path d="M8.7 10.7l6.6-4.4M8.7 13.3l6.6 4.4"></path></svg></button>
             <button class="article-action" data-card-action="favorite" type="button" aria-label="В избранное"><svg viewBox="0 0 24 24"><path d="M12 3.6l2.45 5.05 5.55.8-4.02 3.92.95 5.53L12 16.3l-4.93 2.6.95-5.53L4 9.45l5.55-.8L12 3.6z"></path></svg></button>
           </div>
@@ -1311,7 +1401,7 @@ html.light-mode .action-day svg{color:#1d5f36;}
         <article class="article" data-keywords="маленькая помощь большие изменения жизнь">
           <div class="article-main"><a href="islamic_articles-ru/012-ru.html">Маленькая помощь — большие изменения</a><p>Почему даже небольшая благотворительность может изменить чью-то жизнь.</p><div class="article-meta"><span class="tag">изменения</span></div><div class="article-go"><a href="islamic_articles-ru/012-ru.html" aria-label="Перейти к статье"><span>ПЕРЕЙТИ</span><span aria-hidden="true" class="article-go-arrow">→</span></a></div></div>
           <div class="article-actions">
-            <button class="article-action" data-card-action="save" type="button" aria-label="Сохранить статью"><svg viewBox="0 0 24 24"><path d="M6 4.5A1.5 1.5 0 0 1 7.5 3h9A1.5 1.5 0 0 1 18 4.5V21l-6-3.5L6 21V4.5z"></path></svg></button>
+            <button class="article-action" data-card-action="save" type="button" aria-label="Добавить в закладку"><svg viewBox="0 0 24 24"><path d="M6 4.5A1.5 1.5 0 0 1 7.5 3h9A1.5 1.5 0 0 1 18 4.5V21l-6-3.5L6 21V4.5z"></path></svg></button>
             <button class="article-action" data-card-action="share" type="button" aria-label="Поделиться статьёй"><svg viewBox="0 0 24 24"><circle cx="18" cy="5" r="3"></circle><circle cx="6" cy="12" r="3"></circle><circle cx="18" cy="19" r="3"></circle><path d="M8.7 10.7l6.6-4.4M8.7 13.3l6.6 4.4"></path></svg></button>
             <button class="article-action" data-card-action="favorite" type="button" aria-label="В избранное"><svg viewBox="0 0 24 24"><path d="M12 3.6l2.45 5.05 5.55.8-4.02 3.92.95 5.53L12 16.3l-4.93 2.6.95-5.53L4 9.45l5.55-.8L12 3.6z"></path></svg></button>
           </div>
@@ -1319,7 +1409,7 @@ html.light-mode .action-day svg{color:#1d5f36;}
         <article class="article" data-keywords="надежда семьям достоинство стабильность трудные времена">
           <div class="article-main"><a href="islamic_articles-ru/019-ru.html">Как благотворительность приносит надежду семьям</a><p>Как садака возвращает достоинство, стабильность и надежду.</p><div class="article-meta"><span class="tag">надежда</span><span class="tag">семьи</span></div><div class="article-go"><a href="islamic_articles-ru/019-ru.html" aria-label="Перейти к статье"><span>ПЕРЕЙТИ</span><span aria-hidden="true" class="article-go-arrow">→</span></a></div></div>
           <div class="article-actions">
-            <button class="article-action" data-card-action="save" type="button" aria-label="Сохранить статью"><svg viewBox="0 0 24 24"><path d="M6 4.5A1.5 1.5 0 0 1 7.5 3h9A1.5 1.5 0 0 1 18 4.5V21l-6-3.5L6 21V4.5z"></path></svg></button>
+            <button class="article-action" data-card-action="save" type="button" aria-label="Добавить в закладку"><svg viewBox="0 0 24 24"><path d="M6 4.5A1.5 1.5 0 0 1 7.5 3h9A1.5 1.5 0 0 1 18 4.5V21l-6-3.5L6 21V4.5z"></path></svg></button>
             <button class="article-action" data-card-action="share" type="button" aria-label="Поделиться статьёй"><svg viewBox="0 0 24 24"><circle cx="18" cy="5" r="3"></circle><circle cx="6" cy="12" r="3"></circle><circle cx="18" cy="19" r="3"></circle><path d="M8.7 10.7l6.6-4.4M8.7 13.3l6.6 4.4"></path></svg></button>
             <button class="article-action" data-card-action="favorite" type="button" aria-label="В избранное"><svg viewBox="0 0 24 24"><path d="M12 3.6l2.45 5.05 5.55.8-4.02 3.92.95 5.53L12 16.3l-4.93 2.6.95-5.53L4 9.45l5.55-.8L12 3.6z"></path></svg></button>
           </div>
@@ -1327,7 +1417,7 @@ html.light-mode .action-day svg{color:#1d5f36;}
         <article class="article" data-keywords="дети помощь садака">
           <div class="article-main"><a href="islamic_articles-ru/020-ru.html">Помощь детям через садака</a><p>Почему помощь детям — одна из самых значимых форм благотворительности.</p><div class="article-meta"><span class="tag">дети</span></div><div class="article-go"><a href="islamic_articles-ru/020-ru.html" aria-label="Перейти к статье"><span>ПЕРЕЙТИ</span><span aria-hidden="true" class="article-go-arrow">→</span></a></div></div>
           <div class="article-actions">
-            <button class="article-action" data-card-action="save" type="button" aria-label="Сохранить статью"><svg viewBox="0 0 24 24"><path d="M6 4.5A1.5 1.5 0 0 1 7.5 3h9A1.5 1.5 0 0 1 18 4.5V21l-6-3.5L6 21V4.5z"></path></svg></button>
+            <button class="article-action" data-card-action="save" type="button" aria-label="Добавить в закладку"><svg viewBox="0 0 24 24"><path d="M6 4.5A1.5 1.5 0 0 1 7.5 3h9A1.5 1.5 0 0 1 18 4.5V21l-6-3.5L6 21V4.5z"></path></svg></button>
             <button class="article-action" data-card-action="share" type="button" aria-label="Поделиться статьёй"><svg viewBox="0 0 24 24"><circle cx="18" cy="5" r="3"></circle><circle cx="6" cy="12" r="3"></circle><circle cx="18" cy="19" r="3"></circle><path d="M8.7 10.7l6.6-4.4M8.7 13.3l6.6 4.4"></path></svg></button>
             <button class="article-action" data-card-action="favorite" type="button" aria-label="В избранное"><svg viewBox="0 0 24 24"><path d="M12 3.6l2.45 5.05 5.55.8-4.02 3.92.95 5.53L12 16.3l-4.93 2.6.95-5.53L4 9.45l5.55-.8L12 3.6z"></path></svg></button>
           </div>
@@ -1335,7 +1425,7 @@ html.light-mode .action-day svg{color:#1d5f36;}
         <article class="article" data-keywords="вдовы ислам поддержка садака">
           <div class="article-main"><a href="islamic_articles-ru/021-ru.html">Помощь вдовам в исламе</a><p>Почему поддержка вдов — важная и ответственная форма садака.</p><div class="article-meta"><span class="tag">вдовы</span></div><div class="article-go"><a href="islamic_articles-ru/021-ru.html" aria-label="Перейти к статье"><span>ПЕРЕЙТИ</span><span aria-hidden="true" class="article-go-arrow">→</span></a></div></div>
           <div class="article-actions">
-            <button class="article-action" data-card-action="save" type="button" aria-label="Сохранить статью"><svg viewBox="0 0 24 24"><path d="M6 4.5A1.5 1.5 0 0 1 7.5 3h9A1.5 1.5 0 0 1 18 4.5V21l-6-3.5L6 21V4.5z"></path></svg></button>
+            <button class="article-action" data-card-action="save" type="button" aria-label="Добавить в закладку"><svg viewBox="0 0 24 24"><path d="M6 4.5A1.5 1.5 0 0 1 7.5 3h9A1.5 1.5 0 0 1 18 4.5V21l-6-3.5L6 21V4.5z"></path></svg></button>
             <button class="article-action" data-card-action="share" type="button" aria-label="Поделиться статьёй"><svg viewBox="0 0 24 24"><circle cx="18" cy="5" r="3"></circle><circle cx="6" cy="12" r="3"></circle><circle cx="18" cy="19" r="3"></circle><path d="M8.7 10.7l6.6-4.4M8.7 13.3l6.6 4.4"></path></svg></button>
             <button class="article-action" data-card-action="favorite" type="button" aria-label="В избранное"><svg viewBox="0 0 24 24"><path d="M12 3.6l2.45 5.05 5.55.8-4.02 3.92.95 5.53L12 16.3l-4.93 2.6.95-5.53L4 9.45l5.55-.8L12 3.6z"></path></svg></button>
           </div>
@@ -1343,7 +1433,7 @@ html.light-mode .action-day svg{color:#1d5f36;}
         <article class="article" data-keywords="срочная помощь ислам своевременная садака">
           <div class="article-main"><a href="islamic_articles-ru/022-ru.html">Срочная помощь в исламе</a><p>Почему своевременная помощь является одной из сильных форм садака.</p><div class="article-meta"><span class="tag">срочно</span></div><div class="article-go"><a href="islamic_articles-ru/022-ru.html" aria-label="Перейти к статье"><span>ПЕРЕЙТИ</span><span aria-hidden="true" class="article-go-arrow">→</span></a></div></div>
           <div class="article-actions">
-            <button class="article-action" data-card-action="save" type="button" aria-label="Сохранить статью"><svg viewBox="0 0 24 24"><path d="M6 4.5A1.5 1.5 0 0 1 7.5 3h9A1.5 1.5 0 0 1 18 4.5V21l-6-3.5L6 21V4.5z"></path></svg></button>
+            <button class="article-action" data-card-action="save" type="button" aria-label="Добавить в закладку"><svg viewBox="0 0 24 24"><path d="M6 4.5A1.5 1.5 0 0 1 7.5 3h9A1.5 1.5 0 0 1 18 4.5V21l-6-3.5L6 21V4.5z"></path></svg></button>
             <button class="article-action" data-card-action="share" type="button" aria-label="Поделиться статьёй"><svg viewBox="0 0 24 24"><circle cx="18" cy="5" r="3"></circle><circle cx="6" cy="12" r="3"></circle><circle cx="18" cy="19" r="3"></circle><path d="M8.7 10.7l6.6-4.4M8.7 13.3l6.6 4.4"></path></svg></button>
             <button class="article-action" data-card-action="favorite" type="button" aria-label="В избранное"><svg viewBox="0 0 24 24"><path d="M12 3.6l2.45 5.05 5.55.8-4.02 3.92.95 5.53L12 16.3l-4.93 2.6.95-5.53L4 9.45l5.55-.8L12 3.6z"></path></svg></button>
           </div>
@@ -1351,7 +1441,7 @@ html.light-mode .action-day svg{color:#1d5f36;}
         <article class="article" data-keywords="еда накормить человека ислам садака">
           <div class="article-main"><a href="islamic_articles-ru/023-ru.html">Помощь едой в исламе</a><p>Почему накормить человека — прямая и сильная форма садака.</p><div class="article-meta"><span class="tag">еда</span></div><div class="article-go"><a href="islamic_articles-ru/023-ru.html" aria-label="Перейти к статье"><span>ПЕРЕЙТИ</span><span aria-hidden="true" class="article-go-arrow">→</span></a></div></div>
           <div class="article-actions">
-            <button class="article-action" data-card-action="save" type="button" aria-label="Сохранить статью"><svg viewBox="0 0 24 24"><path d="M6 4.5A1.5 1.5 0 0 1 7.5 3h9A1.5 1.5 0 0 1 18 4.5V21l-6-3.5L6 21V4.5z"></path></svg></button>
+            <button class="article-action" data-card-action="save" type="button" aria-label="Добавить в закладку"><svg viewBox="0 0 24 24"><path d="M6 4.5A1.5 1.5 0 0 1 7.5 3h9A1.5 1.5 0 0 1 18 4.5V21l-6-3.5L6 21V4.5z"></path></svg></button>
             <button class="article-action" data-card-action="share" type="button" aria-label="Поделиться статьёй"><svg viewBox="0 0 24 24"><circle cx="18" cy="5" r="3"></circle><circle cx="6" cy="12" r="3"></circle><circle cx="18" cy="19" r="3"></circle><path d="M8.7 10.7l6.6-4.4M8.7 13.3l6.6 4.4"></path></svg></button>
             <button class="article-action" data-card-action="favorite" type="button" aria-label="В избранное"><svg viewBox="0 0 24 24"><path d="M12 3.6l2.45 5.05 5.55.8-4.02 3.92.95 5.53L12 16.3l-4.93 2.6.95-5.53L4 9.45l5.55-.8L12 3.6z"></path></svg></button>
           </div>
@@ -1359,7 +1449,7 @@ html.light-mode .action-day svg{color:#1d5f36;}
         <article class="article" data-keywords="куда идут пожертвования прозрачность помощь">
           <div class="article-main"><a href="islamic_articles-ru/024-ru.html">Куда идут ваши пожертвования</a><p>Прозрачность, ответственность и превращение садака в реальную помощь.</p><div class="article-meta"><span class="tag">ответственность</span></div><div class="article-go"><a href="islamic_articles-ru/024-ru.html" aria-label="Перейти к статье"><span>ПЕРЕЙТИ</span><span aria-hidden="true" class="article-go-arrow">→</span></a></div></div>
           <div class="article-actions">
-            <button class="article-action" data-card-action="save" type="button" aria-label="Сохранить статью"><svg viewBox="0 0 24 24"><path d="M6 4.5A1.5 1.5 0 0 1 7.5 3h9A1.5 1.5 0 0 1 18 4.5V21l-6-3.5L6 21V4.5z"></path></svg></button>
+            <button class="article-action" data-card-action="save" type="button" aria-label="Добавить в закладку"><svg viewBox="0 0 24 24"><path d="M6 4.5A1.5 1.5 0 0 1 7.5 3h9A1.5 1.5 0 0 1 18 4.5V21l-6-3.5L6 21V4.5z"></path></svg></button>
             <button class="article-action" data-card-action="share" type="button" aria-label="Поделиться статьёй"><svg viewBox="0 0 24 24"><circle cx="18" cy="5" r="3"></circle><circle cx="6" cy="12" r="3"></circle><circle cx="18" cy="19" r="3"></circle><path d="M8.7 10.7l6.6-4.4M8.7 13.3l6.6 4.4"></path></svg></button>
             <button class="article-action" data-card-action="favorite" type="button" aria-label="В избранное"><svg viewBox="0 0 24 24"><path d="M12 3.6l2.45 5.05 5.55.8-4.02 3.92.95 5.53L12 16.3l-4.93 2.6.95-5.53L4 9.45l5.55-.8L12 3.6z"></path></svg></button>
           </div>
@@ -1367,7 +1457,7 @@ html.light-mode .action-day svg{color:#1d5f36;}
         <article class="article" data-keywords="люди откладывают помощь лучший момент садака">
           <div class="article-main"><a href="islamic_articles-ru/026-ru.html">Почему люди откладывают помощь</a><p>Почему помощь сегодня важнее ожидания лучшего момента.</p><div class="article-meta"><span class="tag">решение</span></div><div class="article-go"><a href="islamic_articles-ru/026-ru.html" aria-label="Перейти к статье"><span>ПЕРЕЙТИ</span><span aria-hidden="true" class="article-go-arrow">→</span></a></div></div>
           <div class="article-actions">
-            <button class="article-action" data-card-action="save" type="button" aria-label="Сохранить статью"><svg viewBox="0 0 24 24"><path d="M6 4.5A1.5 1.5 0 0 1 7.5 3h9A1.5 1.5 0 0 1 18 4.5V21l-6-3.5L6 21V4.5z"></path></svg></button>
+            <button class="article-action" data-card-action="save" type="button" aria-label="Добавить в закладку"><svg viewBox="0 0 24 24"><path d="M6 4.5A1.5 1.5 0 0 1 7.5 3h9A1.5 1.5 0 0 1 18 4.5V21l-6-3.5L6 21V4.5z"></path></svg></button>
             <button class="article-action" data-card-action="share" type="button" aria-label="Поделиться статьёй"><svg viewBox="0 0 24 24"><circle cx="18" cy="5" r="3"></circle><circle cx="6" cy="12" r="3"></circle><circle cx="18" cy="19" r="3"></circle><path d="M8.7 10.7l6.6-4.4M8.7 13.3l6.6 4.4"></path></svg></button>
             <button class="article-action" data-card-action="favorite" type="button" aria-label="В избранное"><svg viewBox="0 0 24 24"><path d="M12 3.6l2.45 5.05 5.55.8-4.02 3.92.95 5.53L12 16.3l-4.93 2.6.95-5.53L4 9.45l5.55-.8L12 3.6z"></path></svg></button>
           </div>
@@ -1387,7 +1477,7 @@ html.light-mode .action-day svg{color:#1d5f36;}
         <article class="article" data-keywords="история помощи садака изменила жизнь семьи">
           <div class="article-main"><a href="islamic_articles-ru/004-ru.html">Как одна садака изменила жизнь семьи</a><p>Как даже небольшая благотворительность может изменить жизнь семьи.</p><div class="article-meta"><span class="tag">история</span></div><div class="article-go"><a href="islamic_articles-ru/004-ru.html" aria-label="Перейти к статье"><span>ПЕРЕЙТИ</span><span aria-hidden="true" class="article-go-arrow">→</span></a></div></div>
           <div class="article-actions">
-            <button class="article-action" data-card-action="save" type="button" aria-label="Сохранить статью"><svg viewBox="0 0 24 24"><path d="M6 4.5A1.5 1.5 0 0 1 7.5 3h9A1.5 1.5 0 0 1 18 4.5V21l-6-3.5L6 21V4.5z"></path></svg></button>
+            <button class="article-action" data-card-action="save" type="button" aria-label="Добавить в закладку"><svg viewBox="0 0 24 24"><path d="M6 4.5A1.5 1.5 0 0 1 7.5 3h9A1.5 1.5 0 0 1 18 4.5V21l-6-3.5L6 21V4.5z"></path></svg></button>
             <button class="article-action" data-card-action="share" type="button" aria-label="Поделиться статьёй"><svg viewBox="0 0 24 24"><circle cx="18" cy="5" r="3"></circle><circle cx="6" cy="12" r="3"></circle><circle cx="18" cy="19" r="3"></circle><path d="M8.7 10.7l6.6-4.4M8.7 13.3l6.6 4.4"></path></svg></button>
             <button class="article-action" data-card-action="favorite" type="button" aria-label="В избранное"><svg viewBox="0 0 24 24"><path d="M12 3.6l2.45 5.05 5.55.8-4.02 3.92.95 5.53L12 16.3l-4.93 2.6.95-5.53L4 9.45l5.55-.8L12 3.6z"></path></svg></button>
           </div>
@@ -1407,7 +1497,7 @@ html.light-mode .action-day svg{color:#1d5f36;}
         <article class="article" data-keywords="бедные ислам забота помощь вера">
           <div class="article-main"><a href="islamic_articles-ru/016-ru.html">Забота о бедных в исламе</a><p>Почему помощь нуждающимся является важной частью веры.</p><div class="article-meta"><span class="tag">бедные</span><span class="tag">вера</span></div><div class="article-go"><a href="islamic_articles-ru/016-ru.html" aria-label="Перейти к статье"><span>ПЕРЕЙТИ</span><span aria-hidden="true" class="article-go-arrow">→</span></a></div></div>
           <div class="article-actions">
-            <button class="article-action" data-card-action="save" type="button" aria-label="Сохранить статью"><svg viewBox="0 0 24 24"><path d="M6 4.5A1.5 1.5 0 0 1 7.5 3h9A1.5 1.5 0 0 1 18 4.5V21l-6-3.5L6 21V4.5z"></path></svg></button>
+            <button class="article-action" data-card-action="save" type="button" aria-label="Добавить в закладку"><svg viewBox="0 0 24 24"><path d="M6 4.5A1.5 1.5 0 0 1 7.5 3h9A1.5 1.5 0 0 1 18 4.5V21l-6-3.5L6 21V4.5z"></path></svg></button>
             <button class="article-action" data-card-action="share" type="button" aria-label="Поделиться статьёй"><svg viewBox="0 0 24 24"><circle cx="18" cy="5" r="3"></circle><circle cx="6" cy="12" r="3"></circle><circle cx="18" cy="19" r="3"></circle><path d="M8.7 10.7l6.6-4.4M8.7 13.3l6.6 4.4"></path></svg></button>
             <button class="article-action" data-card-action="favorite" type="button" aria-label="В избранное"><svg viewBox="0 0 24 24"><path d="M12 3.6l2.45 5.05 5.55.8-4.02 3.92.95 5.53L12 16.3l-4.93 2.6.95-5.53L4 9.45l5.55-.8L12 3.6z"></path></svg></button>
           </div>
@@ -1415,7 +1505,7 @@ html.light-mode .action-day svg{color:#1d5f36;}
         <article class="article" data-keywords="ответственность мусульман помогать другим">
           <div class="article-main"><a href="islamic_articles-ru/017-ru.html">Ответственность мусульман помогать другим</a><p>Почему помощь нуждающимся — ответственность каждого мусульманина.</p><div class="article-meta"><span class="tag">ответственность</span></div><div class="article-go"><a href="islamic_articles-ru/017-ru.html" aria-label="Перейти к статье"><span>ПЕРЕЙТИ</span><span aria-hidden="true" class="article-go-arrow">→</span></a></div></div>
           <div class="article-actions">
-            <button class="article-action" data-card-action="save" type="button" aria-label="Сохранить статью"><svg viewBox="0 0 24 24"><path d="M6 4.5A1.5 1.5 0 0 1 7.5 3h9A1.5 1.5 0 0 1 18 4.5V21l-6-3.5L6 21V4.5z"></path></svg></button>
+            <button class="article-action" data-card-action="save" type="button" aria-label="Добавить в закладку"><svg viewBox="0 0 24 24"><path d="M6 4.5A1.5 1.5 0 0 1 7.5 3h9A1.5 1.5 0 0 1 18 4.5V21l-6-3.5L6 21V4.5z"></path></svg></button>
             <button class="article-action" data-card-action="share" type="button" aria-label="Поделиться статьёй"><svg viewBox="0 0 24 24"><circle cx="18" cy="5" r="3"></circle><circle cx="6" cy="12" r="3"></circle><circle cx="18" cy="19" r="3"></circle><path d="M8.7 10.7l6.6-4.4M8.7 13.3l6.6 4.4"></path></svg></button>
             <button class="article-action" data-card-action="favorite" type="button" aria-label="В избранное"><svg viewBox="0 0 24 24"><path d="M12 3.6l2.45 5.05 5.55.8-4.02 3.92.95 5.53L12 16.3l-4.93 2.6.95-5.53L4 9.45l5.55-.8L12 3.6z"></path></svg></button>
           </div>
@@ -1423,7 +1513,7 @@ html.light-mode .action-day svg{color:#1d5f36;}
         <article class="article" data-keywords="справедливость милосердие ислам честность сострадание">
           <div class="article-main"><a href="islamic_articles-ru/018-ru.html">Справедливость и милосердие в исламе</a><p>Баланс между честностью и состраданием в жизни мусульманина.</p><div class="article-meta"><span class="tag">справедливость</span><span class="tag">милосердие</span></div><div class="article-go"><a href="islamic_articles-ru/018-ru.html" aria-label="Перейти к статье"><span>ПЕРЕЙТИ</span><span aria-hidden="true" class="article-go-arrow">→</span></a></div></div>
           <div class="article-actions">
-            <button class="article-action" data-card-action="save" type="button" aria-label="Сохранить статью"><svg viewBox="0 0 24 24"><path d="M6 4.5A1.5 1.5 0 0 1 7.5 3h9A1.5 1.5 0 0 1 18 4.5V21l-6-3.5L6 21V4.5z"></path></svg></button>
+            <button class="article-action" data-card-action="save" type="button" aria-label="Добавить в закладку"><svg viewBox="0 0 24 24"><path d="M6 4.5A1.5 1.5 0 0 1 7.5 3h9A1.5 1.5 0 0 1 18 4.5V21l-6-3.5L6 21V4.5z"></path></svg></button>
             <button class="article-action" data-card-action="share" type="button" aria-label="Поделиться статьёй"><svg viewBox="0 0 24 24"><circle cx="18" cy="5" r="3"></circle><circle cx="6" cy="12" r="3"></circle><circle cx="18" cy="19" r="3"></circle><path d="M8.7 10.7l6.6-4.4M8.7 13.3l6.6 4.4"></path></svg></button>
             <button class="article-action" data-card-action="favorite" type="button" aria-label="В избранное"><svg viewBox="0 0 24 24"><path d="M12 3.6l2.45 5.05 5.55.8-4.02 3.92.95 5.53L12 16.3l-4.93 2.6.95-5.53L4 9.45l5.55-.8L12 3.6z"></path></svg></button>
           </div>
