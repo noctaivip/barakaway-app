@@ -15,8 +15,9 @@ In the name of Allah, the Most Merciful, the Most Compassionate
 <script>
 (function(){
   const root = document.documentElement;
-  const keys = ['theme','app-theme','barakaway-theme','preferred-theme','color-theme'];
+  const keys = ['siteTheme','theme','app-theme','barakaway-theme','preferred-theme','color-theme'];
   let savedTheme = '';
+
   for(const key of keys){
     const value = localStorage.getItem(key);
     if(value && /^(dark|light|dark-mode|light-mode)$/i.test(value)){
@@ -24,11 +25,15 @@ In the name of Allah, the Most Merciful, the Most Compassionate
       break;
     }
   }
-  if(savedTheme){
-    const isLight = savedTheme === 'light' || savedTheme === 'light-mode';
-    root.classList.toggle('light-mode', isLight);
-    root.classList.toggle('dark-mode', !isLight);
+
+  if(!savedTheme){
+    savedTheme = 'dark';
+    localStorage.setItem('siteTheme','dark');
   }
+
+  const isLight = savedTheme === 'light' || savedTheme === 'light-mode';
+  root.classList.toggle('light-mode', isLight);
+  root.classList.toggle('dark-mode', !isLight);
 })();
 </script>
 <link rel="stylesheet" href="/theme.css">
@@ -1188,6 +1193,150 @@ html.light-mode .article-go a:hover{
   }
 }
 
+
+/* === FINAL: global theme sync + premium article CTA placement === */
+.article{
+  min-height:178px;
+  padding:20px 182px 24px 20px !important;
+  align-items:start !important;
+}
+.article-main{
+  min-width:0;
+}
+.article-actions{
+  position:absolute !important;
+  top:18px;
+  right:18px;
+  display:flex !important;
+  gap:10px !important;
+  z-index:3;
+}
+.article-go{
+  position:absolute;
+  right:18px;
+  bottom:18px;
+  margin:0 !important;
+  z-index:2;
+}
+.article-go a{
+  min-height:42px !important;
+  padding:9px 10px 9px 18px !important;
+  gap:12px !important;
+  border-radius:999px !important;
+  font-size:11px !important;
+  letter-spacing:.105em !important;
+  color:#fff8df !important;
+  border:1px solid rgba(240,216,145,.56) !important;
+  background:
+    linear-gradient(135deg,rgba(20,72,43,.98) 0%,rgba(45,122,70,.96) 46%,rgba(154,116,40,.95) 100%) !important;
+  box-shadow:
+    0 16px 34px rgba(0,0,0,.30),
+    0 0 0 1px rgba(215,181,109,.10),
+    inset 0 1px 0 rgba(255,255,255,.18),
+    inset 0 -1px 0 rgba(0,0,0,.22) !important;
+}
+.article-go a::after{
+  content:"";
+  position:absolute;
+  inset:2px;
+  border-radius:999px;
+  border:1px solid rgba(255,255,255,.08);
+  pointer-events:none;
+}
+.article-go a:hover{
+  transform:translateY(-2px) !important;
+  border-color:rgba(255,235,170,.88) !important;
+  background:
+    linear-gradient(135deg,#1f7a45 0%,#36a35e 48%,#c59b46 100%) !important;
+  box-shadow:
+    0 20px 42px rgba(0,0,0,.36),
+    0 0 26px rgba(215,181,109,.18),
+    inset 0 1px 0 rgba(255,255,255,.22) !important;
+}
+.article-go-arrow{
+  width:24px !important;
+  height:24px !important;
+  color:#17351f !important;
+  background:linear-gradient(180deg,#fff1b8,#d2a348 58%,#a87925) !important;
+  box-shadow:
+    0 8px 16px rgba(0,0,0,.26),
+    inset 0 1px 0 rgba(255,255,255,.65) !important;
+}
+html.light-mode .article-go a{
+  color:#17351f !important;
+  border-color:rgba(181,138,54,.38) !important;
+  background:
+    linear-gradient(135deg,#fff8df 0%,#e2c46e 45%,#2d7a46 100%) !important;
+  box-shadow:
+    0 14px 28px rgba(18,34,24,.12),
+    inset 0 1px 0 rgba(255,255,255,.92) !important;
+}
+html.light-mode .article-go a:hover{
+  color:#ffffff !important;
+  background:linear-gradient(135deg,#2d7a46 0%,#4caf6a 52%,#b58a36 100%) !important;
+}
+html.light-mode .article-go-arrow{
+  color:#12301d !important;
+  background:linear-gradient(180deg,#ffffff,#f0d891 58%,#c59b46) !important;
+}
+@media(max-width:720px){
+  .article{
+    display:block !important;
+    min-height:250px;
+    padding:22px 22px 94px 22px !important;
+  }
+  .article-main a{
+    display:inline-block;
+    padding-right:0;
+  }
+  .article-actions{
+    top:auto !important;
+    right:auto !important;
+    left:22px;
+    bottom:22px;
+    gap:10px !important;
+  }
+  .article-action{
+    width:48px !important;
+    height:48px !important;
+    background:rgba(255,255,255,.055) !important;
+    border-color:rgba(215,181,109,.24) !important;
+    box-shadow:0 10px 22px rgba(0,0,0,.16), inset 0 1px 0 rgba(255,255,255,.06);
+  }
+  html.light-mode .article-action{
+    background:rgba(255,255,255,.74) !important;
+    border-color:rgba(45,122,70,.16) !important;
+    box-shadow:0 10px 22px rgba(18,34,24,.08), inset 0 1px 0 rgba(255,255,255,.82);
+  }
+  .article-go{
+    right:22px;
+    bottom:23px;
+  }
+  .article-go a{
+    min-height:48px !important;
+    padding:10px 10px 10px 19px !important;
+    font-size:12px !important;
+    letter-spacing:.11em !important;
+    box-shadow:0 16px 30px rgba(18,34,24,.18), inset 0 1px 0 rgba(255,255,255,.18) !important;
+  }
+  .article-go-arrow{
+    width:28px !important;
+    height:28px !important;
+    font-size:15px !important;
+  }
+}
+@media(max-width:390px){
+  .article{
+    min-height:260px;
+    padding-left:18px !important;
+    padding-right:18px !important;
+  }
+  .article-actions{left:18px;gap:8px !important;}
+  .article-action{width:46px !important;height:46px !important;}
+  .article-go{right:18px;}
+  .article-go a{padding-left:16px !important;font-size:11px !important;}
+}
+
 </style>
 </head>
 
@@ -2233,7 +2382,7 @@ html.light-mode .article-go a:hover{
       if(action === 'save'){
         localStorage.setItem(SAVED_ARTICLE_KEY, data.url);
         syncSaved();
-        showToast('Статья сохранена');
+        showToast('Закладка сохранена');
         return;
       }
 
@@ -2291,12 +2440,12 @@ html.light-mode .article-go a:hover{
           clearSearchFocus();
           savedArticle.classList.add('search-focus');
           savedArticle.scrollIntoView({ behavior:'smooth', block:'center' });
-          showToast('Сохранённая статья показана на этой странице');
+          showToast('Закладка показана на этой странице');
         }else{
           showToast('Сохранённая статья не найдена на этой странице');
         }
       }else{
-        showToast('Сначала сохраните нужную статью');
+        showToast('Сначала добавьте статью в закладки');
       }
       return;
     }
