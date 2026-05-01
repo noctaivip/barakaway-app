@@ -5,7 +5,87 @@ In the name of Allah, the Most Merciful, the Most Compassionate
 <!DOCTYPE html>
 <html lang="ru" class="dark-mode">
 <head>
-<script defer data-domain="onedollarexit.com" src="https://plausible.io/js/script.js"></script>
+<script defer data-domain="onedollarexit.com" src="https://plausible.io/js/script.js">
+function drawPremiumShareMedallions(ctx, x, y, w, h){
+  ctx.save();
+  const r = Math.min(h * 0.38, w * 0.16);
+  const cy = y + h / 2;
+  const cx1 = x + w * 0.37;
+  const cx2 = x + w * 0.63;
+
+  const bg = ctx.createLinearGradient(x, y, x + w, y + h);
+  bg.addColorStop(0, "#062217");
+  bg.addColorStop(0.5, "#071115");
+  bg.addColorStop(1, "#12351f");
+  roundRect(ctx, x, y, w, h, 28);
+  ctx.fillStyle = bg;
+  ctx.fill();
+
+  ctx.strokeStyle = "rgba(215,181,109,.36)";
+  ctx.lineWidth = 2;
+  roundRect(ctx, x + 1, y + 1, w - 2, h - 2, 28);
+  ctx.stroke();
+
+  ctx.globalAlpha = .22;
+  ctx.strokeStyle = "#d7b56d";
+  ctx.lineWidth = 1.1;
+  for(let i = -h; i < w + h; i += 38){
+    ctx.beginPath();
+    ctx.moveTo(x + i, y + h);
+    ctx.lineTo(x + i + h, y);
+    ctx.stroke();
+    ctx.beginPath();
+    ctx.moveTo(x + i, y);
+    ctx.lineTo(x + i + h, y + h);
+    ctx.stroke();
+  }
+  ctx.globalAlpha = 1;
+
+  function medallion(cx, text){
+    const g = ctx.createRadialGradient(cx - r*.35, cy - r*.45, r*.12, cx, cy, r);
+    g.addColorStop(0, "#12351f");
+    g.addColorStop(.58, "#05090b");
+    g.addColorStop(1, "#000000");
+    ctx.beginPath();
+    ctx.arc(cx, cy, r, 0, Math.PI * 2);
+    ctx.fillStyle = g;
+    ctx.fill();
+
+    ctx.strokeStyle = "#d7b56d";
+    ctx.lineWidth = 4;
+    ctx.stroke();
+
+    ctx.beginPath();
+    ctx.arc(cx, cy, r - 10, 0, Math.PI * 2);
+    ctx.strokeStyle = "rgba(215,181,109,.48)";
+    ctx.lineWidth = 2;
+    ctx.stroke();
+
+    ctx.beginPath();
+    ctx.arc(cx, cy, r + 8, 0, Math.PI * 2);
+    ctx.setLineDash([3,5]);
+    ctx.strokeStyle = "rgba(215,181,109,.42)";
+    ctx.lineWidth = 1.4;
+    ctx.stroke();
+    ctx.setLineDash([]);
+
+    ctx.font = "700 " + Math.floor(r * .54) + "px Georgia, serif";
+    ctx.textAlign = "center";
+    ctx.textBaseline = "middle";
+    ctx.fillStyle = "#f6d98b";
+    ctx.shadowColor = "rgba(215,181,109,.35)";
+    ctx.shadowBlur = 14;
+    ctx.fillText(text, cx, cy + 1);
+    ctx.shadowBlur = 0;
+  }
+
+  medallion(cx1, "الله");
+  medallion(cx2, "محمد");
+
+  ctx.restore();
+}
+
+</script>
 <link rel="icon" type="image/png" href="/favicon.png">
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -1338,19 +1418,139 @@ html.light-mode .article-go-arrow{
 }
 
 
-/* === PREMIUM SHARE ORNAMENT (8-point geometry) === */
-.share-ornament{
-  margin:18px 0 10px;
-  height:120px;
-  border-radius:20px;
+
+/* === FINAL FIX: section article count badge without green === */
+.group-count{
   background:
-    radial-gradient(circle at 50% 50%, rgba(215,181,109,.18), transparent 70%),
-    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='600' height='120' viewBox='0 0 600 120'%3E%3Cg fill='none' stroke='%23d7b56d' stroke-width='1.2' opacity='0.6'%3E%3Cpolygon points='60,10 90,30 90,60 60,80 30,60 30,30'/%3E%3Cpolygon points='180,10 210,30 210,60 180,80 150,60 150,30'/%3E%3Cpolygon points='300,10 330,30 330,60 300,80 270,60 270,30'/%3E%3Cpolygon points='420,10 450,30 450,60 420,80 390,60 390,30'/%3E%3Cpolygon points='540,10 570,30 570,60 540,80 510,60 510,30'/%3E%3C/g%3E%3C/svg%3E");
-  background-size:cover;
-  border:1px solid rgba(215,181,109,.28);
+    radial-gradient(circle at 28% 18%, rgba(255,255,255,.18), transparent 36%),
+    linear-gradient(135deg,#8f6a24 0%,#d7b56d 48%,#5a4218 100%) !important;
+  color:#111814 !important;
+  border:1px solid rgba(255,238,180,.42) !important;
   box-shadow:
-    inset 0 1px 0 rgba(255,255,255,.06),
-    0 10px 28px rgba(0,0,0,.35);
+    0 12px 26px rgba(0,0,0,.18),
+    inset 0 1px 0 rgba(255,255,255,.34) !important;
+}
+html.dark-mode .group-count{
+  color:#fff8df !important;
+  background:
+    radial-gradient(circle at 28% 18%, rgba(255,255,255,.15), transparent 36%),
+    linear-gradient(135deg,#4a3514 0%,#b58a36 48%,#2a1f0d 100%) !important;
+  border-color:rgba(240,216,145,.36) !important;
+}
+
+
+/* === FINAL SHARE CARD ORNAMENT: Allah / Muhammad medallions only inside share card === */
+.share-ornament{
+  margin:18px auto 12px;
+  width:min(100%,520px);
+  height:132px;
+  border-radius:24px;
+  position:relative;
+  overflow:hidden;
+  border:1px solid rgba(215,181,109,.34);
+  background:
+    radial-gradient(circle at 28% 50%, rgba(215,181,109,.22), transparent 34%),
+    radial-gradient(circle at 72% 50%, rgba(215,181,109,.22), transparent 34%),
+    linear-gradient(135deg, rgba(6,34,23,.96), rgba(3,10,12,.98));
+  box-shadow:
+    inset 0 1px 0 rgba(255,255,255,.07),
+    inset 0 -18px 38px rgba(0,0,0,.22),
+    0 18px 42px rgba(0,0,0,.36);
+}
+.share-ornament::before{
+  content:"";
+  position:absolute;
+  inset:0;
+  opacity:.30;
+  background-image:
+    linear-gradient(30deg, transparent 47%, rgba(215,181,109,.45) 48%, rgba(215,181,109,.45) 52%, transparent 53%),
+    linear-gradient(150deg, transparent 47%, rgba(215,181,109,.32) 48%, rgba(215,181,109,.32) 52%, transparent 53%);
+  background-size:54px 54px;
+  mask-image:linear-gradient(90deg,transparent,black 16%,black 84%,transparent);
+}
+.share-ornament::after{
+  content:"";
+  position:absolute;
+  left:50%;
+  top:50%;
+  width:1px;
+  height:82px;
+  transform:translate(-50%,-50%);
+  background:linear-gradient(180deg,transparent,rgba(215,181,109,.55),transparent);
+  box-shadow:0 0 26px rgba(215,181,109,.20);
+}
+.share-medallions{
+  position:absolute;
+  inset:0;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  gap:34px;
+  z-index:2;
+}
+.share-medallion{
+  width:92px;
+  height:92px;
+  border-radius:50%;
+  position:relative;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  color:#f6d98b;
+  background:
+    radial-gradient(circle at 34% 24%, rgba(255,255,255,.24), transparent 20%),
+    radial-gradient(circle at 50% 50%, #092019 0%, #05090b 60%, #000 100%);
+  border:2px solid rgba(215,181,109,.74);
+  box-shadow:
+    0 0 0 5px rgba(181,138,54,.20),
+    0 0 0 9px rgba(215,181,109,.12),
+    0 14px 30px rgba(0,0,0,.38),
+    inset 0 1px 0 rgba(255,255,255,.14);
+}
+.share-medallion::before{
+  content:"";
+  position:absolute;
+  inset:8px;
+  border-radius:50%;
+  border:1px solid rgba(215,181,109,.40);
+  box-shadow:inset 0 0 18px rgba(215,181,109,.10);
+}
+.share-medallion::after{
+  content:"";
+  position:absolute;
+  inset:-7px;
+  border-radius:50%;
+  border:1px dashed rgba(215,181,109,.40);
+}
+.share-arabic{
+  direction:rtl;
+  font-family:"Times New Roman", serif;
+  font-size:30px;
+  font-weight:900;
+  line-height:1;
+  color:#f5d98d;
+  text-shadow:
+    0 2px 10px rgba(0,0,0,.55),
+    0 0 18px rgba(215,181,109,.18);
+}
+.share-spark{
+  position:absolute;
+  width:18px;
+  height:18px;
+  border-radius:50%;
+  background:radial-gradient(circle,#fff8d4 0%,#f0d891 28%,rgba(240,216,145,0) 68%);
+  filter:blur(.2px);
+  opacity:.86;
+}
+.share-spark.left{left:calc(50% - 128px);top:22px}
+.share-spark.right{right:calc(50% - 128px);top:22px}
+@media(max-width:720px){
+  .share-ornament{height:116px;border-radius:21px;}
+  .share-medallions{gap:24px;}
+  .share-medallion{width:78px;height:78px;}
+  .share-arabic{font-size:25px;}
+  .share-spark.left{left:calc(50% - 108px);top:20px}
+  .share-spark.right{right:calc(50% - 108px);top:20px}
 }
 
 </style>
@@ -2505,18 +2705,5 @@ html.light-mode .article-go-arrow{
 </script>
 
 <script src="/bottom-nav.js"></script>
-
-<div class="premium-ornament">
-<svg viewBox="0 0 600 120" width="100%" height="100%" preserveAspectRatio="none">
-<defs>
-<pattern id="islamicPattern" width="60" height="60" patternUnits="userSpaceOnUse">
-<path d="M30 0 L60 30 L30 60 L0 30 Z" fill="none" stroke="#d7b56d" stroke-width="0.6"/>
-<circle cx="30" cy="30" r="10" fill="none" stroke="#d7b56d" stroke-width="0.4"/>
-</pattern>
-</defs>
-<rect width="600" height="120" fill="url(#islamicPattern)" opacity="0.9"/>
-</svg>
-</div>
-
 </body>
 </html>
