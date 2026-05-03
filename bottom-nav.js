@@ -24,16 +24,16 @@
   var lang = detectLang();
 
   var labels = {
-    ru: { today:'Сегодня', favorites:'Избранное', quran:'Коран', holidays:'Праздники', learning:'Обучение' },
-    en: { today:'Today', favorites:'Favorites', quran:'Quran', holidays:'Holidays', learning:'Learning' },
-    kz: { today:'Бүгін', favorites:'Таңдаулы', quran:'Құран', holidays:'Мерекелер', learning:'Оқу' },
-    uz: { today:'Bugun', favorites:'Sevimli', quran:'Qurʼon', holidays:'Bayramlar', learning:'O‘rganish' },
-    tr: { today:'Bugün', favorites:'Favoriler', quran:'Kur’an', holidays:'Bayramlar', learning:'Öğrenme' },
-    ar: { today:'اليوم', favorites:'المفضلة', quran:'القرآن', holidays:'الأعياد', learning:'التعلّم' },
-    ur: { today:'آج', favorites:'پسندیدہ', quran:'قرآن', holidays:'اعیاد', learning:'تعلیم' },
-    id: { today:'Hari ini', favorites:'Favorit', quran:'Quran', holidays:'Hari raya', learning:'Belajar' },
-    bn: { today:'আজ', favorites:'প্রিয়', quran:'কুরআন', holidays:'উৎসব', learning:'শিক্ষা' },
-    hi: { today:'आज', favorites:'पसंदीदा', quran:'क़ुरआन', holidays:'त्योहार', learning:'सीखना' }
+    ru: { today:'Сегодня', favorites:'Избранное', names:'99 имён', chat:'Чат', learning:'Обучение' },
+    en: { today:'Today', favorites:'Favorites', names:'99 Names', chat:'Chat', learning:'Learning' },
+    kz: { today:'Бүгін', favorites:'Таңдаулы', names:'99 есім', chat:'Чат', learning:'Оқу' },
+    uz: { today:'Bugun', favorites:'Sevimli', names:'99 ism', chat:'Chat', learning:'O‘rganish' },
+    tr: { today:'Bugün', favorites:'Favoriler', names:'99 İsim', chat:'Sohbet', learning:'Öğrenme' },
+    ar: { today:'اليوم', favorites:'المفضلة', names:'الأسماء 99', chat:'محادثة', learning:'التعلّم' },
+    ur: { today:'آج', favorites:'پسندیدہ', names:'99 نام', chat:'چیٹ', learning:'تعلیم' },
+    id: { today:'Hari ini', favorites:'Favorit', names:'99 Nama', chat:'Chat', learning:'Belajar' },
+    bn: { today:'আজ', favorites:'প্রিয়', names:'৯৯ নাম', chat:'চ্যাট', learning:'শিক্ষা' },
+    hi: { today:'आज', favorites:'पसंदीदा', names:'99 नाम', chat:'चैट', learning:'सीखना' }
   };
 
   var L = labels[lang] || labels.ru;
@@ -121,12 +121,12 @@
     return '<svg class="bottom-nav-heart-svg" viewBox="0 0 24 24" aria-hidden="true"><path class="bottom-nav-heart-path" d="M12 20s-7-4.35-7-10.15A4.15 4.15 0 0 1 12 6.9a4.15 4.15 0 0 1 7 2.95C19 15.65 12 20 12 20Z"/></svg>';
   }
 
-  function iconQuran() {
-    return '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5.5 4.5h5.2c1.1 0 1.8.7 1.8 1.8v13.2c0-1-.8-1.7-1.8-1.7H5.5A1.5 1.5 0 0 1 4 16.3V6a1.5 1.5 0 0 1 1.5-1.5Z"/><path d="M18.5 4.5h-5.2c-1.1 0-1.8.7-1.8 1.8v13.2c0-1 .8-1.7 1.8-1.7h5.2A1.5 1.5 0 0 0 20 16.3V6a1.5 1.5 0 0 0-1.5-1.5Z"/><path d="M8 8.5h2"/><path d="M14 8.5h2"/></svg>';
+  function iconNames() {
+    return '<svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="8.5"/><path d="M8.7 15.6c1.1-2.9 2.2-5.8 3.3-8.7"/><path d="M15.3 15.6c-1.1-2.9-2.2-5.8-3.3-8.7"/><path d="M9.9 12.3h4.2"/></svg>';
   }
 
-  function iconHolidays() {
-    return '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3.5l2.15 4.35 4.8.7-3.48 3.38.82 4.78L12 14.45 7.71 16.71l.82-4.78L5.05 8.55l4.8-.7L12 3.5Z"/><path d="M4.5 20.5h15"/></svg>';
+  function iconChat() {
+    return '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 6.8A3.3 3.3 0 0 1 8.3 3.5h7.4A3.3 3.3 0 0 1 19 6.8v5.7a3.3 3.3 0 0 1-3.3 3.3h-4.4L6.6 20v-4.2A3.3 3.3 0 0 1 5 13V6.8Z"/><path d="M8.8 8.8h6.4"/><path d="M8.8 12h4.4"/></svg>';
   }
 
   function iconLearning() {
@@ -136,8 +136,8 @@
   var navItems = [
     { key:'today', label:L.today, href:file('home'), icon:iconToday },
     { key:'favorites', label:L.favorites, href:file('favorites'), icon:iconHeart },
-    { key:'quran', label:L.quran, href:file('quran'), icon:iconQuran },
-    { key:'holidays', label:L.holidays, href:file('holidays'), icon:iconHolidays },
+    { key:'names', label:L.names, href:file('names'), icon:iconNames },
+    { key:'chat', label:L.chat, href:file('private-chat'), icon:iconChat },
     { key:'learning', label:L.learning, href:file('learning'), icon:iconLearning }
   ];
 
@@ -160,21 +160,19 @@ function activeKey() {
   ) return 'favorites';
 
   if (
-    fileName.indexOf('quran-') === 0 ||
-    pageText.indexOf('quran') !== -1 ||
-    pageText.indexOf('surah') !== -1 ||
-    pageText.indexOf('коран') !== -1
-  ) return 'quran';
+    fileName.indexOf('names-') === 0 ||
+    pageText.indexOf('99 names') !== -1 ||
+    pageText.indexOf('99 им') !== -1 ||
+    pageText.indexOf('асма') !== -1
+  ) return 'names';
 
   if (
-    fileName.indexOf('holidays-') === 0 ||
-    pageText.indexOf('holiday') !== -1 ||
-    pageText.indexOf('holidays') !== -1 ||
-    pageText.indexOf('eid') !== -1 ||
-    pageText.indexOf('ramadan') !== -1 ||
-    pageText.indexOf('calendar') !== -1 ||
-    pageText.indexOf('празд') !== -1
-  ) return 'holidays';
+    fileName.indexOf('private-chat-') === 0 ||
+    fileName.indexOf('chat-') === 0 ||
+    pageText.indexOf('private chat') !== -1 ||
+    pageText.indexOf('приватный чат') !== -1 ||
+    pageText.indexOf('частный чат') !== -1
+  ) return 'chat';
 
   if (
     fileName.indexOf('learning-') === 0 ||
