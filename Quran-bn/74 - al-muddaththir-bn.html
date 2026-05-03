@@ -412,14 +412,60 @@ loadSurah();
 
   function rj(k,f){try{return JSON.parse(localStorage.getItem(k)||JSON.stringify(f));}catch(e){return f;}}
   function wj(k,v){localStorage.setItem(k,JSON.stringify(v));}
+  function quranCompatKeys(kind){
+    return [
+      P + kind,
+      'barakaway:quran:surah:bn:' + kind,
+      'barakaway:quran:surah:ru:' + kind
+    ].filter(function(value, index, arr){ return arr.indexOf(value) === index; });
+  }
+
+  function setQuranCompatArray(kind, arr){
+    quranCompatKeys(kind).forEach(function(key){ wj(key, arr); });
+  }
+
+  function setQuranCompatItem(kind, item){
+    quranCompatKeys(kind).forEach(function(key){ wj(key, item); });
+  }
+
+  function mirrorSurahFavoriteToApp(item, shouldAdd){
+    const keys = [
+      'barakaway_favorites_v1',
+      'barakaway:favorites:bn',
+      'barakaway:favorites'
+    ];
+    const appItem = {
+      type: 'quran-surah',
+      key: item.key || PAGE_KEY,
+      title: 'সূরা ' + (item.number || SURAH_NUMBER || '') + ' — ' + (item.title || SURAH_TITLE || ''),
+      name: 'সূরা ' + (item.number || SURAH_NUMBER || '') + ' — ' + (item.title || SURAH_TITLE || ''),
+      meta: (item.arabic || SURAH_ARABIC || '') + (item.meta ? ' · ' + item.meta : ''),
+      text: (item.arabic || SURAH_ARABIC || '') + (item.meta ? ' · ' + item.meta : ''),
+      href: item.href || location.href,
+      url: item.href || location.href,
+      savedAt: item.savedAt || Date.now()
+    };
+    keys.forEach(function(key){
+      const list = rj(key, []);
+      if(!Array.isArray(list)) return;
+      const filtered = list.filter(function(x){
+        return !(x && ((x.key && x.key === appItem.key) || (x.href && x.href === appItem.href) || (x.url && x.url === appItem.url)));
+      });
+      if(shouldAdd){
+        filtered.unshift(appItem);
+      }
+      wj(key, filtered);
+    });
+  }
+
   function toast(m){let t=document.querySelector('.quran-toast');if(!t){t=document.createElement('div');t.className='quran-toast';document.body.appendChild(t);}t.textContent=m;t.classList.add('is-visible');clearTimeout(toastTimer);toastTimer=setTimeout(()=>t.classList.remove('is-visible'),2100);}
   function esc(v){return String(v||'').replaceAll('&','&amp;').replaceAll('<','&lt;').replaceAll('>','&gt;').replaceAll('"','&quot;').replaceAll("'","&#039;");}
   function pageData(){return {type:'surah',key:PAGE_KEY,number:SURAH_NUMBER,title:SURAH_TITLE,arabic:SURAH_ARABIC,meta:SURAH_META,href:location.href};}
   function ayahData(btn){const c=btn.closest('.ayah-card');const n=btn.dataset.ayahNumber||'';return {type:'ayah',key:PAGE_KEY+'#ayah-'+n,surahNumber:SURAH_NUMBER,surahTitle:SURAH_TITLE,ayahNumber:n,arabic:btn.dataset.ayahArabic||c?.querySelector('.ayah-arabic')?.textContent?.trim()||'',translit:btn.dataset.ayahTranslit||c?.querySelector('.ayah-translit')?.textContent?.trim()||'',meaning:btn.dataset.ayahMeaning||c?.querySelector('.ayah-meaning')?.textContent?.trim()||'',href:location.href.split('#')[0]+'#ayah-'+n};}
-  function favs(){return rj(P+'favorites',[]);}
+  function favs(){const keys=quranCompatKeys('favorites');for(let i=0;i<keys.length;i++){const v=rj(keys[i],[]);if(Array.isArray(v)&&v.length)return v;}return [];}
   function setFavs(x){wj(P+'favorites',x);}
-  function toggleSurahFav(){const item=pageData();let f=favs(),e=f.some(x=>x.key===item.key);setFavs(e?f.filter(x=>x.key!==item.key):[Object.assign({savedAt:Date.now()},item)].concat(f));toast(e?'সূরা প্রিয় তালিকা থেকে সরানো হয়েছে':'সূরা প্রিয় তালিকায় যোগ করা হয়েছে');sync();}
-  function saveItem(item){wj(P+'lastSaved',Object.assign({savedAt:Date.now()},item));toast(item.type==='ayah'?'আয়াত সংরক্ষিত হয়েছে':'সূরা সংরক্ষিত হয়েছে');sync();}
+  function toggleSurahFav(){const item=pageData();let f=favs(),e=f.some(x=>x.key===item.key);let next=e?f.filter(x=>x.key!==item.key):[Object.assign({savedAt:Date.now()},item)].concat(f);setFavs(next);setQuranCompatArray('favorites',next);mirrorSurahFavoriteToApp(Object.assign({savedAt:Date.now()},item),!e);toast(e?'সূরা প্রিয় তালিকা থেকে সরানো হয়েছে':'সূরা প্রিয় তালিকায় যোগ করা হয়েছে');sync();}
+  function saveItem(item){const savedItem=Object.assign({savedAt:Date.now()},item);wj(P+'lastSaved',savedItem);setQuranCompatItem('lastSaved',savedItem);toast(item.type==='ayah'?'আয়াত সংরক্ষিত হয়েছে':'সূরা সংরক্ষিত হয়েছে');sync();}
   function goToSaved(){let s=rj(P+'lastSaved',null);if(!s||!s.href){toast('এখনও কোনো সংরক্ষিত স্থান নেই');return;} if(s.key&&s.key.startsWith(PAGE_KEY+'#ayah-')){let id=s.key.split('#').pop();let el=document.getElementById(id);if(el){el.scrollIntoView({behavior:'smooth',block:'center'});el.style.outline='2px solid rgba(240,216,145,.85)';el.style.outlineOffset='6px';setTimeout(()=>{el.style.outline='';el.style.outlineOffset='';},2400);toast('saved ayah opened');return;}} location.href=s.href;}
   function renderFavs(){const root=document.getElementById('quran-favorites-list');if(!root)return;let f=favs();if(!f.length){root.innerHTML='<div class="quran-empty-state">এখনও কোনো প্রিয় সূরা নেই। সূরার পৃষ্ঠার উপরের তারকা চিহ্নে চাপুন।</div>';return;}root.innerHTML=f.map(item=>{let title='সূরা '+esc(item.number)+' — '+esc(item.title);let meta=esc(item.arabic)+' · '+esc(item.meta);return '<div class="quran-favorite-item"><a href="'+esc(item.href)+'" style="text-decoration:none;color:inherit;min-width:0;"><div class="quran-favorite-title">'+title+'</div><div class="quran-favorite-meta">'+meta+'</div></a><a class="quran-favorite-open" href="'+esc(item.href)+'">›</a><button class="quran-favorite-remove" type="button" data-remove-favorite="'+esc(item.key)+'"><svg viewBox="0 0 24 24"><path d="M12 3.6l2.45 5.05 5.55.8-4.02 3.92.95 5.53L12 16.3l-4.93 2.6.95-5.53L4 9.45l5.55-.8L12 3.6z"/></svg></button></div>';}).join('');}
   function sync(){let keys=new Set(favs().map(x=>x.key)),saved=rj(P+'lastSaved',null);document.querySelectorAll('[data-surah-page-action="favorite"]').forEach(b=>b.classList.toggle('is-active',keys.has(PAGE_KEY)));document.querySelectorAll('[data-surah-page-action="save"]').forEach(b=>b.classList.toggle('is-active',!!saved));document.querySelectorAll('[data-ayah-action="save"]').forEach(b=>b.classList.toggle('is-active',saved&&saved.key===ayahData(b).key));let reading=localStorage.getItem(P+'readingMode')==='1';document.body.classList.toggle('quran-reading-mode',reading);let rb=document.querySelector('[data-surah-page-action="reading"]');if(rb)rb.classList.toggle('is-active',reading);let tb=document.querySelector('[data-surah-page-action="theme"]');if(tb)tb.classList.toggle('is-active',document.documentElement.classList.contains('dark-mode'));}
