@@ -2788,14 +2788,14 @@ html.light-mode .baraka-pro-text{color:#3f5147;}
   </div>
 
   <div class="today-hub-grid">
-    <a class="today-action today-daily-task" id="dailyArticleLink" href="javascript:void(0)" role="button" aria-label="দিনের আয়াত সহ" data-task-key="article">
+    <a class="today-action today-daily-task" id="dailyপ্রবন্ধLink" href="javascript:void(0)" role="button" aria-label="দিনের আয়াত সহ" data-task-key="article">
       <div class="today-action-top">
         <div class="today-action-icon">📖</div>
-        <div class="today-action-arrow today-task-status" id="dailyArticleStatus">→</div>
+        <div class="today-action-arrow today-task-status" id="dailyপ্রবন্ধStatus">→</div>
       </div>
       <div>
         <div class="today-action-title">দিনের আয়াত</div>
-        <div class="today-action-text" id="dailyArticleTitle">দিনের আয়াত লোড হচ্ছে...</div>
+        <div class="today-action-text" id="dailyপ্রবন্ধTitle">দিনের আয়াত লোড হচ্ছে...</div>
       </div>
     </a>
 
@@ -2816,16 +2816,16 @@ html.light-mode .baraka-pro-text{color:#3f5147;}
         <div class="today-action-arrow today-task-status" id="allahNameCounterValue">0/100</div>
       </div>
       <div>
-        <div class="today-action-title" id="allahNameToday">আল্লাহর নাম</div>
+        <div class="today-action-title" id="allahNameআজ">আল্লাহর নাম</div>
         <div class="today-action-text" id="allahNameMeaning">আজ এই নামের অর্থ শেখা হবে।</div>
         <div class="today-counter-track"><div class="today-counter-fill" id="allahNameCounterFill"></div></div>
       </div>
     </div>
 
-    <div class="today-action today-daily-task today-goal-action" id="dailyGoalCard" role="button" tabindex="0" data-task-key="goal" aria-label="দৈনিক লক্ষ্য">
+    <div class="today-action today-daily-task today-goal-action" id="dailyলক্ষ্যCard" role="button" tabindex="0" data-task-key="goal" aria-label="দৈনিক লক্ষ্য">
       <div class="today-action-top">
         <div class="today-action-icon">🎯</div>
-        <div class="today-action-arrow today-task-status" id="dailyGoalStatus">•</div>
+        <div class="today-action-arrow today-task-status" id="dailyলক্ষ্যStatus">•</div>
       </div>
       <div>
         <div class="today-action-title">দৈনিক লক্ষ্য</div>
@@ -2938,7 +2938,7 @@ function changeLanguageChoice(){localStorage.removeItem("siteLanguage");sessionS
 function openPrayerTimesPage(event){if(event&&event.target&&event.target.closest&&event.target.closest(".home-prayer-share-btn")) return;window.location.href="prayer-times-bn.html";}
 function openPrayerTimesPageFromKeyboard(event){if(event.key==="Enter"||event.key===" "){event.preventDefault();openPrayerTimesPage(event);}}
 let deferredInstallPrompt=null;let installVisibilityInFlight=false;
-function getShareUrl(){return window.location.href;}
+function getশেয়ারUrl(){return window.location.href;}
 function isStandaloneMode(){return window.matchMedia("(display-mode: standalone)").matches||window.navigator.standalone===true;}
 function isAndroid(){return /Android/i.test(navigator.userAgent||"");}
 function isIOS(){return /iPhone|iPad|iPod/i.test(navigator.userAgent||"");}
@@ -2948,19 +2948,19 @@ async function updateInstallButtonVisibility(){if(installVisibilityInFlight) ret
 function openCurrentPageInExternalBrowser(){const url=window.location.href;if(isAndroid()){const cleaned=url.replace(/^https?:\/\//,"");window.location.href="intent://"+cleaned+"#Intent;scheme=https;package=com.android.chrome;end";return true;}if(!isIOS()){window.open(url,"_blank","noopener,noreferrer");return true;}return false;}
 function openInstallHelp(){const o=document.getElementById("installHelpOverlay");if(!o) return;o.classList.add("open");o.setAttribute("aria-hidden","false");}
 function closeInstallHelp(){const o=document.getElementById("installHelpOverlay");if(!o) return;o.classList.remove("open");o.setAttribute("aria-hidden","true");}
-async function copyCurrentLink(){const url=getShareUrl(),msg=document.getElementById("shareCopyMsg");try{if(navigator.clipboard&&window.isSecureContext){await navigator.clipboard.writeText(url);}else{const t=document.createElement("textarea");t.value=url;t.setAttribute("readonly","readonly");t.style.position="absolute";t.style.left="-9999px";document.body.appendChild(t);t.select();document.execCommand("copy");document.body.removeChild(t);}if(msg){msg.textContent="অ্যাপের লিংক কপি হয়েছে।";msg.classList.add("show");setTimeout(function(){msg.classList.remove("show");},2200);}}catch(e){window.prompt("লিংকটি কপি করে বাহ্যিক ব্রাউজারে খুলুন:",url);}}
+async function copyCurrentLink(){const url=getশেয়ারUrl(),msg=document.getElementById("shareCopyMsg");try{if(navigator.clipboard&&window.isSecureContext){await navigator.clipboard.writeText(url);}else{const t=document.createElement("textarea");t.value=url;t.setAttribute("readonly","readonly");t.style.position="absolute";t.style.left="-9999px";document.body.appendChild(t);t.select();document.execCommand("copy");document.body.removeChild(t);}if(msg){msg.textContent="অ্যাপের লিংক কপি হয়েছে।";msg.classList.add("show");setTimeout(function(){msg.classList.remove("show");},2200);}}catch(e){window.prompt("লিংকটি কপি করে বাহ্যিক ব্রাউজারে খুলুন:",url);}}
 async function installApp(){if(deferredInstallPrompt){try{await deferredInstallPrompt.prompt();const c=await deferredInstallPrompt.userChoice;if(c&&c.outcome==="accepted") setTimeout(updateInstallButtonVisibility,300);}catch(e){}finally{deferredInstallPrompt=null;}return;}if(isStandaloneMode()){updateInstallButtonVisibility();return;}if(isInAppBrowser()){if(isAndroid()){const opened=openCurrentPageInExternalBrowser();if(!opened) openInstallHelp();return;}openInstallHelp();return;}if(isIOS()){openInstallHelp();return;}openInstallHelp();}
-function openShareOverlay(){const o=document.getElementById("shareOverlay"),m=document.getElementById("shareCopyMsg");if(!o) return;o.classList.add("open");o.setAttribute("aria-hidden","false");if(m) m.classList.remove("show");}
-function closeShareOverlay(){const o=document.getElementById("shareOverlay");if(!o) return;o.classList.remove("open");o.setAttribute("aria-hidden","true");}
-async function copyShareLink(){const url=getShareUrl(),msg=document.getElementById("shareCopyMsg");try{if(navigator.clipboard&&window.isSecureContext){await navigator.clipboard.writeText(url);}else{const t=document.createElement("textarea");t.value=url;t.setAttribute("readonly","readonly");t.style.position="absolute";t.style.left="-9999px";document.body.appendChild(t);t.select();document.execCommand("copy");document.body.removeChild(t);}if(msg){msg.classList.add("show");setTimeout(function(){msg.classList.remove("show");},2200);}}catch(e){window.prompt("লিংকটি কপি করে বাহ্যিক ব্রাউজারে খুলুন:",url);}}
-function openShareTarget(type){const url=encodeURIComponent(getShareUrl()),text=encodeURIComponent("BarakaWay");let target="";if(type==="telegram") target="https://t.me/share/url?url="+url+"&text="+text;if(type==="whatsapp") target="https://wa.me/?text="+text+"%20"+url;if(type==="facebook") target="https://www.facebook.com/sharer/sharer.php?u="+url;if(type==="x") target="https://twitter.com/intent/tweet?text="+text+"&url="+url;if(type==="linkedin") target="https://www.linkedin.com/sharing/share-offsite/?url="+url;if(type==="email") target="mailto:?subject=Hidden%20Sadaqa&body="+text+"%0A"+url;if(target) window.open(target,"_blank","noopener,noreferrer");}
-async function shareApp(){const data={title:"BarakaWay",text:"BarakaWay",url:getShareUrl()};if(navigator.share){try{await navigator.share(data);return;}catch(e){}}openShareOverlay();}
-async function sharePrayerTimes(event){if(event){event.preventDefault();event.stopPropagation();}const text=typeof window.buildPrayerTimesShareText==="function"?window.buildPrayerTimesShareText():"BarakaWay\nPrayer সময়";if(navigator.share){try{await navigator.share({title:"নামাজের সময়",text:text});return;}catch(e){}}try{if(navigator.clipboard&&window.isSecureContext){await navigator.clipboard.writeText(text);}else{const t=document.createElement("textarea");t.value=text;t.setAttribute("readonly","readonly");t.style.position="absolute";t.style.left="-9999px";document.body.appendChild(t);t.select();document.execCommand("copy");document.body.removeChild(t);}alert("নামাজের সময় কপি হয়েছে। এখন মেসেঞ্জারে পাঠানো যাবে।");}catch(e){window.prompt("নামাজের সময় কপি করুন:",text);}}
+function openশেয়ারOverlay(){const o=document.getElementById("shareOverlay"),m=document.getElementById("shareCopyMsg");if(!o) return;o.classList.add("open");o.setAttribute("aria-hidden","false");if(m) m.classList.remove("show");}
+function closeশেয়ারOverlay(){const o=document.getElementById("shareOverlay");if(!o) return;o.classList.remove("open");o.setAttribute("aria-hidden","true");}
+async function copyশেয়ারLink(){const url=getশেয়ারUrl(),msg=document.getElementById("shareCopyMsg");try{if(navigator.clipboard&&window.isSecureContext){await navigator.clipboard.writeText(url);}else{const t=document.createElement("textarea");t.value=url;t.setAttribute("readonly","readonly");t.style.position="absolute";t.style.left="-9999px";document.body.appendChild(t);t.select();document.execCommand("copy");document.body.removeChild(t);}if(msg){msg.classList.add("show");setTimeout(function(){msg.classList.remove("show");},2200);}}catch(e){window.prompt("লিংকটি কপি করে বাহ্যিক ব্রাউজারে খুলুন:",url);}}
+function openশেয়ারTarget(type){const url=encodeURIComponent(getশেয়ারUrl()),text=encodeURIComponent("BarakaWay");let target="";if(type==="telegram") target="https://t.me/share/url?url="+url+"&text="+text;if(type==="whatsapp") target="https://wa.me/?text="+text+"%20"+url;if(type==="facebook") target="https://www.facebook.com/sharer/sharer.php?u="+url;if(type==="x") target="https://twitter.com/intent/tweet?text="+text+"&url="+url;if(type==="linkedin") target="https://www.linkedin.com/sharing/share-offsite/?url="+url;if(type==="email") target="mailto:?subject=Hidden%20Sadaqa&body="+text+"%0A"+url;if(target) window.open(target,"_blank","noopener,noreferrer");}
+async function shareApp(){const data={title:"BarakaWay",text:"BarakaWay",url:getশেয়ারUrl()};if(navigator.share){try{await navigator.share(data);return;}catch(e){}}openশেয়ারOverlay();}
+async function sharePrayerTimes(event){if(event){event.preventDefault();event.stopPropagation();}const text=typeof window.buildPrayerTimesশেয়ারText==="function"?window.buildPrayerTimesশেয়ারText():"BarakaWay\nনামাজের সময়";if(navigator.share){try{await navigator.share({title:"নামাজের সময়",text:text});return;}catch(e){}}try{if(navigator.clipboard&&window.isSecureContext){await navigator.clipboard.writeText(text);}else{const t=document.createElement("textarea");t.value=text;t.setAttribute("readonly","readonly");t.style.position="absolute";t.style.left="-9999px";document.body.appendChild(t);t.select();document.execCommand("copy");document.body.removeChild(t);}alert("নামাজের সময় কপি হয়েছে। এখন মেসেঞ্জারে পাঠানো যাবে।");}catch(e){window.prompt("নামাজের সময় কপি করুন:",text);}}
 window.addEventListener("beforeinstallprompt",function(e){e.preventDefault();deferredInstallPrompt=e;updateInstallButtonVisibility();});
 window.addEventListener("appinstalled",function(){deferredInstallPrompt=null;updateInstallButtonVisibility();});
 window.addEventListener("pageshow",function(){updateInstallButtonVisibility();});
 document.addEventListener("visibilitychange",function(){if(!document.hidden) updateInstallButtonVisibility();});
-window.addEventListener("DOMContentLoaded",function(){const installBtn=document.getElementById("installBtn"),brandInstallTrigger=document.getElementById("brandInstallTrigger"),brandInstallHint=document.getElementById("brandInstallHint"),shareOverlay=document.getElementById("shareOverlay"),shareCloseBtn=document.getElementById("shareCloseBtn"),helpOverlay=document.getElementById("installHelpOverlay"),helpClose=document.getElementById("installHelpCloseBtn"),helpPrimary=document.getElementById("installHelpPrimaryBtn"),helpCopy=document.getElementById("installHelpCopyBtn");if(installBtn) installBtn.addEventListener("click",installApp);if(brandInstallTrigger) brandInstallTrigger.addEventListener("click",function(){if(window.innerWidth<=700&&!isStandaloneMode()) installApp();});if(brandInstallHint){brandInstallHint.addEventListener("click",installApp);brandInstallHint.addEventListener("keydown",function(e){if(e.key==="Enter"||e.key===" "){e.preventDefault();installApp();}});}if(shareCloseBtn) shareCloseBtn.addEventListener("click",closeShareOverlay);if(shareOverlay) shareOverlay.addEventListener("click",function(e){if(e.target===shareOverlay) closeShareOverlay();});if(helpClose) helpClose.addEventListener("click",closeInstallHelp);if(helpOverlay) helpOverlay.addEventListener("click",function(e){if(e.target===helpOverlay) closeInstallHelp();});if(helpPrimary) helpPrimary.addEventListener("click",function(){const opened=openCurrentPageInExternalBrowser();if(!opened) copyCurrentLink();});if(helpCopy) helpCopy.addEventListener("click",copyCurrentLink);document.querySelectorAll("[data-share]").forEach(function(button){button.addEventListener("click",async function(){const type=button.getAttribute("data-share");if(type==="copy"){await copyShareLink();return;}if(type==="more"){if(navigator.share){try{await navigator.share({title:"BarakaWay",text:"BarakaWay",url:getShareUrl()});closeShareOverlay();return;}catch(e){}}await copyShareLink();return;}openShareTarget(type);closeShareOverlay();});});updateInstallButtonVisibility();setTimeout(updateInstallButtonVisibility,1200);window.addEventListener("resize",updateInstallButtonVisibility);});
+window.addEventListener("DOMContentLoaded",function(){const installBtn=document.getElementById("installBtn"),brandInstallTrigger=document.getElementById("brandInstallTrigger"),brandInstallHint=document.getElementById("brandInstallHint"),shareOverlay=document.getElementById("shareOverlay"),shareCloseBtn=document.getElementById("shareCloseBtn"),helpOverlay=document.getElementById("installHelpOverlay"),helpClose=document.getElementById("installHelpCloseBtn"),helpPrimary=document.getElementById("installHelpPrimaryBtn"),helpCopy=document.getElementById("installHelpCopyBtn");if(installBtn) installBtn.addEventListener("click",installApp);if(brandInstallTrigger) brandInstallTrigger.addEventListener("click",function(){if(window.innerWidth<=700&&!isStandaloneMode()) installApp();});if(brandInstallHint){brandInstallHint.addEventListener("click",installApp);brandInstallHint.addEventListener("keydown",function(e){if(e.key==="Enter"||e.key===" "){e.preventDefault();installApp();}});}if(shareCloseBtn) shareCloseBtn.addEventListener("click",closeশেয়ারOverlay);if(shareOverlay) shareOverlay.addEventListener("click",function(e){if(e.target===shareOverlay) closeশেয়ারOverlay();});if(helpClose) helpClose.addEventListener("click",closeInstallHelp);if(helpOverlay) helpOverlay.addEventListener("click",function(e){if(e.target===helpOverlay) closeInstallHelp();});if(helpPrimary) helpPrimary.addEventListener("click",function(){const opened=openCurrentPageInExternalBrowser();if(!opened) copyCurrentLink();});if(helpCopy) helpCopy.addEventListener("click",copyCurrentLink);document.querySelectorAll("[data-share]").forEach(function(button){button.addEventListener("click",async function(){const type=button.getAttribute("data-share");if(type==="copy"){await copyশেয়ারLink();return;}if(type==="more"){if(navigator.share){try{await navigator.share({title:"BarakaWay",text:"BarakaWay",url:getশেয়ারUrl()});closeশেয়ারOverlay();return;}catch(e){}}await copyশেয়ারLink();return;}openশেয়ারTarget(type);closeশেয়ারOverlay();});});updateInstallButtonVisibility();setTimeout(updateInstallButtonVisibility,1200);window.addEventListener("resize",updateInstallButtonVisibility);});
 </script>
 <script>
 (function(){
@@ -2970,7 +2970,7 @@ window.addEventListener("DOMContentLoaded",function(){const installBtn=document.
 
   const promoTexts = [
     { text: "সব সেবা কাছাকাছি", brand: false },
-    { text: "tasksLocal", brand: true }
+    { text: "কাজsLocal", brand: true }
   ];
 
   let promoIndex = 0;
@@ -3106,7 +3106,7 @@ window.addEventListener("DOMContentLoaded",function(){const installBtn=document.
   };
 
   let nextPrayerTimer = null;
-  window.homePrayerShareState = {timings:null, location:UI.fallbackLocation, date:'', city:'Tashkent', country:'Uzbekistan'};
+  window.homePrayerশেয়ারState = {timings:null, location:UI.fallbackLocation, date:'', city:'Tashkent', country:'Uzbekistan'};
 
   function getPrayerSettings(){
     try{
@@ -3116,7 +3116,7 @@ window.addEventListener("DOMContentLoaded",function(){const installBtn=document.
     }
   }
 
-  function parseTodayTimeToDate(timeStr){
+  function parseআজTimeToDate(timeStr){
     const n = new Date();
     const clean = String(timeStr || '').split(' ')[0];
     const parts = clean.split(':').map(Number);
@@ -3127,10 +3127,10 @@ window.addEventListener("DOMContentLoaded",function(){const installBtn=document.
     const seq = ['Fajr','Dhuhr','Asr','Maghrib','Isha'];
     const now = new Date();
     for(const key of seq){
-      const d = parseTodayTimeToDate(t[key]);
+      const d = parseআজTimeToDate(t[key]);
       if(d > now) return {key, time:d};
     }
-    const tf = parseTodayTimeToDate(t.Fajr);
+    const tf = parseআজTimeToDate(t.Fajr);
     tf.setDate(tf.getDate() + 1);
     return {key:'Fajr', time:tf};
   }
@@ -3155,8 +3155,8 @@ window.addEventListener("DOMContentLoaded",function(){const installBtn=document.
       const city = (localStorage.getItem('prayer_city') || 'Tashkent').trim();
       const country = (localStorage.getItem('prayer_country') || 'Uzbekistan').trim();
       const settings = getPrayerSettings();
-      window.homePrayerShareState.city = city || 'Tashkent';
-      window.homePrayerShareState.country = country || 'Uzbekistan';
+      window.homePrayerশেয়ারState.city = city || 'Tashkent';
+      window.homePrayerশেয়ারState.country = country || 'Uzbekistan';
       const method = settings.method || '2';
       const school = settings.school || '1';
       const date = new Date();
@@ -3178,9 +3178,9 @@ window.addEventListener("DOMContentLoaded",function(){const installBtn=document.
 
       const locationText = `${city}${country ? ', ' + country : ''}`;
       elLocation.textContent = locationText || UI.fallbackLocation;
-      window.homePrayerShareState.timings = timings;
-      window.homePrayerShareState.location = locationText || UI.fallbackLocation;
-      window.homePrayerShareState.date = `${dd}.${mm}.${yyyy}`;
+      window.homePrayerশেয়ারState.timings = timings;
+      window.homePrayerশেয়ারState.location = locationText || UI.fallbackLocation;
+      window.homePrayerশেয়ারState.date = `${dd}.${mm}.${yyyy}`;
 
       const next = getNextPrayer(timings);
       const prayerName = UI.names[next.key] || next.key;
@@ -3197,8 +3197,8 @@ window.addEventListener("DOMContentLoaded",function(){const installBtn=document.
     }
   }
 
-  window.buildPrayerTimesShareText = function(){
-    const state = window.homePrayerShareState || {};
+  window.buildPrayerTimesশেয়ারText = function(){
+    const state = window.homePrayerশেয়ারState || {};
     const timings = state.timings || {};
     const clean = (value) => String(value || '--:--').split(' ')[0].slice(0,5);
     return [
@@ -3323,8 +3323,8 @@ window.addEventListener("DOMContentLoaded",function(){const installBtn=document.
   const articleDay = getDaysSince(articleStartDate);
   const articleIndex = articles.length ? articleDay % articles.length : 0;
   const article = articles[articleIndex];
-  const articleLink = document.getElementById('dailyArticleLink');
-  const articleTitle = document.getElementById('dailyArticleTitle');
+  const articleLink = document.getElementById('dailyপ্রবন্ধLink');
+  const articleTitle = document.getElementById('dailyপ্রবন্ধTitle');
   if(article && articleLink && articleTitle){
     articleLink.href = article.url;
     articleTitle.textContent = article.title;
@@ -3354,7 +3354,7 @@ window.addEventListener("DOMContentLoaded",function(){const installBtn=document.
   }
 
   const name = names[articleDay % names.length];
-  const nameEl = document.getElementById('allahNameToday');
+  const nameEl = document.getElementById('allahNameআজ');
   const meaningEl = document.getElementById('allahNameMeaning');
   const card = document.getElementById('allahNameCounterCard');
   const valueEl = document.getElementById('allahNameCounterValue');
@@ -3388,14 +3388,14 @@ window.addEventListener("DOMContentLoaded",function(){const installBtn=document.
   renderCounter();
 
   const practice = document.getElementById('dailyPracticeText');
-  const goalCard = document.getElementById('dailyGoalCard');
-  const goalStatus = document.getElementById('dailyGoalStatus');
+  const goalCard = document.getElementById('dailyলক্ষ্যCard');
+  const goalStatus = document.getElementById('dailyলক্ষ্যStatus');
   const goalKey = 'barakaway_daily_goal_done_' + todayKey;
   let goalDone = localStorage.getItem(goalKey) === '1';
 
   if(practice) practice.textContent = goals[articleDay % goals.length];
 
-  function renderGoal(){
+  function renderলক্ষ্য(){
     if(!goalCard) return;
     goalCard.classList.toggle('goal-done', goalDone);
     if(goalDone){
@@ -3413,23 +3413,23 @@ window.addEventListener("DOMContentLoaded",function(){const installBtn=document.
     if(goalStatus) goalStatus.textContent = hour >= 18 ? '!' : '•';
   }
 
-  function completeGoal(){
+  function completeলক্ষ্য(){
     goalDone = true;
     localStorage.setItem(goalKey,'1');
-    renderGoal();
+    renderলক্ষ্য();
   }
 
   if(goalCard){
-    goalCard.addEventListener('click', completeGoal);
+    goalCard.addEventListener('click', completeলক্ষ্য);
     goalCard.addEventListener('keydown', function(e){
       if(e.key === 'Enter' || e.key === ' '){
         e.preventDefault();
-        completeGoal();
+        completeলক্ষ্য();
       }
     });
   }
 
-  renderGoal();
+  renderলক্ষ্য();
 })();
 </script>
 
@@ -3482,8 +3482,8 @@ window.addEventListener("DOMContentLoaded",function(){const installBtn=document.
     'আল্লাহর একটি নির্দিষ্ট নিয়ামতের জন্য শুকরিয়া আদায় করুন।'
   ];
   const article = articles[dayNumber % articles.length];
-  const articleLink = document.getElementById('dailyArticleLink');
-  const articleTitle = document.getElementById('dailyArticleTitle');
+  const articleLink = document.getElementById('dailyপ্রবন্ধLink');
+  const articleTitle = document.getElementById('dailyপ্রবন্ধTitle');
   if(articleLink && articleTitle){ articleLink.href = article.url; articleTitle.textContent = article.title; }
   const hour = new Date().getHours();
   const currentAdhkarTitle = document.getElementById('currentAdhkarTitle');
@@ -3494,7 +3494,7 @@ window.addEventListener("DOMContentLoaded",function(){const installBtn=document.
     else{ currentAdhkarTitle.textContent = 'পরবর্তী আযকার'; currentAdhkarText.textContent = hour < 4 ? 'পরবর্তী — ফজরের পর সকালের আযকার।' : 'পরবর্তী — মাগরিবের কাছাকাছি সন্ধ্যার আযকার।'; }
   }
   const name = names[dayNumber % names.length];
-  const nameEl = document.getElementById('allahNameToday');
+  const nameEl = document.getElementById('allahNameআজ');
   const card = document.getElementById('allahNameCounterCard');
   const valueEl = document.getElementById('allahNameCounterValue');
   const fillEl = document.getElementById('allahNameCounterFill');
@@ -3525,8 +3525,8 @@ window.addEventListener("DOMContentLoaded",function(){const installBtn=document.
 
 <script>
 (function(){
-  const goalCard = document.getElementById('dailyGoalCard');
-  const goalStatus = document.getElementById('dailyGoalStatus');
+  const goalCard = document.getElementById('dailyলক্ষ্যCard');
+  const goalStatus = document.getElementById('dailyলক্ষ্যStatus');
   if(!goalCard || !goalStatus) return;
 
   function localDateKey(date){
@@ -3536,7 +3536,7 @@ window.addEventListener("DOMContentLoaded",function(){const installBtn=document.
     return y + '-' + m + '-' + d;
   }
 
-  function updateGoalState(){
+  function updateলক্ষ্যState(){
     const now = new Date();
     const key = 'barakaway_daily_goal_bn_' + localDateKey(now);
     const done = localStorage.getItem(key) === '1';
@@ -3561,11 +3561,11 @@ window.addEventListener("DOMContentLoaded",function(){const installBtn=document.
     const key = 'barakaway_daily_goal_bn_' + localDateKey(new Date());
     const done = localStorage.getItem(key) === '1';
     if(localStorage.getItem(key) === '1'){
-      updateGoalState();
+      updateলক্ষ্যState();
       return;
     }
     localStorage.setItem(key, '1');
-    updateGoalState();
+    updateলক্ষ্যState();
   });
 
   goalCard.addEventListener('keydown', function(e){
@@ -3575,8 +3575,8 @@ window.addEventListener("DOMContentLoaded",function(){const installBtn=document.
     }
   });
 
-  updateGoalState();
-  setInterval(updateGoalState, 60000);
+  updateলক্ষ্যState();
+  setInterval(updateলক্ষ্যState, 60000);
 })();
 </script>
 <script>
@@ -3612,7 +3612,7 @@ window.addEventListener("DOMContentLoaded",function(){const installBtn=document.
     return Math.max(0.10, Math.min(0.90, minutes / 1440)).toFixed(2);
   }
 
-  function applyTaskState(card, statusEl, name, openSymbol){
+  function applyকাজState(card, statusEl, name, openSymbol){
     if(!card) return;
 
     const done = isDone(name);
@@ -3631,8 +3631,8 @@ window.addEventListener("DOMContentLoaded",function(){const installBtn=document.
     card.setAttribute("aria-disabled", done ? "true" : "false");
   }
 
-  const articleCard = document.getElementById("dailyArticleLink");
-  const articleStatus = document.getElementById("dailyArticleStatus");
+  const articleCard = document.getElementById("dailyপ্রবন্ধLink");
+  const articleStatus = document.getElementById("dailyপ্রবন্ধStatus");
 
   const adhkarCard = document.getElementById("currentAdhkarLink");
   const adhkarStatus = document.getElementById("currentAdhkarStatus");
@@ -3641,13 +3641,13 @@ window.addEventListener("DOMContentLoaded",function(){const installBtn=document.
   const nameStatus = document.getElementById("allahNameCounterValue");
   const nameFill = document.getElementById("allahNameCounterFill");
 
-  const goalCard = document.getElementById("dailyGoalCard");
-  const goalStatus = document.getElementById("dailyGoalStatus");
+  const goalCard = document.getElementById("dailyলক্ষ্যCard");
+  const goalStatus = document.getElementById("dailyলক্ষ্যStatus");
 
   function renderAll(){
-    applyTaskState(articleCard, articleStatus, "article", "→");
-    applyTaskState(adhkarCard, adhkarStatus, "adhkar", "→");
-    applyTaskState(goalCard, goalStatus, "goal", "•");
+    applyকাজState(articleCard, articleStatus, "article", "→");
+    applyকাজState(adhkarCard, adhkarStatus, "adhkar", "→");
+    applyকাজState(goalCard, goalStatus, "goal", "•");
 
     if(nameCard){
       const done = isDone("name");
@@ -4277,7 +4277,7 @@ window.addEventListener("DOMContentLoaded",function(){const installBtn=document.
     }
   }
 
-  function pickAyahForToday(){
+  function pickAyahForআজ(){
     const today = localDateKey(new Date());
     const START_KEY = 'barakaway_linear_program_start_bn_v1';
     let start = localStorage.getItem(START_KEY);
@@ -4292,9 +4292,9 @@ window.addEventListener("DOMContentLoaded",function(){const installBtn=document.
   }
 
   function renderAyahCard(){
-    const ayah = pickAyahForToday();
-    const card = document.getElementById('dailyArticleLink');
-    const text = document.getElementById('dailyArticleTitle');
+    const ayah = pickAyahForআজ();
+    const card = document.getElementById('dailyপ্রবন্ধLink');
+    const text = document.getElementById('dailyপ্রবন্ধTitle');
     const title = card ? card.querySelector('.today-action-title') : null;
 
     if(card){
@@ -4328,7 +4328,7 @@ window.addEventListener("DOMContentLoaded",function(){const installBtn=document.
 
   renderAyahCard();
 
-  const card = document.getElementById('dailyArticleLink');
+  const card = document.getElementById('dailyপ্রবন্ধLink');
   if(card){
     card.addEventListener('click', function(event){
       event.preventDefault();
@@ -4489,7 +4489,7 @@ window.addEventListener("DOMContentLoaded",function(){const installBtn=document.
     try{return JSON.parse(value);}catch(e){return fallback;}
   }
 
-  function pickChallengeForToday(){
+  function pickChallengeForআজ(){
     const today = localDateKey(new Date());
     const START_KEY = 'barakaway_linear_program_start_bn_v1';
     let start = localStorage.getItem(START_KEY);
@@ -4504,7 +4504,7 @@ window.addEventListener("DOMContentLoaded",function(){const installBtn=document.
   }
 
   function renderChallenge(){
-    const selected = pickChallengeForToday();
+    const selected = pickChallengeForআজ();
     const card = document.getElementById('currentAdhkarLink');
     const title = document.getElementById('currentAdhkarTitle');
     const text = document.getElementById('currentAdhkarText');
@@ -6073,7 +6073,7 @@ window.addEventListener("DOMContentLoaded",function(){const installBtn=document.
     return Math.max(0.10, Math.min(0.90, minutes / 1440)).toFixed(2);
   }
 
-  function pickQuestionForToday(){
+  function pickQuestionForআজ(){
     const today = todayKey();
     const START_KEY = 'barakaway_linear_program_start_bn_v1';
     let start = localStorage.getItem(START_KEY);
@@ -6109,7 +6109,7 @@ window.addEventListener("DOMContentLoaded",function(){const installBtn=document.
   }
 
   function renderMicroQuestion(){
-    const selected = pickQuestionForToday();
+    const selected = pickQuestionForআজ();
     const q = selected.item;
     const answerState = getAnswerState();
     const done = isDone("micro") || (answerState && answerState.date === todayKey());
@@ -6278,7 +6278,7 @@ window.addEventListener("DOMContentLoaded",function(){const installBtn=document.
   }
 
   function getFajrDate(){
-    const timings = window.homePrayerShareState && window.homePrayerShareState.timings;
+    const timings = window.homePrayerশেয়ারState && window.homePrayerশেয়ারState.timings;
     if(!timings || !timings.Fajr) return null;
 
     const fajr = parseTimeToDate(timings.Fajr);
@@ -6482,7 +6482,7 @@ window.addEventListener("DOMContentLoaded",function(){const installBtn=document.
     const card = document.getElementById("allahNameCounterCard");
     const status = document.getElementById("allahNameCounterValue");
     const fill = document.getElementById("allahNameCounterFill");
-    const nameEl = document.getElementById("allahNameToday");
+    const nameEl = document.getElementById("allahNameআজ");
     const meaningEl = document.getElementById("allahNameMeaning");
 
     if(!card) return;
