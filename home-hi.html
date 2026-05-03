@@ -2679,6 +2679,122 @@ html.light-mode .baraka-pro-text{color:#3f5147;}
 .baraka-pro-action,.baraka-pro-arrow{display:none !important;}
 @media(max-width:700px){.baraka-pro-promo{margin:17px auto 8px;padding:20px 17px 19px;border-radius:24px;width:calc(100% - 12px);box-sizing:border-box;}.baraka-pro-promo::after{border-radius:22px;}.baraka-pro-title{font-size:24px;}.baraka-pro-text{font-size:13px;}.baraka-pro-price{font-size:13px;}}
 
+
+.my-saved-overlay{
+  display:none;
+  position:fixed;
+  inset:0;
+  z-index:3600;
+  align-items:flex-end;
+  justify-content:center;
+  padding:12px;
+  box-sizing:border-box;
+  backdrop-filter:blur(10px);
+  -webkit-backdrop-filter:blur(10px);
+}
+.my-saved-overlay.open{display:flex;}
+html.dark-mode .my-saved-overlay{background:rgba(5,10,8,.68);}
+html.light-mode .my-saved-overlay{background:rgba(15,24,18,.42);}
+.my-saved-sheet{
+  width:min(100%,560px);
+  max-height:82vh;
+  overflow:auto;
+  border-radius:28px 28px 20px 20px;
+  padding:18px;
+  box-sizing:border-box;
+}
+html.dark-mode .my-saved-sheet{
+  background:linear-gradient(180deg,#121b21,#0c1316);
+  border:1px solid rgba(215,181,109,.26);
+  box-shadow:0 28px 70px rgba(0,0,0,.55);
+  color:#fff;
+}
+html.light-mode .my-saved-sheet{
+  background:linear-gradient(180deg,#ffffff,#f6faf7);
+  border:1px solid rgba(45,122,70,.18);
+  box-shadow:0 28px 70px rgba(18,34,24,.22);
+  color:#111814;
+}
+.my-saved-head{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:12px;
+  margin-bottom:14px;
+}
+.my-saved-title{
+  font-size:22px;
+  font-weight:950;
+  letter-spacing:-.035em;
+}
+.my-saved-close{
+  width:40px;
+  height:40px;
+  border-radius:999px;
+  border:1px solid rgba(215,181,109,.24);
+  background:rgba(255,255,255,.06);
+  color:#d7b56d;
+  font-size:22px;
+  line-height:1;
+  cursor:pointer;
+  padding:0;
+}
+.my-saved-subtitle{
+  margin:-6px 0 14px;
+  font-size:13px;
+  line-height:1.45;
+  font-weight:700;
+}
+html.dark-mode .my-saved-subtitle{color:#b8c6bf;}
+html.light-mode .my-saved-subtitle{color:#5c6b62;}
+.my-saved-list{
+  display:grid;
+  gap:10px;
+}
+.my-saved-item{
+  display:block;
+  text-decoration:none;
+  padding:14px;
+  border-radius:18px;
+  border:1px solid transparent;
+}
+html.dark-mode .my-saved-item{
+  background:linear-gradient(135deg,rgba(255,255,255,.055),rgba(215,181,109,.06));
+  border-color:rgba(215,181,109,.18);
+  color:#fff;
+}
+html.light-mode .my-saved-item{
+  background:linear-gradient(135deg,#ffffff,#f0f8f3);
+  border-color:rgba(45,122,70,.12);
+  color:#111814;
+}
+.my-saved-item-title{
+  font-size:15px;
+  font-weight:950;
+  margin-bottom:4px;
+}
+.my-saved-item-meta{
+  font-size:12px;
+  line-height:1.4;
+  font-weight:700;
+}
+html.dark-mode .my-saved-item-meta{color:#b8c6bf;}
+html.light-mode .my-saved-item-meta{color:#617169;}
+.my-saved-empty{
+  padding:18px;
+  border-radius:18px;
+  text-align:center;
+  font-size:13px;
+  font-weight:750;
+  line-height:1.5;
+  border:1px dashed rgba(215,181,109,.28);
+}
+html.dark-mode .my-saved-empty{color:#cbd5df;}
+html.light-mode .my-saved-empty{color:#5c6b62;}
+@media(max-width:700px){
+  .premium-resource-grid{gap:10px;}
+  .my-saved-sheet{border-radius:26px 26px 18px 18px;padding:16px;}
+}
 </style>
 <script src="/theme-init.js"></script>
 <link rel="stylesheet" href="/theme.css">
@@ -2694,10 +2810,10 @@ html.light-mode .baraka-pro-text{color:#3f5147;}
     <span class="ripple"></span>
   </button>
   <div class="theme-toggle-center">
-    <span class="theme-toggle-label">Light mode</span>
+    <span class="theme-toggle-label">लाइट मोड</span>
     <input type="checkbox" class="theme-switch" id="themeSwitch" aria-label="Toggle theme">
   </div>
-  <button class="icon-btn right" onclick="shareApp()" aria-label="Share app">
+  <button class="icon-btn right" onclick="shareApp()" aria-label="शेयर करें app">
     <svg viewBox="0 0 24 24" aria-hidden="true">
       <path d="M18 16a2.99 2.99 0 00-2.39 1.2l-6.7-3.35a3.1 3.1 0 000-1.7l6.7-3.35A3 3 0 1014 6a3.1 3.1 0 00.08.68l-6.7 3.35a3 3 0 100 4.94l6.7 3.35A3 3 0 1018 16z"/>
     </svg>
@@ -2727,7 +2843,7 @@ html.light-mode .baraka-pro-text{color:#3f5147;}
   </div>
   <div class="desktop-action-right">
     <div class="desktop-theme-toggle-inner">
-      <span class="theme-toggle-label">Light mode</span>
+      <span class="theme-toggle-label">लाइट मोड</span>
       <input type="checkbox" class="theme-switch" id="desktopThemeSwitch" aria-label="Toggle theme">
     </div>
   </div>
@@ -2788,14 +2904,14 @@ html.light-mode .baraka-pro-text{color:#3f5147;}
   </div>
 
   <div class="today-hub-grid">
-    <a class="today-action today-daily-task" id="dailyArticleLink" href="javascript:void(0)" role="button" aria-label="अमल के साथ आज की आयत" data-task-key="article">
+    <a class="today-action today-daily-task" id="dailyलेखLink" href="javascript:void(0)" role="button" aria-label="अमल के साथ आज की आयत" data-task-key="article">
       <div class="today-action-top">
         <div class="today-action-icon">📖</div>
-        <div class="today-action-arrow today-task-status" id="dailyArticleStatus">→</div>
+        <div class="today-action-arrow today-task-status" id="dailyलेखStatus">→</div>
       </div>
       <div>
         <div class="today-action-title">आज की आयत</div>
-        <div class="today-action-text" id="dailyArticleTitle">आज की आयत लोड हो रही है...</div>
+        <div class="today-action-text" id="dailyलेखTitle">आज की आयत लोड हो रही है...</div>
       </div>
     </a>
 
@@ -2816,16 +2932,16 @@ html.light-mode .baraka-pro-text{color:#3f5147;}
         <div class="today-action-arrow today-task-status" id="allahNameCounterValue">0/100</div>
       </div>
       <div>
-        <div class="today-action-title" id="allahNameToday">अल्लाह का नाम</div>
+        <div class="today-action-title" id="allahNameआज">अल्लाह का नाम</div>
         <div class="today-action-text" id="allahNameMeaning">आज इस नाम का अर्थ याद करें।</div>
         <div class="today-counter-track"><div class="today-counter-fill" id="allahNameCounterFill"></div></div>
       </div>
     </div>
 
-    <div class="today-action today-daily-task today-goal-action" id="dailyGoalCard" role="button" tabindex="0" data-task-key="goal" aria-label="आज का लक्ष्य">
+    <div class="today-action today-daily-task today-goal-action" id="dailyलक्ष्यCard" role="button" tabindex="0" data-task-key="goal" aria-label="आज का लक्ष्य">
       <div class="today-action-top">
         <div class="today-action-icon">🎯</div>
-        <div class="today-action-arrow today-task-status" id="dailyGoalStatus">•</div>
+        <div class="today-action-arrow today-task-status" id="dailyलक्ष्यStatus">•</div>
       </div>
       <div>
         <div class="today-action-title">आज का लक्ष्य</div>
@@ -2855,9 +2971,17 @@ html.light-mode .baraka-pro-text{color:#3f5147;}
 </div>
 
 <div class="premium-resource-grid">
-  <a class="premium-resource-card" href="names-hi.html">
-    <div class="premium-resource-icon">☝️</div>
-    <div><div class="premium-resource-title">99 नाम</div><div class="premium-resource-text">अर्थ, चिंतन और ईमान की मज़बूती।</div></div>
+  <a class="premium-resource-card" href="quran-hi.html">
+    <div class="premium-resource-icon">📖</div>
+    <div><div class="premium-resource-title">क़ुरआन</div><div class="premium-resource-text">सूरह पढ़ना, सहेजना और अल्लाह के शब्दों से दैनिक जुड़ाव।</div></div>
+  </a>
+  <a class="premium-resource-card" href="holidays-hi.html">
+    <div class="premium-resource-icon">🌙</div>
+    <div><div class="premium-resource-title">इस्लामी त्योहार</div><div class="premium-resource-text">महत्वपूर्ण इस्लामी तारीखें और याद दिलाने वाली जानकारी एक जगह।</div></div>
+  </a>
+  <a class="premium-resource-card" href="mosques-hi.html">
+    <div class="premium-resource-icon">🕌</div>
+    <div><div class="premium-resource-title">पास की मस्जिदें</div><div class="premium-resource-text">अपने स्थान के पास नज़दीकी मस्जिदें खोजें।</div></div>
   </a>
   <a class="premium-resource-card" href="qibla-hi.html">
     <div class="premium-resource-icon">🧭</div>
@@ -2879,7 +3003,7 @@ html.light-mode .baraka-pro-text{color:#3f5147;}
 
   <a class="premium-resource-card" href="support-project-hi.html">
     <div class="premium-resource-icon">🤍</div>
-    <div><div class="premium-resource-title">छुपी हुई सदक़ा</div><div class="premium-resource-text">छुपकर सदक़ा - अल्लाह के लिए, लोगों के लिए नहीं</div></div>
+    <div><div class="premium-resource-title">छुपी हुई सदक़ा</div><div class="premium-resource-text">छुपकर सदक़ा - अल्लाह के लिए, लोगों के लिए नहीं।</div></div>
   </a>
 </div>
 
@@ -2907,7 +3031,7 @@ html.light-mode .baraka-pro-text{color:#3f5147;}
       <button class="share-action share-facebook" type="button" data-share="facebook"><div class="share-icon">f</div><span>Facebook</span></button>
       <button class="share-action share-x" type="button" data-share="x"><div class="share-icon">X</div><span>X</span></button>
       <button class="share-action share-linkedin" type="button" data-share="linkedin"><div class="share-icon">in</div><span>LinkedIn</span></button>
-      <button class="share-action share-email" type="button" data-share="email"><div class="share-icon">@</div><span>Email</span></button>
+      <button class="share-action share-email" type="button" data-share="email"><div class="share-icon">@</div><span>ईमेल</span></button>
       <button class="share-action share-copy" type="button" data-share="copy"><div class="share-icon">⧉</div><span>लिंक कॉपी करें</span></button>
       <button class="share-action share-more" type="button" data-share="more"><div class="share-icon">⋯</div><span>और</span></button>
     </div>
@@ -2955,7 +3079,7 @@ function closeShareOverlay(){const o=document.getElementById("shareOverlay");if(
 async function copyShareLink(){const url=getShareUrl(),msg=document.getElementById("shareCopyMsg");try{if(navigator.clipboard&&window.isSecureContext){await navigator.clipboard.writeText(url);}else{const t=document.createElement("textarea");t.value=url;t.setAttribute("readonly","readonly");t.style.position="absolute";t.style.left="-9999px";document.body.appendChild(t);t.select();document.execCommand("copy");document.body.removeChild(t);}if(msg){msg.classList.add("show");setTimeout(function(){msg.classList.remove("show");},2200);}}catch(e){window.prompt("लिंक कॉपी करें और इसे बाहरी ब्राउज़र में खोलें",url);}}
 function openShareTarget(type){const url=encodeURIComponent(getShareUrl()),text=encodeURIComponent("BarakaWay");let target="";if(type==="telegram") target="https://t.me/share/url?url="+url+"&text="+text;if(type==="whatsapp") target="https://wa.me/?text="+text+"%20"+url;if(type==="facebook") target="https://www.facebook.com/sharer/sharer.php?u="+url;if(type==="x") target="https://twitter.com/intent/tweet?text="+text+"&url="+url;if(type==="linkedin") target="https://www.linkedin.com/sharing/share-offsite/?url="+url;if(type==="email") target="mailto:?subject=Hidden%20Sadaqa&body="+text+"%0A"+url;if(target) window.open(target,"_blank","noopener,noreferrer");}
 async function shareApp(){const data={title:"BarakaWay",text:"BarakaWay",url:getShareUrl()};if(navigator.share){try{await navigator.share(data);return;}catch(e){}}openShareOverlay();}
-async function sharePrayerTimes(event){if(event){event.preventDefault();event.stopPropagation();}const text=typeof window.buildPrayerTimesShareText==="function"?window.buildPrayerTimesShareText():"BarakaWay\nनमाज़ के समय";if(navigator.share){try{await navigator.share({title:"नमाज़ के समय",text:text});return;}catch(e){}}try{if(navigator.clipboard&&window.isSecureContext){await navigator.clipboard.writeText(text);}else{const t=document.createElement("textarea");t.value=text;t.setAttribute("readonly","readonly");t.style.position="absolute";t.style.left="-9999px";document.body.appendChild(t);t.select();document.execCommand("copy");document.body.removeChild(t);}alert("नमाज़ के समय कॉपी हो गया। अब इसे मैसेंजर में भेज सकते हैं।");}catch(e){window.prompt("नमाज़ के समय कॉपी करें:",text);}}
+async function sharePrayerTimes(event){if(event){event.preventDefault();event.stopPropagation();}const text=typeof window.buildPrayerTimesshareText==="function"?window.buildPrayerTimesshareText():"BarakaWay\nनमाज़ के समय";if(navigator.share){try{await navigator.share({title:"नमाज़ के समय",text:text});return;}catch(e){}}try{if(navigator.clipboard&&window.isSecureContext){await navigator.clipboard.writeText(text);}else{const t=document.createElement("textarea");t.value=text;t.setAttribute("readonly","readonly");t.style.position="absolute";t.style.left="-9999px";document.body.appendChild(t);t.select();document.execCommand("copy");document.body.removeChild(t);}alert("नमाज़ के समय कॉपी हो गया। अब इसे मैसेंजर में भेज सकते हैं।");}catch(e){window.prompt("नमाज़ के समय कॉपी करें:",text);}}
 window.addEventListener("beforeinstallprompt",function(e){e.preventDefault();deferredInstallPrompt=e;updateInstallButtonVisibility();});
 window.addEventListener("appinstalled",function(){deferredInstallPrompt=null;updateInstallButtonVisibility();});
 window.addEventListener("pageshow",function(){updateInstallButtonVisibility();});
@@ -2970,7 +3094,7 @@ window.addEventListener("DOMContentLoaded",function(){const installBtn=document.
 
   const promoTexts = [
     { text: "सभी सेवाएँ पास में", brand: false },
-    { text: "TasksLocal", brand: true }
+    { text: "कार्यsLocal", brand: true }
   ];
 
   let promoIndex = 0;
@@ -3072,7 +3196,7 @@ window.addEventListener("DOMContentLoaded",function(){const installBtn=document.
     });
 
     labels.forEach(function(label){
-      label.textContent = theme === 'dark' ? 'Light mode' : 'Dark mode';
+      label.textContent = theme === 'dark' ? 'लाइट मोड' : 'डार्क मोड';
     });
   }
 
@@ -3116,7 +3240,7 @@ window.addEventListener("DOMContentLoaded",function(){const installBtn=document.
     }
   }
 
-  function parseTodayTimeToDate(timeStr){
+  function parseआजTimeToDate(timeStr){
     const n = new Date();
     const clean = String(timeStr || '').split(' ')[0];
     const parts = clean.split(':').map(Number);
@@ -3127,10 +3251,10 @@ window.addEventListener("DOMContentLoaded",function(){const installBtn=document.
     const seq = ['Fajr','Dhuhr','Asr','Maghrib','Isha'];
     const now = new Date();
     for(const key of seq){
-      const d = parseTodayTimeToDate(t[key]);
+      const d = parseआजTimeToDate(t[key]);
       if(d > now) return {key, time:d};
     }
-    const tf = parseTodayTimeToDate(t.Fajr);
+    const tf = parseआजTimeToDate(t.Fajr);
     tf.setDate(tf.getDate() + 1);
     return {key:'Fajr', time:tf};
   }
@@ -3197,7 +3321,7 @@ window.addEventListener("DOMContentLoaded",function(){const installBtn=document.
     }
   }
 
-  window.buildPrayerTimesShareText = function(){
+  window.buildPrayerTimesshareText = function(){
     const state = window.homePrayerShareState || {};
     const timings = state.timings || {};
     const clean = (value) => String(value || '--:--').split(' ')[0].slice(0,5);
@@ -3308,8 +3432,8 @@ window.addEventListener("DOMContentLoaded",function(){const installBtn=document.
   const articleDay = getDaysSince(articleStartDate);
   const articleIndex = articles.length ? articleDay % articles.length : 0;
   const article = articles[articleIndex];
-  const articleLink = document.getElementById('dailyArticleLink');
-  const articleTitle = document.getElementById('dailyArticleTitle');
+  const articleLink = document.getElementById('dailyलेखLink');
+  const articleTitle = document.getElementById('dailyलेखTitle');
   if(article && articleLink && articleTitle){
     articleLink.href = article.url;
     articleTitle.textContent = article.title;
@@ -3339,7 +3463,7 @@ window.addEventListener("DOMContentLoaded",function(){const installBtn=document.
   }
 
   const name = names[articleDay % names.length];
-  const nameEl = document.getElementById('allahNameToday');
+  const nameEl = document.getElementById('allahNameआज');
   const meaningEl = document.getElementById('allahNameMeaning');
   const card = document.getElementById('allahNameCounterCard');
   const valueEl = document.getElementById('allahNameCounterValue');
@@ -3373,14 +3497,14 @@ window.addEventListener("DOMContentLoaded",function(){const installBtn=document.
   renderCounter();
 
   const practice = document.getElementById('dailyPracticeText');
-  const goalCard = document.getElementById('dailyGoalCard');
-  const goalStatus = document.getElementById('dailyGoalStatus');
+  const goalCard = document.getElementById('dailyलक्ष्यCard');
+  const goalStatus = document.getElementById('dailyलक्ष्यStatus');
   const goalKey = 'barakaway_daily_goal_done_' + todayKey;
   let goalDone = localStorage.getItem(goalKey) === '1';
 
   if(practice) practice.textContent = goals[articleDay % goals.length];
 
-  function renderGoal(){
+  function renderलक्ष्य(){
     if(!goalCard) return;
     goalCard.classList.toggle('goal-done', goalDone);
     if(goalDone){
@@ -3398,23 +3522,23 @@ window.addEventListener("DOMContentLoaded",function(){const installBtn=document.
     if(goalStatus) goalStatus.textContent = hour >= 18 ? '!' : '•';
   }
 
-  function completeGoal(){
+  function completeलक्ष्य(){
     goalDone = true;
     localStorage.setItem(goalKey,'1');
-    renderGoal();
+    renderलक्ष्य();
   }
 
   if(goalCard){
-    goalCard.addEventListener('click', completeGoal);
+    goalCard.addEventListener('click', completeलक्ष्य);
     goalCard.addEventListener('keydown', function(e){
       if(e.key === 'Enter' || e.key === ' '){
         e.preventDefault();
-        completeGoal();
+        completeलक्ष्य();
       }
     });
   }
 
-  renderGoal();
+  renderलक्ष्य();
 })();
 </script>
 
@@ -3452,8 +3576,8 @@ window.addEventListener("DOMContentLoaded",function(){const installBtn=document.
     'अल्लाह ﷻ की एक खास नेमत पर शुक्र अदा करें।'
   ];
   const article = articles[dayNumber % articles.length];
-  const articleLink = document.getElementById('dailyArticleLink');
-  const articleTitle = document.getElementById('dailyArticleTitle');
+  const articleLink = document.getElementById('dailyलेखLink');
+  const articleTitle = document.getElementById('dailyलेखTitle');
   if(articleLink && articleTitle){ articleLink.href = article.url; articleTitle.textContent = article.title; }
   const hour = new Date().getHours();
   const currentAdhkarTitle = document.getElementById('currentAdhkarTitle');
@@ -3464,7 +3588,7 @@ window.addEventListener("DOMContentLoaded",function(){const installBtn=document.
     else{ currentAdhkarTitle.textContent = 'अगला अज़कार'; currentAdhkarText.textContent = hour < 4 ? 'निकटतम — फ़ज्र के बाद सुबह का अज़कार।' : 'निकटतम — मग़रिब के करीब शाम का अज़कार।'; }
   }
   const name = names[dayNumber % names.length];
-  const nameEl = document.getElementById('allahNameToday');
+  const nameEl = document.getElementById('allahNameआज');
   const card = document.getElementById('allahNameCounterCard');
   const valueEl = document.getElementById('allahNameCounterValue');
   const fillEl = document.getElementById('allahNameCounterFill');
@@ -3495,8 +3619,8 @@ window.addEventListener("DOMContentLoaded",function(){const installBtn=document.
 
 <script>
 (function(){
-  const goalCard = document.getElementById('dailyGoalCard');
-  const goalStatus = document.getElementById('dailyGoalStatus');
+  const goalCard = document.getElementById('dailyलक्ष्यCard');
+  const goalStatus = document.getElementById('dailyलक्ष्यStatus');
   if(!goalCard || !goalStatus) return;
 
   function localDateKey(date){
@@ -3506,7 +3630,7 @@ window.addEventListener("DOMContentLoaded",function(){const installBtn=document.
     return y + '-' + m + '-' + d;
   }
 
-  function updateGoalState(){
+  function updateलक्ष्यState(){
     const now = new Date();
     const key = 'barakaway_daily_goal_hi_' + localDateKey(now);
     const done = localStorage.getItem(key) === '1';
@@ -3531,11 +3655,11 @@ window.addEventListener("DOMContentLoaded",function(){const installBtn=document.
     const key = 'barakaway_daily_goal_hi_' + localDateKey(new Date());
     const done = localStorage.getItem(key) === '1';
     if(localStorage.getItem(key) === '1'){
-      updateGoalState();
+      updateलक्ष्यState();
       return;
     }
     localStorage.setItem(key, '1');
-    updateGoalState();
+    updateलक्ष्यState();
   });
 
   goalCard.addEventListener('keydown', function(e){
@@ -3545,8 +3669,8 @@ window.addEventListener("DOMContentLoaded",function(){const installBtn=document.
     }
   });
 
-  updateGoalState();
-  setInterval(updateGoalState, 60000);
+  updateलक्ष्यState();
+  setInterval(updateलक्ष्यState, 60000);
 })();
 </script>
 <script>
@@ -3582,7 +3706,7 @@ window.addEventListener("DOMContentLoaded",function(){const installBtn=document.
     return Math.max(0.10, Math.min(0.90, minutes / 1440)).toFixed(2);
   }
 
-  function applyTaskState(card, statusEl, name, openSymbol){
+  function applyकार्यState(card, statusEl, name, openSymbol){
     if(!card) return;
 
     const done = isDone(name);
@@ -3601,8 +3725,8 @@ window.addEventListener("DOMContentLoaded",function(){const installBtn=document.
     card.setAttribute("aria-disabled", done ? "true" : "false");
   }
 
-  const articleCard = document.getElementById("dailyArticleLink");
-  const articleStatus = document.getElementById("dailyArticleStatus");
+  const articleCard = document.getElementById("dailyलेखLink");
+  const articleStatus = document.getElementById("dailyलेखStatus");
 
   const adhkarCard = document.getElementById("currentAdhkarLink");
   const adhkarStatus = document.getElementById("currentAdhkarStatus");
@@ -3611,13 +3735,13 @@ window.addEventListener("DOMContentLoaded",function(){const installBtn=document.
   const nameStatus = document.getElementById("allahNameCounterValue");
   const nameFill = document.getElementById("allahNameCounterFill");
 
-  const goalCard = document.getElementById("dailyGoalCard");
-  const goalStatus = document.getElementById("dailyGoalStatus");
+  const goalCard = document.getElementById("dailyलक्ष्यCard");
+  const goalStatus = document.getElementById("dailyलक्ष्यStatus");
 
   function renderAll(){
-    applyTaskState(articleCard, articleStatus, "article", "→");
-    applyTaskState(adhkarCard, adhkarStatus, "adhkar", "→");
-    applyTaskState(goalCard, goalStatus, "goal", "•");
+    applyकार्यState(articleCard, articleStatus, "article", "→");
+    applyकार्यState(adhkarCard, adhkarStatus, "adhkar", "→");
+    applyकार्यState(goalCard, goalStatus, "goal", "•");
 
     if(nameCard){
       const done = isDone("name");
@@ -3721,107 +3845,507 @@ window.addEventListener("DOMContentLoaded",function(){const installBtn=document.
 <script>
 (function(){
   const ayahActions = [
-    {"ref": "2:83", "ayah": "लोगों से अच्छी बात कहो।", "task": "आज आसपास के लोगों से तीन शांत और अच्छी बातें कहें।"},
-    {"ref": "2:152", "ayah": "मुझे याद करो, मैं तुम्हें याद करूँगा।", "task": "आज दिन में दस बार अल्लाह को याद करें।"},
-    {"ref": "2:153", "ayah": "अल्लाह सब्र करने वालों के साथ है।", "task": "आज उकसाए जाने पर भी रूखा जवाब न दें।"},
-    {"ref": "2:195", "ayah": "अल्लाह भलाई करने वालों से प्रेम करता है।", "task": "आज एक नेक काम चुपचाप करें।"},
-    {"ref": "2:222", "ayah": "अल्लाह तौबा करने वालों से प्रेम करता है।", "task": "आज एक गुनाह पर सच्चे दिल से माफी माँगें।"},
-    {"ref": "2:263", "ayah": "अच्छी बात और माफी, तकलीफ देने वाली सदक़ा से बेहतर है।", "task": "आज अपनी मदद का एहसान किसी को न जताएँ।"},
-    {"ref": "2:286", "ayah": "अल्लाह किसी जान पर उसकी क्षमता से अधिक बोझ नहीं डालता।", "task": "आज अपने ऊपर जरूरत से ज्यादा दबाव न डालें।"},
-    {"ref": "3:17", "ayah": "सब्र करने वाले, सच्चे और आज्ञाकारी लोग नेक हैं।", "task": "आज ऐसी जगह सच चुनें जहाँ बहाना आसान हो।"},
-    {"ref": "3:134", "ayah": "वे गुस्सा पी जाते हैं और लोगों को माफ़ करते हैं।", "task": "गुस्सा आए तो अल्लाह के लिए दस सेकंड चुप रहें।"},
-    {"ref": "3:139", "ayah": "कमज़ोर न पड़ो और उदास न हो।", "task": "आज अपने बारे में निराशा का शब्द न बोलें।"},
-    {"ref": "3:146", "ayah": "अल्लाह सब्र करने वालों से प्रेम करता है।", "task": "आज एक छोटी परेशानी शिकायत के बिना स्वीकार करें।"},
-    {"ref": "3:159", "ayah": "उनसे नरमी से पेश आओ।", "task": "आज अपने करीबी से सामान्य से अधिक नरमी से बात करें।"},
-    {"ref": "3:173", "ayah": "हमारे लिए अल्लाह काफी है और वही श्रेष्ठ संरक्षक है।", "task": "चिंता के समय कहें: मेरे लिए अल्लाह काफी है।"},
-    {"ref": "4:36", "ayah": "माता-पिता, रिश्तेदार, अनाथ, गरीब और पड़ोसियों से भलाई करो।", "task": "आज किसी रिश्तेदार या पड़ोसी का ख्याल रखें।"},
-    {"ref": "4:58", "ayah": "अमानतें उनके हक़दारों को लौटा दो।", "task": "आज जो अमानत हो उसे देर न करें।"},
-    {"ref": "4:86", "ayah": "सलाम का जवाब बेहतर या वैसा ही दो।", "task": "आज सलाम का जवाब अधिक गर्मजोशी से दें।"},
-    {"ref": "4:135", "ayah": "न्याय पर मजबूती से खड़े रहो।", "task": "आज छोटी बात में भी अन्याय न करें।"},
-    {"ref": "5:2", "ayah": "भलाई और तक़वा में एक-दूसरे की मदद करो।", "task": "आज किसी अच्छे काम में एक व्यक्ति की मदद करें।"},
-    {"ref": "5:8", "ayah": "न्याय करो, यह तक़वा के अधिक निकट है।", "task": "आज स्थिति समझे बिना किसी पर फैसला न करें।"},
-    {"ref": "5:13", "ayah": "उन्हें माफ़ करो और दरगुज़र करो।", "task": "आज एक छोटी नाराज़गी छोड़ दें।"},
-    {"ref": "6:141", "ayah": "फिजूलखर्ची न करो।", "task": "आज एक अनावश्यक खर्च छोड़ दें।"},
-    {"ref": "6:152", "ayah": "न्याय की बात कहो, चाहे मामला करीबी का हो।", "task": "आज एक कठिन बात में ईमानदारी रखें।"},
-    {"ref": "7:31", "ayah": "खाओ और पियो, मगर फिजूलखर्ची न करो।", "task": "आज खाने या खरीदारी में अति से बचें।"},
-    {"ref": "7:56", "ayah": "अल्लाह की रहमत भलाई करने वालों के करीब है।", "task": "आज ऐसा काम करें जिससे किसी को लाभ पहुँचे।"},
-    {"ref": "7:199", "ayah": "माफ़ी अपनाओ, भलाई का हुक्म दो और अज्ञानियों से दूर रहो।", "task": "आज खाली बहस में शामिल न हों।"},
-    {"ref": "8:46", "ayah": "सब्र करो।", "task": "आज किसी को बीच में न काटें।"},
-    {"ref": "9:51", "ayah": "हम पर वही आएगा जो अल्लाह ने लिखा है।", "task": "डर लगे तो कहें: सब अल्लाह के अधिकार में है।"},
-    {"ref": "9:119", "ayah": "सच्चों के साथ रहो।", "task": "आज झूठ का समर्थन न करें।"},
-    {"ref": "10:62", "ayah": "अल्लाह के करीब लोगों पर न डर है न ग़म।", "task": "आज एक चिंताजनक सोच को दुआ में बदलें।"},
-    {"ref": "11:115", "ayah": "सब्र करो, अल्लाह नेक लोगों का बदला नष्ट नहीं करता।", "task": "आज एक उपयोगी काम पूरा करें।"},
-    {"ref": "12:18", "ayah": "सुंदर सब्र ही बेहतर है।", "task": "गलत समझे जाने पर भी कठोर जवाब न दें।"},
-    {"ref": "12:87", "ayah": "अल्लाह की रहमत से निराश न हो।", "task": "आज यह न कहें कि मुझसे कुछ नहीं होगा।"},
-    {"ref": "13:28", "ayah": "दिल अल्लाह की याद से सुकून पाते हैं।", "task": "बेचैनी आए तो छोटा ज़िक्र करें।"},
-    {"ref": "14:7", "ayah": "यदि तुम शुक्र करोगे तो मैं बढ़ाऊँगा।", "task": "आज पाँच नेमतों का नाम लें।"},
-    {"ref": "15:85", "ayah": "सुंदर तरीके से माफ़ करो।", "task": "आज एक बात बिना याद दिलाए माफ़ करें।"},
-    {"ref": "16:90", "ayah": "अल्लाह न्याय, भलाई और रिश्तेदारों की मदद का आदेश देता है।", "task": "आज किसी करीबी की बिना उलाहना मदद करें।"},
-    {"ref": "16:96", "ayah": "जो अल्लाह के पास है वह अधिक स्थायी है।", "task": "आज लोगों के बजाय आख़िरत के लिए एक काम चुनें।"},
-    {"ref": "16:125", "ayah": "हिकमत और अच्छी नसीहत से बुलाओ।", "task": "आज धर्म पर कठोर बहस न करें।"},
-    {"ref": "17:23", "ayah": "माता-पिता से नाराज़गी का शब्द भी न कहो।", "task": "आज माता-पिता या बड़े से नरम बात करें।"},
-    {"ref": "17:26", "ayah": "रिश्तेदार, गरीब और मुसाफिर को उसका हक़ दो।", "task": "आज जरूरतमंद या करीबी से कुछ उपयोगी बाँटें।"},
-    {"ref": "17:27", "ayah": "फिजूलखर्च लोग शैतानों के भाई हैं।", "task": "आज एक बेकार खर्च छोड़ें।"},
-    {"ref": "17:36", "ayah": "जिस बात का ज्ञान न हो उसके पीछे न चलो।", "task": "आज अपुष्ट जानकारी आगे न भेजें।"},
-    {"ref": "17:37", "ayah": "ज़मीन पर घमंड से न चलो।", "task": "आज अपनी बातों में घमंड न करें।"},
-    {"ref": "18:10", "ayah": "ऐ हमारे रब, हमें अपनी ओर से रहमत दे।", "task": "महत्वपूर्ण काम से पहले सही राह की दुआ करें।"},
-    {"ref": "18:28", "ayah": "उनके साथ सब्र करो जो अपने रब को पुकारते हैं।", "task": "आज अच्छे माहौल या लाभकारी याद के लिए समय दें।"},
-    {"ref": "20:14", "ayah": "मेरी याद के लिए नमाज़ क़ायम करो।", "task": "आज एक नमाज़ बिना जल्दी के पढ़ें।"},
-    {"ref": "20:44", "ayah": "उससे नरमी से बात करो।", "task": "आज कठिन व्यक्ति से भी नरमी से बोलें।"},
-    {"ref": "20:114", "ayah": "ऐ रब, मेरा ज्ञान बढ़ा।", "task": "आज अल्लाह के लिए एक उपयोगी बात सीखें।"},
-    {"ref": "21:35", "ayah": "हम तुम्हें बुराई और भलाई से आज़माते हैं।", "task": "आज एक परीक्षा पर शिकायत के बजाय हिकमत माँगें।"},
-    {"ref": "21:90", "ayah": "वे भलाई में जल्दी करते थे और उम्मीद व डर से पुकारते थे।", "task": "आज एक नेक काम टालें नहीं।"},
-    {"ref": "22:37", "ayah": "अल्लाह तक तुम्हारा तक़वा पहुँचता है।", "task": "आज एक काम दिखावे के बिना करें।"},
-    {"ref": "23:1-2", "ayah": "कामयाब हैं वे ईमान वाले जो नमाज़ में विनम्र हैं।", "task": "आज एक नमाज़ में जल्दबाज़ी और ध्यान भंग हटाएँ।"},
-    {"ref": "23:3", "ayah": "वे बेकार बातों से दूर रहते हैं।", "task": "आज एक खाली स्क्रॉल या बेकार बातचीत छोड़ें।"},
-    {"ref": "24:22", "ayah": "माफ़ करें और दरगुज़र करें।", "task": "दिल से एक छोटी शिकायत निकाल दें।"},
-    {"ref": "24:30", "ayah": "ईमान वालों से कहो अपनी निगाहें नीची रखें।", "task": "आज निगाह की हिफाज़त करें।"},
-    {"ref": "25:63", "ayah": "रहमान के बंदे ज़मीन पर विनम्रता से चलते हैं।", "task": "आज शब्दों और कामों में विनम्र रहें।"},
-    {"ref": "25:67", "ayah": "वे न फिजूलखर्ची करते हैं न कंजूसी।", "task": "आज खरीदारी या खाने में संतुलन चुनें।"},
-    {"ref": "28:77", "ayah": "भलाई करो जैसे अल्लाह ने तुम पर भलाई की।", "task": "आज जो तुम्हारे पास है उसी से किसी की मदद करें।"},
-    {"ref": "29:45", "ayah": "नमाज़ बुराई और अश्लीलता से रोकती है।", "task": "आज नमाज़ के बाद एक बुरे काम से रुकें।"},
-    {"ref": "29:69", "ayah": "जो हमारे लिए कोशिश करते हैं, हम उन्हें रास्ते दिखाते हैं।", "task": "आज सही दिशा में एक छोटा कदम बढ़ाएँ।"},
-    {"ref": "31:14", "ayah": "मेरा और अपने माता-पिता का शुक्र करो।", "task": "आज माता-पिता के लिए दुआ या अच्छा शब्द कहें।"},
-    {"ref": "31:17", "ayah": "जो तुम्हें पहुँचे उस पर सब्र करो।", "task": "आज एक कठिनाई पर शांत रहें।"},
-    {"ref": "31:18", "ayah": "लोगों से मुँह न फेरो और घमंड से न चलो।", "task": "आज किसी को ध्यान से सुनें।"},
-    {"ref": "31:19", "ayah": "मध्यम रहो और आवाज़ नीची रखो।", "task": "आज सामान्य से धीमे और शांत बोलें।"},
-    {"ref": "33:35", "ayah": "अल्लाह को बहुत याद करने वालों के लिए बड़ा प्रतिफल है।", "task": "आज 33 बार ज़िक्र समझ के साथ करें।"},
-    {"ref": "33:41", "ayah": "अल्लाह को बहुत याद करो।", "task": "आज ज़िक्र के लिए तीन छोटे समय रखें।"},
-    {"ref": "33:70", "ayah": "सही बात कहो।", "task": "आज अस्पष्ट नहीं, साफ और सच बोलें।"},
-    {"ref": "39:10", "ayah": "सब्र करने वालों को बेहिसाब बदला मिलेगा।", "task": "आज एक बात पर बिना चिढ़े सब्र करें।"},
-    {"ref": "39:53", "ayah": "अल्लाह की रहमत से निराश न हो।", "task": "आज माफी माँगकर दोबारा शुरुआत करें।"},
-    {"ref": "40:60", "ayah": "मुझे पुकारो, मैं तुम्हें जवाब दूँगा।", "task": "आज अपने शब्दों में एक निजी दुआ करें।"},
-    {"ref": "41:34", "ayah": "बुराई को बेहतर तरीके से टालो।", "task": "आज एक बुरी बात का जवाब भलाई से दें।"},
-    {"ref": "42:36", "ayah": "जो अल्लाह के पास है वह बेहतर और स्थायी है।", "task": "आज खाली आनंद के बदले आख़िरत का लाभ चुनें।"},
-    {"ref": "42:37", "ayah": "जब वे गुस्सा होते हैं तो माफ़ करते हैं।", "task": "आज गुस्से में शब्द से चोट न दें।"},
-    {"ref": "42:40", "ayah": "जो माफ़ करे और सुधार करे, उसका बदला अल्लाह के पास है।", "task": "आज सुलह या दिल की सफाई की ओर कदम लें।"},
-    {"ref": "45:15", "ayah": "जो भलाई करता है, अपने लिए करता है।", "task": "आज नेकी करें और धन्यवाद की प्रतीक्षा न करें।"},
-    {"ref": "47:7", "ayah": "यदि तुम अल्लाह के दीन की मदद करो, वह तुम्हारी मदद करेगा।", "task": "आज किसी लाभकारी इस्लामी काम का समर्थन करें।"},
-    {"ref": "49:10", "ayah": "ईमान वाले भाई हैं, भाइयों में सुलह कराओ।", "task": "आज लोगों के बीच विवाद न बढ़ाएँ।"},
-    {"ref": "49:11", "ayah": "एक समूह दूसरे का मज़ाक न उड़ाए।", "task": "आज ऐसी मज़ाक न करें जिससे कोई नीचा हो।"},
-    {"ref": "49:12", "ayah": "अधिक संदेह और पीठ पीछे बात से बचो।", "task": "आज किसी की ग़ीबत न करें।"},
-    {"ref": "50:18", "ayah": "कोई शब्द नहीं निकलता मगर निगरानी मौजूद है।", "task": "संदेश भेजने से पहले शब्दों पर ध्यान दें।"},
-    {"ref": "51:56", "ayah": "मैंने जिन्न और इंसान को केवल इबादत के लिए पैदा किया।", "task": "आज एक सामान्य काम भी अल्लाह के लिए करें।"},
-    {"ref": "57:20", "ayah": "दुनिया की जिंदगी अस्थायी आनंद है।", "task": "आज दुनिया की छोटी बात पर अधिक परेशान न हों।"},
-    {"ref": "57:23", "ayah": "जो खो गया उस पर अधिक दुख और जो मिला उस पर घमंड न करो।", "task": "आज संतुलन रखें: न घबराहट, न घमंड।"},
-    {"ref": "59:18", "ayah": "हर जान देखे कि उसने कल के लिए क्या भेजा।", "task": "सोने से पहले दिन का एक काम परखें।"},
-    {"ref": "64:16", "ayah": "अल्लाह से अपनी क्षमता भर डरते रहो।", "task": "आज पूर्णता नहीं, ईमानदारी से संभव काम करें।"},
-    {"ref": "65:2-3", "ayah": "जो अल्लाह से डरे, वह उसके लिए रास्ता और रोज़ी बना देता है।", "task": "आज कठिनाई में हलाल रास्ता चुनें।"},
-    {"ref": "65:7", "ayah": "अल्लाह किसी पर उससे अधिक बोझ नहीं डालता जितना उसे दिया।", "task": "अपनी क्षमता की तुलना दूसरों से न करें।"},
-    {"ref": "67:2", "ayah": "उसने जीवन और मृत्यु पैदा किए ताकि देखे कौन बेहतर कर्म करता है।", "task": "आज एक छोटे काम को बेहतर करें।"},
-    {"ref": "70:5", "ayah": "सुंदर सब्र करो।", "task": "आज बिना शिकायत और कठोरता के सब्र करें।"},
-    {"ref": "73:8", "ayah": "अपने रब का नाम याद करो और पूरी तरह उसकी ओर मुड़ो।", "task": "आज एक मिनट केवल अल्लाह की ओर ध्यान दें।"},
-    {"ref": "74:7", "ayah": "अपने रब के लिए सब्र करो।", "task": "आज एक परेशानी अल्लाह के लिए सहें।"},
-    {"ref": "76:8-9", "ayah": "वे अल्लाह की खातिर खिलाते हैं, बदला और धन्यवाद नहीं चाहते।", "task": "आज किसी की मदद बिना प्रतिफल की चाह करें।"},
-    {"ref": "87:14-15", "ayah": "कामयाब हुआ जिसने पाकी अपनाई, रब को याद किया और नमाज़ पढ़ी।", "task": "आज एक नीयत साफ करें।"},
-    {"ref": "90:17", "ayah": "वे सब्र और रहमत की सलाह देते हैं।", "task": "आज किसी को नरम शब्द से सहारा दें।"},
-    {"ref": "92:5-7", "ayah": "जो देता है और तक़वा रखता है, हम उसके लिए आसानी कर देंगे।", "task": "आज थोड़ा दें: धन, समय या ध्यान।"},
-    {"ref": "93:10", "ayah": "माँगने वाले को न झिड़को।", "task": "आज मदद माँगने वाले से कठोर बात न करें।"},
-    {"ref": "93:11", "ayah": "अपने रब की नेमत बयान करो।", "task": "आज एक नेमत याद कर शुक्र करें।"},
-    {"ref": "94:5", "ayah": "कठिनाई के साथ आसानी है।", "task": "आज एक कठिनाई से हार न मानें।"},
-    {"ref": "94:6", "ayah": "निश्चय ही कठिनाई के साथ आसानी है।", "task": "मुश्किल समय में इसे खुद से दोहराएँ।"},
-    {"ref": "95:4", "ayah": "हमने इंसान को उत्तम रूप में पैदा किया।", "task": "आज अपने सम्मान को शब्दों से न तोड़ें।"}
-  ];
+  {
+    "ref": "2:83",
+    "ayah": "लोगों से अच्छी बात कहो।",
+    "task": "आज आसपास के लोगों से तीन शांत और अच्छी बातें कहें।"
+  },
+  {
+    "ref": "2:152",
+    "ayah": "मुझे याद करो, मैं तुम्हें याद करूँगा।",
+    "task": "आज दिन में दस बार अल्लाह को याद करें।"
+  },
+  {
+    "ref": "2:153",
+    "ayah": "अल्लाह सब्र करने वालों के साथ है।",
+    "task": "आज उकसाए जाने पर भी रूखा जवाब न दें।"
+  },
+  {
+    "ref": "2:195",
+    "ayah": "अल्लाह भलाई करने वालों से प्रेम करता है।",
+    "task": "आज एक नेक काम चुपचाप करें।"
+  },
+  {
+    "ref": "2:222",
+    "ayah": "अल्लाह तौबा करने वालों से प्रेम करता है।",
+    "task": "आज एक गुनाह पर सच्चे दिल से माफी माँगें।"
+  },
+  {
+    "ref": "2:263",
+    "ayah": "अच्छी बात और माफी, तकलीफ देने वाली सदक़ा से बेहतर है।",
+    "task": "आज अपनी मदद का एहसान किसी को न जताएँ।"
+  },
+  {
+    "ref": "2:286",
+    "ayah": "अल्लाह किसी जान पर उसकी क्षमता से अधिक बोझ नहीं डालता।",
+    "task": "आज अपने ऊपर जरूरत से ज्यादा दबाव न डालें।"
+  },
+  {
+    "ref": "3:17",
+    "ayah": "सब्र करने वाले, सच्चे और आज्ञाकारी लोग नेक हैं।",
+    "task": "आज ऐसी जगह सच चुनें जहाँ बहाना आसान हो।"
+  },
+  {
+    "ref": "3:134",
+    "ayah": "वे गुस्सा पी जाते हैं और लोगों को माफ़ करते हैं।",
+    "task": "गुस्सा आए तो अल्लाह के लिए दस सेकंड चुप रहें।"
+  },
+  {
+    "ref": "3:139",
+    "ayah": "कमज़ोर न पड़ो और उदास न हो।",
+    "task": "आज अपने बारे में निराशा का शब्द न बोलें।"
+  },
+  {
+    "ref": "3:146",
+    "ayah": "अल्लाह सब्र करने वालों से प्रेम करता है।",
+    "task": "आज एक छोटी परेशानी शिकायत के बिना स्वीकार करें।"
+  },
+  {
+    "ref": "3:159",
+    "ayah": "उनसे नरमी से पेश आओ।",
+    "task": "आज अपने करीबी से सामान्य से अधिक नरमी से बात करें।"
+  },
+  {
+    "ref": "3:173",
+    "ayah": "हमारे लिए अल्लाह काफी है और वही श्रेष्ठ संरक्षक है।",
+    "task": "चिंता के समय कहें: मेरे लिए अल्लाह काफी है।"
+  },
+  {
+    "ref": "4:36",
+    "ayah": "माता-पिता, रिश्तेदार, अनाथ, गरीब और पड़ोसियों से भलाई करो।",
+    "task": "आज किसी रिश्तेदार या पड़ोसी का ख्याल रखें।"
+  },
+  {
+    "ref": "4:58",
+    "ayah": "अमानतें उनके हक़दारों को लौटा दो।",
+    "task": "आज जो अमानत हो उसे देर न करें।"
+  },
+  {
+    "ref": "4:86",
+    "ayah": "सलाम का जवाब बेहतर या वैसा ही दो।",
+    "task": "आज सलाम का जवाब अधिक गर्मजोशी से दें।"
+  },
+  {
+    "ref": "4:135",
+    "ayah": "न्याय पर मजबूती से खड़े रहो।",
+    "task": "आज छोटी बात में भी अन्याय न करें।"
+  },
+  {
+    "ref": "5:2",
+    "ayah": "भलाई और तक़वा में एक-दूसरे की मदद करो।",
+    "task": "आज किसी अच्छे काम में एक व्यक्ति की मदद करें।"
+  },
+  {
+    "ref": "5:8",
+    "ayah": "न्याय करो, यह तक़वा के अधिक निकट है।",
+    "task": "आज स्थिति समझे बिना किसी पर फैसला न करें।"
+  },
+  {
+    "ref": "5:13",
+    "ayah": "उन्हें माफ़ करो और दरगुज़र करो।",
+    "task": "आज एक छोटी नाराज़गी छोड़ दें।"
+  },
+  {
+    "ref": "6:141",
+    "ayah": "फिजूलखर्ची न करो।",
+    "task": "आज एक अनावश्यक खर्च छोड़ दें।"
+  },
+  {
+    "ref": "6:152",
+    "ayah": "न्याय की बात कहो, चाहे मामला करीबी का हो।",
+    "task": "आज एक कठिन बात में ईमानदारी रखें।"
+  },
+  {
+    "ref": "7:31",
+    "ayah": "खाओ और पियो, मगर फिजूलखर्ची न करो।",
+    "task": "आज खाने या खरीदारी में अति से बचें।"
+  },
+  {
+    "ref": "7:56",
+    "ayah": "अल्लाह की रहमत भलाई करने वालों के करीब है।",
+    "task": "आज ऐसा काम करें जिससे किसी को लाभ पहुँचे।"
+  },
+  {
+    "ref": "7:199",
+    "ayah": "माफ़ी अपनाओ, भलाई का हुक्म दो और अज्ञानियों से दूर रहो।",
+    "task": "आज खाली बहस में शामिल न हों।"
+  },
+  {
+    "ref": "8:46",
+    "ayah": "सब्र करो।",
+    "task": "आज किसी को बीच में न काटें।"
+  },
+  {
+    "ref": "9:51",
+    "ayah": "हम पर वही आएगा जो अल्लाह ने लिखा है।",
+    "task": "डर लगे तो कहें: सब अल्लाह के अधिकार में है।"
+  },
+  {
+    "ref": "9:119",
+    "ayah": "सच्चों के साथ रहो।",
+    "task": "आज झूठ का समर्थन न करें।"
+  },
+  {
+    "ref": "10:62",
+    "ayah": "अल्लाह के करीब लोगों पर न डर है न ग़म।",
+    "task": "आज एक चिंताजनक सोच को दुआ में बदलें।"
+  },
+  {
+    "ref": "11:115",
+    "ayah": "सब्र करो, अल्लाह नेक लोगों का बदला नष्ट नहीं करता।",
+    "task": "आज एक उपयोगी काम पूरा करें।"
+  },
+  {
+    "ref": "12:18",
+    "ayah": "सुंदर सब्र ही बेहतर है।",
+    "task": "गलत समझे जाने पर भी कठोर जवाब न दें।"
+  },
+  {
+    "ref": "12:87",
+    "ayah": "अल्लाह की रहमत से निराश न हो।",
+    "task": "आज यह न कहें कि मुझसे कुछ नहीं होगा।"
+  },
+  {
+    "ref": "13:28",
+    "ayah": "दिल अल्लाह की याद से सुकून पाते हैं।",
+    "task": "बेचैनी आए तो छोटा ज़िक्र करें।"
+  },
+  {
+    "ref": "14:7",
+    "ayah": "यदि तुम शुक्र करोगे तो मैं बढ़ाऊँगा।",
+    "task": "आज पाँच नेमतों का नाम लें।"
+  },
+  {
+    "ref": "15:85",
+    "ayah": "सुंदर तरीके से माफ़ करो।",
+    "task": "आज एक बात बिना याद दिलाए माफ़ करें।"
+  },
+  {
+    "ref": "16:90",
+    "ayah": "अल्लाह न्याय, भलाई और रिश्तेदारों की मदद का आदेश देता है।",
+    "task": "आज किसी करीबी की बिना उलाहना मदद करें।"
+  },
+  {
+    "ref": "16:96",
+    "ayah": "जो अल्लाह के पास है वह अधिक स्थायी है।",
+    "task": "आज लोगों के बजाय आख़िरत के लिए एक काम चुनें।"
+  },
+  {
+    "ref": "16:125",
+    "ayah": "हिकमत और अच्छी नसीहत से बुलाओ।",
+    "task": "आज धर्म पर कठोर बहस न करें।"
+  },
+  {
+    "ref": "17:23",
+    "ayah": "माता-पिता से नाराज़गी का शब्द भी न कहो।",
+    "task": "आज माता-पिता या बड़े से नरम बात करें।"
+  },
+  {
+    "ref": "17:26",
+    "ayah": "रिश्तेदार, गरीब और मुसाफिर को उसका हक़ दो।",
+    "task": "आज जरूरतमंद या करीबी से कुछ उपयोगी बाँटें।"
+  },
+  {
+    "ref": "17:27",
+    "ayah": "फिजूलखर्च लोग शैतानों के भाई हैं।",
+    "task": "आज एक बेकार खर्च छोड़ें।"
+  },
+  {
+    "ref": "17:36",
+    "ayah": "जिस बात का ज्ञान न हो उसके पीछे न चलो।",
+    "task": "आज अपुष्ट जानकारी आगे न भेजें।"
+  },
+  {
+    "ref": "17:37",
+    "ayah": "ज़मीन पर घमंड से न चलो।",
+    "task": "आज अपनी बातों में घमंड न करें।"
+  },
+  {
+    "ref": "18:10",
+    "ayah": "ऐ हमारे रब, हमें अपनी ओर से रहमत दे।",
+    "task": "महत्वपूर्ण काम से पहले सही राह की दुआ करें।"
+  },
+  {
+    "ref": "18:28",
+    "ayah": "उनके साथ सब्र करो जो अपने रब को पुकारते हैं।",
+    "task": "आज अच्छे माहौल या लाभकारी याद के लिए समय दें।"
+  },
+  {
+    "ref": "20:14",
+    "ayah": "मेरी याद के लिए नमाज़ क़ायम करो।",
+    "task": "आज एक नमाज़ बिना जल्दी के पढ़ें।"
+  },
+  {
+    "ref": "20:44",
+    "ayah": "उससे नरमी से बात करो।",
+    "task": "आज कठिन व्यक्ति से भी नरमी से बोलें।"
+  },
+  {
+    "ref": "20:114",
+    "ayah": "ऐ रब, मेरा ज्ञान बढ़ा।",
+    "task": "आज अल्लाह के लिए एक उपयोगी बात सीखें।"
+  },
+  {
+    "ref": "21:35",
+    "ayah": "हम तुम्हें बुराई और भलाई से आज़माते हैं।",
+    "task": "आज एक परीक्षा पर शिकायत के बजाय हिकमत माँगें।"
+  },
+  {
+    "ref": "21:90",
+    "ayah": "वे भलाई में जल्दी करते थे और उम्मीद व डर से पुकारते थे।",
+    "task": "आज एक नेक काम टालें नहीं।"
+  },
+  {
+    "ref": "22:37",
+    "ayah": "अल्लाह तक तुम्हारा तक़वा पहुँचता है।",
+    "task": "आज एक काम दिखावे के बिना करें।"
+  },
+  {
+    "ref": "23:1-2",
+    "ayah": "कामयाब हैं वे ईमान वाले जो नमाज़ में विनम्र हैं।",
+    "task": "आज एक नमाज़ में जल्दबाज़ी और ध्यान भंग हटाएँ।"
+  },
+  {
+    "ref": "23:3",
+    "ayah": "वे बेकार बातों से दूर रहते हैं।",
+    "task": "आज एक खाली स्क्रॉल या बेकार बातचीत छोड़ें।"
+  },
+  {
+    "ref": "24:22",
+    "ayah": "माफ़ करें और दरगुज़र करें।",
+    "task": "दिल से एक छोटी शिकायत निकाल दें।"
+  },
+  {
+    "ref": "24:30",
+    "ayah": "ईमान वालों से कहो अपनी निगाहें नीची रखें।",
+    "task": "आज निगाह की हिफाज़त करें।"
+  },
+  {
+    "ref": "25:63",
+    "ayah": "रहमान के बंदे ज़मीन पर विनम्रता से चलते हैं।",
+    "task": "आज शब्दों और कामों में विनम्र रहें।"
+  },
+  {
+    "ref": "25:67",
+    "ayah": "वे न फिजूलखर्ची करते हैं न कंजूसी।",
+    "task": "आज खरीदारी या खाने में संतुलन चुनें।"
+  },
+  {
+    "ref": "28:77",
+    "ayah": "भलाई करो जैसे अल्लाह ने तुम पर भलाई की।",
+    "task": "आज जो तुम्हारे पास है उसी से किसी की मदद करें।"
+  },
+  {
+    "ref": "29:45",
+    "ayah": "नमाज़ बुराई और अश्लीलता से रोकती है।",
+    "task": "आज नमाज़ के बाद एक बुरे काम से रुकें।"
+  },
+  {
+    "ref": "29:69",
+    "ayah": "जो हमारे लिए कोशिश करते हैं, हम उन्हें रास्ते दिखाते हैं।",
+    "task": "आज सही दिशा में एक छोटा कदम बढ़ाएँ।"
+  },
+  {
+    "ref": "31:14",
+    "ayah": "मेरा और अपने माता-पिता का शुक्र करो।",
+    "task": "आज माता-पिता के लिए दुआ या अच्छा शब्द कहें।"
+  },
+  {
+    "ref": "31:17",
+    "ayah": "जो तुम्हें पहुँचे उस पर सब्र करो।",
+    "task": "आज एक कठिनाई पर शांत रहें।"
+  },
+  {
+    "ref": "31:18",
+    "ayah": "लोगों से मुँह न फेरो और घमंड से न चलो।",
+    "task": "आज किसी को ध्यान से सुनें।"
+  },
+  {
+    "ref": "31:19",
+    "ayah": "मध्यम रहो और आवाज़ नीची रखो।",
+    "task": "आज सामान्य से धीमे और शांत बोलें।"
+  },
+  {
+    "ref": "33:35",
+    "ayah": "अल्लाह को बहुत याद करने वालों के लिए बड़ा प्रतिफल है।",
+    "task": "आज 33 बार ज़िक्र समझ के साथ करें।"
+  },
+  {
+    "ref": "33:41",
+    "ayah": "अल्लाह को बहुत याद करो।",
+    "task": "आज ज़िक्र के लिए तीन छोटे समय रखें।"
+  },
+  {
+    "ref": "33:70",
+    "ayah": "सही बात कहो।",
+    "task": "आज अस्पष्ट नहीं, साफ और सच बोलें।"
+  },
+  {
+    "ref": "39:10",
+    "ayah": "सब्र करने वालों को बेहिसाब बदला मिलेगा।",
+    "task": "आज एक बात पर बिना चिढ़े सब्र करें।"
+  },
+  {
+    "ref": "39:53",
+    "ayah": "अल्लाह की रहमत से निराश न हो।",
+    "task": "आज माफी माँगकर दोबारा शुरुआत करें।"
+  },
+  {
+    "ref": "40:60",
+    "ayah": "मुझे पुकारो, मैं तुम्हें जवाब दूँगा।",
+    "task": "आज अपने शब्दों में एक निजी दुआ करें।"
+  },
+  {
+    "ref": "41:34",
+    "ayah": "बुराई को बेहतर तरीके से टालो।",
+    "task": "आज एक बुरी बात का जवाब भलाई से दें।"
+  },
+  {
+    "ref": "42:36",
+    "ayah": "जो अल्लाह के पास है वह बेहतर और स्थायी है।",
+    "task": "आज खाली आनंद के बदले आख़िरत का लाभ चुनें।"
+  },
+  {
+    "ref": "42:37",
+    "ayah": "जब वे गुस्सा होते हैं तो माफ़ करते हैं।",
+    "task": "आज गुस्से में शब्द से चोट न दें।"
+  },
+  {
+    "ref": "42:40",
+    "ayah": "जो माफ़ करे और सुधार करे, उसका बदला अल्लाह के पास है।",
+    "task": "आज सुलह या दिल की सफाई की ओर कदम लें।"
+  },
+  {
+    "ref": "45:15",
+    "ayah": "जो भलाई करता है, अपने लिए करता है।",
+    "task": "आज नेकी करें और धन्यवाद की प्रतीक्षा न करें।"
+  },
+  {
+    "ref": "47:7",
+    "ayah": "यदि तुम अल्लाह के दीन की मदद करो, वह तुम्हारी मदद करेगा।",
+    "task": "आज किसी लाभकारी इस्लामी काम का समर्थन करें।"
+  },
+  {
+    "ref": "49:10",
+    "ayah": "ईमान वाले भाई हैं, भाइयों में सुलह कराओ।",
+    "task": "आज लोगों के बीच विवाद न बढ़ाएँ।"
+  },
+  {
+    "ref": "49:11",
+    "ayah": "एक समूह दूसरे का मज़ाक न उड़ाए।",
+    "task": "आज ऐसी मज़ाक न करें जिससे कोई नीचा हो।"
+  },
+  {
+    "ref": "49:12",
+    "ayah": "अधिक संदेह और पीठ पीछे बात से बचो।",
+    "task": "आज किसी की ग़ीबत न करें।"
+  },
+  {
+    "ref": "50:18",
+    "ayah": "कोई शब्द नहीं निकलता मगर निगरानी मौजूद है।",
+    "task": "संदेश भेजने से पहले शब्दों पर ध्यान दें।"
+  },
+  {
+    "ref": "51:56",
+    "ayah": "मैंने जिन्न और इंसान को केवल इबादत के लिए पैदा किया।",
+    "task": "आज एक सामान्य काम भी अल्लाह के लिए करें।"
+  },
+  {
+    "ref": "57:20",
+    "ayah": "दुनिया की जिंदगी अस्थायी आनंद है।",
+    "task": "आज दुनिया की छोटी बात पर अधिक परेशान न हों।"
+  },
+  {
+    "ref": "57:23",
+    "ayah": "जो खो गया उस पर अधिक दुख और जो मिला उस पर घमंड न करो।",
+    "task": "आज संतुलन रखें: न घबराहट, न घमंड।"
+  },
+  {
+    "ref": "59:18",
+    "ayah": "हर जान देखे कि उसने कल के लिए क्या भेजा।",
+    "task": "सोने से पहले दिन का एक काम परखें।"
+  },
+  {
+    "ref": "64:16",
+    "ayah": "अल्लाह से अपनी क्षमता भर डरते रहो।",
+    "task": "आज पूर्णता नहीं, ईमानदारी से संभव काम करें।"
+  },
+  {
+    "ref": "65:2-3",
+    "ayah": "जो अल्लाह से डरे, वह उसके लिए रास्ता और रोज़ी बना देता है।",
+    "task": "आज कठिनाई में हलाल रास्ता चुनें।"
+  },
+  {
+    "ref": "65:7",
+    "ayah": "अल्लाह किसी पर उससे अधिक बोझ नहीं डालता जितना उसे दिया।",
+    "task": "अपनी क्षमता की तुलना दूसरों से न करें।"
+  },
+  {
+    "ref": "67:2",
+    "ayah": "उसने जीवन और मृत्यु पैदा किए ताकि देखे कौन बेहतर कर्म करता है।",
+    "task": "आज एक छोटे काम को बेहतर करें।"
+  },
+  {
+    "ref": "70:5",
+    "ayah": "सुंदर सब्र करो।",
+    "task": "आज बिना शिकायत और कठोरता के सब्र करें।"
+  },
+  {
+    "ref": "73:8",
+    "ayah": "अपने रब का नाम याद करो और पूरी तरह उसकी ओर मुड़ो।",
+    "task": "आज एक मिनट केवल अल्लाह की ओर ध्यान दें।"
+  },
+  {
+    "ref": "74:7",
+    "ayah": "अपने रब के लिए सब्र करो।",
+    "task": "आज एक परेशानी अल्लाह के लिए सहें।"
+  },
+  {
+    "ref": "76:8-9",
+    "ayah": "वे अल्लाह की खातिर खिलाते हैं, बदला और धन्यवाद नहीं चाहते।",
+    "task": "आज किसी की मदद बिना प्रतिफल की चाह करें।"
+  },
+  {
+    "ref": "87:14-15",
+    "ayah": "कामयाब हुआ जिसने पाकी अपनाई, रब को याद किया और नमाज़ पढ़ी।",
+    "task": "आज एक नीयत साफ करें।"
+  },
+  {
+    "ref": "90:17",
+    "ayah": "वे सब्र और रहमत की सलाह देते हैं।",
+    "task": "आज किसी को नरम शब्द से सहारा दें।"
+  },
+  {
+    "ref": "92:5-7",
+    "ayah": "जो देता है और तक़वा रखता है, हम उसके लिए आसानी कर देंगे।",
+    "task": "आज थोड़ा दें: धन, समय या ध्यान।"
+  },
+  {
+    "ref": "93:10",
+    "ayah": "माँगने वाले को न झिड़को।",
+    "task": "आज मदद माँगने वाले से कठोर बात न करें।"
+  },
+  {
+    "ref": "93:11",
+    "ayah": "अपने रब की नेमत बयान करो।",
+    "task": "आज एक नेमत याद कर शुक्र करें।"
+  },
+  {
+    "ref": "94:5",
+    "ayah": "कठिनाई के साथ आसानी है।",
+    "task": "आज एक कठिनाई से हार न मानें।"
+  },
+  {
+    "ref": "94:6",
+    "ayah": "निश्चय ही कठिनाई के साथ आसानी है।",
+    "task": "मुश्किल समय में इसे खुद से दोहराएँ।"
+  },
+  {
+    "ref": "95:4",
+    "ayah": "हमने इंसान को उत्तम रूप में पैदा किया।",
+    "task": "आज अपने सम्मान को शब्दों से न तोड़ें।"
+  }
+];
 
   const HISTORY_KEY = 'barakaway_ayah_history_hi_v1';
   const TODAY_KEY = 'barakaway_ayah_today_hi_v1';
@@ -3847,7 +4371,7 @@ window.addEventListener("DOMContentLoaded",function(){const installBtn=document.
     }
   }
 
-  function pickAyahForToday(){
+  function pickAyahForआज(){
     const today = localDateKey(new Date());
     const START_KEY = 'barakaway_linear_program_start_hi_v1';
     let start = localStorage.getItem(START_KEY);
@@ -3862,9 +4386,9 @@ window.addEventListener("DOMContentLoaded",function(){const installBtn=document.
   }
 
   function renderAyahCard(){
-    const ayah = pickAyahForToday();
-    const card = document.getElementById('dailyArticleLink');
-    const text = document.getElementById('dailyArticleTitle');
+    const ayah = pickAyahForआज();
+    const card = document.getElementById('dailyलेखLink');
+    const text = document.getElementById('dailyलेखTitle');
     const title = card ? card.querySelector('.today-action-title') : null;
 
     if(card){
@@ -3898,7 +4422,7 @@ window.addEventListener("DOMContentLoaded",function(){const installBtn=document.
 
   renderAyahCard();
 
-  const card = document.getElementById('dailyArticleLink');
+  const card = document.getElementById('dailyलेखLink');
   if(card){
     card.addEventListener('click', function(event){
       event.preventDefault();
@@ -3917,128 +4441,128 @@ window.addEventListener("DOMContentLoaded",function(){const installBtn=document.
 <script>
 (function(){
   const challenges = [
-    "आज पाँच लोगों को पहले सलाम दें।",
-    "आज दस लोगों को अल्लाह के लिए मुस्कुराएँ।",
-    "हर महत्वपूर्ण काम से पहले बिस्मिल्लाह कहें।",
-    "आज किसी की बात बीच में न काटें।",
-    "उकसाए जाने पर भी कठोर जवाब न दें।",
-    "एक शिकायत से अपनी ज़बान रोकें।",
-    "जो व्यक्ति परेशान करता है उसके लिए दुआ करें।",
-    "एक व्यक्ति की चुपचाप मदद करें।",
-    "आज किसी की पीठ पीछे बात न करें।",
-    "तीन खास नेमतों पर अल्लाह का शुक्र करें।",
-    "33 बार इस्तिग़फ़ार शांति से करें।",
-    "अपनी बातचीत से एक बुरा शब्द हटाएँ।",
-    "माता-पिता या करीबी को अच्छा शब्द कहें।",
-    "बातचीत में जीत के लिए बहस न करें।",
-    "हिंदी पाठ उपलब्ध है।",
-    "एक नेकी ऐसी करें कि किसी को पता न चले।",
-    "आज पूरे दिन आवाज़ ऊँची न करें।",
-    "सोने से पहले अपनी एक गलती याद कर माफी माँगें।",
-    "आज वह चीज़ न देखें जो ईमान कमजोर करे।",
-    "एक छोटी सूरह समझ के साथ पढ़ें।",
-    "शिकायत का मन हो तो अल्हम्दुलिल्लाह कहें।",
-    "गुस्से में जवाब देने से पहले दस सेकंड रुकें।",
-    "गलती हो तो पहले माफी माँगें।",
-    "अपनी बातों में बढ़ा-चढ़ाकर न कहें।",
-    "एक काम से पहले अपनी नीयत जाँचें।",
-    "रास्ते या घर से कोई बाधा हटाएँ।",
-    "मरे हुए मुसलमानों के लिए दुआ करें।",
-    "किसी पर हसद हो तो उसके लिए बरकत की दुआ करें।",
-    "अनावश्यक खर्च न करें।",
-    "जो आपसे कमजोर है उसके साथ नरमी करें।",
-    "जहाँ आम तौर पर बहस करते हैं वहाँ एक बार चुप रहें।",
-    "एक छोटी बात में सच बोलें।",
-    "लोगों के रूप, आय या गलतियों पर फैसला न करें।",
-    "यदि संभव हो तो छोटा सदक़ा करें।",
-    "नबी ﷺ पर दस बार दुरूद भेजें।",
-    "एक उपयोगी काम टालें नहीं।",
-    "एक नमाज़ के बाद जल्दबाज़ी न करें।",
-    "एक छोटे आयत का अर्थ पढ़ें।",
-    "खुद को याद दिलाएँ: अल्लाह मुझे देख रहा है।",
-    "एक बातचीत में अतिरिक्त बात न करें।",
-    "किसी का दिन एक वाक्य से आसान करें।",
-    "अपनी जिंदगी की तुलना दूसरों से न करें।",
-    "अपनी उम्मत के लिए दुआ करें।",
-    "व्यंग्य से जवाब न दें।",
-    "किसी कतार, रास्ते या प्रतीक्षा में सब्र करें।",
-    "10 मिनट फोन दूर रखकर शांत ज़िक्र करें।",
-    "जिसे लोग कम देखते हैं उसे अच्छा शब्द कहें।",
-    "दूसरों की गलतियाँ तलाश न करें।",
-    "एक गुनाह याद कर उससे लौटने का निर्णय करें।",
-    "एक काम अमानत की तरह सावधानी से करें।",
-    "अपनी नेकी पर घमंड न करें।",
-    "घर में थकान के बावजूद मुस्कुराएँ।",
-    "बुराई का जवाब बुराई से न दें।",
-    "एक छोटी नाराज़गी अल्लाह के लिए माफ़ करें।",
-    "अल्लाह के एक नाम का अर्थ सीखें।",
-    "बुरी सोच आए तो अस्तग़फ़िरुल्लाह कहें।",
-    "खाली बहस में हिस्सा न लें।",
-    "एक व्यक्ति का मनोबल बढ़ाएँ।",
-    "किसी की गलती पर न हँसें।",
-    "काम या पढ़ाई शुरू करने से पहले दुआ करें।",
-    "समय में ईमानदार रहें; देर से किसी का समय न लें।",
-    "एक जरूरी काम में आलस न करें।",
-    "जिसने भलाई की उसका धन्यवाद करें।",
-    "जहाँ देखभाल कर सकते हैं वहाँ “मुझे फर्क नहीं” न कहें।",
-    "एक बेकार देखने वाली चीज़ से बचें।",
-    "वुज़ू शांति और ध्यान से करें।",
-    "ला इलाहा इल्लल्लाह 20 बार समझकर कहें।",
-    "घर में चिड़चिड़ाहट से जवाब न दें।",
-    "बिना याद दिलाए मदद करें।",
-    "किसी का राज़ न बताएँ।",
-    "एक गुनाह अल्लाह के लिए छोड़ें, चाहे कोई न देखे।",
-    "अल-फातिहा सामान्य से धीरे पढ़ें।",
-    "पूरी बात जाने बिना आरोप न लगाएँ।",
-    "जिसे पसंद नहीं करते उसके साथ भी न्याय करें।",
-    "जिसने पहले मदद की उसके लिए दुआ करें।",
-    "खाने, घर या परिवार के बारे में बुरा न बोलें।",
-    "सफाई के लिए आसपास की एक जगह ठीक करें।",
-    "योजना बनाते समय इन शा अल्लाह कहें।",
-    "किसी की जरूरत देखकर अनदेखा न करें।",
-    "अनुशासन के लिए एक अतिरिक्त आनंद छोड़ें।",
-    "करीबी के साथ बिना धन्यवाद की उम्मीद नेकी करें।",
-    "निगाह को हराम से बचाएँ।",
-    "गुस्से में संदेश न भेजें।",
-    "एक नमाज़ के बाद सामान्य से लंबी दुआ करें।",
-    "छोटे विवाद में सुलह की पहल करें।",
-    "बड़े की बात बीच में न काटें।",
-    "अपने बारे में जरूरत से ज्यादा न बोलें।",
-    "मौत को याद कर एक नीयत सुधारें।",
-    "किसी से कहें: अल्लाह आपको भलाई दे।",
-    "दूसरे के श्रम को कम न आँकें।",
-    "काम न हो सके तो शब्द से मदद करें।",
-    "आसान झूठ के बजाय कठिन सच चुनें।",
-    "धर्म के ज्ञान की ओर एक छोटा कदम लें।",
-    "एक हदीस पढ़कर उसका अमल सोचें।",
-    "माता-पिता या बड़े से छोटी बात पर बहस न करें।",
-    "बच्चे या कमजोर व्यक्ति पर चिड़चिड़े न हों।",
-    "सुबह और शाम माफी की दुआ करें।",
-    "नेकी के जवाब में ठंडापन न दिखाएँ।",
-    "खाने से पहले बिस्मिल्लाह और बाद में अल्हम्दुलिल्लाह कहें।",
-    "किसी के दुख का कारण अपने शब्दों से न बनें।",
-    "अमानत के लिए एक काम समय पर करें।",
-    "लोगों की आपस में तुलना न करें।",
-    "याद रखें कि रिज़्क़ अल्लाह से है, अधिक चिंता न करें।",
-    "एक बुरी आदत एक दिन के लिए छोड़ें।",
-    "सूरह इख़लास तीन बार समझकर पढ़ें।",
-    "मौसम, हालात या लोगों पर शिकायत न करें।",
-    "जिससे कम बात होती है उसे पहले सलाम दें।",
-    "जिससे हसद हुआ उसके लिए दुआ करें।",
-    "सही होने पर भी कठोर शब्द न कहें।",
-    "अपने व्यवहार से किसी को सुकून दें।",
-    "गलती का बहाना न बनाएँ, शांतिपूर्वक स्वीकार करें।",
-    "बुरी सोच आए तो आउज़ु बिल्लाह कहें।",
-    "स्वास्थ्य पर अल्लाह का शुक्र करें।",
-    "घर में बिना कहे मदद करें।",
-    "इंटरनेट पर एक खाली बहस में समय न लगाएँ।",
-    "एक काम अल्लाह के लिए करें और किसी को न बताएँ।",
-    "सोने से पहले पूछें: आज मैंने अल्लाह के लिए क्या किया?",
-    "एक परेशानी शिकायत के बिना स्वीकार करें।",
-    "दूसरों की कमियों के बजाय अपना सुधार देखें।",
-    "दूसरा चुप हो तो भी पहले अच्छा बोलें।",
-    "एक छोटा उपयोगी काम पूरा करें।"
-  ];
+  "आज पाँच लोगों को पहले सलाम दें।",
+  "आज दस लोगों को अल्लाह के लिए मुस्कुराएँ।",
+  "हर महत्वपूर्ण काम से पहले बिस्मिल्लाह कहें।",
+  "आज किसी की बात बीच में न काटें।",
+  "उकसाए जाने पर भी कठोर जवाब न दें।",
+  "एक शिकायत से अपनी ज़बान रोकें।",
+  "जो व्यक्ति परेशान करता है उसके लिए दुआ करें।",
+  "एक व्यक्ति की चुपचाप मदद करें।",
+  "आज किसी की पीठ पीछे बात न करें।",
+  "तीन खास नेमतों पर अल्लाह का शुक्र करें।",
+  "33 बार इस्तिग़फ़ार शांति से करें।",
+  "अपनी बातचीत से एक बुरा शब्द हटाएँ।",
+  "माता-पिता या करीबी को अच्छा शब्द कहें।",
+  "बातचीत में जीत के लिए बहस न करें।",
+  "हिंदी पाठ उपलब्ध है।",
+  "एक नेकी ऐसी करें कि किसी को पता न चले।",
+  "आज पूरे दिन आवाज़ ऊँची न करें।",
+  "सोने से पहले अपनी एक गलती याद कर माफी माँगें।",
+  "आज वह चीज़ न देखें जो ईमान कमजोर करे।",
+  "एक छोटी सूरह समझ के साथ पढ़ें।",
+  "शिकायत का मन हो तो अल्हम्दुलिल्लाह कहें।",
+  "गुस्से में जवाब देने से पहले दस सेकंड रुकें।",
+  "गलती हो तो पहले माफी माँगें।",
+  "अपनी बातों में बढ़ा-चढ़ाकर न कहें।",
+  "एक काम से पहले अपनी नीयत जाँचें।",
+  "रास्ते या घर से कोई बाधा हटाएँ।",
+  "मरे हुए मुसलमानों के लिए दुआ करें।",
+  "किसी पर हसद हो तो उसके लिए बरकत की दुआ करें।",
+  "अनावश्यक खर्च न करें।",
+  "जो आपसे कमजोर है उसके साथ नरमी करें।",
+  "जहाँ आम तौर पर बहस करते हैं वहाँ एक बार चुप रहें।",
+  "एक छोटी बात में सच बोलें।",
+  "लोगों के रूप, आय या गलतियों पर फैसला न करें।",
+  "यदि संभव हो तो छोटा सदक़ा करें।",
+  "नबी ﷺ पर दस बार दुरूद भेजें।",
+  "एक उपयोगी काम टालें नहीं।",
+  "एक नमाज़ के बाद जल्दबाज़ी न करें।",
+  "एक छोटे आयत का अर्थ पढ़ें।",
+  "खुद को याद दिलाएँ: अल्लाह मुझे देख रहा है।",
+  "एक बातचीत में अतिरिक्त बात न करें।",
+  "किसी का दिन एक वाक्य से आसान करें।",
+  "अपनी जिंदगी की तुलना दूसरों से न करें।",
+  "अपनी उम्मत के लिए दुआ करें।",
+  "व्यंग्य से जवाब न दें।",
+  "किसी कतार, रास्ते या प्रतीक्षा में सब्र करें।",
+  "10 मिनट फोन दूर रखकर शांत ज़िक्र करें।",
+  "जिसे लोग कम देखते हैं उसे अच्छा शब्द कहें।",
+  "दूसरों की गलतियाँ तलाश न करें।",
+  "एक गुनाह याद कर उससे लौटने का निर्णय करें।",
+  "एक काम अमानत की तरह सावधानी से करें।",
+  "अपनी नेकी पर घमंड न करें।",
+  "घर में थकान के बावजूद मुस्कुराएँ।",
+  "बुराई का जवाब बुराई से न दें।",
+  "एक छोटी नाराज़गी अल्लाह के लिए माफ़ करें।",
+  "अल्लाह के एक नाम का अर्थ सीखें।",
+  "बुरी सोच आए तो अस्तग़फ़िरुल्लाह कहें।",
+  "खाली बहस में हिस्सा न लें।",
+  "एक व्यक्ति का मनोबल बढ़ाएँ।",
+  "किसी की गलती पर न हँसें।",
+  "काम या पढ़ाई शुरू करने से पहले दुआ करें।",
+  "समय में ईमानदार रहें; देर से किसी का समय न लें।",
+  "एक जरूरी काम में आलस न करें।",
+  "जिसने भलाई की उसका धन्यवाद करें।",
+  "जहाँ देखभाल कर सकते हैं वहाँ “मुझे फर्क नहीं” न कहें।",
+  "एक बेकार देखने वाली चीज़ से बचें।",
+  "वुज़ू शांति और ध्यान से करें।",
+  "ला इलाहा इल्लल्लाह 20 बार समझकर कहें।",
+  "घर में चिड़चिड़ाहट से जवाब न दें।",
+  "बिना याद दिलाए मदद करें।",
+  "किसी का राज़ न बताएँ।",
+  "एक गुनाह अल्लाह के लिए छोड़ें, चाहे कोई न देखे।",
+  "अल-फातिहा सामान्य से धीरे पढ़ें।",
+  "पूरी बात जाने बिना आरोप न लगाएँ।",
+  "जिसे पसंद नहीं करते उसके साथ भी न्याय करें।",
+  "जिसने पहले मदद की उसके लिए दुआ करें।",
+  "खाने, घर या परिवार के बारे में बुरा न बोलें।",
+  "सफाई के लिए आसपास की एक जगह ठीक करें।",
+  "योजना बनाते समय इन शा अल्लाह कहें।",
+  "किसी की जरूरत देखकर अनदेखा न करें।",
+  "अनुशासन के लिए एक अतिरिक्त आनंद छोड़ें।",
+  "करीबी के साथ बिना धन्यवाद की उम्मीद नेकी करें।",
+  "निगाह को हराम से बचाएँ।",
+  "गुस्से में संदेश न भेजें।",
+  "एक नमाज़ के बाद सामान्य से लंबी दुआ करें।",
+  "छोटे विवाद में सुलह की पहल करें।",
+  "बड़े की बात बीच में न काटें।",
+  "अपने बारे में जरूरत से ज्यादा न बोलें।",
+  "मौत को याद कर एक नीयत सुधारें।",
+  "किसी से कहें: अल्लाह आपको भलाई दे।",
+  "दूसरे के श्रम को कम न आँकें।",
+  "काम न हो सके तो शब्द से मदद करें।",
+  "आसान झूठ के बजाय कठिन सच चुनें।",
+  "धर्म के ज्ञान की ओर एक छोटा कदम लें।",
+  "एक हदीस पढ़कर उसका अमल सोचें।",
+  "माता-पिता या बड़े से छोटी बात पर बहस न करें।",
+  "बच्चे या कमजोर व्यक्ति पर चिड़चिड़े न हों।",
+  "सुबह और शाम माफी की दुआ करें।",
+  "नेकी के जवाब में ठंडापन न दिखाएँ।",
+  "खाने से पहले बिस्मिल्लाह और बाद में अल्हम्दुलिल्लाह कहें।",
+  "किसी के दुख का कारण अपने शब्दों से न बनें।",
+  "अमानत के लिए एक काम समय पर करें।",
+  "लोगों की आपस में तुलना न करें।",
+  "याद रखें कि रिज़्क़ अल्लाह से है, अधिक चिंता न करें।",
+  "एक बुरी आदत एक दिन के लिए छोड़ें।",
+  "सूरह इख़लास तीन बार समझकर पढ़ें।",
+  "मौसम, हालात या लोगों पर शिकायत न करें।",
+  "जिससे कम बात होती है उसे पहले सलाम दें।",
+  "जिससे हसद हुआ उसके लिए दुआ करें।",
+  "सही होने पर भी कठोर शब्द न कहें।",
+  "अपने व्यवहार से किसी को सुकून दें।",
+  "गलती का बहाना न बनाएँ, शांतिपूर्वक स्वीकार करें।",
+  "बुरी सोच आए तो आउज़ु बिल्लाह कहें।",
+  "स्वास्थ्य पर अल्लाह का शुक्र करें।",
+  "घर में बिना कहे मदद करें।",
+  "इंटरनेट पर एक खाली बहस में समय न लगाएँ।",
+  "एक काम अल्लाह के लिए करें और किसी को न बताएँ।",
+  "सोने से पहले पूछें: आज मैंने अल्लाह के लिए क्या किया?",
+  "एक परेशानी शिकायत के बिना स्वीकार करें।",
+  "दूसरों की कमियों के बजाय अपना सुधार देखें।",
+  "दूसरा चुप हो तो भी पहले अच्छा बोलें।",
+  "एक छोटा उपयोगी काम पूरा करें।"
+];
   const TODAY_KEY = 'barakaway_daily_challenge_today_hi';
   const HISTORY_KEY = 'barakaway_daily_challenge_history_hi';
 
@@ -4059,7 +4583,7 @@ window.addEventListener("DOMContentLoaded",function(){const installBtn=document.
     try{return JSON.parse(value);}catch(e){return fallback;}
   }
 
-  function pickChallengeForToday(){
+  function pickChallengeForआज(){
     const today = localDateKey(new Date());
     const START_KEY = 'barakaway_linear_program_start_hi_v1';
     let start = localStorage.getItem(START_KEY);
@@ -4074,7 +4598,7 @@ window.addEventListener("DOMContentLoaded",function(){const installBtn=document.
   }
 
   function renderChallenge(){
-    const selected = pickChallengeForToday();
+    const selected = pickChallengeForआज();
     const card = document.getElementById('currentAdhkarLink');
     const title = document.getElementById('currentAdhkarTitle');
     const text = document.getElementById('currentAdhkarText');
@@ -4447,6 +4971,1156 @@ window.addEventListener("DOMContentLoaded",function(){const installBtn=document.
     ],
     "correct": 0,
     "meaning": "आशा मेहनत को खत्म नहीं करती।"
+  },
+  {
+    "q": "?",
+    "options": [
+      "",
+      "",
+      ""
+    ],
+    "correct": 0,
+    "meaning": "एक भलाई अल्लाह."
+  },
+  {
+    "q": "?",
+    "options": [
+      "",
+      "",
+      ""
+    ],
+    "correct": 0,
+    "meaning": "."
+  },
+  {
+    "q": "— है…",
+    "options": [
+      "",
+      "",
+      "नींद"
+    ],
+    "correct": 0,
+    "meaning": "इंसान अल्लाह."
+  },
+  {
+    "q": "अल्लाह?",
+    "options": [
+      "",
+      "",
+      ""
+    ],
+    "correct": 0,
+    "meaning": "."
+  },
+  {
+    "q": "— है…",
+    "options": [
+      "",
+      "पवित्रता",
+      ""
+    ],
+    "correct": 0,
+    "meaning": "जहन्नम."
+  },
+  {
+    "q": "— है…",
+    "options": [
+      "",
+      "",
+      ""
+    ],
+    "correct": 0,
+    "meaning": "काम जहन्नम अल्लाह, जहन्नम लोगों."
+  },
+  {
+    "q": "— है…",
+    "options": [
+      "",
+      "",
+      ""
+    ],
+    "correct": 0,
+    "meaning": "."
+  },
+  {
+    "q": "— है…",
+    "options": [
+      "",
+      "",
+      ""
+    ],
+    "correct": 0,
+    "meaning": "."
+  },
+  {
+    "q": "— है…",
+    "options": [
+      "अल्लाह",
+      "",
+      "लोगों"
+    ],
+    "correct": 0,
+    "meaning": "अल्लाह."
+  },
+  {
+    "q": "?",
+    "options": [
+      "",
+      "",
+      ""
+    ],
+    "correct": 0,
+    "meaning": "—."
+  },
+  {
+    "q": "…",
+    "options": [
+      "",
+      "",
+      ""
+    ],
+    "correct": 0,
+    "meaning": "- —."
+  },
+  {
+    "q": "जहन्नम?",
+    "options": [
+      "",
+      "",
+      ""
+    ],
+    "correct": 0,
+    "meaning": "लोगों."
+  },
+  {
+    "q": "?",
+    "options": [
+      "",
+      "",
+      ""
+    ],
+    "correct": 0,
+    "meaning": "."
+  },
+  {
+    "q": "पवित्रता इस्लाम — है…",
+    "options": [
+      "",
+      "",
+      ""
+    ],
+    "correct": 0,
+    "meaning": "पवित्रता,,."
+  },
+  {
+    "q": "…",
+    "options": [
+      "",
+      "",
+      ""
+    ],
+    "correct": 0,
+    "meaning": "अल्लाह."
+  },
+  {
+    "q": "…",
+    "options": [
+      "",
+      "",
+      ""
+    ],
+    "correct": 0,
+    "meaning": "बाद."
+  },
+  {
+    "q": "…",
+    "options": [
+      "अल्लाह",
+      "",
+      ""
+    ],
+    "correct": 0,
+    "meaning": "पहले दिल."
+  },
+  {
+    "q": "…",
+    "options": [
+      "अल्लाह",
+      "",
+      ""
+    ],
+    "correct": 0,
+    "meaning": "दिन —."
+  },
+  {
+    "q": "बिना?",
+    "options": [
+      "",
+      "",
+      ""
+    ],
+    "correct": 0,
+    "meaning": "लोगों."
+  },
+  {
+    "q": "— है…",
+    "options": [
+      "",
+      "",
+      ""
+    ],
+    "correct": 0,
+    "meaning": ",,."
+  },
+  {
+    "q": "…",
+    "options": [
+      "",
+      "",
+      ""
+    ],
+    "correct": 0,
+    "meaning": "—."
+  },
+  {
+    "q": "?",
+    "options": [
+      "",
+      "",
+      ""
+    ],
+    "correct": 0,
+    "meaning": ",."
+  },
+  {
+    "q": "— है…",
+    "options": [
+      "",
+      "",
+      ""
+    ],
+    "correct": 0,
+    "meaning": "."
+  },
+  {
+    "q": "इंसान, …",
+    "options": [
+      "",
+      "",
+      ""
+    ],
+    "correct": 0,
+    "meaning": "अल्लाह."
+  },
+  {
+    "q": "के लिए बिना — है…",
+    "options": [
+      "",
+      "",
+      ""
+    ],
+    "correct": 0,
+    "meaning": "भलाई."
+  },
+  {
+    "q": "?",
+    "options": [
+      "",
+      "",
+      ""
+    ],
+    "correct": 0,
+    "meaning": "— है."
+  },
+  {
+    "q": ":?",
+    "options": [
+      "",
+      "",
+      ""
+    ],
+    "correct": 0,
+    "meaning": "."
+  },
+  {
+    "q": "?",
+    "options": [
+      "जहन्नम ﷺ",
+      "عليه السلام",
+      "عليه السلام"
+    ],
+    "correct": 0,
+    "meaning": "जहन्नम ﷺ —."
+  },
+  {
+    "q": "?",
+    "options": [
+      "",
+      "",
+      ""
+    ],
+    "correct": 0,
+    "meaning": "— ईमान."
+  },
+  {
+    "q": "?",
+    "options": [
+      "عليه السلام",
+      "",
+      ""
+    ],
+    "correct": 0,
+    "meaning": "عليه السلام अल्लाह."
+  },
+  {
+    "q": "عليه السلام …",
+    "options": [
+      "",
+      "",
+      ""
+    ],
+    "correct": 0,
+    "meaning": "अल्लाह पहले."
+  },
+  {
+    "q": "عليه السلام …",
+    "options": [
+      "",
+      "",
+      ""
+    ],
+    "correct": 0,
+    "meaning": "."
+  },
+  {
+    "q": "عليه السلام …",
+    "options": [
+      "",
+      "",
+      "जहन्नम"
+    ],
+    "correct": 0,
+    "meaning": "— इबादत अल्लाह."
+  },
+  {
+    "q": "عليه السلام — है…",
+    "options": [
+      "अल्लाह",
+      "",
+      ""
+    ],
+    "correct": 0,
+    "meaning": "."
+  },
+  {
+    "q": ", عليه السلام — है…",
+    "options": [
+      "",
+      "",
+      ""
+    ],
+    "correct": 0,
+    "meaning": "— ईमान."
+  },
+  {
+    "q": ", عليه السلام — है…",
+    "options": [
+      "",
+      "",
+      "क़ुरआन"
+    ],
+    "correct": 0,
+    "meaning": "अल्लाह."
+  },
+  {
+    "q": "क़ुरआन …",
+    "options": [
+      "जहन्नम ﷺ",
+      "عليه السلام",
+      "عليه السلام"
+    ],
+    "correct": 0,
+    "meaning": "क़ुरआन —."
+  },
+  {
+    "q": "عليه السلام — है…",
+    "options": [
+      "",
+      "",
+      ""
+    ],
+    "correct": 0,
+    "meaning": "."
+  },
+  {
+    "q": "…",
+    "options": [
+      "",
+      "नमाज़",
+      "ईमान"
+    ],
+    "correct": 0,
+    "meaning": ",."
+  },
+  {
+    "q": "?",
+    "options": [
+      "",
+      "",
+      ""
+    ],
+    "correct": 0,
+    "meaning": "अल्लाह —."
+  },
+  {
+    "q": "…",
+    "options": [
+      "",
+      "",
+      ""
+    ],
+    "correct": 0,
+    "meaning": "."
+  },
+  {
+    "q": "…",
+    "options": [
+      "",
+      "",
+      ""
+    ],
+    "correct": 0,
+    "meaning": ", दिल."
+  },
+  {
+    "q": "इस्लाम?",
+    "options": [
+      "",
+      "",
+      ""
+    ],
+    "correct": 0,
+    "meaning": "."
+  },
+  {
+    "q": "इस्लाम…",
+    "options": [
+      "",
+      "",
+      ""
+    ],
+    "correct": 0,
+    "meaning": "."
+  },
+  {
+    "q": "— है…",
+    "options": [
+      "",
+      "",
+      ""
+    ],
+    "correct": 0,
+    "meaning": ",."
+  },
+  {
+    "q": "— है…",
+    "options": [
+      "",
+      "",
+      ""
+    ],
+    "correct": 0,
+    "meaning": ",,."
+  },
+  {
+    "q": "?",
+    "options": [
+      "",
+      "",
+      ""
+    ],
+    "correct": 0,
+    "meaning": ",."
+  },
+  {
+    "q": "— है…",
+    "options": [
+      "",
+      "",
+      ""
+    ],
+    "correct": 0,
+    "meaning": "."
+  },
+  {
+    "q": "“”?",
+    "options": [
+      "",
+      "",
+      ""
+    ],
+    "correct": 0,
+    "meaning": "क़ुरआन."
+  },
+  {
+    "q": "…",
+    "options": [
+      "",
+      "",
+      ""
+    ],
+    "correct": 0,
+    "meaning": "—."
+  },
+  {
+    "q": "इंसान …",
+    "options": [
+      "",
+      "",
+      ""
+    ],
+    "correct": 0,
+    "meaning": "अल्लाह."
+  },
+  {
+    "q": "?",
+    "options": [
+      "",
+      "",
+      ""
+    ],
+    "correct": 0,
+    "meaning": "इस्लाम."
+  },
+  {
+    "q": "इस्लाम …",
+    "options": [
+      "",
+      "",
+      ""
+    ],
+    "correct": 0,
+    "meaning": "—."
+  },
+  {
+    "q": "ज़ुबान…",
+    "options": [
+      "",
+      "",
+      ""
+    ],
+    "correct": 0,
+    "meaning": "."
+  },
+  {
+    "q": "…",
+    "options": [
+      "",
+      "",
+      "कठोरता से"
+    ],
+    "correct": 0,
+    "meaning": "दिल."
+  },
+  {
+    "q": ", …",
+    "options": [
+      ":",
+      "",
+      ""
+    ],
+    "correct": 0,
+    "meaning": "“ ” —."
+  },
+  {
+    "q": "बिना — है…",
+    "options": [
+      "",
+      "",
+      ""
+    ],
+    "correct": 0,
+    "meaning": "बिना."
+  },
+  {
+    "q": "…",
+    "options": [
+      "",
+      "",
+      ""
+    ],
+    "correct": 0,
+    "meaning": "जहन्नम."
+  },
+  {
+    "q": "क़ुरआन …",
+    "options": [
+      "",
+      "",
+      ""
+    ],
+    "correct": 0,
+    "meaning": "अल्लाह, जहन्नम."
+  },
+  {
+    "q": "क़ुरआन …",
+    "options": [
+      "",
+      "",
+      ""
+    ],
+    "correct": 0,
+    "meaning": "पवित्रता."
+  },
+  {
+    "q": "…",
+    "options": [
+      "ﷺ",
+      "",
+      ""
+    ],
+    "correct": 0,
+    "meaning": "— ﷺ."
+  },
+  {
+    "q": "ﷺ …",
+    "options": [
+      "",
+      "",
+      ""
+    ],
+    "correct": 0,
+    "meaning": "जहन्नम अल्लाह ﷺ."
+  },
+  {
+    "q": "— …",
+    "options": [
+      "",
+      "",
+      ""
+    ],
+    "correct": 0,
+    "meaning": "."
+  },
+  {
+    "q": "…",
+    "options": [
+      "",
+      "",
+      ""
+    ],
+    "correct": 0,
+    "meaning": "."
+  },
+  {
+    "q": "…",
+    "options": [
+      "",
+      "",
+      ""
+    ],
+    "correct": 0,
+    "meaning": "नमाज़ों."
+  },
+  {
+    "q": "रोज़ा …",
+    "options": [
+      "",
+      "जहन्नम",
+      ""
+    ],
+    "correct": 0,
+    "meaning": "रोज़ा सब्र."
+  },
+  {
+    "q": "जहन्नम …",
+    "options": [
+      "",
+      "",
+      ""
+    ],
+    "correct": 0,
+    "meaning": ", इंसान दिल."
+  },
+  {
+    "q": "…",
+    "options": [
+      "",
+      "",
+      ""
+    ],
+    "correct": 0,
+    "meaning": "इस्लाम."
+  },
+  {
+    "q": "…",
+    "options": [
+      "",
+      "बिना",
+      ""
+    ],
+    "correct": 0,
+    "meaning": "नमाज़ —."
+  },
+  {
+    "q": "नमाज़ बिना?",
+    "options": [
+      "",
+      "",
+      ""
+    ],
+    "correct": 0,
+    "meaning": "—,."
+  },
+  {
+    "q": ", …",
+    "options": [
+      "",
+      "",
+      ""
+    ],
+    "correct": 0,
+    "meaning": "."
+  },
+  {
+    "q": "इंसान — है, …",
+    "options": [
+      "ग़ुस्सा",
+      "",
+      ""
+    ],
+    "correct": 0,
+    "meaning": "— जहन्नम."
+  },
+  {
+    "q": "जहन्नम — है…",
+    "options": [
+      "",
+      "",
+      ""
+    ],
+    "correct": 0,
+    "meaning": "जहन्नम."
+  },
+  {
+    "q": "— है…",
+    "options": [
+      "",
+      "",
+      ""
+    ],
+    "correct": 0,
+    "meaning": "."
+  },
+  {
+    "q": "?",
+    "options": [
+      "",
+      "",
+      ""
+    ],
+    "correct": 0,
+    "meaning": "लोगों भले ही."
+  },
+  {
+    "q": ", …",
+    "options": [
+      "",
+      "",
+      ""
+    ],
+    "correct": 0,
+    "meaning": ",."
+  },
+  {
+    "q": "भलाई …",
+    "options": [
+      "",
+      "प्रशंसा",
+      ""
+    ],
+    "correct": 0,
+    "meaning": "भलाई."
+  },
+  {
+    "q": "भलाई, …",
+    "options": [
+      "",
+      "",
+      ""
+    ],
+    "correct": 0,
+    "meaning": "जहन्नम अल्लाह."
+  },
+  {
+    "q": "के लिए?",
+    "options": [
+      "अल्लाह",
+      "",
+      ""
+    ],
+    "correct": 0,
+    "meaning": "."
+  },
+  {
+    "q": "अल्लाह?",
+    "options": [
+      "",
+      "",
+      ""
+    ],
+    "correct": 0,
+    "meaning": "अल्लाह."
+  },
+  {
+    "q": "जहन्नम अल्लाह …",
+    "options": [
+      "",
+      "",
+      ""
+    ],
+    "correct": 0,
+    "meaning": "जहन्नम."
+  },
+  {
+    "q": "पहले अल्लाह …",
+    "options": [
+      "गुनाह",
+      "",
+      ""
+    ],
+    "correct": 0,
+    "meaning": "."
+  },
+  {
+    "q": "अल्लाह …",
+    "options": [
+      "",
+      "",
+      ""
+    ],
+    "correct": 0,
+    "meaning": "."
+  },
+  {
+    "q": "…",
+    "options": [
+      "",
+      "",
+      ""
+    ],
+    "correct": 0,
+    "meaning": "अल्लाह दिल."
+  },
+  {
+    "q": "— है…",
+    "options": [
+      "",
+      "",
+      ""
+    ],
+    "correct": 0,
+    "meaning": "आधार ईमान."
+  },
+  {
+    "q": "…",
+    "options": [
+      "अल्लाह",
+      "",
+      ""
+    ],
+    "correct": 0,
+    "meaning": "अल्लाह."
+  },
+  {
+    "q": "अल्लाह …",
+    "options": [
+      "अल्लाह",
+      "",
+      ""
+    ],
+    "correct": 0,
+    "meaning": ", अल्लाह."
+  },
+  {
+    "q": "…",
+    "options": [
+      "अल्लाह",
+      "",
+      ""
+    ],
+    "correct": 0,
+    "meaning": "आधार."
+  },
+  {
+    "q": "…",
+    "options": [
+      "",
+      "",
+      ""
+    ],
+    "correct": 0,
+    "meaning": "—."
+  },
+  {
+    "q": "…",
+    "options": [
+      "",
+      "",
+      ""
+    ],
+    "correct": 0,
+    "meaning": "."
+  },
+  {
+    "q": "इंसान — है…",
+    "options": [
+      "",
+      "",
+      ""
+    ],
+    "correct": 0,
+    "meaning": "."
+  },
+  {
+    "q": "?",
+    "options": [
+      "",
+      "",
+      ""
+    ],
+    "correct": 0,
+    "meaning": "इंसान."
+  },
+  {
+    "q": "?",
+    "options": [
+      "",
+      "",
+      ""
+    ],
+    "correct": 0,
+    "meaning": "."
+  },
+  {
+    "q": "…",
+    "options": [
+      "",
+      "",
+      ""
+    ],
+    "correct": 0,
+    "meaning": "भले ही."
+  },
+  {
+    "q": "…",
+    "options": [
+      "",
+      "",
+      ""
+    ],
+    "correct": 0,
+    "meaning": "—."
+  },
+  {
+    "q": "भले ही …",
+    "options": [
+      ",",
+      "",
+      ""
+    ],
+    "correct": 0,
+    "meaning": "."
+  },
+  {
+    "q": ", है…",
+    "options": [
+      "",
+      "",
+      ""
+    ],
+    "correct": 0,
+    "meaning": "जहन्नम अल्लाह दिल."
+  },
+  {
+    "q": "?",
+    "options": [
+      "",
+      "",
+      ""
+    ],
+    "correct": 0,
+    "meaning": "— इबादत जीवन."
+  },
+  {
+    "q": "तुम्हें उकसाया जाए, …",
+    "options": [
+      "",
+      "",
+      ""
+    ],
+    "correct": 0,
+    "meaning": "."
+  },
+  {
+    "q": "— है…",
+    "options": [
+      "",
+      "",
+      ""
+    ],
+    "correct": 0,
+    "meaning": "इस्लाम."
+  },
+  {
+    "q": "?",
+    "options": [
+      "",
+      "",
+      ""
+    ],
+    "correct": 0,
+    "meaning": "."
+  },
+  {
+    "q": "— है…",
+    "options": [
+      "",
+      "",
+      ""
+    ],
+    "correct": 0,
+    "meaning": "लोगों."
+  },
+  {
+    "q": "पवित्रता — है…",
+    "options": [
+      "",
+      "",
+      "काम"
+    ],
+    "correct": 0,
+    "meaning": "."
+  },
+  {
+    "q": "इंसान, …",
+    "options": [
+      "",
+      "",
+      ""
+    ],
+    "correct": 0,
+    "meaning": "."
+  },
+  {
+    "q": "— है…",
+    "options": [
+      "",
+      "बिना",
+      ""
+    ],
+    "correct": 0,
+    "meaning": "."
+  },
+  {
+    "q": "…",
+    "options": [
+      "",
+      "बिना",
+      ""
+    ],
+    "correct": 0,
+    "meaning": "परिवार."
+  },
+  {
+    "q": "भलाई अल्लाह…",
+    "options": [
+      "",
+      "",
+      ""
+    ],
+    "correct": 0,
+    "meaning": "काम."
+  },
+  {
+    "q": "भलाई?",
+    "options": [
+      "",
+      "",
+      ""
+    ],
+    "correct": 0,
+    "meaning": "अल्लाह, जहन्नम."
+  },
+  {
+    "q": ", दुआ?",
+    "options": [
+      "",
+      "",
+      ""
+    ],
+    "correct": 0,
+    "meaning": "."
+  },
+  {
+    "q": "ज़ुबान?",
+    "options": [
+      "",
+      "",
+      ""
+    ],
+    "correct": 0,
+    "meaning": "अल्लाह."
+  },
+  {
+    "q": "जहन्नम — है…",
+    "options": [
+      "अल्लाह",
+      "",
+      ""
+    ],
+    "correct": 0,
+    "meaning": "—, — अल्लाह."
+  },
+  {
+    "q": ", …",
+    "options": [
+      "",
+      "?",
+      ""
+    ],
+    "correct": 0,
+    "meaning": "."
+  },
+  {
+    "q": "काम, …",
+    "options": [
+      "अल्लाह",
+      "",
+      ""
+    ],
+    "correct": 0,
+    "meaning": "इंसान अल्लाह."
+  },
+  {
+    "q": ", …",
+    "options": [
+      "",
+      "",
+      ""
+    ],
+    "correct": 0,
+    "meaning": "के लिए दिल."
+  },
+  {
+    "q": "-, …",
+    "options": [
+      "",
+      "",
+      ""
+    ],
+    "correct": 0,
+    "meaning": "."
   }
 ];
   const TASK_PREFIX = "barakaway_today_hi_";
@@ -4493,7 +6167,7 @@ window.addEventListener("DOMContentLoaded",function(){const installBtn=document.
     return Math.max(0.10, Math.min(0.90, minutes / 1440)).toFixed(2);
   }
 
-  function pickQuestionForToday(){
+  function pickQuestionForआज(){
     const today = todayKey();
     const START_KEY = 'barakaway_linear_program_start_hi_v1';
     let start = localStorage.getItem(START_KEY);
@@ -4529,7 +6203,7 @@ window.addEventListener("DOMContentLoaded",function(){const installBtn=document.
   }
 
   function renderMicroQuestion(){
-    const selected = pickQuestionForToday();
+    const selected = pickQuestionForआज();
     const q = selected.item;
     const answerState = getAnswerState();
     const done = isDone("micro") || (answerState && answerState.date === todayKey());
@@ -4902,7 +6576,7 @@ window.addEventListener("DOMContentLoaded",function(){const installBtn=document.
     const card = document.getElementById("allahNameCounterCard");
     const status = document.getElementById("allahNameCounterValue");
     const fill = document.getElementById("allahNameCounterFill");
-    const nameEl = document.getElementById("allahNameToday");
+    const nameEl = document.getElementById("allahNameआज");
     const meaningEl = document.getElementById("allahNameMeaning");
 
     if(!card) return;
@@ -4977,6 +6651,210 @@ window.addEventListener("DOMContentLoaded",function(){const installBtn=document.
 
   bindNameCounterLock();
   setInterval(renderNameCounter, 1000);
+})();
+</script>
+
+<div aria-hidden="true" class="my-saved-overlay" id="barakaway-my-modal">
+<div aria-labelledby="barakawayMyTitle" aria-modal="true" class="my-saved-sheet" role="dialog">
+<div class="my-saved-head">
+<div class="my-saved-title" id="barakawayMyTitle">मेरा</div>
+<button aria-label="बंद करें" class="my-saved-close" data-my-close="" type="button">×</button>
+</div>
+<div class="my-saved-subtitle">सहेजी गई सूरह, आयतें और सामग्री यहाँ इकट्ठी होंगी। यह भाग क़ुरआन, अज़कार और भविष्य के ऐप पेजों के लिए तैयार है।</div>
+<div class="my-saved-list" id="barakawayMyList"></div>
+</div>
+</div>
+
+<script id="barakaway-home-nav-upgrade-script">
+(function(){
+  const MY_LINK = "#barakaway-my";
+  const LEARNING_LINK = "learning-hi.html";
+
+  function svgBookmark(){
+    return '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 4.5A1.5 1.5 0 0 1 7.5 3h9A1.5 1.5 0 0 1 18 4.5V21l-6-3.5L6 21V4.5z"/></svg>';
+  }
+
+  function svgPlay(){
+    return '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5v14l11-7-11-7z"/><path d="M4 5v14"/></svg>';
+  }
+
+  function normalizeText(value){
+    return String(value || "").trim().toLowerCase();
+  }
+
+  function updateBottomNav(){
+    const items = document.querySelectorAll(".bottom-app-nav-item");
+    if(!items.length) return false;
+
+    items.forEach(function(item){
+      const label = item.querySelector(".bottom-app-nav-label");
+      const icon = item.querySelector(".bottom-app-nav-icon");
+      const labelText = normalizeText(label ? label.textContent : item.textContent);
+
+      if(labelText === "अज़कार" || labelText === "अजकार" || labelText === "adhkar"){
+        item.setAttribute("href", MY_LINK);
+        item.dataset.barakaNavRole = "my";
+        if(label) label.textContent = "मेरा";
+        if(icon) icon.innerHTML = svgBookmark();
+        item.setAttribute("aria-label", "मेरा: सहेजी गई सूरह, आयतें और सामग्री");
+        item.classList.remove("active");
+      }
+
+      if(labelText === "सदक़ा" || labelText === "सदका" || labelText === "छुपी हुई सदक़ा" || labelText === "sadaqa"){
+        item.setAttribute("href", LEARNING_LINK);
+        item.dataset.barakaNavRole = "learning";
+        if(label) label.textContent = "सीखना";
+        if(icon) icon.innerHTML = svgPlay();
+        item.setAttribute("aria-label", "सीखना: वीडियो और उपयोगी सामग्री");
+        item.classList.remove("active");
+      }
+    });
+
+    return true;
+  }
+
+  function readJson(key, fallback){
+    try{return JSON.parse(localStorage.getItem(key) || JSON.stringify(fallback));}
+    catch(e){return fallback;}
+  }
+
+  function collectSaved(){
+    const items = [];
+
+    const quranSaved = readJson("barakaway:quran:surah:hi:lastSaved", null);
+    if(quranSaved && quranSaved.href){
+      items.push({
+        title: quranSaved.type === "ayah"
+          ? "क़ुरआन · सहेजी गई आयत " + (quranSaved.ayahNumber || "")
+          : "क़ुरआन · सहेजी गई सूरह",
+        meta: quranSaved.type === "ayah"
+          ? ((quranSaved.surahTitle || "सूरह") + " · " + (quranSaved.meaning || "").slice(0, 90))
+          : ((quranSaved.title || "सूरह") + " · " + (quranSaved.meta || "")),
+        href: quranSaved.href
+      });
+    }
+
+    const quranFavs = readJson("barakaway:quran:surah:hi:favorites", []);
+    quranFavs.slice(0, 12).forEach(function(item){
+      if(item && item.href){
+        items.push({
+          title: "पसंदीदा सूरह · " + (item.title || ("№" + (item.number || ""))),
+          meta: (item.arabic || "") + (item.meta ? " · " + item.meta : ""),
+          href: item.href
+        });
+      }
+    });
+
+    const genericKeys = [
+      "barakaway:adhkar:hi:saved",
+      "barakaway:askars:hi:saved",
+      "barakaway:duas:hi:saved"
+    ];
+
+    genericKeys.forEach(function(key){
+      const saved = readJson(key, []);
+      if(Array.isArray(saved)){
+        saved.slice(0, 8).forEach(function(item){
+          if(item && (item.href || item.url)){
+            items.push({
+              title: item.title || item.name || "सहेजी गई सामग्री",
+              meta: item.meta || item.text || "BarakaWay",
+              href: item.href || item.url
+            });
+          }
+        });
+      }
+    });
+
+    const seen = new Set();
+    return items.filter(function(item){
+      const id = item.title + "|" + item.href;
+      if(seen.has(id)) return false;
+      seen.add(id);
+      return true;
+    });
+  }
+
+  function renderMySaved(){
+    const list = document.getElementById("barakawayMyList");
+    if(!list) return;
+
+    const items = collectSaved();
+
+    if(!items.length){
+      list.innerHTML = '<div class="my-saved-empty">अभी यहाँ कोई सहेजी गई सामग्री नहीं है। क़ुरआन में कोई सूरह या आयत सेव करें — वह इस भाग में दिखाई देगी।</div>';
+      return;
+    }
+
+    list.innerHTML = items.map(function(item){
+      return '<a class="my-saved-item" href="' + String(item.href || "#").replace(/"/g, "&quot;") + '">' +
+        '<div class="my-saved-item-title">' + String(item.title || "सहेजा गया").replace(/</g, "&lt;") + '</div>' +
+        '<div class="my-saved-item-meta">' + String(item.meta || "").replace(/</g, "&lt;") + '</div>' +
+      '</a>';
+    }).join("");
+  }
+
+  function openMySaved(event){
+    if(event){
+      event.preventDefault();
+      event.stopPropagation();
+    }
+    renderMySaved();
+    const modal = document.getElementById("barakaway-my-modal");
+    if(modal){
+      modal.classList.add("open");
+      modal.setAttribute("aria-hidden", "false");
+    }
+  }
+
+  function closeMySaved(){
+    const modal = document.getElementById("barakaway-my-modal");
+    if(modal){
+      modal.classList.remove("open");
+      modal.setAttribute("aria-hidden", "true");
+    }
+  }
+
+  document.addEventListener("click", function(event){
+    const myNav = event.target.closest('[data-baraka-nav-role="my"], a[href="#barakaway-my"]');
+    if(myNav){
+      openMySaved(event);
+      return;
+    }
+
+    if(event.target.closest("[data-my-close]")){
+      event.preventDefault();
+      closeMySaved();
+      return;
+    }
+
+    const overlay = event.target.closest("#barakaway-my-modal");
+    if(overlay && event.target === overlay){
+      closeMySaved();
+    }
+  }, true);
+
+  function boot(){
+    updateBottomNav();
+
+    const navObserver = new MutationObserver(function(){
+      updateBottomNav();
+    });
+    navObserver.observe(document.body, {childList:true, subtree:true});
+
+    let tries = 0;
+    const timer = setInterval(function(){
+      tries += 1;
+      updateBottomNav();
+      if(tries > 20) clearInterval(timer);
+    }, 250);
+  }
+
+  if(document.readyState === "loading"){
+    document.addEventListener("DOMContentLoaded", boot);
+  }else{
+    boot();
+  }
 })();
 </script>
 
