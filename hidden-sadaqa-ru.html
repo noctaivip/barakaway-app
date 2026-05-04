@@ -1049,6 +1049,364 @@ button,.premium-progress-button{
 <script src="/theme-init.js"></script>
 <link rel="stylesheet" href="/theme.css">
 <link rel="stylesheet" href="/theme-universal.css">
+
+<style id="hidden-sadaqa-final-theme-fix">
+/* Hidden Sadaqa — final strict light/dark contrast layer.
+   Loaded after global theme files intentionally. */
+
+:root{
+  color-scheme: light dark;
+}
+
+/* ---------- LIGHT THEME DEFAULT ---------- */
+html,
+body,
+html[data-theme="light"],
+body[data-theme="light"],
+html.light,
+body.light,
+html.light-mode,
+body.light-mode,
+html.theme-light,
+body.theme-light,
+html[data-bs-theme="light"],
+body[data-bs-theme="light"]{
+  --hs-bg:
+    radial-gradient(circle at 50% -12%, rgba(45,122,70,.10), transparent 34%),
+    radial-gradient(circle at 8% 8%, rgba(215,192,122,.14), transparent 28%),
+    linear-gradient(180deg,#f7faf7 0%,#edf5ef 48%,#fbfdfb 100%);
+  --hs-shell:linear-gradient(180deg,#ffffff 0%,#f7fbf8 100%);
+  --hs-card:#ffffff;
+  --hs-card-soft:#f5faf7;
+  --hs-card-deep:#ffffff;
+  --hs-text:#10251b;
+  --hs-heading:#071810;
+  --hs-muted:#52675b;
+  --hs-soft:#294c3a;
+  --hs-border:rgba(35,122,69,.24);
+  --hs-border-strong:rgba(35,122,69,.38);
+  --hs-green:#176c3a;
+  --hs-green-bright:#1f8b4b;
+  --hs-gold:#725712;
+  --hs-gold-bg:rgba(215,192,122,.18);
+  --hs-shadow:0 24px 68px rgba(13,36,27,.14);
+  --hs-shadow-card:0 14px 34px rgba(13,36,27,.10);
+  --hs-button-text:#ffffff;
+  --hs-action-bg:linear-gradient(180deg,#ffffff,#f5faf7);
+  --hs-donation-bg:linear-gradient(180deg,#10291f 0%,#082017 100%);
+  --hs-donation-text:#eaf7ef;
+  --hs-amount-bg:#ffffff;
+  --hs-amount-text:#1f8b4b;
+}
+
+/* ---------- DARK THEME BY SYSTEM ---------- */
+@media (prefers-color-scheme: dark){
+  html:not([data-theme="light"]):not(.light):not(.light-mode):not(.theme-light):not([data-bs-theme="light"]),
+  body:not([data-theme="light"]):not(.light):not(.light-mode):not(.theme-light):not([data-bs-theme="light"]){
+    --hs-bg:
+      radial-gradient(circle at 50% -10%, rgba(92,255,151,.16), transparent 34%),
+      radial-gradient(circle at 10% 10%, rgba(215,192,122,.10), transparent 30%),
+      linear-gradient(180deg,#071512 0%,#0b1d18 44%,#08110f 100%);
+    --hs-shell:linear-gradient(180deg,rgba(15,34,28,.97) 0%,rgba(9,22,19,.99) 100%);
+    --hs-card:rgba(255,255,255,.055);
+    --hs-card-soft:rgba(255,255,255,.075);
+    --hs-card-deep:linear-gradient(180deg,rgba(7,16,15,.96),rgba(10,24,21,.98));
+    --hs-text:#edf8f1;
+    --hs-heading:#ffffff;
+    --hs-muted:#bedcc8;
+    --hs-soft:#d8f0e2;
+    --hs-border:rgba(126,255,174,.18);
+    --hs-border-strong:rgba(126,255,174,.32);
+    --hs-green:#8effb5;
+    --hs-green-bright:#7bf0a6;
+    --hs-gold:#ffe69a;
+    --hs-gold-bg:rgba(215,192,122,.16);
+    --hs-shadow:0 28px 80px rgba(0,0,0,.36);
+    --hs-shadow-card:0 16px 38px rgba(0,0,0,.18);
+    --hs-button-text:#ffffff;
+    --hs-action-bg:linear-gradient(180deg,rgba(255,255,255,.075),rgba(255,255,255,.035));
+    --hs-donation-bg:linear-gradient(180deg,rgba(18,35,31,.98),rgba(9,22,20,.98));
+    --hs-donation-text:#eaf7ef;
+    --hs-amount-bg:#f8fffb;
+    --hs-amount-text:#7cffaa;
+  }
+}
+
+/* ---------- DARK THEME BY APP CLASS / ATTRIBUTE ---------- */
+html[data-theme="dark"],
+body[data-theme="dark"],
+html.dark,
+body.dark,
+html.dark-mode,
+body.dark-mode,
+html.theme-dark,
+body.theme-dark,
+html[data-bs-theme="dark"],
+body[data-bs-theme="dark"],
+[data-theme="dark"]{
+  --hs-bg:
+    radial-gradient(circle at 50% -10%, rgba(92,255,151,.16), transparent 34%),
+    radial-gradient(circle at 10% 10%, rgba(215,192,122,.10), transparent 30%),
+    linear-gradient(180deg,#071512 0%,#0b1d18 44%,#08110f 100%);
+  --hs-shell:linear-gradient(180deg,rgba(15,34,28,.97) 0%,rgba(9,22,19,.99) 100%);
+  --hs-card:rgba(255,255,255,.055);
+  --hs-card-soft:rgba(255,255,255,.075);
+  --hs-card-deep:linear-gradient(180deg,rgba(7,16,15,.96),rgba(10,24,21,.98));
+  --hs-text:#edf8f1;
+  --hs-heading:#ffffff;
+  --hs-muted:#bedcc8;
+  --hs-soft:#d8f0e2;
+  --hs-border:rgba(126,255,174,.18);
+  --hs-border-strong:rgba(126,255,174,.32);
+  --hs-green:#8effb5;
+  --hs-green-bright:#7bf0a6;
+  --hs-gold:#ffe69a;
+  --hs-gold-bg:rgba(215,192,122,.16);
+  --hs-shadow:0 28px 80px rgba(0,0,0,.36);
+  --hs-shadow-card:0 16px 38px rgba(0,0,0,.18);
+  --hs-button-text:#ffffff;
+  --hs-action-bg:linear-gradient(180deg,rgba(255,255,255,.075),rgba(255,255,255,.035));
+  --hs-donation-bg:linear-gradient(180deg,rgba(18,35,31,.98),rgba(9,22,20,.98));
+  --hs-donation-text:#eaf7ef;
+  --hs-amount-bg:#f8fffb;
+  --hs-amount-text:#7cffaa;
+}
+
+/* ---------- HARD OVERRIDES ---------- */
+html,
+body{
+  background:var(--hs-bg) !important;
+  color:var(--hs-text) !important;
+}
+
+.container{
+  background:var(--hs-shell) !important;
+  color:var(--hs-text) !important;
+  border-color:var(--hs-border) !important;
+  box-shadow:var(--hs-shadow) !important;
+}
+
+.container::before{
+  opacity:.72 !important;
+}
+
+h1,
+h2,
+h3,
+.section h2,
+.help-card h3,
+.premium-progress-heading,
+strong{
+  color:var(--hs-heading) !important;
+}
+
+p,
+div,
+span,
+li,
+.section,
+.mobile-dropdown-content,
+.verification,
+.donation-dropdown-content,
+.transactions,
+.tx,
+.wallet,
+.footer{
+  color:var(--hs-text) !important;
+}
+
+.hero-subtitle,
+.help-lead,
+.intro p,
+.verification p,
+.donation-dropdown-content p,
+.quote,
+.help-principle{
+  color:var(--hs-soft) !important;
+}
+
+.small,
+.wallet-type,
+.trust-card span,
+.help-card p,
+.premium-progress-note,
+.donation-summary-note{
+  color:var(--hs-muted) !important;
+}
+
+a:not(.tronscan-check-link){
+  color:var(--hs-green) !important;
+}
+
+.intro,
+.trust-card,
+.help-card,
+.help-principle,
+.transactions,
+.mobile-dropdown,
+.donation-dropdown,
+.wallet-box,
+.quote{
+  background:var(--hs-card) !important;
+  border-color:var(--hs-border) !important;
+  box-shadow:var(--hs-shadow-card) !important;
+}
+
+.wallet-box{
+  background:var(--hs-card-deep) !important;
+}
+
+.page-action-btn{
+  background:var(--hs-action-bg) !important;
+  border-color:var(--hs-border-strong) !important;
+  color:var(--hs-heading) !important;
+  box-shadow:var(--hs-shadow-card), inset 0 1px 0 rgba(255,255,255,.10) !important;
+}
+
+.page-action-btn svg,
+.page-action-btn span{
+  color:var(--hs-heading) !important;
+  stroke:var(--hs-heading) !important;
+}
+
+.page-action-btn.is-active,
+.page-action-btn:hover{
+  border-color:rgba(215,192,122,.58) !important;
+  color:var(--hs-gold) !important;
+}
+
+.page-action-btn.is-active svg,
+.page-action-btn.is-active span,
+.page-action-btn:hover svg,
+.page-action-btn:hover span{
+  color:var(--hs-gold) !important;
+  stroke:var(--hs-gold) !important;
+}
+
+.trust-card strong,
+.help-principle strong,
+.verification strong{
+  color:var(--hs-green-bright) !important;
+}
+
+.trust-card{
+  background:var(--hs-card-soft) !important;
+}
+
+.help-card{
+  background:
+    radial-gradient(circle at 100% 0%, rgba(126,255,174,.10), transparent 34%),
+    radial-gradient(circle at 0% 100%, rgba(215,192,122,.08), transparent 30%),
+    var(--hs-card) !important;
+}
+
+.help-card-icon{
+  color:var(--hs-heading) !important;
+  background:linear-gradient(135deg,rgba(45,122,70,.84),rgba(126,255,174,.22)) !important;
+  border-color:var(--hs-border-strong) !important;
+}
+
+.help-card-status{
+  color:var(--hs-gold) !important;
+  background:var(--hs-gold-bg) !important;
+  border-color:rgba(215,192,122,.34) !important;
+}
+
+.tronscan-check-link{
+  color:var(--hs-gold) !important;
+  background:
+    radial-gradient(circle at 20% 0%, rgba(255,230,154,.26), transparent 34%),
+    linear-gradient(135deg, rgba(215,192,122,.24), rgba(45,122,70,.28)) !important;
+  border-color:rgba(215,192,122,.54) !important;
+  text-shadow:none !important;
+}
+
+.tronscan-check-link::before{
+  color:var(--hs-gold) !important;
+}
+
+button,
+button span{
+  color:var(--hs-button-text) !important;
+}
+
+.donation-dropdown summary,
+.donation-dropdown summary span{
+  color:#ffffff !important;
+}
+
+.donation-dropdown summary{
+  background:linear-gradient(135deg,#1f6f42 0%,#2d7a46 48%,#3fa862 100%) !important;
+}
+
+.donation-dropdown-content{
+  background:var(--hs-card) !important;
+}
+
+.premium-progress-card{
+  background:var(--hs-donation-bg) !important;
+  border-color:var(--hs-border-strong) !important;
+  color:var(--hs-donation-text) !important;
+}
+
+.premium-progress-card *,
+.premium-progress-card p{
+  color:var(--hs-donation-text) !important;
+}
+
+.premium-progress-heading{
+  color:#8effb5 !important;
+}
+
+.premium-progress-note{
+  color:#d8f6e2 !important;
+}
+
+.premium-progress-value{
+  background:var(--hs-amount-bg) !important;
+  border-color:rgba(126,255,174,.18) !important;
+}
+
+#premiumDonationAmount{
+  color:var(--hs-amount-text) !important;
+}
+
+#premiumDonationAmount .currency{
+  color:color-mix(in srgb, var(--hs-amount-text) 72%, #9fa8b7 28%) !important;
+}
+
+.transactions{
+  background:var(--hs-card) !important;
+}
+
+.tx{
+  color:var(--hs-text) !important;
+  border-bottom-color:var(--hs-border) !important;
+}
+
+/* Remove old hard white/light leftovers from external CSS on this page */
+.mobile-dropdown-title{
+  color:var(--hs-heading) !important;
+  background:var(--hs-card-soft) !important;
+  border-left-color:var(--hs-green-bright) !important;
+}
+
+.ramadan-bar,
+.ramadan-text{
+  color:#ffffff !important;
+}
+
+@media(max-width:640px){
+  .trust-grid{
+    grid-template-columns:1fr !important;
+  }
+
+  .help-cards{
+    grid-template-columns:1fr !important;
+  }
+}
+</style>
+
 </head>
 <body>
 <div class="mobile-top-controls">
