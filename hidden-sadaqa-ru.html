@@ -45,29 +45,57 @@ animation:ramadanMove 18s linear infinite;
 
 body{
 margin:0;
-font-family:system-ui;
-background:#f5f7f8;
-color:#222;
+font-family:system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
+background:
+  radial-gradient(circle at 50% -10%, rgba(92,255,151,0.16), transparent 34%),
+  radial-gradient(circle at 10% 10%, rgba(215,192,122,0.10), transparent 30%),
+  linear-gradient(180deg,#071512 0%,#0b1d18 44%,#08110f 100%);
+color:#eaf7ef;
 line-height:1.7;
+min-height:100vh;
 }
 
 .container{
 max-width:850px;
-margin:auto;
-background:white;
-padding:40px 30px;
-box-shadow:0 6px 16px rgba(0,0,0,0.05);
+margin:0 auto 92px;
+background:linear-gradient(180deg, rgba(15,34,28,0.94) 0%, rgba(9,22,19,0.96) 100%);
+padding:42px 28px 48px;
+border:1px solid rgba(126,255,174,0.14);
+border-radius:0 0 30px 30px;
+box-shadow:
+  0 28px 80px rgba(0,0,0,0.34),
+  inset 0 1px 0 rgba(255,255,255,0.04);
+position:relative;
+overflow:hidden;
+}
+
+.container::before{
+content:"";
+position:absolute;
+inset:0;
+background:
+  radial-gradient(circle at top right, rgba(120,255,176,0.08), transparent 30%),
+  radial-gradient(circle at bottom left, rgba(215,192,122,0.07), transparent 32%);
+pointer-events:none;
+}
+
+.container > *{
+position:relative;
+z-index:1;
 }
 
 h1{
 text-align:center;
-font-size:36px;
-margin-bottom:5px;
+font-size:40px;
+line-height:1.08;
+margin:0 0 8px;
+letter-spacing:-0.8px;
+color:#f5fff8;
 }
 
 .subtitle{
 text-align:center;
-color:#666;
+color:#9fd7b5;
 margin-bottom:5px;
 letter-spacing:2px;
 font-size:15px;
@@ -94,7 +122,7 @@ color:#000;
 
 .tagline{
 text-align:center;
-color:#888;
+color:#a8cdb7;
 margin-bottom:40px;
 font-size:14px;
 }
@@ -104,31 +132,39 @@ margin-bottom:45px;
 }
 
 .intro{
-background:#fafafa;
-padding:20px;
-border-radius:8px;
+background:linear-gradient(180deg, rgba(255,255,255,0.07), rgba(255,255,255,0.035));
+padding:22px;
+border-radius:22px;
+border:1px solid rgba(126,255,174,0.14);
+box-shadow:inset 0 1px 0 rgba(255,255,255,0.04);
+color:#dff3e7;
 }
 
 .section h2{
 font-size:22px;
-border-left:4px solid #2d7a46;
+border-left:4px solid #7bf0a6;
 padding-left:12px;
 margin-bottom:15px;
+color:#f5fff8;
 }
 
 .quote{
-background:#eef5f1;
-padding:20px;
-border-radius:8px;
+background:linear-gradient(180deg, rgba(215,192,122,0.12), rgba(255,255,255,0.04));
+padding:22px;
+border-radius:20px;
 font-style:italic;
+border:1px solid rgba(215,192,122,0.22);
+color:#fff8df;
 }
 
 .wallet-box{
-background:#eef6ff;
-padding:30px;
-border-radius:12px;
+background:linear-gradient(180deg, rgba(7,16,15,0.94), rgba(10,24,21,0.96));
+padding:30px 20px;
+border-radius:22px;
 text-align:center;
 margin-top:20px;
+border:1px solid rgba(126,255,174,0.14);
+box-shadow:inset 0 1px 0 rgba(255,255,255,0.04);
 }
 
 .wallet{
@@ -140,7 +176,7 @@ font-weight:bold;
 
 .wallet-type{
 font-size:13px;
-color:#777;
+color:#9fd7b5;
 }
 
 button{
@@ -173,33 +209,36 @@ width:0%;
 }
 
 .transactions{
-background:#fafafa;
+background:linear-gradient(180deg, rgba(255,255,255,0.055), rgba(255,255,255,0.028));
 padding:20px;
-border-radius:8px;
+border-radius:20px;
+border:1px solid rgba(126,255,174,0.12);
+color:#eaf7ef;
 }
 
 .tx{
 padding:10px;
-border-bottom:1px solid #eee;
+border-bottom:1px solid rgba(255,255,255,0.08);
 font-size:14px;
 }
 
 .warning{
-background:#fff3f3;
+background:rgba(120,45,45,0.16);
 padding:20px;
-border-radius:8px;
-border-left:4px solid #d44;
+border-radius:18px;
+border-left:4px solid #e07171;
+color:#ffecec;
 }
 
 .footer{
 text-align:center;
-margin-top:50px;
-color:#555;
+margin-top:42px;
+color:#bce5c9;
 }
 
 .small{
 font-size:14px;
-color:#666;
+color:#b8d8c3;
 }
 
 .link{
@@ -208,7 +247,7 @@ margin-top:30px;
 }
 
 .link a{
-color:#2d7a46;
+color:#8effb5;
 text-decoration:none;
 font-weight:bold;
 margin:0 10px;
@@ -394,8 +433,8 @@ flex:0 0 auto;
 
 
 .donation-dropdown{
-background:#f4f8f5;
-border:1px solid #d8e7dc;
+background:linear-gradient(180deg, rgba(255,255,255,0.055), rgba(255,255,255,0.028));
+border:1px solid rgba(126,255,174,0.14);
 border-radius:14px;
 padding:0;
 overflow:hidden;
@@ -445,6 +484,7 @@ transform:rotate(180deg);
 
 .donation-dropdown-content{
 padding:22px;
+color:#dff3e7;
 }
 
 
@@ -472,24 +512,24 @@ justify-content:space-between;
 gap:12px;
 width:100%;
 padding:16px 18px;
-background:#f7faf8;
-border:1px solid #dbe6de;
-border-radius:14px;
+background:linear-gradient(180deg, rgba(255,255,255,0.07), rgba(255,255,255,0.035));
+border:1px solid rgba(126,255,174,0.14);
+border-radius:18px;
 cursor:pointer;
 font-size:16px;
 font-weight:700;
-color:#1f2a22;
+color:#f5fff8;
 text-align:left;
 transition:all .18s ease;
 }
 .help-option-btn:hover{
 transform:translateY(-1px);
-border-color:#2d7a46;
-box-shadow:0 8px 18px rgba(45,122,70,0.10);
-background:#ffffff;
+border-color:#7bf0a6;
+box-shadow:0 12px 24px rgba(45,122,70,0.18);
+background:linear-gradient(180deg, rgba(255,255,255,0.10), rgba(255,255,255,0.05));
 }
 .help-option-arrow{
-color:#2d7a46;
+color:#8effb5;
 font-size:18px;
 flex:0 0 auto;
 }
@@ -639,6 +679,372 @@ padding:15px 16px;
     padding-top:94px;
   }
 }
+
+.hero-subtitle{
+text-align:center;
+max-width:620px;
+margin:0 auto 22px;
+color:#cfeedd;
+font-size:16px;
+line-height:1.65;
+}
+
+.page-actions{
+display:grid;
+grid-template-columns:repeat(3,minmax(0,1fr));
+gap:12px;
+margin:0 0 28px;
+}
+
+.page-action-btn{
+display:flex;
+flex-direction:column;
+align-items:center;
+justify-content:center;
+gap:7px;
+min-height:76px;
+border-radius:20px;
+border:1px solid rgba(126,255,174,0.16);
+background:linear-gradient(180deg, rgba(255,255,255,0.075), rgba(255,255,255,0.035));
+color:#eaf7ef;
+font-size:13px;
+font-weight:700;
+box-shadow:inset 0 1px 0 rgba(255,255,255,0.045);
+}
+
+.page-action-btn svg{
+width:23px;
+height:23px;
+fill:none;
+stroke:currentColor;
+stroke-width:2;
+}
+
+.page-action-btn.is-active{
+border-color:rgba(215,192,122,0.55);
+color:#ffe69a;
+background:linear-gradient(180deg, rgba(215,192,122,0.16), rgba(45,122,70,0.11));
+}
+
+.trust-grid{
+display:grid;
+grid-template-columns:repeat(3,minmax(0,1fr));
+gap:12px;
+margin:20px 0 0;
+}
+
+.trust-card{
+border:1px solid rgba(126,255,174,0.12);
+border-radius:18px;
+padding:15px;
+background:rgba(255,255,255,0.035);
+}
+
+.trust-card strong{
+display:block;
+color:#f5fff8;
+font-size:14px;
+margin-bottom:4px;
+}
+
+.trust-card span{
+display:block;
+color:#b8d8c3;
+font-size:13px;
+line-height:1.45;
+}
+
+@media(max-width:640px){
+  .container{padding:96px 16px 44px;border-radius:0 0 24px 24px;}
+  h1{font-size:34px;}
+  .page-actions{grid-template-columns:1fr 1fr 1fr;gap:8px;}
+  .page-action-btn{min-height:68px;border-radius:18px;font-size:11.5px;padding:8px 4px;}
+  .trust-grid{grid-template-columns:1fr;}
+}
+
+
+/* === Hidden Sadaqa final responsive light/dark layer === */
+:root{
+  --hs-bg:
+    radial-gradient(circle at 50% -10%, rgba(92,255,151,0.16), transparent 34%),
+    radial-gradient(circle at 10% 10%, rgba(215,192,122,0.10), transparent 30%),
+    linear-gradient(180deg,#071512 0%,#0b1d18 44%,#08110f 100%);
+  --hs-shell:linear-gradient(180deg, rgba(15,34,28,0.94) 0%, rgba(9,22,19,0.96) 100%);
+  --hs-card:linear-gradient(180deg, rgba(255,255,255,0.075), rgba(255,255,255,0.035));
+  --hs-card-strong:linear-gradient(180deg, rgba(7,16,15,0.94), rgba(10,24,21,0.96));
+  --hs-text:#eaf7ef;
+  --hs-heading:#f5fff8;
+  --hs-muted:#b8d8c3;
+  --hs-soft:#cfeedd;
+  --hs-green:#8effb5;
+  --hs-green-2:#7bf0a6;
+  --hs-gold:#ffe69a;
+  --hs-border:rgba(126,255,174,0.16);
+  --hs-border-strong:rgba(126,255,174,0.28);
+  --hs-shadow:0 28px 80px rgba(0,0,0,0.34);
+  --hs-button-text:#f5fff8;
+}
+
+@media (prefers-color-scheme: light){
+  :root{
+    --hs-bg:
+      radial-gradient(circle at 50% -12%, rgba(45,122,70,0.12), transparent 34%),
+      radial-gradient(circle at 8% 8%, rgba(215,192,122,0.16), transparent 28%),
+      linear-gradient(180deg,#f4f8f5 0%,#edf4ef 48%,#f8faf8 100%);
+    --hs-shell:linear-gradient(180deg, rgba(255,255,255,0.96) 0%, rgba(246,250,247,0.98) 100%);
+    --hs-card:linear-gradient(180deg, rgba(255,255,255,0.96), rgba(248,252,249,0.96));
+    --hs-card-strong:linear-gradient(180deg, #ffffff, #f4faf6);
+    --hs-text:#173025;
+    --hs-heading:#0d241b;
+    --hs-muted:#53665c;
+    --hs-soft:#325946;
+    --hs-green:#1f7a45;
+    --hs-green-2:#2d7a46;
+    --hs-gold:#8a6f1d;
+    --hs-border:rgba(45,122,70,0.18);
+    --hs-border-strong:rgba(45,122,70,0.30);
+    --hs-shadow:0 24px 70px rgba(13,36,27,0.12);
+    --hs-button-text:#ffffff;
+  }
+}
+
+body{
+  background:var(--hs-bg) !important;
+  color:var(--hs-text) !important;
+}
+
+.container{
+  background:var(--hs-shell) !important;
+  color:var(--hs-text) !important;
+  border-color:var(--hs-border) !important;
+  box-shadow:var(--hs-shadow) !important;
+}
+
+h1,.section h2,.trust-card strong,.help-card h3{
+  color:var(--hs-heading) !important;
+}
+
+.hero-subtitle,.intro,.donation-dropdown-content,.transactions,.help-lead{
+  color:var(--hs-soft) !important;
+}
+
+.small,.trust-card span,.help-card p,.premium-progress-note{
+  color:var(--hs-muted) !important;
+}
+
+.intro,.trust-card,.transactions,.donation-dropdown,.mobile-dropdown,.wallet-box{
+  background:var(--hs-card) !important;
+  border-color:var(--hs-border) !important;
+}
+
+.wallet-box,.premium-progress-value{
+  background:var(--hs-card-strong) !important;
+}
+
+.quote{
+  background:linear-gradient(180deg, rgba(215,192,122,0.16), rgba(255,255,255,0.05)) !important;
+  border-color:rgba(215,192,122,0.28) !important;
+  color:var(--hs-heading) !important;
+}
+
+.tronscan-check-link{
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  gap:10px;
+  width:100%;
+  box-sizing:border-box;
+  margin:18px 0 4px;
+  padding:15px 18px;
+  border-radius:18px;
+  background:
+    radial-gradient(circle at 20% 0%, rgba(255,230,154,0.28), transparent 34%),
+    linear-gradient(135deg, rgba(215,192,122,0.30), rgba(45,122,70,0.34));
+  border:1px solid rgba(255,230,154,0.58);
+  color:var(--hs-gold) !important;
+  text-decoration:none !important;
+  font-weight:900 !important;
+  letter-spacing:0.2px;
+  box-shadow:
+    0 14px 30px rgba(0,0,0,0.18),
+    inset 0 1px 0 rgba(255,255,255,0.12);
+}
+
+.tronscan-check-link::before{
+  content:"↗";
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  width:24px;
+  height:24px;
+  border-radius:999px;
+  background:rgba(255,230,154,0.18);
+  color:var(--hs-gold);
+  flex:0 0 auto;
+}
+
+.tronscan-check-link:hover{
+  transform:translateY(-1px);
+  border-color:rgba(255,230,154,0.82);
+  filter:brightness(1.05);
+}
+
+.help-section{
+  margin-bottom:34px;
+}
+
+.help-lead{
+  margin:0 0 18px;
+  max-width:760px;
+}
+
+.help-cards{
+  display:grid;
+  grid-template-columns:repeat(2,minmax(0,1fr));
+  gap:14px;
+  margin-top:18px;
+}
+
+.help-card{
+  position:relative;
+  min-height:218px;
+  border-radius:24px;
+  padding:20px;
+  overflow:hidden;
+  background:
+    radial-gradient(circle at 100% 0%, rgba(126,255,174,0.14), transparent 34%),
+    radial-gradient(circle at 0% 100%, rgba(215,192,122,0.10), transparent 30%),
+    var(--hs-card);
+  border:1px solid var(--hs-border);
+  box-shadow:
+    0 16px 38px rgba(0,0,0,0.12),
+    inset 0 1px 0 rgba(255,255,255,0.06);
+}
+
+.help-card::after{
+  content:"";
+  position:absolute;
+  right:-38px;
+  bottom:-48px;
+  width:150px;
+  height:150px;
+  border-radius:50%;
+  border:1px solid var(--hs-border);
+  opacity:0.42;
+}
+
+.help-card-top{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:12px;
+  margin-bottom:18px;
+}
+
+.help-card-icon{
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  width:48px;
+  height:48px;
+  border-radius:18px;
+  background:linear-gradient(135deg, rgba(45,122,70,0.82), rgba(126,255,174,0.28));
+  border:1px solid var(--hs-border-strong);
+  color:var(--hs-heading);
+  font-size:24px;
+  box-shadow:inset 0 1px 0 rgba(255,255,255,0.14);
+}
+
+.help-card-status{
+  padding:7px 10px;
+  border-radius:999px;
+  background:rgba(215,192,122,0.13);
+  border:1px solid rgba(215,192,122,0.26);
+  color:var(--hs-gold);
+  font-size:11px;
+  font-weight:800;
+  letter-spacing:0.45px;
+  text-transform:uppercase;
+}
+
+.help-card h3{
+  margin:0 0 10px;
+  font-size:20px;
+  line-height:1.2;
+  letter-spacing:-0.2px;
+}
+
+.help-card p{
+  margin:0;
+  font-size:14px;
+  line-height:1.62;
+  max-width:95%;
+}
+
+.help-principle{
+  margin-top:16px;
+  padding:17px 18px;
+  border-radius:20px;
+  background:linear-gradient(180deg, rgba(126,255,174,0.08), rgba(255,255,255,0.035));
+  border:1px solid var(--hs-border);
+  color:var(--hs-soft);
+  font-size:14px;
+  line-height:1.65;
+}
+
+.help-principle strong{
+  color:var(--hs-heading);
+}
+
+button,.premium-progress-button{
+  color:var(--hs-button-text) !important;
+}
+
+.donation-dropdown summary{
+  box-shadow:inset 0 1px 0 rgba(255,255,255,0.12);
+}
+
+.premium-progress-card{
+  border-color:var(--hs-border-strong) !important;
+}
+
+@media(max-width:640px){
+  .mobile-dropdown{
+    background:var(--hs-card) !important;
+    border-color:var(--hs-border) !important;
+  }
+
+  .mobile-dropdown-title{
+    color:var(--hs-heading) !important;
+    background:linear-gradient(180deg, rgba(126,255,174,0.10), rgba(255,255,255,0.04)) !important;
+    border-left-color:var(--hs-green-2) !important;
+  }
+
+  .help-cards{
+    grid-template-columns:1fr;
+    gap:12px;
+  }
+
+  .help-card{
+    min-height:auto;
+    padding:18px;
+    border-radius:22px;
+  }
+
+  .help-card h3{
+    font-size:18px;
+  }
+
+  .help-card p{
+    max-width:100%;
+  }
+
+  .tronscan-check-link{
+    padding:14px 15px;
+    font-size:14px;
+  }
+}
+
 </style>
 <script src="/theme-init.js"></script>
 <link rel="stylesheet" href="/theme.css">
@@ -670,36 +1076,44 @@ padding:15px 16px;
 
 <div class="container">
 <h1>Hidden Sadaqa</h1>
+<p class="hero-subtitle">Тихая садака через один публичный адрес: помощь направляется на проверенные случаи, а каждую транзакцию можно увидеть в блокчейне.</p>
+
+<div class="page-actions" aria-label="Действия страницы">
+  <button class="page-action-btn" type="button" onclick="saveHiddenSadaqaReminder()" data-title="Hidden Sadaqa" data-url="hidden-sadaqa-ru.html" data-text="Напоминание о тихой садаке" data-type="Напоминание" data-surah-action="save">
+    <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 4.5h12v15l-6-3.5-6 3.5v-15Z"/></svg>
+    <span>Напомнить</span>
+  </button>
+  <button class="page-action-btn" type="button" onclick="toggleHiddenSadaqaFavorite(this)" data-title="Hidden Sadaqa" data-url="hidden-sadaqa-ru.html" data-text="Тихая садака через BarakaWay" data-type="Проект" data-surah-action="favorite">
+    <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 20s-7-4.35-7-10.15A4.15 4.15 0 0 1 12 6.9a4.15 4.15 0 0 1 7 2.95C19 15.65 12 20 12 20Z"/></svg>
+    <span>Избранное</span>
+  </button>
+  <button class="page-action-btn" type="button" onclick="shareApp()">
+    <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M18 16a3 3 0 1 0-2.4 1.2l-6.7-3.35a3 3 0 0 0 0-1.7l6.7-3.35A3 3 0 1 0 14 6a3 3 0 0 0 .08.68l-6.7 3.35a3 3 0 1 0 0 4.94l6.7 3.35A3 3 0 0 0 18 16Z"/></svg>
+    <span>Поделиться</span>
+  </button>
+</div>
 
 <div class="section intro">
-<p><strong>Мы не просим у людей.</strong><br>
-Мы просим только у Аллаха.</p>
+<p><strong>Hidden Sadaqa</strong> — страница тихой помощи для тех случаев, где важны достоинство человека, проверка и прозрачность.</p>
 
-<p>
-Иногда Аллах делает одних людей причиной помощи для других.
-</p>
+<p>Пожертвование не превращается в публичную историю. Оно проходит через один открытый адрес и направляется туда, где помощь действительно нужна.</p>
 
-<p>
-Даже один доллар может стать причиной облегчения
-для нуждающегося человека.
-</p>
-
-<p>
-Если вы помогли — пусть Аллах примет ваше добро.
-Если вы не можете помочь — сделайте дуа.
-</p>
+<div class="trust-grid">
+  <div class="trust-card"><strong>Один адрес</strong><span>чтобы исключить путаницу и поддельные сборы</span></div>
+  <div class="trust-card"><strong>Публичная проверка</strong><span>каждая транзакция видна в TRON</span></div>
+  <div class="trust-card"><strong>Тихая помощь</strong><span>без раскрытия лишних личных деталей</span></div>
+</div>
 </div>
 
 <details class="mobile-dropdown" open><summary class="mobile-dropdown-title">Прозрачность ▾</summary><div class="mobile-dropdown-content"><div class="section">
 <h2>Прозрачность</h2>
 <div class="verification">
 <p>
-Все пожертвования отправляются на <strong>один публичный адрес кошелька</strong>.
+Все пожертвования принимаются на <strong>один публичный адрес кошелька</strong>. Это снижает риск подмены реквизитов и позволяет проверять поступления без доверия к словам.
 </p>
 
 <p>
-Любой человек может проверить каждую транзакцию
-в блокчейне TRON.
+Каждую транзакцию можно проверить в блокчейне TRON. Адрес открыт, история поступлений не скрывается.
 </p>
 
 <p>
@@ -708,7 +1122,7 @@ padding:15px 16px;
 </p>
 
 <p>
-<a href="https://tronscan.org/#/address/TH6Lae54SaHndgBaNFhXEot7aYCh6GNvvs" target="_blank">
+<a class="tronscan-check-link" href="https://tronscan.org/#/address/TH6Lae54SaHndgBaNFhXEot7aYCh6GNvvs" target="_blank" rel="noopener">
 Проверить транзакции в Tronscan
 </a>
 </p>
@@ -729,35 +1143,60 @@ padding:15px 16px;
 <details class="mobile-dropdown" open>
 <summary class="mobile-dropdown-title">Текущая помощь ▾</summary>
 <div class="mobile-dropdown-content">
-<div class="section">
+<div class="section help-section">
 <h2>Текущая помощь</h2>
 
-<p>
-Пожертвования направляются на разные виды помощи. Нажмите на категорию, чтобы открыть изображение.
+<p class="help-lead">
+Пожертвования направляются на проверенные случаи, где помощь может дать быстрый и понятный результат. Ниже — основные направления, без раскрытия личных данных нуждающихся.
 </p>
 
-<div class="help-options">
-<button class="help-option-btn" type="button" onclick="openHelpImage('data:image/svg+xml;charset=UTF-8,%0A%20%20%20%20%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20width%3D%221200%22%20height%3D%22800%22%20viewBox%3D%220%200%201200%20800%22%3E%0A%20%20%20%20%20%20%3Cdefs%3E%0A%20%20%20%20%20%20%20%20%3ClinearGradient%20id%3D%22g%22%20x1%3D%220%22%20x2%3D%221%22%20y1%3D%220%22%20y2%3D%221%22%3E%0A%20%20%20%20%20%20%20%20%20%20%3Cstop%20offset%3D%220%25%22%20stop-color%3D%22%23eef5f1%22/%3E%0A%20%20%20%20%20%20%20%20%20%20%3Cstop%20offset%3D%22100%25%22%20stop-color%3D%22%23dfeee5%22/%3E%0A%20%20%20%20%20%20%20%20%3C/linearGradient%3E%0A%20%20%20%20%20%20%3C/defs%3E%0A%20%20%20%20%20%20%3Crect%20width%3D%221200%22%20height%3D%22800%22%20fill%3D%22url%28%23g%29%22/%3E%0A%20%20%20%20%20%20%3Crect%20x%3D%2280%22%20y%3D%2280%22%20width%3D%221040%22%20height%3D%22640%22%20rx%3D%2228%22%20fill%3D%22%23ffffff%22%20opacity%3D%220.94%22/%3E%0A%20%20%20%20%20%20%3Crect%20x%3D%22120%22%20y%3D%22120%22%20width%3D%2210%22%20height%3D%22170%22%20rx%3D%225%22%20fill%3D%22%232d7a46%22/%3E%0A%20%20%20%20%20%20%3Ctext%20x%3D%22180%22%20y%3D%22230%22%20font-family%3D%22Arial%2C%20sans-serif%22%20font-size%3D%2296%22%20font-weight%3D%22700%22%20fill%3D%22%232d7a46%22%3E%E2%9C%9A%3C/text%3E%0A%20%20%20%20%20%20%3Ctext%20x%3D%22180%22%20y%3D%22360%22%20font-family%3D%22Arial%2C%20sans-serif%22%20font-size%3D%2254%22%20font-weight%3D%22700%22%20fill%3D%22%231f2a22%22%3E%D0%9E%D0%BF%D0%B5%D1%80%D0%B0%D1%86%D0%B8%D0%B8%20%D0%B4%D0%BB%D1%8F%20%D0%B4%D0%B5%D1%82%D0%B5%D0%B9%3C/text%3E%0A%20%20%20%20%20%20%3Ctext%20x%3D%22180%22%20y%3D%22430%22%20font-family%3D%22Arial%2C%20sans-serif%22%20font-size%3D%2228%22%20fill%3D%22%235b675f%22%3E%D0%A1%D1%80%D0%BE%D1%87%D0%BD%D0%B0%D1%8F%20%D0%BF%D0%BE%D0%BC%D0%BE%D1%89%D1%8C%20%D0%BD%D0%B0%20%D0%BB%D0%B5%D1%87%D0%B5%D0%BD%D0%B8%D0%B5%2C%20%D0%B2%D0%BE%D1%81%D1%81%D1%82%D0%B0%D0%BD%D0%BE%D0%B2%D0%BB%D0%B5%D0%BD%D0%B8%D0%B5%20%D0%B8%20%D0%B2%D0%B0%D0%B6%D0%BD%D1%83%D1%8E%20%D0%BC%D0%B5%D0%B4%D0%B8%D1%86%D0%B8%D0%BD%D1%81%D0%BA%D1%83%D1%8E%20%D0%BF%D0%BE%D0%B4%D0%B4%D0%B5%D1%80%D0%B6%D0%BA%D1%83%3C/text%3E%0A%20%20%20%20%20%20%3Ctext%20x%3D%22180%22%20y%3D%22590%22%20font-family%3D%22Arial%2C%20sans-serif%22%20font-size%3D%2224%22%20fill%3D%22%237a857f%22%3EHidden%20Sadaqa%3C/text%3E%0A%20%20%20%20%3C/svg%3E%0A%20%20%20%20')">
-<span>Операции для детей</span><span class="help-option-arrow">↗</span>
-</button>
-<button class="help-option-btn" type="button" onclick="openHelpImage('data:image/svg+xml;charset=UTF-8,%0A%20%20%20%20%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20width%3D%221200%22%20height%3D%22800%22%20viewBox%3D%220%200%201200%20800%22%3E%0A%20%20%20%20%20%20%3Cdefs%3E%0A%20%20%20%20%20%20%20%20%3ClinearGradient%20id%3D%22g%22%20x1%3D%220%22%20x2%3D%221%22%20y1%3D%220%22%20y2%3D%221%22%3E%0A%20%20%20%20%20%20%20%20%20%20%3Cstop%20offset%3D%220%25%22%20stop-color%3D%22%23eef5f1%22/%3E%0A%20%20%20%20%20%20%20%20%20%20%3Cstop%20offset%3D%22100%25%22%20stop-color%3D%22%23dfeee5%22/%3E%0A%20%20%20%20%20%20%20%20%3C/linearGradient%3E%0A%20%20%20%20%20%20%3C/defs%3E%0A%20%20%20%20%20%20%3Crect%20width%3D%221200%22%20height%3D%22800%22%20fill%3D%22url%28%23g%29%22/%3E%0A%20%20%20%20%20%20%3Crect%20x%3D%2280%22%20y%3D%2280%22%20width%3D%221040%22%20height%3D%22640%22%20rx%3D%2228%22%20fill%3D%22%23ffffff%22%20opacity%3D%220.94%22/%3E%0A%20%20%20%20%20%20%3Crect%20x%3D%22120%22%20y%3D%22120%22%20width%3D%2210%22%20height%3D%22170%22%20rx%3D%225%22%20fill%3D%22%232d7a46%22/%3E%0A%20%20%20%20%20%20%3Ctext%20x%3D%22180%22%20y%3D%22230%22%20font-family%3D%22Arial%2C%20sans-serif%22%20font-size%3D%2296%22%20font-weight%3D%22700%22%20fill%3D%22%232d7a46%22%3E%E2%8C%82%3C/text%3E%0A%20%20%20%20%20%20%3Ctext%20x%3D%22180%22%20y%3D%22360%22%20font-family%3D%22Arial%2C%20sans-serif%22%20font-size%3D%2254%22%20font-weight%3D%22700%22%20fill%3D%22%231f2a22%22%3E%D0%91%D0%B5%D0%B4%D0%BD%D1%8B%D0%B5%20%D0%B8%20%D0%B1%D0%B5%D0%B7%D0%B4%D0%BE%D0%BC%D0%BD%D1%8B%D0%B5%20%D1%81%D0%B5%D0%BC%D1%8C%D0%B8%3C/text%3E%0A%20%20%20%20%20%20%3Ctext%20x%3D%22180%22%20y%3D%22430%22%20font-family%3D%22Arial%2C%20sans-serif%22%20font-size%3D%2228%22%20fill%3D%22%235b675f%22%3E%D0%9F%D0%BE%D0%B4%D0%B4%D0%B5%D1%80%D0%B6%D0%BA%D0%B0%20%D0%B6%D0%B8%D0%BB%D1%8C%D1%8F%2C%20%D0%B1%D0%B5%D0%B7%D0%BE%D0%BF%D0%B0%D1%81%D0%BD%D0%BE%D1%81%D1%82%D0%B8%20%D0%B8%20%D0%B1%D0%B0%D0%B7%D0%BE%D0%B2%D0%BE%D0%B9%20%D1%81%D0%B5%D0%BC%D0%B5%D0%B9%D0%BD%D0%BE%D0%B9%20%D0%BF%D0%BE%D0%BC%D0%BE%D1%89%D0%B8%3C/text%3E%0A%20%20%20%20%20%20%3Ctext%20x%3D%22180%22%20y%3D%22590%22%20font-family%3D%22Arial%2C%20sans-serif%22%20font-size%3D%2224%22%20fill%3D%22%237a857f%22%3EHidden%20Sadaqa%3C/text%3E%0A%20%20%20%20%3C/svg%3E%0A%20%20%20%20')">
-<span>Помощь бедным и бездомным семьям</span><span class="help-option-arrow">↗</span>
-</button>
-<button class="help-option-btn" type="button" onclick="openHelpImage('data:image/svg+xml;charset=UTF-8,%0A%20%20%20%20%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20width%3D%221200%22%20height%3D%22800%22%20viewBox%3D%220%200%201200%20800%22%3E%0A%20%20%20%20%20%20%3Cdefs%3E%0A%20%20%20%20%20%20%20%20%3ClinearGradient%20id%3D%22g%22%20x1%3D%220%22%20x2%3D%221%22%20y1%3D%220%22%20y2%3D%221%22%3E%0A%20%20%20%20%20%20%20%20%20%20%3Cstop%20offset%3D%220%25%22%20stop-color%3D%22%23eef5f1%22/%3E%0A%20%20%20%20%20%20%20%20%20%20%3Cstop%20offset%3D%22100%25%22%20stop-color%3D%22%23dfeee5%22/%3E%0A%20%20%20%20%20%20%20%20%3C/linearGradient%3E%0A%20%20%20%20%20%20%3C/defs%3E%0A%20%20%20%20%20%20%3Crect%20width%3D%221200%22%20height%3D%22800%22%20fill%3D%22url%28%23g%29%22/%3E%0A%20%20%20%20%20%20%3Crect%20x%3D%2280%22%20y%3D%2280%22%20width%3D%221040%22%20height%3D%22640%22%20rx%3D%2228%22%20fill%3D%22%23ffffff%22%20opacity%3D%220.94%22/%3E%0A%20%20%20%20%20%20%3Crect%20x%3D%22120%22%20y%3D%22120%22%20width%3D%2210%22%20height%3D%22170%22%20rx%3D%225%22%20fill%3D%22%232d7a46%22/%3E%0A%20%20%20%20%20%20%3Ctext%20x%3D%22180%22%20y%3D%22230%22%20font-family%3D%22Arial%2C%20sans-serif%22%20font-size%3D%2296%22%20font-weight%3D%22700%22%20fill%3D%22%232d7a46%22%3E%E2%97%94%3C/text%3E%0A%20%20%20%20%20%20%3Ctext%20x%3D%22180%22%20y%3D%22360%22%20font-family%3D%22Arial%2C%20sans-serif%22%20font-size%3D%2254%22%20font-weight%3D%22700%22%20fill%3D%22%231f2a22%22%3E%D0%95%D0%B4%D0%B0%20%D0%B8%20%D0%B1%D0%B0%D0%B7%D0%BE%D0%B2%D1%8B%D0%B5%20%D0%BD%D1%83%D0%B6%D0%B4%D1%8B%3C/text%3E%0A%20%20%20%20%20%20%3Ctext%20x%3D%22180%22%20y%3D%22430%22%20font-family%3D%22Arial%2C%20sans-serif%22%20font-size%3D%2228%22%20fill%3D%22%235b675f%22%3E%D0%9F%D1%80%D0%BE%D0%B4%D1%83%D0%BA%D1%82%D1%8B%2C%20%D0%B3%D0%B8%D0%B3%D0%B8%D0%B5%D0%BD%D0%B0%20%D0%B8%20%D0%BF%D0%BE%D0%B2%D1%81%D0%B5%D0%B4%D0%BD%D0%B5%D0%B2%D0%BD%D1%8B%D0%B5%20%D0%B6%D0%B8%D0%B7%D0%BD%D0%B5%D0%BD%D0%BD%D1%8B%D0%B5%20%D1%80%D0%B0%D1%81%D1%85%D0%BE%D0%B4%D1%8B%3C/text%3E%0A%20%20%20%20%20%20%3Ctext%20x%3D%22180%22%20y%3D%22590%22%20font-family%3D%22Arial%2C%20sans-serif%22%20font-size%3D%2224%22%20fill%3D%22%237a857f%22%3EHidden%20Sadaqa%3C/text%3E%0A%20%20%20%20%3C/svg%3E%0A%20%20%20%20')">
-<span>Еда и базовые нужды</span><span class="help-option-arrow">↗</span>
-</button>
-<button class="help-option-btn" type="button" onclick="openHelpImage('data:image/svg+xml;charset=UTF-8,%0A%20%20%20%20%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20width%3D%221200%22%20height%3D%22800%22%20viewBox%3D%220%200%201200%20800%22%3E%0A%20%20%20%20%20%20%3Cdefs%3E%0A%20%20%20%20%20%20%20%20%3ClinearGradient%20id%3D%22g%22%20x1%3D%220%22%20x2%3D%221%22%20y1%3D%220%22%20y2%3D%221%22%3E%0A%20%20%20%20%20%20%20%20%20%20%3Cstop%20offset%3D%220%25%22%20stop-color%3D%22%23eef5f1%22/%3E%0A%20%20%20%20%20%20%20%20%20%20%3Cstop%20offset%3D%22100%25%22%20stop-color%3D%22%23dfeee5%22/%3E%0A%20%20%20%20%20%20%20%20%3C/linearGradient%3E%0A%20%20%20%20%20%20%3C/defs%3E%0A%20%20%20%20%20%20%3Crect%20width%3D%221200%22%20height%3D%22800%22%20fill%3D%22url%28%23g%29%22/%3E%0A%20%20%20%20%20%20%3Crect%20x%3D%2280%22%20y%3D%2280%22%20width%3D%221040%22%20height%3D%22640%22%20rx%3D%2228%22%20fill%3D%22%23ffffff%22%20opacity%3D%220.94%22/%3E%0A%20%20%20%20%20%20%3Crect%20x%3D%22120%22%20y%3D%22120%22%20width%3D%2210%22%20height%3D%22170%22%20rx%3D%225%22%20fill%3D%22%232d7a46%22/%3E%0A%20%20%20%20%20%20%3Ctext%20x%3D%22180%22%20y%3D%22230%22%20font-family%3D%22Arial%2C%20sans-serif%22%20font-size%3D%2296%22%20font-weight%3D%22700%22%20fill%3D%22%232d7a46%22%3E%E2%98%BE%3C/text%3E%0A%20%20%20%20%20%20%3Ctext%20x%3D%22180%22%20y%3D%22360%22%20font-family%3D%22Arial%2C%20sans-serif%22%20font-size%3D%2254%22%20font-weight%3D%22700%22%20fill%3D%22%231f2a22%22%3E%D0%9C%D0%B5%D1%87%D0%B5%D1%82%D0%B8%20%D0%B8%20%D0%BC%D0%B5%D1%81%D1%82%D0%B0%20%D0%BC%D0%BE%D0%BB%D0%B8%D1%82%D0%B2%D1%8B%3C/text%3E%0A%20%20%20%20%20%20%3Ctext%20x%3D%22180%22%20y%3D%22430%22%20font-family%3D%22Arial%2C%20sans-serif%22%20font-size%3D%2228%22%20fill%3D%22%235b675f%22%3E%D0%A1%D1%82%D1%80%D0%BE%D0%B8%D1%82%D0%B5%D0%BB%D1%8C%D1%81%D1%82%D0%B2%D0%BE%2C%20%D1%80%D0%B5%D0%BC%D0%BE%D0%BD%D1%82%20%D0%B8%20%D0%BF%D1%80%D0%B0%D0%BA%D1%82%D0%B8%D1%87%D0%B5%D1%81%D0%BA%D0%B0%D1%8F%20%D0%BF%D0%BE%D0%B4%D0%B4%D0%B5%D1%80%D0%B6%D0%BA%D0%B0%20%D0%BC%D0%B5%D1%87%D0%B5%D1%82%D0%B5%D0%B9%3C/text%3E%0A%20%20%20%20%20%20%3Ctext%20x%3D%22180%22%20y%3D%22590%22%20font-family%3D%22Arial%2C%20sans-serif%22%20font-size%3D%2224%22%20fill%3D%22%237a857f%22%3EHidden%20Sadaqa%3C/text%3E%0A%20%20%20%20%3C/svg%3E%0A%20%20%20%20')">
-<span>Строительство и поддержка мечетей</span><span class="help-option-arrow">↗</span>
-</button>
+<div class="help-cards">
+  <article class="help-card">
+    <div class="help-card-top">
+      <span class="help-card-icon" aria-hidden="true">✚</span>
+      <span class="help-card-status">Приоритет</span>
+    </div>
+    <h3>Операции для детей</h3>
+    <p>Срочная медицинская помощь, лечение, восстановление и необходимые расходы, которые можно подтвердить документально.</p>
+  </article>
+
+  <article class="help-card">
+    <div class="help-card-top">
+      <span class="help-card-icon" aria-hidden="true">⌂</span>
+      <span class="help-card-status">Проверка</span>
+    </div>
+    <h3>Бедные и бездомные семьи</h3>
+    <p>Поддержка жилья, безопасности, базовых семейных нужд и временной помощи в сложных обстоятельствах.</p>
+  </article>
+
+  <article class="help-card">
+    <div class="help-card-top">
+      <span class="help-card-icon" aria-hidden="true">◔</span>
+      <span class="help-card-status">Базовые нужды</span>
+    </div>
+    <h3>Еда и повседневные расходы</h3>
+    <p>Продукты, гигиена, лекарства первой необходимости и минимальные расходы, без которых семья не может стабильно жить.</p>
+  </article>
+
+  <article class="help-card">
+    <div class="help-card-top">
+      <span class="help-card-icon" aria-hidden="true">☾</span>
+      <span class="help-card-status">Община</span>
+    </div>
+    <h3>Мечети и места молитвы</h3>
+    <p>Практическая поддержка мест молитвы: ремонт, базовая инфраструктура и расходы, важные для общины.</p>
+  </article>
 </div>
 
-<p class="small help-note">
-Каждый случай тщательно проверяется перед оказанием помощи.
-</p>
+<div class="help-principle">
+  <strong>Принцип распределения:</strong>
+  помощь направляется туда, где есть проверяемая нужда, понятный адресат и минимальный риск неправильного использования средств.
+</div>
 
 </div>
 </div>
 </details>
+
 
 <div class="section">
 <details class="donation-dropdown" id="donationPanel">
@@ -771,13 +1210,11 @@ padding:15px 16px;
 
 <div class="donation-dropdown-content">
 <p>
-Все пожертвования отправляются
-на один публичный адрес.
+Пожертвование отправляется на официальный публичный адрес Hidden Sadaqa.
 </p>
 
 <p>
-Любой человек может проверить
-все транзакции на сайте tronscan.org.
+Перед переводом сверяйте адрес полностью. Поступления можно проверить через Tronscan.
 </p>
 
 <p>
@@ -797,7 +1234,7 @@ TH6Lae54SaHndgBaNFhXEot7aYCh6GNvvs
 </div>
 
 <button onclick="copyAddress()">Скопировать адрес</button>
-<a href="https://tronscan.org/#/address/TH6Lae54SaHndgBaNFhXEot7aYCh6GNvvs" target="_blank">
+<a href="https://tronscan.org/#/address/TH6Lae54SaHndgBaNFhXEot7aYCh6GNvvs" target="_blank" rel="noopener">
 <button>Открыть в Tronscan</button>
 </a>
 
@@ -812,7 +1249,7 @@ TH6Lae54SaHndgBaNFhXEot7aYCh6GNvvs
 
 <div class="premium-progress-card">
   <div class="premium-progress-heading">Сбор средств</div>
-  <p class="premium-progress-note">Поддержите проект и помогите нам двигаться дальше 💚</p>
+  <p class="premium-progress-note">Текущий публичный баланс по последней загрузке блокчейна</p>
   <div class="premium-progress-value">
     <div class="premium-progress-amount" id="premiumDonationAmount">4.72<span class="currency">USDT</span></div>
   </div>
@@ -831,42 +1268,6 @@ TH6Lae54SaHndgBaNFhXEot7aYCh6GNvvs
 </div>
 </div></div></details>
 
-<details class="mobile-dropdown" open><summary class="mobile-dropdown-title">Если вы знаете нуждающуюся семью ▾</summary><div class="mobile-dropdown-content"><div class="section">
-<h2>Если вы знаете нуждающуюся семью</h2>
-<p>
-Если вы знаете семью,
-которая нуждается в помощи,
-вы можете написать нам.
-</p>
-
-<p>
-Мы стараемся помогать людям,
-которых можно проверить
-через знакомых или доверенных людей.
-</p>
-</div>
-
-<div class="section">
-<div class="warning">
-<strong>Важно</strong>
-
-<p>
-У проекта только один адрес кошелька.
-</p>
-
-<p>
-Если этот адрес где-то отличается —
-значит сайт или сообщение поддельные.
-</p>
-</div>
-</div></div></details>
-
-<div class="link">
-<a href="about-ru.html">О проекте</a>
-<a href="principles-ru.html">Принципы проекта</a>
-<a href="why-anonymous-ru.html">Почему анонимно</a>
-</div>
-
 <div class="footer">
 <p class="small">
 Пусть Аллах примет добро каждого,
@@ -874,14 +1275,8 @@ TH6Lae54SaHndgBaNFhXEot7aYCh6GNvvs
 </p>
 </div>
 
-<div class="image-modal" id="imageModal" onclick="closeHelpImage(event)">
-  <div class="image-modal-dialog">
-    <button class="image-modal-close" type="button" onclick="closeHelpImage()">×</button>
-    <img class="image-modal-img" id="helpModalImg" src="" alt="">
-  </div>
+
 </div>
-
-
 </div>
 
 <script>
@@ -920,6 +1315,81 @@ document.addEventListener("keydown", function(e){
 });
 
 const wallet="TH6Lae54SaHndgBaNFhXEot7aYCh6GNvvs";
+
+
+function hiddenSadaqaData(){
+  return {
+    title: "Hidden Sadaqa",
+    url: window.location.pathname || "hidden-sadaqa-ru.html",
+    text: "Тихая садака через один публичный адрес",
+    type: "Проект"
+  };
+}
+
+function toggleHiddenSadaqaFavorite(btn){
+  const data = hiddenSadaqaData();
+  if (window.BarakaWayFavorites && typeof window.BarakaWayFavorites.toggle === "function") {
+    const active = window.BarakaWayFavorites.toggle(data);
+    if (btn) {
+      btn.classList.toggle("is-active", active);
+      btn.setAttribute("aria-pressed", active ? "true" : "false");
+    }
+    if (window.BarakaWayFavorites.refreshNav) window.BarakaWayFavorites.refreshNav();
+    return;
+  }
+
+  try {
+    const key = "barakaway_favorites_v1";
+    const raw = localStorage.getItem(key);
+    let list = raw ? JSON.parse(raw) : [];
+    if (!Array.isArray(list)) list = [];
+    const id = data.url + "::" + data.title;
+    const exists = list.some(x => String(x.id) === id);
+    if (exists) {
+      list = list.filter(x => String(x.id) !== id);
+      if (btn) btn.classList.remove("is-active");
+    } else {
+      list.unshift({id, title:data.title, url:data.url, text:data.text, type:data.type, addedAt:new Date().toISOString()});
+      if (btn) btn.classList.add("is-active");
+    }
+    localStorage.setItem(key, JSON.stringify(list));
+  } catch(e) {}
+}
+
+function saveHiddenSadaqaReminder(){
+  const data = {
+    title: "Hidden Sadaqa",
+    text: "Напоминание о тихой садаке",
+    url: window.location.pathname || "hidden-sadaqa-ru.html",
+    savedAt: new Date().toISOString()
+  };
+
+  try {
+    const key = "barakaway_reminders_v1";
+    const raw = localStorage.getItem(key);
+    let list = raw ? JSON.parse(raw) : [];
+    if (!Array.isArray(list)) list = [];
+    list = list.filter(x => x && x.title !== data.title);
+    list.unshift(data);
+    localStorage.setItem(key, JSON.stringify(list));
+  } catch(e) {}
+
+  if (window.BarakaWayFavorites && typeof window.BarakaWayFavorites.toggle === "function") {
+    const id = (window.location.pathname || "hidden-sadaqa-ru.html") + "::Hidden Sadaqa";
+    if (!window.BarakaWayFavorites.isActive || !window.BarakaWayFavorites.isActive(id)) {
+      window.BarakaWayFavorites.toggle({
+        title: "Hidden Sadaqa",
+        url: window.location.pathname || "hidden-sadaqa-ru.html",
+        text: "Напоминание о тихой садаке",
+        type: "Напоминание"
+      });
+    }
+    if (window.BarakaWayFavorites.refreshNav) window.BarakaWayFavorites.refreshNav();
+  }
+
+  alert("Сохранено как напоминание");
+}
+
 
 
 async function loadTransactions(){
@@ -1030,7 +1500,7 @@ function shareApp() {
   const shareData = {
     title: "Hidden Sadaqa",
     text: "Помощь нуждающимся мусульманским семьям.",
-    url: "https://onedollarexit.com"
+    url: window.location.href
   };
 
   if (navigator.share) {
