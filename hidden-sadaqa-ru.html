@@ -1050,761 +1050,363 @@ button,.premium-progress-button{
 <link rel="stylesheet" href="/theme.css">
 <link rel="stylesheet" href="/theme-universal.css">
 
-<style id="hidden-sadaqa-final-theme-fix">
-/* Hidden Sadaqa — final strict light/dark contrast layer.
-   Loaded after global theme files intentionally. */
+<style id="hidden-sadaqa-scoped-final">
+/* Scoped only to this page content. Bottom navigation is not touched. */
 
-:root{
-  color-scheme: light dark;
-}
-
-/* ---------- LIGHT THEME DEFAULT ---------- */
+/* Base light variables */
 html,
-body,
-html[data-theme="light"],
-body[data-theme="light"],
-html.light,
-body.light,
-html.light-mode,
-body.light-mode,
-html.theme-light,
-body.theme-light,
-html[data-bs-theme="light"],
-body[data-bs-theme="light"]{
-  --hs-bg:
+body{
+  --hs-page-bg:
     radial-gradient(circle at 50% -12%, rgba(45,122,70,.10), transparent 34%),
-    radial-gradient(circle at 8% 8%, rgba(215,192,122,.14), transparent 28%),
-    linear-gradient(180deg,#f7faf7 0%,#edf5ef 48%,#fbfdfb 100%);
-  --hs-shell:linear-gradient(180deg,#ffffff 0%,#f7fbf8 100%);
-  --hs-card:#ffffff;
-  --hs-card-soft:#f5faf7;
+    linear-gradient(180deg,#f5faf6 0%,#eef6f0 52%,#fbfdfb 100%);
+  --hs-container-bg:linear-gradient(180deg,#ffffff 0%,#f7fbf8 100%);
+  --hs-card-bg:#ffffff;
+  --hs-card-soft:#f7fbf8;
   --hs-card-deep:#ffffff;
   --hs-text:#10251b;
   --hs-heading:#071810;
-  --hs-muted:#52675b;
+  --hs-muted:#4d6357;
   --hs-soft:#294c3a;
   --hs-border:rgba(35,122,69,.24);
   --hs-border-strong:rgba(35,122,69,.38);
   --hs-green:#176c3a;
   --hs-green-bright:#1f8b4b;
   --hs-gold:#725712;
-  --hs-gold-bg:rgba(215,192,122,.18);
-  --hs-shadow:0 24px 68px rgba(13,36,27,.14);
-  --hs-shadow-card:0 14px 34px rgba(13,36,27,.10);
-  --hs-button-text:#ffffff;
-  --hs-action-bg:linear-gradient(180deg,#ffffff,#f5faf7);
-  --hs-donation-bg:linear-gradient(180deg,#10291f 0%,#082017 100%);
-  --hs-donation-text:#eaf7ef;
-  --hs-amount-bg:#ffffff;
-  --hs-amount-text:#1f8b4b;
+  --hs-shadow:0 24px 70px rgba(13,36,27,.12);
+  --hs-card-shadow:0 14px 34px rgba(13,36,27,.09);
 }
 
-/* ---------- DARK THEME BY SYSTEM ---------- */
+/* Dark variables by system */
 @media (prefers-color-scheme: dark){
-  html:not([data-theme="light"]):not(.light):not(.light-mode):not(.theme-light):not([data-bs-theme="light"]),
-  body:not([data-theme="light"]):not(.light):not(.light-mode):not(.theme-light):not([data-bs-theme="light"]){
-    --hs-bg:
-      radial-gradient(circle at 50% -10%, rgba(92,255,151,.16), transparent 34%),
-      radial-gradient(circle at 10% 10%, rgba(215,192,122,.10), transparent 30%),
-      linear-gradient(180deg,#071512 0%,#0b1d18 44%,#08110f 100%);
-    --hs-shell:linear-gradient(180deg,rgba(15,34,28,.97) 0%,rgba(9,22,19,.99) 100%);
-    --hs-card:rgba(255,255,255,.055);
-    --hs-card-soft:rgba(255,255,255,.075);
-    --hs-card-deep:linear-gradient(180deg,rgba(7,16,15,.96),rgba(10,24,21,.98));
+  html:not([data-theme="light"]):not(.light):not(.theme-light):not(.light-mode),
+  body:not([data-theme="light"]):not(.light):not(.theme-light):not(.light-mode){
+    --hs-page-bg:
+      radial-gradient(circle at 50% -10%, rgba(92,255,151,.14), transparent 34%),
+      linear-gradient(180deg,#071512 0%,#0a1d18 48%,#08110f 100%);
+    --hs-container-bg:linear-gradient(180deg,#0d211b 0%,#091713 100%);
+    --hs-card-bg:#102720;
+    --hs-card-soft:#142e26;
+    --hs-card-deep:#071713;
     --hs-text:#edf8f1;
     --hs-heading:#ffffff;
-    --hs-muted:#bedcc8;
+    --hs-muted:#bcdac8;
     --hs-soft:#d8f0e2;
     --hs-border:rgba(126,255,174,.18);
     --hs-border-strong:rgba(126,255,174,.32);
     --hs-green:#8effb5;
     --hs-green-bright:#7bf0a6;
     --hs-gold:#ffe69a;
-    --hs-gold-bg:rgba(215,192,122,.16);
     --hs-shadow:0 28px 80px rgba(0,0,0,.36);
-    --hs-shadow-card:0 16px 38px rgba(0,0,0,.18);
-    --hs-button-text:#ffffff;
-    --hs-action-bg:linear-gradient(180deg,rgba(255,255,255,.075),rgba(255,255,255,.035));
-    --hs-donation-bg:linear-gradient(180deg,rgba(18,35,31,.98),rgba(9,22,20,.98));
-    --hs-donation-text:#eaf7ef;
-    --hs-amount-bg:#f8fffb;
-    --hs-amount-text:#7cffaa;
+    --hs-card-shadow:0 16px 38px rgba(0,0,0,.18);
   }
 }
 
-/* ---------- DARK THEME BY APP CLASS / ATTRIBUTE ---------- */
+/* Dark variables by app attribute/class */
 html[data-theme="dark"],
 body[data-theme="dark"],
 html.dark,
 body.dark,
-html.dark-mode,
-body.dark-mode,
 html.theme-dark,
 body.theme-dark,
-html[data-bs-theme="dark"],
-body[data-bs-theme="dark"],
-[data-theme="dark"]{
-  --hs-bg:
-    radial-gradient(circle at 50% -10%, rgba(92,255,151,.16), transparent 34%),
-    radial-gradient(circle at 10% 10%, rgba(215,192,122,.10), transparent 30%),
-    linear-gradient(180deg,#071512 0%,#0b1d18 44%,#08110f 100%);
-  --hs-shell:linear-gradient(180deg,rgba(15,34,28,.97) 0%,rgba(9,22,19,.99) 100%);
-  --hs-card:rgba(255,255,255,.055);
-  --hs-card-soft:rgba(255,255,255,.075);
-  --hs-card-deep:linear-gradient(180deg,rgba(7,16,15,.96),rgba(10,24,21,.98));
+html.dark-mode,
+body.dark-mode{
+  --hs-page-bg:
+    radial-gradient(circle at 50% -10%, rgba(92,255,151,.14), transparent 34%),
+    linear-gradient(180deg,#071512 0%,#0a1d18 48%,#08110f 100%);
+  --hs-container-bg:linear-gradient(180deg,#0d211b 0%,#091713 100%);
+  --hs-card-bg:#102720;
+  --hs-card-soft:#142e26;
+  --hs-card-deep:#071713;
   --hs-text:#edf8f1;
   --hs-heading:#ffffff;
-  --hs-muted:#bedcc8;
+  --hs-muted:#bcdac8;
   --hs-soft:#d8f0e2;
   --hs-border:rgba(126,255,174,.18);
   --hs-border-strong:rgba(126,255,174,.32);
   --hs-green:#8effb5;
   --hs-green-bright:#7bf0a6;
   --hs-gold:#ffe69a;
-  --hs-gold-bg:rgba(215,192,122,.16);
   --hs-shadow:0 28px 80px rgba(0,0,0,.36);
-  --hs-shadow-card:0 16px 38px rgba(0,0,0,.18);
-  --hs-button-text:#ffffff;
-  --hs-action-bg:linear-gradient(180deg,rgba(255,255,255,.075),rgba(255,255,255,.035));
-  --hs-donation-bg:linear-gradient(180deg,rgba(18,35,31,.98),rgba(9,22,20,.98));
-  --hs-donation-text:#eaf7ef;
-  --hs-amount-bg:#f8fffb;
-  --hs-amount-text:#7cffaa;
+  --hs-card-shadow:0 16px 38px rgba(0,0,0,.18);
 }
 
-/* ---------- HARD OVERRIDES ---------- */
-html,
-body{
-  background:var(--hs-bg) !important;
-  color:var(--hs-text) !important;
-}
-
-.container{
-  background:var(--hs-shell) !important;
-  color:var(--hs-text) !important;
-  border-color:var(--hs-border) !important;
-  box-shadow:var(--hs-shadow) !important;
-}
-
-.container::before{
-  opacity:.72 !important;
-}
-
-h1,
-h2,
-h3,
-.section h2,
-.help-card h3,
-.premium-progress-heading,
-strong{
-  color:var(--hs-heading) !important;
-}
-
-p,
-div,
-span,
-li,
-.section,
-.mobile-dropdown-content,
-.verification,
-.donation-dropdown-content,
-.transactions,
-.tx,
-.wallet,
-.footer{
-  color:var(--hs-text) !important;
-}
-
-.hero-subtitle,
-.help-lead,
-.intro p,
-.verification p,
-.donation-dropdown-content p,
-.quote,
-.help-principle{
-  color:var(--hs-soft) !important;
-}
-
-.small,
-.wallet-type,
-.trust-card span,
-.help-card p,
-.premium-progress-note,
-.donation-summary-note{
-  color:var(--hs-muted) !important;
-}
-
-a:not(.tronscan-check-link){
-  color:var(--hs-green) !important;
-}
-
-.intro,
-.trust-card,
-.help-card,
-.help-principle,
-.transactions,
-.mobile-dropdown,
-.donation-dropdown,
-.wallet-box,
-.quote{
-  background:var(--hs-card) !important;
-  border-color:var(--hs-border) !important;
-  box-shadow:var(--hs-shadow-card) !important;
-}
-
-.wallet-box{
-  background:var(--hs-card-deep) !important;
-}
-
-.page-action-btn{
-  background:var(--hs-action-bg) !important;
-  border-color:var(--hs-border-strong) !important;
-  color:var(--hs-heading) !important;
-  box-shadow:var(--hs-shadow-card), inset 0 1px 0 rgba(255,255,255,.10) !important;
-}
-
-.page-action-btn svg,
-.page-action-btn span{
-  color:var(--hs-heading) !important;
-  stroke:var(--hs-heading) !important;
-}
-
-.page-action-btn.is-active,
-.page-action-btn:hover{
-  border-color:rgba(215,192,122,.58) !important;
-  color:var(--hs-gold) !important;
-}
-
-.page-action-btn.is-active svg,
-.page-action-btn.is-active span,
-.page-action-btn:hover svg,
-.page-action-btn:hover span{
-  color:var(--hs-gold) !important;
-  stroke:var(--hs-gold) !important;
-}
-
-.trust-card strong,
-.help-principle strong,
-.verification strong{
-  color:var(--hs-green-bright) !important;
-}
-
-.trust-card{
-  background:var(--hs-card-soft) !important;
-}
-
-.help-card{
-  background:
-    radial-gradient(circle at 100% 0%, rgba(126,255,174,.10), transparent 34%),
-    radial-gradient(circle at 0% 100%, rgba(215,192,122,.08), transparent 30%),
-    var(--hs-card) !important;
-}
-
-.help-card-icon{
-  color:var(--hs-heading) !important;
-  background:linear-gradient(135deg,rgba(45,122,70,.84),rgba(126,255,174,.22)) !important;
-  border-color:var(--hs-border-strong) !important;
-}
-
-.help-card-status{
-  color:var(--hs-gold) !important;
-  background:var(--hs-gold-bg) !important;
-  border-color:rgba(215,192,122,.34) !important;
-}
-
-.tronscan-check-link{
-  color:var(--hs-gold) !important;
-  background:
-    radial-gradient(circle at 20% 0%, rgba(255,230,154,.26), transparent 34%),
-    linear-gradient(135deg, rgba(215,192,122,.24), rgba(45,122,70,.28)) !important;
-  border-color:rgba(215,192,122,.54) !important;
-  text-shadow:none !important;
-}
-
-.tronscan-check-link::before{
-  color:var(--hs-gold) !important;
-}
-
-button,
-button span{
-  color:var(--hs-button-text) !important;
-}
-
-.donation-dropdown summary,
-.donation-dropdown summary span{
-  color:#ffffff !important;
-}
-
-.donation-dropdown summary{
-  background:linear-gradient(135deg,#1f6f42 0%,#2d7a46 48%,#3fa862 100%) !important;
-}
-
-.donation-dropdown-content{
-  background:var(--hs-card) !important;
-}
-
-.premium-progress-card{
-  background:var(--hs-donation-bg) !important;
-  border-color:var(--hs-border-strong) !important;
-  color:var(--hs-donation-text) !important;
-}
-
-.premium-progress-card *,
-.premium-progress-card p{
-  color:var(--hs-donation-text) !important;
-}
-
-.premium-progress-heading{
-  color:#8effb5 !important;
-}
-
-.premium-progress-note{
-  color:#d8f6e2 !important;
-}
-
-.premium-progress-value{
-  background:var(--hs-amount-bg) !important;
-  border-color:rgba(126,255,174,.18) !important;
-}
-
-#premiumDonationAmount{
-  color:var(--hs-amount-text) !important;
-}
-
-#premiumDonationAmount .currency{
-  color:color-mix(in srgb, var(--hs-amount-text) 72%, #9fa8b7 28%) !important;
-}
-
-.transactions{
-  background:var(--hs-card) !important;
-}
-
-.tx{
-  color:var(--hs-text) !important;
-  border-bottom-color:var(--hs-border) !important;
-}
-
-/* Remove old hard white/light leftovers from external CSS on this page */
-.mobile-dropdown-title{
-  color:var(--hs-heading) !important;
-  background:var(--hs-card-soft) !important;
-  border-left-color:var(--hs-green-bright) !important;
-}
-
-.ramadan-bar,
-.ramadan-text{
-  color:#ffffff !important;
-}
-
-@media(max-width:640px){
-  .trust-grid{
-    grid-template-columns:1fr !important;
-  }
-
-  .help-cards{
-    grid-template-columns:1fr !important;
-  }
-}
-</style>
-
-
-<style id="hidden-sadaqa-light-dark-consistency-final">
-/* Final consistency: every content block follows Light = light, Dark = dark. */
-
-/* LIGHT */
-html,
-body,
+/* Light variables by app attribute/class */
 html[data-theme="light"],
 body[data-theme="light"],
 html.light,
 body.light,
-html.light-mode,
-body.light-mode,
 html.theme-light,
 body.theme-light,
-html[data-bs-theme="light"],
-body[data-bs-theme="light"]{
-  --hs-bg:#f4f8f5;
-  --hs-shell:#ffffff;
-  --hs-card:#ffffff;
+html.light-mode,
+body.light-mode{
+  --hs-page-bg:
+    radial-gradient(circle at 50% -12%, rgba(45,122,70,.10), transparent 34%),
+    linear-gradient(180deg,#f5faf6 0%,#eef6f0 52%,#fbfdfb 100%);
+  --hs-container-bg:linear-gradient(180deg,#ffffff 0%,#f7fbf8 100%);
+  --hs-card-bg:#ffffff;
   --hs-card-soft:#f7fbf8;
   --hs-card-deep:#ffffff;
   --hs-text:#10251b;
   --hs-heading:#071810;
   --hs-muted:#4d6357;
-  --hs-soft:#274b39;
+  --hs-soft:#294c3a;
   --hs-border:rgba(35,122,69,.24);
   --hs-border-strong:rgba(35,122,69,.38);
   --hs-green:#176c3a;
   --hs-green-bright:#1f8b4b;
   --hs-gold:#725712;
-  --hs-shadow:0 20px 56px rgba(13,36,27,.12);
-  --hs-block-shadow:0 12px 30px rgba(13,36,27,.08);
+  --hs-shadow:0 24px 70px rgba(13,36,27,.12);
+  --hs-card-shadow:0 14px 34px rgba(13,36,27,.09);
 }
 
-/* DARK */
-@media (prefers-color-scheme: dark){
-  html:not([data-theme="light"]):not(.light):not(.light-mode):not(.theme-light):not([data-bs-theme="light"]),
-  body:not([data-theme="light"]):not(.light):not(.light-mode):not(.theme-light):not([data-bs-theme="light"]){
-    --hs-bg:#071512;
-    --hs-shell:#0d211b;
-    --hs-card:#112821;
-    --hs-card-soft:#142e26;
-    --hs-card-deep:#071713;
-    --hs-text:#edf8f1;
-    --hs-heading:#ffffff;
-    --hs-muted:#bedcc8;
-    --hs-soft:#d8f0e2;
-    --hs-border:rgba(126,255,174,.18);
-    --hs-border-strong:rgba(126,255,174,.32);
-    --hs-green:#8effb5;
-    --hs-green-bright:#7bf0a6;
-    --hs-gold:#ffe69a;
-    --hs-shadow:0 28px 80px rgba(0,0,0,.36);
-    --hs-block-shadow:0 16px 38px rgba(0,0,0,.18);
-  }
-}
-
-html[data-theme="dark"],
-body[data-theme="dark"],
-html.dark,
-body.dark,
-html.dark-mode,
-body.dark-mode,
-html.theme-dark,
-body.theme-dark,
-html[data-bs-theme="dark"],
-body[data-bs-theme="dark"],
-[data-theme="dark"]{
-  --hs-bg:#071512;
-  --hs-shell:#0d211b;
-  --hs-card:#112821;
-  --hs-card-soft:#142e26;
-  --hs-card-deep:#071713;
-  --hs-text:#edf8f1;
-  --hs-heading:#ffffff;
-  --hs-muted:#bedcc8;
-  --hs-soft:#d8f0e2;
-  --hs-border:rgba(126,255,174,.18);
-  --hs-border-strong:rgba(126,255,174,.32);
-  --hs-green:#8effb5;
-  --hs-green-bright:#7bf0a6;
-  --hs-gold:#ffe69a;
-  --hs-shadow:0 28px 80px rgba(0,0,0,.36);
-  --hs-block-shadow:0 16px 38px rgba(0,0,0,.18);
-}
-
-/* Page and all blocks */
 body{
-  background:
-    radial-gradient(circle at 50% -10%, color-mix(in srgb, var(--hs-green) 12%, transparent), transparent 34%),
-    var(--hs-bg) !important;
-  color:var(--hs-text) !important;
+  background:var(--hs-page-bg) !important;
 }
 
 .container{
-  background:var(--hs-shell) !important;
+  background:var(--hs-container-bg) !important;
   color:var(--hs-text) !important;
   border-color:var(--hs-border) !important;
   box-shadow:var(--hs-shadow) !important;
+  padding-bottom:78px !important;
 }
 
-.intro,
-.trust-card,
-.mobile-dropdown,
-.mobile-dropdown-content,
-.verification,
-.quote,
-.help-card,
-.help-principle,
-.donation-dropdown,
-.donation-dropdown-content,
-.wallet-box,
-.premium-progress-card,
-.premium-progress-value,
-.transactions,
-.tx{
-  background:var(--hs-card) !important;
-  color:var(--hs-text) !important;
-  border-color:var(--hs-border) !important;
-  box-shadow:var(--hs-block-shadow) !important;
-}
-
-.trust-card,
-.mobile-dropdown-content,
-.help-principle{
-  background:var(--hs-card-soft) !important;
-}
-
-.wallet-box,
-.premium-progress-value{
-  background:var(--hs-card-deep) !important;
-}
-
-/* Typography */
-h1,
-h2,
-h3,
-.section h2,
-.help-card h3,
-.premium-progress-heading,
-strong{
+.container h1,
+.container h2,
+.container h3,
+.container strong{
   color:var(--hs-heading) !important;
 }
 
-p,
-div,
-span,
-li,
-.wallet,
-.tx{
+.container p,
+.container .section,
+.container .verification,
+.container .wallet,
+.container .tx{
   color:var(--hs-text) !important;
 }
 
-.hero-subtitle,
-.intro p,
-.verification p,
-.help-lead,
-.donation-dropdown-content p,
-.quote,
-.help-principle{
+.container .hero-subtitle,
+.container .intro p,
+.container .verification p,
+.container .donation-dropdown-content p,
+.container .help-lead,
+.container .quote,
+.container .help-principle{
   color:var(--hs-soft) !important;
 }
 
-.small,
-.wallet-type,
-.trust-card span,
-.help-card p,
-.premium-progress-note,
-.donation-summary-note{
+.container .small,
+.container .trust-card span,
+.container .help-card p,
+.container .premium-progress-note,
+.container .wallet-type,
+.container .donation-summary-note{
   color:var(--hs-muted) !important;
 }
 
-a:not(.tronscan-check-link){
+.container a:not(.tronscan-check-link){
   color:var(--hs-green) !important;
 }
 
-/* Action buttons */
-.page-action-btn{
-  background:var(--hs-card) !important;
-  border-color:var(--hs-border-strong) !important;
+.container .intro,
+.container .trust-card,
+.container .mobile-dropdown,
+.container .mobile-dropdown-content,
+.container .verification,
+.container .quote,
+.container .help-card,
+.container .help-principle,
+.container .donation-dropdown,
+.container .donation-dropdown-content,
+.container .wallet-box,
+.container .premium-progress-card,
+.container .premium-progress-value,
+.container .transactions{
+  background:var(--hs-card-bg) !important;
+  color:var(--hs-text) !important;
+  border-color:var(--hs-border) !important;
+  box-shadow:var(--hs-card-shadow) !important;
+}
+
+.container .trust-card,
+.container .mobile-dropdown-content,
+.container .help-principle{
+  background:var(--hs-card-soft) !important;
+}
+
+.container .wallet-box,
+.container .premium-progress-value{
+  background:var(--hs-card-deep) !important;
+}
+
+/* Clean icon actions: no white blocks in dark mode, no heavy buttons */
+.container .page-actions{
+  max-width:620px;
+  margin:8px auto 30px !important;
+  display:grid;
+  grid-template-columns:repeat(3,minmax(0,1fr));
+  gap:18px;
+}
+
+.container .page-action-btn{
+  background:transparent !important;
+  border:none !important;
+  box-shadow:none !important;
+  min-height:auto !important;
+  padding:10px 6px !important;
+  margin:0 !important;
   color:var(--hs-heading) !important;
-  box-shadow:var(--hs-block-shadow) !important;
+  display:flex !important;
+  flex-direction:column !important;
+  align-items:center !important;
+  justify-content:center !important;
+  gap:8px !important;
 }
 
-.page-action-btn svg,
-.page-action-btn span{
-  color:var(--hs-heading) !important;
-  stroke:var(--hs-heading) !important;
-}
-
-/* Donation summary remains green in both modes, but readable */
-.donation-dropdown summary{
-  background:linear-gradient(135deg,#1f6f42,#2d7a46,#3fa862) !important;
-  color:#ffffff !important;
-}
-
-.donation-dropdown summary span,
-.donation-dropdown summary .donation-icon{
-  color:#ffffff !important;
-}
-
-/* Fund card must NOT stay dark in light mode */
-.premium-progress-card{
-  background:var(--hs-card) !important;
-}
-
-.premium-progress-heading{
+.container .page-action-btn svg{
+  width:28px !important;
+  height:28px !important;
+  stroke:var(--hs-green-bright) !important;
   color:var(--hs-green-bright) !important;
 }
 
-.premium-progress-value{
-  min-height:116px;
+.container .page-action-btn span{
+  color:var(--hs-heading) !important;
+  font-size:13px !important;
+  font-weight:800 !important;
 }
 
-#premiumDonationAmount{
+.container .page-action-btn:hover span,
+.container .page-action-btn.is-active span{
+  color:var(--hs-gold) !important;
+}
+
+.container .page-action-btn:hover svg,
+.container .page-action-btn.is-active svg{
+  stroke:var(--hs-gold) !important;
+}
+
+/* Small trust blocks: light in light, dark in dark */
+.container .trust-card{
+  border-radius:18px !important;
+  padding:16px !important;
+}
+
+.container .trust-card strong{
   color:var(--hs-green-bright) !important;
 }
 
-#premiumDonationAmount .currency{
-  color:var(--hs-muted) !important;
-}
-
-/* Help cards */
-.help-card-icon{
-  background:color-mix(in srgb, var(--hs-green) 18%, var(--hs-card)) !important;
-  border-color:var(--hs-border-strong) !important;
-  color:var(--hs-heading) !important;
-}
-
-.help-card-status{
-  background:color-mix(in srgb, var(--hs-gold) 15%, var(--hs-card)) !important;
-  color:var(--hs-gold) !important;
-  border-color:color-mix(in srgb, var(--hs-gold) 34%, transparent) !important;
-}
-
-/* Tronscan link visible in both modes */
-.tronscan-check-link{
-  color:var(--hs-gold) !important;
-  background:color-mix(in srgb, var(--hs-gold) 15%, var(--hs-card)) !important;
-  border-color:color-mix(in srgb, var(--hs-gold) 45%, transparent) !important;
-}
-
-/* Last donations */
-.transactions .tx,
-#transactions{
+.container .trust-card span{
   color:var(--hs-text) !important;
 }
 
-/* Mobile dropdown title */
-.mobile-dropdown-title{
-  background:var(--hs-card-soft) !important;
+/* Section spacing */
+.container .section,
+.container .verification{
+  padding:22px !important;
+  border-radius:20px !important;
+}
+
+.container .section h2{
+  margin-top:0 !important;
   color:var(--hs-heading) !important;
   border-left-color:var(--hs-green-bright) !important;
 }
 
-/* Light-only: ensure no dark blocks remain */
-html[data-theme="light"] .premium-progress-card,
-body[data-theme="light"] .premium-progress-card,
-html.light .premium-progress-card,
-body.light .premium-progress-card,
-html.light-mode .premium-progress-card,
-body.light-mode .premium-progress-card,
-html.theme-light .premium-progress-card,
-body.theme-light .premium-progress-card,
-html[data-bs-theme="light"] .premium-progress-card,
-body[data-bs-theme="light"] .premium-progress-card{
-  background:#ffffff !important;
-  color:#10251b !important;
-}
-
-html[data-theme="light"] .premium-progress-card *,
-body[data-theme="light"] .premium-progress-card *,
-html.light .premium-progress-card *,
-body.light .premium-progress-card *,
-html.light-mode .premium-progress-card *,
-body.light-mode .premium-progress-card *,
-html.theme-light .premium-progress-card *,
-body.theme-light .premium-progress-card *,
-html[data-bs-theme="light"] .premium-progress-card *,
-body[data-bs-theme="light"] .premium-progress-card *{
-  color:#10251b !important;
-}
-
-html[data-theme="light"] #premiumDonationAmount,
-body[data-theme="light"] #premiumDonationAmount,
-html.light #premiumDonationAmount,
-body.light #premiumDonationAmount,
-html.light-mode #premiumDonationAmount,
-body.light-mode #premiumDonationAmount,
-html.theme-light #premiumDonationAmount,
-body.theme-light #premiumDonationAmount,
-html[data-bs-theme="light"] #premiumDonationAmount,
-body[data-bs-theme="light"] #premiumDonationAmount{
-  color:#1f8b4b !important;
-}
-
-/* Dark-only: ensure no light blocks remain, except QR/amount white area intentionally made readable */
-html[data-theme="dark"] .intro,
-html[data-theme="dark"] .trust-card,
-html[data-theme="dark"] .mobile-dropdown,
-html[data-theme="dark"] .mobile-dropdown-content,
-html[data-theme="dark"] .verification,
-html[data-theme="dark"] .quote,
-html[data-theme="dark"] .help-card,
-html[data-theme="dark"] .help-principle,
-html[data-theme="dark"] .donation-dropdown,
-html[data-theme="dark"] .donation-dropdown-content,
-html[data-theme="dark"] .wallet-box,
-html[data-theme="dark"] .premium-progress-card,
-html[data-theme="dark"] .transactions,
-body[data-theme="dark"] .intro,
-body[data-theme="dark"] .trust-card,
-body[data-theme="dark"] .mobile-dropdown,
-body[data-theme="dark"] .mobile-dropdown-content,
-body[data-theme="dark"] .verification,
-body[data-theme="dark"] .quote,
-body[data-theme="dark"] .help-card,
-body[data-theme="dark"] .help-principle,
-body[data-theme="dark"] .donation-dropdown,
-body[data-theme="dark"] .donation-dropdown-content,
-body[data-theme="dark"] .wallet-box,
-body[data-theme="dark"] .premium-progress-card,
-body[data-theme="dark"] .transactions,
-html.dark .intro,
-html.dark .trust-card,
-html.dark .mobile-dropdown,
-html.dark .mobile-dropdown-content,
-html.dark .verification,
-html.dark .quote,
-html.dark .help-card,
-html.dark .help-principle,
-html.dark .donation-dropdown,
-html.dark .donation-dropdown-content,
-html.dark .wallet-box,
-html.dark .premium-progress-card,
-html.dark .transactions,
-body.dark .intro,
-body.dark .trust-card,
-body.dark .mobile-dropdown,
-body.dark .mobile-dropdown-content,
-body.dark .verification,
-body.dark .quote,
-body.dark .help-card,
-body.dark .help-principle,
-body.dark .donation-dropdown,
-body.dark .donation-dropdown-content,
-body.dark .wallet-box,
-body.dark .premium-progress-card,
-body.dark .transactions{
-  background:#112821 !important;
-  color:#edf8f1 !important;
-}
-
-html[data-theme="dark"] .premium-progress-value,
-body[data-theme="dark"] .premium-progress-value,
-html.dark .premium-progress-value,
-body.dark .premium-progress-value{
-  background:#071713 !important;
-}
-
-html[data-theme="dark"] #premiumDonationAmount,
-body[data-theme="dark"] #premiumDonationAmount,
-html.dark #premiumDonationAmount,
-body.dark #premiumDonationAmount{
-  color:#7cffaa !important;
-}
-</style>
-
-
-<style id="spacing-fix">
-/* Fix: content touching borders in sections */
-.section,
-.mobile-dropdown-content .section,
-.verification,
-.intro,
-.help-principle,
-.transactions{
-  padding:22px 20px !important;
-}
-
-.mobile-dropdown-content{
-  padding:18px !important;
-}
-
-.section h2{
+.container .verification p{
   margin-top:0 !important;
+  margin-bottom:14px !important;
 }
 
-.verification p{
-  margin-top:0;
-  margin-bottom:14px;
+.container .tronscan-check-link{
+  color:var(--hs-gold) !important;
+  background:linear-gradient(135deg, rgba(215,192,122,.20), rgba(45,122,70,.18)) !important;
+  border:1px solid rgba(215,192,122,.48) !important;
+  text-decoration:none !important;
+  font-weight:900 !important;
 }
 
-/* Ensure inner spacing from borders */
-.verification{
-  padding:20px 22px !important;
-  border-radius:16px;
+.container .help-card-icon{
+  background:rgba(45,122,70,.18) !important;
+  border-color:var(--hs-border-strong) !important;
+  color:var(--hs-heading) !important;
+}
+
+.container .help-card-status{
+  background:rgba(215,192,122,.14) !important;
+  color:var(--hs-gold) !important;
+  border-color:rgba(215,192,122,.32) !important;
+}
+
+.container .donation-dropdown summary{
+  background:linear-gradient(135deg,#1f6f42,#2d7a46,#3fa862) !important;
+}
+
+.container .donation-dropdown summary,
+.container .donation-dropdown summary span{
+  color:#ffffff !important;
+}
+
+/* Fund block follows the active theme */
+.container .premium-progress-card{
+  background:var(--hs-card-bg) !important;
+}
+
+.container .premium-progress-heading{
+  color:var(--hs-green-bright) !important;
+}
+
+.container .premium-progress-value{
+  background:var(--hs-card-deep) !important;
+}
+
+.container #premiumDonationAmount{
+  color:var(--hs-green-bright) !important;
+}
+
+.container #premiumDonationAmount .currency{
+  color:var(--hs-muted) !important;
+}
+
+.container .premium-progress-button,
+.container .premium-progress-button span{
+  color:#ffffff !important;
+}
+
+.container .transactions .tx{
+  color:var(--hs-text) !important;
+  border-bottom-color:var(--hs-border) !important;
+}
+
+.container .footer,
+.container .footer .small{
+  color:var(--hs-muted) !important;
+}
+
+@media(max-width:640px){
+  .container .page-actions{
+    gap:8px;
+  }
+
+  .container .page-action-btn svg{
+    width:24px !important;
+    height:24px !important;
+  }
+
+  .container .page-action-btn span{
+    font-size:11.5px !important;
+  }
+
+  .container .trust-grid,
+  .container .help-cards{
+    grid-template-columns:1fr !important;
+  }
+
+  .container .section,
+  .container .verification{
+    padding:18px !important;
+  }
 }
 </style>
 
