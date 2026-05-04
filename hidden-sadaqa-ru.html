@@ -119,10 +119,10 @@ h1{
 
 /* Quran-style actions */
 .sadaqa-actions{
-  width:min(100%,560px);
+  width:min(100%,430px);
   margin:12px auto 28px;
   display:grid;
-  grid-template-columns:repeat(3,1fr);
+  grid-template-columns:repeat(2,1fr);
   gap:10px;
   align-items:center;
 }
@@ -771,6 +771,33 @@ html.light-mode .sadaqa-action.is-active{
     font-size:23px;
   }
 }
+
+.sadaqa-share-modal{position:fixed;inset:0;z-index:3600;display:none;align-items:center;justify-content:center;padding:18px;background:rgba(4,9,7,.68);backdrop-filter:blur(18px);-webkit-backdrop-filter:blur(18px);}
+.sadaqa-share-modal.is-visible{display:flex;}
+.sadaqa-share-dialog{width:min(100%,520px);border-radius:28px;border:1px solid rgba(215,181,109,.30);background:radial-gradient(circle at 50% 0%,rgba(215,181,109,.18),transparent 42%),linear-gradient(180deg,#121b21,#0c1316);box-shadow:0 34px 80px rgba(0,0,0,.55);color:#fff;overflow:hidden;}
+.sadaqa-share-head{display:flex;align-items:center;justify-content:space-between;gap:14px;padding:18px 18px 12px;border-bottom:1px solid rgba(215,181,109,.20);}
+.sadaqa-share-title{margin:0;font-size:21px;font-weight:950;line-height:1.18;color:#f0d891;}
+.sadaqa-share-close{appearance:none;-webkit-appearance:none;border:1px solid rgba(215,181,109,.26);background:rgba(255,255,255,.04);color:#f0d891;width:38px;height:38px;border-radius:999px;cursor:pointer;font-size:22px;line-height:1;}
+.sadaqa-share-body{padding:16px 18px 18px;}
+.sadaqa-share-card{border-radius:24px;padding:22px 18px;border:1px solid rgba(240,216,145,.38);background:radial-gradient(circle at 85% 0%,rgba(240,216,145,.20),transparent 36%),linear-gradient(135deg,#16251c,#0e171a 58%,#101014);box-shadow:inset 0 1px 0 rgba(255,255,255,.06);}
+.sadaqa-share-bismillah{direction:rtl;text-align:center;font-size:25px;line-height:1.65;color:#f0d891;font-weight:850;margin-bottom:12px;}
+.sadaqa-share-main{text-align:center;font-size:24px;line-height:1.2;font-weight:950;color:#fff;}
+.sadaqa-share-sub{margin-top:10px;text-align:center;color:#cbd5df;font-size:14px;font-weight:750;line-height:1.55;}
+.sadaqa-share-wallet{margin-top:15px;padding:12px;border-radius:16px;border:1px solid rgba(215,181,109,.26);background:rgba(215,181,109,.08);color:#f0d891;font-size:12px;font-weight:900;text-align:center;word-break:break-all;}
+.sadaqa-share-app{margin-top:16px;padding:14px 12px;border-radius:16px;border:1px solid rgba(215,181,109,.30);background:linear-gradient(180deg, rgba(240,216,145,.12), rgba(181,138,54,.08));text-align:center;}
+.sadaqa-share-app-title{font-size:13px;font-weight:850;color:#d7b56d;margin-bottom:6px;letter-spacing:.5px;text-transform:uppercase;}
+.sadaqa-share-app-link{display:inline-block;font-size:15px;font-weight:950;color:#ffffff;text-decoration:none;padding:8px 12px;border-radius:999px;background:linear-gradient(135deg,#2d7a46,#4caf6a);}
+.sadaqa-share-actions{display:flex;gap:10px;justify-content:center;flex-wrap:wrap;margin-top:16px;}
+.sadaqa-share-button{appearance:none;-webkit-appearance:none;border:1px solid rgba(215,181,109,.32);border-radius:999px;background:linear-gradient(180deg,#f0d891,#b9913d);color:#111814;padding:10px 14px;font:inherit;font-weight:950;cursor:pointer;}
+.sadaqa-share-button.secondary{background:rgba(255,255,255,.055);color:#f0d891;}
+html.light-mode .sadaqa-share-dialog{background:radial-gradient(circle at 50% 0%,rgba(181,138,54,.16),transparent 42%),linear-gradient(180deg,#ffffff,#f5f8f6);color:#111814;}
+html.light-mode .sadaqa-share-title,html.light-mode .sadaqa-share-close{color:#8a681f;}
+html.light-mode .sadaqa-share-close{background:#fff;}
+html.light-mode .sadaqa-share-card{background:radial-gradient(circle at 85% 0%,rgba(181,138,54,.18),transparent 36%),linear-gradient(135deg,#ffffff,#f6fbf7 58%,#fff7df);}
+html.light-mode .sadaqa-share-main{color:#111814;}
+html.light-mode .sadaqa-share-sub{color:#526158;}
+html.light-mode .sadaqa-share-bismillah,html.light-mode .sadaqa-share-wallet,html.light-mode .sadaqa-share-app-title{color:#8a681f;}
+
 </style>
 
 <meta property="og:title" content="Hidden Sadaqa — BarakaWay">
@@ -799,17 +826,12 @@ html.light-mode .sadaqa-action.is-active{
   </div>
 
   <div class="sadaqa-actions" aria-label="Действия страницы">
-    <button class="sadaqa-action" data-sadaqa-action="save" type="button" onclick="saveHiddenSadaqaReminder()" aria-label="Сохранить">
-      <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 4.5A1.5 1.5 0 0 1 7.5 3h9A1.5 1.5 0 0 1 18 4.5V21l-6-3.5L6 21V4.5z"/></svg>
-      <span class="action-label">Сохранить</span>
-    </button>
-
-    <button class="sadaqa-action" data-sadaqa-action="favorite" type="button" onclick="toggleHiddenSadaqaFavorite(this)" aria-label="Избранное">
+<button class="sadaqa-action" data-sadaqa-action="favorite" type="button"  aria-label="Избранное">
       <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3.6l2.45 5.05 5.55.8-4.02 3.92.95 5.53L12 16.3l-4.93 2.6.95-5.53L4 9.45l5.55-.8L12 3.6z"/></svg>
       <span class="action-label">Избранное</span>
     </button>
 
-    <button class="sadaqa-action" data-sadaqa-action="share" type="button" onclick="shareApp()" aria-label="Поделиться">
+    <button class="sadaqa-action" data-sadaqa-action="share" type="button"  aria-label="Поделиться">
       <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><path d="M8.7 10.7l6.6-4.4M8.7 13.3l6.6 4.4"/></svg>
       <span class="action-label">Поделиться</span>
     </button>
@@ -899,7 +921,7 @@ html.light-mode .sadaqa-action.is-active{
           <div class="wallet" id="address">TH6Lae54SaHndgBaNFhXEot7aYCh6GNvvs</div>
 
           <div class="wallet-actions">
-            <button type="button" onclick="copyAddress()">Скопировать адрес</button>
+            <button type="button" data-hidden-action="copy-address">Скопировать адрес</button>
             <a href="https://tronscan.org/#/address/TH6Lae54SaHndgBaNFhXEot7aYCh6GNvvs" target="_blank" rel="noopener">
               <button type="button">Открыть в Tronscan</button>
             </a>
@@ -921,7 +943,7 @@ html.light-mode .sadaqa-action.is-active{
       <div class="premium-progress-amount" id="premiumDonationAmount">4.72<span class="currency">USDT</span></div>
     </div>
 
-    <button class="premium-progress-button" type="button" onclick="openDonationPanel()">
+    <button class="premium-progress-button" type="button" >
       <svg class="premium-progress-button-icon" viewBox="0 0 24 24" aria-hidden="true">
         <path fill="currentColor" d="M12 2l2.35 4.76 5.25.76-3.8 3.7.9 5.23L12 14.9l-4.7 2.47.9-5.23-3.8-3.7 5.25-.76L12 2z"/>
       </svg>
@@ -939,152 +961,462 @@ html.light-mode .sadaqa-action.is-active{
   </div>
 </div>
 
-<script>
-const wallet = "TH6Lae54SaHndgBaNFhXEot7aYCh6GNvvs";
+<div class="sadaqa-share-modal" id="sadaqaShareModal" onclick="closeSadaqaShareModal(event)">
+  <div class="sadaqa-share-dialog" role="dialog" aria-modal="true" aria-label="Поделиться Hidden Sadaqa">
+    <div class="sadaqa-share-head">
+      <h3 class="sadaqa-share-title">Поделиться Hidden Sadaqa</h3>
+      <button class="sadaqa-share-close" type="button" onclick="closeSadaqaShareModal()">×</button>
+    </div>
+    <div class="sadaqa-share-body">
+      <div class="sadaqa-share-card">
+        <div class="sadaqa-share-bismillah">بِسْمِ ٱللَّٰهِ ٱلرَّحْمَـٰنِ ٱلرَّحِيمِ</div>
+        <div class="sadaqa-share-main">Hidden Sadaqa</div>
+        <div class="sadaqa-share-sub">Тихая садака через один публичный адрес. Помощь направляется на проверенные случаи.</div>
+        <div class="sadaqa-share-wallet">USDT (TRC20): TH6Lae54SaHndgBaNFhXEot7aYCh6GNvvs</div>
+        <div class="sadaqa-share-app">
+          <div class="sadaqa-share-app-title">BarakaWay App</div>
+          <a class="sadaqa-share-app-link" href="hidden-sadaqa-ru.html">Открыть страницу</a>
+        </div>
+      </div>
+      <div class="sadaqa-share-actions">
+        <button class="sadaqa-share-button" type="button" data-hidden-action="share-card">Поделиться карточкой</button>
+        <button class="sadaqa-share-button secondary" type="button" data-hidden-action="copy-share">Скопировать текст</button>
+      </div>
+    </div>
+  </div>
+</div>
 
-function openDonationPanel(){
-  const panel = document.getElementById("donationPanel");
-  if (!panel) return;
-  panel.open = true;
-  panel.scrollIntoView({behavior:"smooth", block:"start"});
-}
 
-function copyAddress(){
-  const address = document.getElementById("address").innerText.trim();
-  navigator.clipboard.writeText(address);
-  alert("Адрес скопирован");
-}
 
-function hiddenSadaqaData(){
-  return {
-    title: "Hidden Sadaqa",
-    url: window.location.pathname || "hidden-sadaqa-ru.html",
-    text: "Тихая садака через один публичный адрес",
-    type: "Проект"
-  };
-}
+<script id="hidden-sadaqa-actions-fix">
+(function () {
+  "use strict";
 
-function toggleHiddenSadaqaFavorite(btn){
-  const data = hiddenSadaqaData();
+  var WALLET = "TH6Lae54SaHndgBaNFhXEot7aYCh6GNvvs";
+  var FAVORITES_KEY = "barakaway_favorites_v1";
+  var PAGE_URL = window.location.pathname || "hidden-sadaqa-ru.html";
 
-  if (window.BarakaWayFavorites && typeof window.BarakaWayFavorites.toggle === "function") {
-    const active = window.BarakaWayFavorites.toggle(data);
+  function trackEvent(name) {
+    try {
+      if (window.goatcounter && typeof window.goatcounter.count === "function") {
+        window.goatcounter.count({ path: name, title: name, event: true });
+      }
+    } catch (e) {}
+  }
+
+  function favoriteData() {
+    return {
+      title: "Hidden Sadaqa",
+      url: PAGE_URL,
+      text: "Тихая садака: помощь детям, бедным семьям, базовым нуждам и местам молитвы. Способ пожертвования: USDT (TRC20), публичный кошелёк " + WALLET + ".",
+      type: "Садака"
+    };
+  }
+
+  function itemId(data) {
+    return (data.url || "") + "::" + (data.title || "");
+  }
+
+  function readFavorites() {
+    try {
+      var raw = localStorage.getItem(FAVORITES_KEY);
+      var list = raw ? JSON.parse(raw) : [];
+      return Array.isArray(list) ? list : [];
+    } catch (e) {
+      return [];
+    }
+  }
+
+  function writeFavorites(list) {
+    try {
+      localStorage.setItem(FAVORITES_KEY, JSON.stringify(Array.isArray(list) ? list : []));
+    } catch (e) {}
+
+    try {
+      if (window.BarakaWayFavorites && typeof window.BarakaWayFavorites.refreshNav === "function") {
+        window.BarakaWayFavorites.refreshNav();
+      }
+    } catch (e) {}
+  }
+
+  function isFavoriteActive() {
+    var data = favoriteData();
+    var id = itemId(data);
+    return readFavorites().some(function (x) {
+      return String(x && x.id) === String(id);
+    });
+  }
+
+  function updateFavoriteButton() {
+    var btn = document.querySelector('[data-sadaqa-action="favorite"]');
+    if (!btn) return;
+
+    var active = isFavoriteActive();
     btn.classList.toggle("is-active", active);
     btn.setAttribute("aria-pressed", active ? "true" : "false");
-    if (window.BarakaWayFavorites.refreshNav) window.BarakaWayFavorites.refreshNav();
-    return;
   }
 
-  try {
-    const key = "barakaway_favorites_v1";
-    const raw = localStorage.getItem(key);
-    let list = raw ? JSON.parse(raw) : [];
-    if (!Array.isArray(list)) list = [];
-
-    const id = data.url + "::" + data.title;
-    const exists = list.some(x => String(x.id) === id);
+  function toggleFavorite() {
+    var data = favoriteData();
+    var id = itemId(data);
+    var list = readFavorites();
+    var exists = list.some(function (x) {
+      return String(x && x.id) === String(id);
+    });
 
     if (exists) {
-      list = list.filter(x => String(x.id) !== id);
-      btn.classList.remove("is-active");
+      list = list.filter(function (x) {
+        return String(x && x.id) !== String(id);
+      });
     } else {
-      list.unshift({id, title:data.title, url:data.url, text:data.text, type:data.type, addedAt:new Date().toISOString()});
-      btn.classList.add("is-active");
+      list.unshift({
+        id: id,
+        title: data.title,
+        url: data.url,
+        text: data.text,
+        type: data.type,
+        addedAt: new Date().toISOString()
+      });
     }
 
-    localStorage.setItem(key, JSON.stringify(list));
-  } catch(e) {}
-}
+    writeFavorites(list);
+    updateFavoriteButton();
+  }
 
-function saveHiddenSadaqaReminder(){
-  const btn = document.querySelector('[data-sadaqa-action="save"]');
+  function openDonationPanel() {
+    var panel = document.getElementById("donationPanel");
+    if (!panel) return;
 
-  try {
-    const key = "barakaway_reminders_v1";
-    const data = {
-      title: "Hidden Sadaqa",
-      text: "Напоминание о тихой садаке",
-      url: window.location.pathname || "hidden-sadaqa-ru.html",
-      savedAt: new Date().toISOString()
-    };
+    panel.open = true;
+    panel.scrollIntoView({ behavior: "smooth", block: "start" });
+  }
 
-    const raw = localStorage.getItem(key);
-    let list = raw ? JSON.parse(raw) : [];
-    if (!Array.isArray(list)) list = [];
+  function copyAddress() {
+    var node = document.getElementById("address");
+    var address = node ? node.innerText.trim() : WALLET;
 
-    list = list.filter(x => x && x.title !== data.title);
-    list.unshift(data);
-    localStorage.setItem(key, JSON.stringify(list));
-  } catch(e) {}
+    if (navigator.clipboard && navigator.clipboard.writeText) {
+      navigator.clipboard.writeText(address).then(function () {
+        alert("Адрес скопирован");
+      }).catch(function () {
+        fallbackCopy(address);
+      });
+      return;
+    }
 
-  if (btn) btn.classList.add("is-active");
-  alert("Сохранено");
-}
+    fallbackCopy(address);
+  }
 
-function shareApp(){
-  trackEvent("share-button-click");
+  function fallbackCopy(text) {
+    var input = document.createElement("textarea");
+    input.value = text;
+    input.setAttribute("readonly", "");
+    input.style.position = "fixed";
+    input.style.left = "-9999px";
+    document.body.appendChild(input);
+    input.select();
 
-  const shareData = {
-    title: "Hidden Sadaqa",
-    text: "BarakaWay App — Hidden Sadaqa\nТихая садака через один публичный адрес.",
-    url: window.location.href
+    try {
+      document.execCommand("copy");
+      alert("Скопировано");
+    } catch (e) {
+      alert(text);
+    }
+
+    document.body.removeChild(input);
+  }
+
+  function getShareText() {
+    return "BarakaWay App — Hidden Sadaqa\nТихая садака через один публичный адрес. Помощь направляется на проверенные случаи.\n" + window.location.href;
+  }
+
+  function openShareModal() {
+    var modal = document.getElementById("sadaqaShareModal");
+    if (!modal) {
+      shareDirect();
+      return;
+    }
+
+    modal.classList.add("is-visible");
+    document.body.style.overflow = "hidden";
+  }
+
+  function closeShareModal(event) {
+    if (
+      event &&
+      event.target &&
+      !event.target.classList.contains("sadaqa-share-modal") &&
+      !event.target.classList.contains("sadaqa-share-close")
+    ) {
+      return;
+    }
+
+    var modal = document.getElementById("sadaqaShareModal");
+    if (!modal) return;
+
+    modal.classList.remove("is-visible");
+    document.body.style.overflow = "";
+  }
+
+  function copyShareText() {
+    var text = getShareText();
+
+    if (navigator.clipboard && navigator.clipboard.writeText) {
+      navigator.clipboard.writeText(text).then(function () {
+        alert("Текст и ссылка скопированы");
+      }).catch(function () {
+        fallbackCopy(text);
+      });
+      return;
+    }
+
+    fallbackCopy(text);
+  }
+
+  function roundRect(ctx, x, y, w, h, r) {
+    ctx.beginPath();
+    ctx.moveTo(x + r, y);
+    ctx.arcTo(x + w, y, x + w, y + h, r);
+    ctx.arcTo(x + w, y + h, x, y + h, r);
+    ctx.arcTo(x, y + h, x, y, r);
+    ctx.arcTo(x, y, x + w, y, r);
+    ctx.closePath();
+  }
+
+  function wrapText(ctx, text, x, y, maxWidth, lineHeight) {
+    var words = String(text).split(" ");
+    var line = "";
+
+    for (var i = 0; i < words.length; i++) {
+      var test = line + words[i] + " ";
+      if (ctx.measureText(test).width > maxWidth && i > 0) {
+        ctx.fillText(line.trim(), x, y);
+        line = words[i] + " ";
+        y += lineHeight;
+      } else {
+        line = test;
+      }
+    }
+
+    ctx.fillText(line.trim(), x, y);
+  }
+
+  function buildShareImageBlob() {
+    return new Promise(function (resolve) {
+      var canvas = document.createElement("canvas");
+      canvas.width = 1080;
+      canvas.height = 1350;
+
+      var ctx = canvas.getContext("2d");
+      var gradient = ctx.createLinearGradient(0, 0, 1080, 1350);
+      gradient.addColorStop(0, "#15251c");
+      gradient.addColorStop(0.58, "#0e171a");
+      gradient.addColorStop(1, "#101014");
+
+      ctx.fillStyle = gradient;
+      ctx.fillRect(0, 0, 1080, 1350);
+
+      ctx.strokeStyle = "rgba(240,216,145,.55)";
+      ctx.lineWidth = 4;
+      roundRect(ctx, 70, 70, 940, 1210, 42);
+      ctx.stroke();
+
+      ctx.fillStyle = "rgba(240,216,145,.08)";
+      roundRect(ctx, 110, 110, 860, 260, 36);
+      ctx.fill();
+
+      ctx.textAlign = "center";
+      ctx.fillStyle = "#f0d891";
+      ctx.font = "700 46px Arial";
+      ctx.fillText("بِسْمِ ٱللَّٰهِ ٱلرَّحْمَـٰنِ ٱلرَّحِيمِ", 540, 205);
+
+      ctx.fillStyle = "#ffffff";
+      ctx.font = "900 64px Arial";
+      ctx.fillText("Hidden Sadaqa", 540, 315);
+
+      ctx.fillStyle = "#cbd5df";
+      ctx.font = "700 30px Arial";
+      wrapText(ctx, "Тихая садака через один публичный адрес", 540, 430, 820, 42);
+
+      ctx.fillStyle = "#4caf6a";
+      ctx.font = "900 38px Arial";
+      ctx.fillText("Куда направляется помощь", 540, 545);
+
+      ctx.fillStyle = "#ffffff";
+      ctx.font = "700 30px Arial";
+      wrapText(ctx, "Операции для детей • бедные семьи • еда и базовые нужды • мечети и места молитвы", 540, 610, 820, 42);
+
+      ctx.fillStyle = "#f0d891";
+      ctx.font = "900 34px Arial";
+      ctx.fillText("USDT (TRC20)", 540, 785);
+
+      ctx.fillStyle = "#cbd5df";
+      ctx.font = "700 24px Arial";
+      wrapText(ctx, WALLET, 540, 835, 780, 36);
+
+      ctx.fillStyle = "rgba(76,175,106,.22)";
+      roundRect(ctx, 210, 980, 660, 92, 46);
+      ctx.fill();
+
+      ctx.fillStyle = "#ffffff";
+      ctx.font = "900 32px Arial";
+      ctx.fillText("BarakaWay App", 540, 1038);
+
+      ctx.fillStyle = "#f0d891";
+      ctx.font = "800 28px Arial";
+      ctx.fillText("onedollarexit.com", 540, 1125);
+
+      canvas.toBlob(function (blob) {
+        resolve(blob);
+      }, "image/png", 0.95);
+    });
+  }
+
+  async function shareCard() {
+    trackEvent("share-button-click");
+    var text = getShareText();
+
+    try {
+      var blob = await buildShareImageBlob();
+      var file = new File([blob], "hidden-sadaqa-barakaway.png", { type: "image/png" });
+
+      if (navigator.canShare && navigator.canShare({ files: [file] })) {
+        await navigator.share({
+          title: "Hidden Sadaqa",
+          text: text,
+          files: [file]
+        });
+        return;
+      }
+    } catch (e) {}
+
+    shareDirect();
+  }
+
+  function shareDirect() {
+    var text = getShareText();
+
+    if (navigator.share) {
+      navigator.share({
+        title: "Hidden Sadaqa",
+        text: text
+      });
+      return;
+    }
+
+    copyShareText();
+  }
+
+  async function loadTransactions() {
+    var txBox = document.getElementById("transactions");
+    var amountBox = document.getElementById("premiumDonationAmount");
+
+    if (!txBox) return;
+
+    try {
+      var response = await fetch("https://api.trongrid.io/v1/accounts/" + WALLET + "/transactions/trc20");
+      var data = await response.json();
+      var rows = "";
+      var latest = null;
+
+      (data.data || []).slice(0, 10).forEach(function (tx, index) {
+        var amount = Number(tx.value || 0) / 1000000;
+        if (index === 0) latest = amount;
+        rows += '<div class="tx">' + amount.toFixed(2) + " USDT</div>";
+      });
+
+      if (latest !== null && amountBox) {
+        amountBox.innerHTML = latest.toFixed(2) + '<span class="currency">USDT</span>';
+      }
+
+      txBox.innerHTML = rows || '<div class="tx">4.72 USDT</div>';
+    } catch (e) {
+      txBox.innerHTML = '<div class="tx">4.72 USDT</div>';
+    }
+  }
+
+  function init() {
+    var qr = document.getElementById("qr");
+    if (qr) {
+      qr.src = "https://api.qrserver.com/v1/create-qr-code/?size=220x220&data=" + encodeURIComponent(WALLET);
+    }
+
+    updateFavoriteButton();
+    loadTransactions();
+
+    document.addEventListener("click", function (event) {
+      var target = event.target;
+
+      var favoriteBtn = target.closest && target.closest('[data-sadaqa-action="favorite"]');
+      if (favoriteBtn) {
+        event.preventDefault();
+        toggleFavorite();
+        return;
+      }
+
+      var shareBtn = target.closest && target.closest('[data-sadaqa-action="share"]');
+      if (shareBtn) {
+        event.preventDefault();
+        openShareModal();
+        return;
+      }
+
+      var supportBtn = target.closest && target.closest(".premium-progress-button");
+      if (supportBtn) {
+        event.preventDefault();
+        openDonationPanel();
+        return;
+      }
+
+      var copyBtn = target.closest && target.closest('[data-hidden-action="copy-address"]');
+      if (copyBtn) {
+        event.preventDefault();
+        copyAddress();
+        return;
+      }
+
+      var shareCardBtn = target.closest && target.closest('[data-hidden-action="share-card"]');
+      if (shareCardBtn) {
+        event.preventDefault();
+        shareCard();
+        return;
+      }
+
+      var copyShareBtn = target.closest && target.closest('[data-hidden-action="copy-share"]');
+      if (copyShareBtn) {
+        event.preventDefault();
+        copyShareText();
+        return;
+      }
+
+      var closeBtn = target.closest && target.closest(".sadaqa-share-close");
+      if (closeBtn) {
+        event.preventDefault();
+        closeShareModal();
+      }
+    });
+
+    document.addEventListener("keydown", function (event) {
+      if (event.key === "Escape") closeShareModal();
+    });
+  }
+
+  window.openDonationPanel = openDonationPanel;
+  window.copyAddress = copyAddress;
+  window.shareApp = openShareModal;
+  window.shareSadaqaCard = shareCard;
+  window.copySadaqaShareText = copyShareText;
+  window.closeSadaqaShareModal = closeShareModal;
+  window.toggleHiddenSadaqaFavorite = function (btn) {
+    toggleFavorite();
   };
 
-  if (navigator.share) {
-    navigator.share(shareData);
+  if (document.readyState === "loading") {
+    document.addEventListener("DOMContentLoaded", init);
   } else {
-    navigator.clipboard.writeText(shareData.url);
-    alert("Ссылка скопирована");
+    init();
   }
-}
-
-function trackEvent(name) {
-  if (window.goatcounter && typeof window.goatcounter.count === "function") {
-    window.goatcounter.count({
-      path: name,
-      title: name,
-      event: true
-    });
-  }
-}
-
-async function loadTransactions(){
-  const txBox = document.getElementById("transactions");
-  const premiumDonationAmount = document.getElementById("premiumDonationAmount");
-
-  try {
-    const url = `https://api.trongrid.io/v1/accounts/${wallet}/transactions/trc20`;
-    const response = await fetch(url);
-    const data = await response.json();
-
-    let html = "";
-    let latestAmount = null;
-
-    (data.data || []).slice(0,10).forEach((tx,index) => {
-      const amount = Number(tx.value || 0) / 1000000;
-
-      if (index === 0) latestAmount = amount;
-      html += `<div class="tx">${amount.toFixed(2)} USDT</div>`;
-    });
-
-    if (latestAmount !== null && premiumDonationAmount) {
-      premiumDonationAmount.innerHTML = `${latestAmount.toFixed(2)}<span class="currency">USDT</span>`;
-    }
-
-    txBox.innerHTML = html || '<div class="tx">4.72 USDT</div>';
-  } catch(e) {
-    txBox.innerHTML = '<div class="tx">4.72 USDT</div>';
-  }
-}
-
-const qr = document.getElementById("qr");
-qr.src = "https://api.qrserver.com/v1/create-qr-code/?size=220x220&data=" + encodeURIComponent(wallet);
-
-loadTransactions();
-
-if ("serviceWorker" in navigator) {
-  navigator.serviceWorker.register("/service-worker.js");
-}
+})();
 </script>
 
 <script src="/bottom-nav.js"></script>
