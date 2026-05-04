@@ -268,6 +268,136 @@ html.dark-mode .slider{
 }
 
 
+
+.today-heading{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:14px;
+  margin:0 0 12px;
+}
+.today-heading .section-title{
+  margin:0;
+}
+.share-times-btn{
+  min-height:38px;
+  padding:0 14px;
+  border-radius:999px;
+  border:1px solid rgba(45,122,70,0.24);
+  background:#eef5f1;
+  color:#2d7a46;
+  font-size:13px;
+  font-weight:900;
+  cursor:pointer;
+  white-space:nowrap;
+  box-shadow:0 8px 18px rgba(45,122,70,0.08);
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  gap:7px;
+}
+.share-times-icon{
+  width:20px;
+  height:20px;
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  color:#2d7a46;
+  flex:0 0 auto;
+}
+.share-times-icon svg{
+  width:20px;
+  height:20px;
+  display:block;
+  fill:currentColor;
+}
+.share-times-btn:active{
+  transform:scale(0.98);
+}
+.sunrise-strip{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:16px;
+  margin:0 0 14px;
+  padding:14px 18px;
+  border:1px solid var(--border);
+  border-radius:18px;
+  background:linear-gradient(135deg,#fffaf0 0%, #f8fcf7 52%, #edf6ef 100%);
+  box-shadow:0 8px 20px rgba(45,122,70,0.06);
+}
+.sunrise-label{
+  display:flex;
+  flex-direction:column;
+  gap:2px;
+}
+.sunrise-title{
+  font-size:15px;
+  font-weight:900;
+  color:#2d7a46;
+}
+.sunrise-note{
+  font-size:12px;
+  font-weight:700;
+  color:#64756b;
+}
+.sunrise-time{
+  font-size:26px;
+  line-height:1;
+  font-weight:900;
+  color:#1f2a22;
+  white-space:nowrap;
+}
+html.dark-mode .share-times-btn{
+  background:#1d242c;
+  color:#dff4e6;
+  border-color:#2a343d;
+  box-shadow:none;
+}
+html.dark-mode .share-times-icon{
+  color:#dff4e6;
+}
+html.dark-mode .sunrise-strip{
+  background:linear-gradient(135deg,#2b2415 0%, #1d242c 52%, #17352d 100%);
+  border-color:#2a343d;
+  box-shadow:none;
+}
+html.dark-mode .sunrise-title{
+  color:#f3d38a;
+}
+html.dark-mode .sunrise-note{
+  color:#c7d3de;
+}
+html.dark-mode .sunrise-time{
+  color:#f5f7fa;
+}
+@media (max-width:700px){
+  .today-heading{
+    gap:8px;
+    margin-bottom:8px;
+  }
+  .share-times-btn{
+    min-height:30px;
+    padding:0 10px;
+    font-size:11px;
+  }
+  .sunrise-strip{
+    margin-bottom:8px;
+    padding:9px 11px;
+    border-radius:14px;
+  }
+  .sunrise-title{
+    font-size:12px;
+  }
+  .sunrise-note{
+    font-size:9px;
+  }
+  .sunrise-time{
+    font-size:19px;
+  }
+}
+
+
 /* MOBILE COMPACT PRAYER PAGE UPDATE */
 .prayer-now-next{
   width:100%;
@@ -573,9 +703,20 @@ html.dark-mode .slider{
   </div>
 
   <div class="section today-section">
-    <div class="section-title">آج کا شیڈول</div>
+    <div class="today-heading">
+      <div class="section-title">آج کا شیڈول</div>
+      <button class="share-times-btn" id="sharePrayerTimesBtn" type="button" aria-label="نماز کے اوقات شیئر کریں"><span class="share-times-icon" aria-hidden="true"><svg viewBox="0 0 24 24" focusable="false"><path d="M18 16.08c-.76 0-1.44.30-1.96.77L8.91 12.7c.05-.23.09-.46.09-.70s-.04-.47-.09-.70l7.05-4.11A2.99 2.99 0 1 0 15 5c0 .24.04.47.09.70L8.04 9.81A3 3 0 1 0 8.04 14.2l7.12 4.18c-.05.20-.08.41-.08.62a2.92 2.92 0 1 0 2.92-2.92Z"/></svg></span><span>شیئر کریں</span></button>
+    </div>
+    <div class="sunrise-strip" id="sunriseStrip">
+      <div class="sunrise-label">
+        <div class="sunrise-title">طلوع آفتاب</div>
+        <div class="sunrise-note">سورج نکلنے کا وقت</div>
+      </div>
+      <div class="sunrise-time" id="sunriseTimeText">—</div>
+    </div>
     <div id="prayerGrid" class="prayer-grid"></div>
   </div>
+  <canvas id="prayerShareCanvas" width="1080" height="1350" style="display:none"></canvas>
 
   <div class="section notifications-section">
     <div class="section-title">اطلاعات</div>
@@ -640,6 +781,9 @@ const tuneAsr = document.getElementById('tuneAsr');
 const tuneMaghrib = document.getElementById('tuneMaghrib');
 const tuneIsha = document.getElementById('tuneIsha');
 const prayerGrid = document.getElementById('prayerGrid');
+const sunriseTimeText = document.getElementById('sunriseTimeText');
+const sharePrayerTimesBtn = document.getElementById('sharePrayerTimesBtn');
+const prayerShareCanvas = document.getElementById('prayerShareCanvas');
 const leadSelect = document.getElementById('leadSelect');
 const toggleAll = document.getElementById('toggleAll');
 const searchCityBtn = document.getElementById('searchCityBtn');
@@ -698,6 +842,7 @@ function timingsToTuneString(s){ return [0,s.tune.fajr||0,0,s.tune.dhuhr||0,s.tu
 async function loadMethods(){ try{ const r=await fetch('https://api.aladhan.com/v1/methods'); const j=await r.json(); methodSelect.innerHTML=''; Object.entries(j.data||{}).forEach(([id,data])=>{ const o=document.createElement('option'); o.value=String(id); o.textContent=data.name; methodSelect.appendChild(o);}); methodSelect.value=[...methodSelect.options].some(o=>o.value===getSettings().method)?getSettings().method:'3'; }catch(_){ methodSelect.innerHTML='<option value="3">Muslim World League</option><option value="4">Umm Al-Qura University, Makkah</option><option value="5">University of Islamic Sciences, Karachi</option><option value="2">Islamic Society of North America</option><option value="8">Gulf Region</option><option value="13">Diyanet, Turkey</option><option value="15">Moonsighting Committee</option><option value="16">Dubai, UAE</option>'; methodSelect.value=getSettings().method||'3'; } }
 function updatePermissionBadge(){ const b=permissionBadge; if(!('Notification' in window)){ b.textContent=UI.notification_not_supported; b.className='badge warn'; return;} const p=Notification.permission; if(p==='granted'){ b.textContent=UI.notification_enabled; b.className='badge'; } else if(p==='denied'){ b.textContent=UI.notification_denied; b.className='badge warn'; } else { b.textContent=UI.notification_default; b.className='badge warn'; } }
 function setLocationUI(name, sub){ locationName.textContent=name||UI.location_unknown; locationSub.textContent=sub||UI.location_hint; }
+function updateSunriseDisplay(t){ if(sunriseTimeText) sunriseTimeText.textContent=formatTimeDisplay(t?.Sunrise)||'—'; }
 function buildPrayerCards(t){ if(!prayerGrid) return; const prayers=[['Fajr',UI.prayer_fajr],['Sunrise',UI.prayer_sunrise],['Dhuhr',UI.prayer_dhuhr],['Asr',UI.prayer_asr],['Maghrib',UI.prayer_maghrib],['Isha',UI.prayer_isha]]; const next=getNextPrayer(t); prayerGrid.innerHTML=prayers.map(([key,label])=>`<div class="prayer-card${next&&next.key===key?' active':''}" data-prayer="${key}"><div class="prayer-top"><div class="prayer-name">${label}</div><span class="badge">${key}</span></div><div class="prayer-time">${formatTimeDisplay(t[key])}</div><div class="prayer-meta">${UI.source_time}: ${t[key]||'—'}</div></div>`).join(''); }
 function getCurrentPrayer(t){ const seq=['Fajr','Dhuhr','Asr','Maghrib','Isha']; const now=new Date(); let current={key:'Isha',time:parseTodayTimeToDate(t.Isha)}; current.time.setDate(current.time.getDate()-1); for(const key of seq){ const d=parseTodayTimeToDate(t[key]); if(d<=now) current={key,time:d}; } return current; }
 function getNextPrayer(t){ const seq=['Fajr','Dhuhr','Asr','Maghrib','Isha']; const now=new Date(); for(const key of seq){ const d=parseTodayTimeToDate(t[key]); if(d>now) return {key,time:d}; } const tf=parseTodayTimeToDate(t.Fajr); tf.setDate(tf.getDate()+1); return {key:'Fajr',time:tf}; }
@@ -833,7 +978,7 @@ function updateHomeWidgetPreview(){
   homeWidgetPreview.textContent = `<div class="home-prayer-widget">\n  <div class="label">اگلی نماز</div>\n  <div class="name>${name}</div>\n  <div class="time">${time}</div>\n  <div class="countdown">${count}</div>\n</div>`;
 }
 const __oldBuildPrayerCards = buildPrayerCards;
-buildPrayerCards = function(t){ __oldBuildPrayerCards(t); renderMonthView(); updateJumuahBox(); updateHomeWidgetPreview(); };
+buildPrayerCards = function(t){ __oldBuildPrayerCards(t); updateSunriseDisplay(t); renderMonthView(); updateJumuahBox(); updateHomeWidgetPreview(); };
 const __oldSetLocationUI = setLocationUI;
 setLocationUI = function(name, sub){ __oldSetLocationUI(name, sub); updateQibla(); };
 const __oldFetchByCoordinates = fetchByCoordinates;
@@ -843,7 +988,118 @@ fetchByCity = async function(){ await __oldFetchByCity(); updateQibla(); renderM
 const __oldUpdateNextPrayerPanel = updateNextPrayerPanel;
 updateNextPrayerPanel = function(){ __oldUpdateNextPrayerPanel(); updateHomeWidgetPreview(); };
 
+
+function roundedRect(ctx,x,y,w,h,r){
+  ctx.beginPath();
+  ctx.moveTo(x+r,y);
+  ctx.arcTo(x+w,y,x+w,y+h,r);
+  ctx.arcTo(x+w,y+h,x,y+h,r);
+  ctx.arcTo(x,y+h,x,y,r);
+  ctx.arcTo(x,y,x+w,y,r);
+  ctx.closePath();
+}
+function drawWrappedText(ctx,text,x,y,maxWidth,lineHeight,maxLines){
+  const words=String(text||'').split(' ');
+  let line='', lines=[];
+  for(const word of words){
+    const test=line?line+' '+word:word;
+    if(ctx.measureText(test).width>maxWidth && line){
+      lines.push(line);
+      line=word;
+      if(lines.length===maxLines-1) break;
+    }else{
+      line=test;
+    }
+  }
+  if(line) lines.push(line);
+  lines.slice(0,maxLines).forEach((l,i)=>ctx.fillText(l,x,y+i*lineHeight));
+  return y+Math.min(lines.length,maxLines)*lineHeight;
+}
+function getPrayerSharePayload(){
+  const t=state.timingsRaw||{};
+  const city=state.locationName||locationName.textContent||'BarakaWay';
+  const date=gregorianDate.textContent&&gregorianDate.textContent!=='—'?gregorianDate.textContent:new Date().toLocaleDateString('ur');
+  return {
+    title:'نماز کے اوقات',
+    city,
+    date,
+    prayers:[
+      ['فجر',formatTimeDisplay(t.Fajr)],
+      ['طلوع آفتاب',formatTimeDisplay(t.Sunrise)],
+      ['ظہر',formatTimeDisplay(t.Dhuhr)],
+      ['عصر',formatTimeDisplay(t.Asr)],
+      ['مغرب',formatTimeDisplay(t.Maghrib)],
+      ['عشاء',formatTimeDisplay(t.Isha)]
+    ]
+  };
+}
+function buildPrayerShareText(payload){
+  return `BarakaWay App — نماز، اذکار، قرآن، مضامین، قبلہ، مساجد
+
+نماز کے اوقات، قرآن، اذکار، قبلہ کی سمت، اسلامی مضامین اور قریب کی مساجد ایک جگہ۔
+
+https://barakaway.app`;
+}
+async function createPrayerShareBlob(){
+  const canvas=prayerShareCanvas;
+  if(!canvas) return null;
+  const payload=getPrayerSharePayload();
+  const ctx=canvas.getContext('2d');
+  const w=canvas.width,h=canvas.height;
+  const isLight=document.documentElement.classList.contains('light-mode');
+  const theme=isLight?{
+    bg0:'#f5f7f8', bg1:'#eff6f1', bg2:'#ffffff', glow:'rgba(45,122,70,0.10)', card:'rgba(255,255,255,0.96)', cardStroke:'#dfe8e2', title:'#1f2a22', muted:'#607066', brand:'#2d7a46', row:'#f7faf8', rowStroke:'#e1ebe4', sunriseRow:'#fff7e8', sunriseStroke:'#f1dfb4', sunriseText:'#8b5d00', time:'#1f2a22', footer:'#607066'
+  }:{
+    bg0:'#101418', bg1:'#171d24', bg2:'#163023', glow:'rgba(255,255,255,0.08)', card:'rgba(23,29,36,0.96)', cardStroke:'#2a343d', title:'#f5f7fa', muted:'#c7d3de', brand:'#dff4e6', row:'#1d242c', rowStroke:'#2a343d', sunriseRow:'#2a2417', sunriseStroke:'#5b4a24', sunriseText:'#f3d38a', time:'#f5f7fa', footer:'#c7d3de'
+  };
+  ctx.clearRect(0,0,w,h);
+  const grad=ctx.createLinearGradient(0,0,w,h);
+  grad.addColorStop(0,theme.bg0); grad.addColorStop(0.56,theme.bg1); grad.addColorStop(1,theme.bg2);
+  ctx.fillStyle=grad; ctx.fillRect(0,0,w,h);
+  ctx.fillStyle=theme.glow;
+  ctx.beginPath(); ctx.arc(190,210,260,0,Math.PI*2); ctx.fill();
+  ctx.beginPath(); ctx.arc(890,1090,280,0,Math.PI*2); ctx.fill();
+  roundedRect(ctx,78,86,924,1178,44); ctx.fillStyle=theme.card; ctx.fill(); ctx.strokeStyle=theme.cardStroke; ctx.lineWidth=3; ctx.stroke();
+  ctx.textAlign='right';
+  ctx.fillStyle=theme.brand; ctx.font='900 34px system-ui, -apple-system, Segoe UI, sans-serif'; ctx.fillText('BarakaWay App',930,165);
+  ctx.fillStyle=theme.title; ctx.font='900 58px system-ui, -apple-system, Segoe UI, sans-serif'; ctx.fillText(payload.title,930,250);
+  ctx.fillStyle=theme.muted; ctx.font='700 30px system-ui, -apple-system, Segoe UI, sans-serif'; ctx.fillText(payload.date,930,302);
+  ctx.fillStyle=theme.muted; ctx.font='700 27px system-ui, -apple-system, Segoe UI, sans-serif'; drawWrappedText(ctx,payload.city,930,350,760,36,2);
+  const startY=455,rowH=108;
+  payload.prayers.forEach(([name,time],i)=>{
+    const y=startY+i*rowH;
+    const isSunrise=name==='طلوع آفتاب';
+    roundedRect(ctx,118,y,844,78,24);
+    ctx.fillStyle=isSunrise?theme.sunriseRow:theme.row; ctx.fill();
+    ctx.strokeStyle=isSunrise?theme.sunriseStroke:theme.rowStroke; ctx.lineWidth=2; ctx.stroke();
+    ctx.fillStyle=isSunrise?theme.sunriseText:theme.title; ctx.font='900 34px system-ui, -apple-system, Segoe UI, sans-serif'; ctx.textAlign='right'; ctx.fillText(name,900,y+52);
+    ctx.fillStyle=isSunrise?theme.sunriseText:theme.time; ctx.font='900 46px system-ui, -apple-system, Segoe UI, sans-serif'; ctx.textAlign='left'; ctx.fillText(time||'—',180,y+57);
+    ctx.textAlign='right';
+  });
+  ctx.fillStyle=theme.footer; ctx.font='700 28px system-ui, -apple-system, Segoe UI, sans-serif'; ctx.textAlign='right'; ctx.fillText('آج کا نماز شیڈول',930,1225);
+  ctx.fillStyle=theme.brand; ctx.font='900 30px system-ui, -apple-system, Segoe UI, sans-serif'; ctx.textAlign='left'; ctx.fillText('barakaway.app',118,1225);
+  ctx.textAlign='left';
+  return await new Promise(resolve=>canvas.toBlob(resolve,'image/png',0.95));
+}
+async function sharePrayerTimes(){
+  if(!state.timingsRaw){ showToast('پہلے نماز کے اوقات لوڈ کریں.'); return; }
+  const payload=getPrayerSharePayload();
+  const text=buildPrayerShareText(payload);
+  try{
+    const blob=await createPrayerShareBlob();
+    const file=blob?new File([blob],'barakaway-prayer-times.png',{type:'image/png'}):null;
+    if(file && navigator.canShare && navigator.canShare({files:[file]}) && navigator.share){ await navigator.share({title:'BarakaWay App',text,files:[file]}); return; }
+    if(navigator.share){ await navigator.share({title:'BarakaWay App',text}); return; }
+    await navigator.clipboard.writeText(text); showToast('BarakaWay لنک کاپی ہو گیا.');
+  }catch(err){
+    if(err && err.name==='AbortError') return;
+    try{ await navigator.clipboard.writeText(text); showToast('BarakaWay لنک کاپی ہو گیا.'); }catch(_){ showToast(text); }
+  }
+}
+if(sharePrayerTimesBtn){ sharePrayerTimesBtn.addEventListener('click',sharePrayerTimes); }
+
 bootstrap();
+
 </script>
 <script src="/bottom-nav.js"></script>
 </body>
