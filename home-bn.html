@@ -1,0 +1,6653 @@
+<!--
+بِسْمِ ٱللَّٰهِ ٱلرَّحْمَـٰنِ ٱلرَّحِيمِ
+In the name of Allah, the Most Merciful, the Most Compassionate
+-->
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+
+<script>
+(function(){
+  const savedTheme = localStorage.getItem('siteTheme');
+  if(savedTheme){
+    document.documentElement.classList.add(savedTheme + '-mode');
+  } else {
+    document.documentElement.classList.add('dark-mode');
+  }
+})();
+</script>
+
+<script data-goatcounter="https://onedollarexit.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
+
+<link rel="icon" type="image/png" href="/favicon.png">
+<link rel="manifest" href="/manifest.json">
+<meta name="theme-color" content="#2d7a46">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>BarakaWay</title>
+
+<style>
+.ramadan-wrapper{
+max-width:850px;
+margin:auto;
+}
+
+.ramadan-bar{
+background:#2d7a46;
+color:white;
+overflow:hidden;
+white-space:nowrap;
+font-size:14px;
+border-radius:0 0 8px 8px;
+}
+
+.ramadan-text{
+display:inline-block;
+padding-left:100%;
+animation:none;
+}
+
+@keyframes ramadanMove{
+0%{transform:translateX(0);}
+100%{transform:translateX(-100%);}
+}
+
+body{
+position:relative;
+margin:0;
+font-family:system-ui;
+line-height:1.7;
+transition:background .25s,color .25s;
+}
+
+html.dark-mode body{
+background:#101418;
+color:#e9eef3;
+}
+
+html.light-mode body{
+background:#f5f7f8;
+color:#222;
+}
+
+.container{
+  max-width:850px;
+  margin:auto;
+  padding:40px 30px;
+  min-height:calc(100vh - 90px);
+box-shadow:0 6px 16px rgba(0,0,0,0.05);
+transition:background .25s,color .25s,box-shadow .25s;
+}
+
+html.dark-mode .container{
+background:#171d24;
+box-shadow:0 10px 28px rgba(0,0,0,0.35);
+}
+
+html.light-mode .container{
+background:white;
+box-shadow:0 6px 16px rgba(0,0,0,0.05);
+}
+
+h1{
+text-align:center;
+font-size:36px;
+margin-bottom:0px;
+transition:color .25s;
+}
+
+html.dark-mode h1{color:#f5f7fa;}
+html.light-mode h1{color:#222;}
+
+.subtitle{
+text-align:center;
+margin-bottom:5px;
+letter-spacing:2px;
+font-size:15px;
+text-transform:uppercase;
+}
+
+html.dark-mode .subtitle{color:#b9c0c8;}
+html.light-mode .subtitle{color:#666;}
+
+.language-switch{
+text-align:center;
+margin-top:8px;
+margin-bottom:8px;
+font-size:13px;
+}
+
+.language-switch a{
+text-decoration:none;
+margin:0 6px;
+}
+
+html.dark-mode .language-switch a{color:#b9c0c8;}
+html.light-mode .language-switch a{color:#666;}
+
+.language-switch a.active{
+font-weight:bold;
+}
+
+html.dark-mode .language-switch a.active{color:#fff;}
+html.light-mode .language-switch a.active{color:#000;}
+
+.tagline{
+text-align:center;
+margin-bottom:40px;
+font-size:14px;
+}
+
+html.dark-mode .tagline{color:#a8b1ba;}
+html.light-mode .tagline{color:#888;}
+
+.section{
+margin-bottom:45px;
+}
+
+.intro{
+padding:20px;
+border-radius:8px;
+transition:background .25s;
+}
+
+html.dark-mode .intro{background:#1b222a;}
+html.light-mode .intro{background:#fafafa;}
+
+.section h2{
+font-size:22px;
+border-left:4px solid #2d7a46;
+padding-left:12px;
+margin-bottom:15px;
+}
+
+.quote{
+padding:20px;
+border-radius:8px;
+font-style:italic;
+transition:background .25s;
+}
+
+html.dark-mode .quote{background:#163023;color:#dff4e6;}
+html.light-mode .quote{background:#eef5f1;color:#222;}
+
+.wallet-box{
+padding:30px;
+border-radius:12px;
+text-align:center;
+margin-top:20px;
+transition:background .25s;
+}
+
+html.dark-mode .wallet-box{background:#16202b;}
+html.light-mode .wallet-box{background:#eef6ff;}
+
+.wallet{
+font-size:18px;
+word-break:break-all;
+margin:15px 0;
+font-weight:bold;
+}
+
+.wallet-type{
+font-size:13px;
+}
+
+html.dark-mode .wallet-type{color:#9fb0c1;}
+html.light-mode .wallet-type{color:#777;}
+
+button{
+padding:10px 18px;
+border:none;
+background:#2d7a46;
+color:white;
+border-radius:6px;
+cursor:pointer;
+font-size:15px;
+margin:5px;
+}
+
+button:hover{
+background:#256338;
+}
+
+.progress{
+background:#eee;
+border-radius:6px;
+overflow:hidden;
+height:14px;
+margin-top:10px;
+}
+
+.progress-bar{
+height:14px;
+background:#2d7a46;
+width:0%;
+}
+
+.transactions{
+padding:20px;
+border-radius:8px;
+transition:background .25s;
+}
+
+html.dark-mode .transactions{background:#1b222a;}
+html.light-mode .transactions{background:#fafafa;}
+
+.tx{
+padding:10px;
+border-bottom:1px solid #eee;
+font-size:14px;
+}
+
+html.dark-mode .tx{border-bottom-color:#2a3138;}
+
+.warning{
+padding:20px;
+border-radius:8px;
+border-left:4px solid #d44;
+transition:background .25s;
+}
+
+html.dark-mode .warning{background:#2a1717;color:#ffd7d7;}
+html.light-mode .warning{background:#fff3f3;color:#222;}
+
+.footer{
+text-align:center;
+margin-top:50px;
+}
+
+html.dark-mode .footer{color:#b9c0c8;}
+html.light-mode .footer{color:#555;}
+
+.small{
+font-size:14px;
+}
+
+html.dark-mode .small{color:#b9c0c8;}
+html.light-mode .small{color:#666;}
+
+.link{
+text-align:center;
+margin-top:30px;
+}
+
+
+.link a{
+color:#86cfa1;
+text-decoration:none;
+font-weight:800;
+margin:0 12px;
+letter-spacing:-0.01em;
+transition:color .25s ease, opacity .25s ease;
+}
+
+html.dark-mode .link a{
+color:#d7e4dc;
+}
+
+html.light-mode .link a{
+color:#2f6f4a;
+}
+
+.link a:hover{
+opacity:0.88;
+}
+
+.qr{
+margin-top:20px;
+}
+
+.install-box{
+text-align:center;
+margin-top:20px;
+display:block;
+}
+
+.install-btn{
+background:#2d7a46;
+color:white;
+border:none;
+padding:12px 22px;
+font-size:15px;
+border-radius:10px;
+cursor:pointer;
+display:inline-block;
+min-width:230px;
+box-shadow:0 10px 22px rgba(45,122,70,0.16);
+}
+
+.install-btn:hover{
+background:#256338;
+}
+
+.install-btn:active{
+transform:scale(0.985);
+}
+
+@media(max-width:700px){
+  .install-box{
+    display:none !important;
+    margin-top:0;
+  }
+
+  .install-btn{
+    min-width:230px;
+  }
+}
+
+.share-btn{
+background:#3a3a3a;
+color:white;
+border:none;
+padding:12px 22px;
+font-size:15px;
+border-radius:8px;
+cursor:pointer;
+margin-left:10px;
+}
+
+.share-btn:hover{
+background:#222;
+}
+
+.donation-dropdown{
+border-radius:14px;
+padding:0;
+overflow:hidden;
+transition:background .25s,border-color .25s,box-shadow .25s;
+}
+
+html.dark-mode .donation-dropdown{
+background:#1b222a;
+border:1px solid #2a3138;
+box-shadow:0 6px 18px rgba(0,0,0,0.18);
+}
+
+html.light-mode .donation-dropdown{
+background:#f4f8f5;
+border:1px solid #d8e7dc;
+box-shadow:0 6px 18px rgba(45,122,70,0.08);
+}
+
+.donation-dropdown summary{
+list-style:none;
+cursor:pointer;
+padding:20px 22px;
+background:linear-gradient(135deg,#2d7a46,#256338);
+color:white;
+display:flex;
+align-items:center;
+justify-content:space-between;
+gap:16px;
+font-size:20px;
+font-weight:700;
+}
+
+.donation-dropdown summary::-webkit-details-marker{
+display:none;
+}
+
+.donation-summary-text{
+display:flex;
+flex-direction:column;
+gap:4px;
+}
+
+.donation-summary-note{
+font-size:13px;
+font-weight:500;
+opacity:0.9;
+letter-spacing:0.2px;
+}
+
+.donation-icon{
+font-size:24px;
+line-height:1;
+transition:transform 0.2s ease;
+}
+
+.donation-dropdown[open] .donation-icon{
+transform:rotate(180deg);
+}
+
+.donation-dropdown-content{
+padding:22px;
+}
+
+.app-menu{
+margin:28px 0 36px 0;
+}
+.app-menu-grid{
+display:flex;
+flex-direction:column;
+gap:16px;
+max-width:420px;
+margin:0 auto;
+}
+
+.app-menu-btn{
+  display:block;
+  text-align:center;
+  padding:18px 22px;
+  border-radius:22px;
+  text-decoration:none;
+  font-size:22px;
+  font-weight:700;
+  letter-spacing:-0.015em;
+  transition:
+    transform 0.18s ease,
+    box-shadow 0.18s ease,
+    border-color 0.18s ease,
+    background 0.18s ease,
+    color 0.18s ease;
+  transform:translateZ(0);
+  -webkit-tap-highlight-color:transparent;
+}
+
+html.dark-mode .app-menu-btn{
+  background:linear-gradient(135deg,#16212b 0%, #182632 52%, #163228 100%);
+  border:1.5px solid rgba(96,147,120,0.34);
+  box-shadow:
+    0 12px 24px rgba(0,0,0,0.22),
+    inset 0 1px 0 rgba(255,255,255,0.04);
+  color:#f4f7f3;
+}
+
+html.light-mode .app-menu-btn{
+  background:linear-gradient(135deg,#ffffff 0%, #fbfdfc 52%, #eff6f1 100%);
+  border:1.5px solid rgba(44,111,69,0.22);
+  box-shadow:
+    0 12px 24px rgba(15,24,18,0.06),
+    inset 0 1px 0 rgba(255,255,255,0.96);
+  color:#18211b;
+}
+
+/* primary tier */
+.app-menu-btn:nth-child(1),
+.app-menu-btn:nth-child(3),
+.app-menu-btn:nth-child(4){
+  font-weight:800;
+}
+
+html.dark-mode .app-menu-btn:nth-child(1){
+  background:linear-gradient(135deg,#2b2415 0%, #223225 52%, #183026 100%);
+  border-color:rgba(197,162,73,0.44);
+}
+html.light-mode .app-menu-btn:nth-child(1){
+  background:linear-gradient(135deg,#fffaf0 0%, #f8fcf7 52%, #edf6ef 100%);
+  border-color:rgba(185,148,48,0.30);
+}
+
+html.dark-mode .app-menu-btn:nth-child(3){
+  background:linear-gradient(135deg,#221f36 0%, #1d2230 52%, #2b2641 100%);
+  border-color:rgba(124,111,186,0.38);
+}
+html.light-mode .app-menu-btn:nth-child(3){
+  background:linear-gradient(135deg,#fdfcff 0%, #faf9ff 52%, #f1eef9 100%);
+  border-color:rgba(124,111,186,0.24);
+}
+
+html.dark-mode .app-menu-btn:nth-child(4){
+  background:linear-gradient(135deg,#18272a 0%, #182632 48%, #17352d 100%);
+  border-color:rgba(79,156,131,0.38);
+}
+html.light-mode .app-menu-btn:nth-child(4){
+  background:linear-gradient(135deg,#fbfffd 0%, #f7fcfa 48%, #edf7f2 100%);
+  border-color:rgba(79,156,131,0.24);
+}
+
+/* secondary tier */
+html.dark-mode .app-menu-btn:nth-child(2){
+  background:linear-gradient(135deg,#1c2635 0%, #1b2430 52%, #183845 100%);
+  border-color:rgba(73,154,222,0.34);
+}
+html.light-mode .app-menu-btn:nth-child(2){
+  background:linear-gradient(135deg,#fbfdff 0%, #f7fbff 52%, #edf7fb 100%);
+  border-color:rgba(73,154,222,0.22);
+}
+
+html.dark-mode .app-menu-btn:nth-child(5){
+  background:linear-gradient(135deg,#2b2119 0%, #1d2230 52%, #392818 100%);
+  border-color:rgba(191,127,72,0.34);
+}
+html.light-mode .app-menu-btn:nth-child(5){
+  background:linear-gradient(135deg,#fffdfa 0%, #fff8f2 52%, #fbf1e7 100%);
+  border-color:rgba(191,127,72,0.22);
+}
+
+/* tertiary tier */
+html.dark-mode .app-menu-btn:nth-child(6){
+  background:linear-gradient(135deg,#2a1c27 0%, #1d2230 52%, #362130 100%);
+  border-color:rgba(171,88,124,0.30);
+  opacity:0.96;
+}
+html.light-mode .app-menu-btn:nth-child(6){
+  background:linear-gradient(135deg,#fffdfd 0%, #fff8fa 52%, #f8eef2 100%);
+  border-color:rgba(171,88,124,0.20);
+}
+
+html.dark-mode .app-menu-btn:nth-child(7){
+  background:linear-gradient(135deg,#1a2433 0%, #1d2230 52%, #1d2f47 100%);
+  border-color:rgba(92,127,201,0.30);
+  opacity:0.96;
+}
+html.light-mode .app-menu-btn:nth-child(7){
+  background:linear-gradient(135deg,#fcfdff 0%, #f7f9ff 52%, #edf1f8 100%);
+  border-color:rgba(92,127,201,0.20);
+}
+
+.app-menu-btn:hover{
+  transform:translateY(-2px);
+}
+
+html.dark-mode .app-menu-btn:hover{
+  box-shadow:
+    0 16px 30px rgba(0,0,0,0.28),
+    inset 0 1px 0 rgba(255,255,255,0.05);
+}
+
+html.light-mode .app-menu-btn:hover{
+  box-shadow:
+    0 16px 28px rgba(15,24,18,0.08),
+    inset 0 1px 0 rgba(255,255,255,0.98);
+}
+
+.app-menu-btn:active{
+  transform:translateY(0) scale(0.985);
+}
+
+html.dark-mode .app-menu-btn:active{
+  box-shadow:
+    0 8px 18px rgba(0,0,0,0.20),
+    inset 0 1px 0 rgba(255,255,255,0.04);
+}
+
+html.light-mode .app-menu-btn:active{
+  box-shadow:
+    0 8px 18px rgba(15,24,18,0.05),
+    inset 0 1px 0 rgba(255,255,255,0.9);
+}
+@media(max-width:640px){
+  .app-menu-grid{
+    max-width:100%;
+    gap:14px;
+  }
+  .app-menu-btn{
+    font-size:18px;
+    padding:16px 18px;
+    border-radius:16px;
+	transform:translateZ(0);
+  }
+}
+
+.lang-change{
+text-align:center;
+margin-top:14px;
+margin-bottom:6px;
+font-size:14px;
+}
+.lang-change a{
+color:#2d7a46;
+text-decoration:none;
+font-weight:700;
+}
+
+.mobile-top-controls{display:none;}
+
+@media(max-width:700px){
+h1{
+  margin-top:-3px;
+  margin-bottom:3px;
+}
+  .mobile-top-controls{
+    display:block;
+    position:absolute;
+    top:30px;
+    left:0;
+    right:0;
+    z-index:1000;
+    pointer-events:none;
+  }
+
+  .icon-btn{
+    position:absolute;
+    width:46px;
+    height:46px;
+    border-radius:50%;
+    
+    -webkit-
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    padding:0;
+    cursor:pointer;
+    overflow:hidden;
+    pointer-events:auto;
+    transition:background .25s,border-color .25s,box-shadow .25s;
+  }
+
+  html.dark-mode .icon-btn{
+    border:1px solid rgba(214,184,98,0.18);
+    background:linear-gradient(180deg,rgba(22,29,37,0.92) 0%, rgba(18,24,31,0.88) 100%);
+    box-shadow:0 12px 30px rgba(0,0,0,0.22), 0 0 0 1px rgba(76,175,106,0.08), inset 0 1px 0 rgba(255,255,255,0.05);
+  }
+
+  html.light-mode .icon-btn{
+    border:1px solid rgba(214,184,98,0.18);
+    background:linear-gradient(180deg,rgba(255,255,255,0.72) 0%, rgba(248,251,248,0.66) 100%);
+    box-shadow:0 12px 28px rgba(18,34,24,0.10), 0 0 0 1px rgba(45,122,70,0.05), inset 0 1px 0 rgba(255,255,255,0.46);
+  }
+
+  .icon-btn.left{left:12px;}
+  .icon-btn.right{right:12px;}
+
+  .icon-btn svg{
+    width:22px;
+    height:22px;
+    position:relative;
+    z-index:2;
+    transition:fill .25s;
+  }
+
+  html.dark-mode .icon-btn svg{fill:#d9f4e4;}
+  html.light-mode .icon-btn svg{fill:#2d7a46;}
+
+  .icon-btn .ripple{
+    position:absolute;
+    inset:0;
+    border-radius:50%;
+    transform:scale(0);
+    background:radial-gradient(circle, rgba(45,122,70,0.22) 0%, rgba(45,122,70,0.10) 38%, rgba(45,122,70,0.00) 70%);
+    opacity:0;
+    z-index:1;
+  }
+
+  .icon-btn:active .ripple{
+    animation:mobileRipple .42s ease-out;
+  }
+
+  @keyframes mobileRipple{
+    0%{
+      transform:scale(0.15);
+      opacity:1;
+    }
+    100%{
+      transform:scale(2.2);
+      opacity:0;
+    }
+  }
+
+  .icon-btn:active{
+    transform:scale(0.96);
+  }
+
+  .lang-change{
+    display:none;
+  }
+
+  .container{
+    padding-top:94px;
+  }
+}
+
+.promo-text-block{
+  margin-top:28px;
+  padding:18px;
+  text-align:center;
+}
+
+.promo-text{
+  font-size:18px;
+  font-weight:700;
+  transition:opacity 0.6s ease,color .25s;
+}
+
+html.dark-mode .promo-text{color:#e9f6ee;}
+html.light-mode .promo-text{color:#1f2a22;}
+
+.mobile-promo-ad{
+  display:none;
+}
+
+@media(max-width:700px){
+
+.app-menu-btn{
+  font-size:18px;
+  padding:17px 18px;
+  border-radius:20px;
+}
+.app-menu-btn:active{
+  transform:scale(0.985);
+}
+  .mobile-promo-ad{
+    display:block;
+    margin:22px 0 18px 0;
+  }
+
+  .mobile-promo-inner{
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    min-height:74px;
+    padding:18px 20px;
+    border-radius:24px;
+    overflow:hidden;
+    transition:background .25s,border-color .25s,box-shadow .25s;
+  }
+
+  html.dark-mode .mobile-promo-inner{
+    background:linear-gradient(180deg,#1d242c 0%, #1a2128 100%);
+    border:1.5px solid #2a3138;
+    box-shadow:0 10px 24px rgba(0,0,0,0.18), inset 0 1px 0 rgba(255,255,255,0.04);
+  }
+
+  html.light-mode .mobile-promo-inner{
+    background:linear-gradient(180deg,#ffffff 0%, #fbfdfc 100%);
+    border:1.5px solid #dfe8e2;
+    box-shadow:0 10px 24px rgba(19,40,28,0.05), inset 0 1px 0 rgba(255,255,255,0.92);
+  }
+
+.mobile-promo-line{
+  text-align:center;
+  font-size:24px;
+  font-weight:800;
+  letter-spacing:-0.04em;
+  opacity:1;
+  transform:translateY(0) scale(1);
+  transition:
+    opacity 0.45s ease,
+    transform 0.45s ease,
+    filter 0.45s ease;
+}
+
+html.dark-mode .mobile-promo-line{
+  background:linear-gradient(180deg,#dff4e6 0%, #4caf6a 100%);
+  -webkit-background-clip:text;
+  -webkit-text-fill-color:transparent;
+}
+
+html.light-mode .mobile-promo-line{
+  background:linear-gradient(180deg,#1f2a22 0%, #2d7a46 100%);
+  -webkit-background-clip:text;
+  -webkit-text-fill-color:transparent;
+}
+
+.mobile-promo-line.is-hidden{
+  opacity:0;
+  transform:translateY(12px) scale(0.96);
+  filter:blur(4px);
+}
+
+.mobile-promo-line.is-brand{
+  background:linear-gradient(180deg,#2d7a46 0%, #4caf6a 100%);
+  -webkit-background-clip:text;
+  -webkit-text-fill-color:transparent;
+  filter:drop-shadow(0 4px 12px rgba(45,122,70,0.25));
+}
+}
+@keyframes promoBreath{
+  0%{ transform:scale(1); }
+  50%{ transform:scale(1.02); }
+  100%{ transform:scale(1); }
+}
+
+.mobile-promo-line{
+  animation:none;
+}
+
+.share-overlay{
+  display:none;
+  position:fixed;
+  inset:0;
+  
+  -webkit-
+  z-index:3000;
+  padding:20px;
+  box-sizing:border-box;
+  align-items:flex-end;
+  justify-content:center;
+  transition:background .25s;
+}
+
+html.dark-mode .share-overlay{background:rgba(9,12,16,0.62);}
+html.light-mode .share-overlay{background:rgba(15,24,18,0.45);}
+
+.share-overlay.open{display:flex;}
+.share-sheet{
+  width:min(100%,520px);
+  border-radius:28px 28px 20px 20px;
+  padding:18px 18px 20px;
+  transition:background .25s,border-color .25s,box-shadow .25s;
+}
+
+html.dark-mode .share-sheet{
+  background:linear-gradient(180deg,#171d24 0%, #141a20 100%);
+  border:1px solid #2a3138;
+  box-shadow:0 20px 50px rgba(0,0,0,0.35);
+}
+
+html.light-mode .share-sheet{
+  background:linear-gradient(180deg,#ffffff 0%, #fbfdfc 100%);
+  border:1px solid #dfe8e2;
+  box-shadow:0 20px 50px rgba(18,34,24,0.20);
+}
+
+.share-handle{
+  width:56px;
+  height:5px;
+  border-radius:999px;
+  margin:0 auto 14px;
+}
+
+html.dark-mode .share-handle{background:#3a4652;}
+html.light-mode .share-handle{background:#d8e4dc;}
+
+.share-title{
+  text-align:center;
+  font-size:20px;
+  font-weight:800;
+  letter-spacing:-0.02em;
+  margin-bottom:6px;
+}
+
+html.dark-mode .share-title{color:#f5f7fa;}
+html.light-mode .share-title{color:#1f2a22;}
+
+.share-subtitle{
+  text-align:center;
+  font-size:14px;
+  margin-bottom:16px;
+}
+
+html.dark-mode .share-subtitle{color:#a7b2bd;}
+html.light-mode .share-subtitle{color:#607066;}
+
+.share-grid{
+  display:grid;
+  grid-template-columns:repeat(3,minmax(0,1fr));
+  gap:12px;
+}
+
+.share-action{
+  appearance:none;
+  border-radius:20px;
+  padding:14px 8px;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  justify-content:center;
+  gap:10px;
+  cursor:pointer;
+  transition:background .25s,border-color .25s,box-shadow .25s;
+}
+
+html.dark-mode .share-action{
+  border:none;
+  background:#1d242c;
+  border:1px solid #2a3138;
+  box-shadow:0 8px 20px rgba(0,0,0,0.18), inset 0 1px 0 rgba(255,255,255,0.03);
+}
+
+html.light-mode .share-action{
+  border:none;
+  background:#f7faf8;
+  border:1px solid #e1ebe4;
+  box-shadow:0 8px 20px rgba(19,40,28,0.04), inset 0 1px 0 rgba(255,255,255,0.92);
+}
+
+.share-action:active{transform:scale(0.98);}
+.share-icon{
+  width:46px;
+  height:46px;
+  border-radius:50%;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-size:22px;
+  font-weight:800;
+  color:#fff;
+}
+.share-action span{
+  font-size:13px;
+  font-weight:700;
+  text-align:center;
+  line-height:1.25;
+}
+
+html.dark-mode .share-action span{color:#f3f6f9;}
+html.light-mode .share-action span{color:#1f2a22;}
+
+.share-copy-msg{
+  display:none;
+  margin-top:14px;
+  text-align:center;
+  font-size:13px;
+  font-weight:700;
+  color:#2d7a46;
+}
+.share-copy-msg.show{display:block;}
+.share-close{
+  margin-top:14px;
+  width:100%;
+  min-height:48px;
+  border-radius:16px;
+  font-size:15px;
+  font-weight:800;
+  cursor:pointer;
+  transition:background .25s,border-color .25s,color .25s;
+}
+
+html.dark-mode .share-close{
+  border:1px solid #2a3138;
+  background:#1d242c;
+  color:#f3f6f9;
+}
+
+html.light-mode .share-close{
+  border:1px solid #dfe8e2;
+  background:#ffffff;
+  color:#1f2a22;
+}
+
+.share-telegram .share-icon{background:#27A7E7;}
+.share-whatsapp .share-icon{background:#25D366;}
+.share-facebook .share-icon{background:#1877F2;}
+.share-x .share-icon{background:#111111;}
+.share-linkedin .share-icon{background:#0A66C2;}
+.share-email .share-icon{background:#6B7280;}
+.share-copy .share-icon{background:#2d7a46;}
+.share-more .share-icon{background:#8B5CF6;}
+@media(max-width:700px){
+  .share-overlay{padding:10px;}
+  .share-sheet{width:100%;border-radius:26px 26px 18px 18px;padding:16px 14px 16px;}
+  .share-grid{grid-template-columns:repeat(3,minmax(0,1fr));gap:10px;}
+  .share-action{border-radius:18px;padding:12px 6px;}
+  .share-icon{width:42px;height:42px;font-size:20px;}
+  .share-action span{font-size:12px;}
+}
+
+/* PREMIUM MOBILE GUIDE */
+.mobile-guide-active{
+  position:relative;
+  border-color: rgba(45,122,70,0.95) !important;
+
+  box-shadow:
+    0 0 0 2px rgba(45,122,70,0.6),
+    0 0 12px rgba(45,122,70,0.45),
+    0 0 24px rgba(45,122,70,0.25);
+
+  transform: translateY(-2px) scale(1.01);
+  transition: all 0.3s ease;
+}
+@keyframes premiumPulse {
+  0% {
+    box-shadow:
+      0 0 0 0 rgba(45,122,70,0.6),
+      0 0 0 rgba(45,122,70,0.0);
+  }
+  70% {
+    box-shadow:
+      0 0 0 6px rgba(45,122,70,0.0),
+      0 0 18px rgba(45,122,70,0.45);
+  }
+  100% {
+    box-shadow:
+      0 0 0 0 rgba(45,122,70,0.0),
+      0 0 0 rgba(45,122,70,0.0);
+  }
+}
+.mobile-guide-active{
+  animation: premiumPulse 1.4s ease;
+}
+
+
+html.dark-mode 
+html.light-mode 
+.install-help-overlay.open{display:flex}
+
+html.dark-mode 
+html.light-mode 
+.install-help-title{text-align:center;font-size:24px;font-weight:800;margin-bottom:10px}
+html.dark-mode .install-help-title{color:#f5f7fa}
+html.light-mode .install-help-title{color:#1f2a22}
+.install-help-text{text-align:center;font-size:15px;margin-bottom:16px}
+html.dark-mode .install-help-text{color:#a7b2bd}
+html.light-mode .install-help-text{color:#55655c}
+.install-help-steps{margin:0;padding-left:22px;font-size:15px}
+html.dark-mode .install-help-steps{color:#f0f4f8}
+html.light-mode .install-help-steps{color:#1f2a22}
+.install-help-steps li{margin:8px 0}
+.install-help-actions{display:flex;justify-content:center;gap:10px;flex-wrap:wrap;margin-top:18px}
+.install-help-primary,.install-help-secondary{min-height:46px;padding:12px 18px;border-radius:14px;border:none;font-size:15px;font-weight:800;cursor:pointer}
+.install-help-primary{background:#2d7a46;color:#fff;box-shadow:0 10px 22px rgba(45,122,70,0.18)}
+.install-help-secondary{background:#eef5f1;color:#2d7a46}
+.install-help-close{margin-top:10px;width:100%;min-height:46px;border-radius:14px;font-size:15px;font-weight:800;cursor:pointer;transition:background .25s,border-color .25s,color .25s}
+html.dark-mode .install-help-close{border:1px solid #2a3138;background:#1d242c;color:#f3f6f9}
+html.light-mode .install-help-close{border:1px solid #dfe8e2;background:#fff;color:#1f2a22}
+
+
+/* DESKTOP TOP ACTIONS ONLY */
+.desktop-top-actions{
+  display:grid;
+  grid-template-columns:1fr auto 1fr;
+  align-items:center;
+  gap:14px;
+  width:min(850px,100%);
+  margin:10px auto 14px;
+  padding:0 18px;
+  box-sizing:border-box;
+  pointer-events:auto;
+}
+
+.desktop-action-left{
+  display:flex;
+  justify-content:flex-start;
+}
+
+.desktop-action-center{
+  display:flex;
+  justify-content:center;
+}
+
+.desktop-action-right{
+  display:flex;
+  justify-content:flex-end;
+}
+
+.desktop-action-pill,
+.desktop-theme-toggle-inner{
+  min-height:42px;
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  gap:9px;
+  padding:9px 16px;
+  border-radius:999px;
+  text-decoration:none;
+  font-size:13px;
+  font-weight:900;
+  letter-spacing:-0.015em;
+  white-space:nowrap;
+  transition:background .25s ease,border-color .25s ease,box-shadow .25s ease,transform .18s ease,color .25s ease;
+}
+
+.desktop-action-pill:hover,
+.desktop-theme-toggle-inner:hover{
+  transform:translateY(-1px);
+}
+
+html.dark-mode .desktop-action-pill,
+html.dark-mode .desktop-theme-toggle-inner{
+  background:linear-gradient(180deg,rgba(22,29,37,0.94) 0%,rgba(18,24,31,0.90) 100%);
+  border:1px solid rgba(214,184,98,0.18);
+  color:#f3fff7;
+  box-shadow:0 12px 30px rgba(0,0,0,0.22), inset 0 1px 0 rgba(255,255,255,0.05);
+}
+
+html.light-mode .desktop-action-pill,
+html.light-mode .desktop-theme-toggle-inner{
+  background:linear-gradient(180deg,rgba(255,255,255,0.98) 0%,rgba(246,251,248,0.96) 100%);
+  border:1px solid rgba(45,122,70,0.18);
+  color:#1f2a22;
+  box-shadow:0 12px 26px rgba(18,34,24,0.08), inset 0 1px 0 rgba(255,255,255,0.86);
+}
+
+.desktop-top-actions .install-box{
+  display:block;
+  margin:0;
+  text-align:center;
+}
+
+.desktop-top-actions .install-btn{
+  min-height:42px;
+  min-width:190px;
+  margin:0;
+  padding:9px 18px;
+  border-radius:999px;
+  font-size:13px;
+  font-weight:900;
+  letter-spacing:-0.015em;
+  box-shadow:0 12px 26px rgba(45,122,70,0.18);
+}
+
+.desktop-theme-toggle-inner .theme-toggle-label{
+  font-size:13px;
+  font-weight:900;
+  letter-spacing:-0.015em;
+}
+
+@media(max-width:700px){
+  .desktop-top-actions{
+    display:none !important;
+  }
+}
+
+/* THEME TOGGLE CENTER */
+.theme-toggle-center{
+  position:absolute;
+  left:50%;
+  transform:translateX(-50%);
+  display:flex;
+  align-items:center;
+  gap:8px;
+  pointer-events:auto;
+}
+
+.theme-toggle-label{
+  font-size:12px;
+  font-weight:700;
+  white-space:nowrap;
+  transition:color .25s;
+}
+
+html.dark-mode .theme-toggle-label{color:#d9f4e4;}
+html.light-mode .theme-toggle-label{color:#111;}
+
+.theme-switch{
+  width:42px;
+  height:24px;
+  appearance:none;
+  border-radius:999px;
+  position:relative;
+  cursor:pointer;
+  transition:background .25s, box-shadow .25s;
+  border:none;
+}
+
+html.dark-mode .theme-switch{
+  background:#2d7a46;
+  box-shadow:0 0 0 1px rgba(255,255,255,0.08), 0 4px 12px rgba(45,122,70,0.28);
+}
+
+html.light-mode .theme-switch{
+  background:#cfd6de;
+  box-shadow:0 0 0 1px rgba(0,0,0,0.08), 0 4px 12px rgba(0,0,0,0.08);
+}
+
+.theme-switch::before{
+  content:"";
+  position:absolute;
+  top:3px;
+  width:18px;
+  height:18px;
+  background:#fff;
+  border-radius:50%;
+  transition:left .25s, transform .25s;
+}
+
+html.dark-mode .theme-switch::before{left:20px;}
+html.light-mode .theme-switch::before{left:3px;}
+
+/* HOME HERO BRAND + PRAYER WIDGET */
+
+/* HOME HERO BRAND + PRAYER WIDGET */
+.brand-prayer-hero{
+  position:relative;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  gap:16px;
+  margin:2px 0 18px;
+  padding:22px 22px 18px;
+  border-radius:30px;
+  overflow:hidden;
+}
+
+html.dark-mode .brand-prayer-hero{
+  background:linear-gradient(180deg,#111a23 0%, #0f1821 100%);
+  border:1px solid rgba(53,88,73,0.36);
+  box-shadow:0 18px 36px rgba(0,0,0,0.22), inset 0 1px 0 rgba(255,255,255,0.03);
+}
+
+html.light-mode .brand-prayer-hero{
+  background:linear-gradient(180deg,#ffffff 0%, #f7faf8 100%);
+  border:1px solid rgba(45,122,70,0.12);
+  box-shadow:0 16px 30px rgba(21,34,24,0.06), inset 0 1px 0 rgba(255,255,255,0.92);
+}
+
+.brand-signature{
+  position:relative;
+  z-index:1;
+  display:inline-flex;
+  align-items:baseline;
+  justify-content:center;
+  gap:0;
+  font-weight:900;
+  letter-spacing:-0.045em;
+  line-height:1;
+  margin-top:-2px;
+  background:none;
+  border:none;
+  padding:0;
+  cursor:default;
+  font-family:inherit;
+}
+.brand-signature.install-trigger{
+  cursor:pointer;
+}
+.brand-install-hint{
+  display:none;
+  margin-top:-4px;
+  font-size:12px;
+  font-weight:800;
+  letter-spacing:0.02em;
+  color:#4caf6a;
+  text-align:center;
+  cursor:pointer;
+  user-select:none;
+}
+.brand-install-hint.is-visible{
+  display:block;
+}
+
+.brand-signature .brand-letter-accent{
+  color:#66c680;
+}
+
+.brand-signature .brand-letter-main{
+  color:inherit;
+}
+
+html.dark-mode .brand-signature .brand-letter-main{color:#f8fbfd;}
+html.light-mode .brand-signature .brand-letter-main{color:#18211b;}
+
+.brand-signature{
+  font-size:44px;
+}
+.brand-signature.install-trigger:focus-visible,
+.brand-install-hint:focus-visible{
+  outline:2px solid #4caf6a;
+  outline-offset:6px;
+  border-radius:12px;
+}
+
+.home-prayer-widget{
+  position:relative;
+  z-index:1;
+  width:min(100%, 468px);
+  border-radius:24px;
+  padding:19px 18px 16px;
+  text-decoration:none;
+  transition:background .25s,border-color .25s,box-shadow .25s,transform .18s ease;
+  border:1.5px solid transparent;
+  display:block;
+  overflow:hidden;
+}
+
+html.dark-mode .home-prayer-widget{
+  background:linear-gradient(135deg,#121f2a 0%, #182533 48%, #173127 100%);
+  border-color:rgba(107,170,132,0.34);
+  box-shadow:
+    0 16px 32px rgba(0,0,0,0.28),
+    inset 0 1px 0 rgba(255,255,255,0.04);
+}
+
+html.light-mode .home-prayer-widget{
+  background:linear-gradient(135deg,#ffffff 0%, #fbfdfc 48%, #eef6f0 100%);
+  border-color:rgba(45,122,70,0.18);
+  box-shadow:
+    0 14px 28px rgba(15,24,18,0.08),
+    inset 0 1px 0 rgba(255,255,255,0.98);
+}
+
+.home-prayer-widget:hover{
+  transform:translateY(-2px);
+}
+
+.home-prayer-top,
+.home-prayer-main,
+.home-prayer-note{
+  position:relative;
+  z-index:1;
+}
+
+.home-prayer-top{
+  display:flex;
+  align-items:flex-start;
+  justify-content:space-between;
+  gap:12px;
+  margin-bottom:12px;
+}
+
+.home-prayer-kicker{
+  font-size:11px;
+  font-weight:900;
+  text-transform:uppercase;
+  letter-spacing:1.8px;
+}
+
+html.dark-mode .home-prayer-kicker{color:#d7c07a;}
+html.light-mode .home-prayer-kicker{color:#8d6b16;}
+
+.home-prayer-location{
+  font-size:12px;
+  font-weight:800;
+  text-align:right;
+}
+
+html.dark-mode .home-prayer-location{color:#eef3f7;}
+html.light-mode .home-prayer-location{color:#355043;}
+
+.home-prayer-main{
+  display:flex;
+  align-items:flex-end;
+  justify-content:space-between;
+  gap:12px;
+}
+
+.home-prayer-name{
+  font-size:30px;
+  font-weight:900;
+  line-height:1;
+  margin-bottom:8px;
+  color:#66c680;
+}
+
+.home-prayer-time{
+  font-size:42px;
+  font-weight:900;
+  line-height:0.95;
+  letter-spacing:-0.04em;
+}
+
+html.dark-mode .home-prayer-time{color:#ffffff;}
+html.light-mode .home-prayer-time{color:#1a221c;}
+
+.home-prayer-meta{
+  font-size:13px;
+  margin-top:10px;
+}
+
+html.dark-mode .home-prayer-meta{color:#c7d3de;}
+html.light-mode .home-prayer-meta{color:#607066;}
+
+.home-prayer-countdown{
+  font-size:15px;
+  font-weight:900;
+  white-space:nowrap;
+  padding:12px 14px;
+  border-radius:16px;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  justify-content:center;
+  gap:4px;
+  min-width:108px;
+}
+
+html.dark-mode .home-prayer-countdown{
+  background:linear-gradient(180deg,#163521 0%, #14301f 100%);
+  color:#f3fff7;
+  border:1px solid rgba(124,187,148,0.24);
+  box-shadow:inset 0 1px 0 rgba(255,255,255,0.04);
+}
+
+html.light-mode .home-prayer-countdown{
+  background:linear-gradient(180deg,#f0faf3 0%, #e8f5ec 100%);
+  color:#2d7a46;
+  border:1px solid #d7e8dc;
+  box-shadow:inset 0 1px 0 rgba(255,255,255,0.80);
+}
+
+.home-prayer-countdown-label{
+  font-size:10px;
+  line-height:1;
+  font-weight:900;
+  letter-spacing:0.11em;
+  text-transform:uppercase;
+  opacity:0.88;
+}
+
+.home-prayer-note{
+  margin-top:12px;
+  font-size:12px;
+  font-weight:800;
+  text-align:center;
+}
+
+html.dark-mode .home-prayer-note{color:#c0cad4;}
+html.light-mode .home-prayer-note{color:#708177;}
+
+.home-prayer-widget{
+  cursor:pointer;
+}
+
+.home-prayer-widget::after{
+  content:"";
+  position:absolute;
+  inset:0;
+  border-radius:inherit;
+  background:linear-gradient(120deg, transparent 58%, rgba(255,255,255,0.075));
+  opacity:0;
+  pointer-events:none;
+  transition:opacity .25s ease;
+}
+
+.home-prayer-widget:hover::after{
+  opacity:1;
+}
+
+.home-prayer-widget:hover{
+  transform:translateY(-3px) scale(1.01);
+}
+
+.home-prayer-widget:active{
+  transform:translateY(0) scale(.988);
+}
+
+.home-prayer-note{
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  gap:8px;
+  width:auto;
+  min-width:176px;
+  margin-left:0;
+  margin-right:0;
+  padding:9px 13px;
+  border-radius:999px;
+  letter-spacing:-0.01em;
+  transition:background .25s ease,border-color .25s ease,color .25s ease,transform .18s ease,box-shadow .25s ease;
+}
+
+html.dark-mode .home-prayer-note{
+  background:linear-gradient(135deg,rgba(215,192,122,.16),rgba(102,198,128,.11));
+  border:1px solid rgba(215,192,122,.30);
+  color:#f4e4a8;
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.04);
+}
+
+html.light-mode .home-prayer-note{
+  background:linear-gradient(135deg,#fff8e7,#eef8f1);
+  border:1px solid rgba(141,107,22,.22);
+  color:#6f5311;
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.86);
+}
+
+.home-prayer-arrow{
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  width:22px;
+  height:22px;
+  border-radius:50%;
+  font-size:16px;
+  line-height:1;
+  transition:transform .2s ease,background .25s ease,color .25s ease;
+}
+
+html.dark-mode .home-prayer-arrow{
+  background:rgba(215,192,122,.18);
+  color:#f7dc7a;
+}
+
+html.light-mode .home-prayer-arrow{
+  background:rgba(141,107,22,.10);
+  color:#8d6b16;
+}
+
+.home-prayer-widget:hover .home-prayer-note{
+  transform:translateY(-1px);
+}
+
+.home-prayer-widget:hover .home-prayer-arrow{
+  transform:translateX(4px);
+}
+
+.home-prayer-widget:focus-visible{
+  outline:2px solid #d7c07a;
+  outline-offset:5px;
+}
+
+.home-prayer-actions{
+  position:relative;
+  z-index:2;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:12px;
+  width:100%;
+  margin-top:13px;
+}
+
+.home-prayer-note{
+  margin-top:0;
+}
+
+.home-prayer-share-btn{
+  position:relative;
+  z-index:3;
+  width:42px;
+  height:42px;
+  min-width:42px;
+  border-radius:999px;
+  border:1px solid transparent;
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  padding:0;
+  margin:0;
+  cursor:pointer;
+  transition:transform .18s ease, background .25s ease, border-color .25s ease, box-shadow .25s ease;
+}
+
+.home-prayer-share-btn svg{
+  width:20px;
+  height:20px;
+  fill:currentColor;
+}
+
+html.dark-mode .home-prayer-share-btn{
+  background:linear-gradient(135deg,rgba(215,192,122,.18),rgba(102,198,128,.12));
+  border-color:rgba(215,192,122,.32);
+  color:#f7dc7a;
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.04), 0 8px 18px rgba(0,0,0,.18);
+}
+
+html.light-mode .home-prayer-share-btn{
+  background:linear-gradient(135deg,#fff8e7,#eef8f1);
+  border-color:rgba(141,107,22,.24);
+  color:#8d6b16;
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.86), 0 8px 18px rgba(15,24,18,.06);
+}
+
+.home-prayer-share-btn:hover{
+  transform:translateY(-1px) scale(1.04);
+}
+
+.home-prayer-share-btn:active{
+  transform:scale(.96);
+}
+
+.home-prayer-share-btn:focus-visible{
+  outline:2px solid #d7c07a;
+  outline-offset:4px;
+}
+
+@media(max-width:700px){
+  .home-prayer-actions{
+    gap:8px;
+    margin-top:11px;
+  }
+  .home-prayer-note{
+    min-width:0;
+    flex:0 1 auto;
+    padding:9px 12px;
+  }
+  .home-prayer-share-btn{
+    width:40px;
+    height:40px;
+    min-width:40px;
+  }
+}
+
+@media(max-width:700px){
+  .brand-prayer-hero{
+    gap:12px;
+    margin:0 0 12px;
+    padding:18px 14px 14px;
+    border-radius:24px;
+  }
+  .brand-signature{
+    font-size:29px;
+    margin-top:0;
+    transform:translateY(-2px);
+  }
+  .brand-install-hint{
+    margin-top:-2px;
+    font-size:11px;
+  }
+  .home-prayer-widget{
+    width:100%;
+    padding:16px 14px 14px;
+    border-radius:20px;
+  }
+  .home-prayer-top{
+    margin-bottom:10px;
+  }
+  .home-prayer-main{
+    align-items:center;
+    gap:10px;
+  }
+  .home-prayer-name{
+    font-size:24px;
+    margin-bottom:5px;
+  }
+  .home-prayer-time{
+    font-size:34px;
+  }
+  .home-prayer-meta{
+    font-size:12px;
+    margin-top:7px;
+  }
+  .home-prayer-countdown{
+    min-width:96px;
+    font-size:13px;
+    padding:10px 10px;
+    border-radius:14px;
+  }
+  .home-prayer-location{
+    font-size:11px;
+  }
+  .home-prayer-countdown-label{
+    font-size:10px;
+    line-height:1;
+    font-weight:900;
+    letter-spacing:0.08em;
+    text-transform:uppercase;
+    opacity:0.88;
+  }
+  .home-prayer-note{
+    text-align:center;
+  }
+}
+
+.support-project-btn{
+  position:relative;
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  gap:10px;
+  min-width:256px;
+  padding:15px 24px;
+  border-radius:16px;
+  overflow:hidden;
+  text-decoration:none;
+  font-weight:900;
+  font-size:16px;
+  letter-spacing:-0.015em;
+  transition:transform .18s ease, box-shadow .25s ease, border-color .25s ease, background .25s ease;
+  border:1.5px solid transparent;
+}
+
+.support-project-btn-text{
+  position:relative;
+  z-index:2;
+}
+
+.support-project-btn-shine{
+  display:none;
+}
+
+html.dark-mode .support-project-btn{
+  background:linear-gradient(135deg,#3a2c15 0%, #214330 54%, #163026 100%);
+  color:#fffdf7;
+  border-color:rgba(212,175,55,0.36);
+  box-shadow:
+    0 14px 26px rgba(0,0,0,0.24),
+    inset 0 1px 0 rgba(255,255,255,0.06);
+}
+
+html.light-mode .support-project-btn{
+  background:linear-gradient(135deg,#fff8ed 0%, #f5fbf6 54%, #e7f2ea 100%);
+  color:#172019;
+  border-color:rgba(197,157,32,0.28);
+  box-shadow:
+    0 14px 26px rgba(17,27,20,0.08),
+    inset 0 1px 0 rgba(255,255,255,0.98);
+}
+
+.support-project-btn:hover{
+  transform:translateY(-2px);
+}
+
+html.dark-mode .support-project-btn:hover{
+  box-shadow:
+    0 18px 30px rgba(0,0,0,0.28),
+    inset 0 1px 0 rgba(255,255,255,0.07);
+}
+
+html.light-mode .support-project-btn:hover{
+  box-shadow:
+    0 18px 30px rgba(17,27,20,0.11),
+    inset 0 1px 0 rgba(255,255,255,0.99);
+}
+
+.support-project-btn:active{
+  transform:translateY(0) scale(0.988);
+}
+@media(max-width:700px){
+  .support-project-btn{
+    width:90%;
+    max-width:320px;
+    min-width:0;
+    padding:14px 18px;
+    border-radius:16px;
+    font-size:15px;
+    margin:0 auto;
+    display:flex;
+  }
+}
+
+@media(max-width:700px){
+  .brand-prayer-hero{
+    gap:12px;
+    margin:0 0 12px;
+  }
+  .brand-signature{
+    font-size:29px;
+    margin-top:0;
+    transform:translateY(-2px);
+  }
+  .brand-install-hint{
+    margin-top:-2px;
+    font-size:11px;
+  }
+  .home-prayer-widget{
+    width:100%;
+    padding:14px 14px 13px;
+    border-radius:20px;
+  }
+  .home-prayer-top{
+    margin-bottom:8px;
+  }
+  .home-prayer-main{
+    align-items:center;
+  }
+  .home-prayer-name{
+    font-size:22px;
+    margin-bottom:4px;
+  }
+  .home-prayer-time{
+    font-size:30px;
+  }
+  .home-prayer-meta{
+    font-size:12px;
+    margin-top:6px;
+  }
+  .home-prayer-countdown{
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    justify-content:center;
+    gap:3px;
+    min-width:92px;
+    font-size:13px;
+    padding:9px 10px;
+    border-radius:12px;
+  }
+  .home-prayer-location{
+    font-size:11px;
+  }
+  .home-prayer-countdown-label{
+    font-size:10px;
+    line-height:1;
+    font-weight:800;
+    letter-spacing:0.08em;
+    text-transform:uppercase;
+    opacity:0.88;
+  }
+  .home-prayer-note{
+    text-align:center;
+  }
+}
+
+/* PREMIUM TODAY HUB + REFINED HOME NAVIGATION */
+.today-hub{
+  margin:22px 0 24px;
+  border-radius:30px;
+  overflow:hidden;
+  transition:background .25s,border-color .25s,box-shadow .25s;
+}
+html.dark-mode .today-hub{
+  background:linear-gradient(180deg,#111a22 0%, #151d25 58%, #101820 100%);
+  border:1px solid rgba(102,198,128,0.18);
+  box-shadow:0 18px 38px rgba(0,0,0,0.24), inset 0 1px 0 rgba(255,255,255,0.04);
+}
+html.light-mode .today-hub{
+  background:linear-gradient(180deg,#ffffff 0%, #fbfdfc 58%, #eef6f1 100%);
+  border:1px solid rgba(45,122,70,0.13);
+  box-shadow:0 18px 34px rgba(17,27,20,0.07), inset 0 1px 0 rgba(255,255,255,0.94);
+}
+.today-hub-head{
+  padding:22px 22px 12px;
+  text-align:left;
+}
+.today-hub-kicker{
+  font-size:11px;
+  font-weight:900;
+  letter-spacing:1.7px;
+  text-transform:uppercase;
+  margin-bottom:6px;
+}
+html.dark-mode .today-hub-kicker{color:#d7c07a;}
+html.light-mode .today-hub-kicker{color:#8d6b16;}
+.today-hub-title{
+  font-size:27px;
+  line-height:1.12;
+  font-weight:900;
+  letter-spacing:-0.045em;
+  margin:0;
+}
+html.dark-mode .today-hub-title{color:#f7fbf8;}
+html.light-mode .today-hub-title{color:#152018;}
+.today-hub-subtitle{
+  margin-top:8px;
+  font-size:14px;
+  line-height:1.45;
+}
+html.dark-mode .today-hub-subtitle{color:#b6c2bd;}
+html.light-mode .today-hub-subtitle{color:#59695f;}
+.today-hub-grid{
+  display:grid;
+  grid-template-columns:repeat(2,minmax(0,1fr));
+  gap:12px;
+  padding:12px 16px 18px;
+}
+.today-action{
+  min-height:94px;
+  border-radius:24px;
+  padding:16px;
+  display:flex;
+  flex-direction:column;
+  justify-content:space-between;
+  gap:10px;
+  text-decoration:none;
+  transition:transform .18s ease,box-shadow .25s ease,background .25s,border-color .25s;
+  border:1.5px solid transparent;
+  -webkit-tap-highlight-color:transparent;
+}
+html.dark-mode .today-action{
+  background:linear-gradient(135deg,#18222c 0%, #17212a 52%, #173126 100%);
+  border-color:rgba(102,198,128,0.20);
+  box-shadow:0 12px 24px rgba(0,0,0,0.18), inset 0 1px 0 rgba(255,255,255,0.04);
+}
+html.light-mode .today-action{
+  background:linear-gradient(135deg,#ffffff 0%, #fbfdfc 52%, #eef7f1 100%);
+  border-color:rgba(45,122,70,0.14);
+  box-shadow:0 12px 24px rgba(15,24,18,0.05), inset 0 1px 0 rgba(255,255,255,0.96);
+}
+.today-action:active{transform:scale(0.982);}
+.today-action:hover{transform:translateY(-2px);}
+.today-action-top{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:10px;
+}
+.today-action-icon{
+  width:38px;
+  height:38px;
+  border-radius:16px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-size:20px;
+}
+html.dark-mode .today-action-icon{
+  background:rgba(102,198,128,0.13);
+  color:#dff6e7;
+}
+html.light-mode .today-action-icon{
+  background:#edf8f1;
+  color:#2d7a46;
+}
+.today-action-arrow{
+  font-size:18px;
+  font-weight:900;
+}
+html.dark-mode .today-action-arrow{color:#d7c07a;}
+html.light-mode .today-action-arrow{color:#8d6b16;}
+.today-action-title{
+  font-size:16px;
+  line-height:1.15;
+  font-weight:900;
+  letter-spacing:-0.03em;
+}
+html.dark-mode .today-action-title{color:#f5f8f6;}
+html.light-mode .today-action-title{color:#172019;}
+.today-action-text{
+  font-size:12px;
+  line-height:1.35;
+  font-weight:700;
+}
+html.dark-mode .today-action-text{color:#aebbb5;}
+html.light-mode .today-action-text{color:#647268;}
+.today-ayah-text{
+  display:flex;
+  flex-direction:column;
+  gap:7px;
+  font-weight:650;
+}
+.today-ayah-ref{
+  display:inline-flex;
+  width:max-content;
+  padding:3px 8px;
+  border-radius:999px;
+  font-size:10px;
+  line-height:1.2;
+  font-weight:950;
+  letter-spacing:0.04em;
+}
+html.dark-mode .today-ayah-ref{
+  background:rgba(215,192,122,0.14);
+  color:#f1d889;
+  border:1px solid rgba(215,192,122,0.24);
+}
+html.light-mode .today-ayah-ref{
+  background:#fff7e4;
+  color:#7b5b13;
+  border:1px solid rgba(141,107,22,0.18);
+}
+.today-ayah-line{
+  font-size:13px;
+  line-height:1.42;
+  font-weight:850;
+}
+html.dark-mode .today-ayah-line{color:#eef6f0;}
+html.light-mode .today-ayah-line{color:#172019;}
+.today-ayah-task-label{
+  display:inline-block;
+  margin-right:5px;
+  font-weight:950;
+}
+html.dark-mode .today-ayah-task-label{color:#d7c07a;}
+html.light-mode .today-ayah-task-label{color:#8d6b16;}
+.today-ayah-task{
+  font-size:12px;
+  line-height:1.38;
+  font-weight:650;
+}
+
+.home-section-title{
+  margin:28px 0 14px;
+  display:flex;
+  align-items:flex-end;
+  justify-content:space-between;
+  gap:14px;
+}
+.home-section-title h2{
+  margin:0;
+  border-left:none;
+  padding-left:0;
+  font-size:22px;
+  line-height:1.15;
+  font-weight:900;
+  letter-spacing:-0.04em;
+}
+.home-section-note{
+  font-size:12px;
+  font-weight:800;
+  white-space:nowrap;
+}
+html.dark-mode .home-section-note{color:#8fa49a;}
+html.light-mode .home-section-note{color:#66766c;}
+.premium-resource-grid{
+  display:grid;
+  grid-template-columns:repeat(2,minmax(0,1fr));
+  gap:14px;
+  margin:0 0 22px;
+}
+.premium-resource-card{
+  min-height:104px;
+  padding:17px;
+  border-radius:24px;
+  display:flex;
+  flex-direction:column;
+  justify-content:space-between;
+  text-decoration:none;
+  border:1.5px solid transparent;
+  transition:transform .18s ease,box-shadow .25s ease,background .25s,border-color .25s;
+  -webkit-tap-highlight-color:transparent;
+}
+html.dark-mode .premium-resource-card{
+  background:linear-gradient(135deg,#151f29 0%, #18212b 55%, #162a25 100%);
+  border-color:rgba(96,147,120,0.25);
+  box-shadow:0 12px 24px rgba(0,0,0,0.20), inset 0 1px 0 rgba(255,255,255,0.04);
+}
+html.light-mode .premium-resource-card{
+  background:linear-gradient(135deg,#ffffff 0%, #fbfdfc 55%, #f0f7f2 100%);
+  border-color:rgba(44,111,69,0.15);
+  box-shadow:0 12px 24px rgba(15,24,18,0.05), inset 0 1px 0 rgba(255,255,255,0.96);
+}
+.premium-resource-card:hover{transform:translateY(-2px);}
+.premium-resource-card:active{transform:scale(.982);}
+.premium-resource-icon{
+  width:40px;
+  height:40px;
+  border-radius:16px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-size:21px;
+  margin-bottom:12px;
+}
+html.dark-mode .premium-resource-icon{background:rgba(215,192,122,0.11);}
+html.light-mode .premium-resource-icon{background:#fff8e7;}
+.premium-resource-title{
+  font-size:16px;
+  line-height:1.15;
+  font-weight:900;
+  letter-spacing:-0.025em;
+  margin-bottom:5px;
+}
+html.dark-mode .premium-resource-title{color:#f4f7f3;}
+html.light-mode .premium-resource-title{color:#172019;}
+.premium-resource-text{
+  font-size:12px;
+  line-height:1.35;
+  font-weight:700;
+}
+html.dark-mode .premium-resource-text{color:#aebbb5;}
+html.light-mode .premium-resource-text{color:#657268;}
+.about-project-card{
+  margin:22px 0 0;
+  padding:18px;
+  border-radius:26px;
+  transition:background .25s,border-color .25s,box-shadow .25s;
+}
+html.dark-mode .about-project-card{
+  background:linear-gradient(135deg,#191f28 0%, #121b23 55%, #172820 100%);
+  border:1px solid rgba(215,192,122,0.18);
+  box-shadow:0 14px 28px rgba(0,0,0,0.20), inset 0 1px 0 rgba(255,255,255,0.04);
+}
+html.light-mode .about-project-card{
+  background:linear-gradient(135deg,#ffffff 0%, #fbfdfc 55%, #f2f8f4 100%);
+  border:1px solid rgba(45,122,70,0.12);
+  box-shadow:0 14px 28px rgba(15,24,18,0.06), inset 0 1px 0 rgba(255,255,255,0.96);
+}
+.about-project-title{
+  font-size:19px;
+  font-weight:900;
+  letter-spacing:-0.035em;
+  margin-bottom:7px;
+}
+html.dark-mode .about-project-title{color:#f6f8f7;}
+html.light-mode .about-project-title{color:#172019;}
+.about-project-text{
+  font-size:13px;
+  line-height:1.45;
+  font-weight:650;
+  margin-bottom:14px;
+}
+html.dark-mode .about-project-text{color:#aebbb5;}
+html.light-mode .about-project-text{color:#5e6d64;}
+.about-project-actions{
+  display:flex;
+  gap:10px;
+  flex-wrap:wrap;
+}
+.about-project-actions a{
+  text-decoration:none;
+  border-radius:999px;
+  padding:10px 14px;
+  font-size:12px;
+  font-weight:900;
+}
+html.dark-mode .about-project-actions a{
+  background:rgba(102,198,128,0.12);
+  color:#e7f7ed;
+  border:1px solid rgba(102,198,128,0.20);
+}
+html.light-mode .about-project-actions a{
+  background:#eff8f2;
+  color:#2d7a46;
+  border:1px solid rgba(45,122,70,0.14);
+}
+.home-primary-support{
+  margin:22px 0 6px;
+  display:flex;
+  justify-content:center;
+}
+@media(max-width:700px){
+  .today-hub{margin:18px 0 22px;border-radius:26px;}
+  .today-hub-head{padding:20px 18px 10px;}
+  .today-hub-title{font-size:24px;}
+  .today-hub-grid{gap:10px;padding:10px 12px 15px;}
+  .today-action{min-height:92px;border-radius:22px;padding:14px;}
+  .premium-resource-grid{gap:10px;}
+  .premium-resource-card{min-height:100px;border-radius:22px;padding:15px;}
+}
+@media(max-width:380px){
+  .today-action-title,.premium-resource-title{font-size:15px;}
+  .today-action-text,.premium-resource-text{font-size:11.5px;}
+}
+
+
+.today-counter-action,
+.today-static-action{
+  cursor:pointer;
+  text-align:left;
+  font-family:inherit;
+}
+.today-static-action{
+  cursor:default;
+}
+.today-counter-track{
+  width:100%;
+  height:7px;
+  margin-top:10px;
+  border-radius:999px;
+  overflow:hidden;
+}
+html.dark-mode .today-counter-track{
+  background:rgba(255,255,255,0.08);
+}
+html.light-mode .today-counter-track{
+  background:rgba(45,122,70,0.12);
+}
+.today-counter-fill{
+  width:0%;
+  height:100%;
+  border-radius:999px;
+  transition:width .22s ease;
+  background:linear-gradient(90deg,#2d7a46,#66c680);
+}
+.today-counter-action:focus-visible{
+  outline:2px solid #66c680;
+  outline-offset:4px;
+}
+html.dark-mode .today-counter-action{
+  background:linear-gradient(135deg,#202016 0%, #17212a 48%, #143126 100%);
+  border-color:rgba(215,192,122,0.28);
+}
+html.light-mode .today-counter-action{
+  background:linear-gradient(135deg,#fffaf0 0%, #ffffff 48%, #eef7f1 100%);
+  border-color:rgba(141,107,22,0.18);
+}
+html.dark-mode .today-static-action{
+  background:linear-gradient(135deg,#151f29 0%, #17212a 48%, #1e2b22 100%);
+  border-color:rgba(102,198,128,0.18);
+}
+html.light-mode .today-static-action{
+  background:linear-gradient(135deg,#ffffff 0%, #fbfdfc 48%, #f1f7ed 100%);
+  border-color:rgba(45,122,70,0.13);
+}
+
+
+.today-goal-action{
+  cursor:pointer;
+  position:relative;
+  overflow:hidden;
+}
+.today-goal-action::after{
+  content:"";
+  position:absolute;
+  inset:0;
+  opacity:var(--goal-red-opacity,0);
+  background:linear-gradient(135deg,rgba(178,34,34,0.06),rgba(255,38,38,0.26));
+  pointer-events:none;
+  transition:opacity .45s ease;
+}
+.today-goal-action > *{
+  position:relative;
+  z-index:1;
+}
+html.dark-mode .today-goal-action{
+  background:linear-gradient(135deg,#1e1d24 0%, #1b2028 50%, #2a1717 100%);
+  border-color:rgba(255,86,86,0.16);
+}
+html.light-mode .today-goal-action{
+  background:linear-gradient(135deg,#ffffff 0%, #fffafa 52%, #fff1f1 100%);
+  border-color:rgba(210,68,68,0.14);
+}
+.today-goal-action.goal-urgent{
+  animation:goalPulse 1.4s ease-in-out infinite;
+}
+.today-goal-action.goal-done{
+  --goal-red-opacity:0 !important;
+  animation:none !important;
+}
+html.dark-mode .today-goal-action.goal-done{
+  background:linear-gradient(135deg,#17261d 0%, #17262a 52%, #143126 100%);
+  border-color:rgba(102,198,128,0.32);
+}
+html.light-mode .today-goal-action.goal-done{
+  background:linear-gradient(135deg,#f7fff9 0%, #ffffff 52%, #eaf8ef 100%);
+  border-color:rgba(45,122,70,0.22);
+}
+@keyframes goalPulse{
+  0%,100%{box-shadow:0 12px 24px rgba(0,0,0,0.14),0 0 0 rgba(210,68,68,0);}
+  50%{box-shadow:0 12px 24px rgba(0,0,0,0.14),0 0 22px rgba(210,68,68,0.28);}
+}
+
+
+
+/* MICRO KNOWLEDGE DAY — REQUIRED FIFTH DAILY TASK */
+.today-micro-wrap{
+  padding:0 16px 18px;
+}
+.today-micro-action{
+  width:100%;
+  min-height:118px;
+  box-sizing:border-box;
+}
+.today-micro-question{
+  font-size:13px;
+  line-height:1.4;
+  font-weight:500;
+  opacity:0.85;
+}
+html.dark-mode.today-micro-question{color:#f4f7f3;}
+html.light-mode.today-micro-question{color:#172019;}
+.micro-options{
+  display:grid;
+  grid-template-columns:repeat(3,minmax(0,1fr));
+  gap:8px;
+  margin-top:12px;
+}
+.micro-option{
+  width:100%;
+  min-height:38px;
+  margin:0;
+  padding:8px 10px;
+  border-radius:14px;
+  border:1px solid transparent;
+  font-size:12px;
+  font-weight:900;
+  line-height:1.2;
+  cursor:pointer;
+  transition:transform .16s ease, background .25s ease, border-color .25s ease, color .25s ease, opacity .25s ease;
+}
+html.dark-mode .micro-option{
+  background:rgba(102,198,128,.11);
+  border-color:rgba(102,198,128,.18);
+  color:#e7f7ed;
+}
+html.light-mode .micro-option{
+  background:#eff8f2;
+  border-color:rgba(45,122,70,.14);
+  color:#2d7a46;
+}
+.micro-option:active{transform:scale(.98);}
+.today-micro-action.task-done .micro-option,
+.today-micro-action.micro-answered .micro-option{
+  pointer-events:none;
+  opacity:.58;
+}
+.micro-answer-box{
+  display:none;
+  margin-top:12px;
+  padding:12px 13px;
+  border-radius:18px;
+  font-size:12px;
+  line-height:1.45;
+  font-weight:750;
+}
+html.dark-mode .micro-answer-box{
+  background:rgba(102,198,128,.11);
+  border:1px solid rgba(102,198,128,.18);
+  color:#dff6e7;
+}
+html.light-mode .micro-answer-box{
+  background:#f0faf3;
+  border:1px solid rgba(45,122,70,.14);
+  color:#244b32;
+}
+.micro-answer-box.show{display:block;}
+.micro-answer-box strong{font-weight:950;}
+@media(max-width:700px){
+  .today-micro-wrap{padding:0 12px 15px;}
+  .today-micro-action{border-radius:22px;padding:14px;}
+  .micro-options{grid-template-columns:1fr;gap:7px;}
+  .micro-option{min-height:36px;}
+}
+
+/* FIXED BOTTOM APP NAVIGATION — PREMIUM SVG APP STYLE */
+.bottom-app-nav{
+  position:fixed;
+  left:0;
+  right:0;
+  bottom:0;
+  z-index:2100;
+  min-height:82px;
+  padding:10px max(12px, env(safe-area-inset-left)) calc(10px + env(safe-area-inset-bottom)) max(12px, env(safe-area-inset-right));
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  box-sizing:border-box;
+  backdrop-filter:blur(22px) saturate(1.28);
+  -webkit-backdrop-filter:blur(22px) saturate(1.28);
+  transition:background .25s,border-color .25s,box-shadow .25s;
+}
+
+html.dark-mode .bottom-app-nav{
+  background:linear-gradient(180deg,rgba(20,38,29,0.86) 0%,rgba(9,20,15,0.98) 100%);
+  border-top:1px solid rgba(102,198,128,0.30);
+  box-shadow:0 -18px 42px rgba(0,0,0,0.40), inset 0 1px 0 rgba(255,255,255,0.06);
+}
+
+html.light-mode .bottom-app-nav{
+  background:linear-gradient(180deg,rgba(253,255,254,0.92) 0%,rgba(232,246,238,0.98) 100%);
+  border-top:1px solid rgba(45,122,70,0.24);
+  box-shadow:0 -18px 42px rgba(18,34,24,0.14), inset 0 1px 0 rgba(255,255,255,0.96);
+}
+
+.bottom-app-nav::before{
+  content:"";
+  position:absolute;
+  top:0;
+  left:50%;
+  transform:translateX(-50%);
+  width:min(850px,100%);
+  height:3px;
+  background:linear-gradient(90deg,rgba(45,122,70,0),rgba(102,198,128,0.86),rgba(215,192,122,0.76),rgba(45,122,70,0));
+  pointer-events:none;
+}
+
+.bottom-app-nav-inner{
+  width:min(100%,850px);
+  display:grid;
+  grid-template-columns:repeat(5,1fr);
+  align-items:center;
+  gap:6px;
+}
+
+.bottom-app-nav-item{
+  position:relative;
+  min-width:0;
+  min-height:62px;
+  border-radius:22px;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  justify-content:center;
+  gap:5px;
+  text-decoration:none;
+  font-size:11px;
+  line-height:1.05;
+  font-weight:900;
+  letter-spacing:-0.025em;
+  -webkit-tap-highlight-color:transparent;
+  transition:background .22s ease, color .22s ease, transform .16s ease, box-shadow .22s ease, border-color .22s ease;
+  border:1px solid transparent;
+}
+
+.bottom-app-nav-icon{
+  width:30px;
+  height:30px;
+  border-radius:14px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  transition:background .22s ease, transform .18s ease, box-shadow .22s ease;
+}
+
+.bottom-app-nav-item svg{
+  width:21px;
+  height:21px;
+  fill:none;
+  stroke:currentColor;
+  stroke-width:2.05;
+  stroke-linecap:round;
+  stroke-linejoin:round;
+  transition:transform .18s ease,opacity .22s ease,stroke-width .18s ease;
+}
+
+.bottom-app-nav-label{
+  display:block;
+  max-width:100%;
+  overflow:hidden;
+  text-overflow:ellipsis;
+  white-space:nowrap;
+}
+
+html.dark-mode .bottom-app-nav-item{color:#9aacb5;}
+html.light-mode .bottom-app-nav-item{color:#66746b;}
+
+html.dark-mode .bottom-app-nav-item.active{
+  color:#ffffff;
+  background:linear-gradient(135deg,rgba(45,122,70,0.52),rgba(102,198,128,0.18));
+  border-color:rgba(102,198,128,0.22);
+  box-shadow:inset 0 1px 0 rgba(255,255,255,0.08),0 10px 22px rgba(0,0,0,0.24);
+}
+
+html.light-mode .bottom-app-nav-item.active{
+  color:#ffffff;
+  background:linear-gradient(135deg,#2d7a46 0%,#4caf6a 100%);
+  border-color:rgba(45,122,70,0.18);
+  box-shadow:inset 0 1px 0 rgba(255,255,255,0.18),0 12px 24px rgba(45,122,70,0.20);
+}
+
+html.dark-mode .bottom-app-nav-item.active .bottom-app-nav-icon{
+  background:rgba(255,255,255,0.09);
+  box-shadow:inset 0 1px 0 rgba(255,255,255,0.06);
+}
+
+html.light-mode .bottom-app-nav-item.active .bottom-app-nav-icon{
+  background:rgba(255,255,255,0.18);
+  box-shadow:inset 0 1px 0 rgba(255,255,255,0.22);
+}
+
+.bottom-app-nav-item:hover{transform:translateY(-1px);}
+html.dark-mode .bottom-app-nav-item:hover:not(.active){background:rgba(255,255,255,0.045);color:#d8efe1;}
+html.light-mode .bottom-app-nav-item:hover:not(.active){background:rgba(45,122,70,0.07);color:#24663a;}
+.bottom-app-nav-item:active{transform:scale(0.96);}
+.bottom-app-nav-item.active svg{transform:translateY(-1px) scale(1.05);stroke-width:2.25;}
+
+.container{padding-bottom:122px;}
+
+@media(max-width:700px){
+  .container{padding-bottom:122px;}
+  .bottom-app-nav{min-height:78px;padding-top:8px;}
+  .bottom-app-nav-inner{gap:4px;}
+  .bottom-app-nav-item{min-height:58px;border-radius:18px;font-size:10.5px;}
+  .bottom-app-nav-icon{width:28px;height:28px;border-radius:13px;}
+  .bottom-app-nav-item svg{width:20px;height:20px;}
+}
+.today-daily-task{
+  position:relative;
+  overflow:hidden;
+}
+
+.today-daily-task::after{
+  content:"";
+  position:absolute;
+  inset:0;
+  opacity:var(--task-red-opacity,0);
+  background:linear-gradient(135deg,rgba(178,34,34,0.04),rgba(210,38,38,0.28));
+  pointer-events:none;
+  transition:opacity .45s ease;
+}
+
+.today-daily-task > *{
+  position:relative;
+  z-index:1;
+}
+
+.today-daily-task.task-done .today-task-status{
+  color:#66c680 !important;
+  font-size:22px;
+}
+
+html.dark-mode .today-daily-task.task-done{
+  background:linear-gradient(135deg,#17261d 0%,#17262a 52%,#143126 100%) !important;
+  border-color:rgba(102,198,128,.38) !important;
+}
+
+html.light-mode .today-daily-task.task-done{
+  background:linear-gradient(135deg,#f7fff9 0%,#ffffff 52%,#eaf8ef 100%) !important;
+  border-color:rgba(45,122,70,.28) !important;
+}
+
+.today-daily-task.task-urgent:not(.task-done){
+  animation:goalPulse 1.4s ease-in-out infinite;
+}
+
+.today-daily-task.task-done .today-counter-track{
+  display:none;
+}
+
+
+/* TAHAJJUD ALARM — COMPACT BAR */
+.tahajjud-alarm-bar{
+  margin:-4px 0 18px;
+  padding:13px 15px;
+  border-radius:22px;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:12px;
+  transition:background .25s,border-color .25s,box-shadow .25s,transform .18s ease;
+  border:1.5px solid transparent;
+}
+
+html.dark-mode .tahajjud-alarm-bar{
+  background:linear-gradient(135deg,#201d2a 0%, #171f29 52%, #142b24 100%);
+  border-color:rgba(215,192,122,0.28);
+  box-shadow:0 12px 24px rgba(0,0,0,0.20), inset 0 1px 0 rgba(255,255,255,0.04);
+}
+
+html.light-mode .tahajjud-alarm-bar{
+  background:linear-gradient(135deg,#fffaf0 0%, #ffffff 52%, #eef7f1 100%);
+  border-color:rgba(141,107,22,0.18);
+  box-shadow:0 12px 24px rgba(15,24,18,0.05), inset 0 1px 0 rgba(255,255,255,0.96);
+}
+
+.tahajjud-alarm-left{
+  display:flex;
+  align-items:center;
+  gap:11px;
+  min-width:0;
+}
+
+.tahajjud-alarm-icon{
+  width:38px;
+  height:38px;
+  min-width:38px;
+  border-radius:15px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-size:20px;
+}
+
+html.dark-mode .tahajjud-alarm-icon{
+  background:rgba(215,192,122,0.13);
+}
+
+html.light-mode .tahajjud-alarm-icon{
+  background:#fff4d8;
+}
+
+.tahajjud-alarm-title{
+  font-size:14px;
+  line-height:1.15;
+  font-weight:900;
+  letter-spacing:-0.025em;
+}
+
+html.dark-mode .tahajjud-alarm-title{color:#f5f8f6;}
+html.light-mode .tahajjud-alarm-title{color:#172019;}
+
+.tahajjud-alarm-meta{
+  margin-top:3px;
+  font-size:11px;
+  line-height:1.25;
+  font-weight:700;
+}
+
+html.dark-mode .tahajjud-alarm-meta{color:#aebbb5;}
+html.light-mode .tahajjud-alarm-meta{color:#647268;}
+
+.tahajjud-switch{
+  position:relative;
+  width:54px;
+  height:30px;
+  min-width:54px;
+  display:inline-flex;
+  align-items:center;
+}
+
+.tahajjud-switch input{
+  opacity:0;
+  width:0;
+  height:0;
+}
+
+.tahajjud-slider{
+  position:absolute;
+  cursor:pointer;
+  inset:0;
+  border-radius:999px;
+  transition:background .25s ease, box-shadow .25s ease;
+}
+
+html.dark-mode .tahajjud-slider{
+  background:#303a44;
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.05);
+}
+
+html.light-mode .tahajjud-slider{
+  background:#d7ded9;
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.6);
+}
+
+.tahajjud-slider::before{
+  content:"";
+  position:absolute;
+  height:24px;
+  width:24px;
+  left:3px;
+  top:3px;
+  border-radius:50%;
+  background:#fff;
+  transition:transform .25s ease;
+  box-shadow:0 4px 10px rgba(0,0,0,.18);
+}
+
+.tahajjud-switch input:checked + .tahajjud-slider{
+  background:#2d7a46;
+  box-shadow:0 0 0 3px rgba(45,122,70,.14);
+}
+
+.tahajjud-switch input:checked + .tahajjud-slider::before{
+  transform:translateX(24px);
+}
+
+@media(max-width:700px){
+  .tahajjud-alarm-bar{
+    margin:-2px 0 16px;
+    padding:12px 13px;
+    border-radius:20px;
+  }
+  .tahajjud-alarm-title{
+    font-size:13px;
+  }
+  .tahajjud-alarm-meta{
+    font-size:10.5px;
+  }
+  .tahajjud-alarm-icon{
+    width:36px;
+    height:36px;
+    min-width:36px;
+  }
+}
+
+
+
+/* BARAKAWAY প্রো প্রোMO CARD */
+.baraka-pro-promo{
+  position:relative;
+  display:block;
+  margin:18px auto 10px;
+  max-width:520px;
+  padding:22px 20px 21px;
+  border-radius:28px;
+  overflow:hidden;
+  text-decoration:none;
+  border:1.5px solid transparent;
+  transition:transform .18s ease, box-shadow .25s ease, border-color .25s ease, background .25s ease;
+  -webkit-tap-highlight-color:transparent;
+}
+.baraka-pro-promo::before{
+  content:"";
+  position:absolute;
+  inset:0;
+  pointer-events:none;
+  background:linear-gradient(120deg, transparent 0%, rgba(255,255,255,.06) 43%, rgba(255,255,255,.13) 50%, rgba(255,255,255,.04) 57%, transparent 100%);
+  opacity:.62;
+}
+.baraka-pro-promo::after{
+  content:"";
+  position:absolute;
+  inset:1px;
+  border-radius:26px;
+  pointer-events:none;
+  border:1px solid rgba(255,255,255,.06);
+}
+.baraka-pro-promo > *{position:relative;z-index:1;}
+html.dark-mode .baraka-pro-promo{
+  background:linear-gradient(135deg,#171512 0%, #201a10 32%, #0f2a20 72%, #0b211a 100%);
+  border-color:rgba(224,188,82,.58);
+  box-shadow:0 20px 42px rgba(0,0,0,.34),0 0 0 1px rgba(224,188,82,.14),inset 0 1px 0 rgba(255,255,255,.08);
+}
+html.light-mode .baraka-pro-promo{
+  background:linear-gradient(135deg,#fff6d7 0%, #ffffff 38%, #edf8f0 72%, #dff1e5 100%);
+  border-color:rgba(181,139,35,.40);
+  box-shadow:0 18px 36px rgba(17,27,20,.10),0 0 0 1px rgba(45,122,70,.08),inset 0 1px 0 rgba(255,255,255,.98);
+}
+.baraka-pro-promo:hover{transform:translateY(-2px);}
+html.dark-mode .baraka-pro-promo:hover{box-shadow:0 24px 48px rgba(0,0,0,.40),0 0 0 1px rgba(224,188,82,.22),inset 0 1px 0 rgba(255,255,255,.09);}
+html.light-mode .baraka-pro-promo:hover{box-shadow:0 22px 42px rgba(17,27,20,.14),0 0 0 1px rgba(181,139,35,.13),inset 0 1px 0 rgba(255,255,255,.99);}
+.baraka-pro-top{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:13px;}
+.baraka-pro-badge{display:inline-flex;align-items:center;justify-content:center;padding:7px 11px;border-radius:999px;font-size:11px;line-height:1;font-weight:950;letter-spacing:.08em;text-transform:uppercase;}
+html.dark-mode .baraka-pro-badge{background:rgba(224,188,82,.16);color:#ffe8a2;border:1px solid rgba(224,188,82,.36);}
+html.light-mode .baraka-pro-badge{background:#fff0bc;color:#70500f;border:1px solid rgba(141,107,22,.22);}
+.baraka-pro-price{font-size:14px;font-weight:950;white-space:nowrap;letter-spacing:-.02em;}
+html.dark-mode .baraka-pro-price{color:#ffe08a;}
+html.light-mode .baraka-pro-price{color:#6f5311;}
+.baraka-pro-title{font-size:27px;line-height:1.06;font-weight:950;letter-spacing:-.047em;margin:0 0 10px;}
+html.dark-mode .baraka-pro-title{color:#fffaf0;}
+html.light-mode .baraka-pro-title{color:#172019;}
+.baraka-pro-text{font-size:14px;line-height:1.48;font-weight:760;margin:0;max-width:470px;}
+html.dark-mode .baraka-pro-text{color:#e2eadf;}
+html.light-mode .baraka-pro-text{color:#3f5147;}
+.baraka-pro-action,.baraka-pro-arrow{display:none !important;}
+@media(max-width:700px){.baraka-pro-promo{margin:17px auto 8px;padding:20px 17px 19px;border-radius:24px;width:calc(100% - 12px);box-sizing:border-box;}.baraka-pro-promo::after{border-radius:22px;}.baraka-pro-title{font-size:24px;}.baraka-pro-text{font-size:13px;}.baraka-pro-price{font-size:13px;}}
+
+</style>
+<script src="/theme-init.js"></script>
+<link rel="stylesheet" href="/theme.css">
+<link rel="stylesheet" href="/theme-universal.css">
+</head>
+<body>
+
+<div class="mobile-top-controls">
+  <button class="icon-btn left" onclick="changeLanguageChoice()" aria-label="Change language">
+    <svg viewBox="0 0 24 24" aria-hidden="true">
+      <path d="M12 2a10 10 0 100 20 10 10 0 000-20zm6.92 9h-3.02a15.6 15.6 0 00-1.33-5.01A8.03 8.03 0 0118.92 11zM12 4.04c.89 1.08 1.97 3.22 2.28 6.96H9.72C10.03 7.26 11.11 5.12 12 4.04zM4.99 13h3.02a15.6 15.6 0 001.33 5.01A8.03 8.03 0 014.99 13zM8.1 11H5.08a8.03 8.03 0 014.35-5.01A15.6 15.6 0 008.1 11zm1.62 2h4.56c-.31 3.74-1.39 5.88-2.28 6.96-.89-1.08-1.97-3.22-2.28-6.96zm5.18 5.01A15.6 15.6 0 0015.9 13h3.02a8.03 8.03 0 01-4.02 5.01z"/>
+    </svg>
+    <span class="ripple"></span>
+  </button>
+  <div class="theme-toggle-center">
+    <span class="theme-toggle-label">লাইট মোড</span>
+    <input type="checkbox" class="theme-switch" id="themeSwitch" aria-label="থিম পরিবর্তন">
+  </div>
+  <button class="icon-btn right" onclick="shareApp()" aria-label="শেয়ার app">
+    <svg viewBox="0 0 24 24" aria-hidden="true">
+      <path d="M18 16a2.99 2.99 0 00-2.39 1.2l-6.7-3.35a3.1 3.1 0 000-1.7l6.7-3.35A3 3 0 1014 6a3.1 3.1 0 00.08.68l-6.7 3.35a3 3 0 100 4.94l6.7 3.35A3 3 0 1018 16z"/>
+    </svg>
+    <span class="ripple"></span>
+  </button>
+</div>
+
+<div class="ramadan-wrapper">
+<div class="ramadan-bar">
+<div class="ramadan-text">
+জুল-কাদা মাসে নিজের আমল সংরক্ষণ করুন, অপ্রয়োজনীয় কাজ কমান এবং যিকর বাড়ান — সামনে আসা গুরুত্বপূর্ণ দিনগুলোর প্রস্তুতি
+</div>
+</div>
+</div>
+</div>
+
+
+
+<div class="desktop-top-actions" aria-label="Desktop quick actions">
+  <div class="desktop-action-left">
+    <a class="desktop-action-pill" href="#" onclick="changeLanguageChoice(); return false;">ভাষা পরিবর্তন করুন</a>
+  </div>
+  <div class="desktop-action-center">
+    <div class="install-box" id="installBox">
+      <button id="installBtn" class="install-btn" type="button">অ্যাপ ইনস্টল করুন</button>
+    </div>
+  </div>
+  <div class="desktop-action-right">
+    <div class="desktop-theme-toggle-inner">
+      <span class="theme-toggle-label">লাইট মোড</span>
+      <input type="checkbox" class="theme-switch" id="desktopThemeSwitch" aria-label="থিম পরিবর্তন">
+    </div>
+  </div>
+</div>
+
+<div class="container">
+
+<div class="brand-prayer-hero">
+  <button class="brand-signature" id="brandInstallTrigger" type="button" aria-label="BarakaWay">
+    <span class="brand-letter-accent">B</span><span class="brand-letter-main">araka</span><span class="brand-letter-accent">W</span><span class="brand-letter-main">ay</span>
+  </button>
+  <div class="home-prayer-widget" role="link" tabindex="0" onclick="openPrayerTimesPage(event)" onkeydown="openPrayerTimesPageFromKeyboard(event)" aria-label="নামাজের সময়ের পৃষ্ঠা খুলুন">
+    <div class="home-prayer-top">
+      <div class="home-prayer-kicker">পরবর্তী নামাজ</div>
+      <div class="home-prayer-location" id="homePrayerLocation">তাশখন্দ, উজবেকিস্তান</div>
+    </div>
+
+    <div class="home-prayer-main">
+      <div>
+        <div class="home-prayer-name" id="homePrayerName">ফজর</div>
+        <div class="home-prayer-time" id="homePrayerTime">--:--</div>
+        <div class="home-prayer-meta" id="homePrayerMeta">নামাজের সময় লোড হচ্ছে...</div>
+      </div>
+      <div class="home-prayer-countdown">
+        <div class="home-prayer-countdown-label">বাকি</div>
+        <div id="homePrayerCountdown">--:--:--</div>
+      </div>
+    </div>
+
+    <div class="home-prayer-actions">
+      <div class="home-prayer-note"><span>সম্পূর্ণ সময়সূচি</span><span class="home-prayer-arrow" aria-hidden="true">→</span></div>
+      <button class="home-prayer-share-btn" type="button" onclick="sharePrayerTimes(event)" aria-label="নামাজের সময় শেয়ার করুন" title="নামাজের সময় শেয়ার করুন">
+        <svg viewBox="0 0 24 24" aria-hidden="true">
+          <path d="M18 16.08c-.76 0-1.44.3-1.96.77L8.91 12.7c.05-.23.09-.46.09-.7s-.04-.47-.09-.7l7.05-4.11A2.99 2.99 0 1 0 15 5c0 .24.04.47.09.7L8.04 9.81A3 3 0 1 0 8.04 14.2l7.12 4.18c-.04.2-.06.41-.06.62a2.9 2.9 0 1 0 2.9-2.92z"/>
+        </svg>
+      </button>
+    </div>
+  </div>
+</div>
+
+<div class="tahajjud-alarm-bar" id="tahajjudAlarmBar" aria-label="তাহাজ্জুদ নামাজের অ্যালার্ম">
+  <div class="tahajjud-alarm-left">
+    <div class="tahajjud-alarm-icon" aria-hidden="true">🌙</div>
+    <div>
+      <div class="tahajjud-alarm-title">তাহাজ্জুদ নামাজের অ্যালার্ম চালু করুন</div>
+      <div class="tahajjud-alarm-meta" id="tahajjudAlarmMeta">ফজরের ৬০ মিনিট আগে</div>
+    </div>
+  </div>
+  <label class="tahajjud-switch" aria-label="তাহাজ্জুদ অ্যালার্ম চালু বা বন্ধ করুন">
+    <input type="checkbox" id="tahajjudAlarmToggle">
+    <span class="tahajjud-slider"></span>
+  </label>
+</div>
+<section class="today-hub" aria-label="আজ BarakaWay-এ">
+  <div class="today-hub-head">
+    <div class="today-hub-kicker">আজ BarakaWay-এ</div>
+    <h2 class="today-hub-title">প্রতিদিন আল্লাহর ﷻ নৈকট্যের দিকে একটি নতুন পদক্ষেপ</h2>
+  </div>
+
+  <div class="today-hub-grid">
+    <a class="today-action today-daily-task" id="dailyপ্রবন্ধLink" href="javascript:void(0)" role="button" aria-label="দিনের আয়াত সহ" data-task-key="article">
+      <div class="today-action-top">
+        <div class="today-action-icon">📖</div>
+        <div class="today-action-arrow today-task-status" id="dailyপ্রবন্ধStatus">→</div>
+      </div>
+      <div>
+        <div class="today-action-title">দিনের আয়াত</div>
+        <div class="today-action-text" id="dailyপ্রবন্ধTitle">দিনের আয়াত লোড হচ্ছে...</div>
+      </div>
+    </a>
+
+    <a class="today-action today-daily-task" id="currentAdhkarLink" href="javascript:void(0)" role="button" aria-label="দিনের পরীক্ষা" data-task-key="adhkar">
+      <div class="today-action-top">
+        <div class="today-action-icon">🌿</div>
+        <div class="today-action-arrow today-task-status" id="currentAdhkarStatus">→</div>
+      </div>
+      <div>
+        <div class="today-action-title" id="currentAdhkarTitle">দিনের পরীক্ষা</div>
+        <div class="today-action-text" id="currentAdhkarText">দিনের কাজ লোড হচ্ছে...</div>
+      </div>
+    </a>
+
+    <div class="today-action today-daily-task today-counter-action" id="allahNameCounterCard" role="button" tabindex="0" data-task-key="name" aria-label="আল্লাহর নাম পুনরাবৃত্তির কাউন্টার">
+      <div class="today-action-top">
+        <div class="today-action-icon">☝️</div>
+        <div class="today-action-arrow today-task-status" id="allahNameCounterValue">0/100</div>
+      </div>
+      <div>
+        <div class="today-action-title" id="allahNameআজ">আল্লাহর নাম</div>
+        <div class="today-action-text" id="allahNameMeaning">আজ এই নামের অর্থ শেখা হবে।</div>
+        <div class="today-counter-track"><div class="today-counter-fill" id="allahNameCounterFill"></div></div>
+      </div>
+    </div>
+
+    <div class="today-action today-daily-task today-goal-action" id="dailyলক্ষ্যCard" role="button" tabindex="0" data-task-key="goal" aria-label="দৈনিক লক্ষ্য">
+      <div class="today-action-top">
+        <div class="today-action-icon">🎯</div>
+        <div class="today-action-arrow today-task-status" id="dailyলক্ষ্যStatus">•</div>
+      </div>
+      <div>
+        <div class="today-action-title">দৈনিক লক্ষ্য</div>
+        <div class="today-action-text" id="dailyPracticeText">একটি ভালো কাজ নীরবে করুন, কথা ও প্রদর্শন ছাড়া।</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="today-micro-wrap">
+    <div class="today-action today-daily-task today-micro-action" id="dailyMicroKnowledgeCard" role="button" tabindex="0" data-task-key="micro" aria-label="দিনের মাইক্রো-জ্ঞান">
+      <div class="today-action-top">
+        <div class="today-action-icon">🧠</div>
+        <div class="today-action-arrow today-task-status" id="dailyMicroKnowledgeStatus">?</div>
+      </div>
+      <div>
+        <div class="today-action-title">দিনের মাইক্রো-জ্ঞান</div>
+        <div class="today-micro-question" id="dailyMicroQuestion">প্রশ্ন লোড হচ্ছে...</div>
+        <div class="micro-options" id="dailyMicroOptions"></div>
+        <div class="micro-answer-box" id="dailyMicroAnswer"></div>
+      </div>
+    </div>
+  </div>
+</section>
+<div class="home-section-title">
+  <h2>দ্রুত প্রবেশ</h2>
+  <div class="home-section-note">মূল বিভাগ</div>
+</div>
+
+<div class="premium-resource-grid">
+  <a class="premium-resource-card" href="quran-bn.html">
+    <div class="premium-resource-icon">📖</div>
+    <div><div class="premium-resource-title">কুরআন</div><div class="premium-resource-text">সূরা পড়া, সংরক্ষণ করা এবং প্রতিদিন আল্লাহর কথার দিকে ফিরে আসা।</div></div>
+  </a>
+  <a class="premium-resource-card" href="holidays-bn.html">
+    <div class="premium-resource-icon">🌙</div>
+    <div><div class="premium-resource-title">ইসলামী উৎসব</div><div class="premium-resource-text">গুরুত্বপূর্ণ ইসলামী তারিখ ও স্মরণীয় দিন এক জায়গায়।</div></div>
+  </a>
+  <a class="premium-resource-card" href="mosques-bn.html">
+    <div class="premium-resource-icon">🕌</div>
+    <div><div class="premium-resource-title">কাছের মসজিদ</div><div class="premium-resource-text">আপনার অবস্থানের কাছাকাছি মসজিদ খুঁজুন।</div></div>
+  </a>
+  <a class="premium-resource-card" href="qibla-bn.html">
+    <div class="premium-resource-icon">🧭</div>
+    <div><div class="premium-resource-title">কিবলা</div><div class="premium-resource-text">নামাজের জন্য দ্রুত দিকনির্দেশ।</div></div>
+  </a>
+  <a class="premium-resource-card" href="prophets-duas-bn.html">
+    <div class="premium-resource-icon">🤲</div>
+    <div><div class="premium-resource-title">মুসলিম দুর্গ</div><div class="premium-resource-text">সঠিক অর্থ ও সম্মানের সঙ্গে দোয়া।</div></div>
+  </a>
+  <a class="premium-resource-card" href="articles-bn.html">
+    <div class="premium-resource-icon">✨</div>
+    <div><div class="premium-resource-title">প্রবন্ধ</div><div class="premium-resource-text">অতিরিক্ত শব্দ ছাড়া সংক্ষিপ্ত উপকারী লেখা।</div></div>
+  </a>
+
+  <a class="premium-resource-card" href="adhkar-bn.html">
+    <div class="premium-resource-icon">🌿</div>
+    <div><div class="premium-resource-title">আযকার</div><div class="premium-resource-text">প্রতিদিন পড়ার জন্য সকাল ও সন্ধ্যার যিকির।</div></div>
+  </a>
+
+  <a class="premium-resource-card" href="hidden-sadaqa-bn.html">
+    <div class="premium-resource-icon">🤍</div>
+    <div><div class="premium-resource-title">গোপন সদকা</div><div class="premium-resource-text">গোপনে সদকা — আল্লাহর জন্য, মানুষের জন্য নয়।</div></div>
+  </a>
+</div>
+
+<div class="home-primary-support">
+  <a href="support-project-bn.html" class="support-project-btn"><span class="support-project-btn-shine"></span><span class="support-project-btn-text">প্রকল্পকে সমর্থন করুন</span></a>
+</div>
+
+<a class="baraka-pro-promo" href="pro-bn.html" aria-label="BarakaWay প্রো সুবিধা">
+  <div class="baraka-pro-top">
+    <span class="baraka-pro-badge">প্রো সংস্করণ</span>
+    <span class="baraka-pro-price">$1.99 / মাস</span>
+  </div>
+  <h2 class="baraka-pro-title">BarakaWay প্রো সুবিধা</h2>
+  <p class="baraka-pro-text">প্রো সংস্করণ কিনে আপনি অ্যাপের উন্নয়ন, নতুন ফিচার, আপডেট, স্থিতিশীল কাজ এবং প্রকল্পের প্রসারকে সমর্থন করেন, যাতে আরও বেশি মুসলিম প্রতিদিন উপকার পেতে পারেন।</p>
+</a>
+
+<div class="share-overlay" id="shareOverlay" aria-hidden="true">
+  <div class="share-sheet" role="dialog" aria-modal="true" aria-labelledby="shareTitle">
+    <div class="share-handle"></div>
+    <div class="share-title" id="shareTitle">অ্যাপ শেয়ার করুন</div>
+    <div class="share-subtitle">অ্যাপটি কীভাবে শেয়ার করবেন তা নির্বাচন করুন</div>
+    <div class="share-grid">
+      <button class="share-action share-telegram" type="button" data-share="telegram"><div class="share-icon">T</div><span>Telegram</span></button>
+      <button class="share-action share-whatsapp" type="button" data-share="whatsapp"><div class="share-icon">W</div><span>WhatsApp</span></button>
+      <button class="share-action share-facebook" type="button" data-share="facebook"><div class="share-icon">f</div><span>Facebook</span></button>
+      <button class="share-action share-x" type="button" data-share="x"><div class="share-icon">X</div><span>X</span></button>
+      <button class="share-action share-linkedin" type="button" data-share="linkedin"><div class="share-icon">in</div><span>LinkedIn</span></button>
+      <button class="share-action share-email" type="button" data-share="email"><div class="share-icon">@</div><span>ইমেইল</span></button>
+      <button class="share-action share-copy" type="button" data-share="copy"><div class="share-icon">⧉</div><span>লিংক কপি করুন</span></button>
+      <button class="share-action share-more" type="button" data-share="more"><div class="share-icon">⋯</div><span>আরও</span></button>
+    </div>
+    <div class="share-copy-msg" id="shareCopyMsg">অ্যাপের লিংক কপি হয়েছে।</div>
+    <button class="share-close" id="shareCloseBtn" type="button">বন্ধ করুন</button>
+  </div>
+</div>
+
+<div class="install-help-overlay" id="installHelpOverlay" aria-hidden="true">
+  <div class="install-help-sheet" role="dialog" aria-modal="true" aria-labelledby="installHelpTitle">
+    <div class="install-help-title" id="installHelpTitle">অ্যাপ ইনস্টল করুন</div>
+    <div class="install-help-text">যদি সিস্টেম ইনস্টলেশন উইন্ডো না আসে, নিচের ধাপগুলো ব্যবহার করুন।</div>
+    <ol class="install-help-steps">
+      <li>Android-এ পৃষ্ঠাটি বাহ্যিক ব্রাউজারে খুলুন এবং সেখান থেকে অ্যাপ ইনস্টল করুন।</li>
+      <li>iPhone-এ পৃষ্ঠাটি Safari-তে খুলুন।</li>
+      <li>তারপর “শেয়ার” → “হোম স্ক্রিনে যোগ করুন” নির্বাচন করুন।</li>
+    </ol>
+    <div class="install-help-actions">
+      <button class="install-help-primary" id="installHelpPrimaryBtn" type="button">ব্রাউজারে খুলুন</button>
+      <button class="install-help-secondary" id="installHelpCopyBtn" type="button">লিংক কপি করুন</button>
+    </div>
+    <button class="install-help-close" id="installHelpCloseBtn" type="button">বন্ধ করুন</button>
+  </div>
+</div>
+
+<script>
+function changeLanguageChoice(){localStorage.removeItem("siteLanguage");sessionStorage.setItem("forceLanguageSelect","1");window.location.href="index.html";}
+function openPrayerTimesPage(event){if(event&&event.target&&event.target.closest&&event.target.closest(".home-prayer-share-btn")) return;window.location.href="prayer-times-bn.html";}
+function openPrayerTimesPageFromKeyboard(event){if(event.key==="Enter"||event.key===" "){event.preventDefault();openPrayerTimesPage(event);}}
+let deferredInstallPrompt=null;let installVisibilityInFlight=false;
+function getশেয়ারUrl(){return window.location.href;}
+function isStandaloneMode(){return window.matchMedia("(display-mode: standalone)").matches||window.navigator.standalone===true;}
+function isAndroid(){return /Android/i.test(navigator.userAgent||"");}
+function isIOS(){return /iPhone|iPad|iPod/i.test(navigator.userAgent||"");}
+function isInAppBrowser(){const ua=navigator.userAgent||"";return /(Telegram|FBAN|FBAV|Instagram|Line|wv)/i.test(ua);}
+async function hasInstalledRelatedApp(){if(typeof navigator.getInstalledRelatedApps!=="function") return false;try{const apps=await navigator.getInstalledRelatedApps();return Array.isArray(apps)&&apps.length>0;}catch(e){return false;}}
+async function updateInstallButtonVisibility(){if(installVisibilityInFlight) return;installVisibilityInFlight=true;const box=document.getElementById("installBox"),btn=document.getElementById("installBtn"),brandTrigger=document.getElementById("brandInstallTrigger"),brandHint=document.getElementById("brandInstallHint");if(!box||!btn){installVisibilityInFlight=false;return;}let hide=isStandaloneMode()?true:await hasInstalledRelatedApp();box.style.display=hide?"none":"block";btn.textContent="অ্যাপ ইনস্টল করুন";if(brandTrigger){brandTrigger.classList.toggle("install-trigger",!hide);}if(brandHint){brandHint.classList.toggle("is-visible",!hide&&window.innerWidth<=700);}installVisibilityInFlight=false;}
+function openCurrentPageInExternalBrowser(){const url=window.location.href;if(isAndroid()){const cleaned=url.replace(/^https?:\/\//,"");window.location.href="intent://"+cleaned+"#Intent;scheme=https;package=com.android.chrome;end";return true;}if(!isIOS()){window.open(url,"_blank","noopener,noreferrer");return true;}return false;}
+function openInstallHelp(){const o=document.getElementById("installHelpOverlay");if(!o) return;o.classList.add("open");o.setAttribute("aria-hidden","false");}
+function closeInstallHelp(){const o=document.getElementById("installHelpOverlay");if(!o) return;o.classList.remove("open");o.setAttribute("aria-hidden","true");}
+async function copyCurrentLink(){const url=getশেয়ারUrl(),msg=document.getElementById("shareCopyMsg");try{if(navigator.clipboard&&window.isSecureContext){await navigator.clipboard.writeText(url);}else{const t=document.createElement("textarea");t.value=url;t.setAttribute("readonly","readonly");t.style.position="absolute";t.style.left="-9999px";document.body.appendChild(t);t.select();document.execCommand("copy");document.body.removeChild(t);}if(msg){msg.textContent="অ্যাপের লিংক কপি হয়েছে।";msg.classList.add("show");setTimeout(function(){msg.classList.remove("show");},2200);}}catch(e){window.prompt("লিংকটি কপি করে বাহ্যিক ব্রাউজারে খুলুন:",url);}}
+async function installApp(){if(deferredInstallPrompt){try{await deferredInstallPrompt.prompt();const c=await deferredInstallPrompt.userChoice;if(c&&c.outcome==="accepted") setTimeout(updateInstallButtonVisibility,300);}catch(e){}finally{deferredInstallPrompt=null;}return;}if(isStandaloneMode()){updateInstallButtonVisibility();return;}if(isInAppBrowser()){if(isAndroid()){const opened=openCurrentPageInExternalBrowser();if(!opened) openInstallHelp();return;}openInstallHelp();return;}if(isIOS()){openInstallHelp();return;}openInstallHelp();}
+function openশেয়ারOverlay(){const o=document.getElementById("shareOverlay"),m=document.getElementById("shareCopyMsg");if(!o) return;o.classList.add("open");o.setAttribute("aria-hidden","false");if(m) m.classList.remove("show");}
+function closeশেয়ারOverlay(){const o=document.getElementById("shareOverlay");if(!o) return;o.classList.remove("open");o.setAttribute("aria-hidden","true");}
+async function copyশেয়ারLink(){const url=getশেয়ারUrl(),msg=document.getElementById("shareCopyMsg");try{if(navigator.clipboard&&window.isSecureContext){await navigator.clipboard.writeText(url);}else{const t=document.createElement("textarea");t.value=url;t.setAttribute("readonly","readonly");t.style.position="absolute";t.style.left="-9999px";document.body.appendChild(t);t.select();document.execCommand("copy");document.body.removeChild(t);}if(msg){msg.classList.add("show");setTimeout(function(){msg.classList.remove("show");},2200);}}catch(e){window.prompt("লিংকটি কপি করে বাহ্যিক ব্রাউজারে খুলুন:",url);}}
+function openশেয়ারTarget(type){const url=encodeURIComponent(getশেয়ারUrl()),text=encodeURIComponent("BarakaWay");let target="";if(type==="telegram") target="https://t.me/share/url?url="+url+"&text="+text;if(type==="whatsapp") target="https://wa.me/?text="+text+"%20"+url;if(type==="facebook") target="https://www.facebook.com/sharer/sharer.php?u="+url;if(type==="x") target="https://twitter.com/intent/tweet?text="+text+"&url="+url;if(type==="linkedin") target="https://www.linkedin.com/sharing/share-offsite/?url="+url;if(type==="email") target="mailto:?subject=Hidden%20Sadaqa&body="+text+"%0A"+url;if(target) window.open(target,"_blank","noopener,noreferrer");}
+async function shareApp(){const data={title:"BarakaWay",text:"BarakaWay",url:getশেয়ারUrl()};if(navigator.share){try{await navigator.share(data);return;}catch(e){}}openশেয়ারOverlay();}
+async function sharePrayerTimes(event){if(event){event.preventDefault();event.stopPropagation();}const text=typeof window.buildPrayerTimesশেয়ারText==="function"?window.buildPrayerTimesশেয়ারText():"BarakaWay\nনামাজের সময়";if(navigator.share){try{await navigator.share({title:"নামাজের সময়",text:text});return;}catch(e){}}try{if(navigator.clipboard&&window.isSecureContext){await navigator.clipboard.writeText(text);}else{const t=document.createElement("textarea");t.value=text;t.setAttribute("readonly","readonly");t.style.position="absolute";t.style.left="-9999px";document.body.appendChild(t);t.select();document.execCommand("copy");document.body.removeChild(t);}alert("নামাজের সময় কপি হয়েছে। এখন মেসেঞ্জারে পাঠানো যাবে।");}catch(e){window.prompt("নামাজের সময় কপি করুন:",text);}}
+window.addEventListener("beforeinstallprompt",function(e){e.preventDefault();deferredInstallPrompt=e;updateInstallButtonVisibility();});
+window.addEventListener("appinstalled",function(){deferredInstallPrompt=null;updateInstallButtonVisibility();});
+window.addEventListener("pageshow",function(){updateInstallButtonVisibility();});
+document.addEventListener("visibilitychange",function(){if(!document.hidden) updateInstallButtonVisibility();});
+window.addEventListener("DOMContentLoaded",function(){const installBtn=document.getElementById("installBtn"),brandInstallTrigger=document.getElementById("brandInstallTrigger"),brandInstallHint=document.getElementById("brandInstallHint"),shareOverlay=document.getElementById("shareOverlay"),shareCloseBtn=document.getElementById("shareCloseBtn"),helpOverlay=document.getElementById("installHelpOverlay"),helpClose=document.getElementById("installHelpCloseBtn"),helpPrimary=document.getElementById("installHelpPrimaryBtn"),helpCopy=document.getElementById("installHelpCopyBtn");if(installBtn) installBtn.addEventListener("click",installApp);if(brandInstallTrigger) brandInstallTrigger.addEventListener("click",function(){if(window.innerWidth<=700&&!isStandaloneMode()) installApp();});if(brandInstallHint){brandInstallHint.addEventListener("click",installApp);brandInstallHint.addEventListener("keydown",function(e){if(e.key==="Enter"||e.key===" "){e.preventDefault();installApp();}});}if(shareCloseBtn) shareCloseBtn.addEventListener("click",closeশেয়ারOverlay);if(shareOverlay) shareOverlay.addEventListener("click",function(e){if(e.target===shareOverlay) closeশেয়ারOverlay();});if(helpClose) helpClose.addEventListener("click",closeInstallHelp);if(helpOverlay) helpOverlay.addEventListener("click",function(e){if(e.target===helpOverlay) closeInstallHelp();});if(helpPrimary) helpPrimary.addEventListener("click",function(){const opened=openCurrentPageInExternalBrowser();if(!opened) copyCurrentLink();});if(helpCopy) helpCopy.addEventListener("click",copyCurrentLink);document.querySelectorAll("[data-share]").forEach(function(button){button.addEventListener("click",async function(){const type=button.getAttribute("data-share");if(type==="copy"){await copyশেয়ারLink();return;}if(type==="more"){if(navigator.share){try{await navigator.share({title:"BarakaWay",text:"BarakaWay",url:getশেয়ারUrl()});closeশেয়ারOverlay();return;}catch(e){}}await copyশেয়ারLink();return;}openশেয়ারTarget(type);closeশেয়ারOverlay();});});updateInstallButtonVisibility();setTimeout(updateInstallButtonVisibility,1200);window.addEventListener("resize",updateInstallButtonVisibility);});
+</script>
+<script>
+(function(){
+  const promo = document.getElementById("mobilePromoText");
+  if (!promo) return;
+  if (window.innerWidth > 700) return;
+
+  const promoTexts = [
+    { text: "সব সেবা কাছাকাছি", brand: false },
+    { text: "কাজsLocal", brand: true }
+  ];
+
+  let promoIndex = 0;
+
+  setInterval(() => {
+    promo.classList.add("is-hidden");
+
+    setTimeout(() => {
+      promoIndex = (promoIndex + 1) % promoTexts.length;
+      promo.textContent = promoTexts[promoIndex].text;
+
+      if (promoTexts[promoIndex].brand) {
+        promo.classList.add("is-brand");
+      } else {
+        promo.classList.remove("is-brand");
+      }
+
+      promo.classList.remove("is-hidden");
+    }, 420);
+
+  }, 2800);
+})();
+</script>
+
+<script>
+(function(){
+  function initPremiumGuide(){
+    if (window.innerWidth > 700) return;
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+
+    const grid = document.querySelector('.app-menu-grid');
+    if (!grid) return;
+
+    const buttons = [...grid.querySelectorAll('.app-menu-btn')];
+    if (!buttons.length) return;
+
+    grid.classList.add('is-guided');
+    let index = 0;
+    let stopped = false;
+
+    function activate(i){
+      buttons.forEach(b => b.classList.remove('mobile-guide-active'));
+      buttons[i].classList.add('mobile-guide-active');
+    }
+
+    function finish(){
+      buttons.forEach(b => b.classList.remove('mobile-guide-active'));
+      grid.classList.remove('is-guided');
+    }
+
+    function stop(){
+      if (stopped) return;
+      stopped = true;
+      finish();
+    }
+
+    function run(){
+      if (stopped) return;
+      activate(index);
+
+      setTimeout(() => {
+        if (stopped) return;
+        buttons[index].classList.remove('mobile-guide-active');
+        index++;
+
+        if (index < buttons.length) {
+          setTimeout(run, 110);
+        } else {
+          finish();
+        }
+      }, 100);
+    }
+
+    buttons.forEach(btn => {
+      btn.addEventListener('touchstart', stop, { passive:true });
+      btn.addEventListener('click', stop);
+    });
+
+    setTimeout(run, 180);
+  }
+
+  document.addEventListener('DOMContentLoaded', initPremiumGuide);
+})();
+</script>
+<script>
+(function(){
+  const switches = document.querySelectorAll('.theme-switch');
+  const labels = document.querySelectorAll('.theme-toggle-label');
+
+  if(!switches.length || !labels.length) return;
+
+  function applyTheme(theme){
+    document.documentElement.classList.remove('light-mode','dark-mode');
+    document.documentElement.classList.add(theme + '-mode');
+    localStorage.setItem('siteTheme', theme);
+
+    switches.forEach(function(switchEl){
+      switchEl.checked = theme === 'light';
+    });
+
+    labels.forEach(function(label){
+      label.textContent = theme === 'dark' ? 'লাইট মোড' : 'ডার্ক মোড';
+    });
+  }
+
+  const savedTheme = localStorage.getItem('siteTheme') || 'dark';
+  applyTheme(savedTheme);
+
+  switches.forEach(function(switchEl){
+    switchEl.addEventListener('change', function(){
+      applyTheme(this.checked ? 'light' : 'dark');
+    });
+  });
+})();
+</script>
+
+<script>
+(function(){
+  const elName = document.getElementById('homePrayerName');
+  const elTime = document.getElementById('homePrayerTime');
+  const elMeta = document.getElementById('homePrayerMeta');
+  const elCountdown = document.getElementById('homePrayerCountdown');
+  const elLocation = document.getElementById('homePrayerLocation');
+
+  if(!elName || !elTime || !elMeta || !elCountdown || !elLocation) return;
+
+  const UI = {
+    names: {Fajr:'ফজর', Dhuhr:'যোহর', Asr:'আসর', Maghrib:'মাগরিব', Isha:'ইশা'},
+    at: 'এ',
+    startsIn: 'বাকি',
+    loading: 'নামাজের সময় লোড হচ্ছে...',
+    fallbackLocation: 'তাশখন্দ, উজবেকিস্তান'
+  };
+
+  let nextPrayerTimer = null;
+  window.homePrayerশেয়ারState = {timings:null, location:UI.fallbackLocation, date:'', city:'Tashkent', country:'Uzbekistan'};
+
+  function getPrayerSettings(){
+    try{
+      return JSON.parse(localStorage.getItem('prayer_page_settings_v1') || '{}');
+    }catch(_){
+      return {};
+    }
+  }
+
+  function parseআজTimeToDate(timeStr){
+    const n = new Date();
+    const clean = String(timeStr || '').split(' ')[0];
+    const parts = clean.split(':').map(Number);
+    return new Date(n.getFullYear(), n.getMonth(), n.getDate(), parts[0] || 0, parts[1] || 0, 0);
+  }
+
+  function getNextPrayer(t){
+    const seq = ['Fajr','Dhuhr','Asr','Maghrib','Isha'];
+    const now = new Date();
+    for(const key of seq){
+      const d = parseআজTimeToDate(t[key]);
+      if(d > now) return {key, time:d};
+    }
+    const tf = parseআজTimeToDate(t.Fajr);
+    tf.setDate(tf.getDate() + 1);
+    return {key:'Fajr', time:tf};
+  }
+
+  function setCountdown(target){
+    const tick = () => {
+      const now = new Date();
+      let diff = target - now;
+      if(diff < 0) diff = 0;
+      const h = Math.floor(diff / 3600000);
+      const m = Math.floor((diff % 3600000) / 60000);
+      const s = Math.floor((diff % 60000) / 1000);
+      elCountdown.textContent = `${String(h).padStart(2,'0')}:${String(m).padStart(2,'0')}:${String(s).padStart(2,'0')}`;
+    };
+    if(nextPrayerTimer) clearInterval(nextPrayerTimer);
+    tick();
+    nextPrayerTimer = setInterval(tick, 1000);
+  }
+
+  async function fetchPrayerWidget(){
+    try{
+      const city = (localStorage.getItem('prayer_city') || 'Tashkent').trim();
+      const country = (localStorage.getItem('prayer_country') || 'Uzbekistan').trim();
+      const settings = getPrayerSettings();
+      window.homePrayerশেয়ারState.city = city || 'Tashkent';
+      window.homePrayerশেয়ারState.country = country || 'Uzbekistan';
+      const method = settings.method || '2';
+      const school = settings.school || '1';
+      const date = new Date();
+      const dd = String(date.getDate()).padStart(2,'0');
+      const mm = String(date.getMonth() + 1).padStart(2,'0');
+      const yyyy = date.getFullYear();
+      const params = new URLSearchParams({
+        city,
+        country,
+        method,
+        school,
+        tune: '0,0,0,0,0,0,0,0,0'
+      });
+      const url = `https://api.aladhan.com/v1/timingsByCity/${dd}-${mm}-${yyyy}?${params.toString()}`;
+      const res = await fetch(url);
+      const json = await res.json();
+      const timings = json?.data?.timings;
+      if(!timings) throw new Error('No timings');
+
+      const locationText = `${city}${country ? ', ' + country : ''}`;
+      elLocation.textContent = locationText || UI.fallbackLocation;
+      window.homePrayerশেয়ারState.timings = timings;
+      window.homePrayerশেয়ারState.location = locationText || UI.fallbackLocation;
+      window.homePrayerশেয়ারState.date = `${dd}.${mm}.${yyyy}`;
+
+      const next = getNextPrayer(timings);
+      const prayerName = UI.names[next.key] || next.key;
+      elName.textContent = prayerName;
+      elTime.textContent = String(timings[next.key] || '--:--').slice(0,5);
+      elMeta.textContent = '';
+      setCountdown(next.time);
+    }catch(_){
+      elLocation.textContent = UI.fallbackLocation;
+      elName.textContent = 'ফজর';
+      elTime.textContent = '--:--';
+      elMeta.textContent = UI.loading;
+      elCountdown.textContent = '--:--:--';
+    }
+  }
+
+  window.buildPrayerTimesশেয়ারText = function(){
+    const state = window.homePrayerশেয়ারState || {};
+    const timings = state.timings || {};
+    const clean = (value) => String(value || '--:--').split(' ')[0].slice(0,5);
+    return [
+      'BarakaWay',
+      "নামাজের সময়",
+      `${state.location || UI.fallbackLocation}${state.date ? ' — ' + state.date : ''}`,
+      '',
+      `ফজর: ${clean(timings.Fajr)}`,
+      `সূর্যোদয়: ${clean(timings.Sunrise)}`,
+      `যোহর: ${clean(timings.Dhuhr)}`,
+      `আসর: ${clean(timings.Asr)}`,
+      `মাগরিব: ${clean(timings.Maghrib)}`,
+      `ইশা: ${clean(timings.Isha)}`,
+      '',
+      window.location.origin ? window.location.origin + '/prayer-times-bn.html' : window.location.href
+    ].join('\n');
+  };
+
+  fetchPrayerWidget();
+})();
+</script>
+
+
+<script>
+(function(){
+  function getLocalDateKey(date){
+    const year = date.getFullYear();
+    const month = String(date.getMonth() + 1).padStart(2,'0');
+    const day = String(date.getDate()).padStart(2,'0');
+    return year + '-' + month + '-' + day;
+  }
+
+  function getDaysSince(dateString){
+    const start = new Date(dateString + 'T00:00:00');
+    const now = new Date();
+    const today = new Date(now.getFullYear(), now.getMonth(), now.getDate());
+    return Math.max(0, Math.floor((today - start) / 86400000));
+  }
+
+  const today = new Date();
+  const todayKey = getLocalDateKey(today);
+  const hour = today.getHours();
+
+  /* Bengali localized version */
+  const articleStartDate = '2026-04-24';
+  const articles = [
+    {title:'সাদাকা কী', url:'islamic_articles-bn/001-bn.html'},
+    {title:'যাকাত ও সাদাকার পার্থক্য', url:'islamic_articles-bn/002-bn.html'},
+    {title:'গোপন দান কেন গুরুত্বপূর্ণ', url:'islamic_articles-bn/003-bn.html'},
+    {title:'অভাবী পরিবারকে সহায়তা', url:'islamic_articles-bn/004-bn.html'},
+    {title:'কেন এক ডলারও গুরুত্বপূর্ণ', url:'islamic_articles-bn/005-bn.html'},
+    {title:'বাসস্থান সহায়তার জন্য সাদাকা', url:'islamic_articles-bn/006-bn.html'},
+    {title:'ইসলামে সাদাকার উত্তম ধরন', url:'islamic_articles-bn/007-bn.html'},
+    {title:'রমজান মাসে দান', url:'islamic_articles-bn/008-bn.html'},
+    {title:'কুরআনে দান', url:'islamic_articles-bn/009-bn.html'},
+    {title:'একটি সাদাকা কীভাবে একটি পরিবারের জীবন বদলেছে', url:'islamic_articles-bn/010-bn.html'},
+    {title:'পরিবারকে সহায়তা কেন গুরুত্বপূর্ণ', url:'islamic_articles-bn/011-bn.html'},
+    {title:'ছোট সহায়তা — বড় পরিবর্তন', url:'islamic_articles-bn/012-bn.html'},
+    {title:'সাদাকার প্রতিদান', url:'islamic_articles-bn/013-bn.html'},
+    {title:'সাদাকা ও সম্পদের পবিত্রতা', url:'islamic_articles-bn/014-bn.html'},
+    {title:'মুসলিমরা কেন দান করে', url:'islamic_articles-bn/015-bn.html'},
+    {title:'ইসলামে দরিদ্রদের যত্ন', url:'islamic_articles-bn/016-bn.html'},
+    {title:'অন্যকে সাহায্য করা মুসলিমের দায়িত্ব', url:'islamic_articles-bn/017-bn.html'},
+    {title:'ইসলামে ন্যায়বিচার ও দয়া', url:'islamic_articles-bn/018-bn.html'},
+    {title:'দান কীভাবে পরিবারে আশা আনে', url:'islamic_articles-bn/019-bn.html'},
+    {title:'সাদাকার মাধ্যমে শিশুদের সহায়তা', url:'islamic_articles-bn/020-bn.html'},
+    {title:'ইসলামে বিধবাদের সহায়তা', url:'islamic_articles-bn/021-bn.html'},
+    {title:'ইসলামে জরুরি সহায়তা', url:'islamic_articles-bn/022-bn.html'},
+    {title:'ইসলামে খাদ্য সহায়তা', url:'islamic_articles-bn/023-bn.html'},
+    {title:'আপনার দান কোথায় যায়', url:'islamic_articles-bn/024-bn.html'},
+    {title:'দিনের লেখা #25', url:'islamic_articles-bn/025-bn.html'},
+    {title:'দিনের লেখা #26', url:'islamic_articles-bn/026-bn.html'},
+    {title:'দিনের লেখা #27', url:'islamic_articles-bn/027-bn.html'},
+    {title:'দিনের লেখা #28', url:'islamic_articles-bn/028-bn.html'},
+    {title:'দিনের লেখা #29', url:'islamic_articles-bn/029-bn.html'},
+    {title:'দিনের লেখা #30', url:'islamic_articles-bn/030-bn.html'}
+  ];
+
+  const names = [
+    {name:'আর-রহমান', meaning:'পরম দয়ালু: তাঁর দয়া সব সৃষ্টিকে ঘিরে আছে।'},
+    {name:'আর-রহিম', meaning:'বিশেষ দয়ালু: মুমিনদের প্রতি বিশেষ দয়া করেন।'},
+    {name:'আল-মালিক', meaning:'অধিপতি: প্রকৃত রাজা ও পূর্ণ ক্ষমতার রব।'},
+    {name:'আল-কুদ্দুস', meaning:'পবিত্র: সব ধরনের ত্রুটি থেকে সম্পূর্ণ মুক্ত।'},
+    {name:'আস-সালাম', meaning:'শান্তি ও নিরাপত্তার উৎস, অপূর্ণতা থেকে মুক্ত।'},
+    {name:'আল-মুমিন', meaning:'নিরাপত্তা দানকারী ও সত্যকে নিশ্চিতকারী।'},
+    {name:'আল-মুহাইমিন', meaning:'সব কিছুর রক্ষক ও পর্যবেক্ষক।'},
+    {name:'আল-আজিজ', meaning:'পরাক্রমশালী ও অজেয়, পূর্ণ শক্তির অধিকারী।'},
+    {name:'আল-জাব্বার', meaning:'পুনরুদ্ধারকারী, সংশোধনকারী ও ক্ষমতার অধিকারী।'},
+    {name:'আল-মুতাকাব্বির', meaning:'মহিমান্বিত: প্রকৃত মহত্ত্ব একমাত্র তাঁরই।'},
+    {name:'আল-খালিক', meaning:'স্রষ্টা: পূর্ণ প্রজ্ঞায় সবকিছু সৃষ্টি করেন।'},
+    {name:'আল-বারি', meaning:'নমুনা ছাড়া সৃষ্টি করেন এবং অস্তিত্বে আনেন।'},
+    {name:'আল-মুসাওউইর', meaning:'প্রত্যেক সৃষ্টিকে রূপ দান করেন।'},
+    {name:'আল-গাফ্ফার', meaning:'তাওবাকারীদের পাপ বারবার ক্ষমা করেন।'},
+    {name:'আল-কাহ্হার', meaning:'সর্বজয়ী: সবকিছু তাঁর কর্তৃত্বের অধীনে।'},
+    {name:'আল-ওয়াহহাব', meaning:'হিসাব ছাড়া দান করেন, কোনো প্রতিদানের প্রয়োজন নেই।'},
+    {name:'আর-রজ্জাক', meaning:'প্রত্যেক সৃষ্টিকে রিজিক দান করেন।'},
+    {name:'আল-ফাত্তাহ', meaning:'রহমত, জ্ঞান ও সমাধানের দরজা খুলে দেন।'},
+    {name:'আল-আলিম', meaning:'সর্বজ্ঞ: প্রকাশ্য, গোপন ও ভবিষ্যৎ সব জানেন।'},
+    {name:'আল-কাবিদ', meaning:'প্রজ্ঞা অনুযায়ী যা আটকানো দরকার তা আটকান।'},
+    {name:'আল-বাসিত', meaning:'রহমত, রিজিক ও সুযোগ বিস্তৃত করেন।'},
+    {name:'আল-খাফিদ', meaning:'ন্যায় অনুযায়ী যাকে নিচু করেন তাকে নিচু করেন।'},
+    {name:'আর-রাফি', meaning:'প্রজ্ঞা অনুযায়ী যাকে উন্নত করেন তাকে উন্নত করেন।'},
+    {name:'আল-মুইজ্জ', meaning:'যাকে চান সম্মান ও শক্তি দান করেন।'},
+    {name:'আল-মুযিল্ল', meaning:'যারা অপমানের যোগ্য তাদের সম্মান কেড়ে নেন।'},
+    {name:'আস-সামি', meaning:'সর্বশ্রোতা: প্রতিটি দোয়া ও প্রতিটি শব্দ শোনেন।'},
+    {name:'আল-বাসির', meaning:'সর্বদ্রষ্টা: প্রকাশ্য ও গোপন সব দেখেন।'},
+    {name:'আল-হাকাম', meaning:'বিচারক: নিখুঁত ও ন্যায়সঙ্গত সিদ্ধান্ত দেন।'},
+    {name:'আল-আদল', meaning:'ন্যায়পরায়ণ: তাঁর সিদ্ধান্তে কোনো জুলুম নেই।'},
+    {name:'আল-লতিফ', meaning:'সূক্ষ্ম দয়ালু: কোমল ও অদৃশ্যভাবে কল্যাণের দিকে পরিচালিত করেন।'}
+  ];
+
+  const goals = [
+    'একটি ভালো কাজ নীরবে করুন, কথা ও প্রদর্শন ছাড়া।',
+    'একটি গুরুত্বপূর্ণ কাজের আগে আল্লাহর ﷻ জন্য নিয়ত নতুন করুন।',
+    'একজন মানুষকে এমনভাবে সাহায্য করুন যাতে কেউ জানতে না পারে।',
+    'আল্লাহর কাছে ﷻ ৩৩ বার শান্তভাবে ক্ষমা চান।',
+    'বাবা-মা ও প্রিয়জনদের জন্য দোয়া করুন।',
+    'সময় নষ্ট করে এমন একটি অপ্রয়োজনীয় কাজ ছেড়ে দিন।',
+    'আল্লাহর ﷻ একটি নির্দিষ্ট নিয়ামতের জন্য শুকরিয়া আদায় করুন।'
+  ];
+
+  const articleDay = getDaysSince(articleStartDate);
+  const articleIndex = articles.length ? articleDay % articles.length : 0;
+  const article = articles[articleIndex];
+  const articleLink = document.getElementById('dailyপ্রবন্ধLink');
+  const articleTitle = document.getElementById('dailyপ্রবন্ধTitle');
+  if(article && articleLink && articleTitle){
+    articleLink.href = article.url;
+    articleTitle.textContent = article.title;
+  }
+
+  const adhkarLink = document.getElementById('currentAdhkarLink');
+  const currentAdhkarTitle = document.getElementById('currentAdhkarTitle');
+  const currentAdhkarText = document.getElementById('currentAdhkarText');
+  if(currentAdhkarTitle && currentAdhkarText){
+    if(hour >= 4 && hour < 11){
+      currentAdhkarTitle.textContent = 'সকালের আযকার';
+      currentAdhkarText.textContent = 'সরাসরি সকালের আযকার বিভাগ খুলবে।';
+      if(adhkarLink) adhkarLink.href = 'adhkar-bn.html#morning';
+    }else if(hour >= 16 && hour < 22){
+      currentAdhkarTitle.textContent = 'সন্ধ্যার আযকার';
+      currentAdhkarText.textContent = 'সরাসরি সন্ধ্যার আযকার বিভাগ খুলবে।';
+      if(adhkarLink) adhkarLink.href = 'adhkar-bn.html#evening';
+    }else if(hour < 4){
+      currentAdhkarTitle.textContent = 'পরবর্তী আযকার';
+      currentAdhkarText.textContent = 'পরবর্তী — ফজরের পর সকালের আযকার।';
+      if(adhkarLink) adhkarLink.href = 'adhkar-bn.html#morning';
+    }else{
+      currentAdhkarTitle.textContent = 'পরবর্তী আযকার';
+      currentAdhkarText.textContent = 'পরবর্তী — মাগরিবের কাছাকাছি সন্ধ্যার আযকার।';
+      if(adhkarLink) adhkarLink.href = 'adhkar-bn.html#evening';
+    }
+  }
+
+  const name = names[articleDay % names.length];
+  const nameEl = document.getElementById('allahNameআজ');
+  const meaningEl = document.getElementById('allahNameMeaning');
+  const card = document.getElementById('allahNameCounterCard');
+  const valueEl = document.getElementById('allahNameCounterValue');
+  const fillEl = document.getElementById('allahNameCounterFill');
+  const storageKey = 'barakaway_name_counter_' + todayKey;
+  let count = Math.max(0, Math.min(100, parseInt(localStorage.getItem(storageKey) || '0', 10) || 0));
+
+  function renderCounter(){
+    if(nameEl) nameEl.textContent = name.name;
+    if(meaningEl) meaningEl.textContent = name.meaning;
+    if(valueEl) valueEl.textContent = count + '/100';
+    if(fillEl) fillEl.style.width = count + '%';
+    if(card) card.setAttribute('aria-label', name.name + ': ' + count + ' ১০০ বার পড়ার মধ্যে। ' + name.meaning);
+  }
+
+  function incrementCounter(){
+    count = count >= 100 ? 100 : count + 1;
+    localStorage.setItem(storageKey, String(count));
+    renderCounter();
+  }
+
+  if(card){
+    card.addEventListener('click', incrementCounter);
+    card.addEventListener('keydown', function(e){
+      if(e.key === 'Enter' || e.key === ' '){
+        e.preventDefault();
+        incrementCounter();
+      }
+    });
+  }
+  renderCounter();
+
+  const practice = document.getElementById('dailyPracticeText');
+  const goalCard = document.getElementById('dailyলক্ষ্যCard');
+  const goalStatus = document.getElementById('dailyলক্ষ্যStatus');
+  const goalKey = 'barakaway_daily_goal_done_' + todayKey;
+  let goalDone = localStorage.getItem(goalKey) === '1';
+
+  if(practice) practice.textContent = goals[articleDay % goals.length];
+
+  function renderলক্ষ্য(){
+    if(!goalCard) return;
+    goalCard.classList.toggle('goal-done', goalDone);
+    if(goalDone){
+      goalCard.style.setProperty('--goal-red-opacity','0');
+      goalCard.classList.remove('goal-urgent');
+      if(goalStatus) goalStatus.textContent = '✓';
+      return;
+    }
+
+    const minutesNow = hour * 60 + today.getMinutes();
+    const progress = Math.min(1, Math.max(0, minutesNow / 1440));
+    const redOpacity = (0.05 + progress * 0.82).toFixed(2);
+    goalCard.style.setProperty('--goal-red-opacity', redOpacity);
+    goalCard.classList.toggle('goal-urgent', hour >= 18);
+    if(goalStatus) goalStatus.textContent = hour >= 18 ? '!' : '•';
+  }
+
+  function completeলক্ষ্য(){
+    goalDone = true;
+    localStorage.setItem(goalKey,'1');
+    renderলক্ষ্য();
+  }
+
+  if(goalCard){
+    goalCard.addEventListener('click', completeলক্ষ্য);
+    goalCard.addEventListener('keydown', function(e){
+      if(e.key === 'Enter' || e.key === ' '){
+        e.preventDefault();
+        completeলক্ষ্য();
+      }
+    });
+  }
+
+  renderলক্ষ্য();
+})();
+</script>
+
+
+
+<script>
+(function(){
+  const todayKey = new Date().toISOString().slice(0,10);
+  const dayNumber = Math.floor(Date.now() / 86400000);
+  const articles = [
+    {title:'দিনের লেখা #1', url:'islamic_articles-bn/001-bn.html'},
+    {title:'দিনের লেখা #2', url:'islamic_articles-bn/002-bn.html'},
+    {title:'দিনের লেখা #3', url:'islamic_articles-bn/003-bn.html'},
+    {title:'দিনের লেখা #4', url:'islamic_articles-bn/004-bn.html'},
+    {title:'দিনের লেখা #5', url:'islamic_articles-bn/005-bn.html'},
+    {title:'দিনের লেখা #6', url:'islamic_articles-bn/006-bn.html'},
+    {title:'দিনের লেখা #7', url:'islamic_articles-bn/007-bn.html'},
+    {title:'দিনের লেখা #8', url:'islamic_articles-bn/008-bn.html'},
+    {title:'দিনের লেখা #9', url:'islamic_articles-bn/009-bn.html'},
+    {title:'দিনের লেখা #10', url:'islamic_articles-bn/010-bn.html'},
+    {title:'দিনের লেখা #11', url:'islamic_articles-bn/011-bn.html'},
+    {title:'দিনের লেখা #12', url:'islamic_articles-bn/012-bn.html'},
+    {title:'দিনের লেখা #13', url:'islamic_articles-bn/013-bn.html'},
+    {title:'দিনের লেখা #14', url:'islamic_articles-bn/014-bn.html'},
+    {title:'দিনের লেখা #15', url:'islamic_articles-bn/015-bn.html'},
+    {title:'দিনের লেখা #16', url:'islamic_articles-bn/016-bn.html'},
+    {title:'দিনের লেখা #17', url:'islamic_articles-bn/017-bn.html'},
+    {title:'দিনের লেখা #18', url:'islamic_articles-bn/018-bn.html'},
+    {title:'দিনের লেখা #19', url:'islamic_articles-bn/019-bn.html'},
+    {title:'দিনের লেখা #20', url:'islamic_articles-bn/020-bn.html'},
+    {title:'দিনের লেখা #21', url:'islamic_articles-bn/021-bn.html'},
+    {title:'দিনের লেখা #22', url:'islamic_articles-bn/022-bn.html'},
+    {title:'দিনের লেখা #23', url:'islamic_articles-bn/023-bn.html'},
+    {title:'দিনের লেখা #24', url:'islamic_articles-bn/024-bn.html'},
+    {title:'দিনের লেখা #25', url:'islamic_articles-bn/025-bn.html'},
+    {title:'দিনের লেখা #26', url:'islamic_articles-bn/026-bn.html'},
+    {title:'দিনের লেখা #27', url:'islamic_articles-bn/027-bn.html'},
+    {title:'দিনের লেখা #28', url:'islamic_articles-bn/028-bn.html'},
+    {title:'দিনের লেখা #29', url:'islamic_articles-bn/029-bn.html'},
+    {title:'দিনের লেখা #30', url:'islamic_articles-bn/030-bn.html'}
+  ];
+  const names = ['আর-রহমান', 'আর-রহিম', 'আল-মালিক', 'আল-কুদ্দুস', 'আস-সালাম', 'আল-মুমিন', 'আল-মুহাইমিন', 'আল-আজিজ', 'আল-জাব্বার', 'আল-মুতাকাব্বির', 'আল-খালিক', 'আল-বারি', 'আল-মুসাওউইর', 'আল-গাফ্ফার', 'আল-কাহ্হার', 'আল-ওয়াহহাব', 'আর-রজ্জাক', 'আল-ফাত্তাহ', 'আল-আলিম', 'আল-কাবিদ', 'আল-বাসিত', 'আল-খাফিদ', 'আর-রাফি', 'আল-মুইজ্জ', 'আল-মুযিল্ল', 'আস-সামি', 'আল-বাসির', 'আল-হাকাম', 'আল-আদল', 'আল-লতিফ', 'আল-খবির', 'আল-হালিম', 'আল-আযীম', 'আল-গাফুর', 'আশ-শাকুর', 'আল-আলী', 'আল-কাবির', 'আল-হাফিজ', 'আল-মুকীত', 'আল-হাসিব'];
+  const goals = [
+    'একটি গুরুত্বপূর্ণ কাজের আগে নিয়ত নতুন করুন।',
+    'একটি ভালো কাজ নীরবে করুন, কথা ও প্রদর্শন ছাড়া।',
+    'আল্লাহর ﷻ জন্য একটি ভালো কাজ করুন — নীরবে, আন্তরিকভাবে, প্রশংসার আশা ছাড়া।',
+    'আল্লাহর কাছে ৩৩ বার শান্তভাবে ক্ষমা চান।',
+    'সময় নষ্ট করে এমন একটি অপ্রয়োজনীয় কাজ ছেড়ে দিন।',
+    'বাবা-মা ও প্রিয়জনদের জন্য দোয়া করুন।',
+    'আল্লাহর একটি নির্দিষ্ট নিয়ামতের জন্য শুকরিয়া আদায় করুন।'
+  ];
+  const article = articles[dayNumber % articles.length];
+  const articleLink = document.getElementById('dailyপ্রবন্ধLink');
+  const articleTitle = document.getElementById('dailyপ্রবন্ধTitle');
+  if(articleLink && articleTitle){ articleLink.href = article.url; articleTitle.textContent = article.title; }
+  const hour = new Date().getHours();
+  const currentAdhkarTitle = document.getElementById('currentAdhkarTitle');
+  const currentAdhkarText = document.getElementById('currentAdhkarText');
+  if(currentAdhkarTitle && currentAdhkarText){
+    if(hour >= 4 && hour < 11){ currentAdhkarTitle.textContent = 'সকালের আযকার'; currentAdhkarText.textContent = 'সকালের সুরক্ষা দৃঢ় করার সেরা সময়।'; }
+    else if(hour >= 16 && hour < 22){ currentAdhkarTitle.textContent = 'সন্ধ্যার আযকার'; currentAdhkarText.textContent = 'দিন শেষ হওয়ার আগে সন্ধ্যার সুরক্ষা।'; }
+    else{ currentAdhkarTitle.textContent = 'পরবর্তী আযকার'; currentAdhkarText.textContent = hour < 4 ? 'পরবর্তী — ফজরের পর সকালের আযকার।' : 'পরবর্তী — মাগরিবের কাছাকাছি সন্ধ্যার আযকার।'; }
+  }
+  const name = names[dayNumber % names.length];
+  const nameEl = document.getElementById('allahNameআজ');
+  const card = document.getElementById('allahNameCounterCard');
+  const valueEl = document.getElementById('allahNameCounterValue');
+  const fillEl = document.getElementById('allahNameCounterFill');
+  const storageKey = 'barakaway_name_counter_bn_' + todayKey;
+  let count = Math.max(0, Math.min(100, parseInt(localStorage.getItem(storageKey) || '0', 10) || 0));
+  function renderCounter(){
+    if(nameEl) nameEl.textContent = name;
+    if(valueEl) valueEl.textContent = count + '/100';
+    if(fillEl) fillEl.style.width = count + '%';
+    if(card) card.setAttribute('aria-label', name + ': ' + count + ' ১০০ বার পড়ার মধ্যে');
+  }
+  function incrementCounter(){
+    count = count >= 100 ? 0 : count + 1;
+    localStorage.setItem(storageKey, String(count));
+    renderCounter();
+  }
+  if(card){
+    card.addEventListener('click', incrementCounter);
+    card.addEventListener('keydown', function(e){ if(e.key === 'Enter' || e.key === ' '){ e.preventDefault(); incrementCounter(); } });
+  }
+  renderCounter();
+  const practice = document.getElementById('dailyPracticeText');
+  if(practice) practice.textContent = goals[dayNumber % goals.length];
+})();
+</script>
+
+
+
+<script>
+(function(){
+  const goalCard = document.getElementById('dailyলক্ষ্যCard');
+  const goalStatus = document.getElementById('dailyলক্ষ্যStatus');
+  if(!goalCard || !goalStatus) return;
+
+  function localDateKey(date){
+    const y = date.getFullYear();
+    const m = String(date.getMonth() + 1).padStart(2, '0');
+    const d = String(date.getDate()).padStart(2, '0');
+    return y + '-' + m + '-' + d;
+  }
+
+  function updateলক্ষ্যState(){
+    const now = new Date();
+    const key = 'barakaway_daily_goal_bn_' + localDateKey(now);
+    const done = localStorage.getItem(key) === '1';
+
+    goalCard.classList.toggle('goal-done', done);
+    goalCard.classList.toggle('goal-urgent', !done && now.getHours() >= 18);
+    goalStatus.textContent = done ? '✓' : '•';
+
+    if(done){
+      goalCard.style.setProperty('--goal-red-opacity', '0');
+      goalCard.setAttribute('aria-label', 'সম্পন্ন');
+      return;
+    }
+
+    const minutes = now.getHours() * 60 + now.getMinutes();
+    const opacity = Math.max(0.06, Math.min(0.88, minutes / 1440));
+    goalCard.style.setProperty('--goal-red-opacity', opacity.toFixed(2));
+    goalCard.setAttribute('aria-label', 'দৈনিক লক্ষ্য');
+  }
+
+  goalCard.addEventListener('click', function(){
+    const key = 'barakaway_daily_goal_bn_' + localDateKey(new Date());
+    const done = localStorage.getItem(key) === '1';
+    if(localStorage.getItem(key) === '1'){
+      updateলক্ষ্যState();
+      return;
+    }
+    localStorage.setItem(key, '1');
+    updateলক্ষ্যState();
+  });
+
+  goalCard.addEventListener('keydown', function(e){
+    if(e.key === 'Enter' || e.key === ' '){
+      e.preventDefault();
+      goalCard.click();
+    }
+  });
+
+  updateলক্ষ্যState();
+  setInterval(updateলক্ষ্যState, 60000);
+})();
+</script>
+<script>
+(function(){
+  const TASK_PREFIX = "barakaway_today_bn_";
+
+  function localDateKey(date){
+    const y = date.getFullYear();
+    const m = String(date.getMonth() + 1).padStart(2, "0");
+    const d = String(date.getDate()).padStart(2, "0");
+    return y + "-" + m + "-" + d;
+  }
+
+  function todayKey(){
+    return localDateKey(new Date());
+  }
+
+  function taskKey(name){
+    return TASK_PREFIX + todayKey() + "_" + name;
+  }
+
+  function isDone(name){
+    return localStorage.getItem(taskKey(name)) === "1";
+  }
+
+  function setDone(name){
+    localStorage.setItem(taskKey(name), "1");
+  }
+
+  function redOpacity(){
+    const now = new Date();
+    const minutes = now.getHours() * 60 + now.getMinutes();
+    return Math.max(0.10, Math.min(0.90, minutes / 1440)).toFixed(2);
+  }
+
+  function applyকাজState(card, statusEl, name, openSymbol){
+    if(!card) return;
+
+    const done = isDone(name);
+
+    card.classList.toggle("task-done", done);
+    card.classList.toggle("goal-done", done);
+    card.classList.toggle("task-urgent", !done && new Date().getHours() >= 18);
+
+    card.style.setProperty("--task-red-opacity", done ? "0" : redOpacity());
+    card.style.setProperty("--goal-red-opacity", done ? "0" : redOpacity());
+
+    if(statusEl){
+      statusEl.textContent = done ? "✓" : openSymbol;
+    }
+
+    card.setAttribute("aria-disabled", done ? "true" : "false");
+  }
+
+  const articleCard = document.getElementById("dailyপ্রবন্ধLink");
+  const articleStatus = document.getElementById("dailyপ্রবন্ধStatus");
+
+  const adhkarCard = document.getElementById("currentAdhkarLink");
+  const adhkarStatus = document.getElementById("currentAdhkarStatus");
+
+  const nameCard = document.getElementById("allahNameCounterCard");
+  const nameStatus = document.getElementById("allahNameCounterValue");
+  const nameFill = document.getElementById("allahNameCounterFill");
+
+  const goalCard = document.getElementById("dailyলক্ষ্যCard");
+  const goalStatus = document.getElementById("dailyলক্ষ্যStatus");
+
+  function renderAll(){
+    applyকাজState(articleCard, articleStatus, "article", "→");
+    applyকাজState(adhkarCard, adhkarStatus, "adhkar", "→");
+    applyকাজState(goalCard, goalStatus, "goal", "•");
+
+    if(nameCard){
+      const done = isDone("name");
+      let count = Math.max(0, Math.min(100, parseInt(localStorage.getItem(TASK_PREFIX + todayKey() + "_name_count") || "0", 10) || 0));
+
+      if(done){
+        count = 100;
+        nameCard.classList.add("task-done","goal-done");
+        nameCard.classList.remove("task-urgent");
+        nameCard.style.setProperty("--task-red-opacity","0");
+        nameCard.style.setProperty("--goal-red-opacity","0");
+        if(nameStatus) nameStatus.textContent = "✓";
+        if(nameFill) nameFill.style.width = "100%";
+        nameCard.setAttribute("aria-disabled","true");
+      }else{
+        nameCard.classList.remove("task-done","goal-done");
+        nameCard.classList.toggle("task-urgent", new Date().getHours() >= 18);
+        nameCard.style.setProperty("--task-red-opacity", redOpacity());
+        nameCard.style.setProperty("--goal-red-opacity", redOpacity());
+        if(nameStatus) nameStatus.textContent = count + "/100";
+        if(nameFill) nameFill.style.width = count + "%";
+        nameCard.setAttribute("aria-disabled","false");
+      }
+    }
+  }
+
+  if(articleCard){
+    articleCard.addEventListener("click", function(e){
+      if(isDone("article")){
+        e.preventDefault();
+        return;
+      }
+      setDone("article");
+      renderAll();
+    }, true);
+  }
+
+  if(adhkarCard){
+    adhkarCard.addEventListener("click", function(e){
+      if(isDone("adhkar")){
+        e.preventDefault();
+        return;
+      }
+      setDone("adhkar");
+      renderAll();
+    }, true);
+  }
+
+  if(goalCard){
+    goalCard.addEventListener("click", function(e){
+      if(isDone("goal")){
+        e.preventDefault();
+        return;
+      }
+      setDone("goal");
+      renderAll();
+    });
+
+    goalCard.addEventListener("keydown", function(e){
+      if(e.key === "Enter" || e.key === " "){
+        e.preventDefault();
+        if(!isDone("goal")){
+          setDone("goal");
+          renderAll();
+        }
+      }
+    });
+  }
+
+  if(nameCard){
+    nameCard.addEventListener("click", function(e){
+      if(isDone("name")){
+        e.preventDefault();
+        return;
+      }
+
+      let count = Math.max(0, Math.min(100, parseInt(localStorage.getItem(TASK_PREFIX + todayKey() + "_name_count") || "0", 10) || 0));
+      count = Math.min(100, count + 1);
+      localStorage.setItem(TASK_PREFIX + todayKey() + "_name_count", String(count));
+
+      if(count >= 100){
+        setDone("name");
+      }
+
+      renderAll();
+    });
+
+    nameCard.addEventListener("keydown", function(e){
+      if(e.key === "Enter" || e.key === " "){
+        e.preventDefault();
+        nameCard.click();
+      }
+    });
+  }
+
+  renderAll();
+  setInterval(renderAll, 60000);
+})();
+</script>
+
+<script>
+(function(){
+  const ayahActions = [
+  {
+    "ref": "2:83",
+    "ayah": "মানুষের সঙ্গে ভালো কথা বলো।",
+    "task": "আজ আশেপাশের মানুষকে তিনটি শান্ত ও ভালো কথা বলুন।"
+  },
+  {
+    "ref": "2:152",
+    "ayah": "তোমরা আমাকে স্মরণ করো, আমিও তোমাদের স্মরণ করব।",
+    "task": "আজ দিনে দশবার আল্লাহকে স্মরণ করুন।"
+  },
+  {
+    "ref": "2:153",
+    "ayah": "আল্লাহ ধৈর্যশীলদের সঙ্গে আছেন।",
+    "task": "আজ কেউ উসকানি দিলেও রূঢ়ভাবে উত্তর দেবেন না।"
+  },
+  {
+    "ref": "2:195",
+    "ayah": "আল্লাহ সৎকর্মশীলদের ভালোবাসেন।",
+    "task": "আজ প্রশংসার আশা ছাড়া একটি ভালো কাজ করুন।"
+  },
+  {
+    "ref": "2:222",
+    "ayah": "আল্লাহ তাওবাকারীদের ভালোবাসেন।",
+    "task": "আজ নিজের একটি ভুলের জন্য শান্তভাবে ক্ষমা চান।"
+  },
+  {
+    "ref": "2:263",
+    "ayah": "ভালো কথা ও ক্ষমা, কষ্টদায়ক দানের চেয়ে উত্তম।",
+    "task": "আজ নিজের সাহায্যের কথা কাউকে মনে করিয়ে দেবেন না।"
+  },
+  {
+    "ref": "2:286",
+    "ayah": "আল্লাহ কোনো প্রাণকে তার সাধ্যের বাইরে দায়িত্ব দেন না।",
+    "task": "আজ নিজেকে অতিরিক্ত চাপ দেবেন না; সামর্থ্য অনুযায়ী করুন।"
+  },
+  {
+    "ref": "3:134",
+    "ayah": "তারা রাগ সংযত করে এবং মানুষকে ক্ষমা করে।",
+    "task": "রাগ হলে আল্লাহর জন্য দশ সেকেন্ড চুপ থাকুন।"
+  },
+  {
+    "ref": "3:139",
+    "ayah": "দুর্বল হয়ো না এবং দুঃখ করো না।",
+    "task": "আজ নিজের সম্পর্কে হতাশার কথা বলবেন না।"
+  },
+  {
+    "ref": "3:146",
+    "ayah": "আল্লাহ ধৈর্যশীলদের ভালোবাসেন।",
+    "task": "আজ একটি অস্বস্তিকর বিষয় অভিযোগ ছাড়া গ্রহণ করুন।"
+  },
+  {
+    "ref": "4:36",
+    "ayah": "পিতা-মাতা, আত্মীয়, এতিম, অভাবী ও প্রতিবেশীর সঙ্গে ভালো আচরণ করো।",
+    "task": "আজ একজন আত্মীয় বা প্রতিবেশীর খোঁজ নিন।"
+  },
+  {
+    "ref": "4:58",
+    "ayah": "আমানত তার মালিকের কাছে ফিরিয়ে দাও।",
+    "task": "আজ কোনো আমানত বা দায়িত্ব বিলম্ব করবেন না।"
+  },
+  {
+    "ref": "4:86",
+    "ayah": "সালামের উত্তরে আরও ভালো বা সমান উত্তর দাও।",
+    "task": "আজ সালামের উত্তরে আরও উষ্ণ ও মনোযোগী হোন।"
+  },
+  {
+    "ref": "5:2",
+    "ayah": "সৎকর্ম ও তাকওয়ায় একে অন্যকে সাহায্য করো।",
+    "task": "আজ কাউকে ভালো কাজে সাহায্য করুন।"
+  },
+  {
+    "ref": "5:8",
+    "ayah": "ন্যায়পরায়ণ হও; এটি তাকওয়ার কাছাকাছি।",
+    "task": "আজ পরিস্থিতি না জেনে কাউকে বিচার করবেন না।"
+  },
+  {
+    "ref": "7:199",
+    "ayah": "ক্ষমা অবলম্বন করো, ভালো কাজে উৎসাহ দাও।",
+    "task": "আজ একটি ছোট কষ্ট ক্ষমা করে দিন।"
+  },
+  {
+    "ref": "17:26",
+    "ayah": "আত্মীয়, অভাবী ও পথিককে তার অধিকার দাও।",
+    "task": "আজ দরকারি কিছু একজন প্রয়োজনমন্দের সঙ্গে ভাগ করুন।"
+  },
+  {
+    "ref": "17:27",
+    "ayah": "অপচয়কারী শয়তানের ভাই।",
+    "task": "আজ একটি অপ্রয়োজনীয় খরচ ছেড়ে দিন।"
+  },
+  {
+    "ref": "17:36",
+    "ayah": "যা জানো না, তার অনুসরণ করো না।",
+    "task": "আজ যাচাইহীন তথ্য পাঠাবেন না।"
+  },
+  {
+    "ref": "17:37",
+    "ayah": "পৃথিবীতে অহংকার করে চলবে না।",
+    "task": "আজ গর্ব করবেন না এবং কাউকে ছোট করবেন না।"
+  },
+  {
+    "ref": "18:10",
+    "ayah": "হে আমাদের রব, আপনার পক্ষ থেকে আমাদের রহমত দিন।",
+    "task": "আজ গুরুত্বপূর্ণ কাজের আগে সঠিক পথের দোয়া করুন।"
+  },
+  {
+    "ref": "20:14",
+    "ayah": "আমার স্মরণের জন্য নামাজ কায়েম করো।",
+    "task": "আজ একটি নামাজ ধীরে ও মনোযোগ দিয়ে পড়ুন।"
+  },
+  {
+    "ref": "20:44",
+    "ayah": "তার সঙ্গে নরম কথা বলো।",
+    "task": "আজ কঠিন মানুষের সঙ্গেও নরম ভাষায় কথা বলুন।"
+  },
+  {
+    "ref": "20:114",
+    "ayah": "হে আমার রব, আমার জ্ঞান বাড়িয়ে দিন।",
+    "task": "আজ আল্লাহর জন্য একটি উপকারী বিষয় শিখুন।"
+  },
+  {
+    "ref": "21:35",
+    "ayah": "আমরা মন্দ ও ভালো দিয়ে তোমাদের পরীক্ষা করি।",
+    "task": "আজ একটি পরীক্ষার অভিযোগ না করে হিকমত চান।"
+  },
+  {
+    "ref": "21:90",
+    "ayah": "তারা ভালো কাজে দ্রুত অগ্রসর হতো।",
+    "task": "আজ একটি ভালো কাজ বিলম্ব করবেন না।"
+  },
+  {
+    "ref": "22:37",
+    "ayah": "আল্লাহর কাছে পৌঁছায় তোমাদের তাকওয়া।",
+    "task": "আজ একটি কাজ আন্তরিকভাবে করুন, দেখানোর জন্য নয়।"
+  },
+  {
+    "ref": "23:1-2",
+    "ayah": "সফল মুমিনরা নামাজে বিনয়ী।",
+    "task": "আজ এক নামাজে তাড়াহুড়া ও মনোযোগহীনতা কমান।"
+  },
+  {
+    "ref": "23:3",
+    "ayah": "তারা অনর্থক কথা থেকে মুখ ফিরিয়ে নেয়।",
+    "task": "আজ একটি অকারণ স্ক্রল বা ফাঁকা কথা বন্ধ করুন।"
+  },
+  {
+    "ref": "24:22",
+    "ayah": "তারা যেন ক্ষমা করে এবং উদারতা দেখায়।",
+    "task": "আজ হৃদয়ের একটি ছোট কষ্ট ছেড়ে দিন।"
+  },
+  {
+    "ref": "24:30",
+    "ayah": "মুমিনদের বলুন তারা দৃষ্টি সংযত রাখুক।",
+    "task": "আজ হৃদয় নোংরা করে এমন দৃশ্য থেকে দৃষ্টি রক্ষা করুন।"
+  },
+  {
+    "ref": "25:63",
+    "ayah": "রহমানের বান্দারা জমিনে বিনয়ের সঙ্গে চলে।",
+    "task": "আজ কথা ও কাজে বিনয়ী থাকুন।"
+  },
+  {
+    "ref": "25:67",
+    "ayah": "তারা অপচয় করে না এবং কৃপণতাও করে না।",
+    "task": "আজ খাবার বা কেনাকাটায় মধ্যপন্থা রাখুন।"
+  },
+  {
+    "ref": "28:77",
+    "ayah": "আল্লাহ তোমার প্রতি যেমন অনুগ্রহ করেছেন, তুমিও ভালো করো।",
+    "task": "আজ যা আছে তা দিয়েই একজনকে সাহায্য করুন।"
+  },
+  {
+    "ref": "29:45",
+    "ayah": "নামাজ অশ্লীলতা ও মন্দ কাজ থেকে বিরত রাখে।",
+    "task": "আজ নামাজের আগে ভাবুন, এটি আপনাকে কী থেকে বিরত রাখবে।"
+  },
+  {
+    "ref": "31:14",
+    "ayah": "আমার ও তোমার পিতা-মাতার প্রতি কৃতজ্ঞ হও।",
+    "task": "আজ আল্লাহর শুকরিয়া আদায় করুন এবং পিতা-মাতাকে ভালো কথা বলুন।"
+  },
+  {
+    "ref": "31:17",
+    "ayah": "যা তোমার ওপর আসে, তাতে ধৈর্য ধরো।",
+    "task": "আজ বিলম্ব বা অসুবিধায় বিরক্ত হবেন না।"
+  },
+  {
+    "ref": "31:19",
+    "ayah": "মধ্যপন্থা অবলম্বন করো এবং কণ্ঠ নিচু রাখো।",
+    "task": "আজ স্বাভাবিকের চেয়ে শান্ত ও নিচু স্বরে কথা বলুন।"
+  },
+  {
+    "ref": "33:35",
+    "ayah": "আল্লাহর স্মরণকারীদের জন্য ক্ষমা ও মহা প্রতিদান আছে।",
+    "task": "আজ ৩৩ বার শান্তভাবে ও সচেতনভাবে যিকর করুন।"
+  },
+  {
+    "ref": "33:41",
+    "ayah": "আল্লাহকে অধিক স্মরণ করো।",
+    "task": "আজ যিকরের জন্য তিনটি ছোট সময় নির্ধারণ করুন।"
+  },
+  {
+    "ref": "33:70",
+    "ayah": "সঠিক কথা বলো।",
+    "task": "আজ অস্পষ্ট নয়, সৎ ও পরিষ্কার কথা বলুন।"
+  },
+  {
+    "ref": "39:53",
+    "ayah": "আল্লাহর রহমত থেকে হতাশ হয়ো না।",
+    "task": "আজ ক্ষমা চান এবং আত্মঅপমান ছাড়া নতুনভাবে শুরু করুন।"
+  },
+  {
+    "ref": "40:60",
+    "ayah": "আমাকে ডাকো, আমি সাড়া দেব।",
+    "task": "আজ নিজের ভাষায় একটি ব্যক্তিগত দোয়া করুন।"
+  },
+  {
+    "ref": "41:34",
+    "ayah": "মন্দকে উত্তম দিয়ে প্রতিহত করো।",
+    "task": "আজ একটি কষ্টদায়ক কথার উত্তরে ভালোভাবে সাড়া দিন।"
+  },
+  {
+    "ref": "42:36",
+    "ayah": "আল্লাহর কাছে যা আছে তা উত্তম ও স্থায়ী।",
+    "task": "আজ আখিরাতের উপকারকে ফাঁকা আনন্দের ওপর বেছে নিন।"
+  },
+  {
+    "ref": "42:40",
+    "ayah": "যে ক্ষমা করে ও সংশোধন করে, তার প্রতিদান আল্লাহর কাছে।",
+    "task": "আজ মিলন বা অন্তরের ক্ষমার দিকে একটি পদক্ষেপ নিন।"
+  },
+  {
+    "ref": "49:10",
+    "ayah": "মুমিনরা ভাই; তাই ভাইদের মধ্যে মীমাংসা করো।",
+    "task": "আজ মানুষের মধ্যে সংঘাত বাড়াবেন না।"
+  },
+  {
+    "ref": "49:11",
+    "ayah": "কোনো দল যেন অন্য দলকে উপহাস না করে।",
+    "task": "আজ এমন মজা করবেন না যা কাউকে অপমান করে।"
+  },
+  {
+    "ref": "49:12",
+    "ayah": "অনেক সন্দেহ থেকে বাঁচো এবং গীবত করো না।",
+    "task": "আজ কারও পেছনে আলোচনা করবেন না।"
+  },
+  {
+    "ref": "50:18",
+    "ayah": "মানুষ কোনো কথা বলে না, পাশে রক্ষক থাকে।",
+    "task": "আজ মেসেজ পাঠানোর আগে কথা যাচাই করুন।"
+  },
+  {
+    "ref": "51:56",
+    "ayah": "আমি জিন ও মানুষকে শুধু আমার ইবাদতের জন্য সৃষ্টি করেছি।",
+    "task": "আজ একটি সাধারণ কাজ আল্লাহর জন্য নিয়ত করে করুন।"
+  },
+  {
+    "ref": "57:20",
+    "ayah": "দুনিয়ার জীবন সাময়িক ভোগ।",
+    "task": "আজ দুনিয়ার একটি ছোট বিষয়ে অতিরিক্ত চিন্তা করবেন না।"
+  },
+  {
+    "ref": "57:23",
+    "ayah": "হারানো বিষয়ে অতিরিক্ত দুঃখ করো না, প্রাপ্তিতে অতিরিক্ত গর্ব করো না।",
+    "task": "আজ ভারসাম্য রাখুন: আতঙ্ক নয়, অহংকার নয়।"
+  },
+  {
+    "ref": "59:18",
+    "ayah": "প্রত্যেক প্রাণ দেখুক সে আগামী দিনের জন্য কী প্রস্তুত করেছে।",
+    "task": "আজ রাতে দিনের একটি কাজ মূল্যায়ন করুন।"
+  },
+  {
+    "ref": "64:16",
+    "ayah": "সামর্থ্য অনুযায়ী আল্লাহকে ভয় করো।",
+    "task": "আজ নিখুঁত নয়, সামর্থ্য অনুযায়ী আন্তরিক কাজ করুন।"
+  },
+  {
+    "ref": "65:2-3",
+    "ayah": "যে আল্লাহকে ভয় করে, তিনি তার জন্য পথ খুলে দেন।",
+    "task": "আজ কষ্টে বৈধ পথ বেছে নিন।"
+  },
+  {
+    "ref": "67:2",
+    "ayah": "তিনি জীবন ও মৃত্যু সৃষ্টি করেছেন, কে উত্তম কাজে তা পরীক্ষা করতে।",
+    "task": "আজ কথা, নামাজ বা সাহায্যে একটি ছোট উন্নতি করুন।"
+  },
+  {
+    "ref": "70:5",
+    "ayah": "সুন্দর ধৈর্য ধরো।",
+    "task": "আজ অভিযোগ ও রুক্ষতা ছাড়া ধৈর্য ধরুন।"
+  },
+  {
+    "ref": "73:8",
+    "ayah": "তোমার রবের নাম স্মরণ করো এবং তাঁর দিকে সম্পূর্ণ মন দাও।",
+    "task": "আজ এক মিনিট শুধু আল্লাহর দিকে মন দিন।"
+  },
+  {
+    "ref": "74:7",
+    "ayah": "তোমার রবের জন্য ধৈর্য ধরো।",
+    "task": "আজ একটি কষ্ট আল্লাহর জন্য সহ্য করুন।"
+  },
+  {
+    "ref": "76:8-9",
+    "ayah": "তারা আল্লাহর ভালোবাসায় আহার দেয়, প্রতিদান চায় না।",
+    "task": "আজ প্রতিদানের আশা ছাড়া কাউকে সাহায্য করুন।"
+  },
+  {
+    "ref": "87:14-15",
+    "ayah": "সফল সে, যে নিজেকে পবিত্র করে, রবকে স্মরণ করে ও নামাজ পড়ে।",
+    "task": "আজ কাজের আগে একটি নিয়ত শুদ্ধ করুন।"
+  },
+  {
+    "ref": "90:17",
+    "ayah": "তারা ধৈর্য ও দয়ার উপদেশ দেয়।",
+    "task": "আজ একজনকে কোমল কথায় সমর্থন করুন।"
+  },
+  {
+    "ref": "92:5-7",
+    "ayah": "যে দেয় ও তাকওয়া অবলম্বন করে, তার পথ সহজ করা হয়।",
+    "task": "আজ কিছু দিন: অর্থ, সময় বা মনোযোগ।"
+  },
+  {
+    "ref": "33:35",
+    "ayah": "আল্লাহ ইসলামী ইসলামী ইসলামী ইসলামী ইসলামীজাহান্নামকাছে ইসলামী ইসলামী.",
+    "task": "আজ কর 33 ইসলামী ইসলামী শান্তভাবে ইসলামী ইসলামী."
+  },
+  {
+    "ref": "33:41",
+    "ayah": "ইসলামী আল্লাহইসলামী ইসলামী ইসলামী.",
+    "task": "আজ ইসলামী তিনটি ইসলামী ইসলামী ইসলামী ইসলামী."
+  },
+  {
+    "ref": "33:70",
+    "ayah": "ইসলামী ইসলামী কথা.",
+    "task": "আজ না ইসলামী ইসলামী, বল ইসলামী ইসলামী ইসলামী."
+  },
+  {
+    "ref": "39:10",
+    "ayah": "ইসলামী ইসলামী ছাড়া ইসলামী.",
+    "task": "আজ ইসলামী ইসলামী ইসলামী ছাড়া ইসলামী."
+  },
+  {
+    "ref": "39:53",
+    "ayah": "ইসলামী ইসলামী में ইসলামী আল্লাহইসলামী.",
+    "task": "আজ চাও ক্ষমা ইসলামী ইসলামী ইসলামী ছাড়া ইসলামী."
+  },
+  {
+    "ref": "40:60",
+    "ayah": "ইসলামী ইসলামী ইসলামী, ইসলামী ইসলামী ইসলামী ইসলামী.",
+    "task": "আজ কর একটি ইসলামী দোয়া ইসলামী কথাইসলামী."
+  },
+  {
+    "ref": "41:34",
+    "ayah": "ইসলামী ইসলামী ইসলামী, ইসলামী ইসলামী.",
+    "task": "আজ ইসলামী ভালো কাজইসলামী ইসলামী ইসলামী ইসলামী ইসলামী."
+  },
+  {
+    "ref": "42:36",
+    "ayah": "ইসলামী, ইসলামী কাছে আল্লাহইসলামী, ইসলামী ইসলামী ইসলামী.",
+    "task": "আজ বেছে নাও ইসলামী ইসলামী ইসলামী ইসলামী ইসলামী ইসলামী."
+  },
+  {
+    "ref": "42:37",
+    "ayah": "ইসলামী রাগইসলামী, ইসলামী ইসলামী.",
+    "task": "আজ ইসলামী রাগইসলামী না ইসলামী কথাইসলামী."
+  },
+  {
+    "ref": "42:40",
+    "ayah": "ইসলামী ইসলামী ইসলামী ইসলামী, ইসলামী ইসলামীজাহান্নামইসলামী কাছে আল্লাহইসলামী.",
+    "task": "আজ কর ইসলামী ইসলামী ইসলামী ইসলামী ইসলামী ইসলামী."
+  },
+  {
+    "ref": "45:15",
+    "ayah": "ইসলামী ইসলামী ভালো কাজ, ইসলামী ইসলামী ইসলামী ইসলামী.",
+    "task": "আজ কর ভালো কাজ ইসলামী না ইসলামী ইসলামী."
+  },
+  {
+    "ref": "47:7",
+    "ayah": "ইসলামী ইসলামী ইসলামী ইসলামী আল্লাহইসলামী, ইসলামী ইসলামী ইসলামী.",
+    "task": "আজ ইসলামী একটি ইসলামী ইসলামী কাজ কথাইসলামী ইসলামী ইসলামী."
+  },
+  {
+    "ref": "49:10",
+    "ayah": "ইসলামী — ইসলামী, ইসলামী ইসলামী.",
+    "task": "আজ না ইসলামী ইসলামী ইসলামী ইসলামী."
+  },
+  {
+    "ref": "49:11",
+    "ayah": "ইসলামী ইসলামী ইসলামী না ইসলামী ইসলামীজাহান্নাম ইসলামী.",
+    "task": "আজ না ইসলামী ইসলামী, ইসলামী ইসলামী মানুষকে."
+  },
+  {
+    "ref": "49:12",
+    "ayah": "ইসলামী ইসলামী ইসলামী ইসলামী না ইসলামী.",
+    "task": "আজ না ইসলামী ইসলামী জন্য ইসলামী."
+  },
+  {
+    "ref": "50:18",
+    "ayah": "ইসলামী ইসলামী মানুষ কথা, ইসলামী পাশের না ছিল ইসলামী.",
+    "task": "আজ ইসলামী জন্য কথাইসলামী আগে ইসলামী ইসলামী."
+  },
+  {
+    "ref": "51:56",
+    "ayah": "ইসলামী ইসলামী ইসলামী ইসলামী মানুষদের ইসলামী ইসলামী ইবাদতের ইসলামী.",
+    "task": "আজ কর একটি ইসলামী কাজ ইসলামী ইসলামী ইসলামীজাহান্নামইসলামী আল্লাহইসলামী."
+  },
+  {
+    "ref": "57:20",
+    "ayah": "ইসলামী ইসলামী — ইসলামী ইসলামী.",
+    "task": "আজ না ইসলামী ইসলামী ইসলামী-জন্য ইসলামী ইসলামী."
+  },
+  {
+    "ref": "57:23",
+    "ayah": "ইসলামী ইসলামী না ইসলামী ইসলামী ইসলামী ইসলামী না ইসলামীজাহান্নামইসলামী ইসলামী ইসলামী.",
+    "task": "আজ ইসলামী ইসলামী: ছাড়া ইসলামী ইসলামী ছাড়া ইসলামী."
+  },
+  {
+    "ref": "59:18",
+    "ayah": "ইসলামী ইসলামী ইসলামী, ইসলামী ইসলামী ইসলামী ইসলামী.",
+    "task": "আজ আগে ইসলামী ইসলামী ইসলামী ইসলামী ইসলামী."
+  },
+  {
+    "ref": "64:16",
+    "ayah": "ইসলামী আল্লাহইসলামী ইসলামী ইসলামী ইসলামী ইসলামী.",
+    "task": "আজ কর ইসলামী, না ইসলামী, ইসলামী ইসলামী."
+  },
+  {
+    "ref": "65:2-3",
+    "ayah": "ইসলামী ইসলামী আল্লাহইসলামী, ইসলামী ইসলামী ইসলামী ইসলামী ইসলামী ইসলামী ইসলামী না ইসলামী.",
+    "task": "আজ में ইসলামী বেছে নাও ইসলামী ইসলামী."
+  },
+  {
+    "ref": "65:7",
+    "ayah": "আল্লাহ না ইসলামী ইসলামী ইসলামী, ইসলামী ইসলামী.",
+    "task": "আজ না ইসলামী ইসলামী ইসলামী ইসলামী ইসলামী."
+  },
+  {
+    "ref": "67:2",
+    "ayah": "ইসলামী ইসলামী ইসলামী ইসলামী ইসলামী, ইসলামী ইসলামী, ইসলামী ইসলামী ইসলামী.",
+    "task": "আজ ইসলামী একটি ইসলামী কাজ: ইসলামী, নামাজ ইসলামী সাহায্য."
+  },
+  {
+    "ref": "70:5",
+    "ayah": "ইসলামী ইসলামী ধৈর্যইসলামী.",
+    "task": "আজ ইসলামী ছাড়া ইসলামী ইসলামী ছাড়া ইসলামী."
+  },
+  {
+    "ref": "73:8",
+    "ayah": "ইসলামী ইসলামী ইসলামী ইসলামী ইসলামী ইসলামী ইসলামী ইসলামী.",
+    "task": "আজ ইসলামী ইসলামী ইসলামী ইসলামী ইসলামী ইসলামী ইসলামী আল্লাহকাছে."
+  },
+  {
+    "ref": "74:7",
+    "ayah": "ইসলামীজাহান্নামইসলামী ইসলামী ইসলামী ইসলামী.",
+    "task": "আজ ইসলামী ইসলামী ইসলামী ইসলামী ইসলামীজাহান্নামইসলামী আল্লাহইসলামী."
+  },
+  {
+    "ref": "76:8-9",
+    "ayah": "ইসলামী ইসলামী ইসলামীজাহান্নামইসলামী ইসলামী ইসলামী আল্লাহকাছে, না ইসলামী ইসলামীজাহান্নামইসলামী ইসলামী ইসলামী.",
+    "task": "আজ ইসলামী ইসলামী-ইসলামী ছাড়া প্রত্যাশা ইসলামী."
+  },
+  {
+    "ref": "87:14-15",
+    "ayah": "ইসলামী ইসলামী, ইসলামী ইসলামী, ইসলামী ইসলামী ইসলামী ইসলামী.",
+    "task": "আজ ইসলামী একটি ইসলামী আগে কাজের আগে."
+  },
+  {
+    "ref": "90:17",
+    "ayah": "ইসলামী ইসলামী ইসলামী, ইসলামী ইসলামী ধৈর্য ইসলামী ইসলামী.",
+    "task": "আজ ইসলামী ইসলামী মানুষকে ইসলামী কথাইসলামী."
+  },
+  {
+    "ref": "92:5-7",
+    "ayah": "ইসলামী ইসলামী ইসলামী ইসলামী ইসলামী, ইসলামী ইসলামী ইসলামী ইসলামী ইসলামী ইসলামী.",
+    "task": "আজ ইসলামী ইসলামী: দিনইসলামী, ইসলামী ইসলামী ইসলামীঈমানইসলামী."
+  },
+  {
+    "ref": "93:10",
+    "ayah": "ইসলামী ইসলামী ইসলামী.",
+    "task": "আজ না উত্তর দিও ইসলামী ইসলামী, ইসলামী ইসলামী সাহায্যের."
+  },
+  {
+    "ref": "93:11",
+    "ayah": "ইসলামী ইসলামী ইসলামী ইসলামী ইসলামী.",
+    "task": "আজ স্মরণ কর ইসলামী ইসলামী আল্লাহইসলামী ইসলামী ইসলামী জন্য ইসলামী."
+  },
+  {
+    "ref": "94:5",
+    "ayah": "ইসলামী ইসলামী ইসলামী ইসলামী.",
+    "task": "আজ না ইসলামী ইসলামী-জন্য ইসলামী ইসলামী."
+  },
+  {
+    "ref": "94:6",
+    "ayah": "ইসলামী, ইসলামী ইসলামী ইসলামী ইসলামী.",
+    "task": "আজ ইসলামী হলো ইসলামী, ইসলামী ইসলামী ইসলামী."
+  },
+  {
+    "ref": "95:4",
+    "ayah": "ইসলামী ইসলামী মানুষকে में ইসলামী ইসলামী.",
+    "task": "আজ না ইসলামী ইসলামী কথাইসলামী, ইসলামী ইসলামী."
+  }
+];
+
+  const HISTORY_KEY = 'barakaway_ayah_history_bn_v1';
+  const TODAY_KEY = 'barakaway_ayah_today_bn_v1';
+
+  function localDateKey(date){
+    const y = date.getFullYear();
+    const m = String(date.getMonth() + 1).padStart(2, '0');
+    const d = String(date.getDate()).padStart(2, '0');
+    return y + '-' + m + '-' + d;
+  }
+
+  function daysBetween(a, b){
+    const start = new Date(a + 'T00:00:00');
+    const end = new Date(b + 'T00:00:00');
+    return Math.floor((end - start) / 86400000);
+  }
+
+  function safeJsonParse(value, fallback){
+    try{
+      return JSON.parse(value);
+    }catch(e){
+      return fallback;
+    }
+  }
+
+  function pickAyahForআজ(){
+    const today = localDateKey(new Date());
+    const START_KEY = 'barakaway_linear_program_start_bn_v1';
+    let start = localStorage.getItem(START_KEY);
+    if(!start){
+      start = today;
+      localStorage.setItem(START_KEY, start);
+    }
+    const dayNumber = Math.max(0, daysBetween(start, today));
+    const index = ayahActions.length ? (dayNumber % ayahActions.length) : 0;
+    localStorage.setItem(TODAY_KEY, JSON.stringify({date:today, index:index, mode:'linear', day:dayNumber + 1}));
+    return ayahActions[index];
+  }
+
+  function renderAyahCard(){
+    const ayah = pickAyahForআজ();
+    const card = document.getElementById('dailyপ্রবন্ধLink');
+    const text = document.getElementById('dailyপ্রবন্ধTitle');
+    const title = card ? card.querySelector('.today-action-title') : null;
+
+    if(card){
+      card.href = 'javascript:void(0)';
+      card.setAttribute('role', 'button');
+      card.setAttribute('aria-label', 'দিনের আয়াত: ' + ayah.ref + '. ' + ayah.task);
+    }
+
+    if(title){
+      title.textContent = 'দিনের আয়াত';
+    }
+
+    if(text){
+      const escapeHtml = function(value){
+        return String(value)
+          .replace(/&/g, '&amp;')
+          .replace(/</g, '&lt;')
+          .replace(/>/g, '&gt;')
+          .replace(/"/g, '&quot;')
+          .replace(/'/g, '&#039;');
+      };
+
+      text.innerHTML =
+        '<div class="today-ayah-text">' +
+          '<div><span class="today-ayah-ref">' + escapeHtml(ayah.ref) + '</span></div>' +
+          '<div class="today-ayah-line">' + escapeHtml(ayah.ayah) + '</div>' +
+          '<div class="today-ayah-task"><span class="today-ayah-task-label">কাজ:</span>' + escapeHtml(ayah.task) + '</div>' +
+        '</div>';
+    }
+  }
+
+  renderAyahCard();
+
+  const card = document.getElementById('dailyপ্রবন্ধLink');
+  if(card){
+    card.addEventListener('click', function(event){
+      event.preventDefault();
+    }, true);
+    card.addEventListener('keydown', function(event){
+      if(event.key === 'Enter' || event.key === ' '){
+        event.preventDefault();
+        card.click();
+      }
+    });
+  }
+})();
+</script>
+
+
+<script>
+(function(){
+  const challenges = [
+  "আজ পাঁচজনকে আগে সালাম দিন।",
+  "আজ আল্লাহর জন্য দশজনকে হাসিমুখে দেখুন।",
+  "আজ প্রতিটি গুরুত্বপূর্ণ কাজের আগে বিসমিল্লাহ বলুন।",
+  "আজ কারও কথা মাঝপথে কাটবেন না।",
+  "আজ কেউ উসকানি দিলেও রূঢ়ভাবে উত্তর দেবেন না।",
+  "আজ জিহ্বাকে একটি অভিযোগ থেকে বাঁচান।",
+  "আজ যে মানুষ আপনাকে বিরক্ত করে তার জন্য দোয়া করুন।",
+  "আজ ব্যাখ্যা ও প্রদর্শন ছাড়া একজনকে সাহায্য করুন।",
+  "আজ কারও পেছনে আলোচনা করবেন না।",
+  "আজ আল্লাহর তিনটি নির্দিষ্ট নিয়ামতের জন্য শুকরিয়া আদায় করুন।",
+  "আজ আল্লাহর কাছে ৩৩ বার শান্তভাবে ক্ষমা চান।",
+  "আজ নিজের কথাবার্তা থেকে একটি ক্ষতিকর শব্দ বাদ দিন।",
+  "আজ পিতা-মাতা বা কাছের মানুষকে ভালো কথা বলুন।",
+  "আজ কথায় জিততে গিয়ে তর্ক করবেন না।",
+  "আজ শান্তির জন্য একটি ছোট বিষয়ে ছাড় দিন।",
+  "আজ এমন একটি ভালো কাজ করুন যা কেউ জানবে না।",
+  "আজ সারাদিন কণ্ঠ উঁচু করবেন না।",
+  "আজ ঘুমের আগে নিজের একটি ভুল কাজ স্মরণ করে ক্ষমা চান।",
+  "আজ এমন কিছু দেখবেন না যা ঈমান দুর্বল করে।",
+  "আজ একটি ছোট সূরা মনোযোগ দিয়ে পড়ুন।",
+  "আজ অভিযোগ করতে ইচ্ছা হলে আলহামদুলিল্লাহ বলুন।",
+  "আজ রাগে সঙ্গে সঙ্গে উত্তর দেবেন না—দশ সেকেন্ড অপেক্ষা করুন।",
+  "ভুল হলে আজ আগে ক্ষমা চান।",
+  "আজ গল্পে বাড়িয়ে বলবেন না।",
+  "আজ একটি কাজের আগে নিজের নিয়ত পরীক্ষা করুন।",
+  "আজ রাস্তা বা ঘর থেকে অন্যের অসুবিধার একটি জিনিস সরান।",
+  "আজ মৃত মুসলিমদের জন্য দোয়া করুন।",
+  "আজ হিংসা নয়—যার কাছে নিয়ামত আছে তার জন্য বরকতের দোয়া করুন।",
+  "আজ অপ্রয়োজনীয় খরচ করবেন না।",
+  "আজ আপনার চেয়ে দুর্বল মানুষের সঙ্গে আরও কোমল হোন।",
+  "আজ যেখানে সাধারণত তর্ক করেন, সেখানে একবার চুপ থাকুন।",
+  "আজ এমন একটি ছোট বিষয়ে সত্য বলুন যেখানে লুকানো সহজ ছিল।",
+  "আজ মানুষের চেহারা, আয় বা ভুল নিয়ে বিচার করবেন না।",
+  "সামর্থ্য থাকলে আজ ছোট সাদাকা করুন।",
+  "আজ নবী ﷺ-এর ওপর দশবার দরুদ পড়ুন।",
+  "আজ একটি উপকারী কাজ বিলম্ব করবেন না।",
+  "আজ একটি নামাজে সালামের পর তাড়াহুড়া করবেন না।",
+  "আজ একটি ছোট আয়াতের অর্থ পড়ুন।",
+  "আজ নিজেকে মনে করান: আল্লাহ এখন আমাকে দেখছেন।",
+  "আজ একটি কথোপকথনে অপ্রয়োজনীয় কথা বলবেন না।",
+  "আজ একটি বাক্য দিয়ে কারও দিন সহজ করুন।",
+  "আজ নিজের জীবন অন্যের জীবনের সঙ্গে তুলনা করবেন না।",
+  "আজ নিজের উম্মাহর জন্য দোয়া করুন।",
+  "আজ বিদ্রূপ দিয়ে উত্তর দেবেন না।",
+  "আজ সারি, রাস্তা বা অপেক্ষায় ধৈর্য দেখান।",
+  "আজ শান্ত যিকরের জন্য ১০ মিনিট ফোন সরিয়ে রাখুন।",
+  "আজ যে সাধারণত অদেখা থাকে তাকে ভালো কথা বলুন।",
+  "আজ অন্যের ভুল খুঁজবেন না।",
+  "আজ একটি গুনাহ স্মরণ করে তাতে ফিরে না যাওয়ার সিদ্ধান্ত নিন।",
+  "আজ একটি কাজ আমানতের মতো যত্নসহ করুন।",
+  "আজ নিজের ভালো কাজ নিয়ে গর্ব করবেন না।",
+  "আজ ক্লান্ত হলেও ঘরে হাসুন।",
+  "আজ মন্দের জবাবে মন্দ করবেন না।",
+  "আজ আল্লাহর জন্য একটি ছোট কষ্ট ক্ষমা করুন।",
+  "আজ আল্লাহর একটি নামের অর্থ শিখুন।",
+  "খারাপ চিন্তা এলে আজ আস্তাগফিরুল্লাহ বলুন।",
+  "আজ ফাঁকা তর্কে অংশ নেবেন না।",
+  "আজ একজন মানুষের মন ভালো করুন।",
+  "আজ অন্যের ভুল দেখে হাসবেন না।",
+  "আজ কাজ বা পড়াশোনা শুরুর আগে দোয়া করুন।",
+  "আজ সময়ের ব্যাপারে সৎ থাকুন: দেরি করে অন্যের সময় নষ্ট করবেন না।",
+  "আজ একটি বাধ্যতামূলক কাজে অলসতা করবেন না।",
+  "যে আপনাকে উপকার করেছে আজ তাকে ধন্যবাদ দিন।",
+  "যেখানে যত্ন করা যায় সেখানে “আমার কিছু যায় আসে না” বলবেন না।",
+  "আজ একটি অপ্রয়োজনীয় দেখা/স্ক্রল এড়িয়ে চলুন।",
+  "আজ শান্ত ও মনোযোগ দিয়ে ওজু করুন।",
+  "আজ লা ইলাহা ইল্লাল্লাহ ২০ বার মনোযোগ দিয়ে বলুন।",
+  "আজ ঘরে বিরক্তি দিয়ে উত্তর দেবেন না।",
+  "আজ মনে করিয়ে না দিয়ে সাহায্য করুন।",
+  "আজ কারও গোপন কথা বলবেন না।",
+  "আজ আল্লাহর জন্য একটি গুনাহ ছাড়ুন, কেউ না দেখলেও।",
+  "আজ আল-ফাতিহা স্বাভাবিকের চেয়ে ধীরে পড়ুন।",
+  "আজ পুরো অবস্থা না জেনে কাউকে দোষ দেবেন না।",
+  "যাকে পছন্দ করেন না তার প্রতিও আজ ন্যায়পরায়ণ থাকুন।",
+  "যে আগে আপনাকে সাহায্য করেছে তার জন্য দোয়া করুন।",
+  "আজ খাবার, ঘর বা পরিবার নিয়ে খারাপ কথা বলবেন না।",
+  "আজ নিজের আশপাশের একটি জায়গা পরিষ্কার করুন।",
+  "কাজের পরিকল্পনা করলে আজ ইন শা আল্লাহ বলুন।",
+  "আজ কারও প্রয়োজন দেখেও না দেখার ভান করবেন না।",
+  "আজ শৃঙ্খলার জন্য একটি অতিরিক্ত আনন্দ ছেড়ে দিন।",
+  "আজ কাছের মানুষের জন্য ভালো কাজ করুন, কৃতজ্ঞতার আশা ছাড়া।",
+  "আজ নিষিদ্ধ থেকে দৃষ্টি সংযত রাখুন।",
+  "আজ রাগে মেসেজ পাঠাবেন না।",
+  "আজ একটি নামাজের পর স্বাভাবিকের চেয়ে বেশি দোয়া করুন।",
+  "আজ ছোট সংঘাতে আগে মীমাংসা করুন।",
+  "আজ বড়দের কথা মাঝপথে কাটবেন না।",
+  "আজ নিজের সম্পর্কে প্রয়োজনের বেশি বলবেন না।",
+  "আজ মৃত্যুকে একবার স্মরণ করুন এবং একটি নিয়ত সংশোধন করুন।",
+  "আজ কাউকে বলুন: আল্লাহ আপনাকে উত্তম প্রতিদান দিন।",
+  "আজ অন্যের শ্রমকে ছোট করবেন না।",
+  "কাজে সাহায্য করতে না পারলে আজ ভালো কথায় সাহায্য করুন।",
+  "আজ কঠিন সত্যের বদলে সহজ মিথ্যা বেছে নেবেন না।",
+  "আজ দ্বীনের জ্ঞানের দিকে একটি ছোট পদক্ষেপ নিন।",
+  "আজ একটি হাদিস পড়ুন এবং কীভাবে মানবেন ভাবুন।",
+  "আজ পিতা-মাতা বা বড়দের সঙ্গে ছোট বিষয়ে তর্ক করবেন না।",
+  "আজ শিশু বা দুর্বল মানুষের ওপর বিরক্ত হবেন না।",
+  "আজ সকাল ও সন্ধ্যায় ক্ষমার দোয়া করুন।",
+  "আজ ভালো কাজের উত্তরে শীতলতা দেখাবেন না।",
+  "আজ খাবারের আগে বিসমিল্লাহ এবং পরে আলহামদুলিল্লাহ বলুন।",
+  "আজ কথায় কারও দুঃখের কারণ হবেন না।",
+  "আজ আমানতের জন্য একটি কাজ সময়মতো করুন।",
+  "আজ মানুষকে পরস্পরের সঙ্গে তুলনা করবেন না।",
+  "আজ মনে রাখুন রিজিক আল্লাহর পক্ষ থেকে; অতিরিক্ত দুশ্চিন্তা করবেন না।",
+  "আজ অন্তত এক দিনের জন্য একটি ক্ষতিকর অভ্যাস ছাড়ুন।",
+  "আজ সূরা ইখলাস তিনবার মনোযোগ দিয়ে পড়ুন।",
+  "আজ আবহাওয়া, অবস্থা বা মানুষ নিয়ে অভিযোগ করবেন না।",
+  "যার সঙ্গে কম কথা হয়, তাকে আজ আগে সালাম দিন।",
+  "যার প্রতি হিংসা হয়েছে তার জন্য আজ দোয়া করুন।",
+  "সত্য হলেও আজ রুক্ষ কথা বলবেন না।",
+  "আজ ইসলামী ইসলামী-ইসলামী ইসলামী ইসলামী ইসলামী.",
+  "আজ না ইসলামী ইসলামী, ইসলামী ইসলামী ইসলামী শান্তভাবে.",
+  "আজ ইসলামী ইসলামী ইসলামী ইসলামী কথাইসলামী: ইসলামী ইসলামী.",
+  "আজ ইসলামী আল্লাহইসলামী জন্য ইসলামী.",
+  "আজ ইসলামী ইসলামী ছাড়া ইসলামী.",
+  "আজ না ইসলামী ইসলামী ইসলামী ইসলামী ইসলামী ইসলামী में ইসলামী.",
+  "আজ কর একটি ইসলামী ইসলামীজাহান্নামইসলামী আল্লাহইসলামী ইসলামী কাউকে না ইসলামী.",
+  "আজ আগে ইসলামী ইসলামী ইসলামী: ইসলামী ইসলামী ইসলামী ইসলামীজাহান্নামইসলামী আল্লাহইসলামী?",
+  "আজ ইসলামী ইসলামী ইসলামী ছাড়া ইসলামী.",
+  "আজ না ইসলামী ইসলামী ইসলামী ইসলামী — ইসলামী ইসলামী ইসলামী.",
+  "আজ বল ভালো কাজ ইসলামী, যদিও যদি ইসলামী ইসলামী.",
+  "আজ ইসলামী একটি ইসলামী ইসলামী কাজ ইসলামী ইসলামী."
+];
+  const TODAY_KEY = 'barakaway_daily_challenge_today_bn';
+  const HISTORY_KEY = 'barakaway_daily_challenge_history_bn';
+
+  function localDateKey(date){
+    const y = date.getFullYear();
+    const m = String(date.getMonth() + 1).padStart(2, '0');
+    const d = String(date.getDate()).padStart(2, '0');
+    return y + '-' + m + '-' + d;
+  }
+
+  function daysBetween(a, b){
+    const da = new Date(a + 'T00:00:00');
+    const db = new Date(b + 'T00:00:00');
+    return Math.round((db - da) / 86400000);
+  }
+
+  function safeJsonParse(value, fallback){
+    try{return JSON.parse(value);}catch(e){return fallback;}
+  }
+
+  function pickChallengeForআজ(){
+    const today = localDateKey(new Date());
+    const START_KEY = 'barakaway_linear_program_start_bn_v1';
+    let start = localStorage.getItem(START_KEY);
+    if(!start){
+      start = today;
+      localStorage.setItem(START_KEY, start);
+    }
+    const dayNumber = Math.max(0, daysBetween(start, today));
+    const index = challenges.length ? (dayNumber % challenges.length) : 0;
+    localStorage.setItem(TODAY_KEY, JSON.stringify({date:today, index:index, mode:'linear', day:dayNumber + 1}));
+    return {index:index, text:challenges[index]};
+  }
+
+  function renderChallenge(){
+    const selected = pickChallengeForআজ();
+    const card = document.getElementById('currentAdhkarLink');
+    const title = document.getElementById('currentAdhkarTitle');
+    const text = document.getElementById('currentAdhkarText');
+
+    if(card){
+      card.href = 'javascript:void(0)';
+      card.setAttribute('role', 'button');
+      card.setAttribute('aria-label', 'দিনের পরীক্ষা। ' + selected.text);
+    }
+    if(title) title.textContent = 'দিনের পরীক্ষা';
+    if(text) text.textContent = selected.text;
+  }
+
+  renderChallenge();
+  document.addEventListener('DOMContentLoaded', renderChallenge);
+  window.addEventListener('pageshow', renderChallenge);
+})();
+</script>
+
+
+<script>
+(function(){
+  const MICRO_QUESTIONS = [
+  {
+    "q": "ইসলামের কয়টি স্তম্ভ আছে?",
+    "options": [
+      "৪",
+      "৫",
+      "৬"
+    ],
+    "correct": 1,
+    "meaning": "ইসলামের পাঁচটি স্তম্ভ ঈমানি জীবনের ভিত্তি।"
+  },
+  {
+    "q": "কুরআন কার বাণী?",
+    "options": [
+      "আল্লাহর",
+      "মানুষের",
+      "ফেরেশতার"
+    ],
+    "correct": 0,
+    "meaning": "কুরআন আল্লাহর অবতীর্ণ বাণী।"
+  },
+  {
+    "q": "মুসলিম দিনে কয়বার ফরজ নামাজ পড়ে?",
+    "options": [
+      "৩",
+      "৫",
+      "৭"
+    ],
+    "correct": 1,
+    "meaning": "পাঁচ ওয়াক্ত নামাজ ইসলামের বড় ইবাদত।"
+  },
+  {
+    "q": "রমজানে মুসলিমরা কী রাখে?",
+    "options": [
+      "রোজা",
+      "ঘুম",
+      "খেলা"
+    ],
+    "correct": 0,
+    "meaning": "রোজা তাকওয়া ও আত্মনিয়ন্ত্রণ শেখায়।"
+  },
+  {
+    "q": "যাকাত কাদের সাহায্য করে?",
+    "options": [
+      "অভাবীদের",
+      "শুধু ধনীদের",
+      "কাউকে নয়"
+    ],
+    "correct": 0,
+    "meaning": "যাকাত সম্পদের সঙ্গে দায়িত্বকে যুক্ত করে।"
+  },
+  {
+    "q": "সাদাকা কী?",
+    "options": [
+      "স্বেচ্ছা দান",
+      "ঋণ",
+      "বাণিজ্য"
+    ],
+    "correct": 0,
+    "meaning": "সাদাকা আল্লাহর সন্তুষ্টির জন্য দান।"
+  },
+  {
+    "q": "নামাজের আগে কী করা হয়?",
+    "options": [
+      "ওজু",
+      "ঘুম",
+      "খাওয়া"
+    ],
+    "correct": 0,
+    "meaning": "ওজু পবিত্রতার প্রস্তুতি।"
+  },
+  {
+    "q": "কিবলা কোন দিকে?",
+    "options": [
+      "কাবার দিকে",
+      "যেকোনো দিকে",
+      "বাজারের দিকে"
+    ],
+    "correct": 0,
+    "meaning": "নামাজে কাবার দিকে মুখ করা হয়।"
+  },
+  {
+    "q": "দোয়া মানে কী?",
+    "options": [
+      "আল্লাহর কাছে চাওয়া",
+      "শুধু কথা",
+      "বিতর্ক"
+    ],
+    "correct": 0,
+    "meaning": "দোয়া বান্দার রবের সঙ্গে সম্পর্ক।"
+  },
+  {
+    "q": "যিকর কী?",
+    "options": [
+      "আল্লাহকে স্মরণ",
+      "অহংকার",
+      "অভিযোগ"
+    ],
+    "correct": 0,
+    "meaning": "যিকর হৃদয়কে জীবিত করে।"
+  },
+  {
+    "q": "সুবহানাল্লাহ অর্থ কী?",
+    "options": [
+      "আল্লাহ পবিত্র",
+      "আমি ক্লান্ত",
+      "ধন্যবাদ"
+    ],
+    "correct": 0,
+    "meaning": "এটি আল্লাহর পবিত্রতা ঘোষণা।"
+  },
+  {
+    "q": "আলহামদুলিল্লাহ কখন বলা হয়?",
+    "options": [
+      "নিয়ামতের জন্য",
+      "রাগে",
+      "ভুলে"
+    ],
+    "correct": 0,
+    "meaning": "কৃতজ্ঞতা নিয়ামতকে তার উৎসের সঙ্গে যুক্ত করে।"
+  },
+  {
+    "q": "আল্লাহু আকবার অর্থ কী?",
+    "options": [
+      "আল্লাহ মহান",
+      "আমি সঠিক",
+      "বিদায়"
+    ],
+    "correct": 0,
+    "meaning": "এটি মনে করায় আল্লাহ সবকিছুর ঊর্ধ্বে।"
+  },
+  {
+    "q": "লা ইলাহা ইল্লাল্লাহ অর্থ কী?",
+    "options": [
+      "আল্লাহ ছাড়া উপাস্য নেই",
+      "ধন্যবাদ",
+      "শুভ সকাল"
+    ],
+    "correct": 0,
+    "meaning": "এটি তাওহিদের মূল কথা।"
+  },
+  {
+    "q": "মুসলিমের চরিত্র কেমন হওয়া উচিত?",
+    "options": [
+      "সৎ",
+      "মিথ্যাবাদী",
+      "কঠোর"
+    ],
+    "correct": 0,
+    "meaning": "সততা উত্তম চরিত্রের অংশ।"
+  },
+  {
+    "q": "ছোটদের প্রতি দয়া করা কেমন?",
+    "options": [
+      "ভালো",
+      "দুর্বলতা",
+      "খারাপ"
+    ],
+    "correct": 0,
+    "meaning": "মমতা ভালোবাসা ও বিশ্বাস তৈরি করে।"
+  },
+  {
+    "q": "বড়দের সম্মান করা কী?",
+    "options": [
+      "গুরুত্বপূর্ণ",
+      "অপ্রয়োজনীয়",
+      "হাস্যকর"
+    ],
+    "correct": 0,
+    "meaning": "আদব প্রজন্মকে যুক্ত করে।"
+  },
+  {
+    "q": "অন্যের জিনিস নষ্ট করা যায়?",
+    "options": [
+      "না",
+      "হ্যাঁ",
+      "কেউ না দেখলে"
+    ],
+    "correct": 0,
+    "meaning": "মানুষের অধিকার ছোট বিষয়েও রক্ষা করতে হয়।"
+  },
+  {
+    "q": "হারানো জিনিস পেলে কী ভালো?",
+    "options": [
+      "ফেরত দেওয়া",
+      "লুকানো",
+      "বেচে দেওয়া"
+    ],
+    "correct": 0,
+    "meaning": "সততা তখনও প্রকাশ পায় যখন কেউ দেখে না।"
+  },
+  {
+    "q": "গোপন ভালো কাজ কীভাবে করা ভালো?",
+    "options": [
+      "আন্তরিকভাবে",
+      "প্রশংসার জন্য",
+      "ছবির জন্য"
+    ],
+    "correct": 0,
+    "meaning": "গোপন দান রিয়ার ক্ষতি থেকে বাঁচায়।"
+  },
+  {
+    "q": "ভালো কাজ করলে কী করা ভালো?",
+    "options": [
+      "গর্ব না করা",
+      "সবাইকে মনে করানো",
+      "গ্রহীতাকে অপমান করা"
+    ],
+    "correct": 0,
+    "meaning": "আল্লাহর জন্য করা কাজ বিজ্ঞাপন চায় না।"
+  },
+  {
+    "q": "নিয়ামতের জন্য কাকে ধন্যবাদ দিতে হয়?",
+    "options": [
+      "আল্লাহকে",
+      "সুযোগকে",
+      "শুধু নিজেকে"
+    ],
+    "correct": 0,
+    "meaning": "শুকরিয়া হৃদয়কে সঠিক উৎসের দিকে ফেরায়।"
+  },
+  {
+    "q": "আল্লাহর রহমত থেকে হতাশ হওয়া যায়?",
+    "options": [
+      "না",
+      "হ্যাঁ",
+      "সবসময়"
+    ],
+    "correct": 0,
+    "meaning": "তাওবাকারীদের জন্য আল্লাহর রহমত বিস্তৃত।"
+  },
+  {
+    "q": "আল্লাহর প্রতি আশা কিসের সঙ্গে হওয়া উচিত?",
+    "options": [
+      "আমল",
+      "অলসতা",
+      "গুনাহ"
+    ],
+    "correct": 0,
+    "meaning": "আশা চেষ্টা বাতিল করে না।"
+  },
+  {
+    "q": "আল্লাহর ভয় কী সাহায্য করে?",
+    "options": [
+      "গুনাহ ছাড়তে",
+      "কঠোর হতে",
+      "হিংসা করতে"
+    ],
+    "correct": 0,
+    "meaning": "এমন ভয় আচরণকে পবিত্র করে।"
+  },
+  {
+    "q": "আল্লাহর ভালোবাসা প্রকাশ পায় কিসে?",
+    "options": [
+      "আনুগত্যে",
+      "অহংকারে",
+      "মিথ্যায়"
+    ],
+    "correct": 0,
+    "meaning": "ভালোবাসা কাজ দিয়ে প্রমাণিত হয়।"
+  },
+  {
+    "q": "হৃদয় কী দিয়ে পরিষ্কার হয়?",
+    "options": [
+      "যিকর",
+      "হিংসা",
+      "গীবত"
+    ],
+    "correct": 0,
+    "meaning": "আল্লাহর স্মরণ হৃদয়কে জীবিত করে।"
+  },
+  {
+    "q": "সেরা যিকর কোনটি?",
+    "options": [
+      "লা ইলাহা ইল্লাল্লাহ",
+      "কঠোর কথা",
+      "বিতর্ক"
+    ],
+    "correct": 0,
+    "meaning": "এটি তাওহিদের কথা ও ঈমানের ভিত্তি।"
+  },
+  {
+    "q": "ভালো চরিত্রকে কী বলা হয়?",
+    "options": [
+      "আখলাক",
+      "গীবত",
+      "রিয়া"
+    ],
+    "correct": 0,
+    "meaning": "আখলাক আচরণে ঈমানকে প্রকাশ করে।"
+  },
+  {
+    "q": "মানুষের সেরা সৌন্দর্য কী?",
+    "options": [
+      "ভালো চরিত্র",
+      "অহংকার",
+      "রুক্ষতা"
+    ],
+    "correct": 0,
+    "meaning": "সুন্দর আখলাক সবাই দেখতে পায়।"
+  },
+  {
+    "q": "গরিবকে অপমান করা যায়?",
+    "options": [
+      "না",
+      "হ্যাঁ",
+      "সে দুর্বল হলে"
+    ],
+    "correct": 0,
+    "meaning": "মানুষের মর্যাদা ভাঙা যায় না।"
+  },
+  {
+    "q": "ব্যবসায় প্রতারণা করা যায়?",
+    "options": [
+      "না",
+      "হ্যাঁ",
+      "লাভ হলে"
+    ],
+    "correct": 0,
+    "meaning": "হালাল উপার্জনের জন্য সততা দরকার।"
+  },
+  {
+    "q": "ওজন ও মাপ কেমন হওয়া উচিত?",
+    "options": [
+      "ন্যায়সঙ্গত",
+      "প্রতারণামূলক",
+      "গোপন"
+    ],
+    "correct": 0,
+    "meaning": "হিসাবেও ন্যায় গুরুত্বপূর্ণ।"
+  },
+  {
+    "q": "ঋণ কী করতে হয়?",
+    "options": [
+      "ফেরত দিতে",
+      "ভুলে যেতে",
+      "অস্বীকার করতে"
+    ],
+    "correct": 0,
+    "meaning": "ঋণ গুরুতর দায়িত্ব।"
+  },
+  {
+    "q": "ন্যায় কাদের প্রতিও দরকার?",
+    "options": [
+      "যাদের পছন্দ নয়",
+      "শুধু বন্ধুদের",
+      "কারও নয়"
+    ],
+    "correct": 0,
+    "meaning": "ন্যায় ব্যক্তিগত অনুভূতির ওপর নির্ভর করে না।"
+  },
+  {
+    "q": "ছোট কষ্ট ক্ষমা করতে পারলে তা কী?",
+    "options": [
+      "ভালো",
+      "খারাপ",
+      "লজ্জার"
+    ],
+    "correct": 0,
+    "meaning": "আল্লাহর জন্য ক্ষমা হৃদয় পরিষ্কার করে।"
+  },
+  {
+    "q": "মন্দের জবাবে মন্দ করা উচিত?",
+    "options": [
+      "নিজেকে থামানো ভালো",
+      "অবশ্যই",
+      "সবসময়"
+    ],
+    "correct": 0,
+    "meaning": "প্রতিক্রিয়া নিয়ন্ত্রণ করা জীবনের বড় ইবাদত।"
+  },
+  {
+    "q": "উসকানি দিলে কী ভালো?",
+    "options": [
+      "সংযম রাখা",
+      "ফেটে পড়া",
+      "অপমান করা"
+    ],
+    "correct": 0,
+    "meaning": "চাপের মুহূর্তে সবর বেশি মূল্যবান।"
+  },
+  {
+    "q": "প্রাণীর প্রতি দয়া করা কী?",
+    "options": [
+      "ভালো",
+      "গুরুত্বহীন",
+      "নিষিদ্ধ"
+    ],
+    "correct": 0,
+    "meaning": "ইসলামে দয়া প্রাণীকেও অন্তর্ভুক্ত করে।"
+  },
+  {
+    "q": "প্রাণীকে কষ্ট দেওয়া যায়?",
+    "options": [
+      "না",
+      "হ্যাঁ",
+      "ছোট হলে"
+    ],
+    "correct": 0,
+    "meaning": "নিষ্ঠুরতা দয়ার বিপরীত।"
+  },
+  {
+    "q": "রাস্তা থেকে ক্ষতি সরানো কী?",
+    "options": [
+      "ভালো কাজ",
+      "গুনাহ",
+      "তুচ্ছ"
+    ],
+    "correct": 0,
+    "meaning": "মানুষের জন্য ছোট উপকারও মূল্যবান।"
+  },
+  {
+    "q": "বাড়ি ও রাস্তার পরিচ্ছন্নতা কী?",
+    "options": [
+      "দায়িত্ব",
+      "গুরুত্বহীন",
+      "অন্যের কাজ"
+    ],
+    "correct": 0,
+    "meaning": "মুসলিম আশপাশের ক্ষতি কমাতে চেষ্টা করে।"
+  },
+  {
+    "q": "কেউ সাহায্য চাইলে কী ভালো?",
+    "options": [
+      "নরমভাবে উত্তর দেওয়া",
+      "রুক্ষভাবে তাড়ানো",
+      "হাসা"
+    ],
+    "correct": 0,
+    "meaning": "না বললেও সম্মানের সঙ্গে বলা যায়।"
+  },
+  {
+    "q": "পরিবার কী?",
+    "options": [
+      "আমানত",
+      "অধিকারহীন বোঝা",
+      "খেলা"
+    ],
+    "correct": 0,
+    "meaning": "আপনজনের যত্ন ও কোমলতার অধিকার আছে।"
+  },
+  {
+    "q": "আত্মীয়তার সম্পর্ক কী করতে হয়?",
+    "options": [
+      "রক্ষা করতে",
+      "কারণ ছাড়া ভাঙতে",
+      "উপেক্ষা করতে"
+    ],
+    "correct": 0,
+    "meaning": "পরিবারের শক্তি সম্পর্ক ও সম্মান থেকে শুরু হয়।"
+  },
+  {
+    "q": "ছোট ভালো কাজ আল্লাহর কাছে কী হয়?",
+    "options": [
+      "হারায় না",
+      "গণনা হয় না",
+      "হাস্যকর"
+    ],
+    "correct": 0,
+    "meaning": "আন্তরিকতার কারণে ছোট কাজও বড় হতে পারে।"
+  },
+  {
+    "q": "ভালো কাজে কী বেশি গুরুত্বপূর্ণ?",
+    "options": [
+      "ইখলাস",
+      "প্রশংসা",
+      "ছবি"
+    ],
+    "correct": 0,
+    "meaning": "আল্লাহ তাঁর জন্য করা কাজ গ্রহণ করেন।"
+  },
+  {
+    "q": "ক্লান্ত হলে দোয়া করা যায়?",
+    "options": [
+      "হ্যাঁ",
+      "না",
+      "শুধু দাঁড়িয়ে"
+    ],
+    "correct": 0,
+    "meaning": "যেকোনো প্রয়োজনে দোয়া করা যায়।"
+  },
+  {
+    "q": "নিজ ভাষায় দোয়া করা যায়?",
+    "options": [
+      "হ্যাঁ",
+      "না",
+      "কখনও না"
+    ],
+    "correct": 0,
+    "meaning": "আল্লাহ হৃদয়ের আবেদন জানেন।"
+  },
+  {
+    "q": "আশার সেরা স্থান কোথায়?",
+    "options": [
+      "আল্লাহ",
+      "মানুষ সম্পূর্ণভাবে",
+      "সুযোগ"
+    ],
+    "correct": 0,
+    "meaning": "মানুষ কারণ, কিন্তু হৃদয়ের ভরসা আল্লাহ।"
+  },
+  {
+    "q": "কোনো কল্যাণ পেলে কী বলা ভালো?",
+    "options": [
+      "আলহামদুলিল্লাহ",
+      "এত কম কেন?",
+      "সব আমি"
+    ],
+    "correct": 0,
+    "meaning": "কৃতজ্ঞতা অহংকার থেকে রক্ষা করে।"
+  },
+  {
+    "q": "কাজের পরিকল্পনা করলে কী বলা হয়?",
+    "options": [
+      "ইন শা আল্লাহ",
+      "কখনও না",
+      "গুরুত্ব নেই"
+    ],
+    "correct": 0,
+    "meaning": "এতে মানুষ আল্লাহর ইচ্ছাকে স্বীকার করে।"
+  },
+  {
+    "q": "অন্যের সফলতা দেখলে কী ভালো?",
+    "options": [
+      "বরকতের দোয়া করা",
+      "হিংসা করা",
+      "নষ্ট করা"
+    ],
+    "correct": 0,
+    "meaning": "বরকতের দোয়া হিংসা থেকে হৃদয় পরিষ্কার করে।"
+  },
+  {
+    "q": "কেউ ভুল করলে কী ভালো?",
+    "options": [
+      "নরমভাবে সংশোধন করা",
+      "লজ্জা দেওয়া",
+      "হাসা"
+    ],
+    "correct": 0,
+    "meaning": "নরম নসিহত অপমানের চেয়ে উপকারী।"
+  },
+  {
+    "q": "ইসলামী — হলো…",
+    "options": [
+      "ইসলামী",
+      "ইসলামী",
+      "ইসলামী"
+    ],
+    "correct": 0,
+    "meaning": "ইসলামী, ইসলামী ইসলামী, প্রয়োজন ইসলামী."
+  },
+  {
+    "q": "ইসলামী প্রয়োজন…",
+    "options": [
+      "ইসলামী",
+      "ইসলামী",
+      "ইসলামী"
+    ],
+    "correct": 0,
+    "meaning": "ইসলামী ইসলামী — ইসলামী ইসলামী."
+  },
+  {
+    "q": "ইসলামী ইসলামী ইসলামী ইসলামী?",
+    "options": [
+      "ইসলামী",
+      "ইসলামী",
+      "ইসলামী ইসলামী ইসলামী"
+    ],
+    "correct": 0,
+    "meaning": "ইসলামী ইসলামী ইসলামী में ইসলামী, ইসলামী না में ইসলামী."
+  },
+  {
+    "q": "ইসলামী কথা ইসলামী ইসলামী — হলো…",
+    "options": [
+      "ইসলামী",
+      "ইসলামী ইসলামী",
+      "ইসলামী ইসলামী ইসলামী"
+    ],
+    "correct": 0,
+    "meaning": "ইসলামী ইসলামী ইসলামী ইসলামী."
+  },
+  {
+    "q": "ইসলামী মানুষ ইসলামী ইসলামী, ইসলামী ইসলামী…",
+    "options": [
+      "ইসলামী ইসলামী",
+      "ইসলামী",
+      "ইসলামী"
+    ],
+    "correct": 0,
+    "meaning": "ইসলামী ইসলামী ইসলামী ইসলামী ইসলামী ইসলামী কাছে আল্লাহইসলামী."
+  },
+  {
+    "q": "ইসলামী জন্য ইসলামী ছাড়া ইসলামী ইসলামী — হলো…",
+    "options": [
+      "ইসলামী",
+      "ইসলামী",
+      "ইসলামী"
+    ],
+    "correct": 0,
+    "meaning": "ইসলামী ইসলামী ভালো কাজ ইসলামী ইসলামী ইসলামী ইসলামী."
+  },
+  {
+    "q": "ইসলামী ইসলামী ইসলামী ইসলামী ইসলামী?",
+    "options": [
+      "ইসলামী",
+      "ইসলামী",
+      "ইসলামী ইসলামী"
+    ],
+    "correct": 0,
+    "meaning": "ইসলামী — হলো ইসলামী."
+  },
+  {
+    "q": "ইসলামী ইসলামী: ইসলামী কথা ইসলামী ইসলামী?",
+    "options": [
+      "ইসলামী কথা",
+      "ইসলামী",
+      "ইসলামী"
+    ],
+    "correct": 0,
+    "meaning": "ইসলামী ইসলামী ইসলামী."
+  },
+  {
+    "q": "ইসলামী ইসলামী ইসলামী ইসলামী?",
+    "options": [
+      "ইসলামীজাহান্নাম ﷺ",
+      "ইসলামী عليه السلام",
+      "ইসলামী عليه السلام"
+    ],
+    "correct": 0,
+    "meaning": "ইসলামী ইসলামীজাহান্নাম ﷺ — ইসলামী ইসলামী."
+  },
+  {
+    "q": "ইসলামী ইসলামী ইসলামী ইসলামী?",
+    "options": [
+      "ইসলামী",
+      "ইসলামী",
+      "ইসলামী ইসলামী"
+    ],
+    "correct": 0,
+    "meaning": "ইসলামী में ইসলামী — ইসলামী ঈমানইসলামী."
+  },
+  {
+    "q": "ইসলামী ইসলামী ইসলামী ইসলামী ইসলামী?",
+    "options": [
+      "ইসলামী عليه السلام",
+      "ইসলামী",
+      "ইসলামী"
+    ],
+    "correct": 0,
+    "meaning": "ইসলামী ইসলামী عليه السلام ইসলামী ইসলামী আল্লাহকাছে."
+  },
+  {
+    "q": "ইসলামী عليه السلام ইসলামী ইসলামী ইসলামী…",
+    "options": [
+      "ইসলামী",
+      "ইসলামী",
+      "ইসলামী"
+    ],
+    "correct": 0,
+    "meaning": "ইসলামী ইসলামী ইসলামী ইসলামী আল্লাহকাছে আগে ইসলামী ইসলামী."
+  },
+  {
+    "q": "ইসলামী عليه السلام ইসলামী…",
+    "options": [
+      "ইসলামী",
+      "ইসলামী",
+      "ইসলামী"
+    ],
+    "correct": 0,
+    "meaning": "ইসলামী ইসলামী ইসলামী ইসলামী ইসলামী ইসলামী."
+  },
+  {
+    "q": "ইসলামী عليه السلام ইসলামী ইসলামী ইসলামী…",
+    "options": [
+      "ইসলামী",
+      "ইসলামী",
+      "ইসলামীজাহান্নামইসলামী"
+    ],
+    "correct": 0,
+    "meaning": "ইসলামী ইসলামী ইসলামী — ইবাদত ইসলামী আল্লাহকাছে."
+  },
+  {
+    "q": "ইসলামী عليه السلام — হলো…",
+    "options": [
+      "ইসলামী আল্লাহইসলামী",
+      "ইসলামী",
+      "ইসলামী"
+    ],
+    "correct": 0,
+    "meaning": "ইসলামী ইসলামী ইসলামী ইসলামী ইসলামী ইসলামী ইসলামী ইসলামী."
+  },
+  {
+    "q": "ইসলামী, ইসলামী ইসলামী عليه السلام — হলো…",
+    "options": [
+      "ইসলামী",
+      "ইসলামী",
+      "ইসলামী"
+    ],
+    "correct": 0,
+    "meaning": "ইসলামী में ইসলামী — ইসলামী ঈমানইসলামী."
+  },
+  {
+    "q": "ইসলামী, ইসলামী ইসলামী عليه السلام — হলো…",
+    "options": [
+      "ইসলামী",
+      "ইসলামী",
+      "কুরআন"
+    ],
+    "correct": 0,
+    "meaning": "ইসলামী ইসলামী में ইসলামী ইসলামী আল্লাহইসলামী."
+  },
+  {
+    "q": "কুরআন ইসলামী ইসলামী ইসলামী…",
+    "options": [
+      "ইসলামীজাহান্নামকাছে ﷺ",
+      "ইসলামী عليه السلام",
+      "ইসলামী عليه السلام"
+    ],
+    "correct": 0,
+    "meaning": "কুরআন — ইসলামী ইসলামী."
+  },
+  {
+    "q": "ইসলামী عليه السلام — হলো…",
+    "options": [
+      "ইসলামী",
+      "ইসলামী",
+      "ইসলামী"
+    ],
+    "correct": 0,
+    "meaning": "ইসলামী ইসলামী ইসলামী ইসলামী."
+  },
+  {
+    "q": "শয়তান ইসলামী…",
+    "options": [
+      "ইসলামী ইসলামী ইসলামী",
+      "ইসলামী নামাজকাছে",
+      "ইসলামী ঈমান"
+    ],
+    "correct": 0,
+    "meaning": "ইসলামী ইসলামী ইসলামী, ইসলামী ইসলামী ইসলামী."
+  },
+  {
+    "q": "ইসলামী ইসলামী ইসলামী ইসলামী?",
+    "options": [
+      "ইসলামী ইসলামী",
+      "ইসলামী",
+      "ইসলামী"
+    ],
+    "correct": 0,
+    "meaning": "ইসলামী ইসলামী কাছে আল্লাহইসলামী — ইসলামী ইসলামী."
+  },
+  {
+    "q": "ইসলামী ইসলামী…",
+    "options": [
+      "ইসলামী",
+      "ইসলামী",
+      "ইসলামী"
+    ],
+    "correct": 0,
+    "meaning": "ইসলামী ইসলামী ইসলামী में ইসলামী ইসলামী."
+  },
+  {
+    "q": "ইসলামী ইসলামী…",
+    "options": [
+      "ইসলামী",
+      "ইসলামী",
+      "ইসলামী"
+    ],
+    "correct": 0,
+    "meaning": "ইসলামী ইসলামী ইসলামী, হৃদয় ইসলামী ইসলামী."
+  },
+  {
+    "q": "ইসলামী ইসলামী ইসলামী ইসলামী में ইসলামইসলামী?",
+    "options": [
+      "ইসলামী",
+      "ইসলামী",
+      "ইসলামী ইসলামী"
+    ],
+    "correct": 0,
+    "meaning": "ইসলামী ইসলামী ইসলামী ইসলামী में ইসলামী."
+  },
+  {
+    "q": "ইসলামী में ইসলামইসলামী…",
+    "options": [
+      "ইসলামী",
+      "ইসলামী",
+      "ইসলামী"
+    ],
+    "correct": 0,
+    "meaning": "ইসলামী ইসলামী ইসলামী ইসলামী ইসলামী."
+  },
+  {
+    "q": "ইসলামী — হলো…",
+    "options": [
+      "ইসলামী",
+      "ইসলামী",
+      "ইসলামী"
+    ],
+    "correct": 0,
+    "meaning": "ইসলামী প্রয়োজন ইসলামী ইসলামী ইসলামী, ইসলামী ইসলামী ইসলামী."
+  },
+  {
+    "q": "ইসলামী — হলো…",
+    "options": [
+      "ইসলামী",
+      "ইসলামী",
+      "ইসলামী"
+    ],
+    "correct": 0,
+    "meaning": "ইসলামী, ইসলামী ইসলামী ইসলামী, ইসলামী ইসলামী ইসলামী."
+  },
+  {
+    "q": "ইসলামী ইসলামী ইসলামী ইসলামী ইসলামী ইসলামী ইসলামী?",
+    "options": [
+      "ইসলামী",
+      "ইসলামী",
+      "ইসলামী"
+    ],
+    "correct": 0,
+    "meaning": "ইসলামী ইসলামী, ইসলামী ইসলামী না ইসলামী ইসলামী में ইসলামী."
+  },
+  {
+    "q": "ইসলামী ইসলামী ইসলামী — হলো…",
+    "options": [
+      "ইসলামী",
+      "ইসলামী",
+      "ইসলামী"
+    ],
+    "correct": 0,
+    "meaning": "ইসলামী ইসলামী ইসলামী ইসলামী."
+  },
+  {
+    "q": "ইসলামী ইসলামী ইসলামী “ইসলামী”?",
+    "options": [
+      "ইসলামী",
+      "ইসলামী",
+      "ইসলামী ইসলামী"
+    ],
+    "correct": 0,
+    "meaning": "কুরআন ইসলামী ইসলামী ইসলামী মা-বাবাকেইসলামী."
+  },
+  {
+    "q": "ইসলামী প্রয়োজন…",
+    "options": [
+      "ইসলামী",
+      "ইসলামী",
+      "ইসলামী"
+    ],
+    "correct": 0,
+    "meaning": "ইসলামী ইসলামী ইসলামী — ইসলামী ইসলামী ইসলামী."
+  },
+  {
+    "q": "ইসলামী মানুষকাছে ইসলামী…",
+    "options": [
+      "ইসলামী",
+      "ইসলামী",
+      "ইসলামী"
+    ],
+    "correct": 0,
+    "meaning": "ইসলামী ইসলামী ইসলামী ইসলামী ইসলামী আল্লাহইসলামী."
+  },
+  {
+    "q": "ইসলামী ইসলামী ইসলামী?",
+    "options": [
+      "ইসলামী",
+      "ইসলামী",
+      "ইসলামী ইসলামী"
+    ],
+    "correct": 0,
+    "meaning": "ইসলাম ইসলামী ইসলামী ইসলামী ইসলামী."
+  },
+  {
+    "q": "ইসলামী में ইসলামইসলামী ইসলামী…",
+    "options": [
+      "ইসলামী",
+      "ইসলামী",
+      "ইসলামী"
+    ],
+    "correct": 0,
+    "meaning": "ইসলামী — ইসলামী ইসলামী."
+  },
+  {
+    "q": "ইসলামী ইসলামী ইসলামী জিহ্বা…",
+    "options": [
+      "ইসলামী ইসলামী",
+      "ইসলামী ইসলামী",
+      "ইসলামী ইসলামী"
+    ],
+    "correct": 0,
+    "meaning": "ইসলামী ইসলামী ইসলামী ইসলামী ইসলামী ইসলামী ইসলামী."
+  },
+  {
+    "q": "ইসলামী ইসলামী…",
+    "options": [
+      "ইসলামী ইসলামী ইসলামী",
+      "ইসলামী ইসলামী",
+      "ইসলামী কঠোরভাবে"
+    ],
+    "correct": 0,
+    "meaning": "ইসলামী ইসলামী ইসলামী হৃদয় ইসলামী ইসলামী."
+  },
+  {
+    "q": "ইসলামী না ইসলামী, ইসলামী…",
+    "options": [
+      "ইসলামী: না ইসলামী",
+      "ইসলামী",
+      "ইসলামী"
+    ],
+    "correct": 0,
+    "meaning": "ইসলামী “না ইসলামী” — ইসলামী ইসলামী."
+  },
+  {
+    "q": "ইসলামী ছাড়া ইসলামী — হলো…",
+    "options": [
+      "ইসলামী",
+      "ইসলামী",
+      "ইসলামী"
+    ],
+    "correct": 0,
+    "meaning": "ইসলামী ইসলামী ইসলামী ইসলামী ছাড়া ইসলামী."
+  },
+  {
+    "q": "ইসলামী ইসলামী ইসলামী ইসলামী কাছে…",
+    "options": [
+      "ইসলামী",
+      "ইসলামী",
+      "ইসলামী"
+    ],
+    "correct": 0,
+    "meaning": "ইসলামী ইসলামী ইসলামীজাহান্নামইসলামী ইসলামী."
+  },
+  {
+    "q": "কুরআন প্রয়োজন ইসলামী ইসলামী…",
+    "options": [
+      "ইসলামী",
+      "ইসলামী",
+      "ইসলামী"
+    ],
+    "correct": 0,
+    "meaning": "ইসলামী ইসলামী আল্লাহইসলামী, ইসলামী ইসলামী ইসলামী জাহান্নামইসলামী."
+  },
+  {
+    "q": "ইসলামী কুরআনইসলামী ইসলামী ইসলামী में…",
+    "options": [
+      "ইসলামী",
+      "ইসলামী",
+      "ইসলামী"
+    ],
+    "correct": 0,
+    "meaning": "পবিত্রতা ইসলামী ইসলামী ইসলামী ইসলামী."
+  },
+  {
+    "q": "ইসলামী ইসলামী ইসলামী…",
+    "options": [
+      "ইসলামী ﷺ",
+      "ইসলামী ইসলামী",
+      "শয়তানইসলামী"
+    ],
+    "correct": 0,
+    "meaning": "ইসলামী — ইসলামী ইসলামী ইসলামী ইসলামী ইসলামী ইসলামী ﷺ."
+  },
+  {
+    "q": "ইসলামী ইসলামী ইসলামী ﷺ ইসলামী…",
+    "options": [
+      "ইসলামী ইসলামী ইসলামী ইসলামী",
+      "ইসলামী",
+      "ইসলামী"
+    ],
+    "correct": 0,
+    "meaning": "ইসলামী জাহান্নামইসলামী ইসলামী ইসলামী ইসলামী আল্লাহইসলামী ﷺ."
+  },
+  {
+    "q": "ইসলামী — ইসলামী ইসলামী…",
+    "options": [
+      "ইসলামী",
+      "ইসলামী",
+      "ইসলামী ইসলামী"
+    ],
+    "correct": 0,
+    "meaning": "ইসলামী ইসলামী ইসলামী ইসলামী ইসলামী."
+  },
+  {
+    "q": "ইসলামী ইসলামী ইসলামী ইসলামী…",
+    "options": [
+      "ইসলামী",
+      "ইসলামী ইসলামী",
+      "ইসলামী"
+    ],
+    "correct": 0,
+    "meaning": "ইসলামী ইসলামী ইসলামী ইসলামী."
+  },
+  {
+    "q": "ইসলামী ইসলামী…",
+    "options": [
+      "ইসলামী",
+      "ইসলামী",
+      "ইসলামী"
+    ],
+    "correct": 0,
+    "meaning": "ইসলামী নামাজ ইসলামী ইসলামী ইসলামী."
+  },
+  {
+    "q": "রোজা ইসলামী…",
+    "options": [
+      "ইসলামী",
+      "ইসলামীজাহান্নামইসলামী",
+      "ইসলামী"
+    ],
+    "correct": 0,
+    "meaning": "রোজা ইসলামী ইসলামী ইসলামী ধৈর্য."
+  },
+  {
+    "q": "ইসলামীজাহান্নামইসলামী ইসলামী…",
+    "options": [
+      "ইসলামী",
+      "ইসলামী",
+      "ইসলামী"
+    ],
+    "correct": 0,
+    "meaning": "ইসলামী, মানুষ ইসলামী হৃদয়."
+  },
+  {
+    "q": "যাকাত ইসলামী…",
+    "options": [
+      "ইসলামী",
+      "ইসলামী ইসলামী",
+      "ইসলামী"
+    ],
+    "correct": 0,
+    "meaning": "ইসলামী ইসলামইসলামী ইসলামী ইসলামী ইসলামী ইসলামী."
+  },
+  {
+    "q": "ইসলামী ইসলামী ইসলামী…",
+    "options": [
+      "ইসলামী",
+      "ইসলামী ইসলামী ছাড়া ইসলামী",
+      "ইসলামী"
+    ],
+    "correct": 0,
+    "meaning": "ইসলামী নামাজের — ইসলামী ইবাদতের."
+  },
+  {
+    "q": "ইসলামী ইসলামী ইসলামী ইসলামী নামাজ ছাড়া ইসলামী?",
+    "options": [
+      "ইসলামী",
+      "ইসলামী",
+      "ইসলামী"
+    ],
+    "correct": 0,
+    "meaning": "ইসলামী — ইসলামী, ইসলামী ইসলামী ইসলামী ইসলামী."
+  },
+  {
+    "q": "ইসলামী ইসলামী, ইসলামী…",
+    "options": [
+      "ইসলামী",
+      "ইসলামী ইসলামী",
+      "ইসলামী ইসলামী"
+    ],
+    "correct": 0,
+    "meaning": "ইসলামী ইসলামী ইসলামী."
+  },
+  {
+    "q": "ইসলামী মানুষ — হলো ইসলামী, ইসলামী…",
+    "options": [
+      "ইসলামী রাগ",
+      "ইসলামী",
+      "ইসলামী"
+    ],
+    "correct": 0,
+    "meaning": "ইসলামী ইসলামী — ইসলামী ইসলামীজাহান্নাম ইসলামী."
+  },
+  {
+    "q": "ইসলামী ইসলামী ইসলামীজাহান্নামইসলামী — হলো…",
+    "options": [
+      "ইসলামী",
+      "ইসলামী",
+      "ইসলামী"
+    ],
+    "correct": 0,
+    "meaning": "ইসলামী ইসলামী ইসলামীজাহান্নামইসলামী ইসলামী ইসলামী ইসলামী ইসলামী."
+  },
+  {
+    "q": "ইসলামী ইসলামী ইসলামী — হলো…",
+    "options": [
+      "ইসলামী",
+      "ইসলামী প্রয়োজন",
+      "ইসলামী"
+    ],
+    "correct": 0,
+    "meaning": "ইসলামী ইসলামী ইসলামী."
+  },
+  {
+    "q": "ইসলামী ইসলামী ইসলামী ইসলামী ইসলামী?",
+    "options": [
+      "ইসলামী",
+      "ইসলামী",
+      "ইসলামী ইসলামী না ইসলামী"
+    ],
+    "correct": 0,
+    "meaning": "ইসলামী মানুষদের ইসলামী যদিও में ইসলামী."
+  },
+  {
+    "q": "ইসলামী ইসলামী ইসলামী ইসলামী, ইসলামী…",
+    "options": [
+      "ইসলামী",
+      "ইসলামী",
+      "ইসলামী"
+    ],
+    "correct": 0,
+    "meaning": "ইসলামী ইসলামী, ইসলামী ইসলামী না ইসলামী."
+  },
+  {
+    "q": "ইসলামী ভালো কাজ ইসলামী ইসলামী…",
+    "options": [
+      "ইসলামী",
+      "ইসলামী প্রশংসার",
+      "ইসলামী ইসলামী"
+    ],
+    "correct": 0,
+    "meaning": "ইসলামী ভালো কাজ ইসলামী ইসলামী ইসলামী."
+  },
+  {
+    "q": "ইসলামী ইসলামী ভালো কাজ, ইসলামী…",
+    "options": [
+      "ইসলামী ইসলামী",
+      "ইসলামী ইসলামী",
+      "ইসলামী ইসলামী"
+    ],
+    "correct": 0,
+    "meaning": "ইসলামী ইসলামীজাহান্নামইসলামী আল্লাহইসলামী না ইসলামী ইসলামী."
+  },
+  {
+    "q": "ইসলামী প্রয়োজন ইসলামী জন্য ইসলামী?",
+    "options": [
+      "আল্লাহইসলামী",
+      "ইসলামী",
+      "ইসলামী ইসলামী"
+    ],
+    "correct": 0,
+    "meaning": "ইসলামী ইসলামী ইসলামী ইসলামী ইসলামী ইসলামী."
+  },
+  {
+    "q": "ইসলামী ইসলামী ইসলামী में ইসলামী আল্লাহইসলামী?",
+    "options": [
+      "ইসলামী",
+      "ইসলামী",
+      "ইসলামী"
+    ],
+    "correct": 0,
+    "meaning": "ইসলামী আল্লাহইসলামী ইসলামী ইসলামী ইসলামী."
+  },
+  {
+    "q": "ইসলামীজাহান্নামইসলামী ইসলামী আল্লাহইসলামী ইসলামী ইসলামী ইসলামী…",
+    "options": [
+      "ইসলামী",
+      "ইসলামী",
+      "ইসলামী"
+    ],
+    "correct": 0,
+    "meaning": "ইসলামীজাহান্নামইসলামী না ইসলামী ইসলামী."
+  },
+  {
+    "q": "ইসলামী আগে আল্লাহইসলামী ইসলামী…",
+    "options": [
+      "ইসলামী গুনাহ",
+      "ইসলামী ইসলামী",
+      "ইসলামী"
+    ],
+    "correct": 0,
+    "meaning": "ইসলামী ইসলামী ইসলামী ইসলামী."
+  },
+  {
+    "q": "ইসলামী ইসলামী আল্লাহকাছে ইসলামী में…",
+    "options": [
+      "ইসলামী",
+      "ইসলামী",
+      "ইসলামী"
+    ],
+    "correct": 0,
+    "meaning": "ইসলামী ইসলামী ইসলামী."
+  },
+  {
+    "q": "ইসলামী ইসলামী ইসলামী…",
+    "options": [
+      "ইসলামী",
+      "ইসলামী",
+      "ইসলামী"
+    ],
+    "correct": 0,
+    "meaning": "ইসলামী আল্লাহইসলামী ইসলামী হৃদয়."
+  },
+  {
+    "q": "ইসলামী ইসলামী — হলো…",
+    "options": [
+      "ইসলামী ইসলামী ইসলামী",
+      "ইসলামী কথা",
+      "ইসলামী"
+    ],
+    "correct": 0,
+    "meaning": "ইসলামী কথা ইসলামী ইসলামী ভিত্তি ঈমানের."
+  },
+  {
+    "q": "ইসলামী ইসলামী…",
+    "options": [
+      "ইসলামী আল্লাহ",
+      "ইসলামী ইসলামী",
+      "ইসলামী ইসলামী"
+    ],
+    "correct": 0,
+    "meaning": "ইসলামী ইসলামী ইসলামী আল্লাহইসলামী."
+  },
+  {
+    "q": "আল্লাহকাছে ইসলামী ইসলামী…",
+    "options": [
+      "আল্লাহ ইসলামী",
+      "ইসলামী ইসলামী",
+      "ইসলামী ইসলামী"
+    ],
+    "correct": 0,
+    "meaning": "ইসলামী ইসলামী, ইসলামী আল্লাহ ইসলামী ইসলামী."
+  },
+  {
+    "q": "ইসলামী ইসলামী ইসলামী ইসলামী…",
+    "options": [
+      "ইসলামী ইসলামী ইসলামী আল্লাহইসলামী",
+      "ইসলামী",
+      "ইসলামী ইসলামী"
+    ],
+    "correct": 0,
+    "meaning": "ইসলামী ভিত্তি ইসলামী."
+  },
+  {
+    "q": "ইসলামী ইসলামী ইসলামী…",
+    "options": [
+      "ইসলামী",
+      "ইসলামী",
+      "ইসলামী"
+    ],
+    "correct": 0,
+    "meaning": "ইসলামী — ইসলামী ইসলামী ইসলামী."
+  },
+  {
+    "q": "ইসলামী ইসলামী ইসলামী…",
+    "options": [
+      "ইসলামী",
+      "ইসলামী",
+      "ইসলামী"
+    ],
+    "correct": 0,
+    "meaning": "ইসলামী ইসলামী ইসলামী में ইসলামী."
+  },
+  {
+    "q": "ইসলামী ইসলামী মানুষকে — হলো…",
+    "options": [
+      "ইসলামী ইসলামী",
+      "ইসলামী",
+      "ইসলামী"
+    ],
+    "correct": 0,
+    "meaning": "ইসলামী ইসলামী ইসলামী ইসলামী."
+  },
+  {
+    "q": "ইসলামী ইসলামী ইসলামী ইসলামী?",
+    "options": [
+      "ইসলামী",
+      "ইসলামী",
+      "ইসলামী ইসলামী ইসলামী"
+    ],
+    "correct": 0,
+    "meaning": "ইসলামী মানুষকে ইসলামী ইসলামী."
+  },
+  {
+    "q": "ইসলামী ইসলামী ইসলামী में ইসলামী?",
+    "options": [
+      "ইসলামী",
+      "ইসলামী",
+      "ইসলামী ইসলামী"
+    ],
+    "correct": 0,
+    "meaning": "ইসলামী ইসলামী ইসলামী ইসলামী."
+  },
+  {
+    "q": "ইসলামী ইসলামী ইসলামী ইসলামী ইসলামী…",
+    "options": [
+      "ইসলামী",
+      "ইসলামী",
+      "ইসলামী"
+    ],
+    "correct": 0,
+    "meaning": "ইসলামী ইসলামী যদিও में ইসলামী."
+  },
+  {
+    "q": "ইসলামী প্রয়োজন…",
+    "options": [
+      "ইসলামী",
+      "ইসলামী",
+      "ইসলামী"
+    ],
+    "correct": 0,
+    "meaning": "ইসলামী — ইসলামী ইসলামী."
+  },
+  {
+    "q": "ইসলামী ইসলামী যদিও ইসলামী…",
+    "options": [
+      "ইসলামী, ইসলামী না ইসলামী",
+      "ইসলামী ইসলামী",
+      "ইসলামী"
+    ],
+    "correct": 0,
+    "meaning": "ইসলামী না ইসলামী ইসলামী ইসলামী ইসলামী."
+  },
+  {
+    "q": "ইসলামী ইসলামী ইসলামী ইসলামী ইসলামী, হলো…",
+    "options": [
+      "ইসলামী",
+      "ইসলামী",
+      "ইসলামী"
+    ],
+    "correct": 0,
+    "meaning": "ইসলামী ইসলামীজাহান্নামইসলামী আল্লাহইসলামী ইসলামী হৃদয়."
+  },
+  {
+    "q": "ইসলামী ইসলামী ইসলামী ইসলামী ইসলামী ইসলামী?",
+    "options": [
+      "ইসলামী ইসলামী",
+      "ইসলামী",
+      "ইসলামী"
+    ],
+    "correct": 0,
+    "meaning": "ইসলামী ইসলামী — ইসলামী ইবাদত में জীবনের."
+  },
+  {
+    "q": "ইসলামী তোমাকে উসকায়, ইসলামী…",
+    "options": [
+      "ইসলামী",
+      "ইসলামী",
+      "ইসলামী"
+    ],
+    "correct": 0,
+    "meaning": "ইসলামী ইসলামী ইসলামী में ইসলামী ইসলামী."
+  },
+  {
+    "q": "ইসলামী ইসলামী ইসলামী — হলো…",
+    "options": [
+      "ইসলামী",
+      "ইসলামী",
+      "ইসলামী"
+    ],
+    "correct": 0,
+    "meaning": "ইসলামী में ইসলামইসলামী ইসলামী ইসলামী ইসলামী."
+  },
+  {
+    "q": "ইসলামী ইসলামী ইসলামী ইসলামী?",
+    "options": [
+      "ইসলামী",
+      "ইসলামী",
+      "ইসলামী ইসলামী"
+    ],
+    "correct": 0,
+    "meaning": "ইসলামী ইসলামী ইসলামী."
+  },
+  {
+    "q": "ইসলামী ইসলামী ইসলামী ইসলামী — হলো…",
+    "options": [
+      "ইসলামী",
+      "ইসলামী",
+      "ইসলামী"
+    ],
+    "correct": 0,
+    "meaning": "ইসলামী ইসলামী ইসলামী মানুষদের ইসলামী."
+  },
+  {
+    "q": "পবিত্রতা ইসলামী ইসলামী ইসলামী — হলো…",
+    "options": [
+      "ইসলামী",
+      "ইসলামী",
+      "ইসলামী কাজ"
+    ],
+    "correct": 0,
+    "meaning": "ইসলামী ইসলামী না ইসলামী ইসলামী."
+  },
+  {
+    "q": "ইসলামী মানুষ ইসলামী সাহায্যের, ইসলামী…",
+    "options": [
+      "ইসলামী ইসলামী",
+      "ইসলামী ইসলামী",
+      "ইসলামী"
+    ],
+    "correct": 0,
+    "meaning": "ইসলামী ইসলামী ইসলামী ইসলামী ইসলামী ইসলামী."
+  },
+  {
+    "q": "ইসলামী — হলো…",
+    "options": [
+      "ইসলামী",
+      "ইসলামী ছাড়া ইসলামী",
+      "ইসলামী"
+    ],
+    "correct": 0,
+    "meaning": "ইসলামী ইসলামী ইসলামী ইসলামী ইসলামী ইসলামী ইসলামী."
+  },
+  {
+    "q": "ইসলামী ইসলামী প্রয়োজন…",
+    "options": [
+      "ইসলামী",
+      "ইসলামী ছাড়া ইসলামী",
+      "ইসলামী"
+    ],
+    "correct": 0,
+    "meaning": "ইসলামী পরিবারের শুরু হয় ইসলামী ইসলামী ইসলামী ইসলামী."
+  },
+  {
+    "q": "ইসলামী ভালো কাজ কাছে আল্লাহইসলামী…",
+    "options": [
+      "ইসলামী ইসলামী",
+      "ইসলামী ইসলামী",
+      "ইসলামী"
+    ],
+    "correct": 0,
+    "meaning": "ইসলামী ইসলামী কাজ ইসলামী ইসলামী ইসলামী ইসলামী ইসলামী."
+  },
+  {
+    "q": "ইসলামী ইসলামী में ভালো কাজইসলামী ইসলামী?",
+    "options": [
+      "ইসলামী",
+      "ইসলামী",
+      "ইসলামী"
+    ],
+    "correct": 0,
+    "meaning": "আল্লাহ ইসলামী ইসলামী, ইসলামী ইসলামী ইসলামীজাহান্নামইসলামী ইসলামী."
+  },
+  {
+    "q": "ইসলামী ইসলামী, ইসলামী ইসলামী দোয়া?",
+    "options": [
+      "ইসলামী",
+      "ইসলামী",
+      "ইসলামী ইসলামী"
+    ],
+    "correct": 0,
+    "meaning": "ইসলামী ইসলামী में ইসলামী ইসলামী."
+  },
+  {
+    "q": "ইসলামী ইসলামী ইসলামী ইসলামী ইসলামী জিহ্বাইসলামী?",
+    "options": [
+      "ইসলামী",
+      "ইসলামী",
+      "ইসলামী"
+    ],
+    "correct": 0,
+    "meaning": "আল্লাহ ইসলামী ইসলামী ইসলামী."
+  },
+  {
+    "q": "ইসলামী ইসলামী ইসলামীজাহান্নামইসলামী — হলো…",
+    "options": [
+      "আল্লাহ",
+      "ইসলামী ইসলামী",
+      "ইসলামী"
+    ],
+    "correct": 0,
+    "meaning": "ইসলামী — ইসলামী, ইসলামী ইসলামী ইসলামী — আল্লাহ."
+  },
+  {
+    "q": "ইসলামী ইসলামী ইসলামী, ইসলামী ইসলামী…",
+    "options": [
+      "আলহামদুলিল্লাহ",
+      "ইসলামী ইসলামী?",
+      "ইসলামী ইসলামী ইসলামী"
+    ],
+    "correct": 0,
+    "meaning": "ইসলামী ইসলামী ইসলামী ইসলামী."
+  },
+  {
+    "q": "ইসলামী ইসলামী কাজ, ইসলামী…",
+    "options": [
+      "ইসলামী ইসলামী আল্লাহ",
+      "ইসলামী",
+      "ইসলামী ইসলামী"
+    ],
+    "correct": 0,
+    "meaning": "ইসলামী মানুষ ইসলামী ইসলামী আল্লাহইসলামী."
+  },
+  {
+    "q": "ইসলামী ইসলামী ইসলামী ইসলামী, ইসলামী…",
+    "options": [
+      "ইসলামী ইসলামী",
+      "ইসলামী",
+      "ইসলামী"
+    ],
+    "correct": 0,
+    "meaning": "ইসলামী জন্য ইসলামী ইসলামী হৃদয় ইসলামী ইসলামী."
+  },
+  {
+    "q": "ইসলামী ইসলামী-ইসলামী ইসলামী, ইসলামী…",
+    "options": [
+      "ইসলামী ইসলামী",
+      "ইসলামী",
+      "ইসলামী"
+    ],
+    "correct": 0,
+    "meaning": "ইসলামী ইসলামী ইসলামী ইসলামী."
+  }
+];
+  const TASK_PREFIX = "barakaway_today_bn_";
+  const MICRO_TODAY_KEY = "barakaway_micro_question_today_bn_v1";
+  const MICRO_HISTORY_KEY = "barakaway_micro_question_history_bn_v1";
+  const MICRO_ANSWER_PREFIX = "barakaway_micro_answer_bn_";
+
+  function localDateKey(date){
+    const y = date.getFullYear();
+    const m = String(date.getMonth() + 1).padStart(2, "0");
+    const d = String(date.getDate()).padStart(2, "0");
+    return y + "-" + m + "-" + d;
+  }
+
+  function todayKey(){
+    return localDateKey(new Date());
+  }
+
+  function daysBetween(a, b){
+    const da = new Date(a + "T00:00:00");
+    const db = new Date(b + "T00:00:00");
+    return Math.round((db - da) / 86400000);
+  }
+
+  function safeJsonParse(value, fallback){
+    try{return JSON.parse(value);}catch(e){return fallback;}
+  }
+
+  function taskKey(name){
+    return TASK_PREFIX + todayKey() + "_" + name;
+  }
+
+  function markDone(name){
+    localStorage.setItem(taskKey(name), "1");
+  }
+
+  function isDone(name){
+    return localStorage.getItem(taskKey(name)) === "1";
+  }
+
+  function redOpacity(){
+    const now = new Date();
+    const minutes = now.getHours() * 60 + now.getMinutes();
+    return Math.max(0.10, Math.min(0.90, minutes / 1440)).toFixed(2);
+  }
+
+  function pickQuestionForআজ(){
+    const today = todayKey();
+    const START_KEY = 'barakaway_linear_program_start_bn_v1';
+    let start = localStorage.getItem(START_KEY);
+    if(!start){
+      start = today;
+      localStorage.setItem(START_KEY, start);
+    }
+    const dayNumber = Math.max(0, daysBetween(start, today));
+    const index = MICRO_QUESTIONS.length ? (dayNumber % MICRO_QUESTIONS.length) : 0;
+    localStorage.setItem(MICRO_TODAY_KEY, JSON.stringify({date:today, index:index, mode:'linear', day:dayNumber + 1}));
+    return {index:index, item:MICRO_QUESTIONS[index]};
+  }
+
+  function getAnswerState(){
+    return safeJsonParse(localStorage.getItem(MICRO_ANSWER_PREFIX + todayKey()), null);
+  }
+
+  function setAnswerState(index, selected){
+    localStorage.setItem(MICRO_ANSWER_PREFIX + todayKey(), JSON.stringify({date:todayKey(), index:index, selected:selected}));
+    markDone("micro");
+  }
+
+  function setCardState(card, status, done){
+    if(!card) return;
+    card.classList.toggle("task-done", done);
+    card.classList.toggle("goal-done", done);
+    card.classList.toggle("micro-answered", done);
+    card.classList.toggle("task-urgent", !done && new Date().getHours() >= 18);
+    card.style.setProperty("--task-red-opacity", done ? "0" : redOpacity());
+    card.style.setProperty("--goal-red-opacity", done ? "0" : redOpacity());
+    card.setAttribute("aria-disabled", done ? "true" : "false");
+    if(status) status.textContent = done ? "✓" : "?";
+  }
+
+  function renderMicroQuestion(){
+    const selected = pickQuestionForআজ();
+    const q = selected.item;
+    const answerState = getAnswerState();
+    const done = isDone("micro") || (answerState && answerState.date === todayKey());
+
+    const card = document.getElementById("dailyMicroKnowledgeCard");
+    const status = document.getElementById("dailyMicroKnowledgeStatus");
+    const questionEl = document.getElementById("dailyMicroQuestion");
+    const optionsEl = document.getElementById("dailyMicroOptions");
+    const answerEl = document.getElementById("dailyMicroAnswer");
+
+    if(!card || !questionEl || !optionsEl || !answerEl) return;
+
+    questionEl.textContent = q.q;
+    optionsEl.innerHTML = "";
+
+    q.options.forEach(function(option, optionIndex){
+      const btn = document.createElement("button");
+      btn.type = "button";
+      btn.className = "micro-option";
+      btn.textContent = option;
+      btn.disabled = !!done;
+      btn.addEventListener("click", function(event){
+        event.preventDefault();
+        event.stopPropagation();
+        if(isDone("micro")) return;
+        setAnswerState(selected.index, optionIndex);
+        renderMicroQuestion();
+      });
+      optionsEl.appendChild(btn);
+    });
+
+    if(done){
+      const chosen = answerState && Number.isInteger(answerState.selected) ? answerState.selected : q.correct;
+      const correctText = q.options[q.correct];
+      const chosenText = q.options[chosen] || "";
+      const prefix = chosen === q.correct ? "সঠিক।" : "সঠিক উত্তর:";
+      answerEl.innerHTML = "<strong>" + prefix + "</strong> " + correctText + "<br><strong>অর্থ:</strong> " + q.meaning;
+      answerEl.classList.add("show");
+      markDone("micro");
+    }else{
+      answerEl.innerHTML = "";
+      answerEl.classList.remove("show");
+    }
+
+    setCardState(card, status, !!done);
+  }
+
+  function enforceNameCounterLock(){
+    const card = document.getElementById("allahNameCounterCard");
+    const status = document.getElementById("allahNameCounterValue");
+    const fill = document.getElementById("allahNameCounterFill");
+    if(!card) return;
+
+    const nameCountKey = TASK_PREFIX + todayKey() + "_name_count";
+    const legacyKeys = ["barakaway_name_counter_" + todayKey(), "barakaway_name_counter_bn_" + todayKey()];
+
+    function readNumber(key){
+      return Math.max(0, Math.min(100, parseInt(localStorage.getItem(key) || "0", 10) || 0));
+    }
+
+    function readCount(){
+      let count = readNumber(nameCountKey);
+      legacyKeys.forEach(function(key){count = Math.max(count, readNumber(key));});
+      return count;
+    }
+
+    function writeCount(count){
+      const safe = Math.max(0, Math.min(100, count));
+      localStorage.setItem(nameCountKey, String(safe));
+      legacyKeys.forEach(function(key){localStorage.setItem(key, String(safe));});
+      if(safe >= 100) markDone("name");
+    }
+
+    function render(){
+      let count = readCount();
+      const done = isDone("name") || count >= 100;
+      if(done){
+        count = 100;
+        writeCount(100);
+        markDone("name");
+        card.classList.add("task-done", "goal-done");
+        card.classList.remove("task-urgent");
+        card.style.setProperty("--task-red-opacity", "0");
+        card.style.setProperty("--goal-red-opacity", "0");
+        card.setAttribute("aria-disabled", "true");
+        if(status) status.textContent = "✓";
+        if(fill) fill.style.width = "100%";
+        return;
+      }
+      card.classList.remove("task-done", "goal-done");
+      card.classList.toggle("task-urgent", new Date().getHours() >= 18);
+      card.setAttribute("aria-disabled", "false");
+      if(status) status.textContent = count + "/100";
+      if(fill) fill.style.width = count + "%";
+    }
+
+    function oneClick(event){
+      if(event){
+        event.preventDefault();
+        event.stopImmediatePropagation();
+        event.stopPropagation();
+      }
+      if(isDone("name") || readCount() >= 100){
+        render();
+        return;
+      }
+      writeCount(readCount() + 1);
+      render();
+    }
+
+    if(card.dataset.finalNameCounterLock !== "1"){
+      card.dataset.finalNameCounterLock = "1";
+      card.addEventListener("click", oneClick, true);
+      card.addEventListener("keydown", function(event){
+        if(event.key === "Enter" || event.key === " ") oneClick(event);
+      }, true);
+    }
+    render();
+  }
+
+  renderMicroQuestion();
+  enforceNameCounterLock();
+  document.addEventListener("DOMContentLoaded", function(){
+    renderMicroQuestion();
+    enforceNameCounterLock();
+  });
+  window.addEventListener("pageshow", function(){
+    renderMicroQuestion();
+    enforceNameCounterLock();
+  });
+  setInterval(function(){
+    renderMicroQuestion();
+    enforceNameCounterLock();
+  }, 1500);
+})();
+</script>
+
+
+<script>
+(function(){
+  const TOGGLE_KEY = 'barakaway_tahajjud_alarm_enabled_bn_v1';
+  const ALERTED_KEY_PREFIX = 'barakaway_tahajjud_alarm_alerted_bn_';
+  const OFFSET_MINUTES = 60;
+
+  const toggle = document.getElementById('tahajjudAlarmToggle');
+  const meta = document.getElementById('tahajjudAlarmMeta');
+  let alarmTimer = null;
+  let metaTimer = null;
+
+  if(!toggle || !meta) return;
+
+  function localDateKey(date){
+    const y = date.getFullYear();
+    const m = String(date.getMonth() + 1).padStart(2, '0');
+    const d = String(date.getDate()).padStart(2, '0');
+    return y + '-' + m + '-' + d;
+  }
+
+  function parseTimeToDate(value){
+    const clean = String(value || '').replace(/[^\d:]/g, '').trim();
+    const parts = clean.split(':').map(Number);
+    if(!Number.isFinite(parts[0]) || !Number.isFinite(parts[1])) return null;
+    const d = new Date();
+    d.setHours(parts[0], parts[1], 0, 0);
+    return d;
+  }
+
+  function getFajrDate(){
+    const timings = window.homePrayerশেয়ারState && window.homePrayerশেয়ারState.timings;
+    if(!timings || !timings.Fajr) return null;
+
+    const fajr = parseTimeToDate(timings.Fajr);
+    if(!fajr) return null;
+
+    const now = new Date();
+    if(fajr <= now){
+      fajr.setDate(fajr.getDate() + 1);
+    }
+    return fajr;
+  }
+
+  function getAlarmDate(){
+    const fajr = getFajrDate();
+    if(!fajr) return null;
+    return new Date(fajr.getTime() - OFFSET_MINUTES * 60000);
+  }
+
+  function formatTime(date){
+    return String(date.getHours()).padStart(2,'0') + ':' + String(date.getMinutes()).padStart(2,'0');
+  }
+
+  function playTahajjudSound(){
+    try{
+      const AudioContext = window.AudioContext || window.webkitAudioContext;
+      if(!AudioContext) return;
+      const ctx = new AudioContext();
+      const gain = ctx.createGain();
+      gain.gain.setValueAtTime(0.0001, ctx.currentTime);
+      gain.gain.exponentialRampToValueAtTime(0.16, ctx.currentTime + 0.04);
+      gain.gain.exponentialRampToValueAtTime(0.0001, ctx.currentTime + 1.8);
+      gain.connect(ctx.destination);
+
+      [0, 0.55, 1.1].forEach(function(delay){
+        const osc = ctx.createOscillator();
+        osc.type = 'sine';
+        osc.frequency.setValueAtTime(620, ctx.currentTime + delay);
+        osc.connect(gain);
+        osc.start(ctx.currentTime + delay);
+        osc.stop(ctx.currentTime + delay + 0.32);
+      });
+    }catch(e){}
+  }
+
+  function notifyTahajjud(){
+    const fajr = getFajrDate();
+    const body = fajr
+      ? 'ফজরের প্রায় ৬০ মিনিট বাকি। তাহাজ্জুদ নামাজ, দোয়া ও শান্ত যিকরের সময়।'
+      : 'তাহাজ্জুদ নামাজ, দোয়া ও শান্ত যিকরের সময়।';
+
+    playTahajjudSound();
+
+    if('Notification' in window && Notification.permission === 'granted'){
+      new Notification('🌙 BarakaWay — তাহাজ্জুদ', { body: body });
+    }else{
+      alert('🌙 BarakaWay\\n\\n' + body);
+    }
+  }
+
+  function updateMeta(){
+    const enabled = localStorage.getItem(TOGGLE_KEY) === '1';
+    const alarm = getAlarmDate();
+    const fajr = getFajrDate();
+
+    if(!enabled){
+      meta.textContent = 'ফজরের ৬০ মিনিট আগে';
+      return;
+    }
+
+    if(!alarm || !fajr){
+      meta.textContent = 'চালু হয়েছে। ফজরের সময় লোড হচ্ছে...';
+      return;
+    }
+
+    meta.textContent = 'চালু হয়েছে: ' + formatTime(alarm) + ' · ফজর ' + formatTime(fajr);
+  }
+
+  function scheduleAlarm(){
+    if(alarmTimer) clearTimeout(alarmTimer);
+    updateMeta();
+
+    if(localStorage.getItem(TOGGLE_KEY) !== '1') return;
+
+    const alarm = getAlarmDate();
+    if(!alarm) return;
+
+    const now = new Date();
+    const delay = alarm.getTime() - now.getTime();
+    const key = ALERTED_KEY_PREFIX + localDateKey(alarm);
+
+    if(delay <= 0){
+      return;
+    }
+
+    alarmTimer = setTimeout(function(){
+      if(localStorage.getItem(TOGGLE_KEY) !== '1') return;
+      if(localStorage.getItem(key) === '1') return;
+      localStorage.setItem(key, '1');
+      notifyTahajjud();
+      scheduleAlarm();
+    }, Math.min(delay, 2147483647));
+  }
+
+  toggle.checked = localStorage.getItem(TOGGLE_KEY) === '1';
+  updateMeta();
+  scheduleAlarm();
+
+  toggle.addEventListener('change', async function(){
+    localStorage.setItem(TOGGLE_KEY, toggle.checked ? '1' : '0');
+
+    if(toggle.checked && 'Notification' in window && Notification.permission === 'default'){
+      try{ await Notification.requestPermission(); }catch(e){}
+    }
+
+    updateMeta();
+    scheduleAlarm();
+  });
+
+  if(metaTimer) clearInterval(metaTimer);
+  metaTimer = setInterval(function(){
+    updateMeta();
+    scheduleAlarm();
+  }, 60000);
+
+  window.addEventListener('pageshow', function(){
+    updateMeta();
+    scheduleAlarm();
+  });
+})();
+</script>
+
+<script src="/theme-toggle.js"></script>
+<script src="/bottom-nav.js"></script>
+
+<script>
+(function(){
+  const TASK_PREFIX = "barakaway_today_bn_";
+
+  function localDateKey(date){
+    const y = date.getFullYear();
+    const m = String(date.getMonth() + 1).padStart(2, "0");
+    const d = String(date.getDate()).padStart(2, "0");
+    return y + "-" + m + "-" + d;
+  }
+
+  function todayKey(){
+    return localDateKey(new Date());
+  }
+
+  function taskDoneKey(){
+    return TASK_PREFIX + todayKey() + "_name";
+  }
+
+  function taskCountKey(){
+    return TASK_PREFIX + todayKey() + "_name_count";
+  }
+
+  function legacyCountKeys(){
+    return [
+      "barakaway_name_counter_" + todayKey(),
+      "barakaway_name_counter_bn_" + todayKey()
+    ];
+  }
+
+  function readNumber(key){
+    return Math.max(0, Math.min(100, parseInt(localStorage.getItem(key) || "0", 10) || 0));
+  }
+
+  function isNameDone(){
+    return localStorage.getItem(taskDoneKey()) === "1" || readNameCount() >= 100;
+  }
+
+  function setNameDone(){
+    localStorage.setItem(taskDoneKey(), "1");
+    localStorage.setItem(taskCountKey(), "100");
+    legacyCountKeys().forEach(function(key){
+      localStorage.setItem(key, "100");
+    });
+  }
+
+  function readNameCount(){
+    let count = readNumber(taskCountKey());
+    legacyCountKeys().forEach(function(key){
+      count = Math.max(count, readNumber(key));
+    });
+    return Math.max(0, Math.min(100, count));
+  }
+
+  function writeNameCount(count){
+    const safeCount = Math.max(0, Math.min(100, count));
+    localStorage.setItem(taskCountKey(), String(safeCount));
+    legacyCountKeys().forEach(function(key){
+      localStorage.setItem(key, String(safeCount));
+    });
+    if(safeCount >= 100){
+      setNameDone();
+    }
+  }
+
+  function renderNameCounter(){
+    const card = document.getElementById("allahNameCounterCard");
+    const status = document.getElementById("allahNameCounterValue");
+    const fill = document.getElementById("allahNameCounterFill");
+    const nameEl = document.getElementById("allahNameআজ");
+    const meaningEl = document.getElementById("allahNameMeaning");
+
+    if(!card) return;
+
+    let count = readNameCount();
+    const done = isNameDone();
+
+    if(done){
+      count = 100;
+      setNameDone();
+      card.classList.add("task-done", "goal-done");
+      card.classList.remove("task-urgent");
+      card.style.setProperty("--task-red-opacity", "0");
+      card.style.setProperty("--goal-red-opacity", "0");
+      card.setAttribute("aria-disabled", "true");
+      card.setAttribute("aria-label", "আজ আল্লাহর নামের কাজ সম্পন্ন হয়েছে। পুনরাবৃত্তি শেষ।");
+      if(status) status.textContent = "✓";
+      if(fill) fill.style.width = "100%";
+      return;
+    }
+
+    card.classList.remove("task-done", "goal-done");
+    card.classList.toggle("task-urgent", new Date().getHours() >= 18);
+    card.setAttribute("aria-disabled", "false");
+
+    if(status) status.textContent = count + "/100";
+    if(fill) fill.style.width = count + "%";
+
+    const labelName = nameEl ? nameEl.textContent.trim() : "আল্লাহর নাম";
+    const labelMeaning = meaningEl ? meaningEl.textContent.trim() : "";
+    card.setAttribute("aria-label", labelName + ": " + count + " ১০০ বার পড়ার মধ্যে। " + labelMeaning);
+  }
+
+  function completeOneNameClick(event){
+    const card = document.getElementById("allahNameCounterCard");
+    if(!card) return;
+
+    if(event){
+      event.preventDefault();
+      event.stopImmediatePropagation();
+      event.stopPropagation();
+    }
+
+    if(isNameDone()){
+      renderNameCounter();
+      return;
+    }
+
+    const nextCount = Math.min(100, readNameCount() + 1);
+    writeNameCount(nextCount);
+    renderNameCounter();
+  }
+
+  function bindNameCounterLock(){
+    const card = document.getElementById("allahNameCounterCard");
+    if(!card || card.dataset.nameCounterLocked === "1") return;
+
+    card.dataset.nameCounterLocked = "1";
+
+    card.addEventListener("click", function(event){
+      completeOneNameClick(event);
+    }, true);
+
+    card.addEventListener("keydown", function(event){
+      if(event.key === "Enter" || event.key === " "){
+        completeOneNameClick(event);
+      }
+    }, true);
+
+    renderNameCounter();
+  }
+
+  bindNameCounterLock();
+  setInterval(renderNameCounter, 1000);
+})();
+</script>
+
+<script id="barakaway-home-bottom-nav-bn-sync">
+(function(){
+  const NAMES_LINK = "names-bn.html";
+  const CHAT_LINK = "private-chat-bn.html";
+
+  function svgNames(){
+    return '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3a7 7 0 0 0-7 7c0 4.4 4.1 8.2 6.2 9.8a1.3 1.3 0 0 0 1.6 0C14.9 18.2 19 14.4 19 10a7 7 0 0 0-7-7zm0 3.2A3.8 3.8 0 1 1 12 13.8 3.8 3.8 0 0 1 12 6.2z"/></svg>';
+  }
+
+  function svgChat(){
+    return '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 5.5A3.5 3.5 0 0 1 7.5 2h9A3.5 3.5 0 0 1 20 5.5v7A3.5 3.5 0 0 1 16.5 16H11l-5.2 4.1A1.1 1.1 0 0 1 4 19.2V5.5zM8 7.5a1 1 0 1 0 0 2h8a1 1 0 1 0 0-2H8zm0 4a1 1 0 1 0 0 2h5.5a1 1 0 1 0 0-2H8z"/></svg>';
+  }
+
+  function normalizeText(value){
+    return String(value || "").trim().toLowerCase();
+  }
+
+  function isCurrentPage(target){
+    const fileName = (window.location.pathname || "").split("/").pop().toLowerCase();
+    return fileName === String(target || "").toLowerCase();
+  }
+
+  function updateBottomNav(){
+    const items = document.querySelectorAll(".bottom-app-nav-item");
+    if(!items.length) return false;
+
+    items.forEach(function(item){
+      const label = item.querySelector(".bottom-app-nav-label");
+      const icon = item.querySelector(".bottom-app-nav-icon");
+      const labelText = normalizeText(label ? label.textContent : item.textContent);
+      const href = (item.getAttribute("href") || "").toLowerCase();
+
+      const isQuranSlot = labelText === "কুরআন" || labelText === "quran" || href.indexOf("quran-bn.html") !== -1;
+      const isHolidaySlot = labelText === "উৎসব" || labelText === "ইসলামী উৎসব" || labelText === "holidays" || href.indexOf("holidays-bn.html") !== -1;
+      const isNamesSlot = labelText === "৯৯ নাম" || href.indexOf("names-bn.html") !== -1;
+      const isChatSlot = labelText === "চ্যাট" || labelText === "private chat" || href.indexOf("private-chat-bn.html") !== -1;
+
+      if(isQuranSlot || isNamesSlot){
+        item.setAttribute("href", NAMES_LINK);
+        item.dataset.barakaNavRole = "names";
+        if(label) label.textContent = "৯৯ নাম";
+        if(icon) icon.innerHTML = svgNames();
+        item.setAttribute("aria-label", "আল্লাহর ৯৯ নাম");
+        item.classList.toggle("active", isCurrentPage(NAMES_LINK));
+      }
+
+      if(isHolidaySlot || isChatSlot){
+        item.setAttribute("href", CHAT_LINK);
+        item.dataset.barakaNavRole = "private-chat";
+        if(label) label.textContent = "চ্যাট";
+        if(icon) icon.innerHTML = svgChat();
+        item.setAttribute("aria-label", "ব্যক্তিগত চ্যাট");
+        item.classList.toggle("active", isCurrentPage(CHAT_LINK));
+      }
+    });
+
+    return true;
+  }
+
+  function boot(){
+    updateBottomNav();
+    const navObserver = new MutationObserver(function(){ updateBottomNav(); });
+    navObserver.observe(document.body, {childList:true, subtree:true});
+    let tries = 0;
+    const timer = setInterval(function(){
+      tries += 1;
+      updateBottomNav();
+      if(tries > 30) clearInterval(timer);
+    }, 250);
+  }
+
+  if(document.readyState === "loading"){
+    document.addEventListener("DOMContentLoaded", boot);
+  }else{
+    boot();
+  }
+})();
+</script>
+</body>
+</html>
+
+
+
+

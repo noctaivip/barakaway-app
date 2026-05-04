@@ -9,11 +9,10 @@ In the name of Allah, the Most Merciful, the Most Compassionate
 <script>
 (function(){
   const savedTheme = localStorage.getItem('siteTheme');
-  if(savedTheme === 'light'){
-    document.documentElement.classList.add('light-mode');
+  if(savedTheme){
+    document.documentElement.classList.add(savedTheme + '-mode');
   } else {
     document.documentElement.classList.add('dark-mode');
-    localStorage.setItem('siteTheme','dark');
   }
 })();
 </script>
@@ -46,7 +45,7 @@ border-radius:0 0 8px 8px;
 .ramadan-text{
 display:inline-block;
 padding-left:100%;
-animation:ramadanMove 18s linear infinite;
+animation:none;
 }
 
 @keyframes ramadanMove{
@@ -617,8 +616,8 @@ h1{
     width:46px;
     height:46px;
     border-radius:50%;
-    backdrop-filter:blur(12px);
-    -webkit-backdrop-filter:blur(12px);
+    
+    -webkit-
     display:flex;
     align-items:center;
     justify-content:center;
@@ -795,15 +794,15 @@ html.light-mode .mobile-promo-line{
 }
 
 .mobile-promo-line{
-  animation:promoBreath 4s ease-in-out infinite;
+  animation:none;
 }
 
 .share-overlay{
   display:none;
   position:fixed;
   inset:0;
-  backdrop-filter:blur(6px);
-  -webkit-backdrop-filter:blur(6px);
+  
+  -webkit-
   z-index:3000;
   padding:20px;
   box-sizing:border-box;
@@ -1003,13 +1002,13 @@ html.light-mode .share-close{
   animation: premiumPulse 1.4s ease;
 }
 
-.install-help-overlay{display:none;position:fixed;inset:0;backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px);z-index:3200;padding:16px;box-sizing:border-box;align-items:center;justify-content:center;transition:background .25s}
-html.dark-mode .install-help-overlay{background:rgba(9,12,16,0.62)}
-html.light-mode .install-help-overlay{background:rgba(15,24,18,0.46)}
+
+html.dark-mode 
+html.light-mode 
 .install-help-overlay.open{display:flex}
-.install-help-sheet{width:min(100%,520px);border-radius:28px;padding:22px 20px 18px;transition:background .25s,border-color .25s,box-shadow .25s}
-html.dark-mode .install-help-sheet{background:linear-gradient(180deg,#171d24 0%, #141a20 100%);border:1px solid #2a3138;box-shadow:0 24px 54px rgba(0,0,0,0.35)}
-html.light-mode .install-help-sheet{background:linear-gradient(180deg,#ffffff 0%, #fbfdfc 100%);border:1px solid #dfe8e2;box-shadow:0 24px 54px rgba(18,34,24,0.22)}
+
+html.dark-mode 
+html.light-mode 
 .install-help-title{text-align:center;font-size:24px;font-weight:800;margin-bottom:10px}
 html.dark-mode .install-help-title{color:#f5f7fa}
 html.light-mode .install-help-title{color:#1f2a22}
