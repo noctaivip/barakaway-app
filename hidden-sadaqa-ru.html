@@ -1407,6 +1407,407 @@ button span{
 }
 </style>
 
+
+<style id="hidden-sadaqa-light-dark-consistency-final">
+/* Final consistency: every content block follows Light = light, Dark = dark. */
+
+/* LIGHT */
+html,
+body,
+html[data-theme="light"],
+body[data-theme="light"],
+html.light,
+body.light,
+html.light-mode,
+body.light-mode,
+html.theme-light,
+body.theme-light,
+html[data-bs-theme="light"],
+body[data-bs-theme="light"]{
+  --hs-bg:#f4f8f5;
+  --hs-shell:#ffffff;
+  --hs-card:#ffffff;
+  --hs-card-soft:#f7fbf8;
+  --hs-card-deep:#ffffff;
+  --hs-text:#10251b;
+  --hs-heading:#071810;
+  --hs-muted:#4d6357;
+  --hs-soft:#274b39;
+  --hs-border:rgba(35,122,69,.24);
+  --hs-border-strong:rgba(35,122,69,.38);
+  --hs-green:#176c3a;
+  --hs-green-bright:#1f8b4b;
+  --hs-gold:#725712;
+  --hs-shadow:0 20px 56px rgba(13,36,27,.12);
+  --hs-block-shadow:0 12px 30px rgba(13,36,27,.08);
+}
+
+/* DARK */
+@media (prefers-color-scheme: dark){
+  html:not([data-theme="light"]):not(.light):not(.light-mode):not(.theme-light):not([data-bs-theme="light"]),
+  body:not([data-theme="light"]):not(.light):not(.light-mode):not(.theme-light):not([data-bs-theme="light"]){
+    --hs-bg:#071512;
+    --hs-shell:#0d211b;
+    --hs-card:#112821;
+    --hs-card-soft:#142e26;
+    --hs-card-deep:#071713;
+    --hs-text:#edf8f1;
+    --hs-heading:#ffffff;
+    --hs-muted:#bedcc8;
+    --hs-soft:#d8f0e2;
+    --hs-border:rgba(126,255,174,.18);
+    --hs-border-strong:rgba(126,255,174,.32);
+    --hs-green:#8effb5;
+    --hs-green-bright:#7bf0a6;
+    --hs-gold:#ffe69a;
+    --hs-shadow:0 28px 80px rgba(0,0,0,.36);
+    --hs-block-shadow:0 16px 38px rgba(0,0,0,.18);
+  }
+}
+
+html[data-theme="dark"],
+body[data-theme="dark"],
+html.dark,
+body.dark,
+html.dark-mode,
+body.dark-mode,
+html.theme-dark,
+body.theme-dark,
+html[data-bs-theme="dark"],
+body[data-bs-theme="dark"],
+[data-theme="dark"]{
+  --hs-bg:#071512;
+  --hs-shell:#0d211b;
+  --hs-card:#112821;
+  --hs-card-soft:#142e26;
+  --hs-card-deep:#071713;
+  --hs-text:#edf8f1;
+  --hs-heading:#ffffff;
+  --hs-muted:#bedcc8;
+  --hs-soft:#d8f0e2;
+  --hs-border:rgba(126,255,174,.18);
+  --hs-border-strong:rgba(126,255,174,.32);
+  --hs-green:#8effb5;
+  --hs-green-bright:#7bf0a6;
+  --hs-gold:#ffe69a;
+  --hs-shadow:0 28px 80px rgba(0,0,0,.36);
+  --hs-block-shadow:0 16px 38px rgba(0,0,0,.18);
+}
+
+/* Page and all blocks */
+body{
+  background:
+    radial-gradient(circle at 50% -10%, color-mix(in srgb, var(--hs-green) 12%, transparent), transparent 34%),
+    var(--hs-bg) !important;
+  color:var(--hs-text) !important;
+}
+
+.container{
+  background:var(--hs-shell) !important;
+  color:var(--hs-text) !important;
+  border-color:var(--hs-border) !important;
+  box-shadow:var(--hs-shadow) !important;
+}
+
+.intro,
+.trust-card,
+.mobile-dropdown,
+.mobile-dropdown-content,
+.verification,
+.quote,
+.help-card,
+.help-principle,
+.donation-dropdown,
+.donation-dropdown-content,
+.wallet-box,
+.premium-progress-card,
+.premium-progress-value,
+.transactions,
+.tx{
+  background:var(--hs-card) !important;
+  color:var(--hs-text) !important;
+  border-color:var(--hs-border) !important;
+  box-shadow:var(--hs-block-shadow) !important;
+}
+
+.trust-card,
+.mobile-dropdown-content,
+.help-principle{
+  background:var(--hs-card-soft) !important;
+}
+
+.wallet-box,
+.premium-progress-value{
+  background:var(--hs-card-deep) !important;
+}
+
+/* Typography */
+h1,
+h2,
+h3,
+.section h2,
+.help-card h3,
+.premium-progress-heading,
+strong{
+  color:var(--hs-heading) !important;
+}
+
+p,
+div,
+span,
+li,
+.wallet,
+.tx{
+  color:var(--hs-text) !important;
+}
+
+.hero-subtitle,
+.intro p,
+.verification p,
+.help-lead,
+.donation-dropdown-content p,
+.quote,
+.help-principle{
+  color:var(--hs-soft) !important;
+}
+
+.small,
+.wallet-type,
+.trust-card span,
+.help-card p,
+.premium-progress-note,
+.donation-summary-note{
+  color:var(--hs-muted) !important;
+}
+
+a:not(.tronscan-check-link){
+  color:var(--hs-green) !important;
+}
+
+/* Action buttons */
+.page-action-btn{
+  background:var(--hs-card) !important;
+  border-color:var(--hs-border-strong) !important;
+  color:var(--hs-heading) !important;
+  box-shadow:var(--hs-block-shadow) !important;
+}
+
+.page-action-btn svg,
+.page-action-btn span{
+  color:var(--hs-heading) !important;
+  stroke:var(--hs-heading) !important;
+}
+
+/* Donation summary remains green in both modes, but readable */
+.donation-dropdown summary{
+  background:linear-gradient(135deg,#1f6f42,#2d7a46,#3fa862) !important;
+  color:#ffffff !important;
+}
+
+.donation-dropdown summary span,
+.donation-dropdown summary .donation-icon{
+  color:#ffffff !important;
+}
+
+/* Fund card must NOT stay dark in light mode */
+.premium-progress-card{
+  background:var(--hs-card) !important;
+}
+
+.premium-progress-heading{
+  color:var(--hs-green-bright) !important;
+}
+
+.premium-progress-value{
+  min-height:116px;
+}
+
+#premiumDonationAmount{
+  color:var(--hs-green-bright) !important;
+}
+
+#premiumDonationAmount .currency{
+  color:var(--hs-muted) !important;
+}
+
+/* Help cards */
+.help-card-icon{
+  background:color-mix(in srgb, var(--hs-green) 18%, var(--hs-card)) !important;
+  border-color:var(--hs-border-strong) !important;
+  color:var(--hs-heading) !important;
+}
+
+.help-card-status{
+  background:color-mix(in srgb, var(--hs-gold) 15%, var(--hs-card)) !important;
+  color:var(--hs-gold) !important;
+  border-color:color-mix(in srgb, var(--hs-gold) 34%, transparent) !important;
+}
+
+/* Tronscan link visible in both modes */
+.tronscan-check-link{
+  color:var(--hs-gold) !important;
+  background:color-mix(in srgb, var(--hs-gold) 15%, var(--hs-card)) !important;
+  border-color:color-mix(in srgb, var(--hs-gold) 45%, transparent) !important;
+}
+
+/* Last donations */
+.transactions .tx,
+#transactions{
+  color:var(--hs-text) !important;
+}
+
+/* Mobile dropdown title */
+.mobile-dropdown-title{
+  background:var(--hs-card-soft) !important;
+  color:var(--hs-heading) !important;
+  border-left-color:var(--hs-green-bright) !important;
+}
+
+/* Light-only: ensure no dark blocks remain */
+html[data-theme="light"] .premium-progress-card,
+body[data-theme="light"] .premium-progress-card,
+html.light .premium-progress-card,
+body.light .premium-progress-card,
+html.light-mode .premium-progress-card,
+body.light-mode .premium-progress-card,
+html.theme-light .premium-progress-card,
+body.theme-light .premium-progress-card,
+html[data-bs-theme="light"] .premium-progress-card,
+body[data-bs-theme="light"] .premium-progress-card{
+  background:#ffffff !important;
+  color:#10251b !important;
+}
+
+html[data-theme="light"] .premium-progress-card *,
+body[data-theme="light"] .premium-progress-card *,
+html.light .premium-progress-card *,
+body.light .premium-progress-card *,
+html.light-mode .premium-progress-card *,
+body.light-mode .premium-progress-card *,
+html.theme-light .premium-progress-card *,
+body.theme-light .premium-progress-card *,
+html[data-bs-theme="light"] .premium-progress-card *,
+body[data-bs-theme="light"] .premium-progress-card *{
+  color:#10251b !important;
+}
+
+html[data-theme="light"] #premiumDonationAmount,
+body[data-theme="light"] #premiumDonationAmount,
+html.light #premiumDonationAmount,
+body.light #premiumDonationAmount,
+html.light-mode #premiumDonationAmount,
+body.light-mode #premiumDonationAmount,
+html.theme-light #premiumDonationAmount,
+body.theme-light #premiumDonationAmount,
+html[data-bs-theme="light"] #premiumDonationAmount,
+body[data-bs-theme="light"] #premiumDonationAmount{
+  color:#1f8b4b !important;
+}
+
+/* Dark-only: ensure no light blocks remain, except QR/amount white area intentionally made readable */
+html[data-theme="dark"] .intro,
+html[data-theme="dark"] .trust-card,
+html[data-theme="dark"] .mobile-dropdown,
+html[data-theme="dark"] .mobile-dropdown-content,
+html[data-theme="dark"] .verification,
+html[data-theme="dark"] .quote,
+html[data-theme="dark"] .help-card,
+html[data-theme="dark"] .help-principle,
+html[data-theme="dark"] .donation-dropdown,
+html[data-theme="dark"] .donation-dropdown-content,
+html[data-theme="dark"] .wallet-box,
+html[data-theme="dark"] .premium-progress-card,
+html[data-theme="dark"] .transactions,
+body[data-theme="dark"] .intro,
+body[data-theme="dark"] .trust-card,
+body[data-theme="dark"] .mobile-dropdown,
+body[data-theme="dark"] .mobile-dropdown-content,
+body[data-theme="dark"] .verification,
+body[data-theme="dark"] .quote,
+body[data-theme="dark"] .help-card,
+body[data-theme="dark"] .help-principle,
+body[data-theme="dark"] .donation-dropdown,
+body[data-theme="dark"] .donation-dropdown-content,
+body[data-theme="dark"] .wallet-box,
+body[data-theme="dark"] .premium-progress-card,
+body[data-theme="dark"] .transactions,
+html.dark .intro,
+html.dark .trust-card,
+html.dark .mobile-dropdown,
+html.dark .mobile-dropdown-content,
+html.dark .verification,
+html.dark .quote,
+html.dark .help-card,
+html.dark .help-principle,
+html.dark .donation-dropdown,
+html.dark .donation-dropdown-content,
+html.dark .wallet-box,
+html.dark .premium-progress-card,
+html.dark .transactions,
+body.dark .intro,
+body.dark .trust-card,
+body.dark .mobile-dropdown,
+body.dark .mobile-dropdown-content,
+body.dark .verification,
+body.dark .quote,
+body.dark .help-card,
+body.dark .help-principle,
+body.dark .donation-dropdown,
+body.dark .donation-dropdown-content,
+body.dark .wallet-box,
+body.dark .premium-progress-card,
+body.dark .transactions{
+  background:#112821 !important;
+  color:#edf8f1 !important;
+}
+
+html[data-theme="dark"] .premium-progress-value,
+body[data-theme="dark"] .premium-progress-value,
+html.dark .premium-progress-value,
+body.dark .premium-progress-value{
+  background:#071713 !important;
+}
+
+html[data-theme="dark"] #premiumDonationAmount,
+body[data-theme="dark"] #premiumDonationAmount,
+html.dark #premiumDonationAmount,
+body.dark #premiumDonationAmount{
+  color:#7cffaa !important;
+}
+</style>
+
+
+<style id="spacing-fix">
+/* Fix: content touching borders in sections */
+.section,
+.mobile-dropdown-content .section,
+.verification,
+.intro,
+.help-principle,
+.transactions{
+  padding:22px 20px !important;
+}
+
+.mobile-dropdown-content{
+  padding:18px !important;
+}
+
+.section h2{
+  margin-top:0 !important;
+}
+
+.verification p{
+  margin-top:0;
+  margin-bottom:14px;
+}
+
+/* Ensure inner spacing from borders */
+.verification{
+  padding:20px 22px !important;
+  border-radius:16px;
+}
+</style>
+
 </head>
 <body>
 <div class="mobile-top-controls">
