@@ -1,0 +1,887 @@
+<!--
+بِسْمِ ٱللَّٰهِ ٱلرَّحْمَـٰنِ ٱلرَّحِيمِ
+In the name of Allah, the Most Merciful, the Most Compassionate
+-->
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<script async data-goatcounter="https://onedollarexit.goatcounter.com/count" src="//gc.zgo.at/count.js"></script>
+<link rel="icon" href="/favicon.png" type="image/png">
+<link rel="manifest" href="/manifest.json">
+<meta name="theme-color" content="#2d7a46">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="default">
+<title>Мечети поблизости — BarakaWay</title>
+<meta name="description" content="Ближайшие мечети по вашей геолокации: название, адрес, расстояние, копирование адреса и маршрут в навигаторе.">
+<style>
+:root{
+  --bg:#f6f5ef;
+  --text:#17221c;
+  --muted:#64736a;
+  --card:#fffef9;
+  --soft:#f4f1e7;
+  --border:rgba(126,94,35,.18);
+  --gold:#b58a36;
+  --gold2:#d7b56d;
+  --green:#2d7a46;
+  --shadow:0 26px 70px rgba(28,31,24,.12);
+  --shadow2:0 14px 38px rgba(28,31,24,.08);
+}
+html.dark-mode{
+  --bg:#071115;
+  --text:#eef7f2;
+  --muted:#9dafaa;
+  --card:#101b20;
+  --soft:#14242b;
+  --border:rgba(215,181,109,.20);
+  --shadow:0 28px 70px rgba(0,0,0,.48);
+  --shadow2:0 14px 36px rgba(0,0,0,.28);
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+  margin:0;
+  font-family:system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
+  background:radial-gradient(circle at 50% -10%,rgba(215,181,109,.18),transparent 36%),linear-gradient(180deg,var(--bg),var(--bg));
+  color:var(--text);
+  line-height:1.65;
+  padding-bottom:96px;
+}
+button,input{font:inherit}
+.container{
+  max-width:1000px;
+  margin:0 auto;
+  background:linear-gradient(180deg,rgba(255,255,255,.76),rgba(255,255,255,.58)),var(--card);
+  padding:34px 22px 46px;
+  box-shadow:var(--shadow);
+  border:1px solid rgba(215,181,109,.18);
+  border-radius:0 0 34px 34px;
+}
+html.dark-mode .container{
+  background:linear-gradient(180deg,rgba(18,30,36,.98),rgba(12,22,27,.98));
+}
+.hero{
+  text-align:center;
+  margin:0 auto 18px;
+  padding:22px 16px 24px;
+  border-radius:30px;
+  background:radial-gradient(circle at 50% 0%,rgba(215,181,109,.18),transparent 44%),linear-gradient(180deg,rgba(45,122,70,.10),rgba(215,181,109,.06));
+  border:1px solid rgba(215,181,109,.24);
+}
+.bismillah{
+  direction:rtl;
+  font-size:25px;
+  line-height:1.6;
+  color:var(--gold);
+  font-weight:600;
+  margin-bottom:8px;
+}
+h1{
+  font-size:40px;
+  line-height:1.08;
+  margin:0 0 8px;
+  letter-spacing:-.035em;
+}
+.subtitle{
+  margin:0 auto;
+  max-width:760px;
+  color:var(--muted);
+  font-size:15px;
+  font-weight:650;
+}
+.top-actions{
+  position:sticky;
+  top:0;
+  z-index:2200;
+  width:min(100%,820px);
+  margin:12px auto 0;
+  padding:10px 6px 8px;
+  display:grid;
+  grid-template-columns:repeat(4,minmax(0,1fr));
+  gap:12px;
+  background:linear-gradient(180deg,rgba(18,30,36,.98),rgba(18,30,36,.94));
+  backdrop-filter:blur(14px);
+  -webkit-backdrop-filter:blur(14px);
+}
+html.light-mode .top-actions{
+  background:linear-gradient(180deg,rgba(255,254,249,.98),rgba(255,254,249,.94));
+}
+.action{
+  appearance:none;
+  border:1px solid rgba(181,138,54,.25);
+  border-radius:22px;
+  min-height:72px;
+  padding:8px 5px;
+  background:linear-gradient(180deg,rgba(255,255,255,.72),rgba(215,181,109,.08));
+  color:#8a681f;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  justify-content:center;
+  gap:5px;
+  cursor:pointer;
+  font-size:12px;
+  line-height:1.05;
+  font-weight:850;
+  transition:.18s ease;
+  text-align:center;
+  box-shadow:0 12px 28px rgba(0,0,0,.12);
+}
+html.dark-mode .action{
+  background:linear-gradient(180deg,rgba(255,255,255,.05),rgba(215,181,109,.08));
+  color:var(--gold2);
+}
+.action:hover{transform:translateY(-1px);box-shadow:0 10px 24px rgba(18,34,24,.10)}
+.action:active{transform:scale(.96)}
+.action.is-active{
+  color:#fff;
+  border-color:rgba(45,122,70,.35);
+  background:linear-gradient(135deg,#2d7a46,#4caf6a);
+}
+.action svg{
+  width:25px;
+  height:25px;
+  fill:none;
+  stroke:currentColor;
+  stroke-width:2;
+  stroke-linecap:round;
+  stroke-linejoin:round;
+}
+.status-panel{
+  margin:18px auto;
+  padding:18px;
+  border-radius:24px;
+  background:linear-gradient(180deg,rgba(45,122,70,.08),rgba(215,181,109,.05));
+  border:1px solid rgba(215,181,109,.20);
+}
+.status-title{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:12px;
+  font-size:18px;
+  font-weight:900;
+  margin:0 0 6px;
+}
+.status-text{
+  margin:0;
+  color:var(--muted);
+  font-weight:650;
+}
+.location-grid{
+  display:grid;
+  grid-template-columns:1.2fr .8fr;
+  gap:12px;
+  margin-top:14px;
+}
+.info-box{
+  padding:14px;
+  border-radius:20px;
+  border:1px solid var(--border);
+  background:rgba(181,138,54,.06);
+}
+.info-label{
+  font-size:11px;
+  font-weight:900;
+  letter-spacing:1.1px;
+  text-transform:uppercase;
+  color:var(--muted);
+  margin-bottom:3px;
+}
+.info-value{
+  font-size:15px;
+  font-weight:850;
+  color:var(--text);
+  overflow:hidden;
+  text-overflow:ellipsis;
+}
+.search-wrap{
+  max-width:720px;
+  margin:0 auto 18px;
+  position:relative;
+}
+.search{
+  width:100%;
+  padding:15px 18px 15px 46px;
+  border:1px solid var(--border);
+  border-radius:18px;
+  background:var(--card);
+  color:var(--text);
+  outline:none;
+  box-shadow:0 8px 22px rgba(18,34,24,.05);
+  font-size:16px;
+}
+.search:focus{border-color:rgba(181,138,54,.45)}
+.search-icon{
+  position:absolute;
+  left:17px;
+  top:50%;
+  transform:translateY(-50%);
+  color:var(--gold);
+  font-weight:900;
+}
+.grid{display:grid;gap:16px}
+.card{
+  position:relative;
+  overflow:hidden;
+  background:radial-gradient(circle at 94% 0%,rgba(215,181,109,.12),transparent 35%),linear-gradient(180deg,var(--card),var(--card));
+  border:1px solid var(--border);
+  border-radius:26px;
+  padding:18px;
+  box-shadow:var(--shadow2);
+}
+.card::before{
+  content:"";
+  position:absolute;
+  left:0;
+  top:0;
+  bottom:0;
+  width:4px;
+  background:linear-gradient(180deg,var(--green),var(--gold2));
+  opacity:.72;
+}
+.card-head{
+  display:flex;
+  gap:12px;
+  align-items:flex-start;
+  margin-bottom:12px;
+}
+.idx{
+  min-width:58px;
+  width:58px;
+  height:46px;
+  border-radius:18px;
+  background:linear-gradient(135deg,#2d7a46,#4caf6a);
+  color:#fff;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-weight:850;
+  font-size:13px;
+}
+.meta{flex:1;min-width:0}
+.title{
+  font-size:20px;
+  font-weight:850;
+  margin:0 0 2px;
+}
+.distance{
+  display:inline-flex;
+  align-items:center;
+  min-height:28px;
+  margin-top:8px;
+  border-radius:999px;
+  padding:5px 10px;
+  background:rgba(181,138,54,.10);
+  border:1px solid rgba(181,138,54,.20);
+  color:var(--gold);
+  font-size:12px;
+  font-weight:900;
+}
+.address{
+  margin:10px 0 0;
+  color:var(--muted);
+  font-weight:650;
+}
+.label{
+  font-size:11px;
+  font-weight:850;
+  letter-spacing:1.2px;
+  text-transform:uppercase;
+  color:var(--muted);
+  margin:12px 0 5px;
+}
+.coordinates{
+  margin:0;
+  color:var(--text);
+  font-weight:650;
+}
+.card-actions{
+  display:grid;
+  grid-template-columns:repeat(4,minmax(0,1fr));
+  gap:8px;
+  margin-top:15px;
+  padding-top:13px;
+  border-top:1px solid rgba(181,138,54,.18);
+}
+.small-action{
+  appearance:none;
+  border:1px solid rgba(181,138,54,.23);
+  background:rgba(181,138,54,.07);
+  color:#8a681f;
+  min-height:44px;
+  border-radius:16px;
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  gap:6px;
+  cursor:pointer;
+  transition:.16s ease;
+  font-size:12px;
+  font-weight:900;
+  text-decoration:none;
+  text-align:center;
+}
+html.dark-mode .small-action{color:var(--gold2)}
+.small-action:hover{transform:translateY(-1px);background:rgba(45,122,70,.10)}
+.small-action:active{transform:scale(.96)}
+.small-action.primary{
+  background:linear-gradient(135deg,#2d7a46,#4caf6a);
+  color:#fff;
+  border-color:rgba(45,122,70,.3);
+}
+.small-action svg{
+  width:18px;
+  height:18px;
+  fill:none;
+  stroke:currentColor;
+  stroke-width:2;
+  stroke-linecap:round;
+  stroke-linejoin:round;
+}
+.empty{
+  padding:22px;
+  border:1px dashed var(--border);
+  border-radius:22px;
+  color:var(--muted);
+  font-weight:750;
+  text-align:center;
+}
+.notice{
+  margin:18px auto 0;
+  padding:14px 16px;
+  border-radius:20px;
+  border:1px solid rgba(215,181,109,.22);
+  background:rgba(181,138,54,.06);
+  color:var(--muted);
+  font-size:13px;
+  font-weight:650;
+}
+.toast{
+  position:fixed;
+  left:50%;
+  bottom:88px;
+  transform:translateX(-50%) translateY(16px);
+  z-index:3400;
+  max-width:min(92vw,460px);
+  padding:11px 14px;
+  border-radius:999px;
+  color:#111814;
+  background:linear-gradient(180deg,#f0d891,#c59b46);
+  box-shadow:0 16px 36px rgba(0,0,0,.28);
+  font-size:13px;
+  font-weight:850;
+  opacity:0;
+  pointer-events:none;
+  transition:.2s ease;
+  text-align:center;
+}
+.toast.is-visible{
+  opacity:1;
+  transform:translateX(-50%) translateY(0);
+}
+@media(max-width:720px){
+  body{padding-bottom:92px}
+  .container{padding:22px 12px 32px;border-radius:0}
+  .hero{border-radius:24px;padding:18px 12px 20px}
+  h1{font-size:31px}
+  .bismillah{font-size:21px}
+  .subtitle{font-size:14px}
+  .top-actions{
+    width:calc(100% + 24px);
+    max-width:none;
+    margin-left:-12px;
+    margin-right:-12px;
+    gap:8px;
+    padding:8px 10px 7px;
+  }
+  .action{min-height:64px;border-radius:17px;font-size:10.5px}
+  .action svg{width:22px;height:22px}
+  .location-grid{grid-template-columns:1fr}
+  .card{border-radius:22px;padding:16px 14px}
+  .title{font-size:17px}
+  .idx{min-width:54px;width:54px;height:42px;font-size:12px}
+  .card-actions{grid-template-columns:1fr 1fr}
+  .small-action{min-height:44px}
+  .search{font-size:15px;padding:14px 14px 14px 42px}
+}
+@media(max-width:390px){
+  .action-label{display:block;font-size:9.5px}
+  .action{min-height:60px;padding:6px 2px}
+  .action svg{width:21px;height:21px}
+}
+</style>
+<script src="/theme-init.js"></script>
+<link rel="stylesheet" href="/theme.css">
+<link rel="stylesheet" href="/theme-universal.css">
+</head>
+<body>
+<div class="container">
+  <section class="hero">
+    <div class="bismillah">بِسْمِ ٱللَّٰهِ ٱلرَّحْمَـٰنِ ٱلرَّحِيمِ</div>
+    <h1>Мечети поблизости</h1>
+    <p class="subtitle">Найдите ближайшие мечети, откройте маршрут, скопируйте адрес и сохраните удобную точку для навигатора.</p>
+  </section>
+
+  <div class="top-actions" aria-label="Действия страницы">
+    <button class="action" id="locateBtn" type="button">
+      <svg viewBox="0 0 24 24"><path d="M12 2v3"/><path d="M12 19v3"/><path d="M2 12h3"/><path d="M19 12h3"/><circle cx="12" cy="12" r="6"/><circle cx="12" cy="12" r="2"/></svg>
+      <span class="action-label">Найти рядом</span>
+    </button>
+    <button class="action" id="refreshBtn" type="button">
+      <svg viewBox="0 0 24 24"><path d="M21 12a9 9 0 0 1-15.5 6.2"/><path d="M3 12A9 9 0 0 1 18.5 5.8"/><path d="M18.5 2.8v3h-3"/><path d="M5.5 21.2v-3h3"/></svg>
+      <span class="action-label">Обновить</span>
+    </button>
+    <button class="action" id="nearestBtn" type="button">
+      <svg viewBox="0 0 24 24"><path d="M12 21s7-5.1 7-11a7 7 0 1 0-14 0c0 5.9 7 11 7 11z"/><circle cx="12" cy="10" r="2.5"/></svg>
+      <span class="action-label">Ближайшая</span>
+    </button>
+    <button class="action" id="themeBtn" type="button">
+      <svg viewBox="0 0 24 24"><path d="M12 3a6.5 6.5 0 1 0 9 9 8 8 0 1 1-9-9z"/></svg>
+      <span class="action-label">Тема</span>
+    </button>
+  </div>
+
+  <section class="status-panel">
+    <div class="status-title">
+      <span id="statusTitle">Готово к поиску</span>
+      <span id="resultCount">0</span>
+    </div>
+    <p class="status-text" id="statusText">Нажмите «Найти рядом», чтобы показать мечети рядом с вами.</p>
+    <div class="location-grid">
+      <div class="info-box">
+        <div class="info-label">Текущая локация</div>
+        <div class="info-value" id="userLocation">Ожидает определения</div>
+      </div>
+      <div class="info-box">
+        <div class="info-label">Поиск</div>
+        <div class="info-value" id="radiusLabel">ближайшие мечети</div>
+      </div>
+    </div>
+  </section>
+
+  <div class="search-wrap">
+    <span class="search-icon">⌕</span>
+    <input class="search" id="searchInput" type="search" placeholder="Поиск по названию или адресу мечети">
+  </div>
+
+  <main class="grid" id="results">
+    <div class="empty">Нажмите «Найти рядом», чтобы показать ближайшие мечети.</div>
+  </main>
+
+  <div class="notice">
+    Маршрут открывается в установленном навигаторе или в карте браузера. Адрес и координаты можно скопировать одним нажатием.
+  </div>
+</div>
+
+<div class="toast" id="toast"></div>
+
+<script>
+(function(){
+  "use strict";
+
+  const OVERPASS_ENDPOINTS = [
+    "https://overpass-api.de/api/interpreter",
+    "https://overpass.kumi.systems/api/interpreter"
+  ];
+
+  const state = {
+    coords:null,
+    mosques:[],
+    filtered:[],
+    radius:15000,
+    loading:false
+  };
+
+  const els = {
+    locateBtn:document.getElementById("locateBtn"),
+    refreshBtn:document.getElementById("refreshBtn"),
+    nearestBtn:document.getElementById("nearestBtn"),
+    themeBtn:document.getElementById("themeBtn"),
+    statusTitle:document.getElementById("statusTitle"),
+    statusText:document.getElementById("statusText"),
+    resultCount:document.getElementById("resultCount"),
+    userLocation:document.getElementById("userLocation"),
+    results:document.getElementById("results"),
+    searchInput:document.getElementById("searchInput"),
+    toast:document.getElementById("toast")
+  };
+
+  function toast(message){
+    els.toast.textContent = message;
+    els.toast.classList.add("is-visible");
+    clearTimeout(toast._timer);
+    toast._timer = setTimeout(() => els.toast.classList.remove("is-visible"), 2200);
+  }
+
+  function setStatus(title, text){
+    els.statusTitle.textContent = title;
+    els.statusText.textContent = text;
+  }
+
+  function escapeHtml(value){
+    return String(value ?? "").replace(/[&<>"']/g, ch => ({
+      "&":"&amp;",
+      "<":"&lt;",
+      ">":"&gt;",
+      '"':"&quot;",
+      "'":"&#039;"
+    }[ch]));
+  }
+
+  function toRad(n){ return n * Math.PI / 180; }
+
+  function distanceMeters(aLat, aLon, bLat, bLon){
+    const R = 6371000;
+    const dLat = toRad(bLat - aLat);
+    const dLon = toRad(bLon - aLon);
+    const lat1 = toRad(aLat);
+    const lat2 = toRad(bLat);
+    const x = Math.sin(dLat/2) ** 2 + Math.cos(lat1) * Math.cos(lat2) * (Math.sin(dLon/2) ** 2);
+    return 2 * R * Math.atan2(Math.sqrt(x), Math.sqrt(1 - x));
+  }
+
+  function formatDistance(meters){
+    if(!Number.isFinite(meters)) return "—";
+    if(meters < 1000) return `${Math.round(meters)} м`;
+    return `${(meters / 1000).toFixed(meters < 10000 ? 1 : 0)} км`;
+  }
+
+  function compactCoord(num){
+    return Number(num).toFixed(6);
+  }
+
+  function addressFromTags(tags){
+    const parts = [];
+    const street = tags["addr:street"];
+    const house = tags["addr:housenumber"];
+    const city = tags["addr:city"] || tags["addr:town"] || tags["addr:village"] || tags["addr:suburb"];
+    const district = tags["addr:district"];
+    if(street && house) parts.push(`${street}, ${house}`);
+    else if(street) parts.push(street);
+    if(district) parts.push(district);
+    if(city) parts.push(city);
+    return parts.filter(Boolean).join(", ");
+  }
+
+  function osmUrl(lat, lon){
+    return `https://www.openstreetmap.org/?mlat=${lat}&mlon=${lon}#map=18/${lat}/${lon}`;
+  }
+
+  function googleRouteUrl(lat, lon, name){
+    return `https://www.google.com/maps/dir/?api=1&destination=${lat},${lon}&travelmode=walking&query=${encodeURIComponent(name || "Mosque")}`;
+  }
+
+  function yandexRouteUrl(lat, lon){
+    return `https://yandex.com/maps/?rtext=~${lat},${lon}&rtt=auto`;
+  }
+
+  function nativeGeoUrl(lat, lon, name){
+    return `geo:${lat},${lon}?q=${lat},${lon}(${encodeURIComponent(name || "Mosque")})`;
+  }
+
+  function buildOverpassQuery(lat, lon, radius){
+    return `
+[out:json][timeout:25];
+(
+  node["amenity"="place_of_worship"]["religion"="muslim"](around:${radius},${lat},${lon});
+  way["amenity"="place_of_worship"]["religion"="muslim"](around:${radius},${lat},${lon});
+  relation["amenity"="place_of_worship"]["religion"="muslim"](around:${radius},${lat},${lon});
+  node["building"="mosque"](around:${radius},${lat},${lon});
+  way["building"="mosque"](around:${radius},${lat},${lon});
+  relation["building"="mosque"](around:${radius},${lat},${lon});
+  node["name"~"masjid|mosque|мечеть|مسجد",i](around:${radius},${lat},${lon});
+  way["name"~"masjid|mosque|мечеть|مسجد",i](around:${radius},${lat},${lon});
+);
+out center tags;
+`;
+  }
+
+  async function fetchOverpass(lat, lon, radius){
+    const query = buildOverpassQuery(lat, lon, radius);
+    let lastError = null;
+
+    for(const endpoint of OVERPASS_ENDPOINTS){
+      try{
+        const response = await fetch(endpoint, {
+          method:"POST",
+          headers:{"Content-Type":"application/x-www-form-urlencoded;charset=UTF-8"},
+          body:new URLSearchParams({data:query})
+        });
+        if(!response.ok) throw new Error("request failed");
+        return await response.json();
+      }catch(error){
+        lastError = error;
+      }
+    }
+
+    throw lastError || new Error("request failed");
+  }
+
+  async function reversePlaceName(lat, lon){
+    try{
+      const response = await fetch(`https://nominatim.openstreetmap.org/reverse?format=jsonv2&lat=${lat}&lon=${lon}`);
+      const data = await response.json();
+      const address = data.address || {};
+      const city = address.city || address.town || address.village || address.county || "";
+      const country = address.country || "";
+      return [city, country].filter(Boolean).join(", ") || "Локация определена";
+    }catch(error){
+      return "Локация определена";
+    }
+  }
+
+  function normalizeMosques(data, origin){
+    const seen = new Set();
+
+    return (data.elements || []).map(el => {
+      const tags = el.tags || {};
+      const lat = el.lat ?? el.center?.lat;
+      const lon = el.lon ?? el.center?.lon;
+      if(!Number.isFinite(lat) || !Number.isFinite(lon)) return null;
+
+      const name = tags.name || tags["name:ru"] || tags["name:en"] || tags["name:local"] || "Мечеть";
+      const address = addressFromTags(tags);
+      const fallbackAddress = address || `${compactCoord(lat)}, ${compactCoord(lon)}`;
+      const distance = distanceMeters(origin.lat, origin.lon, lat, lon);
+      const key = `${name.toLowerCase()}|${compactCoord(lat)}|${compactCoord(lon)}`;
+      if(seen.has(key)) return null;
+      seen.add(key);
+
+      return {
+        id:`${el.type}-${el.id}`,
+        name,
+        address:fallbackAddress,
+        distance,
+        lat,
+        lon
+      };
+    }).filter(Boolean).sort((a,b) => a.distance - b.distance);
+  }
+
+  function render(){
+    const query = els.searchInput.value.trim().toLowerCase();
+    state.filtered = state.mosques.filter(item => {
+      const hay = `${item.name} ${item.address}`.toLowerCase();
+      return !query || hay.includes(query);
+    });
+
+    els.resultCount.textContent = String(state.filtered.length);
+
+    if(state.loading){
+      els.results.innerHTML = `<div class="empty">Идёт поиск ближайших мечетей...</div>`;
+      return;
+    }
+
+    if(!state.filtered.length){
+      els.results.innerHTML = `<div class="empty">Мечети пока не найдены. Нажмите «Обновить» или попробуйте позже.</div>`;
+      return;
+    }
+
+    els.results.innerHTML = state.filtered.map((item, index) => {
+      const lat = compactCoord(item.lat);
+      const lon = compactCoord(item.lon);
+      const name = escapeHtml(item.name);
+      const address = escapeHtml(item.address);
+      const mapUrl = osmUrl(lat, lon);
+      const googleUrl = googleRouteUrl(lat, lon, item.name);
+      const yandexUrl = yandexRouteUrl(lat, lon);
+      const geoUrl = nativeGeoUrl(lat, lon, item.name);
+
+      return `
+        <article class="card" data-id="${escapeHtml(item.id)}">
+          <div class="card-head">
+            <div class="idx">${index + 1}</div>
+            <div class="meta">
+              <h2 class="title">${name}</h2>
+              <div class="distance">${formatDistance(item.distance)} от вас</div>
+              <p class="address">${address}</p>
+            </div>
+          </div>
+          <div class="label">Координаты</div>
+          <p class="coordinates">${lat}, ${lon}</p>
+          <div class="card-actions">
+            <a class="small-action primary" href="${geoUrl}">
+              <svg viewBox="0 0 24 24"><path d="M4 12l16-8-8 16-2-7-6-1z"/></svg>
+              Навигатор
+            </a>
+            <a class="small-action" href="${googleUrl}" target="_blank" rel="noopener">
+              <svg viewBox="0 0 24 24"><path d="M12 21s7-5.1 7-11a7 7 0 1 0-14 0c0 5.9 7 11 7 11z"/><circle cx="12" cy="10" r="2.5"/></svg>
+              Google
+            </a>
+            <a class="small-action" href="${yandexUrl}" target="_blank" rel="noopener">
+              <svg viewBox="0 0 24 24"><path d="M9 18l6-12"/><path d="M5 12h14"/></svg>
+              Yandex
+            </a>
+            <button class="small-action copy-btn" type="button" data-copy="${address}">
+              <svg viewBox="0 0 24 24"><rect x="8" y="8" width="12" height="12" rx="2"/><path d="M4 16V6a2 2 0 0 1 2-2h10"/></svg>
+              Адрес
+            </button>
+            <a class="small-action" href="${mapUrl}" target="_blank" rel="noopener">
+              <svg viewBox="0 0 24 24"><path d="M9 18l-6 3V6l6-3 6 3 6-3v15l-6 3-6-3z"/><path d="M9 3v15"/><path d="M15 6v15"/></svg>
+              Карта
+            </a>
+            <button class="small-action copy-btn" type="button" data-copy="${lat}, ${lon}">
+              <svg viewBox="0 0 24 24"><path d="M12 2v3"/><path d="M12 19v3"/><path d="M2 12h3"/><path d="M19 12h3"/><circle cx="12" cy="12" r="6"/></svg>
+              Коорд.
+            </button>
+            <button class="small-action share-btn" type="button" data-name="${name}" data-address="${address}" data-lat="${lat}" data-lon="${lon}">
+              <svg viewBox="0 0 24 24"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><path d="M8.6 10.8l6.8-4.1"/><path d="M8.6 13.2l6.8 4.1"/></svg>
+              Поделиться
+            </button>
+            <button class="small-action copy-btn" type="button" data-copy="${name} — ${address}">
+              <svg viewBox="0 0 24 24"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M4 4.5A2.5 2.5 0 0 1 6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5z"/></svg>
+              Точка
+            </button>
+          </div>
+        </article>
+      `;
+    }).join("");
+  }
+
+  async function locateAndSearch(force){
+    if(state.loading) return;
+
+    if(!navigator.geolocation){
+      setStatus("Автоопределение недоступно", "Откройте страницу на устройстве с доступом к геолокации.");
+      toast("Геолокация недоступна");
+      return;
+    }
+
+    state.loading = true;
+    render();
+    setStatus("Определяем локацию", "Разрешите доступ к местоположению, чтобы показать мечети рядом.");
+    els.locateBtn.classList.add("is-active");
+
+    navigator.geolocation.getCurrentPosition(async pos => {
+      const lat = pos.coords.latitude;
+      const lon = pos.coords.longitude;
+
+      state.coords = {lat, lon};
+      const placeName = await reversePlaceName(lat, lon);
+      els.userLocation.textContent = placeName;
+      setStatus("Локация определена", "Ищем ближайшие мечети.");
+
+      try{
+        const data = await fetchOverpass(lat, lon, state.radius);
+        state.mosques = normalizeMosques(data, {lat, lon}).slice(0, 30);
+        state.loading = false;
+        els.locateBtn.classList.remove("is-active");
+
+        if(state.mosques.length){
+          setStatus("Мечети поблизости", `Ближайшая мечеть: ${state.mosques[0].name}, ${formatDistance(state.mosques[0].distance)} от вас.`);
+        }else{
+          setStatus("Мечети не найдены", "Рядом с вами пока нет доступных точек в карте. Попробуйте обновить поиск.");
+        }
+
+        render();
+      }catch(error){
+        state.loading = false;
+        els.locateBtn.classList.remove("is-active");
+        state.mosques = [];
+        setStatus("Не удалось загрузить мечети", "Проверьте интернет и нажмите «Обновить».");
+        render();
+      }
+    }, error => {
+      state.loading = false;
+      els.locateBtn.classList.remove("is-active");
+      setStatus("Локация не определена", "Разрешите доступ к местоположению и нажмите «Найти рядом» ещё раз.");
+      render();
+    }, {
+      enableHighAccuracy:true,
+      timeout:18000,
+      maximumAge: force ? 0 : 300000
+    });
+  }
+
+  function openNearest(){
+    if(!state.mosques.length){
+      toast("Сначала найдите мечети поблизости");
+      return;
+    }
+    const nearest = state.mosques[0];
+    window.location.href = nativeGeoUrl(compactCoord(nearest.lat), compactCoord(nearest.lon), nearest.name);
+  }
+
+  async function copyText(text){
+    try{
+      await navigator.clipboard.writeText(text);
+      toast("Скопировано");
+    }catch(error){
+      const area = document.createElement("textarea");
+      area.value = text;
+      document.body.appendChild(area);
+      area.select();
+      document.execCommand("copy");
+      area.remove();
+      toast("Скопировано");
+    }
+  }
+
+  async function shareMosque(button){
+    const name = button.dataset.name || "Мечеть";
+    const address = button.dataset.address || "";
+    const lat = button.dataset.lat;
+    const lon = button.dataset.lon;
+    const text = `BarakaWay — ${name}\n${address}\nКоординаты: ${lat}, ${lon}\nМаршрут: ${googleRouteUrl(lat, lon, name)}`;
+
+    if(navigator.share){
+      try{
+        await navigator.share({title:name, text});
+        return;
+      }catch(error){}
+    }
+    await copyText(text);
+  }
+
+  function toggleTheme(){
+    const root = document.documentElement;
+    if(root.classList.contains("dark-mode")){
+      root.classList.remove("dark-mode");
+      root.classList.add("light-mode");
+      localStorage.setItem("barakawayMosquesTheme", "light");
+    }else{
+      root.classList.remove("light-mode");
+      root.classList.add("dark-mode");
+      localStorage.setItem("barakawayMosquesTheme", "dark");
+    }
+  }
+
+  function restoreTheme(){
+    const saved = localStorage.getItem("barakawayMosquesTheme");
+    if(saved === "light"){
+      document.documentElement.classList.remove("dark-mode");
+      document.documentElement.classList.add("light-mode");
+    }else if(saved === "dark"){
+      document.documentElement.classList.add("dark-mode");
+      document.documentElement.classList.remove("light-mode");
+    }
+  }
+
+  els.locateBtn.addEventListener("click", () => locateAndSearch(false));
+  els.refreshBtn.addEventListener("click", () => locateAndSearch(true));
+  els.nearestBtn.addEventListener("click", openNearest);
+  els.themeBtn.addEventListener("click", toggleTheme);
+  els.searchInput.addEventListener("input", render);
+
+  document.addEventListener("click", event => {
+    const copyBtn = event.target.closest(".copy-btn");
+    if(copyBtn){
+      copyText(copyBtn.dataset.copy || "");
+      return;
+    }
+
+    const shareBtn = event.target.closest(".share-btn");
+    if(shareBtn){
+      shareMosque(shareBtn);
+    }
+  });
+
+  restoreTheme();
+})();
+</script>
+<script src="/bottom-nav.js"></script>
+</body>
+</html>
