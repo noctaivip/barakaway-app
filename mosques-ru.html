@@ -554,6 +554,224 @@ html.dark-mode .small-action{color:var(--gold2)}
   }
 }
 
+
+/* === Platinum navigation layer === */
+.map-frame{
+  min-height:560px!important;
+}
+.nav-top-pill{
+  position:absolute;
+  left:14px;
+  top:14px;
+  right:82px;
+  z-index:950;
+  border:1px solid rgba(215,181,109,.28);
+  background:linear-gradient(180deg,rgba(18,30,36,.94),rgba(12,22,27,.90));
+  color:#fff;
+  border-radius:20px;
+  padding:12px 14px;
+  box-shadow:0 16px 38px rgba(0,0,0,.30);
+  backdrop-filter:blur(16px);
+  -webkit-backdrop-filter:blur(16px);
+  display:none;
+}
+html.light-mode .nav-top-pill{
+  background:linear-gradient(180deg,rgba(255,254,249,.96),rgba(255,254,249,.90));
+  color:#17221c;
+}
+.nav-top-pill.is-visible{display:block}
+.nav-main-step{
+  font-size:16px;
+  line-height:1.25;
+  font-weight:950;
+  margin:0;
+}
+.nav-sub-step{
+  font-size:12px;
+  color:var(--gold2);
+  font-weight:850;
+  margin:4px 0 0;
+}
+.map-float-stack{
+  position:absolute;
+  right:14px;
+  top:14px;
+  z-index:960;
+  display:grid;
+  gap:10px;
+}
+.map-float-btn{
+  width:52px;
+  height:52px;
+  border-radius:18px;
+  border:1px solid rgba(215,181,109,.30);
+  color:#fff;
+  background:linear-gradient(135deg,rgba(45,122,70,.96),rgba(76,175,106,.72));
+  box-shadow:0 12px 30px rgba(0,0,0,.30);
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  cursor:pointer;
+  font-size:22px;
+  font-weight:950;
+}
+.map-float-btn.secondary{
+  color:#111814;
+  background:linear-gradient(180deg,#f0d891,#c59b46);
+}
+.map-float-btn.is-active{
+  outline:3px solid rgba(215,181,109,.35);
+}
+.nav-bottom-sheet{
+  position:absolute;
+  left:12px;
+  right:12px;
+  bottom:12px;
+  z-index:955;
+  border-radius:24px;
+  border:1px solid rgba(215,181,109,.30);
+  background:linear-gradient(180deg,rgba(18,30,36,.96),rgba(12,22,27,.94));
+  color:#fff;
+  box-shadow:0 20px 46px rgba(0,0,0,.38);
+  backdrop-filter:blur(18px);
+  -webkit-backdrop-filter:blur(18px);
+  overflow:hidden;
+  display:none;
+}
+html.light-mode .nav-bottom-sheet{
+  background:linear-gradient(180deg,rgba(255,254,249,.97),rgba(255,254,249,.92));
+  color:#17221c;
+}
+.nav-bottom-sheet.is-visible{display:block}
+.nav-sheet-main{
+  padding:14px;
+  display:grid;
+  grid-template-columns:1fr auto;
+  gap:12px;
+  align-items:center;
+}
+.nav-title{
+  font-size:15px;
+  font-weight:950;
+  margin:0;
+}
+.nav-metrics{
+  margin:4px 0 0;
+  color:var(--gold2);
+  font-size:12px;
+  font-weight:900;
+}
+.nav-actions{
+  display:flex;
+  gap:8px;
+}
+.nav-action-btn{
+  border:0;
+  border-radius:16px;
+  min-height:44px;
+  padding:0 14px;
+  background:linear-gradient(135deg,#2d7a46,#4caf6a);
+  color:#fff;
+  font-weight:950;
+  cursor:pointer;
+}
+.nav-action-btn.gold{
+  color:#111814;
+  background:linear-gradient(180deg,#f0d891,#c59b46);
+}
+.turn-list{
+  max-height:210px;
+  overflow:auto;
+  border-top:1px solid rgba(215,181,109,.20);
+  padding:8px 10px 10px;
+  display:none;
+}
+.turn-list.is-open{display:block}
+.turn-item{
+  display:grid;
+  grid-template-columns:34px 1fr auto;
+  gap:8px;
+  align-items:center;
+  padding:9px 6px;
+  border-radius:14px;
+  color:inherit;
+}
+.turn-item.is-current{
+  background:rgba(45,122,70,.18);
+}
+.turn-icon{
+  width:30px;
+  height:30px;
+  border-radius:12px;
+  background:rgba(215,181,109,.16);
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  color:var(--gold2);
+  font-weight:950;
+}
+.turn-text{
+  font-size:12px;
+  line-height:1.25;
+  font-weight:800;
+}
+.turn-distance{
+  color:var(--gold2);
+  font-size:11px;
+  font-weight:900;
+  white-space:nowrap;
+}
+.start-drive-btn{
+  background:linear-gradient(135deg,#2d7a46,#4caf6a)!important;
+  color:#fff!important;
+}
+.route-btn{
+  background:linear-gradient(180deg,rgba(45,122,70,.12),rgba(215,181,109,.08))!important;
+}
+@media(max-width:720px){
+  .map-frame{
+    min-height:calc(100vh - 160px)!important;
+  }
+  #map{
+    height:calc(100vh - 160px)!important;
+    min-height:560px!important;
+  }
+  .nav-top-pill{
+    left:10px;
+    top:10px;
+    right:72px;
+    border-radius:18px;
+    padding:10px 12px;
+  }
+  .map-float-stack{
+    right:10px;
+    top:10px;
+  }
+  .map-float-btn{
+    width:48px;
+    height:48px;
+    border-radius:17px;
+    font-size:20px;
+  }
+  .nav-bottom-sheet{
+    left:8px;
+    right:8px;
+    bottom:8px;
+    border-radius:22px;
+  }
+  .nav-sheet-main{
+    grid-template-columns:1fr;
+    gap:10px;
+  }
+  .nav-actions{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+  }
+  .nav-action-btn{
+    min-height:42px;
+  }
+}
+
 </style>
 <script src="/theme-init.js"></script>
 <link rel="stylesheet" href="/theme.css">
@@ -564,7 +782,7 @@ html.dark-mode .small-action{color:var(--gold2)}
   <section class="hero">
     <div class="bismillah">بِسْمِ ٱللَّٰهِ ٱلرَّحْمَـٰنِ ٱلرَّحِيمِ</div>
     <h1>Мечети поблизости</h1>
-    <p class="subtitle">Карта, ближайшие мечети, точное расстояние, маршрут, GPS и быстрый запуск навигатора.</p>
+    <p class="subtitle">Карта, ближайшие мечети, GPS-сопровождение, пошаговый маршрут и быстрый запуск внешнего навигатора.</p>
   </section>
 
   <div class="top-actions" aria-label="Действия страницы">
@@ -611,6 +829,27 @@ html.dark-mode .small-action{color:var(--gold2)}
   <section class="map-panel">
     <div class="map-frame">
       <div id="map"></div>
+      <div class="nav-top-pill" id="navTopPill">
+        <p class="nav-main-step" id="navMainStep">Маршрут готов</p>
+        <p class="nav-sub-step" id="navSubStep">Нажмите «Добраться», чтобы включить сопровождение</p>
+      </div>
+      <div class="map-float-stack">
+        <button class="map-float-btn secondary" id="recenterBtn" type="button" aria-label="Моя локация">⌖</button>
+        <button class="map-float-btn" id="followBtn" type="button" aria-label="Следовать за мной">➤</button>
+      </div>
+      <div class="nav-bottom-sheet" id="navBottomSheet">
+        <div class="nav-sheet-main">
+          <div>
+            <p class="nav-title" id="navDestinationTitle">Выберите мечеть</p>
+            <p class="nav-metrics" id="navMetrics">Маршрут ещё не построен</p>
+          </div>
+          <div class="nav-actions">
+            <button class="nav-action-btn start-drive-btn" id="startDriveBtn" type="button">Добраться</button>
+            <button class="nav-action-btn gold" id="toggleTurnsBtn" type="button">Шаги</button>
+          </div>
+        </div>
+        <div class="turn-list" id="turnList"></div>
+      </div>
     </div>
   </section>
 
@@ -659,7 +898,14 @@ html.dark-mode .small-action{color:var(--gold2)}
     watchId:null,
     markers:new Map(),
     activeRouteId:null,
-    lastRouteRefresh:0
+    activeRoute:null,
+    activeSteps:[],
+    currentStepIndex:0,
+    followMode:false,
+    driveMode:false,
+    lastRouteRefresh:0,
+    headingMarker:null,
+    routeDestination:null
   };
 
   const els = {
@@ -675,7 +921,18 @@ html.dark-mode .small-action{color:var(--gold2)}
     selectedMosque:document.getElementById("selectedMosque"),
     results:document.getElementById("results"),
     searchInput:document.getElementById("searchInput"),
-    toast:document.getElementById("toast")
+    toast:document.getElementById("toast"),
+    recenterBtn:document.getElementById("recenterBtn"),
+    followBtn:document.getElementById("followBtn"),
+    navTopPill:document.getElementById("navTopPill"),
+    navMainStep:document.getElementById("navMainStep"),
+    navSubStep:document.getElementById("navSubStep"),
+    navBottomSheet:document.getElementById("navBottomSheet"),
+    navDestinationTitle:document.getElementById("navDestinationTitle"),
+    navMetrics:document.getElementById("navMetrics"),
+    startDriveBtn:document.getElementById("startDriveBtn"),
+    toggleTurnsBtn:document.getElementById("toggleTurnsBtn"),
+    turnList:document.getElementById("turnList")
   };
 
   function toast(message){
@@ -725,6 +982,99 @@ html.dark-mode .small-action{color:var(--gold2)}
     const h = Math.floor(min / 60);
     const m = min % 60;
     return m ? `${h} ч ${m} мин` : `${h} ч`;
+  }
+
+
+  function stripHtml(value){
+    const tmp = document.createElement("div");
+    tmp.innerHTML = value || "";
+    return (tmp.textContent || tmp.innerText || "").trim();
+  }
+
+  function turnIcon(type, modifier){
+    const t = `${type || ""} ${modifier || ""}`.toLowerCase();
+    if(t.includes("right")) return "↱";
+    if(t.includes("left")) return "↰";
+    if(t.includes("uturn")) return "↶";
+    if(t.includes("roundabout") || t.includes("rotary")) return "⟳";
+    if(t.includes("arrive")) return "◆";
+    if(t.includes("depart")) return "●";
+    if(t.includes("continue")) return "↑";
+    return "↑";
+  }
+
+  function instructionFromManeuver(step, index){
+    const maneuver = step.maneuver || {};
+    const type = String(maneuver.type || "").toLowerCase();
+    const modifier = String(maneuver.modifier || "").toLowerCase();
+    const road = step.name ? ` на ${step.name}` : "";
+
+    if(type === "depart") return `Начните движение${road}`;
+    if(type === "arrive") return "Вы прибыли к мечети";
+    if(type === "roundabout" || type === "rotary") return `На круговом движении продолжайте${road}`;
+    if(modifier.includes("right")) return `Поверните направо${road}`;
+    if(modifier.includes("left")) return `Поверните налево${road}`;
+    if(modifier.includes("straight")) return `Двигайтесь прямо${road}`;
+    if(type === "turn") return `Поверните${road}`;
+    if(type === "continue") return `Продолжайте движение${road}`;
+    return index === 0 ? `Начните движение${road}` : `Продолжайте движение${road}`;
+  }
+
+  function nearestPointIndex(coords, lat, lon){
+    let bestIndex = 0;
+    let bestDistance = Infinity;
+    coords.forEach((point, index) => {
+      const d = distanceMeters(lat, lon, point[0], point[1]);
+      if(d < bestDistance){
+        bestDistance = d;
+        bestIndex = index;
+      }
+    });
+    return {index:bestIndex, distance:bestDistance};
+  }
+
+  function dedupeMosquesWithinRadius(items, radiusMeters){
+    const sorted = [...items].sort((a,b) => a.distance - b.distance);
+    const groups = [];
+
+    sorted.forEach(item => {
+      let group = null;
+      for(const existing of groups){
+        const d = distanceMeters(item.lat, item.lon, existing.lat, existing.lon);
+        if(d <= radiusMeters){
+          group = existing;
+          break;
+        }
+      }
+
+      if(!group){
+        groups.push({...item, aliases:[item.name], mergedCount:1});
+        return;
+      }
+
+      group.mergedCount += 1;
+      if(item.name && !group.aliases.includes(item.name)) group.aliases.push(item.name);
+
+      const groupHasGenericName = group.name === "Мечеть" || group.name.length < 5;
+      const itemHasBetterName = item.name && item.name !== "Мечеть" && item.name.length > group.name.length;
+      if(groupHasGenericName || itemHasBetterName){
+        group.name = item.name;
+      }
+
+      const groupAddressIsCoord = /^-?\d+\.\d+,\s*-?\d+\.\d+$/.test(group.address || "");
+      const itemAddressIsBetter = item.address && !/^-?\d+\.\d+,\s*-?\d+\.\d+$/.test(item.address);
+      if(groupAddressIsCoord && itemAddressIsBetter){
+        group.address = item.address;
+      }
+
+      if(item.distance < group.distance){
+        group.distance = item.distance;
+        group.lat = item.lat;
+        group.lon = item.lon;
+      }
+    });
+
+    return groups.sort((a,b) => a.distance - b.distance);
   }
 
   function compactCoord(num){
@@ -1105,12 +1455,14 @@ out center tags;
 
   function mergeMosques(primary, fallback){
     const seen = new Set();
-    return [...primary, ...fallback].filter(item => {
+    const exact = [...primary, ...fallback].filter(item => {
       const key = `${item.name.toLowerCase()}|${compactCoord(item.lat)}|${compactCoord(item.lon)}`;
       if(seen.has(key)) return false;
       seen.add(key);
       return true;
     }).sort((a,b) => a.distance - b.distance);
+
+    return dedupeMosquesWithinRadius(exact, 500);
   }
 
   function updateFiltered(){
@@ -1136,7 +1488,7 @@ out center tags;
         zIndexOffset:active ? 900 : 400
       }).addTo(state.mosqueLayer);
 
-      marker.bindPopup(`<div class="popup-title">${escapeHtml(item.name)}</div><div class="popup-sub">${formatDistance(item.distance)} · ${escapeHtml(item.address)}</div><div style="margin-top:8px;display:grid;gap:6px"><button type="button" data-popup-route="${escapeHtml(item.id)}" style="border:0;border-radius:10px;background:#2d7a46;color:#fff;font-weight:900;padding:8px 10px;cursor:pointer">Показать маршрут</button><a href="${nativeGeoUrl(compactCoord(item.lat), compactCoord(item.lon), item.name)}" style="border-radius:10px;background:#f0d891;color:#111814;font-weight:900;padding:8px 10px;text-decoration:none;text-align:center">Открыть навигатор</a></div>`);
+      marker.bindPopup(`<div class="popup-title">${escapeHtml(item.name)}</div><div class="popup-sub">${formatDistance(item.distance)} · ${escapeHtml(item.address)}</div><div style="margin-top:8px;display:grid;gap:6px"><button type="button" data-popup-route="${escapeHtml(item.id)}" style="border:0;border-radius:10px;background:#2d7a46;color:#fff;font-weight:900;padding:8px 10px;cursor:pointer">Построить маршрут</button><a href="${nativeGeoUrl(compactCoord(item.lat), compactCoord(item.lon), item.name)}" style="border-radius:10px;background:#f0d891;color:#111814;font-weight:900;padding:8px 10px;text-decoration:none;text-align:center">Внешний навигатор</a></div>`);
       marker.on("click", () => selectMosque(item.id, true));
       state.markers.set(item.id, marker);
     });
@@ -1190,11 +1542,11 @@ out center tags;
           <div class="card-actions">
             <a class="small-action primary" href="${geoUrl}">
               <svg viewBox="0 0 24 24"><path d="M4 12l16-8-8 16-2-7-6-1z"/></svg>
-              Навигатор
+              Внешний
             </a>
             <button class="small-action route-btn" type="button" data-id="${escapeHtml(item.id)}">
               <svg viewBox="0 0 24 24"><path d="M4 19c4-8 12 0 16-8"/><path d="M14 5h6v6"/></svg>
-              Маршрут
+              Построить
             </button>
             <a class="small-action" href="${googleUrl}" target="_blank" rel="noopener">
               <svg viewBox="0 0 24 24"><path d="M12 21s7-5.1 7-11a7 7 0 1 0-14 0c0 5.9 7 11 7 11z"/><circle cx="12" cy="10" r="2.5"/></svg>
@@ -1234,6 +1586,8 @@ out center tags;
 
     state.selected = item;
     els.selectedMosque.textContent = `${item.name} · ${formatDistance(item.distance)}`;
+    state.routeDestination = item;
+    updateNavigationPanel();
     renderList();
 
     if(centerMap && state.map){
@@ -1255,10 +1609,110 @@ out center tags;
     state.map.fitBounds([[state.coords.lat, state.coords.lon], [item.lat, item.lon]], {padding:[44,44]});
   }
 
+  function renderTurnList(){
+    if(!state.activeSteps.length){
+      els.turnList.innerHTML = '<div class="turn-item"><div class="turn-icon">•</div><div class="turn-text">Пошаговые подсказки появятся после построения маршрута</div><div></div></div>';
+      return;
+    }
+
+    els.turnList.innerHTML = state.activeSteps.map((step, index) => {
+      const maneuver = step.maneuver || {};
+      const current = index === state.currentStepIndex ? " is-current" : "";
+      return `
+        <div class="turn-item${current}">
+          <div class="turn-icon">${turnIcon(maneuver.type, maneuver.modifier)}</div>
+          <div class="turn-text">${escapeHtml(instructionFromManeuver(step, index))}</div>
+          <div class="turn-distance">${formatDistance(step.distance || 0)}</div>
+        </div>
+      `;
+    }).join("");
+  }
+
+  function updateNavigationPanel(){
+    const item = state.routeDestination || state.selected;
+    if(!item){
+      els.navTopPill.classList.remove("is-visible");
+      els.navBottomSheet.classList.remove("is-visible");
+      return;
+    }
+
+    els.navBottomSheet.classList.add("is-visible");
+    els.navDestinationTitle.textContent = item.name;
+
+    if(item.routeDistance){
+      els.navMetrics.textContent = `${formatDistance(item.routeDistance)} · примерно ${formatDuration(item.routeDuration)}`;
+    }else{
+      els.navMetrics.textContent = `${formatDistance(item.distance)} от вас`;
+    }
+
+    const step = state.activeSteps[state.currentStepIndex];
+    if(step){
+      els.navTopPill.classList.add("is-visible");
+      els.navMainStep.textContent = instructionFromManeuver(step, state.currentStepIndex);
+      els.navSubStep.textContent = `${formatDistance(step.distance || 0)} · ${item.name}`;
+    }else{
+      els.navTopPill.classList.remove("is-visible");
+    }
+
+    renderTurnList();
+  }
+
+  function updateStepByPosition(lat, lon){
+    if(!state.activeRoute || !state.activeSteps.length) return;
+
+    let bestStepIndex = 0;
+    let bestDistance = Infinity;
+
+    state.activeSteps.forEach((step, index) => {
+      const coords = (step.geometry && step.geometry.coordinates || []).map(pair => [pair[1], pair[0]]);
+      if(!coords.length) return;
+      const nearest = nearestPointIndex(coords, lat, lon);
+      if(nearest.distance < bestDistance){
+        bestDistance = nearest.distance;
+        bestStepIndex = index;
+      }
+    });
+
+    state.currentStepIndex = Math.min(bestStepIndex + (bestDistance < 25 ? 1 : 0), state.activeSteps.length - 1);
+    updateNavigationPanel();
+  }
+
+  function startDriveMode(){
+    const item = state.routeDestination || state.selected || state.mosques[0];
+    if(!item){
+      toast("Сначала выберите мечеть");
+      return;
+    }
+
+    if(!state.activeRouteId || state.activeRouteId !== item.id){
+      drawRoute(item).then(() => startDriveMode());
+      return;
+    }
+
+    state.driveMode = true;
+    state.followMode = true;
+    els.followBtn.classList.add("is-active");
+    els.trackBtn.classList.add("is-active");
+    els.navTopPill.classList.add("is-visible");
+    toggleTracking(true);
+    recenterToUser(true);
+    updateNavigationPanel();
+    toast("Навигация включена");
+  }
+
+  function recenterToUser(zoomIn){
+    if(!state.map || !state.coords){
+      toast("Локация ещё не определена");
+      return;
+    }
+    state.map.setView([state.coords.lat, state.coords.lon], zoomIn ? 18 : Math.max(state.map.getZoom(), 16), {animate:true});
+  }
+
   async function drawRoute(item){
     if(!state.coords || !item) return;
     initMap();
     state.selected = item;
+    state.routeDestination = item;
     state.activeRouteId = item.id;
     setStatus("Строим маршрут", `Маршрут до: ${item.name}`);
 
@@ -1267,8 +1721,8 @@ out center tags;
 
     for(const profile of profiles){
       try{
-        const url = `${OSRM_ROUTE}/${profile}/${state.coords.lon},${state.coords.lat};${item.lon},${item.lat}?overview=full&geometries=geojson&steps=false`;
-        const response = await fetchWithTimeout(url, {}, 7000);
+        const url = `${OSRM_ROUTE}/${profile}/${state.coords.lon},${state.coords.lat};${item.lon},${item.lat}?overview=full&geometries=geojson&steps=true`;
+        const response = await fetchWithTimeout(url, {}, 8000);
         if(!response.ok) throw new Error("route failed");
         const data = await response.json();
         const route = data.routes && data.routes[0];
@@ -1276,28 +1730,37 @@ out center tags;
 
         state.routeLayer.clearLayers();
         const coords = route.geometry.coordinates.map(pair => [pair[1], pair[0]]);
-        L.polyline(coords, {color:"#17351f", weight:9, opacity:.30}).addTo(state.routeLayer);
-        L.polyline(coords, {color:"#2d7a46", weight:6, opacity:.94}).addTo(state.routeLayer);
-        L.polyline(coords, {color:"#d7b56d", weight:2, opacity:.95, dashArray:"2 14"}).addTo(state.routeLayer);
+        L.polyline(coords, {color:"#17351f", weight:11, opacity:.28}).addTo(state.routeLayer);
+        L.polyline(coords, {color:"#2d7a46", weight:7, opacity:.96}).addTo(state.routeLayer);
+        L.polyline(coords, {color:"#d7b56d", weight:2, opacity:.95, dashArray:"2 13"}).addTo(state.routeLayer);
 
-        const mid = coords[Math.floor(coords.length / 2)];
-        if(mid){
-          L.marker(mid, {
-            icon:L.divIcon({
-              className:"barakaway-route-direction",
-              html:'<div style="width:34px;height:34px;border-radius:999px;background:#2d7a46;color:#fff;border:3px solid #fff;box-shadow:0 8px 22px rgba(0,0,0,.35);display:flex;align-items:center;justify-content:center;font-weight:950;transform:rotate(45deg)">➜</div>',
-              iconSize:[34,34],
-              iconAnchor:[17,17]
-            }),
-            interactive:false,
-            zIndexOffset:1200
-          }).addTo(state.routeLayer);
-        }
+        route.legs?.forEach(leg => {
+          (leg.steps || []).forEach((step, index) => {
+            const maneuver = step.maneuver || {};
+            const loc = maneuver.location;
+            if(!loc) return;
+            L.marker([loc[1], loc[0]], {
+              icon:L.divIcon({
+                className:"barakaway-turn-marker",
+                html:`<div style="width:28px;height:28px;border-radius:999px;background:${index === 0 ? "#2d7a46" : "#d7b56d"};color:${index === 0 ? "#fff" : "#111814"};border:2px solid #fff;box-shadow:0 8px 20px rgba(0,0,0,.28);display:flex;align-items:center;justify-content:center;font-weight:950">${turnIcon(maneuver.type, maneuver.modifier)}</div>`,
+                iconSize:[28,28],
+                iconAnchor:[14,14]
+              }),
+              interactive:false,
+              zIndexOffset:1100
+            }).addTo(state.routeLayer);
+          });
+        });
 
         item.routeDistance = route.distance;
         item.routeDuration = route.duration;
+        state.activeRoute = route;
+        state.activeSteps = (route.legs || []).flatMap(leg => leg.steps || []);
+        state.currentStepIndex = 0;
+
         setStatus("Маршрут построен", `${item.name}: ${formatDistance(route.distance)}, примерно ${formatDuration(route.duration)}.`);
-        state.map.fitBounds(coords, {padding:[44,44]});
+        state.map.fitBounds(coords, {padding:[52,52]});
+        updateNavigationPanel();
         routed = true;
         break;
       }catch(error){}
@@ -1305,6 +1768,9 @@ out center tags;
 
     if(!routed){
       drawFallbackLine(item);
+      state.activeRoute = null;
+      state.activeSteps = [];
+      updateNavigationPanel();
       setStatus("Маршрут показан по направлению", "Точная дорожная линия временно недоступна, показано направление до мечети.");
     }
 
@@ -1419,12 +1885,19 @@ out center tags;
     });
   }
 
-  function toggleTracking(){
-    if(state.watchId !== null){
+  function toggleTracking(forceOn){
+    if(state.watchId !== null && forceOn !== true){
       navigator.geolocation.clearWatch(state.watchId);
       state.watchId = null;
+      state.followMode = false;
+      state.driveMode = false;
       els.trackBtn.classList.remove("is-active");
+      els.followBtn.classList.remove("is-active");
       toast("GPS-режим выключен");
+      return;
+    }
+
+    if(state.watchId !== null && forceOn === true){
       return;
     }
 
@@ -1434,6 +1907,7 @@ out center tags;
     }
 
     els.trackBtn.classList.add("is-active");
+    if(state.followMode) els.followBtn.classList.add("is-active");
     toast("GPS-режим включён");
 
     state.watchId = navigator.geolocation.watchPosition(pos => {
@@ -1447,22 +1921,32 @@ out center tags;
         item.distance = distanceMeters(lat, lon, item.lat, item.lon);
       });
       state.mosques.sort((a,b) => a.distance - b.distance);
-      renderList();
 
       if(state.activeRouteId){
         const active = state.mosques.find(x => x.id === state.activeRouteId);
         const now = Date.now();
-        if(active && now - state.lastRouteRefresh > 12000){
+        if(active && now - state.lastRouteRefresh > 15000){
           state.lastRouteRefresh = now;
           drawRoute(active);
+        }else{
+          updateStepByPosition(lat, lon);
         }
       }
+
+      if(state.followMode && state.map){
+        state.map.setView([lat, lon], Math.max(state.map.getZoom(), state.driveMode ? 18 : 16), {animate:true});
+      }
+
+      renderList();
     }, error => {
       els.trackBtn.classList.remove("is-active");
+      els.followBtn.classList.remove("is-active");
+      state.followMode = false;
+      state.driveMode = false;
       toast("GPS не удалось включить");
     }, {
       enableHighAccuracy:true,
-      maximumAge:5000,
+      maximumAge:3000,
       timeout:15000
     });
   }
@@ -1557,7 +2041,20 @@ ${item.address}
   els.locateBtn.addEventListener("click", () => locateAndSearch(false));
   els.refreshBtn.addEventListener("click", () => locateAndSearch(true));
   els.nearestBtn.addEventListener("click", openNearest);
-  els.trackBtn.addEventListener("click", toggleTracking);
+  els.trackBtn.addEventListener("click", () => toggleTracking(false));
+  els.recenterBtn.addEventListener("click", () => recenterToUser(true));
+  els.followBtn.addEventListener("click", () => {
+    state.followMode = !state.followMode;
+    els.followBtn.classList.toggle("is-active", state.followMode);
+    if(state.followMode){
+      toggleTracking(true);
+      recenterToUser(true);
+    }
+  });
+  els.startDriveBtn.addEventListener("click", startDriveMode);
+  els.toggleTurnsBtn.addEventListener("click", () => {
+    els.turnList.classList.toggle("is-open");
+  });
   els.themeBtn.addEventListener("click", toggleTheme);
   els.searchInput.addEventListener("input", renderList);
 
