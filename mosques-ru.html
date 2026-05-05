@@ -505,7 +505,7 @@ html.dark-mode .small-action{color:var(--gold2)}
   .location-grid{grid-template-columns:1fr}
   .map-panel{padding:10px;border-radius:20px}
   .map-frame{border-radius:20px}
-  #map{height:360px}
+  #map{height:520px}
   .map-overlay{left:8px;right:8px;bottom:8px;grid-template-columns:1fr;border-radius:18px}
   .map-mini-actions{display:grid;grid-template-columns:1fr 1fr}
   .card{border-radius:22px;padding:16px 14px}
@@ -519,8 +519,41 @@ html.dark-mode .small-action{color:var(--gold2)}
   .action-label{display:block;font-size:9px}
   .action{min-height:58px;padding:5px 2px}
   .action svg{width:20px;height:20px}
-  #map{height:340px}
+  #map{height:500px}
 }
+
+/* === Premium map refinement: full map, no overlay controls === */
+.map-panel{
+  padding:10px!important;
+}
+#map{
+  height:560px!important;
+}
+.map-overlay,
+.map-mini-actions,
+.map-mini-btn{
+  display:none!important;
+}
+.leaflet-control-container .leaflet-routing-container{
+  display:none!important;
+}
+.route-badge{
+  background:linear-gradient(135deg,rgba(45,122,70,.16),rgba(215,181,109,.12))!important;
+}
+@media(max-width:720px){
+  #map{
+    height:520px!important;
+  }
+  .map-panel{
+    margin-top:12px!important;
+  }
+}
+@media(max-width:390px){
+  #map{
+    height:500px!important;
+  }
+}
+
 </style>
 <script src="/theme-init.js"></script>
 <link rel="stylesheet" href="/theme.css">
@@ -578,16 +611,6 @@ html.dark-mode .small-action{color:var(--gold2)}
   <section class="map-panel">
     <div class="map-frame">
       <div id="map"></div>
-      <div class="map-overlay" id="mapOverlay">
-        <div>
-          <p class="map-selected-title" id="mapSelectedTitle">Выберите мечеть на карте или в списке</p>
-          <p class="map-selected-sub" id="mapSelectedSub">Маршрут появится после выбора мечети</p>
-        </div>
-        <div class="map-mini-actions">
-          <a class="map-mini-btn primary" id="mapNavigatorBtn" href="#">Навигатор</a>
-          <button class="map-mini-btn" id="mapRouteBtn" type="button">Маршрут</button>
-        </div>
-      </div>
     </div>
   </section>
 
@@ -634,7 +657,9 @@ html.dark-mode .small-action{color:var(--gold2)}
     mosqueLayer:null,
     routeLayer:null,
     watchId:null,
-    markers:new Map()
+    markers:new Map(),
+    activeRouteId:null,
+    lastRouteRefresh:0
   };
 
   const els = {
@@ -650,11 +675,7 @@ html.dark-mode .small-action{color:var(--gold2)}
     selectedMosque:document.getElementById("selectedMosque"),
     results:document.getElementById("results"),
     searchInput:document.getElementById("searchInput"),
-    toast:document.getElementById("toast"),
-    mapSelectedTitle:document.getElementById("mapSelectedTitle"),
-    mapSelectedSub:document.getElementById("mapSelectedSub"),
-    mapNavigatorBtn:document.getElementById("mapNavigatorBtn"),
-    mapRouteBtn:document.getElementById("mapRouteBtn")
+    toast:document.getElementById("toast")
   };
 
   function toast(message){
@@ -902,17 +923,72 @@ out center tags;
     return `${lon - lonDelta},${lat + latDelta},${lon + lonDelta},${lat - latDelta}`;
   }
 
+  function hasMosqueIdentityText(text){
+    const value = String(text || "").toLowerCase();
+    return (
+      value.includes("mosque") ||
+      value.includes("masjid") ||
+      value.includes("мeчеть") ||
+      value.includes("мечеть") ||
+      value.includes("مسجد") ||
+      value.includes("cami") ||
+      value.includes("jome") ||
+      value.includes("juma") ||
+      value.includes("jummah") ||
+      value.includes("жоме") ||
+      value.includes("жума")
+    );
+  }
+
+  function isClearlyNonMosqueText(text){
+    const value = String(text || "").toLowerCase();
+    return (
+      value.includes("synagogue") ||
+      value.includes("синагог") ||
+      value.includes("church") ||
+      value.includes("церков") ||
+      value.includes("cathedral") ||
+      value.includes("собор") ||
+      value.includes("chapel") ||
+      value.includes("temple") ||
+      value.includes("храм") ||
+      value.includes("monastery") ||
+      value.includes("монастыр")
+    );
+  }
+
+  function isMosqueFromTags(tags, name){
+    const text = `${name || ""} ${Object.values(tags || {}).join(" ")}`;
+    if(isClearlyNonMosqueText(text)) return false;
+
+    const amenity = String(tags.amenity || "").toLowerCase();
+    const religion = String(tags.religion || "").toLowerCase();
+    const building = String(tags.building || "").toLowerCase();
+
+    if(amenity === "place_of_worship" && religion === "muslim") return true;
+    if(building === "mosque") return true;
+    return hasMosqueIdentityText(text);
+  }
+
   async function fetchNominatimMosques(lat, lon){
-    const queries = ["mosque", "masjid", "мечеть", "cami", "juma masjid"];
+    const queries = [
+      "amenity:mosque",
+      "mosque",
+      "masjid",
+      "мечеть",
+      "مسجد",
+      "juma masjid"
+    ];
     const all = [];
 
     for(const q of queries){
       try{
         const params = new URLSearchParams({
           format:"jsonv2",
-          limit:"20",
+          limit:"18",
           addressdetails:"1",
           extratags:"1",
+          namedetails:"1",
           bounded:"1",
           viewbox:nominatimViewbox(lat, lon, 18),
           q:q
@@ -951,6 +1027,7 @@ out center tags;
       if(!isValidCoord(Number(lat), Number(lon))) return null;
 
       const name = tags.name || tags["name:ru"] || tags["name:en"] || tags["name:local"] || "Мечеть";
+      if(!isMosqueFromTags(tags, name)) return null;
       const address = addressFromTags(tags);
       const fallbackAddress = address || `${compactCoord(lat)}, ${compactCoord(lon)}`;
       const distance = distanceMeters(origin.lat, origin.lon, Number(lat), Number(lon));
@@ -980,11 +1057,33 @@ out center tags;
       if(!isValidCoord(lat, lon)) return null;
 
       const address = item.address || {};
+      const extratags = item.extratags || {};
+      const namedetails = item.namedetails || {};
+      const name =
+        item.name ||
+        namedetails.name ||
+        namedetails["name:ru"] ||
+        namedetails["name:en"] ||
+        item.display_name?.split(",")[0] ||
+        "Мечеть";
+
+      const combined = `${name} ${item.display_name || ""} ${JSON.stringify(address)} ${JSON.stringify(extratags)}`;
+      const religion = String(extratags.religion || address.religion || "").toLowerCase();
+      const amenity = String(extratags.amenity || item.type || "").toLowerCase();
+      const building = String(extratags.building || "").toLowerCase();
+
+      const taggedMosque =
+        religion === "muslim" ||
+        amenity === "mosque" ||
+        building === "mosque" ||
+        hasMosqueIdentityText(combined);
+
+      if(!taggedMosque || isClearlyNonMosqueText(combined)) return null;
+
       const road = address.road;
       const house = address.house_number;
       const city = address.city || address.town || address.village || address.county || "";
       const namedAddress = [road && house ? `${road}, ${house}` : road, city].filter(Boolean).join(", ");
-      const name = item.name || item.display_name?.split(",")[0] || "Мечеть";
       const fallbackAddress = namedAddress || item.display_name || `${compactCoord(lat)}, ${compactCoord(lon)}`;
       const distance = distanceMeters(origin.lat, origin.lon, lat, lon);
       const key = `${name.toLowerCase()}|${compactCoord(lat)}|${compactCoord(lon)}`;
@@ -1037,7 +1136,7 @@ out center tags;
         zIndexOffset:active ? 900 : 400
       }).addTo(state.mosqueLayer);
 
-      marker.bindPopup(`<div class="popup-title">${escapeHtml(item.name)}</div><div class="popup-sub">${formatDistance(item.distance)} · ${escapeHtml(item.address)}</div>`);
+      marker.bindPopup(`<div class="popup-title">${escapeHtml(item.name)}</div><div class="popup-sub">${formatDistance(item.distance)} · ${escapeHtml(item.address)}</div><div style="margin-top:8px;display:grid;gap:6px"><button type="button" data-popup-route="${escapeHtml(item.id)}" style="border:0;border-radius:10px;background:#2d7a46;color:#fff;font-weight:900;padding:8px 10px;cursor:pointer">Показать маршрут</button><a href="${nativeGeoUrl(compactCoord(item.lat), compactCoord(item.lon), item.name)}" style="border-radius:10px;background:#f0d891;color:#111814;font-weight:900;padding:8px 10px;text-decoration:none;text-align:center">Открыть навигатор</a></div>`);
       marker.on("click", () => selectMosque(item.id, true));
       state.markers.set(item.id, marker);
     });
@@ -1135,10 +1234,6 @@ out center tags;
 
     state.selected = item;
     els.selectedMosque.textContent = `${item.name} · ${formatDistance(item.distance)}`;
-    els.mapSelectedTitle.textContent = item.name;
-    els.mapSelectedSub.textContent = `${formatDistance(item.distance)} от вас · ${item.address}`;
-    els.mapNavigatorBtn.href = nativeGeoUrl(compactCoord(item.lat), compactCoord(item.lon), item.name);
-
     renderList();
 
     if(centerMap && state.map){
@@ -1164,6 +1259,7 @@ out center tags;
     if(!state.coords || !item) return;
     initMap();
     state.selected = item;
+    state.activeRouteId = item.id;
     setStatus("Строим маршрут", `Маршрут до: ${item.name}`);
 
     const profiles = ["foot", "driving"];
@@ -1180,11 +1276,26 @@ out center tags;
 
         state.routeLayer.clearLayers();
         const coords = route.geometry.coordinates.map(pair => [pair[1], pair[0]]);
-        L.polyline(coords, {color:"#2d7a46", weight:6, opacity:.9}).addTo(state.routeLayer);
+        L.polyline(coords, {color:"#17351f", weight:9, opacity:.30}).addTo(state.routeLayer);
+        L.polyline(coords, {color:"#2d7a46", weight:6, opacity:.94}).addTo(state.routeLayer);
+        L.polyline(coords, {color:"#d7b56d", weight:2, opacity:.95, dashArray:"2 14"}).addTo(state.routeLayer);
+
+        const mid = coords[Math.floor(coords.length / 2)];
+        if(mid){
+          L.marker(mid, {
+            icon:L.divIcon({
+              className:"barakaway-route-direction",
+              html:'<div style="width:34px;height:34px;border-radius:999px;background:#2d7a46;color:#fff;border:3px solid #fff;box-shadow:0 8px 22px rgba(0,0,0,.35);display:flex;align-items:center;justify-content:center;font-weight:950;transform:rotate(45deg)">➜</div>',
+              iconSize:[34,34],
+              iconAnchor:[17,17]
+            }),
+            interactive:false,
+            zIndexOffset:1200
+          }).addTo(state.routeLayer);
+        }
 
         item.routeDistance = route.distance;
         item.routeDuration = route.duration;
-        els.mapSelectedSub.textContent = `${formatDistance(route.distance)} по маршруту · ${formatDuration(route.duration)}`;
         setStatus("Маршрут построен", `${item.name}: ${formatDistance(route.distance)}, примерно ${formatDuration(route.duration)}.`);
         state.map.fitBounds(coords, {padding:[44,44]});
         routed = true;
@@ -1338,10 +1449,12 @@ out center tags;
       state.mosques.sort((a,b) => a.distance - b.distance);
       renderList();
 
-      if(state.selected){
-        const selected = state.mosques.find(x => x.id === state.selected.id);
-        if(selected){
-          els.mapSelectedSub.textContent = `${formatDistance(selected.distance)} от вас · ${selected.address}`;
+      if(state.activeRouteId){
+        const active = state.mosques.find(x => x.id === state.activeRouteId);
+        const now = Date.now();
+        if(active && now - state.lastRouteRefresh > 12000){
+          state.lastRouteRefresh = now;
+          drawRoute(active);
         }
       }
     }, error => {
@@ -1447,13 +1560,18 @@ ${item.address}
   els.trackBtn.addEventListener("click", toggleTracking);
   els.themeBtn.addEventListener("click", toggleTheme);
   els.searchInput.addEventListener("input", renderList);
-  els.mapRouteBtn.addEventListener("click", () => {
-    const item = state.selected || state.mosques[0];
-    if(item) drawRoute(item);
-    else toast("Сначала выберите мечеть");
-  });
 
   document.addEventListener("click", event => {
+    const popupRouteBtn = event.target.closest("[data-popup-route]");
+    if(popupRouteBtn){
+      const item = state.mosques.find(x => x.id === popupRouteBtn.dataset.popupRoute);
+      if(item){
+        selectMosque(item.id, true);
+        drawRoute(item);
+      }
+      return;
+    }
+
     const copyBtn = event.target.closest(".copy-btn");
     if(copyBtn){
       copyText(copyBtn.dataset.copy || "");
