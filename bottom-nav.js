@@ -138,7 +138,7 @@
     { key:'favorites', label:L.favorites, href:file('favorites'), icon:iconHeart },
     { key:'names', label:L.names, href:file('names'), icon:iconNames },
     { key:'chat', label:L.chat, href:file('private-chat'), icon:iconChat },
-    { key:'learning', label:L.learning, href:file('learning'), icon:iconLearning }
+    { key:'learning', label:L.learning, href:'https://youtu.be/NX5RSAzqXAQ?si=y9dDQvY-9mQvHceA', icon:iconLearning }
   ];
 
 function activeKey() {
