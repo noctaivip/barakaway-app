@@ -133,12 +133,27 @@
     return '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4.5 6.5A2.5 2.5 0 0 1 7 4h10a2.5 2.5 0 0 1 2.5 2.5v11A2.5 2.5 0 0 1 17 20H7a2.5 2.5 0 0 1-2.5-2.5v-11Z"/><path d="M9 8h6"/><path d="M9 12h6"/><path d="M9 16h3"/></svg>';
   }
 
+var learningLinks = {
+  ru: 'https://youtu.be/NX5RSAzqXAQ?si=OH-DiY9KayBMZFQl',
+  en: 'https://youtu.be/OKFAtmywDho?si=KHWQQFkIb888fXcu',
+  ar: 'https://youtu.be/RVxq7pdWmco?si=unA0PfOE7vciFEcO',
+  bn: 'https://www.youtube.com/live/BzH8sq9DA8g?si=iy8XCDtpVhDhZ5z8',
+  hi: 'https://www.youtube.com/live/n8qimGxv-HE?si=jW_psqdkiWsSksj4',
+  id: 'https://youtu.be/b5FMcGeLgVM?si=wSRbMlX2S4qNs0h-',
+  kz: 'https://youtu.be/JkdZ5jIIbxE?si=vvZVFENODB49_b01',
+  tr: 'https://youtu.be/qPz8djrlsnk?si=FCov8LUJEBRhv6Pf',
+  ur: 'https://youtu.be/PUtmr6RPLOc?si=ZbI5pjXJpoj1fSJe',
+  uz: 'https://youtu.be/qDGrYSKST0g?si=jKKc17g6LcUCUi7p'
+};
+
+var learningLink = learningLinks[lang] || learningLinks.ru;
+
   var navItems = [
     { key:'today', label:L.today, href:file('home'), icon:iconToday },
     { key:'favorites', label:L.favorites, href:file('favorites'), icon:iconHeart },
     { key:'names', label:L.names, href:file('names'), icon:iconNames },
     { key:'chat', label:L.chat, href:file('private-chat'), icon:iconChat },
-    { key:'learning', label:L.learning, href:'https://youtu.be/NX5RSAzqXAQ?si=y9dDQvY-9mQvHceA', icon:iconLearning }
+    { key:'learning', label:L.learning, href:learningLink, icon:iconLearning }
   ];
 
 function activeKey() {
