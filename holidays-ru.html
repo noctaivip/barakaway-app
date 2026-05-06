@@ -185,6 +185,11 @@ h1{
   gap:12px;
 }
 
+.quick-panel.today-only{
+  max-width:460px;
+  grid-template-columns:1fr;
+}
+
 .name-box,
 .today-box{
   padding:16px;
@@ -253,6 +258,19 @@ input:focus{
   display:flex;
   flex-direction:column;
   justify-content:center;
+}
+
+.today-action{
+  width:100%;
+  min-height:112px;
+  cursor:pointer;
+  color:var(--bw-text);
+  font:inherit;
+}
+
+.today-action:hover{
+  border-color:rgba(243,217,146,.45);
+  box-shadow:0 14px 36px rgba(215,181,109,.12);
 }
 
 .today-main{
@@ -657,19 +675,12 @@ html.light-mode select{
         Выберите готовую карточку или создайте персональное поздравление с именем.
       </p>
 
-      <div class="quick-panel">
-        <div class="name-box">
-          <label for="recipientName">Имя получателя</label>
-          <div class="name-row">
-            <input id="recipientName" type="text" autocomplete="name" placeholder="Например: Абдуллах">
-            <button class="mini-btn" type="button" onclick="generatePersonal()">Создать</button>
-          </div>
-        </div>
-        <div class="today-box">
+      <div class="quick-panel today-only">
+        <button class="today-box today-action" type="button" onclick="openTodayCard()">
           <div class="small-title">Сегодня</div>
           <div class="today-main" id="todayTitle">Карточка дня</div>
-          <div class="today-text" id="todayText">Каждую пятницу Jumu‘ah-карточки поднимаются первыми.</div>
-        </div>
+          <div class="today-text" id="todayText">Нажмите, чтобы открыть поздравление дня.</div>
+        </button>
       </div>
     </div>
   </section>
@@ -685,10 +696,6 @@ html.light-mode select{
 
   <section class="generator">
     <h2>Персональная карточка</h2>
-    <p>
-      Введите имя получателя, выберите повод — приложение подготовит индивидуальное поздравление,
-      которое можно посмотреть, скопировать или отправить через системное меню телефона.
-    </p>
     <div class="generator-grid">
       <input id="generatorName" type="text" placeholder="Имя получателя">
       <select id="generatorCategory">
@@ -924,23 +931,16 @@ const personalizedTemplates = {
 let currentGreeting = greetings[0];
 
 function saveName(){
-  const name = document.getElementById("recipientName").value.trim();
   const genName = document.getElementById("generatorName").value.trim();
-  localStorage.setItem("barakaway_greeting_name", genName || name || "");
+  localStorage.setItem("barakaway_greeting_name", genName || "");
 }
 
 function loadName(){
   const saved = localStorage.getItem("barakaway_greeting_name") || "";
-  document.getElementById("recipientName").value = saved;
   document.getElementById("generatorName").value = saved;
 }
 
-function syncNames(from){
-  if(from === "hero"){
-    document.getElementById("generatorName").value = document.getElementById("recipientName").value;
-  }else{
-    document.getElementById("recipientName").value = document.getElementById("generatorName").value;
-  }
+function syncNames(){
   saveName();
 }
 
@@ -949,10 +949,11 @@ function isFriday(){
 }
 
 function updateToday(){
-  if(isFriday()){
-    document.getElementById("todayTitle").textContent = "Jumu‘ah Mubarak";
-    document.getElementById("todayText").textContent = "Сегодня пятница — Jumu‘ah-карточки доступны первыми.";
-  }
+  const today = getTodayGreeting();
+  document.getElementById("todayTitle").textContent = today.title;
+  document.getElementById("todayText").textContent = isFriday()
+    ? "Сегодня пятница — откройте Jumu‘ah-карточку дня."
+    : "Нажмите, чтобы открыть поздравление дня.";
 }
 
 function orderedGreetings(){
@@ -1002,8 +1003,8 @@ function findGreeting(id){
 }
 
 function generatePersonal(){
-  syncNames("generator");
-  const name = (document.getElementById("generatorName").value || document.getElementById("recipientName").value || "").trim() || "дорогой брат / дорогая сестра";
+  syncNames();
+  const name = (document.getElementById("generatorName").value || "").trim() || "дорогой брат / дорогая сестра";
   const cat = document.getElementById("generatorCategory").value;
   const tpl = personalizedTemplates[cat] || personalizedTemplates.jumuah;
 
@@ -1020,6 +1021,18 @@ function generatePersonal(){
     style:style
   };
 
+  openModal(currentGreeting);
+}
+
+
+function getTodayGreeting(){
+  const list = orderedGreetings();
+  const dayIndex = Math.floor(Date.now() / 86400000);
+  return list[dayIndex % list.length] || greetings[0];
+}
+
+function openTodayCard(){
+  currentGreeting = getTodayGreeting();
   openModal(currentGreeting);
 }
 
@@ -1274,8 +1287,7 @@ document.addEventListener("DOMContentLoaded", function(){
   updateToday();
   renderCards("all");
 
-  document.getElementById("recipientName").addEventListener("input", function(){syncNames("hero");});
-  document.getElementById("generatorName").addEventListener("input", function(){syncNames("generator");});
+  document.getElementById("generatorName").addEventListener("input", function(){syncNames();});
 
   document.querySelectorAll(".tab").forEach(function(btn){
     btn.addEventListener("click", function(){
