@@ -129,7 +129,7 @@ border-radius:20px;
 <nav class="tabs" aria-label="Категории поздравлений"><button class="tab" type="button" data-filter="all">Все</button><button class="tab active" type="button" data-filter="jumuah">Джума</button><button class="tab" type="button" data-filter="ramadan">Рамадан</button><button class="tab" type="button" data-filter="eid-fitr">Ураза-байрам</button><button class="tab" type="button" data-filter="eid-adha">Курбан-хаит</button><button class="tab" type="button" data-filter="daily">Ежедневно</button></nav>
 <div class="section-title"><h2>Готовые карточки</h2><p>25 карточек распределены по имени файла</p></div><section class="cards" id="cards"></section>
 </main>
-<div class="modal" id="modal" aria-hidden="true"><div class="modal-card"><canvas class="preview-canvas" id="previewCanvas" width="1080" height="1350"></canvas><div class="modal-actions"><button class="action-btn primary" type="button" onclick="shareCurrent()">Поделиться</button><button class="action-btn" type="button" onclick="regeneratePersonal()">Обновить</button><button class="action-btn" type="button" onclick="downloadCurrent()">Скачать</button></div><button class="close-btn" type="button" onclick="closeModal()">Закрыть</button></div></div><div class="toast" id="toast">Готово</div>
+<div class="modal" id="modal" aria-hidden="true"><div class="modal-card"><canvas class="preview-canvas" id="previewCanvas" width="1080" height="1350"></canvas><div class="modal-actions"><button class="action-btn primary" type="button" onclick="shareCurrent()">Поделиться</button><button class="action-btn" type="button" onclick="regeneratePersonal()">Перегенерировать</button><button class="action-btn" type="button" onclick="downloadCurrent()">Скачать</button></div><button class="close-btn" type="button" onclick="closeModal()">Закрыть</button></div></div><div class="toast" id="toast">Готово</div>
 <script>
 const APP_LINK="https://barakaway.app";
 const LOGO_PATH="./assets/greetings/logo.png";
@@ -473,10 +473,42 @@ function findGreeting(id){return greetings.find(function(item){return item.id===
 function generatePersonal(){saveName();const name=(document.getElementById("generatorName").value||"").trim()||"Дорогой брат / дорогая сестра";const cat=document.getElementById("generatorCategory").value;const tpl=personalizedTemplates[cat]||personalizedTemplates.jumuah;currentGreeting={id:"personal",category:cat,label:tpl.label,title:tpl.title,text:selectPersonalText(cat,name),image:getNextPersonalImage(),personalName:name};openModal(currentGreeting);}
 function regeneratePersonal(){
 if(currentGreeting&&currentGreeting.id==="personal"){
-generatePersonal();
+const currentCategory=currentGreeting.category||"jumuah";
+const currentName=currentGreeting.personalName||(document.getElementById("generatorName").value||"").trim()||"Дорогой брат / дорогая сестра";
+
+const tpl=personalizedTemplates[currentCategory]||personalizedTemplates.jumuah;
+const list=tpl.texts||[];
+
+let text=currentGreeting.text;
+let tries=0;
+
+while(text===currentGreeting.text&&tries<12){
+text=list[Math.floor(Math.random()*list.length)](currentName);
+tries++;
+}
+
+let image=currentGreeting.image;
+tries=0;
+
+while(image===currentGreeting.image&&tries<20){
+image=PERSONAL_CARD_IMAGES[Math.floor(Math.random()*PERSONAL_CARD_IMAGES.length)];
+tries++;
+}
+
+currentGreeting={
+id:"personal",
+category:currentCategory,
+label:tpl.label,
+title:tpl.title,
+text:text,
+image:image,
+personalName:currentName
+};
+
+openModal(currentGreeting);
 return;
 }
-showToast("Доступно только для персональных карточек");
+showToast("Сначала создайте персональную карточку");
 }
 function openTodayCard(){currentGreeting=getTodayGreeting();openModal(currentGreeting);}
 function openCard(id){currentGreeting=findGreeting(id);openModal(currentGreeting);}
@@ -503,12 +535,12 @@ return count?total/count:80;
 function getPersonalTextStyle(ctx,w,h){
 const lum=getAverageLuminance(ctx,Math.round(w*0.18),Math.round(h*0.33),Math.round(w*0.64),Math.round(h*0.32));
 if(lum>175){
-return {panel:"rgba(0,0,0,.52)",text:"#ffffff",shadow:"rgba(0,0,0,.92)",blur:16};
+return {panel:"rgba(0,0,0,.68)",text:"#ffffff",shadow:"rgba(0,0,0,.92)",blur:16};
 }
 if(lum<82){
-return {panel:"rgba(0,0,0,.52)",text:"#fff8e8",shadow:"rgba(0,0,0,.92)",blur:20};
+return {panel:"rgba(0,0,0,.68)",text:"#fff8e8",shadow:"rgba(0,0,0,.92)",blur:20};
 }
-return {panel:"rgba(0,0,0,.50)",text:"#f3d992",shadow:"rgba(0,0,0,.90)",blur:18};
+return {panel:"rgba(0,0,0,.66)",text:"#f3d992",shadow:"rgba(0,0,0,.90)",blur:18};
 }
 async function drawImageCardToCanvas(g){const canvas=document.getElementById("previewCanvas");const ctx=canvas.getContext("2d");const w=canvas.width,h=canvas.height;ctx.clearRect(0,0,w,h);ctx.fillStyle="#0c120e";ctx.fillRect(0,0,w,h);try{const img=await loadCanvasImage(g.image);const scale=Math.max(w/img.width,h/img.height);const sw=w/scale,sh=h/scale;const sx=(img.width-sw)/2,sy=(img.height-sh)/2;ctx.drawImage(img,sx,sy,sw,sh,0,0,w,h);}catch(e){const grad=ctx.createLinearGradient(0,0,w,h);grad.addColorStop(0,"#082216");grad.addColorStop(.5,"#1e6c42");grad.addColorStop(1,"#d7b56d");ctx.fillStyle=grad;ctx.fillRect(0,0,w,h);}
 const bottom=ctx.createLinearGradient(0,h*.76,0,h);bottom.addColorStop(0,"rgba(0,0,0,0)");bottom.addColorStop(.78,"rgba(0,0,0,.46)");bottom.addColorStop(1,"rgba(0,0,0,.62)");ctx.fillStyle=bottom;ctx.fillRect(0,0,w,h);
