@@ -125,8 +125,8 @@ border-radius:20px;
 <div class="ramadan-wrapper"><div class="ramadan-bar"><div class="ramadan-text">Tabriklar • Juma • Ramazon • Ramazon Hayiti • Qurbon Hayiti • Har kuni • BarakaWay</div></div></div>
 <main class="container">
 <section class="hero"><div class="hero-inner"><div class="logo"><img src="./assets/greetings.uz/logo.png" alt="BarakaWay"></div><div class="kicker">✦ Tabrik kartalari</div><h1>Tabriklar</h1></div></section>
-<nav class="tabs" aria-label="Tabrik kategoriyalari"><button class="tab active" type="button" data-filter="all">Barchasi</button><button class="tab" type="button" data-filter="jumuah">Juma</button><button class="tab" type="button" data-filter="ramadan">Ramazon</button><button class="tab" type="button" data-filter="eid-fitr">Ramazon Hayiti</button><button class="tab" type="button" data-filter="eid-adha">Qurbon Hayiti</button><button class="tab" type="button" data-filter="daily">Har kuni</button></nav>
 <section class="generator"><h2>Shaxsiy karta</h2><div class="generator-grid"><input id="generatorName" type="text" placeholder="Qabul qiluvchi ismi"><select id="generatorCategory"><option value="jumuah">Juma</option><option value="ramadan">Ramazon</option><option value="eid-fitr">Ramazon Hayiti</option><option value="eid-adha">Qurbon Hayiti</option><option value="daily">Har kuni</option></select><button class="mini-btn" type="button" onclick="generatePersonal()">Yaratish</button></div></section>
+<nav class="tabs" aria-label="Tabrik kategoriyalari"><button class="tab active" type="button" data-filter="jumuah">Juma</button><button class="tab" type="button" data-filter="all">Barchasi</button><button class="tab" type="button" data-filter="ramadan">Ramazon</button><button class="tab" type="button" data-filter="eid-fitr">Ramazon Hayiti</button><button class="tab" type="button" data-filter="eid-adha">Qurbon Hayiti</button><button class="tab" type="button" data-filter="daily">Har kuni</button></nav>
 <div class="section-title"><h2>Tayyor kartalar</h2><p>25 ta karta fayl nomlari bo‘yicha taqsimlangan</p></div><section class="cards" id="cards"></section>
 </main>
 <div class="modal" id="modal" aria-hidden="true"><div class="modal-card"><canvas class="preview-canvas" id="previewCanvas" width="1080" height="1350"></canvas><div class="modal-actions"><button class="action-btn primary" type="button" onclick="shareCurrent()">Ulashish</button><button class="action-btn" type="button" onclick="copyCurrent()">Nusxalash</button><button class="action-btn" type="button" onclick="downloadCurrent()">Yuklab olish</button></div><button class="close-btn" type="button" onclick="closeModal()">Yopish</button></div></div><div class="toast" id="toast">Tayyor</div>
@@ -402,7 +402,7 @@ function getTodayGreeting(){const list=orderedGreetings();const dayIndex=Math.fl
 function updateToday(){return;}
 function renderCards(filter){const root=document.getElementById("cards");const list=orderedGreetings().filter(function(item){return filter==="all"||item.category===filter;});root.innerHTML=list.map(function(item){return `<article class="greeting-card" data-category="${item.category}"><div class="card-art"><img class="card-image" src="${item.image}" alt="${item.title}" loading="lazy"><div class="card-image-overlay"></div><div class="card-brand-badge"><img src="${LOGO_PATH}" alt="BarakaWay"></div><div class="card-category-badge">${item.label}</div><div class="card-site-mark">barakaway.app</div></div><div class="card-body"><h3 class="card-title">${item.title}</h3><p class="card-text">${item.text}</p></div><div class="card-actions"><button class="action-btn" type="button" onclick="openCard('${item.id}')">Zoom</button><button class="action-btn" type="button" onclick="copyCard('${item.id}')">Копировать</button><button class="action-btn primary" type="button" onclick="shareCard('${item.id}')">Ulashish</button></div></article>`;}).join("");}
 function findGreeting(id){return greetings.find(function(item){return item.id===id;})||greetings[0];}
-function generatePersonal(){saveName();const name=(document.getElementById("generatorName").value||"").trim()||"qadrli aka / qadrli opa-singil";const cat=document.getElementById("generatorCategory").value;const tpl=personalizedTemplates[cat]||personalizedTemplates.jumuah;const pool=greetings.filter(function(x){return x.category===cat;});const base=pool[Math.floor(Math.random()*pool.length)]||greetings[0];currentGreeting={id:"personal",category:cat,label:tpl.label,title:tpl.title,subtitle:"Персональное поздравление",text:tpl.text(name),image:base.image};openModal(currentGreeting);}
+function generatePersonal(){saveName();const name=(document.getElementById("generatorName").value||"").trim()||"qadrli aka / qadrli opa-singil";const cat=document.getElementById("generatorCategory").value;const tpl=personalizedTemplates[cat]||personalizedTemplates.jumuah;const pool=greetings.filter(function(x){return x.category===cat;});const base=pool[Math.floor(Math.random()*pool.length)]||greetings[0];currentGreeting={id:"personal",category:cat,label:tpl.label,title:tpl.title,subtitle:name,text:tpl.text(name),image:base.image,personalName:name};openModal(currentGreeting);}
 function openTodayCard(){currentGreeting=getTodayGreeting();openModal(currentGreeting);}
 function openCard(id){currentGreeting=findGreeting(id);openModal(currentGreeting);}
 function copyCard(id){copyText(formatShareText(findGreeting(id)));}
@@ -417,6 +417,19 @@ async function drawImageCardToCanvas(g){const canvas=document.getElementById("pr
 const bottom=ctx.createLinearGradient(0,h*.76,0,h);bottom.addColorStop(0,"rgba(0,0,0,0)");bottom.addColorStop(.78,"rgba(0,0,0,.46)");bottom.addColorStop(1,"rgba(0,0,0,.62)");ctx.fillStyle=bottom;ctx.fillRect(0,0,w,h);
 ctx.strokeStyle="rgba(243,217,146,.78)";ctx.lineWidth=7;drawRoundRect(ctx,34,34,w-68,h-68,36);ctx.stroke();
 try{const logo=await loadCanvasImage(LOGO_PATH);ctx.save();drawRoundRect(ctx,58,58,112,112,30);ctx.clip();ctx.drawImage(logo,58,58,112,112);ctx.restore();ctx.strokeStyle="rgba(243,217,146,.70)";ctx.lineWidth=3;drawRoundRect(ctx,58,58,112,112,30);ctx.stroke();}catch(e){}
+if(g.personalName){
+ctx.textAlign="center";
+ctx.fillStyle="#fff6d8";
+ctx.shadowColor="rgba(0,0,0,.65)";
+ctx.shadowBlur=18;
+ctx.font="700 64px Georgia";
+ctx.fillText(g.personalName,w/2,h*0.52);
+
+ctx.font="500 34px Georgia";
+wrapCanvasText(ctx,g.text,w/2-360,h*0.60,720,48,4);
+ctx.shadowBlur=0;
+}
+
 ctx.textAlign="center";ctx.textBaseline="alphabetic";ctx.fillStyle="rgba(255,238,190,.96)";ctx.font="800 30px system-ui, Arial";ctx.fillText("BarakaWay App",w/2,h-92);ctx.fillStyle="rgba(255,238,190,.82)";ctx.font="650 25px system-ui, Arial";ctx.fillText("barakaway.app",w/2,h-54);return canvas;}
 async function openModal(g){currentGreeting=g;await drawImageCardToCanvas(g);document.getElementById("modal").classList.add("open");document.getElementById("modal").setAttribute("aria-hidden","false");}
 function closeModal(){document.getElementById("modal").classList.remove("open");document.getElementById("modal").setAttribute("aria-hidden","true");}
@@ -445,7 +458,7 @@ function copyText(text){if(navigator.clipboard&&navigator.clipboard.writeText){n
 function fallbackCopy(text){const area=document.createElement("textarea");area.value=text;document.body.appendChild(area);area.select();document.execCommand("copy");area.remove();showToast("Matn nusxalandi");}
 async function downloadCurrent(){const canvas=await drawImageCardToCanvas(currentGreeting);const a=document.createElement("a");a.href=canvas.toDataURL("image/png");a.download="barakaway-greeting.png";document.body.appendChild(a);a.click();a.remove();}
 function showToast(message){const toast=document.getElementById("toast");toast.textContent=message;toast.classList.add("show");setTimeout(function(){toast.classList.remove("show");},1800);}
-document.addEventListener("DOMContentLoaded",function(){loadName();updateToday();renderCards("all");document.getElementById("generatorName").addEventListener("input",saveName);document.querySelectorAll(".tab").forEach(function(btn){btn.addEventListener("click",function(){document.querySelectorAll(".tab").forEach(function(x){x.classList.remove("active");});btn.classList.add("active");renderCards(btn.getAttribute("data-filter"));});});document.getElementById("modal").addEventListener("click",function(e){if(e.target.id==="modal")closeModal();});});
+document.addEventListener("DOMContentLoaded",function(){loadName();updateToday();renderCards("jumuah");document.getElementById("generatorName").addEventListener("input",saveName);document.querySelectorAll(".tab").forEach(function(btn){btn.addEventListener("click",function(){document.querySelectorAll(".tab").forEach(function(x){x.classList.remove("active");});btn.classList.add("active");renderCards(btn.getAttribute("data-filter"));});});document.getElementById("modal").addEventListener("click",function(e){if(e.target.id==="modal")closeModal();});});
 </script>
 <script src="/bottom-nav.js"></script>
 </body>
