@@ -133,6 +133,7 @@ border-radius:20px;
 <script>
 const APP_LINK="https://barakaway.app";
 const LOGO_PATH="./assets/greetings/logo.png";
+const PERSONAL_CARD_IMAGES=["./assets/personal/personal-001.png","./assets/personal/personal-002.png","./assets/personal/personal-003.png","./assets/personal/personal-004.png","./assets/personal/personal-005.png","./assets/personal/personal-006.png","./assets/personal/personal-007.png","./assets/personal/personal-008.png","./assets/personal/personal-009.png","./assets/personal/personal-010.png","./assets/personal/personal-011.png","./assets/personal/personal-012.png","./assets/personal/personal-013.png","./assets/personal/personal-014.png","./assets/personal/personal-015.png"];
 const greetings=[
   {
     "id": "ramadan-001",
@@ -387,12 +388,69 @@ const greetings=[
 ];
 
 const personalizedTemplates={
-  jumuah:{label:"Джума",title:"Джума мубарак",text:function(name){return name+", пусть Аллах наполнит вашу пятницу светом, спокойствием, принятыми дуа и баракатом для вашей семьи.";}},
-  ramadan:{label:"Рамадан",title:"Рамадан мубарак",text:function(name){return name+", пусть этот благословенный месяц наполнит ваш дом баракатом, укрепит иман и принесёт милость Аллаха.";}},
-  "eid-fitr":{label:"Ураза-байрам",title:"Ураза-байрам мубарак",text:function(name){return name+", пусть Аллах примет ваш пост, ваши дуа и добрые дела. Ураза-байрам мубарак вам и вашей семье!";}},
-  "eid-adha":{label:"Курбан-хаит",title:"Курбан-хаит мубарак",text:function(name){return name+", пусть Аллах примет ваши добрые намерения и наполнит ваш дом миром, достатком и баракатом.";}},
-  daily:{label:"Ежедневно",title:"Дуа на каждый день",text:function(name){return name+", пусть Аллах дарует вам спокойствие, защиту, полезные дела и чистый ризк сегодня и всегда.";}}
+  jumuah:{
+    label:"Джума",
+    title:"Джума мубарак",
+    texts:[
+      function(name){return name+", дорогой брат, пусть Аллах наполнит эту пятницу светом, спокойствием, принятыми дуа и баракатом для вашей семьи.";},
+      function(name){return name+", пусть благословенная пятница принесёт вашему сердцу иман, дому — мир, делам — баракат, а дуа — принятие у Аллаха.";},
+      function(name){return name+", в этот день Джума пусть Аллах укрепит вашу веру, очистит сердце, простит ошибки и откроет двери к благому.";},
+      function(name){return name+", Джума мубарак. Пусть Аллах дарует вам светлый день, спокойную душу, чистый ризк и защиту для всей семьи.";},
+      function(name){return name+", пусть эта пятница станет для вас причиной милости, прощения, добрых вестей и устойчивого бараката в жизни.";},
+      function(name){return name+", пусть Аллах примет ваши дуа, укрепит сабр, наполнит сердце нуром и сделает этот день благословенным.";}
+    ]
+  },
+  ramadan:{
+    label:"Рамадан",
+    title:"Рамадан мубарак",
+    texts:[
+      function(name){return name+", пусть священный Рамадан укрепит ваш иман, очистит сердце, наполнит дом баракатом и приблизит вас к милости Аллаха.";},
+      function(name){return name+", Рамадан мубарак. Пусть Аллах примет ваш пост, ваши дуа, ваши добрые дела и дарует семье мир.";},
+      function(name){return name+", пусть этот благословенный месяц принесёт духовную силу, прощение, чистые намерения и спокойствие вашему дому.";},
+      function(name){return name+", пусть Аллах сделает Рамадан для вас месяцем света, принятия, защиты, щедрости и полезных перемен.";},
+      function(name){return name+", пусть каждый день Рамадана приближает вас к Аллаху, укрепляет сердце и открывает двери бараката.";},
+      function(name){return name+", пусть пост, молитвы и добрые дела этого месяца будут приняты, а дом наполнится милостью и радостью.";}
+    ]
+  },
+  "eid-fitr":{
+    label:"Ураза-байрам",
+    title:"Ураза-байрам мубарак",
+    texts:[
+      function(name){return name+", Ураза-байрам мубарак. Пусть Аллах примет ваш пост, ваши дуа и добрые дела, и наполнит дом радостью.";},
+      function(name){return name+", пусть этот светлый праздник принесёт вашей семье мир, милость, радость, прощение и щедрый баракат.";},
+      function(name){return name+", пусть Аллах вознаградит вас за терпение Рамадана, примет поклонение и дарует благие вести.";},
+      function(name){return name+", Ураза-байрам мубарак вам и вашей семье. Пусть в доме будет свет, согласие, достаток и милость Аллаха.";},
+      function(name){return name+", пусть день праздника станет началом новых благих дел, чистых намерений, радости и принятых дуа.";},
+      function(name){return name+", пусть Аллах сохранит вашу семью, укрепит веру, примет пост и наполнит жизнь спокойствием и баракатом.";}
+    ]
+  },
+  "eid-adha":{
+    label:"Курбан-хаит",
+    title:"Курбан-хаит мубарак",
+    texts:[
+      function(name){return name+", Курбан-хаит мубарак. Пусть Аллах примет ваши добрые намерения и наполнит дом миром, достатком и баракатом.";},
+      function(name){return name+", пусть этот священный праздник принесёт вашей семье милость, защиту, щедрость, спокойствие и принятие благих дел.";},
+      function(name){return name+", пусть Аллах укрепит вашу веру, очистит сердце, примет жертву и откроет двери к добру и ризку.";},
+      function(name){return name+", Курбан-хаит мубарак. Пусть в вашем доме будет единство, уважение, милосердие и благословение Аллаха.";},
+      function(name){return name+", пусть этот праздник станет причиной прощения, семейного тепла, благих вестей и устойчивого бараката.";},
+      function(name){return name+", пусть Аллах примет ваши дуа, укрепит сабр, защитит близких и дарует чистый, благословенный ризк.";}
+    ]
+  },
+  daily:{
+    label:"Ежедневно",
+    title:"Дуа на каждый день",
+    texts:[
+      function(name){return name+", пусть Аллах дарует вам сегодня спокойствие, защиту, полезные дела, чистый ризк и свет в сердце.";},
+      function(name){return name+", пусть этот день пройдёт с баракатом, добрыми решениями, внутренним миром и милостью Аллаха.";},
+      function(name){return name+", пусть Аллах облегчит ваши дела, сохранит от плохого, укрепит иман и направит к благому.";},
+      function(name){return name+", пусть в вашем сердце будет спокойствие, в доме — мир, в делах — польза, а в пути — защита Аллаха.";},
+      function(name){return name+", пусть Аллах откроет вам двери добра, даст ясность, силу, благой ризк и красивое завершение дня.";},
+      function(name){return name+", пусть сегодняшний день будет наполнен нуром, благодарностью, полезными поступками и принятыми дуа.";}
+    ]
+  }
 };
+function selectPersonalText(category,name){const tpl=personalizedTemplates[category]||personalizedTemplates.jumuah;const list=tpl.texts||[];const seed=String(name||"").split("").reduce(function(sum,ch){return sum+ch.charCodeAt(0);},0)+Math.floor(Date.now()/60000);const index=list.length?seed%list.length:0;return list[index]?list[index](name):name+", пусть Аллах дарует вам благо, защиту и баракат.";}
+function getNextPersonalImage(){let index=parseInt(localStorage.getItem("barakaway_personal_card_index")||"0",10);if(!Number.isFinite(index)||index<0)index=0;const image=PERSONAL_CARD_IMAGES[index%PERSONAL_CARD_IMAGES.length];localStorage.setItem("barakaway_personal_card_index",String((index+1)%PERSONAL_CARD_IMAGES.length));return image;}
 let currentGreeting=greetings[0];
 function saveName(){localStorage.setItem("barakaway_greeting_name",(document.getElementById("generatorName").value||"").trim());}
 function loadName(){document.getElementById("generatorName").value=localStorage.getItem("barakaway_greeting_name")||"";}
@@ -402,7 +460,7 @@ function getTodayGreeting(){const list=orderedGreetings();const dayIndex=Math.fl
 function updateToday(){return;}
 function renderCards(filter){const root=document.getElementById("cards");const list=orderedGreetings().filter(function(item){return filter==="all"||item.category===filter;});root.innerHTML=list.map(function(item){return `<article class="greeting-card" data-category="${item.category}"><div class="card-art"><img class="card-image" src="${item.image}" alt="${item.title}" loading="lazy"><div class="card-image-overlay"></div><div class="card-brand-badge"><img src="${LOGO_PATH}" alt="BarakaWay"></div><div class="card-category-badge">${item.label}</div><div class="card-site-mark">barakaway.app</div></div><div class="card-body"><h3 class="card-title">${item.title}</h3><p class="card-text">${item.text}</p></div><div class="card-actions"><button class="action-btn" type="button" onclick="openCard('${item.id}')">Zoom</button><button class="action-btn" type="button" onclick="copyCard('${item.id}')">Копировать</button><button class="action-btn primary" type="button" onclick="shareCard('${item.id}')">Поделиться</button></div></article>`;}).join("");}
 function findGreeting(id){return greetings.find(function(item){return item.id===id;})||greetings[0];}
-function generatePersonal(){saveName();const name=(document.getElementById("generatorName").value||"").trim()||"дорогой брат / дорогая сестра";const cat=document.getElementById("generatorCategory").value;const tpl=personalizedTemplates[cat]||personalizedTemplates.jumuah;const pool=greetings.filter(function(x){return x.category===cat;});const base=pool[Math.floor(Math.random()*pool.length)]||greetings[0];currentGreeting={id:"personal",category:cat,label:tpl.label,title:tpl.title,subtitle:"Персональное поздравление",text:tpl.text(name),arabic:base.arabic,image:base.image};openModal(currentGreeting);}
+function generatePersonal(){saveName();const name=(document.getElementById("generatorName").value||"").trim()||"Дорогой брат / дорогая сестра";const cat=document.getElementById("generatorCategory").value;const tpl=personalizedTemplates[cat]||personalizedTemplates.jumuah;currentGreeting={id:"personal",category:cat,label:tpl.label,title:tpl.title,text:selectPersonalText(cat,name),image:getNextPersonalImage(),personalName:name};openModal(currentGreeting);}
 function openTodayCard(){currentGreeting=getTodayGreeting();openModal(currentGreeting);}
 function openCard(id){currentGreeting=findGreeting(id);openModal(currentGreeting);}
 function copyCard(id){copyText(formatShareText(findGreeting(id)));}
@@ -419,11 +477,12 @@ ctx.strokeStyle="rgba(243,217,146,.78)";ctx.lineWidth=7;drawRoundRect(ctx,34,34,
 try{const logo=await loadCanvasImage(LOGO_PATH);ctx.save();drawRoundRect(ctx,58,58,112,112,30);ctx.clip();ctx.drawImage(logo,58,58,112,112);ctx.restore();ctx.strokeStyle="rgba(243,217,146,.70)";ctx.lineWidth=3;drawRoundRect(ctx,58,58,112,112,30);ctx.stroke();}catch(e){}
 ctx.textAlign="center";ctx.textBaseline="alphabetic";
 if(g.id==="personal"){
-ctx.fillStyle="rgba(0,0,0,.42)";drawRoundRect(ctx,90,365,w-180,520,34);ctx.fill();
-ctx.fillStyle="#fff3cf";ctx.font="700 70px Georgia, Times New Roman, serif";wrapCanvasText(ctx,g.title,w/2,455,w-220,76,2);
-ctx.fillStyle="#f3d992";ctx.font="italic 46px Georgia, Times New Roman, serif";ctx.fillText(g.subtitle||"Персональное поздравление",w/2,560);
-ctx.fillStyle="#fff8e8";ctx.font="650 42px system-ui, Arial";wrapCanvasText(ctx,g.text,w/2,650,w-250,58,5);
-if(g.arabic){ctx.fillStyle="#f3d992";ctx.font="600 38px Georgia, Times New Roman, serif";wrapCanvasText(ctx,g.arabic,w/2,835,w-260,52,2);}
+ctx.save();
+ctx.fillStyle="rgba(0,0,0,.30)";drawRoundRect(ctx,96,385,w-192,430,34);ctx.fill();
+ctx.shadowColor="rgba(0,0,0,.82)";ctx.shadowBlur=18;
+ctx.fillStyle="#fff8e8";ctx.font="700 46px system-ui, Arial";
+wrapCanvasText(ctx,g.text,w/2,485,w-260,64,6);
+ctx.restore();
 }
 ctx.fillStyle="rgba(255,238,190,.96)";ctx.font="800 30px system-ui, Arial";ctx.fillText("BarakaWay App",w/2,h-92);ctx.fillStyle="rgba(255,238,190,.82)";ctx.font="650 25px system-ui, Arial";ctx.fillText("barakaway.app",w/2,h-54);return canvas;}
 async function openModal(g){currentGreeting=g;await drawImageCardToCanvas(g);document.getElementById("modal").classList.add("open");document.getElementById("modal").setAttribute("aria-hidden","false");}
