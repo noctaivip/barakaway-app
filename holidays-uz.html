@@ -129,10 +129,11 @@ border-radius:20px;
 <nav class="tabs" aria-label="Tabrik kategoriyalari"><button class="tab active" type="button" data-filter="jumuah">Juma</button><button class="tab" type="button" data-filter="all">Barchasi</button><button class="tab" type="button" data-filter="ramadan">Ramazon</button><button class="tab" type="button" data-filter="eid-fitr">Ramazon Hayiti</button><button class="tab" type="button" data-filter="eid-adha">Qurbon Hayiti</button><button class="tab" type="button" data-filter="daily">Har kuni</button></nav>
 <div class="section-title"><h2>Tayyor kartalar</h2><p>25 ta karta fayl nomlari bo‘yicha taqsimlangan</p></div><section class="cards" id="cards"></section>
 </main>
-<div class="modal" id="modal" aria-hidden="true"><div class="modal-card"><canvas class="preview-canvas" id="previewCanvas" width="1080" height="1350"></canvas><div class="modal-actions"><button class="action-btn primary" type="button" onclick="shareCurrent()">Ulashish</button><button class="action-btn" type="button" onclick="copyCurrent()">Nusxalash</button><button class="action-btn" type="button" onclick="downloadCurrent()">Yuklab olish</button></div><button class="close-btn" type="button" onclick="closeModal()">Yopish</button></div></div><div class="toast" id="toast">Tayyor</div>
+<div class="modal" id="modal" aria-hidden="true"><div class="modal-card"><canvas class="preview-canvas" id="previewCanvas" width="1080" height="1350"></canvas><div class="modal-actions"><button class="action-btn primary" type="button" onclick="shareCurrent()">Ulashish</button><button class="action-btn" type="button" onclick="regeneratePersonal()">Qayta yaratish</button><button class="action-btn" type="button" onclick="downloadCurrent()">Yuklab olish</button></div><button class="close-btn" type="button" onclick="closeModal()">Yopish</button></div></div><div class="toast" id="toast">Tayyor</div>
 <script>
 const APP_LINK="https://barakaway.app";
 const LOGO_PATH="./assets/greetings.uz/logo.png";
+const PERSONAL_CARD_IMAGES=["./assets/personal/personal-001.png","./assets/personal/personal-002.png","./assets/personal/personal-003.png","./assets/personal/personal-004.png","./assets/personal/personal-005.png","./assets/personal/personal-006.png","./assets/personal/personal-007.png","./assets/personal/personal-008.png","./assets/personal/personal-009.png","./assets/personal/personal-010.png","./assets/personal/personal-011.png","./assets/personal/personal-012.png","./assets/personal/personal-013.png","./assets/personal/personal-014.png","./assets/personal/personal-015.png"];
 const greetings=[
   {
     "id": "ramadan-001",
@@ -387,12 +388,85 @@ const greetings=[
 ];
 
 const personalizedTemplates={
-  jumuah:{label:"Джума",title:"Juma muborak",text:function(name){return name+", Alloh juma kuningizni nur, xotirjamlik, qabul bo‘lgan duolar va oilangiz uchun baraka bilan to‘ldirsin.";}},
-  ramadan:{label:"Рамадан",title:"Ramazon muborak",text:function(name){return name+", bu muborak oy uyingizni baraka bilan to‘ldirib, imoningizni mustahkamlab, Allohning rahmatini olib kelsin.";}},
-  "eid-fitr":{label:"Ураза-байрам",title:"Ramazon Hayiti muborak",text:function(name){return name+", пусть Аллах примет ваш пост, ваши дуа и добрые дела. Ramazon Hayiti muborak вам и вашей семье!";}},
-  "eid-adha":{label:"Курбан-хаит",title:"Qurbon Hayiti muborak",text:function(name){return name+", Alloh ezgu niyatlaringizni qabul qilib, uyingizni tinchlik, farovonlik va baraka bilan to‘ldirsin.";}},
-  daily:{label:"Ежедневно",title:"Har kunlik duo",text:function(name){return name+", Alloh sizga bugun va har doim xotirjamlik, himoya, foydali amallar va halol rizq ato etsin.";}}
+  jumuah:{
+    label:"Juma",
+    title:"Juma muborak",
+    texts:[
+      function(name){return name+", aziz birodar, Alloh ushbu juma kuningizni nur, xotirjamlik, qabul bo‘lgan duolar va oilangiz uchun baraka bilan to‘ldirsin.";},
+      function(name){return name+", barakali juma qalbingizga iymon, uyingizga tinchlik, ishlaringizga baraka va duolaringizga ijobat olib kelsin.";},
+      function(name){return name+", Juma muborak. Alloh iymoningizni mustahkam qilsin, qalbingizni poklasin va hayotingizga baraka ato etsin.";},
+      function(name){return name+", Alloh sizga nurli kun, sokin qalb, halol rizq va butun oilangiz uchun omonlik nasib qilsin.";},
+      function(name){return name+", ushbu juma siz uchun rahmat, mag‘firat, xushxabar va hayotingizda mustahkam barakaga sabab bo‘lsin.";},
+      function(name){return name+", Alloh duolaringizni qabul qilsin, sabringizni mustahkamlasin va bu kunni siz uchun muborak qilsin.";}
+    ]
+  },
+  ramadan:{
+    label:"Ramazon",
+    title:"Ramazon muborak",
+    texts:[
+      function(name){return name+", muqaddas Ramazon iymoningizni mustahkamlasin, qalbingizni poklasin va uyingizni baraka bilan to‘ldirsin.";},
+      function(name){return name+", Ramazon muborak. Alloh ro‘zangizni, duolaringizni va yaxshi amallaringizni qabul qilsin.";},
+      function(name){return name+", ushbu muborak oy sizga ruhiy kuch, mag‘firat, pok niyat va oilangizga xotirjamlik olib kelsin.";},
+      function(name){return name+", Alloh Ramazonni siz uchun nur, qabul, himoya, saxovat va foydali o‘zgarishlar oyi qilsin.";},
+      function(name){return name+", Ramazonning har kuni sizni Allohga yaqinlashtirsin, qalbingizni mustahkamlab, baraka eshiklarini ochsin.";},
+      function(name){return name+", bu oy tutgan ro‘zangiz, o‘qigan namozlaringiz va qilgan yaxshiliklaringiz qabul bo‘lsin.";}
+    ]
+  },
+  "eid-fitr":{
+    label:"Ramazon Hayiti",
+    title:"Ramazon Hayiti muborak",
+    texts:[
+      function(name){return name+", Ramazon Hayiti muborak. Alloh ro‘zangizni, duolaringizni va yaxshi amallaringizni qabul qilsin.";},
+      function(name){return name+", ushbu yorug‘ bayram oilangizga tinchlik, rahmat, quvonch, mag‘firat va keng baraka olib kelsin.";},
+      function(name){return name+", Alloh Ramazondagi sabringizni mukofotlasin, ibodatlaringizni qabul qilib, xushxabarlar ato etsin.";},
+      function(name){return name+", Ramazon Hayiti siz va oilangiz uchun muborak bo‘lsin. Uyingizda nur, totuvlik va baraka bo‘lsin.";},
+      function(name){return name+", bayram kuni yangi xayrli ishlar, pok niyatlar, quvonch va qabul bo‘lgan duolarning boshlanishi bo‘lsin.";},
+      function(name){return name+", Alloh oilangizni asrasin, iymoningizni mustahkamlasin va hayotingizni xotirjamlik hamda baraka bilan to‘ldirsin.";}
+    ]
+  },
+  "eid-adha":{
+    label:"Qurbon Hayiti",
+    title:"Qurbon Hayiti muborak",
+    texts:[
+      function(name){return name+", Qurbon Hayiti muborak. Alloh ezgu niyatlaringizni qabul qilib, uyingizni tinchlik va baraka bilan to‘ldirsin.";},
+      function(name){return name+", ushbu muqaddas bayram oilangizga rahmat, himoya, saxovat, xotirjamlik va xayrli amallar olib kelsin.";},
+      function(name){return name+", Alloh iymoningizni mustahkam qilsin, qalbingizni poklasin va rizq eshiklarini keng ochsin.";},
+      function(name){return name+", Qurbon Hayiti muborak. Uyingizda birlik, hurmat, mehr-shafqat va Allohning barakasi doimiy bo‘lsin.";},
+      function(name){return name+", bu bayram mag‘firat, oilaviy iliqlik, xushxabar va mustahkam barakaga sabab bo‘lsin.";},
+      function(name){return name+", Alloh duolaringizni qabul qilsin, yaqinlaringizni asrasin va sizga pok, barakali rizq ato etsin.";}
+    ]
+  },
+  daily:{
+    label:"Har kuni",
+    title:"Har kunlik duo",
+    texts:[
+      function(name){return name+", Alloh bugun sizga xotirjamlik, himoya, foydali ishlar, halol rizq va qalbingizga nur ato etsin.";},
+      function(name){return name+", bu kuningiz baraka, to‘g‘ri qarorlar, ichki xotirjamlik va Allohning rahmati bilan o‘tsin.";},
+      function(name){return name+", Alloh ishlaringizni oson qilsin, yomonliklardan asrasin, iymoningizni mustahkamlasin va yaxshilikka yo‘naltirsin.";},
+      function(name){return name+", qalbingizda xotirjamlik, uyingizda tinchlik, ishlaringizda foyda va yo‘lingizda Allohning himoyasi bo‘lsin.";},
+      function(name){return name+", Alloh sizga yaxshilik eshiklarini ochsin, ravshanlik, kuch, halol rizq va kunning go‘zal yakunini nasib qilsin.";},
+      function(name){return name+", bugungi kun nur, shukr, foydali amallar va qabul bo‘lgan duolar bilan to‘la bo‘lsin.";}
+    ]
+  }
 };
+function selectPersonalText(category,name){
+const tpl=personalizedTemplates[category]||personalizedTemplates.jumuah;
+const list=tpl.texts||[];
+if(!list.length)return name+", Alloh sizga yaxshilik, himoya va baraka ato etsin.";
+const key="barakaway_personal_text_index_uz_"+category;
+let index=parseInt(localStorage.getItem(key)||"-1",10);
+if(!Number.isFinite(index))index=-1;
+index=(index+1)%list.length;
+localStorage.setItem(key,String(index));
+return list[index](name);
+}
+function getNextPersonalImage(){
+let index=parseInt(localStorage.getItem("barakaway_personal_card_index_uz")||"0",10);
+if(!Number.isFinite(index)||index<0)index=0;
+const image=PERSONAL_CARD_IMAGES[index%PERSONAL_CARD_IMAGES.length];
+localStorage.setItem("barakaway_personal_card_index_uz",String((index+1)%PERSONAL_CARD_IMAGES.length));
+return image;
+}
 let currentGreeting=greetings[0];
 function saveName(){localStorage.setItem("barakaway_greeting_name",(document.getElementById("generatorName").value||"").trim());}
 function loadName(){document.getElementById("generatorName").value=localStorage.getItem("barakaway_greeting_name")||"";}
@@ -400,37 +474,88 @@ function isFriday(){return new Date().getDay()===5;}
 function orderedGreetings(){if(!isFriday())return greetings;return greetings.slice().sort(function(a,b){if(a.category==="jumuah"&&b.category!=="jumuah")return -1;if(a.category!=="jumuah"&&b.category==="jumuah")return 1;return 0;});}
 function getTodayGreeting(){const list=orderedGreetings();const dayIndex=Math.floor(Date.now()/86400000);return list[dayIndex%list.length]||greetings[0];}
 function updateToday(){return;}
-function renderCards(filter){const root=document.getElementById("cards");const list=orderedGreetings().filter(function(item){return filter==="all"||item.category===filter;});root.innerHTML=list.map(function(item){return `<article class="greeting-card" data-category="${item.category}"><div class="card-art"><img class="card-image" src="${item.image}" alt="${item.title}" loading="lazy"><div class="card-image-overlay"></div><div class="card-brand-badge"><img src="${LOGO_PATH}" alt="BarakaWay"></div><div class="card-category-badge">${item.label}</div><div class="card-site-mark">barakaway.app</div></div><div class="card-body"><h3 class="card-title">${item.title}</h3><p class="card-text">${item.text}</p></div><div class="card-actions"><button class="action-btn" type="button" onclick="openCard('${item.id}')">Zoom</button><button class="action-btn" type="button" onclick="copyCard('${item.id}')">Копировать</button><button class="action-btn primary" type="button" onclick="shareCard('${item.id}')">Ulashish</button></div></article>`;}).join("");}
+function renderCards(filter){const root=document.getElementById("cards");const list=orderedGreetings().filter(function(item){return filter==="all"||item.category===filter;});root.innerHTML=list.map(function(item){return `<article class="greeting-card" data-category="${item.category}"><div class="card-art"><img class="card-image" src="${item.image}" alt="${item.title}" loading="lazy"><div class="card-image-overlay"></div><div class="card-brand-badge"><img src="${LOGO_PATH}" alt="BarakaWay"></div><div class="card-category-badge">${item.label}</div><div class="card-site-mark">barakaway.app</div></div><div class="card-body"><h3 class="card-title">${item.title}</h3><p class="card-text">${item.text}</p></div><div class="card-actions"><button class="action-btn" type="button" onclick="openCard('${item.id}')">Zoom</button><button class="action-btn" type="button" onclick="copyCard('${item.id}')">Nusxalash</button><button class="action-btn primary" type="button" onclick="shareCard('${item.id}')">Ulashish</button></div></article>`;}).join("");}
 function findGreeting(id){return greetings.find(function(item){return item.id===id;})||greetings[0];}
-function generatePersonal(){saveName();const name=(document.getElementById("generatorName").value||"").trim()||"qadrli aka / qadrli opa-singil";const cat=document.getElementById("generatorCategory").value;const tpl=personalizedTemplates[cat]||personalizedTemplates.jumuah;const pool=greetings.filter(function(x){return x.category===cat;});const base=pool[Math.floor(Math.random()*pool.length)]||greetings[0];currentGreeting={id:"personal",category:cat,label:tpl.label,title:tpl.title,subtitle:name,text:tpl.text(name),image:base.image,personalName:name};openModal(currentGreeting);}
+function generatePersonal(){saveName();const name=(document.getElementById("generatorName").value||"").trim()||"Qadrli birodar / qadrli opa-singil";const cat=document.getElementById("generatorCategory").value;const tpl=personalizedTemplates[cat]||personalizedTemplates.jumuah;currentGreeting={id:"personal",category:cat,label:tpl.label,title:tpl.title,text:selectPersonalText(cat,name),image:getNextPersonalImage(),personalName:name};openModal(currentGreeting);}
+function regeneratePersonal(){
+if(currentGreeting&&currentGreeting.id==="personal"){
+const currentCategory=currentGreeting.category||"jumuah";
+const currentName=currentGreeting.personalName||(document.getElementById("generatorName").value||"").trim()||"Qadrli birodar / qadrli opa-singil";
+const tpl=personalizedTemplates[currentCategory]||personalizedTemplates.jumuah;
+const list=tpl.texts||[];
+
+let text=currentGreeting.text;
+let tries=0;
+while(text===currentGreeting.text&&tries<12){
+text=list[Math.floor(Math.random()*list.length)](currentName);
+tries++;
+}
+
+let image=currentGreeting.image;
+tries=0;
+while(image===currentGreeting.image&&tries<20){
+image=PERSONAL_CARD_IMAGES[Math.floor(Math.random()*PERSONAL_CARD_IMAGES.length)];
+tries++;
+}
+
+currentGreeting={id:"personal",category:currentCategory,label:tpl.label,title:tpl.title,text:text,image:image,personalName:currentName};
+openModal(currentGreeting);
+return;
+}
+showToast("Avval shaxsiy karta yarating");
+}
 function openTodayCard(){currentGreeting=getTodayGreeting();openModal(currentGreeting);}
 function openCard(id){currentGreeting=findGreeting(id);openModal(currentGreeting);}
 function copyCard(id){copyText(formatShareText(findGreeting(id)));}
 function shareCard(id){currentGreeting=findGreeting(id);shareCurrent();}
-function formatShareText(g){return "Yuklab olish приложение BarakaWay — Коран, Азкары, Зикры, Дуа, Кибла и исламские материалы.\n\nhttps://barakaway.app";}
+function formatShareText(g){return "BarakaWay ilovasini yuklab oling — Qur’on, Azkor, Zikrlar, Duolar, Qibla va islomiy materiallar.\n\nhttps://barakaway.app";}
 
 function wrapCanvasText(ctx,text,x,y,maxWidth,lineHeight,maxLines){const words=String(text||"").split(/\s+/);let line="",lines=[];for(let i=0;i<words.length;i++){const test=line+words[i]+" ";if(ctx.measureText(test).width>maxWidth&&i>0){lines.push(line.trim());line=words[i]+" ";}else{line=test;}}if(line.trim())lines.push(line.trim());if(maxLines&&lines.length>maxLines){lines=lines.slice(0,maxLines);lines[lines.length-1]=lines[lines.length-1].replace(/[.,;:!?]*$/,"")+"…";}lines.forEach(function(l,i){ctx.fillText(l,x,y+i*lineHeight);});}
 
 function drawRoundRect(ctx,x,y,w,h,r){const radius=Math.min(r,w/2,h/2);ctx.beginPath();ctx.moveTo(x+radius,y);ctx.arcTo(x+w,y,x+w,y+h,radius);ctx.arcTo(x+w,y+h,x,y+h,radius);ctx.arcTo(x,y+h,x,y,radius);ctx.arcTo(x,y,x+w,y,radius);ctx.closePath();}
 function loadCanvasImage(src){return new Promise(function(resolve,reject){const img=new Image();img.onload=function(){resolve(img)};img.onerror=reject;img.src=src;});}
+function getAverageLuminance(ctx,x,y,w,h){
+try{
+const data=ctx.getImageData(x,y,w,h).data;
+let total=0,count=0;
+for(let i=0;i<data.length;i+=16){
+const r=data[i],g=data[i+1],b=data[i+2];
+total+=(0.2126*r+0.7152*g+0.0722*b);
+count++;
+}
+return count?total/count:80;
+}catch(e){return 80;}
+}
+function getPersonalTextStyle(ctx,w,h){
+const lum=getAverageLuminance(ctx,Math.round(w*0.18),Math.round(h*0.33),Math.round(w*0.64),Math.round(h*0.32));
+if(lum>175){
+return {panel:"rgba(0,0,0,.68)",text:"#ffffff",shadow:"rgba(0,0,0,.92)",blur:16};
+}
+if(lum<82){
+return {panel:"rgba(0,0,0,.68)",text:"#fff8e8",shadow:"rgba(0,0,0,.92)",blur:20};
+}
+return {panel:"rgba(0,0,0,.66)",text:"#f3d992",shadow:"rgba(0,0,0,.90)",blur:18};
+}
 async function drawImageCardToCanvas(g){const canvas=document.getElementById("previewCanvas");const ctx=canvas.getContext("2d");const w=canvas.width,h=canvas.height;ctx.clearRect(0,0,w,h);ctx.fillStyle="#0c120e";ctx.fillRect(0,0,w,h);try{const img=await loadCanvasImage(g.image);const scale=Math.max(w/img.width,h/img.height);const sw=w/scale,sh=h/scale;const sx=(img.width-sw)/2,sy=(img.height-sh)/2;ctx.drawImage(img,sx,sy,sw,sh,0,0,w,h);}catch(e){const grad=ctx.createLinearGradient(0,0,w,h);grad.addColorStop(0,"#082216");grad.addColorStop(.5,"#1e6c42");grad.addColorStop(1,"#d7b56d");ctx.fillStyle=grad;ctx.fillRect(0,0,w,h);}
 const bottom=ctx.createLinearGradient(0,h*.76,0,h);bottom.addColorStop(0,"rgba(0,0,0,0)");bottom.addColorStop(.78,"rgba(0,0,0,.46)");bottom.addColorStop(1,"rgba(0,0,0,.62)");ctx.fillStyle=bottom;ctx.fillRect(0,0,w,h);
 ctx.strokeStyle="rgba(243,217,146,.78)";ctx.lineWidth=7;drawRoundRect(ctx,34,34,w-68,h-68,36);ctx.stroke();
 try{const logo=await loadCanvasImage(LOGO_PATH);ctx.save();drawRoundRect(ctx,58,58,112,112,30);ctx.clip();ctx.drawImage(logo,58,58,112,112);ctx.restore();ctx.strokeStyle="rgba(243,217,146,.70)";ctx.lineWidth=3;drawRoundRect(ctx,58,58,112,112,30);ctx.stroke();}catch(e){}
-if(g.personalName){
-ctx.textAlign="center";
-ctx.fillStyle="#fff6d8";
-ctx.shadowColor="rgba(0,0,0,.65)";
-ctx.shadowBlur=18;
-ctx.font="700 64px Georgia";
-ctx.fillText(g.personalName,w/2,h*0.52);
-
-ctx.font="500 34px Georgia";
-wrapCanvasText(ctx,g.text,w/2-360,h*0.60,720,48,4);
-ctx.shadowBlur=0;
+ctx.textAlign="center";ctx.textBaseline="alphabetic";
+if(g.id==="personal"){
+const style=getPersonalTextStyle(ctx,w,h);
+ctx.save();
+ctx.fillStyle=style.panel;
+drawRoundRect(ctx,96,385,w-192,430,34);
+ctx.fill();
+ctx.shadowColor=style.shadow;
+ctx.shadowBlur=style.blur;
+ctx.fillStyle=style.text;
+ctx.font="700 46px system-ui, Arial";
+wrapCanvasText(ctx,g.text,w/2,485,w-260,64,6);
+ctx.restore();
 }
 
-ctx.textAlign="center";ctx.textBaseline="alphabetic";ctx.fillStyle="rgba(255,238,190,.96)";ctx.font="800 30px system-ui, Arial";ctx.fillText("BarakaWay App",w/2,h-92);ctx.fillStyle="rgba(255,238,190,.82)";ctx.font="650 25px system-ui, Arial";ctx.fillText("barakaway.app",w/2,h-54);return canvas;}
+ctx.fillStyle="rgba(255,238,190,.96)";ctx.font="800 30px system-ui, Arial";ctx.fillText("BarakaWay App",w/2,h-92);ctx.fillStyle="rgba(255,238,190,.82)";ctx.font="650 25px system-ui, Arial";ctx.fillText("barakaway.app",w/2,h-54);return canvas;}
 async function openModal(g){currentGreeting=g;await drawImageCardToCanvas(g);document.getElementById("modal").classList.add("open");document.getElementById("modal").setAttribute("aria-hidden","false");}
 function closeModal(){document.getElementById("modal").classList.remove("open");document.getElementById("modal").setAttribute("aria-hidden","true");}
 function canvasToBlob(canvas){return new Promise(function(resolve){canvas.toBlob(function(blob){resolve(blob);},"image/png",.96);});}
@@ -450,7 +575,7 @@ await navigator.share({title:currentGreeting.title,text:text});
 return;
 }
 }catch(e){}
-showToast("Ulashish недоступно на этом устройстве");
+showToast("Ulashish bu qurilmada mavjud emas");
 }
 
 function copyCurrent(){copyText(formatShareText(currentGreeting));}
