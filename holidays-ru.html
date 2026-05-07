@@ -392,7 +392,7 @@ const personalizedTemplates={
     label:"Джума",
     title:"Джума мубарак",
     headlines:["Джума мубарак","Благословенная Джума","Светлой Джумы","Джума — день бараката","Мирной Джумы"],
-    texts:
+    texts:[
       function(name){return name+", дорогой брат, пусть Аллах наполнит эту пятницу светом, спокойствием, принятыми дуа и баракатом для вашей семьи.";},
       function(name){return name+", пусть благословенная пятница принесёт вашему сердцу иман, дому — мир, делам — баракат, а дуа — принятие у Аллаха.";},
       function(name){return name+", в этот день Джума пусть Аллах укрепит вашу веру, очистит сердце, простит ошибки и откроет двери к благому.";},
@@ -405,7 +405,7 @@ const personalizedTemplates={
     label:"Рамадан",
     title:"Рамадан мубарак",
     headlines:["Рамадан мубарак","Благословенный Рамадан","Священный Рамадан","Месяц милости","Рамадан — месяц света"],
-    texts:
+    texts:[
       function(name){return name+", пусть священный Рамадан укрепит ваш иман, очистит сердце, наполнит дом баракатом и приблизит вас к милости Аллаха.";},
       function(name){return name+", Рамадан мубарак. Пусть Аллах примет ваш пост, ваши дуа, ваши добрые дела и дарует семье мир.";},
       function(name){return name+", пусть этот благословенный месяц принесёт духовную силу, прощение, чистые намерения и спокойствие вашему дому.";},
@@ -418,7 +418,7 @@ const personalizedTemplates={
     label:"Ураза-байрам",
     title:"Ураза-байрам мубарак",
     headlines:["Ид аль-Фитр мубарак","Ураза-байрам мубарак","Праздник Фитр","Светлый Ид аль-Фитр","День радости и милости"],
-    texts:
+    texts:[
       function(name){return name+", Ураза-байрам мубарак. Пусть Аллах примет ваш пост, ваши дуа и добрые дела, и наполнит дом радостью.";},
       function(name){return name+", пусть этот светлый праздник принесёт вашей семье мир, милость, радость, прощение и щедрый баракат.";},
       function(name){return name+", пусть Аллах вознаградит вас за терпение Рамадана, примет поклонение и дарует благие вести.";},
@@ -431,7 +431,7 @@ const personalizedTemplates={
     label:"Курбан-хаит",
     title:"Курбан-хаит мубарак",
     headlines:["Ид аль-Адха мубарак","Курбан-хаит мубарак","Праздник жертвенности","Благословенный Ид аль-Адха","День милости и бараката"],
-    texts:
+    texts:[
       function(name){return name+", Курбан-хаит мубарак. Пусть Аллах примет ваши добрые намерения и наполнит дом миром, достатком и баракатом.";},
       function(name){return name+", пусть этот священный праздник принесёт вашей семье милость, защиту, щедрость, спокойствие и принятие благих дел.";},
       function(name){return name+", пусть Аллах укрепит вашу веру, очистит сердце, примет жертву и откроет двери к добру и ризку.";},
@@ -444,7 +444,7 @@ const personalizedTemplates={
     label:"Ежедневно",
     title:"Дуа на каждый день",
     headlines:["Дуа на каждый день","Баракат этого дня","Мир вашему дому","Свет в сердце","Благословенный день"],
-    texts:
+    texts:[
       function(name){return name+", пусть Аллах дарует вам сегодня спокойствие, защиту, полезные дела, чистый ризк и свет в сердце.";},
       function(name){return name+", пусть этот день пройдёт с баракатом, добрыми решениями, внутренним миром и милостью Аллаха.";},
       function(name){return name+", пусть Аллах облегчит ваши дела, сохранит от плохого, укрепит иман и направит к благому.";},
@@ -570,7 +570,7 @@ return {panel:"rgba(0,0,0,.66)",text:"#f3d992",shadow:"rgba(0,0,0,.90)",blur:18}
 async function drawImageCardToCanvas(g){const canvas=document.getElementById("previewCanvas");const ctx=canvas.getContext("2d");const w=canvas.width,h=canvas.height;ctx.clearRect(0,0,w,h);ctx.fillStyle="#0c120e";ctx.fillRect(0,0,w,h);try{const img=await loadCanvasImage(g.image);const scale=Math.max(w/img.width,h/img.height);const sw=w/scale,sh=h/scale;const sx=(img.width-sw)/2,sy=(img.height-sh)/2;ctx.drawImage(img,sx,sy,sw,sh,0,0,w,h);}catch(e){const grad=ctx.createLinearGradient(0,0,w,h);grad.addColorStop(0,"#082216");grad.addColorStop(.5,"#1e6c42");grad.addColorStop(1,"#d7b56d");ctx.fillStyle=grad;ctx.fillRect(0,0,w,h);}
 const bottom=ctx.createLinearGradient(0,h*.76,0,h);bottom.addColorStop(0,"rgba(0,0,0,0)");bottom.addColorStop(.78,"rgba(0,0,0,.46)");bottom.addColorStop(1,"rgba(0,0,0,.62)");ctx.fillStyle=bottom;ctx.fillRect(0,0,w,h);
 ctx.strokeStyle="rgba(243,217,146,.78)";ctx.lineWidth=7;drawRoundRect(ctx,34,34,w-68,h-68,36);ctx.stroke();
-try{const logo=await loadCanvasImage(LOGO_PATH);ctx.save();drawRoundRect(ctx,58,58,112,112,30);ctx.clip();ctx.drawImage(logo,58,58,112,112);ctx.restore();ctx.strokeStyle="rgba(243,217,146,.70)";ctx.lineWidth=3;drawRoundRect(ctx,58,58,112,112,30);ctx.stroke();}catch(e){}
+try{const logo=await loadCanvasImage(LOGO_PATH);ctx.save();const logoX=(w-112)/2;drawRoundRect(ctx,logoX,58,112,112,30);ctx.clip();ctx.drawImage(logo,logoX,58,112,112);ctx.restore();ctx.strokeStyle="rgba(243,217,146,.70)";ctx.lineWidth=3;drawRoundRect(ctx,logoX,58,112,112,30);ctx.stroke();}catch(e){}
 ctx.textAlign="center";ctx.textBaseline="alphabetic";
 if(g.id==="personal"){
 const style=getPersonalTextStyle(ctx,w,h);
