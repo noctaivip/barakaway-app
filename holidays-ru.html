@@ -391,7 +391,8 @@ const personalizedTemplates={
   jumuah:{
     label:"Джума",
     title:"Джума мубарак",
-    texts:[
+    headlines:["Джума мубарак","Благословенная Джума","Светлой Джумы","Джума — день бараката","Мирной Джумы"],
+    texts:
       function(name){return name+", дорогой брат, пусть Аллах наполнит эту пятницу светом, спокойствием, принятыми дуа и баракатом для вашей семьи.";},
       function(name){return name+", пусть благословенная пятница принесёт вашему сердцу иман, дому — мир, делам — баракат, а дуа — принятие у Аллаха.";},
       function(name){return name+", в этот день Джума пусть Аллах укрепит вашу веру, очистит сердце, простит ошибки и откроет двери к благому.";},
@@ -403,7 +404,8 @@ const personalizedTemplates={
   ramadan:{
     label:"Рамадан",
     title:"Рамадан мубарак",
-    texts:[
+    headlines:["Рамадан мубарак","Благословенный Рамадан","Священный Рамадан","Месяц милости","Рамадан — месяц света"],
+    texts:
       function(name){return name+", пусть священный Рамадан укрепит ваш иман, очистит сердце, наполнит дом баракатом и приблизит вас к милости Аллаха.";},
       function(name){return name+", Рамадан мубарак. Пусть Аллах примет ваш пост, ваши дуа, ваши добрые дела и дарует семье мир.";},
       function(name){return name+", пусть этот благословенный месяц принесёт духовную силу, прощение, чистые намерения и спокойствие вашему дому.";},
@@ -415,7 +417,8 @@ const personalizedTemplates={
   "eid-fitr":{
     label:"Ураза-байрам",
     title:"Ураза-байрам мубарак",
-    texts:[
+    headlines:["Ид аль-Фитр мубарак","Ураза-байрам мубарак","Праздник Фитр","Светлый Ид аль-Фитр","День радости и милости"],
+    texts:
       function(name){return name+", Ураза-байрам мубарак. Пусть Аллах примет ваш пост, ваши дуа и добрые дела, и наполнит дом радостью.";},
       function(name){return name+", пусть этот светлый праздник принесёт вашей семье мир, милость, радость, прощение и щедрый баракат.";},
       function(name){return name+", пусть Аллах вознаградит вас за терпение Рамадана, примет поклонение и дарует благие вести.";},
@@ -427,7 +430,8 @@ const personalizedTemplates={
   "eid-adha":{
     label:"Курбан-хаит",
     title:"Курбан-хаит мубарак",
-    texts:[
+    headlines:["Ид аль-Адха мубарак","Курбан-хаит мубарак","Праздник жертвенности","Благословенный Ид аль-Адха","День милости и бараката"],
+    texts:
       function(name){return name+", Курбан-хаит мубарак. Пусть Аллах примет ваши добрые намерения и наполнит дом миром, достатком и баракатом.";},
       function(name){return name+", пусть этот священный праздник принесёт вашей семье милость, защиту, щедрость, спокойствие и принятие благих дел.";},
       function(name){return name+", пусть Аллах укрепит вашу веру, очистит сердце, примет жертву и откроет двери к добру и ризку.";},
@@ -439,7 +443,8 @@ const personalizedTemplates={
   daily:{
     label:"Ежедневно",
     title:"Дуа на каждый день",
-    texts:[
+    headlines:["Дуа на каждый день","Баракат этого дня","Мир вашему дому","Свет в сердце","Благословенный день"],
+    texts:
       function(name){return name+", пусть Аллах дарует вам сегодня спокойствие, защиту, полезные дела, чистый ризк и свет в сердце.";},
       function(name){return name+", пусть этот день пройдёт с баракатом, добрыми решениями, внутренним миром и милостью Аллаха.";},
       function(name){return name+", пусть Аллах облегчит ваши дела, сохранит от плохого, укрепит иман и направит к благому.";},
@@ -449,6 +454,16 @@ const personalizedTemplates={
     ]
   }
 };
+function selectPersonalHeadline(category){
+const tpl=personalizedTemplates[category]||personalizedTemplates.jumuah;
+const list=tpl.headlines||[tpl.title];
+const key="barakaway_personal_headline_index_"+category;
+let index=parseInt(localStorage.getItem(key)||"-1",10);
+if(!Number.isFinite(index))index=-1;
+index=(index+1)%list.length;
+localStorage.setItem(key,String(index));
+return list[index];
+}
 function selectPersonalText(category,name){
 const tpl=personalizedTemplates[category]||personalizedTemplates.jumuah;
 const list=tpl.texts||[];
@@ -470,7 +485,7 @@ function getTodayGreeting(){const list=orderedGreetings();const dayIndex=Math.fl
 function updateToday(){return;}
 function renderCards(filter){const root=document.getElementById("cards");const list=orderedGreetings().filter(function(item){return filter==="all"||item.category===filter;});root.innerHTML=list.map(function(item){return `<article class="greeting-card" data-category="${item.category}"><div class="card-art"><img class="card-image" src="${item.image}" alt="${item.title}" loading="lazy"><div class="card-image-overlay"></div><div class="card-brand-badge"><img src="${LOGO_PATH}" alt="BarakaWay"></div><div class="card-category-badge">${item.label}</div><div class="card-site-mark">barakaway.app</div></div><div class="card-body"><h3 class="card-title">${item.title}</h3><p class="card-text">${item.text}</p></div><div class="card-actions"><button class="action-btn" type="button" onclick="openCard('${item.id}')">Zoom</button><button class="action-btn" type="button" onclick="copyCard('${item.id}')">Копировать</button><button class="action-btn primary" type="button" onclick="shareCard('${item.id}')">Поделиться</button></div></article>`;}).join("");}
 function findGreeting(id){return greetings.find(function(item){return item.id===id;})||greetings[0];}
-function generatePersonal(){saveName();const name=(document.getElementById("generatorName").value||"").trim()||"Дорогой брат / дорогая сестра";const cat=document.getElementById("generatorCategory").value;const tpl=personalizedTemplates[cat]||personalizedTemplates.jumuah;currentGreeting={id:"personal",category:cat,label:tpl.label,title:tpl.title,text:selectPersonalText(cat,name),image:getNextPersonalImage(),personalName:name};openModal(currentGreeting);}
+function generatePersonal(){saveName();const name=(document.getElementById("generatorName").value||"").trim()||"Дорогой брат / дорогая сестра";const cat=document.getElementById("generatorCategory").value;const tpl=personalizedTemplates[cat]||personalizedTemplates.jumuah;currentGreeting={id:"personal",category:cat,label:tpl.label,title:tpl.title,headline:selectPersonalHeadline(cat),text:selectPersonalText(cat,name),image:getNextPersonalImage(),personalName:name};openModal(currentGreeting);}
 function regeneratePersonal(){
 if(currentGreeting&&currentGreeting.id==="personal"){
 const currentCategory=currentGreeting.category||"jumuah";
@@ -478,6 +493,15 @@ const currentName=currentGreeting.personalName||(document.getElementById("genera
 
 const tpl=personalizedTemplates[currentCategory]||personalizedTemplates.jumuah;
 const list=tpl.texts||[];
+
+let headline=currentGreeting.headline||currentGreeting.title;
+let headlineTries=0;
+const headlineList=tpl.headlines||[tpl.title];
+
+while(headline===currentGreeting.headline&&headlineTries<12){
+headline=headlineList[Math.floor(Math.random()*headlineList.length)];
+headlineTries++;
+}
 
 let text=currentGreeting.text;
 let tries=0;
@@ -500,6 +524,7 @@ id:"personal",
 category:currentCategory,
 label:tpl.label,
 title:tpl.title,
+headline:headline,
 text:text,
 image:image,
 personalName:currentName
@@ -551,13 +576,22 @@ if(g.id==="personal"){
 const style=getPersonalTextStyle(ctx,w,h);
 ctx.save();
 ctx.fillStyle=style.panel;
-drawRoundRect(ctx,96,385,w-192,430,34);
+drawRoundRect(ctx,88,330,w-176,520,38);
 ctx.fill();
 ctx.shadowColor=style.shadow;
 ctx.shadowBlur=style.blur;
+ctx.fillStyle="#f3d992";
+ctx.font="900 72px Georgia, 'Times New Roman', serif";
+wrapCanvasText(ctx,g.headline||g.title,w/2,455,w-250,82,2);
+ctx.strokeStyle="rgba(243,217,146,.58)";
+ctx.lineWidth=3;
+ctx.beginPath();
+ctx.moveTo(220,545);
+ctx.lineTo(w-220,545);
+ctx.stroke();
 ctx.fillStyle=style.text;
-ctx.font="700 46px system-ui, Arial";
-wrapCanvasText(ctx,g.text,w/2,485,w-260,64,6);
+ctx.font="700 43px system-ui, Arial";
+wrapCanvasText(ctx,g.text,w/2,625,w-260,60,5);
 ctx.restore();
 }
 ctx.fillStyle="rgba(255,238,190,.96)";ctx.font="800 30px system-ui, Arial";ctx.fillText("BarakaWay App",w/2,h-92);ctx.fillStyle="rgba(255,238,190,.82)";ctx.font="650 25px system-ui, Arial";ctx.fillText("barakaway.app",w/2,h-54);return canvas;}
