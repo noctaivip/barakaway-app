@@ -2675,6 +2675,873 @@ html.light-mode .baraka-pro-text{color:#3f5147;}
 .baraka-pro-action,.baraka-pro-arrow{display:none !important;}
 @media(max-width:700px){.baraka-pro-promo{margin:17px auto 8px;padding:20px 17px 19px;border-radius:24px;width:calc(100% - 12px);box-sizing:border-box;}.baraka-pro-promo::after{border-radius:22px;}.baraka-pro-title{font-size:24px;}.baraka-pro-text{font-size:13px;}.baraka-pro-price{font-size:13px;}}
 
+
+/* BARAKAWAY PRO PROFESSIONAL STATE OVERRIDES */
+.barakaway-pro-shell{
+  margin:28px 0 28px !important;
+}
+
+.baraka-pro-promo{
+  position:relative;
+  overflow:hidden;
+  display:block;
+  border-radius:30px;
+  padding:24px 22px;
+  text-decoration:none;
+}
+
+html.dark-mode .baraka-pro-promo{
+  background:
+    radial-gradient(circle at 90% 0%, rgba(215,192,122,.18), transparent 28%),
+    linear-gradient(135deg,#191f28 0%,#121b23 52%,#213321 100%);
+  border:1px solid rgba(215,192,122,.24);
+  box-shadow:0 18px 42px rgba(0,0,0,.26), inset 0 1px 0 rgba(255,255,255,.04);
+}
+
+html.light-mode .baraka-pro-promo{
+  background:
+    radial-gradient(circle at 90% 0%, rgba(215,192,122,.14), transparent 28%),
+    linear-gradient(135deg,#fff8e7 0%,#ffffff 52%,#edf7f1 100%);
+  border:1px solid rgba(141,107,22,.16);
+  box-shadow:0 18px 36px rgba(15,24,18,.08), inset 0 1px 0 rgba(255,255,255,.92);
+}
+
+.baraka-pro-promo::after{
+  content:"";
+  position:absolute;
+  inset:0;
+  background:linear-gradient(120deg,transparent 55%,rgba(255,255,255,.08),transparent 70%);
+  opacity:.7;
+  pointer-events:none;
+}
+
+.baraka-pro-top,
+.baraka-pro-title,
+.baraka-pro-text,
+.baraka-pro-cta-row{
+  position:relative;
+  z-index:2;
+}
+
+.baraka-pro-top{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:12px;
+  flex-wrap:wrap;
+}
+
+.baraka-pro-title{
+  margin:17px 0 8px;
+  font-size:31px;
+  line-height:1.05;
+  font-weight:950;
+  letter-spacing:-.055em;
+}
+
+.baraka-pro-text{
+  max-width:720px;
+  font-size:14px;
+  line-height:1.5;
+  font-weight:650;
+}
+
+html.dark-mode .baraka-pro-text{color:#b9c5cf;}
+html.light-mode .baraka-pro-text{color:#58685f;}
+
+.baraka-pro-badge,
+.baraka-pro-price,
+.baraka-pro-status,
+.baraka-pro-cta{
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  min-height:34px;
+  padding:8px 12px;
+  border-radius:999px;
+  font-size:12px;
+  font-weight:950;
+  letter-spacing:-.01em;
+}
+
+html.dark-mode .baraka-pro-badge,
+html.dark-mode .baraka-pro-price,
+html.dark-mode .baraka-pro-status{
+  background:rgba(215,192,122,.12);
+  color:#f2df9d;
+  border:1px solid rgba(215,192,122,.24);
+}
+
+html.light-mode .baraka-pro-badge,
+html.light-mode .baraka-pro-price,
+html.light-mode .baraka-pro-status{
+  background:#fff5dc;
+  color:#785713;
+  border:1px solid rgba(141,107,22,.16);
+}
+
+.baraka-pro-cta{
+  min-height:42px;
+  padding:11px 17px;
+  background:linear-gradient(135deg,#f1db91 0%,#d7c07a 52%,#af8430 100%);
+  color:#111;
+  box-shadow:0 12px 24px rgba(141,107,22,.16);
+}
+
+.barakaway-pro-shell[data-pro-state="unlocked"] .baraka-pro-status{
+  background:rgba(76,175,106,.14);
+  color:#66c680;
+  border-color:rgba(102,198,128,.28);
+}
+
+.barakaway-pro-shell[data-pro-state="unlocked"] .baraka-pro-cta{
+  background:linear-gradient(135deg,#66c680 0%,#2d7a46 100%);
+  color:#fff;
+}
+
+.pro-themes-dropdown{
+  margin:14px 0;
+  border-radius:26px;
+  overflow:hidden;
+}
+
+html.dark-mode .pro-themes-dropdown{
+  background:linear-gradient(135deg,#151d26,#111920);
+  border:1px solid rgba(215,192,122,.18);
+  box-shadow:0 14px 28px rgba(0,0,0,.18);
+}
+
+html.light-mode .pro-themes-dropdown{
+  background:linear-gradient(135deg,#ffffff,#f7fbf8);
+  border:1px solid rgba(141,107,22,.12);
+  box-shadow:0 14px 28px rgba(15,24,18,.05);
+}
+
+.pro-themes-dropdown summary{
+  list-style:none;
+  cursor:pointer;
+  padding:18px;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:14px;
+}
+
+.pro-themes-dropdown summary::-webkit-details-marker{
+  display:none;
+}
+
+.pro-themes-dropdown summary strong{
+  display:block;
+  font-size:18px;
+  font-weight:950;
+  letter-spacing:-.035em;
+}
+
+.pro-themes-dropdown summary small{
+  display:block;
+  margin-top:3px;
+  font-size:12px;
+  font-weight:700;
+}
+
+html.dark-mode .pro-themes-dropdown summary small{color:#aebbc5;}
+html.light-mode .pro-themes-dropdown summary small{color:#65756c;}
+
+.pro-dropdown-arrow{
+  width:34px;
+  height:34px;
+  border-radius:50%;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-size:21px;
+  transition:transform .2s ease;
+}
+
+html.dark-mode .pro-dropdown-arrow{
+  background:rgba(215,192,122,.12);
+  color:#f2df9d;
+}
+
+html.light-mode .pro-dropdown-arrow{
+  background:#fff5dc;
+  color:#785713;
+}
+
+.pro-themes-dropdown[open] .pro-dropdown-arrow{
+  transform:rotate(180deg);
+}
+
+.pro-theme-grid{
+  display:grid;
+  grid-template-columns:repeat(2,minmax(0,1fr));
+  gap:11px;
+  padding:0 14px 16px;
+}
+
+.pro-theme-card{
+  position:relative;
+  overflow:hidden;
+  min-height:112px;
+  border-radius:22px;
+  padding:16px;
+  text-decoration:none;
+  color:#fff;
+  box-shadow:0 12px 24px rgba(0,0,0,.18);
+}
+
+.pro-theme-gold{background:linear-gradient(135deg,#15100a,#4b3615 52%,#d7c07a);}
+.pro-theme-violet{background:linear-gradient(135deg,#181222,#3b2868 52%,#a176ff);}
+.pro-theme-carbon{background:linear-gradient(135deg,#080a0d,#1b222b 52%,#59616c);}
+.pro-theme-child{background:linear-gradient(135deg,#244a70,#87cbff 52%,#ffe3f1);}
+
+.pro-theme-card strong{
+  display:block;
+  max-width:150px;
+  font-size:16px;
+  line-height:1.12;
+  font-weight:950;
+  letter-spacing:-.03em;
+}
+
+.pro-theme-card small{
+  display:block;
+  max-width:160px;
+  margin-top:8px;
+  font-size:11px;
+  line-height:1.28;
+  font-weight:750;
+  opacity:.88;
+}
+
+.pro-theme-lock{
+  position:absolute;
+  top:12px;
+  right:12px;
+  padding:5px 8px;
+  border-radius:999px;
+  background:rgba(0,0,0,.26);
+  border:1px solid rgba(255,255,255,.22);
+  font-size:10px;
+  font-weight:950;
+}
+
+.pro-unlocked-note{
+  display:none;
+  margin:14px 0;
+  padding:13px 15px;
+  border-radius:20px;
+  font-size:13px;
+  font-weight:850;
+}
+
+html.dark-mode .pro-unlocked-note{
+  background:rgba(76,175,106,.12);
+  color:#dff7e6;
+  border:1px solid rgba(102,198,128,.20);
+}
+
+html.light-mode .pro-unlocked-note{
+  background:#eff9f2;
+  color:#2d7a46;
+  border:1px solid rgba(45,122,70,.13);
+}
+
+.barakaway-pro-shell[data-pro-state="unlocked"] .pro-unlocked-note{
+  display:block;
+}
+
+.pro-feature-strip{
+  display:grid !important;
+  grid-template-columns:repeat(2,minmax(0,1fr));
+  gap:12px !important;
+  margin-top:14px !important;
+}
+
+.pro-feature-chip{
+  position:relative;
+  min-height:116px !important;
+  align-items:flex-start !important;
+  justify-content:flex-start !important;
+  flex-direction:column !important;
+  gap:7px !important;
+  border-radius:24px !important;
+  padding:16px !important;
+  overflow:hidden;
+  text-align:left;
+}
+
+.pro-feature-chip::after{
+  content:"";
+  position:absolute;
+  inset:0;
+  background:rgba(7,10,13,.42);
+  backdrop-filter:blur(2px);
+  -webkit-backdrop-filter:blur(2px);
+  pointer-events:none;
+  transition:opacity .25s ease;
+}
+
+.pro-feature-chip em{
+  position:absolute;
+  right:12px;
+  top:12px;
+  z-index:3;
+  padding:5px 9px;
+  border-radius:999px;
+  background:rgba(215,192,122,.16);
+  border:1px solid rgba(215,192,122,.24);
+  color:#f2df9d;
+  font-size:10px;
+  font-style:normal;
+  font-weight:950;
+  letter-spacing:.08em;
+}
+
+.pro-feature-icon,
+.pro-feature-chip strong,
+.pro-feature-chip small{
+  position:relative;
+  z-index:2;
+}
+
+.pro-feature-icon{
+  width:38px;
+  height:38px;
+  border-radius:15px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  background:rgba(215,192,122,.12);
+  font-size:20px;
+}
+
+.pro-feature-chip strong{
+  font-size:16px;
+  line-height:1.13;
+  font-weight:950;
+  letter-spacing:-.03em;
+}
+
+.pro-feature-chip small{
+  display:block;
+  padding-right:30px;
+  font-size:11.5px;
+  line-height:1.32;
+  font-weight:750;
+  opacity:.82;
+}
+
+.barakaway-pro-shell[data-pro-state="unlocked"] .pro-feature-chip::after{
+  opacity:0;
+}
+
+.barakaway-pro-shell[data-pro-state="unlocked"] .pro-feature-chip em{
+  background:rgba(76,175,106,.14);
+  border-color:rgba(102,198,128,.26);
+  color:#66c680;
+}
+
+@media(max-width:700px){
+  .baraka-pro-title{
+    font-size:27px;
+  }
+  .pro-feature-strip,
+  .pro-theme-grid{
+    grid-template-columns:1fr !important;
+  }
+  .pro-feature-chip{
+    min-height:108px !important;
+  }
+}
+
+
+/* BARAKAWAY PRO FINAL HOME */
+.barakaway-pro-final{
+  margin:28px 0 30px;
+  border-radius:32px;
+  overflow:hidden;
+  position:relative;
+  transition:background .25s,border-color .25s,box-shadow .25s;
+}
+
+html.dark-mode .barakaway-pro-final{
+  background:
+    radial-gradient(circle at 90% 0%,rgba(215,192,122,.16),transparent 28%),
+    radial-gradient(circle at 10% 100%,rgba(102,198,128,.12),transparent 28%),
+    linear-gradient(135deg,#171f28 0%,#111a22 52%,#182b22 100%);
+  border:1px solid rgba(215,192,122,.22);
+  box-shadow:0 20px 48px rgba(0,0,0,.28), inset 0 1px 0 rgba(255,255,255,.04);
+}
+
+html.light-mode .barakaway-pro-final{
+  background:
+    radial-gradient(circle at 90% 0%,rgba(215,192,122,.13),transparent 28%),
+    radial-gradient(circle at 10% 100%,rgba(76,175,106,.10),transparent 28%),
+    linear-gradient(135deg,#fff8e7 0%,#ffffff 52%,#edf8f1 100%);
+  border:1px solid rgba(141,107,22,.16);
+  box-shadow:0 20px 42px rgba(17,27,20,.08), inset 0 1px 0 rgba(255,255,255,.92);
+}
+
+.barakaway-pro-final::after{
+  content:"";
+  position:absolute;
+  inset:0;
+  background:linear-gradient(120deg,transparent 56%,rgba(255,255,255,.08),transparent 72%);
+  opacity:.78;
+  pointer-events:none;
+}
+
+.pro-final-head,
+.pro-final-themes,
+.pro-final-grid,
+.pro-final-actions,
+.pro-final-status-line{
+  position:relative;
+  z-index:2;
+}
+
+.pro-final-head{
+  padding:24px 22px 12px;
+}
+
+.pro-final-top{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:12px;
+  flex-wrap:wrap;
+  margin-bottom:15px;
+}
+
+.pro-final-badge,
+.pro-final-state{
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  min-height:34px;
+  padding:8px 12px;
+  border-radius:999px;
+  font-size:11px;
+  font-weight:950;
+  letter-spacing:.10em;
+  text-transform:uppercase;
+}
+
+html.dark-mode .pro-final-badge,
+html.dark-mode .pro-final-state{
+  background:rgba(215,192,122,.12);
+  color:#f2df9d;
+  border:1px solid rgba(215,192,122,.24);
+}
+
+html.light-mode .pro-final-badge,
+html.light-mode .pro-final-state{
+  background:#fff5dc;
+  color:#785713;
+  border:1px solid rgba(141,107,22,.16);
+}
+
+.barakaway-pro-final[data-pro-state="unlocked"] .pro-final-state{
+  background:rgba(76,175,106,.14);
+  color:#dff7e6;
+  border-color:rgba(102,198,128,.28);
+}
+
+.pro-final-title{
+  margin:0;
+  font-size:31px;
+  line-height:1.05;
+  font-weight:950;
+  letter-spacing:-.055em;
+}
+
+html.dark-mode .pro-final-title{color:#f7fbf8;}
+html.light-mode .pro-final-title{color:#172019;}
+
+.pro-final-text{
+  max-width:720px;
+  margin:10px 0 0;
+  font-size:14px;
+  line-height:1.5;
+  font-weight:650;
+}
+
+html.dark-mode .pro-final-text{color:#b9c5cf;}
+html.light-mode .pro-final-text{color:#58685f;}
+
+.pro-final-actions{
+  display:flex;
+  gap:10px;
+  flex-wrap:wrap;
+  padding:4px 22px 18px;
+}
+
+.pro-final-main-btn,
+.pro-final-secondary-btn{
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  min-height:46px;
+  padding:12px 17px;
+  border-radius:999px;
+  text-decoration:none;
+  font-size:13px;
+  font-weight:950;
+  transition:transform .18s ease,box-shadow .25s ease;
+}
+
+.pro-final-main-btn:hover,
+.pro-final-secondary-btn:hover{
+  transform:translateY(-2px);
+}
+
+.pro-final-main-btn{
+  background:linear-gradient(135deg,#f1db91 0%,#d7c07a 52%,#af8430 100%);
+  color:#11150f;
+  box-shadow:0 14px 28px rgba(141,107,22,.18);
+}
+
+.barakaway-pro-final[data-pro-state="unlocked"] .pro-final-main-btn{
+  background:linear-gradient(135deg,#66c680 0%,#2d7a46 100%);
+  color:#fff;
+}
+
+html.dark-mode .pro-final-secondary-btn{
+  background:rgba(20,28,37,.80);
+  color:#f7faf8;
+  border:1px solid rgba(215,192,122,.18);
+}
+
+html.light-mode .pro-final-secondary-btn{
+  background:#ffffff;
+  color:#1f2a22;
+  border:1px solid rgba(45,122,70,.14);
+}
+
+.pro-final-status-line{
+  display:none;
+  margin:0 22px 15px;
+  padding:13px 15px;
+  border-radius:20px;
+  font-size:13px;
+  font-weight:850;
+}
+
+.barakaway-pro-final[data-pro-state="unlocked"] .pro-final-status-line{
+  display:block;
+}
+
+html.dark-mode .pro-final-status-line{
+  background:rgba(76,175,106,.12);
+  color:#dff7e6;
+  border:1px solid rgba(102,198,128,.20);
+}
+
+html.light-mode .pro-final-status-line{
+  background:#eff9f2;
+  color:#2d7a46;
+  border:1px solid rgba(45,122,70,.13);
+}
+
+.pro-final-themes{
+  margin:0 18px 15px;
+  border-radius:26px;
+  overflow:hidden;
+}
+
+html.dark-mode .pro-final-themes{
+  background:rgba(13,19,25,.44);
+  border:1px solid rgba(215,192,122,.16);
+}
+
+html.light-mode .pro-final-themes{
+  background:rgba(255,255,255,.72);
+  border:1px solid rgba(141,107,22,.12);
+}
+
+.pro-final-themes summary{
+  list-style:none;
+  cursor:pointer;
+  padding:17px;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:14px;
+}
+
+.pro-final-themes summary::-webkit-details-marker{
+  display:none;
+}
+
+.pro-final-themes summary strong{
+  display:block;
+  font-size:18px;
+  line-height:1.12;
+  font-weight:950;
+  letter-spacing:-.035em;
+}
+
+.pro-final-themes summary small{
+  display:block;
+  margin-top:4px;
+  font-size:12px;
+  line-height:1.35;
+  font-weight:750;
+}
+
+html.dark-mode .pro-final-themes summary small{color:#aebbc5;}
+html.light-mode .pro-final-themes summary small{color:#65756c;}
+
+.pro-final-arrow{
+  width:34px;
+  height:34px;
+  border-radius:50%;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-size:21px;
+  transition:transform .2s ease;
+}
+
+html.dark-mode .pro-final-arrow{
+  background:rgba(215,192,122,.12);
+  color:#f2df9d;
+}
+
+html.light-mode .pro-final-arrow{
+  background:#fff5dc;
+  color:#785713;
+}
+
+.pro-final-themes[open] .pro-final-arrow{
+  transform:rotate(180deg);
+}
+
+.pro-final-theme-grid{
+  display:grid;
+  grid-template-columns:repeat(2,minmax(0,1fr));
+  gap:10px;
+  padding:0 14px 15px;
+}
+
+.pro-final-theme{
+  position:relative;
+  min-height:112px;
+  border-radius:22px;
+  padding:15px;
+  text-decoration:none;
+  color:#fff;
+  overflow:hidden;
+  box-shadow:0 12px 24px rgba(0,0,0,.18);
+}
+
+.pro-final-theme strong{
+  position:relative;
+  z-index:2;
+  display:block;
+  max-width:150px;
+  font-size:15px;
+  line-height:1.12;
+  font-weight:950;
+  letter-spacing:-.03em;
+}
+
+.pro-final-theme small{
+  position:relative;
+  z-index:2;
+  display:block;
+  max-width:160px;
+  margin-top:7px;
+  font-size:11px;
+  line-height:1.28;
+  font-weight:750;
+  opacity:.88;
+}
+
+.pro-final-theme em{
+  position:absolute;
+  right:11px;
+  bottom:11px;
+  z-index:3;
+  padding:5px 8px;
+  border-radius:999px;
+  background:rgba(0,0,0,.26);
+  border:1px solid rgba(255,255,255,.20);
+  color:#fff;
+  font-size:10px;
+  font-style:normal;
+  font-weight:950;
+}
+
+.pro-theme-gold{background:linear-gradient(135deg,#15100a,#4b3615 52%,#d7c07a);}
+.pro-theme-emerald{background:linear-gradient(135deg,#0d1711,#143524 52%,#4caf6a);}
+.pro-theme-violet{background:linear-gradient(135deg,#181222,#3b2868 52%,#a176ff);}
+.pro-theme-carbon{background:linear-gradient(135deg,#080a0d,#1b222b 52%,#59616c);}
+
+.pro-final-grid{
+  display:grid;
+  grid-template-columns:repeat(2,minmax(0,1fr));
+  gap:12px;
+  padding:0 18px 22px;
+}
+
+.pro-final-card{
+  position:relative;
+  min-height:126px;
+  border-radius:24px;
+  padding:16px;
+  text-decoration:none;
+  overflow:hidden;
+  display:flex;
+  flex-direction:column;
+  justify-content:space-between;
+  transition:transform .18s ease,border-color .25s ease,box-shadow .25s ease;
+}
+
+.pro-final-card:hover{
+  transform:translateY(-2px);
+}
+
+html.dark-mode .pro-final-card{
+  background:linear-gradient(135deg,#18222d 0%,#17202a 52%,#1c3127 100%);
+  border:1px solid rgba(102,198,128,.18);
+  box-shadow:0 12px 24px rgba(0,0,0,.18);
+}
+
+html.light-mode .pro-final-card{
+  background:linear-gradient(135deg,#ffffff 0%,#fbfdfc 52%,#eef7f1 100%);
+  border:1px solid rgba(45,122,70,.12);
+  box-shadow:0 12px 22px rgba(15,24,18,.05);
+}
+
+.pro-final-card::after{
+  content:"";
+  position:absolute;
+  inset:0;
+  z-index:3;
+  background:rgba(7,10,13,.46);
+  backdrop-filter:blur(2px);
+  -webkit-backdrop-filter:blur(2px);
+  pointer-events:none;
+  transition:opacity .25s ease;
+}
+
+.barakaway-pro-final[data-pro-state="unlocked"] .pro-final-card::after{
+  opacity:0;
+}
+
+.pro-final-card-icon,
+.pro-final-card-title,
+.pro-final-card-text,
+.pro-final-lock{
+  position:relative;
+  z-index:4;
+}
+
+.pro-final-card-icon{
+  width:40px;
+  height:40px;
+  border-radius:16px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-size:21px;
+  margin-bottom:12px;
+}
+
+html.dark-mode .pro-final-card-icon{background:rgba(215,192,122,.12);}
+html.light-mode .pro-final-card-icon{background:#fff7e4;}
+
+.pro-final-card-title{
+  font-size:16px;
+  line-height:1.15;
+  font-weight:950;
+  letter-spacing:-.03em;
+  margin-bottom:5px;
+}
+
+html.dark-mode .pro-final-card-title{color:#f6faf7;}
+html.light-mode .pro-final-card-title{color:#172019;}
+
+.pro-final-card-text{
+  padding-right:24px;
+  font-size:12px;
+  line-height:1.35;
+  font-weight:750;
+}
+
+html.dark-mode .pro-final-card-text{color:#afbbc4;}
+html.light-mode .pro-final-card-text{color:#66746c;}
+
+.pro-final-lock{
+  position:absolute;
+  right:13px;
+  top:13px;
+  z-index:5;
+  padding:5px 8px;
+  border-radius:999px;
+  font-size:10px;
+  font-weight:950;
+  letter-spacing:.08em;
+}
+
+html.dark-mode .pro-final-lock{
+  background:rgba(215,192,122,.12);
+  color:#f2df9d;
+  border:1px solid rgba(215,192,122,.22);
+}
+
+html.light-mode .pro-final-lock{
+  background:#fff7e4;
+  color:#7b5b13;
+  border:1px solid rgba(141,107,22,.14);
+}
+
+.barakaway-pro-final[data-pro-state="unlocked"] .pro-final-lock{
+  background:rgba(76,175,106,.14);
+  color:#dff7e6;
+  border-color:rgba(102,198,128,.26);
+}
+
+@media(max-width:700px){
+  .barakaway-pro-final{
+    border-radius:28px;
+    margin:24px 0 26px;
+  }
+
+  .pro-final-head{
+    padding:22px 18px 10px;
+  }
+
+  .pro-final-title{
+    font-size:27px;
+  }
+
+  .pro-final-actions{
+    padding:4px 18px 16px;
+  }
+
+  .pro-final-main-btn,
+  .pro-final-secondary-btn{
+    width:100%;
+  }
+
+  .pro-final-grid,
+  .pro-final-theme-grid{
+    grid-template-columns:1fr;
+  }
+
+  .pro-final-grid{
+    padding:0 14px 18px;
+  }
+
+  .pro-final-themes{
+    margin:0 14px 14px;
+  }
+}
+
 </style>
 <script src="/theme-init.js"></script>
 <link href="/theme.css" rel="stylesheet"/>
@@ -2820,6 +3687,160 @@ html.light-mode .my-saved-empty{color:#5c6b62;}
   .premium-resource-grid{gap:10px;}
   .my-saved-sheet{border-radius:26px 26px 18px 18px;padding:16px;}
 }
+
+
+/* BARAKAWAY PRO HOME FOUNDATION */
+.barakaway-pro-shell{
+  margin:24px 0 10px;
+}
+.baraka-pro-cta-row{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:12px;
+  margin-top:17px;
+  flex-wrap:wrap;
+}
+.baraka-pro-cta,
+.baraka-pro-status{
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  border-radius:999px;
+  font-size:12px;
+  line-height:1;
+  font-weight:950;
+  letter-spacing:-0.01em;
+  padding:10px 13px;
+}
+html.dark-mode .baraka-pro-cta{
+  background:linear-gradient(135deg,#f5d06b,#9c7220);
+  color:#17130a;
+  box-shadow:0 10px 22px rgba(224,188,82,.16);
+}
+html.light-mode .baraka-pro-cta{
+  background:linear-gradient(135deg,#8d6b16,#d8b44a);
+  color:#fffaf0;
+  box-shadow:0 10px 22px rgba(141,107,22,.14);
+}
+html.dark-mode .baraka-pro-status{
+  background:rgba(255,255,255,.06);
+  color:#d6e0db;
+  border:1px solid rgba(255,255,255,.08);
+}
+html.light-mode .baraka-pro-status{
+  background:rgba(45,122,70,.07);
+  color:#405249;
+  border:1px solid rgba(45,122,70,.11);
+}
+.barakaway-pro-shell[data-pro-state="unlocked"] .baraka-pro-status{
+  color:#66c680;
+}
+.pro-compare-grid{
+  display:grid;
+  grid-template-columns:repeat(2,minmax(0,1fr));
+  gap:14px;
+  margin:14px 0;
+}
+.pro-compare-card{
+  border-radius:26px;
+  padding:18px;
+  border:1.5px solid transparent;
+  transition:background .25s,border-color .25s,box-shadow .25s,transform .18s ease;
+}
+html.dark-mode .pro-compare-card{
+  background:linear-gradient(135deg,#151f29 0%,#17212a 55%,#14241f 100%);
+  border-color:rgba(96,147,120,.22);
+  box-shadow:0 12px 24px rgba(0,0,0,.18),inset 0 1px 0 rgba(255,255,255,.04);
+}
+html.light-mode .pro-compare-card{
+  background:linear-gradient(135deg,#ffffff 0%,#fbfdfc 55%,#f0f7f2 100%);
+  border-color:rgba(44,111,69,.14);
+  box-shadow:0 12px 24px rgba(15,24,18,.05),inset 0 1px 0 rgba(255,255,255,.96);
+}
+html.dark-mode .pro-paid-card{
+  background:linear-gradient(135deg,#2a2114 0%,#17212a 45%,#143126 100%);
+  border-color:rgba(224,188,82,.30);
+}
+html.light-mode .pro-paid-card{
+  background:linear-gradient(135deg,#fff8e7 0%,#ffffff 48%,#eef7f1 100%);
+  border-color:rgba(141,107,22,.20);
+}
+.pro-compare-label{
+  width:max-content;
+  padding:6px 10px;
+  border-radius:999px;
+  font-size:10px;
+  font-weight:950;
+  letter-spacing:.09em;
+  text-transform:uppercase;
+  margin-bottom:10px;
+}
+html.dark-mode .pro-free-card .pro-compare-label{background:rgba(102,198,128,.13);color:#dff6e7;border:1px solid rgba(102,198,128,.20);}
+html.light-mode .pro-free-card .pro-compare-label{background:#edf8f1;color:#2d7a46;border:1px solid rgba(45,122,70,.14);}
+html.dark-mode .pro-paid-card .pro-compare-label{background:rgba(224,188,82,.16);color:#ffe8a2;border:1px solid rgba(224,188,82,.34);}
+html.light-mode .pro-paid-card .pro-compare-label{background:#fff0bc;color:#70500f;border:1px solid rgba(141,107,22,.22);}
+.pro-compare-title{
+  font-size:18px;
+  line-height:1.15;
+  font-weight:950;
+  letter-spacing:-.035em;
+  margin-bottom:10px;
+}
+html.dark-mode .pro-compare-title{color:#f5f8f6;}
+html.light-mode .pro-compare-title{color:#172019;}
+.pro-compare-list{
+  margin:0;
+  padding-left:18px;
+  font-size:13px;
+  line-height:1.45;
+  font-weight:700;
+}
+.pro-compare-list li{margin:5px 0;}
+html.dark-mode .pro-compare-list{color:#b9c5bf;}
+html.light-mode .pro-compare-list{color:#5e6d64;}
+.pro-feature-strip{
+  display:grid;
+  grid-template-columns:repeat(3,minmax(0,1fr));
+  gap:10px;
+  margin-top:12px;
+}
+.pro-feature-chip{
+  min-height:58px;
+  display:flex;
+  align-items:center;
+  justify-content:flex-start;
+  gap:10px;
+  padding:12px;
+  border-radius:20px;
+  text-decoration:none;
+  border:1px solid transparent;
+  transition:transform .18s ease,background .25s,border-color .25s,box-shadow .25s;
+}
+.pro-feature-chip:hover{transform:translateY(-2px);}
+.pro-feature-chip span{font-size:20px;line-height:1;}
+.pro-feature-chip strong{font-size:12px;line-height:1.15;font-weight:950;letter-spacing:-.02em;}
+html.dark-mode .pro-feature-chip{
+  background:linear-gradient(135deg,#161f29,#14241f);
+  border-color:rgba(215,192,122,.16);
+  color:#f3f7f5;
+  box-shadow:0 10px 20px rgba(0,0,0,.16),inset 0 1px 0 rgba(255,255,255,.03);
+}
+html.light-mode .pro-feature-chip{
+  background:linear-gradient(135deg,#ffffff,#f1f8f3);
+  border-color:rgba(45,122,70,.12);
+  color:#172019;
+  box-shadow:0 10px 20px rgba(15,24,18,.04),inset 0 1px 0 rgba(255,255,255,.94);
+}
+@media(max-width:700px){
+  .barakaway-pro-shell{margin:20px 0 8px;}
+  .pro-compare-grid{grid-template-columns:1fr;gap:10px;}
+  .pro-feature-strip{grid-template-columns:repeat(2,minmax(0,1fr));gap:9px;}
+  .pro-feature-chip{border-radius:18px;min-height:54px;padding:11px;}
+  .baraka-pro-cta-row{align-items:stretch;}
+  .baraka-pro-cta,.baraka-pro-status{width:100%;box-sizing:border-box;}
+}
+
 </style>
 </head>
 <body>
@@ -3017,14 +4038,128 @@ html.light-mode .my-saved-empty{color:#5c6b62;}
 <a class="support-project-btn" href="support-project-ru.html"><span class="support-project-btn-shine"></span><span class="support-project-btn-text">Поддержать Проект</span></a>
 </div>
 
-<a class="baraka-pro-promo" href="pro-ru.html" aria-label="Возможности BarakaWay PRO">
-  <div class="baraka-pro-top">
-    <span class="baraka-pro-badge">PRO версия</span>
-    <span class="baraka-pro-price">$1.99 / месяц</span>
+<section class="barakaway-pro-final" aria-label="BarakaWay ПРО" data-pro-state="locked">
+
+  <div class="pro-final-head">
+    <div class="pro-final-top">
+      <span class="pro-final-badge">👑 BarakaWay ПРО</span>
+      <span class="pro-final-state" data-home-pro-state>Доступ не активирован</span>
+    </div>
+
+    <h2 class="pro-final-title">Премиальные функции внутри BarakaWay</h2>
+
+    <p class="pro-final-text">
+      После покупки ПРО эти разделы открываются прямо в приложении:
+      премиальные темы, Коран ПРО, проверка чтения, дополнительные чтецы,
+      дуа по целям и премиальные анимации.
+    </p>
   </div>
-  <h2 class="baraka-pro-title">Возможности BarakaWay PRO</h2>
-  <p class="baraka-pro-text">Покупая PRO-версию, вы поддерживаете развитие приложения, новые функции, обновления, стабильную работу и распространение проекта, чтобы больше мусульман могли получать пользу каждый день.</p>
-</a>
+
+  <div class="pro-final-actions">
+    <a class="pro-final-main-btn" href="pro-ru.html" data-home-pro-cta>Открыть ПРО</a>
+    <a class="pro-final-secondary-btn" href="themes-pro-ru.html">ПРО-темы</a>
+  </div>
+
+  <div class="pro-final-status-line">
+    ✅ ПРО активен. Карточки ниже открывают премиальные разделы.
+  </div>
+
+  <details class="pro-final-themes">
+    <summary>
+      <span>
+        <strong>ПРО-темы</strong>
+        <small>Золотая, изумрудная, фиолетовая, карбоновая и другие темы</small>
+      </span>
+      <span class="pro-final-arrow">⌄</span>
+    </summary>
+
+    <div class="pro-final-theme-grid">
+      <a class="pro-final-theme pro-theme-gold" href="pro-ru.html#themes" data-pro-link="themes-pro-ru.html">
+        <strong>Королевское золото</strong>
+        <small>Элитный тёмно-золотой интерфейс</small>
+        <em>ПРО</em>
+      </a>
+
+      <a class="pro-final-theme pro-theme-emerald" href="pro-ru.html#themes" data-pro-link="themes-pro-ru.html">
+        <strong>Изумрудный Коран</strong>
+        <small>Глубокая зелёная среда для чтения</small>
+        <em>ПРО</em>
+      </a>
+
+      <a class="pro-final-theme pro-theme-violet" href="pro-ru.html#themes" data-pro-link="themes-pro-ru.html">
+        <strong>Фиолетовый нур</strong>
+        <small>Мягкая духовная premium-эстетика</small>
+        <em>ПРО</em>
+      </a>
+
+      <a class="pro-final-theme pro-theme-carbon" href="pro-ru.html#themes" data-pro-link="themes-pro-ru.html">
+        <strong>Карбоновая элита</strong>
+        <small>Строгий современный premium-стиль</small>
+        <em>ПРО</em>
+      </a>
+    </div>
+  </details>
+
+  <div class="pro-final-grid">
+
+    <a class="pro-final-card" href="pro-ru.html#quran" data-pro-link="quran-pro-ru.html">
+      <span class="pro-final-lock">ПРО</span>
+      <div>
+        <div class="pro-final-card-icon">📖</div>
+        <div class="pro-final-card-title">Коран ПРО</div>
+        <div class="pro-final-card-text">Полное чтение одной лентой, закладки и прогресс.</div>
+      </div>
+    </a>
+
+    <a class="pro-final-card" href="pro-ru.html#reading" data-pro-link="quran-ai-ru.html">
+      <span class="pro-final-lock">ПРО</span>
+      <div>
+        <div class="pro-final-card-icon">🎙️</div>
+        <div class="pro-final-card-title">Проверка чтения</div>
+        <div class="pro-final-card-text">Правильно — зелёным, ошибка — красным.</div>
+      </div>
+    </a>
+
+    <a class="pro-final-card" href="pro-ru.html#reciters" data-pro-link="reciters-pro-ru.html">
+      <span class="pro-final-lock">ПРО</span>
+      <div>
+        <div class="pro-final-card-icon">🎧</div>
+        <div class="pro-final-card-title">Премиальные чтецы</div>
+        <div class="pro-final-card-text">Выбор голосов и сохранение чтеца для Quran PRO.</div>
+      </div>
+    </a>
+
+    <a class="pro-final-card" href="pro-ru.html#duas" data-pro-link="dua-pro-ru.html">
+      <span class="pro-final-lock">ПРО</span>
+      <div>
+        <div class="pro-final-card-icon">🤲</div>
+        <div class="pro-final-card-title">Дуа по целям</div>
+        <div class="pro-final-card-text">Ризк, дети, здоровье, семья, прощение и защита.</div>
+      </div>
+    </a>
+
+    <a class="pro-final-card" href="pro-ru.html#gif" data-pro-link="gifs-pro-ru.html">
+      <span class="pro-final-lock">ПРО</span>
+      <div>
+        <div class="pro-final-card-icon">✨</div>
+        <div class="pro-final-card-title">Премиальные анимации</div>
+        <div class="pro-final-card-text">GIF, золотые стрелки и premium-карточки.</div>
+      </div>
+    </a>
+
+    <a class="pro-final-card" href="pro-ru.html#themes" data-pro-link="themes-pro-ru.html">
+      <span class="pro-final-lock">ПРО</span>
+      <div>
+        <div class="pro-final-card-icon">👑</div>
+        <div class="pro-final-card-title">Премиальные темы</div>
+        <div class="pro-final-card-text">Золото, изумруд, фиолетовый, карбон и детский стиль.</div>
+      </div>
+    </a>
+
+  </div>
+
+</section>
+
 <div aria-hidden="true" class="share-overlay" id="shareOverlay">
 <div aria-labelledby="shareTitle" aria-modal="true" class="share-sheet" role="dialog">
 <div class="share-handle"></div>
@@ -3060,6 +4195,53 @@ html.light-mode .my-saved-empty{color:#5c6b62;}
 <button class="install-help-close" id="installHelpCloseBtn" type="button">Закрыть</button>
 </div>
 </div>
+
+<script>
+(function(){
+  function syncBarakaProHome(){
+    var isPro = localStorage.getItem('barakaway_pro') === 'true';
+    var shells = document.querySelectorAll('.barakaway-pro-shell');
+
+    shells.forEach(function(shell){
+      shell.setAttribute('data-pro-state', isPro ? 'unlocked' : 'locked');
+    });
+
+    document.querySelectorAll('[data-pro-status]').forEach(function(node){
+      node.textContent = isPro ? 'ПРО активен' : 'Доступ не активирован';
+    });
+
+    document.querySelectorAll('[data-pro-head-status]').forEach(function(node){
+      node.textContent = isPro ? 'ПРО активен' : 'Премиальный доступ';
+    });
+
+    document.querySelectorAll('[data-pro-main-cta]').forEach(function(node){
+      node.textContent = isPro ? 'Открыть функции ПРО' : 'Открыть ПРО';
+    });
+
+    document.querySelectorAll('[data-pro-link]').forEach(function(link){
+      var unlockedHref = link.getAttribute('data-pro-link');
+      var lockedHref = link.getAttribute('href') || 'pro-ru.html';
+
+      if(isPro && unlockedHref){
+        link.setAttribute('href', unlockedHref);
+        link.setAttribute('aria-label', 'Открыть: ' + (link.innerText || 'ПРО-функция').trim());
+      }else{
+        link.setAttribute('href', lockedHref.indexOf('pro-ru.html') === 0 ? lockedHref : 'pro-ru.html');
+        link.setAttribute('aria-label', 'Требуется BarakaWay ПРО');
+      }
+    });
+  }
+
+  if(document.readyState === 'loading'){
+    document.addEventListener('DOMContentLoaded', syncBarakaProHome);
+  }else{
+    syncBarakaProHome();
+  }
+
+  window.addEventListener('storage', syncBarakaProHome);
+})();
+</script>
+
 <script>
 function changeLanguageChoice(){localStorage.removeItem("siteLanguage");sessionStorage.setItem("forceLanguageSelect","1");window.location.href="index.html";}
 function openPrayerTimesPage(event){if(event&&event.target&&event.target.closest&&event.target.closest(".home-prayer-share-btn")) return;window.location.href="prayer-times-ru.html";}
@@ -6878,5 +8060,174 @@ window.addEventListener("DOMContentLoaded",function(){const installBtn=document.
   }
 })();
 </script>
+
+<script>
+(function(){
+  function syncBarakaWayProHome(){
+    var isPro = localStorage.getItem('barakaway_pro') === 'true';
+    var shell = document.querySelector('.barakaway-pro-final');
+    if(!shell) return;
+
+    shell.setAttribute('data-pro-state', isPro ? 'unlocked' : 'locked');
+
+    document.querySelectorAll('[data-home-pro-state]').forEach(function(node){
+      node.textContent = isPro ? 'ПРО активен' : 'Доступ не активирован';
+    });
+
+    document.querySelectorAll('[data-home-pro-cta]').forEach(function(node){
+      node.textContent = isPro ? 'Открыть функции ПРО' : 'Открыть ПРО';
+      node.setAttribute('href', isPro ? 'quran-pro-ru.html' : 'pro-ru.html');
+    });
+
+    document.querySelectorAll('[data-pro-link]').forEach(function(link){
+      var proHref = link.getAttribute('data-pro-link');
+      var lockedHref = link.getAttribute('href') || 'pro-ru.html';
+
+      if(isPro && proHref){
+        link.setAttribute('href', proHref);
+        link.setAttribute('aria-label', 'Открыть PRO-раздел');
+      }else{
+        link.setAttribute('href', lockedHref.indexOf('pro-ru.html') === 0 ? lockedHref : 'pro-ru.html');
+        link.setAttribute('aria-label', 'Требуется BarakaWay ПРО');
+      }
+    });
+  }
+
+  if(document.readyState === 'loading'){
+    document.addEventListener('DOMContentLoaded', syncBarakaWayProHome);
+  }else{
+    syncBarakaWayProHome();
+  }
+
+  window.addEventListener('storage', syncBarakaWayProHome);
+})();
+</script>
+
+
+<script>
+(function(){
+  const PRO_KEY = "barakaway_pro";
+  const HOLD_MS = 7000;
+  let holdTimer = null;
+  let progressTimer = null;
+  let startedAt = 0;
+
+  function findProActivator(){
+    return document.getElementById("proState")
+      || document.querySelector("[data-home-pro-state]")
+      || document.querySelector(".pro-final-state")
+      || document.querySelector(".access-status");
+  }
+
+  function showDevToast(message){
+    let toast = document.getElementById("barakawayDevUnlockToast");
+
+    if(!toast){
+      toast = document.createElement("div");
+      toast.id = "barakawayDevUnlockToast";
+      toast.style.position = "fixed";
+      toast.style.left = "50%";
+      toast.style.bottom = "96px";
+      toast.style.zIndex = "99999";
+      toast.style.transform = "translateX(-50%)";
+      toast.style.width = "min(92%,460px)";
+      toast.style.padding = "14px 16px";
+      toast.style.borderRadius = "18px";
+      toast.style.background = "rgba(16,24,32,.96)";
+      toast.style.border = "1px solid rgba(215,192,122,.28)";
+      toast.style.color = "#f2df9d";
+      toast.style.fontSize = "13px";
+      toast.style.fontWeight = "900";
+      toast.style.textAlign = "center";
+      toast.style.boxShadow = "0 18px 40px rgba(0,0,0,.35)";
+      toast.style.opacity = "0";
+      toast.style.pointerEvents = "none";
+      toast.style.transition = "opacity .25s ease";
+      document.body.appendChild(toast);
+    }
+
+    toast.textContent = message;
+    toast.style.opacity = "1";
+
+    clearTimeout(window.__barakawayDevUnlockToastTimer);
+    window.__barakawayDevUnlockToastTimer = setTimeout(function(){
+      toast.style.opacity = "0";
+    }, 2400);
+  }
+
+  function setActivatorHint(node){
+    if(!node) return;
+    node.style.userSelect = "none";
+    node.style.webkitUserSelect = "none";
+    node.style.cursor = "pointer";
+    node.setAttribute("title", "Тестовый режим: удерживать 7 секунд");
+  }
+
+  function startHold(){
+    const node = findProActivator();
+    if(!node) return;
+
+    startedAt = Date.now();
+    showDevToast("Удерживайте 7 секунд для тестового PRO.");
+
+    clearTimeout(holdTimer);
+    clearInterval(progressTimer);
+
+    progressTimer = setInterval(function(){
+      const left = Math.max(0, Math.ceil((HOLD_MS - (Date.now() - startedAt)) / 1000));
+      if(left > 0){
+        showDevToast("Тестовый PRO: осталось " + left + " сек.");
+      }
+    }, 1000);
+
+    holdTimer = setTimeout(function(){
+      clearInterval(progressTimer);
+
+      const active = localStorage.getItem(PRO_KEY) === "true";
+
+      if(active){
+        localStorage.removeItem(PRO_KEY);
+        showDevToast("Тестовый PRO выключен.");
+      }else{
+        localStorage.setItem(PRO_KEY, "true");
+        localStorage.setItem("barakaway_pro_plan", "developer-test");
+        showDevToast("Тестовый PRO активирован.");
+      }
+
+      setTimeout(function(){
+        window.location.reload();
+      }, 650);
+    }, HOLD_MS);
+  }
+
+  function cancelHold(){
+    clearTimeout(holdTimer);
+    clearInterval(progressTimer);
+    holdTimer = null;
+    progressTimer = null;
+  }
+
+  function init(){
+    const node = findProActivator();
+    if(!node) return;
+
+    setActivatorHint(node);
+
+    node.addEventListener("mousedown", startHold);
+    node.addEventListener("touchstart", startHold, {passive:true});
+    node.addEventListener("mouseup", cancelHold);
+    node.addEventListener("mouseleave", cancelHold);
+    node.addEventListener("touchend", cancelHold);
+    node.addEventListener("touchcancel", cancelHold);
+  }
+
+  if(document.readyState === "loading"){
+    document.addEventListener("DOMContentLoaded", init);
+  }else{
+    init();
+  }
+})();
+</script>
+
 </body>
 </html>

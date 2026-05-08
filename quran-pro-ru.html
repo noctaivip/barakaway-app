@@ -1,0 +1,1351 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<!--
+بِسْمِ ٱللَّٰهِ ٱلرَّحْمَـٰنِ ٱلرَّحِيمِ
+-->
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#101820">
+<title>Коран ПРО — BarakaWay</title>
+
+<style>
+:root{
+  --page:#0b1016;
+  --panel:#151d26;
+  --panel-2:#101820;
+  --gold:#d7c07a;
+  --green:#4caf6a;
+  --green-2:#2d7a46;
+  --text:#f7faf8;
+  --muted:#aeb9c5;
+  --border:rgba(215,192,122,.20);
+  --shadow:0 24px 70px rgba(0,0,0,.36);
+}
+
+*{box-sizing:border-box;}
+html{scroll-behavior:smooth;}
+
+body{
+  margin:0;
+  min-height:100vh;
+  background:
+    radial-gradient(circle at 12% 0%,rgba(215,192,122,.10),transparent 24%),
+    radial-gradient(circle at 88% 8%,rgba(76,175,106,.10),transparent 30%),
+    linear-gradient(180deg,#0b1016 0%,#101820 52%,#0b1016 100%);
+  color:var(--text);
+  font-family:system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",Arial,sans-serif;
+  line-height:1.65;
+}
+
+a{color:inherit;text-decoration:none;}
+button{font-family:inherit;}
+
+.page{
+  width:min(100%,980px);
+  margin:0 auto;
+  padding:22px 18px 122px;
+}
+
+.topbar{
+  position:sticky;
+  top:0;
+  z-index:40;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:12px;
+  padding:12px 0 18px;
+  backdrop-filter:blur(18px);
+  -webkit-backdrop-filter:blur(18px);
+}
+
+.top-pill,
+.pro-state{
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  gap:8px;
+  min-height:42px;
+  padding:9px 15px;
+  border-radius:999px;
+  background:rgba(18,25,33,.78);
+  border:1px solid rgba(215,192,122,.18);
+  color:#f7f2d9;
+  font-size:13px;
+  font-weight:900;
+}
+
+.pro-state.locked{
+  background:rgba(215,192,122,.10);
+  border-color:rgba(215,192,122,.24);
+  color:#f2df9d;
+}
+
+.pro-state.active{
+  background:rgba(76,175,106,.12);
+  border-color:rgba(102,198,128,.28);
+  color:#dff7e6;
+}
+
+.hero{
+  position:relative;
+  overflow:hidden;
+  border-radius:38px;
+  padding:42px 32px 32px;
+  background:
+    radial-gradient(circle at 88% 8%,rgba(215,192,122,.18),transparent 27%),
+    radial-gradient(circle at 14% 88%,rgba(76,175,106,.14),transparent 28%),
+    linear-gradient(135deg,#151d26 0%,#101820 50%,#17261f 100%);
+  border:1px solid var(--border);
+  box-shadow:var(--shadow), inset 0 1px 0 rgba(255,255,255,.04);
+}
+
+.hero::after{
+  content:"";
+  position:absolute;
+  inset:-40%;
+  background:linear-gradient(115deg,transparent 0%,rgba(255,255,255,.04) 45%,transparent 55%);
+  transform:rotate(8deg);
+  pointer-events:none;
+}
+
+.hero-inner{position:relative;z-index:2;}
+
+.badge{
+  display:inline-flex;
+  align-items:center;
+  gap:9px;
+  padding:9px 15px;
+  border-radius:999px;
+  background:rgba(215,192,122,.10);
+  border:1px solid rgba(215,192,122,.26);
+  color:var(--gold);
+  font-size:12px;
+  font-weight:950;
+  letter-spacing:.12em;
+  text-transform:uppercase;
+}
+
+h1{
+  margin:20px 0 12px;
+  max-width:760px;
+  font-size:52px;
+  line-height:.96;
+  letter-spacing:-.065em;
+}
+
+.hero-text{
+  max-width:740px;
+  color:var(--muted);
+  font-size:17px;
+  font-weight:650;
+}
+
+.hero-actions{
+  display:flex;
+  flex-wrap:wrap;
+  gap:12px;
+  margin-top:28px;
+}
+
+.btn{
+  appearance:none;
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  gap:9px;
+  min-height:52px;
+  padding:14px 21px;
+  border-radius:18px;
+  border:1px solid transparent;
+  font-size:14px;
+  font-weight:950;
+  cursor:pointer;
+  text-decoration:none;
+  transition:transform .18s ease,box-shadow .25s ease,background .25s ease,border-color .25s ease;
+  -webkit-tap-highlight-color:transparent;
+}
+
+.btn:hover{transform:translateY(-2px);}
+.btn:active{transform:scale(.985);}
+
+.btn-primary{
+  background:linear-gradient(135deg,#f1db91 0%,#d7c07a 42%,#af8430 100%);
+  color:#11150f;
+  box-shadow:0 18px 38px rgba(215,192,122,.22);
+}
+
+.btn-secondary{
+  background:rgba(20,28,37,.82);
+  color:#f7faf8;
+  border-color:rgba(215,192,122,.18);
+}
+
+.btn-green{
+  background:linear-gradient(135deg,#66c680 0%,#2d7a46 100%);
+  color:white;
+  box-shadow:0 18px 38px rgba(76,175,106,.16);
+}
+
+.access-panel{
+  margin-top:24px;
+  border-radius:30px;
+  padding:22px;
+  background:
+    radial-gradient(circle at 96% 0%,rgba(215,192,122,.12),transparent 30%),
+    linear-gradient(135deg,#151d26 0%,#101820 55%,#14231b 100%);
+  border:1px solid rgba(215,192,122,.18);
+  box-shadow:0 18px 44px rgba(0,0,0,.24);
+}
+
+.access-head{
+  display:flex;
+  justify-content:space-between;
+  align-items:flex-start;
+  gap:16px;
+}
+
+.access-kicker{
+  color:#d7c07a;
+  font-size:11px;
+  font-weight:950;
+  letter-spacing:.12em;
+  text-transform:uppercase;
+  margin-bottom:7px;
+}
+
+.access-title{
+  margin:0;
+  font-size:28px;
+  line-height:1.08;
+  letter-spacing:-.045em;
+}
+
+.access-text{
+  margin:8px 0 0;
+  max-width:680px;
+  color:#aeb9c5;
+  font-size:14px;
+  font-weight:650;
+}
+
+.access-status{
+  flex:0 0 auto;
+  display:inline-flex;
+  min-height:38px;
+  align-items:center;
+  justify-content:center;
+  padding:9px 13px;
+  border-radius:999px;
+  background:rgba(215,192,122,.10);
+  border:1px solid rgba(215,192,122,.22);
+  color:#f2df9d;
+  font-size:12px;
+  font-weight:950;
+  white-space:nowrap;
+}
+
+.access-panel.active .access-status{
+  background:rgba(76,175,106,.12);
+  border-color:rgba(102,198,128,.28);
+  color:#dff7e6;
+}
+
+.reader-layout{
+  display:grid;
+  grid-template-columns:330px 1fr;
+  gap:18px;
+  margin-top:34px;
+}
+
+.reader-side,
+.reader-main{
+  border-radius:32px;
+  background:linear-gradient(135deg,#151d26 0%,#101820 100%);
+  border:1px solid rgba(215,192,122,.16);
+  box-shadow:0 18px 44px rgba(0,0,0,.22), inset 0 1px 0 rgba(255,255,255,.035);
+}
+
+.reader-side{
+  padding:18px;
+  align-self:start;
+  position:sticky;
+  top:82px;
+}
+
+.reader-main{
+  min-height:660px;
+  overflow:hidden;
+}
+
+.side-title{
+  margin:0 0 12px;
+  font-size:22px;
+  line-height:1.1;
+  letter-spacing:-.04em;
+}
+
+.side-text{
+  margin:0 0 16px;
+  color:#aeb9c5;
+  font-size:13px;
+  font-weight:650;
+}
+
+.progress-box{
+  border-radius:24px;
+  padding:16px;
+  background:rgba(76,175,106,.10);
+  border:1px solid rgba(102,198,128,.18);
+  margin-bottom:16px;
+}
+
+.progress-label{
+  display:flex;
+  justify-content:space-between;
+  gap:10px;
+  color:#dff7e6;
+  font-size:12px;
+  font-weight:900;
+  margin-bottom:10px;
+}
+
+.progress-track{
+  height:9px;
+  border-radius:999px;
+  overflow:hidden;
+  background:rgba(255,255,255,.08);
+}
+
+.progress-fill{
+  width:0%;
+  height:100%;
+  border-radius:999px;
+  background:linear-gradient(90deg,#2d7a46,#66c680);
+  transition:width .25s ease;
+}
+
+.side-actions{
+  display:grid;
+  gap:10px;
+}
+
+.side-actions .btn{
+  width:100%;
+  min-height:48px;
+}
+
+.select-box{
+  margin-top:16px;
+}
+
+.select-label{
+  display:block;
+  margin-bottom:8px;
+  color:#d7c07a;
+  font-size:12px;
+  font-weight:950;
+  letter-spacing:.08em;
+  text-transform:uppercase;
+}
+
+select{
+  width:100%;
+  min-height:48px;
+  border-radius:16px;
+  padding:0 14px;
+  color:#f7faf8;
+  background:#111a22;
+  border:1px solid rgba(215,192,122,.18);
+  font-weight:800;
+  outline:none;
+}
+
+.reader-toolbar{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  gap:14px;
+  padding:18px 18px 0;
+}
+
+.reader-title-block h2{
+  margin:0;
+  font-size:28px;
+  line-height:1.08;
+  letter-spacing:-.045em;
+}
+
+.reader-title-block p{
+  margin:6px 0 0;
+  color:#aeb9c5;
+  font-size:13px;
+  font-weight:650;
+}
+
+.reader-tools{
+  display:flex;
+  flex-wrap:wrap;
+  justify-content:flex-end;
+  gap:9px;
+}
+
+.tool-btn{
+  appearance:none;
+  min-height:42px;
+  padding:9px 13px;
+  border-radius:999px;
+  background:rgba(215,192,122,.10);
+  color:#f2df9d;
+  border:1px solid rgba(215,192,122,.22);
+  font-size:12px;
+  font-weight:950;
+  cursor:pointer;
+}
+
+.quran-reader{
+  position:relative;
+  margin:18px;
+  padding:26px 24px;
+  min-height:560px;
+  border-radius:28px;
+  background:
+    radial-gradient(circle at 88% 10%,rgba(215,192,122,.08),transparent 26%),
+    linear-gradient(180deg,#111a22 0%,#0f1720 100%);
+  border:1px solid rgba(255,255,255,.07);
+  overflow:hidden;
+}
+
+.quran-reader.locked::after{
+  content:"Коран ПРО";
+  position:absolute;
+  inset:0;
+  z-index:5;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  background:rgba(5,8,11,.58);
+  backdrop-filter:blur(3px);
+  -webkit-backdrop-filter:blur(3px);
+  color:#f2df9d;
+  font-size:32px;
+  font-weight:950;
+  letter-spacing:.16em;
+  pointer-events:none;
+  text-align:center;
+}
+
+.bismillah{
+  text-align:center;
+  color:#f2df9d;
+  font-size:25px;
+  line-height:1.8;
+  margin-bottom:20px;
+  font-family:"Times New Roman",serif;
+}
+
+.ayah{
+  position:relative;
+  padding:18px 0;
+  border-bottom:1px solid rgba(255,255,255,.07);
+}
+
+.ayah:last-child{border-bottom:none;}
+
+.ayah-top{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  gap:12px;
+  margin-bottom:10px;
+}
+
+.ayah-ref{
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  padding:5px 10px;
+  border-radius:999px;
+  background:rgba(215,192,122,.10);
+  border:1px solid rgba(215,192,122,.20);
+  color:#f2df9d;
+  font-size:12px;
+  font-weight:950;
+}
+
+.bookmark-btn{
+  appearance:none;
+  width:38px;
+  height:38px;
+  border-radius:50%;
+  border:1px solid rgba(215,192,122,.20);
+  background:rgba(215,192,122,.08);
+  color:#f2df9d;
+  cursor:pointer;
+  font-size:17px;
+}
+
+.bookmark-btn.saved{
+  background:rgba(76,175,106,.14);
+  border-color:rgba(102,198,128,.28);
+  color:#dff7e6;
+}
+
+.arabic{
+  direction:rtl;
+  text-align:right;
+  font-family:"Times New Roman",serif;
+  font-size:30px;
+  line-height:2.05;
+  color:#f7faf8;
+}
+
+.translation{
+  margin-top:12px;
+  color:#b8c3cc;
+  font-size:15px;
+  font-weight:650;
+}
+
+.current-ayah{
+  background:rgba(76,175,106,.06);
+  border-radius:20px;
+  padding-left:14px;
+  padding-right:14px;
+}
+
+.reader-footer{
+  display:flex;
+  flex-wrap:wrap;
+  gap:10px;
+  justify-content:center;
+  padding:0 18px 20px;
+}
+
+.lock-note{
+  margin-top:16px;
+  border-radius:24px;
+  padding:18px;
+  background:rgba(215,192,122,.08);
+  border:1px solid rgba(215,192,122,.16);
+  color:#d3dde6;
+  font-size:13px;
+  font-weight:650;
+}
+
+.bottom-nav{
+  position:fixed;
+  left:50%;
+  bottom:18px;
+  z-index:50;
+  transform:translateX(-50%);
+  width:min(92%,560px);
+  display:grid;
+  grid-template-columns:repeat(4,minmax(0,1fr));
+  gap:8px;
+  padding:8px;
+  border-radius:24px;
+  background:rgba(14,20,27,.84);
+  border:1px solid rgba(215,192,122,.18);
+  backdrop-filter:blur(18px);
+  -webkit-backdrop-filter:blur(18px);
+  box-shadow:0 18px 44px rgba(0,0,0,.34);
+}
+
+.bottom-nav a,
+.bottom-nav button{
+  appearance:none;
+  border:none;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  justify-content:center;
+  gap:4px;
+  min-height:54px;
+  border-radius:18px;
+  background:transparent;
+  color:#c8d2dc;
+  font-size:11px;
+  font-weight:850;
+  cursor:pointer;
+  text-decoration:none;
+}
+
+.bottom-nav a.active,
+.bottom-nav button.active{
+  background:linear-gradient(135deg,rgba(215,192,122,.18),rgba(76,175,106,.12));
+  color:#f8e9a9;
+}
+
+.modal-overlay{
+  display:none;
+  position:fixed;
+  inset:0;
+  z-index:100;
+  padding:18px;
+  background:rgba(5,8,11,.72);
+  backdrop-filter:blur(9px);
+  -webkit-backdrop-filter:blur(9px);
+  align-items:center;
+  justify-content:center;
+}
+
+.modal-overlay.open{display:flex;}
+
+.modal{
+  width:min(100%,560px);
+  border-radius:32px;
+  padding:24px;
+  background:
+    radial-gradient(circle at 88% 0%,rgba(215,192,122,.12),transparent 32%),
+    linear-gradient(180deg,#17202a 0%,#111821 100%);
+  border:1px solid rgba(215,192,122,.22);
+  box-shadow:0 28px 80px rgba(0,0,0,.50);
+}
+
+.modal-badge{
+  display:inline-flex;
+  padding:7px 11px;
+  border-radius:999px;
+  background:rgba(215,192,122,.10);
+  border:1px solid rgba(215,192,122,.22);
+  color:#f2df9d;
+  font-size:11px;
+  font-weight:950;
+  letter-spacing:.10em;
+  text-transform:uppercase;
+}
+
+.modal h3{
+  margin:16px 0 8px;
+  font-size:28px;
+  line-height:1.1;
+  letter-spacing:-.04em;
+}
+
+.modal p{
+  color:var(--muted);
+  margin:0;
+  font-size:15px;
+  font-weight:650;
+}
+
+.modal-actions{
+  display:flex;
+  flex-wrap:wrap;
+  gap:10px;
+  margin-top:22px;
+}
+
+.modal-actions .btn{flex:1 1 190px;}
+
+.toast{
+  position:fixed;
+  left:50%;
+  bottom:94px;
+  z-index:140;
+  transform:translateX(-50%) translateY(14px);
+  opacity:0;
+  pointer-events:none;
+  width:min(92%,460px);
+  padding:14px 16px;
+  border-radius:18px;
+  background:rgba(16,24,32,.94);
+  border:1px solid rgba(102,198,128,.24);
+  color:#eaf7ee;
+  font-size:13px;
+  font-weight:850;
+  text-align:center;
+  box-shadow:0 18px 40px rgba(0,0,0,.35);
+  transition:opacity .25s ease,transform .25s ease;
+}
+
+.toast.show{
+  opacity:1;
+  transform:translateX(-50%) translateY(0);
+}
+
+body.theme-royal-gold{
+  background:
+    radial-gradient(circle at 12% 0%,rgba(215,192,122,.18),transparent 26%),
+    linear-gradient(180deg,#090908 0%,#1a160d 52%,#090908 100%);
+}
+
+body.theme-emerald-quran{
+  background:
+    radial-gradient(circle at 12% 0%,rgba(102,198,128,.14),transparent 26%),
+    linear-gradient(180deg,#07110b 0%,#10251a 52%,#07110b 100%);
+}
+
+body.theme-violet-noor{
+  background:
+    radial-gradient(circle at 12% 0%,rgba(161,118,255,.16),transparent 26%),
+    linear-gradient(180deg,#0d0a15 0%,#201931 52%,#0d0a15 100%);
+}
+
+body.theme-carbon-elite{
+  background:
+    radial-gradient(circle at 12% 0%,rgba(255,255,255,.08),transparent 26%),
+    linear-gradient(180deg,#050607 0%,#151a20 52%,#050607 100%);
+}
+
+@media(max-width:900px){
+  .reader-layout{
+    grid-template-columns:1fr;
+  }
+
+  .reader-side{
+    position:relative;
+    top:auto;
+  }
+}
+
+@media(max-width:760px){
+  .page{padding:18px 12px 110px;}
+  .topbar{padding-top:8px;}
+  .top-pill,.pro-state{
+    min-height:38px;
+    padding:8px 12px;
+    font-size:12px;
+  }
+  .hero{
+    padding:32px 20px 24px;
+    border-radius:30px;
+  }
+  h1{font-size:39px;}
+  .hero-text{font-size:16px;}
+  .access-head,
+  .reader-toolbar{
+    align-items:flex-start;
+    flex-direction:column;
+  }
+  .reader-tools{
+    justify-content:flex-start;
+  }
+  .arabic{
+    font-size:25px;
+  }
+  .quran-reader{
+    margin:14px;
+    padding:20px 16px;
+  }
+  .hero-actions .btn,
+  .reader-footer .btn{
+    width:100%;
+  }
+  .bottom-nav{
+    bottom:10px;
+    width:calc(100% - 18px);
+  }
+}
+
+@media(max-width:420px){
+  h1{font-size:35px;}
+}
+</style>
+</head>
+
+<body>
+
+<div class="page">
+
+  <header class="topbar">
+    <a class="top-pill" href="home-ru.html" aria-label="Вернуться на главную">
+      ← Главная
+    </a>
+
+    <div id="proState" class="pro-state locked">
+      🔒 ПРО не активирован
+    </div>
+  </header>
+
+  <main>
+
+    <section class="hero" id="top">
+      <div class="hero-inner">
+        <div class="badge">📖 Коран ПРО</div>
+
+        <h1>Полное чтение Корана одной лентой</h1>
+
+        <div class="hero-text">
+          Коран ПРО создан для долгого спокойного чтения: без постоянных переходов между сурами,
+          с сохранением места чтения, закладками, прогрессом и будущим подключением проверки произношения.
+        </div>
+
+        <div class="hero-actions">
+          <button class="btn btn-primary" id="startReadingBtn">
+            Продолжить чтение
+          </button>
+
+          <button class="btn btn-secondary" id="saveProgressBtn">
+            Сохранить место
+          </button>
+
+          <a class="btn btn-green" href="quran-ai-ru.html">
+            Проверка чтения
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <section class="access-panel" id="access">
+      <div class="access-head">
+        <div>
+          <div class="access-kicker">Состояние доступа</div>
+          <h2 class="access-title">Чтение Корана ПРО</h2>
+          <p class="access-text" id="accessText">
+            Без ПРО режим виден как preview. После активации открываются чтение, закладки и сохранение прогресса.
+          </p>
+        </div>
+
+        <div class="access-status" id="accessStatus">
+          Закрыто
+        </div>
+      </div>
+    </section>
+
+    <section class="reader-layout" id="reader">
+
+      <aside class="reader-side">
+        <h2 class="side-title">Панель чтения</h2>
+        <p class="side-text">
+          Здесь сохраняется последнее место чтения, текущая сура, аят и закладки.
+        </p>
+
+        <div class="progress-box">
+          <div class="progress-label">
+            <span>Прогресс</span>
+            <span id="progressText">0%</span>
+          </div>
+          <div class="progress-track">
+            <div class="progress-fill" id="progressFill"></div>
+          </div>
+        </div>
+
+        <div class="side-actions">
+          <button class="btn btn-primary" id="continueBtn">Продолжить</button>
+          <button class="btn btn-secondary" id="bookmarkCurrentBtn">Добавить закладку</button>
+          <button class="btn btn-secondary" id="clearProgressBtn">Сбросить прогресс</button>
+        </div>
+
+        <div class="select-box">
+          <label class="select-label" for="surahSelect">Быстрый переход</label>
+          <select id="surahSelect">
+            <option value="0">Аль-Фатиха</option>
+            <option value="1">Аль-Бакара — начало</option>
+            <option value="2">Аят аль-Курси</option>
+            <option value="3">Аль-Ихляс</option>
+            <option value="4">Аль-Фаляк</option>
+            <option value="5">Ан-Нас</option>
+          </select>
+        </div>
+
+        <div class="lock-note">
+          В этой версии добавлена рабочая основа. Полный текст Корана можно подключить следующим этапом из вашего существующего Quran-файла.
+        </div>
+      </aside>
+
+      <section class="reader-main">
+        <div class="reader-toolbar">
+          <div class="reader-title-block">
+            <h2 id="readerTitle">Аль-Фатиха</h2>
+            <p id="readerSubtitle">Непрерывное чтение · закладки · прогресс</p>
+          </div>
+
+          <div class="reader-tools">
+            <button class="tool-btn" id="fontMinus">A−</button>
+            <button class="tool-btn" id="fontPlus">A+</button>
+            <button class="tool-btn" id="scrollMode">Режим чтения</button>
+          </div>
+        </div>
+
+        <div class="quran-reader locked" id="quranReader">
+
+          <div class="bismillah">بِسْمِ ٱللَّٰهِ ٱلرَّحْمَـٰنِ ٱلرَّحِيمِ</div>
+
+          <article class="ayah current-ayah" data-index="0">
+            <div class="ayah-top">
+              <span class="ayah-ref">1:1</span>
+              <button class="bookmark-btn" data-bookmark="0">☆</button>
+            </div>
+            <div class="arabic">ٱلْحَمْدُ لِلَّٰهِ رَبِّ ٱلْعَـٰلَمِينَ</div>
+            <div class="translation">Хвала Аллаху, Господу миров.</div>
+          </article>
+
+          <article class="ayah" data-index="1">
+            <div class="ayah-top">
+              <span class="ayah-ref">1:2</span>
+              <button class="bookmark-btn" data-bookmark="1">☆</button>
+            </div>
+            <div class="arabic">ٱلرَّحْمَـٰنِ ٱلرَّحِيمِ</div>
+            <div class="translation">Милостивому, Милующему.</div>
+          </article>
+
+          <article class="ayah" data-index="2">
+            <div class="ayah-top">
+              <span class="ayah-ref">1:3</span>
+              <button class="bookmark-btn" data-bookmark="2">☆</button>
+            </div>
+            <div class="arabic">مَـٰلِكِ يَوْمِ ٱلدِّينِ</div>
+            <div class="translation">Властелину Дня воздаяния.</div>
+          </article>
+
+          <article class="ayah" data-index="3">
+            <div class="ayah-top">
+              <span class="ayah-ref">1:4</span>
+              <button class="bookmark-btn" data-bookmark="3">☆</button>
+            </div>
+            <div class="arabic">إِيَّاكَ نَعْبُدُ وَإِيَّاكَ نَسْتَعِينُ</div>
+            <div class="translation">Тебе одному мы поклоняемся и Тебя одного молим о помощи.</div>
+          </article>
+
+          <article class="ayah" data-index="4">
+            <div class="ayah-top">
+              <span class="ayah-ref">1:5</span>
+              <button class="bookmark-btn" data-bookmark="4">☆</button>
+            </div>
+            <div class="arabic">ٱهْدِنَا ٱلصِّرَٰطَ ٱلْمُسْتَقِيمَ</div>
+            <div class="translation">Веди нас прямым путём.</div>
+          </article>
+
+          <article class="ayah" data-index="5">
+            <div class="ayah-top">
+              <span class="ayah-ref">1:6–7</span>
+              <button class="bookmark-btn" data-bookmark="5">☆</button>
+            </div>
+            <div class="arabic">صِرَٰطَ ٱلَّذِينَ أَنْعَمْتَ عَلَيْهِمْ غَيْرِ ٱلْمَغْضُوبِ عَلَيْهِمْ وَلَا ٱلضَّآلِّينَ</div>
+            <div class="translation">Путём тех, кого Ты облагодетельствовал, не тех, на кого пал гнев, и не заблудших.</div>
+          </article>
+
+        </div>
+
+        <div class="reader-footer">
+          <a class="btn btn-secondary" href="reciters-pro-ru.html">Премиальные чтецы</a>
+          <a class="btn btn-secondary" href="quran-ai-ru.html">Проверка чтения</a>
+          <a class="btn btn-primary" href="pro-ru.html">Управление ПРО</a>
+        </div>
+      </section>
+
+    </section>
+
+  </main>
+
+</div>
+
+<nav class="bottom-nav" aria-label="Нижняя навигация">
+  <a href="home-ru.html">
+    <span>🏠</span>
+    <span>Главная</span>
+  </a>
+
+  <a href="pro-ru.html">
+    <span>👑</span>
+    <span>ПРО</span>
+  </a>
+
+  <a class="active" href="#reader">
+    <span>📖</span>
+    <span>Коран</span>
+  </a>
+
+  <a href="quran-ai-ru.html">
+    <span>🎙️</span>
+    <span>Проверка</span>
+  </a>
+</nav>
+
+<div class="modal-overlay" id="proModal" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+  <div class="modal">
+    <div class="modal-badge">Коран ПРО</div>
+    <h3 id="modalTitle">Открыть полное чтение Корана</h3>
+    <p>
+      Эта функция входит в BarakaWay ПРО. После активации откроются непрерывное чтение,
+      закладки, сохранение прогресса и переход к премиальным Quran-разделам.
+    </p>
+
+    <div class="modal-actions">
+      <a class="btn btn-primary" href="pro-ru.html#plans">Открыть ПРО-доступ</a>
+      <button class="btn btn-secondary" data-close-modal>Закрыть</button>
+    </div>
+  </div>
+</div>
+
+<div class="toast" id="toast"></div>
+
+<script>
+(function(){
+  const PRO_KEY = "barakaway_pro";
+  const PROGRESS_KEY = "barakaway_quran_pro_progress";
+  const BOOKMARKS_KEY = "barakaway_quran_pro_bookmarks";
+  const THEME_KEY = "barakaway_premium_theme";
+
+  const proState = document.getElementById("proState");
+  const accessPanel = document.querySelector(".access-panel");
+  const accessStatus = document.getElementById("accessStatus");
+  const accessText = document.getElementById("accessText");
+  const reader = document.getElementById("quranReader");
+  const progressText = document.getElementById("progressText");
+  const progressFill = document.getElementById("progressFill");
+  const modal = document.getElementById("proModal");
+  const toast = document.getElementById("toast");
+  const ayahs = Array.from(document.querySelectorAll(".ayah"));
+  const startReadingBtn = document.getElementById("startReadingBtn");
+  const continueBtn = document.getElementById("continueBtn");
+  const saveProgressBtn = document.getElementById("saveProgressBtn");
+  const bookmarkCurrentBtn = document.getElementById("bookmarkCurrentBtn");
+  const clearProgressBtn = document.getElementById("clearProgressBtn");
+  const surahSelect = document.getElementById("surahSelect");
+  const fontPlus = document.getElementById("fontPlus");
+  const fontMinus = document.getElementById("fontMinus");
+  const scrollMode = document.getElementById("scrollMode");
+
+  let currentIndex = Number(localStorage.getItem(PROGRESS_KEY) || 0);
+  let arabicFontSize = 30;
+
+  function isPro(){
+    return localStorage.getItem(PRO_KEY) === "true";
+  }
+
+  function showToast(message){
+    toast.textContent = message;
+    toast.classList.add("show");
+    clearTimeout(window.__barakawayQuranToast);
+    window.__barakawayQuranToast = setTimeout(function(){
+      toast.classList.remove("show");
+    }, 2600);
+  }
+
+  function openModal(){
+    modal.classList.add("open");
+  }
+
+  function closeModal(){
+    modal.classList.remove("open");
+  }
+
+  function applyPremiumTheme(){
+    const theme = localStorage.getItem(THEME_KEY);
+    if(!theme) return;
+    document.body.classList.add("theme-" + theme);
+  }
+
+  function getBookmarks(){
+    try{
+      return JSON.parse(localStorage.getItem(BOOKMARKS_KEY) || "[]");
+    }catch(e){
+      return [];
+    }
+  }
+
+  function saveBookmarks(items){
+    localStorage.setItem(BOOKMARKS_KEY, JSON.stringify(items));
+  }
+
+  function syncBookmarks(){
+    const saved = getBookmarks();
+    document.querySelectorAll("[data-bookmark]").forEach(function(btn){
+      const index = Number(btn.getAttribute("data-bookmark"));
+      const active = saved.includes(index);
+      btn.classList.toggle("saved", active);
+      btn.textContent = active ? "★" : "☆";
+    });
+  }
+
+  function setCurrent(index, shouldScroll){
+    currentIndex = Math.max(0, Math.min(index, ayahs.length - 1));
+    localStorage.setItem(PROGRESS_KEY, String(currentIndex));
+
+    ayahs.forEach(function(ayah){
+      ayah.classList.toggle("current-ayah", Number(ayah.getAttribute("data-index")) === currentIndex);
+    });
+
+    const progress = Math.round(((currentIndex + 1) / ayahs.length) * 100);
+    progressText.textContent = progress + "%";
+    progressFill.style.width = progress + "%";
+
+    if(shouldScroll){
+      ayahs[currentIndex].scrollIntoView({behavior:"smooth", block:"center"});
+    }
+  }
+
+  function requirePro(action){
+    if(!isPro()){
+      openModal();
+      return false;
+    }
+    if(typeof action === "function") action();
+    return true;
+  }
+
+  function syncState(){
+    const active = isPro();
+
+    proState.classList.toggle("locked", !active);
+    proState.classList.toggle("active", active);
+    proState.innerHTML = active ? "✅ ПРО активирован" : "🔒 ПРО не активирован";
+
+    accessPanel.classList.toggle("active", active);
+    accessStatus.textContent = active ? "Открыто" : "Закрыто";
+    accessText.textContent = active
+      ? "Коран ПРО открыт. Доступны чтение, закладки, сохранение прогресса и переходы к премиальным Quran-разделам."
+      : "Без ПРО режим виден как preview. После активации открываются чтение, закладки и сохранение прогресса.";
+
+    reader.classList.toggle("locked", !active);
+    startReadingBtn.textContent = active ? "Продолжить чтение" : "Открыть ПРО";
+    continueBtn.textContent = active ? "Продолжить" : "Открыть ПРО";
+
+    setCurrent(currentIndex, false);
+    syncBookmarks();
+  }
+
+  startReadingBtn.addEventListener("click", function(){
+    requirePro(function(){
+      document.getElementById("reader").scrollIntoView({behavior:"smooth", block:"start"});
+      setCurrent(currentIndex, true);
+    });
+  });
+
+  continueBtn.addEventListener("click", function(){
+    requirePro(function(){
+      setCurrent(currentIndex, true);
+      showToast("Открыто последнее место чтения.");
+    });
+  });
+
+  saveProgressBtn.addEventListener("click", function(){
+    requirePro(function(){
+      localStorage.setItem(PROGRESS_KEY, String(currentIndex));
+      showToast("Место чтения сохранено.");
+    });
+  });
+
+  bookmarkCurrentBtn.addEventListener("click", function(){
+    requirePro(function(){
+      const saved = getBookmarks();
+      if(!saved.includes(currentIndex)){
+        saved.push(currentIndex);
+      }
+      saveBookmarks(saved);
+      syncBookmarks();
+      showToast("Закладка добавлена.");
+    });
+  });
+
+  clearProgressBtn.addEventListener("click", function(){
+    requirePro(function(){
+      currentIndex = 0;
+      localStorage.setItem(PROGRESS_KEY, "0");
+      setCurrent(0, true);
+      showToast("Прогресс сброшен.");
+    });
+  });
+
+  surahSelect.addEventListener("change", function(){
+    requirePro(function(){
+      setCurrent(Number(surahSelect.value), true);
+    });
+  });
+
+  document.querySelectorAll("[data-bookmark]").forEach(function(btn){
+    btn.addEventListener("click", function(){
+      requirePro(function(){
+        const index = Number(btn.getAttribute("data-bookmark"));
+        let saved = getBookmarks();
+
+        if(saved.includes(index)){
+          saved = saved.filter(function(item){ return item !== index; });
+          showToast("Закладка удалена.");
+        }else{
+          saved.push(index);
+          showToast("Закладка сохранена.");
+        }
+
+        saveBookmarks(saved);
+        syncBookmarks();
+      });
+    });
+  });
+
+  ayahs.forEach(function(ayah){
+    ayah.addEventListener("click", function(){
+      requirePro(function(){
+        setCurrent(Number(ayah.getAttribute("data-index")), false);
+      });
+    });
+  });
+
+  fontPlus.addEventListener("click", function(){
+    requirePro(function(){
+      arabicFontSize = Math.min(40, arabicFontSize + 2);
+      document.querySelectorAll(".arabic").forEach(function(el){
+        el.style.fontSize = arabicFontSize + "px";
+      });
+    });
+  });
+
+  fontMinus.addEventListener("click", function(){
+    requirePro(function(){
+      arabicFontSize = Math.max(22, arabicFontSize - 2);
+      document.querySelectorAll(".arabic").forEach(function(el){
+        el.style.fontSize = arabicFontSize + "px";
+      });
+    });
+  });
+
+  scrollMode.addEventListener("click", function(){
+    requirePro(function(){
+      reader.scrollIntoView({behavior:"smooth", block:"start"});
+      showToast("Режим чтения открыт.");
+    });
+  });
+
+  document.querySelectorAll("[data-close-modal]").forEach(function(btn){
+    btn.addEventListener("click", closeModal);
+  });
+
+  modal.addEventListener("click", function(event){
+    if(event.target === modal){
+      closeModal();
+    }
+  });
+
+  document.addEventListener("keydown", function(event){
+    if(event.key === "Escape"){
+      closeModal();
+    }
+  });
+
+  applyPremiumTheme();
+  syncState();
+})();
+</script>
+
+
+<script>
+(function(){
+  const PRO_KEY = "barakaway_pro";
+  const HOLD_MS = 7000;
+  let holdTimer = null;
+  let progressTimer = null;
+  let startedAt = 0;
+
+  function findProActivator(){
+    return document.getElementById("proState")
+      || document.querySelector("[data-home-pro-state]")
+      || document.querySelector(".pro-final-state")
+      || document.querySelector(".access-status");
+  }
+
+  function showDevToast(message){
+    let toast = document.getElementById("barakawayDevUnlockToast");
+
+    if(!toast){
+      toast = document.createElement("div");
+      toast.id = "barakawayDevUnlockToast";
+      toast.style.position = "fixed";
+      toast.style.left = "50%";
+      toast.style.bottom = "96px";
+      toast.style.zIndex = "99999";
+      toast.style.transform = "translateX(-50%)";
+      toast.style.width = "min(92%,460px)";
+      toast.style.padding = "14px 16px";
+      toast.style.borderRadius = "18px";
+      toast.style.background = "rgba(16,24,32,.96)";
+      toast.style.border = "1px solid rgba(215,192,122,.28)";
+      toast.style.color = "#f2df9d";
+      toast.style.fontSize = "13px";
+      toast.style.fontWeight = "900";
+      toast.style.textAlign = "center";
+      toast.style.boxShadow = "0 18px 40px rgba(0,0,0,.35)";
+      toast.style.opacity = "0";
+      toast.style.pointerEvents = "none";
+      toast.style.transition = "opacity .25s ease";
+      document.body.appendChild(toast);
+    }
+
+    toast.textContent = message;
+    toast.style.opacity = "1";
+
+    clearTimeout(window.__barakawayDevUnlockToastTimer);
+    window.__barakawayDevUnlockToastTimer = setTimeout(function(){
+      toast.style.opacity = "0";
+    }, 2400);
+  }
+
+  function setActivatorHint(node){
+    if(!node) return;
+    node.style.userSelect = "none";
+    node.style.webkitUserSelect = "none";
+    node.style.cursor = "pointer";
+    node.setAttribute("title", "Тестовый режим: удерживать 7 секунд");
+  }
+
+  function startHold(){
+    const node = findProActivator();
+    if(!node) return;
+
+    startedAt = Date.now();
+    showDevToast("Удерживайте 7 секунд для тестового PRO.");
+
+    clearTimeout(holdTimer);
+    clearInterval(progressTimer);
+
+    progressTimer = setInterval(function(){
+      const left = Math.max(0, Math.ceil((HOLD_MS - (Date.now() - startedAt)) / 1000));
+      if(left > 0){
+        showDevToast("Тестовый PRO: осталось " + left + " сек.");
+      }
+    }, 1000);
+
+    holdTimer = setTimeout(function(){
+      clearInterval(progressTimer);
+
+      const active = localStorage.getItem(PRO_KEY) === "true";
+
+      if(active){
+        localStorage.removeItem(PRO_KEY);
+        showDevToast("Тестовый PRO выключен.");
+      }else{
+        localStorage.setItem(PRO_KEY, "true");
+        localStorage.setItem("barakaway_pro_plan", "developer-test");
+        showDevToast("Тестовый PRO активирован.");
+      }
+
+      setTimeout(function(){
+        window.location.reload();
+      }, 650);
+    }, HOLD_MS);
+  }
+
+  function cancelHold(){
+    clearTimeout(holdTimer);
+    clearInterval(progressTimer);
+    holdTimer = null;
+    progressTimer = null;
+  }
+
+  function init(){
+    const node = findProActivator();
+    if(!node) return;
+
+    setActivatorHint(node);
+
+    node.addEventListener("mousedown", startHold);
+    node.addEventListener("touchstart", startHold, {passive:true});
+    node.addEventListener("mouseup", cancelHold);
+    node.addEventListener("mouseleave", cancelHold);
+    node.addEventListener("touchend", cancelHold);
+    node.addEventListener("touchcancel", cancelHold);
+  }
+
+  if(document.readyState === "loading"){
+    document.addEventListener("DOMContentLoaded", init);
+  }else{
+    init();
+  }
+})();
+</script>
+
+</body>
+</html>

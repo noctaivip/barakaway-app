@@ -1,0 +1,1563 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<!--
+بِسْمِ ٱللَّٰهِ ٱلرَّحْمَـٰنِ ٱلرَّحِيمِ
+-->
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#101820">
+<title>Дуа ПРО — обращения через 99 Имён Аллаха</title>
+
+<style>
+:root{
+  --page:#0b1016;
+  --panel:#151d26;
+  --panel-2:#101820;
+  --gold:#d7c07a;
+  --green:#4caf6a;
+  --green-2:#2d7a46;
+  --text:#f7faf8;
+  --muted:#aeb9c5;
+  --border:rgba(215,192,122,.20);
+  --shadow:0 24px 70px rgba(0,0,0,.36);
+}
+
+*{box-sizing:border-box;}
+html{scroll-behavior:smooth;}
+
+body{
+  margin:0;
+  min-height:100vh;
+  background:
+    radial-gradient(circle at 12% 0%,rgba(215,192,122,.10),transparent 24%),
+    radial-gradient(circle at 88% 8%,rgba(76,175,106,.10),transparent 30%),
+    linear-gradient(180deg,#0b1016 0%,#101820 52%,#0b1016 100%);
+  color:var(--text);
+  font-family:system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",Arial,sans-serif;
+  line-height:1.6;
+}
+
+a{color:inherit;text-decoration:none;}
+button,input{font-family:inherit;}
+
+.page{
+  width:min(100%,980px);
+  margin:0 auto;
+  padding:22px 18px 122px;
+}
+
+.topbar{
+  position:sticky;
+  top:0;
+  z-index:40;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:12px;
+  padding:12px 0 18px;
+  backdrop-filter:blur(18px);
+  -webkit-backdrop-filter:blur(18px);
+}
+
+.top-pill,
+.pro-state{
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  gap:8px;
+  min-height:42px;
+  padding:9px 15px;
+  border-radius:999px;
+  background:rgba(18,25,33,.78);
+  border:1px solid rgba(215,192,122,.18);
+  color:#f7f2d9;
+  font-size:13px;
+  font-weight:900;
+}
+
+.pro-state.locked{
+  background:rgba(215,192,122,.10);
+  border-color:rgba(215,192,122,.24);
+  color:#f2df9d;
+}
+
+.pro-state.active{
+  background:rgba(76,175,106,.12);
+  border-color:rgba(102,198,128,.28);
+  color:#dff7e6;
+}
+
+.hero{
+  position:relative;
+  overflow:hidden;
+  border-radius:38px;
+  padding:42px 32px 32px;
+  background:
+    radial-gradient(circle at 88% 8%,rgba(215,192,122,.18),transparent 27%),
+    radial-gradient(circle at 14% 88%,rgba(76,175,106,.14),transparent 28%),
+    linear-gradient(135deg,#151d26 0%,#101820 50%,#17261f 100%);
+  border:1px solid var(--border);
+  box-shadow:var(--shadow), inset 0 1px 0 rgba(255,255,255,.04);
+}
+
+.hero::after{
+  content:"";
+  position:absolute;
+  inset:-40%;
+  background:linear-gradient(115deg,transparent 0%,rgba(255,255,255,.04) 45%,transparent 55%);
+  transform:rotate(8deg);
+  pointer-events:none;
+}
+
+.hero-inner{position:relative;z-index:2;}
+
+.badge{
+  display:inline-flex;
+  align-items:center;
+  gap:9px;
+  padding:9px 15px;
+  border-radius:999px;
+  background:rgba(215,192,122,.10);
+  border:1px solid rgba(215,192,122,.26);
+  color:var(--gold);
+  font-size:12px;
+  font-weight:950;
+  letter-spacing:.12em;
+  text-transform:uppercase;
+}
+
+h1{
+  margin:20px 0 12px;
+  max-width:780px;
+  font-size:52px;
+  line-height:.96;
+  letter-spacing:-.065em;
+}
+
+.hero-text{
+  max-width:760px;
+  color:var(--muted);
+  font-size:17px;
+  font-weight:650;
+}
+
+.hero-actions{
+  display:flex;
+  flex-wrap:wrap;
+  gap:12px;
+  margin-top:28px;
+}
+
+.btn{
+  appearance:none;
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  gap:9px;
+  min-height:52px;
+  padding:14px 21px;
+  border-radius:18px;
+  border:1px solid transparent;
+  font-size:14px;
+  font-weight:950;
+  cursor:pointer;
+  text-decoration:none;
+  transition:transform .18s ease,box-shadow .25s ease,background .25s ease,border-color .25s ease;
+  -webkit-tap-highlight-color:transparent;
+}
+
+.btn:hover{transform:translateY(-2px);}
+.btn:active{transform:scale(.985);}
+
+.btn-primary{
+  background:linear-gradient(135deg,#f1db91 0%,#d7c07a 42%,#af8430 100%);
+  color:#11150f;
+  box-shadow:0 18px 38px rgba(215,192,122,.22);
+}
+
+.btn-secondary{
+  background:rgba(20,28,37,.82);
+  color:#f7faf8;
+  border-color:rgba(215,192,122,.18);
+}
+
+.btn-green{
+  background:linear-gradient(135deg,#66c680 0%,#2d7a46 100%);
+  color:white;
+  box-shadow:0 18px 38px rgba(76,175,106,.16);
+}
+
+.access-panel{
+  margin-top:24px;
+  border-radius:30px;
+  padding:22px;
+  background:
+    radial-gradient(circle at 96% 0%,rgba(215,192,122,.12),transparent 30%),
+    linear-gradient(135deg,#151d26 0%,#101820 55%,#14231b 100%);
+  border:1px solid rgba(215,192,122,.18);
+  box-shadow:0 18px 44px rgba(0,0,0,.24);
+}
+
+.access-head{
+  display:flex;
+  justify-content:space-between;
+  align-items:flex-start;
+  gap:16px;
+}
+
+.access-kicker{
+  color:#d7c07a;
+  font-size:11px;
+  font-weight:950;
+  letter-spacing:.12em;
+  text-transform:uppercase;
+  margin-bottom:7px;
+}
+
+.access-title{
+  margin:0;
+  font-size:28px;
+  line-height:1.08;
+  letter-spacing:-.045em;
+}
+
+.access-text{
+  margin:8px 0 0;
+  max-width:730px;
+  color:#aeb9c5;
+  font-size:14px;
+  font-weight:650;
+}
+
+.access-status{
+  flex:0 0 auto;
+  display:inline-flex;
+  min-height:38px;
+  align-items:center;
+  justify-content:center;
+  padding:9px 13px;
+  border-radius:999px;
+  background:rgba(215,192,122,.10);
+  border:1px solid rgba(215,192,122,.22);
+  color:#f2df9d;
+  font-size:12px;
+  font-weight:950;
+  white-space:nowrap;
+}
+
+.access-panel.active .access-status{
+  background:rgba(76,175,106,.12);
+  border-color:rgba(102,198,128,.28);
+  color:#dff7e6;
+}
+
+.dua-layout{
+  display:grid;
+  grid-template-columns:330px 1fr;
+  gap:18px;
+  margin-top:34px;
+}
+
+.dua-side,
+.dua-main{
+  border-radius:32px;
+  background:linear-gradient(135deg,#151d26 0%,#101820 100%);
+  border:1px solid rgba(215,192,122,.16);
+  box-shadow:0 18px 44px rgba(0,0,0,.22), inset 0 1px 0 rgba(255,255,255,.035);
+}
+
+.dua-side{
+  padding:18px;
+  align-self:start;
+  position:sticky;
+  top:82px;
+}
+
+.side-title{
+  margin:0 0 12px;
+  font-size:22px;
+  line-height:1.1;
+  letter-spacing:-.04em;
+}
+
+.side-text{
+  margin:0 0 16px;
+  color:#aeb9c5;
+  font-size:13px;
+  font-weight:650;
+}
+
+.category-list{
+  display:grid;
+  gap:10px;
+}
+
+.category-btn{
+  appearance:none;
+  width:100%;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:12px;
+  min-height:54px;
+  border-radius:18px;
+  padding:12px 14px;
+  background:rgba(255,255,255,.045);
+  color:#f7faf8;
+  border:1px solid rgba(255,255,255,.07);
+  font-size:14px;
+  font-weight:900;
+  cursor:pointer;
+  text-align:left;
+}
+
+.category-btn.active{
+  background:linear-gradient(135deg,rgba(215,192,122,.16),rgba(76,175,106,.12));
+  border-color:rgba(215,192,122,.26);
+  color:#f8e9a9;
+}
+
+.category-btn.locked::after{
+  content:"ПРО";
+  padding:4px 8px;
+  border-radius:999px;
+  background:rgba(215,192,122,.10);
+  color:#f2df9d;
+  border:1px solid rgba(215,192,122,.20);
+  font-size:10px;
+  font-weight:950;
+}
+
+.favorite-box{
+  margin-top:16px;
+  border-radius:24px;
+  padding:16px;
+  background:rgba(76,175,106,.10);
+  border:1px solid rgba(102,198,128,.18);
+}
+
+.favorite-title{
+  color:#dff7e6;
+  font-size:13px;
+  font-weight:950;
+  margin-bottom:8px;
+}
+
+.favorite-text{
+  color:#aeb9c5;
+  font-size:12px;
+  font-weight:650;
+}
+
+.dua-main{
+  overflow:hidden;
+}
+
+.dua-header{
+  display:flex;
+  justify-content:space-between;
+  align-items:flex-start;
+  gap:18px;
+  padding:18px 18px 0;
+}
+
+.dua-title h2{
+  margin:0;
+  font-size:30px;
+  line-height:1.08;
+  letter-spacing:-.045em;
+}
+
+.dua-title p{
+  margin:6px 0 0;
+  color:#aeb9c5;
+  font-size:13px;
+  font-weight:650;
+}
+
+.dua-tools{
+  display:flex;
+  flex-wrap:wrap;
+  justify-content:flex-end;
+  gap:9px;
+}
+
+.tool-btn{
+  appearance:none;
+  min-height:42px;
+  padding:9px 13px;
+  border-radius:999px;
+  background:rgba(215,192,122,.10);
+  color:#f2df9d;
+  border:1px solid rgba(215,192,122,.22);
+  font-size:12px;
+  font-weight:950;
+  cursor:pointer;
+}
+
+.dua-content{
+  position:relative;
+  margin:18px;
+  padding:24px;
+  min-height:560px;
+  border-radius:28px;
+  background:
+    radial-gradient(circle at 88% 10%,rgba(215,192,122,.08),transparent 26%),
+    linear-gradient(180deg,#111a22 0%,#0f1720 100%);
+  border:1px solid rgba(255,255,255,.07);
+  overflow:hidden;
+}
+
+.dua-content.locked::after{
+  content:"Дуа ПРО";
+  position:absolute;
+  inset:0;
+  z-index:5;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  background:rgba(5,8,11,.58);
+  backdrop-filter:blur(3px);
+  -webkit-backdrop-filter:blur(3px);
+  color:#f2df9d;
+  font-size:34px;
+  font-weight:950;
+  letter-spacing:.16em;
+  pointer-events:none;
+}
+
+.search-box{
+  margin-bottom:16px;
+}
+
+.search-input{
+  width:100%;
+  min-height:48px;
+  border-radius:18px;
+  padding:12px 15px;
+  background:rgba(255,255,255,.055);
+  border:1px solid rgba(255,255,255,.09);
+  color:#f7faf8;
+  outline:none;
+  font-size:14px;
+  font-weight:750;
+}
+
+.search-input::placeholder{
+  color:#8f9ca8;
+}
+
+.category-summary{
+  border-radius:24px;
+  padding:18px;
+  margin-bottom:16px;
+  background:rgba(215,192,122,.08);
+  border:1px solid rgba(215,192,122,.16);
+}
+
+.category-summary-title{
+  font-size:18px;
+  font-weight:950;
+  letter-spacing:-.03em;
+  margin-bottom:7px;
+}
+
+.category-summary-text{
+  color:#b8c3cc;
+  font-size:13px;
+  font-weight:650;
+}
+
+.names-count{
+  display:inline-flex;
+  margin-top:12px;
+  padding:6px 10px;
+  border-radius:999px;
+  background:rgba(76,175,106,.10);
+  border:1px solid rgba(102,198,128,.18);
+  color:#dff7e6;
+  font-size:11px;
+  font-weight:950;
+  letter-spacing:.08em;
+  text-transform:uppercase;
+}
+
+.dua-card{
+  border-radius:26px;
+  padding:22px;
+  background:rgba(255,255,255,.045);
+  border:1px solid rgba(255,255,255,.07);
+  margin-bottom:16px;
+}
+
+.dua-card:last-child{margin-bottom:0;}
+
+.dua-card-head{
+  display:flex;
+  justify-content:space-between;
+  align-items:flex-start;
+  gap:12px;
+  margin-bottom:14px;
+}
+
+.dua-card-title{
+  margin:0;
+  font-size:22px;
+  line-height:1.12;
+  letter-spacing:-.035em;
+}
+
+.dua-name-subtitle{
+  margin-top:4px;
+  color:#aeb9c5;
+  font-size:13px;
+  font-weight:750;
+}
+
+.dua-chip{
+  flex:0 0 auto;
+  display:inline-flex;
+  padding:5px 9px;
+  border-radius:999px;
+  background:rgba(215,192,122,.10);
+  border:1px solid rgba(215,192,122,.20);
+  color:#f2df9d;
+  font-size:10px;
+  font-weight:950;
+  letter-spacing:.08em;
+  text-transform:uppercase;
+}
+
+.arabic{
+  direction:rtl;
+  text-align:right;
+  font-family:"Times New Roman",serif;
+  font-size:28px;
+  line-height:2;
+  color:#f7faf8;
+  margin:14px 0;
+}
+
+.dua-meaning{
+  color:#b8c3cc;
+  font-size:15px;
+  font-weight:650;
+}
+
+.dua-use{
+  margin-top:12px;
+  color:#d7c07a;
+  font-size:13px;
+  font-weight:850;
+}
+
+.dua-actions{
+  display:flex;
+  flex-wrap:wrap;
+  gap:10px;
+  margin-top:16px;
+}
+
+.small-btn{
+  appearance:none;
+  min-height:38px;
+  padding:8px 12px;
+  border-radius:999px;
+  background:rgba(76,175,106,.10);
+  color:#dff7e6;
+  border:1px solid rgba(102,198,128,.18);
+  font-size:12px;
+  font-weight:900;
+  cursor:pointer;
+}
+
+.small-btn.saved{
+  background:rgba(215,192,122,.14);
+  color:#f2df9d;
+  border-color:rgba(215,192,122,.26);
+}
+
+.info-box{
+  margin-top:28px;
+  border-radius:28px;
+  padding:22px;
+  background:rgba(215,192,122,.08);
+  border:1px solid rgba(215,192,122,.16);
+  color:#d3dde6;
+  font-size:13px;
+  font-weight:650;
+}
+
+.bottom-nav{
+  position:fixed;
+  left:50%;
+  bottom:18px;
+  z-index:50;
+  transform:translateX(-50%);
+  width:min(92%,560px);
+  display:grid;
+  grid-template-columns:repeat(4,minmax(0,1fr));
+  gap:8px;
+  padding:8px;
+  border-radius:24px;
+  background:rgba(14,20,27,.84);
+  border:1px solid rgba(215,192,122,.18);
+  backdrop-filter:blur(18px);
+  -webkit-backdrop-filter:blur(18px);
+  box-shadow:0 18px 44px rgba(0,0,0,.34);
+}
+
+.bottom-nav a,
+.bottom-nav button{
+  appearance:none;
+  border:none;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  justify-content:center;
+  gap:4px;
+  min-height:54px;
+  border-radius:18px;
+  background:transparent;
+  color:#c8d2dc;
+  font-size:11px;
+  font-weight:850;
+  cursor:pointer;
+  text-decoration:none;
+}
+
+.bottom-nav a.active,
+.bottom-nav button.active{
+  background:linear-gradient(135deg,rgba(215,192,122,.18),rgba(76,175,106,.12));
+  color:#f8e9a9;
+}
+
+.modal-overlay{
+  display:none;
+  position:fixed;
+  inset:0;
+  z-index:100;
+  padding:18px;
+  background:rgba(5,8,11,.72);
+  backdrop-filter:blur(9px);
+  -webkit-backdrop-filter:blur(9px);
+  align-items:center;
+  justify-content:center;
+}
+
+.modal-overlay.open{display:flex;}
+
+.modal{
+  width:min(100%,560px);
+  border-radius:32px;
+  padding:24px;
+  background:
+    radial-gradient(circle at 88% 0%,rgba(215,192,122,.12),transparent 32%),
+    linear-gradient(180deg,#17202a 0%,#111821 100%);
+  border:1px solid rgba(215,192,122,.22);
+  box-shadow:0 28px 80px rgba(0,0,0,.50);
+}
+
+.modal-badge{
+  display:inline-flex;
+  padding:7px 11px;
+  border-radius:999px;
+  background:rgba(215,192,122,.10);
+  border:1px solid rgba(215,192,122,.22);
+  color:#f2df9d;
+  font-size:11px;
+  font-weight:950;
+  letter-spacing:.10em;
+  text-transform:uppercase;
+}
+
+.modal h3{
+  margin:16px 0 8px;
+  font-size:28px;
+  line-height:1.1;
+  letter-spacing:-.04em;
+}
+
+.modal p{
+  color:var(--muted);
+  margin:0;
+  font-size:15px;
+  font-weight:650;
+}
+
+.modal-actions{
+  display:flex;
+  flex-wrap:wrap;
+  gap:10px;
+  margin-top:22px;
+}
+
+.modal-actions .btn{flex:1 1 190px;}
+
+.toast{
+  position:fixed;
+  left:50%;
+  bottom:94px;
+  z-index:140;
+  transform:translateX(-50%) translateY(14px);
+  opacity:0;
+  pointer-events:none;
+  width:min(92%,460px);
+  padding:14px 16px;
+  border-radius:18px;
+  background:rgba(16,24,32,.94);
+  border:1px solid rgba(102,198,128,.24);
+  color:#eaf7ee;
+  font-size:13px;
+  font-weight:850;
+  text-align:center;
+  box-shadow:0 18px 40px rgba(0,0,0,.35);
+  transition:opacity .25s ease,transform .25s ease;
+}
+
+.toast.show{
+  opacity:1;
+  transform:translateX(-50%) translateY(0);
+}
+
+body.theme-royal-gold{
+  background:
+    radial-gradient(circle at 12% 0%,rgba(215,192,122,.18),transparent 26%),
+    linear-gradient(180deg,#090908 0%,#1a160d 52%,#090908 100%);
+}
+
+body.theme-emerald-quran{
+  background:
+    radial-gradient(circle at 12% 0%,rgba(102,198,128,.14),transparent 26%),
+    linear-gradient(180deg,#07110b 0%,#10251a 52%,#07110b 100%);
+}
+
+body.theme-violet-noor{
+  background:
+    radial-gradient(circle at 12% 0%,rgba(161,118,255,.16),transparent 26%),
+    linear-gradient(180deg,#0d0a15 0%,#201931 52%,#0d0a15 100%);
+}
+
+body.theme-carbon-elite{
+  background:
+    radial-gradient(circle at 12% 0%,rgba(255,255,255,.08),transparent 26%),
+    linear-gradient(180deg,#050607 0%,#151a20 52%,#050607 100%);
+}
+
+@media(max-width:900px){
+  .dua-layout{
+    grid-template-columns:1fr;
+  }
+
+  .dua-side{
+    position:relative;
+    top:auto;
+  }
+}
+
+@media(max-width:760px){
+  .page{padding:18px 12px 110px;}
+  .topbar{padding-top:8px;}
+  .top-pill,.pro-state{
+    min-height:38px;
+    padding:8px 12px;
+    font-size:12px;
+  }
+  .hero{
+    padding:32px 20px 24px;
+    border-radius:30px;
+  }
+  h1{font-size:39px;}
+  .hero-text{font-size:16px;}
+  .access-head,
+  .dua-header{
+    align-items:flex-start;
+    flex-direction:column;
+  }
+  .dua-tools{
+    justify-content:flex-start;
+  }
+  .arabic{
+    font-size:24px;
+  }
+  .dua-content{
+    margin:14px;
+    padding:18px 16px;
+  }
+  .hero-actions .btn{
+    width:100%;
+  }
+  .bottom-nav{
+    bottom:10px;
+    width:calc(100% - 18px);
+  }
+}
+
+@media(max-width:420px){
+  h1{font-size:35px;}
+}
+</style>
+</head>
+
+<body>
+
+<div class="page">
+
+  <header class="topbar">
+    <a class="top-pill" href="home-ru.html" aria-label="Вернуться на главную">
+      ← Главная
+    </a>
+
+    <div id="proState" class="pro-state locked">
+      🔒 ПРО не активирован
+    </div>
+  </header>
+
+  <main>
+
+    <section class="hero" id="top">
+      <div class="hero-inner">
+        <div class="badge">🤲 Дуа ПРО</div>
+
+        <h1>Обращения через 99 Имён Аллаха</h1>
+
+        <div class="hero-text">
+          В этом разделе собраны обращения к Аллаху через Его Прекрасные Имена
+          по конкретным жизненным темам: богатство и баракат, покаяние, больной человек,
+          быстрая продажа, долги, брак и работа.
+        </div>
+
+        <div class="hero-actions">
+          <button class="btn btn-primary" id="openFirstDua">
+            Открыть обращения
+          </button>
+
+          <button class="btn btn-secondary" data-scroll="#categories">
+            Посмотреть темы
+          </button>
+
+          <a class="btn btn-green" href="pro-ru.html">
+            Назад к ПРО
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <section class="access-panel" id="access">
+      <div class="access-head">
+        <div>
+          <div class="access-kicker">Состояние доступа</div>
+          <h2 class="access-title">99 Имён Аллаха по целям</h2>
+          <p class="access-text" id="accessText">
+            Без ПРО темы видны как preview. После активации открываются обращения через 99 Имён Аллаха, копирование и избранное.
+          </p>
+        </div>
+
+        <div class="access-status" id="accessStatus">
+          Закрыто
+        </div>
+      </div>
+    </section>
+
+    <section class="dua-layout" id="categories">
+
+      <aside class="dua-side">
+        <h2 class="side-title">Темы обращения</h2>
+        <p class="side-text">
+          Выберите тему. Внутри каждой темы будет 99 обращений — по одному через каждое Имя Аллаха.
+        </p>
+
+        <div class="category-list">
+          <button class="category-btn active" data-category="wealth">💰 Богатство и баракат</button>
+          <button class="category-btn" data-category="repentance">🕊️ Покаяние и прощение грехов</button>
+          <button class="category-btn" data-category="sick">🫶 Обращение за больного</button>
+          <button class="category-btn" data-category="sale">🤝 Быстрая продажа</button>
+          <button class="category-btn" data-category="debt">📉 Избавление от долгов</button>
+          <button class="category-btn" data-category="marriage">💍 Жениться / выйти замуж</button>
+          <button class="category-btn" data-category="work">💼 Найти работу</button>
+        </div>
+
+        <div class="favorite-box">
+          <div class="favorite-title">Избранное</div>
+          <div class="favorite-text" id="favoriteText">
+            Пока избранных обращений нет.
+          </div>
+        </div>
+      </aside>
+
+      <section class="dua-main">
+        <div class="dua-header">
+          <div class="dua-title">
+            <h2 id="duaCategoryTitle">Богатство и баракат</h2>
+            <p id="duaCategorySubtitle">Обращения о халяльном ризке, баракате, возможностях и правильных дверях дохода.</p>
+          </div>
+
+          <div class="dua-tools">
+            <button class="tool-btn" id="copyCategoryBtn">Скопировать тему</button>
+            <button class="tool-btn" id="saveCategoryBtn">Сохранить тему</button>
+          </div>
+        </div>
+
+        <div class="dua-content locked" id="duaContent"></div>
+      </section>
+
+    </section>
+
+    <div class="info-box">
+      Это авторские русские обращения, структурированные вокруг 99 Имён Аллаха. 
+      Они не заменяют Коран, Сунну, фетвы и медицинскую, юридическую или финансовую консультацию.
+      Сохранение темы: <strong>barakaway_dua_pro_category</strong>. Избранное:
+      <strong>barakaway_dua_pro_favorites</strong>.
+    </div>
+
+  </main>
+
+</div>
+
+<nav class="bottom-nav" aria-label="Нижняя навигация">
+  <a href="home-ru.html">
+    <span>🏠</span>
+    <span>Главная</span>
+  </a>
+
+  <a href="pro-ru.html">
+    <span>👑</span>
+    <span>ПРО</span>
+  </a>
+
+  <a class="active" href="#categories">
+    <span>🤲</span>
+    <span>Дуа</span>
+  </a>
+
+  <a href="quran-pro-ru.html">
+    <span>📖</span>
+    <span>Коран</span>
+  </a>
+</nav>
+
+<div class="modal-overlay" id="proModal" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+  <div class="modal">
+    <div class="modal-badge">Дуа ПРО</div>
+    <h3 id="modalTitle">Открыть обращения через 99 Имён</h3>
+    <p>
+      Эта функция входит в BarakaWay ПРО. После активации вы сможете открывать все темы,
+      копировать обращения и сохранять избранное.
+    </p>
+
+    <div class="modal-actions">
+      <a class="btn btn-primary" href="pro-ru.html#plans">Открыть ПРО-доступ</a>
+      <button class="btn btn-secondary" data-close-modal>Закрыть</button>
+    </div>
+  </div>
+</div>
+
+<div class="toast" id="toast"></div>
+
+<script>
+(function(){
+  const PRO_KEY = "barakaway_pro";
+  const CATEGORY_KEY = "barakaway_dua_pro_category";
+  const FAVORITES_KEY = "barakaway_dua_pro_favorites";
+  const THEME_KEY = "barakaway_premium_theme";
+
+  const proState = document.getElementById("proState");
+  const accessPanel = document.querySelector(".access-panel");
+  const accessStatus = document.getElementById("accessStatus");
+  const accessText = document.getElementById("accessText");
+  const duaContent = document.getElementById("duaContent");
+  const modal = document.getElementById("proModal");
+  const toast = document.getElementById("toast");
+  const duaCategoryTitle = document.getElementById("duaCategoryTitle");
+  const duaCategorySubtitle = document.getElementById("duaCategorySubtitle");
+  const favoriteText = document.getElementById("favoriteText");
+  const openFirstDua = document.getElementById("openFirstDua");
+  const copyCategoryBtn = document.getElementById("copyCategoryBtn");
+  const saveCategoryBtn = document.getElementById("saveCategoryBtn");
+
+  const names99 = [
+    ["الرَّحْمَنُ","Ар-Рахман","Всемилостивый"],
+    ["الرَّحِيمُ","Ар-Рахим","Особо Милующий"],
+    ["الْمَلِكُ","Аль-Малик","Царь, Владыка"],
+    ["الْقُدُّوسُ","Аль-Куддус","Святой, Пречистый"],
+    ["السَّلاَمُ","Ас-Салям","Источник мира"],
+    ["الْمُؤْمِنُ","Аль-Му’мин","Дарующий безопасность"],
+    ["الْمُهَيْمِنُ","Аль-Мухаймин","Оберегающий"],
+    ["الْعَزِيزُ","Аль-Азиз","Могущественный"],
+    ["الْجَبَّارُ","Аль-Джаббар","Властный, Исправляющий"],
+    ["الْمُتَكَبِّرُ","Аль-Мутакаббир","Величественный"],
+    ["الْخَالِقُ","Аль-Халик","Творец"],
+    ["الْبَارِئُ","Аль-Бари","Создающий без изъяна"],
+    ["الْمُصَوِّرُ","Аль-Мусаввир","Придающий облик"],
+    ["الْغَفَّارُ","Аль-Гаффар","Многократно Прощающий"],
+    ["الْقَهَّارُ","Аль-Каххар","Всепобеждающий"],
+    ["الْوَهَّابُ","Аль-Ваххаб","Дарующий"],
+    ["الرَّزَّاقُ","Ар-Раззак","Наделяющий уделом"],
+    ["الْفَتَّاحُ","Аль-Фаттах","Открывающий"],
+    ["الْعَلِيمُ","Аль-Алим","Всезнающий"],
+    ["الْقَابِضُ","Аль-Кабид","Сдерживающий"],
+    ["الْبَاسِطُ","Аль-Басит","Расширяющий"],
+    ["الْخَافِضُ","Аль-Хафид","Понижающий"],
+    ["الرَّافِعُ","Ар-Рафи","Возвышающий"],
+    ["الْمُعِزُّ","Аль-Муизз","Дарующий честь"],
+    ["المُذِلُّ","Аль-Музилль","Унижающий"],
+    ["السَّمِيعُ","Ас-Сами","Всеслышащий"],
+    ["الْبَصِيرُ","Аль-Басыр","Всевидящий"],
+    ["الْحَكَمُ","Аль-Хакам","Судья"],
+    ["الْعَدْلُ","Аль-Адль","Справедливый"],
+    ["اللَّطِيفُ","Аль-Латиф","Добрый, Тонко Ведающий"],
+    ["الْخَبِيرُ","Аль-Хабир","Сведущий"],
+    ["الْحَلِيمُ","Аль-Халим","Кроткий"],
+    ["الْعَظِيمُ","Аль-Азым","Великий"],
+    ["الْغَفُورُ","Аль-Гафур","Прощающий"],
+    ["الشَّكُورُ","Аш-Шакур","Благодарный"],
+    ["الْعَلِيُّ","Аль-Алий","Всевышний"],
+    ["الْكَبِيرُ","Аль-Кабир","Великий"],
+    ["الْحَفِيظُ","Аль-Хафиз","Хранитель"],
+    ["المُقِيتُ","Аль-Мукит","Поддерживающий"],
+    ["الْحَسِيبُ","Аль-Хасиб","Достаточный"],
+    ["الْجَلِيلُ","Аль-Джалиль","Величественный"],
+    ["الْكَرِيمُ","Аль-Карим","Щедрый"],
+    ["الرَّقِيبُ","Ар-Ракиб","Наблюдающий"],
+    ["الْمُجِيبُ","Аль-Муджиб","Отвечающий"],
+    ["الْوَاسِعُ","Аль-Васи","Объемлющий"],
+    ["الْحَكِيمُ","Аль-Хаким","Мудрый"],
+    ["الْوَدُودُ","Аль-Вадуд","Любящий"],
+    ["الْمَجِيدُ","Аль-Маджид","Славный"],
+    ["الْبَاعِثُ","Аль-Баис","Воскрешающий"],
+    ["الشَّهِيدُ","Аш-Шахид","Свидетель"],
+    ["الْحَقُّ","Аль-Хакк","Истина"],
+    ["الْوَكِيلُ","Аль-Вакил","Попечитель"],
+    ["الْقَوِيُ","Аль-Кавий","Сильный"],
+    ["الْمَتِينُ","Аль-Матин","Крепкий"],
+    ["الْوَلِيُّ","Аль-Валий","Покровитель"],
+    ["الْحَمِيدُ","Аль-Хамид","Достохвальный"],
+    ["الْمُحْصِي","Аль-Мухси","Считающий"],
+    ["الْمُبْدِئُ","Аль-Мубди","Начинающий"],
+    ["الْمُعِيدُ","Аль-Муид","Возвращающий"],
+    ["الْمُحْيِي","Аль-Мухйи","Оживляющий"],
+    ["اَلْمُمِيتُ","Аль-Мумит","Умерщвляющий"],
+    ["الْحَيُّ","Аль-Хайй","Живой"],
+    ["الْقَيُّومُ","Аль-Кайюм","Поддерживающий всё"],
+    ["الْوَاجِدُ","Аль-Ваджид","Находящий"],
+    ["الْمَاجِدُ","Аль-Маджид","Благородный"],
+    ["الْواحِدُ","Аль-Вахид","Единственный"],
+    ["الصَّمَدُ","Ас-Самад","Самодостаточный"],
+    ["الْقَادِرُ","Аль-Кадир","Всемогущий"],
+    ["الْمُقْتَدِرُ","Аль-Муктадир","Всесильный"],
+    ["الْمُقَدِّمُ","Аль-Мукаддим","Выдвигающий вперёд"],
+    ["الْمُؤَخِّرُ","Аль-Муаххир","Отодвигающий"],
+    ["الأوَّلُ","Аль-Авваль","Первый"],
+    ["الآخِرُ","Аль-Ахир","Последний"],
+    ["الظَّاهِرُ","Аз-Захир","Явный"],
+    ["الْبَاطِنُ","Аль-Батин","Скрытый"],
+    ["الْوَالِي","Аль-Вали","Правящий"],
+    ["الْمُتَعَالِي","Аль-Мутаали","Превознесённый"],
+    ["الْبَرُّ","Аль-Барр","Благой"],
+    ["التَّوَابُ","Ат-Тавваб","Принимающий покаяние"],
+    ["الْمُنْتَقِمُ","Аль-Мунтаким","Воздающий"],
+    ["العَفُوُّ","Аль-Афув","Стирающий грехи"],
+    ["الرَّؤُوفُ","Ар-Рауф","Сострадательный"],
+    ["مَالِكُ الْمُلْكِ","Маликуль-Мульк","Владыка власти"],
+    ["ذُو الْجَلاَلِ وَالإكْرَامِ","Зуль-Джаляли валь-Икрам","Обладатель величия и щедрости"],
+    ["الْمُقْسِطُ","Аль-Муксит","Справедливый"],
+    ["الْجَامِعُ","Аль-Джами","Собирающий"],
+    ["الْغَنِيُّ","Аль-Ганий","Богатый, Нуждающийся ни в чём"],
+    ["الْمُغْنِي","Аль-Мугни","Обогащающий"],
+    ["اَلْمَانِعُ","Аль-Мани","Удерживающий"],
+    ["الضَّارَ","Ад-Дарр","Допускающий вред"],
+    ["النَّافِعُ","Ан-Нафи","Приносящий пользу"],
+    ["النُّورُ","Ан-Нур","Свет"],
+    ["الْهَادِي","Аль-Хади","Ведущий"],
+    ["الْبَدِيعُ","Аль-Бади","Создатель без примера"],
+    ["اَلْبَاقِي","Аль-Баки","Вечный"],
+    ["الْوَارِثُ","Аль-Варис","Наследующий всё"],
+    ["الرَّشِيدُ","Ар-Рашид","Наставляющий"],
+    ["الصَّبُورُ","Ас-Сабур","Терпеливый"]
+  ];
+
+  const categories = {
+    wealth:{
+      title:"Богатство и баракат",
+      subtitle:"Обращения о халяльном богатстве, баракате, ризке, возможностях и чистом доходе.",
+      summary:"Эта тема направлена на просьбу о халяльном ризке, финансовой устойчивости, баракате, правильных дверях дохода и защите от харама.",
+      action:"даруй мне халяльный ризк, баракат в доходе, чистые возможности, мудрость в деньгах и защиту от запретного",
+      use:"Читайте с намерением халяльного дохода, бараката, правильных решений и благодарности.",
+      base:"اللَّهُمَّ ارْزُقْنِي رِزْقًا حَلَالًا طَيِّبًا مُبَارَكًا"
+    },
+    repentance:{
+      title:"Покаяние и прощение грехов",
+      subtitle:"Обращения о таубе, прощении, очищении сердца и возвращении к Аллаху.",
+      summary:"Эта тема направлена на искреннее покаяние, прощение явных и скрытых грехов, очищение сердца и твёрдость после таубы.",
+      action:"прими моё покаяние, прости мои грехи, очисти моё сердце и укрепи меня на прямом пути",
+      use:"Читайте после ошибки, в состоянии сожаления, перед сном и после намаза.",
+      base:"رَبِّ اغْفِرْ لِي وَتُبْ عَلَيَّ إِنَّكَ أَنْتَ التَّوَّابُ الرَّحِيمُ"
+    },
+    sick:{
+      title:"Обращение за больного",
+      subtitle:"Обращения о шифа, облегчении боли, милости и восстановлении здоровья.",
+      summary:"Эта тема направлена на просьбу об исцелении больного, облегчении боли, укреплении тела, спокойствии сердца и милости Аллаха.",
+      action:"исцели больного полным исцелением, облегчи его боль, укрепи его тело и даруй ему спокойствие",
+      use:"Читайте за себя, родителей, детей, близких и каждого больного мусульманина.",
+      base:"اللَّهُمَّ رَبَّ النَّاسِ أَذْهِبِ الْبَأْسَ، اشْفِ أَنْتَ الشَّافِي"
+    },
+    sale:{
+      title:"Быстрая продажа",
+      subtitle:"Обращения о честной продаже, хорошем покупателе, баракате и лёгкости сделки.",
+      summary:"Эта тема направлена на просьбу о дозволенной продаже, честном покупателе, ясной сделке, правильной цене и баракате без обмана.",
+      action:"облегчи мне честную и быструю продажу, приведи достойного покупателя, защити сделку от обмана и даруй баракат",
+      use:"Читайте перед продажей товара, недвижимости, автомобиля, услуги или бизнеса.",
+      base:"رَبِّ يَسِّرْ لِي أَمْرِي وَبَارِكْ لِي فِي بَيْعِي"
+    },
+    debt:{
+      title:"Избавление от долгов",
+      subtitle:"Обращения о закрытии долгов, облегчении обязательств и финансовой свободе.",
+      summary:"Эта тема направлена на просьбу о выходе из долгов, правильных источниках оплаты, дисциплине, защите от унижения и облегчении обязательств.",
+      action:"помоги мне закрыть долги халяльным путём, облегчи мои обязательства, открой двери ризка и защити меня от унижения",
+      use:"Читайте регулярно с намерением закрытия долгов, дисциплины и честного исполнения обязательств.",
+      base:"اللَّهُمَّ اكْفِنِي بِحَلَالِكَ عَنْ حَرَامِكَ وَأَغْنِنِي بِفَضْلِكَ عَمَّنْ سِوَاكَ"
+    },
+    marriage:{
+      title:"Жениться / выйти замуж / найти хорошего мужа или жену",
+      subtitle:"Обращения о праведном супруге, семье, любви, милости и баракате в браке.",
+      summary:"Эта тема направлена на просьбу о праведном муже или жене, чистом браке, любви, милости, совместимости и семейном баракате.",
+      action:"даруй мне праведного супруга, чистый брак, любовь, милость, совместимость и баракат в семье",
+      use:"Читайте с намерением халяльного брака, хорошего выбора, спокойной семьи и защиты от неправильных отношений.",
+      base:"رَبِّ هَبْ لِي زَوْجًا صَالِحًا وَبَيْتًا مُبَارَكًا"
+    },
+    work:{
+      title:"Найти работу",
+      subtitle:"Обращения о достойной работе, халяльном доходе, навыках и правильной двери.",
+      summary:"Эта тема направлена на просьбу о достойной работе, честном работодателе, полезных навыках, правильной возможности и стабильном халяльном доходе.",
+      action:"открой для меня достойную работу, халяльный доход, полезные навыки, правильных людей и устойчивую возможность",
+      use:"Читайте перед поиском работы, собеседованием, отправкой резюме и важными решениями.",
+      base:"رَبِّ افْتَحْ لِي بَابَ رِزْقٍ حَلَالٍ وَعَمَلٍ نَافِعٍ"
+    }
+  };
+
+  let currentCategory = localStorage.getItem(CATEGORY_KEY) || "wealth";
+  let searchQuery = "";
+
+  function isPro(){
+    return localStorage.getItem(PRO_KEY) === "true";
+  }
+
+  function showToast(message){
+    toast.textContent = message;
+    toast.classList.add("show");
+    clearTimeout(window.__barakawayDuaToast);
+    window.__barakawayDuaToast = setTimeout(function(){
+      toast.classList.remove("show");
+    }, 2600);
+  }
+
+  function openModal(){
+    modal.classList.add("open");
+  }
+
+  function closeModal(){
+    modal.classList.remove("open");
+  }
+
+  function requirePro(action){
+    if(!isPro()){
+      openModal();
+      return false;
+    }
+    if(typeof action === "function") action();
+    return true;
+  }
+
+  function applyPremiumTheme(){
+    const theme = localStorage.getItem(THEME_KEY);
+    if(!theme) return;
+    document.body.classList.add("theme-" + theme);
+  }
+
+  function getFavorites(){
+    try{
+      return JSON.parse(localStorage.getItem(FAVORITES_KEY) || "[]");
+    }catch(e){
+      return [];
+    }
+  }
+
+  function saveFavorites(items){
+    localStorage.setItem(FAVORITES_KEY, JSON.stringify(items));
+  }
+
+  function updateFavoritesText(){
+    const favs = getFavorites();
+    favoriteText.textContent = favs.length ? favs.length + " обращений сохранено." : "Пока избранных обращений нет.";
+  }
+
+  function makeDua(category, name, index){
+    return {
+      id: currentCategory + "-" + index,
+      title:"Обращение через " + name[1],
+      subtitle:name[2],
+      chip:"Имя " + (index + 1),
+      arabic:"يَا " + name[0] + "، " + category.base,
+      meaning:"О Аллах, обращаюсь к Тебе через Имя " + name[1] + " — " + name[2] + ". " + capitalize(category.action) + ".",
+      use:category.use
+    };
+  }
+
+  function capitalize(text){
+    return text.charAt(0).toUpperCase() + text.slice(1);
+  }
+
+  function renderCategory(categoryKey){
+    const category = categories[categoryKey] || categories.wealth;
+    currentCategory = categoryKey;
+    localStorage.setItem(CATEGORY_KEY, categoryKey);
+
+    duaCategoryTitle.textContent = category.title;
+    duaCategorySubtitle.textContent = category.subtitle;
+
+    document.querySelectorAll("[data-category]").forEach(function(btn){
+      btn.classList.toggle("active", btn.getAttribute("data-category") === categoryKey);
+    });
+
+    const favorites = getFavorites();
+    const query = searchQuery.trim().toLowerCase();
+
+    const items = names99
+      .map(function(name, index){
+        return makeDua(category, name, index);
+      })
+      .filter(function(item){
+        if(!query) return true;
+        return (
+          item.title.toLowerCase().includes(query) ||
+          item.subtitle.toLowerCase().includes(query) ||
+          item.meaning.toLowerCase().includes(query) ||
+          item.arabic.includes(query)
+        );
+      });
+
+    duaContent.innerHTML = `
+      <div class="search-box">
+        <input class="search-input" id="nameSearchInput" type="search" placeholder="Поиск по имени, смыслу или обращению..." value="${escapeHtml(searchQuery)}">
+      </div>
+
+      <div class="category-summary">
+        <div class="category-summary-title">${category.title}</div>
+        <div class="category-summary-text">${category.summary}</div>
+        <div class="names-count">${items.length} из 99 обращений</div>
+      </div>
+
+      ${items.map(function(item){
+        const saved = favorites.includes(item.id);
+
+        return `
+          <article class="dua-card" data-dua-id="${item.id}">
+            <div class="dua-card-head">
+              <div>
+                <h3 class="dua-card-title">${item.title}</h3>
+                <div class="dua-name-subtitle">${item.subtitle}</div>
+              </div>
+              <span class="dua-chip">${item.chip}</span>
+            </div>
+
+            <div class="arabic">${item.arabic}</div>
+
+            <div class="dua-meaning">${item.meaning}</div>
+
+            <div class="dua-use">${item.use}</div>
+
+            <div class="dua-actions">
+              <button class="small-btn ${saved ? "saved" : ""}" data-save-dua="${item.id}">
+                ${saved ? "В избранном" : "В избранное"}
+              </button>
+              <button class="small-btn" data-copy-dua="${item.id}">
+                Скопировать
+              </button>
+            </div>
+          </article>
+        `;
+      }).join("")}
+    `;
+
+    bindDuaButtons();
+    bindSearch();
+    updateFavoritesText();
+  }
+
+  function escapeHtml(value){
+    return String(value)
+      .replaceAll("&","&amp;")
+      .replaceAll("<","&lt;")
+      .replaceAll(">","&gt;")
+      .replaceAll('"',"&quot;");
+  }
+
+  function bindSearch(){
+    const input = document.getElementById("nameSearchInput");
+    if(!input) return;
+
+    input.addEventListener("input", function(){
+      searchQuery = input.value;
+      renderCategory(currentCategory);
+      const restored = document.getElementById("nameSearchInput");
+      if(restored){
+        restored.focus();
+        restored.setSelectionRange(restored.value.length, restored.value.length);
+      }
+    });
+  }
+
+  function bindDuaButtons(){
+    document.querySelectorAll("[data-save-dua]").forEach(function(btn){
+      btn.addEventListener("click", function(){
+        requirePro(function(){
+          const id = btn.getAttribute("data-save-dua");
+          let favs = getFavorites();
+
+          if(favs.includes(id)){
+            favs = favs.filter(function(item){ return item !== id; });
+            showToast("Обращение удалено из избранного.");
+          }else{
+            favs.push(id);
+            showToast("Обращение сохранено в избранное.");
+          }
+
+          saveFavorites(favs);
+          renderCategory(currentCategory);
+        });
+      });
+    });
+
+    document.querySelectorAll("[data-copy-dua]").forEach(function(btn){
+      btn.addEventListener("click", function(){
+        requirePro(function(){
+          const card = btn.closest(".dua-card");
+          const text = card.innerText.replace(/\s+/g, " ").trim();
+
+          if(navigator.clipboard){
+            navigator.clipboard.writeText(text);
+          }
+
+          showToast("Обращение скопировано.");
+        });
+      });
+    });
+  }
+
+  function syncState(){
+    const active = isPro();
+
+    proState.classList.toggle("locked", !active);
+    proState.classList.toggle("active", active);
+    proState.innerHTML = active ? "✅ ПРО активирован" : "🔒 ПРО не активирован";
+
+    accessPanel.classList.toggle("active", active);
+    accessStatus.textContent = active ? "Открыто" : "Закрыто";
+    accessText.textContent = active
+      ? "Дуа ПРО открыты. Можно выбирать темы, открывать 99 обращений, копировать и сохранять избранное."
+      : "Без ПРО темы видны как preview. После активации открываются обращения через 99 Имён Аллаха.";
+
+    duaContent.classList.toggle("locked", !active);
+
+    document.querySelectorAll("[data-category]").forEach(function(btn){
+      btn.classList.toggle("locked", !active);
+    });
+
+    openFirstDua.textContent = active ? "Открыть обращения" : "Открыть ПРО";
+  }
+
+  document.querySelectorAll("[data-category]").forEach(function(btn){
+    btn.addEventListener("click", function(){
+      requirePro(function(){
+        searchQuery = "";
+        renderCategory(btn.getAttribute("data-category"));
+      });
+    });
+  });
+
+  openFirstDua.addEventListener("click", function(){
+    requirePro(function(){
+      document.getElementById("categories").scrollIntoView({behavior:"smooth", block:"start"});
+      renderCategory(currentCategory);
+    });
+  });
+
+  copyCategoryBtn.addEventListener("click", function(){
+    requirePro(function(){
+      const text = duaContent.innerText.replace(/\s+/g, " ").trim();
+
+      if(navigator.clipboard){
+        navigator.clipboard.writeText(text);
+      }
+
+      showToast("Тема скопирована.");
+    });
+  });
+
+  saveCategoryBtn.addEventListener("click", function(){
+    requirePro(function(){
+      localStorage.setItem(CATEGORY_KEY, currentCategory);
+      showToast("Тема сохранена.");
+    });
+  });
+
+  document.querySelectorAll("[data-scroll]").forEach(function(button){
+    button.addEventListener("click", function(){
+      const target = document.querySelector(button.getAttribute("data-scroll"));
+      if(target){
+        target.scrollIntoView({behavior:"smooth", block:"start"});
+      }
+    });
+  });
+
+  document.querySelectorAll("[data-close-modal]").forEach(function(btn){
+    btn.addEventListener("click", closeModal);
+  });
+
+  modal.addEventListener("click", function(event){
+    if(event.target === modal){
+      closeModal();
+    }
+  });
+
+  document.addEventListener("keydown", function(event){
+    if(event.key === "Escape"){
+      closeModal();
+    }
+  });
+
+  applyPremiumTheme();
+  renderCategory(currentCategory);
+  syncState();
+})();
+</script>
+
+
+<script>
+(function(){
+  const PRO_KEY = "barakaway_pro";
+  const HOLD_MS = 7000;
+  let holdTimer = null;
+  let progressTimer = null;
+  let startedAt = 0;
+
+  function findProActivator(){
+    return document.getElementById("proState")
+      || document.querySelector("[data-home-pro-state]")
+      || document.querySelector(".pro-final-state")
+      || document.querySelector(".access-status");
+  }
+
+  function showDevToast(message){
+    let toast = document.getElementById("barakawayDevUnlockToast");
+
+    if(!toast){
+      toast = document.createElement("div");
+      toast.id = "barakawayDevUnlockToast";
+      toast.style.position = "fixed";
+      toast.style.left = "50%";
+      toast.style.bottom = "96px";
+      toast.style.zIndex = "99999";
+      toast.style.transform = "translateX(-50%)";
+      toast.style.width = "min(92%,460px)";
+      toast.style.padding = "14px 16px";
+      toast.style.borderRadius = "18px";
+      toast.style.background = "rgba(16,24,32,.96)";
+      toast.style.border = "1px solid rgba(215,192,122,.28)";
+      toast.style.color = "#f2df9d";
+      toast.style.fontSize = "13px";
+      toast.style.fontWeight = "900";
+      toast.style.textAlign = "center";
+      toast.style.boxShadow = "0 18px 40px rgba(0,0,0,.35)";
+      toast.style.opacity = "0";
+      toast.style.pointerEvents = "none";
+      toast.style.transition = "opacity .25s ease";
+      document.body.appendChild(toast);
+    }
+
+    toast.textContent = message;
+    toast.style.opacity = "1";
+
+    clearTimeout(window.__barakawayDevUnlockToastTimer);
+    window.__barakawayDevUnlockToastTimer = setTimeout(function(){
+      toast.style.opacity = "0";
+    }, 2400);
+  }
+
+  function setActivatorHint(node){
+    if(!node) return;
+    node.style.userSelect = "none";
+    node.style.webkitUserSelect = "none";
+    node.style.cursor = "pointer";
+    node.setAttribute("title", "Тестовый режим: удерживать 7 секунд");
+  }
+
+  function startHold(){
+    const node = findProActivator();
+    if(!node) return;
+
+    startedAt = Date.now();
+    showDevToast("Удерживайте 7 секунд для тестового PRO.");
+
+    clearTimeout(holdTimer);
+    clearInterval(progressTimer);
+
+    progressTimer = setInterval(function(){
+      const left = Math.max(0, Math.ceil((HOLD_MS - (Date.now() - startedAt)) / 1000));
+      if(left > 0){
+        showDevToast("Тестовый PRO: осталось " + left + " сек.");
+      }
+    }, 1000);
+
+    holdTimer = setTimeout(function(){
+      clearInterval(progressTimer);
+
+      const active = localStorage.getItem(PRO_KEY) === "true";
+
+      if(active){
+        localStorage.removeItem(PRO_KEY);
+        showDevToast("Тестовый PRO выключен.");
+      }else{
+        localStorage.setItem(PRO_KEY, "true");
+        localStorage.setItem("barakaway_pro_plan", "developer-test");
+        showDevToast("Тестовый PRO активирован.");
+      }
+
+      setTimeout(function(){
+        window.location.reload();
+      }, 650);
+    }, HOLD_MS);
+  }
+
+  function cancelHold(){
+    clearTimeout(holdTimer);
+    clearInterval(progressTimer);
+    holdTimer = null;
+    progressTimer = null;
+  }
+
+  function init(){
+    const node = findProActivator();
+    if(!node) return;
+
+    setActivatorHint(node);
+
+    node.addEventListener("mousedown", startHold);
+    node.addEventListener("touchstart", startHold, {passive:true});
+    node.addEventListener("mouseup", cancelHold);
+    node.addEventListener("mouseleave", cancelHold);
+    node.addEventListener("touchend", cancelHold);
+    node.addEventListener("touchcancel", cancelHold);
+  }
+
+  if(document.readyState === "loading"){
+    document.addEventListener("DOMContentLoaded", init);
+  }else{
+    init();
+  }
+})();
+</script>
+
+</body>
+</html>

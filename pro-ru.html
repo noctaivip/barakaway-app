@@ -1,0 +1,1582 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<!--
+بِسْمِ ٱللَّٰهِ ٱلرَّحْمَـٰنِ ٱلرَّحِيمِ
+-->
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#101820">
+<title>BarakaWay ПРО</title>
+
+<style>
+:root{
+  --page:#0c1117;
+  --page-2:#111922;
+  --panel:#151d26;
+  --panel-2:#101820;
+  --gold:#d7c07a;
+  --gold-2:#b8953f;
+  --green:#4caf6a;
+  --green-2:#2d7a46;
+  --text:#f7faf8;
+  --muted:#aeb9c5;
+  --soft:#7f8b96;
+  --border:rgba(215,192,122,.18);
+  --border-green:rgba(102,198,128,.22);
+  --shadow:0 24px 70px rgba(0,0,0,.36);
+}
+
+*{
+  box-sizing:border-box;
+}
+
+html{
+  scroll-behavior:smooth;
+}
+
+body{
+  margin:0;
+  min-height:100vh;
+  background:
+    radial-gradient(circle at 12% 0%, rgba(215,192,122,.10), transparent 24%),
+    radial-gradient(circle at 90% 10%, rgba(76,175,106,.10), transparent 30%),
+    linear-gradient(180deg,#0b1016 0%,#101820 46%,#0b1016 100%);
+  color:var(--text);
+  font-family:system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",Arial,sans-serif;
+  line-height:1.55;
+}
+
+a{
+  color:inherit;
+}
+
+button{
+  font-family:inherit;
+}
+
+.page-shell{
+  width:min(100%,980px);
+  margin:0 auto;
+  padding:22px 18px 120px;
+}
+
+.topbar{
+  position:sticky;
+  top:0;
+  z-index:50;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:12px;
+  padding:12px 0 18px;
+  backdrop-filter:blur(18px);
+  -webkit-backdrop-filter:blur(18px);
+}
+
+.top-pill{
+  display:inline-flex;
+  align-items:center;
+  gap:9px;
+  min-height:42px;
+  padding:9px 15px;
+  border-radius:999px;
+  background:rgba(18,25,33,.72);
+  border:1px solid rgba(215,192,122,.18);
+  color:#f7f2d9;
+  font-size:13px;
+  font-weight:900;
+  text-decoration:none;
+  cursor:pointer;
+  transition:transform .18s ease,border-color .25s ease,background .25s ease;
+}
+
+.top-pill:hover{
+  transform:translateY(-1px);
+  border-color:rgba(215,192,122,.34);
+  background:rgba(24,32,41,.88);
+}
+
+.pro-state{
+  display:inline-flex;
+  align-items:center;
+  gap:8px;
+  min-height:42px;
+  padding:9px 15px;
+  border-radius:999px;
+  background:rgba(76,175,106,.10);
+  border:1px solid rgba(76,175,106,.22);
+  color:#dff7e6;
+  font-size:13px;
+  font-weight:900;
+}
+
+.pro-state.locked{
+  background:rgba(215,192,122,.10);
+  border-color:rgba(215,192,122,.22);
+  color:#f2df9d;
+}
+
+.hero{
+  position:relative;
+  overflow:hidden;
+  border-radius:38px;
+  padding:44px 34px 34px;
+  background:
+    radial-gradient(circle at 78% 12%, rgba(215,192,122,.18), transparent 25%),
+    radial-gradient(circle at 18% 86%, rgba(76,175,106,.14), transparent 27%),
+    linear-gradient(135deg,#151d26 0%,#101820 48%,#17261f 100%);
+  border:1px solid var(--border);
+  box-shadow:var(--shadow), inset 0 1px 0 rgba(255,255,255,.04);
+}
+
+.hero::before{
+  content:"";
+  position:absolute;
+  inset:-40%;
+  background:
+    linear-gradient(115deg, transparent 0%, rgba(255,255,255,.035) 45%, transparent 55%);
+  transform:rotate(8deg);
+  pointer-events:none;
+}
+
+.hero-content{
+  position:relative;
+  z-index:2;
+}
+
+.pro-badge{
+  display:inline-flex;
+  align-items:center;
+  gap:9px;
+  padding:9px 15px;
+  border-radius:999px;
+  background:rgba(215,192,122,.10);
+  border:1px solid rgba(215,192,122,.26);
+  color:var(--gold);
+  font-size:12px;
+  font-weight:950;
+  letter-spacing:.12em;
+  text-transform:uppercase;
+}
+
+h1{
+  margin:20px 0 14px;
+  max-width:760px;
+  font-size:56px;
+  line-height:.95;
+  letter-spacing:-.065em;
+}
+
+.hero-text{
+  max-width:720px;
+  color:var(--muted);
+  font-size:18px;
+  font-weight:650;
+}
+
+.hero-actions{
+  display:flex;
+  flex-wrap:wrap;
+  gap:13px;
+  margin-top:30px;
+}
+
+.btn{
+  appearance:none;
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  gap:9px;
+  min-height:54px;
+  padding:14px 22px;
+  border-radius:18px;
+  border:1px solid transparent;
+  font-size:15px;
+  font-weight:950;
+  cursor:pointer;
+  text-decoration:none;
+  transition:transform .18s ease,box-shadow .25s ease,border-color .25s ease,background .25s ease,color .25s ease;
+  -webkit-tap-highlight-color:transparent;
+}
+
+.btn:hover{
+  transform:translateY(-2px);
+}
+
+.btn:active{
+  transform:scale(.985);
+}
+
+.btn-primary{
+  background:linear-gradient(135deg,#f1db91 0%,#d7c07a 42%,#af8430 100%);
+  color:#11150f;
+  box-shadow:0 18px 38px rgba(215,192,122,.23);
+}
+
+.btn-secondary{
+  background:rgba(20,28,37,.82);
+  color:#f7faf8;
+  border-color:rgba(215,192,122,.18);
+}
+
+.btn-green{
+  background:linear-gradient(135deg,#66c680 0%,#2d7a46 100%);
+  color:white;
+  box-shadow:0 18px 38px rgba(76,175,106,.18);
+}
+
+.hero-stats{
+  display:grid;
+  grid-template-columns:repeat(3,minmax(0,1fr));
+  gap:12px;
+  margin-top:28px;
+}
+
+.stat{
+  border-radius:22px;
+  padding:16px;
+  background:rgba(13,19,25,.44);
+  border:1px solid rgba(255,255,255,.07);
+}
+
+.stat-value{
+  font-size:24px;
+  font-weight:950;
+  color:#f8e9a9;
+  line-height:1;
+}
+
+.stat-label{
+  margin-top:7px;
+  color:var(--muted);
+  font-size:12px;
+  font-weight:800;
+}
+
+.section{
+  margin-top:36px;
+}
+
+.section-head{
+  display:flex;
+  align-items:flex-end;
+  justify-content:space-between;
+  gap:18px;
+  margin-bottom:18px;
+}
+
+.section-title{
+  margin:0;
+  font-size:32px;
+  line-height:1.08;
+  letter-spacing:-.045em;
+}
+
+.section-subtitle{
+  margin:8px 0 0;
+  max-width:640px;
+  color:var(--muted);
+  font-size:15px;
+  font-weight:650;
+}
+
+.section-note{
+  white-space:nowrap;
+  color:#d7c07a;
+  font-size:12px;
+  font-weight:950;
+  letter-spacing:.08em;
+  text-transform:uppercase;
+}
+
+.grid{
+  display:grid;
+  grid-template-columns:repeat(2,minmax(0,1fr));
+  gap:16px;
+}
+
+.feature-card{
+  position:relative;
+  overflow:hidden;
+  min-height:188px;
+  padding:22px;
+  border-radius:30px;
+  border:1px solid rgba(255,255,255,.08);
+  background:
+    radial-gradient(circle at 88% 12%, rgba(215,192,122,.08), transparent 30%),
+    linear-gradient(135deg,#151f29 0%,#121a22 54%,#14241f 100%);
+  box-shadow:0 16px 36px rgba(0,0,0,.22), inset 0 1px 0 rgba(255,255,255,.035);
+  cursor:pointer;
+  text-align:left;
+  color:inherit;
+  transition:transform .18s ease,border-color .25s ease,box-shadow .25s ease;
+}
+
+.feature-card:hover{
+  transform:translateY(-3px);
+  border-color:rgba(215,192,122,.28);
+  box-shadow:0 22px 44px rgba(0,0,0,.28), inset 0 1px 0 rgba(255,255,255,.04);
+}
+
+.feature-card:active{
+  transform:scale(.986);
+}
+
+.feature-card.green{
+  background:
+    radial-gradient(circle at 88% 12%, rgba(76,175,106,.14), transparent 31%),
+    linear-gradient(135deg,#14231b 0%,#121c22 52%,#123024 100%);
+}
+
+.feature-card.violet{
+  background:
+    radial-gradient(circle at 88% 12%, rgba(161,118,255,.16), transparent 31%),
+    linear-gradient(135deg,#1e1a2b 0%,#141b24 52%,#271f35 100%);
+}
+
+.feature-card.rose{
+  background:
+    radial-gradient(circle at 88% 12%, rgba(255,129,180,.15), transparent 31%),
+    linear-gradient(135deg,#241924 0%,#141b24 52%,#2b1d27 100%);
+}
+
+.feature-card.carbon{
+  background:
+    radial-gradient(circle at 88% 12%, rgba(255,255,255,.07), transparent 31%),
+    linear-gradient(135deg,#111821 0%,#191f26 52%,#0d1117 100%);
+}
+
+.feature-top{
+  display:flex;
+  align-items:flex-start;
+  justify-content:space-between;
+  gap:12px;
+}
+
+.feature-icon{
+  width:50px;
+  height:50px;
+  border-radius:19px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  background:rgba(215,192,122,.12);
+  border:1px solid rgba(215,192,122,.18);
+  font-size:25px;
+}
+
+.pro-chip{
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  min-height:28px;
+  padding:5px 10px;
+  border-radius:999px;
+  background:rgba(215,192,122,.12);
+  border:1px solid rgba(215,192,122,.24);
+  color:#f2df9d;
+  font-size:11px;
+  font-weight:950;
+  letter-spacing:.09em;
+  text-transform:uppercase;
+}
+
+.feature-card h3{
+  margin:18px 0 8px;
+  font-size:22px;
+  line-height:1.08;
+  letter-spacing:-.035em;
+}
+
+.feature-card p{
+  margin:0;
+  color:#b7c1ca;
+  font-size:14px;
+  font-weight:650;
+}
+
+.theme-row{
+  display:grid;
+  grid-template-columns:repeat(4,minmax(0,1fr));
+  gap:12px;
+}
+
+.theme-tile{
+  min-height:138px;
+  border-radius:26px;
+  padding:16px;
+  border:1px solid rgba(255,255,255,.08);
+  cursor:pointer;
+  overflow:hidden;
+  position:relative;
+  text-align:left;
+  color:white;
+  box-shadow:0 14px 34px rgba(0,0,0,.20);
+  transition:transform .18s ease,border-color .25s ease;
+}
+
+.theme-tile:hover{
+  transform:translateY(-3px);
+  border-color:rgba(215,192,122,.30);
+}
+
+.theme-gold{background:linear-gradient(135deg,#17130d,#403015 52%,#d7c07a);}
+.theme-violet{background:linear-gradient(135deg,#171221,#392a65 52%,#a176ff);}
+.theme-carbon{background:linear-gradient(135deg,#050607,#1b222b 52%,#4a5562);}
+.theme-child{background:linear-gradient(135deg,#25476a,#7fc7ff 52%,#ffe0ef);}
+
+.theme-name{
+  position:relative;
+  z-index:2;
+  font-size:16px;
+  font-weight:950;
+  letter-spacing:-.02em;
+}
+
+.theme-desc{
+  position:relative;
+  z-index:2;
+  margin-top:6px;
+  max-width:130px;
+  font-size:11px;
+  font-weight:800;
+  opacity:.86;
+}
+
+.theme-tile .pro-chip{
+  position:absolute;
+  right:12px;
+  bottom:12px;
+}
+
+.pricing{
+  display:grid;
+  grid-template-columns:repeat(2,minmax(0,1fr));
+  gap:16px;
+}
+
+.price-card{
+  position:relative;
+  overflow:hidden;
+  border-radius:32px;
+  padding:26px;
+  background:linear-gradient(135deg,#151d26 0%,#111921 100%);
+  border:1px solid rgba(255,255,255,.08);
+  box-shadow:0 16px 40px rgba(0,0,0,.22);
+}
+
+.price-card.featured{
+  border-color:rgba(215,192,122,.36);
+  background:
+    radial-gradient(circle at 92% 8%, rgba(215,192,122,.14), transparent 28%),
+    linear-gradient(135deg,#1a211e 0%,#151d26 52%,#2d2514 100%);
+}
+
+.price-label{
+  color:#f2df9d;
+  font-size:12px;
+  font-weight:950;
+  letter-spacing:.12em;
+  text-transform:uppercase;
+}
+
+.price-main{
+  margin-top:12px;
+  font-size:48px;
+  line-height:1;
+  font-weight:950;
+  letter-spacing:-.065em;
+}
+
+.price-main span{
+  color:var(--muted);
+  font-size:16px;
+  letter-spacing:0;
+}
+
+.price-text{
+  min-height:48px;
+  margin-top:12px;
+  color:var(--muted);
+  font-size:14px;
+  font-weight:650;
+}
+
+.price-list{
+  display:grid;
+  gap:9px;
+  margin:18px 0 0;
+  padding:0;
+  list-style:none;
+}
+
+.price-list li{
+  color:#d9e2dc;
+  font-size:13px;
+  font-weight:800;
+}
+
+.price-list li::before{
+  content:"✓";
+  color:#66c680;
+  margin-right:8px;
+}
+
+.price-card .btn{
+  width:100%;
+  margin-top:20px;
+}
+
+.restore-row{
+  display:flex;
+  flex-wrap:wrap;
+  align-items:center;
+  justify-content:center;
+  gap:10px;
+  margin-top:18px;
+}
+
+.link-button{
+  appearance:none;
+  border:none;
+  background:transparent;
+  color:#f2df9d;
+  font-size:13px;
+  font-weight:900;
+  cursor:pointer;
+  text-decoration:underline;
+  text-underline-offset:4px;
+}
+
+.notice{
+  margin-top:20px;
+  border-radius:24px;
+  padding:18px;
+  background:rgba(215,192,122,.08);
+  border:1px solid rgba(215,192,122,.16);
+  color:#d3dde6;
+  font-size:13px;
+  font-weight:650;
+}
+
+.bottom-nav{
+  position:fixed;
+  left:50%;
+  bottom:18px;
+  z-index:80;
+  transform:translateX(-50%);
+  width:min(92%,560px);
+  display:grid;
+  grid-template-columns:repeat(4,minmax(0,1fr));
+  gap:8px;
+  padding:8px;
+  border-radius:24px;
+  background:rgba(14,20,27,.82);
+  border:1px solid rgba(215,192,122,.18);
+  backdrop-filter:blur(18px);
+  -webkit-backdrop-filter:blur(18px);
+  box-shadow:0 18px 44px rgba(0,0,0,.34);
+}
+
+.bottom-nav a,
+.bottom-nav button{
+  appearance:none;
+  border:none;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  justify-content:center;
+  gap:4px;
+  min-height:54px;
+  border-radius:18px;
+  background:transparent;
+  color:#c8d2dc;
+  font-size:11px;
+  font-weight:850;
+  text-decoration:none;
+  cursor:pointer;
+}
+
+.bottom-nav a.active,
+.bottom-nav button.active{
+  background:linear-gradient(135deg,rgba(215,192,122,.18),rgba(76,175,106,.12));
+  color:#f8e9a9;
+}
+
+.modal-overlay{
+  display:none;
+  position:fixed;
+  inset:0;
+  z-index:120;
+  padding:18px;
+  background:rgba(5,8,11,.72);
+  backdrop-filter:blur(9px);
+  -webkit-backdrop-filter:blur(9px);
+  align-items:center;
+  justify-content:center;
+}
+
+.modal-overlay.open{
+  display:flex;
+}
+
+.modal{
+  width:min(100%,560px);
+  border-radius:32px;
+  padding:24px;
+  background:
+    radial-gradient(circle at 88% 0%, rgba(215,192,122,.12), transparent 32%),
+    linear-gradient(180deg,#17202a 0%,#111821 100%);
+  border:1px solid rgba(215,192,122,.22);
+  box-shadow:0 28px 80px rgba(0,0,0,.50);
+}
+
+.modal-badge{
+  display:inline-flex;
+  padding:7px 11px;
+  border-radius:999px;
+  background:rgba(215,192,122,.10);
+  border:1px solid rgba(215,192,122,.22);
+  color:#f2df9d;
+  font-size:11px;
+  font-weight:950;
+  letter-spacing:.10em;
+  text-transform:uppercase;
+}
+
+.modal h3{
+  margin:16px 0 8px;
+  font-size:28px;
+  line-height:1.1;
+  letter-spacing:-.04em;
+}
+
+.modal p{
+  color:var(--muted);
+  margin:0;
+  font-size:15px;
+  font-weight:650;
+}
+
+.modal-actions{
+  display:flex;
+  flex-wrap:wrap;
+  gap:10px;
+  margin-top:22px;
+}
+
+.modal-actions .btn{
+  flex:1 1 190px;
+}
+
+.toast{
+  position:fixed;
+  left:50%;
+  bottom:94px;
+  z-index:160;
+  transform:translateX(-50%) translateY(14px);
+  opacity:0;
+  pointer-events:none;
+  width:min(92%,460px);
+  padding:14px 16px;
+  border-radius:18px;
+  background:rgba(16,24,32,.94);
+  border:1px solid rgba(102,198,128,.24);
+  color:#eaf7ee;
+  font-size:13px;
+  font-weight:850;
+  text-align:center;
+  box-shadow:0 18px 40px rgba(0,0,0,.35);
+  transition:opacity .25s ease,transform .25s ease;
+}
+
+.toast.show{
+  opacity:1;
+  transform:translateX(-50%) translateY(0);
+}
+
+@media(max-width:760px){
+  .page-shell{
+    padding:18px 12px 110px;
+  }
+
+  .topbar{
+    padding-top:8px;
+  }
+
+  .top-pill,
+  .pro-state{
+    min-height:38px;
+    padding:8px 12px;
+    font-size:12px;
+  }
+
+  .hero{
+    padding:32px 20px 24px;
+    border-radius:30px;
+  }
+
+  h1{
+    font-size:40px;
+  }
+
+  .hero-text{
+    font-size:16px;
+  }
+
+  .hero-stats,
+  .grid,
+  .pricing{
+    grid-template-columns:1fr;
+  }
+
+  .theme-row{
+    grid-template-columns:repeat(2,minmax(0,1fr));
+  }
+
+  .section-head{
+    align-items:flex-start;
+    flex-direction:column;
+  }
+
+  .section-title{
+    font-size:28px;
+  }
+
+  .feature-card{
+    min-height:170px;
+    border-radius:26px;
+  }
+
+  .bottom-nav{
+    bottom:10px;
+    width:calc(100% - 18px);
+  }
+}
+
+@media(max-width:420px){
+  h1{
+    font-size:35px;
+  }
+
+  .hero-actions .btn{
+    width:100%;
+  }
+
+  .theme-row{
+    grid-template-columns:1fr;
+  }
+}
+
+/* BARAKAWAY PRO FINAL PROFESSIONAL ADDITIONS */
+.pro-active-panel{
+  margin-top:24px;
+  border-radius:32px;
+  padding:24px;
+  background:
+    radial-gradient(circle at 94% 0%, rgba(215,192,122,.12), transparent 30%),
+    linear-gradient(135deg,#151d26 0%,#101820 52%,#14231b 100%);
+  border:1px solid rgba(215,192,122,.18);
+  box-shadow:0 18px 44px rgba(0,0,0,.26), inset 0 1px 0 rgba(255,255,255,.04);
+}
+
+.pro-active-head{
+  display:flex;
+  justify-content:space-between;
+  align-items:flex-start;
+  gap:18px;
+}
+
+.pro-active-kicker{
+  color:#d7c07a;
+  font-size:11px;
+  font-weight:950;
+  letter-spacing:.12em;
+  text-transform:uppercase;
+  margin-bottom:7px;
+}
+
+.pro-active-panel h2{
+  margin:0;
+  font-size:30px;
+  line-height:1.08;
+  letter-spacing:-.045em;
+}
+
+.pro-active-panel p{
+  max-width:650px;
+  margin:8px 0 0;
+  color:#aeb9c5;
+  font-size:14px;
+  font-weight:650;
+}
+
+.pro-active-status{
+  flex:0 0 auto;
+  display:inline-flex;
+  min-height:38px;
+  align-items:center;
+  justify-content:center;
+  padding:9px 13px;
+  border-radius:999px;
+  background:rgba(215,192,122,.10);
+  border:1px solid rgba(215,192,122,.22);
+  color:#f2df9d;
+  font-size:12px;
+  font-weight:950;
+  white-space:nowrap;
+}
+
+.pro-active-panel.is-active .pro-active-status{
+  background:rgba(76,175,106,.12);
+  border-color:rgba(102,198,128,.26);
+  color:#dff7e6;
+}
+
+.pro-active-actions{
+  display:flex;
+  gap:12px;
+  flex-wrap:wrap;
+  margin-top:20px;
+}
+
+.feature-card.is-unlocked{
+  border-color:rgba(102,198,128,.32);
+}
+
+.feature-card.is-unlocked .pro-chip{
+  background:rgba(76,175,106,.14);
+  border-color:rgba(102,198,128,.28);
+  color:#dff7e6;
+}
+
+.feature-card.is-locked::after,
+.theme-tile.is-locked::after{
+  content:"ПРО";
+  position:absolute;
+  inset:0;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  background:rgba(6,9,12,.46);
+  backdrop-filter:blur(2px);
+  -webkit-backdrop-filter:blur(2px);
+  color:#f2df9d;
+  font-size:24px;
+  font-weight:950;
+  letter-spacing:.16em;
+  z-index:4;
+  pointer-events:none;
+}
+
+.theme-tile.is-unlocked{
+  border-color:rgba(102,198,128,.38);
+}
+
+.store-ready-note{
+  margin-top:14px;
+  color:#8f9aa5;
+  font-size:12px;
+  line-height:1.45;
+  font-weight:650;
+}
+
+@media(max-width:760px){
+  .pro-active-head{
+    flex-direction:column;
+  }
+
+  .pro-active-panel{
+    padding:20px;
+    border-radius:28px;
+  }
+
+  .pro-active-panel h2{
+    font-size:26px;
+  }
+
+  .pro-active-actions .btn{
+    width:100%;
+  }
+}
+
+</style>
+</head>
+
+<body>
+
+<div class="page-shell">
+
+  <header class="topbar">
+    <a class="top-pill" href="home-ru.html" aria-label="Вернуться на главную">
+      ← Главная
+    </a>
+
+    <div id="proState" class="pro-state locked">
+      🔒 ПРО не активирован
+    </div>
+  </header>
+
+  <main>
+
+    <section class="hero" id="top">
+      <div class="hero-content">
+
+        <div class="pro-badge">✦ BarakaWay ПРО</div>
+
+        <h1>Премиальная исламская среда BarakaWay</h1>
+
+        <div class="hero-text">
+          ПРО-версия открывает расширенное чтение Корана, премиальные темы,
+          проверку произношения, дополнительные голоса чтецов, избранные дуа,
+          анимации и персональную духовную систему для ежедневного использования.
+        </div>
+
+        <div class="hero-actions">
+          <button class="btn btn-primary" data-open-purchase="year">
+            Открыть ПРО
+          </button>
+
+          <button class="btn btn-secondary" data-scroll="#features">
+            Посмотреть возможности
+          </button>
+
+          <a class="btn btn-green" href="home-ru.html">
+            Продолжить бесплатно
+          </a>
+        </div>
+
+        <div class="hero-stats">
+          <div class="stat">
+            <div class="stat-value">10+</div>
+            <div class="stat-label">дополнительных чтецов</div>
+          </div>
+
+          <div class="stat">
+            <div class="stat-value">8</div>
+            <div class="stat-label">премиальных тем</div>
+          </div>
+
+          <div class="stat">
+            <div class="stat-value">∞</div>
+            <div class="stat-label">будущие ПРО-разделы</div>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+
+    <section class="pro-active-panel" id="access-state" aria-label="Состояние доступа BarakaWay ПРО">
+      <div class="pro-active-head">
+        <div>
+          <div class="pro-active-kicker">Состояние доступа</div>
+          <h2>Ваш PRO-доступ</h2>
+          <p data-access-description>
+            Активируйте BarakaWay ПРО, чтобы открыть премиальные разделы внутри приложения.
+          </p>
+        </div>
+        <div class="pro-active-status" data-access-status>ПРО не активирован</div>
+      </div>
+
+      <div class="pro-active-actions">
+        <button class="btn btn-primary" data-open-purchase="year" data-access-button>
+          Открыть ПРО
+        </button>
+        <button class="btn btn-secondary" data-scroll="#features">
+          Смотреть разделы
+        </button>
+      </div>
+    </section>
+
+    <section class="section" id="features">
+      <div class="section-head">
+        <div>
+          <h2 class="section-title">Что входит в ПРО</h2>
+          <p class="section-subtitle">
+            Премиальные разделы уже связаны с PRO-логикой. Без доступа они показывают окно покупки, после активации открывают соответствующие страницы.
+          </p>
+        </div>
+        <div class="section-note">Премиум-доступ</div>
+      </div>
+
+      <div class="grid">
+
+        <button class="feature-card green" id="quran" data-feature="Чтение Корана полностью" data-target="quran-pro-ru.html">
+          <div class="feature-top">
+            <div class="feature-icon">📖</div>
+            <div class="pro-chip">ПРО</div>
+          </div>
+          <h3>Чтение Корана полностью</h3>
+          <p>Непрерывное чтение без переходов между сурами, сохранение места чтения и закладки.</p>
+        </button>
+
+        <button class="feature-card green" id="reading" data-feature="Проверка чтения" data-target="quran-ai-ru.html">
+          <div class="feature-top">
+            <div class="feature-icon">🎙️</div>
+            <div class="pro-chip">ПРО</div>
+          </div>
+          <h3>Проверка правильного чтения</h3>
+          <p>Прочитанные правильно слова становятся зелёными, ошибки отмечаются красным.</p>
+        </button>
+
+        <button class="feature-card" id="reciters" data-feature="Премиальные чтецы" data-target="reciters-pro-ru.html">
+          <div class="feature-top">
+            <div class="feature-icon">🎧</div>
+            <div class="pro-chip">ПРО</div>
+          </div>
+          <h3>Премиальные чтецы</h3>
+          <p>Дополнительные голоса чтецов Корана с удобным выбором звучания.</p>
+        </button>
+
+        <button class="feature-card violet" id="themes-card" data-feature="Премиальные темы" data-target="themes-pro-ru.html">
+          <div class="feature-top">
+            <div class="feature-icon">👑</div>
+            <div class="pro-chip">ПРО</div>
+          </div>
+          <h3>Премиальные темы</h3>
+          <p>Золотая, фиолетовая, карбоновая, детская и другие визуальные темы.</p>
+        </button>
+
+        <button class="feature-card rose" id="duas" data-feature="Расширенные дуа" data-target="dua-pro-ru.html">
+          <div class="feature-top">
+            <div class="feature-icon">🤲</div>
+            <div class="pro-chip">ПРО</div>
+          </div>
+          <h3>Расширенные дуа</h3>
+          <p>Дуа для ризка, семьи, детей, здоровья, прощения, рая, защиты и дел.</p>
+        </button>
+
+        <button class="feature-card carbon" id="gif" data-feature="Премиальные анимации" data-target="gifs-pro-ru.html">
+          <div class="feature-top">
+            <div class="feature-icon">✨</div>
+            <div class="pro-chip">ПРО</div>
+          </div>
+          <h3>Премиальные анимации</h3>
+          <p>Анимированные поздравления, красивые стрелки и элитные исламские карточки.</p>
+        </button>
+
+      </div>
+    </section>
+
+    <section class="section" id="themes">
+      <div class="section-head">
+        <div>
+          <h2 class="section-title">Премиальные темы</h2>
+          <p class="section-subtitle">
+            Без доступа темы закрыты. После активации ПРО выбранная тема сохраняется в приложении и применяется как премиальный внешний вид.
+          </p>
+        </div>
+        <div class="section-note">Внешний вид</div>
+      </div>
+
+      <div class="theme-row">
+        <button class="theme-tile theme-gold" data-theme="royal-gold">
+          <div class="theme-name">Королевское золото</div>
+          <div class="theme-desc">Тёмная роскошь и золотые акценты.</div>
+          <div class="pro-chip">ПРО</div>
+        </button>
+
+        <button class="theme-tile theme-violet" data-theme="violet-noor">
+          <div class="theme-name">Фиолетовый нур</div>
+          <div class="theme-desc">Мягкая духовная эстетика.</div>
+          <div class="pro-chip">ПРО</div>
+        </button>
+
+        <button class="theme-tile theme-carbon" data-theme="carbon-elite">
+          <div class="theme-name">Карбоновая элита</div>
+          <div class="theme-desc">Строгий премиальный стиль.</div>
+          <div class="pro-chip">ПРО</div>
+        </button>
+
+        <button class="theme-tile theme-child" data-theme="children-soft">
+          <div class="theme-name">Детская тема</div>
+          <div class="theme-desc">Мягкий семейный интерфейс.</div>
+          <div class="pro-chip">ПРО</div>
+        </button>
+      </div>
+    </section>
+
+    <section class="section" id="plans">
+      <div class="section-head">
+        <div>
+          <h2 class="section-title">Доступ к BarakaWay ПРО</h2>
+          <p class="section-subtitle">
+            Здесь находится экран доступа к BarakaWay ПРО. Для публикации эти кнопки подключаются к Google Play Billing и App Store In‑App Purchase.
+          </p>
+        </div>
+        <div class="section-note">Подписка</div>
+      </div>
+
+      <div class="pricing">
+
+        <div class="price-card">
+          <div class="price-label">Ежемесячно</div>
+          <div class="price-main">$4 <span>/ месяц</span></div>
+          <div class="price-text">
+            Подходит для первого знакомства с ПРО-возможностями приложения.
+          </div>
+
+          <ul class="price-list">
+            <li>Премиальные темы</li>
+            <li>Премиальные чтецы</li>
+            <li>Расширенные дуа</li>
+          </ul>
+
+          <button class="btn btn-secondary" data-open-purchase="month">
+            Выбрать ежемесячно
+          </button>
+        </div>
+
+        <div class="price-card featured">
+          <div class="price-label">На год</div>
+          <div class="price-main">$29 <span>/ год</span></div>
+          <div class="price-text">
+            Оптимальный вариант для постоянного ежедневного использования BarakaWay.
+          </div>
+
+          <ul class="price-list">
+            <li>Все возможности ПРО</li>
+            <li>Будущие премиальные разделы</li>
+            <li>Приоритетная духовная среда</li>
+          </ul>
+
+          <button class="btn btn-primary" data-open-purchase="year">
+            Открыть годовой доступ
+          </button>
+        </div>
+
+      </div>
+
+      <div class="restore-row">
+        <button class="link-button" id="restorePurchase">
+          Восстановить покупку
+        </button>
+</div>
+
+      <div class="notice">
+        Покупка ПРО открывает премиальные разделы внутри одного приложения BarakaWay. В опубликованной версии оплата и восстановление подписки подключаются через официальные механизмы Google Play и App Store.
+      </div>
+    </section>
+
+  </main>
+
+</div>
+
+<nav class="bottom-nav" aria-label="Нижняя навигация">
+  <a href="home-ru.html">
+    <span>🏠</span>
+    <span>Главная</span>
+  </a>
+
+  <button type="button" class="active" data-scroll="#top">
+    <span>👑</span>
+    <span>ПРО</span>
+  </button>
+
+  <button type="button" data-scroll="#features">
+    <span>✨</span>
+    <span>Разделы</span>
+  </button>
+
+  <button type="button" data-scroll="#plans">
+    <span>💳</span>
+    <span>Доступ</span>
+  </button>
+</nav>
+
+<div class="modal-overlay" id="purchaseModal" role="dialog" aria-modal="true" aria-labelledby="purchaseTitle">
+  <div class="modal">
+    <div class="modal-badge">ПРО-доступ</div>
+    <h3 id="purchaseTitle">Открыть BarakaWay ПРО</h3>
+    <p id="purchaseText">
+      После подтверждения будет включён тестовый ПРО-доступ. Позже эта кнопка будет подключена к покупкам Google Play и App Store.
+    </p>
+
+    <div class="modal-actions">
+      <button class="btn btn-primary" id="confirmPurchase">
+        Подтвердить доступ
+      </button>
+      <button class="btn btn-secondary" data-close-modal>
+        Закрыть
+      </button>
+    </div>
+  </div>
+</div>
+
+<div class="modal-overlay" id="featureModal" role="dialog" aria-modal="true" aria-labelledby="featureTitle">
+  <div class="modal">
+    <div class="modal-badge">Премиальный раздел</div>
+    <h3 id="featureTitle">Раздел ПРО</h3>
+    <p id="featureText">
+      Этот раздел будет подключён следующим файлом.
+    </p>
+
+    <div class="modal-actions">
+      <button class="btn btn-primary" id="openFeatureButton">
+        Открыть раздел
+      </button>
+      <button class="btn btn-secondary" data-close-modal>
+        Закрыть
+      </button>
+    </div>
+  </div>
+</div>
+
+<div class="toast" id="toast"></div>
+
+<script>
+(function(){
+  const PRO_KEY = "barakaway_pro";
+  const PLAN_KEY = "barakaway_pro_plan";
+  const THEME_KEY = "barakaway_premium_theme";
+
+  const proState = document.getElementById("proState");
+  const purchaseModal = document.getElementById("purchaseModal");
+  const featureModal = document.getElementById("featureModal");
+  const purchaseTitle = document.getElementById("purchaseTitle");
+  const purchaseText = document.getElementById("purchaseText");
+  const confirmPurchase = document.getElementById("confirmPurchase");
+  const toast = document.getElementById("toast");
+  const featureTitle = document.getElementById("featureTitle");
+  const featureText = document.getElementById("featureText");
+  const openFeatureButton = document.getElementById("openFeatureButton");
+  const activePanel = document.querySelector(".pro-active-panel");
+
+  let selectedPlan = "year";
+  let selectedFeatureTarget = "";
+
+  function isPro(){
+    return localStorage.getItem(PRO_KEY) === "true";
+  }
+
+  function readablePlan(plan){
+    if(plan === "month") return "ежемесячный доступ";
+    if(plan === "year") return "годовой доступ";
+    return "активен";
+  }
+
+  function showToast(message){
+    toast.textContent = message;
+    toast.classList.add("show");
+    clearTimeout(window.__barakawayToastTimer);
+    window.__barakawayToastTimer = setTimeout(function(){
+      toast.classList.remove("show");
+    }, 2600);
+  }
+
+  function updateProState(){
+    const active = isPro();
+    const plan = localStorage.getItem(PLAN_KEY) || "year";
+
+    if(active){
+      proState.classList.remove("locked");
+      proState.innerHTML = "✅ ПРО активирован · " + readablePlan(plan);
+    }else{
+      proState.classList.add("locked");
+      proState.innerHTML = "🔒 ПРО не активирован";
+    }
+
+    if(activePanel){
+      activePanel.classList.toggle("is-active", active);
+    }
+
+    document.querySelectorAll("[data-access-status]").forEach(function(el){
+      el.textContent = active ? "ПРО активен" : "ПРО не активирован";
+    });
+
+    document.querySelectorAll("[data-access-description]").forEach(function(el){
+      el.textContent = active
+        ? "Премиальные разделы открыты. Вы можете переходить к Корану ПРО, темам, чтецам, дуа и анимациям."
+        : "Активируйте BarakaWay ПРО, чтобы открыть премиальные разделы внутри приложения.";
+    });
+
+    document.querySelectorAll("[data-access-button]").forEach(function(el){
+      el.textContent = active ? "ПРО уже активен" : "Открыть ПРО";
+      el.disabled = active;
+    });
+
+    document.querySelectorAll("[data-feature]").forEach(function(card){
+      card.classList.toggle("is-unlocked", active);
+      card.classList.toggle("is-locked", !active);
+    });
+
+    document.querySelectorAll("[data-theme]").forEach(function(tile){
+      tile.classList.toggle("is-unlocked", active);
+      tile.classList.toggle("is-locked", !active);
+    });
+  }
+
+  function openPurchase(plan){
+    selectedPlan = plan || "year";
+
+    if(isPro()){
+      showToast("ПРО-доступ уже активирован.");
+      return;
+    }
+
+    if(selectedPlan === "month"){
+      purchaseTitle.textContent = "Открыть ежемесячный ПРО-доступ";
+      purchaseText.textContent = "После подтверждения будет активирован ежемесячный ПРО-доступ. В опубликованной версии оплата проходит через Google Play или App Store.";
+    }else{
+      purchaseTitle.textContent = "Открыть годовой ПРО-доступ";
+      purchaseText.textContent = "После подтверждения будет активирован годовой ПРО-доступ. В опубликованной версии оплата проходит через Google Play или App Store.";
+    }
+
+    purchaseModal.classList.add("open");
+  }
+
+  function closeModals(){
+    purchaseModal.classList.remove("open");
+    featureModal.classList.remove("open");
+  }
+
+  function scrollToSelector(selector){
+    const el = document.querySelector(selector);
+    if(el){
+      el.scrollIntoView({behavior:"smooth", block:"start"});
+    }
+  }
+
+  function activatePro(plan){
+    localStorage.setItem(PRO_KEY, "true");
+    localStorage.setItem(PLAN_KEY, plan || "year");
+    updateProState();
+    closeModals();
+    showToast("ПРО-доступ активирован.");
+  }
+
+  function openFeature(name, target){
+    selectedFeatureTarget = target || "";
+
+    if(isPro()){
+      if(selectedFeatureTarget){
+        window.location.href = selectedFeatureTarget;
+      }else{
+        showToast("Раздел будет подключён следующим файлом.");
+      }
+      return;
+    }
+
+    featureTitle.textContent = name || "Премиальный раздел";
+    featureText.textContent = "Этот раздел входит в BarakaWay ПРО. Активируйте доступ, чтобы открыть функцию внутри приложения.";
+    openFeatureButton.textContent = "Открыть ПРО";
+    featureModal.classList.add("open");
+  }
+
+  function applyPremiumTheme(themeName){
+    if(!isPro()){
+      featureTitle.textContent = "Премиальная тема";
+      featureText.textContent = "Эта тема доступна в BarakaWay ПРО. Активируйте доступ, чтобы сохранить и применять премиальные темы.";
+      openFeatureButton.textContent = "Открыть ПРО";
+      selectedFeatureTarget = "";
+      featureModal.classList.add("open");
+      return;
+    }
+
+    localStorage.setItem(THEME_KEY, themeName);
+    showToast("Премиальная тема сохранена: " + readableTheme(themeName));
+  }
+
+  function readableTheme(themeName){
+    const names = {
+      "royal-gold":"Королевское золото",
+      "violet-noor":"Фиолетовый нур",
+      "carbon-elite":"Карбоновая элита",
+      "children-soft":"Детская тема"
+    };
+    return names[themeName] || "Премиальная тема";
+  }
+
+  document.querySelectorAll("[data-open-purchase]").forEach(function(button){
+    button.addEventListener("click", function(){
+      openPurchase(button.getAttribute("data-open-purchase"));
+    });
+  });
+
+  document.querySelectorAll("[data-scroll]").forEach(function(button){
+    button.addEventListener("click", function(){
+      scrollToSelector(button.getAttribute("data-scroll"));
+    });
+  });
+
+  document.querySelectorAll("[data-close-modal]").forEach(function(button){
+    button.addEventListener("click", closeModals);
+  });
+
+  document.querySelectorAll(".modal-overlay").forEach(function(overlay){
+    overlay.addEventListener("click", function(event){
+      if(event.target === overlay){
+        closeModals();
+      }
+    });
+  });
+
+  document.querySelectorAll("[data-feature]").forEach(function(card){
+    card.addEventListener("click", function(){
+      openFeature(card.getAttribute("data-feature"), card.getAttribute("data-target"));
+    });
+  });
+
+  document.querySelectorAll("[data-theme]").forEach(function(tile){
+    tile.addEventListener("click", function(){
+      applyPremiumTheme(tile.getAttribute("data-theme"));
+    });
+  });
+
+  confirmPurchase.addEventListener("click", function(){
+    activatePro(selectedPlan);
+  });
+
+  openFeatureButton.addEventListener("click", function(){
+    closeModals();
+    openPurchase("year");
+  });
+
+  document.getElementById("restorePurchase").addEventListener("click", function(){
+    if(isPro()){
+      showToast("ПРО-доступ уже активирован.");
+    }else{
+      showToast("Покупка не найдена. В опубликованной версии здесь будет восстановление подписки.");
+    }
+  });
+
+  document.addEventListener("keydown", function(event){
+    if(event.key === "Escape"){
+      closeModals();
+    }
+  });
+
+  updateProState();
+})();
+</script>
+
+
+<script>
+(function(){
+  const PRO_KEY = "barakaway_pro";
+  const HOLD_MS = 7000;
+  let holdTimer = null;
+  let progressTimer = null;
+  let startedAt = 0;
+
+  function findProActivator(){
+    return document.getElementById("proState")
+      || document.querySelector("[data-home-pro-state]")
+      || document.querySelector(".pro-final-state")
+      || document.querySelector(".access-status");
+  }
+
+  function showDevToast(message){
+    let toast = document.getElementById("barakawayDevUnlockToast");
+
+    if(!toast){
+      toast = document.createElement("div");
+      toast.id = "barakawayDevUnlockToast";
+      toast.style.position = "fixed";
+      toast.style.left = "50%";
+      toast.style.bottom = "96px";
+      toast.style.zIndex = "99999";
+      toast.style.transform = "translateX(-50%)";
+      toast.style.width = "min(92%,460px)";
+      toast.style.padding = "14px 16px";
+      toast.style.borderRadius = "18px";
+      toast.style.background = "rgba(16,24,32,.96)";
+      toast.style.border = "1px solid rgba(215,192,122,.28)";
+      toast.style.color = "#f2df9d";
+      toast.style.fontSize = "13px";
+      toast.style.fontWeight = "900";
+      toast.style.textAlign = "center";
+      toast.style.boxShadow = "0 18px 40px rgba(0,0,0,.35)";
+      toast.style.opacity = "0";
+      toast.style.pointerEvents = "none";
+      toast.style.transition = "opacity .25s ease";
+      document.body.appendChild(toast);
+    }
+
+    toast.textContent = message;
+    toast.style.opacity = "1";
+
+    clearTimeout(window.__barakawayDevUnlockToastTimer);
+    window.__barakawayDevUnlockToastTimer = setTimeout(function(){
+      toast.style.opacity = "0";
+    }, 2400);
+  }
+
+  function setActivatorHint(node){
+    if(!node) return;
+    node.style.userSelect = "none";
+    node.style.webkitUserSelect = "none";
+    node.style.cursor = "pointer";
+    node.setAttribute("title", "Тестовый режим: удерживать 7 секунд");
+  }
+
+  function startHold(){
+    const node = findProActivator();
+    if(!node) return;
+
+    startedAt = Date.now();
+    showDevToast("Удерживайте 7 секунд для тестового PRO.");
+
+    clearTimeout(holdTimer);
+    clearInterval(progressTimer);
+
+    progressTimer = setInterval(function(){
+      const left = Math.max(0, Math.ceil((HOLD_MS - (Date.now() - startedAt)) / 1000));
+      if(left > 0){
+        showDevToast("Тестовый PRO: осталось " + left + " сек.");
+      }
+    }, 1000);
+
+    holdTimer = setTimeout(function(){
+      clearInterval(progressTimer);
+
+      const active = localStorage.getItem(PRO_KEY) === "true";
+
+      if(active){
+        localStorage.removeItem(PRO_KEY);
+        showDevToast("Тестовый PRO выключен.");
+      }else{
+        localStorage.setItem(PRO_KEY, "true");
+        localStorage.setItem("barakaway_pro_plan", "developer-test");
+        showDevToast("Тестовый PRO активирован.");
+      }
+
+      setTimeout(function(){
+        window.location.reload();
+      }, 650);
+    }, HOLD_MS);
+  }
+
+  function cancelHold(){
+    clearTimeout(holdTimer);
+    clearInterval(progressTimer);
+    holdTimer = null;
+    progressTimer = null;
+  }
+
+  function init(){
+    const node = findProActivator();
+    if(!node) return;
+
+    setActivatorHint(node);
+
+    node.addEventListener("mousedown", startHold);
+    node.addEventListener("touchstart", startHold, {passive:true});
+    node.addEventListener("mouseup", cancelHold);
+    node.addEventListener("mouseleave", cancelHold);
+    node.addEventListener("touchend", cancelHold);
+    node.addEventListener("touchcancel", cancelHold);
+  }
+
+  if(document.readyState === "loading"){
+    document.addEventListener("DOMContentLoaded", init);
+  }else{
+    init();
+  }
+})();
+</script>
+
+</body>
+</html>
