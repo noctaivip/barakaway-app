@@ -387,32 +387,261 @@ const greetings=[
 ];
 
 const personalizedTemplates={
-"jumuah":{label:"Cuma",title:"Cumanız mübarek olsun",headlines:["Cumanız mübarek olsun", "Mübarek Cuma", "Huzurlu Cuma", "Cuma — bereket günü", "Huzurlu Cumalar"],texts:[function(name){return name+", Allah size nur, huzur, kabul edilmiş dualar ve kalıcı bereket versin.";},function(name){return name+", Allah imanınızı güçlendirsin ve evinizi huzur ile rahmetle doldursun.";},function(name){return name+", Allah size hayır, rızık ve kabul kapılarını açsın.";},function(name){return name+", Allah ailenizi korusun ve bu günü mübarek kılsın.";},function(name){return name+", bu gün bağışlanma ve güzel haberler sebebi olsun.";},function(name){return name+", Allah duanızı kabul etsin ve kalbinizi nurla doldursun.";}]},
-"ramadan":{label:"Ramazan",title:"Ramazan mübarek olsun",headlines:["Ramazan mübarek olsun", "Mübarek Ramazan", "Kutsal Ramazan", "Rahmet ayı", "Ramazan — nur ayı"],texts:[function(name){return name+", Allah size nur, huzur, kabul edilmiş dualar ve kalıcı bereket versin.";},function(name){return name+", Allah imanınızı güçlendirsin ve evinizi huzur ile rahmetle doldursun.";},function(name){return name+", Allah size hayır, rızık ve kabul kapılarını açsın.";},function(name){return name+", Allah ailenizi korusun ve bu günü mübarek kılsın.";},function(name){return name+", bu gün bağışlanma ve güzel haberler sebebi olsun.";},function(name){return name+", Allah duanızı kabul etsin ve kalbinizi nurla doldursun.";}]},
-"eid-fitr":{label:"Ramazan Bayramı",title:"Ramazan Bayramınız mübarek olsun",headlines:["İydü’l Fıtr mübarek olsun", "Ramazan Bayramınız mübarek olsun", "Fıtr Bayramı", "Nurlu İydü’l Fıtr", "Sevinç ve rahmet günü"],texts:[function(name){return name+", Allah size nur, huzur, kabul edilmiş dualar ve kalıcı bereket versin.";},function(name){return name+", Allah imanınızı güçlendirsin ve evinizi huzur ile rahmetle doldursun.";},function(name){return name+", Allah size hayır, rızık ve kabul kapılarını açsın.";},function(name){return name+", Allah ailenizi korusun ve bu günü mübarek kılsın.";},function(name){return name+", bu gün bağışlanma ve güzel haberler sebebi olsun.";},function(name){return name+", Allah duanızı kabul etsin ve kalbinizi nurla doldursun.";}]},
-"eid-adha":{label:"Kurban Bayramı",title:"Kurban Bayramınız mübarek olsun",headlines:["İydü’l Adha mübarek olsun", "Kurban Bayramınız mübarek olsun", "Kurban bayramı", "Mübarek İydü’l Adha", "Rahmet ve bereket günü"],texts:[function(name){return name+", Allah size nur, huzur, kabul edilmiş dualar ve kalıcı bereket versin.";},function(name){return name+", Allah imanınızı güçlendirsin ve evinizi huzur ile rahmetle doldursun.";},function(name){return name+", Allah size hayır, rızık ve kabul kapılarını açsın.";},function(name){return name+", Allah ailenizi korusun ve bu günü mübarek kılsın.";},function(name){return name+", bu gün bağışlanma ve güzel haberler sebebi olsun.";},function(name){return name+", Allah duanızı kabul etsin ve kalbinizi nurla doldursun.";}]},
-"daily":{label:"Günlük",title:"Her gün için dua",headlines:["Kalbinize nur olsun", "Mübarek bir gün dileriz", "Evinize huzur", "Bu gün size bereket getirsin", "Bugün huzur sizinle olsun", "Allah’ın rahmeti evinize olsun", "Yolunuza hayır ve nur olsun"],texts:[function(name){return name+", Allah size nur, huzur, kabul edilmiş dualar ve kalıcı bereket versin.";},function(name){return name+", Allah imanınızı güçlendirsin ve evinizi huzur ile rahmetle doldursun.";},function(name){return name+", Allah size hayır, rızık ve kabul kapılarını açsın.";},function(name){return name+", Allah ailenizi korusun ve bu günü mübarek kılsın.";},function(name){return name+", bu gün bağışlanma ve güzel haberler sebebi olsun.";},function(name){return name+", Allah duanızı kabul etsin ve kalbinizi nurla doldursun.";}]},
+  jumuah:{
+    label:"Cuma",
+    title:"Cumanız mübarek olsun",
+    headlines:["Cumanız mübarek olsun","Bereketli Cuma","Nurlu Cuma","Huzurlu Cuma","Rahmet dolu Cuma","Dua kapıları açık olsun","Kalbe huzur veren Cuma","Bereket günü","Nur ve sükûnet günü","Kabul dualar günü","İç huzur Cuması","Hayırla gelen Cuma"],
+    openings:[
+      "bu Cuma kalbe sükûnet, düşüncelere açıklık ve işlere bereket getirsin",
+      "bugün rahmet kapıları açılsın, gönül yumuşasın ve dualar hayırla kabul olsun",
+      "bu mübarek gün iç huzura, temiz niyetlere ve Allah'a yakınlığa vesile olsun",
+      "Cuma'nın nuru kalbi aydınlatsın, yolları kolaylaştırsın ve hayrı çoğaltsın",
+      "bu gün gizli sıkıntıları hafifletsin, ümidi güçlendirsin ve gönle ferahlık versin",
+      "bugün kalpte güven, dilde dua, yolda hayır ve hayatta bereket olsun",
+      "bu Cuma sabra güç, kalbe huzur ve rızka bereket getirsin",
+      "bugün Allah'ın rahmetiyle yumuşak, sakin ve hayırlı bir kapı açılsın",
+      "bu gün geçmişin ağırlığını hafifletsin, geleceğe hayırlı bir ışık versin",
+      "Cuma'nın bereketi niyetleri güzelleştirsin, adımları doğruya yöneltsin",
+      "bugün gönül incinmeden ferahlasın, dua gecikmeden hayra bağlansın",
+      "bu mübarek saatler nur, şükür, afiyet ve kabuliyetle dolsun"
+    ],
+    blessings:[
+      "Allah duaları kabul etsin, sabrı güçlendirsin ve her adımı hayra yöneltsin.",
+      "Allah temiz rızık, sağlam iman, doğru karar ve huzurlu bir kalp nasip etsin.",
+      "Allah görünmeyen dertleri hafifletsin, kalbi ferahlatsın ve hayrı çoğaltsın.",
+      "Allah rahmetiyle kuşatsın, nuruyla aydınlatsın ve lütfuyla kolaylık versin.",
+      "Allah kalbi korkudan korusun, ümidi diri tutsun ve yolu bereketli kılsın.",
+      "Allah her güzel niyeti kabul kapısına, her duayı rahmet kapısına ulaştırsın.",
+      "Allah kalpleri imanla güçlendirsin, işleri kolaylaştırsın ve hayrı artırarak versin.",
+      "Allah hayatı faydalı ilimle, samimiyetle ve kalıcı bereketle doldursun.",
+      "Allah hataları bağışlasın, kalbi arındırsın ve merhamet kapılarını açsın.",
+      "Allah bekleyişleri hayra, zorlukları kolaylığa ve duaları rahmete dönüştürsün.",
+      "Allah gönle emniyet, söze hikmet, amele bereket ve yola istikamet versin.",
+      "Allah bu günü korunmuş, huzurlu, temiz ve hayırlı bir gün kılsın."
+    ],
+    closings:[
+      "Cumanız mübarek olsun.","Bu Cuma kabul ve bereketle dolsun.","Nur, huzur ve rahmet sizinle olsun.","Dualar hayırla karşılık bulsun.","Kalp bugün şükürle sakinleşsin.","Bu gün iki dünyada hayra vesile olsun.","Allah'ın rahmeti her adımı kuşatsın.","Bugün sadece hayır iz bıraksın.","Cuma'nın bereketi daim olsun."
+    ]
+  },
+  ramadan:{
+    label:"Ramazan",
+    title:"Ramazan mübarek olsun",
+    headlines:["Ramazan mübarek olsun","Bereketli Ramazan","Rahmet ayı","Nur ayı Ramazan","Kabul ayı","Kalpleri arındıran ay","Sabır ve rahmet ayı","Manevi huzur ayı","Dua ve bereket zamanı","Ramazan'ın nuru","Hayırlı Ramazan","İç huzur Ramazanı"],
+    openings:[
+      "Ramazan kalbi arındırsın, imanı güçlendirsin ve ruhu huzura yaklaştırsın",
+      "bu mübarek ay her güne anlam, her duaya umut ve her ibadete samimiyet katsın",
+      "Ramazan'ın bereketi iç dünyayı sakinleştirsin, niyetleri temizlesin ve yolu aydınlatsın",
+      "bu ay rahmet, mağfiret, sabır ve güzel değişimlerin başlangıcı olsun",
+      "oruç ve dua kalbi yumuşatsın, düşünceyi arındırsın ve hayatı bereketlendirsin",
+      "Ramazan'ın nuru gönle insin, zamanı hayırla doldursun ve şükrü artırırsın",
+      "bu ay manevi güç, içten tevbe ve kabul edilmiş dualara vesile olsun",
+      "Ramazan her günü rahmet, her gecesi huzur ve her duası hayırla dolu kılsın",
+      "bu mübarek zaman kalpteki yorgunluğu hafifletsin ve Allah'a yakınlığı artırsın",
+      "Ramazan sabrı güçlendirsin, şükrü canlandırsın ve iyiliği kolaylaştırsın",
+      "bu ay gönle umut, hayata yön ve zamana bereket getirsin",
+      "Ramazan kalıcı bir nur, temiz bir niyet ve sakin bir kalp bıraksın"
+    ],
+    blessings:[
+      "Allah orucu, namazı, duayı ve her güzel niyeti kabul etsin.",
+      "Allah hataları bağışlasın, sabrı güçlendirsin ve rızasına götüren yolu aydınlatsın.",
+      "Allah günleri bereketle, geceleri ibadetle ve kalbi huzurla doldursun.",
+      "Allah bu ayı rahmet, koruma, temiz rızık ve kalıcı hayır kaynağı kılsın.",
+      "Allah her samimi isteği hayırla karşılasın ve her iyiliği kat kat bereketlendirsin.",
+      "Allah imanı güçlendirsin, gereksiz olandan korusun ve hayra yürümeyi kolaylaştırsın.",
+      "Allah bu ayı faydalı ilim, iç huzur ve kabul edilmiş dualarla doldursun.",
+      "Allah Ramazan'ı güzel değişimlerin ve sürekli bereketin başlangıcı kılsın.",
+      "Allah kalbi Kur'an'a yaklaştırsın, dili zikre alıştırısın ve ameli ihlasla güzelleştirsin.",
+      "Allah her sahuru rahmet, her iftarı şükür ve her duayı kabuliyetle süslesin.",
+      "Allah eksikleri affetsin, niyetleri temizlesin ve gönlü rahmetiyle genişletsin.",
+      "Allah bu ayın feyzini kalpte kalıcı, hayatta bereketli ve yolda aydınlık kılsın."
+    ],
+    closings:[
+      "Ramazan mübarek olsun.","Bu ay kabul ve bereketle dolsun.","Rahmet ve nur bu ay boyunca eksilmesin.","Dualar bu mübarek ayda kabul olsun.","Ramazan kalpte güzel izler bıraksın.","Allah'ın rızasına yakınlaştırsın.","Her gün hayırla ve bereketle geçsin.","Bu ay huzur ve mağfiret getirsin.","Ramazan'ın bereketi daim olsun."
+    ]
+  },
+  "eid-fitr":{
+    label:"Ramazan Bayramı",
+    title:"Ramazan Bayramınız mübarek olsun",
+    headlines:["Ramazan Bayramınız mübarek olsun","Bereketli Bayram","Sevinç ve rahmet günü","Kabul edilmiş ameller günü","Bayram huzuru","Nurla gelen bayram","Şükür ve sevinç günü","Rahmetli bayram sabahı","Gönüllere bayram","Hayırlı bayramlar","Bayramın bereketi","Yeni iyiliklerin başlangıcı"],
+    openings:[
+      "Ramazan Bayramı temiz bir sevinç, derin bir şükür ve kabul duygusu getirsin",
+      "bu bayram yeni iyiliklere, güzel niyetlere ve huzurlu başlangıçlara kapı açsın",
+      "Ramazan'dan kalan nur kalpte canlı, niyetlerde temiz ve amellerde sürekli olsun",
+      "bayram sevinci sakin, pak ve Allah'a şükürle dolu olsun",
+      "bu gün ferahlık, umut, cömertlik ve kalıcı bereket getirsin",
+      "Ramazan Bayramı barışa, affa, iç huzura ve güzel değişimlere vesile olsun",
+      "bugünün sevinci kalbi yumuşatsın, şükrü artırırsın ve gönlü aydınlatsın",
+      "bayramın rahmeti geçmiş sabrı ödüllendirsin ve gelecek günleri hayırla açsın",
+      "bu mübarek gün dua, şükür, nur ve kabuliyetle dolu geçsin",
+      "bayram kalpteki ağırlıkları hafifletsin, ümidi güçlendirsin ve hayrı çoğaltsın",
+      "bu gün temiz sevinç, güzel haberler ve Allah'ın rahmetini hissettirsin",
+      "Ramazan Bayramı gönle dinginlik, hayata bereket ve yola açıklık versin"
+    ],
+    blessings:[
+      "Allah orucu, duaları, ibadetleri ve bütün hayırlı amelleri kabul etsin.",
+      "Allah sabrın karşılığını versin, hataları bağışlasın ve hayır kapılarını açsın.",
+      "Allah kalbi nurla, hayatı bereketle ve yolu açıklıkla doldursun.",
+      "Allah sevinç, koruma, temiz rızık ve iki dünyada huzur nasip etsin.",
+      "Allah imanı güçlü, niyetleri temiz ve amelleri kabul edilmiş kılsın.",
+      "Allah bu bayramı şükre, rahmete ve güzel haberlere vesile etsin.",
+      "Allah samimi ibadetleri kabul etsin ve endişeleri sükûnete dönüştürsün.",
+      "Allah iç gücü, aydınlık yol ve Ramazan'ın bereketli tamamlanmasını nasip etsin.",
+      "Allah bayram sevincini helal huzurla, güzel niyetleri kabuliyetle süslesin.",
+      "Allah her eksikliği rahmetiyle tamamlasın ve her duayı hayra bağlasın.",
+      "Allah gönlü şükürle canlı, hayatı iyilikle bereketli kılsın.",
+      "Allah bu bayramı sürekli hayra ve temiz başlangıçlara vesile etsin."
+    ],
+    closings:[
+      "Bayramınız mübarek olsun.","Ramazan Bayramı hayırlı olsun.","Bu bayram kabul ve bereketle dolsun.","Sevinç, rahmet ve huzur sizinle olsun.","Bayramın nuru kalpte kalsın.","Allah kabul etsin ve hayırla tamamlasın.","Bu gün iki dünyada hayır getirsin.","Rahmet ve şükür eksilmesin.","Bayram bereketi daim olsun."
+    ]
+  },
+  "eid-adha":{
+    label:"Kurban Bayramı",
+    title:"Kurban Bayramınız mübarek olsun",
+    headlines:["Kurban Bayramınız mübarek olsun","Bereketli Kurban Bayramı","Teslimiyet ve rahmet günü","Hayır ve bereket bayramı","Kabul ve şükür günü","Rahmet kapıları açık olsun","Nurlu Kurban Bayramı","İyilikle gelen bayram","Kalplere huzur bayramı","Hayırlı Kurban Bayramı","Bereket ve merhamet günü","Güzel niyetler bayramı"],
+    openings:[
+      "Kurban Bayramı kalbe teslimiyet, ruha güven ve amellere samimi bereket getirsin",
+      "bu mübarek bayram rahmet, mağfiret ve güzel değişimlere vesile olsun",
+      "Kurban Bayramı imanın gücünü, ihlasın değerini ve Allah'a güveni hatırlatsın",
+      "bu bayram hayatı sükûnet, cömertlik, şükür ve nurla doldursun",
+      "bayramın bereketi imanı güçlendirsin, niyetleri arındırsın ve hayır kapılarını açsın",
+      "bu gün kabul edilmiş amellere, iç huzura ve güzel haberlere vesile olsun",
+      "Kurban Bayramı samimi kalbin kıymetini ve Allah'ın rahmetini hissettirsin",
+      "bu mübarek gün huzur, temiz niyetler, faydalı işler ve bereketli yollar getirsin",
+      "bayram gönülde şükür, davranışta incelik ve hayatta rahmet izi bıraksın",
+      "bu gün sabrı güçlendirsin, niyeti temizlesin ve hayra yönelmeyi kolaylaştırsın",
+      "Kurban Bayramı içten bağlılık, sakin sevinç ve kalıcı bereket getirsin",
+      "bu gün Allah'a yakınlığı artıran güzel bir hatırlatma olsun"
+    ],
+    blessings:[
+      "Allah güzel niyetleri, duaları ve her samimi ameli kabul etsin.",
+      "Allah koruma, temiz rızık, güçlü sabır ve aydınlık yol nasip etsin.",
+      "Allah hataları bağışlasın, imanı güçlendirsin ve hayata kalıcı bereket versin.",
+      "Allah ibadetleri kabul etsin ve iki dünyada rahmet kapılarını açsın.",
+      "Allah kalbi endişeden, yolu gereksiz ve zararlı olandan korusun.",
+      "Allah gönül cömertliği, niyet açıklığı ve her gün huzur nasip etsin.",
+      "Allah bu bayramı kabuliyete, şükre ve hayırlı haberlere vesile etsin.",
+      "Allah hayatı iyilik, merhamet, bereket ve faydalı fırsatlarla doldursun.",
+      "Allah her duayı hayra, her ameli kabuliyete ve her adımı istikamete bağlasın.",
+      "Allah kurban bilincini kalpte diri, iyiliği hayatta sürekli kılsın.",
+      "Allah iç huzuru derin, yolu açık ve rızkı bereketli eylesin.",
+      "Allah bu günü rahmet, nur, koruma ve temiz sevinçle tamamlasın."
+    ],
+    closings:[
+      "Kurban Bayramınız mübarek olsun.","Bu bayram kabul ve bereketle dolsun.","Rahmet, huzur ve bereket sizinle olsun.","Allah kabul etsin ve hayra vesile kılsın.","Bayram gönülde nur bıraksın.","Bu gün iki dünyada hayır getirsin.","Şükür ve merhamet eksilmesin.","Bayramın bereketi daim olsun.","Allah güzel niyetleri kabul etsin."
+    ]
+  },
+  daily:{
+    label:"Günlük",
+    title:"Her gün için dua",
+    headlines:["Bugün hayırla geçsin","Kalbe huzur","Güne bereketle başla","Allah'ın rahmeti üzerinize olsun","Nur ve sükûnet","Hayırlı bir gün","Dua ile gelen huzur","Kalbe ferahlık","Bugünün bereketi","İç huzur ve şükür","Yola nur","Güzel bir gün duası"],
+    openings:[
+      "bugün kalbe huzur, düşüncelere açıklık ve işlere kolaylık getirsin",
+      "Allah bu günü nurla, faydalı adımlarla ve güzel karşılaşmalarla doldursun",
+      "bugün gönül sakin, niyetler temiz ve yol bereketli olsun",
+      "bu gün şükre, iç güce ve hayırlı haberlere vesile olsun",
+      "Allah işleri kolaylaştırsın, gereksiz olandan korusun ve faydalı olana yöneltsin",
+      "bugün her adım hayra, huzura ve Allah'ın rızasına yaklaşmaya vesile olsun",
+      "bu gün nur, doğru kararlar ve sessiz bir sevinçle dolu geçsin",
+      "Allah bugün koruma, temiz rızık, sükûnet ve güven nasip etsin",
+      "bu gün yorgunluğu hafifletsin, ümidi güçlendirsin ve kalbi rahatlatırsın",
+      "bugün güzel bir niyetle başlasın, hayırlı bir sonuçla tamamlansın",
+      "Allah günün gizli hayırlarını açığa çıkarsın ve görünen nimetleri bereketlendirsin",
+      "bu gün kalbe ferahlık, söze hikmet ve davranışa incelik katsın"
+    ],
+    blessings:[
+      "Allah imanı güçlendirsin, kalbi arındırsın ve bereket kapılarını açsın.",
+      "Allah duaları kabul etsin, hataları bağışlasın ve ihtiyaç duyulan yerde kolaylık versin.",
+      "Allah endişelerden korusun, ruha huzur versin ve hayra yöneltsin.",
+      "Allah faydalı işler, güzel haberler ve günün hayırlı tamamlanmasını nasip etsin.",
+      "Allah kararlarda açıklık, kalpte güç ve yolda koruma versin.",
+      "Allah bu günü iyiliğe, rahmete ve iç yenilenmeye vesile kılsın.",
+      "Allah hayatı sükûnet, umut ve bereketli faydayla doldursun.",
+      "Allah şükür, sabır ve samimi dualarla Kendisine yakınlaştırsın.",
+      "Allah her zorluğu kolaylığa, her bekleyişi hayra ve her duayı rahmete çevirsin.",
+      "Allah zamanı bereketli, rızkı temiz ve kalbi emniyetli kılsın.",
+      "Allah bugün görünmeyen korumasıyla kuşatsın ve hayrı artırarak versin.",
+      "Allah güzel niyetleri büyütsün, korkuları dindirsin ve gönle güven versin."
+    ],
+    closings:[
+      "Gününüz bereketli olsun.","Bugün huzur ve nur getirsin.","Allah iki dünyada hayır nasip etsin.","Kalp sakin ve şükür dolu olsun.","Bugün yalnızca hayır iz bıraksın.","Allah duaları kabul ve yolları açık etsin.","Bu gün kolay ve faydalı geçsin.","Rahmet her adımı kuşatsın.","Bugünün bereketi daim olsun."
+    ]
+  }
 };
-function selectPersonalHeadline(category){
-const tpl=personalizedTemplates[category]||personalizedTemplates.jumuah;
-const list=tpl.headlines||[tpl.title];
-const key="barakaway_personal_headline_index_"+category;
-let index=parseInt(localStorage.getItem(key)||"-1",10);
-if(!Number.isFinite(index))index=-1;
-index=(index+1)%list.length;
-localStorage.setItem(key,String(index));
-return list[index];
+
+function cleanPersonalName(value){
+  return String(value||"")
+    .replace(/[<>]/g,"")
+    .replace(/\s+/g," ")
+    .trim()
+    .slice(0,42);
 }
+
+function composePersonalText(name,text){
+  const safeName=cleanPersonalName(name);
+  const body=String(text||"").trim();
+  return safeName ? safeName+", "+body : body;
+}
+
+function getPersonalHistory(category,type){
+  const key="barakaway_personal_"+type+"_history_"+category;
+  try{
+    const data=JSON.parse(localStorage.getItem(key)||"[]");
+    return Array.isArray(data)?data:[];
+  }catch(e){return [];}
+}
+
+function savePersonalHistory(category,type,signature,limit){
+  const key="barakaway_personal_"+type+"_history_"+category;
+  const history=getPersonalHistory(category,type).filter(function(item){return item!==signature;});
+  history.unshift(signature);
+  localStorage.setItem(key,JSON.stringify(history.slice(0,limit)));
+}
+
+function pickPersonalIndexed(category,type,list){
+  if(!list||!list.length)return {value:"",index:0};
+  const key="barakaway_personal_"+type+"_index_"+category;
+  let index=parseInt(localStorage.getItem(key)||"-1",10);
+  if(!Number.isFinite(index))index=-1;
+  index=(index+1)%list.length;
+  localStorage.setItem(key,String(index));
+  return {value:list[index],index:index};
+}
+
+function selectPersonalHeadline(category){
+  const tpl=personalizedTemplates[category]||personalizedTemplates.jumuah;
+  const list=tpl.headlines||[tpl.title];
+  const recent=getPersonalHistory(category,"headline");
+  let selected=null;
+  for(let attempt=0;attempt<30;attempt++){
+    const item=pickPersonalIndexed(category,"headline",list);
+    selected=item;
+    if(recent.indexOf(String(item.index))===-1)break;
+  }
+  savePersonalHistory(category,"headline",String(selected.index),Math.min(10,Math.max(1,list.length-1)));
+  return selected.value;
+}
+
 function selectPersonalText(category,name){
-const tpl=personalizedTemplates[category]||personalizedTemplates.jumuah;
-const list=tpl.texts||[];
-if(!list.length)return name+", , Allah size nur, huzur, kabul edilmiş dualar ve kalıcı bereket versin.";
-const key="barakaway_personal_text_index_"+category;
-let index=parseInt(localStorage.getItem(key)||"-1",10);
-if(!Number.isFinite(index))index=-1;
-index=(index+1)%list.length;
-localStorage.setItem(key,String(index));
-return list[index](name);
+  const tpl=personalizedTemplates[category]||personalizedTemplates.jumuah;
+  const openings=tpl.openings||[];
+  const blessings=tpl.blessings||[];
+  const closings=tpl.closings||[];
+  if(!openings.length||!blessings.length||!closings.length){
+    return composePersonalText(name,"Allah bu günü hayır, huzur ve bereketle doldursun.");
+  }
+  const recent=getPersonalHistory(category,"text");
+  let selected=null;
+  for(let attempt=0;attempt<80;attempt++){
+    const opening=pickPersonalIndexed(category,"opening",openings);
+    const blessing=pickPersonalIndexed(category,"blessing",blessings);
+    const closing=pickPersonalIndexed(category,"closing",closings);
+    const signature=[opening.index,blessing.index,closing.index].join("-");
+    selected={opening:opening.value,blessing:blessing.value,closing:closing.value,signature:signature};
+    if(recent.indexOf(signature)===-1)break;
+  }
+  savePersonalHistory(category,"text",selected.signature,36);
+  return composePersonalText(name,selected.opening+". "+selected.blessing+" "+selected.closing);
 }
 function getNextPersonalImage(){let index=parseInt(localStorage.getItem("barakaway_personal_card_index")||"0",10);if(!Number.isFinite(index)||index<0)index=0;const image=PERSONAL_CARD_IMAGES[index%PERSONAL_CARD_IMAGES.length];localStorage.setItem("barakaway_personal_card_index",String((index+1)%PERSONAL_CARD_IMAGES.length));return image;}
 let currentGreeting=greetings[0];
@@ -424,32 +653,15 @@ function getTodayGreeting(){const list=orderedGreetings();const dayIndex=Math.fl
 function updateToday(){return;}
 function renderCards(filter){const root=document.getElementById("cards");const list=orderedGreetings().filter(function(item){return filter==="all"||item.category===filter;});root.innerHTML=list.map(function(item){return `<article class="greeting-card" data-category="${item.category}"><div class="card-art"><img class="card-image" src="${item.image}" alt="${item.title}" loading="lazy"><div class="card-image-overlay"></div><div class="card-brand-badge"><img src="${LOGO_PATH}" alt="BarakaWay"></div><div class="card-category-badge">${item.label}</div><div class="card-site-mark">barakaway.app</div></div><div class="card-body"><h3 class="card-title">${item.title}</h3><p class="card-text">${item.text}</p></div><div class="card-actions"><button class="action-btn" type="button" onclick="openCard('${item.id}')">Yakınlaştır</button><button class="action-btn" type="button" onclick="copyCard('${item.id}')">Kopyala</button><button class="action-btn primary" type="button" onclick="shareCard('${item.id}')">Paylaş</button></div></article>`;}).join("");}
 function findGreeting(id){return greetings.find(function(item){return item.id===id;})||greetings[0];}
-function generatePersonal(){saveName();const name=(document.getElementById("generatorName").value||"").trim()||"Değerli kardeşim";const cat=document.getElementById("generatorCategory").value;const tpl=personalizedTemplates[cat]||personalizedTemplates.jumuah;currentGreeting={id:"personal",category:cat,label:tpl.label,title:tpl.title,headline:selectPersonalHeadline(cat),text:selectPersonalText(cat,name),image:getNextPersonalImage(),personalName:name};openModal(currentGreeting);}
+function generatePersonal(){saveName();const personalName=cleanPersonalName(document.getElementById("generatorName").value||"");const cat=document.getElementById("generatorCategory").value;const tpl=personalizedTemplates[cat]||personalizedTemplates.jumuah;currentGreeting={id:"personal",category:cat,label:tpl.label,title:tpl.title,headline:selectPersonalHeadline(cat),text:selectPersonalText(cat,personalName),image:getNextPersonalImage(),personalName:personalName};openModal(currentGreeting);}
 function regeneratePersonal(){
 if(currentGreeting&&currentGreeting.id==="personal"){
 const currentCategory=currentGreeting.category||"jumuah";
-const currentName=currentGreeting.personalName||(document.getElementById("generatorName").value||"").trim()||"Değerli kardeşim";
-
+const personalName=currentGreeting.personalName||(document.getElementById("generatorName").value||"").trim();
 const tpl=personalizedTemplates[currentCategory]||personalizedTemplates.jumuah;
-const list=tpl.texts||[];
 
-let headline=currentGreeting.headline||currentGreeting.title;
-let headlineTries=0;
-const headlineList=tpl.headlines||[tpl.title];
-
-while(headline===currentGreeting.headline&&headlineTries<12){
-headline=headlineList[Math.floor(Math.random()*headlineList.length)];
-headlineTries++;
-}
-
-let text=currentGreeting.text;
-let tries=0;
-
-while(text===currentGreeting.text&&tries<12){
-text=list[Math.floor(Math.random()*list.length)](currentName);
-tries++;
-}
-
+let headline=selectPersonalHeadline(currentCategory);
+let text=selectPersonalText(currentCategory,personalName);
 let image=getNextPersonalImage();
 
 if(PERSONAL_CARD_IMAGES.length>1&&image===currentGreeting.image){
@@ -464,7 +676,7 @@ title:tpl.title,
 headline:headline,
 text:text,
 image:image,
-personalName:currentName
+personalName:personalName
 };
 
 openModal(currentGreeting);

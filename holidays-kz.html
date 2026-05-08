@@ -387,93 +387,79 @@ const greetings=[
   }
 ];
 
-const personalizedTemplates={
-  jumuah:{
-    label:"Жұма",
-    title:"Жұма мүбәрак",
-    headlines:["Жұма мүбәрак","Берекелі Жұма","Нұрлы Жұма","Жұма — баракат күні","Тыныш Жұма"],
-    texts:[
-      function(name){return name+", қадірлі бауыр, Алла осы жұманы нұрға, тыныштыққа, қабыл болған дұғаларға және отбасыңыз үшін баракатқа толтырсын.";},
-      function(name){return name+", берекелі жұма жүрегіңізге иман, үйіңізге тыныштық, істеріңізге баракат, ал дұғаларыңызға Алланың қабылын әкелсін.";},
-      function(name){return name+", осы Жұма күні Алла иманыңызды нығайтып, жүрегіңізді тазартып, қателіктеріңізді кешіріп, жақсылық есіктерін ашсын.";},
-      function(name){return name+", Жұма мүбәрак. Алла сізге нұрлы күн, тыныш жан, таза ризық және бүкіл отбасыңызға қорған нәсіп етсін.";},
-      function(name){return name+", осы жұма сіз үшін мейірімге, кешірімге, жақсы хабарларға және өмірдегі тұрақты баракатқа себеп болсын.";},
-      function(name){return name+", Алла дұғаларыңызды қабыл етіп, сабырыңызды күшейтіп, жүрегіңізді нұрға толтырып, бұл күнді берекелі етсін.";}
-    ]
-  },
-  ramadan:{
-    label:"Рамазан",
-    title:"Рамазан мүбәрак",
-    headlines:["Рамазан мүбәрак","Берекелі Рамазан","Қасиетті Рамазан","Мейірім айы","Рамазан — нұр айы"],
-    texts:[
-      function(name){return name+", қасиетті Рамазан иманыңызды нығайтып, жүрегіңізді тазартып, үйіңізді баракатқа толтырып, сізді Алланың мейіріміне жақындатсын.";},
-      function(name){return name+", Рамазан мүбәрак. Алла оразаңызды, дұғаларыңызды, ізгі амалдарыңызды қабыл етіп, отбасыңызға тыныштық берсін.";},
-      function(name){return name+", бұл берекелі ай рухани күш, кешірім, таза ниет және үйіңізге тыныштық әкелсін.";},
-      function(name){return name+", Алла Рамазанды сіз үшін нұр, қабыл болу, қорған, жомарттық және пайдалы өзгерістер айы етсін.";},
-      function(name){return name+", Рамазанның әр күні сізді Аллаға жақындатып, жүрегіңізді нығайтып, баракат есіктерін ашсын.";},
-      function(name){return name+", осы айдағы оразаңыз, намаздарыңыз және ізгі амалдарыңыз қабыл болып, үйіңіз мейірім мен қуанышқа толсын.";}
-    ]
-  },
-  "eid-fitr":{
-    label:"Ораза айт",
-    title:"Ораза айт мүбәрак",
-    headlines:["Ид әл-Фитр мүбәрак","Ораза айт мүбәрак","Фитр мерекесі","Нұрлы Ид әл-Фитр","Қуаныш пен мейірім күні"],
-    texts:[
-      function(name){return name+", Ораза айт мүбәрак. Алла оразаңызды, дұғаларыңызды және ізгі амалдарыңызды қабыл етіп, үйіңізді қуанышқа толтырсын.";},
-      function(name){return name+", бұл нұрлы мереке отбасыңызға тыныштық, мейірім, қуаныш, кешірім және мол баракат әкелсін.";},
-      function(name){return name+", Алла Рамазандағы сабырыңыз үшін сауап беріп, құлшылығыңызды қабыл етіп, жақсы хабарлар нәсіп етсін.";},
-      function(name){return name+", Сізге және отбасыңызға Ораза айт мүбәрак. Үйіңізде нұр, келісім, береке және Алланың мейірімі болсын.";},
-      function(name){return name+", мереке күні жаңа ізгі амалдардың, таза ниеттердің, қуаныштың және қабыл болған дұғалардың бастауы болсын.";},
-      function(name){return name+", Алла отбасыңызды сақтап, иманыңызды нығайтып, оразаңызды қабыл етіп, өміріңізді тыныштық пен баракатқа толтырсын.";}
-    ]
-  },
-  "eid-adha":{
-    label:"Құрбан айт",
-    title:"Құрбан айт мүбәрак",
-    headlines:["Ид әл-Адха мүбәрак","Құрбан айт мүбәрак","Құрбандық мерекесі","Берекелі Ид әл-Адха","Мейірім мен баракат күні"],
-    texts:[
-      function(name){return name+", Құрбан айт мүбәрак. Алла ізгі ниеттеріңізді қабыл етіп, үйіңізді тыныштыққа, молшылыққа және баракатқа толтырсын.";},
-      function(name){return name+", бұл қасиетті мереке отбасыңызға мейірім, қорған, жомарттық, тыныштық және ізгі амалдардың қабылын әкелсін.";},
-      function(name){return name+", Алла иманыңызды нығайтып, жүрегіңізді тазартып, құрбандығыңызды қабыл етіп, жақсылық пен ризық есіктерін ашсын.";},
-      function(name){return name+", Құрбан айт мүбәрак. Үйіңізде бірлік, құрмет, мейірім және Алланың берекесі болсын.";},
-      function(name){return name+", бұл мереке кешірімге, отбасылық жылулыққа, жақсы хабарларға және тұрақты баракатқа себеп болсын.";},
-      function(name){return name+", Алла дұғаларыңызды қабыл етіп, сабырыңызды күшейтіп, жақындарыңызды қорғап, таза әрі берекелі ризық нәсіп етсін.";}
-    ]
-  },
-  daily:{
-    label:"Күн сайын",
-    title:"Әр күнге арналған дұға",
-    headlines:["Жүрегіңізге нұр","Күніңіз берекелі болсын","Үйіңізге тыныштық","Бүгінгі күніңізге баракат","Бүгін сізге тыныштық","Алланың мейірімі үйіңізге жаусын","Жолыңызға жақсылық пен нұр"],
-    texts:[
-      function(name){return name+", Алла бүгін сізге тыныштық, қорған, пайдалы істер, таза ризық және жүрекке нұр берсін.";},
-      function(name){return name+", бұл күн баракатпен, дұрыс шешімдермен, ішкі тыныштықпен және Алланың мейірімімен өтсін.";},
-      function(name){return name+", Алла істеріңізді жеңілдетіп, жамандықтан сақтап, иманыңызды күшейтіп, жақсылыққа бағыттасын.";},
-      function(name){return name+", жүрегіңізде тыныштық, үйіңізде бейбітшілік, істеріңізде пайда, жолыңызда Алланың қорғаны болсын.";},
-      function(name){return name+", Алла сізге жақсылық есіктерін ашып, айқындық, күш, адал ризық және күннің көркем аяқталуын нәсіп етсін.";},
-      function(name){return name+", бүгінгі күн нұрға, шүкіршілікке, пайдалы амалдарға және қабыл болған дұғаларға толы болсын.";}
-    ]
-  }
-};
-function selectPersonalHeadline(category){
-const tpl=personalizedTemplates[category]||personalizedTemplates.jumuah;
-const list=tpl.headlines||[tpl.title];
-const key="barakaway_personal_headline_index_"+category;
-let index=parseInt(localStorage.getItem(key)||"-1",10);
-if(!Number.isFinite(index))index=-1;
-index=(index+1)%list.length;
-localStorage.setItem(key,String(index));
-return list[index];
+const personalizedTemplates={"jumuah":{"label":"Жұма","title":"Жұма мүбәрак","openings":["Алла осы жұманы жүрекке нұр, ойға тыныштық және амалдарға баракат беретін күн етсін","Бұл жұма кешірімге, қабыл дұғаларға және таза ниетпен жасалған жақсылықтарға себеп болсын","Жұма күні рухқа тыныштық, ойға айқындық және әр қадамға баракат әкелсін","Бұл күн жүректі жұмсартып, ниетті тазартып, жақсылыққа тұрақтылық берсін","Жұма мейірімге, кешірімге және Алланы еске алуға толы күн болсын","Осы жұма ішкі тыныштыққа, дұрыс шешімге және пайдалы өзгеріске себеп болсын","Бұл күн қабыл дұғалармен, таза оймен және нұрлы бастамалармен есте қалсын","Жұма баракаттың, тыныштықтың және Аллаға жақындаудың себебі болсын","Бұл жұма жақсы хабарға, жеңілдікке және қабыл болған дұғаға жол ашсын","Осы күн шүкірді көбейтіп, сабырды күшейтіп, жанға кеңдік берсін","Жұма күні рухқа жылу, жүрекке сенім және өмірге тыныштық әкелсін","Қасиетті жұма жүректі нұрға, ойды тазалыққа және жолды жақсылыққа бастасын"],"blessings":["Алла жүректі иманмен бекітіп, жанға сабыр, күнге береке және жолға жеңілдік берсін.","Алла дұғаларды қабыл етіп, жүректегі ауырлықты жеңілдетіп, үміт есіктерін ашсын.","Алла бұл күнді нұрлы, жеңіл, берекелі және жақсы хабарларға жақын етсін.","Алла әр дұғаны хайырлы түрде қабыл етіп, әр істі берекемен аяқтатсын.","Алла жүрекке тыныштық, тілге зікір, амалға ықылас және өмірге баракат берсін.","Алла қиындықты жеңілдікке, уайымды сабырға, үмітті берекеге айналдырсын.","Алла адал ризық, пайдалы білім, таза жүрек және көркем мінез нәсіп етсін.","Алла күнді тыныш, жолды жеңіл, жүректі берік және дұғаны қабыл етсін.","Алла әр жасырын дұғаны естіп, оны ең хайырлы түрде жауапсыз қалдырмасын.","Алла ойды таза, ниетті берік, амалды қабыл және жүректі тыныш етсін.","Алла жүректі нұрландырып, әр қадамды туралық пен баракатқа бағыттасын.","Алла мейірім есіктерін ашып, жақсылықты жақын, ауырлықты жеңіл етсін."],"closings":["Жұма мүбәрак.","Баракат пен тыныштық мол болсын.","Дұғалар қабыл болсын.","Бұл күн жақсылықпен аяқталсын.","Жүрек нұрға толсын.","Алла мейірімі әр сәтте серік болсын.","Бұл жұма хайырлы болсын.","Ішкі тыныштық пен иман күшейсін.","Жақсылық есіктері ашық болсын.","Сабыр, шүкір және нұр көбейсін.","Бүгінгі күн берекелі болсын.","Алла қорғауы мен рахымы мол болсын."],"headlines":["Жұма мүбәрак","Берекелі жұма","Нұрлы жұма","Жұма — баракат күні","Тыныштыққа толы жұма","Қабыл дұғалар күні","Жүрекке нұрлы жұма","Мейірім есігі ашық күн","Жақсылыққа бастайтын жұма","Рухқа тыныс беретін жұма","Баракат пен сабыр күні","Алланы еске алатын жұма"]},"ramadan":{"label":"Рамазан","title":"Рамазан мүбәрак","openings":["Алла Рамазанды жүрек тазаруының, иман күшеюінің және қабыл дұғалардың айы етсін","Бұл қасиетті ай жанға тыныштық, амалға ықылас және өмірге баракат әкелсін","Рамазан әр күнді мейіріммен, кешіріммен және рухани жақындаумен толтырсын","Қасиетті ай жақсы амалдарға тұрақтылық, ойға айқындық және жанға тыныштық берсін","Рамазан рухты жаңартып, жүректі тазалап, Аллаға жақындауға себеп болсын","Әр күн қабыл амалдарға, таза ниетке және берекелі қадамдарға толы болсын","Бұл Рамазан ішкі тыныштыққа, мейірімге және жақсылыққа ашық есік болсын","Рамазан күндері жүрекке үміт, жолға жеңілдік және ниетке тазалық берсін","Бұл ай күнәлардың кешірілуіне және жүректің нұрлануына себеп болсын","Рамазан әр жақсы ниетті күшейтіп, әр пайдалы амалды тұрақты етсін","Қасиетті ай Аллаға жақындықты арттырып, жүректі тыныштықпен толтырсын","Рамазан нұры ойға тазалық, амалға ықылас және жолға береке берсін"],"blessings":["Алла оразаны жеңіл, дұғаны қабыл, ниетті таза және жүректі нұрлы етсін.","Алла бұл айда жүректі жұмсартып, сабырды күшейтіп, шүкірді көбейтсін.","Алла әр ауызашарды баракатқа, әр дұғаны үмітке, әр түнді нұрға толтырсын.","Алла бұл айда кешірім, қорған, адал ризық және пайдалы өзгеріс нәсіп етсін.","Алла жүрекке Құран нұрын, тілге зікірді және өмірге тыныштық берсін.","Алла оразаның сабырын, дұғаның қуатын және шүкірдің берекесін сыйласын.","Алла әр түнді қабылдыққа, әр күнді берекеге және әр сәтті мейірімге толтырсын.","Алла иманды бекітіп, жанды тыныштандырып, өмірді хайырлы бағытқа бұрсын.","Алла бұл айда рухани күш, сабыр, шүкір және көркем мінез нәсіп етсін.","Алла дұғаларды қабыл етіп, жүректегі ауырлықты жеңілдетіп, үміт берсін.","Алла бұл айды кешірімге, мейірімге және жақсы өзгеріске себеп етсін.","Алла жүрекке нұр, денеге қуат, ниетке тазалық және өмірге баракат берсін."],"closings":["Рамазан мүбәрак.","Қасиетті ай берекелі болсын.","Дұғалар қабыл болсын.","Жүрек нұрға толсын.","Ораза жеңіл әрі қабыл болсын.","Мейірім мен кешірім мол болсын.","Бұл ай хайырлы өзгеріс әкелсін.","Сабыр мен шүкір көбейсін.","Аллаға жақындық артсын.","Рухани тыныштық тереңдесін.","Әр күн баракатқа толсын.","Алла рақымы серік болсын."],"headlines":["Рамазан мүбәрак","Берекелі Рамазан","Қасиетті Рамазан","Мейірім айы","Рамазан — нұр айы","Кешірім мен баракат айы","Жүрек тазару айы","Дұға қабыл болатын ай","Сабыр мен шүкір айы","Рухани тыныштық айы","Жақсылық есігі ашылған ай","Аллаға жақындайтын ай"]},"eid-fitr":{"label":"Ораза айт","title":"Ораза айт мүбәрак","openings":["Алла оразаны, дұғаларды және ізгі амалдарды қабыл етіп, бұл күнді қуанышқа толтырсын","Ораза айт жүрекке тыныштық, ниетке тазалық және өмірге береке әкелсін","Алла бұл мерекені кешірімге, мейірімге және жаңа жақсылықтарға себеп етсін","Айт күні нұр, шүкір, қуаныш және қабыл болған дұғалармен есте қалсын","Бұл мереке жүректі жеңілдетіп, жанға жылу және өмірге баракат берсін","Ораза айт мейірімге, кешірімге және таза бастамаларға жол ашсын","Бұл күн қабыл амалдардың белгісі және жаңа жақсылықтардың бастауы болсын","Айт мерекесі реніштен тазартып, мейірімге жақындауға себеп болсын","Бұл күн сабырдың жемісін, шүкірдің қуатын және мейірімнің нұрын әкелсін","Ораза айт тыныштыққа, қуанышқа және жүрек кеңдігіне толы болсын","Бұл айт кешірімнің, мейірімнің және берекелі жаңарудың күні болсын","Ораза айт жақсы хабарларға және тыныш қуаныштарға себеп болсын"],"blessings":["Алла Рамазаннан кейінгі күндерді тұрақты иманмен және көркем амалмен жалғастырсын.","Алла әр жақсы ниетті қабыл етіп, әр қуанышты берекелі етсін.","Алла қуанышты шүкірмен, тыныштықты иманмен және өмірді баракатпен толықтырсын.","Алла жүрекке нұр, ойға айқындық және күнге берекелі тыныштық берсін.","Алла әр дұғаны хайырлы жауапқа, әр ниетті жақсы нәтижеге жеткізсін.","Алла өткен амалдарды қабыл етіп, алдағы күндерді хайырлы етсін.","Алла бұл мерекеде үмітті күшейтіп, жанға тыныштық сыйласын.","Алла жүректі таза, өмірді нұрлы және жолды жеңіл етсін.","Алла рухқа жеңілдік, амалға ықылас және ниетке тұрақтылық берсін.","Алла шүкірді көбейтіп, жүректі нұрландырып, әр істі берекелі етсін.","Алла әр қабыл амалдың сауабын арттырып, өмірге хайырлы бағыт берсін.","Алла қуанышқа баракат, жүрекке сабыр және өмірге нұр берсін."],"closings":["Ораза айт мүбәрак.","Айт қабыл әрі берекелі болсын.","Қуаныш пен мейірім мол болсын.","Жүрек тыныштыққа толсын.","Дұғалар қабыл болсын.","Бұл мереке хайырлы болсын.","Шүкір мен нұр көбейсін.","Жақсылық есіктері ашылсын.","Алла рақымы мол болсын.","Айт қуанышы ұзақ болсын.","Өмірге баракат келсін.","Қабылдық пен тыныштық болсын."],"headlines":["Ораза айт мүбәрак","Берекелі Ораза айт","Қуаныш пен мейірім күні","Қабыл амалдар күні","Нұрлы Ораза айт","Шүкір мен қуаныш мерекесі","Жүрекке тыныштық мерекесі","Жақсылыққа толы айт","Береке есігі ашылған күн","Дұға мен қуаныш күні","Кешірімге себеп күн","Таза ниет мерекесі"]},"eid-adha":{"label":"Құрбан айт","title":"Құрбан айт мүбәрак","openings":["Алла ізгі ниеттерді қабыл етіп, бұл мерекені мейірім мен баракатқа толтырсын","Құрбан айт жүрекке ықылас, жанға тыныштық және өмірге береке әкелсін","Алла бұл күнді жомарттыққа, шүкірге және қабыл амалдарға себеп етсін","Мереке нұры жүректі жұмсартып, ниетті тазартып, сабырды күшейтсін","Құрбан айт мейірім, кешірім, адал ризық және рухани тыныштық әкелсін","Бұл мереке Алла разылығына жақындататын көркем амалдарға жол ашсын","Құрбан айт тыныштыққа, жомарттыққа және мейірімділікке толы болсын","Бұл күн әр жақсы ойды пайдалы іске және әр ниетті берекеге айналдырсын","Мереке күндері нұрлы ой, таза жүрек және қабыл дұғалармен өтсін","Құрбан айт рухани жаңаруға және жақсылыққа жақындауға себеп болсын","Бұл мереке үмітті күшейтіп, ауырлықты жеңілдетіп, жақсылықты жақындатсын","Құрбан айт нұры жүректі тыныштандырып, өмірге хайырлы бағыт берсін"],"blessings":["Алла әр жақсы амалды қабыл етіп, әр қадамды хайырлы етсін.","Алла ықыласты арттырып, жүректі нұрға және өмірді баракатқа толтырсын.","Алла әр дұғаны естіп, оны ең хайырлы түрде қабыл етсін.","Алла сабырды күшейтіп, шүкірді көбейтіп, ниетті таза етсін.","Алла жүрекке кеңдік, жолға жеңілдік және амалға ықылас берсін.","Алла адал ризық, көркем мінез және тұрақты баракат нәсіп етсін.","Алла жомарттықты қабыл етіп, жүрекке тыныштық сыйласын.","Алла әр сәтке мейірім, әр іске береке және әр дұғаға қабылдық берсін.","Алла ықыласты амалдарды көбейтіп, күнді берекелі етсін.","Алла рухқа күш, жүрекке нұр және жолға туралық берсін.","Алла әр ізгі ниетті қабыл етіп, оны берекелі нәтижеге жеткізсін.","Алла күнді тыныш, ризықты адал және амалды қабыл етсін."],"closings":["Құрбан айт мүбәрак.","Мереке қабыл әрі берекелі болсын.","Мейірім мен баракат мол болсын.","Жүрек сабырға толсын.","Қабыл ниеттер көбейсін.","Алла разылығы серік болсын.","Бұл айт хайырлы болсын.","Рухани нұр арта берсін.","Жомарттық пен шүкір көбейсін.","Өмірге тыныштық келсін.","Дұғалар қабыл болсын.","Құрбан айт нұрлы болсын."],"headlines":["Құрбан айт мүбәрак","Берекелі Құрбан айт","Мейірім мен баракат күні","Құрбандық мерекесі","Нұрлы Құрбан айт","Ихлас пен шүкір күні","Жомарттыққа толы мереке","Қабыл ниеттер күні","Жүрекке сабыр беретін айт","Жақсылыққа бастайтын мереке","Алла разылығы үшін айт","Тыныштық пен береке күні"]},"daily":{"label":"Күн сайын","title":"Әр күнге арналған дұға","openings":["Алла бүгінгі күнді тыныштыққа, нұрға және пайдалы істерге толтырсын","Бұл күн жүрекке сабыр, ойға айқындық және өмірге баракат әкелсін","Алла жолды жеңілдетіп, ниетті тазартып, әр істі хайырлы етсін","Бүгінгі әр сәт шүкірге, жақсы амалға және тыныш жүрекке себеп болсын","Бұл күн жақсы хабарларға, пайдалы шешімдерге және қабыл дұғаларға жол ашсын","Бүгін ой таза, ниет берік және жүрек Алланы еске алумен тыныш болсын","Бұл күн мейіріммен, шүкірмен және берекелі қадамдармен өтсін","Бүгінгі күн ішкі тыныштыққа және жақсылыққа тұрақтылыққа себеп болсын","Бұл күн артық сөзден сақтап, пайдалы амалға жақындатсын","Бүгін әр қадам туралыққа, әр ой тазалыққа және әр амал қабылдыққа бастасын","Бұл күн жүрекке үміт, өмірге тәртіп және жанға тыныштық берсін","Бүгінгі сәттер нұрлы ойлармен және пайдалы істермен толсын"],"blessings":["Алла жүрекке нұр, жанға тыныштық және күнге береке берсін.","Алла қиындықты жеңілдетіп, уайымды сабырға және үмітті қуатқа айналдырсын.","Алла адал ризық, пайдалы білім және көркем мінез нәсіп етсін.","Алла әр дұғаны естіп, әр жасырын мұқтаждыққа хайырлы жауап берсін.","Алла жүректі кеңейтіп, ойды жеңілдетіп, жолды нұрландырсын.","Алла тыныш ұйқы, жеңіл жүрек және берекелі еңбек нәсіп етсін.","Алла мейірімін жақын, қорғанын берік және баракатын мол етсін.","Алла шүкірді көбейтіп, сабырды күшейтіп, иманды бекітсін.","Алла әр ауырлықтан жеңілдік, әр күмәннан айқындық және әр дұғадан үміт берсін.","Алла жүректі реніштен тазартып, тыныштық пен кеңдік сыйласын.","Алла өмірге нұр, жолға жеңілдік және күнге хайырлы нәтиже берсін.","Алла әр сәтті қауіпсіз, әр істі берекелі және әр шешімді дұрыс етсін."],"closings":["Күн берекелі болсын.","Жүрек тыныштық тапсын.","Дұғалар қабыл болсын.","Жол нұрлы болсын.","Бүгінгі күн хайырлы болсын.","Шүкір мен сабыр көбейсін.","Алла мейірімі серік болсын.","Ішкі тыныштық тереңдесін.","Жақсылық есіктері ашылсын.","Әр қадамға баракат болсын.","Үміт пен нұр көбейсін.","Күн жақсылықпен аяқталсын."],"headlines":["Жүрекке нұр","Бүгінгі күнге баракат","Тыныштық пен жақсылық","Күнге береке","Жолға нұр","Ішкі тыныштық","Алланың мейірімі","Қабыл дұға","Жақсылыққа ашық күн","Сабыр мен шүкір","Нұр мен үміт","Берекелі сәт"]}};
+
+
+function cleanPersonalName(value){
+  return String(value||"")
+    .replace(/[<>]/g,"")
+    .replace(/\s+/g," ")
+    .trim()
+    .slice(0,42);
 }
-function selectPersonalText(category,name){
-const tpl=personalizedTemplates[category]||personalizedTemplates.jumuah;
-const list=tpl.texts||[];
-if(!list.length)return name+", Алла сізге жақсылық, қорған және баракат нәсіп етсін.";
-const key="barakaway_personal_text_index_"+category;
-let index=parseInt(localStorage.getItem(key)||"-1",10);
-if(!Number.isFinite(index))index=-1;
-index=(index+1)%list.length;
-localStorage.setItem(key,String(index));
-return list[index](name);
+function formatPersonalText(name,text){
+  const safeName=cleanPersonalName(name);
+  const body=String(text||"").trim();
+  if(!safeName)return body;
+  return safeName+", "+body;
+}
+function getPersonalHistory(key){
+  try{
+    const data=JSON.parse(localStorage.getItem(key)||"[]");
+    return Array.isArray(data)?data:[];
+  }catch(e){return [];}
+}
+function savePersonalHistory(key,value,limit){
+  const history=getPersonalHistory(key).filter(function(item){return item!==value;});
+  history.unshift(value);
+  localStorage.setItem(key,JSON.stringify(history.slice(0,limit)));
+}
+function pickPersonalOption(category,type,list,currentValue,limit){
+  if(!Array.isArray(list)||!list.length)return "";
+  const key="barakaway_personal_"+type+"_history_"+category;
+  const history=getPersonalHistory(key);
+  let available=list.filter(function(item){return item!==currentValue&&history.indexOf(item)===-1;});
+  if(!available.length)available=list.filter(function(item){return item!==currentValue;});
+  if(!available.length)available=list.slice();
+  const selected=available[Math.floor(Math.random()*available.length)]||list[0]||"";
+  savePersonalHistory(key,selected,limit);
+  return selected;
+}
+function selectPersonalHeadline(category,currentValue){
+  const tpl=personalizedTemplates[category]||personalizedTemplates.jumuah;
+  return pickPersonalOption(category,"headline",tpl.headlines||[tpl.title],currentValue||"",20)||tpl.title;
+}
+function buildPersonalText(category,name,currentSignature){
+  const tpl=personalizedTemplates[category]||personalizedTemplates.jumuah;
+  const openings=tpl.openings||[];
+  const blessings=tpl.blessings||[];
+  const closings=tpl.closings||[];
+  const totalCombos=openings.length*blessings.length*closings.length;
+  if(!totalCombos)return formatPersonalText(name,"Алла бұл күнді нұрға, тыныштыққа және баракатқа толтырсын.");
+  const key="barakaway_personal_combo_history_"+category;
+  const history=getPersonalHistory(key);
+  let selected=null;
+  for(let attempt=0;attempt<80;attempt++){
+    const oi=Math.floor(Math.random()*openings.length);
+    const bi=Math.floor(Math.random()*blessings.length);
+    const ci=Math.floor(Math.random()*closings.length);
+    const signature=oi+"-"+bi+"-"+ci;
+    if(signature!==currentSignature&&history.indexOf(signature)===-1){
+      selected={signature:signature,text:openings[oi]+". "+blessings[bi]+" "+closings[ci]};
+      break;
+    }
+  }
+  if(!selected){
+    const oi=Math.floor(Math.random()*openings.length);
+    const bi=Math.floor(Math.random()*blessings.length);
+    const ci=Math.floor(Math.random()*closings.length);
+    selected={signature:oi+"-"+bi+"-"+ci,text:openings[oi]+". "+blessings[bi]+" "+closings[ci]};
+  }
+  savePersonalHistory(key,selected.signature,40);
+  return {text:formatPersonalText(name,selected.text),signature:selected.signature,total:totalCombos};
+}
+function selectPersonalText(category,name,currentSignature){
+  return buildPersonalText(category,name,currentSignature);
 }
 function getNextPersonalImage(){let index=parseInt(localStorage.getItem("barakaway_personal_card_index")||"0",10);if(!Number.isFinite(index)||index<0)index=0;const image=PERSONAL_CARD_IMAGES[index%PERSONAL_CARD_IMAGES.length];localStorage.setItem("barakaway_personal_card_index",String((index+1)%PERSONAL_CARD_IMAGES.length));return image;}
 let currentGreeting=greetings[0];
@@ -485,49 +471,46 @@ function getTodayGreeting(){const list=orderedGreetings();const dayIndex=Math.fl
 function updateToday(){return;}
 function renderCards(filter){const root=document.getElementById("cards");const list=orderedGreetings().filter(function(item){return filter==="all"||item.category===filter;});root.innerHTML=list.map(function(item){return `<article class="greeting-card" data-category="${item.category}"><div class="card-art"><img class="card-image" src="${item.image}" alt="${item.title}" loading="lazy"><div class="card-image-overlay"></div><div class="card-brand-badge"><img src="${LOGO_PATH}" alt="BarakaWay"></div><div class="card-category-badge">${item.label}</div><div class="card-site-mark">barakaway.app</div></div><div class="card-body"><h3 class="card-title">${item.title}</h3><p class="card-text">${item.text}</p></div><div class="card-actions"><button class="action-btn" type="button" onclick="openCard('${item.id}')">Үлкейту</button><button class="action-btn" type="button" onclick="copyCard('${item.id}')">Көшіру</button><button class="action-btn primary" type="button" onclick="shareCard('${item.id}')">Бөлісу</button></div></article>`;}).join("");}
 function findGreeting(id){return greetings.find(function(item){return item.id===id;})||greetings[0];}
-function generatePersonal(){saveName();const name=(document.getElementById("generatorName").value||"").trim()||"Қадірлі бауыр / қадірлі әпке-қарындас";const cat=document.getElementById("generatorCategory").value;const tpl=personalizedTemplates[cat]||personalizedTemplates.jumuah;currentGreeting={id:"personal",category:cat,label:tpl.label,title:tpl.title,headline:selectPersonalHeadline(cat),text:selectPersonalText(cat,name),image:getNextPersonalImage(),personalName:name};openModal(currentGreeting);}
+function generatePersonal(){
+saveName();
+const personalName=cleanPersonalName(document.getElementById("generatorName").value||"");
+const cat=document.getElementById("generatorCategory").value;
+const tpl=personalizedTemplates[cat]||personalizedTemplates.jumuah;
+const personalText=selectPersonalText(cat,personalName);
+currentGreeting={
+id:"personal",
+category:cat,
+label:tpl.label,
+title:tpl.title,
+headline:selectPersonalHeadline(cat),
+text:personalText.text,
+personalSignature:personalText.signature,
+image:getNextPersonalImage(),
+personalName:personalName
+};
+openModal(currentGreeting);
+}
 function regeneratePersonal(){
 if(currentGreeting&&currentGreeting.id==="personal"){
 const currentCategory=currentGreeting.category||"jumuah";
-const currentName=currentGreeting.personalName||(document.getElementById("generatorName").value||"").trim()||"Қадірлі бауыр / қадірлі әпке-қарындас";
-
+const personalName=cleanPersonalName(currentGreeting.personalName||(document.getElementById("generatorName").value||""));
 const tpl=personalizedTemplates[currentCategory]||personalizedTemplates.jumuah;
-const list=tpl.texts||[];
-
-let headline=currentGreeting.headline||currentGreeting.title;
-let headlineTries=0;
-const headlineList=tpl.headlines||[tpl.title];
-
-while(headline===currentGreeting.headline&&headlineTries<12){
-headline=headlineList[Math.floor(Math.random()*headlineList.length)];
-headlineTries++;
-}
-
-let text=currentGreeting.text;
-let tries=0;
-
-while(text===currentGreeting.text&&tries<12){
-text=list[Math.floor(Math.random()*list.length)](currentName);
-tries++;
-}
-
+const personalText=selectPersonalText(currentCategory,personalName,currentGreeting.personalSignature);
 let image=getNextPersonalImage();
-
 if(PERSONAL_CARD_IMAGES.length>1&&image===currentGreeting.image){
 image=getNextPersonalImage();
 }
-
 currentGreeting={
 id:"personal",
 category:currentCategory,
 label:tpl.label,
 title:tpl.title,
-headline:headline,
-text:text,
+headline:selectPersonalHeadline(currentCategory,currentGreeting.headline),
+text:personalText.text,
+personalSignature:personalText.signature,
 image:image,
-personalName:currentName
+personalName:personalName
 };
-
 openModal(currentGreeting);
 return;
 }

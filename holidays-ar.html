@@ -388,16 +388,80 @@ const greetings=[
 ];
 
 const personalizedTemplates={
-"jumuah":{label:"الجمعة",title:"جمعة مباركة",headlines:["جمعة مباركة", "جمعة مباركة بالخير", "جمعة نور وبركة", "الجمعة — يوم البركة", "جمعة سلام"],texts:[function(name){return name+"، ليمنحكم الله نورًا وطمأنينة ودعوات مقبولة وبركة ثابتة.";},function(name){return name+"، ليقوّي الله إيمانكم ويملأ بيتكم سلامًا ورحمة.";},function(name){return name+"، لتفتح لكم أبواب الخير والرزق والقبول.";},function(name){return name+"، ليحفظ الله عائلتكم ويجعل يومكم مباركًا.";},function(name){return name+"، ليكن هذا اليوم سببًا للمغفرة والبشائر الطيبة.";},function(name){return name+"، ليتقبل الله دعاءكم ويملأ قلبكم نورًا.";}]},
-"ramadan":{label:"رمضان",title:"رمضان مبارك",headlines:["رمضان مبارك", "رمضان مبارك بالخير", "رمضان كريم", "شهر الرحمة", "رمضان — شهر النور"],texts:[function(name){return name+"، ليمنحكم الله نورًا وطمأنينة ودعوات مقبولة وبركة ثابتة.";},function(name){return name+"، ليقوّي الله إيمانكم ويملأ بيتكم سلامًا ورحمة.";},function(name){return name+"، لتفتح لكم أبواب الخير والرزق والقبول.";},function(name){return name+"، ليحفظ الله عائلتكم ويجعل يومكم مباركًا.";},function(name){return name+"، ليكن هذا اليوم سببًا للمغفرة والبشائر الطيبة.";},function(name){return name+"، ليتقبل الله دعاءكم ويملأ قلبكم نورًا.";}]},
-"eid-fitr":{label:"عيد الفطر",title:"عيد الفطر مبارك",headlines:["عيد الفطر مبارك", "عيد الفطر سعيد", "فرحة الفطر", "عيد فطر منير", "يوم الفرح والرحمة"],texts:[function(name){return name+"، ليمنحكم الله نورًا وطمأنينة ودعوات مقبولة وبركة ثابتة.";},function(name){return name+"، ليقوّي الله إيمانكم ويملأ بيتكم سلامًا ورحمة.";},function(name){return name+"، لتفتح لكم أبواب الخير والرزق والقبول.";},function(name){return name+"، ليحفظ الله عائلتكم ويجعل يومكم مباركًا.";},function(name){return name+"، ليكن هذا اليوم سببًا للمغفرة والبشائر الطيبة.";},function(name){return name+"، ليتقبل الله دعاءكم ويملأ قلبكم نورًا.";}]},
-"eid-adha":{label:"عيد الأضحى",title:"عيد الأضحى مبارك",headlines:["عيد الأضحى مبارك", "عيد الأضحى سعيد", "عيد التضحية", "عيد أضحى مبارك", "يوم الرحمة والبركة"],texts:[function(name){return name+"، ليمنحكم الله نورًا وطمأنينة ودعوات مقبولة وبركة ثابتة.";},function(name){return name+"، ليقوّي الله إيمانكم ويملأ بيتكم سلامًا ورحمة.";},function(name){return name+"، لتفتح لكم أبواب الخير والرزق والقبول.";},function(name){return name+"، ليحفظ الله عائلتكم ويجعل يومكم مباركًا.";},function(name){return name+"، ليكن هذا اليوم سببًا للمغفرة والبشائر الطيبة.";},function(name){return name+"، ليتقبل الله دعاءكم ويملأ قلبكم نورًا.";}]},
-"daily":{label:"يوميًا",title:"دعاء لكل يوم",headlines:["نور في قلوبكم", "يوم مبارك لكم", "سلام لبيتكم", "بركة هذا اليوم لكم", "طمأنينة لكم اليوم", "رحمة الله لبيتكم", "خير ونور لطريقكم"],texts:[function(name){return name+"، ليمنحكم الله نورًا وطمأنينة ودعوات مقبولة وبركة ثابتة.";},function(name){return name+"، ليقوّي الله إيمانكم ويملأ بيتكم سلامًا ورحمة.";},function(name){return name+"، لتفتح لكم أبواب الخير والرزق والقبول.";},function(name){return name+"، ليحفظ الله عائلتكم ويجعل يومكم مباركًا.";},function(name){return name+"، ليكن هذا اليوم سببًا للمغفرة والبشائر الطيبة.";},function(name){return name+"، ليتقبل الله دعاءكم ويملأ قلبكم نورًا.";}]},
+  "jumuah":{
+    label:"الجمعة",
+    title:"جمعة مباركة",
+    headlines:["جمعة مباركة","جمعة نور وبركة","جمعة طيبة","يوم مبارك","جمعة سلام وطمأنينة","بركة الجمعة"],
+    openings:["في هذا اليوم المبارك","مع نور الجمعة وبركتها","في ساعات الجمعة الطيبة","في هذا اليوم الذي تكثر فيه الرحمة","مع نسائم الجمعة المباركة","في يوم الجمعة المبارك"],
+    blessings:["نسأل الله أن يملأ القلب طمأنينة، وأن يفتح أبواب الخير والقبول","نسأل الله أن يجعل الدعاء مقبولًا، والعمل مباركًا، والرزق طيبًا","نسأل الله أن يرزق السكينة في القلب، والنور في الطريق، والبركة في الأيام","نسأل الله أن يقرّب القلوب من رحمته، وأن يجعل كل خطوة إلى الخير ميسّرة","نسأل الله أن يجعل هذه الجمعة بداية خير، وسببًا للمغفرة والسكينة"],
+    closings:["وأن يجعل الحياة عامرة بالإيمان والرضا.","وأن يحفظ القلب من الهم، ويبدله نورًا وأملًا.","وأن يكتب في هذا اليوم خيرًا لا ينقطع.","وأن يجعل القادم أجمل وأقرب إلى رضاه.","وأن يرزق طمأنينة لا تزول وبركة لا تنقطع."]
+  },
+  "ramadan":{
+    label:"رمضان",
+    title:"رمضان مبارك",
+    headlines:["رمضان مبارك","رمضان كريم","شهر الرحمة","رمضان شهر النور","شهر المغفرة والسكينة","رمضان بركة وطمأنينة"],
+    openings:["في هذا الشهر المبارك","مع أيام رمضان الطيبة","في شهر الرحمة والمغفرة","مع نفحات رمضان المباركة","في شهر القرآن والسكينة","مع بركة هذا الشهر الفضيل"],
+    blessings:["نسأل الله أن يتقبل الصيام والقيام، وأن يطهّر القلب من كل ضيق","نسأل الله أن يجعل هذا الشهر بابًا للنور والمغفرة والقبول","نسأل الله أن يملأ الأيام بالرحمة، والليالي بالدعاء المستجاب","نسأل الله أن يقوّي الإيمان، ويشرح الصدر، ويبارك في العمر والعمل","نسأل الله أن يجعل رمضان سببًا لقربٍ صادق منه وخيرٍ دائم"],
+    closings:["وأن يجعل كل دعاء قريبًا من الإجابة.","وأن يكتب في هذا الشهر رحمة واسعة وسكينة عميقة.","وأن يبدل التعب أجرًا، والصبر نورًا، والدعاء قبولًا.","وأن يفتح أبواب الخير والرزق والطمأنينة.","وأن يجعل آخره قبولًا ورضوانًا وفرحًا صادقًا."]
+  },
+  "eid-fitr":{
+    label:"عيد الفطر",
+    title:"عيد الفطر مبارك",
+    headlines:["عيد الفطر مبارك","عيد سعيد","فرحة الفطر","عيد رحمة وقبول","يوم فرح وبركة","تقبّل الله منا ومنكم"],
+    openings:["مع فرحة عيد الفطر","في هذا العيد المبارك","بعد أيام الصيام والدعاء","مع صباح العيد المضيء","في يوم الفرح والقبول","مع بركة عيد الفطر"],
+    blessings:["نسأل الله أن يتقبل الصيام والقيام وصالح الأعمال","نسأل الله أن يجعل العيد فرحًا صادقًا وسلامًا في القلب","نسأل الله أن يكتب قبولًا بعد العبادة، وطمأنينة بعد الصبر","نسأل الله أن يجعل هذا العيد بداية خير ونور وبركة","نسأل الله أن يملأ الأيام القادمة بالرحمة والبشائر الطيبة"],
+    closings:["وأن يجعل الفرح مقرونًا بالرضا والقبول.","وأن يديم النور في القلب والبركة في الطريق.","وأن يرزق سكينة جميلة وفرحًا لا ينقطع.","وأن يجعل كل أمنية صالحة أقرب إلى التحقق.","وأن يكتب عيدًا مباركًا عامرًا بالخير."]
+  },
+  "eid-adha":{
+    label:"عيد الأضحى",
+    title:"عيد الأضحى مبارك",
+    headlines:["عيد الأضحى مبارك","عيد الأضحى سعيد","عيد التضحية والبركة","يوم الرحمة والقبول","عيد خير وسلام","بركة عيد الأضحى"],
+    openings:["في هذا العيد المبارك","مع بركة عيد الأضحى","في يوم التضحية والرحمة","مع نفحات هذا العيد العظيم","في أيام الخير والذكر","مع فرحة عيد الأضحى"],
+    blessings:["نسأل الله أن يتقبل النيات الصالحة، وأن يبارك في العمل والرزق","نسأل الله أن يجعل هذا العيد سببًا للرحمة والمغفرة والقبول","نسأل الله أن يطهّر القلب، ويزيد الإيمان، ويفتح أبواب الخير","نسأل الله أن يرزق صدق النية، وحسن العمل، وبركة لا تنقطع","نسأل الله أن يجعل أيام العيد مليئة بالسكينة والبشائر الطيبة"],
+    closings:["وأن يكتب خيرًا واسعًا وطمأنينة دائمة.","وأن يجعل القادم أقرب إلى رضاه وأجمل ببركته.","وأن يحفظ القلب بالإيمان ويملأ الطريق بالنور.","وأن يرزق قبولًا جميلًا وفرحًا مباركًا.","وأن يجعل كل خطوة في الخير محفوظة ومباركة."]
+  },
+  "daily":{
+    label:"يوميًا",
+    title:"دعاء لكل يوم",
+    headlines:["نور في القلب","يوم مبارك","سلام وطمأنينة","بركة هذا اليوم","رحمة من الله","خير ونور","دعاء جميل لهذا اليوم"],
+    openings:["في هذا اليوم","مع بداية هذا اليوم","في كل لحظة من هذا اليوم","مع نور الصباح","في طريق اليوم الجديد","مع هدوء هذا اليوم"],
+    blessings:["نسأل الله أن يرزق القلب سكينة، والطريق نورًا، والعمل بركة","نسأل الله أن يفتح أبواب الخير، ويصرف كل ضيق وهم","نسأل الله أن يجعل اليوم خفيفًا على القلب، مليئًا بالخير والرحمة","نسأل الله أن يبارك في الوقت والرزق، وأن ييسر كل أمر","نسأل الله أن يمنح طمأنينة صادقة وقوة جميلة وصبرًا مباركًا"],
+    closings:["وأن يجعل نهاية اليوم أجمل مما بدأ.","وأن يكتب فيه خيرًا ظاهرًا وخفيًا.","وأن يرزق رضا القلب وحسن التوكل.","وأن يحفظ من كل سوء ويفتح طريق الخير.","وأن يجعل كل دعاء قريبًا وكل خطوة مباركة."]
+  }
 };
+function cleanPersonalName(value){
+  return String(value||"")
+    .replace(/أخي الكريم\s*\/\s*أختي الكريمة/g,"")
+    .replace(/أخي الكريم/g,"")
+    .replace(/أختي الكريمة/g,"")
+    .replace(/أخي/g,"")
+    .replace(/أختي/g,"")
+    .replace(/الأخ/g,"")
+    .replace(/الأخت/g,"")
+    .replace(/يا\s+/g,"")
+    .replace(/[،,]+$/g,"")
+    .trim();
+}
+function withNamePrefix(name,text){
+  const clean=cleanPersonalName(name);
+  if(!clean)return text;
+  return clean+"، "+text;
+}
+function pickPersonalPart(category,part){
+  const tpl=personalizedTemplates[category]||personalizedTemplates.jumuah;
+  const list=tpl[part]||[];
+  if(!list.length)return "";
+  const key="barakaway_personal_"+part+"_index_ar_"+category;
+  let index=parseInt(localStorage.getItem(key)||"-1",10);
+  if(!Number.isFinite(index))index=-1;
+  index=(index+1)%list.length;
+  localStorage.setItem(key,String(index));
+  return list[index];
+}
 function selectPersonalHeadline(category){
 const tpl=personalizedTemplates[category]||personalizedTemplates.jumuah;
 const list=tpl.headlines||[tpl.title];
-const key="barakaway_personal_headline_index_"+category;
+const key="barakaway_personal_headline_index_ar_"+category;
 let index=parseInt(localStorage.getItem(key)||"-1",10);
 if(!Number.isFinite(index))index=-1;
 index=(index+1)%list.length;
@@ -406,14 +470,12 @@ return list[index];
 }
 function selectPersonalText(category,name){
 const tpl=personalizedTemplates[category]||personalizedTemplates.jumuah;
-const list=tpl.texts||[];
-if(!list.length)return name+", ، ليمنحكم الله نورًا وطمأنينة ودعوات مقبولة وبركة ثابتة.";
-const key="barakaway_personal_text_index_"+category;
-let index=parseInt(localStorage.getItem(key)||"-1",10);
-if(!Number.isFinite(index))index=-1;
-index=(index+1)%list.length;
-localStorage.setItem(key,String(index));
-return list[index](name);
+if(!tpl)return withNamePrefix(name,"نسأل الله أن يرزقكم الخير والسكينة والبركة.");
+const opening=pickPersonalPart(category,"openings");
+const blessing=pickPersonalPart(category,"blessings");
+const closing=pickPersonalPart(category,"closings");
+const text=[opening,blessing,closing].filter(Boolean).join("، ").replace(/،\s*وأن/g,"، وأن");
+return withNamePrefix(name,text||"نسأل الله أن يرزقكم الخير والسكينة والبركة.");
 }
 function getNextPersonalImage(){let index=parseInt(localStorage.getItem("barakaway_personal_card_index")||"0",10);if(!Number.isFinite(index)||index<0)index=0;const image=PERSONAL_CARD_IMAGES[index%PERSONAL_CARD_IMAGES.length];localStorage.setItem("barakaway_personal_card_index",String((index+1)%PERSONAL_CARD_IMAGES.length));return image;}
 let currentGreeting=greetings[0];
@@ -425,14 +487,13 @@ function getTodayGreeting(){const list=orderedGreetings();const dayIndex=Math.fl
 function updateToday(){return;}
 function renderCards(filter){const root=document.getElementById("cards");const list=orderedGreetings().filter(function(item){return filter==="all"||item.category===filter;});root.innerHTML=list.map(function(item){return `<article class="greeting-card" data-category="${item.category}"><div class="card-art"><img class="card-image" src="${item.image}" alt="${item.title}" loading="lazy"><div class="card-image-overlay"></div><div class="card-brand-badge"><img src="${LOGO_PATH}" alt="BarakaWay"></div><div class="card-category-badge">${item.label}</div><div class="card-site-mark">barakaway.app</div></div><div class="card-body"><h3 class="card-title">${item.title}</h3><p class="card-text">${item.text}</p></div><div class="card-actions"><button class="action-btn" type="button" onclick="openCard('${item.id}')">تكبير</button><button class="action-btn" type="button" onclick="copyCard('${item.id}')">نسخ</button><button class="action-btn primary" type="button" onclick="shareCard('${item.id}')">مشاركة</button></div></article>`;}).join("");}
 function findGreeting(id){return greetings.find(function(item){return item.id===id;})||greetings[0];}
-function generatePersonal(){saveName();const name=(document.getElementById("generatorName").value||"").trim()||"أخي الكريم / أختي الكريمة";const cat=document.getElementById("generatorCategory").value;const tpl=personalizedTemplates[cat]||personalizedTemplates.jumuah;currentGreeting={id:"personal",category:cat,label:tpl.label,title:tpl.title,headline:selectPersonalHeadline(cat),text:selectPersonalText(cat,name),image:getNextPersonalImage(),personalName:name};openModal(currentGreeting);}
+function generatePersonal(){saveName();const name=cleanPersonalName((document.getElementById("generatorName").value||"").trim());const cat=document.getElementById("generatorCategory").value;const tpl=personalizedTemplates[cat]||personalizedTemplates.jumuah;currentGreeting={id:"personal",category:cat,label:tpl.label,title:tpl.title,headline:selectPersonalHeadline(cat),text:selectPersonalText(cat,name),image:getNextPersonalImage(),personalName:name};openModal(currentGreeting);}
 function regeneratePersonal(){
 if(currentGreeting&&currentGreeting.id==="personal"){
 const currentCategory=currentGreeting.category||"jumuah";
-const currentName=currentGreeting.personalName||(document.getElementById("generatorName").value||"").trim()||"أخي الكريم / أختي الكريمة";
+const currentName=cleanPersonalName(currentGreeting.personalName||(document.getElementById("generatorName").value||"").trim());
 
 const tpl=personalizedTemplates[currentCategory]||personalizedTemplates.jumuah;
-const list=tpl.texts||[];
 
 let headline=currentGreeting.headline||currentGreeting.title;
 let headlineTries=0;
@@ -447,7 +508,7 @@ let text=currentGreeting.text;
 let tries=0;
 
 while(text===currentGreeting.text&&tries<12){
-text=list[Math.floor(Math.random()*list.length)](currentName);
+text=selectPersonalText(currentCategory,currentName);
 tries++;
 }
 

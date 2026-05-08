@@ -387,93 +387,106 @@ const greetings=[
   }
 ];
 
-const personalizedTemplates={
-  jumuah:{
-    label:"Juma",
-    title:"Juma muborak",
-    headlines:["Juma muborak","Barakali Juma","Nurli Juma","Juma — baraka kuni","Tinchlikli Juma"],
-    texts:[
-      function(name){return name+", aziz birodar, Alloh ushbu juma kuningizni nur, xotirjamlik, qabul bo‘lgan duolar va oilangiz uchun baraka bilan to‘ldirsin.";},
-      function(name){return name+", barakali juma qalbingizga iymon, uyingizga tinchlik, ishlaringizga baraka, duolaringizga esa qabul ato etsin.";},
-      function(name){return name+", ushbu Juma kuni Alloh iymoningizni mustahkamlasin, qalbingizni poklasin va sizga yaxshilik eshiklarini ochsin.";},
-      function(name){return name+", Juma muborak. Alloh sizga nurli kun, xotirjam qalb, halol rizq va oilangizga himoya ato etsin.";},
-      function(name){return name+", bu juma siz uchun rahmat, mag‘firat, xushxabar va hayotingizda davomli baraka sababchisi bo‘lsin.";},
-      function(name){return name+", Alloh duolaringizni qabul qilsin, sabringizni mustahkamlasin, qalbingizni nurga to‘ldirsin va bu kunni barakali qilsin.";}
-    ]
-  },
-  ramadan:{
-    label:"Ramazon",
-    title:"Ramazon muborak",
-    headlines:["Ramazon muborak","Barakali Ramazon","Muqaddas Ramazon","Rahmat oyi","Ramazon — nur oyi"],
-    texts:[
-      function(name){return name+", muqaddas Ramazon iymoningizni mustahkamlab, qalbingizni poklab, uyingizni baraka bilan to‘ldirsin va sizni Alloh rahmatiga yaqinlashtirsin.";},
-      function(name){return name+", Ramazon muborak. Alloh ro‘zangizni, duolaringizni, ezgu amallaringizni qabul qilsin va oilangizga tinchlik ato etsin.";},
-      function(name){return name+", bu muborak oy uyingizga ruhiy kuch, mag‘firat, pok niyatlar va xotirjamlik olib kelsin.";},
-      function(name){return name+", Alloh Ramazonni siz uchun nur, qabul, himoya, saxovat va foydali o‘zgarishlar oyi qilsin.";},
-      function(name){return name+", Ramazonning har kuni sizni Allohga yaqinlashtirsin, qalbingizni mustahkamlasin va baraka eshiklarini ochsin.";},
-      function(name){return name+", bu oyning ro‘zasi, namozlari va ezgu amallari qabul bo‘lsin, uyingiz rahmat va quvonchga to‘lsin.";}
-    ]
-  },
-  "eid-fitr":{
-    label:"Ramazon Hayiti",
-    title:"Ramazon Hayiti muborak",
-    headlines:["Ramazon Hayiti muborak","Iyd al-Fitr muborak","Fitr bayrami","Nurli Ramazon Hayiti","Quvonch va rahmat kuni"],
-    texts:[
-      function(name){return name+", Ramazon Hayiti muborak. Alloh ro‘zangizni, duolaringizni va ezgu amallaringizni qabul qilib, uyingizni quvonchga to‘ldirsin.";},
-      function(name){return name+", bu nurli bayram oilangizga tinchlik, rahmat, quvonch, mag‘firat va mo‘l baraka olib kelsin.";},
-      function(name){return name+", Alloh Ramazondagi sabringiz uchun ajr bersin, ibodatlaringizni qabul qilsin va sizga xushxabarlar ato etsin.";},
-      function(name){return name+", Ramazon Hayiti sizga va oilangizga muborak bo‘lsin. Uyingizda nur, ahillik, farovonlik va Alloh rahmati bo‘lsin.";},
-      function(name){return name+", bayram kuni yangi ezgu amallar, pok niyatlar, quvonch va qabul bo‘lgan duolar boshlanishi bo‘lsin.";},
-      function(name){return name+", Alloh oilangizni asrasin, iymoningizni mustahkamlasin, ro‘zangizni qabul qilsin va hayotingizni xotirjamlik hamda baraka bilan to‘ldirsin.";}
-    ]
-  },
-  "eid-adha":{
-    label:"Qurbon Hayiti",
-    title:"Qurbon Hayiti muborak",
-    headlines:["Qurbon Hayiti muborak","Iyd al-Adha muborak","Qurbonlik bayrami","Barakali Qurbon Hayiti","Rahmat va baraka kuni"],
-    texts:[
-      function(name){return name+", Qurbon Hayiti muborak. Alloh ezgu niyatlaringizni qabul qilib, uyingizni tinchlik, farovonlik va baraka bilan to‘ldirsin.";},
-      function(name){return name+", bu muqaddas bayram oilangizga rahmat, himoya, saxovat, xotirjamlik va ezgu amallarning qabulini olib kelsin.";},
-      function(name){return name+", Alloh iymoningizni mustahkamlasin, qalbingizni poklasin, qurbonligingizni qabul qilsin va yaxshilik hamda rizq eshiklarini ochsin.";},
-      function(name){return name+", Qurbon Hayiti muborak. Uyingizda birlik, hurmat, mehr-shafqat va Allohning barakasi bo‘lsin.";},
-      function(name){return name+", bu bayram mag‘firat, oilaviy iliqlik, xushxabarlar va davomli baraka sababchisi bo‘lsin.";},
-      function(name){return name+", Alloh duolaringizni qabul qilsin, sabringizni mustahkamlasin, yaqinlaringizni asrasin va pok, barakali rizq ato etsin.";}
-    ]
-  },
-  daily:{
-    label:"Har kuni",
-    title:"Har kunlik duo",
-    headlines:["Qalbingizga nur","Kuningiz barakali bo‘lsin","Uyingizga tinchlik","Bugungi kuningiz barakali bo‘lsin","Bugun sizga xotirjamlik","Alloh rahmati uyingizga bo‘lsin","Yo‘lingizga yaxshilik va nur"],
-    texts:[
-      function(name){return name+", Alloh bugun sizga xotirjamlik, himoya, foydali ishlar, halol rizq va qalbingizga nur ato etsin.";},
-      function(name){return name+", bu kun baraka, to‘g‘ri qarorlar, ichki xotirjamlik va Allohning rahmati bilan o‘tsin.";},
-      function(name){return name+", Alloh ishlaringizni yengil qilsin, yomonlikdan asrasin, iymoningizni mustahkamlasin va yaxshilikka yo‘naltirsin.";},
-      function(name){return name+", qalbingizda xotirjamlik, uyingizda tinchlik, ishlaringizda foyda, yo‘lingizda esa Alloh himoyasi bo‘lsin.";},
-      function(name){return name+", Alloh sizga yaxshilik eshiklarini ochsin, aniqlik, kuch, halol rizq va kuningizga go‘zal yakun ato etsin.";},
-      function(name){return name+", bugungi kuningiz nur, shukr, foydali amallar va qabul bo‘lgan duolar bilan to‘lsin.";}
-    ]
-  }
+const personalHeadlinePools={
+  jumuah:{label:"Juma",title:"Juma muborak",headlines:["Juma muborak","Barakali Juma","Nurli Juma","Juma — rahmat kuni","Juma — baraka kuni","Duo qabuliga yaqin kun","Qalbga sokinlik Juma","Nur va xotirjamlik kuni","Rahmat eshiklari ochiq kun","Juma nuri qalbga yetib borsin","Xayrli Juma nafasi","Sabr va shukrga to‘la Juma"]},
+  ramadan:{label:"Ramazon",title:"Ramazon muborak",headlines:["Ramazon muborak","Barakali Ramazon","Muqaddas Ramazon","Rahmat oyi","Ramazon — nur oyi","Mag‘firat oyi","Duo va ibodat oyi","Sabr va shukr oyi","Qalb poklanadigan oy","Qur’on nuri bilan kelgan oy","Kabuliyatga yaqin oy","Baraka eshiklari ochiq oy"]},
+  "eid-fitr":{label:"Ramazon Hayiti",title:"Ramazon Hayiti muborak",headlines:["Ramazon Hayiti muborak","Iyd al-Fitr muborak","Fitr bayrami","Rahmat va shukr kuni","Qabul bo‘lgan amallar kuni","Nurli Ramazon Hayiti","Barakali bayram kuni","Qalb quvonchi bayrami","Mag‘firat va umid kuni","Shukr bilan kelgan bayram","Yangi yaxshiliklar boshlanishi","Sokin quvonch bayrami"]},
+  "eid-adha":{label:"Qurbon Hayiti",title:"Qurbon Hayiti muborak",headlines:["Qurbon Hayiti muborak","Iyd al-Adha muborak","Qurbonlik bayrami","Ixlos va taqvo kuni","Rahmat va baraka kuni","Saxovat va shukr bayrami","Nurli Qurbon Hayiti","Qabuliyatga yaqin kun","Alloh roziligiga eltuvchi kun","Sokinlik va baraka bayrami","Pok niyatlar bayrami","Taqvo bilan kelgan bayram"]},
+  daily:{label:"Har kuni",title:"Har kunlik duo",headlines:["Qalbga nur","Bugungi kun barakali bo‘lsin","Sokin va xayrli kun","Allohning rahmati yaqin bo‘lsin","Yo‘lga nur va osonlik","Bugun qalb tinch bo‘lsin","Barakali tong","Xayrli qarorlar kuni","Duo va shukr kuni","Ichki xotirjamlik","Rizq va rahmat kuni","Kunning har lahzasiga baraka"]}
 };
-function selectPersonalHeadline(category){
-const tpl=personalizedTemplates[category]||personalizedTemplates.jumuah;
-const list=tpl.headlines||[tpl.title];
-const key="barakaway_personal_headline_index_"+category;
-let index=parseInt(localStorage.getItem(key)||"-1",10);
-if(!Number.isFinite(index))index=-1;
-index=(index+1)%list.length;
-localStorage.setItem(key,String(index));
-return list[index];
+
+const personalOpenings=[
+  "Alloh bu kunni rahmat, nur va xotirjamlik bilan boshlatsin",
+  "Alloh qalbni sokin, niyatni pok va yo‘lni ravshan qilsin",
+  "Alloh har bir yaxshi niyatni qabulga yaqin qilsin",
+  "Alloh ko‘ngildagi og‘irliklarni yengillashtirib, o‘rniga umid bersin",
+  "Alloh bugungi lahzalarni foydali amal va go‘zal xotirjamlikka aylantirsin",
+  "Alloh ichki tinchlik, mustahkam iymon va halol baraka ato etsin",
+  "Alloh har bir qadamni xayrga, har bir qarorni hikmatga bog‘lasin",
+  "Alloh dildagi sokin duolarni eng xayrli tarzda qabul qilsin",
+  "Alloh qalbga nur, fikrga ravshanlik va hayotga tartib bersin",
+  "Alloh tashvishlarni kamaytirib, shukr va sabrni ziyoda qilsin",
+  "Alloh bugungi kunni himoya, rahmat va baraka bilan o‘rasin",
+  "Alloh har bir yashirin ehtiyojni rahmati bilan yengillashtirsin",
+  "Alloh qalbni O‘z zikri bilan tiriltirib, yo‘lni yaxshilikka ochsin",
+  "Alloh niyatlarni tozalab, amallarni ixlos bilan bezasin",
+  "Alloh har bir sinovni yengillik va daraja sababiga aylantirsin",
+  "Alloh bugungi kunni zararli narsalardan uzoq, foydali eshiklardan yaqin qilsin",
+  "Alloh ko‘ngilga taskin, tanaga quvvat va rizqqa halollik bersin",
+  "Alloh har bir daqiqani rahmat, hidayat va baraka bilan to‘ldirsin"
+];
+
+const personalBlessings=[
+  "duolarni qabul qilib, qalbga chuqur xotirjamlik joylasin",
+  "rizqni halol va barakali, yo‘lni esa xayrli qilsin",
+  "iymonni mustahkam, sabrni go‘zal va shukrni davomli qilsin",
+  "ko‘rinmas xavflardan asrab, yaxshilik eshiklarini ochsin",
+  "har bir qiyinchilikni yengillikka, har bir kutishni xayrli javobga aylantirsin",
+  "qalbdagi dardlarni yengillashtirib, o‘rniga nur va ishonch bersin",
+  "foydali ilm, toza niyat va qabul bo‘ladigan amal nasib qilsin",
+  "tilni zikrga, qalbni shukrga va amalni ixlosga yaqin qilsin",
+  "o‘tgan kamchiliklarni kechirib, oldindagi kunlarni barakali qilsin",
+  "har bir yaxshi ishni oson, har bir zararli yo‘lni uzoq qilsin",
+  "yashirin duolarni eshitib, eng yaxshi vaqtida eng yaxshi javob bersin",
+  "ruhga yengillik, fikrga aniqlik va qalbga ishonch bersin",
+  "xayrli qarorlar, pok niyatlar va osoyishta natijalar nasib qilsin",
+  "kundalik ishlarni foydali, vaqtni barakali va qalbni hushyor qilsin",
+  "rahmatini yaqin, himoyasini mustahkam va barakasini keng qilsin",
+  "har bir yaxshi niyatni davomli savobga aylantirsin",
+  "qalbni hasaddan, tilni og‘ir so‘zdan va yo‘lni adashishdan saqlasin",
+  "hayotni Alloh roziligiga yaqinlashtiradigan go‘zal imkoniyatlar bilan bezasin"
+];
+
+const personalClosings=[
+  "Bu kun xayr, nur va sokinlik bilan yakun topsin.",
+  "Har bir lahza baraka va Allohning rahmatiga yaqin bo‘lsin.",
+  "Qalbda umid, tilda shukr va yo‘lda yaxshilik davom etsin.",
+  "Allohning panohi, rahmati va hidayati doimo yaqin bo‘lsin.",
+  "Duo, sabr va shukr bu kunning eng go‘zal bezagi bo‘lsin.",
+  "Bugun boshlangan yaxshilik uzoq davom etadigan barakaga aylansin.",
+  "Har bir natija xayrli, har bir yo‘l nurli bo‘lsin.",
+  "Alloh bu kunni qabul bo‘lgan duolar va tinch qalb bilan bezasin."
+];
+
+function normalizePersonalName(value){
+  return String(value||"").replace(/\s+/g," ").trim();
 }
-function selectPersonalText(category,name){
-const tpl=personalizedTemplates[category]||personalizedTemplates.jumuah;
-const list=tpl.texts||[];
-if(!list.length)return name+", Alloh sizga yaxshilik, himoya va baraka ato etsin.";
-const key="barakaway_personal_text_index_uz_"+category;
-let index=parseInt(localStorage.getItem(key)||"-1",10);
-if(!Number.isFinite(index))index=-1;
-index=(index+1)%list.length;
-localStorage.setItem(key,String(index));
-return list[index](name);
+function composePersonalGreeting(name,opening,blessing,closing){
+  const cleanName=normalizePersonalName(name);
+  const body=[opening,blessing].filter(Boolean).join(", ").replace(/\s+/g," ").trim()+". "+closing;
+  if(cleanName){return cleanName+", "+body.charAt(0).toLowerCase()+body.slice(1);}
+  return body.charAt(0).toUpperCase()+body.slice(1);
+}
+function readPersonalHistory(key){
+  try{const parsed=JSON.parse(localStorage.getItem(key)||"[]");return Array.isArray(parsed)?parsed:[];}catch(e){return [];}
+}
+function writePersonalHistory(key,value,limit){
+  const history=readPersonalHistory(key).filter(function(item){return item!==value;});
+  history.unshift(value);
+  localStorage.setItem(key,JSON.stringify(history.slice(0,limit)));
+}
+function chooseFreshItem(list,key,limit,currentValue){
+  if(!Array.isArray(list)||!list.length)return "";
+  const history=readPersonalHistory(key).filter(function(item){return list.indexOf(item)!==-1;});
+  let pool=list.filter(function(item){return item!==currentValue&&history.indexOf(item)===-1;});
+  if(!pool.length)pool=list.filter(function(item){return item!==currentValue;});
+  if(!pool.length)pool=list.slice();
+  const selected=pool[Math.floor(Math.random()*pool.length)];
+  writePersonalHistory(key,selected,Math.min(limit,Math.max(1,list.length-1)));
+  return selected;
+}
+function selectPersonalHeadline(category,currentValue){
+  const tpl=personalHeadlinePools[category]||personalHeadlinePools.jumuah;
+  return chooseFreshItem(tpl.headlines||[tpl.title],"barakaway_personal_headline_history_uz_"+category,10,currentValue||"")||tpl.title;
+}
+function selectPersonalText(category,name,currentValue){
+  const opening=chooseFreshItem(personalOpenings,"barakaway_personal_opening_history_uz_"+category,12,currentValue||"");
+  const blessing=chooseFreshItem(personalBlessings,"barakaway_personal_blessing_history_uz_"+category,12,currentValue||"");
+  const closing=chooseFreshItem(personalClosings,"barakaway_personal_closing_history_uz_"+category,6,currentValue||"");
+  return composePersonalGreeting(name,opening,blessing,closing);
+}
+function getPersonalTemplate(category){
+  return personalHeadlinePools[category]||personalHeadlinePools.jumuah;
 }
 function getNextPersonalImage(){
 let index=parseInt(localStorage.getItem("barakaway_personal_card_index_uz")||"0",10);
@@ -491,29 +504,26 @@ function getTodayGreeting(){const list=orderedGreetings();const dayIndex=Math.fl
 function updateToday(){return;}
 function renderCards(filter){const root=document.getElementById("cards");const list=orderedGreetings().filter(function(item){return filter==="all"||item.category===filter;});root.innerHTML=list.map(function(item){return `<article class="greeting-card" data-category="${item.category}"><div class="card-art"><img class="card-image" src="${item.image}" alt="${item.title}" loading="lazy"><div class="card-image-overlay"></div><div class="card-brand-badge"><img src="${LOGO_PATH}" alt="BarakaWay"></div><div class="card-category-badge">${item.label}</div><div class="card-site-mark">barakaway.app</div></div><div class="card-body"><h3 class="card-title">${item.title}</h3><p class="card-text">${item.text}</p></div><div class="card-actions"><button class="action-btn" type="button" onclick="openCard('${item.id}')">Zoom</button><button class="action-btn" type="button" onclick="copyCard('${item.id}')">Nusxalash</button><button class="action-btn primary" type="button" onclick="shareCard('${item.id}')">Ulashish</button></div></article>`;}).join("");}
 function findGreeting(id){return greetings.find(function(item){return item.id===id;})||greetings[0];}
-function generatePersonal(){saveName();const name=(document.getElementById("generatorName").value||"").trim()||"Aziz birodar / aziz opa-singil";const cat=document.getElementById("generatorCategory").value;const tpl=personalizedTemplates[cat]||personalizedTemplates.jumuah;currentGreeting={id:"personal",category:cat,label:tpl.label,title:tpl.title,headline:selectPersonalHeadline(cat),text:selectPersonalText(cat,name),image:getNextPersonalImage(),personalName:name};openModal(currentGreeting);}
+function generatePersonal(){saveName();const name=normalizePersonalName(document.getElementById("generatorName").value||"");const cat=document.getElementById("generatorCategory").value;const tpl=getPersonalTemplate(cat);currentGreeting={id:"personal",category:cat,label:tpl.label,title:tpl.title,headline:selectPersonalHeadline(cat),text:selectPersonalText(cat,name),image:getNextPersonalImage(),personalName:name};openModal(currentGreeting);}
 function regeneratePersonal(){
 if(currentGreeting&&currentGreeting.id==="personal"){
 const currentCategory=currentGreeting.category||"jumuah";
-const currentName=currentGreeting.personalName||(document.getElementById("generatorName").value||"").trim()||"Aziz birodar / aziz opa-singil";
+const currentName=normalizePersonalName(currentGreeting.personalName||(document.getElementById("generatorName").value||""));
 
-const tpl=personalizedTemplates[currentCategory]||personalizedTemplates.jumuah;
+const tpl=getPersonalTemplate(currentCategory);
 const list=tpl.texts||[];
 
-let headline=currentGreeting.headline||currentGreeting.title;
+let headline=selectPersonalHeadline(currentCategory);
 let headlineTries=0;
-const headlineList=tpl.headlines||[tpl.title];
-
 while(headline===currentGreeting.headline&&headlineTries<12){
-headline=headlineList[Math.floor(Math.random()*headlineList.length)];
+headline=selectPersonalHeadline(currentCategory);
 headlineTries++;
 }
 
-let text=currentGreeting.text;
+let text=selectPersonalText(currentCategory,currentName,currentGreeting.text);
 let tries=0;
-
 while(text===currentGreeting.text&&tries<12){
-text=list[Math.floor(Math.random()*list.length)](currentName);
+text=selectPersonalText(currentCategory,currentName,currentGreeting.text);
 tries++;
 }
 
