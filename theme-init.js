@@ -1204,3 +1204,249 @@ html[class*="premium-theme-"] [data-barakaway-logo-lock] *{
   }, 500);
 })();
 
+
+(function(){
+  const STYLE_ID = "barakaway-carbon-fiber-final-fix";
+  const CSS = `
+/* ===== BARAKAWAY CARBON FIBER FINAL FIX ===== */
+/* Only carbon theme/card is changed. Other themes, logo protection and existing logic are untouched. */
+
+:root{
+  --bw-carbon-bg:#050608;
+  --bw-carbon-deep:#0a0d11;
+  --bw-carbon-mid:#151b22;
+  --bw-carbon-silver:rgba(230,238,246,.24);
+  --bw-carbon-silver-soft:rgba(255,255,255,.10);
+}
+
+html.premium-theme-carbon-elite{
+  --bg:#050608;
+  --surface:#0a0d11;
+  --surface-2:#10161d;
+  --surface-3:#1a222b;
+  --border:rgba(230,238,246,.18);
+  --border-2:rgba(255,255,255,.24);
+  --text:#f7fafc;
+  --text-soft:#d5dde7;
+  --text-muted:#9ba8b6;
+  --green:#dfe7ef;
+  --green-strong:#59636e;
+  --green-soft:#f5f7fa;
+  --bw-accent:#dfe7ef;
+  --bw-accent-2:#ffffff;
+  --bw-lux-border-main:rgba(230,238,246,.26);
+  --bw-lux-glow:rgba(210,224,238,.16);
+}
+
+/* Full app carbon texture */
+html.premium-theme-carbon-elite body,
+html.premium-theme-carbon-elite .container,
+html.premium-theme-carbon-elite .hero,
+html.premium-theme-carbon-elite .brand-prayer-hero,
+html.premium-theme-carbon-elite .today-hub,
+html.premium-theme-carbon-elite .about-project-card,
+html.premium-theme-carbon-elite .barakaway-pro-final,
+html.premium-theme-carbon-elite .block,
+html.premium-theme-carbon-elite .card,
+html.premium-theme-carbon-elite .box,
+html.premium-theme-carbon-elite .panel,
+html.premium-theme-carbon-elite .quote,
+html.premium-theme-carbon-elite .empty,
+html.premium-theme-carbon-elite .article,
+html.premium-theme-carbon-elite .category-panel,
+html.premium-theme-carbon-elite .surah-card,
+html.premium-theme-carbon-elite .prayer-card,
+html.premium-theme-carbon-elite .toggle-row,
+html.premium-theme-carbon-elite .meta-item,
+html.premium-theme-carbon-elite .note-box,
+html.premium-theme-carbon-elite .jumuah-box,
+html.premium-theme-carbon-elite .month-day,
+html.premium-theme-carbon-elite .month-head,
+html.premium-theme-carbon-elite .wallet-support,
+html.premium-theme-carbon-elite .home-widget,
+html.premium-theme-carbon-elite .dua-card,
+html.premium-theme-carbon-elite .ayah-card,
+html.premium-theme-carbon-elite .master-audio-wrap,
+html.premium-theme-carbon-elite .reader-side,
+html.premium-theme-carbon-elite .reader-main,
+html.premium-theme-carbon-elite .dua-side,
+html.premium-theme-carbon-elite .dua-main,
+html.premium-theme-carbon-elite .ai-side,
+html.premium-theme-carbon-elite .ai-main,
+html.premium-theme-carbon-elite .player-panel,
+html.premium-theme-carbon-elite .preview-panel,
+html.premium-theme-carbon-elite .app-menu-btn,
+html.premium-theme-carbon-elite .today-action,
+html.premium-theme-carbon-elite .premium-resource-card,
+html.premium-theme-carbon-elite .bottom-app-nav,
+html.premium-theme-carbon-elite .bottom-app-nav-inner{
+  background-color:#07090c !important;
+  background-image:
+    linear-gradient(45deg, rgba(255,255,255,.105) 0 8%, transparent 8% 42%, rgba(255,255,255,.095) 42% 58%, transparent 58% 100%),
+    linear-gradient(-45deg, rgba(255,255,255,.060) 0 8%, transparent 8% 42%, rgba(255,255,255,.052) 42% 58%, transparent 58% 100%),
+    radial-gradient(circle at 82% 12%, rgba(255,255,255,.20), transparent 24%),
+    linear-gradient(135deg,#050608 0%,#111820 50%,#2a333d 100%) !important;
+  background-size:
+    20px 20px,
+    20px 20px,
+    100% 100%,
+    100% 100% !important;
+  background-position:
+    0 0,
+    10px 10px,
+    center,
+    center !important;
+  border-color:rgba(230,238,246,.18) !important;
+  box-shadow:
+    0 24px 58px rgba(0,0,0,.52),
+    0 0 0 1px rgba(255,255,255,.055),
+    inset 0 1px 0 rgba(255,255,255,.14),
+    inset 0 -24px 38px rgba(0,0,0,.38) !important;
+}
+
+/* Carbon selector card on themes-pro page */
+.theme-carbon,
+.theme-grid .theme-card.theme-carbon,
+html[class*="premium-theme-"] .theme-grid .theme-card.theme-carbon,
+html[class*="premium-theme-"] .bw-theme-sample-carbon-elite,
+html[class*="premium-theme-"] .theme-card[data-theme="carbon-elite"]{
+  background-color:#07090c !important;
+  background-image:
+    linear-gradient(45deg, rgba(255,255,255,.14) 0 8%, transparent 8% 42%, rgba(255,255,255,.12) 42% 58%, transparent 58% 100%),
+    linear-gradient(-45deg, rgba(255,255,255,.078) 0 8%, transparent 8% 42%, rgba(255,255,255,.070) 42% 58%, transparent 58% 100%),
+    radial-gradient(circle at 84% 10%, rgba(255,255,255,.24), transparent 24%),
+    linear-gradient(135deg,#050608 0%,#151c24 52%,#4d5965 100%) !important;
+  background-size:
+    20px 20px,
+    20px 20px,
+    100% 100%,
+    100% 100% !important;
+  background-position:
+    0 0,
+    10px 10px,
+    center,
+    center !important;
+  border-color:rgba(230,238,246,.24) !important;
+  box-shadow:
+    0 24px 56px rgba(0,0,0,.46),
+    0 0 0 1px rgba(255,255,255,.06),
+    inset 0 1px 0 rgba(255,255,255,.16),
+    inset 0 -22px 34px rgba(0,0,0,.38) !important;
+}
+
+/* Metallic light sweep only for carbon cards/surfaces */
+.theme-carbon::after,
+html[class*="premium-theme-"] .bw-theme-sample-carbon-elite::after,
+html[class*="premium-theme-"] .theme-card[data-theme="carbon-elite"]::after{
+  content:"";
+  position:absolute;
+  inset:0;
+  background:
+    linear-gradient(118deg,
+      transparent 0%,
+      rgba(255,255,255,.14) 20%,
+      transparent 33%,
+      transparent 66%,
+      rgba(255,255,255,.060) 78%,
+      transparent 100%);
+  pointer-events:none;
+  mix-blend-mode:screen;
+}
+
+/* Carbon buttons */
+html.premium-theme-carbon-elite button:not(.icon-btn):not(.share-close):not(.install-help-close):not(.bottom-app-nav-item),
+html.premium-theme-carbon-elite .btn,
+html.premium-theme-carbon-elite .install-btn,
+html.premium-theme-carbon-elite .support-project-btn,
+html.premium-theme-carbon-elite .copy-wallet-btn,
+html.premium-theme-carbon-elite .quick-btn{
+  background:
+    linear-gradient(180deg,#68727d 0%,#343c45 48%,#1a2027 100%) !important;
+  border-color:rgba(255,255,255,.22) !important;
+  color:#ffffff !important;
+  box-shadow:
+    0 16px 34px rgba(0,0,0,.40),
+    inset 0 1px 0 rgba(255,255,255,.20),
+    inset 0 -12px 24px rgba(0,0,0,.36) !important;
+}
+
+/* Keep protected logo untouched */
+html.premium-theme-carbon-elite .bw-logo-transparent-lock,
+html.premium-theme-carbon-elite .bw-logo-transparent-lock *,
+html.premium-theme-carbon-elite [data-barakaway-logo-lock],
+html.premium-theme-carbon-elite [data-barakaway-logo-lock] *{
+  background:transparent !important;
+  background-color:transparent !important;
+  background-image:none !important;
+  box-shadow:none !important;
+  border-color:transparent !important;
+}
+
+/* ===== END BARAKAWAY CARBON FIBER FINAL FIX ===== */
+`;
+
+  const carbonBg =
+    "linear-gradient(45deg, rgba(255,255,255,.14) 0 8%, transparent 8% 42%, rgba(255,255,255,.12) 42% 58%, transparent 58% 100%)," +
+    "linear-gradient(-45deg, rgba(255,255,255,.078) 0 8%, transparent 8% 42%, rgba(255,255,255,.070) 42% 58%, transparent 58% 100%)," +
+    "radial-gradient(circle at 84% 10%, rgba(255,255,255,.24), transparent 24%)," +
+    "linear-gradient(135deg,#050608 0%,#151c24 52%,#4d5965 100%)";
+
+  function injectCarbonCss(){
+    let style = document.getElementById(STYLE_ID);
+    if(!style){
+      style = document.createElement("style");
+      style.id = STYLE_ID;
+      (document.head || document.documentElement).appendChild(style);
+    }
+    style.textContent = CSS;
+  }
+
+  function lockCarbonCards(){
+    document.querySelectorAll(".theme-card, .theme-carbon, [data-theme='carbon-elite'], .bw-theme-sample-carbon-elite").forEach(function(card){
+      const text = (card.textContent || "").replace(/\s+/g, " ").trim();
+      const isCarbon =
+        card.classList.contains("theme-carbon") ||
+        card.classList.contains("bw-theme-sample-carbon-elite") ||
+        card.getAttribute("data-theme") === "carbon-elite" ||
+        text.indexOf("Карбоновая элита") !== -1 ||
+        text.indexOf("Карбон") !== -1;
+
+      if(!isCarbon) return;
+
+      card.classList.add("theme-carbon");
+      card.classList.add("bw-theme-sample-card");
+      card.classList.add("bw-theme-sample-carbon-elite");
+
+      card.style.setProperty("background-color", "#07090c", "important");
+      card.style.setProperty("background-image", carbonBg, "important");
+      card.style.setProperty("background-size", "20px 20px,20px 20px,100% 100%,100% 100%", "important");
+      card.style.setProperty("background-position", "0 0,10px 10px,center,center", "important");
+      card.style.setProperty("border-color", "rgba(230,238,246,.24)", "important");
+      card.style.setProperty("box-shadow", "0 24px 56px rgba(0,0,0,.46),0 0 0 1px rgba(255,255,255,.06),inset 0 1px 0 rgba(255,255,255,.16),inset 0 -22px 34px rgba(0,0,0,.38)", "important");
+    });
+  }
+
+  function run(){
+    injectCarbonCss();
+    lockCarbonCards();
+  }
+
+  run();
+
+  if(document.readyState === "loading"){
+    document.addEventListener("DOMContentLoaded", run);
+  }else{
+    setTimeout(run, 0);
+  }
+
+  window.addEventListener("storage", run);
+  window.addEventListener("barakaway:premium-theme-change", run);
+
+  let count = 0;
+  const timer = setInterval(function(){
+    run();
+    count++;
+    if(count >= 12) clearInterval(timer);
+  }, 350);
+})();
+
