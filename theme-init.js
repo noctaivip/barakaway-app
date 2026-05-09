@@ -1450,3 +1450,36 @@ html.premium-theme-carbon-elite [data-barakaway-logo-lock] *{
   }, 350);
 })();
 
+
+
+(function(){
+  function lockVisualThemeCards(){
+    document.querySelectorAll(".theme-card").forEach(function(card){
+      const txt = (card.textContent || "").toLowerCase();
+
+      if(txt.includes("детская")){
+        card.classList.add("theme-child");
+      }
+
+      if(txt.includes("ночная мечеть")){
+        card.classList.add("theme-night");
+      }
+
+      if(txt.includes("песочная")){
+        card.classList.add("theme-sand");
+      }
+    });
+  }
+
+  lockVisualThemeCards();
+
+  if(document.readyState === "loading"){
+    document.addEventListener("DOMContentLoaded", lockVisualThemeCards);
+  }
+
+  setTimeout(lockVisualThemeCards, 200);
+  setTimeout(lockVisualThemeCards, 800);
+
+  window.addEventListener("barakaway:premium-theme-change", lockVisualThemeCards);
+})();
+
