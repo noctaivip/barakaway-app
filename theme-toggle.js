@@ -16,7 +16,7 @@
         document.body.classList.add(selected + '-mode');
       }
 
-      localStorage.setItem('siteTheme', selected);
+      try{ localStorage.setItem('siteTheme', selected); }catch(e){}
     }
 
     if(switchEl){
@@ -26,9 +26,14 @@
     if(label){
       label.textContent = selected === 'dark' ? 'Light mode' : 'Dark mode';
     }
+
+    if(window.BarakaWayTheme && typeof window.BarakaWayTheme.refresh === 'function'){
+      window.BarakaWayTheme.refresh();
+    }
   }
 
-  const savedTheme = localStorage.getItem('siteTheme') || 'dark';
+  let savedTheme = 'dark';
+  try{ savedTheme = localStorage.getItem('siteTheme') || 'dark'; }catch(e){}
   applyTheme(savedTheme);
 
   if(!switchEl || !label) return;

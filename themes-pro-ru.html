@@ -772,6 +772,33 @@ body.bw-theme-desert-sand{background:radial-gradient(circle at 12% 0%,rgba(255,2
   to{transform:scale(1.035);}
 }
 
+
+/* PRO THEMES PAGE FINAL LOGIC STYLE */
+.theme-card.locked::after{
+  display:none !important;
+}
+.theme-card.active-theme{
+  border-color:rgba(102,198,128,.72) !important;
+  box-shadow:0 0 0 1px rgba(102,198,128,.26),0 24px 58px rgba(76,175,106,.18),inset 0 1px 0 rgba(255,255,255,.08) !important;
+}
+.theme-card.active-theme .theme-chip{
+  background:rgba(76,175,106,.22) !important;
+  border-color:rgba(102,198,128,.44) !important;
+  color:#e7ffed !important;
+}
+.pro-attention,
+.pro-state.pro-attention{
+  animation:barakawayProBlinkRed .42s ease-in-out 0s 8 alternate !important;
+  background:rgba(226,95,95,.22) !important;
+  border-color:rgba(226,95,95,.75) !important;
+  color:#ffdede !important;
+  box-shadow:0 0 0 4px rgba(226,95,95,.12),0 0 24px rgba(226,95,95,.35) !important;
+}
+@keyframes barakawayProBlinkRed{
+  from{transform:scale(1);}
+  to{transform:scale(1.035);}
+}
+
 </style>
 <link rel="stylesheet" href="theme-universal.css">
 </head>
@@ -907,113 +934,7 @@ body.bw-theme-desert-sand{background:radial-gradient(circle at 12% 0%,rgba(255,2
 
 
 
-<script>
-(function(){
-  const PRO_KEY = "barakaway_pro";
-  const THEME_KEY = "barakaway_premium_theme";
-  const proState = document.getElementById("proState");
-  const toast = document.getElementById("toast");
 
-  function isPro(){ return localStorage.getItem(PRO_KEY) === "true"; }
-
-  function showToast(message){
-    if(!toast) return;
-    toast.textContent = message;
-    toast.classList.add("show");
-    clearTimeout(window.__barakawayThemeToast);
-    window.__barakawayThemeToast = setTimeout(function(){ toast.classList.remove("show"); }, 2400);
-  }
-
-  function blinkProStatus(){
-    if(proState){
-      proState.classList.remove("pro-attention");
-      void proState.offsetWidth;
-      proState.classList.add("pro-attention");
-      setTimeout(function(){ proState.classList.remove("pro-attention"); }, 3600);
-    }
-    showToast("PRO не активирован. Активируйте доступ для выбора темы.");
-  }
-
-  function clearThemeClasses(){
-    Array.from(document.body.classList).forEach(function(cls){
-      if(cls.indexOf("bw-theme-") === 0 || cls.indexOf("theme-") === 0){
-        document.body.classList.remove(cls);
-      }
-    });
-  }
-
-  function applyThemeClass(theme){
-    clearThemeClasses();
-    if(theme){
-      document.body.classList.add("bw-theme-" + theme);
-      document.body.classList.add("theme-" + theme);
-    }
-  }
-
-  function readableTheme(theme){
-    const names = {
-      "royal-gold":"Королевское золото",
-      "emerald-quran":"Изумрудный Коран",
-      "violet-noor":"Фиолетовый нур",
-      "rose-soft":"Розовая гармония",
-      "carbon-elite":"Карбоновая элита",
-      "children-soft":"Детская тема",
-      "night-mosque":"Ночная мечеть",
-      "desert-sand":"Песочная классика"
-    };
-    return names[theme] || "Премиальная тема";
-  }
-
-  function syncState(){
-    const active = isPro();
-    const selected = localStorage.getItem(THEME_KEY);
-
-    if(proState){
-      proState.classList.toggle("locked", !active);
-      proState.classList.toggle("active", active);
-      proState.innerHTML = active ? "✅ PRO активирован" : "🔒 PRO не активирован";
-    }
-
-    if(selected){ applyThemeClass(selected); }
-
-    document.querySelectorAll("[data-theme]").forEach(function(card){
-      const theme = card.getAttribute("data-theme");
-      card.classList.toggle("locked", !active);
-      card.classList.toggle("active-theme", active && selected === theme);
-    });
-  }
-
-  function applyTheme(theme){
-    if(!isPro()){
-      blinkProStatus();
-      return;
-    }
-
-    localStorage.setItem(THEME_KEY, theme);
-    applyThemeClass(theme);
-    syncState();
-
-    try{ window.dispatchEvent(new StorageEvent("storage", {key:THEME_KEY, newValue:theme})); }
-    catch(e){ window.dispatchEvent(new Event("storage")); }
-
-    showToast("Тема применена: " + readableTheme(theme));
-  }
-
-  document.querySelectorAll("[data-theme]").forEach(function(card){
-    card.addEventListener("click", function(){ applyTheme(card.getAttribute("data-theme")); });
-  });
-
-  if(proState){
-    proState.addEventListener("click", function(){
-      if(!isPro()){ window.location.href = "pro-ru.html"; }
-    });
-  }
-
-  window.addEventListener("storage", syncState);
-  syncState();
-})();
-</script>
-<script src="bottom-nav.js"></script>
 
 <script src="theme-init.js"></script>
 
@@ -1036,13 +957,15 @@ body.bw-theme-desert-sand{background:radial-gradient(circle at 12% 0%,rgba(255,2
   };
 
   function isPro(){
-    return localStorage.getItem(PRO_KEY) === "true";
+    try{ return localStorage.getItem(PRO_KEY) === "true"; }catch(e){ return false; }
   }
 
   function showToast(message){
     if(!toast) return;
+
     toast.textContent = message;
     toast.classList.add("show");
+
     clearTimeout(window.__barakawayProThemeToast);
     window.__barakawayProThemeToast = setTimeout(function(){
       toast.classList.remove("show");
@@ -1054,14 +977,20 @@ body.bw-theme-desert-sand{background:radial-gradient(circle at 12% 0%,rgba(255,2
       proState.classList.remove("pro-attention");
       void proState.offsetWidth;
       proState.classList.add("pro-attention");
-      setTimeout(function(){ proState.classList.remove("pro-attention"); }, 3400);
+
+      setTimeout(function(){
+        proState.classList.remove("pro-attention");
+      }, 3400);
     }
+
     showToast("PRO не активирован. Активируйте доступ для выбора темы.");
   }
 
-  function syncStatus(){
+  function syncThemeCards(){
     const active = isPro();
-    const current = localStorage.getItem(THEME_KEY) || "";
+    let current = "";
+
+    try{ current = localStorage.getItem(THEME_KEY) || ""; }catch(e){ current = ""; }
 
     if(proState){
       proState.classList.toggle("locked", !active);
@@ -1086,14 +1015,13 @@ body.bw-theme-desert-sand{background:radial-gradient(circle at 12% 0%,rgba(255,2
       return;
     }
 
-    localStorage.setItem(THEME_KEY, theme);
+    if(!theme) return;
 
     if(window.BarakaWayTheme && typeof window.BarakaWayTheme.applyPremiumTheme === "function"){
       window.BarakaWayTheme.applyPremiumTheme(theme);
     }else{
+      try{ localStorage.setItem(THEME_KEY, theme); }catch(e){}
       document.documentElement.classList.add("premium-theme-" + theme);
-      document.body.classList.add("premium-theme-" + theme);
-      document.body.classList.add("bw-theme-" + theme);
     }
 
     try{
@@ -1102,7 +1030,7 @@ body.bw-theme-desert-sand{background:radial-gradient(circle at 12% 0%,rgba(255,2
       window.dispatchEvent(new Event("storage"));
     }
 
-    syncStatus();
+    syncThemeCards();
     showToast("Тема применена: " + (themeNames[theme] || "PRO-тема"));
   }
 
@@ -1117,12 +1045,14 @@ body.bw-theme-desert-sand{background:radial-gradient(circle at 12% 0%,rgba(255,2
 
   if(proState){
     proState.addEventListener("click", function(){
-      if(!isPro()) window.location.href = "pro-ru.html";
+      if(!isPro()){
+        window.location.href = "pro-ru.html";
+      }
     });
   }
 
-  window.addEventListener("storage", syncStatus);
-  syncStatus();
+  window.addEventListener("storage", syncThemeCards);
+  syncThemeCards();
 })();
 </script>
 
