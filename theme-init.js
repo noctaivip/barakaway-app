@@ -160,10 +160,218 @@
 
 
 (function(){
-  const STYLE_ID = "barakaway-final-hard-fix-logo-theme-cards";
-  const CSS = '\n/* ===== BARAKAWAY FINAL HARD FIX: LOGO + THEME SAMPLE CARDS ===== */\n\n/* Theme selector cards are visual samples. Active PRO theme must never recolor them. */\nhtml[class*="premium-theme-"] .theme-grid .theme-card,\nhtml[class*="premium-theme-"] .theme-card[data-theme],\nhtml[class*="premium-theme-"] [data-theme].theme-card{\n  color:#ffffff !important;\n  isolation:isolate !important;\n  overflow:hidden !important;\n}\n\n/* Original theme card */\nhtml[class*="premium-theme-"] .theme-grid .theme-card:nth-child(1),\nhtml[class*="premium-theme-"] .theme-card[data-theme-clear],\nhtml[class*="premium-theme-"] .restore-original-theme-card{\n  background:\n    radial-gradient(circle at 92% 6%,rgba(255,255,255,.10),transparent 30%),\n    linear-gradient(135deg,#111820 0%,#1c2430 58%,#0d1118 100%) !important;\n  border-color:rgba(255,255,255,.14) !important;\n  box-shadow:0 22px 56px rgba(0,0,0,.24), inset 0 1px 0 rgba(255,255,255,.08) !important;\n}\n\n/* Royal Gold card */\nhtml[class*="premium-theme-"] .theme-grid .theme-card:nth-child(2),\nhtml[class*="premium-theme-"] .theme-card[data-theme="royal-gold"],\nhtml[class*="premium-theme-"] [data-theme="royal-gold"].theme-card{\n  background:\n    radial-gradient(circle at 88% 10%,rgba(255,244,190,.50),transparent 32%),\n    radial-gradient(circle at 18% 100%,rgba(215,192,122,.22),transparent 35%),\n    linear-gradient(135deg,#171208 0%,#4b3615 48%,#d7c07a 100%) !important;\n  border-color:rgba(244,220,148,.64) !important;\n  box-shadow:0 22px 56px rgba(157,116,36,.28), inset 0 1px 0 rgba(255,255,255,.14) !important;\n}\n\n/* Emerald Quran card */\nhtml[class*="premium-theme-"] .theme-grid .theme-card:nth-child(3),\nhtml[class*="premium-theme-"] .theme-card[data-theme="emerald-quran"],\nhtml[class*="premium-theme-"] [data-theme="emerald-quran"].theme-card{\n  background:\n    radial-gradient(circle at 88% 10%,rgba(102,198,128,.44),transparent 32%),\n    radial-gradient(circle at 18% 100%,rgba(45,122,70,.28),transparent 35%),\n    linear-gradient(135deg,#061109 0%,#12301d 52%,#4caf6a 100%) !important;\n  border-color:rgba(102,198,128,.64) !important;\n  box-shadow:0 22px 56px rgba(45,122,70,.28), inset 0 1px 0 rgba(255,255,255,.14) !important;\n}\n\n/* Violet Noor card */\nhtml[class*="premium-theme-"] .theme-grid .theme-card:nth-child(4),\nhtml[class*="premium-theme-"] .theme-card[data-theme="violet-noor"],\nhtml[class*="premium-theme-"] [data-theme="violet-noor"].theme-card{\n  background:\n    radial-gradient(circle at 88% 10%,rgba(161,118,255,.48),transparent 32%),\n    radial-gradient(circle at 18% 100%,rgba(64,42,120,.30),transparent 35%),\n    linear-gradient(135deg,#0d0a15 0%,#241a42 52%,#a176ff 100%) !important;\n  border-color:rgba(161,118,255,.64) !important;\n  box-shadow:0 22px 56px rgba(111,77,204,.28), inset 0 1px 0 rgba(255,255,255,.14) !important;\n}\n\n/* Rose Soft card */\nhtml[class*="premium-theme-"] .theme-grid .theme-card:nth-child(5),\nhtml[class*="premium-theme-"] .theme-card[data-theme="rose-soft"],\nhtml[class*="premium-theme-"] [data-theme="rose-soft"].theme-card{\n  background:\n    radial-gradient(circle at 88% 10%,rgba(255,158,199,.50),transparent 32%),\n    radial-gradient(circle at 18% 100%,rgba(182,77,120,.30),transparent 35%),\n    linear-gradient(135deg,#160a12 0%,#401b31 52%,#ff9ec7 100%) !important;\n  border-color:rgba(255,158,199,.64) !important;\n  box-shadow:0 22px 56px rgba(182,77,120,.28), inset 0 1px 0 rgba(255,255,255,.14) !important;\n}\n\n/* Carbon Elite card */\nhtml[class*="premium-theme-"] .theme-grid .theme-card:nth-child(6),\nhtml[class*="premium-theme-"] .theme-card[data-theme="carbon-elite"],\nhtml[class*="premium-theme-"] [data-theme="carbon-elite"].theme-card{\n  background:\n    radial-gradient(circle at 88% 10%,rgba(202,213,224,.30),transparent 32%),\n    radial-gradient(circle at 18% 100%,rgba(89,97,108,.28),transparent 35%),\n    linear-gradient(135deg,#050607 0%,#1a222c 52%,#59616c 100%) !important;\n  border-color:rgba(202,213,224,.50) !important;\n  box-shadow:0 22px 56px rgba(0,0,0,.34), inset 0 1px 0 rgba(255,255,255,.12) !important;\n}\n\n/* Children card */\nhtml[class*="premium-theme-"] .theme-grid .theme-card:nth-child(7),\nhtml[class*="premium-theme-"] .theme-card[data-theme="children-soft"],\nhtml[class*="premium-theme-"] [data-theme="children-soft"].theme-card{\n  background:\n    radial-gradient(circle at 88% 10%,rgba(255,227,241,.50),transparent 32%),\n    radial-gradient(circle at 18% 100%,rgba(135,203,255,.36),transparent 35%),\n    linear-gradient(135deg,#0c1f32 0%,#234d75 52%,#87cbff 100%) !important;\n  border-color:rgba(135,203,255,.64) !important;\n  box-shadow:0 22px 56px rgba(61,139,199,.26), inset 0 1px 0 rgba(255,255,255,.14) !important;\n}\n\n/* Night Mosque card */\nhtml[class*="premium-theme-"] .theme-grid .theme-card:nth-child(8),\nhtml[class*="premium-theme-"] .theme-card[data-theme="night-mosque"],\nhtml[class*="premium-theme-"] [data-theme="night-mosque"].theme-card{\n  background:\n    radial-gradient(circle at 88% 10%,rgba(215,192,122,.30),transparent 32%),\n    radial-gradient(circle at 18% 100%,rgba(118,154,215,.30),transparent 35%),\n    linear-gradient(135deg,#050b13 0%,#10213d 52%,#355d9a 100%) !important;\n  border-color:rgba(118,154,215,.54) !important;\n  box-shadow:0 22px 56px rgba(53,93,154,.26), inset 0 1px 0 rgba(255,255,255,.12) !important;\n}\n\n/* Desert Sand card */\nhtml[class*="premium-theme-"] .theme-grid .theme-card:nth-child(9),\nhtml[class*="premium-theme-"] .theme-card[data-theme="desert-sand"],\nhtml[class*="premium-theme-"] [data-theme="desert-sand"].theme-card{\n  background:\n    radial-gradient(circle at 88% 10%,rgba(255,237,190,.42),transparent 32%),\n    radial-gradient(circle at 18% 100%,rgba(219,174,97,.30),transparent 35%),\n    linear-gradient(135deg,#130c05 0%,#3e2b13 52%,#dbae61 100%) !important;\n  border-color:rgba(255,237,190,.56) !important;\n  box-shadow:0 22px 56px rgba(154,109,45,.26), inset 0 1px 0 rgba(255,255,255,.12) !important;\n}\n\n/* Text inside theme sample cards */\nhtml[class*="premium-theme-"] .theme-grid .theme-card h3,\nhtml[class*="premium-theme-"] .theme-grid .theme-card p,\nhtml[class*="premium-theme-"] .theme-grid .theme-card strong,\nhtml[class*="premium-theme-"] .theme-grid .theme-card .theme-title,\nhtml[class*="premium-theme-"] .theme-grid .theme-card .theme-description{\n  color:#ffffff !important;\n  text-shadow:0 2px 10px rgba(0,0,0,.22) !important;\n}\n\nhtml[class*="premium-theme-"] .theme-grid .theme-card p,\nhtml[class*="premium-theme-"] .theme-grid .theme-card .theme-description{\n  color:rgba(255,255,255,.86) !important;\n}\n\nhtml[class*="premium-theme-"] .theme-grid .theme-card .theme-chip{\n  background:rgba(0,0,0,.26) !important;\n  color:#ffffff !important;\n  border-color:rgba(255,255,255,.22) !important;\n}\n\n/* BarakaWay logo must not receive premium theme background */\nhtml[class*="premium-theme-"] .brand,\nhtml[class*="premium-theme-"] .brand-logo,\nhtml[class*="premium-theme-"] .logo,\nhtml[class*="premium-theme-"] .app-logo,\nhtml[class*="premium-theme-"] .barakaway-logo,\nhtml[class*="premium-theme-"] .brand-title,\nhtml[class*="premium-theme-"] .brand-mark,\nhtml[class*="premium-theme-"] [class*="barakaway-logo"],\nhtml[class*="premium-theme-"] [class*="app-logo"],\nhtml[class*="premium-theme-"] [class*="brand-logo"],\nhtml[class*="premium-theme-"] [class*="logo"]{\n  background:transparent !important;\n  background-color:transparent !important;\n  border-color:transparent !important;\n  box-shadow:none !important;\n  filter:none !important;\n}\n\n/* Logo children must also stay transparent */\nhtml[class*="premium-theme-"] .brand *,\nhtml[class*="premium-theme-"] .brand-logo *,\nhtml[class*="premium-theme-"] .logo *,\nhtml[class*="premium-theme-"] .app-logo *,\nhtml[class*="premium-theme-"] .barakaway-logo *,\nhtml[class*="premium-theme-"] [class*="barakaway-logo"] *,\nhtml[class*="premium-theme-"] [class*="app-logo"] *,\nhtml[class*="premium-theme-"] [class*="brand-logo"] *,\nhtml[class*="premium-theme-"] [class*="logo"] *{\n  background:transparent !important;\n  background-color:transparent !important;\n  box-shadow:none !important;\n}\n\n/* Hide broken/floating desktop share button only in hero/prayer block */\n@media(min-width:900px){\n  html[class*="premium-theme-"] .brand-prayer-hero > .share-btn,\n  html[class*="premium-theme-"] .brand-prayer-hero > .share-button,\n  html[class*="premium-theme-"] .brand-prayer-hero > button[aria-label*="Поделиться"],\n  html[class*="premium-theme-"] .brand-prayer-hero > button[title*="Поделиться"],\n  html[class*="premium-theme-"] .hero > .share-btn,\n  html[class*="premium-theme-"] .hero > .share-button,\n  html[class*="premium-theme-"] .hero > button[aria-label*="Поделиться"],\n  html[class*="premium-theme-"] .hero > button[title*="Поделиться"]{\n    display:none !important;\n  }\n}\n\n/* Light/Dark switch disappears in PRO themes */\nhtml[class*="premium-theme-"] .theme-toggle-label,\nhtml[class*="premium-theme-"] .theme-toggle,\nhtml[class*="premium-theme-"] #themeSwitch,\nhtml[class*="premium-theme-"] label[for="themeSwitch"],\nhtml[class*="premium-theme-"] .switch,\nhtml[class*="premium-theme-"] .mode-toggle,\nhtml[class*="premium-theme-"] .theme-switch{\n  display:none !important;\n}\n\n/* ===== END BARAKAWAY FINAL HARD FIX: LOGO + THEME SAMPLE CARDS ===== */\n';
+  const STYLE_ID = "barakaway-absolute-fix-theme-samples-logo";
+  const CSS = `
+/* ===== BARAKAWAY ABSOLUTE FIX: THEME SAMPLES + LOGO ===== */
 
-  function injectFinalHardFix(){
+/* Logo immunity */
+html[class*="premium-theme-"] .barakaway-logo,
+html[class*="premium-theme-"] .brand-logo,
+html[class*="premium-theme-"] .app-logo,
+html[class*="premium-theme-"] .logo,
+html[class*="premium-theme-"] [data-logo],
+html[class*="premium-theme-"] [class*="barakaway-logo"],
+html[class*="premium-theme-"] [class*="brand-logo"],
+html[class*="premium-theme-"] [class*="app-logo"],
+html[class*="premium-theme-"] [class*="logo"]{
+  background:transparent !important;
+  background-color:transparent !important;
+  box-shadow:none !important;
+  border-color:transparent !important;
+  filter:none !important;
+}
+
+html[class*="premium-theme-"] .barakaway-logo *,
+html[class*="premium-theme-"] .brand-logo *,
+html[class*="premium-theme-"] .app-logo *,
+html[class*="premium-theme-"] .logo *,
+html[class*="premium-theme-"] [data-logo] *,
+html[class*="premium-theme-"] [class*="barakaway-logo"] *,
+html[class*="premium-theme-"] [class*="brand-logo"] *,
+html[class*="premium-theme-"] [class*="app-logo"] *,
+html[class*="premium-theme-"] [class*="logo"] *{
+  background:transparent !important;
+  background-color:transparent !important;
+  box-shadow:none !important;
+  border-color:transparent !important;
+}
+
+/* Theme sample cards immunity */
+html[class*="premium-theme-"] .theme-grid .theme-card,
+html[class*="premium-theme-"] .theme-card[data-theme],
+html[class*="premium-theme-"] .bw-theme-sample-card{
+  color:#fff !important;
+  isolation:isolate !important;
+  overflow:hidden !important;
+}
+
+html[class*="premium-theme-"] .theme-grid .theme-card h3,
+html[class*="premium-theme-"] .theme-grid .theme-card p,
+html[class*="premium-theme-"] .theme-grid .theme-card strong,
+html[class*="premium-theme-"] .bw-theme-sample-card h3,
+html[class*="premium-theme-"] .bw-theme-sample-card p,
+html[class*="premium-theme-"] .bw-theme-sample-card strong{
+  color:#fff !important;
+  text-shadow:0 2px 10px rgba(0,0,0,.24) !important;
+}
+
+html[class*="premium-theme-"] .theme-grid .theme-card p,
+html[class*="premium-theme-"] .bw-theme-sample-card p{
+  color:rgba(255,255,255,.86) !important;
+}
+
+html[class*="premium-theme-"] .theme-grid .theme-card .theme-chip,
+html[class*="premium-theme-"] .bw-theme-sample-card .theme-chip{
+  background:rgba(0,0,0,.26) !important;
+  color:#fff !important;
+  border-color:rgba(255,255,255,.22) !important;
+}
+
+html[class*="premium-theme-"] .bw-theme-sample-original{
+  background:
+    radial-gradient(circle at 92% 6%,rgba(255,255,255,.10),transparent 30%),
+    linear-gradient(135deg,#111820 0%,#1c2430 58%,#0d1118 100%) !important;
+  border-color:rgba(255,255,255,.14) !important;
+}
+
+html[class*="premium-theme-"] .bw-theme-sample-royal-gold,
+html[class*="premium-theme-"] .theme-card[data-theme="royal-gold"]{
+  background:
+    radial-gradient(circle at 88% 10%,rgba(255,244,190,.50),transparent 32%),
+    radial-gradient(circle at 18% 100%,rgba(215,192,122,.22),transparent 35%),
+    linear-gradient(135deg,#171208 0%,#4b3615 48%,#d7c07a 100%) !important;
+  border-color:rgba(244,220,148,.64) !important;
+}
+
+html[class*="premium-theme-"] .bw-theme-sample-emerald-quran,
+html[class*="premium-theme-"] .theme-card[data-theme="emerald-quran"]{
+  background:
+    radial-gradient(circle at 88% 10%,rgba(102,198,128,.44),transparent 32%),
+    radial-gradient(circle at 18% 100%,rgba(45,122,70,.28),transparent 35%),
+    linear-gradient(135deg,#061109 0%,#12301d 52%,#4caf6a 100%) !important;
+  border-color:rgba(102,198,128,.64) !important;
+}
+
+html[class*="premium-theme-"] .bw-theme-sample-violet-noor,
+html[class*="premium-theme-"] .theme-card[data-theme="violet-noor"]{
+  background:
+    radial-gradient(circle at 88% 10%,rgba(161,118,255,.48),transparent 32%),
+    radial-gradient(circle at 18% 100%,rgba(64,42,120,.30),transparent 35%),
+    linear-gradient(135deg,#0d0a15 0%,#241a42 52%,#a176ff 100%) !important;
+  border-color:rgba(161,118,255,.64) !important;
+}
+
+html[class*="premium-theme-"] .bw-theme-sample-rose-soft,
+html[class*="premium-theme-"] .theme-card[data-theme="rose-soft"]{
+  background:
+    radial-gradient(circle at 88% 10%,rgba(255,158,199,.50),transparent 32%),
+    radial-gradient(circle at 18% 100%,rgba(182,77,120,.30),transparent 35%),
+    linear-gradient(135deg,#160a12 0%,#401b31 52%,#ff9ec7 100%) !important;
+  border-color:rgba(255,158,199,.64) !important;
+}
+
+html[class*="premium-theme-"] .bw-theme-sample-carbon-elite,
+html[class*="premium-theme-"] .theme-card[data-theme="carbon-elite"]{
+  background:
+    radial-gradient(circle at 88% 10%,rgba(202,213,224,.30),transparent 32%),
+    radial-gradient(circle at 18% 100%,rgba(89,97,108,.28),transparent 35%),
+    linear-gradient(135deg,#050607 0%,#1a222c 52%,#59616c 100%) !important;
+  border-color:rgba(202,213,224,.50) !important;
+}
+
+html[class*="premium-theme-"] .bw-theme-sample-children-soft,
+html[class*="premium-theme-"] .theme-card[data-theme="children-soft"]{
+  background:
+    radial-gradient(circle at 88% 10%,rgba(255,227,241,.50),transparent 32%),
+    radial-gradient(circle at 18% 100%,rgba(135,203,255,.36),transparent 35%),
+    linear-gradient(135deg,#0c1f32 0%,#234d75 52%,#87cbff 100%) !important;
+  border-color:rgba(135,203,255,.64) !important;
+}
+
+html[class*="premium-theme-"] .bw-theme-sample-night-mosque,
+html[class*="premium-theme-"] .theme-card[data-theme="night-mosque"]{
+  background:
+    radial-gradient(circle at 88% 10%,rgba(215,192,122,.30),transparent 32%),
+    radial-gradient(circle at 18% 100%,rgba(118,154,215,.30),transparent 35%),
+    linear-gradient(135deg,#050b13 0%,#10213d 52%,#355d9a 100%) !important;
+  border-color:rgba(118,154,215,.54) !important;
+}
+
+html[class*="premium-theme-"] .bw-theme-sample-desert-sand,
+html[class*="premium-theme-"] .theme-card[data-theme="desert-sand"]{
+  background:
+    radial-gradient(circle at 88% 10%,rgba(255,237,190,.42),transparent 32%),
+    radial-gradient(circle at 18% 100%,rgba(219,174,97,.30),transparent 35%),
+    linear-gradient(135deg,#130c05 0%,#3e2b13 52%,#dbae61 100%) !important;
+  border-color:rgba(255,237,190,.56) !important;
+}
+
+/* Light/Dark switch hidden in every PRO theme */
+html[class*="premium-theme-"] .theme-toggle-label,
+html[class*="premium-theme-"] .theme-toggle,
+html[class*="premium-theme-"] #themeSwitch,
+html[class*="premium-theme-"] label[for="themeSwitch"],
+html[class*="premium-theme-"] .switch,
+html[class*="premium-theme-"] .mode-toggle,
+html[class*="premium-theme-"] .theme-switch{
+  display:none !important;
+}
+
+/* ===== END BARAKAWAY ABSOLUTE FIX: THEME SAMPLES + LOGO ===== */
+`;
+
+  const sampleMap = [
+    {key:"original", words:["Оригинальная тема"]},
+    {key:"royal-gold", words:["Королевское золото"]},
+    {key:"emerald-quran", words:["Изумрудный Коран", "Изумрудный Корант"]},
+    {key:"violet-noor", words:["Фиолетовый нур"]},
+    {key:"rose-soft", words:["Розовая гармония"]},
+    {key:"carbon-elite", words:["Карбоновая элита", "Карбон"]},
+    {key:"children-soft", words:["Детская тема", "Детская"]},
+    {key:"night-mosque", words:["Ночная мечеть"]},
+    {key:"desert-sand", words:["Песочная классика", "Песочная"]}
+  ];
+
+  const sampleStyles = {
+    "original": {
+      background:"radial-gradient(circle at 92% 6%,rgba(255,255,255,.10),transparent 30%),linear-gradient(135deg,#111820 0%,#1c2430 58%,#0d1118 100%)",
+      border:"rgba(255,255,255,.14)"
+    },
+    "royal-gold": {
+      background:"radial-gradient(circle at 88% 10%,rgba(255,244,190,.50),transparent 32%),radial-gradient(circle at 18% 100%,rgba(215,192,122,.22),transparent 35%),linear-gradient(135deg,#171208 0%,#4b3615 48%,#d7c07a 100%)",
+      border:"rgba(244,220,148,.64)"
+    },
+    "emerald-quran": {
+      background:"radial-gradient(circle at 88% 10%,rgba(102,198,128,.44),transparent 32%),radial-gradient(circle at 18% 100%,rgba(45,122,70,.28),transparent 35%),linear-gradient(135deg,#061109 0%,#12301d 52%,#4caf6a 100%)",
+      border:"rgba(102,198,128,.64)"
+    },
+    "violet-noor": {
+      background:"radial-gradient(circle at 88% 10%,rgba(161,118,255,.48),transparent 32%),radial-gradient(circle at 18% 100%,rgba(64,42,120,.30),transparent 35%),linear-gradient(135deg,#0d0a15 0%,#241a42 52%,#a176ff 100%)",
+      border:"rgba(161,118,255,.64)"
+    },
+    "rose-soft": {
+      background:"radial-gradient(circle at 88% 10%,rgba(255,158,199,.50),transparent 32%),radial-gradient(circle at 18% 100%,rgba(182,77,120,.30),transparent 35%),linear-gradient(135deg,#160a12 0%,#401b31 52%,#ff9ec7 100%)",
+      border:"rgba(255,158,199,.64)"
+    },
+    "carbon-elite": {
+      background:"radial-gradient(circle at 88% 10%,rgba(202,213,224,.30),transparent 32%),radial-gradient(circle at 18% 100%,rgba(89,97,108,.28),transparent 35%),linear-gradient(135deg,#050607 0%,#1a222c 52%,#59616c 100%)",
+      border:"rgba(202,213,224,.50)"
+    },
+    "children-soft": {
+      background:"radial-gradient(circle at 88% 10%,rgba(255,227,241,.50),transparent 32%),radial-gradient(circle at 18% 100%,rgba(135,203,255,.36),transparent 35%),linear-gradient(135deg,#0c1f32 0%,#234d75 52%,#87cbff 100%)",
+      border:"rgba(135,203,255,.64)"
+    },
+    "night-mosque": {
+      background:"radial-gradient(circle at 88% 10%,rgba(215,192,122,.30),transparent 32%),radial-gradient(circle at 18% 100%,rgba(118,154,215,.30),transparent 35%),linear-gradient(135deg,#050b13 0%,#10213d 52%,#355d9a 100%)",
+      border:"rgba(118,154,215,.54)"
+    },
+    "desert-sand": {
+      background:"radial-gradient(circle at 88% 10%,rgba(255,237,190,.42),transparent 32%),radial-gradient(circle at 18% 100%,rgba(219,174,97,.30),transparent 35%),linear-gradient(135deg,#130c05 0%,#3e2b13 52%,#dbae61 100%)",
+      border:"rgba(255,237,190,.56)"
+    }
+  };
+
+  function injectStyle(){
     let style = document.getElementById(STYLE_ID);
     if(!style){
       style = document.createElement("style");
@@ -173,13 +381,81 @@
     style.textContent = CSS;
   }
 
-  injectFinalHardFix();
+  function markThemeSampleCards(){
+    document.querySelectorAll(".theme-card").forEach(function(card){
+      const text = (card.textContent || "").trim();
 
-  if(document.readyState === "loading"){
-    document.addEventListener("DOMContentLoaded", injectFinalHardFix);
+      sampleMap.forEach(function(item){
+        const matched = item.words.some(function(word){ return text.indexOf(word) !== -1; });
+        if(!matched) return;
+
+        card.classList.add("bw-theme-sample-card");
+        card.classList.add("bw-theme-sample-" + item.key);
+
+        const style = sampleStyles[item.key];
+        if(style){
+          card.style.setProperty("background", style.background, "important");
+          card.style.setProperty("border-color", style.border, "important");
+          card.style.setProperty("color", "#ffffff", "important");
+        }
+
+        card.querySelectorAll("h3,p,strong,.theme-title,.theme-description").forEach(function(node){
+          node.style.setProperty("color", "#ffffff", "important");
+        });
+
+        card.querySelectorAll("p,.theme-description").forEach(function(node){
+          node.style.setProperty("color", "rgba(255,255,255,.86)", "important");
+        });
+
+        card.querySelectorAll(".theme-chip").forEach(function(node){
+          node.style.setProperty("background", "rgba(0,0,0,.26)", "important");
+          node.style.setProperty("color", "#ffffff", "important");
+          node.style.setProperty("border-color", "rgba(255,255,255,.22)", "important");
+        });
+      });
+    });
   }
 
-  window.addEventListener("storage", injectFinalHardFix);
-  window.addEventListener("barakaway:premium-theme-change", injectFinalHardFix);
+  function protectBarakaWayLogo(){
+    document.querySelectorAll("*").forEach(function(node){
+      if(!node || !node.textContent) return;
+
+      const text = node.textContent.trim();
+      const isLogoText = text === "BarakaWay" || text === "BARAKAWAY" || text === "BarakaWay App";
+      const className = String(node.className || "");
+
+      if(
+        isLogoText ||
+        className.indexOf("logo") !== -1 ||
+        className.indexOf("brand-logo") !== -1 ||
+        className.indexOf("barakaway-logo") !== -1
+      ){
+        node.style.setProperty("background", "transparent", "important");
+        node.style.setProperty("background-color", "transparent", "important");
+        node.style.setProperty("box-shadow", "none", "important");
+        node.style.setProperty("border-color", "transparent", "important");
+        node.style.setProperty("filter", "none", "important");
+      }
+    });
+  }
+
+  function run(){
+    injectStyle();
+    markThemeSampleCards();
+    protectBarakaWayLogo();
+  }
+
+  run();
+
+  if(document.readyState === "loading"){
+    document.addEventListener("DOMContentLoaded", run);
+  }else{
+    setTimeout(run, 0);
+  }
+
+  window.addEventListener("storage", run);
+  window.addEventListener("barakaway:premium-theme-change", run);
+  setTimeout(run, 250);
+  setTimeout(run, 900);
 })();
 
