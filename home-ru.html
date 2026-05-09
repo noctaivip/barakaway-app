@@ -3664,6 +3664,88 @@ html.light-mode .pro-final-lock{
   transition:opacity .22s ease;
 }
 
+
+/* HOME GOLD PRO BLOCK FINAL */
+html.dark-mode .barakaway-pro-final,
+html.light-mode .barakaway-pro-final{
+  background:
+    radial-gradient(circle at 88% 0%,rgba(255,255,255,.22),transparent 26%),
+    radial-gradient(circle at 10% 100%,rgba(255,239,177,.18),transparent 30%),
+    linear-gradient(135deg,#f5dc8a 0%,#d7b957 42%,#9d7424 100%) !important;
+  border:1px solid rgba(255,230,154,.70) !important;
+  box-shadow:0 24px 56px rgba(157,116,36,.26), inset 0 1px 0 rgba(255,255,255,.34) !important;
+}
+
+html.dark-mode .pro-final-badge,
+html.light-mode .pro-final-badge{
+  background:rgba(14,18,20,.82) !important;
+  color:#ffe9a8 !important;
+  border:1px solid rgba(255,255,255,.16) !important;
+}
+
+html.dark-mode .pro-final-state,
+html.light-mode .pro-final-state{
+  background:rgba(14,18,20,.88) !important;
+  color:#ffe9a8 !important;
+  border:1px solid rgba(255,255,255,.18) !important;
+  box-shadow:0 10px 24px rgba(0,0,0,.18) !important;
+}
+
+.barakaway-pro-final[data-pro-state="unlocked"] .pro-final-state,
+html.dark-mode .barakaway-pro-final[data-pro-state="unlocked"] .pro-final-state,
+html.light-mode .barakaway-pro-final[data-pro-state="unlocked"] .pro-final-state{
+  background:linear-gradient(135deg,#66c680 0%,#2d7a46 100%) !important;
+  color:#ffffff !important;
+  border-color:rgba(255,255,255,.20) !important;
+}
+
+html.dark-mode .pro-final-themes,
+html.light-mode .pro-final-themes{
+  background:rgba(13,18,20,.78) !important;
+  border:1px solid rgba(255,255,255,.14) !important;
+}
+
+html.dark-mode .pro-final-themes summary strong,
+html.light-mode .pro-final-themes summary strong{
+  color:#ffe9a8 !important;
+}
+
+html.dark-mode .pro-final-themes summary small,
+html.light-mode .pro-final-themes summary small{
+  color:#f7df9b !important;
+}
+
+html.dark-mode .pro-final-card,
+html.light-mode .pro-final-card{
+  background:linear-gradient(135deg,rgba(12,18,22,.92) 0%,rgba(13,28,23,.92) 100%) !important;
+  border:1px solid rgba(255,235,166,.20) !important;
+  box-shadow:0 14px 26px rgba(0,0,0,.18) !important;
+}
+
+html.dark-mode .pro-final-card-title,
+html.light-mode .pro-final-card-title{
+  color:#ffffff !important;
+}
+
+html.dark-mode .pro-final-card-text,
+html.light-mode .pro-final-card-text{
+  color:#d7e1da !important;
+}
+
+html.dark-mode .pro-final-lock,
+html.light-mode .pro-final-lock{
+  background:rgba(245,220,138,.18) !important;
+  color:#ffe9a8 !important;
+  border-color:rgba(245,220,138,.32) !important;
+}
+
+html.dark-mode .pro-final-status-line,
+html.light-mode .pro-final-status-line{
+  background:rgba(13,18,20,.78) !important;
+  color:#dff7e6 !important;
+  border:1px solid rgba(102,198,128,.26) !important;
+}
+
 </style>
 <script src="/theme-init.js"></script>
 <link href="/theme.css" rel="stylesheet"/>
@@ -4157,7 +4239,7 @@ html.light-mode .pro-feature-chip{
 </div>
 
 <div class="home-primary-support">
-<a class="support-project-btn" href="support-project-ru.html"><span class="support-project-btn-shine"></span><span class="support-project-btn-text">Поддержать PROект</span></a>
+<a class="support-project-btn" href="support-project-ru.html"><span class="support-project-btn-shine"></span><span class="support-project-btn-text">Поддержать проект</span></a>
 </div>
 
 <section class="barakaway-pro-final" aria-label="BarakaWay PRO" data-pro-state="locked">
@@ -8180,7 +8262,7 @@ window.addEventListener("DOMContentLoaded",function(){const installBtn=document.
     shell.setAttribute('data-pro-state', isPro ? 'unlocked' : 'locked');
 
     document.querySelectorAll('[data-home-pro-state]').forEach(function(node){
-      node.textContent = isPro ? 'PRO активен' : 'Активировать';
+      node.textContent = isPro ? 'Активно' : 'Активировать';
       node.setAttribute('href', isPro ? 'quran-pro-ru.html' : 'pro-ru.html');
     });
 
@@ -8209,6 +8291,7 @@ window.addEventListener("DOMContentLoaded",function(){const installBtn=document.
 </script>
 
 
+
 <script>
 (function(){
   const PRO_KEY = "barakaway_pro";
@@ -8217,63 +8300,61 @@ window.addEventListener("DOMContentLoaded",function(){const installBtn=document.
   let progressTimer = null;
   let startedAt = 0;
 
-  function isPro(){
-    return localStorage.getItem(PRO_KEY) === "true";
+  function getActivator(){
+    return document.querySelector("[data-home-pro-state]") || document.querySelector(".pro-final-state");
   }
 
-  function getStatusNode(){
-    return document.getElementById("proState")
-      || document.querySelector("[data-home-pro-state]")
-      || document.querySelector(".pro-final-state")
-      || document.getElementById("accessStatus")
-      || document.querySelector(".access-status");
-  }
-
-  function toast(id, message, green){
-    let node = document.getElementById(id);
+  function toast(message, green){
+    let node = document.getElementById("barakawayHomeUnlockToast");
     if(!node){
       node = document.createElement("div");
-      node.id = id;
+      node.id = "barakawayHomeUnlockToast";
+      node.style.position = "fixed";
+      node.style.left = "50%";
+      node.style.bottom = "96px";
+      node.style.zIndex = "999999";
+      node.style.transform = "translateX(-50%)";
+      node.style.width = "min(92%,460px)";
+      node.style.padding = "14px 16px";
+      node.style.borderRadius = "18px";
+      node.style.background = "rgba(16,24,32,.96)";
+      node.style.border = "1px solid rgba(215,192,122,.36)";
+      node.style.color = "#f2df9d";
+      node.style.fontSize = "13px";
+      node.style.fontWeight = "900";
+      node.style.textAlign = "center";
+      node.style.boxShadow = "0 18px 40px rgba(0,0,0,.35)";
+      node.style.opacity = "0";
+      node.style.pointerEvents = "none";
+      node.style.transition = "opacity .22s ease";
       document.body.appendChild(node);
     }
 
     node.textContent = message;
-    if(green){
-      node.style.borderColor = "rgba(102,198,128,.34)";
-      node.style.color = "#e6ffed";
-    }else{
-      node.style.borderColor = "rgba(226,95,95,.36)";
-      node.style.color = "#ffe1e1";
-    }
-
+    node.style.borderColor = green ? "rgba(102,198,128,.36)" : "rgba(215,192,122,.36)";
+    node.style.color = green ? "#e6ffed" : "#f2df9d";
     node.style.opacity = "1";
+
     clearTimeout(node.__timer);
     node.__timer = setTimeout(function(){
       node.style.opacity = "0";
     }, 2400);
   }
 
-  function blinkStatus(message){
-    const node = getStatusNode();
-    if(node){
-      node.classList.remove("pro-attention");
-      void node.offsetWidth;
-      node.classList.add("pro-attention");
-      setTimeout(function(){
-        node.classList.remove("pro-attention");
-      }, 3600);
+  function fireStorageSync(){
+    try{
+      window.dispatchEvent(new StorageEvent("storage", {key:PRO_KEY, newValue:localStorage.getItem(PRO_KEY)}));
+    }catch(e){
+      window.dispatchEvent(new Event("storage"));
     }
-    toast("barakawayProNeedToast", message || "PRO не активирован. Нажмите «Активировать».", false);
   }
 
-  window.barakawayNeedPro = blinkStatus;
-
-  function startHold(event){
-    const node = getStatusNode();
+  function startHold(){
+    const node = getActivator();
     if(!node) return;
 
     startedAt = Date.now();
-    toast("barakawayDevUnlockToast", "Удерживайте 7 секунд для тестового PRO.", true);
+    toast("Удерживайте 7 секунд для тестового PRO.", false);
 
     clearTimeout(holdTimer);
     clearInterval(progressTimer);
@@ -8281,23 +8362,26 @@ window.addEventListener("DOMContentLoaded",function(){const installBtn=document.
     progressTimer = setInterval(function(){
       const left = Math.max(0, Math.ceil((HOLD_MS - (Date.now() - startedAt)) / 1000));
       if(left > 0){
-        toast("barakawayDevUnlockToast", "Тестовый PRO: осталось " + left + " сек.", true);
+        toast("Тестовый PRO: осталось " + left + " сек.", false);
       }
     }, 1000);
 
     holdTimer = setTimeout(function(){
       clearInterval(progressTimer);
-      const active = isPro();
+
+      const active = localStorage.getItem(PRO_KEY) === "true";
 
       if(active){
         localStorage.removeItem(PRO_KEY);
         localStorage.removeItem("barakaway_pro_plan");
-        toast("barakawayDevUnlockToast", "Тестовый PRO выключен.", true);
+        toast("Тестовый PRO выключен.", true);
       }else{
         localStorage.setItem(PRO_KEY, "true");
         localStorage.setItem("barakaway_pro_plan", "developer-test");
-        toast("barakawayDevUnlockToast", "Тестовый PRO активирован.", true);
+        toast("Тестовый PRO активирован на всех страницах.", true);
       }
+
+      fireStorageSync();
 
       setTimeout(function(){
         window.location.reload();
@@ -8312,66 +8396,22 @@ window.addEventListener("DOMContentLoaded",function(){const installBtn=document.
     progressTimer = null;
   }
 
-  function prepareStatus(){
-    const node = getStatusNode();
-    if(!node) return;
+  function init(){
+    const node = getActivator();
+    if(!node || node.__homeOnlyUnlockBound) return;
 
+    node.__homeOnlyUnlockBound = true;
+    node.style.cursor = "pointer";
     node.style.userSelect = "none";
     node.style.webkitUserSelect = "none";
-    node.style.cursor = "pointer";
     node.setAttribute("title", "Тестовый режим: удерживать 7 секунд");
 
-    if(!node.__barakawayHoldBound){
-      node.__barakawayHoldBound = true;
-      node.addEventListener("mousedown", startHold);
-      node.addEventListener("touchstart", startHold, {passive:true});
-      node.addEventListener("mouseup", cancelHold);
-      node.addEventListener("mouseleave", cancelHold);
-      node.addEventListener("touchend", cancelHold);
-      node.addEventListener("touchcancel", cancelHold);
-    }
-  }
-
-  function suppressPurchaseModals(){
-    if(isPro()) return;
-
-    document.querySelectorAll(".modal-overlay.open").forEach(function(modal){
-      modal.classList.remove("open");
-      blinkStatus("PRO не активирован. Активируйте доступ сверху.");
-    });
-  }
-
-  function bindClosedClicks(){
-    document.addEventListener("click", function(event){
-      if(isPro()) return;
-
-      const target = event.target.closest(
-        "[data-feature], [data-theme], [data-reciter], [data-pack], [data-category], [data-save-dua], [data-copy-dua], #startReadingBtn, #continueBtn, #saveProgressBtn, #bookmarkCurrentBtn, #clearProgressBtn, #startPracticeBtn, #demoBtn, #listenBtn, #micButton, #repeatWrongBtn, #resetBtn, #saveResultBtn, #slowModeBtn, #openFirstDua, #openFirstPack, #openFirstReciter, #openProButton, .pro-final-card, .pro-final-theme"
-      );
-
-      if(target){
-        blinkStatus("PRO не активирован. Сначала активируйте доступ.");
-      }
-    }, true);
-  }
-
-  function init(){
-    prepareStatus();
-    bindClosedClicks();
-
-    const observer = new MutationObserver(function(){
-      prepareStatus();
-      suppressPurchaseModals();
-    });
-
-    observer.observe(document.documentElement, {
-      childList:true,
-      subtree:true,
-      attributes:true,
-      attributeFilter:["class"]
-    });
-
-    setInterval(suppressPurchaseModals, 350);
+    node.addEventListener("mousedown", startHold);
+    node.addEventListener("touchstart", startHold, {passive:true});
+    node.addEventListener("mouseup", cancelHold);
+    node.addEventListener("mouseleave", cancelHold);
+    node.addEventListener("touchend", cancelHold);
+    node.addEventListener("touchcancel", cancelHold);
   }
 
   if(document.readyState === "loading"){

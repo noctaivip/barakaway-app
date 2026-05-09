@@ -1290,13 +1290,10 @@ body.theme-carbon-elite{
 </script>
 
 
+
 <script>
 (function(){
   const PRO_KEY = "barakaway_pro";
-  const HOLD_MS = 7000;
-  let holdTimer = null;
-  let progressTimer = null;
-  let startedAt = 0;
 
   function isPro(){
     return localStorage.getItem(PRO_KEY) === "true";
@@ -1310,23 +1307,15 @@ body.theme-carbon-elite{
       || document.querySelector(".access-status");
   }
 
-  function toast(id, message, green){
-    let node = document.getElementById(id);
+  function toast(message){
+    let node = document.getElementById("barakawayProNeedToast");
     if(!node){
       node = document.createElement("div");
-      node.id = id;
+      node.id = "barakawayProNeedToast";
       document.body.appendChild(node);
     }
 
     node.textContent = message;
-    if(green){
-      node.style.borderColor = "rgba(102,198,128,.34)";
-      node.style.color = "#e6ffed";
-    }else{
-      node.style.borderColor = "rgba(226,95,95,.36)";
-      node.style.color = "#ffe1e1";
-    }
-
     node.style.opacity = "1";
     clearTimeout(node.__timer);
     node.__timer = setTimeout(function(){
@@ -1344,122 +1333,22 @@ body.theme-carbon-elite{
         node.classList.remove("pro-attention");
       }, 3600);
     }
-    toast("barakawayProNeedToast", message || "PRO не активирован. Нажмите «Активировать».", false);
+    toast(message || "PRO не активирован. Активируйте доступ на главной странице.");
   }
 
   window.barakawayNeedPro = blinkStatus;
 
-  function startHold(event){
-    const node = getStatusNode();
-    if(!node) return;
-
-    startedAt = Date.now();
-    toast("barakawayDevUnlockToast", "Удерживайте 7 секунд для тестового PRO.", true);
-
-    clearTimeout(holdTimer);
-    clearInterval(progressTimer);
-
-    progressTimer = setInterval(function(){
-      const left = Math.max(0, Math.ceil((HOLD_MS - (Date.now() - startedAt)) / 1000));
-      if(left > 0){
-        toast("barakawayDevUnlockToast", "Тестовый PRO: осталось " + left + " сек.", true);
-      }
-    }, 1000);
-
-    holdTimer = setTimeout(function(){
-      clearInterval(progressTimer);
-      const active = isPro();
-
-      if(active){
-        localStorage.removeItem(PRO_KEY);
-        localStorage.removeItem("barakaway_pro_plan");
-        toast("barakawayDevUnlockToast", "Тестовый PRO выключен.", true);
-      }else{
-        localStorage.setItem(PRO_KEY, "true");
-        localStorage.setItem("barakaway_pro_plan", "developer-test");
-        toast("barakawayDevUnlockToast", "Тестовый PRO активирован.", true);
-      }
-
-      setTimeout(function(){
-        window.location.reload();
-      }, 650);
-    }, HOLD_MS);
-  }
-
-  function cancelHold(){
-    clearTimeout(holdTimer);
-    clearInterval(progressTimer);
-    holdTimer = null;
-    progressTimer = null;
-  }
-
-  function prepareStatus(){
-    const node = getStatusNode();
-    if(!node) return;
-
-    node.style.userSelect = "none";
-    node.style.webkitUserSelect = "none";
-    node.style.cursor = "pointer";
-    node.setAttribute("title", "Тестовый режим: удерживать 7 секунд");
-
-    if(!node.__barakawayHoldBound){
-      node.__barakawayHoldBound = true;
-      node.addEventListener("mousedown", startHold);
-      node.addEventListener("touchstart", startHold, {passive:true});
-      node.addEventListener("mouseup", cancelHold);
-      node.addEventListener("mouseleave", cancelHold);
-      node.addEventListener("touchend", cancelHold);
-      node.addEventListener("touchcancel", cancelHold);
-    }
-  }
-
-  function suppressPurchaseModals(){
+  document.addEventListener("click", function(event){
     if(isPro()) return;
 
-    document.querySelectorAll(".modal-overlay.open").forEach(function(modal){
-      modal.classList.remove("open");
-      blinkStatus("PRO не активирован. Активируйте доступ сверху.");
-    });
-  }
+    const target = event.target.closest(
+      "[data-feature], [data-theme], [data-reciter], [data-pack], [data-category], [data-save-dua], [data-copy-dua], #startReadingBtn, #continueBtn, #saveProgressBtn, #bookmarkCurrentBtn, #clearProgressBtn, #startPracticeBtn, #demoBtn, #listenBtn, #micButton, #repeatWrongBtn, #resetBtn, #saveResultBtn, #slowModeBtn, #openFirstDua, #openFirstPack, #openFirstReciter, #openProButton, .pro-final-card, .pro-final-theme"
+    );
 
-  function bindClosedClicks(){
-    document.addEventListener("click", function(event){
-      if(isPro()) return;
-
-      const target = event.target.closest(
-        "[data-feature], [data-theme], [data-reciter], [data-pack], [data-category], [data-save-dua], [data-copy-dua], #startReadingBtn, #continueBtn, #saveProgressBtn, #bookmarkCurrentBtn, #clearProgressBtn, #startPracticeBtn, #demoBtn, #listenBtn, #micButton, #repeatWrongBtn, #resetBtn, #saveResultBtn, #slowModeBtn, #openFirstDua, #openFirstPack, #openFirstReciter, #openProButton, .pro-final-card, .pro-final-theme"
-      );
-
-      if(target){
-        blinkStatus("PRO не активирован. Сначала активируйте доступ.");
-      }
-    }, true);
-  }
-
-  function init(){
-    prepareStatus();
-    bindClosedClicks();
-
-    const observer = new MutationObserver(function(){
-      prepareStatus();
-      suppressPurchaseModals();
-    });
-
-    observer.observe(document.documentElement, {
-      childList:true,
-      subtree:true,
-      attributes:true,
-      attributeFilter:["class"]
-    });
-
-    setInterval(suppressPurchaseModals, 350);
-  }
-
-  if(document.readyState === "loading"){
-    document.addEventListener("DOMContentLoaded", init);
-  }else{
-    init();
-  }
+    if(target){
+      blinkStatus("PRO не активирован. Активируйте доступ на главной странице.");
+    }
+  }, true);
 })();
 </script>
 
