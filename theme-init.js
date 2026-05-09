@@ -616,3 +616,223 @@ html[class*="premium-theme-"] .bw-logo-transparent-lock *{
   setTimeout(protectBarakaWayLogo, 1000);
 })();
 
+
+(function(){
+  const STYLE_ID = "barakaway-premium-3d-stability-final";
+  const CSS = `
+/* ===== BARAKAWAY PREMIUM 3D THEME LAYER FINAL ===== */
+
+/* Global 3D premium depth for selected PRO themes */
+html[class*="premium-theme-"]{
+  --bw-3d-radius:28px;
+  --bw-3d-border:rgba(255,255,255,.16);
+  --bw-3d-glow:rgba(255,255,255,.10);
+  --bw-3d-shadow-dark:rgba(0,0,0,.42);
+  --bw-3d-inner:rgba(255,255,255,.09);
+}
+
+/* Royal Gold 3D */
+html.premium-theme-royal-gold{
+  --bw-3d-border:rgba(244,220,148,.56);
+  --bw-3d-glow:rgba(244,220,148,.24);
+  --bw-3d-inner:rgba(255,241,178,.16);
+}
+
+/* Emerald Quran 3D */
+html.premium-theme-emerald-quran{
+  --bw-3d-border:rgba(116,223,143,.54);
+  --bw-3d-glow:rgba(116,223,143,.22);
+  --bw-3d-inner:rgba(196,255,213,.13);
+}
+
+/* Violet Noor 3D */
+html.premium-theme-violet-noor{
+  --bw-3d-border:rgba(197,168,255,.52);
+  --bw-3d-glow:rgba(161,118,255,.24);
+  --bw-3d-inner:rgba(229,214,255,.13);
+}
+
+/* Rose Soft 3D */
+html.premium-theme-rose-soft{
+  --bw-3d-border:rgba(255,190,218,.52);
+  --bw-3d-glow:rgba(255,158,199,.24);
+  --bw-3d-inner:rgba(255,220,236,.13);
+}
+
+/* Carbon Elite 3D */
+html.premium-theme-carbon-elite{
+  --bw-3d-border:rgba(220,230,240,.34);
+  --bw-3d-glow:rgba(170,184,199,.18);
+  --bw-3d-inner:rgba(255,255,255,.10);
+}
+
+/* Children Soft 3D + playful child mood */
+html.premium-theme-children-soft{
+  --bg:#07172a;
+  --surface:#102a46;
+  --surface-2:#173a5c;
+  --surface-3:#1f4f7d;
+  --border:rgba(135,203,255,.40);
+  --border-2:rgba(255,227,241,.46);
+  --text:#f7fcff;
+  --text-soft:#d9f0ff;
+  --text-muted:#badfff;
+  --green:#9bd8ff;
+  --green-strong:#438fd0;
+  --green-soft:#e4f7ff;
+  --bw-accent:#9bd8ff;
+  --bw-accent-2:#ffd9ef;
+  --bw-3d-border:rgba(155,216,255,.58);
+  --bw-3d-glow:rgba(255,217,239,.20);
+  --bw-3d-inner:rgba(255,255,255,.14);
+}
+
+html.premium-theme-children-soft body{
+  background:
+    radial-gradient(circle at 16% 0%,rgba(155,216,255,.22),transparent 28%),
+    radial-gradient(circle at 86% 8%,rgba(255,217,239,.20),transparent 34%),
+    linear-gradient(180deg,#07172a 0%,#102a46 50%,#07172a 100%) !important;
+}
+
+/* Premium 3D surfaces */
+html[class*="premium-theme-"] .container,
+html[class*="premium-theme-"] .hero,
+html[class*="premium-theme-"] .brand-prayer-hero,
+html[class*="premium-theme-"] .today-hub,
+html[class*="premium-theme-"] .about-project-card,
+html[class*="premium-theme-"] .barakaway-pro-final,
+html[class*="premium-theme-"] .block,
+html[class*="premium-theme-"] .card,
+html[class*="premium-theme-"] .box,
+html[class*="premium-theme-"] .panel,
+html[class*="premium-theme-"] .quote,
+html[class*="premium-theme-"] .empty,
+html[class*="premium-theme-"] .article,
+html[class*="premium-theme-"] .category-panel,
+html[class*="premium-theme-"] .surah-card,
+html[class*="premium-theme-"] .prayer-card,
+html[class*="premium-theme-"] .toggle-row,
+html[class*="premium-theme-"] .meta-item,
+html[class*="premium-theme-"] .note-box,
+html[class*="premium-theme-"] .jumuah-box,
+html[class*="premium-theme-"] .month-day,
+html[class*="premium-theme-"] .month-head,
+html[class*="premium-theme-"] .wallet-support,
+html[class*="premium-theme-"] .home-widget,
+html[class*="premium-theme-"] .dua-card,
+html[class*="premium-theme-"] .ayah-card,
+html[class*="premium-theme-"] .master-audio-wrap,
+html[class*="premium-theme-"] .reader-side,
+html[class*="premium-theme-"] .reader-main,
+html[class*="premium-theme-"] .dua-side,
+html[class*="premium-theme-"] .dua-main,
+html[class*="premium-theme-"] .ai-side,
+html[class*="premium-theme-"] .ai-main,
+html[class*="premium-theme-"] .player-panel,
+html[class*="premium-theme-"] .preview-panel,
+html[class*="premium-theme-"] .app-menu-btn,
+html[class*="premium-theme-"] .today-action,
+html[class*="premium-theme-"] .premium-resource-card{
+  border:1.5px solid var(--bw-3d-border) !important;
+  box-shadow:
+    0 22px 54px var(--bw-3d-shadow-dark),
+    0 0 0 1px color-mix(in srgb,var(--bw-3d-border) 48%,transparent),
+    0 0 32px var(--bw-3d-glow),
+    inset 0 1px 0 var(--bw-3d-inner),
+    inset 0 -18px 34px rgba(0,0,0,.16) !important;
+  transform:translateZ(0) !important;
+}
+
+/* Buttons also get premium depth */
+html[class*="premium-theme-"] button:not(.icon-btn):not(.share-close):not(.install-help-close):not(.bottom-app-nav-item),
+html[class*="premium-theme-"] .btn,
+html[class*="premium-theme-"] .install-btn,
+html[class*="premium-theme-"] .support-project-btn,
+html[class*="premium-theme-"] .copy-wallet-btn{
+  border:1.5px solid var(--bw-3d-border) !important;
+  box-shadow:
+    0 14px 30px rgba(0,0,0,.26),
+    0 0 22px var(--bw-3d-glow),
+    inset 0 1px 0 var(--bw-3d-inner),
+    inset 0 -10px 22px rgba(0,0,0,.16) !important;
+}
+
+/* Bottom nav 3D */
+html[class*="premium-theme-"] .bottom-app-nav-inner{
+  border:1.5px solid var(--bw-3d-border) !important;
+  box-shadow:
+    0 18px 44px rgba(0,0,0,.38),
+    0 0 28px var(--bw-3d-glow),
+    inset 0 1px 0 var(--bw-3d-inner) !important;
+}
+
+/* Children theme: add soft teddy-like decorative mood without touching layout */
+html.premium-theme-children-soft .today-hub::before,
+html.premium-theme-children-soft .brand-prayer-hero::before,
+html.premium-theme-children-soft .container::before{
+  content:"🧸";
+  position:absolute;
+  opacity:.08;
+  font-size:78px;
+  pointer-events:none;
+  transform:rotate(-12deg);
+}
+
+html.premium-theme-children-soft .today-hub,
+html.premium-theme-children-soft .brand-prayer-hero,
+html.premium-theme-children-soft .container{
+  position:relative;
+  overflow:hidden;
+}
+
+html.premium-theme-children-soft .today-hub::before{right:24px;top:18px;}
+html.premium-theme-children-soft .brand-prayer-hero::before{left:24px;bottom:18px;}
+html.premium-theme-children-soft .container::before{right:28px;bottom:120px;}
+
+/* Extra stability: theme selector cards never inherit active PRO 3D repaint */
+html[class*="premium-theme-"] .theme-grid .theme-card,
+html[class*="premium-theme-"] .theme-card[data-theme],
+html[class*="premium-theme-"] .bw-theme-sample-card{
+  transform:none !important;
+}
+
+/* ===== END BARAKAWAY PREMIUM 3D THEME LAYER FINAL ===== */
+`;
+
+  function injectPremium3D(){
+    let style = document.getElementById(STYLE_ID);
+    if(!style){
+      style = document.createElement("style");
+      style.id = STYLE_ID;
+      (document.head || document.documentElement).appendChild(style);
+    }
+    style.textContent = CSS;
+  }
+
+  function runExistingGuards(){
+    if(typeof window.BarakaWayTheme === "object" && typeof window.BarakaWayTheme.refresh === "function"){
+      window.BarakaWayTheme.refresh();
+    }
+
+    window.dispatchEvent(new Event("storage"));
+  }
+
+  injectPremium3D();
+
+  if(document.readyState === "loading"){
+    document.addEventListener("DOMContentLoaded", injectPremium3D);
+  }else{
+    setTimeout(injectPremium3D, 0);
+  }
+
+  window.addEventListener("storage", injectPremium3D);
+  window.addEventListener("barakaway:premium-theme-change", injectPremium3D);
+
+  let count = 0;
+  const timer = setInterval(function(){
+    injectPremium3D();
+    count++;
+    if(count >= 12) clearInterval(timer);
+  }, 350);
+})();
+
