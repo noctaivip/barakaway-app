@@ -3971,6 +3971,77 @@ html.light-mode .pro-final-themes-link{
   }
 }
 
+
+/* BARAKAWAY GLOBAL PREMIUM THEMES */
+body.bw-theme-royal-gold{
+  background:
+    radial-gradient(circle at 12% 0%,rgba(215,192,122,.18),transparent 26%),
+    linear-gradient(180deg,#090908 0%,#1a160d 52%,#090908 100%) !important;
+}
+body.bw-theme-emerald-quran{
+  background:
+    radial-gradient(circle at 12% 0%,rgba(102,198,128,.16),transparent 26%),
+    linear-gradient(180deg,#061109 0%,#10251a 52%,#061109 100%) !important;
+}
+body.bw-theme-violet-noor{
+  background:
+    radial-gradient(circle at 12% 0%,rgba(161,118,255,.16),transparent 26%),
+    linear-gradient(180deg,#0d0a15 0%,#201931 52%,#0d0a15 100%) !important;
+}
+body.bw-theme-rose-soft{
+  background:
+    radial-gradient(circle at 12% 0%,rgba(255,158,199,.16),transparent 26%),
+    linear-gradient(180deg,#160a12 0%,#311928 52%,#160a12 100%) !important;
+}
+body.bw-theme-carbon-elite{
+  background:
+    radial-gradient(circle at 12% 0%,rgba(255,255,255,.08),transparent 26%),
+    linear-gradient(180deg,#050607 0%,#151a20 52%,#050607 100%) !important;
+}
+body.bw-theme-children-soft{
+  background:
+    radial-gradient(circle at 12% 0%,rgba(135,203,255,.18),transparent 26%),
+    linear-gradient(180deg,#0c1f32 0%,#183e5e 52%,#281d2a 100%) !important;
+}
+body.bw-theme-night-mosque{
+  background:
+    radial-gradient(circle at 12% 0%,rgba(215,192,122,.13),transparent 24%),
+    linear-gradient(180deg,#050b13 0%,#10213d 52%,#050b13 100%) !important;
+}
+body.bw-theme-desert-sand{
+  background:
+    radial-gradient(circle at 12% 0%,rgba(255,237,190,.16),transparent 26%),
+    linear-gradient(180deg,#130c05 0%,#332411 52%,#130c05 100%) !important;
+}
+body[class*="bw-theme-"] .container,
+body[class*="bw-theme-"] .hero,
+body[class*="bw-theme-"] .barakaway-pro-final,
+body[class*="bw-theme-"] .app-menu-btn,
+body[class*="bw-theme-"] .theme-card{
+  transition:background .25s ease,border-color .25s ease,box-shadow .25s ease,color .25s ease !important;
+}
+body.bw-theme-royal-gold .container,
+body.bw-theme-royal-gold .hero{
+  background:linear-gradient(135deg,rgba(23,18,8,.94) 0%,rgba(36,26,11,.94) 54%,rgba(17,16,13,.94) 100%) !important;
+  border-color:rgba(215,192,122,.28) !important;
+}
+body.bw-theme-emerald-quran .container,
+body.bw-theme-emerald-quran .hero{
+  background:linear-gradient(135deg,rgba(7,18,12,.94) 0%,rgba(16,37,26,.94) 54%,rgba(7,17,11,.94) 100%) !important;
+  border-color:rgba(102,198,128,.28) !important;
+}
+body.bw-theme-violet-noor .container,
+body.bw-theme-violet-noor .hero{
+  background:linear-gradient(135deg,rgba(16,11,24,.94) 0%,rgba(32,25,49,.94) 54%,rgba(13,10,21,.94) 100%) !important;
+  border-color:rgba(161,118,255,.26) !important;
+}
+
+
+/* HOME PRO STATUS LINE REMOVED */
+.pro-final-status-line{
+  display:none !important;
+}
+
 </style>
 <script src="/theme-init.js"></script>
 <link href="/theme.css" rel="stylesheet"/>
@@ -4475,12 +4546,7 @@ html.light-mode .pro-feature-chip{
       <button type="button" class="pro-final-state" data-home-pro-state>Активировать</button>
     </div>
   </div>
-
-  <div class="pro-final-status-line">
-    ✅ PRO активен. Карточки ниже открывают премиальные разделы.
-  </div>
-
-  <a class="pro-final-themes-link" href="themes-pro-ru.html" aria-label="Открыть PRO-темы">
+<a class="pro-final-themes-link" href="themes-pro-ru.html" aria-label="Открыть PRO-темы">
     <div class="pro-final-theme-strip">
       <span class="theme-strip-part theme-strip-gold"></span>
       <span class="theme-strip-part theme-strip-emerald"></span>
@@ -8467,7 +8533,7 @@ window.addEventListener("DOMContentLoaded",function(){const installBtn=document.
     shell.setAttribute('data-pro-state', isPro ? 'unlocked' : 'locked');
 
     document.querySelectorAll('[data-home-pro-state]').forEach(function(node){
-      node.textContent = isPro ? 'Активно' : 'Активировать';
+      node.textContent = isPro ? '✅ PRO активен' : 'Активировать';
       node.removeAttribute('href');
     });
 
@@ -8604,7 +8670,7 @@ window.addEventListener("DOMContentLoaded",function(){const installBtn=document.
       }else{
         localStorage.setItem(PRO_KEY, "true");
         localStorage.setItem("barakaway_pro_plan", "developer-test");
-        setActivatorText("Активно");
+        setActivatorText("✅ PRO активен");
         toast("Тестовый PRO активирован на всех страницах.", true);
       }
 
@@ -8666,6 +8732,37 @@ window.addEventListener("DOMContentLoaded",function(){const installBtn=document.
   }else{
     init();
   }
+})();
+</script>
+
+
+<script>
+(function(){
+  const THEME_KEY = "barakaway_premium_theme";
+
+  function applyPremiumTheme(){
+    const theme = localStorage.getItem(THEME_KEY) || "";
+
+    Array.from(document.body.classList).forEach(function(cls){
+      if(cls.indexOf("bw-theme-") === 0 || cls.indexOf("theme-") === 0){
+        document.body.classList.remove(cls);
+      }
+    });
+
+    if(theme){
+      document.body.classList.add("bw-theme-" + theme);
+      document.body.classList.add("theme-" + theme);
+    }
+  }
+
+  if(document.readyState === "loading"){
+    document.addEventListener("DOMContentLoaded", applyPremiumTheme);
+  }else{
+    applyPremiumTheme();
+  }
+
+  window.addEventListener("storage", applyPremiumTheme);
+  window.BarakaWayApplyPremiumTheme = applyPremiumTheme;
 })();
 </script>
 
