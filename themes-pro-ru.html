@@ -799,6 +799,37 @@ body.bw-theme-desert-sand{background:radial-gradient(circle at 12% 0%,rgba(255,2
   to{transform:scale(1.035);}
 }
 
+
+/* ORIGINAL THEME RESTORE CARD */
+.restore-original-theme-card{
+  border:1.5px solid rgba(255,255,255,.12) !important;
+  background:
+    linear-gradient(135deg,rgba(15,20,28,.96) 0%,rgba(22,29,39,.96) 100%) !important;
+}
+.restore-original-theme-card .theme-chip{
+  background:rgba(255,255,255,.08) !important;
+  color:#ffffff !important;
+  border:1px solid rgba(255,255,255,.12) !important;
+}
+.restore-original-theme-card h3{
+  color:#ffffff !important;
+}
+.restore-original-theme-card p{
+  color:rgba(255,255,255,.72) !important;
+}
+
+
+/* TRANSPARENT HERO BLOCK */
+.pro-themes-hero,
+.hero.pro-themes-hero,
+.themes-hero,
+.hero{
+  background:transparent !important;
+  border-color:transparent !important;
+  box-shadow:none !important;
+  backdrop-filter:none !important;
+}
+
 </style>
 <link rel="stylesheet" href="theme-universal.css">
 </head>
@@ -833,16 +864,15 @@ body.bw-theme-desert-sand{background:radial-gradient(circle at 12% 0%,rgba(255,2
 </div>
     </section>
 <section class="section" id="themes">
-      <div class="section-head">
-        <div>
-          <h2 class="section-title">Выбор темы</h2>
-          <p class="section-subtitle">
-            Выберите премиальную тему. После активации PRO выбранный стиль применяется ко всем страницам BarakaWay.
-          </p>
-        </div>
+      <div class="theme-grid">
+
+<div class="theme-card restore-original-theme-card" data-theme-clear="true">
+  <div class="theme-icon">◐</div>
+  <div class="theme-chip">FREE</div>
+  <h3>Оригинальная тема</h3>
+  <p>Вернуть стандартный внешний вид BarakaWay без PRO-стиля.</p>
 </div>
 
-      <div class="theme-grid">
 
         <button class="theme-card theme-gold" data-theme="royal-gold">
           <div class="theme-top">
@@ -1053,6 +1083,45 @@ body.bw-theme-desert-sand{background:radial-gradient(circle at 12% 0%,rgba(255,2
 
   window.addEventListener("storage", syncThemeCards);
   syncThemeCards();
+})();
+</script>
+
+
+<script>
+(function(){
+  document.querySelectorAll('[data-theme-clear="true"]').forEach(function(card){
+    card.addEventListener('click', function(event){
+      event.preventDefault();
+      event.stopPropagation();
+
+      if(window.BarakaWayTheme && typeof window.BarakaWayTheme.clearPremiumTheme === 'function'){
+        window.BarakaWayTheme.clearPremiumTheme();
+      }else{
+        try{
+          localStorage.removeItem('barakaway_premium_theme');
+        }catch(e){}
+      }
+
+      try{
+        window.dispatchEvent(new StorageEvent('storage', {
+          key:'barakaway_premium_theme',
+          newValue:''
+        }));
+      }catch(e){
+        window.dispatchEvent(new Event('storage'));
+      }
+
+      const toast = document.getElementById('toast');
+      if(toast){
+        toast.textContent = 'Оригинальная тема восстановлена';
+        toast.classList.add('show');
+        clearTimeout(window.__restoreThemeToast);
+        window.__restoreThemeToast = setTimeout(function(){
+          toast.classList.remove('show');
+        }, 2200);
+      }
+    }, true);
+  });
 })();
 </script>
 
