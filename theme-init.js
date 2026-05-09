@@ -1504,3 +1504,19 @@ html.premium-theme-carbon-elite [data-barakaway-logo-lock] *{
   setTimeout(run, 200);
 })();
 
+
+
+(function(){
+function forceThemes(){
+document.querySelectorAll('.theme-card').forEach(function(card){
+const t=(card.textContent||'').toLowerCase();
+if(t.includes('детская')) card.classList.add('theme-child','bw-theme-sample-children-soft');
+if(t.includes('ночная')) card.classList.add('theme-night','bw-theme-sample-night-mosque');
+if(t.includes('песочная')) card.classList.add('theme-sand','bw-theme-sample-desert-sand');
+});
+}
+if(document.readyState==='loading'){
+document.addEventListener('DOMContentLoaded',forceThemes);
+}else{forceThemes();}
+setTimeout(forceThemes,400);
+})();
