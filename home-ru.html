@@ -3746,6 +3746,57 @@ html.light-mode .pro-final-status-line{
   border:1px solid rgba(102,198,128,.26) !important;
 }
 
+
+/* HOME PRO DARK GOLD REFINEMENT */
+html.dark-mode .barakaway-pro-final,
+html.light-mode .barakaway-pro-final{
+  background:
+    radial-gradient(circle at 88% 0%,rgba(255,226,143,.16),transparent 26%),
+    radial-gradient(circle at 10% 100%,rgba(102,80,30,.20),transparent 32%),
+    linear-gradient(135deg,#4b3715 0%,#80611f 42%,#2b2110 100%) !important;
+  border:1px solid rgba(214,181,92,.42) !important;
+  box-shadow:0 22px 52px rgba(0,0,0,.26), inset 0 1px 0 rgba(255,230,160,.12) !important;
+}
+
+html.dark-mode .pro-final-badge,
+html.light-mode .pro-final-badge,
+html.dark-mode .pro-final-state,
+html.light-mode .pro-final-state{
+  background:rgba(9,13,16,.88) !important;
+  color:#f4dc94 !important;
+  border:1px solid rgba(244,220,148,.22) !important;
+}
+
+.pro-final-state{
+  appearance:none !important;
+  -webkit-appearance:none !important;
+  border-radius:999px !important;
+  user-select:none !important;
+  -webkit-user-select:none !important;
+  -webkit-touch-callout:none !important;
+  touch-action:none !important;
+}
+
+html.dark-mode .pro-final-themes,
+html.light-mode .pro-final-themes{
+  background:rgba(9,13,16,.72) !important;
+  border:1px solid rgba(244,220,148,.14) !important;
+}
+
+html.dark-mode .pro-final-card,
+html.light-mode .pro-final-card{
+  background:linear-gradient(135deg,rgba(8,13,16,.94) 0%,rgba(13,28,22,.88) 100%) !important;
+  border:1px solid rgba(244,220,148,.16) !important;
+}
+
+.barakaway-pro-final[data-pro-state="unlocked"] .pro-final-state,
+html.dark-mode .barakaway-pro-final[data-pro-state="unlocked"] .pro-final-state,
+html.light-mode .barakaway-pro-final[data-pro-state="unlocked"] .pro-final-state{
+  background:linear-gradient(135deg,#4caf6a 0%,#245f36 100%) !important;
+  color:#ffffff !important;
+  border-color:rgba(255,255,255,.18) !important;
+}
+
 </style>
 <script src="/theme-init.js"></script>
 <link href="/theme.css" rel="stylesheet"/>
@@ -4247,7 +4298,7 @@ html.light-mode .pro-feature-chip{
   <div class="pro-final-head pro-final-head-compact">
     <div class="pro-final-top">
       <span class="pro-final-badge">👑 BarakaWay PRO</span>
-      <a class="pro-final-state" href="pro-ru.html" data-home-pro-state>Активировать</a>
+      <button type="button" class="pro-final-state" data-home-pro-state>Активировать</button>
     </div>
   </div>
 
@@ -8263,7 +8314,7 @@ window.addEventListener("DOMContentLoaded",function(){const installBtn=document.
 
     document.querySelectorAll('[data-home-pro-state]').forEach(function(node){
       node.textContent = isPro ? 'Активно' : 'Активировать';
-      node.setAttribute('href', isPro ? 'quran-pro-ru.html' : 'pro-ru.html');
+      node.removeAttribute('href');
     });
 
     document.querySelectorAll('[data-pro-link]').forEach(function(link){
@@ -8292,6 +8343,7 @@ window.addEventListener("DOMContentLoaded",function(){const installBtn=document.
 
 
 
+
 <script>
 (function(){
   const PRO_KEY = "barakaway_pro";
@@ -8299,9 +8351,14 @@ window.addEventListener("DOMContentLoaded",function(){const installBtn=document.
   let holdTimer = null;
   let progressTimer = null;
   let startedAt = 0;
+  let originalText = "";
 
   function getActivator(){
     return document.querySelector("[data-home-pro-state]") || document.querySelector(".pro-final-state");
+  }
+
+  function isPro(){
+    return localStorage.getItem(PRO_KEY) === "true";
   }
 
   function toast(message, green){
@@ -8349,35 +8406,52 @@ window.addEventListener("DOMContentLoaded",function(){const installBtn=document.
     }
   }
 
-  function startHold(){
+  function setActivatorText(text){
+    const node = getActivator();
+    if(node) node.textContent = text;
+  }
+
+  function startHold(event){
+    if(event){
+      event.preventDefault();
+      event.stopPropagation();
+    }
+
     const node = getActivator();
     if(!node) return;
 
+    originalText = node.textContent || (isPro() ? "Активно" : "Активировать");
     startedAt = Date.now();
-    toast("Удерживайте 7 секунд для тестового PRO.", false);
 
     clearTimeout(holdTimer);
     clearInterval(progressTimer);
 
-    progressTimer = setInterval(function(){
+    function updateCountdown(){
       const left = Math.max(0, Math.ceil((HOLD_MS - (Date.now() - startedAt)) / 1000));
       if(left > 0){
-        toast("Тестовый PRO: осталось " + left + " сек.", false);
+        setActivatorText(left + " сек");
+        toast("Удерживайте: осталось " + left + " сек.", false);
       }
-    }, 1000);
+    }
+
+    updateCountdown();
+
+    progressTimer = setInterval(updateCountdown, 250);
 
     holdTimer = setTimeout(function(){
       clearInterval(progressTimer);
 
-      const active = localStorage.getItem(PRO_KEY) === "true";
+      const active = isPro();
 
       if(active){
         localStorage.removeItem(PRO_KEY);
         localStorage.removeItem("barakaway_pro_plan");
+        setActivatorText("Активировать");
         toast("Тестовый PRO выключен.", true);
       }else{
         localStorage.setItem(PRO_KEY, "true");
         localStorage.setItem("barakaway_pro_plan", "developer-test");
+        setActivatorText("Активно");
         toast("Тестовый PRO активирован на всех страницах.", true);
       }
 
@@ -8389,11 +8463,21 @@ window.addEventListener("DOMContentLoaded",function(){const installBtn=document.
     }, HOLD_MS);
   }
 
-  function cancelHold(){
+  function cancelHold(event){
+    if(event){
+      event.preventDefault();
+      event.stopPropagation();
+    }
+
     clearTimeout(holdTimer);
     clearInterval(progressTimer);
     holdTimer = null;
     progressTimer = null;
+
+    const node = getActivator();
+    if(node && Date.now() - startedAt < HOLD_MS){
+      node.textContent = originalText || (isPro() ? "Активно" : "Активировать");
+    }
   }
 
   function init(){
@@ -8404,14 +8488,27 @@ window.addEventListener("DOMContentLoaded",function(){const installBtn=document.
     node.style.cursor = "pointer";
     node.style.userSelect = "none";
     node.style.webkitUserSelect = "none";
+    node.style.webkitTouchCallout = "none";
+    node.style.touchAction = "none";
     node.setAttribute("title", "Тестовый режим: удерживать 7 секунд");
 
+    node.addEventListener("contextmenu", function(event){
+      event.preventDefault();
+      event.stopPropagation();
+      return false;
+    });
+
+    node.addEventListener("click", function(event){
+      event.preventDefault();
+      event.stopPropagation();
+    });
+
     node.addEventListener("mousedown", startHold);
-    node.addEventListener("touchstart", startHold, {passive:true});
+    node.addEventListener("touchstart", startHold, {passive:false});
     node.addEventListener("mouseup", cancelHold);
     node.addEventListener("mouseleave", cancelHold);
-    node.addEventListener("touchend", cancelHold);
-    node.addEventListener("touchcancel", cancelHold);
+    node.addEventListener("touchend", cancelHold, {passive:false});
+    node.addEventListener("touchcancel", cancelHold, {passive:false});
   }
 
   if(document.readyState === "loading"){
