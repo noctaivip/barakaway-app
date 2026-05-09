@@ -459,3 +459,160 @@ html[class*="premium-theme-"] .theme-switch{
   setTimeout(run, 900);
 })();
 
+
+(function(){
+  const STYLE_ID = "barakaway-logo-only-transparency-fix";
+  const CSS = `
+/* ===== BARAKAWAY LOGO ONLY TRANSPARENCY FIX ===== */
+
+/* Do not let PRO themes repaint the BarakaWay logo or its compact logo wrapper */
+html[class*="premium-theme-"] .barakaway-logo,
+html[class*="premium-theme-"] .brand-logo,
+html[class*="premium-theme-"] .app-logo,
+html[class*="premium-theme-"] .logo,
+html[class*="premium-theme-"] .wordmark,
+html[class*="premium-theme-"] .brand-wordmark,
+html[class*="premium-theme-"] [data-logo],
+html[class*="premium-theme-"] [data-brand-logo],
+html[class*="premium-theme-"] [class*="barakaway-logo"],
+html[class*="premium-theme-"] [class*="brand-logo"],
+html[class*="premium-theme-"] [class*="app-logo"],
+html[class*="premium-theme-"] [class*="wordmark"],
+html[class*="premium-theme-"] [class*="logo"]{
+  background:transparent !important;
+  background-color:transparent !important;
+  background-image:none !important;
+  border-color:transparent !important;
+  box-shadow:none !important;
+  filter:none !important;
+  backdrop-filter:none !important;
+  -webkit-backdrop-filter:none !important;
+}
+
+html[class*="premium-theme-"] .barakaway-logo *,
+html[class*="premium-theme-"] .brand-logo *,
+html[class*="premium-theme-"] .app-logo *,
+html[class*="premium-theme-"] .logo *,
+html[class*="premium-theme-"] .wordmark *,
+html[class*="premium-theme-"] .brand-wordmark *,
+html[class*="premium-theme-"] [data-logo] *,
+html[class*="premium-theme-"] [data-brand-logo] *,
+html[class*="premium-theme-"] [class*="barakaway-logo"] *,
+html[class*="premium-theme-"] [class*="brand-logo"] *,
+html[class*="premium-theme-"] [class*="app-logo"] *,
+html[class*="premium-theme-"] [class*="wordmark"] *,
+html[class*="premium-theme-"] [class*="logo"] *{
+  background:transparent !important;
+  background-color:transparent !important;
+  background-image:none !important;
+  border-color:transparent !important;
+  box-shadow:none !important;
+  filter:none !important;
+  backdrop-filter:none !important;
+  -webkit-backdrop-filter:none !important;
+}
+
+/* JS adds this class directly to the detected logo wrapper */
+html[class*="premium-theme-"] .bw-logo-transparent-lock,
+html[class*="premium-theme-"] .bw-logo-transparent-lock *{
+  background:transparent !important;
+  background-color:transparent !important;
+  background-image:none !important;
+  border-color:transparent !important;
+  box-shadow:none !important;
+  filter:none !important;
+  backdrop-filter:none !important;
+  -webkit-backdrop-filter:none !important;
+}
+
+/* ===== END BARAKAWAY LOGO ONLY TRANSPARENCY FIX ===== */
+`;
+
+  function injectLogoOnlyCss(){
+    let style = document.getElementById(STYLE_ID);
+    if(!style){
+      style = document.createElement("style");
+      style.id = STYLE_ID;
+      (document.head || document.documentElement).appendChild(style);
+    }
+    style.textContent = CSS;
+  }
+
+  function makeTransparent(node){
+    if(!node || node === document.body || node === document.documentElement) return;
+    node.classList.add("bw-logo-transparent-lock");
+    node.style.setProperty("background", "transparent", "important");
+    node.style.setProperty("background-color", "transparent", "important");
+    node.style.setProperty("background-image", "none", "important");
+    node.style.setProperty("border-color", "transparent", "important");
+    node.style.setProperty("box-shadow", "none", "important");
+    node.style.setProperty("filter", "none", "important");
+    node.style.setProperty("backdrop-filter", "none", "important");
+    node.style.setProperty("-webkit-backdrop-filter", "none", "important");
+  }
+
+  function looksLikeCompactLogoWrapper(node){
+    if(!node || node === document.body || node === document.documentElement) return false;
+
+    const rect = node.getBoundingClientRect ? node.getBoundingClientRect() : null;
+    if(!rect) return false;
+
+    const text = (node.textContent || "").replace(/\s+/g, "").trim();
+    const compactSize = rect.width > 20 && rect.width < 360 && rect.height > 10 && rect.height < 120;
+    const logoText = text === "BarakaWay" || text === "BARAKAWAY" || text === "BarakaWayApp";
+
+    return compactSize && logoText;
+  }
+
+  function protectBarakaWayLogo(){
+    injectLogoOnlyCss();
+
+    const all = document.querySelectorAll("body *");
+
+    all.forEach(function(node){
+      const rawText = (node.textContent || "").replace(/\s+/g, "").trim();
+      const cls = String(node.className || "").toLowerCase();
+
+      const isLogoByText =
+        rawText === "BarakaWay" ||
+        rawText === "BARAKAWAY" ||
+        rawText === "BarakaWayApp";
+
+      const isLogoByClass =
+        cls.indexOf("logo") !== -1 ||
+        cls.indexOf("wordmark") !== -1 ||
+        cls.indexOf("brand-logo") !== -1 ||
+        cls.indexOf("barakaway-logo") !== -1;
+
+      if(!isLogoByText && !isLogoByClass) return;
+
+      makeTransparent(node);
+
+      let parent = node.parentElement;
+      let depth = 0;
+
+      while(parent && depth < 4){
+        if(looksLikeCompactLogoWrapper(parent)){
+          makeTransparent(parent);
+        }
+        parent = parent.parentElement;
+        depth++;
+      }
+    });
+  }
+
+  protectBarakaWayLogo();
+
+  if(document.readyState === "loading"){
+    document.addEventListener("DOMContentLoaded", protectBarakaWayLogo);
+  }else{
+    setTimeout(protectBarakaWayLogo, 0);
+  }
+
+  window.addEventListener("storage", protectBarakaWayLogo);
+  window.addEventListener("barakaway:premium-theme-change", protectBarakaWayLogo);
+
+  setTimeout(protectBarakaWayLogo, 250);
+  setTimeout(protectBarakaWayLogo, 1000);
+})();
+
