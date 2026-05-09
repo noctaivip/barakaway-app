@@ -1920,3 +1920,165 @@ html[class*="premium-theme-"] .bottom-app-nav-item.is-active{
 }
 /* ===== END BARAKAWAY PRO PREMIUM THEMES RUNTIME ===== */
 
+
+/* ===== BARAKAWAY PRO THEMES PRECISION PATCH ===== */
+
+/* Theme chooser cards must keep their own identity colors */
+html[class*="premium-theme-"] .theme-card[data-theme],
+html[class*="premium-theme-"] .theme-card[data-theme] *{
+  transition:background .22s ease,border-color .22s ease,box-shadow .22s ease,color .22s ease !important;
+}
+
+html[class*="premium-theme-"] .theme-card[data-theme]{
+  color:#ffffff !important;
+}
+
+/* Royal Gold card always stays gold */
+html[class*="premium-theme-"] .theme-card[data-theme="royal-gold"]{
+  background:
+    radial-gradient(circle at 90% 10%,rgba(255,244,190,.38),transparent 30%),
+    linear-gradient(135deg,#171208 0%,#5b4218 48%,#d7c07a 100%) !important;
+  border-color:rgba(244,220,148,.58) !important;
+}
+
+/* Emerald Quran card always stays emerald */
+html[class*="premium-theme-"] .theme-card[data-theme="emerald-quran"]{
+  background:
+    radial-gradient(circle at 90% 10%,rgba(102,198,128,.38),transparent 30%),
+    linear-gradient(135deg,#061109 0%,#12301d 52%,#4caf6a 100%) !important;
+  border-color:rgba(102,198,128,.58) !important;
+}
+
+/* Violet card always stays violet */
+html[class*="premium-theme-"] .theme-card[data-theme="violet-noor"]{
+  background:
+    radial-gradient(circle at 90% 10%,rgba(161,118,255,.40),transparent 30%),
+    linear-gradient(135deg,#0d0a15 0%,#241a42 52%,#a176ff 100%) !important;
+  border-color:rgba(161,118,255,.58) !important;
+}
+
+/* Rose card always stays rose */
+html[class*="premium-theme-"] .theme-card[data-theme="rose-soft"]{
+  background:
+    radial-gradient(circle at 90% 10%,rgba(255,158,199,.40),transparent 30%),
+    linear-gradient(135deg,#160a12 0%,#401b31 52%,#ff9ec7 100%) !important;
+  border-color:rgba(255,158,199,.58) !important;
+}
+
+/* Carbon card always stays carbon */
+html[class*="premium-theme-"] .theme-card[data-theme="carbon-elite"]{
+  background:
+    radial-gradient(circle at 90% 10%,rgba(202,213,224,.24),transparent 30%),
+    linear-gradient(135deg,#050607 0%,#1a222c 52%,#59616c 100%) !important;
+  border-color:rgba(202,213,224,.44) !important;
+}
+
+/* Children card always stays soft/kids */
+html[class*="premium-theme-"] .theme-card[data-theme="children-soft"]{
+  background:
+    radial-gradient(circle at 90% 10%,rgba(255,227,241,.40),transparent 30%),
+    linear-gradient(135deg,#0c1f32 0%,#234d75 52%,#87cbff 100%) !important;
+  border-color:rgba(135,203,255,.58) !important;
+}
+
+/* Night mosque card always stays night-blue */
+html[class*="premium-theme-"] .theme-card[data-theme="night-mosque"]{
+  background:
+    radial-gradient(circle at 90% 10%,rgba(215,192,122,.22),transparent 30%),
+    linear-gradient(135deg,#050b13 0%,#10213d 52%,#355d9a 100%) !important;
+  border-color:rgba(118,154,215,.46) !important;
+}
+
+/* Desert card always stays sand */
+html[class*="premium-theme-"] .theme-card[data-theme="desert-sand"]{
+  background:
+    radial-gradient(circle at 90% 10%,rgba(255,237,190,.32),transparent 30%),
+    linear-gradient(135deg,#130c05 0%,#3e2b13 52%,#dbae61 100%) !important;
+  border-color:rgba(255,237,190,.50) !important;
+}
+
+/* Restore-original card stays neutral */
+html[class*="premium-theme-"] .theme-card[data-theme-clear],
+html[class*="premium-theme-"] .restore-original-theme-card{
+  background:
+    linear-gradient(135deg,rgba(15,20,28,.96) 0%,rgba(22,29,39,.96) 100%) !important;
+  border-color:rgba(255,255,255,.12) !important;
+}
+
+/* Make theme-card typography readable but not recolored by active premium theme */
+html[class*="premium-theme-"] .theme-card[data-theme] h3,
+html[class*="premium-theme-"] .theme-card[data-theme] p,
+html[class*="premium-theme-"] .theme-card[data-theme] strong{
+  color:#ffffff !important;
+}
+
+html[class*="premium-theme-"] .theme-card[data-theme] p{
+  color:rgba(255,255,255,.84) !important;
+}
+
+html[class*="premium-theme-"] .theme-card[data-theme] .theme-chip{
+  background:rgba(0,0,0,.22) !important;
+  color:#ffffff !important;
+  border-color:rgba(255,255,255,.18) !important;
+}
+
+/* Hide Light/Dark switch in premium themes */
+html[class*="premium-theme-"] .theme-toggle-label,
+html[class*="premium-theme-"] .theme-toggle,
+html[class*="premium-theme-"] #themeSwitch,
+html[class*="premium-theme-"] label[for="themeSwitch"],
+html[class*="premium-theme-"] .switch,
+html[class*="premium-theme-"] .mode-toggle,
+html[class*="premium-theme-"] .theme-switch{
+  display:none !important;
+}
+
+/* Do not recolor brand logo itself too aggressively */
+html[class*="premium-theme-"] .brand,
+html[class*="premium-theme-"] .brand-logo,
+html[class*="premium-theme-"] .logo,
+html[class*="premium-theme-"] .app-logo{
+  background:transparent !important;
+  box-shadow:none !important;
+}
+
+/* Emerald Quran: deeper premium look */
+html.premium-theme-emerald-quran{
+  --bg:#031008;
+  --surface:#06160d;
+  --surface-2:#0a2114;
+  --surface-3:#0f3521;
+  --border:rgba(91,210,126,.34);
+  --border-2:rgba(149,242,174,.42);
+  --text:#f0fff4;
+  --text-soft:#c7f3d2;
+  --text-muted:#8cdca3;
+  --green:#74df8f;
+  --green-strong:#1f7a43;
+  --green-soft:#d4ffe0;
+  --bw-accent:#74df8f;
+  --bw-accent-2:#b8ffd0;
+}
+
+html.premium-theme-emerald-quran body{
+  background:
+    radial-gradient(circle at 18% 0%,rgba(116,223,143,.18),transparent 28%),
+    radial-gradient(circle at 86% 8%,rgba(215,192,122,.10),transparent 32%),
+    linear-gradient(180deg,#020b06 0%,#061b10 48%,#020b06 100%) !important;
+}
+
+html.premium-theme-emerald-quran .container,
+html.premium-theme-emerald-quran .hero,
+html.premium-theme-emerald-quran .brand-prayer-hero,
+html.premium-theme-emerald-quran .today-hub,
+html.premium-theme-emerald-quran .card,
+html.premium-theme-emerald-quran .panel,
+html.premium-theme-emerald-quran .box{
+  background:
+    radial-gradient(circle at 92% 0%,rgba(116,223,143,.13),transparent 30%),
+    linear-gradient(135deg,#07160d 0%,#0a2114 54%,#06120b 100%) !important;
+  border-color:rgba(116,223,143,.28) !important;
+}
+
+/* ===== END BARAKAWAY PRO THEMES PRECISION PATCH ===== */
+
