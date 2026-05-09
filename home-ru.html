@@ -3797,6 +3797,180 @@ html.light-mode .barakaway-pro-final[data-pro-state="unlocked"] .pro-final-state
   border-color:rgba(255,255,255,.18) !important;
 }
 
+
+/* HOME MOBILE PRO HEADER + THEME STRIP FINAL */
+.pro-final-top{
+  display:flex !important;
+  align-items:center !important;
+  justify-content:space-between !important;
+  gap:10px !important;
+  flex-wrap:nowrap !important;
+  width:100% !important;
+}
+
+.pro-final-badge,
+.pro-final-state{
+  white-space:nowrap !important;
+  flex:0 1 auto !important;
+}
+
+.pro-final-state{
+  appearance:none !important;
+  -webkit-appearance:none !important;
+  border-radius:999px !important;
+  user-select:none !important;
+  -webkit-user-select:none !important;
+  -webkit-touch-callout:none !important;
+  touch-action:none !important;
+  border:none;
+}
+
+.pro-final-themes-link{
+  position:relative;
+  z-index:2;
+  display:flex;
+  align-items:center;
+  gap:14px;
+  margin:0 18px 16px;
+  padding:14px;
+  min-height:82px;
+  border-radius:26px;
+  text-decoration:none;
+  overflow:hidden;
+}
+
+html.dark-mode .pro-final-themes-link,
+html.light-mode .pro-final-themes-link{
+  background:rgba(9,13,16,.76) !important;
+  border:1px solid rgba(244,220,148,.16) !important;
+  box-shadow:0 12px 24px rgba(0,0,0,.16);
+}
+
+.pro-final-theme-strip{
+  flex:0 0 132px;
+  height:48px;
+  border-radius:18px;
+  overflow:hidden;
+  display:grid;
+  grid-template-columns:repeat(6,1fr);
+  border:1px solid rgba(255,255,255,.18);
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.12);
+}
+
+.theme-strip-part{display:block;min-width:0;}
+.theme-strip-gold{background:linear-gradient(180deg,#f4dc94,#9d7424);}
+.theme-strip-emerald{background:linear-gradient(180deg,#66c680,#245f36);}
+.theme-strip-violet{background:linear-gradient(180deg,#a176ff,#3b2868);}
+.theme-strip-rose{background:linear-gradient(180deg,#ff9ec7,#5a263f);}
+.theme-strip-carbon{background:linear-gradient(180deg,#59616c,#0a0d10);}
+.theme-strip-kids{background:linear-gradient(180deg,#87cbff,#ffe3f1);}
+
+.pro-final-themes-label{
+  flex:1 1 auto;
+  min-width:0;
+}
+
+.pro-final-themes-label strong{
+  display:block;
+  color:#ffe9a8;
+  font-size:17px;
+  line-height:1.1;
+  font-weight:950;
+  letter-spacing:-.03em;
+}
+
+.pro-final-themes-label small{
+  display:block;
+  margin-top:4px;
+  color:#ead08a;
+  font-size:12px;
+  line-height:1.28;
+  font-weight:750;
+}
+
+.pro-final-themes-go{
+  flex:0 0 auto;
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  min-height:34px;
+  padding:7px 11px;
+  border-radius:999px;
+  background:rgba(244,220,148,.13);
+  color:#ffe9a8;
+  border:1px solid rgba(244,220,148,.22);
+  font-size:11px;
+  font-weight:950;
+}
+
+@media(max-width:700px){
+  .pro-final-head{
+    padding:16px 12px 12px !important;
+  }
+
+  .pro-final-top{
+    gap:8px !important;
+  }
+
+  .pro-final-badge,
+  .pro-final-state{
+    min-height:34px !important;
+    padding:7px 9px !important;
+    font-size:clamp(9px,2.55vw,11px) !important;
+    letter-spacing:.04em !important;
+  }
+
+  .pro-final-badge{
+    max-width:58%;
+  }
+
+  .pro-final-state{
+    max-width:42%;
+  }
+
+  .pro-final-themes-link{
+    margin:0 12px 14px !important;
+    padding:12px !important;
+    min-height:72px !important;
+    border-radius:22px !important;
+    gap:10px !important;
+  }
+
+  .pro-final-theme-strip{
+    flex-basis:86px !important;
+    height:40px !important;
+    border-radius:15px !important;
+  }
+
+  .pro-final-themes-label strong{
+    font-size:14px !important;
+  }
+
+  .pro-final-themes-label small{
+    font-size:10.5px !important;
+    display:-webkit-box;
+    -webkit-line-clamp:2;
+    -webkit-box-orient:vertical;
+    overflow:hidden;
+  }
+
+  .pro-final-themes-go{
+    display:none !important;
+  }
+}
+
+@media(max-width:360px){
+  .pro-final-badge,
+  .pro-final-state{
+    font-size:9px !important;
+    padding:6px 7px !important;
+  }
+
+  .pro-final-theme-strip{
+    flex-basis:72px !important;
+  }
+}
+
 </style>
 <script src="/theme-init.js"></script>
 <link href="/theme.css" rel="stylesheet"/>
@@ -4306,43 +4480,23 @@ html.light-mode .pro-feature-chip{
     ✅ PRO активен. Карточки ниже открывают премиальные разделы.
   </div>
 
-  <details class="pro-final-themes">
-    <summary>
-      <span>
-        <strong>PRO-темы</strong>
-        <small>Золотая, изумрудная, фиолетовая, карбоновая и другие темы</small>
-      </span>
-      <span class="pro-final-arrow">⌄</span>
-    </summary>
-
-    <div class="pro-final-theme-grid">
-      <a class="pro-final-theme pro-theme-gold" href="pro-ru.html#themes" data-pro-link="themes-pro-ru.html">
-        <strong>Королевское золото</strong>
-        <small>Элитный тёмно-золотой интерфейс</small>
-        <em>PRO</em>
-      </a>
-
-      <a class="pro-final-theme pro-theme-emerald" href="pro-ru.html#themes" data-pro-link="themes-pro-ru.html">
-        <strong>Изумрудный Коран</strong>
-        <small>Глубокая зелёная среда для чтения</small>
-        <em>PRO</em>
-      </a>
-
-      <a class="pro-final-theme pro-theme-violet" href="pro-ru.html#themes" data-pro-link="themes-pro-ru.html">
-        <strong>Фиолетовый нур</strong>
-        <small>Мягкая духовная premium-эстетика</small>
-        <em>PRO</em>
-      </a>
-
-      <a class="pro-final-theme pro-theme-carbon" href="pro-ru.html#themes" data-pro-link="themes-pro-ru.html">
-        <strong>Карбоновая элита</strong>
-        <small>Строгий современный premium-стиль</small>
-        <em>PRO</em>
-      </a>
+  <a class="pro-final-themes-link" href="themes-pro-ru.html" aria-label="Открыть PRO-темы">
+    <div class="pro-final-theme-strip">
+      <span class="theme-strip-part theme-strip-gold"></span>
+      <span class="theme-strip-part theme-strip-emerald"></span>
+      <span class="theme-strip-part theme-strip-violet"></span>
+      <span class="theme-strip-part theme-strip-rose"></span>
+      <span class="theme-strip-part theme-strip-carbon"></span>
+      <span class="theme-strip-part theme-strip-kids"></span>
     </div>
-  </details>
+    <div class="pro-final-themes-label">
+      <strong>PRO-темы</strong>
+      <small>Золото · зелёная · фиолетовая · розовая · карбон · детская</small>
+    </div>
+    <span class="pro-final-themes-go">Открыть</span>
+  </a>
 
-  <div class="pro-final-grid">
+<div class="pro-final-grid">
 
     <a class="pro-final-card" href="pro-ru.html#quran" data-pro-link="quran-pro-ru.html">
       <span class="pro-final-lock">PRO</span>
@@ -8344,6 +8498,7 @@ window.addEventListener("DOMContentLoaded",function(){const installBtn=document.
 
 
 
+
 <script>
 (function(){
   const PRO_KEY = "barakaway_pro";
@@ -8435,12 +8590,10 @@ window.addEventListener("DOMContentLoaded",function(){const installBtn=document.
     }
 
     updateCountdown();
-
     progressTimer = setInterval(updateCountdown, 250);
 
     holdTimer = setTimeout(function(){
       clearInterval(progressTimer);
-
       const active = isPro();
 
       if(active){
@@ -8456,10 +8609,7 @@ window.addEventListener("DOMContentLoaded",function(){const installBtn=document.
       }
 
       fireStorageSync();
-
-      setTimeout(function(){
-        window.location.reload();
-      }, 650);
+      setTimeout(function(){ window.location.reload(); }, 650);
     }, HOLD_MS);
   }
 

@@ -1266,5 +1266,39 @@ body.theme-carbon-elite{
 })();
 </script>
 
+
+<script>
+(function(){
+  function getStatusNode(){
+    return document.getElementById("proState")
+      || document.querySelector("[data-home-pro-state]")
+      || document.querySelector(".pro-final-state")
+      || document.getElementById("accessStatus")
+      || document.querySelector(".access-status");
+  }
+
+  function initProStatusNavigation(){
+    const node = getStatusNode();
+    if(!node || node.__proStatusNavBound) return;
+
+    node.__proStatusNavBound = true;
+    node.style.cursor = "pointer";
+    node.addEventListener("click", function(event){
+      if(localStorage.getItem("barakaway_pro") !== "true"){
+        event.preventDefault();
+        event.stopPropagation();
+        window.location.href = "pro-ru.html";
+      }
+    });
+  }
+
+  if(document.readyState === "loading"){
+    document.addEventListener("DOMContentLoaded", initProStatusNavigation);
+  }else{
+    initProStatusNavigation();
+  }
+})();
+</script>
+
 </body>
 </html>
