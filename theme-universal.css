@@ -2523,3 +2523,323 @@ html[class*="premium-theme-"] .bw-theme-sample-card{
 
 /* ===== END BARAKAWAY PREMIUM 3D THEME LAYER FINAL ===== */
 
+
+/* ===== BARAKAWAY LUXURY PRO THEMES FINAL LAYER ===== */
+
+/*
+  Purpose:
+  - premium 3D depth for all PRO themes;
+  - gold accent separation for Emerald Quran and other dark premium themes;
+  - visible premium borders without merging everything into one color;
+  - keep theme selector cards protected;
+  - keep BarakaWay logo transparent/protected.
+*/
+
+html[class*="premium-theme-"]{
+  --bw-lux-gold:#d7c07a;
+  --bw-lux-gold-soft:#f4dc94;
+  --bw-lux-gold-deep:#9d7424;
+  --bw-lux-border-main:rgba(215,192,122,.44);
+  --bw-lux-border-soft:rgba(255,255,255,.12);
+  --bw-lux-shadow:rgba(0,0,0,.46);
+  --bw-lux-glow:rgba(215,192,122,.20);
+  --bw-lux-inner:rgba(255,255,255,.10);
+  --bw-lux-line:linear-gradient(90deg,transparent,rgba(244,220,148,.72),rgba(116,223,143,.50),transparent);
+}
+
+/* Per-theme luxury accent mapping */
+html.premium-theme-royal-gold{
+  --bw-lux-border-main:rgba(244,220,148,.62);
+  --bw-lux-glow:rgba(244,220,148,.25);
+  --bw-lux-line:linear-gradient(90deg,transparent,rgba(255,241,178,.92),rgba(157,116,36,.72),transparent);
+}
+
+html.premium-theme-emerald-quran{
+  --bw-lux-border-main:rgba(215,192,122,.56);
+  --bw-lux-glow:rgba(116,223,143,.22);
+  --bw-lux-line:linear-gradient(90deg,transparent,rgba(215,192,122,.82),rgba(116,223,143,.62),transparent);
+}
+
+html.premium-theme-violet-noor{
+  --bw-lux-border-main:rgba(215,192,122,.50);
+  --bw-lux-glow:rgba(161,118,255,.24);
+  --bw-lux-line:linear-gradient(90deg,transparent,rgba(215,192,122,.72),rgba(197,168,255,.72),transparent);
+}
+
+html.premium-theme-rose-soft{
+  --bw-lux-border-main:rgba(215,192,122,.48);
+  --bw-lux-glow:rgba(255,158,199,.22);
+  --bw-lux-line:linear-gradient(90deg,transparent,rgba(215,192,122,.70),rgba(255,190,218,.72),transparent);
+}
+
+html.premium-theme-carbon-elite{
+  --bw-lux-border-main:rgba(215,192,122,.42);
+  --bw-lux-glow:rgba(202,213,224,.18);
+  --bw-lux-line:linear-gradient(90deg,transparent,rgba(215,192,122,.62),rgba(202,213,224,.52),transparent);
+}
+
+html.premium-theme-children-soft{
+  --bw-lux-border-main:rgba(255,227,241,.50);
+  --bw-lux-glow:rgba(135,203,255,.20);
+  --bw-lux-line:linear-gradient(90deg,transparent,rgba(255,227,241,.70),rgba(135,203,255,.72),transparent);
+}
+
+html.premium-theme-night-mosque{
+  --bw-lux-border-main:rgba(215,192,122,.48);
+  --bw-lux-glow:rgba(118,154,215,.20);
+  --bw-lux-line:linear-gradient(90deg,transparent,rgba(215,192,122,.72),rgba(118,154,215,.62),transparent);
+}
+
+html.premium-theme-desert-sand{
+  --bw-lux-border-main:rgba(255,237,190,.54);
+  --bw-lux-glow:rgba(219,174,97,.22);
+  --bw-lux-line:linear-gradient(90deg,transparent,rgba(255,237,190,.82),rgba(219,174,97,.62),transparent);
+}
+
+/* Premium background depth, less flat */
+html[class*="premium-theme-"] body{
+  background:
+    radial-gradient(circle at 12% -4%, color-mix(in srgb,var(--bw-accent) 22%,transparent), transparent 28%),
+    radial-gradient(circle at 92% 4%, color-mix(in srgb,var(--bw-lux-gold) 14%,transparent), transparent 32%),
+    radial-gradient(circle at 48% 45%, rgba(255,255,255,.035), transparent 34%),
+    linear-gradient(180deg,var(--bg) 0%,color-mix(in srgb,var(--surface) 72%,#000) 44%,var(--bg) 100%) !important;
+}
+
+/* Main premium surfaces: 3D frame + depth */
+html[class*="premium-theme-"] .container,
+html[class*="premium-theme-"] .hero,
+html[class*="premium-theme-"] .brand-prayer-hero,
+html[class*="premium-theme-"] .today-hub,
+html[class*="premium-theme-"] .about-project-card,
+html[class*="premium-theme-"] .barakaway-pro-final,
+html[class*="premium-theme-"] .block,
+html[class*="premium-theme-"] .card,
+html[class*="premium-theme-"] .box,
+html[class*="premium-theme-"] .panel,
+html[class*="premium-theme-"] .quote,
+html[class*="premium-theme-"] .empty,
+html[class*="premium-theme-"] .article,
+html[class*="premium-theme-"] .category-panel,
+html[class*="premium-theme-"] .surah-card,
+html[class*="premium-theme-"] .prayer-card,
+html[class*="premium-theme-"] .toggle-row,
+html[class*="premium-theme-"] .meta-item,
+html[class*="premium-theme-"] .note-box,
+html[class*="premium-theme-"] .jumuah-box,
+html[class*="premium-theme-"] .month-day,
+html[class*="premium-theme-"] .month-head,
+html[class*="premium-theme-"] .wallet-support,
+html[class*="premium-theme-"] .home-widget,
+html[class*="premium-theme-"] .dua-card,
+html[class*="premium-theme-"] .ayah-card,
+html[class*="premium-theme-"] .master-audio-wrap,
+html[class*="premium-theme-"] .reader-side,
+html[class*="premium-theme-"] .reader-main,
+html[class*="premium-theme-"] .dua-side,
+html[class*="premium-theme-"] .dua-main,
+html[class*="premium-theme-"] .ai-side,
+html[class*="premium-theme-"] .ai-main,
+html[class*="premium-theme-"] .player-panel,
+html[class*="premium-theme-"] .preview-panel,
+html[class*="premium-theme-"] .app-menu-btn,
+html[class*="premium-theme-"] .today-action,
+html[class*="premium-theme-"] .premium-resource-card{
+  position:relative !important;
+  border:1.5px solid var(--bw-lux-border-main) !important;
+  background:
+    radial-gradient(circle at 88% 0%, color-mix(in srgb,var(--bw-accent) 15%,transparent), transparent 30%),
+    radial-gradient(circle at 0% 100%, color-mix(in srgb,var(--bw-lux-gold) 8%,transparent), transparent 28%),
+    linear-gradient(145deg,color-mix(in srgb,var(--surface) 90%,#000) 0%,color-mix(in srgb,var(--surface-2) 94%,#000) 52%,color-mix(in srgb,var(--surface-3) 88%,#000) 100%) !important;
+  box-shadow:
+    0 24px 54px var(--bw-lux-shadow),
+    0 0 0 1px color-mix(in srgb,var(--bw-lux-border-main) 54%,transparent),
+    0 0 34px var(--bw-lux-glow),
+    inset 0 1px 0 var(--bw-lux-inner),
+    inset 0 -22px 36px rgba(0,0,0,.18) !important;
+  transform:translateZ(0) !important;
+}
+
+/* Thin premium shine line on major blocks */
+html[class*="premium-theme-"] .container::after,
+html[class*="premium-theme-"] .hero::after,
+html[class*="premium-theme-"] .brand-prayer-hero::after,
+html[class*="premium-theme-"] .today-hub::after,
+html[class*="premium-theme-"] .panel::after,
+html[class*="premium-theme-"] .card::after,
+html[class*="premium-theme-"] .box::after,
+html[class*="premium-theme-"] .surah-card::after,
+html[class*="premium-theme-"] .ayah-card::after,
+html[class*="premium-theme-"] .prayer-card::after,
+html[class*="premium-theme-"] .month-day::after,
+html[class*="premium-theme-"] .today-action::after{
+  content:"";
+  position:absolute;
+  left:18px;
+  right:18px;
+  top:0;
+  height:1px;
+  background:var(--bw-lux-line);
+  opacity:.72;
+  pointer-events:none;
+}
+
+/* Gold separators for titles, so green does not merge into green */
+html[class*="premium-theme-"] h1,
+html[class*="premium-theme-"] h2,
+html[class*="premium-theme-"] h3,
+html[class*="premium-theme-"] .section-title,
+html[class*="premium-theme-"] .home-section-title,
+html[class*="premium-theme-"] .surah-name,
+html[class*="premium-theme-"] .dua-title{
+  text-shadow:0 2px 14px rgba(0,0,0,.32) !important;
+}
+
+html[class*="premium-theme-"] .section h2,
+html[class*="premium-theme-"] .section-title,
+html[class*="premium-theme-"] h2{
+  border-left-color:var(--bw-lux-gold) !important;
+}
+
+/* Buttons: gold/green premium split */
+html[class*="premium-theme-"] button:not(.icon-btn):not(.share-close):not(.install-help-close):not(.bottom-app-nav-item),
+html[class*="premium-theme-"] .btn,
+html[class*="premium-theme-"] .install-btn,
+html[class*="premium-theme-"] .support-project-btn,
+html[class*="premium-theme-"] .copy-wallet-btn,
+html[class*="premium-theme-"] .quick-btn,
+html[class*="premium-theme-"] .help-option-btn{
+  border:1.5px solid var(--bw-lux-border-main) !important;
+  background:
+    linear-gradient(135deg,color-mix(in srgb,var(--green-strong) 82%,#000) 0%,color-mix(in srgb,var(--bw-accent) 76%,var(--bw-lux-gold)) 54%,color-mix(in srgb,var(--bw-lux-gold) 70%,var(--green-strong)) 135%) !important;
+  color:#ffffff !important;
+  box-shadow:
+    0 15px 30px rgba(0,0,0,.30),
+    0 0 24px var(--bw-lux-glow),
+    inset 0 1px 0 rgba(255,255,255,.16),
+    inset 0 -10px 22px rgba(0,0,0,.20) !important;
+}
+
+/* Inputs/selects: quieter background with gold/green border */
+html[class*="premium-theme-"] input,
+html[class*="premium-theme-"] textarea,
+html[class*="premium-theme-"] select,
+html[class*="premium-theme-"] .search-input,
+html[class*="premium-theme-"] .wallet-address,
+html[class*="premium-theme-"] .input,
+html[class*="premium-theme-"] .select{
+  border:1.4px solid color-mix(in srgb,var(--bw-lux-border-main) 72%,transparent) !important;
+  background:linear-gradient(180deg,color-mix(in srgb,var(--surface) 84%,#000),color-mix(in srgb,var(--surface-2) 84%,#000)) !important;
+  box-shadow:
+    inset 0 1px 0 rgba(255,255,255,.08),
+    inset 0 -10px 22px rgba(0,0,0,.14),
+    0 0 18px color-mix(in srgb,var(--bw-lux-glow) 70%,transparent) !important;
+}
+
+/* Prayer time cards get gold premium borders */
+html[class*="premium-theme-"] .prayer-card,
+html[class*="premium-theme-"] .month-day,
+html[class*="premium-theme-"] .prayer-time-card,
+html[class*="premium-theme-"] .time-card{
+  border-color:color-mix(in srgb,var(--bw-lux-gold) 62%,var(--bw-accent)) !important;
+}
+
+/* Active items stronger */
+html[class*="premium-theme-"] .prayer-card.active,
+html[class*="premium-theme-"] .month-day.today,
+html[class*="premium-theme-"] .bottom-app-nav-item.active,
+html[class*="premium-theme-"] .bottom-app-nav-item.is-active{
+  border-color:var(--bw-lux-gold-soft) !important;
+  box-shadow:
+    0 16px 34px rgba(0,0,0,.32),
+    0 0 26px color-mix(in srgb,var(--bw-lux-gold) 32%,transparent),
+    inset 0 1px 0 rgba(255,255,255,.16) !important;
+}
+
+/* Bottom nav: premium glass 3D */
+html[class*="premium-theme-"] .bottom-app-nav{
+  background:linear-gradient(180deg,rgba(0,0,0,.10),rgba(0,0,0,.44)) !important;
+  border-top:1px solid var(--bw-lux-border-main) !important;
+  box-shadow:
+    0 -18px 44px rgba(0,0,0,.42),
+    0 0 28px var(--bw-lux-glow),
+    inset 0 1px 0 rgba(255,255,255,.08) !important;
+}
+
+html[class*="premium-theme-"] .bottom-app-nav-inner{
+  border:1.5px solid var(--bw-lux-border-main) !important;
+  box-shadow:
+    0 18px 44px rgba(0,0,0,.38),
+    0 0 30px var(--bw-lux-glow),
+    inset 0 1px 0 rgba(255,255,255,.12) !important;
+}
+
+/* Children's theme: soft luxury without breaking layout */
+html.premium-theme-children-soft .today-hub::before,
+html.premium-theme-children-soft .brand-prayer-hero::before,
+html.premium-theme-children-soft .container::before{
+  content:"🧸";
+  position:absolute;
+  opacity:.075;
+  font-size:76px;
+  pointer-events:none;
+  transform:rotate(-12deg);
+  z-index:0;
+}
+
+html.premium-theme-children-soft .today-hub,
+html.premium-theme-children-soft .brand-prayer-hero,
+html.premium-theme-children-soft .container{
+  position:relative;
+  overflow:hidden;
+}
+
+html.premium-theme-children-soft .today-hub::before{right:22px;top:16px;}
+html.premium-theme-children-soft .brand-prayer-hero::before{left:22px;bottom:16px;}
+html.premium-theme-children-soft .container::before{right:28px;bottom:118px;}
+
+/* Critical: do not apply premium repaint to theme sample cards */
+html[class*="premium-theme-"] .theme-grid .theme-card,
+html[class*="premium-theme-"] .theme-card[data-theme],
+html[class*="premium-theme-"] .bw-theme-sample-card{
+  transform:none !important;
+}
+
+/* Critical: do not repaint logo */
+html[class*="premium-theme-"] .bw-logo-transparent-lock,
+html[class*="premium-theme-"] .bw-logo-transparent-lock *,
+html[class*="premium-theme-"] [data-barakaway-logo-lock],
+html[class*="premium-theme-"] [data-barakaway-logo-lock] *{
+  background:transparent !important;
+  background-color:transparent !important;
+  background-image:none !important;
+  border-color:transparent !important;
+  box-shadow:none !important;
+  filter:none !important;
+  backdrop-filter:none !important;
+  -webkit-backdrop-filter:none !important;
+}
+
+/* Reduced motion safety */
+@media (prefers-reduced-motion:no-preference){
+  html[class*="premium-theme-"] .container,
+  html[class*="premium-theme-"] .hero,
+  html[class*="premium-theme-"] .brand-prayer-hero,
+  html[class*="premium-theme-"] .today-hub,
+  html[class*="premium-theme-"] .card,
+  html[class*="premium-theme-"] .panel,
+  html[class*="premium-theme-"] .box{
+    transition:background .28s ease,border-color .28s ease,box-shadow .28s ease,transform .28s ease !important;
+  }
+
+  html[class*="premium-theme-"] .card:hover,
+  html[class*="premium-theme-"] .panel:hover,
+  html[class*="premium-theme-"] .box:hover,
+  html[class*="premium-theme-"] .surah-card:hover,
+  html[class*="premium-theme-"] .ayah-card:hover,
+  html[class*="premium-theme-"] .today-action:hover{
+    transform:translateY(-1px) !important;
+  }
+}
+
+/* ===== END BARAKAWAY LUXURY PRO THEMES FINAL LAYER ===== */
+
