@@ -477,11 +477,55 @@ function activeKey() {
     });
   }
 
+
+  function applyPremiumThemeFromStorage() {
+    try {
+      if (window.BarakaWayTheme && typeof window.BarakaWayTheme.refresh === 'function') {
+        window.BarakaWayTheme.refresh();
+        return;
+      }
+
+      var theme = localStorage.getItem('barakaway_premium_theme') || '';
+      var classes = Array.prototype.slice.call(document.documentElement.classList);
+
+      classes.forEach(function (cls) {
+        if (cls.indexOf('premium-theme-') === 0 || cls.indexOf('theme-') === 0) {
+          document.documentElement.classList.remove(cls);
+        }
+      });
+
+      if (document.body) {
+        Array.prototype.slice.call(document.body.classList).forEach(function (cls) {
+          if (cls.indexOf('premium-theme-') === 0 || cls.indexOf('bw-theme-') === 0 || cls.indexOf('theme-') === 0) {
+            document.body.classList.remove(cls);
+          }
+        });
+      }
+
+      if (theme) {
+        document.documentElement.classList.add('premium-theme-' + theme);
+        document.documentElement.classList.add('theme-' + theme);
+        document.documentElement.setAttribute('data-premium-theme', theme);
+
+        if (document.body) {
+          document.body.classList.add('premium-theme-' + theme);
+          document.body.classList.add('bw-theme-' + theme);
+          document.body.classList.add('theme-' + theme);
+          document.body.setAttribute('data-premium-theme', theme);
+        }
+      } else {
+        document.documentElement.removeAttribute('data-premium-theme');
+        if (document.body) document.body.removeAttribute('data-premium-theme');
+      }
+    } catch (e) {}
+  }
+
   function boot() {
+    applyPremiumThemeFromStorage();
     renderBottomNav();
     initFavoritesButtons();
 
-    window.addEventListener('storage', updateNavHeart);
+    window.addEventListener('storage', function(){ updateNavHeart(); applyPremiumThemeFromStorage(); });
     document.addEventListener('barakaway:favorites:changed', updateNavHeart);
   }
 
