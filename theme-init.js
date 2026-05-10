@@ -3,7 +3,7 @@
 
   const SITE_THEME_KEY = "siteTheme";
   const PREMIUM_THEME_KEY = "barakaway_premium_theme";
-  const STYLE_ID = "barakaway-final-premium-global-themes-v31";
+  const STYLE_ID = "barakaway-final-premium-global-themes-v34";
 
   const PREMIUM_THEMES = [
     "royal-gold",
