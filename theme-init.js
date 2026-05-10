@@ -1493,3 +1493,295 @@ setTimeout(forceThemes,400);
   setTimeout(run,900);
 })();
 
+
+
+(function(){
+  const STYLE_ID = "barakaway-pro-material-themes-institutional-final";
+  const CSS = `
+/* ===== BARAKAWAY PRO MATERIAL THEMES — INSTITUTIONAL TEXTURE LAYER ===== */
+:root{
+  --bw-material-shadow:0 26px 64px rgba(0,0,0,.46),0 0 0 1px rgba(255,255,255,.055),inset 0 1px 0 rgba(255,255,255,.14),inset 0 -26px 42px rgba(0,0,0,.34);
+}
+
+/* Runtime premium surfaces */
+html.premium-theme-royal-gold{
+  --bw-material-bg:
+    linear-gradient(45deg,rgba(255,235,165,.105) 0 7%,transparent 7% 43%,rgba(255,224,126,.095) 43% 57%,transparent 57% 100%),
+    linear-gradient(-45deg,rgba(135,92,24,.20) 0 7%,transparent 7% 43%,rgba(255,244,188,.060) 43% 57%,transparent 57% 100%),
+    radial-gradient(circle at 84% 10%,rgba(255,236,157,.30),transparent 25%),
+    linear-gradient(135deg,#090807 0%,#241804 52%,#8d681d 100%);
+  --bw-material-size:22px 22px,22px 22px,100% 100%,100% 100%;
+  --bw-material-position:0 0,11px 11px,center,center;
+  --bw-material-border:rgba(255,231,150,.26);
+}
+
+html.premium-theme-emerald-quran{
+  --bw-material-bg:
+    linear-gradient(45deg,rgba(162,255,192,.10) 0 8%,transparent 8% 42%,rgba(80,190,112,.10) 42% 58%,transparent 58% 100%),
+    linear-gradient(-45deg,rgba(6,54,28,.24) 0 8%,transparent 8% 42%,rgba(205,255,219,.055) 42% 58%,transparent 58% 100%),
+    radial-gradient(circle at 84% 10%,rgba(111,255,156,.24),transparent 25%),
+    linear-gradient(135deg,#031008 0%,#0d2b19 52%,#2f8050 100%);
+  --bw-material-size:22px 22px,22px 22px,100% 100%,100% 100%;
+  --bw-material-position:0 0,11px 11px,center,center;
+  --bw-material-border:rgba(146,255,182,.24);
+}
+
+html.premium-theme-violet-noor{
+  --bw-material-bg:
+    linear-gradient(45deg,rgba(219,196,255,.11) 0 8%,transparent 8% 42%,rgba(161,118,255,.10) 42% 58%,transparent 58% 100%),
+    linear-gradient(-45deg,rgba(50,30,96,.26) 0 8%,transparent 8% 42%,rgba(242,232,255,.055) 42% 58%,transparent 58% 100%),
+    radial-gradient(circle at 84% 10%,rgba(210,188,255,.28),transparent 25%),
+    linear-gradient(135deg,#090713 0%,#221742 52%,#7658d8 100%);
+  --bw-material-size:21px 21px,21px 21px,100% 100%,100% 100%;
+  --bw-material-position:0 0,10.5px 10.5px,center,center;
+  --bw-material-border:rgba(215,194,255,.25);
+}
+
+html.premium-theme-rose-soft{
+  --bw-material-bg:
+    linear-gradient(45deg,rgba(255,207,229,.12) 0 8%,transparent 8% 42%,rgba(255,142,195,.105) 42% 58%,transparent 58% 100%),
+    linear-gradient(-45deg,rgba(100,33,63,.24) 0 8%,transparent 8% 42%,rgba(255,236,246,.060) 42% 58%,transparent 58% 100%),
+    radial-gradient(circle at 84% 10%,rgba(255,204,227,.30),transparent 25%),
+    linear-gradient(135deg,#150711 0%,#3a1830 52%,#bd6692 100%);
+  --bw-material-size:22px 22px,22px 22px,100% 100%,100% 100%;
+  --bw-material-position:0 0,11px 11px,center,center;
+  --bw-material-border:rgba(255,203,226,.26);
+}
+
+html.premium-theme-carbon-elite{
+  --bw-material-bg:
+    linear-gradient(45deg,rgba(255,255,255,.14) 0 8%,transparent 8% 42%,rgba(255,255,255,.12) 42% 58%,transparent 58% 100%),
+    linear-gradient(-45deg,rgba(255,255,255,.078) 0 8%,transparent 8% 42%,rgba(255,255,255,.070) 42% 58%,transparent 58% 100%),
+    radial-gradient(circle at 84% 10%,rgba(255,255,255,.24),transparent 24%),
+    linear-gradient(135deg,#050608 0%,#151c24 52%,#4d5965 100%);
+  --bw-material-size:20px 20px,20px 20px,100% 100%,100% 100%;
+  --bw-material-position:0 0,10px 10px,center,center;
+  --bw-material-border:rgba(230,238,246,.24);
+}
+
+html.premium-theme-children-soft{
+  --bw-material-bg:
+    linear-gradient(45deg,rgba(255,255,255,.145) 0 8%,transparent 8% 42%,rgba(135,203,255,.135) 42% 58%,transparent 58% 100%),
+    linear-gradient(-45deg,rgba(255,227,241,.115) 0 8%,transparent 8% 42%,rgba(38,92,139,.105) 42% 58%,transparent 58% 100%),
+    radial-gradient(circle at 84% 10%,rgba(255,238,248,.34),transparent 24%),
+    linear-gradient(135deg,#112c48 0%,#3e8fc6 52%,#b9dff6 100%);
+  --bw-material-size:24px 24px,24px 24px,100% 100%,100% 100%;
+  --bw-material-position:0 0,12px 12px,center,center;
+  --bw-material-border:rgba(220,242,255,.30);
+}
+
+html.premium-theme-night-mosque{
+  --bw-material-bg:
+    linear-gradient(45deg,rgba(215,192,122,.105) 0 8%,transparent 8% 42%,rgba(124,167,255,.085) 42% 58%,transparent 58% 100%),
+    linear-gradient(-45deg,rgba(9,20,38,.30) 0 8%,transparent 8% 42%,rgba(244,230,178,.050) 42% 58%,transparent 58% 100%),
+    radial-gradient(circle at 82% 10%,rgba(244,230,178,.24),transparent 18%),
+    linear-gradient(135deg,#030812 0%,#0c1d38 52%,#264d82 100%);
+  --bw-material-size:22px 22px,22px 22px,100% 100%,100% 100%;
+  --bw-material-position:0 0,11px 11px,center,center;
+  --bw-material-border:rgba(218,205,162,.24);
+}
+
+html.premium-theme-desert-sand{
+  --bw-material-bg:
+    linear-gradient(45deg,rgba(255,237,190,.12) 0 8%,transparent 8% 42%,rgba(219,174,97,.11) 42% 58%,transparent 58% 100%),
+    linear-gradient(-45deg,rgba(95,61,18,.25) 0 8%,transparent 8% 42%,rgba(255,247,224,.055) 42% 58%,transparent 58% 100%),
+    radial-gradient(circle at 84% 10%,rgba(255,237,190,.28),transparent 24%),
+    linear-gradient(135deg,#120b04 0%,#4a3215 52%,#b8843d 100%);
+  --bw-material-size:23px 23px,23px 23px,100% 100%,100% 100%;
+  --bw-material-position:0 0,11.5px 11.5px,center,center;
+  --bw-material-border:rgba(255,232,177,.25);
+}
+
+html[class*="premium-theme-"] .container,
+html[class*="premium-theme-"] .hero,
+html[class*="premium-theme-"] .brand-prayer-hero,
+html[class*="premium-theme-"] .today-hub,
+html[class*="premium-theme-"] .about-project-card,
+html[class*="premium-theme-"] .barakaway-pro-final,
+html[class*="premium-theme-"] .block,
+html[class*="premium-theme-"] .card,
+html[class*="premium-theme-"] .box,
+html[class*="premium-theme-"] .panel,
+html[class*="premium-theme-"] .quote,
+html[class*="premium-theme-"] .empty,
+html[class*="premium-theme-"] .article,
+html[class*="premium-theme-"] .category-panel,
+html[class*="premium-theme-"] .surah-card,
+html[class*="premium-theme-"] .prayer-card,
+html[class*="premium-theme-"] .toggle-row,
+html[class*="premium-theme-"] .meta-item,
+html[class*="premium-theme-"] .note-box,
+html[class*="premium-theme-"] .jumuah-box,
+html[class*="premium-theme-"] .month-day,
+html[class*="premium-theme-"] .month-head,
+html[class*="premium-theme-"] .wallet-support,
+html[class*="premium-theme-"] .home-widget,
+html[class*="premium-theme-"] .dua-card,
+html[class*="premium-theme-"] .ayah-card,
+html[class*="premium-theme-"] .master-audio-wrap,
+html[class*="premium-theme-"] .reader-side,
+html[class*="premium-theme-"] .reader-main,
+html[class*="premium-theme-"] .dua-side,
+html[class*="premium-theme-"] .dua-main,
+html[class*="premium-theme-"] .ai-side,
+html[class*="premium-theme-"] .ai-main,
+html[class*="premium-theme-"] .player-panel,
+html[class*="premium-theme-"] .preview-panel,
+html[class*="premium-theme-"] .app-menu-btn,
+html[class*="premium-theme-"] .today-action,
+html[class*="premium-theme-"] .premium-resource-card,
+html[class*="premium-theme-"] .bottom-app-nav,
+html[class*="premium-theme-"] .bottom-app-nav-inner{
+  background-color:var(--surface) !important;
+  background-image:var(--bw-material-bg) !important;
+  background-size:var(--bw-material-size) !important;
+  background-position:var(--bw-material-position) !important;
+  border-color:var(--bw-material-border) !important;
+  box-shadow:var(--bw-material-shadow) !important;
+}
+
+html[class*="premium-theme-"] .theme-grid .theme-card,
+html[class*="premium-theme-"] .theme-card[data-theme],
+html[class*="premium-theme-"] .bw-theme-sample-card{
+  box-shadow:var(--bw-material-shadow) !important;
+}
+
+html[class*="premium-theme-"] .barakaway-logo,
+html[class*="premium-theme-"] .brand-logo,
+html[class*="premium-theme-"] .app-logo,
+html[class*="premium-theme-"] .logo,
+html[class*="premium-theme-"] [data-logo],
+html[class*="premium-theme-"] [class*="barakaway-logo"],
+html[class*="premium-theme-"] [class*="brand-logo"],
+html[class*="premium-theme-"] [class*="app-logo"],
+html[class*="premium-theme-"] [class*="logo"],
+html[class*="premium-theme-"] .bw-logo-transparent-lock,
+html[class*="premium-theme-"] .bw-logo-transparent-lock *,
+html[class*="premium-theme-"] [data-barakaway-logo-lock],
+html[class*="premium-theme-"] [data-barakaway-logo-lock] *{
+  background:transparent !important;
+  background-color:transparent !important;
+  background-image:none !important;
+  box-shadow:none !important;
+  border-color:transparent !important;
+}
+
+/* Selector cards — same material logic as Carbon Elite */
+.theme-gold,.theme-grid .theme-card.theme-gold,.bw-theme-sample-royal-gold,.theme-card[data-theme="royal-gold"]{
+  background-color:#090807 !important;
+  background-image:linear-gradient(45deg,rgba(255,235,165,.15) 0 7%,transparent 7% 43%,rgba(255,224,126,.13) 43% 57%,transparent 57% 100%),linear-gradient(-45deg,rgba(135,92,24,.22) 0 7%,transparent 7% 43%,rgba(255,244,188,.07) 43% 57%,transparent 57% 100%),radial-gradient(circle at 84% 10%,rgba(255,236,157,.34),transparent 25%),linear-gradient(135deg,#090807 0%,#241804 52%,#a07623 100%) !important;
+  background-size:22px 22px,22px 22px,100% 100%,100% 100% !important;
+  background-position:0 0,11px 11px,center,center !important;
+  border-color:rgba(255,231,150,.28) !important;
+}
+.theme-emerald,.theme-grid .theme-card.theme-emerald,.bw-theme-sample-emerald-quran,.theme-card[data-theme="emerald-quran"]{
+  background-color:#031008 !important;
+  background-image:linear-gradient(45deg,rgba(162,255,192,.13) 0 8%,transparent 8% 42%,rgba(80,190,112,.13) 42% 58%,transparent 58% 100%),linear-gradient(-45deg,rgba(6,54,28,.26) 0 8%,transparent 8% 42%,rgba(205,255,219,.07) 42% 58%,transparent 58% 100%),radial-gradient(circle at 84% 10%,rgba(111,255,156,.28),transparent 25%),linear-gradient(135deg,#031008 0%,#0d2b19 52%,#36a064 100%) !important;
+  background-size:22px 22px,22px 22px,100% 100%,100% 100% !important;
+  background-position:0 0,11px 11px,center,center !important;
+  border-color:rgba(146,255,182,.28) !important;
+}
+.theme-violet,.theme-grid .theme-card.theme-violet,.bw-theme-sample-violet-noor,.theme-card[data-theme="violet-noor"]{
+  background-color:#090713 !important;
+  background-image:linear-gradient(45deg,rgba(219,196,255,.15) 0 8%,transparent 8% 42%,rgba(161,118,255,.13) 42% 58%,transparent 58% 100%),linear-gradient(-45deg,rgba(50,30,96,.28) 0 8%,transparent 8% 42%,rgba(242,232,255,.07) 42% 58%,transparent 58% 100%),radial-gradient(circle at 84% 10%,rgba(210,188,255,.32),transparent 25%),linear-gradient(135deg,#090713 0%,#221742 52%,#845ff0 100%) !important;
+  background-size:21px 21px,21px 21px,100% 100%,100% 100% !important;
+  background-position:0 0,10.5px 10.5px,center,center !important;
+  border-color:rgba(215,194,255,.28) !important;
+}
+.theme-rose,.theme-grid .theme-card.theme-rose,.bw-theme-sample-rose-soft,.theme-card[data-theme="rose-soft"]{
+  background-color:#150711 !important;
+  background-image:linear-gradient(45deg,rgba(255,207,229,.16) 0 8%,transparent 8% 42%,rgba(255,142,195,.14) 42% 58%,transparent 58% 100%),linear-gradient(-45deg,rgba(100,33,63,.26) 0 8%,transparent 8% 42%,rgba(255,236,246,.07) 42% 58%,transparent 58% 100%),radial-gradient(circle at 84% 10%,rgba(255,204,227,.34),transparent 25%),linear-gradient(135deg,#150711 0%,#3a1830 52%,#db78aa 100%) !important;
+  background-size:22px 22px,22px 22px,100% 100%,100% 100% !important;
+  background-position:0 0,11px 11px,center,center !important;
+  border-color:rgba(255,203,226,.30) !important;
+}
+.theme-carbon,.theme-grid .theme-card.theme-carbon,.bw-theme-sample-carbon-elite,.theme-card[data-theme="carbon-elite"]{
+  background-color:#07090c !important;
+  background-image:linear-gradient(45deg,rgba(255,255,255,.14) 0 8%,transparent 8% 42%,rgba(255,255,255,.12) 42% 58%,transparent 58% 100%),linear-gradient(-45deg,rgba(255,255,255,.078) 0 8%,transparent 8% 42%,rgba(255,255,255,.070) 42% 58%,transparent 58% 100%),radial-gradient(circle at 84% 10%,rgba(255,255,255,.24),transparent 24%),linear-gradient(135deg,#050608 0%,#151c24 52%,#4d5965 100%) !important;
+  background-size:20px 20px,20px 20px,100% 100%,100% 100% !important;
+  background-position:0 0,10px 10px,center,center !important;
+  border-color:rgba(230,238,246,.24) !important;
+}
+.theme-child,.theme-grid .theme-card.theme-child,.bw-theme-sample-children-soft,.theme-card[data-theme="children-soft"]{
+  background-color:#112c48 !important;
+  background-image:linear-gradient(45deg,rgba(255,255,255,.17) 0 8%,transparent 8% 42%,rgba(135,203,255,.16) 42% 58%,transparent 58% 100%),linear-gradient(-45deg,rgba(255,227,241,.14) 0 8%,transparent 8% 42%,rgba(38,92,139,.12) 42% 58%,transparent 58% 100%),radial-gradient(circle at 84% 10%,rgba(255,238,248,.38),transparent 24%),linear-gradient(135deg,#112c48 0%,#3e8fc6 52%,#b9dff6 100%) !important;
+  background-size:24px 24px,24px 24px,100% 100%,100% 100% !important;
+  background-position:0 0,12px 12px,center,center !important;
+  border-color:rgba(220,242,255,.32) !important;
+}
+.theme-night,.theme-grid .theme-card.theme-night,.bw-theme-sample-night-mosque,.theme-card[data-theme="night-mosque"]{
+  background-color:#030812 !important;
+  background-image:linear-gradient(45deg,rgba(215,192,122,.13) 0 8%,transparent 8% 42%,rgba(124,167,255,.11) 42% 58%,transparent 58% 100%),linear-gradient(-45deg,rgba(9,20,38,.32) 0 8%,transparent 8% 42%,rgba(244,230,178,.06) 42% 58%,transparent 58% 100%),radial-gradient(circle at 82% 10%,rgba(244,230,178,.28),transparent 18%),linear-gradient(135deg,#030812 0%,#0c1d38 52%,#2a5792 100%) !important;
+  background-size:22px 22px,22px 22px,100% 100%,100% 100% !important;
+  background-position:0 0,11px 11px,center,center !important;
+  border-color:rgba(218,205,162,.28) !important;
+}
+.theme-sand,.theme-grid .theme-card.theme-sand,.bw-theme-sample-desert-sand,.theme-card[data-theme="desert-sand"]{
+  background-color:#120b04 !important;
+  background-image:linear-gradient(45deg,rgba(255,237,190,.15) 0 8%,transparent 8% 42%,rgba(219,174,97,.14) 42% 58%,transparent 58% 100%),linear-gradient(-45deg,rgba(95,61,18,.27) 0 8%,transparent 8% 42%,rgba(255,247,224,.07) 42% 58%,transparent 58% 100%),radial-gradient(circle at 84% 10%,rgba(255,237,190,.32),transparent 24%),linear-gradient(135deg,#120b04 0%,#4a3215 52%,#c89448 100%) !important;
+  background-size:23px 23px,23px 23px,100% 100%,100% 100% !important;
+  background-position:0 0,11.5px 11.5px,center,center !important;
+  border-color:rgba(255,232,177,.28) !important;
+}
+
+.theme-grid .theme-card.theme-gold,.theme-grid .theme-card.theme-emerald,.theme-grid .theme-card.theme-violet,.theme-grid .theme-card.theme-rose,.theme-grid .theme-card.theme-carbon,.theme-grid .theme-card.theme-child,.theme-grid .theme-card.theme-night,.theme-grid .theme-card.theme-sand,
+.bw-theme-sample-card,.theme-card[data-theme]{
+  box-shadow:var(--bw-material-shadow) !important;
+}
+.theme-grid .theme-card::after,.bw-theme-sample-card::after,.theme-card[data-theme]::after{
+  content:"";
+  position:absolute;
+  inset:0;
+  background:linear-gradient(118deg,transparent 0%,rgba(255,255,255,.14) 20%,transparent 33%,transparent 66%,rgba(255,255,255,.060) 78%,transparent 100%);
+  pointer-events:none;
+  mix-blend-mode:screen;
+}
+.theme-grid .theme-card h3,.theme-grid .theme-card p,.theme-grid .theme-card .theme-top,.theme-grid .theme-card .theme-preview{position:relative;z-index:2;}
+/* ===== END BARAKAWAY PRO MATERIAL THEMES ===== */
+`;
+
+  const map = [
+    ["Золотая", "theme-gold", "bw-theme-sample-royal-gold"],
+    ["Изумруд", "theme-emerald", "bw-theme-sample-emerald-quran"],
+    ["Фиолет", "theme-violet", "bw-theme-sample-violet-noor"],
+    ["Розовая", "theme-rose", "bw-theme-sample-rose-soft"],
+    ["Карбон", "theme-carbon", "bw-theme-sample-carbon-elite"],
+    ["Детская", "theme-child", "bw-theme-sample-children-soft"],
+    ["Ночная", "theme-night", "bw-theme-sample-night-mosque"],
+    ["Песочная", "theme-sand", "bw-theme-sample-desert-sand"]
+  ];
+
+  function inject(){
+    let style = document.getElementById(STYLE_ID);
+    if(!style){
+      style = document.createElement("style");
+      style.id = STYLE_ID;
+      (document.head || document.documentElement).appendChild(style);
+    }
+    style.textContent = CSS;
+  }
+
+  function markCards(){
+    document.querySelectorAll(".theme-grid .theme-card,.theme-card").forEach(function(card){
+      const text = (card.textContent || "").replace(/\s+/g," ").trim();
+      map.forEach(function(row){
+        if(text.indexOf(row[0]) !== -1){
+          card.classList.add(row[1], "bw-theme-sample-card", row[2]);
+        }
+      });
+    });
+  }
+
+  function run(){ inject(); markCards(); }
+  run();
+  if(document.readyState === "loading"){ document.addEventListener("DOMContentLoaded", run); }
+  else { setTimeout(run, 0); }
+  window.addEventListener("storage", run);
+  window.addEventListener("barakaway:premium-theme-change", run);
+  let count = 0;
+  const timer = setInterval(function(){
+    run();
+    count += 1;
+    if(count >= 10) clearInterval(timer);
+  }, 300);
+})();
