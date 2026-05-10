@@ -1683,437 +1683,683 @@ html[class*="premium-theme-"] .premium-resource-card{
   (document.head || document.documentElement).appendChild(style);
 })();
 
+
+/* ===== BARAKAWAY PREMIUM MATERIAL THEMES FINAL INJECTOR ===== */
 (function(){
-  const STYLE_ID = "barakaway-final-pure-css-premium-theme-patterns";
-  if(document.getElementById(STYLE_ID)) return;
-  const CSS = '\n\n/* ===== BARAKAWAY FINAL PURE CSS PREMIUM THEME PATTERNS ===== */\n/* Pure CSS / inline SVG patterns. No external theme images. Same runtime logic as Carbon Elite. */\nhtml.premium-theme-children-soft{\n  --bg:#07172a;\n  --surface:#102b44;\n  --surface-2:#173a5c;\n  --surface-3:#234d75;\n  --border:rgba(135,203,255,.38);\n  --border-2:rgba(255,227,241,.46);\n  --text:#f5fbff;\n  --text-soft:#d8efff;\n  --text-muted:#b8ddf7;\n  --green:#87cbff;\n  --green-strong:#3d8bc7;\n  --green-soft:#dff4ff;\n  --bw-accent:#87cbff;\n  --bw-accent-2:#ffe3f1;\n}\nhtml.premium-theme-night-mosque{\n  --bg:#050b13;\n  --surface:#091426;\n  --surface-2:#10213d;\n  --surface-3:#172f58;\n  --border:rgba(215,192,122,.30);\n  --border-2:rgba(118,154,215,.40);\n  --text:#f5f8ff;\n  --text-soft:#d2e0f7;\n  --text-muted:#9fb7dc;\n  --green:#d7c07a;\n  --green-strong:#355d9a;\n  --green-soft:#f4e6b2;\n  --bw-accent:#d7c07a;\n  --bw-accent-2:#7ca7ff;\n}\nhtml.premium-theme-desert-sand{\n  --bg:#e2bd7b;\n  --surface:#f1d497;\n  --surface-2:#e3b86d;\n  --surface-3:#fff0c1;\n  --border:rgba(92,58,20,.34);\n  --border-2:rgba(121,78,26,.46);\n  --text:#2b1a08;\n  --text-soft:#4a2d0d;\n  --text-muted:#6a471d;\n  --green:#7a511d;\n  --green-strong:#7c501a;\n  --green-soft:#3a2209;\n  --bw-accent:#7a511d;\n  --bw-accent-2:#fff1c6;\n}\n\nhtml.premium-theme-children-soft body{
-  background-color:#07172a !important;
-  background-image:
-    radial-gradient(circle at 30px 34px, rgba(255,255,255,.18) 0 12px, transparent 12.8px),
-    radial-gradient(circle at 19px 24px, rgba(255,255,255,.14) 0 5.8px, transparent 6.4px),
-    radial-gradient(circle at 41px 24px, rgba(255,255,255,.14) 0 5.8px, transparent 6.4px),
-    linear-gradient(27deg, rgba(255,255,255,.07) 5%, transparent 5%, transparent 45%, rgba(255,255,255,.07) 45%, rgba(255,255,255,.07) 55%, transparent 55%, transparent),
-    linear-gradient(207deg, rgba(255,227,241,.06) 5%, transparent 5%, transparent 45%, rgba(255,227,241,.06) 45%, rgba(255,227,241,.06) 55%, transparent 55%, transparent),
-    linear-gradient(180deg,#07172a 0%,#102a46 50%,#07172a 100%) !important;
-  background-size:96px 96px,96px 96px,96px 96px,18px 18px,18px 18px,100% 100% !important;
-  background-position:0 0,0 0,0 0,0 0,9px 9px,center !important;
-  background-repeat:repeat,repeat,repeat,repeat,repeat,no-repeat !important;
-}\nhtml.premium-theme-night-mosque body{
-  background-color:#050b13 !important;
-  background-image:
-    radial-gradient(circle at 18px 18px, rgba(255,255,255,.42) 0 1.2px, transparent 1.8px),
-    radial-gradient(circle at 48px 31px, rgba(255,255,255,.36) 0 1px, transparent 1.6px),
-    radial-gradient(circle at 82px 16px, rgba(255,255,255,.38) 0 1.1px, transparent 1.7px),
-    radial-gradient(circle at 68px 34px, rgba(215,192,122,.22) 0 10px, transparent 10.8px),
-    linear-gradient(90deg, transparent 0 31%, rgba(215,192,122,.10) 31% 33%, transparent 33% 57%, rgba(215,192,122,.10) 57% 59%, transparent 59% 100%),
-    linear-gradient(27deg, rgba(215,192,122,.08) 5%, transparent 5%, transparent 45%, rgba(215,192,122,.08) 45%, rgba(215,192,122,.08) 55%, transparent 55%, transparent),
-    linear-gradient(207deg, rgba(124,167,255,.07) 5%, transparent 5%, transparent 45%, rgba(124,167,255,.07) 45%, rgba(124,167,255,.07) 55%, transparent 55%, transparent),
-    linear-gradient(180deg,#050b13 0%,#091426 48%,#050b13 100%) !important;
-  background-size:120px 120px,120px 120px,120px 120px,120px 120px,120px 120px,18px 18px,18px 18px,100% 100% !important;
-  background-position:0 0,0 0,0 0,0 0,0 0,0 0,9px 9px,center !important;
-  background-repeat:repeat,repeat,repeat,repeat,repeat,repeat,repeat,no-repeat !important;
-}\nhtml.premium-theme-desert-sand body{
-  background-color:#130c05 !important;
-  background-image:
-    radial-gradient(circle at 2px 2px, rgba(255,237,190,.20) 0 1px, transparent 1.7px),
-    radial-gradient(circle at 10px 8px, rgba(219,174,97,.16) 0 1px, transparent 1.8px),
-    linear-gradient(27deg, rgba(255,237,190,.11) 5%, transparent 5%, transparent 45%, rgba(255,237,190,.11) 45%, rgba(255,237,190,.11) 55%, transparent 55%, transparent),
-    linear-gradient(207deg, rgba(120,72,18,.13) 5%, transparent 5%, transparent 45%, rgba(120,72,18,.13) 45%, rgba(120,72,18,.13) 55%, transparent 55%, transparent),
-    linear-gradient(180deg,#130c05 0%,#1e1408 52%,#130c05 100%) !important;
-  background-size:16px 16px,18px 18px,18px 18px,18px 18px,100% 100% !important;
-  background-position:0 0,6px 8px,0 0,9px 9px,center !important;
-  background-repeat:repeat,repeat,repeat,repeat,no-repeat !important;
-}\n\nbody .theme-grid .theme-card.theme-child,\nbody .theme-grid .theme-card.bw-theme-sample-children-soft,\nbody .theme-grid .theme-card[data-theme="children-soft"]{\n  background-color:#07172a!important;\n  background-image:\n    linear-gradient(115deg,transparent 0%,rgba(255,255,255,.12) 44%,transparent 60%),\n    url("data:image/svg+xml,%3Csvg xmlns=\'http://www.w3.org/2000/svg\' width=\'112\' height=\'112\' viewBox=\'0 0 112 112\'%3E%3Cg fill=\'none\' stroke=\'%23ffffff\' stroke-opacity=\'.22\' stroke-width=\'2.4\' stroke-linecap=\'round\' stroke-linejoin=\'round\'%3E%3Ccircle cx=\'34\' cy=\'38\' r=\'15\'/%3E%3Ccircle cx=\'21\' cy=\'27\' r=\'6.5\'/%3E%3Ccircle cx=\'47\' cy=\'27\' r=\'6.5\'/%3E%3Ccircle cx=\'30\' cy=\'38\' r=\'1.8\' fill=\'%23ffffff\' fill-opacity=\'.25\'/%3E%3Ccircle cx=\'39\' cy=\'38\' r=\'1.8\' fill=\'%23ffffff\' fill-opacity=\'.25\'/%3E%3Cpath d=\'M30 47q4.5 4 9 0\'/%3E%3Cpath d=\'M76 24l3.2 6.5 7.2 1-5.2 5.1 1.2 7.1-6.4-3.4-6.4 3.4 1.2-7.1-5.2-5.1 7.2-1z\'/%3E%3Cpath d=\'M20 78c8-7 20-7 28 0 8-7 20-7 28 0\'/%3E%3C/g%3E%3C/svg%3E"),\n    radial-gradient(circle at 88% 10%,rgba(255,227,241,.24),transparent 30%),\n    linear-gradient(135deg,#102b44 0%,#173a5c 54%,#234d75 100%)!important;\n  background-size:100% 100%,112px 112px,100% 100%,100% 100%!important;\n  background-position:center,0 0,center,center!important;\n  background-repeat:no-repeat,repeat,no-repeat,no-repeat!important;\n  border-color:rgba(135,203,255,.46)!important;\n  box-shadow:0 24px 58px rgba(7,23,42,.42),inset 0 1px 0 rgba(255,255,255,.12),inset 0 -24px 38px rgba(0,0,0,.20)!important;\n}\nbody .theme-grid .theme-card.theme-night,\nbody .theme-grid .theme-card.bw-theme-sample-night-mosque,\nbody .theme-grid .theme-card[data-theme="night-mosque"]{\n  background-color:#050b13!important;\n  background-image:\n    linear-gradient(115deg,transparent 0%,rgba(255,255,255,.08) 44%,transparent 60%),\n    url("data:image/svg+xml,%3Csvg xmlns=\'http://www.w3.org/2000/svg\' width=\'124\' height=\'124\' viewBox=\'0 0 124 124\'%3E%3Cg fill=\'%23ffffff\' fill-opacity=\'.42\'%3E%3Ccircle cx=\'14\' cy=\'18\' r=\'1.1\'/%3E%3Ccircle cx=\'47\' cy=\'29\' r=\'.85\'/%3E%3Ccircle cx=\'82\' cy=\'14\' r=\'1.1\'/%3E%3Ccircle cx=\'108\' cy=\'51\' r=\'.8\'/%3E%3Ccircle cx=\'29\' cy=\'81\' r=\'1\'/%3E%3Ccircle cx=\'76\' cy=\'95\' r=\'.8\'/%3E%3Ccircle cx=\'113\' cy=\'109\' r=\'1.1\'/%3E%3Cpath d=\'M70 35a14 14 0 1 1-14-14 10.5 10.5 0 1 0 14 14z\' fill=\'%23d7c07a\' fill-opacity=\'.30\'/%3E%3C/g%3E%3Cg fill=\'none\' stroke=\'%23d7c07a\' stroke-opacity=\'.15\' stroke-width=\'1.45\'%3E%3Cpath d=\'M18 116h88\'/%3E%3Cpath d=\'M36 116V86q8-19 17 0v30\'/%3E%3Cpath d=\'M70 116V77q11-23 22 0v39\'/%3E%3C/g%3E%3C/svg%3E"),\n    radial-gradient(circle at 82% 12%,rgba(215,192,122,.22),transparent 22%),\n    linear-gradient(135deg,#050b13 0%,#091426 50%,#172f58 100%)!important;\n  background-size:100% 100%,124px 124px,100% 100%,100% 100%!important;\n  background-position:center,0 0,center,center!important;\n  background-repeat:no-repeat,repeat,no-repeat,no-repeat!important;\n  border-color:rgba(118,154,215,.40)!important;\n  box-shadow:0 24px 58px rgba(0,8,32,.54),0 0 34px rgba(120,160,255,.14),inset 0 1px 0 rgba(255,255,255,.14),inset 0 -24px 38px rgba(0,0,0,.34)!important;\n}\nbody .theme-grid .theme-card.theme-sand,\nbody .theme-grid .theme-card.bw-theme-sample-desert-sand,\nbody .theme-grid .theme-card[data-theme="desert-sand"]{\n  background-color:#e2bd7b!important;\n  background-image:\n    linear-gradient(115deg,transparent 0%,rgba(255,255,255,.18) 44%,transparent 60%),\n    url("data:image/svg+xml,%3Csvg xmlns=\'http://www.w3.org/2000/svg\' width=\'64\' height=\'64\' viewBox=\'0 0 64 64\'%3E%3Cg fill=\'%23fff0c8\' fill-opacity=\'.28\'%3E%3Ccircle cx=\'6\' cy=\'9\' r=\'1.1\'/%3E%3Ccircle cx=\'26\' cy=\'13\' r=\'.8\'/%3E%3Ccircle cx=\'47\' cy=\'6\' r=\'1\'/%3E%3Ccircle cx=\'56\' cy=\'30\' r=\'.9\'/%3E%3Ccircle cx=\'11\' cy=\'42\' r=\'.8\'/%3E%3Ccircle cx=\'34\' cy=\'52\' r=\'1\'/%3E%3Ccircle cx=\'59\' cy=\'58\' r=\'.75\'/%3E%3C/g%3E%3Cg fill=\'%23a86f2c\' fill-opacity=\'.14\'%3E%3Ccircle cx=\'18\' cy=\'26\' r=\'.9\'/%3E%3Ccircle cx=\'39\' cy=\'34\' r=\'.8\'/%3E%3Ccircle cx=\'50\' cy=\'47\' r=\'.75\'/%3E%3C/g%3E%3C/svg%3E"),\n    radial-gradient(circle at 88% 10%,rgba(255,241,198,.36),transparent 30%),\n    linear-gradient(135deg,#8d5f25 0%,#d4a95f 52%,#fff0c1 100%)!important;\n  background-size:100% 100%,64px 64px,100% 100%,100% 100%!important;\n  background-position:center,0 0,center,center!important;\n  background-repeat:no-repeat,repeat,no-repeat,no-repeat!important;\n  border-color:rgba(255,239,198,.58)!important;\n  box-shadow:0 24px 58px rgba(120,82,33,.38),inset 0 1px 0 rgba(255,255,255,.30),inset 0 -24px 38px rgba(92,58,20,.22)!important;\n}\n\nbody .theme-grid .theme-card.theme-child h3,\nbody .theme-grid .theme-card.theme-child p,\nbody .theme-grid .theme-card.theme-child strong,\nbody .theme-grid .theme-card.bw-theme-sample-children-soft h3,\nbody .theme-grid .theme-card.bw-theme-sample-children-soft p,\nbody .theme-grid .theme-card.bw-theme-sample-children-soft strong,\nbody .theme-grid .theme-card[data-theme="children-soft"] h3,\nbody .theme-grid .theme-card[data-theme="children-soft"] p,\nbody .theme-grid .theme-card[data-theme="children-soft"] strong,\nbody .theme-grid .theme-card.theme-night h3,\nbody .theme-grid .theme-card.theme-night p,\nbody .theme-grid .theme-card.theme-night strong,\nbody .theme-grid .theme-card.bw-theme-sample-night-mosque h3,\nbody .theme-grid .theme-card.bw-theme-sample-night-mosque p,\nbody .theme-grid .theme-card.bw-theme-sample-night-mosque strong,\nbody .theme-grid .theme-card[data-theme="night-mosque"] h3,\nbody .theme-grid .theme-card[data-theme="night-mosque"] p,\nbody .theme-grid .theme-card[data-theme="night-mosque"] strong{\n  color:#fff!important;\n  text-shadow:0 2px 14px rgba(0,0,0,.58)!important;\n}\nbody .theme-grid .theme-card.theme-sand h3,\nbody .theme-grid .theme-card.theme-sand p,\nbody .theme-grid .theme-card.theme-sand strong,\nbody .theme-grid .theme-card.bw-theme-sample-desert-sand h3,\nbody .theme-grid .theme-card.bw-theme-sample-desert-sand p,\nbody .theme-grid .theme-card.bw-theme-sample-desert-sand strong,\nbody .theme-grid .theme-card[data-theme="desert-sand"] h3,\nbody .theme-grid .theme-card[data-theme="desert-sand"] p,\nbody .theme-grid .theme-card[data-theme="desert-sand"] strong{\n  color:#fff8e7!important;\n  text-shadow:0 2px 14px rgba(43,26,8,.72)!important;\n}\n\nhtml.premium-theme-desert-sand h1,\nhtml.premium-theme-desert-sand h2,\nhtml.premium-theme-desert-sand h3,\nhtml.premium-theme-desert-sand h4,\nhtml.premium-theme-desert-sand h5,\nhtml.premium-theme-desert-sand h6,\nhtml.premium-theme-desert-sand .title,\nhtml.premium-theme-desert-sand .section-title,\nhtml.premium-theme-desert-sand .category-title,\nhtml.premium-theme-desert-sand .meta-value,\nhtml.premium-theme-desert-sand .prayer-name,\nhtml.premium-theme-desert-sand .prayer-time,\nhtml.premium-theme-desert-sand .big-location,\nhtml.premium-theme-desert-sand .next-name{\n  color:#2b1a08!important;\n  text-shadow:0 1px 8px rgba(255,239,198,.62)!important;\n}\nhtml.premium-theme-desert-sand p,\nhtml.premium-theme-desert-sand li,\nhtml.premium-theme-desert-sand .subtitle,\nhtml.premium-theme-desert-sand .small,\nhtml.premium-theme-desert-sand .note,\nhtml.premium-theme-desert-sand .muted,\nhtml.premium-theme-desert-sand .category-intro,\nhtml.premium-theme-desert-sand .ref,\nhtml.premium-theme-desert-sand .label,\nhtml.premium-theme-desert-sand .translit,\nhtml.premium-theme-desert-sand .meaning,\nhtml.premium-theme-desert-sand .when,\nhtml.premium-theme-desert-sand .surah-meta,\nhtml.premium-theme-desert-sand .article p,\nhtml.premium-theme-desert-sand .ayah-translit,\nhtml.premium-theme-desert-sand .ayah-meaning{\n  color:#4a2d0d!important;\n  text-shadow:0 1px 8px rgba(255,239,198,.46)!important;\n}\nhtml.premium-theme-desert-sand .bottom-app-nav,\nhtml.premium-theme-desert-sand .bottom-app-nav-inner{\n  color:#2b1a08!important;\n}\nhtml.premium-theme-night-mosque h1,\nhtml.premium-theme-night-mosque h2,\nhtml.premium-theme-night-mosque h3,\nhtml.premium-theme-night-mosque h4,\nhtml.premium-theme-night-mosque p,\nhtml.premium-theme-night-mosque li,\nhtml.premium-theme-children-soft h1,\nhtml.premium-theme-children-soft h2,\nhtml.premium-theme-children-soft h3,\nhtml.premium-theme-children-soft h4,\nhtml.premium-theme-children-soft p,\nhtml.premium-theme-children-soft li{\n  text-shadow:0 2px 12px rgba(0,0,0,.35)!important;\n}\n/* ===== END BARAKAWAY FINAL PURE CSS PREMIUM THEME PATTERNS ===== */\n';
-  const style = document.createElement("style");
-  style.id = STYLE_ID;
-  style.textContent = CSS;
-  (document.head || document.documentElement).appendChild(style);
-})();
-
-
-(function(){
-  const STYLE_ID='barakaway-final-theme-card-independence-clean';
-  const CSS=`
-
-/* ===== FINAL CLEAN FIX: THEME CARDS DO NOT INHERIT ACTIVE PRO THEME ===== */
-html[class*="premium-theme-"] .theme-grid .theme-card{
-  color:#fff !important;
-  isolation:isolate !important;
-  overflow:hidden !important;
+  const STYLE_ID = "barakaway-premium-material-themes-final";
+  const CSS = `/* ===== BARAKAWAY PREMIUM MATERIAL THEMES FINAL ===== */
+html[class*="premium-theme-"]:not(.premium-theme-carbon-elite){
+  --bw-material-text:#ffffff;
+  --bw-material-text-soft:rgba(255,255,255,.86);
+  --bw-material-border:rgba(255,255,255,.20);
+  --bw-material-border-strong:rgba(255,255,255,.32);
+  --bw-material-accent:#ffffff;
+  --bw-material-accent-soft:rgba(255,255,255,.18);
+  --bw-material-page-bg:linear-gradient(180deg,#0b1016 0%,#101820 52%,#0b1016 100%);
+  --bw-material-surface-color:#101820;
+  --bw-material-surface-bg:linear-gradient(135deg,#151d26 0%,#101820 50%,#17261f 100%);
+  --bw-material-surface-bg-size:100% 100%;
+  --bw-material-surface-bg-position:center;
+  --bw-material-surface-bg-repeat:no-repeat;
+  --bw-material-button-bg:linear-gradient(135deg,#66c680 0%,#2d7a46 100%);
+  --bw-material-button-text:#ffffff;
+  --bw-material-input-bg:linear-gradient(180deg,rgba(10,16,22,.88),rgba(16,24,32,.95));
 }
 
-html[class*="premium-theme-"] .theme-grid .theme-card.theme-gold,
-html[class*="premium-theme-"] .theme-grid .theme-card[data-theme="royal-gold"]{
-  background-color:#171208 !important;
-  background-image:
-    linear-gradient(27deg, rgba(255,239,184,.15) 5%, transparent 5%, transparent 45%, rgba(255,239,184,.15) 45%, rgba(255,239,184,.15) 55%, transparent 55%, transparent),
-    linear-gradient(207deg, rgba(175,132,48,.13) 5%, transparent 5%, transparent 45%, rgba(175,132,48,.13) 45%, rgba(175,132,48,.13) 55%, transparent 55%, transparent),
-    linear-gradient(145deg,#171208 0%,#4b3615 52%,#d7c07a 100%) !important;
-  background-size:18px 18px,18px 18px,100% 100% !important;
-  background-position:0 0,9px 9px,center !important;
-  background-repeat:repeat,repeat,no-repeat !important;
-  border-color:rgba(244,220,148,.58) !important;
-}
-html[class*="premium-theme-"] .theme-grid .theme-card.theme-emerald,
-html[class*="premium-theme-"] .theme-grid .theme-card[data-theme="emerald-quran"]{
-  background-color:#061109 !important;
-  background-image:
-    linear-gradient(27deg, rgba(102,198,128,.14) 5%, transparent 5%, transparent 45%, rgba(102,198,128,.14) 45%, rgba(102,198,128,.14) 55%, transparent 55%, transparent),
-    linear-gradient(207deg, rgba(255,255,255,.07) 5%, transparent 5%, transparent 45%, rgba(255,255,255,.07) 45%, rgba(255,255,255,.07) 55%, transparent 55%, transparent),
-    linear-gradient(145deg,#061109 0%,#12301d 52%,#4caf6a 100%) !important;
-  background-size:18px 18px,18px 18px,100% 100% !important;
-  background-position:0 0,9px 9px,center !important;
-  background-repeat:repeat,repeat,no-repeat !important;
-  border-color:rgba(102,198,128,.58) !important;
-}
-html[class*="premium-theme-"] .theme-grid .theme-card.theme-violet,
-html[class*="premium-theme-"] .theme-grid .theme-card[data-theme="violet-noor"]{
-  background-color:#0d0a15 !important;
-  background-image:
-    linear-gradient(27deg, rgba(197,168,255,.14) 5%, transparent 5%, transparent 45%, rgba(197,168,255,.14) 45%, rgba(197,168,255,.14) 55%, transparent 55%, transparent),
-    linear-gradient(207deg, rgba(255,255,255,.07) 5%, transparent 5%, transparent 45%, rgba(255,255,255,.07) 45%, rgba(255,255,255,.07) 55%, transparent 55%, transparent),
-    linear-gradient(145deg,#0d0a15 0%,#241a42 52%,#a176ff 100%) !important;
-  background-size:18px 18px,18px 18px,100% 100% !important;
-  background-position:0 0,9px 9px,center !important;
-  background-repeat:repeat,repeat,no-repeat !important;
-  border-color:rgba(197,168,255,.58) !important;
-}
-html[class*="premium-theme-"] .theme-grid .theme-card.theme-rose,
-html[class*="premium-theme-"] .theme-grid .theme-card[data-theme="rose-soft"]{
-  background-color:#160a12 !important;
-  background-image:
-    radial-gradient(circle at 28px 28px, rgba(255,158,199,.18) 0 10px, transparent 11px),
-    linear-gradient(27deg, rgba(255,190,218,.13) 5%, transparent 5%, transparent 45%, rgba(255,190,218,.13) 45%, rgba(255,190,218,.13) 55%, transparent 55%, transparent),
-    linear-gradient(207deg, rgba(255,255,255,.07) 5%, transparent 5%, transparent 45%, rgba(255,255,255,.07) 45%, rgba(255,255,255,.07) 55%, transparent 55%, transparent),
-    linear-gradient(145deg,#160a12 0%,#401b31 52%,#ff9ec7 100%) !important;
-  background-size:96px 96px,18px 18px,18px 18px,100% 100% !important;
-  background-position:0 0,0 0,9px 9px,center !important;
-  background-repeat:repeat,repeat,repeat,no-repeat !important;
-  border-color:rgba(255,190,218,.58) !important;
-}
-html[class*="premium-theme-"] .theme-grid .theme-card.theme-carbon,
-html[class*="premium-theme-"] .theme-grid .theme-card[data-theme="carbon-elite"]{
-  background-color:#0b0f14 !important;
-  background-image:
-    linear-gradient(27deg, rgba(255,255,255,.10) 5%, transparent 5%, transparent 45%, rgba(255,255,255,.10) 45%, rgba(255,255,255,.10) 55%, transparent 55%, transparent),
-    linear-gradient(207deg, rgba(255,255,255,.06) 5%, transparent 5%, transparent 45%, rgba(255,255,255,.06) 45%, rgba(255,255,255,.06) 55%, transparent 55%, transparent),
-    linear-gradient(145deg,#07090c 0%,#1c232c 52%,#4b5562 100%) !important;
-  background-size:18px 18px,18px 18px,100% 100% !important;
-  background-position:0 0,9px 9px,center !important;
-  background-repeat:repeat,repeat,no-repeat !important;
-  border-color:rgba(255,255,255,.12) !important;
-}
-html[class*="premium-theme-"] .theme-grid .theme-card.theme-child,
-html[class*="premium-theme-"] .theme-grid .theme-card[data-theme="children-soft"]{
-  background-color:#07172a !important;
-  background-image:
-    linear-gradient(27deg, rgba(255,255,255,.13) 5%, transparent 5%, transparent 45%, rgba(255,255,255,.13) 45%, rgba(255,255,255,.13) 55%, transparent 55%, transparent),
-    linear-gradient(207deg, rgba(255,227,241,.10) 5%, transparent 5%, transparent 45%, rgba(255,227,241,.10) 45%, rgba(255,227,241,.10) 55%, transparent 55%, transparent),
-    radial-gradient(circle at 30px 34px, rgba(255,255,255,.34) 0 12px, transparent 12.8px),
-    radial-gradient(circle at 19px 24px, rgba(255,255,255,.28) 0 5.8px, transparent 6.4px),
-    radial-gradient(circle at 41px 24px, rgba(255,255,255,.28) 0 5.8px, transparent 6.4px),
-    linear-gradient(145deg,#07172a 0%,#225983 52%,#8fcfff 100%) !important;
-  background-size:18px 18px,18px 18px,96px 96px,96px 96px,96px 96px,100% 100% !important;
-  background-position:0 0,9px 9px,0 0,0 0,0 0,center !important;
-  background-repeat:repeat,repeat,repeat,repeat,repeat,no-repeat !important;
-  border-color:rgba(160,220,255,.46) !important;
-}
-html[class*="premium-theme-"] .theme-grid .theme-card.theme-night,
-html[class*="premium-theme-"] .theme-grid .theme-card[data-theme="night-mosque"]{
-  background-color:#050b13 !important;
-  background-image:
-    linear-gradient(27deg, rgba(215,192,122,.12) 5%, transparent 5%, transparent 45%, rgba(215,192,122,.12) 45%, rgba(215,192,122,.12) 55%, transparent 55%, transparent),
-    linear-gradient(207deg, rgba(124,167,255,.10) 5%, transparent 5%, transparent 45%, rgba(124,167,255,.10) 45%, rgba(124,167,255,.10) 55%, transparent 55%, transparent),
-    radial-gradient(circle at 18px 18px, rgba(255,255,255,.48) 0 1.2px, transparent 1.8px),
-    radial-gradient(circle at 68px 34px, rgba(215,192,122,.30) 0 10px, transparent 10.8px),
-    linear-gradient(90deg, transparent 0 31%, rgba(215,192,122,.18) 31% 33%, transparent 33% 57%, rgba(215,192,122,.18) 57% 59%, transparent 59% 100%),
-    linear-gradient(145deg,#050b13 0%,#10213d 52%,#294f86 100%) !important;
-  background-size:18px 18px,18px 18px,120px 120px,120px 120px,120px 120px,100% 100% !important;
-  background-position:0 0,9px 9px,0 0,0 0,0 0,center !important;
-  background-repeat:repeat,repeat,repeat,repeat,repeat,no-repeat !important;
-  border-color:rgba(118,154,215,.44) !important;
-}
-html[class*="premium-theme-"] .theme-grid .theme-card.theme-sand,
-html[class*="premium-theme-"] .theme-grid .theme-card[data-theme="desert-sand"]{
-  background-color:#2b1906 !important;
-  background-image:
-    radial-gradient(circle at 2px 2px, rgba(255,237,190,.36) 0 1px, transparent 1.7px),
-    radial-gradient(circle at 10px 8px, rgba(219,174,97,.26) 0 1px, transparent 1.8px),
-    linear-gradient(27deg, rgba(255,237,190,.18) 5%, transparent 5%, transparent 45%, rgba(255,237,190,.18) 45%, rgba(255,237,190,.18) 55%, transparent 55%, transparent),
-    linear-gradient(207deg, rgba(120,72,18,.18) 5%, transparent 5%, transparent 45%, rgba(120,72,18,.18) 45%, rgba(120,72,18,.18) 55%, transparent 55%, transparent),
-    linear-gradient(145deg,#2b1906 0%,#8a6227 52%,#d7a85e 100%) !important;
-  background-size:16px 16px,18px 18px,18px 18px,18px 18px,100% 100% !important;
-  background-position:0 0,6px 8px,0 0,9px 9px,center !important;
-  background-repeat:repeat,repeat,repeat,repeat,no-repeat !important;
-  border-color:rgba(255,237,190,.48) !important;
+html[class*="premium-theme-"]:not(.premium-theme-carbon-elite) body{
+  background:var(--bw-material-page-bg) !important;
+  color:var(--bw-material-text) !important;
 }
 
-html[class*="premium-theme-"] .theme-grid .theme-card h3,
-html[class*="premium-theme-"] .theme-grid .theme-card p,
-html[class*="premium-theme-"] .theme-grid .theme-card strong{
-  color:#fff !important;
-  text-shadow:0 2px 14px rgba(0,0,0,.58) !important;
-}
-html[class*="premium-theme-"] .theme-grid .theme-card .theme-chip{
-  background:rgba(0,0,0,.26) !important;
-  color:#fff !important;
-  border-color:rgba(255,255,255,.22) !important;
-}
-
-/* Logo transparency only, without repainting parent sections */
-html[class*="premium-theme-"] .barakaway-logo,
-html[class*="premium-theme-"] .brand-logo,
-html[class*="premium-theme-"] .app-logo,
-html[class*="premium-theme-"] .logo,
-html[class*="premium-theme-"] .wordmark,
-html[class*="premium-theme-"] .brand-wordmark,
-html[class*="premium-theme-"] [data-logo],
-html[class*="premium-theme-"] [data-brand-logo],
-html[class*="premium-theme-"] [class*="barakaway-logo"],
-html[class*="premium-theme-"] [class*="brand-logo"],
-html[class*="premium-theme-"] [class*="app-logo"],
-html[class*="premium-theme-"] [class*="wordmark"],
-html[class*="premium-theme-"] [class*="logo"]{
-  background:transparent !important;
-  background-color:transparent !important;
-  background-image:none !important;
-  border-color:transparent !important;
-  box-shadow:none !important;
-  filter:none !important;
-}
-/* ===== END FINAL CLEAN FIX ===== */
-`;
-  function inject(){
-    let style=document.getElementById(STYLE_ID);
-    if(!style){style=document.createElement('style');style.id=STYLE_ID;(document.head||document.documentElement).appendChild(style);}
-    style.textContent=CSS;
-  }
-  inject();
-  if(document.readyState==='loading'){document.addEventListener('DOMContentLoaded',inject);}
-  window.addEventListener('barakaway:premium-theme-change',inject);
-  window.addEventListener('storage',inject);
-})();
-
-
-(function(){
-  const STYLE_ID='barakaway-theme-selector-card-material-lock-v20260510';
-  const CSS = `
-
-/* ===== BARAKAWAY THEME SELECTOR CARD MATERIAL LOCK — V20260510 ===== */
-/* Theme selector cards must never inherit the currently active PRO theme. */
-html body .page .theme-grid .theme-card,
-html[class*="premium-theme-"] body .page .theme-grid .theme-card{
-  color:#ffffff !important;
-  isolation:isolate !important;
-  overflow:hidden !important;
-  text-shadow:0 2px 10px rgba(0,0,0,.32) !important;
+html[class*="premium-theme-"]:not(.premium-theme-carbon-elite) .container,
+html[class*="premium-theme-"]:not(.premium-theme-carbon-elite) .hero,
+html[class*="premium-theme-"]:not(.premium-theme-carbon-elite) .brand-prayer-hero,
+html[class*="premium-theme-"]:not(.premium-theme-carbon-elite) .today-hub,
+html[class*="premium-theme-"]:not(.premium-theme-carbon-elite) .about-project-card,
+html[class*="premium-theme-"]:not(.premium-theme-carbon-elite) .barakaway-pro-final,
+html[class*="premium-theme-"]:not(.premium-theme-carbon-elite) .block,
+html[class*="premium-theme-"]:not(.premium-theme-carbon-elite) .card,
+html[class*="premium-theme-"]:not(.premium-theme-carbon-elite) .box,
+html[class*="premium-theme-"]:not(.premium-theme-carbon-elite) .panel,
+html[class*="premium-theme-"]:not(.premium-theme-carbon-elite) .quote,
+html[class*="premium-theme-"]:not(.premium-theme-carbon-elite) .empty,
+html[class*="premium-theme-"]:not(.premium-theme-carbon-elite) .article,
+html[class*="premium-theme-"]:not(.premium-theme-carbon-elite) .category-panel,
+html[class*="premium-theme-"]:not(.premium-theme-carbon-elite) .surah-card,
+html[class*="premium-theme-"]:not(.premium-theme-carbon-elite) .prayer-card,
+html[class*="premium-theme-"]:not(.premium-theme-carbon-elite) .toggle-row,
+html[class*="premium-theme-"]:not(.premium-theme-carbon-elite) .meta-item,
+html[class*="premium-theme-"]:not(.premium-theme-carbon-elite) .note-box,
+html[class*="premium-theme-"]:not(.premium-theme-carbon-elite) .jumuah-box,
+html[class*="premium-theme-"]:not(.premium-theme-carbon-elite) .month-day,
+html[class*="premium-theme-"]:not(.premium-theme-carbon-elite) .month-head,
+html[class*="premium-theme-"]:not(.premium-theme-carbon-elite) .wallet-support,
+html[class*="premium-theme-"]:not(.premium-theme-carbon-elite) .home-widget,
+html[class*="premium-theme-"]:not(.premium-theme-carbon-elite) .dua-card,
+html[class*="premium-theme-"]:not(.premium-theme-carbon-elite) .ayah-card,
+html[class*="premium-theme-"]:not(.premium-theme-carbon-elite) .master-audio-wrap,
+html[class*="premium-theme-"]:not(.premium-theme-carbon-elite) .reader-side,
+html[class*="premium-theme-"]:not(.premium-theme-carbon-elite) .reader-main,
+html[class*="premium-theme-"]:not(.premium-theme-carbon-elite) .dua-side,
+html[class*="premium-theme-"]:not(.premium-theme-carbon-elite) .dua-main,
+html[class*="premium-theme-"]:not(.premium-theme-carbon-elite) .ai-side,
+html[class*="premium-theme-"]:not(.premium-theme-carbon-elite) .ai-main,
+html[class*="premium-theme-"]:not(.premium-theme-carbon-elite) .player-panel,
+html[class*="premium-theme-"]:not(.premium-theme-carbon-elite) .preview-panel,
+html[class*="premium-theme-"]:not(.premium-theme-carbon-elite) .app-menu-btn,
+html[class*="premium-theme-"]:not(.premium-theme-carbon-elite) .today-action,
+html[class*="premium-theme-"]:not(.premium-theme-carbon-elite) .premium-resource-card,
+html[class*="premium-theme-"]:not(.premium-theme-carbon-elite) .bottom-app-nav,
+html[class*="premium-theme-"]:not(.premium-theme-carbon-elite) .bottom-app-nav-inner{
+  background-color:var(--bw-material-surface-color) !important;
+  background-image:var(--bw-material-surface-bg) !important;
+  background-size:var(--bw-material-surface-bg-size) !important;
+  background-position:var(--bw-material-surface-bg-position) !important;
+  background-repeat:var(--bw-material-surface-bg-repeat) !important;
+  border-color:var(--bw-material-border) !important;
+  color:var(--bw-material-text) !important;
+  box-shadow:
+    0 24px 58px rgba(0,0,0,.42),
+    0 0 0 1px rgba(255,255,255,.05),
+    inset 0 1px 0 rgba(255,255,255,.14),
+    inset 0 -22px 34px rgba(0,0,0,.28) !important;
 }
 
-html body .page .theme-grid .theme-card h3,
-html body .page .theme-grid .theme-card p,
-html body .page .theme-grid .theme-card strong,
-html[class*="premium-theme-"] body .page .theme-grid .theme-card h3,
-html[class*="premium-theme-"] body .page .theme-grid .theme-card p,
-html[class*="premium-theme-"] body .page .theme-grid .theme-card strong{
-  color:#ffffff !important;
-  text-shadow:0 2px 10px rgba(0,0,0,.36) !important;
+html[class*="premium-theme-"]:not(.premium-theme-carbon-elite) h1,
+html[class*="premium-theme-"]:not(.premium-theme-carbon-elite) h2,
+html[class*="premium-theme-"]:not(.premium-theme-carbon-elite) h3,
+html[class*="premium-theme-"]:not(.premium-theme-carbon-elite) h4,
+html[class*="premium-theme-"]:not(.premium-theme-carbon-elite) .title,
+html[class*="premium-theme-"]:not(.premium-theme-carbon-elite) .category-title,
+html[class*="premium-theme-"]:not(.premium-theme-carbon-elite) .surah-name,
+html[class*="premium-theme-"]:not(.premium-theme-carbon-elite) .dua-title,
+html[class*="premium-theme-"]:not(.premium-theme-carbon-elite) .ayah-arabic{
+  color:var(--bw-material-text) !important;
 }
 
-html body .page .theme-grid .theme-card .theme-chip,
-html[class*="premium-theme-"] body .page .theme-grid .theme-card .theme-chip{
-  background:rgba(0,0,0,.26) !important;
+html[class*="premium-theme-"]:not(.premium-theme-carbon-elite) p,
+html[class*="premium-theme-"]:not(.premium-theme-carbon-elite) li,
+html[class*="premium-theme-"]:not(.premium-theme-carbon-elite) .subtitle,
+html[class*="premium-theme-"]:not(.premium-theme-carbon-elite) .small,
+html[class*="premium-theme-"]:not(.premium-theme-carbon-elite) .note,
+html[class*="premium-theme-"]:not(.premium-theme-carbon-elite) .muted,
+html[class*="premium-theme-"]:not(.premium-theme-carbon-elite) .label,
+html[class*="premium-theme-"]:not(.premium-theme-carbon-elite) .meaning,
+html[class*="premium-theme-"]:not(.premium-theme-carbon-elite) .when,
+html[class*="premium-theme-"]:not(.premium-theme-carbon-elite) .surah-meta,
+html[class*="premium-theme-"]:not(.premium-theme-carbon-elite) .article p,
+html[class*="premium-theme-"]:not(.premium-theme-carbon-elite) .dua-translit,
+html[class*="premium-theme-"]:not(.premium-theme-carbon-elite) .ayah-translit,
+html[class*="premium-theme-"]:not(.premium-theme-carbon-elite) .ayah-meaning{
+  color:var(--bw-material-text-soft) !important;
+}
+
+html[class*="premium-theme-"]:not(.premium-theme-carbon-elite) strong,
+html[class*="premium-theme-"]:not(.premium-theme-carbon-elite) a,
+html[class*="premium-theme-"]:not(.premium-theme-carbon-elite) .surah-number,
+html[class*="premium-theme-"]:not(.premium-theme-carbon-elite) .badge,
+html[class*="premium-theme-"]:not(.premium-theme-carbon-elite) .chip,
+html[class*="premium-theme-"]:not(.premium-theme-carbon-elite) .wallet-badge{
+  color:var(--bw-material-accent) !important;
+}
+
+html[class*="premium-theme-"]:not(.premium-theme-carbon-elite) .bottom-app-nav-item.active,
+html[class*="premium-theme-"]:not(.premium-theme-carbon-elite) .bottom-app-nav-item.is-active{
+  background:linear-gradient(135deg,var(--bw-material-accent-soft),rgba(255,255,255,.08)) !important;
+  color:var(--bw-material-text) !important;
+  border-color:var(--bw-material-border-strong) !important;
+}
+
+html[class*="premium-theme-"]:not(.premium-theme-carbon-elite) button:not(.icon-btn):not(.share-close):not(.install-help-close):not(.bottom-app-nav-item),
+html[class*="premium-theme-"]:not(.premium-theme-carbon-elite) .btn,
+html[class*="premium-theme-"]:not(.premium-theme-carbon-elite) .install-btn,
+html[class*="premium-theme-"]:not(.premium-theme-carbon-elite) .support-project-btn,
+html[class*="premium-theme-"]:not(.premium-theme-carbon-elite) .copy-wallet-btn,
+html[class*="premium-theme-"]:not(.premium-theme-carbon-elite) .quick-btn{
+  background:var(--bw-material-button-bg) !important;
+  border-color:var(--bw-material-border-strong) !important;
+  color:var(--bw-material-button-text) !important;
+  box-shadow:0 16px 34px rgba(0,0,0,.34), inset 0 1px 0 rgba(255,255,255,.18) !important;
+}
+
+html[class*="premium-theme-"]:not(.premium-theme-carbon-elite) input,
+html[class*="premium-theme-"]:not(.premium-theme-carbon-elite) textarea,
+html[class*="premium-theme-"]:not(.premium-theme-carbon-elite) select,
+html[class*="premium-theme-"]:not(.premium-theme-carbon-elite) .search-input,
+html[class*="premium-theme-"]:not(.premium-theme-carbon-elite) .wallet-address{
+  background:var(--bw-material-input-bg) !important;
+  color:var(--bw-material-text) !important;
+  border-color:var(--bw-material-border-strong) !important;
+}
+
+html[class*="premium-theme-"]:not(.premium-theme-carbon-elite) .theme-grid .theme-card .theme-chip,
+html[class*="premium-theme-"]:not(.premium-theme-carbon-elite) .bw-theme-sample-card .theme-chip{
+  background:rgba(0,0,0,.24) !important;
   border-color:rgba(255,255,255,.22) !important;
   color:#ffffff !important;
 }
 
-html body .page .theme-grid .theme-card.theme-gold,
-html body .page .theme-grid .theme-card[data-theme="royal-gold"],
-html[class*="premium-theme-"] body .page .theme-grid .theme-card.theme-gold,
-html[class*="premium-theme-"] body .page .theme-grid .theme-card[data-theme="royal-gold"]{
-  background-color:#171208 !important;
+body .theme-grid .theme-card.theme-gold,
+body .theme-grid .theme-card[data-theme="royal-gold"],
+html[class*="premium-theme-"] .bw-theme-sample-royal-gold,
+html[class*="premium-theme-"] .theme-card[data-theme="royal-gold"]{
+  background-color:#291906 !important;
   background-image:
-    linear-gradient(27deg, rgba(255,239,184,.15) 5%, transparent 5%, transparent 45%, rgba(255,239,184,.15) 45%, rgba(255,239,184,.15) 55%, transparent 55%, transparent),
-    linear-gradient(207deg, rgba(175,132,48,.13) 5%, transparent 5%, transparent 45%, rgba(175,132,48,.13) 45%, rgba(175,132,48,.13) 55%, transparent 55%, transparent),
-    linear-gradient(145deg,#171208 0%,#4b3615 52%,#d7c07a 100%) !important;
-  background-size:18px 18px,18px 18px,100% 100% !important;
-  background-position:0 0,9px 9px,center !important;
-  background-repeat:repeat,repeat,no-repeat !important;
-  border-color:rgba(244,220,148,.58) !important;
+    radial-gradient(circle at 84% 18%, rgba(255,250,232,.44), transparent 22%),
+    radial-gradient(circle at 18% 92%, rgba(246,205,110,.18), transparent 28%),
+    linear-gradient(115deg, rgba(255,255,255,.18) 0%, rgba(255,255,255,.04) 18%, rgba(255,220,122,.26) 42%, rgba(255,255,255,.08) 58%, rgba(0,0,0,0) 78%),
+    linear-gradient(135deg,#2a1906 0%,#8f662c 54%,#f2cf7a 100%) !important;
+  background-size:100% 100%,100% 100%,100% 100%,100% 100% !important;
+  background-position:center,center,center,center !important;
+  background-repeat:no-repeat !important;
+  border-color:rgba(255,226,155,.54) !important;
+  box-shadow:0 24px 56px rgba(84,55,14,.38), 0 0 0 1px rgba(255,244,206,.12), inset 0 1px 0 rgba(255,255,255,.18), inset 0 -24px 38px rgba(74,45,12,.16) !important;
 }
+body .theme-grid .theme-card.theme-gold .preview-pill,
+body .theme-grid .theme-card[data-theme="royal-gold"] .preview-pill{background:rgba(255,243,207,.52) !important;}
 
-html body .page .theme-grid .theme-card.theme-emerald,
-html body .page .theme-grid .theme-card[data-theme="emerald-quran"],
-html[class*="premium-theme-"] body .page .theme-grid .theme-card.theme-emerald,
-html[class*="premium-theme-"] body .page .theme-grid .theme-card[data-theme="emerald-quran"]{
-  background-color:#061109 !important;
+body .theme-grid .theme-card.theme-emerald,
+body .theme-grid .theme-card[data-theme="emerald-quran"],
+html[class*="premium-theme-"] .bw-theme-sample-emerald-quran,
+html[class*="premium-theme-"] .theme-card[data-theme="emerald-quran"]{
+  background-color:#06140c !important;
   background-image:
-    linear-gradient(27deg, rgba(102,198,128,.14) 5%, transparent 5%, transparent 45%, rgba(102,198,128,.14) 45%, rgba(102,198,128,.14) 55%, transparent 55%, transparent),
-    linear-gradient(207deg, rgba(255,255,255,.07) 5%, transparent 5%, transparent 45%, rgba(255,255,255,.07) 45%, rgba(255,255,255,.07) 55%, transparent 55%, transparent),
-    linear-gradient(145deg,#061109 0%,#12301d 52%,#4caf6a 100%) !important;
-  background-size:18px 18px,18px 18px,100% 100% !important;
-  background-position:0 0,9px 9px,center !important;
-  background-repeat:repeat,repeat,no-repeat !important;
-  border-color:rgba(102,198,128,.58) !important;
+    radial-gradient(circle at 82% 16%, rgba(186,255,214,.30), transparent 22%),
+    radial-gradient(circle at 16% 84%, rgba(72,214,129,.18), transparent 28%),
+    linear-gradient(118deg, rgba(255,255,255,.10) 0%, rgba(255,255,255,0) 20%, rgba(92,232,149,.14) 44%, rgba(255,255,255,.08) 58%, rgba(0,0,0,0) 76%),
+    linear-gradient(135deg,#06140c 0%,#114126 52%,#39a460 100%) !important;
+  background-size:100% 100%,100% 100%,100% 100%,100% 100% !important;
+  background-position:center,center,center,center !important;
+  background-repeat:no-repeat !important;
+  border-color:rgba(129,233,163,.48) !important;
+  box-shadow:0 24px 56px rgba(10,42,24,.40), 0 0 0 1px rgba(178,255,208,.10), inset 0 1px 0 rgba(255,255,255,.16), inset 0 -24px 38px rgba(0,0,0,.18) !important;
 }
+body .theme-grid .theme-card.theme-emerald .preview-pill,
+body .theme-grid .theme-card[data-theme="emerald-quran"] .preview-pill{background:rgba(210,255,224,.46) !important;}
 
-html body .page .theme-grid .theme-card.theme-violet,
-html body .page .theme-grid .theme-card[data-theme="violet-noor"],
-html[class*="premium-theme-"] body .page .theme-grid .theme-card.theme-violet,
-html[class*="premium-theme-"] body .page .theme-grid .theme-card[data-theme="violet-noor"]{
-  background-color:#0d0a15 !important;
+body .theme-grid .theme-card.theme-violet,
+body .theme-grid .theme-card[data-theme="violet-noor"],
+html[class*="premium-theme-"] .bw-theme-sample-violet-noor,
+html[class*="premium-theme-"] .theme-card[data-theme="violet-noor"]{
+  background-color:#0f0a18 !important;
   background-image:
-    linear-gradient(27deg, rgba(197,168,255,.14) 5%, transparent 5%, transparent 45%, rgba(197,168,255,.14) 45%, rgba(197,168,255,.14) 55%, transparent 55%, transparent),
-    linear-gradient(207deg, rgba(255,255,255,.07) 5%, transparent 5%, transparent 45%, rgba(255,255,255,.07) 45%, rgba(255,255,255,.07) 55%, transparent 55%, transparent),
-    linear-gradient(145deg,#0d0a15 0%,#241a42 52%,#a176ff 100%) !important;
-  background-size:18px 18px,18px 18px,100% 100% !important;
-  background-position:0 0,9px 9px,center !important;
-  background-repeat:repeat,repeat,no-repeat !important;
-  border-color:rgba(197,168,255,.58) !important;
+    radial-gradient(circle at 82% 16%, rgba(242,233,255,.34), transparent 22%),
+    radial-gradient(circle at 18% 88%, rgba(168,112,255,.18), transparent 28%),
+    linear-gradient(118deg, rgba(255,255,255,.10) 0%, rgba(255,255,255,0) 18%, rgba(200,168,255,.16) 46%, rgba(255,255,255,.08) 60%, rgba(0,0,0,0) 78%),
+    linear-gradient(135deg,#0f0a18 0%,#341c61 52%,#a87dff 100%) !important;
+  background-size:100% 100%,100% 100%,100% 100%,100% 100% !important;
+  background-position:center,center,center,center !important;
+  background-repeat:no-repeat !important;
+  border-color:rgba(214,191,255,.48) !important;
+  box-shadow:0 24px 56px rgba(30,13,66,.40), 0 0 0 1px rgba(235,225,255,.10), inset 0 1px 0 rgba(255,255,255,.16), inset 0 -24px 38px rgba(0,0,0,.18) !important;
 }
+body .theme-grid .theme-card.theme-violet .preview-pill,
+body .theme-grid .theme-card[data-theme="violet-noor"] .preview-pill{background:rgba(235,224,255,.44) !important;}
 
-html body .page .theme-grid .theme-card.theme-rose,
-html body .page .theme-grid .theme-card[data-theme="rose-soft"],
-html[class*="premium-theme-"] body .page .theme-grid .theme-card.theme-rose,
-html[class*="premium-theme-"] body .page .theme-grid .theme-card[data-theme="rose-soft"]{
-  background-color:#160a12 !important;
+body .theme-grid .theme-card.theme-rose,
+body .theme-grid .theme-card[data-theme="rose-soft"],
+html[class*="premium-theme-"] .bw-theme-sample-rose-soft,
+html[class*="premium-theme-"] .theme-card[data-theme="rose-soft"]{
+  background-color:#1a0b15 !important;
   background-image:
-    radial-gradient(circle at 28px 28px, rgba(255,158,199,.18) 0 10px, transparent 11px),
-    linear-gradient(27deg, rgba(255,190,218,.13) 5%, transparent 5%, transparent 45%, rgba(255,190,218,.13) 45%, rgba(255,190,218,.13) 55%, transparent 55%, transparent),
-    linear-gradient(207deg, rgba(255,255,255,.07) 5%, transparent 5%, transparent 45%, rgba(255,255,255,.07) 45%, rgba(255,255,255,.07) 55%, transparent 55%, transparent),
-    linear-gradient(145deg,#160a12 0%,#401b31 52%,#ff9ec7 100%) !important;
-  background-size:96px 96px,18px 18px,18px 18px,100% 100% !important;
-  background-position:0 0,0 0,9px 9px,center !important;
-  background-repeat:repeat,repeat,repeat,no-repeat !important;
-  border-color:rgba(255,190,218,.58) !important;
+    radial-gradient(circle at 84% 18%, rgba(255,241,247,.38), transparent 24%),
+    radial-gradient(circle at 16% 84%, rgba(255,176,209,.18), transparent 30%),
+    radial-gradient(circle at 24% 18%, rgba(255,205,226,.14) 0 10px, transparent 11px),
+    radial-gradient(circle at 72% 76%, rgba(255,205,226,.14) 0 12px, transparent 13px),
+    linear-gradient(122deg, rgba(255,255,255,.09) 0%, rgba(255,255,255,0) 20%, rgba(255,189,221,.12) 46%, rgba(255,255,255,.08) 60%, rgba(0,0,0,0) 78%),
+    linear-gradient(135deg,#1a0b15 0%,#6a3551 56%,#f1a6c9 100%) !important;
+  background-size:100% 100%,100% 100%,96px 96px,128px 128px,100% 100%,100% 100% !important;
+  background-position:center,center,0 0,18px 14px,center,center !important;
+  background-repeat:no-repeat,no-repeat,repeat,repeat,no-repeat,no-repeat !important;
+  border-color:rgba(255,206,225,.50) !important;
+  box-shadow:0 24px 56px rgba(92,33,64,.34), 0 0 0 1px rgba(255,241,247,.10), inset 0 1px 0 rgba(255,255,255,.16), inset 0 -24px 38px rgba(0,0,0,.16) !important;
 }
+body .theme-grid .theme-card.theme-rose .preview-pill,
+body .theme-grid .theme-card[data-theme="rose-soft"] .preview-pill{background:rgba(255,233,243,.44) !important;}
 
-html body .page .theme-grid .theme-card.theme-carbon,
-html body .page .theme-grid .theme-card[data-theme="carbon-elite"],
-html[class*="premium-theme-"] body .page .theme-grid .theme-card.theme-carbon,
-html[class*="premium-theme-"] body .page .theme-grid .theme-card[data-theme="carbon-elite"]{
-  background-color:#0b0f14 !important;
+body .theme-grid .theme-card.theme-child,
+body .theme-grid .theme-card[data-theme="children-soft"],
+html[class*="premium-theme-"] .bw-theme-sample-children-soft,
+html[class*="premium-theme-"] .theme-card[data-theme="children-soft"]{
+  background-color:#143960 !important;
   background-image:
-    linear-gradient(27deg, rgba(255,255,255,.10) 5%, transparent 5%, transparent 45%, rgba(255,255,255,.10) 45%, rgba(255,255,255,.10) 55%, transparent 55%, transparent),
-    linear-gradient(207deg, rgba(255,255,255,.06) 5%, transparent 5%, transparent 45%, rgba(255,255,255,.06) 45%, rgba(255,255,255,.06) 55%, transparent 55%, transparent),
-    linear-gradient(145deg,#07090c 0%,#1c232c 52%,#4b5562 100%) !important;
-  background-size:18px 18px,18px 18px,100% 100% !important;
-  background-position:0 0,9px 9px,center !important;
-  background-repeat:repeat,repeat,no-repeat !important;
-  border-color:rgba(255,255,255,.12) !important;
+    linear-gradient(135deg, rgba(255,255,255,.08), rgba(255,227,241,.04)),
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='120' viewBox='0 0 180 120'%3E%0A  %3Cg opacity='.28'%3E%0A    %3Cg transform='translate(10 18)'%3E%0A      %3Ccircle cx='24' cy='16' r='8' fill='%23ffffff'/%3E%0A      %3Ccircle cx='40' cy='16' r='8' fill='%23ffffff'/%3E%0A      %3Ccircle cx='32' cy='28' r='18' fill='%23fff6d8'/%3E%0A      %3Ccircle cx='27' cy='25' r='2.4' fill='%237d5a2f'/%3E%0A      %3Ccircle cx='37' cy='25' r='2.4' fill='%237d5a2f'/%3E%0A      %3Ccircle cx='32' cy='31' r='3.6' fill='%23f3b0c8'/%3E%0A      %3Cpath d='M27 36q5 5 10 0' fill='none' stroke='%237d5a2f' stroke-width='2.2' stroke-linecap='round'/%3E%0A      %3Crect x='20' y='44' width='24' height='18' rx='10' fill='%23fff6d8'/%3E%0A    %3C/g%3E%0A    %3Cg transform='translate(84 4) scale(.9)'%3E%0A      %3Ccircle cx='24' cy='16' r='8' fill='%23ffffff'/%3E%0A      %3Ccircle cx='40' cy='16' r='8' fill='%23ffffff'/%3E%0A      %3Ccircle cx='32' cy='28' r='18' fill='%23fff6d8'/%3E%0A      %3Ccircle cx='27' cy='25' r='2.4' fill='%237d5a2f'/%3E%0A      %3Ccircle cx='37' cy='25' r='2.4' fill='%237d5a2f'/%3E%0A      %3Ccircle cx='32' cy='31' r='3.6' fill='%23f3b0c8'/%3E%0A      %3Cpath d='M27 36q5 5 10 0' fill='none' stroke='%237d5a2f' stroke-width='2.2' stroke-linecap='round'/%3E%0A      %3Crect x='20' y='44' width='24' height='18' rx='10' fill='%23fff6d8'/%3E%0A    %3C/g%3E%0A    %3Cg transform='translate(126 54) scale(.78)'%3E%0A      %3Ccircle cx='24' cy='16' r='8' fill='%23ffffff'/%3E%0A      %3Ccircle cx='40' cy='16' r='8' fill='%23ffffff'/%3E%0A      %3Ccircle cx='32' cy='28' r='18' fill='%23fff6d8'/%3E%0A      %3Ccircle cx='27' cy='25' r='2.4' fill='%237d5a2f'/%3E%0A      %3Ccircle cx='37' cy='25' r='2.4' fill='%237d5a2f'/%3E%0A      %3Ccircle cx='32' cy='31' r='3.6' fill='%23f3b0c8'/%3E%0A      %3Cpath d='M27 36q5 5 10 0' fill='none' stroke='%237d5a2f' stroke-width='2.2' stroke-linecap='round'/%3E%0A      %3Crect x='20' y='44' width='24' height='18' rx='10' fill='%23fff6d8'/%3E%0A    %3C/g%3E%0A    %3Cg transform='translate(54 58) scale(.84)'%3E%0A      %3Ccircle cx='24' cy='16' r='8' fill='%23ffffff'/%3E%0A      %3Ccircle cx='40' cy='16' r='8' fill='%23ffffff'/%3E%0A      %3Ccircle cx='32' cy='28' r='18' fill='%23fff6d8'/%3E%0A      %3Ccircle cx='27' cy='25' r='2.4' fill='%237d5a2f'/%3E%0A      %3Ccircle cx='37' cy='25' r='2.4' fill='%237d5a2f'/%3E%0A      %3Ccircle cx='32' cy='31' r='3.6' fill='%23f3b0c8'/%3E%0A      %3Cpath d='M27 36q5 5 10 0' fill='none' stroke='%237d5a2f' stroke-width='2.2' stroke-linecap='round'/%3E%0A      %3Crect x='20' y='44' width='24' height='18' rx='10' fill='%23fff6d8'/%3E%0A    %3C/g%3E%0A  %3C/g%3E%0A%3C/svg%3E"),
+    linear-gradient(135deg,#12304d 0%,#4e96d0 58%,#88c7ff 100%) !important;
+  background-size:100% 100%,180px 120px,100% 100% !important;
+  background-position:center,0 0,center !important;
+  background-repeat:no-repeat,repeat,no-repeat !important;
+  border-color:rgba(214,236,255,.50) !important;
+  box-shadow:0 24px 56px rgba(16,48,78,.38), 0 0 0 1px rgba(255,255,255,.10), inset 0 1px 0 rgba(255,255,255,.18), inset 0 -24px 38px rgba(0,0,0,.14) !important;
 }
+body .theme-grid .theme-card.theme-child .preview-pill,
+body .theme-grid .theme-card[data-theme="children-soft"] .preview-pill{background:rgba(255,247,214,.50) !important;}
 
-html body .page .theme-grid .theme-card.theme-child,
-html body .page .theme-grid .theme-card[data-theme="children-soft"],
-html[class*="premium-theme-"] body .page .theme-grid .theme-card.theme-child,
-html[class*="premium-theme-"] body .page .theme-grid .theme-card[data-theme="children-soft"]{
-  background-color:#07172a !important;
+body .theme-grid .theme-card.theme-night,
+body .theme-grid .theme-card[data-theme="night-mosque"],
+html[class*="premium-theme-"] .bw-theme-sample-night-mosque,
+html[class*="premium-theme-"] .theme-card[data-theme="night-mosque"]{
+  background-color:#041021 !important;
   background-image:
-    linear-gradient(27deg, rgba(255,255,255,.13) 5%, transparent 5%, transparent 45%, rgba(255,255,255,.13) 45%, rgba(255,255,255,.13) 55%, transparent 55%, transparent),
-    linear-gradient(207deg, rgba(255,227,241,.10) 5%, transparent 5%, transparent 45%, rgba(255,227,241,.10) 45%, rgba(255,227,241,.10) 55%, transparent 55%, transparent),
-    radial-gradient(circle at 30px 34px, rgba(255,255,255,.34) 0 12px, transparent 12.8px),
-    radial-gradient(circle at 19px 24px, rgba(255,255,255,.28) 0 5.8px, transparent 6.4px),
-    radial-gradient(circle at 41px 24px, rgba(255,255,255,.28) 0 5.8px, transparent 6.4px),
-    linear-gradient(145deg,#07172a 0%,#225983 52%,#8fcfff 100%) !important;
-  background-size:18px 18px,18px 18px,96px 96px,96px 96px,96px 96px,100% 100% !important;
-  background-position:0 0,9px 9px,0 0,0 0,0 0,center !important;
-  background-repeat:repeat,repeat,repeat,repeat,repeat,no-repeat !important;
-  border-color:rgba(160,220,255,.46) !important;
+    linear-gradient(135deg, rgba(255,255,255,.04), rgba(255,255,255,0) 28%),
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='120' viewBox='0 0 180 120'%3E%0A  %3Crect width='180' height='120' fill='none'/%3E%0A  %3Cg fill='%23ffffff' fill-opacity='.55'%3E%0A    %3Ccircle cx='14' cy='18' r='1.3'/%3E%3Ccircle cx='38' cy='28' r='1'/%3E%3Ccircle cx='61' cy='12' r='1.2'/%3E%3Ccircle cx='91' cy='22' r='1'/%3E%3Ccircle cx='123' cy='16' r='1.25'/%3E%3Ccircle cx='152' cy='34' r='1.05'/%3E%3Ccircle cx='169' cy='18' r='1.1'/%3E%0A    %3Ccircle cx='22' cy='52' r='1.15'/%3E%3Ccircle cx='49' cy='61' r='1'/%3E%3Ccircle cx='78' cy='44' r='1.2'/%3E%3Ccircle cx='112' cy='58' r='1'/%3E%3Ccircle cx='138' cy='49' r='1.2'/%3E%3Ccircle cx='162' cy='63' r='1'/%3E%0A    %3Ccircle cx='18' cy='92' r='1.1'/%3E%3Ccircle cx='44' cy='104' r='1'/%3E%3Ccircle cx='83' cy='90' r='1.2'/%3E%3Ccircle cx='109' cy='98' r='1'/%3E%3Ccircle cx='145' cy='88' r='1.2'/%3E%3Ccircle cx='170' cy='104' r='1'/%3E%0A  %3C/g%3E%0A  %3Cpath d='M128 29a14 14 0 1 1-13-19 10 10 0 1 0 13 19z' fill='%23f1df9f' fill-opacity='.55'/%3E%0A%3C/svg%3E"),
+    linear-gradient(135deg,#041021 0%,#0f2d59 54%,#1b4b8f 100%) !important;
+  background-size:100% 100%,180px 120px,100% 100% !important;
+  background-position:center,0 0,center !important;
+  background-repeat:no-repeat,repeat,no-repeat !important;
+  border-color:rgba(191,214,255,.38) !important;
+  box-shadow:0 24px 56px rgba(0,10,30,.48), 0 0 28px rgba(104,146,255,.14), inset 0 1px 0 rgba(255,255,255,.16), inset 0 -24px 38px rgba(0,0,0,.24) !important;
 }
+body .theme-grid .theme-card.theme-night .preview-pill,
+body .theme-grid .theme-card[data-theme="night-mosque"] .preview-pill{background:rgba(224,234,255,.38) !important;}
 
-html body .page .theme-grid .theme-card.theme-night,
-html body .page .theme-grid .theme-card[data-theme="night-mosque"],
-html[class*="premium-theme-"] body .page .theme-grid .theme-card.theme-night,
-html[class*="premium-theme-"] body .page .theme-grid .theme-card[data-theme="night-mosque"]{
-  background-color:#050b13 !important;
+body .theme-grid .theme-card.theme-sand,
+body .theme-grid .theme-card[data-theme="desert-sand"],
+html[class*="premium-theme-"] .bw-theme-sample-desert-sand,
+html[class*="premium-theme-"] .theme-card[data-theme="desert-sand"]{
+  background-color:#6d471d !important;
   background-image:
-    radial-gradient(circle at 18px 18px, rgba(255,255,255,.48) 0 1.2px, transparent 1.8px),
-    radial-gradient(circle at 48px 31px, rgba(255,255,255,.40) 0 1px, transparent 1.6px),
-    radial-gradient(circle at 82px 16px, rgba(255,255,255,.44) 0 1.1px, transparent 1.7px),
-    radial-gradient(circle at 68px 34px, rgba(215,192,122,.30) 0 10px, transparent 10.8px),
-    linear-gradient(90deg, transparent 0 31%, rgba(215,192,122,.18) 31% 33%, transparent 33% 57%, rgba(215,192,122,.18) 57% 59%, transparent 59% 100%),
-    linear-gradient(27deg, rgba(215,192,122,.12) 5%, transparent 5%, transparent 45%, rgba(215,192,122,.12) 45%, rgba(215,192,122,.12) 55%, transparent 55%, transparent),
-    linear-gradient(207deg, rgba(124,167,255,.10) 5%, transparent 5%, transparent 45%, rgba(124,167,255,.10) 45%, rgba(124,167,255,.10) 55%, transparent 55%, transparent),
-    linear-gradient(145deg,#050b13 0%,#10213d 52%,#294f86 100%) !important;
-  background-size:120px 120px,120px 120px,120px 120px,120px 120px,120px 120px,18px 18px,18px 18px,100% 100% !important;
-  background-position:0 0,0 0,0 0,0 0,0 0,0 0,9px 9px,center !important;
-  background-repeat:repeat,repeat,repeat,repeat,repeat,repeat,repeat,no-repeat !important;
-  border-color:rgba(118,154,215,.44) !important;
+    radial-gradient(circle at 84% 16%, rgba(255,246,217,.24), transparent 24%),
+    radial-gradient(circle at 14% 86%, rgba(255,219,147,.16), transparent 26%),
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='120' viewBox='0 0 160 120'%3E%0A  %3Cg fill='%23fff1c8' fill-opacity='.22'%3E%0A    %3Ccircle cx='8' cy='11' r='1.2'/%3E%3Ccircle cx='31' cy='18' r='1'/%3E%3Ccircle cx='52' cy='8' r='1.1'/%3E%3Ccircle cx='77' cy='16' r='1'/%3E%3Ccircle cx='101' cy='9' r='1.15'/%3E%3Ccircle cx='123' cy='19' r='1'/%3E%3Ccircle cx='146' cy='12' r='1.1'/%3E%0A    %3Ccircle cx='18' cy='42' r='1'/%3E%3Ccircle cx='43' cy='37' r='1.15'/%3E%3Ccircle cx='68' cy='46' r='1'/%3E%3Ccircle cx='92' cy='39' r='1.2'/%3E%3Ccircle cx='116' cy='47' r='1'/%3E%3Ccircle cx='141' cy='40' r='1.1'/%3E%0A    %3Ccircle cx='11' cy='71' r='1.1'/%3E%3Ccircle cx='37' cy='78' r='1'/%3E%3Ccircle cx='59' cy='69' r='1.2'/%3E%3Ccircle cx='84' cy='80' r='1'/%3E%3Ccircle cx='109' cy='73' r='1.1'/%3E%3Ccircle cx='136' cy='81' r='1'/%3E%0A    %3Ccircle cx='19' cy='101' r='1.05'/%3E%3Ccircle cx='48' cy='110' r='1'/%3E%3Ccircle cx='74' cy='98' r='1.1'/%3E%3Ccircle cx='98' cy='109' r='1'/%3E%3Ccircle cx='126' cy='101' r='1.15'/%3E%3Ccircle cx='149' cy='111' r='1'/%3E%0A  %3C/g%3E%0A  %3Cg fill='none' stroke='%23b87c39' stroke-opacity='.18' stroke-width='2'%3E%0A    %3Cpath d='M-6 88c18-9 40-9 58 0 17 8 36 8 54 0 18-9 36-9 54 0'/%3E%0A    %3Cpath d='M-8 103c22-9 42-9 64 0 20 8 38 8 58 0 18-8 34-8 50 0'/%3E%0A  %3C/g%3E%0A%3C/svg%3E"),
+    linear-gradient(150deg,#6d471d 0%,#bf8a46 58%,#efd49b 100%) !important;
+  background-size:100% 100%,100% 100%,160px 120px,100% 100% !important;
+  background-position:center,center,0 0,center !important;
+  background-repeat:no-repeat,no-repeat,repeat,no-repeat !important;
+  border-color:rgba(255,236,188,.48) !important;
+  box-shadow:0 24px 56px rgba(88,60,24,.38), 0 0 0 1px rgba(255,243,212,.10), inset 0 1px 0 rgba(255,255,255,.18), inset 0 -24px 38px rgba(92,58,20,.18) !important;
+}
+body .theme-grid .theme-card.theme-sand .preview-pill,
+body .theme-grid .theme-card[data-theme="desert-sand"] .preview-pill{background:rgba(255,241,206,.46) !important;}
+
+html.premium-theme-royal-gold{
+  --bw-material-text:#fff8e7;
+  --bw-material-text-soft:rgba(255,244,214,.84);
+  --bw-material-border:rgba(255,226,155,.30);
+  --bw-material-border-strong:rgba(255,236,188,.44);
+  --bw-material-accent:#f5d987;
+  --bw-material-accent-soft:rgba(245,217,135,.22);
+  --bw-material-page-bg:radial-gradient(circle at 16% 0%, rgba(255,233,170,.18), transparent 28%), radial-gradient(circle at 84% 10%, rgba(255,210,118,.12), transparent 30%), linear-gradient(180deg,#120b03 0%,#342108 42%,#8a642e 74%,#160f05 100%);
+  --bw-material-surface-color:#291906;
+  --bw-material-surface-bg:radial-gradient(circle at 84% 18%, rgba(255,250,232,.34), transparent 22%), radial-gradient(circle at 16% 84%, rgba(246,205,110,.14), transparent 28%), linear-gradient(115deg, rgba(255,255,255,.16) 0%, rgba(255,255,255,.04) 18%, rgba(255,220,122,.22) 42%, rgba(255,255,255,.08) 58%, rgba(0,0,0,0) 78%), linear-gradient(135deg,#2a1906 0%,#8f662c 54%,#f2cf7a 100%);
+  --bw-material-surface-bg-size:100% 100%,100% 100%,100% 100%,100% 100%;
+  --bw-material-surface-bg-position:center,center,center,center;
+  --bw-material-surface-bg-repeat:no-repeat,no-repeat,no-repeat,no-repeat;
+  --bw-material-button-bg:linear-gradient(180deg,#f6dc96 0%,#c8953a 100%);
+  --bw-material-button-text:#1f1304;
+  --bw-material-input-bg:linear-gradient(180deg,rgba(68,42,12,.88),rgba(38,24,8,.96));
 }
 
-html body .page .theme-grid .theme-card.theme-sand,
-html body .page .theme-grid .theme-card[data-theme="desert-sand"],
-html[class*="premium-theme-"] body .page .theme-grid .theme-card.theme-sand,
-html[class*="premium-theme-"] body .page .theme-grid .theme-card[data-theme="desert-sand"]{
-  background-color:#2b1906 !important;
-  background-image:
-    radial-gradient(circle at 2px 2px, rgba(255,237,190,.36) 0 1px, transparent 1.7px),
-    radial-gradient(circle at 10px 8px, rgba(219,174,97,.26) 0 1px, transparent 1.8px),
-    linear-gradient(27deg, rgba(255,237,190,.18) 5%, transparent 5%, transparent 45%, rgba(255,237,190,.18) 45%, rgba(255,237,190,.18) 55%, transparent 55%, transparent),
-    linear-gradient(207deg, rgba(120,72,18,.18) 5%, transparent 5%, transparent 45%, rgba(120,72,18,.18) 45%, rgba(120,72,18,.18) 55%, transparent 55%, transparent),
-    linear-gradient(145deg,#2b1906 0%,#8a6227 52%,#d7a85e 100%) !important;
-  background-size:16px 16px,18px 18px,18px 18px,18px 18px,100% 100% !important;
-  background-position:0 0,6px 8px,0 0,9px 9px,center !important;
-  background-repeat:repeat,repeat,repeat,repeat,no-repeat !important;
-  border-color:rgba(255,237,190,.48) !important;
+html.premium-theme-emerald-quran{
+  --bw-material-text:#f3fff6;
+  --bw-material-text-soft:rgba(226,255,234,.84);
+  --bw-material-border:rgba(129,233,163,.28);
+  --bw-material-border-strong:rgba(178,255,208,.40);
+  --bw-material-accent:#91efb2;
+  --bw-material-accent-soft:rgba(145,239,178,.22);
+  --bw-material-page-bg:radial-gradient(circle at 16% 0%, rgba(88,228,143,.16), transparent 28%), radial-gradient(circle at 84% 10%, rgba(186,255,214,.10), transparent 30%), linear-gradient(180deg,#051109 0%,#0d2e1b 44%,#1d6c3d 74%,#06120a 100%);
+  --bw-material-surface-color:#06140c;
+  --bw-material-surface-bg:radial-gradient(circle at 82% 16%, rgba(186,255,214,.28), transparent 22%), radial-gradient(circle at 16% 84%, rgba(72,214,129,.14), transparent 28%), linear-gradient(118deg, rgba(255,255,255,.10) 0%, rgba(255,255,255,0) 20%, rgba(92,232,149,.14) 44%, rgba(255,255,255,.08) 58%, rgba(0,0,0,0) 76%), linear-gradient(135deg,#06140c 0%,#114126 52%,#39a460 100%);
+  --bw-material-surface-bg-size:100% 100%,100% 100%,100% 100%,100% 100%;
+  --bw-material-surface-bg-position:center,center,center,center;
+  --bw-material-surface-bg-repeat:no-repeat,no-repeat,no-repeat,no-repeat;
+  --bw-material-button-bg:linear-gradient(180deg,#79d796 0%,#287547 100%);
+  --bw-material-button-text:#ffffff;
+  --bw-material-input-bg:linear-gradient(180deg,rgba(14,56,32,.88),rgba(8,26,16,.96));
 }
 
-html[class*="premium-theme-"] [class*="barakaway-logo"],
-html[class*="premium-theme-"] [class*="brand-logo"],
-html[class*="premium-theme-"] [class*="app-logo"],
-html[class*="premium-theme-"] [class*="logo"],
-html[class*="premium-theme-"] [data-logo],
-html[class*="premium-theme-"] [data-barakaway-logo-lock],
-html[class*="premium-theme-"] [class*="barakaway-logo"] *,
-html[class*="premium-theme-"] [class*="brand-logo"] *,
-html[class*="premium-theme-"] [class*="app-logo"] *,
-html[class*="premium-theme-"] [class*="logo"] *,
-html[class*="premium-theme-"] [data-logo] *,
-html[class*="premium-theme-"] [data-barakaway-logo-lock] *{
-  background:transparent !important;
-  background-color:transparent !important;
-  background-image:none !important;
-  box-shadow:none !important;
-  border-color:transparent !important;
-  outline-color:transparent !important;
+html.premium-theme-violet-noor{
+  --bw-material-text:#fcf9ff;
+  --bw-material-text-soft:rgba(239,230,255,.84);
+  --bw-material-border:rgba(214,191,255,.28);
+  --bw-material-border-strong:rgba(235,225,255,.42);
+  --bw-material-accent:#dcc8ff;
+  --bw-material-accent-soft:rgba(220,200,255,.22);
+  --bw-material-page-bg:radial-gradient(circle at 16% 0%, rgba(195,156,255,.16), transparent 28%), radial-gradient(circle at 84% 12%, rgba(242,233,255,.12), transparent 30%), linear-gradient(180deg,#0d0816 0%,#27124a 44%,#5631a3 74%,#100918 100%);
+  --bw-material-surface-color:#0f0a18;
+  --bw-material-surface-bg:radial-gradient(circle at 82% 16%, rgba(242,233,255,.32), transparent 22%), radial-gradient(circle at 18% 88%, rgba(168,112,255,.16), transparent 28%), linear-gradient(118deg, rgba(255,255,255,.10) 0%, rgba(255,255,255,0) 18%, rgba(200,168,255,.16) 46%, rgba(255,255,255,.08) 60%, rgba(0,0,0,0) 78%), linear-gradient(135deg,#0f0a18 0%,#341c61 52%,#a87dff 100%);
+  --bw-material-surface-bg-size:100% 100%,100% 100%,100% 100%,100% 100%;
+  --bw-material-surface-bg-position:center,center,center,center;
+  --bw-material-surface-bg-repeat:no-repeat,no-repeat,no-repeat,no-repeat;
+  --bw-material-button-bg:linear-gradient(180deg,#d3bbff 0%,#6d49d5 100%);
+  --bw-material-button-text:#ffffff;
+  --bw-material-input-bg:linear-gradient(180deg,rgba(42,23,78,.88),rgba(18,10,32,.96));
 }
-/* ===== END BARAKAWAY THEME SELECTOR CARD MATERIAL LOCK — V20260510 ===== */
-`;
-  function inject(){
-    let style=document.getElementById(STYLE_ID);
-    if(!style){
-      style=document.createElement('style');
-      style.id=STYLE_ID;
-      (document.head||document.documentElement).appendChild(style);
-    }
-    style.textContent=CSS;
-  }
-  inject();
-  if(document.readyState==='loading') document.addEventListener('DOMContentLoaded', inject);
-  window.addEventListener('barakaway:premium-theme-change', inject);
-  setTimeout(inject,250);
-  setTimeout(inject,1000);
-})();
 
-;(function(){
-  var STYLE_ID = 'barakaway-all-premium-carbon-architecture-final';
-  if(document.getElementById(STYLE_ID)) return;
-  var style = document.createElement('style');
-  style.id = STYLE_ID;
-  style.textContent = "\n\n/* ===== BARAKAWAY ALL PREMIUM THEMES: CARBON-ELITE ARCHITECTURE FINAL ===== */\n/* All non-carbon premium themes now use the same architecture as Carbon Elite: variables, full-app texture, selector card texture, buttons, and protected logo. */\n\nhtml.premium-theme-royal-gold{\n  --bg:#080604;\n  --surface:#130d05;\n  --surface-2:#211607;\n  --surface-3:#3a270b;\n  --border:rgba(244,220,148,.24);\n  --border-2:rgba(255,239,184,.34);\n  --text:#fff9e8;\n  --text-soft:#ead7a7;\n  --text-muted:#c4a867;\n  --green:#f2d982;\n  --green-strong:#9d7424;\n  --green-soft:#fff2bd;\n  --bw-accent:#f2d982;\n  --bw-accent-2:#fff6d2;\n  --bw-lux-border-main:rgba(255,232,160,.30);\n  --bw-lux-glow:rgba(255,210,95,.18);\n}\n\nhtml.premium-theme-emerald-quran{\n  --bg:#031009;\n  --surface:#06170e;\n  --surface-2:#0b2416;\n  --surface-3:#123823;\n  --border:rgba(139,236,167,.22);\n  --border-2:rgba(184,255,208,.32);\n  --text:#f2fff6;\n  --text-soft:#c8f4d5;\n  --text-muted:#89dca0;\n  --green:#86e6a1;\n  --green-strong:#186437;\n  --green-soft:#d9ffe3;\n  --bw-accent:#86e6a1;\n  --bw-accent-2:#d8ffd5;\n  --bw-lux-border-main:rgba(139,236,167,.30);\n  --bw-lux-glow:rgba(77,255,136,.16);\n}\n\nhtml.premium-theme-violet-noor{\n  --bg:#0a0613;\n  --surface:#120b22;\n  --surface-2:#1b1035;\n  --surface-3:#2b1856;\n  --border:rgba(199,172,255,.23);\n  --border-2:rgba(223,205,255,.34);\n  --text:#fcf8ff;\n  --text-soft:#e1d3ff;\n  --text-muted:#bca5ef;\n  --green:#c7acff;\n  --green-strong:#6740c8;\n  --green-soft:#efe7ff;\n  --bw-accent:#b98cff;\n  --bw-accent-2:#f0dcff;\n  --bw-lux-border-main:rgba(199,172,255,.30);\n  --bw-lux-glow:rgba(174,116,255,.18);\n}\n\nhtml.premium-theme-rose-soft{\n  --bg:#13070f;\n  --surface:#1e0b17;\n  --surface-2:#301020;\n  --surface-3:#4a1932;\n  --border:rgba(255,186,218,.23);\n  --border-2:rgba(255,216,233,.34);\n  --text:#fff8fb;\n  --text-soft:#ffd9e9;\n  --text-muted:#efa8c9;\n  --green:#ff9ec7;\n  --green-strong:#9f355f;\n  --green-soft:#ffe7f1;\n  --bw-accent:#ff9ec7;\n  --bw-accent-2:#ffe1ee;\n  --bw-lux-border-main:rgba(255,186,218,.30);\n  --bw-lux-glow:rgba(255,120,180,.16);\n}\n\nhtml.premium-theme-children-soft{\n  --bg:#fff7fb;\n  --surface:#fff2f9;\n  --surface-2:#f6edff;\n  --surface-3:#ffe3f3;\n  --border:rgba(255,255,255,.62);\n  --border-2:rgba(255,159,210,.48);\n  --text:#2b2230;\n  --text-soft:#4a3b52;\n  --text-muted:#725f7c;\n  --green:#ff9fd2;\n  --green-strong:#9b67df;\n  --green-soft:#fff0fa;\n  --bw-accent:#ff9fd2;\n  --bw-accent-2:#b69cff;\n  --bw-lux-border-main:rgba(255,255,255,.72);\n  --bw-lux-glow:rgba(255,159,210,.22);\n}\n\nhtml.premium-theme-night-mosque{\n  --bg:#020817;\n  --surface:#06112d;\n  --surface-2:#081744;\n  --surface-3:#102760;\n  --border:rgba(150,180,255,.28);\n  --border-2:rgba(215,192,122,.36);\n  --text:#f8fbff;\n  --text-soft:#dce9ff;\n  --text-muted:#a9c2f0;\n  --green:#d7c07a;\n  --green-strong:#274f92;\n  --green-soft:#fff0b4;\n  --bw-accent:#d7c07a;\n  --bw-accent-2:#8fb5ff;\n  --bw-lux-border-main:rgba(150,180,255,.32);\n  --bw-lux-glow:rgba(110,150,255,.17);\n}\n\nhtml.premium-theme-desert-sand{\n  --bg:#150c04;\n  --surface:#2a1908;\n  --surface-2:#5a3514;\n  --surface-3:#a57136;\n  --border:rgba(255,239,198,.28);\n  --border-2:rgba(255,246,214,.40);\n  --text:#fff8e7;\n  --text-soft:#f2dfb8;\n  --text-muted:#d1ad73;\n  --green:#ffedbe;\n  --green-strong:#8a5a20;\n  --green-soft:#fff3cf;\n  --bw-accent:#ffedbe;\n  --bw-accent-2:#dbae61;\n  --bw-lux-border-main:rgba(255,239,198,.34);\n  --bw-lux-glow:rgba(219,174,97,.18);\n}\n\nhtml.premium-theme-royal-gold body,\nhtml.premium-theme-royal-gold .container,\nhtml.premium-theme-royal-gold .hero,\nhtml.premium-theme-royal-gold .brand-prayer-hero,\nhtml.premium-theme-royal-gold .today-hub,\nhtml.premium-theme-royal-gold .about-project-card,\nhtml.premium-theme-royal-gold .barakaway-pro-final,\nhtml.premium-theme-royal-gold .block,\nhtml.premium-theme-royal-gold .card,\nhtml.premium-theme-royal-gold .box,\nhtml.premium-theme-royal-gold .panel,\nhtml.premium-theme-royal-gold .quote,\nhtml.premium-theme-royal-gold .empty,\nhtml.premium-theme-royal-gold .article,\nhtml.premium-theme-royal-gold .category-panel,\nhtml.premium-theme-royal-gold .surah-card,\nhtml.premium-theme-royal-gold .prayer-card,\nhtml.premium-theme-royal-gold .toggle-row,\nhtml.premium-theme-royal-gold .meta-item,\nhtml.premium-theme-royal-gold .note-box,\nhtml.premium-theme-royal-gold .jumuah-box,\nhtml.premium-theme-royal-gold .month-day,\nhtml.premium-theme-royal-gold .month-head,\nhtml.premium-theme-royal-gold .wallet-support,\nhtml.premium-theme-royal-gold .home-widget,\nhtml.premium-theme-royal-gold .dua-card,\nhtml.premium-theme-royal-gold .ayah-card,\nhtml.premium-theme-royal-gold .master-audio-wrap,\nhtml.premium-theme-royal-gold .reader-side,\nhtml.premium-theme-royal-gold .reader-main,\nhtml.premium-theme-royal-gold .dua-side,\nhtml.premium-theme-royal-gold .dua-main,\nhtml.premium-theme-royal-gold .ai-side,\nhtml.premium-theme-royal-gold .ai-main,\nhtml.premium-theme-royal-gold .player-panel,\nhtml.premium-theme-royal-gold .preview-panel,\nhtml.premium-theme-royal-gold .app-menu-btn,\nhtml.premium-theme-royal-gold .today-action,\nhtml.premium-theme-royal-gold .premium-resource-card,\nhtml.premium-theme-royal-gold .bottom-app-nav,\nhtml.premium-theme-royal-gold .bottom-app-nav-inner{\n  background-color:#130d05 !important;\n  background-image:\n    linear-gradient(45deg,rgba(255,236,170,.115) 0 8%,transparent 8% 42%,rgba(255,218,118,.105) 42% 58%,transparent 58% 100%),\n    linear-gradient(-45deg,rgba(255,255,255,.055) 0 8%,transparent 8% 42%,rgba(255,220,120,.055) 42% 58%,transparent 58% 100%),\n    radial-gradient(circle at 82% 12%,rgba(255,238,174,.24),transparent 24%),\n    radial-gradient(circle at 16% 88%,rgba(175,132,48,.18),transparent 28%),\n    linear-gradient(135deg,#080604 0%,#241707 50%,#7b5316 100%) !important;\n  background-size:22px 22px,22px 22px,100% 100%,100% 100%,100% 100% !important;\n  background-position:0 0,11px 11px,center,center,center !important;\n  border-color:rgba(255,232,160,.24) !important;\n  box-shadow:0 24px 58px rgba(0,0,0,.50),0 0 0 1px rgba(255,232,160,.055),inset 0 1px 0 rgba(255,246,208,.16),inset 0 -24px 38px rgba(70,41,8,.40) !important;\n}\n\nhtml.premium-theme-emerald-quran body,\nhtml.premium-theme-emerald-quran .container,\nhtml.premium-theme-emerald-quran .hero,\nhtml.premium-theme-emerald-quran .brand-prayer-hero,\nhtml.premium-theme-emerald-quran .today-hub,\nhtml.premium-theme-emerald-quran .about-project-card,\nhtml.premium-theme-emerald-quran .barakaway-pro-final,\nhtml.premium-theme-emerald-quran .block,\nhtml.premium-theme-emerald-quran .card,\nhtml.premium-theme-emerald-quran .box,\nhtml.premium-theme-emerald-quran .panel,\nhtml.premium-theme-emerald-quran .quote,\nhtml.premium-theme-emerald-quran .empty,\nhtml.premium-theme-emerald-quran .article,\nhtml.premium-theme-emerald-quran .category-panel,\nhtml.premium-theme-emerald-quran .surah-card,\nhtml.premium-theme-emerald-quran .prayer-card,\nhtml.premium-theme-emerald-quran .toggle-row,\nhtml.premium-theme-emerald-quran .meta-item,\nhtml.premium-theme-emerald-quran .note-box,\nhtml.premium-theme-emerald-quran .jumuah-box,\nhtml.premium-theme-emerald-quran .month-day,\nhtml.premium-theme-emerald-quran .month-head,\nhtml.premium-theme-emerald-quran .wallet-support,\nhtml.premium-theme-emerald-quran .home-widget,\nhtml.premium-theme-emerald-quran .dua-card,\nhtml.premium-theme-emerald-quran .ayah-card,\nhtml.premium-theme-emerald-quran .master-audio-wrap,\nhtml.premium-theme-emerald-quran .reader-side,\nhtml.premium-theme-emerald-quran .reader-main,\nhtml.premium-theme-emerald-quran .dua-side,\nhtml.premium-theme-emerald-quran .dua-main,\nhtml.premium-theme-emerald-quran .ai-side,\nhtml.premium-theme-emerald-quran .ai-main,\nhtml.premium-theme-emerald-quran .player-panel,\nhtml.premium-theme-emerald-quran .preview-panel,\nhtml.premium-theme-emerald-quran .app-menu-btn,\nhtml.premium-theme-emerald-quran .today-action,\nhtml.premium-theme-emerald-quran .premium-resource-card,\nhtml.premium-theme-emerald-quran .bottom-app-nav,\nhtml.premium-theme-emerald-quran .bottom-app-nav-inner{\n  background-color:#06170e !important;\n  background-image:\n    linear-gradient(45deg,rgba(139,236,167,.105) 0 8%,transparent 8% 42%,rgba(216,255,213,.075) 42% 58%,transparent 58% 100%),\n    linear-gradient(-45deg,rgba(255,255,255,.045) 0 8%,transparent 8% 42%,rgba(134,230,161,.060) 42% 58%,transparent 58% 100%),\n    radial-gradient(circle at 82% 12%,rgba(139,236,167,.22),transparent 24%),\n    radial-gradient(circle at 16% 88%,rgba(17,108,57,.30),transparent 30%),\n    linear-gradient(135deg,#031009 0%,#082517 50%,#155c35 100%) !important;\n  background-size:22px 22px,22px 22px,100% 100%,100% 100%,100% 100% !important;\n  background-position:0 0,11px 11px,center,center,center !important;\n  border-color:rgba(139,236,167,.22) !important;\n  box-shadow:0 24px 58px rgba(0,0,0,.50),0 0 0 1px rgba(184,255,208,.050),inset 0 1px 0 rgba(218,255,226,.15),inset 0 -24px 38px rgba(0,34,17,.40) !important;\n}\n\nhtml.premium-theme-violet-noor body,\nhtml.premium-theme-violet-noor .container,\nhtml.premium-theme-violet-noor .hero,\nhtml.premium-theme-violet-noor .brand-prayer-hero,\nhtml.premium-theme-violet-noor .today-hub,\nhtml.premium-theme-violet-noor .about-project-card,\nhtml.premium-theme-violet-noor .barakaway-pro-final,\nhtml.premium-theme-violet-noor .block,\nhtml.premium-theme-violet-noor .card,\nhtml.premium-theme-violet-noor .box,\nhtml.premium-theme-violet-noor .panel,\nhtml.premium-theme-violet-noor .quote,\nhtml.premium-theme-violet-noor .empty,\nhtml.premium-theme-violet-noor .article,\nhtml.premium-theme-violet-noor .category-panel,\nhtml.premium-theme-violet-noor .surah-card,\nhtml.premium-theme-violet-noor .prayer-card,\nhtml.premium-theme-violet-noor .toggle-row,\nhtml.premium-theme-violet-noor .meta-item,\nhtml.premium-theme-violet-noor .note-box,\nhtml.premium-theme-violet-noor .jumuah-box,\nhtml.premium-theme-violet-noor .month-day,\nhtml.premium-theme-violet-noor .month-head,\nhtml.premium-theme-violet-noor .wallet-support,\nhtml.premium-theme-violet-noor .home-widget,\nhtml.premium-theme-violet-noor .dua-card,\nhtml.premium-theme-violet-noor .ayah-card,\nhtml.premium-theme-violet-noor .master-audio-wrap,\nhtml.premium-theme-violet-noor .reader-side,\nhtml.premium-theme-violet-noor .reader-main,\nhtml.premium-theme-violet-noor .dua-side,\nhtml.premium-theme-violet-noor .dua-main,\nhtml.premium-theme-violet-noor .ai-side,\nhtml.premium-theme-violet-noor .ai-main,\nhtml.premium-theme-violet-noor .player-panel,\nhtml.premium-theme-violet-noor .preview-panel,\nhtml.premium-theme-violet-noor .app-menu-btn,\nhtml.premium-theme-violet-noor .today-action,\nhtml.premium-theme-violet-noor .premium-resource-card,\nhtml.premium-theme-violet-noor .bottom-app-nav,\nhtml.premium-theme-violet-noor .bottom-app-nav-inner{\n  background-color:#120b22 !important;\n  background-image:\n    linear-gradient(45deg,rgba(199,172,255,.105) 0 8%,transparent 8% 42%,rgba(240,220,255,.070) 42% 58%,transparent 58% 100%),\n    linear-gradient(-45deg,rgba(255,255,255,.045) 0 8%,transparent 8% 42%,rgba(185,140,255,.065) 42% 58%,transparent 58% 100%),\n    radial-gradient(circle at 82% 12%,rgba(199,172,255,.24),transparent 24%),\n    radial-gradient(circle at 16% 88%,rgba(103,64,200,.28),transparent 30%),\n    linear-gradient(135deg,#0a0613 0%,#1d1139 50%,#4a2f8c 100%) !important;\n  background-size:22px 22px,22px 22px,100% 100%,100% 100%,100% 100% !important;\n  background-position:0 0,11px 11px,center,center,center !important;\n  border-color:rgba(199,172,255,.23) !important;\n  box-shadow:0 24px 58px rgba(0,0,0,.52),0 0 0 1px rgba(223,205,255,.052),inset 0 1px 0 rgba(246,236,255,.15),inset 0 -24px 38px rgba(20,7,55,.42) !important;\n}\n\nhtml.premium-theme-rose-soft body,\nhtml.premium-theme-rose-soft .container,\nhtml.premium-theme-rose-soft .hero,\nhtml.premium-theme-rose-soft .brand-prayer-hero,\nhtml.premium-theme-rose-soft .today-hub,\nhtml.premium-theme-rose-soft .about-project-card,\nhtml.premium-theme-rose-soft .barakaway-pro-final,\nhtml.premium-theme-rose-soft .block,\nhtml.premium-theme-rose-soft .card,\nhtml.premium-theme-rose-soft .box,\nhtml.premium-theme-rose-soft .panel,\nhtml.premium-theme-rose-soft .quote,\nhtml.premium-theme-rose-soft .empty,\nhtml.premium-theme-rose-soft .article,\nhtml.premium-theme-rose-soft .category-panel,\nhtml.premium-theme-rose-soft .surah-card,\nhtml.premium-theme-rose-soft .prayer-card,\nhtml.premium-theme-rose-soft .toggle-row,\nhtml.premium-theme-rose-soft .meta-item,\nhtml.premium-theme-rose-soft .note-box,\nhtml.premium-theme-rose-soft .jumuah-box,\nhtml.premium-theme-rose-soft .month-day,\nhtml.premium-theme-rose-soft .month-head,\nhtml.premium-theme-rose-soft .wallet-support,\nhtml.premium-theme-rose-soft .home-widget,\nhtml.premium-theme-rose-soft .dua-card,\nhtml.premium-theme-rose-soft .ayah-card,\nhtml.premium-theme-rose-soft .master-audio-wrap,\nhtml.premium-theme-rose-soft .reader-side,\nhtml.premium-theme-rose-soft .reader-main,\nhtml.premium-theme-rose-soft .dua-side,\nhtml.premium-theme-rose-soft .dua-main,\nhtml.premium-theme-rose-soft .ai-side,\nhtml.premium-theme-rose-soft .ai-main,\nhtml.premium-theme-rose-soft .player-panel,\nhtml.premium-theme-rose-soft .preview-panel,\nhtml.premium-theme-rose-soft .app-menu-btn,\nhtml.premium-theme-rose-soft .today-action,\nhtml.premium-theme-rose-soft .premium-resource-card,\nhtml.premium-theme-rose-soft .bottom-app-nav,\nhtml.premium-theme-rose-soft .bottom-app-nav-inner{\n  background-color:#1e0b17 !important;\n  background-image:\n    linear-gradient(45deg,rgba(255,186,218,.105) 0 8%,transparent 8% 42%,rgba(255,225,238,.075) 42% 58%,transparent 58% 100%),\n    linear-gradient(-45deg,rgba(255,255,255,.048) 0 8%,transparent 8% 42%,rgba(255,158,199,.068) 42% 58%,transparent 58% 100%),\n    radial-gradient(circle at 82% 12%,rgba(255,186,218,.23),transparent 24%),\n    radial-gradient(circle at 16% 88%,rgba(159,53,95,.28),transparent 30%),\n    linear-gradient(135deg,#13070f 0%,#301020 50%,#78304f 100%) !important;\n  background-size:22px 22px,22px 22px,100% 100%,100% 100%,100% 100% !important;\n  background-position:0 0,11px 11px,center,center,center !important;\n  border-color:rgba(255,186,218,.23) !important;\n  box-shadow:0 24px 58px rgba(0,0,0,.50),0 0 0 1px rgba(255,216,233,.052),inset 0 1px 0 rgba(255,238,246,.16),inset 0 -24px 38px rgba(54,10,30,.40) !important;\n}\n\nhtml.premium-theme-children-soft body,\nhtml.premium-theme-children-soft .container,\nhtml.premium-theme-children-soft .hero,\nhtml.premium-theme-children-soft .brand-prayer-hero,\nhtml.premium-theme-children-soft .today-hub,\nhtml.premium-theme-children-soft .about-project-card,\nhtml.premium-theme-children-soft .barakaway-pro-final,\nhtml.premium-theme-children-soft .block,\nhtml.premium-theme-children-soft .card,\nhtml.premium-theme-children-soft .box,\nhtml.premium-theme-children-soft .panel,\nhtml.premium-theme-children-soft .quote,\nhtml.premium-theme-children-soft .empty,\nhtml.premium-theme-children-soft .article,\nhtml.premium-theme-children-soft .category-panel,\nhtml.premium-theme-children-soft .surah-card,\nhtml.premium-theme-children-soft .prayer-card,\nhtml.premium-theme-children-soft .toggle-row,\nhtml.premium-theme-children-soft .meta-item,\nhtml.premium-theme-children-soft .note-box,\nhtml.premium-theme-children-soft .jumuah-box,\nhtml.premium-theme-children-soft .month-day,\nhtml.premium-theme-children-soft .month-head,\nhtml.premium-theme-children-soft .wallet-support,\nhtml.premium-theme-children-soft .home-widget,\nhtml.premium-theme-children-soft .dua-card,\nhtml.premium-theme-children-soft .ayah-card,\nhtml.premium-theme-children-soft .master-audio-wrap,\nhtml.premium-theme-children-soft .reader-side,\nhtml.premium-theme-children-soft .reader-main,\nhtml.premium-theme-children-soft .dua-side,\nhtml.premium-theme-children-soft .dua-main,\nhtml.premium-theme-children-soft .ai-side,\nhtml.premium-theme-children-soft .ai-main,\nhtml.premium-theme-children-soft .player-panel,\nhtml.premium-theme-children-soft .preview-panel,\nhtml.premium-theme-children-soft .app-menu-btn,\nhtml.premium-theme-children-soft .today-action,\nhtml.premium-theme-children-soft .premium-resource-card,\nhtml.premium-theme-children-soft .bottom-app-nav,\nhtml.premium-theme-children-soft .bottom-app-nav-inner{\n  background-color:#fff7fb !important;\n  background-image:\n    linear-gradient(45deg,rgba(255,255,255,.46) 0 8%,transparent 8% 42%,rgba(255,194,226,.16) 42% 58%,transparent 58% 100%),\n    linear-gradient(-45deg,rgba(182,156,255,.12) 0 8%,transparent 8% 42%,rgba(255,255,255,.22) 42% 58%,transparent 58% 100%),\n    radial-gradient(circle at 82% 12%,rgba(255,255,255,.68),transparent 24%),\n    radial-gradient(circle at 16% 88%,rgba(255,159,210,.24),transparent 30%),\n    linear-gradient(135deg,#fff7fb 0%,#f6edff 50%,#ffd9ef 100%) !important;\n  background-size:22px 22px,22px 22px,100% 100%,100% 100%,100% 100% !important;\n  background-position:0 0,11px 11px,center,center,center !important;\n  border-color:rgba(255,255,255,.62) !important;\n  box-shadow:0 24px 58px rgba(142,73,128,.16),0 0 0 1px rgba(255,255,255,.48),inset 0 1px 0 rgba(255,255,255,.82),inset 0 -24px 38px rgba(255,159,210,.12) !important;\n}\n\nhtml.premium-theme-night-mosque body,\nhtml.premium-theme-night-mosque .container,\nhtml.premium-theme-night-mosque .hero,\nhtml.premium-theme-night-mosque .brand-prayer-hero,\nhtml.premium-theme-night-mosque .today-hub,\nhtml.premium-theme-night-mosque .about-project-card,\nhtml.premium-theme-night-mosque .barakaway-pro-final,\nhtml.premium-theme-night-mosque .block,\nhtml.premium-theme-night-mosque .card,\nhtml.premium-theme-night-mosque .box,\nhtml.premium-theme-night-mosque .panel,\nhtml.premium-theme-night-mosque .quote,\nhtml.premium-theme-night-mosque .empty,\nhtml.premium-theme-night-mosque .article,\nhtml.premium-theme-night-mosque .category-panel,\nhtml.premium-theme-night-mosque .surah-card,\nhtml.premium-theme-night-mosque .prayer-card,\nhtml.premium-theme-night-mosque .toggle-row,\nhtml.premium-theme-night-mosque .meta-item,\nhtml.premium-theme-night-mosque .note-box,\nhtml.premium-theme-night-mosque .jumuah-box,\nhtml.premium-theme-night-mosque .month-day,\nhtml.premium-theme-night-mosque .month-head,\nhtml.premium-theme-night-mosque .wallet-support,\nhtml.premium-theme-night-mosque .home-widget,\nhtml.premium-theme-night-mosque .dua-card,\nhtml.premium-theme-night-mosque .ayah-card,\nhtml.premium-theme-night-mosque .master-audio-wrap,\nhtml.premium-theme-night-mosque .reader-side,\nhtml.premium-theme-night-mosque .reader-main,\nhtml.premium-theme-night-mosque .dua-side,\nhtml.premium-theme-night-mosque .dua-main,\nhtml.premium-theme-night-mosque .ai-side,\nhtml.premium-theme-night-mosque .ai-main,\nhtml.premium-theme-night-mosque .player-panel,\nhtml.premium-theme-night-mosque .preview-panel,\nhtml.premium-theme-night-mosque .app-menu-btn,\nhtml.premium-theme-night-mosque .today-action,\nhtml.premium-theme-night-mosque .premium-resource-card,\nhtml.premium-theme-night-mosque .bottom-app-nav,\nhtml.premium-theme-night-mosque .bottom-app-nav-inner{\n  background-color:#06112d !important;\n  background-image:\n    radial-gradient(circle at 16px 18px,rgba(255,255,255,.40) 0 1.2px,transparent 1.9px),\n    radial-gradient(circle at 48px 32px,rgba(255,255,255,.32) 0 1px,transparent 1.7px),\n    linear-gradient(45deg,rgba(150,180,255,.095) 0 8%,transparent 8% 42%,rgba(215,192,122,.070) 42% 58%,transparent 58% 100%),\n    linear-gradient(-45deg,rgba(255,255,255,.045) 0 8%,transparent 8% 42%,rgba(143,181,255,.060) 42% 58%,transparent 58% 100%),\n    radial-gradient(circle at 82% 12%,rgba(215,192,122,.22),transparent 24%),\n    linear-gradient(135deg,#020817 0%,#081744 50%,#1f4d93 100%) !important;\n  background-size:124px 124px,124px 124px,22px 22px,22px 22px,100% 100%,100% 100% !important;\n  background-position:0 0,0 0,0 0,11px 11px,center,center !important;\n  border-color:rgba(150,180,255,.28) !important;\n  box-shadow:0 24px 58px rgba(0,0,0,.56),0 0 0 1px rgba(150,180,255,.052),inset 0 1px 0 rgba(255,255,255,.14),inset 0 -24px 38px rgba(0,8,32,.46) !important;\n}\n\nhtml.premium-theme-desert-sand body,\nhtml.premium-theme-desert-sand .container,\nhtml.premium-theme-desert-sand .hero,\nhtml.premium-theme-desert-sand .brand-prayer-hero,\nhtml.premium-theme-desert-sand .today-hub,\nhtml.premium-theme-desert-sand .about-project-card,\nhtml.premium-theme-desert-sand .barakaway-pro-final,\nhtml.premium-theme-desert-sand .block,\nhtml.premium-theme-desert-sand .card,\nhtml.premium-theme-desert-sand .box,\nhtml.premium-theme-desert-sand .panel,\nhtml.premium-theme-desert-sand .quote,\nhtml.premium-theme-desert-sand .empty,\nhtml.premium-theme-desert-sand .article,\nhtml.premium-theme-desert-sand .category-panel,\nhtml.premium-theme-desert-sand .surah-card,\nhtml.premium-theme-desert-sand .prayer-card,\nhtml.premium-theme-desert-sand .toggle-row,\nhtml.premium-theme-desert-sand .meta-item,\nhtml.premium-theme-desert-sand .note-box,\nhtml.premium-theme-desert-sand .jumuah-box,\nhtml.premium-theme-desert-sand .month-day,\nhtml.premium-theme-desert-sand .month-head,\nhtml.premium-theme-desert-sand .wallet-support,\nhtml.premium-theme-desert-sand .home-widget,\nhtml.premium-theme-desert-sand .dua-card,\nhtml.premium-theme-desert-sand .ayah-card,\nhtml.premium-theme-desert-sand .master-audio-wrap,\nhtml.premium-theme-desert-sand .reader-side,\nhtml.premium-theme-desert-sand .reader-main,\nhtml.premium-theme-desert-sand .dua-side,\nhtml.premium-theme-desert-sand .dua-main,\nhtml.premium-theme-desert-sand .ai-side,\nhtml.premium-theme-desert-sand .ai-main,\nhtml.premium-theme-desert-sand .player-panel,\nhtml.premium-theme-desert-sand .preview-panel,\nhtml.premium-theme-desert-sand .app-menu-btn,\nhtml.premium-theme-desert-sand .today-action,\nhtml.premium-theme-desert-sand .premium-resource-card,\nhtml.premium-theme-desert-sand .bottom-app-nav,\nhtml.premium-theme-desert-sand .bottom-app-nav-inner{\n  background-color:#2a1908 !important;\n  background-image:\n    radial-gradient(circle at 7px 8px,rgba(255,239,198,.30) 0 1px,transparent 1.8px),\n    linear-gradient(45deg,rgba(255,239,198,.105) 0 8%,transparent 8% 42%,rgba(219,174,97,.080) 42% 58%,transparent 58% 100%),\n    linear-gradient(-45deg,rgba(255,255,255,.046) 0 8%,transparent 8% 42%,rgba(255,237,190,.060) 42% 58%,transparent 58% 100%),\n    radial-gradient(circle at 82% 12%,rgba(255,239,198,.22),transparent 24%),\n    linear-gradient(135deg,#150c04 0%,#5a3514 50%,#c8944f 100%) !important;\n  background-size:18px 18px,22px 22px,22px 22px,100% 100%,100% 100% !important;\n  background-position:0 0,0 0,11px 11px,center,center !important;\n  border-color:rgba(255,239,198,.28) !important;\n  box-shadow:0 24px 58px rgba(0,0,0,.50),0 0 0 1px rgba(255,246,214,.052),inset 0 1px 0 rgba(255,246,214,.16),inset 0 -24px 38px rgba(64,36,10,.40) !important;\n}\n\n.theme-grid .theme-card.theme-gold,\nhtml[class*=\"premium-theme-\"] .theme-grid .theme-card.theme-gold,\nhtml[class*=\"premium-theme-\"] .bw-theme-sample-royal-gold,\nhtml[class*=\"premium-theme-\"] .theme-card[data-theme=\"royal-gold\"],\nbody .theme-grid .theme-card[data-theme=\"royal-gold\"]{\n  background-color:#130d05 !important;\n  background-image:\n    linear-gradient(45deg,rgba(255,236,170,.16) 0 8%,transparent 8% 42%,rgba(255,218,118,.13) 42% 58%,transparent 58% 100%),\n    linear-gradient(-45deg,rgba(255,255,255,.070) 0 8%,transparent 8% 42%,rgba(255,220,120,.075) 42% 58%,transparent 58% 100%),\n    radial-gradient(circle at 84% 10%,rgba(255,238,174,.30),transparent 24%),\n    linear-gradient(135deg,#080604 0%,#2d1d08 52%,#b88928 100%) !important;\n  background-size:22px 22px,22px 22px,100% 100%,100% 100% !important;\n  background-position:0 0,11px 11px,center,center !important;\n  border-color:rgba(255,232,160,.34) !important;\n  box-shadow:0 24px 56px rgba(0,0,0,.42),0 0 0 1px rgba(255,232,160,.08),inset 0 1px 0 rgba(255,246,208,.18),inset 0 -22px 34px rgba(70,41,8,.34) !important;\n}\n\n.theme-grid .theme-card.theme-emerald,\nhtml[class*=\"premium-theme-\"] .theme-grid .theme-card.theme-emerald,\nhtml[class*=\"premium-theme-\"] .bw-theme-sample-emerald-quran,\nhtml[class*=\"premium-theme-\"] .theme-card[data-theme=\"emerald-quran\"],\nbody .theme-grid .theme-card[data-theme=\"emerald-quran\"]{\n  background-color:#06170e !important;\n  background-image:\n    linear-gradient(45deg,rgba(139,236,167,.15) 0 8%,transparent 8% 42%,rgba(216,255,213,.11) 42% 58%,transparent 58% 100%),\n    linear-gradient(-45deg,rgba(255,255,255,.062) 0 8%,transparent 8% 42%,rgba(134,230,161,.080) 42% 58%,transparent 58% 100%),\n    radial-gradient(circle at 84% 10%,rgba(139,236,167,.30),transparent 24%),\n    linear-gradient(135deg,#031009 0%,#0b2c1a 52%,#20935a 100%) !important;\n  background-size:22px 22px,22px 22px,100% 100%,100% 100% !important;\n  background-position:0 0,11px 11px,center,center !important;\n  border-color:rgba(139,236,167,.34) !important;\n  box-shadow:0 24px 56px rgba(0,0,0,.44),0 0 0 1px rgba(184,255,208,.08),inset 0 1px 0 rgba(218,255,226,.18),inset 0 -22px 34px rgba(0,34,17,.34) !important;\n}\n\n.theme-grid .theme-card.theme-violet,\nhtml[class*=\"premium-theme-\"] .theme-grid .theme-card.theme-violet,\nhtml[class*=\"premium-theme-\"] .bw-theme-sample-violet-noor,\nhtml[class*=\"premium-theme-\"] .theme-card[data-theme=\"violet-noor\"],\nbody .theme-grid .theme-card[data-theme=\"violet-noor\"]{\n  background-color:#120b22 !important;\n  background-image:\n    linear-gradient(45deg,rgba(199,172,255,.15) 0 8%,transparent 8% 42%,rgba(240,220,255,.105) 42% 58%,transparent 58% 100%),\n    linear-gradient(-45deg,rgba(255,255,255,.062) 0 8%,transparent 8% 42%,rgba(185,140,255,.080) 42% 58%,transparent 58% 100%),\n    radial-gradient(circle at 84% 10%,rgba(199,172,255,.32),transparent 24%),\n    linear-gradient(135deg,#0a0613 0%,#24134c 52%,#8758ff 100%) !important;\n  background-size:22px 22px,22px 22px,100% 100%,100% 100% !important;\n  background-position:0 0,11px 11px,center,center !important;\n  border-color:rgba(199,172,255,.34) !important;\n  box-shadow:0 24px 56px rgba(0,0,0,.46),0 0 0 1px rgba(223,205,255,.08),inset 0 1px 0 rgba(246,236,255,.18),inset 0 -22px 34px rgba(20,7,55,.35) !important;\n}\n\n.theme-grid .theme-card.theme-rose,\nhtml[class*=\"premium-theme-\"] .theme-grid .theme-card.theme-rose,\nhtml[class*=\"premium-theme-\"] .bw-theme-sample-rose-soft,\nhtml[class*=\"premium-theme-\"] .theme-card[data-theme=\"rose-soft\"],\nbody .theme-grid .theme-card[data-theme=\"rose-soft\"]{\n  background-color:#1e0b17 !important;\n  background-image:\n    linear-gradient(45deg,rgba(255,186,218,.15) 0 8%,transparent 8% 42%,rgba(255,225,238,.105) 42% 58%,transparent 58% 100%),\n    linear-gradient(-45deg,rgba(255,255,255,.064) 0 8%,transparent 8% 42%,rgba(255,158,199,.085) 42% 58%,transparent 58% 100%),\n    radial-gradient(circle at 84% 10%,rgba(255,186,218,.31),transparent 24%),\n    linear-gradient(135deg,#13070f 0%,#3a1026 52%,#d65b91 100%) !important;\n  background-size:22px 22px,22px 22px,100% 100%,100% 100% !important;\n  background-position:0 0,11px 11px,center,center !important;\n  border-color:rgba(255,186,218,.34) !important;\n  box-shadow:0 24px 56px rgba(0,0,0,.44),0 0 0 1px rgba(255,216,233,.08),inset 0 1px 0 rgba(255,238,246,.18),inset 0 -22px 34px rgba(54,10,30,.34) !important;\n}\n\n.theme-grid .theme-card.theme-child,\nhtml[class*=\"premium-theme-\"] .theme-grid .theme-card.theme-child,\nhtml[class*=\"premium-theme-\"] .bw-theme-sample-children-soft,\nhtml[class*=\"premium-theme-\"] .theme-card[data-theme=\"children-soft\"],\nbody .theme-grid .theme-card[data-theme=\"children-soft\"]{\n  background-color:#fff7fb !important;\n  background-image:\n    linear-gradient(45deg,rgba(255,255,255,.54) 0 8%,transparent 8% 42%,rgba(255,194,226,.20) 42% 58%,transparent 58% 100%),\n    linear-gradient(-45deg,rgba(182,156,255,.16) 0 8%,transparent 8% 42%,rgba(255,255,255,.24) 42% 58%,transparent 58% 100%),\n    radial-gradient(circle at 84% 10%,rgba(255,255,255,.70),transparent 24%),\n    linear-gradient(135deg,#fff7fb 0%,#f6edff 52%,#ffcce8 100%) !important;\n  background-size:22px 22px,22px 22px,100% 100%,100% 100% !important;\n  background-position:0 0,11px 11px,center,center !important;\n  border-color:rgba(255,255,255,.72) !important;\n  box-shadow:0 24px 56px rgba(142,73,128,.18),0 0 0 1px rgba(255,255,255,.52),inset 0 1px 0 rgba(255,255,255,.86),inset 0 -22px 34px rgba(255,159,210,.12) !important;\n}\n\n.theme-grid .theme-card.theme-night,\nhtml[class*=\"premium-theme-\"] .theme-grid .theme-card.theme-night,\nhtml[class*=\"premium-theme-\"] .bw-theme-sample-night-mosque,\nhtml[class*=\"premium-theme-\"] .theme-card[data-theme=\"night-mosque\"],\nbody .theme-grid .theme-card[data-theme=\"night-mosque\"]{\n  background-color:#06112d !important;\n  background-image:\n    radial-gradient(circle at 16px 18px,rgba(255,255,255,.42) 0 1.2px,transparent 1.9px),\n    linear-gradient(45deg,rgba(150,180,255,.13) 0 8%,transparent 8% 42%,rgba(215,192,122,.095) 42% 58%,transparent 58% 100%),\n    linear-gradient(-45deg,rgba(255,255,255,.060) 0 8%,transparent 8% 42%,rgba(143,181,255,.078) 42% 58%,transparent 58% 100%),\n    radial-gradient(circle at 84% 10%,rgba(215,192,122,.27),transparent 24%),\n    linear-gradient(135deg,#020817 0%,#081744 52%,#2f65bc 100%) !important;\n  background-size:124px 124px,22px 22px,22px 22px,100% 100%,100% 100% !important;\n  background-position:0 0,0 0,11px 11px,center,center !important;\n  border-color:rgba(150,180,255,.38) !important;\n  box-shadow:0 24px 56px rgba(0,0,0,.50),0 0 0 1px rgba(150,180,255,.08),inset 0 1px 0 rgba(255,255,255,.16),inset 0 -22px 34px rgba(0,8,32,.40) !important;\n}\n\n.theme-grid .theme-card.theme-sand,\nhtml[class*=\"premium-theme-\"] .theme-grid .theme-card.theme-sand,\nhtml[class*=\"premium-theme-\"] .bw-theme-sample-desert-sand,\nhtml[class*=\"premium-theme-\"] .theme-card[data-theme=\"desert-sand\"],\nbody .theme-grid .theme-card[data-theme=\"desert-sand\"]{\n  background-color:#2a1908 !important;\n  background-image:\n    radial-gradient(circle at 7px 8px,rgba(255,239,198,.34) 0 1px,transparent 1.8px),\n    linear-gradient(45deg,rgba(255,239,198,.145) 0 8%,transparent 8% 42%,rgba(219,174,97,.100) 42% 58%,transparent 58% 100%),\n    linear-gradient(-45deg,rgba(255,255,255,.060) 0 8%,transparent 8% 42%,rgba(255,237,190,.075) 42% 58%,transparent 58% 100%),\n    radial-gradient(circle at 84% 10%,rgba(255,239,198,.27),transparent 24%),\n    linear-gradient(135deg,#150c04 0%,#5a3514 52%,#d59b4e 100%) !important;\n  background-size:18px 18px,22px 22px,22px 22px,100% 100%,100% 100% !important;\n  background-position:0 0,0 0,11px 11px,center,center !important;\n  border-color:rgba(255,239,198,.42) !important;\n  box-shadow:0 24px 56px rgba(0,0,0,.44),0 0 0 1px rgba(255,246,214,.08),inset 0 1px 0 rgba(255,246,214,.18),inset 0 -22px 34px rgba(64,36,10,.34) !important;\n}\n\n.theme-grid .theme-card.theme-gold::after,\n.theme-grid .theme-card.theme-emerald::after,\n.theme-grid .theme-card.theme-violet::after,\n.theme-grid .theme-card.theme-rose::after,\n.theme-grid .theme-card.theme-child::after,\n.theme-grid .theme-card.theme-night::after,\n.theme-grid .theme-card.theme-sand::after,\nhtml[class*=\"premium-theme-\"] .theme-card[data-theme=\"royal-gold\"]::after,\nhtml[class*=\"premium-theme-\"] .theme-card[data-theme=\"emerald-quran\"]::after,\nhtml[class*=\"premium-theme-\"] .theme-card[data-theme=\"violet-noor\"]::after,\nhtml[class*=\"premium-theme-\"] .theme-card[data-theme=\"rose-soft\"]::after,\nhtml[class*=\"premium-theme-\"] .theme-card[data-theme=\"children-soft\"]::after,\nhtml[class*=\"premium-theme-\"] .theme-card[data-theme=\"night-mosque\"]::after,\nhtml[class*=\"premium-theme-\"] .theme-card[data-theme=\"desert-sand\"]::after{\n  content:\"\";\n  position:absolute;\n  inset:0;\n  background:linear-gradient(118deg,transparent 0%,rgba(255,255,255,.16) 20%,transparent 33%,transparent 66%,rgba(255,255,255,.070) 78%,transparent 100%);\n  pointer-events:none;\n  mix-blend-mode:screen;\n}\n\nhtml.premium-theme-royal-gold button:not(.icon-btn):not(.share-close):not(.install-help-close):not(.bottom-app-nav-item),\nhtml.premium-theme-royal-gold .btn,\nhtml.premium-theme-royal-gold .install-btn,\nhtml.premium-theme-royal-gold .support-project-btn,\nhtml.premium-theme-royal-gold .copy-wallet-btn,\nhtml.premium-theme-royal-gold .quick-btn{background:linear-gradient(180deg,#f6dd88 0%,#b98729 48%,#4b2d09 100%) !important;border-color:rgba(255,239,184,.34) !important;color:#140e05 !important;box-shadow:0 16px 34px rgba(0,0,0,.38),inset 0 1px 0 rgba(255,255,255,.28),inset 0 -12px 24px rgba(70,41,8,.34) !important;}\nhtml.premium-theme-emerald-quran button:not(.icon-btn):not(.share-close):not(.install-help-close):not(.bottom-app-nav-item),\nhtml.premium-theme-emerald-quran .btn,\nhtml.premium-theme-emerald-quran .install-btn,\nhtml.premium-theme-emerald-quran .support-project-btn,\nhtml.premium-theme-emerald-quran .copy-wallet-btn,\nhtml.premium-theme-emerald-quran .quick-btn{background:linear-gradient(180deg,#8beca7 0%,#21884f 48%,#083d20 100%) !important;border-color:rgba(184,255,208,.32) !important;color:#ffffff !important;box-shadow:0 16px 34px rgba(0,0,0,.40),inset 0 1px 0 rgba(255,255,255,.24),inset 0 -12px 24px rgba(0,34,17,.36) !important;}\nhtml.premium-theme-violet-noor button:not(.icon-btn):not(.share-close):not(.install-help-close):not(.bottom-app-nav-item),\nhtml.premium-theme-violet-noor .btn,\nhtml.premium-theme-violet-noor .install-btn,\nhtml.premium-theme-violet-noor .support-project-btn,\nhtml.premium-theme-violet-noor .copy-wallet-btn,\nhtml.premium-theme-violet-noor .quick-btn{background:linear-gradient(180deg,#c7acff 0%,#7651d8 48%,#2a1760 100%) !important;border-color:rgba(223,205,255,.34) !important;color:#ffffff !important;box-shadow:0 16px 34px rgba(0,0,0,.40),inset 0 1px 0 rgba(255,255,255,.22),inset 0 -12px 24px rgba(20,7,55,.36) !important;}\nhtml.premium-theme-rose-soft button:not(.icon-btn):not(.share-close):not(.install-help-close):not(.bottom-app-nav-item),\nhtml.premium-theme-rose-soft .btn,\nhtml.premium-theme-rose-soft .install-btn,\nhtml.premium-theme-rose-soft .support-project-btn,\nhtml.premium-theme-rose-soft .copy-wallet-btn,\nhtml.premium-theme-rose-soft .quick-btn{background:linear-gradient(180deg,#ffbadb 0%,#c95586 48%,#582039 100%) !important;border-color:rgba(255,216,233,.34) !important;color:#ffffff !important;box-shadow:0 16px 34px rgba(0,0,0,.40),inset 0 1px 0 rgba(255,255,255,.24),inset 0 -12px 24px rgba(54,10,30,.36) !important;}\nhtml.premium-theme-children-soft button:not(.icon-btn):not(.share-close):not(.install-help-close):not(.bottom-app-nav-item),\nhtml.premium-theme-children-soft .btn,\nhtml.premium-theme-children-soft .install-btn,\nhtml.premium-theme-children-soft .support-project-btn,\nhtml.premium-theme-children-soft .copy-wallet-btn,\nhtml.premium-theme-children-soft .quick-btn{background:linear-gradient(180deg,#ffffff 0%,#ff9fd2 48%,#9b67df 100%) !important;border-color:rgba(255,255,255,.76) !important;color:#2b2230 !important;box-shadow:0 16px 34px rgba(142,73,128,.20),inset 0 1px 0 rgba(255,255,255,.82),inset 0 -12px 24px rgba(255,159,210,.18) !important;}\nhtml.premium-theme-night-mosque button:not(.icon-btn):not(.share-close):not(.install-help-close):not(.bottom-app-nav-item),\nhtml.premium-theme-night-mosque .btn,\nhtml.premium-theme-night-mosque .install-btn,\nhtml.premium-theme-night-mosque .support-project-btn,\nhtml.premium-theme-night-mosque .copy-wallet-btn,\nhtml.premium-theme-night-mosque .quick-btn{background:linear-gradient(180deg,#d7c07a 0%,#315d9f 48%,#071531 100%) !important;border-color:rgba(215,192,122,.36) !important;color:#ffffff !important;box-shadow:0 16px 34px rgba(0,0,0,.42),inset 0 1px 0 rgba(255,255,255,.22),inset 0 -12px 24px rgba(0,8,32,.38) !important;}\nhtml.premium-theme-desert-sand button:not(.icon-btn):not(.share-close):not(.install-help-close):not(.bottom-app-nav-item),\nhtml.premium-theme-desert-sand .btn,\nhtml.premium-theme-desert-sand .install-btn,\nhtml.premium-theme-desert-sand .support-project-btn,\nhtml.premium-theme-desert-sand .copy-wallet-btn,\nhtml.premium-theme-desert-sand .quick-btn{background:linear-gradient(180deg,#ffedbe 0%,#b77c36 48%,#3a2109 100%) !important;border-color:rgba(255,246,214,.40) !important;color:#ffffff !important;box-shadow:0 16px 34px rgba(0,0,0,.40),inset 0 1px 0 rgba(255,255,255,.22),inset 0 -12px 24px rgba(64,36,10,.36) !important;}\n\nhtml.premium-theme-children-soft h1,\nhtml.premium-theme-children-soft h2,\nhtml.premium-theme-children-soft h3,\nhtml.premium-theme-children-soft h4,\nhtml.premium-theme-children-soft h5,\nhtml.premium-theme-children-soft h6,\nhtml.premium-theme-children-soft p,\nhtml.premium-theme-children-soft li,\nhtml.premium-theme-children-soft .subtitle,\nhtml.premium-theme-children-soft .section-title,\nhtml.premium-theme-children-soft .category-title,\nhtml.premium-theme-children-soft .article p,\nhtml.premium-theme-children-soft .ayah-meaning,\nhtml.premium-theme-children-soft .dua-translit,\nhtml.premium-theme-children-soft .ayah-translit{color:#2b2230 !important;text-shadow:0 1px 10px rgba(255,255,255,.86) !important;}\nhtml.premium-theme-children-soft .muted,\nhtml.premium-theme-children-soft .small,\nhtml.premium-theme-children-soft .note,\nhtml.premium-theme-children-soft .label,\nhtml.premium-theme-children-soft .surah-meta{color:#5c4d64 !important;}\n\nbody .theme-grid .theme-card.theme-child h3,\nbody .theme-grid .theme-card.theme-child p,\nbody .theme-grid .theme-card.theme-child strong,\nbody .theme-grid .theme-card[data-theme=\"children-soft\"] h3,\nbody .theme-grid .theme-card[data-theme=\"children-soft\"] p,\nbody .theme-grid .theme-card[data-theme=\"children-soft\"] strong{color:#2b2230 !important;text-shadow:0 1px 10px rgba(255,255,255,.90) !important;}\n\nhtml.premium-theme-royal-gold .bw-logo-transparent-lock,\nhtml.premium-theme-royal-gold .bw-logo-transparent-lock *,\nhtml.premium-theme-royal-gold [data-barakaway-logo-lock],\nhtml.premium-theme-royal-gold [data-barakaway-logo-lock] *,\nhtml.premium-theme-emerald-quran .bw-logo-transparent-lock,\nhtml.premium-theme-emerald-quran .bw-logo-transparent-lock *,\nhtml.premium-theme-emerald-quran [data-barakaway-logo-lock],\nhtml.premium-theme-emerald-quran [data-barakaway-logo-lock] *,\nhtml.premium-theme-violet-noor .bw-logo-transparent-lock,\nhtml.premium-theme-violet-noor .bw-logo-transparent-lock *,\nhtml.premium-theme-violet-noor [data-barakaway-logo-lock],\nhtml.premium-theme-violet-noor [data-barakaway-logo-lock] *,\nhtml.premium-theme-rose-soft .bw-logo-transparent-lock,\nhtml.premium-theme-rose-soft .bw-logo-transparent-lock *,\nhtml.premium-theme-rose-soft [data-barakaway-logo-lock],\nhtml.premium-theme-rose-soft [data-barakaway-logo-lock] *,\nhtml.premium-theme-children-soft .bw-logo-transparent-lock,\nhtml.premium-theme-children-soft .bw-logo-transparent-lock *,\nhtml.premium-theme-children-soft [data-barakaway-logo-lock],\nhtml.premium-theme-children-soft [data-barakaway-logo-lock] *,\nhtml.premium-theme-night-mosque .bw-logo-transparent-lock,\nhtml.premium-theme-night-mosque .bw-logo-transparent-lock *,\nhtml.premium-theme-night-mosque [data-barakaway-logo-lock],\nhtml.premium-theme-night-mosque [data-barakaway-logo-lock] *,\nhtml.premium-theme-desert-sand .bw-logo-transparent-lock,\nhtml.premium-theme-desert-sand .bw-logo-transparent-lock *,\nhtml.premium-theme-desert-sand [data-barakaway-logo-lock],\nhtml.premium-theme-desert-sand [data-barakaway-logo-lock] *{\n  background:transparent !important;\n  background-color:transparent !important;\n  background-image:none !important;\n  box-shadow:none !important;\n  border-color:transparent !important;\n}\n\n/* ===== END BARAKAWAY ALL PREMIUM THEMES: CARBON-ELITE ARCHITECTURE FINAL ===== */\n";
-  (document.head || document.documentElement).appendChild(style);
-})();
+html.premium-theme-rose-soft{
+  --bw-material-text:#fff9fc;
+  --bw-material-text-soft:rgba(255,234,244,.84);
+  --bw-material-border:rgba(255,206,225,.30);
+  --bw-material-border-strong:rgba(255,233,243,.42);
+  --bw-material-accent:#ffd2e5;
+  --bw-material-accent-soft:rgba(255,210,229,.22);
+  --bw-material-page-bg:radial-gradient(circle at 16% 0%, rgba(255,196,221,.16), transparent 28%), radial-gradient(circle at 84% 12%, rgba(255,241,247,.12), transparent 30%), linear-gradient(180deg,#160913 0%,#412039 44%,#8c4d6b 74%,#180a13 100%);
+  --bw-material-surface-color:#1a0b15;
+  --bw-material-surface-bg:radial-gradient(circle at 84% 18%, rgba(255,241,247,.34), transparent 24%), radial-gradient(circle at 16% 84%, rgba(255,176,209,.16), transparent 30%), radial-gradient(circle at 24% 18%, rgba(255,205,226,.12) 0 10px, transparent 11px), radial-gradient(circle at 72% 76%, rgba(255,205,226,.12) 0 12px, transparent 13px), linear-gradient(122deg, rgba(255,255,255,.09) 0%, rgba(255,255,255,0) 20%, rgba(255,189,221,.12) 46%, rgba(255,255,255,.08) 60%, rgba(0,0,0,0) 78%), linear-gradient(135deg,#1a0b15 0%,#6a3551 56%,#f1a6c9 100%);
+  --bw-material-surface-bg-size:100% 100%,100% 100%,96px 96px,128px 128px,100% 100%,100% 100%;
+  --bw-material-surface-bg-position:center,center,0 0,18px 14px,center,center;
+  --bw-material-surface-bg-repeat:no-repeat,no-repeat,repeat,repeat,no-repeat,no-repeat;
+  --bw-material-button-bg:linear-gradient(180deg,#ffc2db 0%,#c45d88 100%);
+  --bw-material-button-text:#ffffff;
+  --bw-material-input-bg:linear-gradient(180deg,rgba(82,35,59,.88),rgba(28,12,22,.96));
+}
 
+html.premium-theme-children-soft{
+  --bw-material-text:#ffffff;
+  --bw-material-text-soft:rgba(245,251,255,.88);
+  --bw-material-border:rgba(214,236,255,.28);
+  --bw-material-border-strong:rgba(255,247,214,.38);
+  --bw-material-accent:#fff1be;
+  --bw-material-accent-soft:rgba(255,241,190,.22);
+  --bw-material-page-bg:radial-gradient(circle at 16% 0%, rgba(182,226,255,.18), transparent 28%), radial-gradient(circle at 84% 12%, rgba(255,227,241,.10), transparent 30%), linear-gradient(180deg,#102d49 0%,#2c6ba2 44%,#6eb4ec 74%,#143960 100%);
+  --bw-material-surface-color:#143960;
+  --bw-material-surface-bg:linear-gradient(135deg, rgba(255,255,255,.08), rgba(255,227,241,.04)), url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='120' viewBox='0 0 180 120'%3E%0A  %3Cg opacity='.28'%3E%0A    %3Cg transform='translate(10 18)'%3E%0A      %3Ccircle cx='24' cy='16' r='8' fill='%23ffffff'/%3E%0A      %3Ccircle cx='40' cy='16' r='8' fill='%23ffffff'/%3E%0A      %3Ccircle cx='32' cy='28' r='18' fill='%23fff6d8'/%3E%0A      %3Ccircle cx='27' cy='25' r='2.4' fill='%237d5a2f'/%3E%0A      %3Ccircle cx='37' cy='25' r='2.4' fill='%237d5a2f'/%3E%0A      %3Ccircle cx='32' cy='31' r='3.6' fill='%23f3b0c8'/%3E%0A      %3Cpath d='M27 36q5 5 10 0' fill='none' stroke='%237d5a2f' stroke-width='2.2' stroke-linecap='round'/%3E%0A      %3Crect x='20' y='44' width='24' height='18' rx='10' fill='%23fff6d8'/%3E%0A    %3C/g%3E%0A    %3Cg transform='translate(84 4) scale(.9)'%3E%0A      %3Ccircle cx='24' cy='16' r='8' fill='%23ffffff'/%3E%0A      %3Ccircle cx='40' cy='16' r='8' fill='%23ffffff'/%3E%0A      %3Ccircle cx='32' cy='28' r='18' fill='%23fff6d8'/%3E%0A      %3Ccircle cx='27' cy='25' r='2.4' fill='%237d5a2f'/%3E%0A      %3Ccircle cx='37' cy='25' r='2.4' fill='%237d5a2f'/%3E%0A      %3Ccircle cx='32' cy='31' r='3.6' fill='%23f3b0c8'/%3E%0A      %3Cpath d='M27 36q5 5 10 0' fill='none' stroke='%237d5a2f' stroke-width='2.2' stroke-linecap='round'/%3E%0A      %3Crect x='20' y='44' width='24' height='18' rx='10' fill='%23fff6d8'/%3E%0A    %3C/g%3E%0A    %3Cg transform='translate(126 54) scale(.78)'%3E%0A      %3Ccircle cx='24' cy='16' r='8' fill='%23ffffff'/%3E%0A      %3Ccircle cx='40' cy='16' r='8' fill='%23ffffff'/%3E%0A      %3Ccircle cx='32' cy='28' r='18' fill='%23fff6d8'/%3E%0A      %3Ccircle cx='27' cy='25' r='2.4' fill='%237d5a2f'/%3E%0A      %3Ccircle cx='37' cy='25' r='2.4' fill='%237d5a2f'/%3E%0A      %3Ccircle cx='32' cy='31' r='3.6' fill='%23f3b0c8'/%3E%0A      %3Cpath d='M27 36q5 5 10 0' fill='none' stroke='%237d5a2f' stroke-width='2.2' stroke-linecap='round'/%3E%0A      %3Crect x='20' y='44' width='24' height='18' rx='10' fill='%23fff6d8'/%3E%0A    %3C/g%3E%0A    %3Cg transform='translate(54 58) scale(.84)'%3E%0A      %3Ccircle cx='24' cy='16' r='8' fill='%23ffffff'/%3E%0A      %3Ccircle cx='40' cy='16' r='8' fill='%23ffffff'/%3E%0A      %3Ccircle cx='32' cy='28' r='18' fill='%23fff6d8'/%3E%0A      %3Ccircle cx='27' cy='25' r='2.4' fill='%237d5a2f'/%3E%0A      %3Ccircle cx='37' cy='25' r='2.4' fill='%237d5a2f'/%3E%0A      %3Ccircle cx='32' cy='31' r='3.6' fill='%23f3b0c8'/%3E%0A      %3Cpath d='M27 36q5 5 10 0' fill='none' stroke='%237d5a2f' stroke-width='2.2' stroke-linecap='round'/%3E%0A      %3Crect x='20' y='44' width='24' height='18' rx='10' fill='%23fff6d8'/%3E%0A    %3C/g%3E%0A  %3C/g%3E%0A%3C/svg%3E"), linear-gradient(135deg,#12304d 0%,#4e96d0 58%,#88c7ff 100%);
+  --bw-material-surface-bg-size:100% 100%,180px 120px,100% 100%;
+  --bw-material-surface-bg-position:center,0 0,center;
+  --bw-material-surface-bg-repeat:no-repeat,repeat,no-repeat;
+  --bw-material-button-bg:linear-gradient(180deg,#ffe9a6 0%,#ef9ebf 100%);
+  --bw-material-button-text:#3a2242;
+  --bw-material-input-bg:linear-gradient(180deg,rgba(39,92,137,.88),rgba(17,47,79,.96));
+}
 
+html.premium-theme-night-mosque{
+  --bw-material-text:#f7fbff;
+  --bw-material-text-soft:rgba(225,234,255,.84);
+  --bw-material-border:rgba(191,214,255,.24);
+  --bw-material-border-strong:rgba(241,223,159,.30);
+  --bw-material-accent:#f1df9f;
+  --bw-material-accent-soft:rgba(241,223,159,.20);
+  --bw-material-page-bg:radial-gradient(circle at 16% 0%, rgba(124,167,255,.14), transparent 28%), radial-gradient(circle at 84% 10%, rgba(241,223,159,.10), transparent 30%), linear-gradient(180deg,#030d1a 0%,#0d2345 42%,#153870 74%,#041021 100%);
+  --bw-material-surface-color:#041021;
+  --bw-material-surface-bg:linear-gradient(135deg, rgba(255,255,255,.04), rgba(255,255,255,0) 28%), url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='120' viewBox='0 0 180 120'%3E%0A  %3Crect width='180' height='120' fill='none'/%3E%0A  %3Cg fill='%23ffffff' fill-opacity='.55'%3E%0A    %3Ccircle cx='14' cy='18' r='1.3'/%3E%3Ccircle cx='38' cy='28' r='1'/%3E%3Ccircle cx='61' cy='12' r='1.2'/%3E%3Ccircle cx='91' cy='22' r='1'/%3E%3Ccircle cx='123' cy='16' r='1.25'/%3E%3Ccircle cx='152' cy='34' r='1.05'/%3E%3Ccircle cx='169' cy='18' r='1.1'/%3E%0A    %3Ccircle cx='22' cy='52' r='1.15'/%3E%3Ccircle cx='49' cy='61' r='1'/%3E%3Ccircle cx='78' cy='44' r='1.2'/%3E%3Ccircle cx='112' cy='58' r='1'/%3E%3Ccircle cx='138' cy='49' r='1.2'/%3E%3Ccircle cx='162' cy='63' r='1'/%3E%0A    %3Ccircle cx='18' cy='92' r='1.1'/%3E%3Ccircle cx='44' cy='104' r='1'/%3E%3Ccircle cx='83' cy='90' r='1.2'/%3E%3Ccircle cx='109' cy='98' r='1'/%3E%3Ccircle cx='145' cy='88' r='1.2'/%3E%3Ccircle cx='170' cy='104' r='1'/%3E%0A  %3C/g%3E%0A  %3Cpath d='M128 29a14 14 0 1 1-13-19 10 10 0 1 0 13 19z' fill='%23f1df9f' fill-opacity='.55'/%3E%0A%3C/svg%3E"), linear-gradient(135deg,#041021 0%,#0f2d59 54%,#1b4b8f 100%);
+  --bw-material-surface-bg-size:100% 100%,180px 120px,100% 100%;
+  --bw-material-surface-bg-position:center,0 0,center;
+  --bw-material-surface-bg-repeat:no-repeat,repeat,no-repeat;
+  --bw-material-button-bg:linear-gradient(180deg,#f1df9f 0%,#4d78cb 100%);
+  --bw-material-button-text:#0f1b34;
+  --bw-material-input-bg:linear-gradient(180deg,rgba(16,36,68,.88),rgba(5,16,34,.96));
+}
 
-(function(){
-  var STYLE_ID='barakaway-premium-theme-visual-upgrade-v20260510b';
-  var CSS="\n/* ===== BARAKAWAY PREMIUM THEMES VISUAL UPGRADE \u2014 V20260510B ===== */\n/* Final override: every premium theme uses Carbon Elite architecture with its own premium material. */\n\nhtml.premium-theme-royal-gold{\n  --bg:#080704;--surface:#141008;--surface-2:#21170a;--surface-3:#3a2a0f;\n  --border:rgba(245,219,132,.30);--border-2:rgba(255,237,177,.42);\n  --text:#fff8df;--text-soft:#ead8a5;--text-muted:#c8ad62;\n  --green:#e8cc74;--green-strong:#9d7424;--green-soft:#fff0b4;\n  --bw-accent:#e8cc74;--bw-accent-2:#fff4bd;\n  --bw-premium-material:\n    radial-gradient(circle at 84% 10%,rgba(255,244,189,.24),transparent 25%),\n    radial-gradient(circle at 12% 88%,rgba(157,116,36,.34),transparent 30%),\n    repeating-linear-gradient(135deg,rgba(255,238,170,.11) 0 1px,transparent 1px 18px),\n    linear-gradient(135deg,#070604 0%,#1d1508 48%,#6f531b 100%);\n}\nhtml.premium-theme-emerald-quran{\n  --bg:#031009;--surface:#06170d;--surface-2:#0a2616;--surface-3:#0f3a22;\n  --border:rgba(102,226,150,.28);--border-2:rgba(164,255,196,.42);\n  --text:#f2fff6;--text-soft:#c7f4d4;--text-muted:#91dba6;\n  --green:#66d98a;--green-strong:#176b3d;--green-soft:#c9ffd7;\n  --bw-accent:#66d98a;--bw-accent-2:#c6ffd7;\n  --bw-premium-material:\n    radial-gradient(circle at 82% 12%,rgba(176,255,201,.22),transparent 25%),\n    radial-gradient(circle at 14% 88%,rgba(21,107,61,.42),transparent 31%),\n    linear-gradient(90deg,transparent 0 30%,rgba(180,255,205,.09) 30% 31%,transparent 31% 63%,rgba(180,255,205,.07) 63% 64%,transparent 64% 100%),\n    repeating-linear-gradient(45deg,rgba(255,255,255,.085) 0 1px,transparent 1px 17px),\n    linear-gradient(135deg,#031009 0%,#0a2a18 52%,#2f8f55 100%);\n}\nhtml.premium-theme-violet-noor{\n  --bg:#0b0714;--surface:#130d22;--surface-2:#20153b;--surface-3:#35215f;\n  --border:rgba(181,143,255,.30);--border-2:rgba(221,204,255,.44);\n  --text:#fcf9ff;--text-soft:#e1d4ff;--text-muted:#baa4ee;\n  --green:#b995ff;--green-strong:#6946c7;--green-soft:#eadfff;\n  --bw-accent:#b995ff;--bw-accent-2:#f0e7ff;\n  --bw-premium-material:\n    radial-gradient(circle at 84% 10%,rgba(235,222,255,.24),transparent 26%),\n    radial-gradient(circle at 12% 86%,rgba(105,70,199,.42),transparent 32%),\n    repeating-linear-gradient(120deg,rgba(255,255,255,.10) 0 1px,transparent 1px 19px),\n    linear-gradient(135deg,#0b0714 0%,#231843 50%,#6d4ed0 100%);\n}\nhtml.premium-theme-rose-soft{\n  --bg:#160811;--surface:#22101b;--surface-2:#321529;--surface-3:#4c1f3b;\n  --border:rgba(255,166,204,.30);--border-2:rgba(255,218,234,.44);\n  --text:#fff9fc;--text-soft:#ffd8e9;--text-muted:#efa9c9;\n  --green:#ffa8cf;--green-strong:#b64d78;--green-soft:#ffe2ee;\n  --bw-accent:#ffa8cf;--bw-accent-2:#ffe3ef;\n  --bw-premium-material:\n    radial-gradient(circle at 18% 20%,rgba(255,255,255,.18) 0 2px,transparent 2.8px),\n    radial-gradient(circle at 82% 12%,rgba(255,220,236,.24),transparent 26%),\n    radial-gradient(circle at 15% 85%,rgba(182,77,120,.42),transparent 32%),\n    repeating-linear-gradient(135deg,rgba(255,255,255,.09) 0 1px,transparent 1px 20px),\n    linear-gradient(135deg,#160811 0%,#3a1830 52%,#d86199 100%);\n}\nhtml.premium-theme-children-soft{\n  --bg:#09213a;--surface:#102f4c;--surface-2:#1a456a;--surface-3:#6eb7e8;\n  --border:rgba(190,230,255,.36);--border-2:rgba(255,231,247,.48);\n  --text:#f7fcff;--text-soft:#d7efff;--text-muted:#acd7f4;\n  --green:#9bd9ff;--green-strong:#3e8fc7;--green-soft:#e4f6ff;\n  --bw-accent:#9bd9ff;--bw-accent-2:#ffe5f4;\n  --bw-premium-material:\n    radial-gradient(circle at 18% 22%,rgba(255,255,255,.42) 0 10px,transparent 11px),\n    radial-gradient(circle at 86% 16%,rgba(255,231,247,.38),transparent 26%),\n    radial-gradient(circle at 12% 86%,rgba(89,170,220,.42),transparent 32%),\n    repeating-linear-gradient(135deg,rgba(255,255,255,.08) 0 1px,transparent 1px 20px),\n    linear-gradient(135deg,#09213a 0%,#1f5f91 54%,#a8dcff 100%);\n}\nhtml.premium-theme-night-mosque{\n  --bg:#020716;--surface:#06112b;--surface-2:#0a1e4b;--surface-3:#17396f;\n  --border:rgba(148,180,255,.28);--border-2:rgba(215,192,122,.40);\n  --text:#f8fbff;--text-soft:#dce9ff;--text-muted:#a8c0ed;\n  --green:#d7c07a;--green-strong:#315c9b;--green-soft:#fff0b4;\n  --bw-accent:#d7c07a;--bw-accent-2:#8fb5ff;\n  --bw-premium-material:\n    radial-gradient(circle at 14% 18%,rgba(255,255,255,.50) 0 1.2px,transparent 1.9px),\n    radial-gradient(circle at 42% 28%,rgba(255,255,255,.38) 0 1px,transparent 1.7px),\n    radial-gradient(circle at 76% 18%,rgba(215,192,122,.34) 0 12px,transparent 13px),\n    linear-gradient(90deg,transparent 0 32%,rgba(215,192,122,.12) 32% 33%,transparent 33% 68%,rgba(215,192,122,.10) 68% 69%,transparent 69% 100%),\n    repeating-linear-gradient(135deg,rgba(143,181,255,.08) 0 1px,transparent 1px 20px),\n    linear-gradient(135deg,#020716 0%,#0b214f 54%,#1d4b8d 100%);\n}\nhtml.premium-theme-desert-sand{\n  --bg:#120a03;--surface:#261606;--surface-2:#4a2f10;--surface-3:#a97835;\n  --border:rgba(255,237,190,.32);--border-2:rgba(255,246,214,.48);\n  --text:#fff8e7;--text-soft:#f7e4bd;--text-muted:#e0be82;\n  --green:#ffedbe;--green-strong:#9a6d2d;--green-soft:#fff3cf;\n  --bw-accent:#ffedbe;--bw-accent-2:#dbae61;\n  --bw-premium-material:\n    radial-gradient(circle at 82% 12%,rgba(255,239,198,.24),transparent 26%),\n    radial-gradient(circle at 12% 86%,rgba(154,109,45,.44),transparent 32%),\n    repeating-radial-gradient(circle at 20% 40%,rgba(255,240,200,.14) 0 1px,transparent 1px 11px),\n    linear-gradient(160deg,transparent 0 48%,rgba(255,237,190,.16) 49%,transparent 51% 100%),\n    linear-gradient(135deg,#120a03 0%,#5e3c14 52%,#d9a85d 100%);\n}\n\nhtml[class*=\"premium-theme-\"] body,\nhtml[class*=\"premium-theme-\"] .container,\nhtml[class*=\"premium-theme-\"] .hero,\nhtml[class*=\"premium-theme-\"] .brand-prayer-hero,\nhtml[class*=\"premium-theme-\"] .today-hub,\nhtml[class*=\"premium-theme-\"] .about-project-card,\nhtml[class*=\"premium-theme-\"] .barakaway-pro-final,\nhtml[class*=\"premium-theme-\"] .block,\nhtml[class*=\"premium-theme-\"] .card,\nhtml[class*=\"premium-theme-\"] .box,\nhtml[class*=\"premium-theme-\"] .panel,\nhtml[class*=\"premium-theme-\"] .quote,\nhtml[class*=\"premium-theme-\"] .empty,\nhtml[class*=\"premium-theme-\"] .article,\nhtml[class*=\"premium-theme-\"] .category-panel,\nhtml[class*=\"premium-theme-\"] .surah-card,\nhtml[class*=\"premium-theme-\"] .prayer-card,\nhtml[class*=\"premium-theme-\"] .toggle-row,\nhtml[class*=\"premium-theme-\"] .meta-item,\nhtml[class*=\"premium-theme-\"] .note-box,\nhtml[class*=\"premium-theme-\"] .jumuah-box,\nhtml[class*=\"premium-theme-\"] .month-day,\nhtml[class*=\"premium-theme-\"] .month-head,\nhtml[class*=\"premium-theme-\"] .wallet-support,\nhtml[class*=\"premium-theme-\"] .home-widget,\nhtml[class*=\"premium-theme-\"] .dua-card,\nhtml[class*=\"premium-theme-\"] .ayah-card,\nhtml[class*=\"premium-theme-\"] .master-audio-wrap,\nhtml[class*=\"premium-theme-\"] .reader-side,\nhtml[class*=\"premium-theme-\"] .reader-main,\nhtml[class*=\"premium-theme-\"] .dua-side,\nhtml[class*=\"premium-theme-\"] .dua-main,\nhtml[class*=\"premium-theme-\"] .ai-side,\nhtml[class*=\"premium-theme-\"] .ai-main,\nhtml[class*=\"premium-theme-\"] .player-panel,\nhtml[class*=\"premium-theme-\"] .preview-panel,\nhtml[class*=\"premium-theme-\"] .app-menu-btn,\nhtml[class*=\"premium-theme-\"] .today-action,\nhtml[class*=\"premium-theme-\"] .premium-resource-card,\nhtml[class*=\"premium-theme-\"] .bottom-app-nav,\nhtml[class*=\"premium-theme-\"] .bottom-app-nav-inner{\n  background-color:var(--bg) !important;\n  background-image:var(--bw-premium-material) !important;\n  background-size:auto,auto,auto,auto,100% 100% !important;\n  background-position:center,center,center,center,center !important;\n  background-repeat:no-repeat,no-repeat,repeat,repeat,no-repeat !important;\n  border-color:var(--border) !important;\n  color:var(--text) !important;\n  box-shadow:\n    0 24px 58px rgba(0,0,0,.46),\n    0 0 0 1px rgba(255,255,255,.045),\n    inset 0 1px 0 rgba(255,255,255,.13),\n    inset 0 -24px 38px rgba(0,0,0,.30) !important;\n}\n\nhtml[class*=\"premium-theme-\"] button:not(.icon-btn):not(.share-close):not(.install-help-close):not(.bottom-app-nav-item),\nhtml[class*=\"premium-theme-\"] .btn,\nhtml[class*=\"premium-theme-\"] .install-btn,\nhtml[class*=\"premium-theme-\"] .support-project-btn,\nhtml[class*=\"premium-theme-\"] .copy-wallet-btn,\nhtml[class*=\"premium-theme-\"] .quick-btn{\n  background:linear-gradient(180deg,color-mix(in srgb,var(--bw-accent-2) 78%,#ffffff) 0%,var(--bw-accent) 44%,var(--green-strong) 100%) !important;\n  border-color:var(--border-2) !important;\n  color:#101010 !important;\n  box-shadow:0 16px 34px rgba(0,0,0,.34),inset 0 1px 0 rgba(255,255,255,.32),inset 0 -12px 24px rgba(0,0,0,.22) !important;\n}\n\nhtml[class*=\"premium-theme-\"] .bw-logo-transparent-lock,\nhtml[class*=\"premium-theme-\"] .bw-logo-transparent-lock *,\nhtml[class*=\"premium-theme-\"] [data-barakaway-logo-lock],\nhtml[class*=\"premium-theme-\"] [data-barakaway-logo-lock] *{\n  background:transparent !important;background-color:transparent !important;background-image:none !important;box-shadow:none !important;border-color:transparent !important;\n}\n\nhtml body .page .theme-grid .theme-card[data-theme]{\n  min-height:236px !important;\n  border-width:1px !important;\n  isolation:isolate !important;\n  overflow:hidden !important;\n}\nhtml body .page .theme-grid .theme-card[data-theme]::before{\n  content:\"\" !important;\n  position:absolute !important;\n  inset:0 !important;\n  z-index:1 !important;\n  background:\n    linear-gradient(118deg,transparent 0%,rgba(255,255,255,.18) 18%,transparent 31%,transparent 66%,rgba(255,255,255,.08) 78%,transparent 100%),\n    radial-gradient(circle at 86% 12%,rgba(255,255,255,.18),transparent 26%) !important;\n  pointer-events:none !important;\n  opacity:.95 !important;\n}\nhtml body .page .theme-grid .theme-card[data-theme]::after{\n  content:\"\" !important;\n  position:absolute !important;\n  inset:auto -10% -34% -10% !important;\n  height:62% !important;\n  z-index:1 !important;\n  background:radial-gradient(ellipse at center,rgba(255,255,255,.20),transparent 64%) !important;\n  pointer-events:none !important;\n  opacity:.72 !important;\n}\nhtml body .page .theme-grid .theme-card[data-theme] .theme-top,\nhtml body .page .theme-grid .theme-card[data-theme] h3,\nhtml body .page .theme-grid .theme-card[data-theme] p,\nhtml body .page .theme-grid .theme-card[data-theme] .theme-preview{\n  position:relative !important;\n  z-index:3 !important;\n}\nhtml body .page .theme-grid .theme-card[data-theme] h3,\nhtml body .page .theme-grid .theme-card[data-theme] p{\n  color:#fff !important;\n  text-shadow:0 2px 16px rgba(0,0,0,.68) !important;\n}\nhtml body .page .theme-grid .theme-card[data-theme] .theme-icon{\n  background:rgba(0,0,0,.22) !important;\n  border-color:rgba(255,255,255,.18) !important;\n  box-shadow:inset 0 1px 0 rgba(255,255,255,.20),0 10px 28px rgba(0,0,0,.24) !important;\n}\nhtml body .page .theme-grid .theme-card[data-theme] .theme-chip{\n  background:rgba(0,0,0,.26) !important;\n  border-color:rgba(255,255,255,.20) !important;\n  color:#fff !important;\n}\n\nhtml body .page .theme-grid .theme-card.theme-gold[data-theme=\"royal-gold\"]{background-image:var(--bw-premium-material, radial-gradient(circle at 84% 10%,rgba(255,244,189,.24),transparent 25%),radial-gradient(circle at 12% 88%,rgba(157,116,36,.34),transparent 30%),repeating-linear-gradient(135deg,rgba(255,238,170,.11) 0 1px,transparent 1px 18px),linear-gradient(135deg,#070604 0%,#1d1508 48%,#6f531b 100%)) !important;background-color:#080704 !important;border-color:rgba(245,219,132,.34) !important;box-shadow:0 24px 58px rgba(90,62,12,.42),0 0 0 1px rgba(255,238,170,.12),inset 0 1px 0 rgba(255,255,255,.18),inset 0 -24px 38px rgba(0,0,0,.34) !important;}\nhtml body .page .theme-grid .theme-card.theme-emerald[data-theme=\"emerald-quran\"]{background-image:radial-gradient(circle at 82% 12%,rgba(176,255,201,.22),transparent 25%),radial-gradient(circle at 14% 88%,rgba(21,107,61,.42),transparent 31%),linear-gradient(90deg,transparent 0 30%,rgba(180,255,205,.09) 30% 31%,transparent 31% 63%,rgba(180,255,205,.07) 63% 64%,transparent 64% 100%),repeating-linear-gradient(45deg,rgba(255,255,255,.085) 0 1px,transparent 1px 17px),linear-gradient(135deg,#031009 0%,#0a2a18 52%,#2f8f55 100%) !important;background-color:#031009 !important;border-color:rgba(102,226,150,.34) !important;box-shadow:0 24px 58px rgba(0,70,36,.42),0 0 0 1px rgba(164,255,196,.10),inset 0 1px 0 rgba(255,255,255,.18),inset 0 -24px 38px rgba(0,0,0,.34) !important;}\nhtml body .page .theme-grid .theme-card.theme-violet[data-theme=\"violet-noor\"]{background-image:radial-gradient(circle at 84% 10%,rgba(235,222,255,.24),transparent 26%),radial-gradient(circle at 12% 86%,rgba(105,70,199,.42),transparent 32%),repeating-linear-gradient(120deg,rgba(255,255,255,.10) 0 1px,transparent 1px 19px),linear-gradient(135deg,#0b0714 0%,#231843 50%,#6d4ed0 100%) !important;background-color:#0b0714 !important;border-color:rgba(181,143,255,.38) !important;box-shadow:0 24px 58px rgba(54,24,120,.46),0 0 0 1px rgba(221,204,255,.12),inset 0 1px 0 rgba(255,255,255,.18),inset 0 -24px 38px rgba(0,0,0,.34) !important;}\nhtml body .page .theme-grid .theme-card.theme-rose[data-theme=\"rose-soft\"]{background-image:radial-gradient(circle at 18% 20%,rgba(255,255,255,.18) 0 2px,transparent 2.8px),radial-gradient(circle at 82% 12%,rgba(255,220,236,.24),transparent 26%),radial-gradient(circle at 15% 85%,rgba(182,77,120,.42),transparent 32%),repeating-linear-gradient(135deg,rgba(255,255,255,.09) 0 1px,transparent 1px 20px),linear-gradient(135deg,#160811 0%,#3a1830 52%,#d86199 100%) !important;background-color:#160811 !important;border-color:rgba(255,166,204,.38) !important;box-shadow:0 24px 58px rgba(130,35,82,.42),0 0 0 1px rgba(255,218,234,.12),inset 0 1px 0 rgba(255,255,255,.18),inset 0 -24px 38px rgba(0,0,0,.34) !important;}\nhtml body .page .theme-grid .theme-card.theme-child[data-theme=\"children-soft\"]{background-image:radial-gradient(circle at 18% 22%,rgba(255,255,255,.42) 0 10px,transparent 11px),radial-gradient(circle at 86% 16%,rgba(255,231,247,.38),transparent 26%),radial-gradient(circle at 12% 86%,rgba(89,170,220,.42),transparent 32%),repeating-linear-gradient(135deg,rgba(255,255,255,.08) 0 1px,transparent 1px 20px),linear-gradient(135deg,#09213a 0%,#1f5f91 54%,#a8dcff 100%) !important;background-color:#09213a !important;border-color:rgba(190,230,255,.44) !important;box-shadow:0 24px 58px rgba(28,98,145,.42),0 0 0 1px rgba(255,231,247,.14),inset 0 1px 0 rgba(255,255,255,.26),inset 0 -24px 38px rgba(0,0,0,.24) !important;}\nhtml body .page .theme-grid .theme-card.theme-night[data-theme=\"night-mosque\"]{background-image:radial-gradient(circle at 14% 18%,rgba(255,255,255,.50) 0 1.2px,transparent 1.9px),radial-gradient(circle at 42% 28%,rgba(255,255,255,.38) 0 1px,transparent 1.7px),radial-gradient(circle at 76% 18%,rgba(215,192,122,.34) 0 12px,transparent 13px),linear-gradient(90deg,transparent 0 32%,rgba(215,192,122,.12) 32% 33%,transparent 33% 68%,rgba(215,192,122,.10) 68% 69%,transparent 69% 100%),repeating-linear-gradient(135deg,rgba(143,181,255,.08) 0 1px,transparent 1px 20px),linear-gradient(135deg,#020716 0%,#0b214f 54%,#1d4b8d 100%) !important;background-color:#020716 !important;border-color:rgba(148,180,255,.34) !important;box-shadow:0 24px 58px rgba(0,13,55,.56),0 0 0 1px rgba(215,192,122,.10),inset 0 1px 0 rgba(255,255,255,.16),inset 0 -24px 38px rgba(0,0,0,.38) !important;}\nhtml body .page .theme-grid .theme-card.theme-sand[data-theme=\"desert-sand\"]{background-image:radial-gradient(circle at 82% 12%,rgba(255,239,198,.24),transparent 26%),radial-gradient(circle at 12% 86%,rgba(154,109,45,.44),transparent 32%),repeating-radial-gradient(circle at 20% 40%,rgba(255,240,200,.14) 0 1px,transparent 1px 11px),linear-gradient(160deg,transparent 0 48%,rgba(255,237,190,.16) 49%,transparent 51% 100%),linear-gradient(135deg,#120a03 0%,#5e3c14 52%,#d9a85d 100%) !important;background-color:#120a03 !important;border-color:rgba(255,237,190,.40) !important;box-shadow:0 24px 58px rgba(110,67,18,.44),0 0 0 1px rgba(255,246,214,.12),inset 0 1px 0 rgba(255,255,255,.20),inset 0 -24px 38px rgba(0,0,0,.28) !important;}\n/* ===== END BARAKAWAY PREMIUM THEMES VISUAL UPGRADE \u2014 V20260510B ===== */\n";
+html.premium-theme-desert-sand{
+  --bw-material-text:#fffaf0;
+  --bw-material-text-soft:rgba(255,241,220,.84);
+  --bw-material-border:rgba(255,236,188,.28);
+  --bw-material-border-strong:rgba(255,243,212,.40);
+  --bw-material-accent:#fff0c8;
+  --bw-material-accent-soft:rgba(255,240,200,.20);
+  --bw-material-page-bg:radial-gradient(circle at 16% 0%, rgba(255,233,170,.14), transparent 28%), radial-gradient(circle at 84% 10%, rgba(255,246,217,.10), transparent 30%), linear-gradient(180deg,#5f3e18 0%,#9b6c33 44%,#d7ac69 74%,#6d471d 100%);
+  --bw-material-surface-color:#6d471d;
+  --bw-material-surface-bg:radial-gradient(circle at 84% 16%, rgba(255,246,217,.24), transparent 24%), radial-gradient(circle at 14% 86%, rgba(255,219,147,.16), transparent 26%), url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='120' viewBox='0 0 160 120'%3E%0A  %3Cg fill='%23fff1c8' fill-opacity='.22'%3E%0A    %3Ccircle cx='8' cy='11' r='1.2'/%3E%3Ccircle cx='31' cy='18' r='1'/%3E%3Ccircle cx='52' cy='8' r='1.1'/%3E%3Ccircle cx='77' cy='16' r='1'/%3E%3Ccircle cx='101' cy='9' r='1.15'/%3E%3Ccircle cx='123' cy='19' r='1'/%3E%3Ccircle cx='146' cy='12' r='1.1'/%3E%0A    %3Ccircle cx='18' cy='42' r='1'/%3E%3Ccircle cx='43' cy='37' r='1.15'/%3E%3Ccircle cx='68' cy='46' r='1'/%3E%3Ccircle cx='92' cy='39' r='1.2'/%3E%3Ccircle cx='116' cy='47' r='1'/%3E%3Ccircle cx='141' cy='40' r='1.1'/%3E%0A    %3Ccircle cx='11' cy='71' r='1.1'/%3E%3Ccircle cx='37' cy='78' r='1'/%3E%3Ccircle cx='59' cy='69' r='1.2'/%3E%3Ccircle cx='84' cy='80' r='1'/%3E%3Ccircle cx='109' cy='73' r='1.1'/%3E%3Ccircle cx='136' cy='81' r='1'/%3E%0A    %3Ccircle cx='19' cy='101' r='1.05'/%3E%3Ccircle cx='48' cy='110' r='1'/%3E%3Ccircle cx='74' cy='98' r='1.1'/%3E%3Ccircle cx='98' cy='109' r='1'/%3E%3Ccircle cx='126' cy='101' r='1.15'/%3E%3Ccircle cx='149' cy='111' r='1'/%3E%0A  %3C/g%3E%0A  %3Cg fill='none' stroke='%23b87c39' stroke-opacity='.18' stroke-width='2'%3E%0A    %3Cpath d='M-6 88c18-9 40-9 58 0 17 8 36 8 54 0 18-9 36-9 54 0'/%3E%0A    %3Cpath d='M-8 103c22-9 42-9 64 0 20 8 38 8 58 0 18-8 34-8 50 0'/%3E%0A  %3C/g%3E%0A%3C/svg%3E"), linear-gradient(150deg,#6d471d 0%,#bf8a46 58%,#efd49b 100%);
+  --bw-material-surface-bg-size:100% 100%,100% 100%,160px 120px,100% 100%;
+  --bw-material-surface-bg-position:center,center,0 0,center;
+  --bw-material-surface-bg-repeat:no-repeat,no-repeat,repeat,no-repeat;
+  --bw-material-button-bg:linear-gradient(180deg,#ffe4aa 0%,#bb7f35 100%);
+  --bw-material-button-text:#3c2408;
+  --bw-material-input-bg:linear-gradient(180deg,rgba(126,85,38,.88),rgba(74,46,17,.96));
+}
+/* ===== END BARAKAWAY PREMIUM MATERIAL THEMES FINAL ===== */`;
   function inject(){
     if(document.getElementById(STYLE_ID)) return;
-    var style=document.createElement('style');
-    style.id=STYLE_ID;
-    style.textContent=CSS;
-    document.head.appendChild(style);
+    const style = document.createElement('style');
+    style.id = STYLE_ID;
+    style.textContent = CSS;
+    (document.head || document.documentElement).appendChild(style);
   }
-  if(document.readyState==='loading') document.addEventListener('DOMContentLoaded', inject); else inject();
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', inject, {once:true});
+  } else {
+    inject();
+  }
 })();
+/* ===== END BARAKAWAY PREMIUM MATERIAL THEMES FINAL INJECTOR ===== */
+
+
+/* ===== BARAKAWAY PREMIUM THEMES NO-SQUARE FINAL INJECTOR ===== */
+(function(){
+  const STYLE_ID = "barakaway-premium-themes-no-square-final";
+  const CSS = `
+/* ===== BARAKAWAY PREMIUM THEMES NO-SQUARE FINAL OVERRIDE ===== */
+html[class*="premium-theme-"]:not(.premium-theme-carbon-elite){
+  --bw-final-bg:#101820;
+  --bw-final-material:#101820;
+  --bw-final-material-bg:linear-gradient(135deg,#151d26 0%,#101820 100%);
+  --bw-final-material-size:100% 100%;
+  --bw-final-material-position:center;
+  --bw-final-material-repeat:no-repeat;
+  --bw-final-text:#ffffff;
+  --bw-final-text-soft:rgba(255,255,255,.86);
+  --bw-final-border:rgba(255,255,255,.22);
+  --bw-final-border-strong:rgba(255,255,255,.34);
+  --bw-final-accent:#ffffff;
+  --bw-final-button:linear-gradient(135deg,#444 0%,#111 100%);
+  --bw-final-button-text:#ffffff;
+}
+
+html.premium-theme-royal-gold{
+  --bw-final-bg:linear-gradient(180deg,#130b02 0%,#3a2408 46%,#8e6527 74%,#160e04 100%);
+  --bw-final-material:#311c05;
+  --bw-final-material-bg:radial-gradient(circle at 82% 18%,rgba(255,248,218,.38),transparent 24%),radial-gradient(circle at 18% 84%,rgba(255,206,96,.18),transparent 34%),linear-gradient(118deg,rgba(255,255,255,.16) 0%,rgba(255,255,255,.03) 22%,rgba(255,215,112,.20) 46%,rgba(255,255,255,.08) 62%,rgba(0,0,0,0) 82%),linear-gradient(135deg,#311c05 0%,#8a5d1e 56%,#e8bd59 100%);
+  --bw-final-border:rgba(255,221,135,.42);
+  --bw-final-border-strong:rgba(255,236,186,.56);
+  --bw-final-accent:#f4d27a;
+  --bw-final-button:linear-gradient(180deg,#f2d47d 0%,#b67c25 100%);
+  --bw-final-button-text:#1e1103;
+}
+html.premium-theme-emerald-quran{
+  --bw-final-bg:linear-gradient(180deg,#041107 0%,#0d321b 48%,#1e7840 74%,#051108 100%);
+  --bw-final-material:#06170c;
+  --bw-final-material-bg:radial-gradient(circle at 82% 18%,rgba(185,255,211,.28),transparent 24%),radial-gradient(circle at 18% 84%,rgba(82,220,134,.18),transparent 34%),linear-gradient(118deg,rgba(255,255,255,.10) 0%,rgba(255,255,255,0) 22%,rgba(79,225,138,.14) 46%,rgba(255,255,255,.07) 62%,rgba(0,0,0,0) 82%),linear-gradient(135deg,#06170c 0%,#114326 56%,#37a75d 100%);
+  --bw-final-border:rgba(119,232,157,.40);
+  --bw-final-border-strong:rgba(178,255,206,.50);
+  --bw-final-accent:#8cf2ad;
+  --bw-final-button:linear-gradient(180deg,#79dc97 0%,#237841 100%);
+}
+html.premium-theme-violet-noor{
+  --bw-final-bg:linear-gradient(180deg,#0c0716 0%,#28124d 48%,#6034b5 74%,#10091b 100%);
+  --bw-final-material:#10091b;
+  --bw-final-material-bg:radial-gradient(circle at 82% 18%,rgba(241,231,255,.32),transparent 24%),radial-gradient(circle at 18% 84%,rgba(168,112,255,.18),transparent 34%),linear-gradient(118deg,rgba(255,255,255,.10) 0%,rgba(255,255,255,0) 22%,rgba(204,174,255,.16) 46%,rgba(255,255,255,.07) 62%,rgba(0,0,0,0) 82%),linear-gradient(135deg,#10091b 0%,#351b65 56%,#a77bff 100%);
+  --bw-final-border:rgba(214,191,255,.40);
+  --bw-final-border-strong:rgba(235,225,255,.52);
+  --bw-final-accent:#dcc8ff;
+  --bw-final-button:linear-gradient(180deg,#ceb4ff 0%,#704ad6 100%);
+}
+html.premium-theme-rose-soft{
+  --bw-final-bg:linear-gradient(180deg,#160812 0%,#432039 48%,#965271 74%,#180912 100%);
+  --bw-final-material:#1a0a14;
+  --bw-final-material-bg:radial-gradient(circle at 84% 18%,rgba(255,241,247,.34),transparent 26%),radial-gradient(circle at 18% 84%,rgba(255,172,208,.18),transparent 34%),linear-gradient(118deg,rgba(255,255,255,.10) 0%,rgba(255,255,255,0) 22%,rgba(255,190,221,.15) 46%,rgba(255,255,255,.07) 62%,rgba(0,0,0,0) 82%),linear-gradient(135deg,#1a0a14 0%,#6a3551 58%,#e89bbe 100%);
+  --bw-final-border:rgba(255,204,225,.42);
+  --bw-final-border-strong:rgba(255,232,243,.54);
+  --bw-final-accent:#ffd2e5;
+  --bw-final-button:linear-gradient(180deg,#ffc0da 0%,#bf5a83 100%);
+}
+html.premium-theme-children-soft{
+  --bw-final-bg:linear-gradient(180deg,#0f2d49 0%,#2e6fa8 48%,#78bdf1 74%,#123a60 100%);
+  --bw-final-material:#143a61;
+  --bw-final-material-bg:linear-gradient(135deg,rgba(255,255,255,.10),rgba(255,227,241,.05)),url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='220' height='150' viewBox='0 0 220 150'%3E%0A  %3Cdefs%3E%0A    %3Cg id='bear'%3E%0A      %3Ccircle cx='24' cy='18' r='9' fill='%23fff2c8' opacity='.72'/%3E%0A      %3Ccircle cx='48' cy='18' r='9' fill='%23fff2c8' opacity='.72'/%3E%0A      %3Ccircle cx='36' cy='34' r='23' fill='%23ffe8b8' opacity='.76'/%3E%0A      %3Ccircle cx='28' cy='30' r='2.6' fill='%237a5430' opacity='.72'/%3E%0A      %3Ccircle cx='44' cy='30' r='2.6' fill='%237a5430' opacity='.72'/%3E%0A      %3Cellipse cx='36' cy='39' rx='5.6' ry='4.6' fill='%23f5b7cb' opacity='.72'/%3E%0A      %3Cpath d='M28 48q8 7 16 0' fill='none' stroke='%237a5430' stroke-width='2.4' stroke-linecap='round' opacity='.68'/%3E%0A      %3Crect x='22' y='56' width='28' height='22' rx='13' fill='%23ffe8b8' opacity='.68'/%3E%0A    %3C/g%3E%0A  %3C/defs%3E%0A  %3Cuse href='%23bear' x='10' y='8'/%3E%0A  %3Cuse href='%23bear' x='94' y='0' transform='scale(.9)'/%3E%0A  %3Cuse href='%23bear' x='160' y='54' transform='scale(.72)'/%3E%0A  %3Cuse href='%23bear' x='58' y='80' transform='scale(.76)'/%3E%0A%3C/svg%3E"),linear-gradient(135deg,#12304d 0%,#4d95d0 58%,#8bcaff 100%);
+  --bw-final-material-size:100% 100%,220px 150px,100% 100%;
+  --bw-final-material-position:center,0 0,center;
+  --bw-final-material-repeat:no-repeat,repeat,no-repeat;
+  --bw-final-border:rgba(214,236,255,.42);
+  --bw-final-border-strong:rgba(255,247,214,.52);
+  --bw-final-accent:#fff0bf;
+  --bw-final-button:linear-gradient(180deg,#ffe8a6 0%,#ef9ec0 100%);
+  --bw-final-button-text:#3a2242;
+}
+html.premium-theme-night-mosque{
+  --bw-final-bg:linear-gradient(180deg,#020914 0%,#0d2448 48%,#16407c 74%,#030d1a 100%);
+  --bw-final-material:#041021;
+  --bw-final-material-bg:linear-gradient(135deg,rgba(255,255,255,.04),rgba(255,255,255,0) 30%),url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='220' height='150' viewBox='0 0 220 150'%3E%0A  %3Cdefs%3E%0A    %3Cpath id='s' d='M0,-5 L1.45,-1.45 L5,0 L1.45,1.45 L0,5 L-1.45,1.45 L-5,0 L-1.45,-1.45 Z' fill='%23ffffff' opacity='.62'/%3E%0A    %3Cpath id='g' d='M0,-6 L1.8,-1.8 L6,0 L1.8,1.8 L0,6 L-1.8,1.8 L-6,0 L-1.8,-1.8 Z' fill='%23f5df9b' opacity='.55'/%3E%0A  %3C/defs%3E%0A  %3Cuse href='%23s' x='18' y='20'/%3E%3Cuse href='%23s' x='48' y='36' transform='scale(.72)'/%3E%3Cuse href='%23g' x='78' y='18' transform='scale(.78)'/%3E%0A  %3Cuse href='%23s' x='118' y='30' transform='scale(.62)'/%3E%3Cuse href='%23s' x='154' y='18' transform='scale(.82)'/%3E%3Cuse href='%23g' x='194' y='42' transform='scale(.72)'/%3E%0A  %3Cuse href='%23s' x='28' y='76' transform='scale(.68)'/%3E%3Cuse href='%23g' x='64' y='94' transform='scale(.6)'/%3E%3Cuse href='%23s' x='104' y='76' transform='scale(.78)'/%3E%0A  %3Cuse href='%23s' x='144' y='98' transform='scale(.66)'/%3E%3Cuse href='%23g' x='186' y='84' transform='scale(.7)'/%3E%3Cuse href='%23s' x='204' y='124' transform='scale(.6)'/%3E%0A  %3Cpath d='M164 44a17 17 0 1 1-16-23 12 12 0 1 0 16 23z' fill='%23f1db91' opacity='.36'/%3E%0A%3C/svg%3E"),linear-gradient(135deg,#041021 0%,#102f5e 56%,#1b4c91 100%);
+  --bw-final-material-size:100% 100%,220px 150px,100% 100%;
+  --bw-final-material-position:center,0 0,center;
+  --bw-final-material-repeat:no-repeat,repeat,no-repeat;
+  --bw-final-border:rgba(190,214,255,.34);
+  --bw-final-border-strong:rgba(241,223,159,.44);
+  --bw-final-accent:#f1df9f;
+  --bw-final-button:linear-gradient(180deg,#f1df9f 0%,#4f79cc 100%);
+  --bw-final-button-text:#101b33;
+}
+html.premium-theme-desert-sand{
+  --bw-final-bg:linear-gradient(180deg,#5f3e18 0%,#9d6f35 48%,#d9ad68 74%,#6d471d 100%);
+  --bw-final-material:#755022;
+  --bw-final-material-bg:radial-gradient(circle at 84% 16%,rgba(255,246,217,.22),transparent 26%),radial-gradient(circle at 14% 86%,rgba(255,218,143,.15),transparent 30%),url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='260' height='160' viewBox='0 0 260 160'%3E%0A  %3Cpath d='M-20 94 C30 68 70 70 118 94 S210 122 280 88' fill='none' stroke='%23fff0c8' stroke-opacity='.16' stroke-width='18' stroke-linecap='round'/%3E%0A  %3Cpath d='M-30 124 C28 96 84 98 136 122 S222 150 292 108' fill='none' stroke='%239f6429' stroke-opacity='.13' stroke-width='22' stroke-linecap='round'/%3E%0A  %3Cpath d='M-20 42 C42 18 88 24 132 44 S208 70 280 36' fill='none' stroke='%23fff8d8' stroke-opacity='.12' stroke-width='14' stroke-linecap='round'/%3E%0A%3C/svg%3E"),linear-gradient(150deg,#6d471d 0%,#bd8743 58%,#efd19a 100%);
+  --bw-final-material-size:100% 100%,100% 100%,260px 160px,100% 100%;
+  --bw-final-material-position:center,center,0 0,center;
+  --bw-final-material-repeat:no-repeat,no-repeat,repeat,no-repeat;
+  --bw-final-border:rgba(255,236,188,.40);
+  --bw-final-border-strong:rgba(255,243,212,.52);
+  --bw-final-accent:#fff0c8;
+  --bw-final-button:linear-gradient(180deg,#ffe3a8 0%,#b77b32 100%);
+  --bw-final-button-text:#3b2408;
+}
+
+html[class*="premium-theme-"]:not(.premium-theme-carbon-elite) body,
+html[class*="premium-theme-"]:not(.premium-theme-carbon-elite) .container,
+html[class*="premium-theme-"]:not(.premium-theme-carbon-elite) .hero,
+html[class*="premium-theme-"]:not(.premium-theme-carbon-elite) .brand-prayer-hero,
+html[class*="premium-theme-"]:not(.premium-theme-carbon-elite) .today-hub,
+html[class*="premium-theme-"]:not(.premium-theme-carbon-elite) .about-project-card,
+html[class*="premium-theme-"]:not(.premium-theme-carbon-elite) .barakaway-pro-final,
+html[class*="premium-theme-"]:not(.premium-theme-carbon-elite) .block,
+html[class*="premium-theme-"]:not(.premium-theme-carbon-elite) .card,
+html[class*="premium-theme-"]:not(.premium-theme-carbon-elite) .box,
+html[class*="premium-theme-"]:not(.premium-theme-carbon-elite) .panel,
+html[class*="premium-theme-"]:not(.premium-theme-carbon-elite) .quote,
+html[class*="premium-theme-"]:not(.premium-theme-carbon-elite) .empty,
+html[class*="premium-theme-"]:not(.premium-theme-carbon-elite) .article,
+html[class*="premium-theme-"]:not(.premium-theme-carbon-elite) .category-panel,
+html[class*="premium-theme-"]:not(.premium-theme-carbon-elite) .surah-card,
+html[class*="premium-theme-"]:not(.premium-theme-carbon-elite) .prayer-card,
+html[class*="premium-theme-"]:not(.premium-theme-carbon-elite) .toggle-row,
+html[class*="premium-theme-"]:not(.premium-theme-carbon-elite) .meta-item,
+html[class*="premium-theme-"]:not(.premium-theme-carbon-elite) .note-box,
+html[class*="premium-theme-"]:not(.premium-theme-carbon-elite) .jumuah-box,
+html[class*="premium-theme-"]:not(.premium-theme-carbon-elite) .month-day,
+html[class*="premium-theme-"]:not(.premium-theme-carbon-elite) .month-head,
+html[class*="premium-theme-"]:not(.premium-theme-carbon-elite) .wallet-support,
+html[class*="premium-theme-"]:not(.premium-theme-carbon-elite) .home-widget,
+html[class*="premium-theme-"]:not(.premium-theme-carbon-elite) .dua-card,
+html[class*="premium-theme-"]:not(.premium-theme-carbon-elite) .ayah-card,
+html[class*="premium-theme-"]:not(.premium-theme-carbon-elite) .master-audio-wrap,
+html[class*="premium-theme-"]:not(.premium-theme-carbon-elite) .reader-side,
+html[class*="premium-theme-"]:not(.premium-theme-carbon-elite) .reader-main,
+html[class*="premium-theme-"]:not(.premium-theme-carbon-elite) .dua-side,
+html[class*="premium-theme-"]:not(.premium-theme-carbon-elite) .dua-main,
+html[class*="premium-theme-"]:not(.premium-theme-carbon-elite) .ai-side,
+html[class*="premium-theme-"]:not(.premium-theme-carbon-elite) .ai-main,
+html[class*="premium-theme-"]:not(.premium-theme-carbon-elite) .player-panel,
+html[class*="premium-theme-"]:not(.premium-theme-carbon-elite) .preview-panel,
+html[class*="premium-theme-"]:not(.premium-theme-carbon-elite) .app-menu-btn,
+html[class*="premium-theme-"]:not(.premium-theme-carbon-elite) .today-action,
+html[class*="premium-theme-"]:not(.premium-theme-carbon-elite) .premium-resource-card,
+html[class*="premium-theme-"]:not(.premium-theme-carbon-elite) .bottom-app-nav,
+html[class*="premium-theme-"]:not(.premium-theme-carbon-elite) .bottom-app-nav-inner{
+  background-color:var(--bw-final-material) !important;
+  background-image:var(--bw-final-material-bg) !important;
+  background-size:var(--bw-final-material-size) !important;
+  background-position:var(--bw-final-material-position) !important;
+  background-repeat:var(--bw-final-material-repeat) !important;
+  border-color:var(--bw-final-border) !important;
+  color:var(--bw-final-text) !important;
+  box-shadow:0 24px 58px rgba(0,0,0,.40),0 0 0 1px rgba(255,255,255,.045),inset 0 1px 0 rgba(255,255,255,.14),inset 0 -22px 34px rgba(0,0,0,.22) !important;
+}
+html[class*="premium-theme-"]:not(.premium-theme-carbon-elite) body{background:var(--bw-final-bg) !important;color:var(--bw-final-text) !important;}
+
+body .theme-grid .theme-card.theme-gold,
+body .theme-grid .theme-card[data-theme="royal-gold"],
+html[class*="premium-theme-"] .theme-grid .theme-card.theme-gold,
+html[class*="premium-theme-"] .theme-card[data-theme="royal-gold"]{background-color:#311c05!important;background-image:radial-gradient(circle at 82% 18%,rgba(255,248,218,.38),transparent 24%),radial-gradient(circle at 18% 84%,rgba(255,206,96,.18),transparent 34%),linear-gradient(118deg,rgba(255,255,255,.16) 0%,rgba(255,255,255,.03) 22%,rgba(255,215,112,.20) 46%,rgba(255,255,255,.08) 62%,rgba(0,0,0,0) 82%),linear-gradient(135deg,#311c05 0%,#8a5d1e 56%,#e8bd59 100%)!important;background-size:100% 100%!important;background-position:center!important;background-repeat:no-repeat!important;border-color:rgba(255,221,135,.48)!important;}
+body .theme-grid .theme-card.theme-emerald,
+body .theme-grid .theme-card[data-theme="emerald-quran"],
+html[class*="premium-theme-"] .theme-grid .theme-card.theme-emerald,
+html[class*="premium-theme-"] .theme-card[data-theme="emerald-quran"]{background-color:#06170c!important;background-image:radial-gradient(circle at 82% 18%,rgba(185,255,211,.28),transparent 24%),radial-gradient(circle at 18% 84%,rgba(82,220,134,.18),transparent 34%),linear-gradient(118deg,rgba(255,255,255,.10) 0%,rgba(255,255,255,0) 22%,rgba(79,225,138,.14) 46%,rgba(255,255,255,.07) 62%,rgba(0,0,0,0) 82%),linear-gradient(135deg,#06170c 0%,#114326 56%,#37a75d 100%)!important;background-size:100% 100%!important;background-position:center!important;background-repeat:no-repeat!important;border-color:rgba(119,232,157,.46)!important;}
+body .theme-grid .theme-card.theme-violet,
+body .theme-grid .theme-card[data-theme="violet-noor"],
+html[class*="premium-theme-"] .theme-grid .theme-card.theme-violet,
+html[class*="premium-theme-"] .theme-card[data-theme="violet-noor"]{background-color:#10091b!important;background-image:radial-gradient(circle at 82% 18%,rgba(241,231,255,.32),transparent 24%),radial-gradient(circle at 18% 84%,rgba(168,112,255,.18),transparent 34%),linear-gradient(118deg,rgba(255,255,255,.10) 0%,rgba(255,255,255,0) 22%,rgba(204,174,255,.16) 46%,rgba(255,255,255,.07) 62%,rgba(0,0,0,0) 82%),linear-gradient(135deg,#10091b 0%,#351b65 56%,#a77bff 100%)!important;background-size:100% 100%!important;background-position:center!important;background-repeat:no-repeat!important;border-color:rgba(214,191,255,.46)!important;}
+body .theme-grid .theme-card.theme-rose,
+body .theme-grid .theme-card[data-theme="rose-soft"],
+html[class*="premium-theme-"] .theme-grid .theme-card.theme-rose,
+html[class*="premium-theme-"] .theme-card[data-theme="rose-soft"]{background-color:#1a0a14!important;background-image:radial-gradient(circle at 84% 18%,rgba(255,241,247,.34),transparent 26%),radial-gradient(circle at 18% 84%,rgba(255,172,208,.18),transparent 34%),linear-gradient(118deg,rgba(255,255,255,.10) 0%,rgba(255,255,255,0) 22%,rgba(255,190,221,.15) 46%,rgba(255,255,255,.07) 62%,rgba(0,0,0,0) 82%),linear-gradient(135deg,#1a0a14 0%,#6a3551 58%,#e89bbe 100%)!important;background-size:100% 100%!important;background-position:center!important;background-repeat:no-repeat!important;border-color:rgba(255,204,225,.48)!important;}
+body .theme-grid .theme-card.theme-child,
+body .theme-grid .theme-card[data-theme="children-soft"],
+html[class*="premium-theme-"] .theme-grid .theme-card.theme-child,
+html[class*="premium-theme-"] .theme-card[data-theme="children-soft"]{background-color:#143a61!important;background-image:linear-gradient(135deg,rgba(255,255,255,.10),rgba(255,227,241,.05)),url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='220' height='150' viewBox='0 0 220 150'%3E%0A  %3Cdefs%3E%0A    %3Cg id='bear'%3E%0A      %3Ccircle cx='24' cy='18' r='9' fill='%23fff2c8' opacity='.72'/%3E%0A      %3Ccircle cx='48' cy='18' r='9' fill='%23fff2c8' opacity='.72'/%3E%0A      %3Ccircle cx='36' cy='34' r='23' fill='%23ffe8b8' opacity='.76'/%3E%0A      %3Ccircle cx='28' cy='30' r='2.6' fill='%237a5430' opacity='.72'/%3E%0A      %3Ccircle cx='44' cy='30' r='2.6' fill='%237a5430' opacity='.72'/%3E%0A      %3Cellipse cx='36' cy='39' rx='5.6' ry='4.6' fill='%23f5b7cb' opacity='.72'/%3E%0A      %3Cpath d='M28 48q8 7 16 0' fill='none' stroke='%237a5430' stroke-width='2.4' stroke-linecap='round' opacity='.68'/%3E%0A      %3Crect x='22' y='56' width='28' height='22' rx='13' fill='%23ffe8b8' opacity='.68'/%3E%0A    %3C/g%3E%0A  %3C/defs%3E%0A  %3Cuse href='%23bear' x='10' y='8'/%3E%0A  %3Cuse href='%23bear' x='94' y='0' transform='scale(.9)'/%3E%0A  %3Cuse href='%23bear' x='160' y='54' transform='scale(.72)'/%3E%0A  %3Cuse href='%23bear' x='58' y='80' transform='scale(.76)'/%3E%0A%3C/svg%3E"),linear-gradient(135deg,#12304d 0%,#4d95d0 58%,#8bcaff 100%)!important;background-size:100% 100%,220px 150px,100% 100%!important;background-position:center,0 0,center!important;background-repeat:no-repeat,repeat,no-repeat!important;border-color:rgba(214,236,255,.48)!important;}
+body .theme-grid .theme-card.theme-night,
+body .theme-grid .theme-card[data-theme="night-mosque"],
+html[class*="premium-theme-"] .theme-grid .theme-card.theme-night,
+html[class*="premium-theme-"] .theme-card[data-theme="night-mosque"]{background-color:#041021!important;background-image:linear-gradient(135deg,rgba(255,255,255,.04),rgba(255,255,255,0) 30%),url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='220' height='150' viewBox='0 0 220 150'%3E%0A  %3Cdefs%3E%0A    %3Cpath id='s' d='M0,-5 L1.45,-1.45 L5,0 L1.45,1.45 L0,5 L-1.45,1.45 L-5,0 L-1.45,-1.45 Z' fill='%23ffffff' opacity='.62'/%3E%0A    %3Cpath id='g' d='M0,-6 L1.8,-1.8 L6,0 L1.8,1.8 L0,6 L-1.8,1.8 L-6,0 L-1.8,-1.8 Z' fill='%23f5df9b' opacity='.55'/%3E%0A  %3C/defs%3E%0A  %3Cuse href='%23s' x='18' y='20'/%3E%3Cuse href='%23s' x='48' y='36' transform='scale(.72)'/%3E%3Cuse href='%23g' x='78' y='18' transform='scale(.78)'/%3E%0A  %3Cuse href='%23s' x='118' y='30' transform='scale(.62)'/%3E%3Cuse href='%23s' x='154' y='18' transform='scale(.82)'/%3E%3Cuse href='%23g' x='194' y='42' transform='scale(.72)'/%3E%0A  %3Cuse href='%23s' x='28' y='76' transform='scale(.68)'/%3E%3Cuse href='%23g' x='64' y='94' transform='scale(.6)'/%3E%3Cuse href='%23s' x='104' y='76' transform='scale(.78)'/%3E%0A  %3Cuse href='%23s' x='144' y='98' transform='scale(.66)'/%3E%3Cuse href='%23g' x='186' y='84' transform='scale(.7)'/%3E%3Cuse href='%23s' x='204' y='124' transform='scale(.6)'/%3E%0A  %3Cpath d='M164 44a17 17 0 1 1-16-23 12 12 0 1 0 16 23z' fill='%23f1db91' opacity='.36'/%3E%0A%3C/svg%3E"),linear-gradient(135deg,#041021 0%,#102f5e 56%,#1b4c91 100%)!important;background-size:100% 100%,220px 150px,100% 100%!important;background-position:center,0 0,center!important;background-repeat:no-repeat,repeat,no-repeat!important;border-color:rgba(190,214,255,.42)!important;}
+body .theme-grid .theme-card.theme-sand,
+body .theme-grid .theme-card[data-theme="desert-sand"],
+html[class*="premium-theme-"] .theme-grid .theme-card.theme-sand,
+html[class*="premium-theme-"] .theme-card[data-theme="desert-sand"]{background-color:#755022!important;background-image:radial-gradient(circle at 84% 16%,rgba(255,246,217,.22),transparent 26%),radial-gradient(circle at 14% 86%,rgba(255,218,143,.15),transparent 30%),url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='260' height='160' viewBox='0 0 260 160'%3E%0A  %3Cpath d='M-20 94 C30 68 70 70 118 94 S210 122 280 88' fill='none' stroke='%23fff0c8' stroke-opacity='.16' stroke-width='18' stroke-linecap='round'/%3E%0A  %3Cpath d='M-30 124 C28 96 84 98 136 122 S222 150 292 108' fill='none' stroke='%239f6429' stroke-opacity='.13' stroke-width='22' stroke-linecap='round'/%3E%0A  %3Cpath d='M-20 42 C42 18 88 24 132 44 S208 70 280 36' fill='none' stroke='%23fff8d8' stroke-opacity='.12' stroke-width='14' stroke-linecap='round'/%3E%0A%3C/svg%3E"),linear-gradient(150deg,#6d471d 0%,#bd8743 58%,#efd19a 100%)!important;background-size:100% 100%,100% 100%,260px 160px,100% 100%!important;background-position:center,center,0 0,center!important;background-repeat:no-repeat,no-repeat,repeat,no-repeat!important;border-color:rgba(255,236,188,.46)!important;}
+
+html[class*="premium-theme-"]:not(.premium-theme-carbon-elite) .theme-card::before{background:none!important;opacity:0!important;}
+html[class*="premium-theme-"]:not(.premium-theme-carbon-elite) .theme-card::after{background:linear-gradient(118deg,transparent 0%,rgba(255,255,255,.10) 22%,transparent 40%,transparent 68%,rgba(255,255,255,.05) 82%,transparent 100%)!important;}
+html[class*="premium-theme-"]:not(.premium-theme-carbon-elite) .theme-card h3,
+html[class*="premium-theme-"]:not(.premium-theme-carbon-elite) .theme-card p{color:#fff!important;text-shadow:0 2px 14px rgba(0,0,0,.55)!important;}
+html[class*="premium-theme-"]:not(.premium-theme-carbon-elite) h1,
+html[class*="premium-theme-"]:not(.premium-theme-carbon-elite) h2,
+html[class*="premium-theme-"]:not(.premium-theme-carbon-elite) h3,
+html[class*="premium-theme-"]:not(.premium-theme-carbon-elite) h4,
+html[class*="premium-theme-"]:not(.premium-theme-carbon-elite) .title,
+html[class*="premium-theme-"]:not(.premium-theme-carbon-elite) .category-title,
+html[class*="premium-theme-"]:not(.premium-theme-carbon-elite) .surah-name,
+html[class*="premium-theme-"]:not(.premium-theme-carbon-elite) .dua-title,
+html[class*="premium-theme-"]:not(.premium-theme-carbon-elite) .ayah-arabic{color:var(--bw-final-text)!important;}
+html[class*="premium-theme-"]:not(.premium-theme-carbon-elite) p,
+html[class*="premium-theme-"]:not(.premium-theme-carbon-elite) li,
+html[class*="premium-theme-"]:not(.premium-theme-carbon-elite) .subtitle,
+html[class*="premium-theme-"]:not(.premium-theme-carbon-elite) .small,
+html[class*="premium-theme-"]:not(.premium-theme-carbon-elite) .note,
+html[class*="premium-theme-"]:not(.premium-theme-carbon-elite) .muted,
+html[class*="premium-theme-"]:not(.premium-theme-carbon-elite) .label,
+html[class*="premium-theme-"]:not(.premium-theme-carbon-elite) .meaning,
+html[class*="premium-theme-"]:not(.premium-theme-carbon-elite) .when{color:var(--bw-final-text-soft)!important;}
+html[class*="premium-theme-"]:not(.premium-theme-carbon-elite) button:not(.icon-btn):not(.share-close):not(.install-help-close):not(.bottom-app-nav-item),
+html[class*="premium-theme-"]:not(.premium-theme-carbon-elite) .btn,
+html[class*="premium-theme-"]:not(.premium-theme-carbon-elite) .install-btn,
+html[class*="premium-theme-"]:not(.premium-theme-carbon-elite) .support-project-btn,
+html[class*="premium-theme-"]:not(.premium-theme-carbon-elite) .copy-wallet-btn,
+html[class*="premium-theme-"]:not(.premium-theme-carbon-elite) .quick-btn{background:var(--bw-final-button)!important;color:var(--bw-final-button-text)!important;border-color:var(--bw-final-border-strong)!important;box-shadow:0 16px 34px rgba(0,0,0,.34),inset 0 1px 0 rgba(255,255,255,.18)!important;}
+html[class*="premium-theme-"]:not(.premium-theme-carbon-elite) .bw-logo-transparent-lock,
+html[class*="premium-theme-"]:not(.premium-theme-carbon-elite) .bw-logo-transparent-lock *,
+html[class*="premium-theme-"]:not(.premium-theme-carbon-elite) [data-barakaway-logo-lock],
+html[class*="premium-theme-"]:not(.premium-theme-carbon-elite) [data-barakaway-logo-lock] *{background:transparent!important;background-color:transparent!important;background-image:none!important;box-shadow:none!important;border-color:transparent!important;}
+/* ===== END BARAKAWAY PREMIUM THEMES NO-SQUARE FINAL OVERRIDE ===== */
+`;
+  function inject(){
+    if(document.getElementById(STYLE_ID)) return;
+    const style = document.createElement("style");
+    style.id = STYLE_ID;
+    style.textContent = CSS;
+    (document.head || document.documentElement).appendChild(style);
+  }
+  if(document.readyState === "loading"){
+    document.addEventListener("DOMContentLoaded", inject, {once:true});
+  }else{
+    inject();
+  }
+})();
+/* ===== END BARAKAWAY PREMIUM THEMES NO-SQUARE FINAL INJECTOR ===== */
+
+
+/* ===== BARAKAWAY NO-SQUARE PREMIUM THEMES FINAL INJECTOR ===== */
+(function(){
+  const STYLE_ID = 'barakaway-no-square-premium-themes-final-override';
+  const CSS = "\n/* ===== BARAKAWAY NO-SQUARE PREMIUM THEMES FINAL OVERRIDE ===== */\nhtml.premium-theme-royal-gold{\n  --bg:#130b02;--surface:#291805;--surface-2:#654216;--surface-3:#d3a64c;--border:rgba(255,226,155,.42);--border-2:rgba(255,240,196,.56);--text:#fff8e5;--text-soft:#ffecc2;--text-muted:#e2bd73;--green:#f3d47c;--green-strong:#b77b20;--green-soft:#fff0c0;--bw-accent:#f3d47c;--bw-accent-2:#fff4d3;\n  --bw-final-body:radial-gradient(circle at 15% 0%,rgba(255,236,180,.18),transparent 30%),radial-gradient(circle at 85% 12%,rgba(255,211,118,.16),transparent 32%),linear-gradient(180deg,#120902 0%,#3b2408 44%,#9b6c27 78%,#140b02 100%);\n  --bw-final-card:radial-gradient(circle at 88% 12%,rgba(255,249,227,.30),transparent 26%),linear-gradient(112deg,rgba(255,255,255,.16),rgba(255,255,255,0) 28%,rgba(255,218,120,.24) 48%,rgba(255,255,255,.10) 68%,rgba(0,0,0,0)),linear-gradient(135deg,#2b1905 0%,#9f6d23 58%,#f2cf7a 100%);\n  --bw-final-card-size:100% 100%,100% 100%,100% 100%;--bw-final-card-repeat:no-repeat,no-repeat,no-repeat;--bw-final-card-position:center,center,center;--bw-final-button:linear-gradient(180deg,#ffe8a8 0%,#c98d2d 100%);--bw-final-button-text:#221305;\n}\nhtml.premium-theme-emerald-quran{\n  --bg:#031109;--surface:#061a0e;--surface-2:#0e4b29;--surface-3:#37a763;--border:rgba(126,235,166,.38);--border-2:rgba(183,255,211,.50);--text:#f4fff7;--text-soft:#d7ffe3;--text-muted:#a2eaba;--green:#75e598;--green-strong:#20713e;--green-soft:#cffff0;--bw-accent:#75e598;--bw-accent-2:#cffff0;\n  --bw-final-body:radial-gradient(circle at 15% 0%,rgba(95,232,148,.16),transparent 30%),radial-gradient(circle at 85% 12%,rgba(197,255,220,.12),transparent 32%),linear-gradient(180deg,#031109 0%,#0b2d19 44%,#1d7844 78%,#031109 100%);\n  --bw-final-card:radial-gradient(circle at 88% 12%,rgba(205,255,225,.24),transparent 26%),linear-gradient(112deg,rgba(255,255,255,.10),rgba(255,255,255,0) 28%,rgba(90,230,145,.18) 48%,rgba(255,255,255,.08) 68%,rgba(0,0,0,0)),linear-gradient(135deg,#06170c 0%,#126334 58%,#47bd70 100%);\n  --bw-final-card-size:100% 100%,100% 100%,100% 100%;--bw-final-card-repeat:no-repeat,no-repeat,no-repeat;--bw-final-card-position:center,center,center;--bw-final-button:linear-gradient(180deg,#8cf0a9 0%,#267947 100%);--bw-final-button-text:#ffffff;\n}\nhtml.premium-theme-violet-noor{\n  --bg:#10071a;--surface:#1b0f2d;--surface-2:#46247b;--surface-3:#a77dff;--border:rgba(217,195,255,.38);--border-2:rgba(238,228,255,.52);--text:#fcf8ff;--text-soft:#efdeff;--text-muted:#cfb2ff;--green:#c9a8ff;--green-strong:#6540c9;--green-soft:#efe4ff;--bw-accent:#c9a8ff;--bw-accent-2:#f4eaff;\n  --bw-final-body:radial-gradient(circle at 15% 0%,rgba(196,155,255,.17),transparent 30%),radial-gradient(circle at 85% 12%,rgba(244,232,255,.12),transparent 32%),linear-gradient(180deg,#0f0719 0%,#2c1352 44%,#6940bd 78%,#11071a 100%);\n  --bw-final-card:radial-gradient(circle at 88% 12%,rgba(245,236,255,.28),transparent 26%),linear-gradient(112deg,rgba(255,255,255,.12),rgba(255,255,255,0) 28%,rgba(198,165,255,.20) 48%,rgba(255,255,255,.08) 68%,rgba(0,0,0,0)),linear-gradient(135deg,#13091f 0%,#4d2a86 58%,#a77dff 100%);\n  --bw-final-card-size:100% 100%,100% 100%,100% 100%;--bw-final-card-repeat:no-repeat,no-repeat,no-repeat;--bw-final-card-position:center,center,center;--bw-final-button:linear-gradient(180deg,#d9c4ff 0%,#704bd4 100%);--bw-final-button-text:#ffffff;\n}\nhtml.premium-theme-rose-soft{\n  --bg:#180812;--surface:#28101e;--surface-2:#6e3551;--surface-3:#efa5c8;--border:rgba(255,205,226,.38);--border-2:rgba(255,236,246,.52);--text:#fff8fc;--text-soft:#ffe0ee;--text-muted:#f3aecb;--green:#ffb2d1;--green-strong:#b64f78;--green-soft:#ffe8f2;--bw-accent:#ffb2d1;--bw-accent-2:#fff0f7;\n  --bw-final-body:radial-gradient(circle at 15% 0%,rgba(255,194,221,.16),transparent 30%),radial-gradient(circle at 85% 12%,rgba(255,241,247,.12),transparent 32%),linear-gradient(180deg,#180812 0%,#462039 44%,#955476 78%,#190812 100%);\n  --bw-final-card:radial-gradient(circle at 88% 12%,rgba(255,241,247,.28),transparent 26%),linear-gradient(112deg,rgba(255,255,255,.12),rgba(255,255,255,0) 28%,rgba(255,189,221,.19) 48%,rgba(255,255,255,.08) 68%,rgba(0,0,0,0)),linear-gradient(135deg,#1d0b16 0%,#7a3c5b 58%,#f1a7ca 100%);\n  --bw-final-card-size:100% 100%,100% 100%,100% 100%;--bw-final-card-repeat:no-repeat,no-repeat,no-repeat;--bw-final-card-position:center,center,center;--bw-final-button:linear-gradient(180deg,#ffc6de 0%,#bf5a84 100%);--bw-final-button-text:#ffffff;\n}\nhtml.premium-theme-children-soft{\n  --bg:#0d2e4f;--surface:#143d65;--surface-2:#4a95ce;--surface-3:#91d0ff;--border:rgba(222,242,255,.42);--border-2:rgba(255,246,215,.46);--text:#ffffff;--text-soft:#eff9ff;--text-muted:#cdefff;--green:#fff0b8;--green-strong:#e9a4c1;--green-soft:#ffffff;--bw-accent:#fff0b8;--bw-accent-2:#ffe4f1;\n  --bw-final-body:radial-gradient(circle at 16% 0%,rgba(187,227,255,.18),transparent 30%),radial-gradient(circle at 82% 14%,rgba(255,226,241,.12),transparent 32%),linear-gradient(180deg,#10365b 0%,#347eb8 50%,#85c8f6 100%);\n  --bw-final-card:linear-gradient(135deg,rgba(255,255,255,.08),rgba(255,226,241,.05)),url(\"data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='220' height='140' viewBox='0 0 220 140'%3E%0A  %3Cg opacity='.34'%3E%0A    %3Cg transform='translate(18 20)'%3E%0A      %3Ccircle cx='26' cy='16' r='8' fill='%23fff7d7'/%3E%3Ccircle cx='44' cy='16' r='8' fill='%23fff7d7'/%3E%3Ccircle cx='35' cy='31' r='21' fill='%23fff7d7'/%3E%3Ccircle cx='28' cy='28' r='2.4' fill='%237b5633'/%3E%3Ccircle cx='42' cy='28' r='2.4' fill='%237b5633'/%3E%3Cellipse cx='35' cy='36' rx='5' ry='4' fill='%23efb0c6'/%3E%3Cpath d='M29 43 Q35 49 41 43' fill='none' stroke='%237b5633' stroke-width='2.4' stroke-linecap='round'/%3E%3Crect x='22' y='52' width='26' height='20' rx='11' fill='%23fff7d7'/%3E%0A    %3C/g%3E%0A    %3Cg transform='translate(90 10) scale(.82)'%3E%0A      %3Ccircle cx='26' cy='16' r='8' fill='%23fff7d7'/%3E%3Ccircle cx='44' cy='16' r='8' fill='%23fff7d7'/%3E%3Ccircle cx='35' cy='31' r='21' fill='%23fff7d7'/%3E%3Ccircle cx='28' cy='28' r='2.4' fill='%237b5633'/%3E%3Ccircle cx='42' cy='28' r='2.4' fill='%237b5633'/%3E%3Cellipse cx='35' cy='36' rx='5' ry='4' fill='%23efb0c6'/%3E%3Cpath d='M29 43 Q35 49 41 43' fill='none' stroke='%237b5633' stroke-width='2.4' stroke-linecap='round'/%3E%3Crect x='22' y='52' width='26' height='20' rx='11' fill='%23fff7d7'/%3E%0A    %3C/g%3E%0A    %3Cg transform='translate(150 62) scale(.78)'%3E%0A      %3Ccircle cx='26' cy='16' r='8' fill='%23fff7d7'/%3E%3Ccircle cx='44' cy='16' r='8' fill='%23fff7d7'/%3E%3Ccircle cx='35' cy='31' r='21' fill='%23fff7d7'/%3E%3Ccircle cx='28' cy='28' r='2.4' fill='%237b5633'/%3E%3Ccircle cx='42' cy='28' r='2.4' fill='%237b5633'/%3E%3Cellipse cx='35' cy='36' rx='5' ry='4' fill='%23efb0c6'/%3E%3Cpath d='M29 43 Q35 49 41 43' fill='none' stroke='%237b5633' stroke-width='2.4' stroke-linecap='round'/%3E%3Crect x='22' y='52' width='26' height='20' rx='11' fill='%23fff7d7'/%3E%0A    %3C/g%3E%0A    %3Cg transform='translate(54 78) scale(.70)'%3E%0A      %3Ccircle cx='26' cy='16' r='8' fill='%23fff7d7'/%3E%3Ccircle cx='44' cy='16' r='8' fill='%23fff7d7'/%3E%3Ccircle cx='35' cy='31' r='21' fill='%23fff7d7'/%3E%3Ccircle cx='28' cy='28' r='2.4' fill='%237b5633'/%3E%3Ccircle cx='42' cy='28' r='2.4' fill='%237b5633'/%3E%3Cellipse cx='35' cy='36' rx='5' ry='4' fill='%23efb0c6'/%3E%3Cpath d='M29 43 Q35 49 41 43' fill='none' stroke='%237b5633' stroke-width='2.4' stroke-linecap='round'/%3E%3Crect x='22' y='52' width='26' height='20' rx='11' fill='%23fff7d7'/%3E%0A    %3C/g%3E%0A  %3C/g%3E%0A%3C/svg%3E\"),linear-gradient(135deg,#12375c 0%,#5ba7dc 58%,#94d0ff 100%);\n  --bw-final-card-size:100% 100%,220px 140px,100% 100%;--bw-final-card-repeat:no-repeat,repeat,no-repeat;--bw-final-card-position:center,0 0,center;--bw-final-button:linear-gradient(180deg,#fff1b8 0%,#f1a7c6 100%);--bw-final-button-text:#37223c;\n}\nhtml.premium-theme-night-mosque{\n  --bg:#030c1b;--surface:#06142b;--surface-2:#0f2f60;--surface-3:#1d4e96;--border:rgba(190,215,255,.30);--border-2:rgba(241,223,159,.34);--text:#f8fbff;--text-soft:#e4edff;--text-muted:#adc6f3;--green:#f1df9f;--green-strong:#426fb8;--green-soft:#fff1ba;--bw-accent:#f1df9f;--bw-accent-2:#bcd4ff;\n  --bw-final-body:radial-gradient(circle at 16% 0%,rgba(126,168,255,.14),transparent 30%),radial-gradient(circle at 84% 12%,rgba(241,223,159,.10),transparent 32%),linear-gradient(180deg,#030c1b 0%,#0c2347 48%,#174a88 100%);\n  --bw-final-card:linear-gradient(135deg,rgba(255,255,255,.05),rgba(255,255,255,0) 30%),url(\"data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='220' height='140' viewBox='0 0 220 140'%3E%0A  %3Cg fill='%23ffffff' fill-opacity='.72'%3E%0A    %3Cpath d='M22 20l2.1 5.8 5.9 2-5.9 2-2.1 5.8-2.1-5.8-5.9-2 5.9-2z'/%3E%0A    %3Cpath d='M65 34l1.5 4.1 4.2 1.4-4.2 1.4-1.5 4.1-1.5-4.1-4.2-1.4 4.2-1.4z'/%3E%0A    %3Cpath d='M118 18l1.8 5 5.1 1.7-5.1 1.7-1.8 5-1.8-5-5.1-1.7 5.1-1.7z'/%3E%0A    %3Cpath d='M179 32l1.6 4.4 4.5 1.5-4.5 1.5-1.6 4.4-1.6-4.4-4.5-1.5 4.5-1.5z'/%3E%0A    %3Cpath d='M40 86l1.9 5.3 5.4 1.8-5.4 1.8-1.9 5.3-1.9-5.3-5.4-1.8 5.4-1.8z'/%3E%0A    %3Cpath d='M92 104l1.4 3.9 4 1.3-4 1.3-1.4 3.9-1.4-3.9-4-1.3 4-1.3z'/%3E%0A    %3Cpath d='M147 83l2.2 6 6.1 2-6.1 2-2.2 6-2.2-6-6.1-2 6.1-2z'/%3E%0A    %3Cpath d='M200 96l1.5 4.2 4.3 1.4-4.3 1.4-1.5 4.2-1.5-4.2-4.3-1.4 4.3-1.4z'/%3E%0A  %3C/g%3E%0A  %3Cpath d='M160 22c-8 13-2 29 13 33-15 3-31-7-34-23-3-15 7-29 21-34-4 7-4 16 0 24z' fill='%23f3d77a' fill-opacity='.58'/%3E%0A%3C/svg%3E\"),linear-gradient(135deg,#041022 0%,#12366b 58%,#1b4f91 100%);\n  --bw-final-card-size:100% 100%,220px 140px,100% 100%;--bw-final-card-repeat:no-repeat,repeat,no-repeat;--bw-final-card-position:center,0 0,center;--bw-final-button:linear-gradient(180deg,#f3df99 0%,#4878c8 100%);--bw-final-button-text:#101c34;\n}\nhtml.premium-theme-desert-sand{\n  --bg:#5f3b13;--surface:#7b501e;--surface-2:#b98543;--surface-3:#edd097;--border:rgba(255,236,190,.38);--border-2:rgba(255,245,216,.50);--text:#fffaf0;--text-soft:#fff0d6;--text-muted:#efd0a0;--green:#fff0c8;--green-strong:#b77b35;--green-soft:#fff5d8;--bw-accent:#fff0c8;--bw-accent-2:#fff6de;\n  --bw-final-body:radial-gradient(circle at 16% 0%,rgba(255,231,170,.14),transparent 30%),radial-gradient(circle at 84% 12%,rgba(255,246,217,.10),transparent 32%),linear-gradient(180deg,#5a3813 0%,#9f6e32 48%,#d8ad69 100%);\n  --bw-final-card:radial-gradient(ellipse at 82% 12%,rgba(255,246,217,.22),transparent 32%),linear-gradient(165deg,rgba(255,238,190,.20),rgba(255,238,190,0) 38%,rgba(111,67,20,.18) 72%,rgba(255,255,255,.08)),linear-gradient(150deg,#75501f 0%,#c58f46 58%,#efd29a 100%);\n  --bw-final-card-size:100% 100%,100% 100%,100% 100%;--bw-final-card-repeat:no-repeat,no-repeat,no-repeat;--bw-final-card-position:center,center,center;--bw-final-button:linear-gradient(180deg,#ffe4aa 0%,#bd8239 100%);--bw-final-button-text:#3c2408;\n}\n\nhtml.premium-theme-royal-gold body,\nhtml.premium-theme-emerald-quran body,\nhtml.premium-theme-violet-noor body,\nhtml.premium-theme-rose-soft body,\nhtml.premium-theme-children-soft body,\nhtml.premium-theme-night-mosque body,\nhtml.premium-theme-desert-sand body{\n  background-image:var(--bw-final-body) !important;\n  background-size:100% 100% !important;\n  background-position:center !important;\n  background-repeat:no-repeat !important;\n  color:var(--text) !important;\n}\n\nhtml.premium-theme-royal-gold body,\nhtml.premium-theme-royal-gold .container,\nhtml.premium-theme-royal-gold .hero,\nhtml.premium-theme-royal-gold .brand-prayer-hero,\nhtml.premium-theme-royal-gold .today-hub,\nhtml.premium-theme-royal-gold .about-project-card,\nhtml.premium-theme-royal-gold .barakaway-pro-final,\nhtml.premium-theme-royal-gold .block,\nhtml.premium-theme-royal-gold .card,\nhtml.premium-theme-royal-gold .box,\nhtml.premium-theme-royal-gold .panel,\nhtml.premium-theme-royal-gold .quote,\nhtml.premium-theme-royal-gold .empty,\nhtml.premium-theme-royal-gold .article,\nhtml.premium-theme-royal-gold .category-panel,\nhtml.premium-theme-royal-gold .surah-card,\nhtml.premium-theme-royal-gold .prayer-card,\nhtml.premium-theme-royal-gold .toggle-row,\nhtml.premium-theme-royal-gold .meta-item,\nhtml.premium-theme-royal-gold .note-box,\nhtml.premium-theme-royal-gold .jumuah-box,\nhtml.premium-theme-royal-gold .month-day,\nhtml.premium-theme-royal-gold .month-head,\nhtml.premium-theme-royal-gold .wallet-support,\nhtml.premium-theme-royal-gold .home-widget,\nhtml.premium-theme-royal-gold .dua-card,\nhtml.premium-theme-royal-gold .ayah-card,\nhtml.premium-theme-royal-gold .master-audio-wrap,\nhtml.premium-theme-royal-gold .reader-side,\nhtml.premium-theme-royal-gold .reader-main,\nhtml.premium-theme-royal-gold .dua-side,\nhtml.premium-theme-royal-gold .dua-main,\nhtml.premium-theme-royal-gold .ai-side,\nhtml.premium-theme-royal-gold .ai-main,\nhtml.premium-theme-royal-gold .player-panel,\nhtml.premium-theme-royal-gold .preview-panel,\nhtml.premium-theme-royal-gold .app-menu-btn,\nhtml.premium-theme-royal-gold .today-action,\nhtml.premium-theme-royal-gold .premium-resource-card,\nhtml.premium-theme-royal-gold .bottom-app-nav,\nhtml.premium-theme-royal-gold .bottom-app-nav-inner,\nhtml.premium-theme-emerald-quran body,\nhtml.premium-theme-emerald-quran .container,\nhtml.premium-theme-emerald-quran .hero,\nhtml.premium-theme-emerald-quran .brand-prayer-hero,\nhtml.premium-theme-emerald-quran .today-hub,\nhtml.premium-theme-emerald-quran .about-project-card,\nhtml.premium-theme-emerald-quran .barakaway-pro-final,\nhtml.premium-theme-emerald-quran .block,\nhtml.premium-theme-emerald-quran .card,\nhtml.premium-theme-emerald-quran .box,\nhtml.premium-theme-emerald-quran .panel,\nhtml.premium-theme-emerald-quran .quote,\nhtml.premium-theme-emerald-quran .empty,\nhtml.premium-theme-emerald-quran .article,\nhtml.premium-theme-emerald-quran .category-panel,\nhtml.premium-theme-emerald-quran .surah-card,\nhtml.premium-theme-emerald-quran .prayer-card,\nhtml.premium-theme-emerald-quran .toggle-row,\nhtml.premium-theme-emerald-quran .meta-item,\nhtml.premium-theme-emerald-quran .note-box,\nhtml.premium-theme-emerald-quran .jumuah-box,\nhtml.premium-theme-emerald-quran .month-day,\nhtml.premium-theme-emerald-quran .month-head,\nhtml.premium-theme-emerald-quran .wallet-support,\nhtml.premium-theme-emerald-quran .home-widget,\nhtml.premium-theme-emerald-quran .dua-card,\nhtml.premium-theme-emerald-quran .ayah-card,\nhtml.premium-theme-emerald-quran .master-audio-wrap,\nhtml.premium-theme-emerald-quran .reader-side,\nhtml.premium-theme-emerald-quran .reader-main,\nhtml.premium-theme-emerald-quran .dua-side,\nhtml.premium-theme-emerald-quran .dua-main,\nhtml.premium-theme-emerald-quran .ai-side,\nhtml.premium-theme-emerald-quran .ai-main,\nhtml.premium-theme-emerald-quran .player-panel,\nhtml.premium-theme-emerald-quran .preview-panel,\nhtml.premium-theme-emerald-quran .app-menu-btn,\nhtml.premium-theme-emerald-quran .today-action,\nhtml.premium-theme-emerald-quran .premium-resource-card,\nhtml.premium-theme-emerald-quran .bottom-app-nav,\nhtml.premium-theme-emerald-quran .bottom-app-nav-inner,\nhtml.premium-theme-violet-noor body,\nhtml.premium-theme-violet-noor .container,\nhtml.premium-theme-violet-noor .hero,\nhtml.premium-theme-violet-noor .brand-prayer-hero,\nhtml.premium-theme-violet-noor .today-hub,\nhtml.premium-theme-violet-noor .about-project-card,\nhtml.premium-theme-violet-noor .barakaway-pro-final,\nhtml.premium-theme-violet-noor .block,\nhtml.premium-theme-violet-noor .card,\nhtml.premium-theme-violet-noor .box,\nhtml.premium-theme-violet-noor .panel,\nhtml.premium-theme-violet-noor .quote,\nhtml.premium-theme-violet-noor .empty,\nhtml.premium-theme-violet-noor .article,\nhtml.premium-theme-violet-noor .category-panel,\nhtml.premium-theme-violet-noor .surah-card,\nhtml.premium-theme-violet-noor .prayer-card,\nhtml.premium-theme-violet-noor .toggle-row,\nhtml.premium-theme-violet-noor .meta-item,\nhtml.premium-theme-violet-noor .note-box,\nhtml.premium-theme-violet-noor .jumuah-box,\nhtml.premium-theme-violet-noor .month-day,\nhtml.premium-theme-violet-noor .month-head,\nhtml.premium-theme-violet-noor .wallet-support,\nhtml.premium-theme-violet-noor .home-widget,\nhtml.premium-theme-violet-noor .dua-card,\nhtml.premium-theme-violet-noor .ayah-card,\nhtml.premium-theme-violet-noor .master-audio-wrap,\nhtml.premium-theme-violet-noor .reader-side,\nhtml.premium-theme-violet-noor .reader-main,\nhtml.premium-theme-violet-noor .dua-side,\nhtml.premium-theme-violet-noor .dua-main,\nhtml.premium-theme-violet-noor .ai-side,\nhtml.premium-theme-violet-noor .ai-main,\nhtml.premium-theme-violet-noor .player-panel,\nhtml.premium-theme-violet-noor .preview-panel,\nhtml.premium-theme-violet-noor .app-menu-btn,\nhtml.premium-theme-violet-noor .today-action,\nhtml.premium-theme-violet-noor .premium-resource-card,\nhtml.premium-theme-violet-noor .bottom-app-nav,\nhtml.premium-theme-violet-noor .bottom-app-nav-inner,\nhtml.premium-theme-rose-soft body,\nhtml.premium-theme-rose-soft .container,\nhtml.premium-theme-rose-soft .hero,\nhtml.premium-theme-rose-soft .brand-prayer-hero,\nhtml.premium-theme-rose-soft .today-hub,\nhtml.premium-theme-rose-soft .about-project-card,\nhtml.premium-theme-rose-soft .barakaway-pro-final,\nhtml.premium-theme-rose-soft .block,\nhtml.premium-theme-rose-soft .card,\nhtml.premium-theme-rose-soft .box,\nhtml.premium-theme-rose-soft .panel,\nhtml.premium-theme-rose-soft .quote,\nhtml.premium-theme-rose-soft .empty,\nhtml.premium-theme-rose-soft .article,\nhtml.premium-theme-rose-soft .category-panel,\nhtml.premium-theme-rose-soft .surah-card,\nhtml.premium-theme-rose-soft .prayer-card,\nhtml.premium-theme-rose-soft .toggle-row,\nhtml.premium-theme-rose-soft .meta-item,\nhtml.premium-theme-rose-soft .note-box,\nhtml.premium-theme-rose-soft .jumuah-box,\nhtml.premium-theme-rose-soft .month-day,\nhtml.premium-theme-rose-soft .month-head,\nhtml.premium-theme-rose-soft .wallet-support,\nhtml.premium-theme-rose-soft .home-widget,\nhtml.premium-theme-rose-soft .dua-card,\nhtml.premium-theme-rose-soft .ayah-card,\nhtml.premium-theme-rose-soft .master-audio-wrap,\nhtml.premium-theme-rose-soft .reader-side,\nhtml.premium-theme-rose-soft .reader-main,\nhtml.premium-theme-rose-soft .dua-side,\nhtml.premium-theme-rose-soft .dua-main,\nhtml.premium-theme-rose-soft .ai-side,\nhtml.premium-theme-rose-soft .ai-main,\nhtml.premium-theme-rose-soft .player-panel,\nhtml.premium-theme-rose-soft .preview-panel,\nhtml.premium-theme-rose-soft .app-menu-btn,\nhtml.premium-theme-rose-soft .today-action,\nhtml.premium-theme-rose-soft .premium-resource-card,\nhtml.premium-theme-rose-soft .bottom-app-nav,\nhtml.premium-theme-rose-soft .bottom-app-nav-inner,\nhtml.premium-theme-children-soft body,\nhtml.premium-theme-children-soft .container,\nhtml.premium-theme-children-soft .hero,\nhtml.premium-theme-children-soft .brand-prayer-hero,\nhtml.premium-theme-children-soft .today-hub,\nhtml.premium-theme-children-soft .about-project-card,\nhtml.premium-theme-children-soft .barakaway-pro-final,\nhtml.premium-theme-children-soft .block,\nhtml.premium-theme-children-soft .card,\nhtml.premium-theme-children-soft .box,\nhtml.premium-theme-children-soft .panel,\nhtml.premium-theme-children-soft .quote,\nhtml.premium-theme-children-soft .empty,\nhtml.premium-theme-children-soft .article,\nhtml.premium-theme-children-soft .category-panel,\nhtml.premium-theme-children-soft .surah-card,\nhtml.premium-theme-children-soft .prayer-card,\nhtml.premium-theme-children-soft .toggle-row,\nhtml.premium-theme-children-soft .meta-item,\nhtml.premium-theme-children-soft .note-box,\nhtml.premium-theme-children-soft .jumuah-box,\nhtml.premium-theme-children-soft .month-day,\nhtml.premium-theme-children-soft .month-head,\nhtml.premium-theme-children-soft .wallet-support,\nhtml.premium-theme-children-soft .home-widget,\nhtml.premium-theme-children-soft .dua-card,\nhtml.premium-theme-children-soft .ayah-card,\nhtml.premium-theme-children-soft .master-audio-wrap,\nhtml.premium-theme-children-soft .reader-side,\nhtml.premium-theme-children-soft .reader-main,\nhtml.premium-theme-children-soft .dua-side,\nhtml.premium-theme-children-soft .dua-main,\nhtml.premium-theme-children-soft .ai-side,\nhtml.premium-theme-children-soft .ai-main,\nhtml.premium-theme-children-soft .player-panel,\nhtml.premium-theme-children-soft .preview-panel,\nhtml.premium-theme-children-soft .app-menu-btn,\nhtml.premium-theme-children-soft .today-action,\nhtml.premium-theme-children-soft .premium-resource-card,\nhtml.premium-theme-children-soft .bottom-app-nav,\nhtml.premium-theme-children-soft .bottom-app-nav-inner,\nhtml.premium-theme-night-mosque body,\nhtml.premium-theme-night-mosque .container,\nhtml.premium-theme-night-mosque .hero,\nhtml.premium-theme-night-mosque .brand-prayer-hero,\nhtml.premium-theme-night-mosque .today-hub,\nhtml.premium-theme-night-mosque .about-project-card,\nhtml.premium-theme-night-mosque .barakaway-pro-final,\nhtml.premium-theme-night-mosque .block,\nhtml.premium-theme-night-mosque .card,\nhtml.premium-theme-night-mosque .box,\nhtml.premium-theme-night-mosque .panel,\nhtml.premium-theme-night-mosque .quote,\nhtml.premium-theme-night-mosque .empty,\nhtml.premium-theme-night-mosque .article,\nhtml.premium-theme-night-mosque .category-panel,\nhtml.premium-theme-night-mosque .surah-card,\nhtml.premium-theme-night-mosque .prayer-card,\nhtml.premium-theme-night-mosque .toggle-row,\nhtml.premium-theme-night-mosque .meta-item,\nhtml.premium-theme-night-mosque .note-box,\nhtml.premium-theme-night-mosque .jumuah-box,\nhtml.premium-theme-night-mosque .month-day,\nhtml.premium-theme-night-mosque .month-head,\nhtml.premium-theme-night-mosque .wallet-support,\nhtml.premium-theme-night-mosque .home-widget,\nhtml.premium-theme-night-mosque .dua-card,\nhtml.premium-theme-night-mosque .ayah-card,\nhtml.premium-theme-night-mosque .master-audio-wrap,\nhtml.premium-theme-night-mosque .reader-side,\nhtml.premium-theme-night-mosque .reader-main,\nhtml.premium-theme-night-mosque .dua-side,\nhtml.premium-theme-night-mosque .dua-main,\nhtml.premium-theme-night-mosque .ai-side,\nhtml.premium-theme-night-mosque .ai-main,\nhtml.premium-theme-night-mosque .player-panel,\nhtml.premium-theme-night-mosque .preview-panel,\nhtml.premium-theme-night-mosque .app-menu-btn,\nhtml.premium-theme-night-mosque .today-action,\nhtml.premium-theme-night-mosque .premium-resource-card,\nhtml.premium-theme-night-mosque .bottom-app-nav,\nhtml.premium-theme-night-mosque .bottom-app-nav-inner,\nhtml.premium-theme-desert-sand body,\nhtml.premium-theme-desert-sand .container,\nhtml.premium-theme-desert-sand .hero,\nhtml.premium-theme-desert-sand .brand-prayer-hero,\nhtml.premium-theme-desert-sand .today-hub,\nhtml.premium-theme-desert-sand .about-project-card,\nhtml.premium-theme-desert-sand .barakaway-pro-final,\nhtml.premium-theme-desert-sand .block,\nhtml.premium-theme-desert-sand .card,\nhtml.premium-theme-desert-sand .box,\nhtml.premium-theme-desert-sand .panel,\nhtml.premium-theme-desert-sand .quote,\nhtml.premium-theme-desert-sand .empty,\nhtml.premium-theme-desert-sand .article,\nhtml.premium-theme-desert-sand .category-panel,\nhtml.premium-theme-desert-sand .surah-card,\nhtml.premium-theme-desert-sand .prayer-card,\nhtml.premium-theme-desert-sand .toggle-row,\nhtml.premium-theme-desert-sand .meta-item,\nhtml.premium-theme-desert-sand .note-box,\nhtml.premium-theme-desert-sand .jumuah-box,\nhtml.premium-theme-desert-sand .month-day,\nhtml.premium-theme-desert-sand .month-head,\nhtml.premium-theme-desert-sand .wallet-support,\nhtml.premium-theme-desert-sand .home-widget,\nhtml.premium-theme-desert-sand .dua-card,\nhtml.premium-theme-desert-sand .ayah-card,\nhtml.premium-theme-desert-sand .master-audio-wrap,\nhtml.premium-theme-desert-sand .reader-side,\nhtml.premium-theme-desert-sand .reader-main,\nhtml.premium-theme-desert-sand .dua-side,\nhtml.premium-theme-desert-sand .dua-main,\nhtml.premium-theme-desert-sand .ai-side,\nhtml.premium-theme-desert-sand .ai-main,\nhtml.premium-theme-desert-sand .player-panel,\nhtml.premium-theme-desert-sand .preview-panel,\nhtml.premium-theme-desert-sand .app-menu-btn,\nhtml.premium-theme-desert-sand .today-action,\nhtml.premium-theme-desert-sand .premium-resource-card,\nhtml.premium-theme-desert-sand .bottom-app-nav,\nhtml.premium-theme-desert-sand .bottom-app-nav-inner{\n  background-color:var(--surface) !important;\n  background-image:var(--bw-final-card) !important;\n  background-size:var(--bw-final-card-size) !important;\n  background-position:var(--bw-final-card-position) !important;\n  background-repeat:var(--bw-final-card-repeat) !important;\n  border-color:var(--border) !important;\n  color:var(--text) !important;\n  box-shadow:0 24px 58px rgba(0,0,0,.38),0 0 0 1px rgba(255,255,255,.05),inset 0 1px 0 rgba(255,255,255,.14),inset 0 -22px 34px rgba(0,0,0,.22) !important;\n}\n\nbody .theme-grid .theme-card.theme-gold,\nbody .theme-grid .theme-card[data-theme=\"royal-gold\"],\nhtml[class*=\"premium-theme-\"] .theme-grid .theme-card.theme-gold,\nhtml[class*=\"premium-theme-\"] .theme-grid .theme-card[data-theme=\"royal-gold\"]{background-color:#291805 !important;background-image:radial-gradient(circle at 88% 12%,rgba(255,249,227,.30),transparent 26%),linear-gradient(112deg,rgba(255,255,255,.16),rgba(255,255,255,0) 28%,rgba(255,218,120,.24) 48%,rgba(255,255,255,.10) 68%,rgba(0,0,0,0)),linear-gradient(135deg,#2b1905 0%,#9f6d23 58%,#f2cf7a 100%) !important;background-size:100% 100%,100% 100%,100% 100% !important;background-position:center,center,center !important;background-repeat:no-repeat,no-repeat,no-repeat !important;border-color:rgba(255,226,155,.52) !important;}\nbody .theme-grid .theme-card.theme-emerald,\nbody .theme-grid .theme-card[data-theme=\"emerald-quran\"],\nhtml[class*=\"premium-theme-\"] .theme-grid .theme-card.theme-emerald,\nhtml[class*=\"premium-theme-\"] .theme-grid .theme-card[data-theme=\"emerald-quran\"]{background-color:#061a0e !important;background-image:radial-gradient(circle at 88% 12%,rgba(205,255,225,.24),transparent 26%),linear-gradient(112deg,rgba(255,255,255,.10),rgba(255,255,255,0) 28%,rgba(90,230,145,.18) 48%,rgba(255,255,255,.08) 68%,rgba(0,0,0,0)),linear-gradient(135deg,#06170c 0%,#126334 58%,#47bd70 100%) !important;background-size:100% 100%,100% 100%,100% 100% !important;background-position:center,center,center !important;background-repeat:no-repeat,no-repeat,no-repeat !important;border-color:rgba(126,235,166,.48) !important;}\nbody .theme-grid .theme-card.theme-violet,\nbody .theme-grid .theme-card[data-theme=\"violet-noor\"],\nhtml[class*=\"premium-theme-\"] .theme-grid .theme-card.theme-violet,\nhtml[class*=\"premium-theme-\"] .theme-grid .theme-card[data-theme=\"violet-noor\"]{background-color:#1b0f2d !important;background-image:radial-gradient(circle at 88% 12%,rgba(245,236,255,.28),transparent 26%),linear-gradient(112deg,rgba(255,255,255,.12),rgba(255,255,255,0) 28%,rgba(198,165,255,.20) 48%,rgba(255,255,255,.08) 68%,rgba(0,0,0,0)),linear-gradient(135deg,#13091f 0%,#4d2a86 58%,#a77dff 100%) !important;background-size:100% 100%,100% 100%,100% 100% !important;background-position:center,center,center !important;background-repeat:no-repeat,no-repeat,no-repeat !important;border-color:rgba(217,195,255,.48) !important;}\nbody .theme-grid .theme-card.theme-rose,\nbody .theme-grid .theme-card[data-theme=\"rose-soft\"],\nhtml[class*=\"premium-theme-\"] .theme-grid .theme-card.theme-rose,\nhtml[class*=\"premium-theme-\"] .theme-grid .theme-card[data-theme=\"rose-soft\"]{background-color:#28101e !important;background-image:radial-gradient(circle at 88% 12%,rgba(255,241,247,.28),transparent 26%),linear-gradient(112deg,rgba(255,255,255,.12),rgba(255,255,255,0) 28%,rgba(255,189,221,.19) 48%,rgba(255,255,255,.08) 68%,rgba(0,0,0,0)),linear-gradient(135deg,#1d0b16 0%,#7a3c5b 58%,#f1a7ca 100%) !important;background-size:100% 100%,100% 100%,100% 100% !important;background-position:center,center,center !important;background-repeat:no-repeat,no-repeat,no-repeat !important;border-color:rgba(255,205,226,.48) !important;}\nbody .theme-grid .theme-card.theme-child,\nbody .theme-grid .theme-card[data-theme=\"children-soft\"],\nhtml[class*=\"premium-theme-\"] .theme-grid .theme-card.theme-child,\nhtml[class*=\"premium-theme-\"] .theme-grid .theme-card[data-theme=\"children-soft\"]{background-color:#143d65 !important;background-image:linear-gradient(135deg,rgba(255,255,255,.08),rgba(255,226,241,.05)),url(\"data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='220' height='140' viewBox='0 0 220 140'%3E%0A  %3Cg opacity='.34'%3E%0A    %3Cg transform='translate(18 20)'%3E%0A      %3Ccircle cx='26' cy='16' r='8' fill='%23fff7d7'/%3E%3Ccircle cx='44' cy='16' r='8' fill='%23fff7d7'/%3E%3Ccircle cx='35' cy='31' r='21' fill='%23fff7d7'/%3E%3Ccircle cx='28' cy='28' r='2.4' fill='%237b5633'/%3E%3Ccircle cx='42' cy='28' r='2.4' fill='%237b5633'/%3E%3Cellipse cx='35' cy='36' rx='5' ry='4' fill='%23efb0c6'/%3E%3Cpath d='M29 43 Q35 49 41 43' fill='none' stroke='%237b5633' stroke-width='2.4' stroke-linecap='round'/%3E%3Crect x='22' y='52' width='26' height='20' rx='11' fill='%23fff7d7'/%3E%0A    %3C/g%3E%0A    %3Cg transform='translate(90 10) scale(.82)'%3E%0A      %3Ccircle cx='26' cy='16' r='8' fill='%23fff7d7'/%3E%3Ccircle cx='44' cy='16' r='8' fill='%23fff7d7'/%3E%3Ccircle cx='35' cy='31' r='21' fill='%23fff7d7'/%3E%3Ccircle cx='28' cy='28' r='2.4' fill='%237b5633'/%3E%3Ccircle cx='42' cy='28' r='2.4' fill='%237b5633'/%3E%3Cellipse cx='35' cy='36' rx='5' ry='4' fill='%23efb0c6'/%3E%3Cpath d='M29 43 Q35 49 41 43' fill='none' stroke='%237b5633' stroke-width='2.4' stroke-linecap='round'/%3E%3Crect x='22' y='52' width='26' height='20' rx='11' fill='%23fff7d7'/%3E%0A    %3C/g%3E%0A    %3Cg transform='translate(150 62) scale(.78)'%3E%0A      %3Ccircle cx='26' cy='16' r='8' fill='%23fff7d7'/%3E%3Ccircle cx='44' cy='16' r='8' fill='%23fff7d7'/%3E%3Ccircle cx='35' cy='31' r='21' fill='%23fff7d7'/%3E%3Ccircle cx='28' cy='28' r='2.4' fill='%237b5633'/%3E%3Ccircle cx='42' cy='28' r='2.4' fill='%237b5633'/%3E%3Cellipse cx='35' cy='36' rx='5' ry='4' fill='%23efb0c6'/%3E%3Cpath d='M29 43 Q35 49 41 43' fill='none' stroke='%237b5633' stroke-width='2.4' stroke-linecap='round'/%3E%3Crect x='22' y='52' width='26' height='20' rx='11' fill='%23fff7d7'/%3E%0A    %3C/g%3E%0A    %3Cg transform='translate(54 78) scale(.70)'%3E%0A      %3Ccircle cx='26' cy='16' r='8' fill='%23fff7d7'/%3E%3Ccircle cx='44' cy='16' r='8' fill='%23fff7d7'/%3E%3Ccircle cx='35' cy='31' r='21' fill='%23fff7d7'/%3E%3Ccircle cx='28' cy='28' r='2.4' fill='%237b5633'/%3E%3Ccircle cx='42' cy='28' r='2.4' fill='%237b5633'/%3E%3Cellipse cx='35' cy='36' rx='5' ry='4' fill='%23efb0c6'/%3E%3Cpath d='M29 43 Q35 49 41 43' fill='none' stroke='%237b5633' stroke-width='2.4' stroke-linecap='round'/%3E%3Crect x='22' y='52' width='26' height='20' rx='11' fill='%23fff7d7'/%3E%0A    %3C/g%3E%0A  %3C/g%3E%0A%3C/svg%3E\"),linear-gradient(135deg,#12375c 0%,#5ba7dc 58%,#94d0ff 100%) !important;background-size:100% 100%,220px 140px,100% 100% !important;background-position:center,0 0,center !important;background-repeat:no-repeat,repeat,no-repeat !important;border-color:rgba(222,242,255,.50) !important;}\nbody .theme-grid .theme-card.theme-night,\nbody .theme-grid .theme-card[data-theme=\"night-mosque\"],\nhtml[class*=\"premium-theme-\"] .theme-grid .theme-card.theme-night,\nhtml[class*=\"premium-theme-\"] .theme-grid .theme-card[data-theme=\"night-mosque\"]{background-color:#06142b !important;background-image:linear-gradient(135deg,rgba(255,255,255,.05),rgba(255,255,255,0) 30%),url(\"data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='220' height='140' viewBox='0 0 220 140'%3E%0A  %3Cg fill='%23ffffff' fill-opacity='.72'%3E%0A    %3Cpath d='M22 20l2.1 5.8 5.9 2-5.9 2-2.1 5.8-2.1-5.8-5.9-2 5.9-2z'/%3E%0A    %3Cpath d='M65 34l1.5 4.1 4.2 1.4-4.2 1.4-1.5 4.1-1.5-4.1-4.2-1.4 4.2-1.4z'/%3E%0A    %3Cpath d='M118 18l1.8 5 5.1 1.7-5.1 1.7-1.8 5-1.8-5-5.1-1.7 5.1-1.7z'/%3E%0A    %3Cpath d='M179 32l1.6 4.4 4.5 1.5-4.5 1.5-1.6 4.4-1.6-4.4-4.5-1.5 4.5-1.5z'/%3E%0A    %3Cpath d='M40 86l1.9 5.3 5.4 1.8-5.4 1.8-1.9 5.3-1.9-5.3-5.4-1.8 5.4-1.8z'/%3E%0A    %3Cpath d='M92 104l1.4 3.9 4 1.3-4 1.3-1.4 3.9-1.4-3.9-4-1.3 4-1.3z'/%3E%0A    %3Cpath d='M147 83l2.2 6 6.1 2-6.1 2-2.2 6-2.2-6-6.1-2 6.1-2z'/%3E%0A    %3Cpath d='M200 96l1.5 4.2 4.3 1.4-4.3 1.4-1.5 4.2-1.5-4.2-4.3-1.4 4.3-1.4z'/%3E%0A  %3C/g%3E%0A  %3Cpath d='M160 22c-8 13-2 29 13 33-15 3-31-7-34-23-3-15 7-29 21-34-4 7-4 16 0 24z' fill='%23f3d77a' fill-opacity='.58'/%3E%0A%3C/svg%3E\"),linear-gradient(135deg,#041022 0%,#12366b 58%,#1b4f91 100%) !important;background-size:100% 100%,220px 140px,100% 100% !important;background-position:center,0 0,center !important;background-repeat:no-repeat,repeat,no-repeat !important;border-color:rgba(190,215,255,.40) !important;}\nbody .theme-grid .theme-card.theme-sand,\nbody .theme-grid .theme-card[data-theme=\"desert-sand\"],\nhtml[class*=\"premium-theme-\"] .theme-grid .theme-card.theme-sand,\nhtml[class*=\"premium-theme-\"] .theme-grid .theme-card[data-theme=\"desert-sand\"]{background-color:#7b501e !important;background-image:radial-gradient(ellipse at 82% 12%,rgba(255,246,217,.22),transparent 32%),linear-gradient(165deg,rgba(255,238,190,.20),rgba(255,238,190,0) 38%,rgba(111,67,20,.18) 72%,rgba(255,255,255,.08)),linear-gradient(150deg,#75501f 0%,#c58f46 58%,#efd29a 100%) !important;background-size:100% 100%,100% 100%,100% 100% !important;background-position:center,center,center !important;background-repeat:no-repeat,no-repeat,no-repeat !important;border-color:rgba(255,236,190,.48) !important;}\n\nbody .theme-grid .theme-card:not(.theme-carbon)::before,\nhtml[class*=\"premium-theme-\"] .theme-grid .theme-card:not(.theme-carbon)::before{background:linear-gradient(118deg,transparent 0%,rgba(255,255,255,.16) 25%,transparent 44%,transparent 100%) !important;opacity:.45 !important;}\nbody .theme-grid .theme-card:not(.theme-carbon)::after,\nhtml[class*=\"premium-theme-\"] .theme-grid .theme-card:not(.theme-carbon)::after{background:none !important;}\nbody .theme-grid .theme-card h3,body .theme-grid .theme-card p,body .theme-grid .theme-card strong{text-shadow:0 2px 14px rgba(0,0,0,.54) !important;}\nbody .theme-grid .theme-card .preview-pill{background:rgba(255,255,255,.42) !important;}\nhtml.premium-theme-royal-gold button:not(.icon-btn):not(.share-close):not(.install-help-close):not(.bottom-app-nav-item),html.premium-theme-emerald-quran button:not(.icon-btn):not(.share-close):not(.install-help-close):not(.bottom-app-nav-item),html.premium-theme-violet-noor button:not(.icon-btn):not(.share-close):not(.install-help-close):not(.bottom-app-nav-item),html.premium-theme-rose-soft button:not(.icon-btn):not(.share-close):not(.install-help-close):not(.bottom-app-nav-item),html.premium-theme-children-soft button:not(.icon-btn):not(.share-close):not(.install-help-close):not(.bottom-app-nav-item),html.premium-theme-night-mosque button:not(.icon-btn):not(.share-close):not(.install-help-close):not(.bottom-app-nav-item),html.premium-theme-desert-sand button:not(.icon-btn):not(.share-close):not(.install-help-close):not(.bottom-app-nav-item),html.premium-theme-royal-gold .btn,html.premium-theme-emerald-quran .btn,html.premium-theme-violet-noor .btn,html.premium-theme-rose-soft .btn,html.premium-theme-children-soft .btn,html.premium-theme-night-mosque .btn,html.premium-theme-desert-sand .btn{background:var(--bw-final-button) !important;color:var(--bw-final-button-text) !important;border-color:var(--border-2) !important;box-shadow:0 16px 34px rgba(0,0,0,.30),inset 0 1px 0 rgba(255,255,255,.18) !important;}\nhtml.premium-theme-royal-gold .bw-logo-transparent-lock,html.premium-theme-emerald-quran .bw-logo-transparent-lock,html.premium-theme-violet-noor .bw-logo-transparent-lock,html.premium-theme-rose-soft .bw-logo-transparent-lock,html.premium-theme-children-soft .bw-logo-transparent-lock,html.premium-theme-night-mosque .bw-logo-transparent-lock,html.premium-theme-desert-sand .bw-logo-transparent-lock,html.premium-theme-royal-gold [data-barakaway-logo-lock],html.premium-theme-emerald-quran [data-barakaway-logo-lock],html.premium-theme-violet-noor [data-barakaway-logo-lock],html.premium-theme-rose-soft [data-barakaway-logo-lock],html.premium-theme-children-soft [data-barakaway-logo-lock],html.premium-theme-night-mosque [data-barakaway-logo-lock],html.premium-theme-desert-sand [data-barakaway-logo-lock]{background:transparent !important;background-color:transparent !important;background-image:none !important;box-shadow:none !important;border-color:transparent !important;}\n/* ===== END BARAKAWAY NO-SQUARE PREMIUM THEMES FINAL OVERRIDE ===== */\n";
+  function injectFinalPremiumMaterials(){
+    const old = document.getElementById(STYLE_ID);
+    if(old) old.remove();
+    const style = document.createElement('style');
+    style.id = STYLE_ID;
+    style.textContent = CSS;
+    (document.head || document.documentElement).appendChild(style);
+  }
+  if(document.readyState === 'loading'){
+    document.addEventListener('DOMContentLoaded', injectFinalPremiumMaterials, {once:true});
+  }else{
+    injectFinalPremiumMaterials();
+  }
+  window.addEventListener('barakaway:premium-theme-change', injectFinalPremiumMaterials);
+})();
+/* ===== END BARAKAWAY NO-SQUARE PREMIUM THEMES FINAL INJECTOR ===== */
