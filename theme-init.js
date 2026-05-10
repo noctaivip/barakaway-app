@@ -14,7 +14,7 @@
     'desert-sand'
   ];
 
-  const PREMIUM_CSS = '\n/* ===== BARAKAWAY PRO PREMIUM THEMES RUNTIME ===== */\n:root{\n  --bw-pro-transition: background .22s ease,border-color .22s ease,box-shadow .22s ease,color .22s ease;\n}\n\nhtml.premium-theme-royal-gold{\n  --bg:#090908;\n  --surface:#171208;\n  --surface-2:#20170a;\n  --surface-3:#2b2110;\n  --border:rgba(215,192,122,.36);\n  --border-2:rgba(244,220,148,.44);\n  --text:#fff8df;\n  --text-soft:#ead8a5;\n  --text-muted:#c7ad62;\n  --green:#d7c07a;\n  --green-strong:#9d7424;\n  --green-soft:#fff0b4;\n  --bw-accent:#d7c07a;\n  --bw-accent-2:#f4dc94;\n}\n\nhtml.premium-theme-emerald-quran{\n  --bg:#061109;\n  --surface:#07180e;\n  --surface-2:#0c2114;\n  --surface-3:#12301d;\n  --border:rgba(102,198,128,.34);\n  --border-2:rgba(102,198,128,.46);\n  --text:#f0fff4;\n  --text-soft:#c4f0d1;\n  --text-muted:#8fd9a2;\n  --green:#66c680;\n  --green-strong:#2d7a46;\n  --green-soft:#c9ffd7;\n  --bw-accent:#66c680;\n  --bw-accent-2:#b8ffd0;\n}\n\nhtml.premium-theme-violet-noor{\n  --bg:#0d0a15;\n  --surface:#141020;\n  --surface-2:#1b1530;\n  --surface-3:#241a42;\n  --border:rgba(161,118,255,.34);\n  --border-2:rgba(197,168,255,.42);\n  --text:#fbf8ff;\n  --text-soft:#dfd2ff;\n  --text-muted:#bda6f0;\n  --green:#c5a8ff;\n  --green-strong:#6f4dcc;\n  --green-soft:#eadfff;\n  --bw-accent:#a176ff;\n  --bw-accent-2:#d6c4ff;\n}\n\nhtml.premium-theme-rose-soft{\n  --bg:#160a12;\n  --surface:#21101a;\n  --surface-2:#301525;\n  --surface-3:#401b31;\n  --border:rgba(255,158,199,.34);\n  --border-2:rgba(255,190,218,.44);\n  --text:#fff8fb;\n  --text-soft:#ffd8e8;\n  --text-muted:#f0a9c8;\n  --green:#ff9ec7;\n  --green-strong:#b64d78;\n  --green-soft:#ffe2ee;\n  --bw-accent:#ff9ec7;\n  --bw-accent-2:#ffd0e4;\n}\n\nhtml.premium-theme-carbon-elite{\n  --bg:#050607;\n  --surface:#0d1116;\n  --surface-2:#121820;\n  --surface-3:#1a222c;\n  --border:rgba(170,184,199,.28);\n  --border-2:rgba(202,213,224,.34);\n  --text:#f7fafc;\n  --text-soft:#cfd8e3;\n  --text-muted:#99a7b5;\n  --green:#d6dde6;\n  --green-strong:#59616c;\n  --green-soft:#eef2f6;\n  --bw-accent:#aab8c7;\n  --bw-accent-2:#e8edf3;\n}\n\nhtml.premium-theme-children-soft{\n  --bg:#0c1f32;\n  --surface:#102b44;\n  --surface-2:#173a5c;\n  --surface-3:#234d75;\n  --border:rgba(135,203,255,.34);\n  --border-2:rgba(255,227,241,.40);\n  --text:#f4fbff;\n  --text-soft:#d3ecff;\n  --text-muted:#abd6f7;\n  --green:#87cbff;\n  --green-strong:#3d8bc7;\n  --green-soft:#dff4ff;\n  --bw-accent:#87cbff;\n  --bw-accent-2:#ffe3f1;\n}\n\nhtml.premium-theme-night-mosque{\n  --bg:#050b13;\n  --surface:#091426;\n  --surface-2:#10213d;\n  --surface-3:#172f58;\n  --border:rgba(215,192,122,.28);\n  --border-2:rgba(118,154,215,.36);\n  --text:#f3f7ff;\n  --text-soft:#c8d8f4;\n  --text-muted:#91a9ce;\n  --green:#d7c07a;\n  --green-strong:#355d9a;\n  --green-soft:#f4e6b2;\n  --bw-accent:#d7c07a;\n  --bw-accent-2:#7ca7ff;\n}\n\nhtml.premium-theme-desert-sand{\n  --bg:#130c05;\n  --surface:#1e1408;\n  --surface-2:#2e200e;\n  --surface-3:#3e2b13;\n  --border:rgba(255,237,190,.30);\n  --border-2:rgba(219,174,97,.40);\n  --text:#fff9ea;\n  --text-soft:#ecd7ad;\n  --text-muted:#c9a978;\n  --green:#ffedbe;\n  --green-strong:#9a6d2d;\n  --green-soft:#fff3cf;\n  --bw-accent:#ffedbe;\n  --bw-accent-2:#dbaE61;\n}\n\nhtml[class*="premium-theme-"] body{\n  color:var(--text) !important;\n  background:\n    radial-gradient(circle at 14% 0%, color-mix(in srgb, var(--bw-accent) 20%, transparent), transparent 28%),\n    radial-gradient(circle at 88% 8%, color-mix(in srgb, var(--bw-accent-2) 16%, transparent), transparent 32%),\n    linear-gradient(180deg,var(--bg) 0%,color-mix(in srgb,var(--surface) 72%,var(--bg)) 48%,var(--bg) 100%) !important;\n}\n\nhtml[class*="premium-theme-"] .container,\nhtml[class*="premium-theme-"] .hero,\nhtml[class*="premium-theme-"] .brand-prayer-hero,\nhtml[class*="premium-theme-"] .today-hub,\nhtml[class*="premium-theme-"] .about-project-card,\nhtml[class*="premium-theme-"] .barakaway-pro-final,\nhtml[class*="premium-theme-"] .block,\nhtml[class*="premium-theme-"] .card,\nhtml[class*="premium-theme-"] .box,\nhtml[class*="premium-theme-"] .panel,\nhtml[class*="premium-theme-"] .quote,\nhtml[class*="premium-theme-"] .empty,\nhtml[class*="premium-theme-"] .article,\nhtml[class*="premium-theme-"] .category-panel,\nhtml[class*="premium-theme-"] .surah-card,\nhtml[class*="premium-theme-"] .prayer-card,\nhtml[class*="premium-theme-"] .toggle-row,\nhtml[class*="premium-theme-"] .meta-item,\nhtml[class*="premium-theme-"] .note-box,\nhtml[class*="premium-theme-"] .jumuah-box,\nhtml[class*="premium-theme-"] .month-day,\nhtml[class*="premium-theme-"] .month-head,\nhtml[class*="premium-theme-"] .wallet-support,\nhtml[class*="premium-theme-"] .home-widget,\nhtml[class*="premium-theme-"] .dua-card,\nhtml[class*="premium-theme-"] .ayah-card,\nhtml[class*="premium-theme-"] .master-audio-wrap,\nhtml[class*="premium-theme-"] .reader-side,\nhtml[class*="premium-theme-"] .reader-main,\nhtml[class*="premium-theme-"] .dua-side,\nhtml[class*="premium-theme-"] .dua-main,\nhtml[class*="premium-theme-"] .ai-side,\nhtml[class*="premium-theme-"] .ai-main,\nhtml[class*="premium-theme-"] .player-panel,\nhtml[class*="premium-theme-"] .preview-panel,\nhtml[class*="premium-theme-"] .theme-card,\nhtml[class*="premium-theme-"] .app-menu-btn,\nhtml[class*="premium-theme-"] .today-action,\nhtml[class*="premium-theme-"] .premium-resource-card{\n  background:\n    radial-gradient(circle at 94% 0%, color-mix(in srgb, var(--bw-accent) 12%, transparent), transparent 30%),\n    linear-gradient(135deg,color-mix(in srgb,var(--surface) 92%,#000) 0%,var(--surface-2) 54%,color-mix(in srgb,var(--surface-3) 84%,#000) 100%) !important;\n  border-color:var(--border) !important;\n  color:var(--text) !important;\n  box-shadow:0 18px 42px color-mix(in srgb,var(--bg) 70%,transparent), inset 0 1px 0 rgba(255,255,255,.055) !important;\n  transition:var(--bw-pro-transition) !important;\n}\n\nhtml[class*="premium-theme-"] h1,\nhtml[class*="premium-theme-"] h2,\nhtml[class*="premium-theme-"] h3,\nhtml[class*="premium-theme-"] h4,\nhtml[class*="premium-theme-"] .title,\nhtml[class*="premium-theme-"] .category-title,\nhtml[class*="premium-theme-"] .section h2,\nhtml[class*="premium-theme-"] .surah-name,\nhtml[class*="premium-theme-"] .dua-title,\nhtml[class*="premium-theme-"] .ayah-arabic{\n  color:var(--text) !important;\n}\n\nhtml[class*="premium-theme-"] p,\nhtml[class*="premium-theme-"] li,\nhtml[class*="premium-theme-"] .subtitle,\nhtml[class*="premium-theme-"] .small,\nhtml[class*="premium-theme-"] .note,\nhtml[class*="premium-theme-"] .muted,\nhtml[class*="premium-theme-"] .category-intro,\nhtml[class*="premium-theme-"] .ref,\nhtml[class*="premium-theme-"] .label,\nhtml[class*="premium-theme-"] .translit,\nhtml[class*="premium-theme-"] .meaning,\nhtml[class*="premium-theme-"] .when,\nhtml[class*="premium-theme-"] .surah-meta,\nhtml[class*="premium-theme-"] .article p,\nhtml[class*="premium-theme-"] .dua-translit,\nhtml[class*="premium-theme-"] .ayah-translit,\nhtml[class*="premium-theme-"] .ayah-meaning{\n  color:var(--text-soft) !important;\n}\n\nhtml[class*="premium-theme-"] strong,\nhtml[class*="premium-theme-"] a,\nhtml[class*="premium-theme-"] .surah-number,\nhtml[class*="premium-theme-"] .badge,\nhtml[class*="premium-theme-"] .chip,\nhtml[class*="premium-theme-"] .wallet-badge{\n  color:var(--bw-accent) !important;\n}\n\nhtml[class*="premium-theme-"] .btn.primary,\nhtml[class*="premium-theme-"] .copy-wallet-btn,\nhtml[class*="premium-theme-"] .install-btn,\nhtml[class*="premium-theme-"] .support-project-btn,\nhtml[class*="premium-theme-"] button:not(.icon-btn):not(.share-close):not(.install-help-close):not(.bottom-app-nav-item){\n  background:linear-gradient(135deg,var(--green-strong) 0%, color-mix(in srgb,var(--bw-accent) 72%,var(--green-strong)) 100%) !important;\n  color:#fff !important;\n  border-color:var(--border-2) !important;\n  box-shadow:0 14px 30px color-mix(in srgb,var(--green-strong) 24%,transparent) !important;\n}\n\nhtml[class*="premium-theme-"] input,\nhtml[class*="premium-theme-"] textarea,\nhtml[class*="premium-theme-"] select,\nhtml[class*="premium-theme-"] .search-input,\nhtml[class*="premium-theme-"] .wallet-address{\n  background:color-mix(in srgb,var(--surface-3) 74%,#000) !important;\n  color:var(--text) !important;\n  border-color:var(--border-2) !important;\n}\n\nhtml[class*="premium-theme-"] .bottom-app-nav{\n  background:linear-gradient(180deg,color-mix(in srgb,var(--surface) 88%,transparent),color-mix(in srgb,var(--bg) 96%,transparent)) !important;\n  border-top-color:var(--border) !important;\n  box-shadow:0 -18px 44px color-mix(in srgb,var(--bg) 70%,transparent), inset 0 1px 0 rgba(255,255,255,.04) !important;\n}\n\nhtml[class*="premium-theme-"] .bottom-app-nav-inner{\n  background:linear-gradient(180deg,color-mix(in srgb,var(--surface-2) 92%,transparent),color-mix(in srgb,var(--surface) 94%,transparent)) !important;\n  border-color:var(--border) !important;\n}\n\nhtml[class*="premium-theme-"] .bottom-app-nav-item{\n  color:var(--text-soft) !important;\n}\n\nhtml[class*="premium-theme-"] .bottom-app-nav-item.active,\nhtml[class*="premium-theme-"] .bottom-app-nav-item.is-active{\n  background:linear-gradient(135deg,color-mix(in srgb,var(--bw-accent) 24%,transparent),color-mix(in srgb,var(--green-strong) 28%,transparent)) !important;\n  color:var(--text) !important;\n  border-color:var(--border-2) !important;\n}\n/* ===== END BARAKAWAY PRO PREMIUM THEMES RUNTIME ===== */\n';
+  const PREMIUM_CSS = '\n/* ===== BARAKAWAY PRO PREMIUM THEMES RUNTIME ===== */\n:root{\n  --bw-pro-transition: background .22s ease,border-color .22s ease,box-shadow .22s ease,color .22s ease;\n}\n\nhtml.premium-theme-royal-gold{\n  --bg:#090908;\n  --surface:#171208;\n  --surface-2:#20170a;\n  --surface-3:#2b2110;\n  --border:rgba(215,192,122,.36);\n  --border-2:rgba(244,220,148,.44);\n  --text:#fff8df;\n  --text-soft:#ead8a5;\n  --text-muted:#c7ad62;\n  --green:#d7c07a;\n  --green-strong:#9d7424;\n  --green-soft:#fff0b4;\n  --bw-accent:#d7c07a;\n  --bw-accent-2:#f4dc94;\n}\n\nhtml.premium-theme-emerald-quran{\n  --bg:#061109;\n  --surface:#07180e;\n  --surface-2:#0c2114;\n  --surface-3:#12301d;\n  --border:rgba(102,198,128,.34);\n  --border-2:rgba(102,198,128,.46);\n  --text:#f0fff4;\n  --text-soft:#c4f0d1;\n  --text-muted:#8fd9a2;\n  --green:#66c680;\n  --green-strong:#2d7a46;\n  --green-soft:#c9ffd7;\n  --bw-accent:#66c680;\n  --bw-accent-2:#b8ffd0;\n}\n\nhtml.premium-theme-violet-noor{\n  --bg:#0d0a15;\n  --surface:#141020;\n  --surface-2:#1b1530;\n  --surface-3:#241a42;\n  --border:rgba(161,118,255,.34);\n  --border-2:rgba(197,168,255,.42);\n  --text:#fbf8ff;\n  --text-soft:#dfd2ff;\n  --text-muted:#bda6f0;\n  --green:#c5a8ff;\n  --green-strong:#6f4dcc;\n  --green-soft:#eadfff;\n  --bw-accent:#a176ff;\n  --bw-accent-2:#d6c4ff;\n}\n\nhtml.premium-theme-rose-soft{\n  --bg:#160a12;\n  --surface:#21101a;\n  --surface-2:#301525;\n  --surface-3:#401b31;\n  --border:rgba(255,158,199,.34);\n  --border-2:rgba(255,190,218,.44);\n  --text:#fff8fb;\n  --text-soft:#ffd8e8;\n  --text-muted:#f0a9c8;\n  --green:#ff9ec7;\n  --green-strong:#b64d78;\n  --green-soft:#ffe2ee;\n  --bw-accent:#ff9ec7;\n  --bw-accent-2:#ffd0e4;\n}\n\nhtml.premium-theme-carbon-elite{\n  --bg:#050607;\n  --surface:#0d1116;\n  --surface-2:#121820;\n  --surface-3:#1a222c;\n  --border:rgba(170,184,199,.28);\n  --border-2:rgba(202,213,224,.34);\n  --text:#f7fafc;\n  --text-soft:#cfd8e3;\n  --text-muted:#99a7b5;\n  --green:#d6dde6;\n  --green-strong:#59616c;\n  --green-soft:#eef2f6;\n  --bw-accent:#aab8c7;\n  --bw-accent-2:#e8edf3;\n}\n\nhtml.premium-theme-children-soft{\n  --bg:#0c1f32;\n  --surface:#102b44;\n  --surface-2:#173a5c;\n  --surface-3:#234d75;\n  --border:rgba(135,203,255,.34);\n  --border-2:rgba(255,227,241,.40);\n  --text:#f4fbff;\n  --text-soft:#d3ecff;\n  --text-muted:#abd6f7;\n  --green:#87cbff;\n  --green-strong:#3d8bc7;\n  --green-soft:#dff4ff;\n  --bw-accent:#87cbff;\n  --bw-accent-2:#ffe3f1;\n}\n\nhtml.premium-theme-night-mosque{\n  --bg:#050b13;\n  --surface:#091426;\n  --surface-2:#10213d;\n  --surface-3:#172f58;\n  --border:rgba(215,192,122,.28);\n  --border-2:rgba(118,154,215,.36);\n  --text:#f3f7ff;\n  --text-soft:#c8d8f4;\n  --text-muted:#91a9ce;\n  --green:#d7c07a;\n  --green-strong:#355d9a;\n  --green-soft:#f4e6b2;\n  --bw-accent:#d7c07a;\n  --bw-accent-2:#7ca7ff;\n}\n\nhtml.premium-theme-desert-sand{\n  --bg:#130c05;\n  --surface:#1e1408;\n  --surface-2:#2e200e;\n  --surface-3:#3e2b13;\n  --border:rgba(255,237,190,.30);\n  --border-2:rgba(219,174,97,.40);\n  --text:#fff9ea;\n  --text-soft:#ecd7ad;\n  --text-muted:#c9a978;\n  --green:#ffedbe;\n  --green-strong:#9a6d2d;\n  --green-soft:#fff3cf;\n  --bw-accent:#ffedbe;\n  --bw-accent-2:#dbaE61;\n}\n\nhtml[class*="premium-theme-"] body{\n  color:var(--text) !important;\n  background:\n    radial-gradient(circle at 14% 0%, color-mix(in srgb, var(--bw-accent) 20%, transparent), transparent 28%),\n    radial-gradient(circle at 88% 8%, color-mix(in srgb, var(--bw-accent-2) 16%, transparent), transparent 32%),\n    linear-gradient(180deg,var(--bg) 0%,color-mix(in srgb,var(--surface) 72%,var(--bg)) 48%,var(--bg) 100%) !important;\n}\n\nhtml[class*="premium-theme-"] .container,\nhtml[class*="premium-theme-"] .hero,\nhtml[class*="premium-theme-"] .brand-prayer-hero,\nhtml[class*="premium-theme-"] .today-hub,\nhtml[class*="premium-theme-"] .about-project-card,\nhtml[class*="premium-theme-"] .barakaway-pro-final,\nhtml[class*="premium-theme-"] .block,\nhtml[class*="premium-theme-"] .card,\nhtml[class*="premium-theme-"] .box,\nhtml[class*="premium-theme-"] .panel,\nhtml[class*="premium-theme-"] .quote,\nhtml[class*="premium-theme-"] .empty,\nhtml[class*="premium-theme-"] .article,\nhtml[class*="premium-theme-"] .category-panel,\nhtml[class*="premium-theme-"] .surah-card,\nhtml[class*="premium-theme-"] .prayer-card,\nhtml[class*="premium-theme-"] .toggle-row,\nhtml[class*="premium-theme-"] .meta-item,\nhtml[class*="premium-theme-"] .note-box,\nhtml[class*="premium-theme-"] .jumuah-box,\nhtml[class*="premium-theme-"] .month-day,\nhtml[class*="premium-theme-"] .month-head,\nhtml[class*="premium-theme-"] .wallet-support,\nhtml[class*="premium-theme-"] .home-widget,\nhtml[class*="premium-theme-"] .dua-card,\nhtml[class*="premium-theme-"] .ayah-card,\nhtml[class*="premium-theme-"] .master-audio-wrap,\nhtml[class*="premium-theme-"] .reader-side,\nhtml[class*="premium-theme-"] .reader-main,\nhtml[class*="premium-theme-"] .dua-side,\nhtml[class*="premium-theme-"] .dua-main,\nhtml[class*="premium-theme-"] .ai-side,\nhtml[class*="premium-theme-"] .ai-main,\nhtml[class*="premium-theme-"] .player-panel,\nhtml[class*="premium-theme-"] .preview-panel,\nhtml[class*="premium-theme-"] .app-menu-btn,\nhtml[class*="premium-theme-"] .today-action,\nhtml[class*="premium-theme-"] .premium-resource-card{\n  background:\n    radial-gradient(circle at 94% 0%, color-mix(in srgb, var(--bw-accent) 12%, transparent), transparent 30%),\n    linear-gradient(135deg,color-mix(in srgb,var(--surface) 92%,#000) 0%,var(--surface-2) 54%,color-mix(in srgb,var(--surface-3) 84%,#000) 100%) !important;\n  border-color:var(--border) !important;\n  color:var(--text) !important;\n  box-shadow:0 18px 42px color-mix(in srgb,var(--bg) 70%,transparent), inset 0 1px 0 rgba(255,255,255,.055) !important;\n  transition:var(--bw-pro-transition) !important;\n}\n\nhtml[class*="premium-theme-"] h1,\nhtml[class*="premium-theme-"] h2,\nhtml[class*="premium-theme-"] h3,\nhtml[class*="premium-theme-"] h4,\nhtml[class*="premium-theme-"] .title,\nhtml[class*="premium-theme-"] .category-title,\nhtml[class*="premium-theme-"] .section h2,\nhtml[class*="premium-theme-"] .surah-name,\nhtml[class*="premium-theme-"] .dua-title,\nhtml[class*="premium-theme-"] .ayah-arabic{\n  color:var(--text) !important;\n}\n\nhtml[class*="premium-theme-"] p,\nhtml[class*="premium-theme-"] li,\nhtml[class*="premium-theme-"] .subtitle,\nhtml[class*="premium-theme-"] .small,\nhtml[class*="premium-theme-"] .note,\nhtml[class*="premium-theme-"] .muted,\nhtml[class*="premium-theme-"] .category-intro,\nhtml[class*="premium-theme-"] .ref,\nhtml[class*="premium-theme-"] .label,\nhtml[class*="premium-theme-"] .translit,\nhtml[class*="premium-theme-"] .meaning,\nhtml[class*="premium-theme-"] .when,\nhtml[class*="premium-theme-"] .surah-meta,\nhtml[class*="premium-theme-"] .article p,\nhtml[class*="premium-theme-"] .dua-translit,\nhtml[class*="premium-theme-"] .ayah-translit,\nhtml[class*="premium-theme-"] .ayah-meaning{\n  color:var(--text-soft) !important;\n}\n\nhtml[class*="premium-theme-"] strong,\nhtml[class*="premium-theme-"] a,\nhtml[class*="premium-theme-"] .surah-number,\nhtml[class*="premium-theme-"] .badge,\nhtml[class*="premium-theme-"] .chip,\nhtml[class*="premium-theme-"] .wallet-badge{\n  color:var(--bw-accent) !important;\n}\n\nhtml[class*="premium-theme-"] .btn.primary,\nhtml[class*="premium-theme-"] .copy-wallet-btn,\nhtml[class*="premium-theme-"] .install-btn,\nhtml[class*="premium-theme-"] .support-project-btn,\nhtml[class*="premium-theme-"] button:not(.icon-btn):not(.share-close):not(.install-help-close):not(.bottom-app-nav-item){\n  background:linear-gradient(135deg,var(--green-strong) 0%, color-mix(in srgb,var(--bw-accent) 72%,var(--green-strong)) 100%) !important;\n  color:#fff !important;\n  border-color:var(--border-2) !important;\n  box-shadow:0 14px 30px color-mix(in srgb,var(--green-strong) 24%,transparent) !important;\n}\n\nhtml[class*="premium-theme-"] input,\nhtml[class*="premium-theme-"] textarea,\nhtml[class*="premium-theme-"] select,\nhtml[class*="premium-theme-"] .search-input,\nhtml[class*="premium-theme-"] .wallet-address{\n  background:color-mix(in srgb,var(--surface-3) 74%,#000) !important;\n  color:var(--text) !important;\n  border-color:var(--border-2) !important;\n}\n\nhtml[class*="premium-theme-"] .bottom-app-nav{\n  background:linear-gradient(180deg,color-mix(in srgb,var(--surface) 88%,transparent),color-mix(in srgb,var(--bg) 96%,transparent)) !important;\n  border-top-color:var(--border) !important;\n  box-shadow:0 -18px 44px color-mix(in srgb,var(--bg) 70%,transparent), inset 0 1px 0 rgba(255,255,255,.04) !important;\n}\n\nhtml[class*="premium-theme-"] .bottom-app-nav-inner{\n  background:linear-gradient(180deg,color-mix(in srgb,var(--surface-2) 92%,transparent),color-mix(in srgb,var(--surface) 94%,transparent)) !important;\n  border-color:var(--border) !important;\n}\n\nhtml[class*="premium-theme-"] .bottom-app-nav-item{\n  color:var(--text-soft) !important;\n}\n\nhtml[class*="premium-theme-"] .bottom-app-nav-item.active,\nhtml[class*="premium-theme-"] .bottom-app-nav-item.is-active{\n  background:linear-gradient(135deg,color-mix(in srgb,var(--bw-accent) 24%,transparent),color-mix(in srgb,var(--green-strong) 28%,transparent)) !important;\n  color:var(--text) !important;\n  border-color:var(--border-2) !important;\n}\n/* ===== END BARAKAWAY PRO PREMIUM THEMES RUNTIME ===== */\n';
 
   function safeGet(key){
     try{ return localStorage.getItem(key); }catch(e){ return null; }
@@ -391,13 +391,7 @@ html[class*="premium-theme-"] .theme-switch{
 
         card.classList.add("bw-theme-sample-card");
         card.classList.add("bw-theme-sample-" + item.key);
-
-        const style = sampleStyles[item.key];
-        if(style){
-          card.style.setProperty("background", style.background, "important");
-          card.style.setProperty("border-color", style.border, "important");
-          card.style.setProperty("color", "#ffffff", "important");
-        }
+        card.style.setProperty("color", "#ffffff", "important");
 
         card.querySelectorAll("h3,p,strong,.theme-title,.theme-description").forEach(function(node){
           node.style.setProperty("color", "#ffffff", "important");
@@ -688,10 +682,17 @@ html.premium-theme-children-soft{
 }
 
 html.premium-theme-children-soft body{
-  background:
-    radial-gradient(circle at 16% 0%,rgba(155,216,255,.22),transparent 28%),
-    radial-gradient(circle at 86% 8%,rgba(255,217,239,.20),transparent 34%),
+  background-color:#07172a !important;
+  background-image:
+    radial-gradient(circle at 30px 34px, rgba(255,255,255,.18) 0 12px, transparent 12.8px),
+    radial-gradient(circle at 19px 24px, rgba(255,255,255,.14) 0 5.8px, transparent 6.4px),
+    radial-gradient(circle at 41px 24px, rgba(255,255,255,.14) 0 5.8px, transparent 6.4px),
+    linear-gradient(27deg, rgba(255,255,255,.07) 5%, transparent 5%, transparent 45%, rgba(255,255,255,.07) 45%, rgba(255,255,255,.07) 55%, transparent 55%, transparent),
+    linear-gradient(207deg, rgba(255,227,241,.06) 5%, transparent 5%, transparent 45%, rgba(255,227,241,.06) 45%, rgba(255,227,241,.06) 55%, transparent 55%, transparent),
     linear-gradient(180deg,#07172a 0%,#102a46 50%,#07172a 100%) !important;
+  background-size:96px 96px,96px 96px,96px 96px,18px 18px,18px 18px,100% 100% !important;
+  background-position:0 0,0 0,0 0,0 0,9px 9px,center !important;
+  background-repeat:repeat,repeat,repeat,repeat,repeat,no-repeat !important;
 }
 
 /* Premium 3D surfaces */
@@ -1585,36 +1586,44 @@ html.premium-theme-carbon-elite body{
 html.premium-theme-children-soft body{
   background-color:#07172a !important;
   background-image:
-    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='96' height='96' viewBox='0 0 96 96'%3E%3Cg fill='none' stroke='%23ffffff' stroke-opacity='.17' stroke-width='2.2' stroke-linecap='round' stroke-linejoin='round'%3E%3Ccircle cx='32' cy='35' r='14'/%3E%3Ccircle cx='20' cy='25' r='6'/%3E%3Ccircle cx='44' cy='25' r='6'/%3E%3Ccircle cx='28' cy='35' r='1.8' fill='%23ffffff' fill-opacity='.20'/%3E%3Ccircle cx='36' cy='35' r='1.8' fill='%23ffffff' fill-opacity='.20'/%3E%3Cpath d='M28 43q4 4 8 0'/%3E%3Cpath d='M63 26l2.6 5.4 6 .8-4.3 4.2 1 6-5.3-2.8-5.3 2.8 1-6-4.3-4.2 6-.8z'/%3E%3Cpath d='M18 68c7-7 18-7 25 0 7-7 18-7 25 0'/%3E%3C/g%3E%3C/svg%3E"),
-    radial-gradient(circle at 16% 0%,rgba(155,216,255,.25),transparent 30%),
-    radial-gradient(circle at 88% 8%,rgba(255,217,239,.22),transparent 36%),
-    linear-gradient(180deg,#07172a 0%,#102a46 52%,#07172a 100%) !important;
-  background-size:96px 96px,100% 100%,100% 100%,100% 100% !important;
-  background-position:0 0,center,center,center !important;
+    radial-gradient(circle at 30px 34px, rgba(255,255,255,.18) 0 12px, transparent 12.8px),
+    radial-gradient(circle at 19px 24px, rgba(255,255,255,.14) 0 5.8px, transparent 6.4px),
+    radial-gradient(circle at 41px 24px, rgba(255,255,255,.14) 0 5.8px, transparent 6.4px),
+    linear-gradient(27deg, rgba(255,255,255,.07) 5%, transparent 5%, transparent 45%, rgba(255,255,255,.07) 45%, rgba(255,255,255,.07) 55%, transparent 55%, transparent),
+    linear-gradient(207deg, rgba(255,227,241,.06) 5%, transparent 5%, transparent 45%, rgba(255,227,241,.06) 45%, rgba(255,227,241,.06) 55%, transparent 55%, transparent),
+    linear-gradient(180deg,#07172a 0%,#102a46 50%,#07172a 100%) !important;
+  background-size:96px 96px,96px 96px,96px 96px,18px 18px,18px 18px,100% 100% !important;
+  background-position:0 0,0 0,0 0,0 0,9px 9px,center !important;
+  background-repeat:repeat,repeat,repeat,repeat,repeat,no-repeat !important;
 }
 
 html.premium-theme-night-mosque body{
   background-color:#050b13 !important;
   background-image:
-    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120' viewBox='0 0 120 120'%3E%3Cg fill='%23ffffff' fill-opacity='.36'%3E%3Ccircle cx='16' cy='18' r='1.2'/%3E%3Ccircle cx='48' cy='31' r='.9'/%3E%3Ccircle cx='82' cy='16' r='1.1'/%3E%3Ccircle cx='104' cy='52' r='.8'/%3E%3Ccircle cx='30' cy='78' r='1'/%3E%3Ccircle cx='74' cy='92' r='.75'/%3E%3Ccircle cx='111' cy='105' r='1.1'/%3E%3Cpath d='M68 34a13 13 0 1 1-13-13 10 10 0 1 0 13 13z' fill='%23d7c07a' fill-opacity='.23'/%3E%3C/g%3E%3Cg fill='none' stroke='%23d7c07a' stroke-opacity='.12' stroke-width='1.4'%3E%3Cpath d='M18 112h84'/%3E%3Cpath d='M36 112V85q8-18 16 0v27'/%3E%3Cpath d='M68 112V76q10-22 20 0v36'/%3E%3C/g%3E%3C/svg%3E"),
-    radial-gradient(circle at 82% 12%,rgba(215,192,122,.22),transparent 18%),
-    radial-gradient(circle at 18% 0%,rgba(124,167,255,.18),transparent 34%),
+    radial-gradient(circle at 18px 18px, rgba(255,255,255,.42) 0 1.2px, transparent 1.8px),
+    radial-gradient(circle at 48px 31px, rgba(255,255,255,.36) 0 1px, transparent 1.6px),
+    radial-gradient(circle at 82px 16px, rgba(255,255,255,.38) 0 1.1px, transparent 1.7px),
+    radial-gradient(circle at 68px 34px, rgba(215,192,122,.22) 0 10px, transparent 10.8px),
+    linear-gradient(90deg, transparent 0 31%, rgba(215,192,122,.10) 31% 33%, transparent 33% 57%, rgba(215,192,122,.10) 57% 59%, transparent 59% 100%),
+    linear-gradient(27deg, rgba(215,192,122,.08) 5%, transparent 5%, transparent 45%, rgba(215,192,122,.08) 45%, rgba(215,192,122,.08) 55%, transparent 55%, transparent),
+    linear-gradient(207deg, rgba(124,167,255,.07) 5%, transparent 5%, transparent 45%, rgba(124,167,255,.07) 45%, rgba(124,167,255,.07) 55%, transparent 55%, transparent),
     linear-gradient(180deg,#050b13 0%,#091426 48%,#050b13 100%) !important;
-  background-size:120px 120px,100% 100%,100% 100%,100% 100% !important;
-  background-position:0 0,center,center,center !important;
+  background-size:120px 120px,120px 120px,120px 120px,120px 120px,120px 120px,18px 18px,18px 18px,100% 100% !important;
+  background-position:0 0,0 0,0 0,0 0,0 0,0 0,9px 9px,center !important;
+  background-repeat:repeat,repeat,repeat,repeat,repeat,repeat,repeat,no-repeat !important;
 }
 
 html.premium-theme-desert-sand body{
   background-color:#130c05 !important;
   background-image:
-    radial-gradient(circle at 1px 1px,rgba(255,237,190,.18) 1px,transparent 1.5px),
-    radial-gradient(circle at 11px 9px,rgba(219,174,97,.13) 1px,transparent 1.5px),
-    linear-gradient(25deg,rgba(255,237,190,.10) 5%,transparent 5%,transparent 45%,rgba(255,237,190,.08) 45%,rgba(255,237,190,.08) 55%,transparent 55%,transparent),
-    radial-gradient(circle at 88% 10%,rgba(255,237,190,.24),transparent 32%),
-    radial-gradient(circle at 16% 0%,rgba(219,174,97,.18),transparent 32%),
+    radial-gradient(circle at 2px 2px, rgba(255,237,190,.20) 0 1px, transparent 1.7px),
+    radial-gradient(circle at 10px 8px, rgba(219,174,97,.16) 0 1px, transparent 1.8px),
+    linear-gradient(27deg, rgba(255,237,190,.11) 5%, transparent 5%, transparent 45%, rgba(255,237,190,.11) 45%, rgba(255,237,190,.11) 55%, transparent 55%, transparent),
+    linear-gradient(207deg, rgba(120,72,18,.13) 5%, transparent 5%, transparent 45%, rgba(120,72,18,.13) 45%, rgba(120,72,18,.13) 55%, transparent 55%, transparent),
     linear-gradient(180deg,#130c05 0%,#1e1408 52%,#130c05 100%) !important;
-  background-size:16px 16px,18px 18px,30px 30px,100% 100%,100% 100%,100% 100% !important;
-  background-position:0 0,6px 8px,0 0,center,center,center !important;
+  background-size:16px 16px,18px 18px,18px 18px,18px 18px,100% 100% !important;
+  background-position:0 0,6px 8px,0 0,9px 9px,center !important;
+  background-repeat:repeat,repeat,repeat,repeat,no-repeat !important;
 }
 
 html[class*="premium-theme-"] .container,
@@ -1674,129 +1683,529 @@ html[class*="premium-theme-"] .premium-resource-card{
   (document.head || document.documentElement).appendChild(style);
 })();
 
+(function(){
+  const STYLE_ID = "barakaway-final-pure-css-premium-theme-patterns";
+  if(document.getElementById(STYLE_ID)) return;
+  const CSS = '\n\n/* ===== BARAKAWAY FINAL PURE CSS PREMIUM THEME PATTERNS ===== */\n/* Pure CSS / inline SVG patterns. No external theme images. Same runtime logic as Carbon Elite. */\nhtml.premium-theme-children-soft{\n  --bg:#07172a;\n  --surface:#102b44;\n  --surface-2:#173a5c;\n  --surface-3:#234d75;\n  --border:rgba(135,203,255,.38);\n  --border-2:rgba(255,227,241,.46);\n  --text:#f5fbff;\n  --text-soft:#d8efff;\n  --text-muted:#b8ddf7;\n  --green:#87cbff;\n  --green-strong:#3d8bc7;\n  --green-soft:#dff4ff;\n  --bw-accent:#87cbff;\n  --bw-accent-2:#ffe3f1;\n}\nhtml.premium-theme-night-mosque{\n  --bg:#050b13;\n  --surface:#091426;\n  --surface-2:#10213d;\n  --surface-3:#172f58;\n  --border:rgba(215,192,122,.30);\n  --border-2:rgba(118,154,215,.40);\n  --text:#f5f8ff;\n  --text-soft:#d2e0f7;\n  --text-muted:#9fb7dc;\n  --green:#d7c07a;\n  --green-strong:#355d9a;\n  --green-soft:#f4e6b2;\n  --bw-accent:#d7c07a;\n  --bw-accent-2:#7ca7ff;\n}\nhtml.premium-theme-desert-sand{\n  --bg:#e2bd7b;\n  --surface:#f1d497;\n  --surface-2:#e3b86d;\n  --surface-3:#fff0c1;\n  --border:rgba(92,58,20,.34);\n  --border-2:rgba(121,78,26,.46);\n  --text:#2b1a08;\n  --text-soft:#4a2d0d;\n  --text-muted:#6a471d;\n  --green:#7a511d;\n  --green-strong:#7c501a;\n  --green-soft:#3a2209;\n  --bw-accent:#7a511d;\n  --bw-accent-2:#fff1c6;\n}\n\nhtml.premium-theme-children-soft body{
+  background-color:#07172a !important;
+  background-image:
+    radial-gradient(circle at 30px 34px, rgba(255,255,255,.18) 0 12px, transparent 12.8px),
+    radial-gradient(circle at 19px 24px, rgba(255,255,255,.14) 0 5.8px, transparent 6.4px),
+    radial-gradient(circle at 41px 24px, rgba(255,255,255,.14) 0 5.8px, transparent 6.4px),
+    linear-gradient(27deg, rgba(255,255,255,.07) 5%, transparent 5%, transparent 45%, rgba(255,255,255,.07) 45%, rgba(255,255,255,.07) 55%, transparent 55%, transparent),
+    linear-gradient(207deg, rgba(255,227,241,.06) 5%, transparent 5%, transparent 45%, rgba(255,227,241,.06) 45%, rgba(255,227,241,.06) 55%, transparent 55%, transparent),
+    linear-gradient(180deg,#07172a 0%,#102a46 50%,#07172a 100%) !important;
+  background-size:96px 96px,96px 96px,96px 96px,18px 18px,18px 18px,100% 100% !important;
+  background-position:0 0,0 0,0 0,0 0,9px 9px,center !important;
+  background-repeat:repeat,repeat,repeat,repeat,repeat,no-repeat !important;
+}\nhtml.premium-theme-night-mosque body{
+  background-color:#050b13 !important;
+  background-image:
+    radial-gradient(circle at 18px 18px, rgba(255,255,255,.42) 0 1.2px, transparent 1.8px),
+    radial-gradient(circle at 48px 31px, rgba(255,255,255,.36) 0 1px, transparent 1.6px),
+    radial-gradient(circle at 82px 16px, rgba(255,255,255,.38) 0 1.1px, transparent 1.7px),
+    radial-gradient(circle at 68px 34px, rgba(215,192,122,.22) 0 10px, transparent 10.8px),
+    linear-gradient(90deg, transparent 0 31%, rgba(215,192,122,.10) 31% 33%, transparent 33% 57%, rgba(215,192,122,.10) 57% 59%, transparent 59% 100%),
+    linear-gradient(27deg, rgba(215,192,122,.08) 5%, transparent 5%, transparent 45%, rgba(215,192,122,.08) 45%, rgba(215,192,122,.08) 55%, transparent 55%, transparent),
+    linear-gradient(207deg, rgba(124,167,255,.07) 5%, transparent 5%, transparent 45%, rgba(124,167,255,.07) 45%, rgba(124,167,255,.07) 55%, transparent 55%, transparent),
+    linear-gradient(180deg,#050b13 0%,#091426 48%,#050b13 100%) !important;
+  background-size:120px 120px,120px 120px,120px 120px,120px 120px,120px 120px,18px 18px,18px 18px,100% 100% !important;
+  background-position:0 0,0 0,0 0,0 0,0 0,0 0,9px 9px,center !important;
+  background-repeat:repeat,repeat,repeat,repeat,repeat,repeat,repeat,no-repeat !important;
+}\nhtml.premium-theme-desert-sand body{
+  background-color:#130c05 !important;
+  background-image:
+    radial-gradient(circle at 2px 2px, rgba(255,237,190,.20) 0 1px, transparent 1.7px),
+    radial-gradient(circle at 10px 8px, rgba(219,174,97,.16) 0 1px, transparent 1.8px),
+    linear-gradient(27deg, rgba(255,237,190,.11) 5%, transparent 5%, transparent 45%, rgba(255,237,190,.11) 45%, rgba(255,237,190,.11) 55%, transparent 55%, transparent),
+    linear-gradient(207deg, rgba(120,72,18,.13) 5%, transparent 5%, transparent 45%, rgba(120,72,18,.13) 45%, rgba(120,72,18,.13) 55%, transparent 55%, transparent),
+    linear-gradient(180deg,#130c05 0%,#1e1408 52%,#130c05 100%) !important;
+  background-size:16px 16px,18px 18px,18px 18px,18px 18px,100% 100% !important;
+  background-position:0 0,6px 8px,0 0,9px 9px,center !important;
+  background-repeat:repeat,repeat,repeat,repeat,no-repeat !important;
+}\n\nbody .theme-grid .theme-card.theme-child,\nbody .theme-grid .theme-card.bw-theme-sample-children-soft,\nbody .theme-grid .theme-card[data-theme="children-soft"]{\n  background-color:#07172a!important;\n  background-image:\n    linear-gradient(115deg,transparent 0%,rgba(255,255,255,.12) 44%,transparent 60%),\n    url("data:image/svg+xml,%3Csvg xmlns=\'http://www.w3.org/2000/svg\' width=\'112\' height=\'112\' viewBox=\'0 0 112 112\'%3E%3Cg fill=\'none\' stroke=\'%23ffffff\' stroke-opacity=\'.22\' stroke-width=\'2.4\' stroke-linecap=\'round\' stroke-linejoin=\'round\'%3E%3Ccircle cx=\'34\' cy=\'38\' r=\'15\'/%3E%3Ccircle cx=\'21\' cy=\'27\' r=\'6.5\'/%3E%3Ccircle cx=\'47\' cy=\'27\' r=\'6.5\'/%3E%3Ccircle cx=\'30\' cy=\'38\' r=\'1.8\' fill=\'%23ffffff\' fill-opacity=\'.25\'/%3E%3Ccircle cx=\'39\' cy=\'38\' r=\'1.8\' fill=\'%23ffffff\' fill-opacity=\'.25\'/%3E%3Cpath d=\'M30 47q4.5 4 9 0\'/%3E%3Cpath d=\'M76 24l3.2 6.5 7.2 1-5.2 5.1 1.2 7.1-6.4-3.4-6.4 3.4 1.2-7.1-5.2-5.1 7.2-1z\'/%3E%3Cpath d=\'M20 78c8-7 20-7 28 0 8-7 20-7 28 0\'/%3E%3C/g%3E%3C/svg%3E"),\n    radial-gradient(circle at 88% 10%,rgba(255,227,241,.24),transparent 30%),\n    linear-gradient(135deg,#102b44 0%,#173a5c 54%,#234d75 100%)!important;\n  background-size:100% 100%,112px 112px,100% 100%,100% 100%!important;\n  background-position:center,0 0,center,center!important;\n  background-repeat:no-repeat,repeat,no-repeat,no-repeat!important;\n  border-color:rgba(135,203,255,.46)!important;\n  box-shadow:0 24px 58px rgba(7,23,42,.42),inset 0 1px 0 rgba(255,255,255,.12),inset 0 -24px 38px rgba(0,0,0,.20)!important;\n}\nbody .theme-grid .theme-card.theme-night,\nbody .theme-grid .theme-card.bw-theme-sample-night-mosque,\nbody .theme-grid .theme-card[data-theme="night-mosque"]{\n  background-color:#050b13!important;\n  background-image:\n    linear-gradient(115deg,transparent 0%,rgba(255,255,255,.08) 44%,transparent 60%),\n    url("data:image/svg+xml,%3Csvg xmlns=\'http://www.w3.org/2000/svg\' width=\'124\' height=\'124\' viewBox=\'0 0 124 124\'%3E%3Cg fill=\'%23ffffff\' fill-opacity=\'.42\'%3E%3Ccircle cx=\'14\' cy=\'18\' r=\'1.1\'/%3E%3Ccircle cx=\'47\' cy=\'29\' r=\'.85\'/%3E%3Ccircle cx=\'82\' cy=\'14\' r=\'1.1\'/%3E%3Ccircle cx=\'108\' cy=\'51\' r=\'.8\'/%3E%3Ccircle cx=\'29\' cy=\'81\' r=\'1\'/%3E%3Ccircle cx=\'76\' cy=\'95\' r=\'.8\'/%3E%3Ccircle cx=\'113\' cy=\'109\' r=\'1.1\'/%3E%3Cpath d=\'M70 35a14 14 0 1 1-14-14 10.5 10.5 0 1 0 14 14z\' fill=\'%23d7c07a\' fill-opacity=\'.30\'/%3E%3C/g%3E%3Cg fill=\'none\' stroke=\'%23d7c07a\' stroke-opacity=\'.15\' stroke-width=\'1.45\'%3E%3Cpath d=\'M18 116h88\'/%3E%3Cpath d=\'M36 116V86q8-19 17 0v30\'/%3E%3Cpath d=\'M70 116V77q11-23 22 0v39\'/%3E%3C/g%3E%3C/svg%3E"),\n    radial-gradient(circle at 82% 12%,rgba(215,192,122,.22),transparent 22%),\n    linear-gradient(135deg,#050b13 0%,#091426 50%,#172f58 100%)!important;\n  background-size:100% 100%,124px 124px,100% 100%,100% 100%!important;\n  background-position:center,0 0,center,center!important;\n  background-repeat:no-repeat,repeat,no-repeat,no-repeat!important;\n  border-color:rgba(118,154,215,.40)!important;\n  box-shadow:0 24px 58px rgba(0,8,32,.54),0 0 34px rgba(120,160,255,.14),inset 0 1px 0 rgba(255,255,255,.14),inset 0 -24px 38px rgba(0,0,0,.34)!important;\n}\nbody .theme-grid .theme-card.theme-sand,\nbody .theme-grid .theme-card.bw-theme-sample-desert-sand,\nbody .theme-grid .theme-card[data-theme="desert-sand"]{\n  background-color:#e2bd7b!important;\n  background-image:\n    linear-gradient(115deg,transparent 0%,rgba(255,255,255,.18) 44%,transparent 60%),\n    url("data:image/svg+xml,%3Csvg xmlns=\'http://www.w3.org/2000/svg\' width=\'64\' height=\'64\' viewBox=\'0 0 64 64\'%3E%3Cg fill=\'%23fff0c8\' fill-opacity=\'.28\'%3E%3Ccircle cx=\'6\' cy=\'9\' r=\'1.1\'/%3E%3Ccircle cx=\'26\' cy=\'13\' r=\'.8\'/%3E%3Ccircle cx=\'47\' cy=\'6\' r=\'1\'/%3E%3Ccircle cx=\'56\' cy=\'30\' r=\'.9\'/%3E%3Ccircle cx=\'11\' cy=\'42\' r=\'.8\'/%3E%3Ccircle cx=\'34\' cy=\'52\' r=\'1\'/%3E%3Ccircle cx=\'59\' cy=\'58\' r=\'.75\'/%3E%3C/g%3E%3Cg fill=\'%23a86f2c\' fill-opacity=\'.14\'%3E%3Ccircle cx=\'18\' cy=\'26\' r=\'.9\'/%3E%3Ccircle cx=\'39\' cy=\'34\' r=\'.8\'/%3E%3Ccircle cx=\'50\' cy=\'47\' r=\'.75\'/%3E%3C/g%3E%3C/svg%3E"),\n    radial-gradient(circle at 88% 10%,rgba(255,241,198,.36),transparent 30%),\n    linear-gradient(135deg,#8d5f25 0%,#d4a95f 52%,#fff0c1 100%)!important;\n  background-size:100% 100%,64px 64px,100% 100%,100% 100%!important;\n  background-position:center,0 0,center,center!important;\n  background-repeat:no-repeat,repeat,no-repeat,no-repeat!important;\n  border-color:rgba(255,239,198,.58)!important;\n  box-shadow:0 24px 58px rgba(120,82,33,.38),inset 0 1px 0 rgba(255,255,255,.30),inset 0 -24px 38px rgba(92,58,20,.22)!important;\n}\n\nbody .theme-grid .theme-card.theme-child h3,\nbody .theme-grid .theme-card.theme-child p,\nbody .theme-grid .theme-card.theme-child strong,\nbody .theme-grid .theme-card.bw-theme-sample-children-soft h3,\nbody .theme-grid .theme-card.bw-theme-sample-children-soft p,\nbody .theme-grid .theme-card.bw-theme-sample-children-soft strong,\nbody .theme-grid .theme-card[data-theme="children-soft"] h3,\nbody .theme-grid .theme-card[data-theme="children-soft"] p,\nbody .theme-grid .theme-card[data-theme="children-soft"] strong,\nbody .theme-grid .theme-card.theme-night h3,\nbody .theme-grid .theme-card.theme-night p,\nbody .theme-grid .theme-card.theme-night strong,\nbody .theme-grid .theme-card.bw-theme-sample-night-mosque h3,\nbody .theme-grid .theme-card.bw-theme-sample-night-mosque p,\nbody .theme-grid .theme-card.bw-theme-sample-night-mosque strong,\nbody .theme-grid .theme-card[data-theme="night-mosque"] h3,\nbody .theme-grid .theme-card[data-theme="night-mosque"] p,\nbody .theme-grid .theme-card[data-theme="night-mosque"] strong{\n  color:#fff!important;\n  text-shadow:0 2px 14px rgba(0,0,0,.58)!important;\n}\nbody .theme-grid .theme-card.theme-sand h3,\nbody .theme-grid .theme-card.theme-sand p,\nbody .theme-grid .theme-card.theme-sand strong,\nbody .theme-grid .theme-card.bw-theme-sample-desert-sand h3,\nbody .theme-grid .theme-card.bw-theme-sample-desert-sand p,\nbody .theme-grid .theme-card.bw-theme-sample-desert-sand strong,\nbody .theme-grid .theme-card[data-theme="desert-sand"] h3,\nbody .theme-grid .theme-card[data-theme="desert-sand"] p,\nbody .theme-grid .theme-card[data-theme="desert-sand"] strong{\n  color:#fff8e7!important;\n  text-shadow:0 2px 14px rgba(43,26,8,.72)!important;\n}\n\nhtml.premium-theme-desert-sand h1,\nhtml.premium-theme-desert-sand h2,\nhtml.premium-theme-desert-sand h3,\nhtml.premium-theme-desert-sand h4,\nhtml.premium-theme-desert-sand h5,\nhtml.premium-theme-desert-sand h6,\nhtml.premium-theme-desert-sand .title,\nhtml.premium-theme-desert-sand .section-title,\nhtml.premium-theme-desert-sand .category-title,\nhtml.premium-theme-desert-sand .meta-value,\nhtml.premium-theme-desert-sand .prayer-name,\nhtml.premium-theme-desert-sand .prayer-time,\nhtml.premium-theme-desert-sand .big-location,\nhtml.premium-theme-desert-sand .next-name{\n  color:#2b1a08!important;\n  text-shadow:0 1px 8px rgba(255,239,198,.62)!important;\n}\nhtml.premium-theme-desert-sand p,\nhtml.premium-theme-desert-sand li,\nhtml.premium-theme-desert-sand .subtitle,\nhtml.premium-theme-desert-sand .small,\nhtml.premium-theme-desert-sand .note,\nhtml.premium-theme-desert-sand .muted,\nhtml.premium-theme-desert-sand .category-intro,\nhtml.premium-theme-desert-sand .ref,\nhtml.premium-theme-desert-sand .label,\nhtml.premium-theme-desert-sand .translit,\nhtml.premium-theme-desert-sand .meaning,\nhtml.premium-theme-desert-sand .when,\nhtml.premium-theme-desert-sand .surah-meta,\nhtml.premium-theme-desert-sand .article p,\nhtml.premium-theme-desert-sand .ayah-translit,\nhtml.premium-theme-desert-sand .ayah-meaning{\n  color:#4a2d0d!important;\n  text-shadow:0 1px 8px rgba(255,239,198,.46)!important;\n}\nhtml.premium-theme-desert-sand .bottom-app-nav,\nhtml.premium-theme-desert-sand .bottom-app-nav-inner{\n  color:#2b1a08!important;\n}\nhtml.premium-theme-night-mosque h1,\nhtml.premium-theme-night-mosque h2,\nhtml.premium-theme-night-mosque h3,\nhtml.premium-theme-night-mosque h4,\nhtml.premium-theme-night-mosque p,\nhtml.premium-theme-night-mosque li,\nhtml.premium-theme-children-soft h1,\nhtml.premium-theme-children-soft h2,\nhtml.premium-theme-children-soft h3,\nhtml.premium-theme-children-soft h4,\nhtml.premium-theme-children-soft p,\nhtml.premium-theme-children-soft li{\n  text-shadow:0 2px 12px rgba(0,0,0,.35)!important;\n}\n/* ===== END BARAKAWAY FINAL PURE CSS PREMIUM THEME PATTERNS ===== */\n';
+  const style = document.createElement("style");
+  style.id = STYLE_ID;
+  style.textContent = CSS;
+  (document.head || document.documentElement).appendChild(style);
+})();
 
 
 (function(){
-  const STYLE_ID = 'barakaway-premium-final-material-upgrade-20260510';
-  if(document.getElementById(STYLE_ID)) return;
+  const STYLE_ID='barakaway-final-theme-card-independence-clean';
+  const CSS=`
+
+/* ===== FINAL CLEAN FIX: THEME CARDS DO NOT INHERIT ACTIVE PRO THEME ===== */
+html[class*="premium-theme-"] .theme-grid .theme-card{
+  color:#fff !important;
+  isolation:isolate !important;
+  overflow:hidden !important;
+}
+
+html[class*="premium-theme-"] .theme-grid .theme-card.theme-gold,
+html[class*="premium-theme-"] .theme-grid .theme-card[data-theme="royal-gold"]{
+  background-color:#171208 !important;
+  background-image:
+    linear-gradient(27deg, rgba(255,239,184,.15) 5%, transparent 5%, transparent 45%, rgba(255,239,184,.15) 45%, rgba(255,239,184,.15) 55%, transparent 55%, transparent),
+    linear-gradient(207deg, rgba(175,132,48,.13) 5%, transparent 5%, transparent 45%, rgba(175,132,48,.13) 45%, rgba(175,132,48,.13) 55%, transparent 55%, transparent),
+    linear-gradient(145deg,#171208 0%,#4b3615 52%,#d7c07a 100%) !important;
+  background-size:18px 18px,18px 18px,100% 100% !important;
+  background-position:0 0,9px 9px,center !important;
+  background-repeat:repeat,repeat,no-repeat !important;
+  border-color:rgba(244,220,148,.58) !important;
+}
+html[class*="premium-theme-"] .theme-grid .theme-card.theme-emerald,
+html[class*="premium-theme-"] .theme-grid .theme-card[data-theme="emerald-quran"]{
+  background-color:#061109 !important;
+  background-image:
+    linear-gradient(27deg, rgba(102,198,128,.14) 5%, transparent 5%, transparent 45%, rgba(102,198,128,.14) 45%, rgba(102,198,128,.14) 55%, transparent 55%, transparent),
+    linear-gradient(207deg, rgba(255,255,255,.07) 5%, transparent 5%, transparent 45%, rgba(255,255,255,.07) 45%, rgba(255,255,255,.07) 55%, transparent 55%, transparent),
+    linear-gradient(145deg,#061109 0%,#12301d 52%,#4caf6a 100%) !important;
+  background-size:18px 18px,18px 18px,100% 100% !important;
+  background-position:0 0,9px 9px,center !important;
+  background-repeat:repeat,repeat,no-repeat !important;
+  border-color:rgba(102,198,128,.58) !important;
+}
+html[class*="premium-theme-"] .theme-grid .theme-card.theme-violet,
+html[class*="premium-theme-"] .theme-grid .theme-card[data-theme="violet-noor"]{
+  background-color:#0d0a15 !important;
+  background-image:
+    linear-gradient(27deg, rgba(197,168,255,.14) 5%, transparent 5%, transparent 45%, rgba(197,168,255,.14) 45%, rgba(197,168,255,.14) 55%, transparent 55%, transparent),
+    linear-gradient(207deg, rgba(255,255,255,.07) 5%, transparent 5%, transparent 45%, rgba(255,255,255,.07) 45%, rgba(255,255,255,.07) 55%, transparent 55%, transparent),
+    linear-gradient(145deg,#0d0a15 0%,#241a42 52%,#a176ff 100%) !important;
+  background-size:18px 18px,18px 18px,100% 100% !important;
+  background-position:0 0,9px 9px,center !important;
+  background-repeat:repeat,repeat,no-repeat !important;
+  border-color:rgba(197,168,255,.58) !important;
+}
+html[class*="premium-theme-"] .theme-grid .theme-card.theme-rose,
+html[class*="premium-theme-"] .theme-grid .theme-card[data-theme="rose-soft"]{
+  background-color:#160a12 !important;
+  background-image:
+    radial-gradient(circle at 28px 28px, rgba(255,158,199,.18) 0 10px, transparent 11px),
+    linear-gradient(27deg, rgba(255,190,218,.13) 5%, transparent 5%, transparent 45%, rgba(255,190,218,.13) 45%, rgba(255,190,218,.13) 55%, transparent 55%, transparent),
+    linear-gradient(207deg, rgba(255,255,255,.07) 5%, transparent 5%, transparent 45%, rgba(255,255,255,.07) 45%, rgba(255,255,255,.07) 55%, transparent 55%, transparent),
+    linear-gradient(145deg,#160a12 0%,#401b31 52%,#ff9ec7 100%) !important;
+  background-size:96px 96px,18px 18px,18px 18px,100% 100% !important;
+  background-position:0 0,0 0,9px 9px,center !important;
+  background-repeat:repeat,repeat,repeat,no-repeat !important;
+  border-color:rgba(255,190,218,.58) !important;
+}
+html[class*="premium-theme-"] .theme-grid .theme-card.theme-carbon,
+html[class*="premium-theme-"] .theme-grid .theme-card[data-theme="carbon-elite"]{
+  background-color:#0b0f14 !important;
+  background-image:
+    linear-gradient(27deg, rgba(255,255,255,.10) 5%, transparent 5%, transparent 45%, rgba(255,255,255,.10) 45%, rgba(255,255,255,.10) 55%, transparent 55%, transparent),
+    linear-gradient(207deg, rgba(255,255,255,.06) 5%, transparent 5%, transparent 45%, rgba(255,255,255,.06) 45%, rgba(255,255,255,.06) 55%, transparent 55%, transparent),
+    linear-gradient(145deg,#07090c 0%,#1c232c 52%,#4b5562 100%) !important;
+  background-size:18px 18px,18px 18px,100% 100% !important;
+  background-position:0 0,9px 9px,center !important;
+  background-repeat:repeat,repeat,no-repeat !important;
+  border-color:rgba(255,255,255,.12) !important;
+}
+html[class*="premium-theme-"] .theme-grid .theme-card.theme-child,
+html[class*="premium-theme-"] .theme-grid .theme-card[data-theme="children-soft"]{
+  background-color:#07172a !important;
+  background-image:
+    linear-gradient(27deg, rgba(255,255,255,.13) 5%, transparent 5%, transparent 45%, rgba(255,255,255,.13) 45%, rgba(255,255,255,.13) 55%, transparent 55%, transparent),
+    linear-gradient(207deg, rgba(255,227,241,.10) 5%, transparent 5%, transparent 45%, rgba(255,227,241,.10) 45%, rgba(255,227,241,.10) 55%, transparent 55%, transparent),
+    radial-gradient(circle at 30px 34px, rgba(255,255,255,.34) 0 12px, transparent 12.8px),
+    radial-gradient(circle at 19px 24px, rgba(255,255,255,.28) 0 5.8px, transparent 6.4px),
+    radial-gradient(circle at 41px 24px, rgba(255,255,255,.28) 0 5.8px, transparent 6.4px),
+    linear-gradient(145deg,#07172a 0%,#225983 52%,#8fcfff 100%) !important;
+  background-size:18px 18px,18px 18px,96px 96px,96px 96px,96px 96px,100% 100% !important;
+  background-position:0 0,9px 9px,0 0,0 0,0 0,center !important;
+  background-repeat:repeat,repeat,repeat,repeat,repeat,no-repeat !important;
+  border-color:rgba(160,220,255,.46) !important;
+}
+html[class*="premium-theme-"] .theme-grid .theme-card.theme-night,
+html[class*="premium-theme-"] .theme-grid .theme-card[data-theme="night-mosque"]{
+  background-color:#050b13 !important;
+  background-image:
+    linear-gradient(27deg, rgba(215,192,122,.12) 5%, transparent 5%, transparent 45%, rgba(215,192,122,.12) 45%, rgba(215,192,122,.12) 55%, transparent 55%, transparent),
+    linear-gradient(207deg, rgba(124,167,255,.10) 5%, transparent 5%, transparent 45%, rgba(124,167,255,.10) 45%, rgba(124,167,255,.10) 55%, transparent 55%, transparent),
+    radial-gradient(circle at 18px 18px, rgba(255,255,255,.48) 0 1.2px, transparent 1.8px),
+    radial-gradient(circle at 68px 34px, rgba(215,192,122,.30) 0 10px, transparent 10.8px),
+    linear-gradient(90deg, transparent 0 31%, rgba(215,192,122,.18) 31% 33%, transparent 33% 57%, rgba(215,192,122,.18) 57% 59%, transparent 59% 100%),
+    linear-gradient(145deg,#050b13 0%,#10213d 52%,#294f86 100%) !important;
+  background-size:18px 18px,18px 18px,120px 120px,120px 120px,120px 120px,100% 100% !important;
+  background-position:0 0,9px 9px,0 0,0 0,0 0,center !important;
+  background-repeat:repeat,repeat,repeat,repeat,repeat,no-repeat !important;
+  border-color:rgba(118,154,215,.44) !important;
+}
+html[class*="premium-theme-"] .theme-grid .theme-card.theme-sand,
+html[class*="premium-theme-"] .theme-grid .theme-card[data-theme="desert-sand"]{
+  background-color:#2b1906 !important;
+  background-image:
+    radial-gradient(circle at 2px 2px, rgba(255,237,190,.36) 0 1px, transparent 1.7px),
+    radial-gradient(circle at 10px 8px, rgba(219,174,97,.26) 0 1px, transparent 1.8px),
+    linear-gradient(27deg, rgba(255,237,190,.18) 5%, transparent 5%, transparent 45%, rgba(255,237,190,.18) 45%, rgba(255,237,190,.18) 55%, transparent 55%, transparent),
+    linear-gradient(207deg, rgba(120,72,18,.18) 5%, transparent 5%, transparent 45%, rgba(120,72,18,.18) 45%, rgba(120,72,18,.18) 55%, transparent 55%, transparent),
+    linear-gradient(145deg,#2b1906 0%,#8a6227 52%,#d7a85e 100%) !important;
+  background-size:16px 16px,18px 18px,18px 18px,18px 18px,100% 100% !important;
+  background-position:0 0,6px 8px,0 0,9px 9px,center !important;
+  background-repeat:repeat,repeat,repeat,repeat,no-repeat !important;
+  border-color:rgba(255,237,190,.48) !important;
+}
+
+html[class*="premium-theme-"] .theme-grid .theme-card h3,
+html[class*="premium-theme-"] .theme-grid .theme-card p,
+html[class*="premium-theme-"] .theme-grid .theme-card strong{
+  color:#fff !important;
+  text-shadow:0 2px 14px rgba(0,0,0,.58) !important;
+}
+html[class*="premium-theme-"] .theme-grid .theme-card .theme-chip{
+  background:rgba(0,0,0,.26) !important;
+  color:#fff !important;
+  border-color:rgba(255,255,255,.22) !important;
+}
+
+/* Logo transparency only, without repainting parent sections */
+html[class*="premium-theme-"] .barakaway-logo,
+html[class*="premium-theme-"] .brand-logo,
+html[class*="premium-theme-"] .app-logo,
+html[class*="premium-theme-"] .logo,
+html[class*="premium-theme-"] .wordmark,
+html[class*="premium-theme-"] .brand-wordmark,
+html[class*="premium-theme-"] [data-logo],
+html[class*="premium-theme-"] [data-brand-logo],
+html[class*="premium-theme-"] [class*="barakaway-logo"],
+html[class*="premium-theme-"] [class*="brand-logo"],
+html[class*="premium-theme-"] [class*="app-logo"],
+html[class*="premium-theme-"] [class*="wordmark"],
+html[class*="premium-theme-"] [class*="logo"]{
+  background:transparent !important;
+  background-color:transparent !important;
+  background-image:none !important;
+  border-color:transparent !important;
+  box-shadow:none !important;
+  filter:none !important;
+}
+/* ===== END FINAL CLEAN FIX ===== */
+`;
+  function inject(){
+    let style=document.getElementById(STYLE_ID);
+    if(!style){style=document.createElement('style');style.id=STYLE_ID;(document.head||document.documentElement).appendChild(style);}
+    style.textContent=CSS;
+  }
+  inject();
+  if(document.readyState==='loading'){document.addEventListener('DOMContentLoaded',inject);}
+  window.addEventListener('barakaway:premium-theme-change',inject);
+  window.addEventListener('storage',inject);
+})();
+
+
+(function(){
+  const STYLE_ID='barakaway-theme-selector-card-material-lock-v20260510';
+  const CSS = `
+
+/* ===== BARAKAWAY THEME SELECTOR CARD MATERIAL LOCK — V20260510 ===== */
+/* Theme selector cards must never inherit the currently active PRO theme. */
+html body .page .theme-grid .theme-card,
+html[class*="premium-theme-"] body .page .theme-grid .theme-card{
+  color:#ffffff !important;
+  isolation:isolate !important;
+  overflow:hidden !important;
+  text-shadow:0 2px 10px rgba(0,0,0,.32) !important;
+}
+
+html body .page .theme-grid .theme-card h3,
+html body .page .theme-grid .theme-card p,
+html body .page .theme-grid .theme-card strong,
+html[class*="premium-theme-"] body .page .theme-grid .theme-card h3,
+html[class*="premium-theme-"] body .page .theme-grid .theme-card p,
+html[class*="premium-theme-"] body .page .theme-grid .theme-card strong{
+  color:#ffffff !important;
+  text-shadow:0 2px 10px rgba(0,0,0,.36) !important;
+}
+
+html body .page .theme-grid .theme-card .theme-chip,
+html[class*="premium-theme-"] body .page .theme-grid .theme-card .theme-chip{
+  background:rgba(0,0,0,.26) !important;
+  border-color:rgba(255,255,255,.22) !important;
+  color:#ffffff !important;
+}
+
+html body .page .theme-grid .theme-card.theme-gold,
+html body .page .theme-grid .theme-card[data-theme="royal-gold"],
+html[class*="premium-theme-"] body .page .theme-grid .theme-card.theme-gold,
+html[class*="premium-theme-"] body .page .theme-grid .theme-card[data-theme="royal-gold"]{
+  background-color:#171208 !important;
+  background-image:
+    linear-gradient(27deg, rgba(255,239,184,.15) 5%, transparent 5%, transparent 45%, rgba(255,239,184,.15) 45%, rgba(255,239,184,.15) 55%, transparent 55%, transparent),
+    linear-gradient(207deg, rgba(175,132,48,.13) 5%, transparent 5%, transparent 45%, rgba(175,132,48,.13) 45%, rgba(175,132,48,.13) 55%, transparent 55%, transparent),
+    linear-gradient(145deg,#171208 0%,#4b3615 52%,#d7c07a 100%) !important;
+  background-size:18px 18px,18px 18px,100% 100% !important;
+  background-position:0 0,9px 9px,center !important;
+  background-repeat:repeat,repeat,no-repeat !important;
+  border-color:rgba(244,220,148,.58) !important;
+}
+
+html body .page .theme-grid .theme-card.theme-emerald,
+html body .page .theme-grid .theme-card[data-theme="emerald-quran"],
+html[class*="premium-theme-"] body .page .theme-grid .theme-card.theme-emerald,
+html[class*="premium-theme-"] body .page .theme-grid .theme-card[data-theme="emerald-quran"]{
+  background-color:#061109 !important;
+  background-image:
+    linear-gradient(27deg, rgba(102,198,128,.14) 5%, transparent 5%, transparent 45%, rgba(102,198,128,.14) 45%, rgba(102,198,128,.14) 55%, transparent 55%, transparent),
+    linear-gradient(207deg, rgba(255,255,255,.07) 5%, transparent 5%, transparent 45%, rgba(255,255,255,.07) 45%, rgba(255,255,255,.07) 55%, transparent 55%, transparent),
+    linear-gradient(145deg,#061109 0%,#12301d 52%,#4caf6a 100%) !important;
+  background-size:18px 18px,18px 18px,100% 100% !important;
+  background-position:0 0,9px 9px,center !important;
+  background-repeat:repeat,repeat,no-repeat !important;
+  border-color:rgba(102,198,128,.58) !important;
+}
+
+html body .page .theme-grid .theme-card.theme-violet,
+html body .page .theme-grid .theme-card[data-theme="violet-noor"],
+html[class*="premium-theme-"] body .page .theme-grid .theme-card.theme-violet,
+html[class*="premium-theme-"] body .page .theme-grid .theme-card[data-theme="violet-noor"]{
+  background-color:#0d0a15 !important;
+  background-image:
+    linear-gradient(27deg, rgba(197,168,255,.14) 5%, transparent 5%, transparent 45%, rgba(197,168,255,.14) 45%, rgba(197,168,255,.14) 55%, transparent 55%, transparent),
+    linear-gradient(207deg, rgba(255,255,255,.07) 5%, transparent 5%, transparent 45%, rgba(255,255,255,.07) 45%, rgba(255,255,255,.07) 55%, transparent 55%, transparent),
+    linear-gradient(145deg,#0d0a15 0%,#241a42 52%,#a176ff 100%) !important;
+  background-size:18px 18px,18px 18px,100% 100% !important;
+  background-position:0 0,9px 9px,center !important;
+  background-repeat:repeat,repeat,no-repeat !important;
+  border-color:rgba(197,168,255,.58) !important;
+}
+
+html body .page .theme-grid .theme-card.theme-rose,
+html body .page .theme-grid .theme-card[data-theme="rose-soft"],
+html[class*="premium-theme-"] body .page .theme-grid .theme-card.theme-rose,
+html[class*="premium-theme-"] body .page .theme-grid .theme-card[data-theme="rose-soft"]{
+  background-color:#160a12 !important;
+  background-image:
+    radial-gradient(circle at 28px 28px, rgba(255,158,199,.18) 0 10px, transparent 11px),
+    linear-gradient(27deg, rgba(255,190,218,.13) 5%, transparent 5%, transparent 45%, rgba(255,190,218,.13) 45%, rgba(255,190,218,.13) 55%, transparent 55%, transparent),
+    linear-gradient(207deg, rgba(255,255,255,.07) 5%, transparent 5%, transparent 45%, rgba(255,255,255,.07) 45%, rgba(255,255,255,.07) 55%, transparent 55%, transparent),
+    linear-gradient(145deg,#160a12 0%,#401b31 52%,#ff9ec7 100%) !important;
+  background-size:96px 96px,18px 18px,18px 18px,100% 100% !important;
+  background-position:0 0,0 0,9px 9px,center !important;
+  background-repeat:repeat,repeat,repeat,no-repeat !important;
+  border-color:rgba(255,190,218,.58) !important;
+}
+
+html body .page .theme-grid .theme-card.theme-carbon,
+html body .page .theme-grid .theme-card[data-theme="carbon-elite"],
+html[class*="premium-theme-"] body .page .theme-grid .theme-card.theme-carbon,
+html[class*="premium-theme-"] body .page .theme-grid .theme-card[data-theme="carbon-elite"]{
+  background-color:#0b0f14 !important;
+  background-image:
+    linear-gradient(27deg, rgba(255,255,255,.10) 5%, transparent 5%, transparent 45%, rgba(255,255,255,.10) 45%, rgba(255,255,255,.10) 55%, transparent 55%, transparent),
+    linear-gradient(207deg, rgba(255,255,255,.06) 5%, transparent 5%, transparent 45%, rgba(255,255,255,.06) 45%, rgba(255,255,255,.06) 55%, transparent 55%, transparent),
+    linear-gradient(145deg,#07090c 0%,#1c232c 52%,#4b5562 100%) !important;
+  background-size:18px 18px,18px 18px,100% 100% !important;
+  background-position:0 0,9px 9px,center !important;
+  background-repeat:repeat,repeat,no-repeat !important;
+  border-color:rgba(255,255,255,.12) !important;
+}
+
+html body .page .theme-grid .theme-card.theme-child,
+html body .page .theme-grid .theme-card[data-theme="children-soft"],
+html[class*="premium-theme-"] body .page .theme-grid .theme-card.theme-child,
+html[class*="premium-theme-"] body .page .theme-grid .theme-card[data-theme="children-soft"]{
+  background-color:#07172a !important;
+  background-image:
+    linear-gradient(27deg, rgba(255,255,255,.13) 5%, transparent 5%, transparent 45%, rgba(255,255,255,.13) 45%, rgba(255,255,255,.13) 55%, transparent 55%, transparent),
+    linear-gradient(207deg, rgba(255,227,241,.10) 5%, transparent 5%, transparent 45%, rgba(255,227,241,.10) 45%, rgba(255,227,241,.10) 55%, transparent 55%, transparent),
+    radial-gradient(circle at 30px 34px, rgba(255,255,255,.34) 0 12px, transparent 12.8px),
+    radial-gradient(circle at 19px 24px, rgba(255,255,255,.28) 0 5.8px, transparent 6.4px),
+    radial-gradient(circle at 41px 24px, rgba(255,255,255,.28) 0 5.8px, transparent 6.4px),
+    linear-gradient(145deg,#07172a 0%,#225983 52%,#8fcfff 100%) !important;
+  background-size:18px 18px,18px 18px,96px 96px,96px 96px,96px 96px,100% 100% !important;
+  background-position:0 0,9px 9px,0 0,0 0,0 0,center !important;
+  background-repeat:repeat,repeat,repeat,repeat,repeat,no-repeat !important;
+  border-color:rgba(160,220,255,.46) !important;
+}
+
+html body .page .theme-grid .theme-card.theme-night,
+html body .page .theme-grid .theme-card[data-theme="night-mosque"],
+html[class*="premium-theme-"] body .page .theme-grid .theme-card.theme-night,
+html[class*="premium-theme-"] body .page .theme-grid .theme-card[data-theme="night-mosque"]{
+  background-color:#050b13 !important;
+  background-image:
+    radial-gradient(circle at 18px 18px, rgba(255,255,255,.48) 0 1.2px, transparent 1.8px),
+    radial-gradient(circle at 48px 31px, rgba(255,255,255,.40) 0 1px, transparent 1.6px),
+    radial-gradient(circle at 82px 16px, rgba(255,255,255,.44) 0 1.1px, transparent 1.7px),
+    radial-gradient(circle at 68px 34px, rgba(215,192,122,.30) 0 10px, transparent 10.8px),
+    linear-gradient(90deg, transparent 0 31%, rgba(215,192,122,.18) 31% 33%, transparent 33% 57%, rgba(215,192,122,.18) 57% 59%, transparent 59% 100%),
+    linear-gradient(27deg, rgba(215,192,122,.12) 5%, transparent 5%, transparent 45%, rgba(215,192,122,.12) 45%, rgba(215,192,122,.12) 55%, transparent 55%, transparent),
+    linear-gradient(207deg, rgba(124,167,255,.10) 5%, transparent 5%, transparent 45%, rgba(124,167,255,.10) 45%, rgba(124,167,255,.10) 55%, transparent 55%, transparent),
+    linear-gradient(145deg,#050b13 0%,#10213d 52%,#294f86 100%) !important;
+  background-size:120px 120px,120px 120px,120px 120px,120px 120px,120px 120px,18px 18px,18px 18px,100% 100% !important;
+  background-position:0 0,0 0,0 0,0 0,0 0,0 0,9px 9px,center !important;
+  background-repeat:repeat,repeat,repeat,repeat,repeat,repeat,repeat,no-repeat !important;
+  border-color:rgba(118,154,215,.44) !important;
+}
+
+html body .page .theme-grid .theme-card.theme-sand,
+html body .page .theme-grid .theme-card[data-theme="desert-sand"],
+html[class*="premium-theme-"] body .page .theme-grid .theme-card.theme-sand,
+html[class*="premium-theme-"] body .page .theme-grid .theme-card[data-theme="desert-sand"]{
+  background-color:#2b1906 !important;
+  background-image:
+    radial-gradient(circle at 2px 2px, rgba(255,237,190,.36) 0 1px, transparent 1.7px),
+    radial-gradient(circle at 10px 8px, rgba(219,174,97,.26) 0 1px, transparent 1.8px),
+    linear-gradient(27deg, rgba(255,237,190,.18) 5%, transparent 5%, transparent 45%, rgba(255,237,190,.18) 45%, rgba(255,237,190,.18) 55%, transparent 55%, transparent),
+    linear-gradient(207deg, rgba(120,72,18,.18) 5%, transparent 5%, transparent 45%, rgba(120,72,18,.18) 45%, rgba(120,72,18,.18) 55%, transparent 55%, transparent),
+    linear-gradient(145deg,#2b1906 0%,#8a6227 52%,#d7a85e 100%) !important;
+  background-size:16px 16px,18px 18px,18px 18px,18px 18px,100% 100% !important;
+  background-position:0 0,6px 8px,0 0,9px 9px,center !important;
+  background-repeat:repeat,repeat,repeat,repeat,no-repeat !important;
+  border-color:rgba(255,237,190,.48) !important;
+}
+
+html[class*="premium-theme-"] [class*="barakaway-logo"],
+html[class*="premium-theme-"] [class*="brand-logo"],
+html[class*="premium-theme-"] [class*="app-logo"],
+html[class*="premium-theme-"] [class*="logo"],
+html[class*="premium-theme-"] [data-logo],
+html[class*="premium-theme-"] [data-barakaway-logo-lock],
+html[class*="premium-theme-"] [class*="barakaway-logo"] *,
+html[class*="premium-theme-"] [class*="brand-logo"] *,
+html[class*="premium-theme-"] [class*="app-logo"] *,
+html[class*="premium-theme-"] [class*="logo"] *,
+html[class*="premium-theme-"] [data-logo] *,
+html[class*="premium-theme-"] [data-barakaway-logo-lock] *{
+  background:transparent !important;
+  background-color:transparent !important;
+  background-image:none !important;
+  box-shadow:none !important;
+  border-color:transparent !important;
+  outline-color:transparent !important;
+}
+/* ===== END BARAKAWAY THEME SELECTOR CARD MATERIAL LOCK — V20260510 ===== */
+`;
+  function inject(){
+    let style=document.getElementById(STYLE_ID);
+    if(!style){
+      style=document.createElement('style');
+      style.id=STYLE_ID;
+      (document.head||document.documentElement).appendChild(style);
+    }
+    style.textContent=CSS;
+  }
+  inject();
+  if(document.readyState==='loading') document.addEventListener('DOMContentLoaded', inject);
+  window.addEventListener('barakaway:premium-theme-change', inject);
+  setTimeout(inject,250);
+  setTimeout(inject,1000);
+})();
+
+
+(function(){
+  const NIGHT_STYLE_ID = 'barakaway-night-mosque-premium-polish';
+  if(document.getElementById(NIGHT_STYLE_ID)) return;
   const style = document.createElement('style');
-  style.id = STYLE_ID;
+  style.id = NIGHT_STYLE_ID;
   style.textContent = `
 
-/* ===== BARAKAWAY PREMIUM THEMES FINAL MATERIAL UPGRADE 2026-05-10 ===== */
-/* Carbon Elite remains the reference architecture. These three themes use the same full-surface material logic. */
-
-html.premium-theme-children-soft{
-  --bg:#071527;
-  --surface:#0a1b31;
-  --surface-2:#0e2744;
-  --surface-3:#14365c;
-  --border:rgba(138,196,255,.34);
-  --border-2:rgba(255,238,214,.42);
-  --text:#f7fbff;
-  --text-soft:#dceeff;
-  --text-muted:#a9cce9;
-  --green:#8fcaff;
-  --green-strong:#315f9a;
-  --green-soft:#fff1d8;
-  --bw-accent:#8fcaff;
-  --bw-accent-2:#fff1d8;
-}
-
+/* ===== BARAKAWAY NIGHT MOSQUE PREMIUM POLISH ===== */
 html.premium-theme-night-mosque{
-  --bg:#020712;
-  --surface:#051127;
-  --surface-2:#081a3a;
-  --surface-3:#0d2856;
-  --border:rgba(153,188,255,.30);
-  --border-2:rgba(215,232,255,.38);
-  --text:#f8fbff;
-  --text-soft:#dce9ff;
-  --text-muted:#9fbbe8;
-  --green:#d7e8ff;
-  --green-strong:#2d5790;
-  --green-soft:#ffffff;
-  --bw-accent:#d7e8ff;
-  --bw-accent-2:#79aaff;
+  --bg:#020716 !important;
+  --surface:#06122b !important;
+  --surface-2:#0a1a3d !important;
+  --surface-3:#123064 !important;
+  --border:rgba(138,174,255,.42) !important;
+  --border-2:rgba(215,192,122,.48) !important;
+  --text:#f8fbff !important;
+  --text-soft:#dce8ff !important;
+  --text-muted:#9fb8e6 !important;
+  --green:#d7c07a !important;
+  --green-strong:#264f91 !important;
+  --green-soft:#fff0b8 !important;
+  --bw-accent:#d7c07a !important;
+  --bw-accent-2:#88b4ff !important;
 }
-
-html.premium-theme-desert-sand{
-  --bg:#efe0bc;
-  --surface:#f6e7c6;
-  --surface-2:#e8c98f;
-  --surface-3:#c89955;
-  --border:rgba(119,82,35,.28);
-  --border-2:rgba(104,71,28,.34);
-  --text:#2d2112;
-  --text-soft:#443219;
-  --text-muted:#6f5128;
-  --green:#7a5221;
-  --green-strong:#8e642d;
-  --green-soft:#fff4d4;
-  --bw-accent:#8e642d;
-  --bw-accent-2:#c89955;
-}
-
-body .theme-grid .theme-card.theme-child,
-body .theme-grid .theme-card.bw-theme-sample-children-soft,
-body .theme-grid .theme-card[data-theme="children-soft"]{
-  background-color:#071527 !important;
+html.premium-theme-night-mosque body{
+  background-color:#020716 !important;
   background-image:
-    radial-gradient(circle at 85% 8%,rgba(143,202,255,.28),transparent 26%),
-    radial-gradient(circle at 16% 88%,rgba(255,241,216,.16),transparent 30%),
-    url("data:image/svg+xml,%3Csvg%20xmlns%3D%27http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%27%20width%3D%27156%27%20height%3D%27156%27%20viewBox%3D%270%200%20156%20156%27%3E%3Cg%20fill%3D%27none%27%20stroke%3D%27rgba%28255%2C238%2C214%2C.28%29%27%20stroke-width%3D%274%27%20stroke-linecap%3D%27round%27%20stroke-linejoin%3D%27round%27%3E%3Ccircle%20cx%3D%2754%27%20cy%3D%2762%27%20r%3D%2722%27%2F%3E%3Ccircle%20cx%3D%2734%27%20cy%3D%2742%27%20r%3D%2710%27%2F%3E%3Ccircle%20cx%3D%2774%27%20cy%3D%2742%27%20r%3D%2710%27%2F%3E%3Ccircle%20cx%3D%27102%27%20cy%3D%2784%27%20r%3D%2720%27%2F%3E%3Ccircle%20cx%3D%2784%27%20cy%3D%2763%27%20r%3D%279%27%2F%3E%3Ccircle%20cx%3D%27120%27%20cy%3D%2763%27%20r%3D%279%27%2F%3E%3Cpath%20d%3D%27M45%2068q9%209%2018%200M93%2090q9%209%2018%200%27%2F%3E%3Cpath%20d%3D%27M29%20118c16-15%2038-15%2054%200%2016-15%2038-15%2054%200%27%2F%3E%3C%2Fg%3E%3Cg%20fill%3D%27rgba%28255%2C255%2C255%2C.34%29%27%3E%3Ccircle%20cx%3D%2747%27%20cy%3D%2758%27%20r%3D%272.4%27%2F%3E%3Ccircle%20cx%3D%2761%27%20cy%3D%2758%27%20r%3D%272.4%27%2F%3E%3Ccircle%20cx%3D%2795%27%20cy%3D%2780%27%20r%3D%272.2%27%2F%3E%3Ccircle%20cx%3D%27109%27%20cy%3D%2780%27%20r%3D%272.2%27%2F%3E%3C%2Fg%3E%3C%2Fsvg%3E"),
-    linear-gradient(135deg,#061120 0%,#0d2746 52%,#1a4774 100%) !important;
-  background-size:100% 100%,100% 100%,156px 156px,100% 100% !important;
-  background-position:center,center,14px 12px,center !important;
-  background-repeat:no-repeat,no-repeat,repeat,no-repeat !important;
-  border-color:rgba(143,202,255,.38) !important;
-  color:#f7fbff !important;
-  box-shadow:0 24px 58px rgba(0,12,34,.48), inset 0 1px 0 rgba(255,255,255,.16), inset 0 -26px 40px rgba(0,0,0,.22) !important;
+    radial-gradient(circle at 12% 5%,rgba(255,255,255,.80) 0 1.1px,transparent 1.8px),
+    radial-gradient(circle at 31% 2%,rgba(255,255,255,.58) 0 1px,transparent 1.7px),
+    radial-gradient(circle at 61% 8%,rgba(255,255,255,.72) 0 1.1px,transparent 1.8px),
+    radial-gradient(circle at 91% 4%,rgba(255,255,255,.66) 0 1px,transparent 1.7px),
+    radial-gradient(circle at 84% 14%,rgba(215,192,122,.22),transparent 18%),
+    radial-gradient(circle at 18% 0%,rgba(75,124,220,.24),transparent 30%),
+    linear-gradient(180deg,#020716 0%,#06132e 42%,#081b3d 70%,#020716 100%) !important;
+  background-size:128px 128px,176px 176px,212px 212px,156px 156px,100% 100%,100% 100%,100% 100% !important;
+  background-position:0 0,22px 18px,44px 8px,10px 50px,center,center,center !important;
+  background-repeat:repeat,repeat,repeat,repeat,no-repeat,no-repeat,no-repeat !important;
 }
-
+html.premium-theme-night-mosque .container,
+html.premium-theme-night-mosque .hero,
+html.premium-theme-night-mosque .brand-prayer-hero,
+html.premium-theme-night-mosque .today-hub,
+html.premium-theme-night-mosque .about-project-card,
+html.premium-theme-night-mosque .barakaway-pro-final,
+html.premium-theme-night-mosque .block,
+html.premium-theme-night-mosque .card,
+html.premium-theme-night-mosque .box,
+html.premium-theme-night-mosque .panel,
+html.premium-theme-night-mosque .quote,
+html.premium-theme-night-mosque .empty,
+html.premium-theme-night-mosque .article,
+html.premium-theme-night-mosque .category-panel,
+html.premium-theme-night-mosque .surah-card,
+html.premium-theme-night-mosque .prayer-card,
+html.premium-theme-night-mosque .toggle-row,
+html.premium-theme-night-mosque .meta-item,
+html.premium-theme-night-mosque .note-box,
+html.premium-theme-night-mosque .jumuah-box,
+html.premium-theme-night-mosque .month-day,
+html.premium-theme-night-mosque .month-head,
+html.premium-theme-night-mosque .wallet-support,
+html.premium-theme-night-mosque .home-widget,
+html.premium-theme-night-mosque .dua-card,
+html.premium-theme-night-mosque .ayah-card,
+html.premium-theme-night-mosque .master-audio-wrap,
+html.premium-theme-night-mosque .reader-side,
+html.premium-theme-night-mosque .reader-main,
+html.premium-theme-night-mosque .dua-side,
+html.premium-theme-night-mosque .dua-main,
+html.premium-theme-night-mosque .ai-side,
+html.premium-theme-night-mosque .ai-main,
+html.premium-theme-night-mosque .player-panel,
+html.premium-theme-night-mosque .preview-panel,
+html.premium-theme-night-mosque .app-menu-btn,
+html.premium-theme-night-mosque .today-action,
+html.premium-theme-night-mosque .premium-resource-card,
+html.premium-theme-night-mosque .bottom-app-nav,
+html.premium-theme-night-mosque .bottom-app-nav-inner{
+  background-color:#06122b !important;
+  background-image:
+    linear-gradient(115deg,rgba(255,255,255,.055) 0%,transparent 42%,rgba(136,180,255,.09) 72%,transparent 100%),
+    radial-gradient(circle at 86% 8%,rgba(255,255,255,.72) 0 1.1px,transparent 1.9px),
+    radial-gradient(circle at 72% 30%,rgba(215,192,122,.18),transparent 16%),
+    linear-gradient(135deg,rgba(3,9,24,.96) 0%,rgba(7,20,48,.94) 54%,rgba(18,48,100,.88) 100%) !important;
+  background-size:100% 100%,118px 118px,100% 100%,100% 100% !important;
+  background-position:center,0 0,center,center !important;
+  background-repeat:no-repeat,repeat,no-repeat,no-repeat !important;
+  border-color:rgba(138,174,255,.34) !important;
+  box-shadow:0 20px 48px rgba(0,8,32,.48),inset 0 1px 0 rgba(255,255,255,.085) !important;
+}
 body .theme-grid .theme-card.theme-night,
 body .theme-grid .theme-card.bw-theme-sample-night-mosque,
-body .theme-grid .theme-card[data-theme="night-mosque"]{
-  background-color:#020712 !important;
+body .theme-grid .theme-card[data-theme="night-mosque"],
+html[class*="premium-theme-"] body .theme-grid .theme-card.theme-night,
+html[class*="premium-theme-"] body .theme-grid .theme-card.bw-theme-sample-night-mosque,
+html[class*="premium-theme-"] body .theme-grid .theme-card[data-theme="night-mosque"],
+html body .page .theme-grid .theme-card.theme-night,
+html body .page .theme-grid .theme-card[data-theme="night-mosque"]{
+  background-color:#06122b !important;
   background-image:
-    radial-gradient(circle at 50% 5%,rgba(102,157,255,.20),transparent 30%),
-    url("data:image/svg+xml,%3Csvg%20xmlns%3D%27http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%27%20width%3D%27220%27%20height%3D%27220%27%20viewBox%3D%270%200%20220%20220%27%3E%3Cg%20fill%3D%27rgba%28255%2C255%2C255%2C.92%29%27%3E%3Ccircle%20cx%3D%2714%27%20cy%3D%2718%27%20r%3D%271.1%27%2F%3E%3Ccircle%20cx%3D%2737%27%20cy%3D%2776%27%20r%3D%27.8%27%2F%3E%3Ccircle%20cx%3D%2758%27%20cy%3D%2728%27%20r%3D%271.5%27%2F%3E%3Ccircle%20cx%3D%2781%27%20cy%3D%27112%27%20r%3D%27.9%27%2F%3E%3Ccircle%20cx%3D%27105%27%20cy%3D%2747%27%20r%3D%271.2%27%2F%3E%3Ccircle%20cx%3D%27133%27%20cy%3D%2791%27%20r%3D%27.7%27%2F%3E%3Ccircle%20cx%3D%27162%27%20cy%3D%2726%27%20r%3D%271.4%27%2F%3E%3Ccircle%20cx%3D%27190%27%20cy%3D%2772%27%20r%3D%27.9%27%2F%3E%3Ccircle%20cx%3D%27207%27%20cy%3D%27139%27%20r%3D%271.1%27%2F%3E%3Ccircle%20cx%3D%2726%27%20cy%3D%27171%27%20r%3D%271.3%27%2F%3E%3Ccircle%20cx%3D%2769%27%20cy%3D%27197%27%20r%3D%27.7%27%2F%3E%3Ccircle%20cx%3D%27119%27%20cy%3D%27166%27%20r%3D%271.6%27%2F%3E%3Ccircle%20cx%3D%27151%27%20cy%3D%27188%27%20r%3D%27.8%27%2F%3E%3Ccircle%20cx%3D%27184%27%20cy%3D%27172%27%20r%3D%271.2%27%2F%3E%3Ccircle%20cx%3D%2797%27%20cy%3D%2712%27%20r%3D%27.65%27%2F%3E%3Ccircle%20cx%3D%27144%27%20cy%3D%27136%27%20r%3D%27.95%27%2F%3E%3C%2Fg%3E%3Cg%20fill%3D%27rgba%28169%2C205%2C255%2C.58%29%27%3E%3Ccircle%20cx%3D%2744%27%20cy%3D%27141%27%20r%3D%27.9%27%2F%3E%3Ccircle%20cx%3D%2774%27%20cy%3D%2764%27%20r%3D%27.7%27%2F%3E%3Ccircle%20cx%3D%27128%27%20cy%3D%2722%27%20r%3D%27.8%27%2F%3E%3Ccircle%20cx%3D%27176%27%20cy%3D%27110%27%20r%3D%27.7%27%2F%3E%3Ccircle%20cx%3D%27213%27%20cy%3D%2736%27%20r%3D%27.75%27%2F%3E%3C%2Fg%3E%3C%2Fsvg%3E"),
-    linear-gradient(180deg,#020712 0%,#071c3c 55%,#031023 100%) !important;
-  background-size:100% 100%,220px 220px,100% 100% !important;
-  background-position:center,0 0,center !important;
-  background-repeat:no-repeat,repeat,no-repeat !important;
-  border-color:rgba(153,188,255,.36) !important;
-  color:#f8fbff !important;
-  box-shadow:0 24px 58px rgba(0,8,32,.58), 0 0 34px rgba(120,160,255,.16), inset 0 1px 0 rgba(255,255,255,.16), inset 0 -26px 40px rgba(0,0,0,.34) !important;
+    linear-gradient(115deg,rgba(255,255,255,.10) 0%,transparent 34%,rgba(136,180,255,.13) 62%,transparent 100%),
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160' viewBox='0 0 160 160'%3E%3Cg fill='%23ffffff'%3E%3Ccircle cx='18' cy='18' r='1.25' fill-opacity='.78'/%3E%3Ccircle cx='52' cy='10' r='.9' fill-opacity='.55'/%3E%3Ccircle cx='93' cy='28' r='1.1' fill-opacity='.70'/%3E%3Ccircle cx='137' cy='16' r='.95' fill-opacity='.62'/%3E%3Ccircle cx='146' cy='75' r='1.1' fill-opacity='.68'/%3E%3Ccircle cx='30' cy='96' r='.95' fill-opacity='.58'/%3E%3Ccircle cx='78' cy='122' r='1.15' fill-opacity='.72'/%3E%3Ccircle cx='128' cy='137' r='.85' fill-opacity='.52'/%3E%3C/g%3E%3Cpath d='M62 39a18 18 0 1 1-18-18 13.5 13.5 0 1 0 18 18z' fill='%23d7c07a' fill-opacity='.72'/%3E%3Cg fill='none' stroke='%23d7c07a' stroke-opacity='.26' stroke-width='1.8' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M16 138h128'/%3E%3Cpath d='M32 138V97q11-24 22 0v41'/%3E%3Cpath d='M72 138V84q16-32 32 0v54'/%3E%3Cpath d='M116 138V101q10-22 20 0v37'/%3E%3Cpath d='M80 61h16M88 53v16'/%3E%3C/g%3E%3C/svg%3E"),
+    radial-gradient(circle at 84% 8%,rgba(255,255,255,.20),transparent 18%),
+    radial-gradient(circle at 16% 0%,rgba(82,132,230,.20),transparent 32%),
+    linear-gradient(145deg,#050b18 0%,#0b1b3c 52%,#244b82 100%) !important;
+  background-size:100% 100%,160px 160px,100% 100%,100% 100%,100% 100% !important;
+  background-position:center,0 0,center,center,center !important;
+  background-repeat:no-repeat,repeat,no-repeat,no-repeat,no-repeat !important;
+  border:1px solid rgba(138,174,255,.48) !important;
+  box-shadow:0 24px 58px rgba(0,8,32,.58),0 0 36px rgba(136,180,255,.14),inset 0 1px 0 rgba(255,255,255,.16),inset 0 -24px 38px rgba(0,0,0,.34) !important;
 }
-
-body .theme-grid .theme-card.theme-sand,
-body .theme-grid .theme-card.bw-theme-sample-desert-sand,
-body .theme-grid .theme-card[data-theme="desert-sand"]{
-  background-color:#efe0bc !important;
-  background-image:
-    radial-gradient(circle at 20% 35%,rgba(255,248,226,.46) 0 1px,transparent 1.5px),
-    radial-gradient(circle at 78% 62%,rgba(143,99,42,.18) 0 1px,transparent 1.6px),
-    linear-gradient(16deg,rgba(255,248,226,.32) 0 12%,transparent 13% 38%,rgba(187,138,69,.18) 39% 52%,transparent 53%),
-    radial-gradient(ellipse at 18% 8%,rgba(255,250,234,.45),transparent 34%),
-    linear-gradient(135deg,#f7e9c8 0%,#dfbd7c 54%,#b9823e 100%) !important;
-  background-size:14px 14px,18px 18px,180px 90px,100% 100%,100% 100% !important;
-  background-position:0 0,7px 9px,0 0,center,center !important;
-  background-repeat:repeat,repeat,repeat,no-repeat,no-repeat !important;
-  border-color:rgba(119,82,35,.30) !important;
-  color:#2d2112 !important;
-  box-shadow:0 24px 58px rgba(120,82,33,.28), 0 0 0 1px rgba(255,245,218,.24), inset 0 1px 0 rgba(255,255,255,.34), inset 0 -26px 40px rgba(92,58,20,.14) !important;
-}
-
-body .theme-grid .theme-card.theme-child h3,
-body .theme-grid .theme-card.theme-child p,
-body .theme-grid .theme-card.theme-child strong,
-body .theme-grid .theme-card.bw-theme-sample-children-soft h3,
-body .theme-grid .theme-card.bw-theme-sample-children-soft p,
-body .theme-grid .theme-card.bw-theme-sample-children-soft strong,
-body .theme-grid .theme-card[data-theme="children-soft"] h3,
-body .theme-grid .theme-card[data-theme="children-soft"] p,
-body .theme-grid .theme-card[data-theme="children-soft"] strong,
 body .theme-grid .theme-card.theme-night h3,
 body .theme-grid .theme-card.theme-night p,
 body .theme-grid .theme-card.theme-night strong,
@@ -1806,575 +2215,10 @@ body .theme-grid .theme-card.bw-theme-sample-night-mosque strong,
 body .theme-grid .theme-card[data-theme="night-mosque"] h3,
 body .theme-grid .theme-card[data-theme="night-mosque"] p,
 body .theme-grid .theme-card[data-theme="night-mosque"] strong{
-  color:#f8fbff !important;
-  text-shadow:0 2px 14px rgba(0,0,0,.72) !important;
-}
-
-body .theme-grid .theme-card.theme-sand h3,
-body .theme-grid .theme-card.theme-sand p,
-body .theme-grid .theme-card.theme-sand strong,
-body .theme-grid .theme-card.bw-theme-sample-desert-sand h3,
-body .theme-grid .theme-card.bw-theme-sample-desert-sand p,
-body .theme-grid .theme-card.bw-theme-sample-desert-sand strong,
-body .theme-grid .theme-card[data-theme="desert-sand"] h3,
-body .theme-grid .theme-card[data-theme="desert-sand"] p,
-body .theme-grid .theme-card[data-theme="desert-sand"] strong{
-  color:#2d2112 !important;
-  text-shadow:0 1px 9px rgba(255,248,226,.72) !important;
-}
-
-html.premium-theme-children-soft body,
-html.premium-theme-children-soft .container,
-html.premium-theme-children-soft .hero,
-html.premium-theme-children-soft .brand-prayer-hero,
-html.premium-theme-children-soft .today-hub,
-html.premium-theme-children-soft .about-project-card,
-html.premium-theme-children-soft .barakaway-pro-final,
-html.premium-theme-children-soft .block,
-html.premium-theme-children-soft .card,
-html.premium-theme-children-soft .box,
-html.premium-theme-children-soft .panel,
-html.premium-theme-children-soft .quote,
-html.premium-theme-children-soft .empty,
-html.premium-theme-children-soft .article,
-html.premium-theme-children-soft .category-panel,
-html.premium-theme-children-soft .surah-card,
-html.premium-theme-children-soft .prayer-card,
-html.premium-theme-children-soft .toggle-row,
-html.premium-theme-children-soft .meta-item,
-html.premium-theme-children-soft .note-box,
-html.premium-theme-children-soft .jumuah-box,
-html.premium-theme-children-soft .month-day,
-html.premium-theme-children-soft .month-head,
-html.premium-theme-children-soft .wallet-support,
-html.premium-theme-children-soft .home-widget,
-html.premium-theme-children-soft .dua-card,
-html.premium-theme-children-soft .ayah-card,
-html.premium-theme-children-soft .master-audio-wrap,
-html.premium-theme-children-soft .reader-side,
-html.premium-theme-children-soft .reader-main,
-html.premium-theme-children-soft .dua-side,
-html.premium-theme-children-soft .dua-main,
-html.premium-theme-children-soft .ai-side,
-html.premium-theme-children-soft .ai-main,
-html.premium-theme-children-soft .player-panel,
-html.premium-theme-children-soft .preview-panel,
-html.premium-theme-children-soft .app-menu-btn,
-html.premium-theme-children-soft .today-action,
-html.premium-theme-children-soft .premium-resource-card,
-html.premium-theme-children-soft .bottom-app-nav,
-html.premium-theme-children-soft .bottom-app-nav-inner{
-  background-color:#071527 !important;
-  background-image:
-    radial-gradient(circle at 82% 4%,rgba(143,202,255,.18),transparent 30%),
-    radial-gradient(circle at 12% 92%,rgba(255,241,216,.10),transparent 32%),
-    url("data:image/svg+xml,%3Csvg%20xmlns%3D%27http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%27%20width%3D%27156%27%20height%3D%27156%27%20viewBox%3D%270%200%20156%20156%27%3E%3Cg%20fill%3D%27none%27%20stroke%3D%27rgba%28255%2C238%2C214%2C.28%29%27%20stroke-width%3D%274%27%20stroke-linecap%3D%27round%27%20stroke-linejoin%3D%27round%27%3E%3Ccircle%20cx%3D%2754%27%20cy%3D%2762%27%20r%3D%2722%27%2F%3E%3Ccircle%20cx%3D%2734%27%20cy%3D%2742%27%20r%3D%2710%27%2F%3E%3Ccircle%20cx%3D%2774%27%20cy%3D%2742%27%20r%3D%2710%27%2F%3E%3Ccircle%20cx%3D%27102%27%20cy%3D%2784%27%20r%3D%2720%27%2F%3E%3Ccircle%20cx%3D%2784%27%20cy%3D%2763%27%20r%3D%279%27%2F%3E%3Ccircle%20cx%3D%27120%27%20cy%3D%2763%27%20r%3D%279%27%2F%3E%3Cpath%20d%3D%27M45%2068q9%209%2018%200M93%2090q9%209%2018%200%27%2F%3E%3Cpath%20d%3D%27M29%20118c16-15%2038-15%2054%200%2016-15%2038-15%2054%200%27%2F%3E%3C%2Fg%3E%3Cg%20fill%3D%27rgba%28255%2C255%2C255%2C.34%29%27%3E%3Ccircle%20cx%3D%2747%27%20cy%3D%2758%27%20r%3D%272.4%27%2F%3E%3Ccircle%20cx%3D%2761%27%20cy%3D%2758%27%20r%3D%272.4%27%2F%3E%3Ccircle%20cx%3D%2795%27%20cy%3D%2780%27%20r%3D%272.2%27%2F%3E%3Ccircle%20cx%3D%27109%27%20cy%3D%2780%27%20r%3D%272.2%27%2F%3E%3C%2Fg%3E%3C%2Fsvg%3E"),
-    linear-gradient(135deg,rgba(5,14,28,.96) 0%,rgba(10,31,55,.94) 56%,rgba(20,54,92,.94) 100%) !important;
-  background-size:100% 100%,100% 100%,156px 156px,100% 100% !important;
-  background-position:center,center,16px 12px,center !important;
-  background-repeat:no-repeat,no-repeat,repeat,no-repeat !important;
-  border-color:rgba(143,202,255,.30) !important;
-}
-
-html.premium-theme-night-mosque body,
-html.premium-theme-night-mosque .container,
-html.premium-theme-night-mosque .hero,
-html.premium-theme-night-mosque .brand-prayer-hero,
-html.premium-theme-night-mosque .today-hub,
-html.premium-theme-night-mosque .about-project-card,
-html.premium-theme-night-mosque .barakaway-pro-final,
-html.premium-theme-night-mosque .block,
-html.premium-theme-night-mosque .card,
-html.premium-theme-night-mosque .box,
-html.premium-theme-night-mosque .panel,
-html.premium-theme-night-mosque .quote,
-html.premium-theme-night-mosque .empty,
-html.premium-theme-night-mosque .article,
-html.premium-theme-night-mosque .category-panel,
-html.premium-theme-night-mosque .surah-card,
-html.premium-theme-night-mosque .prayer-card,
-html.premium-theme-night-mosque .toggle-row,
-html.premium-theme-night-mosque .meta-item,
-html.premium-theme-night-mosque .note-box,
-html.premium-theme-night-mosque .jumuah-box,
-html.premium-theme-night-mosque .month-day,
-html.premium-theme-night-mosque .month-head,
-html.premium-theme-night-mosque .wallet-support,
-html.premium-theme-night-mosque .home-widget,
-html.premium-theme-night-mosque .dua-card,
-html.premium-theme-night-mosque .ayah-card,
-html.premium-theme-night-mosque .master-audio-wrap,
-html.premium-theme-night-mosque .reader-side,
-html.premium-theme-night-mosque .reader-main,
-html.premium-theme-night-mosque .dua-side,
-html.premium-theme-night-mosque .dua-main,
-html.premium-theme-night-mosque .ai-side,
-html.premium-theme-night-mosque .ai-main,
-html.premium-theme-night-mosque .player-panel,
-html.premium-theme-night-mosque .preview-panel,
-html.premium-theme-night-mosque .app-menu-btn,
-html.premium-theme-night-mosque .today-action,
-html.premium-theme-night-mosque .premium-resource-card,
-html.premium-theme-night-mosque .bottom-app-nav,
-html.premium-theme-night-mosque .bottom-app-nav-inner{
-  background-color:#020712 !important;
-  background-image:
-    radial-gradient(circle at 52% 0%,rgba(105,162,255,.18),transparent 30%),
-    url("data:image/svg+xml,%3Csvg%20xmlns%3D%27http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%27%20width%3D%27220%27%20height%3D%27220%27%20viewBox%3D%270%200%20220%20220%27%3E%3Cg%20fill%3D%27rgba%28255%2C255%2C255%2C.92%29%27%3E%3Ccircle%20cx%3D%2714%27%20cy%3D%2718%27%20r%3D%271.1%27%2F%3E%3Ccircle%20cx%3D%2737%27%20cy%3D%2776%27%20r%3D%27.8%27%2F%3E%3Ccircle%20cx%3D%2758%27%20cy%3D%2728%27%20r%3D%271.5%27%2F%3E%3Ccircle%20cx%3D%2781%27%20cy%3D%27112%27%20r%3D%27.9%27%2F%3E%3Ccircle%20cx%3D%27105%27%20cy%3D%2747%27%20r%3D%271.2%27%2F%3E%3Ccircle%20cx%3D%27133%27%20cy%3D%2791%27%20r%3D%27.7%27%2F%3E%3Ccircle%20cx%3D%27162%27%20cy%3D%2726%27%20r%3D%271.4%27%2F%3E%3Ccircle%20cx%3D%27190%27%20cy%3D%2772%27%20r%3D%27.9%27%2F%3E%3Ccircle%20cx%3D%27207%27%20cy%3D%27139%27%20r%3D%271.1%27%2F%3E%3Ccircle%20cx%3D%2726%27%20cy%3D%27171%27%20r%3D%271.3%27%2F%3E%3Ccircle%20cx%3D%2769%27%20cy%3D%27197%27%20r%3D%27.7%27%2F%3E%3Ccircle%20cx%3D%27119%27%20cy%3D%27166%27%20r%3D%271.6%27%2F%3E%3Ccircle%20cx%3D%27151%27%20cy%3D%27188%27%20r%3D%27.8%27%2F%3E%3Ccircle%20cx%3D%27184%27%20cy%3D%27172%27%20r%3D%271.2%27%2F%3E%3Ccircle%20cx%3D%2797%27%20cy%3D%2712%27%20r%3D%27.65%27%2F%3E%3Ccircle%20cx%3D%27144%27%20cy%3D%27136%27%20r%3D%27.95%27%2F%3E%3C%2Fg%3E%3Cg%20fill%3D%27rgba%28169%2C205%2C255%2C.58%29%27%3E%3Ccircle%20cx%3D%2744%27%20cy%3D%27141%27%20r%3D%27.9%27%2F%3E%3Ccircle%20cx%3D%2774%27%20cy%3D%2764%27%20r%3D%27.7%27%2F%3E%3Ccircle%20cx%3D%27128%27%20cy%3D%2722%27%20r%3D%27.8%27%2F%3E%3Ccircle%20cx%3D%27176%27%20cy%3D%27110%27%20r%3D%27.7%27%2F%3E%3Ccircle%20cx%3D%27213%27%20cy%3D%2736%27%20r%3D%27.75%27%2F%3E%3C%2Fg%3E%3C%2Fsvg%3E"),
-    linear-gradient(180deg,rgba(2,7,18,.98) 0%,rgba(7,28,60,.94) 55%,rgba(3,16,35,.98) 100%) !important;
-  background-size:100% 100%,220px 220px,100% 100% !important;
-  background-position:center,0 0,center !important;
-  background-repeat:no-repeat,repeat,no-repeat !important;
-  border-color:rgba(153,188,255,.28) !important;
-}
-
-html.premium-theme-desert-sand body,
-html.premium-theme-desert-sand .container,
-html.premium-theme-desert-sand .hero,
-html.premium-theme-desert-sand .brand-prayer-hero,
-html.premium-theme-desert-sand .today-hub,
-html.premium-theme-desert-sand .about-project-card,
-html.premium-theme-desert-sand .barakaway-pro-final,
-html.premium-theme-desert-sand .block,
-html.premium-theme-desert-sand .card,
-html.premium-theme-desert-sand .box,
-html.premium-theme-desert-sand .panel,
-html.premium-theme-desert-sand .quote,
-html.premium-theme-desert-sand .empty,
-html.premium-theme-desert-sand .article,
-html.premium-theme-desert-sand .category-panel,
-html.premium-theme-desert-sand .surah-card,
-html.premium-theme-desert-sand .prayer-card,
-html.premium-theme-desert-sand .toggle-row,
-html.premium-theme-desert-sand .meta-item,
-html.premium-theme-desert-sand .note-box,
-html.premium-theme-desert-sand .jumuah-box,
-html.premium-theme-desert-sand .month-day,
-html.premium-theme-desert-sand .month-head,
-html.premium-theme-desert-sand .wallet-support,
-html.premium-theme-desert-sand .home-widget,
-html.premium-theme-desert-sand .dua-card,
-html.premium-theme-desert-sand .ayah-card,
-html.premium-theme-desert-sand .master-audio-wrap,
-html.premium-theme-desert-sand .reader-side,
-html.premium-theme-desert-sand .reader-main,
-html.premium-theme-desert-sand .dua-side,
-html.premium-theme-desert-sand .dua-main,
-html.premium-theme-desert-sand .ai-side,
-html.premium-theme-desert-sand .ai-main,
-html.premium-theme-desert-sand .player-panel,
-html.premium-theme-desert-sand .preview-panel,
-html.premium-theme-desert-sand .app-menu-btn,
-html.premium-theme-desert-sand .today-action,
-html.premium-theme-desert-sand .premium-resource-card,
-html.premium-theme-desert-sand .bottom-app-nav,
-html.premium-theme-desert-sand .bottom-app-nav-inner{
-  background-color:#efe0bc !important;
-  background-image:
-    radial-gradient(circle at 20% 35%,rgba(255,248,226,.44) 0 1px,transparent 1.5px),
-    radial-gradient(circle at 78% 62%,rgba(143,99,42,.16) 0 1px,transparent 1.6px),
-    linear-gradient(16deg,rgba(255,248,226,.30) 0 12%,transparent 13% 38%,rgba(187,138,69,.16) 39% 52%,transparent 53%),
-    radial-gradient(ellipse at 18% 8%,rgba(255,250,234,.38),transparent 34%),
-    linear-gradient(135deg,rgba(247,233,200,.96) 0%,rgba(223,189,124,.94) 54%,rgba(185,130,62,.94) 100%) !important;
-  background-size:14px 14px,18px 18px,180px 90px,100% 100%,100% 100% !important;
-  background-position:0 0,7px 9px,0 0,center,center !important;
-  background-repeat:repeat,repeat,repeat,no-repeat,no-repeat !important;
-  border-color:rgba(119,82,35,.26) !important;
-}
-
-html.premium-theme-children-soft h1,
-html.premium-theme-children-soft h2,
-html.premium-theme-children-soft h3,
-html.premium-theme-children-soft h4,
-html.premium-theme-children-soft h5,
-html.premium-theme-children-soft p,
-html.premium-theme-children-soft li,
-html.premium-theme-children-soft .subtitle,
-html.premium-theme-children-soft .note,
-html.premium-theme-children-soft .muted,
-html.premium-theme-night-mosque h1,
-html.premium-theme-night-mosque h2,
-html.premium-theme-night-mosque h3,
-html.premium-theme-night-mosque h4,
-html.premium-theme-night-mosque h5,
-html.premium-theme-night-mosque p,
-html.premium-theme-night-mosque li,
-html.premium-theme-night-mosque .subtitle,
-html.premium-theme-night-mosque .note,
-html.premium-theme-night-mosque .muted{
-  color:var(--text) !important;
-  text-shadow:0 2px 14px rgba(0,0,0,.62) !important;
-}
-
-html.premium-theme-desert-sand h1,
-html.premium-theme-desert-sand h2,
-html.premium-theme-desert-sand h3,
-html.premium-theme-desert-sand h4,
-html.premium-theme-desert-sand h5,
-html.premium-theme-desert-sand p,
-html.premium-theme-desert-sand li,
-html.premium-theme-desert-sand .subtitle,
-html.premium-theme-desert-sand .note,
-html.premium-theme-desert-sand .muted{
-  color:#2d2112 !important;
-  text-shadow:0 1px 8px rgba(255,248,226,.62) !important;
-}
-
-html.premium-theme-children-soft .barakaway-logo,
-html.premium-theme-children-soft .brand-logo,
-html.premium-theme-children-soft .app-logo,
-html.premium-theme-children-soft .logo,
-html.premium-theme-children-soft [data-logo],
-html.premium-theme-night-mosque .barakaway-logo,
-html.premium-theme-night-mosque .brand-logo,
-html.premium-theme-night-mosque .app-logo,
-html.premium-theme-night-mosque .logo,
-html.premium-theme-night-mosque [data-logo],
-html.premium-theme-desert-sand .barakaway-logo,
-html.premium-theme-desert-sand .brand-logo,
-html.premium-theme-desert-sand .app-logo,
-html.premium-theme-desert-sand .logo,
-html.premium-theme-desert-sand [data-logo],
-html.premium-theme-children-soft .bw-logo-transparent-lock,
-html.premium-theme-night-mosque .bw-logo-transparent-lock,
-html.premium-theme-desert-sand .bw-logo-transparent-lock{
-  background:transparent !important;
-  background-color:transparent !important;
-  background-image:none !important;
-  box-shadow:none !important;
-  border-color:transparent !important;
-}
-/* ===== END BARAKAWAY PREMIUM THEMES FINAL MATERIAL UPGRADE ===== */
-`;
-  (document.head || document.documentElement).appendChild(style);
-})();
-
-
-(function(){
-  const STYLE_ID = 'barakaway-theme-cards-carbon-parity-final-fix';
-  if(document.getElementById(STYLE_ID)) return;
-  const style = document.createElement('style');
-  style.id = STYLE_ID;
-  style.textContent = `
-
-/* ===== BARAKAWAY THEME CARDS CARBON-PARITY FINAL FIX ===== */
-/* Selector cards are protected from the active app theme and visually show the real theme before selection. */
-.theme-grid .theme-card.theme-child,
-.theme-grid .theme-card.theme-night,
-.theme-grid .theme-card.theme-sand,
-html[class*="premium-theme-"] .theme-grid .theme-card.theme-child,
-html[class*="premium-theme-"] .theme-grid .theme-card.theme-night,
-html[class*="premium-theme-"] .theme-grid .theme-card.theme-sand,
-html[class*="premium-theme-"] .theme-card[data-theme="children-soft"],
-html[class*="premium-theme-"] .theme-card[data-theme="night-mosque"],
-html[class*="premium-theme-"] .theme-card[data-theme="desert-sand"]{
-  position:relative !important;
-  overflow:hidden !important;
-  isolation:isolate !important;
-  border-width:1px !important;
-  box-shadow:
-    0 24px 56px rgba(0,0,0,.42),
-    0 0 0 1px rgba(255,255,255,.055),
-    inset 0 1px 0 rgba(255,255,255,.15),
-    inset 0 -22px 34px rgba(0,0,0,.24) !important;
-}
-
-/* Детская тема — premium dark-blue card with CSS teddy-bear pattern */
-.theme-grid .theme-card.theme-child,
-html[class*="premium-theme-"] .theme-grid .theme-card.theme-child,
-html[class*="premium-theme-"] .theme-card[data-theme="children-soft"]{
-  background-color:#071527 !important;
-  background-image:
-    radial-gradient(circle at 86% 10%,rgba(180,219,255,.42),transparent 26%),
-    radial-gradient(circle at 18% 92%,rgba(255,214,232,.18),transparent 30%),
-    url("data:image/svg+xml,%3Csvg%20xmlns%3D%27http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%27%20width%3D%27172%27%20height%3D%27172%27%20viewBox%3D%270%200%20172%20172%27%3E%3Cg%20fill%3D%27none%27%20stroke%3D%27rgba%28255%2C239%2C218%2C.34%29%27%20stroke-width%3D%274.2%27%20stroke-linecap%3D%27round%27%20stroke-linejoin%3D%27round%27%3E%3Ccircle%20cx%3D%2754%27%20cy%3D%2766%27%20r%3D%2724%27%2F%3E%3Ccircle%20cx%3D%2732%27%20cy%3D%2744%27%20r%3D%2711%27%2F%3E%3Ccircle%20cx%3D%2776%27%20cy%3D%2744%27%20r%3D%2711%27%2F%3E%3Ccircle%20cx%3D%27114%27%20cy%3D%2793%27%20r%3D%2722%27%2F%3E%3Ccircle%20cx%3D%2795%27%20cy%3D%2770%27%20r%3D%279%27%2F%3E%3Ccircle%20cx%3D%27133%27%20cy%3D%2770%27%20r%3D%279%27%2F%3E%3Cpath%20d%3D%27M45%2073q9%208%2018%200M105%2099q9%208%2018%200%27%2F%3E%3Cpath%20d%3D%27M28%20134c18-17%2042-17%2060%200%2018-17%2042-17%2060%200%27%2F%3E%3C%2Fg%3E%3Cg%20fill%3D%27rgba%28255%2C255%2C255%2C.40%29%27%3E%3Ccircle%20cx%3D%2747%27%20cy%3D%2762%27%20r%3D%272.3%27%2F%3E%3Ccircle%20cx%3D%2761%27%20cy%3D%2762%27%20r%3D%272.3%27%2F%3E%3Ccircle%20cx%3D%27107%27%20cy%3D%2788%27%20r%3D%272.1%27%2F%3E%3Ccircle%20cx%3D%27121%27%20cy%3D%2788%27%20r%3D%272.1%27%2F%3E%3C%2Fg%3E%3C%2Fsvg%3E"),
-    linear-gradient(135deg,#071527 0%,#113052 48%,#69b7ed 100%) !important;
-  background-size:100% 100%,100% 100%,172px 172px,100% 100% !important;
-  background-position:center,center,18px 18px,center !important;
-  background-repeat:no-repeat,no-repeat,repeat,no-repeat !important;
-  border-color:rgba(154,211,255,.36) !important;
-}
-
-/* Ночная мечеть — only premium blue night sky and randomly placed stars; no moon, no mosque */
-.theme-grid .theme-card.theme-night,
-html[class*="premium-theme-"] .theme-grid .theme-card.theme-night,
-html[class*="premium-theme-"] .theme-card[data-theme="night-mosque"]{
-  background-color:#020713 !important;
-  background-image:
-    radial-gradient(circle at 12% 18%,rgba(255,255,255,.95) 0 1px,transparent 1.6px),
-    radial-gradient(circle at 31% 72%,rgba(255,255,255,.86) 0 .8px,transparent 1.4px),
-    radial-gradient(circle at 57% 34%,rgba(199,221,255,.92) 0 1.2px,transparent 1.9px),
-    radial-gradient(circle at 78% 68%,rgba(255,255,255,.72) 0 .9px,transparent 1.5px),
-    radial-gradient(circle at 91% 22%,rgba(180,210,255,.86) 0 1.1px,transparent 1.7px),
-    radial-gradient(circle at 48% 6%,rgba(105,162,255,.22),transparent 31%),
-    linear-gradient(135deg,#020713 0%,#081b3c 52%,#183f75 100%) !important;
-  background-size:97px 83px,137px 109px,173px 131px,211px 157px,149px 181px,100% 100%,100% 100% !important;
-  background-position:0 0,17px 11px,31px 19px,7px 23px,43px 5px,center,center !important;
-  background-repeat:repeat,repeat,repeat,repeat,repeat,no-repeat,no-repeat !important;
-  border-color:rgba(153,188,255,.34) !important;
-}
-
-/* Песочная классика — light sand texture, dark text */
-.theme-grid .theme-card.theme-sand,
-html[class*="premium-theme-"] .theme-grid .theme-card.theme-sand,
-html[class*="premium-theme-"] .theme-card[data-theme="desert-sand"]{
-  background-color:#efd9a5 !important;
-  background-image:
-    radial-gradient(circle at 18% 32%,rgba(255,248,226,.62) 0 1px,transparent 1.45px),
-    radial-gradient(circle at 72% 66%,rgba(142,94,38,.22) 0 1px,transparent 1.55px),
-    linear-gradient(14deg,rgba(255,250,231,.42) 0 12%,transparent 13% 38%,rgba(185,129,58,.20) 39% 54%,transparent 55%),
-    radial-gradient(ellipse at 18% 10%,rgba(255,250,235,.48),transparent 34%),
-    linear-gradient(135deg,#f8eac7 0%,#dfbd7c 54%,#b9863f 100%) !important;
-  background-size:13px 13px,19px 19px,190px 92px,100% 100%,100% 100% !important;
-  background-position:0 0,8px 9px,0 0,center,center !important;
-  background-repeat:repeat,repeat,repeat,no-repeat,no-repeat !important;
-  border-color:rgba(122,82,31,.34) !important;
-}
-
-.theme-grid .theme-card.theme-child h3,
-.theme-grid .theme-card.theme-child p,
-.theme-grid .theme-card.theme-night h3,
-.theme-grid .theme-card.theme-night p,
-html[class*="premium-theme-"] .theme-card[data-theme="children-soft"] h3,
-html[class*="premium-theme-"] .theme-card[data-theme="children-soft"] p,
-html[class*="premium-theme-"] .theme-card[data-theme="night-mosque"] h3,
-html[class*="premium-theme-"] .theme-card[data-theme="night-mosque"] p{
   color:#ffffff !important;
-  text-shadow:0 2px 14px rgba(0,0,0,.60) !important;
+  text-shadow:0 2px 16px rgba(0,0,0,.72) !important;
 }
-
-.theme-grid .theme-card.theme-sand h3,
-.theme-grid .theme-card.theme-sand p,
-html[class*="premium-theme-"] .theme-card[data-theme="desert-sand"] h3,
-html[class*="premium-theme-"] .theme-card[data-theme="desert-sand"] p{
-  color:#2b2114 !important;
-  text-shadow:0 1px 8px rgba(255,248,226,.75) !important;
-}
-
-.theme-grid .theme-card.theme-sand .theme-chip,
-html[class*="premium-theme-"] .theme-card[data-theme="desert-sand"] .theme-chip{
-  background:rgba(55,36,14,.18) !important;
-  border-color:rgba(55,36,14,.22) !important;
-  color:#2b2114 !important;
-}
-
-/* Full application after selection — carbon-style coverage for the three material themes. */
-html.premium-theme-children-soft{
-  --bg:#071527; --surface:#0a1d34; --surface-2:#102d4d; --surface-3:#173e68;
-  --border:rgba(154,211,255,.30); --border-2:rgba(255,229,241,.34);
-  --text:#f7fbff; --text-soft:#d7ecff; --text-muted:#afd4f3;
-  --green:#9ad3ff; --green-strong:#347eb7; --green-soft:#e6f6ff;
-  --bw-accent:#9ad3ff; --bw-accent-2:#ffe5f1;
-}
-
-html.premium-theme-night-mosque{
-  --bg:#020713; --surface:#071429; --surface-2:#0d2144; --surface-3:#143363;
-  --border:rgba(153,188,255,.28); --border-2:rgba(207,226,255,.34);
-  --text:#f5f8ff; --text-soft:#cbdaf3; --text-muted:#92abd2;
-  --green:#d8e7ff; --green-strong:#315c9a; --green-soft:#edf5ff;
-  --bw-accent:#d8e7ff; --bw-accent-2:#74a8ff;
-}
-
-html.premium-theme-desert-sand{
-  --bg:#e9d19a; --surface:#f2dfb0; --surface-2:#e7c987; --surface-3:#d5aa5d;
-  --border:rgba(122,82,31,.24); --border-2:rgba(87,57,21,.30);
-  --text:#2b2114; --text-soft:#4b3921; --text-muted:#725533;
-  --green:#7a5622; --green-strong:#8c6026; --green-soft:#3a2a16;
-  --bw-accent:#7a5622; --bw-accent-2:#fff4cf;
-}
-
-html.premium-theme-children-soft body,
-html.premium-theme-children-soft .container,
-html.premium-theme-children-soft .hero,
-html.premium-theme-children-soft .brand-prayer-hero,
-html.premium-theme-children-soft .today-hub,
-html.premium-theme-children-soft .about-project-card,
-html.premium-theme-children-soft .barakaway-pro-final,
-html.premium-theme-children-soft .block,
-html.premium-theme-children-soft .card,
-html.premium-theme-children-soft .box,
-html.premium-theme-children-soft .panel,
-html.premium-theme-children-soft .quote,
-html.premium-theme-children-soft .empty,
-html.premium-theme-children-soft .article,
-html.premium-theme-children-soft .category-panel,
-html.premium-theme-children-soft .surah-card,
-html.premium-theme-children-soft .prayer-card,
-html.premium-theme-children-soft .toggle-row,
-html.premium-theme-children-soft .meta-item,
-html.premium-theme-children-soft .note-box,
-html.premium-theme-children-soft .jumuah-box,
-html.premium-theme-children-soft .month-day,
-html.premium-theme-children-soft .month-head,
-html.premium-theme-children-soft .wallet-support,
-html.premium-theme-children-soft .home-widget,
-html.premium-theme-children-soft .dua-card,
-html.premium-theme-children-soft .ayah-card,
-html.premium-theme-children-soft .master-audio-wrap,
-html.premium-theme-children-soft .reader-side,
-html.premium-theme-children-soft .reader-main,
-html.premium-theme-children-soft .dua-side,
-html.premium-theme-children-soft .dua-main,
-html.premium-theme-children-soft .ai-side,
-html.premium-theme-children-soft .ai-main,
-html.premium-theme-children-soft .player-panel,
-html.premium-theme-children-soft .preview-panel,
-html.premium-theme-children-soft .app-menu-btn,
-html.premium-theme-children-soft .today-action,
-html.premium-theme-children-soft .premium-resource-card,
-html.premium-theme-children-soft .bottom-app-nav,
-html.premium-theme-children-soft .bottom-app-nav-inner{
-  background-color:#071527 !important;
-  background-image:
-    radial-gradient(circle at 86% 10%,rgba(180,219,255,.28),transparent 28%),
-    radial-gradient(circle at 14% 92%,rgba(255,214,232,.12),transparent 32%),
-    url("data:image/svg+xml,%3Csvg%20xmlns%3D%27http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%27%20width%3D%27172%27%20height%3D%27172%27%20viewBox%3D%270%200%20172%20172%27%3E%3Cg%20fill%3D%27none%27%20stroke%3D%27rgba%28255%2C239%2C218%2C.22%29%27%20stroke-width%3D%274.2%27%20stroke-linecap%3D%27round%27%20stroke-linejoin%3D%27round%27%3E%3Ccircle%20cx%3D%2754%27%20cy%3D%2766%27%20r%3D%2724%27%2F%3E%3Ccircle%20cx%3D%2732%27%20cy%3D%2744%27%20r%3D%2711%27%2F%3E%3Ccircle%20cx%3D%2776%27%20cy%3D%2744%27%20r%3D%2711%27%2F%3E%3Ccircle%20cx%3D%27114%27%20cy%3D%2793%27%20r%3D%2722%27%2F%3E%3Ccircle%20cx%3D%2795%27%20cy%3D%2770%27%20r%3D%279%27%2F%3E%3Ccircle%20cx%3D%27133%27%20cy%3D%2770%27%20r%3D%279%27%2F%3E%3Cpath%20d%3D%27M45%2073q9%208%2018%200M105%2099q9%208%2018%200%27%2F%3E%3Cpath%20d%3D%27M28%20134c18-17%2042-17%2060%200%2018-17%2042-17%2060%200%27%2F%3E%3C%2Fg%3E%3C%2Fsvg%3E"),
-    linear-gradient(135deg,#071527 0%,#102f50 52%,#224f83 100%) !important;
-  background-size:100% 100%,100% 100%,172px 172px,100% 100% !important;
-  background-position:center,center,18px 18px,center !important;
-  background-repeat:no-repeat,no-repeat,repeat,no-repeat !important;
-  border-color:rgba(154,211,255,.30) !important;
-}
-
-html.premium-theme-night-mosque body,
-html.premium-theme-night-mosque .container,
-html.premium-theme-night-mosque .hero,
-html.premium-theme-night-mosque .brand-prayer-hero,
-html.premium-theme-night-mosque .today-hub,
-html.premium-theme-night-mosque .about-project-card,
-html.premium-theme-night-mosque .barakaway-pro-final,
-html.premium-theme-night-mosque .block,
-html.premium-theme-night-mosque .card,
-html.premium-theme-night-mosque .box,
-html.premium-theme-night-mosque .panel,
-html.premium-theme-night-mosque .quote,
-html.premium-theme-night-mosque .empty,
-html.premium-theme-night-mosque .article,
-html.premium-theme-night-mosque .category-panel,
-html.premium-theme-night-mosque .surah-card,
-html.premium-theme-night-mosque .prayer-card,
-html.premium-theme-night-mosque .toggle-row,
-html.premium-theme-night-mosque .meta-item,
-html.premium-theme-night-mosque .note-box,
-html.premium-theme-night-mosque .jumuah-box,
-html.premium-theme-night-mosque .month-day,
-html.premium-theme-night-mosque .month-head,
-html.premium-theme-night-mosque .wallet-support,
-html.premium-theme-night-mosque .home-widget,
-html.premium-theme-night-mosque .dua-card,
-html.premium-theme-night-mosque .ayah-card,
-html.premium-theme-night-mosque .master-audio-wrap,
-html.premium-theme-night-mosque .reader-side,
-html.premium-theme-night-mosque .reader-main,
-html.premium-theme-night-mosque .dua-side,
-html.premium-theme-night-mosque .dua-main,
-html.premium-theme-night-mosque .ai-side,
-html.premium-theme-night-mosque .ai-main,
-html.premium-theme-night-mosque .player-panel,
-html.premium-theme-night-mosque .preview-panel,
-html.premium-theme-night-mosque .app-menu-btn,
-html.premium-theme-night-mosque .today-action,
-html.premium-theme-night-mosque .premium-resource-card,
-html.premium-theme-night-mosque .bottom-app-nav,
-html.premium-theme-night-mosque .bottom-app-nav-inner{
-  background-color:#020713 !important;
-  background-image:
-    radial-gradient(circle at 12% 18%,rgba(255,255,255,.92) 0 1px,transparent 1.6px),
-    radial-gradient(circle at 31% 72%,rgba(255,255,255,.82) 0 .8px,transparent 1.4px),
-    radial-gradient(circle at 57% 34%,rgba(199,221,255,.88) 0 1.2px,transparent 1.9px),
-    radial-gradient(circle at 78% 68%,rgba(255,255,255,.68) 0 .9px,transparent 1.5px),
-    radial-gradient(circle at 91% 22%,rgba(180,210,255,.82) 0 1.1px,transparent 1.7px),
-    radial-gradient(circle at 48% 6%,rgba(105,162,255,.18),transparent 31%),
-    linear-gradient(135deg,#020713 0%,#081b3c 52%,#183f75 100%) !important;
-  background-size:97px 83px,137px 109px,173px 131px,211px 157px,149px 181px,100% 100%,100% 100% !important;
-  background-position:0 0,17px 11px,31px 19px,7px 23px,43px 5px,center,center !important;
-  background-repeat:repeat,repeat,repeat,repeat,repeat,no-repeat,no-repeat !important;
-  border-color:rgba(153,188,255,.28) !important;
-}
-
-html.premium-theme-desert-sand body,
-html.premium-theme-desert-sand .container,
-html.premium-theme-desert-sand .hero,
-html.premium-theme-desert-sand .brand-prayer-hero,
-html.premium-theme-desert-sand .today-hub,
-html.premium-theme-desert-sand .about-project-card,
-html.premium-theme-desert-sand .barakaway-pro-final,
-html.premium-theme-desert-sand .block,
-html.premium-theme-desert-sand .card,
-html.premium-theme-desert-sand .box,
-html.premium-theme-desert-sand .panel,
-html.premium-theme-desert-sand .quote,
-html.premium-theme-desert-sand .empty,
-html.premium-theme-desert-sand .article,
-html.premium-theme-desert-sand .category-panel,
-html.premium-theme-desert-sand .surah-card,
-html.premium-theme-desert-sand .prayer-card,
-html.premium-theme-desert-sand .toggle-row,
-html.premium-theme-desert-sand .meta-item,
-html.premium-theme-desert-sand .note-box,
-html.premium-theme-desert-sand .jumuah-box,
-html.premium-theme-desert-sand .month-day,
-html.premium-theme-desert-sand .month-head,
-html.premium-theme-desert-sand .wallet-support,
-html.premium-theme-desert-sand .home-widget,
-html.premium-theme-desert-sand .dua-card,
-html.premium-theme-desert-sand .ayah-card,
-html.premium-theme-desert-sand .master-audio-wrap,
-html.premium-theme-desert-sand .reader-side,
-html.premium-theme-desert-sand .reader-main,
-html.premium-theme-desert-sand .dua-side,
-html.premium-theme-desert-sand .dua-main,
-html.premium-theme-desert-sand .ai-side,
-html.premium-theme-desert-sand .ai-main,
-html.premium-theme-desert-sand .player-panel,
-html.premium-theme-desert-sand .preview-panel,
-html.premium-theme-desert-sand .app-menu-btn,
-html.premium-theme-desert-sand .today-action,
-html.premium-theme-desert-sand .premium-resource-card,
-html.premium-theme-desert-sand .bottom-app-nav,
-html.premium-theme-desert-sand .bottom-app-nav-inner{
-  background-color:#efd9a5 !important;
-  background-image:
-    radial-gradient(circle at 18% 32%,rgba(255,248,226,.62) 0 1px,transparent 1.45px),
-    radial-gradient(circle at 72% 66%,rgba(142,94,38,.22) 0 1px,transparent 1.55px),
-    linear-gradient(14deg,rgba(255,250,231,.42) 0 12%,transparent 13% 38%,rgba(185,129,58,.20) 39% 54%,transparent 55%),
-    radial-gradient(ellipse at 18% 10%,rgba(255,250,235,.48),transparent 34%),
-    linear-gradient(135deg,#f8eac7 0%,#dfbd7c 54%,#b9863f 100%) !important;
-  background-size:13px 13px,19px 19px,190px 92px,100% 100%,100% 100% !important;
-  background-position:0 0,8px 9px,0 0,center,center !important;
-  background-repeat:repeat,repeat,repeat,no-repeat,no-repeat !important;
-  border-color:rgba(122,82,31,.24) !important;
-}
-
-html.premium-theme-children-soft h1, html.premium-theme-children-soft h2, html.premium-theme-children-soft h3, html.premium-theme-children-soft h4, html.premium-theme-children-soft h5,
-html.premium-theme-children-soft p, html.premium-theme-children-soft li, html.premium-theme-children-soft .subtitle, html.premium-theme-children-soft .note, html.premium-theme-children-soft .muted,
-html.premium-theme-night-mosque h1, html.premium-theme-night-mosque h2, html.premium-theme-night-mosque h3, html.premium-theme-night-mosque h4, html.premium-theme-night-mosque h5,
-html.premium-theme-night-mosque p, html.premium-theme-night-mosque li, html.premium-theme-night-mosque .subtitle, html.premium-theme-night-mosque .note, html.premium-theme-night-mosque .muted{
-  color:var(--text) !important;
-  text-shadow:0 2px 14px rgba(0,0,0,.58) !important;
-}
-html.premium-theme-desert-sand h1, html.premium-theme-desert-sand h2, html.premium-theme-desert-sand h3, html.premium-theme-desert-sand h4, html.premium-theme-desert-sand h5,
-html.premium-theme-desert-sand p, html.premium-theme-desert-sand li, html.premium-theme-desert-sand .subtitle, html.premium-theme-desert-sand .note, html.premium-theme-desert-sand .muted,
-html.premium-theme-desert-sand .bottom-app-nav-item{
-  color:#2b2114 !important;
-  text-shadow:0 1px 8px rgba(255,248,226,.62) !important;
-}
-
-html.premium-theme-children-soft button:not(.icon-btn):not(.share-close):not(.install-help-close):not(.bottom-app-nav-item),
-html.premium-theme-night-mosque button:not(.icon-btn):not(.share-close):not(.install-help-close):not(.bottom-app-nav-item),
-html.premium-theme-children-soft .btn,
-html.premium-theme-night-mosque .btn{
-  background:linear-gradient(180deg,#6db8f1 0%,#2f6da5 50%,#15395f 100%) !important;
-  border-color:rgba(214,235,255,.26) !important;
-  color:#ffffff !important;
-}
-html.premium-theme-desert-sand button:not(.icon-btn):not(.share-close):not(.install-help-close):not(.bottom-app-nav-item),
-html.premium-theme-desert-sand .btn{
-  background:linear-gradient(180deg,#fff1c8 0%,#c99343 52%,#805620 100%) !important;
-  border-color:rgba(87,57,21,.28) !important;
-  color:#2b2114 !important;
-}
-/* ===== END BARAKAWAY THEME CARDS CARBON-PARITY FINAL FIX ===== */
+/* ===== END BARAKAWAY NIGHT MOSQUE PREMIUM POLISH ===== */
 `;
   (document.head || document.documentElement).appendChild(style);
 })();
