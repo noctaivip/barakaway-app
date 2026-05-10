@@ -14,7 +14,22 @@
     'desert-sand'
   ];
 
-  const PREMIUM_CSS = '\n/* ===== BARAKAWAY PRO PREMIUM THEMES RUNTIME ===== */\n:root{\n  --bw-pro-transition: background .22s ease,border-color .22s ease,box-shadow .22s ease,color .22s ease;\n}\n\nhtml.premium-theme-royal-gold{\n  --bg:#090908;\n  --surface:#171208;\n  --surface-2:#20170a;\n  --surface-3:#2b2110;\n  --border:rgba(215,192,122,.36);\n  --border-2:rgba(244,220,148,.44);\n  --text:#fff8df;\n  --text-soft:#ead8a5;\n  --text-muted:#c7ad62;\n  --green:#d7c07a;\n  --green-strong:#9d7424;\n  --green-soft:#fff0b4;\n  --bw-accent:#d7c07a;\n  --bw-accent-2:#f4dc94;\n}\n\nhtml.premium-theme-emerald-quran{\n  --bg:#061109;\n  --surface:#07180e;\n  --surface-2:#0c2114;\n  --surface-3:#12301d;\n  --border:rgba(102,198,128,.34);\n  --border-2:rgba(102,198,128,.46);\n  --text:#f0fff4;\n  --text-soft:#c4f0d1;\n  --text-muted:#8fd9a2;\n  --green:#66c680;\n  --green-strong:#2d7a46;\n  --green-soft:#c9ffd7;\n  --bw-accent:#66c680;\n  --bw-accent-2:#b8ffd0;\n}\n\nhtml.premium-theme-violet-noor{\n  --bg:#0d0a15;\n  --surface:#141020;\n  --surface-2:#1b1530;\n  --surface-3:#241a42;\n  --border:rgba(161,118,255,.34);\n  --border-2:rgba(197,168,255,.42);\n  --text:#fbf8ff;\n  --text-soft:#dfd2ff;\n  --text-muted:#bda6f0;\n  --green:#c5a8ff;\n  --green-strong:#6f4dcc;\n  --green-soft:#eadfff;\n  --bw-accent:#a176ff;\n  --bw-accent-2:#d6c4ff;\n}\n\nhtml.premium-theme-rose-soft{\n  --bg:#160a12;\n  --surface:#21101a;\n  --surface-2:#301525;\n  --surface-3:#401b31;\n  --border:rgba(255,158,199,.34);\n  --border-2:rgba(255,190,218,.44);\n  --text:#fff8fb;\n  --text-soft:#ffd8e8;\n  --text-muted:#f0a9c8;\n  --green:#ff9ec7;\n  --green-strong:#b64d78;\n  --green-soft:#ffe2ee;\n  --bw-accent:#ff9ec7;\n  --bw-accent-2:#ffd0e4;\n}\n\nhtml.premium-theme-carbon-elite{\n  --bg:#050607;\n  --surface:#0d1116;\n  --surface-2:#121820;\n  --surface-3:#1a222c;\n  --border:rgba(170,184,199,.28);\n  --border-2:rgba(202,213,224,.34);\n  --text:#f7fafc;\n  --text-soft:#cfd8e3;\n  --text-muted:#99a7b5;\n  --green:#d6dde6;\n  --green-strong:#59616c;\n  --green-soft:#eef2f6;\n  --bw-accent:#aab8c7;\n  --bw-accent-2:#e8edf3;\n}\n\nhtml.premium-theme-children-soft{\n  --bg:#0c1f32;\n  --surface:#102b44;\n  --surface-2:#173a5c;\n  --surface-3:#234d75;\n  --border:rgba(135,203,255,.34);\n  --border-2:rgba(255,227,241,.40);\n  --text:#f4fbff;\n  --text-soft:#d3ecff;\n  --text-muted:#abd6f7;\n  --green:#87cbff;\n  --green-strong:#3d8bc7;\n  --green-soft:#dff4ff;\n  --bw-accent:#87cbff;\n  --bw-accent-2:#ffe3f1;\n}\n\nhtml.premium-theme-night-mosque{\n  --bg:#050b13;\n  --surface:#091426;\n  --surface-2:#10213d;\n  --surface-3:#172f58;\n  --border:rgba(215,192,122,.28);\n  --border-2:rgba(118,154,215,.36);\n  --text:#f3f7ff;\n  --text-soft:#c8d8f4;\n  --text-muted:#91a9ce;\n  --green:#d7c07a;\n  --green-strong:#355d9a;\n  --green-soft:#f4e6b2;\n  --bw-accent:#d7c07a;\n  --bw-accent-2:#7ca7ff;\n}\n\nhtml.premium-theme-desert-sand{\n  --bg:#130c05;\n  --surface:#1e1408;\n  --surface-2:#2e200e;\n  --surface-3:#3e2b13;\n  --border:rgba(255,237,190,.30);\n  --border-2:rgba(219,174,97,.40);\n  --text:#fff9ea;\n  --text-soft:#ecd7ad;\n  --text-muted:#c9a978;\n  --green:#ffedbe;\n  --green-strong:#9a6d2d;\n  --green-soft:#fff3cf;\n  --bw-accent:#ffedbe;\n  --bw-accent-2:#dbaE61;\n}\n\nhtml[class*="premium-theme-"] body{\n  color:var(--text) !important;\n  background:\n    radial-gradient(circle at 14% 0%, color-mix(in srgb, var(--bw-accent) 20%, transparent), transparent 28%),\n    radial-gradient(circle at 88% 8%, color-mix(in srgb, var(--bw-accent-2) 16%, transparent), transparent 32%),\n    linear-gradient(180deg,var(--bg) 0%,color-mix(in srgb,var(--surface) 72%,var(--bg)) 48%,var(--bg) 100%) !important;\n}\n\nhtml[class*="premium-theme-"] .container,\nhtml[class*="premium-theme-"] .hero,\nhtml[class*="premium-theme-"] .brand-prayer-hero,\nhtml[class*="premium-theme-"] .today-hub,\nhtml[class*="premium-theme-"] .about-project-card,\nhtml[class*="premium-theme-"] .barakaway-pro-final,\nhtml[class*="premium-theme-"] .block,\nhtml[class*="premium-theme-"] .card,\nhtml[class*="premium-theme-"] .box,\nhtml[class*="premium-theme-"] .panel,\nhtml[class*="premium-theme-"] .quote,\nhtml[class*="premium-theme-"] .empty,\nhtml[class*="premium-theme-"] .article,\nhtml[class*="premium-theme-"] .category-panel,\nhtml[class*="premium-theme-"] .surah-card,\nhtml[class*="premium-theme-"] .prayer-card,\nhtml[class*="premium-theme-"] .toggle-row,\nhtml[class*="premium-theme-"] .meta-item,\nhtml[class*="premium-theme-"] .note-box,\nhtml[class*="premium-theme-"] .jumuah-box,\nhtml[class*="premium-theme-"] .month-day,\nhtml[class*="premium-theme-"] .month-head,\nhtml[class*="premium-theme-"] .wallet-support,\nhtml[class*="premium-theme-"] .home-widget,\nhtml[class*="premium-theme-"] .dua-card,\nhtml[class*="premium-theme-"] .ayah-card,\nhtml[class*="premium-theme-"] .master-audio-wrap,\nhtml[class*="premium-theme-"] .reader-side,\nhtml[class*="premium-theme-"] .reader-main,\nhtml[class*="premium-theme-"] .dua-side,\nhtml[class*="premium-theme-"] .dua-main,\nhtml[class*="premium-theme-"] .ai-side,\nhtml[class*="premium-theme-"] .ai-main,\nhtml[class*="premium-theme-"] .player-panel,\nhtml[class*="premium-theme-"] .preview-panel,\nhtml[class*="premium-theme-"] .app-menu-btn,\nhtml[class*="premium-theme-"] .today-action,\nhtml[class*="premium-theme-"] .premium-resource-card{\n  background:\n    radial-gradient(circle at 94% 0%, color-mix(in srgb, var(--bw-accent) 12%, transparent), transparent 30%),\n    linear-gradient(135deg,color-mix(in srgb,var(--surface) 92%,#000) 0%,var(--surface-2) 54%,color-mix(in srgb,var(--surface-3) 84%,#000) 100%) !important;\n  border-color:var(--border) !important;\n  color:var(--text) !important;\n  box-shadow:0 18px 42px color-mix(in srgb,var(--bg) 70%,transparent), inset 0 1px 0 rgba(255,255,255,.055) !important;\n  transition:var(--bw-pro-transition) !important;\n}\n\nhtml[class*="premium-theme-"] h1,\nhtml[class*="premium-theme-"] h2,\nhtml[class*="premium-theme-"] h3,\nhtml[class*="premium-theme-"] h4,\nhtml[class*="premium-theme-"] .title,\nhtml[class*="premium-theme-"] .category-title,\nhtml[class*="premium-theme-"] .section h2,\nhtml[class*="premium-theme-"] .surah-name,\nhtml[class*="premium-theme-"] .dua-title,\nhtml[class*="premium-theme-"] .ayah-arabic{\n  color:var(--text) !important;\n}\n\nhtml[class*="premium-theme-"] p,\nhtml[class*="premium-theme-"] li,\nhtml[class*="premium-theme-"] .subtitle,\nhtml[class*="premium-theme-"] .small,\nhtml[class*="premium-theme-"] .note,\nhtml[class*="premium-theme-"] .muted,\nhtml[class*="premium-theme-"] .category-intro,\nhtml[class*="premium-theme-"] .ref,\nhtml[class*="premium-theme-"] .label,\nhtml[class*="premium-theme-"] .translit,\nhtml[class*="premium-theme-"] .meaning,\nhtml[class*="premium-theme-"] .when,\nhtml[class*="premium-theme-"] .surah-meta,\nhtml[class*="premium-theme-"] .article p,\nhtml[class*="premium-theme-"] .dua-translit,\nhtml[class*="premium-theme-"] .ayah-translit,\nhtml[class*="premium-theme-"] .ayah-meaning{\n  color:var(--text-soft) !important;\n}\n\nhtml[class*="premium-theme-"] strong,\nhtml[class*="premium-theme-"] a,\nhtml[class*="premium-theme-"] .surah-number,\nhtml[class*="premium-theme-"] .badge,\nhtml[class*="premium-theme-"] .chip,\nhtml[class*="premium-theme-"] .wallet-badge{\n  color:var(--bw-accent) !important;\n}\n\nhtml[class*="premium-theme-"] .btn.primary,\nhtml[class*="premium-theme-"] .copy-wallet-btn,\nhtml[class*="premium-theme-"] .install-btn,\nhtml[class*="premium-theme-"] .support-project-btn,\nhtml[class*="premium-theme-"] button:not(.icon-btn):not(.share-close):not(.install-help-close):not(.bottom-app-nav-item){\n  background:linear-gradient(135deg,var(--green-strong) 0%, color-mix(in srgb,var(--bw-accent) 72%,var(--green-strong)) 100%) !important;\n  color:#fff !important;\n  border-color:var(--border-2) !important;\n  box-shadow:0 14px 30px color-mix(in srgb,var(--green-strong) 24%,transparent) !important;\n}\n\nhtml[class*="premium-theme-"] input,\nhtml[class*="premium-theme-"] textarea,\nhtml[class*="premium-theme-"] select,\nhtml[class*="premium-theme-"] .search-input,\nhtml[class*="premium-theme-"] .wallet-address{\n  background:color-mix(in srgb,var(--surface-3) 74%,#000) !important;\n  color:var(--text) !important;\n  border-color:var(--border-2) !important;\n}\n\nhtml[class*="premium-theme-"] .bottom-app-nav{\n  background:linear-gradient(180deg,color-mix(in srgb,var(--surface) 88%,transparent),color-mix(in srgb,var(--bg) 96%,transparent)) !important;\n  border-top-color:var(--border) !important;\n  box-shadow:0 -18px 44px color-mix(in srgb,var(--bg) 70%,transparent), inset 0 1px 0 rgba(255,255,255,.04) !important;\n}\n\nhtml[class*="premium-theme-"] .bottom-app-nav-inner{\n  background:linear-gradient(180deg,color-mix(in srgb,var(--surface-2) 92%,transparent),color-mix(in srgb,var(--surface) 94%,transparent)) !important;\n  border-color:var(--border) !important;\n}\n\nhtml[class*="premium-theme-"] .bottom-app-nav-item{\n  color:var(--text-soft) !important;\n}\n\nhtml[class*="premium-theme-"] .bottom-app-nav-item.active,\nhtml[class*="premium-theme-"] .bottom-app-nav-item.is-active{\n  background:linear-gradient(135deg,color-mix(in srgb,var(--bw-accent) 24%,transparent),color-mix(in srgb,var(--green-strong) 28%,transparent)) !important;\n  color:var(--text) !important;\n  border-color:var(--border-2) !important;\n}\n/* ===== END BARAKAWAY PRO PREMIUM THEMES RUNTIME ===== */\n';
+  const PREMIUM_CSS = '\n/* ===== BARAKAWAY PRO PREMIUM THEMES RUNTIME ===== */\n:root{\n  --bw-pro-transition: background .22s ease,border-color .22s ease,box-shadow .22s ease,color .22s ease;\n}\n\nhtml.premium-theme-royal-gold{\n  --bg:#090908;\n  --surface:#171208;\n  --surface-2:#20170a;\n  --surface-3:#2b2110;\n  --border:rgba(215,192,122,.36);\n  --border-2:rgba(244,220,148,.44);\n  --text:#fff8df;\n  --text-soft:#ead8a5;\n  --text-muted:#c7ad62;\n  --green:#d7c07a;\n  --green-strong:#9d7424;\n  --green-soft:#fff0b4;\n  --bw-accent:#d7c07a;\n  --bw-accent-2:#f4dc94;\n}\n\nhtml.premium-theme-emerald-quran{\n  --bg:#061109;\n  --surface:#07180e;\n  --surface-2:#0c2114;\n  --surface-3:#12301d;\n  --border:rgba(102,198,128,.34);\n  --border-2:rgba(102,198,128,.46);\n  --text:#f0fff4;\n  --text-soft:#c4f0d1;\n  --text-muted:#8fd9a2;\n  --green:#66c680;\n  --green-strong:#2d7a46;\n  --green-soft:#c9ffd7;\n  --bw-accent:#66c680;\n  --bw-accent-2:#b8ffd0;\n}\n\nhtml.premium-theme-violet-noor{\n  --bg:#0d0a15;\n  --surface:#141020;\n  --surface-2:#1b1530;\n  --surface-3:#241a42;\n  --border:rgba(161,118,255,.34);\n  --border-2:rgba(197,168,255,.42);\n  --text:#fbf8ff;\n  --text-soft:#dfd2ff;\n  --text-muted:#bda6f0;\n  --green:#c5a8ff;\n  --green-strong:#6f4dcc;\n  --green-soft:#eadfff;\n  --bw-accent:#a176ff;\n  --bw-accent-2:#d6c4ff;\n}\n\nhtml.premium-theme-rose-soft{\n  --bg:#160a12;\n  --surface:#21101a;\n  --surface-2:#301525;\n  --surface-3:#401b31;\n  --border:rgba(255,158,199,.34);\n  --border-2:rgba(255,190,218,.44);\n  --text:#fff8fb;\n  --text-soft:#ffd8e8;\n  --text-muted:#f0a9c8;\n  --green:#ff9ec7;\n  --green-strong:#b64d78;\n  --green-soft:#ffe2ee;\n  --bw-accent:#ff9ec7;\n  --bw-accent-2:#ffd0e4;\n}\n\nhtml.premium-theme-carbon-elite{\n  --bg:#050607;\n  --surface:#0d1116;\n  --surface-2:#121820;\n  --surface-3:#1a222c;\n  --border:rgba(170,184,199,.28);\n  --border-2:rgba(202,213,224,.34);\n  --text:#f7fafc;\n  --text-soft:#cfd8e3;\n  --text-muted:#99a7b5;\n  --green:#d6dde6;\n  --green-strong:#59616c;\n  --green-soft:#eef2f6;\n  --bw-accent:#aab8c7;\n  --bw-accent-2:#e8edf3;\n}\n\nhtml.premium-theme-children-soft{\n  --bg:#0c1f32;\n  --surface:#102b44;\n  --surface-2:#173a5c;\n  --surface-3:#234d75;\n  --border:rgba(135,203,255,.34);\n  --border-2:rgba(255,227,241,.40);\n  --text:#f4fbff;\n  --text-soft:#d3ecff;\n  --text-muted:#abd6f7;\n  --green:#87cbff;\n  --green-strong:#3d8bc7;\n  --green-soft:#dff4ff;\n  --bw-accent:#87cbff;\n  --bw-accent-2:#ffe3f1;\n}\n\nhtml.premium-theme-night-mosque{
+  --bg:#040a12;
+  --surface:#081124;
+  --surface-2:#0d1b33;
+  --surface-3:#142a4c;
+  --border:rgba(118,154,215,.32);
+  --border-2:rgba(118,154,215,.44);
+  --text:#f3f7ff;
+  --text-soft:#c8d8f4;
+  --text-muted:#91a9ce;
+  --green:#d7c07a;
+  --green-strong:#355d9a;
+  --green-soft:#f4e6b2;
+  --bw-accent:#d7c07a;
+  --bw-accent-2:#7ca7ff;
+}\n\nhtml.premium-theme-desert-sand{\n  --bg:#130c05;\n  --surface:#1e1408;\n  --surface-2:#2e200e;\n  --surface-3:#3e2b13;\n  --border:rgba(255,237,190,.30);\n  --border-2:rgba(219,174,97,.40);\n  --text:#fff9ea;\n  --text-soft:#ecd7ad;\n  --text-muted:#c9a978;\n  --green:#ffedbe;\n  --green-strong:#9a6d2d;\n  --green-soft:#fff3cf;\n  --bw-accent:#ffedbe;\n  --bw-accent-2:#dbaE61;\n}\n\nhtml[class*="premium-theme-"] body{\n  color:var(--text) !important;\n  background:\n    radial-gradient(circle at 14% 0%, color-mix(in srgb, var(--bw-accent) 20%, transparent), transparent 28%),\n    radial-gradient(circle at 88% 8%, color-mix(in srgb, var(--bw-accent-2) 16%, transparent), transparent 32%),\n    linear-gradient(180deg,var(--bg) 0%,color-mix(in srgb,var(--surface) 72%,var(--bg)) 48%,var(--bg) 100%) !important;\n}\n\nhtml[class*="premium-theme-"] .container,\nhtml[class*="premium-theme-"] .hero,\nhtml[class*="premium-theme-"] .brand-prayer-hero,\nhtml[class*="premium-theme-"] .today-hub,\nhtml[class*="premium-theme-"] .about-project-card,\nhtml[class*="premium-theme-"] .barakaway-pro-final,\nhtml[class*="premium-theme-"] .block,\nhtml[class*="premium-theme-"] .card,\nhtml[class*="premium-theme-"] .box,\nhtml[class*="premium-theme-"] .panel,\nhtml[class*="premium-theme-"] .quote,\nhtml[class*="premium-theme-"] .empty,\nhtml[class*="premium-theme-"] .article,\nhtml[class*="premium-theme-"] .category-panel,\nhtml[class*="premium-theme-"] .surah-card,\nhtml[class*="premium-theme-"] .prayer-card,\nhtml[class*="premium-theme-"] .toggle-row,\nhtml[class*="premium-theme-"] .meta-item,\nhtml[class*="premium-theme-"] .note-box,\nhtml[class*="premium-theme-"] .jumuah-box,\nhtml[class*="premium-theme-"] .month-day,\nhtml[class*="premium-theme-"] .month-head,\nhtml[class*="premium-theme-"] .wallet-support,\nhtml[class*="premium-theme-"] .home-widget,\nhtml[class*="premium-theme-"] .dua-card,\nhtml[class*="premium-theme-"] .ayah-card,\nhtml[class*="premium-theme-"] .master-audio-wrap,\nhtml[class*="premium-theme-"] .reader-side,\nhtml[class*="premium-theme-"] .reader-main,\nhtml[class*="premium-theme-"] .dua-side,\nhtml[class*="premium-theme-"] .dua-main,\nhtml[class*="premium-theme-"] .ai-side,\nhtml[class*="premium-theme-"] .ai-main,\nhtml[class*="premium-theme-"] .player-panel,\nhtml[class*="premium-theme-"] .preview-panel,\nhtml[class*="premium-theme-"] .app-menu-btn,\nhtml[class*="premium-theme-"] .today-action,\nhtml[class*="premium-theme-"] .premium-resource-card{\n  background:\n    radial-gradient(circle at 94% 0%, color-mix(in srgb, var(--bw-accent) 12%, transparent), transparent 30%),\n    linear-gradient(135deg,color-mix(in srgb,var(--surface) 92%,#000) 0%,var(--surface-2) 54%,color-mix(in srgb,var(--surface-3) 84%,#000) 100%) !important;\n  border-color:var(--border) !important;\n  color:var(--text) !important;\n  box-shadow:0 18px 42px color-mix(in srgb,var(--bg) 70%,transparent), inset 0 1px 0 rgba(255,255,255,.055) !important;\n  transition:var(--bw-pro-transition) !important;\n}\n\nhtml[class*="premium-theme-"] h1,\nhtml[class*="premium-theme-"] h2,\nhtml[class*="premium-theme-"] h3,\nhtml[class*="premium-theme-"] h4,\nhtml[class*="premium-theme-"] .title,\nhtml[class*="premium-theme-"] .category-title,\nhtml[class*="premium-theme-"] .section h2,\nhtml[class*="premium-theme-"] .surah-name,\nhtml[class*="premium-theme-"] .dua-title,\nhtml[class*="premium-theme-"] .ayah-arabic{\n  color:var(--text) !important;\n}\n\nhtml[class*="premium-theme-"] p,\nhtml[class*="premium-theme-"] li,\nhtml[class*="premium-theme-"] .subtitle,\nhtml[class*="premium-theme-"] .small,\nhtml[class*="premium-theme-"] .note,\nhtml[class*="premium-theme-"] .muted,\nhtml[class*="premium-theme-"] .category-intro,\nhtml[class*="premium-theme-"] .ref,\nhtml[class*="premium-theme-"] .label,\nhtml[class*="premium-theme-"] .translit,\nhtml[class*="premium-theme-"] .meaning,\nhtml[class*="premium-theme-"] .when,\nhtml[class*="premium-theme-"] .surah-meta,\nhtml[class*="premium-theme-"] .article p,\nhtml[class*="premium-theme-"] .dua-translit,\nhtml[class*="premium-theme-"] .ayah-translit,\nhtml[class*="premium-theme-"] .ayah-meaning{\n  color:var(--text-soft) !important;\n}\n\nhtml[class*="premium-theme-"] strong,\nhtml[class*="premium-theme-"] a,\nhtml[class*="premium-theme-"] .surah-number,\nhtml[class*="premium-theme-"] .badge,\nhtml[class*="premium-theme-"] .chip,\nhtml[class*="premium-theme-"] .wallet-badge{\n  color:var(--bw-accent) !important;\n}\n\nhtml[class*="premium-theme-"] .btn.primary,\nhtml[class*="premium-theme-"] .copy-wallet-btn,\nhtml[class*="premium-theme-"] .install-btn,\nhtml[class*="premium-theme-"] .support-project-btn,\nhtml[class*="premium-theme-"] button:not(.icon-btn):not(.share-close):not(.install-help-close):not(.bottom-app-nav-item){\n  background:linear-gradient(135deg,var(--green-strong) 0%, color-mix(in srgb,var(--bw-accent) 72%,var(--green-strong)) 100%) !important;\n  color:#fff !important;\n  border-color:var(--border-2) !important;\n  box-shadow:0 14px 30px color-mix(in srgb,var(--green-strong) 24%,transparent) !important;\n}\n\nhtml[class*="premium-theme-"] input,\nhtml[class*="premium-theme-"] textarea,\nhtml[class*="premium-theme-"] select,\nhtml[class*="premium-theme-"] .search-input,\nhtml[class*="premium-theme-"] .wallet-address{\n  background:color-mix(in srgb,var(--surface-3) 74%,#000) !important;\n  color:var(--text) !important;\n  border-color:var(--border-2) !important;\n}\n\nhtml[class*="premium-theme-"] .bottom-app-nav{\n  background:linear-gradient(180deg,color-mix(in srgb,var(--surface) 88%,transparent),color-mix(in srgb,var(--bg) 96%,transparent)) !important;\n  border-top-color:var(--border) !important;\n  box-shadow:0 -18px 44px color-mix(in srgb,var(--bg) 70%,transparent), inset 0 1px 0 rgba(255,255,255,.04) !important;\n}\n\nhtml[class*="premium-theme-"] .bottom-app-nav-inner{\n  background:linear-gradient(180deg,color-mix(in srgb,var(--surface-2) 92%,transparent),color-mix(in srgb,var(--surface) 94%,transparent)) !important;\n  border-color:var(--border) !important;\n}\n\nhtml[class*="premium-theme-"] .bottom-app-nav-item{\n  color:var(--text-soft) !important;\n}\n\nhtml[class*="premium-theme-"] .bottom-app-nav-item.active,\nhtml[class*="premium-theme-"] .bottom-app-nav-item.is-active{\n  background:linear-gradient(135deg,color-mix(in srgb,var(--bw-accent) 24%,transparent),color-mix(in srgb,var(--green-strong) 28%,transparent)) !important;\n  color:var(--text) !important;\n  border-color:var(--border-2) !important;\n}\n/* ===== END BARAKAWAY PRO PREMIUM THEMES RUNTIME ===== */\n';
 
   function safeGet(key){
     try{ return localStorage.getItem(key); }catch(e){ return null; }
@@ -902,9 +917,20 @@ html.premium-theme-children-soft{
 }
 
 html.premium-theme-night-mosque{
-  --bw-lux-border-main:rgba(215,192,122,.48);
-  --bw-lux-glow:rgba(118,154,215,.20);
-  --bw-lux-line:linear-gradient(90deg,transparent,rgba(215,192,122,.72),rgba(118,154,215,.62),transparent);
+  --bg:#040a12;
+  --surface:#081124;
+  --surface-2:#0d1b33;
+  --surface-3:#142a4c;
+  --border:rgba(118,154,215,.32);
+  --border-2:rgba(118,154,215,.44);
+  --text:#f3f7ff;
+  --text-soft:#c8d8f4;
+  --text-muted:#91a9ce;
+  --green:#d7c07a;
+  --green-strong:#355d9a;
+  --green-soft:#f4e6b2;
+  --bw-accent:#d7c07a;
+  --bw-accent-2:#7ca7ff;
 }
 
 html.premium-theme-desert-sand{
@@ -1603,10 +1629,10 @@ html.premium-theme-night-mosque body{
     radial-gradient(circle at 18px 18px, rgba(255,255,255,.42) 0 1.2px, transparent 1.8px),
     radial-gradient(circle at 48px 31px, rgba(255,255,255,.36) 0 1px, transparent 1.6px),
     radial-gradient(circle at 82px 16px, rgba(255,255,255,.38) 0 1.1px, transparent 1.7px),
-    radial-gradient(circle at 68px 34px, rgba(215,192,122,.22) 0 10px, transparent 10.8px),
-    linear-gradient(90deg, transparent 0 31%, rgba(215,192,122,.10) 31% 33%, transparent 33% 57%, rgba(215,192,122,.10) 57% 59%, transparent 59% 100%),
-    linear-gradient(27deg, rgba(215,192,122,.08) 5%, transparent 5%, transparent 45%, rgba(215,192,122,.08) 45%, rgba(215,192,122,.08) 55%, transparent 55%, transparent),
-    linear-gradient(207deg, rgba(124,167,255,.07) 5%, transparent 5%, transparent 45%, rgba(124,167,255,.07) 45%, rgba(124,167,255,.07) 55%, transparent 55%, transparent),
+    radial-gradient(circle at 72% 36%, rgba(255,255,255,.74) 0 .9px, transparent 1.55px),
+    radial-gradient(circle at 39% 70%, rgba(255,255,255,.70) 0 .8px, transparent 1.45px),
+    radial-gradient(circle at 58% 44%, rgba(255,255,255,.64) 0 .8px, transparent 1.45px),
+    radial-gradient(circle at 87% 62%, rgba(255,255,255,.72) 0 .9px, transparent 1.55px),
     linear-gradient(180deg,#050b13 0%,#091426 48%,#050b13 100%) !important;
   background-size:120px 120px,120px 120px,120px 120px,120px 120px,120px 120px,18px 18px,18px 18px,100% 100% !important;
   background-position:0 0,0 0,0 0,0 0,0 0,0 0,9px 9px,center !important;
@@ -1686,7 +1712,22 @@ html[class*="premium-theme-"] .premium-resource-card{
 (function(){
   const STYLE_ID = "barakaway-final-pure-css-premium-theme-patterns";
   if(document.getElementById(STYLE_ID)) return;
-  const CSS = '\n\n/* ===== BARAKAWAY FINAL PURE CSS PREMIUM THEME PATTERNS ===== */\n/* Pure CSS / inline SVG patterns. No external theme images. Same runtime logic as Carbon Elite. */\nhtml.premium-theme-children-soft{\n  --bg:#07172a;\n  --surface:#102b44;\n  --surface-2:#173a5c;\n  --surface-3:#234d75;\n  --border:rgba(135,203,255,.38);\n  --border-2:rgba(255,227,241,.46);\n  --text:#f5fbff;\n  --text-soft:#d8efff;\n  --text-muted:#b8ddf7;\n  --green:#87cbff;\n  --green-strong:#3d8bc7;\n  --green-soft:#dff4ff;\n  --bw-accent:#87cbff;\n  --bw-accent-2:#ffe3f1;\n}\nhtml.premium-theme-night-mosque{\n  --bg:#050b13;\n  --surface:#091426;\n  --surface-2:#10213d;\n  --surface-3:#172f58;\n  --border:rgba(215,192,122,.30);\n  --border-2:rgba(118,154,215,.40);\n  --text:#f5f8ff;\n  --text-soft:#d2e0f7;\n  --text-muted:#9fb7dc;\n  --green:#d7c07a;\n  --green-strong:#355d9a;\n  --green-soft:#f4e6b2;\n  --bw-accent:#d7c07a;\n  --bw-accent-2:#7ca7ff;\n}\nhtml.premium-theme-desert-sand{\n  --bg:#e2bd7b;\n  --surface:#f1d497;\n  --surface-2:#e3b86d;\n  --surface-3:#fff0c1;\n  --border:rgba(92,58,20,.34);\n  --border-2:rgba(121,78,26,.46);\n  --text:#2b1a08;\n  --text-soft:#4a2d0d;\n  --text-muted:#6a471d;\n  --green:#7a511d;\n  --green-strong:#7c501a;\n  --green-soft:#3a2209;\n  --bw-accent:#7a511d;\n  --bw-accent-2:#fff1c6;\n}\n\nhtml.premium-theme-children-soft body{
+  const CSS = '\n\n/* ===== BARAKAWAY FINAL PURE CSS PREMIUM THEME PATTERNS ===== */\n/* Pure CSS / inline SVG patterns. No external theme images. Same runtime logic as Carbon Elite. */\nhtml.premium-theme-children-soft{\n  --bg:#07172a;\n  --surface:#102b44;\n  --surface-2:#173a5c;\n  --surface-3:#234d75;\n  --border:rgba(135,203,255,.38);\n  --border-2:rgba(255,227,241,.46);\n  --text:#f5fbff;\n  --text-soft:#d8efff;\n  --text-muted:#b8ddf7;\n  --green:#87cbff;\n  --green-strong:#3d8bc7;\n  --green-soft:#dff4ff;\n  --bw-accent:#87cbff;\n  --bw-accent-2:#ffe3f1;\n}\nhtml.premium-theme-night-mosque{
+  --bg:#040a12;
+  --surface:#081124;
+  --surface-2:#0d1b33;
+  --surface-3:#142a4c;
+  --border:rgba(118,154,215,.32);
+  --border-2:rgba(118,154,215,.44);
+  --text:#f3f7ff;
+  --text-soft:#c8d8f4;
+  --text-muted:#91a9ce;
+  --green:#d7c07a;
+  --green-strong:#355d9a;
+  --green-soft:#f4e6b2;
+  --bw-accent:#d7c07a;
+  --bw-accent-2:#7ca7ff;
+}\nhtml.premium-theme-desert-sand{\n  --bg:#e2bd7b;\n  --surface:#f1d497;\n  --surface-2:#e3b86d;\n  --surface-3:#fff0c1;\n  --border:rgba(92,58,20,.34);\n  --border-2:rgba(121,78,26,.46);\n  --text:#2b1a08;\n  --text-soft:#4a2d0d;\n  --text-muted:#6a471d;\n  --green:#7a511d;\n  --green-strong:#7c501a;\n  --green-soft:#3a2209;\n  --bw-accent:#7a511d;\n  --bw-accent-2:#fff1c6;\n}\n\nhtml.premium-theme-children-soft body{
   background-color:#07172a !important;
   background-image:
     radial-gradient(circle at 30px 34px, rgba(255,255,255,.18) 0 12px, transparent 12.8px),
@@ -1704,10 +1745,10 @@ html[class*="premium-theme-"] .premium-resource-card{
     radial-gradient(circle at 18px 18px, rgba(255,255,255,.42) 0 1.2px, transparent 1.8px),
     radial-gradient(circle at 48px 31px, rgba(255,255,255,.36) 0 1px, transparent 1.6px),
     radial-gradient(circle at 82px 16px, rgba(255,255,255,.38) 0 1.1px, transparent 1.7px),
-    radial-gradient(circle at 68px 34px, rgba(215,192,122,.22) 0 10px, transparent 10.8px),
-    linear-gradient(90deg, transparent 0 31%, rgba(215,192,122,.10) 31% 33%, transparent 33% 57%, rgba(215,192,122,.10) 57% 59%, transparent 59% 100%),
-    linear-gradient(27deg, rgba(215,192,122,.08) 5%, transparent 5%, transparent 45%, rgba(215,192,122,.08) 45%, rgba(215,192,122,.08) 55%, transparent 55%, transparent),
-    linear-gradient(207deg, rgba(124,167,255,.07) 5%, transparent 5%, transparent 45%, rgba(124,167,255,.07) 45%, rgba(124,167,255,.07) 55%, transparent 55%, transparent),
+    radial-gradient(circle at 72% 36%, rgba(255,255,255,.74) 0 .9px, transparent 1.55px),
+    radial-gradient(circle at 39% 70%, rgba(255,255,255,.70) 0 .8px, transparent 1.45px),
+    radial-gradient(circle at 58% 44%, rgba(255,255,255,.64) 0 .8px, transparent 1.45px),
+    radial-gradient(circle at 87% 62%, rgba(255,255,255,.72) 0 .9px, transparent 1.55px),
     linear-gradient(180deg,#050b13 0%,#091426 48%,#050b13 100%) !important;
   background-size:120px 120px,120px 120px,120px 120px,120px 120px,120px 120px,18px 18px,18px 18px,100% 100% !important;
   background-position:0 0,0 0,0 0,0 0,0 0,0 0,9px 9px,center !important;
@@ -1723,7 +1764,7 @@ html[class*="premium-theme-"] .premium-resource-card{
   background-size:16px 16px,18px 18px,18px 18px,18px 18px,100% 100% !important;
   background-position:0 0,6px 8px,0 0,9px 9px,center !important;
   background-repeat:repeat,repeat,repeat,repeat,no-repeat !important;
-}\n\nbody .theme-grid .theme-card.theme-child,\nbody .theme-grid .theme-card.bw-theme-sample-children-soft,\nbody .theme-grid .theme-card[data-theme="children-soft"]{\n  background-color:#07172a!important;\n  background-image:\n    linear-gradient(115deg,transparent 0%,rgba(255,255,255,.12) 44%,transparent 60%),\n    url("data:image/svg+xml,%3Csvg xmlns=\'http://www.w3.org/2000/svg\' width=\'112\' height=\'112\' viewBox=\'0 0 112 112\'%3E%3Cg fill=\'none\' stroke=\'%23ffffff\' stroke-opacity=\'.22\' stroke-width=\'2.4\' stroke-linecap=\'round\' stroke-linejoin=\'round\'%3E%3Ccircle cx=\'34\' cy=\'38\' r=\'15\'/%3E%3Ccircle cx=\'21\' cy=\'27\' r=\'6.5\'/%3E%3Ccircle cx=\'47\' cy=\'27\' r=\'6.5\'/%3E%3Ccircle cx=\'30\' cy=\'38\' r=\'1.8\' fill=\'%23ffffff\' fill-opacity=\'.25\'/%3E%3Ccircle cx=\'39\' cy=\'38\' r=\'1.8\' fill=\'%23ffffff\' fill-opacity=\'.25\'/%3E%3Cpath d=\'M30 47q4.5 4 9 0\'/%3E%3Cpath d=\'M76 24l3.2 6.5 7.2 1-5.2 5.1 1.2 7.1-6.4-3.4-6.4 3.4 1.2-7.1-5.2-5.1 7.2-1z\'/%3E%3Cpath d=\'M20 78c8-7 20-7 28 0 8-7 20-7 28 0\'/%3E%3C/g%3E%3C/svg%3E"),\n    radial-gradient(circle at 88% 10%,rgba(255,227,241,.24),transparent 30%),\n    linear-gradient(135deg,#102b44 0%,#173a5c 54%,#234d75 100%)!important;\n  background-size:100% 100%,112px 112px,100% 100%,100% 100%!important;\n  background-position:center,0 0,center,center!important;\n  background-repeat:no-repeat,repeat,no-repeat,no-repeat!important;\n  border-color:rgba(135,203,255,.46)!important;\n  box-shadow:0 24px 58px rgba(7,23,42,.42),inset 0 1px 0 rgba(255,255,255,.12),inset 0 -24px 38px rgba(0,0,0,.20)!important;\n}\nbody .theme-grid .theme-card.theme-night,\nbody .theme-grid .theme-card.bw-theme-sample-night-mosque,\nbody .theme-grid .theme-card[data-theme="night-mosque"]{\n  background-color:#050b13!important;\n  background-image:\n    linear-gradient(115deg,transparent 0%,rgba(255,255,255,.08) 44%,transparent 60%),\n    url("data:image/svg+xml,%3Csvg xmlns=\'http://www.w3.org/2000/svg\' width=\'124\' height=\'124\' viewBox=\'0 0 124 124\'%3E%3Cg fill=\'%23ffffff\' fill-opacity=\'.42\'%3E%3Ccircle cx=\'14\' cy=\'18\' r=\'1.1\'/%3E%3Ccircle cx=\'47\' cy=\'29\' r=\'.85\'/%3E%3Ccircle cx=\'82\' cy=\'14\' r=\'1.1\'/%3E%3Ccircle cx=\'108\' cy=\'51\' r=\'.8\'/%3E%3Ccircle cx=\'29\' cy=\'81\' r=\'1\'/%3E%3Ccircle cx=\'76\' cy=\'95\' r=\'.8\'/%3E%3Ccircle cx=\'113\' cy=\'109\' r=\'1.1\'/%3E%3Cpath d=\'M70 35a14 14 0 1 1-14-14 10.5 10.5 0 1 0 14 14z\' fill=\'%23d7c07a\' fill-opacity=\'.30\'/%3E%3C/g%3E%3Cg fill=\'none\' stroke=\'%23d7c07a\' stroke-opacity=\'.15\' stroke-width=\'1.45\'%3E%3Cpath d=\'M18 116h88\'/%3E%3Cpath d=\'M36 116V86q8-19 17 0v30\'/%3E%3Cpath d=\'M70 116V77q11-23 22 0v39\'/%3E%3C/g%3E%3C/svg%3E"),\n    radial-gradient(circle at 82% 12%,rgba(215,192,122,.22),transparent 22%),\n    linear-gradient(135deg,#050b13 0%,#091426 50%,#172f58 100%)!important;\n  background-size:100% 100%,124px 124px,100% 100%,100% 100%!important;\n  background-position:center,0 0,center,center!important;\n  background-repeat:no-repeat,repeat,no-repeat,no-repeat!important;\n  border-color:rgba(118,154,215,.40)!important;\n  box-shadow:0 24px 58px rgba(0,8,32,.54),0 0 34px rgba(120,160,255,.14),inset 0 1px 0 rgba(255,255,255,.14),inset 0 -24px 38px rgba(0,0,0,.34)!important;\n}\nbody .theme-grid .theme-card.theme-sand,\nbody .theme-grid .theme-card.bw-theme-sample-desert-sand,\nbody .theme-grid .theme-card[data-theme="desert-sand"]{\n  background-color:#e2bd7b!important;\n  background-image:\n    linear-gradient(115deg,transparent 0%,rgba(255,255,255,.18) 44%,transparent 60%),\n    url("data:image/svg+xml,%3Csvg xmlns=\'http://www.w3.org/2000/svg\' width=\'64\' height=\'64\' viewBox=\'0 0 64 64\'%3E%3Cg fill=\'%23fff0c8\' fill-opacity=\'.28\'%3E%3Ccircle cx=\'6\' cy=\'9\' r=\'1.1\'/%3E%3Ccircle cx=\'26\' cy=\'13\' r=\'.8\'/%3E%3Ccircle cx=\'47\' cy=\'6\' r=\'1\'/%3E%3Ccircle cx=\'56\' cy=\'30\' r=\'.9\'/%3E%3Ccircle cx=\'11\' cy=\'42\' r=\'.8\'/%3E%3Ccircle cx=\'34\' cy=\'52\' r=\'1\'/%3E%3Ccircle cx=\'59\' cy=\'58\' r=\'.75\'/%3E%3C/g%3E%3Cg fill=\'%23a86f2c\' fill-opacity=\'.14\'%3E%3Ccircle cx=\'18\' cy=\'26\' r=\'.9\'/%3E%3Ccircle cx=\'39\' cy=\'34\' r=\'.8\'/%3E%3Ccircle cx=\'50\' cy=\'47\' r=\'.75\'/%3E%3C/g%3E%3C/svg%3E"),\n    radial-gradient(circle at 88% 10%,rgba(255,241,198,.36),transparent 30%),\n    linear-gradient(135deg,#8d5f25 0%,#d4a95f 52%,#fff0c1 100%)!important;\n  background-size:100% 100%,64px 64px,100% 100%,100% 100%!important;\n  background-position:center,0 0,center,center!important;\n  background-repeat:no-repeat,repeat,no-repeat,no-repeat!important;\n  border-color:rgba(255,239,198,.58)!important;\n  box-shadow:0 24px 58px rgba(120,82,33,.38),inset 0 1px 0 rgba(255,255,255,.30),inset 0 -24px 38px rgba(92,58,20,.22)!important;\n}\n\nbody .theme-grid .theme-card.theme-child h3,\nbody .theme-grid .theme-card.theme-child p,\nbody .theme-grid .theme-card.theme-child strong,\nbody .theme-grid .theme-card.bw-theme-sample-children-soft h3,\nbody .theme-grid .theme-card.bw-theme-sample-children-soft p,\nbody .theme-grid .theme-card.bw-theme-sample-children-soft strong,\nbody .theme-grid .theme-card[data-theme="children-soft"] h3,\nbody .theme-grid .theme-card[data-theme="children-soft"] p,\nbody .theme-grid .theme-card[data-theme="children-soft"] strong,\nbody .theme-grid .theme-card.theme-night h3,\nbody .theme-grid .theme-card.theme-night p,\nbody .theme-grid .theme-card.theme-night strong,\nbody .theme-grid .theme-card.bw-theme-sample-night-mosque h3,\nbody .theme-grid .theme-card.bw-theme-sample-night-mosque p,\nbody .theme-grid .theme-card.bw-theme-sample-night-mosque strong,\nbody .theme-grid .theme-card[data-theme="night-mosque"] h3,\nbody .theme-grid .theme-card[data-theme="night-mosque"] p,\nbody .theme-grid .theme-card[data-theme="night-mosque"] strong{\n  color:#fff!important;\n  text-shadow:0 2px 14px rgba(0,0,0,.58)!important;\n}\nbody .theme-grid .theme-card.theme-sand h3,\nbody .theme-grid .theme-card.theme-sand p,\nbody .theme-grid .theme-card.theme-sand strong,\nbody .theme-grid .theme-card.bw-theme-sample-desert-sand h3,\nbody .theme-grid .theme-card.bw-theme-sample-desert-sand p,\nbody .theme-grid .theme-card.bw-theme-sample-desert-sand strong,\nbody .theme-grid .theme-card[data-theme="desert-sand"] h3,\nbody .theme-grid .theme-card[data-theme="desert-sand"] p,\nbody .theme-grid .theme-card[data-theme="desert-sand"] strong{\n  color:#fff8e7!important;\n  text-shadow:0 2px 14px rgba(43,26,8,.72)!important;\n}\n\nhtml.premium-theme-desert-sand h1,\nhtml.premium-theme-desert-sand h2,\nhtml.premium-theme-desert-sand h3,\nhtml.premium-theme-desert-sand h4,\nhtml.premium-theme-desert-sand h5,\nhtml.premium-theme-desert-sand h6,\nhtml.premium-theme-desert-sand .title,\nhtml.premium-theme-desert-sand .section-title,\nhtml.premium-theme-desert-sand .category-title,\nhtml.premium-theme-desert-sand .meta-value,\nhtml.premium-theme-desert-sand .prayer-name,\nhtml.premium-theme-desert-sand .prayer-time,\nhtml.premium-theme-desert-sand .big-location,\nhtml.premium-theme-desert-sand .next-name{\n  color:#2b1a08!important;\n  text-shadow:0 1px 8px rgba(255,239,198,.62)!important;\n}\nhtml.premium-theme-desert-sand p,\nhtml.premium-theme-desert-sand li,\nhtml.premium-theme-desert-sand .subtitle,\nhtml.premium-theme-desert-sand .small,\nhtml.premium-theme-desert-sand .note,\nhtml.premium-theme-desert-sand .muted,\nhtml.premium-theme-desert-sand .category-intro,\nhtml.premium-theme-desert-sand .ref,\nhtml.premium-theme-desert-sand .label,\nhtml.premium-theme-desert-sand .translit,\nhtml.premium-theme-desert-sand .meaning,\nhtml.premium-theme-desert-sand .when,\nhtml.premium-theme-desert-sand .surah-meta,\nhtml.premium-theme-desert-sand .article p,\nhtml.premium-theme-desert-sand .ayah-translit,\nhtml.premium-theme-desert-sand .ayah-meaning{\n  color:#4a2d0d!important;\n  text-shadow:0 1px 8px rgba(255,239,198,.46)!important;\n}\nhtml.premium-theme-desert-sand .bottom-app-nav,\nhtml.premium-theme-desert-sand .bottom-app-nav-inner{\n  color:#2b1a08!important;\n}\nhtml.premium-theme-night-mosque h1,\nhtml.premium-theme-night-mosque h2,\nhtml.premium-theme-night-mosque h3,\nhtml.premium-theme-night-mosque h4,\nhtml.premium-theme-night-mosque p,\nhtml.premium-theme-night-mosque li,\nhtml.premium-theme-children-soft h1,\nhtml.premium-theme-children-soft h2,\nhtml.premium-theme-children-soft h3,\nhtml.premium-theme-children-soft h4,\nhtml.premium-theme-children-soft p,\nhtml.premium-theme-children-soft li{\n  text-shadow:0 2px 12px rgba(0,0,0,.35)!important;\n}\n/* ===== END BARAKAWAY FINAL PURE CSS PREMIUM THEME PATTERNS ===== */\n';
+}\n\nbody .theme-grid .theme-card.theme-child,\nbody .theme-grid .theme-card.bw-theme-sample-children-soft,\nbody .theme-grid .theme-card[data-theme="children-soft"]{\n  background-color:#07172a!important;\n  background-image:\n    linear-gradient(115deg,transparent 0%,rgba(255,255,255,.12) 44%,transparent 60%),\n    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='118' height='118' viewBox='0 0 118 118'%3E%3Cg fill='%23ffffff' fill-opacity='.72'%3E%3Ccircle cx='14' cy='17' r='1.1'/%3E%3Ccircle cx='45' cy='28' r='.9'/%3E%3Ccircle cx='78' cy='15' r='1'/%3E%3Ccircle cx='104' cy='50' r='.8'/%3E%3Ccircle cx='27' cy='77' r='1'/%3E%3Ccircle cx='75' cy='92' r='.85'/%3E%3Ccircle cx='107' cy='105' r='1'/%3E%3C/g%3E%3C/svg%3E"),\n    radial-gradient(circle at 88% 10%,rgba(255,227,241,.24),transparent 30%),\n    linear-gradient(135deg,#102b44 0%,#173a5c 54%,#234d75 100%)!important;\n  background-size:100% 100%,112px 112px,100% 100%,100% 100%!important;\n  background-position:center,0 0,center,center!important;\n  background-repeat:no-repeat,repeat,no-repeat,no-repeat!important;\n  border-color:rgba(135,203,255,.46)!important;\n  box-shadow:0 24px 58px rgba(7,23,42,.42),inset 0 1px 0 rgba(255,255,255,.12),inset 0 -24px 38px rgba(0,0,0,.20)!important;\n}\nbody .theme-grid .theme-card.theme-night,\nbody .theme-grid .theme-card.bw-theme-sample-night-mosque,\nbody .theme-grid .theme-card[data-theme="night-mosque"]{\n  background-color:#050b13!important;\n  background-image:\n    linear-gradient(115deg,transparent 0%,rgba(255,255,255,.08) 44%,transparent 60%),\n    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='118' height='118' viewBox='0 0 118 118'%3E%3Cg fill='%23ffffff' fill-opacity='.72'%3E%3Ccircle cx='14' cy='17' r='1.1'/%3E%3Ccircle cx='45' cy='28' r='.9'/%3E%3Ccircle cx='78' cy='15' r='1'/%3E%3Ccircle cx='104' cy='50' r='.8'/%3E%3Ccircle cx='27' cy='77' r='1'/%3E%3Ccircle cx='75' cy='92' r='.85'/%3E%3Ccircle cx='107' cy='105' r='1'/%3E%3C/g%3E%3C/svg%3E"),\n    radial-gradient(circle at 82% 12%,rgba(215,192,122,.22),transparent 22%),\n    linear-gradient(135deg,#050b13 0%,#091426 50%,#172f58 100%)!important;\n  background-size:100% 100%,124px 124px,100% 100%,100% 100%!important;\n  background-position:center,0 0,center,center!important;\n  background-repeat:no-repeat,repeat,no-repeat,no-repeat!important;\n  border-color:rgba(118,154,215,.40)!important;\n  box-shadow:0 24px 58px rgba(0,8,32,.54),0 0 34px rgba(120,160,255,.14),inset 0 1px 0 rgba(255,255,255,.14),inset 0 -24px 38px rgba(0,0,0,.34)!important;\n}\nbody .theme-grid .theme-card.theme-sand,\nbody .theme-grid .theme-card.bw-theme-sample-desert-sand,\nbody .theme-grid .theme-card[data-theme="desert-sand"]{\n  background-color:#e2bd7b!important;\n  background-image:\n    linear-gradient(115deg,transparent 0%,rgba(255,255,255,.18) 44%,transparent 60%),\n    url("data:image/svg+xml,%3Csvg xmlns=\'http://www.w3.org/2000/svg\' width=\'64\' height=\'64\' viewBox=\'0 0 64 64\'%3E%3Cg fill=\'%23fff0c8\' fill-opacity=\'.28\'%3E%3Ccircle cx=\'6\' cy=\'9\' r=\'1.1\'/%3E%3Ccircle cx=\'26\' cy=\'13\' r=\'.8\'/%3E%3Ccircle cx=\'47\' cy=\'6\' r=\'1\'/%3E%3Ccircle cx=\'56\' cy=\'30\' r=\'.9\'/%3E%3Ccircle cx=\'11\' cy=\'42\' r=\'.8\'/%3E%3Ccircle cx=\'34\' cy=\'52\' r=\'1\'/%3E%3Ccircle cx=\'59\' cy=\'58\' r=\'.75\'/%3E%3C/g%3E%3Cg fill=\'%23a86f2c\' fill-opacity=\'.14\'%3E%3Ccircle cx=\'18\' cy=\'26\' r=\'.9\'/%3E%3Ccircle cx=\'39\' cy=\'34\' r=\'.8\'/%3E%3Ccircle cx=\'50\' cy=\'47\' r=\'.75\'/%3E%3C/g%3E%3C/svg%3E"),\n    radial-gradient(circle at 88% 10%,rgba(255,241,198,.36),transparent 30%),\n    linear-gradient(135deg,#8d5f25 0%,#d4a95f 52%,#fff0c1 100%)!important;\n  background-size:100% 100%,64px 64px,100% 100%,100% 100%!important;\n  background-position:center,0 0,center,center!important;\n  background-repeat:no-repeat,repeat,no-repeat,no-repeat!important;\n  border-color:rgba(255,239,198,.58)!important;\n  box-shadow:0 24px 58px rgba(120,82,33,.38),inset 0 1px 0 rgba(255,255,255,.30),inset 0 -24px 38px rgba(92,58,20,.22)!important;\n}\n\nbody .theme-grid .theme-card.theme-child h3,\nbody .theme-grid .theme-card.theme-child p,\nbody .theme-grid .theme-card.theme-child strong,\nbody .theme-grid .theme-card.bw-theme-sample-children-soft h3,\nbody .theme-grid .theme-card.bw-theme-sample-children-soft p,\nbody .theme-grid .theme-card.bw-theme-sample-children-soft strong,\nbody .theme-grid .theme-card[data-theme="children-soft"] h3,\nbody .theme-grid .theme-card[data-theme="children-soft"] p,\nbody .theme-grid .theme-card[data-theme="children-soft"] strong,\nbody .theme-grid .theme-card.theme-night h3,\nbody .theme-grid .theme-card.theme-night p,\nbody .theme-grid .theme-card.theme-night strong,\nbody .theme-grid .theme-card.bw-theme-sample-night-mosque h3,\nbody .theme-grid .theme-card.bw-theme-sample-night-mosque p,\nbody .theme-grid .theme-card.bw-theme-sample-night-mosque strong,\nbody .theme-grid .theme-card[data-theme="night-mosque"] h3,\nbody .theme-grid .theme-card[data-theme="night-mosque"] p,\nbody .theme-grid .theme-card[data-theme="night-mosque"] strong{\n  color:#fff!important;\n  text-shadow:0 2px 14px rgba(0,0,0,.58)!important;\n}\nbody .theme-grid .theme-card.theme-sand h3,\nbody .theme-grid .theme-card.theme-sand p,\nbody .theme-grid .theme-card.theme-sand strong,\nbody .theme-grid .theme-card.bw-theme-sample-desert-sand h3,\nbody .theme-grid .theme-card.bw-theme-sample-desert-sand p,\nbody .theme-grid .theme-card.bw-theme-sample-desert-sand strong,\nbody .theme-grid .theme-card[data-theme="desert-sand"] h3,\nbody .theme-grid .theme-card[data-theme="desert-sand"] p,\nbody .theme-grid .theme-card[data-theme="desert-sand"] strong{\n  color:#fff8e7!important;\n  text-shadow:0 2px 14px rgba(43,26,8,.72)!important;\n}\n\nhtml.premium-theme-desert-sand h1,\nhtml.premium-theme-desert-sand h2,\nhtml.premium-theme-desert-sand h3,\nhtml.premium-theme-desert-sand h4,\nhtml.premium-theme-desert-sand h5,\nhtml.premium-theme-desert-sand h6,\nhtml.premium-theme-desert-sand .title,\nhtml.premium-theme-desert-sand .section-title,\nhtml.premium-theme-desert-sand .category-title,\nhtml.premium-theme-desert-sand .meta-value,\nhtml.premium-theme-desert-sand .prayer-name,\nhtml.premium-theme-desert-sand .prayer-time,\nhtml.premium-theme-desert-sand .big-location,\nhtml.premium-theme-desert-sand .next-name{\n  color:#2b1a08!important;\n  text-shadow:0 1px 8px rgba(255,239,198,.62)!important;\n}\nhtml.premium-theme-desert-sand p,\nhtml.premium-theme-desert-sand li,\nhtml.premium-theme-desert-sand .subtitle,\nhtml.premium-theme-desert-sand .small,\nhtml.premium-theme-desert-sand .note,\nhtml.premium-theme-desert-sand .muted,\nhtml.premium-theme-desert-sand .category-intro,\nhtml.premium-theme-desert-sand .ref,\nhtml.premium-theme-desert-sand .label,\nhtml.premium-theme-desert-sand .translit,\nhtml.premium-theme-desert-sand .meaning,\nhtml.premium-theme-desert-sand .when,\nhtml.premium-theme-desert-sand .surah-meta,\nhtml.premium-theme-desert-sand .article p,\nhtml.premium-theme-desert-sand .ayah-translit,\nhtml.premium-theme-desert-sand .ayah-meaning{\n  color:#4a2d0d!important;\n  text-shadow:0 1px 8px rgba(255,239,198,.46)!important;\n}\nhtml.premium-theme-desert-sand .bottom-app-nav,\nhtml.premium-theme-desert-sand .bottom-app-nav-inner{\n  color:#2b1a08!important;\n}\nhtml.premium-theme-night-mosque h1,\nhtml.premium-theme-night-mosque h2,\nhtml.premium-theme-night-mosque h3,\nhtml.premium-theme-night-mosque h4,\nhtml.premium-theme-night-mosque p,\nhtml.premium-theme-night-mosque li,\nhtml.premium-theme-children-soft h1,\nhtml.premium-theme-children-soft h2,\nhtml.premium-theme-children-soft h3,\nhtml.premium-theme-children-soft h4,\nhtml.premium-theme-children-soft p,\nhtml.premium-theme-children-soft li{\n  text-shadow:0 2px 12px rgba(0,0,0,.35)!important;\n}\n/* ===== END BARAKAWAY FINAL PURE CSS PREMIUM THEME PATTERNS ===== */\n';
   const style = document.createElement("style");
   style.id = STYLE_ID;
   style.textContent = CSS;
@@ -1822,11 +1863,11 @@ html[class*="premium-theme-"] .theme-grid .theme-card.theme-night,
 html[class*="premium-theme-"] .theme-grid .theme-card[data-theme="night-mosque"]{
   background-color:#050b13 !important;
   background-image:
-    linear-gradient(27deg, rgba(215,192,122,.12) 5%, transparent 5%, transparent 45%, rgba(215,192,122,.12) 45%, rgba(215,192,122,.12) 55%, transparent 55%, transparent),
-    linear-gradient(207deg, rgba(124,167,255,.10) 5%, transparent 5%, transparent 45%, rgba(124,167,255,.10) 45%, rgba(124,167,255,.10) 55%, transparent 55%, transparent),
+    radial-gradient(circle at 58% 44%, rgba(255,255,255,.64) 0 .8px, transparent 1.45px),
+    radial-gradient(circle at 87% 62%, rgba(255,255,255,.72) 0 .9px, transparent 1.55px),
     radial-gradient(circle at 18px 18px, rgba(255,255,255,.48) 0 1.2px, transparent 1.8px),
-    radial-gradient(circle at 68px 34px, rgba(215,192,122,.30) 0 10px, transparent 10.8px),
-    linear-gradient(90deg, transparent 0 31%, rgba(215,192,122,.18) 31% 33%, transparent 33% 57%, rgba(215,192,122,.18) 57% 59%, transparent 59% 100%),
+    radial-gradient(circle at 72% 36%, rgba(255,255,255,.74) 0 .9px, transparent 1.55px),
+    radial-gradient(circle at 39% 70%, rgba(255,255,255,.70) 0 .8px, transparent 1.45px),
     linear-gradient(145deg,#050b13 0%,#10213d 52%,#294f86 100%) !important;
   background-size:18px 18px,18px 18px,120px 120px,120px 120px,120px 120px,100% 100% !important;
   background-position:0 0,9px 9px,0 0,0 0,0 0,center !important;
@@ -2029,10 +2070,10 @@ html[class*="premium-theme-"] body .page .theme-grid .theme-card[data-theme="nig
     radial-gradient(circle at 18px 18px, rgba(255,255,255,.48) 0 1.2px, transparent 1.8px),
     radial-gradient(circle at 48px 31px, rgba(255,255,255,.40) 0 1px, transparent 1.6px),
     radial-gradient(circle at 82px 16px, rgba(255,255,255,.44) 0 1.1px, transparent 1.7px),
-    radial-gradient(circle at 68px 34px, rgba(215,192,122,.30) 0 10px, transparent 10.8px),
-    linear-gradient(90deg, transparent 0 31%, rgba(215,192,122,.18) 31% 33%, transparent 33% 57%, rgba(215,192,122,.18) 57% 59%, transparent 59% 100%),
-    linear-gradient(27deg, rgba(215,192,122,.12) 5%, transparent 5%, transparent 45%, rgba(215,192,122,.12) 45%, rgba(215,192,122,.12) 55%, transparent 55%, transparent),
-    linear-gradient(207deg, rgba(124,167,255,.10) 5%, transparent 5%, transparent 45%, rgba(124,167,255,.10) 45%, rgba(124,167,255,.10) 55%, transparent 55%, transparent),
+    radial-gradient(circle at 72% 36%, rgba(255,255,255,.74) 0 .9px, transparent 1.55px),
+    radial-gradient(circle at 39% 70%, rgba(255,255,255,.70) 0 .8px, transparent 1.45px),
+    radial-gradient(circle at 58% 44%, rgba(255,255,255,.64) 0 .8px, transparent 1.45px),
+    radial-gradient(circle at 87% 62%, rgba(255,255,255,.72) 0 .9px, transparent 1.55px),
     linear-gradient(145deg,#050b13 0%,#10213d 52%,#294f86 100%) !important;
   background-size:120px 120px,120px 120px,120px 120px,120px 120px,120px 120px,18px 18px,18px 18px,100% 100% !important;
   background-position:0 0,0 0,0 0,0 0,0 0,0 0,9px 9px,center !important;
@@ -2104,20 +2145,20 @@ html[class*="premium-theme-"] [data-barakaway-logo-lock] *{
 
 /* ===== BARAKAWAY NIGHT MOSQUE PREMIUM POLISH ===== */
 html.premium-theme-night-mosque{
-  --bg:#020716 !important;
-  --surface:#06122b !important;
-  --surface-2:#0a1a3d !important;
-  --surface-3:#123064 !important;
-  --border:rgba(138,174,255,.42) !important;
-  --border-2:rgba(215,192,122,.48) !important;
-  --text:#f8fbff !important;
-  --text-soft:#dce8ff !important;
-  --text-muted:#9fb8e6 !important;
-  --green:#d7c07a !important;
-  --green-strong:#264f91 !important;
-  --green-soft:#fff0b8 !important;
-  --bw-accent:#d7c07a !important;
-  --bw-accent-2:#88b4ff !important;
+  --bg:#040a12;
+  --surface:#081124;
+  --surface-2:#0d1b33;
+  --surface-3:#142a4c;
+  --border:rgba(118,154,215,.32);
+  --border-2:rgba(118,154,215,.44);
+  --text:#f3f7ff;
+  --text-soft:#c8d8f4;
+  --text-muted:#91a9ce;
+  --green:#d7c07a;
+  --green-strong:#355d9a;
+  --green-soft:#f4e6b2;
+  --bw-accent:#d7c07a;
+  --bw-accent-2:#7ca7ff;
 }
 html.premium-theme-night-mosque body{
   background-color:#020716 !important;
@@ -2196,7 +2237,7 @@ html body .page .theme-grid .theme-card[data-theme="night-mosque"]{
   background-color:#06122b !important;
   background-image:
     linear-gradient(115deg,rgba(255,255,255,.10) 0%,transparent 34%,rgba(136,180,255,.13) 62%,transparent 100%),
-    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160' viewBox='0 0 160 160'%3E%3Cg fill='%23ffffff'%3E%3Ccircle cx='18' cy='18' r='1.25' fill-opacity='.78'/%3E%3Ccircle cx='52' cy='10' r='.9' fill-opacity='.55'/%3E%3Ccircle cx='93' cy='28' r='1.1' fill-opacity='.70'/%3E%3Ccircle cx='137' cy='16' r='.95' fill-opacity='.62'/%3E%3Ccircle cx='146' cy='75' r='1.1' fill-opacity='.68'/%3E%3Ccircle cx='30' cy='96' r='.95' fill-opacity='.58'/%3E%3Ccircle cx='78' cy='122' r='1.15' fill-opacity='.72'/%3E%3Ccircle cx='128' cy='137' r='.85' fill-opacity='.52'/%3E%3C/g%3E%3Cpath d='M62 39a18 18 0 1 1-18-18 13.5 13.5 0 1 0 18 18z' fill='%23d7c07a' fill-opacity='.72'/%3E%3Cg fill='none' stroke='%23d7c07a' stroke-opacity='.26' stroke-width='1.8' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M16 138h128'/%3E%3Cpath d='M32 138V97q11-24 22 0v41'/%3E%3Cpath d='M72 138V84q16-32 32 0v54'/%3E%3Cpath d='M116 138V101q10-22 20 0v37'/%3E%3Cpath d='M80 61h16M88 53v16'/%3E%3C/g%3E%3C/svg%3E"),
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='118' height='118' viewBox='0 0 118 118'%3E%3Cg fill='%23ffffff' fill-opacity='.72'%3E%3Ccircle cx='14' cy='17' r='1.1'/%3E%3Ccircle cx='45' cy='28' r='.9'/%3E%3Ccircle cx='78' cy='15' r='1'/%3E%3Ccircle cx='104' cy='50' r='.8'/%3E%3Ccircle cx='27' cy='77' r='1'/%3E%3Ccircle cx='75' cy='92' r='.85'/%3E%3Ccircle cx='107' cy='105' r='1'/%3E%3C/g%3E%3C/svg%3E"),
     radial-gradient(circle at 84% 8%,rgba(255,255,255,.20),transparent 18%),
     radial-gradient(circle at 16% 0%,rgba(82,132,230,.20),transparent 32%),
     linear-gradient(145deg,#050b18 0%,#0b1b3c 52%,#244b82 100%) !important;
@@ -2225,7 +2266,7 @@ body .theme-grid .theme-card[data-theme="night-mosque"] strong{
 
 
 (function(){
-  const STYLE_ID = "barakaway-night-mosque-star-only-final-override";
+  const STYLE_ID = "barakaway-night-mosque-stars-only-clean-20260510";
   if(document.getElementById(STYLE_ID)) return;
   const style = document.createElement("style");
   style.id = STYLE_ID;
@@ -2233,20 +2274,20 @@ body .theme-grid .theme-card[data-theme="night-mosque"] strong{
 
 /* ===== BARAKAWAY NIGHT MOSQUE STAR-ONLY FINAL OVERRIDE ===== */
 html.premium-theme-night-mosque{
-  --bg:#020716 !important;
-  --surface:#041021 !important;
-  --surface-2:#071a35 !important;
-  --surface-3:#0b2b58 !important;
-  --border:rgba(102,145,210,.48) !important;
-  --border-2:rgba(126,168,232,.46) !important;
-  --text:#f8fbff !important;
-  --text-soft:#dce8ff !important;
-  --text-muted:#9fb8e6 !important;
-  --green:#d7c07a !important;
-  --green-strong:#214777 !important;
-  --green-soft:#fff0b8 !important;
-  --bw-accent:#d7c07a !important;
-  --bw-accent-2:#88b4ff !important;
+  --bg:#040a12;
+  --surface:#081124;
+  --surface-2:#0d1b33;
+  --surface-3:#142a4c;
+  --border:rgba(118,154,215,.32);
+  --border-2:rgba(118,154,215,.44);
+  --text:#f3f7ff;
+  --text-soft:#c8d8f4;
+  --text-muted:#91a9ce;
+  --green:#d7c07a;
+  --green-strong:#355d9a;
+  --green-soft:#f4e6b2;
+  --bw-accent:#d7c07a;
+  --bw-accent-2:#7ca7ff;
 }
 html.premium-theme-night-mosque body{
   background-color:#020716 !important;
@@ -2360,4 +2401,168 @@ body .theme-grid .theme-card[data-theme="night-mosque"] strong{
 /* ===== END BARAKAWAY NIGHT MOSQUE STAR-ONLY FINAL OVERRIDE ===== */
 `;
   (document.head || document.documentElement).appendChild(style);
+})();
+
+
+(function(){
+  const STYLE_ID = "barakaway-night-mosque-stars-only-clean-20260510-runtime";
+  const CSS = `
+
+/* ===== NIGHT MOSQUE CLEAN FINAL: STARS ONLY, NO MOONS, NO MOSQUE LINES ===== */
+html.premium-theme-night-mosque{
+  --bg:#040a12;
+  --surface:#081124;
+  --surface-2:#0d1b33;
+  --surface-3:#142a4c;
+  --border:rgba(118,154,215,.32);
+  --border-2:rgba(118,154,215,.44);
+  --text:#f3f7ff;
+  --text-soft:#c8d8f4;
+  --text-muted:#91a9ce;
+  --green:#d7c07a;
+  --green-strong:#355d9a;
+  --green-soft:#f4e6b2;
+  --bw-accent:#d7c07a;
+  --bw-accent-2:#7ca7ff;
+}
+
+html.premium-theme-night-mosque body{
+  background:
+    radial-gradient(circle at 8% 10%, rgba(255,255,255,.72) 0 1px, transparent 1.7px),
+    radial-gradient(circle at 18% 36%, rgba(255,255,255,.62) 0 .9px, transparent 1.5px),
+    radial-gradient(circle at 33% 22%, rgba(255,255,255,.78) 0 1px, transparent 1.7px),
+    radial-gradient(circle at 47% 64%, rgba(255,255,255,.56) 0 .85px, transparent 1.45px),
+    radial-gradient(circle at 59% 18%, rgba(255,255,255,.70) 0 1px, transparent 1.65px),
+    radial-gradient(circle at 74% 42%, rgba(255,255,255,.74) 0 1px, transparent 1.7px),
+    radial-gradient(circle at 88% 18%, rgba(255,255,255,.68) 0 .9px, transparent 1.55px),
+    radial-gradient(circle at 97% 70%, rgba(255,255,255,.64) 0 .9px, transparent 1.55px),
+    radial-gradient(900px 560px at 80% 14%, rgba(53,93,154,.22) 0%, transparent 64%),
+    linear-gradient(180deg,#040a12 0%,#081124 52%,#040a12 100%) !important;
+  color:var(--text) !important;
+}
+
+body .theme-grid .theme-card.theme-night,
+body .theme-grid .theme-card.bw-theme-sample-night-mosque,
+body .theme-grid .theme-card[data-theme="night-mosque"],
+html[class*="premium-theme-"] body .theme-grid .theme-card.theme-night,
+html[class*="premium-theme-"] body .theme-grid .theme-card.bw-theme-sample-night-mosque,
+html[class*="premium-theme-"] body .theme-grid .theme-card[data-theme="night-mosque"],
+html body .page .theme-grid .theme-card.theme-night,
+html body .page .theme-grid .theme-card[data-theme="night-mosque"],
+.theme-grid .theme-card.theme-night,
+.theme-grid button.theme-card.theme-night,
+.theme-grid [data-theme="night-mosque"],
+.theme-night{
+
+  position:relative !important;
+  overflow:hidden !important;
+  background-color:#040a12 !important;
+  background-image:
+    radial-gradient(circle at 5% 12%, rgba(255,255,255,.82) 0 1px, transparent 1.7px),
+    radial-gradient(circle at 14% 28%, rgba(255,255,255,.72) 0 .9px, transparent 1.5px),
+    radial-gradient(circle at 26% 11%, rgba(255,255,255,.92) 0 1.15px, transparent 1.8px),
+    radial-gradient(circle at 38% 22%, rgba(255,255,255,.70) 0 .85px, transparent 1.5px),
+    radial-gradient(circle at 52% 9%, rgba(255,255,255,.90) 0 1.1px, transparent 1.8px),
+    radial-gradient(circle at 64% 30%, rgba(255,255,255,.76) 0 .95px, transparent 1.6px),
+    radial-gradient(circle at 78% 15%, rgba(255,255,255,.88) 0 1px, transparent 1.7px),
+    radial-gradient(circle at 91% 25%, rgba(255,255,255,.66) 0 .8px, transparent 1.45px),
+    radial-gradient(circle at 18% 58%, rgba(255,255,255,.76) 0 .9px, transparent 1.55px),
+    radial-gradient(circle at 34% 72%, rgba(255,255,255,.86) 0 1px, transparent 1.7px),
+    radial-gradient(circle at 48% 52%, rgba(255,255,255,.64) 0 .8px, transparent 1.45px),
+    radial-gradient(circle at 67% 68%, rgba(255,255,255,.82) 0 .95px, transparent 1.65px),
+    radial-gradient(circle at 83% 57%, rgba(255,255,255,.92) 0 1.1px, transparent 1.85px),
+    radial-gradient(circle at 96% 77%, rgba(255,255,255,.72) 0 .9px, transparent 1.55px),
+    radial-gradient(700px 360px at 76% 24%, rgba(53,93,154,.34) 0%, transparent 62%),
+    linear-gradient(145deg,#040a12 0%,#081526 48%,#102a4d 100%) !important;
+  background-size:100% 100% !important;
+  background-position:center !important;
+  background-repeat:no-repeat !important;
+  border-color:rgba(118,154,215,.44) !important;
+  box-shadow:
+    0 24px 52px rgba(0,8,32,.56),
+    inset 0 1px 0 rgba(255,255,255,.12),
+    inset 0 -20px 30px rgba(0,0,0,.34) !important;
+}
+
+html.premium-theme-night-mosque .container,
+html.premium-theme-night-mosque .hero,
+html.premium-theme-night-mosque .brand-prayer-hero,
+html.premium-theme-night-mosque .today-hub,
+html.premium-theme-night-mosque .about-project-card,
+html.premium-theme-night-mosque .barakaway-pro-final,
+html.premium-theme-night-mosque .block,
+html.premium-theme-night-mosque .card,
+html.premium-theme-night-mosque .box,
+html.premium-theme-night-mosque .panel,
+html.premium-theme-night-mosque .quote,
+html.premium-theme-night-mosque .empty,
+html.premium-theme-night-mosque .article,
+html.premium-theme-night-mosque .category-panel,
+html.premium-theme-night-mosque .surah-card,
+html.premium-theme-night-mosque .prayer-card,
+html.premium-theme-night-mosque .toggle-row,
+html.premium-theme-night-mosque .meta-item,
+html.premium-theme-night-mosque .note-box,
+html.premium-theme-night-mosque .jumuah-box,
+html.premium-theme-night-mosque .month-day,
+html.premium-theme-night-mosque .month-head,
+html.premium-theme-night-mosque .wallet-support,
+html.premium-theme-night-mosque .home-widget,
+html.premium-theme-night-mosque .dua-card,
+html.premium-theme-night-mosque .ayah-card,
+html.premium-theme-night-mosque .master-audio-wrap,
+html.premium-theme-night-mosque .reader-side,
+html.premium-theme-night-mosque .reader-main,
+html.premium-theme-night-mosque .dua-side,
+html.premium-theme-night-mosque .dua-main,
+html.premium-theme-night-mosque .ai-side,
+html.premium-theme-night-mosque .ai-main,
+html.premium-theme-night-mosque .player-panel,
+html.premium-theme-night-mosque .preview-panel,
+html.premium-theme-night-mosque .app-menu-btn,
+html.premium-theme-night-mosque .today-action,
+html.premium-theme-night-mosque .premium-resource-card,
+html.premium-theme-night-mosque .bottom-app-nav,
+html.premium-theme-night-mosque .bottom-app-nav-inner{
+
+  position:relative !important;
+  overflow:hidden !important;
+  background-color:#040a12 !important;
+  background-image:
+    radial-gradient(circle at 5% 12%, rgba(255,255,255,.82) 0 1px, transparent 1.7px),
+    radial-gradient(circle at 14% 28%, rgba(255,255,255,.72) 0 .9px, transparent 1.5px),
+    radial-gradient(circle at 26% 11%, rgba(255,255,255,.92) 0 1.15px, transparent 1.8px),
+    radial-gradient(circle at 38% 22%, rgba(255,255,255,.70) 0 .85px, transparent 1.5px),
+    radial-gradient(circle at 52% 9%, rgba(255,255,255,.90) 0 1.1px, transparent 1.8px),
+    radial-gradient(circle at 64% 30%, rgba(255,255,255,.76) 0 .95px, transparent 1.6px),
+    radial-gradient(circle at 78% 15%, rgba(255,255,255,.88) 0 1px, transparent 1.7px),
+    radial-gradient(circle at 91% 25%, rgba(255,255,255,.66) 0 .8px, transparent 1.45px),
+    radial-gradient(circle at 18% 58%, rgba(255,255,255,.76) 0 .9px, transparent 1.55px),
+    radial-gradient(circle at 34% 72%, rgba(255,255,255,.86) 0 1px, transparent 1.7px),
+    radial-gradient(circle at 48% 52%, rgba(255,255,255,.64) 0 .8px, transparent 1.45px),
+    radial-gradient(circle at 67% 68%, rgba(255,255,255,.82) 0 .95px, transparent 1.65px),
+    radial-gradient(circle at 83% 57%, rgba(255,255,255,.92) 0 1.1px, transparent 1.85px),
+    radial-gradient(circle at 96% 77%, rgba(255,255,255,.72) 0 .9px, transparent 1.55px),
+    radial-gradient(700px 360px at 76% 24%, rgba(53,93,154,.34) 0%, transparent 62%),
+    linear-gradient(145deg,#040a12 0%,#081526 48%,#102a4d 100%) !important;
+  background-size:100% 100% !important;
+  background-position:center !important;
+  background-repeat:no-repeat !important;
+  border-color:rgba(118,154,215,.44) !important;
+  box-shadow:
+    0 24px 52px rgba(0,8,32,.56),
+    inset 0 1px 0 rgba(255,255,255,.12),
+    inset 0 -20px 30px rgba(0,0,0,.34) !important;
+}
+/* ===== END NIGHT MOSQUE CLEAN FINAL ===== */
+`;
+  function inject(){
+    if(document.getElementById(STYLE_ID)) return;
+    const style=document.createElement("style");
+    style.id=STYLE_ID;
+    style.textContent=CSS;
+    (document.head || document.documentElement).appendChild(style);
+  }
+  if(document.readyState === "loading") document.addEventListener("DOMContentLoaded", inject);
+  else inject();
 })();
