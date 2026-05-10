@@ -14,7 +14,7 @@
     'desert-sand'
   ];
 
-  const PREMIUM_CSS = '\n/* ===== BARAKAWAY PRO PREMIUM THEMES RUNTIME ===== */\n:root{\n  --bw-pro-transition: background .22s ease,border-color .22s ease,box-shadow .22s ease,color .22s ease;\n}\n\nhtml.premium-theme-royal-gold{\n  --bg:#090908;\n  --surface:#171208;\n  --surface-2:#20170a;\n  --surface-3:#2b2110;\n  --border:rgba(215,192,122,.36);\n  --border-2:rgba(244,220,148,.44);\n  --text:#fff8df;\n  --text-soft:#ead8a5;\n  --text-muted:#c7ad62;\n  --green:#d7c07a;\n  --green-strong:#9d7424;\n  --green-soft:#fff0b4;\n  --bw-accent:#d7c07a;\n  --bw-accent-2:#f4dc94;\n}\n\nhtml.premium-theme-emerald-quran{\n  --bg:#061109;\n  --surface:#07180e;\n  --surface-2:#0c2114;\n  --surface-3:#12301d;\n  --border:rgba(102,198,128,.34);\n  --border-2:rgba(102,198,128,.46);\n  --text:#f0fff4;\n  --text-soft:#c4f0d1;\n  --text-muted:#8fd9a2;\n  --green:#66c680;\n  --green-strong:#2d7a46;\n  --green-soft:#c9ffd7;\n  --bw-accent:#66c680;\n  --bw-accent-2:#b8ffd0;\n}\n\nhtml.premium-theme-violet-noor{\n  --bg:#0d0a15;\n  --surface:#141020;\n  --surface-2:#1b1530;\n  --surface-3:#241a42;\n  --border:rgba(161,118,255,.34);\n  --border-2:rgba(197,168,255,.42);\n  --text:#fbf8ff;\n  --text-soft:#dfd2ff;\n  --text-muted:#bda6f0;\n  --green:#c5a8ff;\n  --green-strong:#6f4dcc;\n  --green-soft:#eadfff;\n  --bw-accent:#a176ff;\n  --bw-accent-2:#d6c4ff;\n}\n\nhtml.premium-theme-rose-soft{\n  --bg:#160a12;\n  --surface:#21101a;\n  --surface-2:#301525;\n  --surface-3:#401b31;\n  --border:rgba(255,158,199,.34);\n  --border-2:rgba(255,190,218,.44);\n  --text:#fff8fb;\n  --text-soft:#ffd8e8;\n  --text-muted:#f0a9c8;\n  --green:#ff9ec7;\n  --green-strong:#b64d78;\n  --green-soft:#ffe2ee;\n  --bw-accent:#ff9ec7;\n  --bw-accent-2:#ffd0e4;\n}\n\nhtml.premium-theme-carbon-elite{\n  --bg:#050607;\n  --surface:#0d1116;\n  --surface-2:#121820;\n  --surface-3:#1a222c;\n  --border:rgba(170,184,199,.28);\n  --border-2:rgba(202,213,224,.34);\n  --text:#f7fafc;\n  --text-soft:#cfd8e3;\n  --text-muted:#99a7b5;\n  --green:#d6dde6;\n  --green-strong:#59616c;\n  --green-soft:#eef2f6;\n  --bw-accent:#aab8c7;\n  --bw-accent-2:#e8edf3;\n}\n\nhtml.premium-theme-children-soft{\n  --bg:#0c1f32;\n  --surface:#102b44;\n  --surface-2:#173a5c;\n  --surface-3:#234d75;\n  --border:rgba(135,203,255,.34);\n  --border-2:rgba(255,227,241,.40);\n  --text:#f4fbff;\n  --text-soft:#d3ecff;\n  --text-muted:#abd6f7;\n  --green:#87cbff;\n  --green-strong:#3d8bc7;\n  --green-soft:#dff4ff;\n  --bw-accent:#87cbff;\n  --bw-accent-2:#ffe3f1;\n}\n\nhtml.premium-theme-night-mosque{\n  --bg:#050b13;\n  --surface:#091426;\n  --surface-2:#10213d;\n  --surface-3:#172f58;\n  --border:rgba(215,192,122,.28);\n  --border-2:rgba(118,154,215,.36);\n  --text:#f3f7ff;\n  --text-soft:#c8d8f4;\n  --text-muted:#91a9ce;\n  --green:#d7c07a;\n  --green-strong:#355d9a;\n  --green-soft:#f4e6b2;\n  --bw-accent:#d7c07a;\n  --bw-accent-2:#7ca7ff;\n}\n\nhtml.premium-theme-desert-sand{\n  --bg:#130c05;\n  --surface:#1e1408;\n  --surface-2:#2e200e;\n  --surface-3:#3e2b13;\n  --border:rgba(255,237,190,.30);\n  --border-2:rgba(219,174,97,.40);\n  --text:#fff9ea;\n  --text-soft:#ecd7ad;\n  --text-muted:#c9a978;\n  --green:#ffedbe;\n  --green-strong:#9a6d2d;\n  --green-soft:#fff3cf;\n  --bw-accent:#ffedbe;\n  --bw-accent-2:#dbaE61;\n}\n\nhtml[class*="premium-theme-"] body{\n  color:var(--text) !important;\n  background:\n    radial-gradient(circle at 14% 0%, color-mix(in srgb, var(--bw-accent) 20%, transparent), transparent 28%),\n    radial-gradient(circle at 88% 8%, color-mix(in srgb, var(--bw-accent-2) 16%, transparent), transparent 32%),\n    linear-gradient(180deg,var(--bg) 0%,color-mix(in srgb,var(--surface) 72%,var(--bg)) 48%,var(--bg) 100%) !important;\n}\n\nhtml[class*="premium-theme-"] .container,\nhtml[class*="premium-theme-"] .hero,\nhtml[class*="premium-theme-"] .brand-prayer-hero,\nhtml[class*="premium-theme-"] .today-hub,\nhtml[class*="premium-theme-"] .about-project-card,\nhtml[class*="premium-theme-"] .barakaway-pro-final,\nhtml[class*="premium-theme-"] .block,\nhtml[class*="premium-theme-"] .card,\nhtml[class*="premium-theme-"] .box,\nhtml[class*="premium-theme-"] .panel,\nhtml[class*="premium-theme-"] .quote,\nhtml[class*="premium-theme-"] .empty,\nhtml[class*="premium-theme-"] .article,\nhtml[class*="premium-theme-"] .category-panel,\nhtml[class*="premium-theme-"] .surah-card,\nhtml[class*="premium-theme-"] .prayer-card,\nhtml[class*="premium-theme-"] .toggle-row,\nhtml[class*="premium-theme-"] .meta-item,\nhtml[class*="premium-theme-"] .note-box,\nhtml[class*="premium-theme-"] .jumuah-box,\nhtml[class*="premium-theme-"] .month-day,\nhtml[class*="premium-theme-"] .month-head,\nhtml[class*="premium-theme-"] .wallet-support,\nhtml[class*="premium-theme-"] .home-widget,\nhtml[class*="premium-theme-"] .dua-card,\nhtml[class*="premium-theme-"] .ayah-card,\nhtml[class*="premium-theme-"] .master-audio-wrap,\nhtml[class*="premium-theme-"] .reader-side,\nhtml[class*="premium-theme-"] .reader-main,\nhtml[class*="premium-theme-"] .dua-side,\nhtml[class*="premium-theme-"] .dua-main,\nhtml[class*="premium-theme-"] .ai-side,\nhtml[class*="premium-theme-"] .ai-main,\nhtml[class*="premium-theme-"] .player-panel,\nhtml[class*="premium-theme-"] .preview-panel,\nhtml[class*="premium-theme-"] .app-menu-btn,\nhtml[class*="premium-theme-"] .today-action,\nhtml[class*="premium-theme-"] .premium-resource-card{\n  background:\n    radial-gradient(circle at 94% 0%, color-mix(in srgb, var(--bw-accent) 12%, transparent), transparent 30%),\n    linear-gradient(135deg,color-mix(in srgb,var(--surface) 92%,#000) 0%,var(--surface-2) 54%,color-mix(in srgb,var(--surface-3) 84%,#000) 100%) !important;\n  border-color:var(--border) !important;\n  color:var(--text) !important;\n  box-shadow:0 18px 42px color-mix(in srgb,var(--bg) 70%,transparent), inset 0 1px 0 rgba(255,255,255,.055) !important;\n  transition:var(--bw-pro-transition) !important;\n}\n\nhtml[class*="premium-theme-"] h1,\nhtml[class*="premium-theme-"] h2,\nhtml[class*="premium-theme-"] h3,\nhtml[class*="premium-theme-"] h4,\nhtml[class*="premium-theme-"] .title,\nhtml[class*="premium-theme-"] .category-title,\nhtml[class*="premium-theme-"] .section h2,\nhtml[class*="premium-theme-"] .surah-name,\nhtml[class*="premium-theme-"] .dua-title,\nhtml[class*="premium-theme-"] .ayah-arabic{\n  color:var(--text) !important;\n}\n\nhtml[class*="premium-theme-"] p,\nhtml[class*="premium-theme-"] li,\nhtml[class*="premium-theme-"] .subtitle,\nhtml[class*="premium-theme-"] .small,\nhtml[class*="premium-theme-"] .note,\nhtml[class*="premium-theme-"] .muted,\nhtml[class*="premium-theme-"] .category-intro,\nhtml[class*="premium-theme-"] .ref,\nhtml[class*="premium-theme-"] .label,\nhtml[class*="premium-theme-"] .translit,\nhtml[class*="premium-theme-"] .meaning,\nhtml[class*="premium-theme-"] .when,\nhtml[class*="premium-theme-"] .surah-meta,\nhtml[class*="premium-theme-"] .article p,\nhtml[class*="premium-theme-"] .dua-translit,\nhtml[class*="premium-theme-"] .ayah-translit,\nhtml[class*="premium-theme-"] .ayah-meaning{\n  color:var(--text-soft) !important;\n}\n\nhtml[class*="premium-theme-"] strong,\nhtml[class*="premium-theme-"] a,\nhtml[class*="premium-theme-"] .surah-number,\nhtml[class*="premium-theme-"] .badge,\nhtml[class*="premium-theme-"] .chip,\nhtml[class*="premium-theme-"] .wallet-badge{\n  color:var(--bw-accent) !important;\n}\n\nhtml[class*="premium-theme-"] .btn.primary,\nhtml[class*="premium-theme-"] .copy-wallet-btn,\nhtml[class*="premium-theme-"] .install-btn,\nhtml[class*="premium-theme-"] .support-project-btn,\nhtml[class*="premium-theme-"] button:not(.icon-btn):not(.share-close):not(.install-help-close):not(.bottom-app-nav-item){\n  background:linear-gradient(135deg,var(--green-strong) 0%, color-mix(in srgb,var(--bw-accent) 72%,var(--green-strong)) 100%) !important;\n  color:#fff !important;\n  border-color:var(--border-2) !important;\n  box-shadow:0 14px 30px color-mix(in srgb,var(--green-strong) 24%,transparent) !important;\n}\n\nhtml[class*="premium-theme-"] input,\nhtml[class*="premium-theme-"] textarea,\nhtml[class*="premium-theme-"] select,\nhtml[class*="premium-theme-"] .search-input,\nhtml[class*="premium-theme-"] .wallet-address{\n  background:color-mix(in srgb,var(--surface-3) 74%,#000) !important;\n  color:var(--text) !important;\n  border-color:var(--border-2) !important;\n}\n\nhtml[class*="premium-theme-"] .bottom-app-nav{\n  background:linear-gradient(180deg,color-mix(in srgb,var(--surface) 88%,transparent),color-mix(in srgb,var(--bg) 96%,transparent)) !important;\n  border-top-color:var(--border) !important;\n  box-shadow:0 -18px 44px color-mix(in srgb,var(--bg) 70%,transparent), inset 0 1px 0 rgba(255,255,255,.04) !important;\n}\n\nhtml[class*="premium-theme-"] .bottom-app-nav-inner{\n  background:linear-gradient(180deg,color-mix(in srgb,var(--surface-2) 92%,transparent),color-mix(in srgb,var(--surface) 94%,transparent)) !important;\n  border-color:var(--border) !important;\n}\n\nhtml[class*="premium-theme-"] .bottom-app-nav-item{\n  color:var(--text-soft) !important;\n}\n\nhtml[class*="premium-theme-"] .bottom-app-nav-item.active,\nhtml[class*="premium-theme-"] .bottom-app-nav-item.is-active{\n  background:linear-gradient(135deg,color-mix(in srgb,var(--bw-accent) 24%,transparent),color-mix(in srgb,var(--green-strong) 28%,transparent)) !important;\n  color:var(--text) !important;\n  border-color:var(--border-2) !important;\n}\n/* ===== END BARAKAWAY PRO PREMIUM THEMES RUNTIME ===== */\n';
+  const PREMIUM_CSS = '\n/* ===== BARAKAWAY PRO PREMIUM THEMES RUNTIME ===== */\n:root{\n  --bw-pro-transition: background .22s ease,border-color .22s ease,box-shadow .22s ease,color .22s ease;\n}\n\nhtml.premium-theme-royal-gold{\n  --bg:#090908;\n  --surface:#171208;\n  --surface-2:#20170a;\n  --surface-3:#2b2110;\n  --border:rgba(215,192,122,.36);\n  --border-2:rgba(244,220,148,.44);\n  --text:#fff8df;\n  --text-soft:#ead8a5;\n  --text-muted:#c7ad62;\n  --green:#d7c07a;\n  --green-strong:#9d7424;\n  --green-soft:#fff0b4;\n  --bw-accent:#d7c07a;\n  --bw-accent-2:#f4dc94;\n}\n\nhtml.premium-theme-emerald-quran{\n  --bg:#061109;\n  --surface:#07180e;\n  --surface-2:#0c2114;\n  --surface-3:#12301d;\n  --border:rgba(102,198,128,.34);\n  --border-2:rgba(102,198,128,.46);\n  --text:#f0fff4;\n  --text-soft:#c4f0d1;\n  --text-muted:#8fd9a2;\n  --green:#66c680;\n  --green-strong:#2d7a46;\n  --green-soft:#c9ffd7;\n  --bw-accent:#66c680;\n  --bw-accent-2:#b8ffd0;\n}\n\nhtml.premium-theme-violet-noor{\n  --bg:#0d0a15;\n  --surface:#141020;\n  --surface-2:#1b1530;\n  --surface-3:#241a42;\n  --border:rgba(161,118,255,.34);\n  --border-2:rgba(197,168,255,.42);\n  --text:#fbf8ff;\n  --text-soft:#dfd2ff;\n  --text-muted:#bda6f0;\n  --green:#c5a8ff;\n  --green-strong:#6f4dcc;\n  --green-soft:#eadfff;\n  --bw-accent:#a176ff;\n  --bw-accent-2:#d6c4ff;\n}\n\nhtml.premium-theme-rose-soft{\n  --bg:#160a12;\n  --surface:#21101a;\n  --surface-2:#301525;\n  --surface-3:#401b31;\n  --border:rgba(255,158,199,.34);\n  --border-2:rgba(255,190,218,.44);\n  --text:#fff8fb;\n  --text-soft:#ffd8e8;\n  --text-muted:#f0a9c8;\n  --green:#ff9ec7;\n  --green-strong:#b64d78;\n  --green-soft:#ffe2ee;\n  --bw-accent:#ff9ec7;\n  --bw-accent-2:#ffd0e4;\n}\n\nhtml.premium-theme-carbon-elite{\n  --bg:#050607;\n  --surface:#0d1116;\n  --surface-2:#121820;\n  --surface-3:#1a222c;\n  --border:rgba(170,184,199,.28);\n  --border-2:rgba(202,213,224,.34);\n  --text:#f7fafc;\n  --text-soft:#cfd8e3;\n  --text-muted:#99a7b5;\n  --green:#d6dde6;\n  --green-strong:#59616c;\n  --green-soft:#eef2f6;\n  --bw-accent:#aab8c7;\n  --bw-accent-2:#e8edf3;\n}\n\nhtml.premium-theme-children-soft{\n  --bg:#0c1f32;\n  --surface:#102b44;\n  --surface-2:#173a5c;\n  --surface-3:#234d75;\n  --border:rgba(135,203,255,.34);\n  --border-2:rgba(255,227,241,.40);\n  --text:#f4fbff;\n  --text-soft:#d3ecff;\n  --text-muted:#abd6f7;\n  --green:#87cbff;\n  --green-strong:#3d8bc7;\n  --green-soft:#dff4ff;\n  --bw-accent:#87cbff;\n  --bw-accent-2:#ffe3f1;\n}\n\nhtml.premium-theme-night-mosque{\n  --bg:#050b13;\n  --surface:#091426;\n  --surface-2:#10213d;\n  --surface-3:#172f58;\n  --border:rgba(215,192,122,.28);\n  --border-2:rgba(118,154,215,.36);\n  --text:#f3f7ff;\n  --text-soft:#c8d8f4;\n  --text-muted:#91a9ce;\n  --green:#d7c07a;\n  --green-strong:#355d9a;\n  --green-soft:#f4e6b2;\n  --bw-accent:#d7c07a;\n  --bw-accent-2:#7ca7ff;\n}\n\nhtml.premium-theme-desert-sand{\n  --bg:#130c05;\n  --surface:#1e1408;\n  --surface-2:#2e200e;\n  --surface-3:#3e2b13;\n  --border:rgba(255,237,190,.30);\n  --border-2:rgba(219,174,97,.40);\n  --text:#fff9ea;\n  --text-soft:#ecd7ad;\n  --text-muted:#c9a978;\n  --green:#ffedbe;\n  --green-strong:#9a6d2d;\n  --green-soft:#fff3cf;\n  --bw-accent:#ffedbe;\n  --bw-accent-2:#dbaE61;\n}\n\nhtml[class*="premium-theme-"] body{\n  color:var(--text) !important;\n  background:\n    radial-gradient(circle at 14% 0%, color-mix(in srgb, var(--bw-accent) 20%, transparent), transparent 28%),\n    radial-gradient(circle at 88% 8%, color-mix(in srgb, var(--bw-accent-2) 16%, transparent), transparent 32%),\n    linear-gradient(180deg,var(--bg) 0%,color-mix(in srgb,var(--surface) 72%,var(--bg)) 48%,var(--bg) 100%) !important;\n}\n\nhtml[class*="premium-theme-"] .container,\nhtml[class*="premium-theme-"] .hero,\nhtml[class*="premium-theme-"] .brand-prayer-hero,\nhtml[class*="premium-theme-"] .today-hub,\nhtml[class*="premium-theme-"] .about-project-card,\nhtml[class*="premium-theme-"] .barakaway-pro-final,\nhtml[class*="premium-theme-"] .block,\nhtml[class*="premium-theme-"] .card,\nhtml[class*="premium-theme-"] .box,\nhtml[class*="premium-theme-"] .panel,\nhtml[class*="premium-theme-"] .quote,\nhtml[class*="premium-theme-"] .empty,\nhtml[class*="premium-theme-"] .article,\nhtml[class*="premium-theme-"] .category-panel,\nhtml[class*="premium-theme-"] .surah-card,\nhtml[class*="premium-theme-"] .prayer-card,\nhtml[class*="premium-theme-"] .toggle-row,\nhtml[class*="premium-theme-"] .meta-item,\nhtml[class*="premium-theme-"] .note-box,\nhtml[class*="premium-theme-"] .jumuah-box,\nhtml[class*="premium-theme-"] .month-day,\nhtml[class*="premium-theme-"] .month-head,\nhtml[class*="premium-theme-"] .wallet-support,\nhtml[class*="premium-theme-"] .home-widget,\nhtml[class*="premium-theme-"] .dua-card,\nhtml[class*="premium-theme-"] .ayah-card,\nhtml[class*="premium-theme-"] .master-audio-wrap,\nhtml[class*="premium-theme-"] .reader-side,\nhtml[class*="premium-theme-"] .reader-main,\nhtml[class*="premium-theme-"] .dua-side,\nhtml[class*="premium-theme-"] .dua-main,\nhtml[class*="premium-theme-"] .ai-side,\nhtml[class*="premium-theme-"] .ai-main,\nhtml[class*="premium-theme-"] .player-panel,\nhtml[class*="premium-theme-"] .preview-panel,\nhtml[class*="premium-theme-"] .theme-card,\nhtml[class*="premium-theme-"] .app-menu-btn,\nhtml[class*="premium-theme-"] .today-action,\nhtml[class*="premium-theme-"] .premium-resource-card{\n  background:\n    radial-gradient(circle at 94% 0%, color-mix(in srgb, var(--bw-accent) 12%, transparent), transparent 30%),\n    linear-gradient(135deg,color-mix(in srgb,var(--surface) 92%,#000) 0%,var(--surface-2) 54%,color-mix(in srgb,var(--surface-3) 84%,#000) 100%) !important;\n  border-color:var(--border) !important;\n  color:var(--text) !important;\n  box-shadow:0 18px 42px color-mix(in srgb,var(--bg) 70%,transparent), inset 0 1px 0 rgba(255,255,255,.055) !important;\n  transition:var(--bw-pro-transition) !important;\n}\n\nhtml[class*="premium-theme-"] h1,\nhtml[class*="premium-theme-"] h2,\nhtml[class*="premium-theme-"] h3,\nhtml[class*="premium-theme-"] h4,\nhtml[class*="premium-theme-"] .title,\nhtml[class*="premium-theme-"] .category-title,\nhtml[class*="premium-theme-"] .section h2,\nhtml[class*="premium-theme-"] .surah-name,\nhtml[class*="premium-theme-"] .dua-title,\nhtml[class*="premium-theme-"] .ayah-arabic{\n  color:var(--text) !important;\n}\n\nhtml[class*="premium-theme-"] p,\nhtml[class*="premium-theme-"] li,\nhtml[class*="premium-theme-"] .subtitle,\nhtml[class*="premium-theme-"] .small,\nhtml[class*="premium-theme-"] .note,\nhtml[class*="premium-theme-"] .muted,\nhtml[class*="premium-theme-"] .category-intro,\nhtml[class*="premium-theme-"] .ref,\nhtml[class*="premium-theme-"] .label,\nhtml[class*="premium-theme-"] .translit,\nhtml[class*="premium-theme-"] .meaning,\nhtml[class*="premium-theme-"] .when,\nhtml[class*="premium-theme-"] .surah-meta,\nhtml[class*="premium-theme-"] .article p,\nhtml[class*="premium-theme-"] .dua-translit,\nhtml[class*="premium-theme-"] .ayah-translit,\nhtml[class*="premium-theme-"] .ayah-meaning{\n  color:var(--text-soft) !important;\n}\n\nhtml[class*="premium-theme-"] strong,\nhtml[class*="premium-theme-"] a,\nhtml[class*="premium-theme-"] .surah-number,\nhtml[class*="premium-theme-"] .badge,\nhtml[class*="premium-theme-"] .chip,\nhtml[class*="premium-theme-"] .wallet-badge{\n  color:var(--bw-accent) !important;\n}\n\nhtml[class*="premium-theme-"] .btn.primary,\nhtml[class*="premium-theme-"] .copy-wallet-btn,\nhtml[class*="premium-theme-"] .install-btn,\nhtml[class*="premium-theme-"] .support-project-btn,\nhtml[class*="premium-theme-"] button:not(.icon-btn):not(.share-close):not(.install-help-close):not(.bottom-app-nav-item){\n  background:linear-gradient(135deg,var(--green-strong) 0%, color-mix(in srgb,var(--bw-accent) 72%,var(--green-strong)) 100%) !important;\n  color:#fff !important;\n  border-color:var(--border-2) !important;\n  box-shadow:0 14px 30px color-mix(in srgb,var(--green-strong) 24%,transparent) !important;\n}\n\nhtml[class*="premium-theme-"] input,\nhtml[class*="premium-theme-"] textarea,\nhtml[class*="premium-theme-"] select,\nhtml[class*="premium-theme-"] .search-input,\nhtml[class*="premium-theme-"] .wallet-address{\n  background:color-mix(in srgb,var(--surface-3) 74%,#000) !important;\n  color:var(--text) !important;\n  border-color:var(--border-2) !important;\n}\n\nhtml[class*="premium-theme-"] .bottom-app-nav{\n  background:linear-gradient(180deg,color-mix(in srgb,var(--surface) 88%,transparent),color-mix(in srgb,var(--bg) 96%,transparent)) !important;\n  border-top-color:var(--border) !important;\n  box-shadow:0 -18px 44px color-mix(in srgb,var(--bg) 70%,transparent), inset 0 1px 0 rgba(255,255,255,.04) !important;\n}\n\nhtml[class*="premium-theme-"] .bottom-app-nav-inner{\n  background:linear-gradient(180deg,color-mix(in srgb,var(--surface-2) 92%,transparent),color-mix(in srgb,var(--surface) 94%,transparent)) !important;\n  border-color:var(--border) !important;\n}\n\nhtml[class*="premium-theme-"] .bottom-app-nav-item{\n  color:var(--text-soft) !important;\n}\n\nhtml[class*="premium-theme-"] .bottom-app-nav-item.active,\nhtml[class*="premium-theme-"] .bottom-app-nav-item.is-active{\n  background:linear-gradient(135deg,color-mix(in srgb,var(--bw-accent) 24%,transparent),color-mix(in srgb,var(--green-strong) 28%,transparent)) !important;\n  color:var(--text) !important;\n  border-color:var(--border-2) !important;\n}\n/* ===== END BARAKAWAY PRO PREMIUM THEMES RUNTIME ===== */\n';
 
   function safeGet(key){
     try{ return localStorage.getItem(key); }catch(e){ return null; }
@@ -391,7 +391,13 @@ html[class*="premium-theme-"] .theme-switch{
 
         card.classList.add("bw-theme-sample-card");
         card.classList.add("bw-theme-sample-" + item.key);
-        card.style.setProperty("color", "#ffffff", "important");
+
+        const style = sampleStyles[item.key];
+        if(style){
+          card.style.setProperty("background", style.background, "important");
+          card.style.setProperty("border-color", style.border, "important");
+          card.style.setProperty("color", "#ffffff", "important");
+        }
 
         card.querySelectorAll("h3,p,strong,.theme-title,.theme-description").forEach(function(node){
           node.style.setProperty("color", "#ffffff", "important");
@@ -682,17 +688,10 @@ html.premium-theme-children-soft{
 }
 
 html.premium-theme-children-soft body{
-  background-color:#07172a !important;
-  background-image:
-    radial-gradient(circle at 30px 34px, rgba(255,255,255,.18) 0 12px, transparent 12.8px),
-    radial-gradient(circle at 19px 24px, rgba(255,255,255,.14) 0 5.8px, transparent 6.4px),
-    radial-gradient(circle at 41px 24px, rgba(255,255,255,.14) 0 5.8px, transparent 6.4px),
-    linear-gradient(27deg, rgba(255,255,255,.07) 5%, transparent 5%, transparent 45%, rgba(255,255,255,.07) 45%, rgba(255,255,255,.07) 55%, transparent 55%, transparent),
-    linear-gradient(207deg, rgba(255,227,241,.06) 5%, transparent 5%, transparent 45%, rgba(255,227,241,.06) 45%, rgba(255,227,241,.06) 55%, transparent 55%, transparent),
+  background:
+    radial-gradient(circle at 16% 0%,rgba(155,216,255,.22),transparent 28%),
+    radial-gradient(circle at 86% 8%,rgba(255,217,239,.20),transparent 34%),
     linear-gradient(180deg,#07172a 0%,#102a46 50%,#07172a 100%) !important;
-  background-size:96px 96px,96px 96px,96px 96px,18px 18px,18px 18px,100% 100% !important;
-  background-position:0 0,0 0,0 0,0 0,9px 9px,center !important;
-  background-repeat:repeat,repeat,repeat,repeat,repeat,no-repeat !important;
 }
 
 /* Premium 3D surfaces */
@@ -1586,44 +1585,36 @@ html.premium-theme-carbon-elite body{
 html.premium-theme-children-soft body{
   background-color:#07172a !important;
   background-image:
-    radial-gradient(circle at 30px 34px, rgba(255,255,255,.18) 0 12px, transparent 12.8px),
-    radial-gradient(circle at 19px 24px, rgba(255,255,255,.14) 0 5.8px, transparent 6.4px),
-    radial-gradient(circle at 41px 24px, rgba(255,255,255,.14) 0 5.8px, transparent 6.4px),
-    linear-gradient(27deg, rgba(255,255,255,.07) 5%, transparent 5%, transparent 45%, rgba(255,255,255,.07) 45%, rgba(255,255,255,.07) 55%, transparent 55%, transparent),
-    linear-gradient(207deg, rgba(255,227,241,.06) 5%, transparent 5%, transparent 45%, rgba(255,227,241,.06) 45%, rgba(255,227,241,.06) 55%, transparent 55%, transparent),
-    linear-gradient(180deg,#07172a 0%,#102a46 50%,#07172a 100%) !important;
-  background-size:96px 96px,96px 96px,96px 96px,18px 18px,18px 18px,100% 100% !important;
-  background-position:0 0,0 0,0 0,0 0,9px 9px,center !important;
-  background-repeat:repeat,repeat,repeat,repeat,repeat,no-repeat !important;
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='96' height='96' viewBox='0 0 96 96'%3E%3Cg fill='none' stroke='%23ffffff' stroke-opacity='.17' stroke-width='2.2' stroke-linecap='round' stroke-linejoin='round'%3E%3Ccircle cx='32' cy='35' r='14'/%3E%3Ccircle cx='20' cy='25' r='6'/%3E%3Ccircle cx='44' cy='25' r='6'/%3E%3Ccircle cx='28' cy='35' r='1.8' fill='%23ffffff' fill-opacity='.20'/%3E%3Ccircle cx='36' cy='35' r='1.8' fill='%23ffffff' fill-opacity='.20'/%3E%3Cpath d='M28 43q4 4 8 0'/%3E%3Cpath d='M63 26l2.6 5.4 6 .8-4.3 4.2 1 6-5.3-2.8-5.3 2.8 1-6-4.3-4.2 6-.8z'/%3E%3Cpath d='M18 68c7-7 18-7 25 0 7-7 18-7 25 0'/%3E%3C/g%3E%3C/svg%3E"),
+    radial-gradient(circle at 16% 0%,rgba(155,216,255,.25),transparent 30%),
+    radial-gradient(circle at 88% 8%,rgba(255,217,239,.22),transparent 36%),
+    linear-gradient(180deg,#07172a 0%,#102a46 52%,#07172a 100%) !important;
+  background-size:96px 96px,100% 100%,100% 100%,100% 100% !important;
+  background-position:0 0,center,center,center !important;
 }
 
 html.premium-theme-night-mosque body{
   background-color:#050b13 !important;
   background-image:
-    radial-gradient(circle at 18px 18px, rgba(255,255,255,.42) 0 1.2px, transparent 1.8px),
-    radial-gradient(circle at 48px 31px, rgba(255,255,255,.36) 0 1px, transparent 1.6px),
-    radial-gradient(circle at 82px 16px, rgba(255,255,255,.38) 0 1.1px, transparent 1.7px),
-    radial-gradient(circle at 68px 34px, rgba(215,192,122,.22) 0 10px, transparent 10.8px),
-    linear-gradient(90deg, transparent 0 31%, rgba(215,192,122,.10) 31% 33%, transparent 33% 57%, rgba(215,192,122,.10) 57% 59%, transparent 59% 100%),
-    linear-gradient(27deg, rgba(215,192,122,.08) 5%, transparent 5%, transparent 45%, rgba(215,192,122,.08) 45%, rgba(215,192,122,.08) 55%, transparent 55%, transparent),
-    linear-gradient(207deg, rgba(124,167,255,.07) 5%, transparent 5%, transparent 45%, rgba(124,167,255,.07) 45%, rgba(124,167,255,.07) 55%, transparent 55%, transparent),
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120' viewBox='0 0 120 120'%3E%3Cg fill='%23ffffff' fill-opacity='.36'%3E%3Ccircle cx='16' cy='18' r='1.2'/%3E%3Ccircle cx='48' cy='31' r='.9'/%3E%3Ccircle cx='82' cy='16' r='1.1'/%3E%3Ccircle cx='104' cy='52' r='.8'/%3E%3Ccircle cx='30' cy='78' r='1'/%3E%3Ccircle cx='74' cy='92' r='.75'/%3E%3Ccircle cx='111' cy='105' r='1.1'/%3E%3Cpath d='M68 34a13 13 0 1 1-13-13 10 10 0 1 0 13 13z' fill='%23d7c07a' fill-opacity='.23'/%3E%3C/g%3E%3Cg fill='none' stroke='%23d7c07a' stroke-opacity='.12' stroke-width='1.4'%3E%3Cpath d='M18 112h84'/%3E%3Cpath d='M36 112V85q8-18 16 0v27'/%3E%3Cpath d='M68 112V76q10-22 20 0v36'/%3E%3C/g%3E%3C/svg%3E"),
+    radial-gradient(circle at 82% 12%,rgba(215,192,122,.22),transparent 18%),
+    radial-gradient(circle at 18% 0%,rgba(124,167,255,.18),transparent 34%),
     linear-gradient(180deg,#050b13 0%,#091426 48%,#050b13 100%) !important;
-  background-size:120px 120px,120px 120px,120px 120px,120px 120px,120px 120px,18px 18px,18px 18px,100% 100% !important;
-  background-position:0 0,0 0,0 0,0 0,0 0,0 0,9px 9px,center !important;
-  background-repeat:repeat,repeat,repeat,repeat,repeat,repeat,repeat,no-repeat !important;
+  background-size:120px 120px,100% 100%,100% 100%,100% 100% !important;
+  background-position:0 0,center,center,center !important;
 }
 
 html.premium-theme-desert-sand body{
   background-color:#130c05 !important;
   background-image:
-    radial-gradient(circle at 2px 2px, rgba(255,237,190,.20) 0 1px, transparent 1.7px),
-    radial-gradient(circle at 10px 8px, rgba(219,174,97,.16) 0 1px, transparent 1.8px),
-    linear-gradient(27deg, rgba(255,237,190,.11) 5%, transparent 5%, transparent 45%, rgba(255,237,190,.11) 45%, rgba(255,237,190,.11) 55%, transparent 55%, transparent),
-    linear-gradient(207deg, rgba(120,72,18,.13) 5%, transparent 5%, transparent 45%, rgba(120,72,18,.13) 45%, rgba(120,72,18,.13) 55%, transparent 55%, transparent),
+    radial-gradient(circle at 1px 1px,rgba(255,237,190,.18) 1px,transparent 1.5px),
+    radial-gradient(circle at 11px 9px,rgba(219,174,97,.13) 1px,transparent 1.5px),
+    linear-gradient(25deg,rgba(255,237,190,.10) 5%,transparent 5%,transparent 45%,rgba(255,237,190,.08) 45%,rgba(255,237,190,.08) 55%,transparent 55%,transparent),
+    radial-gradient(circle at 88% 10%,rgba(255,237,190,.24),transparent 32%),
+    radial-gradient(circle at 16% 0%,rgba(219,174,97,.18),transparent 32%),
     linear-gradient(180deg,#130c05 0%,#1e1408 52%,#130c05 100%) !important;
-  background-size:16px 16px,18px 18px,18px 18px,18px 18px,100% 100% !important;
-  background-position:0 0,6px 8px,0 0,9px 9px,center !important;
-  background-repeat:repeat,repeat,repeat,repeat,no-repeat !important;
+  background-size:16px 16px,18px 18px,30px 30px,100% 100%,100% 100%,100% 100% !important;
+  background-position:0 0,6px 8px,0 0,center,center,center !important;
 }
 
 html[class*="premium-theme-"] .container,
@@ -1683,573 +1674,3 @@ html[class*="premium-theme-"] .premium-resource-card{
   (document.head || document.documentElement).appendChild(style);
 })();
 
-(function(){
-  const STYLE_ID = "barakaway-final-pure-css-premium-theme-patterns";
-  if(document.getElementById(STYLE_ID)) return;
-  const CSS = '\n\n/* ===== BARAKAWAY FINAL PURE CSS PREMIUM THEME PATTERNS ===== */\n/* Pure CSS / inline SVG patterns. No external theme images. Same runtime logic as Carbon Elite. */\nhtml.premium-theme-children-soft{\n  --bg:#07172a;\n  --surface:#102b44;\n  --surface-2:#173a5c;\n  --surface-3:#234d75;\n  --border:rgba(135,203,255,.38);\n  --border-2:rgba(255,227,241,.46);\n  --text:#f5fbff;\n  --text-soft:#d8efff;\n  --text-muted:#b8ddf7;\n  --green:#87cbff;\n  --green-strong:#3d8bc7;\n  --green-soft:#dff4ff;\n  --bw-accent:#87cbff;\n  --bw-accent-2:#ffe3f1;\n}\nhtml.premium-theme-night-mosque{\n  --bg:#050b13;\n  --surface:#091426;\n  --surface-2:#10213d;\n  --surface-3:#172f58;\n  --border:rgba(215,192,122,.30);\n  --border-2:rgba(118,154,215,.40);\n  --text:#f5f8ff;\n  --text-soft:#d2e0f7;\n  --text-muted:#9fb7dc;\n  --green:#d7c07a;\n  --green-strong:#355d9a;\n  --green-soft:#f4e6b2;\n  --bw-accent:#d7c07a;\n  --bw-accent-2:#7ca7ff;\n}\nhtml.premium-theme-desert-sand{\n  --bg:#e2bd7b;\n  --surface:#f1d497;\n  --surface-2:#e3b86d;\n  --surface-3:#fff0c1;\n  --border:rgba(92,58,20,.34);\n  --border-2:rgba(121,78,26,.46);\n  --text:#2b1a08;\n  --text-soft:#4a2d0d;\n  --text-muted:#6a471d;\n  --green:#7a511d;\n  --green-strong:#7c501a;\n  --green-soft:#3a2209;\n  --bw-accent:#7a511d;\n  --bw-accent-2:#fff1c6;\n}\n\nhtml.premium-theme-children-soft body{
-  background-color:#07172a !important;
-  background-image:
-    radial-gradient(circle at 30px 34px, rgba(255,255,255,.18) 0 12px, transparent 12.8px),
-    radial-gradient(circle at 19px 24px, rgba(255,255,255,.14) 0 5.8px, transparent 6.4px),
-    radial-gradient(circle at 41px 24px, rgba(255,255,255,.14) 0 5.8px, transparent 6.4px),
-    linear-gradient(27deg, rgba(255,255,255,.07) 5%, transparent 5%, transparent 45%, rgba(255,255,255,.07) 45%, rgba(255,255,255,.07) 55%, transparent 55%, transparent),
-    linear-gradient(207deg, rgba(255,227,241,.06) 5%, transparent 5%, transparent 45%, rgba(255,227,241,.06) 45%, rgba(255,227,241,.06) 55%, transparent 55%, transparent),
-    linear-gradient(180deg,#07172a 0%,#102a46 50%,#07172a 100%) !important;
-  background-size:96px 96px,96px 96px,96px 96px,18px 18px,18px 18px,100% 100% !important;
-  background-position:0 0,0 0,0 0,0 0,9px 9px,center !important;
-  background-repeat:repeat,repeat,repeat,repeat,repeat,no-repeat !important;
-}\nhtml.premium-theme-night-mosque body{
-  background-color:#050b13 !important;
-  background-image:
-    radial-gradient(circle at 18px 18px, rgba(255,255,255,.42) 0 1.2px, transparent 1.8px),
-    radial-gradient(circle at 48px 31px, rgba(255,255,255,.36) 0 1px, transparent 1.6px),
-    radial-gradient(circle at 82px 16px, rgba(255,255,255,.38) 0 1.1px, transparent 1.7px),
-    radial-gradient(circle at 68px 34px, rgba(215,192,122,.22) 0 10px, transparent 10.8px),
-    linear-gradient(90deg, transparent 0 31%, rgba(215,192,122,.10) 31% 33%, transparent 33% 57%, rgba(215,192,122,.10) 57% 59%, transparent 59% 100%),
-    linear-gradient(27deg, rgba(215,192,122,.08) 5%, transparent 5%, transparent 45%, rgba(215,192,122,.08) 45%, rgba(215,192,122,.08) 55%, transparent 55%, transparent),
-    linear-gradient(207deg, rgba(124,167,255,.07) 5%, transparent 5%, transparent 45%, rgba(124,167,255,.07) 45%, rgba(124,167,255,.07) 55%, transparent 55%, transparent),
-    linear-gradient(180deg,#050b13 0%,#091426 48%,#050b13 100%) !important;
-  background-size:120px 120px,120px 120px,120px 120px,120px 120px,120px 120px,18px 18px,18px 18px,100% 100% !important;
-  background-position:0 0,0 0,0 0,0 0,0 0,0 0,9px 9px,center !important;
-  background-repeat:repeat,repeat,repeat,repeat,repeat,repeat,repeat,no-repeat !important;
-}\nhtml.premium-theme-desert-sand body{
-  background-color:#130c05 !important;
-  background-image:
-    radial-gradient(circle at 2px 2px, rgba(255,237,190,.20) 0 1px, transparent 1.7px),
-    radial-gradient(circle at 10px 8px, rgba(219,174,97,.16) 0 1px, transparent 1.8px),
-    linear-gradient(27deg, rgba(255,237,190,.11) 5%, transparent 5%, transparent 45%, rgba(255,237,190,.11) 45%, rgba(255,237,190,.11) 55%, transparent 55%, transparent),
-    linear-gradient(207deg, rgba(120,72,18,.13) 5%, transparent 5%, transparent 45%, rgba(120,72,18,.13) 45%, rgba(120,72,18,.13) 55%, transparent 55%, transparent),
-    linear-gradient(180deg,#130c05 0%,#1e1408 52%,#130c05 100%) !important;
-  background-size:16px 16px,18px 18px,18px 18px,18px 18px,100% 100% !important;
-  background-position:0 0,6px 8px,0 0,9px 9px,center !important;
-  background-repeat:repeat,repeat,repeat,repeat,no-repeat !important;
-}\n\nbody .theme-grid .theme-card.theme-child,\nbody .theme-grid .theme-card.bw-theme-sample-children-soft,\nbody .theme-grid .theme-card[data-theme="children-soft"]{\n  background-color:#07172a!important;\n  background-image:\n    linear-gradient(115deg,transparent 0%,rgba(255,255,255,.12) 44%,transparent 60%),\n    url("data:image/svg+xml,%3Csvg xmlns=\'http://www.w3.org/2000/svg\' width=\'112\' height=\'112\' viewBox=\'0 0 112 112\'%3E%3Cg fill=\'none\' stroke=\'%23ffffff\' stroke-opacity=\'.22\' stroke-width=\'2.4\' stroke-linecap=\'round\' stroke-linejoin=\'round\'%3E%3Ccircle cx=\'34\' cy=\'38\' r=\'15\'/%3E%3Ccircle cx=\'21\' cy=\'27\' r=\'6.5\'/%3E%3Ccircle cx=\'47\' cy=\'27\' r=\'6.5\'/%3E%3Ccircle cx=\'30\' cy=\'38\' r=\'1.8\' fill=\'%23ffffff\' fill-opacity=\'.25\'/%3E%3Ccircle cx=\'39\' cy=\'38\' r=\'1.8\' fill=\'%23ffffff\' fill-opacity=\'.25\'/%3E%3Cpath d=\'M30 47q4.5 4 9 0\'/%3E%3Cpath d=\'M76 24l3.2 6.5 7.2 1-5.2 5.1 1.2 7.1-6.4-3.4-6.4 3.4 1.2-7.1-5.2-5.1 7.2-1z\'/%3E%3Cpath d=\'M20 78c8-7 20-7 28 0 8-7 20-7 28 0\'/%3E%3C/g%3E%3C/svg%3E"),\n    radial-gradient(circle at 88% 10%,rgba(255,227,241,.24),transparent 30%),\n    linear-gradient(135deg,#102b44 0%,#173a5c 54%,#234d75 100%)!important;\n  background-size:100% 100%,112px 112px,100% 100%,100% 100%!important;\n  background-position:center,0 0,center,center!important;\n  background-repeat:no-repeat,repeat,no-repeat,no-repeat!important;\n  border-color:rgba(135,203,255,.46)!important;\n  box-shadow:0 24px 58px rgba(7,23,42,.42),inset 0 1px 0 rgba(255,255,255,.12),inset 0 -24px 38px rgba(0,0,0,.20)!important;\n}\nbody .theme-grid .theme-card.theme-night,\nbody .theme-grid .theme-card.bw-theme-sample-night-mosque,\nbody .theme-grid .theme-card[data-theme="night-mosque"]{\n  background-color:#050b13!important;\n  background-image:\n    linear-gradient(115deg,transparent 0%,rgba(255,255,255,.08) 44%,transparent 60%),\n    url("data:image/svg+xml,%3Csvg xmlns=\'http://www.w3.org/2000/svg\' width=\'124\' height=\'124\' viewBox=\'0 0 124 124\'%3E%3Cg fill=\'%23ffffff\' fill-opacity=\'.42\'%3E%3Ccircle cx=\'14\' cy=\'18\' r=\'1.1\'/%3E%3Ccircle cx=\'47\' cy=\'29\' r=\'.85\'/%3E%3Ccircle cx=\'82\' cy=\'14\' r=\'1.1\'/%3E%3Ccircle cx=\'108\' cy=\'51\' r=\'.8\'/%3E%3Ccircle cx=\'29\' cy=\'81\' r=\'1\'/%3E%3Ccircle cx=\'76\' cy=\'95\' r=\'.8\'/%3E%3Ccircle cx=\'113\' cy=\'109\' r=\'1.1\'/%3E%3Cpath d=\'M70 35a14 14 0 1 1-14-14 10.5 10.5 0 1 0 14 14z\' fill=\'%23d7c07a\' fill-opacity=\'.30\'/%3E%3C/g%3E%3Cg fill=\'none\' stroke=\'%23d7c07a\' stroke-opacity=\'.15\' stroke-width=\'1.45\'%3E%3Cpath d=\'M18 116h88\'/%3E%3Cpath d=\'M36 116V86q8-19 17 0v30\'/%3E%3Cpath d=\'M70 116V77q11-23 22 0v39\'/%3E%3C/g%3E%3C/svg%3E"),\n    radial-gradient(circle at 82% 12%,rgba(215,192,122,.22),transparent 22%),\n    linear-gradient(135deg,#050b13 0%,#091426 50%,#172f58 100%)!important;\n  background-size:100% 100%,124px 124px,100% 100%,100% 100%!important;\n  background-position:center,0 0,center,center!important;\n  background-repeat:no-repeat,repeat,no-repeat,no-repeat!important;\n  border-color:rgba(118,154,215,.40)!important;\n  box-shadow:0 24px 58px rgba(0,8,32,.54),0 0 34px rgba(120,160,255,.14),inset 0 1px 0 rgba(255,255,255,.14),inset 0 -24px 38px rgba(0,0,0,.34)!important;\n}\nbody .theme-grid .theme-card.theme-sand,\nbody .theme-grid .theme-card.bw-theme-sample-desert-sand,\nbody .theme-grid .theme-card[data-theme="desert-sand"]{\n  background-color:#e2bd7b!important;\n  background-image:\n    linear-gradient(115deg,transparent 0%,rgba(255,255,255,.18) 44%,transparent 60%),\n    url("data:image/svg+xml,%3Csvg xmlns=\'http://www.w3.org/2000/svg\' width=\'64\' height=\'64\' viewBox=\'0 0 64 64\'%3E%3Cg fill=\'%23fff0c8\' fill-opacity=\'.28\'%3E%3Ccircle cx=\'6\' cy=\'9\' r=\'1.1\'/%3E%3Ccircle cx=\'26\' cy=\'13\' r=\'.8\'/%3E%3Ccircle cx=\'47\' cy=\'6\' r=\'1\'/%3E%3Ccircle cx=\'56\' cy=\'30\' r=\'.9\'/%3E%3Ccircle cx=\'11\' cy=\'42\' r=\'.8\'/%3E%3Ccircle cx=\'34\' cy=\'52\' r=\'1\'/%3E%3Ccircle cx=\'59\' cy=\'58\' r=\'.75\'/%3E%3C/g%3E%3Cg fill=\'%23a86f2c\' fill-opacity=\'.14\'%3E%3Ccircle cx=\'18\' cy=\'26\' r=\'.9\'/%3E%3Ccircle cx=\'39\' cy=\'34\' r=\'.8\'/%3E%3Ccircle cx=\'50\' cy=\'47\' r=\'.75\'/%3E%3C/g%3E%3C/svg%3E"),\n    radial-gradient(circle at 88% 10%,rgba(255,241,198,.36),transparent 30%),\n    linear-gradient(135deg,#8d5f25 0%,#d4a95f 52%,#fff0c1 100%)!important;\n  background-size:100% 100%,64px 64px,100% 100%,100% 100%!important;\n  background-position:center,0 0,center,center!important;\n  background-repeat:no-repeat,repeat,no-repeat,no-repeat!important;\n  border-color:rgba(255,239,198,.58)!important;\n  box-shadow:0 24px 58px rgba(120,82,33,.38),inset 0 1px 0 rgba(255,255,255,.30),inset 0 -24px 38px rgba(92,58,20,.22)!important;\n}\n\nbody .theme-grid .theme-card.theme-child h3,\nbody .theme-grid .theme-card.theme-child p,\nbody .theme-grid .theme-card.theme-child strong,\nbody .theme-grid .theme-card.bw-theme-sample-children-soft h3,\nbody .theme-grid .theme-card.bw-theme-sample-children-soft p,\nbody .theme-grid .theme-card.bw-theme-sample-children-soft strong,\nbody .theme-grid .theme-card[data-theme="children-soft"] h3,\nbody .theme-grid .theme-card[data-theme="children-soft"] p,\nbody .theme-grid .theme-card[data-theme="children-soft"] strong,\nbody .theme-grid .theme-card.theme-night h3,\nbody .theme-grid .theme-card.theme-night p,\nbody .theme-grid .theme-card.theme-night strong,\nbody .theme-grid .theme-card.bw-theme-sample-night-mosque h3,\nbody .theme-grid .theme-card.bw-theme-sample-night-mosque p,\nbody .theme-grid .theme-card.bw-theme-sample-night-mosque strong,\nbody .theme-grid .theme-card[data-theme="night-mosque"] h3,\nbody .theme-grid .theme-card[data-theme="night-mosque"] p,\nbody .theme-grid .theme-card[data-theme="night-mosque"] strong{\n  color:#fff!important;\n  text-shadow:0 2px 14px rgba(0,0,0,.58)!important;\n}\nbody .theme-grid .theme-card.theme-sand h3,\nbody .theme-grid .theme-card.theme-sand p,\nbody .theme-grid .theme-card.theme-sand strong,\nbody .theme-grid .theme-card.bw-theme-sample-desert-sand h3,\nbody .theme-grid .theme-card.bw-theme-sample-desert-sand p,\nbody .theme-grid .theme-card.bw-theme-sample-desert-sand strong,\nbody .theme-grid .theme-card[data-theme="desert-sand"] h3,\nbody .theme-grid .theme-card[data-theme="desert-sand"] p,\nbody .theme-grid .theme-card[data-theme="desert-sand"] strong{\n  color:#fff8e7!important;\n  text-shadow:0 2px 14px rgba(43,26,8,.72)!important;\n}\n\nhtml.premium-theme-desert-sand h1,\nhtml.premium-theme-desert-sand h2,\nhtml.premium-theme-desert-sand h3,\nhtml.premium-theme-desert-sand h4,\nhtml.premium-theme-desert-sand h5,\nhtml.premium-theme-desert-sand h6,\nhtml.premium-theme-desert-sand .title,\nhtml.premium-theme-desert-sand .section-title,\nhtml.premium-theme-desert-sand .category-title,\nhtml.premium-theme-desert-sand .meta-value,\nhtml.premium-theme-desert-sand .prayer-name,\nhtml.premium-theme-desert-sand .prayer-time,\nhtml.premium-theme-desert-sand .big-location,\nhtml.premium-theme-desert-sand .next-name{\n  color:#2b1a08!important;\n  text-shadow:0 1px 8px rgba(255,239,198,.62)!important;\n}\nhtml.premium-theme-desert-sand p,\nhtml.premium-theme-desert-sand li,\nhtml.premium-theme-desert-sand .subtitle,\nhtml.premium-theme-desert-sand .small,\nhtml.premium-theme-desert-sand .note,\nhtml.premium-theme-desert-sand .muted,\nhtml.premium-theme-desert-sand .category-intro,\nhtml.premium-theme-desert-sand .ref,\nhtml.premium-theme-desert-sand .label,\nhtml.premium-theme-desert-sand .translit,\nhtml.premium-theme-desert-sand .meaning,\nhtml.premium-theme-desert-sand .when,\nhtml.premium-theme-desert-sand .surah-meta,\nhtml.premium-theme-desert-sand .article p,\nhtml.premium-theme-desert-sand .ayah-translit,\nhtml.premium-theme-desert-sand .ayah-meaning{\n  color:#4a2d0d!important;\n  text-shadow:0 1px 8px rgba(255,239,198,.46)!important;\n}\nhtml.premium-theme-desert-sand .bottom-app-nav,\nhtml.premium-theme-desert-sand .bottom-app-nav-inner{\n  color:#2b1a08!important;\n}\nhtml.premium-theme-night-mosque h1,\nhtml.premium-theme-night-mosque h2,\nhtml.premium-theme-night-mosque h3,\nhtml.premium-theme-night-mosque h4,\nhtml.premium-theme-night-mosque p,\nhtml.premium-theme-night-mosque li,\nhtml.premium-theme-children-soft h1,\nhtml.premium-theme-children-soft h2,\nhtml.premium-theme-children-soft h3,\nhtml.premium-theme-children-soft h4,\nhtml.premium-theme-children-soft p,\nhtml.premium-theme-children-soft li{\n  text-shadow:0 2px 12px rgba(0,0,0,.35)!important;\n}\n/* ===== END BARAKAWAY FINAL PURE CSS PREMIUM THEME PATTERNS ===== */\n';
-  const style = document.createElement("style");
-  style.id = STYLE_ID;
-  style.textContent = CSS;
-  (document.head || document.documentElement).appendChild(style);
-})();
-
-
-(function(){
-  const STYLE_ID='barakaway-final-theme-card-independence-clean';
-  const CSS=`
-
-/* ===== FINAL CLEAN FIX: THEME CARDS DO NOT INHERIT ACTIVE PRO THEME ===== */
-html[class*="premium-theme-"] .theme-grid .theme-card{
-  color:#fff !important;
-  isolation:isolate !important;
-  overflow:hidden !important;
-}
-
-html[class*="premium-theme-"] .theme-grid .theme-card.theme-gold,
-html[class*="premium-theme-"] .theme-grid .theme-card[data-theme="royal-gold"]{
-  background-color:#171208 !important;
-  background-image:
-    linear-gradient(27deg, rgba(255,239,184,.15) 5%, transparent 5%, transparent 45%, rgba(255,239,184,.15) 45%, rgba(255,239,184,.15) 55%, transparent 55%, transparent),
-    linear-gradient(207deg, rgba(175,132,48,.13) 5%, transparent 5%, transparent 45%, rgba(175,132,48,.13) 45%, rgba(175,132,48,.13) 55%, transparent 55%, transparent),
-    linear-gradient(145deg,#171208 0%,#4b3615 52%,#d7c07a 100%) !important;
-  background-size:18px 18px,18px 18px,100% 100% !important;
-  background-position:0 0,9px 9px,center !important;
-  background-repeat:repeat,repeat,no-repeat !important;
-  border-color:rgba(244,220,148,.58) !important;
-}
-html[class*="premium-theme-"] .theme-grid .theme-card.theme-emerald,
-html[class*="premium-theme-"] .theme-grid .theme-card[data-theme="emerald-quran"]{
-  background-color:#061109 !important;
-  background-image:
-    linear-gradient(27deg, rgba(102,198,128,.14) 5%, transparent 5%, transparent 45%, rgba(102,198,128,.14) 45%, rgba(102,198,128,.14) 55%, transparent 55%, transparent),
-    linear-gradient(207deg, rgba(255,255,255,.07) 5%, transparent 5%, transparent 45%, rgba(255,255,255,.07) 45%, rgba(255,255,255,.07) 55%, transparent 55%, transparent),
-    linear-gradient(145deg,#061109 0%,#12301d 52%,#4caf6a 100%) !important;
-  background-size:18px 18px,18px 18px,100% 100% !important;
-  background-position:0 0,9px 9px,center !important;
-  background-repeat:repeat,repeat,no-repeat !important;
-  border-color:rgba(102,198,128,.58) !important;
-}
-html[class*="premium-theme-"] .theme-grid .theme-card.theme-violet,
-html[class*="premium-theme-"] .theme-grid .theme-card[data-theme="violet-noor"]{
-  background-color:#0d0a15 !important;
-  background-image:
-    linear-gradient(27deg, rgba(197,168,255,.14) 5%, transparent 5%, transparent 45%, rgba(197,168,255,.14) 45%, rgba(197,168,255,.14) 55%, transparent 55%, transparent),
-    linear-gradient(207deg, rgba(255,255,255,.07) 5%, transparent 5%, transparent 45%, rgba(255,255,255,.07) 45%, rgba(255,255,255,.07) 55%, transparent 55%, transparent),
-    linear-gradient(145deg,#0d0a15 0%,#241a42 52%,#a176ff 100%) !important;
-  background-size:18px 18px,18px 18px,100% 100% !important;
-  background-position:0 0,9px 9px,center !important;
-  background-repeat:repeat,repeat,no-repeat !important;
-  border-color:rgba(197,168,255,.58) !important;
-}
-html[class*="premium-theme-"] .theme-grid .theme-card.theme-rose,
-html[class*="premium-theme-"] .theme-grid .theme-card[data-theme="rose-soft"]{
-  background-color:#160a12 !important;
-  background-image:
-    radial-gradient(circle at 28px 28px, rgba(255,158,199,.18) 0 10px, transparent 11px),
-    linear-gradient(27deg, rgba(255,190,218,.13) 5%, transparent 5%, transparent 45%, rgba(255,190,218,.13) 45%, rgba(255,190,218,.13) 55%, transparent 55%, transparent),
-    linear-gradient(207deg, rgba(255,255,255,.07) 5%, transparent 5%, transparent 45%, rgba(255,255,255,.07) 45%, rgba(255,255,255,.07) 55%, transparent 55%, transparent),
-    linear-gradient(145deg,#160a12 0%,#401b31 52%,#ff9ec7 100%) !important;
-  background-size:96px 96px,18px 18px,18px 18px,100% 100% !important;
-  background-position:0 0,0 0,9px 9px,center !important;
-  background-repeat:repeat,repeat,repeat,no-repeat !important;
-  border-color:rgba(255,190,218,.58) !important;
-}
-html[class*="premium-theme-"] .theme-grid .theme-card.theme-carbon,
-html[class*="premium-theme-"] .theme-grid .theme-card[data-theme="carbon-elite"]{
-  background-color:#0b0f14 !important;
-  background-image:
-    linear-gradient(27deg, rgba(255,255,255,.10) 5%, transparent 5%, transparent 45%, rgba(255,255,255,.10) 45%, rgba(255,255,255,.10) 55%, transparent 55%, transparent),
-    linear-gradient(207deg, rgba(255,255,255,.06) 5%, transparent 5%, transparent 45%, rgba(255,255,255,.06) 45%, rgba(255,255,255,.06) 55%, transparent 55%, transparent),
-    linear-gradient(145deg,#07090c 0%,#1c232c 52%,#4b5562 100%) !important;
-  background-size:18px 18px,18px 18px,100% 100% !important;
-  background-position:0 0,9px 9px,center !important;
-  background-repeat:repeat,repeat,no-repeat !important;
-  border-color:rgba(255,255,255,.12) !important;
-}
-html[class*="premium-theme-"] .theme-grid .theme-card.theme-child,
-html[class*="premium-theme-"] .theme-grid .theme-card[data-theme="children-soft"]{
-  background-color:#07172a !important;
-  background-image:
-    linear-gradient(27deg, rgba(255,255,255,.13) 5%, transparent 5%, transparent 45%, rgba(255,255,255,.13) 45%, rgba(255,255,255,.13) 55%, transparent 55%, transparent),
-    linear-gradient(207deg, rgba(255,227,241,.10) 5%, transparent 5%, transparent 45%, rgba(255,227,241,.10) 45%, rgba(255,227,241,.10) 55%, transparent 55%, transparent),
-    radial-gradient(circle at 30px 34px, rgba(255,255,255,.34) 0 12px, transparent 12.8px),
-    radial-gradient(circle at 19px 24px, rgba(255,255,255,.28) 0 5.8px, transparent 6.4px),
-    radial-gradient(circle at 41px 24px, rgba(255,255,255,.28) 0 5.8px, transparent 6.4px),
-    linear-gradient(145deg,#07172a 0%,#225983 52%,#8fcfff 100%) !important;
-  background-size:18px 18px,18px 18px,96px 96px,96px 96px,96px 96px,100% 100% !important;
-  background-position:0 0,9px 9px,0 0,0 0,0 0,center !important;
-  background-repeat:repeat,repeat,repeat,repeat,repeat,no-repeat !important;
-  border-color:rgba(160,220,255,.46) !important;
-}
-html[class*="premium-theme-"] .theme-grid .theme-card.theme-night,
-html[class*="premium-theme-"] .theme-grid .theme-card[data-theme="night-mosque"]{
-  background-color:#050b13 !important;
-  background-image:
-    linear-gradient(27deg, rgba(215,192,122,.12) 5%, transparent 5%, transparent 45%, rgba(215,192,122,.12) 45%, rgba(215,192,122,.12) 55%, transparent 55%, transparent),
-    linear-gradient(207deg, rgba(124,167,255,.10) 5%, transparent 5%, transparent 45%, rgba(124,167,255,.10) 45%, rgba(124,167,255,.10) 55%, transparent 55%, transparent),
-    radial-gradient(circle at 18px 18px, rgba(255,255,255,.48) 0 1.2px, transparent 1.8px),
-    radial-gradient(circle at 68px 34px, rgba(215,192,122,.30) 0 10px, transparent 10.8px),
-    linear-gradient(90deg, transparent 0 31%, rgba(215,192,122,.18) 31% 33%, transparent 33% 57%, rgba(215,192,122,.18) 57% 59%, transparent 59% 100%),
-    linear-gradient(145deg,#050b13 0%,#10213d 52%,#294f86 100%) !important;
-  background-size:18px 18px,18px 18px,120px 120px,120px 120px,120px 120px,100% 100% !important;
-  background-position:0 0,9px 9px,0 0,0 0,0 0,center !important;
-  background-repeat:repeat,repeat,repeat,repeat,repeat,no-repeat !important;
-  border-color:rgba(118,154,215,.44) !important;
-}
-html[class*="premium-theme-"] .theme-grid .theme-card.theme-sand,
-html[class*="premium-theme-"] .theme-grid .theme-card[data-theme="desert-sand"]{
-  background-color:#2b1906 !important;
-  background-image:
-    radial-gradient(circle at 2px 2px, rgba(255,237,190,.36) 0 1px, transparent 1.7px),
-    radial-gradient(circle at 10px 8px, rgba(219,174,97,.26) 0 1px, transparent 1.8px),
-    linear-gradient(27deg, rgba(255,237,190,.18) 5%, transparent 5%, transparent 45%, rgba(255,237,190,.18) 45%, rgba(255,237,190,.18) 55%, transparent 55%, transparent),
-    linear-gradient(207deg, rgba(120,72,18,.18) 5%, transparent 5%, transparent 45%, rgba(120,72,18,.18) 45%, rgba(120,72,18,.18) 55%, transparent 55%, transparent),
-    linear-gradient(145deg,#2b1906 0%,#8a6227 52%,#d7a85e 100%) !important;
-  background-size:16px 16px,18px 18px,18px 18px,18px 18px,100% 100% !important;
-  background-position:0 0,6px 8px,0 0,9px 9px,center !important;
-  background-repeat:repeat,repeat,repeat,repeat,no-repeat !important;
-  border-color:rgba(255,237,190,.48) !important;
-}
-
-html[class*="premium-theme-"] .theme-grid .theme-card h3,
-html[class*="premium-theme-"] .theme-grid .theme-card p,
-html[class*="premium-theme-"] .theme-grid .theme-card strong{
-  color:#fff !important;
-  text-shadow:0 2px 14px rgba(0,0,0,.58) !important;
-}
-html[class*="premium-theme-"] .theme-grid .theme-card .theme-chip{
-  background:rgba(0,0,0,.26) !important;
-  color:#fff !important;
-  border-color:rgba(255,255,255,.22) !important;
-}
-
-/* Logo transparency only, without repainting parent sections */
-html[class*="premium-theme-"] .barakaway-logo,
-html[class*="premium-theme-"] .brand-logo,
-html[class*="premium-theme-"] .app-logo,
-html[class*="premium-theme-"] .logo,
-html[class*="premium-theme-"] .wordmark,
-html[class*="premium-theme-"] .brand-wordmark,
-html[class*="premium-theme-"] [data-logo],
-html[class*="premium-theme-"] [data-brand-logo],
-html[class*="premium-theme-"] [class*="barakaway-logo"],
-html[class*="premium-theme-"] [class*="brand-logo"],
-html[class*="premium-theme-"] [class*="app-logo"],
-html[class*="premium-theme-"] [class*="wordmark"],
-html[class*="premium-theme-"] [class*="logo"]{
-  background:transparent !important;
-  background-color:transparent !important;
-  background-image:none !important;
-  border-color:transparent !important;
-  box-shadow:none !important;
-  filter:none !important;
-}
-/* ===== END FINAL CLEAN FIX ===== */
-`;
-  function inject(){
-    let style=document.getElementById(STYLE_ID);
-    if(!style){style=document.createElement('style');style.id=STYLE_ID;(document.head||document.documentElement).appendChild(style);}
-    style.textContent=CSS;
-  }
-  inject();
-  if(document.readyState==='loading'){document.addEventListener('DOMContentLoaded',inject);}
-  window.addEventListener('barakaway:premium-theme-change',inject);
-  window.addEventListener('storage',inject);
-})();
-
-
-(function(){
-  const STYLE_ID = "barakaway-final-carbon-logic-material-fix";
-  if(document.getElementById(STYLE_ID)) return;
-  const style = document.createElement("style");
-  style.id = STYLE_ID;
-  style.textContent = `
-/* ===== BARAKAWAY FINAL FIX: CARBON LOGIC WITHOUT GLOBAL CARD REPAINT ===== */
-/* Active PRO theme may repaint the application, but must never repaint theme-selection cards. */
-html[class*="premium-theme-"] .theme-grid .theme-card,
-html[class*="premium-theme-"] .theme-card[data-theme],
-html[class*="premium-theme-"] .bw-theme-sample-card{
-  isolation:isolate !important;
-  overflow:hidden !important;
-  color:#fff !important;
-}
-
-html[class*="premium-theme-"] .theme-grid .theme-card h3,
-html[class*="premium-theme-"] .theme-grid .theme-card p,
-html[class*="premium-theme-"] .theme-grid .theme-card strong,
-html[class*="premium-theme-"] .theme-grid .theme-card .theme-top,
-html[class*="premium-theme-"] .theme-grid .theme-card .theme-preview,
-html[class*="premium-theme-"] .bw-theme-sample-card h3,
-html[class*="premium-theme-"] .bw-theme-sample-card p,
-html[class*="premium-theme-"] .bw-theme-sample-card strong{
-  position:relative !important;
-  z-index:3 !important;
-  color:#fff !important;
-  text-shadow:0 2px 12px rgba(0,0,0,.36) !important;
-}
-
-html[class*="premium-theme-"] .theme-grid .theme-card::before,
-html[class*="premium-theme-"] .theme-card[data-theme]::before,
-html[class*="premium-theme-"] .bw-theme-sample-card::before{
-  content:"" !important;
-  position:absolute !important;
-  inset:0 !important;
-  z-index:1 !important;
-  opacity:.75 !important;
-  pointer-events:none !important;
-  background:linear-gradient(120deg,transparent 45%,rgba(255,255,255,.12) 56%,transparent 70%) !important;
-}
-
-/* Card previews: fixed individual materials, independent from active theme. */
-html[class*="premium-theme-"] .theme-grid .theme-card.theme-gold,
-html[class*="premium-theme-"] .theme-card.theme-gold,
-.theme-card.theme-gold{
-  background-color:#11100d !important;
-  background-image:
-    linear-gradient(27deg,rgba(255,237,190,.16) 5%,transparent 5%,transparent 45%,rgba(255,237,190,.16) 45%,rgba(255,237,190,.16) 55%,transparent 55%,transparent),
-    linear-gradient(207deg,rgba(175,132,48,.12) 5%,transparent 5%,transparent 45%,rgba(175,132,48,.12) 45%,rgba(175,132,48,.12) 55%,transparent 55%,transparent),
-    linear-gradient(145deg,#11100d 0%,#332511 48%,#d7c07a 100%) !important;
-  background-size:18px 18px,18px 18px,100% 100% !important;
-  background-position:0 0,9px 9px,center !important;
-  background-repeat:repeat,repeat,no-repeat !important;
-  border-color:rgba(241,219,145,.44) !important;
-}
-html[class*="premium-theme-"] .theme-grid .theme-card.theme-emerald,
-html[class*="premium-theme-"] .theme-card.theme-emerald,
-.theme-card.theme-emerald{
-  background-color:#0d1711 !important;
-  background-image:
-    linear-gradient(27deg,rgba(102,198,128,.16) 5%,transparent 5%,transparent 45%,rgba(102,198,128,.16) 45%,rgba(102,198,128,.16) 55%,transparent 55%,transparent),
-    linear-gradient(207deg,rgba(184,255,208,.10) 5%,transparent 5%,transparent 45%,rgba(184,255,208,.10) 45%,rgba(184,255,208,.10) 55%,transparent 55%,transparent),
-    linear-gradient(145deg,#0d1711 0%,#143524 52%,#4caf6a 100%) !important;
-  background-size:18px 18px,18px 18px,100% 100% !important;
-  background-position:0 0,9px 9px,center !important;
-  background-repeat:repeat,repeat,no-repeat !important;
-  border-color:rgba(102,198,128,.46) !important;
-}
-html[class*="premium-theme-"] .theme-grid .theme-card.theme-violet,
-html[class*="premium-theme-"] .theme-card.theme-violet,
-.theme-card.theme-violet{
-  background-color:#151020 !important;
-  background-image:
-    linear-gradient(27deg,rgba(197,168,255,.18) 5%,transparent 5%,transparent 45%,rgba(197,168,255,.18) 45%,rgba(197,168,255,.18) 55%,transparent 55%,transparent),
-    linear-gradient(207deg,rgba(161,118,255,.12) 5%,transparent 5%,transparent 45%,rgba(161,118,255,.12) 45%,rgba(161,118,255,.12) 55%,transparent 55%,transparent),
-    linear-gradient(145deg,#151020 0%,#35235e 52%,#a176ff 100%) !important;
-  background-size:18px 18px,18px 18px,100% 100% !important;
-  background-position:0 0,9px 9px,center !important;
-  background-repeat:repeat,repeat,no-repeat !important;
-  border-color:rgba(197,168,255,.46) !important;
-}
-html[class*="premium-theme-"] .theme-grid .theme-card.theme-rose,
-html[class*="premium-theme-"] .theme-card.theme-rose,
-.theme-card.theme-rose{
-  background-color:#1b1018 !important;
-  background-image:
-    radial-gradient(circle at 22px 18px,rgba(255,190,218,.18) 0 10px,transparent 11px),
-    radial-gradient(circle at 54px 54px,rgba(255,158,199,.14) 0 8px,transparent 9px),
-    linear-gradient(27deg,rgba(255,190,218,.14) 5%,transparent 5%,transparent 45%,rgba(255,190,218,.14) 45%,rgba(255,190,218,.14) 55%,transparent 55%,transparent),
-    linear-gradient(145deg,#1b1018 0%,#4a263c 52%,#ff9ec7 100%) !important;
-  background-size:92px 92px,92px 92px,18px 18px,100% 100% !important;
-  background-position:0 0,12px 18px,0 0,center !important;
-  background-repeat:repeat,repeat,repeat,no-repeat !important;
-  border-color:rgba(255,158,199,.48) !important;
-}
-html[class*="premium-theme-"] .theme-grid .theme-card.theme-carbon,
-html[class*="premium-theme-"] .theme-card.theme-carbon,
-.theme-card.theme-carbon{
-  background-color:#0b0f14 !important;
-  background-image:
-    linear-gradient(27deg,rgba(255,255,255,.10) 5%,transparent 5%,transparent 45%,rgba(255,255,255,.10) 45%,rgba(255,255,255,.10) 55%,transparent 55%,transparent),
-    linear-gradient(207deg,rgba(255,255,255,.06) 5%,transparent 5%,transparent 45%,rgba(255,255,255,.06) 45%,rgba(255,255,255,.06) 55%,transparent 55%,transparent),
-    linear-gradient(145deg,#07090c 0%,#1c232c 52%,#4b5562 100%) !important;
-  background-size:18px 18px,18px 18px,100% 100% !important;
-  background-position:0 0,9px 9px,center !important;
-  background-repeat:repeat,repeat,no-repeat !important;
-  border-color:rgba(255,255,255,.12) !important;
-}
-html[class*="premium-theme-"] .theme-grid .theme-card.theme-child,
-html[class*="premium-theme-"] .theme-card.theme-child,
-.theme-card.theme-child{
-  background-color:#0b2947 !important;
-  background-image:
-    radial-gradient(circle at 30px 34px,rgba(255,255,255,.34) 0 12px,transparent 12.8px),
-    radial-gradient(circle at 19px 24px,rgba(255,255,255,.28) 0 5.8px,transparent 6.4px),
-    radial-gradient(circle at 41px 24px,rgba(255,255,255,.28) 0 5.8px,transparent 6.4px),
-    radial-gradient(circle at 26px 33px,rgba(11,41,71,.38) 0 1.8px,transparent 2.3px),
-    radial-gradient(circle at 34px 33px,rgba(11,41,71,.38) 0 1.8px,transparent 2.3px),
-    linear-gradient(27deg,rgba(255,255,255,.13) 5%,transparent 5%,transparent 45%,rgba(255,255,255,.13) 45%,rgba(255,255,255,.13) 55%,transparent 55%,transparent),
-    linear-gradient(207deg,rgba(255,227,241,.10) 5%,transparent 5%,transparent 45%,rgba(255,227,241,.10) 45%,rgba(255,227,241,.10) 55%,transparent 55%,transparent),
-    linear-gradient(145deg,#0b2947 0%,#225983 52%,#8fcfff 100%) !important;
-  background-size:96px 96px,96px 96px,96px 96px,96px 96px,96px 96px,18px 18px,18px 18px,100% 100% !important;
-  background-position:0 0,0 0,0 0,0 0,0 0,0 0,9px 9px,center !important;
-  background-repeat:repeat,repeat,repeat,repeat,repeat,repeat,repeat,no-repeat !important;
-  border-color:rgba(160,220,255,.46) !important;
-}
-html[class*="premium-theme-"] .theme-grid .theme-card.theme-night,
-html[class*="premium-theme-"] .theme-card.theme-night,
-.theme-card.theme-night{
-  background-color:#050b13 !important;
-  background-image:
-    radial-gradient(circle at 12px 18px,rgba(255,255,255,.70) 0 .9px,transparent 1.5px),
-    radial-gradient(circle at 44px 34px,rgba(255,255,255,.55) 0 1.1px,transparent 1.7px),
-    radial-gradient(circle at 78px 14px,rgba(255,255,255,.62) 0 1px,transparent 1.6px),
-    radial-gradient(circle at 104px 76px,rgba(255,255,255,.48) 0 .8px,transparent 1.4px),
-    linear-gradient(27deg,rgba(124,167,255,.10) 5%,transparent 5%,transparent 45%,rgba(124,167,255,.10) 45%,rgba(124,167,255,.10) 55%,transparent 55%,transparent),
-    linear-gradient(207deg,rgba(255,255,255,.05) 5%,transparent 5%,transparent 45%,rgba(255,255,255,.05) 45%,rgba(255,255,255,.05) 55%,transparent 55%,transparent),
-    linear-gradient(145deg,#050b13 0%,#10213d 55%,#244d86 100%) !important;
-  background-size:112px 112px,112px 112px,112px 112px,112px 112px,18px 18px,18px 18px,100% 100% !important;
-  background-position:0 0,0 0,0 0,0 0,0 0,9px 9px,center !important;
-  background-repeat:repeat,repeat,repeat,repeat,repeat,repeat,no-repeat !important;
-  border-color:rgba(118,154,215,.44) !important;
-}
-html[class*="premium-theme-"] .theme-grid .theme-card.theme-sand,
-html[class*="premium-theme-"] .theme-card.theme-sand,
-.theme-card.theme-sand{
-  background-color:#4f3618 !important;
-  background-image:
-    radial-gradient(circle at 1px 1px,rgba(255,246,215,.44) 0 .8px,transparent 1.4px),
-    radial-gradient(circle at 7px 11px,rgba(116,72,28,.22) 0 .9px,transparent 1.5px),
-    radial-gradient(ellipse at 35% 18%,rgba(255,239,190,.25) 0 16%,transparent 42%),
-    radial-gradient(ellipse at 70% 66%,rgba(104,63,22,.18) 0 12%,transparent 38%),
-    linear-gradient(27deg,rgba(255,237,190,.13) 5%,transparent 5%,transparent 45%,rgba(255,237,190,.13) 45%,rgba(255,237,190,.13) 55%,transparent 55%,transparent),
-    linear-gradient(145deg,#3b2309 0%,#916b34 48%,#e5bd74 100%) !important;
-  background-size:8px 8px,13px 13px,100% 100%,100% 100%,18px 18px,100% 100% !important;
-  background-position:0 0,4px 6px,center,center,0 0,center !important;
-  background-repeat:repeat,repeat,no-repeat,no-repeat,repeat,no-repeat !important;
-  border-color:rgba(255,237,190,.52) !important;
-}
-
-/* Application backgrounds: same principle as Carbon Elite, but with correct theme material. */
-html.premium-theme-children-soft body{
-  background-color:#0b2947 !important;
-  background-image:
-    radial-gradient(circle at 30px 34px,rgba(255,255,255,.20) 0 12px,transparent 12.8px),
-    radial-gradient(circle at 19px 24px,rgba(255,255,255,.16) 0 5.8px,transparent 6.4px),
-    radial-gradient(circle at 41px 24px,rgba(255,255,255,.16) 0 5.8px,transparent 6.4px),
-    linear-gradient(27deg,rgba(255,255,255,.08) 5%,transparent 5%,transparent 45%,rgba(255,255,255,.08) 45%,rgba(255,255,255,.08) 55%,transparent 55%,transparent),
-    linear-gradient(207deg,rgba(255,227,241,.07) 5%,transparent 5%,transparent 45%,rgba(255,227,241,.07) 45%,rgba(255,227,241,.07) 55%,transparent 55%,transparent),
-    linear-gradient(145deg,#071a2d 0%,#123b5d 52%,#24689b 100%) !important;
-  background-size:118px 118px,118px 118px,118px 118px,18px 18px,18px 18px,100% 100% !important;
-  background-position:0 0,0 0,0 0,0 0,9px 9px,center !important;
-  background-repeat:repeat,repeat,repeat,repeat,repeat,no-repeat !important;
-}
-html.premium-theme-night-mosque body{
-  background-color:#050b13 !important;
-  background-image:
-    radial-gradient(circle at 12px 18px,rgba(255,255,255,.76) 0 .9px,transparent 1.6px),
-    radial-gradient(circle at 45px 34px,rgba(255,255,255,.55) 0 1.1px,transparent 1.8px),
-    radial-gradient(circle at 78px 14px,rgba(255,255,255,.62) 0 1px,transparent 1.7px),
-    radial-gradient(circle at 104px 76px,rgba(255,255,255,.48) 0 .8px,transparent 1.5px),
-    linear-gradient(27deg,rgba(124,167,255,.08) 5%,transparent 5%,transparent 45%,rgba(124,167,255,.08) 45%,rgba(124,167,255,.08) 55%,transparent 55%,transparent),
-    linear-gradient(145deg,#030812 0%,#071527 52%,#102b4a 100%) !important;
-  background-size:124px 124px,124px 124px,124px 124px,124px 124px,18px 18px,100% 100% !important;
-  background-position:0 0,0 0,0 0,0 0,0 0,center !important;
-  background-repeat:repeat,repeat,repeat,repeat,repeat,no-repeat !important;
-}
-html.premium-theme-desert-sand body{
-  background-color:#553819 !important;
-  background-image:
-    radial-gradient(circle at 1px 1px,rgba(255,246,215,.50) 0 .75px,transparent 1.35px),
-    radial-gradient(circle at 8px 11px,rgba(114,72,28,.28) 0 .85px,transparent 1.45px),
-    radial-gradient(ellipse at 28% 18%,rgba(255,242,204,.24) 0 12%,transparent 40%),
-    radial-gradient(ellipse at 74% 65%,rgba(105,64,24,.18) 0 12%,transparent 38%),
-    linear-gradient(145deg,#3a220b 0%,#8f6730 48%,#deb973 100%) !important;
-  background-size:8px 8px,13px 13px,100% 100%,100% 100%,100% 100% !important;
-  background-position:0 0,4px 6px,center,center,center !important;
-  background-repeat:repeat,repeat,no-repeat,no-repeat,no-repeat !important;
-}
-
-html.premium-theme-children-soft .container,
-html.premium-theme-children-soft .hero,
-html.premium-theme-children-soft .brand-prayer-hero,
-html.premium-theme-children-soft .today-hub,
-html.premium-theme-children-soft .barakaway-pro-final,
-html.premium-theme-children-soft .block,
-html.premium-theme-children-soft .card,
-html.premium-theme-children-soft .panel,
-html.premium-theme-children-soft .home-widget,
-html.premium-theme-children-soft .today-action,
-html.premium-theme-children-soft .prayer-card,
-html.premium-theme-children-soft .dua-card,
-html.premium-theme-children-soft .ayah-card{
-  background-color:#0b2947 !important;
-  background-image:
-    radial-gradient(circle at 30px 34px,rgba(255,255,255,.16) 0 12px,transparent 12.8px),
-    radial-gradient(circle at 19px 24px,rgba(255,255,255,.12) 0 5.8px,transparent 6.4px),
-    radial-gradient(circle at 41px 24px,rgba(255,255,255,.12) 0 5.8px,transparent 6.4px),
-    linear-gradient(27deg,rgba(255,255,255,.07) 5%,transparent 5%,transparent 45%,rgba(255,255,255,.07) 45%,rgba(255,255,255,.07) 55%,transparent 55%,transparent),
-    linear-gradient(145deg,rgba(7,26,45,.96) 0%,rgba(18,59,93,.92) 52%,rgba(36,104,155,.82) 100%) !important;
-  background-size:132px 132px,132px 132px,132px 132px,18px 18px,100% 100% !important;
-  background-repeat:repeat,repeat,repeat,repeat,no-repeat !important;
-  color:#f4fbff !important;
-  border-color:rgba(160,220,255,.38) !important;
-}
-html.premium-theme-night-mosque .container,
-html.premium-theme-night-mosque .hero,
-html.premium-theme-night-mosque .brand-prayer-hero,
-html.premium-theme-night-mosque .today-hub,
-html.premium-theme-night-mosque .barakaway-pro-final,
-html.premium-theme-night-mosque .block,
-html.premium-theme-night-mosque .card,
-html.premium-theme-night-mosque .panel,
-html.premium-theme-night-mosque .home-widget,
-html.premium-theme-night-mosque .today-action,
-html.premium-theme-night-mosque .prayer-card,
-html.premium-theme-night-mosque .dua-card,
-html.premium-theme-night-mosque .ayah-card{
-  background-color:#050b13 !important;
-  background-image:
-    radial-gradient(circle at 12px 18px,rgba(255,255,255,.46) 0 .9px,transparent 1.6px),
-    radial-gradient(circle at 45px 34px,rgba(255,255,255,.36) 0 1.1px,transparent 1.8px),
-    radial-gradient(circle at 78px 14px,rgba(255,255,255,.42) 0 1px,transparent 1.7px),
-    linear-gradient(27deg,rgba(124,167,255,.07) 5%,transparent 5%,transparent 45%,rgba(124,167,255,.07) 45%,rgba(124,167,255,.07) 55%,transparent 55%,transparent),
-    linear-gradient(145deg,rgba(3,8,18,.96) 0%,rgba(7,21,39,.94) 52%,rgba(16,43,74,.86) 100%) !important;
-  background-size:124px 124px,124px 124px,124px 124px,18px 18px,100% 100% !important;
-  background-repeat:repeat,repeat,repeat,repeat,no-repeat !important;
-  color:#f3f7ff !important;
-  border-color:rgba(118,154,215,.38) !important;
-}
-html.premium-theme-desert-sand .container,
-html.premium-theme-desert-sand .hero,
-html.premium-theme-desert-sand .brand-prayer-hero,
-html.premium-theme-desert-sand .today-hub,
-html.premium-theme-desert-sand .barakaway-pro-final,
-html.premium-theme-desert-sand .block,
-html.premium-theme-desert-sand .card,
-html.premium-theme-desert-sand .panel,
-html.premium-theme-desert-sand .home-widget,
-html.premium-theme-desert-sand .today-action,
-html.premium-theme-desert-sand .prayer-card,
-html.premium-theme-desert-sand .dua-card,
-html.premium-theme-desert-sand .ayah-card{
-  background-color:#553819 !important;
-  background-image:
-    radial-gradient(circle at 1px 1px,rgba(255,246,215,.35) 0 .75px,transparent 1.35px),
-    radial-gradient(circle at 8px 11px,rgba(114,72,28,.22) 0 .85px,transparent 1.45px),
-    radial-gradient(ellipse at 28% 18%,rgba(255,242,204,.20) 0 12%,transparent 40%),
-    radial-gradient(ellipse at 74% 65%,rgba(105,64,24,.14) 0 12%,transparent 38%),
-    linear-gradient(145deg,rgba(58,34,11,.92) 0%,rgba(143,103,48,.88) 48%,rgba(222,185,115,.80) 100%) !important;
-  background-size:8px 8px,13px 13px,100% 100%,100% 100%,100% 100% !important;
-  background-repeat:repeat,repeat,no-repeat,no-repeat,no-repeat !important;
-  color:#2b1a07 !important;
-  border-color:rgba(255,237,190,.46) !important;
-}
-
-/* Readability rules per material. */
-html.premium-theme-children-soft h1,
-html.premium-theme-children-soft h2,
-html.premium-theme-children-soft h3,
-html.premium-theme-children-soft h4,
-html.premium-theme-children-soft p,
-html.premium-theme-children-soft li,
-html.premium-theme-children-soft .title,
-html.premium-theme-children-soft .subtitle,
-html.premium-theme-children-soft .muted,
-html.premium-theme-children-soft .note,
-html.premium-theme-night-mosque h1,
-html.premium-theme-night-mosque h2,
-html.premium-theme-night-mosque h3,
-html.premium-theme-night-mosque h4,
-html.premium-theme-night-mosque p,
-html.premium-theme-night-mosque li,
-html.premium-theme-night-mosque .title,
-html.premium-theme-night-mosque .subtitle,
-html.premium-theme-night-mosque .muted,
-html.premium-theme-night-mosque .note{
-  color:#f8fbff !important;
-  text-shadow:0 2px 12px rgba(0,0,0,.38) !important;
-}
-html.premium-theme-desert-sand h1,
-html.premium-theme-desert-sand h2,
-html.premium-theme-desert-sand h3,
-html.premium-theme-desert-sand h4,
-html.premium-theme-desert-sand p,
-html.premium-theme-desert-sand li,
-html.premium-theme-desert-sand .title,
-html.premium-theme-desert-sand .subtitle,
-html.premium-theme-desert-sand .muted,
-html.premium-theme-desert-sand .note{
-  color:#241606 !important;
-  text-shadow:0 1px 8px rgba(255,237,190,.32) !important;
-}
-html.premium-theme-desert-sand .bottom-app-nav-item,
-html.premium-theme-desert-sand .bottom-app-nav-item span,
-html.premium-theme-desert-sand .bottom-app-nav-item div{
-  color:#2b1a07 !important;
-  text-shadow:none !important;
-}
-
-/* BarakaWay logo must stay transparent: no theme material behind the logo. */
-html[class*="premium-theme-"] .barakaway-logo,
-html[class*="premium-theme-"] .brand-logo,
-html[class*="premium-theme-"] .app-logo,
-html[class*="premium-theme-"] .logo,
-html[class*="premium-theme-"] [data-logo],
-html[class*="premium-theme-"] [class*="barakaway-logo"],
-html[class*="premium-theme-"] [class*="brand-logo"],
-html[class*="premium-theme-"] [class*="app-logo"],
-html[class*="premium-theme-"] [class*="logo"]{
-  background:transparent !important;
-  background-color:transparent !important;
-  background-image:none !important;
-  box-shadow:none !important;
-  border-color:transparent !important;
-  outline:none !important;
-  filter:none !important;
-}
-html[class*="premium-theme-"] .barakaway-logo *,
-html[class*="premium-theme-"] .brand-logo *,
-html[class*="premium-theme-"] .app-logo *,
-html[class*="premium-theme-"] .logo *,
-html[class*="premium-theme-"] [data-logo] *,
-html[class*="premium-theme-"] [class*="barakaway-logo"] *,
-html[class*="premium-theme-"] [class*="brand-logo"] *,
-html[class*="premium-theme-"] [class*="app-logo"] *,
-html[class*="premium-theme-"] [class*="logo"] *{
-  background:transparent !important;
-  background-color:transparent !important;
-  background-image:none !important;
-  box-shadow:none !important;
-  border-color:transparent !important;
-}
-/* ===== END BARAKAWAY FINAL FIX ===== */
-`;
-  (document.head || document.documentElement).appendChild(style);
-})();
