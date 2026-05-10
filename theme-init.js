@@ -1452,61 +1452,6 @@ html.premium-theme-carbon-elite [data-barakaway-logo-lock] *{
 
 
 (function(){
-  const STYLE_ID = "barakaway-lightweight-visual-themes-fix";
-  const CSS = `
-/* JS fallback: ensures theme cards receive correct classes without heavy inline images */
-.theme-grid .theme-card.theme-child h3,
-.theme-grid .theme-card.theme-child p,
-.theme-grid .theme-card.bw-theme-sample-children-soft h3,
-.theme-grid .theme-card.bw-theme-sample-children-soft p{
-  color:#2b2230 !important;
-  text-shadow:0 1px 8px rgba(255,255,255,.80) !important;
-}
-`;
-
-  function injectFallback(){
-    if(document.getElementById(STYLE_ID)) return;
-    const style = document.createElement("style");
-    style.id = STYLE_ID;
-    style.textContent = CSS;
-    (document.head || document.documentElement).appendChild(style);
-  }
-
-  function markCards(){
-    document.querySelectorAll(".theme-grid .theme-card, .theme-card").forEach(function(card){
-      const text = (card.textContent || "").replace(/\s+/g," ").trim();
-
-      if(text.indexOf("Детская") !== -1){
-        card.classList.add("theme-child","bw-theme-sample-card","bw-theme-sample-children-soft");
-      }
-      if(text.indexOf("Ночная мечеть") !== -1){
-        card.classList.add("theme-night","bw-theme-sample-card","bw-theme-sample-night-mosque");
-      }
-      if(text.indexOf("Песочная") !== -1){
-        card.classList.add("theme-sand","bw-theme-sample-card","bw-theme-sample-desert-sand");
-      }
-    });
-  }
-
-  function run(){
-    injectFallback();
-    markCards();
-  }
-
-  if(document.readyState === "loading"){
-    document.addEventListener("DOMContentLoaded", run);
-  }else{
-    run();
-  }
-
-  window.addEventListener("storage", run);
-  window.addEventListener("barakaway:premium-theme-change", run);
-  setTimeout(run, 200);
-})();
-
-
-
-(function(){
 function forceThemes(){
 document.querySelectorAll('.theme-card').forEach(function(card){
 const t=(card.textContent||'').toLowerCase();
@@ -1520,3 +1465,31 @@ document.addEventListener('DOMContentLoaded',forceThemes);
 }else{forceThemes();}
 setTimeout(forceThemes,400);
 })();
+
+
+(function(){
+  const STYLE_ID = "barakaway-same-logic-as-carbon-final";
+  const CSS = "body .theme-grid .theme-card.theme-child h3,body .theme-grid .theme-card.theme-child p,body .theme-grid .theme-card.bw-theme-sample-children-soft h3,body .theme-grid .theme-card.bw-theme-sample-children-soft p{color:#2b2230!important;text-shadow:0 1px 8px rgba(255,255,255,.94)!important;}";
+  function injectFallback(){
+    if(document.getElementById(STYLE_ID)) return;
+    const style=document.createElement("style");
+    style.id=STYLE_ID;
+    style.textContent=CSS;
+    (document.head||document.documentElement).appendChild(style);
+  }
+  function markVisualCards(){
+    document.querySelectorAll(".theme-grid .theme-card,.theme-card").forEach(function(card){
+      const text=(card.textContent||"").replace(/\s+/g," ").trim();
+      if(text.indexOf("Детская")!==-1) card.classList.add("theme-child","bw-theme-sample-card","bw-theme-sample-children-soft");
+      if(text.indexOf("Ночная мечеть")!==-1) card.classList.add("theme-night","bw-theme-sample-card","bw-theme-sample-night-mosque");
+      if(text.indexOf("Песочная")!==-1) card.classList.add("theme-sand","bw-theme-sample-card","bw-theme-sample-desert-sand");
+    });
+  }
+  function run(){injectFallback();markVisualCards();}
+  if(document.readyState==="loading"){document.addEventListener("DOMContentLoaded",run);}else{run();}
+  window.addEventListener("storage",run);
+  window.addEventListener("barakaway:premium-theme-change",run);
+  setTimeout(run,250);
+  setTimeout(run,900);
+})();
+
