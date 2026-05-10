@@ -1972,188 +1972,358 @@ html[class*="premium-theme-"] [class*="logo"]{
 /* ===== END FINAL CLEAN FIX ===== */
 
 
-
-/* ===== BARAKAWAY THEME SELECTOR CARD MATERIAL LOCK — V20260510 ===== */
-/* Theme selector cards must never inherit the currently active PRO theme. */
-html body .page .theme-grid .theme-card,
-html[class*="premium-theme-"] body .page .theme-grid .theme-card{
-  color:#ffffff !important;
+/* ===== BARAKAWAY FINAL FIX: CARBON LOGIC WITHOUT GLOBAL CARD REPAINT ===== */
+/* Active PRO theme may repaint the application, but must never repaint theme-selection cards. */
+html[class*="premium-theme-"] .theme-grid .theme-card,
+html[class*="premium-theme-"] .theme-card[data-theme],
+html[class*="premium-theme-"] .bw-theme-sample-card{
   isolation:isolate !important;
   overflow:hidden !important;
-  text-shadow:0 2px 10px rgba(0,0,0,.32) !important;
+  color:#fff !important;
 }
 
-html body .page .theme-grid .theme-card h3,
-html body .page .theme-grid .theme-card p,
-html body .page .theme-grid .theme-card strong,
-html[class*="premium-theme-"] body .page .theme-grid .theme-card h3,
-html[class*="premium-theme-"] body .page .theme-grid .theme-card p,
-html[class*="premium-theme-"] body .page .theme-grid .theme-card strong{
-  color:#ffffff !important;
-  text-shadow:0 2px 10px rgba(0,0,0,.36) !important;
+html[class*="premium-theme-"] .theme-grid .theme-card h3,
+html[class*="premium-theme-"] .theme-grid .theme-card p,
+html[class*="premium-theme-"] .theme-grid .theme-card strong,
+html[class*="premium-theme-"] .theme-grid .theme-card .theme-top,
+html[class*="premium-theme-"] .theme-grid .theme-card .theme-preview,
+html[class*="premium-theme-"] .bw-theme-sample-card h3,
+html[class*="premium-theme-"] .bw-theme-sample-card p,
+html[class*="premium-theme-"] .bw-theme-sample-card strong{
+  position:relative !important;
+  z-index:3 !important;
+  color:#fff !important;
+  text-shadow:0 2px 12px rgba(0,0,0,.36) !important;
 }
 
-html body .page .theme-grid .theme-card .theme-chip,
-html[class*="premium-theme-"] body .page .theme-grid .theme-card .theme-chip{
-  background:rgba(0,0,0,.26) !important;
-  border-color:rgba(255,255,255,.22) !important;
-  color:#ffffff !important;
+html[class*="premium-theme-"] .theme-grid .theme-card::before,
+html[class*="premium-theme-"] .theme-card[data-theme]::before,
+html[class*="premium-theme-"] .bw-theme-sample-card::before{
+  content:"" !important;
+  position:absolute !important;
+  inset:0 !important;
+  z-index:1 !important;
+  opacity:.75 !important;
+  pointer-events:none !important;
+  background:linear-gradient(120deg,transparent 45%,rgba(255,255,255,.12) 56%,transparent 70%) !important;
 }
 
-html body .page .theme-grid .theme-card.theme-gold,
-html body .page .theme-grid .theme-card[data-theme="royal-gold"],
-html[class*="premium-theme-"] body .page .theme-grid .theme-card.theme-gold,
-html[class*="premium-theme-"] body .page .theme-grid .theme-card[data-theme="royal-gold"]{
-  background-color:#171208 !important;
+/* Card previews: fixed individual materials, independent from active theme. */
+html[class*="premium-theme-"] .theme-grid .theme-card.theme-gold,
+html[class*="premium-theme-"] .theme-card.theme-gold,
+.theme-card.theme-gold{
+  background-color:#11100d !important;
   background-image:
-    linear-gradient(27deg, rgba(255,239,184,.15) 5%, transparent 5%, transparent 45%, rgba(255,239,184,.15) 45%, rgba(255,239,184,.15) 55%, transparent 55%, transparent),
-    linear-gradient(207deg, rgba(175,132,48,.13) 5%, transparent 5%, transparent 45%, rgba(175,132,48,.13) 45%, rgba(175,132,48,.13) 55%, transparent 55%, transparent),
-    linear-gradient(145deg,#171208 0%,#4b3615 52%,#d7c07a 100%) !important;
+    linear-gradient(27deg,rgba(255,237,190,.16) 5%,transparent 5%,transparent 45%,rgba(255,237,190,.16) 45%,rgba(255,237,190,.16) 55%,transparent 55%,transparent),
+    linear-gradient(207deg,rgba(175,132,48,.12) 5%,transparent 5%,transparent 45%,rgba(175,132,48,.12) 45%,rgba(175,132,48,.12) 55%,transparent 55%,transparent),
+    linear-gradient(145deg,#11100d 0%,#332511 48%,#d7c07a 100%) !important;
   background-size:18px 18px,18px 18px,100% 100% !important;
   background-position:0 0,9px 9px,center !important;
   background-repeat:repeat,repeat,no-repeat !important;
-  border-color:rgba(244,220,148,.58) !important;
+  border-color:rgba(241,219,145,.44) !important;
 }
-
-html body .page .theme-grid .theme-card.theme-emerald,
-html body .page .theme-grid .theme-card[data-theme="emerald-quran"],
-html[class*="premium-theme-"] body .page .theme-grid .theme-card.theme-emerald,
-html[class*="premium-theme-"] body .page .theme-grid .theme-card[data-theme="emerald-quran"]{
-  background-color:#061109 !important;
+html[class*="premium-theme-"] .theme-grid .theme-card.theme-emerald,
+html[class*="premium-theme-"] .theme-card.theme-emerald,
+.theme-card.theme-emerald{
+  background-color:#0d1711 !important;
   background-image:
-    linear-gradient(27deg, rgba(102,198,128,.14) 5%, transparent 5%, transparent 45%, rgba(102,198,128,.14) 45%, rgba(102,198,128,.14) 55%, transparent 55%, transparent),
-    linear-gradient(207deg, rgba(255,255,255,.07) 5%, transparent 5%, transparent 45%, rgba(255,255,255,.07) 45%, rgba(255,255,255,.07) 55%, transparent 55%, transparent),
-    linear-gradient(145deg,#061109 0%,#12301d 52%,#4caf6a 100%) !important;
+    linear-gradient(27deg,rgba(102,198,128,.16) 5%,transparent 5%,transparent 45%,rgba(102,198,128,.16) 45%,rgba(102,198,128,.16) 55%,transparent 55%,transparent),
+    linear-gradient(207deg,rgba(184,255,208,.10) 5%,transparent 5%,transparent 45%,rgba(184,255,208,.10) 45%,rgba(184,255,208,.10) 55%,transparent 55%,transparent),
+    linear-gradient(145deg,#0d1711 0%,#143524 52%,#4caf6a 100%) !important;
   background-size:18px 18px,18px 18px,100% 100% !important;
   background-position:0 0,9px 9px,center !important;
   background-repeat:repeat,repeat,no-repeat !important;
-  border-color:rgba(102,198,128,.58) !important;
+  border-color:rgba(102,198,128,.46) !important;
 }
-
-html body .page .theme-grid .theme-card.theme-violet,
-html body .page .theme-grid .theme-card[data-theme="violet-noor"],
-html[class*="premium-theme-"] body .page .theme-grid .theme-card.theme-violet,
-html[class*="premium-theme-"] body .page .theme-grid .theme-card[data-theme="violet-noor"]{
-  background-color:#0d0a15 !important;
+html[class*="premium-theme-"] .theme-grid .theme-card.theme-violet,
+html[class*="premium-theme-"] .theme-card.theme-violet,
+.theme-card.theme-violet{
+  background-color:#151020 !important;
   background-image:
-    linear-gradient(27deg, rgba(197,168,255,.14) 5%, transparent 5%, transparent 45%, rgba(197,168,255,.14) 45%, rgba(197,168,255,.14) 55%, transparent 55%, transparent),
-    linear-gradient(207deg, rgba(255,255,255,.07) 5%, transparent 5%, transparent 45%, rgba(255,255,255,.07) 45%, rgba(255,255,255,.07) 55%, transparent 55%, transparent),
-    linear-gradient(145deg,#0d0a15 0%,#241a42 52%,#a176ff 100%) !important;
+    linear-gradient(27deg,rgba(197,168,255,.18) 5%,transparent 5%,transparent 45%,rgba(197,168,255,.18) 45%,rgba(197,168,255,.18) 55%,transparent 55%,transparent),
+    linear-gradient(207deg,rgba(161,118,255,.12) 5%,transparent 5%,transparent 45%,rgba(161,118,255,.12) 45%,rgba(161,118,255,.12) 55%,transparent 55%,transparent),
+    linear-gradient(145deg,#151020 0%,#35235e 52%,#a176ff 100%) !important;
   background-size:18px 18px,18px 18px,100% 100% !important;
   background-position:0 0,9px 9px,center !important;
   background-repeat:repeat,repeat,no-repeat !important;
-  border-color:rgba(197,168,255,.58) !important;
+  border-color:rgba(197,168,255,.46) !important;
 }
-
-html body .page .theme-grid .theme-card.theme-rose,
-html body .page .theme-grid .theme-card[data-theme="rose-soft"],
-html[class*="premium-theme-"] body .page .theme-grid .theme-card.theme-rose,
-html[class*="premium-theme-"] body .page .theme-grid .theme-card[data-theme="rose-soft"]{
-  background-color:#160a12 !important;
+html[class*="premium-theme-"] .theme-grid .theme-card.theme-rose,
+html[class*="premium-theme-"] .theme-card.theme-rose,
+.theme-card.theme-rose{
+  background-color:#1b1018 !important;
   background-image:
-    radial-gradient(circle at 28px 28px, rgba(255,158,199,.18) 0 10px, transparent 11px),
-    linear-gradient(27deg, rgba(255,190,218,.13) 5%, transparent 5%, transparent 45%, rgba(255,190,218,.13) 45%, rgba(255,190,218,.13) 55%, transparent 55%, transparent),
-    linear-gradient(207deg, rgba(255,255,255,.07) 5%, transparent 5%, transparent 45%, rgba(255,255,255,.07) 45%, rgba(255,255,255,.07) 55%, transparent 55%, transparent),
-    linear-gradient(145deg,#160a12 0%,#401b31 52%,#ff9ec7 100%) !important;
-  background-size:96px 96px,18px 18px,18px 18px,100% 100% !important;
-  background-position:0 0,0 0,9px 9px,center !important;
+    radial-gradient(circle at 22px 18px,rgba(255,190,218,.18) 0 10px,transparent 11px),
+    radial-gradient(circle at 54px 54px,rgba(255,158,199,.14) 0 8px,transparent 9px),
+    linear-gradient(27deg,rgba(255,190,218,.14) 5%,transparent 5%,transparent 45%,rgba(255,190,218,.14) 45%,rgba(255,190,218,.14) 55%,transparent 55%,transparent),
+    linear-gradient(145deg,#1b1018 0%,#4a263c 52%,#ff9ec7 100%) !important;
+  background-size:92px 92px,92px 92px,18px 18px,100% 100% !important;
+  background-position:0 0,12px 18px,0 0,center !important;
   background-repeat:repeat,repeat,repeat,no-repeat !important;
-  border-color:rgba(255,190,218,.58) !important;
+  border-color:rgba(255,158,199,.48) !important;
 }
-
-html body .page .theme-grid .theme-card.theme-carbon,
-html body .page .theme-grid .theme-card[data-theme="carbon-elite"],
-html[class*="premium-theme-"] body .page .theme-grid .theme-card.theme-carbon,
-html[class*="premium-theme-"] body .page .theme-grid .theme-card[data-theme="carbon-elite"]{
+html[class*="premium-theme-"] .theme-grid .theme-card.theme-carbon,
+html[class*="premium-theme-"] .theme-card.theme-carbon,
+.theme-card.theme-carbon{
   background-color:#0b0f14 !important;
   background-image:
-    linear-gradient(27deg, rgba(255,255,255,.10) 5%, transparent 5%, transparent 45%, rgba(255,255,255,.10) 45%, rgba(255,255,255,.10) 55%, transparent 55%, transparent),
-    linear-gradient(207deg, rgba(255,255,255,.06) 5%, transparent 5%, transparent 45%, rgba(255,255,255,.06) 45%, rgba(255,255,255,.06) 55%, transparent 55%, transparent),
+    linear-gradient(27deg,rgba(255,255,255,.10) 5%,transparent 5%,transparent 45%,rgba(255,255,255,.10) 45%,rgba(255,255,255,.10) 55%,transparent 55%,transparent),
+    linear-gradient(207deg,rgba(255,255,255,.06) 5%,transparent 5%,transparent 45%,rgba(255,255,255,.06) 45%,rgba(255,255,255,.06) 55%,transparent 55%,transparent),
     linear-gradient(145deg,#07090c 0%,#1c232c 52%,#4b5562 100%) !important;
   background-size:18px 18px,18px 18px,100% 100% !important;
   background-position:0 0,9px 9px,center !important;
   background-repeat:repeat,repeat,no-repeat !important;
   border-color:rgba(255,255,255,.12) !important;
 }
-
-html body .page .theme-grid .theme-card.theme-child,
-html body .page .theme-grid .theme-card[data-theme="children-soft"],
-html[class*="premium-theme-"] body .page .theme-grid .theme-card.theme-child,
-html[class*="premium-theme-"] body .page .theme-grid .theme-card[data-theme="children-soft"]{
-  background-color:#07172a !important;
+html[class*="premium-theme-"] .theme-grid .theme-card.theme-child,
+html[class*="premium-theme-"] .theme-card.theme-child,
+.theme-card.theme-child{
+  background-color:#0b2947 !important;
   background-image:
-    linear-gradient(27deg, rgba(255,255,255,.13) 5%, transparent 5%, transparent 45%, rgba(255,255,255,.13) 45%, rgba(255,255,255,.13) 55%, transparent 55%, transparent),
-    linear-gradient(207deg, rgba(255,227,241,.10) 5%, transparent 5%, transparent 45%, rgba(255,227,241,.10) 45%, rgba(255,227,241,.10) 55%, transparent 55%, transparent),
-    radial-gradient(circle at 30px 34px, rgba(255,255,255,.34) 0 12px, transparent 12.8px),
-    radial-gradient(circle at 19px 24px, rgba(255,255,255,.28) 0 5.8px, transparent 6.4px),
-    radial-gradient(circle at 41px 24px, rgba(255,255,255,.28) 0 5.8px, transparent 6.4px),
-    linear-gradient(145deg,#07172a 0%,#225983 52%,#8fcfff 100%) !important;
-  background-size:18px 18px,18px 18px,96px 96px,96px 96px,96px 96px,100% 100% !important;
-  background-position:0 0,9px 9px,0 0,0 0,0 0,center !important;
-  background-repeat:repeat,repeat,repeat,repeat,repeat,no-repeat !important;
-  border-color:rgba(160,220,255,.46) !important;
-}
-
-html body .page .theme-grid .theme-card.theme-night,
-html body .page .theme-grid .theme-card[data-theme="night-mosque"],
-html[class*="premium-theme-"] body .page .theme-grid .theme-card.theme-night,
-html[class*="premium-theme-"] body .page .theme-grid .theme-card[data-theme="night-mosque"]{
-  background-color:#050b13 !important;
-  background-image:
-    radial-gradient(circle at 18px 18px, rgba(255,255,255,.48) 0 1.2px, transparent 1.8px),
-    radial-gradient(circle at 48px 31px, rgba(255,255,255,.40) 0 1px, transparent 1.6px),
-    radial-gradient(circle at 82px 16px, rgba(255,255,255,.44) 0 1.1px, transparent 1.7px),
-    radial-gradient(circle at 68px 34px, rgba(215,192,122,.30) 0 10px, transparent 10.8px),
-    linear-gradient(90deg, transparent 0 31%, rgba(215,192,122,.18) 31% 33%, transparent 33% 57%, rgba(215,192,122,.18) 57% 59%, transparent 59% 100%),
-    linear-gradient(27deg, rgba(215,192,122,.12) 5%, transparent 5%, transparent 45%, rgba(215,192,122,.12) 45%, rgba(215,192,122,.12) 55%, transparent 55%, transparent),
-    linear-gradient(207deg, rgba(124,167,255,.10) 5%, transparent 5%, transparent 45%, rgba(124,167,255,.10) 45%, rgba(124,167,255,.10) 55%, transparent 55%, transparent),
-    linear-gradient(145deg,#050b13 0%,#10213d 52%,#294f86 100%) !important;
-  background-size:120px 120px,120px 120px,120px 120px,120px 120px,120px 120px,18px 18px,18px 18px,100% 100% !important;
+    radial-gradient(circle at 30px 34px,rgba(255,255,255,.34) 0 12px,transparent 12.8px),
+    radial-gradient(circle at 19px 24px,rgba(255,255,255,.28) 0 5.8px,transparent 6.4px),
+    radial-gradient(circle at 41px 24px,rgba(255,255,255,.28) 0 5.8px,transparent 6.4px),
+    radial-gradient(circle at 26px 33px,rgba(11,41,71,.38) 0 1.8px,transparent 2.3px),
+    radial-gradient(circle at 34px 33px,rgba(11,41,71,.38) 0 1.8px,transparent 2.3px),
+    linear-gradient(27deg,rgba(255,255,255,.13) 5%,transparent 5%,transparent 45%,rgba(255,255,255,.13) 45%,rgba(255,255,255,.13) 55%,transparent 55%,transparent),
+    linear-gradient(207deg,rgba(255,227,241,.10) 5%,transparent 5%,transparent 45%,rgba(255,227,241,.10) 45%,rgba(255,227,241,.10) 55%,transparent 55%,transparent),
+    linear-gradient(145deg,#0b2947 0%,#225983 52%,#8fcfff 100%) !important;
+  background-size:96px 96px,96px 96px,96px 96px,96px 96px,96px 96px,18px 18px,18px 18px,100% 100% !important;
   background-position:0 0,0 0,0 0,0 0,0 0,0 0,9px 9px,center !important;
   background-repeat:repeat,repeat,repeat,repeat,repeat,repeat,repeat,no-repeat !important;
+  border-color:rgba(160,220,255,.46) !important;
+}
+html[class*="premium-theme-"] .theme-grid .theme-card.theme-night,
+html[class*="premium-theme-"] .theme-card.theme-night,
+.theme-card.theme-night{
+  background-color:#050b13 !important;
+  background-image:
+    radial-gradient(circle at 12px 18px,rgba(255,255,255,.70) 0 .9px,transparent 1.5px),
+    radial-gradient(circle at 44px 34px,rgba(255,255,255,.55) 0 1.1px,transparent 1.7px),
+    radial-gradient(circle at 78px 14px,rgba(255,255,255,.62) 0 1px,transparent 1.6px),
+    radial-gradient(circle at 104px 76px,rgba(255,255,255,.48) 0 .8px,transparent 1.4px),
+    linear-gradient(27deg,rgba(124,167,255,.10) 5%,transparent 5%,transparent 45%,rgba(124,167,255,.10) 45%,rgba(124,167,255,.10) 55%,transparent 55%,transparent),
+    linear-gradient(207deg,rgba(255,255,255,.05) 5%,transparent 5%,transparent 45%,rgba(255,255,255,.05) 45%,rgba(255,255,255,.05) 55%,transparent 55%,transparent),
+    linear-gradient(145deg,#050b13 0%,#10213d 55%,#244d86 100%) !important;
+  background-size:112px 112px,112px 112px,112px 112px,112px 112px,18px 18px,18px 18px,100% 100% !important;
+  background-position:0 0,0 0,0 0,0 0,0 0,9px 9px,center !important;
+  background-repeat:repeat,repeat,repeat,repeat,repeat,repeat,no-repeat !important;
   border-color:rgba(118,154,215,.44) !important;
 }
-
-html body .page .theme-grid .theme-card.theme-sand,
-html body .page .theme-grid .theme-card[data-theme="desert-sand"],
-html[class*="premium-theme-"] body .page .theme-grid .theme-card.theme-sand,
-html[class*="premium-theme-"] body .page .theme-grid .theme-card[data-theme="desert-sand"]{
-  background-color:#2b1906 !important;
+html[class*="premium-theme-"] .theme-grid .theme-card.theme-sand,
+html[class*="premium-theme-"] .theme-card.theme-sand,
+.theme-card.theme-sand{
+  background-color:#4f3618 !important;
   background-image:
-    radial-gradient(circle at 2px 2px, rgba(255,237,190,.36) 0 1px, transparent 1.7px),
-    radial-gradient(circle at 10px 8px, rgba(219,174,97,.26) 0 1px, transparent 1.8px),
-    linear-gradient(27deg, rgba(255,237,190,.18) 5%, transparent 5%, transparent 45%, rgba(255,237,190,.18) 45%, rgba(255,237,190,.18) 55%, transparent 55%, transparent),
-    linear-gradient(207deg, rgba(120,72,18,.18) 5%, transparent 5%, transparent 45%, rgba(120,72,18,.18) 45%, rgba(120,72,18,.18) 55%, transparent 55%, transparent),
-    linear-gradient(145deg,#2b1906 0%,#8a6227 52%,#d7a85e 100%) !important;
-  background-size:16px 16px,18px 18px,18px 18px,18px 18px,100% 100% !important;
-  background-position:0 0,6px 8px,0 0,9px 9px,center !important;
-  background-repeat:repeat,repeat,repeat,repeat,no-repeat !important;
-  border-color:rgba(255,237,190,.48) !important;
+    radial-gradient(circle at 1px 1px,rgba(255,246,215,.44) 0 .8px,transparent 1.4px),
+    radial-gradient(circle at 7px 11px,rgba(116,72,28,.22) 0 .9px,transparent 1.5px),
+    radial-gradient(ellipse at 35% 18%,rgba(255,239,190,.25) 0 16%,transparent 42%),
+    radial-gradient(ellipse at 70% 66%,rgba(104,63,22,.18) 0 12%,transparent 38%),
+    linear-gradient(27deg,rgba(255,237,190,.13) 5%,transparent 5%,transparent 45%,rgba(255,237,190,.13) 45%,rgba(255,237,190,.13) 55%,transparent 55%,transparent),
+    linear-gradient(145deg,#3b2309 0%,#916b34 48%,#e5bd74 100%) !important;
+  background-size:8px 8px,13px 13px,100% 100%,100% 100%,18px 18px,100% 100% !important;
+  background-position:0 0,4px 6px,center,center,0 0,center !important;
+  background-repeat:repeat,repeat,no-repeat,no-repeat,repeat,no-repeat !important;
+  border-color:rgba(255,237,190,.52) !important;
 }
 
+/* Application backgrounds: same principle as Carbon Elite, but with correct theme material. */
+html.premium-theme-children-soft body{
+  background-color:#0b2947 !important;
+  background-image:
+    radial-gradient(circle at 30px 34px,rgba(255,255,255,.20) 0 12px,transparent 12.8px),
+    radial-gradient(circle at 19px 24px,rgba(255,255,255,.16) 0 5.8px,transparent 6.4px),
+    radial-gradient(circle at 41px 24px,rgba(255,255,255,.16) 0 5.8px,transparent 6.4px),
+    linear-gradient(27deg,rgba(255,255,255,.08) 5%,transparent 5%,transparent 45%,rgba(255,255,255,.08) 45%,rgba(255,255,255,.08) 55%,transparent 55%,transparent),
+    linear-gradient(207deg,rgba(255,227,241,.07) 5%,transparent 5%,transparent 45%,rgba(255,227,241,.07) 45%,rgba(255,227,241,.07) 55%,transparent 55%,transparent),
+    linear-gradient(145deg,#071a2d 0%,#123b5d 52%,#24689b 100%) !important;
+  background-size:118px 118px,118px 118px,118px 118px,18px 18px,18px 18px,100% 100% !important;
+  background-position:0 0,0 0,0 0,0 0,9px 9px,center !important;
+  background-repeat:repeat,repeat,repeat,repeat,repeat,no-repeat !important;
+}
+html.premium-theme-night-mosque body{
+  background-color:#050b13 !important;
+  background-image:
+    radial-gradient(circle at 12px 18px,rgba(255,255,255,.76) 0 .9px,transparent 1.6px),
+    radial-gradient(circle at 45px 34px,rgba(255,255,255,.55) 0 1.1px,transparent 1.8px),
+    radial-gradient(circle at 78px 14px,rgba(255,255,255,.62) 0 1px,transparent 1.7px),
+    radial-gradient(circle at 104px 76px,rgba(255,255,255,.48) 0 .8px,transparent 1.5px),
+    linear-gradient(27deg,rgba(124,167,255,.08) 5%,transparent 5%,transparent 45%,rgba(124,167,255,.08) 45%,rgba(124,167,255,.08) 55%,transparent 55%,transparent),
+    linear-gradient(145deg,#030812 0%,#071527 52%,#102b4a 100%) !important;
+  background-size:124px 124px,124px 124px,124px 124px,124px 124px,18px 18px,100% 100% !important;
+  background-position:0 0,0 0,0 0,0 0,0 0,center !important;
+  background-repeat:repeat,repeat,repeat,repeat,repeat,no-repeat !important;
+}
+html.premium-theme-desert-sand body{
+  background-color:#553819 !important;
+  background-image:
+    radial-gradient(circle at 1px 1px,rgba(255,246,215,.50) 0 .75px,transparent 1.35px),
+    radial-gradient(circle at 8px 11px,rgba(114,72,28,.28) 0 .85px,transparent 1.45px),
+    radial-gradient(ellipse at 28% 18%,rgba(255,242,204,.24) 0 12%,transparent 40%),
+    radial-gradient(ellipse at 74% 65%,rgba(105,64,24,.18) 0 12%,transparent 38%),
+    linear-gradient(145deg,#3a220b 0%,#8f6730 48%,#deb973 100%) !important;
+  background-size:8px 8px,13px 13px,100% 100%,100% 100%,100% 100% !important;
+  background-position:0 0,4px 6px,center,center,center !important;
+  background-repeat:repeat,repeat,no-repeat,no-repeat,no-repeat !important;
+}
+
+html.premium-theme-children-soft .container,
+html.premium-theme-children-soft .hero,
+html.premium-theme-children-soft .brand-prayer-hero,
+html.premium-theme-children-soft .today-hub,
+html.premium-theme-children-soft .barakaway-pro-final,
+html.premium-theme-children-soft .block,
+html.premium-theme-children-soft .card,
+html.premium-theme-children-soft .panel,
+html.premium-theme-children-soft .home-widget,
+html.premium-theme-children-soft .today-action,
+html.premium-theme-children-soft .prayer-card,
+html.premium-theme-children-soft .dua-card,
+html.premium-theme-children-soft .ayah-card{
+  background-color:#0b2947 !important;
+  background-image:
+    radial-gradient(circle at 30px 34px,rgba(255,255,255,.16) 0 12px,transparent 12.8px),
+    radial-gradient(circle at 19px 24px,rgba(255,255,255,.12) 0 5.8px,transparent 6.4px),
+    radial-gradient(circle at 41px 24px,rgba(255,255,255,.12) 0 5.8px,transparent 6.4px),
+    linear-gradient(27deg,rgba(255,255,255,.07) 5%,transparent 5%,transparent 45%,rgba(255,255,255,.07) 45%,rgba(255,255,255,.07) 55%,transparent 55%,transparent),
+    linear-gradient(145deg,rgba(7,26,45,.96) 0%,rgba(18,59,93,.92) 52%,rgba(36,104,155,.82) 100%) !important;
+  background-size:132px 132px,132px 132px,132px 132px,18px 18px,100% 100% !important;
+  background-repeat:repeat,repeat,repeat,repeat,no-repeat !important;
+  color:#f4fbff !important;
+  border-color:rgba(160,220,255,.38) !important;
+}
+html.premium-theme-night-mosque .container,
+html.premium-theme-night-mosque .hero,
+html.premium-theme-night-mosque .brand-prayer-hero,
+html.premium-theme-night-mosque .today-hub,
+html.premium-theme-night-mosque .barakaway-pro-final,
+html.premium-theme-night-mosque .block,
+html.premium-theme-night-mosque .card,
+html.premium-theme-night-mosque .panel,
+html.premium-theme-night-mosque .home-widget,
+html.premium-theme-night-mosque .today-action,
+html.premium-theme-night-mosque .prayer-card,
+html.premium-theme-night-mosque .dua-card,
+html.premium-theme-night-mosque .ayah-card{
+  background-color:#050b13 !important;
+  background-image:
+    radial-gradient(circle at 12px 18px,rgba(255,255,255,.46) 0 .9px,transparent 1.6px),
+    radial-gradient(circle at 45px 34px,rgba(255,255,255,.36) 0 1.1px,transparent 1.8px),
+    radial-gradient(circle at 78px 14px,rgba(255,255,255,.42) 0 1px,transparent 1.7px),
+    linear-gradient(27deg,rgba(124,167,255,.07) 5%,transparent 5%,transparent 45%,rgba(124,167,255,.07) 45%,rgba(124,167,255,.07) 55%,transparent 55%,transparent),
+    linear-gradient(145deg,rgba(3,8,18,.96) 0%,rgba(7,21,39,.94) 52%,rgba(16,43,74,.86) 100%) !important;
+  background-size:124px 124px,124px 124px,124px 124px,18px 18px,100% 100% !important;
+  background-repeat:repeat,repeat,repeat,repeat,no-repeat !important;
+  color:#f3f7ff !important;
+  border-color:rgba(118,154,215,.38) !important;
+}
+html.premium-theme-desert-sand .container,
+html.premium-theme-desert-sand .hero,
+html.premium-theme-desert-sand .brand-prayer-hero,
+html.premium-theme-desert-sand .today-hub,
+html.premium-theme-desert-sand .barakaway-pro-final,
+html.premium-theme-desert-sand .block,
+html.premium-theme-desert-sand .card,
+html.premium-theme-desert-sand .panel,
+html.premium-theme-desert-sand .home-widget,
+html.premium-theme-desert-sand .today-action,
+html.premium-theme-desert-sand .prayer-card,
+html.premium-theme-desert-sand .dua-card,
+html.premium-theme-desert-sand .ayah-card{
+  background-color:#553819 !important;
+  background-image:
+    radial-gradient(circle at 1px 1px,rgba(255,246,215,.35) 0 .75px,transparent 1.35px),
+    radial-gradient(circle at 8px 11px,rgba(114,72,28,.22) 0 .85px,transparent 1.45px),
+    radial-gradient(ellipse at 28% 18%,rgba(255,242,204,.20) 0 12%,transparent 40%),
+    radial-gradient(ellipse at 74% 65%,rgba(105,64,24,.14) 0 12%,transparent 38%),
+    linear-gradient(145deg,rgba(58,34,11,.92) 0%,rgba(143,103,48,.88) 48%,rgba(222,185,115,.80) 100%) !important;
+  background-size:8px 8px,13px 13px,100% 100%,100% 100%,100% 100% !important;
+  background-repeat:repeat,repeat,no-repeat,no-repeat,no-repeat !important;
+  color:#2b1a07 !important;
+  border-color:rgba(255,237,190,.46) !important;
+}
+
+/* Readability rules per material. */
+html.premium-theme-children-soft h1,
+html.premium-theme-children-soft h2,
+html.premium-theme-children-soft h3,
+html.premium-theme-children-soft h4,
+html.premium-theme-children-soft p,
+html.premium-theme-children-soft li,
+html.premium-theme-children-soft .title,
+html.premium-theme-children-soft .subtitle,
+html.premium-theme-children-soft .muted,
+html.premium-theme-children-soft .note,
+html.premium-theme-night-mosque h1,
+html.premium-theme-night-mosque h2,
+html.premium-theme-night-mosque h3,
+html.premium-theme-night-mosque h4,
+html.premium-theme-night-mosque p,
+html.premium-theme-night-mosque li,
+html.premium-theme-night-mosque .title,
+html.premium-theme-night-mosque .subtitle,
+html.premium-theme-night-mosque .muted,
+html.premium-theme-night-mosque .note{
+  color:#f8fbff !important;
+  text-shadow:0 2px 12px rgba(0,0,0,.38) !important;
+}
+html.premium-theme-desert-sand h1,
+html.premium-theme-desert-sand h2,
+html.premium-theme-desert-sand h3,
+html.premium-theme-desert-sand h4,
+html.premium-theme-desert-sand p,
+html.premium-theme-desert-sand li,
+html.premium-theme-desert-sand .title,
+html.premium-theme-desert-sand .subtitle,
+html.premium-theme-desert-sand .muted,
+html.premium-theme-desert-sand .note{
+  color:#241606 !important;
+  text-shadow:0 1px 8px rgba(255,237,190,.32) !important;
+}
+html.premium-theme-desert-sand .bottom-app-nav-item,
+html.premium-theme-desert-sand .bottom-app-nav-item span,
+html.premium-theme-desert-sand .bottom-app-nav-item div{
+  color:#2b1a07 !important;
+  text-shadow:none !important;
+}
+
+/* BarakaWay logo must stay transparent: no theme material behind the logo. */
+html[class*="premium-theme-"] .barakaway-logo,
+html[class*="premium-theme-"] .brand-logo,
+html[class*="premium-theme-"] .app-logo,
+html[class*="premium-theme-"] .logo,
+html[class*="premium-theme-"] [data-logo],
 html[class*="premium-theme-"] [class*="barakaway-logo"],
 html[class*="premium-theme-"] [class*="brand-logo"],
 html[class*="premium-theme-"] [class*="app-logo"],
-html[class*="premium-theme-"] [class*="logo"],
-html[class*="premium-theme-"] [data-logo],
-html[class*="premium-theme-"] [data-barakaway-logo-lock],
-html[class*="premium-theme-"] [class*="barakaway-logo"] *,
-html[class*="premium-theme-"] [class*="brand-logo"] *,
-html[class*="premium-theme-"] [class*="app-logo"] *,
-html[class*="premium-theme-"] [class*="logo"] *,
-html[class*="premium-theme-"] [data-logo] *,
-html[class*="premium-theme-"] [data-barakaway-logo-lock] *{
+html[class*="premium-theme-"] [class*="logo"]{
   background:transparent !important;
   background-color:transparent !important;
   background-image:none !important;
   box-shadow:none !important;
   border-color:transparent !important;
-  outline-color:transparent !important;
+  outline:none !important;
+  filter:none !important;
 }
-/* ===== END BARAKAWAY THEME SELECTOR CARD MATERIAL LOCK — V20260510 ===== */
+html[class*="premium-theme-"] .barakaway-logo *,
+html[class*="premium-theme-"] .brand-logo *,
+html[class*="premium-theme-"] .app-logo *,
+html[class*="premium-theme-"] .logo *,
+html[class*="premium-theme-"] [data-logo] *,
+html[class*="premium-theme-"] [class*="barakaway-logo"] *,
+html[class*="premium-theme-"] [class*="brand-logo"] *,
+html[class*="premium-theme-"] [class*="app-logo"] *,
+html[class*="premium-theme-"] [class*="logo"] *{
+  background:transparent !important;
+  background-color:transparent !important;
+  background-image:none !important;
+  box-shadow:none !important;
+  border-color:transparent !important;
+}
+/* ===== END BARAKAWAY FINAL FIX ===== */
 
 </style>
-<link rel="stylesheet" href="theme-universal.css?v=20260510-cardlock-v2">
+<link rel="stylesheet" href="theme-universal.css?v=20260510-final-pattern-logic">
 </head>
 
 <body class="page-themes-pro">
@@ -2288,7 +2458,7 @@ html[class*="premium-theme-"] [data-barakaway-logo-lock] *{
 
 
 
-<script src="theme-init.js?v=20260510-cardlock-v2"></script>
+<script src="theme-init.js?v=20260510-final-pattern-logic"></script>
 
 <script>
 (function(){
