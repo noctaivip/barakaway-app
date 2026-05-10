@@ -1,37 +1,51 @@
 /* BarakaWay Service Worker
-   Aggressive update mode for GitHub Pages / active PWA testing.
-   HTML, JS and CSS are always fetched from network with cache reload/no-store.
+   Development / fast-update mode for active PWA testing.
+   Goal: always prefer the newest files from the network, especially HTML/JS/CSS.
 */
 
-const CACHE_VERSION = '20260510-night-mosque-carbon-logic-final-1';
+const CACHE_VERSION = '20260510-night-mosque-carbon-logic-clean-v3';
 const CACHE_NAME = `barakaway-runtime-${CACHE_VERSION}`;
+
+const APP_SHELL = [
+  '/',
+  '/favicon.png',
+  '/manifest.json'
+];
 
 self.addEventListener('install', event => {
   self.skipWaiting();
+  event.waitUntil(
+    caches.open(CACHE_NAME).then(cache => {
+      return cache.addAll(APP_SHELL).catch(() => undefined);
+    })
+  );
 });
 
 self.addEventListener('activate', event => {
   event.waitUntil(
-    caches.keys()
-      .then(keys => Promise.all(keys.map(key => caches.delete(key))))
-      .then(() => self.clients.claim())
+    caches.keys().then(keys => {
+      return Promise.all(keys.map(key => caches.delete(key)));
+    }).then(() => self.clients.claim())
   );
 });
 
 function isSameOrigin(request) {
-  try { return new URL(request.url).origin === self.location.origin; }
-  catch (e) { return false; }
+  try {
+    return new URL(request.url).origin === self.location.origin;
+  } catch (e) {
+    return false;
+  }
 }
 
 function isFreshAsset(request) {
   const url = new URL(request.url);
   const path = url.pathname.toLowerCase();
+
   return (
     request.mode === 'navigate' ||
     path.endsWith('.html') ||
     path.endsWith('.js') ||
     path.endsWith('.css') ||
-    path === '/' ||
     path === '/bottom-nav.js' ||
     path === '/theme-init.js' ||
     path === '/theme-toggle.js' ||
@@ -42,19 +56,22 @@ function isFreshAsset(request) {
 
 self.addEventListener('fetch', event => {
   const request = event.request;
-  if (request.method !== 'GET' || !isSameOrigin(request)) return;
+
+  if (request.method !== 'GET' || !isSameOrigin(request)) {
+    return;
+  }
 
   if (isFreshAsset(request)) {
     event.respondWith(
-      fetch(request, { cache: 'reload' })
-        .catch(() => fetch(request, { cache: 'no-store' }))
+      fetch(request, { cache: 'no-store' })
+        .then(response => response)
         .catch(() => caches.match(request))
     );
     return;
   }
 
   event.respondWith(
-    fetch(request, { cache: 'default' })
+    fetch(request)
       .then(response => {
         const copy = response.clone();
         caches.open(CACHE_NAME).then(cache => cache.put(request, copy)).catch(() => undefined);
