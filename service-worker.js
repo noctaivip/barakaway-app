@@ -3,7 +3,7 @@
    Goal: always prefer the newest files from the network, especially HTML/JS/CSS.
 */
 
-const CACHE_VERSION = '20260510-night-mosque-carbon-final-clean-5';
+const CACHE_VERSION = '20260510-night-mosque-carbon-style-final-1';
 const CACHE_NAME = `barakaway-runtime-${CACHE_VERSION}`;
 
 const APP_SHELL = [
@@ -63,7 +63,7 @@ self.addEventListener('fetch', event => {
 
   if (isFreshAsset(request)) {
     event.respondWith(
-      fetch(request, { cache: 'no-store' })
+      fetch(request, { cache: 'reload' })
         .then(response => response)
         .catch(() => caches.match(request))
     );
