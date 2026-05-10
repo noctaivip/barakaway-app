@@ -2142,6 +2142,124 @@ html[class*="premium-theme-"] [data-barakaway-logo-lock] *{
   const style = document.createElement('style');
   style.id = NIGHT_STYLE_ID;
   style.textContent = `
+
+/* ===== BARAKAWAY NIGHT MOSQUE PREMIUM POLISH ===== */
+html.premium-theme-night-mosque{
+  --bg:#040a12;
+  --surface:#081124;
+  --surface-2:#0d1b33;
+  --surface-3:#142a4c;
+  --border:rgba(118,154,215,.32);
+  --border-2:rgba(118,154,215,.44);
+  --text:#f3f7ff;
+  --text-soft:#c8d8f4;
+  --text-muted:#91a9ce;
+  --green:#d7c07a;
+  --green-strong:#355d9a;
+  --green-soft:#f4e6b2;
+  --bw-accent:#d7c07a;
+  --bw-accent-2:#7ca7ff;
+}
+html.premium-theme-night-mosque body{
+  background-color:#020716 !important;
+  background-image:
+    radial-gradient(circle at 12% 5%,rgba(255,255,255,.80) 0 1.1px,transparent 1.8px),
+    radial-gradient(circle at 31% 2%,rgba(255,255,255,.58) 0 1px,transparent 1.7px),
+    radial-gradient(circle at 61% 8%,rgba(255,255,255,.72) 0 1.1px,transparent 1.8px),
+    radial-gradient(circle at 91% 4%,rgba(255,255,255,.66) 0 1px,transparent 1.7px),
+    radial-gradient(circle at 84% 14%,rgba(215,192,122,.22),transparent 18%),
+    radial-gradient(circle at 18% 0%,rgba(75,124,220,.24),transparent 30%),
+    linear-gradient(180deg,#020716 0%,#06132e 42%,#081b3d 70%,#020716 100%) !important;
+  background-size:128px 128px,176px 176px,212px 212px,156px 156px,100% 100%,100% 100%,100% 100% !important;
+  background-position:0 0,22px 18px,44px 8px,10px 50px,center,center,center !important;
+  background-repeat:repeat,repeat,repeat,repeat,no-repeat,no-repeat,no-repeat !important;
+}
+html.premium-theme-night-mosque .container,
+html.premium-theme-night-mosque .hero,
+html.premium-theme-night-mosque .brand-prayer-hero,
+html.premium-theme-night-mosque .today-hub,
+html.premium-theme-night-mosque .about-project-card,
+html.premium-theme-night-mosque .barakaway-pro-final,
+html.premium-theme-night-mosque .block,
+html.premium-theme-night-mosque .card,
+html.premium-theme-night-mosque .box,
+html.premium-theme-night-mosque .panel,
+html.premium-theme-night-mosque .quote,
+html.premium-theme-night-mosque .empty,
+html.premium-theme-night-mosque .article,
+html.premium-theme-night-mosque .category-panel,
+html.premium-theme-night-mosque .surah-card,
+html.premium-theme-night-mosque .prayer-card,
+html.premium-theme-night-mosque .toggle-row,
+html.premium-theme-night-mosque .meta-item,
+html.premium-theme-night-mosque .note-box,
+html.premium-theme-night-mosque .jumuah-box,
+html.premium-theme-night-mosque .month-day,
+html.premium-theme-night-mosque .month-head,
+html.premium-theme-night-mosque .wallet-support,
+html.premium-theme-night-mosque .home-widget,
+html.premium-theme-night-mosque .dua-card,
+html.premium-theme-night-mosque .ayah-card,
+html.premium-theme-night-mosque .master-audio-wrap,
+html.premium-theme-night-mosque .reader-side,
+html.premium-theme-night-mosque .reader-main,
+html.premium-theme-night-mosque .dua-side,
+html.premium-theme-night-mosque .dua-main,
+html.premium-theme-night-mosque .ai-side,
+html.premium-theme-night-mosque .ai-main,
+html.premium-theme-night-mosque .player-panel,
+html.premium-theme-night-mosque .preview-panel,
+html.premium-theme-night-mosque .app-menu-btn,
+html.premium-theme-night-mosque .today-action,
+html.premium-theme-night-mosque .premium-resource-card,
+html.premium-theme-night-mosque .bottom-app-nav,
+html.premium-theme-night-mosque .bottom-app-nav-inner{
+  background-color:#06122b !important;
+  background-image:
+    linear-gradient(115deg,rgba(255,255,255,.055) 0%,transparent 42%,rgba(136,180,255,.09) 72%,transparent 100%),
+    radial-gradient(circle at 86% 8%,rgba(255,255,255,.72) 0 1.1px,transparent 1.9px),
+    radial-gradient(circle at 72% 30%,rgba(215,192,122,.18),transparent 16%),
+    linear-gradient(135deg,rgba(3,9,24,.96) 0%,rgba(7,20,48,.94) 54%,rgba(18,48,100,.88) 100%) !important;
+  background-size:100% 100%,118px 118px,100% 100%,100% 100% !important;
+  background-position:center,0 0,center,center !important;
+  background-repeat:no-repeat,repeat,no-repeat,no-repeat !important;
+  border-color:rgba(138,174,255,.34) !important;
+  box-shadow:0 20px 48px rgba(0,8,32,.48),inset 0 1px 0 rgba(255,255,255,.085) !important;
+}
+body .theme-grid .theme-card.theme-night,
+body .theme-grid .theme-card.bw-theme-sample-night-mosque,
+body .theme-grid .theme-card[data-theme="night-mosque"],
+html[class*="premium-theme-"] body .theme-grid .theme-card.theme-night,
+html[class*="premium-theme-"] body .theme-grid .theme-card.bw-theme-sample-night-mosque,
+html[class*="premium-theme-"] body .theme-grid .theme-card[data-theme="night-mosque"],
+html body .page .theme-grid .theme-card.theme-night,
+html body .page .theme-grid .theme-card[data-theme="night-mosque"]{
+  background-color:#06122b !important;
+  background-image:
+    linear-gradient(115deg,rgba(255,255,255,.10) 0%,transparent 34%,rgba(136,180,255,.13) 62%,transparent 100%),
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='118' height='118' viewBox='0 0 118 118'%3E%3Cg fill='%23ffffff' fill-opacity='.72'%3E%3Ccircle cx='14' cy='17' r='1.1'/%3E%3Ccircle cx='45' cy='28' r='.9'/%3E%3Ccircle cx='78' cy='15' r='1'/%3E%3Ccircle cx='104' cy='50' r='.8'/%3E%3Ccircle cx='27' cy='77' r='1'/%3E%3Ccircle cx='75' cy='92' r='.85'/%3E%3Ccircle cx='107' cy='105' r='1'/%3E%3C/g%3E%3C/svg%3E"),
+    radial-gradient(circle at 84% 8%,rgba(255,255,255,.20),transparent 18%),
+    radial-gradient(circle at 16% 0%,rgba(82,132,230,.20),transparent 32%),
+    linear-gradient(145deg,#050b18 0%,#0b1b3c 52%,#244b82 100%) !important;
+  background-size:100% 100%,160px 160px,100% 100%,100% 100%,100% 100% !important;
+  background-position:center,0 0,center,center,center !important;
+  background-repeat:no-repeat,repeat,no-repeat,no-repeat,no-repeat !important;
+  border:1px solid rgba(138,174,255,.48) !important;
+  box-shadow:0 24px 58px rgba(0,8,32,.58),0 0 36px rgba(136,180,255,.14),inset 0 1px 0 rgba(255,255,255,.16),inset 0 -24px 38px rgba(0,0,0,.34) !important;
+}
+body .theme-grid .theme-card.theme-night h3,
+body .theme-grid .theme-card.theme-night p,
+body .theme-grid .theme-card.theme-night strong,
+body .theme-grid .theme-card.bw-theme-sample-night-mosque h3,
+body .theme-grid .theme-card.bw-theme-sample-night-mosque p,
+body .theme-grid .theme-card.bw-theme-sample-night-mosque strong,
+body .theme-grid .theme-card[data-theme="night-mosque"] h3,
+body .theme-grid .theme-card[data-theme="night-mosque"] p,
+body .theme-grid .theme-card[data-theme="night-mosque"] strong{
+  color:#ffffff !important;
+  text-shadow:0 2px 16px rgba(0,0,0,.72) !important;
+}
+/* ===== END BARAKAWAY NIGHT MOSQUE PREMIUM POLISH ===== */
 `;
   (document.head || document.documentElement).appendChild(style);
 })();
@@ -2153,6 +2271,134 @@ html[class*="premium-theme-"] [data-barakaway-logo-lock] *{
   const style = document.createElement("style");
   style.id = STYLE_ID;
   style.textContent = `
+
+/* ===== BARAKAWAY NIGHT MOSQUE STAR-ONLY FINAL OVERRIDE ===== */
+html.premium-theme-night-mosque{
+  --bg:#040a12;
+  --surface:#081124;
+  --surface-2:#0d1b33;
+  --surface-3:#142a4c;
+  --border:rgba(118,154,215,.32);
+  --border-2:rgba(118,154,215,.44);
+  --text:#f3f7ff;
+  --text-soft:#c8d8f4;
+  --text-muted:#91a9ce;
+  --green:#d7c07a;
+  --green-strong:#355d9a;
+  --green-soft:#f4e6b2;
+  --bw-accent:#d7c07a;
+  --bw-accent-2:#7ca7ff;
+}
+html.premium-theme-night-mosque body{
+  background-color:#020716 !important;
+  background-image:
+    radial-gradient(circle at 12% 5%,rgba(255,255,255,.78) 0 1px,transparent 1.7px),
+    radial-gradient(circle at 31% 2%,rgba(255,255,255,.52) 0 .9px,transparent 1.6px),
+    radial-gradient(circle at 61% 8%,rgba(255,255,255,.68) 0 1px,transparent 1.7px),
+    radial-gradient(circle at 91% 4%,rgba(255,255,255,.60) 0 .9px,transparent 1.6px),
+    radial-gradient(1200px 700px at 50% -10%,rgba(124,167,255,.08) 0%,transparent 70%),
+    linear-gradient(180deg,#020716 0%,#041021 60%,#020716 100%) !important;
+  background-size:128px 128px,176px 176px,212px 212px,156px 156px,100% 100%,100% 100% !important;
+  background-position:0 0,22px 18px,44px 8px,10px 50px,center,center !important;
+  background-repeat:repeat,repeat,repeat,repeat,no-repeat,no-repeat !important;
+}
+html.premium-theme-night-mosque .container,
+html.premium-theme-night-mosque .hero,
+html.premium-theme-night-mosque .brand-prayer-hero,
+html.premium-theme-night-mosque .today-hub,
+html.premium-theme-night-mosque .about-project-card,
+html.premium-theme-night-mosque .barakaway-pro-final,
+html.premium-theme-night-mosque .block,
+html.premium-theme-night-mosque .card,
+html.premium-theme-night-mosque .box,
+html.premium-theme-night-mosque .panel,
+html.premium-theme-night-mosque .quote,
+html.premium-theme-night-mosque .empty,
+html.premium-theme-night-mosque .article,
+html.premium-theme-night-mosque .category-panel,
+html.premium-theme-night-mosque .surah-card,
+html.premium-theme-night-mosque .prayer-card,
+html.premium-theme-night-mosque .toggle-row,
+html.premium-theme-night-mosque .meta-item,
+html.premium-theme-night-mosque .note-box,
+html.premium-theme-night-mosque .jumuah-box,
+html.premium-theme-night-mosque .month-day,
+html.premium-theme-night-mosque .month-head,
+html.premium-theme-night-mosque .wallet-support,
+html.premium-theme-night-mosque .home-widget,
+html.premium-theme-night-mosque .dua-card,
+html.premium-theme-night-mosque .ayah-card,
+html.premium-theme-night-mosque .master-audio-wrap,
+html.premium-theme-night-mosque .reader-side,
+html.premium-theme-night-mosque .reader-main,
+html.premium-theme-night-mosque .dua-side,
+html.premium-theme-night-mosque .dua-main,
+html.premium-theme-night-mosque .ai-side,
+html.premium-theme-night-mosque .ai-main,
+html.premium-theme-night-mosque .player-panel,
+html.premium-theme-night-mosque .preview-panel,
+html.premium-theme-night-mosque .app-menu-btn,
+html.premium-theme-night-mosque .today-action,
+html.premium-theme-night-mosque .premium-resource-card,
+html.premium-theme-night-mosque .bottom-app-nav,
+html.premium-theme-night-mosque .bottom-app-nav-inner{
+  background-color:#041021 !important;
+  background-image:
+    linear-gradient(115deg,rgba(255,255,255,.045) 0%,transparent 36%,rgba(136,180,255,.075) 68%,transparent 100%),
+    radial-gradient(circle at 14% 16%,rgba(255,255,255,.72) 0 1px,transparent 1.8px),
+    radial-gradient(circle at 42% 9%,rgba(255,255,255,.56) 0 .9px,transparent 1.6px),
+    radial-gradient(circle at 73% 19%,rgba(255,255,255,.64) 0 1px,transparent 1.7px),
+    radial-gradient(circle at 88% 42%,rgba(255,255,255,.50) 0 .85px,transparent 1.5px),
+    linear-gradient(135deg,rgba(2,7,18,.98) 0%,rgba(5,17,37,.96) 54%,rgba(11,43,88,.90) 100%) !important;
+  background-size:100% 100%,118px 118px,152px 152px,176px 176px,136px 136px,100% 100% !important;
+  background-position:center,0 0,34px 14px,18px 26px,52px 8px,center !important;
+  background-repeat:no-repeat,repeat,repeat,repeat,repeat,no-repeat !important;
+  border-color:rgba(102,145,210,.38) !important;
+  box-shadow:0 20px 48px rgba(0,8,32,.52),0 0 34px rgba(92,139,214,.10),inset 0 1px 0 rgba(255,255,255,.085) !important;
+}
+body .theme-grid .theme-card.theme-night,
+body .theme-grid .theme-card.bw-theme-sample-night-mosque,
+body .theme-grid .theme-card[data-theme="night-mosque"],
+html[class*="premium-theme-"] body .theme-grid .theme-card.theme-night,
+html[class*="premium-theme-"] body .theme-grid .theme-card.bw-theme-sample-night-mosque,
+html[class*="premium-theme-"] body .theme-grid .theme-card[data-theme="night-mosque"],
+html body .page .theme-grid .theme-card.theme-night,
+html body .page .theme-grid .theme-card[data-theme="night-mosque"]{
+  background-color:#041021 !important;
+  background-image:
+    linear-gradient(115deg,rgba(255,255,255,.08) 0%,transparent 34%,rgba(136,180,255,.11) 62%,transparent 100%),
+    radial-gradient(circle at 7% 19%,rgba(255,255,255,.82) 0 1px,transparent 1.8px),
+    radial-gradient(circle at 18% 10%,rgba(255,255,255,.55) 0 .85px,transparent 1.6px),
+    radial-gradient(circle at 29% 24%,rgba(255,255,255,.70) 0 1px,transparent 1.7px),
+    radial-gradient(circle at 45% 12%,rgba(255,255,255,.58) 0 .9px,transparent 1.6px),
+    radial-gradient(circle at 62% 20%,rgba(255,255,255,.76) 0 1px,transparent 1.8px),
+    radial-gradient(circle at 78% 9%,rgba(255,255,255,.54) 0 .85px,transparent 1.6px),
+    radial-gradient(circle at 90% 25%,rgba(255,255,255,.68) 0 1px,transparent 1.7px),
+    radial-gradient(circle at 84% 58%,rgba(255,255,255,.58) 0 .9px,transparent 1.6px),
+    radial-gradient(circle at 68% 77%,rgba(255,255,255,.72) 0 1px,transparent 1.7px),
+    radial-gradient(circle at 36% 64%,rgba(255,255,255,.50) 0 .85px,transparent 1.5px),
+    radial-gradient(circle at 15% 80%,rgba(255,255,255,.62) 0 .95px,transparent 1.6px),
+    radial-gradient(900px 420px at 72% 15%,rgba(88,134,220,.16) 0%,transparent 64%),
+    linear-gradient(145deg,#020716 0%,#061630 54%,#102f60 100%) !important;
+  background-size:100% 100%,160px 160px,144px 144px,188px 188px,132px 132px,176px 176px,154px 154px,190px 190px,140px 140px,180px 180px,150px 150px,165px 165px,100% 100%,100% 100% !important;
+  background-position:center,0 0,18px 14px,42px 8px,70px 22px,12px 44px,50px 30px,8px 60px,30px 72px,60px 86px,15px 92px,76px 104px,center,center !important;
+  background-repeat:no-repeat,repeat,repeat,repeat,repeat,repeat,repeat,repeat,repeat,repeat,repeat,repeat,no-repeat,no-repeat !important;
+  border:1px solid rgba(102,145,210,.52) !important;
+  box-shadow:0 24px 58px rgba(0,8,32,.60),0 0 36px rgba(88,134,220,.12),inset 0 1px 0 rgba(255,255,255,.14),inset 0 -24px 38px rgba(0,0,0,.36) !important;
+}
+body .theme-grid .theme-card.theme-night h3,
+body .theme-grid .theme-card.theme-night p,
+body .theme-grid .theme-card.theme-night strong,
+body .theme-grid .theme-card.bw-theme-sample-night-mosque h3,
+body .theme-grid .theme-card.bw-theme-sample-night-mosque p,
+body .theme-grid .theme-card.bw-theme-sample-night-mosque strong,
+body .theme-grid .theme-card[data-theme="night-mosque"] h3,
+body .theme-grid .theme-card[data-theme="night-mosque"] p,
+body .theme-grid .theme-card[data-theme="night-mosque"] strong{
+  color:#ffffff !important;
+  text-shadow:0 2px 16px rgba(0,0,0,.74) !important;
+}
+/* ===== END BARAKAWAY NIGHT MOSQUE STAR-ONLY FINAL OVERRIDE ===== */
 `;
   (document.head || document.documentElement).appendChild(style);
 })();
@@ -2161,50 +2407,81 @@ html[class*="premium-theme-"] [data-barakaway-logo-lock] *{
 (function(){
   const STYLE_ID = "barakaway-night-mosque-stars-only-clean-20260510-runtime";
   const CSS = `
-`;
-  function inject(){
-    if(document.getElementById(STYLE_ID)) return;
-    const style=document.createElement("style");
-    style.id=STYLE_ID;
-    style.textContent=CSS;
-    (document.head || document.documentElement).appendChild(style);
-  }
-  if(document.readyState === "loading") document.addEventListener("DOMContentLoaded", inject);
-  else inject();
-})();
 
-(function(){
-  const STYLE_ID = "barakaway-night-mosque-final-v3";
-  const CSS = `
-
-/* ===== NIGHT MOSQUE FINAL V3 — CARBON ELITE LOGIC, BLUE NIGHT MATERIAL ===== */
+/* ===== NIGHT MOSQUE CLEAN FINAL: STARS ONLY, NO MOONS, NO MOSQUE LINES ===== */
 html.premium-theme-night-mosque{
-  --bg:#04070d;
-  --surface:#08111d;
-  --surface-2:#0d1a2b;
-  --surface-3:#142943;
-  --border:rgba(118,154,215,.30);
-  --border-2:rgba(155,184,232,.38);
-  --text:#f6f9ff;
-  --text-soft:#cbd8ec;
-  --text-muted:#94a8c3;
-  --green:#d6dde6;
+  --bg:#040a12;
+  --surface:#081124;
+  --surface-2:#0d1b33;
+  --surface-3:#142a4c;
+  --border:rgba(118,154,215,.32);
+  --border-2:rgba(118,154,215,.44);
+  --text:#f3f7ff;
+  --text-soft:#c8d8f4;
+  --text-muted:#91a9ce;
+  --green:#d7c07a;
   --green-strong:#355d9a;
-  --green-soft:#eef2f6;
-  --bw-accent:#9bb8e8;
-  --bw-accent-2:#d6dde6;
+  --green-soft:#f4e6b2;
+  --bw-accent:#d7c07a;
+  --bw-accent-2:#7ca7ff;
 }
 
 html.premium-theme-night-mosque body{
+  background:
+    radial-gradient(circle at 8% 10%, rgba(255,255,255,.72) 0 1px, transparent 1.7px),
+    radial-gradient(circle at 18% 36%, rgba(255,255,255,.62) 0 .9px, transparent 1.5px),
+    radial-gradient(circle at 33% 22%, rgba(255,255,255,.78) 0 1px, transparent 1.7px),
+    radial-gradient(circle at 47% 64%, rgba(255,255,255,.56) 0 .85px, transparent 1.45px),
+    radial-gradient(circle at 59% 18%, rgba(255,255,255,.70) 0 1px, transparent 1.65px),
+    radial-gradient(circle at 74% 42%, rgba(255,255,255,.74) 0 1px, transparent 1.7px),
+    radial-gradient(circle at 88% 18%, rgba(255,255,255,.68) 0 .9px, transparent 1.55px),
+    radial-gradient(circle at 97% 70%, rgba(255,255,255,.64) 0 .9px, transparent 1.55px),
+    radial-gradient(900px 560px at 80% 14%, rgba(53,93,154,.22) 0%, transparent 64%),
+    linear-gradient(180deg,#040a12 0%,#081124 52%,#040a12 100%) !important;
   color:var(--text) !important;
-  background-color:#04070d !important;
+}
+
+body .theme-grid .theme-card.theme-night,
+body .theme-grid .theme-card.bw-theme-sample-night-mosque,
+body .theme-grid .theme-card[data-theme="night-mosque"],
+html[class*="premium-theme-"] body .theme-grid .theme-card.theme-night,
+html[class*="premium-theme-"] body .theme-grid .theme-card.bw-theme-sample-night-mosque,
+html[class*="premium-theme-"] body .theme-grid .theme-card[data-theme="night-mosque"],
+html body .page .theme-grid .theme-card.theme-night,
+html body .page .theme-grid .theme-card[data-theme="night-mosque"],
+.theme-grid .theme-card.theme-night,
+.theme-grid button.theme-card.theme-night,
+.theme-grid [data-theme="night-mosque"],
+.theme-night{
+
+  position:relative !important;
+  overflow:hidden !important;
+  background-color:#040a12 !important;
   background-image:
-    radial-gradient(circle at 18% 0%, rgba(124,167,255,.10), transparent 28%),
-    radial-gradient(circle at 88% 8%, rgba(214,221,230,.08), transparent 32%),
-    linear-gradient(180deg,#04070d 0%,#08111d 52%,#04070d 100%) !important;
+    radial-gradient(circle at 5% 12%, rgba(255,255,255,.82) 0 1px, transparent 1.7px),
+    radial-gradient(circle at 14% 28%, rgba(255,255,255,.72) 0 .9px, transparent 1.5px),
+    radial-gradient(circle at 26% 11%, rgba(255,255,255,.92) 0 1.15px, transparent 1.8px),
+    radial-gradient(circle at 38% 22%, rgba(255,255,255,.70) 0 .85px, transparent 1.5px),
+    radial-gradient(circle at 52% 9%, rgba(255,255,255,.90) 0 1.1px, transparent 1.8px),
+    radial-gradient(circle at 64% 30%, rgba(255,255,255,.76) 0 .95px, transparent 1.6px),
+    radial-gradient(circle at 78% 15%, rgba(255,255,255,.88) 0 1px, transparent 1.7px),
+    radial-gradient(circle at 91% 25%, rgba(255,255,255,.66) 0 .8px, transparent 1.45px),
+    radial-gradient(circle at 18% 58%, rgba(255,255,255,.76) 0 .9px, transparent 1.55px),
+    radial-gradient(circle at 34% 72%, rgba(255,255,255,.86) 0 1px, transparent 1.7px),
+    radial-gradient(circle at 48% 52%, rgba(255,255,255,.64) 0 .8px, transparent 1.45px),
+    radial-gradient(circle at 67% 68%, rgba(255,255,255,.82) 0 .95px, transparent 1.65px),
+    radial-gradient(circle at 83% 57%, rgba(255,255,255,.92) 0 1.1px, transparent 1.85px),
+    radial-gradient(circle at 96% 77%, rgba(255,255,255,.72) 0 .9px, transparent 1.55px),
+    radial-gradient(700px 360px at 76% 24%, rgba(53,93,154,.34) 0%, transparent 62%),
+    linear-gradient(145deg,#040a12 0%,#081526 48%,#102a4d 100%) !important;
   background-size:100% 100% !important;
   background-position:center !important;
   background-repeat:no-repeat !important;
+  border-color:rgba(118,154,215,.44) !important;
+  box-shadow:
+    0 24px 52px rgba(0,8,32,.56),
+    inset 0 1px 0 rgba(255,255,255,.12),
+    inset 0 -20px 30px rgba(0,0,0,.34) !important;
 }
 
 html.premium-theme-night-mosque .container,
@@ -2244,106 +2521,56 @@ html.premium-theme-night-mosque .player-panel,
 html.premium-theme-night-mosque .preview-panel,
 html.premium-theme-night-mosque .app-menu-btn,
 html.premium-theme-night-mosque .today-action,
-html.premium-theme-night-mosque .premium-resource-card{
-  background-color:#08111d !important;
-  background-image:
-    linear-gradient(27deg, rgba(155,184,232,.095) 5%, transparent 5%, transparent 45%, rgba(155,184,232,.095) 45%, rgba(155,184,232,.095) 55%, transparent 55%, transparent),
-    linear-gradient(207deg, rgba(255,255,255,.045) 5%, transparent 5%, transparent 45%, rgba(255,255,255,.045) 45%, rgba(255,255,255,.045) 55%, transparent 55%, transparent),
-    linear-gradient(135deg,#050b13 0%,#0d1a2b 54%,#183253 100%) !important;
-  background-size:18px 18px,18px 18px,100% 100% !important;
-  background-position:0 0,9px 9px,center !important;
-  background-repeat:repeat,repeat,no-repeat !important;
-  border-color:rgba(118,154,215,.30) !important;
-  color:var(--text) !important;
-  box-shadow:0 18px 42px rgba(0,8,32,.46), inset 0 1px 0 rgba(255,255,255,.07), inset 0 -16px 28px rgba(0,0,0,.20) !important;
-}
-
-html.premium-theme-night-mosque .bottom-app-nav{
-  position:fixed !important;
-  left:0 !important;
-  right:0 !important;
-  bottom:0 !important;
-  z-index:9999 !important;
-  overflow:visible !important;
-  background:linear-gradient(180deg,rgba(8,17,29,.90),rgba(4,7,13,.98)) !important;
-  border-top:1px solid rgba(118,154,215,.30) !important;
-  box-shadow:0 -18px 44px rgba(0,8,32,.58), inset 0 1px 0 rgba(255,255,255,.045) !important;
-}
-
+html.premium-theme-night-mosque .premium-resource-card,
+html.premium-theme-night-mosque .bottom-app-nav,
 html.premium-theme-night-mosque .bottom-app-nav-inner{
-  position:relative !important;
-  overflow:visible !important;
-  background:linear-gradient(180deg,rgba(20,41,67,.88),rgba(8,17,29,.96)) !important;
-  border-color:rgba(118,154,215,.30) !important;
-  box-shadow:inset 0 1px 0 rgba(255,255,255,.06) !important;
-}
 
-html.premium-theme-night-mosque .bottom-app-nav-item{
-  color:#cbd8ec !important;
-}
-
-html.premium-theme-night-mosque .bottom-app-nav-item.active,
-html.premium-theme-night-mosque .bottom-app-nav-item.is-active{
-  background:linear-gradient(135deg,rgba(155,184,232,.24),rgba(53,93,154,.30)) !important;
-  color:#f6f9ff !important;
-  border-color:rgba(155,184,232,.38) !important;
-}
-
-body .theme-grid .theme-card.theme-night,
-body .theme-grid .theme-card.bw-theme-sample-night-mosque,
-body .theme-grid .theme-card[data-theme="night-mosque"],
-html[class*="premium-theme-"] body .theme-grid .theme-card.theme-night,
-html[class*="premium-theme-"] body .theme-grid .theme-card.bw-theme-sample-night-mosque,
-html[class*="premium-theme-"] body .theme-grid .theme-card[data-theme="night-mosque"],
-html body .page .theme-grid .theme-card.theme-night,
-html body .page .theme-grid .theme-card[data-theme="night-mosque"],
-.theme-grid .theme-card.theme-night,
-.theme-grid button.theme-card.theme-night,
-.theme-grid [data-theme="night-mosque"],
-.theme-night{
   position:relative !important;
   overflow:hidden !important;
-  background-color:#050b13 !important;
+  background-color:#040a12 !important;
   background-image:
-    radial-gradient(circle at 14% 16%, rgba(255,255,255,.70) 0 .9px, transparent 1.55px),
-    radial-gradient(circle at 35% 25%, rgba(255,255,255,.58) 0 .75px, transparent 1.35px),
-    radial-gradient(circle at 58% 14%, rgba(255,255,255,.68) 0 .85px, transparent 1.5px),
-    radial-gradient(circle at 78% 32%, rgba(255,255,255,.56) 0 .75px, transparent 1.35px),
-    radial-gradient(circle at 91% 72%, rgba(255,255,255,.62) 0 .8px, transparent 1.45px),
-    linear-gradient(27deg, rgba(155,184,232,.105) 5%, transparent 5%, transparent 45%, rgba(155,184,232,.105) 45%, rgba(155,184,232,.105) 55%, transparent 55%, transparent),
-    linear-gradient(207deg, rgba(255,255,255,.048) 5%, transparent 5%, transparent 45%, rgba(255,255,255,.048) 45%, rgba(255,255,255,.048) 55%, transparent 55%, transparent),
-    linear-gradient(145deg,#050b13 0%,#0d1a2b 52%,#183253 100%) !important;
-  background-size:100% 100%,100% 100%,100% 100%,100% 100%,100% 100%,18px 18px,18px 18px,100% 100% !important;
-  background-position:center,center,center,center,center,0 0,9px 9px,center !important;
-  background-repeat:no-repeat,no-repeat,no-repeat,no-repeat,no-repeat,repeat,repeat,no-repeat !important;
+    radial-gradient(circle at 5% 12%, rgba(255,255,255,.82) 0 1px, transparent 1.7px),
+    radial-gradient(circle at 14% 28%, rgba(255,255,255,.72) 0 .9px, transparent 1.5px),
+    radial-gradient(circle at 26% 11%, rgba(255,255,255,.92) 0 1.15px, transparent 1.8px),
+    radial-gradient(circle at 38% 22%, rgba(255,255,255,.70) 0 .85px, transparent 1.5px),
+    radial-gradient(circle at 52% 9%, rgba(255,255,255,.90) 0 1.1px, transparent 1.8px),
+    radial-gradient(circle at 64% 30%, rgba(255,255,255,.76) 0 .95px, transparent 1.6px),
+    radial-gradient(circle at 78% 15%, rgba(255,255,255,.88) 0 1px, transparent 1.7px),
+    radial-gradient(circle at 91% 25%, rgba(255,255,255,.66) 0 .8px, transparent 1.45px),
+    radial-gradient(circle at 18% 58%, rgba(255,255,255,.76) 0 .9px, transparent 1.55px),
+    radial-gradient(circle at 34% 72%, rgba(255,255,255,.86) 0 1px, transparent 1.7px),
+    radial-gradient(circle at 48% 52%, rgba(255,255,255,.64) 0 .8px, transparent 1.45px),
+    radial-gradient(circle at 67% 68%, rgba(255,255,255,.82) 0 .95px, transparent 1.65px),
+    radial-gradient(circle at 83% 57%, rgba(255,255,255,.92) 0 1.1px, transparent 1.85px),
+    radial-gradient(circle at 96% 77%, rgba(255,255,255,.72) 0 .9px, transparent 1.55px),
+    radial-gradient(700px 360px at 76% 24%, rgba(53,93,154,.34) 0%, transparent 62%),
+    linear-gradient(145deg,#040a12 0%,#081526 48%,#102a4d 100%) !important;
+  background-size:100% 100% !important;
+  background-position:center !important;
+  background-repeat:no-repeat !important;
   border-color:rgba(118,154,215,.44) !important;
-  box-shadow:0 24px 52px rgba(0,8,32,.56), inset 0 1px 0 rgba(255,255,255,.12), inset 0 -20px 30px rgba(0,0,0,.30) !important;
+  box-shadow:
+    0 24px 52px rgba(0,8,32,.56),
+    inset 0 1px 0 rgba(255,255,255,.12),
+    inset 0 -20px 30px rgba(0,0,0,.34) !important;
 }
-
-body .theme-grid .theme-card.theme-night::before,
-body .theme-grid .theme-card.bw-theme-sample-night-mosque::before,
-body .theme-grid .theme-card[data-theme="night-mosque"]::before,
-.theme-grid .theme-card.theme-night::before,
-.theme-grid [data-theme="night-mosque"]::before{
-  content:"" !important;
-  position:absolute !important;
-  inset:0 !important;
-  pointer-events:none !important;
-  background:linear-gradient(120deg,transparent 48%,rgba(255,255,255,.10),transparent 70%) !important;
-  opacity:.74 !important;
-  z-index:1 !important;
-}
-
-body .theme-grid .theme-card.theme-night > *,
-body .theme-grid .theme-card.bw-theme-sample-night-mosque > *,
-body .theme-grid .theme-card[data-theme="night-mosque"] > *,
-.theme-grid .theme-card.theme-night > *,
-.theme-grid [data-theme="night-mosque"] > *{
-  position:relative !important;
-  z-index:2 !important;
-}
-/* ===== END NIGHT MOSQUE FINAL V3 ===== */
+/* ===== END NIGHT MOSQUE CLEAN FINAL ===== */
 `;
+  function inject(){
+    if(document.getElementById(STYLE_ID)) return;
+    const style=document.createElement("style");
+    style.id=STYLE_ID;
+    style.textContent=CSS;
+    (document.head || document.documentElement).appendChild(style);
+  }
+  if(document.readyState === "loading") document.addEventListener("DOMContentLoaded", inject);
+  else inject();
+})();
+
+/* NIGHT_MOSQUE_CARBON_FINAL_INJECT_START */
+(function(){
+  const STYLE_ID = 'barakaway-night-mosque-carbon-final-style';
+  const CSS = "\n/* ===== FINAL OVERRIDE: NIGHT MOSQUE = CARBON-ELITE LOGIC, DARK BLUE, SPARSE STARS ===== */\n:root{\n  --bw-night-bg:#04070d;\n  --bw-night-surface:#08111c;\n  --bw-night-surface-2:#0d1928;\n  --bw-night-surface-3:#14243a;\n  --bw-night-border:rgba(126,158,205,.32);\n  --bw-night-border-2:rgba(154,180,218,.42);\n  --bw-night-text:#f7fafc;\n  --bw-night-soft:#cfd8e3;\n  --bw-night-muted:#99a7b5;\n}\n\nhtml.premium-theme-night-mosque{\n  --bg:#04070d !important;\n  --surface:#08111c !important;\n  --surface-2:#0d1928 !important;\n  --surface-3:#14243a !important;\n  --border:rgba(126,158,205,.32) !important;\n  --border-2:rgba(154,180,218,.42) !important;\n  --text:#f7fafc !important;\n  --text-soft:#cfd8e3 !important;\n  --text-muted:#99a7b5 !important;\n  --green:#d6dde6 !important;\n  --green-strong:#355d9a !important;\n  --green-soft:#eef2f6 !important;\n  --bw-accent:#aab8c7 !important;\n  --bw-accent-2:#7ca7ff !important;\n}\n\nhtml.premium-theme-night-mosque body,\nbody.premium-theme-night-mosque,\nbody.bw-theme-night-mosque,\nbody.theme-night-mosque{\n  min-height:100vh !important;\n  padding-bottom:116px !important;\n  color:var(--text) !important;\n  background-color:#04070d !important;\n  background-image:\n    radial-gradient(circle at 8% 14%, rgba(255,255,255,.54) 0 1px, transparent 1.65px),\n    radial-gradient(circle at 22% 46%, rgba(255,255,255,.42) 0 .9px, transparent 1.5px),\n    radial-gradient(circle at 48% 18%, rgba(255,255,255,.50) 0 1px, transparent 1.65px),\n    radial-gradient(circle at 72% 62%, rgba(255,255,255,.44) 0 .9px, transparent 1.5px),\n    radial-gradient(circle at 91% 30%, rgba(255,255,255,.54) 0 1px, transparent 1.65px),\n    linear-gradient(27deg, rgba(126,158,205,.10) 5%, transparent 5%, transparent 45%, rgba(126,158,205,.10) 45%, rgba(126,158,205,.10) 55%, transparent 55%, transparent),\n    linear-gradient(207deg, rgba(255,255,255,.045) 5%, transparent 5%, transparent 45%, rgba(255,255,255,.045) 45%, rgba(255,255,255,.045) 55%, transparent 55%, transparent),\n    linear-gradient(145deg,#04070d 0%,#08111c 52%,#14243a 100%) !important;\n  background-size:420px 260px,520px 310px,460px 280px,560px 340px,480px 290px,18px 18px,18px 18px,100% 100% !important;\n  background-position:0 0,80px 30px,140px 20px,20px 120px,180px 80px,0 0,9px 9px,center !important;\n  background-repeat:repeat,repeat,repeat,repeat,repeat,repeat,repeat,no-repeat !important;\n}\n\n/* Selector card: same construction as carbon-elite, but dark-blue night tone */\nbody .theme-grid .theme-card.theme-night,\nbody .theme-grid .theme-card.bw-theme-sample-night-mosque,\nbody .theme-grid .theme-card[data-theme=\"night-mosque\"],\nhtml[class*=\"premium-theme-\"] body .theme-grid .theme-card.theme-night,\nhtml[class*=\"premium-theme-\"] body .theme-grid .theme-card.bw-theme-sample-night-mosque,\nhtml[class*=\"premium-theme-\"] body .theme-grid .theme-card[data-theme=\"night-mosque\"]{\n  position:relative !important;\n  overflow:hidden !important;\n  background-color:#08111c !important;\n  background-image:\n    radial-gradient(circle at 9% 15%, rgba(255,255,255,.62) 0 1px, transparent 1.65px),\n    radial-gradient(circle at 27% 36%, rgba(255,255,255,.48) 0 .9px, transparent 1.5px),\n    radial-gradient(circle at 52% 16%, rgba(255,255,255,.58) 0 1px, transparent 1.65px),\n    radial-gradient(circle at 76% 52%, rgba(255,255,255,.50) 0 .9px, transparent 1.5px),\n    radial-gradient(circle at 93% 28%, rgba(255,255,255,.58) 0 1px, transparent 1.65px),\n    linear-gradient(27deg, rgba(255,255,255,.08) 5%, transparent 5%, transparent 45%, rgba(255,255,255,.08) 45%, rgba(255,255,255,.08) 55%, transparent 55%, transparent),\n    linear-gradient(207deg, rgba(126,158,205,.08) 5%, transparent 5%, transparent 45%, rgba(126,158,205,.08) 45%, rgba(126,158,205,.08) 55%, transparent 55%, transparent),\n    linear-gradient(145deg,#05080f 0%,#0d1928 52%,#183154 100%) !important;\n  background-size:100% 100%,100% 100%,100% 100%,100% 100%,100% 100%,18px 18px,18px 18px,100% 100% !important;\n  background-position:center,center,center,center,center,0 0,9px 9px,center !important;\n  background-repeat:no-repeat,no-repeat,no-repeat,no-repeat,no-repeat,repeat,repeat,no-repeat !important;\n  border:1px solid rgba(126,158,205,.44) !important;\n  box-shadow:\n    0 24px 52px rgba(0,8,32,.48),\n    inset 0 1px 0 rgba(255,255,255,.10),\n    inset 0 -20px 30px rgba(0,0,0,.30) !important;\n}\n\nbody .theme-grid .theme-card.theme-night::before,\nbody .theme-grid .theme-card.bw-theme-sample-night-mosque::before,\nbody .theme-grid .theme-card[data-theme=\"night-mosque\"]::before{\n  content:\"\" !important;\n  position:absolute !important;\n  inset:0 !important;\n  z-index:1 !important;\n  background:linear-gradient(120deg,transparent 50%,rgba(255,255,255,.09),transparent 70%) !important;\n  opacity:.75 !important;\n  pointer-events:none !important;\n}\n\nbody .theme-grid .theme-card.theme-night .theme-top,\nbody .theme-grid .theme-card.theme-night h3,\nbody .theme-grid .theme-card.theme-night p,\nbody .theme-grid .theme-card.theme-night .theme-preview,\nbody .theme-grid .theme-card.bw-theme-sample-night-mosque .theme-top,\nbody .theme-grid .theme-card.bw-theme-sample-night-mosque h3,\nbody .theme-grid .theme-card.bw-theme-sample-night-mosque p,\nbody .theme-grid .theme-card.bw-theme-sample-night-mosque .theme-preview,\nbody .theme-grid .theme-card[data-theme=\"night-mosque\"] .theme-top,\nbody .theme-grid .theme-card[data-theme=\"night-mosque\"] h3,\nbody .theme-grid .theme-card[data-theme=\"night-mosque\"] p,\nbody .theme-grid .theme-card[data-theme=\"night-mosque\"] .theme-preview{\n  position:relative !important;\n  z-index:2 !important;\n}\n\nbody .theme-grid .theme-card.theme-night .theme-icon,\nbody .theme-grid .theme-card.bw-theme-sample-night-mosque .theme-icon,\nbody .theme-grid .theme-card[data-theme=\"night-mosque\"] .theme-icon{\n  font-size:0 !important;\n  color:transparent !important;\n  background:rgba(255,255,255,.10) !important;\n  border:1px solid rgba(255,255,255,.18) !important;\n}\n\nbody .theme-grid .theme-card.theme-night .theme-icon::before,\nbody .theme-grid .theme-card.bw-theme-sample-night-mosque .theme-icon::before,\nbody .theme-grid .theme-card[data-theme=\"night-mosque\"] .theme-icon::before{\n  content:\"\" !important;\n  width:26px !important;\n  height:26px !important;\n  display:block !important;\n  border-radius:999px !important;\n  background:#050607 !important;\n  border:2px solid rgba(214,221,230,.32) !important;\n  box-shadow:inset 0 0 0 1px rgba(0,0,0,.85), 0 0 16px rgba(124,167,255,.16) !important;\n}\n\nbody .theme-grid .theme-card.theme-night h3,\nbody .theme-grid .theme-card.theme-night p,\nbody .theme-grid .theme-card.bw-theme-sample-night-mosque h3,\nbody .theme-grid .theme-card.bw-theme-sample-night-mosque p,\nbody .theme-grid .theme-card[data-theme=\"night-mosque\"] h3,\nbody .theme-grid .theme-card[data-theme=\"night-mosque\"] p{\n  color:#fff !important;\n  text-shadow:0 2px 14px rgba(0,0,0,.42) !important;\n}\n\n/* Runtime premium cards: carbon-elite geometry, dark-blue palette, no mosque lines/moons */\nhtml.premium-theme-night-mosque .container,\nhtml.premium-theme-night-mosque .hero,\nhtml.premium-theme-night-mosque .brand-prayer-hero,\nhtml.premium-theme-night-mosque .today-hub,\nhtml.premium-theme-night-mosque .about-project-card,\nhtml.premium-theme-night-mosque .barakaway-pro-final,\nhtml.premium-theme-night-mosque .block,\nhtml.premium-theme-night-mosque .card,\nhtml.premium-theme-night-mosque .box,\nhtml.premium-theme-night-mosque .panel,\nhtml.premium-theme-night-mosque .quote,\nhtml.premium-theme-night-mosque .empty,\nhtml.premium-theme-night-mosque .article,\nhtml.premium-theme-night-mosque .category-panel,\nhtml.premium-theme-night-mosque .surah-card,\nhtml.premium-theme-night-mosque .prayer-card,\nhtml.premium-theme-night-mosque .toggle-row,\nhtml.premium-theme-night-mosque .meta-item,\nhtml.premium-theme-night-mosque .note-box,\nhtml.premium-theme-night-mosque .jumuah-box,\nhtml.premium-theme-night-mosque .month-day,\nhtml.premium-theme-night-mosque .month-head,\nhtml.premium-theme-night-mosque .wallet-support,\nhtml.premium-theme-night-mosque .home-widget,\nhtml.premium-theme-night-mosque .dua-card,\nhtml.premium-theme-night-mosque .ayah-card,\nhtml.premium-theme-night-mosque .master-audio-wrap,\nhtml.premium-theme-night-mosque .reader-side,\nhtml.premium-theme-night-mosque .reader-main,\nhtml.premium-theme-night-mosque .dua-side,\nhtml.premium-theme-night-mosque .dua-main,\nhtml.premium-theme-night-mosque .ai-side,\nhtml.premium-theme-night-mosque .ai-main,\nhtml.premium-theme-night-mosque .player-panel,\nhtml.premium-theme-night-mosque .preview-panel,\nhtml.premium-theme-night-mosque .app-menu-btn,\nhtml.premium-theme-night-mosque .today-action,\nhtml.premium-theme-night-mosque .premium-resource-card{\n  background-color:#08111c !important;\n  background-image:\n    radial-gradient(circle at 92% 8%, rgba(124,167,255,.12), transparent 28%),\n    linear-gradient(27deg, rgba(255,255,255,.065) 5%, transparent 5%, transparent 45%, rgba(255,255,255,.065) 45%, rgba(255,255,255,.065) 55%, transparent 55%, transparent),\n    linear-gradient(207deg, rgba(126,158,205,.055) 5%, transparent 5%, transparent 45%, rgba(126,158,205,.055) 45%, rgba(126,158,205,.055) 55%, transparent 55%, transparent),\n    linear-gradient(145deg,#05080f 0%,#0d1928 52%,#183154 100%) !important;\n  background-size:100% 100%,18px 18px,18px 18px,100% 100% !important;\n  background-position:center,0 0,9px 9px,center !important;\n  background-repeat:no-repeat,repeat,repeat,no-repeat !important;\n  border-color:rgba(126,158,205,.32) !important;\n  color:#f7fafc !important;\n  box-shadow:0 18px 42px rgba(0,8,32,.54), inset 0 1px 0 rgba(255,255,255,.055) !important;\n}\n\nhtml.premium-theme-night-mosque .bottom-app-nav{\n  position:fixed !important;\n  left:0 !important;\n  right:0 !important;\n  bottom:0 !important;\n  width:100% !important;\n  z-index:9999 !important;\n  transform:none !important;\n  margin:0 !important;\n  background:linear-gradient(180deg,rgba(8,17,28,.88),rgba(4,7,13,.98)) !important;\n  border-top:1px solid rgba(126,158,205,.32) !important;\n  box-shadow:0 -18px 44px rgba(0,8,32,.62), inset 0 1px 0 rgba(255,255,255,.04) !important;\n}\n\nhtml.premium-theme-night-mosque .bottom-app-nav-inner{\n  margin:0 auto !important;\n  background:linear-gradient(180deg,rgba(13,25,40,.94),rgba(8,17,28,.96)) !important;\n  border-color:rgba(126,158,205,.32) !important;\n}\n\nhtml.premium-theme-night-mosque .bottom-app-nav-item{\n  color:#cfd8e3 !important;\n}\n\nhtml.premium-theme-night-mosque .bottom-app-nav-item.active,\nhtml.premium-theme-night-mosque .bottom-app-nav-item.is-active{\n  background:linear-gradient(135deg,rgba(126,158,205,.25),rgba(53,93,154,.30)) !important;\n  color:#f7fafc !important;\n  border-color:rgba(154,180,218,.42) !important;\n}\n/* ===== END FINAL OVERRIDE: NIGHT MOSQUE = CARBON-ELITE LOGIC ===== */\n";
   function inject(){
     const old = document.getElementById(STYLE_ID);
     if(old) old.remove();
@@ -2352,7 +2579,6 @@ body .theme-grid .theme-card[data-theme="night-mosque"] > *,
     style.textContent = CSS;
     (document.head || document.documentElement).appendChild(style);
   }
-  inject();
   if(document.readyState === 'loading'){
     document.addEventListener('DOMContentLoaded', inject);
   }else{
@@ -2361,3 +2587,4 @@ body .theme-grid .theme-card[data-theme="night-mosque"] > *,
   window.addEventListener('barakaway:premium-theme-change', inject);
   window.addEventListener('barakaway:site-theme-change', inject);
 })();
+/* NIGHT_MOSQUE_CARBON_FINAL_INJECT_END */

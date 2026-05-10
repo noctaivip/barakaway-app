@@ -3,7 +3,7 @@
    Goal: always prefer the newest files from the network, especially HTML/JS/CSS.
 */
 
-const CACHE_VERSION = '20260510-night-mosque-carbon-logic-clean-v3';
+const CACHE_VERSION = '20260510-night-mosque-carbon-final-clean-5';
 const CACHE_NAME = `barakaway-runtime-${CACHE_VERSION}`;
 
 const APP_SHELL = [
