@@ -3,7 +3,7 @@
    Goal: always prefer the newest files from the network, especially HTML/JS/CSS.
 */
 
-const CACHE_VERSION = '5102026 825';
+const CACHE_VERSION = '20260510-2145-premium-themes-v32';
 const CACHE_NAME = `barakaway-runtime-${CACHE_VERSION}`;
 
 const APP_SHELL = [
@@ -47,6 +47,7 @@ function isFreshAsset(request) {
     path.endsWith('.js') ||
     path.endsWith('.css') ||
     path === '/bottom-nav.js' ||
+    path === '/theme.css' ||
     path === '/theme-init.js' ||
     path === '/theme-toggle.js' ||
     path === '/theme-universal.css' ||
