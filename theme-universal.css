@@ -2002,3 +2002,48 @@ html[class*="premium-theme-"] body:not(.page-themes-pro) svg :is(path,circle,rec
   stroke:currentColor !important;
 }
 /* ===== END PREMIUM SMART CONTRAST SUPPORT V60 ===== */
+
+
+/* ===== PREMIUM BORDER + GLOW BOOST V61 ===== */
+/* Stronger premium borders and deeper cinematic glow */
+
+html[class*="premium-theme-"]{
+  --bw-premium-border-size:2px;
+  --bw-premium-glow-inner:0 0 0 1px var(--bw-premium-border-glow-inner);
+  --bw-premium-glow-main:0 0 0 2px var(--bw-premium-border-glow-soft);
+  --bw-premium-glow-outer:0 18px 42px var(--bw-premium-border-glow-outer);
+  --bw-premium-glow-hover:0 0 0 2px var(--bw-premium-border-glow-color),
+                           0 22px 54px var(--bw-premium-border-glow-outer);
+}
+
+html[class*="premium-theme-"] :is(
+  .card,.box,.panel,.block,.quote,.empty,.article,.category-panel,
+  .surah-card,.prayer-card,.toggle-row,.meta-item,.note-box,.jumuah-box,
+  .month-day,.wallet-support,.home-widget,.today-card,.today-action,
+  .premium-resource-card,.dua-card,.ayah-card,.hero-panel,.hero-stat,
+  .qibla-panel,.qibla-card,.help-card,.support-card,.content-card,
+  .section-card,.grid-card,.list-card,.feature-card,.player-card,
+  .accordion-item,.dropdown-block,.dropdown-content
+){
+  border-width:var(--bw-premium-border-size) !important;
+  border-color:var(--bw-premium-border-glow-color) !important;
+  box-shadow:
+    var(--bw-premium-glow-inner),
+    var(--bw-premium-glow-main),
+    var(--bw-premium-glow-outer) !important;
+}
+
+html[class*="premium-theme-"] :is(
+  .card,.box,.panel,.block,.surah-card,.prayer-card,.today-card,
+  .today-action,.premium-resource-card,.dua-card,.ayah-card,
+  .hero-panel,.qibla-panel,.help-card,.support-card,.content-card,
+  .section-card,.feature-card,.accordion-item,.dropdown-block
+):hover{
+  border-color:var(--bw-premium-border-glow-color) !important;
+  box-shadow:
+    0 0 0 1px var(--bw-premium-border-glow-inner),
+    var(--bw-premium-glow-hover) !important;
+  transform:translateY(-1px);
+}
+
+/* ===== END PREMIUM BORDER + GLOW BOOST V61 ===== */
