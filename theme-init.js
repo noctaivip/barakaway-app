@@ -3,6 +3,7 @@
 
   const SITE_THEME_KEY = "siteTheme";
   const PREMIUM_THEME_KEY = "barakaway_premium_theme";
+
   const PREMIUM_THEMES = [
     "royal-gold",
     "emerald-quran",
@@ -26,71 +27,93 @@
     try { localStorage.removeItem(key); } catch(e) {}
   }
 
-  function normalizeSiteTheme(value){
-    if(value === "light" || value === "light-mode") return "light";
-    if(value === "dark" || value === "dark-mode") return "dark";
-    return "dark";
+  function normalizeSiteTheme(theme){
+    return theme === "light" ? "light" : "dark";
   }
 
-  function normalizePremiumTheme(value){
-    value = String(value || "").trim();
-    return PREMIUM_THEMES.indexOf(value) !== -1 ? value : "";
+  function normalizePremiumTheme(theme){
+    return PREMIUM_THEMES.indexOf(theme) !== -1 ? theme : "";
   }
 
-  function clearPremiumClasses(){
-    PREMIUM_THEMES.forEach(function(theme){
-      document.documentElement.classList.remove("premium-theme-" + theme);
-      document.body && document.body.classList.remove("premium-theme-" + theme);
+  function removeClassesWithPrefix(target, prefix){
+    if(!target || !target.classList) return;
+    Array.from(target.classList).forEach(function(className){
+      if(className.indexOf(prefix) === 0) target.classList.remove(className);
     });
   }
 
   function applySiteTheme(theme){
     const selected = normalizeSiteTheme(theme);
-    document.documentElement.classList.toggle("light-mode", selected === "light");
-    document.documentElement.classList.toggle("dark-mode", selected !== "light");
+    const root = document.documentElement;
+    root.classList.remove("light-mode", "dark-mode");
+    root.classList.add(selected + "-mode");
+
     if(document.body){
-      document.body.classList.toggle("light-mode", selected === "light");
-      document.body.classList.toggle("dark-mode", selected !== "light");
+      document.body.classList.remove("light-mode", "dark-mode");
+      document.body.classList.add(selected + "-mode");
     }
   }
 
   function applyPremiumTheme(theme){
     const selected = normalizePremiumTheme(theme);
-    clearPremiumClasses();
+    const root = document.documentElement;
+
+    removeClassesWithPrefix(root, "premium-theme-");
+    removeClassesWithPrefix(root, "theme-");
+
+    if(document.body){
+      removeClassesWithPrefix(document.body, "premium-theme-");
+      removeClassesWithPrefix(document.body, "bw-theme-");
+      removeClassesWithPrefix(document.body, "theme-");
+    }
+
     if(selected){
-      document.documentElement.classList.add("premium-theme-" + selected);
-      if(document.body) document.body.classList.add("premium-theme-" + selected);
+      root.classList.add("premium-theme-" + selected);
+      root.classList.add("theme-" + selected);
+      root.setAttribute("data-premium-theme", selected);
+
+      if(document.body){
+        document.body.classList.add("premium-theme-" + selected);
+        document.body.classList.add("bw-theme-" + selected);
+        document.body.classList.add("theme-" + selected);
+        document.body.setAttribute("data-premium-theme", selected);
+      }
+    }else{
+      root.removeAttribute("data-premium-theme");
+      if(document.body) document.body.removeAttribute("data-premium-theme");
     }
   }
 
   function refresh(){
-    const siteTheme = normalizeSiteTheme(safeGet(SITE_THEME_KEY) || safeGet("theme") || "dark");
-    const premiumTheme = normalizePremiumTheme(safeGet(PREMIUM_THEME_KEY) || "");
-    applySiteTheme(siteTheme);
-    applyPremiumTheme(premiumTheme);
+    applySiteTheme(safeGet(SITE_THEME_KEY) || "dark");
+    applyPremiumTheme(safeGet(PREMIUM_THEME_KEY) || "");
   }
 
   window.BarakaWayTheme = {
+    siteKey: SITE_THEME_KEY,
+    premiumKey: PREMIUM_THEME_KEY,
     premiumThemes: PREMIUM_THEMES.slice(),
-    refresh: refresh,
-    currentPremiumTheme: function(){ return normalizePremiumTheme(safeGet(PREMIUM_THEME_KEY) || ""); },
     applySiteTheme: function(theme){
       const selected = normalizeSiteTheme(theme);
       safeSet(SITE_THEME_KEY, selected);
       applySiteTheme(selected);
-      window.dispatchEvent(new CustomEvent("barakaway:site-theme-change", { detail:{ theme:selected } }));
+      window.dispatchEvent(new CustomEvent("barakaway:site-theme-change", { detail: { theme: selected } }));
     },
     applyPremiumTheme: function(theme){
       const selected = normalizePremiumTheme(theme);
       if(selected) safeSet(PREMIUM_THEME_KEY, selected);
       else safeRemove(PREMIUM_THEME_KEY);
       applyPremiumTheme(selected);
-      window.dispatchEvent(new CustomEvent("barakaway:premium-theme-change", { detail:{ theme:selected } }));
+      window.dispatchEvent(new CustomEvent("barakaway:premium-theme-change", { detail: { theme: selected } }));
     },
     clearPremiumTheme: function(){
       safeRemove(PREMIUM_THEME_KEY);
       applyPremiumTheme("");
-      window.dispatchEvent(new CustomEvent("barakaway:premium-theme-change", { detail:{ theme:"" } }));
+      window.dispatchEvent(new CustomEvent("barakaway:premium-theme-change", { detail: { theme: "" } }));
+    },
+    refresh: refresh,
+    currentPremiumTheme: function(){
+      return normalizePremiumTheme(safeGet(PREMIUM_THEME_KEY) || "");
     }
   };
 
@@ -101,21 +124,22 @@
   }
 
   window.addEventListener("storage", function(event){
-    if(!event.key || event.key === SITE_THEME_KEY || event.key === PREMIUM_THEME_KEY || event.key === "theme") refresh();
+    if(!event.key || event.key === SITE_THEME_KEY || event.key === PREMIUM_THEME_KEY) refresh();
   });
-})();
 
-/* ===== BARAKAWAY SERVICE WORKER REGISTRATION V37 ===== */
-(function(){
-  "use strict";
-  if (!("serviceWorker" in navigator)) return;
-  function registerBarakaWayServiceWorker(){
-    navigator.serviceWorker.register("/service-worker.js", { scope:"/" })
-      .then(function(registration){
-        if(registration && typeof registration.update === "function") registration.update().catch(function(){});
-      })
-      .catch(function(){});
+  if("serviceWorker" in navigator){
+    const registerServiceWorker = function(){
+      navigator.serviceWorker.register("/service-worker.js", { scope:"/" })
+        .then(function(registration){
+          if(registration && typeof registration.update === "function") registration.update().catch(function(){});
+        })
+        .catch(function(){});
+    };
+
+    if(document.readyState === "loading"){
+      document.addEventListener("DOMContentLoaded", registerServiceWorker, { once:true });
+    }else{
+      registerServiceWorker();
+    }
   }
-  if(document.readyState === "loading") document.addEventListener("DOMContentLoaded", registerBarakaWayServiceWorker, { once:true });
-  else registerBarakaWayServiceWorker();
 })();
