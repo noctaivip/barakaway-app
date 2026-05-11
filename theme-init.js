@@ -16,15 +16,15 @@
   ];
 
   function safeGet(key){
-    try { return localStorage.getItem(key); } catch(e) { return null; }
+    try{ return localStorage.getItem(key); }catch(e){ return null; }
   }
 
   function safeSet(key, value){
-    try { localStorage.setItem(key, value); } catch(e) {}
+    try{ localStorage.setItem(key, value); }catch(e){}
   }
 
   function safeRemove(key){
-    try { localStorage.removeItem(key); } catch(e) {}
+    try{ localStorage.removeItem(key); }catch(e){}
   }
 
   function normalizeSiteTheme(theme){
@@ -35,42 +35,42 @@
     return PREMIUM_THEMES.indexOf(theme) !== -1 ? theme : "";
   }
 
-  function removeClassesWithPrefix(target, prefix){
-    if(!target || !target.classList) return;
-    Array.from(target.classList).forEach(function(className){
-      if(className.indexOf(prefix) === 0) target.classList.remove(className);
+  function removePremiumThemeClasses(node){
+    if(!node || !node.classList) return;
+    Array.from(node.classList).forEach(function(cls){
+      if(
+        cls.indexOf("premium-theme-") === 0 ||
+        cls.indexOf("bw-theme-") === 0 ||
+        (cls.indexOf("theme-") === 0 && cls !== "theme-toggle" && cls !== "theme-toggle-label")
+      ){
+        node.classList.remove(cls);
+      }
     });
   }
 
   function applySiteTheme(theme){
     const selected = normalizeSiteTheme(theme);
-    const root = document.documentElement;
-    root.classList.remove("light-mode", "dark-mode");
-    root.classList.add(selected + "-mode");
+    document.documentElement.classList.remove("light-mode", "dark-mode");
+    document.documentElement.classList.add(selected + "-mode");
 
     if(document.body){
       document.body.classList.remove("light-mode", "dark-mode");
       document.body.classList.add(selected + "-mode");
     }
+
+    safeSet(SITE_THEME_KEY, selected);
   }
 
   function applyPremiumTheme(theme){
     const selected = normalizePremiumTheme(theme);
-    const root = document.documentElement;
 
-    removeClassesWithPrefix(root, "premium-theme-");
-    removeClassesWithPrefix(root, "theme-");
-
-    if(document.body){
-      removeClassesWithPrefix(document.body, "premium-theme-");
-      removeClassesWithPrefix(document.body, "bw-theme-");
-      removeClassesWithPrefix(document.body, "theme-");
-    }
+    removePremiumThemeClasses(document.documentElement);
+    if(document.body) removePremiumThemeClasses(document.body);
 
     if(selected){
-      root.classList.add("premium-theme-" + selected);
-      root.classList.add("theme-" + selected);
-      root.setAttribute("data-premium-theme", selected);
+      document.documentElement.classList.add("premium-theme-" + selected);
+      document.documentElement.classList.add("theme-" + selected);
+      document.documentElement.setAttribute("data-premium-theme", selected);
 
       if(document.body){
         document.body.classList.add("premium-theme-" + selected);
@@ -79,7 +79,7 @@
         document.body.setAttribute("data-premium-theme", selected);
       }
     }else{
-      root.removeAttribute("data-premium-theme");
+      document.documentElement.removeAttribute("data-premium-theme");
       if(document.body) document.body.removeAttribute("data-premium-theme");
     }
   }
@@ -95,7 +95,6 @@
     premiumThemes: PREMIUM_THEMES.slice(),
     applySiteTheme: function(theme){
       const selected = normalizeSiteTheme(theme);
-      safeSet(SITE_THEME_KEY, selected);
       applySiteTheme(selected);
       window.dispatchEvent(new CustomEvent("barakaway:site-theme-change", { detail: { theme: selected } }));
     },
@@ -118,7 +117,7 @@
   };
 
   if(document.readyState === "loading"){
-    document.addEventListener("DOMContentLoaded", refresh, { once:true });
+    document.addEventListener("DOMContentLoaded", refresh, { once: true });
   }else{
     refresh();
   }
@@ -126,20 +125,28 @@
   window.addEventListener("storage", function(event){
     if(!event.key || event.key === SITE_THEME_KEY || event.key === PREMIUM_THEME_KEY) refresh();
   });
+})();
 
-  if("serviceWorker" in navigator){
-    const registerServiceWorker = function(){
-      navigator.serviceWorker.register("/service-worker.js", { scope:"/" })
-        .then(function(registration){
-          if(registration && typeof registration.update === "function") registration.update().catch(function(){});
-        })
-        .catch(function(){});
-    };
+/* ===== BARAKAWAY SERVICE WORKER REGISTRATION V36 ===== */
+(function(){
+  "use strict";
 
-    if(document.readyState === "loading"){
-      document.addEventListener("DOMContentLoaded", registerServiceWorker, { once:true });
-    }else{
-      registerServiceWorker();
-    }
+  if (!("serviceWorker" in navigator)) return;
+
+  function registerBarakaWayServiceWorker(){
+    navigator.serviceWorker.register("/service-worker.js", { scope: "/" })
+      .then(function(registration){
+        if (registration && typeof registration.update === "function") {
+          registration.update().catch(function(){});
+        }
+      })
+      .catch(function(){});
+  }
+
+  if (document.readyState === "loading") {
+    document.addEventListener("DOMContentLoaded", registerBarakaWayServiceWorker, { once:true });
+  } else {
+    registerBarakaWayServiceWorker();
   }
 })();
+/* ===== END BARAKAWAY SERVICE WORKER REGISTRATION V36 ===== */
