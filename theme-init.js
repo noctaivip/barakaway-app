@@ -87,146 +87,181 @@
   function refresh(){
     applySiteTheme(safeGet(SITE_THEME_KEY) || "dark");
     applyPremiumTheme(safeGet(PREMIUM_THEME_KEY) || "");
-    scheduleAutoContrast();
+    scheduleSmartContrast(document);
   }
 
-  /* ===== BARAKAWAY AUTO CONTRAST ENGINE V58 ===== */
-  const AUTO_CONTRAST_SELECTOR = [
-    "body",
-    ".container", ".page", ".content", "main", "section", "article", "header", "footer", "nav",
-    ".card", ".box", ".panel", ".block", ".quote", ".empty", ".article", ".category-panel",
-    ".surah-card", ".prayer-card", ".toggle-row", ".meta-item", ".note-box", ".jumuah-box",
-    ".month-day", ".month-head", ".wallet-support", ".home-widget", ".brand-prayer-hero",
-    ".home-prayer-widget", ".home-prayer-countdown", ".today-hub", ".today-action", ".today-card",
-    ".today-goal-action", ".daily-card", ".task-card", ".challenge-card", ".ayah-day-card",
-    ".quiz-card", ".quiz-option", ".answer-box", ".result-box", ".intro", ".transactions",
-    ".verification", ".mobile-dropdown", ".mobile-dropdown-title", ".mobile-dropdown-content",
-    ".donation-dropdown", ".donation-dropdown-content", ".dropdown-block", ".dropdown-content",
-    ".name-chip", ".help-category", ".help-card", ".aid-card", ".support-card", ".qibla-panel",
-    ".qibla-card", ".qibla-box", ".hero", ".hero-panel", ".hero-stat", ".hero-card", ".hero-box",
-    ".hero-banner", ".page-hero", ".section-hero", ".quran-hero", ".duas-hero", ".congrats-hero",
-    ".dua-card", ".master-audio-wrap", ".ayah-card", ".loading", ".sec-box", ".wallet-box",
-    ".player-card", ".feature-card", ".quick-card", ".quick-link", ".quick-item",
-    ".premium-resource-card", ".premium-resource", ".pro-card", ".pro-feature", ".pro-item",
-    ".benefit-card", ".support-option", ".support-item", ".support-feature", ".about-project-card",
-    ".app-menu-card", ".app-menu-item", ".section-card", ".content-card", ".content-box",
-    ".list-card", ".list-item", ".grid-card", ".grid-item", ".lesson-card", ".course-card",
-    ".module-card", ".accordion", ".accordion-item", ".accordion-header", ".accordion-body",
-    "details", "summary", ".modal", ".toast", ".warning", ".error", ".wallet-warning",
-    ".desktop-theme-toggle", ".desktop-theme-toggle-inner", ".theme-toggle", ".theme-switch",
-    ".top-pill", ".pro-state", ".bottom-app-nav", ".bottom-app-nav-inner", ".bottom-app-nav-item",
-    "button", ".btn", ".quick-btn", ".install-btn", ".share-btn", ".copy-wallet-btn",
-    ".share-wallet-btn", ".reset-btn", ".qibla-reset", "input", "textarea", "select", ".input",
-    ".select", ".search-input", ".search-box", ".search-box input", ".wallet-address",
-    ".toolbar-btn", ".tab-btn", ".filter-btn", ".action-chip", ".theme-action", ".glass-btn", ".glass-control",
-    ".quran-toolbar button", ".surah-actions button"
+  /* ===== BARAKAWAY SMART CONTRAST ENGINE V60 ===== */
+  /* Applies contrast to the actual text/icon element based on its nearest visible background.
+     It does not recolor whole blocks, so nested dark/light surfaces keep their own readable contrast. */
+  const BW_CONTRAST_LIGHT_TEXT = "#f7faf8";
+  const BW_CONTRAST_DARK_TEXT = "#172019";
+  const BW_CONTRAST_SELECTOR = [
+    "h1", "h2", "h3", "h4", "h5", "h6", "p", "span", "small", "label", "li", "a", "strong", "em", "b", "i",
+    "button", ".btn", ".quick-btn", ".install-btn", ".share-btn", ".copy-wallet-btn", ".share-wallet-btn", ".reset-btn", ".qibla-reset",
+    "input", "textarea", "select", ".input", ".select", ".search-input", ".search-box input", ".wallet-address",
+    ".title", ".subtitle", ".section-title", ".section-subtitle", ".page-title", ".page-subtitle", ".home-section-title", ".home-section-note",
+    ".card-title", ".card-text", ".item-title", ".item-text", ".note", ".muted", ".small", ".description", ".caption", ".label", ".text", ".btn-text",
+    ".meta", ".meta-label", ".meta-value", ".surah-name", ".surah-meta", ".surah-ayahs", ".dua-title", ".dua-source", ".dua-ref", ".dua-translit", ".dua-meaning",
+    ".ayah-arabic", ".ayah-translit", ".ayah-meaning", ".theme-toggle-label", ".accordion-header", ".accordion-body", "summary",
+    "svg", ".icon", ".lucide", ".fa", ".fas", ".far", ".fab", ".material-icons"
   ].join(",");
 
-  const LIGHT_PREMIUM_THEMES = ["rose-soft", "children-soft", "desert-sand", "royal-gold"];
+  const BW_CONTRAST_ICON_SELECTOR = "svg,.icon,.lucide,.fa,.fas,.far,.fab,.material-icons";
 
-  function parseRgb(value){
-    if(!value || value === "transparent") return null;
-    const match = String(value).match(/rgba?\(([^)]+)\)/i);
-    if(!match) return null;
-    const parts = match[1].split(",").map(function(part){ return part.trim(); });
-    if(parts.length < 3) return null;
-    const r = parseFloat(parts[0]);
-    const g = parseFloat(parts[1]);
-    const b = parseFloat(parts[2]);
-    const a = parts.length >= 4 ? parseFloat(parts[3]) : 1;
-    if(!isFinite(r) || !isFinite(g) || !isFinite(b)) return null;
-    return { r:r, g:g, b:b, a:isFinite(a) ? a : 1 };
+  const BW_LIGHT_PREMIUM_THEMES = ["rose-soft", "children-soft", "desert-sand", "royal-gold"];
+
+  function bwCurrentPremiumTheme(){
+    return document.documentElement.getAttribute("data-premium-theme") || safeGet(PREMIUM_THEME_KEY) || "";
   }
 
-  function luminance(rgb){
-    function channel(value){
+  function bwFallbackBackgroundIsLight(){
+    return BW_LIGHT_PREMIUM_THEMES.indexOf(bwCurrentPremiumTheme()) !== -1;
+  }
+
+  function bwParseRgbList(value){
+    const list = [];
+    if(!value || value === "none" || value === "transparent") return list;
+    String(value).replace(/rgba?\(([^)]+)\)/gi, function(_, body){
+      const parts = body.split(",").map(function(part){ return part.trim(); });
+      if(parts.length < 3) return "";
+      const r = parseFloat(parts[0]);
+      const g = parseFloat(parts[1]);
+      const b = parseFloat(parts[2]);
+      const a = parts.length >= 4 ? parseFloat(parts[3]) : 1;
+      if(isFinite(r) && isFinite(g) && isFinite(b)){
+        list.push({ r:r, g:g, b:b, a:isFinite(a) ? Math.max(0, Math.min(1, a)) : 1 });
+      }
+      return "";
+    });
+    return list;
+  }
+
+  function bwAverageRgb(list){
+    if(!list || !list.length) return null;
+    let r = 0, g = 0, b = 0, total = 0;
+    list.forEach(function(rgb){
+      const w = Math.max(0.08, Math.min(1, rgb.a || 1));
+      r += rgb.r * w;
+      g += rgb.g * w;
+      b += rgb.b * w;
+      total += w;
+    });
+    return total ? { r:r / total, g:g / total, b:b / total, a:1 } : null;
+  }
+
+  function bwLuminance(rgb){
+    function c(value){
       value = value / 255;
       return value <= 0.03928 ? value / 12.92 : Math.pow((value + 0.055) / 1.055, 2.4);
     }
-    return 0.2126 * channel(rgb.r) + 0.7152 * channel(rgb.g) + 0.0722 * channel(rgb.b);
+    return 0.2126 * c(rgb.r) + 0.7152 * c(rgb.g) + 0.0722 * c(rgb.b);
   }
 
-  function hasUsableBackground(style){
-    const rgb = parseRgb(style.backgroundColor);
-    if(rgb && rgb.a >= 0.38) return rgb;
+  function bwReadableColorForRgb(rgb){
+    if(!rgb) return bwFallbackBackgroundIsLight() ? BW_CONTRAST_DARK_TEXT : BW_CONTRAST_LIGHT_TEXT;
+    return bwLuminance(rgb) > 0.50 ? BW_CONTRAST_DARK_TEXT : BW_CONTRAST_LIGHT_TEXT;
+  }
+
+  function bwStyleBackgroundRgb(style){
+    if(!style) return null;
+
+    const colorList = bwParseRgbList(style.backgroundColor).filter(function(rgb){ return rgb.a >= 0.18; });
+    if(colorList.length) return colorList[colorList.length - 1];
+
+    const imageList = bwParseRgbList(style.backgroundImage).filter(function(rgb){ return rgb.a >= 0.10; });
+    if(imageList.length) return bwAverageRgb(imageList);
+
     return null;
   }
 
-  function currentPremiumTheme(){
-    const root = document.documentElement;
-    return root.getAttribute("data-premium-theme") || safeGet(PREMIUM_THEME_KEY) || "";
-  }
-
-  function fallbackIsLight(){
-    return LIGHT_PREMIUM_THEMES.indexOf(currentPremiumTheme()) !== -1;
-  }
-
-  function nearestBackgroundRgb(element){
+  function bwNearestBackgroundRgb(element){
     let node = element;
     while(node && node.nodeType === 1){
       const style = window.getComputedStyle(node);
-      const rgb = hasUsableBackground(style);
-      if(rgb) return rgb;
+      const bg = bwStyleBackgroundRgb(style);
+      if(bg) return bg;
       node = node.parentElement;
     }
-    const bodyStyle = document.body ? window.getComputedStyle(document.body) : null;
-    return bodyStyle ? hasUsableBackground(bodyStyle) : null;
+    if(document.body) return bwStyleBackgroundRgb(window.getComputedStyle(document.body));
+    return null;
   }
 
-  function isProbablyLightSurface(element){
-    const rgb = nearestBackgroundRgb(element);
-    if(rgb) return luminance(rgb) > 0.52;
-    return fallbackIsLight();
+  function bwSetImportant(element, property, value){
+    if(element && element.style) element.style.setProperty(property, value, "important");
   }
 
-  function markAutoContrast(element){
-    if(!element || !element.classList) return;
+  function bwApplyTextContrast(element){
+    if(!element || !element.style || !element.matches) return;
     if(element.closest && element.closest(".page-themes-pro")) return;
-    element.classList.remove("bw-auto-on-dark", "bw-auto-on-light");
-    if(isProbablyLightSurface(element)) element.classList.add("bw-auto-on-light");
-    else element.classList.add("bw-auto-on-dark");
-  }
 
-  function applyAutoContrast(root){
-    if(!document.documentElement.className.match(/premium-theme-/)) return;
-    const scope = root && root.querySelectorAll ? root : document;
-    if(document.body) markAutoContrast(document.body);
-    scope.querySelectorAll(AUTO_CONTRAST_SELECTOR).forEach(markAutoContrast);
-  }
+    const color = bwReadableColorForRgb(bwNearestBackgroundRgb(element));
+    bwSetImportant(element, "color", color);
 
-  let autoContrastFrame = 0;
-  function scheduleAutoContrast(){
-    if(autoContrastFrame) cancelAnimationFrame(autoContrastFrame);
-    autoContrastFrame = requestAnimationFrame(function(){
-      autoContrastFrame = 0;
-      applyAutoContrast(document);
-      setTimeout(function(){ applyAutoContrast(document); }, 80);
-    });
-  }
-
-  function installAutoContrastObserver(){
-    if(!document.body || window.__barakawayAutoContrastObserver) return;
-    window.__barakawayAutoContrastObserver = new MutationObserver(function(mutations){
-      for(const mutation of mutations){
-        if(mutation.type === "childList" || mutation.type === "attributes"){
-          scheduleAutoContrast();
-          break;
-        }
+    if(element.matches(BW_CONTRAST_ICON_SELECTOR)){
+      bwSetImportant(element, "stroke", "currentColor");
+      if(element.getAttribute && element.getAttribute("fill") !== "none"){
+        bwSetImportant(element, "fill", "currentColor");
       }
-    });
-    window.__barakawayAutoContrastObserver.observe(document.body, {
-      subtree:true,
-      childList:true,
-      attributes:true,
-      attributeFilter:["class", "style", "hidden", "open"]
+      element.querySelectorAll("path,circle,rect,line,polyline,polygon").forEach(function(child){
+        bwSetImportant(child, "stroke", "currentColor");
+        if(child.getAttribute && child.getAttribute("fill") !== "none"){
+          bwSetImportant(child, "fill", "currentColor");
+        }
+      });
+    }
+  }
+
+  let bwContrastApplying = false;
+  let bwContrastFrame = 0;
+
+  function bwApplySmartContrast(root){
+    if(!document.documentElement.className.match(/premium-theme-/) || !document.body) return;
+    bwContrastApplying = true;
+    try{
+      const scope = root && root.querySelectorAll ? root : document;
+      scope.querySelectorAll(BW_CONTRAST_SELECTOR).forEach(bwApplyTextContrast);
+    }finally{
+      bwContrastApplying = false;
+    }
+  }
+
+  function scheduleSmartContrast(root){
+    if(bwContrastFrame) cancelAnimationFrame(bwContrastFrame);
+    bwContrastFrame = requestAnimationFrame(function(){
+      bwContrastFrame = 0;
+      bwApplySmartContrast(root || document);
     });
   }
 
-  function bootAutoContrast(){
-    scheduleAutoContrast();
-    installAutoContrastObserver();
+  function bootSmartContrast(){
+    scheduleSmartContrast(document);
+    [60, 180, 420, 900, 1800, 3500].forEach(function(delay){
+      setTimeout(function(){ scheduleSmartContrast(document); }, delay);
+    });
+
+    if(!window.__barakawaySmartContrastObserver && document.body){
+      window.__barakawaySmartContrastObserver = new MutationObserver(function(mutations){
+        if(bwContrastApplying) return;
+        for(const mutation of mutations){
+          if(mutation.type === "childList" || mutation.type === "attributes"){
+            scheduleSmartContrast(document);
+            break;
+          }
+        }
+      });
+      window.__barakawaySmartContrastObserver.observe(document.body, {
+        subtree:true,
+        childList:true,
+        attributes:true,
+        attributeFilter:["class", "hidden", "open", "aria-expanded", "data-premium-theme"]
+      });
+    }
   }
-  /* ===== END BARAKAWAY AUTO CONTRAST ENGINE V58 ===== */
+
+  window.BarakaWaySmartContrast = {
+    refresh:function(){ scheduleSmartContrast(document); }
+  };
+  /* ===== END BARAKAWAY SMART CONTRAST ENGINE V60 ===== */
 
 
   window.BarakaWayTheme = {
@@ -238,7 +273,7 @@
       safeSet(SITE_THEME_KEY, selected);
       applySiteTheme(selected);
       window.dispatchEvent(new CustomEvent("barakaway:site-theme-change", { detail: { theme: selected } }));
-      scheduleAutoContrast();
+      scheduleSmartContrast(document);
       },
     applyPremiumTheme: function(theme){
       const selected = normalizePremiumTheme(theme);
@@ -246,13 +281,13 @@
       else safeRemove(PREMIUM_THEME_KEY);
       applyPremiumTheme(selected);
       window.dispatchEvent(new CustomEvent("barakaway:premium-theme-change", { detail: { theme: selected } }));
-      scheduleAutoContrast();
+      scheduleSmartContrast(document);
       },
     clearPremiumTheme: function(){
       safeRemove(PREMIUM_THEME_KEY);
       applyPremiumTheme("");
       window.dispatchEvent(new CustomEvent("barakaway:premium-theme-change", { detail: { theme: "" } }));
-      scheduleAutoContrast();
+      scheduleSmartContrast(document);
       },
     refresh: refresh,
     currentPremiumTheme: function(){
@@ -271,14 +306,16 @@
     if(!event.key || event.key === SITE_THEME_KEY || event.key === PREMIUM_THEME_KEY) refresh();
   });
 
-  window.addEventListener("barakaway:site-theme-change", scheduleAutoContrast);
-  window.addEventListener("barakaway:premium-theme-change", scheduleAutoContrast);
-  window.addEventListener("resize", scheduleAutoContrast);
+  window.addEventListener("load", function(){ scheduleSmartContrast(document); });
+  window.addEventListener("pageshow", function(){ scheduleSmartContrast(document); });
+  window.addEventListener("resize", function(){ scheduleSmartContrast(document); });
+  window.addEventListener("barakaway:site-theme-change", function(){ scheduleSmartContrast(document); });
+  window.addEventListener("barakaway:premium-theme-change", function(){ scheduleSmartContrast(document); });
 
   if(document.readyState === "loading"){
-    document.addEventListener("DOMContentLoaded", bootAutoContrast, { once:true });
+    document.addEventListener("DOMContentLoaded", bootSmartContrast, { once:true });
   }else{
-    bootAutoContrast();
+    bootSmartContrast();
   }
 
   if("serviceWorker" in navigator){
