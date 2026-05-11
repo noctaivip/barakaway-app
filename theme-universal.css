@@ -2003,47 +2003,202 @@ html[class*="premium-theme-"] body:not(.page-themes-pro) svg :is(path,circle,rec
 }
 /* ===== END PREMIUM SMART CONTRAST SUPPORT V60 ===== */
 
-
-/* ===== PREMIUM BORDER + GLOW BOOST V61 ===== */
-/* Stronger premium borders and deeper cinematic glow */
+/* ===== PREMIUM PERFORMANCE + FAST CONTRAST V62 ===== */
+/* Fixes PRO-theme scroll lag:
+   - removes fixed background repaint on nested wrappers;
+   - removes DOM-dependent contrast requirement;
+   - keeps theme-colored border/glow but cheaper;
+   - keeps text/icon contrast by theme tone and surface type. */
 
 html[class*="premium-theme-"]{
-  --bw-premium-border-size:2px;
-  --bw-premium-glow-inner:0 0 0 1px var(--bw-premium-border-glow-inner);
-  --bw-premium-glow-main:0 0 0 2px var(--bw-premium-border-glow-soft);
-  --bw-premium-glow-outer:0 18px 42px var(--bw-premium-border-glow-outer);
-  --bw-premium-glow-hover:0 0 0 2px var(--bw-premium-border-glow-color),
-                           0 22px 54px var(--bw-premium-border-glow-outer);
+  --bw-page-on-light:#172019;
+  --bw-page-on-light-soft:rgba(23,32,25,.82);
+  --bw-page-on-dark:#f7faf8;
+  --bw-page-on-dark-soft:rgba(247,250,248,.86);
+  --bw-surface-dark-text:#f7faf8;
+  --bw-surface-dark-soft:rgba(247,250,248,.84);
+  --bw-surface-light-text:#172019;
+  --bw-surface-light-soft:rgba(23,32,25,.80);
+
+  --bw-fast-glow:
+    0 0 0 1px var(--bw-premium-border-glow-soft),
+    0 8px 20px var(--bw-premium-border-glow-outer);
+  --bw-fast-glow-hover:
+    0 0 0 1px var(--bw-premium-border-glow-color),
+    0 10px 24px var(--bw-premium-border-glow-outer);
 }
 
-html[class*="premium-theme-"] :is(
-  .card,.box,.panel,.block,.quote,.empty,.article,.category-panel,
-  .surah-card,.prayer-card,.toggle-row,.meta-item,.note-box,.jumuah-box,
-  .month-day,.wallet-support,.home-widget,.today-card,.today-action,
-  .premium-resource-card,.dua-card,.ayah-card,.hero-panel,.hero-stat,
-  .qibla-panel,.qibla-card,.help-card,.support-card,.content-card,
-  .section-card,.grid-card,.list-card,.feature-card,.player-card,
-  .accordion-item,.dropdown-block,.dropdown-content
+/* Body is the only real premium background. Fixed attachment causes mobile scroll jank. */
+html[class*="premium-theme-"] body:not(.page-themes-pro),
+html[class*="premium-theme-"] body:not(.page-themes-pro).dark-mode,
+html[class*="premium-theme-"] body:not(.page-themes-pro).light-mode{
+  background:var(--bw-premium-page-bg) !important;
+  background-attachment:scroll !important;
+  color:var(--bw-page-on-dark) !important;
+}
+
+/* Light premium pages need dark text directly on theme background. */
+html:is(.premium-theme-rose-soft,.premium-theme-children-soft,.premium-theme-desert-sand,.premium-theme-royal-gold)
+body:not(.page-themes-pro){
+  color:var(--bw-page-on-light) !important;
+}
+
+/* Structural wrappers must be transparent, not duplicated gradients. */
+html[class*="premium-theme-"] body:not(.page-themes-pro) > :is(
+  .container,.page,.content,main,.page-wrapper,.screen,.layout,.app-shell,.app,.site,.viewport,#app,#root
+),
+html[class*="premium-theme-"] body:not(.page-themes-pro) :is(
+  section,.section,.sections,.page-section,.content-section,.home-section,.quran-section,.prayer-section
+):not(.card,.box,.panel,.block,.section-card,.content-card,.surah-card,.prayer-card,.ayah-card,.dua-card){
+  background:transparent !important;
+  background-attachment:scroll !important;
+  box-shadow:none !important;
+}
+
+/* Text directly on premium background */
+html[class*="premium-theme-"] body:not(.page-themes-pro) :is(
+  h1,h2,h3,h4,h5,h6,.title,.section-title,.page-title,.home-section-title,.category-title,.hero-title,
+  p,span,small,label,li,.subtitle,.tagline,.note,.muted,.description,.section-note,.page-subtitle
+):not(
+  .card *,.box *,.panel *,.block *,.quote *,.article *,.surah-card *,.prayer-card *,.ayah-card *,.dua-card *,
+  .today-action *,.today-card *,.home-prayer-widget *,.brand-prayer-hero *,.premium-resource-card *,
+  .bottom-app-nav *,.topbar *,.modal *,.toast *,button *,.btn *,.quick-btn *,input *,textarea *,select *
 ){
-  border-width:var(--bw-premium-border-size) !important;
-  border-color:var(--bw-premium-border-glow-color) !important;
-  box-shadow:
-    var(--bw-premium-glow-inner),
-    var(--bw-premium-glow-main),
-    var(--bw-premium-glow-outer) !important;
+  color:var(--bw-page-on-dark) !important;
+  text-shadow:none !important;
 }
 
-html[class*="premium-theme-"] :is(
-  .card,.box,.panel,.block,.surah-card,.prayer-card,.today-card,
-  .today-action,.premium-resource-card,.dua-card,.ayah-card,
-  .hero-panel,.qibla-panel,.help-card,.support-card,.content-card,
-  .section-card,.feature-card,.accordion-item,.dropdown-block
-):hover{
-  border-color:var(--bw-premium-border-glow-color) !important;
-  box-shadow:
-    0 0 0 1px var(--bw-premium-border-glow-inner),
-    var(--bw-premium-glow-hover) !important;
-  transform:translateY(-1px);
+html:is(.premium-theme-rose-soft,.premium-theme-children-soft,.premium-theme-desert-sand,.premium-theme-royal-gold)
+body:not(.page-themes-pro) :is(
+  h1,h2,h3,h4,h5,h6,.title,.section-title,.page-title,.home-section-title,.category-title,.hero-title,
+  p,span,small,label,li,.subtitle,.tagline,.note,.muted,.description,.section-note,.page-subtitle
+):not(
+  .card *,.box *,.panel *,.block *,.quote *,.article *,.surah-card *,.prayer-card *,.ayah-card *,.dua-card *,
+  .today-action *,.today-card *,.home-prayer-widget *,.brand-prayer-hero *,.premium-resource-card *,
+  .bottom-app-nav *,.topbar *,.modal *,.toast *,button *,.btn *,.quick-btn *,input *,textarea *,select *
+){
+  color:var(--bw-page-on-light) !important;
 }
 
-/* ===== END PREMIUM BORDER + GLOW BOOST V61 ===== */
+/* Keep premium border/glow, but make it much cheaper than large multi-layer shadows. */
+html[class*="premium-theme-"] body:not(.page-themes-pro) :is(
+  .card,.box,.panel,.block,.quote,.empty,.article,.category-panel,.surah-card,.prayer-card,
+  .toggle-row,.meta-item,.note-box,.jumuah-box,.month-day,.month-head,.wallet-support,.home-widget,
+  .brand-prayer-hero,.home-prayer-widget,.home-prayer-countdown,.today-hub,.today-action,.today-card,
+  .daily-card,.task-card,.challenge-card,.ayah-day-card,.quiz-card,.answer-box,.result-box,
+  .intro,.transactions,.verification,.mobile-dropdown,.mobile-dropdown-title,.mobile-dropdown-content,
+  .donation-dropdown,.donation-dropdown-content,.dropdown-block,.dropdown-content,.name-chip,
+  .help-category,.help-card,.aid-card,.support-card,.qibla-panel,.qibla-card,.qibla-box,
+  .hero,.hero-panel,.hero-stat,.hero-card,.hero-box,.page-hero,.section-hero,.quran-hero,.duas-hero,
+  .dua-card,.master-audio-wrap,.ayah-card,.loading,.sec-box,.wallet-box,.player-card,
+  .feature-card,.quick-card,.quick-link,.quick-item,.premium-resource-card,.premium-resource,
+  .pro-card,.pro-feature,.pro-item,.benefit-card,.support-option,.support-item,.support-feature,
+  .about-project-card,.app-menu-card,.app-menu-item,.section-card,.content-card,.content-box,
+  .list-card,.list-item,.grid-card,.grid-item,.lesson-card,.course-card,.module-card,
+  .accordion,.accordion-item,.accordion-header,.accordion-body,details,summary
+){
+  border-width:2px !important;
+  border-color:var(--bw-premium-border-glow-color) !important;
+  box-shadow:var(--bw-fast-glow) !important;
+  transform:none !important;
+  will-change:auto !important;
+}
+
+/* Hover remains premium but light. */
+@media (hover:hover){
+  html[class*="premium-theme-"] body:not(.page-themes-pro) :is(
+    .card,.box,.panel,.block,.surah-card,.prayer-card,.today-action,.today-card,
+    .premium-resource-card,.dua-card,.ayah-card,.hero-panel,.qibla-panel,.help-card,
+    .support-card,.content-card,.section-card,.feature-card,.accordion-item,.dropdown-block
+  ):hover{
+    box-shadow:var(--bw-fast-glow-hover) !important;
+    transform:none !important;
+  }
+}
+
+/* Dark-mode surfaces: text/icons must be light. */
+html[class*="premium-theme-"].dark-mode body:not(.page-themes-pro) :is(
+  .card,.box,.panel,.block,.quote,.empty,.article,.category-panel,.surah-card,.prayer-card,
+  .toggle-row,.meta-item,.note-box,.jumuah-box,.month-day,.wallet-support,.home-widget,
+  .brand-prayer-hero,.home-prayer-widget,.home-prayer-countdown,.today-hub,.today-action,.today-card,
+  .intro,.transactions,.verification,.donation-dropdown,.dropdown-block,.dropdown-content,.name-chip,
+  .help-card,.support-card,.qibla-panel,.qibla-card,.qibla-box,.hero,.hero-panel,.hero-stat,
+  .dua-card,.master-audio-wrap,.ayah-card,.sec-box,.wallet-box,.player-card,.feature-card,
+  .quick-card,.premium-resource-card,.pro-card,.about-project-card,.app-menu-card,.section-card,
+  .content-card,.content-box,.list-card,.grid-card,.accordion,.accordion-item,details,summary,
+  button,.btn,.quick-btn,.install-btn,.share-btn,.copy-wallet-btn,.share-wallet-btn,.reset-btn,.qibla-reset,
+  input,textarea,select,.input,.select,.search-input,.search-box input,.wallet-address
+),
+html[class*="premium-theme-"].dark-mode body:not(.page-themes-pro) :is(
+  .card,.box,.panel,.block,.quote,.empty,.article,.category-panel,.surah-card,.prayer-card,
+  .today-action,.today-card,.home-prayer-widget,.brand-prayer-hero,.premium-resource-card,
+  .dua-card,.ayah-card,.accordion-item,details,summary,button,.btn,.quick-btn
+) :is(h1,h2,h3,h4,h5,h6,p,span,small,label,li,strong,em,b,.title,.subtitle,.note,.muted,.meta-label,.meta-value,.theme-toggle-label,svg,path){
+  color:var(--bw-surface-dark-text) !important;
+  fill:currentColor !important;
+  stroke:currentColor !important;
+}
+
+/* Light-mode surfaces: text/icons must be dark unless the control is explicitly dark/primary. */
+html[class*="premium-theme-"].light-mode body:not(.page-themes-pro) :is(
+  .card,.box,.panel,.block,.quote,.empty,.article,.category-panel,.surah-card,.prayer-card,
+  .toggle-row,.meta-item,.note-box,.jumuah-box,.month-day,.wallet-support,.home-widget,
+  .today-action,.today-card,.intro,.transactions,.verification,.donation-dropdown,.dropdown-block,
+  .dropdown-content,.name-chip,.help-card,.support-card,.qibla-panel,.qibla-card,.qibla-box,
+  .dua-card,.master-audio-wrap,.ayah-card,.sec-box,.wallet-box,.feature-card,.quick-card,
+  .premium-resource-card,.pro-card,.about-project-card,.app-menu-card,.section-card,.content-card,
+  .content-box,.list-card,.grid-card
+),
+html[class*="premium-theme-"].light-mode body:not(.page-themes-pro) :is(
+  .card,.box,.panel,.block,.quote,.empty,.article,.category-panel,.surah-card,.prayer-card,
+  .today-action,.today-card,.premium-resource-card,.dua-card,.ayah-card
+) :is(h1,h2,h3,h4,h5,h6,p,span,small,label,li,strong,em,b,.title,.subtitle,.note,.muted,.meta-label,.meta-value,svg,path){
+  color:var(--bw-surface-light-text) !important;
+  fill:currentColor !important;
+  stroke:currentColor !important;
+}
+
+/* Explicitly dark controls/buttons keep light text in any mode. */
+html[class*="premium-theme-"] body:not(.page-themes-pro) :is(
+  .desktop-theme-toggle,.desktop-theme-toggle *,.desktop-theme-toggle-inner,.desktop-theme-toggle-inner *,
+  .theme-toggle,.theme-toggle *,.top-pill,.top-pill *,.pro-state,.pro-state *,
+  .support-project-btn,.support-project-btn *,.install-btn,.install-btn *,
+  .btn.primary,.btn.primary *,.copy-wallet-btn,.copy-wallet-btn *,
+  .bottom-app-nav,.bottom-app-nav *,.bottom-app-nav-inner,.bottom-app-nav-inner *,
+  .home-prayer-countdown,.home-prayer-countdown *
+){
+  color:var(--bw-surface-dark-text) !important;
+  fill:currentColor !important;
+  stroke:currentColor !important;
+}
+
+/* Light icon buttons in Quran/toolbars must become dark on light backgrounds. */
+html[class*="premium-theme-"] body:not(.page-themes-pro) :is(
+  .toolbar-btn,.filter-btn,.tab,.tab-btn,.quran-toolbar button,.surah-actions button,
+  .action-chip,.theme-action,.light-control,.glass-btn,.glass-control
+){
+  color:var(--bw-surface-light-text) !important;
+  fill:currentColor !important;
+  stroke:currentColor !important;
+}
+
+/* Disable expensive blur on fixed bottom nav in premium themes. */
+html[class*="premium-theme-"] body:not(.page-themes-pro) .bottom-app-nav{
+  backdrop-filter:none !important;
+  -webkit-backdrop-filter:none !important;
+}
+
+/* Icons inherit the resolved text color without JS. */
+html[class*="premium-theme-"] body:not(.page-themes-pro) :is(svg,path,circle,rect,line,polyline,polygon,.icon,.lucide,.fa,.fas,.far,.fab,.material-icons){
+  color:currentColor !important;
+  fill:currentColor !important;
+  stroke:currentColor !important;
+}
+
+/* Avoid heavy animated shadow/transform recalculation during scroll. */
+html[class*="premium-theme-"] body:not(.page-themes-pro) *{
+  transition-property:background-color,border-color,color,opacity !important;
+}
+
+/* ===== END PREMIUM PERFORMANCE + FAST CONTRAST V62 ===== */
+
