@@ -1831,62 +1831,154 @@ html[class*="premium-theme-"] body:not(.page-themes-pro) :is(
 
 /* ===== END BARAKAWAY PREMIUM THEMES — ON-BACKGROUND TEXT CONTRAST V54 ===== */
 
+/* ===== PREMIUM THEME SECOND BACKGROUND LAYER — EXACT THEME COLOR V55 ===== */
+/* The large secondary canvas marked on screenshots now uses the active premium theme background itself. */
 
-
-/* ===== PREMIUM THEME SECOND BACKGROUND LAYER FIX ===== */
-/* Makes the secondary page canvas blend with the active premium theme color */
+html[class*="premium-theme-"] body:not(.page-themes-pro)::before,
+html[class*="premium-theme-"] body:not(.page-themes-pro)::after{
+  content:none !important;
+  display:none !important;
+  background:none !important;
+}
 
 html[class*="premium-theme-"] body:not(.page-themes-pro),
-html[class*="premium-theme-"] body:not(.page-themes-pro) .container,
-html[class*="premium-theme-"] body:not(.page-themes-pro) .page,
-html[class*="premium-theme-"] body:not(.page-themes-pro) .content,
-html[class*="premium-theme-"] body:not(.page-themes-pro) main,
-html[class*="premium-theme-"] body:not(.page-themes-pro) .page-wrapper,
-html[class*="premium-theme-"] body:not(.page-themes-pro) .screen,
-html[class*="premium-theme-"] body:not(.page-themes-pro) .layout,
-html[class*="premium-theme-"] body:not(.page-themes-pro) .app-shell{
+html[class*="premium-theme-"] body:not(.page-themes-pro).dark-mode,
+html[class*="premium-theme-"] body:not(.page-themes-pro).light-mode{
+  background:var(--bw-premium-page-bg) !important;
+  background-attachment:fixed !important;
+}
+
+html[class*="premium-theme-"] body:not(.page-themes-pro) > :is(
+  .container,
+  .page,
+  .content,
+  main,
+  .page-wrapper,
+  .screen,
+  .layout,
+  .app-shell,
+  .app,
+  .site,
+  .viewport,
+  #app,
+  #root
+),
+html[class*="premium-theme-"] body:not(.page-themes-pro) :is(
+  .container,
+  .page,
+  .content,
+  main,
+  .page-wrapper,
+  .screen,
+  .layout,
+  .app-shell
+):not(
+  .block,
+  .card,
+  .box,
+  .panel,
+  .quote,
+  .empty,
+  .article,
+  .category-panel,
+  .surah-card,
+  .prayer-card,
+  .toggle-row,
+  .meta-item,
+  .note-box,
+  .jumuah-box,
+  .month-day,
+  .month-head,
+  .wallet-support,
+  .home-widget,
+  .brand-prayer-hero,
+  .home-prayer-widget,
+  .home-prayer-countdown,
+  .today-hub,
+  .today-action,
+  .today-card,
+  .daily-card,
+  .task-card,
+  .challenge-card,
+  .ayah-day-card,
+  .quiz-card,
+  .answer-box,
+  .result-box,
+  .intro,
+  .transactions,
+  .verification,
+  .donation-dropdown,
+  .dropdown-block,
+  .dropdown-content,
+  .name-chip,
+  .help-card,
+  .support-card,
+  .qibla-panel,
+  .qibla-card,
+  .qibla-box,
+  .hero,
+  .hero-panel,
+  .hero-stat,
+  .dua-card,
+  .master-audio-wrap,
+  .ayah-card,
+  .sec-box,
+  .wallet-box,
+  .player-card,
+  .feature-card,
+  .quick-card,
+  .premium-resource-card,
+  .pro-card,
+  .about-project-card,
+  .app-menu-card,
+  .section-card,
+  .content-card,
+  .content-box,
+  .list-card,
+  .grid-card,
+  .lesson-card,
+  .course-card,
+  .module-card,
+  .bottom-app-nav,
+  .bottom-app-nav *,
+  .topbar,
+  .topbar *,
+  button,
+  .btn,
+  input,
+  textarea,
+  select
+){
+  background:var(--bw-premium-page-bg) !important;
+  background-attachment:fixed !important;
+  box-shadow:none !important;
+}
+
+/* Section/layout backgrounds must not create a grey overlay between the theme and cards. */
+html[class*="premium-theme-"] body:not(.page-themes-pro) :is(
+  section,
+  .section,
+  .sections,
+  .page-section,
+  .content-section,
+  .home-section,
+  .quran-section,
+  .prayer-section
+):not(
+  .card,
+  .box,
+  .panel,
+  .block,
+  .section-card,
+  .content-card,
+  .surah-card,
+  .prayer-card,
+  .ayah-card,
+  .dua-card
+){
   background:transparent !important;
+  box-shadow:none !important;
 }
 
-/* Fallback soft tint under transparent layers */
-html.premium-theme-rose-soft{
-  --bw-theme-secondary-bg:rgba(243,170,198,.92);
-}
+/* ===== END PREMIUM THEME SECOND BACKGROUND LAYER — EXACT THEME COLOR V55 ===== */
 
-html.premium-theme-emerald-quran{
-  --bw-theme-secondary-bg:rgba(0,64,45,.92);
-}
-
-html.premium-theme-violet-noor{
-  --bw-theme-secondary-bg:rgba(42,13,58,.92);
-}
-
-html.premium-theme-royal-gold{
-  --bw-theme-secondary-bg:rgba(189,138,11,.90);
-}
-
-html.premium-theme-carbon-elite{
-  --bw-theme-secondary-bg:rgba(17,24,32,.94);
-}
-
-html.premium-theme-children-soft{
-  --bw-theme-secondary-bg:rgba(200,238,255,.92);
-}
-
-html.premium-theme-night-mosque{
-  --bw-theme-secondary-bg:rgba(13,20,64,.94);
-}
-
-html.premium-theme-desert-sand{
-  --bw-theme-secondary-bg:rgba(211,165,103,.92);
-}
-
-html[class*="premium-theme-"] body:not(.page-themes-pro)::before{
-  content:"";
-  position:fixed;
-  inset:0;
-  background:var(--bw-theme-secondary-bg, transparent);
-  opacity:.18;
-  pointer-events:none;
-  z-index:-1;
-}
