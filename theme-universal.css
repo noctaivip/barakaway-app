@@ -2202,3 +2202,119 @@ html[class*="premium-theme-"] body:not(.page-themes-pro) *{
 
 /* ===== END PREMIUM PERFORMANCE + FAST CONTRAST V62 ===== */
 
+/* ===== PREMIUM AUTO CONTRAST CLASS RULES V63 ===== */
+/* Applied by theme-init.js after reading the real rendered background. */
+
+html[class*="premium-theme-"]{
+  --bw-contrast-dark:#121816;
+  --bw-contrast-dark-soft:rgba(18,24,22,.82);
+  --bw-contrast-light:#ffffff;
+  --bw-contrast-light-soft:rgba(255,255,255,.86);
+}
+
+html[class*="premium-theme-"] body:not(.page-themes-pro) .bw-auto-on-dark,
+html[class*="premium-theme-"] body:not(.page-themes-pro) .bw-auto-on-dark :is(
+  h1,h2,h3,h4,h5,h6,p,span,small,label,li,strong,b,em,
+  .title,.subtitle,.note,.muted,.section-title,.section-note,
+  .home-section-title,.home-section-note,.today-hub-title,
+  .theme-toggle-label,.card-title,.card-text,.item-title,.item-text,
+  .surah-name,.surah-meta,.dua-title,.dua-ref,.ayah-meaning,.ayah-translit,
+  svg,path,.icon,.lucide,.fa,.fas,.far,.fab,.material-icons
+){
+  color:var(--bw-contrast-light) !important;
+  fill:currentColor !important;
+  stroke:currentColor !important;
+  text-shadow:none !important;
+}
+
+html[class*="premium-theme-"] body:not(.page-themes-pro) .bw-auto-on-light,
+html[class*="premium-theme-"] body:not(.page-themes-pro) .bw-auto-on-light :is(
+  h1,h2,h3,h4,h5,h6,p,span,small,label,li,strong,b,em,
+  .title,.subtitle,.note,.muted,.section-title,.section-note,
+  .home-section-title,.home-section-note,.today-hub-title,
+  .theme-toggle-label,.card-title,.card-text,.item-title,.item-text,
+  .surah-name,.surah-meta,.dua-title,.dua-ref,.ayah-meaning,.ayah-translit,
+  svg,path,.icon,.lucide,.fa,.fas,.far,.fab,.material-icons
+){
+  color:var(--bw-contrast-dark) !important;
+  fill:currentColor !important;
+  stroke:currentColor !important;
+  text-shadow:none !important;
+}
+
+/* Direct text on light PRO theme page background */
+html.bw-premium-page-light body:not(.page-themes-pro) :is(
+  h1,h2,h3,h4,h5,h6,p,span,small,label,li,.title,.subtitle,.section-title,.home-section-title,.section-note,.home-section-note
+):not(
+  .bw-auto-on-dark *,.bw-auto-on-light *,
+  .card *,.box *,.panel *,.block *,.surah-card *,.dua-card *,.ayah-card *,.prayer-card *,
+  .today-hub *,.today-action *,.today-card *,.premium-resource-card *,
+  .bottom-app-nav *,button *,.btn *,input *,textarea *,select *
+){
+  color:var(--bw-contrast-dark) !important;
+}
+
+/* Direct text on dark PRO theme page background */
+html.bw-premium-page-dark body:not(.page-themes-pro) :is(
+  h1,h2,h3,h4,h5,h6,p,span,small,label,li,.title,.subtitle,.section-title,.home-section-title,.section-note,.home-section-note
+):not(
+  .bw-auto-on-dark *,.bw-auto-on-light *,
+  .card *,.box *,.panel *,.block *,.surah-card *,.dua-card *,.ayah-card *,.prayer-card *,
+  .today-hub *,.today-action *,.today-card *,.premium-resource-card *,
+  .bottom-app-nav *,button *,.btn *,input *,textarea *,select *
+){
+  color:var(--bw-contrast-light) !important;
+}
+
+/* Explicit fixes from screenshots */
+html[class*="premium-theme-"] body:not(.page-themes-pro) .today-hub :is(
+  h1,h2,h3,h4,h5,h6,p,span,small,label,li,.today-hub-title,.home-section-title,.section-title
+){
+  color:var(--bw-contrast-light) !important;
+}
+
+html[class*="premium-theme-"] body:not(.page-themes-pro) :is(
+  .desktop-theme-toggle,.desktop-theme-toggle *,
+  .desktop-theme-toggle-inner,.desktop-theme-toggle-inner *,
+  .support-project-btn,.support-project-btn *,
+  .install-btn,.install-btn *,
+  .pro-state,.pro-state *,
+  .top-pill,.top-pill *,
+  .bottom-app-nav,.bottom-app-nav *
+){
+  color:var(--bw-contrast-light) !important;
+  fill:currentColor !important;
+  stroke:currentColor !important;
+}
+
+html:is(.premium-theme-rose-soft,.premium-theme-children-soft,.premium-theme-desert-sand,.premium-theme-royal-gold)
+body:not(.page-themes-pro) :is(
+  .toolbar-btn,.filter-btn,.tab:not(.active),.tab-btn:not(.active),
+  .quran-toolbar button,.surah-actions button,.action-chip,.theme-action,.glass-btn,.glass-control,.light-control
+),
+html:is(.premium-theme-rose-soft,.premium-theme-children-soft,.premium-theme-desert-sand,.premium-theme-royal-gold)
+body:not(.page-themes-pro) :is(
+  .toolbar-btn,.filter-btn,.tab:not(.active),.tab-btn:not(.active),
+  .quran-toolbar button,.surah-actions button,.action-chip,.theme-action,.glass-btn,.glass-control,.light-control
+) :is(span,small,label,svg,path,.icon,.lucide,.fa,.fas,.far,.fab,.material-icons){
+  color:var(--bw-contrast-dark) !important;
+  fill:currentColor !important;
+  stroke:currentColor !important;
+}
+
+html[class*="premium-theme-"] body:not(.page-themes-pro) input::placeholder,
+html[class*="premium-theme-"] body:not(.page-themes-pro) textarea::placeholder{
+  color:rgba(255,255,255,.68) !important;
+}
+
+/* Performance guard */
+html[class*="premium-theme-"] body:not(.page-themes-pro){
+  background-attachment:scroll !important;
+}
+
+html[class*="premium-theme-"] body:not(.page-themes-pro) > :is(.container,.page,.content,main,.page-wrapper,.screen,.layout,.app-shell,.app,.site,.viewport,#app,#root){
+  background-attachment:scroll !important;
+}
+
+/* ===== END PREMIUM AUTO CONTRAST CLASS RULES V63 ===== */
+
