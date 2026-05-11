@@ -609,6 +609,7 @@ h1{
 @media(max-width:420px){
   h1{font-size:35px;}
 }
+
 </style>
 
 <script src="/theme-init.js"></script>
@@ -1113,11 +1114,12 @@ body.page-themes-pro .theme-card.active-theme::after{
 }
 
 html.premium-theme-royal-gold body.page-themes-pro .hero,
+html.theme-royal-gold body.page-themes-pro .hero,
 body.page-themes-pro.premium-theme-royal-gold .hero,
 body.page-themes-pro.theme-royal-gold .hero,
-body.page-themes-pro[data-theme="royal-gold"] .hero,
-body.page-themes-pro[data-current-theme="royal-gold"] .hero,
-body.page-themes-pro[data-active-theme="royal-gold"] .hero{
+body.page-themes-pro.bw-theme-royal-gold .hero,
+html[data-premium-theme="royal-gold"] body.page-themes-pro .hero,
+body.page-themes-pro[data-premium-theme="royal-gold"] .hero{
   background:
     radial-gradient(circle at 82% 14%,rgba(255,238,146,.34) 0%,transparent 22%),
     radial-gradient(circle at 18% 82%,rgba(145,96,8,.18) 0%,transparent 30%),
@@ -1142,6 +1144,10 @@ html.premium-theme-royal-gold body.page-themes-pro .hero h1,
 html.premium-theme-royal-gold body.page-themes-pro .hero h2,
 html.premium-theme-royal-gold body.page-themes-pro .hero .hero-text,
 html.premium-theme-royal-gold body.page-themes-pro .hero .badge,
+html.theme-royal-gold body.page-themes-pro .hero h1,
+html.theme-royal-gold body.page-themes-pro .hero h2,
+html.theme-royal-gold body.page-themes-pro .hero .hero-text,
+html.theme-royal-gold body.page-themes-pro .hero .badge,
 body.page-themes-pro.premium-theme-royal-gold .hero h1,
 body.page-themes-pro.premium-theme-royal-gold .hero h2,
 body.page-themes-pro.premium-theme-royal-gold .hero .hero-text,
@@ -1150,18 +1156,18 @@ body.page-themes-pro.theme-royal-gold .hero h1,
 body.page-themes-pro.theme-royal-gold .hero h2,
 body.page-themes-pro.theme-royal-gold .hero .hero-text,
 body.page-themes-pro.theme-royal-gold .hero .badge,
-body.page-themes-pro[data-theme="royal-gold"] .hero h1,
-body.page-themes-pro[data-theme="royal-gold"] .hero h2,
-body.page-themes-pro[data-theme="royal-gold"] .hero .hero-text,
-body.page-themes-pro[data-theme="royal-gold"] .hero .badge,
-body.page-themes-pro[data-current-theme="royal-gold"] .hero h1,
-body.page-themes-pro[data-current-theme="royal-gold"] .hero h2,
-body.page-themes-pro[data-current-theme="royal-gold"] .hero .hero-text,
-body.page-themes-pro[data-current-theme="royal-gold"] .hero .badge,
-body.page-themes-pro[data-active-theme="royal-gold"] .hero h1,
-body.page-themes-pro[data-active-theme="royal-gold"] .hero h2,
-body.page-themes-pro[data-active-theme="royal-gold"] .hero .hero-text,
-body.page-themes-pro[data-active-theme="royal-gold"] .hero .badge{
+body.page-themes-pro.bw-theme-royal-gold .hero h1,
+body.page-themes-pro.bw-theme-royal-gold .hero h2,
+body.page-themes-pro.bw-theme-royal-gold .hero .hero-text,
+body.page-themes-pro.bw-theme-royal-gold .hero .badge,
+html[data-premium-theme="royal-gold"] body.page-themes-pro .hero h1,
+html[data-premium-theme="royal-gold"] body.page-themes-pro .hero h2,
+html[data-premium-theme="royal-gold"] body.page-themes-pro .hero .hero-text,
+html[data-premium-theme="royal-gold"] body.page-themes-pro .hero .badge,
+body.page-themes-pro[data-premium-theme="royal-gold"] .hero h1,
+body.page-themes-pro[data-premium-theme="royal-gold"] .hero h2,
+body.page-themes-pro[data-premium-theme="royal-gold"] .hero .hero-text,
+body.page-themes-pro[data-premium-theme="royal-gold"] .hero .badge{
   color:#1b1204 !important;
   text-shadow:0 1px 0 rgba(255,246,202,.42),0 10px 24px rgba(92,58,0,.14) !important;
 }
@@ -1299,19 +1305,27 @@ html.original-theme-preview body.page-themes-pro .hero .badge{
 
 html.premium-theme-royal-gold body.page-themes-pro .hero{
   background:
-    radial-gradient(circle at 82% 14%,rgba(255,248,214,.26) 0%,transparent 20%),
-    radial-gradient(circle at 18% 82%,rgba(255,214,120,.16) 0%,transparent 28%),
-    linear-gradient(138deg,transparent 0%,rgba(255,255,255,.10) 12%,transparent 20%,transparent 46%,rgba(255,255,255,.05) 56%,transparent 66%,rgba(0,0,0,.10) 100%),
-    linear-gradient(145deg,#140c02 0%,#2b1a05 12%,#4a2e0a 28%,#7a4b12 46%,#b67b28 68%,#e1b85a 84%,#fff0bf 100%) !important;
-  border-color:rgba(255,228,168,.46) !important;
-  box-shadow:0 32px 82px rgba(48,24,0,.54),inset 0 1px 0 rgba(255,250,228,.18),inset 0 -24px 36px rgba(0,0,0,.24),inset 0 0 44px rgba(255,214,120,.08),0 0 34px rgba(255,214,120,.20) !important;
-  filter:saturate(1.10) contrast(1.10) brightness(1.04) !important;
+    radial-gradient(circle at 82% 14%,rgba(255,238,146,.34) 0%,transparent 22%),
+    radial-gradient(circle at 18% 82%,rgba(145,96,8,.18) 0%,transparent 30%),
+    linear-gradient(145deg,
+      #a57207 0%,
+      #bd8a0b 28%,
+      #d6a516 52%,
+      #edc333 78%,
+      #b88408 100%) !important;
+  border-color:rgba(255,232,146,.62) !important;
+  box-shadow:
+    0 28px 72px rgba(112,74,8,.36),
+    inset 0 1px 0 rgba(255,246,202,.26),
+    inset 0 -18px 30px rgba(92,58,0,.16),
+    0 0 30px rgba(238,195,51,.18) !important;
+  filter:saturate(1.14) contrast(1.04) brightness(1.03) !important;
 }
 
 html.premium-theme-royal-gold body.page-themes-pro .hero h2,
 html.premium-theme-royal-gold body.page-themes-pro .hero .badge{
-  color:#fff6dc !important;
-  text-shadow:0 12px 26px rgba(0,0,0,.52),0 0 12px rgba(255,228,168,.12) !important;
+  color:#1b1204 !important;
+  text-shadow:0 1px 0 rgba(255,246,202,.42),0 10px 24px rgba(92,58,0,.14) !important;
 }
 
 html.premium-theme-emerald-quran body.page-themes-pro .hero{
@@ -1500,6 +1514,43 @@ html.premium-theme-children-soft body.page-themes-pro .hero h2,
 html.premium-theme-children-soft body.page-themes-pro .hero .badge{
   color:#17354a !important;
   text-shadow:0 1px 0 rgba(255,255,255,.58),0 8px 18px rgba(58,105,135,.12) !important;
+}
+
+
+/* fixed PRO badge — must stay identical across all premium themes */
+html body.page-themes-pro .hero .badge,
+html body.page-themes-pro .hero .badge *,
+html[class*="premium-theme-"] body.page-themes-pro .hero .badge,
+html[class*="premium-theme-"] body.page-themes-pro .hero .badge *,
+html[class*="theme-"] body.page-themes-pro .hero .badge,
+html[class*="theme-"] body.page-themes-pro .hero .badge *,
+html[data-premium-theme] body.page-themes-pro .hero .badge,
+html[data-premium-theme] body.page-themes-pro .hero .badge *,
+body.page-themes-pro[class*="premium-theme-"] .hero .badge,
+body.page-themes-pro[class*="premium-theme-"] .hero .badge *,
+body.page-themes-pro[class*="theme-"] .hero .badge,
+body.page-themes-pro[class*="theme-"] .hero .badge *,
+body.page-themes-pro[data-premium-theme] .hero .badge,
+body.page-themes-pro[data-premium-theme] .hero .badge *{
+  color:#d7c07a !important;
+  -webkit-text-fill-color:#d7c07a !important;
+  text-shadow:none !important;
+  filter:none !important;
+  opacity:1 !important;
+}
+
+html body.page-themes-pro .hero .badge,
+html[class*="premium-theme-"] body.page-themes-pro .hero .badge,
+html[class*="theme-"] body.page-themes-pro .hero .badge,
+html[data-premium-theme] body.page-themes-pro .hero .badge,
+body.page-themes-pro[class*="premium-theme-"] .hero .badge,
+body.page-themes-pro[class*="theme-"] .hero .badge,
+body.page-themes-pro[data-premium-theme] .hero .badge{
+  background:#07141c !important;
+  border:1px solid rgba(215,192,122,.24) !important;
+  box-shadow:none !important;
+  backdrop-filter:none !important;
+  -webkit-backdrop-filter:none !important;
 }
 
 </style>
