@@ -1831,3 +1831,62 @@ html[class*="premium-theme-"] body:not(.page-themes-pro) :is(
 
 /* ===== END BARAKAWAY PREMIUM THEMES — ON-BACKGROUND TEXT CONTRAST V54 ===== */
 
+
+
+/* ===== PREMIUM THEME SECOND BACKGROUND LAYER FIX ===== */
+/* Makes the secondary page canvas blend with the active premium theme color */
+
+html[class*="premium-theme-"] body:not(.page-themes-pro),
+html[class*="premium-theme-"] body:not(.page-themes-pro) .container,
+html[class*="premium-theme-"] body:not(.page-themes-pro) .page,
+html[class*="premium-theme-"] body:not(.page-themes-pro) .content,
+html[class*="premium-theme-"] body:not(.page-themes-pro) main,
+html[class*="premium-theme-"] body:not(.page-themes-pro) .page-wrapper,
+html[class*="premium-theme-"] body:not(.page-themes-pro) .screen,
+html[class*="premium-theme-"] body:not(.page-themes-pro) .layout,
+html[class*="premium-theme-"] body:not(.page-themes-pro) .app-shell{
+  background:transparent !important;
+}
+
+/* Fallback soft tint under transparent layers */
+html.premium-theme-rose-soft{
+  --bw-theme-secondary-bg:rgba(243,170,198,.92);
+}
+
+html.premium-theme-emerald-quran{
+  --bw-theme-secondary-bg:rgba(0,64,45,.92);
+}
+
+html.premium-theme-violet-noor{
+  --bw-theme-secondary-bg:rgba(42,13,58,.92);
+}
+
+html.premium-theme-royal-gold{
+  --bw-theme-secondary-bg:rgba(189,138,11,.90);
+}
+
+html.premium-theme-carbon-elite{
+  --bw-theme-secondary-bg:rgba(17,24,32,.94);
+}
+
+html.premium-theme-children-soft{
+  --bw-theme-secondary-bg:rgba(200,238,255,.92);
+}
+
+html.premium-theme-night-mosque{
+  --bw-theme-secondary-bg:rgba(13,20,64,.94);
+}
+
+html.premium-theme-desert-sand{
+  --bw-theme-secondary-bg:rgba(211,165,103,.92);
+}
+
+html[class*="premium-theme-"] body:not(.page-themes-pro)::before{
+  content:"";
+  position:fixed;
+  inset:0;
+  background:var(--bw-theme-secondary-bg, transparent);
+  opacity:.18;
+  pointer-events:none;
+  z-index:-1;
+}
