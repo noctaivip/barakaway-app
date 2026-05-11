@@ -1258,10 +1258,12 @@ html.light-mode .bottom-app-nav-item.active{background:linear-gradient(135deg,#2
   overflow:hidden !important;
 }
 
-/* ===== BARAKAWAY PREMIUM THEMES — BACKGROUND + 30% TRANSPARENT BLOCKS + 3D BORDERS FINAL ===== */
-/* Premium themes repaint the page background.
-   All visible UI blocks/controls get 30% transparent backgrounds via rgba alpha .70.
-   Text, icons and content remain fully opaque because opacity is not used. */
+/* ===== BARAKAWAY PREMIUM THEMES — PURE BACKGROUND + TRANSPARENT INNER BLOCKS FINAL ===== */
+/* Premium themes:
+   1) keep the page background exactly like the selected theme card;
+   2) keep full-page wrappers transparent;
+   3) apply 30% transparency only to inner visual blocks/controls;
+   4) keep text/icons fully opaque. */
 
 html[class*="premium-theme-"]{
   --bw-premium-page-bg:var(--bg);
@@ -1270,9 +1272,7 @@ html[class*="premium-theme-"]{
   --bw-premium-border-glow:rgba(215,192,122,.18);
   --bw-premium-border-inner:rgba(255,255,255,.14);
   --bw-premium-block-dark:rgba(22,32,42,.70);
-  --bw-premium-block-dark-2:rgba(19,33,41,.70);
   --bw-premium-block-light:rgba(255,255,255,.70);
-  --bw-premium-block-light-2:rgba(248,251,249,.70);
 }
 
 html.premium-theme-royal-gold{
@@ -1390,6 +1390,7 @@ html.premium-theme-desert-sand{
   --bw-premium-border-inner:rgba(255,247,228,.24);
 }
 
+/* Pure selected-theme background must stay visible. */
 html[class*="premium-theme-"] body:not(.page-themes-pro),
 html[class*="premium-theme-"] body:not(.page-themes-pro).dark-mode,
 html[class*="premium-theme-"] body:not(.page-themes-pro).light-mode{
@@ -1397,15 +1398,27 @@ html[class*="premium-theme-"] body:not(.page-themes-pro).light-mode{
   background-attachment:fixed !important;
 }
 
+/* Full-page wrappers are never treated as translucent blocks. */
+html[class*="premium-theme-"] body:not(.page-themes-pro),
 html[class*="premium-theme-"] body:not(.page-themes-pro) > .page,
 html[class*="premium-theme-"] body:not(.page-themes-pro) > .content,
-html[class*="premium-theme-"] body:not(.page-themes-pro) > main{
+html[class*="premium-theme-"] body:not(.page-themes-pro) > .container,
+html[class*="premium-theme-"] body:not(.page-themes-pro) > main,
+html[class*="premium-theme-"] body:not(.page-themes-pro) .page,
+html[class*="premium-theme-"] body:not(.page-themes-pro) main,
+html[class*="premium-theme-"] body:not(.page-themes-pro) section,
+html[class*="premium-theme-"] body:not(.page-themes-pro) .section,
+html[class*="premium-theme-"] body:not(.page-themes-pro) .section-head,
+html[class*="premium-theme-"] body:not(.page-themes-pro) .theme-grid,
+html[class*="premium-theme-"] body:not(.page-themes-pro) .hero-actions{
   background:transparent !important;
+  background-image:none !important;
+  box-shadow:none !important;
 }
 
-/* 30% transparency for all real UI blocks and controls. */
+/* Inner blocks only: 30% transparent background. */
 html[class*="premium-theme-"].dark-mode body:not(.page-themes-pro) :is(
-  .container,.content,.block,.card,.box,.panel,.quote,.empty,.article,.category-panel,
+  .block,.card,.box,.panel,.quote,.empty,.article,.category-panel,
   .surah-card,.prayer-card,.toggle-row,.meta-item,.note-box,.jumuah-box,.month-day,.month-head,
   .wallet-support,.home-widget,.intro,.transactions,.verification,.mobile-dropdown,.mobile-dropdown-title,
   .mobile-dropdown-content,.donation-dropdown,.donation-dropdown-content,.dropdown-block,.dropdown-content,
@@ -1417,7 +1430,7 @@ html[class*="premium-theme-"].dark-mode body:not(.page-themes-pro) :is(
   .bottom-nav,.top-pill,.pro-state,.toast,.wallet-warning,.warning,.error,
   .support-grid > *,.features-grid > *,.quick-grid > *,.cards-grid > *,.grid > *,.list > *,.items > *,
   [class*="card"],[class*="Card"],[class*="panel"],[class*="Panel"],[class*="box"],[class*="Box"],
-  [class*="tile"],[class*="Tile"],[class*="item"],[class*="Item"],[class*="option"],[class*="Option"]
+  [class*="tile"],[class*="Tile"],[class*="option"],[class*="Option"]
 ),
 html[class*="premium-theme-"].dark-mode body:not(.page-themes-pro) :is(
   button,.btn,.quick-btn,.install-btn,.share-btn,.copy-wallet-btn,.share-wallet-btn,.reset-btn,.qibla-reset,
@@ -1431,7 +1444,7 @@ html[class*="premium-theme-"].dark-mode body:not(.page-themes-pro) :is(
 }
 
 html[class*="premium-theme-"].light-mode body:not(.page-themes-pro) :is(
-  .container,.content,.block,.card,.box,.panel,.quote,.empty,.article,.category-panel,
+  .block,.card,.box,.panel,.quote,.empty,.article,.category-panel,
   .surah-card,.prayer-card,.toggle-row,.meta-item,.note-box,.jumuah-box,.month-day,.month-head,
   .wallet-support,.home-widget,.intro,.transactions,.verification,.mobile-dropdown,.mobile-dropdown-title,
   .mobile-dropdown-content,.donation-dropdown,.donation-dropdown-content,.dropdown-block,.dropdown-content,
@@ -1443,7 +1456,7 @@ html[class*="premium-theme-"].light-mode body:not(.page-themes-pro) :is(
   .bottom-nav,.top-pill,.pro-state,.toast,.wallet-warning,.warning,.error,
   .support-grid > *,.features-grid > *,.quick-grid > *,.cards-grid > *,.grid > *,.list > *,.items > *,
   [class*="card"],[class*="Card"],[class*="panel"],[class*="Panel"],[class*="box"],[class*="Box"],
-  [class*="tile"],[class*="Tile"],[class*="item"],[class*="Item"],[class*="option"],[class*="Option"]
+  [class*="tile"],[class*="Tile"],[class*="option"],[class*="Option"]
 ),
 html[class*="premium-theme-"].light-mode body:not(.page-themes-pro) :is(
   button,.btn,.quick-btn,.install-btn,.share-btn,.copy-wallet-btn,.share-wallet-btn,.reset-btn,.qibla-reset,
@@ -1456,16 +1469,9 @@ html[class*="premium-theme-"].light-mode body:not(.page-themes-pro) :is(
   -webkit-backdrop-filter:blur(12px) saturate(1.08);
 }
 
-/* Do not force transparent backgrounds on full-page structural wrappers. */
-html[class*="premium-theme-"] body:not(.page-themes-pro) :is(.page,main,section,.section,.theme-grid,.section-head,.hero-actions){
-  background:transparent !important;
-  background-image:none !important;
-  box-shadow:none !important;
-}
-
-/* Theme-colored premium 3D borders. */
+/* Theme-colored premium 3D borders for the same inner blocks/controls. */
 html[class*="premium-theme-"] body:not(.page-themes-pro) :is(
-  .container,.content,.block,.card,.box,.panel,.quote,.empty,.article,.category-panel,
+  .block,.card,.box,.panel,.quote,.empty,.article,.category-panel,
   .surah-card,.prayer-card,.toggle-row,.meta-item,.note-box,.jumuah-box,.month-day,.month-head,
   .wallet-support,.home-widget,.intro,.transactions,.verification,.mobile-dropdown,.mobile-dropdown-title,
   .mobile-dropdown-content,.donation-dropdown,.donation-dropdown-content,.dropdown-block,.dropdown-content,
@@ -1477,7 +1483,7 @@ html[class*="premium-theme-"] body:not(.page-themes-pro) :is(
   .bottom-nav,.top-pill,.pro-state,.toast,.wallet-warning,.warning,.error,
   .support-grid > *,.features-grid > *,.quick-grid > *,.cards-grid > *,.grid > *,.list > *,.items > *,
   [class*="card"],[class*="Card"],[class*="panel"],[class*="Panel"],[class*="box"],[class*="Box"],
-  [class*="tile"],[class*="Tile"],[class*="item"],[class*="Item"],[class*="option"],[class*="Option"]
+  [class*="tile"],[class*="Tile"],[class*="option"],[class*="Option"]
 ),
 html[class*="premium-theme-"] body:not(.page-themes-pro) :is(
   button,.btn,.quick-btn,.install-btn,.share-btn,.copy-wallet-btn,.share-wallet-btn,.reset-btn,.qibla-reset,
@@ -1492,8 +1498,9 @@ html[class*="premium-theme-"] body:not(.page-themes-pro) :is(
     inset 0 1px 0 var(--bw-premium-border-inner) !important;
 }
 
-html[class*="premium-theme-"] body:not(.page-themes-pro) :where(section,article,div,details,summary,li,a):not(
-  body,.page,.content,main,.bottom-nav,.topbar,.theme-grid,.section,.section-head,.hero-actions,.modal-overlay
+/* Existing bordered custom nested blocks get only border color, not forced background if they are wrappers. */
+html[class*="premium-theme-"] body:not(.page-themes-pro) :where(article,div,details,summary,li,a):not(
+  body,.page,.content,.container,main,section,.section,.section-head,.theme-grid,.topbar,.hero-actions,.modal-overlay
 ){
   border-color:var(--bw-premium-border) !important;
 }
@@ -1501,8 +1508,7 @@ html[class*="premium-theme-"] body:not(.page-themes-pro) :where(section,article,
 html[class*="premium-theme-"] body:not(.page-themes-pro) :is(
   .card,.box,.panel,.surah-card,.prayer-card,.month-day,.name-chip,.help-card,.support-card,
   .dua-card,.ayah-card,[class*="card"],[class*="Card"],[class*="panel"],[class*="Panel"],
-  [class*="box"],[class*="Box"],[class*="tile"],[class*="Tile"],[class*="item"],[class*="Item"],
-  button,.btn,[role="button"]
+  [class*="box"],[class*="Box"],[class*="tile"],[class*="Tile"],button,.btn,[role="button"]
 ):hover{
   border-color:var(--bw-premium-border) !important;
   box-shadow:
@@ -1512,5 +1518,5 @@ html[class*="premium-theme-"] body:not(.page-themes-pro) :is(
     inset 0 1px 0 var(--bw-premium-border-inner) !important;
 }
 
-/* ===== END BARAKAWAY PREMIUM THEMES — BACKGROUND + 30% TRANSPARENT BLOCKS + 3D BORDERS FINAL ===== */
+/* ===== END BARAKAWAY PREMIUM THEMES — PURE BACKGROUND + TRANSPARENT INNER BLOCKS FINAL ===== */
 
