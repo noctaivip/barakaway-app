@@ -1258,9 +1258,9 @@ html.light-mode .bottom-app-nav-item.active{background:linear-gradient(135deg,#2
   overflow:hidden !important;
 }
 
-/* ===== BARAKAWAY PREMIUM THEMES — BACKGROUND + 3D BORDERS FINAL ===== */
-/* Premium themes repaint the page background and add theme-colored 3D borders.
-   Inner block backgrounds, text colors and button fills keep the original free-theme styling. */
+/* ===== BARAKAWAY PREMIUM THEMES — GLOBAL BACKGROUND + ALL INNER 3D BORDERS FINAL ===== */
+/* Premium themes repaint the page background and add theme-colored 3D borders
+   to every visible inner UI block/control. Backgrounds, text colors and fills stay original. */
 
 html[class*="premium-theme-"]{
   --bw-premium-page-bg:var(--bg);
@@ -1398,54 +1398,22 @@ html[class*="premium-theme-"] body:not(.page-themes-pro) > main{
   background:transparent !important;
 }
 
-/* Theme-colored premium 3D borders only. Backgrounds/fills are not changed here. */
-html[class*="premium-theme-"] body:not(.page-themes-pro) .container,
-html[class*="premium-theme-"] body:not(.page-themes-pro) .content,
-html[class*="premium-theme-"] body:not(.page-themes-pro) .block,
-html[class*="premium-theme-"] body:not(.page-themes-pro) .card,
-html[class*="premium-theme-"] body:not(.page-themes-pro) .box,
-html[class*="premium-theme-"] body:not(.page-themes-pro) .panel,
-html[class*="premium-theme-"] body:not(.page-themes-pro) .quote,
-html[class*="premium-theme-"] body:not(.page-themes-pro) .empty,
-html[class*="premium-theme-"] body:not(.page-themes-pro) .article,
-html[class*="premium-theme-"] body:not(.page-themes-pro) .category-panel,
-html[class*="premium-theme-"] body:not(.page-themes-pro) .surah-card,
-html[class*="premium-theme-"] body:not(.page-themes-pro) .prayer-card,
-html[class*="premium-theme-"] body:not(.page-themes-pro) .toggle-row,
-html[class*="premium-theme-"] body:not(.page-themes-pro) .meta-item,
-html[class*="premium-theme-"] body:not(.page-themes-pro) .note-box,
-html[class*="premium-theme-"] body:not(.page-themes-pro) .jumuah-box,
-html[class*="premium-theme-"] body:not(.page-themes-pro) .month-day,
-html[class*="premium-theme-"] body:not(.page-themes-pro) .month-head,
-html[class*="premium-theme-"] body:not(.page-themes-pro) .wallet-support,
-html[class*="premium-theme-"] body:not(.page-themes-pro) .home-widget,
-html[class*="premium-theme-"] body:not(.page-themes-pro) .intro,
-html[class*="premium-theme-"] body:not(.page-themes-pro) .transactions,
-html[class*="premium-theme-"] body:not(.page-themes-pro) .verification,
-html[class*="premium-theme-"] body:not(.page-themes-pro) .mobile-dropdown,
-html[class*="premium-theme-"] body:not(.page-themes-pro) .mobile-dropdown-title,
-html[class*="premium-theme-"] body:not(.page-themes-pro) .mobile-dropdown-content,
-html[class*="premium-theme-"] body:not(.page-themes-pro) .donation-dropdown,
-html[class*="premium-theme-"] body:not(.page-themes-pro) .donation-dropdown-content,
-html[class*="premium-theme-"] body:not(.page-themes-pro) .dropdown-block,
-html[class*="premium-theme-"] body:not(.page-themes-pro) .dropdown-content,
-html[class*="premium-theme-"] body:not(.page-themes-pro) .name-chip,
-html[class*="premium-theme-"] body:not(.page-themes-pro) .help-category,
-html[class*="premium-theme-"] body:not(.page-themes-pro) .help-card,
-html[class*="premium-theme-"] body:not(.page-themes-pro) .aid-card,
-html[class*="premium-theme-"] body:not(.page-themes-pro) .support-card,
-html[class*="premium-theme-"] body:not(.page-themes-pro) .qibla-panel,
-html[class*="premium-theme-"] body:not(.page-themes-pro) .qibla-card,
-html[class*="premium-theme-"] body:not(.page-themes-pro) .qibla-box,
-html[class*="premium-theme-"] body:not(.page-themes-pro) .hero-panel,
-html[class*="premium-theme-"] body:not(.page-themes-pro) .hero-stat,
-html[class*="premium-theme-"] body:not(.page-themes-pro) .dua-card,
-html[class*="premium-theme-"] body:not(.page-themes-pro) .master-audio-wrap,
-html[class*="premium-theme-"] body:not(.page-themes-pro) .ayah-card,
-html[class*="premium-theme-"] body:not(.page-themes-pro) .loading,
-html[class*="premium-theme-"] body:not(.page-themes-pro) .sec-box,
-html[class*="premium-theme-"] body:not(.page-themes-pro) .wallet-box,
-html[class*="premium-theme-"] body:not(.page-themes-pro) .player-card{
+/* Broad premium border coverage for nested cards, panels, grid items and page-specific blocks.
+   The selector intentionally targets elements that already look like UI blocks/controls. */
+html[class*="premium-theme-"] body:not(.page-themes-pro) :is(
+  .container,.content,.block,.card,.box,.panel,.quote,.empty,.article,.category-panel,
+  .surah-card,.prayer-card,.toggle-row,.meta-item,.note-box,.jumuah-box,.month-day,.month-head,
+  .wallet-support,.home-widget,.intro,.transactions,.verification,.mobile-dropdown,.mobile-dropdown-title,
+  .mobile-dropdown-content,.donation-dropdown,.donation-dropdown-content,.dropdown-block,.dropdown-content,
+  .name-chip,.help-category,.help-card,.aid-card,.support-card,.qibla-panel,.qibla-card,.qibla-box,
+  .hero-panel,.hero-stat,.dua-card,.master-audio-wrap,.ayah-card,.loading,.sec-box,.wallet-box,
+  .player-card,.feature-card,.quick-card,.quick-link,.quick-item,.daily-card,.today-card,.task-card,
+  .challenge-card,.ayah-day-card,.ayah-box,.quiz-card,.quiz-option,.answer-box,.result-box,.pro-card,
+  .pro-feature,.pro-item,.benefit-card,.support-option,.support-item,.support-feature,.support-grid > *,
+  .features-grid > *, .quick-grid > *, .cards-grid > *, .grid > *, .list > *, .items > *,
+  [class*="card"],[class*="Card"],[class*="panel"],[class*="Panel"],[class*="box"],[class*="Box"],
+  [class*="tile"],[class*="Tile"],[class*="item"],[class*="Item"],[class*="option"],[class*="Option"]
+){
   border-color:var(--bw-premium-border) !important;
   box-shadow:
     0 0 0 1px var(--bw-premium-border-soft),
@@ -1454,28 +1422,11 @@ html[class*="premium-theme-"] body:not(.page-themes-pro) .player-card{
     inset 0 1px 0 var(--bw-premium-border-inner) !important;
 }
 
-html[class*="premium-theme-"] body:not(.page-themes-pro) button,
-html[class*="premium-theme-"] body:not(.page-themes-pro) .btn,
-html[class*="premium-theme-"] body:not(.page-themes-pro) .quick-btn,
-html[class*="premium-theme-"] body:not(.page-themes-pro) .install-btn,
-html[class*="premium-theme-"] body:not(.page-themes-pro) .share-btn,
-html[class*="premium-theme-"] body:not(.page-themes-pro) .copy-wallet-btn,
-html[class*="premium-theme-"] body:not(.page-themes-pro) .share-wallet-btn,
-html[class*="premium-theme-"] body:not(.page-themes-pro) .reset-btn,
-html[class*="premium-theme-"] body:not(.page-themes-pro) .qibla-reset,
-html[class*="premium-theme-"] body:not(.page-themes-pro) #resetHeadingBtn,
-html[class*="premium-theme-"] body:not(.page-themes-pro) .wallet-badge,
-html[class*="premium-theme-"] body:not(.page-themes-pro) .badge,
-html[class*="premium-theme-"] body:not(.page-themes-pro) .chip,
-html[class*="premium-theme-"] body:not(.page-themes-pro) input,
-html[class*="premium-theme-"] body:not(.page-themes-pro) textarea,
-html[class*="premium-theme-"] body:not(.page-themes-pro) select,
-html[class*="premium-theme-"] body:not(.page-themes-pro) .input,
-html[class*="premium-theme-"] body:not(.page-themes-pro) .select,
-html[class*="premium-theme-"] body:not(.page-themes-pro) .number,
-html[class*="premium-theme-"] body:not(.page-themes-pro) .search-input,
-html[class*="premium-theme-"] body:not(.page-themes-pro) .search-box input,
-html[class*="premium-theme-"] body:not(.page-themes-pro) .wallet-address{
+html[class*="premium-theme-"] body:not(.page-themes-pro) :is(
+  button,.btn,.quick-btn,.install-btn,.share-btn,.copy-wallet-btn,.share-wallet-btn,.reset-btn,.qibla-reset,
+  #resetHeadingBtn,.wallet-badge,.badge,.chip,input,textarea,select,.input,.select,.number,.search-input,
+  .search-box input,.wallet-address,a[class*="btn"],a[class*="button"],[role="button"]
+){
   border-color:var(--bw-premium-border) !important;
   box-shadow:
     0 0 0 1px var(--bw-premium-border-soft),
@@ -1484,20 +1435,30 @@ html[class*="premium-theme-"] body:not(.page-themes-pro) .wallet-address{
     inset 0 1px 0 var(--bw-premium-border-inner) !important;
 }
 
-/* Active/hover states keep the same fill, only the premium border gets a stronger lift. */
-html[class*="premium-theme-"] body:not(.page-themes-pro) .card:hover,
-html[class*="premium-theme-"] body:not(.page-themes-pro) .box:hover,
-html[class*="premium-theme-"] body:not(.page-themes-pro) .panel:hover,
-html[class*="premium-theme-"] body:not(.page-themes-pro) .surah-card:hover,
-html[class*="premium-theme-"] body:not(.page-themes-pro) .prayer-card:hover,
-html[class*="premium-theme-"] body:not(.page-themes-pro) .month-day:hover,
-html[class*="premium-theme-"] body:not(.page-themes-pro) .name-chip:hover,
-html[class*="premium-theme-"] body:not(.page-themes-pro) .help-card:hover,
-html[class*="premium-theme-"] body:not(.page-themes-pro) .support-card:hover,
-html[class*="premium-theme-"] body:not(.page-themes-pro) .dua-card:hover,
-html[class*="premium-theme-"] body:not(.page-themes-pro) .ayah-card:hover,
-html[class*="premium-theme-"] body:not(.page-themes-pro) button:hover,
-html[class*="premium-theme-"] body:not(.page-themes-pro) .btn:hover{
+/* Catch-all for custom nested visual blocks that have a real border but no known class name.
+   Excludes structural full-page wrappers and text-only inline elements. */
+html[class*="premium-theme-"] body:not(.page-themes-pro) :where(section,article,div,details,summary,li,a):not(
+  body,
+  .page,
+  .content,
+  main,
+  .bottom-nav,
+  .topbar,
+  .theme-grid,
+  .section,
+  .section-head,
+  .hero-actions,
+  .modal-overlay
+){
+  border-color:var(--bw-premium-border) !important;
+}
+
+html[class*="premium-theme-"] body:not(.page-themes-pro) :is(
+  .card,.box,.panel,.surah-card,.prayer-card,.month-day,.name-chip,.help-card,.support-card,
+  .dua-card,.ayah-card,[class*="card"],[class*="Card"],[class*="panel"],[class*="Panel"],
+  [class*="box"],[class*="Box"],[class*="tile"],[class*="Tile"],[class*="item"],[class*="Item"],
+  button,.btn,[role="button"]
+):hover{
   border-color:var(--bw-premium-border) !important;
   box-shadow:
     0 0 0 1px var(--bw-premium-border),
@@ -1506,5 +1467,5 @@ html[class*="premium-theme-"] body:not(.page-themes-pro) .btn:hover{
     inset 0 1px 0 var(--bw-premium-border-inner) !important;
 }
 
-/* ===== END BARAKAWAY PREMIUM THEMES — BACKGROUND + 3D BORDERS FINAL ===== */
+/* ===== END BARAKAWAY PREMIUM THEMES — GLOBAL BACKGROUND + ALL INNER 3D BORDERS FINAL ===== */
 
