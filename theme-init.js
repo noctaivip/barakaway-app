@@ -89,6 +89,8 @@
     applyPremiumTheme(safeGet(PREMIUM_THEME_KEY) || "");
   }
 
+
+
   window.BarakaWayTheme = {
     siteKey: SITE_THEME_KEY,
     premiumKey: PREMIUM_THEME_KEY,
@@ -98,19 +100,19 @@
       safeSet(SITE_THEME_KEY, selected);
       applySiteTheme(selected);
       window.dispatchEvent(new CustomEvent("barakaway:site-theme-change", { detail: { theme: selected } }));
-    },
+      },
     applyPremiumTheme: function(theme){
       const selected = normalizePremiumTheme(theme);
       if(selected) safeSet(PREMIUM_THEME_KEY, selected);
       else safeRemove(PREMIUM_THEME_KEY);
       applyPremiumTheme(selected);
       window.dispatchEvent(new CustomEvent("barakaway:premium-theme-change", { detail: { theme: selected } }));
-    },
+      },
     clearPremiumTheme: function(){
       safeRemove(PREMIUM_THEME_KEY);
       applyPremiumTheme("");
       window.dispatchEvent(new CustomEvent("barakaway:premium-theme-change", { detail: { theme: "" } }));
-    },
+      },
     refresh: refresh,
     currentPremiumTheme: function(){
       return normalizePremiumTheme(safeGet(PREMIUM_THEME_KEY) || "");
@@ -122,6 +124,7 @@
   }else{
     refresh();
   }
+
 
   window.addEventListener("storage", function(event){
     if(!event.key || event.key === SITE_THEME_KEY || event.key === PREMIUM_THEME_KEY) refresh();
