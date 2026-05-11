@@ -2795,3 +2795,133 @@ html[class*="premium-theme-"] body:not(.page-themes-pro) :is(
 
 /* ===== END PREMIUM THEME UNIVERSAL AUTO CONTRAST V57 ===== */
 
+/* ===== PREMIUM THEME REAL AUTO CONTRAST V58 ===== */
+/* Classes are applied by theme-init.js after reading the real computed background.
+   Dark background -> light text/icons. Light background -> dark text/icons. */
+html[class*="premium-theme-"]{
+  --bw-contrast-light-text:#f7faf8;
+  --bw-contrast-light-text-soft:rgba(247,250,248,.86);
+  --bw-contrast-dark-text:#172019;
+  --bw-contrast-dark-text-soft:rgba(23,32,25,.82);
+}
+
+html[class*="premium-theme-"] body:not(.page-themes-pro) .bw-auto-on-dark,
+html[class*="premium-theme-"] body:not(.page-themes-pro) .bw-auto-on-dark :is(
+  h1,h2,h3,h4,h5,h6,p,span,small,label,li,strong,em,b,i,
+  .title,.subtitle,.section-title,.section-subtitle,.page-title,.page-subtitle,
+  .card-title,.card-text,.item-title,.item-text,.note,.muted,.small,.description,
+  .meta,.meta-label,.meta-value,.surah-name,.surah-meta,.surah-ayahs,.dua-title,
+  .dua-source,.dua-ref,.dua-translit,.dua-meaning,.ayah-arabic,.ayah-translit,
+  .ayah-meaning,.theme-toggle-label,.text,.label,.caption
+){
+  color:var(--bw-contrast-light-text) !important;
+  text-shadow:none !important;
+}
+
+html[class*="premium-theme-"] body:not(.page-themes-pro) .bw-auto-on-light,
+html[class*="premium-theme-"] body:not(.page-themes-pro) .bw-auto-on-light :is(
+  h1,h2,h3,h4,h5,h6,p,span,small,label,li,strong,em,b,i,
+  .title,.subtitle,.section-title,.section-subtitle,.page-title,.page-subtitle,
+  .card-title,.card-text,.item-title,.item-text,.note,.muted,.small,.description,
+  .meta,.meta-label,.meta-value,.surah-name,.surah-meta,.surah-ayahs,.dua-title,
+  .dua-source,.dua-ref,.dua-translit,.dua-meaning,.ayah-arabic,.ayah-translit,
+  .ayah-meaning,.theme-toggle-label,.text,.label,.caption
+){
+  color:var(--bw-contrast-dark-text) !important;
+  text-shadow:none !important;
+}
+
+html[class*="premium-theme-"] body:not(.page-themes-pro) .bw-auto-on-dark :is(svg,path,circle,rect,line,polyline,polygon),
+html[class*="premium-theme-"] body:not(.page-themes-pro) .bw-auto-on-dark :is(.icon,.icon *,.lucide,.fa,.fas,.far,.fab,.material-icons){
+  color:var(--bw-contrast-light-text) !important;
+  stroke:currentColor !important;
+}
+
+html[class*="premium-theme-"] body:not(.page-themes-pro) .bw-auto-on-light :is(svg,path,circle,rect,line,polyline,polygon),
+html[class*="premium-theme-"] body:not(.page-themes-pro) .bw-auto-on-light :is(.icon,.icon *,.lucide,.fa,.fas,.far,.fab,.material-icons){
+  color:var(--bw-contrast-dark-text) !important;
+  stroke:currentColor !important;
+}
+
+/* Filled SVG icons must also follow contrast, but keep explicit no-fill icons untouched where possible. */
+html[class*="premium-theme-"] body:not(.page-themes-pro) .bw-auto-on-dark :is(svg,path,circle,rect,polygon):not([fill="none"]){
+  fill:currentColor !important;
+}
+
+html[class*="premium-theme-"] body:not(.page-themes-pro) .bw-auto-on-light :is(svg,path,circle,rect,polygon):not([fill="none"]){
+  fill:currentColor !important;
+}
+
+html[class*="premium-theme-"] body:not(.page-themes-pro) .bw-auto-on-dark::placeholder,
+html[class*="premium-theme-"] body:not(.page-themes-pro) .bw-auto-on-dark :is(input,textarea,.search-input)::placeholder{
+  color:rgba(247,250,248,.66) !important;
+}
+
+html[class*="premium-theme-"] body:not(.page-themes-pro) .bw-auto-on-light::placeholder,
+html[class*="premium-theme-"] body:not(.page-themes-pro) .bw-auto-on-light :is(input,textarea,.search-input)::placeholder{
+  color:rgba(23,32,25,.58) !important;
+}
+
+/* Known light controls in Quran/surah toolbars: light translucent background -> dark icons/text. */
+html[class*="premium-theme-"] body:not(.page-themes-pro) :is(
+  .quran-toolbar button,
+  .surah-actions button,
+  .toolbar-btn,
+  .tab-btn,
+  .filter-btn,
+  .action-chip,
+  .theme-action,
+  .glass-btn,
+  .glass-control
+).bw-auto-on-light,
+html[class*="premium-theme-"] body:not(.page-themes-pro) :is(
+  .quran-toolbar button,
+  .surah-actions button,
+  .toolbar-btn,
+  .tab-btn,
+  .filter-btn,
+  .action-chip,
+  .theme-action,
+  .glass-btn,
+  .glass-control
+).bw-auto-on-light *{
+  color:var(--bw-contrast-dark-text) !important;
+  stroke:currentColor !important;
+}
+
+/* Known dark controls: dark background -> light text/icons. */
+html[class*="premium-theme-"] body:not(.page-themes-pro) :is(
+  .desktop-theme-toggle,
+  .desktop-theme-toggle-inner,
+  .theme-toggle,
+  .top-pill,
+  .pro-state,
+  .support-project-btn,
+  .install-btn,
+  .bottom-app-nav,
+  .bottom-app-nav-inner,
+  .dark-control,
+  .dark-btn,
+  details,
+  summary
+).bw-auto-on-dark,
+html[class*="premium-theme-"] body:not(.page-themes-pro) :is(
+  .desktop-theme-toggle,
+  .desktop-theme-toggle-inner,
+  .theme-toggle,
+  .top-pill,
+  .pro-state,
+  .support-project-btn,
+  .install-btn,
+  .bottom-app-nav,
+  .bottom-app-nav-inner,
+  .dark-control,
+  .dark-btn,
+  details,
+  summary
+).bw-auto-on-dark *{
+  color:var(--bw-contrast-light-text) !important;
+  stroke:currentColor !important;
+}
+/* ===== END PREMIUM THEME REAL AUTO CONTRAST V58 ===== */
+
