@@ -38,6 +38,8 @@
 
   var L = labels[lang] || labels.ru;
 
+  injectPremiumNavTheme();
+
   function file(base) {
     return '/' + base + '-' + lang + '.html';
   }
@@ -112,6 +114,86 @@
       updateNavHeart();
     }
   };
+
+
+  function injectPremiumNavTheme() {
+    if (document.getElementById('bottom-nav-premium-theme-style')) return;
+
+    var style = document.createElement('style');
+    style.id = 'bottom-nav-premium-theme-style';
+    style.textContent = `
+      :root{
+        --bottom-nav-theme-color:#d7c07a;
+        --bottom-nav-theme-bg:rgba(215,192,122,.18);
+      }
+
+      html[data-premium-theme="emerald-quran"],
+      body[data-premium-theme="emerald-quran"]{
+        --bottom-nav-theme-color:#48f29d;
+        --bottom-nav-theme-bg:rgba(72,242,157,.16);
+      }
+
+      html[data-premium-theme="violet-noor"],
+      body[data-premium-theme="violet-noor"]{
+        --bottom-nav-theme-color:#b57cff;
+        --bottom-nav-theme-bg:rgba(181,124,255,.16);
+      }
+
+      html[data-premium-theme="rose-soft"],
+      body[data-premium-theme="rose-soft"]{
+        --bottom-nav-theme-color:#ff8fc2;
+        --bottom-nav-theme-bg:rgba(255,143,194,.16);
+      }
+
+      html[data-premium-theme="carbon-elite"],
+      body[data-premium-theme="carbon-elite"]{
+        --bottom-nav-theme-color:#cfd8e3;
+        --bottom-nav-theme-bg:rgba(207,216,227,.14);
+      }
+
+      html[data-premium-theme="children-soft"],
+      body[data-premium-theme="children-soft"]{
+        --bottom-nav-theme-color:#7cc8ff;
+        --bottom-nav-theme-bg:rgba(124,200,255,.16);
+      }
+
+      html[data-premium-theme="night-mosque"],
+      body[data-premium-theme="night-mosque"]{
+        --bottom-nav-theme-color:#7ea8ff;
+        --bottom-nav-theme-bg:rgba(126,168,255,.16);
+      }
+
+      html[data-premium-theme="desert-sand"],
+      body[data-premium-theme="desert-sand"]{
+        --bottom-nav-theme-color:#ffd08a;
+        --bottom-nav-theme-bg:rgba(255,208,138,.18);
+      }
+
+      .bottom-nav .active{
+        color:var(--bottom-nav-theme-color) !important;
+      }
+
+      .bottom-nav .active svg{
+        stroke:var(--bottom-nav-theme-color) !important;
+        fill:none !important;
+      }
+
+      .bottom-nav .active .bottom-nav-heart-path{
+        fill:var(--bottom-nav-theme-color) !important;
+        stroke:var(--bottom-nav-theme-color) !important;
+      }
+
+      .bottom-nav .active{
+        background:linear-gradient(
+          135deg,
+          var(--bottom-nav-theme-bg),
+          rgba(255,255,255,.04)
+        ) !important;
+      }
+    `;
+    document.head.appendChild(style);
+  }
+
 
   function iconToday() {
     return '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 7.5h16"/><path d="M8 3.5v4"/><path d="M16 3.5v4"/><rect x="4" y="5.5" width="16" height="15" rx="3"/><path d="M8 12h.01"/><path d="M12 12h.01"/><path d="M16 12h.01"/><path d="M8 16h.01"/><path d="M12 16h.01"/></svg>';
