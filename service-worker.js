@@ -3,7 +3,7 @@
    Goal: always prefer the newest files from the network, especially HTML/JS/CSS.
 */
 
-const CACHE_VERSION = '20260511-stable-contrast-gold-icons-v65';
+const CACHE_VERSION = '20260511-stable-contrast-gold-icons-v66';
 const CACHE_NAME = `barakaway-runtime-${CACHE_VERSION}`;
 
 const APP_SHELL = [
