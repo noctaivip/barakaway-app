@@ -87,8 +87,9 @@
   function refresh(){
     applySiteTheme(safeGet(SITE_THEME_KEY) || "dark");
     applyPremiumTheme(safeGet(PREMIUM_THEME_KEY) || "");
-}
-window.BarakaWayTheme = {
+  }
+
+  window.BarakaWayTheme = {
     siteKey: SITE_THEME_KEY,
     premiumKey: PREMIUM_THEME_KEY,
     premiumThemes: PREMIUM_THEMES.slice(),
@@ -97,19 +98,19 @@ window.BarakaWayTheme = {
       safeSet(SITE_THEME_KEY, selected);
       applySiteTheme(selected);
       window.dispatchEvent(new CustomEvent("barakaway:site-theme-change", { detail: { theme: selected } }));
-},
+    },
     applyPremiumTheme: function(theme){
       const selected = normalizePremiumTheme(theme);
       if(selected) safeSet(PREMIUM_THEME_KEY, selected);
       else safeRemove(PREMIUM_THEME_KEY);
       applyPremiumTheme(selected);
       window.dispatchEvent(new CustomEvent("barakaway:premium-theme-change", { detail: { theme: selected } }));
-},
+    },
     clearPremiumTheme: function(){
       safeRemove(PREMIUM_THEME_KEY);
       applyPremiumTheme("");
       window.dispatchEvent(new CustomEvent("barakaway:premium-theme-change", { detail: { theme: "" } }));
-},
+    },
     refresh: refresh,
     currentPremiumTheme: function(){
       return normalizePremiumTheme(safeGet(PREMIUM_THEME_KEY) || "");
@@ -122,11 +123,11 @@ window.BarakaWayTheme = {
     refresh();
   }
 
-
   window.addEventListener("storage", function(event){
     if(!event.key || event.key === SITE_THEME_KEY || event.key === PREMIUM_THEME_KEY) refresh();
   });
-if("serviceWorker" in navigator){
+
+  if("serviceWorker" in navigator){
     const registerServiceWorker = function(){
       navigator.serviceWorker.register("/service-worker.js", { scope:"/" })
         .then(function(registration){
