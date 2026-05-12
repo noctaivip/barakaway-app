@@ -546,8 +546,6 @@ html.dark-mode .small-action{color:var(--gold2)}
   }
   .map-panel{
     margin-top:12px!important;
-    padding-left:18px!important;
-    padding-right:18px!important;
   }
 }
 @media(max-width:390px){
@@ -2340,5 +2338,38 @@ ${item.address}
 })();
 </script>
 <script src="/bottom-nav.js"></script>
+
+<script>
+/* === Mobile map one-finger scroll lock === */
+(function(){
+  function applyMobileMapTouchMode(){
+    if (!window.L || !window.map || typeof window.map !== "object") return;
+
+    var isMobile = window.matchMedia && window.matchMedia("(max-width: 720px)").matches;
+
+    if (isMobile) {
+      if (window.map.dragging) window.map.dragging.disable();
+      if (window.map.tap) window.map.tap.disable();
+      if (window.map.touchZoom) window.map.touchZoom.enable();
+      if (window.map.doubleClickZoom) window.map.doubleClickZoom.disable();
+      if (window.map.scrollWheelZoom) window.map.scrollWheelZoom.disable();
+    } else {
+      if (window.map.dragging) window.map.dragging.enable();
+      if (window.map.tap) window.map.tap.enable();
+      if (window.map.touchZoom) window.map.touchZoom.enable();
+      if (window.map.doubleClickZoom) window.map.doubleClickZoom.enable();
+      if (window.map.scrollWheelZoom) window.map.scrollWheelZoom.enable();
+    }
+  }
+
+  window.addEventListener("load", function(){
+    setTimeout(applyMobileMapTouchMode, 300);
+    setTimeout(applyMobileMapTouchMode, 1200);
+  });
+
+  window.addEventListener("resize", applyMobileMapTouchMode);
+})();
+</script>
+
 </body>
 </html>
