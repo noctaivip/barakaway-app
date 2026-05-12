@@ -1078,6 +1078,58 @@ html.light-mode .nav-metrics{
   50%{transform:scale(1.28)}
 }
 
+
+/* === GPS status title animation — gold radar === */
+.gps-status-title{
+  display:inline-flex;
+  align-items:center;
+  gap:12px;
+}
+.gps-status-radar{
+  position:relative;
+  width:34px;
+  height:34px;
+  display:none;
+  flex:0 0 34px;
+}
+.status-panel.is-gps-loading .gps-status-radar{
+  display:inline-flex;
+}
+.gps-status-radar::before,
+.gps-status-radar::after{
+  content:"";
+  position:absolute;
+  inset:4px;
+  border-radius:999px;
+  border:2px solid rgba(215,181,109,.55);
+  animation:gpsStatusRing 1.65s infinite ease-out;
+}
+.gps-status-radar::after{
+  animation-delay:.82s;
+}
+.gps-status-dot{
+  position:absolute;
+  left:50%;
+  top:50%;
+  width:11px;
+  height:11px;
+  transform:translate(-50%,-50%);
+  border-radius:999px;
+  background:linear-gradient(180deg,#f8e7ad,#c59b46);
+  box-shadow:
+    0 0 0 4px rgba(215,181,109,.16),
+    0 0 22px rgba(215,181,109,.72);
+  animation:gpsStatusDot 1.05s infinite ease-in-out;
+}
+@keyframes gpsStatusRing{
+  0%{transform:scale(.35);opacity:.95}
+  100%{transform:scale(1.75);opacity:0}
+}
+@keyframes gpsStatusDot{
+  0%,100%{transform:translate(-50%,-50%) scale(1)}
+  50%{transform:translate(-50%,-50%) scale(1.28)}
+}
+
 </style>
 <script src="/theme-init.js"></script>
 <link rel="stylesheet" href="/theme.css">
@@ -1112,7 +1164,10 @@ html.light-mode .nav-metrics{
 
   <section class="status-panel">
     <div class="status-title">
-      <span id="statusTitle">Готово к поиску</span>
+      <span id="statusTitle" class="gps-status-title">
+        <span id="statusTitleText">Готово к поиску</span>
+        <span class="gps-status-radar" aria-hidden="true"><span class="gps-status-dot"></span></span>
+      </span>
       <span id="resultCount">0</span>
     </div>
     <p class="status-text" id="statusText">Нажмите «Найти рядом»: страница определит GPS и покажет ближайшие мечети первыми.</p>
@@ -1216,6 +1271,7 @@ html.light-mode .nav-metrics{
     nearestBtn:document.getElementById("nearestBtn"),
     trackBtn:document.getElementById("trackBtn"),
     statusTitle:document.getElementById("statusTitle"),
+    statusTitleText:document.getElementById("statusTitleText"),
     statusText:document.getElementById("statusText"),
     resultCount:document.getElementById("resultCount"),
     userLocation:document.getElementById("userLocation"),
@@ -1244,8 +1300,14 @@ html.light-mode .nav-metrics{
   }
 
   function setStatus(title, text){
-    els.statusTitle.textContent = title;
+    if(els.statusTitleText){
+      els.statusTitleText.textContent = title;
+    }else{
+      els.statusTitle.textContent = title;
+    }
     els.statusText.textContent = text;
+    const isGpsLoading = /gps|гео|локац|местополож/i.test(`${title} ${text}`) && /определ|ищ|скан|поиск|жд/i.test(`${title} ${text}`);
+    document.querySelector(".status-panel")?.classList.toggle("is-gps-loading", isGpsLoading);
   }
 
   function escapeHtml(value){
@@ -1554,6 +1616,39 @@ L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
 out center tags;
 `;
   }
+
+  
+  function openLocationSettingsHint(){
+    const isAndroid = /Android/i.test(navigator.userAgent);
+    const isIOS = /iPhone|iPad|iPod/i.test(navigator.userAgent);
+
+    toast("Откройте настройки телефона и включите Геоданные / Местоположение");
+
+    // Mobile browsers do not have a universal guaranteed API for opening Location settings.
+    // These deep links are attempted only from a direct user tap and guarded to avoid breaking the page.
+    try{
+      if(isAndroid){
+        window.location.href = "intent://settings#Intent;action=android.settings.LOCATION_SOURCE_SETTINGS;end";
+        return;
+      }
+      if(isIOS){
+        window.location.href = "App-Prefs:Privacy&path=LOCATION";
+      }
+    }catch(error){}
+  }
+
+  function handleGeolocationError(error){
+    document.querySelector(".status-panel")?.classList.remove("is-gps-loading");
+    const denied = error && error.code === 1;
+    setStatus(
+      denied ? "Геолокация запрещена" : "GPS не определён",
+      denied
+        ? "Разрешите доступ к местоположению в настройках телефона или браузера."
+        : "Проверьте, включены ли Геоданные / Местоположение, и нажмите GPS ещё раз."
+    );
+    openLocationSettingsHint();
+  }
+
 
   async function fetchWithTimeout(url, options, timeoutMs){
     const controller = new AbortController();
@@ -2296,6 +2391,7 @@ if(!navigator.geolocation){
 
     state.loading = true;
     renderList();
+    document.querySelector(".status-panel")?.classList.add("is-gps-loading");
     setStatus("Определяем GPS-локацию", "Разрешите доступ к местоположению. Без GPS точный поиск ближайших мечетей невозможен.");
     els.locateBtn.classList.add("is-active");
 
