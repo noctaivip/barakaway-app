@@ -2217,3 +2217,133 @@ a .icon,
   max-height:22px !important;
 }
 
+/* ===== GLOBAL SMART BACKGROUND CONTRAST V71 ===== */
+/* JS writes data-bw-contrast after reading the real element background/gradient. */
+[data-bw-contrast="light-bg"]{
+  color:var(--bw-auto-contrast-text,#101614) !important;
+}
+
+[data-bw-contrast="dark-bg"]{
+  color:var(--bw-auto-contrast-text,#ffffff) !important;
+}
+
+[data-bw-contrast="light-bg"] :is(
+  h1,h2,h3,h4,h5,h6,p,span,small,label,li,strong,b,em,a,
+  .title,.subtitle,.note,.muted,.section-title,.section-note,.section-subtitle,
+  .home-section-title,.home-section-note,.card-title,.card-text,.item-title,.item-text,
+  .category-title,.hero-title,.surah-name,.surah-meta,.surah-ayahs,.dua-title,.dua-ref,
+  .dua-source,.ayah-meaning,.ayah-translit,.ayah-arabic,.meta-label,.meta-value,
+  .prayer-meta,.status,.manual-note,.theme-toggle-label,.theme-chip
+){
+  color:var(--bw-auto-contrast-text,#101614) !important;
+  text-shadow:none !important;
+}
+
+[data-bw-contrast="dark-bg"] :is(
+  h1,h2,h3,h4,h5,h6,p,span,small,label,li,strong,b,em,a,
+  .title,.subtitle,.note,.muted,.section-title,.section-note,.section-subtitle,
+  .home-section-title,.home-section-note,.card-title,.card-text,.item-title,.item-text,
+  .category-title,.hero-title,.surah-name,.surah-meta,.surah-ayahs,.dua-title,.dua-ref,
+  .dua-source,.ayah-meaning,.ayah-translit,.ayah-arabic,.meta-label,.meta-value,
+  .prayer-meta,.status,.manual-note,.theme-toggle-label,.theme-chip
+){
+  color:var(--bw-auto-contrast-text,#ffffff) !important;
+  text-shadow:none !important;
+}
+
+[data-bw-contrast="light-bg"] :is(.subtitle,.note,.muted,small,.small,.description,.card-text,.item-text,.surah-meta,.surah-ayahs,.dua-ref,.dua-source,.prayer-meta){
+  color:var(--bw-auto-contrast-soft,rgba(16,22,20,.82)) !important;
+}
+
+[data-bw-contrast="dark-bg"] :is(.subtitle,.note,.muted,small,.small,.description,.card-text,.item-text,.surah-meta,.surah-ayahs,.dua-ref,.dua-source,.prayer-meta){
+  color:var(--bw-auto-contrast-soft,rgba(255,255,255,.86)) !important;
+}
+
+
+/* Theme showcase page keeps individual card contrast from each card background. */
+body.page-themes-pro .theme-card[data-bw-contrast="light-bg"],
+body.page-themes-pro .theme-card[data-bw-contrast="light-bg"] :is(h3,p,.theme-chip){
+  color:#101614 !important;
+  text-shadow:none !important;
+}
+
+body.page-themes-pro .theme-card[data-bw-contrast="dark-bg"],
+body.page-themes-pro .theme-card[data-bw-contrast="dark-bg"] :is(h3,p,.theme-chip){
+  color:#ffffff !important;
+}
+/* ===== END GLOBAL SMART BACKGROUND CONTRAST V71 ===== */
+
+
+
+/* ===== GLOBAL SMART BACKGROUND CONTRAST V72 ===== */
+/* JS sets data-bw-text-contrast on every readable text/control by the actual nearest surface background. */
+[data-bw-text-contrast="light-bg"]{
+  color:var(--bw-auto-contrast-text,#101614) !important;
+  text-shadow:none !important;
+}
+
+[data-bw-text-contrast="dark-bg"]{
+  color:var(--bw-auto-contrast-text,#ffffff) !important;
+}
+
+[data-bw-text-contrast="light-bg"] :is(svg,path,circle,rect,line,polyline,polygon,.icon,.lucide,.fa,.fas,.far,.fab,.material-icons){
+  color:var(--bw-auto-contrast-text,#101614) !important;
+  fill:currentColor !important;
+  stroke:currentColor !important;
+}
+
+[data-bw-text-contrast="dark-bg"] :is(svg,path,circle,rect,line,polyline,polygon,.icon,.lucide,.fa,.fas,.far,.fab,.material-icons){
+  color:var(--bw-auto-contrast-text,#ffffff) !important;
+  fill:currentColor !important;
+  stroke:currentColor !important;
+}
+
+[data-bw-text-contrast="light-bg"]:is(
+  h1,h2,h3,h4,h5,h6,p,span,small,label,li,strong,b,em,a,button,.btn,.button,
+  .title,.subtitle,.note,.muted,.small,.description,.section-title,.section-note,.section-subtitle,
+  .home-section-title,.home-section-note,.card-title,.card-text,.item-title,.item-text,.category-title,
+  .hero-title,.hero-text,.surah-name,.surah-meta,.surah-ayahs,.dua-title,.dua-ref,.dua-source,
+  .ayah-meaning,.ayah-translit,.ayah-arabic,.meta-label,.meta-value,.prayer-meta,.status,.manual-note,
+  .theme-toggle-label,.theme-chip,.access-kicker,.access-title,.access-text,.access-status
+){
+  color:var(--bw-auto-contrast-text,#101614) !important;
+  text-shadow:none !important;
+}
+
+[data-bw-text-contrast="dark-bg"]:is(
+  h1,h2,h3,h4,h5,h6,p,span,small,label,li,strong,b,em,a,button,.btn,.button,
+  .title,.subtitle,.note,.muted,.small,.description,.section-title,.section-note,.section-subtitle,
+  .home-section-title,.home-section-note,.card-title,.card-text,.item-title,.item-text,.category-title,
+  .hero-title,.hero-text,.surah-name,.surah-meta,.surah-ayahs,.dua-title,.dua-ref,.dua-source,
+  .ayah-meaning,.ayah-translit,.ayah-arabic,.meta-label,.meta-value,.prayer-meta,.status,.manual-note,
+  .theme-toggle-label,.theme-chip,.access-kicker,.access-title,.access-text,.access-status
+){
+  color:var(--bw-auto-contrast-text,#ffffff) !important;
+}
+
+[data-bw-text-contrast="light-bg"]:is(.subtitle,.note,.muted,small,.small,.description,.card-text,.item-text,.surah-meta,.surah-ayahs,.dua-ref,.dua-source,.prayer-meta,.access-text){
+  color:var(--bw-auto-contrast-soft,rgba(16,22,20,.82)) !important;
+}
+
+[data-bw-text-contrast="dark-bg"]:is(.subtitle,.note,.muted,small,.small,.description,.card-text,.item-text,.surah-meta,.surah-ayahs,.dua-ref,.dua-source,.prayer-meta,.access-text){
+  color:var(--bw-auto-contrast-soft,rgba(255,255,255,.88)) !important;
+}
+
+/* Section/page headings without their own card must follow the visible page/theme background. */
+body [data-bw-text-contrast="light-bg"].section-title,
+body [data-bw-text-contrast="light-bg"].section-note,
+body [data-bw-text-contrast="light-bg"].home-section-title,
+body [data-bw-text-contrast="light-bg"].home-section-note,
+body [data-bw-text-contrast="light-bg"]:is(h1,h2).page-title{
+  color:#101614 !important;
+  text-shadow:none !important;
+}
+
+body [data-bw-text-contrast="dark-bg"].section-title,
+body [data-bw-text-contrast="dark-bg"].section-note,
+body [data-bw-text-contrast="dark-bg"].home-section-title,
+body [data-bw-text-contrast="dark-bg"].home-section-note,
+body [data-bw-text-contrast="dark-bg"]:is(h1,h2).page-title{
+  color:#ffffff !important;
+}
+/* ===== END GLOBAL SMART BACKGROUND CONTRAST V72 ===== */
