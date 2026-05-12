@@ -2819,7 +2819,7 @@ html.theme-emerald-quran body:not(.page-themes-pro) .bottom-app-nav *:hover{
 }
 
 
-/* ===== PREMIUM THEMES — BISMILLAH INSTEAD OF LIGHT/DARK TOGGLE ===== */
+/* ===== PREMIUM THEMES — BISMILLAH TEXT INSTEAD OF LIGHT/DARK TOGGLE ===== */
 html[class*="premium-theme-"] .desktop-theme-toggle,
 html[class*="premium-theme-"] .desktop-theme-toggle-inner,
 html[class*="premium-theme-"] .theme-toggle-wrap{
@@ -2828,22 +2828,21 @@ html[class*="premium-theme-"] .theme-toggle-wrap{
   align-items:center !important;
   justify-content:center !important;
   min-width:260px !important;
-  min-height:58px !important;
-  padding:12px 22px !important;
-  border-radius:22px !important;
-  overflow:hidden !important;
+  min-height:44px !important;
+  padding:0 !important;
+  margin:0 !important;
+  border:0 !important;
+  border-radius:0 !important;
+  background:transparent !important;
+  background-image:none !important;
+  box-shadow:none !important;
+  backdrop-filter:none !important;
+  -webkit-backdrop-filter:none !important;
+  overflow:visible !important;
   pointer-events:none !important;
-  background:
-    linear-gradient(135deg,rgba(255,255,255,.10),rgba(255,255,255,.03)),
-    var(--bw-premium-surface) !important;
-  border:1.5px solid var(--bw-premium-border) !important;
-  box-shadow:
-    0 14px 34px rgba(0,0,0,.22),
-    inset 0 1px 0 rgba(255,255,255,.16),
-    0 0 22px rgba(216,179,95,.18) !important;
 }
 
-/* Скрываем все реальные элементы переключателя внутри блока */
+/* Скрываем реальные элементы Light/Dark toggle */
 html[class*="premium-theme-"] .desktop-theme-toggle > *,
 html[class*="premium-theme-"] .desktop-theme-toggle-inner > *,
 html[class*="premium-theme-"] .theme-toggle-wrap > *,
@@ -2857,7 +2856,7 @@ html[class*="premium-theme-"] .light-dark-toggle{
   pointer-events:none !important;
 }
 
-/* Показываем Бисмиллях вместо Light/Dark toggle */
+/* Только надпись, без отдельного блока */
 html[class*="premium-theme-"] .desktop-theme-toggle::before,
 html[class*="premium-theme-"] .desktop-theme-toggle-inner::before,
 html[class*="premium-theme-"] .theme-toggle-wrap::before{
@@ -2865,16 +2864,49 @@ html[class*="premium-theme-"] .theme-toggle-wrap::before{
   display:block !important;
   opacity:1 !important;
   visibility:visible !important;
-  font-size:22px !important;
+  width:auto !important;
+  max-width:100% !important;
+  font-size:24px !important;
   line-height:1.25 !important;
-  font-weight:700 !important;
+  font-weight:800 !important;
   letter-spacing:0 !important;
+  text-align:center !important;
   direction:rtl !important;
   unicode-bidi:isolate !important;
   color:var(--bw-premium-gold-soft) !important;
   -webkit-text-fill-color:var(--bw-premium-gold-soft) !important;
   text-shadow:
-    0 0 12px rgba(255,240,189,.30),
-    0 0 26px rgba(216,179,95,.18) !important;
+    0 0 10px rgba(255,240,189,.34),
+    0 0 22px rgba(216,179,95,.20),
+    0 3px 10px rgba(0,0,0,.26) !important;
+}
+
+/* Desktop: держим надпись аккуратно в центре своей колонки */
+@media (min-width:701px){
+  html[class*="premium-theme-"] .desktop-theme-toggle,
+  html[class*="premium-theme-"] .desktop-theme-toggle-inner,
+  html[class*="premium-theme-"] .theme-toggle-wrap{
+    justify-self:center !important;
+  }
+}
+
+/* Mobile: надпись остаётся ровно на месте бывшего Light/Dark toggle и центрируется */
+@media (max-width:700px){
+  html[class*="premium-theme-"] .desktop-theme-toggle,
+  html[class*="premium-theme-"] .desktop-theme-toggle-inner,
+  html[class*="premium-theme-"] .theme-toggle-wrap{
+    width:100% !important;
+    min-width:0 !important;
+    min-height:38px !important;
+    justify-content:center !important;
+    text-align:center !important;
+  }
+
+  html[class*="premium-theme-"] .desktop-theme-toggle::before,
+  html[class*="premium-theme-"] .desktop-theme-toggle-inner::before,
+  html[class*="premium-theme-"] .theme-toggle-wrap::before{
+    font-size:21px !important;
+    text-align:center !important;
+  }
 }
 
