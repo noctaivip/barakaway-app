@@ -1440,7 +1440,7 @@ html.light-mode .nav-metrics{
   }
 
   function nativeGeoUrl(lat, lon, name){
-    return `geo:${lat},${lon}?q=${lat},${lon}(${encodeURIComponent(name || "Mosque")})`;
+    return googleRouteUrl(lat, lon, name);
   }
 
   function osmUrl(lat, lon){
@@ -2224,30 +2224,11 @@ async function fetchOverpass(lat, lon, radius){
 
   
   function tryOpenLocationSettings(){
-    const isAndroid = /Android/i.test(navigator.userAgent || "");
-    const isIOS = /iPhone|iPad|iPod/i.test(navigator.userAgent || "");
-
-    try{
-      if(isAndroid){
-        window.location.href = "intent://settings/location#Intent;scheme=android-settings;end";
-        setTimeout(() => {
-          window.location.href = "android.settings.LOCATION_SOURCE_SETTINGS";
-        }, 350);
-        return;
-      }
-
-      if(isIOS){
-        window.location.href = "App-Prefs:Privacy&path=LOCATION";
-        setTimeout(() => {
-          window.location.href = "app-settings:";
-        }, 350);
-        return;
-      }
-
-      toast("Откройте настройки браузера и разрешите геолокацию");
-    }catch(error){
-      toast("Включите Геоданные/Location в настройках телефона");
-    }
+    setStatus(
+      "Включите геоданные",
+      "Откройте настройки телефона или браузера и разрешите доступ к местоположению для этой страницы. После включения нажмите «Найти рядом» ещё раз."
+    );
+    toast("Включите Геоданные/Location в настройках телефона");
   }
 
   function resetSearch(){
@@ -2322,7 +2303,6 @@ if(!navigator.geolocation){
       const lat = pos.coords.latitude;
       const lon = pos.coords.longitude;
       updateUserOnMap(lat, lon, pos.coords.accuracy);
-      updateHeadingVisual(pos.coords.heading);
       updateHeadingVisual(pos.coords.heading);
       const placeName = await reversePlaceName(lat, lon);
       await searchByCoords(lat, lon, placeName, {silent:false});
@@ -2504,10 +2484,11 @@ ${item.address}
     }
   }
 
-  els.locateBtn.addEventListener("click", () => locateAndSearch(true));
-  els.refreshBtn.addEventListener("click", resetSearch);
-  els.nearestBtn.addEventListener("click", toggleNearestOnly);
-  els.trackBtn.addEventListener("click", async () => {
+  els.locateBtn.addEventListener("click", event => { event.preventDefault(); locateAndSearch(true); });
+  els.refreshBtn.addEventListener("click", event => { event.preventDefault(); resetSearch(); });
+  els.nearestBtn.addEventListener("click", event => { event.preventDefault(); toggleNearestOnly(); });
+  els.trackBtn.addEventListener("click", async event => {
+    event.preventDefault();
     const allowed = await canAskGeolocation();
     if(!allowed){ tryOpenLocationSettings(); return; }
     toggleTracking(false);
