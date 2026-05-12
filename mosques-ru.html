@@ -735,7 +735,7 @@ html.light-mode .nav-bottom-sheet{
   #map{
     height:calc(100vh - 160px)!important;
     min-height:560px!important;
-    touch-action:pan-y!important;
+    touch-action:pan-y pinch-zoom!important;
   }
   .nav-top-pill{
     left:10px;
@@ -1368,7 +1368,9 @@ html.light-mode .nav-metrics{
       attributionControl:true
     }).setView([41.3111, 69.2797], 12);
 
-    L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
+    
+window.__barakawayMosquesMap = map;
+L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
       maxZoom:19,
       attribution:'&copy; OpenStreetMap'
     }).addTo(state.map);
@@ -2339,35 +2341,62 @@ ${item.address}
 </script>
 <script src="/bottom-nav.js"></script>
 
+
 <script>
-/* === Mobile map one-finger scroll lock === */
+/* === Mobile map one-finger page scroll / two-finger map zoom === */
 (function(){
+  function getMap(){
+    return window.__barakawayMosquesMap || window.map || null;
+  }
+
   function applyMobileMapTouchMode(){
-    if (!window.L || !window.map || typeof window.map !== "object") return;
+    var map = getMap();
+    if (!map) return;
 
     var isMobile = window.matchMedia && window.matchMedia("(max-width: 720px)").matches;
+    var mapEl = document.getElementById("map");
 
     if (isMobile) {
-      if (window.map.dragging) window.map.dragging.disable();
-      if (window.map.tap) window.map.tap.disable();
-      if (window.map.touchZoom) window.map.touchZoom.enable();
-      if (window.map.doubleClickZoom) window.map.doubleClickZoom.disable();
-      if (window.map.scrollWheelZoom) window.map.scrollWheelZoom.disable();
+      if (map.dragging) map.dragging.disable();
+      if (map.tap) map.tap.disable();
+      if (map.doubleClickZoom) map.doubleClickZoom.disable();
+      if (map.scrollWheelZoom) map.scrollWheelZoom.disable();
+      if (map.boxZoom) map.boxZoom.disable();
+      if (map.keyboard) map.keyboard.disable();
+
+      if (map.touchZoom) map.touchZoom.enable();
+
+      if (mapEl) {
+        mapEl.style.touchAction = "pan-y pinch-zoom";
+        mapEl.style.msTouchAction = "pan-y pinch-zoom";
+      }
     } else {
-      if (window.map.dragging) window.map.dragging.enable();
-      if (window.map.tap) window.map.tap.enable();
-      if (window.map.touchZoom) window.map.touchZoom.enable();
-      if (window.map.doubleClickZoom) window.map.doubleClickZoom.enable();
-      if (window.map.scrollWheelZoom) window.map.scrollWheelZoom.enable();
+      if (map.dragging) map.dragging.enable();
+      if (map.tap) map.tap.enable();
+      if (map.doubleClickZoom) map.doubleClickZoom.enable();
+      if (map.scrollWheelZoom) map.scrollWheelZoom.enable();
+      if (map.boxZoom) map.boxZoom.enable();
+      if (map.keyboard) map.keyboard.enable();
+      if (map.touchZoom) map.touchZoom.enable();
+
+      if (mapEl) {
+        mapEl.style.touchAction = "";
+        mapEl.style.msTouchAction = "";
+      }
     }
   }
 
   window.addEventListener("load", function(){
+    applyMobileMapTouchMode();
     setTimeout(applyMobileMapTouchMode, 300);
     setTimeout(applyMobileMapTouchMode, 1200);
+    setTimeout(applyMobileMapTouchMode, 2500);
   });
 
   window.addEventListener("resize", applyMobileMapTouchMode);
+  window.addEventListener("orientationchange", function(){
+    setTimeout(applyMobileMapTouchMode, 300);
+  });
 })();
 </script>
 
