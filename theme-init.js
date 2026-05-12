@@ -86,22 +86,56 @@
 
 
 
-  function parseRgbList(value){
+  function parseCssColors(value){
     const colors = [];
     if(!value || value === "none") return colors;
-    const re = /rgba?\(([^)]+)\)/gi;
-    let match;
-    while((match = re.exec(value))){
-      const parts = match[1].split(',').map(function(part){ return part.trim(); });
+
+    const rgbRe = /rgba?\(([^)]+)\)/gi;
+    let rgbMatch;
+    while((rgbMatch = rgbRe.exec(value))){
+      const raw = rgbMatch[1].trim();
+      let parts;
+      let alpha = 1;
+
+      if(raw.indexOf("/") !== -1){
+        const split = raw.split("/");
+        parts = split[0].trim().split(/[\s,]+/);
+        alpha = parseFloat(split[1]);
+      }else{
+        parts = raw.split(/[\s,]+/);
+      }
+
       if(parts.length < 3) continue;
       const r = parseFloat(parts[0]);
       const g = parseFloat(parts[1]);
       const b = parseFloat(parts[2]);
-      const a = parts.length > 3 ? parseFloat(parts[3]) : 1;
+      const a = parts.length > 3 ? parseFloat(parts[3]) : alpha;
       if(Number.isFinite(r) && Number.isFinite(g) && Number.isFinite(b)){
         colors.push({ r:r, g:g, b:b, a:Number.isFinite(a) ? a : 1 });
       }
     }
+
+    const hexRe = /#([0-9a-f]{3,8})\b/gi;
+    let hexMatch;
+    while((hexMatch = hexRe.exec(value))){
+      const hex = hexMatch[1];
+      let r, g, b, a = 1;
+      if(hex.length === 3 || hex.length === 4){
+        r = parseInt(hex[0] + hex[0], 16);
+        g = parseInt(hex[1] + hex[1], 16);
+        b = parseInt(hex[2] + hex[2], 16);
+        if(hex.length === 4) a = parseInt(hex[3] + hex[3], 16) / 255;
+      }else if(hex.length === 6 || hex.length === 8){
+        r = parseInt(hex.slice(0, 2), 16);
+        g = parseInt(hex.slice(2, 4), 16);
+        b = parseInt(hex.slice(4, 6), 16);
+        if(hex.length === 8) a = parseInt(hex.slice(6, 8), 16) / 255;
+      }
+      if(Number.isFinite(r) && Number.isFinite(g) && Number.isFinite(b)){
+        colors.push({ r:r, g:g, b:b, a:a });
+      }
+    }
+
     return colors;
   }
 
@@ -110,135 +144,130 @@
     return v <= 0.03928 ? v / 12.92 : Math.pow((v + 0.055) / 1.055, 2.4);
   }
 
-  function rawLuminance(color){
-    return (0.2126 * channelToLinear(color.r)) + (0.7152 * channelToLinear(color.g)) + (0.0722 * channelToLinear(color.b));
-  }
-
-  function blendColorOver(color, base){
+  function luminance(color){
     const alpha = Math.max(0, Math.min(1, color.a == null ? 1 : color.a));
-    if(alpha >= 1) return { r:color.r, g:color.g, b:color.b, a:1 };
-    const under = base || { r:255, g:255, b:255, a:1 };
-    return {
-      r:(color.r * alpha) + (under.r * (1 - alpha)),
-      g:(color.g * alpha) + (under.g * (1 - alpha)),
-      b:(color.b * alpha) + (under.b * (1 - alpha)),
-      a:1
-    };
+    const r = (color.r * alpha) + (255 * (1 - alpha));
+    const g = (color.g * alpha) + (255 * (1 - alpha));
+    const b = (color.b * alpha) + (255 * (1 - alpha));
+    return (0.2126 * channelToLinear(r)) + (0.7152 * channelToLinear(g)) + (0.0722 * channelToLinear(b));
   }
 
-  function averageColor(colors){
-    if(!colors || !colors.length) return null;
-    const sum = colors.reduce(function(total, color){
-      total.r += color.r;
-      total.g += color.g;
-      total.b += color.b;
-      return total;
-    }, { r:0, g:0, b:0 });
-    return { r:sum.r / colors.length, g:sum.g / colors.length, b:sum.b / colors.length, a:1 };
-  }
-
-  function elementBackgroundColor(element){
-    if(!element || !window.getComputedStyle) return null;
-    const style = window.getComputedStyle(element);
-    const parentColor = element.parentElement ? elementBackgroundColor(element.parentElement) : { r:255, g:255, b:255, a:1 };
-
-    const backgroundColor = parseRgbList(style.backgroundColor).filter(function(color){ return color.a !== 0; });
-    const imageColors = parseRgbList(style.backgroundImage).filter(function(color){ return color.a !== 0; });
-    const opaqueImageColors = imageColors.filter(function(color){ return color.a >= 0.55; });
-    const opaqueBackgroundColors = backgroundColor.filter(function(color){ return color.a >= 0.55; });
-
-    if(opaqueImageColors.length){
-      return averageColor(opaqueImageColors.map(function(color){ return blendColorOver(color, parentColor); }));
+  function backgroundLuminance(element){
+    let current = element;
+    while(current && current.nodeType === 1){
+      const style = window.getComputedStyle(current);
+      const colors = parseCssColors(style.backgroundImage).concat(parseCssColors(style.backgroundColor));
+      const visible = colors.filter(function(color){ return color.a !== 0; });
+      if(visible.length){
+        return visible.reduce(function(sum, color){ return sum + luminance(color); }, 0) / visible.length;
+      }
+      current = current.parentElement;
     }
-
-    if(opaqueBackgroundColors.length){
-      return averageColor(opaqueBackgroundColors.map(function(color){ return blendColorOver(color, parentColor); }));
-    }
-
-    if(imageColors.length || backgroundColor.length){
-      return averageColor(imageColors.concat(backgroundColor).map(function(color){ return blendColorOver(color, parentColor); }));
-    }
-
-    return parentColor || null;
+    return document.documentElement.classList.contains("light-mode") ? 0.78 : 0.08;
   }
 
-  function elementBackgroundLuminance(element){
-    const color = elementBackgroundColor(element);
-    return color ? rawLuminance(color) : null;
+  function isInsideIgnoredNode(element){
+    return !!(element && element.closest && element.closest("svg, canvas, img, video, audio, picture, iframe, code, pre"));
   }
 
-  const BW_SURFACE_SELECTOR = [
-    "button", ".btn", ".button", ".quick-btn", ".action-btn", ".share-btn", ".install-btn",
-    "input", "textarea", "select", ".search-input", ".wallet-address",
-    ".card", ".box", ".panel", ".block", ".quote", ".empty", ".article",
-    ".hero", ".hero-panel", ".hero-card", ".hero-box", ".page-hero", ".section-hero",
-    ".theme-card", ".premium-resource-card", ".today-hub", ".today-action", ".today-card",
-    ".home-widget", ".home-card", ".quick-card", ".feature-card", ".resource-card",
-    ".surah-card", ".prayer-card", ".dua-card", ".ayah-card",
-    ".qibla-panel", ".qibla-card", ".qibla-box",
-    ".dropdown-block", ".dropdown-content", ".name-chip",
-    ".modal", ".modal-card", ".toast", ".top-pill", ".pro-state", ".access-panel"
-  ].join(",");
+  function forceReadableText(element, textColor, softColor, mutedColor){
+    if(!element || !element.style || isInsideIgnoredNode(element)) return;
 
-  const BW_TEXT_SELECTOR = [
-    "h1", "h2", "h3", "h4", "h5", "h6", "p", "span", "small", "label", "li", "strong", "b", "em", "a",
-    "button", ".btn", ".button", ".quick-btn", ".action-btn", ".share-btn", ".install-btn",
-    "input", "textarea", "select", ".search-input",
-    ".title", ".subtitle", ".note", ".muted", ".small", ".description",
-    ".section-title", ".section-note", ".section-subtitle", ".home-section-title", ".home-section-note",
-    ".card-title", ".card-text", ".item-title", ".item-text", ".category-title", ".hero-title", ".hero-text",
-    ".surah-name", ".surah-meta", ".surah-ayahs", ".dua-title", ".dua-ref", ".dua-source",
-    ".ayah-meaning", ".ayah-translit", ".ayah-arabic", ".meta-label", ".meta-value",
-    ".prayer-meta", ".status", ".manual-note", ".theme-toggle-label", ".theme-chip", ".access-kicker", ".access-title", ".access-text", ".access-status"
-  ].join(",");
+    element.style.setProperty("--bw-auto-contrast-text", textColor);
+    element.style.setProperty("--bw-auto-contrast-soft", softColor);
+    element.style.setProperty("--bw-auto-contrast-muted", mutedColor);
+    element.style.setProperty("color", textColor, "important");
+    element.setAttribute("data-bw-readable", textColor === "#101614" ? "light-bg" : "dark-bg");
 
-  function applyContrastState(element, luma, attributeName){
-    if(!element || luma == null) return;
-    const isLight = luma >= 0.46;
-    const state = isLight ? "light-bg" : "dark-bg";
-    element.setAttribute(attributeName, state);
-    element.style.setProperty("--bw-auto-contrast-text", isLight ? "#101614" : "#ffffff");
-    element.style.setProperty("--bw-auto-contrast-soft", isLight ? "rgba(16,22,20,.82)" : "rgba(255,255,255,.88)");
-    element.style.setProperty("--bw-auto-contrast-muted", isLight ? "rgba(16,22,20,.66)" : "rgba(255,255,255,.72)");
+    const descendants = element.querySelectorAll([
+      "span", "strong", "b", "em", "small", "label", "p", "div",
+      "h1", "h2", "h3", "h4", "h5", "h6",
+      ".title", ".section-title", ".section-note", ".subtitle", ".small", ".note",
+      ".btn", ".button", ".text", ".label", ".meta", ".muted", ".chip",
+      "i:not([class*='fa']):not([class*='icon'])"
+    ].join(","));
+
+    Array.prototype.forEach.call(descendants, function(child){
+      if(isInsideIgnoredNode(child)) return;
+      const tag = child.tagName ? child.tagName.toLowerCase() : "";
+      const className = typeof child.className === "string" ? child.className : "";
+      const useMuted = /muted|meta|note|subtitle|small|description|desc/i.test(className) || tag === "small";
+      child.style.setProperty("color", useMuted ? mutedColor : textColor, "important");
+    });
   }
 
-  function nearestReadableSurface(element){
-    if(!element || !element.closest) return null;
-    return element.closest(BW_SURFACE_SELECTOR);
-  }
-
-  function applySmartContrast(){
+  function applyReadableContrast(){
     if(!document.body || !window.getComputedStyle) return;
 
-    const bodyLuma = elementBackgroundLuminance(document.body);
-    applyContrastState(document.body, bodyLuma, "data-bw-contrast");
+    const selectors = [
+      "body",
+      "h1", "h2", "h3", "h4", "h5", "h6",
+      ".title", ".section-title", ".section-note", ".subtitle", ".tagline",
+      ".container", ".page", ".content", "main", "section", "article",
+      ".card", ".box", ".panel", ".block", ".quote", ".empty", ".article",
+      ".hero", ".hero-panel", ".hero-card", ".hero-box", ".page-hero", ".section-hero",
+      ".today-hub", ".today-action", ".today-card", ".home-widget",
+      ".surah-card", ".prayer-card", ".dua-card", ".ayah-card",
+      ".qibla-panel", ".qibla-card", ".qibla-box",
+      ".dropdown-block", ".dropdown-content", ".name-chip",
+      ".modal", ".modal-card", ".toast",
+      "button", "a.btn", ".btn", ".button", ".quick-btn", ".action-btn",
+      ".share-btn", ".install-btn", ".copy-wallet-btn", ".share-wallet-btn",
+      ".reset-btn", ".qibla-reset", ".help-option-btn",
+      "[role='button']", ".switch", ".toggle", ".pill", ".chip", ".badge",
+      "input", "textarea", "select", ".search-input", ".wallet-address"
+    ];
 
-    const surfaces = document.body.querySelectorAll(BW_SURFACE_SELECTOR);
-    Array.prototype.forEach.call(surfaces, function(element){
-      applyContrastState(element, elementBackgroundLuminance(element), "data-bw-contrast");
-    });
+    const targets = Array.prototype.slice.call(document.body.querySelectorAll(selectors.join(",")));
+    targets.unshift(document.body);
 
-    const textNodes = document.body.querySelectorAll(BW_TEXT_SELECTOR);
-    Array.prototype.forEach.call(textNodes, function(element){
-      const surface = nearestReadableSurface(element);
-      const luma = surface ? elementBackgroundLuminance(surface) : bodyLuma;
-      applyContrastState(element, luma, "data-bw-text-contrast");
+    targets.forEach(function(element){
+      if(!element || isInsideIgnoredNode(element)) return;
+      const luma = backgroundLuminance(element);
+      const isLightBackground = luma >= 0.50;
+      const textColor = isLightBackground ? "#101614" : "#ffffff";
+      const softColor = isLightBackground ? "rgba(16,22,20,.84)" : "rgba(255,255,255,.88)";
+      const mutedColor = isLightBackground ? "rgba(16,22,20,.68)" : "rgba(255,255,255,.74)";
+      forceReadableText(element, textColor, softColor, mutedColor);
     });
   }
 
-  let smartContrastTimer = null;
-  function scheduleSmartContrast(){
-    if(smartContrastTimer) window.clearTimeout(smartContrastTimer);
-    smartContrastTimer = window.setTimeout(function(){
-      smartContrastTimer = null;
-      applySmartContrast();
-    }, 40);
+  let readableContrastTimer = null;
+  function scheduleReadableContrast(){
+    if(readableContrastTimer) window.clearTimeout(readableContrastTimer);
+    readableContrastTimer = window.setTimeout(function(){
+      readableContrastTimer = null;
+      applyReadableContrast();
+    }, 60);
+  }
+
+  function startReadableContrastObserver(){
+    scheduleReadableContrast();
+
+    if(document.fonts && document.fonts.ready){
+      document.fonts.ready.then(scheduleReadableContrast).catch(function(){});
+    }
+
+    window.addEventListener("load", scheduleReadableContrast);
+    window.addEventListener("resize", scheduleReadableContrast);
+    window.addEventListener("barakaway:site-theme-change", scheduleReadableContrast);
+    window.addEventListener("barakaway:premium-theme-change", scheduleReadableContrast);
+
+    if(window.MutationObserver && document.body){
+      const observer = new MutationObserver(scheduleReadableContrast);
+      observer.observe(document.body, {
+        childList:true,
+        subtree:true,
+        attributes:true,
+        attributeFilter:["class", "style", "data-theme", "data-premium-theme", "hidden", "open"]
+      });
+    }
   }
 
   function refresh(){
     applySiteTheme(safeGet(SITE_THEME_KEY) || "dark");
     applyPremiumTheme(safeGet(PREMIUM_THEME_KEY) || "");
-    scheduleSmartContrast();
+    scheduleReadableContrast();
 }
 window.BarakaWayTheme = {
     siteKey: SITE_THEME_KEY,
@@ -248,7 +277,7 @@ window.BarakaWayTheme = {
       const selected = normalizeSiteTheme(theme);
       safeSet(SITE_THEME_KEY, selected);
       applySiteTheme(selected);
-      scheduleSmartContrast();
+      scheduleReadableContrast();
       window.dispatchEvent(new CustomEvent("barakaway:site-theme-change", { detail: { theme: selected } }));
 },
     applyPremiumTheme: function(theme){
@@ -256,13 +285,13 @@ window.BarakaWayTheme = {
       if(selected) safeSet(PREMIUM_THEME_KEY, selected);
       else safeRemove(PREMIUM_THEME_KEY);
       applyPremiumTheme(selected);
-      scheduleSmartContrast();
+      scheduleReadableContrast();
       window.dispatchEvent(new CustomEvent("barakaway:premium-theme-change", { detail: { theme: selected } }));
 },
     clearPremiumTheme: function(){
       safeRemove(PREMIUM_THEME_KEY);
       applyPremiumTheme("");
-      scheduleSmartContrast();
+      scheduleReadableContrast();
       window.dispatchEvent(new CustomEvent("barakaway:premium-theme-change", { detail: { theme: "" } }));
 },
     refresh: refresh,
@@ -273,8 +302,10 @@ window.BarakaWayTheme = {
 
   if(document.readyState === "loading"){
     document.addEventListener("DOMContentLoaded", refresh, { once:true });
+    document.addEventListener("DOMContentLoaded", startReadableContrastObserver, { once:true });
   }else{
     refresh();
+    startReadableContrastObserver();
   }
 
 

@@ -2275,105 +2275,66 @@ body.page-themes-pro .theme-card[data-bw-contrast="dark-bg"] :is(h3,p,.theme-chi
 
 
 
-/* ===== GLOBAL SMART BACKGROUND CONTRAST V72 ===== */
-/* JS sets data-bw-text-contrast on every readable text/control by the actual nearest surface background. */
-[data-bw-text-contrast="light-bg"]{
-  color:var(--bw-auto-contrast-text,#101614) !important;
-  text-shadow:none !important;
-}
-
-[data-bw-text-contrast="dark-bg"]{
+/* ===== BARAKAWAY READABLE CONTRAST FINAL LAYER ===== */
+/* JS sets data-bw-readable from the real rendered background of each control/layer. */
+[data-bw-readable="dark-bg"],
+[data-bw-readable="dark-bg"]:not(svg):not(path):not(canvas):not(img):not(video):not(audio),
+[data-bw-readable="dark-bg"] *:not(svg):not(path):not(canvas):not(img):not(video):not(audio){
   color:var(--bw-auto-contrast-text,#ffffff) !important;
 }
 
-[data-bw-text-contrast="light-bg"] :is(svg,path,circle,rect,line,polyline,polygon,.icon,.lucide,.fa,.fas,.far,.fab,.material-icons){
+[data-bw-readable="light-bg"],
+[data-bw-readable="light-bg"]:not(svg):not(path):not(canvas):not(img):not(video):not(audio),
+[data-bw-readable="light-bg"] *:not(svg):not(path):not(canvas):not(img):not(video):not(audio){
   color:var(--bw-auto-contrast-text,#101614) !important;
-  fill:currentColor !important;
-  stroke:currentColor !important;
 }
 
-[data-bw-text-contrast="dark-bg"] :is(svg,path,circle,rect,line,polyline,polygon,.icon,.lucide,.fa,.fas,.far,.fab,.material-icons){
-  color:var(--bw-auto-contrast-text,#ffffff) !important;
-  fill:currentColor !important;
-  stroke:currentColor !important;
+[data-bw-readable="dark-bg"] .subtitle,
+[data-bw-readable="dark-bg"] .small,
+[data-bw-readable="dark-bg"] .note,
+[data-bw-readable="dark-bg"] .muted,
+[data-bw-readable="dark-bg"] .meta,
+[data-bw-readable="dark-bg"] small{
+  color:var(--bw-auto-contrast-muted,rgba(255,255,255,.74)) !important;
 }
 
-[data-bw-text-contrast="light-bg"]:is(
-  h1,h2,h3,h4,h5,h6,p,span,small,label,li,strong,b,em,a,button,.btn,.button,
-  .title,.subtitle,.note,.muted,.small,.description,.section-title,.section-note,.section-subtitle,
-  .home-section-title,.home-section-note,.card-title,.card-text,.item-title,.item-text,.category-title,
-  .hero-title,.hero-text,.surah-name,.surah-meta,.surah-ayahs,.dua-title,.dua-ref,.dua-source,
-  .ayah-meaning,.ayah-translit,.ayah-arabic,.meta-label,.meta-value,.prayer-meta,.status,.manual-note,
-  .theme-toggle-label,.theme-chip,.access-kicker,.access-title,.access-text,.access-status
-){
-  color:var(--bw-auto-contrast-text,#101614) !important;
-  text-shadow:none !important;
+[data-bw-readable="light-bg"] .subtitle,
+[data-bw-readable="light-bg"] .small,
+[data-bw-readable="light-bg"] .note,
+[data-bw-readable="light-bg"] .muted,
+[data-bw-readable="light-bg"] .meta,
+[data-bw-readable="light-bg"] small{
+  color:var(--bw-auto-contrast-muted,rgba(16,22,20,.68)) !important;
 }
 
-[data-bw-text-contrast="dark-bg"]:is(
-  h1,h2,h3,h4,h5,h6,p,span,small,label,li,strong,b,em,a,button,.btn,.button,
-  .title,.subtitle,.note,.muted,.small,.description,.section-title,.section-note,.section-subtitle,
-  .home-section-title,.home-section-note,.card-title,.card-text,.item-title,.item-text,.category-title,
-  .hero-title,.hero-text,.surah-name,.surah-meta,.surah-ayahs,.dua-title,.dua-ref,.dua-source,
-  .ayah-meaning,.ayah-translit,.ayah-arabic,.meta-label,.meta-value,.prayer-meta,.status,.manual-note,
-  .theme-toggle-label,.theme-chip,.access-kicker,.access-title,.access-text,.access-status
-){
-  color:var(--bw-auto-contrast-text,#ffffff) !important;
-}
-
-[data-bw-text-contrast="light-bg"]:is(.subtitle,.note,.muted,small,.small,.description,.card-text,.item-text,.surah-meta,.surah-ayahs,.dua-ref,.dua-source,.prayer-meta,.access-text){
-  color:var(--bw-auto-contrast-soft,rgba(16,22,20,.82)) !important;
-}
-
-[data-bw-text-contrast="dark-bg"]:is(.subtitle,.note,.muted,small,.small,.description,.card-text,.item-text,.surah-meta,.surah-ayahs,.dua-ref,.dua-source,.prayer-meta,.access-text){
-  color:var(--bw-auto-contrast-soft,rgba(255,255,255,.88)) !important;
-}
-
-/* Section/page headings without their own card must follow the visible page/theme background. */
-body [data-bw-text-contrast="light-bg"].section-title,
-body [data-bw-text-contrast="light-bg"].section-note,
-body [data-bw-text-contrast="light-bg"].home-section-title,
-body [data-bw-text-contrast="light-bg"].home-section-note,
-body [data-bw-text-contrast="light-bg"]:is(h1,h2).page-title{
-  color:#101614 !important;
-  text-shadow:none !important;
-}
-
-body [data-bw-text-contrast="dark-bg"].section-title,
-body [data-bw-text-contrast="dark-bg"].section-note,
-body [data-bw-text-contrast="dark-bg"].home-section-title,
-body [data-bw-text-contrast="dark-bg"].home-section-note,
-body [data-bw-text-contrast="dark-bg"]:is(h1,h2).page-title{
-  color:#ffffff !important;
-}
-/* ===== END GLOBAL SMART BACKGROUND CONTRAST V72 ===== */
-
-
-/* ===== GLOBAL CONTROL CONTRAST FIX V73 ===== */
-/* Buttons and switches must read from their own surface, not from the page theme. */
-:is(button,.btn,.button,.quick-btn,.action-btn,.share-btn,.install-btn,.copy-wallet-btn,.share-wallet-btn,.reset-btn,.qibla-reset,#resetHeadingBtn,.theme-toggle,.toggle,.switch,.pill,.filter-btn,.tab,.chip)[data-bw-contrast="dark-bg"],
-:is(button,.btn,.button,.quick-btn,.action-btn,.share-btn,.install-btn,.copy-wallet-btn,.share-wallet-btn,.reset-btn,.qibla-reset,#resetHeadingBtn,.theme-toggle,.toggle,.switch,.pill,.filter-btn,.tab,.chip)[data-bw-text-contrast="dark-bg"]{
+button[data-bw-readable="dark-bg"],
+.btn[data-bw-readable="dark-bg"],
+.button[data-bw-readable="dark-bg"],
+.quick-btn[data-bw-readable="dark-bg"],
+.action-btn[data-bw-readable="dark-bg"],
+.share-btn[data-bw-readable="dark-bg"],
+.install-btn[data-bw-readable="dark-bg"],
+.copy-wallet-btn[data-bw-readable="dark-bg"],
+.share-wallet-btn[data-bw-readable="dark-bg"],
+.reset-btn[data-bw-readable="dark-bg"],
+.qibla-reset[data-bw-readable="dark-bg"],
+.help-option-btn[data-bw-readable="dark-bg"],
+[role="button"][data-bw-readable="dark-bg"]{
   color:#ffffff !important;
 }
 
-:is(button,.btn,.button,.quick-btn,.action-btn,.share-btn,.install-btn,.copy-wallet-btn,.share-wallet-btn,.reset-btn,.qibla-reset,#resetHeadingBtn,.theme-toggle,.toggle,.switch,.pill,.filter-btn,.tab,.chip)[data-bw-contrast="light-bg"],
-:is(button,.btn,.button,.quick-btn,.action-btn,.share-btn,.install-btn,.copy-wallet-btn,.share-wallet-btn,.reset-btn,.qibla-reset,#resetHeadingBtn,.theme-toggle,.toggle,.switch,.pill,.filter-btn,.tab,.chip)[data-bw-text-contrast="light-bg"]{
+button[data-bw-readable="light-bg"],
+.btn[data-bw-readable="light-bg"],
+.button[data-bw-readable="light-bg"],
+.quick-btn[data-bw-readable="light-bg"],
+.action-btn[data-bw-readable="light-bg"],
+.share-btn[data-bw-readable="light-bg"],
+.install-btn[data-bw-readable="light-bg"],
+.copy-wallet-btn[data-bw-readable="light-bg"],
+.share-wallet-btn[data-bw-readable="light-bg"],
+.reset-btn[data-bw-readable="light-bg"],
+.qibla-reset[data-bw-readable="light-bg"],
+.help-option-btn[data-bw-readable="light-bg"],
+[role="button"][data-bw-readable="light-bg"]{
   color:#101614 !important;
-  text-shadow:none !important;
 }
-
-:is(button,.btn,.button,.quick-btn,.action-btn,.share-btn,.install-btn,.copy-wallet-btn,.share-wallet-btn,.reset-btn,.qibla-reset,#resetHeadingBtn,.theme-toggle,.toggle,.switch,.pill,.filter-btn,.tab,.chip)[data-bw-contrast="dark-bg"] *,
-:is(button,.btn,.button,.quick-btn,.action-btn,.share-btn,.install-btn,.copy-wallet-btn,.share-wallet-btn,.reset-btn,.qibla-reset,#resetHeadingBtn,.theme-toggle,.toggle,.switch,.pill,.filter-btn,.tab,.chip)[data-bw-text-contrast="dark-bg"] *{
-  color:#ffffff !important;
-  fill:currentColor !important;
-  stroke:currentColor !important;
-}
-
-:is(button,.btn,.button,.quick-btn,.action-btn,.share-btn,.install-btn,.copy-wallet-btn,.share-wallet-btn,.reset-btn,.qibla-reset,#resetHeadingBtn,.theme-toggle,.toggle,.switch,.pill,.filter-btn,.tab,.chip)[data-bw-contrast="light-bg"] *,
-:is(button,.btn,.button,.quick-btn,.action-btn,.share-btn,.install-btn,.copy-wallet-btn,.share-wallet-btn,.reset-btn,.qibla-reset,#resetHeadingBtn,.theme-toggle,.toggle,.switch,.pill,.filter-btn,.tab,.chip)[data-bw-text-contrast="light-bg"] *{
-  color:#101614 !important;
-  fill:currentColor !important;
-  stroke:currentColor !important;
-  text-shadow:none !important;
-}
-/* ===== END GLOBAL CONTROL CONTRAST FIX V73 ===== */
