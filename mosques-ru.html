@@ -1140,7 +1140,7 @@ html.light-mode .nav-metrics{
   <section class="hero">
     <div class="bismillah">بِسْمِ ٱللَّٰهِ ٱلرَّحْمَـٰنِ ٱلرَّحِيمِ</div>
     <h1>Мечети поблизости</h1>
-    <p class="subtitle">Автоматический GPS-поиск мечетей в радиусе 15 км: карта, расстояние, точный адрес, маршрут и быстрый запуск навигатора.</p>
+    <p class="subtitle">Автоматический GPS-поиск мечетей в радиусе 5 км: карта, расстояние, точный адрес, маршрут и быстрый запуск навигатора.</p>
   </section>
 
   <div class="top-actions" aria-label="Действия страницы">
@@ -1245,7 +1245,7 @@ html.light-mode .nav-metrics{
     mosques:[],
     filtered:[],
     selected:null,
-    radius:15000,
+    radius:5000,
     loading:false,
     map:null,
     userMarker:null,
@@ -1589,9 +1589,69 @@ L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
     }
   }
 
+
+  function getFastStoredCoords(){
+    const direct = getStoredMosqueCoords() || getStoredPrayerCoords();
+    if(direct && isValidCoord(direct.lat, direct.lon)) return direct;
+    return null;
+  }
+
+  function applyCoordsAndSearch(lat, lon, label, accuracy){
+    state.coords = {
+      lat,
+      lon,
+      accuracy:accuracy || null
+    };
+
+    saveMosqueCoords(lat, lon, label || "Локация определена");
+    updateUserOnMap(lat, lon, accuracy || null);
+    els.userLocation.textContent = label || `${compactCoord(lat)}, ${compactCoord(lon)}`;
+
+    setStatus("Ищем мечети поблизости", "Быстрый поиск ближайших мечетей в радиусе 5 км.");
+    searchNearbyMosques();
+  }
+
+  function requestFastLocation(){
+    document.querySelector(".status-panel")?.classList.add("is-gps-loading");
+    setStatus("Определяем GPS-локацию", "Получаем быстрые координаты и сразу запускаем поиск.");
+
+    const stored = getFastStoredCoords();
+    if(stored){
+      applyCoordsAndSearch(stored.lat, stored.lon, stored.label || "Сохранённая локация", null);
+    }
+
+    if(!navigator.geolocation){
+      handleGeolocationError({code:0});
+      return;
+    }
+
+    navigator.geolocation.getCurrentPosition(
+      async position => {
+        const lat = position.coords.latitude;
+        const lon = position.coords.longitude;
+        const accuracy = position.coords.accuracy || null;
+        const label = await reversePlaceName(lat, lon);
+        applyCoordsAndSearch(lat, lon, label, accuracy);
+      },
+      error => {
+        if(!stored){
+          handleGeolocationError(error);
+        }else{
+          toast("Показаны ближайшие мечети по последней сохранённой локации");
+        }
+      },
+      {
+        enableHighAccuracy:false,
+        timeout:3500,
+        maximumAge:300000
+      }
+    );
+  }
+
+
   function buildOverpassQuery(lat, lon, radius){
     return `
-[out:json][timeout:12];
+[out:json][timeout:6];
 (
   node["amenity"="place_of_worship"]["religion"="muslim"](around:${radius},${lat},${lon});
   way["amenity"="place_of_worship"]["religion"="muslim"](around:${radius},${lat},${lon});
@@ -1695,7 +1755,7 @@ async function fetchOverpass(lat, lon, radius){
           method:"POST",
           headers:{"Content-Type":"application/x-www-form-urlencoded;charset=UTF-8"},
           body:new URLSearchParams({data:query})
-        }, 6500);
+        }, 3200);
         if(!response.ok) throw new Error("request failed");
         return await response.json();
       }catch(error){
@@ -1704,7 +1764,7 @@ async function fetchOverpass(lat, lon, radius){
 
       try{
         const url = endpoint + "?data=" + encodeURIComponent(query);
-        const response = await fetchWithTimeout(url, {method:"GET"}, 6500);
+        const response = await fetchWithTimeout(url, {method:"GET"}, 3200);
         if(!response.ok) throw new Error("request failed");
         return await response.json();
       }catch(error){
@@ -1778,23 +1838,17 @@ async function fetchOverpass(lat, lon, radius){
     const queries = [
       "mosque",
       "masjid",
-      "musalla",
-      "juma masjid",
-      "jome masjid",
       "мечеть",
-      "жоме мечеть",
-      "жума мечеть",
-      "namozgoh",
       "مسجد"
     ];
 
-    const viewbox = nominatimViewbox(lat, lon, 15);
+    const viewbox = nominatimViewbox(lat, lon, 5);
 
     const requests = queries.map(async q => {
       try{
         const params = new URLSearchParams({
           format:"jsonv2",
-          limit:"30",
+          limit:"12",
           addressdetails:"1",
           extratags:"1",
           namedetails:"1",
@@ -1802,7 +1856,7 @@ async function fetchOverpass(lat, lon, radius){
           viewbox:viewbox,
           q:q
         });
-        const response = await fetchWithTimeout(`${NOMINATIM_SEARCH}?${params.toString()}`, {}, 4200);
+        const response = await fetchWithTimeout(`${NOMINATIM_SEARCH}?${params.toString()}`, {}, 2600);
         if(!response.ok) return [];
         const data = await response.json();
         return Array.isArray(data) ? data : [];
@@ -1817,7 +1871,7 @@ async function fetchOverpass(lat, lon, radius){
 
   async function reversePlaceName(lat, lon){
     try{
-      const response = await fetchWithTimeout(`${NOMINATIM_REVERSE}?format=jsonv2&lat=${lat}&lon=${lon}`, {}, 3500);
+      const response = await fetchWithTimeout(`${NOMINATIM_REVERSE}?format=jsonv2&lat=${lat}&lon=${lon}`, {}, 2200);
       const data = await response.json();
       const address = data.address || {};
       const city = address.city || address.town || address.village || address.county || "";
@@ -2272,9 +2326,9 @@ async function fetchOverpass(lat, lon, radius){
     renderList();
 
     if(options && options.silent){
-      setStatus("Ищем мечети поблизости", "Сканируем OpenStreetMap/Overpass в радиусе 15 км от вашей GPS-локации.");
+      setStatus("Ищем мечети поблизости", "Сканируем OpenStreetMap/Overpass в радиусе 5 км от вашей GPS-локации.");
     }else{
-      setStatus("Локация определена", "Сканируем мечети и мусалла в радиусе 15 км, ближайшие выводим первыми.");
+      setStatus("Локация определена", "Сканируем мечети и мусалла в радиусе 5 км, ближайшие выводим первыми.");
     }
 
     els.locateBtn.classList.add("is-active");
@@ -2304,7 +2358,7 @@ async function fetchOverpass(lat, lon, radius){
         selectMosque(state.mosques[0].id, false);
         setStatus("Мечети поблизости", `Найдено: ${state.mosques.length}. Ближайшая: ${state.mosques[0].name}, ${formatDistance(state.mosques[0].distance)} от вас.`);
       }else{
-        setStatus("Мечети не найдены", "В радиусе 15 км открытые карты не вернули мечети. Проверьте GPS или попробуйте обновить поиск.");
+        setStatus("Мечети не найдены", "В радиусе 5 км открытые карты не вернули мечети. Проверьте GPS или попробуйте обновить поиск.");
         renderList();
       }
     }catch(error){
@@ -2649,6 +2703,36 @@ ${item.address}
   restoreTheme();
   window.addEventListener("resize", () => state.map && state.map.invalidateSize());
   autoStart();
+  if(!window.__barakawayFastLocationBound){
+    window.__barakawayFastLocationBound = true;
+    els.locateBtn.onclick = requestFastLocation;
+    els.trackBtn.onclick = function(){
+      els.trackBtn.classList.add("is-active");
+      requestFastLocation();
+    };
+  }
+
+  if(!window.__barakawayRefreshOverride){
+    window.__barakawayRefreshOverride = true;
+    els.refreshBtn.onclick = function(){
+      state.loading = false;
+      state.mosques = [];
+      state.filtered = [];
+      state.selected = null;
+      state.nearestOnly = false;
+      els.nearestBtn.classList.remove("is-active");
+      els.resultCount.textContent = "0";
+      els.selectedMosque.textContent = "Не выбрана";
+      els.searchInput.value = "";
+      state.mosqueLayer?.clearLayers();
+      state.routeLayer?.clearLayers();
+      document.querySelector(".status-panel")?.classList.remove("is-gps-loading");
+      setStatus("Готово к поиску", "Нажмите «Найти рядом»: поиск стартует быстро в радиусе 5 км.");
+      els.results.innerHTML = `<div class="empty">Поиск очищен. Нажмите «Найти рядом».</div>`;
+      toast("Поиск очищен");
+    };
+  }
+
 })();
 </script>
 <script src="/bottom-nav.js"></script>
