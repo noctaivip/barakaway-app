@@ -638,3 +638,85 @@ function activeKey() {
   window.addEventListener("storage", applyBottomNavTheme);
   document.addEventListener("DOMContentLoaded", applyBottomNavTheme);
 
+
+/* === BarakaWay PRO bottom nav solid theme background === */
+(function(){
+  function themeData(theme){
+    var map = {
+      "royal-gold":     { bg:"linear-gradient(180deg,#4b3717 0%,#241707 100%)", accent:"#d7c07a" },
+      "emerald-quran":  { bg:"linear-gradient(180deg,#073c29 0%,#032015 100%)", accent:"#48f29d" },
+      "violet-noor":    { bg:"linear-gradient(180deg,#351d57 0%,#170927 100%)", accent:"#b57cff" },
+      "rose-soft":      { bg:"linear-gradient(180deg,#5b2640 0%,#2b1020 100%)", accent:"#ff7eb6" },
+      "carbon-elite":   { bg:"linear-gradient(180deg,#262f37 0%,#0d1118 100%)", accent:"#cfd8e3" },
+      "children-soft":  { bg:"linear-gradient(180deg,#214b6f 0%,#10283f 100%)", accent:"#4da8ff" },
+      "night-mosque":   { bg:"linear-gradient(180deg,#15285f 0%,#070d29 100%)", accent:"#7ea6ff" },
+      "desert-sand":    { bg:"linear-gradient(180deg,#60461f 0%,#2c1d09 100%)", accent:"#e0b36c" }
+    };
+    return map[theme] || null;
+  }
+
+  function getPremiumTheme(){
+    var root = document.documentElement;
+    var theme = root.getAttribute("data-premium-theme") || "";
+    if (theme) return theme;
+
+    var cls = Array.prototype.slice.call(root.classList).find(function(c){
+      return c.indexOf("premium-theme-") === 0;
+    });
+
+    return cls ? cls.replace("premium-theme-","") : "";
+  }
+
+  function applySolidBottomNav(){
+    var data = themeData(getPremiumTheme());
+    if (!data) return;
+
+    document.documentElement.style.setProperty("--bottom-nav-accent", data.accent);
+    document.documentElement.style.setProperty("--bottom-nav-bg-solid", data.bg);
+
+    document.querySelectorAll(".bottom-app-nav, .bottom-nav").forEach(function(nav){
+      nav.style.setProperty("background", data.bg, "important");
+      nav.style.setProperty("background-image", data.bg, "important");
+      nav.style.setProperty("background-color", "transparent", "important");
+      nav.style.setProperty("opacity", "1", "important");
+      nav.style.setProperty("backdrop-filter", "none", "important");
+      nav.style.setProperty("-webkit-backdrop-filter", "none", "important");
+      nav.style.setProperty("border-top", "1.5px solid " + data.accent + "66", "important");
+      nav.style.setProperty("box-shadow", "0 -14px 34px rgba(0,0,0,.34), inset 0 1px 0 rgba(255,255,255,.08), 0 0 24px " + data.accent + "22", "important");
+    });
+
+    document.querySelectorAll(".bottom-app-nav-inner").forEach(function(inner){
+      inner.style.setProperty("background", "rgba(0,0,0,.12)", "important");
+      inner.style.setProperty("background-image", "none", "important");
+      inner.style.setProperty("border", "1px solid " + data.accent + "55", "important");
+      inner.style.setProperty("box-shadow", "inset 0 1px 0 rgba(255,255,255,.08)", "important");
+    });
+
+    document.querySelectorAll(".bottom-app-nav-item").forEach(function(item){
+      item.style.setProperty("color", data.accent, "important");
+    });
+
+    document.querySelectorAll(".bottom-app-nav-item svg").forEach(function(svg){
+      svg.style.setProperty("stroke", data.accent, "important");
+      svg.style.setProperty("color", data.accent, "important");
+    });
+  }
+
+  function scheduleApply(){
+    applySolidBottomNav();
+    setTimeout(applySolidBottomNav, 100);
+    setTimeout(applySolidBottomNav, 500);
+    setTimeout(applySolidBottomNav, 1200);
+  }
+
+  if (document.readyState === "loading") {
+    document.addEventListener("DOMContentLoaded", scheduleApply);
+  } else {
+    scheduleApply();
+  }
+
+  window.addEventListener("load", scheduleApply);
+  window.addEventListener("storage", scheduleApply);
+  window.addEventListener("barakaway:premium-theme-change", scheduleApply);
+})();
+
