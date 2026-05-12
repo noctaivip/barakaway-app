@@ -1025,6 +1025,59 @@ html.light-mode .nav-metrics{
   100%{transform:scale(1.8);opacity:0}
 }
 
+
+.premium-search-loading{
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  gap:14px;
+}
+.gps-radar{
+  position:relative;
+  width:26px;
+  height:26px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+}
+.gps-radar-dot{
+  width:10px;
+  height:10px;
+  border-radius:999px;
+  background:#2d7a46;
+  box-shadow:0 0 18px rgba(45,122,70,.65);
+  z-index:2;
+  animation:gpsDotPulse 1.1s infinite ease-in-out;
+}
+.gps-radar-ring{
+  position:absolute;
+  inset:0;
+  border-radius:999px;
+  border:2px solid rgba(45,122,70,.42);
+  animation:gpsRadarScan 1.8s infinite linear;
+}
+.gps-radar-ring.delay{
+  animation-delay:.9s;
+}
+.gps-search-text{
+  font-weight:900;
+  letter-spacing:-.01em;
+}
+@keyframes gpsRadarScan{
+  0%{
+    transform:scale(.35);
+    opacity:.95;
+  }
+  100%{
+    transform:scale(1.9);
+    opacity:0;
+  }
+}
+@keyframes gpsDotPulse{
+  0%,100%{transform:scale(1)}
+  50%{transform:scale(1.28)}
+}
+
 </style>
 <script src="/theme-init.js"></script>
 <link rel="stylesheet" href="/theme.css">
@@ -1066,7 +1119,7 @@ html.light-mode .nav-metrics{
       <span id="statusTitle">Готово к поиску</span>
       <span id="resultCount">0</span>
     </div>
-    <p class="status-text" id="statusText">При открытии страницы автоматически запрашивается GPS. Если доступ запрещён, включите геолокацию в настройках телефона/браузера.</p>
+    <p class="status-text" id="statusText">Автоматический поиск ближайших мечетей по GPS.</p>
     <div class="location-grid">
       <div class="info-box">
         <div class="info-label">Текущая локация</div>
@@ -1821,9 +1874,13 @@ async function fetchOverpass(lat, lon, radius){
 
     if(state.loading){
       els.results.innerHTML = `<div class="empty">
-      <div class="gps-loading">
-        <span class="gps-pulse"></span>
-        GPS определяет локацию и ищет ближайшие мечети…
+      <div class="gps-loading premium-search-loading">
+        <span class="gps-radar">
+          <span class="gps-radar-ring"></span>
+          <span class="gps-radar-ring delay"></span>
+          <span class="gps-radar-dot"></span>
+        </span>
+        <span class="gps-search-text">Ищем мечети поблизости…</span>
       </div>
     </div>`;
       return;
