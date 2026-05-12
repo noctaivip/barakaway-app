@@ -1306,7 +1306,7 @@ html.light-mode .nav-metrics{
       els.statusTitle.textContent = title;
     }
     els.statusText.textContent = text;
-    const isGpsLoading = /gps|гео|локац|местополож/i.test(`${title} ${text}`) && /определ|ищ|скан|поиск|жд/i.test(`${title} ${text}`);
+    const isGpsLoading = /gps|гео|локац|местополож|мечет/i.test(`${title} ${text}`) && /определ|ищ|скан|поиск|жд|поблизост/i.test(`${title} ${text}`);
     document.querySelector(".status-panel")?.classList.toggle("is-gps-loading", isGpsLoading);
   }
 
@@ -1608,6 +1608,7 @@ L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
     els.userLocation.textContent = label || `${compactCoord(lat)}, ${compactCoord(lon)}`;
 
     setStatus("Ищем мечети поблизости", "Быстрый поиск ближайших мечетей в радиусе 5 км.");
+    renderImmediateCachedMosques();
     searchNearbyMosques();
   }
 
@@ -1642,8 +1643,8 @@ L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
       },
       {
         enableHighAccuracy:false,
-        timeout:3500,
-        maximumAge:300000
+        timeout:1800,
+        maximumAge:900000
       }
     );
   }
@@ -1651,7 +1652,7 @@ L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
 
   function buildOverpassQuery(lat, lon, radius){
     return `
-[out:json][timeout:6];
+[out:json][timeout:3];
 (
   node["amenity"="place_of_worship"]["religion"="muslim"](around:${radius},${lat},${lon});
   way["amenity"="place_of_worship"]["religion"="muslim"](around:${radius},${lat},${lon});
@@ -1745,34 +1746,49 @@ out center tags;
   }
 
 
+
+
+  function renderImmediateCachedMosques(){
+    const cached = getCachedMosques();
+    if(!cached || !cached.length || !state.coords) return false;
+
+    const refreshed = cached.map(item => ({
+      ...item,
+      distance:distanceMeters(state.coords.lat, state.coords.lon, item.lat, item.lon)
+    })).sort((a,b) => a.distance - b.distance);
+
+    state.mosques = refreshed;
+    updateFiltered();
+    renderList();
+    renderMapMarkers();
+    els.resultCount.textContent = String(refreshed.length);
+    return true;
+  }
+
+
 async function fetchOverpass(lat, lon, radius){
     const query = buildOverpassQuery(lat, lon, radius);
-    let lastError = null;
 
-    for(const endpoint of OVERPASS_ENDPOINTS){
-      try{
-        const response = await fetchWithTimeout(endpoint, {
-          method:"POST",
-          headers:{"Content-Type":"application/x-www-form-urlencoded;charset=UTF-8"},
-          body:new URLSearchParams({data:query})
-        }, 3200);
-        if(!response.ok) throw new Error("request failed");
-        return await response.json();
-      }catch(error){
-        lastError = error;
-      }
+    const requests = OVERPASS_ENDPOINTS.flatMap(endpoint => {
+      const postRequest = fetchWithTimeout(endpoint, {
+        method:"POST",
+        headers:{"Content-Type":"application/x-www-form-urlencoded;charset=UTF-8"},
+        body:new URLSearchParams({data:query})
+      }, 1600).then(r => {
+        if(!r.ok) throw new Error("request failed");
+        return r.json();
+      });
 
-      try{
-        const url = endpoint + "?data=" + encodeURIComponent(query);
-        const response = await fetchWithTimeout(url, {method:"GET"}, 3200);
-        if(!response.ok) throw new Error("request failed");
-        return await response.json();
-      }catch(error){
-        lastError = error;
-      }
-    }
+      const getUrl = endpoint + "?data=" + encodeURIComponent(query);
+      const getRequest = fetchWithTimeout(getUrl, {method:"GET"}, 1600).then(r => {
+        if(!r.ok) throw new Error("request failed");
+        return r.json();
+      });
 
-    throw lastError || new Error("request failed");
+      return [postRequest, getRequest];
+    });
+
+    return await Promise.any(requests);
   }
 
   function nominatimViewbox(lat, lon, km){
@@ -1856,7 +1872,7 @@ async function fetchOverpass(lat, lon, radius){
           viewbox:viewbox,
           q:q
         });
-        const response = await fetchWithTimeout(`${NOMINATIM_SEARCH}?${params.toString()}`, {}, 2600);
+        const response = await fetchWithTimeout(`${NOMINATIM_SEARCH}?${params.toString()}`, {}, 900);
         if(!response.ok) return [];
         const data = await response.json();
         return Array.isArray(data) ? data : [];
@@ -1871,7 +1887,7 @@ async function fetchOverpass(lat, lon, radius){
 
   async function reversePlaceName(lat, lon){
     try{
-      const response = await fetchWithTimeout(`${NOMINATIM_REVERSE}?format=jsonv2&lat=${lat}&lon=${lon}`, {}, 2200);
+      const response = await fetchWithTimeout(`${NOMINATIM_REVERSE}?format=jsonv2&lat=${lat}&lon=${lon}`, {}, 900);
       const data = await response.json();
       const address = data.address || {};
       const city = address.city || address.town || address.village || address.county || "";

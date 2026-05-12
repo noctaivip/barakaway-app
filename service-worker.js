@@ -3,7 +3,7 @@
    Goal: always prefer the newest files from the network, especially HTML/JS/CSS.
 */
 
-const CACHE_VERSION = '20260512-emerald-quran-theme-v96';
+const CACHE_VERSION = '20260512-emerald-quran-theme-v97';
 const CACHE_NAME = `barakaway-runtime-${CACHE_VERSION}`;
 
 const APP_SHELL = [
