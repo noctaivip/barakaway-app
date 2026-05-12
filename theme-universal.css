@@ -2003,108 +2003,136 @@ html[class*="premium-theme-"] body:not(.page-themes-pro) svg :is(path,circle,rec
 }
 /* ===== END PREMIUM SMART CONTRAST SUPPORT V60 ===== */
 
-/* ===== PREMIUM AUTO CONTRAST CLASS RULES V64 ===== */
-/* Strict final layer for JS-applied contrast classes. */
+/* ===== PREMIUM STABLE CONTRAST + GOLD ICONS + LIGHT MODE V65 ===== */
+/* Stable CSS-only final layer: no JS color recalculation, no text flicker. */
 
 html[class*="premium-theme-"]{
-  --bw-contrast-dark:#101614;
-  --bw-contrast-dark-soft:rgba(16,22,20,.82);
-  --bw-contrast-light:#ffffff;
-  --bw-contrast-light-soft:rgba(255,255,255,.86);
+  --bw-premium-text-on-dark:#ffffff;
+  --bw-premium-text-on-dark-soft:rgba(255,255,255,.86);
+  --bw-premium-text-on-light:#101614;
+  --bw-premium-text-on-light-soft:rgba(16,22,20,.82);
+  --bw-premium-gold-icon:#d7b56d;
+  --bw-premium-gold-icon-soft:#f3d992;
 }
 
-/* Dark background => light text/icons */
-html[class*="premium-theme-"] body:not(.page-themes-pro) .bw-auto-on-dark,
-html[class*="premium-theme-"] body:not(.page-themes-pro) .bw-auto-on-dark :is(
-  h1,h2,h3,h4,h5,h6,p,span,small,label,li,strong,b,em,
-  .title,.subtitle,.note,.muted,.section-title,.section-note,.section-subtitle,
-  .home-section-title,.home-section-note,.today-hub-title,.theme-toggle-label,
-  .card-title,.card-text,.item-title,.item-text,.category-title,.hero-title,
-  .surah-name,.surah-meta,.surah-ayahs,.dua-title,.dua-ref,.dua-source,
-  .ayah-meaning,.ayah-translit,.ayah-arabic,.meta-label,.meta-value,
-  .prayer-meta,.status,.manual-note,
-  svg,path,circle,rect,line,polyline,polygon,
-  .icon,.lucide,.fa,.fas,.far,.fab,.material-icons
+html[class*="premium-theme-"] body:not(.page-themes-pro),
+html[class*="premium-theme-"] body:not(.page-themes-pro) > :is(
+  .container,.page,.content,main,.page-wrapper,.screen,.layout,.app-shell,.app,.site,.viewport,#app,#root
 ){
-  color:var(--bw-contrast-light) !important;
-  fill:currentColor !important;
-  stroke:currentColor !important;
-  text-shadow:none !important;
+  background-attachment:scroll !important;
 }
 
-/* Light background => dark text/icons */
-html[class*="premium-theme-"] body:not(.page-themes-pro) .bw-auto-on-light,
-html[class*="premium-theme-"] body:not(.page-themes-pro) .bw-auto-on-light :is(
-  h1,h2,h3,h4,h5,h6,p,span,small,label,li,strong,b,em,
-  .title,.subtitle,.note,.muted,.section-title,.section-note,.section-subtitle,
-  .home-section-title,.home-section-note,.today-hub-title,.theme-toggle-label,
-  .card-title,.card-text,.item-title,.item-text,.category-title,.hero-title,
-  .surah-name,.surah-meta,.surah-ayahs,.dua-title,.dua-ref,.dua-source,
-  .ayah-meaning,.ayah-translit,.ayah-arabic,.meta-label,.meta-value,
-  .prayer-meta,.status,.manual-note,
-  svg,path,circle,rect,line,polyline,polygon,
-  .icon,.lucide,.fa,.fas,.far,.fab,.material-icons
-){
-  color:var(--bw-contrast-dark) !important;
-  fill:currentColor !important;
-  stroke:currentColor !important;
-  text-shadow:none !important;
-}
-
-/* Hard safety for known dark surfaces from screenshots */
+/* Gold icons everywhere in premium themes */
 html[class*="premium-theme-"] body:not(.page-themes-pro) :is(
-  .today-hub,.today-action,.today-card,.premium-resource-card,
+  svg,path,circle,rect,line,polyline,polygon,
+  .icon,.icon *,.lucide,.lucide *,
+  .fa,.fas,.far,.fab,.material-icons,
+  .theme-icon,.theme-icon *,
+  .quick-icon,.quick-icon *,
+  .today-action-icon,.today-action-icon *,
+  .premium-resource-icon,.premium-resource-icon *,
+  .bottom-app-nav svg,.bottom-app-nav path,
+  button svg,button path,.btn svg,.btn path
+){
+  color:var(--bw-premium-gold-icon) !important;
+  fill:currentColor !important;
+  stroke:currentColor !important;
+}
+
+/* Dark surfaces: force light text */
+html[class*="premium-theme-"] body:not(.page-themes-pro) :is(
   .brand-prayer-hero,.home-prayer-widget,.home-prayer-countdown,
+  .today-hub,.today-action,.today-card,.daily-card,.task-card,.challenge-card,.ayah-day-card,.quiz-card,
+  .premium-resource-card,.premium-resource,.pro-card,.pro-feature,.pro-item,
+  .card,.box,.panel,.block,.quote,.empty,.article,.category-panel,
+  .surah-card,.prayer-card,.dua-card,.ayah-card,.master-audio-wrap,
+  .toggle-row,.meta-item,.note-box,.jumuah-box,.month-day,.month-head,.wallet-support,.home-widget,
+  .intro,.transactions,.verification,.donation-dropdown,.donation-dropdown-content,
+  .dropdown-block,.dropdown-content,.name-chip,.help-category,.help-card,.aid-card,.support-card,
+  .qibla-panel,.qibla-card,.qibla-box,.mosque-panel,.mosque-card,.map-panel,.status-panel,
   .hero,.hero-panel,.hero-card,.hero-box,.page-hero,.section-hero,.quran-hero,.duas-hero,.congrats-hero,
-  .generator,.tabs,.greeting-card,.card-body,.card-actions,
-  .mosque-panel,.mosque-card,.qibla-panel,.qibla-card,.qibla-box,
-  .panel,.card,.box,.block,.section-card,.content-card,.dropdown-block,.accordion-item,details,summary
+  .generator,.tabs,.greeting-card,.card-body,.card-actions,.modal-card,.toast,
+  .accordion,.accordion-item,.accordion-header,.accordion-body,details,summary
+),
+html[class*="premium-theme-"] body:not(.page-themes-pro) :is(
+  .brand-prayer-hero,.home-prayer-widget,.home-prayer-countdown,
+  .today-hub,.today-action,.today-card,.daily-card,.task-card,.challenge-card,.ayah-day-card,.quiz-card,
+  .premium-resource-card,.premium-resource,.pro-card,.pro-feature,.pro-item,
+  .card,.box,.panel,.block,.quote,.empty,.article,.category-panel,
+  .surah-card,.prayer-card,.dua-card,.ayah-card,.master-audio-wrap,
+  .toggle-row,.meta-item,.note-box,.jumuah-box,.month-day,.month-head,.wallet-support,.home-widget,
+  .intro,.transactions,.verification,.donation-dropdown,.donation-dropdown-content,
+  .dropdown-block,.dropdown-content,.name-chip,.help-category,.help-card,.aid-card,.support-card,
+  .qibla-panel,.qibla-card,.qibla-box,.mosque-panel,.mosque-card,.map-panel,.status-panel,
+  .hero,.hero-panel,.hero-card,.hero-box,.page-hero,.section-hero,.quran-hero,.duas-hero,.congrats-hero,
+  .generator,.tabs,.greeting-card,.card-body,.card-actions,.modal-card,.toast,
+  .accordion,.accordion-item,.accordion-header,.accordion-body,details,summary
 ) :is(
   h1,h2,h3,h4,h5,h6,p,span,small,label,li,strong,b,em,
-  .title,.subtitle,.note,.muted,.section-title,.section-note,.home-section-title,.today-hub-title,
-  .card-title,.card-text,.item-title,.item-text,.theme-toggle-label,
-  svg,path,circle,rect,line,polyline,polygon,.icon,.lucide,.fa,.fas,.far,.fab,.material-icons
+  .title,.subtitle,.note,.muted,.section-title,.section-note,.section-subtitle,
+  .home-section-title,.home-section-note,.today-hub-title,.theme-toggle-label,
+  .card-title,.card-text,.item-title,.item-text,.category-title,.hero-title,
+  .surah-name,.surah-meta,.surah-ayahs,.dua-title,.dua-ref,.dua-source,
+  .ayah-meaning,.ayah-translit,.ayah-arabic,.meta-label,.meta-value,
+  .prayer-meta,.status,.manual-note
 ){
-  color:var(--bw-contrast-light) !important;
-  fill:currentColor !important;
-  stroke:currentColor !important;
+  color:var(--bw-premium-text-on-dark) !important;
   text-shadow:none !important;
 }
 
-/* Hard safety for known light action buttons on light PRO backgrounds */
-html:is(.premium-theme-rose-soft,.premium-theme-children-soft,.premium-theme-desert-sand,.premium-theme-royal-gold)
-body:not(.page-themes-pro) :is(
+html[class*="premium-theme-"] body:not(.page-themes-pro) :is(
+  .brand-prayer-hero,.home-prayer-widget,.home-prayer-countdown,
+  .today-hub,.today-action,.today-card,.premium-resource-card,
+  .card,.box,.panel,.block,.surah-card,.dua-card,.ayah-card,.prayer-card,
+  .generator,.tabs,.greeting-card,.mosque-panel,.qibla-panel
+) :is(
+  .subtitle,.note,.muted,small,.small,.description,.card-text,.item-text,
+  .surah-meta,.surah-ayahs,.dua-ref,.dua-source,.prayer-meta,.section-note,.home-section-note
+){
+  color:var(--bw-premium-text-on-dark-soft) !important;
+}
+
+/* PRO Light Mode: direct page text must be dark */
+html[class*="premium-theme-"].light-mode body:not(.page-themes-pro),
+html[class*="premium-theme-"].light-mode body:not(.page-themes-pro) > :is(
+  .container,.page,.content,main,.page-wrapper,.screen,.layout,.app-shell,.app,.site,.viewport,#app,#root
+){
+  color:var(--bw-premium-text-on-light) !important;
+}
+
+html[class*="premium-theme-"].light-mode body:not(.page-themes-pro) > :is(
+  .container,.page,.content,main,.page-wrapper,.screen,.layout,.app-shell,.app,.site,.viewport,#app,#root
+) > :is(
+  h1,h2,h3,h4,h5,h6,p,span,small,label,li,.title,.subtitle,.section-title,.home-section-title,.section-note,.home-section-note
+){
+  color:var(--bw-premium-text-on-light) !important;
+  text-shadow:none !important;
+}
+
+/* Light/translucent toolbar buttons on light PRO backgrounds: dark text, gold icons */
+html[class*="premium-theme-"].light-mode body:not(.page-themes-pro) :is(
   .toolbar-btn,.filter-btn,.tab:not(.active),.tab-btn:not(.active),
   .quran-toolbar button,.surah-actions button,.action-chip,.theme-action,.glass-btn,.glass-control,.light-control
 ),
-html:is(.premium-theme-rose-soft,.premium-theme-children-soft,.premium-theme-desert-sand,.premium-theme-royal-gold)
-body:not(.page-themes-pro) :is(
+html[class*="premium-theme-"].light-mode body:not(.page-themes-pro) :is(
   .toolbar-btn,.filter-btn,.tab:not(.active),.tab-btn:not(.active),
   .quran-toolbar button,.surah-actions button,.action-chip,.theme-action,.glass-btn,.glass-control,.light-control
-) :is(
-  h1,h2,h3,h4,h5,h6,p,span,small,label,li,strong,b,em,
-  svg,path,circle,rect,line,polyline,polygon,.icon,.lucide,.fa,.fas,.far,.fab,.material-icons
-){
-  color:var(--bw-contrast-dark) !important;
+) :is(h1,h2,h3,h4,h5,h6,p,span,small,label,li,strong,b,em,.title,.subtitle,.note,.muted){
+  color:var(--bw-premium-text-on-light) !important;
+  text-shadow:none !important;
+}
+
+html[class*="premium-theme-"].light-mode body:not(.page-themes-pro) :is(
+  .toolbar-btn,.filter-btn,.tab:not(.active),.tab-btn:not(.active),
+  .quran-toolbar button,.surah-actions button,.action-chip,.theme-action,.glass-btn,.glass-control,.light-control
+) :is(svg,path,circle,rect,line,polyline,polygon,.icon,.lucide,.fa,.fas,.far,.fab,.material-icons){
+  color:var(--bw-premium-gold-icon) !important;
   fill:currentColor !important;
   stroke:currentColor !important;
 }
 
-/* Main page text on light PRO background */
-html.bw-premium-page-light body:not(.page-themes-pro) > :is(.container,.page,.content,main) :is(
-  h1,h2,h3,h4,h5,h6,.title,.section-title,.home-section-title
-):not(
-  .today-hub *,.today-action *,.today-card *,.premium-resource-card *,
-  .brand-prayer-hero *,.home-prayer-widget *,.home-prayer-countdown *,
-  .hero *,.hero-panel *,.generator *,.tabs *,.greeting-card *,
-  .card *,.box *,.panel *,.block *,.surah-card *,.dua-card *,.ayah-card *,.prayer-card *,
-  button *,.btn *,.bottom-app-nav *
-){
-  color:var(--bw-contrast-dark) !important;
-}
-
-/* Dark controls in any premium theme */
-html[class*="premium-theme-"] body:not(.page-themes-pro) :is(
+/* Dark controls in Light Mode still need white text */
+html[class*="premium-theme-"].light-mode body:not(.page-themes-pro) :is(
   .desktop-theme-toggle,.desktop-theme-toggle *,
   .desktop-theme-toggle-inner,.desktop-theme-toggle-inner *,
   .support-project-btn,.support-project-btn *,
@@ -2114,7 +2142,23 @@ html[class*="premium-theme-"] body:not(.page-themes-pro) :is(
   .bottom-app-nav,.bottom-app-nav *,
   input,textarea,select,.search-input,.search-box input,.wallet-address
 ){
-  color:var(--bw-contrast-light) !important;
+  color:var(--bw-premium-text-on-dark) !important;
+}
+
+/* Primary/active text must stay readable */
+html[class*="premium-theme-"] body:not(.page-themes-pro) :is(
+  .active,.active *,button.active,button.active *,.btn.primary,.btn.primary *,
+  .tab.active,.tab.active *,.action-btn.primary,.action-btn.primary *
+){
+  color:var(--bw-premium-text-on-dark) !important;
+}
+
+/* But icons inside active controls remain gold */
+html[class*="premium-theme-"] body:not(.page-themes-pro) :is(
+  .active,.active *,button.active,button.active *,.btn.primary,.btn.primary *,
+  .tab.active,.tab.active *,.action-btn.primary,.action-btn.primary *
+) :is(svg,path,circle,rect,line,polyline,polygon,.icon,.lucide,.fa,.fas,.far,.fab,.material-icons){
+  color:var(--bw-premium-gold-icon-soft) !important;
   fill:currentColor !important;
   stroke:currentColor !important;
 }
@@ -2124,11 +2168,10 @@ html[class*="premium-theme-"] body:not(.page-themes-pro) textarea::placeholder{
   color:rgba(255,255,255,.68) !important;
 }
 
-/* Performance: avoid fixed-background repaint on PRO themes */
-html[class*="premium-theme-"] body:not(.page-themes-pro),
-html[class*="premium-theme-"] body:not(.page-themes-pro) > :is(.container,.page,.content,main,.page-wrapper,.screen,.layout,.app-shell,.app,.site,.viewport,#app,#root){
-  background-attachment:scroll !important;
+/* Remove text-color transitions to stop button-label flashing */
+html[class*="premium-theme-"] body:not(.page-themes-pro) *{
+  transition-property:background-color,border-color,box-shadow,opacity,transform !important;
 }
 
-/* ===== END PREMIUM AUTO CONTRAST CLASS RULES V64 ===== */
+/* ===== END PREMIUM STABLE CONTRAST + GOLD ICONS + LIGHT MODE V65 ===== */
 
