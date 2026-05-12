@@ -110,26 +110,61 @@
     return v <= 0.03928 ? v / 12.92 : Math.pow((v + 0.055) / 1.055, 2.4);
   }
 
-  function luminance(color){
+  function rawLuminance(color){
+    return (0.2126 * channelToLinear(color.r)) + (0.7152 * channelToLinear(color.g)) + (0.0722 * channelToLinear(color.b));
+  }
+
+  function blendColorOver(color, base){
     const alpha = Math.max(0, Math.min(1, color.a == null ? 1 : color.a));
-    const r = (color.r * alpha) + (255 * (1 - alpha));
-    const g = (color.g * alpha) + (255 * (1 - alpha));
-    const b = (color.b * alpha) + (255 * (1 - alpha));
-    return (0.2126 * channelToLinear(r)) + (0.7152 * channelToLinear(g)) + (0.0722 * channelToLinear(b));
+    if(alpha >= 1) return { r:color.r, g:color.g, b:color.b, a:1 };
+    const under = base || { r:255, g:255, b:255, a:1 };
+    return {
+      r:(color.r * alpha) + (under.r * (1 - alpha)),
+      g:(color.g * alpha) + (under.g * (1 - alpha)),
+      b:(color.b * alpha) + (under.b * (1 - alpha)),
+      a:1
+    };
+  }
+
+  function averageColor(colors){
+    if(!colors || !colors.length) return null;
+    const sum = colors.reduce(function(total, color){
+      total.r += color.r;
+      total.g += color.g;
+      total.b += color.b;
+      return total;
+    }, { r:0, g:0, b:0 });
+    return { r:sum.r / colors.length, g:sum.g / colors.length, b:sum.b / colors.length, a:1 };
+  }
+
+  function elementBackgroundColor(element){
+    if(!element || !window.getComputedStyle) return null;
+    const style = window.getComputedStyle(element);
+    const parentColor = element.parentElement ? elementBackgroundColor(element.parentElement) : { r:255, g:255, b:255, a:1 };
+
+    const backgroundColor = parseRgbList(style.backgroundColor).filter(function(color){ return color.a !== 0; });
+    const imageColors = parseRgbList(style.backgroundImage).filter(function(color){ return color.a !== 0; });
+    const opaqueImageColors = imageColors.filter(function(color){ return color.a >= 0.55; });
+    const opaqueBackgroundColors = backgroundColor.filter(function(color){ return color.a >= 0.55; });
+
+    if(opaqueImageColors.length){
+      return averageColor(opaqueImageColors.map(function(color){ return blendColorOver(color, parentColor); }));
+    }
+
+    if(opaqueBackgroundColors.length){
+      return averageColor(opaqueBackgroundColors.map(function(color){ return blendColorOver(color, parentColor); }));
+    }
+
+    if(imageColors.length || backgroundColor.length){
+      return averageColor(imageColors.concat(backgroundColor).map(function(color){ return blendColorOver(color, parentColor); }));
+    }
+
+    return parentColor || null;
   }
 
   function elementBackgroundLuminance(element){
-    if(!element || !window.getComputedStyle) return null;
-    const style = window.getComputedStyle(element);
-    const colors = parseRgbList(style.backgroundImage).concat(parseRgbList(style.backgroundColor));
-    const solidColors = colors.filter(function(color){ return color.a !== 0; });
-
-    if(solidColors.length){
-      return solidColors.reduce(function(sum, color){ return sum + luminance(color); }, 0) / solidColors.length;
-    }
-
-    if(element.parentElement) return elementBackgroundLuminance(element.parentElement);
-    return null;
+    const color = elementBackgroundColor(element);
+    return color ? rawLuminance(color) : null;
   }
 
   const BW_SURFACE_SELECTOR = [
