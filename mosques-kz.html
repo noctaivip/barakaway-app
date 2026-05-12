@@ -100,14 +100,14 @@ h1{
   margin:12px auto 0;
   padding:10px 6px 8px;
   display:grid;
-  grid-template-columns:repeat(5,minmax(0,1fr));
+  grid-template-columns:repeat(4,minmax(0,1fr));
   gap:10px;
-  background:linear-gradient(180deg,rgba(18,30,36,.98),rgba(18,30,36,.94));
-  backdrop-filter:blur(14px);
-  -webkit-backdrop-filter:blur(14px);
+  background:transparent;
+  backdrop-filter:none;
+  -webkit-backdrop-filter:none;
 }
 html.light-mode .top-actions{
-  background:linear-gradient(180deg,rgba(255,254,249,.98),rgba(255,254,249,.94));
+  background:transparent;
 }
 .action{
   appearance:none;
@@ -498,7 +498,7 @@ html.dark-mode .small-action{color:var(--gold2)}
     margin-right:-12px;
     gap:7px;
     padding:8px 10px 7px;
-    grid-template-columns:repeat(5,minmax(0,1fr));
+    grid-template-columns:repeat(4,minmax(0,1fr));
   }
   .action{min-height:62px;border-radius:16px;font-size:10px;padding:6px 3px}
   .action svg{width:21px;height:21px}
@@ -735,6 +735,7 @@ html.light-mode .nav-bottom-sheet{
   #map{
     height:calc(100vh - 160px)!important;
     min-height:560px!important;
+    touch-action:pan-y pinch-zoom!important;
   }
   .nav-top-pill{
     left:10px;
@@ -985,6 +986,150 @@ html.light-mode .nav-metrics{
   }
 }
 
+
+.gps-loading{
+  display:inline-flex;
+  align-items:center;
+  gap:10px;
+  margin-top:10px;
+  font-weight:800;
+  color:var(--green);
+}
+.gps-pulse{
+  width:14px;
+  height:14px;
+  border-radius:999px;
+  background:#2d7a46;
+  position:relative;
+  animation:gpsPulse 1.4s infinite;
+}
+.gps-pulse::before,
+.gps-pulse::after{
+  content:"";
+  position:absolute;
+  inset:-8px;
+  border-radius:999px;
+  border:2px solid rgba(45,122,70,.35);
+  animation:gpsRing 1.8s infinite;
+}
+.gps-pulse::after{
+  animation-delay:.9s;
+}
+@keyframes gpsPulse{
+  0%{transform:scale(1)}
+  50%{transform:scale(1.18)}
+  100%{transform:scale(1)}
+}
+@keyframes gpsRing{
+  0%{transform:scale(.4);opacity:.9}
+  100%{transform:scale(1.8);opacity:0}
+}
+
+
+.premium-search-loading{
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  gap:14px;
+}
+.gps-radar{
+  position:relative;
+  width:26px;
+  height:26px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+}
+.gps-radar-dot{
+  width:10px;
+  height:10px;
+  border-radius:999px;
+  background:#2d7a46;
+  box-shadow:0 0 18px rgba(45,122,70,.65);
+  z-index:2;
+  animation:gpsDotPulse 1.1s infinite ease-in-out;
+}
+.gps-radar-ring{
+  position:absolute;
+  inset:0;
+  border-radius:999px;
+  border:2px solid rgba(45,122,70,.42);
+  animation:gpsRadarScan 1.8s infinite linear;
+}
+.gps-radar-ring.delay{
+  animation-delay:.9s;
+}
+.gps-search-text{
+  font-weight:900;
+  letter-spacing:-.01em;
+}
+@keyframes gpsRadarScan{
+  0%{
+    transform:scale(.35);
+    opacity:.95;
+  }
+  100%{
+    transform:scale(1.9);
+    opacity:0;
+  }
+}
+@keyframes gpsDotPulse{
+  0%,100%{transform:scale(1)}
+  50%{transform:scale(1.28)}
+}
+
+
+/* === GPS status title animation — gold radar === */
+.gps-status-title{
+  display:inline-flex;
+  align-items:center;
+  gap:12px;
+}
+.gps-status-radar{
+  position:relative;
+  width:34px;
+  height:34px;
+  display:none;
+  flex:0 0 34px;
+}
+.status-panel.is-gps-loading .gps-status-radar{
+  display:inline-flex;
+}
+.gps-status-radar::before,
+.gps-status-radar::after{
+  content:"";
+  position:absolute;
+  inset:4px;
+  border-radius:999px;
+  border:2px solid rgba(215,181,109,.55);
+  animation:gpsStatusRing 1.65s infinite ease-out;
+}
+.gps-status-radar::after{
+  animation-delay:.82s;
+}
+.gps-status-dot{
+  position:absolute;
+  left:50%;
+  top:50%;
+  width:11px;
+  height:11px;
+  transform:translate(-50%,-50%);
+  border-radius:999px;
+  background:linear-gradient(180deg,#f8e7ad,#c59b46);
+  box-shadow:
+    0 0 0 4px rgba(215,181,109,.16),
+    0 0 22px rgba(215,181,109,.72);
+  animation:gpsStatusDot 1.05s infinite ease-in-out;
+}
+@keyframes gpsStatusRing{
+  0%{transform:scale(.35);opacity:.95}
+  100%{transform:scale(1.75);opacity:0}
+}
+@keyframes gpsStatusDot{
+  0%,100%{transform:translate(-50%,-50%) scale(1)}
+  50%{transform:translate(-50%,-50%) scale(1.28)}
+}
+
 </style>
 <script src="/theme-init.js"></script>
 <link rel="stylesheet" href="/theme.css">
@@ -995,7 +1140,7 @@ html.light-mode .nav-metrics{
   <section class="hero">
     <div class="bismillah">بِسْمِ ٱللَّٰهِ ٱلرَّحْمَـٰنِ ٱلرَّحِيمِ</div>
     <h1>Жақын маңдағы мешіттер</h1>
-    <p class="subtitle">Карта, жақын мешіттер, GPS арқылы сүйемелдеу, қадамдық бағыт және сыртқы жолсілтегішті жылдам ашу.</p>
+    <p class="subtitle">GPS арқылы 5 км радиустағы мешіттерді автоматты іздеу: карта, қашықтық, нақты мекенжай, бағыт және навигаторды жылдам іске қосу.</p>
   </section>
 
   <div class="top-actions" aria-label="Бет әрекеттері">
@@ -1015,18 +1160,17 @@ html.light-mode .nav-metrics{
       <svg viewBox="0 0 24 24"><path d="M4 12l16-8-8 16-2-7-6-1z"/><path d="M12 13l8-9"/></svg>
       <span class="action-label">GPS</span>
     </button>
-    <button class="action" id="themeBtn" type="button">
-      <svg viewBox="0 0 24 24"><path d="M12 3a6.5 6.5 0 1 0 9 9 8 8 0 1 1-9-9z"/></svg>
-      <span class="action-label">Түс режимі</span>
-    </button>
   </div>
 
   <section class="status-panel">
     <div class="status-title">
-      <span id="statusTitle">Іздеуге дайын</span>
+      <span id="statusTitle" class="gps-status-title">
+        <span id="statusTitleText">Іздеуге дайын</span>
+        <span class="gps-status-radar" aria-hidden="true"><span class="gps-status-dot"></span></span>
+      </span>
       <span id="resultCount">0</span>
     </div>
-    <p class="status-text" id="statusText">Егер намаз уақыты бетінде орналасқан жеріңіз сақталған болса, мешіттер автоматты түрде жүктеледі.</p>
+    <p class="status-text" id="statusText">«Жақыннан іздеу» түймесін басыңыз: бет GPS-ті анықтап, ең жақын мешіттерді бірінші көрсетеді.</p>
     <div class="location-grid">
       <div class="info-box">
         <div class="info-label">Ағымдағы орналасқан жер</div>
@@ -1048,7 +1192,7 @@ html.light-mode .nav-metrics{
       </div>
       <div class="map-float-stack">
         <button class="map-float-btn secondary" id="recenterBtn" type="button" aria-label="Менің орналасқан жерім">⌖</button>
-        <button class="map-float-btn" id="followBtn" type="button" aria-label="Мені бақылау">➤</button>
+        <button class="map-float-btn" id="followBtn" type="button" aria-label="Мені қадағалау">➤</button>
       </div>
       <div class="nav-bottom-sheet" id="navBottomSheet">
         <div class="nav-sheet-main">
@@ -1068,7 +1212,7 @@ html.light-mode .nav-metrics{
 
   <div class="search-wrap">
     <span class="search-icon">⌕</span>
-    <input class="search" id="searchInput" type="search" placeholder="Мешіттің атауы немесе мекенжайы бойынша іздеу">
+    <input class="search" id="searchInput" type="search" placeholder="Мешіт атауы немесе мекенжайы бойынша іздеу">
   </div>
 
   <main class="grid" id="results">
@@ -1076,7 +1220,7 @@ html.light-mode .nav-metrics{
   </main>
 
   <div class="notice">
-    Бірінші кезеңде тегін ашық дереккөздер қолданылады: карта, мешіттерді іздеу, координаттар және негізгі бағыт. Жаппай өндірістік қолдану үшін кейін жеке tile-серверді, premium routing/API қызметін және орындардың нақтырақ базасын қосуға болады.
+    Іздеу OpenStreetMap/Overpass ашық картографиялық деректерін пайдаланады. Егер нақты мешіт карта базасында жоқ болса, карта деректері жаңартылғанға дейін ол автоматты нәтижелерде көрсетілмейді.
   </div>
 </div>
 
@@ -1101,7 +1245,7 @@ html.light-mode .nav-metrics{
     mosques:[],
     filtered:[],
     selected:null,
-    radius:15000,
+    radius:5000,
     loading:false,
     map:null,
     userMarker:null,
@@ -1118,16 +1262,16 @@ html.light-mode .nav-metrics{
     driveMode:false,
     lastRouteRefresh:0,
     headingMarker:null,
-    routeDestination:null
+    routeDestination:null,
+    nearestOnly:false
   };
-
   const els = {
     locateBtn:document.getElementById("locateBtn"),
     refreshBtn:document.getElementById("refreshBtn"),
     nearestBtn:document.getElementById("nearestBtn"),
     trackBtn:document.getElementById("trackBtn"),
-    themeBtn:document.getElementById("themeBtn"),
     statusTitle:document.getElementById("statusTitle"),
+    statusTitleText:document.getElementById("statusTitleText"),
     statusText:document.getElementById("statusText"),
     resultCount:document.getElementById("resultCount"),
     userLocation:document.getElementById("userLocation"),
@@ -1156,8 +1300,14 @@ html.light-mode .nav-metrics{
   }
 
   function setStatus(title, text){
-    els.statusTitle.textContent = title;
+    if(els.statusTitleText){
+      els.statusTitleText.textContent = title;
+    }else{
+      els.statusTitle.textContent = title;
+    }
     els.statusText.textContent = text;
+    const isGpsLoading = /gps|гео|орналас|орналас|мешіт/i.test(`${title} ${text}`) && /анық|із|скан|күту|жақын|жақын/i.test(`${title} ${text}`);
+    document.querySelector(".status-panel")?.classList.toggle("is-gps-loading", isGpsLoading);
   }
 
   function escapeHtml(value){
@@ -1220,7 +1370,7 @@ html.light-mode .nav-metrics{
     const maneuver = step.maneuver || {};
     const type = String(maneuver.type || "").toLowerCase();
     const modifier = String(maneuver.modifier || "").toLowerCase();
-    const road = step.name ? ` ${step.name}` : "";
+    const road = step.name ? ` — ${step.name}` : "";
 
     if(type === "depart") return `Қозғалысты бастаңыз${road}`;
     if(type === "arrive") return "Мешітке жеттіңіз";
@@ -1305,7 +1455,7 @@ html.light-mode .nav-metrics{
       return {
         lat,
         lon,
-        label:localStorage.getItem("prayer_location_name") || "Намаз уақыты бетіндегі орналасқан жер"
+        label:localStorage.getItem("prayer_location_name") || "Намаз уақытынан алынған орналасқан жер"
       };
     }
     return null;
@@ -1352,7 +1502,7 @@ html.light-mode .nav-metrics{
   }
 
   function nativeGeoUrl(lat, lon, name){
-    return `geo:${lat},${lon}?q=${lat},${lon}(${encodeURIComponent(name || "Mosque")})`;
+    return googleRouteUrl(lat, lon, name);
   }
 
   function osmUrl(lat, lon){
@@ -1367,7 +1517,10 @@ html.light-mode .nav-metrics{
       attributionControl:true
     }).setView([41.3111, 69.2797], 12);
 
-    L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
+    
+
+window.__barakawayMosquesMap = state.map;
+L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
       maxZoom:19,
       attribution:'&copy; OpenStreetMap'
     }).addTo(state.map);
@@ -1436,22 +1589,127 @@ html.light-mode .nav-metrics{
     }
   }
 
+
+  function getFastStoredCoords(){
+    const direct = getStoredMosqueCoords() || getStoredPrayerCoords();
+    if(direct && isValidCoord(direct.lat, direct.lon)) return direct;
+    return null;
+  }
+
+  function applyCoordsAndSearch(lat, lon, label, accuracy){
+    state.coords = {
+      lat,
+      lon,
+      accuracy:accuracy || null
+    };
+
+    saveMosqueCoords(lat, lon, label || "Орналасқан жер анықталды");
+    updateUserOnMap(lat, lon, accuracy || null);
+    els.userLocation.textContent = label || `${compactCoord(lat)}, ${compactCoord(lon)}`;
+
+    setStatus("Жақын мешіттер ізделіп жатыр", "5 км радиустағы ең жақын мешіттерді жылдам іздеу.");
+    renderImmediateCachedMosques();
+    searchNearbyMosques();
+  }
+
+  function requestFastLocation(){
+    document.querySelector(".status-panel")?.classList.add("is-gps-loading");
+    setStatus("GPS орналасуын анықтап жатырмыз", "Координаттарды тез алып, іздеуді бірден бастаймыз.");
+
+    const stored = getFastStoredCoords();
+    if(stored){
+      applyCoordsAndSearch(stored.lat, stored.lon, stored.label || "Сақталған орналасқан жер", null);
+    }
+
+    if(!navigator.geolocation){
+      handleGeolocationError({code:0});
+      return;
+    }
+
+    navigator.geolocation.getCurrentPosition(
+      async position => {
+        const lat = position.coords.latitude;
+        const lon = position.coords.longitude;
+        const accuracy = position.coords.accuracy || null;
+        const label = await reversePlaceName(lat, lon);
+        applyCoordsAndSearch(lat, lon, label, accuracy);
+      },
+      error => {
+        if(!stored){
+          handleGeolocationError(error);
+        }else{
+          toast("Соңғы сақталған орналасқан жер бойынша ең жақын мешіттер көрсетілді");
+        }
+      },
+      {
+        enableHighAccuracy:false,
+        timeout:1800,
+        maximumAge:900000
+      }
+    );
+  }
+
+
   function buildOverpassQuery(lat, lon, radius){
     return `
-[out:json][timeout:12];
+[out:json][timeout:3];
 (
   node["amenity"="place_of_worship"]["religion"="muslim"](around:${radius},${lat},${lon});
   way["amenity"="place_of_worship"]["religion"="muslim"](around:${radius},${lat},${lon});
   relation["amenity"="place_of_worship"]["religion"="muslim"](around:${radius},${lat},${lon});
+
   node["building"="mosque"](around:${radius},${lat},${lon});
   way["building"="mosque"](around:${radius},${lat},${lon});
   relation["building"="mosque"](around:${radius},${lat},${lon});
-  node["name"~"masjid|mosque|мешіт|مسجد|cami|jome|juma",i](around:${radius},${lat},${lon});
-  way["name"~"masjid|mosque|мешіт|مسجد|cami|jome|juma",i](around:${radius},${lat},${lon});
+
+  node["place_of_worship"~"musalla|mosque",i](around:${radius},${lat},${lon});
+  way["place_of_worship"~"musalla|mosque",i](around:${radius},${lat},${lon});
+  relation["place_of_worship"~"musalla|mosque",i](around:${radius},${lat},${lon});
+
+  node["religion"="muslim"]["name"](around:${radius},${lat},${lon});
+  way["religion"="muslim"]["name"](around:${radius},${lat},${lon});
+  relation["religion"="muslim"]["name"](around:${radius},${lat},${lon});
+
+  node["name"~"masjid|mosque|musalla|м[её]четь|مسجد|cami|jome|juma|jummah|жоме|жума|намозгоҳ|namozgoh",i](around:${radius},${lat},${lon});
+  way["name"~"masjid|mosque|musalla|м[её]четь|مسجد|cami|jome|juma|jummah|жоме|жума|намозгоҳ|namozgoh",i](around:${radius},${lat},${lon});
+  relation["name"~"masjid|mosque|musalla|м[её]четь|مسجد|cami|jome|juma|jummah|жоме|жума|намозгоҳ|namozgoh",i](around:${radius},${lat},${lon});
 );
 out center tags;
 `;
   }
+
+  
+  function openLocationSettingsHint(){
+    const isAndroid = /Android/i.test(navigator.userAgent);
+    const isIOS = /iPhone|iPad|iPod/i.test(navigator.userAgent);
+
+    toast("Телефон баптауларын ашып, Геодеректер / Орналасқан жерді қосыңыз");
+
+    // Mobile browsers do not have a universal guaranteed API for opening Location settings.
+    // These deep links are attempted only from a direct user tap and guarded to avoid breaking the page.
+    try{
+      if(isAndroid){
+        window.location.href = "intent://settings#Intent;action=android.settings.LOCATION_SOURCE_SETTINGS;end";
+        return;
+      }
+      if(isIOS){
+        window.location.href = "App-Prefs:Privacy&path=LOCATION";
+      }
+    }catch(error){}
+  }
+
+  function handleGeolocationError(error){
+    document.querySelector(".status-panel")?.classList.remove("is-gps-loading");
+    const denied = error && error.code === 1;
+    setStatus(
+      denied ? "Геоорналасуға рұқсат жоқ" : "GPS анықталмады",
+      denied
+        ? "Телефон немесе браузер баптауларында орналасқан жерге рұқсат беріңіз."
+        : "Геодеректер / Орналасқан жер қосулы екенін тексеріп, GPS түймесін қайта басыңыз."
+    );
+    openLocationSettingsHint();
+  }
+
 
   async function fetchWithTimeout(url, options, timeoutMs){
     const controller = new AbortController();
@@ -1466,34 +1724,71 @@ out center tags;
     }
   }
 
-  async function fetchOverpass(lat, lon, radius){
-    const query = buildOverpassQuery(lat, lon, radius);
-    let lastError = null;
-
-    for(const endpoint of OVERPASS_ENDPOINTS){
-      try{
-        const response = await fetchWithTimeout(endpoint, {
-          method:"POST",
-          headers:{"Content-Type":"application/x-www-form-urlencoded;charset=UTF-8"},
-          body:new URLSearchParams({data:query})
-        }, 9500);
-        if(!response.ok) throw new Error("request failed");
-        return await response.json();
-      }catch(error){
-        lastError = error;
-      }
-
-      try{
-        const url = endpoint + "?data=" + encodeURIComponent(query);
-        const response = await fetchWithTimeout(url, {method:"GET"}, 9500);
-        if(!response.ok) throw new Error("request failed");
-        return await response.json();
-      }catch(error){
-        lastError = error;
-      }
+  
+  function getCachedMosques(){
+    try{
+      const raw = localStorage.getItem("bw_cached_mosques");
+      if(!raw) return null;
+      const parsed = JSON.parse(raw);
+      return Array.isArray(parsed.items) ? parsed.items : null;
+    }catch(error){
+      return null;
     }
+  }
 
-    throw lastError || new Error("request failed");
+  function saveCachedMosques(items){
+    try{
+      localStorage.setItem("bw_cached_mosques", JSON.stringify({
+        ts:Date.now(),
+        items
+      }));
+    }catch(error){}
+  }
+
+
+
+
+  function renderImmediateCachedMosques(){
+    const cached = getCachedMosques();
+    if(!cached || !cached.length || !state.coords) return false;
+
+    const refreshed = cached.map(item => ({
+      ...item,
+      distance:distanceMeters(state.coords.lat, state.coords.lon, item.lat, item.lon)
+    })).sort((a,b) => a.distance - b.distance);
+
+    state.mosques = refreshed;
+    updateFiltered();
+    renderList();
+    renderMapMarkers();
+    els.resultCount.textContent = String(refreshed.length);
+    return true;
+  }
+
+
+async function fetchOverpass(lat, lon, radius){
+    const query = buildOverpassQuery(lat, lon, radius);
+
+    const requests = OVERPASS_ENDPOINTS.flatMap(endpoint => {
+      const postRequest = fetchWithTimeout(endpoint, {
+        method:"POST",
+        headers:{"Content-Type":"application/x-www-form-urlencoded;charset=UTF-8"},
+        body:new URLSearchParams({data:query})
+      }, 1600).then(r => {
+        if(!r.ok) throw new Error("request failed");
+        return r.json();
+      });
+
+      const getUrl = endpoint + "?data=" + encodeURIComponent(query);
+      const getRequest = fetchWithTimeout(getUrl, {method:"GET"}, 1600).then(r => {
+        if(!r.ok) throw new Error("request failed");
+        return r.json();
+      });
+
+      return [postRequest, getRequest];
+    });
+
+    return await Promise.any(requests);
   }
 
   function nominatimViewbox(lat, lon, km){
@@ -1507,7 +1802,7 @@ out center tags;
     return (
       value.includes("mosque") ||
       value.includes("masjid") ||
-      value.includes("мeшіт") ||
+      value.includes("мeчеть") ||
       value.includes("мешіт") ||
       value.includes("مسجد") ||
       value.includes("cami") ||
@@ -1515,7 +1810,10 @@ out center tags;
       value.includes("juma") ||
       value.includes("jummah") ||
       value.includes("жоме") ||
-      value.includes("жұма")
+      value.includes("жума") ||
+      value.includes("musalla") ||
+      value.includes("намозгоҳ") ||
+      value.includes("namozgoh")
     );
   }
 
@@ -1523,16 +1821,16 @@ out center tags;
     const value = String(text || "").toLowerCase();
     return (
       value.includes("synagogue") ||
-      value.includes("synagogue") ||
+      value.includes("синагог") ||
       value.includes("church") ||
-      value.includes("church") ||
+      value.includes("церков") ||
       value.includes("cathedral") ||
-      value.includes("cathedral") ||
+      value.includes("собор") ||
       value.includes("chapel") ||
       value.includes("temple") ||
-      value.includes("temple") ||
+      value.includes("храм") ||
       value.includes("monastery") ||
-      value.includes("monastery")
+      value.includes("монастыр")
     );
   }
 
@@ -1543,49 +1841,53 @@ out center tags;
     const amenity = String(tags.amenity || "").toLowerCase();
     const religion = String(tags.religion || "").toLowerCase();
     const building = String(tags.building || "").toLowerCase();
+    const placeOfWorship = String(tags.place_of_worship || "").toLowerCase();
 
     if(amenity === "place_of_worship" && religion === "muslim") return true;
     if(building === "mosque") return true;
+    if(placeOfWorship === "musalla" || placeOfWorship === "mosque") return true;
+    if(religion === "muslim" && hasMosqueIdentityText(text)) return true;
     return hasMosqueIdentityText(text);
   }
 
   async function fetchNominatimMosques(lat, lon){
     const queries = [
-      "amenity:mosque",
       "mosque",
       "masjid",
       "мешіт",
-      "مسجد",
-      "juma masjid"
+      "مسجد"
     ];
-    const all = [];
 
-    for(const q of queries){
+    const viewbox = nominatimViewbox(lat, lon, 5);
+
+    const requests = queries.map(async q => {
       try{
         const params = new URLSearchParams({
           format:"jsonv2",
-          limit:"18",
+          limit:"12",
           addressdetails:"1",
           extratags:"1",
           namedetails:"1",
           bounded:"1",
-          viewbox:nominatimViewbox(lat, lon, 18),
+          viewbox:viewbox,
           q:q
         });
-        const response = await fetchWithTimeout(`${NOMINATIM_SEARCH}?${params.toString()}`, {}, 6500);
-        if(response.ok){
-          const data = await response.json();
-          if(Array.isArray(data)) all.push(...data);
-        }
-      }catch(error){}
-    }
+        const response = await fetchWithTimeout(`${NOMINATIM_SEARCH}?${params.toString()}`, {}, 900);
+        if(!response.ok) return [];
+        const data = await response.json();
+        return Array.isArray(data) ? data : [];
+      }catch(error){
+        return [];
+      }
+    });
 
-    return all;
+    const chunks = await Promise.all(requests);
+    return chunks.flat();
   }
 
   async function reversePlaceName(lat, lon){
     try{
-      const response = await fetchWithTimeout(`${NOMINATIM_REVERSE}?format=jsonv2&lat=${lat}&lon=${lon}`, {}, 6500);
+      const response = await fetchWithTimeout(`${NOMINATIM_REVERSE}?format=jsonv2&lat=${lat}&lon=${lon}`, {}, 900);
       const data = await response.json();
       const address = data.address || {};
       const city = address.city || address.town || address.village || address.county || "";
@@ -1691,15 +1993,26 @@ out center tags;
       return true;
     }).sort((a,b) => a.distance - b.distance);
 
-    return dedupeMosquesWithinRadius(exact, 500);
+    const merged = dedupeMosquesWithinRadius(exact, 500);
+    saveCachedMosques(merged);
+    return merged;
   }
 
   function updateFiltered(){
     const query = els.searchInput.value.trim().toLowerCase();
-    state.filtered = state.mosques.filter(item => {
+
+    let filtered = state.mosques.filter(item => {
       const hay = `${item.name} ${item.address}`.toLowerCase();
       return !query || hay.includes(query);
     });
+
+    filtered.sort((a,b) => a.distance - b.distance);
+
+    if(state.nearestOnly && filtered.length){
+      filtered = [filtered[0]];
+    }
+
+    state.filtered = filtered;
     els.resultCount.textContent = String(state.filtered.length);
   }
 
@@ -1734,12 +2047,21 @@ out center tags;
     updateFiltered();
 
     if(state.loading){
-      els.results.innerHTML = `<div class="empty">Жақын мешіттер ізделіп жатыр...</div>`;
+      els.results.innerHTML = `<div class="empty">
+      <div class="gps-loading premium-search-loading">
+        <span class="gps-radar">
+          <span class="gps-radar-ring"></span>
+          <span class="gps-radar-ring delay"></span>
+          <span class="gps-radar-dot"></span>
+        </span>
+        <span class="gps-search-text">Жақын мешіттер ізделіп жатыр…</span>
+      </div>
+    </div>`;
       return;
     }
 
     if(!state.filtered.length){
-      els.results.innerHTML = `<div class="empty">Мешіттер әзірге табылмады. «Жаңарту» түймесін басыңыз немесе кейінірек қайталап көріңіз.</div>`;
+      els.results.innerHTML = `<div class="empty">Әзірге мешіттер табылмады. «Жаңарту» түймесін басыңыз немесе кейінірек қайталап көріңіз.</div>`;
       renderMapMarkers();
       return;
     }
@@ -1926,12 +2248,12 @@ out center tags;
     toggleTracking(true);
     recenterToUser(true);
     updateNavigationPanel();
-    toast("Сүйемелдеу қосылды");
+    toast("Навигация қосылды");
   }
 
   function recenterToUser(zoomIn){
     if(!state.map || !state.coords){
-      toast("Орналасқан жер әлі анықталмаған");
+      toast("Орналасқан жер әлі анықталмады");
       return;
     }
     state.map.setView([state.coords.lat, state.coords.lon], zoomIn ? 18 : Math.max(state.map.getZoom(), 16), {animate:true});
@@ -1943,7 +2265,7 @@ out center tags;
     state.selected = item;
     state.routeDestination = item;
     state.activeRouteId = item.id;
-    setStatus("Бағыт құрылып жатыр", `Бағыт: ${item.name}`);
+    setStatus("Бағыт құрылып жатыр", `${item.name} бағыты`);
 
     const profiles = ["foot", "driving"];
     let routed = false;
@@ -1987,7 +2309,7 @@ out center tags;
         state.activeSteps = (route.legs || []).flatMap(leg => leg.steps || []);
         state.currentStepIndex = 0;
 
-        setStatus("Бағыт құрылды", `${item.name}: ${formatDistance(route.distance)}, ${formatDuration(route.duration)}. Сүйемелдеуді бастау үшін «Жүру» түймесін басыңыз.`);
+        setStatus("Бағыт құрылды", `${item.name}: ${formatDistance(route.distance)}, ${formatDuration(route.duration)}. Сүйемелдеуді қосу үшін «Жүру» түймесін басыңыз.`);
         state.map.fitBounds(coords, {padding:[52,52]});
         updateNavigationPanel();
         routed = true;
@@ -2000,7 +2322,7 @@ out center tags;
       state.activeRoute = null;
       state.activeSteps = [];
       updateNavigationPanel();
-      setStatus("Бағыт шамамен көрсетілді", "Жолдың нақты сызығы уақытша қолжетімсіз, мешітке қарай жалпы бағыт көрсетілді.");
+      setStatus("Бағыт бағыт ретінде көрсетілді", "Нақты жол сызығы уақытша қолжетімсіз, мешітке дейінгі бағыт көрсетілді.");
     }
 
     renderList();
@@ -2011,6 +2333,8 @@ out center tags;
 
     initMap();
     state.loading = true;
+    state.nearestOnly = false;
+    els.nearestBtn.classList.remove("is-active");
     state.coords = {lat, lon};
     saveMosqueCoords(lat, lon, label);
     updateUserOnMap(lat, lon);
@@ -2018,9 +2342,9 @@ out center tags;
     renderList();
 
     if(options && options.silent){
-      setStatus("Жақын маңдағы мешіттер ізделіп жатыр", "Сақталған орналасқан жер бойынша жақын мешіттер жүктеліп жатыр.");
+      setStatus("Жақын мешіттер ізделіп жатыр", "GPS орналасуыңыздан 5 км радиуста OpenStreetMap/Overpass сканерленіп жатыр.");
     }else{
-      setStatus("Орналасқан жер анықталды", "Жақын мешіттер ізделіп жатыр.");
+      setStatus("Орналасқан жер анықталды", "5 км радиуста мешіттер мен мусаллалар сканерленіп жатыр, ең жақындары бірінші көрсетіледі.");
     }
 
     els.locateBtn.classList.add("is-active");
@@ -2034,22 +2358,23 @@ out center tags;
         overpassItems = normalizeOverpassMosques(overpassData, {lat, lon});
       }catch(error){}
 
-      if(overpassItems.length < 5){
-        try{
-          const nominatimData = await fetchNominatimMosques(lat, lon);
-          nominatimItems = normalizeNominatimMosques(nominatimData, {lat, lon});
-        }catch(error){}
-      }
+      try{
+        const nominatimData = await fetchNominatimMosques(lat, lon);
+        nominatimItems = normalizeNominatimMosques(nominatimData, {lat, lon});
+      }catch(error){}
 
-      state.mosques = mergeMosques(overpassItems, nominatimItems).slice(0, 30);
+      state.mosques = mergeMosques(overpassItems, nominatimItems)
+        .filter(item => item.distance <= state.radius)
+        .sort((a,b) => a.distance - b.distance)
+        .slice(0, 120);
       state.loading = false;
       els.locateBtn.classList.remove("is-active");
 
       if(state.mosques.length){
         selectMosque(state.mosques[0].id, false);
-        setStatus("Жақын маңдағы мешіттер", `Ең жақын мешіт: ${state.mosques[0].name}, ${formatDistance(state.mosques[0].distance)} сізден.`);
+        setStatus("Жақын маңдағы мешіттер", `Найдено: ${state.mosques.length}. Ең жақыны: ${state.mosques[0].name}, ${formatDistance(state.mosques[0].distance)} сізден.`);
       }else{
-        setStatus("Мешіттер табылмады", "Жаныңызда картада қолжетімді нүктелер әзірге табылмады. Іздеуді жаңартып көріңіз.");
+        setStatus("Мешіттер табылмады", "5 км радиуста ашық карталар мешіттерді қайтармады. GPS-ті тексеріңіз немесе іздеуді жаңартыңыз.");
         renderList();
       }
     }catch(error){
@@ -2061,32 +2386,83 @@ out center tags;
     }
   }
 
+
+  
+  function tryOpenLocationSettings(){
+    setStatus(
+      "Геодеректерді қосыңыз",
+      "Телефон немесе браузер баптауларын ашып, осы бет үшін орналасқан жерге рұқсат беріңіз. Қосқаннан кейін «Жақыннан іздеу» түймесін қайта басыңыз."
+    );
+    toast("Телефон баптауларында Геодеректер/Location қосыңыз");
+  }
+
+  function resetSearch(){
+    state.loading = false;
+    state.mosques = [];
+    state.filtered = [];
+    state.selected = null;
+    state.nearestOnly = false;
+    state.activeRouteId = null;
+    state.activeRoute = null;
+    state.activeSteps = [];
+    state.routeDestination = null;
+
+    if(state.mosqueLayer) state.mosqueLayer.clearLayers();
+    if(state.routeLayer) state.routeLayer.clearLayers();
+    state.markers.clear();
+
+    els.locateBtn.classList.remove("is-active");
+    els.nearestBtn.classList.remove("is-active");
+    els.resultCount.textContent = "0";
+    els.selectedMosque.textContent = "Таңдалмаған";
+    els.results.innerHTML = `<div class="empty">Іздеу тазартылды. GPS-ті қайта анықтап, мешіттерді табу үшін «Жақыннан іздеу» түймесін басыңыз.</div>`;
+    setStatus("Іздеу тазартылды", "Жаңа GPS-іздеу үшін «Жақыннан іздеу» түймесін басыңыз.");
+    toast("Іздеу тазартылды");
+  }
+
+
+  function geolocationErrorText(error){
+    if(!error) return "GPS пен интернетті тексеріп, «Жақыннан іздеу» түймесін қайта басыңыз.";
+    if(error.code === 1){
+      return "Геоорналасуға рұқсат жоқ. Телефонда Location/GPS қосып, браузерде осы сайтқа орналасқан жерге рұқсат беріңіз.";
+    }
+    if(error.code === 2){
+      return "Телефон координаттарды анықтай алмады. GPS/Location қосып, ашық жерге шығып, «Жақыннан іздеу» түймесін басыңыз.";
+    }
+    if(error.code === 3){
+      return "GPS тым ұзақ жауап беріп жатыр. Дәл геоорналасуды қосып, «Жаңарту» түймесін басыңыз.";
+    }
+    return "GPS пен интернетті тексеріп, «Жақыннан іздеу» түймесін қайта басыңыз.";
+  }
+
+  async function canAskGeolocation(){
+    if(!navigator.permissions || !navigator.permissions.query) return true;
+    try{
+      const permission = await navigator.permissions.query({name:"geolocation"});
+      if(permission.state === "denied"){
+        setStatus("Геоорналасуға рұқсат жоқ", "Браузер/телефон баптауларында осы сайтқа орналасқан жерге рұқсат беріп, бетті жаңартыңыз.");
+        toast("Жақын мешіттерді іздеу үшін GPS-ке рұқсат беріңіз");
+        tryOpenLocationSettings();
+        return false;
+      }
+      return true;
+    }catch(error){
+      return true;
+    }
+  }
+
   async function locateAndSearch(force){
     if(state.loading) return;
-
-    if(!force){
-      const prayerCoords = getStoredPrayerCoords();
-      if(prayerCoords){
-        await searchByCoords(prayerCoords.lat, prayerCoords.lon, prayerCoords.label, {silent:false});
-        return;
-      }
-
-      const mosqueCoords = getStoredMosqueCoords();
-      if(mosqueCoords){
-        await searchByCoords(mosqueCoords.lat, mosqueCoords.lon, mosqueCoords.label, {silent:false});
-        return;
-      }
-    }
-
-    if(!navigator.geolocation){
-      setStatus("Автоанықтау қолжетімсіз", "Бетті орналасқан жерді анықтауға қолжетімді құрылғыда ашыңыз.");
-      toast("Орналасқан жерді анықтау қолжетімсіз");
+if(!navigator.geolocation){
+      setStatus("Автоанықтау қолжетімсіз", "Бетті GPS/Location бар құрылғыда ашыңыз немесе браузерде геоорналасуға рұқсат беріңіз.");
+      toast("Геоорналасия қолжетімсіз");
       return;
     }
 
     state.loading = true;
     renderList();
-    setStatus("Орналасқан жер анықталып жатыр", "Жақын мешіттерді көрсету үшін орналасқан жеріңізге қол жеткізуге рұқсат беріңіз.");
+    document.querySelector(".status-panel")?.classList.add("is-gps-loading");
+    setStatus("GPS орналасуын анықтап жатырмыз", "Орналасқан жерге рұқсат беріңіз. GPSсіз ең жақын мешіттерді нақты іздеу мүмкін емес.");
     els.locateBtn.classList.add("is-active");
 
     navigator.geolocation.getCurrentPosition(async pos => {
@@ -2094,25 +2470,20 @@ out center tags;
       const lon = pos.coords.longitude;
       updateUserOnMap(lat, lon, pos.coords.accuracy);
       updateHeadingVisual(pos.coords.heading);
-      updateHeadingVisual(pos.coords.heading);
       const placeName = await reversePlaceName(lat, lon);
       await searchByCoords(lat, lon, placeName, {silent:false});
     }, error => {
       state.loading = false;
       els.locateBtn.classList.remove("is-active");
 
-      const stored = getStoredPrayerCoords() || getStoredMosqueCoords();
-      if(stored){
-        searchByCoords(stored.lat, stored.lon, stored.label, {silent:true});
-        return;
-      }
-
-      setStatus("Орналасқан жер анықталмады", "Орналасқан жеріңізге рұқсат беріп, «Жақыннан іздеу» түймесін қайта басыңыз.");
+      setStatus("Орналасқан жер анықталмады", geolocationErrorText(error));
+      toast("Геодеректер/Location қосу керек");
+      tryOpenLocationSettings();
       renderList();
     }, {
       enableHighAccuracy:true,
-      timeout:12000,
-      maximumAge:force ? 0 : 300000
+      timeout:9000,
+      maximumAge:0
     });
   }
 
@@ -2174,7 +2545,8 @@ out center tags;
       els.followBtn.classList.remove("is-active");
       state.followMode = false;
       state.driveMode = false;
-      toast("GPS режимін қосу мүмкін болмады");
+      toast("GPS-ті қосу мүмкін болмады");
+      tryOpenLocationSettings();
     }, {
       enableHighAccuracy:true,
       maximumAge:3000,
@@ -2185,29 +2557,38 @@ out center tags;
   async function autoStart(){
     initMap();
 
-    const prayerCoords = getStoredPrayerCoords();
-    if(prayerCoords){
-      await searchByCoords(prayerCoords.lat, prayerCoords.lon, prayerCoords.label, {silent:true});
+    setStatus("GPS іздеу іске қосылып жатыр", "GPS-іздеу дайындалып жатыр. Егер браузер сұрауды автоматты түрде іске қоспаса, «Жақыннан іздеу» түймесін басыңыз.");
+    renderList();
+
+    const allowed = await canAskGeolocation();
+    if(allowed){
+      await locateAndSearch(true);
       return;
     }
-
-    const mosqueCoords = getStoredMosqueCoords();
-    if(mosqueCoords){
-      await searchByCoords(mosqueCoords.lat, mosqueCoords.lon, mosqueCoords.label, {silent:true});
-      return;
-    }
-
-    setStatus("Іздеуге дайын", "Жаныңыздағы мешіттерді көрсету үшін «Жақыннан іздеу» түймесін басыңыз.");
     renderList();
   }
 
-  function openNearest(){
-    const item = state.selected || state.mosques[0];
-    if(!item){
-      toast("Алдымен жақын мешіттерді табыңыз");
+  function toggleNearestOnly(){
+    if(!state.mosques.length){
+      toast("Сначала нажмите «Жақыннан іздеу»");
       return;
     }
-    window.location.href = nativeGeoUrl(compactCoord(item.lat), compactCoord(item.lon), item.name);
+
+    state.nearestOnly = !state.nearestOnly;
+    els.nearestBtn.classList.toggle("is-active", state.nearestOnly);
+
+    updateFiltered();
+    renderList();
+
+    if(state.nearestOnly){
+      const item = state.filtered[0] || state.mosques[0];
+      if(item){
+        selectMosque(item.id, true);
+        setStatus("Ең жақын мешіт", `${item.name}: ${formatDistance(item.distance)} сізден.`);
+      }
+    }else{
+      setStatus("Жақын маңдағы барлық мешіттер", `Көрсетілді: ${state.filtered.length}. Ең жақындары бірінші.`);
+    }
   }
 
   async function copyText(text){
@@ -2269,10 +2650,15 @@ ${item.address}
     }
   }
 
-  els.locateBtn.addEventListener("click", () => locateAndSearch(false));
-  els.refreshBtn.addEventListener("click", () => locateAndSearch(true));
-  els.nearestBtn.addEventListener("click", openNearest);
-  els.trackBtn.addEventListener("click", () => toggleTracking(false));
+  els.locateBtn.addEventListener("click", event => { event.preventDefault(); locateAndSearch(true); });
+  els.refreshBtn.addEventListener("click", event => { event.preventDefault(); resetSearch(); });
+  els.nearestBtn.addEventListener("click", event => { event.preventDefault(); toggleNearestOnly(); });
+  els.trackBtn.addEventListener("click", async event => {
+    event.preventDefault();
+    const allowed = await canAskGeolocation();
+    if(!allowed){ tryOpenLocationSettings(); return; }
+    toggleTracking(false);
+  });
   els.recenterBtn.addEventListener("click", () => recenterToUser(true));
   els.followBtn.addEventListener("click", () => {
     state.followMode = !state.followMode;
@@ -2288,7 +2674,6 @@ ${item.address}
     if(item) drawRoute(item);
     else toast("Алдымен мешітті таңдаңыз");
   });
-  els.themeBtn.addEventListener("click", toggleTheme);
   els.searchInput.addEventListener("input", renderList);
 
   document.addEventListener("click", event => {
@@ -2334,8 +2719,131 @@ ${item.address}
   restoreTheme();
   window.addEventListener("resize", () => state.map && state.map.invalidateSize());
   autoStart();
+  if(!window.__barakawayFastLocationBound){
+    window.__barakawayFastLocationBound = true;
+    els.locateBtn.onclick = requestFastLocation;
+    els.trackBtn.onclick = function(){
+      els.trackBtn.classList.add("is-active");
+      requestFastLocation();
+    };
+  }
+
+  if(!window.__barakawayRefreshOverride){
+    window.__barakawayRefreshOverride = true;
+    els.refreshBtn.onclick = function(){
+      state.loading = false;
+      state.mosques = [];
+      state.filtered = [];
+      state.selected = null;
+      state.nearestOnly = false;
+      els.nearestBtn.classList.remove("is-active");
+      els.resultCount.textContent = "0";
+      els.selectedMosque.textContent = "Таңдалмаған";
+      els.searchInput.value = "";
+      state.mosqueLayer?.clearLayers();
+      state.routeLayer?.clearLayers();
+      document.querySelector(".status-panel")?.classList.remove("is-gps-loading");
+      setStatus("Іздеуге дайын", "«Жақыннан іздеу» түймесін басыңыз: іздеу 5 км радиуста жылдам басталады.");
+      els.results.innerHTML = `<div class="empty">Іздеу тазартылды. «Жақыннан іздеу» түймесін басыңыз.</div>`;
+      toast("Іздеу тазартылды");
+    };
+  }
+
 })();
 </script>
 <script src="/bottom-nav.js"></script>
+
+
+
+<script>
+/* === Mobile map: one finger scrolls page, two fingers control map === */
+(function(){
+  function getMap(){
+    return window.__barakawayMosquesMap || null;
+  }
+
+  function setDragging(map, enabled){
+    if (!map || !map.dragging) return;
+    if (enabled) map.dragging.enable();
+    else map.dragging.disable();
+  }
+
+  function applyMobileMapTouchMode(){
+    var map = getMap();
+    var mapEl = document.getElementById("map");
+    if (!map || !mapEl) return;
+
+    var isMobile = window.matchMedia && window.matchMedia("(max-width: 720px)").matches;
+
+    if (!isMobile) {
+      setDragging(map, true);
+      if (map.tap) map.tap.enable();
+      if (map.touchZoom) map.touchZoom.enable();
+      if (map.doubleClickZoom) map.doubleClickZoom.enable();
+      if (map.scrollWheelZoom) map.scrollWheelZoom.enable();
+      if (map.boxZoom) map.boxZoom.enable();
+      if (map.keyboard) map.keyboard.enable();
+      mapEl.style.touchAction = "";
+      mapEl.style.msTouchAction = "";
+      return;
+    }
+
+    setDragging(map, false);
+    if (map.tap) map.tap.disable();
+    if (map.doubleClickZoom) map.doubleClickZoom.disable();
+    if (map.scrollWheelZoom) map.scrollWheelZoom.disable();
+    if (map.boxZoom) map.boxZoom.disable();
+    if (map.keyboard) map.keyboard.disable();
+    if (map.touchZoom) map.touchZoom.enable();
+
+    mapEl.style.touchAction = "pan-y pinch-zoom";
+    mapEl.style.msTouchAction = "pan-y pinch-zoom";
+
+    if (mapEl.__barakawayTouchModeBound) return;
+    mapEl.__barakawayTouchModeBound = true;
+
+    mapEl.addEventListener("touchstart", function(e){
+      if (!window.matchMedia("(max-width: 720px)").matches) return;
+      if (e.touches && e.touches.length >= 2) {
+        setDragging(map, true);
+      } else {
+        setDragging(map, false);
+      }
+    }, { passive:true });
+
+    mapEl.addEventListener("touchmove", function(e){
+      if (!window.matchMedia("(max-width: 720px)").matches) return;
+      if (e.touches && e.touches.length >= 2) {
+        setDragging(map, true);
+      } else {
+        setDragging(map, false);
+      }
+    }, { passive:true });
+
+    mapEl.addEventListener("touchend", function(){
+      if (!window.matchMedia("(max-width: 720px)").matches) return;
+      setTimeout(function(){ setDragging(map, false); }, 60);
+    }, { passive:true });
+
+    mapEl.addEventListener("touchcancel", function(){
+      if (!window.matchMedia("(max-width: 720px)").matches) return;
+      setDragging(map, false);
+    }, { passive:true });
+  }
+
+  window.addEventListener("load", function(){
+    applyMobileMapTouchMode();
+    setTimeout(applyMobileMapTouchMode, 300);
+    setTimeout(applyMobileMapTouchMode, 1200);
+    setTimeout(applyMobileMapTouchMode, 2500);
+  });
+
+  window.addEventListener("resize", applyMobileMapTouchMode);
+  window.addEventListener("orientationchange", function(){
+    setTimeout(applyMobileMapTouchMode, 300);
+  });
+})();
+</script>
+
 </body>
 </html>

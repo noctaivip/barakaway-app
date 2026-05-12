@@ -100,14 +100,14 @@ h1{
  margin:12px auto 0;
  padding:10px 6px 8px;
  display:grid;
- grid-template-columns:repeat(5,minmax(0,1fr));
+ grid-template-columns:repeat(4,minmax(0,1fr));
  gap:10px;
- background:linear-gradient(180deg,rgba(18,30,36,.98),rgba(18,30,36,.94));
- backdrop-filter:blur(14px);
- -webkit-backdrop-filter:blur(14px);
+ background:transparent;
+ backdrop-filter:none;
+ -webkit-backdrop-filter:none;
 }
 html.light-mode .top-actions{
- background:linear-gradient(180deg,rgba(255,254,249,.98),rgba(255,254,249,.94));
+ background:transparent;
 }
 .action{
  appearance:none;
@@ -492,13 +492,13 @@ html.dark-mode .small-action{color:var(--gold2)}
  .bismillah{font-size:21px}
  .subtitle{font-size:14px}
  .top-actions{
-  width:calc(100% + 24px);
-  max-width:none;
-  margin-left:-12px;
-  margin-right:-12px;
-  gap:7px;
-  padding:8px 10px 7px;
-  grid-template-columns:repeat(5,minmax(0,1fr));
+ width:calc(100% + 24px);
+ max-width:none;
+ margin-left:-12px;
+ margin-right:-12px;
+ gap:7px;
+ padding:8px 10px 7px;
+ grid-template-columns:repeat(4,minmax(0,1fr));
  }
  .action{min-height:62px;border-radius:16px;font-size:10px;padding:6px 3px}
  .action svg{width:21px;height:21px}
@@ -542,15 +542,15 @@ html.dark-mode .small-action{color:var(--gold2)}
 }
 @media(max-width:720px){
  #map{
-  height:520px!important;
+ height:520px!important;
  }
  .map-panel{
-  margin-top:12px!important;
+ margin-top:12px!important;
  }
 }
 @media(max-width:390px){
  #map{
-  height:500px!important;
+ height:500px!important;
  }
 }
 
@@ -730,45 +730,46 @@ html.light-mode .nav-bottom-sheet{
 }
 @media(max-width:720px){
  .map-frame{
-  min-height:calc(100vh - 160px)!important;
+ min-height:calc(100vh - 160px)!important;
  }
  #map{
-  height:calc(100vh - 160px)!important;
-  min-height:560px!important;
+ height:calc(100vh - 160px)!important;
+ min-height:560px!important;
+ touch-action:pan-y pinch-zoom!important;
  }
  .nav-top-pill{
-  left:10px;
-  top:10px;
-  right:72px;
-  border-radius:18px;
-  padding:10px 12px;
+ left:10px;
+ top:10px;
+ right:72px;
+ border-radius:18px;
+ padding:10px 12px;
  }
  .map-float-stack{
-  right:10px;
-  top:10px;
+ right:10px;
+ top:10px;
  }
  .map-float-btn{
-  width:48px;
-  height:48px;
-  border-radius:17px;
-  font-size:20px;
+ width:48px;
+ height:48px;
+ border-radius:17px;
+ font-size:20px;
  }
  .nav-bottom-sheet{
-  left:8px;
-  right:8px;
-  bottom:8px;
-  border-radius:22px;
+ left:8px;
+ right:8px;
+ bottom:8px;
+ border-radius:22px;
  }
  .nav-sheet-main{
-  grid-template-columns:1fr;
-  gap:10px;
+ grid-template-columns:1fr;
+ gap:10px;
  }
  .nav-actions{
-  display:grid;
-  grid-template-columns:1fr 1fr;
+ display:grid;
+ grid-template-columns:1fr 1fr;
  }
  .nav-action-btn{
-  min-height:42px;
+ min-height:42px;
  }
 }
 
@@ -924,65 +925,209 @@ html.light-mode .nav-metrics{
 }
 @media(max-width:720px){
  .container{
-  padding:14px 8px 28px!important;
+ padding:14px 8px 28px!important;
  }
  .hero,.status-panel,.search-wrap,.grid,.notice{
-  margin-left:4px!important;
-  margin-right:4px!important;
+ margin-left:4px!important;
+ margin-right:4px!important;
  }
  .map-panel{
-  margin-left:-2px!important;
-  margin-right:-2px!important;
-  padding:4px!important;
+ margin-left:-2px!important;
+ margin-right:-2px!important;
+ padding:4px!important;
  }
  .map-frame{
-  min-height:calc(100vh - 104px)!important;
-  border-radius:24px!important;
+ min-height:calc(100vh - 104px)!important;
+ border-radius:24px!important;
  }
  #map{
-  height:calc(100vh - 104px)!important;
-  min-height:650px!important;
+ height:calc(100vh - 104px)!important;
+ min-height:650px!important;
  }
  .nav-top-pill{
-  left:10px!important;
-  top:10px!important;
-  width:calc(100% - 82px)!important;
-  border-radius:22px!important;
-  padding:13px 14px!important;
+ left:10px!important;
+ top:10px!important;
+ width:calc(100% - 82px)!important;
+ border-radius:22px!important;
+ padding:13px 14px!important;
  }
  .nav-main-step{
-  font-size:22px!important;
+ font-size:22px!important;
  }
  .map-float-stack{
-  right:10px!important;
-  top:10px!important;
-  gap:8px!important;
+ right:10px!important;
+ top:10px!important;
+ gap:8px!important;
  }
  .map-float-btn{
-  width:54px!important;
-  height:54px!important;
-  border-radius:20px!important;
+ width:54px!important;
+ height:54px!important;
+ border-radius:20px!important;
  }
  .nav-bottom-sheet{
-  left:8px!important;
-  right:8px!important;
-  bottom:8px!important;
-  border-radius:28px!important;
+ left:8px!important;
+ right:8px!important;
+ bottom:8px!important;
+ border-radius:28px!important;
  }
  .nav-sheet-main{
-  padding:15px!important;
+ padding:15px!important;
  }
  .nav-actions-primary{
-  gap:10px!important;
+ gap:10px!important;
  }
  .nav-action-btn{
-  min-height:56px!important;
-  border-radius:21px!important;
-  font-size:15px!important;
+ min-height:56px!important;
+ border-radius:21px!important;
+ font-size:15px!important;
  }
  .card-actions{
-  grid-template-columns:1fr 1fr!important;
+ grid-template-columns:1fr 1fr!important;
  }
+}
+
+
+.gps-loading{
+ display:inline-flex;
+ align-items:center;
+ gap:10px;
+ margin-top:10px;
+ font-weight:800;
+ color:var(--green);
+}
+.gps-pulse{
+ width:14px;
+ height:14px;
+ border-radius:999px;
+ background:#2d7a46;
+ position:relative;
+ animation:gpsPulse 1.4s infinite;
+}
+.gps-pulse::before,
+.gps-pulse::after{
+ content:"";
+ position:absolute;
+ inset:-8px;
+ border-radius:999px;
+ border:2px solid rgba(45,122,70,.35);
+ animation:gpsRing 1.8s infinite;
+}
+.gps-pulse::after{
+ animation-delay:.9s;
+}
+@keyframes gpsPulse{
+ 0%{transform:scale(1)}
+ 50%{transform:scale(1.18)}
+ 100%{transform:scale(1)}
+}
+@keyframes gpsRing{
+ 0%{transform:scale(.4);opacity:.9}
+ 100%{transform:scale(1.8);opacity:0}
+}
+
+
+.premium-search-loading{
+ display:flex;
+ align-items:center;
+ justify-content:center;
+ gap:14px;
+}
+.gps-radar{
+ position:relative;
+ width:26px;
+ height:26px;
+ display:flex;
+ align-items:center;
+ justify-content:center;
+}
+.gps-radar-dot{
+ width:10px;
+ height:10px;
+ border-radius:999px;
+ background:#2d7a46;
+ box-shadow:0 0 18px rgba(45,122,70,.65);
+ z-index:2;
+ animation:gpsDotPulse 1.1s infinite ease-in-out;
+}
+.gps-radar-ring{
+ position:absolute;
+ inset:0;
+ border-radius:999px;
+ border:2px solid rgba(45,122,70,.42);
+ animation:gpsRadarScan 1.8s infinite linear;
+}
+.gps-radar-ring.delay{
+ animation-delay:.9s;
+}
+.gps-search-text{
+ font-weight:900;
+ letter-spacing:-.01em;
+}
+@keyframes gpsRadarScan{
+ 0%{
+ transform:scale(.35);
+ opacity:.95;
+ }
+ 100%{
+ transform:scale(1.9);
+ opacity:0;
+ }
+}
+@keyframes gpsDotPulse{
+ 0%,100%{transform:scale(1)}
+ 50%{transform:scale(1.28)}
+}
+
+
+/* === GPS status title animation — gold radar === */
+.gps-status-title{
+ display:inline-flex;
+ align-items:center;
+ gap:12px;
+}
+.gps-status-radar{
+ position:relative;
+ width:34px;
+ height:34px;
+ display:none;
+ flex:0 0 34px;
+}
+.status-panel.is-gps-loading .gps-status-radar{
+ display:inline-flex;
+}
+.gps-status-radar::before,
+.gps-status-radar::after{
+ content:"";
+ position:absolute;
+ inset:4px;
+ border-radius:999px;
+ border:2px solid rgba(215,181,109,.55);
+ animation:gpsStatusRing 1.65s infinite ease-out;
+}
+.gps-status-radar::after{
+ animation-delay:.82s;
+}
+.gps-status-dot{
+ position:absolute;
+ left:50%;
+ top:50%;
+ width:11px;
+ height:11px;
+ transform:translate(-50%,-50%);
+ border-radius:999px;
+ background:linear-gradient(180deg,#f8e7ad,#c59b46);
+ box-shadow:
+ 0 0 0 4px rgba(215,181,109,.16),
+ 0 0 22px rgba(215,181,109,.72);
+ animation:gpsStatusDot 1.05s infinite ease-in-out;
+}
+@keyframes gpsStatusRing{
+ 0%{transform:scale(.35);opacity:.95}
+ 100%{transform:scale(1.75);opacity:0}
+}
+@keyframes gpsStatusDot{
+ 0%,100%{transform:translate(-50%,-50%) scale(1)}
+ 50%{transform:translate(-50%,-50%) scale(1.28)}
 }
 
 </style>
@@ -993,90 +1138,89 @@ html.light-mode .nav-metrics{
 <body>
 <div class="container">
  <section class="hero">
-  <div class="bismillah">بِسْمِ ٱللَّٰهِ ٱلرَّحْمَـٰنِ ٱلرَّحِيمِ</div>
-  <h1>Yakındaki Camiler</h1>
-  <p class="subtitle">Harita, yakındaki camiler, GPS rehberliği, adım adım rota ve harici navigasyonu hızlı başlatma.</p>
+ <div class="bismillah">بِسْمِ ٱللَّٰهِ ٱلرَّحْمَـٰنِ ٱلرَّحِيمِ</div>
+ <h1>Yakındaki Camiler</h1>
+ <p class="subtitle">Harita, yakındaki camiler, GPS rehberliği, adım adım rota ve harici navigasyonu hızlı başlatma.</p>
  </section>
 
  <div class="top-actions" aria-label="Sayfa işlemleri">
-  <button class="action" id="locateBtn" type="button">
-   <svg viewBox="0 0 24 24"><path d="M12 2v3"/><path d="M12 19v3"/><path d="M2 12h3"/><path d="M19 12h3"/><circle cx="12" cy="12" r="6"/><circle cx="12" cy="12" r="2"/></svg>
-   <span class="action-label">Yakında bul</span>
-  </button>
-  <button class="action" id="refreshBtn" type="button">
-   <svg viewBox="0 0 24 24"><path d="M21 12a9 9 0 0 1-15.5 6.2"/><path d="M3 12A9 9 0 0 1 18.5 5.8"/><path d="M18.5 2.8v3h-3"/><path d="M5.5 21.2v-3h3"/></svg>
-   <span class="action-label">Yenile</span>
-  </button>
-  <button class="action" id="nearestBtn" type="button">
-   <svg viewBox="0 0 24 24"><path d="M12 21s7-5.1 7-11a7 7 0 1 0-14 0c0 5.9 7 11 7 11z"/><circle cx="12" cy="10" r="2.5"/></svg>
-   <span class="action-label">En yakın</span>
-  </button>
-  <button class="action" id="trackBtn" type="button">
-   <svg viewBox="0 0 24 24"><path d="M4 12l16-8-8 16-2-7-6-1z"/><path d="M12 13l8-9"/></svg>
-   <span class="action-label">GPS</span>
-  </button>
-  <button class="action" id="themeBtn" type="button">
-   <svg viewBox="0 0 24 24"><path d="M12 3a6.5 6.5 0 1 0 9 9 8 8 0 1 1-9-9z"/></svg>
-   <span class="action-label">Tema</span>
-  </button>
+ <button class="action" id="locateBtn" type="button">
+ <svg viewBox="0 0 24 24"><path d="M12 2v3"/><path d="M12 19v3"/><path d="M2 12h3"/><path d="M19 12h3"/><circle cx="12" cy="12" r="6"/><circle cx="12" cy="12" r="2"/></svg>
+ <span class="action-label">Yakında bul</span>
+ </button>
+ <button class="action" id="refreshBtn" type="button">
+ <svg viewBox="0 0 24 24"><path d="M21 12a9 9 0 0 1-15.5 6.2"/><path d="M3 12A9 9 0 0 1 18.5 5.8"/><path d="M18.5 2.8v3h-3"/><path d="M5.5 21.2v-3h3"/></svg>
+ <span class="action-label">Yenile</span>
+ </button>
+ <button class="action" id="nearestBtn" type="button">
+ <svg viewBox="0 0 24 24"><path d="M12 21s7-5.1 7-11a7 7 0 1 0-14 0c0 5.9 7 11 7 11z"/><circle cx="12" cy="10" r="2.5"/></svg>
+ <span class="action-label">En yakın</span>
+ </button>
+ <button class="action" id="trackBtn" type="button">
+ <svg viewBox="0 0 24 24"><path d="M4 12l16-8-8 16-2-7-6-1z"/><path d="M12 13l8-9"/></svg>
+ <span class="action-label">GPS</span>
+ </button>
  </div>
 
  <section class="status-panel">
-  <div class="status-title">
-   <span id="statusTitle">Aramaya hazır</span>
-   <span id="resultCount">0</span>
-  </div>
-  <p class="status-text" id="statusText">Konum namaz vakitleri sayfasında zaten kayıtlıysa camiler otomatik olarak yüklenecek.</p>
-  <div class="location-grid">
-   <div class="info-box">
-    <div class="info-label">Mevcut konum</div>
-    <div class="info-value" id="userLocation">Konum bekleniyor</div>
-   </div>
-   <div class="info-box">
-    <div class="info-label">Seçilen cami</div>
-    <div class="info-value" id="selectedMosque">Seçilmedi</div>
-   </div>
-  </div>
+ <div class="status-title">
+ <span id="statusTitle" class="gps-status-title">
+ <span id="statusTitleText">Aramaya hazır</span>
+ <span class="gps-status-radar" aria-hidden="true"><span class="gps-status-dot"></span></span>
+ </span>
+ <span id="resultCount">0</span>
+ </div>
+ <p class="status-text" id="statusText">«Yakında bul» düğmesine basın: sayfa GPS’i belirler ve en yakın camileri önce gösterir.</p>
+ <div class="location-grid">
+ <div class="info-box">
+ <div class="info-label">Mevcut konum</div>
+ <div class="info-value" id="userLocation">Belirleme bekleniyor</div>
+ </div>
+ <div class="info-box">
+ <div class="info-label">Seçilen cami</div>
+ <div class="info-value" id="selectedMosque">Seçilmedi</div>
+ </div>
+ </div>
  </section>
 
  <section class="map-panel">
-  <div class="map-frame">
-   <div id="map"></div>
-   <div class="nav-top-pill" id="navTopPill">
-    <p class="nav-main-step" id="navMainStep">Rota hazır</p>
-    <p class="nav-sub-step" id="navSubStep">Rehberliği başlatmak için «Gidelim» düğmesine basın</p>
-   </div>
-   <div class="map-float-stack">
-    <button class="map-float-btn secondary" id="recenterBtn" type="button" aria-label="Konumum">⌖</button>
-    <button class="map-float-btn" id="followBtn" type="button" aria-label="Beni takip et">➤</button>
-   </div>
-   <div class="nav-bottom-sheet" id="navBottomSheet">
-    <div class="nav-sheet-main">
-     <div>
-      <p class="nav-title" id="navDestinationTitle">Cami seçin</p>
-      <p class="nav-metrics" id="navMetrics">Rota henüz oluşturulmadı</p>
-     </div>
-     <div class="nav-actions nav-actions-primary">
-      <button class="nav-action-btn gold route-build-main-btn" id="toggleTurnsBtn" type="button">Rota oluştur</button>
-      <button class="nav-action-btn start-drive-btn" id="startDriveBtn" type="button">Gidelim</button>
-     </div>
-    </div>
-    <div class="turn-list" id="turnList"></div>
-   </div>
-  </div>
+ <div class="map-frame">
+ <div id="map"></div>
+ <div class="nav-top-pill" id="navTopPill">
+ <p class="nav-main-step" id="navMainStep">Rota hazır</p>
+ <p class="nav-sub-step" id="navSubStep">Yönlendirmeyi başlatmak için «Başla» düğmesine basın</p>
+ </div>
+ <div class="map-float-stack">
+ <button class="map-float-btn secondary" id="recenterBtn" type="button" aria-label="Konumum">⌖</button>
+ <button class="map-float-btn" id="followBtn" type="button" aria-label="Beni takip et">➤</button>
+ </div>
+ <div class="nav-bottom-sheet" id="navBottomSheet">
+ <div class="nav-sheet-main">
+ <div>
+ <p class="nav-title" id="navDestinationTitle">Cami seçin</p>
+ <p class="nav-metrics" id="navMetrics">Rota henüz oluşturulmadı</p>
+ </div>
+ <div class="nav-actions nav-actions-primary">
+ <button class="nav-action-btn gold route-build-main-btn" id="toggleTurnsBtn" type="button">Rota oluştur</button>
+ <button class="nav-action-btn start-drive-btn" id="startDriveBtn" type="button">Başla</button>
+ </div>
+ </div>
+ <div class="turn-list" id="turnList"></div>
+ </div>
+ </div>
  </section>
 
  <div class="search-wrap">
-  <span class="search-icon">⌕</span>
-  <input class="search" id="searchInput" type="search" placeholder="Cami adı veya adresine göre ara">
+ <span class="search-icon">⌕</span>
+ <input class="search" id="searchInput" type="search" placeholder="Cami adı veya adresine göre ara">
  </div>
 
  <main class="grid" id="results">
-  <div class="empty">Harita ve arama hazırlanıyor.</div>
+ <div class="empty">Harita ve arama hazırlanıyor.</div>
  </main>
 
  <div class="notice">
-  İlk aşamada ücretsiz açık kaynaklar kullanılır: harita, cami araması, koordinatlar ve temel rota. Büyük ölçekli prodüksiyon için daha sonra özel tile sunucusu, premium routing/API ve daha doğru yer veritabanı bağlanabilir.
+ Arama OpenStreetMap/Overpass açık harita verilerini kullanır. Belirli bir cami harita veritabanında yoksa, harita verileri güncellenene kadar otomatik sonuçlarda görünemez.
  </div>
 </div>
 
@@ -1088,1254 +1232,1618 @@ html.light-mode .nav-metrics{
  "use strict";
 
  const OVERPASS_ENDPOINTS = [
-  "https://overpass-api.de/api/interpreter",
-  "https://overpass.kumi.systems/api/interpreter",
-  "https://overpass.openstreetmap.ru/api/interpreter"
+ "https://overpass-api.de/api/interpreter",
+ "https://overpass.kumi.systems/api/interpreter",
+ "https://overpass.openstreetmap.ru/api/interpreter"
  ];
  const NOMINATIM_SEARCH = "https://nominatim.openstreetmap.org/search";
  const NOMINATIM_REVERSE = "https://nominatim.openstreetmap.org/reverse";
  const OSRM_ROUTE = "https://router.project-osrm.org/route/v1";
 
  const state = {
-  coords:null,
-  mosques:[],
-  filtered:[],
-  selected:null,
-  radius:15000,
-  loading:false,
-  map:null,
-  userMarker:null,
-  userAccuracy:null,
-  mosqueLayer:null,
-  routeLayer:null,
-  watchId:null,
-  markers:new Map(),
-  activeRouteId:null,
-  activeRoute:null,
-  activeSteps:[],
-  currentStepIndex:0,
-  followMode:false,
-  driveMode:false,
-  lastRouteRefresh:0,
-  headingMarker:null,
-  routeDestination:null
+ coords:null,
+ mosques:[],
+ filtered:[],
+ selected:null,
+ radius:5000,
+ loading:false,
+ map:null,
+ userMarker:null,
+ userAccuracy:null,
+ mosqueLayer:null,
+ routeLayer:null,
+ watchId:null,
+ markers:new Map(),
+ activeRouteId:null,
+ activeRoute:null,
+ activeSteps:[],
+ currentStepIndex:0,
+ followMode:false,
+ driveMode:false,
+ lastRouteRefresh:0,
+ headingMarker:null,
+ routeDestination:null,
+ nearestOnly:false
  };
-
  const els = {
-  locateBtn:document.getElementById("locateBtn"),
-  refreshBtn:document.getElementById("refreshBtn"),
-  nearestBtn:document.getElementById("nearestBtn"),
-  trackBtn:document.getElementById("trackBtn"),
-  themeBtn:document.getElementById("themeBtn"),
-  statusTitle:document.getElementById("statusTitle"),
-  statusText:document.getElementById("statusText"),
-  resultCount:document.getElementById("resultCount"),
-  userLocation:document.getElementById("userLocation"),
-  selectedMosque:document.getElementById("selectedMosque"),
-  results:document.getElementById("results"),
-  searchInput:document.getElementById("searchInput"),
-  toast:document.getElementById("toast"),
-  recenterBtn:document.getElementById("recenterBtn"),
-  followBtn:document.getElementById("followBtn"),
-  navTopPill:document.getElementById("navTopPill"),
-  navMainStep:document.getElementById("navMainStep"),
-  navSubStep:document.getElementById("navSubStep"),
-  navBottomSheet:document.getElementById("navBottomSheet"),
-  navDestinationTitle:document.getElementById("navDestinationTitle"),
-  navMetrics:document.getElementById("navMetrics"),
-  startDriveBtn:document.getElementById("startDriveBtn"),
-  toggleTurnsBtn:document.getElementById("toggleTurnsBtn"),
-  turnList:document.getElementById("turnList")
+ locateBtn:document.getElementById("locateBtn"),
+ refreshBtn:document.getElementById("refreshBtn"),
+ nearestBtn:document.getElementById("nearestBtn"),
+ trackBtn:document.getElementById("trackBtn"),
+ statusTitle:document.getElementById("statusTitle"),
+ statusTitleText:document.getElementById("statusTitleText"),
+ statusText:document.getElementById("statusText"),
+ resultCount:document.getElementById("resultCount"),
+ userLocation:document.getElementById("userLocation"),
+ selectedMosque:document.getElementById("selectedMosque"),
+ results:document.getElementById("results"),
+ searchInput:document.getElementById("searchInput"),
+ toast:document.getElementById("toast"),
+ recenterBtn:document.getElementById("recenterBtn"),
+ followBtn:document.getElementById("followBtn"),
+ navTopPill:document.getElementById("navTopPill"),
+ navMainStep:document.getElementById("navMainStep"),
+ navSubStep:document.getElementById("navSubStep"),
+ navBottomSheet:document.getElementById("navBottomSheet"),
+ navDestinationTitle:document.getElementById("navDestinationTitle"),
+ navMetrics:document.getElementById("navMetrics"),
+ startDriveBtn:document.getElementById("startDriveBtn"),
+ toggleTurnsBtn:document.getElementById("toggleTurnsBtn"),
+ turnList:document.getElementById("turnList")
  };
 
  function toast(message){
-  els.toast.textContent = message;
-  els.toast.classList.add("is-visible");
-  clearTimeout(toast._timer);
-  toast._timer = setTimeout(() => els.toast.classList.remove("is-visible"), 2200);
+ els.toast.textContent = message;
+ els.toast.classList.add("is-visible");
+ clearTimeout(toast._timer);
+ toast._timer = setTimeout(() => els.toast.classList.remove("is-visible"), 2200);
  }
 
  function setStatus(title, text){
-  els.statusTitle.textContent = title;
-  els.statusText.textContent = text;
+ if(els.statusTitleText){
+ els.statusTitleText.textContent = title;
+ }else{
+ els.statusTitle.textContent = title;
+ }
+ els.statusText.textContent = text;
+ const isGpsLoading = /gps|konum|geo|cami/i.test(`${title} ${text}`) && /belirlen|aran|taran|beklen|yakın/i.test(`${title} ${text}`);
+ document.querySelector(".status-panel")?.classList.toggle("is-gps-loading", isGpsLoading);
  }
 
  function escapeHtml(value){
-  return String(value ?? "").replace(/[&<>"']/g, ch => ({
-   "&":"&amp;",
-   "<":"&lt;",
-   ">":"&gt;",
-   '"':"&quot;",
-   "'":"&#039;"
-  }[ch]));
+ return String(value ?? "").replace(/[&<>"']/g, ch => ({
+ "&":"&amp;",
+ "<":"&lt;",
+ ">":"&gt;",
+ '"':"&quot;",
+ "'":"&#039;"
+ }[ch]));
  }
 
  function toRad(n){ return n * Math.PI / 180; }
 
  function distanceMeters(aLat, aLon, bLat, bLon){
-  const R = 6371000;
-  const dLat = toRad(bLat - aLat);
-  const dLon = toRad(bLon - aLon);
-  const lat1 = toRad(aLat);
-  const lat2 = toRad(bLat);
-  const x = Math.sin(dLat/2) ** 2 + Math.cos(lat1) * Math.cos(lat2) * (Math.sin(dLon/2) ** 2);
-  return 2 * R * Math.atan2(Math.sqrt(x), Math.sqrt(1 - x));
+ const R = 6371000;
+ const dLat = toRad(bLat - aLat);
+ const dLon = toRad(bLon - aLon);
+ const lat1 = toRad(aLat);
+ const lat2 = toRad(bLat);
+ const x = Math.sin(dLat/2) ** 2 + Math.cos(lat1) * Math.cos(lat2) * (Math.sin(dLon/2) ** 2);
+ return 2 * R * Math.atan2(Math.sqrt(x), Math.sqrt(1 - x));
  }
 
  function formatDistance(meters){
-  if(!Number.isFinite(meters)) return "—";
-  if(meters < 1000) return `${Math.round(meters)} m`;
-  return `${(meters / 1000).toFixed(meters < 10000 ? 1 : 0)} km`;
+ if(!Number.isFinite(meters)) return "—";
+ if(meters < 1000) return `${Math.round(meters)} m`;
+ return `${(meters / 1000).toFixed(meters < 10000 ? 1 : 0)} km`;
  }
 
  function formatDuration(seconds){
-  if(!Number.isFinite(seconds)) return "";
-  const min = Math.max(1, Math.round(seconds / 60));
-  if(min < 60) return `${min} dk`;
-  const h = Math.floor(min / 60);
-  const m = min % 60;
-  return m ? `${h} sa ${m} dk` : `${h} sa`;
+ if(!Number.isFinite(seconds)) return "";
+ const min = Math.max(1, Math.round(seconds / 60));
+ if(min < 60) return `${min} dk`;
+ const h = Math.floor(min / 60);
+ const m = min % 60;
+ return m ? `${h} sa ${m} dk` : `${h} sa`;
  }
 
 
  function stripHtml(value){
-  const tmp = document.createElement("div");
-  tmp.innerHTML = value | "";
-  return (tmp.textContent | tmp.innerText | "").trim();
+ const tmp = document.createElement("div");
+ tmp.innerHTML = value || "";
+ return (tmp.textContent || tmp.innerText || "").trim();
  }
 
  function turnIcon(type, modifier){
-  const t = `${type | ""} ${modifier | ""}`.toLowerCase();
-  if(t.includes("right")) return "↱";
-  if(t.includes("left")) return "↰";
-  if(t.includes("uturn")) return "↶";
-  if(t.includes("roundabout") | t.includes("rotary")) return "⟳";
-  if(t.includes("arrive")) return "◆";
-  if(t.includes("depart")) return "●";
-  if(t.includes("continue")) return "↑";
-  return "↑";
+ const t = `${type || ""} ${modifier || ""}`.toLowerCase();
+ if(t.includes("right")) return "↱";
+ if(t.includes("left")) return "↰";
+ if(t.includes("uturn")) return "↶";
+ if(t.includes("roundabout") || t.includes("rotary")) return "⟳";
+ if(t.includes("arrive")) return "◆";
+ if(t.includes("depart")) return "●";
+ if(t.includes("continue")) return "↑";
+ return "↑";
  }
 
  function instructionFromManeuver(step, index){
-  const maneuver = step.maneuver | {};
-  const type = String(maneuver.type | "").toLowerCase();
-  const modifier = String(maneuver.modifier | "").toLowerCase();
-  const road = step.name ? ` ${step.name}` : "";
+ const maneuver = step.maneuver || {};
+ const type = String(maneuver.type || "").toLowerCase();
+ const modifier = String(maneuver.modifier || "").toLowerCase();
+ const road = step.name ? ` — ${step.name}` : "";
 
-  if(type === "depart") return `Harekete başlayın${road}`;
-  if(type === "arrive") return "Camiye vardınız";
-  if(type === "roundabout" | type === "rotary") return `Döner kavşakta devam edin${road}`;
-  if(modifier.includes("right")) return `Sağa dönün${road}`;
-  if(modifier.includes("left")) return `Sola dönün${road}`;
-  if(modifier.includes("straight")) return `Düz ilerleyin${road}`;
-  if(type === "turn") return `Dönün${road}`;
-  if(type === "continue") return `İlerlemeye devam edin${road}`;
-  return index === 0 ? `Harekete başlayın${road}` : `İlerlemeye devam edin${road}`;
+ if(type === "depart") return `Hareket etmeye başlayın${road}`;
+ if(type === "arrive") return "Camiye ulaştınız";
+ if(type === "roundabout" || type === "rotary") return `Döner kavşakta devam edin${road}`;
+ if(modifier.includes("right")) return `Sağa dönün${road}`;
+ if(modifier.includes("left")) return `Sola dönün${road}`;
+ if(modifier.includes("straight")) return `Düz devam edin${road}`;
+ if(type === "turn") return `Dönün${road}`;
+ if(type === "continue") return `Devam edin${road}`;
+ return index === 0 ? `Hareket etmeye başlayın${road}` : `Devam edin${road}`;
  }
 
  function nearestPointIndex(coords, lat, lon){
-  let bestIndex = 0;
-  let bestDistance = Infinity;
-  coords.forEach((point, index) => {
-   const d = distanceMeters(lat, lon, point[0], point[1]);
-   if(d < bestDistance){
-    bestDistance = d;
-    bestIndex = index;
-   }
-  });
-  return {index:bestIndex, distance:bestDistance};
+ let bestIndex = 0;
+ let bestDistance = Infinity;
+ coords.forEach((point, index) => {
+ const d = distanceMeters(lat, lon, point[0], point[1]);
+ if(d < bestDistance){
+ bestDistance = d;
+ bestIndex = index;
+ }
+ });
+ return {index:bestIndex, distance:bestDistance};
  }
 
  function dedupeMosquesWithinRadius(items, radiusMeters){
-  const sorted = [...items].sort((a,b) => a.distance - b.distance);
-  const groups = [];
+ const sorted = [...items].sort((a,b) => a.distance - b.distance);
+ const groups = [];
 
-  sorted.forEach(item => {
-   let group = null;
-   for(const existing of groups){
-    const d = distanceMeters(item.lat, item.lon, existing.lat, existing.lon);
-    if(d <= radiusMeters){
-     group = existing;
-     break;
-    }
-   }
+ sorted.forEach(item => {
+ let group = null;
+ for(const existing of groups){
+ const d = distanceMeters(item.lat, item.lon, existing.lat, existing.lon);
+ if(d <= radiusMeters){
+ group = existing;
+ break;
+ }
+ }
 
-   if(!group){
-    groups.push({...item, aliases:[item.name], mergedCount:1});
-    return;
-   }
+ if(!group){
+ groups.push({...item, aliases:[item.name], mergedCount:1});
+ return;
+ }
 
-   group.mergedCount += 1;
-   if(item.name && !group.aliases.includes(item.name)) group.aliases.push(item.name);
+ group.mergedCount += 1;
+ if(item.name && !group.aliases.includes(item.name)) group.aliases.push(item.name);
 
-   const groupHasGenericName = group.name === "Cami" | group.name.length < 5;
-   const itemHasBetterName = item.name && item.name !== "Cami" && item.name.length > group.name.length;
-   if(groupHasGenericName | itemHasBetterName){
-    group.name = item.name;
-   }
+ const groupHasGenericName = group.name === "Cami" || group.name.length < 5;
+ const itemHasBetterName = item.name && item.name !== "Cami" && item.name.length > group.name.length;
+ if(groupHasGenericName || itemHasBetterName){
+ group.name = item.name;
+ }
 
-   const groupAddressIsCoord = /^-?\d+\.\d+,\s*-?\d+\.\d+$/.test(group.address | "");
-   const itemAddressIsBetter = item.address && !/^-?\d+\.\d+,\s*-?\d+\.\d+$/.test(item.address);
-   if(groupAddressIsCoord && itemAddressIsBetter){
-    group.address = item.address;
-   }
+ const groupAddressIsCoord = /^-?\d+\.\d+,\s*-?\d+\.\d+$/.test(group.address || "");
+ const itemAddressIsBetter = item.address && !/^-?\d+\.\d+,\s*-?\d+\.\d+$/.test(item.address);
+ if(groupAddressIsCoord && itemAddressIsBetter){
+ group.address = item.address;
+ }
 
-   if(item.distance < group.distance){
-    group.distance = item.distance;
-    group.lat = item.lat;
-    group.lon = item.lon;
-   }
-  });
+ if(item.distance < group.distance){
+ group.distance = item.distance;
+ group.lat = item.lat;
+ group.lon = item.lon;
+ }
+ });
 
-  return groups.sort((a,b) => a.distance - b.distance);
+ return groups.sort((a,b) => a.distance - b.distance);
  }
 
  function compactCoord(num){
-  return Number(num).toFixed(6);
+ return Number(num).toFixed(6);
  }
 
  function isValidCoord(lat, lon){
-  return Number.isFinite(lat) && Number.isFinite(lon) && Math.abs(lat) <= 90 && Math.abs(lon) <= 180;
+ return Number.isFinite(lat) && Number.isFinite(lon) && Math.abs(lat) <= 90 && Math.abs(lon) <= 180;
  }
 
  function getStoredPrayerCoords(){
-  const lat = parseFloat(localStorage.getItem("prayer_lat") | "");
-  const lon = parseFloat(localStorage.getItem("prayer_lon") | "");
-  if(isValidCoord(lat, lon)){
-   return {
-    lat,
-    lon,
-    label:localStorage.getItem("prayer_location_name") | "Namaz vakitleri konumu"
-   };
-  }
-  return null;
+ const lat = parseFloat(localStorage.getItem("prayer_lat") || "");
+ const lon = parseFloat(localStorage.getItem("prayer_lon") || "");
+ if(isValidCoord(lat, lon)){
+ return {
+ lat,
+ lon,
+ label:localStorage.getItem("prayer_location_name") || "Namaz vakitlerinden alınan konum"
+ };
+ }
+ return null;
  }
 
  function saveMosqueCoords(lat, lon, label){
-  localStorage.setItem("mosques_lat", String(lat));
-  localStorage.setItem("mosques_lon", String(lon));
-  localStorage.setItem("mosques_location_name", label | "Konum belirlendi");
+ localStorage.setItem("mosques_lat", String(lat));
+ localStorage.setItem("mosques_lon", String(lon));
+ localStorage.setItem("mosques_location_name", label || "Konum belirlendi");
  }
 
  function getStoredMosqueCoords(){
-  const lat = parseFloat(localStorage.getItem("mosques_lat") | "");
-  const lon = parseFloat(localStorage.getItem("mosques_lon") | "");
-  if(isValidCoord(lat, lon)){
-   return {
-    lat,
-    lon,
-    label:localStorage.getItem("mosques_location_name") | "Kayıtlı konum"
-   };
-  }
-  return null;
+ const lat = parseFloat(localStorage.getItem("mosques_lat") || "");
+ const lon = parseFloat(localStorage.getItem("mosques_lon") || "");
+ if(isValidCoord(lat, lon)){
+ return {
+ lat,
+ lon,
+ label:localStorage.getItem("mosques_location_name") || "Kaydedilmiş konum"
+ };
+ }
+ return null;
  }
 
  function addressFromTags(tags){
-  const parts = [];
-  const street = tags["addr:street"];
-  const house = tags["addr:housenumber"];
-  const city = tags["addr:city"] | tags["addr:town"] | tags["addr:village"] | tags["addr:suburb"];
-  const district = tags["addr:district"];
-  if(street && house) parts.push(`${street}, ${house}`);
-  else if(street) parts.push(street);
-  if(district) parts.push(district);
-  if(city) parts.push(city);
-  return parts.filter(Boolean).join(", ");
+ const parts = [];
+ const street = tags["addr:street"];
+ const house = tags["addr:housenumber"];
+ const city = tags["addr:city"] || tags["addr:town"] || tags["addr:village"] || tags["addr:suburb"];
+ const district = tags["addr:district"];
+ if(street && house) parts.push(`${street}, ${house}`);
+ else if(street) parts.push(street);
+ if(district) parts.push(district);
+ if(city) parts.push(city);
+ return parts.filter(Boolean).join(", ");
  }
 
  function googleRouteUrl(lat, lon, name){
-  return `https://www.google.com/maps/dir/?api=1&destination=${lat},${lon}&travelmode=walking&query=${encodeURIComponent(name | "Mosque")}`;
+ return `https://www.google.com/maps/dir/?api=1&destination=${lat},${lon}&travelmode=walking&query=${encodeURIComponent(name || "Mosque")}`;
  }
 
  function yandexRouteUrl(lat, lon){
-  return `https://yandex.com/maps/?rtext=~${lat},${lon}&rtt=auto`;
+ return `https://yandex.com/maps/?rtext=~${lat},${lon}&rtt=auto`;
  }
 
  function nativeGeoUrl(lat, lon, name){
-  return `geo:${lat},${lon}?q=${lat},${lon}(${encodeURIComponent(name | "Mosque")})`;
+ return googleRouteUrl(lat, lon, name);
  }
 
  function osmUrl(lat, lon){
-  return `https://www.openstreetmap.org/?mlat=${lat}&mlon=${lon}#map=18/${lat}/${lon}`;
+ return `https://www.openstreetmap.org/?mlat=${lat}&mlon=${lon}#map=18/${lat}/${lon}`;
  }
 
  function initMap(){
-  if(state.map | !window.L) return;
+ if(state.map || !window.L) return;
 
-  state.map = L.map("map", {
-   zoomControl:true,
-   attributionControl:true
-  }).setView([41.3111, 69.2797], 12);
+ state.map = L.map("map", {
+ zoomControl:true,
+ attributionControl:true
+ }).setView([41.3111, 69.2797], 12);
 
-  L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
-   maxZoom:19,
-   attribution:'&copy; OpenStreetMap'
-  }).addTo(state.map);
+ 
 
-  state.mosqueLayer = L.layerGroup().addTo(state.map);
-  state.routeLayer = L.layerGroup().addTo(state.map);
+window.__barakawayMosquesMap = state.map;
+L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
+ maxZoom:19,
+ attribution:'&copy; OpenStreetMap'
+ }).addTo(state.map);
+
+ state.mosqueLayer = L.layerGroup().addTo(state.map);
+ state.routeLayer = L.layerGroup().addTo(state.map);
  }
 
  function userIcon(){
-  return L.divIcon({
-   className:"barakaway-user-marker",
-   html:'<div style="width:20px;height:20px;border-radius:999px;background:#2d7a46;border:3px solid #fff;box-shadow:0 0 0 8px rgba(45,122,70,.18),0 8px 20px rgba(0,0,0,.35)"></div>',
-   iconSize:[20,20],
-   iconAnchor:[10,10]
-  });
+ return L.divIcon({
+ className:"barakaway-user-marker",
+ html:'<div style="width:20px;height:20px;border-radius:999px;background:#2d7a46;border:3px solid #fff;box-shadow:0 0 0 8px rgba(45,122,70,.18),0 8px 20px rgba(0,0,0,.35)"></div>',
+ iconSize:[20,20],
+ iconAnchor:[10,10]
+ });
  }
 
  function mosqueIcon(active){
-  return L.divIcon({
-   className:"barakaway-mosque-marker",
-   html:`<div style="width:${active ? 34 : 28}px;height:${active ? 34 : 28}px;border-radius:999px;background:linear-gradient(135deg,#b58a36,#d7b56d);border:3px solid #fff;box-shadow:0 10px 24px rgba(0,0,0,.35);display:flex;align-items:center;justify-content:center;color:#111814;font-weight:950;font-size:${active ? 16 : 13}px">⌂</div>`,
-   iconSize:[active ? 34 : 28, active ? 34 : 28],
-   iconAnchor:[active ? 17 : 14, active ? 17 : 14]
-  });
+ return L.divIcon({
+ className:"barakaway-mosque-marker",
+ html:`<div style="width:${active ? 34 : 28}px;height:${active ? 34 : 28}px;border-radius:999px;background:linear-gradient(135deg,#b58a36,#d7b56d);border:3px solid #fff;box-shadow:0 10px 24px rgba(0,0,0,.35);display:flex;align-items:center;justify-content:center;color:#111814;font-weight:950;font-size:${active ? 16 : 13}px">⌂</div>`,
+ iconSize:[active ? 34 : 28, active ? 34 : 28],
+ iconAnchor:[active ? 17 : 14, active ? 17 : 14]
+ });
  }
 
 
  function updateHeadingVisual(heading){
-  if(!Number.isFinite(heading) | !state.userMarker) return;
-  const el = state.userMarker.getElement();
-  if(el){
-   const inner = el.querySelector("div");
-   if(inner){
-    inner.style.transform = `rotate(${heading}deg)`;
-    inner.style.clipPath = "polygon(50% 0%, 100% 100%, 50% 78%, 0% 100%)";
-    inner.style.borderRadius = "6px";
-    inner.style.width = "26px";
-    inner.style.height = "30px";
-   }
-  }
+ if(!Number.isFinite(heading) || !state.userMarker) return;
+ const el = state.userMarker.getElement();
+ if(el){
+ const inner = el.querySelector("div");
+ if(inner){
+ inner.style.transform = `rotate(${heading}deg)`;
+ inner.style.clipPath = "polygon(50% 0%, 100% 100%, 50% 78%, 0% 100%)";
+ inner.style.borderRadius = "6px";
+ inner.style.width = "26px";
+ inner.style.height = "30px";
+ }
+ }
  }
 
  function updateUserOnMap(lat, lon, accuracy){
-  initMap();
-  if(!state.map) return;
+ initMap();
+ if(!state.map) return;
 
-  const point = [lat, lon];
-  if(!state.userMarker){
-   state.userMarker = L.marker(point, {icon:userIcon(), zIndexOffset:1000}).addTo(state.map).bindPopup("Buradasınız");
-  }else{
-   state.userMarker.setLatLng(point);
-  }
-
-  if(Number.isFinite(accuracy)){
-   if(!state.userAccuracy){
-    state.userAccuracy = L.circle(point, {
-     radius:Math.min(Math.max(accuracy, 25), 500),
-     color:"#2d7a46",
-     fillColor:"#2d7a46",
-     fillOpacity:.10,
-     weight:1
-    }).addTo(state.map);
-   }else{
-    state.userAccuracy.setLatLng(point).setRadius(Math.min(Math.max(accuracy, 25), 500));
-   }
-  }
+ const point = [lat, lon];
+ if(!state.userMarker){
+ state.userMarker = L.marker(point, {icon:userIcon(), zIndexOffset:1000}).addTo(state.map).bindPopup("Buradasınız");
+ }else{
+ state.userMarker.setLatLng(point);
  }
 
+ if(Number.isFinite(accuracy)){
+ if(!state.userAccuracy){
+ state.userAccuracy = L.circle(point, {
+ radius:Math.min(Math.max(accuracy, 25), 500),
+ color:"#2d7a46",
+ fillColor:"#2d7a46",
+ fillOpacity:.10,
+ weight:1
+ }).addTo(state.map);
+ }else{
+ state.userAccuracy.setLatLng(point).setRadius(Math.min(Math.max(accuracy, 25), 500));
+ }
+ }
+ }
+
+
+ function getFastStoredCoords(){
+ const direct = getStoredMosqueCoords() || getStoredPrayerCoords();
+ if(direct && isValidCoord(direct.lat, direct.lon)) return direct;
+ return null;
+ }
+
+ function applyCoordsAndSearch(lat, lon, label, accuracy){
+ state.coords = {
+ lat,
+ lon,
+ accuracy:accuracy || null
+ };
+
+ saveMosqueCoords(lat, lon, label || "Konum belirlendi");
+ updateUserOnMap(lat, lon, accuracy || null);
+ els.userLocation.textContent = label || `${compactCoord(lat)}, ${compactCoord(lon)}`;
+
+ setStatus("Yakındaki camiler aranıyor", "5 km yarıçapında en yakın camiler için hızlı arama.");
+ renderImmediateCachedMosques();
+ searchNearbyMosques();
+ }
+
+ function requestFastLocation(){
+ document.querySelector(".status-panel")?.classList.add("is-gps-loading");
+ setStatus("GPS konumu belirleniyor", "Hızlı koordinatlar alınıyor ve arama hemen başlatılıyor.");
+
+ const stored = getFastStoredCoords();
+ if(stored){
+ applyCoordsAndSearch(stored.lat, stored.lon, stored.label || "Kaydedilmiş konum", null);
+ }
+
+ if(!navigator.geolocation){
+ handleGeolocationError({code:0});
+ return;
+ }
+
+ navigator.geolocation.getCurrentPosition(
+ async position => {
+ const lat = position.coords.latitude;
+ const lon = position.coords.longitude;
+ const accuracy = position.coords.accuracy || null;
+ const label = await reversePlaceName(lat, lon);
+ applyCoordsAndSearch(lat, lon, label, accuracy);
+ },
+ error => {
+ if(!stored){
+ handleGeolocationError(error);
+ }else{
+ toast("Son kaydedilen konuma göre en yakın camiler gösterildi");
+ }
+ },
+ {
+ enableHighAccuracy:false,
+ timeout:1800,
+ maximumAge:900000
+ }
+ );
+ }
+
+
  function buildOverpassQuery(lat, lon, radius){
-  return `
-[out:json][timeout:12];
+ return `
+[out:json][timeout:3];
 (
  node["amenity"="place_of_worship"]["religion"="muslim"](around:${radius},${lat},${lon});
  way["amenity"="place_of_worship"]["religion"="muslim"](around:${radius},${lat},${lon});
  relation["amenity"="place_of_worship"]["religion"="muslim"](around:${radius},${lat},${lon});
+
  node["building"="mosque"](around:${radius},${lat},${lon});
  way["building"="mosque"](around:${radius},${lat},${lon});
  relation["building"="mosque"](around:${radius},${lat},${lon});
- node["name"~"masjid|mosque|msa|مسجد|cami|jome|juma",i](around:${radius},${lat},${lon});
- way["name"~"masjid|mosque|msa|مسجد|cami|jome|juma",i](around:${radius},${lat},${lon});
+
+ node["place_of_worship"~"musalla|mosque",i](around:${radius},${lat},${lon});
+ way["place_of_worship"~"musalla|mosque",i](around:${radius},${lat},${lon});
+ relation["place_of_worship"~"musalla|mosque",i](around:${radius},${lat},${lon});
+
+ node["religion"="muslim"]["name"](around:${radius},${lat},${lon});
+ way["religion"="muslim"]["name"](around:${radius},${lat},${lon});
+ relation["religion"="muslim"]["name"](around:${radius},${lat},${lon});
+
+ node["name"~"masjid|mosque|musalla|м[её]четь|مسجد|cami|jome|juma|jummah|жоме|жума|намозгоҳ|namozgoh",i](around:${radius},${lat},${lon});
+ way["name"~"masjid|mosque|musalla|м[её]четь|مسجد|cami|jome|juma|jummah|жоме|жума|намозгоҳ|namozgoh",i](around:${radius},${lat},${lon});
+ relation["name"~"masjid|mosque|musalla|м[её]четь|مسجد|cami|jome|juma|jummah|жоме|жума|намозгоҳ|namozgoh",i](around:${radius},${lat},${lon});
 );
 out center tags;
 `;
  }
 
- async function fetchWithTimeout(url, options, timeoutMs){
-  const controller = new AbortController();
-  const timer = setTimeout(() => controller.abort(), timeoutMs);
-  try{
-   const response = await fetch(url, {...(options | {}), signal:controller.signal});
-   clearTimeout(timer);
-   return response;
-  }catch(error){
-   clearTimeout(timer);
-   throw error;
-  }
+ 
+ function openLocationSettingsHint(){
+ const isAndroid = /Android/i.test(navigator.userAgent);
+ const isIOS = /iPhone|iPad|iPod/i.test(navigator.userAgent);
+
+ toast("Telefon ayarlarını açın ve Geodata / Konum’u etkinleştirin");
+
+ // Mobile browsers do not have a universal guaranteed API for opening Location settings.
+ // These deep links are attempted only from a direct user tap and guarded to avoid breaking the page.
+ try{
+ if(isAndroid){
+ window.location.href = "intent://settings#Intent;action=android.settings.LOCATION_SOURCE_SETTINGS;end";
+ return;
+ }
+ if(isIOS){
+ window.location.href = "App-Prefs:Privacy&path=LOCATION";
+ }
+ }catch(error){}
  }
 
- async function fetchOverpass(lat, lon, radius){
-  const query = buildOverpassQuery(lat, lon, radius);
-  let lastError = null;
+ function handleGeolocationError(error){
+ document.querySelector(".status-panel")?.classList.remove("is-gps-loading");
+ const denied = error && error.code === 1;
+ setStatus(
+ denied ? "Coğrafi konum izni reddedildi" : "GPS belirlenmedi",
+ denied
+ ? "Telefon veya tarayıcı ayarlarında konum erişimine izin verin."
+ : "Geodata / Konum’un açık olup olmadığını kontrol edin ve GPS’e tekrar basın."
+ );
+ openLocationSettingsHint();
+ }
 
-  for(const endpoint of OVERPASS_ENDPOINTS){
-   try{
-    const response = await fetchWithTimeout(endpoint, {
-     method:"POST",
-     headers:{"Content-Type":"application/x-www-form-urlencoded;charset=UTF-8"},
-     body:new URLSearchParams({data:query})
-    }, 9500);
-    if(!response.ok) throw new Error("request failed");
-    return await response.json();
-   }catch(error){
-    lastError = error;
-   }
 
-   try{
-    const url = endpoint + "?data=" + encodeURIComponent(query);
-    const response = await fetchWithTimeout(url, {method:"GET"}, 9500);
-    if(!response.ok) throw new Error("request failed");
-    return await response.json();
-   }catch(error){
-    lastError = error;
-   }
-  }
+ async function fetchWithTimeout(url, options, timeoutMs){
+ const controller = new AbortController();
+ const timer = setTimeout(() => controller.abort(), timeoutMs);
+ try{
+ const response = await fetch(url, {...(options || {}), signal:controller.signal});
+ clearTimeout(timer);
+ return response;
+ }catch(error){
+ clearTimeout(timer);
+ throw error;
+ }
+ }
 
-  throw lastError | new Error("request failed");
+ 
+ function getCachedMosques(){
+ try{
+ const raw = localStorage.getItem("bw_cached_mosques");
+ if(!raw) return null;
+ const parsed = JSON.parse(raw);
+ return Array.isArray(parsed.items) ? parsed.items : null;
+ }catch(error){
+ return null;
+ }
+ }
+
+ function saveCachedMosques(items){
+ try{
+ localStorage.setItem("bw_cached_mosques", JSON.stringify({
+ ts:Date.now(),
+ items
+ }));
+ }catch(error){}
+ }
+
+
+
+
+ function renderImmediateCachedMosques(){
+ const cached = getCachedMosques();
+ if(!cached || !cached.length || !state.coords) return false;
+
+ const refreshed = cached.map(item => ({
+ ...item,
+ distance:distanceMeters(state.coords.lat, state.coords.lon, item.lat, item.lon)
+ })).sort((a,b) => a.distance - b.distance);
+
+ state.mosques = refreshed;
+ updateFiltered();
+ renderList();
+ renderMapMarkers();
+ els.resultCount.textContent = String(refreshed.length);
+ return true;
+ }
+
+
+async function fetchOverpass(lat, lon, radius){
+ const query = buildOverpassQuery(lat, lon, radius);
+
+ const requests = OVERPASS_ENDPOINTS.flatMap(endpoint => {
+ const postRequest = fetchWithTimeout(endpoint, {
+ method:"POST",
+ headers:{"Content-Type":"application/x-www-form-urlencoded;charset=UTF-8"},
+ body:new URLSearchParams({data:query})
+ }, 1600).then(r => {
+ if(!r.ok) throw new Error("request failed");
+ return r.json();
+ });
+
+ const getUrl = endpoint + "?data=" + encodeURIComponent(query);
+ const getRequest = fetchWithTimeout(getUrl, {method:"GET"}, 1600).then(r => {
+ if(!r.ok) throw new Error("request failed");
+ return r.json();
+ });
+
+ return [postRequest, getRequest];
+ });
+
+ return await Promise.any(requests);
  }
 
  function nominatimViewbox(lat, lon, km){
-  const latDelta = km / 111;
-  const lonDelta = km / (111 * Math.max(Math.cos(toRad(lat)), 0.25));
-  return `${lon - lonDelta},${lat + latDelta},${lon + lonDelta},${lat - latDelta}`;
+ const latDelta = km / 111;
+ const lonDelta = km / (111 * Math.max(Math.cos(toRad(lat)), 0.25));
+ return `${lon - lonDelta},${lat + latDelta},${lon + lonDelta},${lat - latDelta}`;
  }
 
  function hasMosqueIdentityText(text){
-  const value = String(text | "").toLowerCase();
-  return (
-   value.includes("mosque") |
-   value.includes("masjid") |
-   value.includes("mesa") |
-   value.includes("msa") |
-   value.includes("مسجد") |
-   value.includes("cami") |
-   value.includes("jome") |
-   value.includes("juma") |
-   value.includes("jummah") |
-   value.includes("m") |
-   value.includes("m")
-  );
+ const value = String(text || "").toLowerCase();
+ return (
+ value.includes("mosque") ||
+ value.includes("masjid") ||
+ value.includes("мeчеть") ||
+ value.includes("cami") ||
+ value.includes("مسجد") ||
+ value.includes("cami") ||
+ value.includes("jome") ||
+ value.includes("juma") ||
+ value.includes("jummah") ||
+ value.includes("жоме") ||
+ value.includes("жума") ||
+ value.includes("musalla") ||
+ value.includes("намозгоҳ") ||
+ value.includes("namozgoh")
+ );
  }
 
  function isClearlyNonMosqueText(text){
-  const value = String(text | "").toLowerCase();
-  return (
-   value.includes("synagogue") |
-   value.includes("") |
-   value.includes("church") |
-   value.includes("") |
-   value.includes("cathedral") |
-   value.includes("") |
-   value.includes("chapel") |
-   value.includes("temple") |
-   value.includes("m") |
-   value.includes("monastery") |
-   value.includes("m")
-  );
+ const value = String(text || "").toLowerCase();
+ return (
+ value.includes("synagogue") ||
+ value.includes("синагог") ||
+ value.includes("church") ||
+ value.includes("церков") ||
+ value.includes("cathedral") ||
+ value.includes("собор") ||
+ value.includes("chapel") ||
+ value.includes("temple") ||
+ value.includes("храм") ||
+ value.includes("monastery") ||
+ value.includes("монастыр")
+ );
  }
 
  function isMosqueFromTags(tags, name){
-  const text = `${name | ""} ${Object.values(tags | {}).join(" ")}`;
-  if(isClearlyNonMosqueText(text)) return false;
+ const text = `${name || ""} ${Object.values(tags || {}).join(" ")}`;
+ if(isClearlyNonMosqueText(text)) return false;
 
-  const amenity = String(tags.amenity | "").toLowerCase();
-  const religion = String(tags.religion | "").toLowerCase();
-  const building = String(tags.building | "").toLowerCase();
+ const amenity = String(tags.amenity || "").toLowerCase();
+ const religion = String(tags.religion || "").toLowerCase();
+ const building = String(tags.building || "").toLowerCase();
+ const placeOfWorship = String(tags.place_of_worship || "").toLowerCase();
 
-  if(amenity === "place_of_worship" && religion === "muslim") return true;
-  if(building === "mosque") return true;
-  return hasMosqueIdentityText(text);
+ if(amenity === "place_of_worship" && religion === "muslim") return true;
+ if(building === "mosque") return true;
+ if(placeOfWorship === "musalla" || placeOfWorship === "mosque") return true;
+ if(religion === "muslim" && hasMosqueIdentityText(text)) return true;
+ return hasMosqueIdentityText(text);
  }
 
  async function fetchNominatimMosques(lat, lon){
-  const queries = [
-   "amenity:mosque",
-   "mosque",
-   "masjid",
-   "msa",
-   "مسجد",
-   "juma masjid"
-  ];
-  const all = [];
+ const queries = [
+ "mosque",
+ "masjid",
+ "cami",
+ "مسجد"
+ ];
 
-  for(const q of queries){
-   try{
-    const params = new URLSearchParams({
-     format:"jsonv2",
-     limit:"18",
-     addressdetails:"1",
-     extratags:"1",
-     namedetails:"1",
-     bounded:"1",
-     viewbox:nominatimViewbox(lat, lon, 18),
-     q:q
-    });
-    const response = await fetchWithTimeout(`${NOMINATIM_SEARCH}?${params.toString()}`, {}, 6500);
-    if(response.ok){
-     const data = await response.json();
-     if(Array.isArray(data)) all.push(...data);
-    }
-   }catch(error){}
-  }
+ const viewbox = nominatimViewbox(lat, lon, 5);
 
-  return all;
+ const requests = queries.map(async q => {
+ try{
+ const params = new URLSearchParams({
+ format:"jsonv2",
+ limit:"12",
+ addressdetails:"1",
+ extratags:"1",
+ namedetails:"1",
+ bounded:"1",
+ viewbox:viewbox,
+ q:q
+ });
+ const response = await fetchWithTimeout(`${NOMINATIM_SEARCH}?${params.toString()}`, {}, 900);
+ if(!response.ok) return [];
+ const data = await response.json();
+ return Array.isArray(data) ? data : [];
+ }catch(error){
+ return [];
+ }
+ });
+
+ const chunks = await Promise.all(requests);
+ return chunks.flat();
  }
 
  async function reversePlaceName(lat, lon){
-  try{
-   const response = await fetchWithTimeout(`${NOMINATIM_REVERSE}?format=jsonv2&lat=${lat}&lon=${lon}`, {}, 6500);
-   const data = await response.json();
-   const address = data.address | {};
-   const city = address.city | address.town | address.village | address.county | "";
-   const country = address.country | "";
-   return [city, country].filter(Boolean).join(", ") | "Konum belirlendi";
-  }catch(error){
-   return "Konum belirlendi";
-  }
+ try{
+ const response = await fetchWithTimeout(`${NOMINATIM_REVERSE}?format=jsonv2&lat=${lat}&lon=${lon}`, {}, 900);
+ const data = await response.json();
+ const address = data.address || {};
+ const city = address.city || address.town || address.village || address.county || "";
+ const country = address.country || "";
+ return [city, country].filter(Boolean).join(", ") || "Konum belirlendi";
+ }catch(error){
+ return "Konum belirlendi";
+ }
  }
 
  function normalizeOverpassMosques(data, origin){
-  const seen = new Set();
+ const seen = new Set();
 
-  return (data.elements | []).map(el => {
-   const tags = el.tags | {};
-   const lat = el.lat ?? el.center?.lat;
-   const lon = el.lon ?? el.center?.lon;
-   if(!isValidCoord(Number(lat), Number(lon))) return null;
+ return (data.elements || []).map(el => {
+ const tags = el.tags || {};
+ const lat = el.lat ?? el.center?.lat;
+ const lon = el.lon ?? el.center?.lon;
+ if(!isValidCoord(Number(lat), Number(lon))) return null;
 
-   const name = tags.name | tags["name:ru"] | tags["name:en"] | tags["name:local"] | "Cami";
-   if(!isMosqueFromTags(tags, name)) return null;
-   const address = addressFromTags(tags);
-   const fallbackAddress = address | `${compactCoord(lat)}, ${compactCoord(lon)}`;
-   const distance = distanceMeters(origin.lat, origin.lon, Number(lat), Number(lon));
-   const key = `${name.toLowerCase()}|${compactCoord(lat)}|${compactCoord(lon)}`;
-   if(seen.has(key)) return null;
-   seen.add(key);
+ const name = tags.name || tags["name:ru"] || tags["name:en"] || tags["name:local"] || "Cami";
+ if(!isMosqueFromTags(tags, name)) return null;
+ const address = addressFromTags(tags);
+ const fallbackAddress = address || `${compactCoord(lat)}, ${compactCoord(lon)}`;
+ const distance = distanceMeters(origin.lat, origin.lon, Number(lat), Number(lon));
+ const key = `${name.toLowerCase()}|${compactCoord(lat)}|${compactCoord(lon)}`;
+ if(seen.has(key)) return null;
+ seen.add(key);
 
-   return {
-    id:`${el.type}-${el.id}`,
-    name,
-    address:fallbackAddress,
-    distance,
-    routeDistance:null,
-    routeDuration:null,
-    lat:Number(lat),
-    lon:Number(lon)
-   };
-  }).filter(Boolean);
+ return {
+ id:`${el.type}-${el.id}`,
+ name,
+ address:fallbackAddress,
+ distance,
+ routeDistance:null,
+ routeDuration:null,
+ lat:Number(lat),
+ lon:Number(lon)
+ };
+ }).filter(Boolean);
  }
 
  function normalizeNominatimMosques(data, origin){
-  const seen = new Set();
+ const seen = new Set();
 
-  return (data | []).map(item => {
-   const lat = Number(item.lat);
-   const lon = Number(item.lon);
-   if(!isValidCoord(lat, lon)) return null;
+ return (data || []).map(item => {
+ const lat = Number(item.lat);
+ const lon = Number(item.lon);
+ if(!isValidCoord(lat, lon)) return null;
 
-   const address = item.address | {};
-   const extratags = item.extratags | {};
-   const namedetails = item.namedetails | {};
-   const name =
-    item.name |
-    namedetails.name |
-    namedetails["name:ru"] |
-    namedetails["name:en"] |
-    item.display_name?.split(",")[0] |
-    "Cami";
+ const address = item.address || {};
+ const extratags = item.extratags || {};
+ const namedetails = item.namedetails || {};
+ const name =
+ item.name ||
+ namedetails.name ||
+ namedetails["name:ru"] ||
+ namedetails["name:en"] ||
+ item.display_name?.split(",")[0] ||
+ "Cami";
 
-   const combined = `${name} ${item.display_name | ""} ${JSON.stringify(address)} ${JSON.stringify(extratags)}`;
-   const religion = String(extratags.religion | address.religion | "").toLowerCase();
-   const amenity = String(extratags.amenity | item.type | "").toLowerCase();
-   const building = String(extratags.building | "").toLowerCase();
+ const combined = `${name} ${item.display_name || ""} ${JSON.stringify(address)} ${JSON.stringify(extratags)}`;
+ const religion = String(extratags.religion || address.religion || "").toLowerCase();
+ const amenity = String(extratags.amenity || item.type || "").toLowerCase();
+ const building = String(extratags.building || "").toLowerCase();
 
-   const taggedMosque =
-    religion === "muslim" |
-    amenity === "mosque" |
-    building === "mosque" |
-    hasMosqueIdentityText(combined);
+ const taggedMosque =
+ religion === "muslim" ||
+ amenity === "mosque" ||
+ building === "mosque" ||
+ hasMosqueIdentityText(combined);
 
-   if(!taggedMosque | isClearlyNonMosqueText(combined)) return null;
+ if(!taggedMosque || isClearlyNonMosqueText(combined)) return null;
 
-   const road = address.road;
-   const house = address.house_number;
-   const city = address.city | address.town | address.village | address.county | "";
-   const namedAddress = [road && house ? `${road}, ${house}` : road, city].filter(Boolean).join(", ");
-   const fallbackAddress = namedAddress | item.display_name | `${compactCoord(lat)}, ${compactCoord(lon)}`;
-   const distance = distanceMeters(origin.lat, origin.lon, lat, lon);
-   const key = `${name.toLowerCase()}|${compactCoord(lat)}|${compactCoord(lon)}`;
-   if(seen.has(key)) return null;
-   seen.add(key);
+ const road = address.road;
+ const house = address.house_number;
+ const city = address.city || address.town || address.village || address.county || "";
+ const namedAddress = [road && house ? `${road}, ${house}` : road, city].filter(Boolean).join(", ");
+ const fallbackAddress = namedAddress || item.display_name || `${compactCoord(lat)}, ${compactCoord(lon)}`;
+ const distance = distanceMeters(origin.lat, origin.lon, lat, lon);
+ const key = `${name.toLowerCase()}|${compactCoord(lat)}|${compactCoord(lon)}`;
+ if(seen.has(key)) return null;
+ seen.add(key);
 
-   return {
-    id:`nominatim-${item.place_id | key}`,
-    name,
-    address:fallbackAddress,
-    distance,
-    routeDistance:null,
-    routeDuration:null,
-    lat,
-    lon
-   };
-  }).filter(Boolean);
+ return {
+ id:`nominatim-${item.place_id || key}`,
+ name,
+ address:fallbackAddress,
+ distance,
+ routeDistance:null,
+ routeDuration:null,
+ lat,
+ lon
+ };
+ }).filter(Boolean);
  }
 
  function mergeMosques(primary, fallback){
-  const seen = new Set();
-  const exact = [...primary, ...fallback].filter(item => {
-   const key = `${item.name.toLowerCase()}|${compactCoord(item.lat)}|${compactCoord(item.lon)}`;
-   if(seen.has(key)) return false;
-   seen.add(key);
-   return true;
-  }).sort((a,b) => a.distance - b.distance);
+ const seen = new Set();
+ const exact = [...primary, ...fallback].filter(item => {
+ const key = `${item.name.toLowerCase()}|${compactCoord(item.lat)}|${compactCoord(item.lon)}`;
+ if(seen.has(key)) return false;
+ seen.add(key);
+ return true;
+ }).sort((a,b) => a.distance - b.distance);
 
-  return dedupeMosquesWithinRadius(exact, 500);
+ const merged = dedupeMosquesWithinRadius(exact, 500);
+ saveCachedMosques(merged);
+ return merged;
  }
 
  function updateFiltered(){
-  const query = els.searchInput.value.trim().toLowerCase();
-  state.filtered = state.mosques.filter(item => {
-   const hay = `${item.name} ${item.address}`.toLowerCase();
-   return !query | hay.includes(query);
-  });
-  els.resultCount.textContent = String(state.filtered.length);
+ const query = els.searchInput.value.trim().toLowerCase();
+
+ let filtered = state.mosques.filter(item => {
+ const hay = `${item.name} ${item.address}`.toLowerCase();
+ return !query || hay.includes(query);
+ });
+
+ filtered.sort((a,b) => a.distance - b.distance);
+
+ if(state.nearestOnly && filtered.length){
+ filtered = [filtered[0]];
+ }
+
+ state.filtered = filtered;
+ els.resultCount.textContent = String(state.filtered.length);
  }
 
  function renderMapMarkers(){
-  initMap();
-  if(!state.map | !state.mosqueLayer) return;
+ initMap();
+ if(!state.map || !state.mosqueLayer) return;
 
-  state.mosqueLayer.clearLayers();
-  state.markers.clear();
+ state.mosqueLayer.clearLayers();
+ state.markers.clear();
 
-  state.filtered.forEach(item => {
-   const active = state.selected && state.selected.id === item.id;
-   const marker = L.marker([item.lat, item.lon], {
-    icon:mosqueIcon(active),
-    zIndexOffset:active ? 900 : 400
-   }).addTo(state.mosqueLayer);
+ state.filtered.forEach(item => {
+ const active = state.selected && state.selected.id === item.id;
+ const marker = L.marker([item.lat, item.lon], {
+ icon:mosqueIcon(active),
+ zIndexOffset:active ? 900 : 400
+ }).addTo(state.mosqueLayer);
 
-   marker.bindPopup(`<div class="popup-title">${escapeHtml(item.name)}</div><div class="popup-sub">${formatDistance(item.distance)} · ${escapeHtml(item.address)}</div><div style="margin-top:8px;display:grid;gap:6px"><button type="button" data-popup-route="${escapeHtml(item.id)}" style="border:0;border-radius:10px;background:#2d7a46;color:#fff;font-weight:900;padding:8px 10px;cursor:pointer">Rota oluştur</button><a href="${nativeGeoUrl(compactCoord(item.lat), compactCoord(item.lon), item.name)}" style="border-radius:10px;background:#f0d891;color:#111814;font-weight:900;padding:8px 10px;text-decoration:none;text-align:center">Gidelim</a></div>`);
-   marker.on("click", () => selectMosque(item.id, true));
-   state.markers.set(item.id, marker);
-  });
+ marker.bindPopup(`<div class="popup-title">${escapeHtml(item.name)}</div><div class="popup-sub">${formatDistance(item.distance)} · ${escapeHtml(item.address)}</div><div style="margin-top:8px;display:grid;gap:6px"><button type="button" data-popup-route="${escapeHtml(item.id)}" style="border:0;border-radius:10px;background:#2d7a46;color:#fff;font-weight:900;padding:8px 10px;cursor:pointer">Rota oluştur</button><a href="${nativeGeoUrl(compactCoord(item.lat), compactCoord(item.lon), item.name)}" style="border-radius:10px;background:#f0d891;color:#111814;font-weight:900;padding:8px 10px;text-decoration:none;text-align:center">Başla</a></div>`);
+ marker.on("click", () => selectMosque(item.id, true));
+ state.markers.set(item.id, marker);
+ });
 
-  const boundsItems = state.filtered.slice(0, 20).map(item => [item.lat, item.lon]);
-  if(state.coords) boundsItems.push([state.coords.lat, state.coords.lon]);
+ const boundsItems = state.filtered.slice(0, 20).map(item => [item.lat, item.lon]);
+ if(state.coords) boundsItems.push([state.coords.lat, state.coords.lon]);
 
-  if(boundsItems.length && !state.selected){
-   state.map.fitBounds(boundsItems, {padding:[38,38], maxZoom:15});
-  }
+ if(boundsItems.length && !state.selected){
+ state.map.fitBounds(boundsItems, {padding:[38,38], maxZoom:15});
+ }
  }
 
  function renderList(){
-  updateFiltered();
+ updateFiltered();
 
-  if(state.loading){
-   els.results.innerHTML = `<div class="empty">Yakındaki camiler aranıyor...</div>`;
-   return;
-  }
+ if(state.loading){
+ els.results.innerHTML = `<div class="empty">
+ <div class="gps-loading premium-search-loading">
+ <span class="gps-radar">
+ <span class="gps-radar-ring"></span>
+ <span class="gps-radar-ring delay"></span>
+ <span class="gps-radar-dot"></span>
+ </span>
+ <span class="gps-search-text">Yakındaki camiler aranıyor…</span>
+ </div>
+ </div>`;
+ return;
+ }
 
-  if(!state.filtered.length){
-   els.results.innerHTML = `<div class="empty">Henüz cami bulunamadı. «Yenile» düğmesine basın veya daha sonra tekrar deneyin.</div>`;
-   renderMapMarkers();
-   return;
-  }
+ if(!state.filtered.length){
+ els.results.innerHTML = `<div class="empty">Henüz cami bulunamadı. «Yenile» düğmesine basın veya daha sonra tekrar deneyin.</div>`;
+ renderMapMarkers();
+ return;
+ }
 
-  els.results.innerHTML = state.filtered.map((item, index) => {
-   const lat = compactCoord(item.lat);
-   const lon = compactCoord(item.lon);
-   const name = escapeHtml(item.name);
-   const address = escapeHtml(item.address);
-   const mapUrl = osmUrl(lat, lon);
-   const googleUrl = googleRouteUrl(lat, lon, item.name);
-   const yandexUrl = yandexRouteUrl(lat, lon);
-   const geoUrl = nativeGeoUrl(lat, lon, item.name);
-   const selectedClass = state.selected && state.selected.id === item.id ? " is-selected" : "";
-   const routeBadge = item.routeDistance ? `<span class="route-badge">${formatDistance(item.routeDistance)} · ${formatDuration(item.routeDuration)}</span>` : "";
+ els.results.innerHTML = state.filtered.map((item, index) => {
+ const lat = compactCoord(item.lat);
+ const lon = compactCoord(item.lon);
+ const name = escapeHtml(item.name);
+ const address = escapeHtml(item.address);
+ const mapUrl = osmUrl(lat, lon);
+ const googleUrl = googleRouteUrl(lat, lon, item.name);
+ const yandexUrl = yandexRouteUrl(lat, lon);
+ const geoUrl = nativeGeoUrl(lat, lon, item.name);
+ const selectedClass = state.selected && state.selected.id === item.id ? " is-selected" : "";
+ const routeBadge = item.routeDistance ? `<span class="route-badge">${formatDistance(item.routeDistance)} · ${formatDuration(item.routeDuration)}</span>` : "";
 
-   return `
-    <article class="card${selectedClass}" data-id="${escapeHtml(item.id)}">
-     <div class="card-head">
-      <button class="idx select-card-btn" type="button" data-id="${escapeHtml(item.id)}">${index + 1}</button>
-      <div class="meta">
-       <h2 class="title">${name}</h2>
-       <div class="distance">${formatDistance(item.distance)} sizden</div>${routeBadge}
-       <p class="address">${address}</p>
-      </div>
-     </div>
-     <div class="label">Koordinatlar</div>
-     <p class="coordinates">${lat}, ${lon}</p>
-     <div class="card-actions">
-      <button class="small-action route-btn primary" type="button" data-id="${escapeHtml(item.id)}">
-       <svg viewBox="0 0 24 24"><path d="M4 19c4-8 12 0 16-8"/><path d="M14 5h6v6"/></svg>
-       Oluştur
-      </button>
-      <a class="small-action start-external-btn" href="${geoUrl}">
-       <svg viewBox="0 0 24 24"><path d="M4 12l16-8-8 16-2-7-6-1z"/></svg>
-       Gidelim
-      </a>
-      <a class="small-action" href="${googleUrl}" target="_blank" rel="noopener">
-       <svg viewBox="0 0 24 24"><path d="M12 21s7-5.1 7-11a7 7 0 1 0-14 0c0 5.9 7 11 7 11z"/><circle cx="12" cy="10" r="2.5"/></svg>
-       Google
-      </a>
-      <a class="small-action" href="${yandexUrl}" target="_blank" rel="noopener">
-       <svg viewBox="0 0 24 24"><path d="M9 18l6-12"/><path d="M5 12h14"/></svg>
-       Yandex
-      </a>
-      <button class="small-action copy-btn" type="button" data-copy="${address}">
-       <svg viewBox="0 0 24 24"><rect x="8" y="8" width="12" height="12" rx="2"/><path d="M4 16V6a2 2 0 0 1 2-2h10"/></svg>
-       Adres
-      </button>
-      <a class="small-action" href="${mapUrl}" target="_blank" rel="noopener">
-       <svg viewBox="0 0 24 24"><path d="M9 18l-6 3V6l6-3 6 3 6-3v15l-6 3-6-3z"/><path d="M9 3v15"/><path d="M15 6v15"/></svg>
-       Harita
-      </a>
-      <button class="small-action copy-btn" type="button" data-copy="${lat}, ${lon}">
-       <svg viewBox="0 0 24 24"><path d="M12 2v3"/><path d="M12 19v3"/><path d="M2 12h3"/><path d="M19 12h3"/><circle cx="12" cy="12" r="6"/></svg>
-       Koord.
-      </button>
-      <button class="small-action share-btn" type="button" data-id="${escapeHtml(item.id)}">
-       <svg viewBox="0 0 24 24"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><path d="M8.6 10.8l6.8-4.1"/><path d="M8.6 13.2l6.8 4.1"/></svg>
-       Paylaş
-      </button>
-     </div>
-    </article>
-   `;
-  }).join("");
+ return `
+ <article class="card${selectedClass}" data-id="${escapeHtml(item.id)}">
+ <div class="card-head">
+ <button class="idx select-card-btn" type="button" data-id="${escapeHtml(item.id)}">${index + 1}</button>
+ <div class="meta">
+ <h2 class="title">${name}</h2>
+ <div class="distance">${formatDistance(item.distance)} sizden uzakta</div>${routeBadge}
+ <p class="address">${address}</p>
+ </div>
+ </div>
+ <div class="label">Koordinatlar</div>
+ <p class="coordinates">${lat}, ${lon}</p>
+ <div class="card-actions">
+ <button class="small-action route-btn primary" type="button" data-id="${escapeHtml(item.id)}">
+ <svg viewBox="0 0 24 24"><path d="M4 19c4-8 12 0 16-8"/><path d="M14 5h6v6"/></svg>
+ Rota oluştur
+ </button>
+ <a class="small-action start-external-btn" href="${geoUrl}">
+ <svg viewBox="0 0 24 24"><path d="M4 12l16-8-8 16-2-7-6-1z"/></svg>
+ Başla
+ </a>
+ <a class="small-action" href="${googleUrl}" target="_blank" rel="noopener">
+ <svg viewBox="0 0 24 24"><path d="M12 21s7-5.1 7-11a7 7 0 1 0-14 0c0 5.9 7 11 7 11z"/><circle cx="12" cy="10" r="2.5"/></svg>
+ Google
+ </a>
+ <a class="small-action" href="${yandexUrl}" target="_blank" rel="noopener">
+ <svg viewBox="0 0 24 24"><path d="M9 18l6-12"/><path d="M5 12h14"/></svg>
+ Yandex
+ </a>
+ <button class="small-action copy-btn" type="button" data-copy="${address}">
+ <svg viewBox="0 0 24 24"><rect x="8" y="8" width="12" height="12" rx="2"/><path d="M4 16V6a2 2 0 0 1 2-2h10"/></svg>
+ Adres
+ </button>
+ <a class="small-action" href="${mapUrl}" target="_blank" rel="noopener">
+ <svg viewBox="0 0 24 24"><path d="M9 18l-6 3V6l6-3 6 3 6-3v15l-6 3-6-3z"/><path d="M9 3v15"/><path d="M15 6v15"/></svg>
+ Harita
+ </a>
+ <button class="small-action copy-btn" type="button" data-copy="${lat}, ${lon}">
+ <svg viewBox="0 0 24 24"><path d="M12 2v3"/><path d="M12 19v3"/><path d="M2 12h3"/><path d="M19 12h3"/><circle cx="12" cy="12" r="6"/></svg>
+ Koord.
+ </button>
+ <button class="small-action share-btn" type="button" data-id="${escapeHtml(item.id)}">
+ <svg viewBox="0 0 24 24"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><path d="M8.6 10.8l6.8-4.1"/><path d="M8.6 13.2l6.8 4.1"/></svg>
+ Paylaş
+ </button>
+ </div>
+ </article>
+ `;
+ }).join("");
 
-  renderMapMarkers();
+ renderMapMarkers();
  }
 
  function selectMosque(id, centerMap){
-  const item = state.mosques.find(x => String(x.id) === String(id));
-  if(!item) return;
+ const item = state.mosques.find(x => String(x.id) === String(id));
+ if(!item) return;
 
-  state.selected = item;
-  els.selectedMosque.textContent = `${item.name} · ${formatDistance(item.distance)}`;
-  state.routeDestination = item;
-  updateNavigationPanel();
-  renderList();
+ state.selected = item;
+ els.selectedMosque.textContent = `${item.name} · ${formatDistance(item.distance)}`;
+ state.routeDestination = item;
+ updateNavigationPanel();
+ renderList();
 
-  if(centerMap && state.map){
-   state.map.setView([item.lat, item.lon], Math.max(state.map.getZoom(), 16), {animate:true});
-   const marker = state.markers.get(item.id);
-   if(marker) marker.openPopup();
-  }
+ if(centerMap && state.map){
+ state.map.setView([item.lat, item.lon], Math.max(state.map.getZoom(), 16), {animate:true});
+ const marker = state.markers.get(item.id);
+ if(marker) marker.openPopup();
+ }
  }
 
  function drawFallbackLine(item){
-  if(!state.map | !state.coords) return;
-  state.routeLayer.clearLayers();
-  L.polyline([[state.coords.lat, state.coords.lon], [item.lat, item.lon]], {
-   color:"#d7b56d",
-   weight:5,
-   opacity:.85,
-   dashArray:"9 10"
-  }).addTo(state.routeLayer);
-  state.map.fitBounds([[state.coords.lat, state.coords.lon], [item.lat, item.lon]], {padding:[44,44]});
+ if(!state.map || !state.coords) return;
+ state.routeLayer.clearLayers();
+ L.polyline([[state.coords.lat, state.coords.lon], [item.lat, item.lon]], {
+ color:"#d7b56d",
+ weight:5,
+ opacity:.85,
+ dashArray:"9 10"
+ }).addTo(state.routeLayer);
+ state.map.fitBounds([[state.coords.lat, state.coords.lon], [item.lat, item.lon]], {padding:[44,44]});
  }
 
  function renderTurnList(){
-  if(!state.activeSteps.length){
-   els.turnList.innerHTML = '<div class="turn-item"><div class="turn-icon">•</div><div class="turn-text">Rota oluşturulduktan sonra yönlendirmeler görünecek</div><div></div></div>';
-   return;
-  }
+ if(!state.activeSteps.length){
+ els.turnList.innerHTML = '<div class="turn-item"><div class="turn-icon">•</div><div class="turn-text">Rota oluşturulduktan sonra yönergeler görünecek</div><div></div></div>';
+ return;
+ }
 
-  els.turnList.innerHTML = state.activeSteps.map((step, index) => {
-   const maneuver = step.maneuver | {};
-   const current = index === state.currentStepIndex ? " is-current" : "";
-   return `
-    <div class="turn-item${current}">
-     <div class="turn-icon">${turnIcon(maneuver.type, maneuver.modifier)}</div>
-     <div class="turn-text">${escapeHtml(instructionFromManeuver(step, index))}</div>
-     <div class="turn-distance">${formatDistance(step.distance | 0)}</div>
-    </div>
-   `;
-  }).join("");
+ els.turnList.innerHTML = state.activeSteps.map((step, index) => {
+ const maneuver = step.maneuver || {};
+ const current = index === state.currentStepIndex ? " is-current" : "";
+ return `
+ <div class="turn-item${current}">
+ <div class="turn-icon">${turnIcon(maneuver.type, maneuver.modifier)}</div>
+ <div class="turn-text">${escapeHtml(instructionFromManeuver(step, index))}</div>
+ <div class="turn-distance">${formatDistance(step.distance || 0)}</div>
+ </div>
+ `;
+ }).join("");
  }
 
  function updateNavigationPanel(){
-  const item = state.routeDestination | state.selected;
-  if(!item){
-   els.navTopPill.classList.remove("is-visible");
-   els.navBottomSheet.classList.remove("is-visible");
-   return;
-  }
+ const item = state.routeDestination || state.selected;
+ if(!item){
+ els.navTopPill.classList.remove("is-visible");
+ els.navBottomSheet.classList.remove("is-visible");
+ return;
+ }
 
-  els.navBottomSheet.classList.add("is-visible");
-  els.navDestinationTitle.textContent = item.name;
+ els.navBottomSheet.classList.add("is-visible");
+ els.navDestinationTitle.textContent = item.name;
 
-  if(item.routeDistance){
-   els.navMetrics.textContent = `${formatDistance(item.routeDistance)} · ${formatDuration(item.routeDuration)}`;
-  }else{
-   els.navMetrics.textContent = `${formatDistance(item.distance)} sizden`;
-  }
+ if(item.routeDistance){
+ els.navMetrics.textContent = `${formatDistance(item.routeDistance)} · ${formatDuration(item.routeDuration)}`;
+ }else{
+ els.navMetrics.textContent = `${formatDistance(item.distance)} sizden uzakta`;
+ }
 
-  const step = state.activeSteps[state.currentStepIndex];
-  if(step){
-   els.navTopPill.classList.add("is-visible");
-   els.navMainStep.textContent = instructionFromManeuver(step, state.currentStepIndex);
-   els.navSubStep.textContent = `${formatDistance(step.distance | 0)} · ${item.name}`;
-  }else{
-   els.navTopPill.classList.remove("is-visible");
-  }
+ const step = state.activeSteps[state.currentStepIndex];
+ if(step){
+ els.navTopPill.classList.add("is-visible");
+ els.navMainStep.textContent = instructionFromManeuver(step, state.currentStepIndex);
+ els.navSubStep.textContent = `${formatDistance(step.distance || 0)} · ${item.name}`;
+ }else{
+ els.navTopPill.classList.remove("is-visible");
+ }
 
-  renderTurnList();
+ renderTurnList();
  }
 
  function updateStepByPosition(lat, lon){
-  if(!state.activeRoute | !state.activeSteps.length) return;
+ if(!state.activeRoute || !state.activeSteps.length) return;
 
-  let bestStepIndex = 0;
-  let bestDistance = Infinity;
+ let bestStepIndex = 0;
+ let bestDistance = Infinity;
 
-  state.activeSteps.forEach((step, index) => {
-   const coords = (step.geometry && step.geometry.coordinates | []).map(pair => [pair[1], pair[0]]);
-   if(!coords.length) return;
-   const nearest = nearestPointIndex(coords, lat, lon);
-   if(nearest.distance < bestDistance){
-    bestDistance = nearest.distance;
-    bestStepIndex = index;
-   }
-  });
+ state.activeSteps.forEach((step, index) => {
+ const coords = (step.geometry && step.geometry.coordinates || []).map(pair => [pair[1], pair[0]]);
+ if(!coords.length) return;
+ const nearest = nearestPointIndex(coords, lat, lon);
+ if(nearest.distance < bestDistance){
+ bestDistance = nearest.distance;
+ bestStepIndex = index;
+ }
+ });
 
-  state.currentStepIndex = Math.min(bestStepIndex + (bestDistance < 25 ? 1 : 0), state.activeSteps.length - 1);
-  updateNavigationPanel();
+ state.currentStepIndex = Math.min(bestStepIndex + (bestDistance < 25 ? 1 : 0), state.activeSteps.length - 1);
+ updateNavigationPanel();
  }
 
  function startDriveMode(){
-  const item = state.routeDestination | state.selected | state.mosques[0];
-  if(!item){
-   toast("Önce bir cami seçin");
-   return;
-  }
+ const item = state.routeDestination || state.selected || state.mosques[0];
+ if(!item){
+ toast("Önce bir cami seçin");
+ return;
+ }
 
-  if(!state.activeRouteId | state.activeRouteId !== item.id){
-   drawRoute(item).then(() => startDriveMode());
-   return;
-  }
+ if(!state.activeRouteId || state.activeRouteId !== item.id){
+ drawRoute(item).then(() => startDriveMode());
+ return;
+ }
 
-  state.driveMode = true;
-  state.followMode = true;
-  els.followBtn.classList.add("is-active");
-  els.trackBtn.classList.add("is-active");
-  els.navTopPill.classList.add("is-visible");
-  toggleTracking(true);
-  recenterToUser(true);
-  updateNavigationPanel();
-  toast("Navigasyon açık");
+ state.driveMode = true;
+ state.followMode = true;
+ els.followBtn.classList.add("is-active");
+ els.trackBtn.classList.add("is-active");
+ els.navTopPill.classList.add("is-visible");
+ toggleTracking(true);
+ recenterToUser(true);
+ updateNavigationPanel();
+ toast("Navigasyon açık");
  }
 
  function recenterToUser(zoomIn){
-  if(!state.map | !state.coords){
-   toast("Konum henüz belirlenmedi");
-   return;
-  }
-  state.map.setView([state.coords.lat, state.coords.lon], zoomIn ? 18 : Math.max(state.map.getZoom(), 16), {animate:true});
+ if(!state.map || !state.coords){
+ toast("Konum henüz belirlenmedi");
+ return;
+ }
+ state.map.setView([state.coords.lat, state.coords.lon], zoomIn ? 18 : Math.max(state.map.getZoom(), 16), {animate:true});
  }
 
  async function drawRoute(item){
-  if(!state.coords | !item) return;
-  initMap();
-  state.selected = item;
-  state.routeDestination = item;
-  state.activeRouteId = item.id;
-  setStatus("m m", `Rota: ${item.name}`);
+ if(!state.coords || !item) return;
+ initMap();
+ state.selected = item;
+ state.routeDestination = item;
+ state.activeRouteId = item.id;
+ setStatus("Rota oluşturuluyor", `Rota: ${item.name}`);
 
-  const profiles = ["foot", "driving"];
-  let routed = false;
+ const profiles = ["foot", "driving"];
+ let routed = false;
 
-  for(const profile of profiles){
-   try{
-    const url = `${OSRM_ROUTE}/${profile}/${state.coords.lon},${state.coords.lat};${item.lon},${item.lat}?overview=full&geometries=geojson&steps=true`;
-    const response = await fetchWithTimeout(url, {}, 8000);
-    if(!response.ok) throw new Error("route failed");
-    const data = await response.json();
-    const route = data.routes && data.routes[0];
-    if(!route | !route.geometry) throw new Error("route empty");
+ for(const profile of profiles){
+ try{
+ const url = `${OSRM_ROUTE}/${profile}/${state.coords.lon},${state.coords.lat};${item.lon},${item.lat}?overview=full&geometries=geojson&steps=true`;
+ const response = await fetchWithTimeout(url, {}, 8000);
+ if(!response.ok) throw new Error("route failed");
+ const data = await response.json();
+ const route = data.routes && data.routes[0];
+ if(!route || !route.geometry) throw new Error("route empty");
 
-    state.routeLayer.clearLayers();
-    const coords = route.geometry.coordinates.map(pair => [pair[1], pair[0]]);
-    L.polyline(coords, {color:"#17351f", weight:11, opacity:.28}).addTo(state.routeLayer);
-    L.polyline(coords, {color:"#2d7a46", weight:7, opacity:.96}).addTo(state.routeLayer);
-    L.polyline(coords, {color:"#d7b56d", weight:2, opacity:.95, dashArray:"2 13"}).addTo(state.routeLayer);
+ state.routeLayer.clearLayers();
+ const coords = route.geometry.coordinates.map(pair => [pair[1], pair[0]]);
+ L.polyline(coords, {color:"#17351f", weight:11, opacity:.28}).addTo(state.routeLayer);
+ L.polyline(coords, {color:"#2d7a46", weight:7, opacity:.96}).addTo(state.routeLayer);
+ L.polyline(coords, {color:"#d7b56d", weight:2, opacity:.95, dashArray:"2 13"}).addTo(state.routeLayer);
 
-    route.legs?.forEach(leg => {
-     (leg.steps | []).forEach((step, index) => {
-      const maneuver = step.maneuver | {};
-      const loc = maneuver.location;
-      if(!loc) return;
-      L.marker([loc[1], loc[0]], {
-       icon:L.divIcon({
-        className:"barakaway-turn-marker",
-        html:`<div style="width:28px;height:28px;border-radius:999px;background:${index === 0 ? "#2d7a46" : "#d7b56d"};color:${index === 0 ? "#fff" : "#111814"};border:2px solid #fff;box-shadow:0 8px 20px rgba(0,0,0,.28);display:flex;align-items:center;justify-content:center;font-weight:950">${turnIcon(maneuver.type, maneuver.modifier)}</div>`,
-        iconSize:[28,28],
-        iconAnchor:[14,14]
-       }),
-       interactive:false,
-       zIndexOffset:1100
-      }).addTo(state.routeLayer);
-     });
-    });
+ route.legs?.forEach(leg => {
+ (leg.steps || []).forEach((step, index) => {
+ const maneuver = step.maneuver || {};
+ const loc = maneuver.location;
+ if(!loc) return;
+ L.marker([loc[1], loc[0]], {
+ icon:L.divIcon({
+ className:"barakaway-turn-marker",
+ html:`<div style="width:28px;height:28px;border-radius:999px;background:${index === 0 ? "#2d7a46" : "#d7b56d"};color:${index === 0 ? "#fff" : "#111814"};border:2px solid #fff;box-shadow:0 8px 20px rgba(0,0,0,.28);display:flex;align-items:center;justify-content:center;font-weight:950">${turnIcon(maneuver.type, maneuver.modifier)}</div>`,
+ iconSize:[28,28],
+ iconAnchor:[14,14]
+ }),
+ interactive:false,
+ zIndexOffset:1100
+ }).addTo(state.routeLayer);
+ });
+ });
 
-    item.routeDistance = route.distance;
-    item.routeDuration = route.duration;
-    state.activeRoute = route;
-    state.activeSteps = (route.legs | []).flatMap(leg => leg.steps | []);
-    state.currentStepIndex = 0;
+ item.routeDistance = route.distance;
+ item.routeDuration = route.duration;
+ state.activeRoute = route;
+ state.activeSteps = (route.legs || []).flatMap(leg => leg.steps || []);
+ state.currentStepIndex = 0;
 
-    setStatus("Rota oluşturuldu", `${item.name}: ${formatDistance(route.distance)}, ${formatDuration(route.duration)}. Rehberlik için «Gidelim» düğmesine basın.`);
-    state.map.fitBounds(coords, {padding:[52,52]});
-    updateNavigationPanel();
-    routed = true;
-    break;
-   }catch(error){}
-  }
+ setStatus("Rota oluşturuldu", `${item.name}: ${formatDistance(route.distance)}, ${formatDuration(route.duration)}. Yönlendirme için «Başla» düğmesine basın.`);
+ state.map.fitBounds(coords, {padding:[52,52]});
+ updateNavigationPanel();
+ routed = true;
+ break;
+ }catch(error){}
+ }
 
-  if(!routed){
-   drawFallbackLine(item);
-   state.activeRoute = null;
-   state.activeSteps = [];
-   updateNavigationPanel();
-   setStatus("Rota yön olarak gösterildi", "Kesin yol çizgisi geçici olarak kullanılamıyor; camiye yön gösterildi.");
-  }
+ if(!routed){
+ drawFallbackLine(item);
+ state.activeRoute = null;
+ state.activeSteps = [];
+ updateNavigationPanel();
+ setStatus("Rota yön olarak gösterildi", "Kesin yol çizgisi geçici olarak kullanılamıyor; camiye giden yön gösterildi.");
+ }
 
-  renderList();
+ renderList();
  }
 
  async function searchByCoords(lat, lon, label, options){
-  if(state.loading) return;
+ if(state.loading) return;
 
-  initMap();
-  state.loading = true;
-  state.coords = {lat, lon};
-  saveMosqueCoords(lat, lon, label);
-  updateUserOnMap(lat, lon);
-  els.userLocation.textContent = label | "Konum belirlendi";
-  renderList();
+ initMap();
+ state.loading = true;
+ state.nearestOnly = false;
+ els.nearestBtn.classList.remove("is-active");
+ state.coords = {lat, lon};
+ saveMosqueCoords(lat, lon, label);
+ updateUserOnMap(lat, lon);
+ els.userLocation.textContent = label || "Konum belirlendi";
+ renderList();
 
-  if(options && options.silent){
-   setStatus("Yakındaki camiler aranıyor", "Kayıtlı konuma göre yakındaki camiler yükleniyor.");
-  }else{
-   setStatus("Konum belirlendi", "Yakındaki camiler aranıyor.");
-  }
+ if(options && options.silent){
+ setStatus("Yakındaki camiler aranıyor", "GPS konumunuzdan 5 km yarıçapında OpenStreetMap/Overpass taranıyor.");
+ }else{
+ setStatus("Konum belirlendi", "5 km yarıçapında camiler ve musalla taranıyor; en yakın olanlar önce gösteriliyor.");
+ }
 
-  els.locateBtn.classList.add("is-active");
+ els.locateBtn.classList.add("is-active");
 
-  try{
-   let overpassItems = [];
-   let nominatimItems = [];
+ try{
+ let overpassItems = [];
+ let nominatimItems = [];
 
-   try{
-    const overpassData = await fetchOverpass(lat, lon, state.radius);
-    overpassItems = normalizeOverpassMosques(overpassData, {lat, lon});
-   }catch(error){}
+ try{
+ const overpassData = await fetchOverpass(lat, lon, state.radius);
+ overpassItems = normalizeOverpassMosques(overpassData, {lat, lon});
+ }catch(error){}
 
-   if(overpassItems.length < 5){
-    try{
-     const nominatimData = await fetchNominatimMosques(lat, lon);
-     nominatimItems = normalizeNominatimMosques(nominatimData, {lat, lon});
-    }catch(error){}
-   }
+ try{
+ const nominatimData = await fetchNominatimMosques(lat, lon);
+ nominatimItems = normalizeNominatimMosques(nominatimData, {lat, lon});
+ }catch(error){}
 
-   state.mosques = mergeMosques(overpassItems, nominatimItems).slice(0, 30);
-   state.loading = false;
-   els.locateBtn.classList.remove("is-active");
+ state.mosques = mergeMosques(overpassItems, nominatimItems)
+ .filter(item => item.distance <= state.radius)
+ .sort((a,b) => a.distance - b.distance)
+ .slice(0, 120);
+ state.loading = false;
+ els.locateBtn.classList.remove("is-active");
 
-   if(state.mosques.length){
-    selectMosque(state.mosques[0].id, false);
-    setStatus("Yakındaki Camiler", `En yakın msa: ${state.mosques[0].name}, ${formatDistance(state.mosques[0].distance)} sizden.`);
-   }else{
-    setStatus("Cami bulunamadı", "Yakınınızda haritada kullanılabilir cami noktası henüz bulunamadı. Aramayı yenilemeyi deneyin.");
-    renderList();
-   }
-  }catch(error){
-   state.loading = false;
-   els.locateBtn.classList.remove("is-active");
-   state.mosques = [];
-   setStatus("Camiler yüklenemedi", "İnternet bağlantınızı kontrol edin ve «Yenile» düğmesine basın.");
-   renderList();
-  }
+ if(state.mosques.length){
+ selectMosque(state.mosques[0].id, false);
+ setStatus("Yakındaki Camiler", `Bulundu: ${state.mosques.length}. En yakın: ${state.mosques[0].name}, ${formatDistance(state.mosques[0].distance)} sizden uzakta.`);
+ }else{
+ setStatus("Cami bulunamadı", "5 km yarıçapında açık haritalar cami sonucu döndürmedi. GPS’i kontrol edin veya aramayı yenileyin.");
+ renderList();
+ }
+ }catch(error){
+ state.loading = false;
+ els.locateBtn.classList.remove("is-active");
+ state.mosques = [];
+ setStatus("Camiler yüklenemedi", "İnterneti kontrol edin ve «Yenile» düğmesine basın.");
+ renderList();
+ }
+ }
+
+
+ 
+ function tryOpenLocationSettings(){
+ setStatus(
+ "Geodata’yı açın",
+ "Telefon veya tarayıcı ayarlarını açın ve bu sayfa için konum erişimine izin verin. Açtıktan sonra «Yakında bul» düğmesine tekrar basın."
+ );
+ toast("Telefon ayarlarında Geodata/Location’ı açın");
+ }
+
+ function resetSearch(){
+ state.loading = false;
+ state.mosques = [];
+ state.filtered = [];
+ state.selected = null;
+ state.nearestOnly = false;
+ state.activeRouteId = null;
+ state.activeRoute = null;
+ state.activeSteps = [];
+ state.routeDestination = null;
+
+ if(state.mosqueLayer) state.mosqueLayer.clearLayers();
+ if(state.routeLayer) state.routeLayer.clearLayers();
+ state.markers.clear();
+
+ els.locateBtn.classList.remove("is-active");
+ els.nearestBtn.classList.remove("is-active");
+ els.resultCount.textContent = "0";
+ els.selectedMosque.textContent = "Seçilmedi";
+ els.results.innerHTML = `<div class="empty">Arama temizlendi. GPS’i yeniden belirlemek ve camileri bulmak için «Yakında bul» düğmesine basın.</div>`;
+ setStatus("Arama temizlendi", "Yeni GPS araması için «Yakında bul» düğmesine basın.");
+ toast("Arama temizlendi");
+ }
+
+
+ function geolocationErrorText(error){
+ if(!error) return "GPS’i ve interneti kontrol edin, ardından «Yakında bul» düğmesine tekrar basın.";
+ if(error.code === 1){
+ return "Coğrafi konum erişimi reddedildi. Telefonda Location/GPS’i açın ve tarayıcıda bu site için konum erişimine izin verin.";
+ }
+ if(error.code === 2){
+ return "Telefon koordinatları belirleyemedi. GPS/Location’ı açın, açık bir alana çıkın ve «Yakında bul» düğmesine basın.";
+ }
+ if(error.code === 3){
+ return "GPS çok geç yanıt veriyor. Hassas konumu açın ve «Yenile» düğmesine basın.";
+ }
+ return "GPS’i ve interneti kontrol edin, ardından «Yakında bul» düğmesine tekrar basın.";
+ }
+
+ async function canAskGeolocation(){
+ if(!navigator.permissions || !navigator.permissions.query) return true;
+ try{
+ const permission = await navigator.permissions.query({name:"geolocation"});
+ if(permission.state === "denied"){
+ setStatus("Coğrafi konum izni reddedildi", "Bu site için tarayıcı veya telefon ayarlarında konum erişimini açın, ardından sayfayı yenileyin.");
+ toast("Yakındaki camileri aramak için GPS’e izin verin");
+ tryOpenLocationSettings();
+ return false;
+ }
+ return true;
+ }catch(error){
+ return true;
+ }
  }
 
  async function locateAndSearch(force){
-  if(state.loading) return;
+ if(state.loading) return;
+if(!navigator.geolocation){
+ setStatus("Otomatik belirleme kullanılamıyor", "Sayfayı GPS/Location olan bir cihazda açın veya tarayıcıda coğrafi konuma izin verin.");
+ toast("Coğrafi konum kullanılamıyor");
+ return;
+ }
 
-  if(!force){
-   const prayerCoords = getStoredPrayerCoords();
-   if(prayerCoords){
-    await searchByCoords(prayerCoords.lat, prayerCoords.lon, prayerCoords.label, {silent:false});
-    return;
-   }
+ state.loading = true;
+ renderList();
+ document.querySelector(".status-panel")?.classList.add("is-gps-loading");
+ setStatus("GPS konumu belirleniyor", "Konum erişimine izin verin. GPS olmadan en yakın camileri doğru aramak mümkün değildir.");
+ els.locateBtn.classList.add("is-active");
 
-   const mosqueCoords = getStoredMosqueCoords();
-   if(mosqueCoords){
-    await searchByCoords(mosqueCoords.lat, mosqueCoords.lon, mosqueCoords.label, {silent:false});
-    return;
-   }
-  }
+ navigator.geolocation.getCurrentPosition(async pos => {
+ const lat = pos.coords.latitude;
+ const lon = pos.coords.longitude;
+ updateUserOnMap(lat, lon, pos.coords.accuracy);
+ updateHeadingVisual(pos.coords.heading);
+ const placeName = await reversePlaceName(lat, lon);
+ await searchByCoords(lat, lon, placeName, {silent:false});
+ }, error => {
+ state.loading = false;
+ els.locateBtn.classList.remove("is-active");
 
-  if(!navigator.geolocation){
-   setStatus("Otomatik belirleme kullanılamıyor", "Bu sayfayı konum erişimi olan bir cihazda açın.");
-   toast("Konum hizmeti kullanılamıyor");
-   return;
-  }
-
-  state.loading = true;
-  renderList();
-  setStatus("Konum belirleniyor", "Yakındaki camileri göstermek için konum erişimine izin verin.");
-  els.locateBtn.classList.add("is-active");
-
-  navigator.geolocation.getCurrentPosition(async pos => {
-   const lat = pos.coords.latitude;
-   const lon = pos.coords.longitude;
-   updateUserOnMap(lat, lon, pos.coords.accuracy);
-   updateHeadingVisual(pos.coords.heading);
-   updateHeadingVisual(pos.coords.heading);
-   const placeName = await reversePlaceName(lat, lon);
-   await searchByCoords(lat, lon, placeName, {silent:false});
-  }, error => {
-   state.loading = false;
-   els.locateBtn.classList.remove("is-active");
-
-   const stored = getStoredPrayerCoords() | getStoredMosqueCoords();
-   if(stored){
-    searchByCoords(stored.lat, stored.lon, stored.label, {silent:true});
-    return;
-   }
-
-   setStatus("Konum belirlenmedi", "Konum erişimine izin verin ve tekrar «Yakında bul» düğmesine basın.");
-   renderList();
-  }, {
-   enableHighAccuracy:true,
-   timeout:12000,
-   maximumAge:force ? 0 : 300000
-  });
+ setStatus("Konum belirlenmedi", geolocationErrorText(error));
+ toast("Geodata/Location açılmalı");
+ tryOpenLocationSettings();
+ renderList();
+ }, {
+ enableHighAccuracy:true,
+ timeout:9000,
+ maximumAge:0
+ });
  }
 
  function toggleTracking(forceOn){
-  if(state.watchId !== null && forceOn !== true){
-   navigator.geolocation.clearWatch(state.watchId);
-   state.watchId = null;
-   state.followMode = false;
-   state.driveMode = false;
-   els.trackBtn.classList.remove("is-active");
-   els.followBtn.classList.remove("is-active");
-   toast("GPS modu kapalı");
-   return;
-  }
+ if(state.watchId !== null && forceOn !== true){
+ navigator.geolocation.clearWatch(state.watchId);
+ state.watchId = null;
+ state.followMode = false;
+ state.driveMode = false;
+ els.trackBtn.classList.remove("is-active");
+ els.followBtn.classList.remove("is-active");
+ toast("GPS modu kapalı");
+ return;
+ }
 
-  if(state.watchId !== null && forceOn === true){
-   return;
-  }
+ if(state.watchId !== null && forceOn === true){
+ return;
+ }
 
-  if(!navigator.geolocation){
-   toast("GPS kullanılamıyor");
-   return;
-  }
+ if(!navigator.geolocation){
+ toast("GPS kullanılamıyor");
+ return;
+ }
 
-  els.trackBtn.classList.add("is-active");
-  if(state.followMode) els.followBtn.classList.add("is-active");
-  toast("GPS modu açık");
+ els.trackBtn.classList.add("is-active");
+ if(state.followMode) els.followBtn.classList.add("is-active");
+ toast("GPS modu açık");
 
-  state.watchId = navigator.geolocation.watchPosition(pos => {
-   const lat = pos.coords.latitude;
-   const lon = pos.coords.longitude;
-   state.coords = {lat, lon};
-   updateUserOnMap(lat, lon, pos.coords.accuracy);
-   saveMosqueCoords(lat, lon, els.userLocation.textContent | "Konum belirlendi");
+ state.watchId = navigator.geolocation.watchPosition(pos => {
+ const lat = pos.coords.latitude;
+ const lon = pos.coords.longitude;
+ state.coords = {lat, lon};
+ updateUserOnMap(lat, lon, pos.coords.accuracy);
+ saveMosqueCoords(lat, lon, els.userLocation.textContent || "Konum belirlendi");
 
-   state.mosques.forEach(item => {
-    item.distance = distanceMeters(lat, lon, item.lat, item.lon);
-   });
-   state.mosques.sort((a,b) => a.distance - b.distance);
+ state.mosques.forEach(item => {
+ item.distance = distanceMeters(lat, lon, item.lat, item.lon);
+ });
+ state.mosques.sort((a,b) => a.distance - b.distance);
 
-   if(state.activeRouteId){
-    const active = state.mosques.find(x => x.id === state.activeRouteId);
-    const now = Date.now();
-    if(active && now - state.lastRouteRefresh > 15000){
-     state.lastRouteRefresh = now;
-     drawRoute(active);
-    }else{
-     updateStepByPosition(lat, lon);
-    }
-   }
+ if(state.activeRouteId){
+ const active = state.mosques.find(x => x.id === state.activeRouteId);
+ const now = Date.now();
+ if(active && now - state.lastRouteRefresh > 15000){
+ state.lastRouteRefresh = now;
+ drawRoute(active);
+ }else{
+ updateStepByPosition(lat, lon);
+ }
+ }
 
-   if(state.followMode && state.map){
-    state.map.setView([lat, lon], Math.max(state.map.getZoom(), state.driveMode ? 18 : 16), {animate:true});
-   }
+ if(state.followMode && state.map){
+ state.map.setView([lat, lon], Math.max(state.map.getZoom(), state.driveMode ? 18 : 16), {animate:true});
+ }
 
-   renderList();
-  }, error => {
-   els.trackBtn.classList.remove("is-active");
-   els.followBtn.classList.remove("is-active");
-   state.followMode = false;
-   state.driveMode = false;
-   toast("GPS açılamadı");
-  }, {
-   enableHighAccuracy:true,
-   maximumAge:3000,
-   timeout:15000
-  });
+ renderList();
+ }, error => {
+ els.trackBtn.classList.remove("is-active");
+ els.followBtn.classList.remove("is-active");
+ state.followMode = false;
+ state.driveMode = false;
+ toast("GPS açılamadı");
+ tryOpenLocationSettings();
+ }, {
+ enableHighAccuracy:true,
+ maximumAge:3000,
+ timeout:15000
+ });
  }
 
  async function autoStart(){
-  initMap();
+ initMap();
 
-  const prayerCoords = getStoredPrayerCoords();
-  if(prayerCoords){
-   await searchByCoords(prayerCoords.lat, prayerCoords.lon, prayerCoords.label, {silent:true});
-   return;
-  }
+ setStatus("GPS araması başlatılıyor", "GPS araması hazırlanıyor. Tarayıcı isteği otomatik başlatmadıysa «Yakında bul» düğmesine basın.");
+ renderList();
 
-  const mosqueCoords = getStoredMosqueCoords();
-  if(mosqueCoords){
-   await searchByCoords(mosqueCoords.lat, mosqueCoords.lon, mosqueCoords.label, {silent:true});
-   return;
-  }
-
-  setStatus("Aramaya hazır", "m «Yakında bul», sa msa m m.");
-  renderList();
+ const allowed = await canAskGeolocation();
+ if(allowed){
+ await locateAndSearch(true);
+ return;
+ }
+ renderList();
  }
 
- function openNearest(){
-  const item = state.selected | state.mosques[0];
-  if(!item){
-   toast("Önce yakındaki camileri bulun");
-   return;
-  }
-  window.location.href = nativeGeoUrl(compactCoord(item.lat), compactCoord(item.lon), item.name);
+ function toggleNearestOnly(){
+ if(!state.mosques.length){
+ toast("Önce «Yakında bul» düğmesine basın");
+ return;
+ }
+
+ state.nearestOnly = !state.nearestOnly;
+ els.nearestBtn.classList.toggle("is-active", state.nearestOnly);
+
+ updateFiltered();
+ renderList();
+
+ if(state.nearestOnly){
+ const item = state.filtered[0] || state.mosques[0];
+ if(item){
+ selectMosque(item.id, true);
+ setStatus("En yakın cami", `${item.name}: ${formatDistance(item.distance)} sizden uzakta.`);
+ }
+ }else{
+ setStatus("Yakındaki tüm camiler", `Gösterilen: ${state.filtered.length}. En yakın olanlar önce gösterilir.`);
+ }
  }
 
  async function copyText(text){
-  try{
-   await navigator.clipboard.writeText(text);
-   toast("Kopyalandı");
-  }catch(error){
-   const area = document.createElement("textarea");
-   area.value = text;
-   document.body.appendChild(area);
-   area.select();
-   document.execCommand("copy");
-   area.remove();
-   toast("Kopyalandı");
-  }
+ try{
+ await navigator.clipboard.writeText(text);
+ toast("Kopyalandı");
+ }catch(error){
+ const area = document.createElement("textarea");
+ area.value = text;
+ document.body.appendChild(area);
+ area.select();
+ document.execCommand("copy");
+ area.remove();
+ toast("Kopyalandı");
+ }
  }
 
  async function shareMosque(item){
-  if(!item) return;
-  const lat = compactCoord(item.lat);
-  const lon = compactCoord(item.lon);
-  const text = `BarakaWay — ${item.name}
+ if(!item) return;
+ const lat = compactCoord(item.lat);
+ const lon = compactCoord(item.lon);
+ const text = `BarakaWay — ${item.name}
 ${item.address}
 Mesafe: ${formatDistance(item.distance)}
 Koordinatlar: ${lat}, ${lon}
 Rota: ${googleRouteUrl(lat, lon, item.name)}`;
 
-  if(navigator.share){
-   try{
-    await navigator.share({title:item.name, text});
-    return;
-   }catch(error){}
-  }
-  await copyText(text);
+ if(navigator.share){
+ try{
+ await navigator.share({title:item.name, text});
+ return;
+ }catch(error){}
+ }
+ await copyText(text);
  }
 
  function toggleTheme(){
-  const root = document.documentElement;
-  if(root.classList.contains("dark-mode")){
-   root.classList.remove("dark-mode");
-   root.classList.add("light-mode");
-   localStorage.setItem("barakawayMosquesTheme", "light");
-  }else{
-   root.classList.remove("light-mode");
-   root.classList.add("dark-mode");
-   localStorage.setItem("barakawayMosquesTheme", "dark");
-  }
-  setTimeout(() => state.map && state.map.invalidateSize(), 80);
+ const root = document.documentElement;
+ if(root.classList.contains("dark-mode")){
+ root.classList.remove("dark-mode");
+ root.classList.add("light-mode");
+ localStorage.setItem("barakawayMosquesTheme", "light");
+ }else{
+ root.classList.remove("light-mode");
+ root.classList.add("dark-mode");
+ localStorage.setItem("barakawayMosquesTheme", "dark");
+ }
+ setTimeout(() => state.map && state.map.invalidateSize(), 80);
  }
 
  function restoreTheme(){
-  const saved = localStorage.getItem("barakawayMosquesTheme");
-  if(saved === "light"){
-   document.documentElement.classList.remove("dark-mode");
-   document.documentElement.classList.add("light-mode");
-  }else if(saved === "dark"){
-   document.documentElement.classList.add("dark-mode");
-   document.documentElement.classList.remove("light-mode");
-  }
+ const saved = localStorage.getItem("barakawayMosquesTheme");
+ if(saved === "light"){
+ document.documentElement.classList.remove("dark-mode");
+ document.documentElement.classList.add("light-mode");
+ }else if(saved === "dark"){
+ document.documentElement.classList.add("dark-mode");
+ document.documentElement.classList.remove("light-mode");
+ }
  }
 
- els.locateBtn.addEventListener("click", () => locateAndSearch(false));
- els.refreshBtn.addEventListener("click", () => locateAndSearch(true));
- els.nearestBtn.addEventListener("click", openNearest);
- els.trackBtn.addEventListener("click", () => toggleTracking(false));
+ els.locateBtn.addEventListener("click", event => { event.preventDefault(); locateAndSearch(true); });
+ els.refreshBtn.addEventListener("click", event => { event.preventDefault(); resetSearch(); });
+ els.nearestBtn.addEventListener("click", event => { event.preventDefault(); toggleNearestOnly(); });
+ els.trackBtn.addEventListener("click", async event => {
+ event.preventDefault();
+ const allowed = await canAskGeolocation();
+ if(!allowed){ tryOpenLocationSettings(); return; }
+ toggleTracking(false);
+ });
  els.recenterBtn.addEventListener("click", () => recenterToUser(true));
  els.followBtn.addEventListener("click", () => {
-  state.followMode = !state.followMode;
-  els.followBtn.classList.toggle("is-active", state.followMode);
-  if(state.followMode){
-   toggleTracking(true);
-   recenterToUser(true);
-  }
+ state.followMode = !state.followMode;
+ els.followBtn.classList.toggle("is-active", state.followMode);
+ if(state.followMode){
+ toggleTracking(true);
+ recenterToUser(true);
+ }
  });
  els.startDriveBtn.addEventListener("click", startDriveMode);
  els.toggleTurnsBtn.addEventListener("click", () => {
-  const item = state.routeDestination | state.selected | state.mosques[0];
-  if(item) drawRoute(item);
-  else toast("Önce bir cami seçin");
+ const item = state.routeDestination || state.selected || state.mosques[0];
+ if(item) drawRoute(item);
+ else toast("Önce bir cami seçin");
  });
- els.themeBtn.addEventListener("click", toggleTheme);
  els.searchInput.addEventListener("input", renderList);
 
  document.addEventListener("click", event => {
-  const popupRouteBtn = event.target.closest("[data-popup-route]");
-  if(popupRouteBtn){
-   const item = state.mosques.find(x => x.id === popupRouteBtn.dataset.popupRoute);
-   if(item){
-    selectMosque(item.id, true);
-    drawRoute(item);
-   }
-   return;
-  }
+ const popupRouteBtn = event.target.closest("[data-popup-route]");
+ if(popupRouteBtn){
+ const item = state.mosques.find(x => x.id === popupRouteBtn.dataset.popupRoute);
+ if(item){
+ selectMosque(item.id, true);
+ drawRoute(item);
+ }
+ return;
+ }
 
-  const copyBtn = event.target.closest(".copy-btn");
-  if(copyBtn){
-   copyText(copyBtn.dataset.copy | "");
-   return;
-  }
+ const copyBtn = event.target.closest(".copy-btn");
+ if(copyBtn){
+ copyText(copyBtn.dataset.copy || "");
+ return;
+ }
 
-  const shareBtn = event.target.closest(".share-btn");
-  if(shareBtn){
-   const item = state.mosques.find(x => x.id === shareBtn.dataset.id);
-   shareMosque(item);
-   return;
-  }
+ const shareBtn = event.target.closest(".share-btn");
+ if(shareBtn){
+ const item = state.mosques.find(x => x.id === shareBtn.dataset.id);
+ shareMosque(item);
+ return;
+ }
 
-  const routeBtn = event.target.closest(".route-btn");
-  if(routeBtn){
-   const item = state.mosques.find(x => x.id === routeBtn.dataset.id);
-   if(item){
-    selectMosque(item.id, true);
-    drawRoute(item);
-   }
-   return;
-  }
+ const routeBtn = event.target.closest(".route-btn");
+ if(routeBtn){
+ const item = state.mosques.find(x => x.id === routeBtn.dataset.id);
+ if(item){
+ selectMosque(item.id, true);
+ drawRoute(item);
+ }
+ return;
+ }
 
-  const selectBtn = event.target.closest(".select-card-btn");
-  if(selectBtn){
-   selectMosque(selectBtn.dataset.id, true);
-  }
+ const selectBtn = event.target.closest(".select-card-btn");
+ if(selectBtn){
+ selectMosque(selectBtn.dataset.id, true);
+ }
  });
 
  restoreTheme();
  window.addEventListener("resize", () => state.map && state.map.invalidateSize());
  autoStart();
+ if(!window.__barakawayFastLocationBound){
+ window.__barakawayFastLocationBound = true;
+ els.locateBtn.onclick = requestFastLocation;
+ els.trackBtn.onclick = function(){
+ els.trackBtn.classList.add("is-active");
+ requestFastLocation();
+ };
+ }
+
+ if(!window.__barakawayRefreshOverride){
+ window.__barakawayRefreshOverride = true;
+ els.refreshBtn.onclick = function(){
+ state.loading = false;
+ state.mosques = [];
+ state.filtered = [];
+ state.selected = null;
+ state.nearestOnly = false;
+ els.nearestBtn.classList.remove("is-active");
+ els.resultCount.textContent = "0";
+ els.selectedMosque.textContent = "Seçilmedi";
+ els.searchInput.value = "";
+ state.mosqueLayer?.clearLayers();
+ state.routeLayer?.clearLayers();
+ document.querySelector(".status-panel")?.classList.remove("is-gps-loading");
+ setStatus("Aramaya hazır", "«Yakında bul» düğmesine basın: arama 5 km yarıçapında hızlı başlayacak.");
+ els.results.innerHTML = `<div class="empty">Arama temizlendi. «Yakında bul» düğmesine basın.</div>`;
+ toast("Arama temizlendi");
+ };
+ }
+
 })();
 </script>
 <script src="/bottom-nav.js"></script>
+
+
+
+<script>
+/* === Mobile map: one finger scrolls page, two fingers control map === */
+(function(){
+ function getMap(){
+ return window.__barakawayMosquesMap || null;
+ }
+
+ function setDragging(map, enabled){
+ if (!map || !map.dragging) return;
+ if (enabled) map.dragging.enable();
+ else map.dragging.disable();
+ }
+
+ function applyMobileMapTouchMode(){
+ var map = getMap();
+ var mapEl = document.getElementById("map");
+ if (!map || !mapEl) return;
+
+ var isMobile = window.matchMedia && window.matchMedia("(max-width: 720px)").matches;
+
+ if (!isMobile) {
+ setDragging(map, true);
+ if (map.tap) map.tap.enable();
+ if (map.touchZoom) map.touchZoom.enable();
+ if (map.doubleClickZoom) map.doubleClickZoom.enable();
+ if (map.scrollWheelZoom) map.scrollWheelZoom.enable();
+ if (map.boxZoom) map.boxZoom.enable();
+ if (map.keyboard) map.keyboard.enable();
+ mapEl.style.touchAction = "";
+ mapEl.style.msTouchAction = "";
+ return;
+ }
+
+ setDragging(map, false);
+ if (map.tap) map.tap.disable();
+ if (map.doubleClickZoom) map.doubleClickZoom.disable();
+ if (map.scrollWheelZoom) map.scrollWheelZoom.disable();
+ if (map.boxZoom) map.boxZoom.disable();
+ if (map.keyboard) map.keyboard.disable();
+ if (map.touchZoom) map.touchZoom.enable();
+
+ mapEl.style.touchAction = "pan-y pinch-zoom";
+ mapEl.style.msTouchAction = "pan-y pinch-zoom";
+
+ if (mapEl.__barakawayTouchModeBound) return;
+ mapEl.__barakawayTouchModeBound = true;
+
+ mapEl.addEventListener("touchstart", function(e){
+ if (!window.matchMedia("(max-width: 720px)").matches) return;
+ if (e.touches && e.touches.length >= 2) {
+ setDragging(map, true);
+ } else {
+ setDragging(map, false);
+ }
+ }, { passive:true });
+
+ mapEl.addEventListener("touchmove", function(e){
+ if (!window.matchMedia("(max-width: 720px)").matches) return;
+ if (e.touches && e.touches.length >= 2) {
+ setDragging(map, true);
+ } else {
+ setDragging(map, false);
+ }
+ }, { passive:true });
+
+ mapEl.addEventListener("touchend", function(){
+ if (!window.matchMedia("(max-width: 720px)").matches) return;
+ setTimeout(function(){ setDragging(map, false); }, 60);
+ }, { passive:true });
+
+ mapEl.addEventListener("touchcancel", function(){
+ if (!window.matchMedia("(max-width: 720px)").matches) return;
+ setDragging(map, false);
+ }, { passive:true });
+ }
+
+ window.addEventListener("load", function(){
+ applyMobileMapTouchMode();
+ setTimeout(applyMobileMapTouchMode, 300);
+ setTimeout(applyMobileMapTouchMode, 1200);
+ setTimeout(applyMobileMapTouchMode, 2500);
+ });
+
+ window.addEventListener("resize", applyMobileMapTouchMode);
+ window.addEventListener("orientationchange", function(){
+ setTimeout(applyMobileMapTouchMode, 300);
+ });
+})();
+</script>
+
 </body>
 </html>

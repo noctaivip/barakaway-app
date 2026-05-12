@@ -100,14 +100,14 @@ h1{
   margin:12px auto 0;
   padding:10px 6px 8px;
   display:grid;
-  grid-template-columns:repeat(5,minmax(0,1fr));
+  grid-template-columns:repeat(4,minmax(0,1fr));
   gap:10px;
-  background:linear-gradient(180deg,rgba(18,30,36,.98),rgba(18,30,36,.94));
-  backdrop-filter:blur(14px);
-  -webkit-backdrop-filter:blur(14px);
+  background:transparent;
+  backdrop-filter:none;
+  -webkit-backdrop-filter:none;
 }
 html.light-mode .top-actions{
-  background:linear-gradient(180deg,rgba(255,254,249,.98),rgba(255,254,249,.94));
+  background:transparent;
 }
 .action{
   appearance:none;
@@ -498,7 +498,7 @@ html.dark-mode .small-action{color:var(--gold2)}
     margin-right:-12px;
     gap:7px;
     padding:8px 10px 7px;
-    grid-template-columns:repeat(5,minmax(0,1fr));
+    grid-template-columns:repeat(4,minmax(0,1fr));
   }
   .action{min-height:62px;border-radius:16px;font-size:10px;padding:6px 3px}
   .action svg{width:21px;height:21px}
@@ -735,6 +735,7 @@ html.light-mode .nav-bottom-sheet{
   #map{
     height:calc(100vh - 160px)!important;
     min-height:560px!important;
+    touch-action:pan-y pinch-zoom!important;
   }
   .nav-top-pill{
     left:10px;
@@ -985,6 +986,150 @@ html.light-mode .nav-metrics{
   }
 }
 
+
+.gps-loading{
+  display:inline-flex;
+  align-items:center;
+  gap:10px;
+  margin-top:10px;
+  font-weight:800;
+  color:var(--green);
+}
+.gps-pulse{
+  width:14px;
+  height:14px;
+  border-radius:999px;
+  background:#2d7a46;
+  position:relative;
+  animation:gpsPulse 1.4s infinite;
+}
+.gps-pulse::before,
+.gps-pulse::after{
+  content:"";
+  position:absolute;
+  inset:-8px;
+  border-radius:999px;
+  border:2px solid rgba(45,122,70,.35);
+  animation:gpsRing 1.8s infinite;
+}
+.gps-pulse::after{
+  animation-delay:.9s;
+}
+@keyframes gpsPulse{
+  0%{transform:scale(1)}
+  50%{transform:scale(1.18)}
+  100%{transform:scale(1)}
+}
+@keyframes gpsRing{
+  0%{transform:scale(.4);opacity:.9}
+  100%{transform:scale(1.8);opacity:0}
+}
+
+
+.premium-search-loading{
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  gap:14px;
+}
+.gps-radar{
+  position:relative;
+  width:26px;
+  height:26px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+}
+.gps-radar-dot{
+  width:10px;
+  height:10px;
+  border-radius:999px;
+  background:#2d7a46;
+  box-shadow:0 0 18px rgba(45,122,70,.65);
+  z-index:2;
+  animation:gpsDotPulse 1.1s infinite ease-in-out;
+}
+.gps-radar-ring{
+  position:absolute;
+  inset:0;
+  border-radius:999px;
+  border:2px solid rgba(45,122,70,.42);
+  animation:gpsRadarScan 1.8s infinite linear;
+}
+.gps-radar-ring.delay{
+  animation-delay:.9s;
+}
+.gps-search-text{
+  font-weight:900;
+  letter-spacing:-.01em;
+}
+@keyframes gpsRadarScan{
+  0%{
+    transform:scale(.35);
+    opacity:.95;
+  }
+  100%{
+    transform:scale(1.9);
+    opacity:0;
+  }
+}
+@keyframes gpsDotPulse{
+  0%,100%{transform:scale(1)}
+  50%{transform:scale(1.28)}
+}
+
+
+/* === GPS status title animation — gold radar === */
+.gps-status-title{
+  display:inline-flex;
+  align-items:center;
+  gap:12px;
+}
+.gps-status-radar{
+  position:relative;
+  width:34px;
+  height:34px;
+  display:none;
+  flex:0 0 34px;
+}
+.status-panel.is-gps-loading .gps-status-radar{
+  display:inline-flex;
+}
+.gps-status-radar::before,
+.gps-status-radar::after{
+  content:"";
+  position:absolute;
+  inset:4px;
+  border-radius:999px;
+  border:2px solid rgba(215,181,109,.55);
+  animation:gpsStatusRing 1.65s infinite ease-out;
+}
+.gps-status-radar::after{
+  animation-delay:.82s;
+}
+.gps-status-dot{
+  position:absolute;
+  left:50%;
+  top:50%;
+  width:11px;
+  height:11px;
+  transform:translate(-50%,-50%);
+  border-radius:999px;
+  background:linear-gradient(180deg,#f8e7ad,#c59b46);
+  box-shadow:
+    0 0 0 4px rgba(215,181,109,.16),
+    0 0 22px rgba(215,181,109,.72);
+  animation:gpsStatusDot 1.05s infinite ease-in-out;
+}
+@keyframes gpsStatusRing{
+  0%{transform:scale(.35);opacity:.95}
+  100%{transform:scale(1.75);opacity:0}
+}
+@keyframes gpsStatusDot{
+  0%,100%{transform:translate(-50%,-50%) scale(1)}
+  50%{transform:translate(-50%,-50%) scale(1.28)}
+}
+
 </style>
 <script src="/theme-init.js"></script>
 <link rel="stylesheet" href="/theme.css">
@@ -995,7 +1140,7 @@ html.light-mode .nav-metrics{
   <section class="hero">
     <div class="bismillah">بِسْمِ ٱللَّٰهِ ٱلرَّحْمَـٰنِ ٱلرَّحِيمِ</div>
     <h1>Nearby Mosques</h1>
-    <p class="subtitle">Map, nearby mosques, GPS guidance, turn-by-turn route, and fast external navigation.</p>
+    <p class="subtitle">Automatic GPS search for mosques within 5 km: map, distance, exact address, route, and quick navigation launch.</p>
   </section>
 
   <div class="top-actions" aria-label="Page actions">
@@ -1015,18 +1160,17 @@ html.light-mode .nav-metrics{
       <svg viewBox="0 0 24 24"><path d="M4 12l16-8-8 16-2-7-6-1z"/><path d="M12 13l8-9"/></svg>
       <span class="action-label">GPS</span>
     </button>
-    <button class="action" id="themeBtn" type="button">
-      <svg viewBox="0 0 24 24"><path d="M12 3a6.5 6.5 0 1 0 9 9 8 8 0 1 1-9-9z"/></svg>
-      <span class="action-label">Theme</span>
-    </button>
   </div>
 
   <section class="status-panel">
     <div class="status-title">
-      <span id="statusTitle">Ready to search</span>
+      <span id="statusTitle" class="gps-status-title">
+        <span id="statusTitleText">Ready to search</span>
+        <span class="gps-status-radar" aria-hidden="true"><span class="gps-status-dot"></span></span>
+      </span>
       <span id="resultCount">0</span>
     </div>
-    <p class="status-text" id="statusText">If your location is already saved on the Prayer Times page, mosques will load automatically.</p>
+    <p class="status-text" id="statusText">Tap “Find nearby”: this page will detect GPS and show the nearest mosques first.</p>
     <div class="location-grid">
       <div class="info-box">
         <div class="info-label">Current location</div>
@@ -1076,7 +1220,7 @@ html.light-mode .nav-metrics{
   </main>
 
   <div class="notice">
-    At the first stage, free open sources are used: map, mosque search, coordinates, and basic routing. For large-scale production, a dedicated tile server, premium routing/API, and a more accurate places database can be connected later.
+    Search uses open mapping data from OpenStreetMap/Overpass. If a specific mosque is missing from the map database, it cannot appear in the automatic results until the map data is updated.
   </div>
 </div>
 
@@ -1101,7 +1245,7 @@ html.light-mode .nav-metrics{
     mosques:[],
     filtered:[],
     selected:null,
-    radius:15000,
+    radius:5000,
     loading:false,
     map:null,
     userMarker:null,
@@ -1118,16 +1262,16 @@ html.light-mode .nav-metrics{
     driveMode:false,
     lastRouteRefresh:0,
     headingMarker:null,
-    routeDestination:null
+    routeDestination:null,
+    nearestOnly:false
   };
-
   const els = {
     locateBtn:document.getElementById("locateBtn"),
     refreshBtn:document.getElementById("refreshBtn"),
     nearestBtn:document.getElementById("nearestBtn"),
     trackBtn:document.getElementById("trackBtn"),
-    themeBtn:document.getElementById("themeBtn"),
     statusTitle:document.getElementById("statusTitle"),
+    statusTitleText:document.getElementById("statusTitleText"),
     statusText:document.getElementById("statusText"),
     resultCount:document.getElementById("resultCount"),
     userLocation:document.getElementById("userLocation"),
@@ -1156,8 +1300,14 @@ html.light-mode .nav-metrics{
   }
 
   function setStatus(title, text){
-    els.statusTitle.textContent = title;
+    if(els.statusTitleText){
+      els.statusTitleText.textContent = title;
+    }else{
+      els.statusTitle.textContent = title;
+    }
     els.statusText.textContent = text;
+    const isGpsLoading = /gps|гео|локац|местополож|мечет/i.test(`${title} ${text}`) && /определ|ищ|скан|поиск|жд|поблизост/i.test(`${title} ${text}`);
+    document.querySelector(".status-panel")?.classList.toggle("is-gps-loading", isGpsLoading);
   }
 
   function escapeHtml(value){
@@ -1352,7 +1502,7 @@ html.light-mode .nav-metrics{
   }
 
   function nativeGeoUrl(lat, lon, name){
-    return `geo:${lat},${lon}?q=${lat},${lon}(${encodeURIComponent(name || "Mosque")})`;
+    return googleRouteUrl(lat, lon, name);
   }
 
   function osmUrl(lat, lon){
@@ -1367,7 +1517,10 @@ html.light-mode .nav-metrics{
       attributionControl:true
     }).setView([41.3111, 69.2797], 12);
 
-    L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
+    
+
+window.__barakawayMosquesMap = state.map;
+L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
       maxZoom:19,
       attribution:'&copy; OpenStreetMap'
     }).addTo(state.map);
@@ -1436,22 +1589,127 @@ html.light-mode .nav-metrics{
     }
   }
 
+
+  function getFastStoredCoords(){
+    const direct = getStoredMosqueCoords() || getStoredPrayerCoords();
+    if(direct && isValidCoord(direct.lat, direct.lon)) return direct;
+    return null;
+  }
+
+  function applyCoordsAndSearch(lat, lon, label, accuracy){
+    state.coords = {
+      lat,
+      lon,
+      accuracy:accuracy || null
+    };
+
+    saveMosqueCoords(lat, lon, label || "Location detected");
+    updateUserOnMap(lat, lon, accuracy || null);
+    els.userLocation.textContent = label || `${compactCoord(lat)}, ${compactCoord(lon)}`;
+
+    setStatus("Searching nearby mosques", "Fast search for nearby mosques within 5 km.");
+    renderImmediateCachedMosques();
+    searchNearbyMosques();
+  }
+
+  function requestFastLocation(){
+    document.querySelector(".status-panel")?.classList.add("is-gps-loading");
+    setStatus("Detecting GPS location", "Getting quick coordinates and starting the search immediately.");
+
+    const stored = getFastStoredCoords();
+    if(stored){
+      applyCoordsAndSearch(stored.lat, stored.lon, stored.label || "Saved location", null);
+    }
+
+    if(!navigator.geolocation){
+      handleGeolocationError({code:0});
+      return;
+    }
+
+    navigator.geolocation.getCurrentPosition(
+      async position => {
+        const lat = position.coords.latitude;
+        const lon = position.coords.longitude;
+        const accuracy = position.coords.accuracy || null;
+        const label = await reversePlaceName(lat, lon);
+        applyCoordsAndSearch(lat, lon, label, accuracy);
+      },
+      error => {
+        if(!stored){
+          handleGeolocationError(error);
+        }else{
+          toast("Showing nearby mosques using the last saved location");
+        }
+      },
+      {
+        enableHighAccuracy:false,
+        timeout:1800,
+        maximumAge:900000
+      }
+    );
+  }
+
+
   function buildOverpassQuery(lat, lon, radius){
     return `
-[out:json][timeout:12];
+[out:json][timeout:3];
 (
   node["amenity"="place_of_worship"]["religion"="muslim"](around:${radius},${lat},${lon});
   way["amenity"="place_of_worship"]["religion"="muslim"](around:${radius},${lat},${lon});
   relation["amenity"="place_of_worship"]["religion"="muslim"](around:${radius},${lat},${lon});
+
   node["building"="mosque"](around:${radius},${lat},${lon});
   way["building"="mosque"](around:${radius},${lat},${lon});
   relation["building"="mosque"](around:${radius},${lat},${lon});
-  node["name"~"masjid|mosque|mosque|مسجد|cami|jome|juma",i](around:${radius},${lat},${lon});
-  way["name"~"masjid|mosque|mosque|مسجد|cami|jome|juma",i](around:${radius},${lat},${lon});
+
+  node["place_of_worship"~"musalla|mosque",i](around:${radius},${lat},${lon});
+  way["place_of_worship"~"musalla|mosque",i](around:${radius},${lat},${lon});
+  relation["place_of_worship"~"musalla|mosque",i](around:${radius},${lat},${lon});
+
+  node["religion"="muslim"]["name"](around:${radius},${lat},${lon});
+  way["religion"="muslim"]["name"](around:${radius},${lat},${lon});
+  relation["religion"="muslim"]["name"](around:${radius},${lat},${lon});
+
+  node["name"~"masjid|mosque|musalla|м[её]четь|مسجد|cami|jome|juma|jummah|жоме|жума|намозгоҳ|namozgoh",i](around:${radius},${lat},${lon});
+  way["name"~"masjid|mosque|musalla|м[её]четь|مسجد|cami|jome|juma|jummah|жоме|жума|намозгоҳ|namozgoh",i](around:${radius},${lat},${lon});
+  relation["name"~"masjid|mosque|musalla|м[её]четь|مسجد|cami|jome|juma|jummah|жоме|жума|намозгоҳ|namozgoh",i](around:${radius},${lat},${lon});
 );
 out center tags;
 `;
   }
+
+  
+  function openLocationSettingsHint(){
+    const isAndroid = /Android/i.test(navigator.userAgent);
+    const isIOS = /iPhone|iPad|iPod/i.test(navigator.userAgent);
+
+    toast("Open your phone settings and enable Location / GPS");
+
+    // Mobile browsers do not have a universal guaranteed API for opening Location settings.
+    // These deep links are attempted only from a direct user tap and guarded to avoid breaking the page.
+    try{
+      if(isAndroid){
+        window.location.href = "intent://settings#Intent;action=android.settings.LOCATION_SOURCE_SETTINGS;end";
+        return;
+      }
+      if(isIOS){
+        window.location.href = "App-Prefs:Privacy&path=LOCATION";
+      }
+    }catch(error){}
+  }
+
+  function handleGeolocationError(error){
+    document.querySelector(".status-panel")?.classList.remove("is-gps-loading");
+    const denied = error && error.code === 1;
+    setStatus(
+      denied ? "Geolocation denied" : "GPS not detected",
+      denied
+        ? "Allow location access in your phone or browser settings."
+        : "Check that Location / GPS is enabled and tap GPS again."
+    );
+    openLocationSettingsHint();
+  }
+
 
   async function fetchWithTimeout(url, options, timeoutMs){
     const controller = new AbortController();
@@ -1466,34 +1724,71 @@ out center tags;
     }
   }
 
-  async function fetchOverpass(lat, lon, radius){
-    const query = buildOverpassQuery(lat, lon, radius);
-    let lastError = null;
-
-    for(const endpoint of OVERPASS_ENDPOINTS){
-      try{
-        const response = await fetchWithTimeout(endpoint, {
-          method:"POST",
-          headers:{"Content-Type":"application/x-www-form-urlencoded;charset=UTF-8"},
-          body:new URLSearchParams({data:query})
-        }, 9500);
-        if(!response.ok) throw new Error("request failed");
-        return await response.json();
-      }catch(error){
-        lastError = error;
-      }
-
-      try{
-        const url = endpoint + "?data=" + encodeURIComponent(query);
-        const response = await fetchWithTimeout(url, {method:"GET"}, 9500);
-        if(!response.ok) throw new Error("request failed");
-        return await response.json();
-      }catch(error){
-        lastError = error;
-      }
+  
+  function getCachedMosques(){
+    try{
+      const raw = localStorage.getItem("bw_cached_mosques");
+      if(!raw) return null;
+      const parsed = JSON.parse(raw);
+      return Array.isArray(parsed.items) ? parsed.items : null;
+    }catch(error){
+      return null;
     }
+  }
 
-    throw lastError || new Error("request failed");
+  function saveCachedMosques(items){
+    try{
+      localStorage.setItem("bw_cached_mosques", JSON.stringify({
+        ts:Date.now(),
+        items
+      }));
+    }catch(error){}
+  }
+
+
+
+
+  function renderImmediateCachedMosques(){
+    const cached = getCachedMosques();
+    if(!cached || !cached.length || !state.coords) return false;
+
+    const refreshed = cached.map(item => ({
+      ...item,
+      distance:distanceMeters(state.coords.lat, state.coords.lon, item.lat, item.lon)
+    })).sort((a,b) => a.distance - b.distance);
+
+    state.mosques = refreshed;
+    updateFiltered();
+    renderList();
+    renderMapMarkers();
+    els.resultCount.textContent = String(refreshed.length);
+    return true;
+  }
+
+
+async function fetchOverpass(lat, lon, radius){
+    const query = buildOverpassQuery(lat, lon, radius);
+
+    const requests = OVERPASS_ENDPOINTS.flatMap(endpoint => {
+      const postRequest = fetchWithTimeout(endpoint, {
+        method:"POST",
+        headers:{"Content-Type":"application/x-www-form-urlencoded;charset=UTF-8"},
+        body:new URLSearchParams({data:query})
+      }, 1600).then(r => {
+        if(!r.ok) throw new Error("request failed");
+        return r.json();
+      });
+
+      const getUrl = endpoint + "?data=" + encodeURIComponent(query);
+      const getRequest = fetchWithTimeout(getUrl, {method:"GET"}, 1600).then(r => {
+        if(!r.ok) throw new Error("request failed");
+        return r.json();
+      });
+
+      return [postRequest, getRequest];
+    });
+
+    return await Promise.any(requests);
   }
 
   function nominatimViewbox(lat, lon, km){
@@ -1507,15 +1802,18 @@ out center tags;
     return (
       value.includes("mosque") ||
       value.includes("masjid") ||
-      value.includes("mosque") ||
-      value.includes("mosque") ||
+      value.includes("мeчеть") ||
+      value.includes("мечеть") ||
       value.includes("مسجد") ||
       value.includes("cami") ||
       value.includes("jome") ||
       value.includes("juma") ||
       value.includes("jummah") ||
-      value.includes("jome") ||
-      value.includes("juma")
+      value.includes("жоме") ||
+      value.includes("жума") ||
+      value.includes("musalla") ||
+      value.includes("намозгоҳ") ||
+      value.includes("namozgoh")
     );
   }
 
@@ -1523,16 +1821,16 @@ out center tags;
     const value = String(text || "").toLowerCase();
     return (
       value.includes("synagogue") ||
-      value.includes("synagogue") ||
+      value.includes("синагог") ||
       value.includes("church") ||
-      value.includes("church") ||
+      value.includes("церков") ||
       value.includes("cathedral") ||
-      value.includes("cathedral") ||
+      value.includes("собор") ||
       value.includes("chapel") ||
       value.includes("temple") ||
-      value.includes("temple") ||
+      value.includes("храм") ||
       value.includes("monastery") ||
-      value.includes("monastery")
+      value.includes("монастыр")
     );
   }
 
@@ -1543,50 +1841,53 @@ out center tags;
     const amenity = String(tags.amenity || "").toLowerCase();
     const religion = String(tags.religion || "").toLowerCase();
     const building = String(tags.building || "").toLowerCase();
+    const placeOfWorship = String(tags.place_of_worship || "").toLowerCase();
 
     if(amenity === "place_of_worship" && religion === "muslim") return true;
     if(building === "mosque") return true;
+    if(placeOfWorship === "musalla" || placeOfWorship === "mosque") return true;
+    if(religion === "muslim" && hasMosqueIdentityText(text)) return true;
     return hasMosqueIdentityText(text);
   }
 
   async function fetchNominatimMosques(lat, lon){
     const queries = [
-      "amenity:mosque",
       "mosque",
-      "mosques",
       "masjid",
-      "mosque",
-      "مسجد",
-      "juma masjid"
+      "мечеть",
+      "مسجد"
     ];
-    const all = [];
 
-    for(const q of queries){
+    const viewbox = nominatimViewbox(lat, lon, 5);
+
+    const requests = queries.map(async q => {
       try{
         const params = new URLSearchParams({
           format:"jsonv2",
-          limit:"18",
+          limit:"12",
           addressdetails:"1",
           extratags:"1",
           namedetails:"1",
           bounded:"1",
-          viewbox:nominatimViewbox(lat, lon, 18),
+          viewbox:viewbox,
           q:q
         });
-        const response = await fetchWithTimeout(`${NOMINATIM_SEARCH}?${params.toString()}`, {}, 6500);
-        if(response.ok){
-          const data = await response.json();
-          if(Array.isArray(data)) all.push(...data);
-        }
-      }catch(error){}
-    }
+        const response = await fetchWithTimeout(`${NOMINATIM_SEARCH}?${params.toString()}`, {}, 900);
+        if(!response.ok) return [];
+        const data = await response.json();
+        return Array.isArray(data) ? data : [];
+      }catch(error){
+        return [];
+      }
+    });
 
-    return all;
+    const chunks = await Promise.all(requests);
+    return chunks.flat();
   }
 
   async function reversePlaceName(lat, lon){
     try{
-      const response = await fetchWithTimeout(`${NOMINATIM_REVERSE}?format=jsonv2&lat=${lat}&lon=${lon}`, {}, 6500);
+      const response = await fetchWithTimeout(`${NOMINATIM_REVERSE}?format=jsonv2&lat=${lat}&lon=${lon}`, {}, 900);
       const data = await response.json();
       const address = data.address || {};
       const city = address.city || address.town || address.village || address.county || "";
@@ -1692,15 +1993,26 @@ out center tags;
       return true;
     }).sort((a,b) => a.distance - b.distance);
 
-    return dedupeMosquesWithinRadius(exact, 500);
+    const merged = dedupeMosquesWithinRadius(exact, 500);
+    saveCachedMosques(merged);
+    return merged;
   }
 
   function updateFiltered(){
     const query = els.searchInput.value.trim().toLowerCase();
-    state.filtered = state.mosques.filter(item => {
+
+    let filtered = state.mosques.filter(item => {
       const hay = `${item.name} ${item.address}`.toLowerCase();
       return !query || hay.includes(query);
     });
+
+    filtered.sort((a,b) => a.distance - b.distance);
+
+    if(state.nearestOnly && filtered.length){
+      filtered = [filtered[0]];
+    }
+
+    state.filtered = filtered;
     els.resultCount.textContent = String(state.filtered.length);
   }
 
@@ -1735,7 +2047,16 @@ out center tags;
     updateFiltered();
 
     if(state.loading){
-      els.results.innerHTML = `<div class="empty">Searching nearby mosques...</div>`;
+      els.results.innerHTML = `<div class="empty">
+      <div class="gps-loading premium-search-loading">
+        <span class="gps-radar">
+          <span class="gps-radar-ring"></span>
+          <span class="gps-radar-ring delay"></span>
+          <span class="gps-radar-dot"></span>
+        </span>
+        <span class="gps-search-text">Ищем мечети поблизости…</span>
+      </div>
+    </div>`;
       return;
     }
 
@@ -1796,7 +2117,7 @@ out center tags;
             </a>
             <button class="small-action copy-btn" type="button" data-copy="${lat}, ${lon}">
               <svg viewBox="0 0 24 24"><path d="M12 2v3"/><path d="M12 19v3"/><path d="M2 12h3"/><path d="M19 12h3"/><circle cx="12" cy="12" r="6"/></svg>
-              Coord.
+              Coords
             </button>
             <button class="small-action share-btn" type="button" data-id="${escapeHtml(item.id)}">
               <svg viewBox="0 0 24 24"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><path d="M8.6 10.8l6.8-4.1"/><path d="M8.6 13.2l6.8 4.1"/></svg>
@@ -1841,7 +2162,7 @@ out center tags;
 
   function renderTurnList(){
     if(!state.activeSteps.length){
-      els.turnList.innerHTML = '<div class="turn-item"><div class="turn-icon">•</div><div class="turn-text">Route guidance will appear after the route is built</div><div></div></div>';
+      els.turnList.innerHTML = '<div class="turn-item"><div class="turn-icon">•</div><div class="turn-text">Directions will appear after the route is built</div><div></div></div>';
       return;
     }
 
@@ -1988,7 +2309,7 @@ out center tags;
         state.activeSteps = (route.legs || []).flatMap(leg => leg.steps || []);
         state.currentStepIndex = 0;
 
-        setStatus("Route built", `${item.name}: ${formatDistance(route.distance)}, ${formatDuration(route.duration)}. Tap “Go” for guidance.`);
+        setStatus("Route built", `${item.name}: ${formatDistance(route.distance)}, ${formatDuration(route.duration)}. Tap “Go” to start guidance.`);
         state.map.fitBounds(coords, {padding:[52,52]});
         updateNavigationPanel();
         routed = true;
@@ -2001,7 +2322,7 @@ out center tags;
       state.activeRoute = null;
       state.activeSteps = [];
       updateNavigationPanel();
-      setStatus("Route shown by direction", "The exact road line is temporarily unavailable; direction to the mosque is shown.");
+      setStatus("Route direction shown", "The exact road route is temporarily unavailable, so the direction to the mosque is shown.");
     }
 
     renderList();
@@ -2012,6 +2333,8 @@ out center tags;
 
     initMap();
     state.loading = true;
+    state.nearestOnly = false;
+    els.nearestBtn.classList.remove("is-active");
     state.coords = {lat, lon};
     saveMosqueCoords(lat, lon, label);
     updateUserOnMap(lat, lon);
@@ -2019,9 +2342,9 @@ out center tags;
     renderList();
 
     if(options && options.silent){
-      setStatus("Searching nearby mosques", "Loading nearby mosques by saved location.");
+      setStatus("Searching nearby mosques", "Scanning OpenStreetMap/Overpass within 5 km of your GPS location.");
     }else{
-      setStatus("Location detected", "Searching for nearby mosques.");
+      setStatus("Location detected", "Scanning mosques and musallas within 5 km, with the nearest results first.");
     }
 
     els.locateBtn.classList.add("is-active");
@@ -2035,22 +2358,23 @@ out center tags;
         overpassItems = normalizeOverpassMosques(overpassData, {lat, lon});
       }catch(error){}
 
-      if(overpassItems.length < 5){
-        try{
-          const nominatimData = await fetchNominatimMosques(lat, lon);
-          nominatimItems = normalizeNominatimMosques(nominatimData, {lat, lon});
-        }catch(error){}
-      }
+      try{
+        const nominatimData = await fetchNominatimMosques(lat, lon);
+        nominatimItems = normalizeNominatimMosques(nominatimData, {lat, lon});
+      }catch(error){}
 
-      state.mosques = mergeMosques(overpassItems, nominatimItems).slice(0, 30);
+      state.mosques = mergeMosques(overpassItems, nominatimItems)
+        .filter(item => item.distance <= state.radius)
+        .sort((a,b) => a.distance - b.distance)
+        .slice(0, 120);
       state.loading = false;
       els.locateBtn.classList.remove("is-active");
 
       if(state.mosques.length){
         selectMosque(state.mosques[0].id, false);
-        setStatus("Nearby Mosques", `Nearest mosque: ${state.mosques[0].name}, ${formatDistance(state.mosques[0].distance)} from you.`);
+        setStatus("Nearby Mosques", `Found: ${state.mosques.length}. Nearest: ${state.mosques[0].name}, ${formatDistance(state.mosques[0].distance)} from you.`);
       }else{
-        setStatus("No mosques found", "No available mosque points were found nearby yet. Try refreshing the search.");
+        setStatus("No mosques found", "Open maps returned no mosques within 5 km. Check GPS or try refreshing the search.");
         renderList();
       }
     }catch(error){
@@ -2062,32 +2386,83 @@ out center tags;
     }
   }
 
+
+  
+  function tryOpenLocationSettings(){
+    setStatus(
+      "Enable location services",
+      "Open your phone or browser settings and allow location access for this page. After enabling it, tap “Find nearby” again."
+    );
+    toast("Enable Location/GPS in your phone settings");
+  }
+
+  function resetSearch(){
+    state.loading = false;
+    state.mosques = [];
+    state.filtered = [];
+    state.selected = null;
+    state.nearestOnly = false;
+    state.activeRouteId = null;
+    state.activeRoute = null;
+    state.activeSteps = [];
+    state.routeDestination = null;
+
+    if(state.mosqueLayer) state.mosqueLayer.clearLayers();
+    if(state.routeLayer) state.routeLayer.clearLayers();
+    state.markers.clear();
+
+    els.locateBtn.classList.remove("is-active");
+    els.nearestBtn.classList.remove("is-active");
+    els.resultCount.textContent = "0";
+    els.selectedMosque.textContent = "Not selected";
+    els.results.innerHTML = `<div class="empty">Search cleared. Tap “Find nearby” to detect GPS and find mosques again.</div>`;
+    setStatus("Search cleared", "Tap “Find nearby” for a new GPS search.");
+    toast("Search cleared");
+  }
+
+
+  function geolocationErrorText(error){
+    if(!error) return "Check GPS and internet, then tap “Find nearby” again.";
+    if(error.code === 1){
+      return "Geolocation access is denied. Enable Location/GPS on your phone and allow location access for this site in the browser.";
+    }
+    if(error.code === 2){
+      return "Your phone could not detect coordinates. Enable GPS/Location, move to an open area, and tap “Find nearby”.";
+    }
+    if(error.code === 3){
+      return "GPS is taking too long. Enable precise location and tap “Refresh”.";
+    }
+    return "Check GPS and internet, then tap “Find nearby” again.";
+  }
+
+  async function canAskGeolocation(){
+    if(!navigator.permissions || !navigator.permissions.query) return true;
+    try{
+      const permission = await navigator.permissions.query({name:"geolocation"});
+      if(permission.state === "denied"){
+        setStatus("Geolocation denied", "Enable location access for this site in browser/phone settings, then refresh the page.");
+        toast("Allow GPS to search for nearby mosques");
+        tryOpenLocationSettings();
+        return false;
+      }
+      return true;
+    }catch(error){
+      return true;
+    }
+  }
+
   async function locateAndSearch(force){
     if(state.loading) return;
-
-    if(!force){
-      const prayerCoords = getStoredPrayerCoords();
-      if(prayerCoords){
-        await searchByCoords(prayerCoords.lat, prayerCoords.lon, prayerCoords.label, {silent:false});
-        return;
-      }
-
-      const mosqueCoords = getStoredMosqueCoords();
-      if(mosqueCoords){
-        await searchByCoords(mosqueCoords.lat, mosqueCoords.lon, mosqueCoords.label, {silent:false});
-        return;
-      }
-    }
-
-    if(!navigator.geolocation){
-      setStatus("Auto-detection unavailable", "Open this page on a device with geolocation access.");
+if(!navigator.geolocation){
+      setStatus("Auto-detection unavailable", "Open this page on a device with GPS/Location or allow geolocation access in the browser.");
       toast("Geolocation unavailable");
       return;
     }
 
     state.loading = true;
     renderList();
-    setStatus("Detecting location", "Allow location access to show nearby mosques.");
+    document.querySelector(".status-panel")?.classList.add("is-gps-loading");
+    setStatus("Detecting GPS location", "Allow location access. Without GPS, accurate nearby mosque search is not possible.");
     els.locateBtn.classList.add("is-active");
 
     navigator.geolocation.getCurrentPosition(async pos => {
@@ -2095,25 +2470,20 @@ out center tags;
       const lon = pos.coords.longitude;
       updateUserOnMap(lat, lon, pos.coords.accuracy);
       updateHeadingVisual(pos.coords.heading);
-      updateHeadingVisual(pos.coords.heading);
       const placeName = await reversePlaceName(lat, lon);
       await searchByCoords(lat, lon, placeName, {silent:false});
     }, error => {
       state.loading = false;
       els.locateBtn.classList.remove("is-active");
 
-      const stored = getStoredPrayerCoords() || getStoredMosqueCoords();
-      if(stored){
-        searchByCoords(stored.lat, stored.lon, stored.label, {silent:true});
-        return;
-      }
-
-      setStatus("Location not detected", "Allow location access and tap “Find nearby” again.");
+      setStatus("Location not detected", geolocationErrorText(error));
+      toast("Location/GPS must be enabled");
+      tryOpenLocationSettings();
       renderList();
     }, {
       enableHighAccuracy:true,
-      timeout:12000,
-      maximumAge:force ? 0 : 300000
+      timeout:9000,
+      maximumAge:0
     });
   }
 
@@ -2176,6 +2546,7 @@ out center tags;
       state.followMode = false;
       state.driveMode = false;
       toast("Could not enable GPS");
+      tryOpenLocationSettings();
     }, {
       enableHighAccuracy:true,
       maximumAge:3000,
@@ -2186,29 +2557,38 @@ out center tags;
   async function autoStart(){
     initMap();
 
-    const prayerCoords = getStoredPrayerCoords();
-    if(prayerCoords){
-      await searchByCoords(prayerCoords.lat, prayerCoords.lon, prayerCoords.label, {silent:true});
+    setStatus("Starting GPS search", "Preparing GPS search. Tap “Find nearby” if the browser does not start the request automatically.");
+    renderList();
+
+    const allowed = await canAskGeolocation();
+    if(allowed){
+      await locateAndSearch(true);
       return;
     }
-
-    const mosqueCoords = getStoredMosqueCoords();
-    if(mosqueCoords){
-      await searchByCoords(mosqueCoords.lat, mosqueCoords.lon, mosqueCoords.label, {silent:true});
-      return;
-    }
-
-    setStatus("Ready to search", "Click “Find nearby” to show mosques near you.");
     renderList();
   }
 
-  function openNearest(){
-    const item = state.selected || state.mosques[0];
-    if(!item){
-      toast("Find nearby mosques first");
+  function toggleNearestOnly(){
+    if(!state.mosques.length){
+      toast("Tap “Find nearby” first");
       return;
     }
-    window.location.href = nativeGeoUrl(compactCoord(item.lat), compactCoord(item.lon), item.name);
+
+    state.nearestOnly = !state.nearestOnly;
+    els.nearestBtn.classList.toggle("is-active", state.nearestOnly);
+
+    updateFiltered();
+    renderList();
+
+    if(state.nearestOnly){
+      const item = state.filtered[0] || state.mosques[0];
+      if(item){
+        selectMosque(item.id, true);
+        setStatus("Nearest mosque", `${item.name}: ${formatDistance(item.distance)} from you.`);
+      }
+    }else{
+      setStatus("All nearby mosques", `Shown: ${state.filtered.length}. Nearest results are first.`);
+    }
   }
 
   async function copyText(text){
@@ -2270,10 +2650,15 @@ Route: ${googleRouteUrl(lat, lon, item.name)}`;
     }
   }
 
-  els.locateBtn.addEventListener("click", () => locateAndSearch(false));
-  els.refreshBtn.addEventListener("click", () => locateAndSearch(true));
-  els.nearestBtn.addEventListener("click", openNearest);
-  els.trackBtn.addEventListener("click", () => toggleTracking(false));
+  els.locateBtn.addEventListener("click", event => { event.preventDefault(); locateAndSearch(true); });
+  els.refreshBtn.addEventListener("click", event => { event.preventDefault(); resetSearch(); });
+  els.nearestBtn.addEventListener("click", event => { event.preventDefault(); toggleNearestOnly(); });
+  els.trackBtn.addEventListener("click", async event => {
+    event.preventDefault();
+    const allowed = await canAskGeolocation();
+    if(!allowed){ tryOpenLocationSettings(); return; }
+    toggleTracking(false);
+  });
   els.recenterBtn.addEventListener("click", () => recenterToUser(true));
   els.followBtn.addEventListener("click", () => {
     state.followMode = !state.followMode;
@@ -2289,7 +2674,6 @@ Route: ${googleRouteUrl(lat, lon, item.name)}`;
     if(item) drawRoute(item);
     else toast("Select a mosque first");
   });
-  els.themeBtn.addEventListener("click", toggleTheme);
   els.searchInput.addEventListener("input", renderList);
 
   document.addEventListener("click", event => {
@@ -2335,8 +2719,131 @@ Route: ${googleRouteUrl(lat, lon, item.name)}`;
   restoreTheme();
   window.addEventListener("resize", () => state.map && state.map.invalidateSize());
   autoStart();
+  if(!window.__barakawayFastLocationBound){
+    window.__barakawayFastLocationBound = true;
+    els.locateBtn.onclick = requestFastLocation;
+    els.trackBtn.onclick = function(){
+      els.trackBtn.classList.add("is-active");
+      requestFastLocation();
+    };
+  }
+
+  if(!window.__barakawayRefreshOverride){
+    window.__barakawayRefreshOverride = true;
+    els.refreshBtn.onclick = function(){
+      state.loading = false;
+      state.mosques = [];
+      state.filtered = [];
+      state.selected = null;
+      state.nearestOnly = false;
+      els.nearestBtn.classList.remove("is-active");
+      els.resultCount.textContent = "0";
+      els.selectedMosque.textContent = "Not selected";
+      els.searchInput.value = "";
+      state.mosqueLayer?.clearLayers();
+      state.routeLayer?.clearLayers();
+      document.querySelector(".status-panel")?.classList.remove("is-gps-loading");
+      setStatus("Ready to search", "Tap “Find nearby”: the search starts quickly within a 5 km radius.");
+      els.results.innerHTML = `<div class="empty">Search cleared. Tap “Find nearby”.</div>`;
+      toast("Search cleared");
+    };
+  }
+
 })();
 </script>
 <script src="/bottom-nav.js"></script>
+
+
+
+<script>
+/* === Mobile map: one finger scrolls page, two fingers control map === */
+(function(){
+  function getMap(){
+    return window.__barakawayMosquesMap || null;
+  }
+
+  function setDragging(map, enabled){
+    if (!map || !map.dragging) return;
+    if (enabled) map.dragging.enable();
+    else map.dragging.disable();
+  }
+
+  function applyMobileMapTouchMode(){
+    var map = getMap();
+    var mapEl = document.getElementById("map");
+    if (!map || !mapEl) return;
+
+    var isMobile = window.matchMedia && window.matchMedia("(max-width: 720px)").matches;
+
+    if (!isMobile) {
+      setDragging(map, true);
+      if (map.tap) map.tap.enable();
+      if (map.touchZoom) map.touchZoom.enable();
+      if (map.doubleClickZoom) map.doubleClickZoom.enable();
+      if (map.scrollWheelZoom) map.scrollWheelZoom.enable();
+      if (map.boxZoom) map.boxZoom.enable();
+      if (map.keyboard) map.keyboard.enable();
+      mapEl.style.touchAction = "";
+      mapEl.style.msTouchAction = "";
+      return;
+    }
+
+    setDragging(map, false);
+    if (map.tap) map.tap.disable();
+    if (map.doubleClickZoom) map.doubleClickZoom.disable();
+    if (map.scrollWheelZoom) map.scrollWheelZoom.disable();
+    if (map.boxZoom) map.boxZoom.disable();
+    if (map.keyboard) map.keyboard.disable();
+    if (map.touchZoom) map.touchZoom.enable();
+
+    mapEl.style.touchAction = "pan-y pinch-zoom";
+    mapEl.style.msTouchAction = "pan-y pinch-zoom";
+
+    if (mapEl.__barakawayTouchModeBound) return;
+    mapEl.__barakawayTouchModeBound = true;
+
+    mapEl.addEventListener("touchstart", function(e){
+      if (!window.matchMedia("(max-width: 720px)").matches) return;
+      if (e.touches && e.touches.length >= 2) {
+        setDragging(map, true);
+      } else {
+        setDragging(map, false);
+      }
+    }, { passive:true });
+
+    mapEl.addEventListener("touchmove", function(e){
+      if (!window.matchMedia("(max-width: 720px)").matches) return;
+      if (e.touches && e.touches.length >= 2) {
+        setDragging(map, true);
+      } else {
+        setDragging(map, false);
+      }
+    }, { passive:true });
+
+    mapEl.addEventListener("touchend", function(){
+      if (!window.matchMedia("(max-width: 720px)").matches) return;
+      setTimeout(function(){ setDragging(map, false); }, 60);
+    }, { passive:true });
+
+    mapEl.addEventListener("touchcancel", function(){
+      if (!window.matchMedia("(max-width: 720px)").matches) return;
+      setDragging(map, false);
+    }, { passive:true });
+  }
+
+  window.addEventListener("load", function(){
+    applyMobileMapTouchMode();
+    setTimeout(applyMobileMapTouchMode, 300);
+    setTimeout(applyMobileMapTouchMode, 1200);
+    setTimeout(applyMobileMapTouchMode, 2500);
+  });
+
+  window.addEventListener("resize", applyMobileMapTouchMode);
+  window.addEventListener("orientationchange", function(){
+    setTimeout(applyMobileMapTouchMode, 300);
+  });
+})();
+</script>
+
 </body>
 </html>
