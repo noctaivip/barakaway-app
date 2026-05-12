@@ -8,7 +8,8 @@ In the name of Allah, the Most Merciful, the Most Compassionate
 <head>
 <script>
 (function(){
-  const savedTheme = localStorage.getItem('siteTheme');
+  const premiumTheme = localStorage.getItem('barakaway_premium_theme');
+  const savedTheme = premiumTheme ? 'dark' : localStorage.getItem('siteTheme');
   if(savedTheme === 'light'){
     document.documentElement.classList.add('light-mode');
   } else {
@@ -4831,21 +4832,27 @@ window.addEventListener("DOMContentLoaded",function(){const installBtn=document.
 
   if(!switches.length || !labels.length) return;
 
+  function hasPremiumTheme(){
+    try{ return !!localStorage.getItem('barakaway_premium_theme'); }catch(e){ return false; }
+  }
+
   function applyTheme(theme){
+    var selected = hasPremiumTheme() ? 'dark' : theme;
+
     document.documentElement.classList.remove('light-mode','dark-mode');
-    document.documentElement.classList.add(theme + '-mode');
-    localStorage.setItem('siteTheme', theme);
+    document.documentElement.classList.add(selected + '-mode');
+    localStorage.setItem('siteTheme', selected);
 
     switches.forEach(function(switchEl){
-      switchEl.checked = theme === 'light';
+      switchEl.checked = selected === 'light';
     });
 
     labels.forEach(function(label){
-      label.textContent = theme === 'dark' ? 'Light mode' : 'Dark mode';
+      label.textContent = selected === 'dark' ? 'Light mode' : 'Dark mode';
     });
   }
 
-  const savedTheme = localStorage.getItem('siteTheme') || 'dark';
+  const savedTheme = hasPremiumTheme() ? 'dark' : (localStorage.getItem('siteTheme') || 'dark');
   applyTheme(savedTheme);
 
   switches.forEach(function(switchEl){
