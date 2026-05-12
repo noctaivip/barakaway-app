@@ -986,6 +986,45 @@ html.light-mode .nav-metrics{
   }
 }
 
+
+.gps-loading{
+  display:inline-flex;
+  align-items:center;
+  gap:10px;
+  margin-top:10px;
+  font-weight:800;
+  color:var(--green);
+}
+.gps-pulse{
+  width:14px;
+  height:14px;
+  border-radius:999px;
+  background:#2d7a46;
+  position:relative;
+  animation:gpsPulse 1.4s infinite;
+}
+.gps-pulse::before,
+.gps-pulse::after{
+  content:"";
+  position:absolute;
+  inset:-8px;
+  border-radius:999px;
+  border:2px solid rgba(45,122,70,.35);
+  animation:gpsRing 1.8s infinite;
+}
+.gps-pulse::after{
+  animation-delay:.9s;
+}
+@keyframes gpsPulse{
+  0%{transform:scale(1)}
+  50%{transform:scale(1.18)}
+  100%{transform:scale(1)}
+}
+@keyframes gpsRing{
+  0%{transform:scale(.4);opacity:.9}
+  100%{transform:scale(1.8);opacity:0}
+}
+
 </style>
 <script src="/theme-init.js"></script>
 <link rel="stylesheet" href="/theme.css">
@@ -1121,6 +1160,13 @@ html.light-mode .nav-metrics{
     headingMarker:null,
     routeDestination:null
   };
+
+  
+  const cachedMosques = getCachedMosques();
+  if(cachedMosques && cachedMosques.length){
+    state.mosques = cachedMosques;
+  }
+
 
   const els = {
     locateBtn:document.getElementById("locateBtn"),
@@ -1442,7 +1488,7 @@ L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
 
   function buildOverpassQuery(lat, lon, radius){
     return `
-[out:json][timeout:25];
+[out:json][timeout:8];
 (
   node["amenity"="place_of_worship"]["religion"="muslim"](around:${radius},${lat},${lon});
   way["amenity"="place_of_worship"]["religion"="muslim"](around:${radius},${lat},${lon});
@@ -1477,7 +1523,29 @@ out center tags;
     }
   }
 
-  async function fetchOverpass(lat, lon, radius){
+  
+  function getCachedMosques(){
+    try{
+      const raw = localStorage.getItem("bw_cached_mosques");
+      if(!raw) return null;
+      const parsed = JSON.parse(raw);
+      return Array.isArray(parsed.items) ? parsed.items : null;
+    }catch(error){
+      return null;
+    }
+  }
+
+  function saveCachedMosques(items){
+    try{
+      localStorage.setItem("bw_cached_mosques", JSON.stringify({
+        ts:Date.now(),
+        items
+      }));
+    }catch(error){}
+  }
+
+
+async function fetchOverpass(lat, lon, radius){
     const query = buildOverpassQuery(lat, lon, radius);
     let lastError = null;
 
@@ -1487,7 +1555,7 @@ out center tags;
           method:"POST",
           headers:{"Content-Type":"application/x-www-form-urlencoded;charset=UTF-8"},
           body:new URLSearchParams({data:query})
-        }, 16000);
+        }, 6500);
         if(!response.ok) throw new Error("request failed");
         return await response.json();
       }catch(error){
@@ -1496,7 +1564,7 @@ out center tags;
 
       try{
         const url = endpoint + "?data=" + encodeURIComponent(query);
-        const response = await fetchWithTimeout(url, {method:"GET"}, 16000);
+        const response = await fetchWithTimeout(url, {method:"GET"}, 6500);
         if(!response.ok) throw new Error("request failed");
         return await response.json();
       }catch(error){
@@ -1588,7 +1656,7 @@ out center tags;
           viewbox:nominatimViewbox(lat, lon, 10),
           q:q
         });
-        const response = await fetchWithTimeout(`${NOMINATIM_SEARCH}?${params.toString()}`, {}, 9000);
+        const response = await fetchWithTimeout(`${NOMINATIM_SEARCH}?${params.toString()}`, {}, 3500);
         if(response.ok){
           const data = await response.json();
           if(Array.isArray(data)) all.push(...data);
@@ -1601,7 +1669,7 @@ out center tags;
 
   async function reversePlaceName(lat, lon){
     try{
-      const response = await fetchWithTimeout(`${NOMINATIM_REVERSE}?format=jsonv2&lat=${lat}&lon=${lon}`, {}, 9000);
+      const response = await fetchWithTimeout(`${NOMINATIM_REVERSE}?format=jsonv2&lat=${lat}&lon=${lon}`, {}, 3500);
       const data = await response.json();
       const address = data.address || {};
       const city = address.city || address.town || address.village || address.county || "";
@@ -1707,7 +1775,9 @@ out center tags;
       return true;
     }).sort((a,b) => a.distance - b.distance);
 
-    return dedupeMosquesWithinRadius(exact, 500);
+    const merged = dedupeMosquesWithinRadius(exact, 500);
+    saveCachedMosques(merged);
+    return merged;
   }
 
   function updateFiltered(){
@@ -1750,7 +1820,12 @@ out center tags;
     updateFiltered();
 
     if(state.loading){
-      els.results.innerHTML = `<div class="empty">Идёт поиск ближайших мечетей...</div>`;
+      els.results.innerHTML = `<div class="empty">
+      <div class="gps-loading">
+        <span class="gps-pulse"></span>
+        GPS определяет локацию и ищет ближайшие мечети…
+      </div>
+    </div>`;
       return;
     }
 
