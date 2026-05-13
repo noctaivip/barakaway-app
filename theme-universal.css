@@ -2835,97 +2835,6 @@ html.theme-emerald-quran body:not(.page-themes-pro) .bottom-app-nav *:hover{
 }
 
 
-/* ===== PREMIUM THEMES — BISMILLAH TEXT INSTEAD OF LIGHT/DARK TOGGLE ===== */
-html[class*="premium-theme-"] .desktop-theme-toggle,
-html[class*="premium-theme-"] .desktop-theme-toggle-inner,
-html[class*="premium-theme-"] .theme-toggle-wrap{
-  position:relative !important;
-  display:flex !important;
-  align-items:center !important;
-  justify-content:center !important;
-  min-width:260px !important;
-  min-height:44px !important;
-  padding:0 !important;
-  margin:0 !important;
-  border:0 !important;
-  border-radius:0 !important;
-  background:transparent !important;
-  background-image:none !important;
-  box-shadow:none !important;
-  backdrop-filter:none !important;
-  -webkit-backdrop-filter:none !important;
-  overflow:visible !important;
-  pointer-events:none !important;
-}
-
-/* Скрываем реальные элементы Light/Dark toggle */
-html[class*="premium-theme-"] .desktop-theme-toggle > *,
-html[class*="premium-theme-"] .desktop-theme-toggle-inner > *,
-html[class*="premium-theme-"] .theme-toggle-wrap > *,
-html[class*="premium-theme-"] .theme-switch,
-html[class*="premium-theme-"] .theme-toggle-label,
-html[class*="premium-theme-"] .theme-toggle,
-html[class*="premium-theme-"] .light-dark-toggle{
-  display:none !important;
-  opacity:0 !important;
-  visibility:hidden !important;
-  pointer-events:none !important;
-}
-
-/* Только надпись, без отдельного блока */
-html[class*="premium-theme-"] .desktop-theme-toggle::before,
-html[class*="premium-theme-"] .desktop-theme-toggle-inner::before,
-html[class*="premium-theme-"] .theme-toggle-wrap::before{
-  content:"بِسْمِ ٱللَّٰهِ ٱلرَّحْمَٰنِ ٱلرَّحِيمِ" !important;
-  display:block !important;
-  opacity:1 !important;
-  visibility:visible !important;
-  width:auto !important;
-  max-width:100% !important;
-  font-size:24px !important;
-  line-height:1.25 !important;
-  font-weight:800 !important;
-  letter-spacing:0 !important;
-  text-align:center !important;
-  direction:rtl !important;
-  unicode-bidi:isolate !important;
-  color:var(--bw-premium-gold-soft) !important;
-  -webkit-text-fill-color:var(--bw-premium-gold-soft) !important;
-  text-shadow:
-    0 0 10px rgba(255,240,189,.34),
-    0 0 22px rgba(216,179,95,.20),
-    0 3px 10px rgba(0,0,0,.26) !important;
-}
-
-/* Desktop: держим надпись аккуратно в центре своей колонки */
-@media (min-width:701px){
-  html[class*="premium-theme-"] .desktop-theme-toggle,
-  html[class*="premium-theme-"] .desktop-theme-toggle-inner,
-  html[class*="premium-theme-"] .theme-toggle-wrap{
-    justify-self:center !important;
-  }
-}
-
-/* Mobile: надпись остаётся ровно на месте бывшего Light/Dark toggle и центрируется */
-@media (max-width:700px){
-  html[class*="premium-theme-"] .desktop-theme-toggle,
-  html[class*="premium-theme-"] .desktop-theme-toggle-inner,
-  html[class*="premium-theme-"] .theme-toggle-wrap{
-    width:100% !important;
-    min-width:0 !important;
-    min-height:38px !important;
-    justify-content:center !important;
-    text-align:center !important;
-  }
-
-  html[class*="premium-theme-"] .desktop-theme-toggle::before,
-  html[class*="premium-theme-"] .desktop-theme-toggle-inner::before,
-  html[class*="premium-theme-"] .theme-toggle-wrap::before{
-    font-size:21px !important;
-    text-align:center !important;
-  }
-}
-
 
 /* ===== SOLID THEME BOTTOM NAV OUTER LAYER ===== */
 .bottom-app-nav{
@@ -3026,64 +2935,6 @@ html[class*="premium-theme-"] body:not(.page-themes-pro) .bottom-app-nav-inner{
   opacity:1 !important;
 }
 
-/* ===== FIX: PREMIUM BISMILLAH TEXT ON MOBILE HOME TOGGLE ===== */
-html[class*="premium-theme-"] .theme-toggle-center{
-  display:flex !important;
-  align-items:center !important;
-  justify-content:center !important;
-  min-width:260px !important;
-  min-height:38px !important;
-  padding:0 !important;
-  margin:0 !important;
-  border:0 !important;
-  border-radius:0 !important;
-  background:transparent !important;
-  background-image:none !important;
-  box-shadow:none !important;
-  backdrop-filter:none !important;
-  -webkit-backdrop-filter:none !important;
-  overflow:visible !important;
-  pointer-events:none !important;
-}
-
-html[class*="premium-theme-"] .theme-toggle-center > *{
-  display:none !important;
-  opacity:0 !important;
-  visibility:hidden !important;
-  pointer-events:none !important;
-}
-
-html[class*="premium-theme-"] .theme-toggle-center::before{
-  content:"بِسْمِ ٱللَّٰهِ ٱلرَّحْمَٰنِ ٱلرَّحِيمِ" !important;
-  display:block !important;
-  opacity:1 !important;
-  visibility:visible !important;
-  width:auto !important;
-  max-width:100% !important;
-  font-size:21px !important;
-  line-height:1.25 !important;
-  font-weight:800 !important;
-  letter-spacing:0 !important;
-  text-align:center !important;
-  direction:rtl !important;
-  unicode-bidi:isolate !important;
-  color:var(--bw-premium-gold-soft) !important;
-  -webkit-text-fill-color:var(--bw-premium-gold-soft) !important;
-  text-shadow:
-    0 0 10px rgba(255,240,189,.34),
-    0 0 22px rgba(216,179,95,.20),
-    0 3px 10px rgba(0,0,0,.26) !important;
-}
-
-@media (max-width:700px){
-  html[class*="premium-theme-"] .theme-toggle-center{
-    width:100% !important;
-    min-width:0 !important;
-    min-height:38px !important;
-    justify-content:center !important;
-    text-align:center !important;
-  }
-}
 
 /* ===== EMERALD QURAN — GREEN 3D GLOW BORDERS FOR LARGE APP BLOCKS ===== */
 html.premium-theme-emerald-quran{
@@ -3295,8 +3146,8 @@ html.theme-emerald-quran body:not(.page-themes-pro) .ayah-card:hover{
 }
 
 
-/* ===== BARAKAWAY PRO GLOW TOGGLE — FIXED DESKTOP + MOBILE ===== */
-/* Default: Glow On. Off state is supported by unchecked header switch input or by .premium-glow-off/.glow-off on html/body. */
+/* ===== BARAKAWAY PRO GLOW TOGGLE — CLEAN FINAL ===== */
+/* Default: Glow On. Off state: html/body .premium-glow-off or .glow-off, or unchecked existing header switch input. */
 
 html[class*="premium-theme-"]{
   --bw-pro-edge-glow:
@@ -3305,14 +3156,12 @@ html[class*="premium-theme-"]{
     inset 0 0 142px rgba(216,179,95,.10);
 }
 
-/* Keep only the outer application/container inward glow */
 html[class*="premium-theme-"] body:not(.page-themes-pro) .container{
   box-shadow:
     var(--bw-premium-shadow),
     var(--bw-pro-edge-glow) !important;
 }
 
-/* OFF: remove only inward edge glow */
 html[class*="premium-theme-"].premium-glow-off body:not(.page-themes-pro) .container,
 html[class*="premium-theme-"].glow-off body:not(.page-themes-pro) .container,
 body.premium-glow-off .container,
@@ -3324,10 +3173,13 @@ html[class*="premium-theme-"] body:not(.page-themes-pro):has(.theme-switch input
   box-shadow:var(--bw-premium-shadow) !important;
 }
 
-/* Top replacement area: hide Bismillah text and build Glow toggle UI */
+/* Hide all old PRO Bismillah text containers and render Glow switch instead */
 html[class*="premium-theme-"] body:not(.page-themes-pro) .desktop-theme-toggle,
+html[class*="premium-theme-"] body:not(.page-themes-pro) .desktop-theme-toggle-inner,
 html[class*="premium-theme-"] body:not(.page-themes-pro) .mobile-theme-toggle,
+html[class*="premium-theme-"] body:not(.page-themes-pro) .mobile-theme-toggle-inner,
 html[class*="premium-theme-"] body:not(.page-themes-pro) .theme-toggle,
+html[class*="premium-theme-"] body:not(.page-themes-pro) .theme-toggle-inner,
 html[class*="premium-theme-"] body:not(.page-themes-pro) .theme-mode-toggle,
 html[class*="premium-theme-"] body:not(.page-themes-pro) .mode-toggle{
   display:inline-flex !important;
@@ -3349,20 +3201,30 @@ html[class*="premium-theme-"] body:not(.page-themes-pro) .mode-toggle{
   cursor:pointer !important;
   text-decoration:none !important;
   overflow:hidden !important;
+  direction:ltr !important;
 }
 
-/* Hide old text content, including Bismillah injected by earlier CSS/HTML */
+/* Remove old labels/text without hiding the actual switch input functionality */
 html[class*="premium-theme-"] body:not(.page-themes-pro) .desktop-theme-toggle *,
+html[class*="premium-theme-"] body:not(.page-themes-pro) .desktop-theme-toggle-inner *,
 html[class*="premium-theme-"] body:not(.page-themes-pro) .mobile-theme-toggle *,
+html[class*="premium-theme-"] body:not(.page-themes-pro) .mobile-theme-toggle-inner *,
 html[class*="premium-theme-"] body:not(.page-themes-pro) .theme-toggle *,
+html[class*="premium-theme-"] body:not(.page-themes-pro) .theme-toggle-inner *,
 html[class*="premium-theme-"] body:not(.page-themes-pro) .theme-mode-toggle *,
 html[class*="premium-theme-"] body:not(.page-themes-pro) .mode-toggle *{
   font-size:0 !important;
+  color:transparent !important;
+  text-shadow:none !important;
 }
 
+/* Cover direct text nodes inside the old Bismillah area */
 html[class*="premium-theme-"] body:not(.page-themes-pro) .desktop-theme-toggle::before,
+html[class*="premium-theme-"] body:not(.page-themes-pro) .desktop-theme-toggle-inner::before,
 html[class*="premium-theme-"] body:not(.page-themes-pro) .mobile-theme-toggle::before,
+html[class*="premium-theme-"] body:not(.page-themes-pro) .mobile-theme-toggle-inner::before,
 html[class*="premium-theme-"] body:not(.page-themes-pro) .theme-toggle::before,
+html[class*="premium-theme-"] body:not(.page-themes-pro) .theme-toggle-inner::before,
 html[class*="premium-theme-"] body:not(.page-themes-pro) .theme-mode-toggle::before,
 html[class*="premium-theme-"] body:not(.page-themes-pro) .mode-toggle::before{
   content:"Glow On" !important;
@@ -3376,8 +3238,11 @@ html[class*="premium-theme-"] body:not(.page-themes-pro) .mode-toggle::before{
 }
 
 html[class*="premium-theme-"] body:not(.page-themes-pro) .desktop-theme-toggle::after,
+html[class*="premium-theme-"] body:not(.page-themes-pro) .desktop-theme-toggle-inner::after,
 html[class*="premium-theme-"] body:not(.page-themes-pro) .mobile-theme-toggle::after,
+html[class*="premium-theme-"] body:not(.page-themes-pro) .mobile-theme-toggle-inner::after,
 html[class*="premium-theme-"] body:not(.page-themes-pro) .theme-toggle::after,
+html[class*="premium-theme-"] body:not(.page-themes-pro) .theme-toggle-inner::after,
 html[class*="premium-theme-"] body:not(.page-themes-pro) .theme-mode-toggle::after,
 html[class*="premium-theme-"] body:not(.page-themes-pro) .mode-toggle::after{
   content:"" !important;
@@ -3394,60 +3259,85 @@ html[class*="premium-theme-"] body:not(.page-themes-pro) .mode-toggle::after{
     0 0 16px rgba(110,231,183,.32) !important;
 }
 
-/* OFF visual label + switch knob */
 html[class*="premium-theme-"].premium-glow-off body:not(.page-themes-pro) .desktop-theme-toggle::before,
+html[class*="premium-theme-"].premium-glow-off body:not(.page-themes-pro) .desktop-theme-toggle-inner::before,
 html[class*="premium-theme-"].premium-glow-off body:not(.page-themes-pro) .mobile-theme-toggle::before,
+html[class*="premium-theme-"].premium-glow-off body:not(.page-themes-pro) .mobile-theme-toggle-inner::before,
 html[class*="premium-theme-"].premium-glow-off body:not(.page-themes-pro) .theme-toggle::before,
+html[class*="premium-theme-"].premium-glow-off body:not(.page-themes-pro) .theme-toggle-inner::before,
 html[class*="premium-theme-"].premium-glow-off body:not(.page-themes-pro) .theme-mode-toggle::before,
 html[class*="premium-theme-"].premium-glow-off body:not(.page-themes-pro) .mode-toggle::before,
 html[class*="premium-theme-"].glow-off body:not(.page-themes-pro) .desktop-theme-toggle::before,
+html[class*="premium-theme-"].glow-off body:not(.page-themes-pro) .desktop-theme-toggle-inner::before,
 html[class*="premium-theme-"].glow-off body:not(.page-themes-pro) .mobile-theme-toggle::before,
+html[class*="premium-theme-"].glow-off body:not(.page-themes-pro) .mobile-theme-toggle-inner::before,
 html[class*="premium-theme-"].glow-off body:not(.page-themes-pro) .theme-toggle::before,
+html[class*="premium-theme-"].glow-off body:not(.page-themes-pro) .theme-toggle-inner::before,
 html[class*="premium-theme-"].glow-off body:not(.page-themes-pro) .theme-mode-toggle::before,
 html[class*="premium-theme-"].glow-off body:not(.page-themes-pro) .mode-toggle::before,
 body.premium-glow-off .desktop-theme-toggle::before,
+body.premium-glow-off .desktop-theme-toggle-inner::before,
 body.premium-glow-off .mobile-theme-toggle::before,
+body.premium-glow-off .mobile-theme-toggle-inner::before,
 body.premium-glow-off .theme-toggle::before,
+body.premium-glow-off .theme-toggle-inner::before,
 body.premium-glow-off .theme-mode-toggle::before,
 body.premium-glow-off .mode-toggle::before,
 body.glow-off .desktop-theme-toggle::before,
+body.glow-off .desktop-theme-toggle-inner::before,
 body.glow-off .mobile-theme-toggle::before,
+body.glow-off .mobile-theme-toggle-inner::before,
 body.glow-off .theme-toggle::before,
+body.glow-off .theme-toggle-inner::before,
 body.glow-off .theme-mode-toggle::before,
 body.glow-off .mode-toggle::before,
 html[class*="premium-theme-"] body:not(.page-themes-pro):has(.desktop-theme-toggle input:not(:checked)) .desktop-theme-toggle::before,
+html[class*="premium-theme-"] body:not(.page-themes-pro):has(.desktop-theme-toggle input:not(:checked)) .desktop-theme-toggle-inner::before,
 html[class*="premium-theme-"] body:not(.page-themes-pro):has(.mobile-theme-toggle input:not(:checked)) .mobile-theme-toggle::before,
+html[class*="premium-theme-"] body:not(.page-themes-pro):has(.mobile-theme-toggle input:not(:checked)) .mobile-theme-toggle-inner::before,
 html[class*="premium-theme-"] body:not(.page-themes-pro):has(.theme-toggle input:not(:checked)) .theme-toggle::before,
-html[class*="premium-theme-"] body:not(.page-themes-pro):has(.theme-switch input:not(:checked)) .desktop-theme-toggle::before,
-html[class*="premium-theme-"] body:not(.page-themes-pro):has(.theme-switch input:not(:checked)) .mobile-theme-toggle::before{
+html[class*="premium-theme-"] body:not(.page-themes-pro):has(.theme-toggle input:not(:checked)) .theme-toggle-inner::before{
   content:"Glow Off" !important;
 }
 
 html[class*="premium-theme-"].premium-glow-off body:not(.page-themes-pro) .desktop-theme-toggle::after,
+html[class*="premium-theme-"].premium-glow-off body:not(.page-themes-pro) .desktop-theme-toggle-inner::after,
 html[class*="premium-theme-"].premium-glow-off body:not(.page-themes-pro) .mobile-theme-toggle::after,
+html[class*="premium-theme-"].premium-glow-off body:not(.page-themes-pro) .mobile-theme-toggle-inner::after,
 html[class*="premium-theme-"].premium-glow-off body:not(.page-themes-pro) .theme-toggle::after,
+html[class*="premium-theme-"].premium-glow-off body:not(.page-themes-pro) .theme-toggle-inner::after,
 html[class*="premium-theme-"].premium-glow-off body:not(.page-themes-pro) .theme-mode-toggle::after,
 html[class*="premium-theme-"].premium-glow-off body:not(.page-themes-pro) .mode-toggle::after,
 html[class*="premium-theme-"].glow-off body:not(.page-themes-pro) .desktop-theme-toggle::after,
+html[class*="premium-theme-"].glow-off body:not(.page-themes-pro) .desktop-theme-toggle-inner::after,
 html[class*="premium-theme-"].glow-off body:not(.page-themes-pro) .mobile-theme-toggle::after,
+html[class*="premium-theme-"].glow-off body:not(.page-themes-pro) .mobile-theme-toggle-inner::after,
 html[class*="premium-theme-"].glow-off body:not(.page-themes-pro) .theme-toggle::after,
+html[class*="premium-theme-"].glow-off body:not(.page-themes-pro) .theme-toggle-inner::after,
 html[class*="premium-theme-"].glow-off body:not(.page-themes-pro) .theme-mode-toggle::after,
 html[class*="premium-theme-"].glow-off body:not(.page-themes-pro) .mode-toggle::after,
 body.premium-glow-off .desktop-theme-toggle::after,
+body.premium-glow-off .desktop-theme-toggle-inner::after,
 body.premium-glow-off .mobile-theme-toggle::after,
+body.premium-glow-off .mobile-theme-toggle-inner::after,
 body.premium-glow-off .theme-toggle::after,
+body.premium-glow-off .theme-toggle-inner::after,
 body.premium-glow-off .theme-mode-toggle::after,
 body.premium-glow-off .mode-toggle::after,
 body.glow-off .desktop-theme-toggle::after,
+body.glow-off .desktop-theme-toggle-inner::after,
 body.glow-off .mobile-theme-toggle::after,
+body.glow-off .mobile-theme-toggle-inner::after,
 body.glow-off .theme-toggle::after,
+body.glow-off .theme-toggle-inner::after,
 body.glow-off .theme-mode-toggle::after,
 body.glow-off .mode-toggle::after,
 html[class*="premium-theme-"] body:not(.page-themes-pro):has(.desktop-theme-toggle input:not(:checked)) .desktop-theme-toggle::after,
+html[class*="premium-theme-"] body:not(.page-themes-pro):has(.desktop-theme-toggle input:not(:checked)) .desktop-theme-toggle-inner::after,
 html[class*="premium-theme-"] body:not(.page-themes-pro):has(.mobile-theme-toggle input:not(:checked)) .mobile-theme-toggle::after,
+html[class*="premium-theme-"] body:not(.page-themes-pro):has(.mobile-theme-toggle input:not(:checked)) .mobile-theme-toggle-inner::after,
 html[class*="premium-theme-"] body:not(.page-themes-pro):has(.theme-toggle input:not(:checked)) .theme-toggle::after,
-html[class*="premium-theme-"] body:not(.page-themes-pro):has(.theme-switch input:not(:checked)) .desktop-theme-toggle::after,
-html[class*="premium-theme-"] body:not(.page-themes-pro):has(.theme-switch input:not(:checked)) .mobile-theme-toggle::after{
+html[class*="premium-theme-"] body:not(.page-themes-pro):has(.theme-toggle input:not(:checked)) .theme-toggle-inner::after{
   background:
     radial-gradient(circle at 11px 50%, #fff 0 8px, transparent 9px),
     linear-gradient(135deg,rgba(54,64,59,.96),rgba(20,26,23,.98)) !important;
@@ -3455,11 +3345,13 @@ html[class*="premium-theme-"] body:not(.page-themes-pro):has(.theme-switch input
   box-shadow:inset 0 1px 2px rgba(0,0,0,.44) !important;
 }
 
-/* Mobile: keep it compact and visible */
 @media(max-width:700px){
   html[class*="premium-theme-"] body:not(.page-themes-pro) .desktop-theme-toggle,
+  html[class*="premium-theme-"] body:not(.page-themes-pro) .desktop-theme-toggle-inner,
   html[class*="premium-theme-"] body:not(.page-themes-pro) .mobile-theme-toggle,
+  html[class*="premium-theme-"] body:not(.page-themes-pro) .mobile-theme-toggle-inner,
   html[class*="premium-theme-"] body:not(.page-themes-pro) .theme-toggle,
+  html[class*="premium-theme-"] body:not(.page-themes-pro) .theme-toggle-inner,
   html[class*="premium-theme-"] body:not(.page-themes-pro) .theme-mode-toggle,
   html[class*="premium-theme-"] body:not(.page-themes-pro) .mode-toggle{
     min-width:142px !important;
@@ -3467,16 +3359,24 @@ html[class*="premium-theme-"] body:not(.page-themes-pro):has(.theme-switch input
     padding:6px 10px !important;
     gap:8px !important;
   }
+
   html[class*="premium-theme-"] body:not(.page-themes-pro) .desktop-theme-toggle::before,
+  html[class*="premium-theme-"] body:not(.page-themes-pro) .desktop-theme-toggle-inner::before,
   html[class*="premium-theme-"] body:not(.page-themes-pro) .mobile-theme-toggle::before,
+  html[class*="premium-theme-"] body:not(.page-themes-pro) .mobile-theme-toggle-inner::before,
   html[class*="premium-theme-"] body:not(.page-themes-pro) .theme-toggle::before,
+  html[class*="premium-theme-"] body:not(.page-themes-pro) .theme-toggle-inner::before,
   html[class*="premium-theme-"] body:not(.page-themes-pro) .theme-mode-toggle::before,
   html[class*="premium-theme-"] body:not(.page-themes-pro) .mode-toggle::before{
     font-size:11px !important;
   }
+
   html[class*="premium-theme-"] body:not(.page-themes-pro) .desktop-theme-toggle::after,
+  html[class*="premium-theme-"] body:not(.page-themes-pro) .desktop-theme-toggle-inner::after,
   html[class*="premium-theme-"] body:not(.page-themes-pro) .mobile-theme-toggle::after,
+  html[class*="premium-theme-"] body:not(.page-themes-pro) .mobile-theme-toggle-inner::after,
   html[class*="premium-theme-"] body:not(.page-themes-pro) .theme-toggle::after,
+  html[class*="premium-theme-"] body:not(.page-themes-pro) .theme-toggle-inner::after,
   html[class*="premium-theme-"] body:not(.page-themes-pro) .theme-mode-toggle::after,
   html[class*="premium-theme-"] body:not(.page-themes-pro) .mode-toggle::after{
     width:38px !important;
