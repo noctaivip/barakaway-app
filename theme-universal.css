@@ -3146,13 +3146,10 @@ html.theme-emerald-quran body:not(.page-themes-pro) .ayah-card:hover{
 }
 
 
-/* ===== BARAKAWAY PRO GLOW TOGGLE — FINAL SEPARATE SWITCH ===== */
-/*
-  Old theme switch is fully hidden only in PRO themes.
-  New switch is injected by pro-glow-toggle.js.
-  No Light Mode / Dark Mode logic is used.
-  Default: Glow On.
-*/
+
+
+/* ===== BARAKAWAY PRO THEME SWITCH -> GLOW ON/OFF FINAL ===== */
+/* Existing top switch is reused. In PRO: Light/Dark is disabled; switch controls only edge glow. */
 
 html[class*="premium-theme-"]{
   --bw-pro-edge-glow:
@@ -3161,34 +3158,43 @@ html[class*="premium-theme-"]{
     inset 0 0 150px rgba(110,231,183,.12);
 }
 
-/* Hide old Light/Dark/Bismillah switch completely in PRO themes */
-html[class*="premium-theme-"] body:not(.page-themes-pro) .desktop-theme-toggle,
-html[class*="premium-theme-"] body:not(.page-themes-pro) .mobile-theme-toggle,
-html[class*="premium-theme-"] body:not(.page-themes-pro) .theme-toggle,
-html[class*="premium-theme-"] body:not(.page-themes-pro) .theme-mode-toggle,
-html[class*="premium-theme-"] body:not(.page-themes-pro) .mode-toggle{
-  display:none !important;
-  visibility:hidden !important;
-  opacity:0 !important;
-  pointer-events:none !important;
+/* PRO remains visually premium/dark even if old light-mode classes appear */
+html[class*="premium-theme-"] body:not(.page-themes-pro),
+html[class*="premium-theme-"].light-mode body:not(.page-themes-pro),
+html[class*="premium-theme-"] body.light-mode:not(.page-themes-pro){
+  background:var(--bw-premium-page) !important;
+  color:var(--bw-premium-text) !important;
 }
 
-/* Glow ON by default */
-html[class*="premium-theme-"] body:not(.page-themes-pro) .container{
-  box-shadow:
-    var(--bw-premium-shadow),
-    var(--bw-pro-edge-glow) !important;
+/* Glow On */
+html[class*="premium-theme-"]:not(.bw-glow-off) body:not(.page-themes-pro) .container,
+html[class*="premium-theme-"] body:not(.page-themes-pro):not(.bw-glow-off) .container{
+  box-shadow:var(--bw-premium-shadow), var(--bw-pro-edge-glow) !important;
   transition:box-shadow .12s linear !important;
 }
 
-/* Glow OFF */
+/* Glow Off */
 html.bw-glow-off[class*="premium-theme-"] body:not(.page-themes-pro) .container,
 html[class*="premium-theme-"] body.bw-glow-off:not(.page-themes-pro) .container{
   box-shadow:var(--bw-premium-shadow) !important;
 }
 
-/* New injected switch */
-.bw-pro-glow-toggle{
+/* Keep existing switch visible */
+html[class*="premium-theme-"] body:not(.page-themes-pro) .desktop-theme-toggle,
+html[class*="premium-theme-"] body:not(.page-themes-pro) .mobile-theme-toggle,
+html[class*="premium-theme-"] body:not(.page-themes-pro) .theme-toggle,
+html[class*="premium-theme-"] body:not(.page-themes-pro) .theme-mode-toggle,
+html[class*="premium-theme-"] body:not(.page-themes-pro) .mode-toggle{
+  display:inline-flex !important;
+  visibility:visible !important;
+  opacity:1 !important;
+  pointer-events:auto !important;
+}
+
+/* Existing switch shell */
+html[class*="premium-theme-"] body:not(.page-themes-pro) .desktop-theme-toggle-inner,
+html[class*="premium-theme-"] body:not(.page-themes-pro) .mobile-theme-toggle-inner,
+html[class*="premium-theme-"] body:not(.page-themes-pro) .theme-toggle-inner{
   display:inline-flex !important;
   align-items:center !important;
   justify-content:center !important;
@@ -3197,21 +3203,18 @@ html[class*="premium-theme-"] body.bw-glow-off:not(.page-themes-pro) .container{
   min-height:40px !important;
   padding:7px 12px !important;
   border-radius:999px !important;
-  border:1.5px solid rgba(110,231,183,.22) !important;
   background:linear-gradient(180deg,rgba(8,34,22,.96),rgba(4,22,14,.985)) !important;
-  box-shadow:
-    0 10px 26px rgba(0,0,0,.24),
-    inset 0 1px 0 rgba(255,255,255,.05),
-    inset 0 0 18px rgba(110,231,183,.14) !important;
-  color:#fff0bd !important;
-  cursor:pointer !important;
-  user-select:none !important;
-  -webkit-tap-highlight-color:transparent !important;
-  font-family:inherit !important;
-  direction:ltr !important;
+  border:1.5px solid rgba(110,231,183,.22) !important;
+  box-shadow:0 10px 26px rgba(0,0,0,.24), inset 0 1px 0 rgba(255,255,255,.05), inset 0 0 18px rgba(110,231,183,.14) !important;
 }
 
-.bw-pro-glow-toggle__label{
+/* JS sets label to Glow On / Glow Off */
+html[class*="premium-theme-"] body:not(.page-themes-pro) .theme-toggle-label,
+html[class*="premium-theme-"] body:not(.page-themes-pro) .desktop-theme-toggle-label,
+html[class*="premium-theme-"] body:not(.page-themes-pro) .mobile-theme-toggle-label,
+html[class*="premium-theme-"] body:not(.page-themes-pro) .desktop-theme-toggle .theme-toggle-label,
+html[class*="premium-theme-"] body:not(.page-themes-pro) .mobile-theme-toggle .theme-toggle-label,
+html[class*="premium-theme-"] body:not(.page-themes-pro) .theme-toggle .theme-toggle-label{
   font-size:12px !important;
   line-height:1 !important;
   font-weight:900 !important;
@@ -3220,51 +3223,145 @@ html[class*="premium-theme-"] body.bw-glow-off:not(.page-themes-pro) .container{
   white-space:nowrap !important;
 }
 
-.bw-pro-glow-toggle__switch{
-  position:relative !important;
-  width:42px !important;
-  height:23px !important;
-  flex:0 0 42px !important;
-  border-radius:999px !important;
+/* Disable old fake pseudo UI; keep real input/switch */
+html[class*="premium-theme-"] body:not(.page-themes-pro) .theme-toggle::before,
+html[class*="premium-theme-"] body:not(.page-themes-pro) .theme-toggle::after,
+html[class*="premium-theme-"] body:not(.page-themes-pro) .desktop-theme-toggle::before,
+html[class*="premium-theme-"] body:not(.page-themes-pro) .desktop-theme-toggle::after,
+html[class*="premium-theme-"] body:not(.page-themes-pro) .mobile-theme-toggle::before,
+html[class*="premium-theme-"] body:not(.page-themes-pro) .mobile-theme-toggle::after,
+html[class*="premium-theme-"] body:not(.page-themes-pro) .theme-toggle-inner::before,
+html[class*="premium-theme-"] body:not(.page-themes-pro) .theme-toggle-inner::after,
+html[class*="premium-theme-"] body:not(.page-themes-pro) .desktop-theme-toggle-inner::before,
+html[class*="premium-theme-"] body:not(.page-themes-pro) .desktop-theme-toggle-inner::after,
+html[class*="premium-theme-"] body:not(.page-themes-pro) .mobile-theme-toggle-inner::before,
+html[class*="premium-theme-"] body:not(.page-themes-pro) .mobile-theme-toggle-inner::after{
+  content:none !important;
+}
+
+/* Glow On switch visual */
+html[class*="premium-theme-"] body:not(.page-themes-pro) .theme-switch,
+html[class*="premium-theme-"] body:not(.page-themes-pro) .switch{
   background:linear-gradient(135deg,rgba(110,231,183,.92),rgba(45,122,70,.88)) !important;
   border:1px solid rgba(110,231,183,.34) !important;
   box-shadow:0 0 14px rgba(110,231,183,.26), inset 0 1px 2px rgba(0,0,0,.24) !important;
 }
 
-.bw-pro-glow-toggle__switch::before{
-  content:"" !important;
-  position:absolute !important;
-  top:50% !important;
-  right:3px !important;
-  width:17px !important;
-  height:17px !important;
-  transform:translateY(-50%) !important;
-  border-radius:50% !important;
-  background:#fff !important;
-  box-shadow:0 2px 8px rgba(0,0,0,.24) !important;
-}
-
-html.bw-glow-off .bw-pro-glow-toggle__switch,
-body.bw-glow-off .bw-pro-glow-toggle__switch{
+/* Glow Off switch visual */
+html.bw-glow-off[class*="premium-theme-"] body:not(.page-themes-pro) .theme-switch,
+html.bw-glow-off[class*="premium-theme-"] body:not(.page-themes-pro) .switch,
+html[class*="premium-theme-"] body.bw-glow-off:not(.page-themes-pro) .theme-switch,
+html[class*="premium-theme-"] body.bw-glow-off:not(.page-themes-pro) .switch{
   background:linear-gradient(135deg,#39443f,#202622) !important;
   border-color:rgba(255,255,255,.12) !important;
   box-shadow:inset 0 1px 2px rgba(0,0,0,.44) !important;
 }
 
-html.bw-glow-off .bw-pro-glow-toggle__switch::before,
-body.bw-glow-off .bw-pro-glow-toggle__switch::before{
-  right:auto !important;
-  left:3px !important;
-}
-
 @media(max-width:700px){
-  .bw-pro-glow-toggle{
+  html[class*="premium-theme-"] body:not(.page-themes-pro) .desktop-theme-toggle-inner,
+  html[class*="premium-theme-"] body:not(.page-themes-pro) .mobile-theme-toggle-inner,
+  html[class*="premium-theme-"] body:not(.page-themes-pro) .theme-toggle-inner{
     min-width:132px !important;
     min-height:38px !important;
     padding:6px 10px !important;
     gap:8px !important;
   }
-  .bw-pro-glow-toggle__label{
+  html[class*="premium-theme-"] body:not(.page-themes-pro) .theme-toggle-label,
+  html[class*="premium-theme-"] body:not(.page-themes-pro) .desktop-theme-toggle-label,
+  html[class*="premium-theme-"] body:not(.page-themes-pro) .mobile-theme-toggle-label{
+    font-size:11px !important;
+  }
+}
+
+/* ===== BARAKAWAY PRO EXISTING SWITCH -> GLOW ON/OFF FINAL ===== */
+/* In PRO: Light/Dark is disabled. Existing switch controls only the inner edge glow. */
+
+html[class*="premium-theme-"]{
+  --bw-pro-edge-glow:
+    inset 0 0 38px rgba(110,231,183,.42),
+    inset 0 0 88px rgba(110,231,183,.24),
+    inset 0 0 150px rgba(110,231,183,.12);
+}
+
+/* PRO stays premium/dark even if old classes are present */
+html[class*="premium-theme-"] body:not(.page-themes-pro),
+html[class*="premium-theme-"].light-mode body:not(.page-themes-pro),
+html[class*="premium-theme-"] body.light-mode:not(.page-themes-pro){
+  background:var(--bw-premium-page) !important;
+  color:var(--bw-premium-text) !important;
+}
+
+/* Glow On */
+html[class*="premium-theme-"]:not(.bw-glow-off) body:not(.page-themes-pro) .container,
+html[class*="premium-theme-"] body:not(.page-themes-pro):not(.bw-glow-off) .container{
+  box-shadow:var(--bw-premium-shadow), var(--bw-pro-edge-glow) !important;
+  transition:box-shadow .12s linear !important;
+}
+
+/* Glow Off */
+html.bw-glow-off[class*="premium-theme-"] body:not(.page-themes-pro) .container,
+html[class*="premium-theme-"] body.bw-glow-off:not(.page-themes-pro) .container{
+  box-shadow:var(--bw-premium-shadow) !important;
+}
+
+/* Existing switch remains visible and becomes Glow switch */
+html[class*="premium-theme-"] body:not(.page-themes-pro) .desktop-theme-toggle,
+html[class*="premium-theme-"] body:not(.page-themes-pro) .mobile-theme-toggle,
+html[class*="premium-theme-"] body:not(.page-themes-pro) .theme-toggle,
+html[class*="premium-theme-"] body:not(.page-themes-pro) .theme-toggle-center{
+  display:flex !important;
+  visibility:visible !important;
+  opacity:1 !important;
+  pointer-events:auto !important;
+}
+
+html[class*="premium-theme-"] body:not(.page-themes-pro) .desktop-theme-toggle-inner{
+  display:inline-flex !important;
+  align-items:center !important;
+  justify-content:center !important;
+  gap:10px !important;
+  min-width:142px !important;
+  min-height:40px !important;
+  padding:7px 12px !important;
+  border-radius:999px !important;
+  background:linear-gradient(180deg,rgba(8,34,22,.96),rgba(4,22,14,.985)) !important;
+  border:1.5px solid rgba(110,231,183,.22) !important;
+  box-shadow:0 10px 26px rgba(0,0,0,.24), inset 0 1px 0 rgba(255,255,255,.05), inset 0 0 18px rgba(110,231,183,.14) !important;
+}
+
+html[class*="premium-theme-"] body:not(.page-themes-pro) .theme-toggle-label{
+  font-size:12px !important;
+  line-height:1 !important;
+  font-weight:900 !important;
+  color:#fff0bd !important;
+  text-shadow:0 0 10px rgba(216,179,95,.30) !important;
+  white-space:nowrap !important;
+}
+
+html[class*="premium-theme-"] body:not(.page-themes-pro) .theme-switch{
+  background:linear-gradient(135deg,rgba(110,231,183,.92),rgba(45,122,70,.88)) !important;
+  border:1px solid rgba(110,231,183,.34) !important;
+  box-shadow:0 0 14px rgba(110,231,183,.26), inset 0 1px 2px rgba(0,0,0,.24) !important;
+}
+
+html.bw-glow-off[class*="premium-theme-"] body:not(.page-themes-pro) .theme-switch,
+html[class*="premium-theme-"] body.bw-glow-off:not(.page-themes-pro) .theme-switch{
+  background:linear-gradient(135deg,#39443f,#202622) !important;
+  border-color:rgba(255,255,255,.12) !important;
+  box-shadow:inset 0 1px 2px rgba(0,0,0,.44) !important;
+}
+
+html[class*="premium-theme-"] body:not(.page-themes-pro) .theme-toggle::before,
+html[class*="premium-theme-"] body:not(.page-themes-pro) .theme-toggle::after,
+html[class*="premium-theme-"] body:not(.page-themes-pro) .desktop-theme-toggle::before,
+html[class*="premium-theme-"] body:not(.page-themes-pro) .desktop-theme-toggle::after,
+html[class*="premium-theme-"] body:not(.page-themes-pro) .desktop-theme-toggle-inner::before,
+html[class*="premium-theme-"] body:not(.page-themes-pro) .desktop-theme-toggle-inner::after{
+  content:none !important;
+}
+
+@media(max-width:700px){
+  html[class*="premium-theme-"] body:not(.page-themes-pro) .theme-toggle-label{
     font-size:11px !important;
   }
 }
