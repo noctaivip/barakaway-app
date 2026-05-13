@@ -1,109 +1,87 @@
-/* BarakaWay Glow Toggle — standalone state, no Light/Dark mode */
+/* BarakaWay PRO Glow Toggle — separate switch, no Light/Dark */
 (function(){
-  const STORAGE_KEY = "barakawayGlowOff";
+  const STORAGE_KEY = "barakawayProGlowOff";
 
   function isPremium(){
-    return /\bpremium-theme-/.test(document.documentElement.className);
+    return document.documentElement.className.indexOf("premium-theme-") !== -1;
   }
 
-  function syncGlowState(off){
-    document.documentElement.classList.toggle("bw-glow-off", off);
-    if(document.body){
-      document.body.classList.toggle("bw-glow-off", off);
-    }
-    try{
-      localStorage.setItem(STORAGE_KEY, off ? "1" : "0");
-    }catch(e){}
+  function isProThemesPage(){
+    return document.body && document.body.classList.contains("page-themes-pro");
   }
 
   function getSavedOff(){
-    try{
-      return localStorage.getItem(STORAGE_KEY) === "1";
-    }catch(e){
-      return false;
-    }
+    try { return localStorage.getItem(STORAGE_KEY) === "1"; }
+    catch(e){ return false; }
   }
 
-  function findGlowToggles(){
-    return Array.from(document.querySelectorAll(
-      ".desktop-theme-toggle, .mobile-theme-toggle, .theme-toggle, .theme-mode-toggle, .mode-toggle"
-    )).filter(Boolean);
-  }
-
-  function removeOldModeSideEffects(){
-    if(!isPremium()) return;
-
-    /* The old switch may still try to toggle light/dark. In premium pages these classes must not drive the glow switch. */
-    document.documentElement.classList.remove("light-mode");
-    if(document.body){
-      document.body.classList.remove("light-mode");
-    }
-    document.documentElement.classList.add("dark-mode");
-    if(document.body){
-      document.body.classList.add("dark-mode");
-    }
-  }
-
-  function updateNativeInputs(off){
-    findGlowToggles().forEach(toggle => {
-      toggle.setAttribute("role", "switch");
-      toggle.setAttribute("aria-label", off ? "Glow Off" : "Glow On");
-      toggle.setAttribute("aria-checked", off ? "false" : "true");
-
-      const inputs = toggle.querySelectorAll("input[type='checkbox'], input[type='radio']");
-      inputs.forEach(input => {
-        input.checked = !off;
-        input.setAttribute("aria-checked", off ? "false" : "true");
-      });
-    });
+  function saveOff(off){
+    try { localStorage.setItem(STORAGE_KEY, off ? "1" : "0"); }
+    catch(e){}
   }
 
   function setGlow(off){
-    removeOldModeSideEffects();
-    syncGlowState(off);
-    updateNativeInputs(off);
+    document.documentElement.classList.toggle("bw-glow-off", off);
+    if(document.body) document.body.classList.toggle("bw-glow-off", off);
+
+    const btn = document.querySelector(".bw-pro-glow-toggle");
+    if(btn){
+      btn.setAttribute("aria-checked", off ? "false" : "true");
+      const label = btn.querySelector(".bw-pro-glow-toggle__label");
+      if(label) label.textContent = off ? "Glow Off" : "Glow On";
+    }
+
+    saveOff(off);
   }
 
-  function toggleGlow(event){
-    const toggle = event.target.closest(".desktop-theme-toggle, .mobile-theme-toggle, .theme-toggle, .theme-mode-toggle, .mode-toggle");
-    if(!toggle || !isPremium()) return;
+  function findAnchor(){
+    return document.querySelector(
+      ".desktop-theme-toggle, .mobile-theme-toggle, .theme-toggle, .theme-mode-toggle, .mode-toggle"
+    );
+  }
 
-    event.preventDefault();
-    event.stopPropagation();
-    if(event.stopImmediatePropagation) event.stopImmediatePropagation();
+  function createToggle(){
+    if(document.querySelector(".bw-pro-glow-toggle")) return;
 
-    const nextOff = !document.documentElement.classList.contains("bw-glow-off");
-    setGlow(nextOff);
+    const old = findAnchor();
+    const btn = document.createElement("button");
+    btn.type = "button";
+    btn.className = "bw-pro-glow-toggle";
+    btn.setAttribute("aria-label", "Glow toggle");
+    btn.setAttribute("role", "switch");
+
+    btn.innerHTML = '<span class="bw-pro-glow-toggle__label">Glow On</span><span class="bw-pro-glow-toggle__switch" aria-hidden="true"></span>';
+
+    btn.addEventListener("click", function(e){
+      e.preventDefault();
+      e.stopPropagation();
+      const off = !document.documentElement.classList.contains("bw-glow-off");
+      setGlow(off);
+    }, true);
+
+    if(old && old.parentNode){
+      old.parentNode.insertBefore(btn, old);
+    }else{
+      const header = document.querySelector("header, .header, .topbar, .top-bar, .app-header, .nav, .navbar");
+      if(header) header.appendChild(btn);
+      else document.body.insertBefore(btn, document.body.firstChild);
+    }
+  }
+
+  function disableOldSwitch(){
+    document.querySelectorAll(".desktop-theme-toggle, .mobile-theme-toggle, .theme-toggle, .theme-mode-toggle, .mode-toggle").forEach(function(el){
+      if(el.classList.contains("bw-pro-glow-toggle")) return;
+      el.setAttribute("aria-hidden", "true");
+      el.setAttribute("tabindex", "-1");
+    });
   }
 
   function init(){
-    if(!isPremium()) return;
+    if(!document.body || !isPremium() || isProThemesPage()) return;
 
+    createToggle();
+    disableOldSwitch();
     setGlow(getSavedOff());
-
-    findGlowToggles().forEach(toggle => {
-      toggle.addEventListener("click", toggleGlow, true);
-      toggle.addEventListener("change", toggleGlow, true);
-      toggle.addEventListener("keydown", function(event){
-        if(event.key === " " || event.key === "Enter"){
-          toggleGlow(event);
-        }
-      }, true);
-    });
-
-    /* Protect against old theme script adding light-mode after click. */
-    const observer = new MutationObserver(function(){
-      if(!isPremium()) return;
-      const off = document.documentElement.classList.contains("bw-glow-off");
-      removeOldModeSideEffects();
-      syncGlowState(off);
-      updateNativeInputs(off);
-    });
-
-    observer.observe(document.documentElement, {attributes:true, attributeFilter:["class"]});
-    if(document.body){
-      observer.observe(document.body, {attributes:true, attributeFilter:["class"]});
-    }
   }
 
   if(document.readyState === "loading"){
