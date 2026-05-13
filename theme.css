@@ -617,52 +617,205 @@ html.premium-theme-rose-soft body:not(.page-themes-pro) *{
   border-color:rgba(255,174,211,.28);
 }
 
+/* ===== ROSE SOFT V3 HARD NO-EMERALD OVERRIDE ===== */
+/*
+  Hard final layer for rose-soft / Розовая гармония.
+  Forces all remaining UI surfaces in this theme to dark-pink.
+  Scope only: rose-soft. Other themes untouched.
+*/
 
+html.premium-theme-rose-soft,
+html.theme-rose-soft,
+body.premium-theme-rose-soft,
+body.theme-rose-soft,
+body.bw-theme-rose-soft{
+  --green:#ff9ac8 !important;
+  --green-strong:#be185d !important;
+  --green-soft:#ffd1e6 !important;
+  --emerald:#ff9ac8 !important;
+  --emerald-strong:#be185d !important;
+  --emerald-soft:#ffd1e6 !important;
+  --islamic-green:#ff9ac8 !important;
+  --premium-green:#ff9ac8 !important;
+  --accent-green:#ff9ac8 !important;
+  --theme-green:#ff9ac8 !important;
 
-/* ===== ROSE SOFT V2 CLEAN PINK ===== */
+  --bg:#1f0714 !important;
+  --surface:#2a0a1b !important;
+  --surface-2:#3a1026 !important;
+  --surface-3:#511735 !important;
+  --border:rgba(255,174,211,.38) !important;
+  --text:#fff7fb !important;
+  --text-soft:#ffd7e8 !important;
 
+  --bw-premium-page:
+    radial-gradient(circle at top center,rgba(255,120,190,.20),transparent 30%),
+    linear-gradient(180deg,#1f0714 0%,#4a0d2a 52%,#16040e 100%) !important;
+
+  --bw-premium-surface:
+    radial-gradient(circle at 85% 0%,rgba(255,210,232,.10),transparent 28%),
+    linear-gradient(145deg,#240817 0%,#3a1026 55%,#641b43 100%) !important;
+
+  --bw-premium-surface-2:
+    radial-gradient(circle at 90% 0%,rgba(255,210,232,.08),transparent 28%),
+    linear-gradient(145deg,#1f0714 0%,#2a0a1b 55%,#3a1026 100%) !important;
+
+  --bw-premium-button:
+    linear-gradient(180deg,#f43f8f 0%,#be185d 55%,#831843 100%) !important;
+
+  --bw-premium-glow:
+    0 0 28px rgba(236,72,153,.36),
+    0 0 78px rgba(190,24,93,.28) !important;
+
+  --bw-premium-inner-glow:
+    inset 0 0 48px rgba(255,174,211,.15) !important;
+
+  --bw-pro-edge-glow:
+    inset 0 0 40px rgba(255,174,211,.38),
+    inset 0 0 92px rgba(236,72,153,.24),
+    inset 0 0 155px rgba(190,24,93,.14) !important;
+}
+
+/* Page base */
 html.premium-theme-rose-soft body:not(.page-themes-pro),
+html.theme-rose-soft body:not(.page-themes-pro),
 body.premium-theme-rose-soft:not(.page-themes-pro),
+body.theme-rose-soft:not(.page-themes-pro),
 body.bw-theme-rose-soft:not(.page-themes-pro){
   background:
-    radial-gradient(circle at top center,rgba(255,120,190,.18),transparent 28%),
-    linear-gradient(180deg,#2a0717 0%,#4a0d2a 52%,#1b0410 100%) !important;
-}
-
-html.premium-theme-rose-soft :is(.hero,.hero-panel,.hero-card,.home-widget,.top-widget,.main-widget,.prayer-card.active,.today-card,.hero-banner,.intro,.quote,.support-card),
-body.premium-theme-rose-soft :is(.hero,.hero-panel,.hero-card,.home-widget,.top-widget,.main-widget,.prayer-card.active,.today-card,.hero-banner,.intro,.quote,.support-card),
-body.bw-theme-rose-soft :is(.hero,.hero-panel,.hero-card,.home-widget,.top-widget,.main-widget,.prayer-card.active,.today-card,.hero-banner,.intro,.quote,.support-card){
-  background:
-    radial-gradient(circle at 80% 0%,rgba(255,170,220,.10),transparent 26%),
-    linear-gradient(145deg,#2a0918 0%,#4a0d2a 55%,#69173f 100%) !important;
-  border-color:rgba(255,170,220,.38) !important;
-}
-
-html.premium-theme-rose-soft :is(.btn-green,.green-btn,.install-btn,.support-btn,.primary-btn,.action-btn,.hero-action,.prayer-btn,.schedule-btn,.progress-bar),
-body.premium-theme-rose-soft :is(.btn-green,.green-btn,.install-btn,.support-btn,.primary-btn,.action-btn,.hero-action,.prayer-btn,.schedule-btn,.progress-bar),
-body.bw-theme-rose-soft :is(.btn-green,.green-btn,.install-btn,.support-btn,.primary-btn,.action-btn,.hero-action,.prayer-btn,.schedule-btn,.progress-bar){
-  background:linear-gradient(180deg,#ff4fa1 0%,#be185d 48%,#7a123d 100%) !important;
-  border-color:rgba(255,185,225,.44) !important;
+    radial-gradient(circle at top center,rgba(255,120,190,.20),transparent 30%),
+    linear-gradient(180deg,#1f0714 0%,#4a0d2a 52%,#16040e 100%) !important;
   color:#fff7fb !important;
 }
 
-html.premium-theme-rose-soft :is(.app-menu-btn,.quick-link,.menu-card,.feature-card,.category-card),
-body.premium-theme-rose-soft :is(.app-menu-btn,.quick-link,.menu-card,.feature-card,.category-card),
-body.bw-theme-rose-soft :is(.app-menu-btn,.quick-link,.menu-card,.feature-card,.category-card){
+/* Hard override for all visible structural surfaces */
+html.premium-theme-rose-soft body:not(.page-themes-pro) :is(
+  div,section,article,main,aside,header,footer,nav,form,fieldset,details,summary,ul,ol,li
+):not(.leaflet-container):not(.leaflet-pane):not(.leaflet-layer):not(.leaflet-tile-container):not(.leaflet-marker-pane):not(.leaflet-shadow-pane):not(.leaflet-overlay-pane):not(.leaflet-control-container):not(.leaflet-control):not(.leaflet-popup):not(.leaflet-popup-content-wrapper):not(.leaflet-popup-tip),
+body.premium-theme-rose-soft:not(.page-themes-pro) :is(
+  div,section,article,main,aside,header,footer,nav,form,fieldset,details,summary,ul,ol,li
+):not(.leaflet-container):not(.leaflet-pane):not(.leaflet-layer):not(.leaflet-tile-container):not(.leaflet-marker-pane):not(.leaflet-shadow-pane):not(.leaflet-overlay-pane):not(.leaflet-control-container):not(.leaflet-control):not(.leaflet-popup):not(.leaflet-popup-content-wrapper):not(.leaflet-popup-tip),
+body.bw-theme-rose-soft:not(.page-themes-pro) :is(
+  div,section,article,main,aside,header,footer,nav,form,fieldset,details,summary,ul,ol,li
+):not(.leaflet-container):not(.leaflet-pane):not(.leaflet-layer):not(.leaflet-tile-container):not(.leaflet-marker-pane):not(.leaflet-shadow-pane):not(.leaflet-overlay-pane):not(.leaflet-control-container):not(.leaflet-control):not(.leaflet-popup):not(.leaflet-popup-content-wrapper):not(.leaflet-popup-tip){
   background:
-    radial-gradient(circle at 85% 0%,rgba(255,185,225,.10),transparent 24%),
-    linear-gradient(145deg,#350b1f 0%,#4a0d2a 58%,#6d1743 100%) !important;
+    radial-gradient(circle at 88% 0%,rgba(255,210,232,.075),transparent 28%),
+    linear-gradient(145deg,#240817 0%,#331023 55%,#491431 100%) !important;
+  border-color:rgba(255,174,211,.34) !important;
+  color:#fff7fb !important;
 }
 
-html.premium-theme-rose-soft :is(.bottom-nav,.bottom-bar,.bottom-navigation,.nav-shell,.mobile-nav),
-body.premium-theme-rose-soft :is(.bottom-nav,.bottom-bar,.bottom-navigation,.nav-shell,.mobile-nav),
-body.bw-theme-rose-soft :is(.bottom-nav,.bottom-bar,.bottom-navigation,.nav-shell,.mobile-nav){
+/* Main containers slightly deeper */
+html.premium-theme-rose-soft body:not(.page-themes-pro) :is(.container,.page,.page-shell,.app-shell,main,.content),
+body.premium-theme-rose-soft:not(.page-themes-pro) :is(.container,.page,.page-shell,.app-shell,main,.content),
+body.bw-theme-rose-soft:not(.page-themes-pro) :is(.container,.page,.page-shell,.app-shell,main,.content){
+  background:
+    radial-gradient(circle at top center,rgba(255,174,211,.12),transparent 34%),
+    linear-gradient(180deg,#240817 0%,#3a1026 52%,#1a0510 100%) !important;
+}
+
+/* Hero / prayer / support / dropdown / menu cards */
+html.premium-theme-rose-soft body:not(.page-themes-pro) :is(
+  [class*="hero"],[class*="Hero"],[class*="prayer"],[class*="Prayer"],[class*="namaz"],[class*="Namaz"],
+  [class*="salah"],[class*="Salah"],[class*="support"],[class*="Support"],[class*="donat"],[class*="Donat"],
+  [class*="sadaqa"],[class*="Sadaqa"],[class*="sadaka"],[class*="Sadaka"],[class*="dropdown"],[class*="Dropdown"],
+  [class*="accordion"],[class*="Accordion"],[class*="menu"],[class*="Menu"],[class*="quick"],[class*="Quick"],
+  [class*="card"],[class*="Card"],[class*="panel"],[class*="Panel"],[class*="box"],[class*="Box"],[class*="widget"],[class*="Widget"],
+  [class*="row"],[class*="Row"],[class*="item"],[class*="Item"],[class*="block"],[class*="Block"]
+),
+body.premium-theme-rose-soft:not(.page-themes-pro) :is(
+  [class*="hero"],[class*="Hero"],[class*="prayer"],[class*="Prayer"],[class*="namaz"],[class*="Namaz"],
+  [class*="salah"],[class*="Salah"],[class*="support"],[class*="Support"],[class*="donat"],[class*="Donat"],
+  [class*="sadaqa"],[class*="Sadaqa"],[class*="sadaka"],[class*="Sadaka"],[class*="dropdown"],[class*="Dropdown"],
+  [class*="accordion"],[class*="Accordion"],[class*="menu"],[class*="Menu"],[class*="quick"],[class*="Quick"],
+  [class*="card"],[class*="Card"],[class*="panel"],[class*="Panel"],[class*="box"],[class*="Box"],[class*="widget"],[class*="Widget"],
+  [class*="row"],[class*="Row"],[class*="item"],[class*="Item"],[class*="block"],[class*="Block"]
+),
+body.bw-theme-rose-soft:not(.page-themes-pro) :is(
+  [class*="hero"],[class*="Hero"],[class*="prayer"],[class*="Prayer"],[class*="namaz"],[class*="Namaz"],
+  [class*="salah"],[class*="Salah"],[class*="support"],[class*="Support"],[class*="donat"],[class*="Donat"],
+  [class*="sadaqa"],[class*="Sadaqa"],[class*="sadaka"],[class*="Sadaka"],[class*="dropdown"],[class*="Dropdown"],
+  [class*="accordion"],[class*="Accordion"],[class*="menu"],[class*="Menu"],[class*="quick"],[class*="Quick"],
+  [class*="card"],[class*="Card"],[class*="panel"],[class*="Panel"],[class*="box"],[class*="Box"],[class*="widget"],[class*="Widget"],
+  [class*="row"],[class*="Row"],[class*="item"],[class*="Item"],[class*="block"],[class*="Block"]
+){
+  background:
+    radial-gradient(circle at 85% 0%,rgba(255,210,232,.09),transparent 26%),
+    linear-gradient(145deg,#2a0918 0%,#4a0d2a 55%,#69173f 100%) !important;
+  border-color:rgba(255,174,211,.40) !important;
+  color:#fff7fb !important;
+  box-shadow:
+    inset 0 0 24px rgba(255,174,211,.08),
+    0 0 18px rgba(190,24,93,.12) !important;
+}
+
+/* Buttons / pills / badges / active nav */
+html.premium-theme-rose-soft body:not(.page-themes-pro) :is(
+  button,a.btn,.btn,.chip,.badge,.pill,.tag,.tab,.filter-btn,.progress-bar,
+  [class*="btn"],[class*="Btn"],[class*="button"],[class*="Button"],[class*="badge"],[class*="Badge"],[class*="pill"],[class*="Pill"],
+  [class*="active"],[class*="Active"]
+):not(.theme-switch),
+body.premium-theme-rose-soft:not(.page-themes-pro) :is(
+  button,a.btn,.btn,.chip,.badge,.pill,.tag,.tab,.filter-btn,.progress-bar,
+  [class*="btn"],[class*="Btn"],[class*="button"],[class*="Button"],[class*="badge"],[class*="Badge"],[class*="pill"],[class*="Pill"],
+  [class*="active"],[class*="Active"]
+):not(.theme-switch),
+body.bw-theme-rose-soft:not(.page-themes-pro) :is(
+  button,a.btn,.btn,.chip,.badge,.pill,.tag,.tab,.filter-btn,.progress-bar,
+  [class*="btn"],[class*="Btn"],[class*="button"],[class*="Button"],[class*="badge"],[class*="Badge"],[class*="pill"],[class*="Pill"],
+  [class*="active"],[class*="Active"]
+):not(.theme-switch){
+  background:
+    linear-gradient(180deg,#ff4fa1 0%,#be185d 55%,#831843 100%) !important;
+  border-color:rgba(255,190,222,.46) !important;
+  color:#fff7fb !important;
+  box-shadow:
+    inset 0 1px 0 rgba(255,255,255,.10),
+    0 10px 22px rgba(190,24,93,.18) !important;
+}
+
+/* Inputs */
+html.premium-theme-rose-soft body:not(.page-themes-pro) :is(input:not(.theme-switch),textarea,select),
+body.premium-theme-rose-soft:not(.page-themes-pro) :is(input:not(.theme-switch),textarea,select),
+body.bw-theme-rose-soft:not(.page-themes-pro) :is(input:not(.theme-switch),textarea,select){
+  background:linear-gradient(145deg,#2a0a1b,#511735) !important;
+  border-color:rgba(255,174,211,.42) !important;
+  color:#fff7fb !important;
+}
+
+/* Logo and text accents */
+html.premium-theme-rose-soft body:not(.page-themes-pro) :is(h1 span,.brand-accent,.accent,strong,a,.logo span),
+body.premium-theme-rose-soft:not(.page-themes-pro) :is(h1 span,.brand-accent,.accent,strong,a,.logo span),
+body.bw-theme-rose-soft:not(.page-themes-pro) :is(h1 span,.brand-accent,.accent,strong,a,.logo span){
+  color:#ffb6d5 !important;
+  text-shadow:0 0 18px rgba(236,72,153,.22) !important;
+}
+
+/* Bottom nav */
+html.premium-theme-rose-soft body:not(.page-themes-pro) :is(.bottom-nav,.bottom-bar,.bottom-navigation,.nav-shell,.mobile-nav,[class*="bottom"],[class*="Bottom"]),
+body.premium-theme-rose-soft:not(.page-themes-pro) :is(.bottom-nav,.bottom-bar,.bottom-navigation,.nav-shell,.mobile-nav,[class*="bottom"],[class*="Bottom"]),
+body.bw-theme-rose-soft:not(.page-themes-pro) :is(.bottom-nav,.bottom-bar,.bottom-navigation,.nav-shell,.mobile-nav,[class*="bottom"],[class*="Bottom"]){
   background:linear-gradient(180deg,#5a1738 0%,#3a1026 100%) !important;
   border-color:rgba(255,185,225,.34) !important;
 }
 
-html.premium-theme-rose-soft :is(.nav-item.active,.bottom-nav .active,.mobile-nav .active),
-body.premium-theme-rose-soft :is(.nav-item.active,.bottom-nav .active,.mobile-nav .active),
-body.bw-theme-rose-soft :is(.nav-item.active,.bottom-nav .active,.mobile-nav .active){
-  background:linear-gradient(180deg,#ff4fa1 0%,#be185d 100%) !important;
+/* Glow switch */
+html.premium-theme-rose-soft body:not(.page-themes-pro) input.theme-switch,
+body.premium-theme-rose-soft:not(.page-themes-pro) input.theme-switch,
+body.bw-theme-rose-soft:not(.page-themes-pro) input.theme-switch{
+  background:linear-gradient(135deg,#f472b6,#be185d) !important;
+  border-color:rgba(255,190,222,.46) !important;
+}
+
+html.bw-glow-off.premium-theme-rose-soft body:not(.page-themes-pro) input.theme-switch,
+html.premium-theme-rose-soft body.bw-glow-off:not(.page-themes-pro) input.theme-switch,
+body.bw-glow-off.premium-theme-rose-soft:not(.page-themes-pro) input.theme-switch,
+body.bw-glow-off.bw-theme-rose-soft:not(.page-themes-pro) input.theme-switch{
+  background:linear-gradient(135deg,#4a2434,#1f141b) !important;
+  border-color:rgba(255,255,255,.14) !important;
+}
+
+/* Keep real media/map/compass artwork from being painted */
+html.premium-theme-rose-soft body:not(.page-themes-pro) :is(img,canvas,video,iframe,.leaflet-container,.leaflet-container *,#map,#map *,[class*="map"],[class*="Map"],[class*="compass"],[class*="Compass"]){
+  background:initial;
 }
