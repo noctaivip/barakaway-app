@@ -3146,245 +3146,123 @@ html.theme-emerald-quran body:not(.page-themes-pro) .ayah-card:hover{
 }
 
 
-/* ===== BARAKAWAY PRO GLOW TOGGLE — CLEAN FINAL ===== */
-/* Default: Glow On. Off state: html/body .premium-glow-off or .glow-off, or unchecked existing header switch input. */
 
+
+
+
+
+
+/* ===== BARAKAWAY REAL LIGHT/GLOW SWITCH ===== */
+
+/* DEFAULT STATE = GLOW ENABLED */
 html[class*="premium-theme-"]{
   --bw-pro-edge-glow:
     inset 0 0 34px rgba(110,231,183,.38),
-    inset 0 0 84px rgba(110,231,183,.24),
+    inset 0 0 84px rgba(110,231,183,.22),
     inset 0 0 142px rgba(216,179,95,.10);
 }
 
+/* Glow ON */
 html[class*="premium-theme-"] body:not(.page-themes-pro) .container{
   box-shadow:
     var(--bw-premium-shadow),
     var(--bw-pro-edge-glow) !important;
+  transition:
+    box-shadow .12s ease,
+    background .12s ease,
+    border-color .12s ease !important;
 }
 
-html[class*="premium-theme-"].premium-glow-off body:not(.page-themes-pro) .container,
-html[class*="premium-theme-"].glow-off body:not(.page-themes-pro) .container,
-body.premium-glow-off .container,
-body.glow-off .container,
-html[class*="premium-theme-"] body:not(.page-themes-pro):has(.desktop-theme-toggle input:not(:checked)) .container,
-html[class*="premium-theme-"] body:not(.page-themes-pro):has(.mobile-theme-toggle input:not(:checked)) .container,
-html[class*="premium-theme-"] body:not(.page-themes-pro):has(.theme-toggle input:not(:checked)) .container,
-html[class*="premium-theme-"] body:not(.page-themes-pro):has(.theme-switch input:not(:checked)) .container{
-  box-shadow:var(--bw-premium-shadow) !important;
-}
-
-/* Hide all old PRO Bismillah text containers and render Glow switch instead */
-html[class*="premium-theme-"] body:not(.page-themes-pro) .desktop-theme-toggle,
-html[class*="premium-theme-"] body:not(.page-themes-pro) .desktop-theme-toggle-inner,
-html[class*="premium-theme-"] body:not(.page-themes-pro) .mobile-theme-toggle,
-html[class*="premium-theme-"] body:not(.page-themes-pro) .mobile-theme-toggle-inner,
-html[class*="premium-theme-"] body:not(.page-themes-pro) .theme-toggle,
-html[class*="premium-theme-"] body:not(.page-themes-pro) .theme-toggle-inner,
-html[class*="premium-theme-"] body:not(.page-themes-pro) .theme-mode-toggle,
-html[class*="premium-theme-"] body:not(.page-themes-pro) .mode-toggle{
-  display:inline-flex !important;
-  align-items:center !important;
-  justify-content:center !important;
-  gap:10px !important;
-  min-width:174px !important;
-  min-height:42px !important;
-  padding:7px 12px !important;
-  border-radius:999px !important;
-  background:linear-gradient(180deg,rgba(8,34,22,.96),rgba(4,22,14,.985)) !important;
-  border:1.5px solid rgba(110,231,183,.24) !important;
+/* SWITCHED = LIGHT MODE */
+html[class*="premium-theme-"] body:not(.page-themes-pro):has(.theme-toggle input:checked) .container,
+html[class*="premium-theme-"] body:not(.page-themes-pro):has(.desktop-theme-toggle input:checked) .container,
+html[class*="premium-theme-"] body:not(.page-themes-pro):has(.mobile-theme-toggle input:checked) .container{
   box-shadow:
-    0 10px 26px rgba(0,0,0,.24),
-    inset 0 1px 0 rgba(255,255,255,.06),
-    inset 0 0 18px rgba(110,231,183,.18) !important;
-  color:#fff0bd !important;
-  pointer-events:auto !important;
-  cursor:pointer !important;
-  text-decoration:none !important;
-  overflow:hidden !important;
-  direction:ltr !important;
+    0 18px 42px rgba(18,34,24,.08) !important;
 }
 
-/* Remove old labels/text without hiding the actual switch input functionality */
-html[class*="premium-theme-"] body:not(.page-themes-pro) .desktop-theme-toggle *,
-html[class*="premium-theme-"] body:not(.page-themes-pro) .desktop-theme-toggle-inner *,
-html[class*="premium-theme-"] body:not(.page-themes-pro) .mobile-theme-toggle *,
-html[class*="premium-theme-"] body:not(.page-themes-pro) .mobile-theme-toggle-inner *,
-html[class*="premium-theme-"] body:not(.page-themes-pro) .theme-toggle *,
-html[class*="premium-theme-"] body:not(.page-themes-pro) .theme-toggle-inner *,
-html[class*="premium-theme-"] body:not(.page-themes-pro) .theme-mode-toggle *,
-html[class*="premium-theme-"] body:not(.page-themes-pro) .mode-toggle *{
-  font-size:0 !important;
-  color:transparent !important;
+/* REAL LIGHT MODE VISUAL */
+html[class*="premium-theme-"] body:not(.page-themes-pro):has(.theme-toggle input:checked),
+html[class*="premium-theme-"] body:not(.page-themes-pro):has(.desktop-theme-toggle input:checked),
+html[class*="premium-theme-"] body:not(.page-themes-pro):has(.mobile-theme-toggle input:checked){
+  background:
+    linear-gradient(180deg,#f3f7f5 0%,#edf3f0 100%) !important;
+  color:#172019 !important;
+}
+
+/* light cards */
+html[class*="premium-theme-"] body:not(.page-themes-pro):has(.theme-toggle input:checked) .card,
+html[class*="premium-theme-"] body:not(.page-themes-pro):has(.desktop-theme-toggle input:checked) .card,
+html[class*="premium-theme-"] body:not(.page-themes-pro):has(.mobile-theme-toggle input:checked) .card,
+html[class*="premium-theme-"] body:not(.page-themes-pro):has(.theme-toggle input:checked) .panel,
+html[class*="premium-theme-"] body:not(.page-themes-pro):has(.desktop-theme-toggle input:checked) .panel,
+html[class*="premium-theme-"] body:not(.page-themes-pro):has(.mobile-theme-toggle input:checked) .panel,
+html[class*="premium-theme-"] body:not(.page-themes-pro):has(.theme-toggle input:checked) .block,
+html[class*="premium-theme-"] body:not(.page-themes-pro):has(.desktop-theme-toggle input:checked) .block,
+html[class*="premium-theme-"] body:not(.page-themes-pro):has(.mobile-theme-toggle input:checked) .block{
+  background:
+    linear-gradient(180deg,#ffffff 0%,#fbfdfc 100%) !important;
+  border:1.5px solid #cfded5 !important;
+  color:#172019 !important;
+  box-shadow:
+    0 12px 28px rgba(18,34,24,.08) !important;
+}
+
+/* light text */
+html[class*="premium-theme-"] body:not(.page-themes-pro):has(.theme-toggle input:checked) h1,
+html[class*="premium-theme-"] body:not(.page-themes-pro):has(.desktop-theme-toggle input:checked) h1,
+html[class*="premium-theme-"] body:not(.page-themes-pro):has(.mobile-theme-toggle input:checked) h1,
+html[class*="premium-theme-"] body:not(.page-themes-pro):has(.theme-toggle input:checked) h2,
+html[class*="premium-theme-"] body:not(.page-themes-pro):has(.desktop-theme-toggle input:checked) h2,
+html[class*="premium-theme-"] body:not(.page-themes-pro):has(.mobile-theme-toggle input:checked) h2,
+html[class*="premium-theme-"] body:not(.page-themes-pro):has(.theme-toggle input:checked) h3,
+html[class*="premium-theme-"] body:not(.page-themes-pro):has(.desktop-theme-toggle input:checked) h3,
+html[class*="premium-theme-"] body:not(.page-themes-pro):has(.mobile-theme-toggle input:checked) h3,
+html[class*="premium-theme-"] body:not(.page-themes-pro):has(.theme-toggle input:checked) p,
+html[class*="premium-theme-"] body:not(.page-themes-pro):has(.desktop-theme-toggle input:checked) p,
+html[class*="premium-theme-"] body:not(.page-themes-pro):has(.mobile-theme-toggle input:checked) p,
+html[class*="premium-theme-"] body:not(.page-themes-pro):has(.theme-toggle input:checked) span,
+html[class*="premium-theme-"] body:not(.page-themes-pro):has(.desktop-theme-toggle input:checked) span,
+html[class*="premium-theme-"] body:not(.page-themes-pro):has(.mobile-theme-toggle input:checked) span{
+  color:#172019 !important;
   text-shadow:none !important;
 }
 
-/* Cover direct text nodes inside the old Bismillah area */
-html[class*="premium-theme-"] body:not(.page-themes-pro) .desktop-theme-toggle::before,
-html[class*="premium-theme-"] body:not(.page-themes-pro) .desktop-theme-toggle-inner::before,
-html[class*="premium-theme-"] body:not(.page-themes-pro) .mobile-theme-toggle::before,
-html[class*="premium-theme-"] body:not(.page-themes-pro) .mobile-theme-toggle-inner::before,
-html[class*="premium-theme-"] body:not(.page-themes-pro) .theme-toggle::before,
-html[class*="premium-theme-"] body:not(.page-themes-pro) .theme-toggle-inner::before,
-html[class*="premium-theme-"] body:not(.page-themes-pro) .theme-mode-toggle::before,
-html[class*="premium-theme-"] body:not(.page-themes-pro) .mode-toggle::before{
+/* Hide old Light mode text */
+html[class*="premium-theme-"] .theme-toggle-label,
+html[class*="premium-theme-"] .desktop-theme-toggle-label,
+html[class*="premium-theme-"] .mobile-theme-toggle-label{
+  font-size:0 !important;
+  color:transparent !important;
+  line-height:0 !important;
+}
+
+/* Default label */
+html[class*="premium-theme-"] .theme-toggle-label::after,
+html[class*="premium-theme-"] .desktop-theme-toggle-label::after,
+html[class*="premium-theme-"] .mobile-theme-toggle-label::after{
   content:"Glow On" !important;
+  display:inline-block !important;
   font-size:12px !important;
-  line-height:1 !important;
-  font-weight:950 !important;
-  letter-spacing:.01em !important;
+  font-weight:900 !important;
   color:#fff0bd !important;
-  text-shadow:0 0 12px rgba(216,179,95,.28) !important;
-  white-space:nowrap !important;
 }
 
-html[class*="premium-theme-"] body:not(.page-themes-pro) .desktop-theme-toggle::after,
-html[class*="premium-theme-"] body:not(.page-themes-pro) .desktop-theme-toggle-inner::after,
-html[class*="premium-theme-"] body:not(.page-themes-pro) .mobile-theme-toggle::after,
-html[class*="premium-theme-"] body:not(.page-themes-pro) .mobile-theme-toggle-inner::after,
-html[class*="premium-theme-"] body:not(.page-themes-pro) .theme-toggle::after,
-html[class*="premium-theme-"] body:not(.page-themes-pro) .theme-toggle-inner::after,
-html[class*="premium-theme-"] body:not(.page-themes-pro) .theme-mode-toggle::after,
-html[class*="premium-theme-"] body:not(.page-themes-pro) .mode-toggle::after{
-  content:"" !important;
-  width:42px !important;
-  height:23px !important;
-  border-radius:999px !important;
-  flex:0 0 42px !important;
-  background:
-    radial-gradient(circle at 31px 50%, #fff 0 8px, transparent 9px),
-    linear-gradient(135deg,rgba(110,231,183,.92),rgba(45,122,70,.88)) !important;
-  border:1px solid rgba(110,231,183,.38) !important;
-  box-shadow:
-    inset 0 1px 2px rgba(0,0,0,.26),
-    0 0 16px rgba(110,231,183,.32) !important;
+/* Switched label */
+html[class*="premium-theme-"] body:not(.page-themes-pro):has(.theme-toggle input:checked) .theme-toggle-label::after,
+html[class*="premium-theme-"] body:not(.page-themes-pro):has(.desktop-theme-toggle input:checked) .desktop-theme-toggle-label::after,
+html[class*="premium-theme-"] body:not(.page-themes-pro):has(.mobile-theme-toggle input:checked) .mobile-theme-toggle-label::after{
+  content:"Light Mode" !important;
+  color:#17341f !important;
 }
 
-html[class*="premium-theme-"].premium-glow-off body:not(.page-themes-pro) .desktop-theme-toggle::before,
-html[class*="premium-theme-"].premium-glow-off body:not(.page-themes-pro) .desktop-theme-toggle-inner::before,
-html[class*="premium-theme-"].premium-glow-off body:not(.page-themes-pro) .mobile-theme-toggle::before,
-html[class*="premium-theme-"].premium-glow-off body:not(.page-themes-pro) .mobile-theme-toggle-inner::before,
-html[class*="premium-theme-"].premium-glow-off body:not(.page-themes-pro) .theme-toggle::before,
-html[class*="premium-theme-"].premium-glow-off body:not(.page-themes-pro) .theme-toggle-inner::before,
-html[class*="premium-theme-"].premium-glow-off body:not(.page-themes-pro) .theme-mode-toggle::before,
-html[class*="premium-theme-"].premium-glow-off body:not(.page-themes-pro) .mode-toggle::before,
-html[class*="premium-theme-"].glow-off body:not(.page-themes-pro) .desktop-theme-toggle::before,
-html[class*="premium-theme-"].glow-off body:not(.page-themes-pro) .desktop-theme-toggle-inner::before,
-html[class*="premium-theme-"].glow-off body:not(.page-themes-pro) .mobile-theme-toggle::before,
-html[class*="premium-theme-"].glow-off body:not(.page-themes-pro) .mobile-theme-toggle-inner::before,
-html[class*="premium-theme-"].glow-off body:not(.page-themes-pro) .theme-toggle::before,
-html[class*="premium-theme-"].glow-off body:not(.page-themes-pro) .theme-toggle-inner::before,
-html[class*="premium-theme-"].glow-off body:not(.page-themes-pro) .theme-mode-toggle::before,
-html[class*="premium-theme-"].glow-off body:not(.page-themes-pro) .mode-toggle::before,
-body.premium-glow-off .desktop-theme-toggle::before,
-body.premium-glow-off .desktop-theme-toggle-inner::before,
-body.premium-glow-off .mobile-theme-toggle::before,
-body.premium-glow-off .mobile-theme-toggle-inner::before,
-body.premium-glow-off .theme-toggle::before,
-body.premium-glow-off .theme-toggle-inner::before,
-body.premium-glow-off .theme-mode-toggle::before,
-body.premium-glow-off .mode-toggle::before,
-body.glow-off .desktop-theme-toggle::before,
-body.glow-off .desktop-theme-toggle-inner::before,
-body.glow-off .mobile-theme-toggle::before,
-body.glow-off .mobile-theme-toggle-inner::before,
-body.glow-off .theme-toggle::before,
-body.glow-off .theme-toggle-inner::before,
-body.glow-off .theme-mode-toggle::before,
-body.glow-off .mode-toggle::before,
-html[class*="premium-theme-"] body:not(.page-themes-pro):has(.desktop-theme-toggle input:not(:checked)) .desktop-theme-toggle::before,
-html[class*="premium-theme-"] body:not(.page-themes-pro):has(.desktop-theme-toggle input:not(:checked)) .desktop-theme-toggle-inner::before,
-html[class*="premium-theme-"] body:not(.page-themes-pro):has(.mobile-theme-toggle input:not(:checked)) .mobile-theme-toggle::before,
-html[class*="premium-theme-"] body:not(.page-themes-pro):has(.mobile-theme-toggle input:not(:checked)) .mobile-theme-toggle-inner::before,
-html[class*="premium-theme-"] body:not(.page-themes-pro):has(.theme-toggle input:not(:checked)) .theme-toggle::before,
-html[class*="premium-theme-"] body:not(.page-themes-pro):has(.theme-toggle input:not(:checked)) .theme-toggle-inner::before{
-  content:"Glow Off" !important;
-}
-
-html[class*="premium-theme-"].premium-glow-off body:not(.page-themes-pro) .desktop-theme-toggle::after,
-html[class*="premium-theme-"].premium-glow-off body:not(.page-themes-pro) .desktop-theme-toggle-inner::after,
-html[class*="premium-theme-"].premium-glow-off body:not(.page-themes-pro) .mobile-theme-toggle::after,
-html[class*="premium-theme-"].premium-glow-off body:not(.page-themes-pro) .mobile-theme-toggle-inner::after,
-html[class*="premium-theme-"].premium-glow-off body:not(.page-themes-pro) .theme-toggle::after,
-html[class*="premium-theme-"].premium-glow-off body:not(.page-themes-pro) .theme-toggle-inner::after,
-html[class*="premium-theme-"].premium-glow-off body:not(.page-themes-pro) .theme-mode-toggle::after,
-html[class*="premium-theme-"].premium-glow-off body:not(.page-themes-pro) .mode-toggle::after,
-html[class*="premium-theme-"].glow-off body:not(.page-themes-pro) .desktop-theme-toggle::after,
-html[class*="premium-theme-"].glow-off body:not(.page-themes-pro) .desktop-theme-toggle-inner::after,
-html[class*="premium-theme-"].glow-off body:not(.page-themes-pro) .mobile-theme-toggle::after,
-html[class*="premium-theme-"].glow-off body:not(.page-themes-pro) .mobile-theme-toggle-inner::after,
-html[class*="premium-theme-"].glow-off body:not(.page-themes-pro) .theme-toggle::after,
-html[class*="premium-theme-"].glow-off body:not(.page-themes-pro) .theme-toggle-inner::after,
-html[class*="premium-theme-"].glow-off body:not(.page-themes-pro) .theme-mode-toggle::after,
-html[class*="premium-theme-"].glow-off body:not(.page-themes-pro) .mode-toggle::after,
-body.premium-glow-off .desktop-theme-toggle::after,
-body.premium-glow-off .desktop-theme-toggle-inner::after,
-body.premium-glow-off .mobile-theme-toggle::after,
-body.premium-glow-off .mobile-theme-toggle-inner::after,
-body.premium-glow-off .theme-toggle::after,
-body.premium-glow-off .theme-toggle-inner::after,
-body.premium-glow-off .theme-mode-toggle::after,
-body.premium-glow-off .mode-toggle::after,
-body.glow-off .desktop-theme-toggle::after,
-body.glow-off .desktop-theme-toggle-inner::after,
-body.glow-off .mobile-theme-toggle::after,
-body.glow-off .mobile-theme-toggle-inner::after,
-body.glow-off .theme-toggle::after,
-body.glow-off .theme-toggle-inner::after,
-body.glow-off .theme-mode-toggle::after,
-body.glow-off .mode-toggle::after,
-html[class*="premium-theme-"] body:not(.page-themes-pro):has(.desktop-theme-toggle input:not(:checked)) .desktop-theme-toggle::after,
-html[class*="premium-theme-"] body:not(.page-themes-pro):has(.desktop-theme-toggle input:not(:checked)) .desktop-theme-toggle-inner::after,
-html[class*="premium-theme-"] body:not(.page-themes-pro):has(.mobile-theme-toggle input:not(:checked)) .mobile-theme-toggle::after,
-html[class*="premium-theme-"] body:not(.page-themes-pro):has(.mobile-theme-toggle input:not(:checked)) .mobile-theme-toggle-inner::after,
-html[class*="premium-theme-"] body:not(.page-themes-pro):has(.theme-toggle input:not(:checked)) .theme-toggle::after,
-html[class*="premium-theme-"] body:not(.page-themes-pro):has(.theme-toggle input:not(:checked)) .theme-toggle-inner::after{
-  background:
-    radial-gradient(circle at 11px 50%, #fff 0 8px, transparent 9px),
-    linear-gradient(135deg,rgba(54,64,59,.96),rgba(20,26,23,.98)) !important;
-  border-color:rgba(255,255,255,.12) !important;
-  box-shadow:inset 0 1px 2px rgba(0,0,0,.44) !important;
-}
-
-@media(max-width:700px){
-  html[class*="premium-theme-"] body:not(.page-themes-pro) .desktop-theme-toggle,
-  html[class*="premium-theme-"] body:not(.page-themes-pro) .desktop-theme-toggle-inner,
-  html[class*="premium-theme-"] body:not(.page-themes-pro) .mobile-theme-toggle,
-  html[class*="premium-theme-"] body:not(.page-themes-pro) .mobile-theme-toggle-inner,
-  html[class*="premium-theme-"] body:not(.page-themes-pro) .theme-toggle,
-  html[class*="premium-theme-"] body:not(.page-themes-pro) .theme-toggle-inner,
-  html[class*="premium-theme-"] body:not(.page-themes-pro) .theme-mode-toggle,
-  html[class*="premium-theme-"] body:not(.page-themes-pro) .mode-toggle{
-    min-width:142px !important;
-    min-height:38px !important;
-    padding:6px 10px !important;
-    gap:8px !important;
-  }
-
-  html[class*="premium-theme-"] body:not(.page-themes-pro) .desktop-theme-toggle::before,
-  html[class*="premium-theme-"] body:not(.page-themes-pro) .desktop-theme-toggle-inner::before,
-  html[class*="premium-theme-"] body:not(.page-themes-pro) .mobile-theme-toggle::before,
-  html[class*="premium-theme-"] body:not(.page-themes-pro) .mobile-theme-toggle-inner::before,
-  html[class*="premium-theme-"] body:not(.page-themes-pro) .theme-toggle::before,
-  html[class*="premium-theme-"] body:not(.page-themes-pro) .theme-toggle-inner::before,
-  html[class*="premium-theme-"] body:not(.page-themes-pro) .theme-mode-toggle::before,
-  html[class*="premium-theme-"] body:not(.page-themes-pro) .mode-toggle::before{
-    font-size:11px !important;
-  }
-
-  html[class*="premium-theme-"] body:not(.page-themes-pro) .desktop-theme-toggle::after,
-  html[class*="premium-theme-"] body:not(.page-themes-pro) .desktop-theme-toggle-inner::after,
-  html[class*="premium-theme-"] body:not(.page-themes-pro) .mobile-theme-toggle::after,
-  html[class*="premium-theme-"] body:not(.page-themes-pro) .mobile-theme-toggle-inner::after,
-  html[class*="premium-theme-"] body:not(.page-themes-pro) .theme-toggle::after,
-  html[class*="premium-theme-"] body:not(.page-themes-pro) .theme-toggle-inner::after,
-  html[class*="premium-theme-"] body:not(.page-themes-pro) .theme-mode-toggle::after,
-  html[class*="premium-theme-"] body:not(.page-themes-pro) .mode-toggle::after{
-    width:38px !important;
-    height:21px !important;
-    flex-basis:38px !important;
-    background:
-      radial-gradient(circle at 28px 50%, #fff 0 7px, transparent 8px),
-      linear-gradient(135deg,rgba(110,231,183,.92),rgba(45,122,70,.88)) !important;
-  }
+/* One switch only */
+html[class*="premium-theme-"] .desktop-theme-toggle::before,
+html[class*="premium-theme-"] .desktop-theme-toggle::after,
+html[class*="premium-theme-"] .mobile-theme-toggle::before,
+html[class*="premium-theme-"] .mobile-theme-toggle::after,
+html[class*="premium-theme-"] .theme-toggle::before,
+html[class*="premium-theme-"] .theme-toggle::after{
+  content:none !important;
 }
 
