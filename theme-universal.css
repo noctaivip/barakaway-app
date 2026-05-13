@@ -4064,3 +4064,142 @@ body.bw-glow-off.bw-theme-rose-soft:not(.page-themes-pro) input.theme-switch{
 html.premium-theme-rose-soft body:not(.page-themes-pro) :is(img,canvas,video,iframe,.leaflet-container,.leaflet-container *,#map,#map *,[class*="map"],[class*="Map"],[class*="compass"],[class*="Compass"]){
   background:initial;
 }
+
+/* ===== ROSE SOFT V4 GLOW STATE FIX ===== */
+/*
+  Fixes Glow On / Glow Off consistency for rose-soft only.
+  Glow On: edge light is visible on all pages.
+  Glow Off: edge light is fully removed on all pages.
+  Does not change JS logic or other themes.
+*/
+
+html.premium-theme-rose-soft:not(.bw-glow-off),
+html.theme-rose-soft:not(.bw-glow-off),
+body.premium-theme-rose-soft:not(.bw-glow-off),
+body.theme-rose-soft:not(.bw-glow-off),
+body.bw-theme-rose-soft:not(.bw-glow-off){
+  --bw-pro-edge-glow:
+    inset 0 0 40px rgba(255,174,211,.42),
+    inset 0 0 92px rgba(236,72,153,.28),
+    inset 0 0 155px rgba(190,24,93,.16) !important;
+
+  --bw-premium-inner-glow:
+    inset 0 0 48px rgba(255,174,211,.16) !important;
+
+  --bw-premium-glow:
+    0 0 28px rgba(236,72,153,.38),
+    0 0 78px rgba(190,24,93,.30) !important;
+}
+
+/* Main edge glow targets when Glow On */
+html.premium-theme-rose-soft:not(.bw-glow-off) body:not(.page-themes-pro) :is(.container,.page,.page-shell,.app-shell,main),
+html.theme-rose-soft:not(.bw-glow-off) body:not(.page-themes-pro) :is(.container,.page,.page-shell,.app-shell,main),
+body.premium-theme-rose-soft:not(.bw-glow-off):not(.page-themes-pro) :is(.container,.page,.page-shell,.app-shell,main),
+body.theme-rose-soft:not(.bw-glow-off):not(.page-themes-pro) :is(.container,.page,.page-shell,.app-shell,main),
+body.bw-theme-rose-soft:not(.bw-glow-off):not(.page-themes-pro) :is(.container,.page,.page-shell,.app-shell,main){
+  box-shadow:var(--bw-pro-edge-glow) !important;
+}
+
+/* Also support projects/pages where glow is placed on a dedicated wrapper */
+html.premium-theme-rose-soft:not(.bw-glow-off) body:not(.page-themes-pro) :is(.premium-glow,.pro-glow,.edge-glow,.glow-frame,.premium-frame,.pro-frame),
+body.premium-theme-rose-soft:not(.bw-glow-off):not(.page-themes-pro) :is(.premium-glow,.pro-glow,.edge-glow,.glow-frame,.premium-frame,.pro-frame),
+body.bw-theme-rose-soft:not(.bw-glow-off):not(.page-themes-pro) :is(.premium-glow,.pro-glow,.edge-glow,.glow-frame,.premium-frame,.pro-frame){
+  box-shadow:var(--bw-pro-edge-glow) !important;
+}
+
+/* Glow Off must remove the large illumination everywhere */
+html.bw-glow-off.premium-theme-rose-soft,
+html.bw-glow-off.theme-rose-soft,
+html.premium-theme-rose-soft body.bw-glow-off,
+html.theme-rose-soft body.bw-glow-off,
+body.bw-glow-off.premium-theme-rose-soft,
+body.bw-glow-off.theme-rose-soft,
+body.bw-glow-off.bw-theme-rose-soft{
+  --bw-pro-edge-glow:none !important;
+  --bw-premium-inner-glow:none !important;
+  --bw-premium-glow:none !important;
+}
+
+html.bw-glow-off.premium-theme-rose-soft body:not(.page-themes-pro) :is(.container,.page,.page-shell,.app-shell,main,.premium-glow,.pro-glow,.edge-glow,.glow-frame,.premium-frame,.pro-frame),
+html.bw-glow-off.theme-rose-soft body:not(.page-themes-pro) :is(.container,.page,.page-shell,.app-shell,main,.premium-glow,.pro-glow,.edge-glow,.glow-frame,.premium-frame,.pro-frame),
+html.premium-theme-rose-soft body.bw-glow-off:not(.page-themes-pro) :is(.container,.page,.page-shell,.app-shell,main,.premium-glow,.pro-glow,.edge-glow,.glow-frame,.premium-frame,.pro-frame),
+html.theme-rose-soft body.bw-glow-off:not(.page-themes-pro) :is(.container,.page,.page-shell,.app-shell,main,.premium-glow,.pro-glow,.edge-glow,.glow-frame,.premium-frame,.pro-frame),
+body.bw-glow-off.premium-theme-rose-soft:not(.page-themes-pro) :is(.container,.page,.page-shell,.app-shell,main,.premium-glow,.pro-glow,.edge-glow,.glow-frame,.premium-frame,.pro-frame),
+body.bw-glow-off.bw-theme-rose-soft:not(.page-themes-pro) :is(.container,.page,.page-shell,.app-shell,main,.premium-glow,.pro-glow,.edge-glow,.glow-frame,.premium-frame,.pro-frame){
+  box-shadow:none !important;
+}
+
+/* Do not let old hard-pink layer create glow-like shadows when Glow Off */
+html.bw-glow-off.premium-theme-rose-soft body:not(.page-themes-pro) :is(.container,.page,.page-shell,.app-shell,main) *,
+html.premium-theme-rose-soft body.bw-glow-off:not(.page-themes-pro) :is(.container,.page,.page-shell,.app-shell,main) *,
+body.bw-glow-off.premium-theme-rose-soft:not(.page-themes-pro) :is(.container,.page,.page-shell,.app-shell,main) *,
+body.bw-glow-off.bw-theme-rose-soft:not(.page-themes-pro) :is(.container,.page,.page-shell,.app-shell,main) *{
+  box-shadow:inset 0 0 18px rgba(255,174,211,.04) !important;
+}
+
+/* Keep the Glow switch visual state itself */
+html.premium-theme-rose-soft:not(.bw-glow-off) body:not(.page-themes-pro) input.theme-switch,
+body.premium-theme-rose-soft:not(.bw-glow-off):not(.page-themes-pro) input.theme-switch,
+body.bw-theme-rose-soft:not(.bw-glow-off):not(.page-themes-pro) input.theme-switch{
+  background:linear-gradient(135deg,#f472b6,#be185d) !important;
+  border-color:rgba(255,190,222,.46) !important;
+}
+
+html.bw-glow-off.premium-theme-rose-soft body:not(.page-themes-pro) input.theme-switch,
+html.premium-theme-rose-soft body.bw-glow-off:not(.page-themes-pro) input.theme-switch,
+body.bw-glow-off.premium-theme-rose-soft:not(.page-themes-pro) input.theme-switch,
+body.bw-glow-off.bw-theme-rose-soft:not(.page-themes-pro) input.theme-switch{
+  background:linear-gradient(135deg,#4a2434,#1f141b) !important;
+  border-color:rgba(255,255,255,.14) !important;
+}
+
+/* ===== BARAKAWAY ALL PRO THEMES GLOBAL GLOW STATE FIX ===== */
+/*
+  Scope: all PRO themes only.
+  Glow On: edge illumination is visible on every page.
+  Glow Off: edge illumination is removed on every page.
+  Visual theme palettes, layouts and JS logic are unchanged.
+*/
+
+/* Glow On variables for any premium theme */
+html[class*="premium-theme-"]:not(.bw-glow-off),
+body[class*="premium-theme-"]:not(.bw-glow-off),
+body[class*="bw-theme-"]:not(.bw-glow-off){
+  --bw-pro-edge-glow:
+    inset 0 0 40px var(--bw-premium-border, rgba(255,255,255,.28)),
+    inset 0 0 92px color-mix(in srgb, var(--bw-premium-border, rgba(255,255,255,.28)) 70%, transparent),
+    inset 0 0 155px color-mix(in srgb, var(--bw-premium-border, rgba(255,255,255,.28)) 42%, transparent) !important;
+}
+
+/* Glow On applied to main page wrappers */
+html[class*="premium-theme-"]:not(.bw-glow-off) body:not(.page-themes-pro) :is(.container,.page,.page-shell,.app-shell,main,.premium-glow,.pro-glow,.edge-glow,.glow-frame,.premium-frame,.pro-frame),
+body[class*="premium-theme-"]:not(.bw-glow-off):not(.page-themes-pro) :is(.container,.page,.page-shell,.app-shell,main,.premium-glow,.pro-glow,.edge-glow,.glow-frame,.premium-frame,.pro-frame),
+body[class*="bw-theme-"]:not(.bw-glow-off):not(.page-themes-pro) :is(.container,.page,.page-shell,.app-shell,main,.premium-glow,.pro-glow,.edge-glow,.glow-frame,.premium-frame,.pro-frame){
+  box-shadow:var(--bw-pro-edge-glow) !important;
+}
+
+/* Glow Off variables for any premium theme */
+html.bw-glow-off[class*="premium-theme-"],
+html[class*="premium-theme-"] body.bw-glow-off,
+body.bw-glow-off[class*="premium-theme-"],
+body.bw-glow-off[class*="bw-theme-"]{
+  --bw-pro-edge-glow:none !important;
+  --bw-premium-inner-glow:none !important;
+  --bw-premium-glow:none !important;
+}
+
+/* Glow Off removes main edge illumination everywhere */
+html.bw-glow-off[class*="premium-theme-"] body:not(.page-themes-pro) :is(.container,.page,.page-shell,.app-shell,main,.premium-glow,.pro-glow,.edge-glow,.glow-frame,.premium-frame,.pro-frame),
+html[class*="premium-theme-"] body.bw-glow-off:not(.page-themes-pro) :is(.container,.page,.page-shell,.app-shell,main,.premium-glow,.pro-glow,.edge-glow,.glow-frame,.premium-frame,.pro-frame),
+body.bw-glow-off[class*="premium-theme-"]:not(.page-themes-pro) :is(.container,.page,.page-shell,.app-shell,main,.premium-glow,.pro-glow,.edge-glow,.glow-frame,.premium-frame,.pro-frame),
+body.bw-glow-off[class*="bw-theme-"]:not(.page-themes-pro) :is(.container,.page,.page-shell,.app-shell,main,.premium-glow,.pro-glow,.edge-glow,.glow-frame,.premium-frame,.pro-frame){
+  box-shadow:none !important;
+}
+
+/* Glow Off also prevents nested glow-like shadows from staying visible */
+html.bw-glow-off[class*="premium-theme-"] body:not(.page-themes-pro) :is(.container,.page,.page-shell,.app-shell,main) *,
+html[class*="premium-theme-"] body.bw-glow-off:not(.page-themes-pro) :is(.container,.page,.page-shell,.app-shell,main) *,
+body.bw-glow-off[class*="premium-theme-"]:not(.page-themes-pro) :is(.container,.page,.page-shell,.app-shell,main) *,
+body.bw-glow-off[class*="bw-theme-"]:not(.page-themes-pro) :is(.container,.page,.page-shell,.app-shell,main) *{
+  box-shadow:none !important;
+}
