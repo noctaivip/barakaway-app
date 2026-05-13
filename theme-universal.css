@@ -3146,12 +3146,12 @@ html.theme-emerald-quran body:not(.page-themes-pro) .ayah-card:hover{
 }
 
 
-/* ===== BARAKAWAY GLOW ONLY TOGGLE — FINAL ===== */
+/* ===== BARAKAWAY PRO GLOW TOGGLE — FINAL SEPARATE SWITCH ===== */
 /*
-  Light Mode / Dark Mode are not used here.
-  Current premium theme remains unchanged.
-  JS toggles only html.bw-glow-off / body.bw-glow-off.
-  Default state: Glow On.
+  Old theme switch is fully hidden only in PRO themes.
+  New switch is injected by pro-glow-toggle.js.
+  No Light Mode / Dark Mode logic is used.
+  Default: Glow On.
 */
 
 html[class*="premium-theme-"]{
@@ -3161,118 +3161,110 @@ html[class*="premium-theme-"]{
     inset 0 0 150px rgba(110,231,183,.12);
 }
 
-/* Glow ON by default: only outer app/container inward glow */
+/* Hide old Light/Dark/Bismillah switch completely in PRO themes */
+html[class*="premium-theme-"] body:not(.page-themes-pro) .desktop-theme-toggle,
+html[class*="premium-theme-"] body:not(.page-themes-pro) .mobile-theme-toggle,
+html[class*="premium-theme-"] body:not(.page-themes-pro) .theme-toggle,
+html[class*="premium-theme-"] body:not(.page-themes-pro) .theme-mode-toggle,
+html[class*="premium-theme-"] body:not(.page-themes-pro) .mode-toggle{
+  display:none !important;
+  visibility:hidden !important;
+  opacity:0 !important;
+  pointer-events:none !important;
+}
+
+/* Glow ON by default */
 html[class*="premium-theme-"] body:not(.page-themes-pro) .container{
   box-shadow:
     var(--bw-premium-shadow),
     var(--bw-pro-edge-glow) !important;
-  transition:box-shadow .14s linear !important;
+  transition:box-shadow .12s linear !important;
 }
 
-/* Glow OFF: remove only inward edge glow; theme/layout/colors stay unchanged */
+/* Glow OFF */
 html.bw-glow-off[class*="premium-theme-"] body:not(.page-themes-pro) .container,
 html[class*="premium-theme-"] body.bw-glow-off:not(.page-themes-pro) .container{
   box-shadow:var(--bw-premium-shadow) !important;
 }
 
-/* Remove old Light/Dark/Bismillah label text */
-html[class*="premium-theme-"] body:not(.page-themes-pro) .theme-toggle-label,
-html[class*="premium-theme-"] body:not(.page-themes-pro) .desktop-theme-toggle-label,
-html[class*="premium-theme-"] body:not(.page-themes-pro) .mobile-theme-toggle-label,
-html[class*="premium-theme-"] body:not(.page-themes-pro) .desktop-theme-toggle .theme-toggle-label,
-html[class*="premium-theme-"] body:not(.page-themes-pro) .mobile-theme-toggle .theme-toggle-label,
-html[class*="premium-theme-"] body:not(.page-themes-pro) .theme-toggle .theme-toggle-label{
-  font-size:0 !important;
-  line-height:0 !important;
-  color:transparent !important;
-  text-shadow:none !important;
+/* New injected switch */
+.bw-pro-glow-toggle{
+  display:inline-flex !important;
+  align-items:center !important;
+  justify-content:center !important;
+  gap:10px !important;
+  min-width:142px !important;
+  min-height:40px !important;
+  padding:7px 12px !important;
+  border-radius:999px !important;
+  border:1.5px solid rgba(110,231,183,.22) !important;
+  background:linear-gradient(180deg,rgba(8,34,22,.96),rgba(4,22,14,.985)) !important;
+  box-shadow:
+    0 10px 26px rgba(0,0,0,.24),
+    inset 0 1px 0 rgba(255,255,255,.05),
+    inset 0 0 18px rgba(110,231,183,.14) !important;
+  color:#fff0bd !important;
+  cursor:pointer !important;
+  user-select:none !important;
+  -webkit-tap-highlight-color:transparent !important;
+  font-family:inherit !important;
+  direction:ltr !important;
+}
+
+.bw-pro-glow-toggle__label{
+  font-size:12px !important;
+  line-height:1 !important;
+  font-weight:900 !important;
+  color:#fff0bd !important;
+  text-shadow:0 0 10px rgba(216,179,95,.30) !important;
   white-space:nowrap !important;
 }
 
-/* Glow On label */
-html[class*="premium-theme-"]:not(.bw-glow-off) body:not(.page-themes-pro) .theme-toggle-label::after,
-html[class*="premium-theme-"]:not(.bw-glow-off) body:not(.page-themes-pro) .desktop-theme-toggle-label::after,
-html[class*="premium-theme-"]:not(.bw-glow-off) body:not(.page-themes-pro) .mobile-theme-toggle-label::after,
-html[class*="premium-theme-"]:not(.bw-glow-off) body:not(.page-themes-pro) .desktop-theme-toggle .theme-toggle-label::after,
-html[class*="premium-theme-"]:not(.bw-glow-off) body:not(.page-themes-pro) .mobile-theme-toggle .theme-toggle-label::after,
-html[class*="premium-theme-"]:not(.bw-glow-off) body:not(.page-themes-pro) .theme-toggle .theme-toggle-label::after{
-  content:"Glow On" !important;
-  display:inline-block !important;
-  font-size:12px !important;
-  line-height:1 !important;
-  font-weight:900 !important;
-  color:#fff0bd !important;
-  text-shadow:0 0 10px rgba(216,179,95,.30) !important;
-}
-
-/* Glow Off label */
-html.bw-glow-off[class*="premium-theme-"] body:not(.page-themes-pro) .theme-toggle-label::after,
-html.bw-glow-off[class*="premium-theme-"] body:not(.page-themes-pro) .desktop-theme-toggle-label::after,
-html.bw-glow-off[class*="premium-theme-"] body:not(.page-themes-pro) .mobile-theme-toggle-label::after,
-html.bw-glow-off[class*="premium-theme-"] body:not(.page-themes-pro) .desktop-theme-toggle .theme-toggle-label::after,
-html.bw-glow-off[class*="premium-theme-"] body:not(.page-themes-pro) .mobile-theme-toggle .theme-toggle-label::after,
-html.bw-glow-off[class*="premium-theme-"] body:not(.page-themes-pro) .theme-toggle .theme-toggle-label::after,
-html[class*="premium-theme-"] body.bw-glow-off:not(.page-themes-pro) .theme-toggle-label::after,
-html[class*="premium-theme-"] body.bw-glow-off:not(.page-themes-pro) .desktop-theme-toggle-label::after,
-html[class*="premium-theme-"] body.bw-glow-off:not(.page-themes-pro) .mobile-theme-toggle-label::after{
-  content:"Glow Off" !important;
-  display:inline-block !important;
-  font-size:12px !important;
-  line-height:1 !important;
-  font-weight:900 !important;
-  color:#fff0bd !important;
-  text-shadow:0 0 10px rgba(216,179,95,.30) !important;
-}
-
-/* Disable fake duplicate switches; keep only the real existing switch/input */
-html[class*="premium-theme-"] body:not(.page-themes-pro) .theme-toggle::before,
-html[class*="premium-theme-"] body:not(.page-themes-pro) .theme-toggle::after,
-html[class*="premium-theme-"] body:not(.page-themes-pro) .desktop-theme-toggle::before,
-html[class*="premium-theme-"] body:not(.page-themes-pro) .desktop-theme-toggle::after,
-html[class*="premium-theme-"] body:not(.page-themes-pro) .mobile-theme-toggle::before,
-html[class*="premium-theme-"] body:not(.page-themes-pro) .mobile-theme-toggle::after,
-html[class*="premium-theme-"] body:not(.page-themes-pro) .theme-toggle-inner::before,
-html[class*="premium-theme-"] body:not(.page-themes-pro) .theme-toggle-inner::after,
-html[class*="premium-theme-"] body:not(.page-themes-pro) .desktop-theme-toggle-inner::before,
-html[class*="premium-theme-"] body:not(.page-themes-pro) .desktop-theme-toggle-inner::after,
-html[class*="premium-theme-"] body:not(.page-themes-pro) .mobile-theme-toggle-inner::before,
-html[class*="premium-theme-"] body:not(.page-themes-pro) .mobile-theme-toggle-inner::after{
-  content:none !important;
-}
-
-/* Switch shell styling only; no theme change */
-html[class*="premium-theme-"] body:not(.page-themes-pro) .desktop-theme-toggle-inner,
-html[class*="premium-theme-"] body:not(.page-themes-pro) .mobile-theme-toggle-inner,
-html[class*="premium-theme-"] body:not(.page-themes-pro) .theme-toggle-inner{
-  background:linear-gradient(180deg,rgba(8,34,22,.96),rgba(4,22,14,.985)) !important;
-  border:1.5px solid rgba(110,231,183,.18) !important;
-  box-shadow:
-    0 10px 26px rgba(0,0,0,.24),
-    inset 0 1px 0 rgba(255,255,255,.05) !important;
-}
-
-/* Real switch visual: On */
-html[class*="premium-theme-"] body:not(.page-themes-pro) .theme-switch,
-html[class*="premium-theme-"] body:not(.page-themes-pro) .switch{
+.bw-pro-glow-toggle__switch{
+  position:relative !important;
+  width:42px !important;
+  height:23px !important;
+  flex:0 0 42px !important;
+  border-radius:999px !important;
   background:linear-gradient(135deg,rgba(110,231,183,.92),rgba(45,122,70,.88)) !important;
   border:1px solid rgba(110,231,183,.34) !important;
-  box-shadow:0 0 14px rgba(110,231,183,.26) !important;
+  box-shadow:0 0 14px rgba(110,231,183,.26), inset 0 1px 2px rgba(0,0,0,.24) !important;
 }
 
-/* Real switch visual: Off */
-html.bw-glow-off[class*="premium-theme-"] body:not(.page-themes-pro) .theme-switch,
-html.bw-glow-off[class*="premium-theme-"] body:not(.page-themes-pro) .switch,
-html[class*="premium-theme-"] body.bw-glow-off:not(.page-themes-pro) .theme-switch,
-html[class*="premium-theme-"] body.bw-glow-off:not(.page-themes-pro) .switch{
+.bw-pro-glow-toggle__switch::before{
+  content:"" !important;
+  position:absolute !important;
+  top:50% !important;
+  right:3px !important;
+  width:17px !important;
+  height:17px !important;
+  transform:translateY(-50%) !important;
+  border-radius:50% !important;
+  background:#fff !important;
+  box-shadow:0 2px 8px rgba(0,0,0,.24) !important;
+}
+
+html.bw-glow-off .bw-pro-glow-toggle__switch,
+body.bw-glow-off .bw-pro-glow-toggle__switch{
   background:linear-gradient(135deg,#39443f,#202622) !important;
   border-color:rgba(255,255,255,.12) !important;
   box-shadow:inset 0 1px 2px rgba(0,0,0,.44) !important;
 }
 
+html.bw-glow-off .bw-pro-glow-toggle__switch::before,
+body.bw-glow-off .bw-pro-glow-toggle__switch::before{
+  right:auto !important;
+  left:3px !important;
+}
+
 @media(max-width:700px){
-  html[class*="premium-theme-"] body:not(.page-themes-pro) .theme-toggle-label::after,
-  html[class*="premium-theme-"] body:not(.page-themes-pro) .desktop-theme-toggle-label::after,
-  html[class*="premium-theme-"] body:not(.page-themes-pro) .mobile-theme-toggle-label::after{
+  .bw-pro-glow-toggle{
+    min-width:132px !important;
+    min-height:38px !important;
+    padding:6px 10px !important;
+    gap:8px !important;
+  }
+  .bw-pro-glow-toggle__label{
     font-size:11px !important;
   }
 }
