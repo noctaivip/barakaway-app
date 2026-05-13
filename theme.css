@@ -120,3 +120,26 @@ html.dark-mode button.light{
 html.dark-mode button.light:hover{
   background:#232b34;
 }
+
+/* ===== BARAKAWAY PRO GLOW SWITCH REAL KNOB FIX ===== */
+/* Visual only. In PRO: checked/Glow On = knob right; unchecked/Glow Off = knob left. */
+
+html[class*="premium-theme-"] body:not(.page-themes-pro) input.theme-switch::before{
+  transition:left .25s ease, right .25s ease, transform .25s ease !important;
+}
+
+html[class*="premium-theme-"] body:not(.page-themes-pro) input.theme-switch:checked::before,
+html[class*="premium-theme-"]:not(.bw-glow-off) body:not(.page-themes-pro) input.theme-switch::before,
+html[class*="premium-theme-"] body:not(.page-themes-pro):not(.bw-glow-off) input.theme-switch::before{
+  left:20px !important;
+  right:auto !important;
+  transform:none !important;
+}
+
+html.bw-glow-off[class*="premium-theme-"] body:not(.page-themes-pro) input.theme-switch::before,
+html[class*="premium-theme-"] body.bw-glow-off:not(.page-themes-pro) input.theme-switch::before,
+html[class*="premium-theme-"] body:not(.page-themes-pro) input.theme-switch:not(:checked)::before{
+  left:3px !important;
+  right:auto !important;
+  transform:none !important;
+}

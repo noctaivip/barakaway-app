@@ -8,7 +8,8 @@ In the name of Allah, the Most Merciful, the Most Compassionate
 
 <script>
 (function(){
-  const savedTheme = localStorage.getItem('siteTheme');
+  const premiumTheme = localStorage.getItem('barakaway_premium_theme');
+  const savedTheme = premiumTheme ? 'dark' : localStorage.getItem('siteTheme');
   if(savedTheme === 'light'){
     document.documentElement.classList.add('light-mode');
   } else {
@@ -2703,6 +2704,30 @@ html.light-mode .premium-resource-card[href="support-project-uz.html"]{
   border-color:rgba(141,107,22,.18);
 }
 
+
+/* ===== BARAKAWAY PRO GLOW SWITCH REAL KNOB FIX ===== */
+/* Visual only. In PRO: checked/Glow On = knob right; unchecked/Glow Off = knob left. */
+
+html[class*="premium-theme-"] body:not(.page-themes-pro) input.theme-switch::before{
+  transition:left .25s ease, right .25s ease, transform .25s ease !important;
+}
+
+html[class*="premium-theme-"] body:not(.page-themes-pro) input.theme-switch:checked::before,
+html[class*="premium-theme-"]:not(.bw-glow-off) body:not(.page-themes-pro) input.theme-switch::before,
+html[class*="premium-theme-"] body:not(.page-themes-pro):not(.bw-glow-off) input.theme-switch::before{
+  left:20px !important;
+  right:auto !important;
+  transform:none !important;
+}
+
+html.bw-glow-off[class*="premium-theme-"] body:not(.page-themes-pro) input.theme-switch::before,
+html[class*="premium-theme-"] body.bw-glow-off:not(.page-themes-pro) input.theme-switch::before,
+html[class*="premium-theme-"] body:not(.page-themes-pro) input.theme-switch:not(:checked)::before{
+  left:3px !important;
+  right:auto !important;
+  transform:none !important;
+}
+
 </style>
 <script src="/theme-init.js"></script>
 <link rel="stylesheet" href="/theme.css">
@@ -2718,7 +2743,7 @@ html.light-mode .premium-resource-card[href="support-project-uz.html"]{
     <span class="ripple"></span>
   </button>
   <div class="theme-toggle-center">
-    <span class="theme-toggle-label">Yorug‘ rejim</span>
+    <span class="theme-toggle-label">Glow On</span>
     <input type="checkbox" class="theme-switch" id="themeSwitch" aria-label="Toggle theme">
   </div>
   <button class="icon-btn right" onclick="shareApp()" aria-label="Ulashish app">
@@ -2751,7 +2776,7 @@ Zul-Qa’da oyida amallaringizni saqlang, ortiqcha ishlarni kamaytiring va zikrn
   </div>
   <div class="desktop-action-right">
     <div class="desktop-theme-toggle-inner">
-      <span class="theme-toggle-label">Yorug‘ rejim</span>
+      <span class="theme-toggle-label">Glow On</span>
       <input type="checkbox" class="theme-switch" id="desktopThemeSwitch" aria-label="Toggle theme">
     </div>
   </div>
@@ -3089,29 +3114,91 @@ window.addEventListener("DOMContentLoaded",function(){const installBtn=document.
 (function(){
   const switches = document.querySelectorAll('.theme-switch');
   const labels = document.querySelectorAll('.theme-toggle-label');
+  const GLOW_KEY = 'barakawayGlowOff';
 
   if(!switches.length || !labels.length) return;
 
-  function applyTheme(theme){
-    document.documentElement.classList.remove('light-mode','dark-mode');
-    document.documentElement.classList.add(theme + '-mode');
-    localStorage.setItem('siteTheme', theme);
+  function safeGet(key){ try{ return localStorage.getItem(key); }catch(e){ return null; } }
+  function safeSet(key, value){ try{ localStorage.setItem(key, value); }catch(e){} }
+
+  function hasPremiumTheme(){
+    try{
+      if(window.BarakaWayTheme && typeof window.BarakaWayTheme.currentPremiumTheme === 'function'){
+        if(window.BarakaWayTheme.currentPremiumTheme()) return true;
+      }
+      if(safeGet('barakaway_premium_theme')) return true;
+    }catch(e){}
+    return document.documentElement.className.indexOf('premium-theme-') !== -1 ||
+           (document.body && document.body.className.indexOf('premium-theme-') !== -1);
+  }
+
+  function forcePremiumDarkBase(){
+    document.documentElement.classList.remove('light-mode');
+    document.documentElement.classList.add('dark-mode');
+    if(document.body){
+      document.body.classList.remove('light-mode');
+      document.body.classList.add('dark-mode');
+    }
+    safeSet('siteTheme','dark');
+  }
+
+  function setGlowOff(off){
+    document.documentElement.classList.toggle('bw-glow-off', off);
+    if(document.body) document.body.classList.toggle('bw-glow-off', off);
+    safeSet(GLOW_KEY, off ? '1' : '0');
 
     switches.forEach(function(switchEl){
-      switchEl.checked = theme === 'light';
+      switchEl.checked = !off;
+      switchEl.setAttribute('aria-checked', off ? 'false' : 'true');
+      switchEl.setAttribute('aria-label', off ? 'Glow Off' : 'Glow On');
     });
 
     labels.forEach(function(label){
-      label.textContent = theme === 'dark' ? 'Yorug‘ rejim' : 'Qorong‘i rejim';
+      label.textContent = off ? 'Glow Off' : 'Glow On';
     });
   }
 
-  const savedTheme = localStorage.getItem('siteTheme') || 'dark';
-  applyTheme(savedTheme);
+  function applyTheme(theme){
+    if(hasPremiumTheme()){
+      forcePremiumDarkBase();
+      setGlowOff(safeGet(GLOW_KEY) === '1');
+      return;
+    }
+
+    var selected = theme === 'light' ? 'light' : 'dark';
+
+    document.documentElement.classList.remove('light-mode','dark-mode');
+    document.documentElement.classList.add(selected + '-mode');
+    if(document.body){
+      document.body.classList.remove('light-mode','dark-mode');
+      document.body.classList.add(selected + '-mode');
+    }
+    safeSet('siteTheme', selected);
+
+    switches.forEach(function(switchEl){
+      switchEl.checked = selected === 'light';
+    });
+
+    labels.forEach(function(label){
+      label.textContent = selected === 'dark' ? 'Light mode' : 'Dark mode';
+    });
+  }
+
+  if(hasPremiumTheme()){
+    forcePremiumDarkBase();
+    setGlowOff(safeGet(GLOW_KEY) === '1');
+  }else{
+    applyTheme(safeGet('siteTheme') || 'dark');
+  }
 
   switches.forEach(function(switchEl){
     switchEl.addEventListener('change', function(){
-      applyTheme(this.checked ? 'light' : 'dark');
+      if(hasPremiumTheme()){
+        forcePremiumDarkBase();
+        setGlowOff(!this.checked);
+      }else{
+        applyTheme(this.checked ? 'light' : 'dark');
+      }
     });
   });
 })();

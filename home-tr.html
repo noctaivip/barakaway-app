@@ -5,7 +5,15 @@ In the name of Allah, the Most Merciful, the Most Compassionate
 <!DOCTYPE html>
 <html lang="tr">
 <head> <script>
-(function(){ const savedTheme = localStorage.getItem('siteTheme'); if(savedTheme === 'light'){ document.documentElement.classList.add('light-mode'); } else { document.documentElement.classList.add('dark-mode'); localStorage.setItem('siteTheme','dark'); }
+(function(){
+  const premiumTheme = localStorage.getItem('barakaway_premium_theme');
+  const savedTheme = premiumTheme ? 'dark' : localStorage.getItem('siteTheme');
+  if(savedTheme === 'light'){
+    document.documentElement.classList.add('light-mode');
+  } else {
+    document.documentElement.classList.add('dark-mode');
+    localStorage.setItem('siteTheme','dark');
+  }
 })();
 </script> <script data-goatcounter="https://onedollarexit.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script> <link rel="icon" type="image/png" href="/favicon.png">
 <link rel="manifest" href="/manifest.json">
@@ -770,12 +778,36 @@ html.light-mode .baraka-pro-title{color:#172019;}
 html.dark-mode .baraka-pro-text{color:#e2eadf;}
 html.light-mode .baraka-pro-text{color:#3f5147;}
 .baraka-pro-action,.baraka-pro-arrow{display:none !important;}
-@media(max-width:700px){.baraka-pro-promo{margin:17px auto 8px;padding:20px 17px 19px;border-radius:24px;width:calc(100% - 12px);box-sizing:border-box;}.baraka-pro-promo::after{border-radius:22px;}.baraka-pro-title{font-size:24px;}.baraka-pro-text{font-size:13px;}.baraka-pro-price{font-size:13px;}} </style>
+@media(max-width:700px){.baraka-pro-promo{margin:17px auto 8px;padding:20px 17px 19px;border-radius:24px;width:calc(100% - 12px);box-sizing:border-box;}.baraka-pro-promo::after{border-radius:22px;}.baraka-pro-title{font-size:24px;}.baraka-pro-text{font-size:13px;}.baraka-pro-price{font-size:13px;}} 
+/* ===== BARAKAWAY PRO GLOW SWITCH REAL KNOB FIX ===== */
+/* Visual only. In PRO: checked/Glow On = knob right; unchecked/Glow Off = knob left. */
+
+html[class*="premium-theme-"] body:not(.page-themes-pro) input.theme-switch::before{
+  transition:left .25s ease, right .25s ease, transform .25s ease !important;
+}
+
+html[class*="premium-theme-"] body:not(.page-themes-pro) input.theme-switch:checked::before,
+html[class*="premium-theme-"]:not(.bw-glow-off) body:not(.page-themes-pro) input.theme-switch::before,
+html[class*="premium-theme-"] body:not(.page-themes-pro):not(.bw-glow-off) input.theme-switch::before{
+  left:20px !important;
+  right:auto !important;
+  transform:none !important;
+}
+
+html.bw-glow-off[class*="premium-theme-"] body:not(.page-themes-pro) input.theme-switch::before,
+html[class*="premium-theme-"] body.bw-glow-off:not(.page-themes-pro) input.theme-switch::before,
+html[class*="premium-theme-"] body:not(.page-themes-pro) input.theme-switch:not(:checked)::before{
+  left:3px !important;
+  right:auto !important;
+  transform:none !important;
+}
+
+</style>
 <script src="/theme-init.js"></script>
 <link rel="stylesheet" href="/theme.css">
 <link rel="stylesheet" href="/theme-universal.css">
 </head>
-<body> <div class="mobile-top-controls"> <button class="icon-btn left" onclick="changeLanguageChoice()" aria-label="Change language"> <svg viewBox="0 0 24 24" aria-hidden="true"> <path d="M12 2a10 10 0 100 20 10 10 0 000-20zm6.92 9h-3.02a15.6 15.6 0 00-1.33-5.01A8.03 8.03 0 0118.92 11zM12 4.04c.89 1.08 1.97 3.22 2.28 6.96H9.72C10.03 7.26 11.11 5.12 12 4.04zM4.99 13h3.02a15.6 15.6 0 001.33 5.01A8.03 8.03 0 014.99 13zM8.1 11H5.08a8.03 8.03 0 014.35-5.01A15.6 15.6 0 008.1 11zm1.62 2h4.56c-.31 3.74-1.39 5.88-2.28 6.96-.89-1.08-1.97-3.22-2.28-6.96zm5.18 5.01A15.6 15.6 0 0015.9 13h3.02a8.03 8.03 0 01-4.02 5.01z"/> </svg> <span class="ripple"></span> </button> <div class="theme-toggle-center"> <span class="theme-toggle-label">Aydınlık mod</span> <input type="checkbox" class="theme-switch" id="themeSwitch" aria-label="Toggle theme"> </div> <button class="icon-btn right" onclick="shareApp()" aria-label="Paylaş app"> <svg viewBox="0 0 24 24" aria-hidden="true"> <path d="M18 16a2.99 2.99 0 00-2.39 1.2l-6.7-3.35a3.1 3.1 0 000-1.7l6.7-3.35A3 3 0 1014 6a3.1 3.1 0 00.08.68l-6.7 3.35a3 3 0 100 4.94l6.7 3.35A3 3 0 1018 16z"/> </svg> <span class="ripple"></span> </button>
+<body> <div class="mobile-top-controls"> <button class="icon-btn left" onclick="changeLanguageChoice()" aria-label="Change language"> <svg viewBox="0 0 24 24" aria-hidden="true"> <path d="M12 2a10 10 0 100 20 10 10 0 000-20zm6.92 9h-3.02a15.6 15.6 0 00-1.33-5.01A8.03 8.03 0 0118.92 11zM12 4.04c.89 1.08 1.97 3.22 2.28 6.96H9.72C10.03 7.26 11.11 5.12 12 4.04zM4.99 13h3.02a15.6 15.6 0 001.33 5.01A8.03 8.03 0 014.99 13zM8.1 11H5.08a8.03 8.03 0 014.35-5.01A15.6 15.6 0 008.1 11zm1.62 2h4.56c-.31 3.74-1.39 5.88-2.28 6.96-.89-1.08-1.97-3.22-2.28-6.96zm5.18 5.01A15.6 15.6 0 0015.9 13h3.02a8.03 8.03 0 01-4.02 5.01z"/> </svg> <span class="ripple"></span> </button> <div class="theme-toggle-center"> <span class="theme-toggle-label">Glow On</span> <input type="checkbox" class="theme-switch" id="themeSwitch" aria-label="Toggle theme"> </div> <button class="icon-btn right" onclick="shareApp()" aria-label="Paylaş app"> <svg viewBox="0 0 24 24" aria-hidden="true"> <path d="M18 16a2.99 2.99 0 00-2.39 1.2l-6.7-3.35a3.1 3.1 0 000-1.7l6.7-3.35A3 3 0 1014 6a3.1 3.1 0 00.08.68l-6.7 3.35a3 3 0 100 4.94l6.7 3.35A3 3 0 1018 16z"/> </svg> <span class="ripple"></span> </button>
 </div> <div class="ramadan-wrapper">
 <div class="ramadan-bar">
 <div class="ramadan-text">
@@ -783,7 +815,7 @@ Zilkade ayında amellerini koru, gereksizi azalt ve zikri artır — bu, ileride
 </div>
 </div>
 </div>
-</div> <div class="desktop-top-actions" aria-label="Desktop quick actions"> <div class="desktop-action-left"> <a class="desktop-action-pill" href="#" onclick="changeLanguageChoice(); return false;">Dili değiştir</a> </div> <div class="desktop-action-center"> <div class="install-box" id="installBox"> <button id="installBtn" class="install-btn" type="button">Uygulamayı yükle</button> </div> </div> <div class="desktop-action-right"> <div class="desktop-theme-toggle-inner"> <span class="theme-toggle-label">Aydınlık mod</span> <input type="checkbox" class="theme-switch" id="desktopThemeSwitch" aria-label="Toggle theme"> </div> </div>
+</div> <div class="desktop-top-actions" aria-label="Desktop quick actions"> <div class="desktop-action-left"> <a class="desktop-action-pill" href="#" onclick="changeLanguageChoice(); return false;">Dili değiştir</a> </div> <div class="desktop-action-center"> <div class="install-box" id="installBox"> <button id="installBtn" class="install-btn" type="button">Uygulamayı yükle</button> </div> </div> <div class="desktop-action-right"> <div class="desktop-theme-toggle-inner"> <span class="theme-toggle-label">Glow On</span> <input type="checkbox" class="theme-switch" id="desktopThemeSwitch" aria-label="Toggle theme"> </div> </div>
 </div> <div class="container"> <div class="brand-prayer-hero"> <button class="brand-signature" id="brandInstallTrigger" type="button" aria-label="BarakaWay"> <span class="brand-letter-accent">B</span><span class="brand-letter-main">araka</span><span class="brand-letter-accent">W</span><span class="brand-letter-main">ay</span> </button> <div class="home-prayer-widget" role="link" tabindex="0" onclick="openPrayerTimesPage(event)" onkeydown="openPrayerTimesPageFromKeyboard(event)" aria-label="Namaz vakitleri sayfasını aç"> <div class="home-prayer-top"> <div class="home-prayer-kicker">Sonraki namaz</div> <div class="home-prayer-location" id="homePrayerLocation">Taşkent, Özbekistan</div> </div> <div class="home-prayer-main"> <div> <div class="home-prayer-name" id="homePrayerName">Sabah</div> <div class="home-prayer-time" id="homePrayerTime">--:--</div> <div class="home-prayer-meta" id="homePrayerMeta">Namaz vakitleri yükleniyor...</div> </div> <div class="home-prayer-countdown"> <div class="home-prayer-countdown-label">Kalan</div> <div id="homePrayerCountdown">--:--:--</div> </div> </div> <div class="home-prayer-actions"> <div class="home-prayer-note"><span>Tam takvim</span><span class="home-prayer-arrow" aria-hidden="true">→</span></div> <button class="home-prayer-share-btn" type="button" onclick="sharePrayerTimes(event)" aria-label="Namaz vakitlerini paylaş" title="Namaz vakitlerini paylaş"> <svg viewBox="0 0 24 24" aria-hidden="true"> <path d="M18 16.08c-.76 0-1.44.3-1.96.77L8.91 12.7c.05-.23.09-.46.09-.7s-.04-.47-.09-.7l7.05-4.11A2.99 2.99 0 1 0 15 5c0 .24.04.47.09.7L8.04 9.81A3 3 0 1 0 8.04 14.2l7.12 4.18c-.04.2-.06.41-.06.62a2.9 2.9 0 1 0 2.9-2.92z"/> </svg> </button> </div> </div>
 </div> <div class="tahajjud-alarm-bar" id="tahajjudAlarmBar" aria-label="Teheccüd namazı alarmı"> <div class="tahajjud-alarm-left"> <div class="tahajjud-alarm-icon" aria-hidden="true">🌙</div> <div> <div class="tahajjud-alarm-title">Teheccüd namazı alarmını aç</div> <div class="tahajjud-alarm-meta" id="tahajjudAlarmMeta">Bugün BarakaWay’de</div> </div> </div> <label class="tahajjud-switch" aria-label="Teheccüd alarmını aç veya kapat"> <input type="checkbox" id="tahajjudAlarmToggle"> <span class="tahajjud-slider"></span> </label>
 </div>
@@ -865,7 +897,96 @@ window.addEventListener("DOMContentLoaded",function(){const installBtn=document.
 })();
 </script>
 <script>
-(function(){ const switches = document.querySelectorAll('.theme-switch'); const labels = document.querySelectorAll('.theme-toggle-label'); if(!switches.length || !labels.length) return; function applyTheme(theme){ document.documentElement.classList.remove('light-mode','dark-mode'); document.documentElement.classList.add(theme + '-mode'); localStorage.setItem('siteTheme', theme); switches.forEach(function(switchEl){ switchEl.checked = theme === 'light'; }); labels.forEach(function(label){ label.textContent = theme === 'dark' ? 'Aydınlık mod' : 'Karanlık mod'; }); } const savedTheme = localStorage.getItem('siteTheme') || 'dark'; applyTheme(savedTheme); switches.forEach(function(switchEl){ switchEl.addEventListener('change', function(){ applyTheme(this.checked ? 'light' : 'dark'); }); });
+(function(){
+  const switches = document.querySelectorAll('.theme-switch');
+  const labels = document.querySelectorAll('.theme-toggle-label');
+  const GLOW_KEY = 'barakawayGlowOff';
+
+  if(!switches.length || !labels.length) return;
+
+  function safeGet(key){ try{ return localStorage.getItem(key); }catch(e){ return null; } }
+  function safeSet(key, value){ try{ localStorage.setItem(key, value); }catch(e){} }
+
+  function hasPremiumTheme(){
+    try{
+      if(window.BarakaWayTheme && typeof window.BarakaWayTheme.currentPremiumTheme === 'function'){
+        if(window.BarakaWayTheme.currentPremiumTheme()) return true;
+      }
+      if(safeGet('barakaway_premium_theme')) return true;
+    }catch(e){}
+    return document.documentElement.className.indexOf('premium-theme-') !== -1 ||
+           (document.body && document.body.className.indexOf('premium-theme-') !== -1);
+  }
+
+  function forcePremiumDarkBase(){
+    document.documentElement.classList.remove('light-mode');
+    document.documentElement.classList.add('dark-mode');
+    if(document.body){
+      document.body.classList.remove('light-mode');
+      document.body.classList.add('dark-mode');
+    }
+    safeSet('siteTheme','dark');
+  }
+
+  function setGlowOff(off){
+    document.documentElement.classList.toggle('bw-glow-off', off);
+    if(document.body) document.body.classList.toggle('bw-glow-off', off);
+    safeSet(GLOW_KEY, off ? '1' : '0');
+
+    switches.forEach(function(switchEl){
+      switchEl.checked = !off;
+      switchEl.setAttribute('aria-checked', off ? 'false' : 'true');
+      switchEl.setAttribute('aria-label', off ? 'Glow Off' : 'Glow On');
+    });
+
+    labels.forEach(function(label){
+      label.textContent = off ? 'Glow Off' : 'Glow On';
+    });
+  }
+
+  function applyTheme(theme){
+    if(hasPremiumTheme()){
+      forcePremiumDarkBase();
+      setGlowOff(safeGet(GLOW_KEY) === '1');
+      return;
+    }
+
+    var selected = theme === 'light' ? 'light' : 'dark';
+
+    document.documentElement.classList.remove('light-mode','dark-mode');
+    document.documentElement.classList.add(selected + '-mode');
+    if(document.body){
+      document.body.classList.remove('light-mode','dark-mode');
+      document.body.classList.add(selected + '-mode');
+    }
+    safeSet('siteTheme', selected);
+
+    switches.forEach(function(switchEl){
+      switchEl.checked = selected === 'light';
+    });
+
+    labels.forEach(function(label){
+      label.textContent = selected === 'dark' ? 'Light mode' : 'Dark mode';
+    });
+  }
+
+  if(hasPremiumTheme()){
+    forcePremiumDarkBase();
+    setGlowOff(safeGet(GLOW_KEY) === '1');
+  }else{
+    applyTheme(safeGet('siteTheme') || 'dark');
+  }
+
+  switches.forEach(function(switchEl){
+    switchEl.addEventListener('change', function(){
+      if(hasPremiumTheme()){
+        forcePremiumDarkBase();
+        setGlowOff(!this.checked);
+      }else{
+        applyTheme(this.checked ? 'light' : 'dark');
+      }
+    });
+  });
 })();
 </script> <script>
 (function(){ const elName = document.getElementById('homePrayerName'); const elTime = document.getElementById('homePrayerTime'); const elMeta = document.getElementById('homePrayerMeta'); const elCountdown = document.getElementById('homePrayerCountdown'); const elLocation = document.getElementById('homePrayerLocation'); if(!elName || !elTime || !elMeta || !elCountdown || !elLocation) return; const UI = { names: {Fajr:'Sabah', Dhuhr:'Öğle', Asr:'İkindi', Maghrib:'Akşam', Isha:'Yatsı'}, at: 'saat', startsIn: 'kalan', loading: 'Namaz vakitleri yükleniyor...', fallbackLocation: 'Taşkent, Özbekistan' }; let nextPrayerTimer = null; window.homePrayerShareState = {timings:null, location:UI.fallbackLocation, date:'', city:'Tashkent', country:'Uzbekistan'}; function getPrayerSettings(){ try{ return JSON.parse(localStorage.getItem('prayer_page_settings_v1') || '{}'); }catch(_){ return {}; } } function parseTodayTimeToDate(timeStr){ const n = new Date(); const clean = String(timeStr || '').split(' ')[0]; const parts = clean.split(':').map(Number); return new Date(n.getFullYear(), n.getMonth(), n.getDate(), parts[0] || 0, parts[1] || 0, 0); } function getNextPrayer(t){ const seq = ['Fajr','Dhuhr','Asr','Maghrib','Isha']; const now = new Date(); for(const key of seq){ const d = parseTodayTimeToDate(t[key]); if(d > now) return {key, time:d}; } const tf = parseTodayTimeToDate(t.Fajr); tf.setDate(tf.getDate() + 1); return {key:'Fajr', time:tf}; } function setCountdown(target){ const tick = () => { const now = new Date(); let diff = target - now; if(diff < 0) diff = 0; const h = Math.floor(diff / 3600000); const m = Math.floor((diff % 3600000) / 60000); const s = Math.floor((diff % 60000) / 1000); elCountdown.textContent = `${String(h).padStart(2,'0')}:${String(m).padStart(2,'0')}:${String(s).padStart(2,'0')}`; }; if(nextPrayerTimer) clearInterval(nextPrayerTimer); tick(); nextPrayerTimer = setInterval(tick, 1000); } async function fetchPrayerWidget(){ try{ const city = (localStorage.getItem('prayer_city') || 'Tashkent').trim(); const country = (localStorage.getItem('prayer_country') || 'Uzbekistan').trim(); const settings = getPrayerSettings(); window.homePrayerShareState.city = city || 'Tashkent'; window.homePrayerShareState.country = country || 'Uzbekistan'; const method = settings.method || '2'; const school = settings.school || '1'; const date = new Date(); const dd = String(date.getDate()).padStart(2,'0'); const mm = String(date.getMonth() + 1).padStart(2,'0'); const yyyy = date.getFullYear(); const params = new URLSearchParams({ city, country, method, school, tune: '0,0,0,0,0,0,0,0,0' }); const url = `https://api.aladhan.com/v1/timingsByCity/${dd}-${mm}-${yyyy}?${params.toString()}`; const res = await fetch(url); const json = await res.json(); const timings = json?.data?.timings; if(!timings) throw new Error('No timings'); const locationText = `${city}${country ? ', ' + country : ''}`; elLocation.textContent = locationText || UI.fallbackLocation; window.homePrayerShareState.timings = timings; window.homePrayerShareState.location = locationText || UI.fallbackLocation; window.homePrayerShareState.date = `${dd}.${mm}.${yyyy}`; const next = getNextPrayer(timings); const prayerName = UI.names[next.key] || next.key; elName.textContent = prayerName; elTime.textContent = String(timings[next.key] || '--:--').slice(0,5); elMeta.textContent = ''; setCountdown(next.time); }catch(_){ elLocation.textContent = UI.fallbackLocation; elName.textContent = 'Sabah'; elTime.textContent = '--:--'; elMeta.textContent = UI.loading; elCountdown.textContent = '--:--:--'; } } window.buildPrayerTimesShareText = function(){ const state = window.homePrayerShareState || {}; const timings = state.timings || {}; const clean = (value) => String(value || '--:--').split(' ')[0].slice(0,5); return [ 'BarakaWay', "Namaz vakitleri", `${state.location || UI.fallbackLocation}${state.date ? ' — ' + state.date : ''}`, '', `Sabah: ${clean(timings.Fajr)}`, `Güneş: ${clean(timings.Sunrise)}`, `Öğle: ${clean(timings.Dhuhr)}`, `İkindi: ${clean(timings.Asr)}`, `Akşam: ${clean(timings.Maghrib)}`, `Yatsı: ${clean(timings.Isha)}`, '', window.location.origin ? window.location.origin + '/prayer-times-tr.html' : window.location.href ].join('\n'); }; fetchPrayerWidget();

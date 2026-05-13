@@ -3,7 +3,7 @@
    Goal: always prefer the newest files from the network, especially HTML/JS/CSS.
 */
 
-const CACHE_VERSION = '20260513-pro-glow-inline-home-v1';
+const CACHE_VERSION = '20260513-pro-glow-knob-real-fix-v1';
 const CACHE_NAME = `barakaway-runtime-${CACHE_VERSION}`;
 
 const APP_SHELL = [
