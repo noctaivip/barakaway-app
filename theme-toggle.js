@@ -1,10 +1,16 @@
 (function(){
-  const switches = document.querySelectorAll('.theme-switch');
-  const labels = document.querySelectorAll('.theme-toggle-label');
   const GLOW_KEY = 'barakawayGlowOff';
 
   function safeGet(key){ try{ return localStorage.getItem(key); }catch(e){ return null; } }
   function safeSet(key, value){ try{ localStorage.setItem(key, value); }catch(e){} }
+
+  function getSwitches(){
+    return document.querySelectorAll('.theme-switch');
+  }
+
+  function getLabels(){
+    return document.querySelectorAll('.theme-toggle-label');
+  }
 
   function hasPremiumTheme(){
     try{
@@ -32,32 +38,36 @@
     if(document.body) document.body.classList.toggle('bw-glow-off', off);
     safeSet(GLOW_KEY, off ? '1' : '0');
 
-    switches.forEach(function(switchEl){
+    getSwitches().forEach(function(switchEl){
       switchEl.checked = !off;
       switchEl.setAttribute('aria-checked', off ? 'false' : 'true');
       switchEl.setAttribute('aria-label', off ? 'Glow Off' : 'Glow On');
     });
 
-    labels.forEach(function(label){
+    getLabels().forEach(function(label){
       label.textContent = off ? 'Glow Off' : 'Glow On';
     });
   }
 
   function applyTheme(theme){
     const selected = theme === 'light' ? 'light' : 'dark';
+
     document.documentElement.classList.remove('light-mode','dark-mode');
     document.documentElement.classList.add(selected + '-mode');
+
     if(document.body){
       document.body.classList.remove('light-mode','dark-mode');
       document.body.classList.add(selected + '-mode');
     }
+
     safeSet('siteTheme', selected);
 
-    switches.forEach(function(switchEl){
+    getSwitches().forEach(function(switchEl){
       switchEl.checked = selected === 'light';
+      switchEl.setAttribute('aria-checked', selected === 'light' ? 'true' : 'false');
     });
 
-    labels.forEach(function(label){
+    getLabels().forEach(function(label){
       label.textContent = selected === 'dark' ? 'Light mode' : 'Dark mode';
     });
 
@@ -66,17 +76,8 @@
     }
   }
 
-  function init(){
-    if(!switches.length || !labels.length) return;
-
-    if(hasPremiumTheme()){
-      forcePremiumDarkBase();
-      setGlowOff(safeGet(GLOW_KEY) === '1');
-    }else{
-      applyTheme(safeGet('siteTheme') || 'dark');
-    }
-
-    switches.forEach(function(switchEl){
+  function bindSwitches(){
+    getSwitches().forEach(function(switchEl){
       if(switchEl.dataset.bwGlowBound === '1') return;
       switchEl.dataset.bwGlowBound = '1';
 
@@ -89,6 +90,20 @@
         }
       });
     });
+  }
+
+  function syncState(){
+    if(hasPremiumTheme()){
+      forcePremiumDarkBase();
+      setGlowOff(safeGet(GLOW_KEY) === '1');
+    }else{
+      applyTheme(safeGet('siteTheme') || 'dark');
+    }
+  }
+
+  function init(){
+    syncState();
+    bindSwitches();
   }
 
   if(document.readyState === 'loading'){
