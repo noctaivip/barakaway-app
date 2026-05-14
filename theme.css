@@ -1850,3 +1850,117 @@ body.bw-theme-rose-soft:not(.page-themes-pro) .bottom-app-nav :is(*,:hover,:focu
   filter:none !important;
 }
 
+/* ===== PREMIUM THEME BOTTOM NAV COLOR SYNC ===== */
+/*
+  Bottom navigation must follow the active PRO theme immediately.
+  Scoped only to bottom-app-nav / bottom-nav, including themes-pro page.
+*/
+
+html[class*="premium-theme-"] :is(.bottom-app-nav,.bottom-nav),
+body[class*="premium-theme-"] :is(.bottom-app-nav,.bottom-nav),
+body[class*="bw-theme-"] :is(.bottom-app-nav,.bottom-nav){
+  background:var(--bw-premium-page, var(--bw-premium-surface, var(--surface, #101820))) !important;
+  border-top:1px solid var(--bw-premium-border, var(--border, rgba(255,255,255,.16))) !important;
+  box-shadow:
+    0 -18px 44px rgba(0,0,0,.36),
+    inset 0 1px 0 rgba(255,255,255,.06) !important;
+}
+
+html[class*="premium-theme-"] :is(.bottom-app-nav-inner),
+body[class*="premium-theme-"] :is(.bottom-app-nav-inner),
+body[class*="bw-theme-"] :is(.bottom-app-nav-inner){
+  background:var(--bw-premium-surface, var(--surface, #101820)) !important;
+  border:1px solid var(--bw-premium-border, var(--border, rgba(255,255,255,.16))) !important;
+  box-shadow:
+    inset 0 1px 0 rgba(255,255,255,.08),
+    0 12px 30px rgba(0,0,0,.22) !important;
+}
+
+html[class*="premium-theme-"] :is(.bottom-app-nav-item,.bottom-nav a,.bottom-nav button),
+body[class*="premium-theme-"] :is(.bottom-app-nav-item,.bottom-nav a,.bottom-nav button),
+body[class*="bw-theme-"] :is(.bottom-app-nav-item,.bottom-nav a,.bottom-nav button){
+  color:var(--bw-premium-text-soft, var(--text-soft, #dbeafe)) !important;
+  -webkit-text-fill-color:var(--bw-premium-text-soft, var(--text-soft, #dbeafe)) !important;
+  text-shadow:none !important;
+}
+
+html[class*="premium-theme-"] :is(.bottom-app-nav-item svg,.bottom-nav svg),
+body[class*="premium-theme-"] :is(.bottom-app-nav-item svg,.bottom-nav svg),
+body[class*="bw-theme-"] :is(.bottom-app-nav-item svg,.bottom-nav svg){
+  color:inherit !important;
+  stroke:currentColor !important;
+  fill:none !important;
+}
+
+html[class*="premium-theme-"] :is(.bottom-app-nav-item.active,.bottom-nav a.active,.bottom-nav button.active),
+body[class*="premium-theme-"] :is(.bottom-app-nav-item.active,.bottom-nav a.active,.bottom-nav button.active),
+body[class*="bw-theme-"] :is(.bottom-app-nav-item.active,.bottom-nav a.active,.bottom-nav button.active){
+  background:var(--bw-premium-button, var(--surface-3, #2563eb)) !important;
+  border-color:var(--bw-premium-border-strong, var(--bw-premium-border, rgba(255,255,255,.24))) !important;
+  color:var(--bw-premium-button-text, var(--bw-premium-text, #ffffff)) !important;
+  -webkit-text-fill-color:var(--bw-premium-button-text, var(--bw-premium-text, #ffffff)) !important;
+  box-shadow:
+    0 12px 28px rgba(0,0,0,.24),
+    0 0 0 1px color-mix(in srgb, var(--bw-premium-border-strong, rgba(255,255,255,.24)) 55%, transparent),
+    inset 0 1px 0 rgba(255,255,255,.14) !important;
+}
+
+html[class*="premium-theme-"] :is(.bottom-app-nav-item:hover,.bottom-app-nav-item:focus-visible,.bottom-nav a:hover,.bottom-nav button:hover),
+body[class*="premium-theme-"] :is(.bottom-app-nav-item:hover,.bottom-app-nav-item:focus-visible,.bottom-nav a:hover,.bottom-nav button:hover),
+body[class*="bw-theme-"] :is(.bottom-app-nav-item:hover,.bottom-app-nav-item:focus-visible,.bottom-nav a:hover,.bottom-nav button:hover){
+  border-color:var(--bw-premium-border-strong, var(--bw-premium-border, rgba(255,255,255,.24))) !important;
+}
+
+html[class*="premium-theme-"].bw-glow-off :is(.bottom-app-nav,.bottom-app-nav-inner,.bottom-app-nav-item,.bottom-nav,.bottom-nav a,.bottom-nav button),
+html[class*="premium-theme-"] body.bw-glow-off :is(.bottom-app-nav,.bottom-app-nav-inner,.bottom-app-nav-item,.bottom-nav,.bottom-nav a,.bottom-nav button),
+body[class*="premium-theme-"].bw-glow-off :is(.bottom-app-nav,.bottom-app-nav-inner,.bottom-app-nav-item,.bottom-nav,.bottom-nav a,.bottom-nav button),
+body[class*="bw-theme-"].bw-glow-off :is(.bottom-app-nav,.bottom-app-nav-inner,.bottom-app-nav-item,.bottom-nav,.bottom-nav a,.bottom-nav button){
+  box-shadow:none !important;
+}
+
+/* Exact flat blue bottom navigation for Night Mosque */
+html.premium-theme-night-mosque,
+html.theme-night-mosque,
+body.premium-theme-night-mosque,
+body.theme-night-mosque,
+body.bw-theme-night-mosque{
+  --bw-premium-page:#050b1f !important;
+  --bw-premium-surface:#071331 !important;
+  --bw-premium-surface-2:#0a1d46 !important;
+  --bw-premium-button:linear-gradient(180deg,#2563eb 0%,#102a66 100%) !important;
+  --bw-premium-button-text:#f3f8ff !important;
+  --bw-premium-text:#f3f8ff !important;
+  --bw-premium-text-soft:#dbeafe !important;
+  --bw-premium-muted:#93c5fd !important;
+  --bw-premium-border:rgba(96,165,250,.34) !important;
+  --bw-premium-border-strong:rgba(191,219,254,.72) !important;
+}
+
+html.premium-theme-night-mosque :is(.bottom-app-nav,.bottom-nav),
+html.theme-night-mosque :is(.bottom-app-nav,.bottom-nav),
+body.premium-theme-night-mosque :is(.bottom-app-nav,.bottom-nav),
+body.theme-night-mosque :is(.bottom-app-nav,.bottom-nav),
+body.bw-theme-night-mosque :is(.bottom-app-nav,.bottom-nav){
+  background:#050b1f !important;
+  border-top-color:rgba(96,165,250,.30) !important;
+}
+
+html.premium-theme-night-mosque :is(.bottom-app-nav-inner),
+html.theme-night-mosque :is(.bottom-app-nav-inner),
+body.premium-theme-night-mosque :is(.bottom-app-nav-inner),
+body.theme-night-mosque :is(.bottom-app-nav-inner),
+body.bw-theme-night-mosque :is(.bottom-app-nav-inner){
+  background:#071331 !important;
+  border-color:rgba(96,165,250,.34) !important;
+}
+
+html.premium-theme-night-mosque :is(.bottom-app-nav-item.active,.bottom-nav a.active,.bottom-nav button.active),
+html.theme-night-mosque :is(.bottom-app-nav-item.active,.bottom-nav a.active,.bottom-nav button.active),
+body.premium-theme-night-mosque :is(.bottom-app-nav-item.active,.bottom-nav a.active,.bottom-nav button.active),
+body.theme-night-mosque :is(.bottom-app-nav-item.active,.bottom-nav a.active,.bottom-nav button.active),
+body.bw-theme-night-mosque :is(.bottom-app-nav-item.active,.bottom-nav a.active,.bottom-nav button.active){
+  background:linear-gradient(180deg,#2563eb 0%,#102a66 100%) !important;
+  border-color:rgba(191,219,254,.72) !important;
+  color:#f3f8ff !important;
+  -webkit-text-fill-color:#f3f8ff !important;
+}
