@@ -3,6 +3,7 @@
 
   const SITE_THEME_KEY = "siteTheme";
   const PREMIUM_THEME_KEY = "barakaway_premium_theme";
+  const GLOW_KEY = "barakawayGlowOff";
 
   const PREMIUM_THEMES = [
     "royal-gold",
@@ -54,6 +55,15 @@
     }
   }
 
+  function applyGlowState(isPremium){
+    const off = isPremium && safeGet(GLOW_KEY) === "1";
+    document.documentElement.classList.toggle("bw-glow-off", off);
+
+    if(document.body){
+      document.body.classList.toggle("bw-glow-off", off);
+    }
+  }
+
   function applyPremiumTheme(theme){
     const selected = normalizePremiumTheme(theme);
     const root = document.documentElement;
@@ -91,11 +101,13 @@
       safeSet(SITE_THEME_KEY, "dark");
       applySiteTheme("dark");
       applyPremiumTheme(premiumTheme);
+      applyGlowState(true);
       return;
     }
 
     applySiteTheme(safeGet(SITE_THEME_KEY) || "dark");
     applyPremiumTheme("");
+    applyGlowState(false);
   }
 
   window.BarakaWayTheme = {
@@ -118,11 +130,13 @@
         safeRemove(PREMIUM_THEME_KEY);
       }
       applyPremiumTheme(selected);
+      applyGlowState(!!selected);
       window.dispatchEvent(new CustomEvent("barakaway:premium-theme-change", { detail: { theme: selected } }));
     },
     clearPremiumTheme: function(){
       safeRemove(PREMIUM_THEME_KEY);
       applyPremiumTheme("");
+      applyGlowState(false);
       window.dispatchEvent(new CustomEvent("barakaway:premium-theme-change", { detail: { theme: "" } }));
     },
     refresh: refresh,
@@ -138,7 +152,7 @@
   }
 
   window.addEventListener("storage", function(event){
-    if(!event.key || event.key === SITE_THEME_KEY || event.key === PREMIUM_THEME_KEY) refresh();
+    if(!event.key || event.key === SITE_THEME_KEY || event.key === PREMIUM_THEME_KEY || event.key === GLOW_KEY) refresh();
   });
 
   if("serviceWorker" in navigator){
