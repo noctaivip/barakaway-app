@@ -4153,42 +4153,42 @@ body.bw-glow-off.bw-theme-rose-soft:not(.page-themes-pro) input.theme-switch{
   border-color:rgba(255,255,255,.14) !important;
 }
 
-/* ===== BARAKAWAY ALL PRO THEMES GLOBAL GLOW STATE FIX ===== */
-/*
-  Scope: all PRO themes only.
-  Glow On: edge illumination is visible on every page.
-  Glow Off: edge illumination is removed on every page.
-  Visual theme palettes, layouts and JS logic are unchanged.
-*/
+/* ===== BARAKAWAY PRO GLOW ON/OFF FINAL THEME-COLOR FIX ===== */
+/* All PRO themes. Glow color follows active theme. No white fallback. */
 
-/* Glow On variables for any premium theme */
-html[class*="premium-theme-"]:not(.bw-glow-off),
-body[class*="premium-theme-"]:not(.bw-glow-off),
-body[class*="bw-theme-"]:not(.bw-glow-off){
-  --bw-pro-edge-glow:
-    inset 0 0 40px var(--bw-premium-border, rgba(255,255,255,.28)),
-    inset 0 0 92px color-mix(in srgb, var(--bw-premium-border, rgba(255,255,255,.28)) 70%, transparent),
-    inset 0 0 155px color-mix(in srgb, var(--bw-premium-border, rgba(255,255,255,.28)) 42%, transparent) !important;
+html.premium-theme-emerald-quran,body.premium-theme-emerald-quran,body.bw-theme-emerald-quran{
+  --bw-pro-edge-glow:inset 0 0 40px rgba(110,231,183,.42),inset 0 0 92px rgba(110,231,183,.26),inset 0 0 155px rgba(45,122,70,.16) !important;
+}
+html.premium-theme-violet-noor,body.premium-theme-violet-noor,body.bw-theme-violet-noor{
+  --bw-pro-edge-glow:inset 0 0 40px rgba(216,180,254,.40),inset 0 0 92px rgba(168,85,247,.25),inset 0 0 155px rgba(126,34,206,.15) !important;
+}
+html.premium-theme-rose-soft,body.premium-theme-rose-soft,body.bw-theme-rose-soft{
+  --bw-pro-edge-glow:inset 0 0 40px rgba(255,174,211,.40),inset 0 0 92px rgba(236,72,153,.25),inset 0 0 155px rgba(190,24,93,.15) !important;
+}
+html.premium-theme-royal-gold,body.premium-theme-royal-gold,body.bw-theme-royal-gold{
+  --bw-pro-edge-glow:inset 0 0 40px rgba(245,209,112,.40),inset 0 0 92px rgba(215,192,122,.25),inset 0 0 155px rgba(175,132,48,.15) !important;
+}
+html.premium-theme-carbon-elite,body.premium-theme-carbon-elite,body.bw-theme-carbon-elite{
+  --bw-pro-edge-glow:inset 0 0 40px rgba(180,190,205,.30),inset 0 0 92px rgba(120,135,155,.20),inset 0 0 155px rgba(70,82,100,.13) !important;
+}
+html.premium-theme-night-mosque,body.premium-theme-night-mosque,body.bw-theme-night-mosque{
+  --bw-pro-edge-glow:inset 0 0 40px rgba(125,211,252,.38),inset 0 0 92px rgba(56,189,248,.24),inset 0 0 155px rgba(37,99,235,.15) !important;
+}
+html.premium-theme-desert-sand,body.premium-theme-desert-sand,body.bw-theme-desert-sand{
+  --bw-pro-edge-glow:inset 0 0 40px rgba(251,191,36,.36),inset 0 0 92px rgba(217,119,6,.22),inset 0 0 155px rgba(146,64,14,.14) !important;
+}
+html.premium-theme-children-soft,body.premium-theme-children-soft,body.bw-theme-children-soft{
+  --bw-pro-edge-glow:inset 0 0 40px rgba(147,197,253,.34),inset 0 0 92px rgba(244,114,182,.20),inset 0 0 155px rgba(129,140,248,.14) !important;
 }
 
-/* Glow On applied to main page wrappers */
+/* Glow On */
 html[class*="premium-theme-"]:not(.bw-glow-off) body:not(.page-themes-pro) :is(.container,.page,.page-shell,.app-shell,main,.premium-glow,.pro-glow,.edge-glow,.glow-frame,.premium-frame,.pro-frame),
 body[class*="premium-theme-"]:not(.bw-glow-off):not(.page-themes-pro) :is(.container,.page,.page-shell,.app-shell,main,.premium-glow,.pro-glow,.edge-glow,.glow-frame,.premium-frame,.pro-frame),
 body[class*="bw-theme-"]:not(.bw-glow-off):not(.page-themes-pro) :is(.container,.page,.page-shell,.app-shell,main,.premium-glow,.pro-glow,.edge-glow,.glow-frame,.premium-frame,.pro-frame){
   box-shadow:var(--bw-pro-edge-glow) !important;
 }
 
-/* Glow Off variables for any premium theme */
-html.bw-glow-off[class*="premium-theme-"],
-html[class*="premium-theme-"] body.bw-glow-off,
-body.bw-glow-off[class*="premium-theme-"],
-body.bw-glow-off[class*="bw-theme-"]{
-  --bw-pro-edge-glow:none !important;
-  --bw-premium-inner-glow:none !important;
-  --bw-premium-glow:none !important;
-}
-
-/* Glow Off removes main edge illumination everywhere */
+/* Glow Off */
 html.bw-glow-off[class*="premium-theme-"] body:not(.page-themes-pro) :is(.container,.page,.page-shell,.app-shell,main,.premium-glow,.pro-glow,.edge-glow,.glow-frame,.premium-frame,.pro-frame),
 html[class*="premium-theme-"] body.bw-glow-off:not(.page-themes-pro) :is(.container,.page,.page-shell,.app-shell,main,.premium-glow,.pro-glow,.edge-glow,.glow-frame,.premium-frame,.pro-frame),
 body.bw-glow-off[class*="premium-theme-"]:not(.page-themes-pro) :is(.container,.page,.page-shell,.app-shell,main,.premium-glow,.pro-glow,.edge-glow,.glow-frame,.premium-frame,.pro-frame),
@@ -4196,10 +4196,9 @@ body.bw-glow-off[class*="bw-theme-"]:not(.page-themes-pro) :is(.container,.page,
   box-shadow:none !important;
 }
 
-/* Glow Off also prevents nested glow-like shadows from staying visible */
-html.bw-glow-off[class*="premium-theme-"] body:not(.page-themes-pro) :is(.container,.page,.page-shell,.app-shell,main) *,
-html[class*="premium-theme-"] body.bw-glow-off:not(.page-themes-pro) :is(.container,.page,.page-shell,.app-shell,main) *,
-body.bw-glow-off[class*="premium-theme-"]:not(.page-themes-pro) :is(.container,.page,.page-shell,.app-shell,main) *,
-body.bw-glow-off[class*="bw-theme-"]:not(.page-themes-pro) :is(.container,.page,.page-shell,.app-shell,main) *{
-  box-shadow:none !important;
+html.bw-glow-off[class*="premium-theme-"],
+html[class*="premium-theme-"] body.bw-glow-off,
+body.bw-glow-off[class*="premium-theme-"],
+body.bw-glow-off[class*="bw-theme-"]{
+  --bw-pro-edge-glow:none !important;
 }
