@@ -609,6 +609,210 @@ h1{
 @media(max-width:420px){
   h1{font-size:35px;}
 }
+
+
+/* ===== PRO CARD TOP TOGGLE + CARD NEON GLOW ===== */
+
+body.page-themes-pro .theme-card[data-theme]:not([data-coming-soon]){
+  position:relative !important;
+  overflow:hidden !important;
+  transition:
+    border-color .22s ease,
+    box-shadow .22s ease,
+    filter .22s ease,
+    transform .18s ease !important;
+}
+
+/* Toggle is only the control. Main glow is on the card itself. */
+body.page-themes-pro .theme-card[data-theme]:not([data-coming-soon]) .pro-card-glow-toggle{
+  position:absolute !important;
+  left:50% !important;
+  top:16px !important;
+  transform:translateX(-50%) !important;
+  z-index:120 !important;
+
+  width:116px !important;
+  height:38px !important;
+  border-radius:999px !important;
+  padding:4px !important;
+
+  display:flex !important;
+  align-items:center !important;
+  justify-content:flex-start !important;
+
+  background:rgba(5,10,18,.80) !important;
+  border:1px solid rgba(255,255,255,.26) !important;
+
+  backdrop-filter:blur(16px) !important;
+  -webkit-backdrop-filter:blur(16px) !important;
+
+  box-shadow:
+    0 12px 32px rgba(0,0,0,.42),
+    inset 0 1px 0 rgba(255,255,255,.14) !important;
+
+  cursor:pointer !important;
+  pointer-events:auto !important;
+  user-select:none !important;
+  -webkit-tap-highlight-color:transparent !important;
+}
+
+body.page-themes-pro .theme-card[data-theme]:not([data-coming-soon]) .pro-card-glow-label{
+  position:absolute !important;
+  left:42px !important;
+  top:50% !important;
+  transform:translateY(-50%) !important;
+
+  color:#ffffff !important;
+  font-size:10px !important;
+  font-weight:950 !important;
+  letter-spacing:.02em !important;
+  line-height:1 !important;
+  white-space:nowrap !important;
+  text-shadow:0 0 12px rgba(255,255,255,.24) !important;
+}
+
+body.page-themes-pro .theme-card[data-theme]:not([data-coming-soon]) .pro-card-glow-knob{
+  position:absolute !important;
+  left:4px !important;
+  top:4px !important;
+
+  width:30px !important;
+  height:30px !important;
+  border-radius:50% !important;
+  background:#ffffff !important;
+
+  box-shadow:
+    0 0 16px rgba(255,255,255,.72),
+    0 0 30px rgba(255,255,255,.38),
+    0 2px 12px rgba(0,0,0,.34) !important;
+
+  transition:left .22s ease !important;
+}
+
+body.page-themes-pro .theme-card.pro-card-local-glow-on .pro-card-glow-knob{
+  left:81px !important;
+}
+
+body.page-themes-pro .theme-card.pro-card-local-glow-on .pro-card-glow-label{
+  left:13px !important;
+}
+
+/* Main CARD glow — like page Glow On: bright border + inner edge + outer bloom */
+body.page-themes-pro .theme-card[data-theme="emerald-quran"].pro-card-local-glow-on{
+  border-color:rgba(0,255,148,.95) !important;
+  box-shadow:
+    inset 0 0 18px rgba(205,255,232,.76),
+    inset 0 0 48px rgba(92,255,180,.62),
+    inset 0 0 108px rgba(0,255,148,.42),
+    0 0 18px rgba(205,255,232,.48),
+    0 0 46px rgba(0,255,148,.56),
+    0 0 120px rgba(0,255,148,.30),
+    0 18px 44px rgba(0,0,0,.28) !important;
+}
+
+body.page-themes-pro .theme-card[data-theme="violet-noor"].pro-card-local-glow-on{
+  border-color:rgba(222,128,255,.94) !important;
+  box-shadow:
+    inset 0 0 18px rgba(248,210,255,.72),
+    inset 0 0 48px rgba(222,128,255,.60),
+    inset 0 0 108px rgba(176,52,255,.40),
+    0 0 18px rgba(248,210,255,.46),
+    0 0 46px rgba(222,128,255,.54),
+    0 0 120px rgba(176,52,255,.30),
+    0 18px 44px rgba(0,0,0,.28) !important;
+}
+
+body.page-themes-pro .theme-card[data-theme="rose-soft"].pro-card-local-glow-on{
+  border-color:rgba(255,148,210,.94) !important;
+  box-shadow:
+    inset 0 0 18px rgba(255,214,236,.72),
+    inset 0 0 48px rgba(255,148,210,.60),
+    inset 0 0 108px rgba(255,92,176,.40),
+    0 0 18px rgba(255,214,236,.46),
+    0 0 46px rgba(255,148,210,.54),
+    0 0 120px rgba(255,92,176,.30),
+    0 18px 44px rgba(0,0,0,.28) !important;
+}
+
+body.page-themes-pro .theme-card[data-theme="carbon-elite"].pro-card-local-glow-on{
+  border-color:rgba(210,228,255,.90) !important;
+  box-shadow:
+    inset 0 0 18px rgba(240,247,255,.66),
+    inset 0 0 48px rgba(210,228,255,.48),
+    inset 0 0 108px rgba(150,182,228,.34),
+    0 0 18px rgba(240,247,255,.40),
+    0 0 46px rgba(210,228,255,.42),
+    0 0 120px rgba(150,182,228,.24),
+    0 18px 44px rgba(0,0,0,.30) !important;
+}
+
+body.page-themes-pro .theme-card[data-theme="night-mosque"].pro-card-local-glow-on{
+  border-color:rgba(126,192,255,.94) !important;
+  box-shadow:
+    inset 0 0 18px rgba(214,236,255,.70),
+    inset 0 0 48px rgba(126,192,255,.58),
+    inset 0 0 108px rgba(72,132,255,.40),
+    0 0 18px rgba(214,236,255,.46),
+    0 0 46px rgba(126,192,255,.54),
+    0 0 120px rgba(72,132,255,.30),
+    0 18px 44px rgba(0,0,0,.28) !important;
+}
+
+/* Toggle also receives the same color, but secondary. */
+body.page-themes-pro .theme-card.pro-card-local-glow-on .pro-card-glow-toggle{
+  border-color:rgba(255,255,255,.48) !important;
+  box-shadow:
+    0 0 18px currentColor,
+    0 12px 32px rgba(0,0,0,.42),
+    inset 0 1px 0 rgba(255,255,255,.18) !important;
+}
+
+body.page-themes-pro .theme-card[data-theme="emerald-quran"].pro-card-local-glow-on .pro-card-glow-toggle{color:rgba(0,255,148,.60) !important;}
+body.page-themes-pro .theme-card[data-theme="violet-noor"].pro-card-local-glow-on .pro-card-glow-toggle{color:rgba(222,128,255,.60) !important;}
+body.page-themes-pro .theme-card[data-theme="rose-soft"].pro-card-local-glow-on .pro-card-glow-toggle{color:rgba(255,148,210,.60) !important;}
+body.page-themes-pro .theme-card[data-theme="carbon-elite"].pro-card-local-glow-on .pro-card-glow-toggle{color:rgba(210,228,255,.58) !important;}
+body.page-themes-pro .theme-card[data-theme="night-mosque"].pro-card-local-glow-on .pro-card-glow-toggle{color:rgba(126,192,255,.60) !important;}
+
+
+/* ===== PRO CARD TOGGLE SIZE + ON STATE FIX ===== */
+/* Smaller switch. Glow Off = knob left. Glow On = knob right + green switch body. */
+
+body.page-themes-pro .theme-card[data-theme]:not([data-coming-soon]) .pro-card-glow-toggle{
+  width:92px !important;
+  height:32px !important;
+  padding:3px !important;
+  background:rgba(5,10,18,.82) !important;
+  border-color:rgba(255,255,255,.24) !important;
+}
+
+body.page-themes-pro .theme-card[data-theme]:not([data-coming-soon]) .pro-card-glow-label{
+  left:35px !important;
+  font-size:9px !important;
+}
+
+body.page-themes-pro .theme-card[data-theme]:not([data-coming-soon]) .pro-card-glow-knob{
+  left:4px !important;
+  top:4px !important;
+  width:24px !important;
+  height:24px !important;
+}
+
+/* ON state */
+body.page-themes-pro .theme-card.pro-card-local-glow-on .pro-card-glow-toggle{
+  background:linear-gradient(135deg,rgba(0,160,92,.92),rgba(0,92,58,.88)) !important;
+  border-color:rgba(120,255,190,.62) !important;
+}
+
+body.page-themes-pro .theme-card.pro-card-local-glow-on .pro-card-glow-knob{
+  left:64px !important;
+}
+
+body.page-themes-pro .theme-card.pro-card-local-glow-on .pro-card-glow-label{
+  left:10px !important;
+  right:34px !important;
+  color:#f4fff8 !important;
+}
+
 </style>
 
 <script src="/theme-init.js"></script>
@@ -905,6 +1109,9 @@ body.page-themes-pro .theme-card.theme-child.coming-soon-theme .coming-soon-ribb
 </div>
 
         <button class="theme-card theme-emerald" data-theme="emerald-quran">
+          <span class="pro-card-glow-toggle" role="switch" aria-checked="false" aria-label="Glow Off"><span class="pro-card-glow-label">Glow Off</span><span class="pro-card-glow-knob"></span></span>
+
+
           <div class="theme-top">
             <div class="theme-icon">🟢</div>
             <div class="theme-chip">PRO</div>
@@ -915,6 +1122,9 @@ body.page-themes-pro .theme-card.theme-child.coming-soon-theme .coming-soon-ribb
         </button>
 
         <button class="theme-card theme-violet" data-theme="violet-noor">
+          <span class="pro-card-glow-toggle" role="switch" aria-checked="false" aria-label="Glow Off"><span class="pro-card-glow-label">Glow Off</span><span class="pro-card-glow-knob"></span></span>
+
+
           <div class="theme-top">
             <div class="theme-icon">💜</div>
             <div class="theme-chip">PRO</div>
@@ -925,6 +1135,9 @@ body.page-themes-pro .theme-card.theme-child.coming-soon-theme .coming-soon-ribb
         </button>
 
         <button class="theme-card theme-rose" data-theme="rose-soft">
+          <span class="pro-card-glow-toggle" role="switch" aria-checked="false" aria-label="Glow Off"><span class="pro-card-glow-label">Glow Off</span><span class="pro-card-glow-knob"></span></span>
+
+
           <div class="theme-top">
             <div class="theme-icon">🌸</div>
             <div class="theme-chip">PRO</div>
@@ -935,6 +1148,9 @@ body.page-themes-pro .theme-card.theme-child.coming-soon-theme .coming-soon-ribb
         </button>
 
         <button class="theme-card theme-carbon" data-theme="carbon-elite">
+          <span class="pro-card-glow-toggle" role="switch" aria-checked="false" aria-label="Glow Off"><span class="pro-card-glow-label">Glow Off</span><span class="pro-card-glow-knob"></span></span>
+
+
           <div class="theme-top">
             <div class="theme-icon">⚫</div>
             <div class="theme-chip">PRO</div>
@@ -945,6 +1161,9 @@ body.page-themes-pro .theme-card.theme-child.coming-soon-theme .coming-soon-ribb
         </button>
 		
         <button class="theme-card theme-night" data-theme="night-mosque">
+          <span class="pro-card-glow-toggle" role="switch" aria-checked="false" aria-label="Glow Off"><span class="pro-card-glow-label">Glow Off</span><span class="pro-card-glow-knob"></span></span>
+
+
           <div class="theme-top">
             <div class="theme-icon">🌙</div>
             <div class="theme-chip">PRO</div>
@@ -1175,5 +1394,79 @@ body.page-themes-pro .theme-card.theme-child.coming-soon-theme .coming-soon-ribb
 
 
 <script src="bottom-nav.js"></script>
+
+
+<script>
+(function(){
+  'use strict';
+
+  const KEY = 'barakawayProCardGlow';
+
+  function readState(){
+    try{
+      return JSON.parse(localStorage.getItem(KEY) || '{}');
+    }catch(e){
+      return {};
+    }
+  }
+
+  function writeState(state){
+    try{
+      localStorage.setItem(KEY, JSON.stringify(state));
+    }catch(e){}
+  }
+
+  function setCardState(card, isOn){
+    const toggle = card.querySelector('.pro-card-glow-toggle');
+    const label = card.querySelector('.pro-card-glow-label');
+
+    card.classList.toggle('pro-card-local-glow-on', !!isOn);
+
+    if(toggle){
+      toggle.setAttribute('aria-checked', isOn ? 'true' : 'false');
+      toggle.setAttribute('aria-label', isOn ? 'Glow On' : 'Glow Off');
+    }
+
+    if(label){
+      label.textContent = isOn ? 'Glow On' : 'Glow Off';
+    }
+  }
+
+  function applyAll(){
+    const state = readState();
+
+    document.querySelectorAll('body.page-themes-pro .theme-card[data-theme]:not([data-coming-soon])').forEach(function(card){
+      const theme = card.getAttribute('data-theme');
+      setCardState(card, !!state[theme]);
+    });
+  }
+
+  document.addEventListener('click', function(event){
+    const toggle = event.target && event.target.closest ? event.target.closest('.pro-card-glow-toggle') : null;
+    if(!toggle) return;
+
+    event.preventDefault();
+    event.stopPropagation();
+    if(typeof event.stopImmediatePropagation === 'function') event.stopImmediatePropagation();
+
+    const card = toggle.closest('.theme-card[data-theme]');
+    if(!card) return;
+
+    const theme = card.getAttribute('data-theme');
+    const state = readState();
+
+    state[theme] = !state[theme];
+    writeState(state);
+    setCardState(card, state[theme]);
+  }, true);
+
+  if(document.readyState === 'loading'){
+    document.addEventListener('DOMContentLoaded', applyAll, {once:true});
+  }else{
+    applyAll();
+  }
+})();
+</script>
+
 </body>
 </html>
