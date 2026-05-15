@@ -3,7 +3,7 @@
    Goal: always prefer the newest files from the network, especially HTML/JS/CSS.
 */
 
-const CACHE_VERSION = '20260514-pro-card-toggle-size-on-state-v6';
+const CACHE_VERSION = '20260514-pro-card-toggle-final-on-state-v7';
 const CACHE_NAME = `barakaway-runtime-${CACHE_VERSION}`;
 
 const APP_SHELL = [
