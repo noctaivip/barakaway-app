@@ -36,6 +36,18 @@
     return PREMIUM_THEMES.indexOf(theme) !== -1 ? theme : "";
   }
 
+  function isQuranPage(){
+    const path = (location.pathname || "").toLowerCase();
+    return (
+      /\/quran-[a-z]{2}\.html$/.test(path) ||
+      /\/quran-pro-[a-z]{2}\.html$/.test(path) ||
+      /\/quran-ai-[a-z]{2}\.html$/.test(path) ||
+      /\/quran-[a-z]{2}\//.test(path) ||
+      /^quran-[a-z]{2}\.html$/.test(path.replace(/^\//, "")) ||
+      /^quran-[a-z]{2}\//.test(path.replace(/^\//, ""))
+    );
+  }
+
   function removeClassesWithPrefix(target, prefix){
     if(!target || !target.classList) return;
     Array.from(target.classList).forEach(function(className){
@@ -95,6 +107,13 @@
   }
 
   function refresh(){
+    if(isQuranPage()){
+      applySiteTheme("light");
+      applyPremiumTheme("");
+      applyGlowState(false);
+      return;
+    }
+
     const premiumTheme = normalizePremiumTheme(safeGet(PREMIUM_THEME_KEY) || "");
 
     if(premiumTheme){
@@ -115,18 +134,18 @@
     premiumKey: PREMIUM_THEME_KEY,
     premiumThemes: PREMIUM_THEMES.slice(),
     applySiteTheme: function(theme){
-      const selected = normalizePremiumTheme(safeGet(PREMIUM_THEME_KEY) || "") ? "dark" : normalizeSiteTheme(theme);
-      safeSet(SITE_THEME_KEY, selected);
+      const selected = isQuranPage() ? "light" : (normalizePremiumTheme(safeGet(PREMIUM_THEME_KEY) || "") ? "dark" : normalizeSiteTheme(theme));
+      if(!isQuranPage()) safeSet(SITE_THEME_KEY, selected);
       applySiteTheme(selected);
       window.dispatchEvent(new CustomEvent("barakaway:site-theme-change", { detail: { theme: selected } }));
     },
     applyPremiumTheme: function(theme){
-      const selected = normalizePremiumTheme(theme);
+      const selected = isQuranPage() ? "" : normalizePremiumTheme(theme);
       if(selected){
         safeSet(PREMIUM_THEME_KEY, selected);
         safeSet(SITE_THEME_KEY, "dark");
         applySiteTheme("dark");
-      }else{
+      }else if(!isQuranPage()){
         safeRemove(PREMIUM_THEME_KEY);
       }
       applyPremiumTheme(selected);
