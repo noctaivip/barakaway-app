@@ -171,6 +171,80 @@ html[lang='ur'] .ayah-meaning{direction:rtl!important;text-align:right!important
 html[lang='ur'] .ayah-translit{direction:ltr!important;text-align:left!important;}
 html[lang='ur'] .content-toggle{direction:rtl;}
 </style>
+
+
+<style id="surah-sticky-content-controls-fix">
+.content-controls{
+  position:sticky!important;
+  top:0!important;
+  z-index:3200!important;
+  display:flex!important;
+  flex-direction:row!important;
+  align-items:center!important;
+  justify-content:center!important;
+  flex-wrap:nowrap!important;
+  gap:14px!important;
+  width:100%!important;
+  max-width:760px!important;
+  margin:0 auto 18px!important;
+  padding:8px 10px!important;
+  border:0!important;
+  border-radius:0!important;
+  background:transparent!important;
+  box-shadow:none!important;
+  overflow:visible!important;
+}
+
+.content-controls::before,
+.content-controls::after{
+  content:none!important;
+  display:none!important;
+}
+
+.content-toggle{
+  flex:0 0 auto!important;
+  display:inline-flex!important;
+  align-items:center!important;
+  justify-content:center!important;
+  gap:4px!important;
+  min-width:0!important;
+  width:auto!important;
+  margin:0!important;
+  padding:0!important;
+  border:0!important;
+  border-radius:0!important;
+  background:transparent!important;
+  box-shadow:none!important;
+  white-space:nowrap!important;
+  line-height:1!important;
+}
+
+.content-toggle input{
+  flex:0 0 auto!important;
+  width:13px!important;
+  height:13px!important;
+  margin:0!important;
+  padding:0!important;
+}
+
+.content-toggle::before,
+.content-toggle::after{
+  content:none!important;
+  display:none!important;
+}
+
+@media (max-width:700px){
+  .content-controls{
+    max-width:100%!important;
+    gap:12px!important;
+  }
+
+  .content-toggle{
+    font-size:11px!important;
+  }
+}
+</style>
+
 </head>
 <body data-surah-arabic="العلق‎" data-surah-meta="The Clot · سورت 96 · 19 Ayahs · Meccan" data-surah-number="96" data-surah-page-key="Quran-ur/96 - al-alaq-ur.html" data-surah-title="Al-&#x27;Alaq">
 <div class="container">
@@ -449,7 +523,7 @@ loadSurah();
   function goToSaved(){let s=rj(P+'lastSaved',null);if(!s||!s.href){toast('ابھی کوئی save مقام نہیں');return;} if(s.key&&s.key.startsWith(PAGE_KEY+'#ayah-')){let id=s.key.split('#').pop();let el=document.getElementById(id);if(el){el.scrollIntoView({behavior:'smooth',block:'center'});el.style.outline='2px solid rgba(240,216,145,.85)';el.style.outlineOffset='6px';setTimeout(()=>{el.style.outline='';el.style.outlineOffset='';},2400);toast('save آیت کھول دی گئی');return;}} location.href=s.href;}
   function renderFavs(){const root=document.getElementById('quran-favorites-list');if(!root)return;let f=favs();if(!f.length){root.innerHTML='<div class="quran-empty-state">ابھی کوئی پسندیدہ سورت نہیں۔ سورت کے اوپر موجود ستارے کو دبائیں۔</div>';return;}root.innerHTML=f.map(item=>{let title='سورت '+esc(item.number)+' — '+esc(item.title);let meta=esc(item.arabic)+' · '+esc(item.meta);return '<div class="quran-favorite-item"><a href="'+esc(item.href)+'" style="text-decoration:none;color:inherit;min-width:0;"><div class="quran-favorite-title">'+title+'</div><div class="quran-favorite-meta">'+meta+'</div></a><a class="quran-favorite-open" href="'+esc(item.href)+'">›</a><button class="quran-favorite-remove" type="button" data-remove-favorite="'+esc(item.key)+'"><svg viewBox="0 0 24 24"><path d="M12 3.6l2.45 5.05 5.55.8-4.02 3.92.95 5.53L12 16.3l-4.93 2.6.95-5.53L4 9.45l5.55-.8L12 3.6z"/></svg></button></div>';}).join('');}
   function sync(){let keys=new Set(favs().map(x=>x.key)),saved=rj(P+'lastSaved',null);document.querySelectorAll('[data-surah-page-action="favorite"]').forEach(b=>b.classList.toggle('is-active',keys.has(PAGE_KEY)));document.querySelectorAll('[data-surah-page-action="save"]').forEach(b=>b.classList.toggle('is-active',!!saved));document.querySelectorAll('[data-ayah-action="save"]').forEach(b=>b.classList.toggle('is-active',saved&&saved.key===ayahData(b).key));let reading=localStorage.getItem(P+'readingMode')==='1';document.body.classList.toggle('quran-reading-mode',reading);let rb=document.querySelector('[data-surah-page-action="reading"]');if(rb)rb.classList.toggle('is-active',reading);let tb=document.querySelector('[data-surah-page-action="theme"]');if(tb)tb.classList.toggle('is-active',document.documentElement.classList.contains('dark-mode'));}
-  function applyLayers(){let s=rj(P+'layers',{arabic:true,translit:true,meaning:true});document.body.classList.toggle('hide-arabic',!s.arabic);document.body.classList.toggle('hide-translit',!s.translit);document.body.classList.toggle('hide-meaning',!s.meaning);['Arabic','Translit','Meaning'].forEach(n=>{let el=document.getElementById('toggle'+n);if(el)el.checked=!!s[n.toLowerCase()];});}
+  function applyLayers(){let s=rj(P+'layers',{arabic:true,translit:true,meaning:true});document.body.classList.toggle('hide-arabic',!s.arabic);document.body.classList.toggle('hide-translit',!s.translit);document.body.classList.toggle('hide-meaning',!s.meaning);const layerMap={Arabic:'arabic',Arab:'arabic',Translit:'translit',Meaning:'meaning'};Object.keys(layerMap).forEach(n=>{let el=document.getElementById('toggle'+n);if(el)el.checked=!!s[layerMap[n]];});}
   function updLayer(name,checked){let s=rj(P+'layers',{arabic:true,translit:true,meaning:true});s[name]=checked;if(!s.arabic&&!s.translit&&!s.meaning){s[name]=true;toast('کم از کم ایک متن کی تہہ نظر آنی چاہیے');}wj(P+'layers',s);applyLayers();}
   function openM(id){let m=document.getElementById(id);if(m){m.classList.add('is-visible');m.setAttribute('aria-hidden','false');}}
   function closeM(id){let m=document.getElementById(id);if(m){m.classList.remove('is-visible');m.setAttribute('aria-hidden','true');}}
