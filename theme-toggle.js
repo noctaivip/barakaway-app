@@ -23,6 +23,16 @@
            (document.body && document.body.className.indexOf('premium-theme-') !== -1);
   }
 
+
+  function isQuranSurahPage(){
+    try{
+      const path = (window.location && window.location.pathname ? window.location.pathname : '').toLowerCase();
+      return !!(document.body && document.body.hasAttribute('data-surah-page-key')) || /\/quran-[a-z]{2,3}\/[^/]+-[a-z]{2,3}\.html$/.test(path);
+    }catch(e){
+      return false;
+    }
+  }
+
   function forcePremiumDarkBase(){
     document.documentElement.classList.remove('light-mode');
     document.documentElement.classList.add('dark-mode');
@@ -93,6 +103,16 @@
   }
 
   function syncState(){
+    if(isQuranSurahPage()){
+      document.documentElement.classList.remove('dark-mode');
+      document.documentElement.classList.add('light-mode');
+      if(document.body){
+        document.body.classList.remove('dark-mode');
+        document.body.classList.add('light-mode');
+      }
+      return;
+    }
+
     if(hasPremiumTheme()){
       forcePremiumDarkBase();
       setGlowOff(safeGet(GLOW_KEY) === '1');

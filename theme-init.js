@@ -36,18 +36,6 @@
     return PREMIUM_THEMES.indexOf(theme) !== -1 ? theme : "";
   }
 
-  function isQuranPage(){
-    const path = (location.pathname || "").toLowerCase();
-    return (
-      /\/quran-[a-z]{2}\.html$/.test(path) ||
-      /\/quran-pro-[a-z]{2}\.html$/.test(path) ||
-      /\/quran-ai-[a-z]{2}\.html$/.test(path) ||
-      /\/quran-[a-z]{2}\//.test(path) ||
-      /^quran-[a-z]{2}\.html$/.test(path.replace(/^\//, "")) ||
-      /^quran-[a-z]{2}\//.test(path.replace(/^\//, ""))
-    );
-  }
-
   function removeClassesWithPrefix(target, prefix){
     if(!target || !target.classList) return;
     Array.from(target.classList).forEach(function(className){
@@ -73,6 +61,17 @@
 
     if(document.body){
       document.body.classList.toggle("bw-glow-off", off);
+    }
+  }
+
+
+  function isQuranSurahPage(){
+    try {
+      const path = (window.location && window.location.pathname ? window.location.pathname : "").toLowerCase();
+      const body = document.body;
+      return !!(body && body.hasAttribute("data-surah-page-key")) || /\/quran-[a-z]{2,3}\/[^/]+-[a-z]{2,3}\.html$/.test(path);
+    } catch(e) {
+      return false;
     }
   }
 
@@ -107,7 +106,7 @@
   }
 
   function refresh(){
-    if(isQuranPage()){
+    if(isQuranSurahPage()){
       applySiteTheme("light");
       applyPremiumTheme("");
       applyGlowState(false);
@@ -124,7 +123,7 @@
       return;
     }
 
-    applySiteTheme(safeGet(SITE_THEME_KEY) || "dark");
+    applySiteTheme(safeGet(SITE_THEME_KEY) || "light");
     applyPremiumTheme("");
     applyGlowState(false);
   }
@@ -134,18 +133,18 @@
     premiumKey: PREMIUM_THEME_KEY,
     premiumThemes: PREMIUM_THEMES.slice(),
     applySiteTheme: function(theme){
-      const selected = isQuranPage() ? "light" : (normalizePremiumTheme(safeGet(PREMIUM_THEME_KEY) || "") ? "dark" : normalizeSiteTheme(theme));
-      if(!isQuranPage()) safeSet(SITE_THEME_KEY, selected);
+      const selected = normalizePremiumTheme(safeGet(PREMIUM_THEME_KEY) || "") ? "dark" : normalizeSiteTheme(theme);
+      safeSet(SITE_THEME_KEY, selected);
       applySiteTheme(selected);
       window.dispatchEvent(new CustomEvent("barakaway:site-theme-change", { detail: { theme: selected } }));
     },
     applyPremiumTheme: function(theme){
-      const selected = isQuranPage() ? "" : normalizePremiumTheme(theme);
+      const selected = normalizePremiumTheme(theme);
       if(selected){
         safeSet(PREMIUM_THEME_KEY, selected);
         safeSet(SITE_THEME_KEY, "dark");
         applySiteTheme("dark");
-      }else if(!isQuranPage()){
+      }else{
         safeRemove(PREMIUM_THEME_KEY);
       }
       applyPremiumTheme(selected);
