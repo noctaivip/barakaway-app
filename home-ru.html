@@ -4893,7 +4893,6 @@ html.light-mode .today-hub .bw-task-hint{color:#53645a;}
 }
 </style>
 
-
 <style id="bw-ru-task-polish-v3">
 /* Compact daily task polish: spacing, status placement, completed state */
 .today-hub .today-hub-grid{
@@ -5048,7 +5047,6 @@ html.light-mode .today-hub .bw-task-hint{color:#53645a;}
   .bw-name-counter-display{font-size:30px !important;}
 }
 </style>
-
 </head>
 <body>
 <div class="mobile-top-controls">
@@ -9534,15 +9532,12 @@ window.addEventListener("DOMContentLoaded",function(){const installBtn=document.
   window.BarakaWayApplyPremiumTheme = applyPremiumTheme;
 })();
 </script>
-
-
-
 <script id="bw-ru-task-compact-modal-final">
 (function(){
   'use strict';
   const TASK_PREFIX = 'barakaway_today_ru_';
   const NAME_COUNT_PREFIX = 'barakaway_name_counter_ru_';
-  const HINT = 'Нажмите, чтобы выполнить задание';
+  const HINT = "Нажмите, чтобы выполнить задание";
 
   function localDateKey(date){
     const y = date.getFullYear();
@@ -9580,56 +9575,56 @@ window.addEventListener("DOMContentLoaded",function(){const installBtn=document.
   function text(sel, root){ const el = $(sel, root); return el ? clean(el.textContent) : ''; }
 
   const configs = [
-    {key:'article', id:'dailyArticleLink', title:'Аят дня', status:'dailyArticleStatus'},
-    {key:'adhkar', id:'currentAdhkarLink', title:'Испытание дня', status:'currentAdhkarStatus'},
-    {key:'name', id:'allahNameCounterCard', title:'Имя Аллаха', status:'allahNameCounterValue'},
-    {key:'goal', id:'dailyGoalCard', title:'Дневная цель', status:'dailyGoalStatus'},
-    {key:'micro', id:'dailyMicroKnowledgeCard', title:'Микро-знание дня', status:'dailyMicroKnowledgeStatus'}
+    {key:'article', id:'dailyArticleLink', title:"Аят дня", status:'dailyArticleStatus'},
+    {key:'adhkar', id:'currentAdhkarLink', title:"Испытание дня", status:'currentAdhkarStatus'},
+    {key:'name', id:'allahNameCounterCard', title:"Имя Аллаха", status:'allahNameCounterValue'},
+    {key:'goal', id:'dailyGoalCard', title:"Дневная цель", status:'dailyGoalStatus'},
+    {key:'micro', id:'dailyMicroKnowledgeCard', title:"Микро-знание дня", status:'dailyMicroKnowledgeStatus'}
   ];
 
   function articleTaskOnly(){
     const raw = text('.today-ayah-task', document.getElementById('dailyArticleLink')) || '';
-    return raw.replace(/^Задание:\s*/i,'') || 'Выполните сегодняшнее задание по аяту.';
+    return raw.replace(/^Задание:\s*/i,'').replace(/^Task:\s*/i,'') || "Выполните сегодняшнее задание по аяту.";
   }
 
   function buildContent(key){
     if(key === 'article'){
       return {
-        title:'Аят дня',
+        title:"Аят дня",
         ref:text('.today-ayah-ref', document.getElementById('dailyArticleLink')) || '2:286',
-        main:text('#dailyArticleTitle') || text('.today-ayah-line', document.getElementById('dailyArticleLink')) || 'Аллах не возлагает на душу сверх её возможности.',
+        main:text('#dailyArticleTitle') || text('.today-ayah-line', document.getElementById('dailyArticleLink')) || "Аллах не возлагает на душу сверх её возможности.",
         task:articleTaskOnly()
       };
     }
     if(key === 'adhkar'){
       return {
-        title:'Испытание дня',
-        main:text('#currentAdhkarText') || 'Сегодня сделай дуа за человека, который тебя раздражает.',
-        task:'Выполните это испытание спокойно ради Аллаха.'
+        title:"Испытание дня",
+        main:text('#currentAdhkarText') || "Сегодня сделай дуа за человека, который тебя раздражает.",
+        task:"Выполните это испытание спокойно ради Аллаха."
       };
     }
     if(key === 'name'){
       return {
-        title:text('#allahNameToday') || 'Аль-Хабир',
-        main:text('#allahNameMeaning') || 'Дарующий честь и силу тому, кому пожелает.',
-        task:'Повторите это имя Аллаха 100 раз. Каждое нажатие считает одно повторение.'
+        title:text('#allahNameToday') || "Имя Аллаха",
+        main:text('#allahNameMeaning') || "Дарующий честь и силу тому, кому пожелает.",
+        task:"Повторите это имя Аллаха 100 раз. Каждое нажатие считает одно повторение."
       };
     }
     if(key === 'goal'){
       return {
-        title:'Дневная цель',
-        main:text('#dailyPracticeText') || 'Попроси прощения у Аллаха 33 раза спокойно.',
-        task:'Выполните сегодняшнюю цель и отметьте её завершённой.'
+        title:"Дневная цель",
+        main:text('#dailyPracticeText') || "Попроси прощения у Аллаха 33 раза спокойно.",
+        task:"Выполните сегодняшнюю цель и отметьте её завершённой."
       };
     }
     if(key === 'micro'){
-      const q = text('#dailyMicroQuestion') || 'Что нужно перед намазом?';
+      const q = text('#dailyMicroQuestion') || "Что нужно перед намазом?";
       const options = Array.from(document.querySelectorAll('#dailyMicroOptions .micro-option')).map(b=>clean(b.textContent)).filter(Boolean);
-      const fallback = ['Омовение','Еда','Сон'];
-      const answer = text('#dailyMicroAnswer') || 'Смысл: чистота — важное условие намаза.';
-      return {title:'Микро-знание дня', main:q, options:options.length ? options : fallback, task:answer};
+      const fallback = ["Омовение", "Еда", "Сон"];
+      const answer = text('#dailyMicroAnswer') || "Смысл: чистота — важное условие намаза.";
+      return {title:"Микро-знание дня", main:q, options:options.length ? options : fallback, task:answer};
     }
-    return {title:'Задание', main:'', task:'Выполните сегодняшнее задание.'};
+    return {title:"Задание", main:'', task:"Выполните сегодняшнее задание."};
   }
 
   function ensureMeta(card, key){
@@ -9744,7 +9739,7 @@ window.addEventListener("DOMContentLoaded",function(){const installBtn=document.
         const n = getNameCount();
         if(countEl) countEl.textContent = n + '/100';
         completeBtn.disabled = n < 100;
-        if(incBtn) incBtn.textContent = n >= 100 ? '100 / 100 выполнено' : 'Повторить имя +1';
+        if(incBtn) incBtn.textContent = n >= 100 ? "100 / 100 выполнено" : "Повторить имя +1";
         updateNameVisuals();
       }
       incBtn.addEventListener('click', function(){
@@ -9763,7 +9758,7 @@ window.addEventListener("DOMContentLoaded",function(){const installBtn=document.
           overlay.querySelectorAll('.bw-micro-option-btn').forEach(b=>b.classList.remove('is-selected'));
           btn.classList.add('is-selected');
           if(note){
-            note.textContent = data.task || 'Ответ выбран. Теперь можно отметить задание выполненным.';
+            note.textContent = data.task || 'Выполните сегодняшнее задание.';
             note.classList.add('is-visible');
           }
           completeBtn.disabled = false;
@@ -9809,6 +9804,5 @@ window.addEventListener("DOMContentLoaded",function(){const installBtn=document.
   setInterval(applyAllStates, 1200);
 })();
 </script>
-
 </body>
 </html>

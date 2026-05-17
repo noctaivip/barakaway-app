@@ -3812,6 +3812,461 @@ body.bw-theme-violet-noor .hero{
 <script src="/theme-init.js"></script>
 <link rel="stylesheet" href="/theme.css">
 <link rel="stylesheet" href="/theme-universal.css">
+<style id="bw-hi-compact-tasks-polish-final">
+/* ===== RU TODAY TASKS COMPACT UI — POLISHED FINAL ===== */
+.today-hub-grid{
+  display:grid !important;
+  grid-template-columns:repeat(2,minmax(0,1fr)) !important;
+  gap:14px !important;
+  padding:12px 16px 0 !important;
+}
+.today-hub .today-micro-wrap{
+  display:block !important;
+  grid-column:1 / -1 !important;
+  padding:0 16px 18px !important;
+}
+.today-hub .today-action{
+  height:132px !important;
+  min-height:132px !important;
+  border-radius:24px !important;
+  padding:16px !important;
+  position:relative !important;
+  overflow:hidden !important;
+  justify-content:flex-start !important;
+  cursor:pointer !important;
+  box-sizing:border-box !important;
+}
+.today-hub .today-micro-action{
+  height:132px !important;
+  min-height:132px !important;
+}
+.today-hub .today-action-top{margin-bottom:12px !important;}
+.today-hub .today-action-icon{
+  width:40px !important;
+  height:40px !important;
+  min-width:40px !important;
+  border-radius:16px !important;
+}
+.today-hub .today-action-title{
+  display:block !important;
+  font-size:17px !important;
+  line-height:1.14 !important;
+  margin:0 !important;
+  max-width:calc(100% - 8px) !important;
+}
+.today-hub .today-action-text,
+.today-hub .today-ayah-text,
+.today-hub .today-ayah-line,
+.today-hub .today-ayah-task,
+.today-hub .today-counter-track,
+.today-hub .today-micro-question,
+.today-hub .micro-options,
+.today-hub .micro-answer-box{
+  display:none !important;
+}
+.today-hub .today-task-status{
+  opacity:0 !important;
+  pointer-events:none !important;
+}
+.today-hub .today-action.bw-task-done .today-task-status{
+  opacity:1 !important;
+  color:#6ee78d !important;
+  font-size:30px !important;
+  line-height:1 !important;
+}
+.today-hub .bw-task-compact-meta{
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  width:max-content;
+  max-width:100%;
+  margin-top:8px;
+  padding:2px 9px;
+  border-radius:999px;
+  font-size:12px;
+  line-height:1.25;
+  font-weight:900;
+  color:#f1d889;
+  background:rgba(215,192,122,.14);
+  border:1px solid rgba(215,192,122,.24);
+}
+.today-hub .bw-task-hint{
+  position:absolute;
+  left:16px;
+  right:16px;
+  bottom:14px;
+  font-size:12px;
+  line-height:1.25;
+  font-style:italic;
+  font-weight:400;
+  opacity:.72;
+  text-align:left;
+  pointer-events:none;
+}
+.today-hub .today-action.bw-task-done .bw-task-hint{display:none !important;}
+html.dark-mode .today-hub .bw-task-hint{color:#d9e4df;}
+html.light-mode .today-hub .bw-task-hint{color:#53645a;}
+
+/* Not completed: red alert state */
+.today-hub .today-action:not(.bw-task-done){
+  background:linear-gradient(135deg,#17222b 0%,#1d2025 48%,#3a171c 100%) !important;
+  border-color:rgba(255,86,86,.28) !important;
+  animation:bwTaskRedPulse 1.35s ease-in-out infinite !important;
+}
+@keyframes bwTaskRedPulse{
+  0%,100%{
+    box-shadow:0 10px 24px rgba(0,0,0,.18),0 0 0 rgba(255,72,72,0),inset 0 1px 0 rgba(255,255,255,.04);
+    border-color:rgba(255,86,86,.26);
+  }
+  50%{
+    box-shadow:0 10px 24px rgba(0,0,0,.18),0 0 16px rgba(255,72,72,.32),0 0 30px rgba(255,72,72,.16),inset 0 1px 0 rgba(255,255,255,.05);
+    border-color:rgba(255,122,122,.58);
+  }
+}
+
+/* Completed: calm green state, overrides all older urgent classes */
+.today-hub .today-action.bw-task-done,
+.today-hub .today-action.task-done,
+.today-hub .today-action.goal-done,
+.today-hub .today-goal-action.goal-urgent.bw-task-done,
+.today-hub .today-goal-action.goal-urgent.task-done,
+.today-hub .today-goal-action.goal-urgent.goal-done{
+  background:linear-gradient(135deg,#13251e 0%,#142b22 55%,#153628 100%) !important;
+  border-color:rgba(102,198,128,.42) !important;
+  box-shadow:0 12px 24px rgba(0,0,0,.18),0 0 20px rgba(45,122,70,.16),inset 0 1px 0 rgba(255,255,255,.04) !important;
+  animation:none !important;
+  cursor:default !important;
+}
+.today-hub .today-action.bw-task-done::after,
+.today-hub .today-action.task-done::after,
+.today-hub .today-action.goal-done::after{
+  content:'' !important;
+  display:none !important;
+}
+
+.bw-task-modal-overlay{
+  position:fixed;
+  inset:0;
+  z-index:99999;
+  display:none;
+  align-items:center;
+  justify-content:center;
+  padding:22px;
+  box-sizing:border-box;
+  background:rgba(4,8,12,.66);
+  backdrop-filter:blur(9px);
+  -webkit-backdrop-filter:blur(9px);
+}
+.bw-task-modal-overlay.is-open{display:flex;}
+.bw-task-modal-card{
+  width:min(430px,92vw);
+  max-height:min(76vh,620px);
+  overflow:auto;
+  border-radius:28px;
+  padding:24px 22px 22px;
+  box-sizing:border-box;
+  border:1.5px solid rgba(102,198,128,.34);
+  background:linear-gradient(180deg,#111a23 0%,#0f1821 100%);
+  color:#f7fbf8;
+  box-shadow:0 24px 70px rgba(0,0,0,.42),0 0 38px rgba(45,122,70,.18),inset 0 1px 0 rgba(255,255,255,.04);
+}
+.bw-task-modal-title{
+  margin:0 0 14px;
+  font-size:25px;
+  line-height:1.12;
+  font-weight:950;
+  letter-spacing:-.04em;
+}
+.bw-task-modal-ref{
+  display:inline-flex;
+  margin:0 0 12px;
+  padding:4px 10px;
+  border-radius:999px;
+  background:rgba(215,192,122,.14);
+  border:1px solid rgba(215,192,122,.24);
+  color:#f1d889;
+  font-size:12px;
+  font-weight:950;
+}
+.bw-task-modal-text{
+  margin:0 0 10px;
+  font-size:15px;
+  line-height:1.55;
+  color:#dce7e2;
+  font-weight:650;
+}
+.bw-task-modal-task{
+  margin:14px 0 0;
+  padding:14px;
+  border-radius:18px;
+  background:rgba(102,198,128,.08);
+  border:1px solid rgba(102,198,128,.16);
+  color:#f3fff7;
+  font-size:15px;
+  line-height:1.45;
+  font-weight:750;
+}
+.bw-task-modal-task strong{color:#f1d889;}
+.bw-name-counter-box{
+  margin-top:14px;
+  display:grid;
+  gap:10px;
+}
+.bw-name-counter-display{
+  min-height:52px;
+  border-radius:18px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  background:rgba(215,192,122,.12);
+  border:1px solid rgba(215,192,122,.24);
+  color:#f1d889;
+  font-size:24px;
+  font-weight:950;
+}
+.bw-name-counter-btn,
+.bw-task-complete-btn,
+.bw-task-close-btn,
+.bw-micro-option-btn{
+  font-family:inherit;
+}
+.bw-name-counter-btn,
+.bw-task-complete-btn{
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  width:100%;
+  min-height:50px;
+  margin:12px 0 0;
+  border:0;
+  border-radius:18px;
+  background:#2d7a46;
+  color:#fff;
+  font-size:16px;
+  font-weight:900;
+  cursor:pointer;
+  box-shadow:0 12px 26px rgba(45,122,70,.24),inset 0 1px 0 rgba(255,255,255,.12);
+}
+.bw-task-complete-btn:disabled{
+  opacity:.45;
+  cursor:not-allowed;
+}
+.bw-task-close-btn{
+  display:block;
+  width:100%;
+  margin:10px 0 0;
+  min-height:42px;
+  border:1px solid rgba(255,255,255,.10);
+  border-radius:16px;
+  background:rgba(255,255,255,.04);
+  color:#dce7e2;
+  font-weight:800;
+  cursor:pointer;
+}
+.bw-micro-options-grid{
+  display:grid;
+  grid-template-columns:1fr;
+  gap:9px;
+  margin-top:14px;
+}
+.bw-micro-option-btn{
+  min-height:44px;
+  border-radius:16px;
+  border:1px solid rgba(102,198,128,.18);
+  background:rgba(102,198,128,.08);
+  color:#f3fff7;
+  font-weight:850;
+  cursor:pointer;
+}
+.bw-micro-option-btn.is-selected{
+  background:#2d7a46;
+  border-color:#2d7a46;
+  color:#fff;
+}
+.bw-micro-answer-note{
+  display:none;
+  margin-top:12px;
+  padding:12px;
+  border-radius:16px;
+  background:rgba(215,192,122,.10);
+  border:1px solid rgba(215,192,122,.20);
+  color:#f1d889;
+  font-weight:800;
+}
+.bw-micro-answer-note.is-visible{display:block;}
+@media(max-width:700px){
+  .today-hub{margin:18px 0 22px !important;}
+  .today-hub-grid{gap:12px !important;padding:10px 12px 0 !important;}
+  .today-hub .today-micro-wrap{padding:0 12px 16px !important;}
+  .today-hub .today-action,
+  .today-hub .today-micro-action{
+    height:138px !important;
+    min-height:138px !important;
+    padding:14px !important;
+    border-radius:22px !important;
+  }
+  .today-hub .today-action-title{font-size:19px !important;}
+  .today-hub .bw-task-hint{font-size:11.5px;bottom:13px;left:14px;right:14px;}
+  .bw-task-modal-card{width:min(360px,92vw);max-height:70vh;padding:22px 20px 20px;border-radius:26px;}
+  .bw-task-modal-title{font-size:24px;}
+  .bw-task-modal-text,.bw-task-modal-task{font-size:15px;}
+}
+</style>
+
+<style id="bw-hi-task-polish-v3">
+/* Compact daily task polish: spacing, status placement, completed state */
+.today-hub .today-hub-grid{
+  gap:14px !important;
+}
+.today-hub .today-micro-wrap{
+  margin-top:14px !important;
+  padding-top:0 !important;
+}
+.today-hub .today-action{
+  position:relative !important;
+  box-sizing:border-box !important;
+}
+.today-hub .today-action:not(.bw-task-done){
+  background:linear-gradient(135deg,#17222b 0%,#1d2025 48%,#3a171c 100%) !important;
+  border-color:rgba(255,86,86,.30) !important;
+  animation:bwTaskRedPulse 1.35s ease-in-out infinite !important;
+}
+.today-hub .today-action.bw-task-done{
+  background:linear-gradient(135deg,#13261f 0%,#142e23 48%,#153828 100%) !important;
+  border-color:rgba(102,198,128,.42) !important;
+  animation:none !important;
+  box-shadow:0 10px 24px rgba(0,0,0,.18),0 0 18px rgba(102,198,128,.12),inset 0 1px 0 rgba(255,255,255,.04) !important;
+}
+.today-hub .today-task-status{
+  position:absolute !important;
+  top:16px !important;
+  right:18px !important;
+  opacity:0 !important;
+  pointer-events:none !important;
+  z-index:5 !important;
+}
+.today-hub .today-action.bw-task-done .today-task-status{
+  opacity:1 !important;
+  color:#6ee78d !important;
+  font-size:32px !important;
+  line-height:1 !important;
+  text-shadow:0 0 14px rgba(110,231,141,.25) !important;
+}
+.today-hub .bw-task-hint{
+  position:absolute !important;
+  top:17px !important;
+  right:18px !important;
+  left:auto !important;
+  bottom:auto !important;
+  max-width:160px !important;
+  font-size:11px !important;
+  line-height:1.25 !important;
+  font-style:italic !important;
+  font-weight:400 !important;
+  text-align:right !important;
+  opacity:.76 !important;
+  pointer-events:none !important;
+  z-index:4 !important;
+}
+.today-hub .today-action.bw-task-done .bw-task-hint{
+  display:none !important;
+}
+.today-hub .bw-task-compact-meta{
+  position:relative !important;
+  z-index:3 !important;
+  display:inline-flex !important;
+  align-items:center !important;
+  justify-content:center !important;
+  width:max-content !important;
+  max-width:calc(100% - 10px) !important;
+  margin-top:7px !important;
+  padding:3px 10px !important;
+  border-radius:999px !important;
+  line-height:1.15 !important;
+  white-space:nowrap !important;
+  color:#f1d889 !important;
+  background:rgba(215,192,122,.14) !important;
+  border:1px solid rgba(215,192,122,.25) !important;
+  box-sizing:border-box !important;
+}
+.today-hub .bw-task-compact-meta[data-task-meta="article"]{
+  font-size:12px !important;
+  font-weight:950 !important;
+}
+.today-hub .bw-task-compact-meta[data-task-meta="name"]{
+  font-size:16px !important;
+  font-weight:950 !important;
+  padding:4px 12px !important;
+}
+.today-hub .today-action-top{
+  padding-right:150px !important;
+}
+.today-hub .today-action-title{
+  position:relative !important;
+  z-index:3 !important;
+}
+.bw-name-counter-box{
+  margin:16px 0 12px !important;
+  padding:14px !important;
+  border-radius:18px !important;
+  background:rgba(102,198,128,.08) !important;
+  border:1px solid rgba(102,198,128,.18) !important;
+}
+.bw-name-counter-display{
+  display:flex !important;
+  align-items:center !important;
+  justify-content:center !important;
+  min-height:52px !important;
+  margin-bottom:10px !important;
+  border-radius:16px !important;
+  background:rgba(0,0,0,.18) !important;
+  color:#f1d889 !important;
+  font-size:32px !important;
+  line-height:1 !important;
+  font-weight:950 !important;
+  letter-spacing:-.04em !important;
+}
+.bw-name-counter-btn{
+  width:100% !important;
+  min-height:48px !important;
+  border-radius:16px !important;
+  border:1px solid rgba(102,198,128,.34) !important;
+  background:#2d7a46 !important;
+  color:#fff !important;
+  font-size:15px !important;
+  font-weight:900 !important;
+  cursor:pointer !important;
+}
+.bw-micro-options-grid{
+  grid-template-columns:repeat(2,minmax(0,1fr)) !important;
+  gap:10px !important;
+}
+.bw-micro-option-btn{
+  min-height:46px !important;
+  padding:10px !important;
+  text-align:center !important;
+}
+@media(max-width:700px){
+  .today-hub .today-hub-grid{gap:12px !important;}
+  .today-hub .today-micro-wrap{margin-top:12px !important;}
+  .today-hub .today-action-top{padding-right:0 !important;}
+  .today-hub .bw-task-hint{
+    top:14px !important;
+    right:14px !important;
+    max-width:104px !important;
+    font-size:10px !important;
+  }
+  .today-hub .today-action.bw-task-done .today-task-status{
+    font-size:30px !important;
+  }
+  .today-hub .bw-task-compact-meta[data-task-meta="name"]{
+    font-size:14px !important;
+    padding:4px 10px !important;
+  }
+  .bw-micro-options-grid{grid-template-columns:1fr !important;}
+  .bw-name-counter-display{font-size:30px !important;}
+}
+</style>
 </head>
 <body>
 
@@ -8042,6 +8497,278 @@ window.addEventListener("DOMContentLoaded",function(){const installBtn=document.
   }
 
   window.addEventListener('storage', syncBarakaWayProHome);
+})();
+</script>
+<script id="bw-hi-task-compact-modal-final">
+(function(){
+  'use strict';
+  const TASK_PREFIX = 'barakaway_today_hi_';
+  const NAME_COUNT_PREFIX = 'barakaway_name_counter_hi_';
+  const HINT = "आज का कार्य पूरा करने के लिए दबाएँ";
+
+  function localDateKey(date){
+    const y = date.getFullYear();
+    const m = String(date.getMonth()+1).padStart(2,'0');
+    const d = String(date.getDate()).padStart(2,'0');
+    return y + '-' + m + '-' + d;
+  }
+  function todayKey(){ return localDateKey(new Date()); }
+  function doneKey(key){ return TASK_PREFIX + todayKey() + '_' + key; }
+  function countKey(){ return NAME_COUNT_PREFIX + todayKey(); }
+  function safeGet(key){ try{return localStorage.getItem(key);}catch(e){return null;} }
+  function safeSet(key,value){ try{localStorage.setItem(key,value);}catch(e){} }
+  function isDone(key){ return safeGet(doneKey(key)) === '1'; }
+  function markDone(key){
+    safeSet(doneKey(key),'1');
+    if(key === 'name'){
+      safeSet(countKey(),'100');
+      safeSet('barakaway_name_counter_' + todayKey(),'100');
+      safeSet(doneKey('name_count'),'100');
+    }
+  }
+  function getNameCount(){
+    const raw = safeGet(countKey()) || safeGet('barakaway_name_counter_' + todayKey()) || safeGet(doneKey('name_count')) || '0';
+    const n = Math.max(0, Math.min(100, parseInt(raw,10) || 0));
+    return isDone('name') ? 100 : n;
+  }
+  function setNameCount(n){
+    const value = String(Math.max(0, Math.min(100, n)));
+    safeSet(countKey(), value);
+    safeSet('barakaway_name_counter_' + todayKey(), value);
+    safeSet(doneKey('name_count'), value);
+  }
+  function $(sel, root){ return (root || document).querySelector(sel); }
+  function clean(value){ return (value || '').replace(/\s+/g,' ').trim(); }
+  function text(sel, root){ const el = $(sel, root); return el ? clean(el.textContent) : ''; }
+
+  const configs = [
+    {key:'article', id:'dailyArticleLink', title:"आज की आयत", status:'dailyArticleStatus'},
+    {key:'adhkar', id:'currentAdhkarLink', title:"आज की चुनौती", status:'currentAdhkarStatus'},
+    {key:'name', id:'allahNameCounterCard', title:"अल्लाह का नाम", status:'allahNameCounterValue'},
+    {key:'goal', id:'dailyGoalCard', title:"दैनिक लक्ष्य", status:'dailyGoalStatus'},
+    {key:'micro', id:'dailyMicroKnowledgeCard', title:"आज का सूक्ष्म ज्ञान", status:'dailyMicroKnowledgeStatus'}
+  ];
+
+  function articleTaskOnly(){
+    const raw = text('.today-ayah-task', document.getElementById('dailyArticleLink')) || '';
+    return raw.replace(/^Задание:\s*/i,'').replace(/^Task:\s*/i,'') || "आज की आयत का कार्य पूरा करें।";
+  }
+
+  function buildContent(key){
+    if(key === 'article'){
+      return {
+        title:"आज की आयत",
+        ref:text('.today-ayah-ref', document.getElementById('dailyArticleLink')) || '2:286',
+        main:text('#dailyArticleTitle') || text('.today-ayah-line', document.getElementById('dailyArticleLink')) || "अल्लाह किसी आत्मा पर उसकी क्षमता से अधिक बोझ नहीं डालता।",
+        task:articleTaskOnly()
+      };
+    }
+    if(key === 'adhkar'){
+      return {
+        title:"आज की चुनौती",
+        main:text('#currentAdhkarText') || "आज उस व्यक्ति के लिए दुआ करें जो आपको परेशान करता है।",
+        task:"इस चुनौती को अल्लाह के लिए शांति से पूरा करें।"
+      };
+    }
+    if(key === 'name'){
+      return {
+        title:text('#allahNameToday') || "अल्लाह का नाम",
+        main:text('#allahNameMeaning') || "जो जिसे चाहता है सम्मान और शक्ति देता है।",
+        task:"अल्लाह के इस नाम को 100 बार दोहराएँ। हर दबाव एक दोहराव गिनेगा।"
+      };
+    }
+    if(key === 'goal'){
+      return {
+        title:"दैनिक लक्ष्य",
+        main:text('#dailyPracticeText') || "शांति से 33 बार अल्लाह से माफी माँगें।",
+        task:"आज का लक्ष्य पूरा करें और उसे पूर्ण चिह्नित करें।"
+      };
+    }
+    if(key === 'micro'){
+      const q = text('#dailyMicroQuestion') || "नमाज़ से पहले क्या ज़रूरी है?";
+      const options = Array.from(document.querySelectorAll('#dailyMicroOptions .micro-option')).map(b=>clean(b.textContent)).filter(Boolean);
+      const fallback = ["वुज़ू", "भोजन", "नींद"];
+      const answer = text('#dailyMicroAnswer') || "अर्थ: पवित्रता नमाज़ की महत्वपूर्ण शर्त है।";
+      return {title:"आज का सूक्ष्म ज्ञान", main:q, options:options.length ? options : fallback, task:answer};
+    }
+    return {title:"कार्य", main:'', task:"आज का कार्य पूरा करें।"};
+  }
+
+  function ensureMeta(card, key){
+    let meta = card.querySelector('.bw-task-compact-meta');
+    if(!meta){
+      meta = document.createElement('div');
+      meta.className = 'bw-task-compact-meta';
+      const title = card.querySelector('.today-action-title');
+      if(title && title.parentElement) title.parentElement.appendChild(meta);
+      else card.appendChild(meta);
+    }
+    meta.setAttribute('data-task-meta', key);
+    if(key === 'article'){
+      meta.textContent = text('.today-ayah-ref', card) || '2:286';
+      meta.style.display = 'inline-flex';
+    }else if(key === 'name'){
+      meta.textContent = getNameCount() + '/100';
+      meta.style.display = 'inline-flex';
+    }else{
+      meta.textContent = '';
+      meta.style.display = 'none';
+    }
+  }
+
+  function updateNameVisuals(){
+    const n = getNameCount();
+    const value = document.getElementById('allahNameCounterValue');
+    const fill = document.getElementById('allahNameCounterFill');
+    if(value) value.textContent = isDone('name') ? '✓' : (n + '/100');
+    if(fill) fill.style.width = n + '%';
+    const card = document.getElementById('allahNameCounterCard');
+    if(card) ensureMeta(card,'name');
+  }
+
+  function applyState(card, config){
+    if(!card) return;
+    const done = isDone(config.key);
+    card.classList.toggle('bw-task-done', done);
+    card.classList.toggle('task-done', done);
+    card.classList.toggle('goal-done', done);
+    card.classList.toggle('goal-urgent', !done);
+    card.setAttribute('aria-disabled', done ? 'true' : 'false');
+    if(done){ card.setAttribute('tabindex','-1'); }
+    const status = document.getElementById(config.status);
+    if(status){
+      if(config.key === 'name' && !done) status.textContent = getNameCount() + '/100';
+      if(done) status.textContent = '✓';
+    }
+    let hint = card.querySelector('.bw-task-hint');
+    if(!hint){
+      hint = document.createElement('div');
+      hint.className = 'bw-task-hint';
+      hint.textContent = HINT;
+      card.appendChild(hint);
+    }
+    ensureMeta(card, config.key);
+  }
+
+  function applyAllStates(){
+    configs.forEach(function(config){
+      const card = document.getElementById(config.id);
+      if(card) applyState(card, config);
+    });
+    updateNameVisuals();
+  }
+
+  function completeTask(key){
+    markDone(key);
+    applyAllStates();
+  }
+
+  function openModal(config){
+    const card = document.getElementById(config.id);
+    if(!card || isDone(config.key)) return;
+    const data = buildContent(config.key);
+    const old = document.querySelector('.bw-task-modal-overlay');
+    if(old) old.remove();
+    const overlay = document.createElement('div');
+    overlay.className = 'bw-task-modal-overlay is-open';
+
+    let extra = '';
+    if(config.key === 'name'){
+      const n = getNameCount();
+      extra = '<div class="bw-name-counter-box"><div class="bw-name-counter-display" id="bwNameModalCount">'+ n +'/100</div><button type="button" class="bw-name-counter-btn" id="bwNameModalInc">Повторить +1</button></div>';
+    }
+    if(config.key === 'micro'){
+      extra = '<div class="bw-micro-options-grid">' + data.options.map(function(option){ return '<button type="button" class="bw-micro-option-btn">'+ option.replace(/</g,'&lt;').replace(/>/g,'&gt;') +'</button>'; }).join('') + '</div><div class="bw-micro-answer-note" id="bwMicroAnswerNote"></div>';
+    }
+
+    overlay.innerHTML = `
+      <div class="bw-task-modal-card" role="dialog" aria-modal="true" aria-label="${data.title}">
+        <h3 class="bw-task-modal-title"></h3>
+        <div class="bw-task-modal-ref"></div>
+        <p class="bw-task-modal-text"></p>
+        ${extra}
+        <div class="bw-task-modal-task"><strong>कार्य:</strong> <span></span></div>
+        <button type="button" class="bw-task-complete-btn">कार्य पूरा हुआ</button>
+        <button type="button" class="bw-task-close-btn">बंद करें</button>
+      </div>`;
+
+    overlay.querySelector('.bw-task-modal-title').textContent = data.title;
+    const refEl = overlay.querySelector('.bw-task-modal-ref');
+    if(data.ref){ refEl.textContent = data.ref; } else { refEl.style.display = 'none'; }
+    overlay.querySelector('.bw-task-modal-text').textContent = data.main || '';
+    overlay.querySelector('.bw-task-modal-task span').textContent = data.task || 'आज का कार्य पूरा करें।';
+
+    const completeBtn = overlay.querySelector('.bw-task-complete-btn');
+    if(config.key === 'name'){
+      const countEl = overlay.querySelector('#bwNameModalCount');
+      const incBtn = overlay.querySelector('#bwNameModalInc');
+      function syncNameModal(){
+        const n = getNameCount();
+        if(countEl) countEl.textContent = n + '/100';
+        completeBtn.disabled = n < 100;
+        if(incBtn) incBtn.textContent = n >= 100 ? "100 / 100 पूरा" : "नाम +1 दोहराएँ";
+        updateNameVisuals();
+      }
+      incBtn.addEventListener('click', function(){
+        const n = Math.min(100, getNameCount() + 1);
+        setNameCount(n);
+        syncNameModal();
+      });
+      syncNameModal();
+    }
+
+    if(config.key === 'micro'){
+      completeBtn.disabled = true;
+      const note = overlay.querySelector('#bwMicroAnswerNote');
+      overlay.querySelectorAll('.bw-micro-option-btn').forEach(function(btn){
+        btn.addEventListener('click', function(){
+          overlay.querySelectorAll('.bw-micro-option-btn').forEach(b=>b.classList.remove('is-selected'));
+          btn.classList.add('is-selected');
+          if(note){
+            note.textContent = data.task || 'आज का कार्य पूरा करें।';
+            note.classList.add('is-visible');
+          }
+          completeBtn.disabled = false;
+        });
+      });
+    }
+
+    completeBtn.addEventListener('click', function(){
+      if(completeBtn.disabled) return;
+      completeTask(config.key);
+      overlay.remove();
+    });
+    overlay.querySelector('.bw-task-close-btn').addEventListener('click', function(){ overlay.remove(); });
+    overlay.addEventListener('click', function(e){ if(e.target === overlay) overlay.remove(); });
+    document.body.appendChild(overlay);
+  }
+
+  function bindCards(){
+    configs.forEach(function(config){
+      const card = document.getElementById(config.id);
+      if(!card || card.dataset.bwCompactBound === '1') return;
+      card.dataset.bwCompactBound = '1';
+      card.addEventListener('click', function(event){
+        event.preventDefault();
+        event.stopImmediatePropagation();
+        event.stopPropagation();
+        if(isDone(config.key)) return;
+        openModal(config);
+      }, true);
+      card.addEventListener('keydown', function(event){
+        if(event.key === 'Enter' || event.key === ' '){
+          event.preventDefault();
+          if(!isDone(config.key)) openModal(config);
+        }
+      }, true);
+    });
+  }
+
+  function init(){ bindCards(); applyAllStates(); }
+  if(document.readyState === 'loading') document.addEventListener('DOMContentLoaded', init, {once:true});
+  else init();
+  window.addEventListener('pageshow', init);
+  setInterval(applyAllStates, 1200);
 })();
 </script>
 </body>
