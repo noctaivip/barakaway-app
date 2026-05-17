@@ -2409,6 +2409,58 @@ html[dir="rtl"] #allahNameCounterCard:not(.bw-task-done) .bw-task-compact-meta[d
 }
 </style>
 
+
+<style id="bw-uniform-red-glow-all-themes-final">
+/* Same strong red pulse for free/original and all PRO themes */
+.today-hub .today-action:not(.bw-task-done):not(.task-done):not(.goal-done){
+  border-color:rgba(255,82,82,.58) !important;
+  animation:bwUniformRedTaskPulse 1.35s ease-in-out infinite !important;
+  box-shadow:
+    0 10px 24px rgba(0,0,0,.18),
+    0 0 10px rgba(255,42,42,.36),
+    inset 0 1px 0 rgba(255,255,255,.04) !important;
+}
+
+html[class*="premium-theme-"] .today-hub .today-action:not(.bw-task-done):not(.task-done):not(.goal-done),
+body[class*="bw-theme-"] .today-hub .today-action:not(.bw-task-done):not(.task-done):not(.goal-done),
+body[class*="theme-"] .today-hub .today-action:not(.bw-task-done):not(.task-done):not(.goal-done),
+html[class*="bw-theme-"] .today-hub .today-action:not(.bw-task-done):not(.task-done):not(.goal-done){
+  border-color:rgba(255,82,82,.58) !important;
+  animation:bwUniformRedTaskPulse 1.35s ease-in-out infinite !important;
+  box-shadow:
+    0 10px 24px rgba(0,0,0,.20),
+    0 0 10px rgba(255,42,42,.38),
+    inset 0 1px 0 rgba(255,255,255,.05) !important;
+}
+
+@keyframes bwUniformRedTaskPulse{
+  0%,100%{
+    border-color:rgba(255,82,82,.42);
+    box-shadow:
+      0 10px 24px rgba(0,0,0,.18),
+      0 0 7px rgba(255,42,42,.22),
+      0 0 0 rgba(255,42,42,0),
+      inset 0 1px 0 rgba(255,255,255,.04);
+  }
+  50%{
+    border-color:rgba(255,122,122,.98);
+    box-shadow:
+      0 10px 24px rgba(0,0,0,.18),
+      0 0 18px rgba(255,42,42,.78),
+      0 0 36px rgba(255,42,42,.46),
+      0 0 58px rgba(255,42,42,.22),
+      inset 0 1px 0 rgba(255,255,255,.06);
+  }
+}
+
+/* Completed cards must never pulse */
+.today-hub .today-action.bw-task-done,
+.today-hub .today-action.task-done,
+.today-hub .today-action.goal-done{
+  animation:none !important;
+}
+</style>
+
 </head>
 <body> <div class="mobile-top-controls"> <button class="icon-btn left" onclick="changeLanguageChoice()" aria-label="Change language"> <svg viewBox="0 0 24 24" aria-hidden="true"> <path d="M12 2a10 10 0 100 20 10 10 0 000-20zm6.92 9h-3.02a15.6 15.6 0 00-1.33-5.01A8.03 8.03 0 0118.92 11zM12 4.04c.89 1.08 1.97 3.22 2.28 6.96H9.72C10.03 7.26 11.11 5.12 12 4.04zM4.99 13h3.02a15.6 15.6 0 001.33 5.01A8.03 8.03 0 014.99 13zM8.1 11H5.08a8.03 8.03 0 014.35-5.01A15.6 15.6 0 008.1 11zm1.62 2h4.56c-.31 3.74-1.39 5.88-2.28 6.96-.89-1.08-1.97-3.22-2.28-6.96zm5.18 5.01A15.6 15.6 0 0015.9 13h3.02a8.03 8.03 0 01-4.02 5.01z"/> </svg> <span class="ripple"></span> </button> <div class="theme-toggle-center"> <span class="theme-toggle-label">Glow On</span> <input type="checkbox" class="theme-switch" id="themeSwitch" aria-label="Toggle theme"> </div> <button class="icon-btn right" onclick="shareApp()" aria-label="Paylaş app"> <svg viewBox="0 0 24 24" aria-hidden="true"> <path d="M18 16a2.99 2.99 0 00-2.39 1.2l-6.7-3.35a3.1 3.1 0 000-1.7l6.7-3.35A3 3 0 1014 6a3.1 3.1 0 00.08.68l-6.7 3.35a3 3 0 100 4.94l6.7 3.35A3 3 0 1018 16z"/> </svg> <span class="ripple"></span> </button>
 </div> <div class="ramadan-wrapper">

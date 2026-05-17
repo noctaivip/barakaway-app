@@ -4335,6 +4335,58 @@ html[dir="rtl"] #allahNameCounterCard:not(.bw-task-done) .bw-task-compact-meta[d
 }
 </style>
 
+
+<style id="bw-uniform-red-glow-all-themes-final">
+/* Same strong red pulse for free/original and all PRO themes */
+.today-hub .today-action:not(.bw-task-done):not(.task-done):not(.goal-done){
+  border-color:rgba(255,82,82,.58) !important;
+  animation:bwUniformRedTaskPulse 1.35s ease-in-out infinite !important;
+  box-shadow:
+    0 10px 24px rgba(0,0,0,.18),
+    0 0 10px rgba(255,42,42,.36),
+    inset 0 1px 0 rgba(255,255,255,.04) !important;
+}
+
+html[class*="premium-theme-"] .today-hub .today-action:not(.bw-task-done):not(.task-done):not(.goal-done),
+body[class*="bw-theme-"] .today-hub .today-action:not(.bw-task-done):not(.task-done):not(.goal-done),
+body[class*="theme-"] .today-hub .today-action:not(.bw-task-done):not(.task-done):not(.goal-done),
+html[class*="bw-theme-"] .today-hub .today-action:not(.bw-task-done):not(.task-done):not(.goal-done){
+  border-color:rgba(255,82,82,.58) !important;
+  animation:bwUniformRedTaskPulse 1.35s ease-in-out infinite !important;
+  box-shadow:
+    0 10px 24px rgba(0,0,0,.20),
+    0 0 10px rgba(255,42,42,.38),
+    inset 0 1px 0 rgba(255,255,255,.05) !important;
+}
+
+@keyframes bwUniformRedTaskPulse{
+  0%,100%{
+    border-color:rgba(255,82,82,.42);
+    box-shadow:
+      0 10px 24px rgba(0,0,0,.18),
+      0 0 7px rgba(255,42,42,.22),
+      0 0 0 rgba(255,42,42,0),
+      inset 0 1px 0 rgba(255,255,255,.04);
+  }
+  50%{
+    border-color:rgba(255,122,122,.98);
+    box-shadow:
+      0 10px 24px rgba(0,0,0,.18),
+      0 0 18px rgba(255,42,42,.78),
+      0 0 36px rgba(255,42,42,.46),
+      0 0 58px rgba(255,42,42,.22),
+      inset 0 1px 0 rgba(255,255,255,.06);
+  }
+}
+
+/* Completed cards must never pulse */
+.today-hub .today-action.bw-task-done,
+.today-hub .today-action.task-done,
+.today-hub .today-action.goal-done{
+  animation:none !important;
+}
+</style>
+
 </head>
 <body>
 
