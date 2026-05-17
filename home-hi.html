@@ -4268,27 +4268,76 @@ html.light-mode .today-hub .bw-task-hint{color:#53645a;}
 }
 </style>
 
-<script id="bw-hi-task-reset-v2">
+<script id="bw-hi-logic-fix-v3">
 (function(){
   try{
-    var prefixOld = 'barakaway_today_hi_';
-    var prefixNew = 'barakaway_today_hi_v2_';
+    var today = new Date();
+    var y = today.getFullYear();
+    var m = String(today.getMonth()+1).padStart(2,'0');
+    var d = String(today.getDate()).padStart(2,'0');
+    var day = y + '-' + m + '-' + d;
+
+    // Hard reset old broken completed/counter states.
+    var prefixes = [
+      'barakaway_today_hi_',
+      'barakaway_today_hi_v2_',
+      'barakaway_name_counter_hi_',
+      'barakaway_name_counter_hi_v2_',
+      'barakaway_name_counter_' + day
+    ];
     Object.keys(localStorage).forEach(function(key){
-      if(key.indexOf(prefixOld) === 0 && key.indexOf(prefixNew) !== 0){
-        localStorage.removeItem(key);
-      }
+      prefixes.forEach(function(prefix){
+        if(key.indexOf(prefix) === 0) localStorage.removeItem(key);
+      });
     });
   }catch(e){}
+
+  window.BW_TASK_FIX_HI = {
+    selectAnswer: "सही उत्तर चुनें।",
+    correct: "सही।",
+    wrong: "सही उत्तर:",
+    shahadaMeaning: "शहादा इस्लाम का पहला स्तंभ है: गवाही देना कि अल्लाह के सिवा कोई उपास्य नहीं और मुहम्मद ﷺ अल्लाह के रसूल हैं।",
+    repeat: "दोहराएँ +1",
+    countComplete: "100 / 100 पूरा",
+    taskText: "कार्य:"
+  };
 })();
 </script>
 
 
-<style id="bw-hi-micro-options-one-column-fix">
+<style id="bw-hi-logic-polish-fix">
+.today-hub .bw-task-compact-meta[data-task-meta="name"]{
+  cursor:pointer !important;
+  box-shadow:0 8px 18px rgba(215,192,122,.12), inset 0 1px 0 rgba(255,255,255,.08) !important;
+  transition:transform .16s ease, box-shadow .2s ease !important;
+}
+.today-hub .today-action:not(.bw-task-done) .bw-task-compact-meta[data-task-meta="name"]:active{
+  transform:scale(.96) !important;
+}
 .bw-micro-options-grid{
   grid-template-columns:1fr !important;
 }
 .bw-micro-option-btn{
   width:100% !important;
+}
+.bw-task-modal-text{
+  white-space:normal !important;
+}
+</style>
+
+
+<style id="bw-hi-micro-taskbox-remove-fix">
+.bw-task-modal-card[data-task-key="micro"] .bw-task-modal-task{
+  display:none !important;
+}
+.bw-task-modal-card[data-task-key="micro"]{
+  max-height:min(74vh,560px) !important;
+}
+.today-hub #allahNameCounterCard:not(.bw-task-done){
+  cursor:pointer !important;
+}
+.today-hub #allahNameCounterCard:not(.bw-task-done) .bw-task-compact-meta[data-task-meta="name"]{
+  box-shadow:0 8px 18px rgba(215,192,122,.18), inset 0 1px 0 rgba(255,255,255,.08) !important;
 }
 </style>
 
@@ -8527,8 +8576,8 @@ window.addEventListener("DOMContentLoaded",function(){const installBtn=document.
 <script id="bw-hi-task-compact-modal-final">
 (function(){
   'use strict';
-  const TASK_PREFIX = 'barakaway_today_hi_v2_';
-  const NAME_COUNT_PREFIX = 'barakaway_name_counter_hi_v2_';
+  const TASK_PREFIX = 'barakaway_today_hi_v3_';
+  const NAME_COUNT_PREFIX = 'barakaway_name_counter_hi_v3_';
   const HINT = "आज का कार्य पूरा करने के लिए दबाएँ";
 
   function localDateKey(date){
@@ -8547,24 +8596,21 @@ window.addEventListener("DOMContentLoaded",function(){const installBtn=document.
     safeSet(doneKey(key),'1');
     if(key === 'name'){
       safeSet(countKey(),'100');
-      safeSet('barakaway_name_counter_' + todayKey(),'100');
-      safeSet(doneKey('name_count'),'100');
     }
   }
   function getNameCount(){
-    const raw = safeGet(countKey()) || safeGet('barakaway_name_counter_' + todayKey()) || safeGet(doneKey('name_count')) || '0';
+    const raw = safeGet(countKey()) || '0';
     const n = Math.max(0, Math.min(100, parseInt(raw,10) || 0));
     return isDone('name') ? 100 : n;
   }
   function setNameCount(n){
     const value = String(Math.max(0, Math.min(100, n)));
     safeSet(countKey(), value);
-    safeSet('barakaway_name_counter_' + todayKey(), value);
-    safeSet(doneKey('name_count'), value);
   }
   function $(sel, root){ return (root || document).querySelector(sel); }
   function clean(value){ return (value || '').replace(/\s+/g,' ').trim(); }
   function text(sel, root){ const el = $(sel, root); return el ? clean(el.textContent) : ''; }
+  function stripLeadingRef(value){ return clean(value).replace(/^\s*\d+\s*[:：]\s*\d+\s*/,''); }
 
   const configs = [
     {key:'article', id:'dailyArticleLink', title:"आज की आयत", status:'dailyArticleStatus'},
@@ -8579,12 +8625,22 @@ window.addEventListener("DOMContentLoaded",function(){const installBtn=document.
     return raw.replace(/^Задание:\s*/i,'').replace(/^Task:\s*/i,'') || "आज की आयत का कार्य पूरा करें।";
   }
 
+
+  function getMicroMeaning(q, options){
+    const cfg = window.BW_TASK_FIX_HI || {};
+    const joined = ((q || '') + ' ' + (options || []).join(' ')).toLowerCase();
+    if(joined.indexOf('шахад') !== -1 || joined.indexOf('shahad') !== -1 || joined.indexOf('şehad') !== -1 || joined.indexOf('syahad') !== -1 || joined.indexOf('الشهادة') !== -1 || joined.indexOf('شہادت') !== -1 || joined.indexOf('শাহাদা') !== -1 || joined.indexOf('शहादा') !== -1){
+      return cfg.shahadaMeaning || '';
+    }
+    return '';
+  }
+
   function buildContent(key){
     if(key === 'article'){
       return {
         title:"आज की आयत",
         ref:text('.today-ayah-ref', document.getElementById('dailyArticleLink')) || '2:286',
-        main:text('#dailyArticleTitle') || text('.today-ayah-line', document.getElementById('dailyArticleLink')) || "अल्लाह किसी आत्मा पर उसकी क्षमता से अधिक बोझ नहीं डालता।",
+        main:stripLeadingRef(text('#dailyArticleTitle') || text('.today-ayah-line', document.getElementById('dailyArticleLink'))) || "अल्लाह किसी आत्मा पर उसकी क्षमता से अधिक बोझ नहीं डालता।",
         task:articleTaskOnly()
       };
     }
@@ -8613,7 +8669,7 @@ window.addEventListener("DOMContentLoaded",function(){const installBtn=document.
       const q = text('#dailyMicroQuestion') || "नमाज़ से पहले क्या ज़रूरी है?";
       const options = Array.from(document.querySelectorAll('#dailyMicroOptions .micro-option')).map(b=>clean(b.textContent)).filter(Boolean);
       const fallback = ["वुज़ू", "भोजन", "नींद"];
-      const answer = text('#dailyMicroAnswer') || "अर्थ: पवित्रता नमाज़ की महत्वपूर्ण शर्त है।";
+      const answer = getMicroMeaning(q, options) || "अर्थ: पवित्रता नमाज़ की महत्वपूर्ण शर्त है।";
       return {title:"आज का सूक्ष्म ज्ञान", main:q, options:options.length ? options : fallback, task:answer};
     }
     return {title:"कार्य", main:'', task:"आज का कार्य पूरा करें।"};
@@ -8688,6 +8744,17 @@ window.addEventListener("DOMContentLoaded",function(){const installBtn=document.
     applyAllStates();
   }
 
+
+  function getCorrectMicroIndex(options){
+    const list = options || [];
+    for(let i=0;i<list.length;i++){
+      const v = (list[i] || '').toLowerCase();
+      if(v.indexOf('шахад') !== -1 || v.indexOf('shahad') !== -1 || v.indexOf('şehad') !== -1 || v.indexOf('syahad') !== -1 || v.indexOf('الشهادة') !== -1 || v.indexOf('شہادت') !== -1 || v.indexOf('শাহাদা') !== -1 || v.indexOf('शहादा') !== -1) return i;
+      if(v.indexOf('омов') !== -1 || v.indexOf('wudu') !== -1 || v.indexOf('abdest') !== -1 || v.indexOf('وض') !== -1 || v.indexOf('وضو') !== -1 || v.indexOf('ওজু') !== -1 || v.indexOf('वुज़ू') !== -1) return i;
+    }
+    return 0;
+  }
+
   function openModal(config){
     const card = document.getElementById(config.id);
     if(!card) return;
@@ -8707,7 +8774,7 @@ window.addEventListener("DOMContentLoaded",function(){const installBtn=document.
     }
 
     overlay.innerHTML = `
-      <div class="bw-task-modal-card" role="dialog" aria-modal="true" aria-label="${data.title}">
+      <div class="bw-task-modal-card" data-task-key="${config.key}" role="dialog" aria-modal="true" aria-label="${data.title}">
         <h3 class="bw-task-modal-title"></h3>
         <div class="bw-task-modal-ref"></div>
         <p class="bw-task-modal-text"></p>
@@ -8721,7 +8788,8 @@ window.addEventListener("DOMContentLoaded",function(){const installBtn=document.
     const refEl = overlay.querySelector('.bw-task-modal-ref');
     if(data.ref){ refEl.textContent = data.ref; } else { refEl.style.display = 'none'; }
     overlay.querySelector('.bw-task-modal-text').textContent = data.main || '';
-    overlay.querySelector('.bw-task-modal-task span').textContent = data.task || 'आज का कार्य पूरा करें।';
+    if(config.key === 'micro'){ const taskBox = overlay.querySelector('.bw-task-modal-task'); if(taskBox) taskBox.remove(); }
+    else overlay.querySelector('.bw-task-modal-task span').textContent = data.task || 'आज का कार्य पूरा करें।';
 
     const completeBtn = overlay.querySelector('.bw-task-complete-btn');
     if(config.key === 'name'){
@@ -8731,12 +8799,14 @@ window.addEventListener("DOMContentLoaded",function(){const installBtn=document.
         const n = getNameCount();
         if(countEl) countEl.textContent = n + '/100';
         completeBtn.disabled = n < 100;
-        if(incBtn) incBtn.textContent = n >= 100 ? "100 / 100 पूरा" : "नाम +1 दोहराएँ";
+        if(incBtn){ const cfg = window.BW_TASK_FIX_HI || {}; incBtn.textContent = n >= 100 ? (cfg.countComplete || '100 / 100') : (cfg.repeat || '+1'); }
         updateNameVisuals();
       }
       incBtn.addEventListener('click', function(){
         const n = Math.min(100, getNameCount() + 1);
         setNameCount(n);
+        updateNameVisuals();
+        applyAllStates();
         syncNameModal();
       });
       syncNameModal();
@@ -8778,12 +8848,27 @@ window.addEventListener("DOMContentLoaded",function(){const installBtn=document.
         event.stopImmediatePropagation();
         event.stopPropagation();
         if(isDone(config.key)) return;
+        if(config.key === 'name'){
+          const n = Math.min(100, getNameCount() + 1);
+          setNameCount(n);
+          if(n >= 100){ completeTask('name'); }
+          else { updateNameVisuals(); applyAllStates(); }
+          return;
+        }
         openModal(config);
       }, true);
       card.addEventListener('keydown', function(event){
         if(event.key === 'Enter' || event.key === ' '){
           event.preventDefault();
-          if(!isDone(config.key)) openModal(config);
+          if(isDone(config.key)) return;
+          if(config.key === 'name'){
+            const n = Math.min(100, getNameCount() + 1);
+            setNameCount(n);
+            if(n >= 100){ completeTask('name'); }
+            else { updateNameVisuals(); applyAllStates(); }
+            return;
+          }
+          openModal(config);
         }
       }, true);
     });

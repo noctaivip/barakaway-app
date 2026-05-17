@@ -5048,27 +5048,76 @@ html.light-mode .today-hub .bw-task-hint{color:#53645a;}
 }
 </style>
 
-<script id="bw-ru-task-reset-v2">
+<script id="bw-ru-logic-fix-v3">
 (function(){
   try{
-    var prefixOld = 'barakaway_today_ru_';
-    var prefixNew = 'barakaway_today_ru_v2_';
+    var today = new Date();
+    var y = today.getFullYear();
+    var m = String(today.getMonth()+1).padStart(2,'0');
+    var d = String(today.getDate()).padStart(2,'0');
+    var day = y + '-' + m + '-' + d;
+
+    // Hard reset old broken completed/counter states.
+    var prefixes = [
+      'barakaway_today_ru_',
+      'barakaway_today_ru_v2_',
+      'barakaway_name_counter_ru_',
+      'barakaway_name_counter_ru_v2_',
+      'barakaway_name_counter_' + day
+    ];
     Object.keys(localStorage).forEach(function(key){
-      if(key.indexOf(prefixOld) === 0 && key.indexOf(prefixNew) !== 0){
-        localStorage.removeItem(key);
-      }
+      prefixes.forEach(function(prefix){
+        if(key.indexOf(prefix) === 0) localStorage.removeItem(key);
+      });
     });
   }catch(e){}
+
+  window.BW_TASK_FIX_RU = {
+    selectAnswer: "Выберите правильный ответ.",
+    correct: "Верно.",
+    wrong: "Правильный ответ:",
+    shahadaMeaning: "Шахада — первый столп Ислама: свидетельство, что нет божества, кроме Аллаха, и Мухаммад ﷺ — Его Посланник.",
+    repeat: "Повторить +1",
+    countComplete: "100 / 100 выполнено",
+    taskText: "Задание:"
+  };
 })();
 </script>
 
 
-<style id="bw-ru-micro-options-one-column-fix">
+<style id="bw-ru-logic-polish-fix">
+.today-hub .bw-task-compact-meta[data-task-meta="name"]{
+  cursor:pointer !important;
+  box-shadow:0 8px 18px rgba(215,192,122,.12), inset 0 1px 0 rgba(255,255,255,.08) !important;
+  transition:transform .16s ease, box-shadow .2s ease !important;
+}
+.today-hub .today-action:not(.bw-task-done) .bw-task-compact-meta[data-task-meta="name"]:active{
+  transform:scale(.96) !important;
+}
 .bw-micro-options-grid{
   grid-template-columns:1fr !important;
 }
 .bw-micro-option-btn{
   width:100% !important;
+}
+.bw-task-modal-text{
+  white-space:normal !important;
+}
+</style>
+
+
+<style id="bw-ru-micro-taskbox-remove-fix">
+.bw-task-modal-card[data-task-key="micro"] .bw-task-modal-task{
+  display:none !important;
+}
+.bw-task-modal-card[data-task-key="micro"]{
+  max-height:min(74vh,560px) !important;
+}
+.today-hub #allahNameCounterCard:not(.bw-task-done){
+  cursor:pointer !important;
+}
+.today-hub #allahNameCounterCard:not(.bw-task-done) .bw-task-compact-meta[data-task-meta="name"]{
+  box-shadow:0 8px 18px rgba(215,192,122,.18), inset 0 1px 0 rgba(255,255,255,.08) !important;
 }
 </style>
 
@@ -5307,7 +5356,7 @@ html.light-mode .today-hub .bw-task-hint{color:#53645a;}
       <span class="pro-final-lock">PRO</span>
       <div>
         <div class="pro-final-card-icon">🎙️</div>
-        <div class="pro-final-card-title">PROверка чтения</div>
+        <div class="pro-final-card-title">проверка чтения</div>
         <div class="pro-final-card-text">Правильно — зелёным, ошибка — красным.</div>
       </div>
     </a>
@@ -5326,7 +5375,7 @@ html.light-mode .today-hub .bw-task-hint{color:#53645a;}
       <div>
         <div class="pro-final-card-icon">🤲</div>
         <div class="pro-final-card-title">Дуа через 99 Имён</div>
-        <div class="pro-final-card-text">Ризк, дети, здоровье, семья, PROщение и защита.</div>
+        <div class="pro-final-card-text">Ризк, дети, здоровье, семья, прощение и защита.</div>
       </div>
     </a>
 
@@ -5880,7 +5929,7 @@ window.addEventListener("DOMContentLoaded",function(){const installBtn=document.
     'Сделай одно добро тихо, без слов и показухи.',
     'Перед важным делом обнови намерение ради Аллаха ﷻ.',
     'Помоги одному человеку так, чтобы никто не заметил.',
-    'ПоPROси PROщения у Аллаха ﷻ 33 раза спокойно.',
+    'Попроси прощения у Аллаха ﷻ 33 раза спокойно.',
     'Сделай дуа за родителей и близких.',
     'Убери одно лишнее действие, которое крадёт время.',
     'Поблагодари Аллаха ﷻ за одну конкретную милость.'
@@ -6039,7 +6088,7 @@ window.addEventListener("DOMContentLoaded",function(){const installBtn=document.
     'Перед одним важным делом обнови намерение.',
     'Сделай одно добро тихо, без слов и показухи.',
     'Сделай одно хорошее дело ради Аллаха ﷻ - тихо, искренне, без ожидания похвалы.',
-    'ПоPROси PROщения у Аллаха 33 раза спокойно.',
+    'Попроси прощения у Аллаха 33 раза спокойно.',
     'Убери одно лишнее действие, которое крадёт время.',
     'Сделай дуа за родителей и близких.',
     'Поблагодари Аллаха за одну конкретную милость.'
@@ -6333,11 +6382,11 @@ window.addEventListener("DOMContentLoaded",function(){const installBtn=document.
     {
         "ref": "2:222",
         "ayah": "Аллах любит кающихся.",
-        "task": "Сегодня спокойно поPROси PROщения у Аллаха за один свой грех."
+        "task": "Сегодня спокойно попроси прощения у Аллаха за один свой грех."
     },
     {
         "ref": "2:263",
-        "ayah": "Доброе слово и PROщение лучше милостыни с обидой.",
+        "ayah": "Доброе слово и прощение лучше милостыни с обидой.",
         "task": "Сегодня не напоминай никому о своей помощи."
     },
     {
@@ -6373,7 +6422,7 @@ window.addEventListener("DOMContentLoaded",function(){const installBtn=document.
     {
         "ref": "3:173",
         "ayah": "Достаточно нам Аллаха, и Он лучший Попечитель.",
-        "task": "Сегодня при тревоге один раз PROизнеси: мне достаточно Аллаха."
+        "task": "Сегодня при тревоге один раз произнеси: мне достаточно Аллаха."
     },
     {
         "ref": "4:36",
@@ -6482,7 +6531,7 @@ window.addEventListener("DOMContentLoaded",function(){const installBtn=document.
     },
     {
         "ref": "15:85",
-        "ayah": "PROщай красивым PROщением.",
+        "ayah": "PROщай красивым прощением.",
         "task": "Сегодня PROсти одну мелочь без напоминания."
     },
     {
@@ -6528,7 +6577,7 @@ window.addEventListener("DOMContentLoaded",function(){const installBtn=document.
     {
         "ref": "18:10",
         "ayah": "Господь наш, даруй нам милость от Себя.",
-        "task": "Сегодня поPROси у Аллаха правильный путь перед важным делом."
+        "task": "Сегодня попроси у Аллаха правильный путь перед важным делом."
     },
     {
         "ref": "18:28",
@@ -6553,7 +6602,7 @@ window.addEventListener("DOMContentLoaded",function(){const installBtn=document.
     {
         "ref": "21:35",
         "ayah": "Мы испытываем вас злом и добром.",
-        "task": "Сегодня не жалуйся на одно испытание, а поPROси мудрости."
+        "task": "Сегодня не жалуйся на одно испытание, а попроси мудрости."
     },
     {
         "ref": "21:90",
@@ -6632,7 +6681,7 @@ window.addEventListener("DOMContentLoaded",function(){const installBtn=document.
     },
     {
         "ref": "33:35",
-        "ayah": "Аллах приготовил PROщение и великую награду поминающим Его.",
+        "ayah": "Аллах приготовил прощение и великую награду поминающим Его.",
         "task": "Сегодня сделай 33 раза зикр спокойно и осознанно."
     },
     {
@@ -6653,7 +6702,7 @@ window.addEventListener("DOMContentLoaded",function(){const installBtn=document.
     {
         "ref": "39:53",
         "ayah": "Не отчаивайтесь в милости Аллаха.",
-        "task": "Сегодня поPROси PROщения и начни заново без самоунижения."
+        "task": "Сегодня попроси прощения и начни заново без самоунижения."
     },
     {
         "ref": "40:60",
@@ -6678,7 +6727,7 @@ window.addEventListener("DOMContentLoaded",function(){const installBtn=document.
     {
         "ref": "42:40",
         "ayah": "Кто PROстит и исправит, его награда у Аллаха.",
-        "task": "Сегодня сделай шаг к примирению или внутреннему PROщению."
+        "task": "Сегодня сделай шаг к примирению или внутреннему прощению."
     },
     {
         "ref": "45:15",
@@ -6788,7 +6837,7 @@ window.addEventListener("DOMContentLoaded",function(){const installBtn=document.
     {
         "ref": "93:10",
         "ayah": "Не отгоняй PROсящего.",
-        "task": "Сегодня не отвечай резко тому, кто PROсит помощи."
+        "task": "Сегодня не отвечай резко тому, кто просит помощи."
     },
     {
         "ref": "93:11",
@@ -6914,21 +6963,21 @@ window.addEventListener("DOMContentLoaded",function(){const installBtn=document.
     "Сегодня помоги одному человеку без объяснений и показухи.",
     "Сегодня не обсуждай никого за спиной.",
     "Сегодня поблагодари Аллаха за три конкретные милости.",
-    "Сегодня поPROси PROщения у Аллаха 33 раза спокойно.",
+    "Сегодня попроси прощения у Аллаха 33 раза спокойно.",
     "Сегодня убери одно вредное слово из своей речи.",
     "Сегодня скажи родителям или близкому человеку доброе слово.",
     "Сегодня не спорь ради победы в разговоре.",
     "Сегодня уступи в одной мелочи ради мира.",
     "Сегодня сделай одно добро так, чтобы никто не узнал.",
     "Сегодня не повышай голос весь день.",
-    "Сегодня перед сном вспомни один свой неправильный поступок и поPROси PROщения.",
+    "Сегодня перед сном вспомни один свой неправильный поступок и попроси прощения.",
     "Сегодня не смотри на то, что ослабляет твой иман.",
-    "Сегодня PROчитай одну короткую суру осознанно.",
+    "Сегодня прочитай одну короткую суру осознанно.",
     "Сегодня скажи: Альхамдулиллях, когда захочется пожаловаться.",
     "Сегодня не отвечай сразу в гневе — подожди десять секунд.",
-    "Сегодня первым поPROси PROщения, если был неправ.",
+    "Сегодня первым попроси прощения, если был неправ.",
     "Сегодня не преувеличивай в рассказах.",
-    "Сегодня PROверь своё намерение перед одним делом.",
+    "Сегодня проверь своё намерение перед одним делом.",
     "Сегодня убери с пути или из дома одну вещь, которая мешает другим.",
     "Сегодня сделай дуа за умерших мусульман.",
     "Сегодня не завидуй — сделай дуа за того, у кого есть благо.",
@@ -6941,7 +6990,7 @@ window.addEventListener("DOMContentLoaded",function(){const installBtn=document.
     "Сегодня скажи салават PROроку ﷺ десять раз.",
     "Сегодня не откладывай один полезный поступок.",
     "Сегодня в одном намазе не спеши после салама.",
-    "Сегодня PROчитай перевод одного короткого аята.",
+    "Сегодня прочитай перевод одного короткого аята.",
     "Сегодня напомни себе: Аллах видит меня сейчас.",
     "Сегодня не говори лишнего в одном разговоре.",
     "Сегодня облегчи кому-то день хотя бы одной фразой.",
@@ -6970,12 +7019,12 @@ window.addEventListener("DOMContentLoaded",function(){const installBtn=document.
     "Сегодня не говори: мне всё равно, если можно PROявить заботу.",
     "Сегодня избегай одного бесполезного PROсмотра.",
     "Сегодня сделай омовение спокойно и внимательно.",
-    "Сегодня PROизнеси Ля иляха илляЛлах 20 раз осознанно.",
+    "Сегодня произнеси Ля иляха илляЛлах 20 раз осознанно.",
     "Сегодня не отвечай раздражением дома.",
     "Сегодня помоги без напоминания.",
     "Сегодня не рассказывай чужой секрет.",
     "Сегодня оставь один грех ради Аллаха, даже если никто не видит.",
-    "Сегодня PROчитай Аль-Фатиху медленнее обычного.",
+    "Сегодня прочитай Аль-Фатиху медленнее обычного.",
     "Сегодня не обвиняй, пока не узнаешь ситуацию полностью.",
     "Сегодня будь справедлив даже к тому, кто тебе не нравится.",
     "Сегодня сделай дуа за того, кто помог тебе раньше.",
@@ -6997,10 +7046,10 @@ window.addEventListener("DOMContentLoaded",function(){const installBtn=document.
     "Сегодня помоги словом, если не можешь помочь делом.",
     "Сегодня не выбирай лёгкую ложь вместо трудной правды.",
     "Сегодня сделай один маленький шаг к знанию религии.",
-    "Сегодня PROчитай один хадис и подумай, как применить его.",
+    "Сегодня прочитай один хадис и подумай, как применить его.",
     "Сегодня не спорь с родителями или старшими из-за мелочи.",
     "Сегодня не раздражайся на ребёнка или слабого человека.",
-    "Сегодня сделай дуа за PROщение утром и вечером.",
+    "Сегодня сделай дуа за прощение утром и вечером.",
     "Сегодня не отвечай холодом на добро.",
     "Сегодня скажи Бисмиллях перед едой и Альхамдулиллях после.",
     "Сегодня не будь причиной чьей-то печали словами.",
@@ -7008,7 +7057,7 @@ window.addEventListener("DOMContentLoaded",function(){const installBtn=document.
     "Сегодня не сравнивай людей между собой.",
     "Сегодня вспомни, что ризк от Аллаха, и не тревожься лишнего.",
     "Сегодня убери одну вредную привычку хотя бы на день.",
-    "Сегодня PROчитай три раза Ихляс осознанно.",
+    "Сегодня прочитай три раза Ихляс осознанно.",
     "Сегодня не жалуйся на погоду, обстоятельства или людей.",
     "Сегодня дай салам первым тому, с кем редко говоришь.",
     "Сегодня сделай дуа за человека, которому завидовал.",
@@ -7020,7 +7069,7 @@ window.addEventListener("DOMContentLoaded",function(){const installBtn=document.
     "Сегодня помоги дома без PROсьбы.",
     "Сегодня не трать время на один пустой спор в интернете.",
     "Сегодня сделай одно действие ради Аллаха и никому не рассказывай.",
-    "Сегодня перед сном сPROси себя: что я сделал ради Аллаха?",
+    "Сегодня перед сном спроси себя: что я сделал ради Аллаха?",
     "Сегодня прими одну неприятность без жалобы.",
     "Сегодня не смотри на чужие недостатки — займись своим исправлением.",
     "Сегодня скажи добро первым, даже если другой молчит.",
@@ -7197,7 +7246,7 @@ window.addEventListener("DOMContentLoaded",function(){const installBtn=document.
     "q": "Что означает “Альхамдулиллях”?",
     "options": [
       "Хвала Аллаху",
-      "PROшу PROщения",
+      "PROшу прощения",
       "Мир вам"
     ],
     "correct": 0,
@@ -7206,7 +7255,7 @@ window.addEventListener("DOMContentLoaded",function(){const installBtn=document.
   {
     "q": "Что означает “Астагфируллах”?",
     "options": [
-      "PROшу PROщения у Аллаха",
+      "PROшу прощения у Аллаха",
       "Я согласен",
       "Доброе утро"
     ],
@@ -7301,7 +7350,7 @@ window.addEventListener("DOMContentLoaded",function(){const installBtn=document.
       "Украшает"
     ],
     "correct": 1,
-    "meaning": "Мусульманин PROсит у Аллаха благо без зависти к другим."
+    "meaning": "Мусульманин просит у Аллаха благо без зависти к другим."
   },
   {
     "q": "Гнев лучше…",
@@ -7671,7 +7720,7 @@ window.addEventListener("DOMContentLoaded",function(){const installBtn=document.
       "Ничего"
     ],
     "correct": 0,
-    "meaning": "Так ты PROсишь для него блага у Аллаха."
+    "meaning": "Так ты просишь для него блага у Аллаха."
   },
   {
     "q": "Дуа за другого без его ведома — это…",
@@ -8401,7 +8450,7 @@ window.addEventListener("DOMContentLoaded",function(){const installBtn=document.
       "Стыдно"
     ],
     "correct": 0,
-    "meaning": "PROщение ради Аллаха очищает сердце."
+    "meaning": "прощение ради Аллаха очищает сердце."
   },
   {
     "q": "Можно ли отвечать злом на зло?",
@@ -8464,7 +8513,7 @@ window.addEventListener("DOMContentLoaded",function(){const installBtn=document.
     "meaning": "Мусульманин старается не вредить окружающим."
   },
   {
-    "q": "Если человек PROсит помощи, лучше…",
+    "q": "Если человек просит помощи, лучше…",
     "options": [
       "Ответить мягко",
       "Грубо отогнать",
@@ -8566,7 +8615,7 @@ window.addEventListener("DOMContentLoaded",function(){const installBtn=document.
   {
     "q": "Если увидел чужой успех, лучше…",
     "options": [
-      "ПоPROсить барака",
+      "Попросить барака",
       "Завидовать",
       "Портить"
     ],
@@ -9560,8 +9609,8 @@ window.addEventListener("DOMContentLoaded",function(){const installBtn=document.
 <script id="bw-ru-task-compact-modal-final">
 (function(){
   'use strict';
-  const TASK_PREFIX = 'barakaway_today_ru_v2_';
-  const NAME_COUNT_PREFIX = 'barakaway_name_counter_ru_v2_';
+  const TASK_PREFIX = 'barakaway_today_ru_v3_';
+  const NAME_COUNT_PREFIX = 'barakaway_name_counter_ru_v3_';
   const HINT = "Нажмите, чтобы выполнить задание";
 
   function localDateKey(date){
@@ -9580,24 +9629,21 @@ window.addEventListener("DOMContentLoaded",function(){const installBtn=document.
     safeSet(doneKey(key),'1');
     if(key === 'name'){
       safeSet(countKey(),'100');
-      safeSet('barakaway_name_counter_' + todayKey(),'100');
-      safeSet(doneKey('name_count'),'100');
     }
   }
   function getNameCount(){
-    const raw = safeGet(countKey()) || safeGet('barakaway_name_counter_' + todayKey()) || safeGet(doneKey('name_count')) || '0';
+    const raw = safeGet(countKey()) || '0';
     const n = Math.max(0, Math.min(100, parseInt(raw,10) || 0));
     return isDone('name') ? 100 : n;
   }
   function setNameCount(n){
     const value = String(Math.max(0, Math.min(100, n)));
     safeSet(countKey(), value);
-    safeSet('barakaway_name_counter_' + todayKey(), value);
-    safeSet(doneKey('name_count'), value);
   }
   function $(sel, root){ return (root || document).querySelector(sel); }
   function clean(value){ return (value || '').replace(/\s+/g,' ').trim(); }
   function text(sel, root){ const el = $(sel, root); return el ? clean(el.textContent) : ''; }
+  function stripLeadingRef(value){ return clean(value).replace(/^\s*\d+\s*[:：]\s*\d+\s*/,''); }
 
   const configs = [
     {key:'article', id:'dailyArticleLink', title:"Аят дня", status:'dailyArticleStatus'},
@@ -9612,12 +9658,22 @@ window.addEventListener("DOMContentLoaded",function(){const installBtn=document.
     return raw.replace(/^Задание:\s*/i,'').replace(/^Task:\s*/i,'') || "Выполните сегодняшнее задание по аяту.";
   }
 
+
+  function getMicroMeaning(q, options){
+    const cfg = window.BW_TASK_FIX_RU || {};
+    const joined = ((q || '') + ' ' + (options || []).join(' ')).toLowerCase();
+    if(joined.indexOf('шахад') !== -1 || joined.indexOf('shahad') !== -1 || joined.indexOf('şehad') !== -1 || joined.indexOf('syahad') !== -1 || joined.indexOf('الشهادة') !== -1 || joined.indexOf('شہادت') !== -1 || joined.indexOf('শাহাদা') !== -1 || joined.indexOf('शहादा') !== -1){
+      return cfg.shahadaMeaning || '';
+    }
+    return '';
+  }
+
   function buildContent(key){
     if(key === 'article'){
       return {
         title:"Аят дня",
         ref:text('.today-ayah-ref', document.getElementById('dailyArticleLink')) || '2:286',
-        main:text('#dailyArticleTitle') || text('.today-ayah-line', document.getElementById('dailyArticleLink')) || "Аллах не возлагает на душу сверх её возможности.",
+        main:stripLeadingRef(text('#dailyArticleTitle') || text('.today-ayah-line', document.getElementById('dailyArticleLink'))) || "Аллах не возлагает на душу сверх её возможности.",
         task:articleTaskOnly()
       };
     }
@@ -9646,7 +9702,7 @@ window.addEventListener("DOMContentLoaded",function(){const installBtn=document.
       const q = text('#dailyMicroQuestion') || "Что нужно перед намазом?";
       const options = Array.from(document.querySelectorAll('#dailyMicroOptions .micro-option')).map(b=>clean(b.textContent)).filter(Boolean);
       const fallback = ["Омовение", "Еда", "Сон"];
-      const answer = text('#dailyMicroAnswer') || "Смысл: чистота — важное условие намаза.";
+      const answer = getMicroMeaning(q, options) || "Смысл: чистота — важное условие намаза.";
       return {title:"Микро-знание дня", main:q, options:options.length ? options : fallback, task:answer};
     }
     return {title:"Задание", main:'', task:"Выполните сегодняшнее задание."};
@@ -9721,6 +9777,17 @@ window.addEventListener("DOMContentLoaded",function(){const installBtn=document.
     applyAllStates();
   }
 
+
+  function getCorrectMicroIndex(options){
+    const list = options || [];
+    for(let i=0;i<list.length;i++){
+      const v = (list[i] || '').toLowerCase();
+      if(v.indexOf('шахад') !== -1 || v.indexOf('shahad') !== -1 || v.indexOf('şehad') !== -1 || v.indexOf('syahad') !== -1 || v.indexOf('الشهادة') !== -1 || v.indexOf('شہادت') !== -1 || v.indexOf('শাহাদা') !== -1 || v.indexOf('शहादा') !== -1) return i;
+      if(v.indexOf('омов') !== -1 || v.indexOf('wudu') !== -1 || v.indexOf('abdest') !== -1 || v.indexOf('وض') !== -1 || v.indexOf('وضو') !== -1 || v.indexOf('ওজু') !== -1 || v.indexOf('वुज़ू') !== -1) return i;
+    }
+    return 0;
+  }
+
   function openModal(config){
     const card = document.getElementById(config.id);
     if(!card) return;
@@ -9740,7 +9807,7 @@ window.addEventListener("DOMContentLoaded",function(){const installBtn=document.
     }
 
     overlay.innerHTML = `
-      <div class="bw-task-modal-card" role="dialog" aria-modal="true" aria-label="${data.title}">
+      <div class="bw-task-modal-card" data-task-key="${config.key}" role="dialog" aria-modal="true" aria-label="${data.title}">
         <h3 class="bw-task-modal-title"></h3>
         <div class="bw-task-modal-ref"></div>
         <p class="bw-task-modal-text"></p>
@@ -9754,7 +9821,8 @@ window.addEventListener("DOMContentLoaded",function(){const installBtn=document.
     const refEl = overlay.querySelector('.bw-task-modal-ref');
     if(data.ref){ refEl.textContent = data.ref; } else { refEl.style.display = 'none'; }
     overlay.querySelector('.bw-task-modal-text').textContent = data.main || '';
-    overlay.querySelector('.bw-task-modal-task span').textContent = data.task || 'Выполните сегодняшнее задание.';
+    if(config.key === 'micro'){ const taskBox = overlay.querySelector('.bw-task-modal-task'); if(taskBox) taskBox.remove(); }
+    else overlay.querySelector('.bw-task-modal-task span').textContent = data.task || 'Выполните сегодняшнее задание.';
 
     const completeBtn = overlay.querySelector('.bw-task-complete-btn');
     if(config.key === 'name'){
@@ -9764,12 +9832,14 @@ window.addEventListener("DOMContentLoaded",function(){const installBtn=document.
         const n = getNameCount();
         if(countEl) countEl.textContent = n + '/100';
         completeBtn.disabled = n < 100;
-        if(incBtn) incBtn.textContent = n >= 100 ? "100 / 100 выполнено" : "Повторить имя +1";
+        if(incBtn){ const cfg = window.BW_TASK_FIX_RU || {}; incBtn.textContent = n >= 100 ? (cfg.countComplete || '100 / 100') : (cfg.repeat || '+1'); }
         updateNameVisuals();
       }
       incBtn.addEventListener('click', function(){
         const n = Math.min(100, getNameCount() + 1);
         setNameCount(n);
+        updateNameVisuals();
+        applyAllStates();
         syncNameModal();
       });
       syncNameModal();
@@ -9811,12 +9881,27 @@ window.addEventListener("DOMContentLoaded",function(){const installBtn=document.
         event.stopImmediatePropagation();
         event.stopPropagation();
         if(isDone(config.key)) return;
+        if(config.key === 'name'){
+          const n = Math.min(100, getNameCount() + 1);
+          setNameCount(n);
+          if(n >= 100){ completeTask('name'); }
+          else { updateNameVisuals(); applyAllStates(); }
+          return;
+        }
         openModal(config);
       }, true);
       card.addEventListener('keydown', function(event){
         if(event.key === 'Enter' || event.key === ' '){
           event.preventDefault();
-          if(!isDone(config.key)) openModal(config);
+          if(isDone(config.key)) return;
+          if(config.key === 'name'){
+            const n = Math.min(100, getNameCount() + 1);
+            setNameCount(n);
+            if(n >= 100){ completeTask('name'); }
+            else { updateNameVisuals(); applyAllStates(); }
+            return;
+          }
+          openModal(config);
         }
       }, true);
     });
