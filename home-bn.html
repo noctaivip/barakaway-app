@@ -9260,5 +9260,113 @@ window.addEventListener("DOMContentLoaded",function(){const installBtn=document.
 })();
 </script>
 
+
+<style id="bw-daily-lock-pro-glow-fix">
+.today-action-card.goal-urgent,
+.today-action-card:not(.bw-task-done){
+  animation: bwRedPulse 1.8s infinite !important;
+}
+.theme-pro .today-action-card.goal-urgent,
+.theme-pro .today-action-card:not(.bw-task-done),
+[data-theme*="pro"] .today-action-card.goal-urgent,
+[data-theme*="pro"] .today-action-card:not(.bw-task-done){
+  animation: bwRedPulse 1.8s infinite !important;
+  border-color: rgba(255,70,70,.9) !important;
+  box-shadow:
+    0 0 10px rgba(255,40,40,.55),
+    0 0 22px rgba(255,40,40,.35),
+    inset 0 0 12px rgba(255,40,40,.12) !important;
+}
+@keyframes bwRedPulse{
+  0%{
+    border-color: rgba(255,60,60,.45);
+    box-shadow:0 0 6px rgba(255,30,30,.22);
+  }
+  50%{
+    border-color: rgba(255,70,70,.98);
+    box-shadow:
+      0 0 14px rgba(255,40,40,.75),
+      0 0 28px rgba(255,40,40,.45);
+  }
+  100%{
+    border-color: rgba(255,60,60,.45);
+    box-shadow:0 0 6px rgba(255,30,30,.22);
+  }
+}
+</style>
+
+<script id="bw-daily-lock-fix">
+(function(){
+'use strict';
+
+function todayKey(){
+  const d=new Date();
+  return d.getFullYear()+'-'+String(d.getMonth()+1).padStart(2,'0')+'-'+String(d.getDate()).padStart(2,'0');
+}
+
+const CURRENT_DAY = todayKey();
+const STORAGE_DAY_KEY = 'bw_tasks_day_key';
+
+function resetForNewDay(){
+  try{
+    const saved = localStorage.getItem(STORAGE_DAY_KEY);
+    if(saved !== CURRENT_DAY){
+      Object.keys(localStorage).forEach(function(key){
+        if(
+          key.includes('barakaway_today_') ||
+          key.includes('barakaway_name_counter_') ||
+          key.includes('bw_task_done_') ||
+          key.includes('bw_goal_')
+        ){
+          localStorage.removeItem(key);
+        }
+      });
+      localStorage.setItem(STORAGE_DAY_KEY, CURRENT_DAY);
+    }
+  }catch(e){}
+}
+
+function lockCompletedCards(){
+  document.querySelectorAll('.today-action-card').forEach(function(card){
+    const done =
+      card.classList.contains('bw-task-done') ||
+      card.classList.contains('task-done') ||
+      card.classList.contains('goal-done');
+
+    if(done){
+      card.classList.remove('goal-urgent');
+      card.style.pointerEvents = 'none';
+      card.setAttribute('aria-disabled','true');
+
+      const hint = card.querySelector('.bw-task-compact-hint');
+      if(hint) hint.style.display='none';
+
+      let check = card.querySelector('.bw-task-done-check');
+      if(!check){
+        check = document.createElement('div');
+        check.className='bw-task-done-check';
+        check.innerHTML='✓';
+        card.appendChild(check);
+      }
+    }else{
+      card.style.pointerEvents = 'auto';
+      card.classList.add('goal-urgent');
+    }
+  });
+}
+
+resetForNewDay();
+
+document.addEventListener('DOMContentLoaded', lockCompletedCards);
+window.addEventListener('pageshow', lockCompletedCards);
+
+setInterval(function(){
+  resetForNewDay();
+  lockCompletedCards();
+}, 1200);
+
+})();
+</script>
+
 </body>
 </html>
