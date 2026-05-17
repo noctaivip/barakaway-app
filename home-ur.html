@@ -4281,7 +4281,7 @@ html.light-mode .today-hub .bw-task-hint{color:#53645a;}
   cursor:pointer !important;
 }
 .bw-micro-options-grid{
-  grid-template-columns:repeat(2,minmax(0,1fr)) !important;
+  grid-template-columns:1fr !important;
   gap:10px !important;
 }
 .bw-micro-option-btn{
@@ -4310,6 +4310,31 @@ html.light-mode .today-hub .bw-task-hint{color:#53645a;}
   .bw-name-counter-display{font-size:30px !important;}
 }
 </style>
+
+<script id="bw-ur-task-reset-v2">
+(function(){
+  try{
+    var prefixOld = 'barakaway_today_ur_';
+    var prefixNew = 'barakaway_today_ur_v2_';
+    Object.keys(localStorage).forEach(function(key){
+      if(key.indexOf(prefixOld) === 0 && key.indexOf(prefixNew) !== 0){
+        localStorage.removeItem(key);
+      }
+    });
+  }catch(e){}
+})();
+</script>
+
+
+<style id="bw-ur-micro-options-one-column-fix">
+.bw-micro-options-grid{
+  grid-template-columns:1fr !important;
+}
+.bw-micro-option-btn{
+  width:100% !important;
+}
+</style>
+
 </head>
 <body>
 <div class="mobile-top-controls">
@@ -8544,8 +8569,8 @@ window.addEventListener("DOMContentLoaded",function(){const installBtn=document.
 <script id="bw-ur-task-compact-modal-final">
 (function(){
   'use strict';
-  const TASK_PREFIX = 'barakaway_today_ur_';
-  const NAME_COUNT_PREFIX = 'barakaway_name_counter_ur_';
+  const TASK_PREFIX = 'barakaway_today_ur_v2_';
+  const NAME_COUNT_PREFIX = 'barakaway_name_counter_ur_v2_';
   const HINT = "آج کا کام مکمل کرنے کے لیے دبائیں";
 
   function localDateKey(date){
@@ -8707,7 +8732,7 @@ window.addEventListener("DOMContentLoaded",function(){const installBtn=document.
 
   function openModal(config){
     const card = document.getElementById(config.id);
-    if(!card || isDone(config.key)) return;
+    if(!card) return;
     const data = buildContent(config.key);
     const old = document.querySelector('.bw-task-modal-overlay');
     if(old) old.remove();
