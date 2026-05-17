@@ -9125,6 +9125,85 @@ setInterval(function(){
 })();
 </script>
 
+
+<style id="bw-force-visible-red-pulse-final">
+/* FINAL: visible red pulse/glow for unfinished daily tasks in original/free and every PRO theme */
+.today-hub .today-action:not(.bw-task-done):not(.task-done):not(.goal-done){
+  position:relative !important;
+  overflow:visible !important;
+  border-color:rgba(255,92,92,.72) !important;
+  animation:bwCardBodyRedBreathFinal 1.25s ease-in-out infinite !important;
+}
+
+.today-hub .today-action:not(.bw-task-done):not(.task-done):not(.goal-done)::before{
+  content:"" !important;
+  position:absolute !important;
+  inset:-2px !important;
+  border-radius:inherit !important;
+  pointer-events:none !important;
+  z-index:1 !important;
+  border:1.5px solid rgba(255,92,92,.55) !important;
+  box-shadow:
+    0 0 10px rgba(255,54,54,.45),
+    0 0 20px rgba(255,54,54,.28) !important;
+  animation:bwOuterRedGlowFinal 1.25s ease-in-out infinite !important;
+}
+
+.today-hub .today-action:not(.bw-task-done):not(.task-done):not(.goal-done) > *{
+  position:relative !important;
+  z-index:2 !important;
+}
+
+@keyframes bwCardBodyRedBreathFinal{
+  0%,100%{
+    border-color:rgba(255,86,86,.42);
+    box-shadow:
+      0 10px 24px rgba(0,0,0,.18),
+      0 0 6px rgba(255,50,50,.18),
+      inset 0 1px 0 rgba(255,255,255,.04);
+  }
+  50%{
+    border-color:rgba(255,130,130,1);
+    box-shadow:
+      0 10px 24px rgba(0,0,0,.20),
+      0 0 18px rgba(255,54,54,.72),
+      0 0 38px rgba(255,54,54,.42),
+      inset 0 1px 0 rgba(255,255,255,.06);
+  }
+}
+
+@keyframes bwOuterRedGlowFinal{
+  0%,100%{
+    opacity:.45;
+    box-shadow:
+      0 0 8px rgba(255,54,54,.30),
+      0 0 16px rgba(255,54,54,.18);
+  }
+  50%{
+    opacity:1;
+    box-shadow:
+      0 0 18px rgba(255,54,54,.88),
+      0 0 36px rgba(255,54,54,.56),
+      0 0 58px rgba(255,54,54,.28);
+  }
+}
+
+/* Completed cards must stay calm */
+.today-hub .today-action.bw-task-done,
+.today-hub .today-action.task-done,
+.today-hub .today-action.goal-done{
+  animation:none !important;
+  overflow:hidden !important;
+}
+
+.today-hub .today-action.bw-task-done::before,
+.today-hub .today-action.task-done::before,
+.today-hub .today-action.goal-done::before{
+  content:none !important;
+  display:none !important;
+}
+</style>
+
 </body>
 </html>
 
