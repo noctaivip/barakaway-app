@@ -42,6 +42,19 @@ h1{
   font-size:13px;
   text-transform:uppercase;
 }
+
+.auto-detect-top{
+  display:flex;
+  justify-content:center;
+  margin:0 0 24px;
+}
+.auto-detect-top .btn{
+  min-width:240px;
+}
+@media(max-width:640px){
+  .auto-detect-top{margin-bottom:18px;}
+  .auto-detect-top .btn{width:100%;min-width:0;}
+}
 .hero{
   display:grid;
   grid-template-columns:1.3fr 1fr;
@@ -498,6 +511,7 @@ html.dark-mode .sunrise-time{color:#f5f7fa;}
 <body>
 <div class="container">
   <h1>أوقات الصلاة</h1>
+  <div class="auto-detect-top"><button class="btn secondary" id="detectBtn">تحديد تلقائي</button></div>
 
   <div class="hero">
     <div class="panel">
@@ -547,7 +561,6 @@ html.dark-mode .sunrise-time{color:#f5f7fa;}
       </div>
       <div class="btn-row">
         <button class="btn primary" id="searchCityBtn">تحميل حسب المدينة</button>
-        <button class="btn secondary" id="detectBtn">تحديد تلقائي</button>
         <button class="btn" id="refreshBtn">تحديث</button>
       </div>
     </div>
