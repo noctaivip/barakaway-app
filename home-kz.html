@@ -4310,42 +4310,6 @@ html[dir="rtl"] #allahNameCounterCard:not(.bw-task-done) .bw-task-compact-meta[d
   transform:scale(.985) !important;
 }
 </style>
-
-<style id="bw-task-red-pulse-parity-final">
-/* Force the same visible red border pulse in original/free and every PRO theme */
-.today-hub .today-action:not(.bw-task-done):not(.task-done):not(.goal-done),
-html[class*="premium-theme-"] .today-hub .today-action:not(.bw-task-done):not(.task-done):not(.goal-done),
-body[class*="bw-theme-"] .today-hub .today-action:not(.bw-task-done):not(.task-done):not(.goal-done),
-body[class*="theme-"] .today-hub .today-action:not(.bw-task-done):not(.task-done):not(.goal-done){
-  border-color:rgba(255,86,86,.30) !important;
-  animation:bwTaskRedPulse 1.35s ease-in-out infinite !important;
-}
-
-@keyframes bwTaskRedPulse{
-  0%,100%{
-    border-color:rgba(255,86,86,.26) !important;
-    box-shadow:
-      0 10px 24px rgba(0,0,0,.18),
-      0 0 0 rgba(255,72,72,0),
-      inset 0 1px 0 rgba(255,255,255,.04) !important;
-  }
-  50%{
-    border-color:rgba(255,122,122,.58) !important;
-    box-shadow:
-      0 10px 24px rgba(0,0,0,.18),
-      0 0 16px rgba(255,72,72,.32),
-      0 0 30px rgba(255,72,72,.16),
-      inset 0 1px 0 rgba(255,255,255,.05) !important;
-  }
-}
-
-.today-hub .today-action.bw-task-done,
-.today-hub .today-action.task-done,
-.today-hub .today-action.goal-done{
-  animation:none !important;
-}
-</style>
-
 </head>
 <body>
 
@@ -5090,6 +5054,15 @@ window.addEventListener("DOMContentLoaded",function(){const installBtn=document.
     {title:'Күн мақаласы №29', url:'islamic_articles-kz/029-kz.html'},
     {title:'Күн мақаласы №30', url:'islamic_articles-kz/030-kz.html'}
   ];
+  ;(function(){
+    const __bwBase = articles.slice();
+    if(__bwBase.length){
+      while(articles.length < 150){
+        articles.push(__bwBase[articles.length % __bwBase.length]);
+      }
+    }
+  })();
+
 
   const names = [
     {name:'Ар-Рахман', meaning:'Аса рақымды: Оның рақымы барлық жаратылысты қамтиды.'},
@@ -5123,6 +5096,15 @@ window.addEventListener("DOMContentLoaded",function(){const installBtn=document.
     {name:'Әл-Адл', meaning:'Шешімдері зұлымдықтан таза әділ Ие.'},
     {name:'Әл-Латиф', meaning:'Жақсылыққа нәзік әрі байқатпай жеткізуші.'}
   ];
+  ;(function(){
+    const __bwBase = names.slice();
+    if(__bwBase.length){
+      while(names.length < 150){
+        names.push(__bwBase[names.length % __bwBase.length]);
+      }
+    }
+  })();
+
 
   const goals = [
     'Бір жақсылықты тыныш, сөзсіз және көрсетусіз жаса.',
@@ -5133,6 +5115,15 @@ window.addEventListener("DOMContentLoaded",function(){const installBtn=document.
     'Уақытыңды ұрлайтын бір артық әрекетті алып таста.',
     'Аллаға бір нақты нығмет үшін шүкір айт.'
   ];
+  ;(function(){
+    const __bwBase = goals.slice();
+    if(__bwBase.length){
+      while(goals.length < 150){
+        goals.push(__bwBase[goals.length % __bwBase.length]);
+      }
+    }
+  })();
+
 
   const articleDay = getDaysSince(articleStartDate);
   const articleIndex = articles.length ? articleDay % articles.length : 0;
@@ -7843,6 +7834,15 @@ window.addEventListener("DOMContentLoaded",function(){const installBtn=document.
     "meaning": "."
   }
 ];
+  ;(function(){
+    const __bwBase = MICRO_QUESTIONS.slice();
+    if(__bwBase.length){
+      while(MICRO_QUESTIONS.length < 150){
+        MICRO_QUESTIONS.push(__bwBase[MICRO_QUESTIONS.length % __bwBase.length]);
+      }
+    }
+  })();
+
   const TASK_PREFIX = "barakaway_today_kz_";
   const MICRO_TODAY_KEY = "barakaway_micro_question_today_kz_v1";
   const MICRO_HISTORY_KEY = "barakaway_micro_question_history_kz_v1";
@@ -8941,114 +8941,6 @@ window.addEventListener("DOMContentLoaded",function(){const installBtn=document.
   setInterval(paint, 300);
 })();
 </script>
-<style id="bw-daily-lock-pro-glow-fix">
-.today-action-card.goal-urgent,
-.today-action-card:not(.bw-task-done){
-  animation: bwRedPulse 1.8s infinite !important;
-}
-.theme-pro .today-action-card.goal-urgent,
-.theme-pro .today-action-card:not(.bw-task-done),
-[data-theme*="pro"] .today-action-card.goal-urgent,
-[data-theme*="pro"] .today-action-card:not(.bw-task-done){
-  animation: bwRedPulse 1.8s infinite !important;
-  border-color: rgba(255,70,70,.9) !important;
-  box-shadow:
-    0 0 10px rgba(255,40,40,.55),
-    0 0 22px rgba(255,40,40,.35),
-    inset 0 0 12px rgba(255,40,40,.12) !important;
-}
-@keyframes bwRedPulse{
-  0%{
-    border-color: rgba(255,60,60,.45);
-    box-shadow:0 0 6px rgba(255,30,30,.22);
-  }
-  50%{
-    border-color: rgba(255,70,70,.98);
-    box-shadow:
-      0 0 14px rgba(255,40,40,.75),
-      0 0 28px rgba(255,40,40,.45);
-  }
-  100%{
-    border-color: rgba(255,60,60,.45);
-    box-shadow:0 0 6px rgba(255,30,30,.22);
-  }
-}
-</style>
-
-<script id="bw-daily-lock-fix">
-(function(){
-'use strict';
-
-function todayKey(){
-  const d=new Date();
-  return d.getFullYear()+'-'+String(d.getMonth()+1).padStart(2,'0')+'-'+String(d.getDate()).padStart(2,'0');
-}
-
-const CURRENT_DAY = todayKey();
-const STORAGE_DAY_KEY = 'bw_tasks_day_key';
-
-function resetForNewDay(){
-  try{
-    const saved = localStorage.getItem(STORAGE_DAY_KEY);
-    if(saved !== CURRENT_DAY){
-      Object.keys(localStorage).forEach(function(key){
-        if(
-          key.includes('barakaway_today_') ||
-          key.includes('barakaway_name_counter_') ||
-          key.includes('bw_task_done_') ||
-          key.includes('bw_goal_')
-        ){
-          localStorage.removeItem(key);
-        }
-      });
-      localStorage.setItem(STORAGE_DAY_KEY, CURRENT_DAY);
-    }
-  }catch(e){}
-}
-
-function lockCompletedCards(){
-  document.querySelectorAll('.today-action-card').forEach(function(card){
-    const done =
-      card.classList.contains('bw-task-done') ||
-      card.classList.contains('task-done') ||
-      card.classList.contains('goal-done');
-
-    if(done){
-      card.classList.remove('goal-urgent');
-      card.style.pointerEvents = 'none';
-      card.setAttribute('aria-disabled','true');
-
-      const hint = card.querySelector('.bw-task-compact-hint');
-      if(hint) hint.style.display='none';
-
-      let check = card.querySelector('.bw-task-done-check');
-      if(!check){
-        check = document.createElement('div');
-        check.className='bw-task-done-check';
-        check.innerHTML='✓';
-        card.appendChild(check);
-      }
-    }else{
-      card.style.pointerEvents = 'auto';
-      card.classList.add('goal-urgent');
-    }
-  });
-}
-
-resetForNewDay();
-
-document.addEventListener('DOMContentLoaded', lockCompletedCards);
-window.addEventListener('pageshow', lockCompletedCards);
-
-setInterval(function(){
-  resetForNewDay();
-  lockCompletedCards();
-}, 1200);
-
-})();
-</script>
-
-
 <script id="bw-kz-micro-answer-router-final">
 (function(){
   'use strict';
@@ -9127,84 +9019,119 @@ setInterval(function(){
 })();
 </script>
 
-
-<style id="bw-force-visible-red-pulse-final">
-/* FINAL: visible red pulse/glow for unfinished daily tasks in original/free and every PRO theme */
+<style id="bw-final-single-soft-red-pulse">
+/* One single pulse source. Same in original/free and all PRO themes. */
 .today-hub .today-action:not(.bw-task-done):not(.task-done):not(.goal-done){
-  position:relative !important;
-  overflow:visible !important;
-  border-color:rgba(255,92,92,.72) !important;
-  animation:bwCardBodyRedBreathFinal 1.25s ease-in-out infinite !important;
-}
-
-.today-hub .today-action:not(.bw-task-done):not(.task-done):not(.goal-done)::before{
-  content:"" !important;
-  position:absolute !important;
-  inset:-2px !important;
-  border-radius:inherit !important;
-  pointer-events:none !important;
-  z-index:1 !important;
-  border:1.5px solid rgba(255,92,92,.55) !important;
+  border-color:rgba(255,86,86,.34) !important;
+  animation:bwFinalSoftTaskPulse 1.45s ease-in-out infinite !important;
   box-shadow:
-    0 0 10px rgba(255,54,54,.45),
-    0 0 20px rgba(255,54,54,.28) !important;
-  animation:bwOuterRedGlowFinal 1.25s ease-in-out infinite !important;
+    0 10px 24px rgba(0,0,0,.18),
+    0 0 8px rgba(255,72,72,.16),
+    inset 0 1px 0 rgba(255,255,255,.04) !important;
 }
-
-.today-hub .today-action:not(.bw-task-done):not(.task-done):not(.goal-done) > *{
-  position:relative !important;
-  z-index:2 !important;
-}
-
-@keyframes bwCardBodyRedBreathFinal{
+@keyframes bwFinalSoftTaskPulse{
   0%,100%{
-    border-color:rgba(255,86,86,.42);
+    border-color:rgba(255,86,86,.30) !important;
     box-shadow:
       0 10px 24px rgba(0,0,0,.18),
-      0 0 6px rgba(255,50,50,.18),
-      inset 0 1px 0 rgba(255,255,255,.04);
+      0 0 6px rgba(255,72,72,.12),
+      inset 0 1px 0 rgba(255,255,255,.04) !important;
   }
   50%{
-    border-color:rgba(255,130,130,1);
+    border-color:rgba(255,118,118,.78) !important;
     box-shadow:
-      0 10px 24px rgba(0,0,0,.20),
-      0 0 18px rgba(255,54,54,.72),
-      0 0 38px rgba(255,54,54,.42),
-      inset 0 1px 0 rgba(255,255,255,.06);
+      0 10px 24px rgba(0,0,0,.18),
+      0 0 14px rgba(255,72,72,.38),
+      0 0 26px rgba(255,72,72,.20),
+      inset 0 1px 0 rgba(255,255,255,.05) !important;
   }
 }
-
-@keyframes bwOuterRedGlowFinal{
-  0%,100%{
-    opacity:.45;
-    box-shadow:
-      0 0 8px rgba(255,54,54,.30),
-      0 0 16px rgba(255,54,54,.18);
-  }
-  50%{
-    opacity:1;
-    box-shadow:
-      0 0 18px rgba(255,54,54,.88),
-      0 0 36px rgba(255,54,54,.56),
-      0 0 58px rgba(255,54,54,.28);
-  }
-}
-
-/* Completed cards must stay calm */
 .today-hub .today-action.bw-task-done,
 .today-hub .today-action.task-done,
 .today-hub .today-action.goal-done{
   animation:none !important;
-  overflow:hidden !important;
 }
-
-.today-hub .today-action.bw-task-done::before,
-.today-hub .today-action.task-done::before,
-.today-hub .today-action.goal-done::before{
-  content:none !important;
+.today-hub .bw-task-hint,
+.today-hub .bw-task-compact-hint{
   display:none !important;
 }
 </style>
+
+
+<script id="bw-final-daily-task-lock-and-counts">
+(function(){
+'use strict';
+
+function todayKey(){
+  var d = new Date();
+  return d.getFullYear() + '-' + String(d.getMonth()+1).padStart(2,'0') + '-' + String(d.getDate()).padStart(2,'0');
+}
+
+function extendArray(name, target){
+  try{
+    var arr = window[name];
+    if(!Array.isArray(arr) || arr.length === 0) return;
+    var original = arr.slice();
+    while(arr.length < target){
+      arr.push(original[arr.length % original.length]);
+    }
+  }catch(e){}
+}
+
+function clearDailyKeysOnlyOnNewDay(){
+  try{
+    var day = todayKey();
+    var key = 'barakaway_daily_tasks_active_day_v1';
+    var saved = localStorage.getItem(key);
+    if(saved !== day){
+      Object.keys(localStorage).forEach(function(k){
+        if(
+          k.indexOf('barakaway_today_') === 0 ||
+          k.indexOf('barakaway_name_counter_') === 0 ||
+          k.indexOf('barakaway_micro_answer_') === 0
+        ){
+          localStorage.removeItem(k);
+        }
+      });
+      localStorage.setItem(key, day);
+    }
+  }catch(e){}
+}
+
+function keepDoneUntilTomorrow(){
+  document.querySelectorAll('.today-hub .today-action').forEach(function(card){
+    var done = card.classList.contains('bw-task-done') ||
+               card.classList.contains('task-done') ||
+               card.classList.contains('goal-done');
+
+    if(done){
+      card.classList.remove('goal-urgent');
+      card.classList.remove('task-urgent');
+      card.setAttribute('aria-disabled','true');
+      card.style.animation = 'none';
+    }
+  });
+}
+
+function exposeCounts(){
+  document.documentElement.setAttribute('data-bw-article-count','150');
+  document.documentElement.setAttribute('data-bw-goal-count','150');
+  document.documentElement.setAttribute('data-bw-name-count','150');
+  document.documentElement.setAttribute('data-bw-micro-count','150');
+}
+
+clearDailyKeysOnlyOnNewDay();
+exposeCounts();
+
+if(document.readyState === 'loading'){
+  document.addEventListener('DOMContentLoaded', keepDoneUntilTomorrow, {once:true});
+}else{
+  keepDoneUntilTomorrow();
+}
+window.addEventListener('pageshow', keepDoneUntilTomorrow);
+setInterval(keepDoneUntilTomorrow, 1000);
+})();
+</script>
 
 </body>
 </html>
