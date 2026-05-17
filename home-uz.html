@@ -5083,22 +5083,26 @@ window.addEventListener("DOMContentLoaded",function(){const installBtn=document.
       while(articles.length < 150){
         articles.push(__bwBase[articles.length % __bwBase.length]);
       }
-    }
-  })();
-
-
-  const names = ["Ar-Rahmon", "Ar-Rahim", "Al-Malik", "Al-Quddus", "As-Salom", "Al-Mu’min", "Al-Muhaymin", "Al-Aziz", "Al-Jabbor", "Al-Mutakabbir", "Al-Xoliq", "Al-Bori’", "Al-Musavvir", "Al-G‘affor", "Al-Qahhor", "Al-Vahhob", "Ar-Razzoq", "Al-Fattoh", "Al-Alim", "Al-Qobid", "Al-Bosit", "Al-Xofid", "Ar-Rofi’", "Al-Mu’izz", "Al-Muzill", "As-Sami’", "Al-Basir", "Al-Hakam", "Al-Adl", "Al-Latif"];
-  ;(function(){
-    const __bwBase = names.slice();
-    if(__bwBase.length){
-      while(names.length < 150){
-        names.push(__bwBase[names.length % __bwBase.length]);
+      if(articles.length > 150){
+        articles.length = 150;
       }
     }
   })();
 
+const names = ["Ar-Rahmon", "Ar-Rahim", "Al-Malik", "Al-Quddus", "As-Salom", "Al-Mu’min", "Al-Muhaymin", "Al-Aziz", "Al-Jabbor", "Al-Mutakabbir", "Al-Xoliq", "Al-Bori’", "Al-Musavvir", "Al-G‘affor", "Al-Qahhor", "Al-Vahhob", "Ar-Razzoq", "Al-Fattoh", "Al-Alim", "Al-Qobid", "Al-Bosit", "Al-Xofid", "Ar-Rofi’", "Al-Mu’izz", "Al-Muzill", "As-Sami’", "Al-Basir", "Al-Hakam", "Al-Adl", "Al-Latif"];
+  ;(function(){
+    const __bwBase = names.slice();
+    if(__bwBase.length){
+      while(names.length < 114){
+        names.push(__bwBase[names.length % __bwBase.length]);
+      }
+      if(names.length > 114){
+        names.length = 114;
+      }
+    }
+  })();
 
-  const goals = [
+const goals = [
     'Bir yaxshilikni sokin, so‘zsiz va ko‘z-ko‘z qilmasdan qil.',
     'Muhim ish oldidan niyatingni Alloh ﷻ uchun yangila.',
     'Bir kishiga hech kim sezmaydigan tarzda yordam ber.',
@@ -5113,11 +5117,13 @@ window.addEventListener("DOMContentLoaded",function(){const installBtn=document.
       while(goals.length < 150){
         goals.push(__bwBase[goals.length % __bwBase.length]);
       }
+      if(goals.length > 150){
+        goals.length = 150;
+      }
     }
   })();
 
-
-  const articleDay = getDaysSince(articleStartDate);
+const articleDay = getDaysSince(articleStartDate);
   const articleIndex = articles.length ? articleDay % articles.length : 0;
   const article = articles[articleIndex];
   const articleLink = document.getElementById('dailyMaqolaLink');
@@ -7858,10 +7864,13 @@ window.addEventListener("DOMContentLoaded",function(){const installBtn=document.
       while(MICRO_QUESTIONS.length < 150){
         MICRO_QUESTIONS.push(__bwBase[MICRO_QUESTIONS.length % __bwBase.length]);
       }
+      if(MICRO_QUESTIONS.length > 150){
+        MICRO_QUESTIONS.length = 150;
+      }
     }
   })();
 
-  const TASK_PREFIX = "barakaway_today_uz_";
+const TASK_PREFIX = "barakaway_today_uz_";
   const MICRO_TODAY_KEY = "barakaway_micro_question_today_uz_v1";
   const MICRO_HISTORY_KEY = "barakaway_micro_question_history_uz_v1";
   const MICRO_ANSWER_PREFIX = "barakaway_micro_answer_uz_";
@@ -8970,38 +8979,45 @@ window.addEventListener("DOMContentLoaded",function(){const installBtn=document.
 })();
 </script>
 
-<style id="bw-final-single-soft-red-pulse">
-/* One single pulse source. Same in original/free and all PRO themes. */
-.today-hub .today-action:not(.bw-task-done):not(.task-done):not(.goal-done){
-  border-color:rgba(255,86,86,.34) !important;
-  animation:bwFinalSoftTaskPulse 1.45s ease-in-out infinite !important;
+<style id="bw-final-visible-soft-pulse-v2">
+/* Final visible but soft pulse for every unfinished daily task, in original/free and all PRO themes */
+.today-hub .today-action:not(.bw-task-done):not(.task-done):not(.goal-done),
+html[class*="premium-theme-"] .today-hub .today-action:not(.bw-task-done):not(.task-done):not(.goal-done),
+body[class*="bw-theme-"] .today-hub .today-action:not(.bw-task-done):not(.task-done):not(.goal-done),
+body[class*="theme-"] .today-hub .today-action:not(.bw-task-done):not(.task-done):not(.goal-done){
+  border-color:rgba(255,95,95,.70) !important;
+  animation:bwFinalVisibleSoftPulseV2 1.28s ease-in-out infinite !important;
   box-shadow:
     0 10px 24px rgba(0,0,0,.18),
-    0 0 8px rgba(255,72,72,.16),
+    0 0 10px rgba(255,70,70,.28),
     inset 0 1px 0 rgba(255,255,255,.04) !important;
+  will-change:box-shadow,border-color !important;
 }
-@keyframes bwFinalSoftTaskPulse{
+
+@keyframes bwFinalVisibleSoftPulseV2{
   0%,100%{
-    border-color:rgba(255,86,86,.30) !important;
+    border-color:rgba(255,82,82,.44) !important;
     box-shadow:
       0 10px 24px rgba(0,0,0,.18),
-      0 0 6px rgba(255,72,72,.12),
+      0 0 6px rgba(255,70,70,.18),
       inset 0 1px 0 rgba(255,255,255,.04) !important;
   }
   50%{
-    border-color:rgba(255,118,118,.78) !important;
+    border-color:rgba(255,126,126,.92) !important;
     box-shadow:
       0 10px 24px rgba(0,0,0,.18),
-      0 0 14px rgba(255,72,72,.38),
-      0 0 26px rgba(255,72,72,.20),
+      0 0 18px rgba(255,70,70,.58),
+      0 0 34px rgba(255,70,70,.30),
       inset 0 1px 0 rgba(255,255,255,.05) !important;
   }
 }
+
 .today-hub .today-action.bw-task-done,
 .today-hub .today-action.task-done,
 .today-hub .today-action.goal-done{
   animation:none !important;
 }
+
 .today-hub .bw-task-hint,
 .today-hub .bw-task-compact-hint{
   display:none !important;
@@ -9009,78 +9025,138 @@ window.addEventListener("DOMContentLoaded",function(){const installBtn=document.
 </style>
 
 
-<script id="bw-final-daily-task-lock-and-counts">
+<script id="bw-final-daily-lock-visible-pulse-v2">
 (function(){
 'use strict';
+
+var LANG = "uz";
+var DAY_KEY_PREFIX = 'bw_daily_done_v2_' + LANG + '_';
 
 function todayKey(){
   var d = new Date();
   return d.getFullYear() + '-' + String(d.getMonth()+1).padStart(2,'0') + '-' + String(d.getDate()).padStart(2,'0');
 }
 
-function extendArray(name, target){
-  try{
-    var arr = window[name];
-    if(!Array.isArray(arr) || arr.length === 0) return;
-    var original = arr.slice();
-    while(arr.length < target){
-      arr.push(original[arr.length % original.length]);
-    }
-  }catch(e){}
+function doneKey(task){
+  return DAY_KEY_PREFIX + todayKey() + '_' + task;
 }
 
-function clearDailyKeysOnlyOnNewDay(){
+function setDone(task){
   try{
+    localStorage.setItem(doneKey(task), '1');
+
     var day = todayKey();
-    var key = 'barakaway_daily_tasks_active_day_v1';
-    var saved = localStorage.getItem(key);
-    if(saved !== day){
-      Object.keys(localStorage).forEach(function(k){
-        if(
-          k.indexOf('barakaway_today_') === 0 ||
-          k.indexOf('barakaway_name_counter_') === 0 ||
-          k.indexOf('barakaway_micro_answer_') === 0
-        ){
-          localStorage.removeItem(k);
-        }
-      });
-      localStorage.setItem(key, day);
+    var variants = [
+      'barakaway_today_' + LANG + '_' + day + '_' + task,
+      'barakaway_today_' + LANG + '_v2_' + day + '_' + task,
+      'barakaway_today_' + LANG + '_v3_' + day + '_' + task,
+      'barakaway_today_' + LANG + '_final_' + day + '_' + task
+    ];
+    variants.forEach(function(k){ localStorage.setItem(k, '1'); });
+
+    if(task === 'name'){
+      [
+        'barakaway_name_counter_' + LANG + '_' + day,
+        'barakaway_name_counter_' + LANG + '_v2_' + day,
+        'barakaway_name_counter_' + LANG + '_v3_' + day,
+        'barakaway_name_counter_' + LANG + '_final_' + day,
+        'barakaway_name_counter_' + day
+      ].forEach(function(k){ localStorage.setItem(k, '100'); });
     }
   }catch(e){}
 }
 
-function keepDoneUntilTomorrow(){
-  document.querySelectorAll('.today-hub .today-action').forEach(function(card){
-    var done = card.classList.contains('bw-task-done') ||
-               card.classList.contains('task-done') ||
-               card.classList.contains('goal-done');
+function isDone(task){
+  try{
+    return localStorage.getItem(doneKey(task)) === '1' ||
+           localStorage.getItem('barakaway_today_' + LANG + '_v3_' + todayKey() + '_' + task) === '1' ||
+           localStorage.getItem('barakaway_today_' + LANG + '_final_' + todayKey() + '_' + task) === '1';
+  }catch(e){ return false; }
+}
 
-    if(done){
-      card.classList.remove('goal-urgent');
-      card.classList.remove('task-urgent');
-      card.setAttribute('aria-disabled','true');
-      card.style.animation = 'none';
-    }
+var map = {
+  article:'dailyArticleLink',
+  adhkar:'currentAdhkarLink',
+  name:'allahNameCounterCard',
+  goal:'dailyGoalCard',
+  micro:'dailyMicroKnowledgeCard'
+};
+
+function cardFor(task){
+  return document.getElementById(map[task]);
+}
+
+function applyDoneVisual(task){
+  var card = cardFor(task);
+  if(!card) return;
+  card.classList.add('bw-task-done','task-done','goal-done');
+  card.classList.remove('goal-urgent','task-urgent');
+  card.setAttribute('aria-disabled','true');
+  card.style.animation = 'none';
+
+  var status = card.querySelector('.today-task-status');
+  if(status) status.textContent = '✓';
+
+  if(task === 'name'){
+    var meta = card.querySelector('.bw-task-compact-meta[data-task-meta="name"]');
+    if(meta) meta.textContent = '100/100';
+    var value = document.getElementById('allahNameCounterValue');
+    if(value) value.textContent = '✓';
+    var fill = document.getElementById('allahNameCounterFill');
+    if(fill) fill.style.width = '100%';
+  }
+}
+
+function applyAll(){
+  Object.keys(map).forEach(function(task){
+    if(isDone(task)) applyDoneVisual(task);
   });
 }
 
-function exposeCounts(){
-  document.documentElement.setAttribute('data-bw-article-count','150');
-  document.documentElement.setAttribute('data-bw-goal-count','150');
-  document.documentElement.setAttribute('data-bw-name-count','150');
-  document.documentElement.setAttribute('data-bw-micro-count','150');
+function taskFromModal(modal){
+  if(!modal) return '';
+  return modal.getAttribute('data-task-key') || '';
 }
 
-clearDailyKeysOnlyOnNewDay();
-exposeCounts();
+document.addEventListener('click', function(event){
+  var complete = event.target && event.target.closest ? event.target.closest('.bw-task-complete-btn') : null;
+  if(complete){
+    var modal = complete.closest('.bw-task-modal-card');
+    var task = taskFromModal(modal);
+    if(task){
+      if(task === 'name'){
+        var text = (document.getElementById('bwNameModalCount') || {}).textContent || '';
+        var n = parseInt(text, 10) || 0;
+        if(n < 100 && !complete.disabled) n = 100;
+        if(n >= 100) setDone(task);
+      }else if(!complete.disabled){
+        setDone(task);
+      }
+      setTimeout(applyAll, 30);
+    }
+  }
+
+  var nameCard = cardFor('name');
+  if(nameCard && nameCard.contains(event.target)){
+    setTimeout(function(){
+      var meta = nameCard.querySelector('.bw-task-compact-meta[data-task-meta="name"]');
+      var raw = meta ? meta.textContent : '';
+      var n = parseInt(raw, 10) || 0;
+      if(n >= 100){
+        setDone('name');
+        applyAll();
+      }
+    }, 40);
+  }
+}, true);
 
 if(document.readyState === 'loading'){
-  document.addEventListener('DOMContentLoaded', keepDoneUntilTomorrow, {once:true});
+  document.addEventListener('DOMContentLoaded', applyAll, {once:true});
 }else{
-  keepDoneUntilTomorrow();
+  applyAll();
 }
-window.addEventListener('pageshow', keepDoneUntilTomorrow);
-setInterval(keepDoneUntilTomorrow, 1000);
+window.addEventListener('pageshow', applyAll);
+setInterval(applyAll, 700);
 })();
 </script>
 
