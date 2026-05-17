@@ -4427,51 +4427,34 @@ html[dir="rtl"] #allahNameCounterCard:not(.bw-task-done) .bw-task-compact-meta[d
 }
 </style>
 
-
-<style id="bw-uniform-red-glow-all-themes-final">
-/* Same strong red pulse for free/original and all PRO themes */
-.today-hub .today-action:not(.bw-task-done):not(.task-done):not(.goal-done){
-  border-color:rgba(255,82,82,.58) !important;
-  animation:bwUniformRedTaskPulse 1.35s ease-in-out infinite !important;
-  box-shadow:
-    0 10px 24px rgba(0,0,0,.18),
-    0 0 10px rgba(255,42,42,.36),
-    inset 0 1px 0 rgba(255,255,255,.04) !important;
-}
-
+<style id="bw-task-red-pulse-parity-final">
+/* Force the same visible red border pulse in original/free and every PRO theme */
+.today-hub .today-action:not(.bw-task-done):not(.task-done):not(.goal-done),
 html[class*="premium-theme-"] .today-hub .today-action:not(.bw-task-done):not(.task-done):not(.goal-done),
 body[class*="bw-theme-"] .today-hub .today-action:not(.bw-task-done):not(.task-done):not(.goal-done),
-body[class*="theme-"] .today-hub .today-action:not(.bw-task-done):not(.task-done):not(.goal-done),
-html[class*="bw-theme-"] .today-hub .today-action:not(.bw-task-done):not(.task-done):not(.goal-done){
-  border-color:rgba(255,82,82,.58) !important;
-  animation:bwUniformRedTaskPulse 1.35s ease-in-out infinite !important;
-  box-shadow:
-    0 10px 24px rgba(0,0,0,.20),
-    0 0 10px rgba(255,42,42,.38),
-    inset 0 1px 0 rgba(255,255,255,.05) !important;
+body[class*="theme-"] .today-hub .today-action:not(.bw-task-done):not(.task-done):not(.goal-done){
+  border-color:rgba(255,86,86,.30) !important;
+  animation:bwTaskRedPulse 1.35s ease-in-out infinite !important;
 }
 
-@keyframes bwUniformRedTaskPulse{
+@keyframes bwTaskRedPulse{
   0%,100%{
-    border-color:rgba(255,82,82,.42);
+    border-color:rgba(255,86,86,.26) !important;
     box-shadow:
       0 10px 24px rgba(0,0,0,.18),
-      0 0 7px rgba(255,42,42,.22),
-      0 0 0 rgba(255,42,42,0),
-      inset 0 1px 0 rgba(255,255,255,.04);
+      0 0 0 rgba(255,72,72,0),
+      inset 0 1px 0 rgba(255,255,255,.04) !important;
   }
   50%{
-    border-color:rgba(255,122,122,.98);
+    border-color:rgba(255,122,122,.58) !important;
     box-shadow:
       0 10px 24px rgba(0,0,0,.18),
-      0 0 18px rgba(255,42,42,.78),
-      0 0 36px rgba(255,42,42,.46),
-      0 0 58px rgba(255,42,42,.22),
-      inset 0 1px 0 rgba(255,255,255,.06);
+      0 0 16px rgba(255,72,72,.32),
+      0 0 30px rgba(255,72,72,.16),
+      inset 0 1px 0 rgba(255,255,255,.05) !important;
   }
 }
 
-/* Completed cards must never pulse */
 .today-hub .today-action.bw-task-done,
 .today-hub .today-action.task-done,
 .today-hub .today-action.goal-done{
@@ -9174,125 +9157,6 @@ window.addEventListener("DOMContentLoaded",function(){const installBtn=document.
   setInterval(paint, 300);
 })();
 </script>
-
-
-<script id="bw-hi-micro-meaning-final-fix">
-(function(){
-  'use strict';
-
-  var WUDU_MEANING = "वुज़ू सही उत्तर है। अर्थ: पवित्रता नमाज़ की महत्वपूर्ण शर्त है।";
-  var SHAHADA_MEANING = "अर्थ: यह इस्लाम का पहला स्तंभ है — गवाही कि अल्लाह के सिवा कोई उपास्य नहीं और मुहम्मद ﷺ अल्लाह के रसूल हैं।";
-  var CORRECT_LABEL = "";
-
-  function clean(value){
-    return (value || '').replace(/\s+/g,' ').trim();
-  }
-
-  function isWuduText(value){
-    var v = clean(value).toLowerCase();
-    return v.indexOf('омов') !== -1 ||
-           v.indexOf('وض') !== -1 ||
-           v.indexOf('وضو') !== -1 ||
-           v.indexOf('wudu') !== -1 ||
-           v.indexOf('abdest') !== -1 ||
-           v.indexOf('tahorat') !== -1 ||
-           v.indexOf('дәрет') !== -1 ||
-           v.indexOf('ওজু') !== -1 ||
-           v.indexOf('वुज़ू') !== -1 ||
-           v.indexOf('वजू') !== -1;
-  }
-
-  function isShahadaText(value){
-    var v = clean(value).toLowerCase();
-    return v.indexOf('шахад') !== -1 ||
-           v.indexOf('shahad') !== -1 ||
-           v.indexOf('şehad') !== -1 ||
-           v.indexOf('syahad') !== -1 ||
-           v.indexOf('الشهادة') !== -1 ||
-           v.indexOf('شہادت') !== -1 ||
-           v.indexOf('শাহাদা') !== -1 ||
-           v.indexOf('शहादा') !== -1;
-  }
-
-  function findCorrectOption(options, question){
-    var combined = clean(question).toLowerCase();
-
-    if(combined.indexOf('намаз') !== -1 ||
-       combined.indexOf('prayer') !== -1 ||
-       combined.indexOf('salat') !== -1 ||
-       combined.indexOf('namoz') !== -1 ||
-       combined.indexOf('namaz') !== -1 ||
-       combined.indexOf('الصلاة') !== -1 ||
-       combined.indexOf('نماز') !== -1 ||
-       combined.indexOf('নামাজ') !== -1 ||
-       combined.indexOf('नमाज़') !== -1){
-      for(var i=0;i<options.length;i++){
-        if(isWuduText(options[i])) return i;
-      }
-    }
-
-    if(combined.indexOf('столп') !== -1 ||
-       combined.indexOf('pillar') !== -1 ||
-       combined.indexOf('rukun') !== -1 ||
-       combined.indexOf('ustun') !== -1 ||
-       combined.indexOf('şart') !== -1 ||
-       combined.indexOf('ركن') !== -1 ||
-       combined.indexOf('رکن') !== -1 ||
-       combined.indexOf('স্তম্ভ') !== -1 ||
-       combined.indexOf('स्तंभ') !== -1){
-      for(var j=0;j<options.length;j++){
-        if(isShahadaText(options[j])) return j;
-      }
-    }
-
-    for(var k=0;k<options.length;k++){
-      if(isWuduText(options[k])) return k;
-    }
-    for(var m=0;m<options.length;m++){
-      if(isShahadaText(options[m])) return m;
-    }
-    return 0;
-  }
-
-  function meaningFor(options, correctIndex){
-    var correct = options[correctIndex] || '';
-    if(isWuduText(correct)) return WUDU_MEANING;
-    if(isShahadaText(correct)) return SHAHADA_MEANING;
-    return WUDU_MEANING;
-  }
-
-  document.addEventListener('click', function(event){
-    var btn = event.target && event.target.closest ? event.target.closest('.bw-micro-option-btn') : null;
-    if(!btn) return;
-
-    setTimeout(function(){
-      var modal = btn.closest('.bw-task-modal-card');
-      if(!modal || modal.getAttribute('data-task-key') !== 'micro') return;
-
-      var buttons = Array.from(modal.querySelectorAll('.bw-micro-option-btn'));
-      var question = clean((modal.querySelector('.bw-task-modal-text') || {}).textContent || '');
-      var options = buttons.map(function(node){ return clean(node.textContent); });
-      var correctIndex = findCorrectOption(options, question);
-      var correctText = options[correctIndex] || '';
-      var note = modal.querySelector('#bwMicroAnswerNote');
-
-      if(note){
-        note.textContent = CORRECT_LABEL + ' ' + correctText + '. ' + meaningFor(options, correctIndex);
-        note.classList.add('is-visible');
-      }
-
-      buttons.forEach(function(node, index){
-        node.classList.toggle('is-selected', index === correctIndex);
-      });
-
-      var completeBtn = modal.querySelector('.bw-task-complete-btn');
-      if(completeBtn) completeBtn.disabled = false;
-    }, 0);
-  }, true);
-})();
-</script>
-
-
 <style id="bw-daily-lock-pro-glow-fix">
 .today-action-card.goal-urgent,
 .today-action-card:not(.bw-task-done){
@@ -9397,6 +9261,85 @@ setInterval(function(){
   lockCompletedCards();
 }, 1200);
 
+})();
+</script>
+
+
+<script id="bw-hi-micro-answer-router-final">
+(function(){
+  'use strict';
+
+  var MEANING_KAABA = "काबा की ओर। काबा मुसलमानों का क़िब्ला है: नमाज़ में जिस दिशा की ओर रुख किया जाता है।";
+  var MEANING_WUDU = "वुज़ू नमाज़ की तैयारी है। अर्थ: पवित्रता नमाज़ की महत्वपूर्ण शर्त है।";
+  var MEANING_SHAHADA = "शहादा इस्लाम का पहला स्तंभ है: गवाही कि अल्लाह के सिवा कोई उपास्य नहीं और मुहम्मद ﷺ अल्लाह के रसूल हैं।";
+
+  function clean(value){
+    return (value || '').replace(/\s+/g,' ').trim();
+  }
+
+  function lower(value){ return clean(value).toLowerCase(); }
+
+  function hasAny(value, words){
+    var v = lower(value);
+    return words.some(function(w){ return v.indexOf(w) !== -1; });
+  }
+
+  function optionType(text){
+    if(hasAny(text, ['кааб','kaab','kâbe','ka’ba','ka\'b','қаб','قعب','الكعبة','کعب','কাব','काब'])) return 'kaaba';
+    if(hasAny(text, ['омов','wudu','abdest','tahorat','дәрет','وض','وضو','ওজু','वुज़ू','वजू'])) return 'wudu';
+    if(hasAny(text, ['шахад','shahad','şehad','syahad','الشهادة','شہادت','শাহাদা','शहादा'])) return 'shahada';
+    return '';
+  }
+
+  function questionType(question){
+    if(hasAny(question, ['куда','обращается','кааб','кибл','qibla','where','face','faced','kiblat','qiblat','qibla','namazda yuz','бағыт','қайда','يتوجه','قبلة','رخ','দিকে','किस ओर'])) return 'kaaba';
+    if(hasAny(question, ['перед намаз','before prayer','before salah','namozdan oldin','namazdan önce','salat','الصلاة','نماز سے پہلے','নামাজের আগে','नमाज़ से पहले'])) return 'wudu';
+    if(hasAny(question, ['первый столп','first pillar','birinchi ustun','ilk şart','rukun islam pertama','الركن الأول','پہلا رکن','প্রথম স্তম্ভ','पहला स्तंभ'])) return 'shahada';
+    return '';
+  }
+
+  function meaningFor(type){
+    if(type === 'kaaba') return MEANING_KAABA;
+    if(type === 'wudu') return MEANING_WUDU;
+    if(type === 'shahada') return MEANING_SHAHADA;
+    return '';
+  }
+
+  function findCorrectIndex(options, qType){
+    for(var i=0;i<options.length;i++){
+      if(optionType(options[i]) === qType) return i;
+    }
+    return 0;
+  }
+
+  document.addEventListener('click', function(event){
+    var btn = event.target && event.target.closest ? event.target.closest('.bw-micro-option-btn') : null;
+    if(!btn) return;
+
+    setTimeout(function(){
+      var modal = btn.closest('.bw-task-modal-card');
+      if(!modal || modal.getAttribute('data-task-key') !== 'micro') return;
+
+      var buttons = Array.from(modal.querySelectorAll('.bw-micro-option-btn'));
+      var options = buttons.map(function(node){ return clean(node.textContent); });
+      var question = clean((modal.querySelector('.bw-task-modal-text') || {}).textContent || '');
+      var qType = questionType(question) || optionType(options[0]) || 'wudu';
+      var correctIndex = findCorrectIndex(options, qType);
+      var note = modal.querySelector('#bwMicroAnswerNote');
+
+      buttons.forEach(function(node, index){
+        node.classList.toggle('is-selected', index === correctIndex);
+      });
+
+      if(note){
+        note.textContent = meaningFor(qType);
+        note.classList.add('is-visible');
+      }
+
+      var completeBtn = modal.querySelector('.bw-task-complete-btn');
+      if(completeBtn) completeBtn.disabled = false;
+    }, 0);
+  }, true);
 })();
 </script>
 
