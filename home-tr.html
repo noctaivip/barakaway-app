@@ -2277,7 +2277,7 @@ html.light-mode .today-hub .bw-task-hint{color:#53645a;}
   window.BW_TASK_FIX_TR = {
     selectAnswer: "Doğru cevabı seçin.",
     correct: "Doğru.",
-    wrong: "Doğru cevap:",
+    wrong: "",
     shahadaMeaning: "Şehadet, İslam’ın ilk şartıdır: Allah’tan başka ilah olmadığına ve Muhammed’in ﷺ O’nun elçisi olduğuna şahitlik.",
     repeat: "Tekrar +1",
     countComplete: "100 / 100 tamamlandı",
@@ -3275,6 +3275,123 @@ window.addEventListener("DOMContentLoaded",function(){const installBtn=document.
 
   window.addEventListener('pageshow', bind);
   setInterval(paint, 300);
+})();
+</script>
+
+
+<script id="bw-tr-micro-meaning-final-fix">
+(function(){
+  'use strict';
+
+  var WUDU_MEANING = "Anlam: temizlik namazın önemli bir şartıdır.";
+  var SHAHADA_MEANING = "Şehadet doğru cevaptır. Anlam: İslam’ın ilk şartıdır — Allah’tan başka ilah olmadığına ve Muhammed’in ﷺ O’nun elçisi olduğuna şahitlik.";
+  var CORRECT_LABEL = "";
+
+  function clean(value){
+    return (value || '').replace(/\s+/g,' ').trim();
+  }
+
+  function isWuduText(value){
+    var v = clean(value).toLowerCase();
+    return v.indexOf('омов') !== -1 ||
+           v.indexOf('وض') !== -1 ||
+           v.indexOf('وضو') !== -1 ||
+           v.indexOf('wudu') !== -1 ||
+           v.indexOf('abdest') !== -1 ||
+           v.indexOf('tahorat') !== -1 ||
+           v.indexOf('дәрет') !== -1 ||
+           v.indexOf('ওজু') !== -1 ||
+           v.indexOf('वुज़ू') !== -1 ||
+           v.indexOf('वजू') !== -1;
+  }
+
+  function isShahadaText(value){
+    var v = clean(value).toLowerCase();
+    return v.indexOf('шахад') !== -1 ||
+           v.indexOf('shahad') !== -1 ||
+           v.indexOf('şehad') !== -1 ||
+           v.indexOf('syahad') !== -1 ||
+           v.indexOf('الشهادة') !== -1 ||
+           v.indexOf('شہادت') !== -1 ||
+           v.indexOf('শাহাদা') !== -1 ||
+           v.indexOf('शहादा') !== -1;
+  }
+
+  function findCorrectOption(options, question){
+    var combined = clean(question).toLowerCase();
+
+    if(combined.indexOf('намаз') !== -1 ||
+       combined.indexOf('prayer') !== -1 ||
+       combined.indexOf('salat') !== -1 ||
+       combined.indexOf('namoz') !== -1 ||
+       combined.indexOf('namaz') !== -1 ||
+       combined.indexOf('الصلاة') !== -1 ||
+       combined.indexOf('نماز') !== -1 ||
+       combined.indexOf('নামাজ') !== -1 ||
+       combined.indexOf('नमाज़') !== -1){
+      for(var i=0;i<options.length;i++){
+        if(isWuduText(options[i])) return i;
+      }
+    }
+
+    if(combined.indexOf('столп') !== -1 ||
+       combined.indexOf('pillar') !== -1 ||
+       combined.indexOf('rukun') !== -1 ||
+       combined.indexOf('ustun') !== -1 ||
+       combined.indexOf('şart') !== -1 ||
+       combined.indexOf('ركن') !== -1 ||
+       combined.indexOf('رکن') !== -1 ||
+       combined.indexOf('স্তম্ভ') !== -1 ||
+       combined.indexOf('स्तंभ') !== -1){
+      for(var j=0;j<options.length;j++){
+        if(isShahadaText(options[j])) return j;
+      }
+    }
+
+    for(var k=0;k<options.length;k++){
+      if(isWuduText(options[k])) return k;
+    }
+    for(var m=0;m<options.length;m++){
+      if(isShahadaText(options[m])) return m;
+    }
+    return 0;
+  }
+
+  function meaningFor(options, correctIndex){
+    var correct = options[correctIndex] || '';
+    if(isWuduText(correct)) return WUDU_MEANING;
+    if(isShahadaText(correct)) return SHAHADA_MEANING;
+    return WUDU_MEANING;
+  }
+
+  document.addEventListener('click', function(event){
+    var btn = event.target && event.target.closest ? event.target.closest('.bw-micro-option-btn') : null;
+    if(!btn) return;
+
+    setTimeout(function(){
+      var modal = btn.closest('.bw-task-modal-card');
+      if(!modal || modal.getAttribute('data-task-key') !== 'micro') return;
+
+      var buttons = Array.from(modal.querySelectorAll('.bw-micro-option-btn'));
+      var question = clean((modal.querySelector('.bw-task-modal-text') || {}).textContent || '');
+      var options = buttons.map(function(node){ return clean(node.textContent); });
+      var correctIndex = findCorrectOption(options, question);
+      var correctText = options[correctIndex] || '';
+      var note = modal.querySelector('#bwMicroAnswerNote');
+
+      if(note){
+        note.textContent = CORRECT_LABEL + ' ' + correctText + '. ' + meaningFor(options, correctIndex);
+        note.classList.add('is-visible');
+      }
+
+      buttons.forEach(function(node, index){
+        node.classList.toggle('is-selected', index === correctIndex);
+      });
+
+      var completeBtn = modal.querySelector('.bw-task-complete-btn');
+      if(completeBtn) completeBtn.disabled = false;
+    }, 0);
+  }, true);
 })();
 </script>
 
