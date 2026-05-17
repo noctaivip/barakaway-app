@@ -1,0 +1,1550 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+<!--
+بِسْمِ ٱللَّٰهِ ٱلرَّحْمَـٰنِ ٱلرَّحِيمِ
+-->
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#101820">
+<title>PRO Themes BarakaWay</title>
+
+<style>
+:root{
+  --page:#0b1016;
+  --panel:#151d26;
+  --panel-2:#101820;
+  --gold:#d7c07a;
+  --gold-2:#af8430;
+  --green:#4caf6a;
+  --green-2:#2d7a46;
+  --text:#f7faf8;
+  --muted:#aeb9c5;
+  --border:rgba(215,192,122,.20);
+  --shadow:0 24px 70px rgba(0,0,0,.36);
+}
+
+*{box-sizing:border-box;}
+
+html{scroll-behavior:smooth;}
+
+body{
+  margin:0;
+  min-height:100vh;
+  background:
+    radial-gradient(circle at 12% 0%,rgba(215,192,122,.12),transparent 26%),
+    radial-gradient(circle at 88% 8%,rgba(76,175,106,.10),transparent 30%),
+    linear-gradient(180deg,#0b1016 0%,#101820 52%,#0b1016 100%);
+  color:var(--text);
+  font-family:system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",Arial,sans-serif;
+  line-height:1.55;
+}
+
+a{color:inherit;text-decoration:none;}
+button{font-family:inherit;}
+
+.page{
+  width:min(100%,980px);
+  margin:0 auto;
+  padding:22px 18px 120px;
+}
+
+.topbar{
+  position:sticky;
+  top:0;
+  z-index:30;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:12px;
+  padding:12px 0 18px;
+  backdrop-filter:blur(18px);
+  -webkit-backdrop-filter:blur(18px);
+}
+
+.top-pill,
+.pro-state{
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  gap:8px;
+  min-height:42px;
+  padding:9px 15px;
+  border-radius:999px;
+  background:rgba(18,25,33,.78);
+  border:1px solid rgba(215,192,122,.18);
+  color:#f7f2d9;
+  font-size:13px;
+  font-weight:900;
+}
+
+.pro-state.locked{
+  background:rgba(215,192,122,.10);
+  border-color:rgba(215,192,122,.24);
+  color:#f2df9d;
+}
+
+.pro-state.active{
+  background:rgba(76,175,106,.12);
+  border-color:rgba(102,198,128,.28);
+  color:#dff7e6;
+}
+
+.hero{
+  position:relative;
+  overflow:hidden;
+  border-radius:38px;
+  padding:42px 32px 32px;
+  background:
+    radial-gradient(circle at 88% 8%,rgba(215,192,122,.18),transparent 27%),
+    radial-gradient(circle at 14% 88%,rgba(76,175,106,.14),transparent 28%),
+    linear-gradient(135deg,#151d26 0%,#101820 50%,#17261f 100%);
+  border:1px solid var(--border);
+  box-shadow:var(--shadow), inset 0 1px 0 rgba(255,255,255,.04);
+}
+
+.hero::after{
+  content:"";
+  position:absolute;
+  inset:-40%;
+  background:linear-gradient(115deg,transparent 0%,rgba(255,255,255,.04) 45%,transparent 55%);
+  transform:rotate(8deg);
+  pointer-events:none;
+}
+
+.hero-inner{position:relative;z-index:2;}
+
+.badge{
+  display:inline-flex;
+  align-items:center;
+  gap:9px;
+  padding:9px 15px;
+  border-radius:999px;
+  background:rgba(215,192,122,.10);
+  border:1px solid rgba(215,192,122,.26);
+  color:var(--gold);
+  font-size:12px;
+  font-weight:950;
+  letter-spacing:.12em;
+  text-transform:uppercase;
+}
+
+h1{
+  margin:20px 0 12px;
+  max-width:720px;
+  font-size:52px;
+  line-height:.96;
+  letter-spacing:-.065em;
+}
+
+.hero-text{
+  max-width:720px;
+  color:var(--muted);
+  font-size:17px;
+  font-weight:650;
+}
+
+.hero-actions{
+  display:flex;
+  flex-wrap:wrap;
+  gap:12px;
+  margin-top:28px;
+}
+
+.btn{
+  appearance:none;
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  gap:9px;
+  min-height:52px;
+  padding:14px 21px;
+  border-radius:18px;
+  border:1px solid transparent;
+  font-size:14px;
+  font-weight:950;
+  cursor:pointer;
+  text-decoration:none;
+  transition:transform .18s ease,box-shadow .25s ease,background .25s ease,border-color .25s ease;
+  -webkit-tap-highlight-color:transparent;
+}
+
+.btn:hover{transform:translateY(-2px);}
+.btn:active{transform:scale(.985);}
+
+.btn-primary{
+  background:linear-gradient(135deg,#f1db91 0%,#d7c07a 42%,#af8430 100%);
+  color:#11150f;
+  box-shadow:0 18px 38px rgba(215,192,122,.22);
+}
+
+.btn-secondary{
+  background:rgba(20,28,37,.82);
+  color:#f7faf8;
+  border-color:rgba(215,192,122,.18);
+}
+
+.btn-green{
+  background:linear-gradient(135deg,#66c680 0%,#2d7a46 100%);
+  color:white;
+  box-shadow:0 18px 38px rgba(76,175,106,.16);
+}
+
+.access-panel{
+  margin-top:24px;
+  border-radius:30px;
+  padding:22px;
+  background:
+    radial-gradient(circle at 96% 0%,rgba(215,192,122,.12),transparent 30%),
+    linear-gradient(135deg,#151d26 0%,#101820 55%,#14231b 100%);
+  border:1px solid rgba(215,192,122,.18);
+  box-shadow:0 18px 44px rgba(0,0,0,.24);
+}
+
+.access-head{
+  display:flex;
+  justify-content:space-between;
+  align-items:flex-start;
+  gap:16px;
+}
+
+.access-kicker{
+  color:#d7c07a;
+  font-size:11px;
+  font-weight:950;
+  letter-spacing:.12em;
+  text-transform:uppercase;
+  margin-bottom:7px;
+}
+
+.access-title{
+  margin:0;
+  font-size:28px;
+  line-height:1.08;
+  letter-spacing:-.045em;
+}
+
+.access-text{
+  margin:8px 0 0;
+  max-width:650px;
+  color:#aeb9c5;
+  font-size:14px;
+  font-weight:650;
+}
+
+.access-status{
+  flex:0 0 auto;
+  display:inline-flex;
+  min-height:38px;
+  align-items:center;
+  justify-content:center;
+  padding:9px 13px;
+  border-radius:999px;
+  background:rgba(215,192,122,.10);
+  border:1px solid rgba(215,192,122,.22);
+  color:#f2df9d;
+  font-size:12px;
+  font-weight:950;
+  white-space:nowrap;
+}
+
+.access-panel.active .access-status{
+  background:rgba(76,175,106,.12);
+  border-color:rgba(102,198,128,.28);
+  color:#dff7e6;
+}
+
+.section{
+  margin-top:34px;
+}
+
+.section-head{
+  display:flex;
+  align-items:flex-end;
+  justify-content:space-between;
+  gap:16px;
+  margin-bottom:18px;
+}
+
+.section-title{
+  margin:0;
+  font-size:32px;
+  line-height:1.08;
+  letter-spacing:-.045em;
+}
+
+.section-subtitle{
+  margin:8px 0 0;
+  max-width:680px;
+  color:#aeb9c5;
+  font-size:14px;
+  font-weight:650;
+}
+
+.section-note{
+  color:#d7c07a;
+  font-size:12px;
+  font-weight:950;
+  letter-spacing:.08em;
+  text-transform:uppercase;
+  white-space:nowrap;
+}
+
+.theme-grid{
+  display:grid;
+  grid-template-columns:repeat(2,minmax(0,1fr));
+  gap:16px;
+}
+
+.theme-card{
+  position:relative;
+  overflow:hidden;
+  min-height:238px;
+  border-radius:32px;
+  padding:24px;
+  border:1px solid rgba(255,255,255,.10);
+  box-shadow:0 18px 42px rgba(0,0,0,.26), inset 0 1px 0 rgba(255,255,255,.04);
+  cursor:pointer;
+  text-align:left;
+  color:white;
+  transition:transform .18s ease,border-color .25s ease,box-shadow .25s ease;
+}
+
+.theme-card:hover{
+  transform:translateY(-4px);
+  border-color:rgba(215,192,122,.36);
+  box-shadow:0 24px 52px rgba(0,0,0,.32), inset 0 1px 0 rgba(255,255,255,.05);
+}
+
+.theme-card::before{
+  content:"";
+  position:absolute;
+  inset:0;
+  background:linear-gradient(120deg,transparent 50%,rgba(255,255,255,.10),transparent 70%);
+  opacity:.7;
+  pointer-events:none;
+}
+
+.theme-card.locked::after{
+  display:none !important;
+  content:none !important;
+  opacity:0 !important;
+  visibility:hidden !important;
+}
+
+.theme-card.active-theme{
+  border-color:rgba(102,198,128,.52);
+  box-shadow:0 24px 52px rgba(76,175,106,.16), inset 0 1px 0 rgba(255,255,255,.05);
+}
+
+
+
+.theme-gold{background:linear-gradient(145deg,#9a5f21 0%,#d6a04a 44%,#ffe07a 72%,#b97826 100%) !important;}
+.theme-emerald{background:linear-gradient(145deg,#001b12 0%,#006a3c 52%,#48f29d 100%) !important;}
+.theme-violet{background:linear-gradient(145deg,#16091f 0%,#4b1d76 48%,#9b55d8 100%) !important;}
+.theme-rose{background:linear-gradient(145deg,#7f2854 0%,#d46d9d 52%,#ffb8d6 100%) !important;}
+.theme-carbon{position:relative;overflow:hidden;background:linear-gradient(135deg,#050608 0%,#161d25 52%,#4d5965 100%) !important;border:1px solid rgba(230,238,246,.24) !important;}
+.theme-ruby{position:relative;overflow:hidden;background:
+  radial-gradient(circle at 78% 10%,rgba(255,170,170,.18),transparent 28%),
+  radial-gradient(circle at 14% 88%,rgba(90,0,12,.36),transparent 34%),
+  linear-gradient(145deg,#1a0004 0%,#5e000f 42%,#a30018 72%,#3a0008 100%) !important;
+  border:1px solid rgba(255,120,120,.34) !important;
+}
+
+.theme-child{position:relative;overflow:hidden;background:linear-gradient(135deg,#bfe9ff 0%,#79bdeb 55%,#fff0f6 100%) !important;border:1px solid rgba(228,246,255,.66) !important;}
+.theme-night{position:relative;overflow:hidden;background:linear-gradient(145deg,#07091f 0%,#10184a 55%,#1e3471 100%) !important;border:1px solid rgba(189,205,255,.34) !important;}
+.theme-sand{position:relative;overflow:hidden;background:linear-gradient(145deg,#b98542 0%,#d8a862 55%,#f6dca6 100%) !important;border:1px solid rgba(255,232,184,.50) !important;}
+
+.theme-top{
+  position:relative;
+  z-index:2;
+  display:flex;
+  justify-content:space-between;
+  align-items:flex-start;
+  gap:14px;
+}
+
+.theme-icon{
+  width:54px;
+  height:54px;
+  border-radius:20px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  background:rgba(255,255,255,.14);
+  border:1px solid rgba(255,255,255,.20);
+  font-size:27px;
+}
+
+.theme-chip{
+  padding:6px 10px;
+  border-radius:999px;
+  background:rgba(0,0,0,.24);
+  border:1px solid rgba(255,255,255,.18);
+  color:#fff;
+  font-size:10px;
+  font-weight:950;
+  letter-spacing:.09em;
+}
+
+.theme-card h3{
+  position:relative;
+  z-index:2;
+  margin:22px 0 8px;
+  max-width:320px;
+  font-size:26px;
+  line-height:1.05;
+  letter-spacing:-.045em;
+}
+
+.theme-card p{
+  position:relative;
+  z-index:2;
+  margin:0;
+  max-width:340px;
+  color:rgba(255,255,255,.84);
+  font-size:14px;
+  font-weight:700;
+}
+
+.theme-preview{
+  position:relative;
+  z-index:2;
+  display:grid;
+  grid-template-columns:1fr 1fr 1fr;
+  gap:8px;
+  margin-top:22px;
+  max-width:230px;
+}
+
+.preview-pill{
+  height:12px;
+  border-radius:999px;
+  background:rgba(255,255,255,.30);
+}
+
+.preview-pill:nth-child(2){opacity:.72;}
+.preview-pill:nth-child(3){opacity:.48;}
+
+.info-box{
+  margin-top:28px;
+  border-radius:28px;
+  padding:22px;
+  background:rgba(215,192,122,.08);
+  border:1px solid rgba(215,192,122,.16);
+  color:#d3dde6;
+  font-size:13px;
+  font-weight:650;
+}
+
+.bottom-nav{
+  position:fixed;
+  left:50%;
+  bottom:18px;
+  z-index:50;
+  transform:translateX(-50%);
+  width:min(92%,560px);
+  display:grid;
+  grid-template-columns:repeat(4,minmax(0,1fr));
+  gap:8px;
+  padding:8px;
+  border-radius:24px;
+  background:rgba(14,20,27,.84);
+  border:1px solid rgba(215,192,122,.18);
+  backdrop-filter:blur(18px);
+  -webkit-backdrop-filter:blur(18px);
+  box-shadow:0 18px 44px rgba(0,0,0,.34);
+}
+
+.bottom-nav a,
+.bottom-nav button{
+  appearance:none;
+  border:none;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  justify-content:center;
+  gap:4px;
+  min-height:54px;
+  border-radius:18px;
+  background:transparent;
+  color:#c8d2dc;
+  font-size:11px;
+  font-weight:850;
+  cursor:pointer;
+}
+
+.bottom-nav a.active,
+.bottom-nav button.active{
+  background:linear-gradient(135deg,rgba(215,192,122,.18),rgba(76,175,106,.12));
+  color:#f8e9a9;
+}
+
+.modal-overlay{
+  display:none;
+  position:fixed;
+  inset:0;
+  z-index:100;
+  padding:18px;
+  background:rgba(5,8,11,.72);
+  backdrop-filter:blur(9px);
+  -webkit-backdrop-filter:blur(9px);
+  align-items:center;
+  justify-content:center;
+}
+
+.modal-overlay.open{display:flex;}
+
+.modal{
+  width:min(100%,560px);
+  border-radius:32px;
+  padding:24px;
+  background:
+    radial-gradient(circle at 88% 0%,rgba(215,192,122,.12),transparent 32%),
+    linear-gradient(180deg,#17202a 0%,#111821 100%);
+  border:1px solid rgba(215,192,122,.22);
+  box-shadow:0 28px 80px rgba(0,0,0,.50);
+}
+
+.modal-badge{
+  display:inline-flex;
+  padding:7px 11px;
+  border-radius:999px;
+  background:rgba(215,192,122,.10);
+  border:1px solid rgba(215,192,122,.22);
+  color:#f2df9d;
+  font-size:11px;
+  font-weight:950;
+  letter-spacing:.10em;
+  text-transform:uppercase;
+}
+
+.modal h3{
+  margin:16px 0 8px;
+  font-size:28px;
+  line-height:1.1;
+  letter-spacing:-.04em;
+}
+
+.modal p{
+  color:var(--muted);
+  margin:0;
+  font-size:15px;
+  font-weight:650;
+}
+
+.modal-actions{
+  display:flex;
+  flex-wrap:wrap;
+  gap:10px;
+  margin-top:22px;
+}
+
+.modal-actions .btn{flex:1 1 190px;}
+
+.toast{
+  position:fixed;
+  left:50%;
+  bottom:94px;
+  z-index:140;
+  transform:translateX(-50%) translateY(14px);
+  opacity:0;
+  pointer-events:none;
+  width:min(92%,460px);
+  padding:14px 16px;
+  border-radius:18px;
+  background:rgba(16,24,32,.94);
+  border:1px solid rgba(102,198,128,.24);
+  color:#eaf7ee;
+  font-size:13px;
+  font-weight:850;
+  text-align:center;
+  box-shadow:0 18px 40px rgba(0,0,0,.35);
+  transition:opacity .25s ease,transform .25s ease;
+}
+
+.toast.show{
+  opacity:1;
+  transform:translateX(-50%) translateY(0);
+}
+
+@media(max-width:760px){
+  .page{padding:18px 12px 110px;}
+  .topbar{padding-top:8px;}
+  .top-pill,.pro-state{
+    min-height:38px;
+    padding:8px 12px;
+    font-size:12px;
+  }
+  .hero{
+    padding:32px 20px 24px;
+    border-radius:30px;
+  }
+  h1{font-size:39px;}
+  .hero-text{font-size:16px;}
+  .access-head,
+  .section-head{
+    align-items:flex-start;
+    flex-direction:column;
+  }
+  .theme-grid{
+    grid-template-columns:1fr;
+  }
+  .theme-card{
+    min-height:214px;
+    border-radius:28px;
+  }
+  .section-title{
+    font-size:28px;
+  }
+  .hero-actions .btn{
+    width:100%;
+  }
+  .bottom-nav{
+    bottom:10px;
+    width:calc(100% - 18px);
+  }
+}
+
+@media(max-width:420px){
+  h1{font-size:35px;}
+}
+
+
+/* ===== PRO CARD TOP TOGGLE + CARD NEON GLOW ===== */
+
+body.page-themes-pro .theme-card[data-theme]:not([data-coming-soon]){
+  position:relative !important;
+  overflow:hidden !important;
+  transition:
+    border-color .22s ease,
+    box-shadow .22s ease,
+    filter .22s ease,
+    transform .18s ease !important;
+}
+
+/* Toggle is only the control. Main glow is on the card itself. */
+body.page-themes-pro .theme-card[data-theme]:not([data-coming-soon]) .pro-card-glow-toggle{
+  position:absolute !important;
+  left:50% !important;
+  top:16px !important;
+  transform:translateX(-50%) !important;
+  z-index:120 !important;
+
+  width:116px !important;
+  height:38px !important;
+  border-radius:999px !important;
+  padding:4px !important;
+
+  display:flex !important;
+  align-items:center !important;
+  justify-content:flex-start !important;
+
+  background:rgba(5,10,18,.80) !important;
+  border:1px solid rgba(255,255,255,.26) !important;
+
+  backdrop-filter:blur(16px) !important;
+  -webkit-backdrop-filter:blur(16px) !important;
+
+  box-shadow:
+    0 12px 32px rgba(0,0,0,.42),
+    inset 0 1px 0 rgba(255,255,255,.14) !important;
+
+  cursor:pointer !important;
+  pointer-events:auto !important;
+  user-select:none !important;
+  -webkit-tap-highlight-color:transparent !important;
+}
+
+body.page-themes-pro .theme-card[data-theme]:not([data-coming-soon]) .pro-card-glow-label{
+  position:absolute !important;
+  left:42px !important;
+  top:50% !important;
+  transform:translateY(-50%) !important;
+
+  color:#ffffff !important;
+  font-size:10px !important;
+  font-weight:950 !important;
+  letter-spacing:.02em !important;
+  line-height:1 !important;
+  white-space:nowrap !important;
+  text-shadow:0 0 12px rgba(255,255,255,.24) !important;
+}
+
+body.page-themes-pro .theme-card[data-theme]:not([data-coming-soon]) .pro-card-glow-knob{
+  position:absolute !important;
+  left:4px !important;
+  top:4px !important;
+
+  width:30px !important;
+  height:30px !important;
+  border-radius:50% !important;
+  background:#ffffff !important;
+
+  box-shadow:
+    0 0 16px rgba(255,255,255,.72),
+    0 0 30px rgba(255,255,255,.38),
+    0 2px 12px rgba(0,0,0,.34) !important;
+
+  transition:left .22s ease !important;
+}
+
+body.page-themes-pro .theme-card.pro-card-local-glow-on .pro-card-glow-knob{
+  left:81px !important;
+}
+
+body.page-themes-pro .theme-card.pro-card-local-glow-on .pro-card-glow-label{
+  left:13px !important;
+}
+
+/* Main CARD glow — like page Glow On: bright border + inner edge + outer bloom */
+body.page-themes-pro .theme-card[data-theme="emerald-quran"].pro-card-local-glow-on{
+  border-color:rgba(0,255,148,.95) !important;
+  box-shadow:
+    inset 0 0 18px rgba(205,255,232,.76),
+    inset 0 0 48px rgba(92,255,180,.62),
+    inset 0 0 108px rgba(0,255,148,.42),
+    0 0 18px rgba(205,255,232,.48),
+    0 0 46px rgba(0,255,148,.56),
+    0 0 120px rgba(0,255,148,.30),
+    0 18px 44px rgba(0,0,0,.28) !important;
+}
+
+body.page-themes-pro .theme-card[data-theme="violet-noor"].pro-card-local-glow-on{
+  border-color:rgba(222,128,255,.94) !important;
+  box-shadow:
+    inset 0 0 18px rgba(248,210,255,.72),
+    inset 0 0 48px rgba(222,128,255,.60),
+    inset 0 0 108px rgba(176,52,255,.40),
+    0 0 18px rgba(248,210,255,.46),
+    0 0 46px rgba(222,128,255,.54),
+    0 0 120px rgba(176,52,255,.30),
+    0 18px 44px rgba(0,0,0,.28) !important;
+}
+
+body.page-themes-pro .theme-card[data-theme="rose-soft"].pro-card-local-glow-on{
+  border-color:rgba(255,148,210,.94) !important;
+  box-shadow:
+    inset 0 0 18px rgba(255,214,236,.72),
+    inset 0 0 48px rgba(255,148,210,.60),
+    inset 0 0 108px rgba(255,92,176,.40),
+    0 0 18px rgba(255,214,236,.46),
+    0 0 46px rgba(255,148,210,.54),
+    0 0 120px rgba(255,92,176,.30),
+    0 18px 44px rgba(0,0,0,.28) !important;
+}
+
+body.page-themes-pro .theme-card[data-theme="carbon-elite"].pro-card-local-glow-on{
+  border-color:rgba(210,228,255,.90) !important;
+  box-shadow:
+    inset 0 0 18px rgba(240,247,255,.66),
+    inset 0 0 48px rgba(210,228,255,.48),
+    inset 0 0 108px rgba(150,182,228,.34),
+    0 0 18px rgba(240,247,255,.40),
+    0 0 46px rgba(210,228,255,.42),
+    0 0 120px rgba(150,182,228,.24),
+    0 18px 44px rgba(0,0,0,.30) !important;
+}
+
+body.page-themes-pro .theme-card[data-theme="night-mosque"].pro-card-local-glow-on{
+  border-color:rgba(126,192,255,.94) !important;
+  box-shadow:
+    inset 0 0 18px rgba(214,236,255,.70),
+    inset 0 0 48px rgba(126,192,255,.58),
+    inset 0 0 108px rgba(72,132,255,.40),
+    0 0 18px rgba(214,236,255,.46),
+    0 0 46px rgba(126,192,255,.54),
+    0 0 120px rgba(72,132,255,.30),
+    0 18px 44px rgba(0,0,0,.28) !important;
+}
+
+/* Toggle also receives the same color, but secondary. */
+body.page-themes-pro .theme-card.pro-card-local-glow-on .pro-card-glow-toggle{
+  border-color:rgba(255,255,255,.48) !important;
+  box-shadow:
+    0 0 18px currentColor,
+    0 12px 32px rgba(0,0,0,.42),
+    inset 0 1px 0 rgba(255,255,255,.18) !important;
+}
+
+body.page-themes-pro .theme-card[data-theme="emerald-quran"].pro-card-local-glow-on .pro-card-glow-toggle{color:rgba(0,255,148,.60) !important;}
+body.page-themes-pro .theme-card[data-theme="violet-noor"].pro-card-local-glow-on .pro-card-glow-toggle{color:rgba(222,128,255,.60) !important;}
+body.page-themes-pro .theme-card[data-theme="rose-soft"].pro-card-local-glow-on .pro-card-glow-toggle{color:rgba(255,148,210,.60) !important;}
+body.page-themes-pro .theme-card[data-theme="carbon-elite"].pro-card-local-glow-on .pro-card-glow-toggle{color:rgba(210,228,255,.58) !important;}
+body.page-themes-pro .theme-card[data-theme="night-mosque"].pro-card-local-glow-on .pro-card-glow-toggle{color:rgba(126,192,255,.60) !important;}
+
+
+/* ===== PRO CARD TOGGLE SIZE + ON STATE FIX ===== */
+/* Smaller switch. Glow Off = knob left. Glow On = knob right + green switch body. */
+
+body.page-themes-pro .theme-card[data-theme]:not([data-coming-soon]) .pro-card-glow-toggle{
+  width:92px !important;
+  height:32px !important;
+  padding:3px !important;
+  background:rgba(5,10,18,.82) !important;
+  border-color:rgba(255,255,255,.24) !important;
+}
+
+body.page-themes-pro .theme-card[data-theme]:not([data-coming-soon]) .pro-card-glow-label{
+  left:35px !important;
+  font-size:9px !important;
+}
+
+body.page-themes-pro .theme-card[data-theme]:not([data-coming-soon]) .pro-card-glow-knob{
+  left:4px !important;
+  top:4px !important;
+  width:24px !important;
+  height:24px !important;
+}
+
+/* ON state */
+body.page-themes-pro .theme-card.pro-card-local-glow-on .pro-card-glow-toggle{
+  background:linear-gradient(135deg,rgba(0,160,92,.92),rgba(0,92,58,.88)) !important;
+  border-color:rgba(120,255,190,.62) !important;
+}
+
+body.page-themes-pro .theme-card.pro-card-local-glow-on .pro-card-glow-knob{
+  left:64px !important;
+}
+
+body.page-themes-pro .theme-card.pro-card-local-glow-on .pro-card-glow-label{
+  left:10px !important;
+  right:34px !important;
+  color:#f4fff8 !important;
+}
+
+
+/* ===== FINAL PRO CARD TOGGLE ON/OFF OVERRIDE ===== */
+/* Final layer. Off = knob left / dark. On = knob right / green. */
+
+body.page-themes-pro .theme-card[data-theme]:not([data-coming-soon]) .pro-card-glow-toggle{
+  width:92px !important;
+  height:32px !important;
+  padding:3px !important;
+  background:rgba(5,10,18,.84) !important;
+  border-color:rgba(255,255,255,.24) !important;
+}
+
+body.page-themes-pro .theme-card[data-theme]:not([data-coming-soon]) .pro-card-glow-knob{
+  width:24px !important;
+  height:24px !important;
+  left:4px !important;
+  top:4px !important;
+}
+
+body.page-themes-pro .theme-card[data-theme]:not([data-coming-soon]) .pro-card-glow-label{
+  left:35px !important;
+  right:8px !important;
+  font-size:9px !important;
+}
+
+body.page-themes-pro .theme-card[data-theme]:not([data-coming-soon]).pro-card-local-glow-on .pro-card-glow-toggle{
+  background:linear-gradient(135deg,#16c784 0%,#047a4d 100%) !important;
+  border-color:rgba(140,255,204,.72) !important;
+  box-shadow:
+    0 0 16px rgba(22,199,132,.64),
+    0 0 38px rgba(22,199,132,.38),
+    0 12px 32px rgba(0,0,0,.42),
+    inset 0 1px 0 rgba(255,255,255,.18) !important;
+}
+
+body.page-themes-pro .theme-card[data-theme]:not([data-coming-soon]).pro-card-local-glow-on .pro-card-glow-knob{
+  left:64px !important;
+  background:#ffffff !important;
+}
+
+body.page-themes-pro .theme-card[data-theme]:not([data-coming-soon]).pro-card-local-glow-on .pro-card-glow-label{
+  left:10px !important;
+  right:34px !important;
+  color:#f4fff8 !important;
+}
+
+
+/* ===== EMERALD QURAN CARD TEXT LIGHT FIX ===== */
+/* Emerald Quran card: all text stays light, including button/toggle text. */
+
+body.page-themes-pro .theme-card[data-theme="emerald-quran"],
+body.page-themes-pro .theme-card[data-theme="emerald-quran"] *{
+  color:#f4fff8 !important;
+  -webkit-text-fill-color:#f4fff8 !important;
+}
+
+body.page-themes-pro .theme-card[data-theme="emerald-quran"] :is(h1,h2,h3,h4,h5,h6,p,span,small,strong,em,b,i,label,div,button,a){
+  color:#f4fff8 !important;
+  -webkit-text-fill-color:#f4fff8 !important;
+  text-shadow:0 2px 12px rgba(0,0,0,.48) !important;
+}
+
+body.page-themes-pro .theme-card[data-theme="emerald-quran"] .theme-chip,
+body.page-themes-pro .theme-card[data-theme="emerald-quran"] .pro-card-glow-label{
+  color:#ffffff !important;
+  -webkit-text-fill-color:#ffffff !important;
+}
+
+body.page-themes-pro .theme-card[data-theme="emerald-quran"] .preview-pill{
+  -webkit-text-fill-color:initial !important;
+}
+
+body.page-themes-pro .theme-card[data-theme="emerald-quran"] svg,
+body.page-themes-pro .theme-card[data-theme="emerald-quran"] svg *{
+  color:inherit !important;
+  fill:currentColor !important;
+}
+
+</style>
+
+<script src="/theme-init.js"></script>
+<link rel="stylesheet" href="/theme.css">
+<link rel="stylesheet" href="/theme-universal.css">
+
+<style id="barakaway-themes-pro-isolation-final">
+/* themes-pro page must stay a color showcase; selected premium theme must not repaint these cards */
+body.page-themes-pro .theme-card.locked::after{
+  display:none !important;
+  content:none !important;
+  opacity:0 !important;
+  visibility:hidden !important;
+}
+body.page-themes-pro .theme-card,
+body.page-themes-pro .theme-card *{
+  box-sizing:border-box !important;
+}
+body.page-themes-pro .theme-card{
+  position:relative !important;
+  overflow:hidden !important;
+  min-height:238px !important;
+  border-radius:32px !important;
+  padding:24px !important;
+  text-align:left !important;
+  cursor:pointer !important;
+  color:#ffffff !important;
+  border:1px solid rgba(255,255,255,.18) !important;
+  box-shadow:0 18px 42px rgba(0,0,0,.26), inset 0 1px 0 rgba(255,255,255,.08) !important;
+  backdrop-filter:none !important;
+  -webkit-backdrop-filter:none !important;
+}
+body.page-themes-pro .theme-card::before{
+  content:"" !important;
+  position:absolute !important;
+  inset:0 !important;
+  background:linear-gradient(120deg,transparent 48%,rgba(255,255,255,.12),transparent 72%) !important;
+  opacity:.68 !important;
+  pointer-events:none !important;
+}
+body.page-themes-pro .theme-card h3,
+body.page-themes-pro .theme-card p,
+body.page-themes-pro .theme-card .theme-top,
+body.page-themes-pro .theme-card .theme-preview{
+  position:relative !important;
+  z-index:2 !important;
+}
+body.page-themes-pro .theme-card h3{
+  color:#ffffff !important;
+  text-shadow:0 2px 8px rgba(0,0,0,.48) !important;
+}
+body.page-themes-pro .theme-card p{
+  color:rgba(255,255,255,.88) !important;
+  text-shadow:0 2px 7px rgba(0,0,0,.38) !important;
+}
+body.page-themes-pro .theme-card.theme-gold,
+body.page-themes-pro .theme-card[data-theme="royal-gold"]{
+  background:linear-gradient(145deg,#9a5f21 0%,#d6a04a 44%,#ffe07a 72%,#b97826 100%) !important;
+  color:#231606 !important;
+}
+body.page-themes-pro .theme-card.theme-gold h3,
+body.page-themes-pro .theme-card[data-theme="royal-gold"] h3,
+body.page-themes-pro .theme-card.theme-gold p,
+body.page-themes-pro .theme-card[data-theme="royal-gold"] p{
+  color:#241707 !important;
+  text-shadow:0 1px 0 rgba(255,255,255,.20),0 8px 18px rgba(0,0,0,.18) !important;
+}
+body.page-themes-pro .theme-card.theme-emerald,
+body.page-themes-pro .theme-card[data-theme="emerald-quran"]{
+  background:linear-gradient(145deg,#001b12 0%,#006a3c 52%,#48f29d 100%) !important;
+}
+body.page-themes-pro .theme-card.theme-violet,
+body.page-themes-pro .theme-card[data-theme="violet-noor"]{
+  background:linear-gradient(145deg,#16091f 0%,#4b1d76 48%,#9b55d8 100%) !important;
+}
+body.page-themes-pro .theme-card.theme-rose,
+body.page-themes-pro .theme-card[data-theme="rose-soft"]{
+  background:linear-gradient(145deg,#7f2854 0%,#d46d9d 52%,#ffb8d6 100%) !important;
+}
+body.page-themes-pro .theme-card.theme-carbon,
+body.page-themes-pro .theme-card[data-theme="carbon-elite"]{
+  background:linear-gradient(135deg,#050608 0%,#161d25 52%,#4d5965 100%) !important;
+}
+body.page-themes-pro .theme-card.theme-child,
+body.page-themes-pro .theme-card[data-theme="children-soft"]{
+  background:linear-gradient(135deg,#bfe9ff 0%,#79bdeb 55%,#fff0f6 100%) !important;
+}
+body.page-themes-pro .theme-card.theme-night,
+body.page-themes-pro .theme-card[data-theme="night-mosque"]{
+  background:linear-gradient(145deg,#07091f 0%,#10184a 55%,#1e3471 100%) !important;
+}
+body.page-themes-pro .theme-card.theme-sand,
+body.page-themes-pro .theme-card[data-theme="desert-sand"]{
+  background:linear-gradient(145deg,#b98542 0%,#d8a862 55%,#f6dca6 100%) !important;
+}
+body.page-themes-pro .restore-original-theme-card{
+  background:linear-gradient(135deg,rgba(15,20,28,.96) 0%,rgba(22,29,39,.96) 100%) !important;
+  color:#ffffff !important;
+}
+body.page-themes-pro .restore-original-theme-card h3,
+body.page-themes-pro .restore-original-theme-card p{
+  color:#ffffff !important;
+}
+
+
+
+
+
+
+/* emerald quran gemstone correction */
+body.page-themes-pro .theme-card.theme-emerald,
+body.page-themes-pro .theme-card[data-theme="emerald-quran"]{
+  background:
+    linear-gradient(135deg,rgba(0,25,14,.22),rgba(0,180,120,.10)),
+    url("theme-assets/emerald-quran-card.webp") center/cover no-repeat !important;
+  border-color:rgba(70,255,180,.48) !important;
+}
+body.page-themes-pro .theme-card.theme-emerald h3,
+body.page-themes-pro .theme-card[data-theme="emerald-quran"] h3,
+body.page-themes-pro .theme-card.theme-emerald p,
+body.page-themes-pro .theme-card[data-theme="emerald-quran"] p{
+  text-shadow:0 2px 12px rgba(0,0,0,.72),0 1px 0 rgba(0,0,0,.25) !important;
+}
+
+
+/* carbon elite final card correction */
+body.page-themes-pro .theme-card.theme-carbon,
+body.page-themes-pro .theme-card[data-theme="carbon-elite"]{
+  background:
+    radial-gradient(circle at 78% 8%,rgba(236,242,249,.22),transparent 28%),
+    radial-gradient(circle at 12% 92%,rgba(101,115,134,.28),transparent 34%),
+    linear-gradient(145deg,#05070a 0%,#151c24 52%,#566274 100%) !important;
+  border-color:rgba(220,228,238,.46) !important;
+  box-shadow:0 18px 48px rgba(0,0,0,.38),inset 0 1px 0 rgba(255,255,255,.10) !important;
+}
+body.page-themes-pro .theme-card.theme-carbon h3,
+body.page-themes-pro .theme-card[data-theme="carbon-elite"] h3,
+body.page-themes-pro .theme-card.theme-carbon p,
+body.page-themes-pro .theme-card[data-theme="carbon-elite"] p{
+  color:#f7fbff !important;
+  text-shadow:0 2px 12px rgba(0,0,0,.72),0 0 18px rgba(197,208,224,.20) !important;
+}
+body.page-themes-pro .theme-card.theme-carbon .preview-pill,
+body.page-themes-pro .theme-card[data-theme="carbon-elite"] .preview-pill{
+  background:linear-gradient(180deg,#eef4fb 0%,#657386 100%) !important;
+}
+
+/* ruby sultan final card correction */
+body.page-themes-pro .theme-card.theme-ruby,
+body.page-themes-pro .theme-card[data-theme="ruby-sultan"]{
+  background:
+    radial-gradient(circle at 78% 10%,rgba(255,185,185,.18),transparent 28%),
+    radial-gradient(circle at 14% 88%,rgba(78,0,10,.42),transparent 34%),
+    linear-gradient(145deg,#1a0004 0%,#5e000f 42%,#a30018 72%,#3a0008 100%) !important;
+  border-color:rgba(255,120,120,.42) !important;
+  color:#fff7f7 !important;
+  box-shadow:0 18px 48px rgba(0,0,0,.36),inset 0 1px 0 rgba(255,255,255,.10) !important;
+}
+body.page-themes-pro .theme-card.theme-ruby h3,
+body.page-themes-pro .theme-card[data-theme="ruby-sultan"] h3,
+body.page-themes-pro .theme-card.theme-ruby p,
+body.page-themes-pro .theme-card[data-theme="ruby-sultan"] p{
+  color:#fff7f7 !important;
+  text-shadow:0 2px 12px rgba(0,0,0,.72),0 0 18px rgba(255,90,90,.18) !important;
+}
+body.page-themes-pro .theme-card.theme-ruby .preview-pill,
+body.page-themes-pro .theme-card[data-theme="ruby-sultan"] .preview-pill{
+  background:linear-gradient(180deg,#ffd6d6 0%,#9f1a2b 100%) !important;
+}
+body.page-themes-pro .theme-card.theme-ruby.coming-soon-theme::after{
+  background:
+    linear-gradient(90deg,transparent 0%,rgba(255,255,255,.18) 8%,transparent 18%,transparent 82%,rgba(255,255,255,.16) 92%,transparent 100%),
+    linear-gradient(180deg,rgba(58,0,8,.58) 0%,rgba(130,0,18,.70) 50%,rgba(58,0,8,.58) 100%) !important;
+  border-top-color:rgba(255,180,180,.56) !important;
+  border-bottom-color:rgba(255,180,180,.46) !important;
+}
+
+
+/* ===== COMING SOON THEME CARDS ===== */
+body.page-themes-pro .theme-card.coming-soon-theme{
+  cursor:default !important;
+}
+body.page-themes-pro .theme-card.coming-soon-theme::after{
+  content:"" !important;
+  position:absolute !important;
+  left:-18% !important;
+  right:-18% !important;
+  top:50% !important;
+  height:74px !important;
+  transform:translateY(-50%) rotate(-8deg) !important;
+  display:block !important;
+  visibility:visible !important;
+  opacity:1 !important;
+  z-index:4 !important;
+  pointer-events:none !important;
+  background:
+    linear-gradient(90deg,transparent 0%,rgba(255,255,255,.16) 8%,transparent 18%,transparent 82%,rgba(255,255,255,.14) 92%,transparent 100%),
+    linear-gradient(180deg,rgba(17,12,6,.54) 0%,rgba(25,16,8,.68) 50%,rgba(17,12,6,.54) 100%) !important;
+  border-top:1px solid rgba(255,226,167,.58) !important;
+  border-bottom:1px solid rgba(255,226,167,.48) !important;
+  box-shadow:
+    0 0 0 1px rgba(255,226,167,.16),
+    0 14px 28px rgba(0,0,0,.28),
+    inset 0 1px 0 rgba(255,255,255,.18),
+    inset 0 -1px 0 rgba(0,0,0,.18) !important;
+}
+body.page-themes-pro .theme-card.coming-soon-theme .coming-soon-ribbon{
+  position:absolute !important;
+  left:-18% !important;
+  right:-18% !important;
+  top:50% !important;
+  height:74px !important;
+  transform:translateY(-50%) rotate(-8deg) !important;
+  z-index:5 !important;
+  display:flex !important;
+  align-items:center !important;
+  justify-content:center !important;
+  pointer-events:none !important;
+  color:#fff0cf !important;
+  font-size:38px !important;
+  line-height:1 !important;
+  font-weight:1000 !important;
+  letter-spacing:.08em !important;
+  text-transform:uppercase !important;
+  text-shadow:
+    0 2px 0 rgba(70,38,8,.42),
+    0 0 18px rgba(255,218,141,.46),
+    0 10px 24px rgba(0,0,0,.36) !important;
+}
+body.page-themes-pro .theme-card.theme-child.coming-soon-theme::after{
+  background:
+    linear-gradient(90deg,transparent 0%,rgba(255,255,255,.18) 8%,transparent 18%,transparent 82%,rgba(255,255,255,.16) 92%,transparent 100%),
+    linear-gradient(180deg,rgba(29,70,103,.54) 0%,rgba(44,111,162,.66) 50%,rgba(29,70,103,.54) 100%) !important;
+  border-top-color:rgba(194,233,255,.66) !important;
+  border-bottom-color:rgba(194,233,255,.54) !important;
+}
+body.page-themes-pro .theme-card.theme-child.coming-soon-theme .coming-soon-ribbon{
+  color:#eef9ff !important;
+  text-shadow:
+    0 2px 0 rgba(22,60,91,.40),
+    0 0 18px rgba(177,226,255,.48),
+    0 10px 24px rgba(0,0,0,.32) !important;
+}
+@media(max-width:760px){
+  body.page-themes-pro .theme-card.coming-soon-theme::after,
+  body.page-themes-pro .theme-card.coming-soon-theme .coming-soon-ribbon{
+    height:62px !important;
+  }
+  body.page-themes-pro .theme-card.coming-soon-theme .coming-soon-ribbon{
+    font-size:30px !important;
+  }
+}
+@media(max-width:420px){
+  body.page-themes-pro .theme-card.coming-soon-theme .coming-soon-ribbon{
+    font-size:25px !important;
+  }
+}
+
+</style>
+
+</head>
+
+<body class="page-themes-pro">
+
+<div class="page">
+
+  <header class="topbar">
+    <a class="top-pill" href="home-bn.html" aria-label="Back to হোম">
+      ← হোম
+    </a>
+
+    <div id="proState" class="pro-state locked">
+      🔒 PRO সক্রিয় নয়
+    </div>
+  </header>
+
+  <main>
+
+    <section class="hero" id="top">
+      <div class="hero-inner">
+        <div class="badge">👑 PRO Themes</div>
+
+        <h2>BarakaWay দৈনিক ব্যবহারের জন্য ভিজ্যুয়াল পরিবেশ নির্বাচন করুন</h2>
+</div>
+    </section>
+<section class="section" id="themes">
+      <div class="theme-grid">
+
+<div class="theme-card restore-original-theme-card" data-theme-clear="true">
+  <div class="theme-icon">◐</div>
+  <div class="theme-chip">FREE</div>
+  <h3>Original Theme</h3>
+  <p>Restore the standard BarakaWay appearance without the PRO style.</p>
+</div>
+
+        <button class="theme-card theme-emerald" data-theme="emerald-quran">
+          <span class="pro-card-glow-toggle" role="switch" aria-checked="false" aria-label="Glow Off"><span class="pro-card-glow-label">Glow Off</span><span class="pro-card-glow-knob"></span></span>
+
+
+          <div class="theme-top">
+            <div class="theme-icon">🟢</div>
+            <div class="theme-chip">PRO</div>
+          </div>
+          <h3>Emerald Quran</h3>
+          <p>Deep green theme for calm reading, duas and spiritual focus.</p>
+          <div class="theme-preview"><span class="preview-pill"></span><span class="preview-pill"></span><span class="preview-pill"></span></div>
+        </button>
+
+        <button class="theme-card theme-violet" data-theme="violet-noor">
+          <span class="pro-card-glow-toggle" role="switch" aria-checked="false" aria-label="Glow Off"><span class="pro-card-glow-label">Glow Off</span><span class="pro-card-glow-knob"></span></span>
+
+
+          <div class="theme-top">
+            <div class="theme-icon">💜</div>
+            <div class="theme-chip">PRO</div>
+          </div>
+          <h3>Violet Noor</h3>
+          <p>Soft violet theme with a modern spiritual premium style.</p>
+          <div class="theme-preview"><span class="preview-pill"></span><span class="preview-pill"></span><span class="preview-pill"></span></div>
+        </button>
+
+        <button class="theme-card theme-rose" data-theme="rose-soft">
+          <span class="pro-card-glow-toggle" role="switch" aria-checked="false" aria-label="Glow Off"><span class="pro-card-glow-label">Glow Off</span><span class="pro-card-glow-knob"></span></span>
+
+
+          <div class="theme-top">
+            <div class="theme-icon">🌸</div>
+            <div class="theme-chip">PRO</div>
+          </div>
+          <h3>Rose Harmony</h3>
+          <p>Warm feminine theme for a soft, calm and beautiful visual environment.</p>
+          <div class="theme-preview"><span class="preview-pill"></span><span class="preview-pill"></span><span class="preview-pill"></span></div>
+        </button>
+
+        <button class="theme-card theme-carbon" data-theme="carbon-elite">
+          <span class="pro-card-glow-toggle" role="switch" aria-checked="false" aria-label="Glow Off"><span class="pro-card-glow-label">Glow Off</span><span class="pro-card-glow-knob"></span></span>
+
+
+          <div class="theme-top">
+            <div class="theme-icon">⚫</div>
+            <div class="theme-chip">PRO</div>
+          </div>
+          <h3>Carbon Elite</h3>
+          <p>Strict dark style with a modern technological premium character.</p>
+          <div class="theme-preview"><span class="preview-pill"></span><span class="preview-pill"></span><span class="preview-pill"></span></div>
+        </button>
+		
+        <button class="theme-card theme-night" data-theme="night-mosque">
+          <span class="pro-card-glow-toggle" role="switch" aria-checked="false" aria-label="Glow Off"><span class="pro-card-glow-label">Glow Off</span><span class="pro-card-glow-knob"></span></span>
+
+
+          <div class="theme-top">
+            <div class="theme-icon">🌙</div>
+            <div class="theme-chip">PRO</div>
+          </div>
+          <h3>Night Mosque</h3>
+          <p>Deep night theme for evening reading, prayer, duas and calm focus.</p>
+          <div class="theme-preview"><span class="preview-pill"></span><span class="preview-pill"></span><span class="preview-pill"></span></div>
+        </button>
+		
+		<button class="theme-card theme-gold coming-soon-theme" data-theme="royal-gold" data-coming-soon="true" aria-disabled="true">
+          <div class="coming-soon-ribbon">COMING SOON</div>
+          <div class="theme-top">
+            <div class="theme-icon">👑</div>
+            <div class="theme-chip">PRO</div>
+          </div>
+          <h3>Royal Gold</h3>
+          <p>Dark premium theme with golden accents and a calm luxury mood.</p>
+          <div class="theme-preview"><span class="preview-pill"></span><span class="preview-pill"></span><span class="preview-pill"></span></div>
+        </button>
+		
+		<button class="theme-card theme-ruby coming-soon-theme" data-theme="ruby-sultan" data-coming-soon="true" aria-disabled="true">
+          <div class="coming-soon-ribbon">COMING SOON</div>
+          <div class="theme-top">
+            <div class="theme-icon">♦️</div>
+            <div class="theme-chip">PRO</div>
+          </div>
+          <h3>Ruby Sultan</h3>
+          <p>Rich dark red theme with luxurious ruby glow and premium depth.</p>
+          <div class="theme-preview"><span class="preview-pill"></span><span class="preview-pill"></span><span class="preview-pill"></span></div>
+        </button>
+		
+        <button class="theme-card theme-child coming-soon-theme" data-theme="children-soft" data-coming-soon="true" aria-disabled="true">
+          <div class="coming-soon-ribbon">COMING SOON</div>
+          <div class="theme-top">
+            <div class="theme-icon">🧸</div>
+            <div class="theme-chip">PRO</div>
+          </div>
+          <h3>Kids Theme</h3>
+          <p>Soft family interface for the future kids Islamic mode of BarakaWay.</p>
+          <div class="theme-preview"><span class="preview-pill"></span><span class="preview-pill"></span><span class="preview-pill"></span></div>
+        </button>
+
+        <button class="theme-card theme-sand coming-soon-theme" data-theme="desert-sand" data-coming-soon="true" aria-disabled="true">
+          <div class="coming-soon-ribbon">COMING SOON</div>
+          <div class="theme-top">
+            <div class="theme-icon">🏜️</div>
+            <div class="theme-chip">PRO</div>
+          </div>
+          <h3>Desert Classic</h3>
+          <p>Warm traditional theme with soft sand shades and Islamic aesthetics.</p>
+          <div class="theme-preview"><span class="preview-pill"></span><span class="preview-pill"></span><span class="preview-pill"></span></div>
+        </button>
+
+      </div>
+    </section>
+
+  </main>
+
+</div>
+<div class="toast" id="toast"></div>
+
+
+
+
+
+
+<script>
+(function(){
+  const PRO_KEY = "barakaway_pro";
+  const THEME_KEY = "barakaway_premium_theme";
+  const proState = document.getElementById("proState");
+  const toast = document.getElementById("toast");
+
+  const themeNames = {
+    "royal-gold":"Royal Gold",
+    "emerald-quran":"Emerald Quran",
+    "violet-noor":"Violet Noor",
+    "rose-soft":"Rose Harmony",
+    "carbon-elite":"Carbon Elite",
+    "ruby-sultan":"Ruby Sultan",
+    "children-soft":"Kids Theme",
+    "night-mosque":"Night Mosque",
+    "desert-sand":"Desert Classic"
+  };
+
+  function isPro(){
+    try{ return localStorage.getItem(PRO_KEY) === "true"; }catch(e){ return false; }
+  }
+
+  function showToast(message){
+    if(!toast) return;
+
+    toast.textContent = message;
+    toast.classList.add("show");
+
+    clearTimeout(window.__barakawayProThemeToast);
+    window.__barakawayProThemeToast = setTimeout(function(){
+      toast.classList.remove("show");
+    }, 2600);
+  }
+
+  function blinkPro(){
+    if(proState){
+      proState.classList.remove("pro-attention");
+      void proState.offsetWidth;
+      proState.classList.add("pro-attention");
+
+      setTimeout(function(){
+        proState.classList.remove("pro-attention");
+      }, 3400);
+    }
+
+    showToast("PRO সক্রিয় নয়. Activate access to choose a theme.");
+  }
+
+  function syncThemeCards(){
+    const active = isPro();
+    let current = "";
+
+    try{ current = localStorage.getItem(THEME_KEY) || ""; }catch(e){ current = ""; }
+
+    if(proState){
+      proState.classList.toggle("locked", !active);
+      proState.classList.toggle("active", active);
+      proState.innerHTML = active ? "✅ PRO সক্রিয়" : "🔒 PRO সক্রিয় নয়";
+    }
+
+    document.querySelectorAll("[data-theme]").forEach(function(card){
+      const theme = card.getAttribute("data-theme");
+      card.classList.toggle("locked", !active);
+      card.classList.toggle("active-theme", active && current === theme);
+    });
+
+    if(window.BarakaWayTheme && typeof window.BarakaWayTheme.refresh === "function"){
+      window.BarakaWayTheme.refresh();
+    }
+  }
+
+  function setTheme(theme){
+    if(!isPro()){
+      blinkPro();
+      return;
+    }
+
+    if(!theme) return;
+
+    if(window.BarakaWayTheme && typeof window.BarakaWayTheme.applyPremiumTheme === "function"){
+      window.BarakaWayTheme.applyPremiumTheme(theme);
+    }else{
+      try{ localStorage.setItem(THEME_KEY, theme); }catch(e){}
+      document.documentElement.classList.add("premium-theme-" + theme);
+    }
+
+    try{
+      window.dispatchEvent(new StorageEvent("storage", {key:THEME_KEY, newValue:theme}));
+    }catch(e){
+      window.dispatchEvent(new Event("storage"));
+    }
+
+    syncThemeCards();
+    showToast("Theme applied: " + (themeNames[theme] || "PRO-тема"));
+  }
+
+  document.querySelectorAll("[data-theme]").forEach(function(card){
+    card.addEventListener("click", function(event){
+      event.preventDefault();
+      event.stopPropagation();
+      if(card.getAttribute("data-coming-soon") === "true"){
+        showToast("This theme is coming soon: " + (themeNames[card.getAttribute("data-theme")] || "PRO-тема"));
+        return false;
+      }
+      setTheme(card.getAttribute("data-theme"));
+      return false;
+    }, true);
+  });
+
+  if(proState){
+    proState.addEventListener("click", function(){
+      if(!isPro()){
+        window.location.href = "pro-bn.html";
+      }
+    });
+  }
+
+  window.addEventListener("storage", syncThemeCards);
+  syncThemeCards();
+})();
+</script>
+
+
+<script>
+(function(){
+  document.querySelectorAll('[data-theme-clear="true"]').forEach(function(card){
+    card.addEventListener('click', function(event){
+      event.preventDefault();
+      event.stopPropagation();
+
+      if(window.BarakaWayTheme && typeof window.BarakaWayTheme.clearPremiumTheme === 'function'){
+        window.BarakaWayTheme.clearPremiumTheme();
+      }else{
+        try{
+          localStorage.removeItem('barakaway_premium_theme');
+        }catch(e){}
+      }
+
+      try{
+        window.dispatchEvent(new StorageEvent('storage', {
+          key:'barakaway_premium_theme',
+          newValue:''
+        }));
+      }catch(e){
+        window.dispatchEvent(new Event('storage'));
+      }
+
+      const toast = document.getElementById('toast');
+      if(toast){
+        toast.textContent = 'Original Theme восстановлена';
+        toast.classList.add('show');
+        clearTimeout(window.__restoreThemeToast);
+        window.__restoreThemeToast = setTimeout(function(){
+          toast.classList.remove('show');
+        }, 2200);
+      }
+    }, true);
+  });
+})();
+</script>
+
+
+<script src="bottom-nav.js"></script>
+
+
+<script>
+(function(){
+  'use strict';
+
+  const KEY = 'barakawayProCardGlow';
+
+  function readState(){
+    try{
+      return JSON.parse(localStorage.getItem(KEY) || '{}');
+    }catch(e){
+      return {};
+    }
+  }
+
+  function writeState(state){
+    try{
+      localStorage.setItem(KEY, JSON.stringify(state));
+    }catch(e){}
+  }
+
+  function setCardState(card, isOn){
+    const toggle = card.querySelector('.pro-card-glow-toggle');
+    const label = card.querySelector('.pro-card-glow-label');
+
+    card.classList.toggle('pro-card-local-glow-on', !!isOn);
+
+    if(toggle){
+      toggle.setAttribute('aria-checked', isOn ? 'true' : 'false');
+      toggle.setAttribute('aria-label', isOn ? 'Glow On' : 'Glow Off');
+    }
+
+    if(label){
+      label.textContent = isOn ? 'Glow On' : 'Glow Off';
+    }
+  }
+
+  function applyAll(){
+    const state = readState();
+
+    document.querySelectorAll('body.page-themes-pro .theme-card[data-theme]:not([data-coming-soon])').forEach(function(card){
+      const theme = card.getAttribute('data-theme');
+      setCardState(card, !!state[theme]);
+    });
+  }
+
+  document.addEventListener('click', function(event){
+    const toggle = event.target && event.target.closest ? event.target.closest('.pro-card-glow-toggle') : null;
+    if(!toggle) return;
+
+    event.preventDefault();
+    event.stopPropagation();
+    if(typeof event.stopImmediatePropagation === 'function') event.stopImmediatePropagation();
+
+    const card = toggle.closest('.theme-card[data-theme]');
+    if(!card) return;
+
+    const theme = card.getAttribute('data-theme');
+    const state = readState();
+
+    state[theme] = !state[theme];
+    writeState(state);
+    setCardState(card, state[theme]);
+  }, true);
+
+  if(document.readyState === 'loading'){
+    document.addEventListener('DOMContentLoaded', applyAll, {once:true});
+  }else{
+    applyAll();
+  }
+})();
+</script>
+
+</body>
+</html>
