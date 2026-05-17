@@ -4431,6 +4431,45 @@ html[dir="rtl"] .today-hub #allahNameCounterCard:not(.bw-task-done) .bw-task-com
 }
 </style>
 
+
+<style id="bw-ur-name-counter-final-style-fix">
+#allahNameCounterCard:not(.bw-task-done){
+  cursor:pointer !important;
+  touch-action:manipulation !important;
+}
+#allahNameCounterCard .bw-task-compact-meta[data-task-meta="name"]{
+  display:inline-flex !important;
+  align-items:center !important;
+  justify-content:center !important;
+  min-width:82px !important;
+  height:32px !important;
+  padding:5px 12px !important;
+  border-radius:999px !important;
+  font-size:18px !important;
+  font-weight:950 !important;
+  line-height:1 !important;
+  letter-spacing:-.03em !important;
+  z-index:10 !important;
+  position:relative !important;
+  user-select:none !important;
+  -webkit-user-select:none !important;
+}
+#allahNameCounterCard:not(.bw-task-done) .bw-task-compact-meta[data-task-meta="name"]::after{
+  content:"+1";
+  margin-left:8px;
+  font-size:11px;
+  font-weight:950;
+  opacity:.9;
+}
+html[dir="rtl"] #allahNameCounterCard:not(.bw-task-done) .bw-task-compact-meta[data-task-meta="name"]::after{
+  margin-left:0;
+  margin-right:8px;
+}
+#allahNameCounterCard.bw-name-tap-feedback{
+  transform:scale(.985) !important;
+}
+</style>
+
 </head>
 <body>
 <div class="mobile-top-controls">
@@ -8971,53 +9010,46 @@ window.addEventListener("DOMContentLoaded",function(){const installBtn=document.
 })();
 </script>
 
-<script id="bw-ur-name-counter-direct-fix">
+<script id="bw-ur-name-counter-final-click-fix">
 (function(){
   'use strict';
+
+  var LANG = "ur";
+  var COUNT_KEY_BASE = 'barakaway_name_counter_' + LANG + '_final_';
+  var DONE_KEY_BASE = 'barakaway_today_' + LANG + '_final_';
+  var lastTouchAt = 0;
 
   function dateKey(){
     var d = new Date();
     return d.getFullYear() + '-' + String(d.getMonth()+1).padStart(2,'0') + '-' + String(d.getDate()).padStart(2,'0');
   }
 
-  function keys(){
-    var day = dateKey();
-    return {
-      count: 'barakaway_name_counter_ur_v3_' + day,
-      done: 'barakaway_today_ur_v3_' + day + '_name'
-    };
-  }
+  function countKey(){ return COUNT_KEY_BASE + dateKey(); }
+  function doneKey(){ return DONE_KEY_BASE + dateKey() + '_name'; }
 
-  function getCount(){
+  function readCount(){
     try{
-      var k = keys();
-      var done = localStorage.getItem(k.done) === '1';
-      var n = parseInt(localStorage.getItem(k.count) || '0', 10) || 0;
+      var done = localStorage.getItem(doneKey()) === '1';
+      var n = parseInt(localStorage.getItem(countKey()) || '0', 10);
+      if(!Number.isFinite(n)) n = 0;
       n = Math.max(0, Math.min(100, n));
       return done ? 100 : n;
-    }catch(e){ return 0; }
+    }catch(e){
+      return 0;
+    }
   }
 
-  function setCount(n){
+  function writeCount(n){
+    n = Math.max(0, Math.min(100, n));
     try{
-      var k = keys();
-      n = Math.max(0, Math.min(100, n));
-      localStorage.setItem(k.count, String(n));
-      if(n >= 100){
-        localStorage.setItem(k.done, '1');
-      }else{
-        localStorage.removeItem(k.done);
-      }
+      localStorage.setItem(countKey(), String(n));
+      if(n >= 100) localStorage.setItem(doneKey(), '1');
+      else localStorage.removeItem(doneKey());
     }catch(e){}
+    return n;
   }
 
-  function updateNameCard(){
-    var card = document.getElementById('allahNameCounterCard');
-    if(!card) return;
-
-    var count = getCount();
-    var done = count >= 100;
-
+  function ensureMeta(card){
     var meta = card.querySelector('.bw-task-compact-meta[data-task-meta="name"]');
     if(!meta){
       meta = document.createElement('div');
@@ -9027,74 +9059,109 @@ window.addEventListener("DOMContentLoaded",function(){const installBtn=document.
       if(title && title.parentElement) title.parentElement.appendChild(meta);
       else card.appendChild(meta);
     }
+    return meta;
+  }
 
-    meta.textContent = count + '/100';
-    meta.style.display = 'inline-flex';
+  function paint(){
+    var card = document.getElementById('allahNameCounterCard');
+    if(!card) return;
+
+    var n = readCount();
+    var done = n >= 100;
+    var text = n + '/100';
+
+    var meta = ensureMeta(card);
+    meta.textContent = text;
 
     var status = document.getElementById('allahNameCounterValue');
-    if(status) status.textContent = done ? '✓' : (count + '/100');
+    if(status) status.textContent = done ? '✓' : text;
 
     var fill = document.getElementById('allahNameCounterFill');
-    if(fill) fill.style.width = count + '%';
+    if(fill) fill.style.width = n + '%';
 
     card.classList.toggle('bw-task-done', done);
     card.classList.toggle('task-done', done);
     card.classList.toggle('goal-done', done);
     card.classList.toggle('goal-urgent', !done);
     card.setAttribute('aria-disabled', done ? 'true' : 'false');
-    if(!done) card.setAttribute('tabindex','0');
+
+    var modalCount = document.getElementById('bwNameModalCount');
+    if(modalCount) modalCount.textContent = text;
+
+    var modalComplete = document.querySelector('.bw-task-modal-card[data-task-key="name"] .bw-task-complete-btn');
+    if(modalComplete) modalComplete.disabled = n < 100;
+
+    var modalPlus = document.getElementById('bwNameModalInc');
+    if(modalPlus) modalPlus.textContent = done ? '100 / 100' : '+1';
   }
 
-  function incrementName(event){
+  function increment(e){
     var card = document.getElementById('allahNameCounterCard');
     if(!card) return;
-    if(card.contains(event.target)){
-      var count = getCount();
-      if(count >= 100) return;
-      event.preventDefault();
-      event.stopPropagation();
-      event.stopImmediatePropagation();
-      setCount(count + 1);
-      updateNameCard();
+    if(e && !card.contains(e.target)) return;
 
-      var modalCount = document.getElementById('bwNameModalCount');
-      if(modalCount) modalCount.textContent = getCount() + '/100';
-      var modalBtn = document.getElementById('bwNameModalInc');
-      if(modalBtn) modalBtn.textContent = getCount() >= 100 ? '100 / 100' : '+1';
-      var completeBtn = document.querySelector('.bw-task-modal-overlay.is-open .bw-task-complete-btn');
-      if(completeBtn && document.querySelector('.bw-task-modal-card[data-task-key="name"]')){
-        completeBtn.disabled = getCount() < 100;
-      }
+    var n = readCount();
+    if(n >= 100) {
+      paint();
+      return;
     }
+
+    if(e){
+      e.preventDefault();
+      e.stopPropagation();
+      if(e.stopImmediatePropagation) e.stopImmediatePropagation();
+    }
+
+    writeCount(n + 1);
+    card.classList.add('bw-name-tap-feedback');
+    setTimeout(function(){ card.classList.remove('bw-name-tap-feedback'); }, 90);
+    paint();
   }
 
   function bind(){
     var card = document.getElementById('allahNameCounterCard');
-    if(!card || card.dataset.bwDirectNameCounterBound === '1') {
-      updateNameCard();
-      return;
+    if(!card) return;
+
+    if(card.dataset.bwFinalCounterBound !== '1'){
+      card.dataset.bwFinalCounterBound = '1';
+
+      card.addEventListener('pointerup', function(e){
+        increment(e);
+      }, true);
+
+      card.addEventListener('touchend', function(e){
+        lastTouchAt = Date.now();
+        increment(e);
+      }, {capture:true, passive:false});
+
+      card.addEventListener('click', function(e){
+        if(Date.now() - lastTouchAt < 450) return;
+        increment(e);
+      }, true);
+
+      card.addEventListener('keydown', function(e){
+        if(e.key === 'Enter' || e.key === ' '){
+          increment(e);
+        }
+      }, true);
     }
-    card.dataset.bwDirectNameCounterBound = '1';
 
-    card.addEventListener('click', incrementName, true);
-    card.addEventListener('touchend', function(event){
-      incrementName(event);
-    }, {capture:true, passive:false});
-
-    card.addEventListener('keydown', function(event){
-      if(event.key === 'Enter' || event.key === ' '){
-        incrementName(event);
-      }
-    }, true);
-
-    updateNameCard();
+    paint();
   }
+
+  // Also patch modal +1 button if user opens old modal somehow.
+  document.addEventListener('click', function(e){
+    var btn = e.target && e.target.closest ? e.target.closest('#bwNameModalInc') : null;
+    if(btn){
+      increment(e);
+    }
+  }, true);
 
   if(document.readyState === 'loading') document.addEventListener('DOMContentLoaded', bind, {once:true});
   else bind();
 
   window.addEventListener('pageshow', bind);
-  setInterval(updateNameCard, 500);
+  setInterval(paint, 300);
 })();
 </script>
 
