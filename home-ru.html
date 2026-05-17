@@ -4366,6 +4366,118 @@ html[class*="premium-theme-"] body:not(.page-themes-pro) input.theme-switch:not(
 <script src="/theme-init.js"></script>
 <link href="/theme.css" rel="stylesheet"/>
 <link href="/theme-universal.css" rel="stylesheet"/>
+
+<style id="mobile-task-modal-upgrade">
+@media(max-width:700px){
+
+.daily-grid{
+display:grid !important;
+grid-template-columns:1fr 1fr !important;
+gap:14px !important;
+align-items:stretch;
+}
+
+.daily-card,
+.challenge-card,
+.goal-card,
+.name-card{
+min-height:210px !important;
+height:210px !important;
+overflow:hidden !important;
+position:relative !important;
+}
+
+.micro-card{
+grid-column:1 / -1 !important;
+min-height:170px !important;
+}
+
+.daily-card p,
+.challenge-card p,
+.goal-card p,
+.name-card p,
+.micro-card p,
+.daily-card .task-text,
+.challenge-card .task-text,
+.goal-card .task-text,
+.name-card .task-text,
+.micro-card .task-text{
+display:none !important;
+}
+
+.mobile-task-hint{
+display:block !important;
+position:absolute;
+left:18px;
+right:18px;
+bottom:16px;
+font-size:12px;
+font-style:italic;
+font-weight:400;
+opacity:.82;
+}
+
+.task-modal-overlay{
+position:fixed;
+inset:0;
+background:rgba(0,0,0,.72);
+backdrop-filter:blur(8px);
+display:none;
+align-items:center;
+justify-content:center;
+z-index:99999;
+padding:20px;
+}
+
+.task-modal-overlay.active{
+display:flex;
+}
+
+.task-modal{
+background:#111923;
+border:1px solid rgba(85,255,140,.28);
+border-radius:28px;
+padding:24px;
+width:min(92vw,420px);
+color:#fff;
+box-shadow:0 0 45px rgba(65,255,120,.18);
+}
+
+.task-modal h3{
+margin-top:0;
+font-size:26px;
+}
+
+.task-modal p{
+line-height:1.6;
+opacity:.95;
+}
+
+.task-done-btn{
+margin-top:18px;
+width:100%;
+border:none;
+border-radius:18px;
+padding:14px 18px;
+background:#2d7a46;
+color:#fff;
+font-weight:700;
+font-size:15px;
+}
+
+.task-card-done::after{
+content:'✔';
+position:absolute;
+top:18px;
+right:18px;
+font-size:34px;
+color:#6dff98;
+font-weight:900;
+}
+
+}
+</style>
+
 </head>
 <body>
 <div class="mobile-top-controls">
@@ -8850,6 +8962,75 @@ window.addEventListener("DOMContentLoaded",function(){const installBtn=document.
   window.addEventListener("storage", applyPremiumTheme);
   window.BarakaWayApplyPremiumTheme = applyPremiumTheme;
 })();
+</script>
+
+
+<script id="mobile-task-modal-script">
+document.addEventListener('DOMContentLoaded',()=>{
+if(window.innerWidth > 700) return;
+
+const possibleCards = document.querySelectorAll('div,article,section');
+
+possibleCards.forEach(card=>{
+ const txt = card.innerText || '';
+ if(
+   txt.includes('Аят дня') ||
+   txt.includes('Испытание дня') ||
+   txt.includes('Аль-Хабир') ||
+   txt.includes('Дневная цель') ||
+   txt.includes('Микро-знание дня')
+ ){
+    card.classList.add('task-card-done');
+
+    const hint=document.createElement('div');
+    hint.className='mobile-task-hint';
+    hint.textContent='Нажмите, чтобы выполнить задание';
+    card.appendChild(hint);
+
+    card.classList.remove('task-card-done');
+
+    card.style.cursor='pointer';
+
+    card.addEventListener('click',()=>{
+      const existing=document.querySelector('.task-modal-overlay');
+      if(existing) existing.remove();
+
+      const overlay=document.createElement('div');
+      overlay.className='task-modal-overlay active';
+
+      const title=(txt.match(/Аят дня|Испытание дня|Аль-Хабир|Дневная цель|Микро-знание дня/)||['Задание'])[0];
+
+      const modal=document.createElement('div');
+      modal.className='task-modal';
+
+      let body=txt.trim().slice(0,700);
+
+      if(title==='Аль-Хабир'){
+        body += '\n\nПрогресс: 0 / 100';
+      }
+
+      modal.innerHTML=`
+        <h3>${title}</h3>
+        <p>${body}</p>
+        <button class="task-done-btn">Задание выполнено</button>
+      `;
+
+      overlay.appendChild(modal);
+      document.body.appendChild(overlay);
+
+      modal.querySelector('.task-done-btn').addEventListener('click',()=>{
+         card.classList.add('task-card-done');
+         overlay.remove();
+      });
+
+      overlay.addEventListener('click',(e)=>{
+        if(e.target===overlay) overlay.remove();
+      });
+    });
+ }
+});
+
+});
 </script>
 
 </body>
