@@ -689,6 +689,46 @@ function formatShareText(g){return "Скачать приложение BarakaWa
 
 function wrapCanvasText(ctx,text,x,y,maxWidth,lineHeight,maxLines){const words=String(text||"").split(/\s+/);let line="",lines=[];for(let i=0;i<words.length;i++){const test=line+words[i]+" ";if(ctx.measureText(test).width>maxWidth&&i>0){lines.push(line.trim());line=words[i]+" ";}else{line=test;}}if(line.trim())lines.push(line.trim());if(maxLines&&lines.length>maxLines){lines=lines.slice(0,maxLines);lines[lines.length-1]=lines[lines.length-1].replace(/[.,;:!?]*$/,"")+"…";}lines.forEach(function(l,i){ctx.fillText(l,x,y+i*lineHeight);});}
 
+function getWrappedCanvasLines(ctx,text,maxWidth){
+const words=String(text||"").trim().split(/\s+/).filter(Boolean);
+let line="",lines=[];
+for(let i=0;i<words.length;i++){
+const test=line?line+" "+words[i]:words[i];
+if(ctx.measureText(test).width>maxWidth&&line){
+lines.push(line);
+line=words[i];
+}else{
+line=test;
+}
+}
+if(line)lines.push(line);
+return lines;
+}
+function drawFittedCanvasText(ctx,text,x,top,maxWidth,maxHeight,options){
+const opts=options||{};
+let fontSize=opts.maxFontSize||43;
+const minFontSize=opts.minFontSize||27;
+const weight=opts.weight||"700";
+const family=opts.family||"system-ui, Arial";
+let lines=[],lineHeight=0,totalHeight=0;
+while(fontSize>=minFontSize){
+lineHeight=Math.round(fontSize*1.38);
+ctx.font=weight+" "+fontSize+"px "+family;
+lines=getWrappedCanvasLines(ctx,text,maxWidth);
+totalHeight=lines.length*lineHeight;
+if(totalHeight<=maxHeight)break;
+fontSize-=2;
+}
+if(totalHeight>maxHeight){
+lineHeight=Math.max(30,Math.floor(maxHeight/Math.max(lines.length,1)));
+}
+const startY=top+Math.max(0,(maxHeight-totalHeight)/2)+fontSize;
+lines.forEach(function(line,index){
+ctx.fillText(line,x,startY+index*lineHeight);
+});
+return {fontSize:fontSize,lines:lines.length,totalHeight:totalHeight};
+}
+
 function drawRoundRect(ctx,x,y,w,h,r){const radius=Math.min(r,w/2,h/2);ctx.beginPath();ctx.moveTo(x+radius,y);ctx.arcTo(x+w,y,x+w,y+h,radius);ctx.arcTo(x+w,y+h,x,y+h,radius);ctx.arcTo(x,y+h,x,y,radius);ctx.arcTo(x,y,x+w,y,radius);ctx.closePath();}
 function loadCanvasImage(src){return new Promise(function(resolve,reject){const img=new Image();img.onload=function(){resolve(img)};img.onerror=reject;img.src=src;});}
 function getAverageLuminance(ctx,x,y,w,h){
@@ -721,23 +761,22 @@ ctx.textAlign="center";ctx.textBaseline="alphabetic";
 if(g.id==="personal"){
 const style=getPersonalTextStyle(ctx,w,h);
 ctx.save();
+const panelX=88,panelY=320,panelW=w-176,panelH=610;
 ctx.fillStyle=style.panel;
-drawRoundRect(ctx,88,330,w-176,520,38);
+drawRoundRect(ctx,panelX,panelY,panelW,panelH,38);
 ctx.fill();
 ctx.shadowColor=style.shadow;
 ctx.shadowBlur=style.blur;
 ctx.fillStyle="#f3d992";
-ctx.font="900 72px Georgia, 'Times New Roman', serif";
-wrapCanvasText(ctx,g.headline||g.title,w/2,455,w-250,82,2);
+drawFittedCanvasText(ctx,g.headline||g.title,w/2,panelY+52,panelW-170,142,{maxFontSize:72,minFontSize:46,weight:"900",family:"Georgia, 'Times New Roman', serif"});
 ctx.strokeStyle="rgba(243,217,146,.58)";
 ctx.lineWidth=3;
 ctx.beginPath();
-ctx.moveTo(220,545);
-ctx.lineTo(w-220,545);
+ctx.moveTo(panelX+132,panelY+225);
+ctx.lineTo(panelX+panelW-132,panelY+225);
 ctx.stroke();
 ctx.fillStyle=style.text;
-ctx.font="700 43px system-ui, Arial";
-wrapCanvasText(ctx,g.text,w/2,625,w-260,60,5);
+drawFittedCanvasText(ctx,g.text,w/2,panelY+270,panelW-170,panelH-320,{maxFontSize:43,minFontSize:28,weight:"700",family:"system-ui, Arial"});
 ctx.restore();
 }
 ctx.fillStyle="rgba(255,238,190,.96)";ctx.font="800 30px system-ui, Arial";ctx.fillText("BarakaWay App",w/2,h-92);ctx.fillStyle="rgba(255,238,190,.82)";ctx.font="650 25px system-ui, Arial";ctx.fillText("barakaway.app",w/2,h-54);return canvas;}
