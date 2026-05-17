@@ -4225,6 +4225,53 @@ html.light-mode .today-hub .bw-task-hint{color:#53645a;}
 }
 </style>
 
+
+<style id="bw-id-name-counter-visible-fix">
+.today-hub #allahNameCounterCard:not(.bw-task-done){
+  cursor:pointer !important;
+  -webkit-tap-highlight-color:rgba(215,192,122,.16) !important;
+}
+.today-hub #allahNameCounterCard:not(.bw-task-done)::before{
+  content:"";
+  position:absolute;
+  inset:0;
+  border-radius:inherit;
+  background:rgba(215,192,122,.04);
+  opacity:0;
+  pointer-events:none;
+  transition:opacity .14s ease;
+}
+.today-hub #allahNameCounterCard:not(.bw-task-done):active::before{
+  opacity:1;
+}
+.today-hub #allahNameCounterCard .bw-task-compact-meta[data-task-meta="name"]{
+  display:inline-flex !important;
+  align-items:center !important;
+  justify-content:center !important;
+  min-width:72px !important;
+  height:30px !important;
+  padding:4px 12px !important;
+  font-size:18px !important;
+  line-height:1 !important;
+  font-weight:950 !important;
+  letter-spacing:-.03em !important;
+  cursor:pointer !important;
+  user-select:none !important;
+  -webkit-user-select:none !important;
+}
+.today-hub #allahNameCounterCard:not(.bw-task-done) .bw-task-compact-meta[data-task-meta="name"]::after{
+  content:"+";
+  margin-left:7px;
+  font-size:16px;
+  color:#f1d889;
+  opacity:.85;
+}
+html[dir="rtl"] .today-hub #allahNameCounterCard:not(.bw-task-done) .bw-task-compact-meta[data-task-meta="name"]::after{
+  margin-left:0;
+  margin-right:7px;
+}
+</style>
+
 </head>
 <body>
 
@@ -8663,6 +8710,134 @@ window.addEventListener("DOMContentLoaded",function(){const installBtn=document.
   setInterval(applyAllStates, 1200);
 })();
 </script>
+
+<script id="bw-id-name-counter-direct-fix">
+(function(){
+  'use strict';
+
+  function dateKey(){
+    var d = new Date();
+    return d.getFullYear() + '-' + String(d.getMonth()+1).padStart(2,'0') + '-' + String(d.getDate()).padStart(2,'0');
+  }
+
+  function keys(){
+    var day = dateKey();
+    return {
+      count: 'barakaway_name_counter_id_v3_' + day,
+      done: 'barakaway_today_id_v3_' + day + '_name'
+    };
+  }
+
+  function getCount(){
+    try{
+      var k = keys();
+      var done = localStorage.getItem(k.done) === '1';
+      var n = parseInt(localStorage.getItem(k.count) || '0', 10) || 0;
+      n = Math.max(0, Math.min(100, n));
+      return done ? 100 : n;
+    }catch(e){ return 0; }
+  }
+
+  function setCount(n){
+    try{
+      var k = keys();
+      n = Math.max(0, Math.min(100, n));
+      localStorage.setItem(k.count, String(n));
+      if(n >= 100){
+        localStorage.setItem(k.done, '1');
+      }else{
+        localStorage.removeItem(k.done);
+      }
+    }catch(e){}
+  }
+
+  function updateNameCard(){
+    var card = document.getElementById('allahNameCounterCard');
+    if(!card) return;
+
+    var count = getCount();
+    var done = count >= 100;
+
+    var meta = card.querySelector('.bw-task-compact-meta[data-task-meta="name"]');
+    if(!meta){
+      meta = document.createElement('div');
+      meta.className = 'bw-task-compact-meta';
+      meta.setAttribute('data-task-meta','name');
+      var title = card.querySelector('.today-action-title');
+      if(title && title.parentElement) title.parentElement.appendChild(meta);
+      else card.appendChild(meta);
+    }
+
+    meta.textContent = count + '/100';
+    meta.style.display = 'inline-flex';
+
+    var status = document.getElementById('allahNameCounterValue');
+    if(status) status.textContent = done ? '✓' : (count + '/100');
+
+    var fill = document.getElementById('allahNameCounterFill');
+    if(fill) fill.style.width = count + '%';
+
+    card.classList.toggle('bw-task-done', done);
+    card.classList.toggle('task-done', done);
+    card.classList.toggle('goal-done', done);
+    card.classList.toggle('goal-urgent', !done);
+    card.setAttribute('aria-disabled', done ? 'true' : 'false');
+    if(!done) card.setAttribute('tabindex','0');
+  }
+
+  function incrementName(event){
+    var card = document.getElementById('allahNameCounterCard');
+    if(!card) return;
+    if(card.contains(event.target)){
+      var count = getCount();
+      if(count >= 100) return;
+      event.preventDefault();
+      event.stopPropagation();
+      event.stopImmediatePropagation();
+      setCount(count + 1);
+      updateNameCard();
+
+      var modalCount = document.getElementById('bwNameModalCount');
+      if(modalCount) modalCount.textContent = getCount() + '/100';
+      var modalBtn = document.getElementById('bwNameModalInc');
+      if(modalBtn) modalBtn.textContent = getCount() >= 100 ? '100 / 100' : '+1';
+      var completeBtn = document.querySelector('.bw-task-modal-overlay.is-open .bw-task-complete-btn');
+      if(completeBtn && document.querySelector('.bw-task-modal-card[data-task-key="name"]')){
+        completeBtn.disabled = getCount() < 100;
+      }
+    }
+  }
+
+  function bind(){
+    var card = document.getElementById('allahNameCounterCard');
+    if(!card || card.dataset.bwDirectNameCounterBound === '1') {
+      updateNameCard();
+      return;
+    }
+    card.dataset.bwDirectNameCounterBound = '1';
+
+    card.addEventListener('click', incrementName, true);
+    card.addEventListener('touchend', function(event){
+      incrementName(event);
+    }, {capture:true, passive:false});
+
+    card.addEventListener('keydown', function(event){
+      if(event.key === 'Enter' || event.key === ' '){
+        incrementName(event);
+      }
+    }, true);
+
+    updateNameCard();
+  }
+
+  if(document.readyState === 'loading') document.addEventListener('DOMContentLoaded', bind, {once:true});
+  else bind();
+
+  window.addEventListener('pageshow', bind);
+  setInterval(updateNameCard, 500);
+})();
+</script>
+
 </body>
 </html>
 
