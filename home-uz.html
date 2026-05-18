@@ -8979,184 +8979,153 @@ const TASK_PREFIX = "barakaway_today_uz_";
 })();
 </script>
 
-<style id="bw-final-visible-soft-pulse-v2">
-/* Final visible but soft pulse for every unfinished daily task, in original/free and all PRO themes */
-.today-hub .today-action:not(.bw-task-done):not(.task-done):not(.goal-done),
-html[class*="premium-theme-"] .today-hub .today-action:not(.bw-task-done):not(.task-done):not(.goal-done),
-body[class*="bw-theme-"] .today-hub .today-action:not(.bw-task-done):not(.task-done):not(.goal-done),
-body[class*="theme-"] .today-hub .today-action:not(.bw-task-done):not(.task-done):not(.goal-done){
-  border-color:rgba(255,95,95,.70) !important;
-  animation:bwFinalVisibleSoftPulseV2 1.28s ease-in-out infinite !important;
+<style id="bw-final-task-state-repair-v2-css">
+.today-hub .today-action.bw-final-done,
+.today-hub .today-action.bw-task-done,
+.today-hub .today-action.task-done,
+.today-hub .today-action.goal-done{
+  animation:none !important;
+  border-color:rgba(102,198,128,.46) !important;
+  background:linear-gradient(135deg,#13251e 0%,#142b22 55%,#153628 100%) !important;
+  box-shadow:0 12px 24px rgba(0,0,0,.18),0 0 20px rgba(45,122,70,.16),inset 0 1px 0 rgba(255,255,255,.04) !important;
+  cursor:default !important;
+}
+.today-hub .today-action.bw-final-done::before,
+.today-hub .today-action.bw-task-done::before,
+.today-hub .today-action.task-done::before,
+.today-hub .today-action.goal-done::before{content:none !important;display:none !important;}
+.today-hub .today-action:not(.bw-final-done):not(.bw-task-done):not(.task-done):not(.goal-done){
+  border-color:rgba(255,86,86,.42) !important;
+  animation:bwFinalTaskPulseRepairV2 1.45s ease-in-out infinite !important;
+  box-shadow:0 10px 24px rgba(0,0,0,.18),0 0 8px rgba(255,72,72,.18),inset 0 1px 0 rgba(255,255,255,.04) !important;
+}
+@keyframes bwFinalTaskPulseRepairV2{
+  0%,100%{border-color:rgba(255,86,86,.34) !important;box-shadow:0 10px 24px rgba(0,0,0,.18),0 0 6px rgba(255,72,72,.14),inset 0 1px 0 rgba(255,255,255,.04) !important;}
+  50%{border-color:rgba(255,122,122,.78) !important;box-shadow:0 10px 24px rgba(0,0,0,.18),0 0 15px rgba(255,72,72,.42),0 0 28px rgba(255,72,72,.22),inset 0 1px 0 rgba(255,255,255,.05) !important;}
+}
+.today-hub .bw-task-hint,.today-hub .bw-task-compact-hint{display:none !important;}
+</style>
+
+
+<script id="bw-final-task-state-repair-v2-js">
+(function(){
+'use strict';
+var LANG="uz";
+var MICRO_DATA=[{"q": "Islomning nechta ustuni bor?", "options": ["4", "5", "6"], "correct": 1, "meaning": "Islomning besh ustuni musulmon hayotining amaliy asosidir."}, {"q": "Islomning birinchi ustuni nima?", "options": ["Shahodat", "Ro‘za", "Zakot"], "correct": 0, "meaning": "Shahodat — iymon guvohligi va Islomga kirish asosidir."}, {"q": "Bir kunda nechta farz namoz bor?", "options": ["3", "5", "6"], "correct": 1, "meaning": "Besh vaqt namoz inson kunini Alloh bilan bog‘laydi."}, {"q": "Qaysi namoz tongda o‘qiladi?", "options": ["Shom", "Bomdod", "Xufton"], "correct": 1, "meaning": "Bomdod kunni ibodat bilan boshlaydi."}, {"q": "Quyosh botganidan keyin qaysi namoz o‘qiladi?", "options": ["Shom", "Peshin", "Asr"], "correct": 0, "meaning": "Shom namozi quyosh botganidan keyin boshlanadi."}, {"q": "Musulmon namozda qaysi tomonga yuzlanadi?", "options": ["Ka’baga", "Quyoshga", "Istalgan devorga"], "correct": 0, "meaning": "Qibla musulmonlarni yagona ibodat yo‘nalishida birlashtiradi."}, {"q": "Namozdan oldin nima kerak?", "options": ["Tahorat", "Ovqat", "Uyqu"], "correct": 0, "meaning": "Poklik namozning muhim shartidir."}, {"q": "Hanafiy mazhabida tahoratning nechta farzi bor?", "options": ["3", "4", "6"], "correct": 1, "meaning": "Bu asoslar tahoratni haqiqiy qiladi."}, {"q": "Niyat qayerda bo‘ladi?", "options": ["Qalbda", "Kiyimda", "Ovozda"], "correct": 0, "meaning": "Alloh niyatni so‘zsiz ham biladi."}, {"q": "Ataylab yolg‘on gapirish mumkinmi?", "options": ["Ha", "Yo‘q", "Sababsiz ba’zan"], "correct": 1, "meaning": "Rostgo‘ylik iymon va ishonchni mustahkamlaydi."}, {"q": "Bismillah nimani anglatadi?", "options": ["Alloh nomi bilan", "Rahmat", "Xayr"], "correct": 0, "meaning": "Musulmon ishni Alloh nomi bilan boshlaydi."}, {"q": "Alhamdulillah nimani anglatadi?", "options": ["Allohga hamd bo‘lsin", "Men roziman", "Kutaman"], "correct": 0, "meaning": "Shukr qalbni poklaydi va ne’matni qadrlatadi."}, {"q": "Sadaqa faqat pul bilan bo‘ladimi?", "options": ["Ha", "Yo‘q", "Faqat Ramazonda"], "correct": 1, "meaning": "Yaxshi so‘z, yordam va tabassum ham sadaqa bo‘lishi mumkin."}, {"q": "Ramazon oyida musulmonlar nima tutadi?", "options": ["Ro‘za", "Savdo", "Safar"], "correct": 0, "meaning": "Ro‘za nafsni tarbiyalaydi va taqvoni kuchaytiradi."}, {"q": "Qur’on kimning kalomi?", "options": ["Allohning kalomi", "Shoir so‘zi", "Tarix kitobi"], "correct": 0, "meaning": "Qur’on musulmonlar uchun hidoyat manbaidir."}, {"q": "?", "options": ["", "", "Alloh"], "correct": 2, "meaning": "do‘zax Alloh."}, {"q": "Alloh?", "options": ["", "", ""], "correct": 0, "meaning": "yaxshilik."}, {"q": "Alloh duo?", "options": ["", "", ""], "correct": 0, "meaning": "jim — Alloh qalb."}, {"q": "do‘zax — bu kun?", "options": ["", "", ""], "correct": 1, "meaning": ", yordam sadaqa."}, {"q": "— bu…", "options": ["do‘zax", "", ""], "correct": 0, "meaning": "yaxshilik."}, {"q": "— bu…", "options": ["uchun", "", ""], "correct": 0, "meaning": ", odamlarga."}, {"q": "qalb…", "options": ["", "", ""], "correct": 1, "meaning": "Alloh siz."}, {"q": "…", "options": ["", "", ""], "correct": 0, "meaning": "g‘azab —."}, {"q": "?", "options": ["", "", ""], "correct": 0, "meaning": "Alloh."}, {"q": "?", "options": ["", "Alloh", ""], "correct": 1, "meaning": "—, Alloh."}, {"q": "Ramazon — bu …", "options": ["ro‘za", "", ""], "correct": 0, "meaning": "Ramazon."}, {"q": "ro‘za Ramazon — bu…", "options": ["Islom", "", ""], "correct": 0, "meaning": "ro‘za — ibodat,."}, {"q": "— bu…", "options": ["", "", ""], "correct": 0, "meaning": "."}, {"q": "do‘zax ado qilinadi?", "options": ["", "", ""], "correct": 0, "meaning": "do‘zax."}, {"q": "Qur’on — bu…", "options": ["Alloh", "", ""], "correct": 0, "meaning": "Qur’on — hayot."}, {"q": "sura Qur’on — bu…", "options": ["-", "-", "-"], "correct": 0, "meaning": "- namoz Qur’on."}, {"q": "- …", "options": ["Alloh", "", ""], "correct": 0, "meaning": "— asos iymon musulmon."}, {"q": "Nechta ustun iymon?", "options": ["4", "5", "6"], "correct": 2, "meaning": "Alloh,,,, kun."}, {"q": "?", "options": ["", "", ""], "correct": 0, "meaning": "— iymon."}, {"q": "kun?", "options": ["", "", ""], "correct": 0, "meaning": "."}, {"q": "?", "options": ["", "", ""], "correct": 0, "meaning": "bir yaxshilik Alloh."}, {"q": "?", "options": ["", "", ""], "correct": 0, "meaning": "."}, {"q": "— bu…", "options": ["", "", "uyqu"], "correct": 0, "meaning": "inson Alloh."}, {"q": "Alloh?", "options": ["", "", ""], "correct": 0, "meaning": "."}, {"q": "— bu…", "options": ["", "poklik", ""], "correct": 0, "meaning": "do‘zax."}, {"q": "— bu…", "options": ["", "", ""], "correct": 0, "meaning": "amal do‘zax Alloh, do‘zax odamlarga."}, {"q": "— bu…", "options": ["", "", ""], "correct": 0, "meaning": "."}, {"q": "— bu…", "options": ["", "", ""], "correct": 0, "meaning": "."}, {"q": "— bu…", "options": ["Alloh", "", "odamlarga"], "correct": 0, "meaning": "Alloh."}, {"q": "?", "options": ["", "", ""], "correct": 0, "meaning": "—."}, {"q": "…", "options": ["", "", ""], "correct": 0, "meaning": "- —."}, {"q": "do‘zax?", "options": ["", "", ""], "correct": 0, "meaning": "odamlarga."}, {"q": "?", "options": ["", "", ""], "correct": 0, "meaning": "."}, {"q": "poklik Islom — bu…", "options": ["", "", ""], "correct": 0, "meaning": "poklik,,."}, {"q": "…", "options": ["", "", ""], "correct": 0, "meaning": "Alloh."}, {"q": "…", "options": ["", "", ""], "correct": 0, "meaning": "keyin."}, {"q": "…", "options": ["Alloh", "", ""], "correct": 0, "meaning": "oldin qalb."}, {"q": "…", "options": ["Alloh", "", ""], "correct": 0, "meaning": "kun —."}, {"q": "siz?", "options": ["", "", ""], "correct": 0, "meaning": "odamlarga."}, {"q": "— bu…", "options": ["", "", ""], "correct": 0, "meaning": ",,."}, {"q": "…", "options": ["", "", ""], "correct": 0, "meaning": "—."}, {"q": "?", "options": ["", "", ""], "correct": 0, "meaning": ",."}, {"q": "— bu…", "options": ["", "", ""], "correct": 0, "meaning": "."}, {"q": "inson, …", "options": ["", "", ""], "correct": 0, "meaning": "Alloh."}, {"q": "uchun siz — bu…", "options": ["", "", ""], "correct": 0, "meaning": "yaxshilik."}, {"q": "?", "options": ["", "", ""], "correct": 0, "meaning": "— bu."}, {"q": ":?", "options": ["", "", ""], "correct": 0, "meaning": "."}, {"q": "?", "options": ["do‘zax ﷺ", "عليه السلام", "عليه السلام"], "correct": 0, "meaning": "do‘zax ﷺ —."}, {"q": "?", "options": ["", "", ""], "correct": 0, "meaning": "— iymon."}, {"q": "?", "options": ["عليه السلام", "", ""], "correct": 0, "meaning": "عليه السلام Alloh."}, {"q": "عليه السلام …", "options": ["", "", ""], "correct": 0, "meaning": "Alloh oldin."}, {"q": "عليه السلام …", "options": ["", "", ""], "correct": 0, "meaning": "."}, {"q": "عليه السلام …", "options": ["", "", "do‘zax"], "correct": 0, "meaning": "— ibodat Alloh."}, {"q": "عليه السلام — bu…", "options": ["Alloh", "", ""], "correct": 0, "meaning": "."}, {"q": ", عليه السلام — bu…", "options": ["", "", ""], "correct": 0, "meaning": "— iymon."}, {"q": ", عليه السلام — bu…", "options": ["", "", "Qur’on"], "correct": 0, "meaning": "Alloh."}, {"q": "Qur’on …", "options": ["do‘zax ﷺ", "عليه السلام", "عليه السلام"], "correct": 0, "meaning": "Qur’on —."}, {"q": "عليه السلام — bu…", "options": ["", "", ""], "correct": 0, "meaning": "."}, {"q": "…", "options": ["", "namoz", "iymon"], "correct": 0, "meaning": ",."}, {"q": "?", "options": ["", "", ""], "correct": 0, "meaning": "Alloh —."}, {"q": "…", "options": ["", "", ""], "correct": 0, "meaning": "."}, {"q": "…", "options": ["", "", ""], "correct": 0, "meaning": ", qalb."}, {"q": "Islom?", "options": ["", "", ""], "correct": 0, "meaning": "."}, {"q": "Islom…", "options": ["", "", ""], "correct": 0, "meaning": "."}, {"q": "— bu…", "options": ["", "", ""], "correct": 0, "meaning": ",."}, {"q": "— bu…", "options": ["", "", ""], "correct": 0, "meaning": ",,."}, {"q": "?", "options": ["", "", ""], "correct": 0, "meaning": ",."}, {"q": "— bu…", "options": ["", "", ""], "correct": 0, "meaning": "."}, {"q": "“”?", "options": ["", "", ""], "correct": 0, "meaning": "Qur’on."}, {"q": "…", "options": ["", "", ""], "correct": 0, "meaning": "—."}, {"q": "inson …", "options": ["", "", ""], "correct": 0, "meaning": "Alloh."}, {"q": "?", "options": ["", "", ""], "correct": 0, "meaning": "Islom."}, {"q": "Islom …", "options": ["", "", ""], "correct": 0, "meaning": "—."}, {"q": "til…", "options": ["", "", ""], "correct": 0, "meaning": "."}, {"q": "…", "options": ["", "", "qo‘pol"], "correct": 0, "meaning": "qalb."}, {"q": ", …", "options": [":", "", ""], "correct": 0, "meaning": "“ ” —."}, {"q": "siz — bu…", "options": ["", "", ""], "correct": 0, "meaning": "siz."}, {"q": "…", "options": ["", "", ""], "correct": 0, "meaning": "do‘zax."}, {"q": "Qur’on …", "options": ["", "", ""], "correct": 0, "meaning": "Alloh, do‘zax."}, {"q": "Qur’on …", "options": ["", "", ""], "correct": 0, "meaning": "poklik."}, {"q": "…", "options": ["ﷺ", "", ""], "correct": 0, "meaning": "— ﷺ."}, {"q": "ﷺ …", "options": ["", "", ""], "correct": 0, "meaning": "do‘zax Alloh ﷺ."}, {"q": "— …", "options": ["", "", ""], "correct": 0, "meaning": "."}, {"q": "…", "options": ["", "", ""], "correct": 0, "meaning": "."}, {"q": "…", "options": ["", "", ""], "correct": 0, "meaning": "namozlar."}, {"q": "ro‘za …", "options": ["", "do‘zax", ""], "correct": 0, "meaning": "ro‘za sabr."}, {"q": "do‘zax …", "options": ["", "", ""], "correct": 0, "meaning": ", inson qalb."}, {"q": "…", "options": ["", "", ""], "correct": 0, "meaning": "Islom."}, {"q": "…", "options": ["", "siz", ""], "correct": 0, "meaning": "namoz —."}, {"q": "namoz siz?", "options": ["", "", ""], "correct": 0, "meaning": "—,."}, {"q": ", …", "options": ["", "", ""], "correct": 0, "meaning": "."}, {"q": "inson — bu, …", "options": ["g‘azab", "", ""], "correct": 0, "meaning": "— do‘zax."}, {"q": "do‘zax — bu…", "options": ["", "", ""], "correct": 0, "meaning": "do‘zax."}, {"q": "— bu…", "options": ["", "", ""], "correct": 0, "meaning": "."}, {"q": "?", "options": ["", "", ""], "correct": 0, "meaning": "odamlarga hatto."}, {"q": ", …", "options": ["", "", ""], "correct": 0, "meaning": ",."}, {"q": "yaxshilik …", "options": ["", "maqtov", ""], "correct": 0, "meaning": "yaxshilik."}, {"q": "yaxshilik, …", "options": ["", "", ""], "correct": 0, "meaning": "do‘zax Alloh."}, {"q": "uchun?", "options": ["Alloh", "", ""], "correct": 0, "meaning": "."}, {"q": "Alloh?", "options": ["", "", ""], "correct": 0, "meaning": "Alloh."}, {"q": "do‘zax Alloh …", "options": ["", "", ""], "correct": 0, "meaning": "do‘zax."}, {"q": "oldin Alloh …", "options": ["gunoh", "", ""], "correct": 0, "meaning": "."}, {"q": "Alloh …", "options": ["", "", ""], "correct": 0, "meaning": "."}, {"q": "…", "options": ["", "", ""], "correct": 0, "meaning": "Alloh qalb."}, {"q": "— bu…", "options": ["", "", ""], "correct": 0, "meaning": "asos iymon."}, {"q": "…", "options": ["Alloh", "", ""], "correct": 0, "meaning": "Alloh."}, {"q": "Alloh …", "options": ["Alloh", "", ""], "correct": 0, "meaning": ", Alloh."}, {"q": "…", "options": ["Alloh", "", ""], "correct": 0, "meaning": "asos."}, {"q": "…", "options": ["", "", ""], "correct": 0, "meaning": "—."}, {"q": "…", "options": ["", "", ""], "correct": 0, "meaning": "."}, {"q": "inson — bu…", "options": ["", "", ""], "correct": 0, "meaning": "."}, {"q": "?", "options": ["", "", ""], "correct": 0, "meaning": "inson."}, {"q": "?", "options": ["", "", ""], "correct": 0, "meaning": "."}, {"q": "…", "options": ["", "", ""], "correct": 0, "meaning": "hatto."}, {"q": "…", "options": ["", "", ""], "correct": 0, "meaning": "—."}, {"q": "hatto …", "options": [",", "", ""], "correct": 0, "meaning": "."}, {"q": ", bu…", "options": ["", "", ""], "correct": 0, "meaning": "do‘zax Alloh qalb."}, {"q": "?", "options": ["", "", ""], "correct": 0, "meaning": "— ibodat hayot."}, {"q": "sizni qo‘zg‘atishsa, …", "options": ["", "", ""], "correct": 0, "meaning": "."}, {"q": "— bu…", "options": ["", "", ""], "correct": 0, "meaning": "Islom."}, {"q": "?", "options": ["", "", ""], "correct": 0, "meaning": "."}, {"q": "— bu…", "options": ["", "", ""], "correct": 0, "meaning": "odamlarga."}, {"q": "poklik — bu…", "options": ["", "", "amal"], "correct": 0, "meaning": "."}, {"q": "inson, …", "options": ["", "", ""], "correct": 0, "meaning": "."}, {"q": "— bu…", "options": ["", "siz", ""], "correct": 0, "meaning": "."}, {"q": "…", "options": ["", "siz", ""], "correct": 0, "meaning": "oila."}, {"q": "yaxshilik Alloh…", "options": ["", "", ""], "correct": 0, "meaning": "amal."}, {"q": "yaxshilik?", "options": ["", "", ""], "correct": 0, "meaning": "Alloh, do‘zax."}, {"q": ", duo?", "options": ["", "", ""], "correct": 0, "meaning": "."}, {"q": "til?", "options": ["", "", ""], "correct": 0, "meaning": "Alloh."}, {"q": "do‘zax — bu…", "options": ["Alloh", "", ""], "correct": 0, "meaning": "—, — Alloh."}, {"q": ", …", "options": ["", "?", ""], "correct": 0, "meaning": "."}, {"q": "amal, …", "options": ["Alloh", "", ""], "correct": 0, "meaning": "inson Alloh."}, {"q": ", …", "options": ["", "", ""], "correct": 0, "meaning": "uchun qalb."}, {"q": "-, …", "options": ["", "", ""], "correct": 0, "meaning": "."}];
+var TASKS={article:'dailyArticleLink',adhkar:'currentAdhkarLink',name:'allahNameCounterCard',goal:'dailyGoalCard',micro:'dailyMicroKnowledgeCard'};
+function todayKey(){var d=new Date();return d.getFullYear()+'-'+String(d.getMonth()+1).padStart(2,'0')+'-'+String(d.getDate()).padStart(2,'0');}
+function finalDoneKey(task){return 'bw_final_done_v2_'+LANG+'_'+todayKey()+'_'+task;}
+function legacyDoneKeys(task){var day=todayKey();return['barakaway_today_'+LANG+'_'+day+'_'+task,'barakaway_today_'+LANG+'_v2_'+day+'_'+task,'barakaway_today_'+LANG+'_v3_'+day+'_'+task,'barakaway_today_'+LANG+'_final_'+day+'_'+task,'bw_daily_done_v2_'+LANG+'_'+day+'_'+task];}
+function isDone(task){try{if(localStorage.getItem(finalDoneKey(task))==='1')return true;return legacyDoneKeys(task).some(function(k){return localStorage.getItem(k)==='1';});}catch(e){return false;}}
+function setDone(task){try{localStorage.setItem(finalDoneKey(task),'1');legacyDoneKeys(task).forEach(function(k){localStorage.setItem(k,'1');});if(task==='name'){var day=todayKey();['barakaway_name_counter_'+LANG+'_'+day,'barakaway_name_counter_'+LANG+'_v2_'+day,'barakaway_name_counter_'+LANG+'_v3_'+day,'barakaway_name_counter_'+LANG+'_final_'+day,'barakaway_name_counter_'+day].forEach(function(k){localStorage.setItem(k,'100');});}}catch(e){}}
+function taskCard(task){return document.getElementById(TASKS[task]);}
+function taskFromElement(el){if(!el)return'';var modal=el.closest&&el.closest('.bw-task-modal-card');if(modal&&modal.getAttribute('data-task-key'))return modal.getAttribute('data-task-key');var card=el.closest&&el.closest('.today-action');if(card){for(var key in TASKS){if(card.id===TASKS[key])return key;}}return'';}
+function applyDone(task){var card=taskCard(task);if(!card)return;card.classList.add('bw-final-done','bw-task-done','task-done','goal-done');card.classList.remove('goal-urgent','task-urgent');card.setAttribute('aria-disabled','true');card.style.animation='none';var status=card.querySelector('.today-task-status');if(status)status.textContent='✓';var hint=card.querySelector('.bw-task-hint, .bw-task-compact-hint');if(hint)hint.style.display='none';if(task==='name'){var meta=card.querySelector('.bw-task-compact-meta[data-task-meta="name"]');if(meta)meta.textContent='100/100';var value=document.getElementById('allahNameCounterValue');if(value)value.textContent='✓';var fill=document.getElementById('allahNameCounterFill');if(fill)fill.style.width='100%';}}
+function applyAllDone(){Object.keys(TASKS).forEach(function(task){if(isDone(task))applyDone(task);});}
+function blockOpeningDoneCards(event){var card=event.target&&event.target.closest?event.target.closest('.today-action'):null;if(!card)return;var task=taskFromElement(card);if(task&&isDone(task)){applyDone(task);event.preventDefault();event.stopPropagation();if(event.stopImmediatePropagation)event.stopImmediatePropagation();return false;}}
+function norm(v){return(v||'').replace(/\s+/g,' ').trim();}
+function findMicroByQuestion(q){q=norm(q);for(var i=0;i<MICRO_DATA.length;i++){if(norm(MICRO_DATA[i].q)===q)return MICRO_DATA[i];}return null;}
+function repairMicroAnswer(btn){var modal=btn.closest('.bw-task-modal-card');if(!modal||modal.getAttribute('data-task-key')!=='micro')return;var qText=norm((modal.querySelector('.bw-task-modal-text')||{}).textContent||'');var item=findMicroByQuestion(qText);if(!item)return;var buttons=Array.from(modal.querySelectorAll('.bw-micro-option-btn'));buttons.forEach(function(node,index){node.classList.toggle('is-selected',index===Number(item.correct));});var note=modal.querySelector('#bwMicroAnswerNote');if(note){note.textContent=item.meaning||'';note.classList.add('is-visible');}var completeBtn=modal.querySelector('.bw-task-complete-btn');if(completeBtn)completeBtn.disabled=false;}
+document.addEventListener('click',function(event){blockOpeningDoneCards(event);var microBtn=event.target&&event.target.closest?event.target.closest('.bw-micro-option-btn'):null;if(microBtn)setTimeout(function(){repairMicroAnswer(microBtn);},0);var completeBtn=event.target&&event.target.closest?event.target.closest('.bw-task-complete-btn'):null;if(completeBtn&&!completeBtn.disabled){var task=taskFromElement(completeBtn);if(task){setDone(task);setTimeout(function(){applyDone(task);applyAllDone();},20);}}},true);
+document.addEventListener('pointerdown',blockOpeningDoneCards,true);
+document.addEventListener('touchstart',blockOpeningDoneCards,true);
+if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',applyAllDone,{once:true});else applyAllDone();
+window.addEventListener('pageshow',applyAllDone);setInterval(applyAllDone,700);
+})();
+</script>
+
+
+<style id="bw-all-five-cards-red-pulse-final">
+/* All 5 Today cards pulse red until their task is completed. Works in every theme. */
+.today-hub #dailyArticleLink:not(.bw-final-done):not(.bw-task-done):not(.task-done):not(.goal-done),
+.today-hub #currentAdhkarLink:not(.bw-final-done):not(.bw-task-done):not(.task-done):not(.goal-done),
+.today-hub #allahNameCounterCard:not(.bw-final-done):not(.bw-task-done):not(.task-done):not(.goal-done),
+.today-hub #dailyGoalCard:not(.bw-final-done):not(.bw-task-done):not(.task-done):not(.goal-done),
+.today-hub #dailyMicroKnowledgeCard:not(.bw-final-done):not(.bw-task-done):not(.task-done):not(.goal-done){
+  border-color:rgba(255,86,86,.52) !important;
+  animation:bwAllFiveRedPulseFinal 1.35s ease-in-out infinite !important;
   box-shadow:
     0 10px 24px rgba(0,0,0,.18),
-    0 0 10px rgba(255,70,70,.28),
+    0 0 10px rgba(255,72,72,.24),
     inset 0 1px 0 rgba(255,255,255,.04) !important;
-  will-change:box-shadow,border-color !important;
+  will-change:border-color,box-shadow !important;
 }
 
-@keyframes bwFinalVisibleSoftPulseV2{
+/* Same priority in PRO / premium themes */
+html[class*="premium-theme-"] .today-hub #dailyArticleLink:not(.bw-final-done):not(.bw-task-done):not(.task-done):not(.goal-done),
+html[class*="premium-theme-"] .today-hub #currentAdhkarLink:not(.bw-final-done):not(.bw-task-done):not(.task-done):not(.goal-done),
+html[class*="premium-theme-"] .today-hub #allahNameCounterCard:not(.bw-final-done):not(.bw-task-done):not(.task-done):not(.goal-done),
+html[class*="premium-theme-"] .today-hub #dailyGoalCard:not(.bw-final-done):not(.bw-task-done):not(.task-done):not(.goal-done),
+html[class*="premium-theme-"] .today-hub #dailyMicroKnowledgeCard:not(.bw-final-done):not(.bw-task-done):not(.task-done):not(.goal-done),
+body[class*="bw-theme-"] .today-hub #dailyArticleLink:not(.bw-final-done):not(.bw-task-done):not(.task-done):not(.goal-done),
+body[class*="bw-theme-"] .today-hub #currentAdhkarLink:not(.bw-final-done):not(.bw-task-done):not(.task-done):not(.goal-done),
+body[class*="bw-theme-"] .today-hub #allahNameCounterCard:not(.bw-final-done):not(.bw-task-done):not(.task-done):not(.goal-done),
+body[class*="bw-theme-"] .today-hub #dailyGoalCard:not(.bw-final-done):not(.bw-task-done):not(.task-done):not(.goal-done),
+body[class*="bw-theme-"] .today-hub #dailyMicroKnowledgeCard:not(.bw-final-done):not(.bw-task-done):not(.task-done):not(.goal-done),
+body[class*="theme-"] .today-hub #dailyArticleLink:not(.bw-final-done):not(.bw-task-done):not(.task-done):not(.goal-done),
+body[class*="theme-"] .today-hub #currentAdhkarLink:not(.bw-final-done):not(.bw-task-done):not(.task-done):not(.goal-done),
+body[class*="theme-"] .today-hub #allahNameCounterCard:not(.bw-final-done):not(.bw-task-done):not(.task-done):not(.goal-done),
+body[class*="theme-"] .today-hub #dailyGoalCard:not(.bw-final-done):not(.bw-task-done):not(.task-done):not(.goal-done),
+body[class*="theme-"] .today-hub #dailyMicroKnowledgeCard:not(.bw-final-done):not(.bw-task-done):not(.task-done):not(.goal-done){
+  border-color:rgba(255,86,86,.52) !important;
+  animation:bwAllFiveRedPulseFinal 1.35s ease-in-out infinite !important;
+  box-shadow:
+    0 10px 24px rgba(0,0,0,.18),
+    0 0 10px rgba(255,72,72,.24),
+    inset 0 1px 0 rgba(255,255,255,.04) !important;
+}
+
+@keyframes bwAllFiveRedPulseFinal{
   0%,100%{
-    border-color:rgba(255,82,82,.44) !important;
+    border-color:rgba(255,86,86,.36) !important;
     box-shadow:
       0 10px 24px rgba(0,0,0,.18),
-      0 0 6px rgba(255,70,70,.18),
+      0 0 6px rgba(255,72,72,.14),
       inset 0 1px 0 rgba(255,255,255,.04) !important;
   }
   50%{
-    border-color:rgba(255,126,126,.92) !important;
+    border-color:rgba(255,128,128,.88) !important;
     box-shadow:
       0 10px 24px rgba(0,0,0,.18),
-      0 0 18px rgba(255,70,70,.58),
-      0 0 34px rgba(255,70,70,.30),
+      0 0 18px rgba(255,72,72,.50),
+      0 0 34px rgba(255,72,72,.26),
       inset 0 1px 0 rgba(255,255,255,.05) !important;
   }
 }
 
+/* Completed cards never pulse. */
+.today-hub .today-action.bw-final-done,
 .today-hub .today-action.bw-task-done,
 .today-hub .today-action.task-done,
 .today-hub .today-action.goal-done{
   animation:none !important;
 }
-
-.today-hub .bw-task-hint,
-.today-hub .bw-task-compact-hint{
-  display:none !important;
-}
 </style>
 
 
-<script id="bw-final-daily-lock-visible-pulse-v2">
+<script id="bw-all-five-cards-pulse-sync-final">
 (function(){
-'use strict';
-
-var LANG = "uz";
-var DAY_KEY_PREFIX = 'bw_daily_done_v2_' + LANG + '_';
-
-function todayKey(){
-  var d = new Date();
-  return d.getFullYear() + '-' + String(d.getMonth()+1).padStart(2,'0') + '-' + String(d.getDate()).padStart(2,'0');
-}
-
-function doneKey(task){
-  return DAY_KEY_PREFIX + todayKey() + '_' + task;
-}
-
-function setDone(task){
-  try{
-    localStorage.setItem(doneKey(task), '1');
-
-    var day = todayKey();
-    var variants = [
-      'barakaway_today_' + LANG + '_' + day + '_' + task,
-      'barakaway_today_' + LANG + '_v2_' + day + '_' + task,
-      'barakaway_today_' + LANG + '_v3_' + day + '_' + task,
-      'barakaway_today_' + LANG + '_final_' + day + '_' + task
-    ];
-    variants.forEach(function(k){ localStorage.setItem(k, '1'); });
-
-    if(task === 'name'){
-      [
-        'barakaway_name_counter_' + LANG + '_' + day,
-        'barakaway_name_counter_' + LANG + '_v2_' + day,
-        'barakaway_name_counter_' + LANG + '_v3_' + day,
-        'barakaway_name_counter_' + LANG + '_final_' + day,
-        'barakaway_name_counter_' + day
-      ].forEach(function(k){ localStorage.setItem(k, '100'); });
-    }
-  }catch(e){}
-}
-
-function isDone(task){
-  try{
-    return localStorage.getItem(doneKey(task)) === '1' ||
-           localStorage.getItem('barakaway_today_' + LANG + '_v3_' + todayKey() + '_' + task) === '1' ||
-           localStorage.getItem('barakaway_today_' + LANG + '_final_' + todayKey() + '_' + task) === '1';
-  }catch(e){ return false; }
-}
-
-var map = {
-  article:'dailyArticleLink',
-  adhkar:'currentAdhkarLink',
-  name:'allahNameCounterCard',
-  goal:'dailyGoalCard',
-  micro:'dailyMicroKnowledgeCard'
-};
-
-function cardFor(task){
-  return document.getElementById(map[task]);
-}
-
-function applyDoneVisual(task){
-  var card = cardFor(task);
-  if(!card) return;
-  card.classList.add('bw-task-done','task-done','goal-done');
-  card.classList.remove('goal-urgent','task-urgent');
-  card.setAttribute('aria-disabled','true');
-  card.style.animation = 'none';
-
-  var status = card.querySelector('.today-task-status');
-  if(status) status.textContent = '✓';
-
-  if(task === 'name'){
-    var meta = card.querySelector('.bw-task-compact-meta[data-task-meta="name"]');
-    if(meta) meta.textContent = '100/100';
-    var value = document.getElementById('allahNameCounterValue');
-    if(value) value.textContent = '✓';
-    var fill = document.getElementById('allahNameCounterFill');
-    if(fill) fill.style.width = '100%';
-  }
-}
-
-function applyAll(){
-  Object.keys(map).forEach(function(task){
-    if(isDone(task)) applyDoneVisual(task);
-  });
-}
-
-function taskFromModal(modal){
-  if(!modal) return '';
-  return modal.getAttribute('data-task-key') || '';
-}
-
-document.addEventListener('click', function(event){
-  var complete = event.target && event.target.closest ? event.target.closest('.bw-task-complete-btn') : null;
-  if(complete){
-    var modal = complete.closest('.bw-task-modal-card');
-    var task = taskFromModal(modal);
-    if(task){
-      if(task === 'name'){
-        var text = (document.getElementById('bwNameModalCount') || {}).textContent || '';
-        var n = parseInt(text, 10) || 0;
-        if(n < 100 && !complete.disabled) n = 100;
-        if(n >= 100) setDone(task);
-      }else if(!complete.disabled){
-        setDone(task);
+  function syncPulseEligibility(){
+    ['dailyArticleLink','currentAdhkarLink','allahNameCounterCard','dailyGoalCard','dailyMicroKnowledgeCard'].forEach(function(id){
+      var card = document.getElementById(id);
+      if(!card) return;
+      var done = card.classList.contains('bw-final-done') ||
+                 card.classList.contains('bw-task-done') ||
+                 card.classList.contains('task-done') ||
+                 card.classList.contains('goal-done') ||
+                 card.getAttribute('aria-disabled') === 'true';
+      if(!done){
+        card.classList.remove('bw-final-done','bw-task-done','task-done','goal-done');
       }
-      setTimeout(applyAll, 30);
-    }
+    });
   }
-
-  var nameCard = cardFor('name');
-  if(nameCard && nameCard.contains(event.target)){
-    setTimeout(function(){
-      var meta = nameCard.querySelector('.bw-task-compact-meta[data-task-meta="name"]');
-      var raw = meta ? meta.textContent : '';
-      var n = parseInt(raw, 10) || 0;
-      if(n >= 100){
-        setDone('name');
-        applyAll();
-      }
-    }, 40);
+  if(document.readyState === 'loading'){
+    document.addEventListener('DOMContentLoaded', syncPulseEligibility, {once:true});
+  }else{
+    syncPulseEligibility();
   }
-}, true);
-
-if(document.readyState === 'loading'){
-  document.addEventListener('DOMContentLoaded', applyAll, {once:true});
-}else{
-  applyAll();
-}
-window.addEventListener('pageshow', applyAll);
-setInterval(applyAll, 700);
+  window.addEventListener('pageshow', syncPulseEligibility);
+  setInterval(syncPulseEligibility, 1000);
 })();
 </script>
 

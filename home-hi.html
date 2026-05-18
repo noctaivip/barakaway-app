@@ -9244,184 +9244,153 @@ const TASK_PREFIX = "barakaway_today_hi_";
 })();
 </script>
 
-<style id="bw-final-visible-soft-pulse-v2">
-/* Final visible but soft pulse for every unfinished daily task, in original/free and all PRO themes */
-.today-hub .today-action:not(.bw-task-done):not(.task-done):not(.goal-done),
-html[class*="premium-theme-"] .today-hub .today-action:not(.bw-task-done):not(.task-done):not(.goal-done),
-body[class*="bw-theme-"] .today-hub .today-action:not(.bw-task-done):not(.task-done):not(.goal-done),
-body[class*="theme-"] .today-hub .today-action:not(.bw-task-done):not(.task-done):not(.goal-done){
-  border-color:rgba(255,95,95,.70) !important;
-  animation:bwFinalVisibleSoftPulseV2 1.28s ease-in-out infinite !important;
+<style id="bw-final-task-state-repair-v2-css">
+.today-hub .today-action.bw-final-done,
+.today-hub .today-action.bw-task-done,
+.today-hub .today-action.task-done,
+.today-hub .today-action.goal-done{
+  animation:none !important;
+  border-color:rgba(102,198,128,.46) !important;
+  background:linear-gradient(135deg,#13251e 0%,#142b22 55%,#153628 100%) !important;
+  box-shadow:0 12px 24px rgba(0,0,0,.18),0 0 20px rgba(45,122,70,.16),inset 0 1px 0 rgba(255,255,255,.04) !important;
+  cursor:default !important;
+}
+.today-hub .today-action.bw-final-done::before,
+.today-hub .today-action.bw-task-done::before,
+.today-hub .today-action.task-done::before,
+.today-hub .today-action.goal-done::before{content:none !important;display:none !important;}
+.today-hub .today-action:not(.bw-final-done):not(.bw-task-done):not(.task-done):not(.goal-done){
+  border-color:rgba(255,86,86,.42) !important;
+  animation:bwFinalTaskPulseRepairV2 1.45s ease-in-out infinite !important;
+  box-shadow:0 10px 24px rgba(0,0,0,.18),0 0 8px rgba(255,72,72,.18),inset 0 1px 0 rgba(255,255,255,.04) !important;
+}
+@keyframes bwFinalTaskPulseRepairV2{
+  0%,100%{border-color:rgba(255,86,86,.34) !important;box-shadow:0 10px 24px rgba(0,0,0,.18),0 0 6px rgba(255,72,72,.14),inset 0 1px 0 rgba(255,255,255,.04) !important;}
+  50%{border-color:rgba(255,122,122,.78) !important;box-shadow:0 10px 24px rgba(0,0,0,.18),0 0 15px rgba(255,72,72,.42),0 0 28px rgba(255,72,72,.22),inset 0 1px 0 rgba(255,255,255,.05) !important;}
+}
+.today-hub .bw-task-hint,.today-hub .bw-task-compact-hint{display:none !important;}
+</style>
+
+
+<script id="bw-final-task-state-repair-v2-js">
+(function(){
+'use strict';
+var LANG="hi";
+var MICRO_DATA=[{"q": "इस्लाम के कितने स्तंभ हैं?", "options": ["4", "5", "6"], "correct": 1, "meaning": "इस्लाम के स्तंभ मुसलमान के अमल की बुनियाद हैं।"}, {"q": "इस्लाम का पहला स्तंभ क्या है?", "options": ["शहादा", "रोज़ा", "ज़कात"], "correct": 0, "meaning": "शहादा ईमान की गवाही और इस्लाम में प्रवेश है।"}, {"q": "दिन में कितनी फ़र्ज़ नमाज़ें हैं?", "options": ["3", "5", "7"], "correct": 1, "meaning": "पाँच नमाज़ें दिन को अल्लाह से जोड़ती हैं।"}, {"q": "सुबह की नमाज़ कौन सी है?", "options": ["फ़ज्र", "मग़रिब", "ईशा"], "correct": 0, "meaning": "फ़ज्र दिन की शुरुआत इबादत से करती है।"}, {"q": "सूर्यास्त के बाद कौन सी नमाज़ होती है?", "options": ["ज़ुहर", "मग़रिब", "फ़ज्र"], "correct": 1, "meaning": "मग़रिब सूर्यास्त के बाद होती है।"}, {"q": "नमाज़ में मुसलमान किस दिशा की ओर मुख करता है?", "options": ["काबा", "उत्तर", "कोई भी दिशा"], "correct": 0, "meaning": "काबा क़िब्ला है।"}, {"q": "रमज़ान में मुसलमान क्या रखते हैं?", "options": ["रोज़ा", "सिर्फ़ यात्रा", "व्यापार"], "correct": 0, "meaning": "रोज़ा तक़वा और आत्म-संयम सिखाता है।"}, {"q": "ज़कात किससे जुड़ी है?", "options": ["धन की पाकीज़गी", "मनोरंजन", "यात्रा"], "correct": 0, "meaning": "ज़कात माल को पाक करती है और जरूरतमंदों की मदद करती है।"}, {"q": "हज कहाँ किया जाता है?", "options": ["मक्का", "मदीना", "काहिरा"], "correct": 0, "meaning": "हज मक्का में किया जाता है।"}, {"q": "क़ुरआन किसकी किताब है?", "options": ["अल्लाह की", "मनुष्य की", "कवि की"], "correct": 0, "meaning": "क़ुरआन अल्लाह का कलाम है।"}, {"q": "अल्लाह को याद करना क्या कहलाता है?", "options": ["ज़िक्र", "ग़ीबत", "घमंड"], "correct": 0, "meaning": "ज़िक्र दिल को जीवित करता है।"}, {"q": "अच्छा चरित्र क्या कहलाता है?", "options": ["अख़लाक़", "रिबा", "रियाकारी"], "correct": 0, "meaning": "अख़लाक़ ईमान को व्यवहार में दिखाता है।"}, {"q": "सदक़ा कैसे देना बेहतर है?", "options": ["ईमानदारी से", "दिखावे के लिए", "ताने के साथ"], "correct": 0, "meaning": "सच्ची नीयत दान को मूल्यवान बनाती है।"}, {"q": "झूठ बोलना कैसा है?", "options": ["गलत", "अच्छा", "ज़रूरी"], "correct": 0, "meaning": "सच्चाई अच्छे चरित्र का हिस्सा है।"}, {"q": "माता-पिता से कैसा व्यवहार होना चाहिए?", "options": ["नरमी और सम्मान", "रूखापन", "उपेक्षा"], "correct": 0, "meaning": "माता-पिता का हक़ बड़ा है।"}, {"q": "पीठ पीछे बुराई करना क्या है?", "options": ["ग़ीबत", "सदक़ा", "सब्र"], "correct": 0, "meaning": "ग़ीबत से बचना जरूरी है।"}, {"q": "गुस्से में बेहतर काम क्या है?", "options": ["चुप रहना और सब्र", "अपमान करना", "चिल्लाना"], "correct": 0, "meaning": "गुस्से पर काबू मजबूत इबादत है।"}, {"q": "अमानत को क्या करना चाहिए?", "options": ["लौटाना", "छिपाना", "बेचना"], "correct": 0, "meaning": "अमानत ईमानदारी की कसौटी है।"}, {"q": "छोटी नेकी अल्लाह के पास कैसी है?", "options": ["क़ीमती", "बेकार", "मज़ाक"], "correct": 0, "meaning": "छोटी नेकी भी ईमानदारी से बड़ी हो सकती है।"}, {"q": "दुआ किससे की जाती है?", "options": ["अल्लाह से", "सिर्फ़ लोगों से", "भाग्य से"], "correct": 0, "meaning": "दिल का सहारा अल्लाह है।"}, {"q": "नेमत मिलने पर क्या कहना बेहतर है?", "options": ["अल्हम्दुलिल्लाह", "क्यों कम?", "यह सिर्फ़ मेरा है"], "correct": 0, "meaning": "शुक्र घमंड से बचाता है।"}, {"q": "काम की योजना बनाते समय क्या कहना अच्छा है?", "options": ["इन शा अल्लाह", "कभी नहीं", "महत्व नहीं"], "correct": 0, "meaning": "यह अल्लाह की मर्ज़ी को मानना है।"}, {"q": "सबसे अच्छा ज़िक्र कौन सा है?", "options": ["ला इलाहा इल्लल्लाह", "कठोर शब्द", "झगड़ा"], "correct": 0, "meaning": "यह तौहीद का मूल वाक्य है।"}, {"q": "सुब्हानअल्लाह का अर्थ क्या है?", "options": ["अल्लाह पाक है", "मैं थक गया", "धन्यवाद"], "correct": 0, "meaning": "इससे अल्लाह की पाकी बयान होती है।"}, {"q": "अल्लाहु अकबर का अर्थ क्या है?", "options": ["अल्लाह महान है", "मैं सही हूँ", "फिर मिलेंगे"], "correct": 0, "meaning": "यह याद दिलाता है कि अल्लाह सबसे बड़ा है।"}, {"q": "रिज़्क़ किससे है?", "options": ["अल्लाह से", "सिर्फ़ संयोग से", "सिर्फ़ लोगों से"], "correct": 0, "meaning": "कारण लोग हो सकते हैं, मगर देने वाला अल्लाह है।"}, {"q": "मुसलमान को व्यापार में कैसा होना चाहिए?", "options": ["ईमानदार", "धोखेबाज़", "कठोर"], "correct": 0, "meaning": "हलाल कमाई ईमानदारी चाहती है।"}, {"q": "न्याय किसके साथ जरूरी है?", "options": ["सबके साथ", "सिर्फ़ दोस्तों से", "किसी से नहीं"], "correct": 0, "meaning": "न्याय भावना पर निर्भर नहीं करता।"}, {"q": "जानवरों पर दया कैसी है?", "options": ["अच्छी", "महत्वहीन", "मना"], "correct": 0, "meaning": "इस्लाम में रहमत जानवरों तक भी पहुँचती है।"}, {"q": "रास्ते से तकलीफ हटाना क्या है?", "options": ["नेकी", "गुनाह", "बेकार"], "correct": 0, "meaning": "लोगों को लाभ पहुँचाना मूल्यवान है।"}, {"q": "परिवार क्या है?", "options": ["अमानत", "खेल", "बोझ"], "correct": 0, "meaning": "करीबियों का हक़ देखभाल और नरमी है।"}, {"q": "रिश्तेदारी को क्या करना चाहिए?", "options": ["जोड़े रखना", "तोड़ना", "नज़रअंदाज़ करना"], "correct": 0, "meaning": "रिश्ते सम्मान और देखभाल से मजबूत होते हैं।"}, {"q": "अगर गलती हो जाए तो बेहतर क्या है?", "options": ["नरमी से सुधारना", "बदनाम करना", "हँसना"], "correct": 0, "meaning": "नरम नसीहत अपमान से बेहतर है।"}, {"q": "अल्लाह की रहमत से निराश होना चाहिए?", "options": ["नहीं", "हाँ", "हमेशा"], "correct": 0, "meaning": "अल्लाह की रहमत तौबा करने वालों के लिए विस्तृत है।"}, {"q": "आशा किसके साथ होनी चाहिए?", "options": ["अमल के साथ", "आलस के साथ", "गुनाह के साथ"], "correct": 0, "meaning": "आशा मेहनत को खत्म नहीं करती।"}, {"q": "?", "options": ["", "", ""], "correct": 0, "meaning": "एक भलाई अल्लाह."}, {"q": "?", "options": ["", "", ""], "correct": 0, "meaning": "."}, {"q": "— है…", "options": ["", "", "नींद"], "correct": 0, "meaning": "इंसान अल्लाह."}, {"q": "अल्लाह?", "options": ["", "", ""], "correct": 0, "meaning": "."}, {"q": "— है…", "options": ["", "पवित्रता", ""], "correct": 0, "meaning": "जहन्नम."}, {"q": "— है…", "options": ["", "", ""], "correct": 0, "meaning": "काम जहन्नम अल्लाह, जहन्नम लोगों."}, {"q": "— है…", "options": ["", "", ""], "correct": 0, "meaning": "."}, {"q": "— है…", "options": ["", "", ""], "correct": 0, "meaning": "."}, {"q": "— है…", "options": ["अल्लाह", "", "लोगों"], "correct": 0, "meaning": "अल्लाह."}, {"q": "?", "options": ["", "", ""], "correct": 0, "meaning": "—."}, {"q": "…", "options": ["", "", ""], "correct": 0, "meaning": "- —."}, {"q": "जहन्नम?", "options": ["", "", ""], "correct": 0, "meaning": "लोगों."}, {"q": "?", "options": ["", "", ""], "correct": 0, "meaning": "."}, {"q": "पवित्रता इस्लाम — है…", "options": ["", "", ""], "correct": 0, "meaning": "पवित्रता,,."}, {"q": "…", "options": ["", "", ""], "correct": 0, "meaning": "अल्लाह."}, {"q": "…", "options": ["", "", ""], "correct": 0, "meaning": "बाद."}, {"q": "…", "options": ["अल्लाह", "", ""], "correct": 0, "meaning": "पहले दिल."}, {"q": "…", "options": ["अल्लाह", "", ""], "correct": 0, "meaning": "दिन —."}, {"q": "बिना?", "options": ["", "", ""], "correct": 0, "meaning": "लोगों."}, {"q": "— है…", "options": ["", "", ""], "correct": 0, "meaning": ",,."}, {"q": "…", "options": ["", "", ""], "correct": 0, "meaning": "—."}, {"q": "?", "options": ["", "", ""], "correct": 0, "meaning": ",."}, {"q": "— है…", "options": ["", "", ""], "correct": 0, "meaning": "."}, {"q": "इंसान, …", "options": ["", "", ""], "correct": 0, "meaning": "अल्लाह."}, {"q": "के लिए बिना — है…", "options": ["", "", ""], "correct": 0, "meaning": "भलाई."}, {"q": "?", "options": ["", "", ""], "correct": 0, "meaning": "— है."}, {"q": ":?", "options": ["", "", ""], "correct": 0, "meaning": "."}, {"q": "?", "options": ["जहन्नम ﷺ", "عليه السلام", "عليه السلام"], "correct": 0, "meaning": "जहन्नम ﷺ —."}, {"q": "?", "options": ["", "", ""], "correct": 0, "meaning": "— ईमान."}, {"q": "?", "options": ["عليه السلام", "", ""], "correct": 0, "meaning": "عليه السلام अल्लाह."}, {"q": "عليه السلام …", "options": ["", "", ""], "correct": 0, "meaning": "अल्लाह पहले."}, {"q": "عليه السلام …", "options": ["", "", ""], "correct": 0, "meaning": "."}, {"q": "عليه السلام …", "options": ["", "", "जहन्नम"], "correct": 0, "meaning": "— इबादत अल्लाह."}, {"q": "عليه السلام — है…", "options": ["अल्लाह", "", ""], "correct": 0, "meaning": "."}, {"q": ", عليه السلام — है…", "options": ["", "", ""], "correct": 0, "meaning": "— ईमान."}, {"q": ", عليه السلام — है…", "options": ["", "", "क़ुरआन"], "correct": 0, "meaning": "अल्लाह."}, {"q": "क़ुरआन …", "options": ["जहन्नम ﷺ", "عليه السلام", "عليه السلام"], "correct": 0, "meaning": "क़ुरआन —."}, {"q": "عليه السلام — है…", "options": ["", "", ""], "correct": 0, "meaning": "."}, {"q": "…", "options": ["", "नमाज़", "ईमान"], "correct": 0, "meaning": ",."}, {"q": "?", "options": ["", "", ""], "correct": 0, "meaning": "अल्लाह —."}, {"q": "…", "options": ["", "", ""], "correct": 0, "meaning": "."}, {"q": "…", "options": ["", "", ""], "correct": 0, "meaning": ", दिल."}, {"q": "इस्लाम?", "options": ["", "", ""], "correct": 0, "meaning": "."}, {"q": "इस्लाम…", "options": ["", "", ""], "correct": 0, "meaning": "."}, {"q": "— है…", "options": ["", "", ""], "correct": 0, "meaning": ",."}, {"q": "— है…", "options": ["", "", ""], "correct": 0, "meaning": ",,."}, {"q": "?", "options": ["", "", ""], "correct": 0, "meaning": ",."}, {"q": "— है…", "options": ["", "", ""], "correct": 0, "meaning": "."}, {"q": "“”?", "options": ["", "", ""], "correct": 0, "meaning": "क़ुरआन."}, {"q": "…", "options": ["", "", ""], "correct": 0, "meaning": "—."}, {"q": "इंसान …", "options": ["", "", ""], "correct": 0, "meaning": "अल्लाह."}, {"q": "?", "options": ["", "", ""], "correct": 0, "meaning": "इस्लाम."}, {"q": "इस्लाम …", "options": ["", "", ""], "correct": 0, "meaning": "—."}, {"q": "ज़ुबान…", "options": ["", "", ""], "correct": 0, "meaning": "."}, {"q": "…", "options": ["", "", "कठोरता से"], "correct": 0, "meaning": "दिल."}, {"q": ", …", "options": [":", "", ""], "correct": 0, "meaning": "“ ” —."}, {"q": "बिना — है…", "options": ["", "", ""], "correct": 0, "meaning": "बिना."}, {"q": "…", "options": ["", "", ""], "correct": 0, "meaning": "जहन्नम."}, {"q": "क़ुरआन …", "options": ["", "", ""], "correct": 0, "meaning": "अल्लाह, जहन्नम."}, {"q": "क़ुरआन …", "options": ["", "", ""], "correct": 0, "meaning": "पवित्रता."}, {"q": "…", "options": ["ﷺ", "", ""], "correct": 0, "meaning": "— ﷺ."}, {"q": "ﷺ …", "options": ["", "", ""], "correct": 0, "meaning": "जहन्नम अल्लाह ﷺ."}, {"q": "— …", "options": ["", "", ""], "correct": 0, "meaning": "."}, {"q": "…", "options": ["", "", ""], "correct": 0, "meaning": "."}, {"q": "…", "options": ["", "", ""], "correct": 0, "meaning": "नमाज़ों."}, {"q": "रोज़ा …", "options": ["", "जहन्नम", ""], "correct": 0, "meaning": "रोज़ा सब्र."}, {"q": "जहन्नम …", "options": ["", "", ""], "correct": 0, "meaning": ", इंसान दिल."}, {"q": "…", "options": ["", "", ""], "correct": 0, "meaning": "इस्लाम."}, {"q": "…", "options": ["", "बिना", ""], "correct": 0, "meaning": "नमाज़ —."}, {"q": "नमाज़ बिना?", "options": ["", "", ""], "correct": 0, "meaning": "—,."}, {"q": ", …", "options": ["", "", ""], "correct": 0, "meaning": "."}, {"q": "इंसान — है, …", "options": ["ग़ुस्सा", "", ""], "correct": 0, "meaning": "— जहन्नम."}, {"q": "जहन्नम — है…", "options": ["", "", ""], "correct": 0, "meaning": "जहन्नम."}, {"q": "— है…", "options": ["", "", ""], "correct": 0, "meaning": "."}, {"q": "?", "options": ["", "", ""], "correct": 0, "meaning": "लोगों भले ही."}, {"q": ", …", "options": ["", "", ""], "correct": 0, "meaning": ",."}, {"q": "भलाई …", "options": ["", "प्रशंसा", ""], "correct": 0, "meaning": "भलाई."}, {"q": "भलाई, …", "options": ["", "", ""], "correct": 0, "meaning": "जहन्नम अल्लाह."}, {"q": "के लिए?", "options": ["अल्लाह", "", ""], "correct": 0, "meaning": "."}, {"q": "अल्लाह?", "options": ["", "", ""], "correct": 0, "meaning": "अल्लाह."}, {"q": "जहन्नम अल्लाह …", "options": ["", "", ""], "correct": 0, "meaning": "जहन्नम."}, {"q": "पहले अल्लाह …", "options": ["गुनाह", "", ""], "correct": 0, "meaning": "."}, {"q": "अल्लाह …", "options": ["", "", ""], "correct": 0, "meaning": "."}, {"q": "…", "options": ["", "", ""], "correct": 0, "meaning": "अल्लाह दिल."}, {"q": "— है…", "options": ["", "", ""], "correct": 0, "meaning": "आधार ईमान."}, {"q": "…", "options": ["अल्लाह", "", ""], "correct": 0, "meaning": "अल्लाह."}, {"q": "अल्लाह …", "options": ["अल्लाह", "", ""], "correct": 0, "meaning": ", अल्लाह."}, {"q": "…", "options": ["अल्लाह", "", ""], "correct": 0, "meaning": "आधार."}, {"q": "…", "options": ["", "", ""], "correct": 0, "meaning": "—."}, {"q": "…", "options": ["", "", ""], "correct": 0, "meaning": "."}, {"q": "इंसान — है…", "options": ["", "", ""], "correct": 0, "meaning": "."}, {"q": "?", "options": ["", "", ""], "correct": 0, "meaning": "इंसान."}, {"q": "?", "options": ["", "", ""], "correct": 0, "meaning": "."}, {"q": "…", "options": ["", "", ""], "correct": 0, "meaning": "भले ही."}, {"q": "…", "options": ["", "", ""], "correct": 0, "meaning": "—."}, {"q": "भले ही …", "options": [",", "", ""], "correct": 0, "meaning": "."}, {"q": ", है…", "options": ["", "", ""], "correct": 0, "meaning": "जहन्नम अल्लाह दिल."}, {"q": "?", "options": ["", "", ""], "correct": 0, "meaning": "— इबादत जीवन."}, {"q": "तुम्हें उकसाया जाए, …", "options": ["", "", ""], "correct": 0, "meaning": "."}, {"q": "— है…", "options": ["", "", ""], "correct": 0, "meaning": "इस्लाम."}, {"q": "?", "options": ["", "", ""], "correct": 0, "meaning": "."}, {"q": "— है…", "options": ["", "", ""], "correct": 0, "meaning": "लोगों."}, {"q": "पवित्रता — है…", "options": ["", "", "काम"], "correct": 0, "meaning": "."}, {"q": "इंसान, …", "options": ["", "", ""], "correct": 0, "meaning": "."}, {"q": "— है…", "options": ["", "बिना", ""], "correct": 0, "meaning": "."}, {"q": "…", "options": ["", "बिना", ""], "correct": 0, "meaning": "परिवार."}, {"q": "भलाई अल्लाह…", "options": ["", "", ""], "correct": 0, "meaning": "काम."}, {"q": "भलाई?", "options": ["", "", ""], "correct": 0, "meaning": "अल्लाह, जहन्नम."}, {"q": ", दुआ?", "options": ["", "", ""], "correct": 0, "meaning": "."}, {"q": "ज़ुबान?", "options": ["", "", ""], "correct": 0, "meaning": "अल्लाह."}, {"q": "जहन्नम — है…", "options": ["अल्लाह", "", ""], "correct": 0, "meaning": "—, — अल्लाह."}, {"q": ", …", "options": ["", "?", ""], "correct": 0, "meaning": "."}, {"q": "काम, …", "options": ["अल्लाह", "", ""], "correct": 0, "meaning": "इंसान अल्लाह."}, {"q": ", …", "options": ["", "", ""], "correct": 0, "meaning": "के लिए दिल."}, {"q": "-, …", "options": ["", "", ""], "correct": 0, "meaning": "."}];
+var TASKS={article:'dailyArticleLink',adhkar:'currentAdhkarLink',name:'allahNameCounterCard',goal:'dailyGoalCard',micro:'dailyMicroKnowledgeCard'};
+function todayKey(){var d=new Date();return d.getFullYear()+'-'+String(d.getMonth()+1).padStart(2,'0')+'-'+String(d.getDate()).padStart(2,'0');}
+function finalDoneKey(task){return 'bw_final_done_v2_'+LANG+'_'+todayKey()+'_'+task;}
+function legacyDoneKeys(task){var day=todayKey();return['barakaway_today_'+LANG+'_'+day+'_'+task,'barakaway_today_'+LANG+'_v2_'+day+'_'+task,'barakaway_today_'+LANG+'_v3_'+day+'_'+task,'barakaway_today_'+LANG+'_final_'+day+'_'+task,'bw_daily_done_v2_'+LANG+'_'+day+'_'+task];}
+function isDone(task){try{if(localStorage.getItem(finalDoneKey(task))==='1')return true;return legacyDoneKeys(task).some(function(k){return localStorage.getItem(k)==='1';});}catch(e){return false;}}
+function setDone(task){try{localStorage.setItem(finalDoneKey(task),'1');legacyDoneKeys(task).forEach(function(k){localStorage.setItem(k,'1');});if(task==='name'){var day=todayKey();['barakaway_name_counter_'+LANG+'_'+day,'barakaway_name_counter_'+LANG+'_v2_'+day,'barakaway_name_counter_'+LANG+'_v3_'+day,'barakaway_name_counter_'+LANG+'_final_'+day,'barakaway_name_counter_'+day].forEach(function(k){localStorage.setItem(k,'100');});}}catch(e){}}
+function taskCard(task){return document.getElementById(TASKS[task]);}
+function taskFromElement(el){if(!el)return'';var modal=el.closest&&el.closest('.bw-task-modal-card');if(modal&&modal.getAttribute('data-task-key'))return modal.getAttribute('data-task-key');var card=el.closest&&el.closest('.today-action');if(card){for(var key in TASKS){if(card.id===TASKS[key])return key;}}return'';}
+function applyDone(task){var card=taskCard(task);if(!card)return;card.classList.add('bw-final-done','bw-task-done','task-done','goal-done');card.classList.remove('goal-urgent','task-urgent');card.setAttribute('aria-disabled','true');card.style.animation='none';var status=card.querySelector('.today-task-status');if(status)status.textContent='✓';var hint=card.querySelector('.bw-task-hint, .bw-task-compact-hint');if(hint)hint.style.display='none';if(task==='name'){var meta=card.querySelector('.bw-task-compact-meta[data-task-meta="name"]');if(meta)meta.textContent='100/100';var value=document.getElementById('allahNameCounterValue');if(value)value.textContent='✓';var fill=document.getElementById('allahNameCounterFill');if(fill)fill.style.width='100%';}}
+function applyAllDone(){Object.keys(TASKS).forEach(function(task){if(isDone(task))applyDone(task);});}
+function blockOpeningDoneCards(event){var card=event.target&&event.target.closest?event.target.closest('.today-action'):null;if(!card)return;var task=taskFromElement(card);if(task&&isDone(task)){applyDone(task);event.preventDefault();event.stopPropagation();if(event.stopImmediatePropagation)event.stopImmediatePropagation();return false;}}
+function norm(v){return(v||'').replace(/\s+/g,' ').trim();}
+function findMicroByQuestion(q){q=norm(q);for(var i=0;i<MICRO_DATA.length;i++){if(norm(MICRO_DATA[i].q)===q)return MICRO_DATA[i];}return null;}
+function repairMicroAnswer(btn){var modal=btn.closest('.bw-task-modal-card');if(!modal||modal.getAttribute('data-task-key')!=='micro')return;var qText=norm((modal.querySelector('.bw-task-modal-text')||{}).textContent||'');var item=findMicroByQuestion(qText);if(!item)return;var buttons=Array.from(modal.querySelectorAll('.bw-micro-option-btn'));buttons.forEach(function(node,index){node.classList.toggle('is-selected',index===Number(item.correct));});var note=modal.querySelector('#bwMicroAnswerNote');if(note){note.textContent=item.meaning||'';note.classList.add('is-visible');}var completeBtn=modal.querySelector('.bw-task-complete-btn');if(completeBtn)completeBtn.disabled=false;}
+document.addEventListener('click',function(event){blockOpeningDoneCards(event);var microBtn=event.target&&event.target.closest?event.target.closest('.bw-micro-option-btn'):null;if(microBtn)setTimeout(function(){repairMicroAnswer(microBtn);},0);var completeBtn=event.target&&event.target.closest?event.target.closest('.bw-task-complete-btn'):null;if(completeBtn&&!completeBtn.disabled){var task=taskFromElement(completeBtn);if(task){setDone(task);setTimeout(function(){applyDone(task);applyAllDone();},20);}}},true);
+document.addEventListener('pointerdown',blockOpeningDoneCards,true);
+document.addEventListener('touchstart',blockOpeningDoneCards,true);
+if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',applyAllDone,{once:true});else applyAllDone();
+window.addEventListener('pageshow',applyAllDone);setInterval(applyAllDone,700);
+})();
+</script>
+
+
+<style id="bw-all-five-cards-red-pulse-final">
+/* All 5 Today cards pulse red until their task is completed. Works in every theme. */
+.today-hub #dailyArticleLink:not(.bw-final-done):not(.bw-task-done):not(.task-done):not(.goal-done),
+.today-hub #currentAdhkarLink:not(.bw-final-done):not(.bw-task-done):not(.task-done):not(.goal-done),
+.today-hub #allahNameCounterCard:not(.bw-final-done):not(.bw-task-done):not(.task-done):not(.goal-done),
+.today-hub #dailyGoalCard:not(.bw-final-done):not(.bw-task-done):not(.task-done):not(.goal-done),
+.today-hub #dailyMicroKnowledgeCard:not(.bw-final-done):not(.bw-task-done):not(.task-done):not(.goal-done){
+  border-color:rgba(255,86,86,.52) !important;
+  animation:bwAllFiveRedPulseFinal 1.35s ease-in-out infinite !important;
   box-shadow:
     0 10px 24px rgba(0,0,0,.18),
-    0 0 10px rgba(255,70,70,.28),
+    0 0 10px rgba(255,72,72,.24),
     inset 0 1px 0 rgba(255,255,255,.04) !important;
-  will-change:box-shadow,border-color !important;
+  will-change:border-color,box-shadow !important;
 }
 
-@keyframes bwFinalVisibleSoftPulseV2{
+/* Same priority in PRO / premium themes */
+html[class*="premium-theme-"] .today-hub #dailyArticleLink:not(.bw-final-done):not(.bw-task-done):not(.task-done):not(.goal-done),
+html[class*="premium-theme-"] .today-hub #currentAdhkarLink:not(.bw-final-done):not(.bw-task-done):not(.task-done):not(.goal-done),
+html[class*="premium-theme-"] .today-hub #allahNameCounterCard:not(.bw-final-done):not(.bw-task-done):not(.task-done):not(.goal-done),
+html[class*="premium-theme-"] .today-hub #dailyGoalCard:not(.bw-final-done):not(.bw-task-done):not(.task-done):not(.goal-done),
+html[class*="premium-theme-"] .today-hub #dailyMicroKnowledgeCard:not(.bw-final-done):not(.bw-task-done):not(.task-done):not(.goal-done),
+body[class*="bw-theme-"] .today-hub #dailyArticleLink:not(.bw-final-done):not(.bw-task-done):not(.task-done):not(.goal-done),
+body[class*="bw-theme-"] .today-hub #currentAdhkarLink:not(.bw-final-done):not(.bw-task-done):not(.task-done):not(.goal-done),
+body[class*="bw-theme-"] .today-hub #allahNameCounterCard:not(.bw-final-done):not(.bw-task-done):not(.task-done):not(.goal-done),
+body[class*="bw-theme-"] .today-hub #dailyGoalCard:not(.bw-final-done):not(.bw-task-done):not(.task-done):not(.goal-done),
+body[class*="bw-theme-"] .today-hub #dailyMicroKnowledgeCard:not(.bw-final-done):not(.bw-task-done):not(.task-done):not(.goal-done),
+body[class*="theme-"] .today-hub #dailyArticleLink:not(.bw-final-done):not(.bw-task-done):not(.task-done):not(.goal-done),
+body[class*="theme-"] .today-hub #currentAdhkarLink:not(.bw-final-done):not(.bw-task-done):not(.task-done):not(.goal-done),
+body[class*="theme-"] .today-hub #allahNameCounterCard:not(.bw-final-done):not(.bw-task-done):not(.task-done):not(.goal-done),
+body[class*="theme-"] .today-hub #dailyGoalCard:not(.bw-final-done):not(.bw-task-done):not(.task-done):not(.goal-done),
+body[class*="theme-"] .today-hub #dailyMicroKnowledgeCard:not(.bw-final-done):not(.bw-task-done):not(.task-done):not(.goal-done){
+  border-color:rgba(255,86,86,.52) !important;
+  animation:bwAllFiveRedPulseFinal 1.35s ease-in-out infinite !important;
+  box-shadow:
+    0 10px 24px rgba(0,0,0,.18),
+    0 0 10px rgba(255,72,72,.24),
+    inset 0 1px 0 rgba(255,255,255,.04) !important;
+}
+
+@keyframes bwAllFiveRedPulseFinal{
   0%,100%{
-    border-color:rgba(255,82,82,.44) !important;
+    border-color:rgba(255,86,86,.36) !important;
     box-shadow:
       0 10px 24px rgba(0,0,0,.18),
-      0 0 6px rgba(255,70,70,.18),
+      0 0 6px rgba(255,72,72,.14),
       inset 0 1px 0 rgba(255,255,255,.04) !important;
   }
   50%{
-    border-color:rgba(255,126,126,.92) !important;
+    border-color:rgba(255,128,128,.88) !important;
     box-shadow:
       0 10px 24px rgba(0,0,0,.18),
-      0 0 18px rgba(255,70,70,.58),
-      0 0 34px rgba(255,70,70,.30),
+      0 0 18px rgba(255,72,72,.50),
+      0 0 34px rgba(255,72,72,.26),
       inset 0 1px 0 rgba(255,255,255,.05) !important;
   }
 }
 
+/* Completed cards never pulse. */
+.today-hub .today-action.bw-final-done,
 .today-hub .today-action.bw-task-done,
 .today-hub .today-action.task-done,
 .today-hub .today-action.goal-done{
   animation:none !important;
 }
-
-.today-hub .bw-task-hint,
-.today-hub .bw-task-compact-hint{
-  display:none !important;
-}
 </style>
 
 
-<script id="bw-final-daily-lock-visible-pulse-v2">
+<script id="bw-all-five-cards-pulse-sync-final">
 (function(){
-'use strict';
-
-var LANG = "hi";
-var DAY_KEY_PREFIX = 'bw_daily_done_v2_' + LANG + '_';
-
-function todayKey(){
-  var d = new Date();
-  return d.getFullYear() + '-' + String(d.getMonth()+1).padStart(2,'0') + '-' + String(d.getDate()).padStart(2,'0');
-}
-
-function doneKey(task){
-  return DAY_KEY_PREFIX + todayKey() + '_' + task;
-}
-
-function setDone(task){
-  try{
-    localStorage.setItem(doneKey(task), '1');
-
-    var day = todayKey();
-    var variants = [
-      'barakaway_today_' + LANG + '_' + day + '_' + task,
-      'barakaway_today_' + LANG + '_v2_' + day + '_' + task,
-      'barakaway_today_' + LANG + '_v3_' + day + '_' + task,
-      'barakaway_today_' + LANG + '_final_' + day + '_' + task
-    ];
-    variants.forEach(function(k){ localStorage.setItem(k, '1'); });
-
-    if(task === 'name'){
-      [
-        'barakaway_name_counter_' + LANG + '_' + day,
-        'barakaway_name_counter_' + LANG + '_v2_' + day,
-        'barakaway_name_counter_' + LANG + '_v3_' + day,
-        'barakaway_name_counter_' + LANG + '_final_' + day,
-        'barakaway_name_counter_' + day
-      ].forEach(function(k){ localStorage.setItem(k, '100'); });
-    }
-  }catch(e){}
-}
-
-function isDone(task){
-  try{
-    return localStorage.getItem(doneKey(task)) === '1' ||
-           localStorage.getItem('barakaway_today_' + LANG + '_v3_' + todayKey() + '_' + task) === '1' ||
-           localStorage.getItem('barakaway_today_' + LANG + '_final_' + todayKey() + '_' + task) === '1';
-  }catch(e){ return false; }
-}
-
-var map = {
-  article:'dailyArticleLink',
-  adhkar:'currentAdhkarLink',
-  name:'allahNameCounterCard',
-  goal:'dailyGoalCard',
-  micro:'dailyMicroKnowledgeCard'
-};
-
-function cardFor(task){
-  return document.getElementById(map[task]);
-}
-
-function applyDoneVisual(task){
-  var card = cardFor(task);
-  if(!card) return;
-  card.classList.add('bw-task-done','task-done','goal-done');
-  card.classList.remove('goal-urgent','task-urgent');
-  card.setAttribute('aria-disabled','true');
-  card.style.animation = 'none';
-
-  var status = card.querySelector('.today-task-status');
-  if(status) status.textContent = '✓';
-
-  if(task === 'name'){
-    var meta = card.querySelector('.bw-task-compact-meta[data-task-meta="name"]');
-    if(meta) meta.textContent = '100/100';
-    var value = document.getElementById('allahNameCounterValue');
-    if(value) value.textContent = '✓';
-    var fill = document.getElementById('allahNameCounterFill');
-    if(fill) fill.style.width = '100%';
-  }
-}
-
-function applyAll(){
-  Object.keys(map).forEach(function(task){
-    if(isDone(task)) applyDoneVisual(task);
-  });
-}
-
-function taskFromModal(modal){
-  if(!modal) return '';
-  return modal.getAttribute('data-task-key') || '';
-}
-
-document.addEventListener('click', function(event){
-  var complete = event.target && event.target.closest ? event.target.closest('.bw-task-complete-btn') : null;
-  if(complete){
-    var modal = complete.closest('.bw-task-modal-card');
-    var task = taskFromModal(modal);
-    if(task){
-      if(task === 'name'){
-        var text = (document.getElementById('bwNameModalCount') || {}).textContent || '';
-        var n = parseInt(text, 10) || 0;
-        if(n < 100 && !complete.disabled) n = 100;
-        if(n >= 100) setDone(task);
-      }else if(!complete.disabled){
-        setDone(task);
+  function syncPulseEligibility(){
+    ['dailyArticleLink','currentAdhkarLink','allahNameCounterCard','dailyGoalCard','dailyMicroKnowledgeCard'].forEach(function(id){
+      var card = document.getElementById(id);
+      if(!card) return;
+      var done = card.classList.contains('bw-final-done') ||
+                 card.classList.contains('bw-task-done') ||
+                 card.classList.contains('task-done') ||
+                 card.classList.contains('goal-done') ||
+                 card.getAttribute('aria-disabled') === 'true';
+      if(!done){
+        card.classList.remove('bw-final-done','bw-task-done','task-done','goal-done');
       }
-      setTimeout(applyAll, 30);
-    }
+    });
   }
-
-  var nameCard = cardFor('name');
-  if(nameCard && nameCard.contains(event.target)){
-    setTimeout(function(){
-      var meta = nameCard.querySelector('.bw-task-compact-meta[data-task-meta="name"]');
-      var raw = meta ? meta.textContent : '';
-      var n = parseInt(raw, 10) || 0;
-      if(n >= 100){
-        setDone('name');
-        applyAll();
-      }
-    }, 40);
+  if(document.readyState === 'loading'){
+    document.addEventListener('DOMContentLoaded', syncPulseEligibility, {once:true});
+  }else{
+    syncPulseEligibility();
   }
-}, true);
-
-if(document.readyState === 'loading'){
-  document.addEventListener('DOMContentLoaded', applyAll, {once:true});
-}else{
-  applyAll();
-}
-window.addEventListener('pageshow', applyAll);
-setInterval(applyAll, 700);
+  window.addEventListener('pageshow', syncPulseEligibility);
+  setInterval(syncPulseEligibility, 1000);
 })();
 </script>
 
