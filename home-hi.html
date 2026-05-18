@@ -9166,84 +9166,6 @@ const TASK_PREFIX = "barakaway_today_hi_";
   setInterval(paint, 300);
 })();
 </script>
-<script id="bw-hi-micro-answer-router-final">
-(function(){
-  'use strict';
-
-  var MEANING_KAABA = "काबा की ओर। काबा मुसलमानों का क़िब्ला है: नमाज़ में जिस दिशा की ओर रुख किया जाता है।";
-  var MEANING_WUDU = "वुज़ू नमाज़ की तैयारी है। अर्थ: पवित्रता नमाज़ की महत्वपूर्ण शर्त है।";
-  var MEANING_SHAHADA = "शहादा इस्लाम का पहला स्तंभ है: गवाही कि अल्लाह के सिवा कोई उपास्य नहीं और मुहम्मद ﷺ अल्लाह के रसूल हैं।";
-
-  function clean(value){
-    return (value || '').replace(/\s+/g,' ').trim();
-  }
-
-  function lower(value){ return clean(value).toLowerCase(); }
-
-  function hasAny(value, words){
-    var v = lower(value);
-    return words.some(function(w){ return v.indexOf(w) !== -1; });
-  }
-
-  function optionType(text){
-    if(hasAny(text, ['кааб','kaab','kâbe','ka’ba','ka\'b','қаб','قعب','الكعبة','کعب','কাব','काब'])) return 'kaaba';
-    if(hasAny(text, ['омов','wudu','abdest','tahorat','дәрет','وض','وضو','ওজু','वुज़ू','वजू'])) return 'wudu';
-    if(hasAny(text, ['шахад','shahad','şehad','syahad','الشهادة','شہادت','শাহাদা','शहादा'])) return 'shahada';
-    return '';
-  }
-
-  function questionType(question){
-    if(hasAny(question, ['куда','обращается','кааб','кибл','qibla','where','face','faced','kiblat','qiblat','qibla','namazda yuz','бағыт','қайда','يتوجه','قبلة','رخ','দিকে','किस ओर'])) return 'kaaba';
-    if(hasAny(question, ['перед намаз','before prayer','before salah','namozdan oldin','namazdan önce','salat','الصلاة','نماز سے پہلے','নামাজের আগে','नमाज़ से पहले'])) return 'wudu';
-    if(hasAny(question, ['первый столп','first pillar','birinchi ustun','ilk şart','rukun islam pertama','الركن الأول','پہلا رکن','প্রথম স্তম্ভ','पहला स्तंभ'])) return 'shahada';
-    return '';
-  }
-
-  function meaningFor(type){
-    if(type === 'kaaba') return MEANING_KAABA;
-    if(type === 'wudu') return MEANING_WUDU;
-    if(type === 'shahada') return MEANING_SHAHADA;
-    return '';
-  }
-
-  function findCorrectIndex(options, qType){
-    for(var i=0;i<options.length;i++){
-      if(optionType(options[i]) === qType) return i;
-    }
-    return 0;
-  }
-
-  document.addEventListener('click', function(event){
-    var btn = event.target && event.target.closest ? event.target.closest('.bw-micro-option-btn') : null;
-    if(!btn) return;
-
-    setTimeout(function(){
-      var modal = btn.closest('.bw-task-modal-card');
-      if(!modal || modal.getAttribute('data-task-key') !== 'micro') return;
-
-      var buttons = Array.from(modal.querySelectorAll('.bw-micro-option-btn'));
-      var options = buttons.map(function(node){ return clean(node.textContent); });
-      var question = clean((modal.querySelector('.bw-task-modal-text') || {}).textContent || '');
-      var qType = questionType(question) || optionType(options[0]) || 'wudu';
-      var correctIndex = findCorrectIndex(options, qType);
-      var note = modal.querySelector('#bwMicroAnswerNote');
-
-      buttons.forEach(function(node, index){
-        node.classList.toggle('is-selected', index === correctIndex);
-      });
-
-      if(note){
-        note.textContent = meaningFor(qType);
-        note.classList.add('is-visible');
-      }
-
-      var completeBtn = modal.querySelector('.bw-task-complete-btn');
-      if(completeBtn) completeBtn.disabled = false;
-    }, 0);
-  }, true);
-})();
-</script>
-
 <style id="bw-final-task-state-repair-v2-css">
 .today-hub .today-action.bw-final-done,
 .today-hub .today-action.bw-task-done,
@@ -9406,6 +9328,285 @@ body[class*="theme-"] .today-hub #dailyMicroKnowledgeCard:not(.bw-final-done):no
 <script id="bw-visible-border-pulse-hard-final-js">
 (function(){'use strict';var T={article:'dailyArticleLink',adhkar:'currentAdhkarLink',name:'allahNameCounterCard',goal:'dailyGoalCard',micro:'dailyMicroKnowledgeCard'};function day(){var d=new Date();return d.getFullYear()+'-'+String(d.getMonth()+1).padStart(2,'0')+'-'+String(d.getDate()).padStart(2,'0')}function lang(){return(document.documentElement.getAttribute('lang')||'ru').toLowerCase().split('-')[0]}function keys(l,t){var x=day();return['bw_final_done_v2_'+l+'_'+x+'_'+t,'bw_daily_done_v2_'+l+'_'+x+'_'+t,'barakaway_today_'+l+'_'+x+'_'+t,'barakaway_today_'+l+'_v2_'+x+'_'+t,'barakaway_today_'+l+'_v3_'+x+'_'+t,'barakaway_today_'+l+'_final_'+x+'_'+t]}function done(l,t,c){try{if(keys(l,t).some(function(k){return localStorage.getItem(k)==='1'}))return true}catch(e){}return c.classList.contains('bw-final-done')||c.classList.contains('bw-task-done')||c.classList.contains('task-done')||c.classList.contains('goal-done')||c.getAttribute('aria-disabled')==='true'}function sync(){var l=lang();Object.keys(T).forEach(function(t){var c=document.getElementById(T[t]);if(!c)return;if(done(l,t,c))c.classList.remove('bw-needs-pulse');else c.classList.add('bw-needs-pulse')})}if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',sync,{once:true});else sync();window.addEventListener('pageshow',sync);window.addEventListener('storage',sync);document.addEventListener('click',function(){setTimeout(sync,80)},true);setInterval(sync,500)})();
 </script>
+
+
+<!-- BW PATCH: stable done checkmarks + persistent Allah name counter until next 01:00 -->
+<style id="bw-stable-checkmarks-name-counter-patch">
+.today-hub .today-action.bw-final-done,
+.today-hub .today-action.bw-task-done,
+.today-hub .today-action.task-done,
+.today-hub .today-action.goal-done{
+  animation:none !important;
+  outline:none !important;
+}
+.today-hub .today-action.bw-final-done::after,
+.today-hub .today-action.bw-task-done::after,
+.today-hub .today-action.task-done::after,
+.today-hub .today-action.goal-done::after{
+  content:none !important;
+  display:none !important;
+  animation:none !important;
+}
+.today-hub .today-action.bw-final-done .today-task-status,
+.today-hub .today-action.bw-task-done .today-task-status,
+.today-hub .today-action.task-done .today-task-status,
+.today-hub .today-action.goal-done .today-task-status{
+  opacity:1 !important;
+  animation:none !important;
+  transition:none !important;
+  font-size:0 !important;
+}
+.today-hub .today-action.bw-final-done .today-task-status::before,
+.today-hub .today-action.bw-task-done .today-task-status::before,
+.today-hub .today-action.task-done .today-task-status::before,
+.today-hub .today-action.goal-done .today-task-status::before{
+  content:"✓";
+  font-size:32px !important;
+  line-height:1 !important;
+  color:#6ee78d !important;
+  text-shadow:0 0 14px rgba(110,231,141,.25) !important;
+}
+.today-hub .today-action.bw-final-done.bw-needs-pulse,
+.today-hub .today-action.bw-task-done.bw-needs-pulse,
+.today-hub .today-action.task-done.bw-needs-pulse,
+.today-hub .today-action.goal-done.bw-needs-pulse{
+  animation:none !important;
+  outline:none !important;
+}
+</style>
+<script id="bw-stable-checkmarks-allah-counter-patch-js">
+(function(){
+  'use strict';
+
+  var LANG = (document.documentElement.getAttribute('lang') || 'en').toLowerCase().split('-')[0];
+  var ORIGINAL_SET_ITEM = Storage.prototype.setItem;
+  var syncing = false;
+  var TASKS = {
+    article:'dailyArticleLink',
+    adhkar:'currentAdhkarLink',
+    name:'allahNameCounterCard',
+    goal:'dailyGoalCard',
+    micro:'dailyMicroKnowledgeCard'
+  };
+
+  function dayKey(){
+    var d = new Date();
+    if(d.getHours() < 1){ d.setDate(d.getDate() - 1); }
+    return d.getFullYear() + '-' + String(d.getMonth()+1).padStart(2,'0') + '-' + String(d.getDate()).padStart(2,'0');
+  }
+
+  function calendarDayKey(){
+    var d = new Date();
+    return d.getFullYear() + '-' + String(d.getMonth()+1).padStart(2,'0') + '-' + String(d.getDate()).padStart(2,'0');
+  }
+
+  function taskDoneKeys(task){
+    var d = dayKey();
+    var c = calendarDayKey();
+    var keys = [
+      'bw_final_done_v2_' + LANG + '_' + d + '_' + task,
+      'bw_daily_done_v2_' + LANG + '_' + d + '_' + task,
+      'barakaway_today_' + LANG + '_' + d + '_' + task,
+      'barakaway_today_' + LANG + '_v2_' + d + '_' + task,
+      'barakaway_today_' + LANG + '_v3_' + d + '_' + task,
+      'barakaway_today_' + LANG + '_final_' + d + '_' + task
+    ];
+    if(c !== d){
+      keys = keys.concat([
+        'bw_final_done_v2_' + LANG + '_' + c + '_' + task,
+        'bw_daily_done_v2_' + LANG + '_' + c + '_' + task,
+        'barakaway_today_' + LANG + '_' + c + '_' + task,
+        'barakaway_today_' + LANG + '_v2_' + c + '_' + task,
+        'barakaway_today_' + LANG + '_v3_' + c + '_' + task,
+        'barakaway_today_' + LANG + '_final_' + c + '_' + task
+      ]);
+    }
+    return keys;
+  }
+
+  function nameCountKeys(){
+    var d = dayKey();
+    var c = calendarDayKey();
+    var keys = [
+      'bw_allah_name_counter_persist_' + LANG + '_' + d,
+      'barakaway_name_counter_' + LANG + '_' + d,
+      'barakaway_name_counter_' + LANG + '_v2_' + d,
+      'barakaway_name_counter_' + LANG + '_v3_' + d,
+      'barakaway_name_counter_' + LANG + '_final_' + d,
+      'barakaway_name_counter_' + d
+    ];
+    if(c !== d){
+      keys = keys.concat([
+        'barakaway_name_counter_' + LANG + '_' + c,
+        'barakaway_name_counter_' + LANG + '_v2_' + c,
+        'barakaway_name_counter_' + LANG + '_v3_' + c,
+        'barakaway_name_counter_' + LANG + '_final_' + c,
+        'barakaway_name_counter_' + c
+      ]);
+    }
+    return keys;
+  }
+
+  function safeGet(key){
+    try{ return localStorage.getItem(key); }catch(e){ return null; }
+  }
+
+  function safeSet(key, value){
+    try{ ORIGINAL_SET_ITEM.call(localStorage, key, String(value)); }catch(e){}
+  }
+
+  function normalize(value){
+    var n = parseInt(value, 10);
+    if(!Number.isFinite(n)) n = 0;
+    return Math.max(0, Math.min(100, n));
+  }
+
+  function isDone(task){
+    return taskDoneKeys(task).some(function(key){ return safeGet(key) === '1'; });
+  }
+
+  function writeDone(task){
+    taskDoneKeys(task).forEach(function(key){ safeSet(key, '1'); });
+  }
+
+  function readNameCount(){
+    var max = 0;
+    nameCountKeys().forEach(function(key){ max = Math.max(max, normalize(safeGet(key))); });
+    return isDone('name') ? 100 : max;
+  }
+
+  function writeNameCount(value){
+    var n = normalize(value);
+    syncing = true;
+    nameCountKeys().forEach(function(key){ safeSet(key, n); });
+    if(n >= 100){ writeDone('name'); }
+    syncing = false;
+    return n;
+  }
+
+  function stabilizeDoneCard(task){
+    var card = document.getElementById(TASKS[task]);
+    if(!card || !isDone(task)) return;
+    card.classList.add('bw-final-done','bw-task-done','task-done','goal-done');
+    card.classList.remove('bw-needs-pulse','goal-urgent','task-urgent');
+    card.setAttribute('aria-disabled','true');
+    card.style.animation = 'none';
+    var status = card.querySelector('.today-task-status');
+    if(status) status.textContent = '✓';
+  }
+
+  function paintNameCounter(){
+    var n = writeNameCount(readNameCount());
+    var done = n >= 100;
+    var text = n + '/100';
+    var card = document.getElementById('allahNameCounterCard');
+    if(!card) return;
+
+    var meta = card.querySelector('.bw-task-compact-meta[data-task-meta="name"]');
+    if(!meta){
+      meta = document.createElement('div');
+      meta.className = 'bw-task-compact-meta';
+      meta.setAttribute('data-task-meta', 'name');
+      var title = card.querySelector('.today-action-title');
+      if(title && title.parentElement) title.parentElement.appendChild(meta);
+      else card.appendChild(meta);
+    }
+    meta.textContent = text;
+
+    var value = document.getElementById('allahNameCounterValue');
+    if(value) value.textContent = done ? '✓' : text;
+
+    var fill = document.getElementById('allahNameCounterFill');
+    if(fill) fill.style.width = n + '%';
+
+    if(done){
+      writeDone('name');
+      stabilizeDoneCard('name');
+    }else{
+      card.classList.remove('bw-final-done','bw-task-done','task-done','goal-done');
+      card.classList.add('goal-urgent');
+      card.setAttribute('aria-disabled','false');
+    }
+
+    var modalCount = document.getElementById('bwNameModalCount');
+    if(modalCount) modalCount.textContent = text;
+    var modalComplete = document.querySelector('.bw-task-modal-card[data-task-key="name"] .bw-task-complete-btn');
+    if(modalComplete) modalComplete.disabled = n < 100;
+    var modalPlus = document.getElementById('bwNameModalInc');
+    if(modalPlus) modalPlus.textContent = done ? '100 / 100' : '+1';
+  }
+
+  function syncAll(){
+    paintNameCounter();
+    Object.keys(TASKS).forEach(stabilizeDoneCard);
+  }
+
+  Storage.prototype.setItem = function(key, value){
+    var result = ORIGINAL_SET_ITEM.apply(this, arguments);
+    if(!syncing && this === localStorage && typeof key === 'string' && key.indexOf('barakaway_name_counter_') === 0){
+      var current = readNameCount();
+      var incoming = normalize(value);
+      writeNameCount(Math.max(current, incoming));
+      setTimeout(syncAll, 0);
+    }
+    return result;
+  };
+
+  function syncSoon(){ setTimeout(syncAll, 0); setTimeout(syncAll, 80); }
+
+  if(document.readyState === 'loading') document.addEventListener('DOMContentLoaded', syncAll, {once:true});
+  else syncAll();
+
+  window.addEventListener('pageshow', syncAll);
+  window.addEventListener('storage', syncAll);
+  document.addEventListener('pointerup', syncSoon, true);
+  document.addEventListener('touchend', syncSoon, true);
+  document.addEventListener('click', syncSoon, true);
+  document.addEventListener('keydown', function(e){ if(e.key === 'Enter' || e.key === ' ') syncSoon(); }, true);
+  setInterval(syncAll, 120);
+})();
+</script>
+
+
+<script id="bw-hi-micro-meaning-router-clean">
+(function(){
+  'use strict';
+  var MICRO_MEANINGS = [{"q":"इस्लाम के कितने स्तंभ हैं?","n":"इस्लाम के कितने स्तंभ हैं?","opt":["4","5","6"],"meaning":"इस्लाम के स्तंभ मुसलमान के अमल की बुनियाद हैं।","correct":1,"options":["4","5","6"]},{"q":"इस्लाम का पहला स्तंभ क्या है?","n":"इस्लाम का पहला स्तंभ क्या है?","opt":["शहादा","रोज़ा","ज़कात"],"meaning":"शहादा ईमान की गवाही और इस्लाम में प्रवेश है।","correct":0,"options":["शहादा","रोज़ा","ज़कात"]},{"q":"दिन में कितनी फ़र्ज़ नमाज़ें हैं?","n":"दिन में कितनी फ़र्ज़ नमाज़ें हैं?","opt":["3","5","7"],"meaning":"पाँच नमाज़ें दिन को अल्लाह से जोड़ती हैं।","correct":1,"options":["3","5","7"]},{"q":"सुबह की नमाज़ कौन सी है?","n":"सुबह की नमाज़ कौन सी है?","opt":["फ़ज्र","मग़रिब","ईशा"],"meaning":"फ़ज्र दिन की शुरुआत इबादत से करती है।","correct":0,"options":["फ़ज्र","मग़रिब","ईशा"]},{"q":"सूर्यास्त के बाद कौन सी नमाज़ होती है?","n":"सूर्यास्त के बाद कौन सी नमाज़ होती है?","opt":["ज़ुहर","मग़रिब","फ़ज्र"],"meaning":"मग़रिब सूर्यास्त के बाद होती है।","correct":1,"options":["ज़ुहर","मग़रिब","फ़ज्र"]},{"q":"नमाज़ में मुसलमान किस दिशा की ओर मुख करता है?","n":"नमाज़ में मुसलमान किस दिशा की ओर मुख करता है?","opt":["काबा","उत्तर","कोई भी दिशा"],"meaning":"काबा क़िब्ला है।","correct":0,"options":["काबा","उत्तर","कोई भी दिशा"]},{"q":"रमज़ान में मुसलमान क्या रखते हैं?","n":"रमज़ान में मुसलमान क्या रखते हैं?","opt":["रोज़ा","सिर्फ़ यात्रा","व्यापार"],"meaning":"रोज़ा तक़वा और आत्म-संयम सिखाता है।","correct":0,"options":["रोज़ा","सिर्फ़ यात्रा","व्यापार"]},{"q":"ज़कात किससे जुड़ी है?","n":"ज़कात किससे जुड़ी है?","opt":["धन की पाकीज़गी","मनोरंजन","यात्रा"],"meaning":"ज़कात माल को पाक करती है और जरूरतमंदों की मदद करती है।","correct":0,"options":["धन की पाकीज़गी","मनोरंजन","यात्रा"]},{"q":"हज कहाँ किया जाता है?","n":"हज कहाँ किया जाता है?","opt":["मक्का","मदीना","काहिरा"],"meaning":"हज मक्का में किया जाता है।","correct":0,"options":["मक्का","मदीना","काहिरा"]},{"q":"क़ुरआन किसकी किताब है?","n":"क़ुरआन किसकी किताब है?","opt":["अल्लाह की","मनुष्य की","कवि की"],"meaning":"क़ुरआन अल्लाह का कलाम है।","correct":0,"options":["अल्लाह की","मनुष्य की","कवि की"]},{"q":"अल्लाह को याद करना क्या कहलाता है?","n":"अल्लाह को याद करना क्या कहलाता है?","opt":["ज़िक्र","ग़ीबत","घमंड"],"meaning":"ज़िक्र दिल को जीवित करता है।","correct":0,"options":["ज़िक्र","ग़ीबत","घमंड"]},{"q":"अच्छा चरित्र क्या कहलाता है?","n":"अच्छा चरित्र क्या कहलाता है?","opt":["अख़लाक़","रिबा","रियाकारी"],"meaning":"अख़लाक़ ईमान को व्यवहार में दिखाता है।","correct":0,"options":["अख़लाक़","रिबा","रियाकारी"]},{"q":"सदक़ा कैसे देना बेहतर है?","n":"सदक़ा कैसे देना बेहतर है?","opt":["ईमानदारी से","दिखावे के लिए","ताने के साथ"],"meaning":"सच्ची नीयत दान को मूल्यवान बनाती है।","correct":0,"options":["ईमानदारी से","दिखावे के लिए","ताने के साथ"]},{"q":"झूठ बोलना कैसा है?","n":"झूठ बोलना कैसा है?","opt":["गलत","अच्छा","ज़रूरी"],"meaning":"सच्चाई अच्छे चरित्र का हिस्सा है।","correct":0,"options":["गलत","अच्छा","ज़रूरी"]},{"q":"माता-पिता से कैसा व्यवहार होना चाहिए?","n":"माता-पिता से कैसा व्यवहार होना चाहिए?","opt":["नरमी और सम्मान","रूखापन","उपेक्षा"],"meaning":"माता-पिता का हक़ बड़ा है।","correct":0,"options":["नरमी और सम्मान","रूखापन","उपेक्षा"]},{"q":"पीठ पीछे बुराई करना क्या है?","n":"पीठ पीछे बुराई करना क्या है?","opt":["ग़ीबत","सदक़ा","सब्र"],"meaning":"ग़ीबत से बचना जरूरी है।","correct":0,"options":["ग़ीबत","सदक़ा","सब्र"]},{"q":"गुस्से में बेहतर काम क्या है?","n":"गुस्से में बेहतर काम क्या है?","opt":["चुप रहना और सब्र","अपमान करना","चिल्लाना"],"meaning":"गुस्से पर काबू मजबूत इबादत है।","correct":0,"options":["चुप रहना और सब्र","अपमान करना","चिल्लाना"]},{"q":"अमानत को क्या करना चाहिए?","n":"अमानत को क्या करना चाहिए?","opt":["लौटाना","छिपाना","बेचना"],"meaning":"अमानत ईमानदारी की कसौटी है।","correct":0,"options":["लौटाना","छिपाना","बेचना"]},{"q":"छोटी नेकी अल्लाह के पास कैसी है?","n":"छोटी नेकी अल्लाह के पास कैसी है?","opt":["क़ीमती","बेकार","मज़ाक"],"meaning":"छोटी नेकी भी ईमानदारी से बड़ी हो सकती है।","correct":0,"options":["क़ीमती","बेकार","मज़ाक"]},{"q":"दुआ किससे की जाती है?","n":"दुआ किससे की जाती है?","opt":["अल्लाह से","सिर्फ़ लोगों से","भाग्य से"],"meaning":"दिल का सहारा अल्लाह है।","correct":0,"options":["अल्लाह से","सिर्फ़ लोगों से","भाग्य से"]},{"q":"नेमत मिलने पर क्या कहना बेहतर है?","n":"नेमत मिलने पर क्या कहना बेहतर है?","opt":["अल्हम्दुलिल्लाह","क्यों कम?","यह सिर्फ़ मेरा है"],"meaning":"शुक्र घमंड से बचाता है।","correct":0,"options":["अल्हम्दुलिल्लाह","क्यों कम?","यह सिर्फ़ मेरा है"]},{"q":"काम की योजना बनाते समय क्या कहना अच्छा है?","n":"काम की योजना बनाते समय क्या कहना अच्छा है?","opt":["इन शा अल्लाह","कभी नहीं","महत्व नहीं"],"meaning":"यह अल्लाह की मर्ज़ी को मानना है।","correct":0,"options":["इन शा अल्लाह","कभी नहीं","महत्व नहीं"]},{"q":"सबसे अच्छा ज़िक्र कौन सा है?","n":"सबसे अच्छा ज़िक्र कौन सा है?","opt":["ला इलाहा इल्लल्लाह","कठोर शब्द","झगड़ा"],"meaning":"यह तौहीद का मूल वाक्य है।","correct":0,"options":["ला इलाहा इल्लल्लाह","कठोर शब्द","झगड़ा"]},{"q":"सुब्हानअल्लाह का अर्थ क्या है?","n":"सुब्हानअल्लाह का अर्थ क्या है?","opt":["अल्लाह पाक है","मैं थक गया","धन्यवाद"],"meaning":"इससे अल्लाह की पाकी बयान होती है।","correct":0,"options":["अल्लाह पाक है","मैं थक गया","धन्यवाद"]},{"q":"अल्लाहु अकबर का अर्थ क्या है?","n":"अल्लाहु अकबर का अर्थ क्या है?","opt":["अल्लाह महान है","मैं सही हूँ","फिर मिलेंगे"],"meaning":"यह याद दिलाता है कि अल्लाह सबसे बड़ा है।","correct":0,"options":["अल्लाह महान है","मैं सही हूँ","फिर मिलेंगे"]},{"q":"रिज़्क़ किससे है?","n":"रिज़्क़ किससे है?","opt":["अल्लाह से","सिर्फ़ संयोग से","सिर्फ़ लोगों से"],"meaning":"कारण लोग हो सकते हैं, मगर देने वाला अल्लाह है।","correct":0,"options":["अल्लाह से","सिर्फ़ संयोग से","सिर्फ़ लोगों से"]},{"q":"मुसलमान को व्यापार में कैसा होना चाहिए?","n":"मुसलमान को व्यापार में कैसा होना चाहिए?","opt":["ईमानदार","धोखेबाज़","कठोर"],"meaning":"हलाल कमाई ईमानदारी चाहती है।","correct":0,"options":["ईमानदार","धोखेबाज़","कठोर"]},{"q":"न्याय किसके साथ जरूरी है?","n":"न्याय किसके साथ जरूरी है?","opt":["सबके साथ","सिर्फ़ दोस्तों से","किसी से नहीं"],"meaning":"न्याय भावना पर निर्भर नहीं करता।","correct":0,"options":["सबके साथ","सिर्फ़ दोस्तों से","किसी से नहीं"]},{"q":"जानवरों पर दया कैसी है?","n":"जानवरों पर दया कैसी है?","opt":["अच्छी","महत्वहीन","मना"],"meaning":"इस्लाम में रहमत जानवरों तक भी पहुँचती है।","correct":0,"options":["अच्छी","महत्वहीन","मना"]},{"q":"रास्ते से तकलीफ हटाना क्या है?","n":"रास्ते से तकलीफ हटाना क्या है?","opt":["नेकी","गुनाह","बेकार"],"meaning":"लोगों को लाभ पहुँचाना मूल्यवान है।","correct":0,"options":["नेकी","गुनाह","बेकार"]},{"q":"परिवार क्या है?","n":"परिवार क्या है?","opt":["अमानत","खेल","बोझ"],"meaning":"करीबियों का हक़ देखभाल और नरमी है।","correct":0,"options":["अमानत","खेल","बोझ"]},{"q":"रिश्तेदारी को क्या करना चाहिए?","n":"रिश्तेदारी को क्या करना चाहिए?","opt":["जोड़े रखना","तोड़ना","नज़रअंदाज़ करना"],"meaning":"रिश्ते सम्मान और देखभाल से मजबूत होते हैं।","correct":0,"options":["जोड़े रखना","तोड़ना","नज़रअंदाज़ करना"]},{"q":"अगर गलती हो जाए तो बेहतर क्या है?","n":"अगर गलती हो जाए तो बेहतर क्या है?","opt":["नरमी से सुधारना","बदनाम करना","हँसना"],"meaning":"नरम नसीहत अपमान से बेहतर है।","correct":0,"options":["नरमी से सुधारना","बदनाम करना","हँसना"]},{"q":"अल्लाह की रहमत से निराश होना चाहिए?","n":"अल्लाह की रहमत से निराश होना चाहिए?","opt":["नहीं","हाँ","हमेशा"],"meaning":"अल्लाह की रहमत तौबा करने वालों के लिए विस्तृत है।","correct":0,"options":["नहीं","हाँ","हमेशा"]},{"q":"आशा किसके साथ होनी चाहिए?","n":"आशा किसके साथ होनी चाहिए?","opt":["अमल के साथ","आलस के साथ","गुनाह के साथ"],"meaning":"आशा मेहनत को खत्म नहीं करती।","correct":0,"options":["अमल के साथ","आलस के साथ","गुनाह के साथ"]},{"q":"?","n":"?","opt":["","",""],"meaning":"एक भलाई अल्लाह.","correct":0,"options":["","",""]},{"q":"?","n":"?","opt":["","",""],"meaning":".","correct":0,"options":["","",""]},{"q":"— है…","n":"— है…","opt":["","","नींद"],"meaning":"इंसान अल्लाह.","correct":0,"options":["","","नींद"]},{"q":"अल्लाह?","n":"अल्लाह?","opt":["","",""],"meaning":".","correct":0,"options":["","",""]},{"q":"— है…","n":"— है…","opt":["","पवित्रता",""],"meaning":"जहन्नम.","correct":0,"options":["","पवित्रता",""]},{"q":"— है…","n":"— है…","opt":["","",""],"meaning":"काम जहन्नम अल्लाह, जहन्नम लोगों.","correct":0,"options":["","",""]},{"q":"— है…","n":"— है…","opt":["","",""],"meaning":".","correct":0,"options":["","",""]},{"q":"— है…","n":"— है…","opt":["","",""],"meaning":".","correct":0,"options":["","",""]},{"q":"— है…","n":"— है…","opt":["अल्लाह","","लोगों"],"meaning":"अल्लाह.","correct":0,"options":["अल्लाह","","लोगों"]},{"q":"?","n":"?","opt":["","",""],"meaning":"—.","correct":0,"options":["","",""]},{"q":"…","n":"…","opt":["","",""],"meaning":"- —.","correct":0,"options":["","",""]},{"q":"जहन्नम?","n":"जहन्नम?","opt":["","",""],"meaning":"लोगों.","correct":0,"options":["","",""]},{"q":"?","n":"?","opt":["","",""],"meaning":".","correct":0,"options":["","",""]},{"q":"पवित्रता इस्लाम — है…","n":"पवित्रता इस्लाम — है…","opt":["","",""],"meaning":"पवित्रता,,.","correct":0,"options":["","",""]},{"q":"…","n":"…","opt":["","",""],"meaning":"अल्लाह.","correct":0,"options":["","",""]},{"q":"…","n":"…","opt":["","",""],"meaning":"बाद.","correct":0,"options":["","",""]},{"q":"…","n":"…","opt":["अल्लाह","",""],"meaning":"पहले दिल.","correct":0,"options":["अल्लाह","",""]},{"q":"…","n":"…","opt":["अल्लाह","",""],"meaning":"दिन —.","correct":0,"options":["अल्लाह","",""]},{"q":"बिना?","n":"बिना?","opt":["","",""],"meaning":"लोगों.","correct":0,"options":["","",""]},{"q":"— है…","n":"— है…","opt":["","",""],"meaning":",,.","correct":0,"options":["","",""]},{"q":"…","n":"…","opt":["","",""],"meaning":"—.","correct":0,"options":["","",""]},{"q":"?","n":"?","opt":["","",""],"meaning":",.","correct":0,"options":["","",""]},{"q":"— है…","n":"— है…","opt":["","",""],"meaning":".","correct":0,"options":["","",""]},{"q":"इंसान, …","n":"इंसान, …","opt":["","",""],"meaning":"अल्लाह.","correct":0,"options":["","",""]},{"q":"के लिए बिना — है…","n":"के लिए बिना — है…","opt":["","",""],"meaning":"भलाई.","correct":0,"options":["","",""]},{"q":"?","n":"?","opt":["","",""],"meaning":"— है.","correct":0,"options":["","",""]},{"q":":?","n":":?","opt":["","",""],"meaning":".","correct":0,"options":["","",""]},{"q":"?","n":"?","opt":["जहन्नम ﷺ","عليه السلام","عليه السلام"],"meaning":"जहन्नम ﷺ —.","correct":0,"options":["जहन्नम ﷺ","عليه السلام","عليه السلام"]},{"q":"?","n":"?","opt":["","",""],"meaning":"— ईमान.","correct":0,"options":["","",""]},{"q":"?","n":"?","opt":["عليه السلام","",""],"meaning":"عليه السلام अल्लाह.","correct":0,"options":["عليه السلام","",""]},{"q":"عليه السلام …","n":"عليه السلام …","opt":["","",""],"meaning":"अल्लाह पहले.","correct":0,"options":["","",""]},{"q":"عليه السلام …","n":"عليه السلام …","opt":["","",""],"meaning":".","correct":0,"options":["","",""]},{"q":"عليه السلام …","n":"عليه السلام …","opt":["","","जहन्नम"],"meaning":"— इबादत अल्लाह.","correct":0,"options":["","","जहन्नम"]},{"q":"عليه السلام — है…","n":"عليه السلام — है…","opt":["अल्लाह","",""],"meaning":".","correct":0,"options":["अल्लाह","",""]},{"q":", عليه السلام — है…","n":", عليه السلام — है…","opt":["","",""],"meaning":"— ईमान.","correct":0,"options":["","",""]},{"q":", عليه السلام — है…","n":", عليه السلام — है…","opt":["","","क़ुरआन"],"meaning":"अल्लाह.","correct":0,"options":["","","क़ुरआन"]},{"q":"क़ुरआन …","n":"क़ुरआन …","opt":["जहन्नम ﷺ","عليه السلام","عليه السلام"],"meaning":"क़ुरआन —.","correct":0,"options":["जहन्नम ﷺ","عليه السلام","عليه السلام"]},{"q":"عليه السلام — है…","n":"عليه السلام — है…","opt":["","",""],"meaning":".","correct":0,"options":["","",""]},{"q":"…","n":"…","opt":["","नमाज़","ईमान"],"meaning":",.","correct":0,"options":["","नमाज़","ईमान"]},{"q":"?","n":"?","opt":["","",""],"meaning":"अल्लाह —.","correct":0,"options":["","",""]},{"q":"…","n":"…","opt":["","",""],"meaning":".","correct":0,"options":["","",""]},{"q":"…","n":"…","opt":["","",""],"meaning":", दिल.","correct":0,"options":["","",""]},{"q":"इस्लाम?","n":"इस्लाम?","opt":["","",""],"meaning":".","correct":0,"options":["","",""]},{"q":"इस्लाम…","n":"इस्लाम…","opt":["","",""],"meaning":".","correct":0,"options":["","",""]},{"q":"— है…","n":"— है…","opt":["","",""],"meaning":",.","correct":0,"options":["","",""]},{"q":"— है…","n":"— है…","opt":["","",""],"meaning":",,.","correct":0,"options":["","",""]},{"q":"?","n":"?","opt":["","",""],"meaning":",.","correct":0,"options":["","",""]},{"q":"— है…","n":"— है…","opt":["","",""],"meaning":".","correct":0,"options":["","",""]},{"q":"“”?","n":"“”?","opt":["","",""],"meaning":"क़ुरआन.","correct":0,"options":["","",""]},{"q":"…","n":"…","opt":["","",""],"meaning":"—.","correct":0,"options":["","",""]},{"q":"इंसान …","n":"इंसान …","opt":["","",""],"meaning":"अल्लाह.","correct":0,"options":["","",""]},{"q":"?","n":"?","opt":["","",""],"meaning":"इस्लाम.","correct":0,"options":["","",""]},{"q":"इस्लाम …","n":"इस्लाम …","opt":["","",""],"meaning":"—.","correct":0,"options":["","",""]},{"q":"ज़ुबान…","n":"ज़ुबान…","opt":["","",""],"meaning":".","correct":0,"options":["","",""]},{"q":"…","n":"…","opt":["","","कठोरता से"],"meaning":"दिल.","correct":0,"options":["","","कठोरता से"]},{"q":", …","n":", …","opt":[":","",""],"meaning":"“ ” —.","correct":0,"options":[":","",""]},{"q":"बिना — है…","n":"बिना — है…","opt":["","",""],"meaning":"बिना.","correct":0,"options":["","",""]},{"q":"…","n":"…","opt":["","",""],"meaning":"जहन्नम.","correct":0,"options":["","",""]},{"q":"क़ुरआन …","n":"क़ुरआन …","opt":["","",""],"meaning":"अल्लाह, जहन्नम.","correct":0,"options":["","",""]},{"q":"क़ुरआन …","n":"क़ुरआन …","opt":["","",""],"meaning":"पवित्रता.","correct":0,"options":["","",""]},{"q":"…","n":"…","opt":["ﷺ","",""],"meaning":"— ﷺ.","correct":0,"options":["ﷺ","",""]},{"q":"ﷺ …","n":"ﷺ …","opt":["","",""],"meaning":"जहन्नम अल्लाह ﷺ.","correct":0,"options":["","",""]},{"q":"— …","n":"— …","opt":["","",""],"meaning":".","correct":0,"options":["","",""]},{"q":"…","n":"…","opt":["","",""],"meaning":".","correct":0,"options":["","",""]},{"q":"…","n":"…","opt":["","",""],"meaning":"नमाज़ों.","correct":0,"options":["","",""]},{"q":"रोज़ा …","n":"रोज़ा …","opt":["","जहन्नम",""],"meaning":"रोज़ा सब्र.","correct":0,"options":["","जहन्नम",""]},{"q":"जहन्नम …","n":"जहन्नम …","opt":["","",""],"meaning":", इंसान दिल.","correct":0,"options":["","",""]},{"q":"…","n":"…","opt":["","",""],"meaning":"इस्लाम.","correct":0,"options":["","",""]},{"q":"…","n":"…","opt":["","बिना",""],"meaning":"नमाज़ —.","correct":0,"options":["","बिना",""]},{"q":"नमाज़ बिना?","n":"नमाज़ बिना?","opt":["","",""],"meaning":"—,.","correct":0,"options":["","",""]},{"q":", …","n":", …","opt":["","",""],"meaning":".","correct":0,"options":["","",""]},{"q":"इंसान — है, …","n":"इंसान — है, …","opt":["ग़ुस्सा","",""],"meaning":"— जहन्नम.","correct":0,"options":["ग़ुस्सा","",""]},{"q":"जहन्नम — है…","n":"जहन्नम — है…","opt":["","",""],"meaning":"जहन्नम.","correct":0,"options":["","",""]},{"q":"— है…","n":"— है…","opt":["","",""],"meaning":".","correct":0,"options":["","",""]},{"q":"?","n":"?","opt":["","",""],"meaning":"लोगों भले ही.","correct":0,"options":["","",""]},{"q":", …","n":", …","opt":["","",""],"meaning":",.","correct":0,"options":["","",""]},{"q":"भलाई …","n":"भलाई …","opt":["","प्रशंसा",""],"meaning":"भलाई.","correct":0,"options":["","प्रशंसा",""]},{"q":"भलाई, …","n":"भलाई, …","opt":["","",""],"meaning":"जहन्नम अल्लाह.","correct":0,"options":["","",""]},{"q":"के लिए?","n":"के लिए?","opt":["अल्लाह","",""],"meaning":".","correct":0,"options":["अल्लाह","",""]},{"q":"अल्लाह?","n":"अल्लाह?","opt":["","",""],"meaning":"अल्लाह.","correct":0,"options":["","",""]},{"q":"जहन्नम अल्लाह …","n":"जहन्नम अल्लाह …","opt":["","",""],"meaning":"जहन्नम.","correct":0,"options":["","",""]},{"q":"पहले अल्लाह …","n":"पहले अल्लाह …","opt":["गुनाह","",""],"meaning":".","correct":0,"options":["गुनाह","",""]},{"q":"अल्लाह …","n":"अल्लाह …","opt":["","",""],"meaning":".","correct":0,"options":["","",""]},{"q":"…","n":"…","opt":["","",""],"meaning":"अल्लाह दिल.","correct":0,"options":["","",""]},{"q":"— है…","n":"— है…","opt":["","",""],"meaning":"आधार ईमान.","correct":0,"options":["","",""]},{"q":"…","n":"…","opt":["अल्लाह","",""],"meaning":"अल्लाह.","correct":0,"options":["अल्लाह","",""]},{"q":"अल्लाह …","n":"अल्लाह …","opt":["अल्लाह","",""],"meaning":", अल्लाह.","correct":0,"options":["अल्लाह","",""]},{"q":"…","n":"…","opt":["अल्लाह","",""],"meaning":"आधार.","correct":0,"options":["अल्लाह","",""]},{"q":"…","n":"…","opt":["","",""],"meaning":"—.","correct":0,"options":["","",""]},{"q":"…","n":"…","opt":["","",""],"meaning":".","correct":0,"options":["","",""]},{"q":"इंसान — है…","n":"इंसान — है…","opt":["","",""],"meaning":".","correct":0,"options":["","",""]},{"q":"?","n":"?","opt":["","",""],"meaning":"इंसान.","correct":0,"options":["","",""]},{"q":"?","n":"?","opt":["","",""],"meaning":".","correct":0,"options":["","",""]},{"q":"…","n":"…","opt":["","",""],"meaning":"भले ही.","correct":0,"options":["","",""]},{"q":"…","n":"…","opt":["","",""],"meaning":"—.","correct":0,"options":["","",""]},{"q":"भले ही …","n":"भले ही …","opt":[",","",""],"meaning":".","correct":0,"options":[",","",""]},{"q":", है…","n":", है…","opt":["","",""],"meaning":"जहन्नम अल्लाह दिल.","correct":0,"options":["","",""]},{"q":"?","n":"?","opt":["","",""],"meaning":"— इबादत जीवन.","correct":0,"options":["","",""]},{"q":"तुम्हें उकसाया जाए, …","n":"तुम्हें उकसाया जाए, …","opt":["","",""],"meaning":".","correct":0,"options":["","",""]},{"q":"— है…","n":"— है…","opt":["","",""],"meaning":"इस्लाम.","correct":0,"options":["","",""]},{"q":"?","n":"?","opt":["","",""],"meaning":".","correct":0,"options":["","",""]},{"q":"— है…","n":"— है…","opt":["","",""],"meaning":"लोगों.","correct":0,"options":["","",""]},{"q":"पवित्रता — है…","n":"पवित्रता — है…","opt":["","","काम"],"meaning":".","correct":0,"options":["","","काम"]},{"q":"इंसान, …","n":"इंसान, …","opt":["","",""],"meaning":".","correct":0,"options":["","",""]},{"q":"— है…","n":"— है…","opt":["","बिना",""],"meaning":".","correct":0,"options":["","बिना",""]},{"q":"…","n":"…","opt":["","बिना",""],"meaning":"परिवार.","correct":0,"options":["","बिना",""]},{"q":"भलाई अल्लाह…","n":"भलाई अल्लाह…","opt":["","",""],"meaning":"काम.","correct":0,"options":["","",""]},{"q":"भलाई?","n":"भलाई?","opt":["","",""],"meaning":"अल्लाह, जहन्नम.","correct":0,"options":["","",""]},{"q":", दुआ?","n":", दुआ?","opt":["","",""],"meaning":".","correct":0,"options":["","",""]},{"q":"ज़ुबान?","n":"ज़ुबान?","opt":["","",""],"meaning":"अल्लाह.","correct":0,"options":["","",""]},{"q":"जहन्नम — है…","n":"जहन्नम — है…","opt":["अल्लाह","",""],"meaning":"—, — अल्लाह.","correct":0,"options":["अल्लाह","",""]},{"q":", …","n":", …","opt":["","?",""],"meaning":".","correct":0,"options":["","?",""]},{"q":"काम, …","n":"काम, …","opt":["अल्लाह","",""],"meaning":"इंसान अल्लाह.","correct":0,"options":["अल्लाह","",""]},{"q":", …","n":", …","opt":["","",""],"meaning":"के लिए दिल.","correct":0,"options":["","",""]},{"q":"-, …","n":"-, …","opt":["","",""],"meaning":".","correct":0,"options":["","",""]}];
+  var DEFAULT_MEANING = "अर्थ: सही उत्तर चुनें और आज का सबक याद रखें।";
+  function clean(value){ return String(value || '').replace(/\s+/g,' ').trim(); }
+  function norm(value){ return clean(value).toLowerCase(); }
+  function findItem(question){
+    var q = norm(question);
+    for(var i=0;i<MICRO_MEANINGS.length;i++){
+      if(MICRO_MEANINGS[i].n === q) return MICRO_MEANINGS[i];
+    }
+    return null;
+  }
+  function applyMicroMeaning(modal){
+    if(!modal || modal.getAttribute('data-task-key') !== 'micro') return;
+    var questionEl = modal.querySelector('.bw-task-modal-text');
+    var note = modal.querySelector('#bwMicroAnswerNote');
+    var buttons = Array.prototype.slice.call(modal.querySelectorAll('.bw-micro-option-btn'));
+    if(!questionEl || !note || !buttons.length) return;
+    var item = findItem(questionEl.textContent, buttons);
+    var correct = item && typeof item.correct === 'number' ? item.correct : -1;
+    if(correct >= 0 && correct < buttons.length){
+      buttons.forEach(function(btn, index){ btn.classList.toggle('is-selected', index === correct); });
+    }
+    note.textContent = item && item.meaning ? item.meaning : DEFAULT_MEANING;
+    note.classList.add('is-visible');
+    var completeBtn = modal.querySelector('.bw-task-complete-btn');
+    if(completeBtn) completeBtn.disabled = false;
+  }
+  document.addEventListener('click', function(event){
+    var btn = event.target && event.target.closest ? event.target.closest('.bw-micro-option-btn') : null;
+    if(!btn) return;
+    var modal = btn.closest('.bw-task-modal-card');
+    setTimeout(function(){ applyMicroMeaning(modal); }, 30);
+  }, true);
+})();
+</script>
+
 </body>
 </html>
 

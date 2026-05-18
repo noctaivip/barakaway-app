@@ -7791,7 +7791,7 @@ const challenges = [
       const q = text('#dailyMicroQuestion') || "What is needed before prayer?";
       const options = Array.from(document.querySelectorAll('#dailyMicroOptions .micro-option')).map(b=>clean(b.textContent)).filter(Boolean);
       const fallback = ["Wudu", "Food", "Sleep"];
-      const answer = getMicroMeaning(q, options) || "Meaning: purity is an important condition of prayer.";
+      const answer = getMicroMeaning(q, options) || "Meaning: choose the correct answer and remember today’s lesson.";
       return {title:"Daily Micro-knowledge", main:q, options:options.length ? options : fallback, task:answer};
     }
     return {title:"Task", main:'', task:"Complete today’s task."};
@@ -8158,84 +8158,6 @@ const challenges = [
   setInterval(paint, 300);
 })();
 </script>
-<script id="bw-en-micro-answer-router-final">
-(function(){
-  'use strict';
-
-  var MEANING_KAABA = "Toward the Kaaba. The Kaaba is the qibla of Muslims: the direction faced during prayer.";
-  var MEANING_WUDU = "Wudu is preparation for prayer. Meaning: purification is an important condition of prayer.";
-  var MEANING_SHAHADA = "Shahada is the first pillar of Islam: the testimony that there is no god but Allah and Muhammad ﷺ is His Messenger.";
-
-  function clean(value){
-    return (value || '').replace(/\s+/g,' ').trim();
-  }
-
-  function lower(value){ return clean(value).toLowerCase(); }
-
-  function hasAny(value, words){
-    var v = lower(value);
-    return words.some(function(w){ return v.indexOf(w) !== -1; });
-  }
-
-  function optionType(text){
-    if(hasAny(text, ['кааб','kaab','kâbe','ka’ba','ka\'b','қаб','قعب','الكعبة','کعب','কাব','काब'])) return 'kaaba';
-    if(hasAny(text, ['омов','wudu','abdest','tahorat','дәрет','وض','وضو','ওজু','वुज़ू','वजू'])) return 'wudu';
-    if(hasAny(text, ['шахад','shahad','şehad','syahad','الشهادة','شہادت','শাহাদা','शहादा'])) return 'shahada';
-    return '';
-  }
-
-  function questionType(question){
-    if(hasAny(question, ['куда','обращается','кааб','кибл','qibla','where','face','faced','kiblat','qiblat','qibla','namazda yuz','бағыт','қайда','يتوجه','قبلة','رخ','দিকে','किस ओर'])) return 'kaaba';
-    if(hasAny(question, ['перед намаз','before prayer','before salah','namozdan oldin','namazdan önce','salat','الصلاة','نماز سے پہلے','নামাজের আগে','नमाज़ से पहले'])) return 'wudu';
-    if(hasAny(question, ['первый столп','first pillar','birinchi ustun','ilk şart','rukun islam pertama','الركن الأول','پہلا رکن','প্রথম স্তম্ভ','पहला स्तंभ'])) return 'shahada';
-    return '';
-  }
-
-  function meaningFor(type){
-    if(type === 'kaaba') return MEANING_KAABA;
-    if(type === 'wudu') return MEANING_WUDU;
-    if(type === 'shahada') return MEANING_SHAHADA;
-    return '';
-  }
-
-  function findCorrectIndex(options, qType){
-    for(var i=0;i<options.length;i++){
-      if(optionType(options[i]) === qType) return i;
-    }
-    return 0;
-  }
-
-  document.addEventListener('click', function(event){
-    var btn = event.target && event.target.closest ? event.target.closest('.bw-micro-option-btn') : null;
-    if(!btn) return;
-
-    setTimeout(function(){
-      var modal = btn.closest('.bw-task-modal-card');
-      if(!modal || modal.getAttribute('data-task-key') !== 'micro') return;
-
-      var buttons = Array.from(modal.querySelectorAll('.bw-micro-option-btn'));
-      var options = buttons.map(function(node){ return clean(node.textContent); });
-      var question = clean((modal.querySelector('.bw-task-modal-text') || {}).textContent || '');
-      var qType = questionType(question) || optionType(options[0]) || 'wudu';
-      var correctIndex = findCorrectIndex(options, qType);
-      var note = modal.querySelector('#bwMicroAnswerNote');
-
-      buttons.forEach(function(node, index){
-        node.classList.toggle('is-selected', index === correctIndex);
-      });
-
-      if(note){
-        note.textContent = meaningFor(qType);
-        note.classList.add('is-visible');
-      }
-
-      var completeBtn = modal.querySelector('.bw-task-complete-btn');
-      if(completeBtn) completeBtn.disabled = false;
-    }, 0);
-  }, true);
-})();
-</script>
-
 <style id="bw-final-task-state-repair-v2-css">
 .today-hub .today-action.bw-final-done,
 .today-hub .today-action.bw-task-done,
@@ -8398,6 +8320,285 @@ body[class*="theme-"] .today-hub #dailyMicroKnowledgeCard:not(.bw-final-done):no
 <script id="bw-visible-border-pulse-hard-final-js">
 (function(){'use strict';var T={article:'dailyArticleLink',adhkar:'currentAdhkarLink',name:'allahNameCounterCard',goal:'dailyGoalCard',micro:'dailyMicroKnowledgeCard'};function day(){var d=new Date();return d.getFullYear()+'-'+String(d.getMonth()+1).padStart(2,'0')+'-'+String(d.getDate()).padStart(2,'0')}function lang(){return(document.documentElement.getAttribute('lang')||'ru').toLowerCase().split('-')[0]}function keys(l,t){var x=day();return['bw_final_done_v2_'+l+'_'+x+'_'+t,'bw_daily_done_v2_'+l+'_'+x+'_'+t,'barakaway_today_'+l+'_'+x+'_'+t,'barakaway_today_'+l+'_v2_'+x+'_'+t,'barakaway_today_'+l+'_v3_'+x+'_'+t,'barakaway_today_'+l+'_final_'+x+'_'+t]}function done(l,t,c){try{if(keys(l,t).some(function(k){return localStorage.getItem(k)==='1'}))return true}catch(e){}return c.classList.contains('bw-final-done')||c.classList.contains('bw-task-done')||c.classList.contains('task-done')||c.classList.contains('goal-done')||c.getAttribute('aria-disabled')==='true'}function sync(){var l=lang();Object.keys(T).forEach(function(t){var c=document.getElementById(T[t]);if(!c)return;if(done(l,t,c))c.classList.remove('bw-needs-pulse');else c.classList.add('bw-needs-pulse')})}if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',sync,{once:true});else sync();window.addEventListener('pageshow',sync);window.addEventListener('storage',sync);document.addEventListener('click',function(){setTimeout(sync,80)},true);setInterval(sync,500)})();
 </script>
+
+
+<!-- BW PATCH: stable done checkmarks + persistent Allah name counter until next 01:00 -->
+<style id="bw-stable-checkmarks-name-counter-patch">
+.today-hub .today-action.bw-final-done,
+.today-hub .today-action.bw-task-done,
+.today-hub .today-action.task-done,
+.today-hub .today-action.goal-done{
+  animation:none !important;
+  outline:none !important;
+}
+.today-hub .today-action.bw-final-done::after,
+.today-hub .today-action.bw-task-done::after,
+.today-hub .today-action.task-done::after,
+.today-hub .today-action.goal-done::after{
+  content:none !important;
+  display:none !important;
+  animation:none !important;
+}
+.today-hub .today-action.bw-final-done .today-task-status,
+.today-hub .today-action.bw-task-done .today-task-status,
+.today-hub .today-action.task-done .today-task-status,
+.today-hub .today-action.goal-done .today-task-status{
+  opacity:1 !important;
+  animation:none !important;
+  transition:none !important;
+  font-size:0 !important;
+}
+.today-hub .today-action.bw-final-done .today-task-status::before,
+.today-hub .today-action.bw-task-done .today-task-status::before,
+.today-hub .today-action.task-done .today-task-status::before,
+.today-hub .today-action.goal-done .today-task-status::before{
+  content:"✓";
+  font-size:32px !important;
+  line-height:1 !important;
+  color:#6ee78d !important;
+  text-shadow:0 0 14px rgba(110,231,141,.25) !important;
+}
+.today-hub .today-action.bw-final-done.bw-needs-pulse,
+.today-hub .today-action.bw-task-done.bw-needs-pulse,
+.today-hub .today-action.task-done.bw-needs-pulse,
+.today-hub .today-action.goal-done.bw-needs-pulse{
+  animation:none !important;
+  outline:none !important;
+}
+</style>
+<script id="bw-stable-checkmarks-allah-counter-patch-js">
+(function(){
+  'use strict';
+
+  var LANG = (document.documentElement.getAttribute('lang') || 'en').toLowerCase().split('-')[0];
+  var ORIGINAL_SET_ITEM = Storage.prototype.setItem;
+  var syncing = false;
+  var TASKS = {
+    article:'dailyArticleLink',
+    adhkar:'currentAdhkarLink',
+    name:'allahNameCounterCard',
+    goal:'dailyGoalCard',
+    micro:'dailyMicroKnowledgeCard'
+  };
+
+  function dayKey(){
+    var d = new Date();
+    if(d.getHours() < 1){ d.setDate(d.getDate() - 1); }
+    return d.getFullYear() + '-' + String(d.getMonth()+1).padStart(2,'0') + '-' + String(d.getDate()).padStart(2,'0');
+  }
+
+  function calendarDayKey(){
+    var d = new Date();
+    return d.getFullYear() + '-' + String(d.getMonth()+1).padStart(2,'0') + '-' + String(d.getDate()).padStart(2,'0');
+  }
+
+  function taskDoneKeys(task){
+    var d = dayKey();
+    var c = calendarDayKey();
+    var keys = [
+      'bw_final_done_v2_' + LANG + '_' + d + '_' + task,
+      'bw_daily_done_v2_' + LANG + '_' + d + '_' + task,
+      'barakaway_today_' + LANG + '_' + d + '_' + task,
+      'barakaway_today_' + LANG + '_v2_' + d + '_' + task,
+      'barakaway_today_' + LANG + '_v3_' + d + '_' + task,
+      'barakaway_today_' + LANG + '_final_' + d + '_' + task
+    ];
+    if(c !== d){
+      keys = keys.concat([
+        'bw_final_done_v2_' + LANG + '_' + c + '_' + task,
+        'bw_daily_done_v2_' + LANG + '_' + c + '_' + task,
+        'barakaway_today_' + LANG + '_' + c + '_' + task,
+        'barakaway_today_' + LANG + '_v2_' + c + '_' + task,
+        'barakaway_today_' + LANG + '_v3_' + c + '_' + task,
+        'barakaway_today_' + LANG + '_final_' + c + '_' + task
+      ]);
+    }
+    return keys;
+  }
+
+  function nameCountKeys(){
+    var d = dayKey();
+    var c = calendarDayKey();
+    var keys = [
+      'bw_allah_name_counter_persist_' + LANG + '_' + d,
+      'barakaway_name_counter_' + LANG + '_' + d,
+      'barakaway_name_counter_' + LANG + '_v2_' + d,
+      'barakaway_name_counter_' + LANG + '_v3_' + d,
+      'barakaway_name_counter_' + LANG + '_final_' + d,
+      'barakaway_name_counter_' + d
+    ];
+    if(c !== d){
+      keys = keys.concat([
+        'barakaway_name_counter_' + LANG + '_' + c,
+        'barakaway_name_counter_' + LANG + '_v2_' + c,
+        'barakaway_name_counter_' + LANG + '_v3_' + c,
+        'barakaway_name_counter_' + LANG + '_final_' + c,
+        'barakaway_name_counter_' + c
+      ]);
+    }
+    return keys;
+  }
+
+  function safeGet(key){
+    try{ return localStorage.getItem(key); }catch(e){ return null; }
+  }
+
+  function safeSet(key, value){
+    try{ ORIGINAL_SET_ITEM.call(localStorage, key, String(value)); }catch(e){}
+  }
+
+  function normalize(value){
+    var n = parseInt(value, 10);
+    if(!Number.isFinite(n)) n = 0;
+    return Math.max(0, Math.min(100, n));
+  }
+
+  function isDone(task){
+    return taskDoneKeys(task).some(function(key){ return safeGet(key) === '1'; });
+  }
+
+  function writeDone(task){
+    taskDoneKeys(task).forEach(function(key){ safeSet(key, '1'); });
+  }
+
+  function readNameCount(){
+    var max = 0;
+    nameCountKeys().forEach(function(key){ max = Math.max(max, normalize(safeGet(key))); });
+    return isDone('name') ? 100 : max;
+  }
+
+  function writeNameCount(value){
+    var n = normalize(value);
+    syncing = true;
+    nameCountKeys().forEach(function(key){ safeSet(key, n); });
+    if(n >= 100){ writeDone('name'); }
+    syncing = false;
+    return n;
+  }
+
+  function stabilizeDoneCard(task){
+    var card = document.getElementById(TASKS[task]);
+    if(!card || !isDone(task)) return;
+    card.classList.add('bw-final-done','bw-task-done','task-done','goal-done');
+    card.classList.remove('bw-needs-pulse','goal-urgent','task-urgent');
+    card.setAttribute('aria-disabled','true');
+    card.style.animation = 'none';
+    var status = card.querySelector('.today-task-status');
+    if(status) status.textContent = '✓';
+  }
+
+  function paintNameCounter(){
+    var n = writeNameCount(readNameCount());
+    var done = n >= 100;
+    var text = n + '/100';
+    var card = document.getElementById('allahNameCounterCard');
+    if(!card) return;
+
+    var meta = card.querySelector('.bw-task-compact-meta[data-task-meta="name"]');
+    if(!meta){
+      meta = document.createElement('div');
+      meta.className = 'bw-task-compact-meta';
+      meta.setAttribute('data-task-meta', 'name');
+      var title = card.querySelector('.today-action-title');
+      if(title && title.parentElement) title.parentElement.appendChild(meta);
+      else card.appendChild(meta);
+    }
+    meta.textContent = text;
+
+    var value = document.getElementById('allahNameCounterValue');
+    if(value) value.textContent = done ? '✓' : text;
+
+    var fill = document.getElementById('allahNameCounterFill');
+    if(fill) fill.style.width = n + '%';
+
+    if(done){
+      writeDone('name');
+      stabilizeDoneCard('name');
+    }else{
+      card.classList.remove('bw-final-done','bw-task-done','task-done','goal-done');
+      card.classList.add('goal-urgent');
+      card.setAttribute('aria-disabled','false');
+    }
+
+    var modalCount = document.getElementById('bwNameModalCount');
+    if(modalCount) modalCount.textContent = text;
+    var modalComplete = document.querySelector('.bw-task-modal-card[data-task-key="name"] .bw-task-complete-btn');
+    if(modalComplete) modalComplete.disabled = n < 100;
+    var modalPlus = document.getElementById('bwNameModalInc');
+    if(modalPlus) modalPlus.textContent = done ? '100 / 100' : '+1';
+  }
+
+  function syncAll(){
+    paintNameCounter();
+    Object.keys(TASKS).forEach(stabilizeDoneCard);
+  }
+
+  Storage.prototype.setItem = function(key, value){
+    var result = ORIGINAL_SET_ITEM.apply(this, arguments);
+    if(!syncing && this === localStorage && typeof key === 'string' && key.indexOf('barakaway_name_counter_') === 0){
+      var current = readNameCount();
+      var incoming = normalize(value);
+      writeNameCount(Math.max(current, incoming));
+      setTimeout(syncAll, 0);
+    }
+    return result;
+  };
+
+  function syncSoon(){ setTimeout(syncAll, 0); setTimeout(syncAll, 80); }
+
+  if(document.readyState === 'loading') document.addEventListener('DOMContentLoaded', syncAll, {once:true});
+  else syncAll();
+
+  window.addEventListener('pageshow', syncAll);
+  window.addEventListener('storage', syncAll);
+  document.addEventListener('pointerup', syncSoon, true);
+  document.addEventListener('touchend', syncSoon, true);
+  document.addEventListener('click', syncSoon, true);
+  document.addEventListener('keydown', function(e){ if(e.key === 'Enter' || e.key === ' ') syncSoon(); }, true);
+  setInterval(syncAll, 120);
+})();
+</script>
+
+
+<script id="bw-en-micro-meaning-router-clean">
+(function(){
+  'use strict';
+  var MICRO_MEANINGS = [{"q":"Islam?","n":"islam?","opt":["4","5","6"],"meaning":"Islam — .","correct":1,"options":["4","5","6"]},{"q":"Islam — …","n":"islam — …","opt":["shahadah","",""],"meaning":"Shahadah — Islam.","correct":0,"options":["Shahadah","",""]},{"q":"prayer day?","n":"prayer day?","opt":["3","5","6"],"meaning":"prayer day Allah.","correct":1,"options":["3","5","6"]},{"q":"prayer ?","n":"prayer ?","opt":["maghrib","fajr","isha"],"meaning":"Fajr day .","correct":1,"options":["Maghrib","Fajr","Isha"]},{"q":"prayer ?","n":"prayer ?","opt":["maghrib","dhuhr","asr"],"meaning":"Maghrib .","correct":0,"options":["Maghrib","Dhuhr","Asr"]},{"q":"prayer?","n":"prayer?","opt":["","",""],"meaning":"Qiblah .","correct":0,"options":["","",""]},{"q":"prayer?","n":"prayer?","opt":["","",""],"meaning":"Purity — prayer.","correct":0,"options":["","",""]},{"q":"?","n":"?","opt":["3","4","6"],"meaning":".","correct":1,"options":["3","4","6"]},{"q":"…","n":"…","opt":["","",""],"meaning":"Allah .","correct":0,"options":["","",""]},{"q":"?","n":"?","opt":["","",""],"meaning":"iman .","correct":1,"options":["","",""]},{"q":"“”?","n":"“”?","opt":["allah","",""],"meaning":"deed Allah.","correct":0,"options":["Allah","",""]},{"q":"“”?","n":"“”?","opt":["allah","forgiveness",""],"meaning":", Allah.","correct":0,"options":["Allah","forgiveness",""]},{"q":"“”?","n":"“”?","opt":["forgiveness allah","",""],"meaning":"heart Allah.","correct":0,"options":["forgiveness Allah","",""]},{"q":"“ ”?","n":"“ ”?","opt":["","",""],"meaning":"— dua .","correct":0,"options":["","",""]},{"q":"— …","n":"— …","opt":["","",""],"meaning":".","correct":1,"options":["","",""]},{"q":"?","n":"?","opt":["","","allah"],"meaning":"Hell Allah.","correct":2,"options":["","","Allah"]},{"q":"Allah ?","n":"allah ?","opt":["","",""],"meaning":"goodness .","correct":0,"options":["","",""]},{"q":"Allah dua?","n":"allah dua?","opt":["","",""],"meaning":"— Allah heart.","correct":0,"options":["","",""]},{"q":"Hell — day?","n":"hell — day?","opt":["","",""],"meaning":", help sadaqah.","correct":1,"options":["","",""]},{"q":"— …","n":"— …","opt":["hell","",""],"meaning":"goodness .","correct":0,"options":["Hell","",""]},{"q":"— …","n":"— …","opt":["","",""],"meaning":", people.","correct":0,"options":["","",""]},{"q":"heart…","n":"heart…","opt":["","",""],"meaning":"Allah .","correct":1,"options":["","",""]},{"q":"…","n":"…","opt":["","",""],"meaning":"anger — .","correct":0,"options":["","",""]},{"q":"?","n":"?","opt":["","",""],"meaning":"Allah .","correct":0,"options":["","",""]},{"q":"?","n":"?","opt":["","allah",""],"meaning":"— , Allah.","correct":1,"options":["","Allah",""]},{"q":"Ramadan — …","n":"ramadan — …","opt":["","",""],"meaning":"Ramadan .","correct":0,"options":["","",""]},{"q":"Ramadan — …","n":"ramadan — …","opt":["islam","",""],"meaning":"— , .","correct":0,"options":["Islam","",""]},{"q":"— …","n":"— …","opt":["","",""],"meaning":".","correct":0,"options":["","",""]},{"q":"Hell ?","n":"hell ?","opt":["","",""],"meaning":"Hell .","correct":0,"options":["","",""]},{"q":"Qur’an — …","n":"qur’an — …","opt":["allah","",""],"meaning":"Qur’an — .","correct":0,"options":["Allah","",""]},{"q":"surah Qur’an — …","n":"surah qur’an — …","opt":["-","-","-"],"meaning":"- prayer Qur’an.","correct":0,"options":["-","-","-"]},{"q":"- …","n":"- …","opt":["allah","",""],"meaning":"— .","correct":0,"options":["Allah","",""]},{"q":"iman?","n":"iman?","opt":["4","5","6"],"meaning":"Allah, , , , day .","correct":2,"options":["4","5","6"]},{"q":"?","n":"?","opt":["","",""],"meaning":"— iman.","correct":0,"options":["","",""]},{"q":"day?","n":"day?","opt":["","",""],"meaning":".","correct":0,"options":["","",""]},{"q":"?","n":"?","opt":["","",""],"meaning":"goodness Allah .","correct":0,"options":["","",""]},{"q":"?","n":"?","opt":["","",""],"meaning":".","correct":0,"options":["","",""]},{"q":"— …","n":"— …","opt":["","",""],"meaning":"Allah.","correct":0,"options":["","",""]},{"q":"Allah ?","n":"allah ?","opt":["","",""],"meaning":".","correct":0,"options":["","",""]},{"q":"— …","n":"— …","opt":["","purity",""],"meaning":"Hell .","correct":0,"options":["","Purity",""]},{"q":"— …","n":"— …","opt":["","",""],"meaning":"deed Hell Allah, Hell people.","correct":0,"options":["","",""]},{"q":"— …","n":"— …","opt":["","",""],"meaning":".","correct":0,"options":["","",""]},{"q":"— …","n":"— …","opt":["","",""],"meaning":".","correct":0,"options":["","",""]},{"q":"— …","n":"— …","opt":["allah","","people"],"meaning":"Allah.","correct":0,"options":["Allah","","people"]},{"q":"?","n":"?","opt":["","",""],"meaning":"— .","correct":0,"options":["","",""]},{"q":"…","n":"…","opt":["","",""],"meaning":"- — .","correct":0,"options":["","",""]},{"q":"Hell ?","n":"hell ?","opt":["","",""],"meaning":"people.","correct":0,"options":["","",""]},{"q":"?","n":"?","opt":["","",""],"meaning":".","correct":0,"options":["","",""]},{"q":"Purity Islam — …","n":"purity islam — …","opt":["","",""],"meaning":"Purity , , .","correct":0,"options":["","",""]},{"q":"…","n":"…","opt":["","",""],"meaning":"Allah.","correct":0,"options":["","",""]},{"q":"…","n":"…","opt":["","",""],"meaning":".","correct":0,"options":["","",""]},{"q":"…","n":"…","opt":["allah","",""],"meaning":"heart.","correct":0,"options":["Allah","",""]},{"q":"…","n":"…","opt":["allah","",""],"meaning":"day — .","correct":0,"options":["Allah","",""]},{"q":"?","n":"?","opt":["","",""],"meaning":"people.","correct":0,"options":["","",""]},{"q":"— …","n":"— …","opt":["","",""],"meaning":", , .","correct":0,"options":["","",""]},{"q":"…","n":"…","opt":["","",""],"meaning":"— .","correct":0,"options":["","",""]},{"q":"?","n":"?","opt":["","",""],"meaning":", .","correct":0,"options":["","",""]},{"q":"— …","n":"— …","opt":["","",""],"meaning":".","correct":0,"options":["","",""]},{"q":", …","n":", …","opt":["","",""],"meaning":"Allah.","correct":0,"options":["","",""]},{"q":"— …","n":"— …","opt":["","",""],"meaning":"goodness .","correct":0,"options":["","",""]},{"q":"?","n":"?","opt":["","",""],"meaning":"— .","correct":0,"options":["","",""]},{"q":": ?","n":": ?","opt":["","",""],"meaning":".","correct":0,"options":["","",""]},{"q":"?","n":"?","opt":["hell ﷺ","عليه السلام","عليه السلام"],"meaning":"Hell ﷺ — .","correct":0,"options":["Hell ﷺ","عليه السلام","عليه السلام"]},{"q":"?","n":"?","opt":["","",""],"meaning":"— iman.","correct":0,"options":["","",""]},{"q":"?","n":"?","opt":["عليه السلام","",""],"meaning":"عليه السلام Allah.","correct":0,"options":["عليه السلام","",""]},{"q":"عليه السلام …","n":"عليه السلام …","opt":["","",""],"meaning":"Allah .","correct":0,"options":["","",""]},{"q":"عليه السلام …","n":"عليه السلام …","opt":["","",""],"meaning":".","correct":0,"options":["","",""]},{"q":"عليه السلام …","n":"عليه السلام …","opt":["","","hell"],"meaning":"— Allah.","correct":0,"options":["","","Hell"]},{"q":"عليه السلام — …","n":"عليه السلام — …","opt":["allah","",""],"meaning":".","correct":0,"options":["Allah","",""]},{"q":", عليه السلام — …","n":", عليه السلام — …","opt":["","",""],"meaning":"— iman.","correct":0,"options":["","",""]},{"q":", عليه السلام — …","n":", عليه السلام — …","opt":["","","qur’an"],"meaning":"Allah.","correct":0,"options":["","","Qur’an"]},{"q":"Qur’an …","n":"qur’an …","opt":["hell ﷺ","عليه السلام","عليه السلام"],"meaning":"Qur’an — .","correct":0,"options":["Hell ﷺ","عليه السلام","عليه السلام"]},{"q":"عليه السلام — …","n":"عليه السلام — …","opt":["","",""],"meaning":".","correct":0,"options":["","",""]},{"q":"…","n":"…","opt":["","prayer","iman"],"meaning":", .","correct":0,"options":["","prayer","iman"]},{"q":"?","n":"?","opt":["","",""],"meaning":"Allah — .","correct":0,"options":["","",""]},{"q":"…","n":"…","opt":["","",""],"meaning":".","correct":0,"options":["","",""]},{"q":"…","n":"…","opt":["","",""],"meaning":", heart .","correct":0,"options":["","",""]},{"q":"Islam?","n":"islam?","opt":["","",""],"meaning":".","correct":0,"options":["","",""]},{"q":"Islam…","n":"islam…","opt":["","",""],"meaning":".","correct":0,"options":["","",""]},{"q":"— …","n":"— …","opt":["","",""],"meaning":", .","correct":0,"options":["","",""]},{"q":"— …","n":"— …","opt":["","",""],"meaning":", , .","correct":0,"options":["","",""]},{"q":"?","n":"?","opt":["","",""],"meaning":", .","correct":0,"options":["","",""]},{"q":"— …","n":"— …","opt":["","",""],"meaning":".","correct":0,"options":["","",""]},{"q":"“”?","n":"“”?","opt":["","",""],"meaning":"Qur’an .","correct":0,"options":["","",""]},{"q":"…","n":"…","opt":["","",""],"meaning":"— .","correct":0,"options":["","",""]},{"q":"…","n":"…","opt":["","",""],"meaning":"Allah.","correct":0,"options":["","",""]},{"q":"?","n":"?","opt":["","",""],"meaning":"Islam .","correct":0,"options":["","",""]},{"q":"Islam …","n":"islam …","opt":["","",""],"meaning":"— .","correct":0,"options":["","",""]},{"q":"…","n":"…","opt":["","",""],"meaning":".","correct":0,"options":["","",""]},{"q":"…","n":"…","opt":["","",""],"meaning":"heart .","correct":0,"options":["","",""]},{"q":", …","n":", …","opt":[":","",""],"meaning":"“ ” — .","correct":0,"options":[":","",""]},{"q":"— …","n":"— …","opt":["","",""],"meaning":".","correct":0,"options":["","",""]},{"q":"…","n":"…","opt":["","",""],"meaning":"Hell .","correct":0,"options":["","",""]},{"q":"Qur’an …","n":"qur’an …","opt":["","",""],"meaning":"Allah, Hell.","correct":0,"options":["","",""]},{"q":"Qur’an …","n":"qur’an …","opt":["","",""],"meaning":"Purity .","correct":0,"options":["","",""]},{"q":"…","n":"…","opt":["ﷺ","",""],"meaning":"— ﷺ.","correct":0,"options":["ﷺ","",""]},{"q":"ﷺ …","n":"ﷺ …","opt":["","",""],"meaning":"Hell Allah ﷺ.","correct":0,"options":["","",""]},{"q":"— …","n":"— …","opt":["","",""],"meaning":".","correct":0,"options":["","",""]},{"q":"…","n":"…","opt":["","",""],"meaning":".","correct":0,"options":["","",""]},{"q":"…","n":"…","opt":["","",""],"meaning":"prayer .","correct":0,"options":["","",""]},{"q":"…","n":"…","opt":["","hell",""],"meaning":"patience.","correct":0,"options":["","Hell",""]},{"q":"Hell …","n":"hell …","opt":["","",""],"meaning":", heart.","correct":0,"options":["","",""]},{"q":"…","n":"…","opt":["","",""],"meaning":"Islam .","correct":0,"options":["","",""]},{"q":"…","n":"…","opt":["","",""],"meaning":"prayer — .","correct":0,"options":["","",""]},{"q":"prayer ?","n":"prayer ?","opt":["","",""],"meaning":"— , .","correct":0,"options":["","",""]},{"q":", …","n":", …","opt":["","",""],"meaning":".","correct":0,"options":["","",""]},{"q":"— , …","n":"— , …","opt":["anger","",""],"meaning":"— Hell .","correct":0,"options":["anger","",""]},{"q":"Hell — …","n":"hell — …","opt":["","",""],"meaning":"Hell .","correct":0,"options":["","",""]},{"q":"— …","n":"— …","opt":["","",""],"meaning":".","correct":0,"options":["","",""]},{"q":"?","n":"?","opt":["","",""],"meaning":"people .","correct":0,"options":["","",""]},{"q":", …","n":", …","opt":["","",""],"meaning":", .","correct":0,"options":["","",""]},{"q":"goodness …","n":"goodness …","opt":["","",""],"meaning":"goodness .","correct":0,"options":["","",""]},{"q":"goodness, …","n":"goodness, …","opt":["","",""],"meaning":"Hell Allah .","correct":0,"options":["","",""]},{"q":"?","n":"?","opt":["allah","",""],"meaning":".","correct":0,"options":["Allah","",""]},{"q":"Allah?","n":"allah?","opt":["","",""],"meaning":"Allah .","correct":0,"options":["","",""]},{"q":"Hell Allah …","n":"hell allah …","opt":["","",""],"meaning":"Hell .","correct":0,"options":["","",""]},{"q":"Allah …","n":"allah …","opt":["","",""],"meaning":".","correct":0,"options":["","",""]},{"q":"Allah …","n":"allah …","opt":["","",""],"meaning":".","correct":0,"options":["","",""]},{"q":"…","n":"…","opt":["","",""],"meaning":"Allah heart.","correct":0,"options":["","",""]},{"q":"— …","n":"— …","opt":["","",""],"meaning":".","correct":0,"options":["","",""]},{"q":"…","n":"…","opt":["allah","",""],"meaning":"Allah.","correct":0,"options":["Allah","",""]},{"q":"Allah …","n":"allah …","opt":["allah","",""],"meaning":", Allah .","correct":0,"options":["Allah","",""]},{"q":"…","n":"…","opt":["allah","",""],"meaning":".","correct":0,"options":["Allah","",""]},{"q":"…","n":"…","opt":["","",""],"meaning":"— .","correct":0,"options":["","",""]},{"q":"…","n":"…","opt":["","",""],"meaning":".","correct":0,"options":["","",""]},{"q":"— …","n":"— …","opt":["","",""],"meaning":".","correct":0,"options":["","",""]},{"q":"?","n":"?","opt":["","",""],"meaning":".","correct":0,"options":["","",""]},{"q":"?","n":"?","opt":["","",""],"meaning":".","correct":0,"options":["","",""]},{"q":"…","n":"…","opt":["","",""],"meaning":".","correct":0,"options":["","",""]},{"q":"…","n":"…","opt":["","",""],"meaning":"— .","correct":0,"options":["","",""]},{"q":"…","n":"…","opt":[",","",""],"meaning":".","correct":0,"options":[",","",""]},{"q":", …","n":", …","opt":["","",""],"meaning":"Hell Allah heart.","correct":0,"options":["","",""]},{"q":"?","n":"?","opt":["","",""],"meaning":"— .","correct":0,"options":["","",""]},{"q":", …","n":", …","opt":["","",""],"meaning":".","correct":0,"options":["","",""]},{"q":"— …","n":"— …","opt":["","",""],"meaning":"Islam .","correct":0,"options":["","",""]},{"q":"?","n":"?","opt":["","",""],"meaning":".","correct":0,"options":["","",""]},{"q":"— …","n":"— …","opt":["","",""],"meaning":"people .","correct":0,"options":["","",""]},{"q":"Purity — …","n":"purity — …","opt":["","","deed"],"meaning":".","correct":0,"options":["","","deed"]},{"q":", …","n":", …","opt":["","",""],"meaning":".","correct":0,"options":["","",""]},{"q":"— …","n":"— …","opt":["","",""],"meaning":".","correct":0,"options":["","",""]},{"q":"…","n":"…","opt":["","",""],"meaning":".","correct":0,"options":["","",""]},{"q":"goodness Allah…","n":"goodness allah…","opt":["","",""],"meaning":"deed .","correct":0,"options":["","",""]},{"q":"goodness ?","n":"goodness ?","opt":["","",""],"meaning":"Allah , Hell .","correct":0,"options":["","",""]},{"q":", dua?","n":", dua?","opt":["","",""],"meaning":".","correct":0,"options":["","",""]},{"q":"?","n":"?","opt":["","",""],"meaning":"Allah .","correct":0,"options":["","",""]},{"q":"Hell — …","n":"hell — …","opt":["allah","",""],"meaning":"— , — Allah.","correct":0,"options":["Allah","",""]},{"q":", …","n":", …","opt":["","?",""],"meaning":".","correct":0,"options":["","?",""]},{"q":"deed, …","n":"deed, …","opt":["allah","",""],"meaning":"Allah.","correct":0,"options":["Allah","",""]},{"q":", …","n":", …","opt":["","",""],"meaning":"heart .","correct":0,"options":["","",""]},{"q":"- , …","n":"- , …","opt":["","",""],"meaning":".","correct":0,"options":["","",""]}];
+  var DEFAULT_MEANING = "Meaning: choose the correct answer and remember today’s lesson.";
+  function clean(value){ return String(value || '').replace(/\s+/g,' ').trim(); }
+  function norm(value){ return clean(value).toLowerCase(); }
+  function findItem(question){
+    var q = norm(question);
+    for(var i=0;i<MICRO_MEANINGS.length;i++){
+      if(MICRO_MEANINGS[i].n === q) return MICRO_MEANINGS[i];
+    }
+    return null;
+  }
+  function applyMicroMeaning(modal){
+    if(!modal || modal.getAttribute('data-task-key') !== 'micro') return;
+    var questionEl = modal.querySelector('.bw-task-modal-text');
+    var note = modal.querySelector('#bwMicroAnswerNote');
+    var buttons = Array.prototype.slice.call(modal.querySelectorAll('.bw-micro-option-btn'));
+    if(!questionEl || !note || !buttons.length) return;
+    var item = findItem(questionEl.textContent, buttons);
+    var correct = item && typeof item.correct === 'number' ? item.correct : -1;
+    if(correct >= 0 && correct < buttons.length){
+      buttons.forEach(function(btn, index){ btn.classList.toggle('is-selected', index === correct); });
+    }
+    note.textContent = item && item.meaning ? item.meaning : DEFAULT_MEANING;
+    note.classList.add('is-visible');
+    var completeBtn = modal.querySelector('.bw-task-complete-btn');
+    if(completeBtn) completeBtn.disabled = false;
+  }
+  document.addEventListener('click', function(event){
+    var btn = event.target && event.target.closest ? event.target.closest('.bw-micro-option-btn') : null;
+    if(!btn) return;
+    var modal = btn.closest('.bw-task-modal-card');
+    setTimeout(function(){ applyMicroMeaning(modal); }, 30);
+  }, true);
+})();
+</script>
+
 </body>
 </html>
 
