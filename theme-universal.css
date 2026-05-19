@@ -7724,3 +7724,76 @@ html.light-mode body[data-surah-page-key] .content-controls{
     gap:8px !important;
   }
 }
+
+
+/* ===== ADHKAR THEME PARITY FIX ===== */
+/* Scoped only to adhkar pages that contain #layerControls. Keeps dark/light mode consistent across PWA, GitHub and localhost. */
+
+html.dark-mode body:has(#layerControls),
+body.dark-mode:has(#layerControls){
+  background:
+    radial-gradient(circle at 50% -10%,rgba(215,181,109,.18),transparent 36%),
+    linear-gradient(180deg,var(--bg),var(--bg)) !important;
+  color:var(--text) !important;
+}
+
+html.light-mode body:has(#layerControls),
+body.light-mode:has(#layerControls){
+  background:
+    radial-gradient(circle at 50% -10%,rgba(215,181,109,.18),transparent 36%),
+    linear-gradient(180deg,var(--bg),var(--bg)) !important;
+  color:var(--text) !important;
+}
+
+html.dark-mode body:has(#layerControls) .container,
+body.dark-mode:has(#layerControls) .container{
+  background:linear-gradient(180deg,rgba(18,30,36,.98),rgba(12,22,27,.98)) !important;
+  color:var(--text) !important;
+  border:1px solid rgba(215,181,109,.18) !important;
+  box-shadow:var(--shadow) !important;
+}
+
+html.light-mode body:has(#layerControls) .container,
+body.light-mode:has(#layerControls) .container{
+  background:linear-gradient(180deg,rgba(255,255,255,.76),rgba(255,255,255,.58)),var(--card) !important;
+  color:var(--text) !important;
+  border:1px solid rgba(215,181,109,.18) !important;
+  box-shadow:var(--shadow) !important;
+}
+
+html.dark-mode body:has(#layerControls) .page-actions,
+html.dark-mode body:has(#layerControls) .layer-controls,
+body.dark-mode:has(#layerControls) .page-actions,
+body.dark-mode:has(#layerControls) .layer-controls{
+  background:linear-gradient(180deg,rgba(18,30,36,.98),rgba(18,30,36,.94)) !important;
+  color:var(--text) !important;
+}
+
+html.light-mode body:has(#layerControls) .page-actions,
+html.light-mode body:has(#layerControls) .layer-controls,
+body.light-mode:has(#layerControls) .page-actions,
+body.light-mode:has(#layerControls) .layer-controls{
+  background:linear-gradient(180deg,rgba(255,254,249,.98),rgba(255,254,249,.94)) !important;
+  color:var(--text) !important;
+}
+
+html.dark-mode body:has(#layerControls) .card,
+html.dark-mode body:has(#layerControls) .panel,
+body.dark-mode:has(#layerControls) .card,
+body.dark-mode:has(#layerControls) .panel{
+  background:radial-gradient(circle at 94% 0%,rgba(215,181,109,.12),transparent 35%),linear-gradient(180deg,var(--card),var(--card)) !important;
+  border:1px solid var(--border) !important;
+  color:var(--text) !important;
+  box-shadow:var(--shadow2) !important;
+}
+
+html.light-mode body:has(#layerControls) .card,
+html.light-mode body:has(#layerControls) .panel,
+body.light-mode:has(#layerControls) .card,
+body.light-mode:has(#layerControls) .panel{
+  background:radial-gradient(circle at 94% 0%,rgba(215,181,109,.12),transparent 35%),linear-gradient(180deg,var(--card),var(--card)) !important;
+  border:1px solid var(--border) !important;
+  color:var(--text) !important;
+  box-shadow:var(--shadow2) !important;
+}
+

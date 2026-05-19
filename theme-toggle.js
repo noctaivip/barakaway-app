@@ -104,12 +104,26 @@
 
   function syncState(){
     if(isQuranSurahPage()){
-      document.documentElement.classList.remove('dark-mode');
-      document.documentElement.classList.add('light-mode');
+      var inherited = safeGet('siteTheme') || safeGet('theme') || (document.documentElement.classList.contains('dark-mode') ? 'dark' : 'light');
+      inherited = inherited === 'light' ? 'light' : 'dark';
+
+      document.documentElement.classList.remove('light-mode','dark-mode');
+      document.documentElement.classList.add(inherited + '-mode');
+
       if(document.body){
-        document.body.classList.remove('dark-mode');
-        document.body.classList.add('light-mode');
+        document.body.classList.remove('light-mode','dark-mode');
+        document.body.classList.add(inherited + '-mode');
       }
+
+      getSwitches().forEach(function(switchEl){
+        switchEl.checked = inherited === 'light';
+        switchEl.setAttribute('aria-checked', inherited === 'light' ? 'true' : 'false');
+      });
+
+      getLabels().forEach(function(label){
+        label.textContent = inherited === 'dark' ? 'Light mode' : 'Dark mode';
+      });
+
       return;
     }
 

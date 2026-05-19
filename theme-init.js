@@ -69,7 +69,7 @@
     try {
       const path = (window.location && window.location.pathname ? window.location.pathname : "").toLowerCase();
       const body = document.body;
-      return !!(body && body.hasAttribute("data-surah-page-key")) || /\/quran-ru\/[^/]+-ru\.html$/.test(path);
+      return !!(body && body.hasAttribute("data-surah-page-key")) || /\/quran-[a-z]{2,3}\/[^/]+-[a-z]{2,3}\.html$/.test(path);
     } catch(e) {
       return false;
     }

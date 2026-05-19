@@ -4531,14 +4531,14 @@ html[dir="rtl"] #allahNameCounterCard:not(.bw-task-done) .bw-task-compact-meta[d
   </div>
 
   <div class="today-hub-grid">
-    <a class="today-action today-daily-task" id="dailyलेखLink" href="javascript:void(0)" role="button" aria-label="अमल के साथ आज की आयत" data-task-key="article">
+    <a class="today-action today-daily-task" id="dailyArticleLink" href="javascript:void(0)" role="button" aria-label="अमल के साथ आज की आयत" data-task-key="article">
       <div class="today-action-top">
         <div class="today-action-icon">📖</div>
-        <div class="today-action-arrow today-task-status" id="dailyलेखStatus">→</div>
+        <div class="today-action-arrow today-task-status" id="dailyArticleStatus">→</div>
       </div>
       <div>
         <div class="today-action-title">आज की आयत</div>
-        <div class="today-action-text" id="dailyलेखTitle">आज की आयत लोड हो रही है...</div>
+        <div class="today-action-text" id="dailyArticleTitle">आज की आयत लोड हो रही है...</div>
       </div>
     </a>
 
@@ -5228,8 +5228,8 @@ const goals = [
 const articleDay = getDaysSince(articleStartDate);
   const articleIndex = articles.length ? articleDay % articles.length : 0;
   const article = articles[articleIndex];
-  const articleLink = document.getElementById('dailyलेखLink');
-  const articleTitle = document.getElementById('dailyलेखTitle');
+  const articleLink = document.getElementById('dailyArticleLink');
+  const articleTitle = document.getElementById('dailyArticleTitle');
   if(article && articleLink && articleTitle){
     articleLink.href = article.url;
     articleTitle.textContent = article.title;
@@ -5279,16 +5279,6 @@ const articleDay = getDaysSince(articleStartDate);
     count = count >= 100 ? 100 : count + 1;
     localStorage.setItem(storageKey, String(count));
     renderCounter();
-  }
-
-  if(card){
-    card.addEventListener('click', incrementCounter);
-    card.addEventListener('keydown', function(e){
-      if(e.key === 'Enter' || e.key === ' '){
-        e.preventDefault();
-        incrementCounter();
-      }
-    });
   }
   renderCounter();
 
@@ -5372,8 +5362,8 @@ const articleDay = getDaysSince(articleStartDate);
     'अल्लाह ﷻ की एक खास नेमत पर शुक्र अदा करें।'
   ];
   const article = articles[dayNumber % articles.length];
-  const articleLink = document.getElementById('dailyलेखLink');
-  const articleTitle = document.getElementById('dailyलेखTitle');
+  const articleLink = document.getElementById('dailyArticleLink');
+  const articleTitle = document.getElementById('dailyArticleTitle');
   if(articleLink && articleTitle){ articleLink.href = article.url; articleTitle.textContent = article.title; }
   const hour = new Date().getHours();
   const currentAdhkarTitle = document.getElementById('currentAdhkarTitle');
@@ -5400,10 +5390,6 @@ const articleDay = getDaysSince(articleStartDate);
     count = count >= 100 ? 0 : count + 1;
     localStorage.setItem(storageKey, String(count));
     renderCounter();
-  }
-  if(card){
-    card.addEventListener('click', incrementCounter);
-    card.addEventListener('keydown', function(e){ if(e.key === 'Enter' || e.key === ' '){ e.preventDefault(); incrementCounter(); } });
   }
   renderCounter();
   const practice = document.getElementById('dailyPracticeText');
@@ -5521,8 +5507,8 @@ const articleDay = getDaysSince(articleStartDate);
     card.setAttribute("aria-disabled", done ? "true" : "false");
   }
 
-  const articleCard = document.getElementById("dailyलेखLink");
-  const articleStatus = document.getElementById("dailyलेखStatus");
+  const articleCard = document.getElementById("dailyArticleLink");
+  const articleStatus = document.getElementById("dailyArticleStatus");
 
   const adhkarCard = document.getElementById("currentAdhkarLink");
   const adhkarStatus = document.getElementById("currentAdhkarStatus");
@@ -6183,8 +6169,8 @@ const articleDay = getDaysSince(articleStartDate);
 
   function renderAyahCard(){
     const ayah = pickAyahForआज();
-    const card = document.getElementById('dailyलेखLink');
-    const text = document.getElementById('dailyलेखTitle');
+    const card = document.getElementById('dailyArticleLink');
+    const text = document.getElementById('dailyArticleTitle');
     const title = card ? card.querySelector('.today-action-title') : null;
 
     if(card){
@@ -6218,7 +6204,7 @@ const articleDay = getDaysSince(articleStartDate);
 
   renderAyahCard();
 
-  const card = document.getElementById('dailyलेखLink');
+  const card = document.getElementById('dailyArticleLink');
   if(card){
     card.addEventListener('click', function(event){
       event.preventDefault();
@@ -8443,17 +8429,6 @@ const TASK_PREFIX = "barakaway_today_hi_";
     if(!card || card.dataset.nameCounterLocked === "1") return;
 
     card.dataset.nameCounterLocked = "1";
-
-    card.addEventListener("click", function(event){
-      completeOneNameClick(event);
-    }, true);
-
-    card.addEventListener("keydown", function(event){
-      if(event.key === "Enter" || event.key === " "){
-        completeOneNameClick(event);
-      }
-    }, true);
-
     renderNameCounter();
   }
 
@@ -9126,16 +9101,6 @@ const TASK_PREFIX = "barakaway_today_hi_";
 
     if(card.dataset.bwFinalCounterBound !== '1'){
       card.dataset.bwFinalCounterBound = '1';
-
-      card.addEventListener('pointerup', function(e){
-        increment(e);
-      }, true);
-
-      card.addEventListener('touchend', function(e){
-        lastTouchAt = Date.now();
-        increment(e);
-      }, {capture:true, passive:false});
-
       card.addEventListener('click', function(e){
         if(Date.now() - lastTouchAt < 450) return;
         increment(e);
@@ -9603,6 +9568,200 @@ body[class*="theme-"] .today-hub #dailyMicroKnowledgeCard:not(.bw-final-done):no
     if(!btn) return;
     var modal = btn.closest('.bw-task-modal-card');
     setTimeout(function(){ applyMicroMeaning(modal); }, 30);
+  }, true);
+})();
+</script>
+
+
+
+<!-- BW PATCH: force Daily Ayah card modal flow from RU logic -->
+<style id="bw-force-ayah-modal-flow-style">
+.bw-ayah-force-modal-overlay{position:fixed;inset:0;z-index:99999;display:flex;align-items:center;justify-content:center;padding:18px;background:rgba(0,0,0,.58);backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px);box-sizing:border-box;}
+.bw-ayah-force-modal-card{width:min(100%,430px);border-radius:24px;padding:22px 20px;background:linear-gradient(180deg,#132035 0%,#101a2b 100%);border:1px solid rgba(102,198,128,.35);box-shadow:0 24px 60px rgba(0,0,0,.38);color:#fff;box-sizing:border-box;}
+html.light-mode .bw-ayah-force-modal-card{background:linear-gradient(180deg,#ffffff 0%,#f7faf8 100%);color:#162019;box-shadow:0 24px 60px rgba(18,34,24,.20);}
+.bw-ayah-force-title{margin:0 0 10px;font-size:24px;line-height:1.15;font-weight:900;letter-spacing:-.035em;color:#9ff3cf;}
+.bw-ayah-force-ref{display:inline-flex;margin:0 0 12px;padding:4px 10px;border-radius:999px;background:rgba(215,192,122,.14);border:1px solid rgba(215,192,122,.28);color:#f1d889;font-weight:900;font-size:12px;}
+html.light-mode .bw-ayah-force-ref{background:#fff7e4;color:#7b5b13;border-color:rgba(141,107,22,.18);}
+.bw-ayah-force-main{font-size:17px;line-height:1.5;font-weight:800;margin:0 0 14px;}
+.bw-ayah-force-task{font-size:15px;line-height:1.5;font-weight:700;margin:0 0 18px;padding:14px;border-radius:16px;background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.10);}
+html.light-mode .bw-ayah-force-task{background:#f2f8f4;border-color:rgba(45,122,70,.12);}
+.bw-ayah-force-actions{display:flex;flex-direction:column;gap:10px;}
+.bw-ayah-force-complete,.bw-ayah-force-close{width:100%;min-height:46px;border-radius:999px;border:1px solid rgba(102,198,128,.35);font-weight:900;font-size:15px;cursor:pointer;}
+.bw-ayah-force-complete{background:#087348;color:#fff;box-shadow:0 0 18px rgba(102,198,128,.22);}
+.bw-ayah-force-close{background:rgba(255,255,255,.06);color:inherit;}
+html.light-mode .bw-ayah-force-close{background:#fff;}
+</style>
+<script id="bw-force-ayah-modal-flow-js">
+(function(){
+  'use strict';
+  var LANG = 'hi';
+  var COMPLETE_TEXT = 'कार्य पूरा हुआ';
+  var CLOSE_TEXT = 'बंद करें';
+  var TASK_LABEL = 'कार्य';
+  var FALLBACK_TITLE = 'दिन की आयत';
+  var FALLBACK_TASK = 'आज की आयत का कार्य पूरा करें।';
+
+  function dateKey(){
+    var d = new Date();
+    return d.getFullYear() + '-' + String(d.getMonth()+1).padStart(2,'0') + '-' + String(d.getDate()).padStart(2,'0');
+  }
+  function get(k){ try{ return localStorage.getItem(k); }catch(e){ return null; } }
+  function set(k,v){ try{ localStorage.setItem(k,v); }catch(e){} }
+  function remove(k){ try{ localStorage.removeItem(k); }catch(e){} }
+  function doneKey(){ return 'bw_ayah_card_done_v1_' + LANG + '_' + dateKey(); }
+  function legacyKeys(){
+    var x = dateKey();
+    return [
+      'barakaway_today_' + LANG + '_' + x + '_article',
+      'barakaway_today_' + LANG + '_v2_' + x + '_article',
+      'barakaway_today_' + LANG + '_v3_' + x + '_article',
+      'barakaway_today_' + LANG + '_final_' + x + '_article',
+      'bw_daily_done_v2_' + LANG + '_' + x + '_article',
+      'bw_final_done_v2_' + LANG + '_' + x + '_article'
+    ];
+  }
+  function isDone(){ return get(doneKey()) === '1'; }
+  function markDone(){
+    set(doneKey(),'1');
+    legacyKeys().forEach(function(k){ set(k,'1'); });
+  }
+  function clearLegacyIfNotDone(){
+    if(isDone()) return;
+    legacyKeys().forEach(remove);
+  }
+  function card(){
+    return document.getElementById('dailyArticleLink') || document.querySelector('[data-task-key="article"]');
+  }
+  function clean(v){ return String(v || '').replace(/\s+/g,' ').trim(); }
+  function text(sel, root){ var el = (root || document).querySelector(sel); return el ? clean(el.textContent) : ''; }
+  function stripTask(v){ return clean(v).replace(/^(Задание|Task|Vazifa|Görev|Tugas|Тапсырма|کام|المهمة|কাজ|कार्य)\s*[:：]\s*/i,''); }
+  function htmlEscape(v){
+    return String(v || '').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;').replace(/'/g,'&#039;');
+  }
+  function getData(){
+    var c = card();
+    var title = text('.today-action-title', c) || FALLBACK_TITLE;
+    var ref = text('.today-ayah-ref', c);
+    var line = text('.today-ayah-line', c);
+    var task = stripTask(text('.today-ayah-task', c));
+    var full = text('#dailyArticleTitle', c) || text('#dailyArticleTitle') || '';
+    if(!line && full){ line = clean(full.replace(task,'').replace(ref,'')); }
+    if(!task) task = FALLBACK_TASK;
+    if(!line) line = title;
+    return {title:title, ref:ref, line:line, task:task};
+  }
+  function setStatus(done){
+    var c = card(); if(!c) return;
+    if(!c.id) c.id = 'dailyArticleLink';
+    c.setAttribute('href','javascript:void(0)');
+    c.setAttribute('role','button');
+    c.setAttribute('aria-disabled', done ? 'true' : 'false');
+    ['bw-final-done','bw-task-done','task-done','goal-done'].forEach(function(cls){ c.classList.toggle(cls, !!done); });
+    ['bw-needs-pulse','goal-urgent','task-urgent'].forEach(function(cls){ if(done) c.classList.remove(cls); });
+    c.style.setProperty('--task-red-opacity', done ? '0' : '');
+    c.style.setProperty('--goal-red-opacity', done ? '0' : '');
+    var s = document.getElementById('dailyArticleStatus') || c.querySelector('.today-task-status');
+    if(s) s.textContent = done ? '✓' : '→';
+  }
+  function sync(){ clearLegacyIfNotDone(); setStatus(isDone()); }
+  function closeModal(){ var old = document.querySelector('.bw-ayah-force-modal-overlay'); if(old) old.remove(); }
+  function openModal(){
+    if(isDone()) return;
+    closeModal();
+    var d = getData();
+    var overlay = document.createElement('div');
+    overlay.className = 'bw-ayah-force-modal-overlay';
+    overlay.innerHTML = '<div class="bw-ayah-force-modal-card" role="dialog" aria-modal="true">' +
+      '<h3 class="bw-ayah-force-title">' + htmlEscape(d.title) + '</h3>' +
+      (d.ref ? '<div class="bw-ayah-force-ref">' + htmlEscape(d.ref) + '</div>' : '') +
+      '<p class="bw-ayah-force-main">' + htmlEscape(d.line) + '</p>' +
+      '<div class="bw-ayah-force-task"><strong>' + htmlEscape(TASK_LABEL) + ':</strong> ' + htmlEscape(d.task) + '</div>' +
+      '<div class="bw-ayah-force-actions"><button type="button" class="bw-ayah-force-complete">' + htmlEscape(COMPLETE_TEXT) + '</button><button type="button" class="bw-ayah-force-close">' + htmlEscape(CLOSE_TEXT) + '</button></div>' +
+      '</div>';
+    overlay.querySelector('.bw-ayah-force-complete').addEventListener('click', function(){ markDone(); sync(); closeModal(); });
+    overlay.querySelector('.bw-ayah-force-close').addEventListener('click', closeModal);
+    overlay.addEventListener('click', function(e){ if(e.target === overlay) closeModal(); });
+    document.body.appendChild(overlay);
+  }
+  document.addEventListener('click', function(e){
+    var c = card();
+    if(!c || !e.target.closest) return;
+    if(e.target.closest('#' + (c.id || 'dailyArticleLink')) === c || e.target.closest('[data-task-key="article"]') === c){
+      e.preventDefault();
+      e.stopPropagation();
+      e.stopImmediatePropagation();
+      if(!isDone()) openModal();
+      return false;
+    }
+  }, true);
+  document.addEventListener('keydown', function(e){
+    var c = card();
+    if(!c) return;
+    if((e.key === 'Enter' || e.key === ' ') && (document.activeElement === c || (c.contains && c.contains(document.activeElement)))){
+      e.preventDefault(); e.stopPropagation(); e.stopImmediatePropagation();
+      if(!isDone()) openModal();
+      return false;
+    }
+  }, true);
+  if(document.readyState === 'loading') document.addEventListener('DOMContentLoaded', sync, {once:true}); else sync();
+  window.addEventListener('pageshow', sync);
+  window.addEventListener('storage', sync);
+  setInterval(sync, 300);
+})();
+</script>
+
+
+
+<!-- BW PATCH: Micro-knowledge correct/wrong answer visual feedback -->
+<style id="bw-micro-answer-feedback-final">
+.bw-task-modal-card[data-task-key="micro"] .bw-micro-option-btn.is-correct{
+  border:2px solid #35d36f !important;
+  background:linear-gradient(180deg,rgba(53,211,111,.34),rgba(45,122,70,.88)) !important;
+  color:#ffffff !important;
+  box-shadow:0 0 0 1px rgba(53,211,111,.30),0 0 18px rgba(53,211,111,.34),inset 0 1px 0 rgba(255,255,255,.16) !important;
+}
+.bw-task-modal-card[data-task-key="micro"] .bw-micro-option-btn.is-wrong{
+  border:2px solid #ff4d4d !important;
+  background:linear-gradient(180deg,rgba(255,77,77,.34),rgba(120,28,28,.82)) !important;
+  color:#ffffff !important;
+  box-shadow:0 0 0 1px rgba(255,77,77,.30),0 0 18px rgba(255,77,77,.34),inset 0 1px 0 rgba(255,255,255,.12) !important;
+}
+.bw-task-modal-card[data-task-key="micro"] .bw-micro-option-btn.is-correct.is-selected{
+  border-color:#35d36f !important;
+}
+</style>
+<script id="bw-micro-answer-feedback-final">
+(function(){
+  'use strict';
+  function paintMicroAnswer(clickedBtn){
+    if(!clickedBtn || !clickedBtn.closest) return;
+    var modal = clickedBtn.closest('.bw-task-modal-card');
+    if(!modal || modal.getAttribute('data-task-key') !== 'micro') return;
+    var buttons = Array.prototype.slice.call(modal.querySelectorAll('.bw-micro-option-btn'));
+    if(!buttons.length) return;
+
+    buttons.forEach(function(btn){
+      btn.classList.remove('is-correct','is-wrong');
+    });
+
+    var correctBtn = buttons.find(function(btn){ return btn.classList.contains('is-selected'); }) || clickedBtn;
+    correctBtn.classList.add('is-correct');
+
+    if(clickedBtn !== correctBtn){
+      clickedBtn.classList.add('is-wrong');
+    }
+
+    var note = modal.querySelector('#bwMicroAnswerNote');
+    if(note) note.classList.add('is-visible');
+
+    var completeBtn = modal.querySelector('.bw-task-complete-btn');
+    if(completeBtn) completeBtn.disabled = false;
+  }
+
+  document.addEventListener('click', function(event){
+    var btn = event.target && event.target.closest ? event.target.closest('.bw-micro-option-btn') : null;
+    if(!btn) return;
+    setTimeout(function(){ paintMicroAnswer(btn); }, 80);
   }, true);
 })();
 </script>
