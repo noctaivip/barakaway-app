@@ -645,6 +645,205 @@ html.light-mode .quote strong{
     min-height:150px !important;
   }
 }
+
+
+/* Premium categories */
+.premium-categories-wrap{
+margin-top:18px;
+padding:16px;
+border-radius:24px;
+border:1px solid rgba(215,181,109,.32);
+background:
+radial-gradient(circle at 50% 0%,rgba(215,181,109,.22),transparent 42%),
+linear-gradient(135deg,rgba(84,58,18,.92),rgba(18,28,25,.96));
+box-shadow:
+0 18px 42px rgba(0,0,0,.30),
+inset 0 1px 0 rgba(255,255,255,.06);
+}
+
+.premium-categories-head{
+display:flex;
+align-items:center;
+justify-content:space-between;
+gap:12px;
+margin-bottom:12px;
+}
+
+.premium-categories-title{
+display:inline-flex;
+align-items:center;
+gap:8px;
+min-height:34px;
+padding:8px 14px;
+border-radius:999px;
+background:#101418;
+border:1px solid rgba(215,181,109,.26);
+color:#f8e7aa;
+font-size:12px;
+font-weight:950;
+letter-spacing:.04em;
+text-transform:uppercase;
+}
+
+.premium-categories-status{
+display:inline-flex;
+align-items:center;
+gap:7px;
+min-height:32px;
+padding:8px 13px;
+border-radius:999px;
+background:linear-gradient(180deg,#42b968,#2d7a46);
+color:#fff;
+font-size:12px;
+font-weight:950;
+letter-spacing:.04em;
+text-transform:uppercase;
+box-shadow:0 10px 22px rgba(45,122,70,.28);
+}
+
+.premium-categories{
+display:grid;
+grid-template-columns:repeat(6,1fr);
+gap:10px;
+}
+
+.premium-card{
+position:relative;
+min-height:86px;
+border-radius:18px;
+border:1px solid rgba(215,181,109,.30);
+background:
+radial-gradient(circle at 50% 0%,rgba(102,198,128,.16),transparent 48%),
+linear-gradient(180deg,rgba(16,24,22,.98),rgba(10,17,20,.98));
+display:flex;
+align-items:center;
+justify-content:center;
+text-align:center;
+padding:26px 10px 12px;
+font-size:13px;
+line-height:1.22;
+font-weight:950;
+color:#ffffff;
+cursor:pointer;
+transition:transform .18s ease,border-color .25s ease,box-shadow .25s ease,background .25s ease;
+overflow:hidden;
+}
+
+.premium-card::before{
+content:"PRO";
+position:absolute;
+top:7px;
+right:9px;
+font-size:9px;
+line-height:1;
+font-weight:950;
+letter-spacing:.06em;
+padding:4px 6px;
+border-radius:999px;
+color:#f8e7aa;
+border:1px solid rgba(215,181,109,.34);
+background:rgba(215,181,109,.13);
+}
+
+.premium-card:hover{
+transform:translateY(-2px);
+border-color:rgba(215,181,109,.58);
+box-shadow:0 14px 28px rgba(0,0,0,.28),0 0 20px rgba(215,181,109,.10);
+}
+
+.premium-card.active{
+background:
+radial-gradient(circle at 50% 0%,rgba(215,181,109,.32),transparent 45%),
+linear-gradient(135deg,rgba(45,122,70,.56),rgba(84,58,18,.42));
+border-color:#d7b56d;
+box-shadow:
+0 0 0 1px rgba(215,181,109,.34),
+0 16px 32px rgba(0,0,0,.28),
+0 0 24px rgba(215,181,109,.16);
+}
+
+html.light-mode .premium-categories-wrap{
+background:
+radial-gradient(circle at 50% 0%,rgba(180,135,46,.20),transparent 42%),
+linear-gradient(135deg,#fff5d9,#eef8f1);
+border-color:rgba(180,135,46,.28);
+}
+
+html.light-mode .premium-categories-title{
+background:#172019;
+color:#f8e7aa;
+}
+
+html.light-mode .premium-card{
+color:#173522;
+background:
+radial-gradient(circle at 50% 0%,rgba(45,122,70,.10),transparent 48%),
+linear-gradient(180deg,#ffffff,#f4faf6);
+border-color:rgba(180,135,46,.24);
+}
+
+html.light-mode .premium-card.active{
+background:
+radial-gradient(circle at 50% 0%,rgba(180,135,46,.22),transparent 45%),
+linear-gradient(135deg,#eaf8ee,#fff3cf);
+border-color:#b4872e;
+}
+
+@media(max-width:700px){
+.premium-categories-wrap{
+padding:13px;
+border-radius:22px;
+}
+
+.premium-categories-head{
+align-items:flex-start;
+flex-direction:column;
+gap:8px;
+}
+
+.premium-categories{
+grid-template-columns:1fr 1fr;
+gap:10px;
+}
+
+.premium-card{
+min-height:78px;
+font-size:12px;
+padding:26px 9px 10px;
+}
+}
+
+
+/* Premium access state synced with Home */
+.premium-categories-wrap[data-pro-state="locked"]{
+filter:saturate(.72);
+}
+
+.premium-categories-wrap[data-pro-state="locked"] .premium-categories-status{
+background:linear-gradient(180deg,#313b43,#202830);
+color:#f8e7aa;
+box-shadow:none;
+border:1px solid rgba(215,181,109,.24);
+}
+
+.premium-categories-wrap[data-pro-state="locked"] .premium-card{
+opacity:.62;
+cursor:not-allowed;
+}
+
+.premium-categories-wrap[data-pro-state="locked"] .premium-card.active{
+background:
+radial-gradient(circle at 50% 0%,rgba(215,181,109,.10),transparent 45%),
+linear-gradient(180deg,rgba(16,24,22,.96),rgba(10,17,20,.96));
+border-color:rgba(215,181,109,.28);
+box-shadow:none;
+}
+
+html.light-mode .premium-categories-wrap[data-pro-state="locked"] .premium-card.active{
+background:linear-gradient(180deg,#ffffff,#f4faf6);
+border-color:rgba(180,135,46,.22);
+}
+
 </style>
 <script src="/theme-init.js"></script>
 <link rel="stylesheet" href="/theme.css">
@@ -745,6 +944,23 @@ html.light-mode .quote strong{
 
 </div>
 </details>
+
+
+<div class="premium-categories-wrap" data-pro-state="locked">
+<div class="premium-categories-head">
+<div class="premium-categories-title">👑 BarakaWay Pro</div>
+<div class="premium-categories-status" data-names-pro-status>PRO не активен</div>
+</div>
+<div class="premium-categories">
+<div class="premium-card active">Богатство и ризк</div>
+<div class="premium-card">Здоровье близким</div>
+<div class="premium-card">Семья</div>
+<div class="premium-card">Прощение грехов</div>
+<div class="premium-card">Избавление от долгов</div>
+<div class="premium-card">Счастье в обоих мирах</div>
+</div>
+</div>
+
 
 </div>
 
@@ -869,6 +1085,46 @@ renderCurrent();
 renderGrid();
 </script>
 <script src="/bottom-nav.js"></script>
+
+<script>
+(function(){
+  "use strict";
+  const PRO_KEY = "barakaway_pro";
+
+  function isProActive(){
+    try{
+      return localStorage.getItem(PRO_KEY) === "true";
+    }catch(e){
+      return false;
+    }
+  }
+
+  function syncNamesProState(){
+    const active = isProActive();
+    document.querySelectorAll(".premium-categories-wrap").forEach(function(wrap){
+      wrap.setAttribute("data-pro-state", active ? "unlocked" : "locked");
+    });
+
+    document.querySelectorAll("[data-names-pro-status]").forEach(function(node){
+      node.textContent = active ? "✅ PRO активен" : "PRO не активен";
+    });
+
+    document.querySelectorAll(".premium-card").forEach(function(card){
+      card.setAttribute("aria-disabled", active ? "false" : "true");
+      card.tabIndex = active ? 0 : -1;
+    });
+  }
+
+  if(document.readyState === "loading"){
+    document.addEventListener("DOMContentLoaded", syncNamesProState);
+  }else{
+    syncNamesProState();
+  }
+
+  window.addEventListener("storage", syncNamesProState);
+})();
+</script>
+
 </body>
 </html>
 
