@@ -26,9 +26,19 @@ async src="//gc.zgo.at/count.js"></script>
 })();
 </script>
 
+<title>أسماء الله الحسنى — BarakaWay</title>
 
-<title>٩٩ اسمًا من أسماء الله — BarakaWay</title>
-
+<script>
+(function(){
+  const savedTheme = localStorage.getItem('siteTheme');
+  if(savedTheme === 'light'){
+    document.documentElement.classList.add('light-mode');
+  } else {
+    document.documentElement.classList.add('dark-mode');
+    localStorage.setItem('siteTheme','dark');
+  }
+})();
+</script>
 <style>
 :root{
   --bg:#f5f7f8;--text:#222;--card:#ffffff;--card-soft:#fafafa;--border:#dfe8e2;--border-soft:#edf1ee;--green:#2d7a46;--gold:#b4872e;--muted:#66726b;--shadow:0 18px 48px rgba(0,0,0,.08);
@@ -637,25 +647,232 @@ html.light-mode .quote strong{
 }
 
 
-/* === Arabic page adaptation: RTL + fixed premium layout === */
-html[lang="ar"],
-html[dir="rtl"]{
-  direction:rtl;
+/* Premium categories */
+.premium-categories-wrap{
+margin-top:18px;
+padding:16px;
+border-radius:24px;
+border:1px solid rgba(215,181,109,.32);
+background:
+radial-gradient(circle at 50% 0%,rgba(215,181,109,.22),transparent 42%),
+linear-gradient(135deg,rgba(84,58,18,.92),rgba(18,28,25,.96));
+box-shadow:
+0 18px 42px rgba(0,0,0,.30),
+inset 0 1px 0 rgba(255,255,255,.06);
 }
 
-html[lang="ar"] body,
-html[dir="rtl"] body{
+.premium-categories-head{
+display:flex;
+align-items:center;
+justify-content:space-between;
+gap:12px;
+margin-bottom:12px;
+}
+
+.premium-categories-title{
+display:inline-flex;
+align-items:center;
+gap:8px;
+min-height:34px;
+padding:8px 14px;
+border-radius:999px;
+background:#101418;
+border:1px solid rgba(215,181,109,.26);
+color:#f8e7aa;
+font-size:12px;
+font-weight:950;
+letter-spacing:.04em;
+text-transform:uppercase;
+}
+
+.premium-categories-status{
+display:inline-flex;
+align-items:center;
+gap:7px;
+min-height:32px;
+padding:8px 13px;
+border-radius:999px;
+background:linear-gradient(180deg,#42b968,#2d7a46);
+color:#fff;
+font-size:12px;
+font-weight:950;
+letter-spacing:.04em;
+text-transform:uppercase;
+box-shadow:0 10px 22px rgba(45,122,70,.28);
+}
+
+.premium-categories{
+display:grid;
+grid-template-columns:repeat(6,1fr);
+gap:10px;
+}
+
+.premium-card{
+position:relative;
+min-height:86px;
+border-radius:18px;
+border:1px solid rgba(215,181,109,.30);
+background:
+radial-gradient(circle at 50% 0%,rgba(102,198,128,.16),transparent 48%),
+linear-gradient(180deg,rgba(16,24,22,.98),rgba(10,17,20,.98));
+display:flex;
+align-items:center;
+justify-content:center;
+text-align:center;
+padding:26px 10px 12px;
+font-size:13px;
+line-height:1.22;
+font-weight:950;
+color:#ffffff;
+cursor:pointer;
+transition:transform .18s ease,border-color .25s ease,box-shadow .25s ease,background .25s ease;
+overflow:hidden;
+}
+
+.premium-card::before{
+content:"PRO";
+position:absolute;
+top:7px;
+right:9px;
+font-size:9px;
+line-height:1;
+font-weight:950;
+letter-spacing:.06em;
+padding:4px 6px;
+border-radius:999px;
+color:#f8e7aa;
+border:1px solid rgba(215,181,109,.34);
+background:rgba(215,181,109,.13);
+}
+
+.premium-card:hover{
+transform:translateY(-2px);
+border-color:rgba(215,181,109,.58);
+box-shadow:0 14px 28px rgba(0,0,0,.28),0 0 20px rgba(215,181,109,.10);
+}
+
+.premium-card.active{
+background:
+radial-gradient(circle at 50% 0%,rgba(215,181,109,.32),transparent 45%),
+linear-gradient(135deg,rgba(45,122,70,.56),rgba(84,58,18,.42));
+border-color:#d7b56d;
+box-shadow:
+0 0 0 1px rgba(215,181,109,.34),
+0 16px 32px rgba(0,0,0,.28),
+0 0 24px rgba(215,181,109,.16);
+}
+
+html.light-mode .premium-categories-wrap{
+background:
+radial-gradient(circle at 50% 0%,rgba(180,135,46,.20),transparent 42%),
+linear-gradient(135deg,#fff5d9,#eef8f1);
+border-color:rgba(180,135,46,.28);
+}
+
+html.light-mode .premium-categories-title{
+background:#172019;
+color:#f8e7aa;
+}
+
+html.light-mode .premium-card{
+color:#173522;
+background:
+radial-gradient(circle at 50% 0%,rgba(45,122,70,.10),transparent 48%),
+linear-gradient(180deg,#ffffff,#f4faf6);
+border-color:rgba(180,135,46,.24);
+}
+
+html.light-mode .premium-card.active{
+background:
+radial-gradient(circle at 50% 0%,rgba(180,135,46,.22),transparent 45%),
+linear-gradient(135deg,#eaf8ee,#fff3cf);
+border-color:#b4872e;
+}
+
+@media(max-width:700px){
+.premium-categories-wrap{
+padding:13px;
+border-radius:22px;
+}
+
+.premium-categories-head{
+display:flex;
+flex-direction:row;
+align-items:center;
+justify-content:space-between;
+gap:10px;
+}
+
+.premium-categories{
+grid-template-columns:1fr 1fr;
+gap:10px;
+}
+
+.premium-card{
+min-height:78px;
+font-size:12px;
+padding:26px 9px 10px;
+}
+}
+
+
+/* Premium access state synced with Home */
+.premium-categories-wrap[data-pro-state="locked"]{
+filter:saturate(.72);
+}
+
+.premium-categories-wrap[data-pro-state="locked"] .premium-categories-status{
+background:linear-gradient(180deg,#313b43,#202830);
+color:#f8e7aa;
+box-shadow:none;
+border:1px solid rgba(215,181,109,.24);
+}
+
+.premium-categories-wrap[data-pro-state="locked"] .premium-card{
+opacity:.62;
+cursor:not-allowed;
+}
+
+.premium-categories-wrap[data-pro-state="locked"] .premium-card.active{
+background:
+radial-gradient(circle at 50% 0%,rgba(215,181,109,.10),transparent 45%),
+linear-gradient(180deg,rgba(16,24,22,.96),rgba(10,17,20,.96));
+border-color:rgba(215,181,109,.28);
+box-shadow:none;
+}
+
+html.light-mode .premium-categories-wrap[data-pro-state="locked"] .premium-card.active{
+background:linear-gradient(180deg,#ffffff,#f4faf6);
+border-color:rgba(180,135,46,.22);
+}
+
+
+.free-card::before{
+display:none;
+}
+
+.free-card{
+background:
+radial-gradient(circle at 50% 0%,rgba(95,146,255,.14),transparent 46%),
+linear-gradient(180deg,rgba(22,32,48,.98),rgba(12,18,28,.98));
+border-color:rgba(120,170,255,.26);
+}
+
+.free-card.active{
+background:
+radial-gradient(circle at 50% 0%,rgba(95,146,255,.22),transparent 44%),
+linear-gradient(135deg,rgba(32,56,92,.95),rgba(14,24,38,.98));
+border-color:rgba(120,170,255,.55);
+box-shadow:
+0 0 0 1px rgba(120,170,255,.22),
+0 16px 32px rgba(0,0,0,.28);
+}
+
+
+/* === Arabic page adaptation based on RU master === */
+html[lang="ar"] body{
   direction:rtl;
   text-align:right;
-}
-
-html[lang="ar"] .container,
-html[lang="ar"] .player-card,
-html[lang="ar"] .dropdown-block,
-html[dir="rtl"] .container,
-html[dir="rtl"] .player-card,
-html[dir="rtl"] .dropdown-block{
-  direction:rtl;
 }
 
 html[lang="ar"] h1,
@@ -664,117 +881,57 @@ html[lang="ar"] .arabic,
 html[lang="ar"] .translit,
 html[lang="ar"] .meaning,
 html[lang="ar"] .desc,
-html[lang="ar"] .manual-note,
-html[dir="rtl"] h1,
-html[dir="rtl"] .player-top,
-html[dir="rtl"] .arabic,
-html[dir="rtl"] .translit,
-html[dir="rtl"] .meaning,
-html[dir="rtl"] .desc,
-html[dir="rtl"] .manual-note{
+html[lang="ar"] .manual-note{
   text-align:center !important;
 }
 
-html[lang="ar"] .arabic,
-html[dir="rtl"] .arabic{
+html[lang="ar"] .arabic{
   font-family:"Amiri","Scheherazade New","Noto Naskh Arabic","Times New Roman",serif;
+  direction:rtl;
   letter-spacing:0 !important;
 }
 
-html[lang="ar"] .translit,
-html[dir="rtl"] .translit{
+html[lang="ar"] .translit{
   direction:ltr;
 }
 
-html[lang="ar"] .dropdown-title,
-html[dir="rtl"] .dropdown-title{
-  direction:rtl;
-}
-
-html[lang="ar"] .dropdown-block summary,
-html[dir="rtl"] .dropdown-block summary{
+html[lang="ar"] .dropdown-block summary{
   text-align:right;
 }
 
-html[lang="ar"] .search-box input,
-html[dir="rtl"] .search-box input{
+html[lang="ar"] .search-box input{
   direction:rtl;
   text-align:right;
 }
 
-html[lang="ar"] .name-chip .chip-ar,
-html[lang="ar"] .name-chip .chip-tr,
-html[lang="ar"] .name-chip .chip-mean,
-html[lang="ar"] .name-chip .chip-num,
-html[dir="rtl"] .name-chip .chip-ar,
-html[dir="rtl"] .name-chip .chip-tr,
-html[dir="rtl"] .name-chip .chip-mean,
-html[dir="rtl"] .name-chip .chip-num{
+html[lang="ar"] .name-chip .chip-ar{
+  direction:rtl;
   text-align:right;
 }
 
 html[lang="ar"] .name-chip .chip-tr,
-html[dir="rtl"] .name-chip .chip-tr{
+html[lang="ar"] .name-chip .chip-mean,
+html[lang="ar"] .name-chip .chip-num{
   direction:rtl;
+  text-align:right;
 }
 
-html[lang="ar"] .quote::before,
-html[dir="rtl"] .quote::before{
-  left:auto;
-  right:0;
-}
-
-html[lang="ar"] .quote,
-html[dir="rtl"] .quote{
-  padding-right:20px !important;
-  padding-left:18px !important;
-}
-
-html[lang="ar"] .quote strong,
-html[dir="rtl"] .quote strong{
-  margin-right:0;
-  margin-left:6px;
-}
-
-html[lang="ar"] .dropdown-block:nth-of-type(2) .dropdown-content p,
 html[lang="ar"] .quote p,
-html[dir="rtl"] .dropdown-block:nth-of-type(2) .dropdown-content p,
-html[dir="rtl"] .quote p{
+html[lang="ar"] .dropdown-block:nth-of-type(2) .dropdown-content p{
   text-align:right;
 }
 
-html[lang="ar"] .nav-buttons,
-html[dir="rtl"] .nav-buttons{
-  direction:ltr;
+html[lang="ar"] .quote strong{
+  margin-left:6px;
+  margin-right:0;
 }
 
-@media(max-width:700px){
-  html[lang="ar"] .arabic,
-  html[dir="rtl"] .arabic{
-    font-size:42px !important;
-  }
-
-  html[lang="ar"] .translit,
-  html[dir="rtl"] .translit{
-    font-size:22px !important;
-  }
-
-  html[lang="ar"] .meaning,
-  html[dir="rtl"] .meaning{
-    font-size:14.5px !important;
-  }
-
-  html[lang="ar"] .desc,
-  html[dir="rtl"] .desc{
-    font-size:13.5px !important;
-  }
-
-  html[lang="ar"] .quote,
-  html[dir="rtl"] .quote{
-    padding-right:16px !important;
-    padding-left:12px !important;
-  }
+html[lang="ar"] .premium-categories-title,
+html[lang="ar"] .premium-categories-status,
+html[lang="ar"] .premium-card{
+  direction:rtl;
 }
+
 </style>
 <script src="/theme-init.js"></script>
 <link rel="stylesheet" href="/theme.css">
@@ -783,13 +940,13 @@ html[dir="rtl"] .nav-buttons{
 <body>
 
 <div class="container">
-<h1>٩٩ اسمًا من أسماء الله</h1>
+<h1>أسماء الله الحسنى</h1>
 
 <div class="section">
 
 <div class="player-card">
 <div class="player-top">
-<div class="badge" id="nameCounter">الاسم 1 / 99</div>
+<div class="badge" id="nameCounter">Имя 1 / 99</div>
 </div>
 
 <div class="arabic" id="nameArabic"></div>
@@ -810,7 +967,7 @@ html[dir="rtl"] .nav-buttons{
 <div class="control-label">التمرير التلقائي</div>
 <div style="display:flex;gap:10px;flex-wrap:wrap;">
 <button class="play-btn" id="playBtn">▶ ابدأ</button>
-<button class="secondary" id="pauseBtn">❚❚ إيقاف</button>
+<button class="secondary" id="pauseBtn">❚❚ إيقاف مؤقت</button>
 </div>
 </div>
 </div>
@@ -821,60 +978,82 @@ html[dir="rtl"] .nav-buttons{
 <button class="light" id="nextBtn">التالي →</button>
 </div>
 
-<div class="manual-note" id="playStatus">التمرير التلقائي متوقف.</div>
+<div class="manual-note" id="playStatus">التمرير التلقائي выключена.</div>
 </div>
 </div>
 
 <details class="dropdown-block">
-<summary><span class="dropdown-title">جميع الأسماء الـ٩٩</span><span class="dropdown-arrow">▾</span></summary>
+<summary><span class="dropdown-title">كل الأسماء الـ 99</span><span class="dropdown-arrow">▾</span></summary>
 <div class="dropdown-content">
 <div class="search-box">
-<input id="searchInput" type="text" placeholder="ابحث بالاسم أو بالمعنى...">
+<input id="searchInput" type="text" placeholder="ابحث بالاسم أو المعنى...">
 </div>
 <div class="names-grid" id="namesGrid"></div>
 </div>
 </details>
 
 <details class="dropdown-block">
-<summary><span class="dropdown-title">كيف تدعو الله بأسمائه</span><span class="dropdown-arrow">▾</span></summary>
+<summary><span class="dropdown-title">كيف تدعو الله بأسمائه الحسنى</span><span class="dropdown-arrow">▾</span></summary>
 <div class="dropdown-content">
-
-
 <p>
-كل اسم من أسماء الله يكشف عن صفة من صفاته، ومن خلال هذه الصفة يتوجه العبد إليه بالدعاء.
-
-المهم ليس مجرد نطق الاسم، بل فهم معناه والدعاء بما يناسبه.
+كل اسم من أسماء الله الحسنى يدل على صفة عظيمة من صفاته سبحانه. ويمكن للإنسان أن يدعو الله من خلال معنى هذا الاسم.
 </p>
 
 <p>
-وهذه أمثلة:
+المهم ألا يكون الذكر مجرد نطق بالاسم، بل فهم لمعناه ودعاء يناسب هذا المعنى.
+</p>
+
+<p>
+أمثلة:
 </p>
 
 <div class="quote">
 <p>
-<strong>يا رحمن</strong> — ارحمني وأصلح شأني  
+<strong>يا رحمن</strong> — ارحمني برحمتك وأصلح لي شأني  
 <br><br>
-<strong>يا رحيم</strong> — يسّر شدائدي ولا تتركني  
+<strong>يا رحيم</strong> — يسّر أمري ولا تكلني إلى نفسي  
 <br><br>
-<strong>يا سلام</strong> — امنحني السكينة والحفظ والسلام الداخلي  
+<strong>يا سلام</strong> — ارزقني السلامة والطمأنينة والأمان  
 <br><br>
-<strong>يا غفار</strong> — اغفر لي ذنوبي وطهّر قلبي  
+<strong>يا غفار</strong> — اغفر ذنوبي وطهّر قلبي  
 <br><br>
-<strong>يا رزاق</strong> — ارزقني رزقًا حلالًا وادفع عني الحاجة  
+<strong>يا رزاق</strong> — ارزقني رزقًا حلالًا مباركًا واصرف عني الحاجة  
 </p>
 </div>
 
 <p>
-يمكنك أن تمرّ على الأسماء واحدًا بعد واحد، وتجعل كل اسم منها دعاءً شخصيًا لك.
+يمكنك أن تمرّ على الأسماء اسمًا بعد اسم، وتجعل كل اسم منها دعاءً خاصًا بك.
 </p>
 
 <p>
-وهكذا لا تبقى القراءة مجرد معرفة، بل تصبح مناجاةً حيّةً لله. وتحت كل اسم يظهر الآن دعاء قصير مناسب بدل الوصف العام، مع صياغة أقرب إلى المعنى القرآني والتفسيري.
+هكذا تصبح القراءة ليست معرفة فقط، بل مناجاة حيّة لله سبحانه وتعالى. وتحت كل اسم يظهر دعاء قصير مناسب له.
 </p>
-
-
 </div>
 </details>
+
+
+<div class="premium-categories-wrap" id="barakaway-pro-names" data-pro-state="locked">
+<div class="premium-categories-head">
+<div class="premium-categories-title">👑 BarakaWay Pro</div>
+<div class="premium-categories-status" data-names-pro-status>PRO غير مفعّل</div>
+</div>
+<div class="premium-categories">
+<div class="premium-card free-card active" data-premium-set="default">
+دعاء<br>يومي
+</div>
+
+<div class="premium-card" data-premium-set="rizq">الغنى والبركة</div>
+
+<div class="premium-card" data-premium-set="health">دعاء للمريض</div>
+
+<div class="premium-card" data-premium-set="forgive">التوبة ومغفرة الذنوب</div>
+
+<div class="premium-card" data-premium-set="debts">الخلاص من الديون</div>
+
+<div class="premium-card" data-premium-set="both">سعادة الدارين</div>
+</div>
+</div>
+
 
 </div>
 
@@ -882,6 +1061,15 @@ html[dir="rtl"] .nav-buttons{
 const names = [{"num": 1, "ar": "ٱلرَّحْمَٰنُ", "tr": "", "en_mean": "The Universally Merciful", "ru_mean": "الرحمن", "en_desc": "Ya Rahman, cover me with Your mercy and correct my affairs.", "ru_desc": "يا رحمن، غمرني برحمتك وأصلح شأني كله."}, {"num": 2, "ar": "ٱلرَّحِيمُ", "tr": "", "en_mean": "The Especially Merciful", "ru_mean": "الرحيم", "en_desc": "Ya Raheem, ease my hardships and do not leave me to myself.", "ru_desc": "يا رحيم، يسّر شدائدي ولا تكلني إلى نفسي."}, {"num": 3, "ar": "ٱلْمَلِكُ", "tr": "", "en_mean": "The Sovereign", "ru_mean": "الملك", "en_desc": "Ya Malik, rule my life by Your guidance and make my heart obedient to You.", "ru_desc": "يا ملك، دبّر حياتي بهدايتك واجعل قلبي خاضعًا لك."}, {"num": 4, "ar": "ٱلْقُدُّوسُ", "tr": "", "en_mean": "The Most Holy", "ru_mean": "القدوس", "en_desc": "Ya Quddus, purify my heart, my intentions, and my deeds.", "ru_desc": "يا قدوس، طهّر قلبي ونيتي وأعمالي."}, {"num": 5, "ar": "ٱلسَّلَامُ", "tr": "", "en_mean": "The Giver of Peace and Safety", "ru_mean": "السلام", "en_desc": "Ya Salam, grant me peace, safety, and inner calm.", "ru_desc": "يا سلام، امنحني السكينة والأمان والطمأنينة الداخلية."}, {"num": 6, "ar": "ٱلْمُؤْمِنُ", "tr": "", "en_mean": "The Giver of Faith and Security", "ru_mean": "المؤمن", "en_desc": "Ya Mu’min, give my heart security, faith, and reassurance.", "ru_desc": "يا مؤمن، امنح قلبي الأمن والإيمان واليقين."}, {"num": 7, "ar": "ٱلْمُهَيْمِنُ", "tr": "", "en_mean": "The Watchful Protector", "ru_mean": "المهيمن", "en_desc": "Ya Muhaymin, protect me, my family, and all that You entrusted to me.", "ru_desc": "يا مهيمن، احفظني واحفظ أهلي وكل ما ائتمنتني عليه."}, {"num": 8, "ar": "ٱلْعَزِيزُ", "tr": "", "en_mean": "The Almighty", "ru_mean": "العزيز", "en_desc": "Ya Aziz, strengthen me with dignity and keep me firm in truth.", "ru_desc": "يا عزيز، قوّني بالعزة وثبّتني على الحق."}, {"num": 9, "ar": "ٱلْجَبَّارُ", "tr": "", "en_mean": "The Compeller and Restorer", "ru_mean": "الجبار", "en_desc": "Ya Jabbar, mend what is broken in my heart and my life.", "ru_desc": "يا جبار، اجبر ما انكسر في قلبي وفي حياتي."}, {"num": 10, "ar": "ٱلْمُتَكَبِّرُ", "tr": "", "en_mean": "The Supremely Exalted", "ru_mean": "المتكبر", "en_desc": "Ya Mutakabbir, protect me from arrogance and fill me with humility before You.", "ru_desc": "يا متكبر، احمني من الكبر واملأني تواضعًا بين يديك."}, {"num": 11, "ar": "ٱلْخَالِقُ", "tr": "", "en_mean": "The Creator", "ru_mean": "الخالق", "en_desc": "Ya Khaliq, create in me a better character and a better future.", "ru_desc": "يا خالق، اخلق فيّ خُلُقًا أحسن ومستقبلًا أصلح."}, {"num": 12, "ar": "ٱلْبَارِئُ", "tr": "", "en_mean": "The Originator", "ru_mean": "البارئ", "en_desc": "Ya Bari’, set my life in right order and bring good out of disorder.", "ru_desc": "يا بارئ، رتّب حياتي على الوجه الصحيح وأخرج الخير من الفوضى."}, {"num": 13, "ar": "ٱلْمُصَوِّرُ", "tr": "", "en_mean": "The Fashioner", "ru_mean": "المصور", "en_desc": "Ya Musawwir, beautify my character and shape my life in the best way.", "ru_desc": "يا مصور، جمّل خلقي وشكّل حياتي بأفضل صورة."}, {"num": 14, "ar": "ٱلْغَفَّارُ", "tr": "", "en_mean": "The Constant Forgiver", "ru_mean": "الغفار", "en_desc": "Ya Ghaffar, forgive me again and again, and cover my sins.", "ru_desc": "يا غفار، اغفر لي مرة بعد مرة واستر ذنوبي."}, {"num": 15, "ar": "ٱلْقَهَّارُ", "tr": "", "en_mean": "The All-Dominant", "ru_mean": "القهار", "en_desc": "Ya Qahhar, subdue my ego, my desires, and everything that pulls me away from You.", "ru_desc": "يا قهار، اقهر نفسي وشهواتي وكل ما يبعدني عنك."}, {"num": 16, "ar": "ٱلْوَهَّابُ", "tr": "", "en_mean": "The Bestower", "ru_mean": "الوهاب", "en_desc": "Ya Wahhab, grant me blessings that bring me closer to You.", "ru_desc": "يا وهاب، هب لي من النعم ما يقربني إليك."}, {"num": 17, "ar": "ٱلرَّزَّاقُ", "tr": "", "en_mean": "The Provider", "ru_mean": "الرزاق", "en_desc": "Ya Razzaq, provide me with halal sustenance and remove my need.", "ru_desc": "يا رزاق، ارزقني رزقًا حلالًا واسعًا وادفع عني الحاجة."}, {"num": 18, "ar": "ٱلْفَتَّاحُ", "tr": "", "en_mean": "The Opener", "ru_mean": "الفتاح", "en_desc": "Ya Fattah, open for me the doors of mercy, relief, and success.", "ru_desc": "يا فتاح، افتح لي أبواب الرحمة والفرج والنجاح."}, {"num": 19, "ar": "ٱلْعَلِيمُ", "tr": "", "en_mean": "The All-Knowing", "ru_mean": "العليم", "en_desc": "Ya ‘Alim, grant me beneficial knowledge and protect me from ignorance.", "ru_desc": "يا عليم، ارزقني علمًا نافعًا واحفظني من الجهل."}, {"num": 20, "ar": "ٱلْقَابِضُ", "tr": "", "en_mean": "The Withholder", "ru_mean": "القابض", "en_desc": "Ya Qabid, hold back from me what would harm my faith and my heart.", "ru_desc": "يا قابض، اصرف عني ما يضر ديني وقلبي."}, {"num": 21, "ar": "ٱلْبَاسِطُ", "tr": "", "en_mean": "The Expander", "ru_mean": "الباسط", "en_desc": "Ya Basit, expand my chest, my provision, and my hope.", "ru_desc": "يا باسط، ابسط صدري ورزقي وأملي."}, {"num": 22, "ar": "ٱلْخَافِضُ", "tr": "", "en_mean": "The Reducer", "ru_mean": "الخافض", "en_desc": "Ya Khafid, lower my pride and save me from arrogance.", "ru_desc": "يا خافض، اخفض كبريائي ونجّني من التكبر."}, {"num": 23, "ar": "ٱلرَّافِعُ", "tr": "", "en_mean": "The Exalter", "ru_mean": "الرافع", "en_desc": "Ya Rafi’, raise me in faith, character, and honor.", "ru_desc": "يا رافع، ارفعني في الإيمان والأخلاق والكرامة."}, {"num": 24, "ar": "ٱلْمُعِزُّ", "tr": "", "en_mean": "The Giver of Honor", "ru_mean": "المعز", "en_desc": "Ya Mu’izz, honor me through obedience to You and truth.", "ru_desc": "يا معز، أكرمني بطاعتك وبالثبات على الحق."}, {"num": 25, "ar": "ٱلْمُذِلُّ", "tr": "", "en_mean": "The Humiliator", "ru_mean": "المذل", "en_desc": "Ya Mudhill, keep me far from humiliation through sin and wrongdoing.", "ru_desc": "يا مذل، باعد بيني وبين الذل الذي يأتي من المعصية والظلم."}, {"num": 26, "ar": "ٱلسَّمِيعُ", "tr": "", "en_mean": "The All-Hearing", "ru_mean": "السميع", "en_desc": "Ya Sami’, hear my dua, my weakness, and my hidden pain.", "ru_desc": "يا سميع، اسمع دعائي وضعفي وألمي الخفي."}, {"num": 27, "ar": "ٱلْبَصِيرُ", "tr": "", "en_mean": "The All-Seeing", "ru_mean": "البصير", "en_desc": "Ya Basir, see my state and guide me to what is right.", "ru_desc": "يا بصير، انظر إلى حالي واهدني إلى الصواب."}, {"num": 28, "ar": "ٱلْحَكَمُ", "tr": "", "en_mean": "The Judge", "ru_mean": "الحكم", "en_desc": "Ya Hakam, judge my affairs with truth and guide me through confusion.", "ru_desc": "يا حكم، احكم في أمري بالحق وأخرجني من الحيرة."}, {"num": 29, "ar": "ٱلْعَدْلُ", "tr": "", "en_mean": "The Utterly Just", "ru_mean": "العدل", "en_desc": "Ya ‘Adl, place justice in my life and protect me from wrongdoing.", "ru_desc": "يا عدل، أقم العدل في حياتي واحفظني من الظلم."}, {"num": 30, "ar": "ٱللَّطِيفُ", "tr": "", "en_mean": "The Most Gentle", "ru_mean": "اللطيف", "en_desc": "Ya Latif, be gentle with me in what I see and what I do not see.", "ru_desc": "يا لطيف، الطف بي فيما أرى وفيما لا أرى."}, {"num": 31, "ar": "ٱلْخَبِيرُ", "tr": "", "en_mean": "The All-Aware", "ru_mean": "الخبير", "en_desc": "Ya Khabir, guide me in what is hidden from my understanding.", "ru_desc": "يا خبير، دلّني على ما خفي عن فهمي."}, {"num": 32, "ar": "ٱلْحَلِيمُ", "tr": "", "en_mean": "The Forbearing", "ru_mean": "الحليم", "en_desc": "Ya Halim, treat me with forbearance and do not punish me for my haste.", "ru_desc": "يا حليم، عاملني بالحلم ولا تؤاخذني بعجلتي."}, {"num": 33, "ar": "ٱلْعَظِيمُ", "tr": "", "en_mean": "The Magnificent", "ru_mean": "العظيم", "en_desc": "Ya ‘Azim, fill my heart with reverence for Your greatness.", "ru_desc": "يا عظيم، املأ قلبي هيبةً من عظمتك."}, {"num": 34, "ar": "ٱلْغَفُورُ", "tr": "", "en_mean": "The Great Forgiver", "ru_mean": "الغفور", "en_desc": "Ya Ghafur, forgive my major sins and accept my repentance.", "ru_desc": "يا غفور، اغفر لي ذنوبي العظيمة وتقبّل توبتي."}, {"num": 35, "ar": "ٱلشَّكُورُ", "tr": "", "en_mean": "The Appreciative", "ru_mean": "الشكور", "en_desc": "Ya Shakur, accept my small deeds and multiply their reward.", "ru_desc": "يا شكور، تقبّل مني العمل القليل وضاعف لي أجره."}, {"num": 36, "ar": "ٱلْعَلِيُّ", "tr": "", "en_mean": "The Most High", "ru_mean": "العلي", "en_desc": "Ya ‘Aliyy, raise my soul above what lowers me.", "ru_desc": "يا علي، ارفع روحي فوق كل ما يحطّها."}, {"num": 37, "ar": "ٱلْكَبِيرُ", "tr": "", "en_mean": "The Most Great", "ru_mean": "الكبير", "en_desc": "Ya Kabir, make the dunya small in my eyes and Your pleasure great.", "ru_desc": "يا كبير، صغّر الدنيا في عيني وعظّم رضاك في قلبي."}, {"num": 38, "ar": "ٱلْحَفِيظُ", "tr": "", "en_mean": "The Preserver", "ru_mean": "الحفيظ", "en_desc": "Ya Hafiz, preserve my faith, my family, and my end.", "ru_desc": "يا حفيظ، احفظ ديني وأهلي وخاتمتي."}, {"num": 39, "ar": "ٱلْمُقِيتُ", "tr": "", "en_mean": "The Sustainer", "ru_mean": "المقيت", "en_desc": "Ya Muqit, sustain me with strength, patience, and enough provision.", "ru_desc": "يا مقيت، امددني بالقوة والصبر والكفاية من الرزق."}, {"num": 40, "ar": "ٱلْحَسِيبُ", "tr": "", "en_mean": "The Sufficient Reckoner", "ru_mean": "الحسيب", "en_desc": "Ya Hasib, be sufficient for me in every worry and affair.", "ru_desc": "يا حسيب، كن حسبي في كل همّ وكل أمر."}, {"num": 41, "ar": "ٱلْجَلِيلُ", "tr": "", "en_mean": "The Majestic", "ru_mean": "الجليل", "en_desc": "Ya Jalil, fill my heart with reverence for Your majesty.", "ru_desc": "يا جليل، املأ قلبي تعظيمًا لجلالك."}, {"num": 42, "ar": "ٱلْكَرِيمُ", "tr": "", "en_mean": "The Most Generous", "ru_mean": "الكريم", "en_desc": "Ya Karim, be generous to me with forgiveness, ease, and blessing.", "ru_desc": "يا كريم، تكرّم عليّ بالمغفرة واليسر والبركة."}, {"num": 43, "ar": "ٱلرَّقِيبُ", "tr": "", "en_mean": "The Watchful", "ru_mean": "الرقيب", "en_desc": "Ya Raqib, watch over me and keep me away from secret sins.", "ru_desc": "يا رقيب، راقبني واحفظني من الذنوب الخفية."}, {"num": 44, "ar": "ٱلْمُجِيبُ", "tr": "", "en_mean": "The Responsive", "ru_mean": "المجيب", "en_desc": "Ya Mujib, answer my dua and do not turn me away disappointed.", "ru_desc": "يا مجيب، استجب دعائي ولا تردّني خائبًا."}, {"num": 45, "ar": "ٱلْوَاسِعُ", "tr": "", "en_mean": "The All-Encompassing", "ru_mean": "الواسع", "en_desc": "Ya Wasi’, expand for me mercy, understanding, and relief.", "ru_desc": "يا واسع، وسّع لي في الرحمة والفهم والفرج."}, {"num": 46, "ar": "ٱلْحَكِيمُ", "tr": "", "en_mean": "The All-Wise", "ru_mean": "الحكيم", "en_desc": "Ya Hakim, give me wisdom and right decisions.", "ru_desc": "يا حكيم، ارزقني الحكمة وحسن القرار."}, {"num": 47, "ar": "ٱلْوَدُودُ", "tr": "", "en_mean": "The Most Loving", "ru_mean": "الودود", "en_desc": "Ya Wadud, fill my heart with love, mercy, and goodness.", "ru_desc": "يا ودود، املأ قلبي حبًا ورحمةً وخيرًا."}, {"num": 48, "ar": "ٱلْمَجِيدُ", "tr": "", "en_mean": "The Most Glorious", "ru_mean": "المجيد", "en_desc": "Ya Majid, honor me with noble character and righteous deeds.", "ru_desc": "يا مجيد، أكرمني بشرف الخلق وصلاح العمل."}, {"num": 49, "ar": "ٱلْبَاعِثُ", "tr": "", "en_mean": "The Resurrector", "ru_mean": "الباعث", "en_desc": "Ya Ba’ith, revive my heart with faith and sincere worship.", "ru_desc": "يا باعث، أحيِ قلبي بالإيمان والعبادة الصادقة."}, {"num": 50, "ar": "ٱلشَّهِيدُ", "tr": "", "en_mean": "The Witness", "ru_mean": "الشهيد", "en_desc": "Ya Shahid, be my witness in truth and protect me from hypocrisy.", "ru_desc": "يا شهيد، كن شاهدي على الحق واحفظني من النفاق."}, {"num": 51, "ar": "ٱلْحَقُّ", "tr": "", "en_mean": "The Truth", "ru_mean": "الحق", "en_desc": "Ya Haqq, keep me firm upon truth in belief, word, and action.", "ru_desc": "يا حق، ثبّتني على الحق في الاعتقاد والقول والعمل."}, {"num": 52, "ar": "ٱلْوَكِيلُ", "tr": "", "en_mean": "The Trustee", "ru_mean": "الوكيل", "en_desc": "Ya Wakil, manage my affairs in the best way, for I rely upon You.", "ru_desc": "يا وكيل، دبّر أموري أحسن تدبير فإني متوكل عليك."}, {"num": 53, "ar": "ٱلْقَوِيُّ", "tr": "", "en_mean": "The All-Strong", "ru_mean": "القوي", "en_desc": "Ya Qawiyy, strengthen me against weakness, fear, and sin.", "ru_desc": "يا قوي، قوّني على الضعف والخوف والمعصية."}, {"num": 54, "ar": "ٱلْمَتِينُ", "tr": "", "en_mean": "The Firm", "ru_mean": "المتين", "en_desc": "Ya Matin, make me firm in patience, worship, and obedience.", "ru_desc": "يا متين، ثبّتني على الصبر والعبادة والطاعة."}, {"num": 55, "ar": "ٱلْوَلِيُّ", "tr": "", "en_mean": "The Protecting Friend", "ru_mean": "الولي", "en_desc": "Ya Waliyy, be my protector, supporter, and nearest helper.", "ru_desc": "يا ولي، كن لي وليًا ونصيرًا وأقرب معين."}, {"num": 56, "ar": "ٱلْحَمِيدُ", "tr": "", "en_mean": "The Praiseworthy", "ru_mean": "الحميد", "en_desc": "Ya Hamid, make me among those whose lives are worthy of praise before You.", "ru_desc": "يا حميد، اجعلني ممن تحمد حياتهم عندك."}, {"num": 57, "ar": "ٱلْمُحْصِي", "tr": "", "en_mean": "The All-Enumerating", "ru_mean": "المحصي", "en_desc": "Ya Muhsi, record for me mercy and erase from me what brings blame.", "ru_desc": "يا محصي، اكتب لي الرحمة وامحُ عني ما يجلب اللوم."}, {"num": 58, "ar": "ٱلْمُبْدِئُ", "tr": "", "en_mean": "The Originator of All", "ru_mean": "المبدئ", "en_desc": "Ya Mubdi’, begin for me a new opening full of obedience and good.", "ru_desc": "يا مبدئ، ابدأ لي بدايةً جديدةً مليئةً بالطاعة والخير."}, {"num": 59, "ar": "ٱلْمُعِيدُ", "tr": "", "en_mean": "The Restorer", "ru_mean": "المعيد", "en_desc": "Ya Mu’id, return to me what is good, and restore what I lost with better.", "ru_desc": "يا معيد، أعد إليّ ما هو خير وعوّضني عن المفقود بأفضل منه."}, {"num": 60, "ar": "ٱلْمُحْيِي", "tr": "", "en_mean": "The Giver of Life", "ru_mean": "المحيي", "en_desc": "Ya Muhyi, give life to my heart after heedlessness.", "ru_desc": "يا محيي، أحيِ قلبي بعد الغفلة."}, {"num": 61, "ar": "ٱلْمُمِيتُ", "tr": "", "en_mean": "The Creator of Death", "ru_mean": "المميت", "en_desc": "Ya Mumit, give me a good ending and take me only when You are pleased with me.", "ru_desc": "يا مميت، ارزقني حسن الخاتمة ولا تتوفني إلا وأنت راضٍ عني."}, {"num": 62, "ar": "ٱلْحَيُّ", "tr": "", "en_mean": "The Ever-Living", "ru_mean": "الحي", "en_desc": "Ya Hayy, keep my heart alive with remembrance of You.", "ru_desc": "يا حي، أبقِ قلبي حيًا بذكرك."}, {"num": 63, "ar": "ٱلْقَيُّومُ", "tr": "", "en_mean": "The Self-Subsisting", "ru_mean": "القيوم", "en_desc": "Ya Qayyum, sustain me, support me, and do not let me collapse.", "ru_desc": "يا قيوم، أقمْني وساندني ولا تدعني أسقط."}, {"num": 64, "ar": "ٱلْوَاجِدُ", "tr": "", "en_mean": "The Finder", "ru_mean": "الواجد", "en_desc": "Ya Wajid, let me find what is good, and let me find You near me in every hardship.", "ru_desc": "يا واجد، يسّر لي أن أجد الخير وأن أجد قربك في كل شدة."}, {"num": 65, "ar": "ٱلْمَاجِدُ", "tr": "", "en_mean": "The Noble and Glorious", "ru_mean": "الماجد", "en_desc": "Ya Majid, ennoble my heart and make my path honorable before You.", "ru_desc": "يا ماجد، شرّف قلبي واجعل طريقي كريمًا عندك."}, {"num": 66, "ar": "ٱلْوَاحِدُ", "tr": "", "en_mean": "The One", "ru_mean": "الواحد", "en_desc": "Ya Wahid, unite my heart upon You alone and remove divided attachments from me.", "ru_desc": "يا واحد، اجمع قلبي عليك وحدك وانزع منه التعلقات المفرقة."}, {"num": 67, "ar": "ٱلْأَحَدُ", "tr": "", "en_mean": "The Unique", "ru_mean": "الأحد", "en_desc": "Ya Ahad, make my worship sincere for You alone.", "ru_desc": "يا أحد، اجعل عبادتي خالصةً لك وحدك."}, {"num": 68, "ar": "ٱلصَّمَدُ", "tr": "", "en_mean": "The Eternal Refuge", "ru_mean": "الصمد", "en_desc": "Ya Samad, I turn to You with all my needs, so do not leave me in need of creation.", "ru_desc": "يا صمد، أتوجه إليك بكل حاجاتي فلا تجعلني محتاجًا إلى الخلق."}, {"num": 69, "ar": "ٱلْقَادِرُ", "tr": "", "en_mean": "The All-Powerful", "ru_mean": "القادر", "en_desc": "Ya Qadir, You are able over all things, so make possible what is good for me.", "ru_desc": "يا قادر، أنت على كل شيء قدير، فاجعل الخير ممكنًا لي."}, {"num": 70, "ar": "ٱلْمُقْتَدِرُ", "tr": "", "en_mean": "The Absolutely Powerful", "ru_mean": "المقتدر", "en_desc": "Ya Muqtadir, decree for me what is right and protect me from what harms me.", "ru_desc": "يا مقتدر، قدّر لي ما هو صواب واحفظني من الضرر."}, {"num": 71, "ar": "ٱلْمُقَدِّمُ", "tr": "", "en_mean": "The Expediter", "ru_mean": "المقدم", "en_desc": "Ya Muqaddim, bring me forward in what pleases You.", "ru_desc": "يا مقدم، قدّمني فيما يرضيك."}, {"num": 72, "ar": "ٱلْمُؤَخِّرُ", "tr": "", "en_mean": "The Delayer", "ru_mean": "المؤخر", "en_desc": "Ya Mu’akhkhir, delay from me what is not good, and keep me patient with Your timing.", "ru_desc": "يا مؤخر، أخّر عني ما ليس بخير واجعلني صابرًا على توقيتك."}, {"num": 73, "ar": "ٱلْأَوَّلُ", "tr": "", "en_mean": "The First", "ru_mean": "الأول", "en_desc": "Ya Awwal, let my beginning be with Your guidance and blessing.", "ru_desc": "يا أول، اجعل بدايتي مع هدايتك وبركتك."}, {"num": 74, "ar": "ٱلْآخِرُ", "tr": "", "en_mean": "The Last", "ru_mean": "الآخر", "en_desc": "Ya Akhir, grant me a blessed ending and the best final outcome.", "ru_desc": "يا آخر، ارزقني خاتمةً مباركةً وأفضل عاقبة."}, {"num": 75, "ar": "ٱلظَّاهِرُ", "tr": "", "en_mean": "The Manifest", "ru_mean": "الظاهر", "en_desc": "Ya Zahir, show me the signs of truth clearly.", "ru_desc": "يا ظاهر، أرني آيات الحق واضحةً جلية."}, {"num": 76, "ar": "ٱلْبَاطِنُ", "tr": "", "en_mean": "The Hidden", "ru_mean": "الباطن", "en_desc": "Ya Batin, know my hidden pain and heal what no one sees.", "ru_desc": "يا باطن، أنت أعلم بألمي الخفي فاشفِ ما لا يراه أحد."}, {"num": 77, "ar": "ٱلْوَالِي", "tr": "", "en_mean": "The Governor", "ru_mean": "الوالي", "en_desc": "Ya Wali, manage my affairs better than I could ever manage them myself.", "ru_desc": "يا والي، تولَّ أمري خيرًا مما أتولاه لنفسي."}, {"num": 78, "ar": "ٱلْمُتَعَالِي", "tr": "", "en_mean": "The Most Exalted", "ru_mean": "المتعالي", "en_desc": "Ya Muta’ali, raise me above sin, pettiness, and low desires.", "ru_desc": "يا متعال، ارفعني فوق الذنب وصغائر الأمور ودناءة الشهوات."}, {"num": 79, "ar": "ٱلْبَرُّ", "tr": "", "en_mean": "The Source of All Goodness", "ru_mean": "البر", "en_desc": "Ya Barr, shower me with goodness and make me a source of good for others.", "ru_desc": "يا بر، أغدق عليّ من خيرك واجعلني سببًا للخير لغيري."}, {"num": 80, "ar": "ٱلتَّوَّابُ", "tr": "", "en_mean": "The Acceptor of Repentance", "ru_mean": "التواب", "en_desc": "Ya Tawwab, accept my repentance and bring me back to You beautifully.", "ru_desc": "يا تواب، تقبّل توبتي وردّني إليك ردًا جميلًا."}, {"num": 81, "ar": "ٱلْمُنْتَقِمُ", "tr": "", "en_mean": "The Avenger", "ru_mean": "المنتقم", "en_desc": "Ya Muntaqim, grant justice against oppression and protect me from ظلم.", "ru_desc": "يا منتقم، أقم العدل على الظلم واحفظني من الظلم."}, {"num": 82, "ar": "ٱلْعَفُوُّ", "tr": "", "en_mean": "The Pardoner", "ru_mean": "العفو", "en_desc": "Ya ‘Afuww, erase my sins completely and leave no trace of them upon me.", "ru_desc": "يا عفو، امحُ ذنوبي كلها ولا تبقَ لها أثرًا عليّ."}, {"num": 83, "ar": "ٱلرَّؤُوفُ", "tr": "", "en_mean": "The Most Kind", "ru_mean": "الرؤوف", "en_desc": "Ya Ra’uf, treat me with tenderness, gentleness, and mercy.", "ru_desc": "يا رؤوف، عاملني بالرأفة واللطف والرحمة."}, {"num": 84, "ar": "مَالِكُ ٱلْمُلْكِ", "tr": "", "en_mean": "Owner of All Sovereignty", "ru_mean": "مالك الملك", "en_desc": "Ya Malik-ul-Mulk, grant me only what is good from Your dominion and keep false power away from my heart.", "ru_desc": "يا مالك الملك، هب لي من ملكك ما فيه خير واصرف عن قلبي شهوة السلطان الباطل."}, {"num": 85, "ar": "ذُو ٱلْجَلَالِ وَٱلْإِكْرَامِ", "tr": "", "en_mean": "Lord of Majesty and Honor", "ru_mean": "ذو الجلال والإكرام", "en_desc": "Ya Dhul-Jalali wal-Ikram, honor me with Your closeness and noble character.", "ru_desc": "يا ذا الجلال والإكرام، أكرمني بقربك وبحسن الخلق."}, {"num": 86, "ar": "ٱلْمُقْسِطُ", "tr": "", "en_mean": "The Equitable", "ru_mean": "المقسط", "en_desc": "Ya Muqsit, place fairness and balance in my life and my decisions.", "ru_desc": "يا مقسط، اجعل في حياتي وقراراتي عدلًا وتوازنًا."}, {"num": 87, "ar": "ٱلْجَامِعُ", "tr": "", "en_mean": "The Gatherer", "ru_mean": "الجامع", "en_desc": "Ya Jami’, gather my scattered heart and unite my affairs upon good.", "ru_desc": "يا جامع، اجمع شتات قلبي ووحّد أمري على الخير."}, {"num": 88, "ar": "ٱلْغَنِيُّ", "tr": "", "en_mean": "The Self-Sufficient", "ru_mean": "الغني", "en_desc": "Ya Ghani, enrich my heart with contentment and free me from desperate need.", "ru_desc": "يا غني، أغنِ قلبي بالقناعة وحررني من الحاجة المذلة."}, {"num": 89, "ar": "ٱلْمُغْنِي", "tr": "", "en_mean": "The Enricher", "ru_mean": "المغني", "en_desc": "Ya Mughni, grant me sufficient halal provision and inner richness.", "ru_desc": "يا مغني، ارزقني كفايةً من الحلال وغنىً في القلب."}, {"num": 90, "ar": "ٱلْمَانِعُ", "tr": "", "en_mean": "The Preventer", "ru_mean": "المانع", "en_desc": "Ya Mani’, prevent from me what would harm my faith, my home, and my future.", "ru_desc": "يا مانع، امنع عني ما يضر ديني وبيتي ومستقبلي."}, {"num": 91, "ar": "ٱلضَّارُ", "tr": "", "en_mean": "The Dispenser of Affliction", "ru_mean": "الضار", "en_desc": "Ya Darr, keep harmful trials away from me and make me patient in what You decree.", "ru_desc": "يا ضار، اصرف عني البلاء المهلك واجعلني صابرًا على قضائك."}, {"num": 92, "ar": "ٱلنَّافِعُ", "tr": "", "en_mean": "The Bestower of Benefit", "ru_mean": "النافع", "en_desc": "Ya Nafi’, bring me benefit in my religion, my life, and my family.", "ru_desc": "يا نافع، اجلب لي النفع في ديني وحياتي وأهلي."}, {"num": 93, "ar": "ٱلنُّورُ", "tr": "", "en_mean": "The Light", "ru_mean": "النور", "en_desc": "Ya Nur, illuminate my path and bring me out of darkness.", "ru_desc": "يا نور، أنر طريقي وأخرجني من الظلمات."}, {"num": 94, "ar": "ٱلْهَادِي", "tr": "", "en_mean": "The Guide", "ru_mean": "الهادي", "en_desc": "Ya Hadi, guide me to the straight path and keep me firm upon it.", "ru_desc": "يا هادي، اهدني إلى الصراط المستقيم وثبّتني عليه."}, {"num": 95, "ar": "ٱلْبَدِيعُ", "tr": "", "en_mean": "The Incomparable Originator", "ru_mean": "البديع", "en_desc": "Ya Badi’, open for me beautiful outcomes I could not have imagined.", "ru_desc": "يا بديع، افتح لي من الجميل ما لم أكن أتخيله."}, {"num": 96, "ar": "ٱلْبَاقِي", "tr": "", "en_mean": "The Everlasting", "ru_mean": "الباقي", "en_desc": "Ya Baqi, make what I do for You lasting and accepted.", "ru_desc": "يا باقي، اجعل ما أعمله لك باقيًا مقبولًا."}, {"num": 97, "ar": "ٱلْوَارِثُ", "tr": "", "en_mean": "The Inheritor", "ru_mean": "الوارث", "en_desc": "Ya Warith, leave for me what is truly beneficial when all else fades.", "ru_desc": "يا وارث، أبقِ لي ما ينفع حقًا حين يزول كل شيء."}, {"num": 98, "ar": "ٱلرَّشِيدُ", "tr": "", "en_mean": "The Guide to the Right Way", "ru_mean": "الرشيد", "en_desc": "Ya Rashid, direct me to what is right and keep me from misguidance.", "ru_desc": "يا رشيد، وجّهني إلى الصواب واحفظني من الضلال."}, {"num": 99, "ar": "ٱلصَّبُورُ", "tr": "", "en_mean": "The Most Patient", "ru_mean": "الصبور", "en_desc": "Ya Sabur, give me patience without complaint and firmness without despair.", "ru_desc": "يا صبور، ارزقني صبرًا بلا سخط وثباتًا بلا يأس."}];
 const meanKey = "ru_mean";
 const descKey = "ru_desc";
+const premiumRizqDescriptions = ["يا الرحمن، ارزقني رزقًا حلالًا واسعًا ومالًا مباركًا.", "يا الرحيم، وسّع رزقي وبارك لي في كسبي وعملي.", "يا الملك، افتح لي أبواب الخير والفرص والبركة.", "يا القدوس، اجعل مالي وعملي وطريقي مباركًا.", "يا السلام، ارزقني كفايةً وغنىً وسكينةً في الرزق.", "يا المؤمن، ارزقني رزقًا حلالًا واسعًا ومالًا مباركًا.", "يا المهيمن، وسّع رزقي وبارك لي في كسبي وعملي.", "يا العزيز، افتح لي أبواب الخير والفرص والبركة.", "يا الجبار، اجعل مالي وعملي وطريقي مباركًا.", "يا المتكبر، ارزقني كفايةً وغنىً وسكينةً في الرزق.", "يا الخالق، ارزقني رزقًا حلالًا واسعًا ومالًا مباركًا.", "يا البارئ، وسّع رزقي وبارك لي في كسبي وعملي.", "يا المصور، افتح لي أبواب الخير والفرص والبركة.", "يا الغفار، اجعل مالي وعملي وطريقي مباركًا.", "يا القهار، ارزقني كفايةً وغنىً وسكينةً في الرزق.", "يا الوهاب، ارزقني رزقًا حلالًا واسعًا ومالًا مباركًا.", "يا الرزاق، وسّع رزقي وبارك لي في كسبي وعملي.", "يا الفتاح، افتح لي أبواب الخير والفرص والبركة.", "يا العليم، اجعل مالي وعملي وطريقي مباركًا.", "يا القابض، ارزقني كفايةً وغنىً وسكينةً في الرزق.", "يا الباسط، ارزقني رزقًا حلالًا واسعًا ومالًا مباركًا.", "يا الخافض، وسّع رزقي وبارك لي في كسبي وعملي.", "يا الرافع، افتح لي أبواب الخير والفرص والبركة.", "يا المعز، اجعل مالي وعملي وطريقي مباركًا.", "يا المذل، ارزقني كفايةً وغنىً وسكينةً في الرزق.", "يا السميع، ارزقني رزقًا حلالًا واسعًا ومالًا مباركًا.", "يا البصير، وسّع رزقي وبارك لي في كسبي وعملي.", "يا الحكم، افتح لي أبواب الخير والفرص والبركة.", "يا العدل، اجعل مالي وعملي وطريقي مباركًا.", "يا اللطيف، ارزقني كفايةً وغنىً وسكينةً في الرزق.", "يا الخبير، ارزقني رزقًا حلالًا واسعًا ومالًا مباركًا.", "يا الحليم، وسّع رزقي وبارك لي في كسبي وعملي.", "يا العظيم، افتح لي أبواب الخير والفرص والبركة.", "يا الغفور، اجعل مالي وعملي وطريقي مباركًا.", "يا الشكور، ارزقني كفايةً وغنىً وسكينةً في الرزق.", "يا العلي، ارزقني رزقًا حلالًا واسعًا ومالًا مباركًا.", "يا الكبير، وسّع رزقي وبارك لي في كسبي وعملي.", "يا الحفيظ، افتح لي أبواب الخير والفرص والبركة.", "يا المقيت، اجعل مالي وعملي وطريقي مباركًا.", "يا الحسيب، ارزقني كفايةً وغنىً وسكينةً في الرزق.", "يا الجليل، ارزقني رزقًا حلالًا واسعًا ومالًا مباركًا.", "يا الكريم، وسّع رزقي وبارك لي في كسبي وعملي.", "يا الرقيب، افتح لي أبواب الخير والفرص والبركة.", "يا المجيب، اجعل مالي وعملي وطريقي مباركًا.", "يا الواسع، ارزقني كفايةً وغنىً وسكينةً في الرزق.", "يا الحكيم، ارزقني رزقًا حلالًا واسعًا ومالًا مباركًا.", "يا الودود، وسّع رزقي وبارك لي في كسبي وعملي.", "يا المجيد، افتح لي أبواب الخير والفرص والبركة.", "يا الباعث، اجعل مالي وعملي وطريقي مباركًا.", "يا الشهيد، ارزقني كفايةً وغنىً وسكينةً في الرزق.", "يا الحق، ارزقني رزقًا حلالًا واسعًا ومالًا مباركًا.", "يا الوكيل، وسّع رزقي وبارك لي في كسبي وعملي.", "يا القوي، افتح لي أبواب الخير والفرص والبركة.", "يا المتين، اجعل مالي وعملي وطريقي مباركًا.", "يا الولي، ارزقني كفايةً وغنىً وسكينةً في الرزق.", "يا الحميد، ارزقني رزقًا حلالًا واسعًا ومالًا مباركًا.", "يا المحصي، وسّع رزقي وبارك لي في كسبي وعملي.", "يا المبدئ، افتح لي أبواب الخير والفرص والبركة.", "يا المعيد، اجعل مالي وعملي وطريقي مباركًا.", "يا المحيي، ارزقني كفايةً وغنىً وسكينةً في الرزق.", "يا المميت، ارزقني رزقًا حلالًا واسعًا ومالًا مباركًا.", "يا الحي، وسّع رزقي وبارك لي في كسبي وعملي.", "يا القيوم، افتح لي أبواب الخير والفرص والبركة.", "يا الواجد، اجعل مالي وعملي وطريقي مباركًا.", "يا الماجد، ارزقني كفايةً وغنىً وسكينةً في الرزق.", "يا الواحد، ارزقني رزقًا حلالًا واسعًا ومالًا مباركًا.", "يا الأحد، وسّع رزقي وبارك لي في كسبي وعملي.", "يا الصمد، افتح لي أبواب الخير والفرص والبركة.", "يا القادر، اجعل مالي وعملي وطريقي مباركًا.", "يا المقتدر، ارزقني كفايةً وغنىً وسكينةً في الرزق.", "يا المقدم، ارزقني رزقًا حلالًا واسعًا ومالًا مباركًا.", "يا المؤخر، وسّع رزقي وبارك لي في كسبي وعملي.", "يا الأول، افتح لي أبواب الخير والفرص والبركة.", "يا الآخر، اجعل مالي وعملي وطريقي مباركًا.", "يا الظاهر، ارزقني كفايةً وغنىً وسكينةً في الرزق.", "يا الباطن، ارزقني رزقًا حلالًا واسعًا ومالًا مباركًا.", "يا الوالي، وسّع رزقي وبارك لي في كسبي وعملي.", "يا المتعالي، افتح لي أبواب الخير والفرص والبركة.", "يا البر، اجعل مالي وعملي وطريقي مباركًا.", "يا التواب، ارزقني كفايةً وغنىً وسكينةً في الرزق.", "يا المنتقم، ارزقني رزقًا حلالًا واسعًا ومالًا مباركًا.", "يا العفو، وسّع رزقي وبارك لي في كسبي وعملي.", "يا الرؤوف، افتح لي أبواب الخير والفرص والبركة.", "يا مالك الملك، اجعل مالي وعملي وطريقي مباركًا.", "يا ذو الجلال والإكرام، ارزقني كفايةً وغنىً وسكينةً في الرزق.", "يا المقسط، ارزقني رزقًا حلالًا واسعًا ومالًا مباركًا.", "يا الجامع، وسّع رزقي وبارك لي في كسبي وعملي.", "يا الغني، افتح لي أبواب الخير والفرص والبركة.", "يا المغني، اجعل مالي وعملي وطريقي مباركًا.", "يا المانع، ارزقني كفايةً وغنىً وسكينةً في الرزق.", "يا الضار، ارزقني رزقًا حلالًا واسعًا ومالًا مباركًا.", "يا النافع، وسّع رزقي وبارك لي في كسبي وعملي.", "يا النور، افتح لي أبواب الخير والفرص والبركة.", "يا الهادي، اجعل مالي وعملي وطريقي مباركًا.", "يا البديع، ارزقني كفايةً وغنىً وسكينةً في الرزق.", "يا الباقي، ارزقني رزقًا حلالًا واسعًا ومالًا مباركًا.", "يا الوارث، وسّع رزقي وبارك لي في كسبي وعملي.", "يا الرشيد، افتح لي أبواب الخير والفرص والبركة.", "يا الصبور، اجعل مالي وعملي وطريقي مباركًا."];
+const premiumHealthDescriptions = ["يا الرحمن، اشفِ المريض شفاءً تامًا وارزقه القوة والعافية.", "يا الرحيم، خفف ألمه واملأ قلبه بالأمل والسكينة.", "يا الملك، ارفع عنه المرض وأحطه برحمتك.", "يا القدوس، ردّ إليه صحته وافتح له أبواب الشفاء.", "يا السلام، ارزقه الصبر والشفاء وطمأنينة القلب.", "يا المؤمن، اشفِ المريض شفاءً تامًا وارزقه القوة والعافية.", "يا المهيمن، خفف ألمه واملأ قلبه بالأمل والسكينة.", "يا العزيز، ارفع عنه المرض وأحطه برحمتك.", "يا الجبار، ردّ إليه صحته وافتح له أبواب الشفاء.", "يا المتكبر، ارزقه الصبر والشفاء وطمأنينة القلب.", "يا الخالق، اشفِ المريض شفاءً تامًا وارزقه القوة والعافية.", "يا البارئ، خفف ألمه واملأ قلبه بالأمل والسكينة.", "يا المصور، ارفع عنه المرض وأحطه برحمتك.", "يا الغفار، ردّ إليه صحته وافتح له أبواب الشفاء.", "يا القهار، ارزقه الصبر والشفاء وطمأنينة القلب.", "يا الوهاب، اشفِ المريض شفاءً تامًا وارزقه القوة والعافية.", "يا الرزاق، خفف ألمه واملأ قلبه بالأمل والسكينة.", "يا الفتاح، ارفع عنه المرض وأحطه برحمتك.", "يا العليم، ردّ إليه صحته وافتح له أبواب الشفاء.", "يا القابض، ارزقه الصبر والشفاء وطمأنينة القلب.", "يا الباسط، اشفِ المريض شفاءً تامًا وارزقه القوة والعافية.", "يا الخافض، خفف ألمه واملأ قلبه بالأمل والسكينة.", "يا الرافع، ارفع عنه المرض وأحطه برحمتك.", "يا المعز، ردّ إليه صحته وافتح له أبواب الشفاء.", "يا المذل، ارزقه الصبر والشفاء وطمأنينة القلب.", "يا السميع، اشفِ المريض شفاءً تامًا وارزقه القوة والعافية.", "يا البصير، خفف ألمه واملأ قلبه بالأمل والسكينة.", "يا الحكم، ارفع عنه المرض وأحطه برحمتك.", "يا العدل، ردّ إليه صحته وافتح له أبواب الشفاء.", "يا اللطيف، ارزقه الصبر والشفاء وطمأنينة القلب.", "يا الخبير، اشفِ المريض شفاءً تامًا وارزقه القوة والعافية.", "يا الحليم، خفف ألمه واملأ قلبه بالأمل والسكينة.", "يا العظيم، ارفع عنه المرض وأحطه برحمتك.", "يا الغفور، ردّ إليه صحته وافتح له أبواب الشفاء.", "يا الشكور، ارزقه الصبر والشفاء وطمأنينة القلب.", "يا العلي، اشفِ المريض شفاءً تامًا وارزقه القوة والعافية.", "يا الكبير، خفف ألمه واملأ قلبه بالأمل والسكينة.", "يا الحفيظ، ارفع عنه المرض وأحطه برحمتك.", "يا المقيت، ردّ إليه صحته وافتح له أبواب الشفاء.", "يا الحسيب، ارزقه الصبر والشفاء وطمأنينة القلب.", "يا الجليل، اشفِ المريض شفاءً تامًا وارزقه القوة والعافية.", "يا الكريم، خفف ألمه واملأ قلبه بالأمل والسكينة.", "يا الرقيب، ارفع عنه المرض وأحطه برحمتك.", "يا المجيب، ردّ إليه صحته وافتح له أبواب الشفاء.", "يا الواسع، ارزقه الصبر والشفاء وطمأنينة القلب.", "يا الحكيم، اشفِ المريض شفاءً تامًا وارزقه القوة والعافية.", "يا الودود، خفف ألمه واملأ قلبه بالأمل والسكينة.", "يا المجيد، ارفع عنه المرض وأحطه برحمتك.", "يا الباعث، ردّ إليه صحته وافتح له أبواب الشفاء.", "يا الشهيد، ارزقه الصبر والشفاء وطمأنينة القلب.", "يا الحق، اشفِ المريض شفاءً تامًا وارزقه القوة والعافية.", "يا الوكيل، خفف ألمه واملأ قلبه بالأمل والسكينة.", "يا القوي، ارفع عنه المرض وأحطه برحمتك.", "يا المتين، ردّ إليه صحته وافتح له أبواب الشفاء.", "يا الولي، ارزقه الصبر والشفاء وطمأنينة القلب.", "يا الحميد، اشفِ المريض شفاءً تامًا وارزقه القوة والعافية.", "يا المحصي، خفف ألمه واملأ قلبه بالأمل والسكينة.", "يا المبدئ، ارفع عنه المرض وأحطه برحمتك.", "يا المعيد، ردّ إليه صحته وافتح له أبواب الشفاء.", "يا المحيي، ارزقه الصبر والشفاء وطمأنينة القلب.", "يا المميت، اشفِ المريض شفاءً تامًا وارزقه القوة والعافية.", "يا الحي، خفف ألمه واملأ قلبه بالأمل والسكينة.", "يا القيوم، ارفع عنه المرض وأحطه برحمتك.", "يا الواجد، ردّ إليه صحته وافتح له أبواب الشفاء.", "يا الماجد، ارزقه الصبر والشفاء وطمأنينة القلب.", "يا الواحد، اشفِ المريض شفاءً تامًا وارزقه القوة والعافية.", "يا الأحد، خفف ألمه واملأ قلبه بالأمل والسكينة.", "يا الصمد، ارفع عنه المرض وأحطه برحمتك.", "يا القادر، ردّ إليه صحته وافتح له أبواب الشفاء.", "يا المقتدر، ارزقه الصبر والشفاء وطمأنينة القلب.", "يا المقدم، اشفِ المريض شفاءً تامًا وارزقه القوة والعافية.", "يا المؤخر، خفف ألمه واملأ قلبه بالأمل والسكينة.", "يا الأول، ارفع عنه المرض وأحطه برحمتك.", "يا الآخر، ردّ إليه صحته وافتح له أبواب الشفاء.", "يا الظاهر، ارزقه الصبر والشفاء وطمأنينة القلب.", "يا الباطن، اشفِ المريض شفاءً تامًا وارزقه القوة والعافية.", "يا الوالي، خفف ألمه واملأ قلبه بالأمل والسكينة.", "يا المتعالي، ارفع عنه المرض وأحطه برحمتك.", "يا البر، ردّ إليه صحته وافتح له أبواب الشفاء.", "يا التواب، ارزقه الصبر والشفاء وطمأنينة القلب.", "يا المنتقم، اشفِ المريض شفاءً تامًا وارزقه القوة والعافية.", "يا العفو، خفف ألمه واملأ قلبه بالأمل والسكينة.", "يا الرؤوف، ارفع عنه المرض وأحطه برحمتك.", "يا مالك الملك، ردّ إليه صحته وافتح له أبواب الشفاء.", "يا ذو الجلال والإكرام، ارزقه الصبر والشفاء وطمأنينة القلب.", "يا المقسط، اشفِ المريض شفاءً تامًا وارزقه القوة والعافية.", "يا الجامع، خفف ألمه واملأ قلبه بالأمل والسكينة.", "يا الغني، ارفع عنه المرض وأحطه برحمتك.", "يا المغني، ردّ إليه صحته وافتح له أبواب الشفاء.", "يا المانع، ارزقه الصبر والشفاء وطمأنينة القلب.", "يا الضار، اشفِ المريض شفاءً تامًا وارزقه القوة والعافية.", "يا النافع، خفف ألمه واملأ قلبه بالأمل والسكينة.", "يا النور، ارفع عنه المرض وأحطه برحمتك.", "يا الهادي، ردّ إليه صحته وافتح له أبواب الشفاء.", "يا البديع، ارزقه الصبر والشفاء وطمأنينة القلب.", "يا الباقي، اشفِ المريض شفاءً تامًا وارزقه القوة والعافية.", "يا الوارث، خفف ألمه واملأ قلبه بالأمل والسكينة.", "يا الرشيد، ارفع عنه المرض وأحطه برحمتك.", "يا الصبور، ردّ إليه صحته وافتح له أبواب الشفاء."];
+const premiumForgiveDescriptions = ["يا الرحمن، تقبّل توبتي واغفر ذنوبي وطهّر قلبي.", "يا الرحيم، امحُ خطاياي واحفظني من الرجوع إلى المعاصي.", "يا الملك، ارزقني توبة صادقة وقلبًا نقيًا ومغفرةً واسعة.", "يا القدوس، اغفر ذنوبي الظاهرة والخفية وأصلح أمري.", "يا السلام، اغمرني برحمتك وثبّتني على الصراط المستقيم.", "يا المؤمن، تقبّل توبتي واغفر ذنوبي وطهّر قلبي.", "يا المهيمن، امحُ خطاياي واحفظني من الرجوع إلى المعاصي.", "يا العزيز، ارزقني توبة صادقة وقلبًا نقيًا ومغفرةً واسعة.", "يا الجبار، اغفر ذنوبي الظاهرة والخفية وأصلح أمري.", "يا المتكبر، اغمرني برحمتك وثبّتني على الصراط المستقيم.", "يا الخالق، تقبّل توبتي واغفر ذنوبي وطهّر قلبي.", "يا البارئ، امحُ خطاياي واحفظني من الرجوع إلى المعاصي.", "يا المصور، ارزقني توبة صادقة وقلبًا نقيًا ومغفرةً واسعة.", "يا الغفار، اغفر ذنوبي الظاهرة والخفية وأصلح أمري.", "يا القهار، اغمرني برحمتك وثبّتني على الصراط المستقيم.", "يا الوهاب، تقبّل توبتي واغفر ذنوبي وطهّر قلبي.", "يا الرزاق، امحُ خطاياي واحفظني من الرجوع إلى المعاصي.", "يا الفتاح، ارزقني توبة صادقة وقلبًا نقيًا ومغفرةً واسعة.", "يا العليم، اغفر ذنوبي الظاهرة والخفية وأصلح أمري.", "يا القابض، اغمرني برحمتك وثبّتني على الصراط المستقيم.", "يا الباسط، تقبّل توبتي واغفر ذنوبي وطهّر قلبي.", "يا الخافض، امحُ خطاياي واحفظني من الرجوع إلى المعاصي.", "يا الرافع، ارزقني توبة صادقة وقلبًا نقيًا ومغفرةً واسعة.", "يا المعز، اغفر ذنوبي الظاهرة والخفية وأصلح أمري.", "يا المذل، اغمرني برحمتك وثبّتني على الصراط المستقيم.", "يا السميع، تقبّل توبتي واغفر ذنوبي وطهّر قلبي.", "يا البصير، امحُ خطاياي واحفظني من الرجوع إلى المعاصي.", "يا الحكم، ارزقني توبة صادقة وقلبًا نقيًا ومغفرةً واسعة.", "يا العدل، اغفر ذنوبي الظاهرة والخفية وأصلح أمري.", "يا اللطيف، اغمرني برحمتك وثبّتني على الصراط المستقيم.", "يا الخبير، تقبّل توبتي واغفر ذنوبي وطهّر قلبي.", "يا الحليم، امحُ خطاياي واحفظني من الرجوع إلى المعاصي.", "يا العظيم، ارزقني توبة صادقة وقلبًا نقيًا ومغفرةً واسعة.", "يا الغفور، اغفر ذنوبي الظاهرة والخفية وأصلح أمري.", "يا الشكور، اغمرني برحمتك وثبّتني على الصراط المستقيم.", "يا العلي، تقبّل توبتي واغفر ذنوبي وطهّر قلبي.", "يا الكبير، امحُ خطاياي واحفظني من الرجوع إلى المعاصي.", "يا الحفيظ، ارزقني توبة صادقة وقلبًا نقيًا ومغفرةً واسعة.", "يا المقيت، اغفر ذنوبي الظاهرة والخفية وأصلح أمري.", "يا الحسيب، اغمرني برحمتك وثبّتني على الصراط المستقيم.", "يا الجليل، تقبّل توبتي واغفر ذنوبي وطهّر قلبي.", "يا الكريم، امحُ خطاياي واحفظني من الرجوع إلى المعاصي.", "يا الرقيب، ارزقني توبة صادقة وقلبًا نقيًا ومغفرةً واسعة.", "يا المجيب، اغفر ذنوبي الظاهرة والخفية وأصلح أمري.", "يا الواسع، اغمرني برحمتك وثبّتني على الصراط المستقيم.", "يا الحكيم، تقبّل توبتي واغفر ذنوبي وطهّر قلبي.", "يا الودود، امحُ خطاياي واحفظني من الرجوع إلى المعاصي.", "يا المجيد، ارزقني توبة صادقة وقلبًا نقيًا ومغفرةً واسعة.", "يا الباعث، اغفر ذنوبي الظاهرة والخفية وأصلح أمري.", "يا الشهيد، اغمرني برحمتك وثبّتني على الصراط المستقيم.", "يا الحق، تقبّل توبتي واغفر ذنوبي وطهّر قلبي.", "يا الوكيل، امحُ خطاياي واحفظني من الرجوع إلى المعاصي.", "يا القوي، ارزقني توبة صادقة وقلبًا نقيًا ومغفرةً واسعة.", "يا المتين، اغفر ذنوبي الظاهرة والخفية وأصلح أمري.", "يا الولي، اغمرني برحمتك وثبّتني على الصراط المستقيم.", "يا الحميد، تقبّل توبتي واغفر ذنوبي وطهّر قلبي.", "يا المحصي، امحُ خطاياي واحفظني من الرجوع إلى المعاصي.", "يا المبدئ، ارزقني توبة صادقة وقلبًا نقيًا ومغفرةً واسعة.", "يا المعيد، اغفر ذنوبي الظاهرة والخفية وأصلح أمري.", "يا المحيي، اغمرني برحمتك وثبّتني على الصراط المستقيم.", "يا المميت، تقبّل توبتي واغفر ذنوبي وطهّر قلبي.", "يا الحي، امحُ خطاياي واحفظني من الرجوع إلى المعاصي.", "يا القيوم، ارزقني توبة صادقة وقلبًا نقيًا ومغفرةً واسعة.", "يا الواجد، اغفر ذنوبي الظاهرة والخفية وأصلح أمري.", "يا الماجد، اغمرني برحمتك وثبّتني على الصراط المستقيم.", "يا الواحد، تقبّل توبتي واغفر ذنوبي وطهّر قلبي.", "يا الأحد، امحُ خطاياي واحفظني من الرجوع إلى المعاصي.", "يا الصمد، ارزقني توبة صادقة وقلبًا نقيًا ومغفرةً واسعة.", "يا القادر، اغفر ذنوبي الظاهرة والخفية وأصلح أمري.", "يا المقتدر، اغمرني برحمتك وثبّتني على الصراط المستقيم.", "يا المقدم، تقبّل توبتي واغفر ذنوبي وطهّر قلبي.", "يا المؤخر، امحُ خطاياي واحفظني من الرجوع إلى المعاصي.", "يا الأول، ارزقني توبة صادقة وقلبًا نقيًا ومغفرةً واسعة.", "يا الآخر، اغفر ذنوبي الظاهرة والخفية وأصلح أمري.", "يا الظاهر، اغمرني برحمتك وثبّتني على الصراط المستقيم.", "يا الباطن، تقبّل توبتي واغفر ذنوبي وطهّر قلبي.", "يا الوالي، امحُ خطاياي واحفظني من الرجوع إلى المعاصي.", "يا المتعالي، ارزقني توبة صادقة وقلبًا نقيًا ومغفرةً واسعة.", "يا البر، اغفر ذنوبي الظاهرة والخفية وأصلح أمري.", "يا التواب، اغمرني برحمتك وثبّتني على الصراط المستقيم.", "يا المنتقم، تقبّل توبتي واغفر ذنوبي وطهّر قلبي.", "يا العفو، امحُ خطاياي واحفظني من الرجوع إلى المعاصي.", "يا الرؤوف، ارزقني توبة صادقة وقلبًا نقيًا ومغفرةً واسعة.", "يا مالك الملك، اغفر ذنوبي الظاهرة والخفية وأصلح أمري.", "يا ذو الجلال والإكرام، اغمرني برحمتك وثبّتني على الصراط المستقيم.", "يا المقسط، تقبّل توبتي واغفر ذنوبي وطهّر قلبي.", "يا الجامع، امحُ خطاياي واحفظني من الرجوع إلى المعاصي.", "يا الغني، ارزقني توبة صادقة وقلبًا نقيًا ومغفرةً واسعة.", "يا المغني، اغفر ذنوبي الظاهرة والخفية وأصلح أمري.", "يا المانع، اغمرني برحمتك وثبّتني على الصراط المستقيم.", "يا الضار، تقبّل توبتي واغفر ذنوبي وطهّر قلبي.", "يا النافع، امحُ خطاياي واحفظني من الرجوع إلى المعاصي.", "يا النور، ارزقني توبة صادقة وقلبًا نقيًا ومغفرةً واسعة.", "يا الهادي، اغفر ذنوبي الظاهرة والخفية وأصلح أمري.", "يا البديع، اغمرني برحمتك وثبّتني على الصراط المستقيم.", "يا الباقي، تقبّل توبتي واغفر ذنوبي وطهّر قلبي.", "يا الوارث، امحُ خطاياي واحفظني من الرجوع إلى المعاصي.", "يا الرشيد، ارزقني توبة صادقة وقلبًا نقيًا ومغفرةً واسعة.", "يا الصبور، اغفر ذنوبي الظاهرة والخفية وأصلح أمري."];
+const premiumDebtDescriptions = ["يا الرحمن، اقضِ ديني وارزقني رزقًا حلالًا يرفع عني الضيق.", "يا الرحيم، يسّر أموري المالية وافتح لي أبواب الفرج.", "يا الملك، أعنّي على سداد ديوني وارزقني طمأنينة القلب.", "يا القدوس، احفظني من الفقر والديون والهموم المالية.", "يا السلام، بارك في دخلي وارفع عني أعبائي.", "يا المؤمن، اقضِ ديني وارزقني رزقًا حلالًا يرفع عني الضيق.", "يا المهيمن، يسّر أموري المالية وافتح لي أبواب الفرج.", "يا العزيز، أعنّي على سداد ديوني وارزقني طمأنينة القلب.", "يا الجبار، احفظني من الفقر والديون والهموم المالية.", "يا المتكبر، بارك في دخلي وارفع عني أعبائي.", "يا الخالق، اقضِ ديني وارزقني رزقًا حلالًا يرفع عني الضيق.", "يا البارئ، يسّر أموري المالية وافتح لي أبواب الفرج.", "يا المصور، أعنّي على سداد ديوني وارزقني طمأنينة القلب.", "يا الغفار، احفظني من الفقر والديون والهموم المالية.", "يا القهار، بارك في دخلي وارفع عني أعبائي.", "يا الوهاب، اقضِ ديني وارزقني رزقًا حلالًا يرفع عني الضيق.", "يا الرزاق، يسّر أموري المالية وافتح لي أبواب الفرج.", "يا الفتاح، أعنّي على سداد ديوني وارزقني طمأنينة القلب.", "يا العليم، احفظني من الفقر والديون والهموم المالية.", "يا القابض، بارك في دخلي وارفع عني أعبائي.", "يا الباسط، اقضِ ديني وارزقني رزقًا حلالًا يرفع عني الضيق.", "يا الخافض، يسّر أموري المالية وافتح لي أبواب الفرج.", "يا الرافع، أعنّي على سداد ديوني وارزقني طمأنينة القلب.", "يا المعز، احفظني من الفقر والديون والهموم المالية.", "يا المذل، بارك في دخلي وارفع عني أعبائي.", "يا السميع، اقضِ ديني وارزقني رزقًا حلالًا يرفع عني الضيق.", "يا البصير، يسّر أموري المالية وافتح لي أبواب الفرج.", "يا الحكم، أعنّي على سداد ديوني وارزقني طمأنينة القلب.", "يا العدل، احفظني من الفقر والديون والهموم المالية.", "يا اللطيف، بارك في دخلي وارفع عني أعبائي.", "يا الخبير، اقضِ ديني وارزقني رزقًا حلالًا يرفع عني الضيق.", "يا الحليم، يسّر أموري المالية وافتح لي أبواب الفرج.", "يا العظيم، أعنّي على سداد ديوني وارزقني طمأنينة القلب.", "يا الغفور، احفظني من الفقر والديون والهموم المالية.", "يا الشكور، بارك في دخلي وارفع عني أعبائي.", "يا العلي، اقضِ ديني وارزقني رزقًا حلالًا يرفع عني الضيق.", "يا الكبير، يسّر أموري المالية وافتح لي أبواب الفرج.", "يا الحفيظ، أعنّي على سداد ديوني وارزقني طمأنينة القلب.", "يا المقيت، احفظني من الفقر والديون والهموم المالية.", "يا الحسيب، بارك في دخلي وارفع عني أعبائي.", "يا الجليل، اقضِ ديني وارزقني رزقًا حلالًا يرفع عني الضيق.", "يا الكريم، يسّر أموري المالية وافتح لي أبواب الفرج.", "يا الرقيب، أعنّي على سداد ديوني وارزقني طمأنينة القلب.", "يا المجيب، احفظني من الفقر والديون والهموم المالية.", "يا الواسع، بارك في دخلي وارفع عني أعبائي.", "يا الحكيم، اقضِ ديني وارزقني رزقًا حلالًا يرفع عني الضيق.", "يا الودود، يسّر أموري المالية وافتح لي أبواب الفرج.", "يا المجيد، أعنّي على سداد ديوني وارزقني طمأنينة القلب.", "يا الباعث، احفظني من الفقر والديون والهموم المالية.", "يا الشهيد، بارك في دخلي وارفع عني أعبائي.", "يا الحق، اقضِ ديني وارزقني رزقًا حلالًا يرفع عني الضيق.", "يا الوكيل، يسّر أموري المالية وافتح لي أبواب الفرج.", "يا القوي، أعنّي على سداد ديوني وارزقني طمأنينة القلب.", "يا المتين، احفظني من الفقر والديون والهموم المالية.", "يا الولي، بارك في دخلي وارفع عني أعبائي.", "يا الحميد، اقضِ ديني وارزقني رزقًا حلالًا يرفع عني الضيق.", "يا المحصي، يسّر أموري المالية وافتح لي أبواب الفرج.", "يا المبدئ، أعنّي على سداد ديوني وارزقني طمأنينة القلب.", "يا المعيد، احفظني من الفقر والديون والهموم المالية.", "يا المحيي، بارك في دخلي وارفع عني أعبائي.", "يا المميت، اقضِ ديني وارزقني رزقًا حلالًا يرفع عني الضيق.", "يا الحي، يسّر أموري المالية وافتح لي أبواب الفرج.", "يا القيوم، أعنّي على سداد ديوني وارزقني طمأنينة القلب.", "يا الواجد، احفظني من الفقر والديون والهموم المالية.", "يا الماجد، بارك في دخلي وارفع عني أعبائي.", "يا الواحد، اقضِ ديني وارزقني رزقًا حلالًا يرفع عني الضيق.", "يا الأحد، يسّر أموري المالية وافتح لي أبواب الفرج.", "يا الصمد، أعنّي على سداد ديوني وارزقني طمأنينة القلب.", "يا القادر، احفظني من الفقر والديون والهموم المالية.", "يا المقتدر، بارك في دخلي وارفع عني أعبائي.", "يا المقدم، اقضِ ديني وارزقني رزقًا حلالًا يرفع عني الضيق.", "يا المؤخر، يسّر أموري المالية وافتح لي أبواب الفرج.", "يا الأول، أعنّي على سداد ديوني وارزقني طمأنينة القلب.", "يا الآخر، احفظني من الفقر والديون والهموم المالية.", "يا الظاهر، بارك في دخلي وارفع عني أعبائي.", "يا الباطن، اقضِ ديني وارزقني رزقًا حلالًا يرفع عني الضيق.", "يا الوالي، يسّر أموري المالية وافتح لي أبواب الفرج.", "يا المتعالي، أعنّي على سداد ديوني وارزقني طمأنينة القلب.", "يا البر، احفظني من الفقر والديون والهموم المالية.", "يا التواب، بارك في دخلي وارفع عني أعبائي.", "يا المنتقم، اقضِ ديني وارزقني رزقًا حلالًا يرفع عني الضيق.", "يا العفو، يسّر أموري المالية وافتح لي أبواب الفرج.", "يا الرؤوف، أعنّي على سداد ديوني وارزقني طمأنينة القلب.", "يا مالك الملك، احفظني من الفقر والديون والهموم المالية.", "يا ذو الجلال والإكرام، بارك في دخلي وارفع عني أعبائي.", "يا المقسط، اقضِ ديني وارزقني رزقًا حلالًا يرفع عني الضيق.", "يا الجامع، يسّر أموري المالية وافتح لي أبواب الفرج.", "يا الغني، أعنّي على سداد ديوني وارزقني طمأنينة القلب.", "يا المغني، احفظني من الفقر والديون والهموم المالية.", "يا المانع، بارك في دخلي وارفع عني أعبائي.", "يا الضار، اقضِ ديني وارزقني رزقًا حلالًا يرفع عني الضيق.", "يا النافع، يسّر أموري المالية وافتح لي أبواب الفرج.", "يا النور، أعنّي على سداد ديوني وارزقني طمأنينة القلب.", "يا الهادي، احفظني من الفقر والديون والهموم المالية.", "يا البديع، بارك في دخلي وارفع عني أعبائي.", "يا الباقي، اقضِ ديني وارزقني رزقًا حلالًا يرفع عني الضيق.", "يا الوارث، يسّر أموري المالية وافتح لي أبواب الفرج.", "يا الرشيد، أعنّي على سداد ديوني وارزقني طمأنينة القلب.", "يا الصبور، احفظني من الفقر والديون والهموم المالية."];
+const premiumBothDescriptions = ["يا الرحمن، ارزقني السعادة والبركة في الدنيا والآخرة.", "يا الرحيم، جمّل حياتي بالخير وارزقني حسن الخاتمة.", "يا الملك، املأ قلبي إيمانًا ومستقبلي رحمةً وبركة.", "يا القدوس، اهدني إلى فلاح الدنيا والآخرة.", "يا السلام، ارزقني الطمأنينة والخير والسعادة الأبدية.", "يا المؤمن، ارزقني السعادة والبركة في الدنيا والآخرة.", "يا المهيمن، جمّل حياتي بالخير وارزقني حسن الخاتمة.", "يا العزيز، املأ قلبي إيمانًا ومستقبلي رحمةً وبركة.", "يا الجبار، اهدني إلى فلاح الدنيا والآخرة.", "يا المتكبر، ارزقني الطمأنينة والخير والسعادة الأبدية.", "يا الخالق، ارزقني السعادة والبركة في الدنيا والآخرة.", "يا البارئ، جمّل حياتي بالخير وارزقني حسن الخاتمة.", "يا المصور، املأ قلبي إيمانًا ومستقبلي رحمةً وبركة.", "يا الغفار، اهدني إلى فلاح الدنيا والآخرة.", "يا القهار، ارزقني الطمأنينة والخير والسعادة الأبدية.", "يا الوهاب، ارزقني السعادة والبركة في الدنيا والآخرة.", "يا الرزاق، جمّل حياتي بالخير وارزقني حسن الخاتمة.", "يا الفتاح، املأ قلبي إيمانًا ومستقبلي رحمةً وبركة.", "يا العليم، اهدني إلى فلاح الدنيا والآخرة.", "يا القابض، ارزقني الطمأنينة والخير والسعادة الأبدية.", "يا الباسط، ارزقني السعادة والبركة في الدنيا والآخرة.", "يا الخافض، جمّل حياتي بالخير وارزقني حسن الخاتمة.", "يا الرافع، املأ قلبي إيمانًا ومستقبلي رحمةً وبركة.", "يا المعز، اهدني إلى فلاح الدنيا والآخرة.", "يا المذل، ارزقني الطمأنينة والخير والسعادة الأبدية.", "يا السميع، ارزقني السعادة والبركة في الدنيا والآخرة.", "يا البصير، جمّل حياتي بالخير وارزقني حسن الخاتمة.", "يا الحكم، املأ قلبي إيمانًا ومستقبلي رحمةً وبركة.", "يا العدل، اهدني إلى فلاح الدنيا والآخرة.", "يا اللطيف، ارزقني الطمأنينة والخير والسعادة الأبدية.", "يا الخبير، ارزقني السعادة والبركة في الدنيا والآخرة.", "يا الحليم، جمّل حياتي بالخير وارزقني حسن الخاتمة.", "يا العظيم، املأ قلبي إيمانًا ومستقبلي رحمةً وبركة.", "يا الغفور، اهدني إلى فلاح الدنيا والآخرة.", "يا الشكور، ارزقني الطمأنينة والخير والسعادة الأبدية.", "يا العلي، ارزقني السعادة والبركة في الدنيا والآخرة.", "يا الكبير، جمّل حياتي بالخير وارزقني حسن الخاتمة.", "يا الحفيظ، املأ قلبي إيمانًا ومستقبلي رحمةً وبركة.", "يا المقيت، اهدني إلى فلاح الدنيا والآخرة.", "يا الحسيب، ارزقني الطمأنينة والخير والسعادة الأبدية.", "يا الجليل، ارزقني السعادة والبركة في الدنيا والآخرة.", "يا الكريم، جمّل حياتي بالخير وارزقني حسن الخاتمة.", "يا الرقيب، املأ قلبي إيمانًا ومستقبلي رحمةً وبركة.", "يا المجيب، اهدني إلى فلاح الدنيا والآخرة.", "يا الواسع، ارزقني الطمأنينة والخير والسعادة الأبدية.", "يا الحكيم، ارزقني السعادة والبركة في الدنيا والآخرة.", "يا الودود، جمّل حياتي بالخير وارزقني حسن الخاتمة.", "يا المجيد، املأ قلبي إيمانًا ومستقبلي رحمةً وبركة.", "يا الباعث، اهدني إلى فلاح الدنيا والآخرة.", "يا الشهيد، ارزقني الطمأنينة والخير والسعادة الأبدية.", "يا الحق، ارزقني السعادة والبركة في الدنيا والآخرة.", "يا الوكيل، جمّل حياتي بالخير وارزقني حسن الخاتمة.", "يا القوي، املأ قلبي إيمانًا ومستقبلي رحمةً وبركة.", "يا المتين، اهدني إلى فلاح الدنيا والآخرة.", "يا الولي، ارزقني الطمأنينة والخير والسعادة الأبدية.", "يا الحميد، ارزقني السعادة والبركة في الدنيا والآخرة.", "يا المحصي، جمّل حياتي بالخير وارزقني حسن الخاتمة.", "يا المبدئ، املأ قلبي إيمانًا ومستقبلي رحمةً وبركة.", "يا المعيد، اهدني إلى فلاح الدنيا والآخرة.", "يا المحيي، ارزقني الطمأنينة والخير والسعادة الأبدية.", "يا المميت، ارزقني السعادة والبركة في الدنيا والآخرة.", "يا الحي، جمّل حياتي بالخير وارزقني حسن الخاتمة.", "يا القيوم، املأ قلبي إيمانًا ومستقبلي رحمةً وبركة.", "يا الواجد، اهدني إلى فلاح الدنيا والآخرة.", "يا الماجد، ارزقني الطمأنينة والخير والسعادة الأبدية.", "يا الواحد، ارزقني السعادة والبركة في الدنيا والآخرة.", "يا الأحد، جمّل حياتي بالخير وارزقني حسن الخاتمة.", "يا الصمد، املأ قلبي إيمانًا ومستقبلي رحمةً وبركة.", "يا القادر، اهدني إلى فلاح الدنيا والآخرة.", "يا المقتدر، ارزقني الطمأنينة والخير والسعادة الأبدية.", "يا المقدم، ارزقني السعادة والبركة في الدنيا والآخرة.", "يا المؤخر، جمّل حياتي بالخير وارزقني حسن الخاتمة.", "يا الأول، املأ قلبي إيمانًا ومستقبلي رحمةً وبركة.", "يا الآخر، اهدني إلى فلاح الدنيا والآخرة.", "يا الظاهر، ارزقني الطمأنينة والخير والسعادة الأبدية.", "يا الباطن، ارزقني السعادة والبركة في الدنيا والآخرة.", "يا الوالي، جمّل حياتي بالخير وارزقني حسن الخاتمة.", "يا المتعالي، املأ قلبي إيمانًا ومستقبلي رحمةً وبركة.", "يا البر، اهدني إلى فلاح الدنيا والآخرة.", "يا التواب، ارزقني الطمأنينة والخير والسعادة الأبدية.", "يا المنتقم، ارزقني السعادة والبركة في الدنيا والآخرة.", "يا العفو، جمّل حياتي بالخير وارزقني حسن الخاتمة.", "يا الرؤوف، املأ قلبي إيمانًا ومستقبلي رحمةً وبركة.", "يا مالك الملك، اهدني إلى فلاح الدنيا والآخرة.", "يا ذو الجلال والإكرام، ارزقني الطمأنينة والخير والسعادة الأبدية.", "يا المقسط، ارزقني السعادة والبركة في الدنيا والآخرة.", "يا الجامع، جمّل حياتي بالخير وارزقني حسن الخاتمة.", "يا الغني، املأ قلبي إيمانًا ومستقبلي رحمةً وبركة.", "يا المغني، اهدني إلى فلاح الدنيا والآخرة.", "يا المانع، ارزقني الطمأنينة والخير والسعادة الأبدية.", "يا الضار، ارزقني السعادة والبركة في الدنيا والآخرة.", "يا النافع، جمّل حياتي بالخير وارزقني حسن الخاتمة.", "يا النور، املأ قلبي إيمانًا ومستقبلي رحمةً وبركة.", "يا الهادي، اهدني إلى فلاح الدنيا والآخرة.", "يا البديع، ارزقني الطمأنينة والخير والسعادة الأبدية.", "يا الباقي، ارزقني السعادة والبركة في الدنيا والآخرة.", "يا الوارث، جمّل حياتي بالخير وارزقني حسن الخاتمة.", "يا الرشيد، املأ قلبي إيمانًا ومستقبلي رحمةً وبركة.", "يا الصبور، اهدني إلى فلاح الدنيا والآخرة."];
+let activePremiumSet = "";
+function isNamesProActive(){
+  try{ return localStorage.getItem("barakaway_pro") === "true"; }catch(e){ return false; }
+}
 let currentIndex = 0;
 let autoTimer = null;
 
@@ -930,7 +1118,19 @@ function renderCurrent(){
   nameArabic.textContent = item.ar;
   nameTranslit.textContent = item.tr;
   nameMeaning.textContent = item[meanKey];
-  nameDesc.textContent = item[descKey];
+  if(isNamesProActive() && activePremiumSet === "rizq" && premiumRizqDescriptions[currentIndex]){
+    nameDesc.textContent = premiumRizqDescriptions[currentIndex];
+  } else if(isNamesProActive() && activePremiumSet === "health" && premiumHealthDescriptions[currentIndex]){
+    nameDesc.textContent = premiumHealthDescriptions[currentIndex];
+  } else if(isNamesProActive() && activePremiumSet === "forgive" && premiumForgiveDescriptions[currentIndex]){
+    nameDesc.textContent = premiumForgiveDescriptions[currentIndex];
+  } else if(isNamesProActive() && activePremiumSet === "debts" && premiumDebtDescriptions[currentIndex]){
+    nameDesc.textContent = premiumDebtDescriptions[currentIndex];
+  } else if(isNamesProActive() && activePremiumSet === "both" && premiumBothDescriptions[currentIndex]){
+    nameDesc.textContent = premiumBothDescriptions[currentIndex];
+  } else {
+    nameDesc.textContent = item[descKey];
+  }
   nameCounter.textContent = `الاسم ${item.num} / 99`;
 }
 
@@ -974,7 +1174,7 @@ function stopAuto(){
     clearInterval(autoTimer);
     autoTimer = null;
   }
-  playStatus.textContent = "يمكنك القراءة يدويًا بأزرار السابق/التالي أو تشغيل التمرير التلقائي من 1 إلى 10 ثوانٍ.";
+  playStatus.textContent = "يمكنك القراءة يدويًا باستخدام السابق/التالي أو تشغيل التمرير التلقائي من 1 إلى 10 ثوانٍ.";
 }
 
 document.getElementById("playBtn").addEventListener("click", startAuto);
@@ -995,12 +1195,94 @@ speedRange.addEventListener("input", () => {
 
 searchInput.addEventListener("input", () => renderGrid(searchInput.value));
 
+
+function initPremiumDescriptionCards(){
+  const cards = document.querySelectorAll(".premium-card");
+  cards.forEach((card) => {
+    card.addEventListener("click", () => {
+      if(!isNamesProActive()) return;
+      cards.forEach((item) => item.classList.remove("active"));
+      card.classList.add("active");
+      activePremiumSet = card.dataset.premiumSet || "";
+
+      if(activePremiumSet === "default"){
+        activePremiumSet = "";
+      }
+
+      renderCurrent();
+    });
+  });
+
+  const activeCard = document.querySelector(".premium-card.active");
+  if(activeCard && isNamesProActive()){
+    activePremiumSet = activeCard.dataset.premiumSet || "";
+
+    if(activePremiumSet === "default"){
+      activePremiumSet = "";
+    }
+
+    renderCurrent();
+  }
+}
+
+initPremiumDescriptionCards();
+
 renderCurrent();
 renderGrid();
 </script>
 <script src="/bottom-nav.js"></script>
+
+<script>
+(function(){
+  "use strict";
+  const PRO_KEY = "barakaway_pro";
+
+  function isProActive(){
+    try{
+      return localStorage.getItem(PRO_KEY) === "true";
+    }catch(e){
+      return false;
+    }
+  }
+
+  function syncNamesProState(){
+    const active = isProActive();
+    document.querySelectorAll(".premium-categories-wrap").forEach(function(wrap){
+      wrap.setAttribute("data-pro-state", active ? "unlocked" : "locked");
+    });
+
+    document.querySelectorAll("[data-names-pro-status]").forEach(function(node){
+      node.textContent = active ? "✅ PRO مفعّل" : "PRO غير مفعّل";
+    });
+
+    document.querySelectorAll(".premium-card").forEach(function(card){
+      card.setAttribute("aria-disabled", active ? "false" : "true");
+      card.tabIndex = active ? 0 : -1;
+    });
+
+    try{
+      if(typeof renderCurrent === "function"){
+        renderCurrent();
+      }
+    }catch(e){}
+  }
+
+  if(document.readyState === "loading"){
+    document.addEventListener("DOMContentLoaded", syncNamesProState);
+  }else{
+    syncNamesProState();
+  }
+
+  window.addEventListener("storage", syncNamesProState);
+})();
+</script>
+
+
+
+
 </body>
 </html>
+
 
 
 
