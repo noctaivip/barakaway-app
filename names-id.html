@@ -26,9 +26,19 @@ async src="//gc.zgo.at/count.js"></script>
 })();
 </script>
 
-
 <title>99 Nama Allah — BarakaWay</title>
 
+<script>
+(function(){
+  const savedTheme = localStorage.getItem('siteTheme');
+  if(savedTheme === 'light'){
+    document.documentElement.classList.add('light-mode');
+  } else {
+    document.documentElement.classList.add('dark-mode');
+    localStorage.setItem('siteTheme','dark');
+  }
+})();
+</script>
 <style>
 :root{
   --bg:#f5f7f8;--text:#222;--card:#ffffff;--card-soft:#fafafa;--border:#dfe8e2;--border-soft:#edf1ee;--green:#2d7a46;--gold:#b4872e;--muted:#66726b;--shadow:0 18px 48px rgba(0,0,0,.08);
@@ -637,7 +647,229 @@ html.light-mode .quote strong{
 }
 
 
-/* === Indonesian page adaptation: keep ID content, apply final RU stable layout === */
+/* Premium categories */
+.premium-categories-wrap{
+margin-top:18px;
+padding:16px;
+border-radius:24px;
+border:1px solid rgba(215,181,109,.32);
+background:
+radial-gradient(circle at 50% 0%,rgba(215,181,109,.22),transparent 42%),
+linear-gradient(135deg,rgba(84,58,18,.92),rgba(18,28,25,.96));
+box-shadow:
+0 18px 42px rgba(0,0,0,.30),
+inset 0 1px 0 rgba(255,255,255,.06);
+}
+
+.premium-categories-head{
+display:flex;
+align-items:center;
+justify-content:space-between;
+gap:12px;
+margin-bottom:12px;
+}
+
+.premium-categories-title{
+display:inline-flex;
+align-items:center;
+gap:8px;
+min-height:34px;
+padding:8px 14px;
+border-radius:999px;
+background:#101418;
+border:1px solid rgba(215,181,109,.26);
+color:#f8e7aa;
+font-size:12px;
+font-weight:950;
+letter-spacing:.04em;
+text-transform:uppercase;
+}
+
+.premium-categories-status{
+display:inline-flex;
+align-items:center;
+gap:7px;
+min-height:32px;
+padding:8px 13px;
+border-radius:999px;
+background:linear-gradient(180deg,#42b968,#2d7a46);
+color:#fff;
+font-size:12px;
+font-weight:950;
+letter-spacing:.04em;
+text-transform:uppercase;
+box-shadow:0 10px 22px rgba(45,122,70,.28);
+}
+
+.premium-categories{
+display:grid;
+grid-template-columns:repeat(6,1fr);
+gap:10px;
+}
+
+.premium-card{
+position:relative;
+min-height:86px;
+border-radius:18px;
+border:1px solid rgba(215,181,109,.30);
+background:
+radial-gradient(circle at 50% 0%,rgba(102,198,128,.16),transparent 48%),
+linear-gradient(180deg,rgba(16,24,22,.98),rgba(10,17,20,.98));
+display:flex;
+align-items:center;
+justify-content:center;
+text-align:center;
+padding:26px 10px 12px;
+font-size:13px;
+line-height:1.22;
+font-weight:950;
+color:#ffffff;
+cursor:pointer;
+transition:transform .18s ease,border-color .25s ease,box-shadow .25s ease,background .25s ease;
+overflow:hidden;
+}
+
+.premium-card::before{
+content:"PRO";
+position:absolute;
+top:7px;
+right:9px;
+font-size:9px;
+line-height:1;
+font-weight:950;
+letter-spacing:.06em;
+padding:4px 6px;
+border-radius:999px;
+color:#f8e7aa;
+border:1px solid rgba(215,181,109,.34);
+background:rgba(215,181,109,.13);
+}
+
+.premium-card:hover{
+transform:translateY(-2px);
+border-color:rgba(215,181,109,.58);
+box-shadow:0 14px 28px rgba(0,0,0,.28),0 0 20px rgba(215,181,109,.10);
+}
+
+.premium-card.active{
+background:
+radial-gradient(circle at 50% 0%,rgba(215,181,109,.32),transparent 45%),
+linear-gradient(135deg,rgba(45,122,70,.56),rgba(84,58,18,.42));
+border-color:#d7b56d;
+box-shadow:
+0 0 0 1px rgba(215,181,109,.34),
+0 16px 32px rgba(0,0,0,.28),
+0 0 24px rgba(215,181,109,.16);
+}
+
+html.light-mode .premium-categories-wrap{
+background:
+radial-gradient(circle at 50% 0%,rgba(180,135,46,.20),transparent 42%),
+linear-gradient(135deg,#fff5d9,#eef8f1);
+border-color:rgba(180,135,46,.28);
+}
+
+html.light-mode .premium-categories-title{
+background:#172019;
+color:#f8e7aa;
+}
+
+html.light-mode .premium-card{
+color:#173522;
+background:
+radial-gradient(circle at 50% 0%,rgba(45,122,70,.10),transparent 48%),
+linear-gradient(180deg,#ffffff,#f4faf6);
+border-color:rgba(180,135,46,.24);
+}
+
+html.light-mode .premium-card.active{
+background:
+radial-gradient(circle at 50% 0%,rgba(180,135,46,.22),transparent 45%),
+linear-gradient(135deg,#eaf8ee,#fff3cf);
+border-color:#b4872e;
+}
+
+@media(max-width:700px){
+.premium-categories-wrap{
+padding:13px;
+border-radius:22px;
+}
+
+.premium-categories-head{
+display:flex;
+flex-direction:row;
+align-items:center;
+justify-content:space-between;
+gap:10px;
+}
+
+.premium-categories{
+grid-template-columns:1fr 1fr;
+gap:10px;
+}
+
+.premium-card{
+min-height:78px;
+font-size:12px;
+padding:26px 9px 10px;
+}
+}
+
+
+/* Premium access state synced with Home */
+.premium-categories-wrap[data-pro-state="locked"]{
+filter:saturate(.72);
+}
+
+.premium-categories-wrap[data-pro-state="locked"] .premium-categories-status{
+background:linear-gradient(180deg,#313b43,#202830);
+color:#f8e7aa;
+box-shadow:none;
+border:1px solid rgba(215,181,109,.24);
+}
+
+.premium-categories-wrap[data-pro-state="locked"] .premium-card{
+opacity:.62;
+cursor:not-allowed;
+}
+
+.premium-categories-wrap[data-pro-state="locked"] .premium-card.active{
+background:
+radial-gradient(circle at 50% 0%,rgba(215,181,109,.10),transparent 45%),
+linear-gradient(180deg,rgba(16,24,22,.96),rgba(10,17,20,.96));
+border-color:rgba(215,181,109,.28);
+box-shadow:none;
+}
+
+html.light-mode .premium-categories-wrap[data-pro-state="locked"] .premium-card.active{
+background:linear-gradient(180deg,#ffffff,#f4faf6);
+border-color:rgba(180,135,46,.22);
+}
+
+
+.free-card::before{
+display:none;
+}
+
+.free-card{
+background:
+radial-gradient(circle at 50% 0%,rgba(95,146,255,.14),transparent 46%),
+linear-gradient(180deg,rgba(22,32,48,.98),rgba(12,18,28,.98));
+border-color:rgba(120,170,255,.26);
+}
+
+.free-card.active{
+background:
+radial-gradient(circle at 50% 0%,rgba(95,146,255,.22),transparent 44%),
+linear-gradient(135deg,rgba(32,56,92,.95),rgba(14,24,38,.98));
+border-color:rgba(120,170,255,.55);
+box-shadow:
+0 0 0 1px rgba(120,170,255,.22),
+0 16px 32px rgba(0,0,0,.28);
+}
+
+
+/* === Indonesian page adaptation based on RU master === */
 html[lang="id"] body{
   direction:ltr;
   text-align:left;
@@ -663,11 +895,13 @@ html[lang="id"] .translit{
   direction:ltr;
 }
 
-html[lang="id"] .dropdown-block summary{
-  text-align:left;
-}
-
-html[lang="id"] .search-box input{
+html[lang="id"] .dropdown-block summary,
+html[lang="id"] .search-box input,
+html[lang="id"] .name-chip .chip-tr,
+html[lang="id"] .name-chip .chip-mean,
+html[lang="id"] .name-chip .chip-num,
+html[lang="id"] .quote p,
+html[lang="id"] .dropdown-block:nth-of-type(2) .dropdown-content p{
   direction:ltr;
   text-align:left;
 }
@@ -677,47 +911,10 @@ html[lang="id"] .name-chip .chip-ar{
   text-align:right;
 }
 
-html[lang="id"] .name-chip .chip-tr,
-html[lang="id"] .name-chip .chip-mean,
-html[lang="id"] .name-chip .chip-num{
-  direction:ltr;
-  text-align:left;
-}
-
-html[lang="id"] .quote p,
-html[lang="id"] .dropdown-block:nth-of-type(2) .dropdown-content p{
-  text-align:left;
-}
-
 html[lang="id"] .quote strong{
   margin-right:6px;
 }
 
-@media(max-width:700px){
-  html[lang="id"] h1{
-    font-size:22px !important;
-  }
-
-  html[lang="id"] .meaning{
-    font-size:14px !important;
-  }
-
-  html[lang="id"] .desc{
-    font-size:13px !important;
-  }
-
-  html[lang="id"] .dropdown-block:nth-of-type(2) summary{
-    font-size:15px !important;
-  }
-
-  html[lang="id"] .dropdown-block:nth-of-type(2) .dropdown-content p{
-    font-size:13.5px !important;
-  }
-
-  html[lang="id"] .quote p{
-    font-size:13px !important;
-  }
-}
 </style>
 <script src="/theme-init.js"></script>
 <link rel="stylesheet" href="/theme.css">
@@ -732,7 +929,7 @@ html[lang="id"] .quote strong{
 
 <div class="player-card">
 <div class="player-top">
-<div class="badge" id="nameCounter">Nama 1 / 99</div>
+<div class="badge" id="nameCounter">Имя 1 / 99</div>
 </div>
 
 <div class="arabic" id="nameArabic"></div>
@@ -750,7 +947,7 @@ html[lang="id"] .quote strong{
 </div>
 
 <div class="control-group">
-<div class="control-label">Putar otomatis</div>
+<div class="control-label">Gulir otomatis</div>
 <div style="display:flex;gap:10px;flex-wrap:wrap;">
 <button class="play-btn" id="playBtn">▶ Mulai</button>
 <button class="secondary" id="pauseBtn">❚❚ Jeda</button>
@@ -759,36 +956,34 @@ html[lang="id"] .quote strong{
 </div>
 
 <div class="nav-buttons">
-<button class="light" id="prevBtn">← Sebelumnya</button>
+<button class="light" id="prevBtn">← Kembali</button>
 <button class="light" id="resetBtn">↺</button>
 <button class="light" id="nextBtn">Berikutnya →</button>
 </div>
 
-<div class="manual-note" id="playStatus">Putar otomatis dimatikan.</div>
+<div class="manual-note" id="playStatus">Gulir otomatis выключена.</div>
 </div>
 </div>
 
 <details class="dropdown-block">
-<summary><span class="dropdown-title">Semua 99 nama</span><span class="dropdown-arrow">▾</span></summary>
+<summary><span class="dropdown-title">Semua 99 Nama</span><span class="dropdown-arrow">▾</span></summary>
 <div class="dropdown-content">
 <div class="search-box">
-<input id="searchInput" type="text" placeholder="Cari nama atau makna...">
+<input id="searchInput" type="text" placeholder="Cari berdasarkan nama atau makna...">
 </div>
 <div class="names-grid" id="namesGrid"></div>
 </div>
 </details>
 
 <details class="dropdown-block">
-<summary><span class="dropdown-title">Cara berdoa melalui Nama Allah</span><span class="dropdown-arrow">▾</span></summary>
+<summary><span class="dropdown-title">Cara berdoa melalui Nama-Nama Allah</span><span class="dropdown-arrow">▾</span></summary>
 <div class="dropdown-content">
-
-
 <p>
-Setiap Nama Allah menunjukkan sifat-Nya. Melalui sifat itu, seseorang dapat berdoa kepada-Nya.
+Setiap Nama Allah menunjukkan salah satu sifat-Nya yang sempurna. Seseorang dapat berdoa kepada Allah melalui makna dari Nama tersebut.
 </p>
 
 <p>
-Yang penting bukan sekadar menyebut nama, tetapi memahami maknanya dan memohon sesuai dengan makna itu.
+Yang penting bukan sekadar mengucapkan Nama, tetapi memahami maknanya dan memohon sesuai dengan makna itu.
 </p>
 
 <p>
@@ -799,27 +994,49 @@ Contoh:
 <p>
 <strong>Ya Rahman</strong> — limpahkan rahmat-Mu kepadaku dan perbaikilah urusanku  
 <br><br>
-<strong>Ya Raheem</strong> — ringankan kesulitanku dan jangan tinggalkan aku  
+<strong>Ya Rahim</strong> — mudahkan kesulitanku dan jangan tinggalkan aku sendirian  
 <br><br>
-<strong>Ya Salam</strong> — karuniakan kepadaku ketenangan, perlindungan, dan kedamaian batin  
+<strong>Ya Salam</strong> — berikan aku ketenangan, perlindungan, dan kedamaian batin  
 <br><br>
-<strong>Ya Ghaffar</strong> — ampunilah dosa-dosaku dan sucikan hatiku  
+<strong>Ya Ghaffar</strong> — ampunilah dosaku dan sucikan hatiku  
 <br><br>
-<strong>Ya Razzaq</strong> — berilah aku rezeki halal dan hilangkan kebutuhanku  
+<strong>Ya Razzaq</strong> — berikan aku rezeki halal yang penuh berkah dan hilangkan kebutuhanku  
 </p>
 </div>
 
 <p>
-Anda dapat melalui nama-nama itu satu per satu dan menjadikan masing-masing sebagai doa pribadi.
+Anda dapat membaca Nama-Nama Allah satu per satu dan menjadikan setiap Nama sebagai doa pribadi.
 </p>
 
 <p>
-Dengan demikian, membaca bukan hanya menjadi pengetahuan, tetapi juga menjadi munajat yang hidup kepada Allah. Di bawah setiap nama, kini ditampilkan doa singkat yang sesuai.
+Dengan begitu, bacaan ini bukan hanya pengetahuan, tetapi menjadi munajat hidup kepada Allah. Di bawah setiap Nama ditampilkan doa singkat yang sesuai.
 </p>
-
-
 </div>
 </details>
+
+
+<div class="premium-categories-wrap" id="barakaway-pro-names" data-pro-state="locked">
+<div class="premium-categories-head">
+<div class="premium-categories-title">👑 BarakaWay Pro</div>
+<div class="premium-categories-status" data-names-pro-status>PRO tidak aktif</div>
+</div>
+<div class="premium-categories">
+<div class="premium-card free-card active" data-premium-set="default">
+Doa<br>harian
+</div>
+
+<div class="premium-card" data-premium-set="rizq">Kekayaan dan barakah</div>
+
+<div class="premium-card" data-premium-set="health">Doa untuk orang sakit</div>
+
+<div class="premium-card" data-premium-set="forgive">Tobat dan ampunan dosa</div>
+
+<div class="premium-card" data-premium-set="debts">Bebas dari utang</div>
+
+<div class="premium-card" data-premium-set="both">Bahagia di dua dunia</div>
+</div>
+</div>
+
 
 </div>
 
@@ -827,6 +1044,15 @@ Dengan demikian, membaca bukan hanya menjadi pengetahuan, tetapi juga menjadi mu
 const names = [{"num": 1, "ar": "ٱلرَّحْمَٰنُ", "tr": "Ar-Rahman", "id_mean": "Yang Maha Pengasih kepada semua", "id_desc": "Ya Rahman, limpahkan rahmat-Mu kepadaku dan perbaikilah urusanku."}, {"num": 2, "ar": "ٱلرَّحِيمُ", "tr": "Ar-Raheem", "id_mean": "Yang Maha Penyayang secara khusus", "id_desc": "Ya Raheem, ringankan kesulitanku dan jangan biarkan aku sendirian dengan diriku."}, {"num": 3, "ar": "ٱلْمَلِكُ", "tr": "Al-Malik", "id_mean": "Sang Penguasa", "id_desc": "Ya Malik, aturlah hidupku dengan petunjuk-Mu dan jadikan hatiku taat kepada-Mu."}, {"num": 4, "ar": "ٱلْقُدُّوسُ", "tr": "Al-Quddus", "id_mean": "Yang Maha Suci", "id_desc": "Ya Quddus, sucikan hatiku, niatku, dan amal-amalku."}, {"num": 5, "ar": "ٱلسَّلَامُ", "tr": "As-Salam", "id_mean": "Pemberi kedamaian dan keamanan", "id_desc": "Ya Salam, karuniakan kepadaku ketenangan, perlindungan, dan kedamaian batin."}, {"num": 6, "ar": "ٱلْمُؤْمِنُ", "tr": "Al-Mu’min", "id_mean": "Pemberi iman dan rasa aman", "id_desc": "Ya Mu’min, berikan keamanan, iman, dan ketenteraman pada hatiku."}, {"num": 7, "ar": "ٱلْمُهَيْمِنُ", "tr": "Al-Muhaymin", "id_mean": "Pelindung Yang Maha Mengawasi", "id_desc": "Ya Muhaymin, lindungilah aku, keluargaku, dan semua yang Engkau titipkan kepadaku."}, {"num": 8, "ar": "ٱلْعَزِيزُ", "tr": "Al-Aziz", "id_mean": "Yang Mahaperkasa", "id_desc": "Ya Aziz, kuatkan aku dengan kemuliaan dan teguhkan aku di atas kebenaran."}, {"num": 9, "ar": "ٱلْجَبَّارُ", "tr": "Al-Jabbar", "id_mean": "Yang Menundukkan dan Memperbaiki", "id_desc": "Ya Jabbar, perbaikilah segala yang patah dalam hatiku dan hidupku."}, {"num": 10, "ar": "ٱلْمُتَكَبِّرُ", "tr": "Al-Mutakabbir", "id_mean": "Yang Mahatinggi", "id_desc": "Ya Mutakabbir, lindungi aku dari kesombongan dan penuhi aku dengan kerendahan hati di hadapan-Mu."}, {"num": 11, "ar": "ٱلْخَالِقُ", "tr": "Al-Khaliq", "id_mean": "Sang Pencipta", "id_desc": "Ya Khaliq, ciptakan dalam diriku akhlak yang lebih baik dan masa depan yang lebih baik."}, {"num": 12, "ar": "ٱلْبَارِئُ", "tr": "Al-Bari’", "id_mean": "Yang Mengadakan dari tiada", "id_desc": "Ya Bari’, tata hidupku dengan benar dan keluarkan kebaikan dari kekacauan."}, {"num": 13, "ar": "ٱلْمُصَوِّرُ", "tr": "Al-Musawwir", "id_mean": "Yang Membentuk", "id_desc": "Ya Musawwir, indahkan akhlakku dan bentuklah hidupku dengan cara terbaik."}, {"num": 14, "ar": "ٱلْغَفَّارُ", "tr": "Al-Ghaffar", "id_mean": "Yang Maha Mengampuni berulang kali", "id_desc": "Ya Ghaffar, ampunilah aku lagi dan lagi serta tutupilah dosa-dosaku."}, {"num": 15, "ar": "ٱلْقَهَّارُ", "tr": "Al-Qahhar", "id_mean": "Yang Maha Menundukkan", "id_desc": "Ya Qahhar, tundukkan egoku, hawa nafsuku, dan segala yang menjauhkanku dari-Mu."}, {"num": 16, "ar": "ٱلْوَهَّابُ", "tr": "Al-Wahhab", "id_mean": "Yang Maha Pemberi", "id_desc": "Ya Wahhab, karuniakan kepadaku nikmat yang mendekatkanku kepada-Mu."}, {"num": 17, "ar": "ٱلرَّزَّاقُ", "tr": "Ar-Razzaq", "id_mean": "Pemberi rezeki", "id_desc": "Ya Razzaq, berilah aku rezeki halal dan hilangkan kebutuhanku."}, {"num": 18, "ar": "ٱلْفَتَّاحُ", "tr": "Al-Fattah", "id_mean": "Pembuka", "id_desc": "Ya Fattah, bukakan bagiku pintu rahmat, kelapangan, dan keberhasilan."}, {"num": 19, "ar": "ٱلْعَلِيمُ", "tr": "Al-‘Alim", "id_mean": "Yang Maha Mengetahui", "id_desc": "Ya ‘Alim, karuniakan kepadaku ilmu yang bermanfaat dan lindungi aku dari kebodohan."}, {"num": 20, "ar": "ٱلْقَابِضُ", "tr": "Al-Qabid", "id_mean": "Yang Menahan", "id_desc": "Ya Qabid, tahanlah dariku apa yang dapat merusak imanku dan hatiku."}, {"num": 21, "ar": "ٱلْبَاسِطُ", "tr": "Al-Basit", "id_mean": "Yang Melapangkan", "id_desc": "Ya Basit, lapangkan dadaku, rezekiku, dan harapanku."}, {"num": 22, "ar": "ٱلْخَافِضُ", "tr": "Al-Khafid", "id_mean": "Yang Merendahkan", "id_desc": "Ya Khafid, rendahkan kesombonganku dan selamatkan aku dari keangkuhan."}, {"num": 23, "ar": "ٱلرَّافِعُ", "tr": "Ar-Rafi’", "id_mean": "Yang Meninggikan", "id_desc": "Ya Rafi’, angkatlah aku dalam iman, akhlak, dan kehormatan."}, {"num": 24, "ar": "ٱلْمُعِزُّ", "tr": "Al-Mu’izz", "id_mean": "Pemberi kemuliaan", "id_desc": "Ya Mu’izz, muliakan aku melalui ketaatan kepada-Mu dan kebenaran."}, {"num": 25, "ar": "ٱلْمُذِلُّ", "tr": "Al-Mudhill", "id_mean": "Yang Menghinakan", "id_desc": "Ya Mudhill, jauhkan aku dari kehinaan karena dosa dan kezaliman."}, {"num": 26, "ar": "ٱلسَّمِيعُ", "tr": "As-Sami’", "id_mean": "Yang Maha Mendengar", "id_desc": "Ya Sami’, dengarlah doaku, kelemahanku, dan rasa sakitku yang tersembunyi."}, {"num": 27, "ar": "ٱلْبَصِيرُ", "tr": "Al-Basir", "id_mean": "Yang Maha Melihat", "id_desc": "Ya Basir, lihatlah keadaanku dan bimbing aku kepada yang benar."}, {"num": 28, "ar": "ٱلْحَكَمُ", "tr": "Al-Hakam", "id_mean": "Sang Hakim", "id_desc": "Ya Hakam, putuskan urusanku dengan kebenaran dan keluarkan aku dari kebingungan."}, {"num": 29, "ar": "ٱلْعَدْلُ", "tr": "Al-‘Adl", "id_mean": "Yang Maha Adil", "id_desc": "Ya ‘Adl, tegakkan keadilan dalam hidupku dan lindungi aku dari kezaliman."}, {"num": 30, "ar": "ٱللَّطِيفُ", "tr": "Al-Latif", "id_mean": "Yang Maha Lembut", "id_desc": "Ya Latif, bersikaplah lembut kepadaku dalam apa yang kulihat dan yang tidak kulihat."}, {"num": 31, "ar": "ٱلْخَبِيرُ", "tr": "Al-Khabir", "id_mean": "Yang Maha Mengetahui segala yang tersembunyi", "id_desc": "Ya Khabir, bimbinglah aku dalam hal-hal yang tersembunyi dari pemahamanku."}, {"num": 32, "ar": "ٱلْحَلِيمُ", "tr": "Al-Halim", "id_mean": "Yang Maha Penyantun", "id_desc": "Ya Halim, perlakukan aku dengan kelembutan dan jangan hukum aku karena ketergesaanku."}, {"num": 33, "ar": "ٱلْعَظِيمُ", "tr": "Al-‘Azim", "id_mean": "Yang Maha Agung", "id_desc": "Ya ‘Azim, penuhi hatiku dengan pengagungan terhadap kebesaran-Mu."}, {"num": 34, "ar": "ٱلْغَفُورُ", "tr": "Al-Ghafur", "id_mean": "Yang Maha Pengampun", "id_desc": "Ya Ghafur, ampunilah dosa-dosaku yang besar dan terimalah tobatku."}, {"num": 35, "ar": "ٱلشَّكُورُ", "tr": "Ash-Shakur", "id_mean": "Yang Mensyukuri dan melipatgandakan kebaikan", "id_desc": "Ya Shakur, terimalah amal-amalku yang kecil dan lipatgandakan pahalanya."}, {"num": 36, "ar": "ٱلْعَلِيُّ", "tr": "Al-‘Aliyy", "id_mean": "Yang Maha Tinggi", "id_desc": "Ya ‘Aliyy, angkat jiwaku di atas segala yang merendahkanku."}, {"num": 37, "ar": "ٱلْكَبِيرُ", "tr": "Al-Kabir", "id_mean": "Yang Maha Besar", "id_desc": "Ya Kabir, jadikan dunia kecil di mataku dan keridaan-Mu besar bagiku."}, {"num": 38, "ar": "ٱلْحَفِيظُ", "tr": "Al-Hafiz", "id_mean": "Yang Memelihara", "id_desc": "Ya Hafiz, peliharalah imanku, keluargaku, dan akhir hidupku."}, {"num": 39, "ar": "ٱلْمُقِيتُ", "tr": "Al-Muqit", "id_mean": "Yang Menopang dan memberi kecukupan", "id_desc": "Ya Muqit, topanglah aku dengan kekuatan, kesabaran, dan rezeki yang cukup."}, {"num": 40, "ar": "ٱلْحَسِيبُ", "tr": "Al-Hasib", "id_mean": "Yang Maha Mencukupi", "id_desc": "Ya Hasib, cukuplah Engkau bagiku dalam setiap kegelisahan dan urusan."}, {"num": 41, "ar": "ٱلْجَلِيلُ", "tr": "Al-Jalil", "id_mean": "Yang Maha Mulia", "id_desc": "Ya Jalil, penuhi hatiku dengan pengagungan terhadap keagungan-Mu."}, {"num": 42, "ar": "ٱلْكَرِيمُ", "tr": "Al-Karim", "id_mean": "Yang Maha Dermawan", "id_desc": "Ya Karim, limpahkan kepadaku ampunan, kemudahan, dan keberkahan."}, {"num": 43, "ar": "ٱلرَّقِيبُ", "tr": "Ar-Raqib", "id_mean": "Yang Maha Mengawasi", "id_desc": "Ya Raqib, awasilah aku dan jauhkan aku dari dosa-dosa tersembunyi."}, {"num": 44, "ar": "ٱلْمُجِيبُ", "tr": "Al-Mujib", "id_mean": "Yang Mengabulkan", "id_desc": "Ya Mujib, kabulkan doaku dan jangan kembalikan aku dengan kecewa."}, {"num": 45, "ar": "ٱلْوَاسِعُ", "tr": "Al-Wasi’", "id_mean": "Yang Maha Luas", "id_desc": "Ya Wasi’, luaskan bagiku rahmat, pemahaman, dan kelapangan."}, {"num": 46, "ar": "ٱلْحَكِيمُ", "tr": "Al-Hakim", "id_mean": "Yang Maha Bijaksana", "id_desc": "Ya Hakim, berikan kepadaku hikmah dan keputusan yang benar."}, {"num": 47, "ar": "ٱلْوَدُودُ", "tr": "Al-Wadud", "id_mean": "Yang Maha Mencintai", "id_desc": "Ya Wadud, penuhi hatiku dengan cinta, rahmat, dan kebaikan."}, {"num": 48, "ar": "ٱلْمَجِيدُ", "tr": "Al-Majid", "id_mean": "Yang Mahamulia", "id_desc": "Ya Majid, muliakan aku dengan akhlak yang mulia dan amal saleh."}, {"num": 49, "ar": "ٱلْبَاعِثُ", "tr": "Al-Ba’ith", "id_mean": "Yang Membangkitkan", "id_desc": "Ya Ba’ith, hidupkan hatiku dengan iman dan ibadah yang tulus."}, {"num": 50, "ar": "ٱلشَّهِيدُ", "tr": "Ash-Shahid", "id_mean": "Yang Menyaksikan", "id_desc": "Ya Shahid, jadilah saksiku dalam kebenaran dan lindungi aku dari kemunafikan."}, {"num": 51, "ar": "ٱلْحَقُّ", "tr": "Al-Haqq", "id_mean": "Yang Maha Benar", "id_desc": "Ya Haqq, teguhkan aku di atas kebenaran dalam keyakinan, ucapan, dan perbuatan."}, {"num": 52, "ar": "ٱلْوَكِيلُ", "tr": "Al-Wakil", "id_mean": "Yang Maha Dipercaya dan Tempat Bersandar", "id_desc": "Ya Wakil, uruslah semua urusanku dengan sebaik-baiknya, karena aku bertawakal kepada-Mu."}, {"num": 53, "ar": "ٱلْقَوِيُّ", "tr": "Al-Qawiyy", "id_mean": "Yang Maha Kuat", "id_desc": "Ya Qawiyy, kuatkan aku melawan kelemahan, ketakutan, dan dosa."}, {"num": 54, "ar": "ٱلْمَتِينُ", "tr": "Al-Matin", "id_mean": "Yang Maha Kokoh", "id_desc": "Ya Matin, jadikan aku teguh dalam sabar, ibadah, dan ketaatan."}, {"num": 55, "ar": "ٱلْوَلِيُّ", "tr": "Al-Waliyy", "id_mean": "Pelindung dan Penolong", "id_desc": "Ya Waliyy, jadilah pelindungku, penolongku, dan pembantuku yang paling dekat."}, {"num": 56, "ar": "ٱلْحَمِيدُ", "tr": "Al-Hamid", "id_mean": "Yang Maha Terpuji", "id_desc": "Ya Hamid, jadikan aku termasuk orang yang hidupnya layak dipuji di sisi-Mu."}, {"num": 57, "ar": "ٱلْمُحْصِي", "tr": "Al-Muhsi", "id_mean": "Yang Menghitung segala sesuatu", "id_desc": "Ya Muhsi, catatlah rahmat untukku dan hapuslah dariku apa yang mendatangkan celaan."}, {"num": 58, "ar": "ٱلْمُبْدِئُ", "tr": "Al-Mubdi’", "id_mean": "Yang Memulai segala sesuatu", "id_desc": "Ya Mubdi’, mulailah bagiku pembukaan baru yang penuh ketaatan dan kebaikan."}, {"num": 59, "ar": "ٱلْمُعِيدُ", "tr": "Al-Mu’id", "id_mean": "Yang Mengembalikan", "id_desc": "Ya Mu’id, kembalikan kepadaku yang baik dan ganti apa yang hilang dengan yang lebih baik."}, {"num": 60, "ar": "ٱلْمُحْيِي", "tr": "Al-Muhyi", "id_mean": "Pemberi kehidupan", "id_desc": "Ya Muhyi, hidupkan hatiku setelah kelalaian."}, {"num": 61, "ar": "ٱلْمُمِيتُ", "tr": "Al-Mumit", "id_mean": "Pencipta kematian", "id_desc": "Ya Mumit, karuniakan kepadaku akhir yang baik dan wafatkan aku hanya ketika Engkau rida kepadaku."}, {"num": 62, "ar": "ٱلْحَيُّ", "tr": "Al-Hayy", "id_mean": "Yang Mahahidup", "id_desc": "Ya Hayy, hidupkan hatiku dengan mengingat-Mu."}, {"num": 63, "ar": "ٱلْقَيُّومُ", "tr": "Al-Qayyum", "id_mean": "Yang Berdiri Sendiri dan Menegakkan segala sesuatu", "id_desc": "Ya Qayyum, topanglah aku, kuatkanlah aku, dan jangan biarkan aku runtuh."}, {"num": 64, "ar": "ٱلْوَاجِدُ", "tr": "Al-Wajid", "id_mean": "Yang Menemukan", "id_desc": "Ya Wajid, pertemukan aku dengan yang baik dan rasakanlah kedekatan-Mu dalam setiap kesulitan."}, {"num": 65, "ar": "ٱلْمَاجِدُ", "tr": "Al-Majid", "id_mean": "Yang Maha Mulia dan Maha Agung", "id_desc": "Ya Majid, muliakan hatiku dan jadikan jalanku terhormat di hadapan-Mu."}, {"num": 66, "ar": "ٱلْوَاحِدُ", "tr": "Al-Wahid", "id_mean": "Yang Esa", "id_desc": "Ya Wahid, satukan hatiku hanya untuk-Mu dan hilangkan segala keterikatan yang memecahkannya."}, {"num": 67, "ar": "ٱلْأَحَدُ", "tr": "Al-Ahad", "id_mean": "Yang Tunggal", "id_desc": "Ya Ahad, jadikan ibadahku tulus hanya untuk-Mu."}, {"num": 68, "ar": "ٱلصَّمَدُ", "tr": "As-Samad", "id_mean": "Tempat bergantung yang abadi", "id_desc": "Ya Samad, kepada-Mu aku membawa semua kebutuhanku, maka jangan biarkan aku bergantung pada makhluk."}, {"num": 69, "ar": "ٱلْقَادِرُ", "tr": "Al-Qadir", "id_mean": "Yang Mahakuasa", "id_desc": "Ya Qadir, Engkau Mahakuasa atas segala sesuatu, maka mudahkanlah bagiku apa yang baik."}, {"num": 70, "ar": "ٱلْمُقْتَدِرُ", "tr": "Al-Muqtadir", "id_mean": "Yang Memiliki kuasa mutlak", "id_desc": "Ya Muqtadir, tetapkan bagiku apa yang benar dan lindungi aku dari apa yang membahayakan."}, {"num": 71, "ar": "ٱلْمُقَدِّمُ", "tr": "Al-Muqaddim", "id_mean": "Yang Mendahulukan", "id_desc": "Ya Muqaddim, dahulukan aku dalam hal-hal yang Engkau cintai."}, {"num": 72, "ar": "ٱلْمُؤَخِّرُ", "tr": "Al-Mu’akhkhir", "id_mean": "Yang Mengakhirkan", "id_desc": "Ya Mu’akhkhir, jauhkan dariku apa yang bukan kebaikan dan jadikan aku sabar terhadap waktu-Mu."}, {"num": 73, "ar": "ٱلْأَوَّلُ", "tr": "Al-Awwal", "id_mean": "Yang Awal", "id_desc": "Ya Awwal, jadikan awal langkahku bersama petunjuk dan keberkahan-Mu."}, {"num": 74, "ar": "ٱلْآخِرُ", "tr": "Al-Akhir", "id_mean": "Yang Akhir", "id_desc": "Ya Akhir, karuniakan kepadaku akhir yang diberkahi dan hasil akhir yang terbaik."}, {"num": 75, "ar": "ٱلظَّاهِرُ", "tr": "Az-Zahir", "id_mean": "Yang Nyata", "id_desc": "Ya Zahir, tampakkan kepadaku tanda-tanda kebenaran dengan jelas."}, {"num": 76, "ar": "ٱلْبَاطِنُ", "tr": "Al-Batin", "id_mean": "Yang Tersembunyi", "id_desc": "Ya Batin, Engkau mengetahui rasa sakitku yang tersembunyi, maka sembuhkanlah apa yang tidak dilihat manusia."}, {"num": 77, "ar": "ٱلْوَالِي", "tr": "Al-Wali", "id_mean": "Yang Mengatur", "id_desc": "Ya Wali, aturlah urusanku lebih baik daripada aku mengaturnya sendiri."}, {"num": 78, "ar": "ٱلْمُتَعَالِي", "tr": "Al-Muta’ali", "id_mean": "Yang Paling Tinggi", "id_desc": "Ya Muta’ali, angkatlah aku di atas dosa, kerendahan, dan keinginan yang hina."}, {"num": 79, "ar": "ٱلْبَرُّ", "tr": "Al-Barr", "id_mean": "Sumber segala kebaikan", "id_desc": "Ya Barr, limpahkan kepadaku kebaikan dan jadikan aku sebab kebaikan bagi orang lain."}, {"num": 80, "ar": "ٱلتَّوَّابُ", "tr": "At-Tawwab", "id_mean": "Penerima tobat", "id_desc": "Ya Tawwab, terimalah tobatku dan kembalikan aku kepada-Mu dengan cara yang indah."}, {"num": 81, "ar": "ٱلْمُنْتَقِمُ", "tr": "Al-Muntaqim", "id_mean": "Yang Membalas dengan adil", "id_desc": "Ya Muntaqim, tegakkan keadilan atas kezaliman dan lindungi aku dari kezaliman."}, {"num": 82, "ar": "ٱلْعَفُوُّ", "tr": "Al-‘Afuww", "id_mean": "Yang Menghapus dosa", "id_desc": "Ya ‘Afuww, hapuslah dosa-dosaku sepenuhnya dan jangan sisakan bekasnya padaku."}, {"num": 83, "ar": "ٱلرَّؤُوفُ", "tr": "Ar-Ra’uf", "id_mean": "Yang Maha Belas Kasih", "id_desc": "Ya Ra’uf, perlakukan aku dengan kelembutan, kasih sayang, dan rahmat."}, {"num": 84, "ar": "مَالِكُ ٱلْمُلْكِ", "tr": "Malik-ul-Mulk", "id_mean": "Pemilik seluruh kerajaan", "id_desc": "Ya Malik-ul-Mulk, karuniakan kepadaku dari kerajaan-Mu hanya yang baik dan jauhkan cinta kekuasaan palsu dari hatiku."}, {"num": 85, "ar": "ذُو ٱلْجَلَالِ وَٱلْإِكْرَامِ", "tr": "Dhul-Jalali wal-Ikram", "id_mean": "Pemilik keagungan dan kemuliaan", "id_desc": "Ya Dhul-Jalali wal-Ikram, muliakan aku dengan kedekatan kepada-Mu dan akhlak yang mulia."}, {"num": 86, "ar": "ٱلْمُقْسِطُ", "tr": "Al-Muqsit", "id_mean": "Yang Menegakkan keseimbangan dan keadilan", "id_desc": "Ya Muqsit, tegakkan keadilan dan keseimbangan dalam hidup serta keputusanku."}, {"num": 87, "ar": "ٱلْجَامِعُ", "tr": "Al-Jami’", "id_mean": "Yang Mengumpulkan", "id_desc": "Ya Jami’, kumpulkan hatiku yang tercerai-berai dan satukan urusanku di atas kebaikan."}, {"num": 88, "ar": "ٱلْغَنِيُّ", "tr": "Al-Ghani", "id_mean": "Yang Maha Kaya", "id_desc": "Ya Ghani, kayakan hatiku dengan rasa cukup dan bebaskan aku dari kebutuhan yang menghinakan."}, {"num": 89, "ar": "ٱلْمُغْنِي", "tr": "Al-Mughni", "id_mean": "Yang Memberi kecukupan", "id_desc": "Ya Mughni, berikan kepadaku rezeki halal yang cukup dan kekayaan batin."}, {"num": 90, "ar": "ٱلْمَانِعُ", "tr": "Al-Mani’", "id_mean": "Yang Mencegah", "id_desc": "Ya Mani’, cegahlah dariku apa yang membahayakan imanku, rumahku, dan masa depanku."}, {"num": 91, "ar": "ٱلضَّارُ", "tr": "Ad-Darr", "id_mean": "Yang Menetapkan ujian", "id_desc": "Ya Darr, jauhkan ujian yang merusak dariku dan jadikan aku sabar atas ketetapan-Mu."}, {"num": 92, "ar": "ٱلنَّافِعُ", "tr": "An-Nafi’", "id_mean": "Pemberi manfaat", "id_desc": "Ya Nafi’, datangkan manfaat bagiku dalam agamaku, hidupku, dan keluargaku."}, {"num": 93, "ar": "ٱلنُّورُ", "tr": "An-Nur", "id_mean": "Cahaya", "id_desc": "Ya Nur, terangilah jalanku dan keluarkan aku dari kegelapan."}, {"num": 94, "ar": "ٱلْهَادِي", "tr": "Al-Hadi", "id_mean": "Pemberi petunjuk", "id_desc": "Ya Hadi, bimbing aku ke jalan yang lurus dan teguhkan aku di atasnya."}, {"num": 95, "ar": "ٱلْبَدِيعُ", "tr": "Al-Badi’", "id_mean": "Pencipta tanpa contoh", "id_desc": "Ya Badi’, bukakan bagiku hasil yang indah yang tak pernah kubayangkan."}, {"num": 96, "ar": "ٱلْبَاقِي", "tr": "Al-Baqi", "id_mean": "Yang Kekal", "id_desc": "Ya Baqi, jadikan apa yang kulakukan karena-Mu kekal dan diterima."}, {"num": 97, "ar": "ٱلْوَارِثُ", "tr": "Al-Warith", "id_mean": "Pewarislah segala sesuatu", "id_desc": "Ya Warith, sisakan bagiku apa yang benar-benar bermanfaat ketika semua yang lain lenyap."}, {"num": 98, "ar": "ٱلرَّشِيدُ", "tr": "Ar-Rashid", "id_mean": "Pemberi petunjuk ke jalan yang lurus", "id_desc": "Ya Rashid, arahkan aku kepada yang benar dan jauhkan aku dari kesesatan."}, {"num": 99, "ar": "ٱلصَّبُورُ", "tr": "As-Sabur", "id_mean": "Yang Maha Sabar", "id_desc": "Ya Sabur, karuniakan kepadaku kesabaran tanpa keluh kesah dan keteguhan tanpa putus asa."}];
 const meanKey = "id_mean";
 const descKey = "id_desc";
+const premiumRizqDescriptions = ["Ya Rahman, berikan aku rezeki halal, kelapangan, dan kekayaan yang berkah.", "Ya Raheem, luaskan rezekiku dan berkahilah penghasilanku.", "Ya Malik, bukakan pintu peluang, kebaikan, dan kemudahan finansial.", "Ya Quddus, berkahilah pekerjaanku, hartaku, dan masa depanku.", "Ya Salam, berikan aku rezeki yang cukup dan ketenangan dalam kecukupan.", "Ya Mumin, berikan aku rezeki halal, kelapangan, dan kekayaan yang berkah.", "Ya Muhaymin, luaskan rezekiku dan berkahilah penghasilanku.", "Ya Aziz, bukakan pintu peluang, kebaikan, dan kemudahan finansial.", "Ya Jabbar, berkahilah pekerjaanku, hartaku, dan masa depanku.", "Ya Mutakabbir, berikan aku rezeki yang cukup dan ketenangan dalam kecukupan.", "Ya Khaliq, berikan aku rezeki halal, kelapangan, dan kekayaan yang berkah.", "Ya Bari, luaskan rezekiku dan berkahilah penghasilanku.", "Ya Musawwir, bukakan pintu peluang, kebaikan, dan kemudahan finansial.", "Ya Ghaffar, berkahilah pekerjaanku, hartaku, dan masa depanku.", "Ya Qahhar, berikan aku rezeki yang cukup dan ketenangan dalam kecukupan.", "Ya Wahhab, berikan aku rezeki halal, kelapangan, dan kekayaan yang berkah.", "Ya Razzaq, luaskan rezekiku dan berkahilah penghasilanku.", "Ya Fattah, bukakan pintu peluang, kebaikan, dan kemudahan finansial.", "Ya Alim, berkahilah pekerjaanku, hartaku, dan masa depanku.", "Ya Qabid, berikan aku rezeki yang cukup dan ketenangan dalam kecukupan.", "Ya Basit, berikan aku rezeki halal, kelapangan, dan kekayaan yang berkah.", "Ya Khafid, luaskan rezekiku dan berkahilah penghasilanku.", "Ya Rafi, bukakan pintu peluang, kebaikan, dan kemudahan finansial.", "Ya Muizz, berkahilah pekerjaanku, hartaku, dan masa depanku.", "Ya Mudhill, berikan aku rezeki yang cukup dan ketenangan dalam kecukupan.", "Ya Sami, berikan aku rezeki halal, kelapangan, dan kekayaan yang berkah.", "Ya Basir, luaskan rezekiku dan berkahilah penghasilanku.", "Ya Hakam, bukakan pintu peluang, kebaikan, dan kemudahan finansial.", "Ya Adl, berkahilah pekerjaanku, hartaku, dan masa depanku.", "Ya Latif, berikan aku rezeki yang cukup dan ketenangan dalam kecukupan.", "Ya Khabir, berikan aku rezeki halal, kelapangan, dan kekayaan yang berkah.", "Ya Halim, luaskan rezekiku dan berkahilah penghasilanku.", "Ya Azim, bukakan pintu peluang, kebaikan, dan kemudahan finansial.", "Ya Ghafur, berkahilah pekerjaanku, hartaku, dan masa depanku.", "Ya Shakur, berikan aku rezeki yang cukup dan ketenangan dalam kecukupan.", "Ya Aliyy, berikan aku rezeki halal, kelapangan, dan kekayaan yang berkah.", "Ya Kabir, luaskan rezekiku dan berkahilah penghasilanku.", "Ya Hafiz, bukakan pintu peluang, kebaikan, dan kemudahan finansial.", "Ya Muqit, berkahilah pekerjaanku, hartaku, dan masa depanku.", "Ya Hasib, berikan aku rezeki yang cukup dan ketenangan dalam kecukupan.", "Ya Jalil, berikan aku rezeki halal, kelapangan, dan kekayaan yang berkah.", "Ya Karim, luaskan rezekiku dan berkahilah penghasilanku.", "Ya Raqib, bukakan pintu peluang, kebaikan, dan kemudahan finansial.", "Ya Mujib, berkahilah pekerjaanku, hartaku, dan masa depanku.", "Ya Wasi, berikan aku rezeki yang cukup dan ketenangan dalam kecukupan.", "Ya Hakim, berikan aku rezeki halal, kelapangan, dan kekayaan yang berkah.", "Ya Wadud, luaskan rezekiku dan berkahilah penghasilanku.", "Ya Majid, bukakan pintu peluang, kebaikan, dan kemudahan finansial.", "Ya Baith, berkahilah pekerjaanku, hartaku, dan masa depanku.", "Ya Shahid, berikan aku rezeki yang cukup dan ketenangan dalam kecukupan.", "Ya Haqq, berikan aku rezeki halal, kelapangan, dan kekayaan yang berkah.", "Ya Wakil, luaskan rezekiku dan berkahilah penghasilanku.", "Ya Qawiyy, bukakan pintu peluang, kebaikan, dan kemudahan finansial.", "Ya Matin, berkahilah pekerjaanku, hartaku, dan masa depanku.", "Ya Waliyy, berikan aku rezeki yang cukup dan ketenangan dalam kecukupan.", "Ya Hamid, berikan aku rezeki halal, kelapangan, dan kekayaan yang berkah.", "Ya Muhsi, luaskan rezekiku dan berkahilah penghasilanku.", "Ya Mubdi, bukakan pintu peluang, kebaikan, dan kemudahan finansial.", "Ya Muid, berkahilah pekerjaanku, hartaku, dan masa depanku.", "Ya Muhyi, berikan aku rezeki yang cukup dan ketenangan dalam kecukupan.", "Ya Mumit, berikan aku rezeki halal, kelapangan, dan kekayaan yang berkah.", "Ya Hayy, luaskan rezekiku dan berkahilah penghasilanku.", "Ya Qayyum, bukakan pintu peluang, kebaikan, dan kemudahan finansial.", "Ya Wajid, berkahilah pekerjaanku, hartaku, dan masa depanku.", "Ya Majid, berikan aku rezeki yang cukup dan ketenangan dalam kecukupan.", "Ya Wahid, berikan aku rezeki halal, kelapangan, dan kekayaan yang berkah.", "Ya Ahad, luaskan rezekiku dan berkahilah penghasilanku.", "Ya Samad, bukakan pintu peluang, kebaikan, dan kemudahan finansial.", "Ya Qadir, berkahilah pekerjaanku, hartaku, dan masa depanku.", "Ya Muqtadir, berikan aku rezeki yang cukup dan ketenangan dalam kecukupan.", "Ya Muqaddim, berikan aku rezeki halal, kelapangan, dan kekayaan yang berkah.", "Ya Muakhkhir, luaskan rezekiku dan berkahilah penghasilanku.", "Ya Awwal, bukakan pintu peluang, kebaikan, dan kemudahan finansial.", "Ya Akhir, berkahilah pekerjaanku, hartaku, dan masa depanku.", "Ya Zahir, berikan aku rezeki yang cukup dan ketenangan dalam kecukupan.", "Ya Batin, berikan aku rezeki halal, kelapangan, dan kekayaan yang berkah.", "Ya Wali, luaskan rezekiku dan berkahilah penghasilanku.", "Ya Mutaali, bukakan pintu peluang, kebaikan, dan kemudahan finansial.", "Ya Barr, berkahilah pekerjaanku, hartaku, dan masa depanku.", "Ya Tawwab, berikan aku rezeki yang cukup dan ketenangan dalam kecukupan.", "Ya Muntaqim, berikan aku rezeki halal, kelapangan, dan kekayaan yang berkah.", "Ya Afuww, luaskan rezekiku dan berkahilah penghasilanku.", "Ya Rauf, bukakan pintu peluang, kebaikan, dan kemudahan finansial.", "Ya Malik-ul-Mulk, berkahilah pekerjaanku, hartaku, dan masa depanku.", "Ya Dhul-Jalali wal-Ikram, berikan aku rezeki yang cukup dan ketenangan dalam kecukupan.", "Ya Muqsit, berikan aku rezeki halal, kelapangan, dan kekayaan yang berkah.", "Ya Jami, luaskan rezekiku dan berkahilah penghasilanku.", "Ya Ghani, bukakan pintu peluang, kebaikan, dan kemudahan finansial.", "Ya Mughni, berkahilah pekerjaanku, hartaku, dan masa depanku.", "Ya Mani, berikan aku rezeki yang cukup dan ketenangan dalam kecukupan.", "Ya Darr, berikan aku rezeki halal, kelapangan, dan kekayaan yang berkah.", "Ya Nafi, luaskan rezekiku dan berkahilah penghasilanku.", "Ya Nur, bukakan pintu peluang, kebaikan, dan kemudahan finansial.", "Ya Hadi, berkahilah pekerjaanku, hartaku, dan masa depanku.", "Ya Badi, berikan aku rezeki yang cukup dan ketenangan dalam kecukupan.", "Ya Baqi, berikan aku rezeki halal, kelapangan, dan kekayaan yang berkah.", "Ya Warith, luaskan rezekiku dan berkahilah penghasilanku.", "Ya Rashid, bukakan pintu peluang, kebaikan, dan kemudahan finansial.", "Ya Sabur, berkahilah pekerjaanku, hartaku, dan masa depanku."];
+const premiumHealthDescriptions = ["Ya Rahman, berikan kesembuhan, kekuatan, dan pemulihan sempurna kepada orang yang sakit.", "Ya Raheem, ringankan rasa sakitnya dan penuhi hatinya dengan harapan.", "Ya Malik, angkat penyakit darinya dan lindungi ia dengan rahmat-Mu.", "Ya Quddus, pulihkan kesehatannya dan bukakan pintu-pintu kesembuhan.", "Ya Salam, berikan ia sabar, kesembuhan, dan ketenangan hati.", "Ya Mumin, berikan kesembuhan, kekuatan, dan pemulihan sempurna kepada orang yang sakit.", "Ya Muhaymin, ringankan rasa sakitnya dan penuhi hatinya dengan harapan.", "Ya Aziz, angkat penyakit darinya dan lindungi ia dengan rahmat-Mu.", "Ya Jabbar, pulihkan kesehatannya dan bukakan pintu-pintu kesembuhan.", "Ya Mutakabbir, berikan ia sabar, kesembuhan, dan ketenangan hati.", "Ya Khaliq, berikan kesembuhan, kekuatan, dan pemulihan sempurna kepada orang yang sakit.", "Ya Bari, ringankan rasa sakitnya dan penuhi hatinya dengan harapan.", "Ya Musawwir, angkat penyakit darinya dan lindungi ia dengan rahmat-Mu.", "Ya Ghaffar, pulihkan kesehatannya dan bukakan pintu-pintu kesembuhan.", "Ya Qahhar, berikan ia sabar, kesembuhan, dan ketenangan hati.", "Ya Wahhab, berikan kesembuhan, kekuatan, dan pemulihan sempurna kepada orang yang sakit.", "Ya Razzaq, ringankan rasa sakitnya dan penuhi hatinya dengan harapan.", "Ya Fattah, angkat penyakit darinya dan lindungi ia dengan rahmat-Mu.", "Ya Alim, pulihkan kesehatannya dan bukakan pintu-pintu kesembuhan.", "Ya Qabid, berikan ia sabar, kesembuhan, dan ketenangan hati.", "Ya Basit, berikan kesembuhan, kekuatan, dan pemulihan sempurna kepada orang yang sakit.", "Ya Khafid, ringankan rasa sakitnya dan penuhi hatinya dengan harapan.", "Ya Rafi, angkat penyakit darinya dan lindungi ia dengan rahmat-Mu.", "Ya Muizz, pulihkan kesehatannya dan bukakan pintu-pintu kesembuhan.", "Ya Mudhill, berikan ia sabar, kesembuhan, dan ketenangan hati.", "Ya Sami, berikan kesembuhan, kekuatan, dan pemulihan sempurna kepada orang yang sakit.", "Ya Basir, ringankan rasa sakitnya dan penuhi hatinya dengan harapan.", "Ya Hakam, angkat penyakit darinya dan lindungi ia dengan rahmat-Mu.", "Ya Adl, pulihkan kesehatannya dan bukakan pintu-pintu kesembuhan.", "Ya Latif, berikan ia sabar, kesembuhan, dan ketenangan hati.", "Ya Khabir, berikan kesembuhan, kekuatan, dan pemulihan sempurna kepada orang yang sakit.", "Ya Halim, ringankan rasa sakitnya dan penuhi hatinya dengan harapan.", "Ya Azim, angkat penyakit darinya dan lindungi ia dengan rahmat-Mu.", "Ya Ghafur, pulihkan kesehatannya dan bukakan pintu-pintu kesembuhan.", "Ya Shakur, berikan ia sabar, kesembuhan, dan ketenangan hati.", "Ya Aliyy, berikan kesembuhan, kekuatan, dan pemulihan sempurna kepada orang yang sakit.", "Ya Kabir, ringankan rasa sakitnya dan penuhi hatinya dengan harapan.", "Ya Hafiz, angkat penyakit darinya dan lindungi ia dengan rahmat-Mu.", "Ya Muqit, pulihkan kesehatannya dan bukakan pintu-pintu kesembuhan.", "Ya Hasib, berikan ia sabar, kesembuhan, dan ketenangan hati.", "Ya Jalil, berikan kesembuhan, kekuatan, dan pemulihan sempurna kepada orang yang sakit.", "Ya Karim, ringankan rasa sakitnya dan penuhi hatinya dengan harapan.", "Ya Raqib, angkat penyakit darinya dan lindungi ia dengan rahmat-Mu.", "Ya Mujib, pulihkan kesehatannya dan bukakan pintu-pintu kesembuhan.", "Ya Wasi, berikan ia sabar, kesembuhan, dan ketenangan hati.", "Ya Hakim, berikan kesembuhan, kekuatan, dan pemulihan sempurna kepada orang yang sakit.", "Ya Wadud, ringankan rasa sakitnya dan penuhi hatinya dengan harapan.", "Ya Majid, angkat penyakit darinya dan lindungi ia dengan rahmat-Mu.", "Ya Baith, pulihkan kesehatannya dan bukakan pintu-pintu kesembuhan.", "Ya Shahid, berikan ia sabar, kesembuhan, dan ketenangan hati.", "Ya Haqq, berikan kesembuhan, kekuatan, dan pemulihan sempurna kepada orang yang sakit.", "Ya Wakil, ringankan rasa sakitnya dan penuhi hatinya dengan harapan.", "Ya Qawiyy, angkat penyakit darinya dan lindungi ia dengan rahmat-Mu.", "Ya Matin, pulihkan kesehatannya dan bukakan pintu-pintu kesembuhan.", "Ya Waliyy, berikan ia sabar, kesembuhan, dan ketenangan hati.", "Ya Hamid, berikan kesembuhan, kekuatan, dan pemulihan sempurna kepada orang yang sakit.", "Ya Muhsi, ringankan rasa sakitnya dan penuhi hatinya dengan harapan.", "Ya Mubdi, angkat penyakit darinya dan lindungi ia dengan rahmat-Mu.", "Ya Muid, pulihkan kesehatannya dan bukakan pintu-pintu kesembuhan.", "Ya Muhyi, berikan ia sabar, kesembuhan, dan ketenangan hati.", "Ya Mumit, berikan kesembuhan, kekuatan, dan pemulihan sempurna kepada orang yang sakit.", "Ya Hayy, ringankan rasa sakitnya dan penuhi hatinya dengan harapan.", "Ya Qayyum, angkat penyakit darinya dan lindungi ia dengan rahmat-Mu.", "Ya Wajid, pulihkan kesehatannya dan bukakan pintu-pintu kesembuhan.", "Ya Majid, berikan ia sabar, kesembuhan, dan ketenangan hati.", "Ya Wahid, berikan kesembuhan, kekuatan, dan pemulihan sempurna kepada orang yang sakit.", "Ya Ahad, ringankan rasa sakitnya dan penuhi hatinya dengan harapan.", "Ya Samad, angkat penyakit darinya dan lindungi ia dengan rahmat-Mu.", "Ya Qadir, pulihkan kesehatannya dan bukakan pintu-pintu kesembuhan.", "Ya Muqtadir, berikan ia sabar, kesembuhan, dan ketenangan hati.", "Ya Muqaddim, berikan kesembuhan, kekuatan, dan pemulihan sempurna kepada orang yang sakit.", "Ya Muakhkhir, ringankan rasa sakitnya dan penuhi hatinya dengan harapan.", "Ya Awwal, angkat penyakit darinya dan lindungi ia dengan rahmat-Mu.", "Ya Akhir, pulihkan kesehatannya dan bukakan pintu-pintu kesembuhan.", "Ya Zahir, berikan ia sabar, kesembuhan, dan ketenangan hati.", "Ya Batin, berikan kesembuhan, kekuatan, dan pemulihan sempurna kepada orang yang sakit.", "Ya Wali, ringankan rasa sakitnya dan penuhi hatinya dengan harapan.", "Ya Mutaali, angkat penyakit darinya dan lindungi ia dengan rahmat-Mu.", "Ya Barr, pulihkan kesehatannya dan bukakan pintu-pintu kesembuhan.", "Ya Tawwab, berikan ia sabar, kesembuhan, dan ketenangan hati.", "Ya Muntaqim, berikan kesembuhan, kekuatan, dan pemulihan sempurna kepada orang yang sakit.", "Ya Afuww, ringankan rasa sakitnya dan penuhi hatinya dengan harapan.", "Ya Rauf, angkat penyakit darinya dan lindungi ia dengan rahmat-Mu.", "Ya Malik-ul-Mulk, pulihkan kesehatannya dan bukakan pintu-pintu kesembuhan.", "Ya Dhul-Jalali wal-Ikram, berikan ia sabar, kesembuhan, dan ketenangan hati.", "Ya Muqsit, berikan kesembuhan, kekuatan, dan pemulihan sempurna kepada orang yang sakit.", "Ya Jami, ringankan rasa sakitnya dan penuhi hatinya dengan harapan.", "Ya Ghani, angkat penyakit darinya dan lindungi ia dengan rahmat-Mu.", "Ya Mughni, pulihkan kesehatannya dan bukakan pintu-pintu kesembuhan.", "Ya Mani, berikan ia sabar, kesembuhan, dan ketenangan hati.", "Ya Darr, berikan kesembuhan, kekuatan, dan pemulihan sempurna kepada orang yang sakit.", "Ya Nafi, ringankan rasa sakitnya dan penuhi hatinya dengan harapan.", "Ya Nur, angkat penyakit darinya dan lindungi ia dengan rahmat-Mu.", "Ya Hadi, pulihkan kesehatannya dan bukakan pintu-pintu kesembuhan.", "Ya Badi, berikan ia sabar, kesembuhan, dan ketenangan hati.", "Ya Baqi, berikan kesembuhan, kekuatan, dan pemulihan sempurna kepada orang yang sakit.", "Ya Warith, ringankan rasa sakitnya dan penuhi hatinya dengan harapan.", "Ya Rashid, angkat penyakit darinya dan lindungi ia dengan rahmat-Mu.", "Ya Sabur, pulihkan kesehatannya dan bukakan pintu-pintu kesembuhan."];
+const premiumForgiveDescriptions = ["Ya Rahman, terimalah tobatku, ampunilah dosaku, dan sucikan hatiku.", "Ya Raheem, hapuslah kesalahanku dan jagalah aku dari kembali kepada dosa.", "Ya Malik, berikan aku tobat yang tulus, hati yang bersih, dan ampunan yang luas.", "Ya Quddus, ampunilah dosaku yang tampak dan tersembunyi, dan perbaikilah urusanku.", "Ya Salam, limpahkan rahmat-Mu kepadaku dan teguhkan aku di jalan yang lurus.", "Ya Mumin, terimalah tobatku, ampunilah dosaku, dan sucikan hatiku.", "Ya Muhaymin, hapuslah kesalahanku dan jagalah aku dari kembali kepada dosa.", "Ya Aziz, berikan aku tobat yang tulus, hati yang bersih, dan ampunan yang luas.", "Ya Jabbar, ampunilah dosaku yang tampak dan tersembunyi, dan perbaikilah urusanku.", "Ya Mutakabbir, limpahkan rahmat-Mu kepadaku dan teguhkan aku di jalan yang lurus.", "Ya Khaliq, terimalah tobatku, ampunilah dosaku, dan sucikan hatiku.", "Ya Bari, hapuslah kesalahanku dan jagalah aku dari kembali kepada dosa.", "Ya Musawwir, berikan aku tobat yang tulus, hati yang bersih, dan ampunan yang luas.", "Ya Ghaffar, ampunilah dosaku yang tampak dan tersembunyi, dan perbaikilah urusanku.", "Ya Qahhar, limpahkan rahmat-Mu kepadaku dan teguhkan aku di jalan yang lurus.", "Ya Wahhab, terimalah tobatku, ampunilah dosaku, dan sucikan hatiku.", "Ya Razzaq, hapuslah kesalahanku dan jagalah aku dari kembali kepada dosa.", "Ya Fattah, berikan aku tobat yang tulus, hati yang bersih, dan ampunan yang luas.", "Ya Alim, ampunilah dosaku yang tampak dan tersembunyi, dan perbaikilah urusanku.", "Ya Qabid, limpahkan rahmat-Mu kepadaku dan teguhkan aku di jalan yang lurus.", "Ya Basit, terimalah tobatku, ampunilah dosaku, dan sucikan hatiku.", "Ya Khafid, hapuslah kesalahanku dan jagalah aku dari kembali kepada dosa.", "Ya Rafi, berikan aku tobat yang tulus, hati yang bersih, dan ampunan yang luas.", "Ya Muizz, ampunilah dosaku yang tampak dan tersembunyi, dan perbaikilah urusanku.", "Ya Mudhill, limpahkan rahmat-Mu kepadaku dan teguhkan aku di jalan yang lurus.", "Ya Sami, terimalah tobatku, ampunilah dosaku, dan sucikan hatiku.", "Ya Basir, hapuslah kesalahanku dan jagalah aku dari kembali kepada dosa.", "Ya Hakam, berikan aku tobat yang tulus, hati yang bersih, dan ampunan yang luas.", "Ya Adl, ampunilah dosaku yang tampak dan tersembunyi, dan perbaikilah urusanku.", "Ya Latif, limpahkan rahmat-Mu kepadaku dan teguhkan aku di jalan yang lurus.", "Ya Khabir, terimalah tobatku, ampunilah dosaku, dan sucikan hatiku.", "Ya Halim, hapuslah kesalahanku dan jagalah aku dari kembali kepada dosa.", "Ya Azim, berikan aku tobat yang tulus, hati yang bersih, dan ampunan yang luas.", "Ya Ghafur, ampunilah dosaku yang tampak dan tersembunyi, dan perbaikilah urusanku.", "Ya Shakur, limpahkan rahmat-Mu kepadaku dan teguhkan aku di jalan yang lurus.", "Ya Aliyy, terimalah tobatku, ampunilah dosaku, dan sucikan hatiku.", "Ya Kabir, hapuslah kesalahanku dan jagalah aku dari kembali kepada dosa.", "Ya Hafiz, berikan aku tobat yang tulus, hati yang bersih, dan ampunan yang luas.", "Ya Muqit, ampunilah dosaku yang tampak dan tersembunyi, dan perbaikilah urusanku.", "Ya Hasib, limpahkan rahmat-Mu kepadaku dan teguhkan aku di jalan yang lurus.", "Ya Jalil, terimalah tobatku, ampunilah dosaku, dan sucikan hatiku.", "Ya Karim, hapuslah kesalahanku dan jagalah aku dari kembali kepada dosa.", "Ya Raqib, berikan aku tobat yang tulus, hati yang bersih, dan ampunan yang luas.", "Ya Mujib, ampunilah dosaku yang tampak dan tersembunyi, dan perbaikilah urusanku.", "Ya Wasi, limpahkan rahmat-Mu kepadaku dan teguhkan aku di jalan yang lurus.", "Ya Hakim, terimalah tobatku, ampunilah dosaku, dan sucikan hatiku.", "Ya Wadud, hapuslah kesalahanku dan jagalah aku dari kembali kepada dosa.", "Ya Majid, berikan aku tobat yang tulus, hati yang bersih, dan ampunan yang luas.", "Ya Baith, ampunilah dosaku yang tampak dan tersembunyi, dan perbaikilah urusanku.", "Ya Shahid, limpahkan rahmat-Mu kepadaku dan teguhkan aku di jalan yang lurus.", "Ya Haqq, terimalah tobatku, ampunilah dosaku, dan sucikan hatiku.", "Ya Wakil, hapuslah kesalahanku dan jagalah aku dari kembali kepada dosa.", "Ya Qawiyy, berikan aku tobat yang tulus, hati yang bersih, dan ampunan yang luas.", "Ya Matin, ampunilah dosaku yang tampak dan tersembunyi, dan perbaikilah urusanku.", "Ya Waliyy, limpahkan rahmat-Mu kepadaku dan teguhkan aku di jalan yang lurus.", "Ya Hamid, terimalah tobatku, ampunilah dosaku, dan sucikan hatiku.", "Ya Muhsi, hapuslah kesalahanku dan jagalah aku dari kembali kepada dosa.", "Ya Mubdi, berikan aku tobat yang tulus, hati yang bersih, dan ampunan yang luas.", "Ya Muid, ampunilah dosaku yang tampak dan tersembunyi, dan perbaikilah urusanku.", "Ya Muhyi, limpahkan rahmat-Mu kepadaku dan teguhkan aku di jalan yang lurus.", "Ya Mumit, terimalah tobatku, ampunilah dosaku, dan sucikan hatiku.", "Ya Hayy, hapuslah kesalahanku dan jagalah aku dari kembali kepada dosa.", "Ya Qayyum, berikan aku tobat yang tulus, hati yang bersih, dan ampunan yang luas.", "Ya Wajid, ampunilah dosaku yang tampak dan tersembunyi, dan perbaikilah urusanku.", "Ya Majid, limpahkan rahmat-Mu kepadaku dan teguhkan aku di jalan yang lurus.", "Ya Wahid, terimalah tobatku, ampunilah dosaku, dan sucikan hatiku.", "Ya Ahad, hapuslah kesalahanku dan jagalah aku dari kembali kepada dosa.", "Ya Samad, berikan aku tobat yang tulus, hati yang bersih, dan ampunan yang luas.", "Ya Qadir, ampunilah dosaku yang tampak dan tersembunyi, dan perbaikilah urusanku.", "Ya Muqtadir, limpahkan rahmat-Mu kepadaku dan teguhkan aku di jalan yang lurus.", "Ya Muqaddim, terimalah tobatku, ampunilah dosaku, dan sucikan hatiku.", "Ya Muakhkhir, hapuslah kesalahanku dan jagalah aku dari kembali kepada dosa.", "Ya Awwal, berikan aku tobat yang tulus, hati yang bersih, dan ampunan yang luas.", "Ya Akhir, ampunilah dosaku yang tampak dan tersembunyi, dan perbaikilah urusanku.", "Ya Zahir, limpahkan rahmat-Mu kepadaku dan teguhkan aku di jalan yang lurus.", "Ya Batin, terimalah tobatku, ampunilah dosaku, dan sucikan hatiku.", "Ya Wali, hapuslah kesalahanku dan jagalah aku dari kembali kepada dosa.", "Ya Mutaali, berikan aku tobat yang tulus, hati yang bersih, dan ampunan yang luas.", "Ya Barr, ampunilah dosaku yang tampak dan tersembunyi, dan perbaikilah urusanku.", "Ya Tawwab, limpahkan rahmat-Mu kepadaku dan teguhkan aku di jalan yang lurus.", "Ya Muntaqim, terimalah tobatku, ampunilah dosaku, dan sucikan hatiku.", "Ya Afuww, hapuslah kesalahanku dan jagalah aku dari kembali kepada dosa.", "Ya Rauf, berikan aku tobat yang tulus, hati yang bersih, dan ampunan yang luas.", "Ya Malik-ul-Mulk, ampunilah dosaku yang tampak dan tersembunyi, dan perbaikilah urusanku.", "Ya Dhul-Jalali wal-Ikram, limpahkan rahmat-Mu kepadaku dan teguhkan aku di jalan yang lurus.", "Ya Muqsit, terimalah tobatku, ampunilah dosaku, dan sucikan hatiku.", "Ya Jami, hapuslah kesalahanku dan jagalah aku dari kembali kepada dosa.", "Ya Ghani, berikan aku tobat yang tulus, hati yang bersih, dan ampunan yang luas.", "Ya Mughni, ampunilah dosaku yang tampak dan tersembunyi, dan perbaikilah urusanku.", "Ya Mani, limpahkan rahmat-Mu kepadaku dan teguhkan aku di jalan yang lurus.", "Ya Darr, terimalah tobatku, ampunilah dosaku, dan sucikan hatiku.", "Ya Nafi, hapuslah kesalahanku dan jagalah aku dari kembali kepada dosa.", "Ya Nur, berikan aku tobat yang tulus, hati yang bersih, dan ampunan yang luas.", "Ya Hadi, ampunilah dosaku yang tampak dan tersembunyi, dan perbaikilah urusanku.", "Ya Badi, limpahkan rahmat-Mu kepadaku dan teguhkan aku di jalan yang lurus.", "Ya Baqi, terimalah tobatku, ampunilah dosaku, dan sucikan hatiku.", "Ya Warith, hapuslah kesalahanku dan jagalah aku dari kembali kepada dosa.", "Ya Rashid, berikan aku tobat yang tulus, hati yang bersih, dan ampunan yang luas.", "Ya Sabur, ampunilah dosaku yang tampak dan tersembunyi, dan perbaikilah urusanku."];
+const premiumDebtDescriptions = ["Ya Rahman, bebaskan aku dari utang dan berikan rezeki halal yang melapangkan.", "Ya Raheem, mudahkan kesulitan finansialku dan bukakan pintu jalan keluar.", "Ya Malik, bantulah aku melunasi utang dan hidup dengan tenang.", "Ya Quddus, lindungi aku dari kemiskinan, utang baru, dan tekanan finansial.", "Ya Salam, berkahilah pendapatanku dan angkatlah bebanku.", "Ya Mumin, bebaskan aku dari utang dan berikan rezeki halal yang melapangkan.", "Ya Muhaymin, mudahkan kesulitan finansialku dan bukakan pintu jalan keluar.", "Ya Aziz, bantulah aku melunasi utang dan hidup dengan tenang.", "Ya Jabbar, lindungi aku dari kemiskinan, utang baru, dan tekanan finansial.", "Ya Mutakabbir, berkahilah pendapatanku dan angkatlah bebanku.", "Ya Khaliq, bebaskan aku dari utang dan berikan rezeki halal yang melapangkan.", "Ya Bari, mudahkan kesulitan finansialku dan bukakan pintu jalan keluar.", "Ya Musawwir, bantulah aku melunasi utang dan hidup dengan tenang.", "Ya Ghaffar, lindungi aku dari kemiskinan, utang baru, dan tekanan finansial.", "Ya Qahhar, berkahilah pendapatanku dan angkatlah bebanku.", "Ya Wahhab, bebaskan aku dari utang dan berikan rezeki halal yang melapangkan.", "Ya Razzaq, mudahkan kesulitan finansialku dan bukakan pintu jalan keluar.", "Ya Fattah, bantulah aku melunasi utang dan hidup dengan tenang.", "Ya Alim, lindungi aku dari kemiskinan, utang baru, dan tekanan finansial.", "Ya Qabid, berkahilah pendapatanku dan angkatlah bebanku.", "Ya Basit, bebaskan aku dari utang dan berikan rezeki halal yang melapangkan.", "Ya Khafid, mudahkan kesulitan finansialku dan bukakan pintu jalan keluar.", "Ya Rafi, bantulah aku melunasi utang dan hidup dengan tenang.", "Ya Muizz, lindungi aku dari kemiskinan, utang baru, dan tekanan finansial.", "Ya Mudhill, berkahilah pendapatanku dan angkatlah bebanku.", "Ya Sami, bebaskan aku dari utang dan berikan rezeki halal yang melapangkan.", "Ya Basir, mudahkan kesulitan finansialku dan bukakan pintu jalan keluar.", "Ya Hakam, bantulah aku melunasi utang dan hidup dengan tenang.", "Ya Adl, lindungi aku dari kemiskinan, utang baru, dan tekanan finansial.", "Ya Latif, berkahilah pendapatanku dan angkatlah bebanku.", "Ya Khabir, bebaskan aku dari utang dan berikan rezeki halal yang melapangkan.", "Ya Halim, mudahkan kesulitan finansialku dan bukakan pintu jalan keluar.", "Ya Azim, bantulah aku melunasi utang dan hidup dengan tenang.", "Ya Ghafur, lindungi aku dari kemiskinan, utang baru, dan tekanan finansial.", "Ya Shakur, berkahilah pendapatanku dan angkatlah bebanku.", "Ya Aliyy, bebaskan aku dari utang dan berikan rezeki halal yang melapangkan.", "Ya Kabir, mudahkan kesulitan finansialku dan bukakan pintu jalan keluar.", "Ya Hafiz, bantulah aku melunasi utang dan hidup dengan tenang.", "Ya Muqit, lindungi aku dari kemiskinan, utang baru, dan tekanan finansial.", "Ya Hasib, berkahilah pendapatanku dan angkatlah bebanku.", "Ya Jalil, bebaskan aku dari utang dan berikan rezeki halal yang melapangkan.", "Ya Karim, mudahkan kesulitan finansialku dan bukakan pintu jalan keluar.", "Ya Raqib, bantulah aku melunasi utang dan hidup dengan tenang.", "Ya Mujib, lindungi aku dari kemiskinan, utang baru, dan tekanan finansial.", "Ya Wasi, berkahilah pendapatanku dan angkatlah bebanku.", "Ya Hakim, bebaskan aku dari utang dan berikan rezeki halal yang melapangkan.", "Ya Wadud, mudahkan kesulitan finansialku dan bukakan pintu jalan keluar.", "Ya Majid, bantulah aku melunasi utang dan hidup dengan tenang.", "Ya Baith, lindungi aku dari kemiskinan, utang baru, dan tekanan finansial.", "Ya Shahid, berkahilah pendapatanku dan angkatlah bebanku.", "Ya Haqq, bebaskan aku dari utang dan berikan rezeki halal yang melapangkan.", "Ya Wakil, mudahkan kesulitan finansialku dan bukakan pintu jalan keluar.", "Ya Qawiyy, bantulah aku melunasi utang dan hidup dengan tenang.", "Ya Matin, lindungi aku dari kemiskinan, utang baru, dan tekanan finansial.", "Ya Waliyy, berkahilah pendapatanku dan angkatlah bebanku.", "Ya Hamid, bebaskan aku dari utang dan berikan rezeki halal yang melapangkan.", "Ya Muhsi, mudahkan kesulitan finansialku dan bukakan pintu jalan keluar.", "Ya Mubdi, bantulah aku melunasi utang dan hidup dengan tenang.", "Ya Muid, lindungi aku dari kemiskinan, utang baru, dan tekanan finansial.", "Ya Muhyi, berkahilah pendapatanku dan angkatlah bebanku.", "Ya Mumit, bebaskan aku dari utang dan berikan rezeki halal yang melapangkan.", "Ya Hayy, mudahkan kesulitan finansialku dan bukakan pintu jalan keluar.", "Ya Qayyum, bantulah aku melunasi utang dan hidup dengan tenang.", "Ya Wajid, lindungi aku dari kemiskinan, utang baru, dan tekanan finansial.", "Ya Majid, berkahilah pendapatanku dan angkatlah bebanku.", "Ya Wahid, bebaskan aku dari utang dan berikan rezeki halal yang melapangkan.", "Ya Ahad, mudahkan kesulitan finansialku dan bukakan pintu jalan keluar.", "Ya Samad, bantulah aku melunasi utang dan hidup dengan tenang.", "Ya Qadir, lindungi aku dari kemiskinan, utang baru, dan tekanan finansial.", "Ya Muqtadir, berkahilah pendapatanku dan angkatlah bebanku.", "Ya Muqaddim, bebaskan aku dari utang dan berikan rezeki halal yang melapangkan.", "Ya Muakhkhir, mudahkan kesulitan finansialku dan bukakan pintu jalan keluar.", "Ya Awwal, bantulah aku melunasi utang dan hidup dengan tenang.", "Ya Akhir, lindungi aku dari kemiskinan, utang baru, dan tekanan finansial.", "Ya Zahir, berkahilah pendapatanku dan angkatlah bebanku.", "Ya Batin, bebaskan aku dari utang dan berikan rezeki halal yang melapangkan.", "Ya Wali, mudahkan kesulitan finansialku dan bukakan pintu jalan keluar.", "Ya Mutaali, bantulah aku melunasi utang dan hidup dengan tenang.", "Ya Barr, lindungi aku dari kemiskinan, utang baru, dan tekanan finansial.", "Ya Tawwab, berkahilah pendapatanku dan angkatlah bebanku.", "Ya Muntaqim, bebaskan aku dari utang dan berikan rezeki halal yang melapangkan.", "Ya Afuww, mudahkan kesulitan finansialku dan bukakan pintu jalan keluar.", "Ya Rauf, bantulah aku melunasi utang dan hidup dengan tenang.", "Ya Malik-ul-Mulk, lindungi aku dari kemiskinan, utang baru, dan tekanan finansial.", "Ya Dhul-Jalali wal-Ikram, berkahilah pendapatanku dan angkatlah bebanku.", "Ya Muqsit, bebaskan aku dari utang dan berikan rezeki halal yang melapangkan.", "Ya Jami, mudahkan kesulitan finansialku dan bukakan pintu jalan keluar.", "Ya Ghani, bantulah aku melunasi utang dan hidup dengan tenang.", "Ya Mughni, lindungi aku dari kemiskinan, utang baru, dan tekanan finansial.", "Ya Mani, berkahilah pendapatanku dan angkatlah bebanku.", "Ya Darr, bebaskan aku dari utang dan berikan rezeki halal yang melapangkan.", "Ya Nafi, mudahkan kesulitan finansialku dan bukakan pintu jalan keluar.", "Ya Nur, bantulah aku melunasi utang dan hidup dengan tenang.", "Ya Hadi, lindungi aku dari kemiskinan, utang baru, dan tekanan finansial.", "Ya Badi, berkahilah pendapatanku dan angkatlah bebanku.", "Ya Baqi, bebaskan aku dari utang dan berikan rezeki halal yang melapangkan.", "Ya Warith, mudahkan kesulitan finansialku dan bukakan pintu jalan keluar.", "Ya Rashid, bantulah aku melunasi utang dan hidup dengan tenang.", "Ya Sabur, lindungi aku dari kemiskinan, utang baru, dan tekanan finansial."];
+const premiumBothDescriptions = ["Ya Rahman, berikan aku kebahagiaan dan barakah di dunia dan akhirat.", "Ya Raheem, indahkan hidupku dengan kebaikan dan berikan akhir yang baik.", "Ya Malik, penuhi hatiku dengan iman dan masa depanku dengan rahmat.", "Ya Quddus, tuntun aku menuju keberhasilan di dunia dan akhirat.", "Ya Salam, berikan aku ketenangan, kebaikan, dan kebahagiaan abadi.", "Ya Mumin, berikan aku kebahagiaan dan barakah di dunia dan akhirat.", "Ya Muhaymin, indahkan hidupku dengan kebaikan dan berikan akhir yang baik.", "Ya Aziz, penuhi hatiku dengan iman dan masa depanku dengan rahmat.", "Ya Jabbar, tuntun aku menuju keberhasilan di dunia dan akhirat.", "Ya Mutakabbir, berikan aku ketenangan, kebaikan, dan kebahagiaan abadi.", "Ya Khaliq, berikan aku kebahagiaan dan barakah di dunia dan akhirat.", "Ya Bari, indahkan hidupku dengan kebaikan dan berikan akhir yang baik.", "Ya Musawwir, penuhi hatiku dengan iman dan masa depanku dengan rahmat.", "Ya Ghaffar, tuntun aku menuju keberhasilan di dunia dan akhirat.", "Ya Qahhar, berikan aku ketenangan, kebaikan, dan kebahagiaan abadi.", "Ya Wahhab, berikan aku kebahagiaan dan barakah di dunia dan akhirat.", "Ya Razzaq, indahkan hidupku dengan kebaikan dan berikan akhir yang baik.", "Ya Fattah, penuhi hatiku dengan iman dan masa depanku dengan rahmat.", "Ya Alim, tuntun aku menuju keberhasilan di dunia dan akhirat.", "Ya Qabid, berikan aku ketenangan, kebaikan, dan kebahagiaan abadi.", "Ya Basit, berikan aku kebahagiaan dan barakah di dunia dan akhirat.", "Ya Khafid, indahkan hidupku dengan kebaikan dan berikan akhir yang baik.", "Ya Rafi, penuhi hatiku dengan iman dan masa depanku dengan rahmat.", "Ya Muizz, tuntun aku menuju keberhasilan di dunia dan akhirat.", "Ya Mudhill, berikan aku ketenangan, kebaikan, dan kebahagiaan abadi.", "Ya Sami, berikan aku kebahagiaan dan barakah di dunia dan akhirat.", "Ya Basir, indahkan hidupku dengan kebaikan dan berikan akhir yang baik.", "Ya Hakam, penuhi hatiku dengan iman dan masa depanku dengan rahmat.", "Ya Adl, tuntun aku menuju keberhasilan di dunia dan akhirat.", "Ya Latif, berikan aku ketenangan, kebaikan, dan kebahagiaan abadi.", "Ya Khabir, berikan aku kebahagiaan dan barakah di dunia dan akhirat.", "Ya Halim, indahkan hidupku dengan kebaikan dan berikan akhir yang baik.", "Ya Azim, penuhi hatiku dengan iman dan masa depanku dengan rahmat.", "Ya Ghafur, tuntun aku menuju keberhasilan di dunia dan akhirat.", "Ya Shakur, berikan aku ketenangan, kebaikan, dan kebahagiaan abadi.", "Ya Aliyy, berikan aku kebahagiaan dan barakah di dunia dan akhirat.", "Ya Kabir, indahkan hidupku dengan kebaikan dan berikan akhir yang baik.", "Ya Hafiz, penuhi hatiku dengan iman dan masa depanku dengan rahmat.", "Ya Muqit, tuntun aku menuju keberhasilan di dunia dan akhirat.", "Ya Hasib, berikan aku ketenangan, kebaikan, dan kebahagiaan abadi.", "Ya Jalil, berikan aku kebahagiaan dan barakah di dunia dan akhirat.", "Ya Karim, indahkan hidupku dengan kebaikan dan berikan akhir yang baik.", "Ya Raqib, penuhi hatiku dengan iman dan masa depanku dengan rahmat.", "Ya Mujib, tuntun aku menuju keberhasilan di dunia dan akhirat.", "Ya Wasi, berikan aku ketenangan, kebaikan, dan kebahagiaan abadi.", "Ya Hakim, berikan aku kebahagiaan dan barakah di dunia dan akhirat.", "Ya Wadud, indahkan hidupku dengan kebaikan dan berikan akhir yang baik.", "Ya Majid, penuhi hatiku dengan iman dan masa depanku dengan rahmat.", "Ya Baith, tuntun aku menuju keberhasilan di dunia dan akhirat.", "Ya Shahid, berikan aku ketenangan, kebaikan, dan kebahagiaan abadi.", "Ya Haqq, berikan aku kebahagiaan dan barakah di dunia dan akhirat.", "Ya Wakil, indahkan hidupku dengan kebaikan dan berikan akhir yang baik.", "Ya Qawiyy, penuhi hatiku dengan iman dan masa depanku dengan rahmat.", "Ya Matin, tuntun aku menuju keberhasilan di dunia dan akhirat.", "Ya Waliyy, berikan aku ketenangan, kebaikan, dan kebahagiaan abadi.", "Ya Hamid, berikan aku kebahagiaan dan barakah di dunia dan akhirat.", "Ya Muhsi, indahkan hidupku dengan kebaikan dan berikan akhir yang baik.", "Ya Mubdi, penuhi hatiku dengan iman dan masa depanku dengan rahmat.", "Ya Muid, tuntun aku menuju keberhasilan di dunia dan akhirat.", "Ya Muhyi, berikan aku ketenangan, kebaikan, dan kebahagiaan abadi.", "Ya Mumit, berikan aku kebahagiaan dan barakah di dunia dan akhirat.", "Ya Hayy, indahkan hidupku dengan kebaikan dan berikan akhir yang baik.", "Ya Qayyum, penuhi hatiku dengan iman dan masa depanku dengan rahmat.", "Ya Wajid, tuntun aku menuju keberhasilan di dunia dan akhirat.", "Ya Majid, berikan aku ketenangan, kebaikan, dan kebahagiaan abadi.", "Ya Wahid, berikan aku kebahagiaan dan barakah di dunia dan akhirat.", "Ya Ahad, indahkan hidupku dengan kebaikan dan berikan akhir yang baik.", "Ya Samad, penuhi hatiku dengan iman dan masa depanku dengan rahmat.", "Ya Qadir, tuntun aku menuju keberhasilan di dunia dan akhirat.", "Ya Muqtadir, berikan aku ketenangan, kebaikan, dan kebahagiaan abadi.", "Ya Muqaddim, berikan aku kebahagiaan dan barakah di dunia dan akhirat.", "Ya Muakhkhir, indahkan hidupku dengan kebaikan dan berikan akhir yang baik.", "Ya Awwal, penuhi hatiku dengan iman dan masa depanku dengan rahmat.", "Ya Akhir, tuntun aku menuju keberhasilan di dunia dan akhirat.", "Ya Zahir, berikan aku ketenangan, kebaikan, dan kebahagiaan abadi.", "Ya Batin, berikan aku kebahagiaan dan barakah di dunia dan akhirat.", "Ya Wali, indahkan hidupku dengan kebaikan dan berikan akhir yang baik.", "Ya Mutaali, penuhi hatiku dengan iman dan masa depanku dengan rahmat.", "Ya Barr, tuntun aku menuju keberhasilan di dunia dan akhirat.", "Ya Tawwab, berikan aku ketenangan, kebaikan, dan kebahagiaan abadi.", "Ya Muntaqim, berikan aku kebahagiaan dan barakah di dunia dan akhirat.", "Ya Afuww, indahkan hidupku dengan kebaikan dan berikan akhir yang baik.", "Ya Rauf, penuhi hatiku dengan iman dan masa depanku dengan rahmat.", "Ya Malik-ul-Mulk, tuntun aku menuju keberhasilan di dunia dan akhirat.", "Ya Dhul-Jalali wal-Ikram, berikan aku ketenangan, kebaikan, dan kebahagiaan abadi.", "Ya Muqsit, berikan aku kebahagiaan dan barakah di dunia dan akhirat.", "Ya Jami, indahkan hidupku dengan kebaikan dan berikan akhir yang baik.", "Ya Ghani, penuhi hatiku dengan iman dan masa depanku dengan rahmat.", "Ya Mughni, tuntun aku menuju keberhasilan di dunia dan akhirat.", "Ya Mani, berikan aku ketenangan, kebaikan, dan kebahagiaan abadi.", "Ya Darr, berikan aku kebahagiaan dan barakah di dunia dan akhirat.", "Ya Nafi, indahkan hidupku dengan kebaikan dan berikan akhir yang baik.", "Ya Nur, penuhi hatiku dengan iman dan masa depanku dengan rahmat.", "Ya Hadi, tuntun aku menuju keberhasilan di dunia dan akhirat.", "Ya Badi, berikan aku ketenangan, kebaikan, dan kebahagiaan abadi.", "Ya Baqi, berikan aku kebahagiaan dan barakah di dunia dan akhirat.", "Ya Warith, indahkan hidupku dengan kebaikan dan berikan akhir yang baik.", "Ya Rashid, penuhi hatiku dengan iman dan masa depanku dengan rahmat.", "Ya Sabur, tuntun aku menuju keberhasilan di dunia dan akhirat."];
+let activePremiumSet = "";
+function isNamesProActive(){
+  try{ return localStorage.getItem("barakaway_pro") === "true"; }catch(e){ return false; }
+}
 let currentIndex = 0;
 let autoTimer = null;
 
@@ -860,7 +1086,7 @@ function renderGrid(filter=""){
   renderCurrent();
   renderGrid(searchInput.value);
 
-  // smooth scroll to top card
+  // Плавный скролл к верхнему блоку с именем
   document.querySelector(".player-card").scrollIntoView({
     behavior: "smooth",
     block: "start"
@@ -875,7 +1101,19 @@ function renderCurrent(){
   nameArabic.textContent = item.ar;
   nameTranslit.textContent = item.tr;
   nameMeaning.textContent = item[meanKey];
-  nameDesc.textContent = item[descKey];
+  if(isNamesProActive() && activePremiumSet === "rizq" && premiumRizqDescriptions[currentIndex]){
+    nameDesc.textContent = premiumRizqDescriptions[currentIndex];
+  } else if(isNamesProActive() && activePremiumSet === "health" && premiumHealthDescriptions[currentIndex]){
+    nameDesc.textContent = premiumHealthDescriptions[currentIndex];
+  } else if(isNamesProActive() && activePremiumSet === "forgive" && premiumForgiveDescriptions[currentIndex]){
+    nameDesc.textContent = premiumForgiveDescriptions[currentIndex];
+  } else if(isNamesProActive() && activePremiumSet === "debts" && premiumDebtDescriptions[currentIndex]){
+    nameDesc.textContent = premiumDebtDescriptions[currentIndex];
+  } else if(isNamesProActive() && activePremiumSet === "both" && premiumBothDescriptions[currentIndex]){
+    nameDesc.textContent = premiumBothDescriptions[currentIndex];
+  } else {
+    nameDesc.textContent = item[descKey];
+  }
   nameCounter.textContent = `Nama ${item.num} / 99`;
 }
 
@@ -911,7 +1149,7 @@ function startAuto(){
     }
     nextName();
   }, seconds * 1000);
-  playStatus.textContent = "Putar otomatis: " + seconds + "s";
+  playStatus.textContent = "Gulir otomatis: " + seconds + "s";
 }
 
 function stopAuto(){
@@ -919,7 +1157,7 @@ function stopAuto(){
     clearInterval(autoTimer);
     autoTimer = null;
   }
-  playStatus.textContent = "Gunakan tombol sebelumnya/berikutnya atau aktifkan putar otomatis 1–10 detik.";
+  playStatus.textContent = "Anda bisa membaca manual dengan tombol kembali/berikutnya, atau mengaktifkan gulir otomatis dari 1 sampai 10 detik.";
 }
 
 document.getElementById("playBtn").addEventListener("click", startAuto);
@@ -940,12 +1178,94 @@ speedRange.addEventListener("input", () => {
 
 searchInput.addEventListener("input", () => renderGrid(searchInput.value));
 
+
+function initPremiumDescriptionCards(){
+  const cards = document.querySelectorAll(".premium-card");
+  cards.forEach((card) => {
+    card.addEventListener("click", () => {
+      if(!isNamesProActive()) return;
+      cards.forEach((item) => item.classList.remove("active"));
+      card.classList.add("active");
+      activePremiumSet = card.dataset.premiumSet || "";
+
+      if(activePremiumSet === "default"){
+        activePremiumSet = "";
+      }
+
+      renderCurrent();
+    });
+  });
+
+  const activeCard = document.querySelector(".premium-card.active");
+  if(activeCard && isNamesProActive()){
+    activePremiumSet = activeCard.dataset.premiumSet || "";
+
+    if(activePremiumSet === "default"){
+      activePremiumSet = "";
+    }
+
+    renderCurrent();
+  }
+}
+
+initPremiumDescriptionCards();
+
 renderCurrent();
 renderGrid();
 </script>
 <script src="/bottom-nav.js"></script>
+
+<script>
+(function(){
+  "use strict";
+  const PRO_KEY = "barakaway_pro";
+
+  function isProActive(){
+    try{
+      return localStorage.getItem(PRO_KEY) === "true";
+    }catch(e){
+      return false;
+    }
+  }
+
+  function syncNamesProState(){
+    const active = isProActive();
+    document.querySelectorAll(".premium-categories-wrap").forEach(function(wrap){
+      wrap.setAttribute("data-pro-state", active ? "unlocked" : "locked");
+    });
+
+    document.querySelectorAll("[data-names-pro-status]").forEach(function(node){
+      node.textContent = active ? "✅ PRO aktif" : "PRO tidak aktif";
+    });
+
+    document.querySelectorAll(".premium-card").forEach(function(card){
+      card.setAttribute("aria-disabled", active ? "false" : "true");
+      card.tabIndex = active ? 0 : -1;
+    });
+
+    try{
+      if(typeof renderCurrent === "function"){
+        renderCurrent();
+      }
+    }catch(e){}
+  }
+
+  if(document.readyState === "loading"){
+    document.addEventListener("DOMContentLoaded", syncNamesProState);
+  }else{
+    syncNamesProState();
+  }
+
+  window.addEventListener("storage", syncNamesProState);
+})();
+</script>
+
+
+
+
 </body>
 </html>
+
 
 
 
