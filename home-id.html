@@ -4311,25 +4311,6 @@ html[dir="rtl"] #allahNameCounterCard:not(.bw-task-done) .bw-task-compact-meta[d
 }
 </style>
 
-<script id="bw-id-clear-old-broken-task-state-v5">
-(function(){
-  try{
-    if(localStorage.getItem('bw_id_task_v5_state_cleaned') === '1') return;
-    Object.keys(localStorage).forEach(function(k){
-      if(
-        k.indexOf('barakaway_today_id_v3_') === 0 ||
-        k.indexOf('barakaway_today_id_v5_') === 0 ||
-        k.indexOf('bw_daily_done_v2_id_') === 0 ||
-        k.indexOf('bw_final_done_v2_id_') === 0
-      ){
-        localStorage.removeItem(k);
-      }
-    });
-    localStorage.setItem('bw_id_task_v5_state_cleaned','1');
-  }catch(e){}
-})();
-</script>
-
 </head>
 <body>
 
@@ -4463,16 +4444,16 @@ Jaga amalmu di bulan Dzulqa’dah, kurangi hal yang tidak perlu, dan perbanyak z
         <div class="today-action-arrow today-task-status" id="allahNameCounterValue">0/100</div>
       </div>
       <div>
-        <div class="today-action-title" id="allahNameHari ini">Nama Allah</div>
+        <div class="today-action-title" id="allahNameToday">Nama Allah</div>
         <div class="today-action-text" id="allahNameMeaning">Hari ini hafalkan makna nama ini.</div>
         <div class="today-counter-track"><div class="today-counter-fill" id="allahNameCounterFill"></div></div>
       </div>
     </div>
 
-    <div class="today-action today-daily-task today-goal-action" id="dailyTargetCard" role="button" tabindex="0" data-task-key="goal" aria-label="Target harian">
+    <div class="today-action today-daily-task today-goal-action" id="dailyGoalCard" role="button" tabindex="0" data-task-key="goal" aria-label="Target harian">
       <div class="today-action-top">
         <div class="today-action-icon">🎯</div>
-        <div class="today-action-arrow today-task-status" id="dailyTargetStatus">•</div>
+        <div class="today-action-arrow today-task-status" id="dailyGoalStatus">•</div>
       </div>
       <div>
         <div class="today-action-title">Target harian</div>
@@ -5219,8 +5200,8 @@ const articleDay = getDaysSince(articleStartDate);
   renderCounter();
 
   const practice = document.getElementById('dailyPracticeText');
-  const goalCard = document.getElementById('dailyTargetCard');
-  const goalStatus = document.getElementById('dailyTargetStatus');
+  const goalCard = document.getElementById('dailyGoalCard');
+  const goalStatus = document.getElementById('dailyGoalStatus');
   const goalKey = 'barakaway_daily_goal_done_' + todayKey;
   let goalDone = localStorage.getItem(goalKey) === '1';
 
@@ -5356,8 +5337,8 @@ const articleDay = getDaysSince(articleStartDate);
 
 <script>
 (function(){
-  const goalCard = document.getElementById('dailyTargetCard');
-  const goalStatus = document.getElementById('dailyTargetStatus');
+  const goalCard = document.getElementById('dailyGoalCard');
+  const goalStatus = document.getElementById('dailyGoalStatus');
   if(!goalCard || !goalStatus) return;
 
   function localDateKey(date){
@@ -5472,8 +5453,8 @@ const articleDay = getDaysSince(articleStartDate);
   const nameStatus = document.getElementById("allahNameCounterValue");
   const nameFill = document.getElementById("allahNameCounterFill");
 
-  const goalCard = document.getElementById("dailyTargetCard");
-  const goalStatus = document.getElementById("dailyTargetStatus");
+  const goalCard = document.getElementById("dailyGoalCard");
+  const goalStatus = document.getElementById("dailyGoalStatus");
 
   function renderAll(){
     applyTugasState(articleCard, articleStatus, "article", "→");
@@ -8712,7 +8693,7 @@ const TASK_PREFIX = "barakaway_today_id_";
         <p class="bw-task-modal-text"></p>
         ${extra}
         <div class="bw-task-modal-task"><strong>Tugas:</strong> <span></span></div>
-        <button type="button" class="bw-task-complete-btn">Tugas selesai</button>
+        <button type="button" class="bw-task-complete-btn">Selesaikan tugas</button>
         <button type="button" class="bw-task-close-btn">Tutup</button>
       </div>`;
 
@@ -8781,6 +8762,10 @@ const TASK_PREFIX = "barakaway_today_id_";
         event.stopPropagation();
         if(isDone(config.key)) return;
         if(config.key === 'name'){
+          const n = Math.min(100, getNameCount() + 1);
+          setNameCount(n);
+          if(n >= 100){ completeTask('name'); }
+          else { updateNameVisuals(); applyAllStates(); }
           return;
         }
         openModal(config);
@@ -8790,6 +8775,10 @@ const TASK_PREFIX = "barakaway_today_id_";
           event.preventDefault();
           if(isDone(config.key)) return;
           if(config.key === 'name'){
+            const n = Math.min(100, getNameCount() + 1);
+            setNameCount(n);
+            if(n >= 100){ completeTask('name'); }
+            else { updateNameVisuals(); applyAllStates(); }
             return;
           }
           openModal(config);
@@ -8921,14 +8910,6 @@ const TASK_PREFIX = "barakaway_today_id_";
     if(card.dataset.bwFinalCounterBound !== '1'){
       card.dataset.bwFinalCounterBound = '1';
 
-      card.addEventListener('pointerup', function(e){
-        increment(e);
-      }, true);
-
-      card.addEventListener('touchend', function(e){
-        lastTouchAt = Date.now();
-        increment(e);
-      }, {capture:true, passive:false});
 
       card.addEventListener('click', function(e){
         if(Date.now() - lastTouchAt < 450) return;
@@ -9596,6 +9577,7 @@ html.light-mode .bw-ayah-force-close{background:#fff;}
 </script>
 
 
+
 <script id="bw-id-reset-today-for-testing">
 (function(){
   if(!/[?&]resetToday=1(?:&|$)/.test(location.search)) return;
@@ -9608,8 +9590,10 @@ html.light-mode .bw-ayah-force-close{background:#fff;}
     if(k.indexOf(today) !== -1 && (
       k.indexOf('barakaway_today_id_') === 0 ||
       k.indexOf('barakaway_name_counter_id_') === 0 ||
-      k.indexOf('bw_daily_done') === 0 ||
-      k.indexOf('bw_final_done') === 0
+      k.indexOf('barakaway_name_counter_') === 0 ||
+      k.indexOf('barakaway_daily_goal_done_') === 0 ||
+      k.indexOf('bw_daily_done_v2_id_') === 0 ||
+      k.indexOf('bw_final_done_v2_id_') === 0
     )){
       localStorage.removeItem(k);
     }
@@ -9618,22 +9602,64 @@ html.light-mode .bw-ayah-force-close{background:#fff;}
 </script>
 
 
-<script id="bw-id-goal-open-guard-v5">
+<script id="bw-id-reset-today-once-for-card-test">
 (function(){
   'use strict';
-  function todayKey(){
+  var LANG = 'id';
+  function pad(n){ return String(n).padStart(2,'0'); }
+  function todayKey(offsetHour){
     var d = new Date();
-    return d.getFullYear() + '-' + String(d.getMonth()+1).padStart(2,'0') + '-' + String(d.getDate()).padStart(2,'0');
+    if(offsetHour && d.getHours() < offsetHour){ d.setDate(d.getDate() - 1); }
+    return d.getFullYear() + '-' + pad(d.getMonth()+1) + '-' + pad(d.getDate());
   }
-  function isGoalDone(){
-    try{return localStorage.getItem('barakaway_today_id_v5_' + todayKey() + '_goal') === '1';}catch(e){return false;}
+  var dayKeys = [todayKey(0), todayKey(1)];
+  var marker = 'bw_id_card_test_reset_once_' + dayKeys[0] + '_v1';
+  try{
+    if(localStorage.getItem(marker) === '1') return;
+    var prefixes = [
+      'barakaway_today_' + LANG + '_',
+      'bw_daily_done_v2_' + LANG + '_',
+      'bw_final_done_v2_' + LANG + '_',
+      'barakaway_name_counter_' + LANG + '_',
+      'bw_allah_name_counter_persist_' + LANG + '_',
+      'bw_ayah_card_done_v1_' + LANG + '_',
+      'bw_micro_answer_' + LANG + '_',
+      'barakaway_daily_goal_done_'
+    ];
+    Object.keys(localStorage).forEach(function(k){
+      var hasToday = dayKeys.some(function(d){ return k.indexOf(d) !== -1; });
+      if(!hasToday) return;
+      if(prefixes.some(function(p){ return k.indexOf(p) === 0; }) || k.indexOf('barakaway_name_counter_') === 0){
+        localStorage.removeItem(k);
+      }
+    });
+    localStorage.setItem(marker, '1');
+  }catch(e){}
+
+  function clearVisualState(){
+    var ids = ['dailyArticleLink','currentAdhkarLink','allahNameCounterCard','dailyGoalCard','dailyMicroKnowledgeCard'];
+    ids.forEach(function(id){
+      var card = document.getElementById(id);
+      if(!card) return;
+      card.classList.remove('bw-final-done','bw-task-done','task-done','goal-done');
+      card.classList.add('bw-needs-pulse');
+      card.removeAttribute('aria-disabled');
+      card.style.removeProperty('--task-red-opacity');
+      card.style.removeProperty('--goal-red-opacity');
+      var status = card.querySelector('.today-task-status');
+      if(status) status.textContent = '→';
+    });
+    var nameMeta = document.querySelector('#allahNameCounterCard .bw-task-compact-meta[data-task-meta="name"]');
+    if(nameMeta) nameMeta.textContent = '0/100';
+    var nameValue = document.getElementById('allahNameCounterValue');
+    if(nameValue) nameValue.textContent = '0/100';
+    var fill = document.getElementById('allahNameCounterFill');
+    if(fill) fill.style.width = '0%';
   }
-  document.addEventListener('click', function(e){
-    var card = e.target && e.target.closest ? e.target.closest('#dailyGoalCard') : null;
-    if(!card || isGoalDone()) return;
-    card.setAttribute('aria-disabled','false');
-    card.classList.remove('bw-final-done','bw-task-done','task-done','goal-done');
-  }, true);
+  if(document.readyState === 'loading') document.addEventListener('DOMContentLoaded', clearVisualState, {once:true});
+  else clearVisualState();
+  setTimeout(clearVisualState, 80);
+  setTimeout(clearVisualState, 300);
 })();
 </script>
 
