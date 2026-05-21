@@ -4310,6 +4310,26 @@ html[dir="rtl"] #allahNameCounterCard:not(.bw-task-done) .bw-task-compact-meta[d
   transform:scale(.985) !important;
 }
 </style>
+
+<script id="bw-id-clear-old-broken-task-state-v5">
+(function(){
+  try{
+    if(localStorage.getItem('bw_id_task_v5_state_cleaned') === '1') return;
+    Object.keys(localStorage).forEach(function(k){
+      if(
+        k.indexOf('barakaway_today_id_v3_') === 0 ||
+        k.indexOf('barakaway_today_id_v5_') === 0 ||
+        k.indexOf('bw_daily_done_v2_id_') === 0 ||
+        k.indexOf('bw_final_done_v2_id_') === 0
+      ){
+        localStorage.removeItem(k);
+      }
+    });
+    localStorage.setItem('bw_id_task_v5_state_cleaned','1');
+  }catch(e){}
+})();
+</script>
+
 </head>
 <body>
 
@@ -5186,6 +5206,16 @@ const articleDay = getDaysSince(articleStartDate);
     localStorage.setItem(storageKey, String(count));
     renderCounter();
   }
+
+  if(card){
+    card.addEventListener('click', incrementCounter);
+    card.addEventListener('keydown', function(e){
+      if(e.key === 'Enter' || e.key === ' '){
+        e.preventDefault();
+        incrementCounter();
+      }
+    });
+  }
   renderCounter();
 
   const practice = document.getElementById('dailyPracticeText');
@@ -5311,6 +5341,10 @@ const articleDay = getDaysSince(articleStartDate);
     count = count >= 100 ? 0 : count + 1;
     localStorage.setItem(storageKey, String(count));
     renderCounter();
+  }
+  if(card){
+    card.addEventListener('click', incrementCounter);
+    card.addEventListener('keydown', function(e){ if(e.key === 'Enter' || e.key === ' '){ e.preventDefault(); incrementCounter(); } });
   }
   renderCounter();
   const practice = document.getElementById('dailyPracticeText');
@@ -8350,6 +8384,17 @@ const TASK_PREFIX = "barakaway_today_id_";
     if(!card || card.dataset.nameCounterLocked === "1") return;
 
     card.dataset.nameCounterLocked = "1";
+
+    card.addEventListener("click", function(event){
+      completeOneNameClick(event);
+    }, true);
+
+    card.addEventListener("keydown", function(event){
+      if(event.key === "Enter" || event.key === " "){
+        completeOneNameClick(event);
+      }
+    }, true);
+
     renderNameCounter();
   }
 
@@ -8382,7 +8427,7 @@ const TASK_PREFIX = "barakaway_today_id_";
       var text = normalize(label ? label.textContent : item.textContent);
       var href = normalize(item.getAttribute('href'));
 
-      if(text === 'quran' || text === 'koran' || text === 'al-qur'an' || text === 'al quran' || text === 'коран' || href.indexOf('quran-id.html') !== -1){
+      if(text === 'quran' || text === 'koran' || text === 'al-qur'an' || text === 'al quran' || text === 'quran' || href.indexOf('quran-id.html') !== -1){
         item.setAttribute('href', '/names-id.html');
         item.setAttribute('data-nav', 'names');
         item.setAttribute('aria-label', '99 Nama Allah');
@@ -8391,7 +8436,7 @@ const TASK_PREFIX = "barakaway_today_id_";
         item.classList.remove('active');
       }
 
-      if(text === 'holidays' || text === 'islamic holidays' || text === 'hari besar islam' || text === 'hari raya' || text === 'праздники' || href.indexOf('holidays-id.html') !== -1){
+      if(text === 'holidays' || text === 'islamic holidays' || text === 'hari besar islam' || text === 'hari raya' || text === 'holidays' || href.indexOf('holidays-id.html') !== -1){
         item.setAttribute('href', '/private-chat-id.html');
         item.setAttribute('data-nav', 'chat');
         item.setAttribute('aria-label', 'Chat pribadi');
@@ -8463,7 +8508,7 @@ const TASK_PREFIX = "barakaway_today_id_";
 <script id="bw-id-task-compact-modal-final">
 (function(){
   'use strict';
-  const TASK_PREFIX = 'barakaway_today_id_v3_';
+  const TASK_PREFIX = 'barakaway_today_id_v5_';
   const NAME_COUNT_PREFIX = 'barakaway_name_counter_id_v3_';
   const HINT = "Ketuk untuk menyelesaikan tugas hari ini";
 
@@ -8509,14 +8554,14 @@ const TASK_PREFIX = "barakaway_today_id_";
 
   function articleTaskOnly(){
     const raw = text('.today-ayah-task', document.getElementById('dailyArticleLink')) || '';
-    return raw.replace(/^Задание:\s*/i,'').replace(/^Task:\s*/i,'') || "Selesaikan tugas ayat hari ini.";
+    return raw.replace(/^Tugas:\s*/i,'').replace(/^Task:\s*/i,'') || "Selesaikan tugas ayat hari ini.";
   }
 
 
   function getMicroMeaning(q, options){
     const cfg = window.BW_TASK_FIX_ID || {};
     const joined = ((q || '') + ' ' + (options || []).join(' ')).toLowerCase();
-    if(joined.indexOf('шахад') !== -1 || joined.indexOf('shahad') !== -1 || joined.indexOf('şehad') !== -1 || joined.indexOf('syahad') !== -1 || joined.indexOf('الشهادة') !== -1 || joined.indexOf('شہادت') !== -1 || joined.indexOf('শাহাদা') !== -1 || joined.indexOf('शहादा') !== -1){
+    if(joined.indexOf('syahad') !== -1 || joined.indexOf('shahad') !== -1 || joined.indexOf('şehad') !== -1 || joined.indexOf('syahad') !== -1 || joined.indexOf('الشهادة') !== -1 || joined.indexOf('شہادت') !== -1 || joined.indexOf('শাহাদা') !== -1 || joined.indexOf('शहादा') !== -1){
       return cfg.shahadaMeaning || '';
     }
     return '';
@@ -8636,8 +8681,8 @@ const TASK_PREFIX = "barakaway_today_id_";
     const list = options || [];
     for(let i=0;i<list.length;i++){
       const v = (list[i] || '').toLowerCase();
-      if(v.indexOf('шахад') !== -1 || v.indexOf('shahad') !== -1 || v.indexOf('şehad') !== -1 || v.indexOf('syahad') !== -1 || v.indexOf('الشهادة') !== -1 || v.indexOf('شہادت') !== -1 || v.indexOf('শাহাদা') !== -1 || v.indexOf('शहादा') !== -1) return i;
-      if(v.indexOf('омов') !== -1 || v.indexOf('wudu') !== -1 || v.indexOf('abdest') !== -1 || v.indexOf('وض') !== -1 || v.indexOf('وضو') !== -1 || v.indexOf('ওজু') !== -1 || v.indexOf('वुज़ू') !== -1) return i;
+      if(v.indexOf('syahad') !== -1 || v.indexOf('shahad') !== -1 || v.indexOf('şehad') !== -1 || v.indexOf('syahad') !== -1 || v.indexOf('الشهادة') !== -1 || v.indexOf('شہادت') !== -1 || v.indexOf('শাহাদা') !== -1 || v.indexOf('शहादा') !== -1) return i;
+      if(v.indexOf('wudu') !== -1 || v.indexOf('wudu') !== -1 || v.indexOf('abdest') !== -1 || v.indexOf('وض') !== -1 || v.indexOf('وضو') !== -1 || v.indexOf('ওজু') !== -1 || v.indexOf('वुज़ू') !== -1) return i;
     }
     return 0;
   }
@@ -8654,7 +8699,7 @@ const TASK_PREFIX = "barakaway_today_id_";
     let extra = '';
     if(config.key === 'name'){
       const n = getNameCount();
-      extra = '<div class="bw-name-counter-box"><div class="bw-name-counter-display" id="bwNameModalCount">'+ n +'/100</div><button type="button" class="bw-name-counter-btn" id="bwNameModalInc">Повторить +1</button></div>';
+      extra = '<div class="bw-name-counter-box"><div class="bw-name-counter-display" id="bwNameModalCount">'+ n +'/100</div><button type="button" class="bw-name-counter-btn" id="bwNameModalInc">Ulangi +1</button></div>';
     }
     if(config.key === 'micro'){
       extra = '<div class="bw-micro-options-grid">' + data.options.map(function(option){ return '<button type="button" class="bw-micro-option-btn">'+ option.replace(/</g,'&lt;').replace(/>/g,'&gt;') +'</button>'; }).join('') + '</div><div class="bw-micro-answer-note" id="bwMicroAnswerNote"></div>';
@@ -8736,10 +8781,6 @@ const TASK_PREFIX = "barakaway_today_id_";
         event.stopPropagation();
         if(isDone(config.key)) return;
         if(config.key === 'name'){
-          const n = Math.min(100, getNameCount() + 1);
-          setNameCount(n);
-          if(n >= 100){ completeTask('name'); }
-          else { updateNameVisuals(); applyAllStates(); }
           return;
         }
         openModal(config);
@@ -8749,10 +8790,6 @@ const TASK_PREFIX = "barakaway_today_id_";
           event.preventDefault();
           if(isDone(config.key)) return;
           if(config.key === 'name'){
-            const n = Math.min(100, getNameCount() + 1);
-            setNameCount(n);
-            if(n >= 100){ completeTask('name'); }
-            else { updateNameVisuals(); applyAllStates(); }
             return;
           }
           openModal(config);
@@ -8883,6 +8920,16 @@ const TASK_PREFIX = "barakaway_today_id_";
 
     if(card.dataset.bwFinalCounterBound !== '1'){
       card.dataset.bwFinalCounterBound = '1';
+
+      card.addEventListener('pointerup', function(e){
+        increment(e);
+      }, true);
+
+      card.addEventListener('touchend', function(e){
+        lastTouchAt = Date.now();
+        increment(e);
+      }, {capture:true, passive:false});
+
       card.addEventListener('click', function(e){
         if(Date.now() - lastTouchAt < 450) return;
         increment(e);
@@ -9416,7 +9463,7 @@ html.light-mode .bw-ayah-force-close{background:#fff;}
   }
   function clean(v){ return String(v || '').replace(/\s+/g,' ').trim(); }
   function text(sel, root){ var el = (root || document).querySelector(sel); return el ? clean(el.textContent) : ''; }
-  function stripTask(v){ return clean(v).replace(/^(Задание|Task|Vazifa|Görev|Tugas|Тапсырма|کام|المهمة|কাজ|कार्य)\s*[:：]\s*/i,''); }
+  function stripTask(v){ return clean(v).replace(/^(Tugas|Task|Vazifa|Görev|Tugas|Tugas|کام|المهمة|কাজ|कार्य)\s*[:：]\s*/i,''); }
   function htmlEscape(v){
     return String(v || '').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;').replace(/'/g,'&#039;');
   }
@@ -9544,6 +9591,48 @@ html.light-mode .bw-ayah-force-close{background:#fff;}
     var btn = event.target && event.target.closest ? event.target.closest('.bw-micro-option-btn') : null;
     if(!btn) return;
     setTimeout(function(){ paintMicroAnswer(btn); }, 80);
+  }, true);
+})();
+</script>
+
+
+<script id="bw-id-reset-today-for-testing">
+(function(){
+  if(!/[?&]resetToday=1(?:&|$)/.test(location.search)) return;
+  var d = new Date();
+  var y = d.getFullYear();
+  var m = String(d.getMonth()+1).padStart(2,'0');
+  var day = String(d.getDate()).padStart(2,'0');
+  var today = y + '-' + m + '-' + day;
+  Object.keys(localStorage).forEach(function(k){
+    if(k.indexOf(today) !== -1 && (
+      k.indexOf('barakaway_today_id_') === 0 ||
+      k.indexOf('barakaway_name_counter_id_') === 0 ||
+      k.indexOf('bw_daily_done') === 0 ||
+      k.indexOf('bw_final_done') === 0
+    )){
+      localStorage.removeItem(k);
+    }
+  });
+})();
+</script>
+
+
+<script id="bw-id-goal-open-guard-v5">
+(function(){
+  'use strict';
+  function todayKey(){
+    var d = new Date();
+    return d.getFullYear() + '-' + String(d.getMonth()+1).padStart(2,'0') + '-' + String(d.getDate()).padStart(2,'0');
+  }
+  function isGoalDone(){
+    try{return localStorage.getItem('barakaway_today_id_v5_' + todayKey() + '_goal') === '1';}catch(e){return false;}
+  }
+  document.addEventListener('click', function(e){
+    var card = e.target && e.target.closest ? e.target.closest('#dailyGoalCard') : null;
+    if(!card || isGoalDone()) return;
+    card.setAttribute('aria-disabled','false');
+    card.classList.remove('bw-final-done','bw-task-done','task-done','goal-done');
   }, true);
 })();
 </script>
