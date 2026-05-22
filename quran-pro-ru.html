@@ -736,6 +736,74 @@ html.light-mode .ayah-ref{
 }
 
 </style>
+
+<style id="quran-pro-final-favorite-loading-fix">
+/* Final fixes: star fill only, favorites bottom state, continue loading border */
+.icon-btn[data-action="save"].saved,
+.icon-btn[data-action="save"].active{
+  background:rgba(215,181,109,.08) !important;
+  border-color:rgba(45,122,70,.28) !important;
+  color:#4caf6a !important;
+  box-shadow:0 0 0 1px rgba(76,175,106,.16) !important;
+}
+.icon-btn[data-action="save"].saved svg,
+.icon-btn[data-action="save"].active svg{
+  fill:currentColor !important;
+  stroke:currentColor !important;
+}
+.icon-btn[data-action="bookmark"].saved{
+  color:#ffffff !important;
+  background:linear-gradient(135deg,rgba(45,122,70,.88),rgba(76,175,106,.34)) !important;
+  border-color:rgba(45,122,70,.28) !important;
+}
+.icon-btn[data-action="bookmark"].saved svg{
+  fill:currentColor !important;
+}
+.continue-reading-btn{
+  position:relative;
+  overflow:hidden;
+  isolation:isolate;
+}
+.continue-reading-btn > svg,
+.continue-reading-btn > span{
+  position:relative;
+  z-index:2;
+}
+.continue-reading-btn.is-loading::before{
+  content:"";
+  position:absolute;
+  inset:-2px;
+  border-radius:inherit;
+  background:conic-gradient(from 0deg, transparent 0deg, rgba(240,216,145,.10) 70deg, rgba(76,175,106,.95) 110deg, rgba(240,216,145,.85) 145deg, transparent 220deg, transparent 360deg);
+  animation:quranContinueBorderRun .82s linear infinite;
+  z-index:0;
+}
+.continue-reading-btn.is-loading::after{
+  content:"";
+  position:absolute;
+  inset:2px;
+  border-radius:inherit;
+  background:rgba(14,20,27,.96);
+  z-index:1;
+}
+@keyframes quranContinueBorderRun{
+  to{transform:rotate(360deg);}
+}
+body.quran-has-favorites .bottom-nav a[href*="favorite"],
+body.quran-has-favorites .bottom-nav a[href*="izbran"],
+body.quran-has-favorites .bottom-nav a[href*="favorites"],
+body.quran-has-favorites nav a[href*="favorite"],
+body.quran-has-favorites nav a[href*="favorites"]{
+  color:#f0d891 !important;
+}
+body.quran-has-favorites .bottom-nav a[href*="favorite"] svg,
+body.quran-has-favorites .bottom-nav a[href*="favorites"] svg,
+body.quran-has-favorites nav a[href*="favorite"] svg,
+body.quran-has-favorites nav a[href*="favorites"] svg{
+  fill:currentColor !important;
+  stroke:currentColor !important;
+}
+</style>
 </head>
 <body>
 <div class="page">
@@ -828,6 +896,7 @@ html.light-mode .ayah-ref{
   const BOOKMARKS_KEY="barakaway_quran_pro_ru_bookmarks";
   const SETTINGS_KEY="barakaway_quran_pro_ru_settings";
   const FAVORITES_KEY="barakaway_favorites_ru";
+  const FAVORITES_MIRROR_KEYS=["barakaway_favorites","barakaway_favorites_ru","barakaway_quran_favorites_ru","barakaway_saved_ayahs_ru","barakaway_favorites_items"];
 
   const SURAH_INDEX=[{"number":1,"arabic":"الفاتحة","name":"Открывающая","ayahs":"7 аятов","meta":"Ниспослание: Мекканская","href":"Quran-ru/1 - al-fatihah-ru.html","search":"1 الفاتحة al-fatihah открывающая"},{"number":2,"arabic":"البقرة","name":"Корова","ayahs":"286 аятов","meta":"Ниспослание: Мединская","href":"Quran-ru/2 - al-baqarah-ru.html","search":"2 البقرة al-baqarah корова"},{"number":3,"arabic":"آل عمران","name":"Семейство Имрана","ayahs":"200 аятов","meta":"Ниспослание: Мединская","href":"Quran-ru/3 - ali-imran-ru.html","search":"3 آل عمران ali-imran семейство имрана"},{"number":4,"arabic":"النساء","name":"Женщины","ayahs":"176 аятов","meta":"Ниспослание: Мединская","href":"Quran-ru/4 - an-nisa-ru.html","search":"4 النساء an-nisa женщины"},{"number":5,"arabic":"المائدة","name":"Трапеза","ayahs":"120 аятов","meta":"Ниспослание: Мединская","href":"Quran-ru/5 - al-maidah-ru.html","search":"5 المائدة al-maidah трапеза"},{"number":6,"arabic":"الأنعام","name":"Скот","ayahs":"165 аятов","meta":"Ниспослание: Мекканская","href":"Quran-ru/6 - al-anam-ru.html","search":"6 الأنعام al-anam скот"},{"number":7,"arabic":"الأعراف","name":"Преграды","ayahs":"206 аятов","meta":"Ниспослание: Мекканская","href":"Quran-ru/7 - al-araf-ru.html","search":"7 الأعراف al-araf преграды"},{"number":8,"arabic":"الأنفال","name":"Трофеи","ayahs":"75 аятов","meta":"Ниспослание: Мединская","href":"Quran-ru/8 - al-anfal-ru.html","search":"8 الأنفال al-anfal трофеи"},{"number":9,"arabic":"التوبة","name":"Покаяние","ayahs":"129 аятов","meta":"Ниспослание: Мединская","href":"Quran-ru/9 - at-tawbah-ru.html","search":"9 التوبة at-tawbah покаяние"},{"number":10,"arabic":"يونس","name":"Юнус","ayahs":"109 аятов","meta":"Ниспослание: Мекканская","href":"Quran-ru/10 - yunus-ru.html","search":"10 يونس yunus юнус"},{"number":11,"arabic":"هود","name":"Худ","ayahs":"123 аятов","meta":"Ниспослание: Мекканская","href":"Quran-ru/11 - hud-ru.html","search":"11 هود hud худ"},{"number":12,"arabic":"يوسف","name":"Юсуф","ayahs":"111 аятов","meta":"Ниспослание: Мекканская","href":"Quran-ru/12 - yusuf-ru.html","search":"12 يوسف yusuf юсуф"},{"number":13,"arabic":"الرعد","name":"Гром","ayahs":"43 аятов","meta":"Ниспослание: Мединская","href":"Quran-ru/13 - ar-rad-ru.html","search":"13 الرعد ar-rad гром"},{"number":14,"arabic":"ابراهيم","name":"Ибрахим","ayahs":"52 аятов","meta":"Ниспослание: Мекканская","href":"Quran-ru/14 - ibrahim-ru.html","search":"14 ابراهيم ibrahim ибрахим"},{"number":15,"arabic":"الحجر","name":"Аль-Хиджр","ayahs":"99 аятов","meta":"Ниспослание: Мекканская","href":"Quran-ru/15 - al-hijr-ru.html","search":"15 الحجر al-hijr аль-хиджр"},{"number":16,"arabic":"النحل","name":"Пчёлы","ayahs":"128 аятов","meta":"Ниспослание: Мекканская","href":"Quran-ru/16 - an-nahl-ru.html","search":"16 النحل an-nahl пчёлы"},{"number":17,"arabic":"الإسراء","name":"Ночной перенос","ayahs":"111 аятов","meta":"Ниспослание: Мекканская","href":"Quran-ru/17 - al-isra-ru.html","search":"17 الإسراء al-isra ночной перенос"},{"number":18,"arabic":"الكهف","name":"Пещера","ayahs":"110 аятов","meta":"Ниспослание: Мекканская","href":"Quran-ru/18 - al-kahf-ru.html","search":"18 الكهف al-kahf пещера"},{"number":19,"arabic":"مريم","name":"Марьям","ayahs":"98 аятов","meta":"Ниспослание: Мекканская","href":"Quran-ru/19 - maryam-ru.html","search":"19 مريم maryam марьям"},{"number":20,"arabic":"طه","name":"Та Ха","ayahs":"135 аятов","meta":"Ниспослание: Мекканская","href":"Quran-ru/20 - ta-ha-ru.html","search":"20 طه ta-ha та ха"},{"number":21,"arabic":"الأنبياء","name":"Пророки","ayahs":"112 аятов","meta":"Ниспослание: Мекканская","href":"Quran-ru/21 - al-anbiya-ru.html","search":"21 الأنبياء al-anbiya пророки"},{"number":22,"arabic":"الحج","name":"Хадж","ayahs":"78 аятов","meta":"Ниспослание: Мединская","href":"Quran-ru/22 - al-hajj-ru.html","search":"22 الحج al-hajj хадж"},{"number":23,"arabic":"المؤمنون","name":"Верующие","ayahs":"118 аятов","meta":"Ниспослание: Мекканская","href":"Quran-ru/23 - al-muminun-ru.html","search":"23 المؤمنون al-muminun верующие"},{"number":24,"arabic":"النور","name":"Свет","ayahs":"64 аятов","meta":"Ниспослание: Мединская","href":"Quran-ru/24 - an-nur-ru.html","search":"24 النور an-nur свет"},{"number":25,"arabic":"الفرقان","name":"Различение","ayahs":"77 аятов","meta":"Ниспослание: Мекканская","href":"Quran-ru/25 - al-furqan-ru.html","search":"25 الفرقان al-furqan различение"},{"number":26,"arabic":"الشعراء","name":"Поэты","ayahs":"227 аятов","meta":"Ниспослание: Мекканская","href":"Quran-ru/26 - ash-shuara-ru.html","search":"26 الشعراء ash-shuara поэты"},{"number":27,"arabic":"النمل","name":"Муравьи","ayahs":"93 аятов","meta":"Ниспослание: Мекканская","href":"Quran-ru/27 - an-naml-ru.html","search":"27 النمل an-naml муравьи"},{"number":28,"arabic":"القصص","name":"Рассказ","ayahs":"88 аятов","meta":"Ниспослание: Мекканская","href":"Quran-ru/28 - al-qasas-ru.html","search":"28 القصص al-qasas рассказ"},{"number":29,"arabic":"العنكبوت","name":"Паук","ayahs":"69 аятов","meta":"Ниспослание: Мекканская","href":"Quran-ru/29 - al-ankabut-ru.html","search":"29 العنكبوت al-ankabut паук"},{"number":30,"arabic":"الروم","name":"Римляне","ayahs":"60 аятов","meta":"Ниспослание: Мекканская","href":"Quran-ru/30 - ar-rum-ru.html","search":"30 الروم ar-rum римляне"},{"number":31,"arabic":"لقمان","name":"Лукман","ayahs":"34 аятов","meta":"Ниспослание: Мекканская","href":"Quran-ru/31 - luqman-ru.html","search":"31 لقمان luqman лукман"},{"number":32,"arabic":"السجدة","name":"Поклон","ayahs":"30 аятов","meta":"Ниспослание: Мекканская","href":"Quran-ru/32 - as-sajdah-ru.html","search":"32 السجدة as-sajdah поклон"},{"number":33,"arabic":"الأحزاب","name":"Союзники","ayahs":"73 аятов","meta":"Ниспослание: Мединская","href":"Quran-ru/33 - al-ahzab-ru.html","search":"33 الأحزاب al-ahzab союзники"},{"number":34,"arabic":"سبإ","name":"Саба","ayahs":"54 аятов","meta":"Ниспослание: Мекканская","href":"Quran-ru/34 - saba-ru.html","search":"34 سبإ saba саба"},{"number":35,"arabic":"فاطر","name":"Творец","ayahs":"45 аятов","meta":"Ниспослание: Мекканская","href":"Quran-ru/35 - fatir-ru.html","search":"35 فاطر fatir творец"},{"number":36,"arabic":"يس","name":"Йа Син","ayahs":"83 аятов","meta":"Ниспослание: Мекканская","href":"Quran-ru/36 - ya-sin-ru.html","search":"36 يس ya-sin йа син"},{"number":37,"arabic":"الصافات","name":"Выстроившиеся в ряды","ayahs":"182 аятов","meta":"Ниспослание: Мекканская","href":"Quran-ru/37 - as-saffat-ru.html","search":"37 الصافات as-saffat выстроившиеся в ряды"},{"number":38,"arabic":"ص","name":"Сад","ayahs":"88 аятов","meta":"Ниспослание: Мекканская","href":"Quran-ru/38 - sad-ru.html","search":"38 ص sad сад"},{"number":39,"arabic":"الزمر","name":"Толпы","ayahs":"75 аятов","meta":"Ниспослание: Мекканская","href":"Quran-ru/39 - az-zumar-ru.html","search":"39 الزمر az-zumar толпы"},{"number":40,"arabic":"غافر","name":"Прощающий","ayahs":"85 аятов","meta":"Ниспослание: Мекканская","href":"Quran-ru/40 - ghafir-ru.html","search":"40 غافر ghafir прощающий"},{"number":41,"arabic":"فصلت","name":"Разъяснены","ayahs":"54 аятов","meta":"Ниспослание: Мекканская","href":"Quran-ru/41 - fussilat-ru.html","search":"41 فصلت fussilat разъяснены"},{"number":42,"arabic":"الشورى","name":"Совет","ayahs":"53 аятов","meta":"Ниспослание: Мекканская","href":"Quran-ru/42 - ash-shuraa-ru.html","search":"42 الشورى ash-shuraa совет"},{"number":43,"arabic":"الزخرف","name":"Украшения","ayahs":"89 аятов","meta":"Ниспослание: Мекканская","href":"Quran-ru/43 - az-zukhruf-ru.html","search":"43 الزخرف az-zukhruf украшения"},{"number":44,"arabic":"الدخان","name":"Дым","ayahs":"59 аятов","meta":"Ниспослание: Мекканская","href":"Quran-ru/44 - ad-dukhan-ru.html","search":"44 الدخان ad-dukhan дым"},{"number":45,"arabic":"الجاثية","name":"Коленопреклонённые","ayahs":"37 аятов","meta":"Ниспослание: Мекканская","href":"Quran-ru/45 - al-jathiyah-ru.html","search":"45 الجاثية al-jathiyah коленопреклонённые"},{"number":46,"arabic":"الأحقاف","name":"Барханы","ayahs":"35 аятов","meta":"Ниспослание: Мекканская","href":"Quran-ru/46 - al-ahqaf-ru.html","search":"46 الأحقاف al-ahqaf барханы"},{"number":47,"arabic":"محمد","name":"Мухаммад","ayahs":"38 аятов","meta":"Ниспослание: Мединская","href":"Quran-ru/47 - muhammad-ru.html","search":"47 محمد muhammad мухаммад"},{"number":48,"arabic":"الفتح","name":"Победа","ayahs":"29 аятов","meta":"Ниспослание: Мединская","href":"Quran-ru/48 - al-fath-ru.html","search":"48 الفتح al-fath победа"},{"number":49,"arabic":"الحجرات","name":"Комнаты","ayahs":"18 аятов","meta":"Ниспослание: Мединская","href":"Quran-ru/49 - al-hujurat-ru.html","search":"49 الحجرات al-hujurat комнаты"},{"number":50,"arabic":"ق","name":"Каф","ayahs":"45 аятов","meta":"Ниспослание: Мекканская","href":"Quran-ru/50 - qaf-ru.html","search":"50 ق qaf каф"},{"number":51,"arabic":"الذاريات","name":"Рассеивающие","ayahs":"60 аятов","meta":"Ниспослание: Мекканская","href":"Quran-ru/51 - adh-dhariyat-ru.html","search":"51 الذاريات adh-dhariyat рассеивающие"},{"number":52,"arabic":"الطور","name":"Гора","ayahs":"49 аятов","meta":"Ниспослание: Мекканская","href":"Quran-ru/52 - at-tur-ru.html","search":"52 الطور at-tur гора"},{"number":53,"arabic":"النجم","name":"Звезда","ayahs":"62 аятов","meta":"Ниспослание: Мекканская","href":"Quran-ru/53 - an-najm-ru.html","search":"53 النجم an-najm звезда"},{"number":54,"arabic":"القمر","name":"Луна","ayahs":"55 аятов","meta":"Ниспослание: Мекканская","href":"Quran-ru/54 - al-qamar-ru.html","search":"54 القمر al-qamar луна"},{"number":55,"arabic":"الرحمن","name":"Милостивый","ayahs":"78 аятов","meta":"Ниспослание: Мединская","href":"Quran-ru/55 - ar-rahman-ru.html","search":"55 الرحمن ar-rahman-ru. милостивый"},{"number":56,"arabic":"الواقعة","name":"Событие","ayahs":"96 аятов","meta":"Ниспослание: Мекканская","href":"Quran-ru/56 - al-waqiah-ru.html","search":"56 الواقعة al-waqiah событие"},{"number":57,"arabic":"الحديد","name":"Железо","ayahs":"29 аятов","meta":"Ниспослание: Мединская","href":"Quran-ru/57 - al-hadid-ru.html","search":"57 الحديد al-hadid железо"},{"number":58,"arabic":"المجادلة","name":"Препирающаяся","ayahs":"22 аятов","meta":"Ниспослание: Мединская","href":"Quran-ru/58 - al-mujadila-ru.html","search":"58 المجادلة al-mujadila препирающаяся"},{"number":59,"arabic":"الحشر","name":"Сбор","ayahs":"24 аятов","meta":"Ниспослание: Мединская","href":"Quran-ru/59 - al-hashr-ru.html","search":"59 الحشر al-hashr сбор"},{"number":60,"arabic":"الممتحنة","name":"Испытуемая","ayahs":"13 аятов","meta":"Ниспослание: Мединская","href":"Quran-ru/60 - al-mumtahanah-ru.html","search":"60 الممتحنة al-mumtahanah испытуемая"},{"number":61,"arabic":"الصف","name":"Ряд","ayahs":"14 аятов","meta":"Ниспослание: Мединская","href":"Quran-ru/61 - as-saff-ru.html","search":"61 الصف as-saff ряд"},{"number":62,"arabic":"الجمعة","name":"Пятница","ayahs":"11 аятов","meta":"Ниспослание: Мединская","href":"Quran-ru/62 - al-jumuah-ru.html","search":"62 الجمعة al-jumuah пятница"},{"number":63,"arabic":"المنافقون","name":"Лицемеры","ayahs":"11 аятов","meta":"Ниспослание: Мединская","href":"Quran-ru/63 - al-munafiqun-ru.html","search":"63 المنافقون al-munafiqun лицемеры"},{"number":64,"arabic":"التغابن","name":"Взаимное обделение","ayahs":"18 аятов","meta":"Ниспослание: Мединская","href":"Quran-ru/64 - at-taghabun-ru.html","search":"64 التغابن at-taghabun взаимное обделение"},{"number":65,"arabic":"الطلاق","name":"Развод","ayahs":"12 аятов","meta":"Ниспослание: Мединская","href":"Quran-ru/65 - at-talaq-ru.html","search":"65 الطلاق at-talaq развод"},{"number":66,"arabic":"التحريم","name":"Запрещение","ayahs":"12 аятов","meta":"Ниспослание: Мединская","href":"Quran-ru/66 - at-tahrim-ru.html","search":"66 التحريم at-tahrim запрещение"},{"number":67,"arabic":"الملك","name":"Власть","ayahs":"30 аятов","meta":"Ниспослание: Мекканская","href":"Quran-ru/67 - al-mulk-ru.html","search":"67 الملك al-mulk власть"},{"number":68,"arabic":"القلم","name":"Письменная трость","ayahs":"52 аятов","meta":"Ниспослание: Мекканская","href":"Quran-ru/68 - al-qalam-ru.html","search":"68 القلم al-qalam письменная трость"},{"number":69,"arabic":"الحاقة","name":"Неминуемое","ayahs":"52 аятов","meta":"Ниспослание: Мекканская","href":"Quran-ru/69 - al-haqqah-ru.html","search":"69 الحاقة al-haqqah неминуемое"},{"number":70,"arabic":"المعارج","name":"Ступени","ayahs":"44 аятов","meta":"Ниспослание: Мекканская","href":"Quran-ru/70 - al-maarij-ru.html","search":"70 المعارج al-maarij ступени"},{"number":71,"arabic":"نوح","name":"Нух","ayahs":"28 аятов","meta":"Ниспослание: Мекканская","href":"Quran-ru/71 - nuh-ru.html","search":"71 نوح nuh нух"},{"number":72,"arabic":"الجن","name":"Джинны","ayahs":"28 аятов","meta":"Ниспослание: Мекканская","href":"Quran-ru/72 - al-jinn-ru.html","search":"72 الجن al-jinn джинны"},{"number":73,"arabic":"المزمل","name":"Закутавшийся","ayahs":"20 аятов","meta":"Ниспослание: Мекканская","href":"Quran-ru/73 - al-muzzammil-ru.html","search":"73 المزمل al-muzzammil закутавшийся"},{"number":74,"arabic":"المدثر","name":"Завернувшийся","ayahs":"56 аятов","meta":"Ниспослание: Мекканская","href":"Quran-ru/74 - al-muddaththir-ru.html","search":"74 المدثر al-muddaththir завернувшийся"},{"number":75,"arabic":"القيامة","name":"Воскресение","ayahs":"40 аятов","meta":"Ниспослание: Мекканская","href":"Quran-ru/75 - al-qiyamah-ru.html","search":"75 القيامة al-qiyamah воскресение"},{"number":76,"arabic":"الانسان","name":"Человек","ayahs":"31 аятов","meta":"Ниспослание: Мединская","href":"Quran-ru/76 - al-insan-ru.html","search":"76 الانسان al-insan человек"},{"number":77,"arabic":"المرسلات","name":"Посылаемые","ayahs":"50 аятов","meta":"Ниспослание: Мекканская","href":"Quran-ru/77 - al-mursalat-ru.html","search":"77 المرسلات al-mursalat посылаемые"},{"number":78,"arabic":"النبإ","name":"Весть","ayahs":"40 аятов","meta":"Ниспослание: Мекканская","href":"Quran-ru/78 - an-naba-ru.html","search":"78 النبإ an-naba весть"},{"number":79,"arabic":"النازعات","name":"Исторгающие","ayahs":"46 аятов","meta":"Ниспослание: Мекканская","href":"Quran-ru/79 - an-naziat-ru.html","search":"79 النازعات an-naziat исторгающие"},{"number":80,"arabic":"عبس","name":"Нахмурился","ayahs":"42 аятов","meta":"Ниспослание: Мекканская","href":"Quran-ru/80 - abasa-ru.html","search":"80 عبس abasa нахмурился"},{"number":81,"arabic":"التكوير","name":"Скручивание","ayahs":"29 аятов","meta":"Ниспослание: Мекканская","href":"Quran-ru/81 - at-takwir-ru.html","search":"81 التكوير at-takwir скручивание"},{"number":82,"arabic":"الإنفطار","name":"Раскалывание","ayahs":"19 аятов","meta":"Ниспослание: Мекканская","href":"Quran-ru/82 - al-infitar-ru.html","search":"82 الإنفطار al-infitar раскалывание"},{"number":83,"arabic":"المطففين","name":"Обвешивающие","ayahs":"36 аятов","meta":"Ниспослание: Мекканская","href":"Quran-ru/83 - al-mutaffifin-ru.html","search":"83 المطففين al-mutaffifin обвешивающие"},{"number":84,"arabic":"الإنشقاق","name":"Раскалывание","ayahs":"25 аятов","meta":"Ниспослание: Мекканская","href":"Quran-ru/84 - al-inshiqaq-ru.html","search":"84 الإنشقاق al-inshiqaq раскалывание"},{"number":85,"arabic":"البروج","name":"Созвездия","ayahs":"22 аятов","meta":"Ниспослание: Мекканская","href":"Quran-ru/85 - al-buruj-ru.html","search":"85 البروج al-buruj созвездия"},{"number":86,"arabic":"الطارق","name":"Ночной путник","ayahs":"17 аятов","meta":"Ниспослание: Мекканская","href":"Quran-ru/86 - at-tariq-ru.html","search":"86 الطارق at-tariq ночной путник"},{"number":87,"arabic":"الأعلى","name":"Всевышний","ayahs":"19 аятов","meta":"Ниспослание: Мекканская","href":"Quran-ru/87 - al-ala-ru.html","search":"87 الأعلى al-ala всевышний"},{"number":88,"arabic":"الغاشية","name":"Покрывающее","ayahs":"26 аятов","meta":"Ниспослание: Мекканская","href":"Quran-ru/88 - al-ghashiyah-ru.html","search":"88 الغاشية al-ghashiyah покрывающее"},{"number":89,"arabic":"الفجر","name":"Заря","ayahs":"30 аятов","meta":"Ниспослание: Мекканская","href":"Quran-ru/89 - al-fajr-ru.html","search":"89 الفجر al-fajr заря"},{"number":90,"arabic":"البلد","name":"Город","ayahs":"20 аятов","meta":"Ниспослание: Мекканская","href":"Quran-ru/90 - al-balad-ru.html","search":"90 البلد al-balad город"},{"number":91,"arabic":"الشمس","name":"Солнце","ayahs":"15 аятов","meta":"Ниспослание: Мекканская","href":"Quran-ru/91 - ash-shams-ru.html","search":"91 الشمس ash-shams солнце"},{"number":92,"arabic":"الليل","name":"Ночь","ayahs":"21 аятов","meta":"Ниспослание: Мекканская","href":"Quran-ru/92 - al-layl-ru.html","search":"92 الليل al-layl ночь"},{"number":93,"arabic":"الضحى","name":"Утро","ayahs":"11 аятов","meta":"Ниспослание: Мекканская","href":"Quran-ru/93 - ad-duhaa-ru.html","search":"93 الضحى ad-duhaa утро"},{"number":94,"arabic":"الشرح","name":"Раскрытие","ayahs":"8 аятов","meta":"Ниспослание: Мекканская","href":"Quran-ru/94 - ash-sharh-ru.html","search":"94 الشرح ash-sharh раскрытие"},{"number":95,"arabic":"التين","name":"Смоковница","ayahs":"8 аятов","meta":"Ниспослание: Мекканская","href":"Quran-ru/95 - at-tin-ru.html","search":"95 التين at-tin смоковница"},{"number":96,"arabic":"العلق","name":"Сгусток","ayahs":"19 аятов","meta":"Ниспослание: Мекканская","href":"Quran-ru/96 - al-alaq-ru.html","search":"96 العلق al-alaq сгусток"},{"number":97,"arabic":"القدر","name":"Предопределение","ayahs":"5 аятов","meta":"Ниспослание: Мекканская","href":"Quran-ru/97 - al-qadr-ru.html","search":"97 القدر al-qadr предопределение"},{"number":98,"arabic":"البينة","name":"Ясное знамение","ayahs":"8 аятов","meta":"Ниспослание: Мединская","href":"Quran-ru/98 - al-bayyinah-ru.html","search":"98 البينة al-bayyinah ясное знамение"},{"number":99,"arabic":"الزلزلة","name":"Землетрясение","ayahs":"8 аятов","meta":"Ниспослание: Мединская","href":"Quran-ru/99 - az-zalzalah-ru.html","search":"99 الزلزلة az-zalzalah землетрясение"},{"number":100,"arabic":"العاديات","name":"Скачущие","ayahs":"11 аятов","meta":"Ниспослание: Мекканская","href":"Quran-ru/100 - al-adiyat-ru.html","search":"100 العاديات al-adiyat скачущие"},{"number":101,"arabic":"القارعة","name":"Поражающее","ayahs":"11 аятов","meta":"Ниспослание: Мекканская","href":"Quran-ru/101 - al-qariah-ru.html","search":"101 القارعة al-qariah поражающее"},{"number":102,"arabic":"التكاثر","name":"Страсть к умножению","ayahs":"8 аятов","meta":"Ниспослание: Мекканская","href":"Quran-ru/102 - at-takathur-ru.html","search":"102 التكاثر at-takathur страсть к умножению"},{"number":103,"arabic":"العصر","name":"Предвечернее время","ayahs":"3 аятов","meta":"Ниспослание: Мекканская","href":"Quran-ru/103 - al-asr-ru.html","search":"103 العصر al-asr предвечернее время"},{"number":104,"arabic":"الهمزة","name":"Хулитель","ayahs":"9 аятов","meta":"Ниспослание: Мекканская","href":"Quran-ru/104 - al-humazah-ru.html","search":"104 الهمزة al-humazah хулитель"},{"number":105,"arabic":"الفيل","name":"Слон","ayahs":"5 аятов","meta":"Ниспослание: Мекканская","href":"Quran-ru/105 - al-fil-ru.html","search":"105 الفيل al-fil слон"},{"number":106,"arabic":"قريش","name":"Курайшиты","ayahs":"4 аятов","meta":"Ниспослание: Мекканская","href":"Quran-ru/106 - quraysh-ru.html","search":"106 قريش quraysh курайшиты"},{"number":107,"arabic":"الماعون","name":"Подаяние","ayahs":"7 аятов","meta":"Ниспослание: Мекканская","href":"Quran-ru/107 - al-maun-ru.html","search":"107 الماعون al-maun подаяние"},{"number":108,"arabic":"الكوثر","name":"Изобилие","ayahs":"3 аятов","meta":"Ниспослание: Мекканская","href":"Quran-ru/108 - al-kawthar-ru.html","search":"108 الكوثر al-kawthar изобилие"},{"number":109,"arabic":"الكافرون","name":"Неверующие","ayahs":"6 аятов","meta":"Ниспослание: Мекканская","href":"Quran-ru/109 - al-kafirun-ru.html","search":"109 الكافرون al-kafirun неверующие"},{"number":110,"arabic":"النصر","name":"Помощь","ayahs":"3 аятов","meta":"Ниспослание: Мединская","href":"Quran-ru/110 - al-nasr-ru.html","search":"110 النصر al-nasr помощь"},{"number":111,"arabic":"المسد","name":"Пальмовые волокна","ayahs":"5 аятов","meta":"Ниспослание: Мекканская","href":"Quran-ru/111 - al-masad-ru.html","search":"111 المسد al-masad пальмовые волокна"},{"number":112,"arabic":"الإخلاص","name":"Искренность","ayahs":"4 аятов","meta":"Ниспослание: Мекканская","href":"Quran-ru/112 - al-ikhlas-ru.html","search":"112 الإخلاص al-ikhlas искренность"},{"number":113,"arabic":"الفلق","name":"Рассвет","ayahs":"5 аятов","meta":"Ниспослание: Мекканская","href":"Quran-ru/113 - al-falaq-ru.html","search":"113 الفلق al-falaq рассвет"},{"number":114,"arabic":"الناس","name":"Люди","ayahs":"6 аятов","meta":"Ниспослание: Мекканская","href":"Quran-ru/114 - an-nas-ru.html","search":"114 الناس an-nas люди"}];
   const fallbackData=SURAH_INDEX.map(function(s){
@@ -1144,25 +1213,34 @@ html.light-mode .ayah-ref{
     const targetId=ayahId(a);
     document.documentElement.classList.add("quran-exact-scroll");
     clearTimeout(window.__quranProExactScroll);
-    const delays=[0,120,260,520,900,1350,1900];
-    function run(step){
-      const node=document.getElementById(targetId) || refs.container.querySelector('[data-index="'+index+'"]');
-      if(!node){
-        if(step<delays.length-1){window.__quranProExactScroll=setTimeout(function(){run(step+1);},delays[step+1]);}
-        return;
-      }
+    function locate(){
+      return document.getElementById(targetId) || refs.container.querySelector('[data-index="'+index+'"]');
+    }
+    function align(behavior){
+      const node=locate();
+      if(!node)return false;
       refs.container.querySelectorAll(".current-ayah").forEach(function(el){el.classList.remove("current-ayah");});
       node.classList.add("current-ayah");
+      node.style.contentVisibility="visible";
+      node.scrollIntoView({behavior:behavior||"auto",block:"start",inline:"nearest"});
       const controls=document.querySelector(".reader-controls-v2");
-      const stickyOffset=(controls?controls.getBoundingClientRect().height:0)+18;
-      const top=Math.max(0,node.getBoundingClientRect().top+window.pageYOffset-stickyOffset);
-      window.scrollTo({top:top,behavior:step===0?"smooth":"auto"});
+      const stickyOffset=(controls?controls.getBoundingClientRect().height:0)+16;
+      window.scrollBy({top:-stickyOffset,behavior:"auto"});
+      return true;
+    }
+    const delays=[0,80,180,360,700,1150,1700];
+    function run(step){
+      align(step===0?"smooth":"auto");
       if(step<delays.length-1){
         window.__quranProExactScroll=setTimeout(function(){run(step+1);},delays[step+1]);
       }else{
         window.__quranProExactScroll=setTimeout(function(){
           document.documentElement.classList.remove("quran-exact-scroll");
-        },700);
+          const node=locate();
+          if(node)node.style.contentVisibility="";
+          const btn=document.getElementById("continueBookmarkBtn");
+          if(btn)btn.classList.remove("is-loading");
+        },420);
       }
     }
     requestAnimationFrame(function(){run(0);});
@@ -1207,6 +1285,7 @@ html.light-mode .ayah-ref{
       html+='<article class="ayah '+(i===currentIndex?'current-ayah':'')+'" id="'+ayahId(a)+'" data-index="'+i+'"><div class="ayah-top"><span class="ayah-ref">'+ayahLabel(a)+'</span>'+actionButtons(i,saved)+'</div><div class="arabic">'+escapeHtml(a.arabic)+'</div><div class="translit">'+escapeHtml(a.translit)+'</div><div class="translation">'+escapeHtml(a.ru)+'</div></article>';
     }
     refs.container.innerHTML=html;
+    syncFavoriteButtons();
     refs.reader.style.setProperty("--arabic-font-size", arabicFontSize+"px");
     const gs=groups(); const a=currentAyah();
     if(settings.mode==="book"){const g=gs[currentPage]||gs[0];const m=g?g.meta:surahMeta(1);refs.pageMeta.textContent="Сура "+(currentPage+1)+" из "+gs.length+" · "+m.arabic+" · "+m.name+" · "+m.ayahs;refs.readerTitle.textContent=m.name||"Полное чтение";}
@@ -1234,10 +1313,13 @@ html.light-mode .ayah-ref{
     updateProgress();
   }
   function saveAndGo(index){
-    saveFavorite(index);
+    const active=saveFavorite(index);
     localStorage.setItem(PROGRESS_KEY,String(index));
-    refs.container.querySelectorAll('[data-action="save"][data-index="'+index+'"]').forEach(function(btn){btn.classList.add("saved","active");});
-    showToast("Аят сохранён в избранное.");
+    refs.container.querySelectorAll('[data-action="save"][data-index="'+index+'"]').forEach(function(btn){
+      btn.classList.toggle("saved",active);
+      btn.classList.toggle("active",active);
+    });
+    showToast(active?"Аят сохранён в избранное.":"Аят удалён из избранного.");
   }
   async function shareAyah(index){
     const a=quran[index];
@@ -1292,7 +1374,7 @@ html.light-mode .ayah-ref{
   document.getElementById("toggleArabic").addEventListener("change",function(e){setDisplaySetting("arabic",e.target.checked);});
   document.getElementById("toggleTranslit").addEventListener("change",function(e){setDisplaySetting("translit",e.target.checked);});
   document.getElementById("toggleTranslation").addEventListener("change",function(e){setDisplaySetting("translation",e.target.checked);});
-  document.getElementById("continueBookmarkBtn").addEventListener("click",function(){requirePro(function(){const saved=normalizedBookmarks();const index=saved.length?saved[0]:Number(localStorage.getItem(PROGRESS_KEY)||0);setCurrent(index,false);scrollToCurrentExact(index);showToast(saved.length?"Открыта ваша закладка.":"Открыто последнее место чтения.");});});
+  document.getElementById("continueBookmarkBtn").addEventListener("click",function(){const btn=this;requirePro(function(){btn.classList.add("is-loading");const saved=normalizedBookmarks();const index=saved.length?saved[0]:Number(localStorage.getItem(PROGRESS_KEY)||0);setCurrent(index,false);scrollToCurrentExact(index);showToast(saved.length?"Открыта ваша закладка.":"Открыто последнее место чтения.");setTimeout(function(){btn.classList.remove("is-loading");},2600);});});
   document.getElementById("scrollTopBtn").addEventListener("click",function(){window.scrollTo({top:0,behavior:"smooth"});});
   document.getElementById("fontPlus").addEventListener("click",function(){arabicFontSize=Math.min(44,arabicFontSize+2);refs.reader.style.setProperty("--arabic-font-size",arabicFontSize+"px");});
   document.getElementById("fontMinus").addEventListener("click",function(){arabicFontSize=Math.max(22,arabicFontSize-2);refs.reader.style.setProperty("--arabic-font-size",arabicFontSize+"px");});
@@ -1302,7 +1384,7 @@ html.light-mode .ayah-ref{
   refs.proState.addEventListener("click",function(){if(!isPro())window.location.href="pro-ru.html";});
 
   applyPremiumTheme();
-  loadQuranData().then(function(data){quran=data;if(refs.dataWarning)refs.dataWarning.hidden=!usingFallback;currentIndex=Math.max(0,Math.min(currentIndex,quran.length-1));currentPage=groupIndexForCurrent();syncProState();render();});
+  loadQuranData().then(function(data){quran=data;if(refs.dataWarning)refs.dataWarning.hidden=!usingFallback;currentIndex=Math.max(0,Math.min(currentIndex,quran.length-1));currentPage=groupIndexForCurrent();syncProState();render();syncBottomFavorites();});
   window.addEventListener("storage",syncProState);
   window.addEventListener("focus",syncProState);
   window.addEventListener("pageshow",syncProState);
