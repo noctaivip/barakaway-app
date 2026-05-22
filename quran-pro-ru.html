@@ -511,7 +511,24 @@ html.light-mode .translation{
     catch(e){return {arabic:true,translit:true,translation:true,mode:"book"};}
   }
   function saveSettings(){localStorage.setItem(SETTINGS_KEY,JSON.stringify(settings));}
-  function isPro(){return localStorage.getItem(PRO_KEY)==="true";}
+  function isPro(){
+    const activeValues = {"true":true,"1":true,"yes":true,"active":true,"activated":true,"unlocked":true,"pro":true,"developer-test":true};
+    const keys = [
+      PRO_KEY,
+      "barakaway_pro_active",
+      "barakaway_pro_status",
+      "barakaway_premium_active",
+      "barakaway_premium_status"
+    ];
+
+    for(const key of keys){
+      const value = String(localStorage.getItem(key) || sessionStorage.getItem(key) || "").trim().toLowerCase();
+      if(activeValues[value]) return true;
+    }
+
+    const plan = String(localStorage.getItem("barakaway_pro_plan") || sessionStorage.getItem("barakaway_pro_plan") || "").trim();
+    return !!plan;
+  }
   function showToast(message){refs.toast.textContent=message;refs.toast.classList.add("show");clearTimeout(window.__quranProToast);window.__quranProToast=setTimeout(function(){refs.toast.classList.remove("show");},2400);}
   function openModal(){refs.modal.classList.add("open");}
   function closeModal(){refs.modal.classList.remove("open");}
