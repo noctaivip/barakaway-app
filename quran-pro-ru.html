@@ -466,6 +466,37 @@ html.light-mode .translation{
   .book-stage:not(.continuous) #ayahContainer{max-height:calc(100vh - 245px);}
 }
 
+
+
+/* === QuranPro sticky reader controls fix === */
+.reader-shell{
+  overflow:visible !important;
+}
+.controls{
+  position:-webkit-sticky !important;
+  position:sticky !important;
+  top:0 !important;
+  z-index:9990 !important;
+  align-self:flex-start;
+}
+.controls::before{
+  content:"";
+  position:absolute;
+  inset:-10px -10px -8px;
+  z-index:-1;
+  border-radius:28px;
+  background:rgba(11,16,22,.82);
+  backdrop-filter:blur(18px);
+  -webkit-backdrop-filter:blur(18px);
+}
+@media(max-width:760px){
+  .controls{
+    top:0 !important;
+    margin:10px 10px 0 !important;
+    max-height:none;
+    overflow:visible;
+  }
+}
 </style>
 </head>
 <body>
