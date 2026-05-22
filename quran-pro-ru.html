@@ -690,25 +690,49 @@ html.light-mode .ayah-ref{
   border-color:var(--qp-accent-border) !important;
 }
 
-/* === Continue bookmark + top button fix === */
+/* === Continue bookmark + exact top controls fix === */
 .continue-reading-btn.has-bookmark svg{
   fill:currentColor;
 }
-.scroll-top-btn svg{
-  width:18px;
-  height:18px;
-  fill:none;
-  stroke:currentColor;
-  stroke-width:2.4;
-  stroke-linecap:round;
-  stroke-linejoin:round;
+.quran-exact-scroll .ayah{
+  content-visibility:visible !important;
+  contain-intrinsic-size:auto !important;
 }
 .scroll-top-btn{
-  min-width:104px;
+  min-width:50px !important;
+  width:50px !important;
+  padding-left:0 !important;
+  padding-right:0 !important;
+  border-radius:18px !important;
 }
-@media(max-width:520px){
-  .scroll-top-btn{min-width:auto;}
-  .scroll-top-btn span{display:none;}
+.scroll-top-btn svg{
+  width:21px;
+  height:21px;
+  fill:none;
+  stroke:currentColor;
+  stroke-width:2.35;
+  stroke-linecap:round;
+  stroke-linejoin:round;
+  filter:drop-shadow(0 4px 10px color-mix(in srgb,var(--qp-accent) 28%,transparent));
+}
+@media(max-width:560px){
+  .reader-action-row{
+    grid-template-columns:auto auto max-content auto !important;
+    align-items:center;
+  }
+  .continue-reading-btn{
+    width:max-content !important;
+    max-width:calc(100vw - 176px);
+    padding-left:12px !important;
+    padding-right:12px !important;
+  }
+  .continue-reading-btn span{
+    white-space:nowrap;
+  }
+  .scroll-top-btn{
+    min-width:48px !important;
+    width:48px !important;
+  }
 }
 
 </style>
@@ -759,9 +783,8 @@ html.light-mode .ayah-ref{
             <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 4.5A1.5 1.5 0 0 1 7.5 3h9A1.5 1.5 0 0 1 18 4.5V21l-6-3.5L6 21V4.5z"></path></svg>
             <span>Продолжить чтение</span>
           </button>
-          <button class="tool-btn scroll-top-btn" id="scrollTopBtn" type="button" aria-label="Наверх страницы">
-            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 5l-7 7m7-7l7 7M12 5v14"></path></svg>
-            <span>Наверх</span>
+          <button class="tool-btn scroll-top-btn" id="scrollTopBtn" type="button" aria-label="Наверх страницы" title="Наверх">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 19V6"></path><path d="M6.5 11.5L12 6l5.5 5.5"></path></svg>
           </button>
         </div>
       </div>
@@ -1114,18 +1137,35 @@ html.light-mode .ayah-ref{
     });
     syncContinueButton();
   }
-  function scrollToCurrentExact(){
-    const a=currentAyah();
+  function scrollToCurrentExact(targetIndex){
+    const index=Number.isFinite(Number(targetIndex))?Number(targetIndex):currentIndex;
+    const a=quran[index];
     if(!a)return;
-    const node=document.getElementById(ayahId(a)) || refs.container.querySelector('[data-index="'+currentIndex+'"]');
-    if(!node){refs.reader.scrollIntoView({behavior:"smooth",block:"start"});return;}
-    node.classList.add("current-ayah");
-    node.scrollIntoView({behavior:"smooth",block:"center"});
+    const targetId=ayahId(a);
+    document.documentElement.classList.add("quran-exact-scroll");
     clearTimeout(window.__quranProExactScroll);
-    window.__quranProExactScroll=setTimeout(function(){
-      const fresh=document.getElementById(ayahId(a)) || refs.container.querySelector('[data-index="'+currentIndex+'"]');
-      if(fresh)fresh.scrollIntoView({behavior:"smooth",block:"center"});
-    },360);
+    const delays=[0,120,260,520,900,1350,1900];
+    function run(step){
+      const node=document.getElementById(targetId) || refs.container.querySelector('[data-index="'+index+'"]');
+      if(!node){
+        if(step<delays.length-1){window.__quranProExactScroll=setTimeout(function(){run(step+1);},delays[step+1]);}
+        return;
+      }
+      refs.container.querySelectorAll(".current-ayah").forEach(function(el){el.classList.remove("current-ayah");});
+      node.classList.add("current-ayah");
+      const controls=document.querySelector(".reader-controls-v2");
+      const stickyOffset=(controls?controls.getBoundingClientRect().height:0)+18;
+      const top=Math.max(0,node.getBoundingClientRect().top+window.pageYOffset-stickyOffset);
+      window.scrollTo({top:top,behavior:step===0?"smooth":"auto"});
+      if(step<delays.length-1){
+        window.__quranProExactScroll=setTimeout(function(){run(step+1);},delays[step+1]);
+      }else{
+        window.__quranProExactScroll=setTimeout(function(){
+          document.documentElement.classList.remove("quran-exact-scroll");
+        },700);
+      }
+    }
+    requestAnimationFrame(function(){run(0);});
   }
   function setCurrent(index,scroll){
     currentIndex=Math.max(0,Math.min(index,quran.length-1));
@@ -1238,7 +1278,7 @@ html.light-mode .ayah-ref{
     applyDisplaySettings();
   }
 
-  document.addEventListener("click",function(e){const action=e.target.closest("[data-action]");if(action){e.preventDefault();e.stopPropagation();const index=Number(action.dataset.index);setCurrent(index,false);if(action.dataset.action==="bookmark")requirePro(function(){toggleBookmark(index);});if(action.dataset.action==="save")requirePro(function(){saveAndGo(index);});if(action.dataset.action==="share")requirePro(function(){shareAyah(index);});return;}const bm=e.target.closest("[data-goto-bookmark]");if(bm){e.preventDefault();e.stopPropagation();requirePro(function(){refs.bookmarkPanel.classList.remove("open");setCurrent(Number(bm.dataset.gotoBookmark),true);});}});
+  document.addEventListener("click",function(e){const action=e.target.closest("[data-action]");if(action){e.preventDefault();e.stopPropagation();const index=Number(action.dataset.index);setCurrent(index,false);if(action.dataset.action==="bookmark")requirePro(function(){toggleBookmark(index);});if(action.dataset.action==="save")requirePro(function(){saveAndGo(index);});if(action.dataset.action==="share")requirePro(function(){shareAyah(index);});return;}const bm=e.target.closest("[data-goto-bookmark]");if(bm){e.preventDefault();e.stopPropagation();requirePro(function(){refs.bookmarkPanel.classList.remove("open");setCurrent(Number(bm.dataset.gotoBookmark),false);scrollToCurrentExact(Number(bm.dataset.gotoBookmark));});}});
   
   
   
@@ -1252,7 +1292,7 @@ html.light-mode .ayah-ref{
   document.getElementById("toggleArabic").addEventListener("change",function(e){setDisplaySetting("arabic",e.target.checked);});
   document.getElementById("toggleTranslit").addEventListener("change",function(e){setDisplaySetting("translit",e.target.checked);});
   document.getElementById("toggleTranslation").addEventListener("change",function(e){setDisplaySetting("translation",e.target.checked);});
-  document.getElementById("continueBookmarkBtn").addEventListener("click",function(){requirePro(function(){const saved=normalizedBookmarks();const index=saved.length?saved[0]:Number(localStorage.getItem(PROGRESS_KEY)||0);setCurrent(index,false);requestAnimationFrame(scrollToCurrentExact);showToast(saved.length?"Открыта ваша закладка.":"Открыто последнее место чтения.");});});
+  document.getElementById("continueBookmarkBtn").addEventListener("click",function(){requirePro(function(){const saved=normalizedBookmarks();const index=saved.length?saved[0]:Number(localStorage.getItem(PROGRESS_KEY)||0);setCurrent(index,false);scrollToCurrentExact(index);showToast(saved.length?"Открыта ваша закладка.":"Открыто последнее место чтения.");});});
   document.getElementById("scrollTopBtn").addEventListener("click",function(){window.scrollTo({top:0,behavior:"smooth"});});
   document.getElementById("fontPlus").addEventListener("click",function(){arabicFontSize=Math.min(44,arabicFontSize+2);refs.reader.style.setProperty("--arabic-font-size",arabicFontSize+"px");});
   document.getElementById("fontMinus").addEventListener("click",function(){arabicFontSize=Math.max(22,arabicFontSize-2);refs.reader.style.setProperty("--arabic-font-size",arabicFontSize+"px");});
