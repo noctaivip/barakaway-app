@@ -861,6 +861,7 @@ html.quran-pro-jumping .ayah{
 /* Button press feedback: green border pulse on clicked controls */
 .tool-btn.qp-pressed,
 .icon-btn.qp-pressed,
+.reader-check.qp-pressed,
 .quran-checkline.qp-pressed{
   border-color:var(--qp-accent,#4caf6a) !important;
   box-shadow:0 0 0 3px rgba(76,175,106,.18),0 0 22px rgba(76,175,106,.26) !important;
@@ -954,6 +955,457 @@ html.quran-pro-jumping .ayah{
 @media(max-width:760px){
   #quranReader .arabic{font-size:var(--arabic-font-size,25px) !important;}
 }
+</style>
+
+
+<style id="quran-pro-tajweed-assistant-style">
+/* QuranPro Tajweed AI assistant: premium recording UI, no false green checks without backend model. */
+.tajweed-mic-btn{
+  color:var(--qp-accent-2,#66c680) !important;
+}
+.tajweed-mic-btn.is-recording{
+  color:#ffffff !important;
+  background:linear-gradient(135deg,#b91c1c,#ef4444) !important;
+  border-color:rgba(255,130,130,.70) !important;
+  box-shadow:0 0 0 4px rgba(239,68,68,.16),0 0 24px rgba(239,68,68,.35) !important;
+  animation:tajweedMicPulse 1.05s ease-in-out infinite;
+}
+@keyframes tajweedMicPulse{
+  0%,100%{transform:scale(1);}
+  50%{transform:scale(1.055);}
+}
+.tajweed-panel{
+  margin:14px 0 4px;
+  padding:14px;
+  border-radius:22px;
+  border:1px solid var(--qp-accent-border,rgba(45,122,70,.32));
+  background:
+    radial-gradient(circle at 92% 0%,color-mix(in srgb,var(--qp-accent,#2d7a46) 16%,transparent),transparent 36%),
+    linear-gradient(180deg,rgba(255,255,255,.045),rgba(215,181,109,.045));
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.05),0 14px 30px rgba(0,0,0,.14);
+}
+.tajweed-head{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:10px;
+  margin-bottom:10px;
+}
+.tajweed-title{
+  display:flex;
+  align-items:center;
+  gap:8px;
+  color:#ffffff;
+  font-size:13px;
+  font-weight:950;
+}
+.tajweed-title svg{
+  width:18px;
+  height:18px;
+  fill:none;
+  stroke:var(--qp-accent-2,#66c680);
+  stroke-width:2;
+  stroke-linecap:round;
+  stroke-linejoin:round;
+}
+.tajweed-state{
+  color:var(--qp-accent-text,#dff7e6);
+  font-size:11px;
+  font-weight:950;
+  padding:5px 9px;
+  border-radius:999px;
+  background:var(--qp-accent-soft,rgba(45,122,70,.14));
+  border:1px solid var(--qp-accent-border,rgba(45,122,70,.32));
+  white-space:nowrap;
+}
+.tajweed-target{
+  direction:rtl;
+  text-align:right;
+  color:#f0d891;
+  font-family:"Times New Roman",serif;
+  font-size:24px;
+  line-height:1.9;
+  margin:8px 0 12px;
+}
+.tajweed-word{
+  display:inline-block;
+  padding:0 3px;
+  border-radius:8px;
+  transition:background .2s ease,color .2s ease,box-shadow .2s ease;
+}
+.tajweed-word.pending{background:rgba(255,255,255,.035);}
+.tajweed-word.ok{background:rgba(34,197,94,.16);color:#86efac;box-shadow:0 0 0 1px rgba(34,197,94,.22);}
+.tajweed-word.bad{background:rgba(239,68,68,.16);color:#fecaca;box-shadow:0 0 0 1px rgba(239,68,68,.24);}
+.tajweed-grid{
+  display:grid;
+  grid-template-columns:repeat(3,minmax(0,1fr));
+  gap:8px;
+  margin:10px 0;
+}
+.tajweed-meter{
+  padding:9px;
+  border-radius:16px;
+  background:rgba(255,255,255,.045);
+  border:1px solid rgba(255,255,255,.07);
+}
+.tajweed-meter-label{
+  color:#cbd5df;
+  font-size:11px;
+  font-weight:900;
+  margin-bottom:6px;
+}
+.tajweed-track{
+  height:6px;
+  overflow:hidden;
+  border-radius:999px;
+  background:rgba(255,255,255,.08);
+}
+.tajweed-fill{
+  width:0%;
+  height:100%;
+  border-radius:999px;
+  background:linear-gradient(90deg,var(--qp-accent,#2d7a46),var(--qp-accent-2,#66c680));
+  transition:width .28s ease;
+}
+.tajweed-message{
+  color:#cbd5df;
+  font-size:12px;
+  font-weight:800;
+  line-height:1.45;
+  margin-top:10px;
+}
+.tajweed-message strong{color:#f0d891;}
+.tajweed-actions{
+  display:flex;
+  align-items:center;
+  flex-wrap:wrap;
+  gap:8px;
+  margin-top:12px;
+}
+.tajweed-action{
+  appearance:none;
+  -webkit-appearance:none;
+  border:1px solid var(--qp-accent-border,rgba(45,122,70,.32));
+  background:var(--qp-accent-soft,rgba(45,122,70,.14));
+  color:#ffffff;
+  border-radius:999px;
+  min-height:38px;
+  padding:9px 13px;
+  font:inherit;
+  font-size:12px;
+  font-weight:950;
+  cursor:pointer;
+}
+.tajweed-action.primary{
+  background:linear-gradient(135deg,var(--qp-accent,#2d7a46),var(--qp-accent-2,#66c680));
+  color:#ffffff;
+}
+.tajweed-wave{
+  position:relative;
+  height:38px;
+  border-radius:16px;
+  background:rgba(0,0,0,.16);
+  border:1px solid rgba(255,255,255,.07);
+  overflow:hidden;
+}
+.tajweed-wave::before{
+  content:"";
+  position:absolute;
+  inset:0;
+  background:repeating-linear-gradient(90deg,transparent 0 8px,color-mix(in srgb,var(--qp-accent-2,#66c680) 45%,transparent) 8px 10px,transparent 10px 18px);
+  opacity:.22;
+  transform:translateX(var(--tajweed-wave-x,0));
+}
+.tajweed-panel.is-recording .tajweed-wave::before{
+  animation:tajweedWaveMove .9s linear infinite;
+  opacity:.55;
+}
+@keyframes tajweedWaveMove{to{transform:translateX(18px);}}
+html.light-mode .tajweed-title{color:#111814;}
+html.light-mode .tajweed-panel{background:linear-gradient(180deg,#ffffff,#f7fbf7);}
+html.light-mode .tajweed-target{color:#8a681f;}
+html.light-mode .tajweed-message,.tajweed-meter-label{color:#526158;}
+@media(max-width:560px){
+  .tajweed-panel{padding:12px;border-radius:20px;}
+  .tajweed-head{align-items:flex-start;flex-direction:column;}
+  .tajweed-target{font-size:22px;}
+  .tajweed-grid{grid-template-columns:1fr;}
+  .tajweed-action{width:100%;}
+}
+</style>
+
+
+<style id="quran-pro-live-word-recitation-style">
+.live-recitation-panel .tajweed-word.current{background:rgba(215,181,109,.14);color:#f0d891;box-shadow:0 0 0 1px rgba(215,181,109,.22);}
+.live-recitation-panel .tajweed-message strong{color:#86efac;}
+.live-recitation-panel .tajweed-grid,.live-recitation-panel .tajweed-actions{display:none !important;}
+</style>
+
+<style id="quran-pro-surah-live-mic-style">
+/* Premium general live-recitation microphone inside surah header */
+.surah-boundary{
+  position:relative;
+}
+.surah-live-header{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:14px;
+  width:100%;
+}
+.surah-live-copy{
+  min-width:0;
+  text-align:left;
+}
+.surah-live-copy .surah-book-arabic{
+  text-align:left;
+}
+.surah-live-mic{
+  appearance:none;
+  -webkit-appearance:none;
+  min-width:132px;
+  min-height:48px;
+  padding:10px 14px;
+  border-radius:999px;
+  border:1px solid var(--qp-accent-border,rgba(45,122,70,.32));
+  background:
+    radial-gradient(circle at 22% 0%,rgba(255,255,255,.16),transparent 36%),
+    linear-gradient(135deg,var(--qp-accent,#2d7a46),var(--qp-accent-2,#66c680));
+  color:#fff;
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  gap:9px;
+  font:inherit;
+  font-size:12px;
+  line-height:1.15;
+  font-weight:950;
+  cursor:pointer;
+  box-shadow:0 14px 34px color-mix(in srgb,var(--qp-accent,#2d7a46) 32%,transparent),inset 0 1px 0 rgba(255,255,255,.18);
+  transition:transform .16s ease,box-shadow .22s ease,filter .22s ease;
+}
+.surah-live-mic svg{
+  width:21px;
+  height:21px;
+  fill:none;
+  stroke:currentColor;
+  stroke-width:2;
+  stroke-linecap:round;
+  stroke-linejoin:round;
+}
+.surah-live-mic:hover{
+  transform:translateY(-1px);
+  filter:brightness(1.06);
+}
+.surah-live-mic:active{
+  transform:scale(.97);
+}
+.surah-live-mic.is-recording{
+  background:linear-gradient(135deg,#b91c1c,#ef4444) !important;
+  border-color:rgba(255,130,130,.72) !important;
+  animation:tajweedMicPulse 1.05s ease-in-out infinite;
+}
+.surah-live-mic-text{
+  display:flex;
+  flex-direction:column;
+  align-items:flex-start;
+  gap:1px;
+}
+.surah-live-mic-text strong{
+  font-size:12px;
+  letter-spacing:-.01em;
+}
+.surah-live-mic-text span{
+  font-size:10px;
+  opacity:.88;
+  font-weight:850;
+}
+@media(max-width:560px){
+  .surah-live-header{
+    align-items:flex-start;
+  }
+  .surah-live-mic{
+    min-width:54px;
+    width:54px;
+    height:54px;
+    padding:0;
+    border-radius:18px;
+  }
+  .surah-live-mic-text{display:none;}
+  .surah-live-mic svg{width:23px;height:23px;}
+}
+</style>
+
+<style id="quran-pro-live-letter-reader-style">
+/* Intelligent Quran Reader: no error panel, only live green reading progress. */
+.tajweed-panel{display:none !important;}
+.quran-live-letter{transition:color .14s ease,text-shadow .14s ease,background .14s ease;border-radius:5px;padding:0 .01em;}
+.quran-live-letter.is-read{color:#6ff29a !important;text-shadow:0 0 14px rgba(76,175,106,.42),0 0 3px rgba(255,255,255,.20);}
+.quran-live-letter.is-current{background:rgba(215,181,109,.16);box-shadow:0 0 0 1px rgba(215,181,109,.18);}
+.surah-live-mic-text span{display:none !important;}
+.surah-live-mic.is-recording{border-color:rgba(111,242,154,.82) !important;box-shadow:0 0 0 4px rgba(76,175,106,.14),0 0 28px rgba(76,175,106,.38) !important;}
+.surah-live-mic.is-recording svg{filter:drop-shadow(0 0 10px rgba(111,242,154,.85));}
+</style>
+
+<style id="quran-pro-surah-title-premium-highlight">
+/* Bright premium surah title highlight */
+.surah-book-name{
+  display:inline-block;
+  color:#fff7d1 !important;
+  background:linear-gradient(135deg,#f0d891 0%,#ffffff 46%,var(--qp-accent-2,#66c680) 100%);
+  -webkit-background-clip:text;
+  background-clip:text;
+  -webkit-text-fill-color:transparent;
+  text-shadow:0 0 22px rgba(240,216,145,.18);
+}
+.surah-boundary .surah-book-name{
+  padding:3px 12px 5px;
+  border-radius:999px;
+  border:1px solid var(--qp-accent-border,rgba(215,181,109,.32));
+  background:
+    linear-gradient(135deg,rgba(240,216,145,.16),rgba(76,175,106,.10)),
+    linear-gradient(135deg,#f0d891 0%,#ffffff 46%,var(--qp-accent-2,#66c680) 100%);
+  -webkit-background-clip:padding-box,text;
+  background-clip:padding-box,text;
+  box-shadow:0 0 24px rgba(215,181,109,.12), inset 0 1px 0 rgba(255,255,255,.05);
+}
+html.light-mode .surah-book-name{
+  background:linear-gradient(135deg,#8a681f 0%,#111814 45%,#2d7a46 100%);
+  -webkit-background-clip:text;
+  background-clip:text;
+}
+</style>
+
+<style id="quran-pro-live-reader-final-soft-performance-style">
+/* Final live reader tuning: smoother mobile work + clear premium green surah title */
+.surah-book-name{
+  color:#66c680 !important;
+  text-shadow:0 0 18px rgba(102,198,128,.22),0 2px 10px rgba(0,0,0,.28) !important;
+}
+html.light-mode .surah-book-name{
+  color:#2d7a46 !important;
+  text-shadow:0 0 14px rgba(45,122,70,.16) !important;
+}
+.quran-live-letter.is-read{
+  color:#66c680 !important;
+  text-shadow:0 0 12px rgba(102,198,128,.24);
+}
+.quran-live-letter.is-current{
+  border-bottom:2px solid #66c680;
+}
+</style>
+
+
+<style id="quran-pro-surah-title-rich-green-final">
+/* Final requested surah title style: rich dark green fill + subtle golden letter edge. */
+.surah-book-name{
+  display:inline-block !important;
+  color:#0f6b3d !important;
+  -webkit-text-fill-color:#0f6b3d !important;
+  background:none !important;
+  background-clip:initial !important;
+  -webkit-background-clip:initial !important;
+  font-weight:950 !important;
+  letter-spacing:-0.035em !important;
+  text-shadow:
+    -0.55px -0.55px 0 rgba(240,216,145,.72),
+     0.55px -0.55px 0 rgba(240,216,145,.62),
+    -0.55px  0.55px 0 rgba(185,145,61,.62),
+     0.55px  0.55px 0 rgba(185,145,61,.52),
+     0 0 14px rgba(15,107,61,.32),
+     0 8px 22px rgba(0,0,0,.26) !important;
+}
+.surah-boundary .surah-book-name{
+  padding:4px 14px 6px !important;
+  border-radius:999px !important;
+  border:1px solid rgba(240,216,145,.34) !important;
+  background:linear-gradient(180deg,rgba(15,107,61,.12),rgba(240,216,145,.055)) !important;
+  box-shadow:
+    inset 0 1px 0 rgba(255,255,255,.06),
+    0 0 0 1px rgba(15,107,61,.14),
+    0 10px 24px rgba(0,0,0,.18) !important;
+}
+html.light-mode .surah-book-name{
+  color:#0b6b3b !important;
+  -webkit-text-fill-color:#0b6b3b !important;
+  text-shadow:
+    -0.45px -0.45px 0 rgba(181,138,54,.58),
+     0.45px -0.45px 0 rgba(181,138,54,.48),
+    -0.45px  0.45px 0 rgba(181,138,54,.48),
+     0.45px  0.45px 0 rgba(181,138,54,.40),
+     0 0 12px rgba(11,107,59,.16) !important;
+}
+html.light-mode .surah-boundary .surah-book-name{
+  background:linear-gradient(180deg,rgba(45,122,70,.08),rgba(181,138,54,.045)) !important;
+  border-color:rgba(181,138,54,.30) !important;
+}
+</style>
+
+<style id="quran-pro-premium-title-final-override">
+/* Final premium surah title: clean emerald typography with restrained warm-gold depth. */
+.surah-book-name{
+  display:inline-block !important;
+  padding:0 !important;
+  border:0 !important;
+  border-radius:0 !important;
+  background:none !important;
+  background-image:none !important;
+  box-shadow:none !important;
+  color:#3fa56d !important;
+  -webkit-text-fill-color:#3fa56d !important;
+  -webkit-text-stroke:0 !important;
+  font-weight:900 !important;
+  letter-spacing:-0.028em !important;
+  line-height:1.12 !important;
+  text-shadow:
+    0 1px 0 rgba(231,199,126,.42),
+    0 8px 24px rgba(63,165,109,.16),
+    0 14px 34px rgba(0,0,0,.24) !important;
+}
+.surah-boundary .surah-book-name{
+  padding:0 !important;
+  border:0 !important;
+  border-radius:0 !important;
+  background:none !important;
+  background-image:none !important;
+  box-shadow:none !important;
+  color:#4fb87b !important;
+  -webkit-text-fill-color:#4fb87b !important;
+  font-size:27px !important;
+  font-weight:920 !important;
+  text-shadow:
+    0 .8px 0 rgba(240,216,145,.44),
+    0 7px 20px rgba(79,184,123,.18),
+    0 13px 30px rgba(0,0,0,.22) !important;
+}
+.surah-book-cover .surah-book-name{
+  color:#4fb87b !important;
+  -webkit-text-fill-color:#4fb87b !important;
+}
+html.light-mode .surah-book-name,
+html.light-mode .surah-boundary .surah-book-name,
+html.light-mode .surah-book-cover .surah-book-name{
+  color:#28784f !important;
+  -webkit-text-fill-color:#28784f !important;
+  text-shadow:
+    0 .8px 0 rgba(181,138,54,.32),
+    0 7px 18px rgba(40,120,79,.12) !important;
+}
+@media(max-width:760px){
+  .surah-boundary .surah-book-name{
+    font-size:24px !important;
+    letter-spacing:-0.022em !important;
+  }
+}
+</style>
+
+<style id="quran-pro-stable-live-reader-fix">
+/* Stable reading mode: no fake error checking, no auto-jump, current-word only. */
+.quran-live-letter{transition:color .16s ease, text-shadow .16s ease, background .16s ease;}
+.quran-live-letter.is-read{color:#58c982 !important;text-shadow:0 0 12px rgba(88,201,130,.28);}
+.quran-live-letter.is-current{color:#f0d891 !important;text-shadow:0 0 10px rgba(240,216,145,.22);}
+.surah-live-mic,.tajweed-mic-btn{background:linear-gradient(135deg,rgba(45,122,70,.92),rgba(88,201,130,.58)) !important;border-color:rgba(240,216,145,.42) !important;color:#fff !important;}
+.surah-live-mic.is-recording,.tajweed-mic-btn.is-recording{box-shadow:0 0 0 4px rgba(88,201,130,.18),0 0 28px rgba(88,201,130,.38) !important;}
 </style>
 </head>
 <body>
@@ -1573,7 +2025,32 @@ html.quran-pro-jumping .ayah{
       window.scrollTo({top:Math.max(0,Math.round(y)),behavior:"smooth"});
     });
   }
-  function actionButtons(i,saved){return '<div class="ayah-actions"><button class="icon-btn '+(saved?'saved':'')+'" data-action="bookmark" data-index="'+i+'" title="Закладка" aria-label="Закладка"><svg viewBox="0 0 24 24"><path d="M6 4.5A1.5 1.5 0 0 1 7.5 3h9A1.5 1.5 0 0 1 18 4.5V21l-6-3.5L6 21V4.5z"></path></svg></button><button class="icon-btn" data-action="save" data-index="'+i+'" title="Сохранить" aria-label="Сохранить"><svg viewBox="0 0 24 24"><path d="M12 3.6l2.45 5.05 5.55.8-4.02 3.92.95 5.53L12 16.3l-4.93 2.6.95-5.53L4 9.45l5.55-.8L12 3.6z"></path></svg></button><button class="icon-btn" data-action="share" data-index="'+i+'" title="Поделиться" aria-label="Поделиться"><svg viewBox="0 0 24 24"><circle cx="18" cy="5" r="3"></circle><circle cx="6" cy="12" r="3"></circle><circle cx="18" cy="19" r="3"></circle><path d="M8.7 10.7l6.6-4.4M8.7 13.3l6.6 4.4"></path></svg></button></div>';}
+  function renderArabicText(text){
+    const raw=String(text||"");
+    let html='<div class="arabic" data-live-arabic>';
+    let wordIndex=0;
+    let inWord=false;
+    let charIndex=0;
+    for(let pos=0;pos<raw.length;pos++){
+      const ch=raw[pos];
+      if(/\s/.test(ch)){
+        inWord=false;
+        charIndex=0;
+        html+=escapeHtml(ch);
+        continue;
+      }
+      if(!inWord){
+        inWord=true;
+        charIndex=0;
+        wordIndex++;
+      }
+      html+='<span class="quran-live-letter" data-live-word="'+(wordIndex-1)+'" data-live-char="'+charIndex+'">'+escapeHtml(ch)+'</span>';
+      charIndex++;
+    }
+    html+='</div>';
+    return html;
+  }
+  function actionButtons(i,saved){return '<div class="ayah-actions"><button class="icon-btn '+(saved?'saved':'')+'" data-action="bookmark" data-index="'+i+'" title="Закладка" aria-label="Закладка"><svg viewBox="0 0 24 24"><path d="M6 4.5A1.5 1.5 0 0 1 7.5 3h9A1.5 1.5 0 0 1 18 4.5V21l-6-3.5L6 21V4.5z"></path></svg></button><button class="icon-btn" data-action="save" data-index="'+i+'" title="Сохранить" aria-label="Сохранить"><svg viewBox="0 0 24 24"><path d="M12 3.6l2.45 5.05 5.55.8-4.02 3.92.95 5.53L12 16.3l-4.93 2.6.95-5.53L4 9.45l5.55-.8L12 3.6z"></path></svg></button><button class="icon-btn" data-action="share" data-index="'+i+'" title="Поделиться" aria-label="Поделиться"><svg viewBox="0 0 24 24"><circle cx="18" cy="5" r="3"></circle><circle cx="6" cy="12" r="3"></circle><circle cx="18" cy="19" r="3"></circle><path d="M8.7 10.7l6.6-4.4M8.7 13.3l6.6 4.4"></path></svg></button><button class="icon-btn tajweed-mic-btn" data-action="tajweed" data-index="'+i+'" title="Читайте" aria-label="Читайте"><svg viewBox="0 0 24 24"><path d="M12 3a3 3 0 0 0-3 3v6a3 3 0 0 0 6 0V6a3 3 0 0 0-3-3z"></path><path d="M19 10v2a7 7 0 0 1-14 0v-2"></path><path d="M12 19v3"></path><path d="M8 22h8"></path></svg></button></div>';}
   function renderPlaceholder(a,i,saved,cover){
     const meta=surahMeta(a.surah);
     const cls=cover?'surah-book-cover':'surah-boundary';
@@ -1590,9 +2067,9 @@ html.quran-pro-jumping .ayah{
     for(let i=range.start;i<range.end;i++){
       const a=quran[i]; const saved=bookmarks.includes(i);
       if(a.isSurahPlaceholder){html+=renderPlaceholder(a,i,saved,settings.mode==="book"); continue;}
-      if((i===range.start || quran[i-1].surah!==a.surah) && settings.mode==="continuous"){const m=surahMeta(a.surah);html+='<div class="surah-boundary"><div class="surah-book-arabic">'+escapeHtml(m.arabic)+'</div><div class="surah-book-name">'+escapeHtml(surahRuTitle(m))+'</div><div class="surah-book-meta">'+escapeHtml(m.ayahs+' · '+m.meta)+'</div></div>';}
+      if((i===range.start || quran[i-1].surah!==a.surah) && settings.mode==="continuous"){const m=surahMeta(a.surah);html+='<div class="surah-boundary"><div class="surah-live-header"><div class="surah-live-copy"><div class="surah-book-arabic">'+escapeHtml(m.arabic)+'</div><div class="surah-book-name">'+escapeHtml(surahRuTitle(m))+'</div><div class="surah-book-meta">'+escapeHtml(m.ayahs+' · '+m.meta)+'</div></div><button class="surah-live-mic" type="button" data-action="surah-tajweed" data-surah="'+a.surah+'" aria-label="Начать живое чтение суры"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3a3 3 0 0 0-3 3v6a3 3 0 0 0 6 0V6a3 3 0 0 0-3-3z"></path><path d="M19 10v2a7 7 0 0 1-14 0v-2"></path><path d="M12 19v3"></path><path d="M8 22h8"></path></svg><span class="surah-live-mic-text"><strong>Читайте</strong></span></button></div></div>';}
       if(a.surah!==1 && a.ayah===1){html+='<div class="bismillah">بِسْمِ ٱللَّٰهِ ٱلرَّحْمَـٰنِ ٱلرَّحِيمِ</div>';}
-      html+='<article class="ayah '+(i===currentIndex?'current-ayah':'')+'" id="'+ayahId(a)+'" data-index="'+i+'" data-surah="'+a.surah+'" data-ayah="'+a.ayah+'"><div class="ayah-top"><span class="ayah-ref">'+ayahLabel(a)+'</span>'+actionButtons(i,saved)+'</div><div class="arabic">'+escapeHtml(a.arabic)+'</div><div class="translit">'+escapeHtml(a.translit)+'</div><div class="translation">'+escapeHtml(a.ru)+'</div></article>';
+      html+='<article class="ayah '+(i===currentIndex?'current-ayah':'')+'" id="'+ayahId(a)+'" data-index="'+i+'" data-surah="'+a.surah+'" data-ayah="'+a.ayah+'"><div class="ayah-top"><span class="ayah-ref">'+ayahLabel(a)+'</span>'+actionButtons(i,saved)+'</div>'+renderArabicText(a.arabic)+'<div class="translit">'+escapeHtml(a.translit)+'</div><div class="translation">'+escapeHtml(a.ru)+'</div></article>';
     }
     html += renderSurahStepNav();
     refs.container.innerHTML=html;
@@ -1680,37 +2157,311 @@ html.quran-pro-jumping .ayah{
     node.__qpPressTimer=setTimeout(function(){node.classList.remove("qp-pressed");},420);
   }
 
-  document.addEventListener("click",function(e){
-    const nav=e.target.closest("[data-surah-nav]");
-    if(nav){
-      e.preventDefault();
-      e.stopPropagation();
-      if(nav.disabled)return;
-      pressFeedback(nav);
-      requirePro(function(){
-        if(nav.dataset.surahNav==="next")goToSurahPage(currentPage+1);
-        if(nav.dataset.surahNav==="prev")goToSurahPage(currentPage-1);
+  let tajweedRecognition = null;
+  let tajweedActive = null;
+  let tajweedSafetyTimer = null;
+  let tajweedLastResultIndex = 0;
+
+  function tajweedMicSvg(){
+    return '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3a3 3 0 0 0-3 3v6a3 3 0 0 0 6 0V6a3 3 0 0 0-3-3z"></path><path d="M19 10v2a7 7 0 0 1-14 0v-2"></path><path d="M12 19v3"></path><path d="M8 22h8"></path></svg>';
+  }
+
+  function splitArabicWords(text){
+    return String(text||"").replace(/[۞۩﴾﴿.,؛،!?؟]/g," ").split(/\s+/).map(function(w){return w.trim();}).filter(Boolean);
+  }
+
+  function normalizeArabicWord(word){
+    return String(word||"")
+      .replace(/\u0670/g,"ا")
+      .replace(/[\u0610-\u061A\u064B-\u065F\u06D6-\u06ED]/g,"")
+      .replace(/[إأآٱا]/g,"ا")
+      .replace(/ى/g,"ي")
+      .replace(/ة/g,"ه")
+      .replace(/ؤ/g,"و")
+      .replace(/ئ/g,"ي")
+      .replace(/ـ/g,"")
+      .replace(/[^\u0621-\u064A]/g,"")
+      .trim();
+  }
+
+  function getSpeechRecognition(){
+    return window.SpeechRecognition || window.webkitSpeechRecognition || null;
+  }
+
+  function liveScopeFromIndex(index){
+    const a=quran[index];
+    if(!a)return null;
+    return {surah:Number(a.surah), start:index};
+  }
+
+  function liveScopeFromSurah(surah){
+    const s=Number(surah);
+    const idx=firstReadableIndexInSurah(s);
+    if(idx<0)return null;
+    return {surah:s, start:idx};
+  }
+
+  function buildLiveMap(scope){
+    const items=[];
+    const start=Math.max(0, Number(scope && scope.start) || 0);
+    const surah=Number(scope && scope.surah);
+    for(let i=start;i<quran.length;i++){
+      const a=quran[i];
+      if(!a || Number(a.surah)!==surah)break;
+      if(a.isSurahPlaceholder)continue;
+      splitArabicWords(a.arabic).forEach(function(word,w){
+        items.push({index:i, word:w, expected:normalizeArabicWord(word), raw:word});
+      });
+    }
+    return items;
+  }
+
+  function buildLiveCache(scope){
+    if(!scope || !scope.map)return;
+    scope.map.forEach(function(item){
+      item._chars=Array.from(refs.container.querySelectorAll('.ayah[data-index="'+item.index+'"] .quran-live-letter[data-live-word="'+item.word+'"]'));
+    });
+    scope._cached=true;
+  }
+
+  function clearLiveMarks(scope){
+    if(scope && scope.map && scope._cached){
+      scope.map.forEach(function(item){
+        (item._chars||[]).forEach(function(node){node.classList.remove('is-read','is-current');});
       });
       return;
     }
-    const action=e.target.closest("[data-action]");
-    if(action){e.preventDefault();e.stopPropagation();pressFeedback(action);const index=Number(action.dataset.index);if(action.dataset.action==="bookmark")requirePro(function(){setCurrent(index,false);toggleBookmark(index);});if(action.dataset.action==="save")requirePro(function(){saveAndGo(index);});if(action.dataset.action==="share")requirePro(function(){shareAyah(index);});return;}
-    const bm=e.target.closest("[data-goto-bookmark]");
-    if(bm){e.preventDefault();e.stopPropagation();pressFeedback(bm);requirePro(function(){refs.bookmarkPanel.classList.remove("open");scrollToCurrentExact(Number(bm.dataset.gotoBookmark));});}
+    const surah=scope && scope.surah;
+    refs.container.querySelectorAll('.quran-live-letter.is-read,.quran-live-letter.is-current').forEach(function(node){
+      if(!surah || Number(node.closest('.ayah') && node.closest('.ayah').getAttribute('data-surah'))===Number(surah)){
+        node.classList.remove('is-read','is-current');
+      }
+    });
+  }
+
+  function markWord(item, mode, partialChars){
+    const chars=item._chars || Array.from(refs.container.querySelectorAll('.ayah[data-index="'+item.index+'"] .quran-live-letter[data-live-word="'+item.word+'"]'));
+    if(!chars.length)return;
+    chars.forEach(function(ch){ch.classList.remove('is-current');});
+    if(mode==='full'){
+      chars.forEach(function(ch){ch.classList.add('is-read');});
+      return;
+    }
+    const n=Math.max(0,Math.min(chars.length-1,partialChars||0));
+    chars.slice(0,n).forEach(function(ch){ch.classList.add('is-read');});
+    if(chars[n])chars[n].classList.add('is-current');
+  }
+
+  function levenshteinDistance(a,b){
+    a=String(a||""); b=String(b||"");
+    const al=a.length, bl=b.length;
+    if(!al)return bl;
+    if(!bl)return al;
+    const row=[];
+    for(let j=0;j<=bl;j++)row[j]=j;
+    for(let i=1;i<=al;i++){
+      let prev=row[0];
+      row[0]=i;
+      for(let j=1;j<=bl;j++){
+        const tmp=row[j];
+        const cost=a[i-1]===b[j-1]?0:1;
+        row[j]=Math.min(row[j]+1,row[j-1]+1,prev+cost);
+        prev=tmp;
+      }
+    }
+    return row[bl];
+  }
+
+  function liveWordMatches(expected, heard){
+    expected=normalizeArabicWord(expected);
+    heard=normalizeArabicWord(heard);
+    if(!expected || !heard)return false;
+    if(expected===heard)return true;
+    if(heard.length < Math.max(2, expected.length-1))return false;
+    if(expected.length>3 && heard[heard.length-1] !== expected[expected.length-1])return false;
+    const d=levenshteinDistance(expected,heard);
+    const limit=expected.length>=8 ? 2 : (expected.length>=5 ? 1 : 0);
+    return d<=limit;
+  }
+
+  function livePrefixRatio(expected, partial){
+    expected=normalizeArabicWord(expected);
+    partial=normalizeArabicWord(partial);
+    if(!expected || !partial)return 0;
+    if(partial.length>=expected.length)return liveWordMatches(expected,partial) ? .98 : 0;
+    if(expected.indexOf(partial)===0)return Math.min(.92,partial.length/expected.length);
+    let best=0;
+    const max=Math.min(expected.length-1,partial.length);
+    for(let n=1;n<=max;n++){
+      const e=expected.slice(0,n);
+      const p=partial.slice(0,n);
+      const d=levenshteinDistance(e,p);
+      if(d<=Math.max(0,Math.floor(n*.18)))best=n/expected.length;
+    }
+    return Math.min(.88,best);
+  }
+
+  function resetLiveProgress(scope){
+    scope.pointer=0;
+    scope.lastPartial='';
+    clearLiveMarks(scope);
+  }
+
+  function applyLiveChunk(scope, chunk){
+    if(!scope || !chunk)return;
+    const map=scope.map || [];
+    if(!map.length)return;
+    if(!scope._cached)buildLiveCache(scope);
+
+    const heard=splitArabicWords(chunk).map(normalizeArabicWord).filter(Boolean);
+    if(!heard.length)return;
+
+    let ptr=Math.max(0,Math.min(scope.pointer||0,map.length-1));
+    let consumed=false;
+
+    /* If user repeats the current word or phrase after a mistake, process it again.
+       No forward scanning: the reader advances only through the current expected word. */
+    for(let h=0; h<heard.length && ptr<map.length; h++){
+      const current=map[ptr];
+      const word=heard[h];
+
+      if(liveWordMatches(current.expected,word)){
+        markWord(current,'full');
+        ptr++;
+        consumed=true;
+        continue;
+      }
+
+      const ratio=livePrefixRatio(current.expected,word);
+      if(ratio>0){
+        const chars=current._chars || [];
+        const partialCount=Math.max(1,Math.min(chars.length-1,Math.floor(chars.length*ratio)));
+        markWord(current,'partial',partialCount);
+      }else{
+        markWord(current,'partial',0);
+      }
+      break;
+    }
+
+    scope.pointer=ptr;
+    if(consumed){
+      const next=map[ptr];
+      if(next)markWord(next,'partial',0);
+    }
+  }
+
+  function startLiveReading(scope, btn){
+    if(!scope){showToast('Откройте суру для чтения.');return;}
+    if(tajweedRecognition){stopTajweedRecording();}
+    const SpeechRec=getSpeechRecognition();
+    if(!SpeechRec){showToast('Микрофон чтения работает в Chrome по HTTPS или localhost.');return;}
+    try{
+      tajweedActive=scope;
+      tajweedActive.map=buildLiveMap(scope);
+      tajweedActive._cached=false;
+      tajweedActive.pointer=0;
+      tajweedLastResultIndex=0;
+      buildLiveCache(tajweedActive);
+      resetLiveProgress(tajweedActive);
+
+      tajweedRecognition=new SpeechRec();
+      tajweedRecognition.lang='ar-SA';
+      tajweedRecognition.continuous=true;
+      tajweedRecognition.interimResults=true;
+      tajweedRecognition.maxAlternatives=1;
+
+      tajweedRecognition.onresult=function(event){
+        for(let i=tajweedLastResultIndex;i<event.results.length;i++){
+          const txt=(event.results[i][0] && event.results[i][0].transcript) || '';
+          if(txt)applyLiveChunk(tajweedActive,txt);
+        }
+        tajweedLastResultIndex=Math.max(tajweedLastResultIndex,event.resultIndex);
+      };
+
+      tajweedRecognition.onerror=function(){
+        /* No red error panel in reading mode. */
+      };
+
+      tajweedRecognition.onend=function(){
+        refs.container.querySelectorAll('.tajweed-mic-btn.is-recording,.surah-live-mic.is-recording').forEach(function(x){x.classList.remove('is-recording');});
+        tajweedRecognition=null;
+        clearTimeout(tajweedSafetyTimer);
+      };
+
+      tajweedRecognition.start();
+      if(btn)btn.classList.add('is-recording');
+      refs.container.querySelectorAll('.surah-live-mic').forEach(function(x){if(x!==btn)x.classList.remove('is-recording');});
+      showToast('Читайте спокойно. Подсветка идёт только по текущему слову.');
+      clearTimeout(tajweedSafetyTimer);
+      tajweedSafetyTimer=setTimeout(function(){stopTajweedRecording();},180000);
+    }catch(err){
+      tajweedRecognition=null;
+      showToast('Разрешите доступ к микрофону.');
+    }
+  }
+
+  function startTajweedRecording(index, btn){
+    const scope=liveScopeFromIndex(index);
+    startLiveReading(scope, btn);
+  }
+
+  function stopTajweedRecording(){
+    clearTimeout(tajweedSafetyTimer);
+    if(tajweedRecognition){
+      const rec=tajweedRecognition;
+      tajweedRecognition=null;
+      try{rec.stop();}catch(e){}
+    }
+    refs.container.querySelectorAll('.tajweed-mic-btn.is-recording,.surah-live-mic.is-recording').forEach(function(x){x.classList.remove('is-recording');});
+  }
+
+
+  function firstReadableIndexInSurah(surah){
+    surah=Number(surah);
+    const idx=quran.findIndex(function(a){return Number(a.surah)===surah && !a.isSurahPlaceholder;});
+    return idx>=0 ? idx : quran.findIndex(function(a){return Number(a.surah)===surah;});
+  }
+  refs.container.addEventListener("click",function(event){
+    const surahNav=event.target.closest("[data-surah-nav]");
+    if(surahNav && refs.container.contains(surahNav)){
+      event.preventDefault();
+      event.stopPropagation();
+      pressFeedback(surahNav);
+      requirePro(function(){
+        const dir=surahNav.getAttribute("data-surah-nav");
+        if(dir==="next")goToSurahPage(currentPage+1);
+        if(dir==="prev")goToSurahPage(currentPage-1);
+      });
+      return;
+    }
+
+    const btn=event.target.closest("[data-action]");
+    if(!btn || !refs.container.contains(btn))return;
+    const action=btn.getAttribute("data-action");
+    if(["bookmark","save","share","tajweed","surah-tajweed"].indexOf(action)===-1)return;
+    event.preventDefault();
+    event.stopPropagation();
+    pressFeedback(btn);
+    requirePro(function(){
+      if(action==="surah-tajweed"){
+        const scope=liveScopeFromSurah(btn.getAttribute("data-surah"));
+        if(!scope){showToast("Сура ещё загружается.");return;}
+        currentIndex=scope.start;
+        startLiveReading(scope,btn);
+        return;
+      }
+      const index=Number(btn.getAttribute("data-index"));
+      if(!Number.isFinite(index) || !quran[index])return;
+      if(action==="bookmark")toggleBookmark(index);
+      else if(action==="save")saveAndGo(index);
+      else if(action==="share")shareAyah(index);
+      else if(action==="tajweed")startTajweedRecording(index,btn);
+    });
   });
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  document.getElementById("toggleArabic").addEventListener("change",function(e){pressFeedback(e.target.closest(".quran-checkline"));setDisplaySetting("arabic",e.target.checked);});
-  document.getElementById("toggleTranslit").addEventListener("change",function(e){pressFeedback(e.target.closest(".quran-checkline"));setDisplaySetting("translit",e.target.checked);});
-  document.getElementById("toggleTranslation").addEventListener("change",function(e){pressFeedback(e.target.closest(".quran-checkline"));setDisplaySetting("translation",e.target.checked);});
+
+  document.getElementById("toggleArabic").addEventListener("change",function(e){pressFeedback(e.target.closest(".reader-check"));setDisplaySetting("arabic",e.target.checked);});
+  document.getElementById("toggleTranslit").addEventListener("change",function(e){pressFeedback(e.target.closest(".reader-check"));setDisplaySetting("translit",e.target.checked);});
+  document.getElementById("toggleTranslation").addEventListener("change",function(e){pressFeedback(e.target.closest(".reader-check"));setDisplaySetting("translation",e.target.checked);});
   document.getElementById("continueBookmarkBtn").addEventListener("click",function(){
     const btn=this;
     pressFeedback(btn);
