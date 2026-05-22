@@ -511,6 +511,99 @@ html.light-mode .translation{
     overflow:visible;
   }
 }
+
+/* === QuranPro controls v2: compact checkboxes + continue reading === */
+.reader-controls-v2{
+  display:flex !important;
+  flex-direction:column !important;
+  gap:10px !important;
+}
+.reader-check-row,
+.reader-action-row{
+  display:flex;
+  align-items:center;
+  flex-wrap:wrap;
+  gap:14px;
+}
+.reader-check-row{
+  justify-content:flex-start;
+  padding:2px 0;
+}
+.reader-check{
+  display:inline-flex;
+  align-items:center;
+  gap:6px;
+  min-height:22px;
+  padding:0;
+  border:0;
+  border-radius:0;
+  background:transparent;
+  color:#ffffff;
+  font-size:13px;
+  font-weight:950;
+  cursor:pointer;
+  user-select:none;
+  line-height:1;
+}
+.reader-check input{
+  width:14px;
+  height:14px;
+  margin:0;
+  accent-color:#4caf6a;
+  flex:0 0 auto;
+}
+.reader-check:has(input:checked){
+  color:#ffffff;
+  border-color:transparent;
+  background:transparent;
+}
+.continue-reading-btn{
+  display:inline-flex !important;
+  align-items:center !important;
+  gap:8px !important;
+}
+.continue-reading-btn svg{
+  width:18px;
+  height:18px;
+  fill:none;
+  stroke:currentColor;
+  stroke-width:2;
+  stroke-linecap:round;
+  stroke-linejoin:round;
+}
+@media(max-width:560px){
+  .reader-check-row{
+    display:flex;
+    flex-wrap:nowrap;
+    width:100%;
+    gap:10px;
+  }
+  .reader-check{
+    justify-content:flex-start;
+    padding:0;
+    font-size:12px;
+    gap:5px;
+    white-space:nowrap;
+  }
+  .reader-check input{
+    width:13px;
+    height:13px;
+  }
+  .reader-action-row{
+    width:100%;
+    display:grid;
+    grid-template-columns:auto auto 1fr;
+    gap:8px;
+  }
+  .continue-reading-btn{
+    justify-content:center !important;
+    min-width:0 !important;
+  }
+  .continue-reading-btn span{
+    white-space:nowrap;
+  }
+}
+
 </style>
 </head>
 <body>
@@ -546,13 +639,20 @@ html.light-mode .translation{
         </div>
       </div>
 
-      <div class="controls" aria-label="Настройки чтения">
-        <button class="tool-btn active" id="toggleArabic">Арабский</button>
-        <button class="tool-btn active" id="toggleTranslit">Транскрипция</button>
-        <button class="tool-btn active" id="toggleTranslation">Русский</button>
-        <button class="tool-btn" id="fontMinus">A−</button>
-        <button class="tool-btn" id="fontPlus">A+</button>
-        <button class="tool-btn" id="continuousModeBtn">Лента</button>
+      <div class="controls reader-controls-v2" aria-label="Настройки чтения">
+        <div class="reader-check-row" aria-label="Видимость текста">
+          <label class="reader-check"><input type="checkbox" id="toggleArabic" checked><span>Арабский</span></label>
+          <label class="reader-check"><input type="checkbox" id="toggleTranslit" checked><span>Транскрипция</span></label>
+          <label class="reader-check"><input type="checkbox" id="toggleTranslation" checked><span>Перевод</span></label>
+        </div>
+        <div class="reader-action-row" aria-label="Размер текста и продолжение чтения">
+          <button class="tool-btn" id="fontMinus">A−</button>
+          <button class="tool-btn" id="fontPlus">A+</button>
+          <button class="tool-btn continue-reading-btn" id="continueBookmarkBtn" type="button" aria-label="Продолжить чтение с закладки">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 4.5A1.5 1.5 0 0 1 7.5 3h9A1.5 1.5 0 0 1 18 4.5V21l-6-3.5L6 21V4.5z"></path></svg>
+            <span>Продолжить чтение</span>
+          </button>
+        </div>
       </div>
 
       <div class="book-stage locked" id="quranReader">
@@ -840,10 +940,25 @@ html.light-mode .translation{
     const progress=Math.round((pos/total)*100);
     refs.progressText.textContent=progress+"%"; refs.progressFill.style.width=progress+"%"; localStorage.setItem(PROGRESS_KEY,String(currentIndex));
   }
+  function syncCurrentDom(){
+    refs.container.querySelectorAll(".current-ayah").forEach(function(node){node.classList.remove("current-ayah");});
+    const node=refs.container.querySelector('[data-index="'+currentIndex+'"]');
+    if(node)node.classList.add("current-ayah");
+  }
+  function syncBookmarkButtons(){
+    const saved=getBookmarks();
+    refs.container.querySelectorAll('[data-action="bookmark"]').forEach(function(btn){
+      const active=saved.includes(Number(btn.dataset.index));
+      btn.classList.toggle("saved",active);
+    });
+  }
   function setCurrent(index,scroll){
     currentIndex=Math.max(0,Math.min(index,quran.length-1));
     currentPage=groupIndexForCurrent();
-    updateProgress(); render();
+    updateProgress();
+    syncCurrentDom();
+    const a=currentAyah();
+    refs.readerTitle.textContent=a?ayahLabel(a):"Полное чтение";
     if(scroll){setTimeout(function(){const node=document.querySelector('[data-index="'+currentIndex+'"]'); if(node)node.scrollIntoView({behavior:"smooth",block:"center"}); else refs.reader.scrollIntoView({behavior:"smooth",block:"start"});},40);}
   }
   function visibleRange(){
@@ -861,7 +976,7 @@ html.light-mode .translation{
 
   function render(){
     refs.reader.classList.toggle("hide-arabic",!settings.arabic);refs.reader.classList.toggle("hide-translit",!settings.translit);refs.reader.classList.toggle("hide-translation",!settings.translation);refs.reader.classList.toggle("continuous",settings.mode==="continuous");
-    document.getElementById("toggleArabic").classList.toggle("active",settings.arabic);document.getElementById("toggleTranslit").classList.toggle("active",settings.translit);document.getElementById("toggleTranslation").classList.toggle("active",settings.translation);const continuousBtn=document.getElementById("continuousModeBtn");if(continuousBtn)continuousBtn.classList.toggle("active",true);settings.mode="continuous";
+    document.getElementById("toggleArabic").checked=!!settings.arabic;document.getElementById("toggleTranslit").checked=!!settings.translit;document.getElementById("toggleTranslation").checked=!!settings.translation;settings.mode="continuous";
     if(!quran.length){refs.container.innerHTML='<div class="empty-state">Текст Корана не загружен.</div>';return;}
     const range=visibleRange(); const bookmarks=getBookmarks(); let html="";
     const first=quran[range.start];
@@ -877,11 +992,11 @@ html.light-mode .translation{
     refs.container.querySelectorAll(".arabic").forEach(function(el){el.style.fontSize=arabicFontSize+"px";});
     const gs=groups(); const a=currentAyah();
     if(settings.mode==="book"){const g=gs[currentPage]||gs[0];const m=g?g.meta:surahMeta(1);refs.pageMeta.textContent="Сура "+(currentPage+1)+" из "+gs.length+" · "+m.arabic+" · "+m.name+" · "+m.ayahs;refs.readerTitle.textContent=m.name||"Полное чтение";}
-    else {refs.pageMeta.textContent="Лента Корана";refs.readerTitle.textContent=a?ayahLabel(a):"Полное чтение";}
+    else {refs.pageMeta.textContent="Священный Коран";refs.readerTitle.textContent=a?ayahLabel(a):"Полное чтение";}
     renderBookmarks(); updateProgress();
   }
   function renderBookmarks(){const saved=getBookmarks();if(!saved.length){refs.bookmarkList.innerHTML='<div class="empty-state">Закладок пока нет.</div>';return;}refs.bookmarkList.innerHTML=saved.map(function(index){const a=quran[index];if(!a)return"";return '<div class="bookmark-item"><span>'+ayahLabel(a)+'</span><button data-goto-bookmark="'+index+'">Открыть</button></div>';}).join("");}
-  function toggleBookmark(index){let saved=getBookmarks();if(saved.includes(index)){saved=[];showToast("Закладка удалена.");}else{saved=[index];localStorage.setItem(PROGRESS_KEY,String(index));showToast("Закладка поставлена. Можно продолжить чтение с этого места.");}saveBookmarks(saved);render();}
+  function toggleBookmark(index){let saved=getBookmarks();if(saved.includes(index)){saved=[];showToast("Закладка удалена.");}else{saved=[index];localStorage.setItem(PROGRESS_KEY,String(index));showToast("Закладка поставлена. Можно продолжить чтение с этого места.");}saveBookmarks(saved);syncBookmarkButtons();renderBookmarks();updateProgress();}
   function saveAndGo(index){saveFavorite(index);localStorage.setItem(PROGRESS_KEY,String(index));showToast("Сохранено. Открываю избранное.");setTimeout(function(){window.location.href="favorites-ru.html";},350);}
   async function shareAyah(index){
     const a=quran[index];
@@ -919,13 +1034,12 @@ html.light-mode .translation{
   
   
   
-  document.getElementById("toggleArabic").addEventListener("click",function(){settings.arabic=!settings.arabic;saveSettings();render();});
-  document.getElementById("toggleTranslit").addEventListener("click",function(){settings.translit=!settings.translit;saveSettings();render();});
-  document.getElementById("toggleTranslation").addEventListener("click",function(){settings.translation=!settings.translation;saveSettings();render();});
-  
-  document.getElementById("continuousModeBtn").addEventListener("click",function(){settings.mode="continuous";saveSettings();render();});
-  document.getElementById("fontPlus").addEventListener("click",function(){arabicFontSize=Math.min(44,arabicFontSize+2);render();});
-  document.getElementById("fontMinus").addEventListener("click",function(){arabicFontSize=Math.max(22,arabicFontSize-2);render();});
+  document.getElementById("toggleArabic").addEventListener("change",function(e){settings.arabic=e.target.checked;saveSettings();render();});
+  document.getElementById("toggleTranslit").addEventListener("change",function(e){settings.translit=e.target.checked;saveSettings();render();});
+  document.getElementById("toggleTranslation").addEventListener("change",function(e){settings.translation=e.target.checked;saveSettings();render();});
+  document.getElementById("continueBookmarkBtn").addEventListener("click",function(){requirePro(function(){const saved=getBookmarks();const index=saved.length?saved[0]:Number(localStorage.getItem(PROGRESS_KEY)||0);setCurrent(index,true);showToast(saved.length?"Открыта ваша закладка.":"Открыто последнее место чтения.");});});
+  document.getElementById("fontPlus").addEventListener("click",function(){arabicFontSize=Math.min(44,arabicFontSize+2);refs.container.querySelectorAll(".arabic").forEach(function(el){el.style.fontSize=arabicFontSize+"px";});});
+  document.getElementById("fontMinus").addEventListener("click",function(){arabicFontSize=Math.max(22,arabicFontSize-2);refs.container.querySelectorAll(".arabic").forEach(function(el){el.style.fontSize=arabicFontSize+"px";});});
   document.querySelectorAll("[data-close-modal]").forEach(function(btn){btn.addEventListener("click",closeModal);});
   refs.modal.addEventListener("click",function(e){if(e.target===refs.modal)closeModal();});
   document.addEventListener("keydown",function(e){if(e.key==="Escape")closeModal();});
