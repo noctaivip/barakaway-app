@@ -689,6 +689,28 @@ html.light-mode .ayah-ref{
   background:color-mix(in srgb,var(--qp-accent) 9%,#ffffff) !important;
   border-color:var(--qp-accent-border) !important;
 }
+
+/* === Continue bookmark + top button fix === */
+.continue-reading-btn.has-bookmark svg{
+  fill:currentColor;
+}
+.scroll-top-btn svg{
+  width:18px;
+  height:18px;
+  fill:none;
+  stroke:currentColor;
+  stroke-width:2.4;
+  stroke-linecap:round;
+  stroke-linejoin:round;
+}
+.scroll-top-btn{
+  min-width:104px;
+}
+@media(max-width:520px){
+  .scroll-top-btn{min-width:auto;}
+  .scroll-top-btn span{display:none;}
+}
+
 </style>
 </head>
 <body>
@@ -736,6 +758,10 @@ html.light-mode .ayah-ref{
           <button class="tool-btn continue-reading-btn" id="continueBookmarkBtn" type="button" aria-label="Продолжить чтение с закладки">
             <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 4.5A1.5 1.5 0 0 1 7.5 3h9A1.5 1.5 0 0 1 18 4.5V21l-6-3.5L6 21V4.5z"></path></svg>
             <span>Продолжить чтение</span>
+          </button>
+          <button class="tool-btn scroll-top-btn" id="scrollTopBtn" type="button" aria-label="Наверх страницы">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 5l-7 7m7-7l7 7M12 5v14"></path></svg>
+            <span>Наверх</span>
           </button>
         </div>
       </div>
@@ -994,7 +1020,52 @@ html.light-mode .ayah-ref{
   }
 
   function getBookmarks(){try{return JSON.parse(localStorage.getItem(BOOKMARKS_KEY)||"[]");}catch(e){return [];}}
-  function saveBookmarks(items){localStorage.setItem(BOOKMARKS_KEY,JSON.stringify(Array.from(new Set(items)).sort(function(a,b){return a-b;})));}
+  function ayahKeyFromIndex(index){
+    const a=quran[index];
+    if(!a)return null;
+    return a.isSurahPlaceholder ? ("surah:"+a.surah) : (a.surah+":"+a.ayah);
+  }
+  function indexFromBookmark(item){
+    if(item===undefined || item===null)return -1;
+    if(typeof item==="number")return Math.max(0,Math.min(item,quran.length-1));
+    if(typeof item==="string"){
+      const parts=item.replace("ayah:","").split(":");
+      if(parts.length>=2){
+        const s=Number(parts[0]);
+        const a=Number(parts[1]);
+        return quran.findIndex(function(row){return Number(row.surah)===s && Number(row.ayah)===a;});
+      }
+      const n=Number(item);
+      return Number.isFinite(n)?Math.max(0,Math.min(n,quran.length-1)):-1;
+    }
+    if(typeof item==="object"){
+      if(item.key)return indexFromBookmark(item.key);
+      if(item.surah && item.ayah){
+        return quran.findIndex(function(row){return Number(row.surah)===Number(item.surah) && Number(row.ayah)===Number(item.ayah);});
+      }
+      if(Number.isFinite(Number(item.index)))return Math.max(0,Math.min(Number(item.index),quran.length-1));
+    }
+    return -1;
+  }
+  function normalizedBookmarks(){
+    const raw=getBookmarks();
+    const item=Array.isArray(raw)?raw[0]:raw;
+    const index=indexFromBookmark(item);
+    if(index<0)return [];
+    return [index];
+  }
+  function saveBookmarkIndex(index){
+    const a=quran[index];
+    if(!a){localStorage.setItem(BOOKMARKS_KEY,"[]");return;}
+    const record={index:index,surah:a.surah,ayah:a.ayah||1,key:ayahKeyFromIndex(index),savedAt:new Date().toISOString()};
+    localStorage.setItem(BOOKMARKS_KEY,JSON.stringify([record]));
+  }
+  function clearBookmark(){localStorage.setItem(BOOKMARKS_KEY,"[]");}
+  function saveBookmarks(items){
+    if(!items || !items.length){clearBookmark();return;}
+    const idx=indexFromBookmark(items[0]);
+    if(idx>=0)saveBookmarkIndex(idx); else clearBookmark();
+  }
   function getFavorites(){try{return JSON.parse(localStorage.getItem(FAVORITES_KEY)||"[]");}catch(e){return [];}}
   function saveFavorite(index){
     const a=quran[index]; if(!a)return;
@@ -1030,12 +1101,31 @@ html.light-mode .ayah-ref{
     const node=refs.container.querySelector('[data-index="'+currentIndex+'"]');
     if(node)node.classList.add("current-ayah");
   }
+  function syncContinueButton(){
+    const btn=document.getElementById("continueBookmarkBtn");
+    if(!btn)return;
+    btn.classList.toggle("has-bookmark", normalizedBookmarks().length>0);
+  }
   function syncBookmarkButtons(){
-    const saved=getBookmarks();
+    const saved=normalizedBookmarks();
     refs.container.querySelectorAll('[data-action="bookmark"]').forEach(function(btn){
       const active=saved.includes(Number(btn.dataset.index));
       btn.classList.toggle("saved",active);
     });
+    syncContinueButton();
+  }
+  function scrollToCurrentExact(){
+    const a=currentAyah();
+    if(!a)return;
+    const node=document.getElementById(ayahId(a)) || refs.container.querySelector('[data-index="'+currentIndex+'"]');
+    if(!node){refs.reader.scrollIntoView({behavior:"smooth",block:"start"});return;}
+    node.classList.add("current-ayah");
+    node.scrollIntoView({behavior:"smooth",block:"center"});
+    clearTimeout(window.__quranProExactScroll);
+    window.__quranProExactScroll=setTimeout(function(){
+      const fresh=document.getElementById(ayahId(a)) || refs.container.querySelector('[data-index="'+currentIndex+'"]');
+      if(fresh)fresh.scrollIntoView({behavior:"smooth",block:"center"});
+    },360);
   }
   function setCurrent(index,scroll){
     currentIndex=Math.max(0,Math.min(index,quran.length-1));
@@ -1044,7 +1134,10 @@ html.light-mode .ayah-ref{
     syncCurrentDom();
     const a=currentAyah();
     refs.readerTitle.textContent=a?ayahLabel(a):"Полное чтение";
-    if(scroll){setTimeout(function(){const node=document.querySelector('[data-index="'+currentIndex+'"]'); if(node)node.scrollIntoView({behavior:"smooth",block:"center"}); else refs.reader.scrollIntoView({behavior:"smooth",block:"start"});},40);}
+    if(scroll){
+      if(!refs.container.querySelector('[data-index="'+currentIndex+'"]'))render();
+      requestAnimationFrame(scrollToCurrentExact);
+    }
   }
   function visibleRange(){
     if(settings.mode==="continuous")return {start:0,end:quran.length};
@@ -1063,7 +1156,7 @@ html.light-mode .ayah-ref{
     refs.reader.classList.toggle("hide-arabic",!settings.arabic);refs.reader.classList.toggle("hide-translit",!settings.translit);refs.reader.classList.toggle("hide-translation",!settings.translation);refs.reader.classList.toggle("continuous",settings.mode==="continuous");
     document.getElementById("toggleArabic").checked=!!settings.arabic;document.getElementById("toggleTranslit").checked=!!settings.translit;document.getElementById("toggleTranslation").checked=!!settings.translation;settings.mode="continuous";
     if(!quran.length){refs.container.innerHTML='<div class="empty-state">Текст Корана не загружен.</div>';return;}
-    const range=visibleRange(); const bookmarks=getBookmarks(); let html="";
+    const range=visibleRange(); const bookmarks=normalizedBookmarks(); let html="";
     const first=quran[range.start];
     if(settings.mode==="book" && first && first.surah!==1){html+='<div class="bismillah">بِسْمِ ٱللَّٰهِ ٱلرَّحْمَـٰنِ ٱلرَّحِيمِ</div>';}
     for(let i=range.start;i<range.end;i++){
@@ -1080,27 +1173,32 @@ html.light-mode .ayah-ref{
     else {refs.pageMeta.textContent="Священный Коран";refs.readerTitle.textContent=a?ayahLabel(a):"Полное чтение";}
     renderBookmarks(); updateProgress();
   }
-  function renderBookmarks(){const saved=getBookmarks();if(!saved.length){refs.bookmarkList.innerHTML='<div class="empty-state">Закладок пока нет.</div>';return;}refs.bookmarkList.innerHTML=saved.map(function(index){const a=quran[index];if(!a)return"";return '<div class="bookmark-item"><span>'+ayahLabel(a)+'</span><button data-goto-bookmark="'+index+'">Открыть</button></div>';}).join("");}
+  function renderBookmarks(){const saved=normalizedBookmarks();syncContinueButton();if(!saved.length){refs.bookmarkList.innerHTML='<div class="empty-state">Закладок пока нет.</div>';return;}refs.bookmarkList.innerHTML=saved.map(function(index){const a=quran[index];if(!a)return"";return '<div class="bookmark-item"><span>'+ayahLabel(a)+'</span><button data-goto-bookmark="'+index+'">Открыть</button></div>';}).join("");}
   function toggleBookmark(index){
-    const previous=getBookmarks()[0];
-    let saved=getBookmarks();
-    if(saved.includes(index)){
-      saved=[];
+    const previous=normalizedBookmarks()[0];
+    const currentSaved=previous===index;
+    if(currentSaved){
+      clearBookmark();
       showToast("Закладка удалена.");
     }else{
-      saved=[index];
+      saveBookmarkIndex(index);
       localStorage.setItem(PROGRESS_KEY,String(index));
       showToast("Закладка поставлена. Можно продолжить чтение с этого места.");
     }
-    saveBookmarks(saved);
     if(previous!==undefined){
       refs.container.querySelectorAll('[data-action="bookmark"][data-index="'+previous+'"]').forEach(function(btn){btn.classList.remove("saved");});
     }
-    refs.container.querySelectorAll('[data-action="bookmark"][data-index="'+index+'"]').forEach(function(btn){btn.classList.toggle("saved",saved.includes(index));});
+    refs.container.querySelectorAll('[data-action="bookmark"][data-index="'+index+'"]').forEach(function(btn){btn.classList.toggle("saved",!currentSaved);});
     renderBookmarks();
+    syncContinueButton();
     updateProgress();
   }
-  function saveAndGo(index){saveFavorite(index);localStorage.setItem(PROGRESS_KEY,String(index));showToast("Сохранено. Открываю избранное.");setTimeout(function(){window.location.href="favorites-ru.html";},350);}
+  function saveAndGo(index){
+    saveFavorite(index);
+    localStorage.setItem(PROGRESS_KEY,String(index));
+    refs.container.querySelectorAll('[data-action="save"][data-index="'+index+'"]').forEach(function(btn){btn.classList.add("saved","active");});
+    showToast("Аят сохранён в избранное.");
+  }
   async function shareAyah(index){
     const a=quran[index];
     if(!a)return;
@@ -1140,7 +1238,7 @@ html.light-mode .ayah-ref{
     applyDisplaySettings();
   }
 
-  document.addEventListener("click",function(e){const action=e.target.closest("[data-action]");if(action){e.preventDefault();const index=Number(action.dataset.index);setCurrent(index,false);if(action.dataset.action==="bookmark")requirePro(function(){toggleBookmark(index);});if(action.dataset.action==="save")requirePro(function(){saveAndGo(index);});if(action.dataset.action==="share")requirePro(function(){shareAyah(index);});return;}const bm=e.target.closest("[data-goto-bookmark]");if(bm){requirePro(function(){refs.bookmarkPanel.classList.remove("open");setCurrent(Number(bm.dataset.gotoBookmark),true);});}});
+  document.addEventListener("click",function(e){const action=e.target.closest("[data-action]");if(action){e.preventDefault();e.stopPropagation();const index=Number(action.dataset.index);setCurrent(index,false);if(action.dataset.action==="bookmark")requirePro(function(){toggleBookmark(index);});if(action.dataset.action==="save")requirePro(function(){saveAndGo(index);});if(action.dataset.action==="share")requirePro(function(){shareAyah(index);});return;}const bm=e.target.closest("[data-goto-bookmark]");if(bm){e.preventDefault();e.stopPropagation();requirePro(function(){refs.bookmarkPanel.classList.remove("open");setCurrent(Number(bm.dataset.gotoBookmark),true);});}});
   
   
   
@@ -1154,7 +1252,8 @@ html.light-mode .ayah-ref{
   document.getElementById("toggleArabic").addEventListener("change",function(e){setDisplaySetting("arabic",e.target.checked);});
   document.getElementById("toggleTranslit").addEventListener("change",function(e){setDisplaySetting("translit",e.target.checked);});
   document.getElementById("toggleTranslation").addEventListener("change",function(e){setDisplaySetting("translation",e.target.checked);});
-  document.getElementById("continueBookmarkBtn").addEventListener("click",function(){requirePro(function(){const saved=getBookmarks();const index=saved.length?saved[0]:Number(localStorage.getItem(PROGRESS_KEY)||0);setCurrent(index,true);showToast(saved.length?"Открыта ваша закладка.":"Открыто последнее место чтения.");});});
+  document.getElementById("continueBookmarkBtn").addEventListener("click",function(){requirePro(function(){const saved=normalizedBookmarks();const index=saved.length?saved[0]:Number(localStorage.getItem(PROGRESS_KEY)||0);setCurrent(index,false);requestAnimationFrame(scrollToCurrentExact);showToast(saved.length?"Открыта ваша закладка.":"Открыто последнее место чтения.");});});
+  document.getElementById("scrollTopBtn").addEventListener("click",function(){window.scrollTo({top:0,behavior:"smooth"});});
   document.getElementById("fontPlus").addEventListener("click",function(){arabicFontSize=Math.min(44,arabicFontSize+2);refs.reader.style.setProperty("--arabic-font-size",arabicFontSize+"px");});
   document.getElementById("fontMinus").addEventListener("click",function(){arabicFontSize=Math.max(22,arabicFontSize-2);refs.reader.style.setProperty("--arabic-font-size",arabicFontSize+"px");});
   document.querySelectorAll("[data-close-modal]").forEach(function(btn){btn.addEventListener("click",closeModal);});
