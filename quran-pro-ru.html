@@ -468,6 +468,20 @@ html.light-mode .translation{
 
 
 
+/* === QuranPro clean continuous reader instructions === */
+.reader-shell{margin-top:24px;}
+.reader-head{align-items:start;}
+.reader-title h2{margin-bottom:12px;}
+.quran-icon-guide{display:grid;gap:8px;max-width:720px;margin-top:10px;}
+.quran-icon-guide-item{display:flex;align-items:center;gap:10px;color:#cbd5df;font-size:13px;font-weight:800;line-height:1.35;}
+.guide-icon{width:34px;height:34px;min-width:34px;border-radius:999px;display:inline-flex;align-items:center;justify-content:center;background:rgba(215,181,109,.08);border:1px solid rgba(215,181,109,.22);color:#d7b56d;}
+.guide-icon svg{width:18px;height:18px;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;}
+.quran-icon-guide-item:nth-child(2) .guide-icon svg{fill:currentColor;}
+#continuousModeBtn{color:#ffffff !important;background:linear-gradient(135deg,rgba(45,122,70,.88),rgba(76,175,106,.34)) !important;border-color:rgba(45,122,70,.34) !important;}
+.book-page-meta{justify-content:flex-start !important;}
+@media(max-width:760px){.quran-icon-guide{gap:7px}.quran-icon-guide-item{font-size:12.5px}.guide-icon{width:32px;height:32px;min-width:32px}}
+
+
 /* === QuranPro sticky reader controls fix === */
 .reader-shell{
   overflow:visible !important;
@@ -507,25 +521,24 @@ html.light-mode .translation{
   </header>
 
   <main>
-    <section class="hero" id="top">
-      <div class="hero-inner">
-        <div class="badge">📖 Коран PRO</div>
-        <h1>Коран как книга: читайте с места остановки</h1>
-        <div class="hero-text">PRO-ридер предназначен для цельного чтения Корана: арабский текст, транскрипция, русский перевод, скрытие нужных слоёв, закладки, сохранение места и перелистывание свайпом на мобильном.</div>
-        <div class="hero-actions">
-          <button class="btn btn-primary" id="continueTopBtn">Продолжить чтение</button>
-          <button class="btn btn-secondary" id="saveTopBtn">Сохранить место</button>
-          <button class="btn btn-secondary" id="openBookmarksTopBtn">Закладки</button>
-          <button class="btn btn-green" id="shareTopBtn">Поделиться</button>
-        </div>
-      </div>
-    </section>
-
     <section class="reader-shell" id="reader">
       <div class="reader-head">
         <div class="reader-title">
           <h2 id="readerTitle">Полное чтение</h2>
-          <p id="readerSubtitle">Книжный режим · свайп · закладки · сохранение по аятам</p>
+          <div class="quran-icon-guide" aria-label="Как использовать иконки аята">
+            <div class="quran-icon-guide-item">
+              <span class="guide-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M6 4.5A1.5 1.5 0 0 1 7.5 3h9A1.5 1.5 0 0 1 18 4.5V21l-6-3.5L6 21V4.5z"></path></svg></span>
+              <span>Ставьте закладку, чтобы продолжить чтение с места остановки.</span>
+            </div>
+            <div class="quran-icon-guide-item">
+              <span class="guide-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M12 3.6l2.45 5.05 5.55.8-4.02 3.92.95 5.53L12 16.3l-4.93 2.6.95-5.53L4 9.45l5.55-.8L12 3.6z"></path></svg></span>
+              <span>Сохраняйте любимые аяты в избранное.</span>
+            </div>
+            <div class="quran-icon-guide-item">
+              <span class="guide-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><circle cx="18" cy="5" r="3"></circle><circle cx="6" cy="12" r="3"></circle><circle cx="18" cy="19" r="3"></circle><path d="M8.7 10.7l6.6-4.4M8.7 13.3l6.6 4.4"></path></svg></span>
+              <span>Делитесь любимыми аятами Священного Корана.</span>
+            </div>
+          </div>
         </div>
         <div class="progress-card">
           <div class="progress-label"><span>Прогресс</span><span id="progressText">0%</span></div>
@@ -539,37 +552,22 @@ html.light-mode .translation{
         <button class="tool-btn active" id="toggleTranslation">Русский</button>
         <button class="tool-btn" id="fontMinus">A−</button>
         <button class="tool-btn" id="fontPlus">A+</button>
-        <button class="tool-btn active" id="bookModeBtn">Книга</button>
         <button class="tool-btn" id="continuousModeBtn">Лента</button>
       </div>
 
       <div class="book-stage locked" id="quranReader">
         <div class="book-page-meta">
           <span id="pageMeta">Загрузка текста…</span>
-          <div class="book-nav">
-            <button id="prevPageBtn" aria-label="Предыдущая страница">‹</button>
-            <button id="nextPageBtn" aria-label="Следующая страница">›</button>
-          </div>
         </div>
         <div id="ayahContainer"></div>
       </div>
 
-      <div class="data-warning" id="dataWarning" hidden>
-        Подключён полный Коран: 114 сур и все аяты загружаются внутри QuranPro. Если локальный JSON есть на сайте, используется он; иначе ридер берёт арабский текст, транскрипцию и русский перевод через Quran API.
-      </div>
 
       <section class="bookmark-panel" id="bookmarkPanel" aria-label="Закладки">
         <h3>Закладки</h3>
         <div class="bookmark-list" id="bookmarkList"></div>
       </section>
 
-      <div class="reader-actions" style="padding:0 20px 22px;margin-top:0">
-        <button class="btn btn-primary" id="continueBtn">Продолжить</button>
-        <button class="btn btn-secondary" id="savePlaceBtn">Сохранить</button>
-        <button class="btn btn-secondary" id="bookmarkCurrentBtn">Закладка на текущем аяте</button>
-        <button class="btn btn-secondary" id="clearProgressBtn">Сбросить место</button>
-        <a class="btn btn-green" href="quran-ai-ru.html">Проверка чтения</a>
-      </div>
     </section>
   </main>
 </div>
@@ -615,10 +613,11 @@ html.light-mode .translation{
   let touchStartY=0;
   let currentPage=0;
   let settings=loadSettings();
+  settings.mode="continuous";
 
   function loadSettings(){
-    try{return Object.assign({arabic:true,translit:true,translation:true,mode:"book"},JSON.parse(localStorage.getItem(SETTINGS_KEY)||"{}"));}
-    catch(e){return {arabic:true,translit:true,translation:true,mode:"book"};}
+    try{return Object.assign({arabic:true,translit:true,translation:true,mode:"continuous"},JSON.parse(localStorage.getItem(SETTINGS_KEY)||"{}"));}
+    catch(e){return {arabic:true,translit:true,translation:true,mode:"continuous"};}
   }
   function saveSettings(){localStorage.setItem(SETTINGS_KEY,JSON.stringify(settings));}
   function isPro(){
@@ -853,7 +852,7 @@ html.light-mode .translation{
     if(currentPage>=gs.length)currentPage=gs.length-1;
     return {start:gs[currentPage].start,end:gs[currentPage].end};
   }
-  function actionButtons(i,saved){return '<div class="ayah-actions"><button class="icon-btn '+(saved?'saved':'')+'" data-action="bookmark" data-index="'+i+'" title="Закладка" aria-label="Закладка"><svg viewBox="0 0 24 24"><path d="M12 3.6l2.45 5.05 5.55.8-4.02 3.92.95 5.53L12 16.3l-4.93 2.6.95-5.53L4 9.45l5.55-.8L12 3.6z"></path></svg></button><button class="icon-btn" data-action="save" data-index="'+i+'" title="Сохранить" aria-label="Сохранить"><svg viewBox="0 0 24 24"><path d="M6 4.5A1.5 1.5 0 0 1 7.5 3h9A1.5 1.5 0 0 1 18 4.5V21l-6-3.5L6 21V4.5z"></path></svg></button><button class="icon-btn" data-action="share" data-index="'+i+'" title="Поделиться" aria-label="Поделиться"><svg viewBox="0 0 24 24"><circle cx="18" cy="5" r="3"></circle><circle cx="6" cy="12" r="3"></circle><circle cx="18" cy="19" r="3"></circle><path d="M8.7 10.7l6.6-4.4M8.7 13.3l6.6 4.4"></path></svg></button></div>';}
+  function actionButtons(i,saved){return '<div class="ayah-actions"><button class="icon-btn '+(saved?'saved':'')+'" data-action="bookmark" data-index="'+i+'" title="Закладка" aria-label="Закладка"><svg viewBox="0 0 24 24"><path d="M6 4.5A1.5 1.5 0 0 1 7.5 3h9A1.5 1.5 0 0 1 18 4.5V21l-6-3.5L6 21V4.5z"></path></svg></button><button class="icon-btn" data-action="save" data-index="'+i+'" title="Сохранить" aria-label="Сохранить"><svg viewBox="0 0 24 24"><path d="M12 3.6l2.45 5.05 5.55.8-4.02 3.92.95 5.53L12 16.3l-4.93 2.6.95-5.53L4 9.45l5.55-.8L12 3.6z"></path></svg></button><button class="icon-btn" data-action="share" data-index="'+i+'" title="Поделиться" aria-label="Поделиться"><svg viewBox="0 0 24 24"><circle cx="18" cy="5" r="3"></circle><circle cx="6" cy="12" r="3"></circle><circle cx="18" cy="19" r="3"></circle><path d="M8.7 10.7l6.6-4.4M8.7 13.3l6.6 4.4"></path></svg></button></div>';}
   function renderPlaceholder(a,i,saved,cover){
     const meta=surahMeta(a.surah);
     const cls=cover?'surah-book-cover':'surah-boundary';
@@ -862,7 +861,7 @@ html.light-mode .translation{
 
   function render(){
     refs.reader.classList.toggle("hide-arabic",!settings.arabic);refs.reader.classList.toggle("hide-translit",!settings.translit);refs.reader.classList.toggle("hide-translation",!settings.translation);refs.reader.classList.toggle("continuous",settings.mode==="continuous");
-    document.getElementById("toggleArabic").classList.toggle("active",settings.arabic);document.getElementById("toggleTranslit").classList.toggle("active",settings.translit);document.getElementById("toggleTranslation").classList.toggle("active",settings.translation);document.getElementById("bookModeBtn").classList.toggle("active",settings.mode==="book");document.getElementById("continuousModeBtn").classList.toggle("active",settings.mode==="continuous");
+    document.getElementById("toggleArabic").classList.toggle("active",settings.arabic);document.getElementById("toggleTranslit").classList.toggle("active",settings.translit);document.getElementById("toggleTranslation").classList.toggle("active",settings.translation);const continuousBtn=document.getElementById("continuousModeBtn");if(continuousBtn)continuousBtn.classList.toggle("active",true);settings.mode="continuous";
     if(!quran.length){refs.container.innerHTML='<div class="empty-state">Текст Корана не загружен.</div>';return;}
     const range=visibleRange(); const bookmarks=getBookmarks(); let html="";
     const first=quran[range.start];
@@ -878,11 +877,11 @@ html.light-mode .translation{
     refs.container.querySelectorAll(".arabic").forEach(function(el){el.style.fontSize=arabicFontSize+"px";});
     const gs=groups(); const a=currentAyah();
     if(settings.mode==="book"){const g=gs[currentPage]||gs[0];const m=g?g.meta:surahMeta(1);refs.pageMeta.textContent="Сура "+(currentPage+1)+" из "+gs.length+" · "+m.arabic+" · "+m.name+" · "+m.ayahs;refs.readerTitle.textContent=m.name||"Полное чтение";}
-    else {refs.pageMeta.textContent="Лента · "+gs.length+" сур · "+quran.length+" записей";refs.readerTitle.textContent=a?ayahLabel(a):"Полное чтение";}
+    else {refs.pageMeta.textContent="Лента Корана";refs.readerTitle.textContent=a?ayahLabel(a):"Полное чтение";}
     renderBookmarks(); updateProgress();
   }
   function renderBookmarks(){const saved=getBookmarks();if(!saved.length){refs.bookmarkList.innerHTML='<div class="empty-state">Закладок пока нет.</div>';return;}refs.bookmarkList.innerHTML=saved.map(function(index){const a=quran[index];if(!a)return"";return '<div class="bookmark-item"><span>'+ayahLabel(a)+'</span><button data-goto-bookmark="'+index+'">Открыть</button></div>';}).join("");}
-  function toggleBookmark(index){let saved=getBookmarks();if(saved.includes(index)){saved=saved.filter(function(i){return i!==index;});showToast("Закладка удалена.");}else{saved.push(index);showToast("Закладка сохранена.");}saveBookmarks(saved);render();}
+  function toggleBookmark(index){let saved=getBookmarks();if(saved.includes(index)){saved=[];showToast("Закладка удалена.");}else{saved=[index];localStorage.setItem(PROGRESS_KEY,String(index));showToast("Закладка поставлена. Можно продолжить чтение с этого места.");}saveBookmarks(saved);render();}
   function saveAndGo(index){saveFavorite(index);localStorage.setItem(PROGRESS_KEY,String(index));showToast("Сохранено. Открываю избранное.");setTimeout(function(){window.location.href="favorites-ru.html";},350);}
   async function shareAyah(index){
     const a=quran[index];
@@ -910,32 +909,30 @@ html.light-mode .translation{
   }
 
   document.addEventListener("click",function(e){const action=e.target.closest("[data-action]");if(action){e.preventDefault();const index=Number(action.dataset.index);setCurrent(index,false);if(action.dataset.action==="bookmark")requirePro(function(){toggleBookmark(index);});if(action.dataset.action==="save")requirePro(function(){saveAndGo(index);});if(action.dataset.action==="share")requirePro(function(){shareAyah(index);});return;}const bm=e.target.closest("[data-goto-bookmark]");if(bm){requirePro(function(){refs.bookmarkPanel.classList.remove("open");setCurrent(Number(bm.dataset.gotoBookmark),true);});}});
-  document.getElementById("continueTopBtn").addEventListener("click",function(){requirePro(function(){setCurrent(Number(localStorage.getItem(PROGRESS_KEY)||0),true);});});
-  document.getElementById("continueBtn").addEventListener("click",function(){requirePro(function(){setCurrent(Number(localStorage.getItem(PROGRESS_KEY)||0),true);});});
-  document.getElementById("saveTopBtn").addEventListener("click",function(){requirePro(function(){saveAndGo(currentIndex);});});
-  document.getElementById("savePlaceBtn").addEventListener("click",function(){requirePro(function(){saveAndGo(currentIndex);});});
-  document.getElementById("bookmarkCurrentBtn").addEventListener("click",function(){requirePro(function(){toggleBookmark(currentIndex);});});
-  document.getElementById("openBookmarksTopBtn").addEventListener("click",function(){requirePro(function(){refs.bookmarkPanel.classList.toggle("open");renderBookmarks();refs.bookmarkPanel.scrollIntoView({behavior:"smooth",block:"start"});});});
-  document.getElementById("shareTopBtn").addEventListener("click",function(){requirePro(function(){shareAyah(currentIndex);});});
-  document.getElementById("clearProgressBtn").addEventListener("click",function(){requirePro(function(){setCurrent(0,true);showToast("Место чтения сброшено.");});});
-  document.getElementById("prevPageBtn").addEventListener("click",function(){requirePro(prevPage);});
-  document.getElementById("nextPageBtn").addEventListener("click",function(){requirePro(nextPage);});
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
   document.getElementById("toggleArabic").addEventListener("click",function(){settings.arabic=!settings.arabic;saveSettings();render();});
   document.getElementById("toggleTranslit").addEventListener("click",function(){settings.translit=!settings.translit;saveSettings();render();});
   document.getElementById("toggleTranslation").addEventListener("click",function(){settings.translation=!settings.translation;saveSettings();render();});
-  document.getElementById("bookModeBtn").addEventListener("click",function(){settings.mode="book";saveSettings();currentPage=groupIndexForCurrent();render();});
+  
   document.getElementById("continuousModeBtn").addEventListener("click",function(){settings.mode="continuous";saveSettings();render();});
   document.getElementById("fontPlus").addEventListener("click",function(){arabicFontSize=Math.min(44,arabicFontSize+2);render();});
   document.getElementById("fontMinus").addEventListener("click",function(){arabicFontSize=Math.max(22,arabicFontSize-2);render();});
-  refs.reader.addEventListener("touchstart",function(e){const t=e.changedTouches[0];touchStartX=t.clientX;touchStartY=t.clientY;},{passive:true});
-  refs.reader.addEventListener("touchend",function(e){const t=e.changedTouches[0];const dx=t.clientX-touchStartX;const dy=t.clientY-touchStartY;if(Math.abs(dx)>70&&Math.abs(dx)>Math.abs(dy)*1.4){requirePro(function(){dx<0?nextPage():prevPage();});}},{passive:true});
   document.querySelectorAll("[data-close-modal]").forEach(function(btn){btn.addEventListener("click",closeModal);});
   refs.modal.addEventListener("click",function(e){if(e.target===refs.modal)closeModal();});
-  document.addEventListener("keydown",function(e){if(e.key==="Escape")closeModal();if(e.key==="ArrowRight")requirePro(prevPage);if(e.key==="ArrowLeft")requirePro(nextPage);});
+  document.addEventListener("keydown",function(e){if(e.key==="Escape")closeModal();});
   refs.proState.addEventListener("click",function(){if(!isPro())window.location.href="pro-ru.html";});
 
   applyPremiumTheme();
-  loadQuranData().then(function(data){quran=data;refs.dataWarning.hidden=!usingFallback;currentIndex=Math.max(0,Math.min(currentIndex,quran.length-1));currentPage=groupIndexForCurrent();syncProState();render();});
+  loadQuranData().then(function(data){quran=data;if(refs.dataWarning)refs.dataWarning.hidden=!usingFallback;currentIndex=Math.max(0,Math.min(currentIndex,quran.length-1));currentPage=groupIndexForCurrent();syncProState();render();});
   window.addEventListener("storage",syncProState);
   window.addEventListener("focus",syncProState);
   window.addEventListener("pageshow",syncProState);
