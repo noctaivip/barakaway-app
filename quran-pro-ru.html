@@ -388,6 +388,84 @@ html.light-mode .translation{
   .surah-book-name{font-size:29px;}
 }
 
+
+
+/* === QuranPro real in-page book reader: no external surah navigation === */
+.book-stage{
+  box-shadow:
+    0 28px 70px rgba(0,0,0,.36),
+    inset 0 1px 0 rgba(255,255,255,.05),
+    inset 0 0 0 1px rgba(240,216,145,.08) !important;
+}
+.book-stage::before{
+  content:"";
+  position:absolute;
+  top:18px;
+  bottom:18px;
+  left:50%;
+  width:2px;
+  transform:translateX(-50%);
+  background:linear-gradient(180deg,transparent,rgba(0,0,0,.42),rgba(240,216,145,.20),rgba(0,0,0,.42),transparent);
+  box-shadow:0 0 34px rgba(0,0,0,.45);
+  pointer-events:none;
+  opacity:.72;
+  z-index:0;
+}
+.book-stage::after{
+  content:"";
+  position:absolute;
+  inset:0;
+  background:
+    linear-gradient(90deg,rgba(255,255,255,.035),transparent 24%,rgba(0,0,0,.18) 50%,transparent 76%,rgba(255,255,255,.025)),
+    repeating-linear-gradient(0deg,rgba(255,255,255,.025) 0,rgba(255,255,255,.025) 1px,transparent 1px,transparent 7px);
+  pointer-events:none;
+  opacity:.62;
+  z-index:0;
+}
+.book-page-meta,
+#ayahContainer{
+  position:relative;
+  z-index:1;
+}
+#ayahContainer{
+  min-height:520px;
+  padding:8px 4px 4px;
+}
+.book-stage:not(.continuous) #ayahContainer{
+  max-height:calc(100vh - 270px);
+  overflow:auto;
+  padding-right:8px;
+  scrollbar-width:thin;
+}
+.surah-book-open{display:none !important;}
+.surah-reader-note{
+  margin-top:16px;
+  color:#d7b56d;
+  font-size:13px;
+  font-weight:850;
+  text-align:center;
+}
+.book-stage.is-flipping-next #ayahContainer,
+.book-stage.is-flipping-prev #ayahContainer{
+  animation:barakawayBookFlip .44s ease;
+  transform-origin:center center;
+}
+.book-stage.is-flipping-prev #ayahContainer{animation-name:barakawayBookFlipPrev;}
+@keyframes barakawayBookFlip{
+  0%{transform:perspective(1100px) rotateY(0deg) translateX(0); opacity:1; filter:none;}
+  48%{transform:perspective(1100px) rotateY(-10deg) translateX(-18px); opacity:.72; filter:blur(1px);}
+  100%{transform:perspective(1100px) rotateY(0deg) translateX(0); opacity:1; filter:none;}
+}
+@keyframes barakawayBookFlipPrev{
+  0%{transform:perspective(1100px) rotateY(0deg) translateX(0); opacity:1; filter:none;}
+  48%{transform:perspective(1100px) rotateY(10deg) translateX(18px); opacity:.72; filter:blur(1px);}
+  100%{transform:perspective(1100px) rotateY(0deg) translateX(0); opacity:1; filter:none;}
+}
+@media(max-width:760px){
+  .book-stage::before{left:auto;right:12px;opacity:.35;}
+  .book-stage:not(.continuous) #ayahContainer{max-height:calc(100vh - 245px);}
+}
+
 </style>
 </head>
 <body>
@@ -446,7 +524,7 @@ html.light-mode .translation{
       </div>
 
       <div class="data-warning" id="dataWarning" hidden>
-        Встроен полный список 114 сур. Если рядом будет подключён полный JSON с аятами, ридер автоматически покажет весь текст Корана: арабский, транскрипцию и русский перевод.
+        Подключён полный Коран: 114 сур и все аяты загружаются внутри QuranPro. Если локальный JSON есть на сайте, используется он; иначе ридер берёт арабский текст, транскрипцию и русский перевод через Quran API.
       </div>
 
       <section class="bookmark-panel" id="bookmarkPanel" aria-label="Закладки">
@@ -481,6 +559,7 @@ html.light-mode .translation{
 <script>
 (function(){
   const PRO_KEY="barakaway_pro";
+  const PRO_PLAN_KEY="barakaway_pro_plan";
   const THEME_KEY="barakaway_premium_theme";
   const PROGRESS_KEY="barakaway_quran_pro_ru_progress";
   const BOOKMARKS_KEY="barakaway_quran_pro_ru_bookmarks";
@@ -512,15 +591,11 @@ html.light-mode .translation{
   }
   function saveSettings(){localStorage.setItem(SETTINGS_KEY,JSON.stringify(settings));}
   function isPro(){
-    const direct = localStorage.getItem(PRO_KEY) === "true";
-    const plan = localStorage.getItem("barakaway_pro_plan");
-    const planActive = !!plan && plan !== "false" && plan !== "0" && plan !== "expired" && plan !== "none";
-
-    if(planActive && !direct){
-      localStorage.setItem(PRO_KEY,"true");
+    try{
+      return localStorage.getItem(PRO_KEY)==="true" || !!localStorage.getItem(PRO_PLAN_KEY);
+    }catch(e){
+      return false;
     }
-
-    return direct || planActive;
   }
   function showToast(message){refs.toast.textContent=message;refs.toast.classList.add("show");clearTimeout(window.__quranProToast);window.__quranProToast=setTimeout(function(){refs.toast.classList.remove("show");},2400);}
   function openModal(){refs.modal.classList.add("open");}
@@ -542,8 +617,148 @@ html.light-mode .translation{
     };
   }
 
+  function cleanText(value){return String(value||"").replace(/\s+/g," ").trim();}
+
+  function parseAyahsFromDocument(doc,surahNumber){
+    const meta=surahMeta(surahNumber);
+    const out=[];
+    const seen=new Set();
+    const selectors=[".ayah","article.ayah","[data-ayah]","[data-ayah-number]",".quran-ayah",".verse",".ayah-card",".quran-verse"];
+    let nodes=[];
+    selectors.some(function(sel){
+      nodes=Array.from(doc.querySelectorAll(sel));
+      return nodes.length>1;
+    });
+    if(!nodes.length){
+      const candidates=Array.from(doc.querySelectorAll("article, .card, .verse-card, .quran-card, li"));
+      nodes=candidates.filter(function(node){
+        const text=cleanText(node.textContent);
+        return /[\u0600-\u06FF]/.test(text) && text.length>20;
+      });
+    }
+    nodes.forEach(function(node,idx){
+      const numberAttr=node.getAttribute("data-ayah")||node.getAttribute("data-ayah-number")||node.getAttribute("data-number")||node.getAttribute("data-index");
+      const ayahNumber=Number(numberAttr)||idx+1;
+      const arabic=cleanText((node.querySelector(".arabic,.ayah-arabic,.quran-arabic,.arabic-text,[data-arabic]")||{}).textContent||node.getAttribute("data-arabic")||"");
+      const translit=cleanText((node.querySelector(".translit,.transliteration,.ayah-translit,.latin,.transcription,[data-translit]")||{}).textContent||node.getAttribute("data-translit")||"");
+      const ru=cleanText((node.querySelector(".translation,.ayah-translation,.russian,.ru,.meaning,[data-translation]")||{}).textContent||node.getAttribute("data-translation")||"");
+      let fallbackArabic=arabic;
+      let fallbackRu=ru;
+      if(!fallbackArabic || !fallbackRu){
+        const clone=node.cloneNode(true);
+        clone.querySelectorAll("button,a,svg,script,style,.ayah-actions,.surah-actions,.bookmark-btn,.icon-btn").forEach(function(el){el.remove();});
+        const lines=cleanText(clone.textContent).split(/(?<=[.!?؟])\s+/).filter(Boolean);
+        if(!fallbackArabic){
+          const arLine=lines.find(function(line){return /[\u0600-\u06FF]/.test(line);});
+          fallbackArabic=cleanText(arLine||"");
+        }
+        if(!fallbackRu){
+          const ruLine=lines.find(function(line){return /[А-Яа-яЁё]/.test(line) && !/[\u0600-\u06FF]/.test(line);});
+          fallbackRu=cleanText(ruLine||"");
+        }
+      }
+      const key=surahNumber+":"+ayahNumber+":"+fallbackArabic+":"+fallbackRu;
+      if((fallbackArabic||fallbackRu) && !seen.has(key)){
+        seen.add(key);
+        out.push({surah:surahNumber,ayah:ayahNumber,arabic:fallbackArabic,translit:translit,ru:fallbackRu});
+      }
+    });
+    if(out.length){return out;}
+    return [{surah:meta.number,ayah:0,isSurahPlaceholder:true,arabic:meta.arabic,translit:(meta.search||"").split(" ")[2]||"",ru:meta.name,meta:meta.meta,ayahs:meta.ayahs,href:""}];
+  }
+
+  async function fetchSurahFromHtml(meta){
+    try{
+      const res=await fetch(meta.href,{cache:"force-cache"});
+      if(!res.ok) return null;
+      const html=await res.text();
+      const doc=new DOMParser().parseFromString(html,"text/html");
+      const arr=parseAyahsFromDocument(doc,meta.number);
+      return arr && arr.length ? arr : null;
+    }catch(e){
+      return null;
+    }
+  }
+
+  async function loadQuranFromLocalSurahPages(){
+    const all=[];
+    let loadedRealText=0;
+    for(const meta of SURAH_INDEX){
+      const arr=await fetchSurahFromHtml(meta);
+      if(arr && arr.length){
+        if(!arr.every(function(item){return item.isSurahPlaceholder;})){loadedRealText++;}
+        all.push.apply(all,arr);
+      }else{
+        all.push({surah:meta.number,ayah:0,isSurahPlaceholder:true,arabic:meta.arabic,translit:(meta.search||"").split(" ")[2]||"",ru:meta.name,meta:meta.meta,ayahs:meta.ayahs,href:""});
+      }
+    }
+    if(loadedRealText>0){usingFallback=loadedRealText<114;return all.map(normalizeAyah);}
+    return null;
+  }
+
+
+
+  function flattenAlQuranCloudSurahs(payload){
+    const data = payload && payload.data;
+    const surahs = Array.isArray(data && data.surahs) ? data.surahs : [];
+    const map = new Map();
+    surahs.forEach(function(surah){
+      const number = Number(surah.number);
+      const ayahs = Array.isArray(surah.ayahs) ? surah.ayahs : [];
+      ayahs.forEach(function(ayah){
+        const key = number + ':' + Number(ayah.numberInSurah);
+        map.set(key, String(ayah.text || '').trim());
+      });
+    });
+    return map;
+  }
+
+  async function fetchJson(url){
+    const res = await fetch(url,{cache:'force-cache'});
+    if(!res.ok) throw new Error('Fetch failed: '+url);
+    return await res.json();
+  }
+
+  async function loadQuranFromAlQuranCloud(){
+    try{
+      const base='https://api.alquran.cloud/v1/quran/';
+      const arabicPromise=fetchJson(base+'quran-uthmani');
+      const russianPromise=fetchJson(base+'ru.kuliev');
+      const translitPromise=fetchJson(base+'en.transliteration').catch(function(){return null;});
+      const results=await Promise.all([arabicPromise,russianPromise,translitPromise]);
+      const arabicMap=flattenAlQuranCloudSurahs(results[0]);
+      const russianMap=flattenAlQuranCloudSurahs(results[1]);
+      const translitMap=results[2] ? flattenAlQuranCloudSurahs(results[2]) : new Map();
+      const all=[];
+      SURAH_INDEX.forEach(function(meta){
+        const total=Number(String(meta.ayahs||'').match(/\d+/)?.[0]||0);
+        for(let ayah=1; ayah<=total; ayah++){
+          const key=meta.number+':'+ayah;
+          all.push({
+            surah:meta.number,
+            ayah:ayah,
+            arabic:arabicMap.get(key)||'',
+            translit:translitMap.get(key)||'',
+            ru:russianMap.get(key)||'',
+            meta:meta.meta,
+            ayahs:meta.ayahs,
+            href:''
+          });
+        }
+      });
+      const real=all.filter(function(item){return item.arabic && item.ru;}).length;
+      if(real>=6200){
+        usingFallback=false;
+        return all.map(normalizeAyah);
+      }
+    }catch(e){
+      return null;
+    }
+    return null;
+  }
+
   async function loadQuranData(){
-    if(Array.isArray(window.BARAKAWAY_QURAN_RU) && window.BARAKAWAY_QURAN_RU.length){return window.BARAKAWAY_QURAN_RU.map(normalizeAyah);}
+    if(Array.isArray(window.BARAKAWAY_QURAN_RU) && window.BARAKAWAY_QURAN_RU.length){usingFallback=false;return window.BARAKAWAY_QURAN_RU.map(normalizeAyah);}
     const urls=["/quran-pro-ru.json","/quran-ru.json","/assets/quran-ru.json"];
     for(const url of urls){
       try{
@@ -551,10 +766,14 @@ html.light-mode .translation{
         if(res.ok){
           const data=await res.json();
           const arr=Array.isArray(data)?data:(data.ayahs||data.verses||data.quran);
-          if(Array.isArray(arr)&&arr.length){return arr.map(normalizeAyah);}
+          if(Array.isArray(arr)&&arr.length){usingFallback=false;return arr.map(normalizeAyah);}
         }
       }catch(e){}
     }
+    const fromCloud=await loadQuranFromAlQuranCloud();
+    if(fromCloud && fromCloud.length){return fromCloud;}
+    const fromPages=await loadQuranFromLocalSurahPages();
+    if(fromPages && fromPages.length){return fromPages;}
     usingFallback=true;
     return fallbackData.map(normalizeAyah);
   }
@@ -607,8 +826,9 @@ html.light-mode .translation{
   function renderPlaceholder(a,i,saved,cover){
     const meta=surahMeta(a.surah);
     const cls=cover?'surah-book-cover':'surah-boundary';
-    return '<article class="ayah '+(i===currentIndex?'current-ayah':'')+' '+cls+'" id="'+ayahId(a)+'" data-index="'+i+'"><div class="ayah-top"><span class="ayah-ref">Сура '+a.surah+'</span>'+actionButtons(i,saved)+'</div><div class="surah-book-number">#'+a.surah+'</div><div class="surah-book-arabic">'+escapeHtml(a.arabic||meta.arabic)+'</div><div class="surah-book-name">'+escapeHtml(a.ru||meta.name)+'</div><div class="surah-book-meta">'+escapeHtml((a.ayahs||meta.ayahs)+' · '+(a.meta||meta.meta))+'</div>'+(a.href||meta.href?'<a class="surah-book-open" href="'+escapeHtml(a.href||meta.href)+'">Открыть суру полностью</a>':'')+'</article>';
+    return '<article class="ayah '+(i===currentIndex?'current-ayah':'')+' '+cls+'" id="'+ayahId(a)+'" data-index="'+i+'"><div class="ayah-top"><span class="ayah-ref">Сура '+a.surah+'</span>'+actionButtons(i,saved)+'</div><div class="surah-book-number">#'+a.surah+'</div><div class="surah-book-arabic">'+escapeHtml(a.arabic||meta.arabic)+'</div><div class="surah-book-name">'+escapeHtml(a.ru||meta.name)+'</div><div class="surah-book-meta">'+escapeHtml((a.ayahs||meta.ayahs)+' · '+(a.meta||meta.meta))+'</div><div class="surah-reader-note">Идёт загрузка полного текста этой суры внутри QuranPro. Перехода в обычный Коран нет.</div></article>';
   }
+
   function render(){
     refs.reader.classList.toggle("hide-arabic",!settings.arabic);refs.reader.classList.toggle("hide-translit",!settings.translit);refs.reader.classList.toggle("hide-translation",!settings.translation);refs.reader.classList.toggle("continuous",settings.mode==="continuous");
     document.getElementById("toggleArabic").classList.toggle("active",settings.arabic);document.getElementById("toggleTranslit").classList.toggle("active",settings.translit);document.getElementById("toggleTranslation").classList.toggle("active",settings.translation);document.getElementById("bookModeBtn").classList.toggle("active",settings.mode==="book");document.getElementById("continuousModeBtn").classList.toggle("active",settings.mode==="continuous");
@@ -633,17 +853,30 @@ html.light-mode .translation{
   function renderBookmarks(){const saved=getBookmarks();if(!saved.length){refs.bookmarkList.innerHTML='<div class="empty-state">Закладок пока нет.</div>';return;}refs.bookmarkList.innerHTML=saved.map(function(index){const a=quran[index];if(!a)return"";return '<div class="bookmark-item"><span>'+ayahLabel(a)+'</span><button data-goto-bookmark="'+index+'">Открыть</button></div>';}).join("");}
   function toggleBookmark(index){let saved=getBookmarks();if(saved.includes(index)){saved=saved.filter(function(i){return i!==index;});showToast("Закладка удалена.");}else{saved.push(index);showToast("Закладка сохранена.");}saveBookmarks(saved);render();}
   function saveAndGo(index){saveFavorite(index);localStorage.setItem(PROGRESS_KEY,String(index));showToast("Сохранено. Открываю избранное.");setTimeout(function(){window.location.href="favorites-ru.html";},350);}
-  async function shareAyah(index){const a=quran[index];if(!a)return;const meta=surahMeta(a.surah);const text=a.isSurahPlaceholder?("Коран · Сура "+a.surah+" · "+(a.ru||meta.name)+"
-"+(a.arabic||meta.arabic)+"
-"+(a.ayahs||meta.ayahs)+" · "+(a.meta||meta.meta)):("Коран "+a.surah+":"+a.ayah+"
-"+a.arabic+(a.translit?"
-"+a.translit:"")+(a.ru?"
-"+a.ru:""));if(navigator.share){try{await navigator.share({title:a.isSurahPlaceholder?("Сура "+a.surah):("Коран "+a.surah+":"+a.ayah),text});return;}catch(e){}}try{await navigator.clipboard.writeText(text);showToast("Текст скопирован для отправки.");}catch(e){window.prompt("Скопируйте текст:",text);}}
+  async function shareAyah(index){
+    const a=quran[index];
+    if(!a)return;
+    const meta=surahMeta(a.surah);
+    const text=a.isSurahPlaceholder
+      ? ("Коран · Сура "+a.surah+" · "+(a.ru||meta.name)+"\n"+(a.arabic||meta.arabic)+"\n"+(a.ayahs||meta.ayahs)+" · "+(a.meta||meta.meta))
+      : ("Коран "+a.surah+":"+a.ayah+"\n"+a.arabic+(a.translit?"\n"+a.translit:"")+(a.ru?"\n"+a.ru:""));
+    if(navigator.share){
+      try{await navigator.share({title:a.isSurahPlaceholder?("Сура "+a.surah):("Коран "+a.surah+":"+a.ayah),text});return;}catch(e){}
+    }
+    try{await navigator.clipboard.writeText(text);showToast("Текст скопирован для отправки.");}
+    catch(e){window.prompt("Скопируйте текст:",text);}
+  }
   function flip(direction,done){refs.reader.classList.remove("is-flipping-next","is-flipping-prev");void refs.reader.offsetWidth;refs.reader.classList.add(direction==="next"?"is-flipping-next":"is-flipping-prev");setTimeout(function(){done();setTimeout(function(){refs.reader.classList.remove("is-flipping-next","is-flipping-prev");},430);},90);}
   function nextPage(){if(settings.mode==="continuous"){setCurrent(Math.min(currentIndex+1,quran.length-1),true);return;}const gs=groups();if(currentPage<gs.length-1){flip("next",function(){currentPage++;currentIndex=gs[currentPage].start;render();refs.reader.scrollIntoView({behavior:"smooth",block:"start"});});}}
   function prevPage(){if(settings.mode==="continuous"){setCurrent(Math.max(currentIndex-1,0),true);return;}const gs=groups();if(currentPage>0){flip("prev",function(){currentPage--;currentIndex=gs[currentPage].start;render();refs.reader.scrollIntoView({behavior:"smooth",block:"start"});});}}
   function applyPremiumTheme(){const theme=localStorage.getItem(THEME_KEY);if(theme)document.body.classList.add("theme-"+theme);}
-  function syncProState(){const active=isPro();refs.proState.classList.toggle("locked",!active);refs.proState.classList.toggle("active",active);refs.proState.innerHTML=active?"✅ PRO активирован":"🔒 PRO не активирован";refs.reader.classList.toggle("locked",!active);}
+  function syncProState(){
+    const active=isPro();
+    refs.proState.classList.toggle("locked",!active);
+    refs.proState.classList.toggle("active",active);
+    refs.proState.innerHTML=active?"✅ PRO активирован":"🔒 PRO не активирован";
+    refs.reader.classList.toggle("locked",!active);
+  }
 
   document.addEventListener("click",function(e){const action=e.target.closest("[data-action]");if(action){e.preventDefault();const index=Number(action.dataset.index);setCurrent(index,false);if(action.dataset.action==="bookmark")requirePro(function(){toggleBookmark(index);});if(action.dataset.action==="save")requirePro(function(){saveAndGo(index);});if(action.dataset.action==="share")requirePro(function(){shareAyah(index);});return;}const bm=e.target.closest("[data-goto-bookmark]");if(bm){requirePro(function(){refs.bookmarkPanel.classList.remove("open");setCurrent(Number(bm.dataset.gotoBookmark),true);});}});
   document.getElementById("continueTopBtn").addEventListener("click",function(){requirePro(function(){setCurrent(Number(localStorage.getItem(PROGRESS_KEY)||0),true);});});
@@ -673,6 +906,9 @@ html.light-mode .translation{
   applyPremiumTheme();
   loadQuranData().then(function(data){quran=data;refs.dataWarning.hidden=!usingFallback;currentIndex=Math.max(0,Math.min(currentIndex,quran.length-1));currentPage=groupIndexForCurrent();syncProState();render();});
   window.addEventListener("storage",syncProState);
+  window.addEventListener("focus",syncProState);
+  window.addEventListener("pageshow",syncProState);
+  document.addEventListener("visibilitychange",function(){if(!document.hidden)syncProState();});
 })();
 </script>
 <script src="/theme-toggle.js"></script>
