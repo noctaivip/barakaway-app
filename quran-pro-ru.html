@@ -512,22 +512,15 @@ html.light-mode .translation{
   }
   function saveSettings(){localStorage.setItem(SETTINGS_KEY,JSON.stringify(settings));}
   function isPro(){
-    const activeValues = {"true":true,"1":true,"yes":true,"active":true,"activated":true,"unlocked":true,"pro":true,"developer-test":true};
-    const keys = [
-      PRO_KEY,
-      "barakaway_pro_active",
-      "barakaway_pro_status",
-      "barakaway_premium_active",
-      "barakaway_premium_status"
-    ];
+    const direct = localStorage.getItem(PRO_KEY) === "true";
+    const plan = localStorage.getItem("barakaway_pro_plan");
+    const planActive = !!plan && plan !== "false" && plan !== "0" && plan !== "expired" && plan !== "none";
 
-    for(const key of keys){
-      const value = String(localStorage.getItem(key) || sessionStorage.getItem(key) || "").trim().toLowerCase();
-      if(activeValues[value]) return true;
+    if(planActive && !direct){
+      localStorage.setItem(PRO_KEY,"true");
     }
 
-    const plan = String(localStorage.getItem("barakaway_pro_plan") || sessionStorage.getItem("barakaway_pro_plan") || "").trim();
-    return !!plan;
+    return direct || planActive;
   }
   function showToast(message){refs.toast.textContent=message;refs.toast.classList.add("show");clearTimeout(window.__quranProToast);window.__quranProToast=setTimeout(function(){refs.toast.classList.remove("show");},2400);}
   function openModal(){refs.modal.classList.add("open");}
