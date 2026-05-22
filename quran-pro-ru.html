@@ -871,11 +871,86 @@ html.quran-pro-jumping .ayah{
   transform:scale(.985);
 }
 </style>
+
+<style id="quran-pro-one-surah-reader-style">
+/* One-surah mobile reader: only one surah is rendered at a time for speed */
+.book-stage{
+  min-height:auto !important;
+}
+.surah-step-nav{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:10px;
+  margin:26px 0 4px;
+  padding-top:18px;
+  border-top:1px solid rgba(215,181,109,.18);
+}
+.surah-step-btn{
+  appearance:none;
+  -webkit-appearance:none;
+  min-height:48px;
+  border-radius:18px;
+  border:1px solid rgba(215,181,109,.22);
+  background:linear-gradient(180deg,rgba(255,255,255,.045),rgba(215,181,109,.08));
+  color:var(--qp-accent,#d7b56d);
+  padding:12px 15px;
+  font:inherit;
+  font-size:13px;
+  font-weight:950;
+  cursor:pointer;
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  gap:8px;
+  transition:transform .16s ease,border-color .2s ease,box-shadow .2s ease,background .2s ease;
+}
+.surah-step-btn:hover{
+  border-color:var(--qp-accent,#4caf6a);
+  box-shadow:0 10px 24px rgba(18,34,24,.18);
+}
+.surah-step-btn:active{transform:scale(.97);}
+.surah-step-btn.primary{
+  background:linear-gradient(135deg,var(--qp-accent,#2d7a46),color-mix(in srgb,var(--qp-accent,#4caf6a) 58%,#ffffff 0%));
+  color:#ffffff;
+  border-color:color-mix(in srgb,var(--qp-accent,#4caf6a) 62%,transparent);
+}
+.surah-step-btn[disabled]{
+  opacity:.52;
+  cursor:default;
+  transform:none !important;
+  box-shadow:none !important;
+}
+.surah-step-hint{
+  margin:14px 0 0;
+  color:#aeb9c5;
+  font-size:12px;
+  font-weight:750;
+  text-align:center;
+}
+@media(max-width:560px){
+  .surah-step-nav{
+    display:grid;
+    grid-template-columns:1fr;
+    gap:9px;
+  }
+  .surah-step-btn{
+    width:100%;
+  }
+}
+
+/* One-surah reader stability: no virtual estimates inside current surah. */
+.quran-pro-jumping .ayah,
+.ayah{
+  content-visibility:visible !important;
+  contain-intrinsic-size:auto !important;
+}
+</style>
+
 </head>
 <body>
 <div class="page">
   <header class="topbar">
-    <a class="top-pill" href="home-ru.html" aria-label="Вернуться на главную">← Главная</a>
     <div id="proState" class="pro-state locked">🔒 PRO не активирован</div>
   </header>
 
@@ -883,7 +958,7 @@ html.quran-pro-jumping .ayah{
     <section class="reader-shell" id="reader">
       <div class="reader-head">
         <div class="reader-title">
-          <h2 id="readerTitle">Полное чтение</h2>
+          <h2 id="readerTitle" class="khatm-title">ХАТМ КОРАНА</h2>
           <div class="quran-icon-guide" aria-label="Как использовать иконки аята">
             <div class="quran-icon-guide-item">
               <span class="guide-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M6 4.5A1.5 1.5 0 0 1 7.5 3h9A1.5 1.5 0 0 1 18 4.5V21l-6-3.5L6 21V4.5z"></path></svg></span>
@@ -918,8 +993,8 @@ html.quran-pro-jumping .ayah{
             <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 4.5A1.5 1.5 0 0 1 7.5 3h9A1.5 1.5 0 0 1 18 4.5V21l-6-3.5L6 21V4.5z"></path></svg>
             <span>Продолжить чтение</span>
           </button>
-          <button class="tool-btn scroll-top-btn" id="scrollTopBtn" type="button" aria-label="Наверх страницы" title="Наверх">
-            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 19V6"></path><path d="M6.5 11.5L12 6l5.5 5.5"></path></svg>
+          <button class="tool-btn scroll-top-btn" id="scrollTopBtn" type="button" aria-label="К началу Корана" title="К началу Корана">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20 6v5h-5"></path><path d="M19.2 13.6a7.4 7.4 0 1 1-2.1-7.2L20 11"></path></svg>
           </button>
         </div>
       </div>
@@ -970,6 +1045,9 @@ html.quran-pro-jumping .ayah{
     const roman=(s.search||"").split(" ")[2]||"";
     return {surah:s.number,ayah:0,isSurahPlaceholder:true,arabic:s.arabic,translit:roman,ru:s.name,meta:s.meta,ayahs:s.ayahs,href:s.href};
   });
+  const SURAH_CYRILLIC={1: "Фатиха", 2: "Бакара", 3: "Али Имран", 4: "Ниса", 5: "Маида", 6: "Анъам", 7: "Араф", 8: "Анфаль", 9: "Тауба", 10: "Юнус", 11: "Худ", 12: "Юсуф", 13: "Раад", 14: "Ибрахим", 15: "Хиджр", 16: "Нахль", 17: "Исра", 18: "Кахф", 19: "Марьям", 20: "Та Ха", 21: "Анбия", 22: "Хадж", 23: "Муминун", 24: "Нур", 25: "Фуркан", 26: "Шуара", 27: "Намль", 28: "Касас", 29: "Анкабут", 30: "Рум", 31: "Лукман", 32: "Саджда", 33: "Ахзаб", 34: "Саба", 35: "Фатир", 36: "Йа Син", 37: "Саффат", 38: "Сад", 39: "Зумар", 40: "Гафир", 41: "Фуссилят", 42: "Шура", 43: "Зухруф", 44: "Духан", 45: "Джасия", 46: "Ахкаф", 47: "Мухаммад", 48: "Фатх", 49: "Худжурат", 50: "Каф", 51: "Зарият", 52: "Тур", 53: "Наджм", 54: "Камар", 55: "Рахман", 56: "Вакиа", 57: "Хадид", 58: "Муджадиля", 59: "Хашр", 60: "Мумтахина", 61: "Сафф", 62: "Джумуа", 63: "Мунафикун", 64: "Тагабун", 65: "Талак", 66: "Тахрим", 67: "Мульк", 68: "Калам", 69: "Хакка", 70: "Мааридж", 71: "Нух", 72: "Джинн", 73: "Муззаммиль", 74: "Муддассир", 75: "Кияма", 76: "Инсан", 77: "Мурсалят", 78: "Наба", 79: "Назиат", 80: "Абаса", 81: "Таквир", 82: "Инфитар", 83: "Мутаффифин", 84: "Иншикак", 85: "Бурудж", 86: "Тарик", 87: "Аля", 88: "Гашия", 89: "Фаджр", 90: "Балад", 91: "Шамс", 92: "Ляйл", 93: "Духа", 94: "Шарх", 95: "Тин", 96: "Аляк", 97: "Кадр", 98: "Баййина", 99: "Зальзаля", 100: "Адият", 101: "Кариа", 102: "Такасур", 103: "Аср", 104: "Хумаза", 105: "Филь", 106: "Курайш", 107: "Маун", 108: "Каусар", 109: "Кафирун", 110: "Наср", 111: "Масад", 112: "Ихляс", 113: "Фаляк", 114: "Нас"};
+  function surahRuTitle(meta){ const c=SURAH_CYRILLIC[Number(meta&&meta.number)]||""; const n=(meta&&meta.name)||""; if(c && n){ return c+" ("+n+")"; } return c ? c : (n ? n : ""); }
+
 
   const refs={
     proState:document.getElementById("proState"),reader:document.getElementById("quranReader"),container:document.getElementById("ayahContainer"),pageMeta:document.getElementById("pageMeta"),progressText:document.getElementById("progressText"),progressFill:document.getElementById("progressFill"),toast:document.getElementById("toast"),modal:document.getElementById("proModal"),bookmarkPanel:document.getElementById("bookmarkPanel"),bookmarkList:document.getElementById("bookmarkList"),dataWarning:document.getElementById("dataWarning"),readerTitle:document.getElementById("readerTitle")
@@ -1326,7 +1404,7 @@ html.quran-pro-jumping .ayah{
   function surahMeta(n){return SURAH_INDEX.find(function(s){return s.number===Number(n);})||{number:n,arabic:"",name:"Сура "+n,ayahs:"",meta:"",href:""};}
   function currentAyah(){return quran[currentIndex];}
   function ayahId(a){return a.isSurahPlaceholder?"surah-"+a.surah:"ayah-"+a.surah+"-"+a.ayah;}
-  function ayahLabel(a){const meta=surahMeta(a.surah);return a.isSurahPlaceholder?("Сура "+a.surah+" · "+(a.ru||meta.name)):(meta.name||("Сура "+a.surah))+" · "+a.surah+":"+a.ayah;}
+  function ayahLabel(a){const meta=surahMeta(a.surah);return a.isSurahPlaceholder?("Сура "+a.surah+" · "+surahRuTitle(meta)):(surahRuTitle(meta)||("Сура "+a.surah))+" · "+a.surah+":"+a.ayah;}
   function groups(){
     const out=[]; let last=null;
     quran.forEach(function(a,i){
@@ -1338,10 +1416,12 @@ html.quran-pro-jumping .ayah{
   function groupIndexForCurrent(){const gs=groups();const idx=gs.findIndex(function(g){return currentIndex>=g.start&&currentIndex<g.end;});return idx<0?0:idx;}
   function updateProgress(){
     const gs=groups();
-    const total=settings.mode==="book"?Math.max(gs.length,1):Math.max(quran.length,1);
-    const pos=settings.mode==="book"?groupIndexForCurrent()+1:currentIndex+1;
+    const total=Math.max(gs.length,1);
+    const pos=groupIndexForCurrent()+1;
     const progress=Math.round((pos/total)*100);
-    refs.progressText.textContent=progress+"%"; refs.progressFill.style.width=progress+"%"; localStorage.setItem(PROGRESS_KEY,String(currentIndex));
+    refs.progressText.textContent=progress+"%";
+    refs.progressFill.style.width=progress+"%";
+    localStorage.setItem(PROGRESS_KEY,String(currentIndex));
   }
   function syncCurrentDom(){
     refs.container.querySelectorAll(".current-ayah").forEach(function(node){node.classList.remove("current-ayah");});
@@ -1363,7 +1443,7 @@ html.quran-pro-jumping .ayah{
   }
   function scrollToCurrentExact(targetIndex, options){
     options=options||{};
-    const index=Number.isFinite(Number(targetIndex))?Math.max(0,Math.min(Number(targetIndex),quran.length-1)):currentIndex;
+    const index=Number.isFinite(Number(targetIndex)) ? Math.max(0,Math.min(Number(targetIndex),quran.length-1)) : currentIndex;
     const a=quran[index];
     if(!a){
       showToast("Закладка не найдена.");
@@ -1374,23 +1454,16 @@ html.quran-pro-jumping .ayah{
     currentPage=groupIndexForCurrent();
     localStorage.setItem(PROGRESS_KEY,String(currentIndex));
 
-    if(!refs.container.querySelector('[data-index="'+index+'"]')){
-      render();
-    }
+    // В одно-суровом режиме сначала открываем именно ту суру, где стоит закладка.
+    render();
 
     const targetId=ayahId(a);
     const targetSelector='[data-surah="'+a.surah+'"][data-ayah="'+a.ayah+'"]';
 
-    function targetNode(){
+    function findTarget(){
       return document.getElementById(targetId)
         || refs.container.querySelector(targetSelector)
         || refs.container.querySelector('[data-index="'+index+'"]');
-    }
-
-    const node=targetNode();
-    if(!node){
-      showToast("Закладка не найдена в тексте.");
-      return false;
     }
 
     function offsetTop(){
@@ -1401,17 +1474,19 @@ html.quran-pro-jumping .ayah{
       return Math.ceil(topbarHeight+controlsHeight+18);
     }
 
-    function markCurrent(){
+    function jump(){
+      const node=findTarget();
+      if(!node){
+        showToast("Закладка не найдена в тексте.");
+        return false;
+      }
       refs.container.querySelectorAll(".current-ayah").forEach(function(el){el.classList.remove("current-ayah");});
       node.classList.add("current-ayah");
-      refs.readerTitle.textContent=ayahLabel(a);
+      refs.readerTitle.textContent="ХАТМ КОРАНА";
       updateProgress();
-    }
-
-    function jumpNow(){
-      markCurrent();
       const y=window.pageYOffset + node.getBoundingClientRect().top - offsetTop();
-      window.scrollTo(0,Math.max(0,Math.round(y)));
+      window.scrollTo({top:Math.max(0,Math.round(y)),behavior:"auto"});
+      return true;
     }
 
     const html=document.documentElement;
@@ -1422,27 +1497,22 @@ html.quran-pro-jumping .ayah{
     html.style.scrollBehavior="auto";
     body.style.scrollBehavior="auto";
 
-    /* Force exact layout before calculating the coordinate. This prevents the long Quran feed
-       from moving gradually because of content-visibility estimates. */
-    void refs.container.offsetHeight;
-    void node.offsetHeight;
-    jumpNow();
-
     clearTimeout(window.__quranProExactJump1);
     clearTimeout(window.__quranProExactJump2);
     clearTimeout(window.__quranProExactJump3);
 
-    window.__quranProExactJump1=setTimeout(jumpNow,40);
-    window.__quranProExactJump2=setTimeout(jumpNow,140);
-    window.__quranProExactJump3=setTimeout(function(){
-      jumpNow();
-      html.classList.remove("quran-pro-jumping");
-      html.style.scrollBehavior=oldHtmlScroll;
-      body.style.scrollBehavior=oldBodyScroll;
-      if(options.toast!==false){
-        showToast(options.message || "Открыта ваша закладка.");
-      }
-    },320);
+    requestAnimationFrame(function(){
+      jump();
+      window.__quranProExactJump1=setTimeout(function(){
+        jump();
+        html.classList.remove("quran-pro-jumping");
+        html.style.scrollBehavior=oldHtmlScroll;
+        body.style.scrollBehavior=oldBodyScroll;
+        if(options.toast!==false){
+          showToast(options.message || "Открыта ваша закладка.");
+        }
+      },80);
+    });
 
     return true;
   }
@@ -1452,23 +1522,54 @@ html.quran-pro-jumping .ayah{
     updateProgress();
     syncCurrentDom();
     const a=currentAyah();
-    refs.readerTitle.textContent=a?ayahLabel(a):"Полное чтение";
+    refs.readerTitle.textContent="ХАТМ КОРАНА";
     if(scroll){
       if(!refs.container.querySelector('[data-index="'+currentIndex+'"]'))render();
       requestAnimationFrame(scrollToCurrentExact);
     }
   }
   function visibleRange(){
-    if(settings.mode==="continuous")return {start:0,end:quran.length};
-    const gs=groups(); if(!gs.length)return {start:0,end:0};
+    const gs=groups();
+    if(!gs.length)return {start:0,end:0};
+    if(currentPage<0)currentPage=0;
     if(currentPage>=gs.length)currentPage=gs.length-1;
     return {start:gs[currentPage].start,end:gs[currentPage].end};
+  }
+
+  function renderSurahStepNav(){
+    const gs=groups();
+    if(!gs.length)return "";
+    const prev=gs[currentPage-1];
+    const next=gs[currentPage+1];
+    const prevLabel=prev ? "← Вернуться к суре "+prev.surah : "← Начало Корана";
+    const nextLabel=next ? "Продолжить чтение →" : "Коран завершён";
+    return '<div class="surah-step-nav" aria-label="Переход между сурами">'
+      + '<button class="surah-step-btn" type="button" data-surah-nav="prev" '+(!prev?'disabled aria-disabled="true"':'')+'>'+escapeHtml(prevLabel)+'</button>'
+      + '<button class="surah-step-btn primary" type="button" data-surah-nav="next" '+(!next?'disabled aria-disabled="true"':'')+'>'+escapeHtml(nextLabel)+'</button>'
+      + '</div><div class="surah-step-hint">Для скорости на телефоне QuranPro показывает одну суру за раз. Следующая сура открывается без перехода в обычный Quran.</div>';
+  }
+
+  function goToSurahPage(pageIndex){
+    const gs=groups();
+    if(!gs.length)return;
+    const target=Math.max(0,Math.min(Number(pageIndex),gs.length-1));
+    currentPage=target;
+    currentIndex=gs[target].start;
+    localStorage.setItem(PROGRESS_KEY,String(currentIndex));
+    render();
+    requestAnimationFrame(function(){
+      const shell=document.getElementById("reader");
+      const controls=document.querySelector(".reader-controls-v2");
+      const offset=(controls?controls.getBoundingClientRect().height:0)+16;
+      const y=window.pageYOffset+shell.getBoundingClientRect().top-offset;
+      window.scrollTo({top:Math.max(0,Math.round(y)),behavior:"smooth"});
+    });
   }
   function actionButtons(i,saved){return '<div class="ayah-actions"><button class="icon-btn '+(saved?'saved':'')+'" data-action="bookmark" data-index="'+i+'" title="Закладка" aria-label="Закладка"><svg viewBox="0 0 24 24"><path d="M6 4.5A1.5 1.5 0 0 1 7.5 3h9A1.5 1.5 0 0 1 18 4.5V21l-6-3.5L6 21V4.5z"></path></svg></button><button class="icon-btn" data-action="save" data-index="'+i+'" title="Сохранить" aria-label="Сохранить"><svg viewBox="0 0 24 24"><path d="M12 3.6l2.45 5.05 5.55.8-4.02 3.92.95 5.53L12 16.3l-4.93 2.6.95-5.53L4 9.45l5.55-.8L12 3.6z"></path></svg></button><button class="icon-btn" data-action="share" data-index="'+i+'" title="Поделиться" aria-label="Поделиться"><svg viewBox="0 0 24 24"><circle cx="18" cy="5" r="3"></circle><circle cx="6" cy="12" r="3"></circle><circle cx="18" cy="19" r="3"></circle><path d="M8.7 10.7l6.6-4.4M8.7 13.3l6.6 4.4"></path></svg></button></div>';}
   function renderPlaceholder(a,i,saved,cover){
     const meta=surahMeta(a.surah);
     const cls=cover?'surah-book-cover':'surah-boundary';
-    return '<article class="ayah '+(i===currentIndex?'current-ayah':'')+' '+cls+'" id="'+ayahId(a)+'" data-index="'+i+'" data-surah="'+a.surah+'" data-ayah="'+a.ayah+'"><div class="ayah-top"><span class="ayah-ref">Сура '+a.surah+'</span>'+actionButtons(i,saved)+'</div><div class="surah-book-number">#'+a.surah+'</div><div class="surah-book-arabic">'+escapeHtml(a.arabic||meta.arabic)+'</div><div class="surah-book-name">'+escapeHtml(a.ru||meta.name)+'</div><div class="surah-book-meta">'+escapeHtml((a.ayahs||meta.ayahs)+' · '+(a.meta||meta.meta))+'</div><div class="surah-reader-note">Идёт загрузка полного текста этой суры внутри QuranPro. Перехода в обычный Коран нет.</div></article>';
+    return '<article class="ayah '+(i===currentIndex?'current-ayah':'')+' '+cls+'" id="'+ayahId(a)+'" data-index="'+i+'" data-surah="'+a.surah+'" data-ayah="'+a.ayah+'"><div class="ayah-top"><span class="ayah-ref">Сура '+a.surah+'</span>'+actionButtons(i,saved)+'</div><div class="surah-book-number">#'+a.surah+'</div><div class="surah-book-arabic">'+escapeHtml(a.arabic||meta.arabic)+'</div><div class="surah-book-name">'+escapeHtml(surahRuTitle(meta))+'</div><div class="surah-book-meta">'+escapeHtml((a.ayahs||meta.ayahs)+' · '+(a.meta||meta.meta))+'</div><div class="surah-reader-note">Идёт загрузка полного текста этой суры внутри QuranPro. Перехода в обычный Коран нет.</div></article>';
   }
 
   function render(){
@@ -1481,16 +1582,16 @@ html.quran-pro-jumping .ayah{
     for(let i=range.start;i<range.end;i++){
       const a=quran[i]; const saved=bookmarks.includes(i);
       if(a.isSurahPlaceholder){html+=renderPlaceholder(a,i,saved,settings.mode==="book"); continue;}
-      if((i===range.start || quran[i-1].surah!==a.surah) && settings.mode==="continuous"){const m=surahMeta(a.surah);html+='<div class="surah-boundary"><div class="surah-book-arabic">'+escapeHtml(m.arabic)+'</div><div class="surah-book-name">'+escapeHtml(m.name)+'</div><div class="surah-book-meta">'+escapeHtml(m.ayahs+' · '+m.meta)+'</div></div>';}
+      if((i===range.start || quran[i-1].surah!==a.surah) && settings.mode==="continuous"){const m=surahMeta(a.surah);html+='<div class="surah-boundary"><div class="surah-book-arabic">'+escapeHtml(m.arabic)+'</div><div class="surah-book-name">'+escapeHtml(surahRuTitle(m))+'</div><div class="surah-book-meta">'+escapeHtml(m.ayahs+' · '+m.meta)+'</div></div>';}
       if(a.surah!==1 && a.ayah===1){html+='<div class="bismillah">بِسْمِ ٱللَّٰهِ ٱلرَّحْمَـٰنِ ٱلرَّحِيمِ</div>';}
       html+='<article class="ayah '+(i===currentIndex?'current-ayah':'')+'" id="'+ayahId(a)+'" data-index="'+i+'" data-surah="'+a.surah+'" data-ayah="'+a.ayah+'"><div class="ayah-top"><span class="ayah-ref">'+ayahLabel(a)+'</span>'+actionButtons(i,saved)+'</div><div class="arabic">'+escapeHtml(a.arabic)+'</div><div class="translit">'+escapeHtml(a.translit)+'</div><div class="translation">'+escapeHtml(a.ru)+'</div></article>';
     }
+    html += renderSurahStepNav();
     refs.container.innerHTML=html;
     syncFavoriteButtons();
     refs.reader.style.setProperty("--arabic-font-size", arabicFontSize+"px");
     const gs=groups(); const a=currentAyah();
-    if(settings.mode==="book"){const g=gs[currentPage]||gs[0];const m=g?g.meta:surahMeta(1);refs.pageMeta.textContent="Сура "+(currentPage+1)+" из "+gs.length+" · "+m.arabic+" · "+m.name+" · "+m.ayahs;refs.readerTitle.textContent=m.name||"Полное чтение";}
-    else {refs.pageMeta.textContent="Священный Коран";refs.readerTitle.textContent=a?ayahLabel(a):"Полное чтение";}
+    {const g=gs[currentPage]||gs[0];const m=g?g.meta:surahMeta(1);refs.pageMeta.textContent="Сура "+(currentPage+1)+" из "+gs.length+" · "+m.arabic+" · "+surahRuTitle(m)+" · "+m.ayahs;refs.readerTitle.textContent="ХАТМ КОРАНА";}
     renderBookmarks(); updateProgress();
   }
   function renderBookmarks(){const saved=normalizedBookmarks();syncContinueButton();if(!saved.length){refs.bookmarkList.innerHTML='<div class="empty-state">Закладок пока нет.</div>';return;}refs.bookmarkList.innerHTML=saved.map(function(index){const a=quran[index];if(!a)return"";return '<div class="bookmark-item"><span>'+ayahLabel(a)+'</span><button data-goto-bookmark="'+index+'">Открыть</button></div>';}).join("");}
@@ -1571,7 +1672,24 @@ html.quran-pro-jumping .ayah{
     node.__qpPressTimer=setTimeout(function(){node.classList.remove("qp-pressed");},420);
   }
 
-  document.addEventListener("click",function(e){const action=e.target.closest("[data-action]");if(action){e.preventDefault();e.stopPropagation();pressFeedback(action);const index=Number(action.dataset.index);if(action.dataset.action==="bookmark")requirePro(function(){setCurrent(index,false);toggleBookmark(index);});if(action.dataset.action==="save")requirePro(function(){saveAndGo(index);});if(action.dataset.action==="share")requirePro(function(){shareAyah(index);});return;}const bm=e.target.closest("[data-goto-bookmark]");if(bm){e.preventDefault();e.stopPropagation();pressFeedback(bm);requirePro(function(){refs.bookmarkPanel.classList.remove("open");scrollToCurrentExact(Number(bm.dataset.gotoBookmark));});}});
+  document.addEventListener("click",function(e){
+    const nav=e.target.closest("[data-surah-nav]");
+    if(nav){
+      e.preventDefault();
+      e.stopPropagation();
+      if(nav.disabled)return;
+      pressFeedback(nav);
+      requirePro(function(){
+        if(nav.dataset.surahNav==="next")goToSurahPage(currentPage+1);
+        if(nav.dataset.surahNav==="prev")goToSurahPage(currentPage-1);
+      });
+      return;
+    }
+    const action=e.target.closest("[data-action]");
+    if(action){e.preventDefault();e.stopPropagation();pressFeedback(action);const index=Number(action.dataset.index);if(action.dataset.action==="bookmark")requirePro(function(){setCurrent(index,false);toggleBookmark(index);});if(action.dataset.action==="save")requirePro(function(){saveAndGo(index);});if(action.dataset.action==="share")requirePro(function(){shareAyah(index);});return;}
+    const bm=e.target.closest("[data-goto-bookmark]");
+    if(bm){e.preventDefault();e.stopPropagation();pressFeedback(bm);requirePro(function(){refs.bookmarkPanel.classList.remove("open");scrollToCurrentExact(Number(bm.dataset.gotoBookmark));});}
+  });
   
   
   
@@ -1599,7 +1717,7 @@ html.quran-pro-jumping .ayah{
       scrollToCurrentExact(index,{message:"Открыта ваша закладка."});
     });
   });
-  document.getElementById("scrollTopBtn").addEventListener("click",function(){pressFeedback(this);window.scrollTo({top:0,behavior:"smooth"});});
+  document.getElementById("scrollTopBtn").addEventListener("click",function(){pressFeedback(this);requirePro(function(){goToSurahPage(0);showToast("Открыта первая сура.");});});
   document.getElementById("fontPlus").addEventListener("click",function(){pressFeedback(this);arabicFontSize=Math.min(44,arabicFontSize+2);refs.reader.style.setProperty("--arabic-font-size",arabicFontSize+"px");});
   document.getElementById("fontMinus").addEventListener("click",function(){pressFeedback(this);arabicFontSize=Math.max(22,arabicFontSize-2);refs.reader.style.setProperty("--arabic-font-size",arabicFontSize+"px");});
   document.querySelectorAll("[data-close-modal]").forEach(function(btn){btn.addEventListener("click",closeModal);});
