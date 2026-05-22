@@ -735,6 +735,10 @@ html.light-mode .ayah-ref{
   }
 }
 
+
+/* Stable continue-reading scroll: disable smooth behavior while exact anchor is being calculated */
+html.quran-exact-scroll{scroll-behavior:auto !important;}
+html.quran-exact-scroll .ayah{content-visibility:visible !important;contain-intrinsic-size:auto !important;}
 </style>
 
 <style id="quran-pro-final-favorite-loading-fix">
@@ -803,6 +807,40 @@ body.quran-has-favorites nav a[href*="favorites"] svg{
   fill:currentColor !important;
   stroke:currentColor !important;
 }
+
+body.quran-has-favorites .bottom-nav a.barakaway-favorite-active,
+body.quran-has-favorites .bottom-nav button.barakaway-favorite-active,
+body.quran-has-favorites nav a.barakaway-favorite-active,
+body.quran-has-favorites nav button.barakaway-favorite-active{
+  color:#f0d891 !important;
+}
+body.quran-has-favorites .bottom-nav a.barakaway-favorite-active svg,
+body.quran-has-favorites .bottom-nav button.barakaway-favorite-active svg,
+body.quran-has-favorites nav a.barakaway-favorite-active svg,
+body.quran-has-favorites nav button.barakaway-favorite-active svg{
+  fill:currentColor !important;
+  stroke:currentColor !important;
+}
+
+/* === Final performance/favorites/continue corrections === */
+.continue-reading-btn.is-loading{
+  pointer-events:none;
+  border-color:transparent !important;
+  box-shadow:0 0 0 1px rgba(240,216,145,.18),0 0 22px rgba(76,175,106,.18) !important;
+}
+.icon-btn[data-action="save"].saved,
+.icon-btn[data-action="save"].active{
+  background:rgba(215,181,109,.08) !important;
+  border-color:rgba(215,181,109,.22) !important;
+  color:var(--qp-accent,#4caf6a) !important;
+  box-shadow:none !important;
+}
+.icon-btn[data-action="save"].saved svg,
+.icon-btn[data-action="save"].active svg{
+  fill:currentColor !important;
+  stroke:currentColor !important;
+}
+
 </style>
 </head>
 <body>
@@ -1131,9 +1169,13 @@ body.quran-has-favorites nav a[href*="favorites"] svg{
       return Number.isFinite(n)?Math.max(0,Math.min(n,quran.length-1)):-1;
     }
     if(typeof item==="object"){
-      if(item.key)return indexFromBookmark(item.key);
+      if(item.key){
+        const byKey=indexFromBookmark(item.key);
+        if(byKey>=0)return byKey;
+      }
       if(item.surah && item.ayah){
-        return quran.findIndex(function(row){return Number(row.surah)===Number(item.surah) && Number(row.ayah)===Number(item.ayah);});
+        const byPair=quran.findIndex(function(row){return Number(row.surah)===Number(item.surah) && Number(row.ayah)===Number(item.ayah);});
+        if(byPair>=0)return byPair;
       }
       if(Number.isFinite(Number(item.index)))return Math.max(0,Math.min(Number(item.index),quran.length-1));
     }
@@ -1158,14 +1200,98 @@ body.quran-has-favorites nav a[href*="favorites"] svg{
     const idx=indexFromBookmark(items[0]);
     if(idx>=0)saveBookmarkIndex(idx); else clearBookmark();
   }
-  function getFavorites(){try{return JSON.parse(localStorage.getItem(FAVORITES_KEY)||"[]");}catch(e){return [];}}
+  function readJsonStorage(key){
+    try{const parsed=JSON.parse(localStorage.getItem(key)||"[]");return Array.isArray(parsed)?parsed:[];}catch(e){return [];}
+  }
+  function writeJsonStorage(key,items){
+    try{localStorage.setItem(key,JSON.stringify(Array.isArray(items)?items:[]));}catch(e){}
+  }
+  function favoriteIdForAyah(a){
+    if(!a)return "";
+    return a.isSurahPlaceholder?"quran-pro-surah-ru-"+a.surah:"quran-pro-ayah-ru-"+a.surah+":"+a.ayah;
+  }
+  function getFavorites(){return readJsonStorage(FAVORITES_KEY);}
+  function getGlobalFavorites(){return readJsonStorage("barakaway_favorites_v1");}
+  function dispatchFavoritesChanged(){
+    try{document.dispatchEvent(new CustomEvent("barakaway:favorites:changed"));}catch(e){}
+    try{window.dispatchEvent(new CustomEvent("barakaway:favorites:changed"));}catch(e){}
+    try{window.dispatchEvent(new StorageEvent("storage",{key:"barakaway_favorites_v1",newValue:localStorage.getItem("barakaway_favorites_v1")||"[]"}));}catch(e){}
+  }
+  function hasAnyFavorites(){
+    return FAVORITES_MIRROR_KEYS.some(function(key){return readJsonStorage(key).length>0;}) || getGlobalFavorites().length>0;
+  }
+  function markBottomFavoriteNodes(active){
+    const nodes=Array.from(document.querySelectorAll(".bottom-nav a,.bottom-nav button,nav a,nav button"));
+    nodes.forEach(function(node){
+      const text=(node.textContent||"").toLowerCase();
+      const href=(node.getAttribute("href")||"").toLowerCase();
+      const isFavorite=text.includes("избран") || href.includes("favorite") || href.includes("favorites") || href.includes("izbran");
+      if(!isFavorite)return;
+      node.classList.toggle("barakaway-favorite-active",!!active);
+      node.classList.toggle("active",!!active);
+      node.classList.toggle("is-active",!!active);
+      node.querySelectorAll("svg,path").forEach(function(svg){
+        if(active){
+          svg.style.fill="currentColor";
+          svg.style.stroke="currentColor";
+        }else{
+          svg.style.fill="";
+          svg.style.stroke="";
+        }
+      });
+    });
+  }
+  function syncBottomFavorites(){
+    const active=hasAnyFavorites();
+    document.body.classList.toggle("quran-has-favorites",active);
+    markBottomFavoriteNodes(active);
+    clearTimeout(window.__quranProBottomFavTimer);
+    window.__quranProBottomFavTimer=setTimeout(function(){markBottomFavoriteNodes(active);},180);
+  }
+  function syncFavoriteButtons(){
+    const ids=new Set(getFavorites().map(function(item){return String(item&&item.id||"");}));
+    refs.container.querySelectorAll('[data-action="save"]').forEach(function(btn){
+      const a=quran[Number(btn.dataset.index)];
+      const active=ids.has(favoriteIdForAyah(a));
+      btn.classList.toggle("saved",active);
+      btn.classList.toggle("active",active);
+    });
+    syncBottomFavorites();
+  }
   function saveFavorite(index){
-    const a=quran[index]; if(!a)return;
-    const items=getFavorites();
-    const id=a.isSurahPlaceholder?"quran-pro-surah-"+a.surah:"quran-pro-"+a.surah+":"+a.ayah;
-    const title=a.isSurahPlaceholder?"Коран PRO · Сура "+a.surah+" · "+a.ru:"Коран PRO "+a.surah+":"+a.ayah;
-    const record={id,type:"quran-pro",title,text:a.isSurahPlaceholder?(a.arabic+" · "+a.ru):(a.ru||a.arabic),url:"quran-pro-ru.html#"+ayahId(a),createdAt:new Date().toISOString()};
-    localStorage.setItem(FAVORITES_KEY,JSON.stringify([record].concat(items.filter(function(item){return item.id!==id;}))));
+    const a=quran[index]; if(!a)return false;
+    const id=favoriteIdForAyah(a);
+    const meta=surahMeta(a.surah);
+    const title=a.isSurahPlaceholder?"Коран PRO · Сура "+a.surah+" · "+(a.ru||meta.name):"Коран PRO · "+(meta.name||("Сура "+a.surah))+" · "+a.surah+":"+a.ayah;
+    const record={
+      id:id,
+      type:"quran-pro-ayah",
+      source:"quran-pro-ru",
+      lang:"ru",
+      title:title,
+      name:title,
+      surah:Number(a.surah),
+      ayah:Number(a.ayah||1),
+      arabic:a.arabic||meta.arabic||"",
+      translit:a.translit||"",
+      text:a.isSurahPlaceholder?((a.arabic||meta.arabic||"")+" · "+(a.ru||meta.name||"")):(a.ru||a.arabic||""),
+      translation:a.ru||"",
+      url:"quran-pro-ru.html#"+ayahId(a),
+      href:"quran-pro-ru.html#"+ayahId(a),
+      createdAt:new Date().toISOString()
+    };
+    const current=getFavorites();
+    const exists=current.some(function(item){return String(item&&item.id||"")===id;});
+    const next=exists?current.filter(function(item){return String(item&&item.id||"")!==id;}):[record].concat(current.filter(function(item){return String(item&&item.id||"")!==id;}));
+    FAVORITES_MIRROR_KEYS.forEach(function(key){
+      const list=readJsonStorage(key).filter(function(item){return String(item&&item.id||"")!==id;});
+      writeJsonStorage(key,exists?list:[record].concat(list));
+    });
+    const global=getGlobalFavorites().filter(function(item){return String(item&&item.id||"")!==id;});
+    writeJsonStorage("barakaway_favorites_v1",exists?global:[record].concat(global));
+    dispatchFavoritesChanged();
+    syncBottomFavorites();
+    return !exists;
   }
 
   function surahMeta(n){return SURAH_INDEX.find(function(s){return s.number===Number(n);})||{number:n,arabic:"",name:"Сура "+n,ayahs:"",meta:"",href:""};}
@@ -1206,44 +1332,80 @@ body.quran-has-favorites nav a[href*="favorites"] svg{
     });
     syncContinueButton();
   }
-  function scrollToCurrentExact(targetIndex){
+  function scrollToCurrentExact(targetIndex, options){
+    options=options||{};
     const index=Number.isFinite(Number(targetIndex))?Number(targetIndex):currentIndex;
     const a=quran[index];
-    if(!a)return;
+    const btn=document.getElementById("continueBookmarkBtn");
+    if(!a){if(btn)btn.classList.remove("is-loading");return false;}
     const targetId=ayahId(a);
     document.documentElement.classList.add("quran-exact-scroll");
     clearTimeout(window.__quranProExactScroll);
+
     function locate(){
       return document.getElementById(targetId) || refs.container.querySelector('[data-index="'+index+'"]');
     }
-    function align(behavior){
+    function stickyOffset(){
+      const controls=document.querySelector(".reader-controls-v2");
+      const topbar=document.querySelector(".topbar");
+      const controlsRect=controls?controls.getBoundingClientRect():{height:0};
+      const topbarRect=topbar?topbar.getBoundingClientRect():{height:0};
+      return Math.ceil(Math.min(topbarRect.height||0,70)+(controlsRect.height||0)+16);
+    }
+    function prepareNode(node){
+      if(!node)return;
+      node.style.contentVisibility="visible";
+      node.style.containIntrinsicSize="auto";
+      node.classList.add("current-ayah");
+    }
+    function align(){
       const node=locate();
       if(!node)return false;
       refs.container.querySelectorAll(".current-ayah").forEach(function(el){el.classList.remove("current-ayah");});
-      node.classList.add("current-ayah");
-      node.style.contentVisibility="visible";
-      node.scrollIntoView({behavior:behavior||"auto",block:"start",inline:"nearest"});
-      const controls=document.querySelector(".reader-controls-v2");
-      const stickyOffset=(controls?controls.getBoundingClientRect().height:0)+16;
-      window.scrollBy({top:-stickyOffset,behavior:"auto"});
+      prepareNode(node);
+      node.scrollIntoView({behavior:"auto",block:"start",inline:"nearest"});
+      const top=node.getBoundingClientRect().top;
+      const offset=stickyOffset();
+      window.scrollBy(0,Math.round(top-offset));
       return true;
     }
-    const delays=[0,80,180,360,700,1150,1700];
-    function run(step){
-      align(step===0?"smooth":"auto");
-      if(step<delays.length-1){
-        window.__quranProExactScroll=setTimeout(function(){run(step+1);},delays[step+1]);
-      }else{
-        window.__quranProExactScroll=setTimeout(function(){
-          document.documentElement.classList.remove("quran-exact-scroll");
-          const node=locate();
-          if(node)node.style.contentVisibility="";
-          const btn=document.getElementById("continueBookmarkBtn");
-          if(btn)btn.classList.remove("is-loading");
-        },420);
+    function isAligned(){
+      const node=locate();
+      if(!node)return false;
+      const top=Math.round(node.getBoundingClientRect().top);
+      const expected=stickyOffset();
+      return Math.abs(top-expected)<24;
+    }
+    function finish(ok){
+      const node=locate();
+      if(node){
+        node.style.contentVisibility="";
+        node.style.containIntrinsicSize="";
+      }
+      document.documentElement.classList.remove("quran-exact-scroll");
+      if(btn)btn.classList.remove("is-loading");
+      if(ok && options.toast!==false){
+        showToast(options.message || "Открыто место продолжения чтения.");
       }
     }
-    requestAnimationFrame(function(){run(0);});
+    function step(count){
+      const ok=align();
+      if(!ok){
+        if(count<6){window.__quranProExactScroll=setTimeout(function(){step(count+1);},120);return;}
+        finish(false);return;
+      }
+      if(count>=8 || (count>=3 && isAligned())){
+        window.__quranProExactScroll=setTimeout(function(){finish(true);},160);
+        return;
+      }
+      const delay=count<3?80:160;
+      window.__quranProExactScroll=setTimeout(function(){step(count+1);},delay);
+    }
+
+    requestAnimationFrame(function(){
+      setTimeout(function(){step(0);},20);
+    });
+    return true;
   }
   function setCurrent(index,scroll){
     currentIndex=Math.max(0,Math.min(index,quran.length-1));
@@ -1319,6 +1481,8 @@ body.quran-has-favorites nav a[href*="favorites"] svg{
       btn.classList.toggle("saved",active);
       btn.classList.toggle("active",active);
     });
+    syncBottomFavorites();
+    setTimeout(syncBottomFavorites,260);
     showToast(active?"Аят сохранён в избранное.":"Аят удалён из избранного.");
   }
   async function shareAyah(index){
@@ -1374,7 +1538,36 @@ body.quran-has-favorites nav a[href*="favorites"] svg{
   document.getElementById("toggleArabic").addEventListener("change",function(e){setDisplaySetting("arabic",e.target.checked);});
   document.getElementById("toggleTranslit").addEventListener("change",function(e){setDisplaySetting("translit",e.target.checked);});
   document.getElementById("toggleTranslation").addEventListener("change",function(e){setDisplaySetting("translation",e.target.checked);});
-  document.getElementById("continueBookmarkBtn").addEventListener("click",function(){const btn=this;requirePro(function(){btn.classList.add("is-loading");const saved=normalizedBookmarks();const index=saved.length?saved[0]:Number(localStorage.getItem(PROGRESS_KEY)||0);setCurrent(index,false);scrollToCurrentExact(index);showToast(saved.length?"Открыта ваша закладка.":"Открыто последнее место чтения.");setTimeout(function(){btn.classList.remove("is-loading");},2600);});});
+  document.getElementById("continueBookmarkBtn").addEventListener("pointerdown",function(){
+    if(isPro()){
+      this.classList.add("is-loading");
+      void this.offsetWidth;
+    }
+  });
+  document.getElementById("continueBookmarkBtn").addEventListener("click",function(){
+    const btn=this;
+    btn.classList.add("is-loading");
+    void btn.offsetWidth;
+    requirePro(function(){
+      const saved=normalizedBookmarks();
+      const progressIndex=Number(localStorage.getItem(PROGRESS_KEY)||0);
+      const rawIndex=saved.length?saved[0]:progressIndex;
+      const index=Math.max(0,Math.min(Number(rawIndex)||0,quran.length-1));
+      currentIndex=index;
+      currentPage=groupIndexForCurrent();
+      updateProgress();
+      syncCurrentDom();
+      const a=currentAyah();
+      refs.readerTitle.textContent=a?ayahLabel(a):"Полное чтение";
+      setTimeout(function(){
+        const ok=scrollToCurrentExact(index,{message:saved.length?"Открыта ваша закладка.":"Открыто последнее место чтения."});
+        if(!ok){btn.classList.remove("is-loading");}
+      },35);
+    });
+    if(!isPro()){
+      setTimeout(function(){btn.classList.remove("is-loading");},500);
+    }
+  });
   document.getElementById("scrollTopBtn").addEventListener("click",function(){window.scrollTo({top:0,behavior:"smooth"});});
   document.getElementById("fontPlus").addEventListener("click",function(){arabicFontSize=Math.min(44,arabicFontSize+2);refs.reader.style.setProperty("--arabic-font-size",arabicFontSize+"px");});
   document.getElementById("fontMinus").addEventListener("click",function(){arabicFontSize=Math.max(22,arabicFontSize-2);refs.reader.style.setProperty("--arabic-font-size",arabicFontSize+"px");});
