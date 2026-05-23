@@ -1409,42 +1409,20 @@ html.light-mode .surah-book-cover .surah-book-name{
 </style>
 
 
-<style id="quran-pro-mobile-performance-and-mic-fix">
-/* Mobile performance fix: keep premium look, reduce GPU-heavy effects and DOM paint cost on phones. */
+<style id="quran-pro-mobile-mic-layout-final-fix">
+/* Mobile performance/layout fix: verse title above, action icons centered below. */
 @media(max-width:760px){
-  .hero,.reader-shell,.book-stage,.controls,.modal,.toast,.surah-boundary,.ayah,.btn,.tool-btn,.icon-btn,.surah-step-btn,.surah-live-mic{
-    box-shadow:none !important;
-    filter:none !important;
-  }
-  .topbar,.controls,.controls::before,.modal-overlay{
-    backdrop-filter:none !important;
-    -webkit-backdrop-filter:none !important;
-  }
-  .hero,.book-stage,.reader-shell{
-    background:#101820 !important;
-  }
-  .book-stage::after,.book-stage::before{
-    opacity:.18 !important;
-  }
-  .quran-live-letter{
-    transition:none !important;
-    text-shadow:none !important;
-  }
-  .quran-live-letter.is-read{
-    text-shadow:none !important;
-  }
-  .ayah{
-    content-visibility:auto !important;
-    contain-intrinsic-size:220px !important;
-  }
-  html.quran-live-active .ayah,
-  html.quran-pro-jumping .ayah{
-    content-visibility:visible !important;
-    contain-intrinsic-size:auto !important;
-  }
+  .ayah-top{flex-direction:column !important;align-items:center !important;justify-content:center !important;gap:12px !important;text-align:center !important;}
+  .ayah-ref{align-self:center !important;max-width:100% !important;text-align:center !important;white-space:normal !important;line-height:1.45 !important;}
+  .ayah-actions{width:100% !important;justify-content:center !important;align-items:center !important;flex-wrap:wrap !important;gap:10px !important;}
+  .icon-btn,.tajweed-mic-btn{flex:0 0 auto !important;}
+  .surah-live-header{align-items:center !important;}
+  .surah-live-copy{text-align:left !important;min-width:0 !important;}
+  html[dir="rtl"] .surah-live-copy,html[dir="rtl"] .surah-live-copy .surah-book-arabic{text-align:right !important;}
+  .book-stage,.ayah,.surah-boundary,.surah-book-cover{filter:none !important;backdrop-filter:none !important;-webkit-backdrop-filter:none !important;}
+  .quran-live-letter{will-change:auto !important;}
 }
 </style>
-
 </head>
 <body>
 <div class="page">
@@ -2064,11 +2042,12 @@ html.light-mode .surah-book-cover .surah-book-name{
     });
   }
   function renderArabicText(text){
+    return '<div class="arabic" data-live-arabic>'+escapeHtml(String(text||''))+'</div>';
+  }
+
+  function renderLiveArabicLetters(text){
     const raw=String(text||"");
-    if(!document.documentElement.classList.contains("quran-live-active")){
-      return '<div class="arabic" data-live-arabic>'+escapeHtml(raw)+'</div>';
-    }
-    let html='<div class="arabic" data-live-arabic>';
+    let html='';
     let wordIndex=0;
     let inWord=false;
     let charIndex=0;
@@ -2088,8 +2067,20 @@ html.light-mode .surah-book-cover .surah-book-name{
       html+='<span class="quran-live-letter" data-live-word="'+(wordIndex-1)+'" data-live-char="'+charIndex+'">'+escapeHtml(ch)+'</span>';
       charIndex++;
     }
-    html+='</div>';
     return html;
+  }
+
+  function prepareLiveScopeDom(scope){
+    if(!scope || !scope.map)return;
+    scope.map.forEach(function(item){
+      const ayah=quran[item.index];
+      if(!ayah)return;
+      const node=refs.container.querySelector('.ayah[data-index="'+item.index+'"] .arabic[data-live-arabic]');
+      if(node && !node.dataset.liveReady){
+        node.innerHTML=renderLiveArabicLetters(ayah.arabic);
+        node.dataset.liveReady='1';
+      }
+    });
   }
   function actionButtons(i,saved){return '<div class="ayah-actions"><button class="icon-btn '+(saved?'saved':'')+'" data-action="bookmark" data-index="'+i+'" title="बुकमार्क" aria-label="बुकमार्क"><svg viewBox="0 0 24 24"><path d="M6 4.5A1.5 1.5 0 0 1 7.5 3h9A1.5 1.5 0 0 1 18 4.5V21l-6-3.5L6 21V4.5z"></path></svg></button><button class="icon-btn" data-action="save" data-index="'+i+'" title="सहेजें" aria-label="सहेजें"><svg viewBox="0 0 24 24"><path d="M12 3.6l2.45 5.05 5.55.8-4.02 3.92.95 5.53L12 16.3l-4.93 2.6.95-5.53L4 9.45l5.55-.8L12 3.6z"></path></svg></button><button class="icon-btn" data-action="share" data-index="'+i+'" title="साझा करें" aria-label="साझा करें"><svg viewBox="0 0 24 24"><circle cx="18" cy="5" r="3"></circle><circle cx="6" cy="12" r="3"></circle><circle cx="18" cy="19" r="3"></circle><path d="M8.7 10.7l6.6-4.4M8.7 13.3l6.6 4.4"></path></svg></button><button class="icon-btn tajweed-mic-btn" data-action="tajweed" data-index="'+i+'" title="पढ़ें" aria-label="पढ़ें"><svg viewBox="0 0 24 24"><path d="M12 3a3 3 0 0 0-3 3v6a3 3 0 0 0 6 0V6a3 3 0 0 0-3-3z"></path><path d="M19 10v2a7 7 0 0 1-14 0v-2"></path><path d="M12 19v3"></path><path d="M8 22h8"></path></svg></button></div>';}
   function renderPlaceholder(a,i,saved,cover){
@@ -2202,6 +2193,7 @@ html.light-mode .surah-book-cover .surah-book-name{
   let tajweedActive = null;
   let tajweedSafetyTimer = null;
   let tajweedLastResultIndex = 0;
+  let tajweedKeepAlive = false;
 
   function tajweedMicSvg(){
     return '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3a3 3 0 0 0-3 3v6a3 3 0 0 0 6 0V6a3 3 0 0 0-3-3z"></path><path d="M19 10v2a7 7 0 0 1-14 0v-2"></path><path d="M12 19v3"></path><path d="M8 22h8"></path></svg>';
@@ -2393,76 +2385,91 @@ html.light-mode .surah-book-cover .surah-book-name{
 
   function startLiveReading(scope, btn){
     if(!scope){showToast('Откройте суру для чтения.');return;}
-    if(tajweedRecognition){stopTajweedRecording(true);}
     const SpeechRec=getSpeechRecognition();
     if(!SpeechRec){showToast('Микрофон чтения работает в Chrome по HTTPS или localhost.');return;}
-    try{
-      window.__quranLiveKeepAlive=true;
-      window.__quranLiveManualStop=false;
-      window.__quranLiveScope={surah:Number(scope.surah),start:Number(scope.start)||0};
-      window.__quranLiveBtnSurah=btn ? btn.getAttribute('data-surah') : null;
-      document.documentElement.classList.add('quran-live-active');
-      if(!refs.container.querySelector('.quran-live-letter'))render();
 
-      tajweedActive=scope;
-      tajweedActive.map=buildLiveMap(scope);
-      tajweedActive._cached=false;
-      tajweedActive.pointer=Number(tajweedActive.pointer)||0;
-      tajweedLastResultIndex=0;
-      buildLiveCache(tajweedActive);
-      resetLiveProgress(tajweedActive);
-
-      tajweedRecognition=new SpeechRec();
-      tajweedRecognition.lang='ar-SA';
-      tajweedRecognition.continuous=true;
-      tajweedRecognition.interimResults=true;
-      tajweedRecognition.maxAlternatives=1;
-
-      tajweedRecognition.onresult=function(event){
-        for(let i=tajweedLastResultIndex;i<event.results.length;i++){
-          const txt=(event.results[i][0] && event.results[i][0].transcript) || '';
-          if(txt)applyLiveChunk(tajweedActive,txt);
-        }
-        tajweedLastResultIndex=Math.max(tajweedLastResultIndex,event.resultIndex);
-      };
-
-      tajweedRecognition.onerror=function(event){
-        if(event && (event.error==='not-allowed' || event.error==='service-not-allowed')){
-          window.__quranLiveKeepAlive=false;
-          window.__quranLiveManualStop=true;
-          showToast('Разрешите доступ к микрофону.');
-        }
-      };
-
-      tajweedRecognition.onend=function(){
-        tajweedRecognition=null;
-        clearTimeout(tajweedSafetyTimer);
-        if(window.__quranLiveKeepAlive && !window.__quranLiveManualStop){
-          refs.container.querySelectorAll('.surah-live-mic,.tajweed-mic-btn').forEach(function(x){x.classList.add('is-recording');});
-          tajweedSafetyTimer=setTimeout(function(){
-            if(window.__quranLiveKeepAlive && !tajweedRecognition){
-              try{startLiveReading(window.__quranLiveScope || scope, btn || refs.container.querySelector('.surah-live-mic[data-surah="'+(scope && scope.surah)+'"]'));}catch(e){}
-            }
-          },420);
-        }else{
-          refs.container.querySelectorAll('.tajweed-mic-btn.is-recording,.surah-live-mic.is-recording').forEach(function(x){x.classList.remove('is-recording');});
-          document.documentElement.classList.remove('quran-live-active');
-          render();
-        }
-      };
-
-      tajweedRecognition.start();
-      refs.container.querySelectorAll('.surah-live-mic,.tajweed-mic-btn').forEach(function(x){x.classList.remove('is-recording');});
-      if(btn)btn.classList.add('is-recording');
-      showToast('Читайте спокойно. Микрофон будет активен до закрытия страницы.');
-      clearTimeout(tajweedSafetyTimer);
-    }catch(err){
-      tajweedRecognition=null;
-      window.__quranLiveKeepAlive=false;
-      window.__quranLiveManualStop=true;
-      document.documentElement.classList.remove('quran-live-active');
-      showToast('Разрешите доступ к микрофону.');
+    if(tajweedRecognition){
+      const sameScope=tajweedActive && Number(tajweedActive.surah)===Number(scope.surah) && Number(tajweedActive.start)===Number(scope.start);
+      if(sameScope && tajweedKeepAlive){
+        stopTajweedRecording();
+        return;
+      }
+      stopTajweedRecording();
     }
+
+    tajweedActive=scope;
+    tajweedActive.map=buildLiveMap(scope);
+    tajweedActive._cached=false;
+    tajweedActive.pointer=0;
+    tajweedActive._button=btn || null;
+    tajweedKeepAlive=true;
+    tajweedLastResultIndex=0;
+    prepareLiveScopeDom(tajweedActive);
+    buildLiveCache(tajweedActive);
+    resetLiveProgress(tajweedActive);
+
+    function setRecordingVisual(active){
+      refs.container.querySelectorAll('.tajweed-mic-btn.is-recording,.surah-live-mic.is-recording').forEach(function(x){x.classList.remove('is-recording');});
+      if(active){
+        const liveBtn=tajweedActive && tajweedActive._button;
+        if(liveBtn && document.contains(liveBtn))liveBtn.classList.add('is-recording');
+      }
+    }
+
+    function armRecognition(){
+      if(!tajweedKeepAlive || !tajweedActive)return;
+      try{
+        const rec=new SpeechRec();
+        tajweedRecognition=rec;
+        rec.lang='ar-SA';
+        rec.continuous=true;
+        rec.interimResults=true;
+        rec.maxAlternatives=1;
+        tajweedLastResultIndex=0;
+
+        rec.onresult=function(event){
+          const start=Math.max(0,event.resultIndex||0);
+          for(let i=start;i<event.results.length;i++){
+            const txt=(event.results[i][0] && event.results[i][0].transcript) || '';
+            if(txt)applyLiveChunk(tajweedActive,txt);
+          }
+          tajweedLastResultIndex=event.results.length;
+        };
+
+        rec.onerror=function(){
+          /* Keep the reading session alive; onend will restart when the browser stops listening. */
+        };
+
+        rec.onend=function(){
+          if(tajweedRecognition===rec)tajweedRecognition=null;
+          if(!tajweedKeepAlive || !tajweedActive){
+            setRecordingVisual(false);
+            return;
+          }
+          setRecordingVisual(true);
+          clearTimeout(tajweedSafetyTimer);
+          tajweedSafetyTimer=setTimeout(function(){
+            if(tajweedKeepAlive && tajweedActive && !tajweedRecognition)armRecognition();
+          },420);
+        };
+
+        rec.start();
+        setRecordingVisual(true);
+      }catch(err){
+        if(tajweedKeepAlive){
+          clearTimeout(tajweedSafetyTimer);
+          tajweedSafetyTimer=setTimeout(function(){
+            if(tajweedKeepAlive && tajweedActive && !tajweedRecognition)armRecognition();
+          },900);
+        }else{
+          setRecordingVisual(false);
+        }
+      }
+    }
+
+    showToast('Читайте спокойно. Микрофон будет оставаться активным.');
+    clearTimeout(tajweedSafetyTimer);
+    armRecognition();
   }
 
   function startTajweedRecording(index, btn){
@@ -2470,41 +2477,17 @@ html.light-mode .surah-book-cover .surah-book-name{
     startLiveReading(scope, btn);
   }
 
-  function stopTajweedRecording(soft){
+  function stopTajweedRecording(){
+    tajweedKeepAlive=false;
     clearTimeout(tajweedSafetyTimer);
-    if(!soft){
-      window.__quranLiveKeepAlive=false;
-      window.__quranLiveManualStop=true;
-      document.documentElement.classList.remove('quran-live-active');
-    }
     if(tajweedRecognition){
       const rec=tajweedRecognition;
       tajweedRecognition=null;
       try{rec.stop();}catch(e){}
     }
-    if(!soft){
-      refs.container.querySelectorAll('.tajweed-mic-btn.is-recording,.surah-live-mic.is-recording').forEach(function(x){x.classList.remove('is-recording');});
-      render();
-    }
+    refs.container.querySelectorAll('.tajweed-mic-btn.is-recording,.surah-live-mic.is-recording').forEach(function(x){x.classList.remove('is-recording');});
   }
 
-
-
-
-  document.addEventListener('visibilitychange',function(){
-    if(!document.hidden && window.__quranLiveKeepAlive && !tajweedRecognition){
-      clearTimeout(tajweedSafetyTimer);
-      tajweedSafetyTimer=setTimeout(function(){
-        try{startLiveReading(window.__quranLiveScope || tajweedActive, refs.container.querySelector('.surah-live-mic.is-recording') || refs.container.querySelector('.surah-live-mic'));}catch(e){}
-      },520);
-    }
-  });
-
-  window.addEventListener('pagehide',function(){
-    window.__quranLiveKeepAlive=false;
-    window.__quranLiveManualStop=true;
-    try{if(tajweedRecognition)tajweedRecognition.stop();}catch(e){}
-  });
 
   function firstReadableIndexInSurah(surah){
     surah=Number(surah);
