@@ -1423,6 +1423,19 @@ html.light-mode .surah-book-cover .surah-book-name{
   .quran-live-letter{will-change:auto !important;}
 }
 </style>
+
+<style id="quran-pro-mobile-final-mic-layout-fix">
+/* Mobile QuranPro: ayah header stacks cleanly and live reader avoids expensive repaint effects. */
+@media(max-width:560px){
+  .ayah-top{display:flex !important;flex-direction:column !important;align-items:stretch !important;gap:12px !important;}
+  .ayah-ref{align-self:flex-start !important;max-width:100% !important;white-space:normal !important;line-height:1.35 !important;}
+  .ayah-actions{width:100% !important;display:flex !important;justify-content:center !important;align-items:center !important;gap:12px !important;flex-wrap:nowrap !important;}
+  .ayah-actions .icon-btn{flex:0 0 48px !important;width:48px !important;height:48px !important;}
+  .surah-live-header{display:flex !important;align-items:flex-start !important;justify-content:space-between !important;gap:12px !important;}
+  .surah-live-mic{flex:0 0 58px !important;width:58px !important;height:58px !important;min-width:58px !important;}
+  .quran-live-letter{transition:none !important;text-shadow:none !important;}
+}
+</style>
 </head>
 <body>
 <div class="page">
@@ -2194,6 +2207,7 @@ html.light-mode .surah-book-cover .surah-book-name{
   let tajweedSafetyTimer = null;
   let tajweedLastResultIndex = 0;
   let tajweedKeepAlive = false;
+  let tajweedMediaStream = null;
 
   function tajweedMicSvg(){
     return '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3a3 3 0 0 0-3 3v6a3 3 0 0 0 6 0V6a3 3 0 0 0-3-3z"></path><path d="M19 10v2a7 7 0 0 1-14 0v-2"></path><path d="M12 19v3"></path><path d="M8 22h8"></path></svg>';
@@ -2340,40 +2354,109 @@ html.light-mode .surah-book-cover .surah-book-name{
     clearLiveMarks(scope);
   }
 
+  function latinReadingKey(text){
+    return String(text||'')
+      .toLowerCase()
+      .replace(/[’'`´ʿʾʾʿ]/g,'')
+      .replace(/kh/g,'h').replace(/ḥ/g,'h').replace(/h/g,'h')
+      .replace(/th/g,'s').replace(/dh/g,'z').replace(/sh/g,'s')
+      .replace(/aa/g,'a').replace(/ee/g,'i').replace(/oo/g,'u')
+      .replace(/[^a-z]/g,'')
+      .replace(/[aeiou]/g,'');
+  }
+
+  function arabicReadingKey(text){
+    const map={
+      'ء':'','ا':'a','أ':'a','إ':'a','آ':'a','ٱ':'a','ى':'a',
+      'ب':'b','ت':'t','ث':'s','ج':'j','ح':'h','خ':'h','د':'d','ذ':'z','ر':'r','ز':'z','س':'s','ش':'s','ص':'s','ض':'d','ط':'t','ظ':'z','ع':'','غ':'g','ف':'f','ق':'q','ك':'k','ل':'l','م':'m','ن':'n','ه':'h','ة':'h','و':'w','ؤ':'w','ي':'y','ئ':'y'
+    };
+    return Array.from(normalizeArabicWord(text)).map(function(ch){return map[ch]!==undefined?map[ch]:ch;}).join('').replace(/[aeiou]/g,'');
+  }
+
+  function heardTokens(chunk){
+    return String(chunk||'')
+      .replace(/[۞۩﴾﴿.,؛،!?؟]/g,' ')
+      .split(/\s+/)
+      .map(function(w){return w.trim();})
+      .filter(Boolean)
+      .map(function(w){return {raw:w, arabic:normalizeArabicWord(w), latin:latinReadingKey(w)};});
+  }
+
+  function phraseMatchLength(map, ptr, token){
+    if(!token || ptr>=map.length)return 0;
+    const max=Math.min(6,map.length-ptr);
+    const heardArabic=token.arabic;
+    const heardLatin=token.latin || arabicReadingKey(token.raw);
+    let best=0;
+    for(let n=1;n<=max;n++){
+      const slice=map.slice(ptr,ptr+n);
+      const expectedArabic=slice.map(function(x){return normalizeArabicWord(x.expected);}).join('');
+      const expectedLatin=slice.map(function(x){return arabicReadingKey(x.raw || x.expected);}).join('');
+      if(heardArabic && liveWordMatches(expectedArabic,heardArabic))best=n;
+      if(heardLatin && expectedLatin){
+        const short=Math.min(expectedLatin.length,heardLatin.length);
+        const dist=levenshteinDistance(expectedLatin,heardLatin);
+        const limit=expectedLatin.length>=14 ? 5 : (expectedLatin.length>=9 ? 3 : (expectedLatin.length>=5 ? 2 : 1));
+        if((short>=3 && (expectedLatin.indexOf(heardLatin)>=0 || heardLatin.indexOf(expectedLatin)>=0)) || dist<=limit)best=n;
+      }
+    }
+    return best;
+  }
+
+  function partialRatioForToken(expected, token){
+    const arabicRatio=token.arabic ? livePrefixRatio(expected,token.arabic) : 0;
+    const expLatin=arabicReadingKey(expected);
+    const heardLatin=token.latin || arabicReadingKey(token.raw);
+    let latinRatio=0;
+    if(expLatin && heardLatin){
+      if(expLatin.indexOf(heardLatin)===0)latinRatio=Math.min(.92,heardLatin.length/expLatin.length);
+      else{
+        const max=Math.min(expLatin.length,heardLatin.length);
+        let best=0;
+        for(let n=1;n<=max;n++){
+          if(levenshteinDistance(expLatin.slice(0,n),heardLatin.slice(0,n))<=Math.max(0,Math.floor(n*.25)))best=n/expLatin.length;
+        }
+        latinRatio=Math.min(.88,best);
+      }
+    }
+    return Math.max(arabicRatio,latinRatio);
+  }
+
   function applyLiveChunk(scope, chunk){
     if(!scope || !chunk)return;
     const map=scope.map || [];
     if(!map.length)return;
     if(!scope._cached)buildLiveCache(scope);
 
-    const heard=splitArabicWords(chunk).map(normalizeArabicWord).filter(Boolean);
+    const heard=heardTokens(chunk);
     if(!heard.length)return;
 
     let ptr=Math.max(0,Math.min(scope.pointer||0,map.length-1));
     let consumed=false;
 
-    /* If user repeats the current word or phrase after a mistake, process it again.
-       No forward scanning: the reader advances only through the current expected word. */
+    /* Browser speech recognition often returns cumulative phrases and may split
+       Bismillah as one token or several words. Scan the heard phrase and advance
+       only when the current Quran word/phrase is actually found. Repeated words
+       are allowed; already-read words are ignored. */
     for(let h=0; h<heard.length && ptr<map.length; h++){
-      const current=map[ptr];
-      const word=heard[h];
-
-      if(liveWordMatches(current.expected,word)){
-        markWord(current,'full');
-        ptr++;
+      const token=heard[h];
+      const matchLen=phraseMatchLength(map,ptr,token);
+      if(matchLen>0){
+        for(let k=0;k<matchLen && ptr<map.length;k++){
+          markWord(map[ptr],'full');
+          ptr++;
+        }
         consumed=true;
         continue;
       }
 
-      const ratio=livePrefixRatio(current.expected,word);
+      const current=map[ptr];
+      const ratio=partialRatioForToken(current.expected,token);
       if(ratio>0){
         const chars=current._chars || [];
         const partialCount=Math.max(1,Math.min(chars.length-1,Math.floor(chars.length*ratio)));
         markWord(current,'partial',partialCount);
-      }else{
-        markWord(current,'partial',0);
       }
-      break;
     }
 
     scope.pointer=ptr;
@@ -2381,6 +2464,19 @@ html.light-mode .surah-book-cover .surah-book-name{
       const next=map[ptr];
       if(next)markWord(next,'partial',0);
     }
+  }
+
+  function ensureLiveMicStream(){
+    if(tajweedMediaStream && tajweedMediaStream.getTracks().some(function(t){return t.readyState==='live';})){
+      return Promise.resolve(tajweedMediaStream);
+    }
+    if(!navigator.mediaDevices || !navigator.mediaDevices.getUserMedia){
+      return Promise.resolve(null);
+    }
+    return navigator.mediaDevices.getUserMedia({audio:{echoCancellation:false,noiseSuppression:false,autoGainControl:false}}).then(function(stream){
+      tajweedMediaStream=stream;
+      return stream;
+    }).catch(function(){return null;});
   }
 
   function startLiveReading(scope, btn){
@@ -2391,7 +2487,7 @@ html.light-mode .surah-book-cover .surah-book-name{
     if(tajweedRecognition){
       const sameScope=tajweedActive && Number(tajweedActive.surah)===Number(scope.surah) && Number(tajweedActive.start)===Number(scope.start);
       if(sameScope && tajweedKeepAlive){
-        stopTajweedRecording();
+        showToast('Микрофон уже включён. Продолжайте читать.');
         return;
       }
       stopTajweedRecording();
@@ -2469,7 +2565,7 @@ html.light-mode .surah-book-cover .surah-book-name{
 
     showToast('Читайте спокойно. Микрофон будет оставаться активным.');
     clearTimeout(tajweedSafetyTimer);
-    armRecognition();
+    ensureLiveMicStream().finally(function(){armRecognition();});
   }
 
   function startTajweedRecording(index, btn){
