@@ -2605,72 +2605,97 @@ html.light-mode .surah-book-cover .surah-book-name{
 
     function startAudioLevelReader(stream){
       const AudioCtx=window.AudioContext || window.webkitAudioContext;
-      if(!AudioCtx){showToast('Браузер не поддерживает живое чтение.');setRecordingVisual(false);return;}
+      if(!AudioCtx){
+        setRecordingVisual(true);
+        showToast('Микрофон включён. Прогресс идёт только по распознанным словам.');
+        startStrictSpeechReader();
+        return;
+      }
       if(!tajweedAudioContext)tajweedAudioContext=new AudioCtx();
       if(tajweedAudioContext.state==='suspended')tajweedAudioContext.resume().catch(function(){});
       if(tajweedAudioSource){try{tajweedAudioSource.disconnect();}catch(e){}}
       tajweedAudioSource=tajweedAudioContext.createMediaStreamSource(stream);
       tajweedAnalyser=tajweedAudioContext.createAnalyser();
-      tajweedAnalyser.fftSize=1024;
-      tajweedAnalyser.smoothingTimeConstant=.36;
+      tajweedAnalyser.fftSize=512;
+      tajweedAnalyser.smoothingTimeConstant=.42;
       tajweedAudioData=new Uint8Array(tajweedAnalyser.fftSize);
       tajweedAudioSource.connect(tajweedAnalyser);
       setRecordingVisual(true);
       requestWakeLock();
-      showToast('Микрофон включён. Читайте — зелёная дорожка будет идти за словами.');
+      showToast('Микрофон включён. Дорожка идёт только когда распознаны правильные слова.');
 
-      function tick(now){
+      function tick(){
         if(!tajweedKeepAlive || !tajweedActive || !tajweedAnalyser){
           setRecordingVisual(false);
           releaseWakeLock();
           return;
         }
-        tajweedAnalyser.getByteTimeDomainData(tajweedAudioData);
-        let sum=0;
-        for(let i=0;i<tajweedAudioData.length;i++){
-          const v=(tajweedAudioData[i]-128)/128;
-          sum+=v*v;
-        }
-        const rms=Math.sqrt(sum/tajweedAudioData.length);
-        const floor=tajweedActive._noiseFloor || .010;
-        if(rms<floor*1.55){
-          tajweedActive._noiseFloor=(floor*.985)+(rms*.015);
-        }
-        const threshold=Math.max(.012,Math.min(.040,(tajweedActive._noiseFloor||.010)*2.15));
-        const speaking=rms>threshold;
-        if(speaking){
-          tajweedActive._speakingFrames=(tajweedActive._speakingFrames||0)+1;
-          tajweedActive._silentFrames=0;
-        }else{
-          tajweedActive._silentFrames=(tajweedActive._silentFrames||0)+1;
-          tajweedActive._speakingFrames=0;
-        }
-        if(tajweedActive._waitingNextAyah){
-          if(!speaking && (tajweedActive._silentFrames||0)>=8){
-            tajweedActive._boundaryReady=true;
-          }
-          if(speaking && tajweedActive._boundaryReady && (tajweedActive._speakingFrames||0)>=3){
-            tajweedActive._waitingNextAyah=false;
-            tajweedActive._boundaryReady=false;
-            tajweedActive._currentWordVoiceMs=0;
-            tajweedActive._lastAdvance=now+180;
-          }
-          tajweedAudioRaf=requestAnimationFrame(tick);
-          return;
-        }
-        const lastTick=tajweedActive._lastTickNow || now;
-        const frameMs=Math.max(12,Math.min(44,now-lastTick));
-        tajweedActive._lastTickNow=now;
-        if(speaking && (tajweedActive._speakingFrames||0)>=3){
-          const strength=rms>threshold*2.7 ? .72 : (rms>threshold*1.8 ? .66 : .58);
-          advanceLiveLetters(frameMs*strength);
-          tajweedActive._lastAdvance=now;
-        }
+        /* The audio analyser is intentionally used only to keep the live mic session
+           warm and the UI active. It must never move Quran progress by loudness,
+           because ordinary speech or noise would falsely advance the ayah. */
         tajweedAudioRaf=requestAnimationFrame(tick);
       }
       cancelAnimationFrame(tajweedAudioRaf);
       tajweedAudioRaf=requestAnimationFrame(tick);
+      startStrictSpeechReader();
     }
+
+    function startStrictSpeechReader(){
+      const SpeechRecognition=getSpeechRecognition();
+      if(!SpeechRecognition){
+        showToast('В этом браузере нет точного распознавания речи. Дорожка не будет идти от постороннего звука.');
+        return;
+      }
+      if(tajweedRecognition){
+        try{tajweedRecognition.onend=null;tajweedRecognition.onerror=null;tajweedRecognition.onresult=null;tajweedRecognition.stop();}catch(e){}
+        tajweedRecognition=null;
+      }
+      let rec;
+      try{rec=new SpeechRecognition();}catch(e){return;}
+      tajweedRecognition=rec;
+      rec.lang='ar-SA';
+      rec.continuous=true;
+      rec.interimResults=true;
+      rec.maxAlternatives=3;
+      tajweedLastResultIndex=0;
+      let restartTimer=null;
+      let lastAcceptedAt=0;
+
+      function feedTranscript(text){
+        if(!tajweedKeepAlive || !tajweedActive || !text)return;
+        const before=tajweedActive.pointer||0;
+        applyLiveChunk(tajweedActive,text);
+        if((tajweedActive.pointer||0)>before){
+          lastAcceptedAt=Date.now();
+        }
+      }
+
+      rec.onresult=function(event){
+        if(!tajweedKeepAlive || !tajweedActive)return;
+        for(let i=event.resultIndex;i<event.results.length;i++){
+          const result=event.results[i];
+          let best='';
+          for(let a=0;a<result.length;a++){
+            const t=(result[a] && result[a].transcript) ? result[a].transcript.trim() : '';
+            if(t.length>best.length)best=t;
+          }
+          if(best)feedTranscript(best);
+        }
+      };
+      rec.onerror=function(){
+        /* Do not stop the mic state on transient mobile recognition errors. */
+      };
+      rec.onend=function(){
+        if(!tajweedKeepAlive)return;
+        clearTimeout(restartTimer);
+        restartTimer=setTimeout(function(){
+          if(!tajweedKeepAlive)return;
+          try{rec.start();}catch(e){}
+        },260);
+      };
+      try{rec.start();}catch(e){}
+    }
+
 
     ensureLiveMicStream().then(function(stream){
       if(!stream){
