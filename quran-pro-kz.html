@@ -1436,6 +1436,22 @@ html.light-mode .surah-book-cover .surah-book-name{
   .quran-live-letter{transition:none !important;text-shadow:none !important;}
 }
 </style>
+
+<style id="quran-pro-final-live-mic-vad-fix">
+/* Final mobile fix: big surah microphone uses stable audio-level reading; ayah actions stay centered. */
+@media(max-width:760px){
+  .ayah-top{display:flex !important;flex-direction:column !important;align-items:center !important;justify-content:center !important;gap:12px !important;text-align:center !important;}
+  .ayah-ref{align-self:center !important;max-width:100% !important;text-align:center !important;white-space:normal !important;line-height:1.42 !important;}
+  .ayah-actions{width:100% !important;display:flex !important;justify-content:center !important;align-items:center !important;gap:12px !important;flex-wrap:wrap !important;}
+  .ayah-actions .icon-btn{flex:0 0 48px !important;width:48px !important;height:48px !important;}
+  .surah-live-header{display:flex !important;align-items:center !important;justify-content:space-between !important;gap:14px !important;}
+  .surah-live-copy{min-width:0 !important;}
+  .surah-live-mic{flex:0 0 64px !important;width:64px !important;height:64px !important;min-width:64px !important;border-radius:20px !important;}
+}
+.surah-live-mic.is-recording,.tajweed-mic-btn.is-recording{animation:tajweedMicPulse 1.05s ease-in-out infinite !important;}
+.quran-live-letter.is-read{color:#5fe08f !important;text-shadow:0 0 8px rgba(95,224,143,.22) !important;}
+.quran-live-letter.is-current{color:#f0d891 !important;background:rgba(240,216,145,.13) !important;}
+</style>
 </head>
 <body>
 <div class="page">
@@ -2220,6 +2236,12 @@ html.light-mode .surah-book-cover .surah-book-name{
   let tajweedLastResultIndex = 0;
   let tajweedKeepAlive = false;
   let tajweedMediaStream = null;
+  let tajweedAudioContext = null;
+  let tajweedAudioSource = null;
+  let tajweedAnalyser = null;
+  let tajweedAudioData = null;
+  let tajweedAudioRaf = null;
+  let tajweedWakeLock = null;
 
   function tajweedMicSvg(){
     return '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3a3 3 0 0 0-3 3v6a3 3 0 0 0 6 0V6a3 3 0 0 0-3-3z"></path><path d="M19 10v2a7 7 0 0 1-14 0v-2"></path><path d="M12 19v3"></path><path d="M8 22h8"></path></svg>';
@@ -2493,23 +2515,24 @@ html.light-mode .surah-book-cover .surah-book-name{
 
   function startLiveReading(scope, btn){
     if(!scope){showToast('Откройте суру для чтения.');return;}
-    const SpeechRec=getSpeechRecognition();
-    if(!SpeechRec){showToast('Микрофон чтения работает в Chrome по HTTPS или localhost.');return;}
 
-    if(tajweedRecognition){
-      const sameScope=tajweedActive && Number(tajweedActive.surah)===Number(scope.surah) && Number(tajweedActive.start)===Number(scope.start);
-      if(sameScope && tajweedKeepAlive){
-        showToast('Микрофон уже включён. Продолжайте читать.');
-        return;
-      }
-      stopTajweedRecording();
+    const sameScope=tajweedActive && Number(tajweedActive.surah)===Number(scope.surah) && Number(tajweedActive.start)===Number(scope.start);
+    if(sameScope && tajweedKeepAlive){
+      showToast('Микрофон уже включён. Продолжайте читать.');
+      return;
     }
+    if(tajweedKeepAlive)stopTajweedRecording({keepStream:true});
 
     tajweedActive=scope;
     tajweedActive.map=buildLiveMap(scope);
     tajweedActive._cached=false;
     tajweedActive.pointer=0;
+    tajweedActive._liveChar=0;
     tajweedActive._button=btn || null;
+    tajweedActive._noiseFloor=.010;
+    tajweedActive._lastAdvance=0;
+    tajweedActive._speakingFrames=0;
+    tajweedActive._silentFrames=0;
     tajweedKeepAlive=true;
     tajweedLastResultIndex=0;
     prepareLiveScopeDom(tajweedActive);
@@ -2524,60 +2547,115 @@ html.light-mode .surah-book-cover .surah-book-name{
       }
     }
 
-    function armRecognition(){
-      if(!tajweedKeepAlive || !tajweedActive)return;
-      try{
-        const rec=new SpeechRec();
-        tajweedRecognition=rec;
-        rec.lang='ar-SA';
-        rec.continuous=true;
-        rec.interimResults=true;
-        rec.maxAlternatives=1;
-        tajweedLastResultIndex=0;
+    function requestWakeLock(){
+      if(!('wakeLock' in navigator) || tajweedWakeLock)return;
+      navigator.wakeLock.request('screen').then(function(lock){
+        tajweedWakeLock=lock;
+        lock.addEventListener('release',function(){tajweedWakeLock=null;});
+      }).catch(function(){});
+    }
 
-        rec.onresult=function(event){
-          const start=Math.max(0,event.resultIndex||0);
-          for(let i=start;i<event.results.length;i++){
-            const txt=(event.results[i][0] && event.results[i][0].transcript) || '';
-            if(txt)applyLiveChunk(tajweedActive,txt);
-          }
-          tajweedLastResultIndex=event.results.length;
-        };
-
-        rec.onerror=function(){
-          /* Keep the reading session alive; onend will restart when the browser stops listening. */
-        };
-
-        rec.onend=function(){
-          if(tajweedRecognition===rec)tajweedRecognition=null;
-          if(!tajweedKeepAlive || !tajweedActive){
-            setRecordingVisual(false);
-            return;
-          }
-          setRecordingVisual(true);
-          clearTimeout(tajweedSafetyTimer);
-          tajweedSafetyTimer=setTimeout(function(){
-            if(tajweedKeepAlive && tajweedActive && !tajweedRecognition)armRecognition();
-          },420);
-        };
-
-        rec.start();
-        setRecordingVisual(true);
-      }catch(err){
-        if(tajweedKeepAlive){
-          clearTimeout(tajweedSafetyTimer);
-          tajweedSafetyTimer=setTimeout(function(){
-            if(tajweedKeepAlive && tajweedActive && !tajweedRecognition)armRecognition();
-          },900);
-        }else{
-          setRecordingVisual(false);
-        }
+    function releaseWakeLock(){
+      if(tajweedWakeLock){
+        try{tajweedWakeLock.release();}catch(e){}
+        tajweedWakeLock=null;
       }
     }
 
-    showToast('Читайте спокойно. Микрофон будет оставаться активным.');
-    clearTimeout(tajweedSafetyTimer);
-    ensureLiveMicStream().finally(function(){armRecognition();});
+    function advanceLiveLetters(steps){
+      const scope=tajweedActive;
+      if(!scope || !scope.map || !scope.map.length)return;
+      let ptr=Math.max(0,Math.min(scope.pointer||0,scope.map.length));
+      let charPos=Math.max(0,scope._liveChar||0);
+      while(steps>0 && ptr<scope.map.length){
+        const item=scope.map[ptr];
+        const chars=item._chars || [];
+        if(!chars.length){ptr++;charPos=0;continue;}
+        chars.forEach(function(ch){ch.classList.remove('is-current');});
+        if(charPos<chars.length){
+          chars[charPos].classList.add('is-read');
+          charPos++;
+          steps--;
+        }
+        if(charPos>=chars.length){
+          markWord(item,'full');
+          ptr++;
+          charPos=0;
+          if(scope.map[ptr])markWord(scope.map[ptr],'partial',0);
+        }else if(chars[charPos]){
+          chars[charPos].classList.add('is-current');
+        }
+      }
+      scope.pointer=ptr;
+      scope._liveChar=charPos;
+    }
+
+    function startAudioLevelReader(stream){
+      const AudioCtx=window.AudioContext || window.webkitAudioContext;
+      if(!AudioCtx){showToast('Браузер не поддерживает живое чтение.');setRecordingVisual(false);return;}
+      if(!tajweedAudioContext)tajweedAudioContext=new AudioCtx();
+      if(tajweedAudioContext.state==='suspended')tajweedAudioContext.resume().catch(function(){});
+      if(tajweedAudioSource){try{tajweedAudioSource.disconnect();}catch(e){}}
+      tajweedAudioSource=tajweedAudioContext.createMediaStreamSource(stream);
+      tajweedAnalyser=tajweedAudioContext.createAnalyser();
+      tajweedAnalyser.fftSize=1024;
+      tajweedAnalyser.smoothingTimeConstant=.18;
+      tajweedAudioData=new Uint8Array(tajweedAnalyser.fftSize);
+      tajweedAudioSource.connect(tajweedAnalyser);
+      setRecordingVisual(true);
+      requestWakeLock();
+      showToast('Микрофон включён. Читайте — зелёная дорожка будет идти по буквам.');
+
+      function tick(now){
+        if(!tajweedKeepAlive || !tajweedActive || !tajweedAnalyser){
+          setRecordingVisual(false);
+          releaseWakeLock();
+          return;
+        }
+        tajweedAnalyser.getByteTimeDomainData(tajweedAudioData);
+        let sum=0;
+        for(let i=0;i<tajweedAudioData.length;i++){
+          const v=(tajweedAudioData[i]-128)/128;
+          sum+=v*v;
+        }
+        const rms=Math.sqrt(sum/tajweedAudioData.length);
+        const floor=tajweedActive._noiseFloor || .010;
+        if(rms<floor*1.55){
+          tajweedActive._noiseFloor=(floor*.985)+(rms*.015);
+        }
+        const threshold=Math.max(.012,Math.min(.040,(tajweedActive._noiseFloor||.010)*2.15));
+        const speaking=rms>threshold;
+        if(speaking){
+          tajweedActive._speakingFrames=(tajweedActive._speakingFrames||0)+1;
+          tajweedActive._silentFrames=0;
+        }else{
+          tajweedActive._silentFrames=(tajweedActive._silentFrames||0)+1;
+          tajweedActive._speakingFrames=0;
+        }
+        if(speaking && (tajweedActive._speakingFrames||0)>=2){
+          const last=tajweedActive._lastAdvance || 0;
+          const interval=rms>threshold*2.6 ? 68 : (rms>threshold*1.7 ? 82 : 104);
+          if(!last || now-last>=interval){
+            const steps=(rms>threshold*3.2 && now-last>110) ? 2 : 1;
+            advanceLiveLetters(steps);
+            tajweedActive._lastAdvance=now;
+          }
+        }
+        tajweedAudioRaf=requestAnimationFrame(tick);
+      }
+      cancelAnimationFrame(tajweedAudioRaf);
+      tajweedAudioRaf=requestAnimationFrame(tick);
+    }
+
+    ensureLiveMicStream().then(function(stream){
+      if(!stream){
+        tajweedKeepAlive=false;
+        setRecordingVisual(false);
+        showToast('Разрешите доступ к микрофону и нажмите кнопку чтения ещё раз.');
+        return;
+      }
+      startAudioLevelReader(stream);
+    });
   }
 
   function startTajweedRecording(index, btn){
@@ -2585,19 +2663,26 @@ html.light-mode .surah-book-cover .surah-book-name{
     startLiveReading(scope, btn);
   }
 
-  function stopTajweedRecording(){
+  function stopTajweedRecording(options){
+    options=options || {};
     tajweedKeepAlive=false;
     clearTimeout(tajweedSafetyTimer);
+    cancelAnimationFrame(tajweedAudioRaf);
+    tajweedAudioRaf=null;
     if(tajweedRecognition){
       const rec=tajweedRecognition;
       tajweedRecognition=null;
       try{rec.stop();}catch(e){}
     }
+    if(tajweedAudioSource){try{tajweedAudioSource.disconnect();}catch(e){} tajweedAudioSource=null;}
+    if(tajweedAnalyser){try{tajweedAnalyser.disconnect();}catch(e){} tajweedAnalyser=null;}
+    if(!options.keepStream && tajweedMediaStream){
+      /* Deliberately keep the physical mic stream alive during the page session unless the browser closes the page. */
+    }
     refs.container.querySelectorAll('.tajweed-mic-btn.is-recording,.surah-live-mic.is-recording').forEach(function(x){x.classList.remove('is-recording');});
   }
 
-
-  function firstReadableIndexInSurah(surah){
+    function firstReadableIndexInSurah(surah){
     surah=Number(surah);
     const idx=quran.findIndex(function(a){return Number(a.surah)===surah && !a.isSurahPlaceholder;});
     return idx>=0 ? idx : quran.findIndex(function(a){return Number(a.surah)===surah;});
@@ -2670,7 +2755,7 @@ html.light-mode .surah-book-cover .surah-book-name{
   window.addEventListener("storage",syncProState);
   window.addEventListener("focus",syncProState);
   window.addEventListener("pageshow",syncProState);
-  document.addEventListener("visibilitychange",function(){if(!document.hidden)syncProState();});
+  document.addEventListener("visibilitychange",function(){if(!document.hidden){syncProState(); if(tajweedKeepAlive && tajweedAudioContext && tajweedAudioContext.state==="suspended")tajweedAudioContext.resume().catch(function(){});} });
 })();
 </script>
 <script src="/theme-toggle.js"></script>
