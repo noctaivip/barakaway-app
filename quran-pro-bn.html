@@ -958,295 +958,6 @@ html.quran-pro-jumping .ayah{
 </style>
 
 
-<style id="quran-pro-tajweed-assistant-style">
-/* QuranPro Tajweed AI assistant: premium recording UI, no false green checks without backend model. */
-.tajweed-mic-btn{
-  color:var(--qp-accent-2,#66c680) !important;
-}
-.tajweed-mic-btn.is-recording{
-  color:#ffffff !important;
-  background:linear-gradient(135deg,#b91c1c,#ef4444) !important;
-  border-color:rgba(255,130,130,.70) !important;
-  box-shadow:0 0 0 4px rgba(239,68,68,.16),0 0 24px rgba(239,68,68,.35) !important;
-  animation:tajweedMicPulse 1.05s ease-in-out infinite;
-}
-@keyframes tajweedMicPulse{
-  0%,100%{transform:scale(1);}
-  50%{transform:scale(1.055);}
-}
-.tajweed-panel{
-  margin:14px 0 4px;
-  padding:14px;
-  border-radius:22px;
-  border:1px solid var(--qp-accent-border,rgba(45,122,70,.32));
-  background:
-    radial-gradient(circle at 92% 0%,color-mix(in srgb,var(--qp-accent,#2d7a46) 16%,transparent),transparent 36%),
-    linear-gradient(180deg,rgba(255,255,255,.045),rgba(215,181,109,.045));
-  box-shadow:inset 0 1px 0 rgba(255,255,255,.05),0 14px 30px rgba(0,0,0,.14);
-}
-.tajweed-head{
-  display:flex;
-  align-items:center;
-  justify-content:space-between;
-  gap:10px;
-  margin-bottom:10px;
-}
-.tajweed-title{
-  display:flex;
-  align-items:center;
-  gap:8px;
-  color:#ffffff;
-  font-size:13px;
-  font-weight:950;
-}
-.tajweed-title svg{
-  width:18px;
-  height:18px;
-  fill:none;
-  stroke:var(--qp-accent-2,#66c680);
-  stroke-width:2;
-  stroke-linecap:round;
-  stroke-linejoin:round;
-}
-.tajweed-state{
-  color:var(--qp-accent-text,#dff7e6);
-  font-size:11px;
-  font-weight:950;
-  padding:5px 9px;
-  border-radius:999px;
-  background:var(--qp-accent-soft,rgba(45,122,70,.14));
-  border:1px solid var(--qp-accent-border,rgba(45,122,70,.32));
-  white-space:nowrap;
-}
-.tajweed-target{
-  direction:rtl;
-  text-align:right;
-  color:#f0d891;
-  font-family:"Times New Roman",serif;
-  font-size:24px;
-  line-height:1.9;
-  margin:8px 0 12px;
-}
-.tajweed-word{
-  display:inline-block;
-  padding:0 3px;
-  border-radius:8px;
-  transition:background .2s ease,color .2s ease,box-shadow .2s ease;
-}
-.tajweed-word.pending{background:rgba(255,255,255,.035);}
-.tajweed-word.ok{background:rgba(34,197,94,.16);color:#86efac;box-shadow:0 0 0 1px rgba(34,197,94,.22);}
-.tajweed-word.bad{background:rgba(239,68,68,.16);color:#fecaca;box-shadow:0 0 0 1px rgba(239,68,68,.24);}
-.tajweed-grid{
-  display:grid;
-  grid-template-columns:repeat(3,minmax(0,1fr));
-  gap:8px;
-  margin:10px 0;
-}
-.tajweed-meter{
-  padding:9px;
-  border-radius:16px;
-  background:rgba(255,255,255,.045);
-  border:1px solid rgba(255,255,255,.07);
-}
-.tajweed-meter-label{
-  color:#cbd5df;
-  font-size:11px;
-  font-weight:900;
-  margin-bottom:6px;
-}
-.tajweed-track{
-  height:6px;
-  overflow:hidden;
-  border-radius:999px;
-  background:rgba(255,255,255,.08);
-}
-.tajweed-fill{
-  width:0%;
-  height:100%;
-  border-radius:999px;
-  background:linear-gradient(90deg,var(--qp-accent,#2d7a46),var(--qp-accent-2,#66c680));
-  transition:width .28s ease;
-}
-.tajweed-message{
-  color:#cbd5df;
-  font-size:12px;
-  font-weight:800;
-  line-height:1.45;
-  margin-top:10px;
-}
-.tajweed-message strong{color:#f0d891;}
-.tajweed-actions{
-  display:flex;
-  align-items:center;
-  flex-wrap:wrap;
-  gap:8px;
-  margin-top:12px;
-}
-.tajweed-action{
-  appearance:none;
-  -webkit-appearance:none;
-  border:1px solid var(--qp-accent-border,rgba(45,122,70,.32));
-  background:var(--qp-accent-soft,rgba(45,122,70,.14));
-  color:#ffffff;
-  border-radius:999px;
-  min-height:38px;
-  padding:9px 13px;
-  font:inherit;
-  font-size:12px;
-  font-weight:950;
-  cursor:pointer;
-}
-.tajweed-action.primary{
-  background:linear-gradient(135deg,var(--qp-accent,#2d7a46),var(--qp-accent-2,#66c680));
-  color:#ffffff;
-}
-.tajweed-wave{
-  position:relative;
-  height:38px;
-  border-radius:16px;
-  background:rgba(0,0,0,.16);
-  border:1px solid rgba(255,255,255,.07);
-  overflow:hidden;
-}
-.tajweed-wave::before{
-  content:"";
-  position:absolute;
-  inset:0;
-  background:repeating-linear-gradient(90deg,transparent 0 8px,color-mix(in srgb,var(--qp-accent-2,#66c680) 45%,transparent) 8px 10px,transparent 10px 18px);
-  opacity:.22;
-  transform:translateX(var(--tajweed-wave-x,0));
-}
-.tajweed-panel.is-recording .tajweed-wave::before{
-  animation:tajweedWaveMove .9s linear infinite;
-  opacity:.55;
-}
-@keyframes tajweedWaveMove{to{transform:translateX(18px);}}
-html.light-mode .tajweed-title{color:#111814;}
-html.light-mode .tajweed-panel{background:linear-gradient(180deg,#ffffff,#f7fbf7);}
-html.light-mode .tajweed-target{color:#8a681f;}
-html.light-mode .tajweed-message,.tajweed-meter-label{color:#526158;}
-@media(max-width:560px){
-  .tajweed-panel{padding:12px;border-radius:20px;}
-  .tajweed-head{align-items:flex-start;flex-direction:column;}
-  .tajweed-target{font-size:22px;}
-  .tajweed-grid{grid-template-columns:1fr;}
-  .tajweed-action{width:100%;}
-}
-</style>
-
-
-<style id="quran-pro-live-word-recitation-style">
-.live-recitation-panel .tajweed-word.current{background:rgba(215,181,109,.14);color:#f0d891;box-shadow:0 0 0 1px rgba(215,181,109,.22);}
-.live-recitation-panel .tajweed-message strong{color:#86efac;}
-.live-recitation-panel .tajweed-grid,.live-recitation-panel .tajweed-actions{display:none !important;}
-</style>
-
-<style id="quran-pro-surah-live-mic-style">
-/* Premium general live-recitation microphone inside surah header */
-.surah-boundary{
-  position:relative;
-}
-.surah-live-header{
-  display:flex;
-  align-items:center;
-  justify-content:space-between;
-  gap:14px;
-  width:100%;
-}
-.surah-live-copy{
-  min-width:0;
-  text-align:left;
-}
-.surah-live-copy .surah-book-arabic{
-  text-align:left;
-}
-.surah-live-mic{
-  appearance:none;
-  -webkit-appearance:none;
-  min-width:132px;
-  min-height:48px;
-  padding:10px 14px;
-  border-radius:999px;
-  border:1px solid var(--qp-accent-border,rgba(45,122,70,.32));
-  background:
-    radial-gradient(circle at 22% 0%,rgba(255,255,255,.16),transparent 36%),
-    linear-gradient(135deg,var(--qp-accent,#2d7a46),var(--qp-accent-2,#66c680));
-  color:#fff;
-  display:inline-flex;
-  align-items:center;
-  justify-content:center;
-  gap:9px;
-  font:inherit;
-  font-size:12px;
-  line-height:1.15;
-  font-weight:950;
-  cursor:pointer;
-  box-shadow:0 14px 34px color-mix(in srgb,var(--qp-accent,#2d7a46) 32%,transparent),inset 0 1px 0 rgba(255,255,255,.18);
-  transition:transform .16s ease,box-shadow .22s ease,filter .22s ease;
-}
-.surah-live-mic svg{
-  width:21px;
-  height:21px;
-  fill:none;
-  stroke:currentColor;
-  stroke-width:2;
-  stroke-linecap:round;
-  stroke-linejoin:round;
-}
-.surah-live-mic:hover{
-  transform:translateY(-1px);
-  filter:brightness(1.06);
-}
-.surah-live-mic:active{
-  transform:scale(.97);
-}
-.surah-live-mic.is-recording{
-  background:linear-gradient(135deg,#b91c1c,#ef4444) !important;
-  border-color:rgba(255,130,130,.72) !important;
-  animation:tajweedMicPulse 1.05s ease-in-out infinite;
-}
-.surah-live-mic-text{
-  display:flex;
-  flex-direction:column;
-  align-items:flex-start;
-  gap:1px;
-}
-.surah-live-mic-text strong{
-  font-size:12px;
-  letter-spacing:-.01em;
-}
-.surah-live-mic-text span{
-  font-size:10px;
-  opacity:.88;
-  font-weight:850;
-}
-@media(max-width:560px){
-  .surah-live-header{
-    align-items:flex-start;
-  }
-  .surah-live-mic{
-    min-width:54px;
-    width:54px;
-    height:54px;
-    padding:0;
-    border-radius:18px;
-  }
-  .surah-live-mic-text{display:none;}
-  .surah-live-mic svg{width:23px;height:23px;}
-}
-</style>
-
-<style id="quran-pro-live-letter-reader-style">
-/* Intelligent Quran Reader: no error panel, only live green reading progress. */
-.tajweed-panel{display:none !important;}
-.quran-live-letter{transition:color .14s ease,text-shadow .14s ease,background .14s ease;border-radius:5px;padding:0 .01em;}
-.quran-live-letter.is-read{color:#6ff29a !important;text-shadow:0 0 14px rgba(76,175,106,.42),0 0 3px rgba(255,255,255,.20);}
-.quran-live-letter.is-current{background:rgba(215,181,109,.16);box-shadow:0 0 0 1px rgba(215,181,109,.18);}
-.surah-live-mic-text span{display:none !important;}
-.surah-live-mic.is-recording{border-color:rgba(111,242,154,.82) !important;box-shadow:0 0 0 4px rgba(76,175,106,.14),0 0 28px rgba(76,175,106,.38) !important;}
-.surah-live-mic.is-recording svg{filter:drop-shadow(0 0 10px rgba(111,242,154,.85));}
-</style>
-
 <style id="quran-pro-surah-title-premium-highlight">
 /* Bright premium surah title highlight */
 .surah-book-name{
@@ -1275,26 +986,6 @@ html.light-mode .surah-book-name{
   background-clip:text;
 }
 </style>
-
-<style id="quran-pro-live-reader-final-soft-performance-style">
-/* Final live reader tuning: smoother mobile work + clear premium green surah title */
-.surah-book-name{
-  color:#66c680 !important;
-  text-shadow:0 0 18px rgba(102,198,128,.22),0 2px 10px rgba(0,0,0,.28) !important;
-}
-html.light-mode .surah-book-name{
-  color:#2d7a46 !important;
-  text-shadow:0 0 14px rgba(45,122,70,.16) !important;
-}
-.quran-live-letter.is-read{
-  color:#66c680 !important;
-  text-shadow:0 0 12px rgba(102,198,128,.24);
-}
-.quran-live-letter.is-current{
-  border-bottom:2px solid #66c680;
-}
-</style>
-
 
 <style id="quran-pro-surah-title-rich-green-final">
 /* Final requested surah title style: rich dark green fill + subtle golden letter edge. */
@@ -1399,59 +1090,48 @@ html.light-mode .surah-book-cover .surah-book-name{
 }
 </style>
 
-<style id="quran-pro-stable-live-reader-fix">
-/* Stable reading mode: no fake error checking, no auto-jump, current-word only. */
-.quran-live-letter{transition:color .16s ease, text-shadow .16s ease, background .16s ease;}
-.quran-live-letter.is-read{color:#58c982 !important;text-shadow:0 0 12px rgba(88,201,130,.28);}
-.quran-live-letter.is-current{color:#f0d891 !important;text-shadow:0 0 10px rgba(240,216,145,.22);}
-.surah-live-mic,.tajweed-mic-btn{background:linear-gradient(135deg,rgba(45,122,70,.92),rgba(88,201,130,.58)) !important;border-color:rgba(240,216,145,.42) !important;color:#fff !important;}
-.surah-live-mic.is-recording,.tajweed-mic-btn.is-recording{box-shadow:0 0 0 4px rgba(88,201,130,.18),0 0 28px rgba(88,201,130,.38) !important;}
+
+<style id="quran-pro-reader-header-cleanup">
+/* Clean, centered surah header for current release. */
+.surah-boundary{text-align:center !important;}
+.surah-boundary .surah-book-arabic,.surah-boundary .surah-book-name,.surah-boundary .surah-book-meta{text-align:center !important;}
+@media(max-width:760px){.surah-boundary{padding:18px 14px !important;}.ayah-actions{justify-content:center !important;}.surah-book-name{margin-top:8px !important;}}
 </style>
 
 
-<style id="quran-pro-mobile-mic-layout-final-fix">
-/* Mobile performance/layout fix: verse title above, action icons centered below. */
-@media(max-width:760px){
-  .ayah-top{flex-direction:column !important;align-items:center !important;justify-content:center !important;gap:12px !important;text-align:center !important;}
-  .ayah-ref{align-self:center !important;max-width:100% !important;text-align:center !important;white-space:normal !important;line-height:1.45 !important;}
-  .ayah-actions{width:100% !important;justify-content:center !important;align-items:center !important;flex-wrap:wrap !important;gap:10px !important;}
-  .icon-btn,.tajweed-mic-btn{flex:0 0 auto !important;}
-  .surah-live-header{align-items:center !important;}
-  .surah-live-copy{text-align:left !important;min-width:0 !important;}
-  html[dir="rtl"] .surah-live-copy,html[dir="rtl"] .surah-live-copy .surah-book-arabic{text-align:right !important;}
-  .book-stage,.ayah,.surah-boundary,.surah-book-cover{filter:none !important;backdrop-filter:none !important;-webkit-backdrop-filter:none !important;}
-  .quran-live-letter{will-change:auto !important;}
+<style id="quran-pro-reading-plan-style">
+/* QuranPro Reading Plan: lightweight daily goal, no microphone dependency. */
+.reading-plan-card{
+  margin:14px 20px 0;
+  padding:16px;
+  border-radius:26px;
+  border:1px solid rgba(215,181,109,.18);
+  background:linear-gradient(180deg,rgba(255,255,255,.045),rgba(215,181,109,.055));
+  box-shadow:0 14px 34px rgba(0,0,0,.16),inset 0 1px 0 rgba(255,255,255,.045);
 }
+.reading-plan-head{display:flex;align-items:flex-start;justify-content:space-between;gap:14px;margin-bottom:12px;}
+.reading-plan-title{font-size:19px;font-weight:950;letter-spacing:-.035em;color:#f0d891;line-height:1.12;}
+.reading-plan-subtitle{margin-top:4px;color:#aeb9c5;font-size:12px;font-weight:750;line-height:1.35;}
+.reading-plan-badge{display:inline-flex;align-items:center;justify-content:center;min-height:34px;padding:7px 11px;border-radius:999px;background:var(--qp-accent-soft,rgba(45,122,70,.14));border:1px solid var(--qp-accent-border,rgba(45,122,70,.32));color:var(--qp-accent-text,#dff7e6);font-size:11px;font-weight:950;white-space:nowrap;}
+.reading-plan-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:8px;margin:12px 0;}
+.reading-plan-stat{padding:10px;border-radius:18px;background:rgba(255,255,255,.045);border:1px solid rgba(255,255,255,.07);}
+.reading-plan-stat span{display:block;color:#aeb9c5;font-size:10px;font-weight:900;text-transform:uppercase;letter-spacing:.06em;}
+.reading-plan-stat strong{display:block;margin-top:3px;color:#fff;font-size:16px;font-weight:950;line-height:1.15;}
+.reading-plan-track{height:8px;border-radius:999px;overflow:hidden;background:rgba(255,255,255,.08);margin:12px 0 13px;}
+.reading-plan-fill{width:0%;height:100%;border-radius:999px;background:linear-gradient(90deg,var(--qp-accent,#2d7a46),var(--qp-accent-2,#66c680));transition:width .22s ease;}
+.reading-plan-actions{display:flex;align-items:center;flex-wrap:wrap;gap:8px;}
+.reading-plan-btn{appearance:none;-webkit-appearance:none;min-height:40px;padding:9px 12px;border-radius:999px;border:1px solid rgba(215,181,109,.20);background:rgba(215,181,109,.08);color:#d7b56d;font:inherit;font-size:12px;font-weight:950;cursor:pointer;transition:transform .14s ease,border-color .18s ease,background .18s ease,box-shadow .18s ease;}
+.reading-plan-btn:hover{border-color:var(--qp-accent,#4caf6a);box-shadow:0 8px 20px color-mix(in srgb,var(--qp-accent,#4caf6a) 20%,transparent);}
+.reading-plan-btn:active{transform:scale(.97);}
+.reading-plan-btn.primary{background:linear-gradient(135deg,var(--qp-accent,#2d7a46),var(--qp-accent-2,#66c680));border-color:var(--qp-accent-border,rgba(45,122,70,.32));color:#fff;}
+.reading-plan-goals{display:flex;align-items:center;gap:6px;flex-wrap:wrap;margin-top:10px;}
+.reading-plan-goal{min-height:32px;padding:7px 10px;border-radius:999px;border:1px solid rgba(215,181,109,.18);background:rgba(255,255,255,.035);color:#cbd5df;font:inherit;font-size:11px;font-weight:950;cursor:pointer;}
+.reading-plan-goal.active{background:var(--qp-accent-soft,rgba(45,122,70,.14));border-color:var(--qp-accent-border,rgba(45,122,70,.32));color:var(--qp-accent-text,#dff7e6);}
+html.light-mode .reading-plan-card{background:linear-gradient(180deg,#ffffff,#f7fbf7);border-color:rgba(181,138,54,.22);box-shadow:0 10px 24px rgba(18,34,24,.07);}
+html.light-mode .reading-plan-title{color:#8a681f;}html.light-mode .reading-plan-subtitle{color:#526158;}html.light-mode .reading-plan-stat strong{color:#111814;}
+@media(max-width:760px){.reading-plan-card{margin:12px 14px 0;padding:14px;border-radius:22px}.reading-plan-head{flex-direction:column;gap:8px}.reading-plan-grid{grid-template-columns:repeat(2,minmax(0,1fr));}.reading-plan-actions{display:grid;grid-template-columns:1fr;}.reading-plan-btn{width:100%;border-radius:16px;}.reading-plan-goals{justify-content:center;}}
 </style>
 
-<style id="quran-pro-mobile-final-mic-layout-fix">
-/* Mobile QuranPro: ayah header stacks cleanly and live reader avoids expensive repaint effects. */
-@media(max-width:560px){
-  .ayah-top{display:flex !important;flex-direction:column !important;align-items:stretch !important;gap:12px !important;}
-  .ayah-ref{align-self:flex-start !important;max-width:100% !important;white-space:normal !important;line-height:1.35 !important;}
-  .ayah-actions{width:100% !important;display:flex !important;justify-content:center !important;align-items:center !important;gap:12px !important;flex-wrap:nowrap !important;}
-  .ayah-actions .icon-btn{flex:0 0 48px !important;width:48px !important;height:48px !important;}
-  .surah-live-header{display:flex !important;align-items:flex-start !important;justify-content:space-between !important;gap:12px !important;}
-  .surah-live-mic{flex:0 0 58px !important;width:58px !important;height:58px !important;min-width:58px !important;}
-  .quran-live-letter{transition:none !important;text-shadow:none !important;}
-}
-</style>
-
-<style id="quran-pro-final-live-mic-vad-fix">
-/* Final mobile fix: big surah microphone uses stable audio-level reading; ayah actions stay centered. */
-@media(max-width:760px){
-  .ayah-top{display:flex !important;flex-direction:column !important;align-items:center !important;justify-content:center !important;gap:12px !important;text-align:center !important;}
-  .ayah-ref{align-self:center !important;max-width:100% !important;text-align:center !important;white-space:normal !important;line-height:1.42 !important;}
-  .ayah-actions{width:100% !important;display:flex !important;justify-content:center !important;align-items:center !important;gap:12px !important;flex-wrap:wrap !important;}
-  .ayah-actions .icon-btn{flex:0 0 48px !important;width:48px !important;height:48px !important;}
-  .surah-live-header{display:flex !important;align-items:center !important;justify-content:space-between !important;gap:14px !important;}
-  .surah-live-copy{min-width:0 !important;}
-  .surah-live-mic{flex:0 0 64px !important;width:64px !important;height:64px !important;min-width:64px !important;border-radius:20px !important;}
-}
-.surah-live-mic.is-recording,.tajweed-mic-btn.is-recording{animation:tajweedMicPulse 1.05s ease-in-out infinite !important;}
-.quran-live-letter.is-read{color:#5fe08f !important;text-shadow:0 0 8px rgba(95,224,143,.22) !important;}
-.quran-live-letter.is-current{color:#f0d891 !important;background:rgba(240,216,145,.13) !important;}
-</style>
 </head>
 <body>
 <div class="page">
@@ -1503,6 +1183,35 @@ html.light-mode .surah-book-cover .surah-book-name{
           </button>
         </div>
       </div>
+
+      <section class="reading-plan-card" id="readingPlanCard" aria-label="পাঠ পরিকল্পনা">
+        <div class="reading-plan-head">
+          <div>
+            <div class="reading-plan-title">পাঠ পরিকল্পনা</div>
+            <div class="reading-plan-subtitle">দৈনিক লক্ষ্য ও খতমের অগ্রগতি।</div>
+          </div>
+          <div class="reading-plan-badge" id="readingPlanBadge">বাকি: 0 আয়াত</div>
+        </div>
+        <div class="reading-plan-grid">
+          <div class="reading-plan-stat"><span>আজ</span><strong id="readingPlanToday">0 / 20</strong></div>
+          <div class="reading-plan-stat"><span>বাকি</span><strong id="readingPlanLeft">20</strong></div>
+          <div class="reading-plan-stat"><span>খতম</span><strong id="readingPlanTotal">0%</strong></div>
+          <div class="reading-plan-stat"><span>ধারা</span><strong id="readingPlanStreak">0</strong></div>
+        </div>
+        <div class="reading-plan-track" aria-hidden="true"><div class="reading-plan-fill" id="readingPlanFill"></div></div>
+        <div class="reading-plan-actions">
+          <button class="reading-plan-btn primary" id="readingPlanMarkCurrent" type="button">বর্তমান আয়াত পড়া হয়েছে</button>
+          <button class="reading-plan-btn" id="readingPlanMarkSurah" type="button">সূরা পড়া হয়েছে</button>
+          <button class="reading-plan-btn" id="readingPlanNextUnread" type="button">পরের অপঠিত আয়াত</button>
+          <button class="reading-plan-btn" id="readingPlanResetDay" type="button">আজ রিসেট</button>
+        </div>
+        <div class="reading-plan-goals" aria-label="লক্ষ্য">
+          <button class="reading-plan-goal" data-plan-goal="10" type="button">10</button>
+          <button class="reading-plan-goal active" data-plan-goal="20" type="button">20</button>
+          <button class="reading-plan-goal" data-plan-goal="50" type="button">50</button>
+        </div>
+      </section>
+
 
       <div class="book-stage locked" id="quranReader">
         <div class="book-page-meta">
@@ -2071,51 +1780,79 @@ html.light-mode .surah-book-cover .surah-book-name{
     });
   }
   function renderArabicText(text){
-    return '<div class="arabic" data-live-arabic>'+escapeHtml(String(text||''))+'</div>';
+    return '<div class="arabic">'+escapeHtml(String(text||''))+'</div>';
   }
-
-  function renderLiveArabicLetters(text){
-    const raw=String(text||"");
-    let html='';
-    let wordIndex=0;
-    let inWord=false;
-    let charIndex=0;
-    for(let pos=0;pos<raw.length;pos++){
-      const ch=raw[pos];
-      if(/\s/.test(ch)){
-        inWord=false;
-        charIndex=0;
-        html+=escapeHtml(ch);
-        continue;
-      }
-      if(!inWord){
-        inWord=true;
-        charIndex=0;
-        wordIndex++;
-      }
-      html+='<span class="quran-live-letter" data-live-word="'+(wordIndex-1)+'" data-live-char="'+charIndex+'">'+escapeHtml(ch)+'</span>';
-      charIndex++;
-    }
-    return html;
-  }
-
-  function prepareLiveScopeDom(scope){
-    if(!scope || !scope.map)return;
-    scope.map.forEach(function(item){
-      const ayah=quran[item.index];
-      if(!ayah)return;
-      const node=refs.container.querySelector('.ayah[data-index="'+item.index+'"] .arabic[data-live-arabic]');
-      if(node && !node.dataset.liveReady){
-        node.innerHTML=renderLiveArabicLetters(ayah.arabic);
-        node.dataset.liveReady='1';
-      }
-    });
-  }
-  function actionButtons(i,saved){return '<div class="ayah-actions"><button class="icon-btn '+(saved?'saved':'')+'" data-action="bookmark" data-index="'+i+'" title="বুকমার্ক" aria-label="বুকমার্ক"><svg viewBox="0 0 24 24"><path d="M6 4.5A1.5 1.5 0 0 1 7.5 3h9A1.5 1.5 0 0 1 18 4.5V21l-6-3.5L6 21V4.5z"></path></svg></button><button class="icon-btn" data-action="save" data-index="'+i+'" title="সংরক্ষণ" aria-label="সংরক্ষণ"><svg viewBox="0 0 24 24"><path d="M12 3.6l2.45 5.05 5.55.8-4.02 3.92.95 5.53L12 16.3l-4.93 2.6.95-5.53L4 9.45l5.55-.8L12 3.6z"></path></svg></button><button class="icon-btn" data-action="share" data-index="'+i+'" title="শেয়ার" aria-label="শেয়ার"><svg viewBox="0 0 24 24"><circle cx="18" cy="5" r="3"></circle><circle cx="6" cy="12" r="3"></circle><circle cx="18" cy="19" r="3"></circle><path d="M8.7 10.7l6.6-4.4M8.7 13.3l6.6 4.4"></path></svg></button><button class="icon-btn tajweed-mic-btn" data-action="tajweed" data-index="'+i+'" title="পড়ুন" aria-label="পড়ুন"><svg viewBox="0 0 24 24"><path d="M12 3a3 3 0 0 0-3 3v6a3 3 0 0 0 6 0V6a3 3 0 0 0-3-3z"></path><path d="M19 10v2a7 7 0 0 1-14 0v-2"></path><path d="M12 19v3"></path><path d="M8 22h8"></path></svg></button></div>';}
+  function actionButtons(i,saved){return '<div class="ayah-actions"><button class="icon-btn '+(saved?'saved':'')+'" data-action="bookmark" data-index="'+i+'" title="বুকমার্ক" aria-label="বুকমার্ক"><svg viewBox="0 0 24 24"><path d="M6 4.5A1.5 1.5 0 0 1 7.5 3h9A1.5 1.5 0 0 1 18 4.5V21l-6-3.5L6 21V4.5z"></path></svg></button><button class="icon-btn" data-action="save" data-index="'+i+'" title="সংরক্ষণ" aria-label="সংরক্ষণ"><svg viewBox="0 0 24 24"><path d="M12 3.6l2.45 5.05 5.55.8-4.02 3.92.95 5.53L12 16.3l-4.93 2.6.95-5.53L4 9.45l5.55-.8L12 3.6z"></path></svg></button><button class="icon-btn" data-action="share" data-index="'+i+'" title="শেয়ার" aria-label="শেয়ার"><svg viewBox="0 0 24 24"><circle cx="18" cy="5" r="3"></circle><circle cx="6" cy="12" r="3"></circle><circle cx="18" cy="19" r="3"></circle><path d="M8.7 10.7l6.6-4.4M8.7 13.3l6.6 4.4"></path></svg></button></div>';}
   function renderPlaceholder(a,i,saved,cover){
     const meta=surahMeta(a.surah);
     const cls=cover?'surah-book-cover':'surah-boundary';
     return '<article class="ayah '+(i===currentIndex?'current-ayah':'')+' '+cls+'" id="'+ayahId(a)+'" data-index="'+i+'" data-surah="'+a.surah+'" data-ayah="'+a.ayah+'"><div class="ayah-top"><span class="ayah-ref">সূরা '+a.surah+'</span>'+actionButtons(i,saved)+'</div><div class="surah-book-number">#'+a.surah+'</div><div class="surah-book-arabic">'+escapeHtml(a.arabic||meta.arabic)+'</div><div class="surah-book-name">'+escapeHtml(surahBnTitle(meta))+'</div><div class="surah-book-meta">'+escapeHtml((a.ayahs||meta.ayahs)+' · '+(a.meta||meta.meta))+'</div><div class="surah-reader-note">QuranPro-এর ভিতরে এই সূরার সম্পূর্ণ টেক্সট লোড হচ্ছে। সাধারণ কুরআন পেজে যাওয়া নেই।</div></article>';
+  }
+
+
+  const READING_PLAN_KEY="barakaway_quran_pro_bn_reading_plan";
+  const READING_PLAN_TEXT={"title": "পাঠ পরিকল্পনা", "subtitle": "দৈনিক লক্ষ্য ও খতমের অগ্রগতি।", "today": "আজ", "left": "বাকি", "total": "খতম", "streak": "ধারা", "goal": "লক্ষ্য", "ayahs": "আয়াত", "mark": "বর্তমান আয়াত পড়া হয়েছে", "markSurah": "সূরা পড়া হয়েছে", "next": "পরের অপঠিত আয়াত", "reset": "আজ রিসেট", "done": "আজ সম্পন্ন", "marked": "আয়াত পড়া হিসেবে চিহ্নিত হয়েছে।", "surahMarked": "সূরা পড়া হিসেবে চিহ্নিত হয়েছে।", "nextToast": "পরের অপঠিত আয়াত খোলা হয়েছে।", "noNext": "সব লোড হওয়া আয়াত চিহ্নিত আছে।", "resetToast": "আজকের অগ্রগতি রিসেট হয়েছে।"};
+  function todayKey(){return new Date().toISOString().slice(0,10);}
+  function safePlanParse(raw){try{return raw?JSON.parse(raw):null;}catch(e){return null;}}
+  function defaultReadingPlan(){return {goal:20,read:[],days:{},lastGoalDate:"",streak:0};}
+  function getReadingPlan(){
+    const plan=Object.assign(defaultReadingPlan(),safePlanParse(localStorage.getItem(READING_PLAN_KEY))||{});
+    if(!Array.isArray(plan.read))plan.read=[];
+    if(!plan.days || typeof plan.days!=="object")plan.days={};
+    if(!plan.goal || plan.goal<1)plan.goal=20;
+    if(!plan.streak || plan.streak<0)plan.streak=0;
+    return plan;
+  }
+  function saveReadingPlan(plan){localStorage.setItem(READING_PLAN_KEY,JSON.stringify(plan));}
+  function planReadSet(plan){return new Set((plan.read||[]).map(Number).filter(function(n){return Number.isFinite(n)&&n>=0;}));}
+  function planDaySet(plan,date){return new Set(((plan.days||{})[date]||[]).map(Number).filter(function(n){return Number.isFinite(n)&&n>=0;}));}
+  function updatePlanStreak(plan,date){
+    const dayCount=((plan.days||{})[date]||[]).length;
+    if(dayCount<plan.goal || plan.lastGoalDate===date)return;
+    const d=new Date(date+"T00:00:00");d.setDate(d.getDate()-1);
+    const y=d.toISOString().slice(0,10);
+    plan.streak=(plan.lastGoalDate===y)?((Number(plan.streak)||0)+1):1;
+    plan.lastGoalDate=date;
+  }
+  function markPlanIndices(indices,quiet){
+    const plan=getReadingPlan();const date=todayKey();
+    if(!plan.days[date])plan.days[date]=[];
+    const all=planReadSet(plan);const day=planDaySet(plan,date);
+    indices.forEach(function(index){if(Number.isFinite(index)&&quran[index]&&!quran[index].isSurahPlaceholder){all.add(index);day.add(index);}});
+    plan.read=Array.from(all).sort(function(a,b){return a-b;});
+    plan.days[date]=Array.from(day).sort(function(a,b){return a-b;});
+    updatePlanStreak(plan,date);saveReadingPlan(plan);updateReadingPlan();
+    if(!quiet)showToast(READING_PLAN_TEXT.marked);
+  }
+  function markCurrentSurahRead(){
+    const a=currentAyah();if(!a)return;
+    const indices=[];quran.forEach(function(item,index){if(item && !item.isSurahPlaceholder && item.surah===a.surah)indices.push(index);});
+    markPlanIndices(indices,true);showToast(READING_PLAN_TEXT.surahMarked);
+  }
+  function goToNextUnread(){
+    const plan=getReadingPlan();const read=planReadSet(plan);let target=-1;
+    for(let i=Math.max(0,currentIndex+1);i<quran.length;i++){if(quran[i]&&!quran[i].isSurahPlaceholder&&!read.has(i)){target=i;break;}}
+    if(target<0){for(let i=0;i<quran.length;i++){if(quran[i]&&!quran[i].isSurahPlaceholder&&!read.has(i)){target=i;break;}}}
+    if(target>=0){scrollToCurrentExact(target,{message:READING_PLAN_TEXT.nextToast});}else{showToast(READING_PLAN_TEXT.noNext);}
+  }
+  function resetReadingPlanDay(){
+    const plan=getReadingPlan();delete plan.days[todayKey()];
+    if(plan.lastGoalDate===todayKey())plan.lastGoalDate="";
+    saveReadingPlan(plan);updateReadingPlan();showToast(READING_PLAN_TEXT.resetToast);
+  }
+  function setReadingPlanGoal(goal){
+    const plan=getReadingPlan();plan.goal=Math.max(1,Number(goal)||20);updatePlanStreak(plan,todayKey());saveReadingPlan(plan);updateReadingPlan();
+  }
+  function updateReadingPlan(){
+    const card=document.getElementById("readingPlanCard");if(!card)return;
+    const plan=getReadingPlan();const date=todayKey();const today=((plan.days||{})[date]||[]).length;
+    const goal=Number(plan.goal)||20;const left=Math.max(0,goal-today);const total=(plan.read||[]).length;const totalPct=quran.length?Math.round((total/quran.filter(function(a){return a&&!a.isSurahPlaceholder;}).length)*100):0;
+    const dayPct=Math.max(0,Math.min(100,Math.round((today/goal)*100)));
+    const setText=function(id,value){const node=document.getElementById(id);if(node)node.textContent=value;};
+    setText("readingPlanToday",today+" / "+goal);setText("readingPlanLeft",left);setText("readingPlanTotal",totalPct+"%");setText("readingPlanStreak",(Number(plan.streak)||0));
+    const fill=document.getElementById("readingPlanFill");if(fill)fill.style.width=dayPct+"%";
+    const badge=document.getElementById("readingPlanBadge");if(badge)badge.textContent=left===0?READING_PLAN_TEXT.done:(READING_PLAN_TEXT.left+": "+left+" "+READING_PLAN_TEXT.ayahs);
+    document.querySelectorAll("[data-plan-goal]").forEach(function(btn){btn.classList.toggle("active",Number(btn.getAttribute("data-plan-goal"))===goal);});
   }
 
   function render(){
@@ -2128,7 +1865,7 @@ html.light-mode .surah-book-cover .surah-book-name{
     for(let i=range.start;i<range.end;i++){
       const a=quran[i]; const saved=bookmarks.includes(i);
       if(a.isSurahPlaceholder){html+=renderPlaceholder(a,i,saved,settings.mode==="book"); continue;}
-      if((i===range.start || quran[i-1].surah!==a.surah) && settings.mode==="continuous"){const m=surahMeta(a.surah);html+='<div class="surah-boundary"><div class="surah-live-header"><div class="surah-live-copy"><div class="surah-book-arabic">'+escapeHtml(m.arabic)+'</div><div class="surah-book-name">'+escapeHtml(surahBnTitle(m))+'</div><div class="surah-book-meta">'+escapeHtml(m.ayahs+' · '+m.meta)+'</div></div><button class="surah-live-mic" type="button" data-action="surah-tajweed" data-surah="'+a.surah+'" aria-label="সূরার লাইভ পাঠ শুরু করুন"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3a3 3 0 0 0-3 3v6a3 3 0 0 0 6 0V6a3 3 0 0 0-3-3z"></path><path d="M19 10v2a7 7 0 0 1-14 0v-2"></path><path d="M12 19v3"></path><path d="M8 22h8"></path></svg><span class="surah-live-mic-text"><strong>পড়ুন</strong></span></button></div></div>';}
+      if((i===range.start || quran[i-1].surah!==a.surah) && settings.mode==="continuous"){const m=surahMeta(a.surah);html+='<div class="surah-boundary"><div class="surah-book-arabic">'+escapeHtml(m.arabic)+'</div><div class="surah-book-name">'+escapeHtml(surahBnTitle(m))+'</div><div class="surah-book-meta">'+escapeHtml(m.ayahs+' · '+m.meta)+'</div></div>';}
       if(a.surah!==1 && a.ayah===1){html+='<div class="bismillah">بِسْمِ ٱللَّٰهِ ٱلرَّحْمَـٰنِ ٱلرَّحِيمِ</div>';}
       html+='<article class="ayah '+(i===currentIndex?'current-ayah':'')+'" id="'+ayahId(a)+'" data-index="'+i+'" data-surah="'+a.surah+'" data-ayah="'+a.ayah+'"><div class="ayah-top"><span class="ayah-ref">'+ayahLabel(a)+'</span>'+actionButtons(i,saved)+'</div>'+renderArabicText(a.arabic)+'<div class="translit">'+escapeHtml(a.translit)+'</div><div class="translation">'+escapeHtml(a.ru)+'</div></article>';
     }
@@ -2138,7 +1875,7 @@ html.light-mode .surah-book-cover .surah-book-name{
     refs.reader.style.setProperty("--arabic-font-size", arabicFontSize+"px");
     const gs=groups(); const a=currentAyah();
     {const g=gs[currentPage]||gs[0];const m=g?g.meta:surahMeta(1);refs.pageMeta.textContent="সূরা "+(currentPage+1)+" এর মধ্যে "+gs.length+" · "+m.arabic+" · "+surahBnTitle(m)+" · "+m.ayahs;refs.readerTitle.textContent="কুরআন খতম";}
-    renderBookmarks(); updateProgress();
+    renderBookmarks(); updateProgress(); updateReadingPlan();
   }
   function renderBookmarks(){const saved=normalizedBookmarks();syncContinueButton();if(!saved.length){refs.bookmarkList.innerHTML='<div class="empty-state">এখনও কোনো বুকমার্ক নেই।</div>';return;}refs.bookmarkList.innerHTML=saved.map(function(index){const a=quran[index];if(!a)return"";return '<div class="bookmark-item"><span>'+ayahLabel(a)+'</span><button data-goto-bookmark="'+index+'">খুলুন</button></div>';}).join("");}
   function toggleBookmark(index){
@@ -2218,525 +1955,6 @@ html.light-mode .surah-book-cover .surah-book-name{
     node.__qpPressTimer=setTimeout(function(){node.classList.remove("qp-pressed");},420);
   }
 
-  let tajweedRecognition = null;
-  let tajweedActive = null;
-  let tajweedSafetyTimer = null;
-  let tajweedLastResultIndex = 0;
-  let tajweedKeepAlive = false;
-  let tajweedMediaStream = null;
-  let tajweedAudioContext = null;
-  let tajweedAudioSource = null;
-  let tajweedAnalyser = null;
-  let tajweedAudioData = null;
-  let tajweedAudioRaf = null;
-  let tajweedWakeLock = null;
-
-  function tajweedMicSvg(){
-    return '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3a3 3 0 0 0-3 3v6a3 3 0 0 0 6 0V6a3 3 0 0 0-3-3z"></path><path d="M19 10v2a7 7 0 0 1-14 0v-2"></path><path d="M12 19v3"></path><path d="M8 22h8"></path></svg>';
-  }
-
-  function splitArabicWords(text){
-    return String(text||"").replace(/[۞۩﴾﴿.,؛،!?؟]/g," ").split(/\s+/).map(function(w){return w.trim();}).filter(Boolean);
-  }
-
-  function normalizeArabicWord(word){
-    return String(word||"")
-      .replace(/\u0670/g,"ا")
-      .replace(/[\u0610-\u061A\u064B-\u065F\u06D6-\u06ED]/g,"")
-      .replace(/[إأآٱا]/g,"ا")
-      .replace(/ى/g,"ي")
-      .replace(/ة/g,"ه")
-      .replace(/ؤ/g,"و")
-      .replace(/ئ/g,"ي")
-      .replace(/ـ/g,"")
-      .replace(/[^\u0621-\u064A]/g,"")
-      .trim();
-  }
-
-  function getSpeechRecognition(){
-    return window.SpeechRecognition || window.webkitSpeechRecognition || null;
-  }
-
-  function liveScopeFromIndex(index){
-    const a=quran[index];
-    if(!a)return null;
-    return {surah:Number(a.surah), start:index};
-  }
-
-  function liveScopeFromSurah(surah){
-    const s=Number(surah);
-    const idx=firstReadableIndexInSurah(s);
-    if(idx<0)return null;
-    return {surah:s, start:idx};
-  }
-
-  function buildLiveMap(scope){
-    const items=[];
-    const start=Math.max(0, Number(scope && scope.start) || 0);
-    const surah=Number(scope && scope.surah);
-    for(let i=start;i<quran.length;i++){
-      const a=quran[i];
-      if(!a || Number(a.surah)!==surah)break;
-      if(a.isSurahPlaceholder)continue;
-      splitArabicWords(a.arabic).forEach(function(word,w){
-        items.push({index:i, word:w, expected:normalizeArabicWord(word), raw:word});
-      });
-    }
-    return items;
-  }
-
-  function buildLiveCache(scope){
-    if(!scope || !scope.map)return;
-    scope.map.forEach(function(item){
-      item._chars=Array.from(refs.container.querySelectorAll('.ayah[data-index="'+item.index+'"] .quran-live-letter[data-live-word="'+item.word+'"]'));
-    });
-    scope._cached=true;
-  }
-
-  function clearLiveMarks(scope){
-    if(scope && scope.map && scope._cached){
-      scope.map.forEach(function(item){
-        (item._chars||[]).forEach(function(node){node.classList.remove('is-read','is-current');});
-      });
-      return;
-    }
-    const surah=scope && scope.surah;
-    refs.container.querySelectorAll('.quran-live-letter.is-read,.quran-live-letter.is-current').forEach(function(node){
-      if(!surah || Number(node.closest('.ayah') && node.closest('.ayah').getAttribute('data-surah'))===Number(surah)){
-        node.classList.remove('is-read','is-current');
-      }
-    });
-  }
-
-  function markWord(item, mode, partialChars){
-    const chars=item._chars || Array.from(refs.container.querySelectorAll('.ayah[data-index="'+item.index+'"] .quran-live-letter[data-live-word="'+item.word+'"]'));
-    if(!chars.length)return;
-    chars.forEach(function(ch){ch.classList.remove('is-current');});
-    if(mode==='full'){
-      chars.forEach(function(ch){ch.classList.add('is-read');});
-      return;
-    }
-    const n=Math.max(0,Math.min(chars.length-1,partialChars||0));
-    chars.slice(0,n).forEach(function(ch){ch.classList.add('is-read');});
-    if(chars[n])chars[n].classList.add('is-current');
-  }
-
-  function levenshteinDistance(a,b){
-    a=String(a||""); b=String(b||"");
-    const al=a.length, bl=b.length;
-    if(!al)return bl;
-    if(!bl)return al;
-    const row=[];
-    for(let j=0;j<=bl;j++)row[j]=j;
-    for(let i=1;i<=al;i++){
-      let prev=row[0];
-      row[0]=i;
-      for(let j=1;j<=bl;j++){
-        const tmp=row[j];
-        const cost=a[i-1]===b[j-1]?0:1;
-        row[j]=Math.min(row[j]+1,row[j-1]+1,prev+cost);
-        prev=tmp;
-      }
-    }
-    return row[bl];
-  }
-
-  function liveWordMatches(expected, heard){
-    expected=normalizeArabicWord(expected);
-    heard=normalizeArabicWord(heard);
-    if(!expected || !heard)return false;
-    if(expected===heard)return true;
-    if(heard.length < Math.max(2, expected.length-1))return false;
-    if(expected.length>3 && heard[heard.length-1] !== expected[expected.length-1])return false;
-    const d=levenshteinDistance(expected,heard);
-    const limit=expected.length>=8 ? 2 : (expected.length>=5 ? 1 : 0);
-    return d<=limit;
-  }
-
-  function livePrefixRatio(expected, partial){
-    expected=normalizeArabicWord(expected);
-    partial=normalizeArabicWord(partial);
-    if(!expected || !partial)return 0;
-    if(partial.length>=expected.length)return liveWordMatches(expected,partial) ? .98 : 0;
-    if(expected.indexOf(partial)===0)return Math.min(.92,partial.length/expected.length);
-    let best=0;
-    const max=Math.min(expected.length-1,partial.length);
-    for(let n=1;n<=max;n++){
-      const e=expected.slice(0,n);
-      const p=partial.slice(0,n);
-      const d=levenshteinDistance(e,p);
-      if(d<=Math.max(0,Math.floor(n*.18)))best=n/expected.length;
-    }
-    return Math.min(.88,best);
-  }
-
-  function resetLiveProgress(scope){
-    scope.pointer=0;
-    scope.lastPartial='';
-    clearLiveMarks(scope);
-  }
-
-  function latinReadingKey(text){
-    return String(text||'')
-      .toLowerCase()
-      .replace(/[’'`´ʿʾʾʿ]/g,'')
-      .replace(/kh/g,'h').replace(/ḥ/g,'h').replace(/h/g,'h')
-      .replace(/th/g,'s').replace(/dh/g,'z').replace(/sh/g,'s')
-      .replace(/aa/g,'a').replace(/ee/g,'i').replace(/oo/g,'u')
-      .replace(/[^a-z]/g,'')
-      .replace(/[aeiou]/g,'');
-  }
-
-  function arabicReadingKey(text){
-    const map={
-      'ء':'','ا':'a','أ':'a','إ':'a','آ':'a','ٱ':'a','ى':'a',
-      'ب':'b','ت':'t','ث':'s','ج':'j','ح':'h','خ':'h','د':'d','ذ':'z','ر':'r','ز':'z','س':'s','ش':'s','ص':'s','ض':'d','ط':'t','ظ':'z','ع':'','غ':'g','ف':'f','ق':'q','ك':'k','ل':'l','م':'m','ن':'n','ه':'h','ة':'h','و':'w','ؤ':'w','ي':'y','ئ':'y'
-    };
-    return Array.from(normalizeArabicWord(text)).map(function(ch){return map[ch]!==undefined?map[ch]:ch;}).join('').replace(/[aeiou]/g,'');
-  }
-
-  function heardTokens(chunk){
-    return String(chunk||'')
-      .replace(/[۞۩﴾﴿.,؛،!?؟]/g,' ')
-      .split(/\s+/)
-      .map(function(w){return w.trim();})
-      .filter(Boolean)
-      .map(function(w){return {raw:w, arabic:normalizeArabicWord(w), latin:latinReadingKey(w)};});
-  }
-
-  function phraseMatchLength(map, ptr, token){
-    if(!token || ptr>=map.length)return 0;
-    const max=Math.min(6,map.length-ptr);
-    const heardArabic=token.arabic;
-    const heardLatin=token.latin || arabicReadingKey(token.raw);
-    let best=0;
-    for(let n=1;n<=max;n++){
-      const slice=map.slice(ptr,ptr+n);
-      const expectedArabic=slice.map(function(x){return normalizeArabicWord(x.expected);}).join('');
-      const expectedLatin=slice.map(function(x){return arabicReadingKey(x.raw || x.expected);}).join('');
-      if(heardArabic && liveWordMatches(expectedArabic,heardArabic))best=n;
-      if(heardLatin && expectedLatin){
-        const short=Math.min(expectedLatin.length,heardLatin.length);
-        const dist=levenshteinDistance(expectedLatin,heardLatin);
-        const limit=expectedLatin.length>=14 ? 5 : (expectedLatin.length>=9 ? 3 : (expectedLatin.length>=5 ? 2 : 1));
-        if((short>=3 && (expectedLatin.indexOf(heardLatin)>=0 || heardLatin.indexOf(expectedLatin)>=0)) || dist<=limit)best=n;
-      }
-    }
-    return best;
-  }
-
-  function partialRatioForToken(expected, token){
-    const arabicRatio=token.arabic ? livePrefixRatio(expected,token.arabic) : 0;
-    const expLatin=arabicReadingKey(expected);
-    const heardLatin=token.latin || arabicReadingKey(token.raw);
-    let latinRatio=0;
-    if(expLatin && heardLatin){
-      if(expLatin.indexOf(heardLatin)===0)latinRatio=Math.min(.92,heardLatin.length/expLatin.length);
-      else{
-        const max=Math.min(expLatin.length,heardLatin.length);
-        let best=0;
-        for(let n=1;n<=max;n++){
-          if(levenshteinDistance(expLatin.slice(0,n),heardLatin.slice(0,n))<=Math.max(0,Math.floor(n*.25)))best=n/expLatin.length;
-        }
-        latinRatio=Math.min(.88,best);
-      }
-    }
-    return Math.max(arabicRatio,latinRatio);
-  }
-
-  function applyLiveChunk(scope, chunk){
-    if(!scope || !chunk)return;
-    const map=scope.map || [];
-    if(!map.length)return;
-    if(!scope._cached)buildLiveCache(scope);
-
-    const heard=heardTokens(chunk);
-    if(!heard.length)return;
-
-    let ptr=Math.max(0,Math.min(scope.pointer||0,map.length-1));
-    let consumed=false;
-
-    /* Browser speech recognition often returns cumulative phrases and may split
-       Bismillah as one token or several words. Scan the heard phrase and advance
-       only when the current Quran word/phrase is actually found. Repeated words
-       are allowed; already-read words are ignored. */
-    for(let h=0; h<heard.length && ptr<map.length; h++){
-      const token=heard[h];
-      const matchLen=phraseMatchLength(map,ptr,token);
-      if(matchLen>0){
-        for(let k=0;k<matchLen && ptr<map.length;k++){
-          markWord(map[ptr],'full');
-          ptr++;
-        }
-        consumed=true;
-        continue;
-      }
-
-      const current=map[ptr];
-      const ratio=partialRatioForToken(current.expected,token);
-      if(ratio>0){
-        const chars=current._chars || [];
-        const partialCount=Math.max(1,Math.min(chars.length-1,Math.floor(chars.length*ratio)));
-        markWord(current,'partial',partialCount);
-      }
-    }
-
-    scope.pointer=ptr;
-    if(consumed){
-      const next=map[ptr];
-      if(next)markWord(next,'partial',0);
-    }
-  }
-
-  function ensureLiveMicStream(){
-    if(tajweedMediaStream && tajweedMediaStream.getTracks().some(function(t){return t.readyState==='live';})){
-      return Promise.resolve(tajweedMediaStream);
-    }
-    if(!navigator.mediaDevices || !navigator.mediaDevices.getUserMedia){
-      return Promise.resolve(null);
-    }
-    return navigator.mediaDevices.getUserMedia({audio:{echoCancellation:false,noiseSuppression:false,autoGainControl:false}}).then(function(stream){
-      tajweedMediaStream=stream;
-      return stream;
-    }).catch(function(){return null;});
-  }
-
-  function startLiveReading(scope, btn){
-    if(!scope){showToast('Откройте суру для чтения.');return;}
-
-    const sameScope=tajweedActive && Number(tajweedActive.surah)===Number(scope.surah) && Number(tajweedActive.start)===Number(scope.start);
-    if(sameScope && tajweedKeepAlive){
-      showToast('Микрофон уже включён. Продолжайте читать.');
-      return;
-    }
-    if(tajweedKeepAlive)stopTajweedRecording({keepStream:true});
-
-    tajweedActive=scope;
-    tajweedActive.map=buildLiveMap(scope);
-    tajweedActive._cached=false;
-    tajweedActive.pointer=0;
-    tajweedActive._liveChar=0;
-    tajweedActive._button=btn || null;
-    tajweedActive._noiseFloor=.010;
-    tajweedActive._lastAdvance=0;
-    tajweedActive._speakingFrames=0;
-    tajweedActive._silentFrames=0;
-    tajweedActive._waitingNextAyah=false;
-    tajweedActive._boundaryReady=false;
-    tajweedActive._currentWordVoiceMs=0;
-    tajweedActive._lastTickNow=0;
-    tajweedKeepAlive=true;
-    tajweedLastResultIndex=0;
-    prepareLiveScopeDom(tajweedActive);
-    buildLiveCache(tajweedActive);
-    resetLiveProgress(tajweedActive);
-
-    function setRecordingVisual(active){
-      refs.container.querySelectorAll('.tajweed-mic-btn.is-recording,.surah-live-mic.is-recording').forEach(function(x){x.classList.remove('is-recording');});
-      if(active){
-        const liveBtn=tajweedActive && tajweedActive._button;
-        if(liveBtn && document.contains(liveBtn))liveBtn.classList.add('is-recording');
-      }
-    }
-
-    function requestWakeLock(){
-      if(!('wakeLock' in navigator) || tajweedWakeLock)return;
-      navigator.wakeLock.request('screen').then(function(lock){
-        tajweedWakeLock=lock;
-        lock.addEventListener('release',function(){tajweedWakeLock=null;});
-      }).catch(function(){});
-    }
-
-    function releaseWakeLock(){
-      if(tajweedWakeLock){
-        try{tajweedWakeLock.release();}catch(e){}
-        tajweedWakeLock=null;
-      }
-    }
-
-    function liveWordRequiredMs(item, nextItem){
-      const raw=String((item && (item.raw || item.expected)) || '');
-      const base=Math.max(3,Array.from(String((item && item.expected) || '')).length || 3);
-      let ms=620 + base*155;
-      if(/[ّ]/.test(raw))ms+=220;
-      if(/[ٰٓ]/.test(raw))ms+=160;
-      if(!nextItem || Number(nextItem.index)!==Number(item.index))ms+=520;
-      return Math.max(980, Math.min(2400, ms));
-    }
-
-    function advanceLiveLetters(voicedMs){
-      const scope=tajweedActive;
-      if(!scope || !scope.map || !scope.map.length || scope._waitingNextAyah)return;
-      let ptr=Math.max(0,Math.min(scope.pointer||0,scope.map.length));
-      const item=scope.map[ptr];
-      if(!item)return;
-      const nextItem=scope.map[ptr+1] || null;
-      const chars=item._chars || [];
-      if(!chars.length){scope.pointer=ptr+1;scope._currentWordVoiceMs=0;return;}
-
-      const safeVoicedMs=Math.max(0,Math.min(22,voicedMs||0));
-      scope._currentWordVoiceMs=Math.max(0,(scope._currentWordVoiceMs||0)+safeVoicedMs);
-      const required=liveWordRequiredMs(item,nextItem);
-      const ratio=Math.max(0,Math.min(1,scope._currentWordVoiceMs/required));
-      const visibleChars=chars.length;
-      const partialCount=Math.max(1,Math.min(visibleChars-1,Math.floor(visibleChars*ratio)));
-
-      if(ratio<1){
-        markWord(item,'partial',partialCount);
-        return;
-      }
-
-      markWord(item,'full');
-      ptr++;
-      scope.pointer=ptr;
-      scope._liveChar=0;
-      scope._currentWordVoiceMs=0;
-
-      if(ptr<scope.map.length && Number(scope.map[ptr].index)!==Number(item.index)){
-        scope._waitingNextAyah=true;
-        scope._boundaryReady=false;
-        scope._speakingFrames=0;
-        scope._silentFrames=0;
-        scope._lastAdvance=performance.now()+360;
-        return;
-      }
-      if(scope.map[ptr])markWord(scope.map[ptr],'partial',0);
-    }
-
-    function startAudioLevelReader(stream){
-      const AudioCtx=window.AudioContext || window.webkitAudioContext;
-      if(!AudioCtx){
-        setRecordingVisual(true);
-        showToast('Микрофон включён. Прогресс идёт только по распознанным словам.');
-        startStrictSpeechReader();
-        return;
-      }
-      if(!tajweedAudioContext)tajweedAudioContext=new AudioCtx();
-      if(tajweedAudioContext.state==='suspended')tajweedAudioContext.resume().catch(function(){});
-      if(tajweedAudioSource){try{tajweedAudioSource.disconnect();}catch(e){}}
-      tajweedAudioSource=tajweedAudioContext.createMediaStreamSource(stream);
-      tajweedAnalyser=tajweedAudioContext.createAnalyser();
-      tajweedAnalyser.fftSize=512;
-      tajweedAnalyser.smoothingTimeConstant=.42;
-      tajweedAudioData=new Uint8Array(tajweedAnalyser.fftSize);
-      tajweedAudioSource.connect(tajweedAnalyser);
-      setRecordingVisual(true);
-      requestWakeLock();
-      showToast('Микрофон включён. Дорожка идёт только когда распознаны правильные слова.');
-
-      function tick(){
-        if(!tajweedKeepAlive || !tajweedActive || !tajweedAnalyser){
-          setRecordingVisual(false);
-          releaseWakeLock();
-          return;
-        }
-        /* The audio analyser is intentionally used only to keep the live mic session
-           warm and the UI active. It must never move Quran progress by loudness,
-           because ordinary speech or noise would falsely advance the ayah. */
-        tajweedAudioRaf=requestAnimationFrame(tick);
-      }
-      cancelAnimationFrame(tajweedAudioRaf);
-      tajweedAudioRaf=requestAnimationFrame(tick);
-      startStrictSpeechReader();
-    }
-
-    function startStrictSpeechReader(){
-      const SpeechRecognition=getSpeechRecognition();
-      if(!SpeechRecognition){
-        showToast('В этом браузере нет точного распознавания речи. Дорожка не будет идти от постороннего звука.');
-        return;
-      }
-      if(tajweedRecognition){
-        try{tajweedRecognition.onend=null;tajweedRecognition.onerror=null;tajweedRecognition.onresult=null;tajweedRecognition.stop();}catch(e){}
-        tajweedRecognition=null;
-      }
-      let rec;
-      try{rec=new SpeechRecognition();}catch(e){return;}
-      tajweedRecognition=rec;
-      rec.lang='ar-SA';
-      rec.continuous=true;
-      rec.interimResults=true;
-      rec.maxAlternatives=3;
-      tajweedLastResultIndex=0;
-      let restartTimer=null;
-      let lastAcceptedAt=0;
-
-      function feedTranscript(text){
-        if(!tajweedKeepAlive || !tajweedActive || !text)return;
-        const before=tajweedActive.pointer||0;
-        applyLiveChunk(tajweedActive,text);
-        if((tajweedActive.pointer||0)>before){
-          lastAcceptedAt=Date.now();
-        }
-      }
-
-      rec.onresult=function(event){
-        if(!tajweedKeepAlive || !tajweedActive)return;
-        for(let i=event.resultIndex;i<event.results.length;i++){
-          const result=event.results[i];
-          let best='';
-          for(let a=0;a<result.length;a++){
-            const t=(result[a] && result[a].transcript) ? result[a].transcript.trim() : '';
-            if(t.length>best.length)best=t;
-          }
-          if(best)feedTranscript(best);
-        }
-      };
-      rec.onerror=function(){
-        /* Do not stop the mic state on transient mobile recognition errors. */
-      };
-      rec.onend=function(){
-        if(!tajweedKeepAlive)return;
-        clearTimeout(restartTimer);
-        restartTimer=setTimeout(function(){
-          if(!tajweedKeepAlive)return;
-          try{rec.start();}catch(e){}
-        },260);
-      };
-      try{rec.start();}catch(e){}
-    }
-
-
-    ensureLiveMicStream().then(function(stream){
-      if(!stream){
-        tajweedKeepAlive=false;
-        setRecordingVisual(false);
-        showToast('Разрешите доступ к микрофону и нажмите кнопку чтения ещё раз.');
-        return;
-      }
-      startAudioLevelReader(stream);
-    });
-  }
-
-  function startTajweedRecording(index, btn){
-    const scope=liveScopeFromIndex(index);
-    startLiveReading(scope, btn);
-  }
-
-  function stopTajweedRecording(options){
-    options=options || {};
-    tajweedKeepAlive=false;
-    clearTimeout(tajweedSafetyTimer);
-    cancelAnimationFrame(tajweedAudioRaf);
-    tajweedAudioRaf=null;
-    if(tajweedRecognition){
-      const rec=tajweedRecognition;
-      tajweedRecognition=null;
-      try{rec.stop();}catch(e){}
-    }
-    if(tajweedAudioSource){try{tajweedAudioSource.disconnect();}catch(e){} tajweedAudioSource=null;}
-    if(tajweedAnalyser){try{tajweedAnalyser.disconnect();}catch(e){} tajweedAnalyser=null;}
-    if(!options.keepStream && tajweedMediaStream){
-      /* Deliberately keep the physical mic stream alive during the page session unless the browser closes the page. */
-    }
-    refs.container.querySelectorAll('.tajweed-mic-btn.is-recording,.surah-live-mic.is-recording').forEach(function(x){x.classList.remove('is-recording');});
-  }
-
-    function firstReadableIndexInSurah(surah){
-    surah=Number(surah);
-    const idx=quran.findIndex(function(a){return Number(a.surah)===surah && !a.isSurahPlaceholder;});
-    return idx>=0 ? idx : quran.findIndex(function(a){return Number(a.surah)===surah;});
-  }
   refs.container.addEventListener("click",function(event){
     const surahNav=event.target.closest("[data-surah-nav]");
     if(surahNav && refs.container.contains(surahNav)){
@@ -2754,24 +1972,17 @@ html.light-mode .surah-book-cover .surah-book-name{
     const btn=event.target.closest("[data-action]");
     if(!btn || !refs.container.contains(btn))return;
     const action=btn.getAttribute("data-action");
-    if(["bookmark","save","share","tajweed","surah-tajweed"].indexOf(action)===-1)return;
+    if(["bookmark","save","share"].indexOf(action)===-1)return;
     event.preventDefault();
     event.stopPropagation();
     pressFeedback(btn);
     requirePro(function(){
-      if(action==="surah-tajweed"){
-        const scope=liveScopeFromSurah(btn.getAttribute("data-surah"));
-        if(!scope){showToast("সূরা এখনও লোড হচ্ছে।");return;}
-        currentIndex=scope.start;
-        startLiveReading(scope,btn);
-        return;
-      }
       const index=Number(btn.getAttribute("data-index"));
       if(!Number.isFinite(index) || !quran[index])return;
       if(action==="bookmark")toggleBookmark(index);
       else if(action==="save")saveAndGo(index);
       else if(action==="share")shareAyah(index);
-      else if(action==="tajweed")startTajweedRecording(index,btn);
+     
     });
   });
 
@@ -2793,6 +2004,12 @@ html.light-mode .surah-book-cover .surah-book-name{
     });
   });
   document.getElementById("scrollTopBtn").addEventListener("click",function(){pressFeedback(this);requirePro(function(){goToSurahPage(0);showToast("প্রথম সূরা খোলা হয়েছে।");});});
+
+  document.getElementById("readingPlanMarkCurrent").addEventListener("click",function(){pressFeedback(this);requirePro(function(){markPlanIndices([currentIndex],false);});});
+  document.getElementById("readingPlanMarkSurah").addEventListener("click",function(){pressFeedback(this);requirePro(markCurrentSurahRead);});
+  document.getElementById("readingPlanNextUnread").addEventListener("click",function(){pressFeedback(this);requirePro(goToNextUnread);});
+  document.getElementById("readingPlanResetDay").addEventListener("click",function(){pressFeedback(this);requirePro(resetReadingPlanDay);});
+  document.querySelectorAll("[data-plan-goal]").forEach(function(btn){btn.addEventListener("click",function(){pressFeedback(this);requirePro(function(){setReadingPlanGoal(btn.getAttribute("data-plan-goal"));});});});
   document.getElementById("fontPlus").addEventListener("click",function(){pressFeedback(this);arabicFontSize=Math.min(44,arabicFontSize+2);refs.reader.style.setProperty("--arabic-font-size",arabicFontSize+"px");});
   document.getElementById("fontMinus").addEventListener("click",function(){pressFeedback(this);arabicFontSize=Math.max(22,arabicFontSize-2);refs.reader.style.setProperty("--arabic-font-size",arabicFontSize+"px");});
   document.querySelectorAll("[data-close-modal]").forEach(function(btn){btn.addEventListener("click",closeModal);});
@@ -2805,7 +2022,7 @@ html.light-mode .surah-book-cover .surah-book-name{
   window.addEventListener("storage",syncProState);
   window.addEventListener("focus",syncProState);
   window.addEventListener("pageshow",syncProState);
-  document.addEventListener("visibilitychange",function(){if(!document.hidden){syncProState(); if(tajweedKeepAlive && tajweedAudioContext && tajweedAudioContext.state==="suspended")tajweedAudioContext.resume().catch(function(){});} });
+  document.addEventListener("visibilitychange",function(){if(!document.hidden){syncProState();} });
 })();
 </script>
 <script src="/theme-toggle.js"></script>
