@@ -2551,6 +2551,8 @@ body{direction:rtl;}
     tajweedActive._lastAdvance=0;
     tajweedActive._speakingFrames=0;
     tajweedActive._silentFrames=0;
+    tajweedActive._waitingNextAyah=false;
+    tajweedActive._boundaryReady=false;
     tajweedKeepAlive=true;
     tajweedLastResultIndex=0;
     prepareLiveScopeDom(tajweedActive);
@@ -2582,7 +2584,7 @@ body{direction:rtl;}
 
     function advanceLiveLetters(steps){
       const scope=tajweedActive;
-      if(!scope || !scope.map || !scope.map.length)return;
+      if(!scope || !scope.map || !scope.map.length || scope._waitingNextAyah)return;
       let ptr=Math.max(0,Math.min(scope.pointer||0,scope.map.length));
       let charPos=Math.max(0,scope._liveChar||0);
       while(steps>0 && ptr<scope.map.length){
@@ -2599,6 +2601,16 @@ body{direction:rtl;}
           markWord(item,'full');
           ptr++;
           charPos=0;
+          if(ptr<scope.map.length && Number(scope.map[ptr].index)!==Number(item.index)){
+            scope.pointer=ptr;
+            scope._liveChar=0;
+            scope._waitingNextAyah=true;
+            scope._boundaryReady=false;
+            scope._speakingFrames=0;
+            scope._silentFrames=0;
+            scope._lastAdvance=performance.now()+220;
+            return;
+          }
           if(scope.map[ptr])markWord(scope.map[ptr],'partial',0);
         }else if(chars[charPos]){
           chars[charPos].classList.add('is-current');
@@ -2650,12 +2662,23 @@ body{direction:rtl;}
           tajweedActive._silentFrames=(tajweedActive._silentFrames||0)+1;
           tajweedActive._speakingFrames=0;
         }
-        if(speaking && (tajweedActive._speakingFrames||0)>=2){
+        if(tajweedActive._waitingNextAyah){
+          if(!speaking && (tajweedActive._silentFrames||0)>=8){
+            tajweedActive._boundaryReady=true;
+          }
+          if(speaking && tajweedActive._boundaryReady && (tajweedActive._speakingFrames||0)>=3){
+            tajweedActive._waitingNextAyah=false;
+            tajweedActive._boundaryReady=false;
+            tajweedActive._lastAdvance=now+180;
+          }
+          tajweedAudioRaf=requestAnimationFrame(tick);
+          return;
+        }
+        if(speaking && (tajweedActive._speakingFrames||0)>=3){
           const last=tajweedActive._lastAdvance || 0;
-          const interval=rms>threshold*2.6 ? 68 : (rms>threshold*1.7 ? 82 : 104);
+          const interval=rms>threshold*2.6 ? 135 : (rms>threshold*1.7 ? 155 : 180);
           if(!last || now-last>=interval){
-            const steps=(rms>threshold*3.2 && now-last>110) ? 2 : 1;
-            advanceLiveLetters(steps);
+            advanceLiveLetters(1);
             tajweedActive._lastAdvance=now;
           }
         }
