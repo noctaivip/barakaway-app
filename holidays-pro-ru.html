@@ -1177,40 +1177,49 @@ canvas.toBlob(function(blob){resolve(blob);},type,quality);
 
 async function createHolidayProAnimation(g){
 currentHolidayProVariation=holidayProPickVariation(g);
+const gifBlob=await createHolidayProGif(g);
+if(gifBlob&&gifBlob.size){
+return {blob:gifBlob,type:"image/gif",name:"barakaway-holidays-pro.gif"};
+}
 const canvas=document.getElementById("previewCanvas");
-if(!canvas.captureStream||typeof MediaRecorder==="undefined"){
-await drawAnimatedCardFrame(g,0);
+await drawAnimatedCardFrame(g,0,currentHolidayProVariation);
 const fallbackBlob=await holidayProCanvasBlob(canvas,"image/png",.96);
 return {blob:fallbackBlob,type:"image/png",name:"barakaway-holidays-pro.png"};
 }
-const stream=canvas.captureStream(30);
-let mimeType="video/webm";
-if(MediaRecorder.isTypeSupported&&MediaRecorder.isTypeSupported("video/webm;codecs=vp9")){
-mimeType="video/webm;codecs=vp9";
-}
-const recorder=new MediaRecorder(stream,{mimeType:mimeType});
-const chunks=[];
-recorder.ondataavailable=function(e){if(e.data&&e.data.size)chunks.push(e.data);};
-const duration=3600;
-const fps=30;
-const total=Math.round(duration/1000*fps);
-return new Promise(function(resolve){
-recorder.onstop=function(){
-const blob=new Blob(chunks,{type:"video/webm"});
-resolve({blob:blob,type:"video/webm",name:"barakaway-holidays-pro.webm"});
-};
-recorder.start();
-let frame=0;
-const timer=setInterval(async function(){
+
+function holidayProGifWord(value){return String.fromCharCode(value&255,(value>>8)&255);}
+function holidayProGifBlocks(bytes){let out="";for(let i=0;i<bytes.length;i+=255){const part=bytes.slice(i,i+255);out+=String.fromCharCode(part.length);for(let j=0;j<part.length;j++){out+=String.fromCharCode(part[j]);}}return out+"\x00";}
+function holidayProGifColorByte(v){return Math.max(0,Math.min(255,Math.round(v)));}
+function holidayProGifPalette(){const palette=[];for(let r=0;r<6;r++){for(let g=0;g<6;g++){for(let b=0;b<6;b++){palette.push(holidayProGifColorByte(r*51),holidayProGifColorByte(g*51),holidayProGifColorByte(b*51));}}}while(palette.length<768){palette.push(0,0,0);}return palette;}
+function holidayProGifIndexedPixels(imageData){const data=imageData.data;const pixels=new Uint8Array(data.length/4);for(let i=0,p=0;i<data.length;i+=4,p++){const r=Math.round(data[i]/51);const g=Math.round(data[i+1]/51);const b=Math.round(data[i+2]/51);pixels[p]=r*36+g*6+b;}return pixels;}
+function holidayProGifLzwEncode(indices,minCodeSize){const clearCode=1<<minCodeSize;const endCode=clearCode+1;let codeSize=minCodeSize+1;let nextCode=endCode+1;const maxCode=4095;const dict=new Map();function resetDict(){dict.clear();for(let i=0;i<clearCode;i++){dict.set(String.fromCharCode(i),i);}codeSize=minCodeSize+1;nextCode=endCode+1;}const bytes=[];let cur=0,bits=0;function writeCode(code){cur|=code<<bits;bits+=codeSize;while(bits>=8){bytes.push(cur&255);cur>>=8;bits-=8;}}resetDict();writeCode(clearCode);let w=String.fromCharCode(indices[0]);for(let i=1;i<indices.length;i++){const k=String.fromCharCode(indices[i]);const wk=w+k;if(dict.has(wk)){w=wk;}else{writeCode(dict.get(w));if(nextCode<=maxCode){dict.set(wk,nextCode++);if(nextCode===(1<<codeSize)&&codeSize<12){codeSize++;}}else{writeCode(clearCode);resetDict();}w=k;}}writeCode(dict.get(w));writeCode(endCode);if(bits>0)bytes.push(cur&255);return bytes;}
+function holidayProGifFrame(indexed,width,height,delayCs){const lzw=holidayProGifLzwEncode(indexed,8);let out="\x21\xF9\x04\x04"+holidayProGifWord(delayCs)+"\x00\x00";out+="\x2C"+holidayProGifWord(0)+holidayProGifWord(0)+holidayProGifWord(width)+holidayProGifWord(height)+"\x00";out+="\x08"+holidayProGifBlocks(lzw);return out;}
+function holidayProGifBinaryToBlob(binary){const len=binary.length;const bytes=new Uint8Array(len);for(let i=0;i<len;i++){bytes[i]=binary.charCodeAt(i)&255;}return new Blob([bytes],{type:"image/gif"});}
+async function createHolidayProGif(g){
+const sourceCanvas=document.getElementById("previewCanvas");
+const exportWidth=540;
+const exportHeight=Math.round(sourceCanvas.height*(exportWidth/sourceCanvas.width));
+const exportCanvas=document.createElement("canvas");
+exportCanvas.width=exportWidth;
+exportCanvas.height=exportHeight;
+const exportCtx=exportCanvas.getContext("2d",{willReadFrequently:true});
+const fps=12;
+const duration=3000;
+const totalFrames=Math.round(duration/1000*fps);
+let gif="GIF89a"+holidayProGifWord(exportWidth)+holidayProGifWord(exportHeight)+"\xF7\x00\x00";
+const palette=holidayProGifPalette();
+for(let i=0;i<palette.length;i++){gif+=String.fromCharCode(palette[i]);}
+gif+="\x21\xFF\x0BNETSCAPE2.0\x03\x01\x00\x00\x00";
+for(let frame=0;frame<totalFrames;frame++){
 const t=frame/fps;
 await drawAnimatedCardFrame(g,t,currentHolidayProVariation);
-frame++;
-if(frame>total){
-clearInterval(timer);
-recorder.stop();
+exportCtx.clearRect(0,0,exportWidth,exportHeight);
+exportCtx.drawImage(sourceCanvas,0,0,exportWidth,exportHeight);
+const indexed=holidayProGifIndexedPixels(exportCtx.getImageData(0,0,exportWidth,exportHeight));
+gif+=holidayProGifFrame(indexed,exportWidth,exportHeight,Math.round(100/fps));
 }
-},1000/fps);
-});
+gif+=";";
+return holidayProGifBinaryToBlob(gif);
 }
 
 async function drawImageCardToCanvas(g){const canvas=document.getElementById("previewCanvas");const ctx=canvas.getContext("2d");const w=canvas.width,h=canvas.height;ctx.clearRect(0,0,w,h);ctx.fillStyle="#0c120e";ctx.fillRect(0,0,w,h);try{const img=await loadCanvasImage(g.image);const scale=Math.max(w/img.width,h/img.height);const sw=w/scale,sh=h/scale;const sx=(img.width-sw)/2,sy=(img.height-sh)/2;ctx.drawImage(img,sx,sy,sw,sh,0,0,w,h);}catch(e){const grad=ctx.createLinearGradient(0,0,w,h);grad.addColorStop(0,"#082216");grad.addColorStop(.5,"#1e6c42");grad.addColorStop(1,"#d7b56d");ctx.fillStyle=grad;ctx.fillRect(0,0,w,h);}
