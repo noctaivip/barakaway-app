@@ -777,6 +777,9 @@ function selectPersonalHeadline(category){
 function selectPersonalText(category,name){return buildPersonalText(category,name);}
 function getNextPersonalImage(){let index=parseInt(localStorage.getItem("barakaway_personal_card_index")||"0",10);if(!Number.isFinite(index)||index<0)index=0;const image=PERSONAL_CARD_IMAGES[index%PERSONAL_CARD_IMAGES.length];localStorage.setItem("barakaway_personal_card_index",String((index+1)%PERSONAL_CARD_IMAGES.length));return image;}
 let currentGreeting=greetings[0];
+let holidayProPreparedShare=null;
+let holidayProPreparingShare=null;
+let holidayProPrepareToken=0;
 function saveName(){localStorage.setItem("barakaway_greeting_name",(document.getElementById("generatorName").value||"").trim());}
 function loadName(){document.getElementById("generatorName").value=localStorage.getItem("barakaway_greeting_name")||"";}
 function isFriday(){return new Date().getDay()===5;}
@@ -785,7 +788,31 @@ function getTodayGreeting(){const list=orderedGreetings();const dayIndex=Math.fl
 function updateToday(){return;}
 function renderCards(filter){const root=document.getElementById("cards");const list=orderedGreetings().filter(function(item){return filter==="all"||item.category===filter;});root.innerHTML=list.map(function(item){return `<article class="greeting-card" data-category="${item.category}"><div class="card-art"><div class="holiday-pro-stars" aria-hidden="true"><span style="--x:8%;--y:18%;--s:14px;--d:9.5s;--delay:-1s;--from-x:-18px;--from-y:5px;--to-x:260px;--to-y:28px"></span><span style="--x:72%;--y:14%;--s:11px;--d:11s;--delay:-3s;--from-x:80px;--from-y:0;--to-x:-210px;--to-y:46px"></span><span style="--x:18%;--y:46%;--s:9px;--d:12s;--delay:-5s;--from-x:-30px;--from-y:80px;--to-x:230px;--to-y:-36px"></span><span style="--x:82%;--y:48%;--s:13px;--d:10.5s;--delay:-2s;--from-x:42px;--from-y:-30px;--to-x:-250px;--to-y:70px"></span><span style="--x:34%;--y:76%;--s:8px;--d:13s;--delay:-6s;--from-x:15px;--from-y:58px;--to-x:190px;--to-y:-74px"></span><span style="--x:58%;--y:62%;--s:10px;--d:12.5s;--delay:-4s;--from-x:120px;--from-y:50px;--to-x:-160px;--to-y:-44px"></span><span style="--x:46%;--y:24%;--s:7px;--d:14s;--delay:-7s;--from-x:-90px;--from-y:-10px;--to-x:120px;--to-y:96px"></span><span style="--x:90%;--y:74%;--s:8px;--d:15s;--delay:-8s;--from-x:24px;--from-y:20px;--to-x:-210px;--to-y:-120px"></span></div><img class="card-image" src="${item.image}" alt="${item.title}" loading="lazy"><div class="card-image-overlay"></div><div class="card-brand-badge"><img src="${LOGO_PATH}" alt="BarakaWay"></div><div class="card-category-badge">${item.label}</div><div class="card-site-mark">barakaway.app</div></div><div class="card-body"><h3 class="card-title">${item.title}</h3></div><div class="card-actions"><button class="action-btn" type="button" onclick="openCard('${item.id}')">Zoom</button><button class="action-btn" type="button" onclick="copyCard('${item.id}')">Копировать</button><button class="action-btn primary" type="button" onclick="shareCard('${item.id}')">Поделиться</button></div></article>`;}).join("");}
 function findGreeting(id){return greetings.find(function(item){return item.id===id;})||greetings[0];}
-function generatePersonal(){saveName();const name=cleanPersonalName(document.getElementById("generatorName").value||"");const cat=document.getElementById("generatorCategory").value;const tpl=personalizedTemplates[cat]||personalizedTemplates.jumuah;currentGreeting={id:"personal",category:cat,label:tpl.label,title:tpl.title,headline:selectPersonalHeadline(cat),text:selectPersonalText(cat,name),image:getNextPersonalImage(),personalName:name};openModal(currentGreeting);}
+
+function resetHolidayProPreparedShare(){
+holidayProPreparedShare=null;
+holidayProPreparingShare=null;
+holidayProPrepareToken++;
+}
+function prepareHolidayProShare(g){
+const token=++holidayProPrepareToken;
+holidayProPreparedShare=null;
+holidayProPreparingShare=createHolidayProAnimation(g).then(function(fileData){
+if(token===holidayProPrepareToken){
+holidayProPreparedShare=fileData;
+return fileData;
+}
+return null;
+}).catch(function(){
+if(token===holidayProPrepareToken){
+holidayProPreparingShare=null;
+holidayProPreparedShare=null;
+}
+return null;
+});
+return holidayProPreparingShare;
+}
+function generatePersonal(){saveName();const name=cleanPersonalName(document.getElementById("generatorName").value||"");const cat=document.getElementById("generatorCategory").value;const tpl=personalizedTemplates[cat]||personalizedTemplates.jumuah;currentGreeting={id:"personal",category:cat,label:tpl.label,title:tpl.title,headline:selectPersonalHeadline(cat),text:selectPersonalText(cat,name),image:getNextPersonalImage(),personalName:name};openModal(currentGreeting);prepareHolidayProShare(currentGreeting);}
 function regeneratePersonal(){
 if(currentGreeting&&currentGreeting.id==="personal"){
 const currentCategory=currentGreeting.category||"jumuah";
@@ -827,12 +854,13 @@ personalName:currentName
 };
 
 openModal(currentGreeting);
+prepareHolidayProShare(currentGreeting);
 return;
 }
 showToast("Сначала создайте персональную карточку");
 }
-function openTodayCard(){currentGreeting=getTodayGreeting();openModal(currentGreeting);}
-function openCard(id){currentGreeting=findGreeting(id);openModal(currentGreeting);}
+function openTodayCard(){currentGreeting=getTodayGreeting();openModal(currentGreeting);prepareHolidayProShare(currentGreeting);}
+function openCard(id){currentGreeting=findGreeting(id);openModal(currentGreeting);prepareHolidayProShare(currentGreeting);}
 function copyCard(id){copyText(formatShareText(findGreeting(id)));}
 function shareCard(id){currentGreeting=findGreeting(id);shareCurrent();}
 function formatShareText(g){return "Скачать приложение BarakaWay — Коран, Азкары, Зикры, Дуа, Кибла и исламские материалы.\n\nhttps://barakaway.app";}
@@ -1247,20 +1275,42 @@ drawFittedCanvasText(ctx,g.text,w/2,panelY+270,panelW-170,panelH-320,{maxFontSiz
 ctx.restore();
 }
 ctx.fillStyle="rgba(255,238,190,.96)";ctx.font="800 30px system-ui, Arial";ctx.fillText("BarakaWay App",w/2,h-92);ctx.fillStyle="rgba(255,238,190,.82)";ctx.font="650 25px system-ui, Arial";ctx.fillText("barakaway.app",w/2,h-54);return canvas;}
-async function openModal(g){currentGreeting=g;currentHolidayProVariation=holidayProPickVariation(g);await drawAnimatedCardFrame(g,0,currentHolidayProVariation);document.getElementById("modal").classList.add("open");document.getElementById("modal").setAttribute("aria-hidden","false");startHolidayProPreview(g,currentHolidayProVariation);}
+async function openModal(g){
+resetHolidayProPreparedShare();currentGreeting=g;currentHolidayProVariation=holidayProPickVariation(g);await drawAnimatedCardFrame(g,0,currentHolidayProVariation);document.getElementById("modal").classList.add("open");document.getElementById("modal").setAttribute("aria-hidden","false");startHolidayProPreview(g,currentHolidayProVariation);}
 function closeModal(){stopHolidayProPreview();document.getElementById("modal").classList.remove("open");document.getElementById("modal").setAttribute("aria-hidden","true");}
 function canvasToBlob(canvas){return new Promise(function(resolve){canvas.toBlob(function(blob){resolve(blob);},"image/png",.96);});}
 
 async function shareCurrent(){
-stopHolidayProPreview();
-const text=formatShareText(currentGreeting);
 try{
-const output=await createHolidayProAnimation(currentGreeting);
-const file=new File([output.blob],output.name,{type:output.type});
-if(navigator.canShare&&navigator.canShare({files:[file]})){
-await navigator.share({title:currentGreeting.title,text:text,files:[file]});
-startHolidayProPreview(currentGreeting,currentHolidayProVariation);
+const g=currentGreeting||greetings[0];
+let fileData=holidayProPreparedShare;
+if(!fileData){
+if(holidayProPreparingShare){
+showToast("Анимация почти готова...");
+fileData=await holidayProPreparingShare;
+}else{
+showToast("Готовим анимацию...");
+fileData=await prepareHolidayProShare(g);
+}
+}
+if(!fileData||!fileData.blob){
+showToast("Не удалось подготовить анимацию");
 return;
+}
+const file=new File([fileData.blob],fileData.name,{type:fileData.type});
+const text=formatShareText(g);
+if(navigator.share&&navigator.canShare&&navigator.canShare({files:[file]})){
+await navigator.share({files:[file],text:text});
+return;
+}
+if(navigator.share){
+await navigator.share({text:text});
+return;
+}
+await downloadCurrent();
+}catch(e){
+showToast("Поделиться недоступно на этом устройстве");
+}
 }
 if(navigator.share){
 await navigator.share({title:currentGreeting.title,text:text});
