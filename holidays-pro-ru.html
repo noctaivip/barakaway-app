@@ -777,6 +777,9 @@ function selectPersonalHeadline(category){
 function selectPersonalText(category,name){return buildPersonalText(category,name);}
 function getNextPersonalImage(){let index=parseInt(localStorage.getItem("barakaway_personal_card_index")||"0",10);if(!Number.isFinite(index)||index<0)index=0;const image=PERSONAL_CARD_IMAGES[index%PERSONAL_CARD_IMAGES.length];localStorage.setItem("barakaway_personal_card_index",String((index+1)%PERSONAL_CARD_IMAGES.length));return image;}
 let currentGreeting=greetings[0];
+let holidayProPreparedKey=null;
+let holidayProPreparedOutput=null;
+let holidayProPreparePromise=null;
 function saveName(){localStorage.setItem("barakaway_greeting_name",(document.getElementById("generatorName").value||"").trim());}
 function loadName(){document.getElementById("generatorName").value=localStorage.getItem("barakaway_greeting_name")||"";}
 function isFriday(){return new Date().getDay()===5;}
@@ -1176,7 +1179,7 @@ canvas.toBlob(function(blob){resolve(blob);},type,quality);
 }
 
 async function createHolidayProAnimation(g){
-currentHolidayProVariation=holidayProPickVariation(g);
+if(!currentHolidayProVariation){currentHolidayProVariation=holidayProPickVariation(g);}
 const gifBlob=await createHolidayProGif(g);
 if(gifBlob&&gifBlob.size){
 return {blob:gifBlob,type:"image/gif",name:"barakaway-holidays-pro.gif"};
@@ -1197,14 +1200,14 @@ function holidayProGifFrame(indexed,width,height,delayCs){const lzw=holidayProGi
 function holidayProGifBinaryToBlob(binary){const len=binary.length;const bytes=new Uint8Array(len);for(let i=0;i<len;i++){bytes[i]=binary.charCodeAt(i)&255;}return new Blob([bytes],{type:"image/gif"});}
 async function createHolidayProGif(g){
 const sourceCanvas=document.getElementById("previewCanvas");
-const exportWidth=540;
+const exportWidth=360;
 const exportHeight=Math.round(sourceCanvas.height*(exportWidth/sourceCanvas.width));
 const exportCanvas=document.createElement("canvas");
 exportCanvas.width=exportWidth;
 exportCanvas.height=exportHeight;
 const exportCtx=exportCanvas.getContext("2d",{willReadFrequently:true});
-const fps=12;
-const duration=3000;
+const fps=5;
+const duration=1600;
 const totalFrames=Math.round(duration/1000*fps);
 let gif="GIF89a"+holidayProGifWord(exportWidth)+holidayProGifWord(exportHeight)+"\xF7\x00\x00";
 const palette=holidayProGifPalette();
@@ -1247,19 +1250,45 @@ drawFittedCanvasText(ctx,g.text,w/2,panelY+270,panelW-170,panelH-320,{maxFontSiz
 ctx.restore();
 }
 ctx.fillStyle="rgba(255,238,190,.96)";ctx.font="800 30px system-ui, Arial";ctx.fillText("BarakaWay App",w/2,h-92);ctx.fillStyle="rgba(255,238,190,.82)";ctx.font="650 25px system-ui, Arial";ctx.fillText("barakaway.app",w/2,h-54);return canvas;}
-async function openModal(g){currentGreeting=g;currentHolidayProVariation=holidayProPickVariation(g);await drawAnimatedCardFrame(g,0,currentHolidayProVariation);document.getElementById("modal").classList.add("open");document.getElementById("modal").setAttribute("aria-hidden","false");startHolidayProPreview(g,currentHolidayProVariation);}
+async function holidayProAnimationKey(g){return [g&&g.id,g&&g.image,g&&g.headline,g&&g.text,currentHolidayProVariation&&currentHolidayProVariation.seed].join("|");}
+function prepareHolidayProAnimation(g){
+const key=holidayProAnimationKey(g);
+if(holidayProPreparedKey===key&&holidayProPreparedOutput)return Promise.resolve(holidayProPreparedOutput);
+if(holidayProPreparedKey===key&&holidayProPreparePromise)return holidayProPreparePromise;
+holidayProPreparedKey=key;
+holidayProPreparedOutput=null;
+holidayProPreparePromise=createHolidayProAnimation(g).then(function(output){holidayProPreparedOutput=output;return output;}).catch(function(e){holidayProPreparedKey=null;holidayProPreparedOutput=null;throw e;});
+return holidayProPreparePromise;
+}
+function resetHolidayProPreparedAnimation(){holidayProPreparedKey=null;holidayProPreparedOutput=null;holidayProPreparePromise=null;}
+async function openModal(g){currentGreeting=g;currentHolidayProVariation=holidayProPickVariation(g);resetHolidayProPreparedAnimation();await drawAnimatedCardFrame(g,0,currentHolidayProVariation);document.getElementById("modal").classList.add("open");document.getElementById("modal").setAttribute("aria-hidden","false");startHolidayProPreview(g,currentHolidayProVariation);setTimeout(function(){prepareHolidayProAnimation(g).catch(function(){});},120);}
 function closeModal(){stopHolidayProPreview();document.getElementById("modal").classList.remove("open");document.getElementById("modal").setAttribute("aria-hidden","true");}
 function canvasToBlob(canvas){return new Promise(function(resolve){canvas.toBlob(function(blob){resolve(blob);},"image/png",.96);});}
 
 async function shareCurrent(){
 stopHolidayProPreview();
 const text=formatShareText(currentGreeting);
-showToast("Генерация новой Pro-анимации...");
 try{
-const output=await createHolidayProAnimation(currentGreeting);
+const key=holidayProAnimationKey(currentGreeting);
+let output=holidayProPreparedKey===key?holidayProPreparedOutput:null;
+if(!output){
+if(!holidayProPreparePromise){prepareHolidayProAnimation(currentGreeting).catch(function(){});}
+showToast("Анимация готовится. Нажмите ещё раз через секунду.");
+startHolidayProPreview(currentGreeting);
+return;
+}
 const file=new File([output.blob],output.name,{type:output.type});
 if(navigator.canShare&&navigator.canShare({files:[file]})){
 await navigator.share({title:currentGreeting.title,text:text,files:[file]});
+startHolidayProPreview(currentGreeting);
+return;
+}
+const canvas=document.getElementById("previewCanvas");
+await drawAnimatedCardFrame(currentGreeting,0,currentHolidayProVariation);
+const pngBlob=await holidayProCanvasBlob(canvas,"image/png",.96);
+const pngFile=new File([pngBlob],"barakaway-holidays-pro.png",{type:"image/png"});
+if(navigator.canShare&&navigator.canShare({files:[pngFile]})){
+await navigator.share({title:currentGreeting.title,text:text,files:[pngFile]});
 startHolidayProPreview(currentGreeting);
 return;
 }
@@ -1273,8 +1302,8 @@ startHolidayProPreview(currentGreeting);
 return;
 }catch(e){
 startHolidayProPreview(currentGreeting);
+showToast("Поделиться отменено или недоступно");
 }
-showToast("Поделиться недоступно на этом устройстве");
 }
 
 function copyCurrent(){copyText(formatShareText(currentGreeting));}
@@ -1291,8 +1320,8 @@ setTimeout(function(){URL.revokeObjectURL(a.href);},1200);
 }
 async function downloadCurrent(){
 stopHolidayProPreview();
-showToast("Генерация новой Pro-анимации...");
-const output=await createHolidayProAnimation(currentGreeting);
+showToast("Подготовка Pro-анимации...");
+const output=await prepareHolidayProAnimation(currentGreeting);
 downloadHolidayProBlob(output.blob,output.name);
 startHolidayProPreview(currentGreeting);
 }
