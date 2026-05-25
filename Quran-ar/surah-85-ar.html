@@ -593,8 +593,8 @@ function renderAyahs(arData) {
     const arabic = ayahs[i]; const num = arabic.numberInSurah;
     const article = document.createElement("article"); article.className = "ayah-card"; article.id = `ayah-${num}`;
     article.innerHTML = `
-      <div class="ayah-toolbar"><div class="ayah-index">${num}</div><button class="play-btn" type="button" data-default-label="▶ ${labels.playAyah} ${num}" data-playing-label="■ ${labels.stopAyah} ${num}" onclick="playAyah('ayah-audio-${num}', this)">▶ ${labels.playAyah} ${num}</button></div>
-      <audio class="ayah-audio" id="ayah-audio-${num}" preload="none" src="${audioUrl(num)}"></audio>
+      <div class="ayah-toolbar"><div class="ayah-index">${num}</div><button class="play-btn" type="button" data-default-label="▶ ${labels.playAyah} ${num}" data-playing-label="■ ${labels.stopAyah} ${num}" onclick="playAyah('audio-ayah-${num}', this)">▶ ${labels.playAyah} ${num}</button></div>
+      <audio class="ayah-audio" id="audio-ayah-${num}" preload="none" src="${audioUrl(num)}"></audio>
       <div class="ayah-arabic">${arabic.text}</div>
       <div class="ayah-tafsir">التفسير المختصر لهذه الآية سيظهر هنا عند ربط مصدر تفسير معتمد.</div>
       <div class="ayah-actions" aria-label="إجراءات الآية">
