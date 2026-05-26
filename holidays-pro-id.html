@@ -998,7 +998,7 @@ function attachSafeImages(root){
   });
 }
 
-function renderCards(filter){const root=document.getElementById("cards");const list=orderedGreetings().filter(function(item){return filter==="all"||item.category===filter;});root.innerHTML=list.map(function(item){return `<article class="greeting-card" data-category="${item.category}"><div class="card-art"><img class="card-image" src="${item.image}" alt="${item.title}" loading="lazy"><div class="card-image-overlay"></div><div class="card-brand-badge"><img src="${LOGO_PATH}" alt="BarakaWay"></div><div class="card-category-badge">${item.label}</div><div class="card-site-mark">barakaway.app</div></div><div class="card-body"><h3 class="card-title">${item.title}</h3></div><div class="card-actions"><button class="action-btn" type="button" onclick="zoomCard('${item.id}')">Perbesar</button><button class="action-btn" type="button" onclick="copyCard('${item.id}')">Salin</button><button class="action-btn primary" type="button" onclick="shareCard('${item.id}')">Bagikan</button></div></article>`;}).join("");attachSafeImages(root);}
+function renderCards(filter){const root=document.getElementById("cards");const list=orderedGreetings().filter(function(item){return filter==="all"||item.category===filter;});root.innerHTML=list.map(function(item){return `<article class="greeting-card" data-category="${item.category}"><div class="card-art"><img class="card-image" src="${item.image}" alt="${item.title}" loading="lazy"><div class="card-image-overlay"></div><div class="card-brand-badge"><img src="${LOGO_PATH}" alt="BarakaWay"></div><div class="card-category-badge">${item.label}</div><div class="card-site-mark">barakaway.app</div></div><div class="card-body"><h3 class="card-title">${item.title}</h3></div><div class="card-actions"><button class="action-btn" type="button" onclick="downloadReadyCard('${item.id}')">Unduh</button><button class="action-btn" type="button" onclick="copyCard('${item.id}')">Salin</button><button class="action-btn primary" type="button" onclick="shareCard('${item.id}')">Bagikan</button></div></article>`;}).join("");attachSafeImages(root);}
 function findGreeting(id){return greetings.find(function(item){return item.id===id;})||greetings[0];}
 function generatePersonal(){saveName();const name=cleanPersonalName(document.getElementById("generatorName").value||"");const cat=document.getElementById("generatorCategory").value;const tpl=personalizedTemplates[cat]||personalizedTemplates.jumuah;currentGreeting={id:"personal",category:cat,label:tpl.label,title:tpl.title,headline:selectPersonalHeadline(cat),text:selectPersonalText(cat,name),image:getNextPersonalImage(),personalName:name};openModal(currentGreeting);}
 function regeneratePersonal(){
@@ -1040,7 +1040,7 @@ showToast("Buat kartu pribadi terlebih dahulu");
 function openTodayCard(){currentGreeting=getTodayGreeting();openModal(currentGreeting);}
 function openCard(id){currentGreeting=findGreeting(id);openModal(currentGreeting);}
 function copyCard(id){copyText(formatShareText(findGreeting(id)));}
-function shareCard(id){currentGreeting=findGreeting(id);shareCurrent();}
+function shareCard(id){shareReadyCard(id);}
 function formatShareText(g){return "Unduh aplikasi BarakaWay — Al-Qur’an, Azkar, Zikir, Doa, Kiblat, dan materi Islam.\\n\\nhttps://barakaway.app";}
 
 function wrapCanvasText(ctx,text,x,y,maxWidth,lineHeight,maxLines){const words=String(text||"").split(/\s+/);let line="",lines=[];for(let i=0;i<words.length;i++){const test=line+words[i]+" ";if(ctx.measureText(test).width>maxWidth&&i>0){lines.push(line.trim());line=words[i]+" ";}else{line=test;}}if(line.trim())lines.push(line.trim());if(maxLines&&lines.length>maxLines){lines=lines.slice(0,maxLines);lines[lines.length-1]=lines[lines.length-1].replace(/[.,;:!?]*$/,"")+"…";}lines.forEach(function(l,i){ctx.fillText(l,x,y+i*lineHeight);});}
@@ -1126,7 +1126,8 @@ return {panel:"rgba(0,0,0,.66)",text:"#f3d992",shadow:"rgba(0,0,0,.90)",blur:18}
 async function drawImageCardToCanvas(g){const canvas=document.getElementById("previewCanvas");const ctx=canvas.getContext("2d");const w=canvas.width,h=canvas.height;ctx.clearRect(0,0,w,h);ctx.fillStyle="#0c120e";ctx.fillRect(0,0,w,h);try{const img=await loadCanvasImage(g.image);const scale=Math.max(w/img.width,h/img.height);const sw=w/scale,sh=h/scale;const sx=(img.width-sw)/2,sy=(img.height-sh)/2;ctx.drawImage(img,sx,sy,sw,sh,0,0,w,h);}catch(e){const grad=ctx.createLinearGradient(0,0,w,h);grad.addColorStop(0,"#082216");grad.addColorStop(.5,"#1e6c42");grad.addColorStop(1,"#d7b56d");ctx.fillStyle=grad;ctx.fillRect(0,0,w,h);}
 const bottom=ctx.createLinearGradient(0,h*.76,0,h);bottom.addColorStop(0,"rgba(0,0,0,0)");bottom.addColorStop(.78,"rgba(0,0,0,.46)");bottom.addColorStop(1,"rgba(0,0,0,.62)");ctx.fillStyle=bottom;ctx.fillRect(0,0,w,h);
 
-try{const logo=await loadCanvasImage(LOGO_PATH);ctx.save();const logoX=(w-112)/2;drawRoundRect(ctx,logoX,58,112,112,30);ctx.clip();ctx.drawImage(logo,logoX,58,112,112);ctx.restore();ctx.strokeStyle="rgba(243,217,146,.70)";ctx.lineWidth=3;drawRoundRect(ctx,logoX,58,112,112,30);ctx.stroke();}catch(e){}
+try{const logo=await loadCanvasImage(LOGO_PATH);ctx.save();const logoX=(w-112)/2;drawRoundRect(ctx,logoX,58,112,112,30);ctx.clip();ctx.drawImage(logo,logoX,58,112,112);ctx.restore();
+  drawBarakaWayWatermark(ctx,w,h);ctx.strokeStyle="rgba(243,217,146,.70)";ctx.lineWidth=3;drawRoundRect(ctx,logoX,58,112,112,30);ctx.stroke();}catch(e){}
 ctx.textAlign="center";ctx.textBaseline="alphabetic";
 if(g.id==="personal"){
 const style=getPersonalTextStyle(ctx,w,h);
@@ -1190,6 +1191,37 @@ async function openModal(g){currentGreeting=g;await drawImageCardToCanvas(g);doc
 function closeModal(){document.getElementById("modal").classList.remove("open");document.getElementById("modal").setAttribute("aria-hidden","true");}
 function canvasToBlob(canvas){return new Promise(function(resolve){canvas.toBlob(function(blob){resolve(blob);},"image/png",.96);});}
 
+function downloadCanvasBlob(blob,name){
+  const url=URL.createObjectURL(blob);
+  const a=document.createElement("a");
+  a.href=url;
+  a.download=name;
+  document.body.appendChild(a);
+  a.click();
+  a.remove();
+  setTimeout(function(){URL.revokeObjectURL(url);},1200);
+}
+async function shareReadyCard(id){
+  const g=findGreeting(id);
+  if(!g)return;
+  const text=formatShareText(g);
+  try{
+    const canvas=await drawReadyCardDownload(g);
+    const blob=await canvasToBlob(canvas);
+    const file=new File([blob],`barakaway-${g.id}.png`,{type:"image/png"});
+    if(navigator.canShare&&navigator.canShare({files:[file]})){
+      await navigator.share({title:g.title,text:text,files:[file]});
+      return;
+    }
+    if(navigator.share){
+      await navigator.share({title:g.title,text:text});
+      return;
+    }
+  }catch(e){}
+  showToast("Поделиться недоступно на этом устройстве");
+}
+
+
 async function shareCurrent(){
 const canvas=await drawImageCardToCanvas(currentGreeting);
 const text=formatShareText(currentGreeting);
@@ -1215,6 +1247,130 @@ async function downloadCurrent(){const canvas=await drawImageCardToCanvas(curren
 function showToast(message){const toast=document.getElementById("toast");toast.textContent=message;toast.classList.add("show");setTimeout(function(){toast.classList.remove("show");},1800);}
 
 
+
+
+
+function drawBarakaWayWatermark(ctx,w,h){
+  ctx.save();
+  ctx.globalAlpha=.085;
+  ctx.translate(w/2,h/2);
+  ctx.rotate(-Math.PI/7);
+  ctx.textAlign="center";
+  ctx.textBaseline="middle";
+  ctx.fillStyle="#fff4c2";
+  ctx.strokeStyle="rgba(0,0,0,.42)";
+  ctx.lineWidth=3;
+  ctx.font="900 78px system-ui,-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif";
+  ctx.strokeText("BarakaWay App",0,-26);
+  ctx.fillText("BarakaWay App",0,-26);
+  ctx.font="800 42px system-ui,-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif";
+  ctx.strokeText("barakaway.app",0,42);
+  ctx.fillText("barakaway.app",0,42);
+  ctx.restore();
+
+  ctx.save();
+  ctx.globalAlpha=.045;
+  ctx.rotate(-Math.PI/7);
+  ctx.textAlign="center";
+  ctx.textBaseline="middle";
+  ctx.fillStyle="#fff4c2";
+  ctx.font="800 34px system-ui,-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif";
+  const stepX=430;
+  const stepY=260;
+  for(let y=-h*1.2;y<h*1.8;y+=stepY){
+    for(let x=-w*1.2;x<w*1.8;x+=stepX){
+      ctx.fillText("BarakaWay App",x,y);
+      ctx.fillText("barakaway.app",x,y+42);
+    }
+  }
+  ctx.restore();
+}
+
+async function drawReadyCardDownload(g){
+  const source=await loadCanvasImage(g.image);
+  const logo=await loadCanvasImage(LOGO_PATH).catch(()=>null);
+  const w=1080;
+  const h=1350;
+  const canvas=document.createElement("canvas");
+  canvas.width=w;
+  canvas.height=h;
+  const ctx=canvas.getContext("2d");
+
+  ctx.fillStyle="#080d0f";
+  ctx.fillRect(0,0,w,h);
+
+  const radius=64;
+  ctx.save();
+  drawRoundRect(ctx,44,44,w-88,h-88,radius);
+  ctx.clip();
+  ctx.drawImage(source,44,44,w-88,h-88);
+  ctx.restore();
+
+  ctx.save();
+  ctx.strokeStyle="rgba(243,217,146,.72)";
+  ctx.lineWidth=4;
+  drawRoundRect(ctx,60,60,w-120,h-120,48);
+  ctx.stroke();
+  ctx.restore();
+
+  drawBarakaWayWatermark(ctx,w,h);
+
+  if(logo){
+    const logoSize=112;
+    const lx=(w-logoSize)/2;
+    const ly=78;
+    ctx.save();
+    ctx.shadowColor="rgba(0,0,0,.55)";
+    ctx.shadowBlur=22;
+    drawRoundRect(ctx,lx-8,ly-8,logoSize+16,logoSize+16,28);
+    ctx.fillStyle="rgba(4,13,9,.72)";
+    ctx.fill();
+    ctx.clip();
+    ctx.drawImage(logo,lx,ly,logoSize,logoSize);
+    ctx.restore();
+  }
+
+  const markH=92;
+  const markX=86;
+  const markY=h-164;
+  const markW=w-172;
+  const grad=ctx.createLinearGradient(markX,markY,markX,markY+markH);
+  grad.addColorStop(0,"rgba(0,0,0,.18)");
+  grad.addColorStop(.48,"rgba(0,0,0,.58)");
+  grad.addColorStop(1,"rgba(0,0,0,.22)");
+  ctx.save();
+  ctx.shadowColor="rgba(0,0,0,.62)";
+  ctx.shadowBlur=20;
+  drawRoundRect(ctx,markX,markY,markW,markH,44);
+  ctx.fillStyle=grad;
+  ctx.fill();
+  ctx.restore();
+
+  ctx.textAlign="center";
+  ctx.textBaseline="middle";
+  ctx.fillStyle="#fff4c2";
+  ctx.font="900 30px system-ui,-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif";
+  ctx.shadowColor="rgba(0,0,0,.7)";
+  ctx.shadowBlur=8;
+  ctx.fillText("BarakaWay App",w/2,markY+36);
+  ctx.fillStyle="rgba(255,244,194,.86)";
+  ctx.font="800 22px system-ui,-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif";
+  ctx.fillText("barakaway.app",w/2,markY+64);
+  ctx.shadowBlur=0;
+
+  return canvas;
+}
+async function downloadReadyCard(id){
+  const g=findGreeting(id);
+  if(!g)return;
+  try{
+    const canvas=await drawReadyCardDownload(g);
+    const blob=await canvasToBlob(canvas);
+    downloadCanvasBlob(blob,`barakaway-${g.id}.png`);
+  }catch(e){
+    showToast("Не удалось подготовить изображение");
+  }
+}
 
 let zoomState={active:false,img:null,stage:null,scale:1.85,x:0,y:0,startX:0,startY:0,baseX:0,baseY:0,dragging:false};
 function resolveAssetUrl(src){
