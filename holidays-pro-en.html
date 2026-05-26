@@ -985,7 +985,82 @@ function isFriday(){return new Date().getDay()===5;}
 function orderedGreetings(){if(!isFriday())return greetings;return greetings.slice().sort(function(a,b){if(a.category==="jumuah"&&b.category!=="jumuah")return -1;if(a.category!=="jumuah"&&b.category==="jumuah")return 1;return 0;});}
 function getTodayGreeting(){const list=orderedGreetings();const dayIndex=Math.floor(Date.now()/86400000);return list[dayIndex%list.length]||greetings[0];}
 function updateToday(){return;}
-function renderCards(filter){const root=document.getElementById("cards");const list=orderedGreetings().filter(function(item){return filter==="all"||item.category===filter;});root.innerHTML=list.map(function(item){return `<article class="greeting-card" data-category="${item.category}"><div class="card-art"><img class="card-image" src="${item.image}" alt="${item.title}" loading="lazy"><div class="card-image-overlay"></div><div class="card-brand-badge"><img src="${LOGO_PATH}" alt="BarakaWay"></div><div class="card-category-badge">${item.label}</div><div class="card-site-mark">barakaway.app</div></div><div class="card-body"><h3 class="card-title">${item.title}</h3></div><div class="card-actions"><button class="action-btn" type="button" onclick="zoomCard('${item.id}')">Zoom</button><button class="action-btn" type="button" onclick="copyCard('${item.id}')">Copy</button><button class="action-btn primary" type="button" onclick="shareCard('${item.id}')">Share</button></div></article>`;}).join("");}
+
+const ASSET_CACHE_TAG="pro-mobile-asset-fix-20260526";
+function stripAssetQuery(src){return String(src||"").split("?")[0];}
+function cacheAsset(src){
+  src=String(src||"");
+  if(!src||!src.startsWith("./assets/"))return src;
+  const clean=stripAssetQuery(src);
+  return clean+"?v="+ASSET_CACHE_TAG;
+}
+function uniqueAssetList(list){
+  const seen=new Set();
+  return list.filter(function(item){if(!item||seen.has(item))return false;seen.add(item);return true;});
+}
+function assetFallbacks(src){
+  const clean=stripAssetQuery(src);
+  const list=[clean];
+  const m=clean.match(/^\.\/assets\/(greetings(?:-pro)?-([a-z]+))\/([^\/]+)$/);
+  if(m){
+    const folder=m[1], lang=m[2], file=m[3];
+    const proFolder="greetings-pro-"+lang;
+    const normalFolder="greetings-"+lang;
+    const base=file.replace(/\.(png|jpg|jpeg|webp)$/i,"");
+    const ext=(file.match(/\.(png|jpg|jpeg|webp)$/i)||[".png"])[0];
+    const noPro=base.replace(/-pro$/i,"");
+    const pro=noPro+"-pro";
+    const variants=[];
+    [pro,noPro].forEach(function(stem){
+      variants.push(stem+ext.toLowerCase());
+      variants.push(stem+ext.toUpperCase());
+      variants.push(stem+".png");
+      variants.push(stem+".jpg");
+      variants.push(stem+".jpeg");
+      variants.push(stem+".webp");
+      variants.push(stem.replace(/^ramadan/i,"Ramadan")+".png");
+      variants.push(stem.replace(/^Ramadan/,"ramadan")+".png");
+    });
+    [proFolder,normalFolder].forEach(function(f){variants.forEach(function(v){list.push("./assets/"+f+"/"+v);});});
+    if(file==="logo.png"){list.push("./assets/barakaway-logo.png");}
+  }
+  const p=clean.match(/^\.\/assets\/(personal(?:-pro)?)\/([^\/]+)$/);
+  if(p){
+    const file=p[2];
+    const stem=file.replace(/\.(png|jpg|jpeg|webp)$/i,"").replace(/-pro$/i,"");
+    ["personal-pro","personal"].forEach(function(f){
+      [".jpg",".jpeg",".png",".webp"].forEach(function(ext){list.push("./assets/"+f+"/"+stem+ext);list.push("./assets/"+f+"/"+stem+"-pro"+ext);});
+    });
+  }
+  return uniqueAssetList(list).map(cacheAsset);
+}
+function handleImageFallback(img){
+  if(!img)return;
+  let list=[];
+  try{list=JSON.parse(img.dataset.assetFallbacks||"[]");}catch(e){list=[];}
+  const index=Number(img.dataset.assetFallbackIndex||"0")+1;
+  if(index<list.length){
+    img.dataset.assetFallbackIndex=String(index);
+    img.src=list[index];
+  }
+}
+function prepareSafeImage(img,src){
+  if(!img)return;
+  const clean=stripAssetQuery(src||img.getAttribute("src")||"");
+  if(!clean||!clean.startsWith("./assets/"))return;
+  const fallbacks=assetFallbacks(clean);
+  img.dataset.assetFallbacks=JSON.stringify(fallbacks);
+  img.dataset.assetFallbackIndex="0";
+  img.onerror=function(){handleImageFallback(this);};
+  img.src=fallbacks[0];
+}
+function attachSafeImages(root){
+  (root||document).querySelectorAll('img[src^="./assets/"],img[data-src^="./assets/"]').forEach(function(img){
+    prepareSafeImage(img,img.getAttribute("data-src")||img.getAttribute("src"));
+  });
+}
+
+function renderCards(filter){const root=document.getElementById("cards");const list=orderedGreetings().filter(function(item){return filter==="all"||item.category===filter;});root.innerHTML=list.map(function(item){return `<article class="greeting-card" data-category="${item.category}"><div class="card-art"><img class="card-image" src="${item.image}" alt="${item.title}" loading="lazy"><div class="card-image-overlay"></div><div class="card-brand-badge"><img src="${LOGO_PATH}" alt="BarakaWay"></div><div class="card-category-badge">${item.label}</div><div class="card-site-mark">barakaway.app</div></div><div class="card-body"><h3 class="card-title">${item.title}</h3></div><div class="card-actions"><button class="action-btn" type="button" onclick="zoomCard('${item.id}')">Zoom</button><button class="action-btn" type="button" onclick="copyCard('${item.id}')">Copy</button><button class="action-btn primary" type="button" onclick="shareCard('${item.id}')">Share</button></div></article>`;}).join("");attachSafeImages(root);}
 function findGreeting(id){return greetings.find(function(item){return item.id===id;})||greetings[0];}
 function generatePersonal(){saveName();const name=cleanPersonalName(document.getElementById("generatorName").value||"");const cat=document.getElementById("generatorCategory").value;const tpl=personalizedTemplates[cat]||personalizedTemplates.jumuah;const personalText=selectPersonalText(cat,name);currentGreeting={id:"personal",category:cat,label:tpl.label,title:tpl.title,headline:selectPersonalHeadline(cat),text:personalText.text,textSignature:personalText.signature,image:getNextPersonalImage(),personalName:name};openModal(currentGreeting);}
 function regeneratePersonal(){
@@ -1052,7 +1127,21 @@ return {fontSize:fontSize,lines:lines.length,totalHeight:totalHeight};
 }
 
 function drawRoundRect(ctx,x,y,w,h,r){const radius=Math.min(r,w/2,h/2);ctx.beginPath();ctx.moveTo(x+radius,y);ctx.arcTo(x+w,y,x+w,y+h,radius);ctx.arcTo(x+w,y+h,x,y+h,radius);ctx.arcTo(x,y+h,x,y,radius);ctx.arcTo(x,y,x+w,y,radius);ctx.closePath();}
-function loadCanvasImage(src){return new Promise(function(resolve,reject){const img=new Image();img.onload=function(){resolve(img)};img.onerror=reject;img.src=src;});}
+function loadCanvasImage(src){
+return new Promise(function(resolve,reject){
+  const fallbacks=assetFallbacks(src);
+  let index=0;
+  const img=new Image();
+  img.crossOrigin="anonymous";
+  img.onload=function(){resolve(img)};
+  img.onerror=function(){
+    index++;
+    if(index<fallbacks.length){img.src=fallbacks[index];}
+    else{reject(new Error("Image load failed: "+src));}
+  };
+  img.src=fallbacks[0]||src;
+});
+}
 function getAverageLuminance(ctx,x,y,w,h){
 try{
 const data=ctx.getImageData(x,y,w,h).data;
@@ -1248,7 +1337,7 @@ function zoomCard(id){
   if(g&&g.image){openZoomViewer(g.image);}
 }
 
-document.addEventListener("DOMContentLoaded",function(){loadName();updateToday();renderCards("jumuah");bindZoomViewer();document.getElementById("generatorName").addEventListener("input",saveName);document.querySelectorAll(".tab").forEach(function(btn){btn.addEventListener("click",function(){document.querySelectorAll(".tab").forEach(function(x){x.classList.remove("active");});btn.classList.add("active");renderCards(btn.getAttribute("data-filter"));});});document.getElementById("modal").addEventListener("click",function(e){if(e.target.id==="modal")closeModal();});});
+document.addEventListener("DOMContentLoaded",function(){loadName();updateToday();renderCards("jumuah");attachSafeImages(document);bindZoomViewer();document.getElementById("generatorName").addEventListener("input",saveName);document.querySelectorAll(".tab").forEach(function(btn){btn.addEventListener("click",function(){document.querySelectorAll(".tab").forEach(function(x){x.classList.remove("active");});btn.classList.add("active");renderCards(btn.getAttribute("data-filter"));});});document.getElementById("modal").addEventListener("click",function(e){if(e.target.id==="modal")closeModal();});});
 </script>
 <script src="/bottom-nav.js"></script>
 
