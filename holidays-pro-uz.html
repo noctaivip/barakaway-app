@@ -22,9 +22,6 @@ BarakaWay — Greetings / Поздравления
 <meta name="theme-color" content="#2d7a46">
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
-<meta http-equiv="Pragma" content="no-cache">
-<meta http-equiv="Expires" content="0">
 <title>Holidays Pro — BarakaWay</title>
 <link rel="stylesheet" href="/theme.css">
 <link rel="stylesheet" href="/theme-universal.css">
@@ -186,6 +183,84 @@ border-radius:20px;
   padding-left:2px;
 }
 
+
+
+/* Ready-card fullscreen zoom */
+.zoom-viewer{
+  position:fixed;
+  inset:0;
+  z-index:99999;
+  display:none;
+  background:rgba(0,0,0,.94);
+  backdrop-filter:blur(10px);
+  -webkit-backdrop-filter:blur(10px);
+  touch-action:none;
+}
+.zoom-viewer.active{display:block}
+.zoom-stage{
+  position:absolute;
+  inset:0;
+  overflow:hidden;
+  cursor:grab;
+  touch-action:none;
+}
+.zoom-stage:active{cursor:grabbing}
+.zoom-stage img{
+  position:absolute;
+  left:50%;
+  top:50%;
+  width:min(92vw,760px);
+  max-width:none;
+  height:auto;
+  transform:translate(-50%,-50%) scale(1.85);
+  transform-origin:center center;
+  user-select:none;
+  -webkit-user-drag:none;
+  border-radius:18px;
+  box-shadow:0 30px 90px rgba(0,0,0,.72);
+  will-change:transform;
+}
+.zoom-close{
+  position:fixed;
+  top:calc(env(safe-area-inset-top,0px) + 14px);
+  right:calc(env(safe-area-inset-right,0px) + 14px);
+  z-index:100001;
+  width:46px;
+  height:46px;
+  border-radius:999px;
+  border:1px solid rgba(255,255,255,.22);
+  background:rgba(12,16,20,.84);
+  color:#fff;
+  font-size:30px;
+  line-height:1;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  cursor:pointer;
+  box-shadow:0 14px 36px rgba(0,0,0,.44);
+}
+.zoom-hint{
+  position:fixed;
+  left:50%;
+  bottom:calc(env(safe-area-inset-bottom,0px) + 18px);
+  transform:translateX(-50%);
+  z-index:100000;
+  color:rgba(255,255,255,.78);
+  background:rgba(12,16,20,.62);
+  border:1px solid rgba(255,255,255,.12);
+  border-radius:999px;
+  padding:9px 14px;
+  font-size:13px;
+  font-weight:800;
+  pointer-events:none;
+}
+@media(max-width:560px){
+  .zoom-stage img{
+    width:94vw;
+    transform:translate(-50%,-50%) scale(2.15);
+  }
+}
+
 </style>
 <script src="/theme-init.js"></script>
 <link rel="stylesheet" href="/theme.css">
@@ -194,7 +269,7 @@ border-radius:20px;
 <body>
 <div class="ramadan-wrapper"><div class="ramadan-bar"><div class="ramadan-text">Holidays Pro • Pro tabriklar • BarakaWay</div></div></div>
 <main class="container">
-<section class="hero"><div class="hero-inner"><div class="logo"><img src="./assets/greetings-pro-uz/logo.png?v=pro-assets-20260526-1" alt="BarakaWay"></div><h1>Holidays <span class="pro-word">Pro</span></h1></div></section>
+<section class="hero"><div class="hero-inner"><div class="logo"><img src="./assets/greetings-pro-uz/logo.png" alt="BarakaWay"></div><h1>Holidays <span class="pro-word">Pro</span></h1></div></section>
 <section class="generator"><h2>Shaxsiy tabrik</h2><div class="generator-grid"><input id="generatorName" type="text" placeholder="Qabul qiluvchi ismi"><select id="generatorCategory"><option value="jumuah">Juma</option><option value="ramadan">Ramazon</option><option value="eid-fitr">Ramazon Hayiti</option><option value="eid-adha">Qurbon Hayiti</option><option value="daily">Har kuni</option></select><button class="mini-btn" type="button" onclick="generatePersonal()">Yaratish</button></div></section>
 <nav class="tabs" aria-label="Tabrik kategoriyalari"><button class="tab active" type="button" data-filter="jumuah">Juma</button><button class="tab" type="button" data-filter="all">Barchasi</button><button class="tab" type="button" data-filter="ramadan">Ramazon</button><button class="tab" type="button" data-filter="eid-fitr">Ramazon Hayiti</button><button class="tab" type="button" data-filter="eid-adha">Qurbon Hayiti</button><button class="tab" type="button" data-filter="daily">Har kuni</button></nav>
 <div class="section-title"><h2>Tayyor tabriklar</h2></div><section class="cards" id="cards"></section>
@@ -202,8 +277,8 @@ border-radius:20px;
 <div class="modal" id="modal" aria-hidden="true"><div class="modal-card"><canvas class="preview-canvas" id="previewCanvas" width="1080" height="1350"></canvas><div class="modal-actions"><button class="action-btn primary" type="button" onclick="shareCurrent()">Ulashish</button><button class="action-btn" type="button" onclick="regeneratePersonal()">Qayta yaratish</button><button class="action-btn" type="button" onclick="downloadCurrent()">Yuklab olish</button></div><button class="close-btn" type="button" onclick="closeModal()">Yopish</button></div></div><div class="toast" id="toast">Tayyor</div>
 <script>
 const APP_LINK="https://barakaway.app";
-const LOGO_PATH="./assets/greetings-pro-uz/logo.png?v=pro-assets-20260526-1";
-const PERSONAL_CARD_IMAGES=["./assets/personal-pro/personal-001.jpg?v=pro-assets-20260526-1","./assets/personal-pro/personal-002.jpg?v=pro-assets-20260526-1","./assets/personal-pro/personal-003.jpg?v=pro-assets-20260526-1","./assets/personal-pro/personal-004.jpg?v=pro-assets-20260526-1","./assets/personal-pro/personal-005.jpg?v=pro-assets-20260526-1","./assets/personal-pro/personal-006.jpg?v=pro-assets-20260526-1","./assets/personal-pro/personal-007.jpg?v=pro-assets-20260526-1","./assets/personal-pro/personal-008.jpg?v=pro-assets-20260526-1","./assets/personal-pro/personal-009.jpg?v=pro-assets-20260526-1","./assets/personal-pro/personal-010.jpg?v=pro-assets-20260526-1","./assets/personal-pro/personal-011.jpg?v=pro-assets-20260526-1","./assets/personal-pro/personal-012.jpg?v=pro-assets-20260526-1","./assets/personal-pro/personal-013.jpg?v=pro-assets-20260526-1","./assets/personal-pro/personal-014.jpg?v=pro-assets-20260526-1","./assets/personal-pro/personal-015.jpg?v=pro-assets-20260526-1","./assets/personal-pro/personal-016.jpg?v=pro-assets-20260526-1","./assets/personal-pro/personal-017.jpg?v=pro-assets-20260526-1","./assets/personal-pro/personal-018.jpg?v=pro-assets-20260526-1","./assets/personal-pro/personal-019.jpg?v=pro-assets-20260526-1","./assets/personal-pro/personal-020.jpg?v=pro-assets-20260526-1","./assets/personal-pro/personal-021.jpg?v=pro-assets-20260526-1","./assets/personal-pro/personal-022.jpg?v=pro-assets-20260526-1","./assets/personal-pro/personal-023.jpg?v=pro-assets-20260526-1","./assets/personal-pro/personal-024.jpg?v=pro-assets-20260526-1","./assets/personal-pro/personal-025.jpg?v=pro-assets-20260526-1","./assets/personal-pro/personal-026.jpg?v=pro-assets-20260526-1","./assets/personal-pro/personal-027.jpg?v=pro-assets-20260526-1","./assets/personal-pro/personal-028.jpg?v=pro-assets-20260526-1","./assets/personal-pro/personal-029.jpg?v=pro-assets-20260526-1","./assets/personal-pro/personal-030.jpg?v=pro-assets-20260526-1","./assets/personal-pro/personal-031.jpg?v=pro-assets-20260526-1","./assets/personal-pro/personal-032.jpg?v=pro-assets-20260526-1","./assets/personal-pro/personal-033.jpg?v=pro-assets-20260526-1","./assets/personal-pro/personal-034.jpg?v=pro-assets-20260526-1","./assets/personal-pro/personal-035.jpg?v=pro-assets-20260526-1","./assets/personal-pro/personal-036.jpg?v=pro-assets-20260526-1","./assets/personal-pro/personal-037.jpg?v=pro-assets-20260526-1","./assets/personal-pro/personal-038.jpg?v=pro-assets-20260526-1","./assets/personal-pro/personal-039.jpg?v=pro-assets-20260526-1","./assets/personal-pro/personal-040.jpg?v=pro-assets-20260526-1","./assets/personal-pro/personal-041.jpg?v=pro-assets-20260526-1","./assets/personal-pro/personal-042.jpg?v=pro-assets-20260526-1","./assets/personal-pro/personal-043.jpg?v=pro-assets-20260526-1","./assets/personal-pro/personal-044.jpg?v=pro-assets-20260526-1","./assets/personal-pro/personal-045.jpg?v=pro-assets-20260526-1","./assets/personal-pro/personal-046.jpg?v=pro-assets-20260526-1","./assets/personal-pro/personal-047.jpg?v=pro-assets-20260526-1","./assets/personal-pro/personal-048.jpg?v=pro-assets-20260526-1"];
+const LOGO_PATH="./assets/greetings-pro-uz/logo.png";
+const PERSONAL_CARD_IMAGES=["./assets/personal-pro/personal-001.jpg","./assets/personal-pro/personal-002.jpg","./assets/personal-pro/personal-003.jpg","./assets/personal-pro/personal-004.jpg","./assets/personal-pro/personal-005.jpg","./assets/personal-pro/personal-006.jpg","./assets/personal-pro/personal-007.jpg","./assets/personal-pro/personal-008.jpg","./assets/personal-pro/personal-009.jpg","./assets/personal-pro/personal-010.jpg","./assets/personal-pro/personal-011.jpg","./assets/personal-pro/personal-012.jpg","./assets/personal-pro/personal-013.jpg","./assets/personal-pro/personal-014.jpg","./assets/personal-pro/personal-015.jpg","./assets/personal-pro/personal-016.jpg","./assets/personal-pro/personal-017.jpg","./assets/personal-pro/personal-018.jpg","./assets/personal-pro/personal-019.jpg","./assets/personal-pro/personal-020.jpg","./assets/personal-pro/personal-021.jpg","./assets/personal-pro/personal-022.jpg","./assets/personal-pro/personal-023.jpg","./assets/personal-pro/personal-024.jpg","./assets/personal-pro/personal-025.jpg","./assets/personal-pro/personal-026.jpg","./assets/personal-pro/personal-027.jpg","./assets/personal-pro/personal-028.jpg","./assets/personal-pro/personal-029.jpg","./assets/personal-pro/personal-030.jpg","./assets/personal-pro/personal-031.jpg","./assets/personal-pro/personal-032.jpg","./assets/personal-pro/personal-033.jpg","./assets/personal-pro/personal-034.jpg","./assets/personal-pro/personal-035.jpg","./assets/personal-pro/personal-036.jpg","./assets/personal-pro/personal-037.jpg","./assets/personal-pro/personal-038.jpg","./assets/personal-pro/personal-039.jpg","./assets/personal-pro/personal-040.jpg","./assets/personal-pro/personal-041.jpg","./assets/personal-pro/personal-042.jpg","./assets/personal-pro/personal-043.jpg","./assets/personal-pro/personal-044.jpg","./assets/personal-pro/personal-045.jpg","./assets/personal-pro/personal-046.jpg","./assets/personal-pro/personal-047.jpg","./assets/personal-pro/personal-048.jpg"];
 const greetings=[
   {
     "id": "ramadan-001",
@@ -213,7 +288,7 @@ const greetings=[
     "subtitle": "Muqaddas oy",
     "text": "Bu muborak oy imoningizni mustahkamlab, uyingizni baraka bilan to‘ldirsin va qalbingizni Allohga yaqinlashtirsin.",
     "arabic": "اللهم بلغنا رمضان وبارك لنا فيه",
-    "image": "./assets/greetings-pro-uz/Ramadan-001-pro.png?v=pro-assets-20260526-1"
+    "image": "./assets/greetings-pro-uz/Ramadan-001-pro.png"
   },
   {
     "id": "ramadan-002",
@@ -223,7 +298,7 @@ const greetings=[
     "subtitle": "Muqaddas oy",
     "text": "Bu muborak oy imoningizni mustahkamlab, uyingizni baraka bilan to‘ldirsin va qalbingizni Allohga yaqinlashtirsin.",
     "arabic": "اللهم بلغنا رمضان وبارك لنا فيه",
-    "image": "./assets/greetings-pro-uz/Ramadan-002-pro.png?v=pro-assets-20260526-1"
+    "image": "./assets/greetings-pro-uz/Ramadan-002-pro.png"
   },
   {
     "id": "ramadan-003",
@@ -233,7 +308,7 @@ const greetings=[
     "subtitle": "Muqaddas oy",
     "text": "Bu muborak oy imoningizni mustahkamlab, uyingizni baraka bilan to‘ldirsin va qalbingizni Allohga yaqinlashtirsin.",
     "arabic": "اللهم بلغنا رمضان وبارك لنا فيه",
-    "image": "./assets/greetings-pro-uz/Ramadan-003-pro.png?v=pro-assets-20260526-1"
+    "image": "./assets/greetings-pro-uz/Ramadan-003-pro.png"
   },
   {
     "id": "ramadan-004",
@@ -243,7 +318,7 @@ const greetings=[
     "subtitle": "Muqaddas oy",
     "text": "Bu muborak oy imoningizni mustahkamlab, uyingizni baraka bilan to‘ldirsin va qalbingizni Allohga yaqinlashtirsin.",
     "arabic": "اللهم بلغنا رمضان وبارك لنا فيه",
-    "image": "./assets/greetings-pro-uz/Ramadan-004-pro.png?v=pro-assets-20260526-1"
+    "image": "./assets/greetings-pro-uz/Ramadan-004-pro.png"
   },
   {
     "id": "ramadan-005",
@@ -253,7 +328,7 @@ const greetings=[
     "subtitle": "Muqaddas oy",
     "text": "Bu muborak oy imoningizni mustahkamlab, uyingizni baraka bilan to‘ldirsin va qalbingizni Allohga yaqinlashtirsin.",
     "arabic": "اللهم بلغنا رمضان وبارك لنا فيه",
-    "image": "./assets/greetings-pro-uz/Ramadan-005-pro.png?v=pro-assets-20260526-1"
+    "image": "./assets/greetings-pro-uz/Ramadan-005-pro.png"
   },
   {
     "id": "ramadan-006",
@@ -263,7 +338,7 @@ const greetings=[
     "subtitle": "Muqaddas oy",
     "text": "Bu muborak oy imoningizni mustahkamlab, uyingizni baraka bilan to‘ldirsin va qalbingizni Allohga yaqinlashtirsin.",
     "arabic": "اللهم بلغنا رمضان وبارك لنا فيه",
-    "image": "./assets/greetings-pro-uz/Ramadan-006-pro.png?v=pro-assets-20260526-1"
+    "image": "./assets/greetings-pro-uz/Ramadan-006-pro.png"
   },
   {
     "id": "ramadan-007",
@@ -273,7 +348,7 @@ const greetings=[
     "subtitle": "Muqaddas oy",
     "text": "Bu muborak oy imoningizni mustahkamlab, uyingizni baraka bilan to‘ldirsin va qalbingizni Allohga yaqinlashtirsin.",
     "arabic": "اللهم بلغنا رمضان وبارك لنا فيه",
-    "image": "./assets/greetings-pro-uz/Ramadan-007-pro.png?v=pro-assets-20260526-1"
+    "image": "./assets/greetings-pro-uz/Ramadan-007-pro.png"
   },
   {
     "id": "eid-fitr-001",
@@ -283,7 +358,7 @@ const greetings=[
     "subtitle": "Ramazon Hayiti",
     "text": "Alloh ro‘zalaringizni, duolaringizni va yaxshi amallaringizni qabul qilib, uyingizni quvonch, rahmat va baraka bilan to‘ldirsin.",
     "arabic": "تقبل الله منا ومنكم صالح الأعمال",
-    "image": "./assets/greetings-pro-uz/eid-fitr-001-pro.png?v=pro-assets-20260526-1"
+    "image": "./assets/greetings-pro-uz/eid-fitr-001-pro.png"
   },
   {
     "id": "eid-fitr-002",
@@ -293,7 +368,7 @@ const greetings=[
     "subtitle": "Ramazon Hayiti",
     "text": "Alloh ro‘zalaringizni, duolaringizni va yaxshi amallaringizni qabul qilib, uyingizni quvonch, rahmat va baraka bilan to‘ldirsin.",
     "arabic": "تقبل الله منا ومنكم صالح الأعمال",
-    "image": "./assets/greetings-pro-uz/eid-fitr-002-pro.png?v=pro-assets-20260526-1"
+    "image": "./assets/greetings-pro-uz/eid-fitr-002-pro.png"
   },
   {
     "id": "eid-fitr-003",
@@ -303,7 +378,7 @@ const greetings=[
     "subtitle": "Ramazon Hayiti",
     "text": "Alloh ro‘zalaringizni, duolaringizni va yaxshi amallaringizni qabul qilib, uyingizni quvonch, rahmat va baraka bilan to‘ldirsin.",
     "arabic": "تقبل الله منا ومنكم صالح الأعمال",
-    "image": "./assets/greetings-pro-uz/eid-fitr-003-pro.png?v=pro-assets-20260526-1"
+    "image": "./assets/greetings-pro-uz/eid-fitr-003-pro.png"
   },
   {
     "id": "eid-fitr-004",
@@ -313,7 +388,7 @@ const greetings=[
     "subtitle": "Ramazon Hayiti",
     "text": "Alloh ro‘zalaringizni, duolaringizni va yaxshi amallaringizni qabul qilib, uyingizni quvonch, rahmat va baraka bilan to‘ldirsin.",
     "arabic": "تقبل الله منا ومنكم صالح الأعمال",
-    "image": "./assets/greetings-pro-uz/eid-fitr-004-pro.png?v=pro-assets-20260526-1"
+    "image": "./assets/greetings-pro-uz/eid-fitr-004-pro.png"
   },
   {
     "id": "eid-fitr-005",
@@ -323,7 +398,7 @@ const greetings=[
     "subtitle": "Ramazon Hayiti",
     "text": "Alloh ro‘zalaringizni, duolaringizni va yaxshi amallaringizni qabul qilib, uyingizni quvonch, rahmat va baraka bilan to‘ldirsin.",
     "arabic": "تقبل الله منا ومنكم صالح الأعمال",
-    "image": "./assets/greetings-pro-uz/eid-fitr-005-pro.png?v=pro-assets-20260526-1"
+    "image": "./assets/greetings-pro-uz/eid-fitr-005-pro.png"
   },
   {
     "id": "eid-fitr-006",
@@ -333,7 +408,7 @@ const greetings=[
     "subtitle": "Ramazon Hayiti",
     "text": "Alloh ro‘zalaringizni, duolaringizni va yaxshi amallaringizni qabul qilib, uyingizni quvonch, rahmat va baraka bilan to‘ldirsin.",
     "arabic": "تقبل الله منا ومنكم صالح الأعمال",
-    "image": "./assets/greetings-pro-uz/eid-fitr-006-pro.png?v=pro-assets-20260526-1"
+    "image": "./assets/greetings-pro-uz/eid-fitr-006-pro.png"
   },
   {
     "id": "eid-fitr-007",
@@ -343,7 +418,7 @@ const greetings=[
     "subtitle": "Ramazon Hayiti",
     "text": "Alloh ro‘zalaringizni, duolaringizni va yaxshi amallaringizni qabul qilib, uyingizni quvonch, rahmat va baraka bilan to‘ldirsin.",
     "arabic": "تقبل الله منا ومنكم صالح الأعمال",
-    "image": "./assets/greetings-pro-uz/eid-fitr-007-pro.png?v=pro-assets-20260526-1"
+    "image": "./assets/greetings-pro-uz/eid-fitr-007-pro.png"
   },
   {
     "id": "eid-adha-001",
@@ -353,7 +428,7 @@ const greetings=[
     "subtitle": "Qurbon Hayiti",
     "text": "Bu muqaddas bayram oilangizga tinchlik, farovonlik, mehr-shafqat va barcha ezgu niyatlarning qabul bo‘lishini olib kelsin.",
     "arabic": "تقبل الله منا ومنكم وجعلنا من الصالحين",
-    "image": "./assets/greetings-pro-uz/eid-adha-001-pro.png?v=pro-assets-20260526-1"
+    "image": "./assets/greetings-pro-uz/eid-adha-001-pro.png"
   },
   {
     "id": "eid-adha-002",
@@ -363,7 +438,7 @@ const greetings=[
     "subtitle": "Qurbon Hayiti",
     "text": "Bu muqaddas bayram oilangizga tinchlik, farovonlik, mehr-shafqat va barcha ezgu niyatlarning qabul bo‘lishini olib kelsin.",
     "arabic": "تقبل الله منا ومنكم وجعلنا من الصالحين",
-    "image": "./assets/greetings-pro-uz/eid-adha-002-pro.png?v=pro-assets-20260526-1"
+    "image": "./assets/greetings-pro-uz/eid-adha-002-pro.png"
   },
   {
     "id": "eid-adha-003",
@@ -373,7 +448,7 @@ const greetings=[
     "subtitle": "Qurbon Hayiti",
     "text": "Bu muqaddas bayram oilangizga tinchlik, farovonlik, mehr-shafqat va barcha ezgu niyatlarning qabul bo‘lishini olib kelsin.",
     "arabic": "تقبل الله منا ومنكم وجعلنا من الصالحين",
-    "image": "./assets/greetings-pro-uz/eid-adha-003-pro.png?v=pro-assets-20260526-1"
+    "image": "./assets/greetings-pro-uz/eid-adha-003-pro.png"
   },
   {
     "id": "eid-adha-004",
@@ -383,7 +458,7 @@ const greetings=[
     "subtitle": "Qurbon Hayiti",
     "text": "Bu muqaddas bayram oilangizga tinchlik, farovonlik, mehr-shafqat va barcha ezgu niyatlarning qabul bo‘lishini olib kelsin.",
     "arabic": "تقبل الله منا ومنكم وجعلنا من الصالحين",
-    "image": "./assets/greetings-pro-uz/eid-adha-004-pro.png?v=pro-assets-20260526-1"
+    "image": "./assets/greetings-pro-uz/eid-adha-004-pro.png"
   },
   {
     "id": "eid-adha-005",
@@ -393,7 +468,7 @@ const greetings=[
     "subtitle": "Qurbon Hayiti",
     "text": "Bu muqaddas bayram oilangizga tinchlik, farovonlik, mehr-shafqat va barcha ezgu niyatlarning qabul bo‘lishini olib kelsin.",
     "arabic": "تقبل الله منا ومنكم وجعلنا من الصالحين",
-    "image": "./assets/greetings-pro-uz/eid-adha-005-pro.png?v=pro-assets-20260526-1"
+    "image": "./assets/greetings-pro-uz/eid-adha-005-pro.png"
   },
   {
     "id": "eid-adha-006",
@@ -403,7 +478,7 @@ const greetings=[
     "subtitle": "Qurbon Hayiti",
     "text": "Bu muqaddas bayram oilangizga tinchlik, farovonlik, mehr-shafqat va barcha ezgu niyatlarning qabul bo‘lishini olib kelsin.",
     "arabic": "تقبل الله منا ومنكم وجعلنا من الصالحين",
-    "image": "./assets/greetings-pro-uz/eid-adha-006-pro.png?v=pro-assets-20260526-1"
+    "image": "./assets/greetings-pro-uz/eid-adha-006-pro.png"
   },
   {
     "id": "eid-adha-007",
@@ -413,7 +488,7 @@ const greetings=[
     "subtitle": "Qurbon Hayiti",
     "text": "Bu muqaddas bayram oilangizga tinchlik, farovonlik, mehr-shafqat va barcha ezgu niyatlarning qabul bo‘lishini olib kelsin.",
     "arabic": "تقبل الله منا ومنكم وجعلنا من الصالحين",
-    "image": "./assets/greetings-pro-uz/eid-adha-007-pro.png?v=pro-assets-20260526-1"
+    "image": "./assets/greetings-pro-uz/eid-adha-007-pro.png"
   },
   {
     "id": "jumuah-001",
@@ -423,7 +498,7 @@ const greetings=[
     "subtitle": "Barakali juma",
     "text": "Bu juma uyingizga tinchlik, qalbingizga xotirjamlik, ishlaringizga baraka olib kelsin va duolaringiz Alloh tomonidan qabul qilinsin.",
     "arabic": "اللهم اجعل هذا اليوم نوراً لقلوبنا وبركةً في أعمالنا",
-    "image": "./assets/greetings-pro-uz/juma-001-pro.png?v=pro-assets-20260526-1"
+    "image": "./assets/greetings-pro-uz/juma-001-pro.png"
   },
   {
     "id": "jumuah-002",
@@ -433,7 +508,7 @@ const greetings=[
     "subtitle": "Barakali juma",
     "text": "Bu juma uyingizga tinchlik, qalbingizga xotirjamlik, ishlaringizga baraka olib kelsin va duolaringiz Alloh tomonidan qabul qilinsin.",
     "arabic": "اللهم اجعل هذا اليوم نوراً لقلوبنا وبركةً في أعمالنا",
-    "image": "./assets/greetings-pro-uz/juma-002-pro.png?v=pro-assets-20260526-1"
+    "image": "./assets/greetings-pro-uz/juma-002-pro.png"
   },
   {
     "id": "jumuah-003",
@@ -443,7 +518,7 @@ const greetings=[
     "subtitle": "Barakali juma",
     "text": "Bu juma uyingizga tinchlik, qalbingizga xotirjamlik, ishlaringizga baraka olib kelsin va duolaringiz Alloh tomonidan qabul qilinsin.",
     "arabic": "اللهم اجعل هذا اليوم نوراً لقلوبنا وبركةً في أعمالنا",
-    "image": "./assets/greetings-pro-uz/juma-003-pro.png?v=pro-assets-20260526-1"
+    "image": "./assets/greetings-pro-uz/juma-003-pro.png"
   },
   {
     "id": "jumuah-004",
@@ -453,7 +528,7 @@ const greetings=[
     "subtitle": "Barakali juma",
     "text": "Bu juma uyingizga tinchlik, qalbingizga xotirjamlik, ishlaringizga baraka olib kelsin va duolaringiz Alloh tomonidan qabul qilinsin.",
     "arabic": "اللهم اجعل هذا اليوم نوراً لقلوبنا وبركةً في أعمالنا",
-    "image": "./assets/greetings-pro-uz/juma-004-pro.png?v=pro-assets-20260526-1"
+    "image": "./assets/greetings-pro-uz/juma-004-pro.png"
   },
   {
     "id": "jumuah-005",
@@ -463,7 +538,7 @@ const greetings=[
     "subtitle": "Barakali juma",
     "text": "Bu juma uyingizga tinchlik, qalbingizga xotirjamlik, ishlaringizga baraka olib kelsin va duolaringiz Alloh tomonidan qabul qilinsin.",
     "arabic": "اللهم اجعل هذا اليوم نوراً لقلوبنا وبركةً في أعمالنا",
-    "image": "./assets/greetings-pro-uz/juma-005-pro.png?v=pro-assets-20260526-1"
+    "image": "./assets/greetings-pro-uz/juma-005-pro.png"
   },
   {
     "id": "jumuah-006",
@@ -473,7 +548,7 @@ const greetings=[
     "subtitle": "Barakali juma",
     "text": "Bu juma uyingizga tinchlik, qalbingizga xotirjamlik, ishlaringizga baraka olib kelsin va duolaringiz Alloh tomonidan qabul qilinsin.",
     "arabic": "اللهم اجعل هذا اليوم نوراً لقلوبنا وبركةً في أعمالنا",
-    "image": "./assets/greetings-pro-uz/juma-006-pro.png?v=pro-assets-20260526-1"
+    "image": "./assets/greetings-pro-uz/juma-006-pro.png"
   },
   {
     "id": "jumuah-007",
@@ -483,7 +558,7 @@ const greetings=[
     "subtitle": "Barakali juma",
     "text": "Bu juma uyingizga tinchlik, qalbingizga xotirjamlik, ishlaringizga baraka olib kelsin va duolaringiz Alloh tomonidan qabul qilinsin.",
     "arabic": "اللهم اجعل هذا اليوم نوراً لقلوبنا وبركةً في أعمالنا",
-    "image": "./assets/greetings-pro-uz/juma-007-pro.png?v=pro-assets-20260526-1"
+    "image": "./assets/greetings-pro-uz/juma-007-pro.png"
   },
   {
     "id": "jumuah-008",
@@ -493,7 +568,7 @@ const greetings=[
     "subtitle": "Barakali juma",
     "text": "Bu juma uyingizga tinchlik, qalbingizga xotirjamlik, ishlaringizga baraka olib kelsin va duolaringiz Alloh tomonidan qabul qilinsin.",
     "arabic": "اللهم اجعل هذا اليوم نوراً لقلوبنا وبركةً في أعمالنا",
-    "image": "./assets/greetings-pro-uz/juma-008-pro.png?v=pro-assets-20260526-1"
+    "image": "./assets/greetings-pro-uz/juma-008-pro.png"
   },
   {
     "id": "jumuah-009",
@@ -503,7 +578,7 @@ const greetings=[
     "subtitle": "Barakali juma",
     "text": "Bu juma uyingizga tinchlik, qalbingizga xotirjamlik, ishlaringizga baraka olib kelsin va duolaringiz Alloh tomonidan qabul qilinsin.",
     "arabic": "اللهم اجعل هذا اليوم نوراً لقلوبنا وبركةً في أعمالنا",
-    "image": "./assets/greetings-pro-uz/juma-009-pro.png?v=pro-assets-20260526-1"
+    "image": "./assets/greetings-pro-uz/juma-009-pro.png"
   },
   {
     "id": "jumuah-010",
@@ -513,7 +588,7 @@ const greetings=[
     "subtitle": "Barakali juma",
     "text": "Bu juma uyingizga tinchlik, qalbingizga xotirjamlik, ishlaringizga baraka olib kelsin va duolaringiz Alloh tomonidan qabul qilinsin.",
     "arabic": "اللهم اجعل هذا اليوم نوراً لقلوبنا وبركةً في أعمالنا",
-    "image": "./assets/greetings-pro-uz/juma-010-pro.png?v=pro-assets-20260526-1"
+    "image": "./assets/greetings-pro-uz/juma-010-pro.png"
   },
   {
     "id": "jumuah-011",
@@ -523,7 +598,7 @@ const greetings=[
     "subtitle": "Barakali juma",
     "text": "Bu juma uyingizga tinchlik, qalbingizga xotirjamlik, ishlaringizga baraka olib kelsin va duolaringiz Alloh tomonidan qabul qilinsin.",
     "arabic": "اللهم اجعل هذا اليوم نوراً لقلوبنا وبركةً في أعمالنا",
-    "image": "./assets/greetings-pro-uz/juma-011-pro.png?v=pro-assets-20260526-1"
+    "image": "./assets/greetings-pro-uz/juma-011-pro.png"
   },
   {
     "id": "daily-001",
@@ -533,7 +608,7 @@ const greetings=[
     "subtitle": "Har kungi tilak",
     "text": "Alloh yo‘lingizni yoritsin, qalbingizni poklasin, imoningizni mustahkamlasin va bu kunni xotirjamlik hamda baraka bilan to‘ldirsin.",
     "arabic": "اللهم نور قلبي ويسر أمري وبارك لي في يومي",
-    "image": "./assets/greetings-pro-uz/daily-001-pro.png?v=pro-assets-20260526-1"
+    "image": "./assets/greetings-pro-uz/daily-001-pro.png"
   },
   {
     "id": "daily-002",
@@ -543,7 +618,7 @@ const greetings=[
     "subtitle": "Har kungi tilak",
     "text": "Alloh yo‘lingizni yoritsin, qalbingizni poklasin, imoningizni mustahkamlasin va bu kunni xotirjamlik hamda baraka bilan to‘ldirsin.",
     "arabic": "اللهم نور قلبي ويسر أمري وبارك لي في يومي",
-    "image": "./assets/greetings-pro-uz/daily-002-pro.png?v=pro-assets-20260526-1"
+    "image": "./assets/greetings-pro-uz/daily-002-pro.png"
   },
   {
     "id": "daily-003",
@@ -553,7 +628,7 @@ const greetings=[
     "subtitle": "Har kungi tilak",
     "text": "Alloh yo‘lingizni yoritsin, qalbingizni poklasin, imoningizni mustahkamlasin va bu kunni xotirjamlik hamda baraka bilan to‘ldirsin.",
     "arabic": "اللهم نور قلبي ويسر أمري وبارك لي في يومي",
-    "image": "./assets/greetings-pro-uz/daily-003-pro.png?v=pro-assets-20260526-1"
+    "image": "./assets/greetings-pro-uz/daily-003-pro.png"
   },
   {
     "id": "daily-004",
@@ -563,7 +638,7 @@ const greetings=[
     "subtitle": "Har kungi tilak",
     "text": "Alloh yo‘lingizni yoritsin, qalbingizni poklasin, imoningizni mustahkamlasin va bu kunni xotirjamlik hamda baraka bilan to‘ldirsin.",
     "arabic": "اللهم نور قلبي ويسر أمري وبارك لي في يومي",
-    "image": "./assets/greetings-pro-uz/daily-004-pro.png?v=pro-assets-20260526-1"
+    "image": "./assets/greetings-pro-uz/daily-004-pro.png"
   },
   {
     "id": "daily-005",
@@ -573,7 +648,7 @@ const greetings=[
     "subtitle": "Har kungi tilak",
     "text": "Alloh yo‘lingizni yoritsin, qalbingizni poklasin, imoningizni mustahkamlasin va bu kunni xotirjamlik hamda baraka bilan to‘ldirsin.",
     "arabic": "اللهم نور قلبي ويسر أمري وبارك لي في يومي",
-    "image": "./assets/greetings-pro-uz/daily-005-pro.png?v=pro-assets-20260526-1"
+    "image": "./assets/greetings-pro-uz/daily-005-pro.png"
   },
   {
     "id": "daily-006",
@@ -583,7 +658,7 @@ const greetings=[
     "subtitle": "Har kungi tilak",
     "text": "Alloh yo‘lingizni yoritsin, qalbingizni poklasin, imoningizni mustahkamlasin va bu kunni xotirjamlik hamda baraka bilan to‘ldirsin.",
     "arabic": "اللهم نور قلبي ويسر أمري وبارك لي في يومي",
-    "image": "./assets/greetings-pro-uz/daily-006-pro.png?v=pro-assets-20260526-1"
+    "image": "./assets/greetings-pro-uz/daily-006-pro.png"
   },
   {
     "id": "daily-007",
@@ -593,7 +668,7 @@ const greetings=[
     "subtitle": "Har kungi tilak",
     "text": "Alloh yo‘lingizni yoritsin, qalbingizni poklasin, imoningizni mustahkamlasin va bu kunni xotirjamlik hamda baraka bilan to‘ldirsin.",
     "arabic": "اللهم نور قلبي ويسر أمري وبارك لي في يومي",
-    "image": "./assets/greetings-pro-uz/daily-007-pro.png?v=pro-assets-20260526-1"
+    "image": "./assets/greetings-pro-uz/daily-007-pro.png"
   },
   {
     "id": "daily-008",
@@ -603,7 +678,7 @@ const greetings=[
     "subtitle": "Har kungi tilak",
     "text": "Alloh yo‘lingizni yoritsin, qalbingizni poklasin, imoningizni mustahkamlasin va bu kunni xotirjamlik hamda baraka bilan to‘ldirsin.",
     "arabic": "اللهم نور قلبي ويسر أمري وبارك لي في يومي",
-    "image": "./assets/greetings-pro-uz/daily-008-pro.png?v=pro-assets-20260526-1"
+    "image": "./assets/greetings-pro-uz/daily-008-pro.png"
   },
   {
     "id": "daily-009",
@@ -613,7 +688,7 @@ const greetings=[
     "subtitle": "Har kungi tilak",
     "text": "Alloh yo‘lingizni yoritsin, qalbingizni poklasin, imoningizni mustahkamlasin va bu kunni xotirjamlik hamda baraka bilan to‘ldirsin.",
     "arabic": "اللهم نور قلبي ويسر أمري وبارك لي في يومي",
-    "image": "./assets/greetings-pro-uz/daily-009-pro.png?v=pro-assets-20260526-1"
+    "image": "./assets/greetings-pro-uz/daily-009-pro.png"
   },
   {
     "id": "daily-010",
@@ -623,7 +698,7 @@ const greetings=[
     "subtitle": "Har kungi tilak",
     "text": "Alloh yo‘lingizni yoritsin, qalbingizni poklasin, imoningizni mustahkamlasin va bu kunni xotirjamlik hamda baraka bilan to‘ldirsin.",
     "arabic": "اللهم نور قلبي ويسر أمري وبارك لي في يومي",
-    "image": "./assets/greetings-pro-uz/daily-010-pro.png?v=pro-assets-20260526-1"
+    "image": "./assets/greetings-pro-uz/daily-010-pro.png"
   },
   {
     "id": "daily-011",
@@ -633,7 +708,7 @@ const greetings=[
     "subtitle": "Har kungi tilak",
     "text": "Alloh yo‘lingizni yoritsin, qalbingizni poklasin, imoningizni mustahkamlasin va bu kunni xotirjamlik hamda baraka bilan to‘ldirsin.",
     "arabic": "اللهم نور قلبي ويسر أمري وبارك لي في يومي",
-    "image": "./assets/greetings-pro-uz/daily-011-pro.png?v=pro-assets-20260526-1"
+    "image": "./assets/greetings-pro-uz/daily-011-pro.png"
   }
 ];
 
@@ -962,8 +1037,101 @@ function copyText(text){if(navigator.clipboard&&navigator.clipboard.writeText){n
 function fallbackCopy(text){const area=document.createElement("textarea");area.value=text;document.body.appendChild(area);area.select();document.execCommand("copy");area.remove();showToast("Matn nusxalandi");}
 async function downloadCurrent(){const canvas=await drawImageCardToCanvas(currentGreeting);const a=document.createElement("a");a.href=canvas.toDataURL("image/png");a.download="barakaway-greeting.png";document.body.appendChild(a);a.click();a.remove();}
 function showToast(message){const toast=document.getElementById("toast");toast.textContent=message;toast.classList.add("show");setTimeout(function(){toast.classList.remove("show");},1800);}
-document.addEventListener("DOMContentLoaded",function(){loadName();updateToday();renderCards("jumuah");document.getElementById("generatorName").addEventListener("input",saveName);document.querySelectorAll(".tab").forEach(function(btn){btn.addEventListener("click",function(){document.querySelectorAll(".tab").forEach(function(x){x.classList.remove("active");});btn.classList.add("active");renderCards(btn.getAttribute("data-filter"));});});document.getElementById("modal").addEventListener("click",function(e){if(e.target.id==="modal")closeModal();});});
+
+
+let zoomState={active:false,img:null,stage:null,scale:1.85,x:0,y:0,startX:0,startY:0,baseX:0,baseY:0,dragging:false};
+function clampZoom(){
+  const img=zoomState.img;
+  const stage=zoomState.stage;
+  if(!img||!stage)return;
+  const rect=stage.getBoundingClientRect();
+  const naturalW=img.offsetWidth*zoomState.scale;
+  const naturalH=img.offsetHeight*zoomState.scale;
+  const maxX=Math.max(30,(naturalW-rect.width)/2+90);
+  const maxY=Math.max(30,(naturalH-rect.height)/2+90);
+  zoomState.x=Math.max(-maxX,Math.min(maxX,zoomState.x));
+  zoomState.y=Math.max(-maxY,Math.min(maxY,zoomState.y));
+}
+function applyZoomTransform(){
+  clampZoom();
+  if(zoomState.img){
+    zoomState.img.style.transform=`translate(calc(-50% + ${zoomState.x}px), calc(-50% + ${zoomState.y}px)) scale(${zoomState.scale})`;
+  }
+}
+function openZoomViewer(src){
+  const viewer=document.getElementById("zoomViewer");
+  const img=document.getElementById("zoomImage");
+  const stage=document.getElementById("zoomStage");
+  if(!viewer||!img||!stage)return;
+  zoomState.active=true;
+  zoomState.img=img;
+  zoomState.stage=stage;
+  zoomState.scale=window.matchMedia("(max-width:560px)").matches?2.15:1.85;
+  zoomState.x=0;
+  zoomState.y=0;
+  img.src=src;
+  viewer.classList.add("active");
+  viewer.setAttribute("aria-hidden","false");
+  document.body.style.overflow="hidden";
+  requestAnimationFrame(applyZoomTransform);
+}
+function closeZoomViewer(){
+  const viewer=document.getElementById("zoomViewer");
+  if(viewer){
+    viewer.classList.remove("active");
+    viewer.setAttribute("aria-hidden","true");
+  }
+  document.body.style.overflow="";
+  zoomState.active=false;
+  zoomState.dragging=false;
+}
+function zoomPointerDown(e){
+  if(!zoomState.active)return;
+  zoomState.dragging=true;
+  zoomState.startX=e.clientX;
+  zoomState.startY=e.clientY;
+  zoomState.baseX=zoomState.x;
+  zoomState.baseY=zoomState.y;
+  if(zoomState.stage&&zoomState.stage.setPointerCapture){
+    try{zoomState.stage.setPointerCapture(e.pointerId);}catch(_){}
+  }
+}
+function zoomPointerMove(e){
+  if(!zoomState.active||!zoomState.dragging)return;
+  zoomState.x=zoomState.baseX+(e.clientX-zoomState.startX);
+  zoomState.y=zoomState.baseY+(e.clientY-zoomState.startY);
+  applyZoomTransform();
+}
+function zoomPointerUp(){zoomState.dragging=false;}
+function bindZoomViewer(){
+  const stage=document.getElementById("zoomStage");
+  const viewer=document.getElementById("zoomViewer");
+  if(!stage||!viewer||stage.dataset.bound==="1")return;
+  stage.dataset.bound="1";
+  stage.addEventListener("pointerdown",zoomPointerDown);
+  stage.addEventListener("pointermove",zoomPointerMove);
+  stage.addEventListener("pointerup",zoomPointerUp);
+  stage.addEventListener("pointercancel",zoomPointerUp);
+  viewer.addEventListener("click",function(e){if(e.target===viewer)closeZoomViewer();});
+  window.addEventListener("keydown",function(e){if(e.key==="Escape")closeZoomViewer();});
+}
+function zoomCard(id){
+  const g=findGreeting(id);
+  if(g&&g.image){openZoomViewer(g.image);}
+}
+
+document.addEventListener("DOMContentLoaded",function(){loadName();updateToday();renderCards("jumuah");bindZoomViewer();document.getElementById("generatorName").addEventListener("input",saveName);document.querySelectorAll(".tab").forEach(function(btn){btn.addEventListener("click",function(){document.querySelectorAll(".tab").forEach(function(x){x.classList.remove("active");});btn.classList.add("active");renderCards(btn.getAttribute("data-filter"));});});document.getElementById("modal").addEventListener("click",function(e){if(e.target.id==="modal")closeModal();});});
 </script>
 <script src="/bottom-nav.js"></script>
+
+
+<div class="zoom-viewer" id="zoomViewer" aria-hidden="true">
+  <button class="zoom-close" type="button" onclick="closeZoomViewer()" aria-label="Close">×</button>
+  <div class="zoom-stage" id="zoomStage">
+    <img id="zoomImage" alt="">
+  </div>
+  <div class="zoom-hint">Двигайте изображение пальцем</div>
+</div>
+
 </body>
 </html>
