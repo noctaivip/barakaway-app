@@ -183,13 +183,14 @@ border-radius:20px;
 }
 
 
+
 /* Ready-card fullscreen zoom */
 .zoom-viewer{
   position:fixed;
   inset:0;
-  z-index:9999;
+  z-index:99999;
   display:none;
-  background:rgba(0,0,0,.92);
+  background:rgba(0,0,0,.94);
   backdrop-filter:blur(10px);
   -webkit-backdrop-filter:blur(10px);
   touch-action:none;
@@ -222,12 +223,12 @@ border-radius:20px;
   position:fixed;
   top:calc(env(safe-area-inset-top,0px) + 14px);
   right:calc(env(safe-area-inset-right,0px) + 14px);
-  z-index:10001;
+  z-index:100001;
   width:46px;
   height:46px;
   border-radius:999px;
   border:1px solid rgba(255,255,255,.22);
-  background:rgba(12,16,20,.82);
+  background:rgba(12,16,20,.84);
   color:#fff;
   font-size:30px;
   line-height:1;
@@ -242,7 +243,7 @@ border-radius:20px;
   left:50%;
   bottom:calc(env(safe-area-inset-bottom,0px) + 18px);
   transform:translateX(-50%);
-  z-index:10000;
+  z-index:100000;
   color:rgba(255,255,255,.78);
   background:rgba(12,16,20,.62);
   border:1px solid rgba(255,255,255,.12);
@@ -874,7 +875,7 @@ function isFriday(){return new Date().getDay()===5;}
 function orderedGreetings(){if(!isFriday())return greetings;return greetings.slice().sort(function(a,b){if(a.category==="jumuah"&&b.category!=="jumuah")return -1;if(a.category!=="jumuah"&&b.category==="jumuah")return 1;return 0;});}
 function getTodayGreeting(){const list=orderedGreetings();const dayIndex=Math.floor(Date.now()/86400000);return list[dayIndex%list.length]||greetings[0];}
 function updateToday(){return;}
-function renderCards(filter){const root=document.getElementById("cards");const list=orderedGreetings().filter(function(item){return filter==="all"||item.category===filter;});root.innerHTML=list.map(function(item){return `<article class="greeting-card" data-category="${item.category}"><div class="card-art"><img class="card-image" src="${item.image}" alt="${item.title}" loading="lazy"><div class="card-image-overlay"></div><div class="card-brand-badge"><img src="${LOGO_PATH}" alt="BarakaWay"></div><div class="card-category-badge">${item.label}</div><div class="card-site-mark">barakaway.app</div></div><div class="card-body"><h3 class="card-title">${item.title}</h3></div><div class="card-actions"><button class="action-btn" type="button" onclick="openCard('${item.id}')">বড় করুন</button><button class="action-btn" type="button" onclick="copyCard('${item.id}')">কপি করুন</button><button class="action-btn primary" type="button" onclick="shareCard('${item.id}')">শেয়ার করুন</button></div></article>`;}).join("");}
+function renderCards(filter){const root=document.getElementById("cards");const list=orderedGreetings().filter(function(item){return filter==="all"||item.category===filter;});root.innerHTML=list.map(function(item){return `<article class="greeting-card" data-category="${item.category}"><div class="card-art"><img class="card-image" src="${item.image}" alt="${item.title}" loading="lazy"><div class="card-image-overlay"></div><div class="card-brand-badge"><img src="${LOGO_PATH}" alt="BarakaWay"></div><div class="card-category-badge">${item.label}</div><div class="card-site-mark">barakaway.app</div></div><div class="card-body"><h3 class="card-title">${item.title}</h3></div><div class="card-actions"><button class="action-btn" type="button" onclick="zoomCard('${item.id}')">বড় করুন</button><button class="action-btn" type="button" onclick="copyCard('${item.id}')">কপি করুন</button><button class="action-btn primary" type="button" onclick="shareCard('${item.id}')">শেয়ার করুন</button></div></article>`;}).join("");}
 function findGreeting(id){return greetings.find(function(item){return item.id===id;})||greetings[0];}
 function generatePersonal(){saveName();const displayName=(document.getElementById("generatorName").value||"").trim();const cat=document.getElementById("generatorCategory").value;const tpl=personalizedTemplates[cat]||personalizedTemplates.jumuah;currentGreeting={id:"personal",category:cat,label:tpl.label,title:tpl.title,headline:selectPersonalHeadline(cat),text:selectPersonalText(cat,displayName),image:getNextPersonalImage(),personalName:displayName};openModal(currentGreeting);}
 function regeneratePersonal(){
@@ -1087,6 +1088,7 @@ function fallbackCopy(text){const area=document.createElement("textarea");area.v
 async function downloadCurrent(){const canvas=await drawImageCardToCanvas(currentGreeting);const a=document.createElement("a");a.href=canvas.toDataURL("image/png");a.download="barakaway-greeting.png";document.body.appendChild(a);a.click();a.remove();}
 function showToast(message){const toast=document.getElementById("toast");toast.textContent=message;toast.classList.add("show");setTimeout(function(){toast.classList.remove("show");},1800);}
 
+
 let zoomState={active:false,img:null,stage:null,scale:1.85,x:0,y:0,startX:0,startY:0,baseX:0,baseY:0,dragging:false};
 function clampZoom(){
   const img=zoomState.img;
@@ -1095,8 +1097,8 @@ function clampZoom(){
   const rect=stage.getBoundingClientRect();
   const naturalW=img.offsetWidth*zoomState.scale;
   const naturalH=img.offsetHeight*zoomState.scale;
-  const maxX=Math.max(30,(naturalW-rect.width)/2+80);
-  const maxY=Math.max(30,(naturalH-rect.height)/2+80);
+  const maxX=Math.max(30,(naturalW-rect.width)/2+90);
+  const maxY=Math.max(30,(naturalH-rect.height)/2+90);
   zoomState.x=Math.max(-maxX,Math.min(maxX,zoomState.x));
   zoomState.y=Math.max(-maxY,Math.min(maxY,zoomState.y));
 }
@@ -1150,9 +1152,7 @@ function zoomPointerMove(e){
   zoomState.y=zoomState.baseY+(e.clientY-zoomState.startY);
   applyZoomTransform();
 }
-function zoomPointerUp(){
-  zoomState.dragging=false;
-}
+function zoomPointerUp(){zoomState.dragging=false;}
 function bindZoomViewer(){
   const stage=document.getElementById("zoomStage");
   const viewer=document.getElementById("zoomViewer");
@@ -1165,12 +1165,15 @@ function bindZoomViewer(){
   viewer.addEventListener("click",function(e){if(e.target===viewer)closeZoomViewer();});
   window.addEventListener("keydown",function(e){if(e.key==="Escape")closeZoomViewer();});
 }
+function zoomCard(id){
+  const g=findGreeting(id);
+  if(g&&g.image){openZoomViewer(g.image);}
+}
 
-function zoomCard(id){const g=findGreeting(id);if(g&&g.image){openZoomViewer(g.image);}}
-
-document.addEventListener("DOMContentLoaded",function(){loadName();updateToday();renderCards("jumuah");document.getElementById("generatorName").addEventListener("input",saveName);document.querySelectorAll(".tab").forEach(function(btn){btn.addEventListener("click",function(){document.querySelectorAll(".tab").forEach(function(x){x.classList.remove("active");});btn.classList.add("active");renderCards(btn.getAttribute("data-filter"));});});document.getElementById("modal").addEventListener("click",function(e){if(e.target.id==="modal")closeModal();});});
+document.addEventListener("DOMContentLoaded",function(){loadName();updateToday();renderCards("jumuah");bindZoomViewer();document.getElementById("generatorName").addEventListener("input",saveName);document.querySelectorAll(".tab").forEach(function(btn){btn.addEventListener("click",function(){document.querySelectorAll(".tab").forEach(function(x){x.classList.remove("active");});btn.classList.add("active");renderCards(btn.getAttribute("data-filter"));});});document.getElementById("modal").addEventListener("click",function(e){if(e.target.id==="modal")closeModal();});});
 </script>
 <script src="/bottom-nav.js"></script>
+
 
 <div class="zoom-viewer" id="zoomViewer" aria-hidden="true">
   <button class="zoom-close" type="button" onclick="closeZoomViewer()" aria-label="Close">×</button>
