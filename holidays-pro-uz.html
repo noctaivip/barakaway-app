@@ -121,7 +121,7 @@ border-radius:20px;
 .cards{grid-template-columns:repeat(auto-fit,minmax(320px,1fr))!important;align-items:start!important;}
 
 
-/* Holidays Pro: safe premium layer */
+/* Holidays Pro: safe layer */
 .hero h1{
   background:linear-gradient(135deg,#fff8dc,#f3d992 45%,#d7b56d);
   -webkit-background-clip:text;
@@ -142,18 +142,59 @@ border-radius:20px;
 }
 .card-image{box-shadow:0 14px 38px rgba(0,0,0,.32)}
 
+
+/* Holidays Pro title luxury finish */
+.hero h1{
+  position:relative;
+  display:inline-block;
+  padding:4px 18px 8px;
+  background:linear-gradient(92deg,#fff9df 0%,#f9e7a8 22%,#d7a945 48%,#fff4c2 70%,#b8872f 100%)!important;
+  -webkit-background-clip:text!important;
+  background-clip:text!important;
+  color:transparent!important;
+  text-shadow:0 0 18px rgba(243,217,146,.26),0 9px 32px rgba(0,0,0,.38)!important;
+}
+.hero h1:after{
+  content:"";
+  position:absolute;
+  left:18px;
+  right:18px;
+  bottom:0;
+  height:2px;
+  border-radius:999px;
+  background:linear-gradient(90deg,transparent,#f3d992,#b8872f,#f3d992,transparent);
+  box-shadow:0 0 18px rgba(243,217,146,.42);
+}
+
+
+
+/* PRO single diamond color */
+.hero h1 .pro-word{
+  background:none!important;
+  -webkit-background-clip:initial!important;
+  background-clip:initial!important;
+  color:#dff7ff!important;
+  text-shadow:
+    0 0 8px rgba(223,247,255,.55),
+    0 0 18px rgba(118,219,255,.34),
+    0 8px 24px rgba(0,0,0,.45)!important;
+  position:relative;
+  display:inline-block;
+  padding-left:2px;
+}
+
 </style>
 <script src="/theme-init.js"></script>
 <link rel="stylesheet" href="/theme.css">
 <link rel="stylesheet" href="/theme-universal.css">
 </head>
 <body>
-<div class="ramadan-wrapper"><div class="ramadan-bar"><div class="ramadan-text">Holidays Pro • Premium tabriklar • BarakaWay</div></div></div>
+<div class="ramadan-wrapper"><div class="ramadan-bar"><div class="ramadan-text">Holidays Pro • Pro tabriklar • BarakaWay</div></div></div>
 <main class="container">
-<section class="hero"><div class="hero-inner"><div class="logo"><img src="./assets/greetings-pro-uz/logo.png" alt="BarakaWay"></div><h1>Holidays Pro</h1></div></section>
-<section class="generator"><h2>Premium shaxsiy tabrik</h2><div class="generator-grid"><input id="generatorName" type="text" placeholder="Qabul qiluvchi ismi"><select id="generatorCategory"><option value="jumuah">Juma</option><option value="ramadan">Ramazon</option><option value="eid-fitr">Ramazon Hayiti</option><option value="eid-adha">Qurbon Hayiti</option><option value="daily">Har kuni</option></select><button class="mini-btn" type="button" onclick="generatePersonal()">Yaratish</button></div></section>
+<section class="hero"><div class="hero-inner"><div class="logo"><img src="./assets/greetings-pro-uz/logo.png" alt="BarakaWay"></div><h1>Holidays <span class="pro-word">Pro</span></h1></div></section>
+<section class="generator"><h2>Shaxsiy tabrik</h2><div class="generator-grid"><input id="generatorName" type="text" placeholder="Qabul qiluvchi ismi"><select id="generatorCategory"><option value="jumuah">Juma</option><option value="ramadan">Ramazon</option><option value="eid-fitr">Ramazon Hayiti</option><option value="eid-adha">Qurbon Hayiti</option><option value="daily">Har kuni</option></select><button class="mini-btn" type="button" onclick="generatePersonal()">Yaratish</button></div></section>
 <nav class="tabs" aria-label="Tabrik kategoriyalari"><button class="tab active" type="button" data-filter="jumuah">Juma</button><button class="tab" type="button" data-filter="all">Barchasi</button><button class="tab" type="button" data-filter="ramadan">Ramazon</button><button class="tab" type="button" data-filter="eid-fitr">Ramazon Hayiti</button><button class="tab" type="button" data-filter="eid-adha">Qurbon Hayiti</button><button class="tab" type="button" data-filter="daily">Har kuni</button></nav>
-<div class="section-title"><h2>Premium tayyor tabriklar</h2><p>Pro kolleksiyadan 43 premium karta</p></div><section class="cards" id="cards"></section>
+<div class="section-title"><h2>Tayyor tabriklar</h2><p>Pro kolleksiyadan 43 karta</p></div><section class="cards" id="cards"></section>
 </main>
 <div class="modal" id="modal" aria-hidden="true"><div class="modal-card"><canvas class="preview-canvas" id="previewCanvas" width="1080" height="1350"></canvas><div class="modal-actions"><button class="action-btn primary" type="button" onclick="shareCurrent()">Ulashish</button><button class="action-btn" type="button" onclick="regeneratePersonal()">Qayta yaratish</button><button class="action-btn" type="button" onclick="downloadCurrent()">Yuklab olish</button></div><button class="close-btn" type="button" onclick="closeModal()">Yopish</button></div></div><div class="toast" id="toast">Tayyor</div>
 <script>
