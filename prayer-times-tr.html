@@ -790,11 +790,13 @@ html.dark-mode .sunrise-time{
           <div class="field">
             <label for="soundSelect">Bildirim sesi</label>
             <select id="soundSelect" class="select">
+              <option value="adhan">Ezan</option>
               <option value="beep">Kısa bip</option>
               <option value="chime">Yumuşak zil</option>
-              <option value="soft">Sakin ton</option>
+              <option value="soft">Sakin uyarı</option>
               <option value="loud">Yüksek uyarı</option>
-              <option value="adhan">Ezan / melodik uyarı</option>
+              <option value="melody">Melodik uyarı</option>
+              <option value="vibrate">Sessiz — sadece titreşim</option>
             </select>
           </div>
           <div class="btn-row">
@@ -868,7 +870,7 @@ const homeWidgetPreview = document.getElementById('homeWidgetPreview');
 const UI = {"notification_not_supported": "Bildirimler kullanılamıyor", "notification_enabled": "Bildirimler açık", "notification_denied": "Bildirimler engellendi", "notification_default": "İzin verilmedi", "local_reminder_engine": "Yerel hatırlatmalar", "location_unknown": "Konum seçilmedi", "location_hint": "Ülke ve şehir seç veya otomatik algılamayı kullan", "manual_location_sub": "Seçilen şehre göre yüklendi", "detected_location": "Algılanan konum", "city_country_required": "Ülke ve şehri gir.", "geolocation_not_supported": "Bu cihaz konum hizmetini desteklemiyor", "location_error": "Konum algılama hatası", "notification_granted_msg": "Bildirim izni verildi.", "notification_denied_msg": "Bildirimlere izin verilmedi.", "time_for": "Şimdi vakit", "starts_in": "sonra", "minutes": "dk", "enable_notifications_first": "Önce bildirimleri aç.", "test_notification_title": "Test bildirimi", "test_notification_body": "Namaz vakitleri için yerel hatırlatmalar çalışıyor.", "notifications_saved": "Bildirim ayarları kaydedildi.", "sound_preview": "Ses test edildi", "load_error": "Namaz vakitleri yüklenemedi", "prayer_fajr": "Fecr", "prayer_sunrise": "Güneş", "prayer_dhuhr": "Öğle", "prayer_asr": "İkindi", "prayer_maghrib": "Akşam", "prayer_isha": "Yatsı", "source_time": "Kaynak zamanı", "at_label": "в", "notification_title": "Hatırlatma", "mosque_adjust_saved": "Cami ayarı kaydedildi", "mosque_adjustment": "Cami ayarı"};
 const state = { currentMode:'city', city:localStorage.getItem('prayer_city')||'', country:localStorage.getItem('prayer_country')||'', lat:localStorage.getItem('prayer_lat')||'', lon:localStorage.getItem('prayer_lon')||'', locationName:localStorage.getItem('prayer_location_name')||'', timingsRaw:null, methodName:'', timezone:'', nextPrayerTimer:null, notificationTimeouts:[] };
 const SETTINGS_KEY='prayer_page_settings_v1';
-function getSettings(){ const d={method:'3',school:'1',timeFormat:'24',lead:'10',tune:{fajr:0,dhuhr:0,asr:0,maghrib:0,isha:0},enabled:{Fajr:true,Dhuhr:true,Asr:true,Maghrib:true,Isha:true},sound:'beep'}; try{ const p=JSON.parse(localStorage.getItem(SETTINGS_KEY)||'{}'); return {...d,...p,tune:{...d.tune,...(p.tune||{})},enabled:{...d.enabled,...(p.enabled||{})}} }catch(_){ return d } }
+function getSettings(){ const d={method:'3',school:'1',timeFormat:'24',lead:'10',tune:{fajr:0,dhuhr:0,asr:0,maghrib:0,isha:0},enabled:{Fajr:true,Dhuhr:true,Asr:true,Maghrib:true,Isha:true},sound:'adhan'}; try{ const p=JSON.parse(localStorage.getItem(SETTINGS_KEY)||'{}'); return {...d,...p,tune:{...d.tune,...(p.tune||{})},enabled:{...d.enabled,...(p.enabled||{})}} }catch(_){ return d } }
 function clampTuneValue(v){ v=Number(v)||0; return Math.max(-120,Math.min(120,v)); }
 function saveSettings(){ const s={method:methodSelect.value,school:schoolSelect.value,timeFormat:timeFormatSelect.value,lead:leadSelect.value,tune:{fajr:clampTuneValue(tuneFajr.value),dhuhr:clampTuneValue(tuneDhuhr.value),asr:clampTuneValue(tuneAsr.value),maghrib:clampTuneValue(tuneMaghrib.value),isha:clampTuneValue(tuneIsha.value)},enabled:getPrayerToggleState(),sound:getSelectedSound()}; localStorage.setItem(SETTINGS_KEY, JSON.stringify(s)); return s; }
 function applySettingsToUI(){ const s=getSettings(); schoolSelect.value=s.school; timeFormatSelect.value=s.timeFormat; leadSelect.value=s.lead; if(soundSelect) soundSelect.value=s.sound||'beep'; tuneFajr.value=s.tune.fajr; tuneDhuhr.value=s.tune.dhuhr; tuneAsr.value=s.tune.asr; tuneMaghrib.value=s.tune.maghrib; tuneIsha.value=s.tune.isha; updateMosqueAdjustDisplay(); document.querySelectorAll('.prayer-toggle').forEach(el=>el.checked=!!s.enabled[el.dataset.prayer]); syncToggleAll(); }
@@ -979,7 +981,28 @@ async function detectLocation(){
 async function suggestCities(){ const city=cityInput.value.trim(), country=countryInput.value.trim(); if(city.length<3) return; try{ const r=await fetch(`https://nominatim.openstreetmap.org/search?format=jsonv2&limit=6&q=${encodeURIComponent([city,country].filter(Boolean).join(', '))}`); const data=await r.json(); citySuggestions.innerHTML=''; data.forEach(item=>{ const o=document.createElement('option'); o.value=item.name||item.display_name; o.label=item.display_name; citySuggestions.appendChild(o);}); }catch(_){} }
 
 function getSelectedSound(){ return soundSelect ? (soundSelect.value || 'beep') : 'beep'; }
-function playNotificationSound(kind){
+function startVibrationOnly(){
+  try{
+    if('vibrate' in navigator){
+      navigator.vibrate([900,350,900,350,900,350,900,350,1400]);
+    }
+  }catch(_){}
+}
+function stopVibration(){
+  try{ if('vibrate' in navigator) navigator.vibrate(0); }catch(_){}
+}
+async function tryPlayAdhanFile(prayerKey){
+  try{
+    const isFajr = String(prayerKey||'').toLowerCase()==='fajr';
+    const file = isFajr ? 'sounds/fajr-adhan.mp3' : 'sounds/adhan.mp3';
+    const audio = new Audio(file);
+    audio.preload = 'auto';
+    audio.volume = 1;
+    await audio.play();
+    return true;
+  }catch(_){ return false; }
+}
+function playGeneratedTone(kind){
   try{
     const AudioCtx = window.AudioContext || window.webkitAudioContext;
     if(!AudioCtx) return;
@@ -988,32 +1011,53 @@ function playNotificationSound(kind){
     master.connect(ctx.destination);
     const now = ctx.currentTime;
     const profiles = {
-      beep:[[880,0,0.14,0.26]],
-      chime:[[660,0,0.16,0.18],[990,0.18,0.22,0.14]],
-      soft:[[523,0,0.22,0.10],[659,0.24,0.24,0.09],[784,0.50,0.30,0.08]],
-      loud:[[740,0,0.22,0.32],[740,0.34,0.22,0.30],[920,0.68,0.28,0.28]],
-      adhan:[[392,0,0.45,0.18],[440,0.46,0.42,0.16],[523,0.90,0.50,0.15],[494,1.42,0.42,0.14],[440,1.86,0.55,0.13]]
+      beep:[[880,0,0.12,0.26]],
+      chime:[[660,0,0.20,0.13],[1046,0.18,0.32,0.09]],
+      soft:[[392,0,0.28,0.07],[523,0.30,0.34,0.06],[659,0.68,0.42,0.055]],
+      loud:[[740,0,0.18,0.35],[740,0.28,0.18,0.32],[980,0.56,0.26,0.30]],
+      melody:[[523,0,0.18,0.12],[659,0.20,0.20,0.11],[784,0.44,0.24,0.10],[1046,0.72,0.32,0.08]],
+      adhan:[[261.63,0,0.50,0.15],[329.63,0.52,0.60,0.14],[392.00,1.14,0.72,0.13],[349.23,1.88,0.62,0.12],[293.66,2.54,0.82,0.11]],
+      adhan_fajr:[[293.66,0,0.55,0.16],[329.63,0.55,0.55,0.15],[392.00,1.10,0.70,0.14],[440.00,1.82,0.62,0.13],[392.00,2.48,0.70,0.12],[329.63,3.22,0.85,0.11]]
     };
     (profiles[kind]||profiles.beep).forEach(([freq,start,duration,volume])=>{
       const osc = ctx.createOscillator();
       const gain = ctx.createGain();
-      osc.type = kind==='adhan' ? 'sine' : 'triangle';
+      osc.type = (kind==='beep'||kind==='loud') ? 'square' : 'sine';
       osc.frequency.setValueAtTime(freq, now+start);
+      if(kind==='adhan_fajr'||kind==='adhan'){
+        osc.frequency.linearRampToValueAtTime(freq*1.035, now+start+duration*0.5);
+        osc.frequency.linearRampToValueAtTime(freq*0.995, now+start+duration);
+      }
       gain.gain.setValueAtTime(0.0001, now+start);
-      gain.gain.exponentialRampToValueAtTime(volume, now+start+0.03);
+      gain.gain.exponentialRampToValueAtTime(volume, now+start+0.04);
       gain.gain.exponentialRampToValueAtTime(0.0001, now+start+duration);
       osc.connect(gain); gain.connect(master);
-      osc.start(now+start); osc.stop(now+start+duration+0.03);
+      osc.start(now+start); osc.stop(now+start+duration+0.05);
     });
-    setTimeout(()=>ctx.close().catch(()=>{}), 2800);
+    setTimeout(()=>ctx.close().catch(()=>{}), (kind==='adhan_fajr'||kind==='adhan')?4600:2200);
   }catch(_){}
+}
+async function playNotificationSound(kind, prayerKey){
+  stopVibration();
+  if(kind==='vibrate'){
+    startVibrationOnly();
+    return;
+  }
+  if(kind==='adhan'){
+    const isFajr = String(prayerKey||'').toLowerCase()==='fajr';
+    const played = await tryPlayAdhanFile(prayerKey);
+    if(played) return;
+    playGeneratedTone(isFajr ? 'adhan_fajr' : 'adhan');
+    return;
+  }
+  playGeneratedTone(kind);
 }
 
 async function requestNotificationPermission(){ saveSettings(); if(!('Notification' in window)){ showToast(UI.notification_not_supported); updatePermissionBadge(); return; } const result=await Notification.requestPermission(); updatePermissionBadge(); if(result==='granted'){ scheduleNotifications(); showToast(UI.notifications_saved); } else { showToast(UI.notification_denied_msg); } }
 function clearNotificationSchedules(){ state.notificationTimeouts.forEach(id=>clearTimeout(id)); state.notificationTimeouts=[]; }
-function scheduleNotifications(){ clearNotificationSchedules(); if(!state.timingsRaw) return; if(!('Notification' in window)||Notification.permission!=='granted') return; const s=getSettings(); const now=new Date(); ['Fajr','Dhuhr','Asr','Maghrib','Isha'].forEach(prayer=>{ if(!s.enabled[prayer]) return; const d=parseTodayTimeToDate(state.timingsRaw[prayer]); d.setMinutes(d.getMinutes()-Number(s.lead||0)); const diff=d-now; if(diff<=0) return; const id=setTimeout(()=>{ const title=`${UI.notification_title} — ${prayer}`; const body=Number(s.lead||0)===0?`${UI.time_for} ${prayer}`:`${prayer} ${UI.starts_in} ${s.lead} ${UI.minutes}`; try{ playNotificationSound(getSelectedSound()); new Notification(title,{body,silent:false}); }catch(_){} }, diff); state.notificationTimeouts.push(id); }); }
+function scheduleNotifications(){ clearNotificationSchedules(); if(!state.timingsRaw) return; if(!('Notification' in window)||Notification.permission!=='granted') return; const s=getSettings(); const now=new Date(); ['Fajr','Dhuhr','Asr','Maghrib','Isha'].forEach(prayer=>{ if(!s.enabled[prayer]) return; const d=parseTodayTimeToDate(state.timingsRaw[prayer]); d.setMinutes(d.getMinutes()-Number(s.lead||0)); const diff=d-now; if(diff<=0) return; const id=setTimeout(()=>{ const title=`${UI.notification_title} — ${prayer}`; const body=Number(s.lead||0)===0?`${UI.time_for} ${prayer}`:`${prayer} ${UI.starts_in} ${s.lead} ${UI.minutes}`; try{ const soundKind=getSelectedSound(); playNotificationSound(soundKind, prayer); new Notification(title,{body, silent:soundKind==='vibrate', requireInteraction:true, vibrate:[900,350,900,350,1200]}); }catch(_){} }, diff); state.notificationTimeouts.push(id); }); }
 function handleToggleAll(){ const v=toggleAll.checked; document.querySelectorAll('.prayer-toggle').forEach(el=>el.checked=v); }
-async function testNotification(){ if(!('Notification' in window)){ showToast(UI.notification_not_supported); return; } if(Notification.permission!=='granted'){ const result=await Notification.requestPermission(); updatePermissionBadge(); if(result!=='granted'){ showToast(UI.enable_notifications_first); return; } } saveSettings(); playNotificationSound(getSelectedSound()); new Notification(UI.test_notification_title,{body:UI.test_notification_body}); showToast(UI.sound_preview||UI.test_notification_title); }
+async function testNotification(){ if(!('Notification' in window)){ showToast(UI.notification_not_supported); return; } if(Notification.permission!=='granted'){ const result=await Notification.requestPermission(); updatePermissionBadge(); if(result!=='granted'){ showToast(UI.enable_notifications_first); return; } } saveSettings(); const soundKind=getSelectedSound(); playNotificationSound(soundKind, 'Fajr'); new Notification(UI.test_notification_title,{body:UI.test_notification_body, silent:soundKind==='vibrate', requireInteraction:true, vibrate:[900,350,900,350,1200]}); showToast(UI.sound_preview||UI.test_notification_title); }
 function applyFiltersAndReload(){ saveSettings(); if(state.currentMode==='coords'&&state.lat&&state.lon){ fetchByCoordinates(Number(state.lat),Number(state.lon),state.locationName||UI.detected_location).catch(e=>showToast(UI.load_error+': '+e.message)); } else if(cityInput.value.trim()&&countryInput.value.trim()){ fetchByCity().catch(e=>showToast(UI.load_error+': '+e.message)); } }
 function resetFilters(){ localStorage.removeItem(SETTINGS_KEY); applySettingsToUI(); loadMethods().then(()=>{ methodSelect.value='3'; updateMosqueAdjustDisplay(); applyFiltersAndReload(); }); }
 function restoreLastLocationInputs(){ cityInput.value=state.city||''; countryInput.value=state.country||''; }
