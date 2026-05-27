@@ -1004,8 +1004,23 @@ async function tryPlayAdhanFile(prayerKey){
     const isFajr = String(prayerKey||'').toLowerCase()==='fajr';
     const file = isFajr ? 'sounds/fajr-adhan.mp3' : 'sounds/adhan.mp3';
     const audio = new Audio(file);
+    state.activeAdhanAudio = audio;
     audio.preload = 'auto';
     audio.volume = 1;
+    audio.onended = ()=>{
+      if(state.activeAdhanAudio === audio){
+        state.activeAdhanAudio = null;
+        state.testSoundPlaying = false;
+        updateTestNotificationButton(false);
+      }
+    };
+    audio.onerror = ()=>{
+      if(state.activeAdhanAudio === audio){
+        state.activeAdhanAudio = null;
+        state.testSoundPlaying = false;
+        updateTestNotificationButton(false);
+      }
+    };
     await audio.play();
     return true;
   }catch(_){ return false; }
@@ -1015,6 +1030,7 @@ function playGeneratedTone(kind){
     const AudioCtx = window.AudioContext || window.webkitAudioContext;
     if(!AudioCtx) return;
     const ctx = new AudioCtx();
+    state.activeToneContext = ctx;
     const master = ctx.createGain();
     master.connect(ctx.destination);
     const now = ctx.currentTime;
@@ -1042,11 +1058,49 @@ function playGeneratedTone(kind){
       osc.connect(gain); gain.connect(master);
       osc.start(now+start); osc.stop(now+start+duration+0.05);
     });
-    setTimeout(()=>ctx.close().catch(()=>{}), (kind==='adhan_fajr'||kind==='adhan')?4600:2200);
+    const closeDelay = (kind==='adhan_fajr'||kind==='adhan')?4600:2200;
+    state.activeToneTimer = setTimeout(()=>{
+      try{ ctx.close().catch(()=>{}); }catch(_){}
+      if(state.activeToneContext === ctx){
+        state.activeToneContext = null;
+        state.testSoundPlaying = false;
+        updateTestNotificationButton(false);
+      }
+    }, closeDelay);
   }catch(_){}
 }
-async function playNotificationSound(kind, prayerKey){
+function updateTestNotificationButton(isPlaying){
+  if(!testNotifBtn) return;
+  if(!testNotifBtn.dataset.originalText){
+    testNotifBtn.dataset.originalText = testNotifBtn.textContent.trim() || 'Test notification';
+  }
+  testNotifBtn.textContent = isPlaying ? '⏹ Stop' : testNotifBtn.dataset.originalText;
+  testNotifBtn.setAttribute('aria-pressed', isPlaying ? 'true' : 'false');
+}
+function stopActiveNotificationSound(){
   stopVibration();
+  try{
+    if(state.activeAdhanAudio){
+      state.activeAdhanAudio.pause();
+      state.activeAdhanAudio.currentTime = 0;
+      state.activeAdhanAudio = null;
+    }
+  }catch(_){}
+  try{
+    if(state.activeToneTimer){
+      clearTimeout(state.activeToneTimer);
+      state.activeToneTimer = null;
+    }
+    if(state.activeToneContext){
+      state.activeToneContext.close().catch(()=>{});
+      state.activeToneContext = null;
+    }
+  }catch(_){}
+  state.testSoundPlaying = false;
+  updateTestNotificationButton(false);
+}
+async function playNotificationSound(kind, prayerKey){
+  stopActiveNotificationSound();
   if(kind==='vibrate'){
     startVibrationOnly();
     return;
@@ -1065,7 +1119,29 @@ async function requestNotificationPermission(){ saveSettings(); if(!('Notificati
 function clearNotificationSchedules(){ state.notificationTimeouts.forEach(id=>clearTimeout(id)); state.notificationTimeouts=[]; }
 function scheduleNotifications(){ clearNotificationSchedules(); if(!state.timingsRaw) return; if(!('Notification' in window)||Notification.permission!=='granted') return; const s=getSettings(); const now=new Date(); ['Fajr','Dhuhr','Asr','Maghrib','Isha'].forEach(prayer=>{ if(!s.enabled[prayer]) return; const d=parseTodayTimeToDate(state.timingsRaw[prayer]); d.setMinutes(d.getMinutes()-Number(s.lead||0)); const diff=d-now; if(diff<=0) return; const id=setTimeout(()=>{ const title=`${UI.notification_title} — ${prayer}`; const body=Number(s.lead||0)===0?`${UI.time_for} ${prayer}`:`${prayer} ${UI.starts_in} ${s.lead} ${UI.minutes}`; try{ const soundKind=getSelectedSound(); playNotificationSound(soundKind, prayer); new Notification(title,{body, silent:soundKind==='vibrate', requireInteraction:true, vibrate:[900,350,900,350,1200]}); }catch(_){} }, diff); state.notificationTimeouts.push(id); }); }
 function handleToggleAll(){ const v=toggleAll.checked; document.querySelectorAll('.prayer-toggle').forEach(el=>el.checked=v); }
-async function testNotification(){ if(!('Notification' in window)){ showToast(UI.notification_not_supported); return; } if(Notification.permission!=='granted'){ const result=await Notification.requestPermission(); updatePermissionBadge(); if(result!=='granted'){ showToast(UI.enable_notifications_first); return; } } saveSettings(); const soundKind=getSelectedSound(); playNotificationSound(soundKind, 'Fajr'); new Notification(UI.test_notification_title,{body:UI.test_notification_body, silent:soundKind==='vibrate', requireInteraction:true, vibrate:[900,350,900,350,1200]}); showToast(UI.sound_preview||UI.test_notification_title); }
+async function testNotification(){
+  if(state.testSoundPlaying){
+    stopActiveNotificationSound();
+    return;
+  }
+  if(!('Notification' in window)){ showToast(UI.notification_not_supported); return; }
+  if(Notification.permission!=='granted'){
+    const result=await Notification.requestPermission();
+    updatePermissionBadge();
+    if(result!=='granted'){ showToast(UI.enable_notifications_first); return; }
+  }
+  saveSettings();
+  const soundKind=getSelectedSound();
+  state.testSoundPlaying = true;
+  updateTestNotificationButton(true);
+  await playNotificationSound(soundKind, 'Fajr');
+  state.testSoundPlaying = true;
+  updateTestNotificationButton(true);
+  try{
+    new Notification(UI.test_notification_title,{body:UI.test_notification_body, silent:soundKind==='vibrate', requireInteraction:true, vibrate:[900,350,900,350,1200]});
+  }catch(_){}
+  showToast(UI.sound_preview||UI.test_notification_title);
+}
 function applyFiltersAndReload(){ saveSettings(); if(state.currentMode==='coords'&&state.lat&&state.lon){ fetchByCoordinates(Number(state.lat),Number(state.lon),state.locationName||UI.detected_location).catch(e=>showToast(UI.load_error+': '+e.message)); } else if(cityInput.value.trim()&&countryInput.value.trim()){ fetchByCity().catch(e=>showToast(UI.load_error+': '+e.message)); } }
 function resetFilters(){ localStorage.removeItem(SETTINGS_KEY); applySettingsToUI(); loadMethods().then(()=>{ methodSelect.value='3'; updateMosqueAdjustDisplay(); applyFiltersAndReload(); }); }
 function restoreLastLocationInputs(){ cityInput.value=state.city||''; countryInput.value=state.country||''; }
