@@ -677,6 +677,32 @@ html.dark-mode .sunrise-time{
   .prayer-lead-select{width:112px;min-height:38px}
 }
 
+
+/* compact all-prayers row + theme borders */
+.notify-list .toggle-row.all-prayers-row{
+  display:flex !important;
+  align-items:center;
+  justify-content:flex-start !important;
+  gap:12px !important;
+  width:max-content;
+  max-width:100%;
+  padding:12px 14px;
+  border-color:rgba(45,122,70,.28);
+  box-shadow:inset 0 0 0 1px rgba(45,122,70,.05),0 8px 20px rgba(45,122,70,.04);
+}
+.notify-list .toggle-row.all-prayers-row .switch{margin-left:2px;flex:0 0 auto;}
+.notify-list .toggle-row.prayer-notify-row{
+  border:1px solid rgba(45,122,70,.32) !important;
+  box-shadow:inset 0 0 0 1px rgba(45,122,70,.06),0 8px 20px rgba(45,122,70,.045);
+}
+.notify-list .toggle-row.prayer-notify-row:hover{
+  border-color:rgba(45,122,70,.48) !important;
+  box-shadow:inset 0 0 0 1px rgba(45,122,70,.10),0 10px 24px rgba(45,122,70,.075);
+}
+@media(max-width:700px){
+  .notify-list .toggle-row.all-prayers-row{width:fit-content; padding:12px 14px;}
+}
+
 </style>
 <script src="/theme-init.js"></script>
 <link rel="stylesheet" href="/theme.css">
@@ -824,7 +850,7 @@ html.dark-mode .sunrise-time{
           </div>
         </div>
         <div class="notify-list">
-          <div class="toggle-row"><strong>Все пять намазов</strong><span></span><label class="switch"><input type="checkbox" id="toggleAll"><span class="slider"></span></label></div>
+          <div class="toggle-row all-prayers-row"><strong>Все пять намазов</strong><label class="switch"><input type="checkbox" id="toggleAll"><span class="slider"></span></label></div>
           <div class="toggle-row prayer-notify-row"><strong>Фаджр</strong><div class="prayer-volume-control" data-volume-row="Fajr"><button type="button" class="volume-step-btn" data-volume-target="Fajr" data-volume-delta="-10" aria-label="−">−</button><span class="prayer-volume-label" id="volumeLabelFajr">80%</span><button type="button" class="volume-step-btn" data-volume-target="Fajr" data-volume-delta="10" aria-label="+">+</button></div><div class="prayer-lead-control"><select class="prayer-lead-select" data-lead-prayer="Fajr" id="leadSelectFajr"><option value="0">0 min</option><option value="5">5 min</option><option value="10">10 min</option><option value="15">15 min</option><option value="20">20 min</option><option value="30">30 min</option><option value="40">40 min</option><option value="50">50 min</option><option value="60">1 h</option></select></div><label class="switch"><input type="checkbox" class="prayer-toggle" data-prayer="Fajr"><span class="slider"></span></label></div>
           <div class="toggle-row prayer-notify-row"><strong>Зухр</strong><div class="prayer-volume-control" data-volume-row="Dhuhr"><button type="button" class="volume-step-btn" data-volume-target="Dhuhr" data-volume-delta="-10" aria-label="−">−</button><span class="prayer-volume-label" id="volumeLabelDhuhr">80%</span><button type="button" class="volume-step-btn" data-volume-target="Dhuhr" data-volume-delta="10" aria-label="+">+</button></div><div class="prayer-lead-control"><select class="prayer-lead-select" data-lead-prayer="Dhuhr" id="leadSelectDhuhr"><option value="0">0 min</option><option value="5">5 min</option><option value="10">10 min</option><option value="15">15 min</option><option value="20">20 min</option><option value="30">30 min</option><option value="40">40 min</option><option value="50">50 min</option><option value="60">1 h</option></select></div><label class="switch"><input type="checkbox" class="prayer-toggle" data-prayer="Dhuhr"><span class="slider"></span></label></div>
           <div class="toggle-row prayer-notify-row"><strong>Аср</strong><div class="prayer-volume-control" data-volume-row="Asr"><button type="button" class="volume-step-btn" data-volume-target="Asr" data-volume-delta="-10" aria-label="−">−</button><span class="prayer-volume-label" id="volumeLabelAsr">80%</span><button type="button" class="volume-step-btn" data-volume-target="Asr" data-volume-delta="10" aria-label="+">+</button></div><div class="prayer-lead-control"><select class="prayer-lead-select" data-lead-prayer="Asr" id="leadSelectAsr"><option value="0">0 min</option><option value="5">5 min</option><option value="10">10 min</option><option value="15">15 min</option><option value="20">20 min</option><option value="30">30 min</option><option value="40">40 min</option><option value="50">50 min</option><option value="60">1 h</option></select></div><label class="switch"><input type="checkbox" class="prayer-toggle" data-prayer="Asr"><span class="slider"></span></label></div>
@@ -908,7 +934,19 @@ function getPrayerToggleState(){ const m={}; document.querySelectorAll('.prayer-
 function clampVolume(v){ v=Number(v); if(!Number.isFinite(v)) v=80; return Math.max(0, Math.min(100, Math.round(v/10)*10)); }
 function getPrayerVolumeState(){ const current=getSettings().volume||{}; const m={}; PRAYER_KEYS.forEach(k=>{ const el=document.getElementById('volumeLabel'+k); const shown=el?parseInt(el.textContent,10):current[k]; m[k]=clampVolume(shown); }); return m; }
 function updateVolumeLabels(volume){ PRAYER_KEYS.forEach(k=>{ const el=document.getElementById('volumeLabel'+k); if(el) el.textContent=clampVolume((volume||{})[k])+'%'; }); }
-async function changePrayerVolume(prayer, delta){ const s=getSettings(); s.volume={...s.volume,[prayer]:clampVolume((s.volume&&s.volume[prayer]!==undefined?s.volume[prayer]:80)+Number(delta||0))}; localStorage.setItem(SETTINGS_KEY, JSON.stringify(s)); updateVolumeLabels(s.volume); scheduleNotifications(); try{ await playNotificationSound(getSelectedSound(), prayer); }catch(_){} }
+async function changePrayerVolume(prayer, delta){
+  const s=getSettings();
+  const current=(s.volume&&s.volume[prayer]!==undefined?s.volume[prayer]:80);
+  const next=clampVolume(current+Number(delta||0));
+  s.volume={...s.volume,[prayer]:next};
+  localStorage.setItem(SETTINGS_KEY, JSON.stringify(s));
+  updateVolumeLabels(s.volume);
+  scheduleNotifications();
+  try{
+    if(next<=0){ stopActiveNotificationSound(); return; }
+    await playNotificationSound(getSelectedSound(), prayer, 3500);
+  }catch(_){}
+}
 function showToast(message){
   let toast = document.getElementById('appToast');
   if(!toast){
@@ -1024,14 +1062,14 @@ function startVibrationOnly(){
 function stopVibration(){
   try{ if('vibrate' in navigator) navigator.vibrate(0); }catch(_){}
 }
-async function tryPlayAdhanFile(prayerKey, volumeLevel=1){
+async function tryPlayAdhanFile(prayerKey, volumeLevel=1, previewMs=0){
   try{
     const isFajr = String(prayerKey||'').toLowerCase()==='fajr';
     const file = isFajr ? 'sounds/fajr-adhan.mp3' : 'sounds/adhan.mp3';
     const audio = new Audio(file);
     state.activeAdhanAudio = audio;
     audio.preload = 'auto';
-    audio.volume = Math.max(0, Math.min(1, Number(volumeLevel)||1));
+    audio.volume = Math.max(0, Math.min(1, Number(volumeLevel)||0));
     audio.onended = ()=>{
       if(state.activeAdhanAudio === audio){
         state.activeAdhanAudio = null;
@@ -1047,6 +1085,14 @@ async function tryPlayAdhanFile(prayerKey, volumeLevel=1){
       }
     };
     await audio.play();
+    if(Number(previewMs)>0){
+      if(state.activePreviewStopTimer) clearTimeout(state.activePreviewStopTimer);
+      state.activePreviewStopTimer = setTimeout(()=>{
+        if(state.activeAdhanAudio === audio){
+          stopActiveNotificationSound();
+        }
+      }, Number(previewMs));
+    }
     return true;
   }catch(_){ return false; }
 }
@@ -1106,6 +1152,10 @@ function updateTestNotificationButton(isPlaying){
 function stopActiveNotificationSound(){
   stopVibration();
   try{
+    if(state.activePreviewStopTimer){
+      clearTimeout(state.activePreviewStopTimer);
+      state.activePreviewStopTimer = null;
+    }
     if(state.activeAdhanAudio){
       state.activeAdhanAudio.pause();
       state.activeAdhanAudio.currentTime = 0;
@@ -1125,17 +1175,21 @@ function stopActiveNotificationSound(){
   state.testSoundPlaying = false;
   updateTestNotificationButton(false);
 }
-async function playNotificationSound(kind, prayerKey){
+async function playNotificationSound(kind, prayerKey, previewMs=0){
   stopActiveNotificationSound();
   const settings = getSettings();
-  const volumeLevel = clampVolume((settings.volume||{})[prayerKey]!==undefined ? settings.volume[prayerKey] : 80) / 100;
+  const volumePercent = clampVolume((settings.volume||{})[prayerKey]!==undefined ? settings.volume[prayerKey] : 80);
+  const volumeLevel = volumePercent / 100;
+  if(volumePercent<=0 && kind!=='vibrate'){
+    return;
+  }
   if(kind==='vibrate'){
     startVibrationOnly();
     return;
   }
   if(kind==='adhan'){
     const isFajr = String(prayerKey||'').toLowerCase()==='fajr';
-    const played = await tryPlayAdhanFile(prayerKey, volumeLevel);
+    const played = await tryPlayAdhanFile(prayerKey, volumeLevel, previewMs);
     if(played) return;
     playGeneratedTone(isFajr ? 'adhan_fajr' : 'adhan', volumeLevel);
     return;
