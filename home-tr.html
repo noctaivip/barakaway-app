@@ -2428,6 +2428,49 @@ html[dir="rtl"] #allahNameCounterCard:not(.bw-task-done) .bw-task-compact-meta[d
   transform:scale(.985) !important;
 }
 </style>
+
+<style id="bw-home-share-pulse-card-final">
+:root{--home-share-pulse:rgba(45,122,70,.95);--home-share-pulse-soft:rgba(45,122,70,.34);--home-share-pulse-strong:rgba(45,122,70,.62);}
+body.bw-theme-emerald-quran{--home-share-pulse:rgba(102,198,128,.98);--home-share-pulse-soft:rgba(102,198,128,.38);--home-share-pulse-strong:rgba(102,198,128,.68);}
+body.bw-theme-royal-gold{--home-share-pulse:rgba(215,192,122,.98);--home-share-pulse-soft:rgba(215,192,122,.38);--home-share-pulse-strong:rgba(215,192,122,.68);}
+body.bw-theme-violet-noor{--home-share-pulse:rgba(161,118,255,.98);--home-share-pulse-soft:rgba(161,118,255,.38);--home-share-pulse-strong:rgba(161,118,255,.68);}
+body.bw-theme-rose-soft{--home-share-pulse:rgba(255,158,199,.98);--home-share-pulse-soft:rgba(255,158,199,.38);--home-share-pulse-strong:rgba(255,158,199,.68);}
+body.bw-theme-carbon-elite{--home-share-pulse:rgba(210,220,230,.92);--home-share-pulse-soft:rgba(210,220,230,.28);--home-share-pulse-strong:rgba(210,220,230,.52);}
+body.bw-theme-children-soft{--home-share-pulse:rgba(135,203,255,.98);--home-share-pulse-soft:rgba(135,203,255,.38);--home-share-pulse-strong:rgba(135,203,255,.68);}
+body.bw-theme-night-mosque{--home-share-pulse:rgba(215,192,122,.92);--home-share-pulse-soft:rgba(215,192,122,.30);--home-share-pulse-strong:rgba(215,192,122,.54);}
+body.bw-theme-desert-sand{--home-share-pulse:rgba(255,215,145,.96);--home-share-pulse-soft:rgba(255,215,145,.34);--home-share-pulse-strong:rgba(255,215,145,.60);}
+.home-prayer-share-btn{
+  position:relative !important;
+  overflow:visible !important;
+  border:1.5px solid var(--home-share-pulse) !important;
+  animation:bwHomeShareCorePulse 1.75s ease-in-out infinite !important;
+  box-shadow:0 0 0 0 var(--home-share-pulse-soft),0 8px 18px rgba(0,0,0,.18),inset 0 1px 0 rgba(255,255,255,.06) !important;
+}
+.home-prayer-share-btn::after{
+  content:"";
+  position:absolute;
+  inset:-7px;
+  border-radius:999px;
+  border:2px solid var(--home-share-pulse);
+  pointer-events:none;
+  opacity:.55;
+  transform:scale(.92);
+  animation:bwHomeShareRingPulse 1.75s ease-in-out infinite !important;
+}
+.home-prayer-share-btn svg{position:relative;z-index:2;filter:drop-shadow(0 0 5px var(--home-share-pulse-soft));}
+.home-prayer-share-btn:hover{animation-duration:1.15s !important;}
+.home-prayer-share-btn:hover::after{animation-duration:1.15s !important;}
+@keyframes bwHomeShareCorePulse{
+  0%,100%{box-shadow:0 0 0 0 var(--home-share-pulse-soft),0 8px 18px rgba(0,0,0,.18),inset 0 1px 0 rgba(255,255,255,.06);transform:translateZ(0) scale(1);}
+  50%{box-shadow:0 0 0 4px var(--home-share-pulse-soft),0 0 20px var(--home-share-pulse-strong),0 10px 22px rgba(0,0,0,.20),inset 0 1px 0 rgba(255,255,255,.08);transform:translateY(-1px) scale(1.035);}
+}
+@keyframes bwHomeShareRingPulse{
+  0%,100%{opacity:.20;transform:scale(.88);}
+  50%{opacity:.85;transform:scale(1.16);}
+}
+@media (prefers-reduced-motion: reduce){.home-prayer-share-btn,.home-prayer-share-btn::after{animation:none !important;}}
+</style>
+
 </head>
 <body> <div class="mobile-top-controls"> <button class="icon-btn left" onclick="changeLanguageChoice()" aria-label="Change language"> <svg viewBox="0 0 24 24" aria-hidden="true"> <path d="M12 2a10 10 0 100 20 10 10 0 000-20zm6.92 9h-3.02a15.6 15.6 0 00-1.33-5.01A8.03 8.03 0 0118.92 11zM12 4.04c.89 1.08 1.97 3.22 2.28 6.96H9.72C10.03 7.26 11.11 5.12 12 4.04zM4.99 13h3.02a15.6 15.6 0 001.33 5.01A8.03 8.03 0 014.99 13zM8.1 11H5.08a8.03 8.03 0 014.35-5.01A15.6 15.6 0 008.1 11zm1.62 2h4.56c-.31 3.74-1.39 5.88-2.28 6.96-.89-1.08-1.97-3.22-2.28-6.96zm5.18 5.01A15.6 15.6 0 0015.9 13h3.02a8.03 8.03 0 01-4.02 5.01z"/> </svg> <span class="ripple"></span> </button> <div class="theme-toggle-center"> <span class="theme-toggle-label">Glow On</span> <input type="checkbox" class="theme-switch" id="themeSwitch" aria-label="Toggle theme"> </div> <button class="icon-btn right" onclick="shareApp()" aria-label="Paylaş app"> <svg viewBox="0 0 24 24" aria-hidden="true"> <path d="M18 16a2.99 2.99 0 00-2.39 1.2l-6.7-3.35a3.1 3.1 0 000-1.7l6.7-3.35A3 3 0 1014 6a3.1 3.1 0 00.08.68l-6.7 3.35a3 3 0 100 4.94l6.7 3.35A3 3 0 1018 16z"/> </svg> <span class="ripple"></span> </button>
 </div> <div class="ramadan-wrapper">
@@ -2569,7 +2612,77 @@ function closeShareOverlay(){const o=document.getElementById("shareOverlay");if(
 async function copyShareLink(){const url=getShareUrl(),msg=document.getElementById("shareCopyMsg");try{if(navigator.clipboard&&window.isSecureContext){await navigator.clipboard.writeText(url);}else{const t=document.createElement("textarea");t.value=url;t.setAttribute("readonly","readonly");t.style.position="absolute";t.style.left="-9999px";document.body.appendChild(t);t.select();document.execCommand("copy");document.body.removeChild(t);}if(msg){msg.classList.add("show");setTimeout(function(){msg.classList.remove("show");},2200);}}catch(e){window.prompt("Bağlantıyı kopyalayın:",url);}}
 function openShareTarget(type){const url=encodeURIComponent(getShareUrl()),text=encodeURIComponent("BarakaWay");let target="";if(type==="telegram") target="https://t.me/share/url?url="+url+"&text="+text;if(type==="whatsapp") target="https://wa.me/?text="+text+"%20"+url;if(type==="facebook") target="https://www.facebook.com/sharer/sharer.php?u="+url;if(type==="x") target="https://twitter.com/intent/tweet?text="+text+"&url="+url;if(type==="linkedin") target="https://www.linkedin.com/sharing/share-offsite/?url="+url;if(type==="email") target="mailto:?subject=Hidden%20Sadaqa&body="+text+"%0A"+url;if(target) window.open(target,"_blank","noopener,noreferrer");}
 async function shareApp(){const data={title:"BarakaWay",text:"BarakaWay",url:getShareUrl()};if(navigator.share){try{await navigator.share(data);return;}catch(e){}}openShareOverlay();}
-async function sharePrayerTimes(event){if(event){event.preventDefault();event.stopPropagation();}const text=typeof window.buildPrayerTimesShareText==="function"?window.buildPrayerTimesShareText():"BarakaWay\nNamaz vakitleri";if(navigator.share){try{await navigator.share({title:"Namaz vakitleri",text:text});return;}catch(e){}}try{if(navigator.clipboard&&window.isSecureContext){await navigator.clipboard.writeText(text);}else{const t=document.createElement("textarea");t.value=text;t.setAttribute("readonly","readonly");t.style.position="absolute";t.style.left="-9999px";document.body.appendChild(t);t.select();document.execCommand("copy");document.body.removeChild(t);}alert("Namaz vakitleri kopyalandı.");}catch(e){window.prompt("Namaz vakitlerini kopyalayın:",text);}}
+
+function bwHomeShareLocale(){
+  const lang=(document.documentElement.getAttribute('lang')||'en').toLowerCase();
+  const isRTL=document.documentElement.getAttribute('dir')==='rtl'||['ar','ur'].includes(lang);
+  const table={
+    ru:{title:'Время молитв',subtitle:'Время молитв на сегодня',dateLocale:'ru-RU',fallbackLocation:'Ташкент, Узбекистан',urlText:'barakaway.app',alert:'Карточка намазов скопирована. Теперь можно отправить её в мессенджере.',copyPrompt:'Скопируйте времена намазов:',names:{Fajr:'Фаджр',Sunrise:'Восход',Dhuhr:'Зухр',Asr:'Аср',Maghrib:'Магриб',Isha:'Иша'}},
+    en:{title:'Prayer Times',subtitle:'Prayer times for today',dateLocale:'en-US',fallbackLocation:'Tashkent, Uzbekistan',urlText:'barakaway.app',alert:'Prayer times card copied. You can now send it in a messenger.',copyPrompt:'Copy prayer times:',names:{Fajr:'Fajr',Sunrise:'Sunrise',Dhuhr:'Dhuhr',Asr:'Asr',Maghrib:'Maghrib',Isha:'Isha'}},
+    uz:{title:'Namoz vaqtlari',subtitle:'Bugungi namoz vaqtlari',dateLocale:'uz-UZ',fallbackLocation:'Toshkent, O‘zbekiston',urlText:'barakaway.app',alert:'Namoz vaqtlari kartasi nusxalandi. Endi uni messenjerda yuborishingiz mumkin.',copyPrompt:'Namoz vaqtlarini nusxalang:',names:{Fajr:'Bomdod',Sunrise:'Quyosh',Dhuhr:'Peshin',Asr:'Asr',Maghrib:'Shom',Isha:'Xufton'}},
+    tr:{title:'Namaz Vakitleri',subtitle:'Bugünün namaz vakitleri',dateLocale:'tr-TR',fallbackLocation:'Taşkent, Özbekistan',urlText:'barakaway.app',alert:'Namaz vakitleri kartı kopyalandı. Artık mesajlaşma uygulamasında gönderebilirsiniz.',copyPrompt:'Namaz vakitlerini kopyalayın:',names:{Fajr:'Fecir',Sunrise:'Güneş',Dhuhr:'Öğle',Asr:'İkindi',Maghrib:'Akşam',Isha:'Yatsı'}},
+    id:{title:'Waktu Salat',subtitle:'Waktu salat hari ini',dateLocale:'id-ID',fallbackLocation:'Tashkent, Uzbekistan',urlText:'barakaway.app',alert:'Kartu waktu salat disalin. Sekarang bisa dikirim di messenger.',copyPrompt:'Salin waktu salat:',names:{Fajr:'Subuh',Sunrise:'Terbit',Dhuhr:'Zuhur',Asr:'Asar',Maghrib:'Magrib',Isha:'Isya'}},
+    kz:{title:'Намаз уақыттары',subtitle:'Бүгінгі намаз уақыттары',dateLocale:'kk-KZ',fallbackLocation:'Ташкент, Өзбекстан',urlText:'barakaway.app',alert:'Намаз уақыттары картасы көшірілді. Енді мессенджерде жібере аласыз.',copyPrompt:'Намаз уақыттарын көшіріңіз:',names:{Fajr:'Таң',Sunrise:'Күн шығуы',Dhuhr:'Бесін',Asr:'Екінті',Maghrib:'Ақшам',Isha:'Құптан'}},
+    hi:{title:'नमाज़ का समय',subtitle:'आज की नमाज़ का समय',dateLocale:'hi-IN',fallbackLocation:'ताशकंद, उज़्बेकिस्तान',urlText:'barakaway.app',alert:'नमाज़ समय कार्ड कॉपी हो गया। अब इसे मैसेंजर में भेज सकते हैं।',copyPrompt:'नमाज़ का समय कॉपी करें:',names:{Fajr:'फ़ज्र',Sunrise:'सूर्योदय',Dhuhr:'ज़ुहर',Asr:'अस्र',Maghrib:'मग़रिब',Isha:'इशा'}},
+    bn:{title:'নামাজের সময়',subtitle:'আজকের নামাজের সময়',dateLocale:'bn-BD',fallbackLocation:'তাশখন্দ, উজবেকিস্তান',urlText:'barakaway.app',alert:'নামাজের সময়ের কার্ড কপি হয়েছে। এখন মেসেঞ্জারে পাঠাতে পারবেন।',copyPrompt:'নামাজের সময় কপি করুন:',names:{Fajr:'ফজর',Sunrise:'সূর্যোদয়',Dhuhr:'যোহর',Asr:'আসর',Maghrib:'মাগরিব',Isha:'ইশা'}},
+    ar:{title:'أوقات الصلاة',subtitle:'أوقات الصلاة لهذا اليوم',dateLocale:'ar',fallbackLocation:'طشقند، أوزبكستان',urlText:'barakaway.app',alert:'تم نسخ بطاقة أوقات الصلاة. يمكنك إرسالها الآن في تطبيق المراسلة.',copyPrompt:'انسخ أوقات الصلاة:',names:{Fajr:'الفجر',Sunrise:'الشروق',Dhuhr:'الظهر',Asr:'العصر',Maghrib:'المغرب',Isha:'العشاء'}},
+    ur:{title:'نماز کے اوقات',subtitle:'آج کے نماز کے اوقات',dateLocale:'ur-PK',fallbackLocation:'تاشقند، ازبکستان',urlText:'barakaway.app',alert:'نماز کے اوقات کا کارڈ کاپی ہو گیا۔ اب آپ اسے میسنجر میں بھیج سکتے ہیں۔',copyPrompt:'نماز کے اوقات کاپی کریں:',names:{Fajr:'فجر',Sunrise:'طلوع آفتاب',Dhuhr:'ظہر',Asr:'عصر',Maghrib:'مغرب',Isha:'عشاء'}}
+  };
+  return Object.assign({lang,isRTL},table[lang]||table.en);
+}
+function bwHomeCleanTime(value){return String(value||'--:--').split(' ')[0].slice(0,5)||'--:--';}
+function bwRoundRect(ctx,x,y,w,h,r){ctx.beginPath();ctx.moveTo(x+r,y);ctx.arcTo(x+w,y,x+w,y+h,r);ctx.arcTo(x+w,y+h,x,y+h,r);ctx.arcTo(x,y+h,x,y,r);ctx.arcTo(x,y,x+w,y,r);ctx.closePath();}
+function bwCanvasText(ctx,text,x,y,maxWidth){
+  const words=String(text||'').split(' ');let line='';let lines=[];
+  for(const word of words){const test=line?line+' '+word:word;if(ctx.measureText(test).width>maxWidth&&line){lines.push(line);line=word;}else line=test;}
+  if(line) lines.push(line);lines.slice(0,2).forEach((ln,i)=>ctx.fillText(ln,x,y+i*34));
+}
+async function createHomePrayerShareCardFile(){
+  const loc=bwHomeShareLocale();
+  const state=window.homePrayerShareState||{};
+  const timings=state.timings||{};
+  const location=(state.location||document.getElementById('homePrayerLocation')?.textContent||loc.fallbackLocation).trim();
+  const dateText=new Date().toLocaleDateString(loc.dateLocale,{weekday:'long',day:'2-digit',month:'long',year:'numeric'});
+  const c=document.createElement('canvas');c.width=900;c.height=900;const ctx=c.getContext('2d');
+  const grad=ctx.createLinearGradient(0,0,900,900);grad.addColorStop(0,'#0e171f');grad.addColorStop(.58,'#17222b');grad.addColorStop(1,'#123522');ctx.fillStyle=grad;ctx.fillRect(0,0,900,900);
+  ctx.fillStyle='rgba(45,122,70,.26)';ctx.beginPath();ctx.arc(760,120,220,0,Math.PI*2);ctx.fill();
+  ctx.fillStyle='rgba(215,192,122,.12)';ctx.beginPath();ctx.arc(80,820,260,0,Math.PI*2);ctx.fill();
+  bwRoundRect(ctx,70,70,760,760,44);ctx.fillStyle='rgba(17,25,34,.92)';ctx.fill();ctx.strokeStyle='rgba(102,198,128,.20)';ctx.lineWidth=2;ctx.stroke();
+  ctx.textBaseline='top';ctx.direction=loc.isRTL?'rtl':'ltr';
+  ctx.fillStyle='#dff6e7';ctx.font='800 28px system-ui,-apple-system,Segoe UI,sans-serif';ctx.textAlign=loc.isRTL?'right':'left';ctx.fillText('BarakaWay',loc.isRTL?780:120,110);
+  ctx.fillStyle='#f7fbff';ctx.font='900 52px system-ui,-apple-system,Segoe UI,sans-serif';ctx.fillText(loc.title,loc.isRTL?780:120,165);
+  ctx.fillStyle='#c7d3de';ctx.font='800 24px system-ui,-apple-system,Segoe UI,sans-serif';bwCanvasText(ctx,location,loc.isRTL?780:120,235,660);
+  ctx.fillStyle='#e7f7ed';ctx.font='750 22px system-ui,-apple-system,Segoe UI,sans-serif';bwCanvasText(ctx,dateText,loc.isRTL?780:120,308,660);
+  const keys=['Fajr','Sunrise','Dhuhr','Asr','Maghrib','Isha'];let y=382;
+  keys.forEach(function(k){
+    const isSun=k==='Sunrise';bwRoundRect(ctx,120,y,660,68,18);ctx.fillStyle=isSun?'rgba(141,107,22,.26)':'rgba(255,255,255,.045)';ctx.fill();ctx.strokeStyle=isSun?'rgba(215,192,122,.26)':'rgba(255,255,255,.06)';ctx.lineWidth=1.4;ctx.stroke();
+    ctx.font='850 26px system-ui,-apple-system,Segoe UI,sans-serif';ctx.fillStyle=isSun?'#f4d98b':'#dff4e6';ctx.textAlign=loc.isRTL?'right':'left';ctx.fillText(loc.names[k]||k,loc.isRTL?745:150,y+18);
+    ctx.font='900 34px system-ui,-apple-system,Segoe UI,sans-serif';ctx.fillStyle='#f5f7fa';ctx.textAlign=loc.isRTL?'left':'right';ctx.fillText(bwHomeCleanTime(timings[k]),loc.isRTL?150:745,y+14);
+    y+=87;
+  });
+  ctx.font='800 22px system-ui,-apple-system,Segoe UI,sans-serif';ctx.fillStyle='#c7d3de';ctx.textAlign=loc.isRTL?'right':'left';ctx.fillText(loc.subtitle,loc.isRTL?560:120,775);
+  ctx.fillStyle='#dff6e7';ctx.textAlign=loc.isRTL?'left':'right';ctx.fillText(loc.urlText,loc.isRTL?120:780,775);
+  return new Promise(function(resolve){c.toBlob(function(blob){resolve(blob?new File([blob],'barakaway-prayer-times.png',{type:'image/png'}):null);},'image/png',0.94);});
+}
+async function sharePrayerTimes(event){
+  if(event){event.preventDefault();event.stopPropagation();}
+  const loc=bwHomeShareLocale();
+  const text=typeof window.buildPrayerTimesShareText==='function'?window.buildPrayerTimesShareText():'BarakaWay\n'+loc.title;
+  const url=(window.location&&window.location.origin)?window.location.origin:window.location.href;
+  let file=null;
+  try{file=await createHomePrayerShareCardFile();}catch(e){file=null;}
+  if(navigator.share){
+    try{
+      if(file&&navigator.canShare&&navigator.canShare({files:[file]})){await navigator.share({title:loc.title,text:text,files:[file]});return;}
+      await navigator.share({title:loc.title,text:text,url:url});return;
+    }catch(e){}
+  }
+  try{
+    if(file&&navigator.clipboard&&window.ClipboardItem&&window.isSecureContext){await navigator.clipboard.write([new ClipboardItem({'image/png':file})]);alert(loc.alert);return;}
+    if(navigator.clipboard&&window.isSecureContext){await navigator.clipboard.writeText(text);}else{const t=document.createElement('textarea');t.value=text;t.setAttribute('readonly','readonly');t.style.position='absolute';t.style.left='-9999px';document.body.appendChild(t);t.select();document.execCommand('copy');document.body.removeChild(t);}alert(loc.alert);
+  }catch(e){window.prompt(loc.copyPrompt,text);}
+}
+
 window.addEventListener("beforeinstallprompt",function(e){e.preventDefault();deferredInstallPrompt=e;updateInstallButtonVisibility();});
 window.addEventListener("appinstalled",function(){deferredInstallPrompt=null;updateInstallButtonVisibility();});
 window.addEventListener("pageshow",function(){updateInstallButtonVisibility();});
