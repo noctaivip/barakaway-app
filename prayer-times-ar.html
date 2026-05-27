@@ -91,6 +91,8 @@ border:1px solid var(--border);
 .notify-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px;}
 .notify-list{display:grid;gap:10px;}
 .toggle-row{display:flex;align-items:center;justify-content:space-between;gap:12px;background:var(--card-bg);border:1px solid var(--border);border-radius:16px;padding:14px 16px;}
+.notify-list .toggle-row.prayer-notify-row{border-color:rgba(45,122,70,.28);box-shadow:inset 0 0 0 1px rgba(45,122,70,.05),0 8px 20px rgba(45,122,70,.045);}
+.notify-list .toggle-row.prayer-notify-row:hover{border-color:rgba(45,122,70,.46);box-shadow:inset 0 0 0 1px rgba(45,122,70,.08),0 10px 24px rgba(45,122,70,.07);}
 .toggle-row strong{font-size:15px;}
 .switch{position:relative;width:48px;height:28px;flex:0 0 auto;}
 .switch input{opacity:0;width:0;height:0;}
@@ -790,7 +792,7 @@ function getPrayerToggleState(){ const m={}; document.querySelectorAll('.prayer-
 function clampVolume(v){ v=Number(v); if(!Number.isFinite(v)) v=80; return Math.max(0, Math.min(100, Math.round(v/10)*10)); }
 function getPrayerVolumeState(){ const current=getSettings().volume||{}; const m={}; PRAYER_KEYS.forEach(k=>{ const el=document.getElementById('volumeLabel'+k); const shown=el?parseInt(el.textContent,10):current[k]; m[k]=clampVolume(shown); }); return m; }
 function updateVolumeLabels(volume){ PRAYER_KEYS.forEach(k=>{ const el=document.getElementById('volumeLabel'+k); if(el) el.textContent=clampVolume((volume||{})[k])+'%'; }); }
-function changePrayerVolume(prayer, delta){ const s=getSettings(); s.volume={...s.volume,[prayer]:clampVolume((s.volume&&s.volume[prayer]!==undefined?s.volume[prayer]:80)+Number(delta||0))}; localStorage.setItem(SETTINGS_KEY, JSON.stringify(s)); updateVolumeLabels(s.volume); scheduleNotifications(); }
+async function changePrayerVolume(prayer, delta){ const s=getSettings(); s.volume={...s.volume,[prayer]:clampVolume((s.volume&&s.volume[prayer]!==undefined?s.volume[prayer]:80)+Number(delta||0))}; localStorage.setItem(SETTINGS_KEY, JSON.stringify(s)); updateVolumeLabels(s.volume); scheduleNotifications(); try{ await playNotificationSound(getSelectedSound(), prayer); }catch(_){} }
 function showToast(message){
   let toast = document.getElementById('appToast');
   if(!toast){
