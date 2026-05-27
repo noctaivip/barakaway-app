@@ -714,6 +714,18 @@ function adaptTextForAudience(text,audience){
   t=t.replace(/kamu/gi,"kalian").replace(/hatimu/gi,"hati kalian");
   return t;
 }
+function groupGreetingOpening(audience,label){
+  const openings={
+    "team":"Поздравляю всю команду.",
+    "employees":"Поздравляю всех сотрудников.",
+    "relatives":"Поздравляю всех родных.",
+    "colleagues":"Поздравляю всех коллег.",
+    "partners":"Поздравляю всех партнёров.",
+    "collective":"Поздравляю весь коллектив.",
+    "all-muslims":"Поздравляю всех мусульман.",
+  };
+  return openings[audience]||"";
+}
 function formatPersonalTextForAudience(name,text){
   const audience=getGeneratorAudience();
   if(audience==="individual"){
@@ -723,12 +735,11 @@ function formatPersonalTextForAudience(name,text){
     const clean=cleanPersonalName(name||"");
     return clean?clean+", "+text:text;
   }
-  const label=audienceLabelForText(audience,name);
-  const body=adaptTextForAudience(text,audience);
-  if(!label)return body;
-  if("ru"==="ar")return label+"، "+body;
-  if("ru"==="ur")return label+"، "+body;
-  return label+", "+body;
+  const label=audienceLabelForText(audience,"");
+  const body=adaptTextForAudience(text,audience).replace(/^\s+/,"");
+  const opening=groupGreetingOpening(audience,label);
+  if(!opening)return body;
+  return opening+" "+body.charAt(0).toUpperCase()+body.slice(1);
 }
 function selectPersonalText(category,name){return buildPersonalText(category,name);}
 function getNextPersonalImage(){let index=parseInt(localStorage.getItem("barakaway_personal_card_index")||"0",10);if(!Number.isFinite(index)||index<0)index=0;const image=PERSONAL_CARD_IMAGES[index%PERSONAL_CARD_IMAGES.length];localStorage.setItem("barakaway_personal_card_index",String((index+1)%PERSONAL_CARD_IMAGES.length));return image;}
@@ -836,6 +847,34 @@ ctx.fillText(line,x,startY+index*lineHeight);
 return {fontSize:fontSize,lines:lines.length,totalHeight:totalHeight};
 }
 
+
+function getLocalizedSalamGreeting(){
+  const lang=(document.documentElement.getAttribute("lang")||"en").toLowerCase();
+  const map={
+    ru:"Ассаламу алейкум ва рахматуллахи ва баракатуху",
+    en:"Assalamu alaikum wa rahmatullahi wa barakatuh",
+    tr:"Esselamu aleyküm ve rahmetullahi ve berekatüh",
+    id:"Assalamu’alaikum warahmatullahi wabarakatuh",
+    uz:"Assalomu alaykum va rahmatullohi va barokatuh",
+    kk:"Ассаламу алейкум уа рахматуллахи уа баракатуху",
+    hi:"अस्सलामु अलैकुम व रहमतुल्लाहि व बरकातुहू",
+    bn:"আসসালামু আলাইকুম ওয়া রহমাতুল্লাহি ওয়া বারাকাতুহু",
+    ur:"السلام علیکم ورحمۃ اللہ وبرکاتہ",
+    ar:"السلام عليكم ورحمة الله وبركاته"
+  };
+  return map[lang]||map.en;
+}
+function drawSalamGreetingLine(ctx,text,x,top,maxWidth){
+  ctx.save();
+  ctx.textAlign="center";
+  ctx.textBaseline="alphabetic";
+  ctx.shadowColor="rgba(0,0,0,.90)";
+  ctx.shadowBlur=14;
+  ctx.fillStyle="#fff4c2";
+  drawFittedCanvasText(ctx,text,x,top,maxWidth,52,{maxFontSize:34,minFontSize:24,weight:"850",family:"Georgia, 'Times New Roman', system-ui, serif"});
+  ctx.restore();
+}
+
 function drawRoundRect(ctx,x,y,w,h,r){const radius=Math.min(r,w/2,h/2);ctx.beginPath();ctx.moveTo(x+radius,y);ctx.arcTo(x+w,y,x+w,y+h,radius);ctx.arcTo(x+w,y+h,x,y+h,radius);ctx.arcTo(x,y+h,x,y,radius);ctx.arcTo(x,y,x+w,y,radius);ctx.closePath();}
 function loadCanvasImage(src){return new Promise(function(resolve,reject){const img=new Image();img.onload=function(){resolve(img)};img.onerror=reject;img.src=src;});}
 function getAverageLuminance(ctx,x,y,w,h){
@@ -882,8 +921,15 @@ ctx.beginPath();
 ctx.moveTo(panelX+132,panelY+225);
 ctx.lineTo(panelX+panelW-132,panelY+225);
 ctx.stroke();
+drawSalamGreetingLine(ctx,getLocalizedSalamGreeting(),w/2,panelY+242,panelW-170);
+ctx.strokeStyle="rgba(243,217,146,.38)";
+ctx.lineWidth=2;
+ctx.beginPath();
+ctx.moveTo(panelX+172,panelY+306);
+ctx.lineTo(panelX+panelW-172,panelY+306);
+ctx.stroke();
 ctx.fillStyle=style.text;
-drawFittedCanvasText(ctx,g.text,w/2,panelY+270,panelW-170,panelH-320,{maxFontSize:43,minFontSize:28,weight:"700",family:"system-ui, Arial"});
+drawFittedCanvasText(ctx,g.text,w/2,panelY+332,panelW-170,panelH-386,{maxFontSize:41,minFontSize:27,weight:"700",family:"system-ui, Arial"});
 ctx.restore();
 }
 ctx.fillStyle="rgba(255,238,190,.96)";ctx.font="800 30px system-ui, Arial";ctx.fillText("BarakaWay App",w/2,h-92);ctx.fillStyle="rgba(255,238,190,.82)";ctx.font="650 25px system-ui, Arial";ctx.fillText("barakaway.app",w/2,h-54);return canvas;}
