@@ -120,6 +120,18 @@ border-radius:20px;
 .cards{grid-template-columns:repeat(auto-fit,minmax(320px,1fr))!important;align-items:start!important;}
 
 html[dir="rtl"] body,html[dir="rtl"] input,html[dir="rtl"] select,html[dir="rtl"] button{font-family:system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",Tahoma,Arial,sans-serif}html[dir="rtl"] .section-title p{text-align:left}
+
+.confirm-modal{position:fixed;inset:0;z-index:90;display:none;align-items:center;justify-content:center;padding:18px;background:rgba(0,0,0,.74);backdrop-filter:blur(10px)}
+.confirm-modal.open{display:flex}
+.confirm-card{width:min(100%,460px);border-radius:28px;background:var(--bw-card);border:1px solid var(--bw-line);box-shadow:0 30px 100px rgba(0,0,0,.56);padding:22px;text-align:center}
+.confirm-card h3{margin:0 0 10px;font-size:22px;line-height:1.2;letter-spacing:-.02em;text-transform:uppercase;color:var(--bw-gold-2)}
+.confirm-card p{margin:0;color:var(--bw-muted);font-size:15px;line-height:1.55}
+.confirm-category{margin:14px auto 16px;display:inline-flex;align-items:center;justify-content:center;min-height:38px;padding:8px 14px;border-radius:999px;border:1px solid rgba(215,181,109,.30);background:rgba(215,181,109,.10);color:var(--bw-gold-2);font-size:13px;font-weight:900;text-transform:uppercase;letter-spacing:.04em}
+.confirm-actions{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:18px}
+.confirm-actions button{min-height:46px;border-radius:16px;font:inherit;font-weight:900;cursor:pointer;border:1px solid rgba(215,181,109,.22);background:rgba(255,255,255,.055);color:var(--bw-text)}
+.confirm-actions .confirm-primary{border:0;color:#10140f;background:linear-gradient(135deg,var(--bw-gold-2),var(--bw-gold))}
+@media(max-width:520px){.confirm-actions{grid-template-columns:1fr}}
+
 </style>
 <script src="/theme-init.js"></script>
 <link rel="stylesheet" href="/theme.css">
@@ -133,7 +145,7 @@ html[dir="rtl"] body,html[dir="rtl"] input,html[dir="rtl"] select,html[dir="rtl"
 <nav class="tabs" aria-label="مبارکباد کی اقسام"><button class="tab" type="button" data-filter="all">سب</button><button class="tab active" type="button" data-filter="jumuah">جمعہ</button><button class="tab" type="button" data-filter="ramadan">رمضان</button><button class="tab" type="button" data-filter="eid-fitr">عید الفطر</button><button class="tab" type="button" data-filter="eid-adha">عید الاضحیٰ</button><button class="tab" type="button" data-filter="daily">روزانہ</button></nav>
 <div class="section-title"><h2>تیار کارڈز</h2><p>25 کارڈز فائل کے نام کے مطابق ترتیب دیے گئے ہیں</p></div><section class="cards" id="cards"></section>
 </main>
-<div class="modal" id="modal" aria-hidden="true"><div class="modal-card"><canvas class="preview-canvas" id="previewCanvas" width="1080" height="1350"></canvas><div class="modal-actions"><button class="action-btn primary" type="button" onclick="shareCurrent()">شیئر کریں</button><button class="action-btn" type="button" onclick="regeneratePersonal()">دوبارہ بنائیں</button><button class="action-btn" type="button" onclick="downloadCurrent()">ڈاؤن لوڈ</button></div><button class="close-btn" type="button" onclick="closeModal()">بند کریں</button></div></div><div class="toast" id="toast">تیار</div>
+<div class="modal" id="modal" aria-hidden="true"><div class="modal-card"><canvas class="preview-canvas" id="previewCanvas" width="1080" height="1350"></canvas><div class="modal-actions"><button class="action-btn primary" type="button" onclick="requestShareConfirmation()">شیئر کریں</button><button class="action-btn" type="button" onclick="regeneratePersonal()">دوبارہ بنائیں</button><button class="action-btn" type="button" onclick="downloadCurrent()">ڈاؤن لوڈ</button></div><button class="close-btn" type="button" onclick="closeModal()">بند کریں</button></div></div><div class="confirm-modal" id="shareConfirmModal" aria-hidden="true"><div class="confirm-card" role="dialog" aria-modal="true" aria-labelledby="shareConfirmTitle"><h3 id="shareConfirmTitle"></h3><div class="confirm-category" id="shareConfirmCategory"></div><p id="shareConfirmBody"></p><div class="confirm-actions"><button type="button" onclick="closeShareConfirm()" id="shareConfirmCancel"></button><button class="confirm-primary" type="button" onclick="confirmShareNow()" id="shareConfirmOk"></button></div></div></div><div class="toast" id="toast">تیار</div>
 <script>
 const APP_LINK="https://barakaway.app";
 const LOGO_PATH="./assets/greetings-ru/logo.png";
@@ -516,7 +528,7 @@ showToast("پہلے ذاتی کارڈ بنائیں");
 function openTodayCard(){currentGreeting=getTodayGreeting();openModal(currentGreeting);}
 function openCard(id){currentGreeting=findGreeting(id);openModal(currentGreeting);}
 function copyCard(id){copyText(formatShareText(findGreeting(id)));}
-function shareCard(id){currentGreeting=findGreeting(id);shareCurrent();}
+function shareCard(id){currentGreeting=findGreeting(id);requestShareConfirmation(currentGreeting);}
 function formatShareText(g){return "BarakaWay ایپ ڈاؤن لوڈ کریں — قرآن، اذکار، ذکر، دعائیں، قبلہ اور اسلامی مواد۔\\n\\nhttps://barakaway.app";}
 
 function wrapCanvasText(ctx,text,x,y,maxWidth,lineHeight,maxLines){const words=String(text||"").split(/\s+/);let line="",lines=[];for(let i=0;i<words.length;i++){const test=line+words[i]+" ";if(ctx.measureText(test).width>maxWidth&&i>0){lines.push(line.trim());line=words[i]+" ";}else{line=test;}}if(line.trim())lines.push(line.trim());if(maxLines&&lines.length>maxLines){lines=lines.slice(0,maxLines);lines[lines.length-1]=lines[lines.length-1].replace(/[.,;:!?]*$/,"")+"…";}lines.forEach(function(l,i){ctx.fillText(l,x,y+i*lineHeight);});}
@@ -616,7 +628,45 @@ async function openModal(g){currentGreeting=g;await drawImageCardToCanvas(g);doc
 function closeModal(){document.getElementById("modal").classList.remove("open");document.getElementById("modal").setAttribute("aria-hidden","true");}
 function canvasToBlob(canvas){return new Promise(function(resolve){canvas.toBlob(function(blob){resolve(blob);},"image/png",.96);});}
 
-async function shareCurrent(){
+
+const SHARE_CONFIRM_TEXT={"confirm": "تصدیق کرتا ہوں", "cancel": "منسوخ کریں", "title": "مبارکباد بھیجنے کی تصدیق کریں", "dailyTitle": "روزانہ مبارکباد بھیجنے کی تصدیق کریں", "body": "آپ یہ مبارکباد بھیجنے والے ہیں: {category}. بھیجنے سے پہلے منتخب کارڈ ضرور چیک کریں۔", "dailyBody": "آپ روزانہ مبارکباد بھیجنے والے ہیں۔ بھیجنے سے پہلے منتخب کارڈ ضرور چیک کریں۔", "category": "زمرہ"};
+function getShareConfirmCategory(g){
+  if(!g)return "";
+  return g.label||g.title||"";
+}
+function getShareConfirmTitle(g){
+  if(g&&g.category==="daily")return SHARE_CONFIRM_TEXT.dailyTitle;
+  return SHARE_CONFIRM_TEXT.title;
+}
+function getShareConfirmBody(g){
+  const category=getShareConfirmCategory(g);
+  if(g&&g.category==="daily")return SHARE_CONFIRM_TEXT.dailyBody;
+  return SHARE_CONFIRM_TEXT.body.replace("{category}",category);
+}
+function requestShareConfirmation(g){
+  if(g)currentGreeting=g;
+  const modal=document.getElementById("shareConfirmModal");
+  if(!modal){confirmedShareCurrent();return;}
+  document.getElementById("shareConfirmTitle").textContent=getShareConfirmTitle(currentGreeting);
+  document.getElementById("shareConfirmCategory").textContent=SHARE_CONFIRM_TEXT.category+": "+getShareConfirmCategory(currentGreeting);
+  document.getElementById("shareConfirmBody").textContent=getShareConfirmBody(currentGreeting);
+  document.getElementById("shareConfirmCancel").textContent=SHARE_CONFIRM_TEXT.cancel;
+  document.getElementById("shareConfirmOk").textContent=SHARE_CONFIRM_TEXT.confirm;
+  modal.classList.add("open");
+  modal.setAttribute("aria-hidden","false");
+}
+function closeShareConfirm(){
+  const modal=document.getElementById("shareConfirmModal");
+  if(!modal)return;
+  modal.classList.remove("open");
+  modal.setAttribute("aria-hidden","true");
+}
+function confirmShareNow(){
+  closeShareConfirm();
+  confirmedShareCurrent();
+}
+
+async function confirmedShareCurrent(){
 const canvas=await drawImageCardToCanvas(currentGreeting);
 const text=formatShareText(currentGreeting);
 try{
@@ -639,7 +689,7 @@ function copyText(text){if(navigator.clipboard&&navigator.clipboard.writeText){n
 function fallbackCopy(text){const area=document.createElement("textarea");area.value=text;document.body.appendChild(area);area.select();document.execCommand("copy");area.remove();showToast("متن کاپی ہو گیا");}
 async function downloadCurrent(){const canvas=await drawImageCardToCanvas(currentGreeting);const a=document.createElement("a");a.href=canvas.toDataURL("image/png");a.download="barakaway-greeting.png";document.body.appendChild(a);a.click();a.remove();}
 function showToast(message){const toast=document.getElementById("toast");toast.textContent=message;toast.classList.add("show");setTimeout(function(){toast.classList.remove("show");},1800);}
-document.addEventListener("DOMContentLoaded",function(){loadName();updateToday();renderCards("jumuah");document.getElementById("generatorName").addEventListener("input",saveName);document.querySelectorAll(".tab").forEach(function(btn){btn.addEventListener("click",function(){document.querySelectorAll(".tab").forEach(function(x){x.classList.remove("active");});btn.classList.add("active");renderCards(btn.getAttribute("data-filter"));});});document.getElementById("modal").addEventListener("click",function(e){if(e.target.id==="modal")closeModal();});});
+document.addEventListener("DOMContentLoaded",function(){loadName();updateToday();renderCards("jumuah");document.getElementById("generatorName").addEventListener("input",saveName);document.querySelectorAll(".tab").forEach(function(btn){btn.addEventListener("click",function(){document.querySelectorAll(".tab").forEach(function(x){x.classList.remove("active");});btn.classList.add("active");renderCards(btn.getAttribute("data-filter"));});});document.getElementById("modal").addEventListener("click",function(e){if(e.target.id==="modal")closeModal();});const scm=document.getElementById("shareConfirmModal");if(scm){scm.addEventListener("click",function(e){if(e.target.id==="shareConfirmModal")closeShareConfirm();});}});
 </script>
 <script src="/bottom-nav.js"></script>
 </body>

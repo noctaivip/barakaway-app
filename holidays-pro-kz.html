@@ -261,6 +261,18 @@ border-radius:20px;
   }
 }
 
+
+.confirm-modal{position:fixed;inset:0;z-index:90;display:none;align-items:center;justify-content:center;padding:18px;background:rgba(0,0,0,.74);backdrop-filter:blur(10px)}
+.confirm-modal.open{display:flex}
+.confirm-card{width:min(100%,460px);border-radius:28px;background:var(--bw-card);border:1px solid var(--bw-line);box-shadow:0 30px 100px rgba(0,0,0,.56);padding:22px;text-align:center}
+.confirm-card h3{margin:0 0 10px;font-size:22px;line-height:1.2;letter-spacing:-.02em;text-transform:uppercase;color:var(--bw-gold-2)}
+.confirm-card p{margin:0;color:var(--bw-muted);font-size:15px;line-height:1.55}
+.confirm-category{margin:14px auto 16px;display:inline-flex;align-items:center;justify-content:center;min-height:38px;padding:8px 14px;border-radius:999px;border:1px solid rgba(215,181,109,.30);background:rgba(215,181,109,.10);color:var(--bw-gold-2);font-size:13px;font-weight:900;text-transform:uppercase;letter-spacing:.04em}
+.confirm-actions{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:18px}
+.confirm-actions button{min-height:46px;border-radius:16px;font:inherit;font-weight:900;cursor:pointer;border:1px solid rgba(215,181,109,.22);background:rgba(255,255,255,.055);color:var(--bw-text)}
+.confirm-actions .confirm-primary{border:0;color:#10140f;background:linear-gradient(135deg,var(--bw-gold-2),var(--bw-gold))}
+@media(max-width:520px){.confirm-actions{grid-template-columns:1fr}}
+
 </style>
 <script src="/theme-init.js"></script>
 <link rel="stylesheet" href="/theme.css">
@@ -274,7 +286,7 @@ border-radius:20px;
 <nav class="tabs" aria-label="Құттықтау санаттары"><button class="tab" type="button" data-filter="all">Барлығы</button><button class="tab active" type="button" data-filter="jumuah">Жұма</button><button class="tab" type="button" data-filter="ramadan">Рамазан</button><button class="tab" type="button" data-filter="eid-fitr">Ораза айт</button><button class="tab" type="button" data-filter="eid-adha">Құрбан айт</button><button class="tab" type="button" data-filter="daily">Күн сайын</button></nav>
 <div class="section-title"><h2>Дайын құттықтаулар</h2></div><section class="cards" id="cards"></section>
 </main>
-<div class="modal" id="modal" aria-hidden="true"><div class="modal-card"><canvas class="preview-canvas" id="previewCanvas" width="1080" height="1350"></canvas><div class="modal-actions"><button class="action-btn primary" type="button" onclick="shareCurrent()">Бөлісу</button><button class="action-btn" type="button" onclick="regeneratePersonal()">Қайта генерациялау</button><button class="action-btn" type="button" onclick="downloadCurrent()">Жүктеп алу</button></div><button class="close-btn" type="button" onclick="closeModal()">Жабу</button></div></div><div class="toast" id="toast">Дайын</div>
+<div class="modal" id="modal" aria-hidden="true"><div class="modal-card"><canvas class="preview-canvas" id="previewCanvas" width="1080" height="1350"></canvas><div class="modal-actions"><button class="action-btn primary" type="button" onclick="requestShareConfirmation()">Бөлісу</button><button class="action-btn" type="button" onclick="regeneratePersonal()">Қайта генерациялау</button><button class="action-btn" type="button" onclick="downloadCurrent()">Жүктеп алу</button></div><button class="close-btn" type="button" onclick="closeModal()">Жабу</button></div></div><div class="confirm-modal" id="shareConfirmModal" aria-hidden="true"><div class="confirm-card" role="dialog" aria-modal="true" aria-labelledby="shareConfirmTitle"><h3 id="shareConfirmTitle"></h3><div class="confirm-category" id="shareConfirmCategory"></div><p id="shareConfirmBody"></p><div class="confirm-actions"><button type="button" onclick="closeShareConfirm()" id="shareConfirmCancel"></button><button class="confirm-primary" type="button" onclick="confirmShareNow()" id="shareConfirmOk"></button></div></div></div><div class="toast" id="toast">Дайын</div>
 <script>
 const APP_LINK="https://barakaway.app";
 const LOGO_PATH="./assets/greetings-pro-kz/logo.png";
@@ -1101,7 +1113,45 @@ async function shareReadyCard(id){
 }
 
 
-async function shareCurrent(){
+
+const SHARE_CONFIRM_TEXT={"confirm": "Растаймын", "cancel": "Бас тарту", "title": "Құттықтауды жіберуді растаңыз", "dailyTitle": "Күнделікті құттықтауды жіберуді растаңыз", "body": "Сіз мына құттықтауды жібергелі тұрсыз: {category}. Жібермес бұрын таңдалған ашықхатты тексеріңіз.", "dailyBody": "Сіз күнделікті құттықтауды жібергелі тұрсыз. Жібермес бұрын таңдалған ашықхатты тексеріңіз.", "category": "Санат"};
+function getShareConfirmCategory(g){
+  if(!g)return "";
+  return g.label||g.title||"";
+}
+function getShareConfirmTitle(g){
+  if(g&&g.category==="daily")return SHARE_CONFIRM_TEXT.dailyTitle;
+  return SHARE_CONFIRM_TEXT.title;
+}
+function getShareConfirmBody(g){
+  const category=getShareConfirmCategory(g);
+  if(g&&g.category==="daily")return SHARE_CONFIRM_TEXT.dailyBody;
+  return SHARE_CONFIRM_TEXT.body.replace("{category}",category);
+}
+function requestShareConfirmation(g){
+  if(g)currentGreeting=g;
+  const modal=document.getElementById("shareConfirmModal");
+  if(!modal){confirmedShareCurrent();return;}
+  document.getElementById("shareConfirmTitle").textContent=getShareConfirmTitle(currentGreeting);
+  document.getElementById("shareConfirmCategory").textContent=SHARE_CONFIRM_TEXT.category+": "+getShareConfirmCategory(currentGreeting);
+  document.getElementById("shareConfirmBody").textContent=getShareConfirmBody(currentGreeting);
+  document.getElementById("shareConfirmCancel").textContent=SHARE_CONFIRM_TEXT.cancel;
+  document.getElementById("shareConfirmOk").textContent=SHARE_CONFIRM_TEXT.confirm;
+  modal.classList.add("open");
+  modal.setAttribute("aria-hidden","false");
+}
+function closeShareConfirm(){
+  const modal=document.getElementById("shareConfirmModal");
+  if(!modal)return;
+  modal.classList.remove("open");
+  modal.setAttribute("aria-hidden","true");
+}
+function confirmShareNow(){
+  closeShareConfirm();
+  confirmedShareCurrent();
+}
+
+async function confirmedShareCurrent(){
 const canvas=await drawImageCardToCanvas(currentGreeting);
 const text=formatShareText(currentGreeting);
 try{
@@ -1385,7 +1435,7 @@ function zoomCard(id){
   if(g&&g.image){openZoomViewer(g.image);}
 }
 
-document.addEventListener("DOMContentLoaded",function(){loadName();updateToday();renderCards("jumuah");attachSafeImages(document);bindZoomViewer();document.getElementById("generatorName").addEventListener("input",saveName);document.querySelectorAll(".tab").forEach(function(btn){btn.addEventListener("click",function(){document.querySelectorAll(".tab").forEach(function(x){x.classList.remove("active");});btn.classList.add("active");renderCards(btn.getAttribute("data-filter"));});});document.getElementById("modal").addEventListener("click",function(e){if(e.target.id==="modal")closeModal();});});
+document.addEventListener("DOMContentLoaded",function(){loadName();updateToday();renderCards("jumuah");attachSafeImages(document);bindZoomViewer();document.getElementById("generatorName").addEventListener("input",saveName);document.querySelectorAll(".tab").forEach(function(btn){btn.addEventListener("click",function(){document.querySelectorAll(".tab").forEach(function(x){x.classList.remove("active");});btn.classList.add("active");renderCards(btn.getAttribute("data-filter"));});});document.getElementById("modal").addEventListener("click",function(e){if(e.target.id==="modal")closeModal();});const scm=document.getElementById("shareConfirmModal");if(scm){scm.addEventListener("click",function(e){if(e.target.id==="shareConfirmModal")closeShareConfirm();});}});
 </script>
 <script src="/bottom-nav.js"></script>
 
