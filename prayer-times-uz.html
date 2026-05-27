@@ -816,6 +816,61 @@ html.light-mode .sunrise-title{
   color:#1f2a22 !important;
 }
 
+
+
+/* FINAL: soft theme pulse for Share button (CSS only, no JS changed) */
+.share-times-btn{
+  --share-pulse-color: var(--theme-accent, var(--premium-accent, var(--accent-color, #2d7a46)));
+  position:relative;
+  overflow:visible;
+  isolation:isolate;
+  border:1.5px solid color-mix(in srgb, var(--share-pulse-color) 72%, transparent) !important;
+  background:color-mix(in srgb, var(--share-pulse-color) 12%, #1d242c) !important;
+  color:#f3fff7 !important;
+  box-shadow:0 0 0 0 color-mix(in srgb, var(--share-pulse-color) 35%, transparent), 0 0 16px color-mix(in srgb, var(--share-pulse-color) 20%, transparent) !important;
+  animation:shareThemeSoftPulse 1.85s ease-in-out infinite;
+}
+.share-times-btn .share-times-icon,
+.share-times-btn svg{
+  color:currentColor !important;
+  fill:currentColor !important;
+}
+.share-times-btn::after{
+  content:"";
+  position:absolute;
+  inset:-5px;
+  border-radius:999px;
+  border:1.5px solid color-mix(in srgb, var(--share-pulse-color) 62%, transparent);
+  opacity:.38;
+  pointer-events:none;
+  z-index:-1;
+  animation:shareThemeOuterPulse 1.85s ease-in-out infinite;
+}
+@keyframes shareThemeSoftPulse{
+  0%,100%{
+    border-color:color-mix(in srgb, var(--share-pulse-color) 55%, transparent);
+    box-shadow:0 0 0 0 color-mix(in srgb, var(--share-pulse-color) 22%, transparent), 0 0 10px color-mix(in srgb, var(--share-pulse-color) 16%, transparent) !important;
+    transform:translateZ(0);
+  }
+  50%{
+    border-color:color-mix(in srgb, var(--share-pulse-color) 100%, white 0%);
+    box-shadow:0 0 0 5px color-mix(in srgb, var(--share-pulse-color) 16%, transparent), 0 0 26px color-mix(in srgb, var(--share-pulse-color) 44%, transparent) !important;
+    transform:translateY(-1px);
+  }
+}
+@keyframes shareThemeOuterPulse{
+  0%,100%{opacity:.20; transform:scale(.985);}
+  50%{opacity:.78; transform:scale(1.045);}
+}
+html.light-mode .share-times-btn{
+  background:color-mix(in srgb, var(--share-pulse-color) 10%, #ffffff) !important;
+  color:var(--share-pulse-color) !important;
+}
+@media (prefers-reduced-motion: reduce){
+  .share-times-btn,
+  .share-times-btn::after{animation:none !important;}
+}
+
 </style>
 <script src="/theme-init.js"></script>
 <link rel="stylesheet" href="/theme.css">
