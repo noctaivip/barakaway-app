@@ -931,7 +931,7 @@ showToast("Алдымен жеке карточка жасаңыз");
 function openTodayCard(){currentGreeting=getTodayGreeting();openModal(currentGreeting);}
 function openCard(id){currentGreeting=findGreeting(id);openModal(currentGreeting);}
 function copyCard(id){copyText(formatShareText(findGreeting(id)));}
-function shareCard(id){shareReadyCard(id);}
+function shareCard(id){currentGreeting=findGreeting(id);window.__pendingReadyShareId=id;requestShareConfirmation(currentGreeting);}
 function formatShareText(g){return "BarakaWay қосымшасын жүктеп алыңыз — Құран, азкарлар, зікірлер, дұғалар, Құбыла және ислам материалдары.\n\nhttps://barakaway.app";}
 
 function wrapCanvasText(ctx,text,x,y,maxWidth,lineHeight,maxLines){const words=String(text||"").split(/\s+/);let line="",lines=[];for(let i=0;i<words.length;i++){const test=line+words[i]+" ";if(ctx.measureText(test).width>maxWidth&&i>0){lines.push(line.trim());line=words[i]+" ";}else{line=test;}}if(line.trim())lines.push(line.trim());if(maxLines&&lines.length>maxLines){lines=lines.slice(0,maxLines);lines[lines.length-1]=lines[lines.length-1].replace(/[.,;:!?]*$/,"")+"…";}lines.forEach(function(l,i){ctx.fillText(l,x,y+i*lineHeight);});}
@@ -1148,6 +1148,12 @@ function closeShareConfirm(){
 }
 function confirmShareNow(){
   closeShareConfirm();
+  if(window.__pendingReadyShareId){
+    const id=window.__pendingReadyShareId;
+    window.__pendingReadyShareId=null;
+    shareReadyCard(id);
+    return;
+  }
   confirmedShareCurrent();
 }
 
