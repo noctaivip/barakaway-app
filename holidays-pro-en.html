@@ -296,7 +296,7 @@ border-radius:20px;
 </main>
 <div class="modal" id="modal" aria-hidden="true"><div class="modal-card"><canvas class="preview-canvas" id="previewCanvas" width="1080" height="1350"></canvas><div class="modal-actions"><button class="action-btn primary" type="button" onclick="requestShareConfirmation()">Share</button><button class="action-btn" type="button" onclick="regeneratePersonal()">Regenerate</button><button class="action-btn" type="button" onclick="downloadCurrent()">Download</button></div><button class="close-btn" type="button" onclick="closeModal()">Close</button></div></div><div class="confirm-modal" id="shareConfirmModal" aria-hidden="true"><div class="confirm-card" role="dialog" aria-modal="true" aria-labelledby="shareConfirmTitle"><h3 id="shareConfirmTitle"></h3><div class="confirm-category" id="shareConfirmCategory"></div><p id="shareConfirmBody"></p><div class="confirm-actions"><button type="button" onclick="closeShareConfirm()" id="shareConfirmCancel"></button><button class="confirm-primary" type="button" onclick="confirmShareNow()" id="shareConfirmOk"></button></div></div></div><div class="toast" id="toast">Done</div>
 <script>
-const APP_LINK="https://barakaway.app";
+const APP_LINK="BarakaWay — one step closer to Allah every day.\nbarakaway.app";
 const LOGO_PATH="./assets/greetings-pro-en/logo.png";
 const PERSONAL_CARD_IMAGES=["./assets/personal-pro/personal-001.jpg","./assets/personal-pro/personal-002.jpg","./assets/personal-pro/personal-003.jpg","./assets/personal-pro/personal-004.jpg","./assets/personal-pro/personal-005.jpg","./assets/personal-pro/personal-006.jpg","./assets/personal-pro/personal-007.jpg","./assets/personal-pro/personal-008.jpg","./assets/personal-pro/personal-009.jpg","./assets/personal-pro/personal-010.jpg","./assets/personal-pro/personal-011.jpg","./assets/personal-pro/personal-012.jpg","./assets/personal-pro/personal-013.jpg","./assets/personal-pro/personal-014.jpg","./assets/personal-pro/personal-015.jpg","./assets/personal-pro/personal-016.jpg","./assets/personal-pro/personal-017.jpg","./assets/personal-pro/personal-018.jpg","./assets/personal-pro/personal-019.jpg","./assets/personal-pro/personal-020.jpg","./assets/personal-pro/personal-021.jpg","./assets/personal-pro/personal-022.jpg","./assets/personal-pro/personal-023.jpg","./assets/personal-pro/personal-024.jpg","./assets/personal-pro/personal-025.jpg","./assets/personal-pro/personal-026.jpg","./assets/personal-pro/personal-027.jpg","./assets/personal-pro/personal-028.jpg","./assets/personal-pro/personal-029.jpg","./assets/personal-pro/personal-030.jpg","./assets/personal-pro/personal-031.jpg","./assets/personal-pro/personal-032.jpg","./assets/personal-pro/personal-033.jpg","./assets/personal-pro/personal-034.jpg","./assets/personal-pro/personal-035.jpg","./assets/personal-pro/personal-036.jpg","./assets/personal-pro/personal-037.jpg","./assets/personal-pro/personal-038.jpg","./assets/personal-pro/personal-039.jpg","./assets/personal-pro/personal-040.jpg","./assets/personal-pro/personal-041.jpg","./assets/personal-pro/personal-042.jpg","./assets/personal-pro/personal-043.jpg","./assets/personal-pro/personal-044.jpg","./assets/personal-pro/personal-045.jpg","./assets/personal-pro/personal-046.jpg","./assets/personal-pro/personal-047.jpg","./assets/personal-pro/personal-048.jpg"];
 const greetings=[
@@ -1177,7 +1177,8 @@ function attachSafeImages(root){
   });
 }
 
-function renderCards(filter){const root=document.getElementById("cards");const list=orderedGreetings().filter(function(item){return filter==="all"||item.category===filter;});root.innerHTML=list.map(function(item){return `<article class="greeting-card" data-category="${item.category}"><div class="card-art"><img class="card-image" src="${item.image}" alt="${item.title}" loading="lazy"><div class="card-image-overlay"></div><div class="card-brand-badge"><img src="${LOGO_PATH}" alt="BarakaWay"></div><div class="card-category-badge">${item.label}</div><div class="card-site-mark">barakaway.app</div></div><div class="card-body"><h3 class="card-title">${item.title}</h3></div><div class="card-actions"><button class="action-btn" type="button" onclick="downloadReadyCard('${item.id}')">Download</button><button class="action-btn" type="button" onclick="copyCard('${item.id}')">Copy</button><button class="action-btn primary" type="button" onclick="shareCard('${item.id}')">Share</button></div></article>`;}).join("");attachSafeImages(root);}
+function renderCards(filter){const root=document.getElementById("cards");const list=orderedGreetings().filter(function(item){return filter==="all"||item.category===filter;});root.innerHTML=list.map(function(item){return `BarakaWay — one step closer to Allah every day.
+barakaway.app`;}).join("");attachSafeImages(root);}
 function findGreeting(id){return greetings.find(function(item){return item.id===id;})||greetings[0];}
 function generatePersonal(){initAudienceNameLogic();const audience=getGeneratorAudience();const nameInput=document.getElementById("generatorName");let name=cleanPersonalName((nameInput&&audience==="individual")?nameInput.value||"":"");if(audience==="individual"&&!name){if(nameInput){nameInput.focus();nameInput.classList.add("field-error");setTimeout(()=>nameInput.classList.remove("field-error"),900);}alert("Please enter the recipient name for a personal greeting.");return;}saveName();const cat=document.getElementById("generatorCategory").value;const tpl=personalizedTemplates[cat]||personalizedTemplates.jumuah;const personalText=selectPersonalText(cat,name);currentGreeting={id:"personal",category:cat,label:tpl.label,title:tpl.title,headline:selectPersonalHeadline(cat),text:personalText.text,textSignature:personalText.signature,image:getNextPersonalImage(),personalName:name,personalAudience:getGeneratorAudience()};openModal(currentGreeting);}
 function regeneratePersonal(){
@@ -1199,7 +1200,7 @@ function openTodayCard(){currentGreeting=getTodayGreeting();openModal(currentGre
 function openCard(id){currentGreeting=findGreeting(id);openModal(currentGreeting);}
 function copyCard(id){copyText(formatShareText(findGreeting(id)));}
 function shareCard(id){currentGreeting=findGreeting(id);window.__pendingReadyShareId=id;requestShareConfirmation(currentGreeting);}
-function formatShareText(g){return "Download the BarakaWay app — Quran, Adhkar, Dhikr, Duas, Qibla, and Islamic materials.\n\nhttps://barakaway.app";}
+function formatShareText(g){return "BarakaWay — one step closer to Allah every day.\nbarakaway.app";}
 
 function wrapCanvasText(ctx,text,x,y,maxWidth,lineHeight,maxLines){const words=String(text||"").split(/\s+/);let line="",lines=[];for(let i=0;i<words.length;i++){const test=line+words[i]+" ";if(ctx.measureText(test).width>maxWidth&&i>0){lines.push(line.trim());line=words[i]+" ";}else{line=test;}}if(line.trim())lines.push(line.trim());if(maxLines&&lines.length>maxLines){lines=lines.slice(0,maxLines);lines[lines.length-1]=lines[lines.length-1].replace(/[.,;:!?]*$/,"")+"…";}lines.forEach(function(l,i){ctx.fillText(l,x,y+i*lineHeight);});}
 
@@ -1379,7 +1380,7 @@ ctx.fillStyle=style.text;
 drawFittedCanvasText(ctx,g.text,w/2,panelY+332,panelW-170,panelH-386,{maxFontSize:41,minFontSize:27,weight:"700",family:"system-ui, Arial"});
 ctx.restore();
 }
-ctx.fillStyle="rgba(255,238,190,.96)";ctx.font="800 30px system-ui, Arial";ctx.fillText("BarakaWay App",w/2,h-92);ctx.fillStyle="rgba(255,238,190,.82)";ctx.font="650 25px system-ui, Arial";ctx.fillText("barakaway.app",w/2,h-54);return canvas;}
+ctx.fillStyle="rgba(255,238,190,.96)";ctx.font="800 30px system-ui, Arial";ctx.fillText("BarakaWay App",w/2,h-92);ctx.fillStyle="rgba(255,238,190,.82)";ctx.font="650 25px system-ui, Arial";ctx.fillText("BarakaWay — one step closer to Allah every day.\nbarakaway.app",w/2,h-54);return canvas;}
 async function openModal(g){currentGreeting=g;await drawImageCardToCanvas(g);document.getElementById("modal").classList.add("open");document.getElementById("modal").setAttribute("aria-hidden","false");}
 function closeModal(){document.getElementById("modal").classList.remove("open");document.getElementById("modal").setAttribute("aria-hidden","true");}
 function canvasToBlob(canvas){return new Promise(function(resolve){canvas.toBlob(function(blob){resolve(blob);},"image/png",.96);});}
@@ -1501,8 +1502,8 @@ function drawBarakaWayWatermark(ctx,w,h){
   ctx.strokeText("BarakaWay App",0,-26);
   ctx.fillText("BarakaWay App",0,-26);
   ctx.font="800 42px system-ui,-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif";
-  ctx.strokeText("barakaway.app",0,42);
-  ctx.fillText("barakaway.app",0,42);
+  ctx.strokeText("BarakaWay — one step closer to Allah every day.\nbarakaway.app",0,42);
+  ctx.fillText("BarakaWay — one step closer to Allah every day.\nbarakaway.app",0,42);
   ctx.restore();
 
   ctx.save();
@@ -1517,7 +1518,7 @@ function drawBarakaWayWatermark(ctx,w,h){
   for(let y=-h*1.2;y<h*1.8;y+=stepY){
     for(let x=-w*1.2;x<w*1.8;x+=stepX){
       ctx.fillText("BarakaWay App",x,y);
-      ctx.fillText("barakaway.app",x,y+42);
+      ctx.fillText("BarakaWay — one step closer to Allah every day.\nbarakaway.app",x,y+42);
     }
   }
   ctx.restore();
@@ -1592,7 +1593,7 @@ async function drawReadyCardDownload(g){
   ctx.fillText("BarakaWay App",w/2,markY+36);
   ctx.fillStyle="rgba(255,244,194,.86)";
   ctx.font="800 22px system-ui,-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif";
-  ctx.fillText("barakaway.app",w/2,markY+64);
+  ctx.fillText("BarakaWay — one step closer to Allah every day.\nbarakaway.app",w/2,markY+64);
   ctx.shadowBlur=0;
 
   return canvas;
