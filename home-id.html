@@ -5,6 +5,46 @@
 <!DOCTYPE html>
 <html lang="kz">
 <head>
+<script id="bw-force-unfinished-daily-tasks-v20260530">
+(function(){
+  'use strict';
+  try{
+    var lang = 'id';
+    var marker = 'bw_force_unfinished_daily_tasks_v20260530_' + lang;
+    if(localStorage.getItem(marker)==='1') return;
+    var d = new Date();
+    var day = d.getFullYear() + '-' + String(d.getMonth()+1).padStart(2,'0') + '-' + String(d.getDate()).padStart(2,'0');
+    var tasks = ['article','adhkar','name','goal','micro'];
+    var langs = ['ru','en','uz','kz','tr','id','hi','bn','ar','ur',lang];
+    var remove = [];
+    for(var i=0;i<localStorage.length;i++){
+      var k = localStorage.key(i); if(!k) continue;
+      var low = k.toLowerCase();
+      if(low.indexOf(day.toLowerCase())!==-1 && (
+        low.indexOf('barakaway_today_')!==-1 ||
+        low.indexOf('bw_final_done_v2_')!==-1 ||
+        low.indexOf('bw_daily_done_v2_')!==-1 ||
+        low.indexOf('barakaway_micro_answer_')!==-1 ||
+        low.indexOf('barakaway_name_counter_')!==-1 ||
+        low.indexOf('bw_ayah_card_done_')!==-1 ||
+        low.indexOf('barakaway_pro_micro_done_')!==-1
+      )) remove.push(k);
+    }
+    remove.forEach(function(k){localStorage.removeItem(k);});
+    tasks.forEach(function(task){langs.forEach(function(l){
+      localStorage.removeItem('bw_final_done_v2_'+l+'_'+day+'_'+task);
+      localStorage.removeItem('bw_daily_done_v2_'+l+'_'+day+'_'+task);
+      localStorage.removeItem('barakaway_today_'+l+'_'+day+'_'+task);
+      localStorage.removeItem('barakaway_today_'+l+'_v2_'+day+'_'+task);
+      localStorage.removeItem('barakaway_today_'+l+'_v3_'+day+'_'+task);
+      localStorage.removeItem('barakaway_today_'+l+'_final_'+day+'_'+task);
+    });});
+    localStorage.removeItem('barakaway_pro_micro_done_'+day);
+    localStorage.setItem(marker,'1');
+  }catch(e){}
+})();
+</script>
+
 
 <script>
 (function(){
@@ -4172,41 +4212,7 @@ html.light-mode .today-hub .bw-task-hint{color:#53645a;}
 }
 </style>
 
-<script id="bw-kz-logic-fix-v3">
-(function(){
-  try{
-    var today = new Date();
-    var y = today.getFullYear();
-    var m = String(today.getMonth()+1).padStart(2,'0');
-    var d = String(today.getDate()).padStart(2,'0');
-    var day = y + '-' + m + '-' + d;
 
-    // Hard reset old broken completed/counter states.
-    var prefixes = [
-      'barakaway_today_kz_',
-      'barakaway_today_kz_v2_',
-      'barakaway_name_counter_kz_',
-      'barakaway_name_counter_kz_v2_',
-      'barakaway_name_counter_' + day
-    ];
-    Object.keys(localStorage).forEach(function(key){
-      prefixes.forEach(function(prefix){
-        if(key.indexOf(prefix) === 0) localStorage.removeItem(key);
-      });
-    });
-  }catch(e){}
-
-  window.BW_TASK_FIX_KZ = {
-    selectAnswer: "Дұрыс жауапты таңдаңыз.",
-    correct: "Дұрыс.",
-    wrong: "",
-    shahadaMeaning: "Шаһада — Исламның бірінші тірегі: Алладан басқа құдай жоқ және Мұхаммед ﷺ Оның Елшісі екеніне куәлік.",
-    repeat: "Қайталау +1",
-    countComplete: "100 / 100 орындалды",
-    taskText: "Тапсырма:"
-  };
-})();
-</script>
 
 
 <style id="bw-kz-logic-polish-fix">
@@ -12973,7 +12979,7 @@ const TASK_PREFIX = "barakaway_today_kz_";
 <script id="bw-final-task-state-repair-v2-js">
 (function(){
 'use strict';
-var LANG="kz";
+var LANG="id";
 var MICRO_DATA=[{"q": "Исламның неше тірегі бар?", "options": ["5", "4", "6"], "correct": 0, "meaning": "Ислам бес негізгі тірекке құрылған."}, {"q": "Намаз күніне неше рет оқылады?", "options": ["5", "3", "7"], "correct": 0, "meaning": "Бес уақыт намаз мұсылман өмірінің негізі."}, {"q": "Дәрет не үшін керек?", "options": ["Намазға дайындық", "Тек ұйқы үшін", "Тек тамақ үшін"], "correct": 0, "meaning": "Тазалық намаздың маңызды шарты."}, {"q": "Ниет қайда болады?", "options": ["Жүректе", "Киімде", "Иәуыста"], "correct": 0, "meaning": "Алла ниетті сөзсіз де біледі."}, {"q": "Әдейі өтірік айтуға бола ма?", "options": ["Жоқ", "Иә", "Себепсіз кейде"], "correct": 0, "meaning": "Шыншылдық иман мен сенімді күшейтеді."}, {"q": "«Бисмиллаһ» нені білдіреді?", "options": ["Алланың атымен", "Рахмет", "Кездескенше"], "correct": 0, "meaning": "Мұсылман істі Алланың атымен бастайды."}, {"q": "«Әлхамдулиллаһ» нені білдіреді?", "options": ["Мақтау Аллаға", "Кешір", "Мен шаршадым"], "correct": 0, "meaning": "Бұл шүкір мен мойындаудың сөзі."}, {"q": "Садақа тек ақшамен бола ма?", "options": ["Жоқ", "Иә", "Тек көп ақша"], "correct": 0, "meaning": "Жақсы сөз де, көмек те садақа болуы мүмкін."}, {"q": "Жақсы сөз — бұл…", "options": ["Садақа", "Бос нәрсе", "Зиян"], "correct": 0, "meaning": "Жақсы сөз жүректі жұмсартады."}, {"q": "Ата-анаға қарым-қатынас қандай болуы керек?", "options": ["Құрметпен", "Қатал", "Елемеу"], "correct": 0, "meaning": "Ата-ананың ақысы үлкен."}, {"q": "Дұға қашан жасалады?", "options": ["Кез келген уақытта", "Тек бір жерде", "Ешқашан"], "correct": 0, "meaning": "Алла құлын әрдайым естиді."}, {"q": "Сабыр деген не?", "options": ["Өзін ұстау", "Айқайлау", "Беріліп кету"], "correct": 0, "meaning": "Сабыр жүректі тәрбиелейді."}, {"q": "Шүкір не береді?", "options": ["Нығметті тану", "Тәкаппарлық", "Ұмыту"], "correct": 0, "meaning": "Шүкір нығметті Берушімен байланыстырады."}, {"q": "Алланың рақымынан үміт үзуге бола ма?", "options": ["Жоқ", "Иә", "Әрқашан"], "correct": 0, "meaning": "Алланың рақымы тәубе етушілерге кең."}, {"q": "Аллаға үміт қандай болуы керек?", "options": ["Амалмен", "Жалқаулықпен", "Күнәмен"], "correct": 0, "meaning": "Үміт әрекетті жоққа шығармайды."}, {"q": "Алладан қорқу неге көмектеседі?", "options": ["Күнәдан алыстауға", "Дөрекі болуға", "Қызғануға"], "correct": 0, "meaning": "Мұндай қорқыныш мінезді тазартады."}, {"q": "Алланы сүю неден көрінеді?", "options": ["Мойынсұнудан", "Тәкаппарлықтан", "Өтіріктен"], "correct": 0, "meaning": "Сүйіспеншілік амалмен дәлелденеді."}, {"q": "Жүрек немен тазарады?", "options": ["Зікірмен", "Қызғанышпен", "Ғайбатпен"], "correct": 0, "meaning": "Алланы еске алу жүректі тірілтеді."}, {"q": "Ең жақсы зікірдің бірі…", "options": ["Лә иләһә иллаллаһ", "Дөрекі сөз", "Иәу"], "correct": 0, "meaning": "Бұл таухид сөзі және иман негізі."}, {"q": "«Субханаллаһ» нені білдіреді?", "options": ["Алла пәк", "Мен шаршадым", "Саған рахмет"], "correct": 0, "meaning": "Мүмін осылай Алланы ұлықтайды."}, {"q": "«Аллаһу Акбар» нені білдіреді?", "options": ["Алла Ұлы", "Мен дұрыспын", "Кездескенше"], "correct": 0, "meaning": "Бұл Алланың ұлылығын мойындау."}, {"q": "Ғайбат деген не?", "options": ["Артынан жаман айту", "Көмектесу", "Сәлем беру"], "correct": 0, "meaning": "Ғайбат жүректі және қатынасты бұзады."}, {"q": "Адам қателессе, жақсысы…", "options": ["Жұмсақ түзету", "Мазақ ету", "Ұятқа қалдыру"], "correct": 0, "meaning": "Жұмсақ насихат қорлаудан пайдалы."}, {"q": "Жануарларға мейірім көрсету — бұл…", "options": ["Жақсылық", "Маңызды емес", "Тыйым"], "correct": 0, "meaning": "Исламдағы мейірім жануарларды да қамтиды."}, {"q": "Жолдан зиянды нәрсені алып тастау — бұл…", "options": ["Жақсылық", "Күнә", "Бос нәрсе"], "correct": 0, "meaning": "Кішкентай пайда да адамдар үшін құнды."}, {"q": "Отбасы — бұл…", "options": ["Аманат", "Ойын", "Жүк"], "correct": 0, "meaning": "Жақындардың қамқорлық пен жұмсақтыққа ақысы бар."}, {"q": "Туыстық байланысты…", "options": ["Сақтау керек", "Себепсіз үзу керек", "Елемеу керек"], "correct": 0, "meaning": "Отбасының күші байланыс пен құрметтен басталады."}, {"q": "Жақсы істе ең маңыздысы не?", "options": ["Ықылас", "Мақтау", "Фото"], "correct": 0, "meaning": "Алла Өз разылығы үшін жасалған істі қабыл етеді."}, {"q": "Шаршағанда дұға жасауға бола ма?", "options": ["Иә", "Жоқ", "Тек тұрып"], "correct": 0, "meaning": "Дұға әр мұқтаждықта қолжетімді."}, {"q": "Дұғаны өз тіліңде жасауға бола ма?", "options": ["Иә", "Жоқ", "Ешқашан"], "correct": 0, "meaning": "Алла жүректің үндеуін түсінеді."}, {"q": "ү Құ — бұл…", "options": ["-", "-", "-"], "correct": 0, "meaning": "- Құ."}, {"q": "- …", "options": ["", "", ""], "correct": 0, "meaning": "— негіз иманның ұ."}, {"q": "Қанша тірек?", "options": ["4", "5", "6"], "correct": 2, "meaning": ",,,, ү."}, {"q": "?", "options": ["", "", ""], "correct": 0, "meaning": "—."}, {"q": "ү?", "options": ["", "", ""], "correct": 0, "meaning": "."}, {"q": "?", "options": ["", "", ""], "correct": 0, "meaning": "бір ққ."}, {"q": "?", "options": ["", "", ""], "correct": 0, "meaning": "."}, {"q": "— бұл…", "options": ["", "", "ұқ"], "correct": 0, "meaning": "қ."}, {"q": "?", "options": ["", "", ""], "correct": 0, "meaning": "."}, {"q": "— бұл…", "options": ["", "қ", ""], "correct": 0, "meaning": "қ."}, {"q": "— бұл…", "options": ["", "", ""], "correct": 0, "meaning": "і қ, қ қғ."}, {"q": "— бұл…", "options": ["", "", ""], "correct": 0, "meaning": "."}, {"q": "— бұл…", "options": ["", "", ""], "correct": 0, "meaning": "."}, {"q": "— бұл…", "options": ["", "", "қғ"], "correct": 0, "meaning": "."}, {"q": "?", "options": ["", "", ""], "correct": 0, "meaning": "—."}, {"q": "…", "options": ["", "", ""], "correct": 0, "meaning": "- —."}, {"q": "қ?", "options": ["", "", ""], "correct": 0, "meaning": "қғ."}, {"q": "?", "options": ["", "", ""], "correct": 0, "meaning": "."}, {"q": "қ — бұл…", "options": ["", "", ""], "correct": 0, "meaning": "қ,,."}, {"q": "…", "options": ["", "", ""], "correct": 0, "meaning": "."}, {"q": "…", "options": ["", "", ""], "correct": 0, "meaning": "кейін."}, {"q": "…", "options": ["", "", ""], "correct": 0, "meaning": "алдында ү."}, {"q": "…", "options": ["", "", ""], "correct": 0, "meaning": "ү —."}, {"q": "онсыз?", "options": ["", "", ""], "correct": 0, "meaning": "қғ."}, {"q": "— бұл…", "options": ["", "", ""], "correct": 0, "meaning": ",,."}, {"q": "…", "options": ["", "", ""], "correct": 0, "meaning": "—."}, {"q": "?", "options": ["", "", ""], "correct": 0, "meaning": ",."}, {"q": "— бұл…", "options": ["", "", ""], "correct": 0, "meaning": "."}, {"q": "қ, …", "options": ["", "", ""], "correct": 0, "meaning": "."}, {"q": "үшін онсыз — бұл…", "options": ["", "", ""], "correct": 0, "meaning": "ққ."}, {"q": "?", "options": ["", "", ""], "correct": 0, "meaning": "— бұл."}, {"q": ":?", "options": ["", "", ""], "correct": 0, "meaning": "."}, {"q": "?", "options": ["қ ﷺ", "عليه السلام", "عليه السلام"], "correct": 0, "meaning": "қ ﷺ —."}, {"q": "?", "options": ["", "", ""], "correct": 0, "meaning": "—."}, {"q": "?", "options": ["عليه السلام", "", ""], "correct": 0, "meaning": "عليه السلام."}, {"q": "عليه السلام …", "options": ["", "", ""], "correct": 0, "meaning": "алдында."}, {"q": "عليه السلام …", "options": ["", "", ""], "correct": 0, "meaning": "."}, {"q": "عليه السلام …", "options": ["", "", "қ"], "correct": 0, "meaning": "— ғқ."}, {"q": "عليه السلام — бұл…", "options": ["", "", ""], "correct": 0, "meaning": "."}, {"q": ", عليه السلام — бұл…", "options": ["", "", ""], "correct": 0, "meaning": "—."}, {"q": ", عليه السلام — бұл…", "options": ["", "", "Құ"], "correct": 0, "meaning": "."}, {"q": "Құ …", "options": ["қ ﷺ", "عليه السلام", "عليه السلام"], "correct": 0, "meaning": "Құ —."}, {"q": "عليه السلام — бұл…", "options": ["", "", ""], "correct": 0, "meaning": "."}, {"q": "…", "options": ["", "", ""], "correct": 0, "meaning": ",."}, {"q": "?", "options": ["", "", ""], "correct": 0, "meaning": "—."}, {"q": "…", "options": ["", "", ""], "correct": 0, "meaning": "."}, {"q": "…", "options": ["", "", ""], "correct": 0, "meaning": ", ү."}, {"q": "?", "options": ["", "", ""], "correct": 0, "meaning": "."}, {"q": "…", "options": ["", "", ""], "correct": 0, "meaning": "."}, {"q": "— бұл…", "options": ["", "", ""], "correct": 0, "meaning": ",."}, {"q": "— бұл…", "options": ["", "", ""], "correct": 0, "meaning": ",,."}, {"q": "?", "options": ["", "", ""], "correct": 0, "meaning": ",."}, {"q": "— бұл…", "options": ["", "", ""], "correct": 0, "meaning": "."}, {"q": "“”?", "options": ["", "", ""], "correct": 0, "meaning": "Құ."}, {"q": "…", "options": ["", "", ""], "correct": 0, "meaning": "—."}, {"q": "қ …", "options": ["", "", ""], "correct": 0, "meaning": "."}, {"q": "?", "options": ["", "", ""], "correct": 0, "meaning": "."}, {"q": "…", "options": ["", "", ""], "correct": 0, "meaning": "—."}, {"q": "і…", "options": ["", "", ""], "correct": 0, "meaning": "."}, {"q": "…", "options": ["", "", "дөрекі"], "correct": 0, "meaning": "ү."}, {"q": ", …", "options": [":", "", ""], "correct": 0, "meaning": "“ ” —."}, {"q": "онсыз — бұл…", "options": ["", "", ""], "correct": 0, "meaning": "онсыз."}, {"q": "…", "options": ["", "", ""], "correct": 0, "meaning": "қ."}, {"q": "Құ …", "options": ["", "", ""], "correct": 0, "meaning": ", қ."}, {"q": "Құ …", "options": ["", "", ""], "correct": 0, "meaning": "қ."}, {"q": "…", "options": ["ﷺ", "", ""], "correct": 0, "meaning": "— ﷺ."}, {"q": "ﷺ …", "options": ["", "", ""], "correct": 0, "meaning": "қ ﷺ."}, {"q": "— …", "options": ["", "", ""], "correct": 0, "meaning": "."}, {"q": "…", "options": ["", "", ""], "correct": 0, "meaning": "."}, {"q": "…", "options": ["", "", ""], "correct": 0, "meaning": "."}, {"q": "…", "options": ["", "қ", ""], "correct": 0, "meaning": "."}, {"q": "қ …", "options": ["", "", ""], "correct": 0, "meaning": ", қ ү."}, {"q": "…", "options": ["", "", ""], "correct": 0, "meaning": "."}, {"q": "…", "options": ["", "онсыз", ""], "correct": 0, "meaning": "—."}, {"q": "онсыз?", "options": ["", "", ""], "correct": 0, "meaning": "—,."}, {"q": ", …", "options": ["", "", ""], "correct": 0, "meaning": "."}, {"q": "қ — бұл, …", "options": ["", "", ""], "correct": 0, "meaning": "— қ."}, {"q": "қ — бұл…", "options": ["", "", ""], "correct": 0, "meaning": "қ."}, {"q": "— бұл…", "options": ["", "", ""], "correct": 0, "meaning": "."}, {"q": "?", "options": ["", "", ""], "correct": 0, "meaning": "қғ тіпті."}, {"q": ", …", "options": ["", "", ""], "correct": 0, "meaning": ",."}, {"q": "ққ …", "options": ["", "мақтау", ""], "correct": 0, "meaning": "ққ."}, {"q": "ққ, …", "options": ["", "", ""], "correct": 0, "meaning": "қ."}, {"q": "үшін?", "options": ["", "", ""], "correct": 0, "meaning": "."}, {"q": "?", "options": ["", "", ""], "correct": 0, "meaning": "."}, {"q": "қ …", "options": ["", "", ""], "correct": 0, "meaning": "қ."}, {"q": "алдында …", "options": ["үә", "", ""], "correct": 0, "meaning": "."}, {"q": "…", "options": ["", "", ""], "correct": 0, "meaning": "."}, {"q": "…", "options": ["", "", ""], "correct": 0, "meaning": "ү."}, {"q": "— бұл…", "options": ["", "", ""], "correct": 0, "meaning": "негіз иманның."}, {"q": "…", "options": ["", "", ""], "correct": 0, "meaning": "."}, {"q": "…", "options": ["", "", ""], "correct": 0, "meaning": ",."}, {"q": "…", "options": ["", "", ""], "correct": 0, "meaning": "негіз."}, {"q": "…", "options": ["", "", ""], "correct": 0, "meaning": "—."}, {"q": "…", "options": ["", "", ""], "correct": 0, "meaning": "."}, {"q": "қ — бұл…", "options": ["", "", ""], "correct": 0, "meaning": "."}, {"q": "?", "options": ["", "", ""], "correct": 0, "meaning": "қ."}, {"q": "?", "options": ["", "", ""], "correct": 0, "meaning": "."}, {"q": "…", "options": ["", "", ""], "correct": 0, "meaning": "тіпті."}, {"q": "…", "options": ["", "", ""], "correct": 0, "meaning": "—."}, {"q": "тіпті …", "options": [",", "", ""], "correct": 0, "meaning": "."}, {"q": ", бұл…", "options": ["", "", ""], "correct": 0, "meaning": "қ ү."}, {"q": "?", "options": ["", "", ""], "correct": 0, "meaning": "— ғқ өмірдің."}, {"q": "сізді арандатса, …", "options": ["", "", ""], "correct": 0, "meaning": "."}, {"q": "— бұл…", "options": ["", "", ""], "correct": 0, "meaning": "."}, {"q": "?", "options": ["", "", ""], "correct": 0, "meaning": "."}, {"q": "— бұл…", "options": ["", "", ""], "correct": 0, "meaning": "қғ."}, {"q": "қ — бұл…", "options": ["", "", "і"], "correct": 0, "meaning": "."}, {"q": "қ, …", "options": ["", "", ""], "correct": 0, "meaning": "."}, {"q": "— бұл…", "options": ["", "онсыз", ""], "correct": 0, "meaning": "."}, {"q": "…", "options": ["", "онсыз", ""], "correct": 0, "meaning": "."}, {"q": "ққ …", "options": ["", "", ""], "correct": 0, "meaning": "і."}, {"q": "ққ?", "options": ["", "", ""], "correct": 0, "meaning": ", қ."}, {"q": ", ұғ?", "options": ["", "", ""], "correct": 0, "meaning": "."}, {"q": "і?", "options": ["", "", ""], "correct": 0, "meaning": "."}, {"q": "қ — бұл…", "options": ["", "", ""], "correct": 0, "meaning": "—, —."}, {"q": ", …", "options": ["", "?", ""], "correct": 0, "meaning": "."}, {"q": "і, …", "options": ["", "", ""], "correct": 0, "meaning": "қ."}, {"q": ", …", "options": ["", "", ""], "correct": 0, "meaning": "үшін ү."}, {"q": "-, …", "options": ["", "", ""], "correct": 0, "meaning": "."}];
 var TASKS={article:'dailyArticleLink',adhkar:'currentAdhkarLink',name:'allahNameCounterCard',goal:'dailyGoalCard',micro:'dailyMicroKnowledgeCard'};
 function todayKey(){var d=new Date();return d.getFullYear()+'-'+String(d.getMonth()+1).padStart(2,'0')+'-'+String(d.getDate()).padStart(2,'0');}
@@ -12983,15 +12989,15 @@ function isDone(task){try{if(localStorage.getItem(finalDoneKey(task))==='1')retu
 function setDone(task){try{localStorage.setItem(finalDoneKey(task),'1');legacyDoneKeys(task).forEach(function(k){localStorage.setItem(k,'1');});if(task==='name'){var day=todayKey();['barakaway_name_counter_'+LANG+'_'+day,'barakaway_name_counter_'+LANG+'_v2_'+day,'barakaway_name_counter_'+LANG+'_v3_'+day,'barakaway_name_counter_'+LANG+'_final_'+day,'barakaway_name_counter_'+day].forEach(function(k){localStorage.setItem(k,'100');});}}catch(e){}}
 function taskCard(task){return document.getElementById(TASKS[task]);}
 function taskFromElement(el){if(!el)return'';var modal=el.closest&&el.closest('.bw-task-modal-card');if(modal&&modal.getAttribute('data-task-key'))return modal.getAttribute('data-task-key');var card=el.closest&&el.closest('.today-action');if(card){for(var key in TASKS){if(card.id===TASKS[key])return key;}}return'';}
-function applyDone(task){var card=taskCard(task);if(!card)return;card.classList.add('bw-final-done','bw-task-done','task-done','goal-done');card.classList.remove('goal-urgent','task-urgent');card.setAttribute('aria-disabled','true');card.style.animation='none';var status=card.querySelector('.today-task-status');if(status)status.textContent='✓';var hint=card.querySelector('.bw-task-hint, .bw-task-compact-hint');if(hint)hint.style.display='none';if(task==='name'){var meta=card.querySelector('.bw-task-compact-meta[data-task-meta="name"]');if(meta)meta.textContent='100/100';var value=document.getElementById('allahNameCounterValue');if(value)value.textContent='✓';var fill=document.getElementById('allahNameCounterFill');if(fill)fill.style.width='100%';}}
-function applyAllDone(){Object.keys(TASKS).forEach(function(task){if(isDone(task))applyDone(task);});}
-function blockАшуingDoneCards(event){var card=event.target&&event.target.closest?event.target.closest('.today-action'):null;if(!card)return;var task=taskFromElement(card);if(task&&isDone(task)){applyDone(task);event.preventDefault();event.stopPropagation();if(event.stopImmediatePropagation)event.stopImmediatePropagation();return false;}}
+function applyDone(task){var card=taskCard(task);if(!card)return;if(task==='micro'){var microPro=document.getElementById('dailyMicroProUpsell');if(microPro)microPro.classList.add('is-visible');}card.classList.add('bw-final-done','bw-task-done','task-done','goal-done');card.classList.remove('goal-urgent','task-urgent');card.setAttribute('aria-disabled','true');card.style.animation='none';var status=card.querySelector('.today-task-status');if(status)status.textContent='✓';var hint=card.querySelector('.bw-task-hint, .bw-task-compact-hint');if(hint)hint.style.display='none';if(task==='name'){var meta=card.querySelector('.bw-task-compact-meta[data-task-meta="name"]');if(meta)meta.textContent='100/100';var value=document.getElementById('allahNameCounterValue');if(value)value.textContent='✓';var fill=document.getElementById('allahNameCounterFill');if(fill)fill.style.width='100%';}}
+function applyAllDone(){Object.keys(TASKS).forEach(function(task){if(isDone(task))applyDone(task);});var microPro=document.getElementById('dailyMicroProUpsell');if(microPro)microPro.classList.toggle('is-visible',isDone('micro'));}
+function blockOpeningDoneCards(event){var card=event.target&&event.target.closest?event.target.closest('.today-action'):null;if(!card)return;var task=taskFromElement(card);if(task&&isDone(task)){applyDone(task);event.preventDefault();event.stopPropagation();if(event.stopImmediatePropagation)event.stopImmediatePropagation();return false;}}
 function norm(v){return(v||'').replace(/\s+/g,' ').trim();}
 function findMicroByQuestion(q){q=norm(q);for(var i=0;i<MICRO_DATA.length;i++){if(norm(MICRO_DATA[i].q)===q)return MICRO_DATA[i];}return null;}
 function repairMicroAnswer(btn){var modal=btn.closest('.bw-task-modal-card');if(!modal||modal.getAttribute('data-task-key')!=='micro')return;var qText=norm((modal.querySelector('.bw-task-modal-text')||{}).textContent||'');var item=findMicroByQuestion(qText);if(!item)return;var buttons=Array.from(modal.querySelectorAll('.bw-micro-option-btn'));buttons.forEach(function(node,index){node.classList.toggle('is-selected',index===Number(item.correct));});var note=modal.querySelector('#bwMicroAnswerNote');if(note){note.textContent=item.meaning||'';note.classList.add('is-visible');}var completeBtn=modal.querySelector('.bw-task-complete-btn');if(completeBtn)completeBtn.disabled=false;}
-document.addEventListener('click',function(event){blockАшуingDoneCards(event);var microBtn=event.target&&event.target.closest?event.target.closest('.bw-micro-option-btn'):null;if(microBtn)setTimeout(function(){repairMicroAnswer(microBtn);},0);var completeBtn=event.target&&event.target.closest?event.target.closest('.bw-task-complete-btn'):null;if(completeBtn&&!completeBtn.disabled){var task=taskFromElement(completeBtn);if(task){setDone(task);setTimeout(function(){applyDone(task);applyAllDone();},20);}}},true);
-document.addEventListener('pointerdown',blockАшуingDoneCards,true);
-document.addEventListener('touchstart',blockАшуingDoneCards,true);
+document.addEventListener('click',function(event){blockOpeningDoneCards(event);var microBtn=event.target&&event.target.closest?event.target.closest('.bw-micro-option-btn'):null;if(microBtn)setTimeout(function(){repairMicroAnswer(microBtn);},0);var completeBtn=event.target&&event.target.closest?event.target.closest('.bw-task-complete-btn'):null;if(completeBtn&&!completeBtn.disabled){var task=taskFromElement(completeBtn);if(task){setDone(task);setTimeout(function(){applyDone(task);applyAllDone();},20);}}},true);
+document.addEventListener('pointerdown',blockOpeningDoneCards,true);
+document.addEventListener('touchstart',blockOpeningDoneCards,true);
 if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',applyAllDone,{once:true});else applyAllDone();
 window.addEventListener('pageshow',applyAllDone);setInterval(applyAllDone,700);
 })();
@@ -14179,53 +14185,83 @@ html.light-mode .bw-micro-pro-title{color:#172019;}
 </style>
 
 <style id="bw-pro-micro-compact-sequence-final">
+.today-hub .today-micro-question,
+.today-hub .micro-options,
+.today-hub .micro-answer-box{
+  display:none !important;
+  visibility:hidden !important;
+  height:0 !important;
+  min-height:0 !important;
+  max-height:0 !important;
+  margin:0 !important;
+  padding:0 !important;
+  overflow:hidden !important;
+}
+.today-hub .today-micro-action{overflow:hidden !important;}
 .bw-micro-pro-upsell{margin:0 16px 12px !important;padding:11px 14px !important;border-radius:16px !important;min-height:0 !important;display:none;align-items:center;justify-content:flex-start;}
 .bw-micro-pro-upsell.is-visible{display:flex !important;}
 .bw-micro-pro-upsell::after{opacity:.35 !important;}
+.bw-micro-pro-top,.bw-micro-pro-badge,.bw-micro-pro-link,.bw-micro-pro-text{display:none !important;}
 .bw-micro-pro-title{margin:0 !important;font-size:15px !important;line-height:1.2 !important;font-weight:950 !important;letter-spacing:-.025em !important;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
 @media(max-width:700px){.bw-micro-pro-upsell{margin:0 12px 10px !important;padding:10px 12px !important;border-radius:15px !important;}.bw-micro-pro-title{font-size:14px !important;}}
+.bw-micro-pro-status{display:none;align-items:center;justify-content:center;flex:0 0 auto;margin-left:auto;width:26px;height:26px;border-radius:999px;font-size:22px;line-height:1;font-weight:950;color:#6ee78d;text-shadow:0 0 14px rgba(110,231,141,.28);}
+.bw-micro-pro-upsell.bw-pro-micro-done .bw-micro-pro-status{display:inline-flex;}
+.bw-micro-pro-upsell.bw-pro-micro-done{background:linear-gradient(135deg,#13261f 0%,#142e23 52%,#153828 100%) !important;border-color:rgba(102,198,128,.42) !important;}
 .bw-pro-micro-progress{display:inline-flex;align-items:center;justify-content:center;min-height:28px;padding:6px 10px;margin:0 auto 12px;border-radius:999px;font-size:12px;font-weight:950;letter-spacing:.04em;}
-html.dark-mode .bw-pro-micro-progress{background:rgba(215,192,122,.13);color:#f2df9d;border:1px solid rgba(215,192,122,.25);}
-html.light-mode .bw-pro-micro-progress{background:#fff5dc;color:#785713;border:1px solid rgba(141,107,22,.16);}
-.bw-pro-micro-options-grid{display:grid;grid-template-columns:1fr;gap:10px;margin:15px 0 12px;}
-.bw-pro-micro-option-btn{width:100%;min-height:48px;margin:0;padding:12px 14px;border-radius:16px;font-size:15px;font-weight:900;cursor:pointer;transition:background .2s,border-color .2s,box-shadow .2s,transform .12s,color .2s;}
-html.dark-mode .bw-pro-micro-option-btn{background:#1d242c;border:1px solid #2a3138;color:#f3f6f9;}
-html.light-mode .bw-pro-micro-option-btn{background:#f7faf8;border:1px solid #e1ebe4;color:#1f2a22;}
-.bw-pro-micro-option-btn:active{transform:scale(.985);}
-.bw-pro-micro-option-btn.bw-answer-correct{background:#2d7a46 !important;border-color:#66c680 !important;color:#fff !important;box-shadow:0 0 0 1px rgba(102,198,128,.55),0 10px 22px rgba(45,122,70,.22) !important;}
-.bw-pro-micro-option-btn.bw-answer-wrong{background:#8f2424 !important;border-color:#ff6b6b !important;color:#fff !important;box-shadow:0 0 0 1px rgba(255,107,107,.45),0 10px 22px rgba(143,36,36,.22) !important;}
-.bw-pro-micro-answer-note{display:none;margin:10px 0 0;padding:12px 13px;border-radius:16px;font-size:13px;line-height:1.45;font-weight:750;}
-.bw-pro-micro-answer-note.is-visible{display:block;}
-html.dark-mode .bw-pro-micro-answer-note{background:rgba(215,192,122,.10);border:1px solid rgba(215,192,122,.22);color:#f6e9ba;}
-html.light-mode .bw-pro-micro-answer-note{background:#fff8e7;border:1px solid rgba(141,107,22,.18);color:#5c4310;}
+html.dark-mode .bw-pro-micro-progress{background:rgba(215,192,122,.13);color:#f2df9d;border:1px solid rgba(215,192,122,.25);}html.light-mode .bw-pro-micro-progress{background:#fff5dc;color:#785713;border:1px solid rgba(141,107,22,.16);}
+.bw-pro-micro-options-grid{display:grid;grid-template-columns:1fr;gap:10px;margin:15px 0 12px;}.bw-pro-micro-option-btn{width:100%;min-height:48px;margin:0;padding:12px 14px;border-radius:16px;font-size:15px;font-weight:900;cursor:pointer;transition:background .2s,border-color .2s,box-shadow .2s,transform .12s,color .2s;}
+html.dark-mode .bw-pro-micro-option-btn{background:#1d242c;border:1px solid #2a3138;color:#f3f6f9;}html.light-mode .bw-pro-micro-option-btn{background:#f7faf8;border:1px solid #e1ebe4;color:#1f2a22;}.bw-pro-micro-option-btn:active{transform:scale(.985);}.bw-pro-micro-option-btn.bw-answer-correct{background:#2d7a46 !important;border-color:#66c680 !important;color:#fff !important;box-shadow:0 0 0 1px rgba(102,198,128,.55),0 10px 22px rgba(45,122,70,.22) !important;}.bw-pro-micro-option-btn.bw-answer-wrong{background:#8f2424 !important;border-color:#ff6b6b !important;color:#fff !important;box-shadow:0 0 0 1px rgba(255,107,107,.45),0 10px 22px rgba(143,36,36,.22) !important;}.bw-pro-micro-answer-note{display:none;margin:10px 0 0;padding:12px 13px;border-radius:16px;font-size:13px;line-height:1.45;font-weight:750;}.bw-pro-micro-answer-note.is-visible{display:block;}html.dark-mode .bw-pro-micro-answer-note{background:rgba(215,192,122,.10);border:1px solid rgba(215,192,122,.22);color:#f6e9ba;}html.light-mode .bw-pro-micro-answer-note{background:#fff8e7;border:1px solid rgba(141,107,22,.18);color:#5c4310;}
 </style>
 
 <script id="bw-pro-micro-compact-sequence-final">
 (function(){
   'use strict';
-  var PRO_KEY='barakaway_pro';
+  var LANG='id';
   var DAILY_TOTAL=5;
-  var LABELS={ariaDone:'Pertanyaan PRO hari ini selesai',ariaOpen:'Lima pertanyaan tambahan setiap hari di versi Pro',modalAria:'Pertanyaan PRO',proQuestion:'Pertanyaan PRO',correct:'Jawaban benar:',meaning:'Makna:',next:'Selesai dan lanjut',finish:'Selesai',close:'Tutup'};
-  function isPro(){try{return localStorage.getItem(PRO_KEY)==='true';}catch(e){return false;}}
+  var LABELS={
+    ariaDone:'Pertanyaan PRO hari ini sudah selesai',
+    ariaOpen:'Tambahan 5 pertanyaan harian di versi Pro',
+    modalAria:'Pertanyaan PRO',
+    proQuestion:'Pertanyaan PRO',
+    correct:'Jawaban benar:',
+    meaning:'Penjelasan:',
+    next:'Selesai dan lanjutkan',
+    finish:'Selesai',
+    close:'Tutup'
+  };
   function clean(v){return String(v||'').replace(/\s+/g,' ').trim();}
-  function esc(v){return clean(v).replace(/[&<>"]/g,function(ch){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[ch];});}
+  function esc(v){return clean(v).replace(/[&<>\"]/g,function(ch){return {'&':'&amp;','<':'&lt;','>':'&gt;','\"':'&quot;'}[ch];});}
   function todayKey(){var d=new Date();return d.getFullYear()+'-'+String(d.getMonth()+1).padStart(2,'0')+'-'+String(d.getDate()).padStart(2,'0');}
   function dateSeed(){var d=new Date();return d.getFullYear()*10000+(d.getMonth()+1)*100+d.getDate();}
-  function doneKey(){return 'barakaway_pro_micro_done_id_'+todayKey();}
+  function doneKey(){return 'barakaway_pro_micro_done_'+LANG+'_'+todayKey();}
   function isDone(){try{return localStorage.getItem(doneKey())==='1';}catch(e){return false;}}
   function markDone(){try{localStorage.setItem(doneKey(),'1');}catch(e){}}
+  function resetBrokenDoneOnce(){
+    try{
+      var marker='bw_id_micro_pro_fix_reset_20260530_v2';
+      if(localStorage.getItem(marker)==='1')return;
+      localStorage.removeItem(doneKey());
+      localStorage.removeItem('barakaway_pro_micro_done_'+todayKey());
+      localStorage.setItem(marker,'1');
+    }catch(e){}
+  }
+  resetBrokenDoneOnce();
   function mainMicroDone(){
     var card=document.getElementById('dailyMicroKnowledgeCard');
     var status=document.getElementById('dailyMicroKnowledgeStatus');
-    if(card&&(card.classList.contains('bw-task-done')||card.classList.contains('task-done')||card.classList.contains('micro-answered')||card.classList.contains('done')||card.classList.contains('completed')||card.classList.contains('is-done')))return true;
-    if(status&&clean(status.textContent)==='✓')return true;
+    if(card){
+      var classes=['bw-final-done','bw-task-done','task-done','micro-answered','done','completed','is-done'];
+      for(var i=0;i<classes.length;i++){if(card.classList.contains(classes[i]))return true;}
+    }
+    if(status && clean(status.textContent)==='✓')return true;
     try{
       var day=todayKey();
-      for(var i=0;i<localStorage.length;i++){
-        var k=localStorage.key(i)||'';
-        if(k.indexOf(day)!==-1&&k.toLowerCase().indexOf('micro')!==-1){
+      for(var j=0;j<localStorage.length;j++){
+        var k=localStorage.key(j)||'';
+        var low=k.toLowerCase();
+        if(k.indexOf(day)!==-1 && low.indexOf('micro')!==-1){
           var v=localStorage.getItem(k);
-          if(v==='1'||(v&&v.indexOf('selected')!==-1))return true;
+          if(v==='1' || (v && v.indexOf('selected')!==-1))return true;
         }
       }
     }catch(e){}
@@ -14237,20 +14273,35 @@ html.light-mode .bw-pro-micro-answer-note{background:#fff8e7;border:1px solid rg
     link.classList.toggle('is-visible',mainMicroDone());
     link.classList.toggle('bw-pro-micro-done',isDone());
     link.setAttribute('aria-label',isDone()?LABELS.ariaDone:LABELS.ariaOpen);
+    link.setAttribute('href','javascript:void(0)');
+    if(!link.querySelector('.bw-micro-pro-status')){
+      var st=document.createElement('span');
+      st.className='bw-micro-pro-status';
+      st.textContent='✓';
+      link.appendChild(st);
+    }
   }
   function normalizeItem(item){
+    item=item||{};
     var options=Array.isArray(item.options)?item.options:(Array.isArray(item.opt)?item.opt:[]);
-    var correct=Number.isInteger(item.correct)?item.correct:0;
-    if(!Number.isInteger(item.correct)){
-      Object.keys(item||{}).forEach(function(k){if((k==='doğru'||k==='dogru'||k==='correctIndex')&&Number.isInteger(item[k]))correct=item[k];});
-    }
-    return {q:item.q||item.question||item.title||'',options:options,correct:Math.max(0,Math.min(options.length-1,correct||0)),meaning:item.meaning||item.answer||item.text||''};
+    var correct=0;
+    if(typeof item.correct==='number')correct=item.correct;
+    else if(typeof item.answer==='number')correct=item.answer;
+    else if(typeof item.correctIndex==='number')correct=item.correctIndex;
+    return {q:item.q||item.question||item.title||'',options:options,correct:Math.max(0,Math.min(Math.max(options.length-1,0),correct||0)),meaning:item.meaning||item.explain||item.answerText||item.text||''};
   }
   function getPool(){
-    var candidates=[];
-    try{if(Array.isArray(MICRO_QUESTIONS))candidates=MICRO_QUESTIONS;}catch(e){}
-    try{if(!candidates.length&&Array.isArray(MICRO_DATA))candidates=MICRO_DATA;}catch(e){}
-    return candidates.map(normalizeItem).filter(function(x){return x.q&&x.options&&x.options.length;});
+    var arr=[];
+    try{if(Array.isArray(MICRO_QUESTIONS))arr=MICRO_QUESTIONS.slice();}catch(e){}
+    arr=arr.map(normalizeItem).filter(function(x){return x.q&&x.options&&x.options.length;});
+    if(arr.length)return arr;
+    return [
+      {q:'Berapa jumlah salat wajib dalam sehari?',options:['3','5','6'],correct:1,meaning:'Lima salat wajib menjaga hubungan seorang Muslim dengan Allah sepanjang hari.'},
+      {q:'Apa yang dilakukan sebelum salat?',options:['Wudu','Makan','Tidur'],correct:0,meaning:'Bersuci adalah syarat penting sebelum salat.'},
+      {q:'Apa arti Bismillah?',options:['Dengan nama Allah','Terima kasih','Sampai jumpa'],correct:0,meaning:'Seorang Muslim memulai perbuatan baik dengan nama Allah.'},
+      {q:'Apakah sedekah hanya berupa uang?',options:['Ya','Tidak','Hanya makanan'],correct:1,meaning:'Ucapan baik, bantuan, dan senyuman juga bisa menjadi sedekah.'},
+      {q:'Ramadan adalah...',options:['Bulan puasa','Bulan permainan','Bulan bisnis'],correct:0,meaning:'Ramadan mengajarkan takwa dan pengendalian diri.'}
+    ];
   }
   function pickDailyFive(){
     var pool=getPool();
@@ -14259,7 +14310,7 @@ html.light-mode .bw-pro-micro-answer-note{background:#fff8e7;border:1px solid rg
     var start=seed%pool.length;
     var step=(Math.floor(seed/7)%17)+3;
     var out=[],used={};
-    for(var i=0;out.length<DAILY_TOTAL&&i<pool.length*2;i++){
+    for(var i=0;out.length<DAILY_TOTAL&&i<pool.length*3;i++){
       var ix=(start+i*step)%pool.length;
       if(!used[ix]){used[ix]=1;out.push(pool[ix]);}
     }
@@ -14325,12 +14376,20 @@ html.light-mode .bw-pro-micro-answer-note{background:#fff8e7;border:1px solid rg
     if(!link||link.dataset.bwProMicroSequenceBound==='1')return;
     link.dataset.bwProMicroSequenceBound='1';
     link.addEventListener('click',function(event){
-      if(!isPro())return;
       event.preventDefault();
       event.stopPropagation();
       openProSequence();
+      return false;
     },true);
   }
+  document.addEventListener('click',function(event){
+    var link=event.target&&event.target.closest?event.target.closest('#dailyMicroProUpsell'):null;
+    if(!link)return;
+    event.preventDefault();
+    event.stopPropagation();
+    openProSequence();
+    return false;
+  },true);
   if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',bind,{once:true});else bind();
   window.addEventListener('pageshow',bind);
   window.addEventListener('storage',syncProStatus);
@@ -14338,6 +14397,97 @@ html.light-mode .bw-pro-micro-answer-note{background:#fff8e7;border:1px solid rg
 })();
 </script>
 
+<style id="bw-micro-answer-logic-user-choice-fix">
+.bw-task-modal-card[data-task-key="micro"] .bw-micro-option-btn.is-selected:not(.bw-answer-correct):not(.bw-answer-wrong){
+  background:rgba(102,198,128,.08) !important;
+  border-color:rgba(102,198,128,.18) !important;
+  color:#f3fff7 !important;
+}
+.bw-task-modal-card[data-task-key="micro"] .bw-micro-option-btn.bw-answer-correct{
+  background:#2d7a46 !important;
+  border-color:#66c680 !important;
+  color:#fff !important;
+  box-shadow:0 0 0 1px rgba(102,198,128,.55),0 10px 22px rgba(45,122,70,.22) !important;
+}
+.bw-task-modal-card[data-task-key="micro"] .bw-micro-option-btn.bw-answer-wrong{
+  background:#8f2424 !important;
+  border-color:#ff6b6b !important;
+  color:#fff !important;
+  box-shadow:0 0 0 1px rgba(255,107,107,.45),0 10px 22px rgba(143,36,36,.22) !important;
+}
+</style>
+<script id="bw-micro-answer-logic-user-choice-fix">
+(function(){
+  function clean(value){return String(value || '').replace(/\s+/g,' ').trim();}
+  function norm(value){return clean(value).toLowerCase();}
+  function escapeHtml(value){return clean(value).replace(/[&<>"]/g,function(ch){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[ch];});}
+  function getMicroItem(question){
+    var q = norm(question);
+    try{
+      if(Array.isArray(MICRO_QUESTIONS)){
+        for(var i=0;i<MICRO_QUESTIONS.length;i++){
+          if(norm(MICRO_QUESTIONS[i].q) === q) return MICRO_QUESTIONS[i];
+        }
+      }
+    }catch(e){}
+    return null;
+  }
+  function resetModal(modal){
+    if(!modal || modal.getAttribute('data-task-key') !== 'micro' || modal.getAttribute('data-bw-micro-answered') === '1') return;
+    var buttons = Array.prototype.slice.call(modal.querySelectorAll('.bw-micro-option-btn'));
+    buttons.forEach(function(btn){
+      btn.classList.remove('is-selected','is-correct','is-wrong','bw-answer-correct','bw-answer-wrong','bw-answer-pulse');
+      btn.disabled = false;
+    });
+    var note = modal.querySelector('#bwMicroAnswerNote');
+    if(note){ note.textContent = ''; note.classList.remove('is-visible'); }
+    var complete = modal.querySelector('.bw-task-complete-btn');
+    if(complete) complete.disabled = true;
+  }
+  function applyChoice(modal, chosenIndex){
+    if(!modal || modal.getAttribute('data-task-key') !== 'micro') return;
+    modal.setAttribute('data-bw-micro-answered','1');
+    var questionEl = modal.querySelector('.bw-task-modal-text');
+    var buttons = Array.prototype.slice.call(modal.querySelectorAll('.bw-micro-option-btn'));
+    if(!questionEl || !buttons.length) return;
+    var item = getMicroItem(questionEl.textContent);
+    if(!item || typeof item.correct !== 'number') return;
+    buttons.forEach(function(btn,index){
+      btn.classList.remove('is-selected','is-correct','is-wrong','bw-answer-correct','bw-answer-wrong','bw-answer-pulse');
+      if(index === item.correct) btn.classList.add('bw-answer-correct');
+      if(index === chosenIndex && index !== item.correct) btn.classList.add('bw-answer-wrong');
+      btn.disabled = true;
+    });
+    var note = modal.querySelector('#bwMicroAnswerNote');
+    if(note){
+      note.innerHTML = '<strong>Правильный ответ:</strong> ' + escapeHtml(item.options[item.correct] || '') + '<br><strong>Смысл:</strong> ' + escapeHtml(item.meaning || '');
+      note.classList.add('is-visible');
+    }
+    var complete = modal.querySelector('.bw-task-complete-btn');
+    if(complete) complete.disabled = false;
+  }
+  document.addEventListener('click', function(event){
+    var btn = event.target && event.target.closest ? event.target.closest('.bw-task-modal-card[data-task-key="micro"] .bw-micro-option-btn') : null;
+    if(!btn) return;
+    var modal = btn.closest('.bw-task-modal-card[data-task-key="micro"]');
+    if(!modal || modal.getAttribute('data-bw-micro-answered') === '1') return;
+    var buttons = Array.prototype.slice.call(modal.querySelectorAll('.bw-micro-option-btn'));
+    var chosenIndex = buttons.indexOf(btn);
+    [0,80,220,460,760].forEach(function(delay){setTimeout(function(){applyChoice(modal, chosenIndex);}, delay);});
+  }, true);
+  var observer = new MutationObserver(function(mutations){
+    mutations.forEach(function(mutation){
+      Array.prototype.forEach.call(mutation.addedNodes || [], function(node){
+        if(!node || node.nodeType !== 1) return;
+        var modal = node.matches && node.matches('.bw-task-modal-card[data-task-key="micro"]') ? node : (node.querySelector && node.querySelector('.bw-task-modal-card[data-task-key="micro"]'));
+        if(!modal) return;
+        [120,320,700,1100].forEach(function(delay){setTimeout(function(){resetModal(modal);}, delay);});
+      });
+    });
+  });
+  if(document.body) observer.observe(document.body,{childList:true,subtree:true});
+})();
+</script>
 </body>
 </html>
 

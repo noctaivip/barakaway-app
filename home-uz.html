@@ -20,106 +20,7 @@ In the name of Allah, the Most Merciful, the Most Compassionate
 </script>
 
 
-<script id="bw-reset-five-daily-tasks-clean">
-(function(){
-  'use strict';
 
-  function dateKey(offsetDays){
-    var d = new Date();
-    if(offsetDays){ d.setDate(d.getDate() + offsetDays); }
-    return d.getFullYear() + '-' + String(d.getMonth()+1).padStart(2,'0') + '-' + String(d.getDate()).padStart(2,'0');
-  }
-
-  function remove(key){
-    try{ localStorage.removeItem(key); }catch(e){}
-  }
-
-  function resetDailyKeys(){
-    var lang = (document.documentElement.getAttribute('lang') || 'uz').toLowerCase().split('-')[0];
-    var tasks = ['article','adhkar','goal','name','micro'];
-    var days = [dateKey(0), dateKey(-1), dateKey(1)];
-
-    days.forEach(function(day){
-      tasks.forEach(function(task){
-        [
-          'barakaway_today_uz_' + day + '_' + task,
-          'barakaway_today_' + lang + '_' + day + '_' + task,
-          'barakaway_today_' + lang + '_v2_' + day + '_' + task,
-          'barakaway_today_' + lang + '_v3_' + day + '_' + task,
-          'barakaway_today_' + lang + '_final_' + day + '_' + task,
-          'bw_daily_done_v2_' + lang + '_' + day + '_' + task,
-          'bw_final_done_v2_' + lang + '_' + day + '_' + task
-        ].forEach(remove);
-      });
-
-      [
-        'barakaway_today_uz_' + day + '_name_count',
-        'barakaway_micro_answer_uz_' + day,
-        'barakaway_name_counter_' + day,
-        'barakaway_name_counter_uz_' + day,
-        'barakaway_name_counter_' + lang + '_' + day,
-        'barakaway_name_counter_' + lang + '_v2_' + day,
-        'barakaway_name_counter_' + lang + '_v3_' + day,
-        'barakaway_name_counter_' + lang + '_final_' + day,
-        'bw_allah_name_counter_persist_' + lang + '_' + day,
-        'bw_ayah_card_done_v1_' + lang + '_' + day
-      ].forEach(remove);
-    });
-
-    remove('barakaway_micro_question_today_uz_v1');
-  }
-
-  function cleanVisibleState(){
-    var cards = [
-      ['dailyArticleLink','dailyArticleStatus','→'],
-      ['currentAdhkarLink','currentAdhkarStatus','→'],
-      ['dailyGoalCard','dailyGoalStatus','•'],
-      ['allahNameCounterCard','allahNameCounterValue','0/100'],
-      ['dailyMicroKnowledgeCard','dailyMicroKnowledgeStatus','?']
-    ];
-
-    cards.forEach(function(item){
-      var card = document.getElementById(item[0]);
-      var status = document.getElementById(item[1]);
-      if(card){
-        card.classList.remove('bw-final-done','bw-task-done','task-done','goal-done','micro-answered','done','completed','is-done');
-        card.setAttribute('aria-disabled','false');
-        card.style.setProperty('--task-red-opacity','');
-        card.style.setProperty('--goal-red-opacity','');
-      }
-      if(status){ status.textContent = item[2]; }
-    });
-
-    var fill = document.getElementById('allahNameCounterFill');
-    if(fill){ fill.style.width = '0%'; }
-
-    var answer = document.getElementById('dailyMicroAnswer');
-    if(answer){
-      answer.innerHTML = '';
-      answer.classList.remove('show');
-    }
-
-    document.querySelectorAll('.micro-option').forEach(function(btn){
-      btn.disabled = false;
-      btn.classList.remove('micro-correct','micro-wrong');
-    });
-  }
-
-  resetDailyKeys();
-
-  if(document.readyState === 'loading'){
-    document.addEventListener('DOMContentLoaded', function(){
-      resetDailyKeys();
-      cleanVisibleState();
-      setTimeout(cleanVisibleState, 50);
-    }, {once:true});
-  }else{
-    resetDailyKeys();
-    cleanVisibleState();
-    setTimeout(cleanVisibleState, 50);
-  }
-})();
-</script>
 
 <script data-goatcounter="https://onedollarexit.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
 
@@ -4318,27 +4219,7 @@ html.light-mode .today-hub .bw-task-hint{color:#53645a;}
 
 <script id="bw-uz-logic-fix-v3">
 (function(){
-  try{
-    var today = new Date();
-    var y = today.getFullYear();
-    var m = String(today.getMonth()+1).padStart(2,'0');
-    var d = String(today.getDate()).padStart(2,'0');
-    var day = y + '-' + m + '-' + d;
-
-    // Hard reset old broken completed/counter states.
-    var prefixes = [
-      'barakaway_today_uz_',
-      'barakaway_today_uz_v2_',
-      'barakaway_name_counter_uz_',
-      'barakaway_name_counter_uz_v2_',
-      'barakaway_name_counter_' + day
-    ];
-    Object.keys(localStorage).forEach(function(key){
-      prefixes.forEach(function(prefix){
-        if(key.indexOf(prefix) === 0) localStorage.removeItem(key);
-      });
-    });
-  }catch(e){}
+  // Daily task state is intentionally preserved until the calendar day changes.
 
   window.BW_TASK_FIX_UZ = {
     selectAnswer: "To‘g‘ri javobni tanlang.",
@@ -4681,7 +4562,7 @@ Zul-Qa’da oyida amallaringizni saqlang, ortiqcha ishlarni kamaytiring va zikrn
     </div>
   </div>
 
-<a class="bw-micro-pro-upsell" href="pro-uz.html#micro" id="dailyMicroProUpsell" role="button">
+<a class="bw-micro-pro-upsell" href="javascript:void(0)" id="dailyMicroProUpsell" role="button">
   <span class="bw-micro-pro-title">Pro versiyada har kuni +5 ta savol</span>
   <span class="bw-micro-pro-status" id="dailyMicroProStatus" aria-hidden="true">✓</span>
 </a>
@@ -10182,8 +10063,8 @@ function isDone(task){try{if(localStorage.getItem(finalDoneKey(task))==='1')retu
 function setDone(task){try{localStorage.setItem(finalDoneKey(task),'1');legacyDoneKeys(task).forEach(function(k){localStorage.setItem(k,'1');});if(task==='name'){var day=todayKey();['barakaway_name_counter_'+LANG+'_'+day,'barakaway_name_counter_'+LANG+'_v2_'+day,'barakaway_name_counter_'+LANG+'_v3_'+day,'barakaway_name_counter_'+LANG+'_final_'+day,'barakaway_name_counter_'+day].forEach(function(k){localStorage.setItem(k,'100');});}}catch(e){}}
 function taskCard(task){return document.getElementById(TASKS[task]);}
 function taskFromElement(el){if(!el)return'';var modal=el.closest&&el.closest('.bw-task-modal-card');if(modal&&modal.getAttribute('data-task-key'))return modal.getAttribute('data-task-key');var card=el.closest&&el.closest('.today-action');if(card){for(var key in TASKS){if(card.id===TASKS[key])return key;}}return'';}
-function applyDone(task){var card=taskCard(task);if(!card)return;card.classList.add('bw-final-done','bw-task-done','task-done','goal-done');card.classList.remove('goal-urgent','task-urgent');card.setAttribute('aria-disabled','true');card.style.animation='none';var status=card.querySelector('.today-task-status');if(status)status.textContent='✓';var hint=card.querySelector('.bw-task-hint, .bw-task-compact-hint');if(hint)hint.style.display='none';if(task==='name'){var meta=card.querySelector('.bw-task-compact-meta[data-task-meta="name"]');if(meta)meta.textContent='100/100';var value=document.getElementById('allahNameCounterValue');if(value)value.textContent='✓';var fill=document.getElementById('allahNameCounterFill');if(fill)fill.style.width='100%';}}
-function applyAllDone(){Object.keys(TASKS).forEach(function(task){if(isDone(task))applyDone(task);});}
+function applyDone(task){var card=taskCard(task);if(!card)return;if(task==='micro'){var microPro=document.getElementById('dailyMicroProUpsell');if(microPro)microPro.classList.add('is-visible');}card.classList.add('bw-final-done','bw-task-done','task-done','goal-done');card.classList.remove('goal-urgent','task-urgent');card.setAttribute('aria-disabled','true');card.style.animation='none';var status=card.querySelector('.today-task-status');if(status)status.textContent='✓';var hint=card.querySelector('.bw-task-hint, .bw-task-compact-hint');if(hint)hint.style.display='none';if(task==='name'){var meta=card.querySelector('.bw-task-compact-meta[data-task-meta="name"]');if(meta)meta.textContent='100/100';var value=document.getElementById('allahNameCounterValue');if(value)value.textContent='✓';var fill=document.getElementById('allahNameCounterFill');if(fill)fill.style.width='100%';}}
+function applyAllDone(){Object.keys(TASKS).forEach(function(task){if(isDone(task))applyDone(task);});var microPro=document.getElementById('dailyMicroProUpsell');if(microPro)microPro.classList.toggle('is-visible',isDone('micro'));}
 function blockOpeningDoneCards(event){var card=event.target&&event.target.closest?event.target.closest('.today-action'):null;if(!card)return;var task=taskFromElement(card);if(task&&isDone(task)){applyDone(task);event.preventDefault();event.stopPropagation();if(event.stopImmediatePropagation)event.stopImmediatePropagation();return false;}}
 function norm(v){return(v||'').replace(/\s+/g,' ').trim();}
 function findMicroByQuestion(q){q=norm(q);for(var i=0;i<MICRO_DATA.length;i++){if(norm(MICRO_DATA[i].q)===q)return MICRO_DATA[i];}return null;}
@@ -10977,16 +10858,78 @@ html.light-mode .bw-micro-pro-title{color:#172019;}
 </style>
 
 <style id="bw-pro-micro-compact-sequence-final">
-.bw-micro-pro-upsell{margin:0 16px 12px !important;padding:11px 14px !important;border-radius:16px !important;min-height:0 !important;display:none;align-items:center;justify-content:flex-start;}
+.bw-micro-pro-upsell{
+  margin:0 16px 12px !important;
+  padding:11px 14px !important;
+  border-radius:16px !important;
+  min-height:0 !important;
+  display:none;
+  align-items:center;
+  justify-content:flex-start;
+}
 .bw-micro-pro-upsell.is-visible{display:flex !important;}
 .bw-micro-pro-upsell::after{opacity:.35 !important;}
-.bw-micro-pro-title{margin:0 !important;font-size:15px !important;line-height:1.2 !important;font-weight:950 !important;letter-spacing:-.025em !important;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
-@media(max-width:700px){.bw-micro-pro-upsell{margin:0 12px 10px !important;padding:10px 12px !important;border-radius:15px !important;}.bw-micro-pro-title{font-size:14px !important;}}
-.bw-pro-micro-progress{display:inline-flex;align-items:center;justify-content:center;min-height:28px;padding:6px 10px;margin:0 auto 12px;border-radius:999px;font-size:12px;font-weight:950;letter-spacing:.04em;}
+.bw-micro-pro-top,.bw-micro-pro-badge,.bw-micro-pro-link,.bw-micro-pro-text{display:none !important;}
+.bw-micro-pro-title{
+  margin:0 !important;
+  font-size:15px !important;
+  line-height:1.2 !important;
+  font-weight:950 !important;
+  letter-spacing:-.025em !important;
+  white-space:nowrap;
+  overflow:hidden;
+  text-overflow:ellipsis;
+}
+@media(max-width:700px){
+  .bw-micro-pro-upsell{margin:0 12px 10px !important;padding:10px 12px !important;border-radius:15px !important;}
+  .bw-micro-pro-title{font-size:14px !important;}
+}
+.bw-micro-pro-status{
+  display:none;
+  align-items:center;
+  justify-content:center;
+  flex:0 0 auto;
+  margin-left:auto;
+  width:26px;
+  height:26px;
+  border-radius:999px;
+  font-size:22px;
+  line-height:1;
+  font-weight:950;
+  color:#6ee78d;
+  text-shadow:0 0 14px rgba(110,231,141,.28);
+}
+.bw-micro-pro-upsell.bw-pro-micro-done .bw-micro-pro-status{display:inline-flex;}
+.bw-micro-pro-upsell.bw-pro-micro-done{
+  background:linear-gradient(135deg,#13261f 0%,#142e23 52%,#153828 100%) !important;
+  border-color:rgba(102,198,128,.42) !important;
+}
+.bw-pro-micro-progress{
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  min-height:28px;
+  padding:6px 10px;
+  margin:0 auto 12px;
+  border-radius:999px;
+  font-size:12px;
+  font-weight:950;
+  letter-spacing:.04em;
+}
 html.dark-mode .bw-pro-micro-progress{background:rgba(215,192,122,.13);color:#f2df9d;border:1px solid rgba(215,192,122,.25);}
 html.light-mode .bw-pro-micro-progress{background:#fff5dc;color:#785713;border:1px solid rgba(141,107,22,.16);}
 .bw-pro-micro-options-grid{display:grid;grid-template-columns:1fr;gap:10px;margin:15px 0 12px;}
-.bw-pro-micro-option-btn{width:100%;min-height:48px;margin:0;padding:12px 14px;border-radius:16px;font-size:15px;font-weight:900;cursor:pointer;transition:background .2s,border-color .2s,box-shadow .2s,transform .12s,color .2s;}
+.bw-pro-micro-option-btn{
+  width:100%;
+  min-height:48px;
+  margin:0;
+  padding:12px 14px;
+  border-radius:16px;
+  font-size:15px;
+  font-weight:900;
+  cursor:pointer;
+  transition:background .2s,border-color .2s,box-shadow .2s,transform .12s,color .2s;
+}
 html.dark-mode .bw-pro-micro-option-btn{background:#1d242c;border:1px solid #2a3138;color:#f3f6f9;}
 html.light-mode .bw-pro-micro-option-btn{background:#f7faf8;border:1px solid #e1ebe4;color:#1f2a22;}
 .bw-pro-micro-option-btn:active{transform:scale(.985);}
@@ -10997,66 +10940,58 @@ html.light-mode .bw-pro-micro-option-btn{background:#f7faf8;border:1px solid #e1
 html.dark-mode .bw-pro-micro-answer-note{background:rgba(215,192,122,.10);border:1px solid rgba(215,192,122,.22);color:#f6e9ba;}
 html.light-mode .bw-pro-micro-answer-note{background:#fff8e7;border:1px solid rgba(141,107,22,.18);color:#5c4310;}
 </style>
-
 <script id="bw-pro-micro-compact-sequence-final">
 (function(){
   'use strict';
-  var PRO_KEY='barakaway_pro';
-  var DAILY_TOTAL=5;
-  var LABELS={ariaDone:'Bugungi PRO savollar bajarildi',ariaOpen:'Pro versiyada har kuni beshta qo‘shimcha savol',modalAria:'PRO savollar',proQuestion:'PRO savol',correct:'To‘g‘ri javob:',meaning:'Ma’nosi:',next:'Yakunlash va davom etish',finish:'Yakunlash',close:'Yopish'};
+  var PRO_KEY = 'barakaway_pro';
+  var DAILY_TOTAL = 5;
   function isPro(){try{return localStorage.getItem(PRO_KEY)==='true';}catch(e){return false;}}
   function clean(v){return String(v||'').replace(/\s+/g,' ').trim();}
   function esc(v){return clean(v).replace(/[&<>"]/g,function(ch){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[ch];});}
   function todayKey(){var d=new Date();return d.getFullYear()+'-'+String(d.getMonth()+1).padStart(2,'0')+'-'+String(d.getDate()).padStart(2,'0');}
   function dateSeed(){var d=new Date();return d.getFullYear()*10000+(d.getMonth()+1)*100+d.getDate();}
-  function doneKey(){return 'barakaway_pro_micro_done_uz_'+todayKey();}
+  function doneKey(){return 'barakaway_pro_micro_done_'+todayKey();}
   function isDone(){try{return localStorage.getItem(doneKey())==='1';}catch(e){return false;}}
   function markDone(){try{localStorage.setItem(doneKey(),'1');}catch(e){}}
-  function mainMicroDone(){
-    var card=document.getElementById('dailyMicroKnowledgeCard');
-    var status=document.getElementById('dailyMicroKnowledgeStatus');
-    if(card&&(card.classList.contains('bw-task-done')||card.classList.contains('task-done')||card.classList.contains('micro-answered')||card.classList.contains('done')||card.classList.contains('completed')||card.classList.contains('is-done')))return true;
-    if(status&&clean(status.textContent)==='✓')return true;
-    try{
-      var day=todayKey();
-      for(var i=0;i<localStorage.length;i++){
-        var k=localStorage.key(i)||'';
-        if(k.indexOf(day)!==-1&&k.toLowerCase().indexOf('micro')!==-1){
-          var v=localStorage.getItem(k);
-          if(v==='1'||(v&&v.indexOf('selected')!==-1))return true;
-        }
-      }
-    }catch(e){}
-    return false;
-  }
   function syncProStatus(){
     var link=document.getElementById('dailyMicroProUpsell');
     if(!link)return;
-    link.classList.toggle('is-visible',mainMicroDone());
-    link.classList.toggle('bw-pro-micro-done',isDone());
-    link.setAttribute('aria-label',isDone()?LABELS.ariaDone:LABELS.ariaOpen);
+    link.classList.toggle('bw-pro-micro-done', isDone());
+    link.setAttribute('aria-label', isDone() ? 'Bugungi PRO savollar bajarildi' : 'Pro versiyada har kuni beshta qo‘shimcha savol');
   }
   function normalizeItem(item){
+    item=item||{};
     var options=Array.isArray(item.options)?item.options:(Array.isArray(item.opt)?item.opt:[]);
     var correct=Number.isInteger(item.correct)?item.correct:0;
     if(!Number.isInteger(item.correct)){
-      Object.keys(item||{}).forEach(function(k){if((k==='doğru'||k==='dogru'||k==='correctIndex')&&Number.isInteger(item[k]))correct=item[k];});
+      Object.keys(item).forEach(function(k){if((k==='dogru'||k==='doğru'||k==='correctIndex')&&Number.isInteger(item[k]))correct=item[k];});
     }
     return {q:item.q||item.question||item.title||'',options:options,correct:Math.max(0,Math.min(options.length-1,correct||0)),meaning:item.meaning||item.answer||item.text||''};
   }
+  function validItem(x){
+    return x&&clean(x.q)&&Array.isArray(x.options)&&x.options.length>=2&&x.options.some(function(o){return clean(o);});
+  }
   function getPool(){
-    var candidates=[];
-    try{if(Array.isArray(MICRO_QUESTIONS))candidates=MICRO_QUESTIONS;}catch(e){}
-    try{if(!candidates.length&&Array.isArray(MICRO_DATA))candidates=MICRO_DATA;}catch(e){}
-    return candidates.map(normalizeItem).filter(function(x){return x.q&&x.options&&x.options.length;});
+    var pool=[];
+    try{if(Array.isArray(MICRO_QUESTIONS)&&MICRO_QUESTIONS.length)pool=MICRO_QUESTIONS;}catch(e){}
+    try{if(!pool.length&&Array.isArray(MICRO_DATA)&&MICRO_DATA.length)pool=MICRO_DATA;}catch(e){}
+    pool=pool.map(normalizeItem).filter(validItem);
+    if(pool.length)return pool;
+    return [
+      {q:'Bir kunda nechta farz namoz bor?',options:['3','5','6'],correct:1,meaning:'Besh vaqt namoz inson kunini Alloh bilan bog‘laydi.'},
+      {q:'Namozdan oldin nima kerak?',options:['Tahorat','Ovqat','Uyqu'],correct:0,meaning:'Poklik namozning muhim shartidir.'},
+      {q:'“Bismillah” nimani anglatadi?',options:['Alloh nomi bilan','Rahmat','Xayr'],correct:0,meaning:'Musulmon ishni Alloh nomi bilan boshlaydi.'},
+      {q:'Sadaqa faqat pul bilan bo‘ladimi?',options:['Ha','Yo‘q','Faqat ovqat'],correct:1,meaning:'Yaxshi so‘z, yordam va tabassum ham sadaqa bo‘lishi mumkin.'},
+      {q:'Ramazon — bu … oyi.',options:['Ro‘za','O‘yin','Savdo'],correct:0,meaning:'Ramazon taqvo va tartibni o‘rgatadi.'}
+    ];
   }
   function pickDailyFive(){
-    var pool=getPool();
+    var pool=getPool().filter(validItem);
     if(pool.length<=DAILY_TOTAL)return pool.slice(0,DAILY_TOTAL);
     var seed=dateSeed();
     var start=seed%pool.length;
     var step=(Math.floor(seed/7)%17)+3;
-    var out=[],used={};
+    var out=[], used={};
     for(var i=0;out.length<DAILY_TOTAL&&i<pool.length*2;i++){
       var ix=(start+i*step)%pool.length;
       if(!used[ix]){used[ix]=1;out.push(pool[ix]);}
@@ -11071,8 +11006,8 @@ html.light-mode .bw-pro-micro-answer-note{background:#fff8e7;border:1px solid rg
     if(old)old.remove();
     var overlay=document.createElement('div');
     overlay.className='bw-task-modal-overlay bw-pro-micro-overlay is-open';
-    overlay.innerHTML='<div class="bw-task-modal-card" data-task-key="micro-pro" role="dialog" aria-modal="true" aria-label="'+esc(LABELS.modalAria)+'"><div class="bw-pro-micro-progress"></div><h3 class="bw-task-modal-title"></h3><p class="bw-task-modal-text"></p><div class="bw-pro-micro-options-grid"></div><div class="bw-pro-micro-answer-note"></div><button type="button" class="bw-task-complete-btn" disabled></button><button type="button" class="bw-task-close-btn">'+esc(LABELS.close)+'</button></div>';
-    var ix=0,answered=false;
+    overlay.innerHTML='<div class="bw-task-modal-card" data-task-key="micro-pro" role="dialog" aria-modal="true" aria-label="PRO savollar"><div class="bw-pro-micro-progress"></div><h3 class="bw-task-modal-title"></h3><p class="bw-task-modal-text"></p><div class="bw-pro-micro-options-grid"></div><div class="bw-pro-micro-answer-note"></div><button type="button" class="bw-task-complete-btn" disabled>Yakunlash</button><button type="button" class="bw-task-close-btn">Yopish</button></div>';
+    var ix=0, answered=false;
     var progress=overlay.querySelector('.bw-pro-micro-progress');
     var title=overlay.querySelector('.bw-task-modal-title');
     var qEl=overlay.querySelector('.bw-task-modal-text');
@@ -11083,34 +11018,35 @@ html.light-mode .bw-pro-micro-answer-note{background:#fff8e7;border:1px solid rg
       answered=false;
       var item=items[ix];
       progress.textContent=(ix+1)+' / '+items.length;
-      title.textContent=LABELS.proQuestion;
+      title.textContent='PRO savol';
       qEl.textContent=clean(item.q);
       note.textContent='';
       note.classList.remove('is-visible');
       next.disabled=true;
-      next.textContent=ix<items.length-1?LABELS.next:LABELS.finish;
+      next.textContent=ix<items.length-1?'Yakunlash va davom etish':'Yakunlash';
       grid.innerHTML=item.options.map(function(opt,i){return '<button type="button" class="bw-pro-micro-option-btn" data-index="'+i+'">'+esc(opt)+'</button>';}).join('');
     }
     grid.addEventListener('click',function(event){
-      var btn=event.target&&event.target.closest?event.target.closest('.bw-pro-micro-option-btn'):null;
+      var btn=event.target.closest('.bw-pro-micro-option-btn');
       if(!btn||answered)return;
       answered=true;
-      var chosen=parseInt(btn.getAttribute('data-index'),10);
       var item=items[ix];
+      var chosen=Number(btn.getAttribute('data-index'));
       var correct=Number(item.correct)||0;
-      Array.prototype.slice.call(grid.querySelectorAll('.bw-pro-micro-option-btn')).forEach(function(node,i){
+      Array.from(grid.querySelectorAll('.bw-pro-micro-option-btn')).forEach(function(node){
+        var i=Number(node.getAttribute('data-index'));
         node.disabled=true;
         if(i===correct)node.classList.add('bw-answer-correct');
         if(i===chosen&&i!==correct)node.classList.add('bw-answer-wrong');
       });
-      note.innerHTML='<strong>'+esc(LABELS.correct)+'</strong> '+esc(item.options[correct]||'')+'<br><strong>'+esc(LABELS.meaning)+'</strong> '+esc(item.meaning||'');
+      note.innerHTML='<strong>To‘g‘ri javob:</strong> '+esc(item.options[correct]||'')+'<br><strong>Ma’nosi:</strong> '+esc(item.meaning||'');
       note.classList.add('is-visible');
       next.disabled=false;
     });
     next.addEventListener('click',function(){
       if(next.disabled)return;
       if(ix<items.length-1){ix++;render();}
-      else{markDone();syncProStatus();overlay.remove();}
+      else {markDone();syncProStatus();overlay.remove();}
     });
     overlay.querySelector('.bw-task-close-btn').addEventListener('click',function(){overlay.remove();});
     overlay.addEventListener('click',function(e){if(e.target===overlay)overlay.remove();});
@@ -11123,19 +11059,44 @@ html.light-mode .bw-pro-micro-answer-note{background:#fff8e7;border:1px solid rg
     if(!link||link.dataset.bwProMicroSequenceBound==='1')return;
     link.dataset.bwProMicroSequenceBound='1';
     link.addEventListener('click',function(event){
-      if(!isPro())return;
       event.preventDefault();
       event.stopPropagation();
+      if(event.stopImmediatePropagation)event.stopImmediatePropagation();
       openProSequence();
+      return false;
     },true);
   }
-  if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',bind,{once:true});else bind();
+  if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',bind,{once:true}); else bind();
   window.addEventListener('pageshow',bind);
   window.addEventListener('storage',syncProStatus);
   setInterval(syncProStatus,1000);
 })();
 </script>
 
+
+
+<style id="bw-uz-daily-persist-and-micro-clean-fix">
+/* Preserve completed daily tasks on refresh and remove the empty compact meta strip from the micro card. */
+.today-hub #dailyMicroKnowledgeCard .bw-task-compact-meta,
+.today-hub .today-micro-action .bw-task-compact-meta{
+  display:none !important;
+  width:0 !important;
+  max-width:0 !important;
+  height:0 !important;
+  min-height:0 !important;
+  margin:0 !important;
+  padding:0 !important;
+  border:0 !important;
+  background:transparent !important;
+  box-shadow:none !important;
+  overflow:hidden !important;
+}
+.today-hub #dailyMicroKnowledgeCard .today-micro-question,
+.today-hub #dailyMicroKnowledgeCard .micro-options,
+.today-hub #dailyMicroKnowledgeCard .micro-answer-box{
+  display:none !important;
+}
+</style>
 </body>
 </html>
 

@@ -6,6 +6,46 @@
 
 <html lang="bn">
 <head>
+<script id="bw-force-unfinished-daily-tasks-v20260530">
+(function(){
+  'use strict';
+  try{
+    var lang = 'bn';
+    var marker = 'bw_force_unfinished_daily_tasks_v20260530_' + lang;
+    if(localStorage.getItem(marker)==='1') return;
+    var d = new Date();
+    var day = d.getFullYear() + '-' + String(d.getMonth()+1).padStart(2,'0') + '-' + String(d.getDate()).padStart(2,'0');
+    var tasks = ['article','adhkar','name','goal','micro'];
+    var langs = ['ru','en','uz','kz','tr','id','hi','bn','ar','ur',lang];
+    var remove = [];
+    for(var i=0;i<localStorage.length;i++){
+      var k = localStorage.key(i); if(!k) continue;
+      var low = k.toLowerCase();
+      if(low.indexOf(day.toLowerCase())!==-1 && (
+        low.indexOf('barakaway_today_')!==-1 ||
+        low.indexOf('bw_final_done_v2_')!==-1 ||
+        low.indexOf('bw_daily_done_v2_')!==-1 ||
+        low.indexOf('barakaway_micro_answer_')!==-1 ||
+        low.indexOf('barakaway_name_counter_')!==-1 ||
+        low.indexOf('bw_ayah_card_done_')!==-1 ||
+        low.indexOf('barakaway_pro_micro_done_')!==-1
+      )) remove.push(k);
+    }
+    remove.forEach(function(k){localStorage.removeItem(k);});
+    tasks.forEach(function(task){langs.forEach(function(l){
+      localStorage.removeItem('bw_final_done_v2_'+l+'_'+day+'_'+task);
+      localStorage.removeItem('bw_daily_done_v2_'+l+'_'+day+'_'+task);
+      localStorage.removeItem('barakaway_today_'+l+'_'+day+'_'+task);
+      localStorage.removeItem('barakaway_today_'+l+'_v2_'+day+'_'+task);
+      localStorage.removeItem('barakaway_today_'+l+'_v3_'+day+'_'+task);
+      localStorage.removeItem('barakaway_today_'+l+'_final_'+day+'_'+task);
+    });});
+    localStorage.removeItem('barakaway_pro_micro_done_'+day);
+    localStorage.setItem(marker,'1');
+  }catch(e){}
+})();
+</script>
+
 <script>
 (function(){
   const premiumTheme = localStorage.getItem('barakaway_premium_theme');
@@ -4309,41 +4349,7 @@ html.light-mode .today-hub .bw-task-hint{color:#53645a;}
 }
 </style>
 
-<script id="bw-bn-logic-fix-v3">
-(function(){
-  try{
-    var today = new Date();
-    var y = today.getFullYear();
-    var m = String(today.getMonth()+1).padStart(2,'0');
-    var d = String(today.getDate()).padStart(2,'0');
-    var day = y + '-' + m + '-' + d;
 
-    // Hard reset old broken completed/counter states.
-    var prefixes = [
-      'barakaway_today_bn_',
-      'barakaway_today_bn_v2_',
-      'barakaway_name_counter_bn_',
-      'barakaway_name_counter_bn_v2_',
-      'barakaway_name_counter_' + day
-    ];
-    Object.keys(localStorage).forEach(function(key){
-      prefixes.forEach(function(prefix){
-        if(key.indexOf(prefix) === 0) localStorage.removeItem(key);
-      });
-    });
-  }catch(e){}
-
-  window.BW_TASK_FIX_BN = {
-    selectAnswer: "সঠিক উত্তর নির্বাচন করুন।",
-    correct: "সঠিক।",
-    wrong: "",
-    shahadaMeaning: "শাহাদা ইসলামের প্রথম স্তম্ভ: সাক্ষ্য দেওয়া যে আল্লাহ ছাড়া কোনো উপাস্য নেই এবং মুহাম্মদ ﷺ আল্লাহর রাসূল।",
-    repeat: "পুনরাবৃত্তি +1",
-    countComplete: "100 / 100 সম্পন্ন",
-    taskText: "কাজ:"
-  };
-})();
-</script>
 
 
 <style id="bw-bn-logic-polish-fix">
@@ -13191,8 +13197,8 @@ function isDone(task){try{if(localStorage.getItem(finalDoneKey(task))==='1')retu
 function setDone(task){try{localStorage.setItem(finalDoneKey(task),'1');legacyDoneKeys(task).forEach(function(k){localStorage.setItem(k,'1');});if(task==='name'){var day=todayKey();['barakaway_name_counter_'+LANG+'_'+day,'barakaway_name_counter_'+LANG+'_v2_'+day,'barakaway_name_counter_'+LANG+'_v3_'+day,'barakaway_name_counter_'+LANG+'_final_'+day,'barakaway_name_counter_'+day].forEach(function(k){localStorage.setItem(k,'100');});}}catch(e){}}
 function taskCard(task){return document.getElementById(TASKS[task]);}
 function taskFromElement(el){if(!el)return'';var modal=el.closest&&el.closest('.bw-task-modal-card');if(modal&&modal.getAttribute('data-task-key'))return modal.getAttribute('data-task-key');var card=el.closest&&el.closest('.today-action');if(card){for(var key in TASKS){if(card.id===TASKS[key])return key;}}return'';}
-function applyDone(task){var card=taskCard(task);if(!card)return;card.classList.add('bw-final-done','bw-task-done','task-done','goal-done');card.classList.remove('goal-urgent','task-urgent');card.setAttribute('aria-disabled','true');card.style.animation='none';var status=card.querySelector('.today-task-status');if(status)status.textContent='✓';var hint=card.querySelector('.bw-task-hint, .bw-task-compact-hint');if(hint)hint.style.display='none';if(task==='name'){var meta=card.querySelector('.bw-task-compact-meta[data-task-meta="name"]');if(meta)meta.textContent='100/100';var value=document.getElementById('allahNameCounterValue');if(value)value.textContent='✓';var fill=document.getElementById('allahNameCounterFill');if(fill)fill.style.width='100%';}}
-function applyAllDone(){Object.keys(TASKS).forEach(function(task){if(isDone(task))applyDone(task);});}
+function applyDone(task){var card=taskCard(task);if(!card)return;if(task==='micro'){var microPro=document.getElementById('dailyMicroProUpsell');if(microPro)microPro.classList.add('is-visible');}card.classList.add('bw-final-done','bw-task-done','task-done','goal-done');card.classList.remove('goal-urgent','task-urgent');card.setAttribute('aria-disabled','true');card.style.animation='none';var status=card.querySelector('.today-task-status');if(status)status.textContent='✓';var hint=card.querySelector('.bw-task-hint, .bw-task-compact-hint');if(hint)hint.style.display='none';if(task==='name'){var meta=card.querySelector('.bw-task-compact-meta[data-task-meta="name"]');if(meta)meta.textContent='100/100';var value=document.getElementById('allahNameCounterValue');if(value)value.textContent='✓';var fill=document.getElementById('allahNameCounterFill');if(fill)fill.style.width='100%';}}
+function applyAllDone(){Object.keys(TASKS).forEach(function(task){if(isDone(task))applyDone(task);});var microPro=document.getElementById('dailyMicroProUpsell');if(microPro)microPro.classList.toggle('is-visible',isDone('micro'));}
 function blockOpeningDoneCards(event){var card=event.target&&event.target.closest?event.target.closest('.today-action'):null;if(!card)return;var task=taskFromElement(card);if(task&&isDone(task)){applyDone(task);event.preventDefault();event.stopPropagation();if(event.stopImmediatePropagation)event.stopImmediatePropagation();return false;}}
 function norm(v){return(v||'').replace(/\s+/g,' ').trim();}
 function findMicroByQuestion(q){q=norm(q);for(var i=0;i<MICRO_DATA.length;i++){if(norm(MICRO_DATA[i].q)===q)return MICRO_DATA[i];}return null;}
@@ -13826,7 +13832,7 @@ html.light-mode .bw-ayah-force-close{background:#fff;}
   Object.keys(MICRO_MAP).forEach(function(q){NORM_MAP[norm(q)] = MICRO_MAP[q];});
   function getInfo(question){return MICRO_MAP[clean(question)] || NORM_MAP[norm(question)] || null;}
   function stripBadPrefix(text){
-    return clean(text).replace(/^\s*(বাংলা লেখা|Meaning|Ma[’']no|বাংলা লেখাғবাংলা লেখা|Anlam|Makna|अर्थ|অর্থ|المعنى|مطلب)\s*[:：]\s*/i,'');
+    return clean(text).replace(/^\s*(Смысл|Meaning|Ma[’']no|Мағынасы|Anlam|Makna|अर्थ|অর্থ|المعنى|مطلب)\s*[:：]\s*/i,'');
   }
   function styleButtons(buttons, chosenIndex, correctIndex){
     buttons.forEach(function(b,i){
@@ -14035,53 +14041,83 @@ html.light-mode .bw-micro-pro-title{color:#172019;}
 </style>
 
 <style id="bw-pro-micro-compact-sequence-final">
+.today-hub .today-micro-question,
+.today-hub .micro-options,
+.today-hub .micro-answer-box{
+  display:none !important;
+  visibility:hidden !important;
+  height:0 !important;
+  min-height:0 !important;
+  max-height:0 !important;
+  margin:0 !important;
+  padding:0 !important;
+  overflow:hidden !important;
+}
+.today-hub .today-micro-action{overflow:hidden !important;}
 .bw-micro-pro-upsell{margin:0 16px 12px !important;padding:11px 14px !important;border-radius:16px !important;min-height:0 !important;display:none;align-items:center;justify-content:flex-start;}
 .bw-micro-pro-upsell.is-visible{display:flex !important;}
 .bw-micro-pro-upsell::after{opacity:.35 !important;}
+.bw-micro-pro-top,.bw-micro-pro-badge,.bw-micro-pro-link,.bw-micro-pro-text{display:none !important;}
 .bw-micro-pro-title{margin:0 !important;font-size:15px !important;line-height:1.2 !important;font-weight:950 !important;letter-spacing:-.025em !important;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
 @media(max-width:700px){.bw-micro-pro-upsell{margin:0 12px 10px !important;padding:10px 12px !important;border-radius:15px !important;}.bw-micro-pro-title{font-size:14px !important;}}
+.bw-micro-pro-status{display:none;align-items:center;justify-content:center;flex:0 0 auto;margin-left:auto;width:26px;height:26px;border-radius:999px;font-size:22px;line-height:1;font-weight:950;color:#6ee78d;text-shadow:0 0 14px rgba(110,231,141,.28);}
+.bw-micro-pro-upsell.bw-pro-micro-done .bw-micro-pro-status{display:inline-flex;}
+.bw-micro-pro-upsell.bw-pro-micro-done{background:linear-gradient(135deg,#13261f 0%,#142e23 52%,#153828 100%) !important;border-color:rgba(102,198,128,.42) !important;}
 .bw-pro-micro-progress{display:inline-flex;align-items:center;justify-content:center;min-height:28px;padding:6px 10px;margin:0 auto 12px;border-radius:999px;font-size:12px;font-weight:950;letter-spacing:.04em;}
-html.dark-mode .bw-pro-micro-progress{background:rgba(215,192,122,.13);color:#f2df9d;border:1px solid rgba(215,192,122,.25);}
-html.light-mode .bw-pro-micro-progress{background:#fff5dc;color:#785713;border:1px solid rgba(141,107,22,.16);}
-.bw-pro-micro-options-grid{display:grid;grid-template-columns:1fr;gap:10px;margin:15px 0 12px;}
-.bw-pro-micro-option-btn{width:100%;min-height:48px;margin:0;padding:12px 14px;border-radius:16px;font-size:15px;font-weight:900;cursor:pointer;transition:background .2s,border-color .2s,box-shadow .2s,transform .12s,color .2s;}
-html.dark-mode .bw-pro-micro-option-btn{background:#1d242c;border:1px solid #2a3138;color:#f3f6f9;}
-html.light-mode .bw-pro-micro-option-btn{background:#f7faf8;border:1px solid #e1ebe4;color:#1f2a22;}
-.bw-pro-micro-option-btn:active{transform:scale(.985);}
-.bw-pro-micro-option-btn.bw-answer-correct{background:#2d7a46 !important;border-color:#66c680 !important;color:#fff !important;box-shadow:0 0 0 1px rgba(102,198,128,.55),0 10px 22px rgba(45,122,70,.22) !important;}
-.bw-pro-micro-option-btn.bw-answer-wrong{background:#8f2424 !important;border-color:#ff6b6b !important;color:#fff !important;box-shadow:0 0 0 1px rgba(255,107,107,.45),0 10px 22px rgba(143,36,36,.22) !important;}
-.bw-pro-micro-answer-note{display:none;margin:10px 0 0;padding:12px 13px;border-radius:16px;font-size:13px;line-height:1.45;font-weight:750;}
-.bw-pro-micro-answer-note.is-visible{display:block;}
-html.dark-mode .bw-pro-micro-answer-note{background:rgba(215,192,122,.10);border:1px solid rgba(215,192,122,.22);color:#f6e9ba;}
-html.light-mode .bw-pro-micro-answer-note{background:#fff8e7;border:1px solid rgba(141,107,22,.18);color:#5c4310;}
+html.dark-mode .bw-pro-micro-progress{background:rgba(215,192,122,.13);color:#f2df9d;border:1px solid rgba(215,192,122,.25);}html.light-mode .bw-pro-micro-progress{background:#fff5dc;color:#785713;border:1px solid rgba(141,107,22,.16);}
+.bw-pro-micro-options-grid{display:grid;grid-template-columns:1fr;gap:10px;margin:15px 0 12px;}.bw-pro-micro-option-btn{width:100%;min-height:48px;margin:0;padding:12px 14px;border-radius:16px;font-size:15px;font-weight:900;cursor:pointer;transition:background .2s,border-color .2s,box-shadow .2s,transform .12s,color .2s;}
+html.dark-mode .bw-pro-micro-option-btn{background:#1d242c;border:1px solid #2a3138;color:#f3f6f9;}html.light-mode .bw-pro-micro-option-btn{background:#f7faf8;border:1px solid #e1ebe4;color:#1f2a22;}.bw-pro-micro-option-btn:active{transform:scale(.985);}.bw-pro-micro-option-btn.bw-answer-correct{background:#2d7a46 !important;border-color:#66c680 !important;color:#fff !important;box-shadow:0 0 0 1px rgba(102,198,128,.55),0 10px 22px rgba(45,122,70,.22) !important;}.bw-pro-micro-option-btn.bw-answer-wrong{background:#8f2424 !important;border-color:#ff6b6b !important;color:#fff !important;box-shadow:0 0 0 1px rgba(255,107,107,.45),0 10px 22px rgba(143,36,36,.22) !important;}.bw-pro-micro-answer-note{display:none;margin:10px 0 0;padding:12px 13px;border-radius:16px;font-size:13px;line-height:1.45;font-weight:750;}.bw-pro-micro-answer-note.is-visible{display:block;}html.dark-mode .bw-pro-micro-answer-note{background:rgba(215,192,122,.10);border:1px solid rgba(215,192,122,.22);color:#f6e9ba;}html.light-mode .bw-pro-micro-answer-note{background:#fff8e7;border:1px solid rgba(141,107,22,.18);color:#5c4310;}
 </style>
 
 <script id="bw-pro-micro-compact-sequence-final">
 (function(){
   'use strict';
-  var PRO_KEY='barakaway_pro';
+  var LANG='bn';
   var DAILY_TOTAL=5;
-  var LABELS={ariaDone:'আজকের PRO প্রশ্নগুলো সম্পন্ন হয়েছে',ariaOpen:'Pro সংস্করণে প্রতিদিন অতিরিক্ত পাঁচটি প্রশ্ন',modalAria:'PRO প্রশ্ন',proQuestion:'PRO প্রশ্ন',correct:'সঠিক উত্তর:',meaning:'অর্থ:',next:'শেষ করে এগিয়ে যান',finish:'শেষ করুন',close:'বন্ধ করুন'};
-  function isPro(){try{return localStorage.getItem(PRO_KEY)==='true';}catch(e){return false;}}
+  var LABELS={
+    ariaDone:'আজকের PRO প্রশ্ন সম্পন্ন হয়েছে',
+    ariaOpen:'Pro সংস্করণে প্রতিদিন অতিরিক্ত ৫টি প্রশ্ন',
+    modalAria:'PRO প্রশ্ন',
+    proQuestion:'PRO প্রশ্ন',
+    correct:'সঠিক উত্তর:',
+    meaning:'ব্যাখ্যা:',
+    next:'শেষ করে এগিয়ে যান',
+    finish:'শেষ করুন',
+    close:'বন্ধ করুন'
+  };
   function clean(v){return String(v||'').replace(/\s+/g,' ').trim();}
   function esc(v){return clean(v).replace(/[&<>"]/g,function(ch){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[ch];});}
   function todayKey(){var d=new Date();return d.getFullYear()+'-'+String(d.getMonth()+1).padStart(2,'0')+'-'+String(d.getDate()).padStart(2,'0');}
   function dateSeed(){var d=new Date();return d.getFullYear()*10000+(d.getMonth()+1)*100+d.getDate();}
-  function doneKey(){return 'barakaway_pro_micro_done_bn_'+todayKey();}
+  function doneKey(){return 'barakaway_pro_micro_done_'+LANG+'_'+todayKey();}
   function isDone(){try{return localStorage.getItem(doneKey())==='1';}catch(e){return false;}}
   function markDone(){try{localStorage.setItem(doneKey(),'1');}catch(e){}}
+  function resetBrokenDoneOnce(){
+    try{
+      var marker='bw_bn_micro_pro_fix_reset_20260530_v2';
+      if(localStorage.getItem(marker)==='1')return;
+      localStorage.removeItem(doneKey());
+      localStorage.removeItem('barakaway_pro_micro_done_'+todayKey());
+      localStorage.setItem(marker,'1');
+    }catch(e){}
+  }
+  resetBrokenDoneOnce();
   function mainMicroDone(){
     var card=document.getElementById('dailyMicroKnowledgeCard');
     var status=document.getElementById('dailyMicroKnowledgeStatus');
-    if(card&&(card.classList.contains('bw-task-done')||card.classList.contains('task-done')||card.classList.contains('micro-answered')||card.classList.contains('done')||card.classList.contains('completed')||card.classList.contains('is-done')))return true;
-    if(status&&clean(status.textContent)==='✓')return true;
+    if(card){
+      var classes=['bw-final-done','bw-task-done','task-done','micro-answered','done','completed','is-done'];
+      for(var i=0;i<classes.length;i++){if(card.classList.contains(classes[i]))return true;}
+    }
+    if(status && clean(status.textContent)==='✓')return true;
     try{
       var day=todayKey();
-      for(var i=0;i<localStorage.length;i++){
-        var k=localStorage.key(i)||'';
-        if(k.indexOf(day)!==-1&&k.toLowerCase().indexOf('micro')!==-1){
+      for(var j=0;j<localStorage.length;j++){
+        var k=localStorage.key(j)||'';
+        var low=k.toLowerCase();
+        if(k.indexOf(day)!==-1 && low.indexOf('micro')!==-1){
           var v=localStorage.getItem(k);
-          if(v==='1'||(v&&v.indexOf('selected')!==-1))return true;
+          if(v==='1' || (v && v.indexOf('selected')!==-1))return true;
         }
       }
     }catch(e){}
@@ -14093,20 +14129,35 @@ html.light-mode .bw-pro-micro-answer-note{background:#fff8e7;border:1px solid rg
     link.classList.toggle('is-visible',mainMicroDone());
     link.classList.toggle('bw-pro-micro-done',isDone());
     link.setAttribute('aria-label',isDone()?LABELS.ariaDone:LABELS.ariaOpen);
+    link.setAttribute('href','javascript:void(0)');
+    if(!link.querySelector('.bw-micro-pro-status')){
+      var st=document.createElement('span');
+      st.className='bw-micro-pro-status';
+      st.textContent='✓';
+      link.appendChild(st);
+    }
   }
   function normalizeItem(item){
+    item=item||{};
     var options=Array.isArray(item.options)?item.options:(Array.isArray(item.opt)?item.opt:[]);
-    var correct=Number.isInteger(item.correct)?item.correct:0;
-    if(!Number.isInteger(item.correct)){
-      Object.keys(item||{}).forEach(function(k){if((k==='doğru'||k==='dogru'||k==='correctIndex')&&Number.isInteger(item[k]))correct=item[k];});
-    }
-    return {q:item.q||item.question||item.title||'',options:options,correct:Math.max(0,Math.min(options.length-1,correct||0)),meaning:item.meaning||item.answer||item.text||''};
+    var correct=0;
+    if(typeof item.correct==='number')correct=item.correct;
+    else if(typeof item.answer==='number')correct=item.answer;
+    else if(typeof item.correctIndex==='number')correct=item.correctIndex;
+    return {q:item.q||item.question||item.title||'',options:options,correct:Math.max(0,Math.min(Math.max(options.length-1,0),correct||0)),meaning:item.meaning||item.explain||item.answerText||item.text||''};
   }
   function getPool(){
-    var candidates=[];
-    try{if(Array.isArray(MICRO_QUESTIONS))candidates=MICRO_QUESTIONS;}catch(e){}
-    try{if(!candidates.length&&Array.isArray(MICRO_DATA))candidates=MICRO_DATA;}catch(e){}
-    return candidates.map(normalizeItem).filter(function(x){return x.q&&x.options&&x.options.length;});
+    var arr=[];
+    try{if(Array.isArray(MICRO_QUESTIONS))arr=MICRO_QUESTIONS.slice();}catch(e){}
+    arr=arr.map(normalizeItem).filter(function(x){return x.q&&x.options&&x.options.length;});
+    if(arr.length)return arr;
+    return [
+      {q:'দিনে কতটি ফরজ নামাজ আছে?',options:['৩','৫','৬'],correct:1,meaning:'পাঁচ ওয়াক্ত নামাজ মুসলিমের দিনকে আল্লাহর সঙ্গে যুক্ত রাখে।'},
+      {q:'নামাজের আগে কী করা জরুরি?',options:['ওজু','খাবার','ঘুম'],correct:0,meaning:'পবিত্রতা নামাজের গুরুত্বপূর্ণ শর্ত।'},
+      {q:'বিসমিল্লাহ অর্থ কী?',options:['আল্লাহর নামে','ধন্যবাদ','বিদায়'],correct:0,meaning:'মুসলিম কাজ শুরু করে আল্লাহর নামে।'},
+      {q:'সদকা কি শুধু টাকা দিয়ে হয়?',options:['হ্যাঁ','না','শুধু খাবার দিয়ে'],correct:1,meaning:'ভালো কথা, সাহায্য ও হাসিও সদকা হতে পারে।'},
+      {q:'রমজান হলো...',options:['রোজার মাস','খেলার মাস','ব্যবসার মাস'],correct:0,meaning:'রমজান তাকওয়া ও আত্মনিয়ন্ত্রণ শেখায়।'}
+    ];
   }
   function pickDailyFive(){
     var pool=getPool();
@@ -14115,7 +14166,7 @@ html.light-mode .bw-pro-micro-answer-note{background:#fff8e7;border:1px solid rg
     var start=seed%pool.length;
     var step=(Math.floor(seed/7)%17)+3;
     var out=[],used={};
-    for(var i=0;out.length<DAILY_TOTAL&&i<pool.length*2;i++){
+    for(var i=0;out.length<DAILY_TOTAL&&i<pool.length*3;i++){
       var ix=(start+i*step)%pool.length;
       if(!used[ix]){used[ix]=1;out.push(pool[ix]);}
     }
@@ -14181,12 +14232,20 @@ html.light-mode .bw-pro-micro-answer-note{background:#fff8e7;border:1px solid rg
     if(!link||link.dataset.bwProMicroSequenceBound==='1')return;
     link.dataset.bwProMicroSequenceBound='1';
     link.addEventListener('click',function(event){
-      if(!isPro())return;
       event.preventDefault();
       event.stopPropagation();
       openProSequence();
+      return false;
     },true);
   }
+  document.addEventListener('click',function(event){
+    var link=event.target&&event.target.closest?event.target.closest('#dailyMicroProUpsell'):null;
+    if(!link)return;
+    event.preventDefault();
+    event.stopPropagation();
+    openProSequence();
+    return false;
+  },true);
   if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',bind,{once:true});else bind();
   window.addEventListener('pageshow',bind);
   window.addEventListener('storage',syncProStatus);
@@ -14194,5 +14253,96 @@ html.light-mode .bw-pro-micro-answer-note{background:#fff8e7;border:1px solid rg
 })();
 </script>
 
+<style id="bw-micro-answer-logic-user-choice-fix">
+.bw-task-modal-card[data-task-key="micro"] .bw-micro-option-btn.is-selected:not(.bw-answer-correct):not(.bw-answer-wrong){
+  background:rgba(102,198,128,.08) !important;
+  border-color:rgba(102,198,128,.18) !important;
+  color:#f3fff7 !important;
+}
+.bw-task-modal-card[data-task-key="micro"] .bw-micro-option-btn.bw-answer-correct{
+  background:#2d7a46 !important;
+  border-color:#66c680 !important;
+  color:#fff !important;
+  box-shadow:0 0 0 1px rgba(102,198,128,.55),0 10px 22px rgba(45,122,70,.22) !important;
+}
+.bw-task-modal-card[data-task-key="micro"] .bw-micro-option-btn.bw-answer-wrong{
+  background:#8f2424 !important;
+  border-color:#ff6b6b !important;
+  color:#fff !important;
+  box-shadow:0 0 0 1px rgba(255,107,107,.45),0 10px 22px rgba(143,36,36,.22) !important;
+}
+</style>
+<script id="bw-micro-answer-logic-user-choice-fix">
+(function(){
+  function clean(value){return String(value || '').replace(/\s+/g,' ').trim();}
+  function norm(value){return clean(value).toLowerCase();}
+  function escapeHtml(value){return clean(value).replace(/[&<>"]/g,function(ch){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[ch];});}
+  function getMicroItem(question){
+    var q = norm(question);
+    try{
+      if(Array.isArray(MICRO_QUESTIONS)){
+        for(var i=0;i<MICRO_QUESTIONS.length;i++){
+          if(norm(MICRO_QUESTIONS[i].q) === q) return MICRO_QUESTIONS[i];
+        }
+      }
+    }catch(e){}
+    return null;
+  }
+  function resetModal(modal){
+    if(!modal || modal.getAttribute('data-task-key') !== 'micro' || modal.getAttribute('data-bw-micro-answered') === '1') return;
+    var buttons = Array.prototype.slice.call(modal.querySelectorAll('.bw-micro-option-btn'));
+    buttons.forEach(function(btn){
+      btn.classList.remove('is-selected','is-correct','is-wrong','bw-answer-correct','bw-answer-wrong','bw-answer-pulse');
+      btn.disabled = false;
+    });
+    var note = modal.querySelector('#bwMicroAnswerNote');
+    if(note){ note.textContent = ''; note.classList.remove('is-visible'); }
+    var complete = modal.querySelector('.bw-task-complete-btn');
+    if(complete) complete.disabled = true;
+  }
+  function applyChoice(modal, chosenIndex){
+    if(!modal || modal.getAttribute('data-task-key') !== 'micro') return;
+    modal.setAttribute('data-bw-micro-answered','1');
+    var questionEl = modal.querySelector('.bw-task-modal-text');
+    var buttons = Array.prototype.slice.call(modal.querySelectorAll('.bw-micro-option-btn'));
+    if(!questionEl || !buttons.length) return;
+    var item = getMicroItem(questionEl.textContent);
+    if(!item || typeof item.correct !== 'number') return;
+    buttons.forEach(function(btn,index){
+      btn.classList.remove('is-selected','is-correct','is-wrong','bw-answer-correct','bw-answer-wrong','bw-answer-pulse');
+      if(index === item.correct) btn.classList.add('bw-answer-correct');
+      if(index === chosenIndex && index !== item.correct) btn.classList.add('bw-answer-wrong');
+      btn.disabled = true;
+    });
+    var note = modal.querySelector('#bwMicroAnswerNote');
+    if(note){
+      note.innerHTML = '<strong>Правильный ответ:</strong> ' + escapeHtml(item.options[item.correct] || '') + '<br><strong>Смысл:</strong> ' + escapeHtml(item.meaning || '');
+      note.classList.add('is-visible');
+    }
+    var complete = modal.querySelector('.bw-task-complete-btn');
+    if(complete) complete.disabled = false;
+  }
+  document.addEventListener('click', function(event){
+    var btn = event.target && event.target.closest ? event.target.closest('.bw-task-modal-card[data-task-key="micro"] .bw-micro-option-btn') : null;
+    if(!btn) return;
+    var modal = btn.closest('.bw-task-modal-card[data-task-key="micro"]');
+    if(!modal || modal.getAttribute('data-bw-micro-answered') === '1') return;
+    var buttons = Array.prototype.slice.call(modal.querySelectorAll('.bw-micro-option-btn'));
+    var chosenIndex = buttons.indexOf(btn);
+    [0,80,220,460,760].forEach(function(delay){setTimeout(function(){applyChoice(modal, chosenIndex);}, delay);});
+  }, true);
+  var observer = new MutationObserver(function(mutations){
+    mutations.forEach(function(mutation){
+      Array.prototype.forEach.call(mutation.addedNodes || [], function(node){
+        if(!node || node.nodeType !== 1) return;
+        var modal = node.matches && node.matches('.bw-task-modal-card[data-task-key="micro"]') ? node : (node.querySelector && node.querySelector('.bw-task-modal-card[data-task-key="micro"]'));
+        if(!modal) return;
+        [120,320,700,1100].forEach(function(delay){setTimeout(function(){resetModal(modal);}, delay);});
+      });
+    });
+  });
+  if(document.body) observer.observe(document.body,{childList:true,subtree:true});
+})();
+</script>
 </body>
 </html>
