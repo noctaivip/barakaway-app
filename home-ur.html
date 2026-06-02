@@ -6,6 +6,22 @@
 
 <html lang="ur" dir="rtl">
 <head>
+<script id="bw-micro-force-reset-v5">
+(function(){
+var k='bw_micro_reset_v5_ur';
+if(localStorage.getItem(k)==='1') return;
+try{
+Object.keys(localStorage).forEach(function(x){
+ var l=x.toLowerCase();
+ if(l.indexOf('micro')!==-1 || l.indexOf('question_today')!==-1 || l.indexOf('question_history')!==-1){
+   localStorage.removeItem(x);
+ }
+});
+localStorage.setItem(k,'1');
+}catch(e){}
+})();
+</script>
+
 <script>
 (function(){
   const premiumTheme = localStorage.getItem('barakaway_premium_theme');
@@ -13856,8 +13872,8 @@ function isDone(task){try{if(localStorage.getItem(finalDoneKey(task))==='1')retu
 function setDone(task){try{localStorage.setItem(finalDoneKey(task),'1');legacyDoneKeys(task).forEach(function(k){localStorage.setItem(k,'1');});if(task==='name'){var day=todayKey();['barakaway_name_counter_'+LANG+'_'+day,'barakaway_name_counter_'+LANG+'_v2_'+day,'barakaway_name_counter_'+LANG+'_v3_'+day,'barakaway_name_counter_'+LANG+'_final_'+day,'barakaway_name_counter_'+day].forEach(function(k){localStorage.setItem(k,'100');});}}catch(e){}}
 function taskCard(task){return document.getElementById(TASKS[task]);}
 function taskFromElement(el){if(!el)return'';var modal=el.closest&&el.closest('.bw-task-modal-card');if(modal&&modal.getAttribute('data-task-key'))return modal.getAttribute('data-task-key');var card=el.closest&&el.closest('.today-action');if(card){for(var key in TASKS){if(card.id===TASKS[key])return key;}}return'';}
-function applyDone(task){var card=taskCard(task);if(!card)return;card.classList.add('bw-final-done','bw-task-done','task-done','goal-done');card.classList.remove('goal-urgent','task-urgent');card.setAttribute('aria-disabled','true');card.style.animation='none';var status=card.querySelector('.today-task-status');if(status)status.textContent='✓';var hint=card.querySelector('.bw-task-hint, .bw-task-compact-hint');if(hint)hint.style.display='none';if(task==='name'){var meta=card.querySelector('.bw-task-compact-meta[data-task-meta="name"]');if(meta)meta.textContent='100/100';var value=document.getElementById('allahNameCounterValue');if(value)value.textContent='✓';var fill=document.getElementById('allahNameCounterFill');if(fill)fill.style.width='100%';}}
-function applyAllDone(){Object.keys(TASKS).forEach(function(task){if(isDone(task))applyDone(task);});}
+function applyDone(task){var card=taskCard(task);if(!card)return;if(task==='micro'){var microPro=document.getElementById('dailyMicroProUpsell');if(microPro)microPro.classList.add('is-visible');}card.classList.add('bw-final-done','bw-task-done','task-done','goal-done');card.classList.remove('goal-urgent','task-urgent');card.setAttribute('aria-disabled','true');card.style.animation='none';var status=card.querySelector('.today-task-status');if(status)status.textContent='✓';var hint=card.querySelector('.bw-task-hint, .bw-task-compact-hint');if(hint)hint.style.display='none';if(task==='name'){var meta=card.querySelector('.bw-task-compact-meta[data-task-meta="name"]');if(meta)meta.textContent='100/100';var value=document.getElementById('allahNameCounterValue');if(value)value.textContent='✓';var fill=document.getElementById('allahNameCounterFill');if(fill)fill.style.width='100%';}}
+function applyAllDone(){Object.keys(TASKS).forEach(function(task){if(isDone(task))applyDone(task);});var microPro=document.getElementById('dailyMicroProUpsell');if(microPro)microPro.classList.toggle('is-visible',isDone('micro'));}
 function blockOpeningDoneCards(event){var card=event.target&&event.target.closest?event.target.closest('.today-action'):null;if(!card)return;var task=taskFromElement(card);if(task&&isDone(task)){applyDone(task);event.preventDefault();event.stopPropagation();if(event.stopImmediatePropagation)event.stopImmediatePropagation();return false;}}
 function norm(v){return(v||'').replace(/\s+/g,' ').trim();}
 function findMicroByQuestion(q){q=norm(q);for(var i=0;i<MICRO_DATA.length;i++){if(norm(MICRO_DATA[i].q)===q)return MICRO_DATA[i];}return null;}
@@ -14835,53 +14851,83 @@ html.light-mode .bw-micro-pro-title{color:#172019;}
 </style>
 
 <style id="bw-pro-micro-compact-sequence-final">
+.today-hub .today-micro-question,
+.today-hub .micro-options,
+.today-hub .micro-answer-box{
+  display:none !important;
+  visibility:hidden !important;
+  height:0 !important;
+  min-height:0 !important;
+  max-height:0 !important;
+  margin:0 !important;
+  padding:0 !important;
+  overflow:hidden !important;
+}
+.today-hub .today-micro-action{overflow:hidden !important;}
 .bw-micro-pro-upsell{margin:0 16px 12px !important;padding:11px 14px !important;border-radius:16px !important;min-height:0 !important;display:none;align-items:center;justify-content:flex-start;}
 .bw-micro-pro-upsell.is-visible{display:flex !important;}
 .bw-micro-pro-upsell::after{opacity:.35 !important;}
+.bw-micro-pro-top,.bw-micro-pro-badge,.bw-micro-pro-link,.bw-micro-pro-text{display:none !important;}
 .bw-micro-pro-title{margin:0 !important;font-size:15px !important;line-height:1.2 !important;font-weight:950 !important;letter-spacing:-.025em !important;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
 @media(max-width:700px){.bw-micro-pro-upsell{margin:0 12px 10px !important;padding:10px 12px !important;border-radius:15px !important;}.bw-micro-pro-title{font-size:14px !important;}}
+.bw-micro-pro-status{display:none;align-items:center;justify-content:center;flex:0 0 auto;margin-left:auto;width:26px;height:26px;border-radius:999px;font-size:22px;line-height:1;font-weight:950;color:#6ee78d;text-shadow:0 0 14px rgba(110,231,141,.28);}
+.bw-micro-pro-upsell.bw-pro-micro-done .bw-micro-pro-status{display:inline-flex;}
+.bw-micro-pro-upsell.bw-pro-micro-done{background:linear-gradient(135deg,#13261f 0%,#142e23 52%,#153828 100%) !important;border-color:rgba(102,198,128,.42) !important;}
 .bw-pro-micro-progress{display:inline-flex;align-items:center;justify-content:center;min-height:28px;padding:6px 10px;margin:0 auto 12px;border-radius:999px;font-size:12px;font-weight:950;letter-spacing:.04em;}
-html.dark-mode .bw-pro-micro-progress{background:rgba(215,192,122,.13);color:#f2df9d;border:1px solid rgba(215,192,122,.25);}
-html.light-mode .bw-pro-micro-progress{background:#fff5dc;color:#785713;border:1px solid rgba(141,107,22,.16);}
-.bw-pro-micro-options-grid{display:grid;grid-template-columns:1fr;gap:10px;margin:15px 0 12px;}
-.bw-pro-micro-option-btn{width:100%;min-height:48px;margin:0;padding:12px 14px;border-radius:16px;font-size:15px;font-weight:900;cursor:pointer;transition:background .2s,border-color .2s,box-shadow .2s,transform .12s,color .2s;}
-html.dark-mode .bw-pro-micro-option-btn{background:#1d242c;border:1px solid #2a3138;color:#f3f6f9;}
-html.light-mode .bw-pro-micro-option-btn{background:#f7faf8;border:1px solid #e1ebe4;color:#1f2a22;}
-.bw-pro-micro-option-btn:active{transform:scale(.985);}
-.bw-pro-micro-option-btn.bw-answer-correct{background:#2d7a46 !important;border-color:#66c680 !important;color:#fff !important;box-shadow:0 0 0 1px rgba(102,198,128,.55),0 10px 22px rgba(45,122,70,.22) !important;}
-.bw-pro-micro-option-btn.bw-answer-wrong{background:#8f2424 !important;border-color:#ff6b6b !important;color:#fff !important;box-shadow:0 0 0 1px rgba(255,107,107,.45),0 10px 22px rgba(143,36,36,.22) !important;}
-.bw-pro-micro-answer-note{display:none;margin:10px 0 0;padding:12px 13px;border-radius:16px;font-size:13px;line-height:1.45;font-weight:750;}
-.bw-pro-micro-answer-note.is-visible{display:block;}
-html.dark-mode .bw-pro-micro-answer-note{background:rgba(215,192,122,.10);border:1px solid rgba(215,192,122,.22);color:#f6e9ba;}
-html.light-mode .bw-pro-micro-answer-note{background:#fff8e7;border:1px solid rgba(141,107,22,.18);color:#5c4310;}
+html.dark-mode .bw-pro-micro-progress{background:rgba(215,192,122,.13);color:#f2df9d;border:1px solid rgba(215,192,122,.25);}html.light-mode .bw-pro-micro-progress{background:#fff5dc;color:#785713;border:1px solid rgba(141,107,22,.16);}
+.bw-pro-micro-options-grid{display:grid;grid-template-columns:1fr;gap:10px;margin:15px 0 12px;}.bw-pro-micro-option-btn{width:100%;min-height:48px;margin:0;padding:12px 14px;border-radius:16px;font-size:15px;font-weight:900;cursor:pointer;transition:background .2s,border-color .2s,box-shadow .2s,transform .12s,color .2s;}
+html.dark-mode .bw-pro-micro-option-btn{background:#1d242c;border:1px solid #2a3138;color:#f3f6f9;}html.light-mode .bw-pro-micro-option-btn{background:#f7faf8;border:1px solid #e1ebe4;color:#1f2a22;}.bw-pro-micro-option-btn:active{transform:scale(.985);}.bw-pro-micro-option-btn.bw-answer-correct{background:#2d7a46 !important;border-color:#66c680 !important;color:#fff !important;box-shadow:0 0 0 1px rgba(102,198,128,.55),0 10px 22px rgba(45,122,70,.22) !important;}.bw-pro-micro-option-btn.bw-answer-wrong{background:#8f2424 !important;border-color:#ff6b6b !important;color:#fff !important;box-shadow:0 0 0 1px rgba(255,107,107,.45),0 10px 22px rgba(143,36,36,.22) !important;}.bw-pro-micro-answer-note{display:none;margin:10px 0 0;padding:12px 13px;border-radius:16px;font-size:13px;line-height:1.45;font-weight:750;}.bw-pro-micro-answer-note.is-visible{display:block;}html.dark-mode .bw-pro-micro-answer-note{background:rgba(215,192,122,.10);border:1px solid rgba(215,192,122,.22);color:#f6e9ba;}html.light-mode .bw-pro-micro-answer-note{background:#fff8e7;border:1px solid rgba(141,107,22,.18);color:#5c4310;}
 </style>
 
 <script id="bw-pro-micro-compact-sequence-final">
 (function(){
   'use strict';
-  var PRO_KEY='barakaway_pro';
+  var LANG='ur';
   var DAILY_TOTAL=5;
-  var LABELS={ariaDone:'آج کے PRO سوالات مکمل ہو گئے',ariaOpen:'Pro ورژن میں روزانہ پانچ اضافی سوالات',modalAria:'PRO سوالات',proQuestion:'PRO سوال',correct:'درست جواب:',meaning:'مطلب:',next:'مکمل کریں اور آگے بڑھیں',finish:'مکمل کریں',close:'بند کریں'};
-  function isPro(){try{return localStorage.getItem(PRO_KEY)==='true';}catch(e){return false;}}
+  var LABELS={
+    ariaDone:'آج کے PRO سوالات مکمل ہو گئے',
+    ariaOpen:'Pro ورژن میں روزانہ پانچ اضافی سوالات',
+    modalAria:'PRO سوالات',
+    proQuestion:'PRO سوال',
+    correct:'درست جواب:',
+    meaning:'تشریح:',
+    next:'مکمل کریں اور آگے بڑھیں',
+    finish:'مکمل کریں',
+    close:'بند کریں'
+  };
   function clean(v){return String(v||'').replace(/\s+/g,' ').trim();}
-  function esc(v){return clean(v).replace(/[&<>"]/g,function(ch){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[ch];});}
+  function esc(v){return clean(v).replace(/[&<>\"]/g,function(ch){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[ch];});}
   function todayKey(){var d=new Date();return d.getFullYear()+'-'+String(d.getMonth()+1).padStart(2,'0')+'-'+String(d.getDate()).padStart(2,'0');}
   function dateSeed(){var d=new Date();return d.getFullYear()*10000+(d.getMonth()+1)*100+d.getDate();}
-  function doneKey(){return 'barakaway_pro_micro_done_ur_'+todayKey();}
+  function doneKey(){return 'barakaway_pro_micro_done_'+LANG+'_'+todayKey();}
   function isDone(){try{return localStorage.getItem(doneKey())==='1';}catch(e){return false;}}
   function markDone(){try{localStorage.setItem(doneKey(),'1');}catch(e){}}
+  function resetBrokenDoneOnce(){
+    try{
+      var marker='bw_ur_micro_pro_fix_reset_20260530_v3';
+      if(localStorage.getItem(marker)==='1')return;
+      localStorage.removeItem(doneKey());
+      localStorage.removeItem('barakaway_pro_micro_done_'+todayKey());
+      localStorage.setItem(marker,'1');
+    }catch(e){}
+  }
+  resetBrokenDoneOnce();
   function mainMicroDone(){
     var card=document.getElementById('dailyMicroKnowledgeCard');
     var status=document.getElementById('dailyMicroKnowledgeStatus');
-    if(card&&(card.classList.contains('bw-task-done')||card.classList.contains('task-done')||card.classList.contains('micro-answered')||card.classList.contains('done')||card.classList.contains('completed')||card.classList.contains('is-done')))return true;
-    if(status&&clean(status.textContent)==='✓')return true;
+    if(card){
+      var classes=['bw-final-done','bw-task-done','task-done','micro-answered','done','completed','is-done'];
+      for(var i=0;i<classes.length;i++){if(card.classList.contains(classes[i]))return true;}
+    }
+    if(status && clean(status.textContent)==='✓')return true;
     try{
       var day=todayKey();
-      for(var i=0;i<localStorage.length;i++){
-        var k=localStorage.key(i)||'';
-        if(k.indexOf(day)!==-1&&k.toLowerCase().indexOf('micro')!==-1){
+      for(var j=0;j<localStorage.length;j++){
+        var k=localStorage.key(j)||'';
+        var low=k.toLowerCase();
+        if(k.indexOf(day)!==-1 && low.indexOf('micro')!==-1){
           var v=localStorage.getItem(k);
-          if(v==='1'||(v&&v.indexOf('selected')!==-1))return true;
+          if(v==='1' || (v && v.indexOf('selected')!==-1))return true;
         }
       }
     }catch(e){}
@@ -14893,20 +14939,38 @@ html.light-mode .bw-pro-micro-answer-note{background:#fff8e7;border:1px solid rg
     link.classList.toggle('is-visible',mainMicroDone());
     link.classList.toggle('bw-pro-micro-done',isDone());
     link.setAttribute('aria-label',isDone()?LABELS.ariaDone:LABELS.ariaOpen);
+    link.setAttribute('href','javascript:void(0)');
+    if(!link.querySelector('.bw-micro-pro-status')){
+      var st=document.createElement('span');
+      st.className='bw-micro-pro-status';
+      st.textContent='✓';
+      link.appendChild(st);
+    }
   }
   function normalizeItem(item){
+    item=item||{};
     var options=Array.isArray(item.options)?item.options:(Array.isArray(item.opt)?item.opt:[]);
-    var correct=Number.isInteger(item.correct)?item.correct:0;
-    if(!Number.isInteger(item.correct)){
-      Object.keys(item||{}).forEach(function(k){if((k==='doğru'||k==='dogru'||k==='correctIndex')&&Number.isInteger(item[k]))correct=item[k];});
-    }
-    return {q:item.q||item.question||item.title||'',options:options,correct:Math.max(0,Math.min(options.length-1,correct||0)),meaning:item.meaning||item.answer||item.text||''};
+    var correct=0;
+    if(typeof item.correct==='number')correct=item.correct;
+    else if(typeof item.answer==='number')correct=item.answer;
+    else if(typeof item.correctIndex==='number')correct=item.correctIndex;
+    else if(typeof item.dogru==='number')correct=item.dogru;
+    else if(typeof item['doğru']==='number')correct=item['doğru'];
+    return {q:item.q||item.question||item.title||'',options:options,correct:Math.max(0,Math.min(Math.max(options.length-1,0),correct||0)),meaning:item.meaning||item.explain||item.answerText||item.text||''};
   }
   function getPool(){
-    var candidates=[];
-    try{if(Array.isArray(MICRO_QUESTIONS))candidates=MICRO_QUESTIONS;}catch(e){}
-    try{if(!candidates.length&&Array.isArray(MICRO_DATA))candidates=MICRO_DATA;}catch(e){}
-    return candidates.map(normalizeItem).filter(function(x){return x.q&&x.options&&x.options.length;});
+    var arr=[];
+    try{if(Array.isArray(MICRO_QUESTIONS))arr=MICRO_QUESTIONS.slice();}catch(e){}
+    try{if(!arr.length && Array.isArray(LANGUAGE_MICRO_POOL))arr=LANGUAGE_MICRO_POOL.slice();}catch(e){}
+    arr=arr.map(normalizeItem).filter(function(x){return x.q&&x.options&&x.options.length;});
+    if(arr.length)return arr;
+    return [
+      {q:'دن میں فرض نمازیں کتنی ہیں؟',options:['3','5','6'],correct:1,meaning:'پانچ وقت کی نماز مسلمان کے دن کو اللہ سے جوڑتی ہے۔'},
+      {q:'نماز سے پہلے کیا کیا جاتا ہے؟',options:['وضو کیا جاتا ہے','کھانا کھایا جاتا ہے','سویا جاتا ہے'],correct:0,meaning:'پاکیزگی نماز کی اہم شرطوں میں سے ہے۔'},
+      {q:'بسم اللہ کا مطلب کیا ہے؟',options:['اللہ کے نام سے','شکریہ','خدا حافظ'],correct:0,meaning:'مسلمان اچھے کام اللہ کے نام سے شروع کرتا ہے۔'},
+      {q:'کیا صدقہ صرف پیسہ ہے؟',options:['ہاں','نہیں','صرف کھانا'],correct:1,meaning:'اچھی بات، مدد اور مسکراہٹ بھی صدقہ ہو سکتی ہے۔'},
+      {q:'رمضان کیا ہے؟',options:['روزے کا مہینہ','کھیل کا مہینہ','تجارت کا مہینہ'],correct:0,meaning:'رمضان تقویٰ اور نفس کی تربیت سکھاتا ہے۔'}
+    ];
   }
   function pickDailyFive(){
     var pool=getPool();
@@ -14915,7 +14979,7 @@ html.light-mode .bw-pro-micro-answer-note{background:#fff8e7;border:1px solid rg
     var start=seed%pool.length;
     var step=(Math.floor(seed/7)%17)+3;
     var out=[],used={};
-    for(var i=0;out.length<DAILY_TOTAL&&i<pool.length*2;i++){
+    for(var i=0;out.length<DAILY_TOTAL&&i<pool.length*3;i++){
       var ix=(start+i*step)%pool.length;
       if(!used[ix]){used[ix]=1;out.push(pool[ix]);}
     }
@@ -14981,16 +15045,573 @@ html.light-mode .bw-pro-micro-answer-note{background:#fff8e7;border:1px solid rg
     if(!link||link.dataset.bwProMicroSequenceBound==='1')return;
     link.dataset.bwProMicroSequenceBound='1';
     link.addEventListener('click',function(event){
-      if(!isPro())return;
       event.preventDefault();
       event.stopPropagation();
       openProSequence();
+      return false;
     },true);
   }
+  document.addEventListener('click',function(event){
+    var link=event.target&&event.target.closest?event.target.closest('#dailyMicroProUpsell'):null;
+    if(!link)return;
+    event.preventDefault();
+    event.stopPropagation();
+    openProSequence();
+    return false;
+  },true);
   if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',bind,{once:true});else bind();
   window.addEventListener('pageshow',bind);
   window.addEventListener('storage',syncProStatus);
   setInterval(syncProStatus,1000);
+})();
+</script>
+
+<style id="bw-micro-answer-feedback-final">
+.bw-task-modal-card[data-task-key="micro"] .bw-micro-option-btn.is-correct{
+  border:2px solid #35d36f !important;
+  background:linear-gradient(180deg,rgba(53,211,111,.34),rgba(45,122,70,.88)) !important;
+  color:#ffffff !important;
+  box-shadow:0 0 0 1px rgba(53,211,111,.30),0 0 18px rgba(53,211,111,.34),inset 0 1px 0 rgba(255,255,255,.16) !important;
+}
+.bw-task-modal-card[data-task-key="micro"] .bw-micro-option-btn.is-wrong{
+  border:2px solid #ff4d4d !important;
+  background:linear-gradient(180deg,rgba(255,77,77,.34),rgba(120,28,28,.82)) !important;
+  color:#ffffff !important;
+  box-shadow:0 0 0 1px rgba(255,77,77,.30),0 0 18px rgba(255,77,77,.34),inset 0 1px 0 rgba(255,255,255,.12) !important;
+}
+.bw-task-modal-card[data-task-key="micro"] .bw-micro-option-btn.is-correct.is-selected{
+  border-color:#35d36f !important;
+}
+</style>
+<style id="bw-micro-final-verified-style">
+.bw-task-modal-card[data-task-key="micro"] .bw-micro-option-btn.bw-answer-correct,
+#dailyMicroOptions .micro-option.bw-answer-correct{
+  background:linear-gradient(135deg,rgba(45,122,70,.94),rgba(31,112,64,.94)) !important;
+  border-color:#5dff9a !important;
+  color:#fff !important;
+  box-shadow:0 0 0 1px rgba(93,255,154,.55),0 0 18px rgba(93,255,154,.28) !important;
+}
+.bw-task-modal-card[data-task-key="micro"] .bw-micro-option-btn.bw-answer-correct.bw-answer-pulse,
+#dailyMicroOptions .micro-option.bw-answer-correct.bw-answer-pulse{
+  animation:bwMicroCorrectPulse 1.15s ease-in-out 2;
+}
+.bw-task-modal-card[data-task-key="micro"] .bw-micro-option-btn.bw-answer-wrong,
+#dailyMicroOptions .micro-option.bw-answer-wrong{
+  background:linear-gradient(135deg,rgba(128,28,31,.96),rgba(103,22,25,.96)) !important;
+  border-color:#ff5c68 !important;
+  color:#fff !important;
+  box-shadow:0 0 0 1px rgba(255,92,104,.58),0 0 18px rgba(255,92,104,.22) !important;
+}
+.bw-task-modal-card[data-task-key="micro"] .bw-micro-answer-note.is-visible,
+#dailyMicroAnswer.show{
+  color:#ffe7a3 !important;
+  font-weight:800 !important;
+}
+@keyframes bwMicroCorrectPulse{
+  0%,100%{transform:scale(1);box-shadow:0 0 0 1px rgba(93,255,154,.55),0 0 12px rgba(93,255,154,.20)}
+  50%{transform:scale(1.025);box-shadow:0 0 0 2px rgba(93,255,154,.82),0 0 26px rgba(93,255,154,.42)}
+}
+</style>
+<script id="bw-micro-final-verified-js">
+(function(){
+  'use strict';
+  var MICRO_MAP = {"Что является основой Ислама?":{"correct":0,"meaning":"Таухид — основа веры: поклонение только Аллаху."},"Что означает таухид?":{"correct":0,"meaning":"Это важное знание помогает жить осознанно и ближе к Аллаху."},"Кто последний Пророк?":{"correct":0,"meaning":"Пророки учили людей поклоняться только Аллаху."},"Сколько столпов Ислама?":{"correct":0,"meaning":"Пять столпов — это шахада, намаз, закят, пост и хадж."},"Первый столп Ислама — это…":{"correct":0,"meaning":"Пять столпов — это шахада, намаз, закят, пост и хадж."},"Что означает шахада?":{"correct":0,"meaning":"Это важное знание помогает жить осознанно и ближе к Аллаху."},"Что означает ислам?":{"correct":0,"meaning":"Это важное знание помогает жить осознанно и ближе к Аллаху."},"Что означает ихсан?":{"correct":0,"meaning":"Это важное знание помогает жить осознанно и ближе к Аллаху."},"Кто наш Господь?":{"correct":0,"meaning":"Это важное знание помогает жить осознанно и ближе к Аллаху."},"Книга мусульман — это…":{"correct":0,"meaning":"Это важное знание помогает жить осознанно и ближе к Аллаху."},"Сколько обязательных намазов в день?":{"correct":0,"meaning":"Намаз — главный ежедневный поклон после шахады."},"Первый намаз дня — это…":{"correct":0,"meaning":"Намаз — главный ежедневный поклон после шахады."},"Последний обязательный намаз — это…":{"correct":0,"meaning":"Намаз — главный ежедневный поклон после шахады."},"Куда обращаются в намазе?":{"correct":0,"meaning":"Намаз — главный ежедневный поклон после шахады."},"Что читают в каждом ракаате?":{"correct":0,"meaning":"Это важное знание помогает жить осознанно и ближе к Аллаху."},"Намаз начинается с…":{"correct":0,"meaning":"Намаз — главный ежедневный поклон после шахады."},"Что такое суджуд?":{"correct":0,"meaning":"Это важное знание помогает жить осознанно и ближе к Аллаху."},"Что такое руку?":{"correct":0,"meaning":"Это важное знание помогает жить осознанно и ближе к Аллаху."},"Что нарушает намаз?":{"correct":0,"meaning":"Намаз — главный ежедневный поклон после шахады."},"Пятничный намаз называется…":{"correct":0,"meaning":"Намаз — главный ежедневный поклон после шахады."},"Кто приносил откровение пророкам?":{"correct":0,"meaning":"Пророки учили людей поклоняться только Аллаху."},"Как зовут ангела смерти?":{"correct":0,"meaning":"Ангел смерти называется Малак аль-Маут."},"Кто задаёт вопросы в могиле?":{"correct":0,"meaning":"В могиле вопросы задают ангелы Мункар и Накир."},"Кто записывает добрые дела?":{"correct":0,"meaning":"Это важное знание помогает жить осознанно и ближе к Аллаху."},"Кто записывает плохие дела?":{"correct":0,"meaning":"Это важное знание помогает жить осознанно и ближе к Аллаху."},"Ангелы созданы из…":{"correct":0,"meaning":"Вера в ангелов — часть имана."},"Ангелы ослушиваются Аллаха?":{"correct":0,"meaning":"Вера в ангелов — часть имана."},"Как зовут хранителя Рая?":{"correct":0,"meaning":"Это важное знание помогает жить осознанно и ближе к Аллаху."},"Как зовут хранителя Ада?":{"correct":0,"meaning":"Это важное знание помогает жить осознанно и ближе к Аллаху."},"Кто протрубит в Рог?":{"correct":0,"meaning":"Вера в ангелов — часть имана."},"Какие вопросы задают в могиле?":{"correct":0,"meaning":"Это важное знание помогает жить осознанно и ближе к Аллаху."},"Кто твой Господь?":{"correct":0,"meaning":"Это важное знание помогает жить осознанно и ближе к Аллаху."},"Какая твоя религия?":{"correct":0,"meaning":"Это важное знание помогает жить осознанно и ближе к Аллаху."},"Кто твой Пророк?":{"correct":0,"meaning":"Пророки учили людей поклоняться только Аллаху."},"Что помогает в могиле?":{"correct":0,"meaning":"Это важное знание помогает жить осознанно и ближе к Аллаху."},"Могила может быть…":{"correct":0,"meaning":"Это важное знание помогает жить осознанно и ближе к Аллаху."},"Можно ли забывать смерть?":{"correct":0,"meaning":"Это важное знание помогает жить осознанно и ближе к Аллаху."},"Что читают за умершего в дуа?":{"correct":0,"meaning":"Это важное знание помогает жить осознанно и ближе к Аллаху."},"Лучший запас после смерти — это…":{"correct":0,"meaning":"Это важное знание помогает жить осознанно и ближе к Аллаху."},"Барзах — это…":{"correct":0,"meaning":"Это важное знание помогает жить осознанно и ближе к Аллаху."},"Первая сура Корана — это…":{"correct":0,"meaning":"Коран — Слово Аллаха и руководство для людей."},"Последняя сура Корана — это…":{"correct":0,"meaning":"Коран — Слово Аллаха и руководство для людей."},"Самая длинная сура — это…":{"correct":0,"meaning":"Коран — Слово Аллаха и руководство для людей."},"Коран нужно читать с…":{"correct":0,"meaning":"Коран — Слово Аллаха и руководство для людей."},"Перед Кораном желательно быть в…":{"correct":0,"meaning":"Коран — Слово Аллаха и руководство для людей."},"Коран был ниспослан на…":{"correct":0,"meaning":"Коран — Слово Аллаха и руководство для людей."},"Ночь ниспослания Корана — это…":{"correct":0,"meaning":"Коран — Слово Аллаха и руководство для людей."},"Сура Ихлас говорит о…":{"correct":0,"meaning":"Это важное знание помогает жить осознанно и ближе к Аллаху."},"Аят аль-Курси в какой суре?":{"correct":0,"meaning":"Это важное знание помогает жить осознанно и ближе к Аллаху."},"Коран — это…":{"correct":0,"meaning":"Коран — Слово Аллаха и руководство для людей."},"Первый человек и пророк — это…":{"correct":0,"meaning":"Пророки учили людей поклоняться только Аллаху."},"Кому был ниспослан Коран?":{"correct":0,"meaning":"Коран — Слово Аллаха и руководство для людей."},"Кому была дана Тора?":{"correct":0,"meaning":"Это важное знание помогает жить осознанно и ближе к Аллаху."},"Кому был дан Инджиль?":{"correct":0,"meaning":"Это важное знание помогает жить осознанно и ближе к Аллаху."},"Кому были даны Забур?":{"correct":0,"meaning":"Это важное знание помогает жить осознанно и ближе к Аллаху."},"Пророк Иса عليه السلام — это…":{"correct":0,"meaning":"Пророки учили людей поклоняться только Аллаху."},"Пророк Муса عليه السلام говорил с…":{"correct":0,"meaning":"Пророки учили людей поклоняться только Аллаху."},"Пророк Ибрахим عليه السلام известен как…":{"correct":0,"meaning":"Пророки учили людей поклоняться только Аллаху."},"Пророк Нух عليه السلام построил…":{"correct":0,"meaning":"Пророки учили людей поклоняться только Аллаху."},"Пророки учили людей…":{"correct":0,"meaning":"Пророки учили людей поклоняться только Аллаху."},"Омовение перед намазом называется…":{"correct":0,"meaning":"Намаз — главный ежедневный поклон после шахады."},"Что моют в омовении?":{"correct":0,"meaning":"Чистота помогает правильно совершать поклонение."},"Сон может нарушить омовение?":{"correct":0,"meaning":"Чистота помогает правильно совершать поклонение."},"После туалета нужно…":{"correct":0,"meaning":"Это важное знание помогает жить осознанно и ближе к Аллаху."},"Чистота — это…":{"correct":0,"meaning":"Чистота помогает правильно совершать поклонение."},"Гусль — это…":{"correct":0,"meaning":"Это важное знание помогает жить осознанно и ближе к Аллаху."},"Таяммум делают при отсутствии…":{"correct":0,"meaning":"Это важное знание помогает жить осознанно и ближе к Аллаху."},"Перед намазом нужна…":{"correct":0,"meaning":"Намаз — главный ежедневный поклон после шахады."},"Одежда для намаза должна быть…":{"correct":0,"meaning":"Намаз — главный ежедневный поклон после шахады."},"Место намаза должно быть…":{"correct":0,"meaning":"Намаз — главный ежедневный поклон после шахады."},"Месяц обязательного поста — это…":{"correct":0,"meaning":"Это важное знание помогает жить осознанно и ближе к Аллаху."},"Пост начинается с…":{"correct":0,"meaning":"Рамадан воспитывает богобоязненность и самоконтроль."},"Пост открывают при…":{"correct":0,"meaning":"Рамадан воспитывает богобоязненность и самоконтроль."},"Ночь лучше тысячи месяцев — это…":{"correct":0,"meaning":"Это важное знание помогает жить осознанно и ближе к Аллаху."},"Таравих читают в…":{"correct":0,"meaning":"Это важное знание помогает жить осознанно и ближе к Аллаху."},"Сухур — это…":{"correct":0,"meaning":"Рамадан воспитывает богобоязненность и самоконтроль."},"Ифтар — это…":{"correct":0,"meaning":"Рамадан воспитывает богобоязненность и самоконтроль."},"Пост учит…":{"correct":0,"meaning":"Рамадан воспитывает богобоязненность и самоконтроль."},"Кто не может поститься, тот…":{"correct":0,"meaning":"Это важное знание помогает жить осознанно и ближе к Аллаху."},"Рамадан — месяц…":{"correct":0,"meaning":"Рамадан воспитывает богобоязненность и самоконтроль."},"Перед едой говорят…":{"correct":0,"meaning":"Это важное знание помогает жить осознанно и ближе к Аллаху."},"После еды говорят…":{"correct":0,"meaning":"Это важное знание помогает жить осознанно и ближе к Аллаху."},"При чихании говорят…":{"correct":0,"meaning":"Это важное знание помогает жить осознанно и ближе к Аллаху."},"Салам — это…":{"correct":0,"meaning":"Это важное знание помогает жить осознанно и ближе к Аллаху."},"Сосед имеет…":{"correct":0,"meaning":"Это важное знание помогает жить осознанно и ближе к Аллаху."},"Гость заслуживает…":{"correct":0,"meaning":"Это важное знание помогает жить осознанно и ближе к Аллаху."},"Лучше говорить…":{"correct":0,"meaning":"Это важное знание помогает жить осознанно и ближе к Аллаху."},"Если не знаешь, лучше…":{"correct":0,"meaning":"Это важное знание помогает жить осознанно и ближе к Аллаху."},"Старших нужно…":{"correct":0,"meaning":"Это важное знание помогает жить осознанно и ближе к Аллаху."},"Младших нужно…":{"correct":0,"meaning":"Это важное знание помогает жить осознанно и ближе к Аллаху."},"Первым делом спросят о…":{"correct":0,"meaning":"Это важное знание помогает жить осознанно и ближе к Аллаху."},"Судный день называется…":{"correct":0,"meaning":"Это важное знание помогает жить осознанно и ближе к Аллаху."},"Рай по-арабски — это…":{"correct":0,"meaning":"Это важное знание помогает жить осознанно и ближе к Аллаху."},"Ад по-арабски — это…":{"correct":0,"meaning":"Это важное знание помогает жить осознанно и ближе к Аллаху."},"Мизан — это…":{"correct":0,"meaning":"Это важное знание помогает жить осознанно и ближе к Аллаху."},"Сират — это…":{"correct":0,"meaning":"Это важное знание помогает жить осознанно и ближе к Аллаху."},"Книга дел будет…":{"correct":0,"meaning":"Это важное знание помогает жить осознанно и ближе к Аллаху."},"Тауба — это…":{"correct":0,"meaning":"Это важное знание помогает жить осознанно и ближе к Аллаху."},"Ширк — это…":{"correct":0,"meaning":"Это важное знание помогает жить осознанно и ближе к Аллаху."},"Иман — это…":{"correct":0,"meaning":"Это важное знание помогает жить осознанно и ближе к Аллаху."},"Что является основой Ислама? (2)":{"correct":0,"meaning":"Таухид — основа веры: поклонение только Аллаху."},"Что означает таухид? (2)":{"correct":0,"meaning":"Это важное знание помогает жить осознанно и ближе к Аллаху."},"Кто последний Пророк? (2)":{"correct":0,"meaning":"Пророки учили людей поклоняться только Аллаху."},"Сколько столпов Ислама? (2)":{"correct":0,"meaning":"Пять столпов — это шахада, намаз, закят, пост и хадж."},"Первый столп Ислама — это… (2)":{"correct":0,"meaning":"Пять столпов — это шахада, намаз, закят, пост и хадж."},"Что означает шахада? (2)":{"correct":0,"meaning":"Это важное знание помогает жить осознанно и ближе к Аллаху."},"Что означает ислам? (2)":{"correct":0,"meaning":"Это важное знание помогает жить осознанно и ближе к Аллаху."},"Что означает ихсан? (2)":{"correct":0,"meaning":"Это важное знание помогает жить осознанно и ближе к Аллаху."},"Кто наш Господь? (2)":{"correct":0,"meaning":"Это важное знание помогает жить осознанно и ближе к Аллаху."},"Книга мусульман — это… (2)":{"correct":0,"meaning":"Это важное знание помогает жить осознанно и ближе к Аллаху."},"Сколько обязательных намазов в день? (2)":{"correct":0,"meaning":"Намаз — главный ежедневный поклон после шахады."},"Первый намаз дня — это… (2)":{"correct":0,"meaning":"Намаз — главный ежедневный поклон после шахады."},"Последний обязательный намаз — это… (2)":{"correct":0,"meaning":"Намаз — главный ежедневный поклон после шахады."},"Куда обращаются в намазе? (2)":{"correct":0,"meaning":"Намаз — главный ежедневный поклон после шахады."},"Что читают в каждом ракаате? (2)":{"correct":0,"meaning":"Это важное знание помогает жить осознанно и ближе к Аллаху."},"Намаз начинается с… (2)":{"correct":0,"meaning":"Намаз — главный ежедневный поклон после шахады."},"Что такое суджуд? (2)":{"correct":0,"meaning":"Это важное знание помогает жить осознанно и ближе к Аллаху."},"Что такое руку? (2)":{"correct":0,"meaning":"Это важное знание помогает жить осознанно и ближе к Аллаху."},"Что нарушает намаз? (2)":{"correct":0,"meaning":"Намаз — главный ежедневный поклон после шахады."},"Пятничный намаз называется… (2)":{"correct":0,"meaning":"Намаз — главный ежедневный поклон после шахады."},"Что такое таваккуль?":{"correct":0,"meaning":"Таваккуль — это доверие Аллаху вместе с дозволенными действиями."},"Как зовут ангела смерти? (2)":{"correct":0,"meaning":"Ангел смерти называется Малак аль-Маут."},"Кто задаёт вопросы в могиле? (2)":{"correct":0,"meaning":"В могиле вопросы задают ангелы Мункар и Накир."},"Кто записывает добрые дела? (2)":{"correct":0,"meaning":"Это важное знание помогает жить осознанно и ближе к Аллаху."},"Кто записывает плохие дела? (2)":{"correct":0,"meaning":"Это важное знание помогает жить осознанно и ближе к Аллаху."},"Ангелы созданы из… (2)":{"correct":0,"meaning":"Вера в ангелов — часть имана."},"Ангелы ослушиваются Аллаха? (2)":{"correct":0,"meaning":"Вера в ангелов — часть имана."},"Как зовут хранителя Рая? (2)":{"correct":0,"meaning":"Это важное знание помогает жить осознанно и ближе к Аллаху."},"Как зовут хранителя Ада? (2)":{"correct":0,"meaning":"Это важное знание помогает жить осознанно и ближе к Аллаху."},"Кто протрубит в Рог? (2)":{"correct":0,"meaning":"Вера в ангелов — часть имана."},"Какие вопросы задают в могиле? (2)":{"correct":0,"meaning":"Это важное знание помогает жить осознанно и ближе к Аллаху."},"Кто твой Господь? (2)":{"correct":0,"meaning":"Это важное знание помогает жить осознанно и ближе к Аллаху."},"Какая твоя религия? (2)":{"correct":0,"meaning":"Это важное знание помогает жить осознанно и ближе к Аллаху."},"Кто твой Пророк? (2)":{"correct":0,"meaning":"Пророки учили людей поклоняться только Аллаху."},"Что помогает в могиле? (2)":{"correct":0,"meaning":"Это важное знание помогает жить осознанно и ближе к Аллаху."},"Могила может быть… (2)":{"correct":0,"meaning":"Это важное знание помогает жить осознанно и ближе к Аллаху."},"Можно ли забывать смерть? (2)":{"correct":0,"meaning":"Это важное знание помогает жить осознанно и ближе к Аллаху."},"Что читают за умершего в дуа? (2)":{"correct":0,"meaning":"Это важное знание помогает жить осознанно и ближе к Аллаху."},"Лучший запас после смерти — это… (2)":{"correct":0,"meaning":"Это важное знание помогает жить осознанно и ближе к Аллаху."},"Барзах — это… (2)":{"correct":0,"meaning":"Это важное знание помогает жить осознанно и ближе к Аллаху."},"Первая сура Корана — это… (2)":{"correct":0,"meaning":"Коран — Слово Аллаха и руководство для людей."},"Последняя сура Корана — это… (2)":{"correct":0,"meaning":"Коран — Слово Аллаха и руководство для людей."},"Самая длинная сура — это… (2)":{"correct":0,"meaning":"Коран — Слово Аллаха и руководство для людей."},"Коран нужно читать с… (2)":{"correct":0,"meaning":"Коран — Слово Аллаха и руководство для людей."},"Перед Кораном желательно быть в… (2)":{"correct":0,"meaning":"Коран — Слово Аллаха и руководство для людей."},"Коран был ниспослан на… (2)":{"correct":0,"meaning":"Коран — Слово Аллаха и руководство для людей."},"Ночь ниспослания Корана — это… (2)":{"correct":0,"meaning":"Коран — Слово Аллаха и руководство для людей."},"Сура Ихлас говорит о… (2)":{"correct":0,"meaning":"Это важное знание помогает жить осознанно и ближе к Аллаху."},"Аят аль-Курси в какой суре? (2)":{"correct":0,"meaning":"Это важное знание помогает жить осознанно и ближе к Аллаху."},"Коран — это… (2)":{"correct":0,"meaning":"Коран — Слово Аллаха и руководство для людей."},"Первый человек и пророк — это… (2)":{"correct":0,"meaning":"Пророки учили людей поклоняться только Аллаху."},"Кому был ниспослан Коран? (2)":{"correct":0,"meaning":"Коран — Слово Аллаха и руководство для людей."},"Кому была дана Тора? (2)":{"correct":0,"meaning":"Это важное знание помогает жить осознанно и ближе к Аллаху."},"Кому был дан Инджиль? (2)":{"correct":0,"meaning":"Это важное знание помогает жить осознанно и ближе к Аллаху."},"Кому были даны Забур? (2)":{"correct":0,"meaning":"Это важное знание помогает жить осознанно и ближе к Аллаху."},"Пророк Иса عليه السلام — это… (2)":{"correct":0,"meaning":"Пророки учили людей поклоняться только Аллаху."},"Пророк Муса عليه السلام говорил с… (2)":{"correct":0,"meaning":"Пророки учили людей поклоняться только Аллаху."},"Пророк Ибрахим عليه السلام известен как… (2)":{"correct":0,"meaning":"Пророки учили людей поклоняться только Аллаху."},"Пророк Нух عليه السلام построил… (2)":{"correct":0,"meaning":"Пророки учили людей поклоняться только Аллаху."},"Пророки учили людей… (2)":{"correct":0,"meaning":"Пророки учили людей поклоняться только Аллаху."},"Омовение перед намазом называется… (2)":{"correct":0,"meaning":"Намаз — главный ежедневный поклон после шахады."},"Что моют в омовении? (2)":{"correct":0,"meaning":"Чистота помогает правильно совершать поклонение."},"Сон может нарушить омовение? (2)":{"correct":0,"meaning":"Чистота помогает правильно совершать поклонение."},"После туалета нужно… (2)":{"correct":0,"meaning":"Это важное знание помогает жить осознанно и ближе к Аллаху."},"Чистота — это… (2)":{"correct":0,"meaning":"Чистота помогает правильно совершать поклонение."},"Гусль — это… (2)":{"correct":0,"meaning":"Это важное знание помогает жить осознанно и ближе к Аллаху."},"Таяммум делают при отсутствии… (2)":{"correct":0,"meaning":"Это важное знание помогает жить осознанно и ближе к Аллаху."},"Перед намазом нужна… (2)":{"correct":0,"meaning":"Намаз — главный ежедневный поклон после шахады."},"Одежда для намаза должна быть… (2)":{"correct":0,"meaning":"Намаз — главный ежедневный поклон после шахады."},"Место намаза должно быть… (2)":{"correct":0,"meaning":"Намаз — главный ежедневный поклон после шахады."},"Месяц обязательного поста — это… (2)":{"correct":0,"meaning":"Это важное знание помогает жить осознанно и ближе к Аллаху."},"Пост начинается с… (2)":{"correct":0,"meaning":"Рамадан воспитывает богобоязненность и самоконтроль."},"Пост открывают при… (2)":{"correct":0,"meaning":"Рамадан воспитывает богобоязненность и самоконтроль."},"Ночь лучше тысячи месяцев — это… (2)":{"correct":0,"meaning":"Это важное знание помогает жить осознанно и ближе к Аллаху."},"Таравих читают в… (2)":{"correct":0,"meaning":"Это важное знание помогает жить осознанно и ближе к Аллаху."},"Сухур — это… (2)":{"correct":0,"meaning":"Рамадан воспитывает богобоязненность и самоконтроль."},"Ифтар — это… (2)":{"correct":0,"meaning":"Рамадан воспитывает богобоязненность и самоконтроль."},"Пост учит… (2)":{"correct":0,"meaning":"Рамадан воспитывает богобоязненность и самоконтроль."},"Кто не может поститься, тот… (2)":{"correct":0,"meaning":"Это важное знание помогает жить осознанно и ближе к Аллаху."},"Рамадан — месяц… (2)":{"correct":0,"meaning":"Рамадан воспитывает богобоязненность и самоконтроль."},"Перед едой говорят… (2)":{"correct":0,"meaning":"Это важное знание помогает жить осознанно и ближе к Аллаху."},"После еды говорят… (2)":{"correct":0,"meaning":"Это важное знание помогает жить осознанно и ближе к Аллаху."},"При чихании говорят… (2)":{"correct":0,"meaning":"Это важное знание помогает жить осознанно и ближе к Аллаху."},"Салам — это… (2)":{"correct":0,"meaning":"Это важное знание помогает жить осознанно и ближе к Аллаху."},"Сосед имеет… (2)":{"correct":0,"meaning":"Это важное знание помогает жить осознанно и ближе к Аллаху."},"Гость заслуживает… (2)":{"correct":0,"meaning":"Это важное знание помогает жить осознанно и ближе к Аллаху."},"Лучше говорить… (2)":{"correct":0,"meaning":"Это важное знание помогает жить осознанно и ближе к Аллаху."},"Если не знаешь, лучше… (2)":{"correct":0,"meaning":"Это важное знание помогает жить осознанно и ближе к Аллаху."},"Старших нужно… (2)":{"correct":0,"meaning":"Это важное знание помогает жить осознанно и ближе к Аллаху."},"Младших нужно… (2)":{"correct":0,"meaning":"Это важное знание помогает жить осознанно и ближе к Аллаху."},"Первым делом спросят о… (2)":{"correct":0,"meaning":"Это важное знание помогает жить осознанно и ближе к Аллаху."},"Судный день называется… (2)":{"correct":0,"meaning":"Это важное знание помогает жить осознанно и ближе к Аллаху."},"Рай по-арабски — это… (2)":{"correct":0,"meaning":"Это важное знание помогает жить осознанно и ближе к Аллаху."},"Ад по-арабски — это… (2)":{"correct":0,"meaning":"Это важное знание помогает жить осознанно и ближе к Аллаху."},"Мизан — это… (2)":{"correct":0,"meaning":"Это важное знание помогает жить осознанно и ближе к Аллаху."},"Сират — это… (2)":{"correct":0,"meaning":"Это важное знание помогает жить осознанно и ближе к Аллаху."},"Книга дел будет… (2)":{"correct":0,"meaning":"Это важное знание помогает жить осознанно и ближе к Аллаху."},"Тауба — это… (2)":{"correct":0,"meaning":"Это важное знание помогает жить осознанно и ближе к Аллаху."},"Ширк — это… (2)":{"correct":0,"meaning":"Это важное знание помогает жить осознанно и ближе к Аллаху."},"Иман — это… (2)":{"correct":0,"meaning":"Это важное знание помогает жить осознанно и ближе к Аллаху."},"Что является основой Ислама? (3)":{"correct":0,"meaning":"Таухид — основа веры: поклонение только Аллаху."},"Что означает таухид? (3)":{"correct":0,"meaning":"Это важное знание помогает жить осознанно и ближе к Аллаху."},"Кто последний Пророк? (3)":{"correct":0,"meaning":"Пророки учили людей поклоняться только Аллаху."},"Сколько столпов Ислама? (3)":{"correct":0,"meaning":"Пять столпов — это шахада, намаз, закят, пост и хадж."},"Первый столп Ислама — это… (3)":{"correct":0,"meaning":"Пять столпов — это шахада, намаз, закят, пост и хадж."},"Что означает шахада? (3)":{"correct":0,"meaning":"Это важное знание помогает жить осознанно и ближе к Аллаху."},"Что означает ислам? (3)":{"correct":0,"meaning":"Это важное знание помогает жить осознанно и ближе к Аллаху."},"Что означает ихсан? (3)":{"correct":0,"meaning":"Это важное знание помогает жить осознанно и ближе к Аллаху."},"Кто наш Господь? (3)":{"correct":0,"meaning":"Это важное знание помогает жить осознанно и ближе к Аллаху."},"Книга мусульман — это… (3)":{"correct":0,"meaning":"Это важное знание помогает жить осознанно и ближе к Аллаху."},"Сколько обязательных намазов в день? (3)":{"correct":0,"meaning":"Намаз — главный ежедневный поклон после шахады."},"Первый намаз дня — это… (3)":{"correct":0,"meaning":"Намаз — главный ежедневный поклон после шахады."},"Последний обязательный намаз — это… (3)":{"correct":0,"meaning":"Намаз — главный ежедневный поклон после шахады."},"Куда обращаются в намазе? (3)":{"correct":0,"meaning":"Намаз — главный ежедневный поклон после шахады."},"Что читают в каждом ракаате? (3)":{"correct":0,"meaning":"Это важное знание помогает жить осознанно и ближе к Аллаху."},"Намаз начинается с… (3)":{"correct":0,"meaning":"Намаз — главный ежедневный поклон после шахады."},"Что такое суджуд? (3)":{"correct":0,"meaning":"Это важное знание помогает жить осознанно и ближе к Аллаху."},"Что такое руку? (3)":{"correct":0,"meaning":"Это важное знание помогает жить осознанно и ближе к Аллаху."},"Что нарушает намаз? (3)":{"correct":0,"meaning":"Намаз — главный ежедневный поклон после шахады."},"Пятничный намаз называется… (3)":{"correct":0,"meaning":"Намаз — главный ежедневный поклон после шахады."},"Кто приносил откровение пророкам? (3)":{"correct":0,"meaning":"Пророки учили людей поклоняться только Аллаху."},"Как зовут ангела смерти? (3)":{"correct":0,"meaning":"Ангел смерти называется Малак аль-Маут."},"Кто задаёт вопросы в могиле? (3)":{"correct":0,"meaning":"В могиле вопросы задают ангелы Мункар и Накир."},"Кто записывает добрые дела? (3)":{"correct":0,"meaning":"Это важное знание помогает жить осознанно и ближе к Аллаху."},"Кто записывает плохие дела? (3)":{"correct":0,"meaning":"Это важное знание помогает жить осознанно и ближе к Аллаху."},"Ангелы созданы из… (3)":{"correct":0,"meaning":"Вера в ангелов — часть имана."},"Ангелы ослушиваются Аллаха? (3)":{"correct":0,"meaning":"Вера в ангелов — часть имана."},"Как зовут хранителя Рая? (3)":{"correct":0,"meaning":"Это важное знание помогает жить осознанно и ближе к Аллаху."},"Как зовут хранителя Ада? (3)":{"correct":0,"meaning":"Это важное знание помогает жить осознанно и ближе к Аллаху."},"Кто протрубит в Рог? (3)":{"correct":0,"meaning":"Вера в ангелов — часть имана."},"Какие вопросы задают в могиле? (3)":{"correct":0,"meaning":"Это важное знание помогает жить осознанно и ближе к Аллаху."},"Кто твой Господь? (3)":{"correct":0,"meaning":"Это важное знание помогает жить осознанно и ближе к Аллаху."},"Какая твоя религия? (3)":{"correct":0,"meaning":"Это важное знание помогает жить осознанно и ближе к Аллаху."},"Кто твой Пророк? (3)":{"correct":0,"meaning":"Пророки учили людей поклоняться только Аллаху."},"Что помогает в могиле? (3)":{"correct":0,"meaning":"Это важное знание помогает жить осознанно и ближе к Аллаху."},"Могила может быть… (3)":{"correct":0,"meaning":"Это важное знание помогает жить осознанно и ближе к Аллаху."},"Можно ли забывать смерть? (3)":{"correct":0,"meaning":"Это важное знание помогает жить осознанно и ближе к Аллаху."},"Что читают за умершего в дуа? (3)":{"correct":0,"meaning":"Это важное знание помогает жить осознанно и ближе к Аллаху."},"Лучший запас после смерти — это… (3)":{"correct":0,"meaning":"Это важное знание помогает жить осознанно и ближе к Аллаху."},"Барзах — это… (3)":{"correct":0,"meaning":"Это важное знание помогает жить осознанно и ближе к Аллаху."},"Первая сура Корана — это… (3)":{"correct":0,"meaning":"Коран — Слово Аллаха и руководство для людей."},"Последняя сура Корана — это… (3)":{"correct":0,"meaning":"Коран — Слово Аллаха и руководство для людей."},"Самая длинная сура — это… (3)":{"correct":0,"meaning":"Коран — Слово Аллаха и руководство для людей."},"Коран нужно читать с… (3)":{"correct":0,"meaning":"Коран — Слово Аллаха и руководство для людей."},"Перед Кораном желательно быть в… (3)":{"correct":0,"meaning":"Коран — Слово Аллаха и руководство для людей."},"Коран был ниспослан на… (3)":{"correct":0,"meaning":"Коран — Слово Аллаха и руководство для людей."},"Ночь ниспослания Корана — это… (3)":{"correct":0,"meaning":"Коран — Слово Аллаха и руководство для людей."},"Сура Ихлас говорит о… (3)":{"correct":0,"meaning":"Это важное знание помогает жить осознанно и ближе к Аллаху."},"Аят аль-Курси в какой суре? (3)":{"correct":0,"meaning":"Это важное знание помогает жить осознанно и ближе к Аллаху."},"Коран — это… (3)":{"correct":0,"meaning":"Коран — Слово Аллаха и руководство для людей."},"Первый человек и пророк — это… (3)":{"correct":0,"meaning":"Пророки учили людей поклоняться только Аллаху."},"Кому был ниспослан Коран? (3)":{"correct":0,"meaning":"Коран — Слово Аллаха и руководство для людей."},"Кому была дана Тора? (3)":{"correct":0,"meaning":"Это важное знание помогает жить осознанно и ближе к Аллаху."},"Кому был дан Инджиль? (3)":{"correct":0,"meaning":"Это важное знание помогает жить осознанно и ближе к Аллаху."},"Кому были даны Забур? (3)":{"correct":0,"meaning":"Это важное знание помогает жить осознанно и ближе к Аллаху."},"Пророк Иса عليه السلام — это… (3)":{"correct":0,"meaning":"Пророки учили людей поклоняться только Аллаху."},"Пророк Муса عليه السلام говорил с… (3)":{"correct":0,"meaning":"Пророки учили людей поклоняться только Аллаху."},"Пророк Ибрахим عليه السلام известен как… (3)":{"correct":0,"meaning":"Пророки учили людей поклоняться только Аллаху."},"Пророк Нух عليه السلام построил… (3)":{"correct":0,"meaning":"Пророки учили людей поклоняться только Аллаху."},"Пророки учили людей… (3)":{"correct":0,"meaning":"Пророки учили людей поклоняться только Аллаху."},"Омовение перед намазом называется… (3)":{"correct":0,"meaning":"Намаз — главный ежедневный поклон после шахады."},"Что моют в омовении? (3)":{"correct":0,"meaning":"Чистота помогает правильно совершать поклонение."},"Сон может нарушить омовение? (3)":{"correct":0,"meaning":"Чистота помогает правильно совершать поклонение."},"После туалета нужно… (3)":{"correct":0,"meaning":"Это важное знание помогает жить осознанно и ближе к Аллаху."},"Чистота — это… (3)":{"correct":0,"meaning":"Чистота помогает правильно совершать поклонение."},"Гусль — это… (3)":{"correct":0,"meaning":"Это важное знание помогает жить осознанно и ближе к Аллаху."},"Таяммум делают при отсутствии… (3)":{"correct":0,"meaning":"Это важное знание помогает жить осознанно и ближе к Аллаху."},"Перед намазом нужна… (3)":{"correct":0,"meaning":"Намаз — главный ежедневный поклон после шахады."},"Одежда для намаза должна быть… (3)":{"correct":0,"meaning":"Намаз — главный ежедневный поклон после шахады."},"Место намаза должно быть… (3)":{"correct":0,"meaning":"Намаз — главный ежедневный поклон после шахады."},"Месяц обязательного поста — это… (3)":{"correct":0,"meaning":"Это важное знание помогает жить осознанно и ближе к Аллаху."},"Пост начинается с… (3)":{"correct":0,"meaning":"Рамадан воспитывает богобоязненность и самоконтроль."},"Пост открывают при… (3)":{"correct":0,"meaning":"Рамадан воспитывает богобоязненность и самоконтроль."},"Ночь лучше тысячи месяцев — это… (3)":{"correct":0,"meaning":"Это важное знание помогает жить осознанно и ближе к Аллаху."},"Таравих читают в… (3)":{"correct":0,"meaning":"Это важное знание помогает жить осознанно и ближе к Аллаху."},"Сухур — это… (3)":{"correct":0,"meaning":"Рамадан воспитывает богобоязненность и самоконтроль."},"Ифтар — это… (3)":{"correct":0,"meaning":"Рамадан воспитывает богобоязненность и самоконтроль."},"Пост учит… (3)":{"correct":0,"meaning":"Рамадан воспитывает богобоязненность и самоконтроль."},"Кто не может поститься, тот… (3)":{"correct":0,"meaning":"Это важное знание помогает жить осознанно и ближе к Аллаху."},"Рамадан — месяц… (3)":{"correct":0,"meaning":"Рамадан воспитывает богобоязненность и самоконтроль."},"Перед едой говорят… (3)":{"correct":0,"meaning":"Это важное знание помогает жить осознанно и ближе к Аллаху."},"После еды говорят… (3)":{"correct":0,"meaning":"Это важное знание помогает жить осознанно и ближе к Аллаху."},"При чихании говорят… (3)":{"correct":0,"meaning":"Это важное знание помогает жить осознанно и ближе к Аллаху."},"Салам — это… (3)":{"correct":0,"meaning":"Это важное знание помогает жить осознанно и ближе к Аллаху."},"Сосед имеет… (3)":{"correct":0,"meaning":"Это важное знание помогает жить осознанно и ближе к Аллаху."},"Гость заслуживает… (3)":{"correct":0,"meaning":"Это важное знание помогает жить осознанно и ближе к Аллаху."},"Лучше говорить… (3)":{"correct":0,"meaning":"Это важное знание помогает жить осознанно и ближе к Аллаху."},"Если не знаешь, лучше… (3)":{"correct":0,"meaning":"Это важное знание помогает жить осознанно и ближе к Аллаху."},"Старших нужно… (3)":{"correct":0,"meaning":"Это важное знание помогает жить осознанно и ближе к Аллаху."},"Младших нужно… (3)":{"correct":0,"meaning":"Это важное знание помогает жить осознанно и ближе к Аллаху."},"Первым делом спросят о… (3)":{"correct":0,"meaning":"Это важное знание помогает жить осознанно и ближе к Аллаху."},"Судный день называется… (3)":{"correct":0,"meaning":"Это важное знание помогает жить осознанно и ближе к Аллаху."},"Рай по-арабски — это… (3)":{"correct":0,"meaning":"Это важное знание помогает жить осознанно и ближе к Аллаху."},"Ад по-арабски — это… (3)":{"correct":0,"meaning":"Это важное знание помогает жить осознанно и ближе к Аллаху."},"Мизан — это… (3)":{"correct":0,"meaning":"Это важное знание помогает жить осознанно и ближе к Аллаху."},"Сират — это… (3)":{"correct":0,"meaning":"Это важное знание помогает жить осознанно и ближе к Аллаху."},"Книга дел будет… (3)":{"correct":0,"meaning":"Это важное знание помогает жить осознанно и ближе к Аллаху."},"Тауба — это… (3)":{"correct":0,"meaning":"Это важное знание помогает жить осознанно и ближе к Аллаху."},"Ширк — это… (3)":{"correct":0,"meaning":"Это важное знание помогает жить осознанно и ближе к Аллаху."},"Иман — это… (3)":{"correct":0,"meaning":"Это важное знание помогает жить осознанно и ближе к Аллаху."},"Что является основой Ислама? (4)":{"correct":0,"meaning":"Таухид — основа веры: поклонение только Аллаху."},"Что означает таухид? (4)":{"correct":0,"meaning":"Это важное знание помогает жить осознанно и ближе к Аллаху."},"Кто последний Пророк? (4)":{"correct":0,"meaning":"Пророки учили людей поклоняться только Аллаху."},"Сколько столпов Ислама? (4)":{"correct":0,"meaning":"Пять столпов — это шахада, намаз, закят, пост и хадж."},"Первый столп Ислама — это… (4)":{"correct":0,"meaning":"Пять столпов — это шахада, намаз, закят, пост и хадж."},"Что означает шахада? (4)":{"correct":0,"meaning":"Это важное знание помогает жить осознанно и ближе к Аллаху."},"Что означает ислам? (4)":{"correct":0,"meaning":"Это важное знание помогает жить осознанно и ближе к Аллаху."},"Что означает ихсан? (4)":{"correct":0,"meaning":"Это важное знание помогает жить осознанно и ближе к Аллаху."},"Кто наш Господь? (4)":{"correct":0,"meaning":"Это важное знание помогает жить осознанно и ближе к Аллаху."},"Книга мусульман — это… (4)":{"correct":0,"meaning":"Это важное знание помогает жить осознанно и ближе к Аллаху."},"Сколько обязательных намазов в день? (4)":{"correct":0,"meaning":"Намаз — главный ежедневный поклон после шахады."},"Первый намаз дня — это… (4)":{"correct":0,"meaning":"Намаз — главный ежедневный поклон после шахады."},"Последний обязательный намаз — это… (4)":{"correct":0,"meaning":"Намаз — главный ежедневный поклон после шахады."},"Куда обращаются в намазе? (4)":{"correct":0,"meaning":"Намаз — главный ежедневный поклон после шахады."},"Что читают в каждом ракаате? (4)":{"correct":0,"meaning":"Это важное знание помогает жить осознанно и ближе к Аллаху."},"Намаз начинается с… (4)":{"correct":0,"meaning":"Намаз — главный ежедневный поклон после шахады."},"Что такое суджуд? (4)":{"correct":0,"meaning":"Это важное знание помогает жить осознанно и ближе к Аллаху."},"Что такое руку? (4)":{"correct":0,"meaning":"Это важное знание помогает жить осознанно и ближе к Аллаху."},"Что нарушает намаз? (4)":{"correct":0,"meaning":"Намаз — главный ежедневный поклон после шахады."},"Пятничный намаз называется… (4)":{"correct":0,"meaning":"Намаз — главный ежедневный поклон после шахады."},"Кто приносил откровение пророкам? (4)":{"correct":0,"meaning":"Пророки учили людей поклоняться только Аллаху."},"Как зовут ангела смерти? (4)":{"correct":0,"meaning":"Ангел смерти называется Малак аль-Маут."},"Кто задаёт вопросы в могиле? (4)":{"correct":0,"meaning":"В могиле вопросы задают ангелы Мункар и Накир."},"Кто записывает добрые дела? (4)":{"correct":0,"meaning":"Это важное знание помогает жить осознанно и ближе к Аллаху."},"Кто записывает плохие дела? (4)":{"correct":0,"meaning":"Это важное знание помогает жить осознанно и ближе к Аллаху."},"Ангелы созданы из… (4)":{"correct":0,"meaning":"Вера в ангелов — часть имана."},"Ангелы ослушиваются Аллаха? (4)":{"correct":0,"meaning":"Вера в ангелов — часть имана."},"Как зовут хранителя Рая? (4)":{"correct":0,"meaning":"Это важное знание помогает жить осознанно и ближе к Аллаху."},"Как зовут хранителя Ада? (4)":{"correct":0,"meaning":"Это важное знание помогает жить осознанно и ближе к Аллаху."},"Кто протрубит в Рог? (4)":{"correct":0,"meaning":"Вера в ангелов — часть имана."},"Какие вопросы задают в могиле? (4)":{"correct":0,"meaning":"Это важное знание помогает жить осознанно и ближе к Аллаху."},"Кто твой Господь? (4)":{"correct":0,"meaning":"Это важное знание помогает жить осознанно и ближе к Аллаху."},"Какая твоя религия? (4)":{"correct":0,"meaning":"Это важное знание помогает жить осознанно и ближе к Аллаху."},"Кто твой Пророк? (4)":{"correct":0,"meaning":"Пророки учили людей поклоняться только Аллаху."},"Что помогает в могиле? (4)":{"correct":0,"meaning":"Это важное знание помогает жить осознанно и ближе к Аллаху."},"Могила может быть… (4)":{"correct":0,"meaning":"Это важное знание помогает жить осознанно и ближе к Аллаху."},"Можно ли забывать смерть? (4)":{"correct":0,"meaning":"Это важное знание помогает жить осознанно и ближе к Аллаху."},"Что читают за умершего в дуа? (4)":{"correct":0,"meaning":"Это важное знание помогает жить осознанно и ближе к Аллаху."},"Лучший запас после смерти — это… (4)":{"correct":0,"meaning":"Это важное знание помогает жить осознанно и ближе к Аллаху."},"Барзах — это… (4)":{"correct":0,"meaning":"Это важное знание помогает жить осознанно и ближе к Аллаху."},"Первая сура Корана — это… (4)":{"correct":0,"meaning":"Коран — Слово Аллаха и руководство для людей."},"Последняя сура Корана — это… (4)":{"correct":0,"meaning":"Коран — Слово Аллаха и руководство для людей."},"Самая длинная сура — это… (4)":{"correct":0,"meaning":"Коран — Слово Аллаха и руководство для людей."},"Коран нужно читать с… (4)":{"correct":0,"meaning":"Коран — Слово Аллаха и руководство для людей."},"Перед Кораном желательно быть в… (4)":{"correct":0,"meaning":"Коран — Слово Аллаха и руководство для людей."},"Коран был ниспослан на… (4)":{"correct":0,"meaning":"Коран — Слово Аллаха и руководство для людей."},"Ночь ниспослания Корана — это… (4)":{"correct":0,"meaning":"Коран — Слово Аллаха и руководство для людей."},"Сура Ихлас говорит о… (4)":{"correct":0,"meaning":"Это важное знание помогает жить осознанно и ближе к Аллаху."},"Аят аль-Курси в какой суре? (4)":{"correct":0,"meaning":"Это важное знание помогает жить осознанно и ближе к Аллаху."},"Коран — это… (4)":{"correct":0,"meaning":"Коран — Слово Аллаха и руководство для людей."},"Первый человек и пророк — это… (4)":{"correct":0,"meaning":"Пророки учили людей поклоняться только Аллаху."},"Кому был ниспослан Коран? (4)":{"correct":0,"meaning":"Коран — Слово Аллаха и руководство для людей."},"Кому была дана Тора? (4)":{"correct":0,"meaning":"Это важное знание помогает жить осознанно и ближе к Аллаху."},"Кому был дан Инджиль? (4)":{"correct":0,"meaning":"Это важное знание помогает жить осознанно и ближе к Аллаху."},"Кому были даны Забур? (4)":{"correct":0,"meaning":"Это важное знание помогает жить осознанно и ближе к Аллаху."},"Пророк Иса عليه السلام — это… (4)":{"correct":0,"meaning":"Пророки учили людей поклоняться только Аллаху."},"Пророк Муса عليه السلام говорил с… (4)":{"correct":0,"meaning":"Пророки учили людей поклоняться только Аллаху."},"Пророк Ибрахим عليه السلام известен как… (4)":{"correct":0,"meaning":"Пророки учили людей поклоняться только Аллаху."},"Пророк Нух عليه السلام построил… (4)":{"correct":0,"meaning":"Пророки учили людей поклоняться только Аллаху."},"Пророки учили людей… (4)":{"correct":0,"meaning":"Пророки учили людей поклоняться только Аллаху."},"Омовение перед намазом называется… (4)":{"correct":0,"meaning":"Намаз — главный ежедневный поклон после шахады."},"Что моют в омовении? (4)":{"correct":0,"meaning":"Чистота помогает правильно совершать поклонение."},"Сон может нарушить омовение? (4)":{"correct":0,"meaning":"Чистота помогает правильно совершать поклонение."},"После туалета нужно… (4)":{"correct":0,"meaning":"Это важное знание помогает жить осознанно и ближе к Аллаху."},"Чистота — это… (4)":{"correct":0,"meaning":"Чистота помогает правильно совершать поклонение."},"Гусль — это… (4)":{"correct":0,"meaning":"Это важное знание помогает жить осознанно и ближе к Аллаху."},"Таяммум делают при отсутствии… (4)":{"correct":0,"meaning":"Это важное знание помогает жить осознанно и ближе к Аллаху."},"Перед намазом нужна… (4)":{"correct":0,"meaning":"Намаз — главный ежедневный поклон после шахады."},"Одежда для намаза должна быть… (4)":{"correct":0,"meaning":"Намаз — главный ежедневный поклон после шахады."},"Место намаза должно быть… (4)":{"correct":0,"meaning":"Намаз — главный ежедневный поклон после шахады."},"Месяц обязательного поста — это… (4)":{"correct":0,"meaning":"Это важное знание помогает жить осознанно и ближе к Аллаху."},"Пост начинается с… (4)":{"correct":0,"meaning":"Рамадан воспитывает богобоязненность и самоконтроль."},"Пост открывают при… (4)":{"correct":0,"meaning":"Рамадан воспитывает богобоязненность и самоконтроль."},"Ночь лучше тысячи месяцев — это… (4)":{"correct":0,"meaning":"Это важное знание помогает жить осознанно и ближе к Аллаху."},"Таравих читают в… (4)":{"correct":0,"meaning":"Это важное знание помогает жить осознанно и ближе к Аллаху."},"Сухур — это… (4)":{"correct":0,"meaning":"Рамадан воспитывает богобоязненность и самоконтроль."},"Ифтар — это… (4)":{"correct":0,"meaning":"Рамадан воспитывает богобоязненность и самоконтроль."},"Пост учит… (4)":{"correct":0,"meaning":"Рамадан воспитывает богобоязненность и самоконтроль."},"Кто не может поститься, тот… (4)":{"correct":0,"meaning":"Это важное знание помогает жить осознанно и ближе к Аллаху."},"Рамадан — месяц… (4)":{"correct":0,"meaning":"Рамадан воспитывает богобоязненность и самоконтроль."},"Перед едой говорят… (4)":{"correct":0,"meaning":"Это важное знание помогает жить осознанно и ближе к Аллаху."},"После еды говорят… (4)":{"correct":0,"meaning":"Это важное знание помогает жить осознанно и ближе к Аллаху."},"При чихании говорят… (4)":{"correct":0,"meaning":"Это важное знание помогает жить осознанно и ближе к Аллаху."},"Салам — это… (4)":{"correct":0,"meaning":"Это важное знание помогает жить осознанно и ближе к Аллаху."},"Сосед имеет… (4)":{"correct":0,"meaning":"Это важное знание помогает жить осознанно и ближе к Аллаху."},"Гость заслуживает… (4)":{"correct":0,"meaning":"Это важное знание помогает жить осознанно и ближе к Аллаху."},"Лучше говорить… (4)":{"correct":0,"meaning":"Это важное знание помогает жить осознанно и ближе к Аллаху."},"Если не знаешь, лучше… (4)":{"correct":0,"meaning":"Это важное знание помогает жить осознанно и ближе к Аллаху."},"Старших нужно… (4)":{"correct":0,"meaning":"Это важное знание помогает жить осознанно и ближе к Аллаху."},"Младших нужно… (4)":{"correct":0,"meaning":"Это важное знание помогает жить осознанно и ближе к Аллаху."},"Первым делом спросят о… (4)":{"correct":0,"meaning":"Это важное знание помогает жить осознанно и ближе к Аллаху."},"Судный день называется… (4)":{"correct":0,"meaning":"Это важное знание помогает жить осознанно и ближе к Аллаху."},"Рай по-арабски — это… (4)":{"correct":0,"meaning":"Это важное знание помогает жить осознанно и ближе к Аллаху."},"Ад по-арабски — это… (4)":{"correct":0,"meaning":"Это важное знание помогает жить осознанно и ближе к Аллаху."},"Мизан — это… (4)":{"correct":0,"meaning":"Это важное знание помогает жить осознанно и ближе к Аллаху."},"Сират — это… (4)":{"correct":0,"meaning":"Это важное знание помогает жить осознанно и ближе к Аллаху."},"Книга дел будет… (4)":{"correct":0,"meaning":"Это важное знание помогает жить осознанно и ближе к Аллаху."},"Тауба — это… (4)":{"correct":0,"meaning":"Это важное знание помогает жить осознанно и ближе к Аллаху."},"Ширк — это… (4)":{"correct":0,"meaning":"Это важное знание помогает жить осознанно и ближе к Аллаху."},"Иман — это… (4)":{"correct":0,"meaning":"Это важное знание помогает жить осознанно и ближе к Аллаху."},"Что является основой Ислама? (5)":{"correct":0,"meaning":"Таухид — основа веры: поклонение только Аллаху."},"Что означает таухид? (5)":{"correct":0,"meaning":"Это важное знание помогает жить осознанно и ближе к Аллаху."},"Кто последний Пророк? (5)":{"correct":0,"meaning":"Пророки учили людей поклоняться только Аллаху."},"Сколько столпов Ислама? (5)":{"correct":0,"meaning":"Пять столпов — это шахада, намаз, закят, пост и хадж."},"Первый столп Ислама — это… (5)":{"correct":0,"meaning":"Пять столпов — это шахада, намаз, закят, пост и хадж."},"Что означает шахада? (5)":{"correct":0,"meaning":"Это важное знание помогает жить осознанно и ближе к Аллаху."},"Что означает ислам? (5)":{"correct":0,"meaning":"Это важное знание помогает жить осознанно и ближе к Аллаху."},"Что означает ихсан? (5)":{"correct":0,"meaning":"Это важное знание помогает жить осознанно и ближе к Аллаху."},"Кто наш Господь? (5)":{"correct":0,"meaning":"Это важное знание помогает жить осознанно и ближе к Аллаху."},"Книга мусульман — это… (5)":{"correct":0,"meaning":"Это важное знание помогает жить осознанно и ближе к Аллаху."},"Сколько обязательных намазов в день? (5)":{"correct":0,"meaning":"Намаз — главный ежедневный поклон после шахады."},"Первый намаз дня — это… (5)":{"correct":0,"meaning":"Намаз — главный ежедневный поклон после шахады."},"Последний обязательный намаз — это… (5)":{"correct":0,"meaning":"Намаз — главный ежедневный поклон после шахады."},"Куда обращаются в намазе? (5)":{"correct":0,"meaning":"Намаз — главный ежедневный поклон после шахады."},"Что читают в каждом ракаате? (5)":{"correct":0,"meaning":"Это важное знание помогает жить осознанно и ближе к Аллаху."},"Намаз начинается с… (5)":{"correct":0,"meaning":"Намаз — главный ежедневный поклон после шахады."},"Что такое суджуд? (5)":{"correct":0,"meaning":"Это важное знание помогает жить осознанно и ближе к Аллаху."},"Что такое руку? (5)":{"correct":0,"meaning":"Это важное знание помогает жить осознанно и ближе к Аллаху."},"Что нарушает намаз? (5)":{"correct":0,"meaning":"Намаз — главный ежедневный поклон после шахады."},"Пятничный намаз называется… (5)":{"correct":0,"meaning":"Намаз — главный ежедневный поклон после шахады."},"Кто приносил откровение пророкам? (5)":{"correct":0,"meaning":"Пророки учили людей поклоняться только Аллаху."},"Как зовут ангела смерти? (5)":{"correct":0,"meaning":"Ангел смерти называется Малак аль-Маут."},"Кто задаёт вопросы в могиле? (5)":{"correct":0,"meaning":"В могиле вопросы задают ангелы Мункар и Накир."},"Кто записывает добрые дела? (5)":{"correct":0,"meaning":"Это важное знание помогает жить осознанно и ближе к Аллаху."},"Кто записывает плохие дела? (5)":{"correct":0,"meaning":"Это важное знание помогает жить осознанно и ближе к Аллаху."},"Ангелы созданы из… (5)":{"correct":0,"meaning":"Вера в ангелов — часть имана."},"Ангелы ослушиваются Аллаха? (5)":{"correct":0,"meaning":"Вера в ангелов — часть имана."},"Как зовут хранителя Рая? (5)":{"correct":0,"meaning":"Это важное знание помогает жить осознанно и ближе к Аллаху."},"Как зовут хранителя Ада? (5)":{"correct":0,"meaning":"Это важное знание помогает жить осознанно и ближе к Аллаху."},"Кто протрубит в Рог? (5)":{"correct":0,"meaning":"Вера в ангелов — часть имана."},"Какие вопросы задают в могиле? (5)":{"correct":0,"meaning":"Это важное знание помогает жить осознанно и ближе к Аллаху."},"Кто твой Господь? (5)":{"correct":0,"meaning":"Это важное знание помогает жить осознанно и ближе к Аллаху."},"Какая твоя религия? (5)":{"correct":0,"meaning":"Это важное знание помогает жить осознанно и ближе к Аллаху."},"Кто твой Пророк? (5)":{"correct":0,"meaning":"Пророки учили людей поклоняться только Аллаху."},"Что помогает в могиле? (5)":{"correct":0,"meaning":"Это важное знание помогает жить осознанно и ближе к Аллаху."},"Могила может быть… (5)":{"correct":0,"meaning":"Это важное знание помогает жить осознанно и ближе к Аллаху."},"Можно ли забывать смерть? (5)":{"correct":0,"meaning":"Это важное знание помогает жить осознанно и ближе к Аллаху."},"Что читают за умершего в дуа? (5)":{"correct":0,"meaning":"Это важное знание помогает жить осознанно и ближе к Аллаху."},"Лучший запас после смерти — это… (5)":{"correct":0,"meaning":"Это важное знание помогает жить осознанно и ближе к Аллаху."},"Барзах — это… (5)":{"correct":0,"meaning":"Это важное знание помогает жить осознанно и ближе к Аллаху."},"Первая сура Корана — это… (5)":{"correct":0,"meaning":"Коран — Слово Аллаха и руководство для людей."},"Последняя сура Корана — это… (5)":{"correct":0,"meaning":"Коран — Слово Аллаха и руководство для людей."},"Самая длинная сура — это… (5)":{"correct":0,"meaning":"Коран — Слово Аллаха и руководство для людей."},"Коран нужно читать с… (5)":{"correct":0,"meaning":"Коран — Слово Аллаха и руководство для людей."},"Перед Кораном желательно быть в… (5)":{"correct":0,"meaning":"Коран — Слово Аллаха и руководство для людей."},"Коран был ниспослан на… (5)":{"correct":0,"meaning":"Коран — Слово Аллаха и руководство для людей."},"Ночь ниспослания Корана — это… (5)":{"correct":0,"meaning":"Коран — Слово Аллаха и руководство для людей."},"Сура Ихлас говорит о… (5)":{"correct":0,"meaning":"Это важное знание помогает жить осознанно и ближе к Аллаху."},"Аят аль-Курси в какой суре? (5)":{"correct":0,"meaning":"Это важное знание помогает жить осознанно и ближе к Аллаху."},"Коран — это… (5)":{"correct":0,"meaning":"Коран — Слово Аллаха и руководство для людей."},"Первый человек и пророк — это… (5)":{"correct":0,"meaning":"Пророки учили людей поклоняться только Аллаху."},"Кому был ниспослан Коран? (5)":{"correct":0,"meaning":"Коран — Слово Аллаха и руководство для людей."},"Кому была дана Тора? (5)":{"correct":0,"meaning":"Это важное знание помогает жить осознанно и ближе к Аллаху."},"Кому был дан Инджиль? (5)":{"correct":0,"meaning":"Это важное знание помогает жить осознанно и ближе к Аллаху."},"Кому были даны Забур? (5)":{"correct":0,"meaning":"Это важное знание помогает жить осознанно и ближе к Аллаху."},"Пророк Иса عليه السلام — это… (5)":{"correct":0,"meaning":"Пророки учили людей поклоняться только Аллаху."},"Пророк Муса عليه السلام говорил с… (5)":{"correct":0,"meaning":"Пророки учили людей поклоняться только Аллаху."},"Пророк Ибрахим عليه السلام известен как… (5)":{"correct":0,"meaning":"Пророки учили людей поклоняться только Аллаху."},"Пророк Нух عليه السلام построил… (5)":{"correct":0,"meaning":"Пророки учили людей поклоняться только Аллаху."},"Пророки учили людей… (5)":{"correct":0,"meaning":"Пророки учили людей поклоняться только Аллаху."},"Омовение перед намазом называется… (5)":{"correct":0,"meaning":"Намаз — главный ежедневный поклон после шахады."},"Что моют в омовении? (5)":{"correct":0,"meaning":"Чистота помогает правильно совершать поклонение."},"Сон может нарушить омовение? (5)":{"correct":0,"meaning":"Чистота помогает правильно совершать поклонение."},"После туалета нужно… (5)":{"correct":0,"meaning":"Это важное знание помогает жить осознанно и ближе к Аллаху."},"Чистота — это… (5)":{"correct":0,"meaning":"Чистота помогает правильно совершать поклонение."},"Гусль — это… (5)":{"correct":0,"meaning":"Это важное знание помогает жить осознанно и ближе к Аллаху."},"Таяммум делают при отсутствии… (5)":{"correct":0,"meaning":"Это важное знание помогает жить осознанно и ближе к Аллаху."},"Перед намазом нужна… (5)":{"correct":0,"meaning":"Намаз — главный ежедневный поклон после шахады."},"Одежда для намаза должна быть… (5)":{"correct":0,"meaning":"Намаз — главный ежедневный поклон после шахады."},"Место намаза должно быть… (5)":{"correct":0,"meaning":"Намаз — главный ежедневный поклон после шахады."},"Месяц обязательного поста — это… (5)":{"correct":0,"meaning":"Это важное знание помогает жить осознанно и ближе к Аллаху."},"Пост начинается с… (5)":{"correct":0,"meaning":"Рамадан воспитывает богобоязненность и самоконтроль."},"Пост открывают при… (5)":{"correct":0,"meaning":"Рамадан воспитывает богобоязненность и самоконтроль."},"Ночь лучше тысячи месяцев — это… (5)":{"correct":0,"meaning":"Это важное знание помогает жить осознанно и ближе к Аллаху."},"Таравих читают в… (5)":{"correct":0,"meaning":"Это важное знание помогает жить осознанно и ближе к Аллаху."},"Сухур — это… (5)":{"correct":0,"meaning":"Рамадан воспитывает богобоязненность и самоконтроль."},"Ифтар — это… (5)":{"correct":0,"meaning":"Рамадан воспитывает богобоязненность и самоконтроль."},"Пост учит… (5)":{"correct":0,"meaning":"Рамадан воспитывает богобоязненность и самоконтроль."},"Кто не может поститься, тот… (5)":{"correct":0,"meaning":"Это важное знание помогает жить осознанно и ближе к Аллаху."},"Рамадан — месяц… (5)":{"correct":0,"meaning":"Рамадан воспитывает богобоязненность и самоконтроль."},"Перед едой говорят… (5)":{"correct":0,"meaning":"Это важное знание помогает жить осознанно и ближе к Аллаху."},"После еды говорят… (5)":{"correct":0,"meaning":"Это важное знание помогает жить осознанно и ближе к Аллаху."},"При чихании говорят… (5)":{"correct":0,"meaning":"Это важное знание помогает жить осознанно и ближе к Аллаху."},"Салам — это… (5)":{"correct":0,"meaning":"Это важное знание помогает жить осознанно и ближе к Аллаху."},"Сосед имеет… (5)":{"correct":0,"meaning":"Это важное знание помогает жить осознанно и ближе к Аллаху."},"Гость заслуживает… (5)":{"correct":0,"meaning":"Это важное знание помогает жить осознанно и ближе к Аллаху."},"Лучше говорить… (5)":{"correct":0,"meaning":"Это важное знание помогает жить осознанно и ближе к Аллаху."},"Если не знаешь, лучше… (5)":{"correct":0,"meaning":"Это важное знание помогает жить осознанно и ближе к Аллаху."},"Старших нужно… (5)":{"correct":0,"meaning":"Это важное знание помогает жить осознанно и ближе к Аллаху."},"Младших нужно… (5)":{"correct":0,"meaning":"Это важное знание помогает жить осознанно и ближе к Аллаху."},"Первым делом спросят о… (5)":{"correct":0,"meaning":"Это важное знание помогает жить осознанно и ближе к Аллаху."},"Судный день называется… (5)":{"correct":0,"meaning":"Это важное знание помогает жить осознанно и ближе к Аллаху."},"Рай по-арабски — это… (5)":{"correct":0,"meaning":"Это важное знание помогает жить осознанно и ближе к Аллаху."},"Ад по-арабски — это… (5)":{"correct":0,"meaning":"Это важное знание помогает жить осознанно и ближе к Аллаху."},"Мизан — это… (5)":{"correct":0,"meaning":"Это важное знание помогает жить осознанно и ближе к Аллаху."},"Сират — это… (5)":{"correct":0,"meaning":"Это важное знание помогает жить осознанно и ближе к Аллаху."},"Книга дел будет… (5)":{"correct":0,"meaning":"Это важное знание помогает жить осознанно и ближе к Аллаху."},"Тауба — это… (5)":{"correct":0,"meaning":"Это важное знание помогает жить осознанно и ближе к Аллаху."},"Ширк — это… (5)":{"correct":0,"meaning":"Это важное знание помогает жить осознанно и ближе к Аллаху."},"Иман — это… (5)":{"correct":0,"meaning":"Это важное знание помогает жить осознанно и ближе к Аллаху."}};
+  function clean(v){return String(v||'').replace(/\s+/g,' ').trim();}
+  function norm(v){return clean(v).toLowerCase();}
+  var NORM_MAP = {};
+  Object.keys(MICRO_MAP).forEach(function(q){NORM_MAP[norm(q)] = MICRO_MAP[q];});
+  function getInfo(question){return MICRO_MAP[clean(question)] || NORM_MAP[norm(question)] || null;}
+  function stripBadPrefix(text){
+    return clean(text).replace(/^\s*(Смысл|Meaning|Ma[’']no|Мағынасы|Anlam|Makna|अर्थ|অর্থ|المعنى|مطلب)\s*[:：]\s*/i,'');
+  }
+  function styleButtons(buttons, chosenIndex, correctIndex){
+    buttons.forEach(function(b,i){
+      b.classList.remove('is-selected','is-correct','is-wrong','bw-answer-correct','bw-answer-wrong','bw-answer-pulse');
+      if(i === correctIndex){
+        b.classList.add('bw-answer-correct','bw-answer-pulse');
+      }
+      if(i === chosenIndex && i !== correctIndex){
+        b.classList.add('bw-answer-wrong');
+      }
+    });
+  }
+  function fixModal(modal, chosenIndex){
+    if(!modal || modal.getAttribute('data-task-key') !== 'micro') return;
+    var questionEl = modal.querySelector('.bw-task-modal-text');
+    var buttons = Array.prototype.slice.call(modal.querySelectorAll('.bw-micro-option-btn'));
+    var note = modal.querySelector('#bwMicroAnswerNote');
+    if(!questionEl || !buttons.length) return;
+    var info = getInfo(questionEl.textContent);
+    if(!info || typeof info.correct !== 'number') return;
+    if(typeof chosenIndex !== 'number' || chosenIndex < 0){
+      chosenIndex = buttons.findIndex(function(b){return b.classList.contains('is-selected') || b.classList.contains('bw-answer-wrong') || b.classList.contains('bw-answer-correct');});
+      if(chosenIndex < 0) chosenIndex = info.correct;
+    }
+    styleButtons(buttons, chosenIndex, info.correct);
+    if(note){
+      note.textContent = stripBadPrefix(info.meaning || '');
+      note.classList.add('is-visible');
+    }
+    var completeBtn = modal.querySelector('.bw-task-complete-btn');
+    if(completeBtn) completeBtn.disabled = false;
+  }
+  function fixInline(chosenIndex){
+    var questionEl = document.getElementById('dailyMicroQuestion');
+    var box = document.getElementById('dailyMicroOptions');
+    var answer = document.getElementById('dailyMicroAnswer');
+    if(!questionEl || !box) return;
+    var buttons = Array.prototype.slice.call(box.querySelectorAll('.micro-option'));
+    if(!buttons.length) return;
+    var info = getInfo(questionEl.textContent);
+    if(!info || typeof info.correct !== 'number') return;
+    if(typeof chosenIndex !== 'number' || chosenIndex < 0){
+      chosenIndex = buttons.findIndex(function(b){return b.classList.contains('bw-answer-wrong') || b.classList.contains('bw-answer-correct');});
+      if(chosenIndex < 0) chosenIndex = info.correct;
+    }
+    styleButtons(buttons, chosenIndex, info.correct);
+    if(answer && answer.classList.contains('show')){
+      answer.textContent = stripBadPrefix(info.meaning || '');
+      answer.classList.add('show');
+    }
+  }
+  document.addEventListener('click', function(event){
+    var modalBtn = event.target && event.target.closest ? event.target.closest('.bw-micro-option-btn') : null;
+    if(modalBtn){
+      var modal = modalBtn.closest('.bw-task-modal-card');
+      var buttons = modal ? Array.prototype.slice.call(modal.querySelectorAll('.bw-micro-option-btn')) : [];
+      var chosen = buttons.indexOf(modalBtn);
+      setTimeout(function(){fixModal(modal, chosen);}, 180);
+      setTimeout(function(){fixModal(modal, chosen);}, 420);
+      return;
+    }
+    var inlineBtn = event.target && event.target.closest ? event.target.closest('#dailyMicroOptions .micro-option') : null;
+    if(inlineBtn){
+      var list = Array.prototype.slice.call(document.querySelectorAll('#dailyMicroOptions .micro-option'));
+      var ix = list.indexOf(inlineBtn);
+      setTimeout(function(){fixInline(ix);}, 180);
+      setTimeout(function(){fixInline(ix);}, 420);
+    }
+  }, true);
+  var observer = new MutationObserver(function(mutations){
+    mutations.forEach(function(m){
+      if(m.addedNodes && m.addedNodes.length){
+        Array.prototype.forEach.call(m.addedNodes,function(node){
+          if(node.nodeType !== 1) return;
+          if(node.matches && node.matches('.bw-task-modal-card[data-task-key="micro"]')) setTimeout(function(){fixModal(node,-1);},80);
+          var inner = node.querySelector && node.querySelector('.bw-task-modal-card[data-task-key="micro"]');
+          if(inner) setTimeout(function(){fixModal(inner,-1);},80);
+        });
+      }
+    });
+  });
+  if(document.body) observer.observe(document.body,{childList:true,subtree:true});
+})();
+</script>
+<style id="bw-micro-answer-logic-user-choice-fix">
+.bw-task-modal-card[data-task-key="micro"] .bw-micro-option-btn.is-selected:not(.bw-answer-correct):not(.bw-answer-wrong){
+  background:rgba(102,198,128,.08) !important;
+  border-color:rgba(102,198,128,.18) !important;
+  color:#f3fff7 !important;
+}
+.bw-task-modal-card[data-task-key="micro"] .bw-micro-option-btn.bw-answer-correct{
+  background:#2d7a46 !important;
+  border-color:#66c680 !important;
+  color:#fff !important;
+  box-shadow:0 0 0 1px rgba(102,198,128,.55),0 10px 22px rgba(45,122,70,.22) !important;
+}
+.bw-task-modal-card[data-task-key="micro"] .bw-micro-option-btn.bw-answer-wrong{
+  background:#8f2424 !important;
+  border-color:#ff6b6b !important;
+  color:#fff !important;
+  box-shadow:0 0 0 1px rgba(255,107,107,.45),0 10px 22px rgba(143,36,36,.22) !important;
+}
+</style>
+<script id="bw-micro-answer-logic-user-choice-fix">
+(function(){
+  function clean(value){return String(value || '').replace(/\s+/g,' ').trim();}
+  function norm(value){return clean(value).toLowerCase();}
+  function escapeHtml(value){return clean(value).replace(/[&<>"]/g,function(ch){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[ch];});}
+  function getMicroItem(question){
+    var q = norm(question);
+    try{
+      if(Array.isArray(MICRO_QUESTIONS)){
+        for(var i=0;i<MICRO_QUESTIONS.length;i++){
+          if(norm(MICRO_QUESTIONS[i].q) === q) return MICRO_QUESTIONS[i];
+        }
+      }
+    }catch(e){}
+    return null;
+  }
+  function resetModal(modal){
+    if(!modal || modal.getAttribute('data-task-key') !== 'micro' || modal.getAttribute('data-bw-micro-answered') === '1') return;
+    var buttons = Array.prototype.slice.call(modal.querySelectorAll('.bw-micro-option-btn'));
+    buttons.forEach(function(btn){
+      btn.classList.remove('is-selected','is-correct','is-wrong','bw-answer-correct','bw-answer-wrong','bw-answer-pulse');
+      btn.disabled = false;
+    });
+    var note = modal.querySelector('#bwMicroAnswerNote');
+    if(note){ note.textContent = ''; note.classList.remove('is-visible'); }
+    var complete = modal.querySelector('.bw-task-complete-btn');
+    if(complete) complete.disabled = true;
+  }
+  function applyChoice(modal, chosenIndex){
+    if(!modal || modal.getAttribute('data-task-key') !== 'micro') return;
+    modal.setAttribute('data-bw-micro-answered','1');
+    var questionEl = modal.querySelector('.bw-task-modal-text');
+    var buttons = Array.prototype.slice.call(modal.querySelectorAll('.bw-micro-option-btn'));
+    if(!questionEl || !buttons.length) return;
+    var item = getMicroItem(questionEl.textContent);
+    if(!item || typeof item.correct !== 'number') return;
+    buttons.forEach(function(btn,index){
+      btn.classList.remove('is-selected','is-correct','is-wrong','bw-answer-correct','bw-answer-wrong','bw-answer-pulse');
+      if(index === item.correct) btn.classList.add('bw-answer-correct');
+      if(index === chosenIndex && index !== item.correct) btn.classList.add('bw-answer-wrong');
+      btn.disabled = true;
+    });
+    var note = modal.querySelector('#bwMicroAnswerNote');
+    if(note){
+      note.innerHTML = '<strong>Правильный ответ:</strong> ' + escapeHtml(item.options[item.correct] || '') + '<br><strong>Смысл:</strong> ' + escapeHtml(item.meaning || '');
+      note.classList.add('is-visible');
+    }
+    var complete = modal.querySelector('.bw-task-complete-btn');
+    if(complete) complete.disabled = false;
+  }
+  document.addEventListener('click', function(event){
+    var btn = event.target && event.target.closest ? event.target.closest('.bw-task-modal-card[data-task-key="micro"] .bw-micro-option-btn') : null;
+    if(!btn) return;
+    var modal = btn.closest('.bw-task-modal-card[data-task-key="micro"]');
+    if(!modal || modal.getAttribute('data-bw-micro-answered') === '1') return;
+    var buttons = Array.prototype.slice.call(modal.querySelectorAll('.bw-micro-option-btn'));
+    var chosenIndex = buttons.indexOf(btn);
+    [0,80,220,460,760].forEach(function(delay){setTimeout(function(){applyChoice(modal, chosenIndex);}, delay);});
+  }, true);
+  var observer = new MutationObserver(function(mutations){
+    mutations.forEach(function(mutation){
+      Array.prototype.forEach.call(mutation.addedNodes || [], function(node){
+        if(!node || node.nodeType !== 1) return;
+        var modal = node.matches && node.matches('.bw-task-modal-card[data-task-key="micro"]') ? node : (node.querySelector && node.querySelector('.bw-task-modal-card[data-task-key="micro"]'));
+        if(!modal) return;
+        [120,320,700,1100].forEach(function(delay){setTimeout(function(){resetModal(modal);}, delay);});
+      });
+    });
+  });
+  if(document.body) observer.observe(document.body,{childList:true,subtree:true});
+})();
+</script>
+
+<style id="bw-universal-pro-style-v1">
+.bw-micro-pro-upsell{display:none!important;}
+.bw-micro-pro-upsell.is-visible{display:flex!important;}
+.bw-universal-pro-modal{display:none;position:fixed;inset:0;z-index:99999;align-items:center;justify-content:center;padding:18px;background:rgba(4,10,14,.66);backdrop-filter:blur(7px);-webkit-backdrop-filter:blur(7px)}
+.bw-universal-pro-modal.open{display:flex}
+.bw-universal-pro-card{position:relative;width:min(100%,410px);border-radius:24px;padding:24px 20px 20px;background:#111b24;border:1px solid rgba(102,198,128,.38);box-shadow:0 28px 60px rgba(0,0,0,.42);color:#f5f7fa;text-align:right;font-family:inherit}
+html.light-mode .bw-universal-pro-card{background:#fff;color:#172019;box-shadow:0 28px 60px rgba(15,24,18,.20)}
+.bw-universal-pro-step{position:absolute;top:20px;left:20px;border-radius:999px;padding:7px 11px;background:rgba(215,192,122,.16);border:1px solid rgba(215,192,122,.28);color:#f3d992;font-weight:900;font-size:13px}
+.bw-universal-pro-card h3{margin:44px 0 12px;font-size:22px;font-weight:950;letter-spacing:-.03em}
+.bw-universal-pro-question{font-size:15px;font-weight:850;margin-bottom:14px;color:#dfe7e3}
+html.light-mode .bw-universal-pro-question{color:#27332b}
+.bw-universal-pro-options{display:flex;flex-direction:column;gap:10px}
+.bw-universal-pro-option{width:100%;margin:0;padding:13px 14px;border-radius:14px;border:1px solid rgba(255,255,255,.10);background:#1c2630;color:#fff;font-weight:900;cursor:pointer;text-align:right}
+html.light-mode .bw-universal-pro-option{background:#f4f7f5;color:#172019;border-color:#dfe8e2}
+.bw-universal-pro-option.correct{background:#2f874d!important;border-color:#66c680!important;color:#fff}
+.bw-universal-pro-option.wrong{background:#a92c2c!important;border-color:#ff5a5a!important;color:#fff}
+.bw-universal-pro-option:disabled{cursor:default;opacity:1}
+.bw-universal-pro-explain{display:none;margin-top:12px;padding:12px 13px;border-radius:14px;background:rgba(215,192,122,.10);border:1px solid rgba(215,192,122,.22);color:#f4e4a8;font-size:13px;font-weight:850;line-height:1.5}
+html.light-mode .bw-universal-pro-explain{background:#fff8e7;color:#665013}
+.bw-universal-pro-explain.show{display:block}
+.bw-universal-pro-next,.bw-universal-pro-close{width:100%;min-height:44px;margin:10px 0 0;border-radius:14px;border:0;font-weight:950;cursor:pointer}
+.bw-universal-pro-next{background:#2d7a46;color:#fff}
+.bw-universal-pro-next:disabled{opacity:.55;cursor:default}
+.bw-universal-pro-close{background:#18242e;color:#fff;border:1px solid rgba(255,255,255,.10)}
+html.light-mode .bw-universal-pro-close{background:#fff;color:#172019;border-color:#dfe8e2}
+</style>
+<script id="bw-universal-daily-language-fix-v1">
+(function(){
+'use strict';
+var BW_LANG = 'ur';
+var BW_LABELS = {"next": "اگلا", "finish": "ختم", "close": "بند کریں", "title": "PRO سوال"};
+var BW_RTL = true;
+var BW_RESET_ONCE_KEY = 'bw_reset_once_all_tasks_' + BW_LANG + '_20260530_next_day_v4';
+var BW_PRO_CURSOR_KEY = 'bw_pro_micro_cursor_' + BW_LANG + '_v1';
+/* BW_NEXT_DAY_TEST_RESET_V4 */
+
+function todayKey(){
+  var d = new Date();
+  return d.getFullYear() + '-' + String(d.getMonth()+1).padStart(2,'0') + '-' + String(d.getDate()).padStart(2,'0');
+}
+
+function shouldNamespaceKey(key){
+  if(!key || typeof key !== 'string') return false;
+  if(/^(siteTheme|siteTema|siteLanguage|siteDil|prayer_|barakaway_premium_theme|barakaway_pro$|barakaway_pro_plan)/.test(key)) return false;
+  return (
+    key.indexOf('barakaway_today_') === 0 ||
+    key.indexOf('bw_final_done_v2_') === 0 ||
+    key.indexOf('bw_daily_done_v2_') === 0 ||
+    key.indexOf('barakaway_micro_answer_') === 0 ||
+    key.indexOf('barakaway_name_counter_') === 0 ||
+    key.indexOf('bw_ayah_card_done_') === 0 ||
+    key.indexOf('bw_allah_name_counter') === 0 ||
+    key.indexOf('barakaway_daily_goal_done') === 0 ||
+    key.indexOf('barakaway_pro_micro_done_') === 0 ||
+    key.indexOf('bw_pro_micro_cursor_') === 0 ||
+    key.indexOf('daily_done') !== -1 ||
+    key.indexOf('task_done') !== -1 ||
+    key.indexOf('micro_answer') !== -1
+  );
+}
+
+function hasLangAlready(key){
+  return new RegExp('(^|_)' + BW_LANG + '(_|$)').test(key);
+}
+
+function nsKey(key){
+  if(!shouldNamespaceKey(key) || hasLangAlready(key)) return key;
+  return 'bw_lang_' + BW_LANG + '__' + key;
+}
+
+(function patchStorage(){
+  try{
+    if(window.__BW_STORAGE_PATCHED__) return;
+    window.__BW_STORAGE_PATCHED__ = true;
+    var rawSet = Storage.prototype.setItem;
+    var rawGet = Storage.prototype.getItem;
+    var rawRemove = Storage.prototype.removeItem;
+    Storage.prototype.setItem = function(k,v){ return rawSet.call(this, nsKey(String(k)), v); };
+    Storage.prototype.getItem = function(k){
+      k = String(k);
+      var nk = nsKey(k);
+      if(nk !== k) return rawGet.call(this, nk);
+      return rawGet.call(this, k);
+    };
+    Storage.prototype.removeItem = function(k){
+      k = String(k);
+      rawRemove.call(this, nsKey(k));
+      return rawRemove.call(this, k);
+    };
+  }catch(e){}
+})();
+
+function wipeProgressOnce(){
+  try{
+    if(localStorage.getItem(BW_RESET_ONCE_KEY) === '1') return false;
+    var remove = [];
+    for(var i=0;i<localStorage.length;i++){
+      var k = localStorage.key(i);
+      if(!k) continue;
+      var low = k.toLowerCase();
+      if(
+        (low.indexOf('bw_lang_' + BW_LANG + '__') === 0) ||
+        (low.indexOf('barakaway_today_') === 0) ||
+        (low.indexOf('bw_final_done_v2_') === 0) ||
+        (low.indexOf('bw_daily_done_v2_') === 0) ||
+        (low.indexOf('barakaway_micro_answer_') === 0) ||
+        (low.indexOf('barakaway_name_counter_') === 0) ||
+        (low.indexOf('bw_ayah_card_done_') === 0) ||
+        (low.indexOf('bw_allah_name_counter') === 0) ||
+        (low.indexOf('barakaway_daily_goal_done') === 0) ||
+        (low.indexOf('barakaway_pro_micro_done_') === 0) ||
+        (low.indexOf('bw_pro_micro_cursor_') === 0) ||
+        (low.indexOf('daily_done') !== -1) ||
+        (low.indexOf('task_done') !== -1) ||
+        (low.indexOf('micro_answer') !== -1)
+      ) remove.push(k);
+    }
+    remove.forEach(function(k){ localStorage.removeItem(k); });
+    localStorage.setItem(BW_RESET_ONCE_KEY, '1');
+    return true;
+  }catch(e){return false;}
+}
+
+function markCardDone(card, done){
+  if(!card) return;
+  ['task-done','goal-done','is-done','done','completed','is-completed','answered','correct','success','finished','is-finished','bw-final-done','bw-task-done','micro-answered'].forEach(function(c){
+    if(done) card.classList.add(c); else card.classList.remove(c);
+  });
+  card.setAttribute('data-bw-done', done ? '1' : '0');
+}
+
+function resetVisualOnce(){
+  try{
+    var cards = ['dailyArticleLink','dailyChallengeCard','dailyGoalCard','allahNameCounterCard','dailyMicroKnowledgeCard'].map(function(id){return document.getElementById(id);}).filter(Boolean);
+    cards.forEach(function(card){
+      markCardDone(card, false);
+      card.removeAttribute('data-done'); card.removeAttribute('data-completed');
+      var checks = card.querySelectorAll('.today-action-check,.task-check,.check,.done-check,.complete-check,.today-done-check');
+      checks.forEach(function(ch){ ch.remove(); });
+      var fills = card.querySelectorAll('.today-counter-fill,.progress-bar,.progress-fill');
+      fills.forEach(function(f){ f.style.width = '0%'; });
+    });
+    var ids = ['dailyArticleStatus','dailyChallengeStatus','dailyGoalStatus','dailyMicroKnowledgeStatus'];
+    ids.forEach(function(id){var el=document.getElementById(id); if(el && el.textContent.trim()==='✓') el.textContent='•';});
+    var counter = document.getElementById('allahNameCounterValue'); if(counter) counter.textContent = '0/100';
+    var fill = document.getElementById('allahNameCounterFill'); if(fill) fill.style.width = '0%';
+  }catch(e){}
+}
+
+function getMicroDone(){
+  var t = todayKey();
+  var candidates = [
+    'bw_final_done_v2_' + BW_LANG + '_' + t + '_micro',
+    'bw_daily_done_v2_' + BW_LANG + '_' + t + '_micro',
+    'barakaway_today_' + BW_LANG + '_' + t + '_micro',
+    'barakaway_today_' + BW_LANG + '_v2_' + t + '_micro',
+    'barakaway_today_' + BW_LANG + '_v3_' + t + '_micro',
+    'barakaway_today_' + BW_LANG + '_final_' + t + '_micro',
+    'barakaway_micro_answer_' + BW_LANG + '_' + t
+  ];
+  try{
+    return candidates.some(function(k){ return localStorage.getItem(k) !== null; });
+  }catch(e){return false;}
+}
+
+function hasProAccess(){
+  try{
+    var pro = localStorage.getItem('barakaway_pro');
+    var plan = localStorage.getItem('barakaway_pro_plan');
+    if(pro && /^(1|true|yes|active|unlocked|premium|pro)$/i.test(String(pro))) return true;
+    if(plan && String(plan).trim() !== '' && String(plan).trim() !== 'free') return true;
+  }catch(e){}
+  return false;
+}
+
+function controlProVisibility(){
+  var up = document.getElementById('dailyMicroProUpsell') || document.querySelector('.bw-micro-pro-upsell');
+  if(!up) return;
+  var visible = getMicroDone();
+  up.classList.toggle('is-visible', !!visible);
+  up.style.display = visible ? 'flex' : 'none';
+}
+
+function normalizeQuestions(){
+  var src = [];
+  try{
+    if(window.MICRO_QUESTIONS && Array.isArray(window.MICRO_QUESTIONS)) src = window.MICRO_QUESTIONS;
+    else if(window.MICRO_DATA && Array.isArray(window.MICRO_DATA)) src = window.MICRO_DATA;
+    else if(typeof MICRO_QUESTIONS !== 'undefined' && Array.isArray(MICRO_QUESTIONS)) src = MICRO_QUESTIONS;
+    else if(typeof MICRO_DATA !== 'undefined' && Array.isArray(MICRO_DATA)) src = MICRO_DATA;
+  }catch(e){src=[];}
+  var seen = Object.create(null);
+  src = src.filter(function(item){
+    if(!item || !item.q || !Array.isArray(item.options)) return false;
+    if(typeof item.correct !== 'number' || item.correct < 0 || item.correct >= item.options.length) return false;
+    var q = String(item.q).trim();
+    if(!q || seen[q]) return false;
+    var opts = item.options.map(function(o){return String(o).trim();});
+    if(new Set(opts).size !== opts.length) return false;
+    seen[q] = true;
+    return item;
+  });
+  return src;
+}
+
+function takeFive(){
+  var all = normalizeQuestions();
+  if(!all.length) return [];
+  var cursor = parseInt(localStorage.getItem(BW_PRO_CURSOR_KEY) || '0', 10);
+  if(isNaN(cursor) || cursor < 0) cursor = 0;
+  cursor = cursor % all.length;
+  var pack = [];
+  for(var i=0; i<5 && i<all.length; i++) pack.push(all[(cursor+i)%all.length]);
+  localStorage.setItem(BW_PRO_CURSOR_KEY, String((cursor + pack.length) % all.length));
+  return pack;
+}
+
+function ensureModal(){
+  var old = document.getElementById('bwUniversalProModal');
+  if(old) old.remove();
+  var overlay = document.createElement('div');
+  overlay.id = 'bwUniversalProModal';
+  overlay.className = 'bw-universal-pro-modal';
+  if(BW_RTL) overlay.setAttribute('dir','rtl');
+  overlay.innerHTML =
+    '<div class="bw-universal-pro-card" role="dialog" aria-modal="true">' +
+      '<div class="bw-universal-pro-step" id="bwUniversalProStep">1 / 5</div>' +
+      '<h3>' + BW_LABELS.title + '</h3>' +
+      '<div class="bw-universal-pro-question" id="bwUniversalProQuestion"></div>' +
+      '<div class="bw-universal-pro-options" id="bwUniversalProOptions"></div>' +
+      '<div class="bw-universal-pro-explain" id="bwUniversalProExplain"></div>' +
+      '<button type="button" class="bw-universal-pro-next" id="bwUniversalProNext">' + BW_LABELS.next + '</button>' +
+      '<button type="button" class="bw-universal-pro-close" id="bwUniversalProClose">' + BW_LABELS.close + '</button>' +
+    '</div>';
+  document.body.appendChild(overlay);
+  return overlay;
+}
+
+function setupProModal(){
+  var trigger = document.getElementById('dailyMicroProUpsell') || document.querySelector('.bw-micro-pro-upsell');
+  if(!trigger) return;
+  var modal = ensureModal();
+  var step = document.getElementById('bwUniversalProStep');
+  var qEl = document.getElementById('bwUniversalProQuestion');
+  var optsEl = document.getElementById('bwUniversalProOptions');
+  var expEl = document.getElementById('bwUniversalProExplain');
+  var nextBtn = document.getElementById('bwUniversalProNext');
+  var closeBtn = document.getElementById('bwUniversalProClose');
+  var pack = [], index = 0, answered = false;
+
+  function explain(item){ return item.meaning || item.explain || (item.options[item.correct] || ''); }
+  function render(){
+    var item = pack[index]; answered = false;
+    step.textContent = (index+1) + ' / ' + pack.length;
+    qEl.textContent = item.q;
+    expEl.textContent = ''; expEl.classList.remove('show');
+    nextBtn.disabled = true;
+    nextBtn.textContent = index === pack.length - 1 ? BW_LABELS.finish : BW_LABELS.next;
+    optsEl.innerHTML = '';
+    item.options.forEach(function(opt,i){
+      var btn = document.createElement('button');
+      btn.type = 'button'; btn.className = 'bw-universal-pro-option'; btn.textContent = opt;
+      btn.addEventListener('click', function(){
+        if(answered) return;
+        answered = true;
+        Array.prototype.slice.call(optsEl.children).forEach(function(b,j){b.disabled=true; if(j===item.correct)b.classList.add('correct');});
+        if(i !== item.correct) btn.classList.add('wrong');
+        expEl.textContent = explain(item); expEl.classList.add('show'); nextBtn.disabled = false;
+      });
+      optsEl.appendChild(btn);
+    });
+  }
+  function open(e){
+    if(e){ e.preventDefault(); e.stopPropagation(); if(e.stopImmediatePropagation)e.stopImmediatePropagation(); }
+    if(!getMicroDone() || !hasProAccess()) { controlProVisibility(); return false; }
+    pack = takeFive(); if(!pack.length) return false;
+    index=0; render(); modal.classList.add('open'); return false;
+  }
+  function close(){ modal.classList.remove('open'); }
+  nextBtn.addEventListener('click', function(){ if(!answered) return; if(index<pack.length-1){index++; render();} else close(); });
+  closeBtn.addEventListener('click', close);
+  modal.addEventListener('click', function(e){ if(e.target===modal) close(); });
+  trigger.removeAttribute('href'); trigger.removeAttribute('target'); trigger.style.cursor='pointer';
+  trigger.onclick = open;
+  trigger.addEventListener('click', open, true);
+}
+
+function patchSetItemForPro(){
+  try{
+    if(window.__BW_PRO_SETITEM_PATCHED__) return;
+    window.__BW_PRO_SETITEM_PATCHED__ = true;
+    var raw = Storage.prototype.setItem;
+    Storage.prototype.setItem = function(k,v){
+      var r = raw.apply(this, arguments);
+      try{ if(String(k).indexOf('micro') !== -1) setTimeout(controlProVisibility, 0); }catch(e){}
+      return r;
+    };
+  }catch(e){}
+}
+
+function init(){
+  var didReset = wipeProgressOnce();
+  if(didReset) resetVisualOnce();
+  controlProVisibility();
+  setupProModal();
+  patchSetItemForPro();
+  setTimeout(function(){ if(didReset) resetVisualOnce(); controlProVisibility(); }, 80);
+  setTimeout(controlProVisibility, 300);
+  setTimeout(controlProVisibility, 900);
+}
+if(document.readyState === 'loading') document.addEventListener('DOMContentLoaded', init, {once:true});
+else init();
+window.addEventListener('load', function(){ setTimeout(controlProVisibility, 120); setTimeout(controlProVisibility, 600); });
 })();
 </script>
 
