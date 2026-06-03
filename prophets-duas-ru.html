@@ -2811,7 +2811,6 @@ html.dark-mode .highlight-istikhara{
   color:#fff8e1;
 }
 </style>
-
 <style id="fortress-search-style">
 html body .fortress-search-wrap{width:min(100%,720px);margin:10px auto 18px;padding:0 4px}
 html body .fortress-search-bar{display:grid;grid-template-columns:minmax(0,1fr) 58px;align-items:center;gap:10px;padding:8px;border-radius:24px;border:1px solid rgba(215,181,109,.34);background:radial-gradient(circle at 8% 0%,rgba(215,181,109,.14),transparent 38%),linear-gradient(135deg,rgba(21,31,34,.96),rgba(10,17,20,.98));box-shadow:0 18px 42px rgba(0,0,0,.34),inset 0 1px 0 rgba(255,255,255,.055)}
@@ -2864,8 +2863,6 @@ html.light-mode body .fortress-listening-dots i{background:#745416}
 @media(max-width:700px){html body .fortress-search-panel{grid-template-columns:1fr;gap:7px;margin-top:7px}html body .fortress-search-nav{justify-content:space-between;width:100%;padding:0 1px}html body .fortress-search-nav-btn{width:36px;height:34px}html body .fortress-search-counter{min-width:70px}}
 
 </style>
-
-
 <style id="fortress-search-working-overrides">
 body .dua-search-hidden{display:none!important;}
 body.fortress-search-active .dua-card[data-search-match="1"]{border-color:rgba(246,223,162,.82)!important;box-shadow:0 18px 42px rgba(0,0,0,.42),0 0 0 1px rgba(246,223,162,.22)!important;}
@@ -2972,8 +2969,8 @@ html.light-mode body .fortress-search-status{
 }
 </style>
 <script src="/theme-init.js"></script>
-<link rel="stylesheet" href="/theme.css">
-<link rel="stylesheet" href="/theme-universal.css">
+<link href="/theme.css" rel="stylesheet"/>
+<link href="/theme-universal.css" rel="stylesheet"/>
 </head>
 <body>
 <div class="container">
@@ -2984,23 +2981,23 @@ html.light-mode body .fortress-search-status{
 <button aria-label="Открыть сохранённое место" class="fortress-action" data-fortress-action="save" type="button"><span aria-hidden="true" class="fortress-action-icon"><svg viewbox="0 0 24 24"><path d="M6 4.5A2.5 2.5 0 0 1 8.5 2h7A2.5 2.5 0 0 1 18 4.5V22l-6-3.4L6 22V4.5z"></path></svg></span><span class="fortress-action-label">Сохранить</span></button>
 <button aria-label="Переключить тему" class="fortress-action" data-fortress-action="theme" type="button"><span aria-hidden="true" class="fortress-action-icon"><svg viewbox="0 0 24 24"><path d="M21 12.7A8.5 8.5 0 0 1 11.3 3 7 7 0 1 0 21 12.7z"></path></svg></span><span class="fortress-action-label">Тема</span></button>
 </div>
-<div class="fortress-search-wrap" role="search" aria-label="Поиск по дуа внутри этой страницы">
-  <div class="fortress-search-bar">
-    <div class="fortress-search-input-shell">
-      <svg aria-hidden="true" class="fortress-search-icon" viewBox="0 0 24 24"><path d="M10.8 18.1a7.3 7.3 0 1 1 0-14.6 7.3 7.3 0 0 1 0 14.6Z" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path><path d="m16.1 16.1 4.4 4.4" fill="none" stroke="currentColor" stroke-linecap="round" stroke-width="2"></path></svg>
-      <input autocomplete="off" class="fortress-search-input" id="fortressDuaSearchInput" inputmode="search" placeholder="Поиск по дуа: мечеть, дом, дорога..." type="search"/>
-      <button aria-label="Очистить поиск" class="fortress-search-clear" id="fortressDuaSearchClear" type="button"><svg viewBox="0 0 24 24"><path d="M6 6l12 12M18 6 6 18"></path></svg></button>
-    </div>
-    <button aria-label="Голосовой поиск" class="fortress-voice-button" id="fortressDuaVoiceButton" type="button"><svg viewBox="0 0 24 24"><path d="M12 14a3 3 0 0 0 3-3V6a3 3 0 0 0-6 0v5a3 3 0 0 0 3 3Z"></path><path d="M19 11a7 7 0 0 1-14 0"></path><path d="M12 18v4"></path><path d="M8 22h8"></path></svg></button>
-  </div>
-  <div class="fortress-search-panel">
-    <div aria-live="polite" class="fortress-search-status" id="fortressDuaSearchStatus"></div>
-    <div aria-label="Навигация по найденным дуа" class="fortress-search-nav" id="fortressDuaSearchNav">
-      <button aria-label="Предыдущее найденное дуа" class="fortress-search-nav-btn" id="fortressDuaSearchPrev" type="button"><svg viewBox="0 0 24 24"><path d="M15 18l-6-6 6-6"></path></svg></button>
-      <div class="fortress-search-counter" id="fortressDuaSearchCounter"></div>
-      <button aria-label="Следующее найденное дуа" class="fortress-search-nav-btn" id="fortressDuaSearchNext" type="button"><svg viewBox="0 0 24 24"><path d="M9 6l6 6-6 6"></path></svg></button>
-    </div>
-  </div>
+<div aria-label="Поиск по дуа внутри этой страницы" class="fortress-search-wrap" role="search">
+<div class="fortress-search-bar">
+<div class="fortress-search-input-shell">
+<svg aria-hidden="true" class="fortress-search-icon" viewbox="0 0 24 24"><path d="M10.8 18.1a7.3 7.3 0 1 1 0-14.6 7.3 7.3 0 0 1 0 14.6Z" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path><path d="m16.1 16.1 4.4 4.4" fill="none" stroke="currentColor" stroke-linecap="round" stroke-width="2"></path></svg>
+<input autocomplete="off" class="fortress-search-input" id="fortressDuaSearchInput" inputmode="search" placeholder="Поиск по дуа: мечеть, дом, дорога..." type="search"/>
+<button aria-label="Очистить поиск" class="fortress-search-clear" id="fortressDuaSearchClear" type="button"><svg viewbox="0 0 24 24"><path d="M6 6l12 12M18 6 6 18"></path></svg></button>
+</div>
+<button aria-label="Голосовой поиск" class="fortress-voice-button" id="fortressDuaVoiceButton" type="button"><svg viewbox="0 0 24 24"><path d="M12 14a3 3 0 0 0 3-3V6a3 3 0 0 0-6 0v5a3 3 0 0 0 3 3Z"></path><path d="M19 11a7 7 0 0 1-14 0"></path><path d="M12 18v4"></path><path d="M8 22h8"></path></svg></button>
+</div>
+<div class="fortress-search-panel">
+<div aria-live="polite" class="fortress-search-status" id="fortressDuaSearchStatus"></div>
+<div aria-label="Навигация по найденным дуа" class="fortress-search-nav" id="fortressDuaSearchNav">
+<button aria-label="Предыдущее найденное дуа" class="fortress-search-nav-btn" id="fortressDuaSearchPrev" type="button"><svg viewbox="0 0 24 24"><path d="M15 18l-6-6 6-6"></path></svg></button>
+<div class="fortress-search-counter" id="fortressDuaSearchCounter"></div>
+<button aria-label="Следующее найденное дуа" class="fortress-search-nav-btn" id="fortressDuaSearchNext" type="button"><svg viewbox="0 0 24 24"><path d="M9 6l6 6-6 6"></path></svg></button>
+</div>
+</div>
 </div>
 <h1>Крепость мусульманина</h1>
 <div class="hero-note">
@@ -3032,7 +3029,7 @@ html.light-mode body .fortress-search-status{
 <div class="field-label">Перевод</div>
 <p class="dua-meaning">О Аллах, поистине, Ты — Прощающий, любишь прощение, так прости же меня.</p>
 <div class="field-label">Транскрипция</div>
-<div class="dua-translit">Allahumma innaka ‘afuwwun tuhibbul-‘afwa fa‘fu ‘anni.</div>
+<div class="dua-translit">Аллахумма иннака афуууун тухиббул-афуа фафу анни.</div>
 <div class="field-label">Арабский текст</div>
 <div class="dua-arabic">اللَّهُمَّ إِنَّكَ عَفُوٌّ تُحِبُّ الْعَفْوَ فَاعْفُ عَنِّي</div>
 <div class="badges"><span class="badge">Прощение</span><span class="badge">Покаяние</span></div>
@@ -3054,7 +3051,7 @@ html.light-mode body .fortress-search-status{
 <div class="field-label">Перевод</div>
 <p class="dua-meaning">О Аллах, я прошу у Тебя прощения и благополучия в этом мире и в Последней жизни. О Аллах, я прошу у Тебя прощения и благополучия в моей религии, в моей мирской жизни, в моей семье и в моём имуществе. О Аллах, покрой мои недостатки, успокой мои страхи и охрани меня спереди, сзади, справа, слева и сверху, и я прибегаю к Твоему величию от того, чтобы быть внезапно погубленным снизу.</p>
 <div class="field-label">Транскрипция</div>
-<div class="dua-translit">Allahumma inni as’alukal-‘afwa wal-‘afiyata fid-dunya wal-akhirah. Allahumma inni as’alukal-‘afwa wal-‘afiyata fi dini wa dunyaya wa ahli wa mali. Allahummastur ‘awrati wa amin raw‘ati wahfazni min bayni yadayya wa min khalfi wa ‘an yamini wa ‘an shimali wa min fawqi, wa a‘udhu bi ‘azamatika an ughtala min tahti.</div>
+<div class="dua-translit">Аллахумма инни асалукал-афуа уал-афийата фид-дунйа уал-ахирах. Аллахумма инни асалукал-афуа уал-афийата фи дини уа дунйайа уа ахли уа мали. Аллахуммастур аурати уа амин рауати уахфазни мин байни йадаййа уа мин халфи уа ан йамини уа ан шимали уа мин фауки, уа аузу би азаматика ан угътала мин тахти.</div>
 <div class="field-label">Арабский текст</div>
 <div class="dua-arabic">اللَّهُمَّ إِنِّي أَسْأَلُكَ الْعَفْوَ وَالْعَافِيَةَ فِي الدُّنْيَا وَالْآخِرَةِ، اللَّهُمَّ إِنِّي أَسْأَلُكَ الْعَفْوَ وَالْعَافِيَةَ فِي دِينِي وَدُنْيَايَ وَأَهْلِي وَمَالِي، اللَّهُمَّ اسْتُرْ عَوْرَاتِي وَآمِنْ رَوْعَاتِي، وَاحْفَظْنِي مِنْ بَيْنِ يَدَيَّ وَمِنْ خَلْفِي وَعَنْ يَمِينِي وَعَنْ شِمَالِي وَمِنْ فَوْقِي، وَأَعُوذُ بِعَظَمَتِكَ أَنْ أُغْتَالَ مِنْ تَحْتِي</div>
 <div class="badges"><span class="badge">Благополучие</span><span class="badge">Защита</span><span class="badge">Семья и имущество</span></div>
@@ -3076,7 +3073,7 @@ html.light-mode body .fortress-search-status{
 <div class="field-label">Перевод</div>
 <p class="dua-meaning">О Аллах, прошу у Тебя полезного знания, благого удела и принятого деяния.</p>
 <div class="field-label">Транскрипция</div>
-<div class="dua-translit">Allahumma inni as’aluka ‘ilman nafi‘an, wa rizqan tayyiban, wa ‘amalan mutaqabbalan.</div>
+<div class="dua-translit">Аллахумма инни асалука илман нафиан, уа ризкан таййибан, уа амалан мутакаббалан.</div>
 <div class="field-label">Арабский текст</div>
 <div class="dua-arabic">اللَّهُمَّ إِنِّي أَسْأَلُكَ عِلْمًا نَافِعًا، وَرِزْقًا طَيِّبًا، وَعَمَلًا مُتَقَبَّلًا</div>
 <div class="badges"><span class="badge">Знание</span><span class="badge">Ризк</span><span class="badge">Принятие дел</span></div>
@@ -3098,7 +3095,7 @@ html.light-mode body .fortress-search-status{
 <div class="field-label">Перевод</div>
 <p class="dua-meaning">О Аллах, я прошу у Тебя правильного пути, богобоязненности, целомудрия и самодостаточности.</p>
 <div class="field-label">Транскрипция</div>
-<div class="dua-translit">Allahumma inni as’alukal-huda wat-tuqa wal-‘afafa wal-ghina.</div>
+<div class="dua-translit">Аллахумма инни асалукал-худа уат-тука уал-афафа уал-гъина.</div>
 <div class="field-label">Арабский текст</div>
 <div class="dua-arabic">اللَّهُمَّ إِنِّي أَسْأَلُكَ الْهُدَى وَالتُّقَى وَالْعَفَافَ وَالْغِنَى</div>
 <div class="badges"><span class="badge">Руководство</span><span class="badge">Така</span><span class="badge">Самодостаточность</span></div>
@@ -3120,7 +3117,7 @@ html.light-mode body .fortress-search-status{
 <div class="field-label">Перевод</div>
 <p class="dua-meaning">О Аллах, сделай для меня достаточным дозволенное Тобой вместо запретного и обогати меня Своей милостью так, чтобы я ни в ком, кроме Тебя, не нуждался.</p>
 <div class="field-label">Транскрипция</div>
-<div class="dua-translit">Allahumm-akfini bihalalika ‘an haramika, wa aghnini bifadlika ‘amman siwaka.</div>
+<div class="dua-translit">Аллахумм-акфини бихалалика ан харамика, уа агънини бифадлика амман сиуака.</div>
 <div class="field-label">Арабский текст</div>
 <div class="dua-arabic">اللَّهُمَّ اكْفِنِي بِحَلَالِكَ عَنْ حَرَامِكَ، وَأَغْنِنِي بِفَضْلِكَ عَمَّنْ سِوَاكَ</div>
 <div class="badges"><span class="badge">Халяльный удел</span><span class="badge">Независимость</span><span class="badge">Финансовое облегчение</span></div>
@@ -3142,7 +3139,7 @@ html.light-mode body .fortress-search-status{
 <div class="field-label">Перевод</div>
 <p class="dua-meaning">О Аллах, прибегаю к Тебе от тревоги и печали, от слабости и лени, от скупости и трусости, от бремени долга и от притеснения людей.</p>
 <div class="field-label">Транскрипция</div>
-<div class="dua-translit">Allahumma inni a‘udhu bika minal-hammi wal-hazan, wal-‘ajzi wal-kasal, wal-bukhli wal-jubn, wa dala‘id-dayn, wa ghalabatir-rijal.</div>
+<div class="dua-translit">Аллахумма инни аузу бика минал-хамми уал-хазан, уал-аджзи уал-касал, уал-бухли уал-джубн, уа далаид-дайн, уа гъалабатир-риджал.</div>
 <div class="field-label">Арабский текст</div>
 <div class="dua-arabic">اللَّهُمَّ إِنِّي أَعُوذُ بِكَ مِنَ الْهَمِّ وَالْحَزَنِ، وَالْعَجْزِ وَالْكَسَلِ، وَالْبُخْلِ وَالْجُبْنِ، وَضَلَعِ الدَّيْنِ، وَغَلَبَةِ الرِّجَالِ</div>
 <div class="badges"><span class="badge">Долги</span><span class="badge">Тревога</span><span class="badge">Защита от слабости</span></div>
@@ -3164,7 +3161,7 @@ html.light-mode body .fortress-search-status{
 <div class="field-label">Перевод</div>
 <p class="dua-meaning">О Аллах, даруй нам благо в этом мире, благо в Последней жизни и защити нас от наказания Огня.</p>
 <div class="field-label">Транскрипция</div>
-<div class="dua-translit">Allahumma atina fid-dunya hasanatan, wa fil-akhirati hasanatan, wa qina ‘adhaban-nar.</div>
+<div class="dua-translit">Аллахумма атина фид-дунйа хасанатан, уа фил-ахирати хасанатан, уа кина азабан-нар.</div>
 <div class="field-label">Арабский текст</div>
 <div class="dua-arabic">اللَّهُمَّ آتِنَا فِي الدُّنْيَا حَسَنَةً وَفِي الْآخِرَةِ حَسَنَةً وَقِنَا عَذَابَ النَّارِ</div>
 <div class="badges"><span class="badge">Общее благо</span><span class="badge">Дунья и Ахира</span></div>
@@ -3186,7 +3183,7 @@ html.light-mode body .fortress-search-status{
 <div class="field-label">Перевод</div>
 <p class="dua-meaning">О Аллах, прибегаю к Тебе от исчезновения Твоей милости, от ухода благополучия, от внезапности Твоего наказания и от всего, что вызывает Твой гнев.</p>
 <div class="field-label">Транскрипция</div>
-<div class="dua-translit">Allahumma inni a‘udhu bika min zawali ni‘matika, wa tahawwuli ‘afiyatika, wa fuja’ati niqmatika, wa jami‘i sakhatika.</div>
+<div class="dua-translit">Аллахумма инни аузу бика мин зауали ниматика, уа тахаууули афийатика, уа фуджаати никматика, уа джамии сахатика.</div>
 <div class="field-label">Арабский текст</div>
 <div class="dua-arabic">اللَّهُمَّ إِنِّي أَعُوذُ بِكَ مِنْ زَوَالِ نِعْمَتِكَ، وَتَحَوُّلِ عَافِيَتِكَ، وَفُجَاءَةِ نِقْمَتِكَ، وَجَمِيعِ سَخَطِكَ</div>
 <div class="badges"><span class="badge">Сохранение милостей</span><span class="badge">Благополучие</span><span class="badge">Защита</span></div>
@@ -3208,7 +3205,7 @@ html.light-mode body .fortress-search-status{
 <div class="field-label">Перевод</div>
 <p class="dua-meaning">О Аллах, прибегаю к Тебе от мучения Ада, от мучения могилы, от испытаний жизни и смерти и от зла смуты Масиха ад-Даджаля.</p>
 <div class="field-label">Транскрипция</div>
-<div class="dua-translit">Allahumma inni a‘udhu bika min ‘adhabi jahannam, wa min ‘adhabil-qabr, wa min fitnatil-mahya wal-mamat, wa min sharri fitnatil-masihid-dajjal.</div>
+<div class="dua-translit">Аллахумма инни аузу бика мин азаби джаханнам, уа мин азабил-кабр, уа мин фитнатил-махйа уал-мамат, уа мин шарри фитнатил-масихид-даджджал.</div>
 <div class="field-label">Арабский текст</div>
 <div class="dua-arabic">اللَّهُمَّ إِنِّي أَعُوذُ بِكَ مِنْ عَذَابِ جَهَنَّمَ، وَمِنْ عَذَابِ الْقَبْرِ، وَمِنْ فِتْنَةِ الْمَحْيَا وَالْمَمَاتِ، وَمِنْ شَرِّ فِتْنَةِ الْمَسِيحِ الدَّجَّالِ</div>
 <div class="badges"><span class="badge">Защита</span><span class="badge">Ахира</span><span class="badge">Смуты</span></div>
@@ -4801,18 +4798,17 @@ html.light-mode body .fortress-search-status{
 
 Передают, что Джабир бин ‘Абдуллах, да будет доволен Аллах ими обоими, сказал: «Посланник Аллаха ﷺ учил нас, как следует просить благословения Аллаха на совершение любого дела подобно тому, как он учил нас той или иной суре Корана. Он говорил: “Когда кто-нибудь из вас захочет сделать что-либо, пусть совершит добровольную молитву в два раката, а потом скажет:
 <div class="dua-meaning">
-  <div class="highlight-istikhara">
+<div class="highlight-istikhara">
 О Аллах! Поистине, я прошу у Тебя благословения, ибо Ты обладаешь знанием, и я прошу у Тебя силы, ибо Ты обладаешь могуществом, и я прошу Тебя оказать мне великую милость, ибо, поистине, Ты можешь, а я не могу, Ты знаешь, а я не знаю — и Тебе известно всё о сокрытом. О Аллах! Если это дело станет благом для моей религии, для моей жизни и для исхода моих дел, что Тебе известно, то предопредели его мне, облегчи его для меня и дай мне Твоё благословение на это. Если же это дело станет злом для моей религии, для моей жизни и для исхода моих дел, что также Тебе известно, то отврати его от меня, и отврати меня от него и предопредели мне благо, где бы оно ни было, а потом удоволь меня этим”.
 </div>
 Потом человеку следует сказать, чего он хочет».
-</p><p class="dua-meaning">Не испытал сожалений ни один из тех, кто просил помощи у Творца, а потом советовался с верующими из числа сотворённых Им созданий, проявляя осмотрительность в своих делах.</p>
+<p class="dua-meaning">Не испытал сожалений ни один из тех, кто просил помощи у Творца, а потом советовался с верующими из числа сотворённых Им созданий, проявляя осмотрительность в своих делах.</p>
 <div class="field-label">Транскрипция</div>
 <p class="dua-translit">А́ллахумма и́н-ни астахы́ру-ка би-‘и́льми-ка ва астакди́ру-ка би-ку́драти-ка ва ас’а́лю-ка мин фа́дли-ка ль-‘азы́ми фа-и́нна-ка та́кдиру ва ля а́кдиру ва та́‘ляму ва ля а́‘ляму ва а́нта ‘Алля́му ль-гуййу́б. А́ллахумма ин ку́нта та́‘ляму а́нна ха́за ль-а́мра ха́йрун ли фи ди́ни ва ма‘а́ши ва ‘а́кыбати а́мри (или: ‘а́джили-хи ва а́джили-хи) фа-кду́р-ху ли ва йа́ссирху ли су́мма ба́рик ли фи́-хи. Ва и́н ку́нта та́‘ляму а́нна ха́за ль-а́мра ша́ррун ли фи ди́ни ва ма‘а́ши ва ‘а́кыбати а́мри (или: ‘а́джили-хи ва а́джили-хи) фа-сри́ф-ху ‘а́н-ни ва-сри́фни ‘а́н-ху ва-кду́р ли-яль-хэ́йра хэ́йсу кя́на су́мма а́рды-ни би-хи.</p>
 <div class="field-label">Арабский текст</div>
 <p class="dua-arabic">اللَّهُمَّ إِنِّي أَسْتَخِيرُكَ بِعِلْمِكَ، وَأَسْتَقْدِرُكَ بِقُدْرَتِكَ، وَأَسْأَلُكَ مِنْ فَضْلِكَ العَظِيمِ فَإِنَّكَ تَقْدِرُ وَلاَ أَقْدِرُ، وَتَعْلَمُ وَلاَ أَعْلَمُ، وَأَنْتَ عَلاَّمُ الغُيُوبِ، اللَّهُمَّ إِنْ كُنْتَ تَعْلَمُ أَنَّ هَذَا الأمْرَ خَيْرٌ لِي فِي دِينِي وَمَعَاشِي وَعَاقِبَةِ أَمْرِي – أَوْ قَالَ: عَاجِلِهِ وَآجِلِهِ - فَاقْدُرْهُ لِي وَيَسِّرْهُ لِي ثُمَّ بَارِكْ لِي فِيهِ، وَإِنْ كُنْتَ تَعْلَمُ أَنَّ هَذَا الْأَمْرَ شَرٌّ لِي فِي دِينِي وَمَعَاشِي وَعَاقِبَةِ أَمْرِي – أَوْ قَالَ: عَاجِلِهِ وَآجِلِهِ – فَاصْرِفْهُ عَنِّي وَاصْرِفْنِي عَنْهُ وَاقْدُرْ لِيَ الْخَيْرَ حَيْثُ كَانَ، ثُمَّ أَرْضِنِي بِهِ</p>
 <div class="badges"><span class="badge">Намаз</span><span class="badge">Истихара</span></div>
-
-</details>
+</div></div></details>
 <details class="dua-card empty-dua dua-subgroup">
 <summary class="dua-head">
 <div class="dua-index">32</div>
@@ -5372,7 +5368,7 @@ html.light-mode body .fortress-search-status{
 <button aria-label="Сохранить это место" class="dua-mini-action" data-dua-action="save" data-dua-id="bad-dream-dua-1" type="button"><span aria-hidden="true" class="mini-icon"><svg viewbox="0 0 24 24"><path d="M6 4.5A2.5 2.5 0 0 1 8.5 2h7A2.5 2.5 0 0 1 18 4.5V22l-6-3.4L6 22V4.5z"></path></svg></span><span>Сохранить</span></button>
 </div>
 <div class="field-label">Перевод</div>
-<p class="dua-meaning">В подобных случаях желательно:<br><br>а) трижды сплюнуть налево;<br><br>б) трижды обратиться к Аллаху с мольбой о защите от шайтана и зла того, что увидел человек;<br><br>в) никому не рассказывать об этом;<br><br>г) перевернуться на другой бок.</p>
+<p class="dua-meaning">В подобных случаях желательно:<br/><br/>а) трижды сплюнуть налево;<br/><br/>б) трижды обратиться к Аллаху с мольбой о защите от шайтана и зла того, что увидел человек;<br/><br/>в) никому не рассказывать об этом;<br/><br/>г) перевернуться на другой бок.</p>
 <div class="badges"><span class="badge">Сон</span><span class="badge">Совет</span></div></div>
 </details><details class="dua-card nested-dua" data-dua-id="bad-dream-dua-2" data-dua-title="Видение или бессвязный сон — 2" id="bad-dream-dua-2">
 <summary class="dua-head"><div class="dua-meta"><div class="dua-title">Видение или бессвязный сон — 2</div></div><div class="dua-arrow">▾</div></summary>
@@ -5691,7 +5687,7 @@ html.light-mode body .fortress-search-status{
 <p class="dua-meaning">Передают, что Пророк (салля Ллаху ‘алейхи ва саллям) сказал:</p>
 <p class="dua-meaning"><em>«Тот, кто запомнит наизусть десять первых айатов суры “Пещера”, будет защищён от искушения Лжеца (ад-Даджжаль)».</em></p>
 <div class="field-label">Аль-Кахф — Пещера</div>
-<p class="dua-arabic">بِسْمِ ٱللَّهِ ٱلرَّحْمَٰنِ ٱلرَّحِيمِ<br/>ٱلْحَمْدُ لِلَّهِ ٱلَّذِىٓ أَنزَلَ عَلَىٰ عَبْدِهِ ٱلْكِتَٰبَ وَلَمْ يَجْعَل لَّهُۥ عِوَجَا ۜ</p>
+<p class="dua-arabic">بِسْمِ ٱللَّهِ ٱلرَّحْمَٰنِ ٱلرَّحِيمِ<br>ٱلْحَمْدُ لِلَّهِ ٱلَّذِىٓ أَنزَلَ عَلَىٰ عَبْدِهِ ٱلْكِتَٰبَ وَلَمْ يَجْعَل لَّهُۥ عِوَجَا ۜ</br></p>
 <p class="dua-meaning">Хвала Аллаху, Который ниспослал Своему рабу Писание и не допустил в нём неправды,</p>
 <p class="dua-arabic">قَيِّمًۭا لِّيُنذِرَ بَأْسًۭا شَدِيدًۭا مِّن لَّدُنْهُ وَيُبَشِّرَ ٱلْمُؤْمِنِينَ ٱلَّذِينَ يَعْمَلُونَ ٱلصَّٰلِحَٰتِ أَنَّ لَهُمْ أَجْرًا حَسَنًۭا</p>
 <p class="dua-meaning">и сделал его правильным, чтобы предостеречь [неверующих] от тяжких мучений от Него и сообщить верующим, совершающим праведные деяния, благую весть о том, что им уготована прекрасная награда,</p>
@@ -5858,7 +5854,7 @@ html.light-mode body .fortress-search-status{
 <p class="dua-translit">Аманту би-Лляхи ва русули-хи.</p>
 <div class="field-label">Аят</div>
 <p class="dua-meaning">Следует прочитать аят Корана:</p>
-<p class="dua-meaning"><strong>Аль-Хадид — Железо: 3</strong><br/>Он — Первый и Последний, Высочайший и Ближайший. Он знает о всякой вещи.</p>
+<p class="dua-meaning"><strong>Аль-Хадид — Железо: 3</strong><br>Он — Первый и Последний, Высочайший и Ближайший. Он знает о всякой вещи.</br></p>
 <div class="field-label">Арабский текст</div>
 <p class="dua-arabic">هُوَ الْأَوَّلُ وَالْآخِرُ وَالظَّاهِرُ وَالْبَاطِنُ ۖ وَهُوَ بِكُلِّ شَيْءٍ عَلِيمٌ</p>
 <div class="badges"><span class="badge">Сомнения</span><span class="badge">Вера</span><span class="badge">Защита</span></div></div>
@@ -5881,7 +5877,7 @@ html.light-mode body .fortress-search-status{
 <div class="field-label">Арабский текст</div>
 <p class="dua-arabic">قَدَرُ اللَّهِ وَمَا شَاءَ فَعَلَ</p>
 <div class="field-label">Транскрипция</div>
-<p class="dua-translit">Кадарy Ллахи ва ма ша’а фа‘аль.</p>
+<p class="dua-translit">Кадару Ллахи ва ма ша’а фа‘аль.</p>
 <div class="field-label">Передано</div>
 <p class="dua-meaning">Передают, что Посланник Аллаха (салля Ллаху ‘алейхи ва саллям) сказал:</p>
 <p class="dua-meaning"><em>«Сильный верующий лучше слабого, и Всемогущий и Великий Аллах больше любит [сильного, хотя] благо есть в каждом из них. Стремись к тому, что пойдёт тебе на пользу, проси помощи у Аллаха и не проявляй слабость, если же постигнет тебя какое-нибудь [бедствие], не говори: “Если бы я сделал [это], было бы так-то и так-то”, но говори: “[Таково] предопределение Аллаха, и Он сделал, что пожелал”, ибо, поистине, [эти] “если” открывают шайтану [путь к его] делам».</em></p>
@@ -6014,11 +6010,10 @@ html.light-mode body .fortress-search-status{
 </summary>
 <div class="dua-body">
 <div class="dua-item-actions" data-dua-actions-for="amazement-added-1">
-<button aria-label="Добавить в избранное" class="dua-mini-action" data-dua-action="favorite" data-dua-id="amazement-added-1" type="button"><span aria-hidden="true" class="mini-icon"><svg viewBox="0 0 24 24"><path d="M12 3.8l2.35 4.76 5.25.76-3.8 3.7.9 5.23L12 15.78 7.3 18.25l.9-5.23-3.8-3.7 5.25-.76L12 3.8z"></path></svg></span><span>Избранное</span></button>
-<button aria-label="Поделиться этим дуа" class="dua-mini-action" data-dua-action="share" data-dua-id="amazement-added-1" type="button"><span aria-hidden="true" class="mini-icon"><svg viewBox="0 0 24 24"><path d="M18 8a3 3 0 1 0-2.83-4H15a3 3 0 0 0 .18 1.02L8.9 8.66A3 3 0 1 0 9 15.34l6.28 3.64A3 3 0 1 0 16 17.3l-6.28-3.64a3.1 3.1 0 0 0 0-3.32l6.28-3.64A3 3 0 0 0 18 8z"></path></svg></span><span>Поделиться</span></button>
-<button aria-label="Сохранить это место" class="dua-mini-action" data-dua-action="save" data-dua-id="amazement-added-1" type="button"><span aria-hidden="true" class="mini-icon"><svg viewBox="0 0 24 24"><path d="M6 4.5A2.5 2.5 0 0 1 8.5 2h7A2.5 2.5 0 0 1 18 4.5V22l-6-3.4L6 22V4.5z"></path></svg></span><span>Сохранить</span></button>
+<button aria-label="Добавить в избранное" class="dua-mini-action" data-dua-action="favorite" data-dua-id="amazement-added-1" type="button"><span aria-hidden="true" class="mini-icon"><svg viewbox="0 0 24 24"><path d="M12 3.8l2.35 4.76 5.25.76-3.8 3.7.9 5.23L12 15.78 7.3 18.25l.9-5.23-3.8-3.7 5.25-.76L12 3.8z"></path></svg></span><span>Избранное</span></button>
+<button aria-label="Поделиться этим дуа" class="dua-mini-action" data-dua-action="share" data-dua-id="amazement-added-1" type="button"><span aria-hidden="true" class="mini-icon"><svg viewbox="0 0 24 24"><path d="M18 8a3 3 0 1 0-2.83-4H15a3 3 0 0 0 .18 1.02L8.9 8.66A3 3 0 1 0 9 15.34l6.28 3.64A3 3 0 1 0 16 17.3l-6.28-3.64a3.1 3.1 0 0 0 0-3.32l6.28-3.64A3 3 0 0 0 18 8z"></path></svg></span><span>Поделиться</span></button>
+<button aria-label="Сохранить это место" class="dua-mini-action" data-dua-action="save" data-dua-id="amazement-added-1" type="button"><span aria-hidden="true" class="mini-icon"><svg viewbox="0 0 24 24"><path d="M6 4.5A2.5 2.5 0 0 1 8.5 2h7A2.5 2.5 0 0 1 18 4.5V22l-6-3.4L6 22V4.5z"></path></svg></span><span>Сохранить</span></button>
 </div>
-
 <div class="field-label">Перевод</div>
 <p class="dua-meaning">Пречист Аллах!</p>
 <div class="field-label">Арабский текст</div>
@@ -6038,11 +6033,10 @@ html.light-mode body .fortress-search-status{
 </summary>
 <div class="dua-body">
 <div class="dua-item-actions" data-dua-actions-for="amazement-added-2">
-<button aria-label="Добавить в избранное" class="dua-mini-action" data-dua-action="favorite" data-dua-id="amazement-added-2" type="button"><span aria-hidden="true" class="mini-icon"><svg viewBox="0 0 24 24"><path d="M12 3.8l2.35 4.76 5.25.76-3.8 3.7.9 5.23L12 15.78 7.3 18.25l.9-5.23-3.8-3.7 5.25-.76L12 3.8z"></path></svg></span><span>Избранное</span></button>
-<button aria-label="Поделиться этим дуа" class="dua-mini-action" data-dua-action="share" data-dua-id="amazement-added-2" type="button"><span aria-hidden="true" class="mini-icon"><svg viewBox="0 0 24 24"><path d="M18 8a3 3 0 1 0-2.83-4H15a3 3 0 0 0 .18 1.02L8.9 8.66A3 3 0 1 0 9 15.34l6.28 3.64A3 3 0 1 0 16 17.3l-6.28-3.64a3.1 3.1 0 0 0 0-3.32l6.28-3.64A3 3 0 0 0 18 8z"></path></svg></span><span>Поделиться</span></button>
-<button aria-label="Сохранить это место" class="dua-mini-action" data-dua-action="save" data-dua-id="amazement-added-2" type="button"><span aria-hidden="true" class="mini-icon"><svg viewBox="0 0 24 24"><path d="M6 4.5A2.5 2.5 0 0 1 8.5 2h7A2.5 2.5 0 0 1 18 4.5V22l-6-3.4L6 22V4.5z"></path></svg></span><span>Сохранить</span></button>
+<button aria-label="Добавить в избранное" class="dua-mini-action" data-dua-action="favorite" data-dua-id="amazement-added-2" type="button"><span aria-hidden="true" class="mini-icon"><svg viewbox="0 0 24 24"><path d="M12 3.8l2.35 4.76 5.25.76-3.8 3.7.9 5.23L12 15.78 7.3 18.25l.9-5.23-3.8-3.7 5.25-.76L12 3.8z"></path></svg></span><span>Избранное</span></button>
+<button aria-label="Поделиться этим дуа" class="dua-mini-action" data-dua-action="share" data-dua-id="amazement-added-2" type="button"><span aria-hidden="true" class="mini-icon"><svg viewbox="0 0 24 24"><path d="M18 8a3 3 0 1 0-2.83-4H15a3 3 0 0 0 .18 1.02L8.9 8.66A3 3 0 1 0 9 15.34l6.28 3.64A3 3 0 1 0 16 17.3l-6.28-3.64a3.1 3.1 0 0 0 0-3.32l6.28-3.64A3 3 0 0 0 18 8z"></path></svg></span><span>Поделиться</span></button>
+<button aria-label="Сохранить это место" class="dua-mini-action" data-dua-action="save" data-dua-id="amazement-added-2" type="button"><span aria-hidden="true" class="mini-icon"><svg viewbox="0 0 24 24"><path d="M6 4.5A2.5 2.5 0 0 1 8.5 2h7A2.5 2.5 0 0 1 18 4.5V22l-6-3.4L6 22V4.5z"></path></svg></span><span>Сохранить</span></button>
 </div>
-
 <div class="field-label">Перевод</div>
 <p class="dua-meaning">Аллах велик!</p>
 <div class="field-label">Арабский текст</div>
@@ -6064,11 +6058,10 @@ html.light-mode body .fortress-search-status{
 </summary>
 <div class="dua-body">
 <div class="dua-item-actions" data-dua-actions-for="joy-prostration-added-1">
-<button aria-label="Добавить в избранное" class="dua-mini-action" data-dua-action="favorite" data-dua-id="joy-prostration-added-1" type="button"><span aria-hidden="true" class="mini-icon"><svg viewBox="0 0 24 24"><path d="M12 3.8l2.35 4.76 5.25.76-3.8 3.7.9 5.23L12 15.78 7.3 18.25l.9-5.23-3.8-3.7 5.25-.76L12 3.8z"></path></svg></span><span>Избранное</span></button>
-<button aria-label="Поделиться этим дуа" class="dua-mini-action" data-dua-action="share" data-dua-id="joy-prostration-added-1" type="button"><span aria-hidden="true" class="mini-icon"><svg viewBox="0 0 24 24"><path d="M18 8a3 3 0 1 0-2.83-4H15a3 3 0 0 0 .18 1.02L8.9 8.66A3 3 0 1 0 9 15.34l6.28 3.64A3 3 0 1 0 16 17.3l-6.28-3.64a3.1 3.1 0 0 0 0-3.32l6.28-3.64A3 3 0 0 0 18 8z"></path></svg></span><span>Поделиться</span></button>
-<button aria-label="Сохранить это место" class="dua-mini-action" data-dua-action="save" data-dua-id="joy-prostration-added-1" type="button"><span aria-hidden="true" class="mini-icon"><svg viewBox="0 0 24 24"><path d="M6 4.5A2.5 2.5 0 0 1 8.5 2h7A2.5 2.5 0 0 1 18 4.5V22l-6-3.4L6 22V4.5z"></path></svg></span><span>Сохранить</span></button>
+<button aria-label="Добавить в избранное" class="dua-mini-action" data-dua-action="favorite" data-dua-id="joy-prostration-added-1" type="button"><span aria-hidden="true" class="mini-icon"><svg viewbox="0 0 24 24"><path d="M12 3.8l2.35 4.76 5.25.76-3.8 3.7.9 5.23L12 15.78 7.3 18.25l.9-5.23-3.8-3.7 5.25-.76L12 3.8z"></path></svg></span><span>Избранное</span></button>
+<button aria-label="Поделиться этим дуа" class="dua-mini-action" data-dua-action="share" data-dua-id="joy-prostration-added-1" type="button"><span aria-hidden="true" class="mini-icon"><svg viewbox="0 0 24 24"><path d="M18 8a3 3 0 1 0-2.83-4H15a3 3 0 0 0 .18 1.02L8.9 8.66A3 3 0 1 0 9 15.34l6.28 3.64A3 3 0 1 0 16 17.3l-6.28-3.64a3.1 3.1 0 0 0 0-3.32l6.28-3.64A3 3 0 0 0 18 8z"></path></svg></span><span>Поделиться</span></button>
+<button aria-label="Сохранить это место" class="dua-mini-action" data-dua-action="save" data-dua-id="joy-prostration-added-1" type="button"><span aria-hidden="true" class="mini-icon"><svg viewbox="0 0 24 24"><path d="M6 4.5A2.5 2.5 0 0 1 8.5 2h7A2.5 2.5 0 0 1 18 4.5V22l-6-3.4L6 22V4.5z"></path></svg></span><span>Сохранить</span></button>
 </div>
-
 <div class="field-label">Передано</div>
 <p class="dua-meaning">Передают, что когда случалось нечто радовавшее Пророка (салля Ллаху ‘алейхи ва саллям), он склонялся в земном поклоне и благодарил Благословенного и Всевышнего Аллаха.</p>
 <div class="badges"><span class="badge">Радость</span><span class="badge">Благодарность</span><span class="badge">Суджуд</span></div>
@@ -6084,11 +6077,10 @@ html.light-mode body .fortress-search-status{
 </summary>
 <div class="dua-body">
 <div class="dua-item-actions" data-dua-actions-for="pain-added-1">
-<button aria-label="Добавить в избранное" class="dua-mini-action" data-dua-action="favorite" data-dua-id="pain-added-1" type="button"><span aria-hidden="true" class="mini-icon"><svg viewBox="0 0 24 24"><path d="M12 3.8l2.35 4.76 5.25.76-3.8 3.7.9 5.23L12 15.78 7.3 18.25l.9-5.23-3.8-3.7 5.25-.76L12 3.8z"></path></svg></span><span>Избранное</span></button>
-<button aria-label="Поделиться этим дуа" class="dua-mini-action" data-dua-action="share" data-dua-id="pain-added-1" type="button"><span aria-hidden="true" class="mini-icon"><svg viewBox="0 0 24 24"><path d="M18 8a3 3 0 1 0-2.83-4H15a3 3 0 0 0 .18 1.02L8.9 8.66A3 3 0 1 0 9 15.34l6.28 3.64A3 3 0 1 0 16 17.3l-6.28-3.64a3.1 3.1 0 0 0 0-3.32l6.28-3.64A3 3 0 0 0 18 8z"></path></svg></span><span>Поделиться</span></button>
-<button aria-label="Сохранить это место" class="dua-mini-action" data-dua-action="save" data-dua-id="pain-added-1" type="button"><span aria-hidden="true" class="mini-icon"><svg viewBox="0 0 24 24"><path d="M6 4.5A2.5 2.5 0 0 1 8.5 2h7A2.5 2.5 0 0 1 18 4.5V22l-6-3.4L6 22V4.5z"></path></svg></span><span>Сохранить</span></button>
+<button aria-label="Добавить в избранное" class="dua-mini-action" data-dua-action="favorite" data-dua-id="pain-added-1" type="button"><span aria-hidden="true" class="mini-icon"><svg viewbox="0 0 24 24"><path d="M12 3.8l2.35 4.76 5.25.76-3.8 3.7.9 5.23L12 15.78 7.3 18.25l.9-5.23-3.8-3.7 5.25-.76L12 3.8z"></path></svg></span><span>Избранное</span></button>
+<button aria-label="Поделиться этим дуа" class="dua-mini-action" data-dua-action="share" data-dua-id="pain-added-1" type="button"><span aria-hidden="true" class="mini-icon"><svg viewbox="0 0 24 24"><path d="M18 8a3 3 0 1 0-2.83-4H15a3 3 0 0 0 .18 1.02L8.9 8.66A3 3 0 1 0 9 15.34l6.28 3.64A3 3 0 1 0 16 17.3l-6.28-3.64a3.1 3.1 0 0 0 0-3.32l6.28-3.64A3 3 0 0 0 18 8z"></path></svg></span><span>Поделиться</span></button>
+<button aria-label="Сохранить это место" class="dua-mini-action" data-dua-action="save" data-dua-id="pain-added-1" type="button"><span aria-hidden="true" class="mini-icon"><svg viewbox="0 0 24 24"><path d="M6 4.5A2.5 2.5 0 0 1 8.5 2h7A2.5 2.5 0 0 1 18 4.5V22l-6-3.4L6 22V4.5z"></path></svg></span><span>Сохранить</span></button>
 </div>
-
 <div class="field-label">Передано</div>
 <p class="dua-meaning">Передают, что [однажды] ‘Усман бин Абуль-‘Ас ас-Сакафи (да будет доволен им Аллах) пожаловался Посланнику Аллаха (салля Ллаху ‘алейхи ва саллям) на боль, которую он испытывал с тех пор, как принял ислам, и Посланник Аллаха (салля Ллаху ‘алейхи ва саллям) сказал ему:</p>
 <p class="dua-meaning"><em>«Положи руку на [то место] твоего тела, которое [тебя беспокоит], и трижды произнеси слова: <strong>“С именем Аллаха”</strong>, а потом семь раз скажи: <strong>“Прибегаю к защите Аллаха и Его мощи от зла того, что я ощущаю и чего опасаюсь”</strong>».</em></p>
@@ -6111,11 +6103,10 @@ html.light-mode body .fortress-search-status{
 </summary>
 <div class="dua-body">
 <div class="dua-item-actions" data-dua-actions-for="evil-eye-added-1">
-<button aria-label="Добавить в избранное" class="dua-mini-action" data-dua-action="favorite" data-dua-id="evil-eye-added-1" type="button"><span aria-hidden="true" class="mini-icon"><svg viewBox="0 0 24 24"><path d="M12 3.8l2.35 4.76 5.25.76-3.8 3.7.9 5.23L12 15.78 7.3 18.25l.9-5.23-3.8-3.7 5.25-.76L12 3.8z"></path></svg></span><span>Избранное</span></button>
-<button aria-label="Поделиться этим дуа" class="dua-mini-action" data-dua-action="share" data-dua-id="evil-eye-added-1" type="button"><span aria-hidden="true" class="mini-icon"><svg viewBox="0 0 24 24"><path d="M18 8a3 3 0 1 0-2.83-4H15a3 3 0 0 0 .18 1.02L8.9 8.66A3 3 0 1 0 9 15.34l6.28 3.64A3 3 0 1 0 16 17.3l-6.28-3.64a3.1 3.1 0 0 0 0-3.32l6.28-3.64A3 3 0 0 0 18 8z"></path></svg></span><span>Поделиться</span></button>
-<button aria-label="Сохранить это место" class="dua-mini-action" data-dua-action="save" data-dua-id="evil-eye-added-1" type="button"><span aria-hidden="true" class="mini-icon"><svg viewBox="0 0 24 24"><path d="M6 4.5A2.5 2.5 0 0 1 8.5 2h7A2.5 2.5 0 0 1 18 4.5V22l-6-3.4L6 22V4.5z"></path></svg></span><span>Сохранить</span></button>
+<button aria-label="Добавить в избранное" class="dua-mini-action" data-dua-action="favorite" data-dua-id="evil-eye-added-1" type="button"><span aria-hidden="true" class="mini-icon"><svg viewbox="0 0 24 24"><path d="M12 3.8l2.35 4.76 5.25.76-3.8 3.7.9 5.23L12 15.78 7.3 18.25l.9-5.23-3.8-3.7 5.25-.76L12 3.8z"></path></svg></span><span>Избранное</span></button>
+<button aria-label="Поделиться этим дуа" class="dua-mini-action" data-dua-action="share" data-dua-id="evil-eye-added-1" type="button"><span aria-hidden="true" class="mini-icon"><svg viewbox="0 0 24 24"><path d="M18 8a3 3 0 1 0-2.83-4H15a3 3 0 0 0 .18 1.02L8.9 8.66A3 3 0 1 0 9 15.34l6.28 3.64A3 3 0 1 0 16 17.3l-6.28-3.64a3.1 3.1 0 0 0 0-3.32l6.28-3.64A3 3 0 0 0 18 8z"></path></svg></span><span>Поделиться</span></button>
+<button aria-label="Сохранить это место" class="dua-mini-action" data-dua-action="save" data-dua-id="evil-eye-added-1" type="button"><span aria-hidden="true" class="mini-icon"><svg viewbox="0 0 24 24"><path d="M6 4.5A2.5 2.5 0 0 1 8.5 2h7A2.5 2.5 0 0 1 18 4.5V22l-6-3.4L6 22V4.5z"></path></svg></span><span>Сохранить</span></button>
 </div>
-
 <div class="field-label">Передано</div>
 <p class="dua-meaning">Передают, что Посланник Аллаха (салля Ллаху ‘алейхи ва саллям) сказал:</p>
 <p class="dua-meaning"><em>«Если кто-нибудь из вас увидит в своём брате [по вере], или в самом себе, или в своём достоянии нечто такое, что ему понравится, [пусть призовёт на это благословение Аллаха], ибо дурной глаз — истина».</em></p>
@@ -6132,11 +6123,10 @@ html.light-mode body .fortress-search-status{
 </summary>
 <div class="dua-body">
 <div class="dua-item-actions" data-dua-actions-for="fear-added-1">
-<button aria-label="Добавить в избранное" class="dua-mini-action" data-dua-action="favorite" data-dua-id="fear-added-1" type="button"><span aria-hidden="true" class="mini-icon"><svg viewBox="0 0 24 24"><path d="M12 3.8l2.35 4.76 5.25.76-3.8 3.7.9 5.23L12 15.78 7.3 18.25l.9-5.23-3.8-3.7 5.25-.76L12 3.8z"></path></svg></span><span>Избранное</span></button>
-<button aria-label="Поделиться этим дуа" class="dua-mini-action" data-dua-action="share" data-dua-id="fear-added-1" type="button"><span aria-hidden="true" class="mini-icon"><svg viewBox="0 0 24 24"><path d="M18 8a3 3 0 1 0-2.83-4H15a3 3 0 0 0 .18 1.02L8.9 8.66A3 3 0 1 0 9 15.34l6.28 3.64A3 3 0 1 0 16 17.3l-6.28-3.64a3.1 3.1 0 0 0 0-3.32l6.28-3.64A3 3 0 0 0 18 8z"></path></svg></span><span>Поделиться</span></button>
-<button aria-label="Сохранить это место" class="dua-mini-action" data-dua-action="save" data-dua-id="fear-added-1" type="button"><span aria-hidden="true" class="mini-icon"><svg viewBox="0 0 24 24"><path d="M6 4.5A2.5 2.5 0 0 1 8.5 2h7A2.5 2.5 0 0 1 18 4.5V22l-6-3.4L6 22V4.5z"></path></svg></span><span>Сохранить</span></button>
+<button aria-label="Добавить в избранное" class="dua-mini-action" data-dua-action="favorite" data-dua-id="fear-added-1" type="button"><span aria-hidden="true" class="mini-icon"><svg viewbox="0 0 24 24"><path d="M12 3.8l2.35 4.76 5.25.76-3.8 3.7.9 5.23L12 15.78 7.3 18.25l.9-5.23-3.8-3.7 5.25-.76L12 3.8z"></path></svg></span><span>Избранное</span></button>
+<button aria-label="Поделиться этим дуа" class="dua-mini-action" data-dua-action="share" data-dua-id="fear-added-1" type="button"><span aria-hidden="true" class="mini-icon"><svg viewbox="0 0 24 24"><path d="M18 8a3 3 0 1 0-2.83-4H15a3 3 0 0 0 .18 1.02L8.9 8.66A3 3 0 1 0 9 15.34l6.28 3.64A3 3 0 1 0 16 17.3l-6.28-3.64a3.1 3.1 0 0 0 0-3.32l6.28-3.64A3 3 0 0 0 18 8z"></path></svg></span><span>Поделиться</span></button>
+<button aria-label="Сохранить это место" class="dua-mini-action" data-dua-action="save" data-dua-id="fear-added-1" type="button"><span aria-hidden="true" class="mini-icon"><svg viewbox="0 0 24 24"><path d="M6 4.5A2.5 2.5 0 0 1 8.5 2h7A2.5 2.5 0 0 1 18 4.5V22l-6-3.4L6 22V4.5z"></path></svg></span><span>Сохранить</span></button>
 </div>
-
 <div class="field-label">Перевод</div>
 <p class="dua-meaning">Нет бога, кроме Аллаха!</p>
 <div class="field-label">Арабский текст</div>
@@ -6156,11 +6146,10 @@ html.light-mode body .fortress-search-status{
 </summary>
 <div class="dua-body">
 <div class="dua-item-actions" data-dua-actions-for="shaytan-plot-protection-added-1">
-<button aria-label="Добавить в избранное" class="dua-mini-action" data-dua-action="favorite" data-dua-id="shaytan-plot-protection-added-1" type="button"><span aria-hidden="true" class="mini-icon"><svg viewBox="0 0 24 24"><path d="M12 3.8l2.35 4.76 5.25.76-3.8 3.7.9 5.23L12 15.78 7.3 18.25l.9-5.23-3.8-3.7 5.25-.76L12 3.8z"></path></svg></span><span>Избранное</span></button>
-<button aria-label="Поделиться этим дуа" class="dua-mini-action" data-dua-action="share" data-dua-id="shaytan-plot-protection-added-1" type="button"><span aria-hidden="true" class="mini-icon"><svg viewBox="0 0 24 24"><path d="M18 8a3 3 0 1 0-2.83-4H15a3 3 0 0 0 .18 1.02L8.9 8.66A3 3 0 1 0 9 15.34l6.28 3.64A3 3 0 1 0 16 17.3l-6.28-3.64a3.1 3.1 0 0 0 0-3.32l6.28-3.64A3 3 0 0 0 18 8z"></path></svg></span><span>Поделиться</span></button>
-<button aria-label="Сохранить это место" class="dua-mini-action" data-dua-action="save" data-dua-id="shaytan-plot-protection-added-1" type="button"><span aria-hidden="true" class="mini-icon"><svg viewBox="0 0 24 24"><path d="M6 4.5A2.5 2.5 0 0 1 8.5 2h7A2.5 2.5 0 0 1 18 4.5V22l-6-3.4L6 22V4.5z"></path></svg></span><span>Сохранить</span></button>
+<button aria-label="Добавить в избранное" class="dua-mini-action" data-dua-action="favorite" data-dua-id="shaytan-plot-protection-added-1" type="button"><span aria-hidden="true" class="mini-icon"><svg viewbox="0 0 24 24"><path d="M12 3.8l2.35 4.76 5.25.76-3.8 3.7.9 5.23L12 15.78 7.3 18.25l.9-5.23-3.8-3.7 5.25-.76L12 3.8z"></path></svg></span><span>Избранное</span></button>
+<button aria-label="Поделиться этим дуа" class="dua-mini-action" data-dua-action="share" data-dua-id="shaytan-plot-protection-added-1" type="button"><span aria-hidden="true" class="mini-icon"><svg viewbox="0 0 24 24"><path d="M18 8a3 3 0 1 0-2.83-4H15a3 3 0 0 0 .18 1.02L8.9 8.66A3 3 0 1 0 9 15.34l6.28 3.64A3 3 0 1 0 16 17.3l-6.28-3.64a3.1 3.1 0 0 0 0-3.32l6.28-3.64A3 3 0 0 0 18 8z"></path></svg></span><span>Поделиться</span></button>
+<button aria-label="Сохранить это место" class="dua-mini-action" data-dua-action="save" data-dua-id="shaytan-plot-protection-added-1" type="button"><span aria-hidden="true" class="mini-icon"><svg viewbox="0 0 24 24"><path d="M6 4.5A2.5 2.5 0 0 1 8.5 2h7A2.5 2.5 0 0 1 18 4.5V22l-6-3.4L6 22V4.5z"></path></svg></span><span>Сохранить</span></button>
 </div>
-
 <div class="field-label">Перевод</div>
 <p class="dua-meaning">Прибегаю к защите совершенных слов Аллаха, [пойти против которых] не в силах ни праведный, ни нечестивый, от зла того, что Он сотворил, и создал, и вызвал из небытия, и от зла того, что нисходит с неба, и от зла того, что восходит к нему, и от зла того, что Он создал в земле, и от зла того, что из неё появляется, и от зла искушений ночи и дня, и от зла всего приходящего ночью, кроме того, что приносит с собой благо, о Милостивый!</p>
 <div class="field-label">Арабский текст</div>
@@ -6391,9 +6380,9 @@ html.light-mode body .fortress-search-status{
 <div class="dua-arrow">▾</div>
 </summary>
 <div class="dua-body"><div class="dua-item-actions" data-dua-actions-for="dhikr-counting-on-fingers">
-<button aria-label="Добавить в избранное" class="dua-mini-action" data-dua-action="favorite" data-dua-id="dhikr-counting-on-fingers" type="button"><span aria-hidden="true" class="mini-icon"><svg viewBox="0 0 24 24"><path d="M12 3.8l2.35 4.76 5.25.76-3.8 3.7.9 5.23L12 15.78 7.3 18.25l.9-5.23-3.8-3.7 5.25-.76L12 3.8z"></path></svg></span><span>Избранное</span></button>
-<button aria-label="Поделиться этим дуа" class="dua-mini-action" data-dua-action="share" data-dua-id="dhikr-counting-on-fingers" type="button"><span aria-hidden="true" class="mini-icon"><svg viewBox="0 0 24 24"><path d="M18 8a3 3 0 1 0-2.83-4H15a3 3 0 0 0 .18 1.02L8.9 8.66A3 3 0 1 0 9 15.34l6.28 3.64A3 3 0 1 0 16 17.3l-6.28-3.64a3.1 3.1 0 0 0 0-3.32l6.28-3.64A3 3 0 0 0 18 8z"></path></svg></span><span>Поделиться</span></button>
-<button aria-label="Сохранить это место" class="dua-mini-action" data-dua-action="save" data-dua-id="dhikr-counting-on-fingers" type="button"><span aria-hidden="true" class="mini-icon"><svg viewBox="0 0 24 24"><path d="M6 4.5A2.5 2.5 0 0 1 8.5 2h7A2.5 2.5 0 0 1 18 4.5V22l-6-3.4L6 22V4.5z"></path></svg></span><span>Сохранить</span></button>
+<button aria-label="Добавить в избранное" class="dua-mini-action" data-dua-action="favorite" data-dua-id="dhikr-counting-on-fingers" type="button"><span aria-hidden="true" class="mini-icon"><svg viewbox="0 0 24 24"><path d="M12 3.8l2.35 4.76 5.25.76-3.8 3.7.9 5.23L12 15.78 7.3 18.25l.9-5.23-3.8-3.7 5.25-.76L12 3.8z"></path></svg></span><span>Избранное</span></button>
+<button aria-label="Поделиться этим дуа" class="dua-mini-action" data-dua-action="share" data-dua-id="dhikr-counting-on-fingers" type="button"><span aria-hidden="true" class="mini-icon"><svg viewbox="0 0 24 24"><path d="M18 8a3 3 0 1 0-2.83-4H15a3 3 0 0 0 .18 1.02L8.9 8.66A3 3 0 1 0 9 15.34l6.28 3.64A3 3 0 1 0 16 17.3l-6.28-3.64a3.1 3.1 0 0 0 0-3.32l6.28-3.64A3 3 0 0 0 18 8z"></path></svg></span><span>Поделиться</span></button>
+<button aria-label="Сохранить это место" class="dua-mini-action" data-dua-action="save" data-dua-id="dhikr-counting-on-fingers" type="button"><span aria-hidden="true" class="mini-icon"><svg viewbox="0 0 24 24"><path d="M6 4.5A2.5 2.5 0 0 1 8.5 2h7A2.5 2.5 0 0 1 18 4.5V22l-6-3.4L6 22V4.5z"></path></svg></span><span>Сохранить</span></button>
 </div>
 <div class="field-label">Перевод</div>
 <p class="dua-meaning">Передают, что ‘Абдуллах бин ‘Амр, да будет доволен Аллах ими обоими, сказал: «Я видел, как Посланник Аллаха (салля Ллаху ‘алейхи ва саллям) считал славословия [Аллаху] с помощью [пальцев] правой руки».</p>
@@ -6409,9 +6398,9 @@ html.light-mode body .fortress-search-status{
 <div class="dua-arrow">▾</div>
 </summary>
 <div class="dua-body"><div class="dua-item-actions" data-dua-actions-for="night-etiquette-children-doors-vessels">
-<button aria-label="Добавить в избранное" class="dua-mini-action" data-dua-action="favorite" data-dua-id="night-etiquette-children-doors-vessels" type="button"><span aria-hidden="true" class="mini-icon"><svg viewBox="0 0 24 24"><path d="M12 3.8l2.35 4.76 5.25.76-3.8 3.7.9 5.23L12 15.78 7.3 18.25l.9-5.23-3.8-3.7 5.25-.76L12 3.8z"></path></svg></span><span>Избранное</span></button>
-<button aria-label="Поделиться этим дуа" class="dua-mini-action" data-dua-action="share" data-dua-id="night-etiquette-children-doors-vessels" type="button"><span aria-hidden="true" class="mini-icon"><svg viewBox="0 0 24 24"><path d="M18 8a3 3 0 1 0-2.83-4H15a3 3 0 0 0 .18 1.02L8.9 8.66A3 3 0 1 0 9 15.34l6.28 3.64A3 3 0 1 0 16 17.3l-6.28-3.64a3.1 3.1 0 0 0 0-3.32l6.28-3.64A3 3 0 0 0 18 8z"></path></svg></span><span>Поделиться</span></button>
-<button aria-label="Сохранить это место" class="dua-mini-action" data-dua-action="save" data-dua-id="night-etiquette-children-doors-vessels" type="button"><span aria-hidden="true" class="mini-icon"><svg viewBox="0 0 24 24"><path d="M6 4.5A2.5 2.5 0 0 1 8.5 2h7A2.5 2.5 0 0 1 18 4.5V22l-6-3.4L6 22V4.5z"></path></svg></span><span>Сохранить</span></button>
+<button aria-label="Добавить в избранное" class="dua-mini-action" data-dua-action="favorite" data-dua-id="night-etiquette-children-doors-vessels" type="button"><span aria-hidden="true" class="mini-icon"><svg viewbox="0 0 24 24"><path d="M12 3.8l2.35 4.76 5.25.76-3.8 3.7.9 5.23L12 15.78 7.3 18.25l.9-5.23-3.8-3.7 5.25-.76L12 3.8z"></path></svg></span><span>Избранное</span></button>
+<button aria-label="Поделиться этим дуа" class="dua-mini-action" data-dua-action="share" data-dua-id="night-etiquette-children-doors-vessels" type="button"><span aria-hidden="true" class="mini-icon"><svg viewbox="0 0 24 24"><path d="M18 8a3 3 0 1 0-2.83-4H15a3 3 0 0 0 .18 1.02L8.9 8.66A3 3 0 1 0 9 15.34l6.28 3.64A3 3 0 1 0 16 17.3l-6.28-3.64a3.1 3.1 0 0 0 0-3.32l6.28-3.64A3 3 0 0 0 18 8z"></path></svg></span><span>Поделиться</span></button>
+<button aria-label="Сохранить это место" class="dua-mini-action" data-dua-action="save" data-dua-id="night-etiquette-children-doors-vessels" type="button"><span aria-hidden="true" class="mini-icon"><svg viewbox="0 0 24 24"><path d="M6 4.5A2.5 2.5 0 0 1 8.5 2h7A2.5 2.5 0 0 1 18 4.5V22l-6-3.4L6 22V4.5z"></path></svg></span><span>Сохранить</span></button>
 </div>
 <div class="field-label">Перевод</div>
 <p class="dua-meaning">Передают, что Посланник Аллаха (салля Ллаху ‘алейхи ва саллям) сказал:</p>
@@ -6852,9 +6841,9 @@ html.light-mode body .fortress-search-status{
 <div class="dua-arrow">▾</div>
 </summary>
 <div class="dua-body"><div class="dua-item-actions" data-dua-actions-for="greeting-non-muslim-added-1">
-<button aria-label="Добавить в избранное" class="dua-mini-action" data-dua-action="favorite" data-dua-id="greeting-non-muslim-added-1" type="button"><span aria-hidden="true" class="mini-icon"><svg viewBox="0 0 24 24"><path d="M12 3.8l2.35 4.76 5.25.76-3.8 3.7.9 5.23L12 15.78 7.3 18.25l.9-5.23-3.8-3.7 5.25-.76L12 3.8z"></path></svg></span><span>Избранное</span></button>
-<button aria-label="Поделиться этим дуа" class="dua-mini-action" data-dua-action="share" data-dua-id="greeting-non-muslim-added-1" type="button"><span aria-hidden="true" class="mini-icon"><svg viewBox="0 0 24 24"><path d="M18 8a3 3 0 1 0-2.83-4H15a3 3 0 0 0 .18 1.02L8.9 8.66A3 3 0 1 0 9 15.34l6.28 3.64A3 3 0 1 0 16 17.3l-6.28-3.64a3.1 3.1 0 0 0 0-3.32l6.28-3.64A3 3 0 0 0 18 8z"></path></svg></span><span>Поделиться</span></button>
-<button aria-label="Сохранить это место" class="dua-mini-action" data-dua-action="save" data-dua-id="greeting-non-muslim-added-1" type="button"><span aria-hidden="true" class="mini-icon"><svg viewBox="0 0 24 24"><path d="M6 4.5A2.5 2.5 0 0 1 8.5 2h7A2.5 2.5 0 0 1 18 4.5V22l-6-3.4L6 22V4.5z"></path></svg></span><span>Сохранить</span></button>
+<button aria-label="Добавить в избранное" class="dua-mini-action" data-dua-action="favorite" data-dua-id="greeting-non-muslim-added-1" type="button"><span aria-hidden="true" class="mini-icon"><svg viewbox="0 0 24 24"><path d="M12 3.8l2.35 4.76 5.25.76-3.8 3.7.9 5.23L12 15.78 7.3 18.25l.9-5.23-3.8-3.7 5.25-.76L12 3.8z"></path></svg></span><span>Избранное</span></button>
+<button aria-label="Поделиться этим дуа" class="dua-mini-action" data-dua-action="share" data-dua-id="greeting-non-muslim-added-1" type="button"><span aria-hidden="true" class="mini-icon"><svg viewbox="0 0 24 24"><path d="M18 8a3 3 0 1 0-2.83-4H15a3 3 0 0 0 .18 1.02L8.9 8.66A3 3 0 1 0 9 15.34l6.28 3.64A3 3 0 1 0 16 17.3l-6.28-3.64a3.1 3.1 0 0 0 0-3.32l6.28-3.64A3 3 0 0 0 18 8z"></path></svg></span><span>Поделиться</span></button>
+<button aria-label="Сохранить это место" class="dua-mini-action" data-dua-action="save" data-dua-id="greeting-non-muslim-added-1" type="button"><span aria-hidden="true" class="mini-icon"><svg viewbox="0 0 24 24"><path d="M6 4.5A2.5 2.5 0 0 1 8.5 2h7A2.5 2.5 0 0 1 18 4.5V22l-6-3.4L6 22V4.5z"></path></svg></span><span>Сохранить</span></button>
 </div>
 <div class="field-label">Перевод</div>
 <p class="dua-meaning">Передают со слов Анаса (да будет доволен им Аллах), что Посланник Аллаха (салля Ллаху ‘алейхи ва саллям) сказал: «Если вас будут приветствовать люди Писания, отвечайте: “И вам”».</p>
@@ -6870,9 +6859,9 @@ html.light-mode body .fortress-search-status{
 <div class="dua-arrow">▾</div>
 </summary>
 <div class="dua-body"><div class="dua-item-actions" data-dua-actions-for="reproach-added-1">
-<button aria-label="Добавить в избранное" class="dua-mini-action" data-dua-action="favorite" data-dua-id="reproach-added-1" type="button"><span aria-hidden="true" class="mini-icon"><svg viewBox="0 0 24 24"><path d="M12 3.8l2.35 4.76 5.25.76-3.8 3.7.9 5.23L12 15.78 7.3 18.25l.9-5.23-3.8-3.7 5.25-.76L12 3.8z"></path></svg></span><span>Избранное</span></button>
-<button aria-label="Поделиться этим дуа" class="dua-mini-action" data-dua-action="share" data-dua-id="reproach-added-1" type="button"><span aria-hidden="true" class="mini-icon"><svg viewBox="0 0 24 24"><path d="M18 8a3 3 0 1 0-2.83-4H15a3 3 0 0 0 .18 1.02L8.9 8.66A3 3 0 1 0 9 15.34l6.28 3.64A3 3 0 1 0 16 17.3l-6.28-3.64a3.1 3.1 0 0 0 0-3.32l6.28-3.64A3 3 0 0 0 18 8z"></path></svg></span><span>Поделиться</span></button>
-<button aria-label="Сохранить это место" class="dua-mini-action" data-dua-action="save" data-dua-id="reproach-added-1" type="button"><span aria-hidden="true" class="mini-icon"><svg viewBox="0 0 24 24"><path d="M6 4.5A2.5 2.5 0 0 1 8.5 2h7A2.5 2.5 0 0 1 18 4.5V22l-6-3.4L6 22V4.5z"></path></svg></span><span>Сохранить</span></button>
+<button aria-label="Добавить в избранное" class="dua-mini-action" data-dua-action="favorite" data-dua-id="reproach-added-1" type="button"><span aria-hidden="true" class="mini-icon"><svg viewbox="0 0 24 24"><path d="M12 3.8l2.35 4.76 5.25.76-3.8 3.7.9 5.23L12 15.78 7.3 18.25l.9-5.23-3.8-3.7 5.25-.76L12 3.8z"></path></svg></span><span>Избранное</span></button>
+<button aria-label="Поделиться этим дуа" class="dua-mini-action" data-dua-action="share" data-dua-id="reproach-added-1" type="button"><span aria-hidden="true" class="mini-icon"><svg viewbox="0 0 24 24"><path d="M18 8a3 3 0 1 0-2.83-4H15a3 3 0 0 0 .18 1.02L8.9 8.66A3 3 0 1 0 9 15.34l6.28 3.64A3 3 0 1 0 16 17.3l-6.28-3.64a3.1 3.1 0 0 0 0-3.32l6.28-3.64A3 3 0 0 0 18 8z"></path></svg></span><span>Поделиться</span></button>
+<button aria-label="Сохранить это место" class="dua-mini-action" data-dua-action="save" data-dua-id="reproach-added-1" type="button"><span aria-hidden="true" class="mini-icon"><svg viewbox="0 0 24 24"><path d="M6 4.5A2.5 2.5 0 0 1 8.5 2h7A2.5 2.5 0 0 1 18 4.5V22l-6-3.4L6 22V4.5z"></path></svg></span><span>Сохранить</span></button>
 </div>
 <div class="field-label">Перевод</div>
 <p class="dua-meaning">Передают, что Посланник Аллаха (салля Ллаху ‘алейхи ва саллям) сказал: «О Аллах! Кого бы из верующих я ни подверг поношению, сделай это для него средством приближения к Тебе в День воскресения».</p>
@@ -6892,9 +6881,9 @@ html.light-mode body .fortress-search-status{
 <div class="dua-arrow">▾</div>
 </summary>
 <div class="dua-body"><div class="dua-item-actions" data-dua-actions-for="praise-muslim-added-1">
-<button aria-label="Добавить в избранное" class="dua-mini-action" data-dua-action="favorite" data-dua-id="praise-muslim-added-1" type="button"><span aria-hidden="true" class="mini-icon"><svg viewBox="0 0 24 24"><path d="M12 3.8l2.35 4.76 5.25.76-3.8 3.7.9 5.23L12 15.78 7.3 18.25l.9-5.23-3.8-3.7 5.25-.76L12 3.8z"></path></svg></span><span>Избранное</span></button>
-<button aria-label="Поделиться этим дуа" class="dua-mini-action" data-dua-action="share" data-dua-id="praise-muslim-added-1" type="button"><span aria-hidden="true" class="mini-icon"><svg viewBox="0 0 24 24"><path d="M18 8a3 3 0 1 0-2.83-4H15a3 3 0 0 0 .18 1.02L8.9 8.66A3 3 0 1 0 9 15.34l6.28 3.64A3 3 0 1 0 16 17.3l-6.28-3.64a3.1 3.1 0 0 0 0-3.32l6.28-3.64A3 3 0 0 0 18 8z"></path></svg></span><span>Поделиться</span></button>
-<button aria-label="Сохранить это место" class="dua-mini-action" data-dua-action="save" data-dua-id="praise-muslim-added-1" type="button"><span aria-hidden="true" class="mini-icon"><svg viewBox="0 0 24 24"><path d="M6 4.5A2.5 2.5 0 0 1 8.5 2h7A2.5 2.5 0 0 1 18 4.5V22l-6-3.4L6 22V4.5z"></path></svg></span><span>Сохранить</span></button>
+<button aria-label="Добавить в избранное" class="dua-mini-action" data-dua-action="favorite" data-dua-id="praise-muslim-added-1" type="button"><span aria-hidden="true" class="mini-icon"><svg viewbox="0 0 24 24"><path d="M12 3.8l2.35 4.76 5.25.76-3.8 3.7.9 5.23L12 15.78 7.3 18.25l.9-5.23-3.8-3.7 5.25-.76L12 3.8z"></path></svg></span><span>Избранное</span></button>
+<button aria-label="Поделиться этим дуа" class="dua-mini-action" data-dua-action="share" data-dua-id="praise-muslim-added-1" type="button"><span aria-hidden="true" class="mini-icon"><svg viewbox="0 0 24 24"><path d="M18 8a3 3 0 1 0-2.83-4H15a3 3 0 0 0 .18 1.02L8.9 8.66A3 3 0 1 0 9 15.34l6.28 3.64A3 3 0 1 0 16 17.3l-6.28-3.64a3.1 3.1 0 0 0 0-3.32l6.28-3.64A3 3 0 0 0 18 8z"></path></svg></span><span>Поделиться</span></button>
+<button aria-label="Сохранить это место" class="dua-mini-action" data-dua-action="save" data-dua-id="praise-muslim-added-1" type="button"><span aria-hidden="true" class="mini-icon"><svg viewbox="0 0 24 24"><path d="M6 4.5A2.5 2.5 0 0 1 8.5 2h7A2.5 2.5 0 0 1 18 4.5V22l-6-3.4L6 22V4.5z"></path></svg></span><span>Сохранить</span></button>
 </div>
 <div class="field-label">Перевод</div>
 <p class="dua-meaning">Передают, что Пророк (салля Ллаху ‘алейхи ва саллям) сказал: «Пусть тот из вас, кому непременно будет нужно похвалить своего товарища, скажет: “Я считаю такого-то таким-то и таким-то, если он и в самом деле считает его таким, но я никого не обеляю пред Аллахом”, отчёта же за его дела потребует Аллах».</p>
@@ -6910,9 +6899,9 @@ html.light-mode body .fortress-search-status{
 <div class="dua-arrow">▾</div>
 </summary>
 <div class="dua-body"><div class="dua-item-actions" data-dua-actions-for="self-praise-protection-added-1">
-<button aria-label="Добавить в избранное" class="dua-mini-action" data-dua-action="favorite" data-dua-id="self-praise-protection-added-1" type="button"><span aria-hidden="true" class="mini-icon"><svg viewBox="0 0 24 24"><path d="M12 3.8l2.35 4.76 5.25.76-3.8 3.7.9 5.23L12 15.78 7.3 18.25l.9-5.23-3.8-3.7 5.25-.76L12 3.8z"></path></svg></span><span>Избранное</span></button>
-<button aria-label="Поделиться этим дуа" class="dua-mini-action" data-dua-action="share" data-dua-id="self-praise-protection-added-1" type="button"><span aria-hidden="true" class="mini-icon"><svg viewBox="0 0 24 24"><path d="M18 8a3 3 0 1 0-2.83-4H15a3 3 0 0 0 .18 1.02L8.9 8.66A3 3 0 1 0 9 15.34l6.28 3.64A3 3 0 1 0 16 17.3l-6.28-3.64a3.1 3.1 0 0 0 0-3.32l6.28-3.64A3 3 0 0 0 18 8z"></path></svg></span><span>Поделиться</span></button>
-<button aria-label="Сохранить это место" class="dua-mini-action" data-dua-action="save" data-dua-id="self-praise-protection-added-1" type="button"><span aria-hidden="true" class="mini-icon"><svg viewBox="0 0 24 24"><path d="M6 4.5A2.5 2.5 0 0 1 8.5 2h7A2.5 2.5 0 0 1 18 4.5V22l-6-3.4L6 22V4.5z"></path></svg></span><span>Сохранить</span></button>
+<button aria-label="Добавить в избранное" class="dua-mini-action" data-dua-action="favorite" data-dua-id="self-praise-protection-added-1" type="button"><span aria-hidden="true" class="mini-icon"><svg viewbox="0 0 24 24"><path d="M12 3.8l2.35 4.76 5.25.76-3.8 3.7.9 5.23L12 15.78 7.3 18.25l.9-5.23-3.8-3.7 5.25-.76L12 3.8z"></path></svg></span><span>Избранное</span></button>
+<button aria-label="Поделиться этим дуа" class="dua-mini-action" data-dua-action="share" data-dua-id="self-praise-protection-added-1" type="button"><span aria-hidden="true" class="mini-icon"><svg viewbox="0 0 24 24"><path d="M18 8a3 3 0 1 0-2.83-4H15a3 3 0 0 0 .18 1.02L8.9 8.66A3 3 0 1 0 9 15.34l6.28 3.64A3 3 0 1 0 16 17.3l-6.28-3.64a3.1 3.1 0 0 0 0-3.32l6.28-3.64A3 3 0 0 0 18 8z"></path></svg></span><span>Поделиться</span></button>
+<button aria-label="Сохранить это место" class="dua-mini-action" data-dua-action="save" data-dua-id="self-praise-protection-added-1" type="button"><span aria-hidden="true" class="mini-icon"><svg viewbox="0 0 24 24"><path d="M6 4.5A2.5 2.5 0 0 1 8.5 2h7A2.5 2.5 0 0 1 18 4.5V22l-6-3.4L6 22V4.5z"></path></svg></span><span>Сохранить</span></button>
 </div>
 <div class="field-label">Перевод</div>
 <p class="dua-meaning">О Аллах! Не взыщи с меня за то, что они говорят, и прости мне то, о чём они не знают, и сделай так, чтобы я стал лучше, чем они думают обо мне.</p>
@@ -7188,11 +7177,11 @@ html.light-mode body .fortress-search-status{
 <button aria-label="Сохранить это место" class="dua-mini-action" data-dua-action="save" data-dua-id="deceased-child-dua-1" type="button"><span aria-hidden="true" class="mini-icon"><svg viewbox="0 0 24 24"><path d="M6 4.5A2.5 2.5 0 0 1 8.5 2h7A2.5 2.5 0 0 1 18 4.5V22l-6-3.4L6 22V4.5z"></path></svg></span><span>Сохранить</span></button>
 </div>
 <div class="field-label">Перевод</div>
-<p class="dua-meaning">О Аллах! Упаси его от мук могилы.<br><br>Кроме того, будет хорошо, если человек скажет:<br><br>«О Аллах! Сделай [так, чтобы смерть этого ребёнка являлась] причиной воздаяния, которое будет ждать [в Раю] его родителей, а сам он стал бы для них запасом и заступником, ходатайство которого будет принято. О Аллах! Утяжели им весы их и увеличь за него их награды, и присоедини его к праведным верующим, и помести его под опеку Ибрахима, и упаси его по милосердию Своему от мук Ада, и даруй ему в [Раю] дом лучше его дома и семью лучше его семьи. О Аллах! Прости наших предков, наших детей и тех, кто уверовал раньше нас».</p>
+<p class="dua-meaning">О Аллах! Упаси его от мук могилы.<br/><br/>Кроме того, будет хорошо, если человек скажет:<br/><br/>«О Аллах! Сделай [так, чтобы смерть этого ребёнка являлась] причиной воздаяния, которое будет ждать [в Раю] его родителей, а сам он стал бы для них запасом и заступником, ходатайство которого будет принято. О Аллах! Утяжели им весы их и увеличь за него их награды, и присоедини его к праведным верующим, и помести его под опеку Ибрахима, и упаси его по милосердию Своему от мук Ада, и даруй ему в [Раю] дом лучше его дома и семью лучше его семьи. О Аллах! Прости наших предков, наших детей и тех, кто уверовал раньше нас».</p>
 <div class="field-label">Транскрипция</div>
-<p class="dua-translit">Аллахумма а‘из-ху мин ‘азаби ль-кабр.<br><br>Аллахумма дж‘аль-ху фаратан ва зухран ли-валидай-хи ва шафи‘ан муджабан. Аллахумма саккыль би-хи мавазина-хума ва а‘зым би-хи уджура-хума ва альхик-ху би-с-салихин аль-му’минин, ва-дж‘аль-ху фи кафаляти Ибрахима, ва кы-хи би-рахмати-ка ‘азаба ль-джахим, ва абдиль-ху дара хайран мин дари-хи ва ахлян хайран мин ахли-хи. Аллахумма гфир ли-асляфи-на ва афрати-на ва ман сабака-на би-ль-иман.</p>
+<p class="dua-translit">Аллахумма а‘из-ху мин ‘азаби ль-кабр.<br/><br/>Аллахумма дж‘аль-ху фаратан ва зухран ли-валидай-хи ва шафи‘ан муджабан. Аллахумма саккыль би-хи мавазина-хума ва а‘зым би-хи уджура-хума ва альхик-ху би-с-салихин аль-му’минин, ва-дж‘аль-ху фи кафаляти Ибрахима, ва кы-хи би-рахмати-ка ‘азаба ль-джахим, ва абдиль-ху дара хайран мин дари-хи ва ахлян хайран мин ахли-хи. Аллахумма гфир ли-асляфи-на ва афрати-на ва ман сабака-на би-ль-иман.</p>
 <div class="field-label">Арабский текст</div>
-<p class="dua-arabic">اللَّهُمَّ أَعِذْهُ مِنْ عَذَابِ الْقَبْرِ<br><br>اللَّهُمَّ اجْعَلْهُ فَرَطًا وَذُخْرًا لِوَالِدَيْهِ، وَشَفِيعًا مُجَابًا، اللَّهُمَّ ثَقِّلْ بِهِ مَوَازِينَهُمَا، وَأَعْظِمْ بِهِ أُجُورَهُمَا، وَأَلْحِقْهُ بِصَالِحِ الْمُؤْمِنِينَ، وَاجْعَلْهُ فِي كَفَالَةِ إِبْرَاهِيمَ، وَقِهِ بِرَحْمَتِكَ عَذَابَ الْجَحِيمِ، وَأَبْدِلْهُ دَارًا خَيْرًا مِنْ دَارِهِ، وَأَهْلًا خَيْرًا مِنْ أَهْلِهِ، اللَّهُمَّ اغْفِرْ لِأَسْلَافِنَا وَأَفْرَاطِنَا، وَمَنْ سَبَقَنَا بِالْإِيمَانِ</p>
+<p class="dua-arabic">اللَّهُمَّ أَعِذْهُ مِنْ عَذَابِ الْقَبْرِ<br/><br/>اللَّهُمَّ اجْعَلْهُ فَرَطًا وَذُخْرًا لِوَالِدَيْهِ، وَشَفِيعًا مُجَابًا، اللَّهُمَّ ثَقِّلْ بِهِ مَوَازِينَهُمَا، وَأَعْظِمْ بِهِ أُجُورَهُمَا، وَأَلْحِقْهُ بِصَالِحِ الْمُؤْمِنِينَ، وَاجْعَلْهُ فِي كَفَالَةِ إِبْرَاهِيمَ، وَقِهِ بِرَحْمَتِكَ عَذَابَ الْجَحِيمِ، وَأَبْدِلْهُ دَارًا خَيْرًا مِنْ دَارِهِ، وَأَهْلًا خَيْرًا مِنْ أَهْلِهِ، اللَّهُمَّ اغْفِرْ لِأَسْلَافِنَا وَأَفْرَاطِنَا، وَمَنْ سَبَقَنَا بِالْإِيمَانِ</p>
 <div class="badges"><span class="badge">Ребёнок</span><span class="badge">Могила</span><span class="badge">Утешение</span></div>
 </div>
 </details>
@@ -7222,11 +7211,11 @@ html.light-mode body .fortress-search-status{
 <button aria-label="Сохранить это место" class="dua-mini-action" data-dua-action="save" data-dua-id="condolence-expression-dua" type="button"><span aria-hidden="true" class="mini-icon"><svg viewbox="0 0 24 24"><path d="M6 4.5A2.5 2.5 0 0 1 8.5 2h7A2.5 2.5 0 0 1 18 4.5V22l-6-3.4L6 22V4.5z"></path></svg></span><span>Сохранить</span></button>
 </div>
 <div class="field-label">Перевод</div>
-<p class="dua-meaning">Поистине, Аллаху принадлежит и то, что Он забрал, и то, что Он даровал, и для всего определил Он свой срок... Так пусть же она проявляет терпение и безропотно переносит утрату в надежде на награду Аллаха.<br><br>Кроме того, будет хорошо, если, выражая соболезнование, человек скажет:<br><br>«Да сделает Аллах великой твою награду, и да пошлёт тебе прекрасное утешение, и да простит Он того, кто у тебя умер».</p>
+<p class="dua-meaning">Поистине, Аллаху принадлежит и то, что Он забрал, и то, что Он даровал, и для всего определил Он свой срок... Так пусть же она проявляет терпение и безропотно переносит утрату в надежде на награду Аллаха.<br/><br/>Кроме того, будет хорошо, если, выражая соболезнование, человек скажет:<br/><br/>«Да сделает Аллах великой твою награду, и да пошлёт тебе прекрасное утешение, и да простит Он того, кто у тебя умер».</p>
 <div class="field-label">Транскрипция</div>
-<p class="dua-translit">Инна ли-Лляхи ма ахаза ва ля-ху ма а‘та, ва куллю шай’ин ‘инда-ху би-аджалин мусамма... Фа-ль-тасбир ва-ль-тахтасиб.<br><br>А‘зама Ллаху аджра-ка ва ахсана ‘аза’а-ка ва гафара ли-маййити-ка.</p>
+<p class="dua-translit">Инна ли-Лляхи ма ахаза ва ля-ху ма а‘та, ва куллю шай’ин ‘инда-ху би-аджалин мусамма... Фа-ль-тасбир ва-ль-тахтасиб.<br/><br/>А‘зама Ллаху аджра-ка ва ахсана ‘аза’а-ка ва гафара ли-маййити-ка.</p>
 <div class="field-label">Арабский текст</div>
-<p class="dua-arabic">إِنَّ لِلَّهِ مَا أَخَذَ، وَلَهُ مَا أَعْطَى، وَكُلُّ شَيْءٍ عِنْدَهُ بِأَجَلٍ مُسَمًّى، فَلْتَصْبِرْ وَلْتَحْتَسِبْ<br><br>أَعْظَمَ اللَّهُ أَجْرَكَ، وَأَحْسَنَ عَزَاءَكَ، وَغَفَرَ لِمَيِّتِكَ</p>
+<p class="dua-arabic">إِنَّ لِلَّهِ مَا أَخَذَ، وَلَهُ مَا أَعْطَى، وَكُلُّ شَيْءٍ عِنْدَهُ بِأَجَلٍ مُسَمًّى، فَلْتَصْبِرْ وَلْتَحْتَسِبْ<br/><br/>أَعْظَمَ اللَّهُ أَجْرَكَ، وَأَحْسَنَ عَزَاءَكَ، وَغَفَرَ لِمَيِّتِكَ</p>
 <div class="badges"><span class="badge">Соболезнование</span><span class="badge">Терпение</span></div>
 </div>
 </details>
@@ -7605,9 +7594,9 @@ html.light-mode body .fortress-search-status{
 <summary class="dua-head"><div class="dua-meta"><div class="dua-title">При входе на рынок</div></div><div class="dua-arrow">▾</div></summary>
 <div class="dua-body">
 <div class="dua-item-actions" data-dua-actions-for="entering-market-dua">
-<button aria-label="Добавить в избранное" class="dua-mini-action" data-dua-action="favorite" data-dua-id="entering-market-dua" type="button"><span aria-hidden="true" class="mini-icon"><svg viewBox="0 0 24 24"><path d="M12 3.8l2.35 4.76 5.25.76-3.8 3.7.9 5.23L12 15.78 7.3 18.25l.9-5.23-3.8-3.7 5.25-.76L12 3.8z"></path></svg></span><span>Избранное</span></button>
-<button aria-label="Поделиться этим дуа" class="dua-mini-action" data-dua-action="share" data-dua-id="entering-market-dua" type="button"><span aria-hidden="true" class="mini-icon"><svg viewBox="0 0 24 24"><path d="M18 8a3 3 0 1 0-2.83-4H15a3 3 0 0 0 .18 1.02L8.9 8.66A3 3 0 1 0 9 15.34l6.28 3.64A3 3 0 1 0 16 17.3l-6.28-3.64a3.1 3.1 0 0 0 0-3.32l6.28-3.64A3 3 0 0 0 18 8z"></path></svg></span><span>Поделиться</span></button>
-<button aria-label="Сохранить это место" class="dua-mini-action" data-dua-action="save" data-dua-id="entering-market-dua" type="button"><span aria-hidden="true" class="mini-icon"><svg viewBox="0 0 24 24"><path d="M6 4.5A2.5 2.5 0 0 1 8.5 2h7A2.5 2.5 0 0 1 18 4.5V22l-6-3.4L6 22V4.5z"></path></svg></span><span>Сохранить</span></button>
+<button aria-label="Добавить в избранное" class="dua-mini-action" data-dua-action="favorite" data-dua-id="entering-market-dua" type="button"><span aria-hidden="true" class="mini-icon"><svg viewbox="0 0 24 24"><path d="M12 3.8l2.35 4.76 5.25.76-3.8 3.7.9 5.23L12 15.78 7.3 18.25l.9-5.23-3.8-3.7 5.25-.76L12 3.8z"></path></svg></span><span>Избранное</span></button>
+<button aria-label="Поделиться этим дуа" class="dua-mini-action" data-dua-action="share" data-dua-id="entering-market-dua" type="button"><span aria-hidden="true" class="mini-icon"><svg viewbox="0 0 24 24"><path d="M18 8a3 3 0 1 0-2.83-4H15a3 3 0 0 0 .18 1.02L8.9 8.66A3 3 0 1 0 9 15.34l6.28 3.64A3 3 0 1 0 16 17.3l-6.28-3.64a3.1 3.1 0 0 0 0-3.32l6.28-3.64A3 3 0 0 0 18 8z"></path></svg></span><span>Поделиться</span></button>
+<button aria-label="Сохранить это место" class="dua-mini-action" data-dua-action="save" data-dua-id="entering-market-dua" type="button"><span aria-hidden="true" class="mini-icon"><svg viewbox="0 0 24 24"><path d="M6 4.5A2.5 2.5 0 0 1 8.5 2h7A2.5 2.5 0 0 1 18 4.5V22l-6-3.4L6 22V4.5z"></path></svg></span><span>Сохранить</span></button>
 </div>
 <div class="field-label">Смысл</div>
 <p class="dua-meaning">Нет бога, кроме одного лишь Аллаха, у Которого нет сотоварища; Ему принадлежит власть и Ему — хвала. Он оживляет и умерщвляет, а Сам Он — Живой, Который не умрёт; в деснице Его благо, и Он всё может.</p>
@@ -7622,9 +7611,9 @@ html.light-mode body .fortress-search-status{
 <summary class="dua-head"><div class="dua-meta"><div class="dua-title">Если верховое животное споткнётся</div></div><div class="dua-arrow">▾</div></summary>
 <div class="dua-body">
 <div class="dua-item-actions" data-dua-actions-for="riding-animal-stumbles-dua">
-<button aria-label="Добавить в избранное" class="dua-mini-action" data-dua-action="favorite" data-dua-id="riding-animal-stumbles-dua" type="button"><span aria-hidden="true" class="mini-icon"><svg viewBox="0 0 24 24"><path d="M12 3.8l2.35 4.76 5.25.76-3.8 3.7.9 5.23L12 15.78 7.3 18.25l.9-5.23-3.8-3.7 5.25-.76L12 3.8z"></path></svg></span><span>Избранное</span></button>
-<button aria-label="Поделиться этим дуа" class="dua-mini-action" data-dua-action="share" data-dua-id="riding-animal-stumbles-dua" type="button"><span aria-hidden="true" class="mini-icon"><svg viewBox="0 0 24 24"><path d="M18 8a3 3 0 1 0-2.83-4H15a3 3 0 0 0 .18 1.02L8.9 8.66A3 3 0 1 0 9 15.34l6.28 3.64A3 3 0 1 0 16 17.3l-6.28-3.64a3.1 3.1 0 0 0 0-3.32l6.28-3.64A3 3 0 0 0 18 8z"></path></svg></span><span>Поделиться</span></button>
-<button aria-label="Сохранить это место" class="dua-mini-action" data-dua-action="save" data-dua-id="riding-animal-stumbles-dua" type="button"><span aria-hidden="true" class="mini-icon"><svg viewBox="0 0 24 24"><path d="M6 4.5A2.5 2.5 0 0 1 8.5 2h7A2.5 2.5 0 0 1 18 4.5V22l-6-3.4L6 22V4.5z"></path></svg></span><span>Сохранить</span></button>
+<button aria-label="Добавить в избранное" class="dua-mini-action" data-dua-action="favorite" data-dua-id="riding-animal-stumbles-dua" type="button"><span aria-hidden="true" class="mini-icon"><svg viewbox="0 0 24 24"><path d="M12 3.8l2.35 4.76 5.25.76-3.8 3.7.9 5.23L12 15.78 7.3 18.25l.9-5.23-3.8-3.7 5.25-.76L12 3.8z"></path></svg></span><span>Избранное</span></button>
+<button aria-label="Поделиться этим дуа" class="dua-mini-action" data-dua-action="share" data-dua-id="riding-animal-stumbles-dua" type="button"><span aria-hidden="true" class="mini-icon"><svg viewbox="0 0 24 24"><path d="M18 8a3 3 0 1 0-2.83-4H15a3 3 0 0 0 .18 1.02L8.9 8.66A3 3 0 1 0 9 15.34l6.28 3.64A3 3 0 1 0 16 17.3l-6.28-3.64a3.1 3.1 0 0 0 0-3.32l6.28-3.64A3 3 0 0 0 18 8z"></path></svg></span><span>Поделиться</span></button>
+<button aria-label="Сохранить это место" class="dua-mini-action" data-dua-action="save" data-dua-id="riding-animal-stumbles-dua" type="button"><span aria-hidden="true" class="mini-icon"><svg viewbox="0 0 24 24"><path d="M6 4.5A2.5 2.5 0 0 1 8.5 2h7A2.5 2.5 0 0 1 18 4.5V22l-6-3.4L6 22V4.5z"></path></svg></span><span>Сохранить</span></button>
 </div>
 <div class="field-label">Смысл</div>
 <p class="dua-meaning">С именем Аллаха!</p>
@@ -7639,9 +7628,9 @@ html.light-mode body .fortress-search-status{
 <summary class="dua-head"><div class="dua-meta"><div class="dua-title">За остающихся (путнику)</div></div><div class="dua-arrow">▾</div></summary>
 <div class="dua-body">
 <div class="dua-item-actions" data-dua-actions-for="traveler-leaving-people-dua">
-<button aria-label="Добавить в избранное" class="dua-mini-action" data-dua-action="favorite" data-dua-id="traveler-leaving-people-dua" type="button"><span aria-hidden="true" class="mini-icon"><svg viewBox="0 0 24 24"><path d="M12 3.8l2.35 4.76 5.25.76-3.8 3.7.9 5.23L12 15.78 7.3 18.25l.9-5.23-3.8-3.7 5.25-.76L12 3.8z"></path></svg></span><span>Избранное</span></button>
-<button aria-label="Поделиться этим дуа" class="dua-mini-action" data-dua-action="share" data-dua-id="traveler-leaving-people-dua" type="button"><span aria-hidden="true" class="mini-icon"><svg viewBox="0 0 24 24"><path d="M18 8a3 3 0 1 0-2.83-4H15a3 3 0 0 0 .18 1.02L8.9 8.66A3 3 0 1 0 9 15.34l6.28 3.64A3 3 0 1 0 16 17.3l-6.28-3.64a3.1 3.1 0 0 0 0-3.32l6.28-3.64A3 3 0 0 0 18 8z"></path></svg></span><span>Поделиться</span></button>
-<button aria-label="Сохранить это место" class="dua-mini-action" data-dua-action="save" data-dua-id="traveler-leaving-people-dua" type="button"><span aria-hidden="true" class="mini-icon"><svg viewBox="0 0 24 24"><path d="M6 4.5A2.5 2.5 0 0 1 8.5 2h7A2.5 2.5 0 0 1 18 4.5V22l-6-3.4L6 22V4.5z"></path></svg></span><span>Сохранить</span></button>
+<button aria-label="Добавить в избранное" class="dua-mini-action" data-dua-action="favorite" data-dua-id="traveler-leaving-people-dua" type="button"><span aria-hidden="true" class="mini-icon"><svg viewbox="0 0 24 24"><path d="M12 3.8l2.35 4.76 5.25.76-3.8 3.7.9 5.23L12 15.78 7.3 18.25l.9-5.23-3.8-3.7 5.25-.76L12 3.8z"></path></svg></span><span>Избранное</span></button>
+<button aria-label="Поделиться этим дуа" class="dua-mini-action" data-dua-action="share" data-dua-id="traveler-leaving-people-dua" type="button"><span aria-hidden="true" class="mini-icon"><svg viewbox="0 0 24 24"><path d="M18 8a3 3 0 1 0-2.83-4H15a3 3 0 0 0 .18 1.02L8.9 8.66A3 3 0 1 0 9 15.34l6.28 3.64A3 3 0 1 0 16 17.3l-6.28-3.64a3.1 3.1 0 0 0 0-3.32l6.28-3.64A3 3 0 0 0 18 8z"></path></svg></span><span>Поделиться</span></button>
+<button aria-label="Сохранить это место" class="dua-mini-action" data-dua-action="save" data-dua-id="traveler-leaving-people-dua" type="button"><span aria-hidden="true" class="mini-icon"><svg viewbox="0 0 24 24"><path d="M6 4.5A2.5 2.5 0 0 1 8.5 2h7A2.5 2.5 0 0 1 18 4.5V22l-6-3.4L6 22V4.5z"></path></svg></span><span>Сохранить</span></button>
 </div>
 <div class="field-label">Смысл</div>
 <p class="dua-meaning">Вверяю вас Аллаху, у Которого не пропадает отданное Ему на хранение.</p>
@@ -7659,9 +7648,9 @@ html.light-mode body .fortress-search-status{
 <summary class="dua-head"><div class="dua-meta"><div class="dua-title">Дуа 1</div></div><div class="dua-arrow">▾</div></summary>
 <div class="dua-body">
 <div class="dua-item-actions" data-dua-actions-for="resident-dua-1">
-<button aria-label="Добавить в избранное" class="dua-mini-action" data-dua-action="favorite" data-dua-id="resident-dua-1" type="button"><span aria-hidden="true" class="mini-icon"><svg viewBox="0 0 24 24"><path d="M12 3.8l2.35 4.76 5.25.76-3.8 3.7.9 5.23L12 15.78 7.3 18.25l.9-5.23-3.8-3.7 5.25-.76L12 3.8z"></path></svg></span><span>Избранное</span></button>
-<button aria-label="Поделиться этим дуа" class="dua-mini-action" data-dua-action="share" data-dua-id="resident-dua-1" type="button"><span aria-hidden="true" class="mini-icon"><svg viewBox="0 0 24 24"><path d="M18 8a3 3 0 1 0-2.83-4H15a3 3 0 0 0 .18 1.02L8.9 8.66A3 3 0 1 0 9 15.34l6.28 3.64A3 3 0 1 0 16 17.3l-6.28-3.64a3.1 3.1 0 0 0 0-3.32l6.28-3.64A3 3 0 0 0 18 8z"></path></svg></span><span>Поделиться</span></button>
-<button aria-label="Сохранить это место" class="dua-mini-action" data-dua-action="save" data-dua-id="resident-dua-1" type="button"><span aria-hidden="true" class="mini-icon"><svg viewBox="0 0 24 24"><path d="M6 4.5A2.5 2.5 0 0 1 8.5 2h7A2.5 2.5 0 0 1 18 4.5V22l-6-3.4L6 22V4.5z"></path></svg></span><span>Сохранить</span></button>
+<button aria-label="Добавить в избранное" class="dua-mini-action" data-dua-action="favorite" data-dua-id="resident-dua-1" type="button"><span aria-hidden="true" class="mini-icon"><svg viewbox="0 0 24 24"><path d="M12 3.8l2.35 4.76 5.25.76-3.8 3.7.9 5.23L12 15.78 7.3 18.25l.9-5.23-3.8-3.7 5.25-.76L12 3.8z"></path></svg></span><span>Избранное</span></button>
+<button aria-label="Поделиться этим дуа" class="dua-mini-action" data-dua-action="share" data-dua-id="resident-dua-1" type="button"><span aria-hidden="true" class="mini-icon"><svg viewbox="0 0 24 24"><path d="M18 8a3 3 0 1 0-2.83-4H15a3 3 0 0 0 .18 1.02L8.9 8.66A3 3 0 1 0 9 15.34l6.28 3.64A3 3 0 1 0 16 17.3l-6.28-3.64a3.1 3.1 0 0 0 0-3.32l6.28-3.64A3 3 0 0 0 18 8z"></path></svg></span><span>Поделиться</span></button>
+<button aria-label="Сохранить это место" class="dua-mini-action" data-dua-action="save" data-dua-id="resident-dua-1" type="button"><span aria-hidden="true" class="mini-icon"><svg viewbox="0 0 24 24"><path d="M6 4.5A2.5 2.5 0 0 1 8.5 2h7A2.5 2.5 0 0 1 18 4.5V22l-6-3.4L6 22V4.5z"></path></svg></span><span>Сохранить</span></button>
 </div>
 <div class="field-label">Смысл</div>
 <p class="dua-meaning">Вверяю Аллаху твою религию, то, что отдано тебе на хранение, и исход твоего дела.</p>
@@ -7676,9 +7665,9 @@ html.light-mode body .fortress-search-status{
 <summary class="dua-head"><div class="dua-meta"><div class="dua-title">Дуа 2</div></div><div class="dua-arrow">▾</div></summary>
 <div class="dua-body">
 <div class="dua-item-actions" data-dua-actions-for="resident-dua-2">
-<button aria-label="Добавить в избранное" class="dua-mini-action" data-dua-action="favorite" data-dua-id="resident-dua-2" type="button"><span aria-hidden="true" class="mini-icon"><svg viewBox="0 0 24 24"><path d="M12 3.8l2.35 4.76 5.25.76-3.8 3.7.9 5.23L12 15.78 7.3 18.25l.9-5.23-3.8-3.7 5.25-.76L12 3.8z"></path></svg></span><span>Избранное</span></button>
-<button aria-label="Поделиться этим дуа" class="dua-mini-action" data-dua-action="share" data-dua-id="resident-dua-2" type="button"><span aria-hidden="true" class="mini-icon"><svg viewBox="0 0 24 24"><path d="M18 8a3 3 0 1 0-2.83-4H15a3 3 0 0 0 .18 1.02L8.9 8.66A3 3 0 1 0 9 15.34l6.28 3.64A3 3 0 1 0 16 17.3l-6.28-3.64a3.1 3.1 0 0 0 0-3.32l6.28-3.64A3 3 0 0 0 18 8z"></path></svg></span><span>Поделиться</span></button>
-<button aria-label="Сохранить это место" class="dua-mini-action" data-dua-action="save" data-dua-id="resident-dua-2" type="button"><span aria-hidden="true" class="mini-icon"><svg viewBox="0 0 24 24"><path d="M6 4.5A2.5 2.5 0 0 1 8.5 2h7A2.5 2.5 0 0 1 18 4.5V22l-6-3.4L6 22V4.5z"></path></svg></span><span>Сохранить</span></button>
+<button aria-label="Добавить в избранное" class="dua-mini-action" data-dua-action="favorite" data-dua-id="resident-dua-2" type="button"><span aria-hidden="true" class="mini-icon"><svg viewbox="0 0 24 24"><path d="M12 3.8l2.35 4.76 5.25.76-3.8 3.7.9 5.23L12 15.78 7.3 18.25l.9-5.23-3.8-3.7 5.25-.76L12 3.8z"></path></svg></span><span>Избранное</span></button>
+<button aria-label="Поделиться этим дуа" class="dua-mini-action" data-dua-action="share" data-dua-id="resident-dua-2" type="button"><span aria-hidden="true" class="mini-icon"><svg viewbox="0 0 24 24"><path d="M18 8a3 3 0 1 0-2.83-4H15a3 3 0 0 0 .18 1.02L8.9 8.66A3 3 0 1 0 9 15.34l6.28 3.64A3 3 0 1 0 16 17.3l-6.28-3.64a3.1 3.1 0 0 0 0-3.32l6.28-3.64A3 3 0 0 0 18 8z"></path></svg></span><span>Поделиться</span></button>
+<button aria-label="Сохранить это место" class="dua-mini-action" data-dua-action="save" data-dua-id="resident-dua-2" type="button"><span aria-hidden="true" class="mini-icon"><svg viewbox="0 0 24 24"><path d="M6 4.5A2.5 2.5 0 0 1 8.5 2h7A2.5 2.5 0 0 1 18 4.5V22l-6-3.4L6 22V4.5z"></path></svg></span><span>Сохранить</span></button>
 </div>
 <div class="field-label">Смысл</div>
 <p class="dua-meaning">Да наделит тебя Аллах благочестием, и да простит Он твой грех, и да облегчит Он для тебя обретение блага, где бы ты ни был.</p>
@@ -7695,9 +7684,9 @@ html.light-mode body .fortress-search-status{
 <summary class="dua-head"><div class="dua-meta"><div class="dua-title">Зикры в пути</div></div><div class="dua-arrow">▾</div></summary>
 <div class="dua-body">
 <div class="dua-item-actions" data-dua-actions-for="travel-dhikr-dua">
-<button aria-label="Добавить в избранное" class="dua-mini-action" data-dua-action="favorite" data-dua-id="travel-dhikr-dua" type="button"><span aria-hidden="true" class="mini-icon"><svg viewBox="0 0 24 24"><path d="M12 3.8l2.35 4.76 5.25.76-3.8 3.7.9 5.23L12 15.78 7.3 18.25l.9-5.23-3.8-3.7 5.25-.76L12 3.8z"></path></svg></span><span>Избранное</span></button>
-<button aria-label="Поделиться этим дуа" class="dua-mini-action" data-dua-action="share" data-dua-id="travel-dhikr-dua" type="button"><span aria-hidden="true" class="mini-icon"><svg viewBox="0 0 24 24"><path d="M18 8a3 3 0 1 0-2.83-4H15a3 3 0 0 0 .18 1.02L8.9 8.66A3 3 0 1 0 9 15.34l6.28 3.64A3 3 0 1 0 16 17.3l-6.28-3.64a3.1 3.1 0 0 0 0-3.32l6.28-3.64A3 3 0 0 0 18 8z"></path></svg></span><span>Поделиться</span></button>
-<button aria-label="Сохранить это место" class="dua-mini-action" data-dua-action="save" data-dua-id="travel-dhikr-dua" type="button"><span aria-hidden="true" class="mini-icon"><svg viewBox="0 0 24 24"><path d="M6 4.5A2.5 2.5 0 0 1 8.5 2h7A2.5 2.5 0 0 1 18 4.5V22l-6-3.4L6 22V4.5z"></path></svg></span><span>Сохранить</span></button>
+<button aria-label="Добавить в избранное" class="dua-mini-action" data-dua-action="favorite" data-dua-id="travel-dhikr-dua" type="button"><span aria-hidden="true" class="mini-icon"><svg viewbox="0 0 24 24"><path d="M12 3.8l2.35 4.76 5.25.76-3.8 3.7.9 5.23L12 15.78 7.3 18.25l.9-5.23-3.8-3.7 5.25-.76L12 3.8z"></path></svg></span><span>Избранное</span></button>
+<button aria-label="Поделиться этим дуа" class="dua-mini-action" data-dua-action="share" data-dua-id="travel-dhikr-dua" type="button"><span aria-hidden="true" class="mini-icon"><svg viewbox="0 0 24 24"><path d="M18 8a3 3 0 1 0-2.83-4H15a3 3 0 0 0 .18 1.02L8.9 8.66A3 3 0 1 0 9 15.34l6.28 3.64A3 3 0 1 0 16 17.3l-6.28-3.64a3.1 3.1 0 0 0 0-3.32l6.28-3.64A3 3 0 0 0 18 8z"></path></svg></span><span>Поделиться</span></button>
+<button aria-label="Сохранить это место" class="dua-mini-action" data-dua-action="save" data-dua-id="travel-dhikr-dua" type="button"><span aria-hidden="true" class="mini-icon"><svg viewbox="0 0 24 24"><path d="M6 4.5A2.5 2.5 0 0 1 8.5 2h7A2.5 2.5 0 0 1 18 4.5V22l-6-3.4L6 22V4.5z"></path></svg></span><span>Сохранить</span></button>
 </div>
 <div class="field-label">Смысл</div>
 <p class="dua-meaning">Передают, что Джабир (да будет доволен им Аллах) сказал: «Поднимаясь на возвышенности, мы произносили слова “Аллах велик”, а когда спускались в низины, говорили: “Пречист Аллах”».</p>
@@ -7708,9 +7697,9 @@ html.light-mode body .fortress-search-status{
 <summary class="dua-head"><div class="dua-meta"><div class="dua-title">Путнику перед рассветом</div></div><div class="dua-arrow">▾</div></summary>
 <div class="dua-body">
 <div class="dua-item-actions" data-dua-actions-for="traveler-before-dawn-dua">
-<button aria-label="Добавить в избранное" class="dua-mini-action" data-dua-action="favorite" data-dua-id="traveler-before-dawn-dua" type="button"><span aria-hidden="true" class="mini-icon"><svg viewBox="0 0 24 24"><path d="M12 3.8l2.35 4.76 5.25.76-3.8 3.7.9 5.23L12 15.78 7.3 18.25l.9-5.23-3.8-3.7 5.25-.76L12 3.8z"></path></svg></span><span>Избранное</span></button>
-<button aria-label="Поделиться этим дуа" class="dua-mini-action" data-dua-action="share" data-dua-id="traveler-before-dawn-dua" type="button"><span aria-hidden="true" class="mini-icon"><svg viewBox="0 0 24 24"><path d="M18 8a3 3 0 1 0-2.83-4H15a3 3 0 0 0 .18 1.02L8.9 8.66A3 3 0 1 0 9 15.34l6.28 3.64A3 3 0 1 0 16 17.3l-6.28-3.64a3.1 3.1 0 0 0 0-3.32l6.28-3.64A3 3 0 0 0 18 8z"></path></svg></span><span>Поделиться</span></button>
-<button aria-label="Сохранить это место" class="dua-mini-action" data-dua-action="save" data-dua-id="traveler-before-dawn-dua" type="button"><span aria-hidden="true" class="mini-icon"><svg viewBox="0 0 24 24"><path d="M6 4.5A2.5 2.5 0 0 1 8.5 2h7A2.5 2.5 0 0 1 18 4.5V22l-6-3.4L6 22V4.5z"></path></svg></span><span>Сохранить</span></button>
+<button aria-label="Добавить в избранное" class="dua-mini-action" data-dua-action="favorite" data-dua-id="traveler-before-dawn-dua" type="button"><span aria-hidden="true" class="mini-icon"><svg viewbox="0 0 24 24"><path d="M12 3.8l2.35 4.76 5.25.76-3.8 3.7.9 5.23L12 15.78 7.3 18.25l.9-5.23-3.8-3.7 5.25-.76L12 3.8z"></path></svg></span><span>Избранное</span></button>
+<button aria-label="Поделиться этим дуа" class="dua-mini-action" data-dua-action="share" data-dua-id="traveler-before-dawn-dua" type="button"><span aria-hidden="true" class="mini-icon"><svg viewbox="0 0 24 24"><path d="M18 8a3 3 0 1 0-2.83-4H15a3 3 0 0 0 .18 1.02L8.9 8.66A3 3 0 1 0 9 15.34l6.28 3.64A3 3 0 1 0 16 17.3l-6.28-3.64a3.1 3.1 0 0 0 0-3.32l6.28-3.64A3 3 0 0 0 18 8z"></path></svg></span><span>Поделиться</span></button>
+<button aria-label="Сохранить это место" class="dua-mini-action" data-dua-action="save" data-dua-id="traveler-before-dawn-dua" type="button"><span aria-hidden="true" class="mini-icon"><svg viewbox="0 0 24 24"><path d="M6 4.5A2.5 2.5 0 0 1 8.5 2h7A2.5 2.5 0 0 1 18 4.5V22l-6-3.4L6 22V4.5z"></path></svg></span><span>Сохранить</span></button>
 </div>
 <div class="field-label">Смысл</div>
 <p class="dua-meaning">Да передаст другим слышащий эти слова, что мы воздаём хвалу Аллаху и что испытание Его прекрасно. Господь наш, не покидай нас и окажи нам милость. Прибегаю к защите Аллаха от Огня!</p>
@@ -7746,9 +7735,9 @@ html.light-mode body .fortress-search-status{
 <div class="dua-arrow">▾</div>
 </summary>
 <div class="dua-body"><div class="dua-item-actions" data-dua-actions-for="rooster-donkey-sound-added-1">
-<button aria-label="Добавить в избранное" class="dua-mini-action" data-dua-action="favorite" data-dua-id="rooster-donkey-sound-added-1" type="button"><span aria-hidden="true" class="mini-icon"><svg viewBox="0 0 24 24"><path d="M12 3.8l2.35 4.76 5.25.76-3.8 3.7.9 5.23L12 15.78 7.3 18.25l.9-5.23-3.8-3.7 5.25-.76L12 3.8z"></path></svg></span><span>Избранное</span></button>
-<button aria-label="Поделиться этим дуа" class="dua-mini-action" data-dua-action="share" data-dua-id="rooster-donkey-sound-added-1" type="button"><span aria-hidden="true" class="mini-icon"><svg viewBox="0 0 24 24"><path d="M18 8a3 3 0 1 0-2.83-4H15a3 3 0 0 0 .18 1.02L8.9 8.66A3 3 0 1 0 9 15.34l6.28 3.64A3 3 0 1 0 16 17.3l-6.28-3.64a3.1 3.1 0 0 0 0-3.32l6.28-3.64A3 3 0 0 0 18 8z"></path></svg></span><span>Поделиться</span></button>
-<button aria-label="Сохранить это место" class="dua-mini-action" data-dua-action="save" data-dua-id="rooster-donkey-sound-added-1" type="button"><span aria-hidden="true" class="mini-icon"><svg viewBox="0 0 24 24"><path d="M6 4.5A2.5 2.5 0 0 1 8.5 2h7A2.5 2.5 0 0 1 18 4.5V22l-6-3.4L6 22V4.5z"></path></svg></span><span>Сохранить</span></button>
+<button aria-label="Добавить в избранное" class="dua-mini-action" data-dua-action="favorite" data-dua-id="rooster-donkey-sound-added-1" type="button"><span aria-hidden="true" class="mini-icon"><svg viewbox="0 0 24 24"><path d="M12 3.8l2.35 4.76 5.25.76-3.8 3.7.9 5.23L12 15.78 7.3 18.25l.9-5.23-3.8-3.7 5.25-.76L12 3.8z"></path></svg></span><span>Избранное</span></button>
+<button aria-label="Поделиться этим дуа" class="dua-mini-action" data-dua-action="share" data-dua-id="rooster-donkey-sound-added-1" type="button"><span aria-hidden="true" class="mini-icon"><svg viewbox="0 0 24 24"><path d="M18 8a3 3 0 1 0-2.83-4H15a3 3 0 0 0 .18 1.02L8.9 8.66A3 3 0 1 0 9 15.34l6.28 3.64A3 3 0 1 0 16 17.3l-6.28-3.64a3.1 3.1 0 0 0 0-3.32l6.28-3.64A3 3 0 0 0 18 8z"></path></svg></span><span>Поделиться</span></button>
+<button aria-label="Сохранить это место" class="dua-mini-action" data-dua-action="save" data-dua-id="rooster-donkey-sound-added-1" type="button"><span aria-hidden="true" class="mini-icon"><svg viewbox="0 0 24 24"><path d="M6 4.5A2.5 2.5 0 0 1 8.5 2h7A2.5 2.5 0 0 1 18 4.5V22l-6-3.4L6 22V4.5z"></path></svg></span><span>Сохранить</span></button>
 </div>
 <div class="field-label">Перевод</div>
 <p class="dua-meaning">Передают, что Пророк (салля Ллаху ‘алейхи ва саллям) сказал: «Если услышите крик петуха, молите Аллаха оказать вам милость, ибо, поистине, это значит, что петух увидел ангела. Если же вы услышите рёв осла, обращайтесь к Аллаху с мольбой о защите от шайтана, ибо, поистине, это значит, что осёл увидел шайтана».</p>
@@ -7770,9 +7759,9 @@ html.light-mode body .fortress-search-status{
 <div class="dua-arrow">▾</div>
 </summary>
 <div class="dua-body"><div class="dua-item-actions" data-dua-actions-for="dog-barking-added-1">
-<button aria-label="Добавить в избранное" class="dua-mini-action" data-dua-action="favorite" data-dua-id="dog-barking-added-1" type="button"><span aria-hidden="true" class="mini-icon"><svg viewBox="0 0 24 24"><path d="M12 3.8l2.35 4.76 5.25.76-3.8 3.7.9 5.23L12 15.78 7.3 18.25l.9-5.23-3.8-3.7 5.25-.76L12 3.8z"></path></svg></span><span>Избранное</span></button>
-<button aria-label="Поделиться этим дуа" class="dua-mini-action" data-dua-action="share" data-dua-id="dog-barking-added-1" type="button"><span aria-hidden="true" class="mini-icon"><svg viewBox="0 0 24 24"><path d="M18 8a3 3 0 1 0-2.83-4H15a3 3 0 0 0 .18 1.02L8.9 8.66A3 3 0 1 0 9 15.34l6.28 3.64A3 3 0 1 0 16 17.3l-6.28-3.64a3.1 3.1 0 0 0 0-3.32l6.28-3.64A3 3 0 0 0 18 8z"></path></svg></span><span>Поделиться</span></button>
-<button aria-label="Сохранить это место" class="dua-mini-action" data-dua-action="save" data-dua-id="dog-barking-added-1" type="button"><span aria-hidden="true" class="mini-icon"><svg viewBox="0 0 24 24"><path d="M6 4.5A2.5 2.5 0 0 1 8.5 2h7A2.5 2.5 0 0 1 18 4.5V22l-6-3.4L6 22V4.5z"></path></svg></span><span>Сохранить</span></button>
+<button aria-label="Добавить в избранное" class="dua-mini-action" data-dua-action="favorite" data-dua-id="dog-barking-added-1" type="button"><span aria-hidden="true" class="mini-icon"><svg viewbox="0 0 24 24"><path d="M12 3.8l2.35 4.76 5.25.76-3.8 3.7.9 5.23L12 15.78 7.3 18.25l.9-5.23-3.8-3.7 5.25-.76L12 3.8z"></path></svg></span><span>Избранное</span></button>
+<button aria-label="Поделиться этим дуа" class="dua-mini-action" data-dua-action="share" data-dua-id="dog-barking-added-1" type="button"><span aria-hidden="true" class="mini-icon"><svg viewbox="0 0 24 24"><path d="M18 8a3 3 0 1 0-2.83-4H15a3 3 0 0 0 .18 1.02L8.9 8.66A3 3 0 1 0 9 15.34l6.28 3.64A3 3 0 1 0 16 17.3l-6.28-3.64a3.1 3.1 0 0 0 0-3.32l6.28-3.64A3 3 0 0 0 18 8z"></path></svg></span><span>Поделиться</span></button>
+<button aria-label="Сохранить это место" class="dua-mini-action" data-dua-action="save" data-dua-id="dog-barking-added-1" type="button"><span aria-hidden="true" class="mini-icon"><svg viewbox="0 0 24 24"><path d="M6 4.5A2.5 2.5 0 0 1 8.5 2h7A2.5 2.5 0 0 1 18 4.5V22l-6-3.4L6 22V4.5z"></path></svg></span><span>Сохранить</span></button>
 </div>
 <div class="field-label">Перевод</div>
 <p class="dua-meaning">Передают, что Посланник Аллаха (салля Ллаху ‘алейхи ва саллям) сказал: «Если услышите ночью собачий лай или ослиный рёв, молите Аллаха о защите, ибо, поистине, собаки и ослы видят то, чего не видите вы».</p>
@@ -7795,9 +7784,9 @@ html.light-mode body .fortress-search-status{
 </summary>
 <div class="dua-body">
 <div class="dua-item-actions" data-dua-actions-for="talbiyah-ihram-added-1">
-<button aria-label="Добавить в избранное" class="dua-mini-action" data-dua-action="favorite" data-dua-id="talbiyah-ihram-added-1" type="button"><span aria-hidden="true" class="mini-icon"><svg viewBox="0 0 24 24"><path d="M12 3.8l2.35 4.76 5.25.76-3.8 3.7.9 5.23L12 15.78 7.3 18.25l.9-5.23-3.8-3.7 5.25-.76L12 3.8z"></path></svg></span><span>Избранное</span></button>
-<button aria-label="Поделиться этим дуа" class="dua-mini-action" data-dua-action="share" data-dua-id="talbiyah-ihram-added-1" type="button"><span aria-hidden="true" class="mini-icon"><svg viewBox="0 0 24 24"><path d="M18 8a3 3 0 1 0-2.83-4H15a3 3 0 0 0 .18 1.02L8.9 8.66A3 3 0 1 0 9 15.34l6.28 3.64A3 3 0 1 0 16 17.3l-6.28-3.64a3.1 3.1 0 0 0 0-3.32l6.28-3.64A3 3 0 0 0 18 8z"></path></svg></span><span>Поделиться</span></button>
-<button aria-label="Сохранить это место" class="dua-mini-action" data-dua-action="save" data-dua-id="talbiyah-ihram-added-1" type="button"><span aria-hidden="true" class="mini-icon"><svg viewBox="0 0 24 24"><path d="M6 4.5A2.5 2.5 0 0 1 8.5 2h7A2.5 2.5 0 0 1 18 4.5V22l-6-3.4L6 22V4.5z"></path></svg></span><span>Сохранить</span></button>
+<button aria-label="Добавить в избранное" class="dua-mini-action" data-dua-action="favorite" data-dua-id="talbiyah-ihram-added-1" type="button"><span aria-hidden="true" class="mini-icon"><svg viewbox="0 0 24 24"><path d="M12 3.8l2.35 4.76 5.25.76-3.8 3.7.9 5.23L12 15.78 7.3 18.25l.9-5.23-3.8-3.7 5.25-.76L12 3.8z"></path></svg></span><span>Избранное</span></button>
+<button aria-label="Поделиться этим дуа" class="dua-mini-action" data-dua-action="share" data-dua-id="talbiyah-ihram-added-1" type="button"><span aria-hidden="true" class="mini-icon"><svg viewbox="0 0 24 24"><path d="M18 8a3 3 0 1 0-2.83-4H15a3 3 0 0 0 .18 1.02L8.9 8.66A3 3 0 1 0 9 15.34l6.28 3.64A3 3 0 1 0 16 17.3l-6.28-3.64a3.1 3.1 0 0 0 0-3.32l6.28-3.64A3 3 0 0 0 18 8z"></path></svg></span><span>Поделиться</span></button>
+<button aria-label="Сохранить это место" class="dua-mini-action" data-dua-action="save" data-dua-id="talbiyah-ihram-added-1" type="button"><span aria-hidden="true" class="mini-icon"><svg viewbox="0 0 24 24"><path d="M6 4.5A2.5 2.5 0 0 1 8.5 2h7A2.5 2.5 0 0 1 18 4.5V22l-6-3.4L6 22V4.5z"></path></svg></span><span>Сохранить</span></button>
 </div>
 <div class="field-label">Перевод</div>
 <p class="dua-meaning">Вот я перед Тобой, о Аллах, вот я перед Тобой, вот я перед Тобой, нет у Тебя сотоварища, вот я перед Тобой; хвала Тебе, поистине, милость и владычество принадлежат Тебе, и нет у Тебя сотоварища.</p>
@@ -7818,9 +7807,9 @@ html.light-mode body .fortress-search-status{
 </summary>
 <div class="dua-body">
 <div class="dua-item-actions" data-dua-actions-for="black-stone-added-1">
-<button aria-label="Добавить в избранное" class="dua-mini-action" data-dua-action="favorite" data-dua-id="black-stone-added-1" type="button"><span aria-hidden="true" class="mini-icon"><svg viewBox="0 0 24 24"><path d="M12 3.8l2.35 4.76 5.25.76-3.8 3.7.9 5.23L12 15.78 7.3 18.25l.9-5.23-3.8-3.7 5.25-.76L12 3.8z"></path></svg></span><span>Избранное</span></button>
-<button aria-label="Поделиться этим дуа" class="dua-mini-action" data-dua-action="share" data-dua-id="black-stone-added-1" type="button"><span aria-hidden="true" class="mini-icon"><svg viewBox="0 0 24 24"><path d="M18 8a3 3 0 1 0-2.83-4H15a3 3 0 0 0 .18 1.02L8.9 8.66A3 3 0 1 0 9 15.34l6.28 3.64A3 3 0 1 0 16 17.3l-6.28-3.64a3.1 3.1 0 0 0 0-3.32l6.28-3.64A3 3 0 0 0 18 8z"></path></svg></span><span>Поделиться</span></button>
-<button aria-label="Сохранить это место" class="dua-mini-action" data-dua-action="save" data-dua-id="black-stone-added-1" type="button"><span aria-hidden="true" class="mini-icon"><svg viewBox="0 0 24 24"><path d="M6 4.5A2.5 2.5 0 0 1 8.5 2h7A2.5 2.5 0 0 1 18 4.5V22l-6-3.4L6 22V4.5z"></path></svg></span><span>Сохранить</span></button>
+<button aria-label="Добавить в избранное" class="dua-mini-action" data-dua-action="favorite" data-dua-id="black-stone-added-1" type="button"><span aria-hidden="true" class="mini-icon"><svg viewbox="0 0 24 24"><path d="M12 3.8l2.35 4.76 5.25.76-3.8 3.7.9 5.23L12 15.78 7.3 18.25l.9-5.23-3.8-3.7 5.25-.76L12 3.8z"></path></svg></span><span>Избранное</span></button>
+<button aria-label="Поделиться этим дуа" class="dua-mini-action" data-dua-action="share" data-dua-id="black-stone-added-1" type="button"><span aria-hidden="true" class="mini-icon"><svg viewbox="0 0 24 24"><path d="M18 8a3 3 0 1 0-2.83-4H15a3 3 0 0 0 .18 1.02L8.9 8.66A3 3 0 1 0 9 15.34l6.28 3.64A3 3 0 1 0 16 17.3l-6.28-3.64a3.1 3.1 0 0 0 0-3.32l6.28-3.64A3 3 0 0 0 18 8z"></path></svg></span><span>Поделиться</span></button>
+<button aria-label="Сохранить это место" class="dua-mini-action" data-dua-action="save" data-dua-id="black-stone-added-1" type="button"><span aria-hidden="true" class="mini-icon"><svg viewbox="0 0 24 24"><path d="M6 4.5A2.5 2.5 0 0 1 8.5 2h7A2.5 2.5 0 0 1 18 4.5V22l-6-3.4L6 22V4.5z"></path></svg></span><span>Сохранить</span></button>
 </div>
 <div class="field-label">Перевод</div>
 <p class="dua-meaning">Передают, что, совершая обряд обхода Каабы во время прощального паломничества, Пророк (салля Ллаху ‘алейхи ва саллям) сидел верхом на верблюде. По достижении того угла, в который вделан Чёрный камень, Пророк (салля Ллаху ‘алейхи ва саллям) каждый раз протягивал к нему руку, держа в ней то, что у него было, и произносил слова «Аллаху акбар».</p>
@@ -7837,9 +7826,9 @@ html.light-mode body .fortress-search-status{
 </summary>
 <div class="dua-body">
 <div class="dua-item-actions" data-dua-actions-for="yemeni-corner-kaaba-added-1">
-<button aria-label="Добавить в избранное" class="dua-mini-action" data-dua-action="favorite" data-dua-id="yemeni-corner-kaaba-added-1" type="button"><span aria-hidden="true" class="mini-icon"><svg viewBox="0 0 24 24"><path d="M12 3.8l2.35 4.76 5.25.76-3.8 3.7.9 5.23L12 15.78 7.3 18.25l.9-5.23-3.8-3.7 5.25-.76L12 3.8z"></path></svg></span><span>Избранное</span></button>
-<button aria-label="Поделиться этим дуа" class="dua-mini-action" data-dua-action="share" data-dua-id="yemeni-corner-kaaba-added-1" type="button"><span aria-hidden="true" class="mini-icon"><svg viewBox="0 0 24 24"><path d="M18 8a3 3 0 1 0-2.83-4H15a3 3 0 0 0 .18 1.02L8.9 8.66A3 3 0 1 0 9 15.34l6.28 3.64A3 3 0 1 0 16 17.3l-6.28-3.64a3.1 3.1 0 0 0 0-3.32l6.28-3.64A3 3 0 0 0 18 8z"></path></svg></span><span>Поделиться</span></button>
-<button aria-label="Сохранить это место" class="dua-mini-action" data-dua-action="save" data-dua-id="yemeni-corner-kaaba-added-1" type="button"><span aria-hidden="true" class="mini-icon"><svg viewBox="0 0 24 24"><path d="M6 4.5A2.5 2.5 0 0 1 8.5 2h7A2.5 2.5 0 0 1 18 4.5V22l-6-3.4L6 22V4.5z"></path></svg></span><span>Сохранить</span></button>
+<button aria-label="Добавить в избранное" class="dua-mini-action" data-dua-action="favorite" data-dua-id="yemeni-corner-kaaba-added-1" type="button"><span aria-hidden="true" class="mini-icon"><svg viewbox="0 0 24 24"><path d="M12 3.8l2.35 4.76 5.25.76-3.8 3.7.9 5.23L12 15.78 7.3 18.25l.9-5.23-3.8-3.7 5.25-.76L12 3.8z"></path></svg></span><span>Избранное</span></button>
+<button aria-label="Поделиться этим дуа" class="dua-mini-action" data-dua-action="share" data-dua-id="yemeni-corner-kaaba-added-1" type="button"><span aria-hidden="true" class="mini-icon"><svg viewbox="0 0 24 24"><path d="M18 8a3 3 0 1 0-2.83-4H15a3 3 0 0 0 .18 1.02L8.9 8.66A3 3 0 1 0 9 15.34l6.28 3.64A3 3 0 1 0 16 17.3l-6.28-3.64a3.1 3.1 0 0 0 0-3.32l6.28-3.64A3 3 0 0 0 18 8z"></path></svg></span><span>Поделиться</span></button>
+<button aria-label="Сохранить это место" class="dua-mini-action" data-dua-action="save" data-dua-id="yemeni-corner-kaaba-added-1" type="button"><span aria-hidden="true" class="mini-icon"><svg viewbox="0 0 24 24"><path d="M6 4.5A2.5 2.5 0 0 1 8.5 2h7A2.5 2.5 0 0 1 18 4.5V22l-6-3.4L6 22V4.5z"></path></svg></span><span>Сохранить</span></button>
 </div>
 <div class="field-label">Перевод</div>
 <p class="dua-meaning">Господь наш! Даруй нам в мире этом добро и в мире вечном добро и защити нас от мук Огня.</p>
@@ -7860,9 +7849,9 @@ html.light-mode body .fortress-search-status{
 </summary>
 <div class="dua-body">
 <div class="dua-item-actions" data-dua-actions-for="safa-marwa-added-1">
-<button aria-label="Добавить в избранное" class="dua-mini-action" data-dua-action="favorite" data-dua-id="safa-marwa-added-1" type="button"><span aria-hidden="true" class="mini-icon"><svg viewBox="0 0 24 24"><path d="M12 3.8l2.35 4.76 5.25.76-3.8 3.7.9 5.23L12 15.78 7.3 18.25l.9-5.23-3.8-3.7 5.25-.76L12 3.8z"></path></svg></span><span>Избранное</span></button>
-<button aria-label="Поделиться этим дуа" class="dua-mini-action" data-dua-action="share" data-dua-id="safa-marwa-added-1" type="button"><span aria-hidden="true" class="mini-icon"><svg viewBox="0 0 24 24"><path d="M18 8a3 3 0 1 0-2.83-4H15a3 3 0 0 0 .18 1.02L8.9 8.66A3 3 0 1 0 9 15.34l6.28 3.64A3 3 0 1 0 16 17.3l-6.28-3.64a3.1 3.1 0 0 0 0-3.32l6.28-3.64A3 3 0 0 0 18 8z"></path></svg></span><span>Поделиться</span></button>
-<button aria-label="Сохранить это место" class="dua-mini-action" data-dua-action="save" data-dua-id="safa-marwa-added-1" type="button"><span aria-hidden="true" class="mini-icon"><svg viewBox="0 0 24 24"><path d="M6 4.5A2.5 2.5 0 0 1 8.5 2h7A2.5 2.5 0 0 1 18 4.5V22l-6-3.4L6 22V4.5z"></path></svg></span><span>Сохранить</span></button>
+<button aria-label="Добавить в избранное" class="dua-mini-action" data-dua-action="favorite" data-dua-id="safa-marwa-added-1" type="button"><span aria-hidden="true" class="mini-icon"><svg viewbox="0 0 24 24"><path d="M12 3.8l2.35 4.76 5.25.76-3.8 3.7.9 5.23L12 15.78 7.3 18.25l.9-5.23-3.8-3.7 5.25-.76L12 3.8z"></path></svg></span><span>Избранное</span></button>
+<button aria-label="Поделиться этим дуа" class="dua-mini-action" data-dua-action="share" data-dua-id="safa-marwa-added-1" type="button"><span aria-hidden="true" class="mini-icon"><svg viewbox="0 0 24 24"><path d="M18 8a3 3 0 1 0-2.83-4H15a3 3 0 0 0 .18 1.02L8.9 8.66A3 3 0 1 0 9 15.34l6.28 3.64A3 3 0 1 0 16 17.3l-6.28-3.64a3.1 3.1 0 0 0 0-3.32l6.28-3.64A3 3 0 0 0 18 8z"></path></svg></span><span>Поделиться</span></button>
+<button aria-label="Сохранить это место" class="dua-mini-action" data-dua-action="save" data-dua-id="safa-marwa-added-1" type="button"><span aria-hidden="true" class="mini-icon"><svg viewbox="0 0 24 24"><path d="M6 4.5A2.5 2.5 0 0 1 8.5 2h7A2.5 2.5 0 0 1 18 4.5V22l-6-3.4L6 22V4.5z"></path></svg></span><span>Сохранить</span></button>
 </div>
 <div class="field-label">Перевод</div>
 <p class="dua-meaning">Передают, что, приблизившись к холму ас-Сафа, Пророк (салля Ллаху ‘алейхи ва саллям) прочитал часть аята, где сказано: «Поистине, ас-Сафа и аль-Марва — из [числа] обрядов Аллаха…» (2:158). Потом он сказал: «Начну с того, с чего начал Аллах», — и начал выполнять обряд ритуального бега с ас-Сафы. Поднявшись на этот холм и когда его взору открылась Кааба, он произнёс слова «Нет бога, кроме Аллаха» и «Аллах велик», а потом сказал: «Нет бога, кроме одного лишь Аллаха, у Которого нет сотоварища; Ему принадлежит власть, и Ему — хвала, Он всё может. Нет бога, кроме одного лишь Аллаха, который выполнил Своё обещание, помог Своему рабу и один разбил союзные племена». Он произнёс эти слова трижды и после каждого раза обращался к Аллаху с мольбами, а затем спустился вниз и быстро шагом направился к аль-Марве. Поднявшись на этот холм, Пророк (салля Ллаху ‘алейхи ва саллям) сделал то же, что делал на ас-Сафе.</p>
@@ -7883,9 +7872,9 @@ html.light-mode body .fortress-search-status{
 </summary>
 <div class="dua-body">
 <div class="dua-item-actions" data-dua-actions-for="arafat-standing-added-1">
-<button aria-label="Добавить в избранное" class="dua-mini-action" data-dua-action="favorite" data-dua-id="arafat-standing-added-1" type="button"><span aria-hidden="true" class="mini-icon"><svg viewBox="0 0 24 24"><path d="M12 3.8l2.35 4.76 5.25.76-3.8 3.7.9 5.23L12 15.78 7.3 18.25l.9-5.23-3.8-3.7 5.25-.76L12 3.8z"></path></svg></span><span>Избранное</span></button>
-<button aria-label="Поделиться этим дуа" class="dua-mini-action" data-dua-action="share" data-dua-id="arafat-standing-added-1" type="button"><span aria-hidden="true" class="mini-icon"><svg viewBox="0 0 24 24"><path d="M18 8a3 3 0 1 0-2.83-4H15a3 3 0 0 0 .18 1.02L8.9 8.66A3 3 0 1 0 9 15.34l6.28 3.64A3 3 0 1 0 16 17.3l-6.28-3.64a3.1 3.1 0 0 0 0-3.32l6.28-3.64A3 3 0 0 0 18 8z"></path></svg></span><span>Поделиться</span></button>
-<button aria-label="Сохранить это место" class="dua-mini-action" data-dua-action="save" data-dua-id="arafat-standing-added-1" type="button"><span aria-hidden="true" class="mini-icon"><svg viewBox="0 0 24 24"><path d="M6 4.5A2.5 2.5 0 0 1 8.5 2h7A2.5 2.5 0 0 1 18 4.5V22l-6-3.4L6 22V4.5z"></path></svg></span><span>Сохранить</span></button>
+<button aria-label="Добавить в избранное" class="dua-mini-action" data-dua-action="favorite" data-dua-id="arafat-standing-added-1" type="button"><span aria-hidden="true" class="mini-icon"><svg viewbox="0 0 24 24"><path d="M12 3.8l2.35 4.76 5.25.76-3.8 3.7.9 5.23L12 15.78 7.3 18.25l.9-5.23-3.8-3.7 5.25-.76L12 3.8z"></path></svg></span><span>Избранное</span></button>
+<button aria-label="Поделиться этим дуа" class="dua-mini-action" data-dua-action="share" data-dua-id="arafat-standing-added-1" type="button"><span aria-hidden="true" class="mini-icon"><svg viewbox="0 0 24 24"><path d="M18 8a3 3 0 1 0-2.83-4H15a3 3 0 0 0 .18 1.02L8.9 8.66A3 3 0 1 0 9 15.34l6.28 3.64A3 3 0 1 0 16 17.3l-6.28-3.64a3.1 3.1 0 0 0 0-3.32l6.28-3.64A3 3 0 0 0 18 8z"></path></svg></span><span>Поделиться</span></button>
+<button aria-label="Сохранить это место" class="dua-mini-action" data-dua-action="save" data-dua-id="arafat-standing-added-1" type="button"><span aria-hidden="true" class="mini-icon"><svg viewbox="0 0 24 24"><path d="M6 4.5A2.5 2.5 0 0 1 8.5 2h7A2.5 2.5 0 0 1 18 4.5V22l-6-3.4L6 22V4.5z"></path></svg></span><span>Сохранить</span></button>
 </div>
 <div class="field-label">Перевод</div>
 <p class="dua-meaning">Передают, что Пророк (салля Ллаху ‘алейхи ва саллям) сказал: «Лучшей мольбой является та, с которой обращаются к Аллаху в день стояния у ‘Арафата, а лучшим из того, что говорил я, как и другие пророки, жившие до меня, являются слова: “Нет бога, кроме одного лишь Аллаха, у Которого нет сотоварища; Ему принадлежит власть, Ему — хвала, и Он всё может”».</p>
@@ -7906,9 +7895,9 @@ html.light-mode body .fortress-search-status{
 </summary>
 <div class="dua-body">
 <div class="dua-item-actions" data-dua-actions-for="mashar-haram-added-1">
-<button aria-label="Добавить в избранное" class="dua-mini-action" data-dua-action="favorite" data-dua-id="mashar-haram-added-1" type="button"><span aria-hidden="true" class="mini-icon"><svg viewBox="0 0 24 24"><path d="M12 3.8l2.35 4.76 5.25.76-3.8 3.7.9 5.23L12 15.78 7.3 18.25l.9-5.23-3.8-3.7 5.25-.76L12 3.8z"></path></svg></span><span>Избранное</span></button>
-<button aria-label="Поделиться этим дуа" class="dua-mini-action" data-dua-action="share" data-dua-id="mashar-haram-added-1" type="button"><span aria-hidden="true" class="mini-icon"><svg viewBox="0 0 24 24"><path d="M18 8a3 3 0 1 0-2.83-4H15a3 3 0 0 0 .18 1.02L8.9 8.66A3 3 0 1 0 9 15.34l6.28 3.64A3 3 0 1 0 16 17.3l-6.28-3.64a3.1 3.1 0 0 0 0-3.32l6.28-3.64A3 3 0 0 0 18 8z"></path></svg></span><span>Поделиться</span></button>
-<button aria-label="Сохранить это место" class="dua-mini-action" data-dua-action="save" data-dua-id="mashar-haram-added-1" type="button"><span aria-hidden="true" class="mini-icon"><svg viewBox="0 0 24 24"><path d="M6 4.5A2.5 2.5 0 0 1 8.5 2h7A2.5 2.5 0 0 1 18 4.5V22l-6-3.4L6 22V4.5z"></path></svg></span><span>Сохранить</span></button>
+<button aria-label="Добавить в избранное" class="dua-mini-action" data-dua-action="favorite" data-dua-id="mashar-haram-added-1" type="button"><span aria-hidden="true" class="mini-icon"><svg viewbox="0 0 24 24"><path d="M12 3.8l2.35 4.76 5.25.76-3.8 3.7.9 5.23L12 15.78 7.3 18.25l.9-5.23-3.8-3.7 5.25-.76L12 3.8z"></path></svg></span><span>Избранное</span></button>
+<button aria-label="Поделиться этим дуа" class="dua-mini-action" data-dua-action="share" data-dua-id="mashar-haram-added-1" type="button"><span aria-hidden="true" class="mini-icon"><svg viewbox="0 0 24 24"><path d="M18 8a3 3 0 1 0-2.83-4H15a3 3 0 0 0 .18 1.02L8.9 8.66A3 3 0 1 0 9 15.34l6.28 3.64A3 3 0 1 0 16 17.3l-6.28-3.64a3.1 3.1 0 0 0 0-3.32l6.28-3.64A3 3 0 0 0 18 8z"></path></svg></span><span>Поделиться</span></button>
+<button aria-label="Сохранить это место" class="dua-mini-action" data-dua-action="save" data-dua-id="mashar-haram-added-1" type="button"><span aria-hidden="true" class="mini-icon"><svg viewbox="0 0 24 24"><path d="M6 4.5A2.5 2.5 0 0 1 8.5 2h7A2.5 2.5 0 0 1 18 4.5V22l-6-3.4L6 22V4.5z"></path></svg></span><span>Сохранить</span></button>
 </div>
 <div class="field-label">Перевод</div>
 <p class="dua-meaning">Передают, что Пророк (салля Ллаху ‘алейхи ва саллям) сел верхом на Касву и приехал к аль-Маш‘ар аль-Харам, где повернулся лицом к кибле, после чего обращался к Аллаху с мольбами и произносил слова «Аллах велик», «Нет бога, кроме Аллаха» и «Нет бога, кроме одного лишь Аллаха, у Которого нет сотоварища», пока не рассвело полностью, а потом двинулся в путь ещё до восхода солнца.</p>
@@ -7925,9 +7914,9 @@ html.light-mode body .fortress-search-status{
 </summary>
 <div class="dua-body">
 <div class="dua-item-actions" data-dua-actions-for="stoning-pillars-added-1">
-<button aria-label="Добавить в избранное" class="dua-mini-action" data-dua-action="favorite" data-dua-id="stoning-pillars-added-1" type="button"><span aria-hidden="true" class="mini-icon"><svg viewBox="0 0 24 24"><path d="M12 3.8l2.35 4.76 5.25.76-3.8 3.7.9 5.23L12 15.78 7.3 18.25l.9-5.23-3.8-3.7 5.25-.76L12 3.8z"></path></svg></span><span>Избранное</span></button>
-<button aria-label="Поделиться этим дуа" class="dua-mini-action" data-dua-action="share" data-dua-id="stoning-pillars-added-1" type="button"><span aria-hidden="true" class="mini-icon"><svg viewBox="0 0 24 24"><path d="M18 8a3 3 0 1 0-2.83-4H15a3 3 0 0 0 .18 1.02L8.9 8.66A3 3 0 1 0 9 15.34l6.28 3.64A3 3 0 1 0 16 17.3l-6.28-3.64a3.1 3.1 0 0 0 0-3.32l6.28-3.64A3 3 0 0 0 18 8z"></path></svg></span><span>Поделиться</span></button>
-<button aria-label="Сохранить это место" class="dua-mini-action" data-dua-action="save" data-dua-id="stoning-pillars-added-1" type="button"><span aria-hidden="true" class="mini-icon"><svg viewBox="0 0 24 24"><path d="M6 4.5A2.5 2.5 0 0 1 8.5 2h7A2.5 2.5 0 0 1 18 4.5V22l-6-3.4L6 22V4.5z"></path></svg></span><span>Сохранить</span></button>
+<button aria-label="Добавить в избранное" class="dua-mini-action" data-dua-action="favorite" data-dua-id="stoning-pillars-added-1" type="button"><span aria-hidden="true" class="mini-icon"><svg viewbox="0 0 24 24"><path d="M12 3.8l2.35 4.76 5.25.76-3.8 3.7.9 5.23L12 15.78 7.3 18.25l.9-5.23-3.8-3.7 5.25-.76L12 3.8z"></path></svg></span><span>Избранное</span></button>
+<button aria-label="Поделиться этим дуа" class="dua-mini-action" data-dua-action="share" data-dua-id="stoning-pillars-added-1" type="button"><span aria-hidden="true" class="mini-icon"><svg viewbox="0 0 24 24"><path d="M18 8a3 3 0 1 0-2.83-4H15a3 3 0 0 0 .18 1.02L8.9 8.66A3 3 0 1 0 9 15.34l6.28 3.64A3 3 0 1 0 16 17.3l-6.28-3.64a3.1 3.1 0 0 0 0-3.32l6.28-3.64A3 3 0 0 0 18 8z"></path></svg></span><span>Поделиться</span></button>
+<button aria-label="Сохранить это место" class="dua-mini-action" data-dua-action="save" data-dua-id="stoning-pillars-added-1" type="button"><span aria-hidden="true" class="mini-icon"><svg viewbox="0 0 24 24"><path d="M6 4.5A2.5 2.5 0 0 1 8.5 2h7A2.5 2.5 0 0 1 18 4.5V22l-6-3.4L6 22V4.5z"></path></svg></span><span>Сохранить</span></button>
 </div>
 <div class="field-label">Перевод</div>
 <p class="dua-meaning">Передают, что, бросая камешек в каждый из трёх столбов, Пророк (салля Ллаху ‘алейхи ва саллям) произносил слова «Аллаху акбар», после чего проходил вперёд, останавливался, воздевая руки к небу, и взывал к Аллаху, обратившись лицом к кибле. Он поступил так, бросив камешки в первый и второй столбы. Что же касается большого столба, то, бросая в него камешки, он также всякий раз произносил слова «Аллаху акбар», но потом покинул это место и не стал стоять у этого столба.</p>
@@ -7944,11 +7933,10 @@ html.light-mode body .fortress-search-status{
 </summary>
 <div class="dua-body">
 <div class="dua-item-actions" data-dua-actions-for="sacrifice-added-1">
-<button aria-label="Добавить в избранное" class="dua-mini-action" data-dua-action="favorite" data-dua-id="sacrifice-added-1" type="button"><span aria-hidden="true" class="mini-icon"><svg viewBox="0 0 24 24"><path d="M12 3.8l2.35 4.76 5.25.76-3.8 3.7.9 5.23L12 15.78 7.3 18.25l.9-5.23-3.8-3.7 5.25-.76L12 3.8z"></path></svg></span><span>Избранное</span></button>
-<button aria-label="Поделиться этим дуа" class="dua-mini-action" data-dua-action="share" data-dua-id="sacrifice-added-1" type="button"><span aria-hidden="true" class="mini-icon"><svg viewBox="0 0 24 24"><path d="M18 8a3 3 0 1 0-2.83-4H15a3 3 0 0 0 .18 1.02L8.9 8.66A3 3 0 1 0 9 15.34l6.28 3.64A3 3 0 1 0 16 17.3l-6.28-3.64a3.1 3.1 0 0 0 0-3.32l6.28-3.64A3 3 0 0 0 18 8z"></path></svg></span><span>Поделиться</span></button>
-<button aria-label="Сохранить это место" class="dua-mini-action" data-dua-action="save" data-dua-id="sacrifice-added-1" type="button"><span aria-hidden="true" class="mini-icon"><svg viewBox="0 0 24 24"><path d="M6 4.5A2.5 2.5 0 0 1 8.5 2h7A2.5 2.5 0 0 1 18 4.5V22l-6-3.4L6 22V4.5z"></path></svg></span><span>Сохранить</span></button>
+<button aria-label="Добавить в избранное" class="dua-mini-action" data-dua-action="favorite" data-dua-id="sacrifice-added-1" type="button"><span aria-hidden="true" class="mini-icon"><svg viewbox="0 0 24 24"><path d="M12 3.8l2.35 4.76 5.25.76-3.8 3.7.9 5.23L12 15.78 7.3 18.25l.9-5.23-3.8-3.7 5.25-.76L12 3.8z"></path></svg></span><span>Избранное</span></button>
+<button aria-label="Поделиться этим дуа" class="dua-mini-action" data-dua-action="share" data-dua-id="sacrifice-added-1" type="button"><span aria-hidden="true" class="mini-icon"><svg viewbox="0 0 24 24"><path d="M18 8a3 3 0 1 0-2.83-4H15a3 3 0 0 0 .18 1.02L8.9 8.66A3 3 0 1 0 9 15.34l6.28 3.64A3 3 0 1 0 16 17.3l-6.28-3.64a3.1 3.1 0 0 0 0-3.32l6.28-3.64A3 3 0 0 0 18 8z"></path></svg></span><span>Поделиться</span></button>
+<button aria-label="Сохранить это место" class="dua-mini-action" data-dua-action="save" data-dua-id="sacrifice-added-1" type="button"><span aria-hidden="true" class="mini-icon"><svg viewbox="0 0 24 24"><path d="M6 4.5A2.5 2.5 0 0 1 8.5 2h7A2.5 2.5 0 0 1 18 4.5V22l-6-3.4L6 22V4.5z"></path></svg></span><span>Сохранить</span></button>
 </div>
-
 <div class="field-label">Перевод</div>
 <p class="dua-meaning">С именем Аллаха, Аллах велик! {О Аллах! От Тебя и Тебе}. О Аллах! Прими же [это] от меня.</p>
 <div class="field-label">Арабский текст</div>
@@ -8139,7 +8127,6 @@ html.light-mode body .fortress-search-status{
   }, true);
 })();
 </script>
-
 <script id="fortress-actions-script">
 (function(){
   const FAVORITES_KEY="barakaway_fortress_ru_favorite_duas";const GLOBAL_FAVORITES_KEY="barakaway_favorites_v1";const PROGRESS_KEY="barakaway_fortress_ru_saved_dua";const READING_KEY="barakaway_fortress_ru_reading";let toastTimer=null;
@@ -8503,7 +8490,6 @@ html.light-mode body .fortress-search-status{
 </div>
 </div>
 <button aria-label="Выйти из режима чтения" class="fortress-reading-exit" id="fortress-reading-exit" type="button">× Выйти</button>
-
 <script id="fortress-search-script">
 (function(){
   'use strict';
@@ -8670,7 +8656,5 @@ html.light-mode body .fortress-search-status{
   ready(init);
 })();
 </script>
-
-
 </body>
 </html>
