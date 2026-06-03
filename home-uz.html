@@ -11429,6 +11429,85 @@ window.addEventListener('load', function(){ setTimeout(controlProVisibility, 120
 })();
 </script>
 
+
+<style id="bw-uz-pro-strip-stability-fix">
+@media(max-width:700px){
+  body #dailyMicroProUpsell,
+  body .bw-micro-pro-upsell,
+  body .today-hub #dailyMicroProUpsell,
+  body .today-hub .bw-micro-pro-upsell{
+    display:flex !important;
+    visibility:visible !important;
+    opacity:1 !important;
+    pointer-events:auto !important;
+    transform:none !important;
+    filter:none !important;
+    height:auto !important;
+    min-height:52px !important;
+    max-height:none !important;
+    overflow:visible !important;
+  }
+
+  body #dailyMicroProUpsell:not(.is-visible),
+  body .bw-micro-pro-upsell:not(.is-visible){
+    display:flex !important;
+    visibility:visible !important;
+    opacity:1 !important;
+  }
+
+  body #dailyMicroProUpsell.is-hidden,
+  body .bw-micro-pro-upsell.is-hidden{
+    display:flex !important;
+    visibility:visible !important;
+    opacity:1 !important;
+  }
+}
+</style>
+<script id="bw-uz-pro-strip-stability-fix-js">
+(function(){
+  function keepProStripVisible(){
+    var nodes = document.querySelectorAll('#dailyMicroProUpsell,.bw-micro-pro-upsell');
+    nodes.forEach(function(node){
+      node.classList.add('is-visible');
+      node.classList.remove('is-hidden');
+      node.style.display = 'flex';
+      node.style.visibility = 'visible';
+      node.style.opacity = '1';
+      node.style.pointerEvents = 'auto';
+      node.style.transform = 'none';
+      node.style.filter = 'none';
+      node.style.height = 'auto';
+      node.style.maxHeight = 'none';
+    });
+  }
+
+  if(document.readyState === 'loading'){
+    document.addEventListener('DOMContentLoaded', keepProStripVisible, {once:true});
+  }else{
+    keepProStripVisible();
+  }
+
+  window.addEventListener('pageshow', keepProStripVisible);
+  document.addEventListener('visibilitychange', keepProStripVisible, true);
+  document.addEventListener('click', function(){
+    setTimeout(keepProStripVisible, 0);
+    setTimeout(keepProStripVisible, 80);
+    setTimeout(keepProStripVisible, 240);
+  }, true);
+
+  var observer = new MutationObserver(keepProStripVisible);
+  setTimeout(function(){
+    observer.observe(document.documentElement, {
+      subtree:true,
+      childList:true,
+      attributes:true,
+      attributeFilter:['class','style']
+    });
+    keepProStripVisible();
+  }, 0);
+})();
+</script>
+
 </body>
 </html>
 
