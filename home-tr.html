@@ -11645,3 +11645,229 @@ window.addEventListener('load', function(){ setTimeout(controlProVisibility, 120
   }
 }
 </style>
+
+
+<!-- TR Allah-name card final RU-layout correction -->
+<style id="bw-tr-allah-ru-layout-final-v3">
+@media(max-width:700px){
+  .today-hub .today-hub-grid > #allahNameCounterCard{
+    grid-column:auto !important;
+    width:auto !important;
+    min-height:138px !important;
+    height:auto !important;
+    padding:14px !important;
+    border-radius:22px !important;
+    position:relative !important;
+    overflow:hidden !important;
+    display:flex !important;
+    flex-direction:column !important;
+    justify-content:space-between !important;
+    gap:8px !important;
+  }
+
+  .today-hub #allahNameCounterCard .today-action-top{
+    position:static !important;
+    display:flex !important;
+    align-items:flex-start !important;
+    justify-content:space-between !important;
+    gap:10px !important;
+    padding:0 !important;
+    min-height:40px !important;
+  }
+
+  .today-hub #allahNameCounterCard .today-action-icon{
+    position:relative !important;
+    z-index:2 !important;
+    width:40px !important;
+    height:40px !important;
+    min-width:40px !important;
+    border-radius:16px !important;
+  }
+
+  .today-hub #allahNameCounterCard .today-action-title{
+    display:block !important;
+    position:relative !important;
+    z-index:3 !important;
+    margin:0 0 34px 0 !important;
+    font-size:11px !important;
+    line-height:1.05 !important;
+    font-weight:850 !important;
+    letter-spacing:-0.015em !important;
+    white-space:nowrap !important;
+    overflow:visible !important;
+    text-overflow:clip !important;
+    max-width:100% !important;
+  }
+
+  .today-hub #allahNameCounterCard #allahNameCounterValue{
+    position:absolute !important;
+    left:22px !important;
+    right:auto !important;
+    top:auto !important;
+    bottom:15px !important;
+    z-index:4 !important;
+    transform:none !important;
+    display:inline-flex !important;
+    visibility:visible !important;
+    opacity:1 !important;
+    align-items:center !important;
+    justify-content:center !important;
+    box-sizing:border-box !important;
+    min-width:78px !important;
+    width:auto !important;
+    height:auto !important;
+    min-height:30px !important;
+    padding:6px 12px !important;
+    border-radius:999px !important;
+    font-size:18px !important;
+    line-height:1 !important;
+    font-weight:950 !important;
+    letter-spacing:-0.02em !important;
+    color:#f1d889 !important;
+    background:rgba(215,192,122,.16) !important;
+    border:1px solid rgba(215,192,122,.28) !important;
+    box-shadow:inset 0 1px 0 rgba(255,255,255,.05), 0 4px 12px rgba(0,0,0,.16) !important;
+    text-shadow:none !important;
+    pointer-events:none !important;
+  }
+
+  html.light-mode .today-hub #allahNameCounterCard #allahNameCounterValue{
+    color:#7b5b13 !important;
+    background:#fff7e4 !important;
+    border-color:rgba(141,107,22,.20) !important;
+  }
+
+  .today-hub #allahNameCounterCard #allahNameCounterValue::before,
+  .today-hub #allahNameCounterCard #allahNameCounterValue::after,
+  .today-hub #allahNameCounterCard.bw-final-done #allahNameCounterValue::before,
+  .today-hub #allahNameCounterCard.bw-task-done #allahNameCounterValue::before,
+  .today-hub #allahNameCounterCard.task-done #allahNameCounterValue::before,
+  .today-hub #allahNameCounterCard.goal-done #allahNameCounterValue::before{
+    content:none !important;
+    display:none !important;
+  }
+
+  .today-hub #allahNameCounterCard .today-action-text,
+  .today-hub #allahNameCounterCard .today-counter-track,
+  .today-hub #allahNameCounterCard .bw-task-compact-meta[data-task-meta="name"]{
+    display:none !important;
+    visibility:hidden !important;
+    height:0 !important;
+    min-height:0 !important;
+    max-height:0 !important;
+    margin:0 !important;
+    padding:0 !important;
+    overflow:hidden !important;
+  }
+
+  .today-hub #allahNameCounterCard.bw-final-done #allahNameCounterValue,
+  .today-hub #allahNameCounterCard.bw-task-done #allahNameCounterValue,
+  .today-hub #allahNameCounterCard.task-done #allahNameCounterValue,
+  .today-hub #allahNameCounterCard.goal-done #allahNameCounterValue{
+    font-size:18px !important;
+  }
+
+  .today-hub #allahNameCounterCard.bw-final-done .today-task-status,
+  .today-hub #allahNameCounterCard.bw-task-done .today-task-status,
+  .today-hub #allahNameCounterCard.task-done .today-task-status,
+  .today-hub #allahNameCounterCard.goal-done .today-task-status{
+    font-size:18px !important;
+  }
+
+  .bw-micro-pro-upsell.bw-tr-pro-stable-visible,
+  .bw-micro-pro-upsell.is-visible{
+    width:auto !important;
+    margin:0 12px 15px !important;
+    padding:13px 18px !important;
+    border-radius:18px !important;
+    min-height:44px !important;
+    align-items:center !important;
+    justify-content:space-between !important;
+    gap:12px !important;
+  }
+
+  .bw-micro-pro-title{
+    font-size:14px !important;
+    line-height:1.15 !important;
+    white-space:normal !important;
+    overflow:visible !important;
+    text-overflow:clip !important;
+  }
+}
+</style>
+<script id="bw-tr-allah-ru-layout-final-v3">
+(function(){
+  'use strict';
+
+  function todayKey(){
+    var d = new Date();
+    return d.getFullYear() + '-' + String(d.getMonth() + 1).padStart(2, '0') + '-' + String(d.getDate()).padStart(2, '0');
+  }
+
+  function normalize(value){
+    var n = parseInt(value, 10);
+    if(!Number.isFinite(n)) n = 0;
+    return Math.max(0, Math.min(100, n));
+  }
+
+  function readCounter(){
+    var lang = 'tr';
+    var day = todayKey();
+    var keys = [
+      'bw_allah_name_counter_persist_' + lang + '_' + day,
+      'barakaway_name_counter_' + lang + '_' + day,
+      'barakaway_name_counter_' + lang + '_v2_' + day,
+      'barakaway_name_counter_' + lang + '_v3_' + day,
+      'barakaway_name_counter_' + lang + '_final_' + day,
+      'barakaway_name_counter_' + day
+    ];
+    var max = 0;
+    try{
+      keys.forEach(function(key){
+        max = Math.max(max, normalize(localStorage.getItem(key)));
+      });
+      var doneKeys = [
+        'bw_final_done_v2_' + lang + '_' + day + '_name',
+        'bw_daily_done_v2_' + lang + '_' + day + '_name',
+        'barakaway_today_' + lang + '_' + day + '_name',
+        'barakaway_today_' + lang + '_v2_' + day + '_name',
+        'barakaway_today_' + lang + '_v3_' + day + '_name',
+        'barakaway_today_' + lang + '_final_' + day + '_name'
+      ];
+      if(doneKeys.some(function(key){ return localStorage.getItem(key) === '1'; })) max = 100;
+    }catch(e){}
+    return max;
+  }
+
+  function paint(){
+    var card = document.getElementById('allahNameCounterCard');
+    var value = document.getElementById('allahNameCounterValue');
+    var title = document.getElementById('allahNameBugün') || document.getElementById('allahNameToday');
+    if(!card || !value) return;
+
+    var n = readCounter();
+    value.textContent = n + '/100';
+    value.setAttribute('aria-label', n + '/100');
+
+    if(title && !String(title.textContent || '').trim()){
+      title.textContent = 'Allah’ın ismi';
+    }
+
+    var meta = card.querySelector('.bw-task-compact-meta[data-task-meta="name"]');
+    if(meta) meta.style.display = 'none';
+
+    var fill = document.getElementById('allahNameCounterFill');
+    if(fill) fill.style.width = n + '%';
+  }
+
+  if(document.readyState === 'loading'){
+    document.addEventListener('DOMContentLoaded', paint, {once:true});
+  }else{
+    paint();
+  }
+  window.addEventListener('pageshow', paint);
+  document.addEventListener('click', function(){ setTimeout(paint, 0); setTimeout(paint, 120); }, true);
+  document.addEventListener('pointerup', function(){ setTimeout(paint, 0); setTimeout(paint, 120); }, true);
+  setInterval(paint, 250);
+})();
+</script>
