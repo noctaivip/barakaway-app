@@ -6,7 +6,31 @@
 
 <html dir="rtl" lang="ur">
 <head>
-<script id="bw-micro-force-reset-v5">
+<script id="bw-ur-load-freeze-guard-v2">
+(function(){
+  'use strict';
+  if(window.__BW_UR_FREEZE_GUARD_V2__) return;
+  window.__BW_UR_FREEZE_GUARD_V2__ = true;
+  var NativeMO = window.MutationObserver || window.WebKitMutationObserver;
+  if(NativeMO){
+    window.MutationObserver = function(callback){
+      var pending = false;
+      var latest = [];
+      var obs = new NativeMO(function(mutations, observer){
+        latest = mutations || [];
+        if(pending) return;
+        pending = true;
+        setTimeout(function(){
+          pending = false;
+          try{ callback(latest, observer); }catch(e){ console.error('BW MutationObserver guarded:', e); }
+        }, 80);
+      });
+      return obs;
+    };
+    window.MutationObserver.prototype = NativeMO.prototype;
+  }
+})();
+</script><script id="bw-micro-force-reset-v5">
 (function(){
 var k='bw_micro_reset_v5_ur';
 if(localStorage.getItem(k)==='1') return;
@@ -15510,243 +15534,67 @@ html.light-mode #allahNameCounterValue{
   overflow:visible !important;
 }
 </style>
-<script id="bw-ur-allah-counter-no-flicker-fix-js">
+
+<script id="bw-ur-final-hard-stability-fix-v2">
 (function(){
   'use strict';
-
-  var LANG = 'ur';
-  var RAW_SET = Storage.prototype.setItem;
-  var RAW_GET = Storage.prototype.getItem;
-
-  function todayKey(){
-    var d = new Date();
-    return d.getFullYear() + '-' + String(d.getMonth()+1).padStart(2,'0') + '-' + String(d.getDate()).padStart(2,'0');
-  }
-
-  function rawGet(key){
-    try{return RAW_GET.call(localStorage, key);}catch(e){return null;}
-  }
-
-  function rawSet(key, value){
-    try{RAW_SET.call(localStorage, key, String(value));}catch(e){}
-  }
-
-  function normalize(v){
-    var n = parseInt(v, 10);
-    if(!Number.isFinite(n)) n = 0;
-    return Math.max(0, Math.min(100, n));
-  }
-
-  function countKeys(){
-    var t = todayKey();
-    var base = [
-      'bw_final_done_v2_' + LANG + '_' + t + '_name_count',
-      'bw_daily_done_v2_' + LANG + '_' + t + '_name_count',
-      'barakaway_today_' + LANG + '_' + t + '_name_count',
-      'barakaway_today_' + LANG + '_v2_' + t + '_name_count',
-      'barakaway_today_' + LANG + '_v3_' + t + '_name_count',
-      'barakaway_today_' + LANG + '_final_' + t + '_name_count',
-      'barakaway_name_counter_' + t,
-      'barakaway_name_counter_' + LANG + '_' + t,
-      'barakaway_name_counter_' + LANG + '_v2_' + t,
-      'barakaway_name_counter_' + LANG + '_v3_' + t,
-      'barakaway_name_counter_' + LANG + '_final_' + t,
-      'bw_allah_name_counter_persist_' + LANG + '_' + t
-    ];
-    var all = [];
-    base.forEach(function(k){
-      all.push(k);
-      all.push('bw_lang_' + LANG + '__' + k);
-    });
-    return all;
-  }
-
-  function doneKeys(){
-    var t = todayKey();
-    var base = [
-      'bw_final_done_v2_' + LANG + '_' + t + '_name',
-      'bw_daily_done_v2_' + LANG + '_' + t + '_name',
-      'barakaway_today_' + LANG + '_' + t + '_name',
-      'barakaway_today_' + LANG + '_v2_' + t + '_name',
-      'barakaway_today_' + LANG + '_v3_' + t + '_name',
-      'barakaway_today_' + LANG + '_final_' + t + '_name'
-    ];
-    var all = [];
-    base.forEach(function(k){
-      all.push(k);
-      all.push('bw_lang_' + LANG + '__' + k);
-    });
-    return all;
-  }
-
-  function readCount(){
-    var max = 0;
-    countKeys().forEach(function(k){
-      max = Math.max(max, normalize(rawGet(k)));
-    });
-    return max;
-  }
-
-  function writeCount(n){
-    var safe = normalize(n);
-    countKeys().forEach(function(k){ rawSet(k, safe); });
-    if(safe >= 100){
-      doneKeys().forEach(function(k){ rawSet(k, '1'); });
-    }else{
-      doneKeys().forEach(function(k){ rawSet(k, '0'); });
-    }
-    return safe;
-  }
-
-  function ensureMeta(card){
-    var meta = card.querySelector('.bw-task-compact-meta[data-task-meta="name"]');
-    if(!meta){
-      meta = document.createElement('div');
-      meta.className = 'bw-task-compact-meta';
-      meta.setAttribute('data-task-meta','name');
-      var title = card.querySelector('.today-action-title');
-      if(title && title.parentElement) title.parentElement.appendChild(meta);
-      else card.appendChild(meta);
-    }
-    return meta;
-  }
-
-  function paint(){
-    var card = document.getElementById('allahNameCounterCard');
-    if(!card) return;
-    var n = readCount();
-    var label = n >= 100 ? '✓' : (n + '/100');
-
-    var meta = ensureMeta(card);
-    meta.textContent = n + '/100';
-
-    var value = document.getElementById('allahNameCounterValue');
-    if(value) value.textContent = label;
-
-    var fill = document.getElementById('allahNameCounterFill');
-    if(fill) fill.style.width = n + '%';
-
-    card.classList.toggle('task-done', n >= 100);
-    card.classList.toggle('goal-done', n >= 100);
-    card.classList.toggle('bw-task-done', n >= 100);
-    card.classList.toggle('bw-final-done', n >= 100);
-    card.classList.toggle('goal-urgent', n < 100);
-    card.classList.toggle('task-urgent', n < 100);
-    card.setAttribute('aria-disabled', n >= 100 ? 'true' : 'false');
-  }
-
-  function increment(e){
-    var card = document.getElementById('allahNameCounterCard');
-    if(!card) return;
-    if(e && !card.contains(e.target)) return;
-
-    if(e){
-      e.preventDefault();
-      e.stopPropagation();
-      if(e.stopImmediatePropagation) e.stopImmediatePropagation();
-    }
-
-    var n = readCount();
-    if(n < 100) writeCount(n + 1);
-    paint();
-    setTimeout(paint, 30);
-    setTimeout(paint, 160);
-    setTimeout(paint, 420);
-  }
-
-  function bind(){
-    var old = document.getElementById('allahNameCounterCard');
-    if(!old || old.dataset.bwUrNoFlickerBound === '1') return;
-
-    var card = old.cloneNode(true);
-    card.dataset.bwUrNoFlickerBound = '1';
-    old.parentNode.replaceChild(card, old);
-
-    card.addEventListener('click', increment, true);
-    card.addEventListener('touchend', increment, {capture:true, passive:false});
-    paint();
-  }
-
-  window.__bwUrNameCounterPaint = paint;
-
-  if(document.readyState === 'loading'){
-    document.addEventListener('DOMContentLoaded', bind, {once:true});
-  }else{
-    bind();
-  }
-
-  window.addEventListener('pageshow', function(){ bind(); paint(); });
-  document.addEventListener('visibilitychange', paint, true);
-
-  var mo = new MutationObserver(function(){ paint(); });
-  setTimeout(function(){
-    var card = document.getElementById('allahNameCounterCard');
-    if(card) mo.observe(card, {childList:true, subtree:true, characterData:true, attributes:true});
-    paint();
-  }, 0);
-})();
-</script>
-<script id="bw-ur-freeze-and-pro-final-fix-v1">
-(function(){
-  'use strict';
-  var LANG = 'ur';
-  function todayKey(){ var d=new Date(); return d.getFullYear()+'-'+String(d.getMonth()+1).padStart(2,'0')+'-'+String(d.getDate()).padStart(2,'0'); }
-  function rawGet(k){ try{return localStorage.getItem(k);}catch(e){return null;} }
-  function rawSet(k,v){ try{localStorage.setItem(k,String(v));}catch(e){} }
-  function microDone(){
-    var t=todayKey();
-    var card=document.getElementById('dailyMicroKnowledgeCard');
-    var status=document.getElementById('dailyMicroKnowledgeStatus');
-    if(status && status.textContent && status.textContent.indexOf('✓')!==-1) return true;
-    if(card){
-      var cls=['bw-final-done','bw-task-done','task-done','micro-answered','done','completed','is-done'];
-      for(var i=0;i<cls.length;i++){ if(card.classList.contains(cls[i])) return true; }
-    }
-    var keys=[
-      'bw_final_done_v2_'+LANG+'_'+t+'_micro',
-      'bw_daily_done_v2_'+LANG+'_'+t+'_micro',
-      'barakaway_today_'+LANG+'_'+t+'_micro',
-      'barakaway_today_'+LANG+'_v2_'+t+'_micro',
-      'barakaway_today_'+LANG+'_v3_'+t+'_micro',
-      'barakaway_today_'+LANG+'_final_'+t+'_micro',
-      'barakaway_micro_answer_'+LANG+'_'+t,
-      'bw_lang_'+LANG+'__barakaway_micro_answer_'+LANG+'_'+t
-    ];
-    for(var j=0;j<keys.length;j++){ if(rawGet(keys[j])!==null) return true; }
-    return false;
+  var LANG='ur';
+  function day(){var d=new Date();return d.getFullYear()+'-'+String(d.getMonth()+1).padStart(2,'0')+'-'+String(d.getDate()).padStart(2,'0');}
+  function get(k){try{return localStorage.getItem(k);}catch(e){return null;}}
+  function set(k,v){try{localStorage.setItem(k,String(v));}catch(e){}}
+  function q(s,r){return (r||document).querySelector(s);}
+  function qa(s,r){return Array.prototype.slice.call((r||document).querySelectorAll(s));}
+  function isMicroDone(){
+    var t=day(), card=document.getElementById('dailyMicroKnowledgeCard'), st=document.getElementById('dailyMicroKnowledgeStatus');
+    if(st && /✓|تم|مکمل|done/i.test(st.textContent||'')) return true;
+    if(card && (card.classList.contains('task-done') || card.classList.contains('bw-task-done') || card.classList.contains('bw-final-done') || card.classList.contains('micro-answered') || card.getAttribute('aria-disabled')==='true')) return true;
+    var keys=['bw_final_done_v2_'+LANG+'_'+t+'_micro','bw_daily_done_v2_'+LANG+'_'+t+'_micro','barakaway_today_'+LANG+'_'+t+'_micro','barakaway_today_'+LANG+'_v2_'+t+'_micro','barakaway_today_'+LANG+'_v3_'+t+'_micro','barakaway_today_'+LANG+'_final_'+t+'_micro','barakaway_micro_answer_'+LANG+'_'+t,'bw_lang_'+LANG+'__barakaway_micro_answer_'+LANG+'_'+t];
+    return keys.some(function(k){return get(k)!==null && get(k)!=='0' && get(k)!=='false';});
   }
   function syncPro(){
-    var pro=document.getElementById('dailyMicroProUpsell') || document.querySelector('.bw-micro-pro-upsell');
+    var pro=document.getElementById('dailyMicroProUpsell') || q('.bw-micro-pro-upsell');
     if(!pro) return;
-    var show=microDone();
+    var show=isMicroDone();
     pro.classList.toggle('is-visible', show);
-    pro.style.display = show ? 'flex' : 'none';
-    pro.style.visibility = show ? 'visible' : 'hidden';
-    pro.style.opacity = show ? '1' : '0';
-    pro.style.pointerEvents = show ? 'auto' : 'none';
+    pro.style.cssText += show ? ';display:flex!important;visibility:visible!important;opacity:1!important;pointer-events:auto!important;' : ';display:none!important;visibility:hidden!important;opacity:0!important;pointer-events:none!important;';
+    pro.setAttribute('aria-hidden', show ? 'false':'true');
     pro.setAttribute('href','javascript:void(0)');
-    pro.setAttribute('aria-hidden', show ? 'false' : 'true');
   }
-  function syncTasks(){
-    var ids=['dailyArticleLink','currentAdhkarLink','dailyGoalCard','allahNameCounterCard','dailyMicroKnowledgeCard'];
-    ids.forEach(function(id){
-      var el=document.getElementById(id);
-      if(el) el.style.willChange='auto';
+  function fixLanguageButton(){
+    qa('a,button').forEach(function(el){
+      var txt=(el.textContent||'').trim().toLowerCase();
+      if(txt.indexOf('زبان')!==-1 || txt.indexOf('language')!==-1 || txt.indexOf('dil')!==-1){
+        if(!el.dataset.bwLangFixed){
+          el.dataset.bwLangFixed='1';
+          el.addEventListener('click',function(e){
+            var modal=document.getElementById('languageModal') || document.getElementById('language-modal') || q('.language-modal,.lang-modal,.language-panel');
+            var select=document.getElementById('siteLanguage') || document.getElementById('forceLanguageSelect') || document.getElementById('siteDil') || document.getElementById('forceDilSelect');
+            if(modal){e.preventDefault(); modal.classList.add('open','show','is-visible'); modal.style.display='flex'; modal.setAttribute('aria-hidden','false');}
+            else if(select){e.preventDefault(); select.style.display='block'; select.focus();}
+          }, true);
+        }
+      }
     });
-    syncPro();
   }
-  var originalSetItem = Storage.prototype.setItem;
-  Storage.prototype.setItem = function(key,value){
-    var r = originalSetItem.apply(this, arguments);
-    if(typeof key === 'string' && (key.indexOf('micro')!==-1 || key.indexOf('today')!==-1 || key.indexOf('pro')!==-1)){
-      setTimeout(syncTasks,0); setTimeout(syncTasks,120);
-    }
-    return r;
-  };
-  if(document.readyState==='loading') document.addEventListener('DOMContentLoaded', syncTasks, {once:true}); else syncTasks();
-  window.addEventListener('pageshow', syncTasks);
-  document.addEventListener('click', function(){ setTimeout(syncTasks,0); setTimeout(syncTasks,200); }, true);
-  setInterval(syncPro, 700);
+  function stableCounter(){
+    var card=document.getElementById('allahNameCounterCard'); if(!card || card.dataset.bwUrStableCounter==='1') return;
+    card.dataset.bwUrStableCounter='1';
+    card.addEventListener('click',function(e){
+      var t=day(), keys=['barakaway_name_counter_'+t,'barakaway_name_counter_'+LANG+'_'+t,'barakaway_name_counter_'+LANG+'_final_'+t,'bw_allah_name_counter_persist_'+LANG+'_'+t];
+      var n=0; keys.forEach(function(k){var v=parseInt(get(k)||'0',10); if(isFinite(v)) n=Math.max(n,v);});
+      n=Math.min(100,n+1); keys.forEach(function(k){set(k,n);});
+      var meta=q('.bw-task-compact-meta[data-task-meta="name"]',card); if(meta) meta.textContent=n+'/100';
+      var value=document.getElementById('allahNameCounterValue'); if(value) value.textContent=(n>=100?'✓':n+'/100');
+      var fill=document.getElementById('allahNameCounterFill'); if(fill) fill.style.width=n+'%';
+      if(n>=100){card.classList.add('task-done','bw-task-done','bw-final-done','goal-done');card.classList.remove('goal-urgent','task-urgent','bw-needs-pulse');card.setAttribute('aria-disabled','true');}
+      syncPro();
+    }, true);
+  }
+  function boot(){fixLanguageButton(); stableCounter(); syncPro();}
+  if(document.readyState==='loading') document.addEventListener('DOMContentLoaded', boot, {once:true}); else boot();
+  window.addEventListener('pageshow', boot);
+  document.addEventListener('click', function(){setTimeout(syncPro,120);}, true);
+  setTimeout(boot,600); setTimeout(boot,1600);
 })();
 </script></body>
 </html>
