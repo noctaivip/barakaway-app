@@ -4365,22 +4365,6 @@ body.bw-theme-desert-sand{--home-share-pulse:rgba(255,215,145,.96);--home-share-
 @media (prefers-reduced-motion: reduce){.home-prayer-share-btn,.home-prayer-share-btn::after{animation:none !important;}}
 </style>
 
-
-<style id="bw-task-title-mobile-fit-v1">
-@media(max-width:700px){
-  .today-hub .today-action-title{
-    font-size:11px !important;
-    line-height:1.05 !important;
-    font-weight:850 !important;
-    letter-spacing:-0.015em !important;
-    white-space:nowrap !important;
-    overflow:visible !important;
-    text-overflow:clip !important;
-    max-width:100% !important;
-  }
-}
-</style>
-
 </head>
 <body>
 
@@ -4507,10 +4491,10 @@ body.bw-theme-desert-sand{--home-share-pulse:rgba(255,215,145,.96);--home-share-
         <div class="today-action-text" id="currentAdhkarText">Күн тапсырмасы жүктелуде...</div>
       </div>
     </a>
-    <div class="today-action today-daily-task today-goal-action" id="dailyМақсатCard" role="button" tabindex="0" data-task-key="goal" aria-label="Күндік мақсат">
+    <div class="today-action today-daily-task today-goal-action" id="dailyGoalCard" role="button" tabindex="0" data-task-key="goal" aria-label="Күндік мақсат">
       <div class="today-action-top">
         <div class="today-action-icon">🎯</div>
-        <div class="today-action-arrow today-task-status" id="dailyМақсатStatus">•</div>
+        <div class="today-action-arrow today-task-status" id="dailyGoalStatus">•</div>
       </div>
       <div>
         <div class="today-action-title">Күндік мақсат</div>
@@ -4523,7 +4507,7 @@ body.bw-theme-desert-sand{--home-share-pulse:rgba(255,215,145,.96);--home-share-
         <div class="today-action-arrow today-task-status" id="allahNameCounterValue">0/100</div>
       </div>
       <div>
-        <div class="today-action-title" id="allahNameБүгін">Алла есімі</div>
+        <div class="today-action-title" id="allahNameToday">Алла есімі</div>
         <div class="today-action-text" id="allahNameMeaning">Бүгін осы есімнің мағынасын жаттаймыз.</div>
         <div class="today-counter-track"><div class="today-counter-fill" id="allahNameCounterFill"></div></div>
       </div>
@@ -4611,7 +4595,7 @@ body.bw-theme-desert-sand{--home-share-pulse:rgba(255,215,145,.96);--home-share-
       <button class="share-action share-more" type="button" data-share="more"><div class="share-icon">⋯</div><span>Тағы</span></button>
     </div>
     <div class="share-copy-msg" id="shareCopyMsg">Қосымша сілтемесі көшірілді.</div>
-    <button class="share-close" id="shareЖабуBtn" type="button">Жабу</button>
+    <button class="share-close" id="shareCloseBtn" type="button">Жабу</button>
   </div>
 </div>
 
@@ -4628,7 +4612,7 @@ body.bw-theme-desert-sand{--home-share-pulse:rgba(255,215,145,.96);--home-share-
       <button class="install-help-primary" id="installHelpPrimaryBtn" type="button">Браузерде ашу</button>
       <button class="install-help-secondary" id="installHelpCopyBtn" type="button">Сілтемені көшіру</button>
     </div>
-    <button class="install-help-close" id="installHelpЖабуBtn" type="button">Жабу</button>
+    <button class="install-help-close" id="installHelpCloseBtn" type="button">Жабу</button>
   </div>
 </div>
 
@@ -4794,7 +4778,7 @@ window.addEventListener("beforeinstallprompt",function(e){e.preventDefault();def
 window.addEventListener("appinstalled",function(){deferredInstallPrompt=null;updateInstallButtonVisibility();});
 window.addEventListener("pageshow",function(){updateInstallButtonVisibility();});
 document.addEventListener("visibilitychange",function(){if(!document.hidden) updateInstallButtonVisibility();});
-window.addEventListener("DOMContentLoaded",function(){const installBtn=document.getElementById("installBtn"),brandInstallTrigger=document.getElementById("brandInstallTrigger"),brandInstallHint=document.getElementById("brandInstallHint"),shareOverlay=document.getElementById("shareOverlay"),shareЖабуBtn=document.getElementById("shareЖабуBtn"),helpOverlay=document.getElementById("installHelpOverlay"),helpЖабу=document.getElementById("installHelpЖабуBtn"),helpPrimary=document.getElementById("installHelpPrimaryBtn"),helpCopy=document.getElementById("installHelpCopyBtn");if(installBtn) installBtn.addEventListener("click",installApp);if(brandInstallTrigger) brandInstallTrigger.addEventListener("click",function(){if(window.innerWidth<=700&&!isStandaloneMode()) installApp();});if(brandInstallHint){brandInstallHint.addEventListener("click",installApp);brandInstallHint.addEventListener("keydown",function(e){if(e.key==="Enter"||e.key===" "){e.preventDefault();installApp();}});}if(shareЖабуBtn) shareЖабуBtn.addEventListener("click",closeБөлісуOverlay);if(shareOverlay) shareOverlay.addEventListener("click",function(e){if(e.target===shareOverlay) closeБөлісуOverlay();});if(helpЖабу) helpЖабу.addEventListener("click",closeInstallHelp);if(helpOverlay) helpOverlay.addEventListener("click",function(e){if(e.target===helpOverlay) closeInstallHelp();});if(helpPrimary) helpPrimary.addEventListener("click",function(){const opened=openCurrentPageInExternalBrowser();if(!opened) copyCurrentLink();});if(helpCopy) helpCopy.addEventListener("click",copyCurrentLink);document.querySelectorAll("[data-share]").forEach(function(button){button.addEventListener("click",async function(){const type=button.getAttribute("data-share");if(type==="copy"){await copyБөлісуLink();return;}if(type==="more"){if(navigator.share){try{await navigator.share({title:"БаракаУэй",text:"БаракаУэй",url:getБөлісуUrl()});closeБөлісуOverlay();return;}catch(e){}}await copyБөлісуLink();return;}openБөлісуTarget(type);closeБөлісуOverlay();});});updateInstallButtonVisibility();setTimeout(updateInstallButtonVisibility,1200);window.addEventListener("resize",updateInstallButtonVisibility);});
+window.addEventListener("DOMContentLoaded",function(){const installBtn=document.getElementById("installBtn"),brandInstallTrigger=document.getElementById("brandInstallTrigger"),brandInstallHint=document.getElementById("brandInstallHint"),shareOverlay=document.getElementById("shareOverlay"),shareCloseBtn=document.getElementById("shareCloseBtn"),helpOverlay=document.getElementById("installHelpOverlay"),helpЖабу=document.getElementById("installHelpCloseBtn"),helpPrimary=document.getElementById("installHelpPrimaryBtn"),helpCopy=document.getElementById("installHelpCopyBtn");if(installBtn) installBtn.addEventListener("click",installApp);if(brandInstallTrigger) brandInstallTrigger.addEventListener("click",function(){if(window.innerWidth<=700&&!isStandaloneMode()) installApp();});if(brandInstallHint){brandInstallHint.addEventListener("click",installApp);brandInstallHint.addEventListener("keydown",function(e){if(e.key==="Enter"||e.key===" "){e.preventDefault();installApp();}});}if(shareCloseBtn) shareCloseBtn.addEventListener("click",closeБөлісуOverlay);if(shareOverlay) shareOverlay.addEventListener("click",function(e){if(e.target===shareOverlay) closeБөлісуOverlay();});if(helpЖабу) helpЖабу.addEventListener("click",closeInstallHelp);if(helpOverlay) helpOverlay.addEventListener("click",function(e){if(e.target===helpOverlay) closeInstallHelp();});if(helpPrimary) helpPrimary.addEventListener("click",function(){const opened=openCurrentPageInExternalBrowser();if(!opened) copyCurrentLink();});if(helpCopy) helpCopy.addEventListener("click",copyCurrentLink);document.querySelectorAll("[data-share]").forEach(function(button){button.addEventListener("click",async function(){const type=button.getAttribute("data-share");if(type==="copy"){await copyБөлісуLink();return;}if(type==="more"){if(navigator.share){try{await navigator.share({title:"БаракаУэй",text:"БаракаУэй",url:getБөлісуUrl()});closeБөлісуOverlay();return;}catch(e){}}await copyБөлісуLink();return;}openБөлісуTarget(type);closeБөлісуOverlay();});});updateInstallButtonVisibility();setTimeout(updateInstallButtonVisibility,1200);window.addEventListener("resize",updateInstallButtonVisibility);});
 </script>
 <script>
 (function(){
@@ -5483,7 +5467,7 @@ const articleDay = getDaysSince(articleStartDate);
   }
 
   const name = names[articleDay % names.length];
-  const nameEl = document.getElementById('allahNameБүгін');
+  const nameEl = document.getElementById('allahNameToday');
   const meaningEl = document.getElementById('allahNameMeaning');
   const card = document.getElementById('allahNameCounterCard');
   const valueEl = document.getElementById('allahNameCounterValue');
@@ -5517,8 +5501,8 @@ const articleDay = getDaysSince(articleStartDate);
   renderCounter();
 
   const practice = document.getElementById('dailyPracticeText');
-  const goalCard = document.getElementById('dailyМақсатCard');
-  const goalStatus = document.getElementById('dailyМақсатStatus');
+  const goalCard = document.getElementById('dailyGoalCard');
+  const goalStatus = document.getElementById('dailyGoalStatus');
   const goalKey = 'barakaway_daily_goal_done_' + todayKey;
   let goalDone = localStorage.getItem(goalKey) === '1';
 
@@ -5816,12 +5800,11 @@ const articleDay = getDaysSince(articleStartDate);
     else{ currentAdhkarTitle.textContent = 'Келесі азкар'; currentAdhkarText.textContent = hour < 4 ? 'Ең жақыны — Фаджрдан кейінгі таңғы азкар.' : 'Ең жақыны — Мағрибке жақын кешкі азкар.'; }
   }
   const name = names[dayNumber % names.length];
-  const nameEl = document.getElementById('allahNameБүгін');
+  const nameEl = document.getElementById('allahNameToday');
   const card = document.getElementById('allahNameCounterCard');
   const valueEl = document.getElementById('allahNameCounterValue');
   const fillEl = document.getElementById('allahNameCounterFill');
-  const LANG_KEY = (document.documentElement.getAttribute('lang') || 'id').toLowerCase().split('-')[0];
-  const storageKey = 'barakaway_name_counter_' + LANG_KEY + '_' + todayKey;
+  const storageKey = 'barakaway_name_counter_kz_' + todayKey;
   let count = Math.max(0, Math.min(100, parseInt(localStorage.getItem(storageKey) || '0', 10) || 0));
   function renderCounter(){
     if(nameEl) nameEl.textContent = name;
@@ -5830,7 +5813,7 @@ const articleDay = getDaysSince(articleStartDate);
     if(card) card.setAttribute('aria-label', name + ': ' + count + ' 100 қайталаудың ішінен');
   }
   function incrementCounter(){
-    count = Math.min(100, count + 1);
+    count = count >= 100 ? 0 : count + 1;
     localStorage.setItem(storageKey, String(count));
     renderCounter();
   }
@@ -5848,8 +5831,8 @@ const articleDay = getDaysSince(articleStartDate);
 
 <script>
 (function(){
-  const goalCard = document.getElementById('dailyМақсатCard');
-  const goalStatus = document.getElementById('dailyМақсатStatus');
+  const goalCard = document.getElementById('dailyGoalCard');
+  const goalStatus = document.getElementById('dailyGoalStatus');
   if(!goalCard || !goalStatus) return;
 
   function localDateKey(date){
@@ -5904,8 +5887,7 @@ const articleDay = getDaysSince(articleStartDate);
 </script>
 <script>
 (function(){
-  const LANG_KEY = (document.documentElement.getAttribute("lang") || "id").toLowerCase().split("-")[0];
-  const TASK_PREFIX = "barakaway_today_" + LANG_KEY + "_";
+  const TASK_PREFIX = "barakaway_today_kz_";
 
   function localDateKey(date){
     const y = date.getFullYear();
@@ -5965,8 +5947,8 @@ const articleDay = getDaysSince(articleStartDate);
   const nameStatus = document.getElementById("allahNameCounterValue");
   const nameFill = document.getElementById("allahNameCounterFill");
 
-  const goalCard = document.getElementById("dailyМақсатCard");
-  const goalStatus = document.getElementById("dailyМақсатStatus");
+  const goalCard = document.getElementById("dailyGoalCard");
+  const goalStatus = document.getElementById("dailyGoalStatus");
 
   function renderAll(){
     applyТапсырмаState(articleCard, articleStatus, "article", "→");
@@ -12000,8 +11982,7 @@ const TASK_PREFIX = "barakaway_today_kz_";
     if(!card) return;
 
     const nameCountKey = TASK_PREFIX + todayKey() + "_name_count";
-    const langKey = (document.documentElement.getAttribute("lang") || "id").toLowerCase().split("-")[0];
-    const legacyKeys = ["barakaway_name_counter_" + todayKey(), "barakaway_name_counter_" + langKey + "_" + todayKey()];
+    const legacyKeys = ["barakaway_name_counter_" + todayKey(), "barakaway_name_counter_kz_" + todayKey()];
 
     function readNumber(key){
       return Math.max(0, Math.min(100, parseInt(localStorage.getItem(key) || "0", 10) || 0));
@@ -12252,8 +12233,7 @@ const TASK_PREFIX = "barakaway_today_kz_";
 
 <script>
 (function(){
-  const LANG_KEY = (document.documentElement.getAttribute("lang") || "id").toLowerCase().split("-")[0];
-  const TASK_PREFIX = "barakaway_today_" + LANG_KEY + "_";
+  const TASK_PREFIX = "barakaway_today_kz_";
 
   function localDateKey(date){
     const y = date.getFullYear();
@@ -12277,7 +12257,7 @@ const TASK_PREFIX = "barakaway_today_kz_";
   function legacyCountKeys(){
     return [
       "barakaway_name_counter_" + todayKey(),
-      "barakaway_name_counter_" + LANG_KEY + "_" + todayKey()
+      "barakaway_name_counter_kz_" + todayKey()
     ];
   }
 
@@ -12320,7 +12300,7 @@ const TASK_PREFIX = "barakaway_today_kz_";
     const card = document.getElementById("allahNameCounterCard");
     const status = document.getElementById("allahNameCounterValue");
     const fill = document.getElementById("allahNameCounterFill");
-    const nameEl = document.getElementById("allahNameБүгін");
+    const nameEl = document.getElementById("allahNameToday");
     const meaningEl = document.getElementById("allahNameMeaning");
 
     if(!card) return;
@@ -12505,9 +12485,8 @@ const TASK_PREFIX = "barakaway_today_kz_";
 <script id="bw-kz-task-compact-modal-final">
 (function(){
   'use strict';
-  const LANG_KEY = (document.documentElement.getAttribute('lang') || 'id').toLowerCase().split('-')[0];
-  const TASK_PREFIX = 'barakaway_today_' + LANG_KEY + '_v3_';
-  const NAME_COUNT_PREFIX = 'barakaway_name_counter_' + LANG_KEY + '_v3_';
+  const TASK_PREFIX = 'barakaway_today_kz_v3_';
+  const NAME_COUNT_PREFIX = 'barakaway_name_counter_kz_v3_';
   const HINT = "Бүгінгі тапсырманы орындау үшін басыңыз";
 
   function localDateKey(date){
@@ -12816,7 +12795,7 @@ const TASK_PREFIX = "barakaway_today_kz_";
 (function(){
   'use strict';
 
-  var LANG = (document.documentElement.getAttribute('lang') || 'id').toLowerCase().split('-')[0];
+  var LANG = "kz";
   var COUNT_KEY_BASE = 'barakaway_name_counter_' + LANG + '_final_';
   var DONE_KEY_BASE = 'barakaway_today_' + LANG + '_final_';
 
@@ -13754,7 +13733,7 @@ html.light-mode .bw-ayah-force-close{background:#fff;}
   }
 
   function card(){
-    return document.getElementById('dailyМақсатCard') ||
+    return document.getElementById('dailyGoalCard') ||
            document.getElementById('dailyGoalCard') ||
            Array.prototype.slice.call(document.querySelectorAll('.today-goal-action,.today-action')).find(function(el){
              return (el.textContent || '').indexOf('Күндік мақсат') !== -1;
