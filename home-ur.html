@@ -15844,5 +15844,51 @@ body{ overflow-x:hidden; }
 })();
 </script>
 
+
+
+<style id="bw-ur-single-allah-name-counter-final-css">
+#allahNameCounterCard .bw-task-compact-meta[data-task-meta="name"]{
+  display:none !important;
+  visibility:hidden !important;
+  opacity:0 !important;
+  width:0 !important;
+  min-width:0 !important;
+  max-width:0 !important;
+  height:0 !important;
+  min-height:0 !important;
+  padding:0 !important;
+  margin:0 !important;
+  border:0 !important;
+  overflow:hidden !important;
+  pointer-events:none !important;
+}
+</style>
+<script id="bw-ur-single-allah-name-counter-final-js">
+(function(){
+  'use strict';
+  function removeExtraNameCounters(){
+    var card = document.getElementById('allahNameCounterCard');
+    if(!card) return;
+    card.querySelectorAll('.bw-task-compact-meta[data-task-meta="name"]').forEach(function(el){
+      el.remove();
+    });
+  }
+  function init(){
+    removeExtraNameCounters();
+    var card = document.getElementById('allahNameCounterCard');
+    if(!card || card.dataset.bwUrSingleCounterObserver === '1') return;
+    card.dataset.bwUrSingleCounterObserver = '1';
+    try{
+      new MutationObserver(removeExtraNameCounters).observe(card,{childList:true,subtree:true});
+    }catch(e){}
+  }
+  if(document.readyState === 'loading') document.addEventListener('DOMContentLoaded', init, {once:true});
+  else init();
+  window.addEventListener('pageshow', init);
+  setTimeout(init,100);
+  setTimeout(init,600);
+})();
+</script>
+
 </body>
 </html>
