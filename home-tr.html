@@ -2726,7 +2726,8 @@ Zilkade ayında amellerini koru, gereksizi azalt ve zikri artır — bu, ileride
 </section>
 
 <script>
-function changeDilChoice(){localStorage.removeItem("siteDil");sessionStorage.setItem("forceDilSelect","1");window.location.href="index.html";}
+function changeDilChoice(){try{localStorage.removeItem("siteLanguage");localStorage.removeItem("siteDil");sessionStorage.setItem("forceLanguageSelect","1");sessionStorage.setItem("forceDilSelect","1");}catch(e){}window.location.href="index.html";}
+function changeLanguageChoice(){changeDilChoice();}
 function openPrayerTimesPage(event){if(event&&event.target&&event.target.closest&&event.target.closest(".home-prayer-share-btn")) return;window.location.href="prayer-times-tr.html";}
 function openPrayerTimesPageFromKeyboard(event){if(event.key==="Enter"||event.key===" "){event.preventDefault();openPrayerTimesPage(event);}}
 let deferredYüklePrompt=null;let installVisibilityInFlight=false;
@@ -10926,6 +10927,119 @@ function init(){
 if(document.readyState === 'loading') document.addEventListener('DOMContentLoaded', init, {once:true});
 else init();
 window.addEventListener('load', function(){ setTimeout(controlProVisibility, 120); setTimeout(controlProVisibility, 600); });
+})();
+</script>
+
+
+
+<!-- BW FINAL TR FIX: language switch + stable Pro +5 questions -->
+<style id="bw-tr-final-language-pro-stability-fix-style">
+#dailyMicroProUpsell.bw-tr-pro-force-hidden{display:none !important; visibility:hidden !important; opacity:0 !important; pointer-events:none !important;}
+#dailyMicroProUpsell.bw-tr-pro-force-visible{display:flex !important; visibility:visible !important; opacity:1 !important; pointer-events:auto !important; align-items:center !important; justify-content:flex-start !important;}
+.bw-tr-pro-modal{position:fixed;inset:0;z-index:2147483647;display:none;align-items:center;justify-content:center;padding:18px;box-sizing:border-box;background:rgba(5,9,12,.66);backdrop-filter:blur(7px);-webkit-backdrop-filter:blur(7px)}
+.bw-tr-pro-modal.open{display:flex!important}
+.bw-tr-pro-card{width:min(100%,430px);max-height:92vh;overflow:auto;border-radius:26px;padding:22px 20px 20px;background:linear-gradient(180deg,#101b25 0%,#0d161e 100%);border:1px solid rgba(102,198,128,.34);box-shadow:0 26px 70px rgba(0,0,0,.44);color:#f7fbf8;box-sizing:border-box}
+html.light-mode .bw-tr-pro-card{background:linear-gradient(180deg,#fff 0%,#f7faf8 100%);color:#172019;box-shadow:0 26px 70px rgba(18,34,24,.22)}
+.bw-tr-pro-step{font-size:12px;font-weight:950;letter-spacing:.08em;text-transform:uppercase;color:#d7c07a;margin-bottom:8px}.bw-tr-pro-title{margin:0 0 10px;font-size:24px;line-height:1.15;font-weight:950;letter-spacing:-.035em}.bw-tr-pro-question{margin:0 0 15px;font-size:15px;line-height:1.45;font-weight:850}.bw-tr-pro-options{display:grid;gap:10px;margin-bottom:13px}.bw-tr-pro-option{width:100%;min-height:42px;border-radius:14px;border:1px solid rgba(102,198,128,.22);background:rgba(102,198,128,.09);color:#f3fff7;font-size:14px;font-weight:900;cursor:pointer}.bw-tr-pro-option.correct{border-color:#42e87b!important;background:linear-gradient(180deg,rgba(66,232,123,.36),rgba(45,122,70,.88))!important;color:#fff!important}.bw-tr-pro-option.wrong{border-color:#ff5a5a!important;background:linear-gradient(180deg,rgba(255,90,90,.34),rgba(120,28,28,.86))!important;color:#fff!important}html.light-mode .bw-tr-pro-option{background:#f0faf3;color:#244b32;border-color:rgba(45,122,70,.18)}.bw-tr-pro-explain{display:none;margin:10px 0 14px;padding:12px 13px;border-radius:16px;background:rgba(215,192,122,.12);border:1px solid rgba(215,192,122,.28);color:#f6df9b;font-size:13px;line-height:1.5;font-weight:800}.bw-tr-pro-explain.show{display:block}html.light-mode .bw-tr-pro-explain{background:#fff8e7;border-color:rgba(141,107,22,.22);color:#6f5311}.bw-tr-pro-actions{display:grid;gap:10px}.bw-tr-pro-next,.bw-tr-pro-close{width:100%;min-height:45px;border-radius:999px;border:1px solid rgba(102,198,128,.28);font-size:14px;font-weight:950;cursor:pointer}.bw-tr-pro-next{background:#2d7a46;color:#fff}.bw-tr-pro-next:disabled{opacity:.45;cursor:not-allowed}.bw-tr-pro-close{background:rgba(255,255,255,.06);color:#f7fbf8}html.light-mode .bw-tr-pro-close{background:#fff;color:#172019;border-color:rgba(45,122,70,.16)}
+</style>
+<script id="bw-tr-final-language-pro-stability-fix-js">
+(function(){
+  'use strict';
+  var LANG='tr';
+  function todayKey(){var d=new Date();return d.getFullYear()+'-'+String(d.getMonth()+1).padStart(2,'0')+'-'+String(d.getDate()).padStart(2,'0');}
+  function goLanguage(){
+    try{
+      localStorage.removeItem('siteLanguage');
+      localStorage.removeItem('siteDil');
+      sessionStorage.setItem('forceLanguageSelect','1');
+      sessionStorage.setItem('forceDilSelect','1');
+    }catch(e){}
+    window.location.href='index.html';
+  }
+  window.changeLanguageChoice=goLanguage;
+  window.changeDilChoice=goLanguage;
+  document.addEventListener('click',function(e){
+    var el=e.target&&e.target.closest?e.target.closest('a,button,[role="button"]'):null;
+    if(!el)return;
+    var txt=(el.textContent||'').toLowerCase().trim();
+    var aria=(el.getAttribute('aria-label')||'').toLowerCase();
+    var onclick=(el.getAttribute('onclick')||'').toLowerCase();
+    if(txt==='dili değiştir'||txt==='dil değiştir'||aria.indexOf('change language')!==-1||aria.indexOf('dil')!==-1||onclick.indexOf('changedilchoice')!==-1||onclick.indexOf('changelanguagechoice')!==-1){
+      e.preventDefault(); e.stopPropagation(); if(e.stopImmediatePropagation)e.stopImmediatePropagation(); goLanguage(); return false;
+    }
+  },true);
+
+  function keysFor(task){var d=todayKey();return [
+    'barakaway_today_'+LANG+'_'+d+'_'+task,
+    'barakaway_today_'+LANG+'_v2_'+d+'_'+task,
+    'barakaway_today_'+LANG+'_v3_'+d+'_'+task,
+    'barakaway_today_'+LANG+'_final_'+d+'_'+task,
+    'bw_final_done_v2_'+LANG+'_'+d+'_'+task,
+    'bw_daily_done_v2_'+LANG+'_'+d+'_'+task
+  ];}
+  function isMicroDone(){
+    try{
+      if(keysFor('micro').some(function(k){return localStorage.getItem(k)==='1';}))return true;
+      if(localStorage.getItem('barakaway_micro_answer_'+LANG+'_'+todayKey()))return true;
+      if(localStorage.getItem('barakaway_micro_answer_tr_'+todayKey()))return true;
+      for(var i=0;i<localStorage.length;i++){var k=localStorage.key(i)||'';var v=localStorage.getItem(k)||'';if(k.indexOf(todayKey())!==-1&&k.toLowerCase().indexOf('micro')!==-1&&(v==='1'||v.indexOf('selected')!==-1))return true;}
+    }catch(e){}
+    var card=document.getElementById('dailyMicroKnowledgeCard');
+    return !!(card&&(card.classList.contains('task-done')||card.classList.contains('bw-final-done')||card.classList.contains('bw-task-done')||card.getAttribute('aria-disabled')==='true'));
+  }
+  function isProDone(){try{return localStorage.getItem('barakaway_pro_micro_done_'+LANG+'_'+todayKey())==='1';}catch(e){return false;}}
+  function setProDone(){try{localStorage.setItem('barakaway_pro_micro_done_'+LANG+'_'+todayKey(),'1');}catch(e){}}
+  function syncPro(){
+    var up=document.getElementById('dailyMicroProUpsell'); if(!up)return;
+    var visible=isMicroDone();
+    up.classList.toggle('is-visible',visible);
+    up.classList.toggle('bw-tr-pro-force-visible',visible);
+    up.classList.toggle('bw-tr-pro-force-hidden',!visible);
+    up.classList.toggle('bw-pro-micro-done',isProDone());
+    up.style.display=visible?'flex':'none';
+    up.style.visibility=visible?'visible':'hidden';
+    up.style.opacity=visible?'1':'0';
+    up.style.pointerEvents=visible?'auto':'none';
+    up.setAttribute('href','javascript:void(0)');
+    up.removeAttribute('target');
+    var st=document.getElementById('dailyMicroProStatus')||up.querySelector('.bw-micro-pro-status');
+    if(st)st.textContent=isProDone()?'✓':'→';
+  }
+  function normItem(item){
+    item=item||{}; var options=Array.isArray(item.options)?item.options:[]; var correct=0;
+    if(typeof item.correct==='number')correct=item.correct; else if(typeof item['doğru']==='number')correct=item['doğru']; else if(typeof item.answer==='number')correct=item.answer;
+    return {q:String(item.q||item.question||'').trim(),options:options.map(function(x){return String(x||'').trim();}).filter(Boolean),correct:Math.max(0,Math.min(options.length-1,correct||0)),meaning:String(item.meaning||item.explanation||item.explain||'').trim()};
+  }
+  function pool(){
+    var arr=[]; try{if(Array.isArray(window.MICRO_QUESTIONS))arr=window.MICRO_QUESTIONS.slice();}catch(e){}
+    arr=arr.map(normItem).filter(function(x){return x.q&&x.options.length>=2;});
+    var seen={}; arr=arr.filter(function(x){if(seen[x.q])return false;seen[x.q]=1;return true;});
+    if(arr.length>=5)return arr;
+    return [
+      {q:'Günde kaç vakit farz namaz vardır?',options:['Üç','Beş','Yedi'],correct:1,meaning:'Beş vakit namaz Müslümanın gününü Allah ile bağlar.'},
+      {q:'Namazdan önce ne almak gerekir?',options:['Abdest','Yemek','Uyku'],correct:0,meaning:'Namaz için abdest almak gerekir.'},
+      {q:'Dua ne demektir?',options:['Allah’a yönelip istemek','Sadece konuşmak','Sadece susmak'],correct:0,meaning:'Dua, kulun Allah’a yönelmesi ve O’ndan istemesidir.'},
+      {q:'Zikir neyi hatırlamaktır?',options:['Allah’ı','Parayı','Yolculuğu'],correct:0,meaning:'Zikir Allah’ı anmak ve hatırlamaktır.'},
+      {q:'Sadaka ne için verilir?',options:['Allah rızası için','Gösteriş için','Övülmek için'],correct:0,meaning:'Sadaka Allah rızası için verilir.'}
+    ];
+  }
+  function dailyFive(){var a=pool(), seed=todayKey().replace(/-/g,'')*1, start=seed%a.length, out=[]; for(var i=0;i<5&&i<a.length;i++)out.push(a[(start+i)%a.length]); return out;}
+  function openPro(){
+    syncPro(); if(!isMicroDone())return false;
+    var old=document.getElementById('bwTrFinalProModal'); if(old)old.remove();
+    var items=dailyFive(), ix=0, answered=false;
+    var ov=document.createElement('div'); ov.id='bwTrFinalProModal'; ov.className='bw-tr-pro-modal open';
+    ov.innerHTML='<div class="bw-tr-pro-card" role="dialog" aria-modal="true"><div class="bw-tr-pro-step"></div><h3 class="bw-tr-pro-title">Pro: Günlük +5 soru</h3><div class="bw-tr-pro-question"></div><div class="bw-tr-pro-options"></div><div class="bw-tr-pro-explain"></div><div class="bw-tr-pro-actions"><button type="button" class="bw-tr-pro-next" disabled>Sonraki</button><button type="button" class="bw-tr-pro-close">Kapat</button></div></div>';
+    document.body.appendChild(ov);
+    var step=ov.querySelector('.bw-tr-pro-step'), q=ov.querySelector('.bw-tr-pro-question'), opts=ov.querySelector('.bw-tr-pro-options'), exp=ov.querySelector('.bw-tr-pro-explain'), next=ov.querySelector('.bw-tr-pro-next');
+    function render(){var item=items[ix]; answered=false; step.textContent=(ix+1)+' / '+items.length; q.textContent=item.q; exp.textContent=''; exp.classList.remove('show'); next.disabled=true; next.textContent=ix===items.length-1?'Bitir':'Sonraki'; opts.innerHTML=''; item.options.forEach(function(opt,i){var b=document.createElement('button');b.type='button';b.className='bw-tr-pro-option';b.textContent=opt;b.onclick=function(){if(answered)return;answered=true;Array.prototype.slice.call(opts.children).forEach(function(n,j){n.disabled=true;if(j===item.correct)n.classList.add('correct');});if(i!==item.correct)b.classList.add('wrong');exp.textContent=item.meaning||item.options[item.correct]||'';exp.classList.add('show');next.disabled=false;};opts.appendChild(b);});}
+    next.onclick=function(){if(next.disabled)return;if(ix<items.length-1){ix++;render();}else{setProDone();syncPro();ov.remove();}};
+    ov.querySelector('.bw-tr-pro-close').onclick=function(){ov.remove();}; ov.onclick=function(e){if(e.target===ov)ov.remove();}; render(); return false;
+  }
+  document.addEventListener('click',function(e){var up=e.target&&e.target.closest?e.target.closest('#dailyMicroProUpsell'):null;if(!up)return;e.preventDefault();e.stopPropagation();if(e.stopImmediatePropagation)e.stopImmediatePropagation();openPro();return false;},true);
+  function init(){syncPro();setTimeout(syncPro,50);setTimeout(syncPro,250);setTimeout(syncPro,800);} 
+  if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',init,{once:true});else init();
+  window.addEventListener('pageshow',init); window.addEventListener('storage',syncPro); setInterval(syncPro,300);
 })();
 </script>
 
