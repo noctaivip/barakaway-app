@@ -11733,3 +11733,241 @@ html.light-mode .today-hub .today-goal-action{
   setInterval(sync, 400);
 })();
 </script>
+
+
+<!-- BW TR 51 FINAL TARGETED FIX: language button + reset daily tasks for testing -->
+<style id="bw-tr51-final-targeted-task-language-fix-css">
+/* Show exactly the RU-style compact cards: title + status only on the cards. */
+.today-hub .today-action .today-action-text,
+.today-hub .today-micro-question,
+.today-hub .micro-options,
+.today-hub .micro-answer-box{
+  display:none !important;
+}
+.today-hub .today-action.bw-tr51-done,
+.today-hub .today-action.bw-final-done,
+.today-hub .today-action.bw-task-done,
+.today-hub .today-action.task-done,
+.today-hub .today-action.goal-done,
+.today-hub .today-micro-action.micro-answered{
+  background:linear-gradient(135deg,#18222c 0%, #17212a 52%, #173126 100%) !important;
+  border-color:rgba(102,198,128,0.34) !important;
+  animation:none !important;
+}
+html.light-mode .today-hub .today-action.bw-tr51-done,
+html.light-mode .today-hub .today-action.bw-final-done,
+html.light-mode .today-hub .today-action.bw-task-done,
+html.light-mode .today-hub .today-action.task-done,
+html.light-mode .today-hub .today-action.goal-done,
+html.light-mode .today-hub .today-micro-action.micro-answered{
+  background:linear-gradient(135deg,#ffffff 0%, #fbfdfc 52%, #eef7f1 100%) !important;
+  border-color:rgba(45,122,70,0.22) !important;
+}
+.today-hub .today-action.bw-tr51-open{
+  cursor:pointer !important;
+  pointer-events:auto !important;
+}
+#bwTr51TaskModal{
+  position:fixed;
+  inset:0;
+  z-index:99999;
+  display:none;
+  align-items:flex-end;
+  justify-content:center;
+  padding:16px;
+  box-sizing:border-box;
+  background:rgba(5,10,14,.68);
+  backdrop-filter:blur(8px);
+  -webkit-backdrop-filter:blur(8px);
+}
+#bwTr51TaskModal.open{display:flex;}
+.bw-tr51-task-sheet{
+  width:min(100%,520px);
+  border-radius:28px 28px 20px 20px;
+  padding:20px;
+  box-sizing:border-box;
+  background:linear-gradient(180deg,#171d24 0%,#121820 100%);
+  border:1px solid rgba(102,198,128,.24);
+  box-shadow:0 24px 60px rgba(0,0,0,.42);
+  color:#f5f8f6;
+}
+html.light-mode .bw-tr51-task-sheet{
+  background:linear-gradient(180deg,#ffffff 0%,#fbfdfc 100%);
+  color:#172019;
+  border-color:rgba(45,122,70,.16);
+}
+.bw-tr51-task-title{font-size:24px;line-height:1.15;font-weight:950;letter-spacing:-.04em;margin:0 0 12px;}
+.bw-tr51-task-text{font-size:15px;line-height:1.45;font-weight:700;margin:0 0 16px;color:#b8c6bf;}
+html.light-mode .bw-tr51-task-text{color:#5e6d64;}
+.bw-tr51-options{display:grid;gap:8px;margin:0 0 14px;}
+.bw-tr51-option{width:100%;border-radius:16px;padding:12px 14px;border:1px solid rgba(102,198,128,.22);background:rgba(102,198,128,.10);color:#eaf7ee;font-size:14px;font-weight:900;text-align:left;cursor:pointer;}
+html.light-mode .bw-tr51-option{background:#eff8f2;color:#2d7a46;border-color:rgba(45,122,70,.14);}
+.bw-tr51-row{display:flex;gap:10px;flex-wrap:wrap;}
+.bw-tr51-primary,.bw-tr51-secondary{flex:1 1 160px;min-height:48px;border-radius:16px;border:none;font-size:15px;font-weight:950;cursor:pointer;}
+.bw-tr51-primary{background:#2d7a46;color:#fff;}
+.bw-tr51-secondary{background:#1d242c;color:#f3f6f9;border:1px solid #2a3138;}
+html.light-mode .bw-tr51-secondary{background:#fff;color:#172019;border-color:#dfe8e2;}
+</style>
+<script id="bw-tr51-final-targeted-task-language-fix-js">
+(function(){
+  'use strict';
+
+  var LANG='tr';
+  var VERSION='2026-06-04-tr51-final-1';
+  var RESET_MARK='bw_tr51_open_tasks_reset_'+VERSION;
+  var TASKS={
+    article:{id:'dailyArticleLink',status:'dailyArticleStatus',title:'Günün ayeti',fallback:'Bugünün ayetini oku ve kısa görevi tamamla.'},
+    adhkar:{id:'currentAdhkarLink',status:'currentAdhkarStatus',title:'Günün görevi',fallback:'Bugünün görevini tamamla.'},
+    goal:{id:'dailyGoalCard',status:'dailyGoalStatus',title:'Günlük hedef',fallback:'Bugünkü hedefi tamamla.'},
+    name:{id:'allahNameCounterCard',status:'allahNameCounterValue',title:'Allah’ın ismi',fallback:'Bu ismi 100 kez tekrar et.'},
+    micro:{id:'dailyMicroKnowledgeCard',status:'dailyMicroKnowledgeStatus',title:'Günün kısa bilgisi',fallback:'Soruyu cevapla ve bilgiyi tamamla.'}
+  };
+
+  function today(){var d=new Date();return d.getFullYear()+'-'+String(d.getMonth()+1).padStart(2,'0')+'-'+String(d.getDate()).padStart(2,'0');}
+  function safeKeys(){try{return Object.keys(localStorage);}catch(e){return[];}}
+  function removeKey(k){try{localStorage.removeItem(k);}catch(e){}}
+  function setKey(k,v){try{localStorage.setItem(k,String(v));}catch(e){}}
+  function getKey(k){try{return localStorage.getItem(k);}catch(e){return null;}}
+  function containsTaskKey(k){
+    if(!k) return false;
+    var s=String(k).toLowerCase();
+    if(s.indexOf('bw_tr51_open_tasks_reset_')===0) return false;
+    return (
+      s.indexOf('barakaway_today_tr_')!==-1 ||
+      s.indexOf('bw_final_done_v2_tr_')!==-1 ||
+      s.indexOf('bw_daily_done_v2_tr_')!==-1 ||
+      s.indexOf('bw_allah_name_counter_persist_tr_')!==-1 ||
+      s.indexOf('barakaway_name_counter_tr_')!==-1 ||
+      s.indexOf('barakaway_name_counter_'+today())!==-1 ||
+      s.indexOf('barakaway_micro_answer_tr_')!==-1 ||
+      s.indexOf('question_today_tr')!==-1 ||
+      s.indexOf('question_history_tr')!==-1 ||
+      s.indexOf('micro_answer_tr')!==-1
+    );
+  }
+  function taskDoneKey(task){return 'barakaway_today_'+LANG+'_'+today()+'_'+task;}
+  function nameCountKey(){return 'barakaway_name_counter_'+LANG+'_'+today();}
+
+  function hardResetForTestingOnce(){
+    if(getKey(RESET_MARK)==='1') return;
+    safeKeys().forEach(function(k){if(containsTaskKey(k)) removeKey(k);});
+    setKey(RESET_MARK,'1');
+  }
+
+  function statusEl(task){return document.getElementById(TASKS[task].status);}
+  function cardEl(task){return document.getElementById(TASKS[task].id);}
+  function isDone(task){
+    if(task==='name') return parseInt(getKey(nameCountKey())||'0',10)>=100 || getKey(taskDoneKey('name'))==='1';
+    return getKey(taskDoneKey(task))==='1';
+  }
+  function nameCount(){var n=parseInt(getKey(nameCountKey())||'0',10); if(!Number.isFinite(n)) n=0; return Math.max(0,Math.min(100,n));}
+
+  function paintTask(task){
+    var card=cardEl(task), st=statusEl(task);
+    if(!card) return;
+    card.classList.add('bw-tr51-open');
+    card.removeAttribute('aria-disabled');
+    card.style.pointerEvents='auto';
+    card.style.cursor='pointer';
+    var done=isDone(task);
+    card.classList.toggle('bw-tr51-done',done);
+    card.classList.toggle('bw-final-done',done);
+    card.classList.toggle('bw-task-done',done);
+    card.classList.toggle('task-done',done);
+    if(task==='goal') card.classList.toggle('goal-done',done);
+    if(task==='micro') card.classList.toggle('micro-answered',done);
+    card.classList.remove('goal-urgent','task-urgent','bw-needs-pulse');
+    if(st){
+      if(task==='name') st.textContent=done?'✓':(nameCount()+'/100');
+      else st.textContent=done?'✓':'→';
+    }
+    var fill=document.getElementById('allahNameCounterFill');
+    if(task==='name' && fill) fill.style.width=nameCount()+'%';
+  }
+  function paintAll(){Object.keys(TASKS).forEach(paintTask);}
+
+  function completeTask(task){
+    if(task==='name'){
+      setKey(nameCountKey(),'100');
+    }
+    setKey(taskDoneKey(task),'1');
+    paintAll();
+  }
+  function incrementName(){
+    var n=Math.min(100,nameCount()+1);
+    setKey(nameCountKey(),String(n));
+    if(n>=100) setKey(taskDoneKey('name'),'1');
+    paintAll();
+  }
+
+  function getText(selector, fallback){var el=document.querySelector(selector);var t=el&&(el.textContent||'').trim();return t||fallback||'';}
+  function clearModal(){var old=document.getElementById('bwTr51TaskModal'); if(old) old.remove();}
+  function closeModal(){var m=document.getElementById('bwTr51TaskModal'); if(m) m.classList.remove('open');}
+  function openModal(task){
+    clearModal();
+    var cfg=TASKS[task];
+    var title=(cardEl(task)&&cardEl(task).querySelector('.today-action-title')&&cardEl(task).querySelector('.today-action-title').textContent.trim())||cfg.title;
+    var text=cfg.fallback;
+    if(task==='article') text=getText('#dailyArticleTitle', cfg.fallback);
+    if(task==='adhkar') text=getText('#currentAdhkarText', cfg.fallback);
+    if(task==='goal') text=getText('#dailyPracticeText', cfg.fallback);
+    if(task==='micro') text=getText('#dailyMicroQuestion', cfg.fallback);
+    var modal=document.createElement('div');
+    modal.id='bwTr51TaskModal';
+    modal.setAttribute('role','dialog');
+    modal.setAttribute('aria-modal','true');
+    var optionsHtml='';
+    if(task==='micro'){
+      var opts=[].slice.call(document.querySelectorAll('#dailyMicroOptions .micro-option')).map(function(b){return (b.textContent||'').trim();}).filter(Boolean);
+      if(opts.length){
+        optionsHtml='<div class="bw-tr51-options">'+opts.map(function(o){return '<button type="button" class="bw-tr51-option">'+o.replace(/[&<>]/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;'}[c];})+'</button>';}).join('')+'</div>';
+      }
+    }
+    modal.innerHTML='<div class="bw-tr51-task-sheet"><h3 class="bw-tr51-task-title"></h3><p class="bw-tr51-task-text"></p>'+optionsHtml+'<div class="bw-tr51-row"><button type="button" class="bw-tr51-primary">Görevi tamamla</button><button type="button" class="bw-tr51-secondary">Kapat</button></div></div>';
+    document.body.appendChild(modal);
+    modal.querySelector('.bw-tr51-task-title').textContent=title;
+    modal.querySelector('.bw-tr51-task-text').textContent=text;
+    modal.querySelector('.bw-tr51-primary').addEventListener('click',function(){completeTask(task);closeModal();});
+    modal.querySelector('.bw-tr51-secondary').addEventListener('click',closeModal);
+    modal.querySelectorAll('.bw-tr51-option').forEach(function(btn){btn.addEventListener('click',function(){completeTask(task);closeModal();});});
+    modal.addEventListener('click',function(e){if(e.target===modal) closeModal();});
+    modal.classList.add('open');
+  }
+
+  function openLanguageChoice(event){
+    if(event){event.preventDefault();event.stopPropagation();if(event.stopImmediatePropagation) event.stopImmediatePropagation();}
+    try{
+      localStorage.removeItem('siteLanguage');
+      localStorage.removeItem('siteDil');
+      localStorage.removeItem('barakaway_language');
+      sessionStorage.setItem('forceLanguageSelect','1');
+      sessionStorage.setItem('forceDilSelect','1');
+    }catch(e){}
+    window.location.href='index.html';
+  }
+
+  function bindClicks(){
+    window.changeLanguageChoice=openLanguageChoice;
+    window.changeDilChoice=openLanguageChoice;
+    document.querySelectorAll('.mobile-top-controls .icon-btn.left,.desktop-action-left a').forEach(function(btn){
+      btn.onclick=function(e){openLanguageChoice(e);return false;};
+    });
+    Object.keys(TASKS).forEach(function(task){
+      var card=cardEl(task); if(!card || card.dataset.bwTr51FinalClick==='1') return;
+      card.dataset.bwTr51FinalClick='1';
+      card.addEventListener('click',function(e){
+        e.preventDefault(); e.stopPropagation(); if(e.stopImmediatePropagation) e.stopImmediatePropagation();
+        if(task==='name') incrementName(); else openModal(task);
+        return false;
+      },true);
+      card.addEventListener('keydown',function(e){
+        if(e.key==='Enter'||e.key===' '){e.preventDefault(); if(task==='name') incrementName(); else openModal(task);}
+      },true);
+    });
+  }
+
+  function boot(){hardResetForTestingOnce();bindClicks();paintAll();setTimeout(paintAll,60);setTimeout(paintAll,300);}
+  if(document.readyState==='loading') document.addEventListener('DOMContentLoaded',boot,{once:true}); else boot();
+  window.addEventListener('pageshow',function(){bindClicks();paintAll();});
+})();
+</script>
