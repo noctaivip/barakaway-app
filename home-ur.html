@@ -15847,39 +15847,84 @@ body{ overflow-x:hidden; }
 
 
 <style id="bw-ur-single-allah-name-counter-final-css">
-#allahNameCounterCard .bw-task-compact-meta[data-task-meta="name"]{
+/* Fix: keep the working in-card Allah-name counter, hide only the extra top status counter. */
+#allahNameCounterCard:not(.bw-task-done):not(.task-done):not(.goal-done):not(.bw-final-done) #allahNameCounterValue{
   display:none !important;
   visibility:hidden !important;
   opacity:0 !important;
-  width:0 !important;
-  min-width:0 !important;
-  max-width:0 !important;
-  height:0 !important;
-  min-height:0 !important;
-  padding:0 !important;
-  margin:0 !important;
-  border:0 !important;
-  overflow:hidden !important;
   pointer-events:none !important;
+}
+#allahNameCounterCard .bw-task-compact-meta[data-task-meta="name"]{
+  display:inline-flex !important;
+  visibility:visible !important;
+  opacity:1 !important;
+  align-items:center !important;
+  justify-content:center !important;
+  width:max-content !important;
+  min-width:82px !important;
+  max-width:calc(100% - 12px) !important;
+  height:32px !important;
+  min-height:32px !important;
+  padding:5px 12px !important;
+  margin-top:8px !important;
+  border-radius:999px !important;
+  font-size:18px !important;
+  line-height:1 !important;
+  font-weight:950 !important;
+  letter-spacing:-.03em !important;
+  white-space:nowrap !important;
+  pointer-events:auto !important;
+  position:relative !important;
+  z-index:10 !important;
+}
+#allahNameCounterCard:not(.bw-task-done):not(.task-done):not(.goal-done):not(.bw-final-done) .bw-task-compact-meta[data-task-meta="name"]::after{
+  content:"+" !important;
+  margin-left:0 !important;
+  margin-right:8px !important;
+  font-size:16px !important;
+  font-weight:950 !important;
+  opacity:.9 !important;
+}
+#allahNameCounterCard.bw-task-done .bw-task-compact-meta[data-task-meta="name"],
+#allahNameCounterCard.task-done .bw-task-compact-meta[data-task-meta="name"],
+#allahNameCounterCard.goal-done .bw-task-compact-meta[data-task-meta="name"],
+#allahNameCounterCard.bw-final-done .bw-task-compact-meta[data-task-meta="name"]{
+  display:none !important;
+}
+#allahNameCounterCard.bw-task-done #allahNameCounterValue,
+#allahNameCounterCard.task-done #allahNameCounterValue,
+#allahNameCounterCard.goal-done #allahNameCounterValue,
+#allahNameCounterCard.bw-final-done #allahNameCounterValue{
+  display:inline-flex !important;
+  visibility:visible !important;
+  opacity:1 !important;
 }
 </style>
 <script id="bw-ur-single-allah-name-counter-final-js">
 (function(){
   'use strict';
-  function removeExtraNameCounters(){
+  function keepOnlyInlineNameCounter(){
     var card = document.getElementById('allahNameCounterCard');
     if(!card) return;
-    card.querySelectorAll('.bw-task-compact-meta[data-task-meta="name"]').forEach(function(el){
-      el.remove();
-    });
+    var title = card.querySelector('#allahNameToday') || card.querySelector('.today-action-title');
+    var holder = title && title.parentElement ? title.parentElement : card;
+    var metas = Array.prototype.slice.call(card.querySelectorAll('.bw-task-compact-meta[data-task-meta="name"]'));
+    var meta = metas[0];
+    if(!meta){
+      meta = document.createElement('div');
+      meta.className = 'bw-task-compact-meta';
+      meta.setAttribute('data-task-meta','name');
+    }
+    metas.slice(1).forEach(function(el){ el.remove(); });
+    if(meta.parentElement !== holder) holder.appendChild(meta);
   }
   function init(){
-    removeExtraNameCounters();
+    keepOnlyInlineNameCounter();
     var card = document.getElementById('allahNameCounterCard');
-    if(!card || card.dataset.bwUrSingleCounterObserver === '1') return;
-    card.dataset.bwUrSingleCounterObserver = '1';
+    if(!card || card.dataset.bwUrCorrectCounterObserver === '1') return;
+    card.dataset.bwUrCorrectCounterObserver = '1';
     try{
-      new MutationObserver(removeExtraNameCounters).observe(card,{childList:true,subtree:true});
+      new MutationObserver(keepOnlyInlineNameCounter).observe(card,{childList:true,subtree:true});
     }catch(e){}
   }
   if(document.readyState === 'loading') document.addEventListener('DOMContentLoaded', init, {once:true});
