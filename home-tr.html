@@ -3214,7 +3214,7 @@ const goals = [
     }
   })();
 
-const articleDay = getDaysSince(articleStartDate); const articleIndex = articles.length ? articleDay % articles.length : 0; const article = articles[articleIndex]; const articleLink = document.getElementById('dailyArticleLink'); const articleTitle = document.getElementById('dailyArticleTitle'); if(article && articleLink && articleTitle){ articleLink.href = article.url; articleTitle.textContent = article.title; } const adhkarLink = document.getElementById('currentAdhkarLink'); const currentAdhkarTitle = document.getElementById('currentAdhkarTitle'); const currentAdhkarText = document.getElementById('currentAdhkarText'); if(currentAdhkarTitle && currentAdhkarText){ if(hour >= 4 && hour < 11){ currentAdhkarTitle.textContent = 'Sabah zikirleri'; currentAdhkarText.textContent = 'Bugün BarakaWay BarakaWay.'; if(adhkarLink) adhkarLink.href = 'adhkar-tr.html#morning'; }else if(hour >= 16 && hour < 22){ currentAdhkarTitle.textContent = 'Akşam zikirleri'; currentAdhkarText.textContent = 'Bugün BarakaWay BarakaWay.'; if(adhkarLink) adhkarLink.href = 'adhkar-tr.html#evening'; }else if(hour < 4){ currentAdhkarTitle.textContent = 'Sonraki zikir'; currentAdhkarText.textContent = 'Sabah zikri — Allah’ı anarak güne başlayın.'; if(adhkarLink) adhkarLink.href = 'adhkar-tr.html#morning'; }else{ currentAdhkarTitle.textContent = 'Sonraki zikir'; currentAdhkarText.textContent = 'Akşam zikri — günü Allah’ı anarak tamamlayın.'; if(adhkarLink) adhkarLink.href = 'adhkar-tr.html#evening'; } } const name = names[articleDay % names.length]; const nameEl = document.getElementById('allahNameBugün'); const meaningEl = document.getElementById('allahNameMeaning'); const card = document.getElementById('allahNameCounterCard'); const valueEl = document.getElementById('allahNameCounterValue'); const fillEl = document.getElementById('allahNameCounterFill'); const storageKey = 'barakaway_name_counter_' + todayKey; let count = Math.max(0, Math.min(100, parseInt(localStorage.getItem(storageKey) || '0', 10) || 0)); function renderCounter(){ if(nameEl) nameEl.textContent = name.name; if(meaningEl) meaningEl.textContent = name.meaning; if(valueEl) valueEl.textContent = count + '/100'; if(fillEl) fillEl.style.width = count + '%'; if(card) card.setAttribute('aria-label', name.name + ': ' + count + ' İslami bilgi 100 İslami bilgi. ' + name.meaning); } function incrementCounter(){ count = count >= 100 ? 100 : count + 1; localStorage.setItem(storageKey, String(count)); renderCounter(); } renderCounter(); const practice = document.getElementById('dailyPracticeText'); const goalCard = document.getElementById('dailyGoalCard'); const goalStatus = document.getElementById('dailyGoalStatus'); const goalKey = 'barakaway_daily_goal_done_' + todayKey; let goalDone = localStorage.getItem(goalKey) === '1'; if(practice) practice.textContent = goals[articleDay % goals.length]; function renderGoal(){ if(!goalCard) return; goalCard.classList.toggle('goal-done', goalDone); if(goalDone){ goalCard.style.setProperty('--goal-red-opacity','0'); goalCard.classList.remove('goal-urgent'); if(goalStatus) goalStatus.textContent = '✓'; return; } const minutesNow = hour * 60 + today.getMinutes(); const progress = Math.min(1, Math.max(0, minutesNow / 1440)); const redOpacity = (0.05 + progress * 0.82).toFixed(2); goalCard.style.setProperty('--goal-red-opacity', redOpacity); goalCard.classList.toggle('goal-urgent', hour >= 18); if(goalStatus) goalStatus.textContent = hour >= 18 ? '!' : '•'; } function completeGoal(){ goalDone = true; localStorage.setItem(goalKey,'1'); renderGoal(); } if(goalCard){ goalCard.addEventListener('click', completeGoal); goalCard.addEventListener('keydown', function(e){ if(e.key === 'Enter' || e.key === ' '){ e.preventDefault(); completeGoal(); } }); } renderGoal();
+const articleDay = getDaysSince(articleStartDate); const articleIndex = articles.length ? articleDay % articles.length : 0; const article = articles[articleIndex]; const articleLink = document.getElementById('dailyArticleLink'); const articleTitle = document.getElementById('dailyArticleTitle'); if(article && articleLink && articleTitle){ articleLink.href = article.url; articleTitle.textContent = article.title; } const adhkarLink = document.getElementById('currentAdhkarLink'); const currentAdhkarTitle = document.getElementById('currentAdhkarTitle'); const currentAdhkarText = document.getElementById('currentAdhkarText'); if(currentAdhkarTitle && currentAdhkarText){ if(hour >= 4 && hour < 11){ currentAdhkarTitle.textContent = 'Sabah zikirleri'; currentAdhkarText.textContent = 'Bugün BarakaWay BarakaWay.'; if(adhkarLink) adhkarLink.href = 'adhkar-tr.html#morning'; }else if(hour >= 16 && hour < 22){ currentAdhkarTitle.textContent = 'Akşam zikirleri'; currentAdhkarText.textContent = 'Bugün BarakaWay BarakaWay.'; if(adhkarLink) adhkarLink.href = 'adhkar-tr.html#evening'; }else if(hour < 4){ currentAdhkarTitle.textContent = 'Sonraki zikir'; currentAdhkarText.textContent = 'Sabah zikri — Allah’ı anarak güne başlayın.'; if(adhkarLink) adhkarLink.href = 'adhkar-tr.html#morning'; }else{ currentAdhkarTitle.textContent = 'Sonraki zikir'; currentAdhkarText.textContent = 'Akşam zikri — günü Allah’ı anarak tamamlayın.'; if(adhkarLink) adhkarLink.href = 'adhkar-tr.html#evening'; } } const name = names[articleDay % names.length]; const nameEl = document.getElementById('allahNameBugün'); const meaningEl = document.getElementById('allahNameMeaning'); const card = document.getElementById('allahNameCounterCard'); const valueEl = document.getElementById('allahNameCounterValue'); const fillEl = document.getElementById('allahNameCounterFill'); const storageKey = 'barakaway_name_counter_tr_' + todayKey; let count = Math.max(0, Math.min(100, parseInt(localStorage.getItem(storageKey) || '0', 10) || 0)); function renderCounter(){ if(nameEl) nameEl.textContent = name.name; if(meaningEl) meaningEl.textContent = name.meaning; if(valueEl) valueEl.textContent = count + '/100'; if(fillEl) fillEl.style.width = count + '%'; if(card) card.setAttribute('aria-label', name.name + ': ' + count + ' İslami bilgi 100 İslami bilgi. ' + name.meaning); } function incrementCounter(){ count = count >= 100 ? 100 : count + 1; localStorage.setItem(storageKey, String(count)); renderCounter(); } renderCounter(); const practice = document.getElementById('dailyPracticeText'); const goalCard = document.getElementById('dailyGoalCard'); const goalStatus = document.getElementById('dailyGoalStatus'); const goalKey = 'barakaway_daily_goal_done_' + todayKey; let goalDone = localStorage.getItem(goalKey) === '1'; if(practice) practice.textContent = goals[articleDay % goals.length]; function renderGoal(){ if(!goalCard) return; goalCard.classList.toggle('goal-done', goalDone); if(goalDone){ goalCard.style.setProperty('--goal-red-opacity','0'); goalCard.classList.remove('goal-urgent'); if(goalStatus) goalStatus.textContent = '✓'; return; } const minutesNow = hour * 60 + today.getMinutes(); const progress = Math.min(1, Math.max(0, minutesNow / 1440)); const redOpacity = (0.05 + progress * 0.82).toFixed(2); goalCard.style.setProperty('--goal-red-opacity', redOpacity); goalCard.classList.toggle('goal-urgent', hour >= 18); if(goalStatus) goalStatus.textContent = hour >= 18 ? '!' : '•'; } function completeGoal(){ goalDone = true; localStorage.setItem(goalKey,'1'); renderGoal(); } if(goalCard){ goalCard.addEventListener('click', completeGoal); goalCard.addEventListener('keydown', function(e){ if(e.key === 'Enter' || e.key === ' '){ e.preventDefault(); completeGoal(); } }); } renderGoal();
 })();
 </script> <script>
 (function(){ const todayKey = new Date().toISOString().slice(0,10); const dayNumber = Math.floor(Date.now() / 86400000); const articles = [ {title:'Günün makalesi #1', url:'islamic_articles-tr/001-tr.html'}, {title:'Günün makalesi #2', url:'islamic_articles-tr/002-tr.html'}, {title:'Günün makalesi #3', url:'islamic_articles-tr/003-tr.html'}, {title:'Günün makalesi #4', url:'islamic_articles-tr/004-tr.html'}, {title:'Günün makalesi #5', url:'islamic_articles-tr/005-tr.html'}, {title:'Günün makalesi #6', url:'islamic_articles-tr/006-tr.html'}, {title:'Günün makalesi #7', url:'islamic_articles-tr/007-tr.html'}, {title:'Günün makalesi #8', url:'islamic_articles-tr/008-tr.html'}, {title:'Günün makalesi #9', url:'islamic_articles-tr/009-tr.html'}, {title:'Günün makalesi #10', url:'islamic_articles-tr/010-tr.html'}, {title:'Günün makalesi #11', url:'islamic_articles-tr/011-tr.html'}, {title:'Günün makalesi #12', url:'islamic_articles-tr/012-tr.html'}, {title:'Günün makalesi #13', url:'islamic_articles-tr/013-tr.html'}, {title:'Günün makalesi #14', url:'islamic_articles-tr/014-tr.html'}, {title:'Günün makalesi #15', url:'islamic_articles-tr/015-tr.html'}, {title:'Günün makalesi #16', url:'islamic_articles-tr/016-tr.html'}, {title:'Günün makalesi #17', url:'islamic_articles-tr/017-tr.html'}, {title:'Günün makalesi #18', url:'islamic_articles-tr/018-tr.html'}, {title:'Günün makalesi #19', url:'islamic_articles-tr/019-tr.html'}, {title:'Günün makalesi #20', url:'islamic_articles-tr/020-tr.html'}, {title:'Günün makalesi #21', url:'islamic_articles-tr/021-tr.html'}, {title:'Günün makalesi #22', url:'islamic_articles-tr/022-tr.html'}, {title:'Günün makalesi #23', url:'islamic_articles-tr/023-tr.html'}, {title:'Günün makalesi #24', url:'islamic_articles-tr/024-tr.html'}, {title:'Günün makalesi #25', url:'islamic_articles-tr/025-tr.html'}, {title:'Günün makalesi #26', url:'islamic_articles-tr/026-tr.html'}, {title:'Günün makalesi #27', url:'islamic_articles-tr/027-tr.html'}, {title:'Günün makalesi #28', url:'islamic_articles-tr/028-tr.html'}, {title:'Günün makalesi #29', url:'islamic_articles-tr/029-tr.html'}, {title:'Günün makalesi #30', url:'islamic_articles-tr/030-tr.html'} ]; const names = ['Ar-Rahman', 'Ar-Rahim', 'Al-Malik', 'Al-Quddus', 'As-Salam', 'Al-Mu’min', 'Al-Muhaymin', 'Al-Aziz', 'Al-Jabbar', 'Al-Mutakabbir', 'Al-Khaliq', 'Al-Bari', 'İslami bilgi-', 'Al-Ghaffar', 'Al-Qahhar', 'Al-Wahhab', 'Ar-Razzaq', 'Al-Fattah', 'Al-Alim', 'Al-Qabid', 'Al-Basit', 'Al-Khafid', 'Ar-Rafi', 'Al-Muizz', 'Al-Mudzill', 'As-Sami', 'Al-Basir', 'Al-Hakam', 'Al-Adl', 'Al-Latif', 'Al-Khabir', 'Al-Halim', 'Al-Azim', 'Al-Ghafur', 'Ash-Shakur', 'Al-Aliyy', 'Al-Kabir', 'Al-Hafiz', 'Al-Muqit', 'Al-Hasib']; const goals = [
@@ -11869,5 +11869,165 @@ window.addEventListener('load', function(){ setTimeout(controlProVisibility, 120
   document.addEventListener('click', function(){ setTimeout(paint, 0); setTimeout(paint, 120); }, true);
   document.addEventListener('pointerup', function(){ setTimeout(paint, 0); setTimeout(paint, 120); }, true);
   setInterval(paint, 250);
+})();
+</script>
+
+<!-- TR final correction: Allah-name counter state + Pro upsell layout -->
+<style id="bw-tr-final-state-layout-correction-v41">
+@media(max-width:700px){
+  .today-hub .bw-micro-pro-upsell.is-visible,
+  .today-hub .bw-micro-pro-upsell.bw-tr-pro-stable-visible{
+    display:flex !important;
+    width:calc(100% - 24px) !important;
+    max-width:calc(100% - 24px) !important;
+    margin:0 12px 15px !important;
+    box-sizing:border-box !important;
+    min-height:56px !important;
+    padding:13px 18px !important;
+    border-radius:18px !important;
+    align-items:center !important;
+    justify-content:space-between !important;
+    gap:12px !important;
+  }
+  .today-hub .bw-micro-pro-title{
+    display:block !important;
+    min-width:0 !important;
+    font-size:18px !important;
+    line-height:1.12 !important;
+    font-weight:950 !important;
+    letter-spacing:-.035em !important;
+    white-space:nowrap !important;
+    overflow:hidden !important;
+    text-overflow:ellipsis !important;
+  }
+  .today-hub .bw-micro-pro-status{
+    display:inline-flex !important;
+    flex:0 0 auto !important;
+  }
+
+  .today-hub #allahNameCounterCard{
+    min-height:138px !important;
+    padding:14px !important;
+    box-sizing:border-box !important;
+    position:relative !important;
+    overflow:hidden !important;
+  }
+  .today-hub #allahNameCounterCard .today-action-title{
+    margin:0 0 34px 0 !important;
+  }
+  .today-hub #allahNameCounterCard #allahNameCounterValue{
+    left:22px !important;
+    bottom:15px !important;
+    top:auto !important;
+    right:auto !important;
+    transform:none !important;
+    z-index:4 !important;
+  }
+}
+</style>
+<script id="bw-tr-final-name-counter-state-v41">
+(function(){
+  'use strict';
+  var LANG='tr';
+  var RESET_MARK='bw_tr_name_counter_state_reset_v41';
+
+  function dayKey(){
+    var d=new Date();
+    return d.getFullYear()+'-'+String(d.getMonth()+1).padStart(2,'0')+'-'+String(d.getDate()).padStart(2,'0');
+  }
+  function norm(v){
+    var n=parseInt(v,10);
+    if(!Number.isFinite(n)) n=0;
+    return Math.max(0,Math.min(100,n));
+  }
+  function countKeys(){
+    var d=dayKey();
+    return [
+      'bw_allah_name_counter_persist_'+LANG+'_'+d,
+      'barakaway_name_counter_'+LANG+'_'+d,
+      'barakaway_name_counter_'+LANG+'_v2_'+d,
+      'barakaway_name_counter_'+LANG+'_v3_'+d,
+      'barakaway_name_counter_'+LANG+'_final_'+d
+    ];
+  }
+  function genericCountKeys(){
+    var d=dayKey();
+    return ['barakaway_name_counter_'+d];
+  }
+  function doneKeys(){
+    var d=dayKey();
+    return [
+      'bw_final_done_v2_'+LANG+'_'+d+'_name',
+      'bw_daily_done_v2_'+LANG+'_'+d+'_name',
+      'barakaway_today_'+LANG+'_'+d+'_name',
+      'barakaway_today_'+LANG+'_v2_'+d+'_name',
+      'barakaway_today_'+LANG+'_v3_'+d+'_name',
+      'barakaway_today_'+LANG+'_final_'+d+'_name'
+    ];
+  }
+  function get(k){try{return localStorage.getItem(k);}catch(e){return null;}}
+  function set(k,v){try{localStorage.setItem(k,String(v));}catch(e){}}
+  function del(k){try{localStorage.removeItem(k);}catch(e){}}
+
+  function resetOldBadStateOnce(){
+    try{
+      if(localStorage.getItem(RESET_MARK)==='1') return;
+      countKeys().concat(genericCountKeys()).concat(doneKeys()).forEach(del);
+      localStorage.setItem(RESET_MARK,'1');
+    }catch(e){}
+  }
+
+  function isDone(){
+    return doneKeys().some(function(k){return get(k)==='1';});
+  }
+  function readCount(){
+    var max=0;
+    countKeys().forEach(function(k){max=Math.max(max,norm(get(k)));});
+    return isDone() ? 100 : max;
+  }
+  function writeCount(n){
+    n=norm(n);
+    countKeys().forEach(function(k){set(k,n);});
+    if(n>=100){doneKeys().forEach(function(k){set(k,'1');});}
+    return n;
+  }
+  function paint(){
+    var card=document.getElementById('allahNameCounterCard');
+    var value=document.getElementById('allahNameCounterValue');
+    var fill=document.getElementById('allahNameCounterFill');
+    if(!card||!value) return;
+    var n=readCount();
+    value.textContent=n+'/100';
+    value.setAttribute('aria-label',n+'/100');
+    if(fill) fill.style.width=n+'%';
+    if(n<100 && !isDone()){
+      card.classList.remove('bw-final-done','bw-task-done','task-done','goal-done');
+      card.setAttribute('aria-disabled','false');
+    }
+  }
+
+  resetOldBadStateOnce();
+
+  var originalSetItem=Storage.prototype.setItem;
+  Storage.prototype.setItem=function(key,value){
+    var result=originalSetItem.apply(this,arguments);
+    if(this===localStorage && typeof key==='string'){
+      var d=dayKey();
+      if(key==='barakaway_name_counter_'+d || key.indexOf('barakaway_name_counter_'+LANG+'_')===0 || key.indexOf('bw_allah_name_counter_persist_'+LANG+'_')===0){
+        var incoming=norm(value);
+        var current=readCount();
+        writeCount(Math.max(current,incoming));
+        setTimeout(paint,0);
+        setTimeout(paint,80);
+      }
+    }
+    return result;
+  };
+
+  if(document.readyState==='loading') document.addEventListener('DOMContentLoaded',paint,{once:true}); else paint();
+  window.addEventListener('pageshow',paint);
+  document.addEventListener('click',function(){setTimeout(paint,0);setTimeout(paint,100);},true);
+  document.addEventListener('pointerup',function(){setTimeout(paint,0);setTimeout(paint,100);},true);
+  setInterval(paint,300);
 })();
 </script>
