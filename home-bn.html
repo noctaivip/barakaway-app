@@ -4503,22 +4503,6 @@ body.bw-theme-desert-sand{--home-share-pulse:rgba(255,215,145,.96);--home-share-
 @media (prefers-reduced-motion: reduce){.home-prayer-share-btn,.home-prayer-share-btn::after{animation:none !important;}}
 </style>
 
-
-<style id="bw-task-title-mobile-fit-v1">
-@media(max-width:700px){
-  .today-hub .today-action-title{
-    font-size:11px !important;
-    line-height:1.05 !important;
-    font-weight:850 !important;
-    letter-spacing:-0.015em !important;
-    white-space:nowrap !important;
-    overflow:visible !important;
-    text-overflow:clip !important;
-    max-width:100% !important;
-  }
-}
-</style>
-
 </head>
 <body>
 <div class="mobile-top-controls">
@@ -5919,7 +5903,7 @@ const articleDay = getDaysSince(articleStartDate);
   const card = document.getElementById('allahNameCounterCard');
   const valueEl = document.getElementById('allahNameCounterValue');
   const fillEl = document.getElementById('allahNameCounterFill');
-  const storageKey = 'barakaway_name_counter_ru_' + todayKey;
+  const storageKey = 'barakaway_name_counter_bn_' + todayKey;
   let count = Math.max(0, Math.min(100, parseInt(localStorage.getItem(storageKey) || '0', 10) || 0));
   function renderCounter(){
     if(nameEl) nameEl.textContent = name;
@@ -5952,7 +5936,7 @@ const articleDay = getDaysSince(articleStartDate);
 
   function updateGoalState(){
     const now = new Date();
-    const key = 'barakaway_daily_goal_ru_' + localDateKey(now);
+    const key = 'barakaway_daily_goal_bn_' + localDateKey(now);
     const done = localStorage.getItem(key) === '1';
 
     goalCard.classList.toggle('goal-done', done);
@@ -5972,7 +5956,7 @@ const articleDay = getDaysSince(articleStartDate);
   }
 
   goalCard.addEventListener('click', function(){
-    const key = 'barakaway_daily_goal_ru_' + localDateKey(new Date());
+    const key = 'barakaway_daily_goal_bn_' + localDateKey(new Date());
     const done = localStorage.getItem(key) === '1';
     if(localStorage.getItem(key) === '1'){
       updateGoalState();
@@ -5995,7 +5979,7 @@ const articleDay = getDaysSince(articleStartDate);
 </script>
 <script>
 (function(){
-  const TASK_PREFIX = "barakaway_today_ru_";
+  const TASK_PREFIX = "barakaway_today_bn_";
 
   function localDateKey(date){
     const y = date.getFullYear();
@@ -6666,8 +6650,8 @@ const articleDay = getDaysSince(articleStartDate);
   }
 ];
 
-  const HISTORY_KEY = 'barakaway_ayah_history_ru_v1';
-  const TODAY_KEY = 'barakaway_ayah_today_ru_v1';
+  const HISTORY_KEY = 'barakaway_ayah_history_bn_v1';
+  const TODAY_KEY = 'barakaway_ayah_today_bn_v1';
 
   function localDateKey(date){
     const y = date.getFullYear();
@@ -6692,7 +6676,7 @@ const articleDay = getDaysSince(articleStartDate);
 
   function pickAyahForToday(){
     const today = localDateKey(new Date());
-    const START_KEY = 'barakaway_linear_program_start_ru_v1';
+    const START_KEY = 'barakaway_linear_program_start_bn_v1';
     let start = localStorage.getItem(START_KEY);
     if(!start){
       start = today;
@@ -6902,7 +6886,7 @@ const articleDay = getDaysSince(articleStartDate);
 
   function pickChallengeForToday(){
     const today = localDateKey(new Date());
-    const START_KEY = 'barakaway_linear_program_start_ru_v1';
+    const START_KEY = 'barakaway_linear_program_start_bn_v1';
     let start = localStorage.getItem(START_KEY);
     if(!start){
       start = today;
@@ -11950,10 +11934,10 @@ const articleDay = getDaysSince(articleStartDate);
     }
   })();
 
-const TASK_PREFIX = "barakaway_today_ru_";
-  const MICRO_TODAY_KEY = "barakaway_micro_question_today_ru_v1";
-  const MICRO_HISTORY_KEY = "barakaway_micro_question_history_ru_v1";
-  const MICRO_ANSWER_PREFIX = "barakaway_micro_answer_ru_";
+const TASK_PREFIX = "barakaway_today_bn_";
+  const MICRO_TODAY_KEY = "barakaway_micro_question_today_bn_v1";
+  const MICRO_HISTORY_KEY = "barakaway_micro_question_history_bn_v1";
+  const MICRO_ANSWER_PREFIX = "barakaway_micro_answer_bn_";
 
   function localDateKey(date){
     const y = date.getFullYear();
@@ -11996,7 +11980,7 @@ const TASK_PREFIX = "barakaway_today_ru_";
 
   function pickQuestionForToday(){
     const today = todayKey();
-    const START_KEY = 'barakaway_linear_program_start_ru_v1';
+    const START_KEY = 'barakaway_linear_program_start_bn_v1';
     let start = localStorage.getItem(START_KEY);
     if(!start){
       start = today;
@@ -12085,7 +12069,7 @@ const TASK_PREFIX = "barakaway_today_ru_";
     if(!card) return;
 
     const nameCountKey = TASK_PREFIX + todayKey() + "_name_count";
-    const legacyKeys = ["barakaway_name_counter_" + todayKey(), "barakaway_name_counter_ru_" + todayKey()];
+    const legacyKeys = ["barakaway_name_counter_" + todayKey(), "barakaway_name_counter_bn_" + todayKey()];
 
     function readNumber(key){
       return Math.max(0, Math.min(100, parseInt(localStorage.getItem(key) || "0", 10) || 0));
@@ -12169,8 +12153,8 @@ const TASK_PREFIX = "barakaway_today_ru_";
 </script>
 <script>
 (function(){
-  const TOGGLE_KEY = 'barakaway_tahajjud_alarm_enabled_ru_v1';
-  const ALERTED_KEY_PREFIX = 'barakaway_tahajjud_alarm_alerted_ru_';
+  const TOGGLE_KEY = 'barakaway_tahajjud_alarm_enabled_bn_v1';
+  const ALERTED_KEY_PREFIX = 'barakaway_tahajjud_alarm_alerted_bn_';
   const OFFSET_MINUTES = 60;
 
   const toggle = document.getElementById('tahajjudAlarmToggle');
@@ -12332,7 +12316,7 @@ const TASK_PREFIX = "barakaway_today_ru_";
 <script src="/bottom-nav.js"></script>
 <script>
 (function(){
-  const TASK_PREFIX = "barakaway_today_ru_";
+  const TASK_PREFIX = "barakaway_today_bn_";
 
   function localDateKey(date){
     const y = date.getFullYear();
@@ -12356,7 +12340,7 @@ const TASK_PREFIX = "barakaway_today_ru_";
   function legacyCountKeys(){
     return [
       "barakaway_name_counter_" + todayKey(),
-      "barakaway_name_counter_ru_" + todayKey()
+      "barakaway_name_counter_bn_" + todayKey()
     ];
   }
 
