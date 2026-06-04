@@ -2602,7 +2602,7 @@ body.bw-theme-desert-sand{--home-share-pulse:rgba(255,215,145,.96);--home-share-
 </script>
 
 </head>
-<body> <div class="mobile-top-controls"> <button class="icon-btn left" onclick="changeDilChoice()" aria-label="Change language"> <svg viewBox="0 0 24 24" aria-hidden="true"> <path d="M12 2a10 10 0 100 20 10 10 0 000-20zm6.92 9h-3.02a15.6 15.6 0 00-1.33-5.01A8.03 8.03 0 0118.92 11zM12 4.04c.89 1.08 1.97 3.22 2.28 6.96H9.72C10.03 7.26 11.11 5.12 12 4.04zM4.99 13h3.02a15.6 15.6 0 001.33 5.01A8.03 8.03 0 014.99 13zM8.1 11H5.08a8.03 8.03 0 014.35-5.01A15.6 15.6 0 008.1 11zm1.62 2h4.56c-.31 3.74-1.39 5.88-2.28 6.96-.89-1.08-1.97-3.22-2.28-6.96zm5.18 5.01A15.6 15.6 0 0015.9 13h3.02a8.03 8.03 0 01-4.02 5.01z"/> </svg> <span class="ripple"></span> </button> <div class="theme-toggle-center"> <span class="theme-toggle-label">Işığı Aç</span> <input type="checkbox" class="theme-switch" id="themeSwitch" aria-label="Toggle theme"> </div> <button class="icon-btn right" onclick="shareApp()" aria-label="Paylaş app"> <svg viewBox="0 0 24 24" aria-hidden="true"> <path d="M18 16a2.99 2.99 0 00-2.39 1.2l-6.7-3.35a3.1 3.1 0 000-1.7l6.7-3.35A3 3 0 1014 6a3.1 3.1 0 00.08.68l-6.7 3.35a3 3 0 100 4.94l6.7 3.35A3 3 0 1018 16z"/> </svg> <span class="ripple"></span> </button>
+<body> <div class="mobile-top-controls"> <button class="icon-btn left" onclick="changeLanguageChoice()" aria-label="Change language"> <svg viewBox="0 0 24 24" aria-hidden="true"> <path d="M12 2a10 10 0 100 20 10 10 0 000-20zm6.92 9h-3.02a15.6 15.6 0 00-1.33-5.01A8.03 8.03 0 0118.92 11zM12 4.04c.89 1.08 1.97 3.22 2.28 6.96H9.72C10.03 7.26 11.11 5.12 12 4.04zM4.99 13h3.02a15.6 15.6 0 001.33 5.01A8.03 8.03 0 014.99 13zM8.1 11H5.08a8.03 8.03 0 014.35-5.01A15.6 15.6 0 008.1 11zm1.62 2h4.56c-.31 3.74-1.39 5.88-2.28 6.96-.89-1.08-1.97-3.22-2.28-6.96zm5.18 5.01A15.6 15.6 0 0015.9 13h3.02a8.03 8.03 0 01-4.02 5.01z"/> </svg> <span class="ripple"></span> </button> <div class="theme-toggle-center"> <span class="theme-toggle-label">Işığı Aç</span> <input type="checkbox" class="theme-switch" id="themeSwitch" aria-label="Toggle theme"> </div> <button class="icon-btn right" onclick="shareApp()" aria-label="Paylaş app"> <svg viewBox="0 0 24 24" aria-hidden="true"> <path d="M18 16a2.99 2.99 0 00-2.39 1.2l-6.7-3.35a3.1 3.1 0 000-1.7l6.7-3.35A3 3 0 1014 6a3.1 3.1 0 00.08.68l-6.7 3.35a3 3 0 100 4.94l6.7 3.35A3 3 0 1018 16z"/> </svg> <span class="ripple"></span> </button>
 </div> <div class="ramadan-wrapper">
 <div class="ramadan-bar">
 <div class="ramadan-text">
@@ -11271,6 +11271,143 @@ html.light-mode .today-hub .today-goal-action{
   setInterval(force,150);
 })();
 </script>
+
+<style id="bw-tr-v7-task-language-final-fix">
+/* Final TR-only correction: language button + daily cards start unfinished and clickable */
+.today-hub .today-action:not(.bw-task-done):not(.task-done):not(.goal-done):not(.bw-final-done){
+  animation:none !important;
+  border-color:rgba(102,198,128,.28) !important;
+  background:linear-gradient(135deg,#17261d 0%,#17262a 52%,#143126 100%) !important;
+  box-shadow:0 12px 24px rgba(0,0,0,.18), inset 0 1px 0 rgba(255,255,255,.04) !important;
+  cursor:pointer !important;
+}
+.today-hub .today-action:not(.bw-task-done):not(.task-done):not(.goal-done):not(.bw-final-done) .today-task-status{
+  opacity:0 !important;
+  visibility:hidden !important;
+}
+.today-hub .today-action.bw-task-done .today-task-status,
+.today-hub .today-action.task-done .today-task-status,
+.today-hub .today-action.goal-done .today-task-status,
+.today-hub .today-action.bw-final-done .today-task-status{
+  opacity:1 !important;
+  visibility:visible !important;
+  color:#6ee78d !important;
+}
+.today-hub .today-action:not(.bw-task-done):not(.task-done):not(.goal-done):not(.bw-final-done) .today-action-text,
+.today-hub .today-action:not(.bw-task-done):not(.task-done):not(.goal-done):not(.bw-final-done) .today-micro-question,
+.today-hub .today-action:not(.bw-task-done):not(.task-done):not(.goal-done):not(.bw-final-done) .micro-options,
+.today-hub .today-action:not(.bw-task-done):not(.task-done):not(.goal-done):not(.bw-final-done) .micro-answer-box,
+.today-hub .today-action:not(.bw-task-done):not(.task-done):not(.goal-done):not(.bw-final-done) .today-counter-track{
+  display:none !important;
+}
+</style>
+<script id="bw-tr-v7-task-language-final-fix">
+(function(){
+  'use strict';
+
+  var RESET_MARK = 'bw_tr_daily_unfinished_reset_v7';
+
+  function todayDateKey(){
+    var d = new Date();
+    return d.getFullYear() + '-' + String(d.getMonth()+1).padStart(2,'0') + '-' + String(d.getDate()).padStart(2,'0');
+  }
+
+  function isTaskStorageKey(key){
+    var k = String(key || '').toLowerCase();
+    return (
+      k.indexOf('barakaway_today_tr') !== -1 ||
+      k.indexOf('barakaway_name_counter_tr') !== -1 ||
+      k.indexOf('bw_lang_tr__barakaway_today') !== -1 ||
+      k.indexOf('bw_lang_tr__barakaway_name_counter') !== -1 ||
+      k.indexOf('task_done') !== -1 ||
+      k.indexOf('daily_task') !== -1
+    );
+  }
+
+  function resetDailyTasksOnce(){
+    try{
+      if(localStorage.getItem(RESET_MARK) === todayDateKey()) return;
+      Object.keys(localStorage).forEach(function(key){
+        if(isTaskStorageKey(key)) localStorage.removeItem(key);
+      });
+      localStorage.setItem(RESET_MARK, todayDateKey());
+    }catch(e){}
+  }
+
+  function openLanguageChoice(event){
+    if(event){
+      event.preventDefault();
+      event.stopPropagation();
+      if(event.stopImmediatePropagation) event.stopImmediatePropagation();
+    }
+    try{
+      localStorage.removeItem('siteLanguage');
+      localStorage.removeItem('siteDil');
+      sessionStorage.setItem('forceLanguageSelect','1');
+      sessionStorage.setItem('forceDilSelect','1');
+    }catch(e){}
+    window.location.href = 'index.html';
+  }
+
+  window.changeLanguageChoice = openLanguageChoice;
+  window.changeDilChoice = openLanguageChoice;
+
+  var taskCards = [
+    {id:'dailyArticleLink', status:'dailyArticleStatus'},
+    {id:'currentAdhkarLink', status:'currentAdhkarStatus'},
+    {id:'dailyGoalCard', status:'dailyGoalStatus'},
+    {id:'allahNameCounterCard', status:'allahNameCounterValue'},
+    {id:'dailyMicroKnowledgeCard', status:'dailyMicroKnowledgeStatus'}
+  ];
+
+  function forceUnfinishedVisuals(){
+    taskCards.forEach(function(item){
+      var card = document.getElementById(item.id);
+      if(!card) return;
+      card.classList.remove('bw-final-done','bw-task-done','task-done','goal-done');
+      card.classList.remove('task-urgent','goal-urgent');
+      card.removeAttribute('aria-disabled');
+      card.setAttribute('tabindex', item.id === 'dailyArticleLink' || item.id === 'currentAdhkarLink' ? '0' : (card.getAttribute('tabindex') || '0'));
+      card.style.removeProperty('--task-red-opacity');
+      card.style.removeProperty('--goal-red-opacity');
+
+      var status = document.getElementById(item.status);
+      if(status){
+        if(item.id === 'allahNameCounterCard') status.textContent = '0/100';
+        else status.textContent = '';
+      }
+    });
+
+    var nameMeta = document.querySelector('#allahNameCounterCard .bw-task-compact-meta[data-task-meta="name"]');
+    if(nameMeta) nameMeta.textContent = '0/100';
+    var nameFill = document.getElementById('allahNameCounterFill');
+    if(nameFill) nameFill.style.width = '0%';
+  }
+
+  function bindLanguageButton(){
+    var btn = document.querySelector('.mobile-top-controls .icon-btn.left');
+    if(!btn || btn.dataset.bwTrLangFixed === '1') return;
+    btn.dataset.bwTrLangFixed = '1';
+    btn.setAttribute('onclick','changeLanguageChoice(event)');
+    btn.addEventListener('click', openLanguageChoice, true);
+  }
+
+  function boot(){
+    resetDailyTasksOnce();
+    bindLanguageButton();
+    forceUnfinishedVisuals();
+    setTimeout(forceUnfinishedVisuals, 80);
+    setTimeout(forceUnfinishedVisuals, 350);
+  }
+
+  if(document.readyState === 'loading'){
+    document.addEventListener('DOMContentLoaded', boot, {once:true});
+  }else{
+    boot();
+  }
+})();
+</script>
+
 </body>
 </html> 
 
