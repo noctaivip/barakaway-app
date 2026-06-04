@@ -3837,23 +3837,6 @@ html.light-mode .pro-final-card-title{
 html.dark-mode .today-hub .bw-task-hint{color:#d9e4df;}
 html.light-mode .today-hub .bw-task-hint{color:#53645a;}
 
-/* Not completed: red alert state */
-.today-hub .today-action:not(.bw-task-done){
-  background:linear-gradient(135deg,#17222b 0%,#1d2025 48%,#3a171c 100%) !important;
-  border-color:rgba(255,86,86,.28) !important;
-  animation:bwTaskRedPulse 1.35s ease-in-out infinite !important;
-}
-@keyframes bwTaskRedPulse{
-  0%,100%{
-    box-shadow:0 10px 24px rgba(0,0,0,.18),0 0 0 rgba(255,72,72,0),inset 0 1px 0 rgba(255,255,255,.04);
-    border-color:rgba(255,86,86,.26);
-  }
-  50%{
-    box-shadow:0 10px 24px rgba(0,0,0,.18),0 0 16px rgba(255,72,72,.32),0 0 30px rgba(255,72,72,.16),inset 0 1px 0 rgba(255,255,255,.05);
-    border-color:rgba(255,122,122,.58);
-  }
-}
-
 /* Completed: calm жасыл state, overrides all older urgent classes */
 .today-hub .today-action.bw-task-done,
 .today-hub .today-action.task-done,
@@ -4056,11 +4039,7 @@ html.light-mode .today-hub .bw-task-hint{color:#53645a;}
   position:relative !important;
   box-sizing:border-box !important;
 }
-.today-hub .today-action:not(.bw-task-done){
-  background:linear-gradient(135deg,#17222b 0%,#1d2025 48%,#3a171c 100%) !important;
-  border-color:rgba(255,86,86,.30) !important;
-  animation:bwTaskRedPulse 1.35s ease-in-out infinite !important;
-}
+.today-hub .today-action:not(.bw-task-done){animation:none !important;}
 .today-hub .today-action.bw-task-done{
   background:linear-gradient(135deg,#13261f 0%,#142e23 48%,#153828 100%) !important;
   border-color:rgba(102,198,128,.42) !important;
@@ -14646,6 +14625,98 @@ window.addEventListener('load', function(){ setTimeout(controlProVisibility, 120
 })();
 </script>
 
+
+
+<style id="bw-final-ru-today-hub-parity-fix">
+/* Final parity with RU today cards: titles only, no red alert state, one checkmark. */
+.today-hub .today-action{
+  background:linear-gradient(135deg,#18222c 0%, #17212a 52%, #173126 100%) !important;
+  border-color:rgba(102,198,128,0.20) !important;
+  box-shadow:0 12px 24px rgba(0,0,0,0.18), inset 0 1px 0 rgba(255,255,255,0.04) !important;
+  animation:none !important;
+}
+html.light-mode .today-hub .today-action{
+  background:linear-gradient(135deg,#ffffff 0%, #fbfdfc 52%, #eef7f1 100%) !important;
+  border-color:rgba(45,122,70,0.14) !important;
+  box-shadow:0 12px 24px rgba(15,24,18,0.05), inset 0 1px 0 rgba(255,255,255,0.96) !important;
+}
+.today-hub .today-action.bw-final-done,
+.today-hub .today-action.bw-task-done,
+.today-hub .today-action.task-done,
+.today-hub .today-action.goal-done{
+  background:linear-gradient(135deg,#17261d 0%,#17262a 52%,#143126 100%) !important;
+  border-color:rgba(102,198,128,.38) !important;
+  box-shadow:0 12px 24px rgba(0,0,0,0.18), inset 0 1px 0 rgba(255,255,255,0.04) !important;
+  animation:none !important;
+}
+.today-hub .today-action-text,
+.today-hub .today-ayah-text,
+.today-hub .today-ayah-line,
+.today-hub .today-ayah-task,
+.today-hub .today-micro-question,
+.today-hub .micro-options,
+.today-hub .micro-answer-box,
+.today-hub .bw-task-hint{
+  display:none !important;
+}
+.today-hub .today-action-title{
+  display:block !important;
+  font-size:17px !important;
+  line-height:1.14 !important;
+  margin:0 !important;
+  white-space:normal !important;
+  overflow:visible !important;
+  text-overflow:clip !important;
+  max-width:100% !important;
+}
+.today-hub .today-task-status{
+  opacity:0 !important;
+  pointer-events:none !important;
+  font-size:0 !important;
+  line-height:1 !important;
+}
+.today-hub .today-action.bw-final-done .today-task-status,
+.today-hub .today-action.bw-task-done .today-task-status,
+.today-hub .today-action.task-done .today-task-status,
+.today-hub .today-action.goal-done .today-task-status{
+  opacity:1 !important;
+  font-size:0 !important;
+  color:transparent !important;
+}
+.today-hub .today-action.bw-final-done .today-task-status::before,
+.today-hub .today-action.bw-task-done .today-task-status::before,
+.today-hub .today-action.task-done .today-task-status::before,
+.today-hub .today-action.goal-done .today-task-status::before{
+  content:"✓" !important;
+  font-size:32px !important;
+  line-height:1 !important;
+  color:#6ee78d !important;
+  text-shadow:0 0 14px rgba(110,231,141,.25) !important;
+}
+.today-hub .today-task-status::after,
+.today-hub .today-action::after{
+  content:none !important;
+  display:none !important;
+}
+</style>
+<script id="bw-final-ru-today-hub-parity-js">
+(function(){
+  function cleanCards(){
+    var ids=['dailyArticleLink','currentAdhkarLink','dailyGoalCard','allahNameCounterCard','dailyMicroKnowledgeCard'];
+    ids.forEach(function(id){
+      var card=document.getElementById(id);
+      if(!card) return;
+      card.classList.remove('task-urgent','goal-urgent','bw-needs-pulse');
+      card.style.animation='none';
+      var extra=card.querySelectorAll('.today-action-text,.today-ayah-text,.today-ayah-line,.today-ayah-task,.today-micro-question,.micro-options,.micro-answer-box,.bw-task-hint');
+      extra.forEach(function(el){ el.style.display='none'; });
+    });
+  }
+  if(document.readyState==='loading') document.addEventListener('DOMContentLoaded', cleanCards); else cleanCards();
+  setTimeout(cleanCards,100);
+  setTimeout(cleanCards,600);
+})();
+</script>
 </body>
 </html>
 
