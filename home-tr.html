@@ -10929,6 +10929,81 @@ window.addEventListener('load', function(){ setTimeout(controlProVisibility, 120
 })();
 </script>
 
+
+
+<!-- BW TR mobile task/title + stable Pro +5 patch -->
+<style id="bw-tr-mobile-task-title-pro-stability-patch">
+@media(max-width:700px){
+  .today-hub .today-action-title{
+    font-size:19px !important;
+    line-height:1.14 !important;
+    font-weight:900 !important;
+    letter-spacing:-0.035em !important;
+    text-transform:none !important;
+    white-space:nowrap !important;
+    overflow:hidden !important;
+    text-overflow:ellipsis !important;
+    max-width:100% !important;
+  }
+}
+.bw-micro-pro-upsell.bw-tr-pro-stable-visible{
+  display:flex !important;
+  align-items:center !important;
+  gap:12px !important;
+}
+</style>
+<script id="bw-tr-pro-plus-five-stability-patch">
+(function(){
+  var DAY=(new Date()).toISOString().slice(0,10);
+  var STABLE_KEY='bw_tr_micro_pro_visible_'+DAY;
+  function hasMainMicroDone(){
+    try{
+      if(localStorage.getItem(STABLE_KEY)==='1') return true;
+      var exact=[
+        'bw_task_done_micro_'+DAY,
+        'barakaway_task_micro_'+DAY,
+        'barakaway_daily_micro_'+DAY,
+        'micro_done_'+DAY,
+        'question_today_'+DAY
+      ];
+      for(var i=0;i<exact.length;i++){
+        var v=localStorage.getItem(exact[i]);
+        if(v==='1'||v==='true'||(v&&String(v).indexOf('selected')!==-1)) return true;
+      }
+      for(var j=0;j<localStorage.length;j++){
+        var k=localStorage.key(j)||'';
+        var low=k.toLowerCase();
+        if(k.indexOf(DAY)!==-1 && (low.indexOf('micro')!==-1 || low.indexOf('question_today')!==-1)){
+          var val=localStorage.getItem(k);
+          if(val==='1'||val==='true'||(val&&String(val).indexOf('selected')!==-1)) return true;
+        }
+      }
+    }catch(e){}
+    return false;
+  }
+  function apply(){
+    var link=document.getElementById('dailyMicroProUpsell');
+    if(!link) return;
+    var visible=hasMainMicroDone();
+    if(visible){
+      try{localStorage.setItem(STABLE_KEY,'1');}catch(e){}
+      link.classList.add('is-visible','bw-tr-pro-stable-visible');
+      link.style.display='flex';
+      link.style.visibility='visible';
+      link.style.opacity='1';
+    }else{
+      link.classList.remove('is-visible','bw-tr-pro-stable-visible');
+      link.style.display='none';
+    }
+  }
+  if(document.readyState==='loading') document.addEventListener('DOMContentLoaded',apply,{once:true}); else apply();
+  window.addEventListener('pageshow',apply);
+  window.addEventListener('storage',apply);
+  document.addEventListener('click',function(){setTimeout(apply,80);setTimeout(apply,420);},true);
+  setInterval(apply,250);
+})();
+</script>
+
 </body>
 </html> 
 
