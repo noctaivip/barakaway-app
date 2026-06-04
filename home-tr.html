@@ -10384,25 +10384,24 @@ html.dark-mode .bw-pro-micro-option-btn{background:#1d242c;border:1px solid #2a3
   }
   resetBrokenDoneOnce();
   function mainMicroDone(){
-    var card=document.getElementById('dailyMicroKnowledgeCard');
-    var status=document.getElementById('dailyMicroKnowledgeStatus');
-    if(card){
-      var classes=['bw-final-done','bw-task-done','task-done','micro-answered','done','completed','is-done'];
-      for(var i=0;i<classes.length;i++){if(card.classList.contains(classes[i]))return true;}
-    }
-    if(status && clean(status.textContent)==='✓')return true;
     try{
       var day=todayKey();
-      for(var j=0;j<localStorage.length;j++){
-        var k=localStorage.key(j)||'';
-        var low=k.toLowerCase();
-        if(k.indexOf(day)!==-1 && low.indexOf('micro')!==-1){
-          var v=localStorage.getItem(k);
-          if(v==='1' || (v && v.indexOf('selected')!==-1))return true;
-        }
+      var keys=[
+        'bw_final_done_v2_'+LANG+'_'+day+'_micro',
+        'bw_daily_done_v2_'+LANG+'_'+day+'_micro',
+        'barakaway_today_'+LANG+'_'+day+'_micro',
+        'barakaway_today_'+LANG+'_v2_'+day+'_micro',
+        'barakaway_today_'+LANG+'_v3_'+day+'_micro',
+        'barakaway_today_'+LANG+'_final_'+day+'_micro'
+      ];
+      for(var i=0;i<keys.length;i++){
+        if(localStorage.getItem(keys[i])==='1') return true;
       }
-    }catch(e){}
-    return false;
+      var saved=localStorage.getItem('barakaway_micro_answer_'+LANG+'_'+day);
+      if(!saved) return false;
+      var parsed=JSON.parse(saved);
+      return !!parsed && parsed.date===day && typeof parsed.selected==='number';
+    }catch(e){return false;}
   }
   function syncProStatus(){
     var link=document.getElementById('dailyMicroProUpsell');
@@ -10786,11 +10785,16 @@ function getMicroDone(){
     'barakaway_today_' + BW_LANG + '_' + t + '_micro',
     'barakaway_today_' + BW_LANG + '_v2_' + t + '_micro',
     'barakaway_today_' + BW_LANG + '_v3_' + t + '_micro',
-    'barakaway_today_' + BW_LANG + '_final_' + t + '_micro',
-    'barakaway_micro_answer_' + BW_LANG + '_' + t
+    'barakaway_today_' + BW_LANG + '_final_' + t + '_micro'
   ];
   try{
-    return candidates.some(function(k){ return localStorage.getItem(k) !== null; });
+    for(var i=0;i<candidates.length;i++){
+      if(localStorage.getItem(candidates[i]) === '1') return true;
+    }
+    var saved = localStorage.getItem('barakaway_micro_answer_' + BW_LANG + '_' + t);
+    if(!saved) return false;
+    var parsed = JSON.parse(saved);
+    return !!parsed && parsed.date === t && typeof parsed.selected === 'number';
   }catch(e){return false;}
 }
 
@@ -10950,6 +10954,7 @@ window.addEventListener('load', function(){ setTimeout(controlProVisibility, 120
 <!-- TR daily tasks stability fix: false completed state + PRO upsell flicker -->
 <style id="bw-tr-daily-stability-fix-v1-css">
   .bw-micro-pro-upsell{display:none !important;}
+  .bw-micro-pro-upsell.is-visible:not(.bw-tr-pro-stable-visible){display:none !important;}
   .bw-micro-pro-upsell.bw-tr-pro-stable-visible{display:flex !important;}
 </style>
 <script id="bw-tr-daily-stability-fix-v1">
@@ -11122,6 +11127,52 @@ window.addEventListener('load', function(){ setTimeout(controlProVisibility, 120
 })();
 </script>
 
+
+<script id="bw-tr-pro-upsell-final-visibility-guard-v2">
+(function(){
+  'use strict';
+  function todayKey(){
+    var d=new Date();
+    return d.getFullYear()+'-'+String(d.getMonth()+1).padStart(2,'0')+'-'+String(d.getDate()).padStart(2,'0');
+  }
+  function microDone(){
+    var lang='tr', day=todayKey();
+    try{
+      var keys=[
+        'bw_final_done_v2_'+lang+'_'+day+'_micro',
+        'bw_daily_done_v2_'+lang+'_'+day+'_micro',
+        'barakaway_today_'+lang+'_'+day+'_micro',
+        'barakaway_today_'+lang+'_v2_'+day+'_micro',
+        'barakaway_today_'+lang+'_v3_'+day+'_micro',
+        'barakaway_today_'+lang+'_final_'+day+'_micro'
+      ];
+      for(var i=0;i<keys.length;i++){
+        if(localStorage.getItem(keys[i])==='1') return true;
+      }
+      var saved=localStorage.getItem('barakaway_micro_answer_'+lang+'_'+day);
+      if(!saved) return false;
+      var parsed=JSON.parse(saved);
+      return !!parsed && parsed.date===day && typeof parsed.selected==='number';
+    }catch(e){return false;}
+  }
+  function syncProUpsell(){
+    var up=document.getElementById('dailyMicroProUpsell') || document.querySelector('.bw-micro-pro-upsell');
+    if(!up) return;
+    var visible=microDone();
+    up.classList.toggle('bw-tr-pro-stable-visible', visible);
+    up.classList.toggle('is-visible', visible);
+    up.setAttribute('aria-hidden', visible ? 'false' : 'true');
+    up.style.setProperty('display', visible ? 'flex' : 'none', 'important');
+  }
+  if(document.readyState==='loading') document.addEventListener('DOMContentLoaded', syncProUpsell, {once:true});
+  else syncProUpsell();
+  window.addEventListener('pageshow', syncProUpsell);
+  window.addEventListener('storage', syncProUpsell);
+  document.addEventListener('click', function(){setTimeout(syncProUpsell,0);setTimeout(syncProUpsell,150);}, true);
+  document.addEventListener('pointerup', function(){setTimeout(syncProUpsell,0);setTimeout(syncProUpsell,150);}, true);
+  setInterval(syncProUpsell, 80);
+})();
+</script>
 </body>
 </html> 
 
