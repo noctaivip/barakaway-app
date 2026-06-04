@@ -1937,6 +1937,23 @@ html.light-mode .pro-final-card-title{
 html.dark-mode .today-hub .bw-task-hint{color:#d9e4df;}
 html.light-mode .today-hub .bw-task-hint{color:#53645a;}
 
+/* Not completed: red alert state */
+.today-hub .today-action:not(.bw-task-done){
+  background:linear-gradient(135deg,#17222b 0%,#1d2025 48%,#3a171c 100%) !important;
+  border-color:rgba(255,86,86,.28) !important;
+  animation:bwTaskRedPulse 1.35s ease-in-out infinite !important;
+}
+@keyframes bwTaskRedPulse{
+  0%,100%{
+    box-shadow:0 10px 24px rgba(0,0,0,.18),0 0 0 rgba(255,72,72,0),inset 0 1px 0 rgba(255,255,255,.04);
+    border-color:rgba(255,86,86,.26);
+  }
+  50%{
+    box-shadow:0 10px 24px rgba(0,0,0,.18),0 0 16px rgba(255,72,72,.32),0 0 30px rgba(255,72,72,.16),inset 0 1px 0 rgba(255,255,255,.05);
+    border-color:rgba(255,122,122,.58);
+  }
+}
+
 /* Completed: calm green state, overrides all older urgent classes */
 .today-hub .today-action.bw-task-done,
 .today-hub .today-action.task-done,
@@ -2139,7 +2156,11 @@ html.light-mode .today-hub .bw-task-hint{color:#53645a;}
   position:relative !important;
   box-sizing:border-box !important;
 }
-.today-hub .today-action:not(.bw-task-done){animation:none !important;}
+.today-hub .today-action:not(.bw-task-done){
+  background:linear-gradient(135deg,#17222b 0%,#1d2025 48%,#3a171c 100%) !important;
+  border-color:rgba(255,86,86,.30) !important;
+  animation:bwTaskRedPulse 1.35s ease-in-out infinite !important;
+}
 .today-hub .today-action.bw-task-done{
   background:linear-gradient(135deg,#13261f 0%,#142e23 48%,#153828 100%) !important;
   border-color:rgba(102,198,128,.42) !important;
@@ -2714,13 +2735,13 @@ function isStandaloneMode(){return window.matchMedia("(display-mode: standalone)
 function isAndroid(){return /Android/i.test(navigator.userAgent||"");}
 function isIOS(){return /iPhone|iPad|iPod/i.test(navigator.userAgent||"");}
 function isInAppBrowser(){const ua=navigator.userAgent||"";return /(Telegram|FBAN|FBAV|Instagram|Line|wv)/i.test(ua);}
-async function hasYükleedRelatedApp(){if(typeof navigator.getYükleedRelatedApps!=="function") return false;try{const apps=await navigator.getYükleedRelatedApps();return Array.isArray(apps)&&apps.length>0;}catch(e){return false;}}
-async function updateYükleButtonVisibility(){if(installVisibilityInFlight) return;installVisibilityInFlight=true;const box=document.getElementById("installBox"),btn=document.getElementById("installBtn"),brandTrigger=document.getElementById("brandInstallTrigger"),brandHint=document.getElementById("brandYükleHint");if(!box||!btn){installVisibilityInFlight=false;return;}let hide=isStandaloneMode()?true:await hasYükleedRelatedApp();box.style.display=hide?"none":"block";btn.textContent="Uygulamayı yükle";if(brandTrigger){brandTrigger.classList.toggle("install-trigger",!hide);}if(brandHint){brandHint.classList.toggle("is-visible",!hide&&window.innerWidth<=700);}installVisibilityInFlight=false;}
+async function hasInstalledRelatedApp(){if(typeof navigator.getYükleedRelatedApps!=="function") return false;try{const apps=await navigator.getYükleedRelatedApps();return Array.isArray(apps)&&apps.length>0;}catch(e){return false;}}
+async function updateInstallButtonVisibility(){if(installVisibilityInFlight) return;installVisibilityInFlight=true;const box=document.getElementById("installBox"),btn=document.getElementById("installBtn"),brandTrigger=document.getElementById("brandInstallTrigger"),brandHint=document.getElementById("brandInstallHint");if(!box||!btn){installVisibilityInFlight=false;return;}let hide=isStandaloneMode()?true:await hasInstalledRelatedApp();box.style.display=hide?"none":"block";btn.textContent="Uygulamayı yükle";if(brandTrigger){brandTrigger.classList.toggle("install-trigger",!hide);}if(brandHint){brandHint.classList.toggle("is-visible",!hide&&window.innerWidth<=700);}installVisibilityInFlight=false;}
 function openCurrentPageInExternalBrowser(){const url=window.location.href;if(isAndroid()){const cleaned=url.replace(/^https?:\/\//,"");window.location.href="intent://"+cleaned+"#Intent;scheme=https;package=com.android.chrome;end";return true;}if(!isIOS()){window.open(url,"_blank","noopener,noreferrer");return true;}return false;}
 function openYükleHelp(){const o=document.getElementById("installHelpOverlay");if(!o) return;o.classList.add("open");o.setAttribute("aria-hidden","false");}
-function closeYükleHelp(){const o=document.getElementById("installHelpOverlay");if(!o) return;o.classList.remove("open");o.setAttribute("aria-hidden","true");}
+function closeInstallHelp(){const o=document.getElementById("installHelpOverlay");if(!o) return;o.classList.remove("open");o.setAttribute("aria-hidden","true");}
 async function copyCurrentLink(){const url=getPaylaşUrl(),msg=document.getElementById("shareKopyalaMsg");try{if(navigator.clipboard&&window.isSecureContext){await navigator.clipboard.writeText(url);}else{const t=document.createElement("textarea");t.value=url;t.setAttribute("readonly","readonly");t.style.position="absolute";t.style.left="-9999px";document.body.appendChild(t);t.select();document.execCommand("copy");document.body.removeChild(t);}if(msg){msg.textContent="Uygulama bağlantısı kopyalandı.";msg.classList.add("show");setTimeout(function(){msg.classList.remove("show");},2200);}}catch(e){window.prompt("Bağlantıyı kopyalayın:",url);}}
-async function installApp(){if(deferredYüklePrompt){try{await deferredYüklePrompt.prompt();const c=await deferredYüklePrompt.userChoice;if(c&&c.outcome==="accepted") setTimeout(updateYükleButtonVisibility,300);}catch(e){}finally{deferredYüklePrompt=null;}return;}if(isStandaloneMode()){updateYükleButtonVisibility();return;}if(isInAppBrowser()){if(isAndroid()){const opened=openCurrentPageInExternalBrowser();if(!opened) openYükleHelp();return;}openYükleHelp();return;}if(isIOS()){openYükleHelp();return;}openYükleHelp();}
+async function installApp(){if(deferredYüklePrompt){try{await deferredYüklePrompt.prompt();const c=await deferredYüklePrompt.userChoice;if(c&&c.outcome==="accepted") setTimeout(updateInstallButtonVisibility,300);}catch(e){}finally{deferredYüklePrompt=null;}return;}if(isStandaloneMode()){updateInstallButtonVisibility();return;}if(isInAppBrowser()){if(isAndroid()){const opened=openCurrentPageInExternalBrowser();if(!opened) openYükleHelp();return;}openYükleHelp();return;}if(isIOS()){openYükleHelp();return;}openYükleHelp();}
 function openPaylaşOverlay(){const o=document.getElementById("shareOverlay"),m=document.getElementById("shareKopyalaMsg");if(!o) return;o.classList.add("open");o.setAttribute("aria-hidden","false");if(m) m.classList.remove("show");}
 function closePaylaşOverlay(){const o=document.getElementById("shareOverlay");if(!o) return;o.classList.remove("open");o.setAttribute("aria-hidden","true");}
 async function copyPaylaşLink(){const url=getPaylaşUrl(),msg=document.getElementById("shareKopyalaMsg");try{if(navigator.clipboard&&window.isSecureContext){await navigator.clipboard.writeText(url);}else{const t=document.createElement("textarea");t.value=url;t.setAttribute("readonly","readonly");t.style.position="absolute";t.style.left="-9999px";document.body.appendChild(t);t.select();document.execCommand("copy");document.body.removeChild(t);}if(msg){msg.classList.add("show");setTimeout(function(){msg.classList.remove("show");},2200);}}catch(e){window.prompt("Bağlantıyı kopyalayın:",url);}}
@@ -2797,11 +2818,11 @@ async function sharePrayerTimes(event){
   }catch(e){window.prompt(loc.copyPrompt,text);}
 }
 
-window.addEventListener("beforeinstallprompt",function(e){e.preventDefault();deferredYüklePrompt=e;updateYükleButtonVisibility();});
-window.addEventListener("appinstalled",function(){deferredYüklePrompt=null;updateYükleButtonVisibility();});
-window.addEventListener("pageshow",function(){updateYükleButtonVisibility();});
-document.addEventListener("visibilitychange",function(){if(!document.hidden) updateYükleButtonVisibility();});
-window.addEventListener("DOMContentLoaded",function(){const installBtn=document.getElementById("installBtn"),brandInstallTrigger=document.getElementById("brandInstallTrigger"),brandYükleHint=document.getElementById("brandYükleHint"),shareOverlay=document.getElementById("shareOverlay"),shareKapatBtn=document.getElementById("shareKapatBtn"),helpOverlay=document.getElementById("installHelpOverlay"),helpKapat=document.getElementById("installHelpKapatBtn"),helpPrimary=document.getElementById("installHelpPrimaryBtn"),helpKopyala=document.getElementById("installHelpKopyalaBtn");if(installBtn) installBtn.addEventListener("click",installApp);if(brandInstallTrigger) brandInstallTrigger.addEventListener("click",function(){if(window.innerWidth<=700&&!isStandaloneMode()) installApp();});if(brandYükleHint){brandYükleHint.addEventListener("click",installApp);brandYükleHint.addEventListener("keydown",function(e){if(e.key==="Enter"||e.key===" "){e.preventDefault();installApp();}});}if(shareKapatBtn) shareKapatBtn.addEventListener("click",closePaylaşOverlay);if(shareOverlay) shareOverlay.addEventListener("click",function(e){if(e.target===shareOverlay) closePaylaşOverlay();});if(helpKapat) helpKapat.addEventListener("click",closeYükleHelp);if(helpOverlay) helpOverlay.addEventListener("click",function(e){if(e.target===helpOverlay) closeYükleHelp();});if(helpPrimary) helpPrimary.addEventListener("click",function(){const opened=openCurrentPageInExternalBrowser();if(!opened) copyCurrentLink();});if(helpKopyala) helpKopyala.addEventListener("click",copyCurrentLink);document.querySelectorAll("[data-share]").forEach(function(button){button.addEventListener("click",async function(){const type=button.getAttribute("data-share");if(type==="copy"){await copyPaylaşLink();return;}if(type==="more"){if(navigator.share){try{await navigator.share({title:"BarakaWay",text:"BarakaWay",url:getPaylaşUrl()});closePaylaşOverlay();return;}catch(e){}}await copyPaylaşLink();return;}openPaylaşTarget(type);closePaylaşOverlay();});});updateYükleButtonVisibility();setTimeout(updateYükleButtonVisibility,1200);window.addEventListener("resize",updateYükleButtonVisibility);});
+window.addEventListener("beforeinstallprompt",function(e){e.preventDefault();deferredYüklePrompt=e;updateInstallButtonVisibility();});
+window.addEventListener("appinstalled",function(){deferredYüklePrompt=null;updateInstallButtonVisibility();});
+window.addEventListener("pageshow",function(){updateInstallButtonVisibility();});
+document.addEventListener("visibilitychange",function(){if(!document.hidden) updateInstallButtonVisibility();});
+window.addEventListener("DOMContentLoaded",function(){const installBtn=document.getElementById("installBtn"),brandInstallTrigger=document.getElementById("brandInstallTrigger"),brandInstallHint=document.getElementById("brandInstallHint"),shareOverlay=document.getElementById("shareOverlay"),shareKapatBtn=document.getElementById("shareKapatBtn"),helpOverlay=document.getElementById("installHelpOverlay"),helpKapat=document.getElementById("installHelpKapatBtn"),helpPrimary=document.getElementById("installHelpPrimaryBtn"),helpKopyala=document.getElementById("installHelpKopyalaBtn");if(installBtn) installBtn.addEventListener("click",installApp);if(brandInstallTrigger) brandInstallTrigger.addEventListener("click",function(){if(window.innerWidth<=700&&!isStandaloneMode()) installApp();});if(brandInstallHint){brandInstallHint.addEventListener("click",installApp);brandInstallHint.addEventListener("keydown",function(e){if(e.key==="Enter"||e.key===" "){e.preventDefault();installApp();}});}if(shareKapatBtn) shareKapatBtn.addEventListener("click",closePaylaşOverlay);if(shareOverlay) shareOverlay.addEventListener("click",function(e){if(e.target===shareOverlay) closePaylaşOverlay();});if(helpKapat) helpKapat.addEventListener("click",closeInstallHelp);if(helpOverlay) helpOverlay.addEventListener("click",function(e){if(e.target===helpOverlay) closeInstallHelp();});if(helpPrimary) helpPrimary.addEventListener("click",function(){const opened=openCurrentPageInExternalBrowser();if(!opened) copyCurrentLink();});if(helpKopyala) helpKopyala.addEventListener("click",copyCurrentLink);document.querySelectorAll("[data-share]").forEach(function(button){button.addEventListener("click",async function(){const type=button.getAttribute("data-share");if(type==="copy"){await copyPaylaşLink();return;}if(type==="more"){if(navigator.share){try{await navigator.share({title:"BarakaWay",text:"BarakaWay",url:getPaylaşUrl()});closePaylaşOverlay();return;}catch(e){}}await copyPaylaşLink();return;}openPaylaşTarget(type);closePaylaşOverlay();});});updateInstallButtonVisibility();setTimeout(updateInstallButtonVisibility,1200);window.addEventListener("resize",updateInstallButtonVisibility);});
 </script>
 <script>
 (function(){ const promo = document.getElementById("mobilePromoText"); if (!promo) return; if (window.innerWidth > 700) return; const promoTexts = [ { text: "Yakındaki tüm hizmetler", brand: false }, { text: "GörevsLocal", brand: true } ]; let promoIndex = 0; setInterval(() => { promo.classList.add("is-hidden"); setTimeout(() => { promoIndex = (promoIndex + 1) % promoTexts.length; promo.textContent = promoTexts[promoIndex].text; if (promoTexts[promoIndex].brand) { promo.classList.add("is-brand"); } else { promo.classList.remove("is-brand"); } promo.classList.remove("is-hidden"); }, 420); }, 2800);
@@ -10983,94 +11004,271 @@ window.addEventListener('load', function(){ setTimeout(controlProVisibility, 120
 
 
 
-<style id="bw-final-ru-today-hub-parity-fix">
-/* Final parity with RU today cards: titles only, no red alert state, one checkmark. */
+<!-- BW PATCH: RU-reference daily cards final parity — title-only cards, no red state, single status mark. -->
+<style id="bw-ru-reference-daily-cards-final-v3">
 .today-hub .today-action{
-  background:linear-gradient(135deg,#18222c 0%, #17212a 52%, #173126 100%) !important;
-  border-color:rgba(102,198,128,0.20) !important;
-  box-shadow:0 12px 24px rgba(0,0,0,0.18), inset 0 1px 0 rgba(255,255,255,0.04) !important;
   animation:none !important;
+  outline:none !important;
 }
-html.light-mode .today-hub .today-action{
-  background:linear-gradient(135deg,#ffffff 0%, #fbfdfc 52%, #eef7f1 100%) !important;
-  border-color:rgba(45,122,70,0.14) !important;
-  box-shadow:0 12px 24px rgba(15,24,18,0.05), inset 0 1px 0 rgba(255,255,255,0.96) !important;
-}
-.today-hub .today-action.bw-final-done,
-.today-hub .today-action.bw-task-done,
-.today-hub .today-action.task-done,
-.today-hub .today-action.goal-done{
-  background:linear-gradient(135deg,#17261d 0%,#17262a 52%,#143126 100%) !important;
-  border-color:rgba(102,198,128,.38) !important;
-  box-shadow:0 12px 24px rgba(0,0,0,0.18), inset 0 1px 0 rgba(255,255,255,0.04) !important;
+.today-hub .today-action.goal-urgent,
+.today-hub .today-action.task-urgent,
+.today-hub .today-action.bw-needs-pulse{
   animation:none !important;
+  outline:none !important;
+  border-color:rgba(102,198,128,.28) !important;
+}
+.today-hub .today-action::before,
+.today-hub .today-action::after,
+.today-hub .today-task-status::before,
+.today-hub .today-task-status::after{
+  content:none !important;
+  display:none !important;
 }
 .today-hub .today-action-text,
 .today-hub .today-ayah-text,
 .today-hub .today-ayah-line,
 .today-hub .today-ayah-task,
+.today-hub .today-counter-track,
+.today-hub .today-counter-fill,
 .today-hub .today-micro-question,
 .today-hub .micro-options,
 .today-hub .micro-answer-box,
-.today-hub .bw-task-hint{
+.today-hub .bw-task-hint,
+.today-hub .bw-task-compact-hint{
   display:none !important;
+  visibility:hidden !important;
+  opacity:0 !important;
+  pointer-events:none !important;
 }
 .today-hub .today-action-title{
   display:block !important;
-  font-size:17px !important;
-  line-height:1.14 !important;
-  margin:0 !important;
+  width:auto !important;
+  max-width:100% !important;
+  min-width:0 !important;
   white-space:normal !important;
   overflow:visible !important;
   text-overflow:clip !important;
-  max-width:100% !important;
 }
 .today-hub .today-task-status{
-  opacity:0 !important;
+  visibility:visible !important;
+  opacity:1 !important;
   pointer-events:none !important;
-  font-size:0 !important;
-  line-height:1 !important;
 }
 .today-hub .today-action.bw-final-done .today-task-status,
 .today-hub .today-action.bw-task-done .today-task-status,
 .today-hub .today-action.task-done .today-task-status,
-.today-hub .today-action.goal-done .today-task-status{
-  opacity:1 !important;
-  font-size:0 !important;
-  color:transparent !important;
-}
-.today-hub .today-action.bw-final-done .today-task-status::before,
-.today-hub .today-action.bw-task-done .today-task-status::before,
-.today-hub .today-action.task-done .today-task-status::before,
-.today-hub .today-action.goal-done .today-task-status::before{
-  content:"✓" !important;
+.today-hub .today-action.goal-done .today-task-status,
+.today-hub .today-action.micro-answered .today-task-status{
   font-size:32px !important;
   line-height:1 !important;
   color:#6ee78d !important;
+  background:transparent !important;
+  border:0 !important;
+  box-shadow:none !important;
   text-shadow:0 0 14px rgba(110,231,141,.25) !important;
 }
-.today-hub .today-task-status::after,
-.today-hub .today-action::after{
-  content:none !important;
-  display:none !important;
+.today-hub #allahNameCounterCard .today-task-status{
+  color:#f5d98a !important;
 }
 </style>
-<script id="bw-final-ru-today-hub-parity-js">
+<script id="bw-ru-reference-daily-cards-final-v3-js">
 (function(){
-  function cleanCards(){
-    var ids=['dailyArticleLink','currentAdhkarLink','dailyGoalCard','allahNameCounterCard','dailyMicroKnowledgeCard'];
+  'use strict';
+  var ids=['dailyArticleLink','currentAdhkarLink','dailyGoalCard','allahNameCounterCard','dailyMicroKnowledgeCard'];
+  function normalizeDailyCards(){
     ids.forEach(function(id){
       var card=document.getElementById(id);
       if(!card) return;
-      card.classList.remove('task-urgent','goal-urgent','bw-needs-pulse');
+      card.classList.remove('goal-urgent','task-urgent','bw-needs-pulse');
       card.style.animation='none';
-      var extra=card.querySelectorAll('.today-action-text,.today-ayah-text,.today-ayah-line,.today-ayah-task,.today-micro-question,.micro-options,.micro-answer-box,.bw-task-hint');
-      extra.forEach(function(el){ el.style.display='none'; });
+      card.querySelectorAll('.today-action-text,.today-ayah-text,.today-ayah-line,.today-ayah-task,.today-counter-track,.today-counter-fill,.today-micro-question,.micro-options,.micro-answer-box,.bw-task-hint,.bw-task-compact-hint').forEach(function(el){
+        el.style.setProperty('display','none','important');
+        el.style.setProperty('visibility','hidden','important');
+        el.style.setProperty('opacity','0','important');
+      });
+      var title=card.querySelector('.today-action-title');
+      if(title){
+        title.style.setProperty('white-space','normal','important');
+        title.style.setProperty('overflow','visible','important');
+        title.style.setProperty('text-overflow','clip','important');
+        title.style.setProperty('max-width','100%','important');
+      }
+      var status=card.querySelector('.today-task-status');
+      if(status){
+        var t=(status.textContent||'').replace(/✓\s*✓/g,'✓').trim();
+        if(t==='✓ ✓') t='✓';
+        status.textContent=t;
+      }
     });
   }
-  if(document.readyState==='loading') document.addEventListener('DOMContentLoaded', cleanCards); else cleanCards();
-  setTimeout(cleanCards,100);
-  setTimeout(cleanCards,600);
+  if(document.readyState==='loading') document.addEventListener('DOMContentLoaded', normalizeDailyCards); else normalizeDailyCards();
+  window.addEventListener('load', function(){ setTimeout(normalizeDailyCards,80); setTimeout(normalizeDailyCards,500); });
+  window.addEventListener('pageshow', normalizeDailyCards);
+})();
+</script>
+
+
+
+<!-- BW PATCH: final visual parity lock — no red urgency, title-only cards, one visible status. -->
+<style id="bw-ru-reference-daily-cards-final-v4">
+.today-hub .today-action,
+.today-hub .today-daily-task,
+.today-hub .today-goal-action{
+  --task-red-opacity:0 !important;
+  --goal-red-opacity:0 !important;
+  animation:none !important;
+  outline:none !important;
+  background:linear-gradient(135deg,#18222c 0%, #17212a 52%, #173126 100%) !important;
+  border-color:rgba(102,198,128,.30) !important;
+  box-shadow:0 12px 24px rgba(0,0,0,.18), inset 0 1px 0 rgba(255,255,255,.04) !important;
+}
+html.light-mode .today-hub .today-action,
+html.light-mode .today-hub .today-daily-task,
+html.light-mode .today-hub .today-goal-action{
+  background:linear-gradient(135deg,#ffffff 0%, #fbfdfc 52%, #eef7f1 100%) !important;
+  border-color:rgba(45,122,70,.16) !important;
+  box-shadow:0 12px 24px rgba(15,24,18,.05), inset 0 1px 0 rgba(255,255,255,.96) !important;
+}
+.today-hub .today-action.goal-urgent,
+.today-hub .today-action.task-urgent,
+.today-hub .today-action.bw-needs-pulse{
+  --task-red-opacity:0 !important;
+  --goal-red-opacity:0 !important;
+  animation:none !important;
+}
+.today-hub .today-action::before,
+.today-hub .today-action::after,
+.today-hub .today-daily-task::before,
+.today-hub .today-daily-task::after,
+.today-hub .today-goal-action::before,
+.today-hub .today-goal-action::after,
+.today-hub .today-task-status::before,
+.today-hub .today-task-status::after{
+  content:none !important;
+  display:none !important;
+  opacity:0 !important;
+}
+.today-hub .today-action-text,
+.today-hub .today-ayah-text,
+.today-hub .today-ayah-line,
+.today-hub .today-ayah-task,
+.today-hub .today-counter-track,
+.today-hub .today-counter-fill,
+.today-hub .today-micro-question,
+.today-hub .micro-options,
+.today-hub .micro-answer-box,
+.today-hub .bw-task-hint,
+.today-hub .bw-task-compact-hint{
+  display:none !important;
+  visibility:hidden !important;
+  opacity:0 !important;
+  pointer-events:none !important;
+}
+.today-hub .today-action-title{
+  display:block !important;
+  width:auto !important;
+  max-width:100% !important;
+  min-width:0 !important;
+  white-space:normal !important;
+  overflow:visible !important;
+  text-overflow:clip !important;
+}
+.today-hub .today-task-status{
+  visibility:visible !important;
+  opacity:1 !important;
+  pointer-events:none !important;
+}
+.today-hub .today-action.bw-final-done .today-task-status,
+.today-hub .today-action.bw-task-done .today-task-status,
+.today-hub .today-action.task-done .today-task-status,
+.today-hub .today-action.goal-done .today-task-status,
+.today-hub .today-action.micro-answered .today-task-status{
+  background:transparent !important;
+  border:0 !important;
+  box-shadow:none !important;
+  color:#6ee78d !important;
+  font-size:32px !important;
+  line-height:1 !important;
+  text-shadow:0 0 14px rgba(110,231,141,.25) !important;
+}
+.today-hub #allahNameCounterCard .today-task-status{
+  color:#f5d98a !important;
+}
+</style>
+<script id="bw-ru-reference-daily-cards-final-v4-js">
+(function(){
+  'use strict';
+  var ids=['dailyArticleLink','currentAdhkarLink','dailyGoalCard','allahNameCounterCard','dailyMicroKnowledgeCard'];
+  function lockTodayCards(){
+    ids.forEach(function(id){
+      var card=document.getElementById(id);
+      if(!card) return;
+      card.classList.remove('goal-urgent','task-urgent','bw-needs-pulse');
+      card.style.setProperty('--task-red-opacity','0','important');
+      card.style.setProperty('--goal-red-opacity','0','important');
+      card.style.setProperty('animation','none','important');
+      card.querySelectorAll('.today-action-text,.today-ayah-text,.today-ayah-line,.today-ayah-task,.today-counter-track,.today-counter-fill,.today-micro-question,.micro-options,.micro-answer-box,.bw-task-hint,.bw-task-compact-hint').forEach(function(el){
+        el.style.setProperty('display','none','important');
+        el.style.setProperty('visibility','hidden','important');
+        el.style.setProperty('opacity','0','important');
+      });
+      var title=card.querySelector('.today-action-title');
+      if(title){
+        title.style.setProperty('white-space','normal','important');
+        title.style.setProperty('overflow','visible','important');
+        title.style.setProperty('text-overflow','clip','important');
+        title.style.setProperty('max-width','100%','important');
+      }
+      var status=card.querySelector('.today-task-status');
+      if(status){
+        var t=(status.textContent||'').replace(/✓\s*✓/g,'✓').trim();
+        status.textContent=t;
+      }
+    });
+  }
+  if(document.readyState==='loading') document.addEventListener('DOMContentLoaded', lockTodayCards); else lockTodayCards();
+  window.addEventListener('load', function(){ lockTodayCards(); setTimeout(lockTodayCards,80); setTimeout(lockTodayCards,500); setTimeout(lockTodayCards,1500); });
+  window.addEventListener('pageshow', lockTodayCards);
+  setInterval(lockTodayCards,1200);
+})();
+</script>
+
+
+
+<!-- BW PATCH: force RU-reference daily cards inline, after all older urgency scripts. -->
+<style id="bw-force-daily-cards-v6-css">
+.today-hub .today-action-text,.today-hub .today-ayah-text,.today-hub .today-ayah-line,.today-hub .today-ayah-task,.today-hub .today-counter-track,.today-hub .today-counter-fill,.today-hub .today-micro-question,.today-hub .micro-options,.today-hub .micro-answer-box,.today-hub .bw-task-hint,.today-hub .bw-task-compact-hint{display:none!important;visibility:hidden!important;opacity:0!important;pointer-events:none!important;}
+.today-hub .today-action::before,.today-hub .today-action::after,.today-hub .today-daily-task::before,.today-hub .today-daily-task::after,.today-hub .today-goal-action::before,.today-hub .today-goal-action::after,.today-hub .today-task-status::before,.today-hub .today-task-status::after{content:none!important;display:none!important;opacity:0!important;}
+.today-hub .today-action-title{white-space:normal!important;overflow:visible!important;text-overflow:clip!important;max-width:100%!important;}
+</style>
+<script id="bw-force-daily-cards-v6-js">
+(function(){
+  'use strict';
+  var ids=['dailyArticleLink','currentAdhkarLink','dailyGoalCard','allahNameCounterCard','dailyMicroKnowledgeCard'];
+  function setImportant(el,prop,val){try{el.style.setProperty(prop,val,'important');}catch(e){}}
+  function force(){
+    ids.forEach(function(id){
+      var card=document.getElementById(id);
+      if(!card) return;
+      card.classList.remove('goal-urgent','task-urgent','bw-needs-pulse');
+      setImportant(card,'--task-red-opacity','0');
+      setImportant(card,'--goal-red-opacity','0');
+      setImportant(card,'animation','none');
+      setImportant(card,'outline','none');
+      setImportant(card,'background','linear-gradient(135deg,#18222c 0%,#17212a 52%,#173126 100%)');
+      setImportant(card,'border-color','rgba(102,198,128,.30)');
+      setImportant(card,'box-shadow','0 12px 24px rgba(0,0,0,.18), inset 0 1px 0 rgba(255,255,255,.04)');
+      card.querySelectorAll('.today-action-text,.today-ayah-text,.today-ayah-line,.today-ayah-task,.today-counter-track,.today-counter-fill,.today-micro-question,.micro-options,.micro-answer-box,.bw-task-hint,.bw-task-compact-hint').forEach(function(el){setImportant(el,'display','none');setImportant(el,'visibility','hidden');setImportant(el,'opacity','0');});
+      var title=card.querySelector('.today-action-title');
+      if(title){setImportant(title,'white-space','normal');setImportant(title,'overflow','visible');setImportant(title,'text-overflow','clip');setImportant(title,'max-width','100%');}
+      var st=card.querySelector('.today-task-status');
+      if(st){st.textContent=(st.textContent||'').replace(/✓\s*✓/g,'✓').trim();}
+    });
+  }
+  if(document.readyState==='loading') document.addEventListener('DOMContentLoaded',force); else force();
+  window.addEventListener('load',function(){force();setTimeout(force,50);setTimeout(force,200);setTimeout(force,700);setTimeout(force,1600);});
+  window.addEventListener('pageshow',force);
+  setInterval(force,150);
 })();
 </script>
 </body>
