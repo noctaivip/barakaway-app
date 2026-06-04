@@ -5820,7 +5820,8 @@ const articleDay = getDaysSince(articleStartDate);
   const card = document.getElementById('allahNameCounterCard');
   const valueEl = document.getElementById('allahNameCounterValue');
   const fillEl = document.getElementById('allahNameCounterFill');
-  const storageKey = 'barakaway_name_counter_kz_' + todayKey;
+  const LANG_KEY = (document.documentElement.getAttribute('lang') || 'id').toLowerCase().split('-')[0];
+  const storageKey = 'barakaway_name_counter_' + LANG_KEY + '_' + todayKey;
   let count = Math.max(0, Math.min(100, parseInt(localStorage.getItem(storageKey) || '0', 10) || 0));
   function renderCounter(){
     if(nameEl) nameEl.textContent = name;
@@ -5829,7 +5830,7 @@ const articleDay = getDaysSince(articleStartDate);
     if(card) card.setAttribute('aria-label', name + ': ' + count + ' 100 қайталаудың ішінен');
   }
   function incrementCounter(){
-    count = count >= 100 ? 0 : count + 1;
+    count = Math.min(100, count + 1);
     localStorage.setItem(storageKey, String(count));
     renderCounter();
   }
@@ -5903,7 +5904,8 @@ const articleDay = getDaysSince(articleStartDate);
 </script>
 <script>
 (function(){
-  const TASK_PREFIX = "barakaway_today_kz_";
+  const LANG_KEY = (document.documentElement.getAttribute("lang") || "id").toLowerCase().split("-")[0];
+  const TASK_PREFIX = "barakaway_today_" + LANG_KEY + "_";
 
   function localDateKey(date){
     const y = date.getFullYear();
@@ -11998,7 +12000,8 @@ const TASK_PREFIX = "barakaway_today_kz_";
     if(!card) return;
 
     const nameCountKey = TASK_PREFIX + todayKey() + "_name_count";
-    const legacyKeys = ["barakaway_name_counter_" + todayKey(), "barakaway_name_counter_kz_" + todayKey()];
+    const langKey = (document.documentElement.getAttribute("lang") || "id").toLowerCase().split("-")[0];
+    const legacyKeys = ["barakaway_name_counter_" + todayKey(), "barakaway_name_counter_" + langKey + "_" + todayKey()];
 
     function readNumber(key){
       return Math.max(0, Math.min(100, parseInt(localStorage.getItem(key) || "0", 10) || 0));
@@ -12249,7 +12252,8 @@ const TASK_PREFIX = "barakaway_today_kz_";
 
 <script>
 (function(){
-  const TASK_PREFIX = "barakaway_today_kz_";
+  const LANG_KEY = (document.documentElement.getAttribute("lang") || "id").toLowerCase().split("-")[0];
+  const TASK_PREFIX = "barakaway_today_" + LANG_KEY + "_";
 
   function localDateKey(date){
     const y = date.getFullYear();
@@ -12273,7 +12277,7 @@ const TASK_PREFIX = "barakaway_today_kz_";
   function legacyCountKeys(){
     return [
       "barakaway_name_counter_" + todayKey(),
-      "barakaway_name_counter_kz_" + todayKey()
+      "barakaway_name_counter_" + LANG_KEY + "_" + todayKey()
     ];
   }
 
@@ -12501,8 +12505,9 @@ const TASK_PREFIX = "barakaway_today_kz_";
 <script id="bw-kz-task-compact-modal-final">
 (function(){
   'use strict';
-  const TASK_PREFIX = 'barakaway_today_kz_v3_';
-  const NAME_COUNT_PREFIX = 'barakaway_name_counter_kz_v3_';
+  const LANG_KEY = (document.documentElement.getAttribute('lang') || 'id').toLowerCase().split('-')[0];
+  const TASK_PREFIX = 'barakaway_today_' + LANG_KEY + '_v3_';
+  const NAME_COUNT_PREFIX = 'barakaway_name_counter_' + LANG_KEY + '_v3_';
   const HINT = "Бүгінгі тапсырманы орындау үшін басыңыз";
 
   function localDateKey(date){
@@ -12811,7 +12816,7 @@ const TASK_PREFIX = "barakaway_today_kz_";
 (function(){
   'use strict';
 
-  var LANG = "kz";
+  var LANG = (document.documentElement.getAttribute('lang') || 'id').toLowerCase().split('-')[0];
   var COUNT_KEY_BASE = 'barakaway_name_counter_' + LANG + '_final_';
   var DONE_KEY_BASE = 'barakaway_today_' + LANG + '_final_';
 
