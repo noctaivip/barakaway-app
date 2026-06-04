@@ -11430,12 +11430,11 @@ window.addEventListener('load', function(){ setTimeout(controlProVisibility, 120
 </script>
 
 
-<style id="bw-uz-pro-strip-stability-fix">
+
+<style id="bw-uz-mobile-freeze-prologic-fix-css">
 @media(max-width:700px){
-  body #dailyMicroProUpsell,
-  body .bw-micro-pro-upsell,
-  body .today-hub #dailyMicroProUpsell,
-  body .today-hub .bw-micro-pro-upsell{
+  body #dailyMicroProUpsell.bw-uz-pro-visible,
+  body .bw-micro-pro-upsell.bw-uz-pro-visible{
     display:flex !important;
     visibility:visible !important;
     opacity:1 !important;
@@ -11448,63 +11447,97 @@ window.addEventListener('load', function(){ setTimeout(controlProVisibility, 120
     overflow:visible !important;
   }
 
-  body #dailyMicroProUpsell:not(.is-visible),
-  body .bw-micro-pro-upsell:not(.is-visible){
-    display:flex !important;
-    visibility:visible !important;
-    opacity:1 !important;
-  }
-
-  body #dailyMicroProUpsell.is-hidden,
-  body .bw-micro-pro-upsell.is-hidden{
-    display:flex !important;
-    visibility:visible !important;
-    opacity:1 !important;
+  body #dailyMicroProUpsell:not(.bw-uz-pro-visible),
+  body .bw-micro-pro-upsell:not(.bw-uz-pro-visible){
+    display:none !important;
   }
 }
 </style>
-<script id="bw-uz-pro-strip-stability-fix-js">
+<script id="bw-uz-mobile-freeze-prologic-fix-js">
 (function(){
-  function keepProStripVisible(){
+  'use strict';
+
+  var LANG = 'uz';
+
+  function todayKey(){
+    var d = new Date();
+    return d.getFullYear() + '-' + String(d.getMonth()+1).padStart(2,'0') + '-' + String(d.getDate()).padStart(2,'0');
+  }
+
+  function getRaw(key){
+    try{return localStorage.getItem(key);}catch(e){return null;}
+  }
+
+  function microDone(){
+    var t = todayKey();
+    var keys = [
+      'bw_final_done_v2_' + LANG + '_' + t + '_micro',
+      'bw_daily_done_v2_' + LANG + '_' + t + '_micro',
+      'barakaway_today_' + LANG + '_' + t + '_micro',
+      'barakaway_today_' + LANG + '_v2_' + t + '_micro',
+      'barakaway_today_' + LANG + '_v3_' + t + '_micro',
+      'barakaway_today_' + LANG + '_final_' + t + '_micro',
+      'barakaway_micro_answer_' + LANG + '_' + t
+    ];
+
+    for(var i=0;i<keys.length;i++){
+      var direct = getRaw(keys[i]);
+      if(direct !== null && direct !== '0') return true;
+      var namespaced = getRaw('bw_lang_' + LANG + '__' + keys[i]);
+      if(namespaced !== null && namespaced !== '0') return true;
+    }
+
+    var card = document.getElementById('dailyMicroKnowledgeCard');
+    if(card && (
+      card.classList.contains('task-done') ||
+      card.classList.contains('goal-done') ||
+      card.classList.contains('bw-task-done') ||
+      card.classList.contains('bw-final-done') ||
+      card.getAttribute('data-bw-done') === '1'
+    )) return true;
+
+    return false;
+  }
+
+  function syncProStrip(){
+    var visible = microDone();
     var nodes = document.querySelectorAll('#dailyMicroProUpsell,.bw-micro-pro-upsell');
     nodes.forEach(function(node){
-      node.classList.add('is-visible');
+      node.classList.toggle('bw-uz-pro-visible', visible);
       node.classList.remove('is-hidden');
-      node.style.display = 'flex';
-      node.style.visibility = 'visible';
-      node.style.opacity = '1';
-      node.style.pointerEvents = 'auto';
-      node.style.transform = 'none';
-      node.style.filter = 'none';
-      node.style.height = 'auto';
-      node.style.maxHeight = 'none';
+      if(visible){
+        node.classList.add('is-visible');
+        node.style.display = 'flex';
+        node.style.visibility = 'visible';
+        node.style.opacity = '1';
+        node.style.pointerEvents = 'auto';
+      }else{
+        node.classList.remove('is-visible');
+        node.style.display = 'none';
+      }
     });
+  }
+
+  function syncSoon(){
+    syncProStrip();
+    setTimeout(syncProStrip, 80);
+    setTimeout(syncProStrip, 250);
   }
 
   if(document.readyState === 'loading'){
-    document.addEventListener('DOMContentLoaded', keepProStripVisible, {once:true});
+    document.addEventListener('DOMContentLoaded', syncSoon, {once:true});
   }else{
-    keepProStripVisible();
+    syncSoon();
   }
 
-  window.addEventListener('pageshow', keepProStripVisible);
-  document.addEventListener('visibilitychange', keepProStripVisible, true);
-  document.addEventListener('click', function(){
-    setTimeout(keepProStripVisible, 0);
-    setTimeout(keepProStripVisible, 80);
-    setTimeout(keepProStripVisible, 240);
+  window.addEventListener('pageshow', syncSoon);
+  window.addEventListener('storage', syncSoon);
+  document.addEventListener('click', function(e){
+    if(e.target && e.target.closest && e.target.closest('#dailyMicroKnowledgeCard,.bw-task-complete-btn,.micro-option,.bw-micro-option-btn')){
+      setTimeout(syncProStrip, 120);
+      setTimeout(syncProStrip, 350);
+    }
   }, true);
-
-  var observer = new MutationObserver(keepProStripVisible);
-  setTimeout(function(){
-    observer.observe(document.documentElement, {
-      subtree:true,
-      childList:true,
-      attributes:true,
-      attributeFilter:['class','style']
-    });
-    keepProStripVisible();
-  }, 0);
 })();
 </script>
 
