@@ -563,7 +563,7 @@ html.light-mode .today-action-icon{ background:#edf8f1; color:#2d7a46;
 }
 html.dark-mode .today-action-arrow{color:#d7c07a;}
 html.light-mode .today-action-arrow{color:#8d6b16;}
-.today-action-title{ font-size:15px; line-height:1.15; font-weight:900; letter-spacing:-0.03em; text-transform:none; overflow:hidden; text-overflow:ellipsis; white-space:nowrap;
+.today-action-title{ font-size:16px; line-height:1.15; font-weight:900; letter-spacing:-0.03em;
 }
 html.dark-mode .today-action-title{color:#f5f8f6;}
 html.light-mode .today-action-title{color:#172019;}
@@ -2541,66 +2541,6 @@ body.bw-theme-desert-sand{--home-share-pulse:rgba(255,215,145,.96);--home-share-
   }
 }
 </style>
-<script id="bw-tr-language-overlay-stability-fix">
-(function(){
-  function isLangOrIndexTrigger(el){
-    if(!el) return false;
-    var text=(el.textContent||'').toLowerCase();
-    var aria=(el.getAttribute('aria-label')||'').toLowerCase();
-    var href=(el.getAttribute('href')||'').toLowerCase();
-    var cls=(el.className||'').toString().toLowerCase();
-    var id=(el.id||'').toLowerCase();
-    return (
-      href.indexOf('index') !== -1 ||
-      href.indexOf('lang') !== -1 ||
-      cls.indexOf('lang') !== -1 ||
-      id.indexOf('lang') !== -1 ||
-      aria.indexOf('language') !== -1 ||
-      aria.indexOf('dil') !== -1 ||
-      text.indexOf('dil') !== -1 ||
-      text.indexOf('language') !== -1
-    );
-  }
-
-  document.addEventListener('click', function(e){
-    var trigger = e.target && e.target.closest ? e.target.closest('a,button,[role="button"]') : null;
-    if(!isLangOrIndexTrigger(trigger)) return;
-
-    window.__bwLangIndexOpenedAt = Date.now();
-
-    setTimeout(function(){
-      var selectors = [
-        '.language-overlay','.language-modal','.lang-overlay','.lang-modal',
-        '.index-overlay','.index-modal','#languageOverlay','#langOverlay','#indexOverlay'
-      ];
-      selectors.forEach(function(sel){
-        document.querySelectorAll(sel).forEach(function(node){
-          var cs = window.getComputedStyle(node);
-          if(cs.display !== 'none'){
-            node.classList.add('open');
-            node.style.visibility = 'visible';
-            node.style.opacity = '1';
-            node.style.pointerEvents = 'auto';
-          }
-        });
-      });
-    }, 0);
-  }, true);
-
-  document.addEventListener('click', function(e){
-    if(!window.__bwLangIndexOpenedAt) return;
-    if(Date.now() - window.__bwLangIndexOpenedAt > 450) return;
-
-    var overlay = e.target && e.target.closest ? e.target.closest('.language-overlay,.language-modal,.lang-overlay,.lang-modal,.index-overlay,.index-modal,#languageOverlay,#langOverlay,#indexOverlay') : null;
-    var trigger = e.target && e.target.closest ? e.target.closest('a,button,[role="button"]') : null;
-
-    if(overlay){
-      e.stopPropagation();
-    }
-  }, true);
-})();
-</script>
-
 </head>
 <body> <div class="mobile-top-controls"> <button class="icon-btn left" onclick="changeDilChoice()" aria-label="Change language"> <svg viewBox="0 0 24 24" aria-hidden="true"> <path d="M12 2a10 10 0 100 20 10 10 0 000-20zm6.92 9h-3.02a15.6 15.6 0 00-1.33-5.01A8.03 8.03 0 0118.92 11zM12 4.04c.89 1.08 1.97 3.22 2.28 6.96H9.72C10.03 7.26 11.11 5.12 12 4.04zM4.99 13h3.02a15.6 15.6 0 001.33 5.01A8.03 8.03 0 014.99 13zM8.1 11H5.08a8.03 8.03 0 014.35-5.01A15.6 15.6 0 008.1 11zm1.62 2h4.56c-.31 3.74-1.39 5.88-2.28 6.96-.89-1.08-1.97-3.22-2.28-6.96zm5.18 5.01A15.6 15.6 0 0015.9 13h3.02a8.03 8.03 0 01-4.02 5.01z"/> </svg> <span class="ripple"></span> </button> <div class="theme-toggle-center"> <span class="theme-toggle-label">Işığı Aç</span> <input type="checkbox" class="theme-switch" id="themeSwitch" aria-label="Toggle theme"> </div> <button class="icon-btn right" onclick="shareApp()" aria-label="Paylaş app"> <svg viewBox="0 0 24 24" aria-hidden="true"> <path d="M18 16a2.99 2.99 0 00-2.39 1.2l-6.7-3.35a3.1 3.1 0 000-1.7l6.7-3.35A3 3 0 1014 6a3.1 3.1 0 00.08.68l-6.7 3.35a3 3 0 100 4.94l6.7 3.35A3 3 0 1018 16z"/> </svg> <span class="ripple"></span> </button>
 </div> <div class="ramadan-wrapper">
@@ -2614,7 +2554,7 @@ Zilkade ayında amellerini koru, gereksizi azalt ve zikri artır — bu, ileride
 </div> <div class="container"> <div class="brand-prayer-hero"> <button class="brand-signature" id="brandYükleTrigger" type="button" aria-label="BarakaWay"> <span class="brand-letter-accent">B</span><span class="brand-letter-main">araka</span><span class="brand-letter-accent">W</span><span class="brand-letter-main">ay</span> </button> <div class="home-prayer-widget" role="link" tabindex="0" onclick="openPrayerTimesPage(event)" onkeydown="openPrayerTimesPageFromKeyboard(event)" aria-label="Namaz vakitleri sayfasını aç"> <div class="home-prayer-top"> <div class="home-prayer-kicker">Sonraki namaz</div> <div class="home-prayer-location" id="homePrayerLocation">Taşkent, Özbekistan</div> </div> <div class="home-prayer-main"> <div> <div class="home-prayer-name" id="homePrayerName">Sabah</div> <div class="home-prayer-time" id="homePrayerTime">--:--</div> <div class="home-prayer-meta" id="homePrayerMeta">Namaz vakitleri yükleniyor...</div> </div> <div class="home-prayer-countdown"> <div class="home-prayer-countdown-label">Kalan</div> <div id="homePrayerCountdown">--:--:--</div> </div> </div> <div class="home-prayer-actions"> <div class="home-prayer-note"><span>Tam takvim</span><span class="home-prayer-arrow" aria-hidden="true">→</span></div> <button class="home-prayer-share-btn" type="button" onclick="sharePrayerTimes(event)" aria-label="Namaz vakitlerini paylaş" title="Namaz vakitlerini paylaş"> <svg viewBox="0 0 24 24" aria-hidden="true"> <path d="M18 16.08c-.76 0-1.44.3-1.96.77L8.91 12.7c.05-.23.09-.46.09-.7s-.04-.47-.09-.7l7.05-4.11A2.99 2.99 0 1 0 15 5c0 .24.04.47.09.7L8.04 9.81A3 3 0 1 0 8.04 14.2l7.12 4.18c-.04.2-.06.41-.06.62a2.9 2.9 0 1 0 2.9-2.92z"/> </svg> </button> </div> </div>
 </div> <div class="tahajjud-alarm-bar" id="tahajjudAlarmBar" aria-label="Teheccüd namazı alarmı"> <div class="tahajjud-alarm-left"> <div class="tahajjud-alarm-icon" aria-hidden="true">🌙</div> <div> <div class="tahajjud-alarm-title">Teheccüd namazı alarmını aç</div> <div class="tahajjud-alarm-meta" id="tahajjudAlarmMeta">Bugün BarakaWay’de</div> </div> </div> <label class="tahajjud-switch" aria-label="Teheccüd alarmını aç veya kapat"> <input type="checkbox" id="tahajjudAlarmToggle"> <span class="tahajjud-slider"></span> </label>
 </div>
-<section class="today-hub" aria-label="Bugün BarakaWay’de"> <div class="today-hub-head"> <div class="today-hub-kicker">Bugün BarakaWay’de</div> <h2 class="today-hub-title">Her gün Allah’a ﷻ bir adım daha yakın</h2> </div> <div class="today-hub-grid"> <a class="today-action today-daily-task" id="dailyArticleLink" href="javascript:void(0)" role="button" aria-label="Uygulamalı günün ayeti" data-task-key="article"> <div class="today-action-top"> <div class="today-action-icon">📖</div> <div class="today-action-arrow today-task-status" id="dailyArticleStatus">→</div> </div> <div> <div class="today-action-title">Günün ayeti</div> <div class="today-action-text" id="dailyArticleTitle">Günün ayeti yükleniyor...</div> </div> </a> <a class="today-action today-daily-task" id="currentAdhkarLink" href="javascript:void(0)" role="button" aria-label="Günün görevi" data-task-key="adhkar"> <div class="today-action-top"> <div class="today-action-icon">🌿</div> <div class="today-action-arrow today-task-status" id="currentAdhkarStatus">→</div> </div> <div> <div class="today-action-title" id="currentAdhkarTitle">Günün görevi</div> <div class="today-action-text" id="currentAdhkarText">Günün görevi yükleniyor...</div> </div> </a> <div class="today-action today-daily-task today-counter-action" id="allahNameCounterCard" role="button" tabindex="0" data-task-key="name" aria-label="Allah’ın ismini tekrar sayacı"> <div class="today-action-top"> <div class="today-action-icon">☝️</div> <div class="today-action-arrow today-task-status" id="allahNameCounterValue">0/100</div> </div> <div> <div class="today-action-title" id="allahNameBugün">Allah’ın ismi</div> <div class="today-action-text" id="allahNameMeaning">Bugün bu ismin anlamını öğreniyoruz.</div> <div class="today-counter-track"><div class="today-counter-fill" id="allahNameCounterFill"></div></div> </div> </div> <div class="today-action today-daily-task today-goal-action" id="dailyGoalCard" role="button" tabindex="0" data-task-key="goal" aria-label="Günlük hedef"> <div class="today-action-top"> <div class="today-action-icon">🎯</div> <div class="today-action-arrow today-task-status" id="dailyGoalStatus">•</div> </div> <div> <div class="today-action-title">Günlük hedef</div> <div class="today-action-text" id="dailyPracticeText">Bir iyiliği sessizce, sözsüz ve gösterişsiz yap.</div> </div> </div> </div> <div class="today-micro-wrap"> <div class="today-action today-daily-task today-micro-action" id="dailyMicroKnowledgeCard" role="button" tabindex="0" data-task-key="micro" aria-label="Günün kısa bilgisi"> <div class="today-action-top"> <div class="today-action-icon">🧠</div> <div class="today-action-arrow today-task-status" id="dailyMicroKnowledgeStatus">?</div> </div> <div> <div class="today-action-title">Günün kısa bilgisi</div> <div class="today-micro-question" id="dailyMicroQuestion">Soru yükleniyor...</div> <div class="micro-options" id="dailyMicroOptions"></div> <div class="micro-answer-box" id="dailyMicroAnswer"></div> </div> </div> </div>
+<section class="today-hub" aria-label="Bugün BarakaWay’de"> <div class="today-hub-head"> <div class="today-hub-kicker">Bugün BarakaWay’de</div> <h2 class="today-hub-title">Her gün Allah’a ﷻ bir adım daha yakın</h2> </div> <div class="today-hub-grid"> <a class="today-action today-daily-task" id="dailyArticleLink" href="javascript:void(0)" role="button" aria-label="Uygulamalı günün ayeti" data-task-key="article"> <div class="today-action-top"> <div class="today-action-icon">📖</div> <div class="today-action-arrow today-task-status" id="dailyArticleStatus">→</div> </div> <div> <div class="today-action-title">Günün ayeti</div> <div class="today-action-text" id="dailyArticleTitle">Günün ayeti yükleniyor...</div> </div> </a> <a class="today-action today-daily-task" id="currentAdhkarLink" href="javascript:void(0)" role="button" aria-label="Günün görevi" data-task-key="adhkar"> <div class="today-action-top"> <div class="today-action-icon">🌿</div> <div class="today-action-arrow today-task-status" id="currentAdhkarStatus">→</div> </div> <div> <div class="today-action-title" id="currentAdhkarTitle">Günün görevi</div> <div class="today-action-text" id="currentAdhkarText">Günün görevi yükleniyor...</div> </div> </a> <div class="today-action today-daily-task today-goal-action" id="dailyGoalCard" role="button" tabindex="0" data-task-key="goal" aria-label="Günlük hedef"> <div class="today-action-top"> <div class="today-action-icon">🎯</div> <div class="today-action-arrow today-task-status" id="dailyGoalStatus">•</div> </div> <div> <div class="today-action-title">Günlük hedef</div> <div class="today-action-text" id="dailyPracticeText">Bir iyiliği sessizce, sözsüz ve gösterişsiz yap.</div> </div> </div> </div> <div class="today-action today-daily-task today-counter-action" id="allahNameCounterCard" role="button" tabindex="0" data-task-key="name" aria-label="Allah’ın ismini tekrar sayacı"> <div class="today-action-top"> <div class="today-action-icon">☝️</div> <div class="today-action-arrow today-task-status" id="allahNameCounterValue">0/100</div> </div> <div> <div class="today-action-title" id="allahNameBugün">Allah’ın ismi</div> <div class="today-action-text" id="allahNameMeaning">Bugün bu ismin anlamını öğreniyoruz.</div> <div class="today-counter-track"><div class="today-counter-fill" id="allahNameCounterFill"></div></div> </div> </div> <div class="today-micro-wrap"> <div class="today-action today-daily-task today-micro-action" id="dailyMicroKnowledgeCard" role="button" tabindex="0" data-task-key="micro" aria-label="Günün kısa bilgisi"> <div class="today-action-top"> <div class="today-action-icon">🧠</div> <div class="today-action-arrow today-task-status" id="dailyMicroKnowledgeStatus">?</div> </div> <div> <div class="today-action-title">Günün kısa bilgisi</div> <div class="today-micro-question" id="dailyMicroQuestion">Soru yükleniyor...</div> <div class="micro-options" id="dailyMicroOptions"></div> <div class="micro-answer-box" id="dailyMicroAnswer"></div> </div> </div> </div>
 
 <a class="bw-micro-pro-upsell" href="pro-tr.html#micro" id="dailyMicroProUpsell" role="button">
   <span class="bw-micro-pro-title">Pro sürümünde her gün +5 soru</span>
@@ -2726,7 +2666,7 @@ Zilkade ayında amellerini koru, gereksizi azalt ve zikri artır — bu, ileride
 </section>
 
 <script>
-function changeDilChoice(){localStorage.removeItem("siteDil");sessionStorage.setItem("forceDilSelect","1");window.location.href="index.html";}
+function changeDilChoice(){localStorage.removeItem("siteLanguage");localStorage.removeItem("siteDil");sessionStorage.setItem("forceLanguageSelect","1");sessionStorage.setItem("forceDilSelect","1");window.location.href="index.html";}
 function openPrayerTimesPage(event){if(event&&event.target&&event.target.closest&&event.target.closest(".home-prayer-share-btn")) return;window.location.href="prayer-times-tr.html";}
 function openPrayerTimesPageFromKeyboard(event){if(event.key==="Enter"||event.key===" "){event.preventDefault();openPrayerTimesPage(event);}}
 let deferredYüklePrompt=null;let installVisibilityInFlight=false;
@@ -10791,9 +10731,9 @@ function hasProAccess(){
 function controlProVisibility(){
   var up = document.getElementById('dailyMicroProUpsell') || document.querySelector('.bw-micro-pro-upsell');
   if(!up) return;
-  var visible = getMicroDone();
+  var visible = getMicroDone() && hasProAccess();
   up.classList.toggle('is-visible', !!visible);
-  up.style.display = visible ? 'flex' : '';
+  up.style.display = visible ? 'flex' : 'none';
 }
 
 function normalizeQuestions(){
@@ -10887,7 +10827,7 @@ function setupProModal(){
   }
   function open(e){
     if(e){ e.preventDefault(); e.stopPropagation(); if(e.stopImmediatePropagation)e.stopImmediatePropagation(); }
-    if(!getMicroDone()) { controlProVisibility(); return false; }
+    if(!getMicroDone() || !hasProAccess()) { controlProVisibility(); return false; }
     pack = takeFive(); if(!pack.length) return false;
     index=0; render(); modal.classList.add('open'); return false;
   }
@@ -10952,58 +10892,6 @@ window.addEventListener('load', function(){ setTimeout(controlProVisibility, 120
   gap:12px !important;
 }
 </style>
-<script id="bw-tr-pro-plus-five-stability-patch">
-(function(){
-  var DAY=(new Date()).toISOString().slice(0,10);
-  var STABLE_KEY='bw_tr_micro_pro_visible_'+DAY;
-  function hasMainMicroDone(){
-    try{
-      if(localStorage.getItem(STABLE_KEY)==='1') return true;
-      var exact=[
-        'bw_task_done_micro_'+DAY,
-        'barakaway_task_micro_'+DAY,
-        'barakaway_daily_micro_'+DAY,
-        'micro_done_'+DAY,
-        'question_today_'+DAY
-      ];
-      for(var i=0;i<exact.length;i++){
-        var v=localStorage.getItem(exact[i]);
-        if(v==='1'||v==='true'||(v&&String(v).indexOf('selected')!==-1)) return true;
-      }
-      for(var j=0;j<localStorage.length;j++){
-        var k=localStorage.key(j)||'';
-        var low=k.toLowerCase();
-        if(k.indexOf(DAY)!==-1 && (low.indexOf('micro')!==-1 || low.indexOf('question_today')!==-1)){
-          var val=localStorage.getItem(k);
-          if(val==='1'||val==='true'||(val&&String(val).indexOf('selected')!==-1)) return true;
-        }
-      }
-    }catch(e){}
-    return false;
-  }
-  function apply(){
-    var link=document.getElementById('dailyMicroProUpsell');
-    if(!link) return;
-    var visible=hasMainMicroDone();
-    if(visible){
-      try{localStorage.setItem(STABLE_KEY,'1');}catch(e){}
-      link.classList.add('is-visible','bw-tr-pro-stable-visible');
-      link.style.display='flex';
-      link.style.visibility='visible';
-      link.style.opacity='1';
-    }else{
-      link.classList.remove('is-visible','bw-tr-pro-stable-visible');
-      link.style.display='none';
-    }
-  }
-  if(document.readyState==='loading') document.addEventListener('DOMContentLoaded',apply,{once:true}); else apply();
-  window.addEventListener('pageshow',apply);
-  window.addEventListener('storage',apply);
-  document.addEventListener('click',function(){setTimeout(apply,80);setTimeout(apply,420);},true);
-  setInterval(apply,250);
-})();
-</script>
-
 </body>
 </html> 
 
