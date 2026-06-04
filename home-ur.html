@@ -4360,11 +4360,39 @@ html.light-mode .today-hub .bw-task-hint{color:#53645a;}
 
 <script id="bw-ur-logic-fix-v3">
 (function(){
+  try{
+    var today = new Date();
+    var y = today.getFullYear();
+    var m = String(today.getMonth()+1).padStart(2,'0');
+    var d = String(today.getDate()).padStart(2,'0');
+    var day = y + '-' + m + '-' + d;
+    var resetKey = 'bw_ur_task_runtime_repair_20260604_' + day;
+    if(localStorage.getItem(resetKey) !== '1'){
+      var prefixes = [
+        'barakaway_today_ur_',
+        'barakaway_today_ur_v2_',
+        'barakaway_name_counter_ur_',
+        'barakaway_name_counter_ur_v2_',
+        'barakaway_name_counter_ur_v3_',
+        'barakaway_name_counter_ur_final_',
+        'bw_allah_name_counter_persist_ur_',
+        'bw_final_done_v2_ur_',
+        'bw_daily_done_v2_ur_'
+      ];
+      Object.keys(localStorage).forEach(function(key){
+        prefixes.forEach(function(prefix){
+          if(key.indexOf(prefix) === 0 && key.indexOf(day) !== -1) localStorage.removeItem(key);
+        });
+      });
+      localStorage.setItem(resetKey, '1');
+    }
+  }catch(e){}
+
   window.BW_TASK_FIX_UR = {
     selectAnswer: "درست جواب منتخب کریں۔",
     correct: "درست۔",
     wrong: "",
-    shahadaمطلب: "شہادت اسلام کا پہلا رکن ہے: گواہی دینا کہ اللہ کے سوا کوئی معبود نہیں اور محمد ﷺ اللہ کے رسول ہیں۔",
+    shahadaMeaning: "شہادت اسلام کا پہلا رکن ہے: گواہی دینا کہ اللہ کے سوا کوئی معبود نہیں اور محمد ﷺ اللہ کے رسول ہیں۔",
     repeat: "دہرائیں +1",
     countComplete: "100 / 100 مکمل",
     taskText: "کام:"
@@ -15674,98 +15702,74 @@ html.light-mode #allahNameCounterValue{
   color:#7b5b13 !important;
   border:1px solid rgba(141,107,22,.20) !important;
 }
-#allahNameCounterCard{
-  overflow:visible !important;
-}
+#allahNameCounterCard{ overflow:visible !important; pointer-events:auto !important; }
+body{ overflow-x:hidden; }
 </style>
 <script id="bw-ur-allah-counter-no-flicker-fix-js">
 (function(){
   'use strict';
-
   var LANG = 'ur';
-  var RAW_SET = Storage.prototype.setItem;
-  var RAW_GET = Storage.prototype.getItem;
+  var resetKeyPrefix = 'bw_ur_name_false_done_repair_20260604_';
+  var bound = false;
 
-  function todayKey(){
+  function day(){
     var d = new Date();
     return d.getFullYear() + '-' + String(d.getMonth()+1).padStart(2,'0') + '-' + String(d.getDate()).padStart(2,'0');
   }
-
-  function rawGet(key){
-    try{return RAW_GET.call(localStorage, key);}catch(e){return null;}
-  }
-
-  function rawSet(key, value){
-    try{RAW_SET.call(localStorage, key, String(value));}catch(e){}
-  }
-
-  function normalize(v){
-    var n = parseInt(v, 10);
-    if(!Number.isFinite(n)) n = 0;
-    return Math.max(0, Math.min(100, n));
-  }
+  function get(k){ try{return localStorage.getItem(k);}catch(e){return null;} }
+  function set(k,v){ try{localStorage.setItem(k,String(v));}catch(e){} }
+  function del(k){ try{localStorage.removeItem(k);}catch(e){} }
+  function norm(v){ var n=parseInt(v,10); if(!Number.isFinite(n)) n=0; return Math.max(0,Math.min(100,n)); }
 
   function countKeys(){
-    var t = todayKey();
-    var base = [
-      'bw_final_done_v2_' + LANG + '_' + t + '_name_count',
-      'bw_daily_done_v2_' + LANG + '_' + t + '_name_count',
-      'barakaway_today_' + LANG + '_' + t + '_name_count',
-      'barakaway_today_' + LANG + '_v2_' + t + '_name_count',
-      'barakaway_today_' + LANG + '_v3_' + t + '_name_count',
-      'barakaway_today_' + LANG + '_final_' + t + '_name_count',
-      'barakaway_name_counter_' + t,
-      'barakaway_name_counter_' + LANG + '_' + t,
-      'barakaway_name_counter_' + LANG + '_v2_' + t,
-      'barakaway_name_counter_' + LANG + '_v3_' + t,
+    var t = day();
+    return [
       'barakaway_name_counter_' + LANG + '_final_' + t,
-      'bw_allah_name_counter_persist_' + LANG + '_' + t
+      'barakaway_name_counter_' + LANG + '_v3_' + t,
+      'barakaway_name_counter_' + LANG + '_v2_' + t,
+      'barakaway_name_counter_' + LANG + '_' + t,
+      'bw_allah_name_counter_persist_' + LANG + '_' + t,
+      'barakaway_today_' + LANG + '_final_' + t + '_name_count',
+      'barakaway_today_' + LANG + '_v3_' + t + '_name_count',
+      'barakaway_today_' + LANG + '_v2_' + t + '_name_count',
+      'barakaway_today_' + LANG + '_' + t + '_name_count',
+      'bw_final_done_v2_' + LANG + '_' + t + '_name_count',
+      'bw_daily_done_v2_' + LANG + '_' + t + '_name_count'
     ];
-    var all = [];
-    base.forEach(function(k){
-      all.push(k);
-      all.push('bw_lang_' + LANG + '__' + k);
-    });
-    return all;
   }
-
   function doneKeys(){
-    var t = todayKey();
-    var base = [
-      'bw_final_done_v2_' + LANG + '_' + t + '_name',
-      'bw_daily_done_v2_' + LANG + '_' + t + '_name',
-      'barakaway_today_' + LANG + '_' + t + '_name',
-      'barakaway_today_' + LANG + '_v2_' + t + '_name',
+    var t = day();
+    return [
+      'barakaway_today_' + LANG + '_final_' + t + '_name',
       'barakaway_today_' + LANG + '_v3_' + t + '_name',
-      'barakaway_today_' + LANG + '_final_' + t + '_name'
+      'barakaway_today_' + LANG + '_v2_' + t + '_name',
+      'barakaway_today_' + LANG + '_' + t + '_name',
+      'bw_final_done_v2_' + LANG + '_' + t + '_name',
+      'bw_daily_done_v2_' + LANG + '_' + t + '_name'
     ];
-    var all = [];
-    base.forEach(function(k){
-      all.push(k);
-      all.push('bw_lang_' + LANG + '__' + k);
-    });
-    return all;
   }
-
   function readCount(){
     var max = 0;
-    countKeys().forEach(function(k){
-      max = Math.max(max, normalize(rawGet(k)));
-    });
+    countKeys().forEach(function(k){ max = Math.max(max, norm(get(k))); });
     return max;
   }
-
   function writeCount(n){
-    var safe = normalize(n);
-    countKeys().forEach(function(k){ rawSet(k, safe); });
-    if(safe >= 100){
-      doneKeys().forEach(function(k){ rawSet(k, '1'); });
-    }else{
-      doneKeys().forEach(function(k){ rawSet(k, '0'); });
-    }
-    return safe;
+    n = norm(n);
+    countKeys().forEach(function(k){ set(k,n); });
+    if(n >= 100) doneKeys().forEach(function(k){ set(k,'1'); });
+    else doneKeys().forEach(function(k){ del(k); });
+    return n;
   }
-
+  function repairFalseDoneOnce(){
+    var rk = resetKeyPrefix + day();
+    if(get(rk) === '1') return;
+    var n = readCount();
+    if(n < 100){
+      doneKeys().forEach(function(k){ del(k); });
+      writeCount(n);
+    }
+    set(rk,'1');
+  }
   function ensureMeta(card){
     var meta = card.querySelector('.bw-task-compact-meta[data-task-meta="name"]');
     if(!meta){
@@ -15778,80 +15782,65 @@ html.light-mode #allahNameCounterValue{
     }
     return meta;
   }
-
   function paint(){
+    repairFalseDoneOnce();
     var card = document.getElementById('allahNameCounterCard');
     if(!card) return;
     var n = readCount();
-    var label = n >= 100 ? '✓' : (n + '/100');
-
-    var meta = ensureMeta(card);
-    meta.textContent = n + '/100';
-
-    var value = document.getElementById('allahNameCounterValue');
-    if(value) value.textContent = label;
-
+    var done = n >= 100;
+    var text = n + '/100';
+    ensureMeta(card).textContent = text;
+    var status = document.getElementById('allahNameCounterValue');
+    if(status) status.textContent = done ? '✓' : text;
     var fill = document.getElementById('allahNameCounterFill');
     if(fill) fill.style.width = n + '%';
-
-    card.classList.toggle('task-done', n >= 100);
-    card.classList.toggle('goal-done', n >= 100);
-    card.classList.toggle('bw-task-done', n >= 100);
-    card.classList.toggle('bw-final-done', n >= 100);
-    card.classList.toggle('goal-urgent', n < 100);
-    card.classList.toggle('task-urgent', n < 100);
-    card.setAttribute('aria-disabled', n >= 100 ? 'true' : 'false');
+    ['bw-final-done','bw-task-done','task-done','goal-done'].forEach(function(c){ card.classList.toggle(c, done); });
+    ['bw-needs-pulse','task-urgent','goal-urgent'].forEach(function(c){ card.classList.toggle(c, !done); });
+    card.setAttribute('aria-disabled', done ? 'true' : 'false');
+    var modalCount = document.getElementById('bwNameModalCount');
+    if(modalCount) modalCount.textContent = text;
+    var modalBtn = document.getElementById('bwNameModalInc');
+    if(modalBtn) modalBtn.textContent = done ? '100 / 100' : '+1';
   }
-
-  function increment(e){
+  function inc(e){
     var card = document.getElementById('allahNameCounterCard');
     if(!card) return;
-    if(e && !card.contains(e.target)) return;
-
-    if(e){
-      e.preventDefault();
-      e.stopPropagation();
-      if(e.stopImmediatePropagation) e.stopImmediatePropagation();
-    }
-
+    if(e && e.target && !card.contains(e.target) && !(e.target.closest && e.target.closest('#bwNameModalInc'))) return;
+    if(e){ e.preventDefault(); e.stopPropagation(); if(e.stopImmediatePropagation) e.stopImmediatePropagation(); }
     var n = readCount();
     if(n < 100) writeCount(n + 1);
     paint();
-    setTimeout(paint, 30);
-    setTimeout(paint, 160);
-    setTimeout(paint, 420);
+    setTimeout(paint,60);
   }
-
   function bind(){
-    var old = document.getElementById('allahNameCounterCard');
-    if(!old || old.dataset.bwUrNoFlickerBound === '1') return;
-
-    var card = old.cloneNode(true);
-    card.dataset.bwUrNoFlickerBound = '1';
-    old.parentNode.replaceChild(card, old);
-
-    card.addEventListener('click', increment, true);
-    card.addEventListener('touchend', increment, {capture:true, passive:false});
-    paint();
-  }
-
-  window.__bwUrNameCounterPaint = paint;
-
-  if(document.readyState === 'loading'){
-    document.addEventListener('DOMContentLoaded', bind, {once:true});
-  }else{
-    bind();
-  }
-
-  window.addEventListener('pageshow', function(){ bind(); paint(); });
-  document.addEventListener('visibilitychange', paint, true);
-
-  var mo = new MutationObserver(function(){ paint(); });
-  setTimeout(function(){
     var card = document.getElementById('allahNameCounterCard');
-    if(card) mo.observe(card, {childList:true, subtree:true, characterData:true, attributes:true});
+    if(!card) return;
+    if(card.dataset.bwUrStableCounterBound !== '1'){
+      var clone = card.cloneNode(true);
+      clone.dataset.bwUrStableCounterBound = '1';
+      card.parentNode.replaceChild(clone, card);
+      clone.addEventListener('click', inc, true);
+      clone.addEventListener('keydown', function(e){ if(e.key === 'Enter' || e.key === ' ') inc(e); }, true);
+    }
+    if(!bound){
+      bound = true;
+      document.addEventListener('click', function(e){
+        if(e.target && e.target.closest && e.target.closest('#bwNameModalInc')) inc(e);
+      }, true);
+    }
     paint();
-  }, 0);
+  }
+  function init(){
+    document.querySelectorAll('.share-overlay.open,.install-help-overlay.open,.bw-universal-pro-modal.open').forEach(function(el){ el.classList.remove('open'); });
+    bind();
+    setTimeout(paint,120);
+    setTimeout(paint,500);
+  }
+  if(document.readyState === 'loading') document.addEventListener('DOMContentLoaded', init, {once:true});
+  else init();
+  window.addEventListener('pageshow', init);
+  window.addEventListener('storage', paint);
+  setInterval(paint, 800);
 })();
 </script>
 
