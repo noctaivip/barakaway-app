@@ -2610,7 +2610,9 @@ body.bw-theme-desert-sand{--home-share-pulse:rgba(255,215,145,.96);--home-share-
 
 
 
-<style id="bw-tr-final-mobile-bugfix-v3">
+
+
+<style id="bw-tr-final-mobile-bugfix-v4">
 @media(max-width:700px){
   body .today-hub .today-action,
   body .today-hub .today-micro-action{
@@ -2632,11 +2634,7 @@ body.bw-theme-desert-sand{--home-share-pulse:rgba(255,215,145,.96);--home-share-
     text-overflow:clip !important;
   }
 
-  body .today-hub #dailyArticleLink .today-action-title{
-    margin-top:auto !important;
-    margin-bottom:46px !important;
-  }
-
+  body .today-hub #dailyArticleLink .today-action-title,
   body .today-hub #allahNameCounterCard .today-action-title{
     margin-top:auto !important;
     margin-bottom:48px !important;
@@ -2694,20 +2692,20 @@ body.bw-theme-desert-sand{--home-share-pulse:rgba(255,215,145,.96);--home-share-
     justify-content:center !important;
     position:absolute !important;
     left:18px !important;
-    bottom:12px !important;
+    bottom:10px !important;
     z-index:9 !important;
-    min-width:58px !important;
-    max-width:96px !important;
-    height:24px !important;
-    min-height:24px !important;
-    max-height:24px !important;
+    min-width:82px !important;
+    max-width:118px !important;
+    height:28px !important;
+    min-height:28px !important;
+    max-height:28px !important;
     margin:0 !important;
-    padding:0 11px !important;
+    padding:0 12px !important;
     border-radius:999px !important;
     white-space:nowrap !important;
     overflow:hidden !important;
     pointer-events:none !important;
-    font-size:13px !important;
+    font-size:15px !important;
     line-height:1 !important;
     font-weight:950 !important;
     letter-spacing:.01em !important;
@@ -11118,7 +11116,9 @@ window.addEventListener('load', function(){ setTimeout(controlProVisibility, 120
 
 
 
-<script id="bw-tr-final-mobile-bugfix-v3">
+
+
+<script id="bw-tr-final-mobile-bugfix-v4">
 (function(){
   'use strict';
   var LANG = 'tr';
@@ -11273,9 +11273,7 @@ window.addEventListener('load', function(){ setTimeout(controlProVisibility, 120
     }
   }
 
-  function firstText(el){
-    return el ? (el.textContent || '').trim() : '';
-  }
+  function firstText(el){ return el ? (el.textContent || '').trim() : ''; }
 
   function paintAyah(){
     var card=document.getElementById('dailyArticleLink');
@@ -11317,29 +11315,39 @@ window.addEventListener('load', function(){ setTimeout(controlProVisibility, 120
     paintPro();
   }
 
+  function goLanguageIndex(){
+    try{
+      sessionStorage.setItem('forceDilSelect','1');
+      localStorage.setItem('forceDilSelect','1');
+      localStorage.setItem('barakaway_force_dil_select','1');
+      localStorage.removeItem('siteDil');
+      localStorage.removeItem('selectedDil');
+      localStorage.removeItem('barakawayDil');
+    }catch(e){}
+    window.location.assign('index.html?forceDilSelect=1&langSelect=1&noRedirect=1');
+    return false;
+  }
+
   document.addEventListener('click',handleNameClick,true);
   document.addEventListener('keydown',function(event){
     if(event.key!=='Enter' && event.key!==' ') return;
     handleNameClick(event);
   },true);
 
-  window.changeDilChoice=function(){
-    try{
-      sessionStorage.setItem('forceDilSelect','1');
-      localStorage.removeItem('siteDil');
-    }catch(e){}
-    window.location.href='index.html?forceDilSelect=1';
-    return false;
-  };
+  window.changeDilChoice=goLanguageIndex;
 
   document.addEventListener('click',function(e){
-    var target=e.target && e.target.closest ? e.target.closest('[onclick*="changeDilChoice"], .lang-change a, a[href*="forceDilSelect"]') : null;
+    var target=e.target && e.target.closest ? e.target.closest('[onclick*="changeDilChoice"], .lang-change a, a[href*="forceDilSelect"], a[href*="index.html"]') : null;
     if(target){
-      e.preventDefault();
-      e.stopPropagation();
-      if(e.stopImmediatePropagation) e.stopImmediatePropagation();
-      window.changeDilChoice();
-      return false;
+      var text=(target.textContent || '').toLowerCase();
+      var href=target.getAttribute('href') || '';
+      if(text.indexOf('dil') !== -1 || text.indexOf('язык') !== -1 || href.indexOf('forceDilSelect') !== -1){
+        e.preventDefault();
+        e.stopPropagation();
+        if(e.stopImmediatePropagation) e.stopImmediatePropagation();
+        goLanguageIndex();
+        return false;
+      }
     }
   },true);
 
