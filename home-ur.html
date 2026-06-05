@@ -13839,7 +13839,7 @@ const TASK_PREFIX = "barakaway_today_ur_";
   else bind();
 
   window.addEventListener('pageshow', bind);
-  setInterval(paint, 300);
+  setInterval(paint, 2000);
 })();
 </script>
 <style id="bw-final-task-state-repair-v2-css">
@@ -15830,12 +15830,15 @@ html.light-mode #allahNameCounterValue{
   window.addEventListener('pageshow', function(){ bind(); paint(); });
   document.addEventListener('visibilitychange', paint, true);
 
-  var mo = new MutationObserver(function(){ paint(); });
-  setTimeout(function(){
+  /* Stability fix: do not observe the card while paint() updates the same card.
+     The previous MutationObserver caused a feedback loop on mobile browsers. */
+  setTimeout(paint, 0);
+  setTimeout(paint, 250);
+  setTimeout(paint, 900);
+  document.addEventListener('click', function(e){
     var card = document.getElementById('allahNameCounterCard');
-    if(card) mo.observe(card, {childList:true, subtree:true, characterData:true, attributes:true});
-    paint();
-  }, 0);
+    if(card && card.contains(e.target)) setTimeout(paint, 0);
+  }, true);
 })();
 </script>
 
