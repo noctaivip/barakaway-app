@@ -2616,26 +2616,55 @@ body.bw-theme-desert-sand{--home-share-pulse:rgba(255,215,145,.96);--home-share-
 
 
 
-
-
-<style id="bw-tr-ayah-single-final">
+<style id="bw-tr-final-mobile-bugfix-v6">
 @media(max-width:700px){
-  body .today-hub #dailyArticleLink{
+  body .today-hub .today-action,
+  body .today-hub .today-micro-action{
     position:relative !important;
+    justify-content:flex-start !important;
+    overflow:visible !important;
   }
 
-  body .today-hub #dailyArticleLink .today-ayah-ref,
-  body .today-hub #dailyArticleLink .bw-task-compact-meta[data-task-meta="article"],
-  body .today-hub #dailyArticleBadge,
-  body .today-hub #dailyArticleFixedBadge{
+  body .today-hub .today-action-title{
+    display:block !important;
+    position:relative !important;
+    z-index:5 !important;
+    font-size:11px !important;
+    line-height:1.1 !important;
+    font-weight:900 !important;
+    letter-spacing:1.2px !important;
+    white-space:normal !important;
+    overflow:visible !important;
+    text-overflow:clip !important;
+  }
+
+  body .today-hub #dailyArticleLink .today-action-title,
+  body .today-hub #allahNameCounterCard .today-action-title{
+    margin-top:auto !important;
+    margin-bottom:48px !important;
+  }
+
+  body .today-hub #currentAdhkarLink .today-action-title,
+  body .today-hub #dailyGoalCard .today-action-title,
+  body .today-hub #dailyMicroKnowledgeCard .today-action-title{
+    margin-top:auto !important;
+    margin-bottom:0 !important;
+  }
+
+  body .today-hub .today-action-text,
+  body .today-hub .today-ayah-line,
+  body .today-hub .today-ayah-task,
+  body .today-hub .today-counter-track,
+  body .today-hub .today-counter-fill,
+  body .today-hub .today-micro-question,
+  body .today-hub .micro-options,
+  body .today-hub .micro-answer-box,
+  body .today-hub .bw-task-hint,
+  body .today-hub .bw-task-compact-hint{
     display:none !important;
     visibility:hidden !important;
     opacity:0 !important;
-    width:0 !important;
     height:0 !important;
-    min-width:0 !important;
-    min-height:0 !important;
-    max-width:0 !important;
     max-height:0 !important;
     margin:0 !important;
     padding:0 !important;
@@ -2643,9 +2672,25 @@ body.bw-theme-desert-sand{--home-share-pulse:rgba(255,215,145,.96);--home-share-
     pointer-events:none !important;
   }
 
-  body .today-hub #dailyArticleLink::after{
-    content:attr(data-ayah-ref);
+  body .today-hub #dailyArticleTitle,
+  body .today-hub #dailyArticleLink .today-ayah-text{
+    display:block !important;
+    visibility:visible !important;
+    opacity:1 !important;
+    position:static !important;
+    height:0 !important;
+    max-height:0 !important;
+    margin:0 !important;
+    padding:0 !important;
+    overflow:visible !important;
+    pointer-events:none !important;
+  }
+
+  body .today-hub #dailyArticleLink .today-ayah-ref,
+  body .today-hub #dailyArticleBadge{
     display:inline-flex !important;
+    visibility:visible !important;
+    opacity:1 !important;
     align-items:center !important;
     justify-content:center !important;
     position:absolute !important;
@@ -2673,13 +2718,74 @@ body.bw-theme-desert-sand{--home-share-pulse:rgba(255,215,145,.96);--home-share-
     border:1px solid rgba(215,192,122,.30) !important;
     box-shadow:inset 0 1px 0 rgba(255,255,255,.08) !important;
     transform:none !important;
-    box-sizing:border-box !important;
   }
 
-  html.light-mode body .today-hub #dailyArticleLink::after{
+  body .today-hub #dailyArticleLink .bw-task-compact-meta[data-task-meta="article"]:not(#dailyArticleFixedBadge){
+    display:none !important;
+    visibility:hidden !important;
+    opacity:0 !important;
+    height:0 !important;
+    max-height:0 !important;
+    overflow:hidden !important;
+  }
+
+  body .today-hub #allahNameCounterCard .bw-task-compact-meta[data-task-meta="name"]{
+    display:inline-flex !important;
+    visibility:visible !important;
+    opacity:1 !important;
+    align-items:center !important;
+    justify-content:center !important;
+    position:absolute !important;
+    left:18px !important;
+    bottom:10px !important;
+    z-index:9 !important;
+    width:auto !important;
+    min-width:82px !important;
+    max-width:118px !important;
+    height:28px !important;
+    min-height:28px !important;
+    max-height:28px !important;
+    margin:0 !important;
+    padding:0 12px !important;
+    border-radius:999px !important;
+    white-space:nowrap !important;
+    overflow:hidden !important;
+    pointer-events:none !important;
+    font-size:15px !important;
+    line-height:1 !important;
+    font-weight:950 !important;
+    letter-spacing:.01em !important;
+    color:#f1d889 !important;
+    background:rgba(215,192,122,.18) !important;
+    border:1px solid rgba(215,192,122,.30) !important;
+    box-shadow:inset 0 1px 0 rgba(255,255,255,.08) !important;
+    transform:none !important;
+  }
+
+  html.light-mode body .today-hub #dailyArticleLink .today-ayah-ref,
+  html.light-mode body .today-hub #dailyArticleBadge,
+  html.light-mode body .today-hub #dailyArticleFixedBadge,
+  html.light-mode body .today-hub #allahNameCounterCard .bw-task-compact-meta[data-task-meta="name"]{
     color:#7b5b13 !important;
     background:#fff7e4 !important;
     border-color:rgba(141,107,22,.20) !important;
+  }
+
+  body #dailyMicroProUpsell,
+  body .bw-micro-pro-upsell{
+    display:none !important;
+    visibility:hidden !important;
+    opacity:0 !important;
+    pointer-events:none !important;
+    animation:none !important;
+  }
+
+  body.bw-tr-micro-done #dailyMicroProUpsell,
+  body.bw-tr-micro-done .bw-micro-pro-upsell{
+    display:flex !important;
+    visibility:visible !important;
+    opacity:1 !important;
+    pointer-events:auto !important;
   }
 }
 </style>
@@ -2697,7 +2803,7 @@ Zilkade ayında amellerini koru, gereksizi azalt ve zikri artır — bu, ileride
 </div> <div class="container"> <div class="brand-prayer-hero"> <button class="brand-signature" id="brandInstallTrigger" type="button" aria-label="BarakaWay"> <span class="brand-letter-accent">B</span><span class="brand-letter-main">araka</span><span class="brand-letter-accent">W</span><span class="brand-letter-main">ay</span> </button> <div class="home-prayer-widget" role="link" tabindex="0" onclick="openPrayerTimesPage(event)" onkeydown="openPrayerTimesPageFromKeyboard(event)" aria-label="Namaz vakitleri sayfasını aç"> <div class="home-prayer-top"> <div class="home-prayer-kicker">Sonraki namaz</div> <div class="home-prayer-location" id="homePrayerLocation">Taşkent, Özbekistan</div> </div> <div class="home-prayer-main"> <div> <div class="home-prayer-name" id="homePrayerName">Sabah</div> <div class="home-prayer-time" id="homePrayerTime">--:--</div> <div class="home-prayer-meta" id="homePrayerMeta">Namaz vakitleri yükleniyor...</div> </div> <div class="home-prayer-countdown"> <div class="home-prayer-countdown-label">Kalan</div> <div id="homePrayerCountdown">--:--:--</div> </div> </div> <div class="home-prayer-actions"> <div class="home-prayer-note"><span>Tam takvim</span><span class="home-prayer-arrow" aria-hidden="true">→</span></div> <button class="home-prayer-share-btn" type="button" onclick="sharePrayerTimes(event)" aria-label="Namaz vakitlerini paylaş" title="Namaz vakitlerini paylaş"> <svg viewBox="0 0 24 24" aria-hidden="true"> <path d="M18 16.08c-.76 0-1.44.3-1.96.77L8.91 12.7c.05-.23.09-.46.09-.7s-.04-.47-.09-.7l7.05-4.11A2.99 2.99 0 1 0 15 5c0 .24.04.47.09.7L8.04 9.81A3 3 0 1 0 8.04 14.2l7.12 4.18c-.04.2-.06.41-.06.62a2.9 2.9 0 1 0 2.9-2.92z"/> </svg> </button> </div> </div>
 </div> <div class="tahajjud-alarm-bar" id="tahajjudAlarmBar" aria-label="Teheccüd namazı alarmı"> <div class="tahajjud-alarm-left"> <div class="tahajjud-alarm-icon" aria-hidden="true">🌙</div> <div> <div class="tahajjud-alarm-title">Teheccüd namazı alarmını aç</div> <div class="tahajjud-alarm-meta" id="tahajjudAlarmMeta">Bugün BarakaWay’de</div> </div> </div> <label class="tahajjud-switch" aria-label="Teheccüd alarmını aç veya kapat"> <input type="checkbox" id="tahajjudAlarmToggle"> <span class="tahajjud-slider"></span> </label>
 </div>
-<section class="today-hub" aria-label="Bugün BarakaWay’de"> <div class="today-hub-head"> <div class="today-hub-kicker">Bugün BarakaWay’de</div> <h2 class="today-hub-title">Her gün Allah’a ﷻ bir adım daha yakın</h2> </div> <div class="today-hub-grid"> <a class="today-action today-daily-task" id="dailyArticleLink" href="javascript:void(0)" role="button" aria-label="Uygulamalı günün ayeti" data-task-key="article"> <div class="today-action-top"> <div class="today-action-icon">📖</div> <div class="today-action-arrow today-task-status" id="dailyArticleStatus">→</div> </div> <div> <div class="today-action-title">Günün ayeti</div> <div class="today-action-text" id="dailyArticleTitle">Günün ayeti yükleniyor...</div> </div> </a> <a class="today-action today-daily-task" id="currentAdhkarLink" href="javascript:void(0)" role="button" aria-label="Günün görevi" data-task-key="adhkar"> <div class="today-action-top"> <div class="today-action-icon">🌿</div> <div class="today-action-arrow today-task-status" id="currentAdhkarStatus">→</div> </div> <div> <div class="today-action-title" id="currentAdhkarTitle">Günün görevi</div> <div class="today-action-text" id="currentAdhkarText">Günün görevi yükleniyor...</div> </div> </a> <div class="today-action today-daily-task today-counter-action" id="allahNameCounterCard" role="button" tabindex="0" data-task-key="name" aria-label="Allah’ın ismini tekrar sayacı"> <div class="today-action-top"> <div class="today-action-icon">☝️</div> <div class="today-action-arrow today-task-status" id="allahNameCounterValue">0/100</div> </div> <div> <div class="today-action-title" id="allahNameBugün">Allah’ın ismi</div> <div class="today-action-text" id="allahNameMeaning">Bugün bu ismin anlamını öğreniyoruz.</div> <div class="today-counter-track"><div class="today-counter-fill" id="allahNameCounterFill"></div></div> </div> </div> <div class="today-action today-daily-task today-goal-action" id="dailyGoalCard" role="button" tabindex="0" data-task-key="goal" aria-label="Günlük hedef"> <div class="today-action-top"> <div class="today-action-icon">🎯</div> <div class="today-action-arrow today-task-status" id="dailyGoalStatus">•</div> </div> <div> <div class="today-action-title">Günlük hedef</div> <div class="today-action-text" id="dailyPracticeText">Bir iyiliği sessizce, sözsüz ve gösterişsiz yap.</div> </div> </div> </div> <div class="today-micro-wrap"> <div class="today-action today-daily-task today-micro-action" id="dailyMicroKnowledgeCard" role="button" tabindex="0" data-task-key="micro" aria-label="Günün kısa bilgisi"> <div class="today-action-top"> <div class="today-action-icon">🧠</div> <div class="today-action-arrow today-task-status" id="dailyMicroKnowledgeStatus">?</div> </div> <div> <div class="today-action-title">Günün kısa bilgisi</div> <div class="today-micro-question" id="dailyMicroQuestion">Soru yükleniyor...</div> <div class="micro-options" id="dailyMicroOptions"></div> <div class="micro-answer-box" id="dailyMicroAnswer"></div> </div> </div> </div>
+<section class="today-hub" aria-label="Bugün BarakaWay’de"> <div class="today-hub-head"> <div class="today-hub-kicker">Bugün BarakaWay’de</div> <h2 class="today-hub-title">Her gün Allah’a ﷻ bir adım daha yakın</h2> </div> <div class="today-hub-grid"> <a class="today-action today-daily-task" id="dailyArticleLink" href="javascript:void(0)" role="button" aria-label="Uygulamalı günün ayeti" data-task-key="article"> <div class="today-action-top"> <div class="today-action-icon">📖</div> <div class="today-action-arrow today-task-status" id="dailyArticleStatus">→</div> </div> <div> <div class="today-action-title">Günün ayeti</div> <div class="today-action-text" id="dailyArticleTitle">Günün ayeti yükleniyor...</div> </div> <div class="bw-task-compact-meta" id="dailyArticleFixedBadge" data-task-meta="article">7:55</div> </a> <a class="today-action today-daily-task" id="currentAdhkarLink" href="javascript:void(0)" role="button" aria-label="Günün görevi" data-task-key="adhkar"> <div class="today-action-top"> <div class="today-action-icon">🌿</div> <div class="today-action-arrow today-task-status" id="currentAdhkarStatus">→</div> </div> <div> <div class="today-action-title" id="currentAdhkarTitle">Günün görevi</div> <div class="today-action-text" id="currentAdhkarText">Günün görevi yükleniyor...</div> </div> </a> <div class="today-action today-daily-task today-counter-action" id="allahNameCounterCard" role="button" tabindex="0" data-task-key="name" aria-label="Allah’ın ismini tekrar sayacı"> <div class="today-action-top"> <div class="today-action-icon">☝️</div> <div class="today-action-arrow today-task-status" id="allahNameCounterValue">0/100</div> </div> <div> <div class="today-action-title" id="allahNameBugün">Allah’ın ismi</div> <div class="today-action-text" id="allahNameMeaning">Bugün bu ismin anlamını öğreniyoruz.</div> <div class="today-counter-track"><div class="today-counter-fill" id="allahNameCounterFill"></div></div> </div> </div> <div class="today-action today-daily-task today-goal-action" id="dailyGoalCard" role="button" tabindex="0" data-task-key="goal" aria-label="Günlük hedef"> <div class="today-action-top"> <div class="today-action-icon">🎯</div> <div class="today-action-arrow today-task-status" id="dailyGoalStatus">•</div> </div> <div> <div class="today-action-title">Günlük hedef</div> <div class="today-action-text" id="dailyPracticeText">Bir iyiliği sessizce, sözsüz ve gösterişsiz yap.</div> </div> </div> </div> <div class="today-micro-wrap"> <div class="today-action today-daily-task today-micro-action" id="dailyMicroKnowledgeCard" role="button" tabindex="0" data-task-key="micro" aria-label="Günün kısa bilgisi"> <div class="today-action-top"> <div class="today-action-icon">🧠</div> <div class="today-action-arrow today-task-status" id="dailyMicroKnowledgeStatus">?</div> </div> <div> <div class="today-action-title">Günün kısa bilgisi</div> <div class="today-micro-question" id="dailyMicroQuestion">Soru yükleniyor...</div> <div class="micro-options" id="dailyMicroOptions"></div> <div class="micro-answer-box" id="dailyMicroAnswer"></div> </div> </div> </div>
 
 <a class="bw-micro-pro-upsell" href="pro-tr.html#micro" id="dailyMicroProUpsell" role="button">
   <span class="bw-micro-pro-title">Pro sürümünde her gün +5 soru</span>
@@ -11021,52 +11127,262 @@ window.addEventListener('load', function(){ setTimeout(controlProVisibility, 120
 
 
 
-
-
-<script id="bw-tr-ayah-single-final">
+<script id="bw-tr-final-mobile-bugfix-v6">
 (function(){
   'use strict';
+  var LANG = 'tr';
 
-  function cleanAyahBadge(){
-    var card = document.getElementById('dailyArticleLink');
+  function pad(n){ return String(n).padStart(2,'0'); }
+  function dayKey(){ var d=new Date(); return d.getFullYear()+'-'+pad(d.getMonth()+1)+'-'+pad(d.getDate()); }
+  function altDayKey(){ var d=new Date(); return d.getFullYear()+pad(d.getMonth()+1)+pad(d.getDate()); }
+  function safeGet(k){ try{return localStorage.getItem(k);}catch(e){return null;} }
+  function safeSet(k,v){ try{localStorage.setItem(k,String(v));}catch(e){} }
+  function safeRemove(k){ try{localStorage.removeItem(k);}catch(e){} }
+  function intVal(v){ var n=parseInt(v,10); if(!Number.isFinite(n)) n=0; return Math.max(0,Math.min(100,n)); }
+
+  function taskDoneKeys(task){
+    var d=dayKey(), a=altDayKey();
+    return [
+      'bw_final_done_v2_'+LANG+'_'+d+'_'+task,
+      'bw_daily_done_v2_'+LANG+'_'+d+'_'+task,
+      'barakaway_today_'+LANG+'_'+d+'_'+task,
+      'barakaway_today_'+LANG+'_v2_'+d+'_'+task,
+      'barakaway_today_'+LANG+'_v3_'+d+'_'+task,
+      'barakaway_today_'+LANG+'_final_'+d+'_'+task,
+      'barakaway_today_'+LANG+'_'+a+'_'+task,
+      'barakaway_today_'+LANG+'_v2_'+a+'_'+task,
+      'barakaway_today_'+LANG+'_v3_'+a+'_'+task,
+      'barakaway_today_'+LANG+'_final_'+a+'_'+task
+    ];
+  }
+
+  function writeDone(task){ taskDoneKeys(task).forEach(function(k){safeSet(k,'1');}); }
+  function clearDone(task){ taskDoneKeys(task).forEach(safeRemove); }
+
+  function nameCountKeys(){
+    var d=dayKey(), a=altDayKey();
+    return [
+      'barakaway_today_'+LANG+'_v3_'+d+'_name_count',
+      'barakaway_today_'+LANG+'_v2_'+d+'_name_count',
+      'barakaway_today_'+LANG+'_'+d+'_name_count',
+      'barakaway_name_counter_'+LANG+'_v3_'+d,
+      'barakaway_name_counter_'+LANG+'_v2_'+d,
+      'barakaway_name_counter_'+LANG+'_final_'+d,
+      'barakaway_name_counter_'+LANG+'_'+d,
+      'barakaway_name_counter_'+d,
+      'bw_allah_name_counter_persist_'+LANG+'_'+d,
+      'barakaway_name_counter_'+LANG+'_v3_'+a,
+      'barakaway_name_counter_'+LANG+'_v2_'+a,
+      'barakaway_name_counter_'+LANG+'_final_'+a,
+      'barakaway_name_counter_'+LANG+'_'+a,
+      'barakaway_name_counter_'+a
+    ];
+  }
+
+  function readNameCount(){
+    var max=0;
+    nameCountKeys().forEach(function(k){ max=Math.max(max,intVal(safeGet(k))); });
+    return max;
+  }
+
+  function writeNameCount(n){
+    var value=intVal(n);
+    nameCountKeys().forEach(function(k){safeSet(k,value);});
+    if(value>=100) writeDone('name'); else clearDone('name');
+    return value;
+  }
+
+  function ensureNameBadge(){
+    var card=document.getElementById('allahNameCounterCard');
+    if(!card) return null;
+    var meta=card.querySelector('.bw-task-compact-meta[data-task-meta="name"]');
+    if(!meta){
+      meta=document.createElement('div');
+      meta.className='bw-task-compact-meta';
+      meta.setAttribute('data-task-meta','name');
+      var title=card.querySelector('.today-action-title');
+      if(title && title.parentElement) title.parentElement.appendChild(meta);
+      else card.appendChild(meta);
+    }
+    return meta;
+  }
+
+  function paintName(){
+    var card=document.getElementById('allahNameCounterCard');
     if(!card) return;
+    var count=readNameCount();
+    if(count<100) clearDone('name');
+    var meta=ensureNameBadge();
+    if(meta) meta.textContent=count+'/100';
+    var fill=document.getElementById('allahNameCounterFill');
+    if(fill) fill.style.width=count+'%';
+    var status=document.getElementById('allahNameCounterValue');
+    if(status) status.textContent='✓';
+    if(count>=100){
+      writeDone('name');
+      card.classList.add('bw-final-done','bw-task-done','task-done','goal-done');
+      card.classList.remove('goal-urgent','task-urgent');
+      card.setAttribute('aria-disabled','true');
+      card.style.animation='none';
+    }else{
+      card.classList.remove('bw-final-done','bw-task-done','task-done','goal-done');
+      card.setAttribute('aria-disabled','false');
+    }
+  }
 
-    var ref = '7:55';
+  function handleNameClick(event){
+    var card=event.target && event.target.closest ? event.target.closest('#allahNameCounterCard') : null;
+    if(!card) return;
+    var count=readNameCount();
+    if(count>=100){ paintName(); event.preventDefault(); event.stopPropagation(); if(event.stopImmediatePropagation) event.stopImmediatePropagation(); return false; }
+    writeNameCount(count+1);
+    paintName();
+    event.preventDefault();
+    event.stopPropagation();
+    if(event.stopImmediatePropagation) event.stopImmediatePropagation();
+    return false;
+  }
 
-    var sources = card.querySelectorAll('.today-ayah-ref, .bw-task-compact-meta[data-task-meta="article"], #dailyArticleBadge');
-    sources.forEach(function(el){
-      var txt = (el.textContent || '').trim();
-      if(/^\d+\s*:\s*\d+$/.test(txt)){
-        ref = txt.replace(/\s+/g,'');
+  function microDone(){
+    var d=dayKey(), a=altDayKey();
+    var keys=taskDoneKeys('micro').concat([
+      'barakaway_micro_answer_'+LANG+'_'+d,
+      'barakaway_micro_answer_'+LANG+'_'+a,
+      'barakaway_micro_answer_tr_'+d,
+      'barakaway_micro_answer_tr_'+a
+    ]);
+    for(var i=0;i<keys.length;i++){
+      var v=safeGet(keys[i]);
+      if(v==='1') return true;
+      if(v){
+        try{
+          var parsed=JSON.parse(v);
+          if(parsed && (parsed.date===d || parsed.done===true || parsed.completed===true)) return true;
+        }catch(e){
+          if(String(v).indexOf(d)!==-1 || String(v).indexOf('correct')!==-1) return true;
+        }
       }
-    });
+    }
+    return false;
+  }
 
-    var title = card.querySelector('.today-action-title');
+  function paintPro(){
+    var done=microDone();
+    document.body.classList.toggle('bw-tr-micro-done',done);
+    var up=document.getElementById('dailyMicroProUpsell') || document.querySelector('.bw-micro-pro-upsell');
+    if(up){
+      up.classList.toggle('is-visible',done);
+      up.style.display=done?'flex':'none';
+      up.style.visibility=done?'visible':'hidden';
+      up.style.opacity=done?'1':'0';
+      up.style.pointerEvents=done?'auto':'none';
+    }
+  }
+
+  function firstText(el){ return el ? (el.textContent || '').trim() : ''; }
+
+  function paintAyah(){
+    var card=document.getElementById('dailyArticleLink');
+    if(!card) return;
+    var oldMeta=card.querySelector('.bw-task-compact-meta[data-task-meta="article"]:not(#dailyArticleFixedBadge)');
+    if(oldMeta) oldMeta.remove();
+
+    var ref=card.querySelector('.today-ayah-ref');
+    var badge=document.getElementById('dailyArticleFixedBadge');
+    var val=firstText(ref) || firstText(badge) || '7:55';
+
+    var title=card.querySelector('.today-action-title');
     if(title){
-      var leaked = (title.textContent || '').match(/(\d+\s*:\s*\d+)/);
+      var leaked=title.textContent.match(/(\d+\s*:\s*\d+)/);
       if(leaked){
-        ref = leaked[1].replace(/\s+/g,'');
-        title.textContent = title.textContent.replace(/\d+\s*:\s*\d+/g,'').trim();
+        val=leaked[1].replace(/\s+/g,'');
+        title.textContent=title.textContent.replace(/(\d+\s*:\s*\d+)/g,'').trim();
       }
     }
 
-    card.setAttribute('data-ayah-ref', ref);
+    if(ref) ref.style.display='none';
+    if(!badge){
+      badge=document.createElement('div');
+      badge.id='dailyArticleFixedBadge';
+      badge.className='bw-task-compact-meta';
+      badge.setAttribute('data-task-meta','article');
+      card.appendChild(badge);
+    }
+    badge.textContent=val;
+  }
 
-    // Remove only injected/floating duplicate badge nodes, not the original dynamic hidden ref.
-    card.querySelectorAll('#dailyArticleFixedBadge, .bw-task-compact-meta[data-task-meta="article"], #dailyArticleBadge').forEach(function(el){
-      el.remove();
+  function sync(){
+    paintAyah();
+    paintName();
+    paintPro();
+  }
+
+  function clearLanguageState(){
+    try{
+      sessionStorage.setItem('forceDilSelect','1');
+      sessionStorage.setItem('barakaway_force_dil_select','1');
+      sessionStorage.setItem('barakaway_manual_language_change','1');
+      localStorage.setItem('forceDilSelect','1');
+      localStorage.setItem('barakaway_force_dil_select','1');
+      localStorage.setItem('barakaway_manual_language_change','1');
+      Object.keys(localStorage).forEach(function(k){
+        var low=String(k).toLowerCase();
+        if(low.indexOf('lang')!==-1 || low.indexOf('language')!==-1 || low.indexOf('dil')!==-1){
+          localStorage.removeItem(k);
+        }
+      });
+      localStorage.removeItem('siteDil');
+      localStorage.removeItem('siteLanguage');
+      localStorage.removeItem('selectedDil');
+      localStorage.removeItem('selectedLang');
+      localStorage.removeItem('barakawayDil');
+      localStorage.removeItem('barakawayLang');
+    }catch(e){}
+  }
+
+  function openLanguageIndex(event){
+    if(event){
+      event.preventDefault();
+      event.stopPropagation();
+      if(event.stopImmediatePropagation) event.stopImmediatePropagation();
+    }
+    clearLanguageState();
+    window.location.replace('index.html?forceDilSelect=1&langSelect=1&manual=1&noRedirect=1');
+    return false;
+  }
+
+  document.addEventListener('click',handleNameClick,true);
+  document.addEventListener('keydown',function(event){
+    if(event.key!=='Enter' && event.key!==' ') return;
+    handleNameClick(event);
+  },true);
+
+  window.bwOpenLanguageIndex=openLanguageIndex;
+  window.changeDilChoice=openLanguageIndex;
+
+  function normalizeLanguageButtons(){
+    document.querySelectorAll('[onclick*="changeDilChoice"], [onclick*="bwOpenLanguageIndex"], .lang-change a, a[href*="forceDilSelect"]').forEach(function(el){
+      el.setAttribute('onclick','return bwOpenLanguageIndex(event)');
+      if(el.tagName && el.tagName.toLowerCase()==='a'){
+        el.setAttribute('href','index.html?forceDilSelect=1&langSelect=1&manual=1&noRedirect=1');
+      }
+      el.style.pointerEvents='auto';
+      el.style.cursor='pointer';
     });
   }
 
-  if(document.readyState === 'loading'){
-    document.addEventListener('DOMContentLoaded', cleanAyahBadge, {once:true});
-  }else{
-    cleanAyahBadge();
-  }
+  document.addEventListener('click',function(e){
+    var target=e.target && e.target.closest ? e.target.closest('[onclick*="changeDilChoice"], [onclick*="bwOpenLanguageIndex"], .lang-change a, a[href*="forceDilSelect"]') : null;
+    if(target) return openLanguageIndex(e);
+  },true);
 
-  window.addEventListener('pageshow', cleanAyahBadge);
-  document.addEventListener('click', function(){ setTimeout(cleanAyahBadge, 0); setTimeout(cleanAyahBadge, 80); }, true);
-  setInterval(cleanAyahBadge, 300);
+  if(document.readyState==='loading') document.addEventListener('DOMContentLoaded',function(){ normalizeLanguageButtons(); sync(); },{once:true});
+  else { normalizeLanguageButtons(); sync(); }
+
+  window.addEventListener('pageshow',function(){ normalizeLanguageButtons(); sync(); });
+  window.addEventListener('storage',sync);
+  document.addEventListener('click',function(){setTimeout(sync,0);setTimeout(sync,90);},true);
+  setInterval(sync,250);
 })();
 </script>
 
