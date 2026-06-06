@@ -50,6 +50,20 @@ h1 { text-align:center; font-size:38px; margin:0 0 8px; }
   .ayah-meaning { font-size:16px; }
   .master-btn { width:100%; }
 }
+
+/* BarakaWay final fix: force Quran toolbar toggle labels to white */
+.adhkar-sticky-toolbar .content-toggle,
+.adhkar-sticky-toolbar .content-toggle *,
+.content-controls .content-toggle,
+.content-controls .content-toggle *{
+  color:#ffffff!important;
+  -webkit-text-fill-color:#ffffff!important;
+  opacity:1!important;
+}
+.adhkar-sticky-toolbar .content-toggle input,
+.content-controls .content-toggle input{
+  -webkit-text-fill-color:initial!important;
+}
 </style>
 <script src="/theme-init.js"></script>
 <link href="/theme.css" rel="stylesheet"/>
@@ -490,9 +504,9 @@ html body .adhkar-sticky-toolbar .content-toggle span{
 <button aria-label="Сохранить" class="surah-page-action" data-surah-page-action="save" type="button"><svg viewbox="0 0 24 24"><path d="M6 4.5A1.5 1.5 0 0 1 7.5 3h9A1.5 1.5 0 0 1 18 4.5V21l-6-3.5L6 21V4.5z"></path></svg><span class="surah-page-action-label">Сохранить</span></button>
 </div>
 <div aria-label="Показ текста" class="content-controls">
-<label class="content-toggle"><input checked="" data-layer-toggle="arabic" id="toggleArabic" type="checkbox"/>Арабский</label>
-<label class="content-toggle"><input checked="" data-layer-toggle="translit" id="toggleTranslit" type="checkbox"/>Транскрипция</label>
-<label class="content-toggle"><input checked="" data-layer-toggle="meaning" id="toggleMeaning" type="checkbox"/>Перевод</label>
+<label class="content-toggle"><input checked="" data-layer-toggle="arabic" id="toggleArabic" type="checkbox"/><span class="content-toggle-label-text" style="color:#ffffff!important;-webkit-text-fill-color:#ffffff!important;opacity:1!important">Арабский</span></label>
+<label class="content-toggle"><input checked="" data-layer-toggle="translit" id="toggleTranslit" type="checkbox"/><span class="content-toggle-label-text" style="color:#ffffff!important;-webkit-text-fill-color:#ffffff!important;opacity:1!important">Транскрипция</span></label>
+<label class="content-toggle"><input checked="" data-layer-toggle="meaning" id="toggleMeaning" type="checkbox"/><span class="content-toggle-label-text" style="color:#ffffff!important;-webkit-text-fill-color:#ffffff!important;opacity:1!important">Перевод</span></label>
 </div>
 <h2><center>الطور‎‎‎‎</center></h2>
 <p class="subtitle">Гора · Сура 52 · 49 аятов · Мекканская</p>
@@ -980,6 +994,37 @@ loadSurah();
     setTimeout(function(){ measure(); update(); }, 250);
     setTimeout(function(){ measure(); update(); }, 800);
   });
+})();
+</script>
+
+<script id="bw-force-quran-toggle-labels-white">
+(function(){
+  function forceWhite(){
+    document.querySelectorAll('.adhkar-sticky-toolbar .content-toggle, .content-controls .content-toggle').forEach(function(label){
+      label.style.setProperty('color','#ffffff','important');
+      label.style.setProperty('-webkit-text-fill-color','#ffffff','important');
+      label.style.setProperty('opacity','1','important');
+      label.childNodes.forEach(function(n){
+        if(n.nodeType===3 && n.nodeValue.trim()){
+          var span=document.createElement('span');
+          span.className='content-toggle-label-text';
+          span.textContent=n.nodeValue;
+          span.style.setProperty('color','#ffffff','important');
+          span.style.setProperty('-webkit-text-fill-color','#ffffff','important');
+          span.style.setProperty('opacity','1','important');
+          label.replaceChild(span,n);
+        }
+      });
+      label.querySelectorAll('span').forEach(function(span){
+        span.style.setProperty('color','#ffffff','important');
+        span.style.setProperty('-webkit-text-fill-color','#ffffff','important');
+        span.style.setProperty('opacity','1','important');
+      });
+    });
+  }
+  if(document.readyState==='loading') document.addEventListener('DOMContentLoaded',forceWhite); else forceWhite();
+  window.addEventListener('load',forceWhite);
+  document.addEventListener('scroll',forceWhite,{passive:true});
 })();
 </script>
 </body>
