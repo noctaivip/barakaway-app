@@ -9444,10 +9444,10 @@ html.light-mode .bw-ar-modal-option{color:#172019;background:#f4faf6;}
   function markDone(key){const map={article:['#dailyArticleLink','#dailyArticleStatus'],adhkar:['#currentAdhkarLink','#currentAdhkarStatus'],goal:['#dailyGoalCard','#dailyGoalStatus'],micro:['#dailyMicroKnowledgeCard','#dailyMicroKnowledgeStatus']};const p=map[key];if(!p)return;const card=qs(p[0]),st=qs(p[1]);if(card){card.classList.add('bw-final-done','bw-task-done','task-done','goal-done');card.classList.remove('goal-urgent','task-urgent','bw-needs-pulse');card.setAttribute('aria-disabled','true');card.style.setProperty('--goal-red-opacity','0');card.style.animation='none';}if(st)st.textContent='✓';try{localStorage.setItem('barakaway_ar_'+key+'_done_'+todayKey,'1');localStorage.setItem('bw_final_done_v2_ar_'+todayKey+'_'+key,'1');localStorage.setItem('bw_daily_done_v2_ar_'+todayKey+'_'+key,'1');localStorage.setItem('barakaway_today_ar_'+todayKey+'_'+key,'1');localStorage.setItem('barakaway_today_ar_v2_'+todayKey+'_'+key,'1');localStorage.setItem('barakaway_today_ar_v3_'+todayKey+'_'+key,'1');localStorage.setItem('barakaway_today_ar_final_'+todayKey+'_'+key,'1')}catch(e){}}
   function openModal(data,key){removeOldOverlay();const overlay=document.createElement('div');overlay.className='bw-task-modal-overlay is-open';overlay.innerHTML=`<div class="bw-task-modal-card" data-task-key="${key}" role="dialog" aria-modal="true"><h3 class="bw-task-modal-title"></h3><div class="bw-task-modal-ref"></div><p class="bw-task-modal-text"></p><div class="bw-task-modal-task"><strong>${AR.task}</strong> <span></span></div><button class="bw-task-complete-btn" type="button">${AR.done}</button><button class="bw-task-close-btn" type="button">${AR.close}</button></div>`;document.body.appendChild(overlay);qs('.bw-task-modal-title',overlay).textContent=data.title||'';const ref=qs('.bw-task-modal-ref',overlay);if(data.ref){ref.textContent=data.ref}else{ref.style.display='none'}qs('.bw-task-modal-text',overlay).textContent=data.main||'';qs('.bw-task-modal-task span',overlay).textContent=data.task||'';qs('.bw-task-close-btn',overlay).addEventListener('click',()=>overlay.remove());qs('.bw-task-complete-btn',overlay).addEventListener('click',()=>{markDone(key);overlay.remove()});}
   function openMicro(){removeOldOverlay();const overlay=document.createElement('div');overlay.className='bw-task-modal-overlay is-open';overlay.innerHTML=`<div class="bw-task-modal-card" data-task-key="micro" role="dialog" aria-modal="true"><h3 class="bw-task-modal-title">${AR.micro}</h3><p class="bw-task-modal-text"></p><div class="bw-ar-modal-options"></div><div class="bw-ar-modal-note"></div><button class="bw-task-complete-btn" type="button" disabled style="opacity:.65">${AR.done}</button><button class="bw-task-close-btn" type="button">${AR.close}</button></div>`;document.body.appendChild(overlay);qs('.bw-task-modal-text',overlay).textContent=DATA.micro.q;const opts=qs('.bw-ar-modal-options',overlay),note=qs('.bw-ar-modal-note',overlay),complete=qs('.bw-task-complete-btn',overlay);DATA.micro.options.forEach((o,i)=>{const b=document.createElement('button');b.type='button';b.className='bw-ar-modal-option';b.textContent=o;b.dataset.index=i;opts.appendChild(b)});opts.addEventListener('click',e=>{const btn=e.target.closest('.bw-ar-modal-option');if(!btn)return;qsa('.bw-ar-modal-option',opts).forEach((b,i)=>{b.disabled=true;if(i===DATA.micro.correct)b.classList.add('bw-ar-choice-correct')});if(Number(btn.dataset.index)!==DATA.micro.correct)btn.classList.add('bw-ar-choice-wrong');note.textContent=DATA.micro.meaning;note.classList.add('show');complete.disabled=false;complete.style.opacity='1';});qs('.bw-task-close-btn',overlay).addEventListener('click',()=>overlay.remove());complete.addEventListener('click',()=>{markDone('micro');overlay.remove()});}
-  function resetForCheck(){/* لا نعيد ضبط هدف اليوم عند تحديث الصفحة: يبقى مكتملًا حتى اليوم التالي. */}
+  function resetForCheck(){/* AR test reset active: do not restore completed goal state. */}
   function resetAllTasksOnceForCheck(){
     try{
-      const flag='bw_ar_check_reset_once_'+todayKey+'_v1';
+      const flag='bw_ar_check_reset_once_'+todayKey+'_v3';
       if(localStorage.getItem(flag)==='1') return;
       const tasks=['article','adhkar','name','goal','micro'];
       const prefixes=[
@@ -9481,17 +9481,9 @@ html.light-mode .bw-ar-modal-option{color:#172019;background:#f4faf6;}
     });
     const fill=qs('#allahNameCounterFill'); if(fill) fill.style.width='0%';
   }
-  function restoreDailyGoalDone(){
-    try{
-      const keys=['barakaway_ar_goal_done_'+todayKey,'bw_final_done_v2_ar_'+todayKey+'_goal','bw_daily_done_v2_ar_'+todayKey+'_goal','barakaway_today_ar_'+todayKey+'_goal','barakaway_today_ar_v2_'+todayKey+'_goal','barakaway_today_ar_v3_'+todayKey+'_goal','barakaway_today_ar_final_'+todayKey+'_goal'];
-      if(!keys.some(k=>localStorage.getItem(k)==='1')) return;
-      const card=qs('#dailyGoalCard'), st=qs('#dailyGoalStatus');
-      if(card){card.classList.add('bw-final-done','bw-task-done','task-done','goal-done');card.classList.remove('goal-urgent','task-urgent','bw-needs-pulse');card.setAttribute('aria-disabled','true');card.style.setProperty('--goal-red-opacity','0');card.style.animation='none';}
-      if(st)st.textContent='✓';
-    }catch(e){}
-  }
-  document.addEventListener('DOMContentLoaded',()=>{localize();setTimeout(localize,500);setTimeout(restoreDailyGoalDone,700);setTimeout(localize,1500);setTimeout(restoreDailyGoalDone,1700);});document.addEventListener('change',e=>{if(e.target&&e.target.matches('.theme-switch'))setTimeout(localize,20)},true);
-  document.addEventListener('click',function(e){const c=e.target.closest&&e.target.closest('#dailyArticleLink,#currentAdhkarLink,#dailyGoalCard,#dailyMicroKnowledgeCard');if(!c)return;e.preventDefault();e.stopImmediatePropagation();if(c.id==='dailyArticleLink')openModal(DATA.article,'article');else if(c.id==='currentAdhkarLink')openModal(DATA.adhkar,'adhkar');else if(c.id==='dailyGoalCard')openModal(DATA.goal,'goal');else if(c.id==='dailyMicroKnowledgeCard')openMicro();},true);
+  function restoreDailyGoalDone(){/* disabled: goal must not appear completed before user completes it */}
+  document.addEventListener('DOMContentLoaded',()=>{resetAllTasksOnceForCheck();clearVisualDoneForCheck();localize();setTimeout(function(){clearVisualDoneForCheck();localize();},500);setTimeout(function(){clearVisualDoneForCheck();localize();},1500);});document.addEventListener('change',e=>{if(e.target&&e.target.matches('.theme-switch'))setTimeout(localize,20)},true);
+  document.addEventListener('click',function(e){if(e.target.closest&&e.target.closest('#dailyMicroOptions .micro-option')) return;const c=e.target.closest&&e.target.closest('#dailyArticleLink,#currentAdhkarLink,#dailyGoalCard,#dailyMicroKnowledgeCard');if(!c)return;e.preventDefault();e.stopImmediatePropagation();if(c.id==='dailyArticleLink')openModal(DATA.article,'article');else if(c.id==='currentAdhkarLink')openModal(DATA.adhkar,'adhkar');else if(c.id==='dailyGoalCard')openModal(DATA.goal,'goal');else if(c.id==='dailyMicroKnowledgeCard')openMicro();},true);
 })();
 </script>
 
@@ -10230,6 +10222,53 @@ function init(){
 if(document.readyState === 'loading') document.addEventListener('DOMContentLoaded', init, {once:true});
 else init();
 window.addEventListener('load', function(){ setTimeout(controlProVisibility, 120); setTimeout(controlProVisibility, 600); });
+})();
+</script>
+
+
+
+<script id="bw-ar-final-goal-micro-test-fix-v47">
+(function(){
+'use strict';
+function todayKey(){var d=new Date();return d.getFullYear()+'-'+String(d.getMonth()+1).padStart(2,'0')+'-'+String(d.getDate()).padStart(2,'0');}
+function clearTodayDoneOnce(){
+  try{
+    var flag='bw_ar_user_test_clear_v47_'+todayKey();
+    if(localStorage.getItem(flag)==='1') return;
+    var remove=[];
+    for(var i=0;i<localStorage.length;i++){
+      var k=localStorage.key(i); if(!k) continue;
+      var low=k.toLowerCase();
+      if(low.indexOf('barakaway_today_ar')!==-1 || low.indexOf('bw_final_done_v2_ar')!==-1 || low.indexOf('bw_daily_done_v2_ar')!==-1 || low.indexOf('barakaway_ar_')!==-1 || low.indexOf('barakaway_name_counter_ar')!==-1 || low.indexOf('barakaway_micro_answer_ar')!==-1){remove.push(k);}
+    }
+    remove.forEach(function(k){localStorage.removeItem(k);});
+    localStorage.setItem(flag,'1');
+  }catch(e){}
+}
+function clearVisual(){
+  var pairs=[['dailyArticleLink','dailyArticleStatus','•'],['currentAdhkarLink','currentAdhkarStatus','•'],['dailyGoalCard','dailyGoalStatus','•'],['dailyMicroKnowledgeCard','dailyMicroKnowledgeStatus','?']];
+  pairs.forEach(function(p){var card=document.getElementById(p[0]),st=document.getElementById(p[1]); if(card){card.classList.remove('bw-final-done','bw-task-done','task-done','goal-done','is-done','done','completed','is-completed','answered','correct','success','finished','is-finished','micro-answered');card.removeAttribute('aria-disabled');card.setAttribute('data-bw-done','0');card.style.animation='';card.style.setProperty('--goal-red-opacity','');} if(st)st.textContent=p[2];});
+  var name=document.getElementById('allahNameCounterCard'); if(name){name.classList.remove('bw-final-done','bw-task-done','task-done','goal-done','is-done','done','completed','is-completed');name.removeAttribute('aria-disabled');}
+  var nv=document.getElementById('allahNameCounterValue'); if(nv) nv.textContent='0/100';
+  var nf=document.getElementById('allahNameCounterFill'); if(nf) nf.style.width='0%';
+}
+function bindMicroInline(){
+  var box=document.getElementById('dailyMicroOptions'); if(!box || box.dataset.bwArStableMicro==='1') return;
+  box.dataset.bwArStableMicro='1';
+  box.addEventListener('click',function(e){
+    var btn=e.target.closest&&e.target.closest('.micro-option'); if(!btn) return;
+    e.preventDefault(); e.stopPropagation(); if(e.stopImmediatePropagation)e.stopImmediatePropagation();
+    var buttons=[].slice.call(box.querySelectorAll('.micro-option'));
+    var correct=0;
+    buttons.forEach(function(b,i){b.disabled=true;b.classList.toggle('bw-answer-correct',i===correct);b.classList.remove('bw-answer-wrong');});
+    if(Number(btn.dataset.index)!==correct) btn.classList.add('bw-answer-wrong');
+    var ans=document.getElementById('dailyMicroAnswer');
+    if(ans){ans.textContent='التوحيد هو إفراد الله بالعبادة، وهو أصل الإيمان وأعظم ما يجب تعلمه.';ans.classList.add('show');ans.style.display='block';}
+  },true);
+}
+function init(){clearTodayDoneOnce();clearVisual();bindMicroInline();}
+if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',init,{once:true});else init();
+setTimeout(init,400);setTimeout(init,1200);
 })();
 </script>
 
