@@ -14048,23 +14048,14 @@ html.dark-mode .bw-pro-micro-option-btn{background:#1d242c;border:1px solid #2a3
     }catch(e){}
     return false;
   }
-  function hasProAccess(){
-    try{
-      var pro=localStorage.getItem('barakaway_pro');
-      var plan=localStorage.getItem('barakaway_pro_plan');
-      if(pro && /^(1|true|yes|active|unlocked|premium|pro)$/i.test(String(pro)))return true;
-      if(plan && String(plan).trim()!=='' && String(plan).trim()!=='free')return true;
-    }catch(e){}
-    return false;
-  }
   function syncProStatus(){
     var link=document.getElementById('dailyMicroProUpsell');
     if(!link)return;
     var done=isDone();
-    link.classList.toggle('is-visible',mainMicroDone()&&hasProAccess());
+    link.classList.toggle('is-visible',mainMicroDone());
     link.classList.toggle('bw-pro-micro-done',done);
     link.setAttribute('aria-label',done?LABELS.ariaDone:LABELS.ariaOpen);
-    link.setAttribute('href',hasProAccess()?'javascript:void(0)':'pro-kz.html#micro');
+    link.setAttribute('href',isPro()?'javascript:void(0)':'pro-kz.html#micro');
     var status=link.querySelector('.bw-micro-pro-status');
     if(!status){
       status=document.createElement('span');
@@ -14171,22 +14162,12 @@ html.dark-mode .bw-pro-micro-option-btn{background:#1d242c;border:1px solid #2a3
     if(!link||link.dataset.bwProMicroSequenceBound==='1')return;
     link.dataset.bwProMicroSequenceBound='1';
     link.addEventListener('click',function(event){
-      if(!hasProAccess())return;
+      if(!isPro())return;
       event.preventDefault();
       event.stopPropagation();
       openProSequence();
-      return false;
     },true);
   }
-  document.addEventListener('click',function(event){
-    var link=event.target&&event.target.closest?event.target.closest('#dailyMicroProUpsell'):null;
-    if(!link)return;
-    if(!hasProAccess())return;
-    event.preventDefault();
-    event.stopPropagation();
-    openProSequence();
-    return false;
-  },true);
   if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',bind,{once:true});else bind();
   window.addEventListener('pageshow',bind);
   window.addEventListener('storage',syncProStatus);
@@ -14588,7 +14569,7 @@ function hasProAccess(){
 function controlProVisibility(){
   var up = document.getElementById('dailyMicroProUpsell') || document.querySelector('.bw-micro-pro-upsell');
   if(!up) return;
-  var visible = getMicroDone() && hasProAccess();
+  var visible = getMicroDone();
   up.classList.toggle('is-visible', !!visible);
   up.style.display = visible ? 'flex' : 'none';
 }
