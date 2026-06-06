@@ -10348,5 +10348,125 @@ window.addEventListener('load',function(){setTimeout(sync,100);setTimeout(sync,6
 })();
 </script>
 
+
+<style id="bw-ar-pro-micro-visibility-lock-v49">
+html:not([data-bw-main-micro-done="1"]) #dailyMicroProUpsell{display:none!important;}
+html[data-bw-main-micro-done="1"] #dailyMicroProUpsell{display:block!important;}
+html:not([data-bw-main-micro-done="1"]) #dailyMicroProUpsell .bw-micro-pro-status{display:none!important;}
+</style>
+<script id="bw-ar-pro-micro-visibility-lock-v49">
+(function(){
+'use strict';
+var LANG='ar';
+function todayKey(){
+  var d=new Date();
+  return d.getFullYear()+'-'+String(d.getMonth()+1).padStart(2,'0')+'-'+String(d.getDate()).padStart(2,'0');
+}
+function isPro(){
+  try{
+    return localStorage.getItem('barakaway_pro')==='true' ||
+           localStorage.getItem('barakaway_pro')==='1' ||
+           localStorage.getItem('barakaway_pro_active')==='1';
+  }catch(e){return false;}
+}
+function microDone(){
+  var day=todayKey();
+  var keys=[
+    'bw_final_done_v2_'+LANG+'_'+day+'_micro',
+    'bw_daily_done_v2_'+LANG+'_'+day+'_micro',
+    'barakaway_today_'+LANG+'_'+day+'_micro',
+    'barakaway_today_'+LANG+'_v2_'+day+'_micro',
+    'barakaway_today_'+LANG+'_v3_'+day+'_micro',
+    'barakaway_today_'+LANG+'_final_'+day+'_micro',
+    'bw_final_done_v2_ar_'+day+'_micro',
+    'bw_daily_done_v2_ar_'+day+'_micro',
+    'barakaway_ar_micro_done_'+day
+  ];
+  try{
+    for(var i=0;i<keys.length;i++){
+      if(localStorage.getItem(keys[i])==='1') return true;
+    }
+  }catch(e){}
+  var card=document.getElementById('dailyMicroKnowledgeCard');
+  var status=document.getElementById('dailyMicroKnowledgeStatus');
+  if(card && (
+    card.classList.contains('bw-final-done') ||
+    card.classList.contains('bw-task-done') ||
+    card.classList.contains('task-done') ||
+    card.classList.contains('micro-answered')
+  )) return true;
+  return !!(status && String(status.textContent||'').replace(/\s+/g,'').trim()==='✓');
+}
+function sync(){
+  var done=microDone();
+  var root=document.documentElement;
+  var link=document.getElementById('dailyMicroProUpsell');
+  if(done) root.setAttribute('data-bw-main-micro-done','1');
+  else root.removeAttribute('data-bw-main-micro-done');
+  if(!link) return;
+  link.classList.toggle('is-visible',done);
+  if(done){
+    link.style.removeProperty('display');
+    link.setAttribute('href','pro-ar.html#micro');
+    link.setAttribute('role','button');
+    link.setAttribute('tabindex','0');
+  }else{
+    link.style.setProperty('display','none','important');
+    link.classList.remove('bw-pro-micro-done');
+  }
+}
+function guardClick(e){
+  var link=e.target && e.target.closest ? e.target.closest('#dailyMicroProUpsell') : null;
+  if(!link) return;
+  sync();
+  if(!microDone()){
+    e.preventDefault();
+    e.stopPropagation();
+    if(e.stopImmediatePropagation) e.stopImmediatePropagation();
+    return false;
+  }
+  if(!isPro()){
+    e.preventDefault();
+    e.stopPropagation();
+    if(e.stopImmediatePropagation) e.stopImmediatePropagation();
+    window.location.href='pro-ar.html#micro';
+    return false;
+  }
+}
+function patchStorage(){
+  try{
+    if(window.__BW_AR_PRO_MICRO_VISIBILITY_LOCK_STORAGE__) return;
+    window.__BW_AR_PRO_MICRO_VISIBILITY_LOCK_STORAGE__=true;
+    var rawSet=Storage.prototype.setItem;
+    var rawRemove=Storage.prototype.removeItem;
+    Storage.prototype.setItem=function(){
+      var r=rawSet.apply(this,arguments);
+      try{ if(String(arguments[0]||'').toLowerCase().indexOf('micro')!==-1) setTimeout(sync,0); }catch(e){}
+      return r;
+    };
+    Storage.prototype.removeItem=function(){
+      var r=rawRemove.apply(this,arguments);
+      try{ if(String(arguments[0]||'').toLowerCase().indexOf('micro')!==-1) setTimeout(sync,0); }catch(e){}
+      return r;
+    };
+  }catch(e){}
+}
+function init(){
+  patchStorage();
+  sync();
+  document.addEventListener('click',guardClick,true);
+  setTimeout(sync,50);
+  setTimeout(sync,250);
+  setTimeout(sync,800);
+}
+if(document.readyState==='loading') document.addEventListener('DOMContentLoaded',init,{once:true});
+else init();
+window.addEventListener('load',function(){setTimeout(sync,60);setTimeout(sync,500);});
+window.addEventListener('pageshow',sync);
+window.addEventListener('storage',sync);
+setInterval(sync,500);
+})();
+</script>
+
 </body>
 </html>
