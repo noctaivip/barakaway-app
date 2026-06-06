@@ -14019,7 +14019,7 @@ html.dark-mode .bw-pro-micro-option-btn{background:#1d242c;border:1px solid #2a3
   function markDone(){try{localStorage.setItem(doneKey(),'1');}catch(e){}}
   function resetBrokenDoneOnce(){
     try{
-      var marker='bw_kz_micro_pro_fix_reset_20260530_v3';
+      var marker='bw_kz_micro_pro_fix_reset_20260530_v4';
       if(localStorage.getItem(marker)==='1')return;
       localStorage.removeItem(doneKey());
       localStorage.removeItem('barakaway_pro_micro_done_'+todayKey());
@@ -14051,16 +14051,19 @@ html.dark-mode .bw-pro-micro-option-btn{background:#1d242c;border:1px solid #2a3
   function syncProStatus(){
     var link=document.getElementById('dailyMicroProUpsell');
     if(!link)return;
+    var done=isDone();
     link.classList.toggle('is-visible',mainMicroDone());
-    link.classList.toggle('bw-pro-micro-done',isDone());
-    link.setAttribute('aria-label',isDone()?LABELS.ariaDone:LABELS.ariaOpen);
+    link.classList.toggle('bw-pro-micro-done',done);
+    link.setAttribute('aria-label',done?LABELS.ariaDone:LABELS.ariaOpen);
     link.setAttribute('href','javascript:void(0)');
-    if(!link.querySelector('.bw-micro-pro-status')){
-      var st=document.createElement('span');
-      st.className='bw-micro-pro-status';
-      st.textContent='✓';
-      link.appendChild(st);
+    var status=link.querySelector('.bw-micro-pro-status');
+    if(!status){
+      status=document.createElement('span');
+      status.className='bw-micro-pro-status';
+      status.textContent='✓';
+      link.appendChild(status);
     }
+    status.style.display=done?'inline-flex':'none';
   }
   function normalizeItem(item){
     item=item||{};
