@@ -93,6 +93,7 @@ html.dark-mode body{background:linear-gradient(180deg,var(--bg),var(--bg))!impor
 html.dark-mode .ayah-action,html.dark-mode .surah-page-action{background:rgba(215,181,109,.08);border-color:rgba(215,181,109,.20);color:#d7b56d}html.dark-mode .ayah-translit{color:#d7b56d!important}
 @media(max-width:700px){.surah-page-actions{gap:7px}.surah-page-action{min-height:58px;border-radius:16px;font-size:10.5px;padding:7px 4px}.content-controls{grid-template-columns:1fr;gap:8px}.surah-premium-bismillah{font-size:23px}}
 </style>
+
 <style id="surah-v3-fixes-style">
 /* === v3 fixes: ayah save, no ayah favorite, dark toggles, PNG card === */
 .content-controls{
@@ -139,6 +140,8 @@ html.dark-mode .content-toggle input{accent-color:#4caf6a;filter:none!important;
 }
 html.light-mode .quran-share-brand{color:#111814;}
 </style>
+
+
 <style id="surah-visual-balance-fix-style">
 /* Visual balance fix: smaller gold Arabic, readable white transcription, softer translation, active saved icons */
 .ayah-arabic{
@@ -183,6 +186,8 @@ html.light-mode .ayah-meaning{color:rgba(17,24,20,.72)!important;}
   .quran-reading-mode .ayah-arabic{font-size:23px!important;line-height:1.7!important;font-weight:400!important;}
 }
 </style>
+
+
 <style id="surah-final-layout-and-favorites-fix-style">
 /* Final ayah layout: no green ayah number, actions left, play button right */
 .ayah-card{
@@ -249,6 +254,75 @@ html.light-mode .ayah-meaning{color:rgba(17,24,20,.72)!important;}
 }
 </style>
 
+<style id="bw-sticky-content-controls-fix">
+/* BarakaWay Quran content controls: sticky, horizontal, no background */
+.content-controls{
+  position:sticky !important;
+  top:0 !important;
+  z-index:3000 !important;
+  display:flex !important;
+  flex-direction:row !important;
+  flex-wrap:nowrap !important;
+  align-items:center !important;
+  justify-content:center !important;
+  gap:14px !important;
+  width:100% !important;
+  max-width:100% !important;
+  margin:12px auto 18px !important;
+  padding:8px 6px !important;
+  background:transparent !important;
+  border:none !important;
+  box-shadow:none !important;
+  border-radius:0 !important;
+  overflow-x:auto !important;
+  -webkit-overflow-scrolling:touch !important;
+}
+.content-controls::before,
+.content-controls::after{
+  content:none !important;
+  display:none !important;
+}
+.content-controls .content-toggle{
+  display:inline-flex !important;
+  align-items:center !important;
+  justify-content:center !important;
+  gap:4px !important;
+  flex:0 0 auto !important;
+  margin:0 !important;
+  padding:0 !important;
+  background:transparent !important;
+  border:none !important;
+  box-shadow:none !important;
+  border-radius:0 !important;
+  white-space:nowrap !important;
+}
+.content-controls .content-toggle::before,
+.content-controls .content-toggle::after{
+  content:none !important;
+  display:none !important;
+}
+.content-controls input[type="checkbox"]{
+  width:auto !important;
+  height:auto !important;
+  margin:0 !important;
+  padding:0 !important;
+  appearance:auto !important;
+  -webkit-appearance:checkbox !important;
+  accent-color:#2d7a46 !important;
+  background:transparent !important;
+  border:none !important;
+  box-shadow:none !important;
+}
+@media(max-width:560px){
+  .content-controls{
+    justify-content:center !important;
+    gap:9px !important;
+    padding:7px 2px !important;
+    font-size:12px !important;
+  }
+}
+</style>
+
 <style id="surah-theme-sync-fix">
 html.dark-mode body,
 html.premium-mode body{
@@ -268,6 +342,8 @@ html.premium-mode .surah-card{
   color: var(--text, #fff) !important;
 }
 </style>
+
+
 <style id="surah-page-theme-background-final-fix">
 html.dark-mode body,
 html.premium-mode body,
@@ -292,10 +368,259 @@ html.light-mode .container{
 }
 </style>
 
+<style id="surah-content-controls-final-visible-fix">
+html body .content-controls,
+html.dark-mode body .content-controls,
+html.light-mode body .content-controls,
+html.premium-mode body .content-controls,
+html[class*="premium-theme-"] body .content-controls{
+  position:sticky!important;
+  position:-webkit-sticky!important;
+  top:0!important;
+  z-index:9000!important;
+  display:flex!important;
+  flex-direction:row!important;
+  align-items:center!important;
+  justify-content:center!important;
+  flex-wrap:nowrap!important;
+  gap:22px!important;
+  width:auto!important;
+  max-width:100%!important;
+  margin:0 auto 26px!important;
+  padding:6px 0!important;
+  border:0!important;
+  outline:0!important;
+  border-radius:0!important;
+  background:transparent!important;
+  background-color:transparent!important;
+  background-image:none!important;
+  box-shadow:none!important;
+  filter:none!important;
+  backdrop-filter:none!important;
+  -webkit-backdrop-filter:none!important;
+  overflow:visible!important;
+}
+
+html body .content-controls.bw-controls-fixed{
+  position:fixed!important;
+  left:0!important;
+  right:0!important;
+  top:0!important;
+  width:100%!important;
+  max-width:none!important;
+  margin:0!important;
+  padding:8px 0!important;
+  z-index:9000!important;
+  pointer-events:auto!important;
+  background:transparent!important;
+  background-color:transparent!important;
+  background-image:none!important;
+  box-shadow:none!important;
+}
+
+html body .content-controls::before,
+html body .content-controls::after{
+  content:none!important;
+  display:none!important;
+  background:transparent!important;
+  background-color:transparent!important;
+  background-image:none!important;
+  border:0!important;
+  box-shadow:none!important;
+}
+
+html body .content-controls .content-toggle,
+html body .content-controls label,
+html body .content-controls span,
+html body .content-controls strong,
+html body .content-controls b,
+html body .content-controls em{
+  flex:0 0 auto!important;
+  display:inline-flex!important;
+  align-items:center!important;
+  justify-content:center!important;
+  width:auto!important;
+  min-width:0!important;
+  margin:0!important;
+  padding:0!important;
+  border:0!important;
+  outline:0!important;
+  border-radius:0!important;
+  background:transparent!important;
+  background-color:transparent!important;
+  background-image:none!important;
+  box-shadow:none!important;
+  filter:none!important;
+  white-space:nowrap!important;
+  line-height:1!important;
+  font-weight:800!important;
+  opacity:1!important;
+  visibility:visible!important;
+}
+
+html body .content-controls .content-toggle{gap:6px!important;}
+
+html body .content-controls input,
+html body .content-controls input[type="checkbox"]{
+  flex:0 0 auto!important;
+  display:inline-block!important;
+  width:15px!important;
+  height:15px!important;
+  min-width:15px!important;
+  min-height:15px!important;
+  margin:0!important;
+  padding:0!important;
+  box-shadow:none!important;
+  opacity:1!important;
+  visibility:visible!important;
+  vertical-align:middle!important;
+}
+
+html.dark-mode body .content-controls,
+html.dark-mode body .content-controls *,
+html.premium-mode body .content-controls,
+html.premium-mode body .content-controls *,
+html[class*="premium-theme-"] body .content-controls,
+html[class*="premium-theme-"] body .content-controls *{
+  color:#ffffff!important;
+  -webkit-text-fill-color:#ffffff!important;
+  opacity:1!important;
+  visibility:visible!important;
+  text-shadow:none!important;
+}
+
+html.light-mode body .content-controls,
+html.light-mode body .content-controls *{
+  color:#111814!important;
+  -webkit-text-fill-color:#111814!important;
+  opacity:1!important;
+  visibility:visible!important;
+  text-shadow:none!important;
+}
+
+html.dark-mode body .content-controls input,
+html.premium-mode body .content-controls input,
+html[class*="premium-theme-"] body .content-controls input,
+html.light-mode body .content-controls input{
+  -webkit-text-fill-color:initial!important;
+}
+
+@media (max-width:700px){
+  html body .content-controls,
+  html body .content-controls.bw-controls-fixed{
+    flex-direction:row!important;
+    flex-wrap:nowrap!important;
+    align-items:center!important;
+    justify-content:center!important;
+    gap:10px!important;
+    width:100%!important;
+    max-width:100%!important;
+    padding:6px 0!important;
+    background:transparent!important;
+    background-color:transparent!important;
+    background-image:none!important;
+    border:0!important;
+    box-shadow:none!important;
+  }
+
+  html body .content-controls .content-toggle,
+  html body .content-controls label,
+  html body .content-controls span,
+  html body .content-controls strong{
+    font-size:12px!important;
+    gap:4px!important;
+    white-space:nowrap!important;
+  }
+
+  html body .content-controls input,
+  html body .content-controls input[type="checkbox"]{
+    width:13px!important;
+    height:13px!important;
+    min-width:13px!important;
+    min-height:13px!important;
+  }
+}
+
+@media (max-width:380px){
+  html body .content-controls,
+  html body .content-controls.bw-controls-fixed{gap:7px!important;}
+  html body .content-controls .content-toggle,
+  html body .content-controls label,
+  html body .content-controls span,
+  html body .content-controls strong{
+    font-size:11px!important;
+    gap:3px!important;
+  }
+}
+</style>
+
+<script id="surah-content-controls-sticky-js">
+(function(){
+  "use strict";
+  function init(){
+    var controls = document.querySelector(".content-controls");
+    if(!controls || controls.dataset.bwStickyBound === "1") return;
+    controls.dataset.bwStickyBound = "1";
+
+    var placeholder = document.createElement("div");
+    placeholder.setAttribute("data-bw-controls-placeholder","1");
+    placeholder.style.display = "none";
+    placeholder.style.height = "0px";
+    controls.parentNode.insertBefore(placeholder, controls);
+
+    var startTop = 0;
+
+    function measure(){
+      controls.classList.remove("bw-controls-fixed");
+      placeholder.style.display = "none";
+      placeholder.style.height = "0px";
+      var rect = controls.getBoundingClientRect();
+      startTop = rect.top + (window.pageYOffset || document.documentElement.scrollTop || 0);
+    }
+
+    function update(){
+      var y = window.pageYOffset || document.documentElement.scrollTop || 0;
+      if(y >= startTop){
+        if(!controls.classList.contains("bw-controls-fixed")){
+          placeholder.style.height = controls.offsetHeight + "px";
+          placeholder.style.display = "block";
+          controls.classList.add("bw-controls-fixed");
+        }
+      }else{
+        if(controls.classList.contains("bw-controls-fixed")){
+          controls.classList.remove("bw-controls-fixed");
+          placeholder.style.display = "none";
+          placeholder.style.height = "0px";
+        }
+      }
+    }
+
+    measure();
+    update();
+
+    window.addEventListener("scroll", update, {passive:true});
+    window.addEventListener("resize", function(){
+      controls.classList.remove("bw-controls-fixed");
+      measure();
+      update();
+    }, {passive:true});
+
+    setTimeout(function(){ measure(); update(); }, 120);
+    setTimeout(function(){ measure(); update(); }, 500);
+  }
+
+  if(document.readyState === "loading"){
+    document.addEventListener("DOMContentLoaded", init, {once:true});
+  }else{
+    init();
+  }
+})();
+</script>
 
 
-<style id="bw-quran-adhkar-toolbar-final-static">
-/* BarakaWay final Quran toolbar: actions + text toggles fixed together, matched to al-fatihah reference */
+
+<style id="bw-quran-adhkar-toolbar-match-final">
+/* BarakaWay: Quran toolbar aligned to adhkar reference, no horizontal drift, no split sticky layers */
 .adhkar-sticky-spacer{display:none!important;height:0!important;}
 .adhkar-sticky-spacer.is-active{display:block!important;}
 .adhkar-sticky-toolbar{
@@ -328,7 +653,9 @@ html.light-mode .container{
   z-index:5000!important;
 }
 .adhkar-sticky-toolbar .surah-page-actions,
-.adhkar-sticky-toolbar .content-controls{
+.adhkar-sticky-toolbar .content-controls,
+html body .adhkar-sticky-toolbar .content-controls,
+html body .adhkar-sticky-toolbar .content-controls.bw-controls-fixed{
   position:relative!important;
   top:auto!important;
   left:auto!important;
@@ -356,7 +683,9 @@ html.light-mode .container{
   padding:0!important;
 }
 .adhkar-sticky-toolbar .surah-page-action[data-surah-page-action="theme"]{display:none!important;}
-.adhkar-sticky-toolbar .content-controls{
+.adhkar-sticky-toolbar .content-controls,
+html body .adhkar-sticky-toolbar .content-controls,
+html body .adhkar-sticky-toolbar .content-controls.bw-controls-fixed{
   display:flex!important;
   flex-direction:row!important;
   align-items:center!important;
@@ -367,7 +696,8 @@ html.light-mode .container{
   margin-bottom:0!important;
   padding:0!important;
 }
-.adhkar-sticky-toolbar .content-toggle{
+.adhkar-sticky-toolbar .content-toggle,
+html body .adhkar-sticky-toolbar .content-toggle{
   position:relative!important;
   min-height:0!important;
   border:0!important;
@@ -391,14 +721,15 @@ html.light-mode .container{
   opacity:1!important;
 }
 .adhkar-sticky-toolbar .content-toggle span,
-.adhkar-sticky-toolbar .content-toggle-label-text{
+.adhkar-sticky-toolbar .content-toggle-label-text,
+html body .adhkar-sticky-toolbar .content-toggle span,
+html body .adhkar-sticky-toolbar .content-toggle-label-text{
   color:#ffffff!important;
   -webkit-text-fill-color:#ffffff!important;
   opacity:1!important;
-  visibility:visible!important;
 }
 .adhkar-sticky-toolbar .content-toggle input,
-.adhkar-sticky-toolbar .content-toggle input[type="checkbox"]{
+html body .adhkar-sticky-toolbar .content-toggle input{
   appearance:none!important;
   -webkit-appearance:none!important;
   width:18px!important;
@@ -419,12 +750,12 @@ html.light-mode .container{
   -webkit-text-fill-color:initial!important;
 }
 .adhkar-sticky-toolbar .content-toggle input:checked,
-.adhkar-sticky-toolbar .content-toggle input[type="checkbox"]:checked{
+html body .adhkar-sticky-toolbar .content-toggle input:checked{
   background:linear-gradient(135deg,#2d7a46,#4caf6a)!important;
   border-color:rgba(255,255,255,.32)!important;
 }
 .adhkar-sticky-toolbar .content-toggle input:checked::after,
-.adhkar-sticky-toolbar .content-toggle input[type="checkbox"]:checked::after{
+html body .adhkar-sticky-toolbar .content-toggle input:checked::after{
   content:""!important;
   position:absolute!important;
   left:4px!important;
@@ -466,7 +797,9 @@ html.light-mode .adhkar-sticky-toolbar .content-toggle-label-text{
     border-radius:0 0 18px 18px!important;
   }
   .adhkar-sticky-toolbar .surah-page-actions,
-  .adhkar-sticky-toolbar .content-controls{
+  .adhkar-sticky-toolbar .content-controls,
+  html body .adhkar-sticky-toolbar .content-controls,
+  html body .adhkar-sticky-toolbar .content-controls.bw-controls-fixed{
     width:100%!important;
     max-width:none!important;
     margin-left:0!important;
@@ -477,7 +810,7 @@ html.light-mode .adhkar-sticky-toolbar .content-toggle-label-text{
   .adhkar-sticky-toolbar .surah-page-action svg{width:22px!important;height:22px!important;}
   .adhkar-sticky-toolbar .content-controls{gap:11px!important;}
   .adhkar-sticky-toolbar .content-toggle{font-size:12px!important;gap:6px!important;}
-  .adhkar-sticky-toolbar .content-toggle input{width:17px!important;height:17px!important;min-width:17px!important;min-height:17px!important;}
+  .adhkar-sticky-toolbar .content-toggle input{width:17px!important;height:17px!important;min-width:17px!important;min-height:17px!important;border-radius:5px!important;}
 }
 @media(max-width:390px){
   .adhkar-sticky-toolbar .surah-page-action-label{display:block!important;font-size:9.5px!important;}
@@ -487,6 +820,7 @@ html.light-mode .adhkar-sticky-toolbar .content-toggle-label-text{
   .adhkar-sticky-toolbar .content-toggle input{width:16px!important;height:16px!important;min-width:16px!important;min-height:16px!important;}
 }
 </style>
+
 </head>
 <body data-surah-arabic="العلق" data-surah-meta="जमा हुआ लहू · सूरह 96 · 19 आयतें · मक्की" data-surah-number="96" data-surah-page-key="Quran-hi/96 - al-alaq-hi.html" data-surah-title="अल-अलक़">
 <div class="container">
@@ -495,6 +829,7 @@ html.light-mode .adhkar-sticky-toolbar .content-toggle-label-text{
 <div class="surah-premium-bismillah">بِسْمِ ٱللَّٰهِ ٱلرَّحْمَـٰنِ ٱلرَّحِيمِ</div>
 <p class="surah-premium-note">क़ुरआन की सूराएँ और आयतें पढ़ें, सहेजें और साझा करें।</p>
 </div>
+<div class="adhkar-sticky-spacer"></div>
 <div class="adhkar-sticky-toolbar">
 <div aria-label="सूरा क्रियाएँ" class="surah-page-actions">
 <button aria-label="पसंदीदा" class="surah-page-action" data-surah-page-action="favorite" type="button"><svg viewbox="0 0 24 24"><path d="M12 3.6l2.45 5.05 5.55.8-4.02 3.92.95 5.53L12 16.3l-4.93 2.6.95-5.53L4 9.45l5.55-.8L12 3.6z"></path></svg><span class="surah-page-action-label">पसंदीदा</span></button>
@@ -503,12 +838,12 @@ html.light-mode .adhkar-sticky-toolbar .content-toggle-label-text{
 <button aria-label="सहेजें" class="surah-page-action" data-surah-page-action="save" type="button"><svg viewbox="0 0 24 24"><path d="M6 4.5A1.5 1.5 0 0 1 7.5 3h9A1.5 1.5 0 0 1 18 4.5V21l-6-3.5L6 21V4.5z"></path></svg><span class="surah-page-action-label">सहेजें</span></button>
 </div>
 <div aria-label="टेक्स्ट प्रदर्शन" class="content-controls">
-<label class="content-toggle" style="color:#ffffff!important;-webkit-text-fill-color:#ffffff!important;opacity:1!important"><input checked="" data-layer-toggle="arabic" id="toggleArabic" type="checkbox"/><span class="content-toggle-label-text" style="color:#ffffff!important;-webkit-text-fill-color:#ffffff!important;opacity:1!important">अरबी</span></label>
-<label class="content-toggle" style="color:#ffffff!important;-webkit-text-fill-color:#ffffff!important;opacity:1!important"><input checked="" data-layer-toggle="translit" id="toggleTranslit" type="checkbox"/><span class="content-toggle-label-text" style="color:#ffffff!important;-webkit-text-fill-color:#ffffff!important;opacity:1!important">लिप्यंतरण</span></label>
-<label class="content-toggle" style="color:#ffffff!important;-webkit-text-fill-color:#ffffff!important;opacity:1!important"><input checked="" data-layer-toggle="meaning" id="toggleMeaning" type="checkbox"/><span class="content-toggle-label-text" style="color:#ffffff!important;-webkit-text-fill-color:#ffffff!important;opacity:1!important">अनुवाद</span></label>
+<label class="content-toggle"><input checked="" data-layer-toggle="arabic" id="toggleArabic" type="checkbox"/><span class="content-toggle-label-text" style="color:#ffffff!important;-webkit-text-fill-color:#ffffff!important;opacity:1!important">अरबी</span></label>
+<label class="content-toggle"><input checked="" data-layer-toggle="translit" id="toggleTranslit" type="checkbox"/><span class="content-toggle-label-text" style="color:#ffffff!important;-webkit-text-fill-color:#ffffff!important;opacity:1!important">लिप्यंतरण</span></label>
+<label class="content-toggle"><input checked="" data-layer-toggle="meaning" id="toggleMeaning" type="checkbox"/><span class="content-toggle-label-text" style="color:#ffffff!important;-webkit-text-fill-color:#ffffff!important;opacity:1!important">अनुवाद</span></label>
 </div>
 </div>
-<div class="adhkar-sticky-spacer" aria-hidden="true"></div><h2><center>العلق</center></h2>
+<h2><center>العلق</center></h2>
 <p class="subtitle">जमा हुआ लहू · सूरह 96 · 19 आयतें · मक्की</p>
 <div class="master-audio-wrap">
 <div class="master-audio-title">ऑडियो · अल-अलक़</div>
@@ -761,6 +1096,8 @@ async function loadSurah() {
 
 loadSurah();
 </script>
+
+
 <script id="surah-production-actions-script">
 (function(){
   const P='barakaway:quran:surah:hi:';
@@ -917,65 +1254,84 @@ loadSurah();
 <div aria-hidden="true" class="quran-modal-backdrop" id="quran-favorites-modal"><div aria-modal="true" class="quran-modal" role="dialog"><div class="quran-modal-head"><h2 class="quran-modal-title">पसंदीदा</h2><button class="quran-modal-close" data-quran-close="favorites" type="button">×</button></div><div class="quran-modal-body"><div class="quran-favorites-list" id="quran-favorites-list"></div></div></div></div>
 <div aria-hidden="true" class="quran-modal-backdrop" id="quran-share-modal"><div aria-modal="true" class="quran-modal" role="dialog"><div class="quran-modal-head"><h2 class="quran-modal-title">साझा करें</h2><button class="quran-modal-close" data-quran-close="share" type="button">×</button></div><div class="quran-modal-body"><div id="quran-share-card-root"></div></div></div></div>
 
-<script id="bw-quran-adhkar-toolbar-final-static-js">
+<script id="bw-quran-adhkar-toolbar-final-js">
 (function(){
-  "use strict";
-  function initToolbar(){
-    var toolbar=document.querySelector('.adhkar-sticky-toolbar');
-    if(!toolbar) return;
-    var spacer=toolbar.nextElementSibling;
-    if(!spacer || !spacer.classList || !spacer.classList.contains('adhkar-sticky-spacer')){
-      spacer=document.createElement('div');
-      spacer.className='adhkar-sticky-spacer';
-      spacer.setAttribute('aria-hidden','true');
-      toolbar.parentNode.insertBefore(spacer, toolbar.nextSibling);
-    }
-    toolbar.querySelectorAll('[data-surah-page-action="theme"]').forEach(function(btn){btn.remove();});
-    toolbar.querySelectorAll('.content-toggle').forEach(function(label){
-      label.style.color='#ffffff';
-      label.style.webkitTextFillColor='#ffffff';
-      Array.prototype.forEach.call(label.childNodes,function(node){
+  function forceWhiteLabels(root){
+    (root || document).querySelectorAll('.adhkar-sticky-toolbar .content-toggle, .adhkar-sticky-toolbar .content-toggle span, .adhkar-sticky-toolbar .content-toggle-label-text').forEach(function(el){
+      el.style.setProperty('color','#ffffff','important');
+      el.style.setProperty('-webkit-text-fill-color','#ffffff','important');
+      el.style.setProperty('opacity','1','important');
+    });
+  }
+  function wrapToggleText(){
+    document.querySelectorAll('.content-controls .content-toggle').forEach(function(label){
+      if(label.querySelector('.content-toggle-label-text')) return;
+      var nodes=Array.prototype.slice.call(label.childNodes);
+      nodes.forEach(function(node){
         if(node.nodeType===3 && node.textContent.trim()){
           var span=document.createElement('span');
           span.className='content-toggle-label-text';
           span.textContent=node.textContent.trim();
-          span.style.color='#ffffff';
-          span.style.webkitTextFillColor='#ffffff';
-          span.style.opacity='1';
+          span.style.setProperty('color','#ffffff','important');
+          span.style.setProperty('-webkit-text-fill-color','#ffffff','important');
+          span.style.setProperty('opacity','1','important');
           label.replaceChild(span,node);
         }
       });
-      label.querySelectorAll('span').forEach(function(span){
-        span.classList.add('content-toggle-label-text');
-        span.style.color='#ffffff';
-        span.style.webkitTextFillColor='#ffffff';
-        span.style.opacity='1';
-      });
     });
+  }
+  function ensureToolbar(){
+    var actions=document.querySelector('.surah-page-actions');
+    var controls=document.querySelector('.content-controls');
+    if(!actions || !controls) return;
+    if(!document.querySelector('.adhkar-sticky-toolbar')){
+      var toolbar=document.createElement('div');
+      toolbar.className='adhkar-sticky-toolbar';
+      var spacer=document.createElement('div');
+      spacer.className='adhkar-sticky-spacer';
+      actions.parentNode.insertBefore(spacer,actions);
+      actions.parentNode.insertBefore(toolbar,actions);
+      toolbar.appendChild(actions);
+      toolbar.appendChild(controls);
+    }
+    document.querySelectorAll('[data-surah-page-action="theme"]').forEach(function(btn){btn.style.setProperty('display','none','important');});
+    controls.classList.add('bw-controls-fixed');
+  }
+  function initSticky(){
+    var toolbar=document.querySelector('.adhkar-sticky-toolbar');
+    var spacer=document.querySelector('.adhkar-sticky-spacer');
+    if(!toolbar || !spacer) return;
     var startY=0;
-    var fixed=false;
     function measure(){
-      if(!fixed){ startY=toolbar.getBoundingClientRect().top + (window.pageYOffset||document.documentElement.scrollTop||0); }
-      spacer.style.height=toolbar.offsetHeight+'px';
+      var was=toolbar.classList.contains('is-fixed');
+      if(was) toolbar.classList.remove('is-fixed');
+      startY=toolbar.getBoundingClientRect().top + window.pageYOffset;
+      if(was) toolbar.classList.add('is-fixed');
+      update();
     }
     function update(){
-      var y=window.pageYOffset||document.documentElement.scrollTop||0;
-      var shouldFix=y>startY;
-      if(shouldFix!==fixed){
-        fixed=shouldFix;
-        toolbar.classList.toggle('is-fixed',fixed);
-        spacer.classList.toggle('is-active',fixed);
+      var fixed=window.pageYOffset > startY;
+      if(fixed){
         spacer.style.height=toolbar.offsetHeight+'px';
+        spacer.classList.add('is-active');
+        toolbar.classList.add('is-fixed');
+      }else{
+        toolbar.classList.remove('is-fixed');
+        spacer.classList.remove('is-active');
+        spacer.style.height='0px';
       }
+      forceWhiteLabels(document);
     }
-    measure(); update();
     window.addEventListener('scroll',update,{passive:true});
-    window.addEventListener('resize',function(){fixed=false;toolbar.classList.remove('is-fixed');spacer.classList.remove('is-active');measure();update();});
-    setTimeout(function(){measure();update();},120);
-    setTimeout(function(){measure();update();},500);
+    window.addEventListener('resize',measure);
+    setTimeout(measure,60);
+    setTimeout(measure,250);
+    setTimeout(forceWhiteLabels,300,document);
   }
-  if(document.readyState==='loading') document.addEventListener('DOMContentLoaded',initToolbar); else initToolbar();
+  function boot(){wrapToggleText();ensureToolbar();forceWhiteLabels(document);initSticky();}
+  if(document.readyState==='loading') document.addEventListener('DOMContentLoaded',boot); else boot();
 })();
 </script>
+
 </body>
 </html>
