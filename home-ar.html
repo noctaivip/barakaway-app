@@ -10273,137 +10273,78 @@ setTimeout(init,400);setTimeout(init,1200);
 </script>
 
 
-
-<script id="bw-ar-v48-final-reset-and-premature-done-fix">
+<style id="bw-ar-pro-block-stable-final-v48">
+.bw-micro-pro-upsell,
+.bw-micro-pro-upsell.is-visible,
+#dailyMicroProUpsell,
+#dailyMicroProUpsell.is-visible{
+  display:none !important;
+}
+.bw-micro-pro-upsell.bw-pro-after-micro-ready,
+.bw-micro-pro-upsell.bw-pro-after-micro-ready.is-visible,
+#dailyMicroProUpsell.bw-pro-after-micro-ready,
+#dailyMicroProUpsell.bw-pro-after-micro-ready.is-visible{
+  display:flex !important;
+}
+</style>
+<script id="bw-ar-pro-block-stable-final-v48">
 (function(){
 'use strict';
-var LANG='ar';
-var RESET_FLAG='bw_ar_v48_reset_all_tasks_once_'+(new Date()).toISOString().slice(0,10);
-var userTouched=Object.create(null);
-var doneClasses=['bw-final-done','bw-task-done','task-done','goal-done','is-done','done','completed','is-completed','answered','correct','success','finished','is-finished','micro-answered','bw-pro-micro-done'];
-var tasks=[
-  {id:'dailyArticleLink', status:'dailyArticleStatus', empty:'•'},
-  {id:'currentAdhkarLink', status:'currentAdhkarStatus', empty:'•'},
-  {id:'dailyChallengeCard', status:'dailyChallengeStatus', empty:'•'},
-  {id:'dailyGoalCard', status:'dailyGoalStatus', empty:'•'},
-  {id:'dailyMicroKnowledgeCard', status:'dailyMicroKnowledgeStatus', empty:'?'},
-  {id:'allahNameCounterCard', status:'allahNameCounterValue', empty:'0/100'}
-];
 function todayKey(){var d=new Date();return d.getFullYear()+'-'+String(d.getMonth()+1).padStart(2,'0')+'-'+String(d.getDate()).padStart(2,'0');}
-function isProtectedKey(k){return /^(siteTheme|siteTema|siteLanguage|siteDil|prayer_|barakaway_premium_theme|barakaway_pro$|barakaway_pro_plan)/.test(k||'');}
-function shouldRemoveKey(k){
-  if(!k || isProtectedKey(k)) return false;
-  var l=String(k).toLowerCase();
-  return (
-    l.indexOf('barakaway_today_ar')!==-1 ||
-    l.indexOf('bw_lang_ar__barakaway_today')!==-1 ||
-    l.indexOf('bw_final_done_v2_ar')!==-1 ||
-    l.indexOf('bw_lang_ar__bw_final_done_v2')!==-1 ||
-    l.indexOf('bw_daily_done_v2_ar')!==-1 ||
-    l.indexOf('bw_lang_ar__bw_daily_done_v2')!==-1 ||
-    l.indexOf('bw_ayah_card_done')!==-1 ||
-    l.indexOf('barakaway_daily_goal_done')!==-1 ||
-    l.indexOf('barakaway_micro_answer_ar')!==-1 ||
-    l.indexOf('bw_lang_ar__barakaway_micro_answer')!==-1 ||
-    l.indexOf('barakaway_name_counter_ar')!==-1 ||
-    l.indexOf('bw_lang_ar__barakaway_name_counter')!==-1 ||
-    l.indexOf('bw_allah_name_counter')!==-1 ||
-    l.indexOf('barakaway_pro_micro_done_ar')!==-1 ||
-    l.indexOf('bw_lang_ar__barakaway_pro_micro_done')!==-1 ||
-    l.indexOf('bw_pro_micro_cursor_ar')!==-1 ||
-    l.indexOf('question_today')!==-1 ||
-    l.indexOf('question_history')!==-1 ||
-    (l.indexOf('daily_done')!==-1 && l.indexOf('_ar')!==-1) ||
-    (l.indexOf('task_done')!==-1 && l.indexOf('_ar')!==-1)
-  );
+function storageIsOne(k){try{return localStorage.getItem(k)==='1';}catch(e){return false;}}
+function microDone(){
+  var t=todayKey();
+  var keys=[
+    'bw_final_done_v2_ar_'+t+'_micro',
+    'bw_daily_done_v2_ar_'+t+'_micro',
+    'barakaway_today_ar_'+t+'_micro',
+    'barakaway_today_ar_v2_'+t+'_micro',
+    'barakaway_today_ar_v3_'+t+'_micro',
+    'barakaway_today_ar_final_'+t+'_micro',
+    'barakaway_ar_micro_done_'+t,
+    'barakaway_micro_answer_ar_'+t
+  ];
+  for(var i=0;i<keys.length;i++){if(storageIsOne(keys[i])) return true;}
+  return false;
 }
-function resetStorageOnce(){
+function proDone(){try{return localStorage.getItem('barakaway_pro_micro_done_ar_'+todayKey())==='1';}catch(e){return false;}}
+function sync(){
+  var el=document.getElementById('dailyMicroProUpsell') || document.querySelector('.bw-micro-pro-upsell');
+  if(!el) return;
+  var ready=microDone();
+  el.classList.toggle('bw-pro-after-micro-ready',ready);
+  el.classList.toggle('is-visible',ready);
+  el.classList.toggle('bw-pro-micro-done',ready && proDone());
+  el.style.setProperty('display',ready?'flex':'none','important');
+  el.setAttribute('aria-hidden',ready?'false':'true');
+}
+function schedule(){window.requestAnimationFrame?requestAnimationFrame(sync):setTimeout(sync,0);}
+function patchStorage(){
   try{
-    if(localStorage.getItem(RESET_FLAG)==='1') return;
-    var rm=[];
-    for(var i=0;i<localStorage.length;i++){var k=localStorage.key(i); if(shouldRemoveKey(k)) rm.push(k);}
-    rm.forEach(function(k){try{localStorage.removeItem(k);}catch(e){}});
-    localStorage.setItem(RESET_FLAG,'1');
+    if(window.__BW_AR_PRO_BLOCK_STABLE_V48__) return;
+    window.__BW_AR_PRO_BLOCK_STABLE_V48__=true;
+    var rawSet=Storage.prototype.setItem, rawRemove=Storage.prototype.removeItem;
+    Storage.prototype.setItem=function(k,v){var r=rawSet.apply(this,arguments);try{if(String(k).indexOf('micro')!==-1 || String(k).indexOf('pro')!==-1) schedule();}catch(e){}return r;};
+    Storage.prototype.removeItem=function(k){var r=rawRemove.apply(this,arguments);try{if(String(k).indexOf('micro')!==-1 || String(k).indexOf('pro')!==-1) schedule();}catch(e){}return r;};
   }catch(e){}
 }
-function stripDone(el){
-  if(!el) return;
-  doneClasses.forEach(function(c){el.classList.remove(c);});
-  el.setAttribute('data-bw-done','0');
-  el.removeAttribute('data-done');
-  el.removeAttribute('data-completed');
-  el.removeAttribute('aria-disabled');
-  el.style.setProperty('--goal-red-opacity','');
-  if(el.id!=='allahNameCounterCard') el.style.animation='';
-  var checks=el.querySelectorAll('.today-action-check,.task-check,.check,.done-check,.complete-check,.today-done-check,.bw-micro-pro-status');
-  Array.prototype.forEach.call(checks,function(ch){
-    if(ch.classList && ch.classList.contains('bw-micro-pro-status')){ch.style.display='none'; ch.textContent='';}
-    else ch.remove();
-  });
-}
-function forceUndone(id,status,empty){
-  if(userTouched[id]) return;
-  var el=document.getElementById(id); if(!el) return;
-  stripDone(el);
-  var st=status && document.getElementById(status);
-  if(st){
-    if(status==='allahNameCounterValue') st.textContent='0/100';
-    else if(st.textContent.trim()==='✓' || st.textContent.trim()==='' || /done|تم|مكتمل/i.test(st.textContent)) st.textContent=empty;
-  }
-  var fill=el.querySelector('.today-counter-fill,.progress-bar,.progress-fill') || (id==='allahNameCounterCard' && document.getElementById('allahNameCounterFill'));
-  if(fill && id!=='allahNameCounterCard') fill.style.width='0%';
-  if(id==='allahNameCounterCard' && fill && !userTouched[id]) fill.style.width='0%';
-}
-function allRequiredDone(){
-  var ids=['dailyArticleLink','currentAdhkarLink','dailyChallengeCard','dailyGoalCard','dailyMicroKnowledgeCard','allahNameCounterCard'];
-  return ids.every(function(id){
-    var el=document.getElementById(id); if(!el) return id==='currentAdhkarLink' || id==='dailyChallengeCard';
-    if(el.getAttribute('data-bw-done')==='1') return true;
-    if(doneClasses.some(function(c){return c!=='bw-pro-micro-done' && el.classList.contains(c);})) return true;
-    var st=el.querySelector('.today-action-check,.task-check,.check,.done-check,.complete-check,.today-done-check');
-    if(st) return true;
-    var sid=(id==='dailyArticleLink'?'dailyArticleStatus':id==='currentAdhkarLink'?'currentAdhkarStatus':id==='dailyChallengeCard'?'dailyChallengeStatus':id==='dailyGoalCard'?'dailyGoalStatus':id==='dailyMicroKnowledgeCard'?'dailyMicroKnowledgeStatus':id==='allahNameCounterCard'?'allahNameCounterValue':'');
-    var s=sid&&document.getElementById(sid); if(s && s.textContent.trim()==='✓') return true;
-    if(id==='allahNameCounterCard'){var v=document.getElementById('allahNameCounterValue');return !!(v && /^100\s*\/\s*100/.test(v.textContent));}
-    return false;
-  });
-}
-function hasPro(){try{var p=localStorage.getItem('barakaway_pro'),pl=localStorage.getItem('barakaway_pro_plan');return /^(1|true|yes|active|unlocked|premium|pro)$/i.test(String(p||'')) || (!!pl && String(pl).trim()!=='' && String(pl).trim()!=='free');}catch(e){return false;}}
-function proDone(){
-  try{
-    var t=todayKey();
-    var keys=['barakaway_pro_micro_done_ar_'+t,'bw_lang_ar__barakaway_pro_micro_done_ar_'+t,'barakaway_pro_micro_done_'+LANG+'_'+t];
-    return keys.some(function(k){return localStorage.getItem(k)==='1';});
-  }catch(e){return false;}
-}
-function controlPlusFive(){
-  var up=document.getElementById('dailyMicroProUpsell') || document.querySelector('.bw-micro-pro-upsell'); if(!up) return;
-  var show=allRequiredDone() && hasPro();
-  up.classList.toggle('is-visible',show);
-  up.style.display=show?'flex':'none';
-  if(!proDone()){
-    up.classList.remove('bw-pro-micro-done','bw-final-done','bw-task-done','task-done','done','completed','is-done');
-    var s=up.querySelector('.bw-micro-pro-status,.today-action-check,.task-check,.check,.done-check,.complete-check,.today-done-check');
-    if(s){s.style.display='none'; s.textContent='';}
-  }
-}
-function resetVisualWindow(){
-  tasks.forEach(function(t){forceUndone(t.id,t.status,t.empty);});
-  controlPlusFive();
-}
-function markTouchedFromEvent(e){
-  var map=['dailyArticleLink','currentAdhkarLink','dailyChallengeCard','dailyGoalCard','dailyMicroKnowledgeCard','allahNameCounterCard'];
-  for(var i=0;i<map.length;i++){var el=document.getElementById(map[i]); if(el && (e.target===el || (el.contains && el.contains(e.target)))) userTouched[map[i]]=true;}
-}
 function init(){
-  resetStorageOnce();
-  resetVisualWindow();
-  document.addEventListener('click',markTouchedFromEvent,true);
-  [80,250,600,1200,2200,3800].forEach(function(ms){setTimeout(resetVisualWindow,ms);});
-  setInterval(controlPlusFive,700);
+  patchStorage();
+  sync();
+  var el=document.getElementById('dailyMicroProUpsell') || document.querySelector('.bw-micro-pro-upsell');
+  if(el && window.MutationObserver){
+    try{new MutationObserver(schedule).observe(el,{attributes:true,attributeFilter:['class','style','aria-hidden']});}catch(e){}
+  }
+  var micro=document.getElementById('dailyMicroKnowledgeCard');
+  var status=document.getElementById('dailyMicroKnowledgeStatus');
+  if(window.MutationObserver){
+    try{if(micro)new MutationObserver(schedule).observe(micro,{attributes:true,attributeFilter:['class','data-bw-done','aria-disabled']});}catch(e){}
+    try{if(status)new MutationObserver(schedule).observe(status,{childList:true,characterData:true,subtree:true});}catch(e){}
+  }
+  setTimeout(sync,50);setTimeout(sync,250);setTimeout(sync,800);setInterval(sync,500);
 }
 if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',init,{once:true});else init();
-window.addEventListener('load',function(){setTimeout(resetVisualWindow,150);setTimeout(resetVisualWindow,800);});
+window.addEventListener('load',function(){setTimeout(sync,100);setTimeout(sync,600);});
 })();
 </script>
 
