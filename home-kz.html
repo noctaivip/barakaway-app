@@ -14707,6 +14707,59 @@ window.addEventListener('load', function(){ setTimeout(controlProVisibility, 120
 })();
 </script>
 
+
+<script id="bw-kz-pro-plus5-after-micro-complete-fix-v1">
+(function(){
+  'use strict';
+  var LANG = 'kz';
+  function todayKey(){
+    var d = new Date();
+    return d.getFullYear() + '-' + String(d.getMonth()+1).padStart(2,'0') + '-' + String(d.getDate()).padStart(2,'0');
+  }
+  function read(k){ try{ return localStorage.getItem(k); }catch(e){ return null; } }
+  function hasProAccess(){
+    try{
+      var pro = read('barakaway_pro');
+      var plan = read('barakaway_pro_plan');
+      if(pro && /^(1|true|yes|active|unlocked|premium|pro)$/i.test(String(pro))) return true;
+      if(plan && String(plan).trim() !== '' && String(plan).trim() !== 'free') return true;
+    }catch(e){}
+    return false;
+  }
+  function microComplete(){
+    var t = todayKey();
+    var keys = [
+      'bw_final_done_v2_' + LANG + '_' + t + '_micro',
+      'bw_daily_done_v2_' + LANG + '_' + t + '_micro',
+      'barakaway_today_' + LANG + '_' + t + '_micro',
+      'barakaway_today_' + LANG + '_v2_' + t + '_micro',
+      'barakaway_today_' + LANG + '_v3_' + t + '_micro',
+      'barakaway_today_' + LANG + '_final_' + t + '_micro'
+    ];
+    for(var i=0;i<keys.length;i++){ if(read(keys[i]) === '1') return true; }
+    return false;
+  }
+  function proQuestionsDone(){
+    return read('barakaway_pro_micro_done_' + todayKey()) === '1';
+  }
+  function syncPlusFive(){
+    var link = document.getElementById('dailyMicroProUpsell') || document.querySelector('.bw-micro-pro-upsell');
+    if(!link) return;
+    var visible = microComplete() && hasProAccess();
+    link.classList.toggle('is-visible', visible);
+    link.style.display = visible ? 'flex' : 'none';
+    link.classList.toggle('bw-pro-micro-done', visible && proQuestionsDone());
+    var status = link.querySelector('.bw-micro-pro-status');
+    if(status) status.style.display = (visible && proQuestionsDone()) ? 'inline-flex' : 'none';
+  }
+  document.addEventListener('click', function(){ setTimeout(syncPlusFive, 60); setTimeout(syncPlusFive, 300); }, true);
+  if(document.readyState === 'loading') document.addEventListener('DOMContentLoaded', syncPlusFive, {once:true});
+  else syncPlusFive();
+  window.addEventListener('pageshow', syncPlusFive);
+  window.addEventListener('storage', syncPlusFive);
+  setInterval(syncPlusFive, 500);
+})();
+</script>
 </body>
 </html>
 
