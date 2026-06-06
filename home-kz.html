@@ -13241,8 +13241,8 @@ function isDone(task){try{if(localStorage.getItem(finalDoneKey(task))==='1')retu
 function setDone(task){try{localStorage.setItem(finalDoneKey(task),'1');legacyDoneKeys(task).forEach(function(k){localStorage.setItem(k,'1');});if(task==='name'){var day=todayKey();['barakaway_name_counter_'+LANG+'_'+day,'barakaway_name_counter_'+LANG+'_v2_'+day,'barakaway_name_counter_'+LANG+'_v3_'+day,'barakaway_name_counter_'+LANG+'_final_'+day,'barakaway_name_counter_'+day].forEach(function(k){localStorage.setItem(k,'100');});}}catch(e){}}
 function taskCard(task){return document.getElementById(TASKS[task]);}
 function taskFromElement(el){if(!el)return'';var modal=el.closest&&el.closest('.bw-task-modal-card');if(modal&&modal.getAttribute('data-task-key'))return modal.getAttribute('data-task-key');var card=el.closest&&el.closest('.today-action');if(card){for(var key in TASKS){if(card.id===TASKS[key])return key;}}return'';}
-function applyDone(task){var card=taskCard(task);if(!card)return;if(task==='micro'){var microPro=document.getElementById('dailyMicroProUpsell');if(microPro)microPro.classList.add('is-visible');}card.classList.add('bw-final-done','bw-task-done','task-done','goal-done');card.classList.remove('goal-urgent','task-urgent');card.setAttribute('aria-disabled','true');card.style.animation='none';var status=card.querySelector('.today-task-status');if(status)status.textContent='✓';var hint=card.querySelector('.bw-task-hint, .bw-task-compact-hint');if(hint)hint.style.display='none';if(task==='name'){var meta=card.querySelector('.bw-task-compact-meta[data-task-meta="name"]');if(meta)meta.textContent='100/100';var value=document.getElementById('allahNameCounterValue');if(value)value.textContent='✓';var fill=document.getElementById('allahNameCounterFill');if(fill)fill.style.width='100%';}}
-function applyAllDone(){Object.keys(TASKS).forEach(function(task){if(isDone(task))applyDone(task);});var microPro=document.getElementById('dailyMicroProUpsell');if(microPro)microPro.classList.toggle('is-visible',isDone('micro'));}
+function applyDone(task){var card=taskCard(task);if(!card)return;card.classList.add('bw-final-done','bw-task-done','task-done','goal-done');card.classList.remove('goal-urgent','task-urgent');card.setAttribute('aria-disabled','true');card.style.animation='none';var status=card.querySelector('.today-task-status');if(status)status.textContent='✓';var hint=card.querySelector('.bw-task-hint, .bw-task-compact-hint');if(hint)hint.style.display='none';if(task==='name'){var meta=card.querySelector('.bw-task-compact-meta[data-task-meta="name"]');if(meta)meta.textContent='100/100';var value=document.getElementById('allahNameCounterValue');if(value)value.textContent='✓';var fill=document.getElementById('allahNameCounterFill');if(fill)fill.style.width='100%';}}
+function applyAllDone(){Object.keys(TASKS).forEach(function(task){if(isDone(task))applyDone(task);});var microPro=document.getElementById('dailyMicroProUpsell');if(microPro){var allDone=Object.keys(TASKS).every(function(task){return isDone(task);});microPro.classList.toggle('is-visible',allDone);}}
 function blockOpeningDoneCards(event){var card=event.target&&event.target.closest?event.target.closest('.today-action'):null;if(!card)return;var task=taskFromElement(card);if(task&&isDone(task)){applyDone(task);event.preventDefault();event.stopPropagation();if(event.stopImmediatePropagation)event.stopImmediatePropagation();return false;}}
 function norm(v){return(v||'').replace(/\s+/g,' ').trim();}
 function findMicroByQuestion(q){q=norm(q);for(var i=0;i<MICRO_DATA.length;i++){if(norm(MICRO_DATA[i].q)===q)return MICRO_DATA[i];}return null;}
@@ -14048,11 +14048,30 @@ html.dark-mode .bw-pro-micro-option-btn{background:#1d242c;border:1px solid #2a3
     }catch(e){}
     return false;
   }
+  function dailyTaskDone(task){
+    var day=todayKey();
+    var keys=[
+      'bw_final_done_v2_'+LANG+'_'+day+'_'+task,
+      'bw_daily_done_v2_'+LANG+'_'+day+'_'+task,
+      'barakaway_today_'+LANG+'_'+day+'_'+task,
+      'barakaway_today_'+LANG+'_v2_'+day+'_'+task,
+      'barakaway_today_'+LANG+'_v3_'+day+'_'+task,
+      'barakaway_today_'+LANG+'_final_'+day+'_'+task
+    ];
+    if(task==='name'){
+      var counts=['barakaway_today_'+LANG+'_'+day+'_name_count','barakaway_name_counter_'+day,'barakaway_name_counter_'+LANG+'_'+day,'barakaway_name_counter_'+LANG+'_v3_'+day,'barakaway_name_counter_'+LANG+'_final_'+day];
+      for(var c=0;c<counts.length;c++){var n=parseInt(localStorage.getItem(counts[c])||'0',10)||0;if(n>=100)return true;}
+    }
+    if(task==='micro')keys.push('barakaway_micro_answer_'+LANG+'_'+day);
+    for(var i=0;i<keys.length;i++){var v=localStorage.getItem(keys[i]);if(v==='1'||(task==='micro'&&v!==null))return true;}
+    return false;
+  }
+  function allDailyTasksDone(){return ['article','adhkar','name','goal','micro'].every(dailyTaskDone);}
   function syncProStatus(){
     var link=document.getElementById('dailyMicroProUpsell');
     if(!link)return;
     var done=isDone();
-    link.classList.toggle('is-visible', mainMicroDone() && isPro());
+    link.classList.toggle('is-visible', allDailyTasksDone() && isPro());
     link.classList.toggle('bw-pro-micro-done',done);
     link.setAttribute('aria-label',done?LABELS.ariaDone:LABELS.ariaOpen);
     link.setAttribute('href',isPro()?'javascript:void(0)':'pro-kz.html#micro');
@@ -14708,10 +14727,11 @@ window.addEventListener('load', function(){ setTimeout(controlProVisibility, 120
 </script>
 
 
-<script id="bw-kz-pro-plus5-after-micro-complete-fix-v1">
+<script id="bw-kz-pro-plus5-after-all-five-complete-fix-v2">
 (function(){
   'use strict';
   var LANG = 'kz';
+  var TASKS = ['article','adhkar','name','goal','micro'];
   function todayKey(){
     var d = new Date();
     return d.getFullYear() + '-' + String(d.getMonth()+1).padStart(2,'0') + '-' + String(d.getDate()).padStart(2,'0');
@@ -14726,38 +14746,57 @@ window.addEventListener('load', function(){ setTimeout(controlProVisibility, 120
     }catch(e){}
     return false;
   }
-  function microComplete(){
+  function taskDone(task){
     var t = todayKey();
     var keys = [
-      'bw_final_done_v2_' + LANG + '_' + t + '_micro',
-      'bw_daily_done_v2_' + LANG + '_' + t + '_micro',
-      'barakaway_today_' + LANG + '_' + t + '_micro',
-      'barakaway_today_' + LANG + '_v2_' + t + '_micro',
-      'barakaway_today_' + LANG + '_v3_' + t + '_micro',
-      'barakaway_today_' + LANG + '_final_' + t + '_micro'
+      'bw_final_done_v2_' + LANG + '_' + t + '_' + task,
+      'bw_daily_done_v2_' + LANG + '_' + t + '_' + task,
+      'barakaway_today_' + LANG + '_' + t + '_' + task,
+      'barakaway_today_' + LANG + '_v2_' + t + '_' + task,
+      'barakaway_today_' + LANG + '_v3_' + t + '_' + task,
+      'barakaway_today_' + LANG + '_final_' + t + '_' + task
     ];
-    for(var i=0;i<keys.length;i++){ if(read(keys[i]) === '1') return true; }
+    if(task === 'name'){
+      var countKeys = [
+        'barakaway_today_' + LANG + '_' + t + '_name_count',
+        'barakaway_name_counter_' + t,
+        'barakaway_name_counter_' + LANG + '_' + t,
+        'barakaway_name_counter_' + LANG + '_v3_' + t,
+        'barakaway_name_counter_' + LANG + '_final_' + t
+      ];
+      for(var c=0;c<countKeys.length;c++){
+        var n = parseInt(read(countKeys[c]) || '0', 10) || 0;
+        if(n >= 100) return true;
+      }
+    }
+    if(task === 'micro'){
+      keys.push('barakaway_micro_answer_' + LANG + '_' + t);
+    }
+    for(var i=0;i<keys.length;i++){ if(read(keys[i]) === '1' || (task === 'micro' && read(keys[i]) !== null)) return true; }
     return false;
   }
+  function allFiveDone(){ return TASKS.every(taskDone); }
   function proQuestionsDone(){
-    return read('barakaway_pro_micro_done_' + todayKey()) === '1';
+    var t = todayKey();
+    return read('barakaway_pro_micro_done_' + LANG + '_' + t) === '1' || read('barakaway_pro_micro_done_' + t) === '1';
   }
   function syncPlusFive(){
     var link = document.getElementById('dailyMicroProUpsell') || document.querySelector('.bw-micro-pro-upsell');
     if(!link) return;
-    var visible = microComplete() && hasProAccess();
+    var visible = allFiveDone() && hasProAccess();
     link.classList.toggle('is-visible', visible);
     link.style.display = visible ? 'flex' : 'none';
     link.classList.toggle('bw-pro-micro-done', visible && proQuestionsDone());
     var status = link.querySelector('.bw-micro-pro-status');
     if(status) status.style.display = (visible && proQuestionsDone()) ? 'inline-flex' : 'none';
   }
-  document.addEventListener('click', function(){ setTimeout(syncPlusFive, 60); setTimeout(syncPlusFive, 300); }, true);
+  document.addEventListener('click', function(){ setTimeout(syncPlusFive, 40); setTimeout(syncPlusFive, 260); }, true);
   if(document.readyState === 'loading') document.addEventListener('DOMContentLoaded', syncPlusFive, {once:true});
   else syncPlusFive();
+  window.addEventListener('load', syncPlusFive);
   window.addEventListener('pageshow', syncPlusFive);
   window.addEventListener('storage', syncPlusFive);
-  setInterval(syncPlusFive, 500);
+  setInterval(syncPlusFive, 250);
 })();
 </script>
 </body>
