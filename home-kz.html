@@ -14052,7 +14052,7 @@ html.dark-mode .bw-pro-micro-option-btn{background:#1d242c;border:1px solid #2a3
     var link=document.getElementById('dailyMicroProUpsell');
     if(!link)return;
     var done=isDone();
-    link.classList.toggle('is-visible',mainMicroDone());
+    link.classList.toggle('is-visible', mainMicroDone() && isPro());
     link.classList.toggle('bw-pro-micro-done',done);
     link.setAttribute('aria-label',done?LABELS.ariaDone:LABELS.ariaOpen);
     link.setAttribute('href',isPro()?'javascript:void(0)':'pro-kz.html#micro');
@@ -14569,7 +14569,7 @@ function hasProAccess(){
 function controlProVisibility(){
   var up = document.getElementById('dailyMicroProUpsell') || document.querySelector('.bw-micro-pro-upsell');
   if(!up) return;
-  var visible = getMicroDone();
+  var visible = getMicroDone() && hasProAccess();
   up.classList.toggle('is-visible', !!visible);
   up.style.display = visible ? 'flex' : 'none';
 }
