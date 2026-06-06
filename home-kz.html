@@ -14818,3 +14818,132 @@ window.addEventListener('load', function(){ setTimeout(controlProVisibility, 120
     overflow:hidden !important;
 }
 </style>
+
+<!-- BW FINAL PATCH V2: strict KZ +5 questions gate, loaded last -->
+<style id="bw-kz-pro-five-strict-gate-v2-style">
+#dailyMicroProUpsell:not(.is-visible){display:none !important;}
+#dailyMicroProUpsell .bw-micro-pro-status{display:none !important;}
+#dailyMicroProUpsell.bw-pro-micro-done .bw-micro-pro-status{display:inline-flex !important;}
+</style>
+<script id="bw-kz-pro-five-strict-gate-v2-js">
+(function(){
+  'use strict';
+
+  var IDS = {
+    article:'dailyArticleLink',
+    adhkar:'currentAdhkarLink',
+    goal:'dailyGoalCard',
+    name:'allahNameCounterCard',
+    micro:'dailyMicroKnowledgeCard'
+  };
+
+  function clean(v){return String(v || '').replace(/\s+/g,' ').trim();}
+  function todayKey(){
+    var d = new Date();
+    return d.getFullYear() + '-' + String(d.getMonth()+1).padStart(2,'0') + '-' + String(d.getDate()).padStart(2,'0');
+  }
+  function card(task){return document.getElementById(IDS[task]);}
+  function hasDoneClass(el){
+    return !!el && (
+      el.classList.contains('bw-final-done') ||
+      el.classList.contains('bw-task-done') ||
+      el.classList.contains('task-done') ||
+      el.classList.contains('goal-done') ||
+      el.getAttribute('aria-disabled') === 'true'
+    );
+  }
+  function statusDone(el){
+    var s = el && el.querySelector('.today-task-status');
+    return clean(s && s.textContent) === '✓';
+  }
+  function keyDone(task){
+    var day = todayKey();
+    var keys = [
+      'bw_final_done_v2_kz_' + day + '_' + task,
+      'bw_daily_done_v2_kz_' + day + '_' + task,
+      'barakaway_today_kz_' + day + '_' + task,
+      'barakaway_today_kz_v2_' + day + '_' + task,
+      'barakaway_today_kz_v3_' + day + '_' + task,
+      'barakaway_today_kz_final_' + day + '_' + task
+    ];
+    try{
+      for(var i=0;i<keys.length;i++){
+        if(localStorage.getItem(keys[i]) === '1') return true;
+      }
+    }catch(e){}
+    return false;
+  }
+  function regularDone(task){
+    var el = card(task);
+    return hasDoneClass(el) || statusDone(el) || keyDone(task);
+  }
+  function nameDone(){
+    var el = card('name');
+    var value = clean((document.getElementById('allahNameCounterValue') || {}).textContent);
+    if(value === '✓') return true;
+    var m = value.match(/^(\d+)\s*\/\s*100/);
+    if(m && parseInt(m[1],10) >= 100) return true;
+    if(hasDoneClass(el) || statusDone(el) || keyDone('name')) return true;
+
+    var day = todayKey();
+    var keys = [
+      'barakaway_today_kz_' + day + '_name_count',
+      'barakaway_name_counter_' + day,
+      'barakaway_name_counter_kz_' + day,
+      'barakaway_name_counter_kz_v3_' + day,
+      'barakaway_name_counter_kz_final_' + day
+    ];
+    try{
+      for(var i=0;i<keys.length;i++){
+        if((parseInt(localStorage.getItem(keys[i]) || '0',10) || 0) >= 100) return true;
+      }
+    }catch(e){}
+    return false;
+  }
+  function microDone(){
+    var el = card('micro');
+    return hasDoneClass(el) || statusDone(el) || keyDone('micro');
+  }
+  function allFiveDone(){
+    return regularDone('article') && regularDone('adhkar') && regularDone('goal') && nameDone() && microDone();
+  }
+  function proDone(){
+    try{return localStorage.getItem('barakaway_pro_micro_done_' + todayKey()) === '1';}
+    catch(e){return false;}
+  }
+  function sync(){
+    var link = document.getElementById('dailyMicroProUpsell');
+    if(!link) return;
+
+    var ready = allFiveDone();
+    var done = proDone();
+
+    if(ready){
+      link.classList.add('is-visible');
+      link.style.display = '';
+      link.setAttribute('aria-hidden','false');
+    }else{
+      link.classList.remove('is-visible');
+      link.style.setProperty('display','none','important');
+      link.setAttribute('aria-hidden','true');
+    }
+
+    link.classList.toggle('bw-pro-micro-done', done);
+    var status = link.querySelector('.bw-micro-pro-status');
+    if(status){
+      status.style.setProperty('display', done ? 'inline-flex' : 'none', 'important');
+    }
+  }
+
+  if(document.readyState === 'loading') document.addEventListener('DOMContentLoaded', sync, {once:true});
+  else sync();
+
+  window.addEventListener('pageshow', sync);
+  window.addEventListener('storage', sync);
+  document.addEventListener('click', function(){setTimeout(sync,50);setTimeout(sync,300);setTimeout(sync,900);}, true);
+  setTimeout(sync,100);
+  setTimeout(sync,700);
+  setTimeout(sync,1500);
+  setInterval(sync,500);
+})();
+</script>
