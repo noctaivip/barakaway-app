@@ -4775,7 +4775,7 @@ body.bw-theme-desert-sand{--home-share-pulse:rgba(255,215,145,.96);--home-share-
     </div>
   </div>
 
-<a class="bw-micro-pro-upsell is-visible" href="pro-kz.html#micro" id="dailyMicroProUpsell" role="button">
+<a class="bw-micro-pro-upsell" href="pro-kz.html#micro" id="dailyMicroProUpsell" role="button">
   <span class="bw-micro-pro-title">Pro нұсқасында күн сайын +5 сұрақ</span>
   <span class="bw-micro-pro-status" id="dailyMicroProStatus" aria-hidden="true">✓</span>
 </a>
@@ -13242,7 +13242,7 @@ function setDone(task){try{localStorage.setItem(finalDoneKey(task),'1');legacyDo
 function taskCard(task){return document.getElementById(TASKS[task]);}
 function taskFromElement(el){if(!el)return'';var modal=el.closest&&el.closest('.bw-task-modal-card');if(modal&&modal.getAttribute('data-task-key'))return modal.getAttribute('data-task-key');var card=el.closest&&el.closest('.today-action');if(card){for(var key in TASKS){if(card.id===TASKS[key])return key;}}return'';}
 function applyDone(task){var card=taskCard(task);if(!card)return;if(task==='micro'){var microPro=document.getElementById('dailyMicroProUpsell');if(microPro)microPro.classList.add('is-visible');}card.classList.add('bw-final-done','bw-task-done','task-done','goal-done');card.classList.remove('goal-urgent','task-urgent');card.setAttribute('aria-disabled','true');card.style.animation='none';var status=card.querySelector('.today-task-status');if(status)status.textContent='✓';var hint=card.querySelector('.bw-task-hint, .bw-task-compact-hint');if(hint)hint.style.display='none';if(task==='name'){var meta=card.querySelector('.bw-task-compact-meta[data-task-meta="name"]');if(meta)meta.textContent='100/100';var value=document.getElementById('allahNameCounterValue');if(value)value.textContent='✓';var fill=document.getElementById('allahNameCounterFill');if(fill)fill.style.width='100%';}}
-function applyAllDone(){Object.keys(TASKS).forEach(function(task){if(isDone(task))applyDone(task);});var microPro=document.getElementById('dailyMicroProUpsell');if(microPro)microPro.classList.add('is-visible');}
+function applyAllDone(){Object.keys(TASKS).forEach(function(task){if(isDone(task))applyDone(task);});var microPro=document.getElementById('dailyMicroProUpsell');if(microPro)microPro.classList.toggle('is-visible',isDone('micro'));}
 function blockOpeningDoneCards(event){var card=event.target&&event.target.closest?event.target.closest('.today-action'):null;if(!card)return;var task=taskFromElement(card);if(task&&isDone(task)){applyDone(task);event.preventDefault();event.stopPropagation();if(event.stopImmediatePropagation)event.stopImmediatePropagation();return false;}}
 function norm(v){return(v||'').replace(/\s+/g,' ').trim();}
 function findMicroByQuestion(q){q=norm(q);for(var i=0;i<MICRO_DATA.length;i++){if(norm(MICRO_DATA[i].q)===q)return MICRO_DATA[i];}return null;}
@@ -13999,6 +13999,7 @@ html.dark-mode .bw-pro-micro-option-btn{background:#1d242c;border:1px solid #2a3
   'use strict';
   var LANG='kz';
   var DAILY_TOTAL=5;
+  function isPro(){try{var pro=localStorage.getItem('barakaway_pro');var plan=localStorage.getItem('barakaway_pro_plan');return pro==='true'||/^(1|true|yes|active|unlocked|premium|pro)$/i.test(String(pro||''))||(plan&&String(plan).trim()!==''&&String(plan).trim()!=='free');}catch(e){return false;}}
   var LABELS={
     ariaDone:'Бүгінгі PRO сұрақтары аяқталды',
     ariaOpen:'Pro нұсқасында күн сайын қосымша 5 сұрақ',
@@ -14162,6 +14163,7 @@ html.dark-mode .bw-pro-micro-option-btn{background:#1d242c;border:1px solid #2a3
     if(!link||link.dataset.bwProMicroSequenceBound==='1')return;
     link.dataset.bwProMicroSequenceBound='1';
     link.addEventListener('click',function(event){
+      if(!isPro())return;
       event.preventDefault();
       event.stopPropagation();
       openProSequence();
@@ -14171,6 +14173,7 @@ html.dark-mode .bw-pro-micro-option-btn{background:#1d242c;border:1px solid #2a3
   document.addEventListener('click',function(event){
     var link=event.target&&event.target.closest?event.target.closest('#dailyMicroProUpsell'):null;
     if(!link)return;
+    if(!isPro())return;
     event.preventDefault();
     event.stopPropagation();
     openProSequence();
@@ -14577,7 +14580,7 @@ function hasProAccess(){
 function controlProVisibility(){
   var up = document.getElementById('dailyMicroProUpsell') || document.querySelector('.bw-micro-pro-upsell');
   if(!up) return;
-  var visible = getMicroDone();
+  var visible = getMicroDone() && hasProAccess();
   up.classList.toggle('is-visible', !!visible);
   up.style.display = visible ? 'flex' : 'none';
 }
