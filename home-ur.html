@@ -4537,6 +4537,13 @@ body.bw-theme-desert-sand{--home-share-pulse:rgba(255,215,145,.96);--home-share-
 @media (prefers-reduced-motion: reduce){.home-prayer-share-btn,.home-prayer-share-btn::after{animation:none !important;}}
 </style>
 
+
+<style id="bw-ur-hide-name-top-counter-fix">
+#allahNameCounterCard .bw-task-compact-meta[data-task-meta="name"]{
+  display:none !important;
+}
+</style>
+
 </head>
 <body>
 <div class="mobile-top-controls">
@@ -14178,15 +14185,7 @@ body[class*="theme-"] .today-hub #dailyMicroKnowledgeCard:not(.bw-final-done):no
     if(!card) return;
 
     var meta = card.querySelector('.bw-task-compact-meta[data-task-meta="name"]');
-    if(!meta){
-      meta = document.createElement('div');
-      meta.className = 'bw-task-compact-meta';
-      meta.setAttribute('data-task-meta', 'name');
-      var title = card.querySelector('.today-action-title');
-      if(title && title.parentElement) title.parentElement.appendChild(meta);
-      else card.appendChild(meta);
-    }
-    meta.textContent = text;
+    if(meta) meta.remove();
 
     var value = document.getElementById('allahNameCounterValue');
     if(value) value.textContent = done ? '✓' : text;
