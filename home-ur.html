@@ -16197,5 +16197,139 @@ html.light-mode #allahNameCounterCard .bw-task-compact-meta[data-task-meta="name
 })();
 </script>
 
+
+<style id="bw-ur-allah-name-counter-no-blink-final">
+#allahNameCounterCard .bw-task-compact-meta[data-task-meta="name"]{
+  display:inline-flex !important;
+  visibility:visible !important;
+  opacity:1 !important;
+  transform:none !important;
+  animation:none !important;
+  transition:none !important;
+  pointer-events:none !important;
+}
+#allahNameCounterCard:not(.bw-task-done):not(.task-done):not(.goal-done) #allahNameCounterValue{
+  width:0 !important;
+  min-width:0 !important;
+  height:0 !important;
+  padding:0 !important;
+  margin:0 !important;
+  border:0 !important;
+  overflow:hidden !important;
+  opacity:0 !important;
+  visibility:hidden !important;
+  font-size:0 !important;
+  line-height:0 !important;
+  pointer-events:none !important;
+}
+#allahNameCounterCard #allahNameCounterFill{
+  visibility:visible !important;
+  opacity:1 !important;
+  animation:none !important;
+  transition:width .18s ease !important;
+}
+</style>
+<script id="bw-ur-allah-name-counter-no-blink-final-js">
+(function(){
+  'use strict';
+  var scheduled = false;
+
+  function todayKey(){
+    var d = new Date();
+    return d.getFullYear() + '-' + String(d.getMonth()+1).padStart(2,'0') + '-' + String(d.getDate()).padStart(2,'0');
+  }
+
+  function readNumber(key){
+    var n = 0;
+    try{ n = parseInt(localStorage.getItem(key) || '0', 10) || 0; }catch(e){}
+    return Math.max(0, Math.min(100, n));
+  }
+
+  function readCount(){
+    var t = todayKey();
+    var keys = [
+      'bw_final_done_v2_ur_' + t + '_name_count',
+      'bw_daily_done_v2_ur_' + t + '_name_count',
+      'barakaway_today_ur_' + t + '_name_count',
+      'barakaway_today_ur_v2_' + t + '_name_count',
+      'barakaway_today_ur_v3_' + t + '_name_count',
+      'barakaway_today_ur_final_' + t + '_name_count',
+      'barakaway_name_counter_' + t,
+      'barakaway_name_counter_ur_' + t,
+      'barakaway_name_counter_ur_v2_' + t,
+      'barakaway_name_counter_ur_v3_' + t,
+      'barakaway_name_counter_ur_final_' + t
+    ];
+    var max = 0;
+    keys.forEach(function(k){ max = Math.max(max, readNumber(k)); });
+    return max;
+  }
+
+  function ensureMeta(card){
+    var meta = card.querySelector('.bw-task-compact-meta[data-task-meta="name"]');
+    if(!meta){
+      meta = document.createElement('div');
+      meta.className = 'bw-task-compact-meta';
+      meta.setAttribute('data-task-meta','name');
+    }
+    var title = card.querySelector('#allahNameToday, .today-action-title');
+    if(title && title.parentNode && meta.previousElementSibling !== title){
+      title.insertAdjacentElement('afterend', meta);
+    }else if(!meta.parentNode){
+      card.appendChild(meta);
+    }
+    meta.style.setProperty('display','inline-flex','important');
+    meta.style.setProperty('visibility','visible','important');
+    meta.style.setProperty('opacity','1','important');
+    meta.style.setProperty('animation','none','important');
+    meta.style.setProperty('transition','none','important');
+    return meta;
+  }
+
+  function paint(){
+    scheduled = false;
+    var card = document.getElementById('allahNameCounterCard');
+    if(!card) return;
+
+    var n = readCount();
+    var done = n >= 100;
+    var text = n + '/100';
+
+    var meta = ensureMeta(card);
+    if(meta.textContent !== text) meta.textContent = text;
+
+    var top = document.getElementById('allahNameCounterValue');
+    if(top){
+      var wanted = done ? '✓' : '';
+      if(top.textContent !== wanted) top.textContent = wanted;
+    }
+
+    var fill = document.getElementById('allahNameCounterFill');
+    if(fill && fill.style.width !== (n + '%')) fill.style.width = n + '%';
+  }
+
+  function schedule(){
+    if(scheduled) return;
+    scheduled = true;
+    requestAnimationFrame(paint);
+  }
+
+  function start(){
+    paint();
+    var card = document.getElementById('allahNameCounterCard');
+    if(!card) return;
+    var observer = new MutationObserver(schedule);
+    observer.observe(card, {childList:true, subtree:true, characterData:true, attributes:true, attributeFilter:['class','style']});
+    setInterval(paint, 500);
+  }
+
+  if(document.readyState === 'loading'){
+    document.addEventListener('DOMContentLoaded', start, {once:true});
+  }else{
+    start();
+  }
+})();
+</script>
+
 </body>
 </html>
