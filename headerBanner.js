@@ -164,26 +164,58 @@
     return fallbackLang;
   }
 
-  function getHijriMonth(){
+  var monthNames = {
+    ru: ["Мухаррам", "Сафар", "Раби аль-авваль", "Раби ас-сани", "Джумада аль-уля", "Джумада ас-сания", "Раджаб", "Ша‘бан", "Рамадан", "Шавваль", "Зуль-Ка‘да", "Зуль-Хиджа"],
+    en: ["Muharram", "Safar", "Rabi al-Awwal", "Rabi al-Thani", "Jumada al-Ula", "Jumada al-Thani", "Rajab", "Sha‘ban", "Ramadan", "Shawwal", "Dhul-Qa‘dah", "Dhul-Hijjah"],
+    ar: ["محرّم", "صفر", "ربيع الأول", "ربيع الآخر", "جمادى الأولى", "جمادى الآخرة", "رجب", "شعبان", "رمضان", "شوال", "ذو القعدة", "ذو الحجة"],
+    tr: ["Muharrem", "Safer", "Rebiülevvel", "Rebiülahir", "Cemaziyelevvel", "Cemaziyelahir", "Recep", "Şaban", "Ramazan", "Şevval", "Zilkade", "Zilhicce"],
+    kz: ["Мұхаррам", "Сафар", "Рабиғ әл-әууәл", "Рабиғ әс-сани", "Жұмада әл-ула", "Жұмада әс-сания", "Рәжәб", "Шағбан", "Рамазан", "Шәууәл", "Зүлқағда", "Зүлхижжа"],
+    uz: ["Muharram", "Safar", "Rabiul avval", "Rabius soniy", "Jumodul avval", "Jumodul soniy", "Rajab", "Sha’bon", "Ramazon", "Shavvol", "Zulqa’da", "Zulhijja"],
+    id: ["Muharram", "Safar", "Rabiul Awal", "Rabiul Akhir", "Jumadil Awal", "Jumadil Akhir", "Rajab", "Sya‘ban", "Ramadan", "Syawwal", "Dzulqa’dah", "Dzulhijjah"],
+    hi: ["मुहर्रम", "सफ़र", "रबीउल अव्वल", "रबीउस सानी", "जुमादा अल ऊला", "जुमादा अस सानिया", "रजब", "शाबान", "रमज़ान", "शव्वाल", "ज़ुल क़ादा", "ज़ुल हिज्जा"],
+    ur: ["محرم", "صفر", "ربیع الاول", "ربیع الآخر", "جمادی الاولیٰ", "جمادی الآخرہ", "رجب", "شعبان", "رمضان", "شوال", "ذوالقعدہ", "ذوالحجہ"],
+    bn: ["মুহাররম", "সফর", "রবিউল আউয়াল", "রবিউস সানি", "জুমাদাল উলা", "জুমাদাল আখিরা", "রজব", "শাবান", "রমজান", "শাওয়াল", "জুলকাদা", "জুলহিজ্জা"]
+  };
+
+  function getHijriDate(){
     var now = new Date();
 
     try{
-      var parts = new Intl.DateTimeFormat("en-u-ca-islamic-umalqura", {month:"numeric"}).formatToParts(now);
+      var parts = new Intl.DateTimeFormat("en-u-ca-islamic-umalqura", {day:"numeric", month:"numeric"}).formatToParts(now);
+      var day = 1;
+      var month = 11;
       for(var i=0;i<parts.length;i++){
-        if(parts[i].type === "month"){
-          var month = parseInt(parts[i].value, 10);
-          if(month >= 1 && month <= 12) return month;
-        }
+        if(parts[i].type === "day") day = parseInt(parts[i].value, 10);
+        if(parts[i].type === "month") month = parseInt(parts[i].value, 10);
       }
+      if(day >= 1 && day <= 30 && month >= 1 && month <= 12) return {day:day, month:month};
     }catch(e){}
 
     try{
-      var formatted = new Intl.DateTimeFormat("en-u-ca-islamic", {month:"numeric"}).format(now);
-      var num = parseInt(String(formatted).replace(/[^0-9]/g,""), 10);
-      if(num >= 1 && num <= 12) return num;
+      var fallbackParts = new Intl.DateTimeFormat("en-u-ca-islamic", {day:"numeric", month:"numeric"}).formatToParts(now);
+      var fallbackDay = 1;
+      var fallbackMonth = 11;
+      for(var j=0;j<fallbackParts.length;j++){
+        if(fallbackParts[j].type === "day") fallbackDay = parseInt(fallbackParts[j].value, 10);
+        if(fallbackParts[j].type === "month") fallbackMonth = parseInt(fallbackParts[j].value, 10);
+      }
+      if(fallbackDay >= 1 && fallbackDay <= 30 && fallbackMonth >= 1 && fallbackMonth <= 12) return {day:fallbackDay, month:fallbackMonth};
     }catch(e){}
 
-    return 11;
+    return {day:1, month:11};
+  }
+
+  function makeDayPrefix(lang, day, monthName){
+    if(lang === "en") return "Day " + day + " of " + monthName + " — ";
+    if(lang === "ar") return "اليوم " + day + " من شهر " + monthName + " — ";
+    if(lang === "tr") return monthName + " ayının " + day + ". günü — ";
+    if(lang === "kz") return monthName + " айының " + day + "-күні — ";
+    if(lang === "uz") return monthName + " oyining " + day + "-kuni — ";
+    if(lang === "id") return "Hari ke-" + day + " bulan " + monthName + " — ";
+    if(lang === "hi") return monthName + " महीने का " + day + "वाँ दिन — ";
+    if(lang === "ur") return monthName + " کا " + day + "واں دن — ";
+    if(lang === "bn") return monthName + " মাসের " + day + "তম দিন — ";
+    return day + "-й день месяца " + monthName + " — ";
   }
 
   function applyHeaderBanner(){
@@ -191,8 +223,13 @@
     if(!el) return;
     var lang = getLang();
     var list = messages[lang] || messages[fallbackLang];
-    var month = getHijriMonth();
-    el.textContent = list[month - 1] || list[10] || "";
+    var hijriDate = getHijriDate();
+    var month = hijriDate.month;
+    var day = hijriDate.day;
+    var names = monthNames[lang] || monthNames[fallbackLang];
+    var monthName = names[month - 1] || names[10] || "";
+    var message = list[month - 1] || list[10] || "";
+    el.textContent = makeDayPrefix(lang, day, monthName) + message;
   }
 
   if(document.readyState === "loading"){
