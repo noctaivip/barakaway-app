@@ -13153,7 +13153,6 @@ const TASK_PREFIX = "barakaway_today_hi_";
 })();
 </script>
 <script src="/theme-toggle.js"></script>
-<script src="/bottom-nav.js"></script>
 <script>
 (function(){
   const TASK_PREFIX = "barakaway_today_hi_";
@@ -13300,198 +13299,6 @@ const TASK_PREFIX = "barakaway_today_hi_";
 <div class="my-saved-list" id="barakawayMyList"></div>
 </div>
 </div>
-<script id="barakaway-home-nav-upgrade-script">
-(function(){
-  const MY_LINK = "#barakaway-my";
-  const LEARNING_LINK = "learning-hi.html";
-
-  function svgBookmark(){
-    return '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 4.5A1.5 1.5 0 0 1 7.5 3h9A1.5 1.5 0 0 1 18 4.5V21l-6-3.5L6 21V4.5z"/></svg>';
-  }
-
-  function svgPlay(){
-    return '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5v14l11-7-11-7z"/><path d="M4 5v14"/></svg>';
-  }
-
-  function normalizeText(value){
-    return String(value || "").trim().toLowerCase();
-  }
-
-  function updateBottomNav(){
-    const items = document.querySelectorAll(".bottom-app-nav-item");
-    if(!items.length) return false;
-
-    items.forEach(function(item){
-      const label = item.querySelector(".bottom-app-nav-label");
-      const icon = item.querySelector(".bottom-app-nav-icon");
-      const labelText = normalizeText(label ? label.textContent : item.textContent);
-
-      if(labelText === "हिंदी पाठ"){
-        item.setAttribute("href", MY_LINK);
-        item.dataset.barakaNavRole = "my";
-        if(label) label.textContent = "मेरा";
-        if(icon) icon.innerHTML = svgBookmark();
-        item.setAttribute("aria-label", "मेरा: हिंदी पाठ");
-        item.classList.remove("active");
-      }
-
-      if(labelText === "हिंदी पाठ"){
-        item.setAttribute("href", LEARNING_LINK);
-        item.dataset.barakaNavRole = "learning";
-        if(label) label.textContent = "सीखना";
-        if(icon) icon.innerHTML = svgPlay();
-        item.setAttribute("aria-label", "सीखना: हिंदी पाठ");
-        item.classList.remove("active");
-      }
-    });
-
-    return true;
-  }
-
-  function readJson(key, fallback){
-    try{return JSON.parse(localStorage.getItem(key) || JSON.stringify(fallback));}
-    catch(e){return fallback;}
-  }
-
-  function collectSaved(){
-    const items = [];
-
-    const quranSaved = readJson("barakaway:quran:surah:ru:lastSaved", null);
-    if(quranSaved && quranSaved.href){
-      items.push({
-        title: quranSaved.type === "ayah"
-          ? "क़ुरआन · सहेजी गई आयत " + (quranSaved.ayahNumber || "")
-          : "क़ुरआन · सहेजी गई सूरह",
-        meta: quranSaved.type === "ayah"
-          ? ((quranSaved.surahTitle || "सूरह") + " · " + (quranSaved.meaning || "").slice(0, 90))
-          : ((quranSaved.title || "सूरह") + " · " + (quranSaved.meta || "")),
-        href: quranSaved.href
-      });
-    }
-
-    const quranFavs = readJson("barakaway:quran:surah:ru:favorites", []);
-    quranFavs.slice(0, 12).forEach(function(item){
-      if(item && item.href){
-        items.push({
-          title: "चुनी हुई सूरह · " + (item.title || ("№" + (item.number || ""))),
-          meta: (item.arabic || "") + (item.meta ? " · " + item.meta : ""),
-          href: item.href
-        });
-      }
-    });
-
-    const genericKeys = [
-      "barakaway:adhkar:ru:saved",
-      "barakaway:askars:ru:saved",
-      "barakaway:duas:ru:saved"
-    ];
-
-    genericKeys.forEach(function(key){
-      const saved = readJson(key, []);
-      if(Array.isArray(saved)){
-        saved.slice(0, 8).forEach(function(item){
-          if(item && (item.href || item.url)){
-            items.push({
-              title: item.title || item.name || "सहेजी गई सामग्री",
-              meta: item.meta || item.text || "BarakaWay",
-              href: item.href || item.url
-            });
-          }
-        });
-      }
-    });
-
-    const seen = new Set();
-    return items.filter(function(item){
-      const id = item.title + "|" + item.href;
-      if(seen.has(id)) return false;
-      seen.add(id);
-      return true;
-    });
-  }
-
-  function renderMySaved(){
-    const list = document.getElementById("barakawayMyList");
-    if(!list) return;
-
-    const items = collectSaved();
-
-    if(!items.length){
-      list.innerHTML = '<div class="my-saved-empty">हिंदी पाठ.</div>';
-      return;
-    }
-
-    list.innerHTML = items.map(function(item){
-      return '<a class="my-saved-item" href="' + String(item.href || "#").replace(/"/g, "&quot;") + '">' +
-        '<div class="my-saved-item-title">' + String(item.title || "हिंदी पाठ").replace(/</g, "&lt;") + '</div>' +
-        '<div class="my-saved-item-meta">' + String(item.meta || "").replace(/</g, "&lt;") + '</div>' +
-      '</a>';
-    }).join("");
-  }
-
-  function openMySaved(event){
-    if(event){
-      event.preventDefault();
-      event.stopPropagation();
-    }
-    renderMySaved();
-    const modal = document.getElementById("barakaway-my-modal");
-    if(modal){
-      modal.classList.add("open");
-      modal.setAttribute("aria-hidden", "false");
-    }
-  }
-
-  function closeMySaved(){
-    const modal = document.getElementById("barakaway-my-modal");
-    if(modal){
-      modal.classList.remove("open");
-      modal.setAttribute("aria-hidden", "true");
-    }
-  }
-
-  document.addEventListener("click", function(event){
-    const myNav = event.target.closest('[data-baraka-nav-role="my"], a[href="#barakaway-my"]');
-    if(myNav){
-      openMySaved(event);
-      return;
-    }
-
-    if(event.target.closest("[data-my-close]")){
-      event.preventDefault();
-      closeMySaved();
-      return;
-    }
-
-    const overlay = event.target.closest("#barakaway-my-modal");
-    if(overlay && event.target === overlay){
-      closeMySaved();
-    }
-  }, true);
-
-  function boot(){
-    updateBottomNav();
-
-    const navObserver = new MutationObserver(function(){
-      updateBottomNav();
-    });
-    navObserver.observe(document.body, {childList:true, subtree:true});
-
-    let tries = 0;
-    const timer = setInterval(function(){
-      tries += 1;
-      updateBottomNav();
-      if(tries > 20) clearInterval(timer);
-    }, 250);
-  }
-
-  if(document.readyState === "loading"){
-    document.addEventListener("DOMContentLoaded", boot);
-  }else{
-    boot();
-  }
-})();
-</script>
 <script>
 (function(){
   function syncBarakaWayProHome(){
@@ -15714,5 +15521,7 @@ window.addEventListener('load', function(){ setTimeout(controlProVisibility, 120
 })();
 </script>
 
+
+<script src="/bottom-nav.js"></script>
 </body>
 </html>
