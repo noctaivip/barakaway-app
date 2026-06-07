@@ -52,6 +52,14 @@ body.light-mode .hero p{
   color:#405248 !important;
 }
 
+
+.card{padding-bottom:42px!important}
+.drag-handle{position:absolute;right:14px;bottom:14px;z-index:4;width:34px;height:34px;border-radius:12px;border:1px solid rgba(215,192,122,.28);background:rgba(215,192,122,.08);color:#d7c07a;display:flex;align-items:center;justify-content:center;cursor:grab;-webkit-tap-highlight-color:transparent;touch-action:none}
+.drag-handle:active{cursor:grabbing;transform:scale(.96)}
+.drag-handle span,.drag-handle span:before,.drag-handle span:after{display:block;width:16px;height:2px;border-radius:999px;background:currentColor;content:""}
+.drag-handle span{position:relative;box-shadow:0 5px 0 currentColor,0 -5px 0 currentColor}
+.card.is-dragging{opacity:.72;transform:scale(.985);box-shadow:0 18px 36px rgba(0,0,0,.34)!important}
+html.light-mode .drag-handle{background:#fff8df!important;border-color:#d8c783!important;color:#6d550b!important}
 </style>
 <script src="/theme-init.js"></script>
 <link rel="stylesheet" href="/theme.css">
@@ -140,10 +148,6 @@ body.light-mode .hero p{
     return pageCache[url];
   }
 
-  function attrSelectorValue(value){
-    return String(value||'').replace(/\\/g,'\\\\').replace(/"/g,'\\"');
-  }
-
   function pickText(root, selectors){
     for(var i=0;i<selectors.length;i++){
       var el=root.querySelector(selectors[i]);
@@ -175,7 +179,7 @@ body.light-mode .hero p{
 
     return fetchProphetsPage().then(function(doc){
       if(!doc) return fallback;
-      var selector='details.nested-dua[data-dua-id="'+attrSelectorValue(parsed.duaId)+'"]';
+      var selector='details.nested-dua[data-dua-id="'+CSS.escape(parsed.duaId)+'"]';
       var dua=doc.querySelector(selector);
       if(!dua) return fallback;
       var title=dua.getAttribute('data-dua-title') || pickText(dua,[
@@ -233,6 +237,7 @@ body.light-mode .hero p{
       var type=safe((x && x.type) || TEXT.savedMaterial);
       return '<div class="card" data-id="'+id+'">'+
         '<button class="remove" type="button" data-remove-id="'+id+'" aria-label="'+safe(TEXT.remove)+'">×</button>'+
+        '<button class="drag-handle" type="button" aria-label="Reorder"><span></span></button>'+
         '<a href="'+url+'" style="text-decoration:none;color:inherit;display:block">'+
         '<div class="icon">💛</div>'+
         '<div class="title">'+title+'</div>'+
@@ -249,6 +254,7 @@ body.light-mode .hero p{
         var id=safe(x.removeId || x.id);
         return '<div class="card" data-id="'+id+'">'+
           '<button class="remove" type="button" data-remove-id="'+id+'" aria-label="'+safe(TEXT.remove)+'">×</button>'+
+        '<button class="drag-handle" type="button" aria-label="Reorder"><span></span></button>'+
           '<a href="'+safe(x.url)+'" style="text-decoration:none;color:inherit;display:block">'+
           '<div class="icon">💛</div>'+
           '<div class="title">'+safe(x.title)+'</div>'+
@@ -259,6 +265,63 @@ body.light-mode .hero p{
       }).join('');
     });
   }
+
+
+  var draggedCard=null;
+  var draggedGrid=null;
+
+  function persistOrderFromDom(){
+    var grid=document.getElementById('favoritesGrid');
+    if(!grid) return;
+    var ids=[].slice.call(grid.querySelectorAll('.card[data-id]')).map(function(card){return card.getAttribute('data-id');}).filter(Boolean);
+    if(!ids.length) return;
+    var list=read();
+    var byId={};
+    list.forEach(function(x){byId[itemId(x)]=x;});
+    var next=[];
+    ids.forEach(function(id){if(byId[id]){next.push(byId[id]);delete byId[id];}});
+    list.forEach(function(x){var id=itemId(x);if(byId[id]) next.push(x);});
+    if(next.length===list.length) write(next);
+  }
+
+  document.addEventListener('pointerdown',function(e){
+    var handle=e.target && e.target.closest ? e.target.closest('.drag-handle') : null;
+    if(!handle) return;
+    var card=handle.closest('.card');
+    var grid=handle.closest('#favoritesGrid');
+    if(!card || !grid) return;
+    e.preventDefault();
+    e.stopPropagation();
+    draggedCard=card;
+    draggedGrid=grid;
+    card.classList.add('is-dragging');
+    try{handle.setPointerCapture(e.pointerId);}catch(err){}
+  });
+
+  document.addEventListener('pointermove',function(e){
+    if(!draggedCard || !draggedGrid) return;
+    e.preventDefault();
+    var el=document.elementFromPoint(e.clientX,e.clientY);
+    var over=el && el.closest ? el.closest('#favoritesGrid .card') : null;
+    if(!over || over===draggedCard || over.parentNode!==draggedGrid) return;
+    var rect=over.getBoundingClientRect();
+    var before=e.clientY < rect.top + rect.height/2;
+    draggedGrid.insertBefore(draggedCard,before ? over : over.nextSibling);
+  },{passive:false});
+
+  document.addEventListener('pointerup',function(){
+    if(!draggedCard) return;
+    draggedCard.classList.remove('is-dragging');
+    persistOrderFromDom();
+    draggedCard=null;
+    draggedGrid=null;
+  });
+
+  document.addEventListener('pointercancel',function(){
+    if(draggedCard) draggedCard.classList.remove('is-dragging');
+    draggedCard=null;
+    draggedGrid=null;
+  });
 
   document.addEventListener('click',function(e){
     var btn=e.target && e.target.closest ? e.target.closest('[data-remove-id]') : null;
