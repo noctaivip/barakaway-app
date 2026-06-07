@@ -5404,52 +5404,9 @@ body.bw-theme-desert-sand{--home-share-pulse:rgba(255,215,145,.96);--home-share-
 </div>
 <div class="ramadan-wrapper">
 <div class="ramadan-bar">
-<div class="ramadan-text" id="monthlyIslamicBannerText">
-Сохрани свои действия в месяц Зуль-Ка‘да, сократи лишнее и усили зикр - это подготовка к самым важным дням впереди
+<div class="ramadan-text"></div>
 </div>
 </div>
-</div>
-<script id="monthly-islamic-banner-js">
-(function(){
-  const banner = document.getElementById('monthlyIslamicBannerText');
-  if(!banner) return;
-
-  const monthlyTexts = {
-    1: 'В месяц Мухаррам усили пост, зикр и покаяние; особенно цени день Ашура и начни год с чистым сердцем',
-    2: 'В месяц Сафар держись утренних и вечерних азкаров, оставь суеверия и укрепляй упование только на Аллаха',
-    3: 'В месяц Раби аль-Авваль чаще вспоминай сунну Пророка ﷺ, улучшай нрав и добавь салават каждый день',
-    4: 'В месяц Раби ас-Сани закрепи полезные привычки: намаз вовремя, Коран понемногу и добро к близким',
-    5: 'В месяц Джумада аль-Уля уменьши лишние слова, усили дуа и сделай больше скрытых добрых дел ради Аллаха',
-    6: 'В месяц Джумада ас-Сани пересмотри свои намерения, укрепи сабр и возвращайся к Корану хотя бы понемногу',
-    7: 'В месяц Раджаб готовь сердце к Рамадану: больше истигфара, меньше грехов и больше постоянных благих дел',
-    8: 'В месяц Шаабан чаще держи добровольный пост, усили чтение Корана и заранее подготовься к Рамадану',
-    9: 'В месяц Рамадан береги пост, Коран, таравих, садака и дуа — это время очищения сердца и приближения к Аллаху',
-    10: 'В месяц Шавваль постарайся держать шесть дней поста после Рамадана и сохрани поклонение, которое начал',
-    11: 'Сохрани свои действия в месяц Зуль-Ка‘да, сократи лишнее и усили зикр - это подготовка к самым важным дням впереди',
-    12: 'В месяц Зуль-Хиджа цени первые десять дней, увеличь такбир, садака, дуа и не упусти пост в день Арафа'
-  };
-
-  function getIslamicMonth(){
-    try{
-      const parts = new Intl.DateTimeFormat('en-u-ca-islamic-umalqura',{month:'numeric'}).formatToParts(new Date());
-      const part = parts.find(function(x){ return x.type === 'month'; });
-      const month = part ? parseInt(part.value,10) : NaN;
-      if(month >= 1 && month <= 12) return month;
-    }catch(e){}
-
-    try{
-      const parts = new Intl.DateTimeFormat('en-u-ca-islamic',{month:'numeric'}).formatToParts(new Date());
-      const part = parts.find(function(x){ return x.type === 'month'; });
-      const month = part ? parseInt(part.value,10) : NaN;
-      if(month >= 1 && month <= 12) return month;
-    }catch(e){}
-
-    return 11;
-  }
-
-  banner.textContent = monthlyTexts[getIslamicMonth()] || monthlyTexts[11];
-})();
-</script>
 
 <div aria-label="Desktop quick actions" class="desktop-top-actions">
 <div class="desktop-action-left">
@@ -13287,6 +13244,7 @@ const TASK_PREFIX = "barakaway_today_ru_";
 })();
 </script>
 <script src="/theme-toggle.js"></script>
+<script src="/headerBanner.js"></script>
 <script src="/bottom-nav.js"></script>
 <script>
 (function(){
