@@ -75,6 +75,9 @@ body.light-mode .hero p{
 <script>
 (function(){
   var KEY='barakaway_favorites_v1';
+  var CURRENT_LANG='hi';
+  var TEXT={fav:'पसंदीदा',saved:'सहेजे गए',savedMaterial:'सहेजी गई सामग्री',dua:'दुआ',remove:'पसंदीदा से हटाएँ'};
+  var pageCache={};
 
   function safe(value){
     return String(value == null ? '' : value)
@@ -89,47 +92,147 @@ body.light-mode .hero p{
     try{
       var parsed=JSON.parse(localStorage.getItem(KEY)||'[]');
       return Array.isArray(parsed)?parsed.filter(Boolean):[];
-    }catch(e){
-      return [];
-    }
+    }catch(e){return [];}
   }
 
   function write(list){
-    localStorage.setItem(KEY,JSON.stringify(Array.isArray(list)?list:[]));
+    try{localStorage.setItem(KEY,JSON.stringify(Array.isArray(list)?list:[]));}catch(e){}
     try{document.dispatchEvent(new CustomEvent('barakaway:favorites:changed'));}catch(e){}
+    if(window.BarakaWayFavorites&&typeof window.BarakaWayFavorites.refreshNav==='function'){
+      try{window.BarakaWayFavorites.refreshNav();}catch(e){}
+    }
   }
 
   function itemId(x){
     return String((x && x.id) || ((x && x.url || '') + '::' + (x && x.title || '')));
   }
 
+  function normalizeLang(lang){
+    lang=String(lang||'').toLowerCase();
+    if(lang==='kk') return 'kz';
+    return lang || CURRENT_LANG;
+  }
+
+  function localizedUrl(url){
+    url=String(url||'#');
+    return url.replace(/(prophets-duas-)(ru|en|tr|uz|id|kz|kk|hi|bn|ur|ar)(\.html)/i,function(_,a,b,c){return a+CURRENT_LANG+c;});
+  }
+
+  function parseProphetsDuaId(id){
+    var m=String(id||'').match(/(?:^|\/)prophets-duas-(ru|en|tr|uz|id|kz|kk|hi|bn|ur|ar)\.html::dua::(.+)$/i);
+    return m?{sourceLang:normalizeLang(m[1]),duaId:m[2]}:null;
+  }
+
+  function localProphetsDuaGlobalId(duaId){
+    return '/prophets-duas-'+CURRENT_LANG+'.html::dua::'+duaId;
+  }
+
+  function fetchProphetsPage(){
+    var url='/prophets-duas-'+CURRENT_LANG+'.html';
+    if(!pageCache[url]){
+      pageCache[url]=fetch(url,{cache:'force-cache'}).then(function(r){
+        if(!r.ok) throw new Error('Failed to load '+url);
+        return r.text();
+      }).then(function(html){
+        return new DOMParser().parseFromString(html,'text/html');
+      }).catch(function(){return null;});
+    }
+    return pageCache[url];
+  }
+
+  function attrSelectorValue(value){
+    return String(value||'').replace(/\\/g,'\\\\').replace(/"/g,'\\"');
+  }
+
+  function pickText(root, selectors){
+    for(var i=0;i<selectors.length;i++){
+      var el=root.querySelector(selectors[i]);
+      var text=el && el.textContent ? el.textContent.trim() : '';
+      if(text) return text;
+    }
+    return '';
+  }
+
+  function resolveItem(x){
+    var rawId=itemId(x);
+    var parsed=parseProphetsDuaId(rawId);
+    var fallback={
+      id: rawId,
+      removeId: rawId,
+      url: localizedUrl(x && x.url || '#'),
+      title: (x && x.title) || TEXT.fav,
+      text: (x && (x.text || x.type)) || TEXT.savedMaterial,
+      type: (x && x.type) || TEXT.savedMaterial
+    };
+
+    if(!parsed){
+      return Promise.resolve(fallback);
+    }
+
+    fallback.id=localProphetsDuaGlobalId(parsed.duaId);
+    fallback.url='/prophets-duas-'+CURRENT_LANG+'.html#'+parsed.duaId;
+    fallback.type=TEXT.dua;
+
+    return fetchProphetsPage().then(function(doc){
+      if(!doc) return fallback;
+      var selector='details.nested-dua[data-dua-id="'+attrSelectorValue(parsed.duaId)+'"]';
+      var dua=doc.querySelector(selector);
+      if(!dua) return fallback;
+      var title=dua.getAttribute('data-dua-title') || pickText(dua,[
+        ':scope > summary .dua-title',
+        'summary .dua-title',
+        '.dua-title'
+      ]);
+      var text=pickText(dua,[
+        ':scope > .dua-body .dua-meaning',
+        ':scope > .dua-body .dua-translit',
+        ':scope > .dua-body .dua-arabic',
+        '.dua-meaning',
+        '.dua-translit',
+        '.dua-arabic'
+      ]);
+      return {
+        id:fallback.id,
+        removeId:rawId,
+        url:fallback.url,
+        title:title || fallback.title,
+        text:text || fallback.text,
+        type:TEXT.dua
+      };
+    });
+  }
+
+  function updateCount(n){
+    var count=document.getElementById('favoritesCount');
+    if(count) count.textContent=n+' '+TEXT.saved;
+  }
+
   function render(){
     var grid=document.getElementById('favoritesGrid');
     var empty=document.getElementById('favoritesEmpty');
-    var count=document.getElementById('favoritesCount');
     var clear=document.getElementById('favoritesClear');
     var list=read();
+    if(!grid || !empty) return;
 
-    count.textContent=list.length+' सहेजे गए';
+    updateCount(list.length);
 
     if(!list.length){
       empty.style.display='';
-      clear.classList.remove('is-visible');
+      if(clear) clear.classList.remove('is-visible');
       grid.innerHTML='';
       return;
     }
 
     empty.style.display='none';
-    clear.classList.add('is-visible');
-
-    grid.innerHTML=list.map(function(x,index){
+    if(clear) clear.classList.add('is-visible');
+    grid.innerHTML=list.map(function(x){
       var id=safe(itemId(x));
-      var url=safe(x.url||'#');
-      var title=safe(x.title||'पसंदीदा');
-      var text=safe(x.text||x.type||'सहेजी गई सामग्री');
-      var type=safe(x.type||'सूरह');
+      var url=safe(localizedUrl(x && x.url || '#'));
+      var title=safe((x && x.title) || TEXT.fav);
+      var text=safe((x && (x.text || x.type)) || TEXT.savedMaterial);
+      var type=safe((x && x.type) || TEXT.savedMaterial);
       return '<div class="card" data-id="'+id+'">'+
-        '<button class="remove" type="button" data-remove-id="'+id+'" aria-label="पसंदीदा से हटाएँ">×</button>'+
+        '<button class="remove" type="button" data-remove-id="'+id+'" aria-label="'+safe(TEXT.remove)+'">×</button>'+
         '<a href="'+url+'" style="text-decoration:none;color:inherit;display:block">'+
         '<div class="icon">💛</div>'+
         '<div class="title">'+title+'</div>'+
@@ -138,10 +241,27 @@ body.light-mode .hero p{
         '</a>'+
       '</div>';
     }).join('');
+
+    Promise.all(list.map(resolveItem)).then(function(localized){
+      var current=read();
+      if(current.length!==list.length) return;
+      grid.innerHTML=localized.map(function(x){
+        var id=safe(x.removeId || x.id);
+        return '<div class="card" data-id="'+id+'">'+
+          '<button class="remove" type="button" data-remove-id="'+id+'" aria-label="'+safe(TEXT.remove)+'">×</button>'+
+          '<a href="'+safe(x.url)+'" style="text-decoration:none;color:inherit;display:block">'+
+          '<div class="icon">💛</div>'+
+          '<div class="title">'+safe(x.title)+'</div>'+
+          '<div class="text">'+safe(x.text)+'</div>'+
+          '<span class="badge">'+safe(x.type)+'</span>'+
+          '</a>'+
+        '</div>';
+      }).join('');
+    });
   }
 
   document.addEventListener('click',function(e){
-    var btn=e.target.closest('[data-remove-id]');
+    var btn=e.target && e.target.closest ? e.target.closest('[data-remove-id]') : null;
     if(!btn)return;
     e.preventDefault();
     e.stopPropagation();
@@ -151,11 +271,12 @@ body.light-mode .hero p{
     render();
   });
 
-  document.getElementById('favoritesClear').addEventListener('click',function(){
-    write([]);
-    render();
-  });
+  var clearBtn=document.getElementById('favoritesClear');
+  if(clearBtn){
+    clearBtn.addEventListener('click',function(){write([]);render();});
+  }
 
+  document.addEventListener('barakaway:favorites:changed',render);
   render();
 })();
 </script>
