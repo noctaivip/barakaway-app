@@ -1168,29 +1168,8 @@ function attachSafeImages(root){
   });
 }
 
-function renderCards(filter){
-  const root=document.getElementById("cards");
-  if(!root)return;
-  const list=orderedGreetings().filter(function(item){return filter==="all"||item.category===filter;});
-  const lang=(document.documentElement.getAttribute("lang")||"en").toLowerCase();
-  const labels={ru:["Открыть","Поделиться","Копировать"],en:["Open","Share","Copy"],tr:["Aç","Paylaş","Kopyala"],id:["Buka","Bagikan","Salin"],uz:["Ochish","Ulashish","Nusxalash"],kk:["Ашу","Бөлісу","Көшіру"],hi:["खोलें","शेयर करें","कॉपी करें"],bn:["খুলুন","শেয়ার","কপি"],ur:["کھولیں","شیئر کریں","کاپی کریں"],ar:["فتح","مشاركة","نسخ"]}[lang]||["Open","Share","Copy"];
-  function esc(value){return String(value==null?"":value).replace(/[&<>"']/g,function(ch){return {"&":"&amp;","<":"&lt;",">":"&gt;","\"":"&quot;","'":"&#39;"}[ch];});}
-  root.innerHTML=list.map(function(item){
-    const id=esc(item.id);
-    return `<article class="greeting-card">
-      <div class="card-art" role="button" tabindex="0" onclick="openCard('${id}')" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();openCard('${id}');}">
-        <img class="card-image" src="${esc(item.image)}" alt="${esc(item.title)}" loading="lazy">
-        <div class="card-image-overlay"></div>
-        <div class="card-brand-badge"><img src="${esc(LOGO_PATH)}" alt="BarakaWay" loading="lazy"></div>
-        <div class="card-category-badge">${esc(item.label||"")}</div>
-        <div class="card-site-mark">barakaway.app</div>
-      </div>
-      <div class="card-body"><h3 class="card-title">${esc(item.title)}</h3><p class="card-text">${esc(item.text)}</p></div>
-      <div class="card-actions"><button class="action-btn primary" type="button" onclick="openCard('${id}')">${labels[0]}</button><button class="action-btn" type="button" onclick="shareCard('${id}')">${labels[1]}</button><button class="action-btn" type="button" onclick="copyCard('${id}')">${labels[2]}</button></div>
-    </article>`;
-  }).join("");
-  if(typeof attachSafeImages==="function")attachSafeImages(root);
-}
+function renderCards(filter){const root=document.getElementById("cards");const list=orderedGreetings().filter(function(item){return filter==="all"||item.category===filter;});root.innerHTML=list.map(function(item){return `BarakaWay — her gün Allah’a bir adım daha yakın.
+barakaway.app`;}).join("");attachSafeImages(root);}
 function findGreeting(id){return greetings.find(function(item){return item.id===id;})||greetings[0];}
 function generatePersonal(){initAudienceNameLogic();const audience=getGeneratorAudience();const nameInput=document.getElementById("generatorName");let name=cleanPersonalName((nameInput&&audience==="individual")?nameInput.value||"":"");if(audience==="individual"&&!name){if(nameInput){nameInput.focus();nameInput.classList.add("field-error");setTimeout(()=>nameInput.classList.remove("field-error"),900);}alert("Kişisel tebrik için alıcının adını girin.");return;}saveName();const cat=document.getElementById("generatorCategory").value;const tpl=personalizedTemplates[cat]||personalizedTemplates.jumuah;currentGreeting={id:"personal",category:cat,label:tpl.label,title:tpl.title,headline:selectPersonalHeadline(cat),text:selectPersonalText(cat,personalName),image:getNextPersonalImage(),personalName:personalName};openModal(currentGreeting);}
 function regeneratePersonal(){
