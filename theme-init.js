@@ -190,3 +190,23 @@
     }
   }
 })();
+
+
+
+/* Global Android status bar color */
+(function(){
+  function applyThemeColor(){
+    var meta = document.querySelector('meta[name="theme-color"]');
+    if(!meta){
+      meta = document.createElement('meta');
+      meta.setAttribute('name','theme-color');
+      document.head.appendChild(meta);
+    }
+    meta.setAttribute('content','#000000');
+  }
+  if(document.readyState === "loading"){
+    document.addEventListener("DOMContentLoaded", applyThemeColor, { once:true });
+  }else{
+    applyThemeColor();
+  }
+})();
