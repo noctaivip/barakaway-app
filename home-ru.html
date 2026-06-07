@@ -5404,11 +5404,52 @@ body.bw-theme-desert-sand{--home-share-pulse:rgba(255,215,145,.96);--home-share-
 </div>
 <div class="ramadan-wrapper">
 <div class="ramadan-bar">
-<div class="ramadan-text">
+<div class="ramadan-text" id="monthlyIslamicBannerText">
 Сохрани свои действия в месяц Зуль-Ка‘да, сократи лишнее и усили зикр - это подготовка к самым важным дням впереди
 </div>
 </div>
 </div>
+<script id="monthly-islamic-banner-js">
+(function(){
+  const banner = document.getElementById('monthlyIslamicBannerText');
+  if(!banner) return;
+
+  const monthlyTexts = {
+    1: 'В месяц Мухаррам усили пост, зикр и покаяние; особенно цени день Ашура и начни год с чистым сердцем',
+    2: 'В месяц Сафар держись утренних и вечерних азкаров, оставь суеверия и укрепляй упование только на Аллаха',
+    3: 'В месяц Раби аль-Авваль чаще вспоминай сунну Пророка ﷺ, улучшай нрав и добавь салават каждый день',
+    4: 'В месяц Раби ас-Сани закрепи полезные привычки: намаз вовремя, Коран понемногу и добро к близким',
+    5: 'В месяц Джумада аль-Уля уменьши лишние слова, усили дуа и сделай больше скрытых добрых дел ради Аллаха',
+    6: 'В месяц Джумада ас-Сани пересмотри свои намерения, укрепи сабр и возвращайся к Корану хотя бы понемногу',
+    7: 'В месяц Раджаб готовь сердце к Рамадану: больше истигфара, меньше грехов и больше постоянных благих дел',
+    8: 'В месяц Шаабан чаще держи добровольный пост, усили чтение Корана и заранее подготовься к Рамадану',
+    9: 'В месяц Рамадан береги пост, Коран, таравих, садака и дуа — это время очищения сердца и приближения к Аллаху',
+    10: 'В месяц Шавваль постарайся держать шесть дней поста после Рамадана и сохрани поклонение, которое начал',
+    11: 'Сохрани свои действия в месяц Зуль-Ка‘да, сократи лишнее и усили зикр - это подготовка к самым важным дням впереди',
+    12: 'В месяц Зуль-Хиджа цени первые десять дней, увеличь такбир, садака, дуа и не упусти пост в день Арафа'
+  };
+
+  function getIslamicMonth(){
+    try{
+      const parts = new Intl.DateTimeFormat('en-u-ca-islamic-umalqura',{month:'numeric'}).formatToParts(new Date());
+      const part = parts.find(function(x){ return x.type === 'month'; });
+      const month = part ? parseInt(part.value,10) : NaN;
+      if(month >= 1 && month <= 12) return month;
+    }catch(e){}
+
+    try{
+      const parts = new Intl.DateTimeFormat('en-u-ca-islamic',{month:'numeric'}).formatToParts(new Date());
+      const part = parts.find(function(x){ return x.type === 'month'; });
+      const month = part ? parseInt(part.value,10) : NaN;
+      if(month >= 1 && month <= 12) return month;
+    }catch(e){}
+
+    return 11;
+  }
+
+  banner.textContent = monthlyTexts[getIslamicMonth()] || monthlyTexts[11];
+})();
+</script>
 
 <div aria-label="Desktop quick actions" class="desktop-top-actions">
 <div class="desktop-action-left">
@@ -13246,6 +13287,7 @@ const TASK_PREFIX = "barakaway_today_ru_";
 })();
 </script>
 <script src="/theme-toggle.js"></script>
+<script src="/bottom-nav.js"></script>
 <script>
 (function(){
   const TASK_PREFIX = "barakaway_today_ru_";
@@ -13392,6 +13434,199 @@ const TASK_PREFIX = "barakaway_today_ru_";
 <div class="my-saved-list" id="barakawayMyList"></div>
 </div>
 </div>
+
+<script id="barakaway-home-nav-upgrade-script">
+(function(){
+  const MY_LINK = "#barakaway-my";
+  const LEARNING_LINK = "learning-ru.html";
+
+  function svgBookmark(){
+    return '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 4.5A1.5 1.5 0 0 1 7.5 3h9A1.5 1.5 0 0 1 18 4.5V21l-6-3.5L6 21V4.5z"/></svg>';
+  }
+
+  function svgPlay(){
+    return '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5v14l11-7-11-7z"/><path d="M4 5v14"/></svg>';
+  }
+
+  function normalizeText(value){
+    return String(value || "").trim().toLowerCase();
+  }
+
+  function updateBottomNav(){
+    const items = document.querySelectorAll(".bottom-app-nav-item");
+    if(!items.length) return false;
+
+    items.forEach(function(item){
+      const label = item.querySelector(".bottom-app-nav-label");
+      const icon = item.querySelector(".bottom-app-nav-icon");
+      const labelText = normalizeText(label ? label.textContent : item.textContent);
+
+      if(labelText === "аскары"){
+        item.setAttribute("href", MY_LINK);
+        item.dataset.barakaNavRole = "my";
+        if(label) label.textContent = "Моё";
+        if(icon) icon.innerHTML = svgBookmark();
+        item.setAttribute("aria-label", "Моё: сохранённые суры, аяты и материалы");
+        item.classList.remove("active");
+      }
+
+      if(labelText === "садака"){
+        item.setAttribute("href", LEARNING_LINK);
+        item.dataset.barakaNavRole = "learning";
+        if(label) label.textContent = "Обучение";
+        if(icon) icon.innerHTML = svgPlay();
+        item.setAttribute("aria-label", "Обучение: видео и полезные материалы");
+        item.classList.remove("active");
+      }
+    });
+
+    return true;
+  }
+
+  function readJson(key, fallback){
+    try{return JSON.parse(localStorage.getItem(key) || JSON.stringify(fallback));}
+    catch(e){return fallback;}
+  }
+
+  function collectSaved(){
+    const items = [];
+
+    const quranSaved = readJson("barakaway:quran:surah:ru:lastSaved", null);
+    if(quranSaved && quranSaved.href){
+      items.push({
+        title: quranSaved.type === "ayah"
+          ? "Коран · сохранённый аят " + (quranSaved.ayahNumber || "")
+          : "Коран · сохранённая сура",
+        meta: quranSaved.type === "ayah"
+          ? ((quranSaved.surahTitle || "Сура") + " · " + (quranSaved.meaning || "").slice(0, 90))
+          : ((quranSaved.title || "Сура") + " · " + (quranSaved.meta || "")),
+        href: quranSaved.href
+      });
+    }
+
+    const quranFavs = readJson("barakaway:quran:surah:ru:favorites", []);
+    quranFavs.slice(0, 12).forEach(function(item){
+      if(item && item.href){
+        items.push({
+          title: "Избранная сура · " + (item.title || ("№" + (item.number || ""))),
+          meta: (item.arabic || "") + (item.meta ? " · " + item.meta : ""),
+          href: item.href
+        });
+      }
+    });
+
+    const genericKeys = [
+      "barakaway:adhkar:ru:saved",
+      "barakaway:askars:ru:saved",
+      "barakaway:duas:ru:saved"
+    ];
+
+    genericKeys.forEach(function(key){
+      const saved = readJson(key, []);
+      if(Array.isArray(saved)){
+        saved.slice(0, 8).forEach(function(item){
+          if(item && (item.href || item.url)){
+            items.push({
+              title: item.title || item.name || "Сохранённый материал",
+              meta: item.meta || item.text || "BarakaWay",
+              href: item.href || item.url
+            });
+          }
+        });
+      }
+    });
+
+    const seen = new Set();
+    return items.filter(function(item){
+      const id = item.title + "|" + item.href;
+      if(seen.has(id)) return false;
+      seen.add(id);
+      return true;
+    });
+  }
+
+  function renderMySaved(){
+    const list = document.getElementById("barakawayMyList");
+    if(!list) return;
+
+    const items = collectSaved();
+
+    if(!items.length){
+      list.innerHTML = '<div class="my-saved-empty">Пока здесь нет сохранённых материалов. Сохрани суру или аят в Коране — он появится в этом разделе.</div>';
+      return;
+    }
+
+    list.innerHTML = items.map(function(item){
+      return '<a class="my-saved-item" href="' + String(item.href || "#").replace(/"/g, "&quot;") + '">' +
+        '<div class="my-saved-item-title">' + String(item.title || "Сохранённое").replace(/</g, "&lt;") + '</div>' +
+        '<div class="my-saved-item-meta">' + String(item.meta || "").replace(/</g, "&lt;") + '</div>' +
+      '</a>';
+    }).join("");
+  }
+
+  function openMySaved(event){
+    if(event){
+      event.preventDefault();
+      event.stopPropagation();
+    }
+    renderMySaved();
+    const modal = document.getElementById("barakaway-my-modal");
+    if(modal){
+      modal.classList.add("open");
+      modal.setAttribute("aria-hidden", "false");
+    }
+  }
+
+  function closeMySaved(){
+    const modal = document.getElementById("barakaway-my-modal");
+    if(modal){
+      modal.classList.remove("open");
+      modal.setAttribute("aria-hidden", "true");
+    }
+  }
+
+  document.addEventListener("click", function(event){
+    const myNav = event.target.closest('[data-baraka-nav-role="my"], a[href="#barakaway-my"]');
+    if(myNav){
+      openMySaved(event);
+      return;
+    }
+
+    if(event.target.closest("[data-my-close]")){
+      event.preventDefault();
+      closeMySaved();
+      return;
+    }
+
+    const overlay = event.target.closest("#barakaway-my-modal");
+    if(overlay && event.target === overlay){
+      closeMySaved();
+    }
+  }, true);
+
+  function boot(){
+    updateBottomNav();
+
+    const navObserver = new MutationObserver(function(){
+      updateBottomNav();
+    });
+    navObserver.observe(document.body, {childList:true, subtree:true});
+
+    let tries = 0;
+    const timer = setInterval(function(){
+      tries += 1;
+      updateBottomNav();
+      if(tries > 20) clearInterval(timer);
+    }, 250);
+  }
+
+  if(document.readyState === "loading"){
+    document.addEventListener("DOMContentLoaded", boot);
+  }else{
+    boot();
+  }
+})();
+</script>
 
 <script>
 (function(){
@@ -15537,7 +15772,5 @@ window.addEventListener('load', function(){ setTimeout(controlProVisibility, 120
 })();
 </script>
 
-
-<script src="/bottom-nav.js"></script>
 </body>
 </html>
