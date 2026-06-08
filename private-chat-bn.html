@@ -164,6 +164,48 @@ input:focus,textarea:focus,select:focus{
     background:rgba(255,255,255,.055);
     border:1px solid rgba(255,255,255,.09);
 }
+
+.investor-card{
+    margin-top:22px;
+    padding:18px;
+    border-radius:22px;
+    background:linear-gradient(135deg,rgba(215,181,109,.14),rgba(255,255,255,.035));
+    border:1px solid rgba(215,181,109,.24);
+    box-shadow:0 18px 38px rgba(0,0,0,.18);
+}
+.investor-kicker{
+    color:var(--gold-2);
+    font-size:12px;
+    font-weight:800;
+    letter-spacing:.12em;
+    text-transform:uppercase;
+    margin-bottom:8px;
+}
+.investor-card h2{
+    margin:0 0 8px;
+    font-size:20px;
+    line-height:1.2;
+    letter-spacing:-.02em;
+}
+.investor-card p{
+    margin:0 0 14px;
+    color:var(--muted);
+    line-height:1.55;
+    font-size:14.5px;
+}
+.investor-btn{
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    min-height:46px;
+    border-radius:16px;
+    text-decoration:none;
+    font-weight:800;
+    color:#0b100b;
+    background:linear-gradient(135deg,var(--gold-2),var(--gold));
+    box-shadow:0 12px 28px rgba(215,181,109,.16);
+}
+
 .note{
     margin-top:16px;
     padding:14px;
@@ -329,7 +371,7 @@ html.light-mode .small{
             <div class="badge">✦ ব্যক্তিগত যোগাযোগ চ্যানেল</div>
             <h1>BarakaWay-এর সাথে যোগাযোগ করুন</h1>
             <p class="lead">
-                অ্যাপের কোনো সমস্যা, অনুবাদ সংশোধন, পরামর্শ, অ্যাপ সম্পর্কিত প্রশ্ন বা বিনিয়োগ সংক্রান্ত অনুরোধের জন্য বার্তা পাঠান। আপনার বার্তাটি স্বয়ংক্রিয়ভাবে আপনার ইমেইল অ্যাপে প্রস্তুত অবস্থায় খুলবে।
+                অ্যাপের কোনো সমস্যা, অনুবাদ সংশোধন, পরামর্শ বা অ্যাপ সম্পর্কিত প্রশ্নের জন্য বার্তা পাঠান। আপনার বার্তাটি স্বয়ংক্রিয়ভাবে আপনার ইমেইল অ্যাপে প্রস্তুত অবস্থায় খুলবে।
             </p>
 
             <div class="grid">
@@ -340,7 +382,6 @@ html.light-mode .small{
                         <option>অ্যাপে সমস্যা</option>
                         <option>অনুবাদ সংশোধন</option>
                         <option>পরামর্শ বা সুপারিশ</option>
-                        <option>বিনিয়োগ সংক্রান্ত অনুরোধ</option>
                         <option>অন্যান্য</option>
                     </select>
                 </div>
@@ -363,11 +404,17 @@ html.light-mode .small{
 
             <div class="actions">
                 <button class="btn" type="button" onclick="sendMail()">বার্তা পাঠান</button>
-                <a class="btn-secondary" href="https://t.me/barakaway_app" target="_blank" rel="noopener" onclick="openTelegramBot(); return false;">টেলিগ্রামে লিখুন</a>
+                <a class="btn-secondary" href="https://t.me/BarakaWaySupportBot" target="_blank" rel="noopener" onclick="openTelegramBot(); return false;">Telegram Support</a>
             </div>
             <div class="contact">
                 <div>Email: <a href="mailto:admin@barakaway.app">admin@barakaway.app</a></div>
-                <div>Telegram: <a href="https://t.me/barakaway_app" target="_blank" rel="noopener">@barakaway_app</a></div>
+                <div>Telegram: <a href="https://t.me/BarakaWaySupportBot" target="_blank" rel="noopener">@BarakaWaySupportBot</a></div>
+            </div>
+            <div class="investor-card">
+                <div class="investor-kicker">Investor Relations</div>
+                <h2>বিনিয়োগকারী ও অংশীদারদের জন্য</h2>
+                <p>আপনি যদি BarakaWay-এর উন্নয়ন, অংশীদারিত্ব বা বিনিয়োগ নিয়ে আগ্রহী হন, সরাসরি টিমের সাথে যোগাযোগ করুন।</p>
+                <a class="investor-btn" href="mailto:admin@barakaway.app?subject=BarakaWay%20Investor%20Relations">বিনিয়োগ অনুরোধ পাঠান</a>
             </div>
         </div>
     </section>
@@ -376,7 +423,7 @@ html.light-mode .small{
 <script>
 const STORAGE_KEY = "barakaway_private_chat_ru";
 const ADMIN_EMAIL = "admin@barakaway.app";
-const TELEGRAM_BOT_URL = "https://t.me/barakaway_app";
+const TELEGRAM_BOT_URL = "https://t.me/BarakaWaySupportBot";
 
 function loadSavedData(){
     try{
