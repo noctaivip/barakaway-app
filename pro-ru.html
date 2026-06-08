@@ -560,6 +560,49 @@ h1{
   font-weight:650;
 }
 
+.bottom-nav{
+  position:fixed;
+  left:50%;
+  bottom:18px;
+  z-index:80;
+  transform:translateX(-50%);
+  width:min(92%,560px);
+  display:grid;
+  grid-template-columns:repeat(4,minmax(0,1fr));
+  gap:8px;
+  padding:8px;
+  border-radius:24px;
+  background:rgba(14,20,27,.82);
+  border:1px solid rgba(215,192,122,.18);
+  backdrop-filter:blur(18px);
+  -webkit-backdrop-filter:blur(18px);
+  box-shadow:0 18px 44px rgba(0,0,0,.34);
+}
+
+.bottom-nav a,
+.bottom-nav button{
+  appearance:none;
+  border:none;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  justify-content:center;
+  gap:4px;
+  min-height:54px;
+  border-radius:18px;
+  background:transparent;
+  color:#c8d2dc;
+  font-size:11px;
+  font-weight:850;
+  text-decoration:none;
+  cursor:pointer;
+}
+
+.bottom-nav a.active,
+.bottom-nav button.active{
+  background:linear-gradient(135deg,rgba(215,192,122,.18),rgba(76,175,106,.12));
+  color:#f8e9a9;
+}
 
 .modal-overlay{
   display:none;
@@ -704,6 +747,11 @@ h1{
   .feature-card{
     min-height:170px;
     border-radius:26px;
+  }
+
+  .bottom-nav{
+    bottom:10px;
+    width:calc(100% - 18px);
   }
 }
 
@@ -925,6 +973,282 @@ h1{
 <script src="/theme-init.js"></script>
 <link rel="stylesheet" href="/theme.css">
 <link rel="stylesheet" href="/theme-universal.css">
+
+<style id="pro-page-light-mode-readable-surface-fix">
+/* Light Mode only: PRO page light surfaces + dark readable text */
+html.light-mode body{
+  background:radial-gradient(circle at 12% 0%,rgba(215,192,122,.18),transparent 26%),
+             radial-gradient(circle at 90% 10%,rgba(76,175,106,.14),transparent 32%),
+             linear-gradient(180deg,#fffaf0 0%,#f3faf5 52%,#ffffff 100%) !important;
+  color:#101814 !important;
+}
+html.light-mode .topbar{
+  background:linear-gradient(180deg,rgba(255,250,240,.92),rgba(255,250,240,.70)) !important;
+}
+html.light-mode .top-pill,
+html.light-mode .pro-state,
+html.light-mode .pro-state.locked{
+  background:#ffffff !important;
+  border:1.5px solid #b9d2c0 !important;
+  color:#101814 !important;
+  box-shadow:0 8px 20px rgba(30,70,45,.08) !important;
+}
+html.light-mode .hero,
+html.light-mode .pro-active-panel,
+html.light-mode .feature-card,
+html.light-mode .feature-card.green,
+html.light-mode .feature-card.violet,
+html.light-mode .feature-card.rose,
+html.light-mode .feature-card.carbon,
+html.light-mode .price-card,
+html.light-mode .price-card.featured,
+html.light-mode .notice,
+html.light-mode .modal,
+html.light-mode .stat{
+  background:radial-gradient(circle at 92% 0%,rgba(215,192,122,.13),transparent 30%),
+             linear-gradient(145deg,#ffffff 0%,#fffdf8 52%,#eef8f2 100%) !important;
+  border:1.5px solid #b9d2c0 !important;
+  color:#101814 !important;
+  box-shadow:0 16px 38px rgba(30,70,45,.10), inset 0 1px 0 rgba(255,255,255,.98) !important;
+}
+html.light-mode .hero::before{
+  background:linear-gradient(115deg,transparent 0%,rgba(45,122,70,.06) 45%,transparent 55%) !important;
+}
+html.light-mode h1,
+html.light-mode h2,
+html.light-mode h3,
+html.light-mode .section-title,
+html.light-mode .price-main,
+html.light-mode .theme-name,
+html.light-mode .stat-value,
+html.light-mode .pro-active-panel h2,
+html.light-mode .modal h3{
+  color:#101814 !important;
+  -webkit-text-fill-color:#101814 !important;
+  text-shadow:none !important;
+}
+html.light-mode .hero-text,
+html.light-mode .section-subtitle,
+html.light-mode .feature-card p,
+html.light-mode .price-text,
+html.light-mode .price-main span,
+html.light-mode .price-list li,
+html.light-mode .notice,
+html.light-mode .modal p,
+html.light-mode .pro-active-panel p,
+html.light-mode .stat-label,
+html.light-mode .store-ready-note,
+html.light-mode .theme-desc{
+  color:#26382f !important;
+  -webkit-text-fill-color:#26382f !important;
+}
+html.light-mode .pro-badge,
+html.light-mode .pro-chip,
+html.light-mode .price-label,
+html.light-mode .section-note,
+html.light-mode .pro-active-kicker,
+html.light-mode .pro-active-status,
+html.light-mode .modal-badge,
+html.light-mode .link-button{
+  background:#fff7e5 !important;
+  border:1px solid #d6c69e !important;
+  color:#5b3f0f !important;
+  -webkit-text-fill-color:#5b3f0f !important;
+  font-weight:950 !important;
+}
+html.light-mode .feature-icon{
+  background:#fff7e5 !important;
+  border:1px solid #d6c69e !important;
+  color:#101814 !important;
+}
+html.light-mode .btn-secondary{
+  background:#ffffff !important;
+  color:#101814 !important;
+  -webkit-text-fill-color:#101814 !important;
+  border:1.5px solid #b9d2c0 !important;
+}
+html.light-mode .btn-primary{
+  color:#101814 !important;
+  -webkit-text-fill-color:#101814 !important;
+  box-shadow:0 12px 26px rgba(184,138,27,.18) !important;
+}
+html.light-mode .btn-green{
+  color:#ffffff !important;
+  -webkit-text-fill-color:#ffffff !important;
+}
+html.light-mode .theme-tile{
+  border:1.5px solid #b9d2c0 !important;
+  color:#101814 !important;
+  box-shadow:0 14px 34px rgba(30,70,45,.10) !important;
+}
+html.light-mode .theme-gold{background:linear-gradient(135deg,#fffaf0,#fff3d0 52%,#d7c07a) !important;}
+html.light-mode .theme-violet{background:linear-gradient(135deg,#ffffff,#f0e9ff 52%,#c9b7ff) !important;}
+html.light-mode .theme-carbon{background:linear-gradient(135deg,#ffffff,#eef3f6 52%,#c9d3dc) !important;}
+html.light-mode .theme-child{background:linear-gradient(135deg,#ffffff,#eaf7ff 52%,#ffe0ef) !important;}
+html.light-mode .bottom-nav{
+  background:rgba(255,255,255,.92) !important;
+  border:1.5px solid #b9d2c0 !important;
+  box-shadow:0 18px 44px rgba(30,70,45,.14) !important;
+}
+html.light-mode .bottom-nav a,
+html.light-mode .bottom-nav button{color:#26382f !important;}
+html.light-mode .bottom-nav a.active,
+html.light-mode .bottom-nav button.active{
+  background:linear-gradient(135deg,#2d7a46,#4caf6a) !important;
+  color:#ffffff !important;
+}
+html.light-mode .toast{
+  background:#ffffff !important;
+  border:1.5px solid #b9d2c0 !important;
+  color:#101814 !important;
+  box-shadow:0 18px 40px rgba(30,70,45,.14) !important;
+}
+html.light-mode .modal-overlay{background:rgba(255,250,240,.72) !important;}
+html.light-mode .feature-card:hover,
+html.light-mode .theme-tile:hover{
+  border-color:#2d7a46 !important;
+  box-shadow:0 20px 42px rgba(45,122,70,.16), inset 0 1px 0 rgba(255,255,255,.98) !important;
+}
+</style>
+
+
+<style id="pro-page-light-mode-force-final-fix">
+/* FINAL FIX — Light Mode only. Overrides dark PRO surfaces. */
+html.light-mode body,
+body.light-mode{
+  background:radial-gradient(circle at 12% 0%,rgba(215,192,122,.22),transparent 28%),
+             radial-gradient(circle at 90% 10%,rgba(76,175,106,.16),transparent 34%),
+             linear-gradient(180deg,#fffaf0 0%,#f4fbf6 52%,#ffffff 100%) !important;
+  color:#101814 !important;
+}
+html.light-mode body .hero,
+html.light-mode body .pro-active-panel,
+html.light-mode body .feature-card,
+html.light-mode body .feature-card.green,
+html.light-mode body .feature-card.violet,
+html.light-mode body .feature-card.rose,
+html.light-mode body .feature-card.carbon,
+html.light-mode body .price-card,
+html.light-mode body .price-card.featured,
+html.light-mode body .stat,
+html.light-mode body .notice,
+html.light-mode body .modal,
+body.light-mode .hero,
+body.light-mode .pro-active-panel,
+body.light-mode .feature-card,
+body.light-mode .feature-card.green,
+body.light-mode .feature-card.violet,
+body.light-mode .feature-card.rose,
+body.light-mode .feature-card.carbon,
+body.light-mode .price-card,
+body.light-mode .price-card.featured,
+body.light-mode .stat,
+body.light-mode .notice,
+body.light-mode .modal{
+  background:radial-gradient(circle at 92% 0%,rgba(215,192,122,.14),transparent 30%),
+             linear-gradient(145deg,#ffffff 0%,#fffdf8 52%,#eef8f2 100%) !important;
+  border:1.5px solid #b9d2c0 !important;
+  color:#101814 !important;
+  box-shadow:0 16px 38px rgba(30,70,45,.10), inset 0 1px 0 rgba(255,255,255,.98) !important;
+}
+html.light-mode body .hero *,
+html.light-mode body .pro-active-panel *,
+html.light-mode body .feature-card *,
+html.light-mode body .price-card *,
+html.light-mode body .notice,
+html.light-mode body .modal *,
+body.light-mode .hero *,
+body.light-mode .pro-active-panel *,
+body.light-mode .feature-card *,
+body.light-mode .price-card *,
+body.light-mode .notice,
+body.light-mode .modal *{
+  color:#101814 !important;
+  -webkit-text-fill-color:#101814 !important;
+  text-shadow:none !important;
+}
+html.light-mode body .hero-text,
+html.light-mode body .section-subtitle,
+html.light-mode body .feature-card p,
+html.light-mode body .price-text,
+html.light-mode body .price-main span,
+html.light-mode body .price-list li,
+html.light-mode body .pro-active-panel p,
+html.light-mode body .stat-label,
+html.light-mode body .modal p,
+body.light-mode .hero-text,
+body.light-mode .section-subtitle,
+body.light-mode .feature-card p,
+body.light-mode .price-text,
+body.light-mode .price-main span,
+body.light-mode .price-list li,
+body.light-mode .pro-active-panel p,
+body.light-mode .stat-label,
+body.light-mode .modal p{
+  color:#26382f !important;
+  -webkit-text-fill-color:#26382f !important;
+}
+html.light-mode body .pro-badge,
+html.light-mode body .pro-chip,
+html.light-mode body .price-label,
+html.light-mode body .section-note,
+html.light-mode body .pro-active-kicker,
+html.light-mode body .pro-active-status,
+html.light-mode body .modal-badge,
+html.light-mode body .link-button,
+body.light-mode .pro-badge,
+body.light-mode .pro-chip,
+body.light-mode .price-label,
+body.light-mode .section-note,
+body.light-mode .pro-active-kicker,
+body.light-mode .pro-active-status,
+body.light-mode .modal-badge,
+body.light-mode .link-button{
+  background:#fff7e5 !important;
+  border:1px solid #d6c69e !important;
+  color:#5b3f0f !important;
+  -webkit-text-fill-color:#5b3f0f !important;
+}
+html.light-mode body .btn-secondary,
+body.light-mode .btn-secondary{
+  background:#ffffff !important;
+  border:1.5px solid #b9d2c0 !important;
+  color:#101814 !important;
+  -webkit-text-fill-color:#101814 !important;
+}
+html.light-mode body .theme-tile,
+body.light-mode .theme-tile{
+  border:1.5px solid #b9d2c0 !important;
+  color:#101814 !important;
+  box-shadow:0 14px 34px rgba(30,70,45,.10) !important;
+}
+html.light-mode body .theme-gold,body.light-mode .theme-gold{background:linear-gradient(135deg,#fffaf0,#fff3d0 52%,#d7c07a) !important;}
+html.light-mode body .theme-violet,body.light-mode .theme-violet{background:linear-gradient(135deg,#ffffff,#f0e9ff 52%,#c9b7ff) !important;}
+html.light-mode body .theme-carbon,body.light-mode .theme-carbon{background:linear-gradient(135deg,#ffffff,#eef3f6 52%,#c9d3dc) !important;}
+html.light-mode body .theme-child,body.light-mode .theme-child{background:linear-gradient(135deg,#ffffff,#eaf7ff 52%,#ffe0ef) !important;}
+html.light-mode body .bottom-nav,
+body.light-mode .bottom-nav{
+  background:rgba(255,255,255,.94) !important;
+  border:1.5px solid #b9d2c0 !important;
+  box-shadow:0 18px 44px rgba(30,70,45,.14) !important;
+}
+html.light-mode body .bottom-nav a,
+html.light-mode body .bottom-nav button,
+body.light-mode .bottom-nav a,
+body.light-mode .bottom-nav button{
+  color:#26382f !important;
+  -webkit-text-fill-color:#26382f !important;
+}
+html.light-mode body .bottom-nav a.active,
+html.light-mode body .bottom-nav button.active,
+body.light-mode .bottom-nav a.active,
+body.light-mode .bottom-nav button.active{
+  background:linear-gradient(135deg,#2d7a46,#4caf6a) !important;
+  color:#ffffff !important;
+  -webkit-text-fill-color:#ffffff !important;
+}
+</style>
+
 </head>
 
 <body>
@@ -1187,6 +1511,27 @@ h1{
 
 </div>
 
+<nav class="bottom-nav" aria-label="Нижняя навигация">
+  <a href="home-ru.html">
+    <span>🏠</span>
+    <span>Главная</span>
+  </a>
+
+  <button type="button" class="active" data-scroll="#top">
+    <span>👑</span>
+    <span>PRO</span>
+  </button>
+
+  <button type="button" data-scroll="#features">
+    <span>✨</span>
+    <span>Разделы</span>
+  </button>
+
+  <button type="button" data-scroll="#plans">
+    <span>💳</span>
+    <span>Доступ</span>
+  </button>
+</nav>
 
 <div class="modal-overlay" id="purchaseModal" role="dialog" aria-modal="true" aria-labelledby="purchaseTitle">
   <div class="modal">
@@ -1551,6 +1896,5 @@ h1{
 })();
 </script>
 
-<script src="/bottom-nav.js"></script>
 </body>
 </html>
