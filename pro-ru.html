@@ -1337,6 +1337,199 @@ body.light-mode .pricing-pro-new .price-card{
 }
 </style>
 
+
+<style id="pro-support-status-professional-fix">
+/* Support status UI. Does not change payment/business logic outside this page. */
+.support-badge-panel{
+  margin:0 0 18px;
+}
+
+.support-badge-shine{
+  position:relative;
+  overflow:hidden;
+  display:grid;
+  gap:5px;
+  justify-items:center;
+  text-align:center;
+  padding:18px 18px;
+  border-radius:28px;
+  background:
+    linear-gradient(135deg,rgba(215,192,122,.18),rgba(76,175,106,.10)),
+    linear-gradient(145deg,#151d26 0%,#101820 52%,#17261f 100%);
+  border:1px solid rgba(215,192,122,.30);
+  box-shadow:0 18px 44px rgba(0,0,0,.26), inset 0 1px 0 rgba(255,255,255,.05);
+}
+
+.support-badge-shine:before{
+  content:"";
+  position:absolute;
+  inset:-60%;
+  background:linear-gradient(115deg,transparent 0%,rgba(255,255,255,.18) 48%,transparent 56%);
+  transform:rotate(10deg);
+  animation:barakawaySupportShine 4.8s ease-in-out infinite;
+  pointer-events:none;
+}
+
+@keyframes barakawaySupportShine{
+  0%,60%{transform:translateX(-38%) rotate(10deg);opacity:0;}
+  72%{opacity:1;}
+  100%{transform:translateX(38%) rotate(10deg);opacity:0;}
+}
+
+.support-badge-kicker{
+  position:relative;
+  z-index:1;
+  color:#d7c07a;
+  font-size:10px;
+  font-weight:950;
+  letter-spacing:.18em;
+  text-transform:uppercase;
+}
+
+.support-badge-shine strong{
+  position:relative;
+  z-index:1;
+  font-size:28px;
+  line-height:1;
+  letter-spacing:-.04em;
+  color:#f8e9a9;
+  text-shadow:0 0 24px rgba(215,192,122,.34);
+}
+
+.support-badge-shine span:last-child{
+  position:relative;
+  z-index:1;
+  color:#dbe7df;
+  font-size:12px;
+  font-weight:800;
+}
+
+.support-tier-grid,
+.support-tier-modal-grid{
+  display:grid;
+  gap:8px;
+  margin-top:14px;
+}
+
+.support-tier-grid{
+  grid-template-columns:repeat(2,minmax(0,1fr));
+}
+
+.support-tier,
+.support-tier-modal{
+  appearance:none;
+  border:1px solid rgba(215,192,122,.22);
+  background:rgba(215,192,122,.08);
+  color:#f7faf8;
+  border-radius:16px;
+  padding:10px;
+  display:grid;
+  gap:3px;
+  text-align:left;
+  cursor:pointer;
+  font:inherit;
+}
+
+.support-tier strong,
+.support-tier-modal strong{
+  font-size:12px;
+  font-weight:950;
+  color:#f8e9a9;
+}
+
+.support-tier span,
+.support-tier-modal span{
+  font-size:12px;
+  font-weight:900;
+  color:#aeb9c5;
+}
+
+.support-tier.legacy,
+.support-tier-modal.legacy{
+  grid-column:1 / -1;
+}
+
+.support-tier-modal.is-selected{
+  border-color:rgba(215,192,122,.70);
+  background:rgba(215,192,122,.18);
+  box-shadow:0 0 0 4px rgba(215,192,122,.10);
+}
+
+.support-note{
+  margin-top:10px;
+  color:#8f9aa5;
+  font-size:11px;
+  line-height:1.45;
+  font-weight:750;
+}
+
+html.light-mode .support-badge-shine,
+body.light-mode .support-badge-shine{
+  background:
+    linear-gradient(135deg,rgba(215,192,122,.18),rgba(76,175,106,.08)),
+    linear-gradient(145deg,#ffffff 0%,#fffdf8 52%,#eef8f2 100%) !important;
+  border:1.5px solid #d6c69e !important;
+  box-shadow:0 16px 38px rgba(30,70,45,.10), inset 0 1px 0 rgba(255,255,255,.98) !important;
+}
+
+html.light-mode .support-badge-shine strong,
+body.light-mode .support-badge-shine strong{
+  color:#5b3f0f !important;
+  -webkit-text-fill-color:#5b3f0f !important;
+  text-shadow:0 0 18px rgba(215,192,122,.20) !important;
+}
+
+html.light-mode .support-badge-kicker,
+body.light-mode .support-badge-kicker{
+  color:#8a6420 !important;
+  -webkit-text-fill-color:#8a6420 !important;
+}
+
+html.light-mode .support-badge-shine span:last-child,
+body.light-mode .support-badge-shine span:last-child{
+  color:#26382f !important;
+  -webkit-text-fill-color:#26382f !important;
+}
+
+html.light-mode .support-tier,
+html.light-mode .support-tier-modal,
+body.light-mode .support-tier,
+body.light-mode .support-tier-modal{
+  background:#fffdf8 !important;
+  border:1.5px solid #d6c69e !important;
+  color:#101814 !important;
+}
+
+html.light-mode .support-tier strong,
+html.light-mode .support-tier-modal strong,
+body.light-mode .support-tier strong,
+body.light-mode .support-tier-modal strong{
+  color:#5b3f0f !important;
+  -webkit-text-fill-color:#5b3f0f !important;
+}
+
+html.light-mode .support-tier span,
+html.light-mode .support-tier-modal span,
+body.light-mode .support-tier span,
+body.light-mode .support-tier-modal span{
+  color:#26382f !important;
+  -webkit-text-fill-color:#26382f !important;
+}
+
+@media(max-width:760px){
+  .support-badge-panel{
+    margin:2px 0 16px;
+  }
+  .support-badge-shine{
+    padding:16px 14px;
+    border-radius:24px;
+  }
+  .support-badge-shine strong{
+    font-size:24px;
+  }
+}
+</style>
+
 </head>
 
 <body>
@@ -1352,6 +1545,14 @@ body.light-mode .pricing-pro-new .price-card{
       🔒 PRO не активирован
     </div>
   </header>
+
+  <div id="supportBadgePanel" class="support-badge-panel" hidden aria-label="Статус поддержки BarakaWay">
+    <div class="support-badge-shine">
+      <span class="support-badge-kicker">BarakaWay Circle</span>
+      <strong data-support-badge-label>Supporter</strong>
+      <span data-support-badge-text>Вы поддерживаете развитие проекта.</span>
+    </div>
+  </div>
 
   <main>
 
@@ -1604,19 +1805,31 @@ body.light-mode .pricing-pro-new .price-card{
           <div class="price-label">Поддержать проект</div>
           <div class="price-main">$199+ <span>/ статус</span></div>
           <div class="price-text">
-            Для тех, кто хочет стать частью развития BarakaWay.
+            Для тех, кто хочет стать частью развития BarakaWay и получить особый статус.
           </div>
 
-          <ul class="price-list support-tiers">
-            <li><strong>Supporter</strong> · $199</li>
-            <li><strong>Patron</strong> · $499</li>
-            <li><strong>Founder</strong> · $999</li>
-            <li><strong>Legacy Sponsor</strong> · $4999</li>
-          </ul>
+          <div class="support-tier-grid" aria-label="Уровни поддержки">
+            <button type="button" class="support-tier" data-open-support="supporter">
+              <strong>Supporter</strong>
+              <span>$199</span>
+            </button>
+            <button type="button" class="support-tier" data-open-support="patron">
+              <strong>Patron</strong>
+              <span>$499</span>
+            </button>
+            <button type="button" class="support-tier" data-open-support="founder">
+              <strong>Founder</strong>
+              <span>$999</span>
+            </button>
+            <button type="button" class="support-tier legacy" data-open-support="legacy">
+              <strong>Legacy Sponsor</strong>
+              <span>$4999</span>
+            </button>
+          </div>
 
-          <button class="btn btn-secondary" data-open-purchase="support">
-            Стать частью проекта
-          </button>
+          <div class="support-note">
+            Статус показывается в приложении после подтверждения покупки.
+          </div>
         </div>
 
       </div>
@@ -1696,6 +1909,44 @@ body.light-mode .pricing-pro-new .price-card{
   </div>
 </div>
 
+<div class="modal-overlay" id="supportModal" role="dialog" aria-modal="true" aria-labelledby="supportTitle">
+  <div class="modal support-modal-card">
+    <div class="modal-badge">Статус поддержки</div>
+    <h3 id="supportTitle">Поддержать BarakaWay</h3>
+    <p id="supportText">
+      Выберите уровень поддержки. В опубликованной версии подтверждение будет проходить через Google Play или App Store.
+    </p>
+
+    <div class="support-tier-modal-grid">
+      <button type="button" class="support-tier-modal" data-select-support="supporter">
+        <strong>Supporter</strong>
+        <span>$199</span>
+      </button>
+      <button type="button" class="support-tier-modal" data-select-support="patron">
+        <strong>Patron</strong>
+        <span>$499</span>
+      </button>
+      <button type="button" class="support-tier-modal" data-select-support="founder">
+        <strong>Founder</strong>
+        <span>$999</span>
+      </button>
+      <button type="button" class="support-tier-modal legacy" data-select-support="legacy">
+        <strong>Legacy Sponsor</strong>
+        <span>$4999</span>
+      </button>
+    </div>
+
+    <div class="modal-actions">
+      <button class="btn btn-primary" id="confirmSupport" disabled>
+        Подтвердить статус
+      </button>
+      <button class="btn btn-secondary" data-close-modal>
+        Закрыть
+      </button>
+    </div>
+  </div>
+</div>
+
 <div class="toast" id="toast"></div>
 
 <script>
@@ -1703,6 +1954,7 @@ body.light-mode .pricing-pro-new .price-card{
   const PRO_KEY = "barakaway_pro";
   const PLAN_KEY = "barakaway_pro_plan";
   const THEME_KEY = "barakaway_premium_theme";
+  const SUPPORT_KEY = "barakaway_support_level";
 
   const proState = document.getElementById("proState");
   const purchaseModal = document.getElementById("purchaseModal");
@@ -1715,9 +1967,13 @@ body.light-mode .pricing-pro-new .price-card{
   const featureText = document.getElementById("featureText");
   const openFeatureButton = document.getElementById("openFeatureButton");
   const activePanel = document.querySelector(".pro-active-panel");
+  const supportModal = document.getElementById("supportModal");
+  const confirmSupport = document.getElementById("confirmSupport");
+  const supportBadgePanel = document.getElementById("supportBadgePanel");
 
   let selectedPlan = "year";
   let selectedFeatureTarget = "";
+  let selectedSupportLevel = "";
 
   function isPro(){
     return localStorage.getItem(PRO_KEY) === "true";
@@ -1730,6 +1986,65 @@ body.light-mode .pricing-pro-new .price-card{
     if(plan === "support") return "статус поддержки";
     return "активен";
   }
+
+  function supportMeta(level){
+    const map = {
+      supporter:{label:"Supporter", price:"$199", text:"Вы поддерживаете развитие BarakaWay."},
+      patron:{label:"Patron", price:"$499", text:"Вы являетесь патроном развития BarakaWay."},
+      founder:{label:"Founder", price:"$999", text:"Вы входите в круг основателей BarakaWay."},
+      legacy:{label:"Legacy Sponsor", price:"$4999", text:"Ваш вклад останется частью истории BarakaWay."}
+    };
+    return map[level] || null;
+  }
+
+  function updateSupportBadge(){
+    const level = localStorage.getItem(SUPPORT_KEY) || "";
+    const meta = supportMeta(level);
+    if(!supportBadgePanel) return;
+
+    if(!meta){
+      supportBadgePanel.hidden = true;
+      return;
+    }
+
+    supportBadgePanel.hidden = false;
+    const label = supportBadgePanel.querySelector("[data-support-badge-label]");
+    const text = supportBadgePanel.querySelector("[data-support-badge-text]");
+    if(label) label.textContent = meta.label;
+    if(text) text.textContent = meta.text;
+  }
+
+  function openSupport(level){
+    selectedSupportLevel = level || "";
+    const meta = supportMeta(selectedSupportLevel);
+
+    if(!supportModal || !meta) return;
+
+    document.getElementById("supportTitle").textContent = meta.label + " · " + meta.price;
+    document.getElementById("supportText").textContent =
+      "После подтверждения покупки будет включён PRO-доступ и сохранён статус " + meta.label + ". В релизе подтверждение должно приходить только после оплаты через Google Play или App Store.";
+
+    document.querySelectorAll("[data-select-support]").forEach(function(btn){
+      btn.classList.toggle("is-selected", btn.getAttribute("data-select-support") === selectedSupportLevel);
+    });
+
+    if(confirmSupport) confirmSupport.disabled = false;
+    supportModal.classList.add("open");
+  }
+
+  function activateSupport(level){
+    const meta = supportMeta(level);
+    if(!meta) return;
+
+    localStorage.setItem(PRO_KEY, "true");
+    localStorage.setItem(PLAN_KEY, "support");
+    localStorage.setItem(SUPPORT_KEY, level);
+    updateProState();
+    updateSupportBadge();
+    closeModals();
+    showToast(meta.label + " активирован.");
+  }
+
 
   function showToast(message){
     toast.textContent = message;
@@ -1797,8 +2112,8 @@ body.light-mode .pricing-pro-new .price-card{
       purchaseTitle.textContent = "Открыть PRO навсегда";
       purchaseText.textContent = "После подтверждения будет активирован пожизненный PRO-доступ за $99. В опубликованной версии покупка проходит через Google Play или App Store.";
     }else if(selectedPlan === "support"){
-      purchaseTitle.textContent = "Поддержать BarakaWay";
-      purchaseText.textContent = "Этот пакет для тех, кто хочет поддержать развитие проекта и получить особый статус участника. В опубликованной версии уровни поддержки оформляются отдельными покупками.";
+      openSupport("supporter");
+      return;
     }else{
       purchaseTitle.textContent = "Открыть годовой PRO-доступ";
       purchaseText.textContent = "После подтверждения будет активирован годовой PRO-доступ за $17.99. В опубликованной версии оплата проходит через Google Play или App Store.";
@@ -1810,6 +2125,7 @@ body.light-mode .pricing-pro-new .price-card{
   function closeModals(){
     purchaseModal.classList.remove("open");
     featureModal.classList.remove("open");
+    if(supportModal) supportModal.classList.remove("open");
   }
 
   function scrollToSelector(selector){
@@ -1875,6 +2191,25 @@ body.light-mode .pricing-pro-new .price-card{
     });
   });
 
+  document.querySelectorAll("[data-open-support]").forEach(function(button){
+    button.addEventListener("click", function(){
+      openSupport(button.getAttribute("data-open-support"));
+    });
+  });
+
+  document.querySelectorAll("[data-select-support]").forEach(function(button){
+    button.addEventListener("click", function(){
+      openSupport(button.getAttribute("data-select-support"));
+    });
+  });
+
+  if(confirmSupport){
+    confirmSupport.addEventListener("click", function(){
+      activateSupport(selectedSupportLevel);
+    });
+  }
+
+
   document.querySelectorAll("[data-scroll]").forEach(function(button){
     button.addEventListener("click", function(){
       scrollToSelector(button.getAttribute("data-scroll"));
@@ -1906,6 +2241,10 @@ body.light-mode .pricing-pro-new .price-card{
   });
 
   confirmPurchase.addEventListener("click", function(){
+    if(selectedPlan === "support"){
+      openSupport("supporter");
+      return;
+    }
     activatePro(selectedPlan);
   });
 
@@ -1929,6 +2268,7 @@ body.light-mode .pricing-pro-new .price-card{
   });
 
   updateProState();
+  updateSupportBadge();
 })();
 </script>
 
