@@ -2312,19 +2312,19 @@ body.light-mode #purchaseModal .btn-secondary{
 
           <div class="support-tier-grid" aria-label="Уровни поддержки">
             <button type="button" class="support-tier tier-supporter" data-open-support="supporter">
-              <span class="support-tier-badge">⭐⭐</span><strong>Supporter</strong>
+              <strong>Supporter ⭐⭐</strong>
               <span>$199</span>
             </button>
             <button type="button" class="support-tier tier-patron" data-open-support="patron">
-              <span class="support-tier-badge">⭐⭐⭐</span><strong>Patron</strong>
+              <strong>Patron ⭐⭐⭐</strong>
               <span>$499</span>
             </button>
             <button type="button" class="support-tier tier-benefactor" data-open-support="benefactor">
-              <span class="support-tier-badge">⭐⭐⭐⭐</span><strong>Benefactor</strong>
+              <strong>Benefactor ⭐⭐⭐⭐</strong>
               <span>$1999</span>
             </button>
             <button type="button" class="support-tier legacy tier-legacy" data-open-support="legacy">
-              <span class="support-tier-badge">⭐⭐⭐⭐⭐</span><strong>Legacy Sponsor</strong>
+              <strong>Legacy Sponsor ⭐⭐⭐⭐⭐</strong>
               <span>$4999</span>
             </button>
           </div>
@@ -2415,19 +2415,19 @@ body.light-mode #purchaseModal .btn-secondary{
 
     <div class="support-tier-modal-grid">
       <button type="button" class="support-tier-modal tier-supporter" data-select-support="supporter">
-        <strong>Supporter</strong>
+        <strong>Supporter ⭐⭐</strong>
         <span>$199</span>
       </button>
       <button type="button" class="support-tier-modal tier-patron" data-select-support="patron">
-        <strong>Patron</strong>
+        <strong>Patron ⭐⭐⭐</strong>
         <span>$499</span>
       </button>
       <button type="button" class="support-tier-modal tier-benefactor" data-select-support="benefactor">
-        <strong>Benefactor</strong>
+        <strong>Benefactor ⭐⭐⭐⭐</strong>
         <span>$1999</span>
       </button>
       <button type="button" class="support-tier-modal legacy tier-legacy" data-select-support="legacy">
-        <strong>Legacy Sponsor</strong>
+        <strong>Legacy Sponsor ⭐⭐⭐⭐⭐</strong>
         <span>$4999</span>
       </button>
     </div>
@@ -2485,10 +2485,10 @@ body.light-mode #purchaseModal .btn-secondary{
 
   function supportMeta(level){
     const map = {
-      supporter:{label:"Supporter", price:"$199", text:"Вы поддерживаете развитие BarakaWay."},
-      patron:{label:"Patron", price:"$499", text:"Вы являетесь патроном развития BarakaWay."},
-      benefactor:{label:"Benefactor", price:"$1999", text:"Вы поддерживаете BarakaWay как благодетель проекта."},
-      legacy:{label:"Legacy Sponsor", price:"$4999", text:"Ваш вклад останется частью истории BarakaWay."}
+      supporter:{label:"Supporter", stars:"⭐⭐", price:"$199", text:"Вы поддерживаете развитие BarakaWay."},
+      patron:{label:"Patron", stars:"⭐⭐⭐", price:"$499", text:"Вы являетесь патроном развития BarakaWay."},
+      benefactor:{label:"Benefactor", stars:"⭐⭐⭐⭐", price:"$1999", text:"Вы поддерживаете BarakaWay как благодетель проекта."},
+      legacy:{label:"Legacy Sponsor", stars:"⭐⭐⭐⭐⭐", price:"$4999", text:"Ваш вклад останется частью истории BarakaWay."}
     };
     return map[level] || null;
   }
@@ -2498,7 +2498,7 @@ body.light-mode #purchaseModal .btn-secondary{
     const meta = supportMeta(level);
     if(!supportBadgePanel) return;
 
-    if(!meta){
+    if(!isPro() || !meta){
       supportBadgePanel.hidden = true;
       return;
     }
@@ -2506,7 +2506,7 @@ body.light-mode #purchaseModal .btn-secondary{
     supportBadgePanel.hidden = false;
     const label = supportBadgePanel.querySelector("[data-support-badge-label]");
     const text = supportBadgePanel.querySelector("[data-support-badge-text]");
-    if(label) label.textContent = meta.label;
+    if(label) label.textContent = meta.label + " " + meta.stars;
     if(text) text.textContent = meta.text;
   }
 
@@ -2516,7 +2516,7 @@ body.light-mode #purchaseModal .btn-secondary{
 
     if(!supportModal || !meta) return;
 
-    document.getElementById("supportTitle").textContent = meta.label + " · " + meta.price;
+    document.getElementById("supportTitle").textContent = meta.label + " " + meta.stars + " · " + meta.price;
     document.getElementById("supportText").textContent =
       "После подтверждения покупки будет включён PRO-доступ и сохранён статус " + meta.label + ". После оплаты статус появится в приложении.";
 
@@ -2566,6 +2566,8 @@ body.light-mode #purchaseModal .btn-secondary{
     if(activePanel){
       activePanel.classList.toggle("is-active", active);
     }
+
+    updateSupportBadge();
 
     document.querySelectorAll("[data-access-status]").forEach(function(el){
       el.textContent = active ? "PRO активен" : "PRO не активирован";
