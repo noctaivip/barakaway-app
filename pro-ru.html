@@ -1249,6 +1249,94 @@ body.light-mode .bottom-nav button.active{
 }
 </style>
 
+
+<style id="pro-pricing-four-plans-compact-fix">
+/* Pricing update: compact 4-plan layout. Light Mode and Dark Mode supported without touching app logic. */
+.pricing.pricing-pro-new{
+  grid-template-columns:repeat(4,minmax(0,1fr));
+  align-items:stretch;
+}
+
+.pricing-pro-new .price-card{
+  padding:20px;
+  border-radius:28px;
+}
+
+.pricing-pro-new .price-main{
+  font-size:38px;
+  letter-spacing:-.06em;
+}
+
+.pricing-pro-new .price-main span{
+  display:block;
+  margin-top:5px;
+  font-size:12px;
+  font-weight:850;
+}
+
+.pricing-pro-new .price-text{
+  min-height:62px;
+  font-size:13px;
+}
+
+.pricing-pro-new .price-list li{
+  font-size:12px;
+  line-height:1.35;
+}
+
+.support-card{
+  border-color:rgba(215,192,122,.30);
+}
+
+.support-tiers strong{
+  color:#f8e9a9;
+}
+
+html.light-mode .support-tiers strong,
+body.light-mode .support-tiers strong{
+  color:#5b3f0f !important;
+  -webkit-text-fill-color:#5b3f0f !important;
+}
+
+html.light-mode .pricing-pro-new .price-card,
+body.light-mode .pricing-pro-new .price-card{
+  background:radial-gradient(circle at 92% 0%,rgba(215,192,122,.14),transparent 30%),
+             linear-gradient(145deg,#ffffff 0%,#fffdf8 52%,#eef8f2 100%) !important;
+  border:1.5px solid #b9d2c0 !important;
+  color:#101814 !important;
+}
+
+@media(max-width:980px){
+  .pricing.pricing-pro-new{
+    grid-template-columns:repeat(2,minmax(0,1fr));
+  }
+}
+
+@media(max-width:760px){
+  .pricing.pricing-pro-new{
+    grid-template-columns:1fr;
+  }
+
+  .pricing-pro-new .price-card{
+    padding:22px;
+  }
+
+  .pricing-pro-new .price-main{
+    font-size:42px;
+  }
+
+  .pricing-pro-new .price-main span{
+    display:inline;
+    margin-top:0;
+    font-size:14px;
+  }
+
+  .pricing-pro-new .price-text{
+    min-height:auto;
+  }
+}
+</style>
+
 </head>
 
 <body>
@@ -1456,13 +1544,13 @@ body.light-mode .bottom-nav button.active{
         <div class="section-note">Подписка</div>
       </div>
 
-      <div class="pricing">
+      <div class="pricing pricing-pro-new">
 
         <div class="price-card">
           <div class="price-label">Ежемесячно</div>
-          <div class="price-main">$4 <span>/ месяц</span></div>
+          <div class="price-main">$1.99 <span>/ месяц</span></div>
           <div class="price-text">
-            Подходит для первого знакомства с PRO-возможностями приложения.
+            Низкий вход для знакомства с PRO-возможностями BarakaWay.
           </div>
 
           <ul class="price-list">
@@ -1472,25 +1560,62 @@ body.light-mode .bottom-nav button.active{
           </ul>
 
           <button class="btn btn-secondary" data-open-purchase="month">
-            Выбрать ежемесячно
+            Выбрать месяц
           </button>
         </div>
 
         <div class="price-card featured">
           <div class="price-label">На год</div>
-          <div class="price-main">$29 <span>/ год</span></div>
+          <div class="price-main">$17.99 <span>/ год</span></div>
           <div class="price-text">
-            Оптимальный вариант для постоянного ежедневного использования BarakaWay.
+            Самый удобный вариант для постоянного ежедневного использования.
           </div>
 
           <ul class="price-list">
             <li>Все возможности PRO</li>
             <li>Будущие премиальные разделы</li>
-            <li>Приоритетная духовная среда</li>
+            <li>Экономия по сравнению с месяцем</li>
           </ul>
 
           <button class="btn btn-primary" data-open-purchase="year">
             Открыть годовой доступ
+          </button>
+        </div>
+
+        <div class="price-card">
+          <div class="price-label">Навсегда</div>
+          <div class="price-main">$99 <span>/ lifetime</span></div>
+          <div class="price-text">
+            Один платёж и постоянный доступ к PRO без подписки.
+          </div>
+
+          <ul class="price-list">
+            <li>Пожизненный PRO-доступ</li>
+            <li>Премиальные темы и разделы</li>
+            <li>Без ежемесячных списаний</li>
+          </ul>
+
+          <button class="btn btn-secondary" data-open-purchase="lifetime">
+            Купить навсегда
+          </button>
+        </div>
+
+        <div class="price-card support-card">
+          <div class="price-label">Поддержать проект</div>
+          <div class="price-main">$199+ <span>/ статус</span></div>
+          <div class="price-text">
+            Для тех, кто хочет стать частью развития BarakaWay.
+          </div>
+
+          <ul class="price-list support-tiers">
+            <li><strong>Supporter</strong> · $199</li>
+            <li><strong>Patron</strong> · $499</li>
+            <li><strong>Founder</strong> · $999</li>
+            <li><strong>Legacy Sponsor</strong> · $4999</li>
+          </ul>
+
+          <button class="btn btn-secondary" data-open-purchase="support">
+            Стать частью проекта
           </button>
         </div>
 
@@ -1601,6 +1726,8 @@ body.light-mode .bottom-nav button.active{
   function readablePlan(plan){
     if(plan === "month") return "ежемесячный доступ";
     if(plan === "year") return "годовой доступ";
+    if(plan === "lifetime") return "пожизненный доступ";
+    if(plan === "support") return "статус поддержки";
     return "активен";
   }
 
@@ -1665,10 +1792,16 @@ body.light-mode .bottom-nav button.active{
 
     if(selectedPlan === "month"){
       purchaseTitle.textContent = "Открыть ежемесячный PRO-доступ";
-      purchaseText.textContent = "После подтверждения будет активирован ежемесячный PRO-доступ. В опубликованной версии оплата PROходит через Google Play или App Store.";
+      purchaseText.textContent = "После подтверждения будет активирован ежемесячный PRO-доступ за $1.99. В опубликованной версии оплата проходит через Google Play или App Store.";
+    }else if(selectedPlan === "lifetime"){
+      purchaseTitle.textContent = "Открыть PRO навсегда";
+      purchaseText.textContent = "После подтверждения будет активирован пожизненный PRO-доступ за $99. В опубликованной версии покупка проходит через Google Play или App Store.";
+    }else if(selectedPlan === "support"){
+      purchaseTitle.textContent = "Поддержать BarakaWay";
+      purchaseText.textContent = "Этот пакет для тех, кто хочет поддержать развитие проекта и получить особый статус участника. В опубликованной версии уровни поддержки оформляются отдельными покупками.";
     }else{
       purchaseTitle.textContent = "Открыть годовой PRO-доступ";
-      purchaseText.textContent = "После подтверждения будет активирован годовой PRO-доступ. В опубликованной версии оплата PROходит через Google Play или App Store.";
+      purchaseText.textContent = "После подтверждения будет активирован годовой PRO-доступ за $17.99. В опубликованной версии оплата проходит через Google Play или App Store.";
     }
 
     purchaseModal.classList.add("open");
