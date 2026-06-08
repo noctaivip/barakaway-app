@@ -1530,6 +1530,157 @@ body.light-mode .support-tier-modal span{
 }
 </style>
 
+
+<style id="pro-copy-support-badges-final-fix">
+/* Final content polish: simple wording, coming-soon reading feature, rich support badges */
+.feature-coming-soon{
+  opacity:.72;
+  cursor:default !important;
+  filter:saturate(.82);
+}
+
+.feature-coming-soon h3 span{
+  text-decoration:line-through;
+  text-decoration-thickness:2px;
+  text-decoration-color:rgba(215,192,122,.78);
+}
+
+.soon-chip{
+  background:rgba(215,192,122,.16) !important;
+  border-color:rgba(215,192,122,.36) !important;
+  color:#f8e9a9 !important;
+}
+
+.support-tier,
+.support-tier-modal{
+  position:relative;
+  overflow:hidden;
+  min-height:66px;
+  border-radius:20px !important;
+  text-align:center !important;
+  justify-items:center;
+  align-content:center;
+  box-shadow:0 12px 26px rgba(0,0,0,.18), inset 0 1px 0 rgba(255,255,255,.06);
+}
+
+.support-tier:before,
+.support-tier-modal:before{
+  content:"";
+  position:absolute;
+  inset:-70%;
+  background:linear-gradient(115deg,transparent 0%,rgba(255,255,255,.18) 48%,transparent 56%);
+  transform:translateX(-35%) rotate(12deg);
+  pointer-events:none;
+}
+
+.support-tier:hover:before,
+.support-tier-modal:hover:before{
+  animation:barakawayTierSweep 1.2s ease forwards;
+}
+
+@keyframes barakawayTierSweep{
+  to{transform:translateX(35%) rotate(12deg);}
+}
+
+.tier-supporter{
+  background:linear-gradient(135deg,rgba(76,175,106,.16),rgba(215,192,122,.08)) !important;
+  border-color:rgba(102,198,128,.34) !important;
+}
+
+.tier-patron{
+  background:linear-gradient(135deg,rgba(215,192,122,.20),rgba(76,175,106,.10)) !important;
+  border-color:rgba(215,192,122,.42) !important;
+}
+
+.tier-founder{
+  background:linear-gradient(135deg,rgba(215,192,122,.28),rgba(161,118,255,.16)) !important;
+  border-color:rgba(215,192,122,.58) !important;
+}
+
+.tier-legacy{
+  background:
+    radial-gradient(circle at 20% 0%,rgba(255,255,255,.18),transparent 26%),
+    linear-gradient(135deg,rgba(215,192,122,.36),rgba(175,132,48,.22),rgba(76,175,106,.14)) !important;
+  border-color:rgba(248,233,169,.72) !important;
+  box-shadow:0 18px 38px rgba(215,192,122,.18), inset 0 1px 0 rgba(255,255,255,.12) !important;
+}
+
+.tier-supporter strong,
+.tier-patron strong,
+.tier-founder strong,
+.tier-legacy strong{
+  position:relative;
+  z-index:1;
+  letter-spacing:.02em;
+}
+
+.tier-supporter strong{font-size:13px;}
+.tier-patron strong{font-size:14px;}
+.tier-founder strong{font-size:15px;}
+.tier-legacy strong{font-size:16px;}
+
+.tier-legacy strong{
+  text-shadow:0 0 20px rgba(215,192,122,.36);
+}
+
+html.light-mode .feature-coming-soon h3 span,
+body.light-mode .feature-coming-soon h3 span{
+  text-decoration-color:#8a6420 !important;
+}
+
+html.light-mode .soon-chip,
+body.light-mode .soon-chip{
+  background:#fff7e5 !important;
+  border-color:#d6c69e !important;
+  color:#5b3f0f !important;
+  -webkit-text-fill-color:#5b3f0f !important;
+}
+
+html.light-mode .tier-supporter,
+body.light-mode .tier-supporter{
+  background:linear-gradient(135deg,#f5fff8,#fffdf4) !important;
+  border-color:#9ec9aa !important;
+}
+
+html.light-mode .tier-patron,
+body.light-mode .tier-patron{
+  background:linear-gradient(135deg,#fffdf4,#fff1c8) !important;
+  border-color:#d6c69e !important;
+}
+
+html.light-mode .tier-founder,
+body.light-mode .tier-founder{
+  background:linear-gradient(135deg,#fff8df,#f1e8ff) !important;
+  border-color:#c9aa55 !important;
+}
+
+html.light-mode .tier-legacy,
+body.light-mode .tier-legacy{
+  background:radial-gradient(circle at 20% 0%,rgba(255,255,255,.75),transparent 26%),
+             linear-gradient(135deg,#fff6cf,#e8c76a,#f8f1d7) !important;
+  border-color:#b8953f !important;
+  box-shadow:0 18px 38px rgba(184,149,63,.18), inset 0 1px 0 rgba(255,255,255,.9) !important;
+}
+
+html.light-mode .tier-supporter strong,
+html.light-mode .tier-patron strong,
+html.light-mode .tier-founder strong,
+html.light-mode .tier-legacy strong,
+body.light-mode .tier-supporter strong,
+body.light-mode .tier-patron strong,
+body.light-mode .tier-founder strong,
+body.light-mode .tier-legacy strong{
+  color:#101814 !important;
+  -webkit-text-fill-color:#101814 !important;
+}
+
+html.light-mode .tier-legacy strong,
+body.light-mode .tier-legacy strong{
+  color:#5b3f0f !important;
+  -webkit-text-fill-color:#5b3f0f !important;
+}
+</style>
+
 </head>
 
 <body>
@@ -1565,8 +1716,8 @@ body.light-mode .support-tier-modal span{
 
         <div class="hero-text">
           PRO-версия открывает расширенное чтение Корана, премиальные темы,
-          PROверку PROизношения, дополнительные голоса чтецов, избранные дуа,
-          анимации и персональную духовную систему для ежедневного использования.
+          дополнительные голоса чтецов, избранные дуа, красивые карточки
+          и удобные возможности для ежедневного использования.
         </div>
 
         <div class="hero-actions">
@@ -1648,13 +1799,13 @@ body.light-mode .support-tier-modal span{
           <p>Непрерывное чтение без переходов между сурами, сохранение места чтения и закладки.</p>
         </button>
 
-        <button class="feature-card green" id="reading" data-feature="PROверка чтения" data-target="quran-ai-ru.html">
+        <button class="feature-card green feature-coming-soon" id="reading" data-feature="Проверка правильного чтения" data-target="quran-ai-ru.html" aria-disabled="true">
           <div class="feature-top">
             <div class="feature-icon">🎙️</div>
-            <div class="pro-chip">PRO</div>
+            <div class="pro-chip soon-chip">Скоро в PRO</div>
           </div>
-          <h3>PROверка правильного чтения</h3>
-          <p>PROчитанные правильно слова становятся зелёными, ошибки отмечаются красным.</p>
+          <h3><span>Проверка правильного чтения</span></h3>
+          <p>Эта возможность скоро появится в PRO.</p>
         </button>
 
         <button class="feature-card" id="reciters" data-feature="Чтецы Корана PRO" data-target="reciters-pro-ru.html">
@@ -1689,8 +1840,8 @@ body.light-mode .support-tier-modal span{
             <div class="feature-icon">✨</div>
             <div class="pro-chip">PRO</div>
           </div>
-          <h3>Анимации для поздравлений</h3>
-          <p>GIF, золотые стрелки и premium-карточки внутри раздела поздравлений.</p>
+          <h3>Карточки для поздравлений</h3>
+          <p>Красивые карточки внутри раздела поздравлений.</p>
         </button>
 
       </div>
@@ -1805,23 +1956,23 @@ body.light-mode .support-tier-modal span{
           <div class="price-label">Поддержать проект</div>
           <div class="price-main">$199+ <span>/ статус</span></div>
           <div class="price-text">
-            Для тех, кто хочет стать частью развития BarakaWay и получить особый статус.
+            Для тех, кто хочет поддержать развитие BarakaWay и получить красивый статус в приложении.
           </div>
 
           <div class="support-tier-grid" aria-label="Уровни поддержки">
-            <button type="button" class="support-tier" data-open-support="supporter">
+            <button type="button" class="support-tier tier-supporter" data-open-support="supporter">
               <strong>Supporter</strong>
               <span>$199</span>
             </button>
-            <button type="button" class="support-tier" data-open-support="patron">
+            <button type="button" class="support-tier tier-patron" data-open-support="patron">
               <strong>Patron</strong>
               <span>$499</span>
             </button>
-            <button type="button" class="support-tier" data-open-support="founder">
+            <button type="button" class="support-tier tier-founder" data-open-support="founder">
               <strong>Founder</strong>
               <span>$999</span>
             </button>
-            <button type="button" class="support-tier legacy" data-open-support="legacy">
+            <button type="button" class="support-tier legacy tier-legacy" data-open-support="legacy">
               <strong>Legacy Sponsor</strong>
               <span>$4999</span>
             </button>
@@ -1840,9 +1991,6 @@ body.light-mode .support-tier-modal span{
         </button>
 </div>
 
-      <div class="notice">
-        Покупка PRO открывает премиальные разделы внутри одного приложения BarakaWay. В опубликованной версии оплата и восстановление подписки подключаются через официальные механизмы Google Play и App Store.
-      </div>
     </section>
 
   </main>
@@ -1914,23 +2062,23 @@ body.light-mode .support-tier-modal span{
     <div class="modal-badge">Статус поддержки</div>
     <h3 id="supportTitle">Поддержать BarakaWay</h3>
     <p id="supportText">
-      Выберите уровень поддержки. В опубликованной версии подтверждение будет проходить через Google Play или App Store.
+      Выберите уровень поддержки. После оплаты статус появится в приложении.
     </p>
 
     <div class="support-tier-modal-grid">
-      <button type="button" class="support-tier-modal" data-select-support="supporter">
+      <button type="button" class="support-tier-modal tier-supporter" data-select-support="supporter">
         <strong>Supporter</strong>
         <span>$199</span>
       </button>
-      <button type="button" class="support-tier-modal" data-select-support="patron">
+      <button type="button" class="support-tier-modal tier-patron" data-select-support="patron">
         <strong>Patron</strong>
         <span>$499</span>
       </button>
-      <button type="button" class="support-tier-modal" data-select-support="founder">
+      <button type="button" class="support-tier-modal tier-founder" data-select-support="founder">
         <strong>Founder</strong>
         <span>$999</span>
       </button>
-      <button type="button" class="support-tier-modal legacy" data-select-support="legacy">
+      <button type="button" class="support-tier-modal legacy tier-legacy" data-select-support="legacy">
         <strong>Legacy Sponsor</strong>
         <span>$4999</span>
       </button>
@@ -2022,7 +2170,7 @@ body.light-mode .support-tier-modal span{
 
     document.getElementById("supportTitle").textContent = meta.label + " · " + meta.price;
     document.getElementById("supportText").textContent =
-      "После подтверждения покупки будет включён PRO-доступ и сохранён статус " + meta.label + ". В релизе подтверждение должно приходить только после оплаты через Google Play или App Store.";
+      "После подтверждения покупки будет включён PRO-доступ и сохранён статус " + meta.label + ". После оплаты статус появится в приложении.";
 
     document.querySelectorAll("[data-select-support]").forEach(function(btn){
       btn.classList.toggle("is-selected", btn.getAttribute("data-select-support") === selectedSupportLevel);
@@ -2144,6 +2292,11 @@ body.light-mode .support-tier-modal span{
   }
 
   function openFeature(name, target){
+    if(target === "quran-ai-ru.html"){
+      showToast("Проверка правильного чтения скоро появится в PRO.");
+      return;
+    }
+
     selectedFeatureTarget = target || "";
 
     if(isPro()){
