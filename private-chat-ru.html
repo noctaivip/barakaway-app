@@ -364,10 +364,10 @@ html.light-mode .small{
 
             <div class="actions">
                 <button class="btn" type="button" onclick="sendMail()">Отправить сообщение</button>
-                <a class="btn-secondary" href="https://t.me/barakaway_app" target="_blank" rel="noopener">Написать в Telegram</a>
+                <a class="btn-secondary" href="https://t.me/barakaway_app" target="_blank" rel="noopener" onclick="openTelegramBot(); return false;">Написать в Telegram</a>
             </div>
             <div class="contact">
-                <div>Email: <a href="mailto:barakaway.app@gmail.com">barakaway.app@gmail.com</a></div>
+                <div>Email: <a href="mailto:admin@barakaway.app">admin@barakaway.app</a></div>
                 <div>Telegram: <a href="https://t.me/barakaway_app" target="_blank" rel="noopener">@barakaway_app</a></div>
             </div>
         </div>
@@ -376,6 +376,8 @@ html.light-mode .small{
 
 <script>
 const STORAGE_KEY = "barakaway_private_chat_ru";
+const ADMIN_EMAIL = "admin@barakaway.app";
+const TELEGRAM_BOT_URL = "https://t.me/barakaway_app";
 
 function loadSavedData(){
     try{
@@ -423,7 +425,32 @@ function sendMail(){
         "Источник: BarakaWay App"
     );
 
-    window.location.href = "mailto:barakaway.app@gmail.com?subject=" + subject + "&body=" + body;
+    window.location.href = "mailto:" + ADMIN_EMAIL + "?subject=" + subject + "&body=" + body;
+}
+
+function openTelegramBot(){
+    saveData();
+
+    const topic = document.getElementById("topic").value;
+    const name = document.getElementById("name").value.trim();
+    const contact = document.getElementById("contact").value.trim();
+    const message = document.getElementById("message").value.trim();
+
+    const telegramMessage =
+        "BarakaWay App — Private Message\n" +
+        "--------------------------------\n\n" +
+        "Topic:\n" + topic + "\n\n" +
+        "Name:\n" + (name || "Not provided") + "\n\n" +
+        "Contact:\n" + (contact || "Not provided") + "\n\n" +
+        "Message:\n" + (message || "Message is empty") + "\n\n" +
+        "--------------------------------\n" +
+        "Source: BarakaWay App";
+
+    if(navigator.clipboard && telegramMessage.trim()){
+        navigator.clipboard.writeText(telegramMessage).catch(function(){});
+    }
+
+    window.open(TELEGRAM_BOT_URL, "_blank", "noopener");
 }
 
 document.addEventListener("DOMContentLoaded", loadSavedData);
