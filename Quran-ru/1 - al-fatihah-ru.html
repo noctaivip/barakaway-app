@@ -427,7 +427,7 @@ html.light-mode .adhkar-sticky-toolbar{
   border-color:rgba(181,138,54,.16)!important;
   box-shadow:0 14px 34px rgba(28,31,24,.12)!important;
 }
-html.light-mode .adhkar-sticky-toolbar .content-toggle{color:#ffffff!important;}
+html.dark-mode .adhkar-sticky-toolbar .content-toggle{color:#ffffff!important;}
 @media(max-width:720px){
   .adhkar-sticky-toolbar{
     width:calc(100% + 24px)!important;
@@ -476,7 +476,7 @@ html.light-mode .adhkar-sticky-toolbar .content-toggle{color:#ffffff!important;}
 .adhkar-sticky-toolbar .content-toggle,
 html body .adhkar-sticky-toolbar .content-toggle,
 html.dark-mode .adhkar-sticky-toolbar .content-toggle,
-html.light-mode .adhkar-sticky-toolbar .content-toggle{
+html.dark-mode .adhkar-sticky-toolbar .content-toggle{
   color:#ffffff!important;
   opacity:1!important;
 }
@@ -487,67 +487,65 @@ html body .adhkar-sticky-toolbar .content-toggle span{
 }
 </style>
 
-<style id="bw-ru-quran-light-text-and-toggle-row-fix">
-/* RU Quran light-mode readability + one-line content toggles */
-html.light-mode .ayah-card,
-html.light-mode .ayah-card *{
-  color:#111814!important;
-  -webkit-text-fill-color:#111814!important;
-}
-html.light-mode .ayah-action.is-active,
-html.light-mode .ayah-action.is-active *{
-  color:#ffffff!important;
-  -webkit-text-fill-color:#ffffff!important;
-}
-html.light-mode .play-btn,
-html.light-mode .play-btn *,
-html.light-mode .master-btn,
-html.light-mode .master-btn *,
-html.light-mode .surah-page-action.is-active,
-html.light-mode .surah-page-action.is-active *{
-  color:#ffffff!important;
-  -webkit-text-fill-color:#ffffff!important;
-}
+<style id="bw-light-mode-quran-toolbar-fix">
+/* Light mode only: keep layer toggles readable and on one row. Dark mode is untouched. */
 html.light-mode .content-controls,
-html.light-mode .adhkar-sticky-toolbar .content-controls{
-  display:grid!important;
-  grid-template-columns:repeat(3,minmax(0,1fr))!important;
+html.light-mode body .content-controls{
+  display:flex!important;
+  flex-direction:row!important;
+  align-items:center!important;
+  justify-content:center!important;
+  flex-wrap:nowrap!important;
+  gap:12px!important;
 }
 html.light-mode .content-toggle,
-html.light-mode .content-toggle *,
-html.light-mode .adhkar-sticky-toolbar .content-toggle,
-html.light-mode .adhkar-sticky-toolbar .content-toggle *{
-  color:#111814!important;
-  -webkit-text-fill-color:#111814!important;
+html.light-mode body .content-toggle{
+  color:#203126!important;
+  -webkit-text-fill-color:#203126!important;
+  opacity:1!important;
+  white-space:nowrap!important;
+  flex:0 0 auto!important;
+}
+html.light-mode .content-toggle span,
+html.light-mode body .content-toggle span,
+html.light-mode .content-toggle-label-text,
+html.light-mode body .content-toggle-label-text{
+  color:#203126!important;
+  -webkit-text-fill-color:#203126!important;
   opacity:1!important;
 }
-html.light-mode .content-toggle{
-  min-width:0!important;
-  white-space:nowrap!important;
-}
-html.light-mode .content-toggle input,
-html.light-mode .adhkar-sticky-toolbar .content-toggle input{
-  width:16px!important;
-  height:16px!important;
-  min-width:16px!important;
-  min-height:16px!important;
-  accent-color:#2d7a46!important;
-  -webkit-text-fill-color:initial!important;
+html.light-mode .adhkar-sticky-toolbar .content-controls,
+html.light-mode body .adhkar-sticky-toolbar .content-controls{
+  display:flex!important;
+  flex-direction:row!important;
+  flex-wrap:nowrap!important;
+  align-items:center!important;
+  justify-content:center!important;
+  gap:12px!important;
 }
 @media(max-width:700px){
   html.light-mode .content-controls,
-  html.light-mode .adhkar-sticky-toolbar .content-controls{
-    grid-template-columns:repeat(3,minmax(0,1fr))!important;
-    gap:7px!important;
-    padding:10px!important;
+  html.light-mode body .content-controls{
+    display:flex!important;
+    grid-template-columns:none!important;
+    flex-direction:row!important;
+    flex-wrap:nowrap!important;
+    gap:10px!important;
+    padding:10px 8px!important;
   }
   html.light-mode .content-toggle,
-  html.light-mode .adhkar-sticky-toolbar .content-toggle{
-    font-size:10.5px!important;
-    gap:4px!important;
-    padding:8px 4px!important;
-    border-radius:12px!important;
+  html.light-mode body .content-toggle{
+    font-size:12px!important;
+    gap:6px!important;
+    padding:0!important;
+    min-width:0!important;
   }
+}
+@media(max-width:390px){
+  html.light-mode .content-controls,
+  html.light-mode body .content-controls{gap:8px!important;}
+  html.light-mode .content-toggle,
+  html.light-mode body .content-toggle{font-size:11px!important;gap:5px!important;}
 }
 </style>
 </head>
@@ -1006,32 +1004,33 @@ function playAllAyahs() {
 
 <script id="bw-force-quran-toggle-labels-white">
 (function(){
-  function forceWhite(){
+  function applyToggleLabelTheme(){
+    var isLight=document.documentElement.classList.contains('light-mode') && !document.documentElement.classList.contains('dark-mode');
+    var color=isLight?'#203126':'#ffffff';
     document.querySelectorAll('.adhkar-sticky-toolbar .content-toggle, .content-controls .content-toggle').forEach(function(label){
-      label.style.setProperty('color','#ffffff','important');
-      label.style.setProperty('-webkit-text-fill-color','#ffffff','important');
+      label.style.setProperty('color',color,'important');
+      label.style.setProperty('-webkit-text-fill-color',color,'important');
       label.style.setProperty('opacity','1','important');
+      label.style.setProperty('white-space','nowrap','important');
       label.childNodes.forEach(function(n){
         if(n.nodeType===3 && n.nodeValue.trim()){
           var span=document.createElement('span');
           span.className='content-toggle-label-text';
           span.textContent=n.nodeValue;
-          span.style.setProperty('color','#ffffff','important');
-          span.style.setProperty('-webkit-text-fill-color','#ffffff','important');
-          span.style.setProperty('opacity','1','important');
           label.replaceChild(span,n);
         }
       });
       label.querySelectorAll('span').forEach(function(span){
-        span.style.setProperty('color','#ffffff','important');
-        span.style.setProperty('-webkit-text-fill-color','#ffffff','important');
+        span.style.setProperty('color',color,'important');
+        span.style.setProperty('-webkit-text-fill-color',color,'important');
         span.style.setProperty('opacity','1','important');
       });
     });
   }
-  if(document.readyState==='loading') document.addEventListener('DOMContentLoaded',forceWhite); else forceWhite();
-  window.addEventListener('load',forceWhite);
-  document.addEventListener('scroll',forceWhite,{passive:true});
+  if(document.readyState==='loading') document.addEventListener('DOMContentLoaded',applyToggleLabelTheme); else applyToggleLabelTheme();
+  window.addEventListener('load',applyToggleLabelTheme);
+  document.addEventListener('scroll',applyToggleLabelTheme,{passive:true});
+  new MutationObserver(applyToggleLabelTheme).observe(document.documentElement,{attributes:true,attributeFilter:['class']});
 })();
 </script>
 </body>
