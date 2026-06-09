@@ -3739,7 +3739,10 @@ html.light-mode .pro-final-card-title{
 }
 
 
-/* BarakaWay PRO stars — exact mobile position above hero card */
+
+
+
+/* BarakaWay PRO stars — fixed mobile placement above BarakaWay card */
 @media(max-width:700px){
   .bw-status-stars,
   .status-stars,
@@ -3749,17 +3752,20 @@ html.light-mode .pro-final-card-title{
     align-items:center !important;
     justify-content:center !important;
     width:100% !important;
-    margin:22px auto 18px !important;
+    height:auto !important;
+    margin:84px auto 14px !important;
     padding:0 !important;
     background:transparent !important;
     border:0 !important;
+    outline:0 !important;
     box-shadow:none !important;
     backdrop-filter:none !important;
     -webkit-backdrop-filter:none !important;
     position:relative !important;
-    z-index:30 !important;
+    z-index:80 !important;
     line-height:1 !important;
     pointer-events:none !important;
+    transform:none !important;
   }
 
   .bw-status-stars .star,
@@ -3770,15 +3776,27 @@ html.light-mode .pro-final-card-title{
   .status-stars span,
   .pro-status-stars span,
   .barakaway-status-stars span{
-    color:#f4c542 !important;
-    font-size:26px !important;
+    color:#f6c94c !important;
+    font-size:31px !important;
+    font-weight:900 !important;
     line-height:1 !important;
-    letter-spacing:4px !important;
+    letter-spacing:5px !important;
     text-shadow:
-      0 0 10px rgba(244,197,66,.62),
-      0 0 22px rgba(244,197,66,.28),
-      0 3px 10px rgba(0,0,0,.38) !important;
-    filter:drop-shadow(0 0 8px rgba(244,197,66,.35)) !important;
+      0 0 10px rgba(246,201,76,.75),
+      0 0 24px rgba(246,201,76,.36),
+      0 4px 12px rgba(0,0,0,.45) !important;
+    filter:drop-shadow(0 0 8px rgba(246,201,76,.42)) !important;
+  }
+
+  .brand-prayer-hero{
+    margin-top:0 !important;
+  }
+
+  .brand-prayer-hero .bw-status-stars,
+  .brand-prayer-hero .status-stars,
+  .brand-prayer-hero .pro-status-stars,
+  .brand-prayer-hero .barakaway-status-stars{
+    display:none !important;
   }
 }
 
@@ -15130,20 +15148,28 @@ window.addEventListener('load', function(){ setTimeout(controlProVisibility, 120
 })();
 </script>
 
-<script id="bw-status-stars-exact-placement-v2">
+
+<script id="bw-status-stars-force-top-v3">
 (function(){
   function placeStatusStars(){
     var hero = document.querySelector('.brand-prayer-hero');
+    if(!hero) return;
+
     var stars = document.querySelector('.bw-status-stars, .status-stars, .pro-status-stars, .barakaway-status-stars');
-    if(!hero || !stars) return;
+
+    if(!stars){
+      return;
+    }
 
     stars.classList.add('bw-status-stars');
 
-    var parent = hero.parentNode;
-    if(!parent) return;
+    if(stars.parentElement && stars.parentElement.classList && stars.parentElement.classList.contains('brand-prayer-hero')){
+      hero.parentNode.insertBefore(stars, hero);
+      return;
+    }
 
     if(stars.nextElementSibling !== hero){
-      parent.insertBefore(stars, hero);
+      hero.parentNode.insertBefore(stars, hero);
     }
   }
 
@@ -15153,9 +15179,11 @@ window.addEventListener('load', function(){ setTimeout(controlProVisibility, 120
     placeStatusStars();
   }
 
+  window.addEventListener('load', placeStatusStars);
   setTimeout(placeStatusStars, 50);
-  setTimeout(placeStatusStars, 250);
-  setTimeout(placeStatusStars, 800);
+  setTimeout(placeStatusStars, 200);
+  setTimeout(placeStatusStars, 700);
+  setTimeout(placeStatusStars, 1500);
 })();
 </script>
 
