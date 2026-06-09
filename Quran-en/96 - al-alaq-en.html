@@ -696,10 +696,146 @@ body.light-mode .toggle-option{
 color:#222 !important;
 white-space:nowrap !important;
 }
+</style>
 
-body.light-mode .content-controls{background:#f7f6f1!important;}
-body.light-mode .content-toggle{display:inline-flex!important;align-items:center!important;white-space:nowrap!important;}
-body.light-mode .content-toggle-label-text{color:#222!important;-webkit-text-fill-color:#222!important;opacity:1!important;}
+
+<style id="bw-en-light-mode-toolbar-final-recheck">
+/* Final light-mode fix: remove dark toolbar background, keep controls readable and in one row. Dark mode is untouched. */
+html.light-mode .adhkar-sticky-toolbar,
+html:not(.dark-mode) .adhkar-sticky-toolbar{
+  background:linear-gradient(180deg,rgba(255,255,255,.82),rgba(246,250,247,.74))!important;
+  background-color:rgba(255,255,255,.82)!important;
+  border:1px solid rgba(181,138,54,.14)!important;
+  box-shadow:0 18px 46px rgba(17,24,20,.12)!important;
+}
+html.light-mode .adhkar-sticky-toolbar .content-controls,
+html.light-mode body .adhkar-sticky-toolbar .content-controls,
+html.light-mode body .adhkar-sticky-toolbar .content-controls.bw-controls-fixed,
+html:not(.dark-mode) .adhkar-sticky-toolbar .content-controls,
+html:not(.dark-mode) body .adhkar-sticky-toolbar .content-controls,
+html:not(.dark-mode) body .adhkar-sticky-toolbar .content-controls.bw-controls-fixed{
+  display:flex!important;
+  flex-direction:row!important;
+  flex-wrap:nowrap!important;
+  align-items:center!important;
+  justify-content:center!important;
+  gap:18px!important;
+  width:100%!important;
+  max-width:820px!important;
+  margin:0 auto!important;
+  padding:8px 0!important;
+  border:0!important;
+  border-radius:0!important;
+  background:transparent!important;
+  background-color:transparent!important;
+  background-image:none!important;
+  box-shadow:none!important;
+  overflow:visible!important;
+}
+html.light-mode .adhkar-sticky-toolbar .content-toggle,
+html.light-mode body .adhkar-sticky-toolbar .content-toggle,
+html.light-mode .adhkar-sticky-toolbar .content-toggle span,
+html.light-mode .adhkar-sticky-toolbar .content-toggle .content-toggle-label-text,
+html:not(.dark-mode) .adhkar-sticky-toolbar .content-toggle,
+html:not(.dark-mode) body .adhkar-sticky-toolbar .content-toggle,
+html:not(.dark-mode) .adhkar-sticky-toolbar .content-toggle span,
+html:not(.dark-mode) .adhkar-sticky-toolbar .content-toggle .content-toggle-label-text{
+  display:inline-flex!important;
+  align-items:center!important;
+  justify-content:center!important;
+  flex:0 0 auto!important;
+  width:auto!important;
+  min-width:0!important;
+  margin:0!important;
+  padding:0!important;
+  gap:7px!important;
+  color:#111814!important;
+  -webkit-text-fill-color:#111814!important;
+  text-shadow:none!important;
+  opacity:1!important;
+  white-space:nowrap!important;
+  line-height:1!important;
+  font-weight:750!important;
+  background:transparent!important;
+  background-color:transparent!important;
+  background-image:none!important;
+  border:0!important;
+  box-shadow:none!important;
+}
+html.light-mode .adhkar-sticky-toolbar .content-toggle input,
+html.light-mode body .adhkar-sticky-toolbar .content-toggle input,
+html:not(.dark-mode) .adhkar-sticky-toolbar .content-toggle input,
+html:not(.dark-mode) body .adhkar-sticky-toolbar .content-toggle input{
+  appearance:none!important;
+  -webkit-appearance:none!important;
+  flex:0 0 auto!important;
+  display:inline-flex!important;
+  align-items:center!important;
+  justify-content:center!important;
+  width:18px!important;
+  height:18px!important;
+  min-width:18px!important;
+  min-height:18px!important;
+  margin:0!important;
+  padding:0!important;
+  border-radius:5px!important;
+  border:1.5px solid rgba(181,138,54,.54)!important;
+  background:transparent!important;
+  box-shadow:none!important;
+  opacity:1!important;
+  -webkit-text-fill-color:initial!important;
+}
+html.light-mode .adhkar-sticky-toolbar .content-toggle input:checked,
+html.light-mode body .adhkar-sticky-toolbar .content-toggle input:checked,
+html:not(.dark-mode) .adhkar-sticky-toolbar .content-toggle input:checked,
+html:not(.dark-mode) body .adhkar-sticky-toolbar .content-toggle input:checked{
+  background:linear-gradient(135deg,#2d7a46,#4caf6a)!important;
+  border-color:rgba(45,122,70,.38)!important;
+}
+html.light-mode .adhkar-sticky-toolbar .content-toggle input:checked::after,
+html.light-mode body .adhkar-sticky-toolbar .content-toggle input:checked::after,
+html:not(.dark-mode) .adhkar-sticky-toolbar .content-toggle input:checked::after,
+html:not(.dark-mode) body .adhkar-sticky-toolbar .content-toggle input:checked::after{
+  content:""!important;
+  position:absolute!important;
+  left:4px!important;
+  top:4px!important;
+  width:9px!important;
+  height:5px!important;
+  border-left:2px solid #fff!important;
+  border-bottom:2px solid #fff!important;
+  transform:rotate(-45deg)!important;
+}
+@media(max-width:720px){
+  html.light-mode .adhkar-sticky-toolbar .content-controls,
+  html.light-mode body .adhkar-sticky-toolbar .content-controls,
+  html:not(.dark-mode) .adhkar-sticky-toolbar .content-controls,
+  html:not(.dark-mode) body .adhkar-sticky-toolbar .content-controls{
+    flex-direction:row!important;
+    flex-wrap:nowrap!important;
+    gap:11px!important;
+  }
+  html.light-mode .adhkar-sticky-toolbar .content-toggle,
+  html.light-mode .adhkar-sticky-toolbar .content-toggle span,
+  html.light-mode .adhkar-sticky-toolbar .content-toggle .content-toggle-label-text,
+  html:not(.dark-mode) .adhkar-sticky-toolbar .content-toggle,
+  html:not(.dark-mode) .adhkar-sticky-toolbar .content-toggle span,
+  html:not(.dark-mode) .adhkar-sticky-toolbar .content-toggle .content-toggle-label-text{
+    font-size:12px!important;
+    gap:6px!important;
+    white-space:nowrap!important;
+  }
+}
+@media(max-width:390px){
+  html.light-mode .adhkar-sticky-toolbar .content-controls,
+  html:not(.dark-mode) .adhkar-sticky-toolbar .content-controls{gap:8px!important;}
+  html.light-mode .adhkar-sticky-toolbar .content-toggle,
+  html.light-mode .adhkar-sticky-toolbar .content-toggle span,
+  html.light-mode .adhkar-sticky-toolbar .content-toggle .content-toggle-label-text,
+  html:not(.dark-mode) .adhkar-sticky-toolbar .content-toggle,
+  html:not(.dark-mode) .adhkar-sticky-toolbar .content-toggle span,
+  html:not(.dark-mode) .adhkar-sticky-toolbar .content-toggle .content-toggle-label-text{font-size:11px!important;gap:5px!important;}
+}
 </style>
 </head>
 <body data-surah-arabic="العلق‎‎‎" data-surah-meta="The Clinging Clot · Surah 96 · 19 Ayahs · Meccan" data-surah-number="96" data-surah-page-key="Quran-en/96 - al-alaq-en.html" data-surah-title="Al-Alaq">
@@ -717,9 +853,9 @@ body.light-mode .content-toggle-label-text{color:#222!important;-webkit-text-fil
 <button aria-label="Save" class="surah-page-action" data-surah-page-action="save" type="button"><svg viewbox="0 0 24 24"><path d="M6 4.5A1.5 1.5 0 0 1 7.5 3h9A1.5 1.5 0 0 1 18 4.5V21l-6-3.5L6 21V4.5z"></path></svg><span class="surah-page-action-label">Save</span></button>
 </div>
 <div aria-label="Text display" class="content-controls">
-<label class="content-toggle"><input checked="" data-layer-toggle="arabic" id="toggleArabic" type="checkbox"/><span class="content-toggle-label-text" >Arabic</span></label>
-<label class="content-toggle"><input checked="" data-layer-toggle="translit" id="toggleTranslit" type="checkbox"/><span class="content-toggle-label-text" >Transliteration</span></label>
-<label class="content-toggle"><input checked="" data-layer-toggle="meaning" id="toggleMeaning" type="checkbox"/><span class="content-toggle-label-text" >Translation</span></label>
+<label class="content-toggle"><input checked="" data-layer-toggle="arabic" id="toggleArabic" type="checkbox"/><span class="content-toggle-label-text">Arabic</span></label>
+<label class="content-toggle"><input checked="" data-layer-toggle="translit" id="toggleTranslit" type="checkbox"/><span class="content-toggle-label-text">Transliteration</span></label>
+<label class="content-toggle"><input checked="" data-layer-toggle="meaning" id="toggleMeaning" type="checkbox"/><span class="content-toggle-label-text">Translation</span></label>
 </div>
 </div>
 <div class="adhkar-sticky-spacer"></div>
