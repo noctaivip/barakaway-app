@@ -1206,7 +1206,7 @@ html.light-mode .theme-switch::before{left:3px;}
   flex-direction:column;
   align-items:center;
   gap:16px;
-  margin:-8px 0 18px;
+  margin:2px 0 18px;
   padding:22px 22px 18px;
   border-radius:30px;
   overflow:hidden;
@@ -3739,68 +3739,6 @@ html.light-mode .pro-final-card-title{
   }
 }
 
-
-
-
-
-/* BarakaWay PRO stars — fixed mobile placement above BarakaWay card */
-@media(max-width:700px){
-  .bw-status-stars,
-  .status-stars,
-  .pro-status-stars,
-  .barakaway-status-stars{
-    display:flex !important;
-    align-items:center !important;
-    justify-content:center !important;
-    width:100% !important;
-    height:auto !important;
-    margin:84px auto 14px !important;
-    padding:0 !important;
-    background:transparent !important;
-    border:0 !important;
-    outline:0 !important;
-    box-shadow:none !important;
-    backdrop-filter:none !important;
-    -webkit-backdrop-filter:none !important;
-    position:relative !important;
-    z-index:80 !important;
-    line-height:1 !important;
-    pointer-events:none !important;
-    transform:none !important;
-  }
-
-  .bw-status-stars .star,
-  .status-stars .star,
-  .pro-status-stars .star,
-  .barakaway-status-stars .star,
-  .bw-status-stars span,
-  .status-stars span,
-  .pro-status-stars span,
-  .barakaway-status-stars span{
-    color:#f6c94c !important;
-    font-size:31px !important;
-    font-weight:900 !important;
-    line-height:1 !important;
-    letter-spacing:5px !important;
-    text-shadow:
-      0 0 10px rgba(246,201,76,.75),
-      0 0 24px rgba(246,201,76,.36),
-      0 4px 12px rgba(0,0,0,.45) !important;
-    filter:drop-shadow(0 0 8px rgba(246,201,76,.42)) !important;
-  }
-
-  .brand-prayer-hero{
-    margin-top:0 !important;
-  }
-
-  .brand-prayer-hero .bw-status-stars,
-  .brand-prayer-hero .status-stars,
-  .brand-prayer-hero .pro-status-stars,
-  .brand-prayer-hero .barakaway-status-stars{
-    display:none !important;
-  }
-}
-
 </style>
 <script src="/theme-init.js"></script>
 <link rel="stylesheet" href="/theme.css">
@@ -4936,28 +4874,6 @@ html.light-mode [data-task-meta="article"] *{
 }
 </style>
 
-
-<style id="barakaway-home-status-stars-style">
-/* BarakaWay: mobile PRO/support status stars under the theme switch */
-.bw-mobile-status-stars{display:none;}
-@media(max-width:700px){
-  .bw-mobile-status-stars{
-    display:none;align-items:center;justify-content:center;gap:7px;
-    margin:-10px auto 4px;min-height:30px;padding:0;border-radius:0;
-    width:max-content;max-width:92%;position:relative;z-index:8;overflow:visible;pointer-events:none;
-    letter-spacing:1.5px;font-size:21px;line-height:1;user-select:none;-webkit-tap-highlight-color:transparent;
-    background:transparent !important;
-    border:0 !important;
-    box-shadow:none !important;
-  }
-  .bw-mobile-status-stars.is-visible{display:flex;}
-  .bw-mobile-status-stars::before{display:none !important;}
-  .bw-mobile-status-stars .bw-status-star{position:relative;z-index:1;display:inline-flex;align-items:center;justify-content:center;color:#f6d36b;text-shadow:0 1px 0 rgba(82,54,4,.8),0 0 10px rgba(246,211,107,.42),0 0 22px rgba(215,192,122,.24);filter:drop-shadow(0 2px 5px rgba(0,0,0,.38));}
-  html.light-mode .bw-mobile-status-stars{background:transparent !important;border:0 !important;box-shadow:none !important;}
-  html.light-mode .bw-mobile-status-stars .bw-status-star{color:#b8860b;text-shadow:0 1px 0 rgba(255,255,255,.75),0 0 9px rgba(184,134,11,.22);}
-  body:not(.bw-pro-active) .bw-mobile-status-stars{display:none !important;}
-}
-</style>
 </head>
 <body>
 
@@ -5008,9 +4924,8 @@ html.light-mode [data-task-meta="article"] *{
 
 <div class="container">
 
-<div class="bw-mobile-status-stars" id="bwMobileStatusStars" aria-label="BarakaWay status stars"></div>
 <div class="brand-prayer-hero">
-<button class="brand-signature" id="brandInstallTrigger" type="button" aria-label="БаракаУэй">
+  <button class="brand-signature" id="brandInstallTrigger" type="button" aria-label="БаракаУэй">
     <span class="brand-letter-accent">Барака</span><span class="brand-letter-main">Уэй</span>
   </button>
   <div class="home-prayer-widget" role="link" tabindex="0" onclick="openPrayerTimesPage(event)" onkeydown="openPrayerTimesPageFromKeyboard(event)" aria-label="Намаз уақыттары бетін ашу">
@@ -5121,7 +5036,7 @@ html.light-mode [data-task-meta="article"] *{
     </div>
   </div>
 
-<a class="bw-micro-pro-upsell" href="pro-kz.html#micro" id="dailyMicroProUpsell" role="button">
+<a class="bw-micro-pro-upsell" href="pro-ru.html#micro" id="dailyMicroProUpsell" role="button">
   <span class="bw-micro-pro-title">Pro нұсқасында күн сайын +5 сұрақ</span>
   <span class="bw-micro-pro-status" id="dailyMicroProStatus" aria-hidden="true">✓</span>
 </a>
@@ -14421,7 +14336,7 @@ html.dark-mode .bw-pro-micro-option-btn{background:#1d242c;border:1px solid #2a3
     link.classList.toggle('is-visible', dailyTaskDone('micro'));
     link.classList.toggle('bw-pro-micro-done',done);
     link.setAttribute('aria-label',done?LABELS.ariaDone:LABELS.ariaOpen);
-    link.setAttribute('href',isPro()?'javascript:void(0)':'pro-kz.html#micro');
+    link.setAttribute('href',isPro()?'javascript:void(0)':'pro-ru.html#micro');
     var status=link.querySelector('.bw-micro-pro-status');
     if(!status){
       status=document.createElement('span');
@@ -14938,7 +14853,7 @@ function controlProVisibility(){
   var visible = getMicroDone();
   up.classList.toggle('is-visible', !!visible);
   up.style.display = visible ? 'flex' : 'none';
-  up.setAttribute('href', hasProAccess() ? 'javascript:void(0)' : 'pro-kz.html#micro');
+  up.setAttribute('href', hasProAccess() ? 'javascript:void(0)' : 'pro-ru.html#micro');
 }
 
 function normalizeQuestions(){
@@ -15033,7 +14948,7 @@ function setupProModal(){
   function open(e){
     if(e){ e.preventDefault(); e.stopPropagation(); if(e.stopImmediatePropagation)e.stopImmediatePropagation(); }
     if(!getMicroDone()) { controlProVisibility(); return false; }
-    if(!hasProAccess()) { window.location.href = 'pro-kz.html#micro'; return false; }
+    if(!hasProAccess()) { window.location.href = 'pro-ru.html#micro'; return false; }
     pack = takeFive(); if(!pack.length) return false;
     index=0; render(); modal.classList.add('open'); return false;
   }
@@ -15135,7 +15050,7 @@ window.addEventListener('load', function(){ setTimeout(controlProVisibility, 120
     var visible = taskDone('micro');
     link.classList.toggle('is-visible', visible);
     link.style.display = visible ? 'flex' : 'none';
-    link.setAttribute('href', hasProAccess() ? 'javascript:void(0)' : 'pro-kz.html#micro');
+    link.setAttribute('href', hasProAccess() ? 'javascript:void(0)' : 'pro-ru.html#micro');
     link.classList.toggle('bw-pro-micro-done', visible && proQuestionsDone());
     var status = link.querySelector('.bw-micro-pro-status');
     if(status) status.style.display = (visible && proQuestionsDone()) ? 'inline-flex' : 'none';
@@ -15180,7 +15095,7 @@ window.addEventListener('load', function(){ setTimeout(controlProVisibility, 120
     var ready=microDone();
     link.classList.toggle('is-visible',ready);
     link.classList.toggle('bw-pro-micro-done',proExtraDone());
-    link.setAttribute('href',isPro()?'javascript:void(0)':'pro-kz.html#micro');
+    link.setAttribute('href',isPro()?'javascript:void(0)':'pro-ru.html#micro');
     link.setAttribute('aria-hidden',ready?'false':'true');
     var status=link.querySelector('.bw-micro-pro-status');
     if(status)status.style.display=proExtraDone()?'inline-flex':'none';
@@ -15193,76 +15108,66 @@ window.addEventListener('load', function(){ setTimeout(controlProVisibility, 120
 })();
 </script>
 
-<script id="barakaway-home-status-stars-script">
+<script id="bw-kz-pro-micro-status-link-fix-v1">
 (function(){
-  function read(key){try{return localStorage.getItem(key)||"";}catch(e){return "";}}
-  function statusStarCount(){
-    var isPro=read('barakaway_pro')==='true';
-    if(!isPro) return 0;
-
-    var plan=String(read('barakaway_pro_plan') || '').toLowerCase().trim();
-    var level=String(read('barakaway_support_level') || '').toLowerCase().trim();
-    var map={supporter:2,patron:3,benefactor:4,legacy:5};
-
-    if(plan==='support' && map[level]) return map[level];
-    return 1;
+  'use strict';
+  var LANG='kz';
+  function todayKey(){
+    var d=new Date();
+    return d.getFullYear()+'-'+String(d.getMonth()+1).padStart(2,'0')+'-'+String(d.getDate()).padStart(2,'0');
   }
-  function renderStatusStars(){
-    var box=document.getElementById('bwMobileStatusStars');
-    if(!box) return;
-    var count=statusStarCount();
-    document.body.classList.toggle('bw-pro-active',count>0);
-    if(count<=0){box.classList.remove('is-visible');box.innerHTML='';box.setAttribute('aria-hidden','true');return;}
-    box.setAttribute('aria-hidden','false');
-    box.classList.add('is-visible');
-    box.innerHTML=Array.from({length:count},function(){return '<span class="bw-status-star" aria-hidden="true">★</span>';}).join('');
+  function isPro(){
+    try{return localStorage.getItem('barakaway_pro')==='true';}catch(e){return false;}
   }
-  if(document.readyState==='loading'){document.addEventListener('DOMContentLoaded',renderStatusStars);}else{renderStatusStars();}
-  window.addEventListener('storage',renderStatusStars);
-  window.addEventListener('barakaway:pro-status-change',renderStatusStars);
-  window.addEventListener('barakaway:support-status-change',renderStatusStars);
+  function microDone(){
+    var card=document.getElementById('dailyMicroKnowledgeCard');
+    var status=document.getElementById('dailyMicroKnowledgeStatus');
+    if(card){
+      if(card.classList.contains('bw-final-done')||card.classList.contains('bw-task-done')||card.classList.contains('task-done')||card.classList.contains('micro-answered')||card.getAttribute('aria-disabled')==='true')return true;
+    }
+    return !!(status && String(status.textContent||'').replace(/\s+/g,'').trim()==='✓');
+  }
+  function clearNonProDone(){
+    if(isPro())return;
+    try{
+      localStorage.removeItem('barakaway_pro_micro_done_'+todayKey());
+      localStorage.removeItem('barakaway_pro_micro_done_'+LANG+'_'+todayKey());
+    }catch(e){}
+  }
+  function proExtraDone(){
+    if(!isPro())return false;
+    try{return localStorage.getItem('barakaway_pro_micro_done_'+todayKey())==='1'||localStorage.getItem('barakaway_pro_micro_done_'+LANG+'_'+todayKey())==='1';}catch(e){return false;}
+  }
+  function sync(){
+    var link=document.getElementById('dailyMicroProUpsell');
+    if(!link)return;
+    clearNonProDone();
+    var ready=microDone();
+    var done=proExtraDone();
+    link.classList.toggle('is-visible',ready);
+    link.classList.toggle('bw-pro-micro-done',done);
+    link.setAttribute('href',isPro()?'javascript:void(0)':'pro-ru.html#micro');
+    link.setAttribute('aria-hidden',ready?'false':'true');
+    var status=link.querySelector('.bw-micro-pro-status');
+    if(status)status.style.display=done?'inline-flex':'none';
+  }
+  document.addEventListener('click',function(event){
+    var link=event.target&&event.target.closest?event.target.closest('#dailyMicroProUpsell'):null;
+    if(!link)return;
+    sync();
+    if(!isPro()){
+      event.preventDefault();
+      event.stopImmediatePropagation();
+      window.location.href='pro-ru.html#micro';
+    }
+  },true);
+  if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',sync,{once:true});else sync();
+  window.addEventListener('pageshow',sync);
+  window.addEventListener('storage',sync);
+  [50,200,700,1500].forEach(function(t){setTimeout(sync,t);});
+  setInterval(sync,400);
 })();
 </script>
-
-
-<script id="bw-status-stars-force-top-v3">
-(function(){
-  function placeStatusStars(){
-    var hero = document.querySelector('.brand-prayer-hero');
-    if(!hero) return;
-
-    var stars = document.querySelector('.bw-mobile-status-stars, .bw-status-stars, .status-stars, .pro-status-stars, .barakaway-status-stars');
-
-    if(!stars){
-      return;
-    }
-
-    if(!stars.classList.contains('bw-mobile-status-stars')) stars.classList.add('bw-status-stars');
-
-    if(stars.parentElement && stars.parentElement.classList && stars.parentElement.classList.contains('brand-prayer-hero')){
-      hero.parentNode.insertBefore(stars, hero);
-      return;
-    }
-
-    if(stars.nextElementSibling !== hero){
-      hero.parentNode.insertBefore(stars, hero);
-    }
-  }
-
-  if(document.readyState === 'loading'){
-    document.addEventListener('DOMContentLoaded', placeStatusStars);
-  }else{
-    placeStatusStars();
-  }
-
-  window.addEventListener('load', placeStatusStars);
-  setTimeout(placeStatusStars, 50);
-  setTimeout(placeStatusStars, 200);
-  setTimeout(placeStatusStars, 700);
-  setTimeout(placeStatusStars, 1500);
-})();
-</script>
-
 </body>
 </html>
 
