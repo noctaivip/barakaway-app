@@ -13584,9 +13584,13 @@ window.addEventListener('load', function(){ setTimeout(controlProVisibility, 120
   function statusStarCount(){
     var isPro=read('barakaway_pro')==='true';
     if(!isPro) return 0;
-    var level=read('barakaway_support_level');
+
+    var plan=String(read('barakaway_pro_plan') || '').toLowerCase().trim();
+    var level=String(read('barakaway_support_level') || '').toLowerCase().trim();
     var map={supporter:2,patron:3,benefactor:4,legacy:5};
-    return map[level] || 1;
+
+    if(plan==='support' && map[level]) return map[level];
+    return 1;
   }
   function renderStatusStars(){
     var box=document.getElementById('bwMobileStatusStars');
