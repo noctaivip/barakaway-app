@@ -13588,8 +13588,8 @@ function isDone(task){try{if(localStorage.getItem(finalDoneKey(task))==='1')retu
 function setDone(task){try{localStorage.setItem(finalDoneKey(task),'1');legacyDoneKeys(task).forEach(function(k){localStorage.setItem(k,'1');});if(task==='name'){var day=todayKey();['barakaway_name_counter_'+LANG+'_'+day,'barakaway_name_counter_'+LANG+'_v2_'+day,'barakaway_name_counter_'+LANG+'_v3_'+day,'barakaway_name_counter_'+LANG+'_final_'+day,'barakaway_name_counter_'+day].forEach(function(k){localStorage.setItem(k,'100');});}}catch(e){}}
 function taskCard(task){return document.getElementById(TASKS[task]);}
 function taskFromElement(el){if(!el)return'';var modal=el.closest&&el.closest('.bw-task-modal-card');if(modal&&modal.getAttribute('data-task-key'))return modal.getAttribute('data-task-key');var card=el.closest&&el.closest('.today-action');if(card){for(var key in TASKS){if(card.id===TASKS[key])return key;}}return'';}
-function applyDone(task){var card=taskCard(task);if(!card)return;if(task==='micro'){var microPro=document.getElementById('dailyMicroProUpsell');if(microPro)microPro.classList.add('is-visible');}card.classList.add('bw-final-done','bw-task-done','task-done','goal-done');card.classList.remove('goal-urgent','task-urgent');card.setAttribute('aria-disabled','true');card.style.animation='none';var status=card.querySelector('.today-task-status');if(status)status.textContent='✓';var hint=card.querySelector('.bw-task-hint, .bw-task-compact-hint');if(hint)hint.style.display='none';if(task==='name'){var meta=card.querySelector('.bw-task-compact-meta[data-task-meta="name"]');if(meta)meta.textContent='100/100';var value=document.getElementById('allahNameCounterValue');if(value)value.textContent='✓';var fill=document.getElementById('allahNameCounterFill');if(fill)fill.style.width='100%';}}
-function applyAllDone(){Object.keys(TASKS).forEach(function(task){if(isDone(task))applyDone(task);});var microPro=document.getElementById('dailyMicroProUpsell');if(microPro)microPro.classList.toggle('is-visible',isDone('micro'));}
+function applyDone(task){var card=taskCard(task);if(!card)return;card.classList.add('bw-final-done','bw-task-done','task-done','goal-done');card.classList.remove('goal-urgent','task-urgent');card.setAttribute('aria-disabled','true');card.style.animation='none';var status=card.querySelector('.today-task-status');if(status)status.textContent='✓';var hint=card.querySelector('.bw-task-hint, .bw-task-compact-hint');if(hint)hint.style.display='none';if(task==='name'){var meta=card.querySelector('.bw-task-compact-meta[data-task-meta="name"]');if(meta)meta.textContent='100/100';var value=document.getElementById('allahNameCounterValue');if(value)value.textContent='✓';var fill=document.getElementById('allahNameCounterFill');if(fill)fill.style.width='100%';}}
+function applyAllDone(){Object.keys(TASKS).forEach(function(task){if(isDone(task))applyDone(task);});}
 function blockOpeningDoneCards(event){var card=event.target&&event.target.closest?event.target.closest('.today-action'):null;if(!card)return;var task=taskFromElement(card);if(task&&isDone(task)){applyDone(task);event.preventDefault();event.stopPropagation();if(event.stopImmediatePropagation)event.stopImmediatePropagation();return false;}}
 function norm(v){return(v||'').replace(/\s+/g,' ').trim();}
 function findMicroByQuestion(q){q=norm(q);for(var i=0;i<MICRO_DATA.length;i++){if(norm(MICRO_DATA[i].q)===q)return MICRO_DATA[i];}return null;}
@@ -14429,25 +14429,7 @@ html.dark-mode .bw-pro-micro-option-btn{background:#1d242c;border:1px solid #2a3
       card.getAttribute('data-bw-done')==='1';
   }
   function syncProStatus(){
-    var link=document.getElementById('dailyMicroProUpsell');
-    if(!link)return;
-    var ready=microTaskReady();
-    var done=ready&&isDone();
-    link.classList.toggle('is-visible', ready);
-    link.classList.toggle('bw-pro-micro-done',done);
-    link.style.display=ready?'block':'none';
-    link.setAttribute('aria-hidden',ready?'false':'true');
-    link.setAttribute('aria-label',done?LABELS.ariaDone:LABELS.ariaOpen);
-    link.setAttribute('href',isPro()?'javascript:void(0)':'pro-kz.html#micro');
-    var status=link.querySelector('.bw-micro-pro-status');
-    if(!status){
-      status=document.createElement('span');
-      status.className='bw-micro-pro-status';
-      status.textContent='✓';
-      link.appendChild(status);
-    }
-    status.textContent='✓';
-    status.style.display=done?'inline-flex':'none';
+    /* handled only by bw-kz-plus5-authoritative-flow-v64 to prevent flicker */
   }
   function normalizeItem(item){
     item=item||{};
@@ -14966,16 +14948,9 @@ function hasProAccess(){
 }
 
 function controlProVisibility(){
-  var up = document.getElementById('dailyMicroProUpsell') || document.querySelector('.bw-micro-pro-upsell');
-  if(!up) return;
-  var visible = getMicroDone();
-  up.classList.toggle('is-visible', !!visible);
-  up.style.display = visible ? 'block' : 'none';
-  up.setAttribute('aria-hidden', visible ? 'false' : 'true');
-  up.setAttribute('href', hasProAccess() ? 'javascript:void(0)' : 'pro-kz.html#micro');
-  var status = document.getElementById('dailyMicroProStatus');
-  if(status && !up.classList.contains('bw-pro-micro-done')) status.style.display = 'none';
+  /* handled only by bw-kz-plus5-authoritative-flow-v64 to prevent flicker */
 }
+
 
 function normalizeQuestions(){
   var src = [];
