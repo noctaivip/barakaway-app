@@ -3711,6 +3711,41 @@ html.light-mode .pro-final-card-title{
   }
 }
 
+
+/* BarakaWay status stars — placed above the main hero card */
+@media(max-width:700px){
+  .bw-status-stars,
+  .status-stars,
+  .pro-status-stars,
+  .barakaway-status-stars{
+    display:flex !important;
+    align-items:center !important;
+    justify-content:center !important;
+    width:100% !important;
+    margin:10px auto 12px !important;
+    padding:0 !important;
+    background:transparent !important;
+    border:0 !important;
+    box-shadow:none !important;
+    backdrop-filter:none !important;
+    -webkit-backdrop-filter:none !important;
+    position:relative !important;
+    z-index:5 !important;
+  }
+
+  .bw-status-stars .star,
+  .status-stars .star,
+  .pro-status-stars .star,
+  .barakaway-status-stars .star,
+  .bw-status-stars span,
+  .status-stars span,
+  .pro-status-stars span,
+  .barakaway-status-stars span{
+    color:#d7c07a !important;
+    text-shadow:0 0 10px rgba(215,192,122,.55),0 2px 10px rgba(0,0,0,.35) !important;
+  }
+}
+
 </style>
 <style id="barakaway-home-nav-upgrade-style">
 /* === Home quick access + bottom navigation upgrade === */
@@ -14965,5 +15000,25 @@ window.addEventListener('load', function(){ setTimeout(controlProVisibility, 120
   window.addEventListener('barakaway:support-status-change',renderStatusStars);
 })();
 </script>
+
+<script id="bw-status-stars-placement-fix">
+(function(){
+  function placeStatusStars(){
+    var hero = document.querySelector('.brand-prayer-hero');
+    var stars = document.querySelector('.bw-status-stars, .status-stars, .pro-status-stars, .barakaway-status-stars');
+    if(!hero || !stars) return;
+    if(stars.nextElementSibling === hero) return;
+    hero.parentNode.insertBefore(stars, hero);
+  }
+  if(document.readyState === 'loading'){
+    document.addEventListener('DOMContentLoaded', placeStatusStars);
+  }else{
+    placeStatusStars();
+  }
+  setTimeout(placeStatusStars, 100);
+  setTimeout(placeStatusStars, 500);
+})();
+</script>
+
 </body>
 </html>
