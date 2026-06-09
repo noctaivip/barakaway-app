@@ -3111,8 +3111,8 @@ html.light-mode [data-task-meta="article"] *{
 @media(max-width:700px){
   .bw-mobile-status-stars{
     display:none;align-items:center;justify-content:center;gap:7px;
-    margin:-2px auto 8px;min-height:30px;padding:0;border-radius:0;
-    width:max-content;max-width:92%;position:relative;z-index:3;overflow:visible;
+    margin:4px auto -15px;min-height:30px;padding:0;border-radius:0;
+    width:max-content;max-width:92%;position:relative;z-index:8;overflow:visible;pointer-events:none;
     letter-spacing:1.5px;font-size:21px;line-height:1;user-select:none;-webkit-tap-highlight-color:transparent;
     background:transparent !important;
     border:0 !important;
@@ -3134,7 +3134,8 @@ html.light-mode [data-task-meta="article"] *{
 </div>
 </div>
 </div> <div class="desktop-top-actions" aria-label="Desktop quick actions"> <div class="desktop-action-left"> <a class="desktop-action-pill" href="#" onclick="return bwOpenLanguageIndex(event)">Dili değiştir</a> </div> <div class="desktop-action-center"> <div class="install-box" id="installBox"> <button id="installBtn" class="install-btn" type="button">Uygulamayı yükle</button> </div> </div> <div class="desktop-action-right"> <div class="desktop-theme-toggle-inner"> <span class="theme-toggle-label">Işığı Aç</span> <input type="checkbox" class="theme-switch" id="desktopThemeSwitch" aria-label="Toggle theme"> </div> </div>
-</div> <div class="container"> <div class="brand-prayer-hero"> <div class="bw-mobile-status-stars" id="bwMobileStatusStars" aria-label="BarakaWay status stars"></div>
+</div> <div class="container"> <div class="bw-mobile-status-stars" id="bwMobileStatusStars" aria-label="BarakaWay status stars"></div>
+<div class="brand-prayer-hero">
 <button class="brand-signature" id="brandInstallTrigger" type="button" aria-label="BarakaWay"> <span class="brand-letter-accent">B</span><span class="brand-letter-main">araka</span><span class="brand-letter-accent">W</span><span class="brand-letter-main">ay</span> </button> <div class="home-prayer-widget" role="link" tabindex="0" onclick="openPrayerTimesPage(event)" onkeydown="openPrayerTimesPageFromKeyboard(event)" aria-label="Namaz vakitleri sayfasını aç"> <div class="home-prayer-top"> <div class="home-prayer-kicker">Sonraki namaz</div> <div class="home-prayer-location" id="homePrayerLocation">Taşkent, Özbekistan</div> </div> <div class="home-prayer-main"> <div> <div class="home-prayer-name" id="homePrayerName">Sabah</div> <div class="home-prayer-time" id="homePrayerTime">--:--</div> <div class="home-prayer-meta" id="homePrayerMeta">Namaz vakitleri yükleniyor...</div> </div> <div class="home-prayer-countdown"> <div class="home-prayer-countdown-label">Kalan</div> <div id="homePrayerCountdown">--:--:--</div> </div> </div> <div class="home-prayer-actions"> <div class="home-prayer-note"><span>Tam takvim</span><span class="home-prayer-arrow" aria-hidden="true">→</span></div> <button class="home-prayer-share-btn" type="button" onclick="sharePrayerTimes(event)" aria-label="Namaz vakitlerini paylaş" title="Namaz vakitlerini paylaş"> <svg viewBox="0 0 24 24" aria-hidden="true"> <path d="M18 16.08c-.76 0-1.44.3-1.96.77L8.91 12.7c.05-.23.09-.46.09-.7s-.04-.47-.09-.7l7.05-4.11A2.99 2.99 0 1 0 15 5c0 .24.04.47.09.7L8.04 9.81A3 3 0 1 0 8.04 14.2l7.12 4.18c-.04.2-.06.41-.06.62a2.9 2.9 0 1 0 2.9-2.92z"/> </svg> </button> </div> </div>
 </div> <div class="tahajjud-alarm-bar" id="tahajjudAlarmBar" aria-label="Teheccüd namazı alarmı"> <div class="tahajjud-alarm-left"> <div class="tahajjud-alarm-icon" aria-hidden="true">🌙</div> <div> <div class="tahajjud-alarm-title">Teheccüd namazı alarmını aç</div> <div class="tahajjud-alarm-meta" id="tahajjudAlarmMeta">Bugün BarakaWay’de</div> </div> </div> <label class="tahajjud-switch" aria-label="Teheccüd alarmını aç veya kapat"> <input type="checkbox" id="tahajjudAlarmToggle"> <span class="tahajjud-slider"></span> </label>
 </div>
@@ -11761,13 +11762,13 @@ window.addEventListener('load', function(){ setTimeout(controlProVisibility, 120
     var hero = document.querySelector('.brand-prayer-hero');
     if(!hero) return;
 
-    var stars = document.querySelector('.bw-status-stars, .status-stars, .pro-status-stars, .barakaway-status-stars');
+    var stars = document.querySelector('.bw-mobile-status-stars, .bw-status-stars, .status-stars, .pro-status-stars, .barakaway-status-stars');
 
     if(!stars){
       return;
     }
 
-    stars.classList.add('bw-status-stars');
+    if(!stars.classList.contains('bw-mobile-status-stars')) stars.classList.add('bw-status-stars');
 
     if(stars.parentElement && stars.parentElement.classList && stars.parentElement.classList.contains('brand-prayer-hero')){
       hero.parentNode.insertBefore(stars, hero);

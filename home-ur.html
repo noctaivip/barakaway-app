@@ -4889,8 +4889,8 @@ html.light-mode [data-task-meta="article"] *{
 @media(max-width:700px){
   .bw-mobile-status-stars{
     display:none;align-items:center;justify-content:center;gap:7px;
-    margin:-2px auto 8px;min-height:30px;padding:0;border-radius:0;
-    width:max-content;max-width:92%;position:relative;z-index:3;overflow:visible;
+    margin:4px auto -15px;min-height:30px;padding:0;border-radius:0;
+    width:max-content;max-width:92%;position:relative;z-index:8;overflow:visible;pointer-events:none;
     letter-spacing:1.5px;font-size:21px;line-height:1;user-select:none;-webkit-tap-highlight-color:transparent;
     background:transparent !important;
     border:0 !important;
@@ -4947,8 +4947,8 @@ html.light-mode [data-task-meta="article"] *{
 </div>
 </div>
 <div class="container">
-<div class="brand-prayer-hero">
 <div class="bw-mobile-status-stars" id="bwMobileStatusStars" aria-label="BarakaWay status stars"></div>
+<div class="brand-prayer-hero">
 <button aria-label="براکا وے" class="brand-signature" id="brandInstallTrigger" type="button">
 <span class="brand-letter-accent">ب</span><span class="brand-letter-main">راکا</span><span class="brand-letter-accent">و</span><span class="brand-letter-main">ے</span>
 </button>
@@ -16717,13 +16717,13 @@ html.light-mode #allahNameCounterCard .bw-task-compact-meta[data-task-meta="name
     var hero = document.querySelector('.brand-prayer-hero');
     if(!hero) return;
 
-    var stars = document.querySelector('.bw-status-stars, .status-stars, .pro-status-stars, .barakaway-status-stars');
+    var stars = document.querySelector('.bw-mobile-status-stars, .bw-status-stars, .status-stars, .pro-status-stars, .barakaway-status-stars');
 
     if(!stars){
       return;
     }
 
-    stars.classList.add('bw-status-stars');
+    if(!stars.classList.contains('bw-mobile-status-stars')) stars.classList.add('bw-status-stars');
 
     if(stars.parentElement && stars.parentElement.classList && stars.parentElement.classList.contains('brand-prayer-hero')){
       hero.parentNode.insertBefore(stars, hero);
