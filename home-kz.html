@@ -5123,7 +5123,7 @@ html.light-mode [data-task-meta="article"] *{
 
 <a class="bw-micro-pro-upsell" href="pro-kz.html#micro" id="dailyMicroProUpsell" role="button">
   <span class="bw-micro-pro-title">Pro нұсқасында күн сайын +5 сұрақ</span>
-  <span class="bw-micro-pro-status" id="dailyMicroProStatus" aria-hidden="true">✓</span>
+  <span class="bw-micro-pro-status" id="dailyMicroProStatus" aria-hidden="true" style="display:none;">+</span>
 </a>
 </section>
 <div class="home-section-title">
@@ -14789,7 +14789,7 @@ html.light-mode .bw-universal-pro-close{background:#fff;color:#172019;border-col
 var BW_LANG = 'kz';
 var BW_LABELS = {"next": "Келесі", "finish": "Аяқтау", "close": "Жабу", "title": "PRO сұрақ"};
 var BW_RTL = false;
-var BW_RESET_ONCE_KEY = 'bw_reset_once_all_tasks_' + BW_LANG + '_20260530_next_day_v4';
+var BW_RESET_ONCE_KEY = 'bw_reset_once_all_tasks_' + BW_LANG + '_20260530_next_day_v5';
 var BW_PRO_CURSOR_KEY = 'bw_pro_micro_cursor_' + BW_LANG + '_v1';
 /* BW_NEXT_DAY_TEST_RESET_V4 */
 
@@ -14890,7 +14890,7 @@ function markCardDone(card, done){
 
 function resetVisualOnce(){
   try{
-    var cards = ['dailyArticleLink','dailyChallengeCard','dailyGoalCard','allahNameCounterCard','dailyMicroKnowledgeCard'].map(function(id){return document.getElementById(id);}).filter(Boolean);
+    var cards = ['dailyArticleLink','currentAdhkarLink','dailyGoalCard','allahNameCounterCard','dailyMicroKnowledgeCard','dailyMicroProUpsell'].map(function(id){return document.getElementById(id);}).filter(Boolean);
     cards.forEach(function(card){
       markCardDone(card, false);
       card.removeAttribute('data-done'); card.removeAttribute('data-completed');
@@ -14899,8 +14899,9 @@ function resetVisualOnce(){
       var fills = card.querySelectorAll('.today-counter-fill,.progress-bar,.progress-fill');
       fills.forEach(function(f){ f.style.width = '0%'; });
     });
-    var ids = ['dailyArticleStatus','dailyChallengeStatus','dailyGoalStatus','dailyMicroKnowledgeStatus'];
+    var ids = ['dailyArticleStatus','currentAdhkarStatus','dailyМақсатStatus','dailyMicroKnowledgeStatus','dailyMicroProStatus'];
     ids.forEach(function(id){var el=document.getElementById(id); if(el && el.textContent.trim()==='✓') el.textContent='•';});
+    var proStatus = document.getElementById('dailyMicroProStatus'); if(proStatus){ proStatus.textContent = '+'; proStatus.style.display = 'none'; }
     var counter = document.getElementById('allahNameCounterValue'); if(counter) counter.textContent = '0/100';
     var fill = document.getElementById('allahNameCounterFill'); if(fill) fill.style.width = '0%';
   }catch(e){}
