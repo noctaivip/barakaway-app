@@ -442,7 +442,7 @@ html.light-mode .theme-toggle-label{color:#111;} .theme-switch{ width:42px; heig
 } .theme-switch::before{ content:""; position:absolute; top:3px; width:18px; height:18px; background:#fff; border-radius:50%; transition:left .25s, transform .25s;
 } html.dark-mode .theme-switch::before{left:20px;}
 html.light-mode .theme-switch::before{left:3px;} /* HOME HERO BRAND + PRAYER WIDGET */ /* HOME HERO BRAND + PRAYER WIDGET */
-.brand-prayer-hero{ position:relative; display:flex; flex-direction:column; align-items:center; gap:16px; margin:-8px 0 18px; padding:22px 22px 18px; border-radius:30px; overflow:hidden;
+.brand-prayer-hero{ position:relative; display:flex; flex-direction:column; align-items:center; gap:16px; margin:2px 0 18px; padding:22px 22px 18px; border-radius:30px; overflow:hidden;
 } html.dark-mode .brand-prayer-hero{ background:linear-gradient(180deg,#111a23 0%, #0f1821 100%); border:1px solid rgba(53,88,73,0.36); box-shadow:0 18px 36px rgba(0,0,0,0.22), inset 0 1px 0 rgba(255,255,255,0.03);
 } html.light-mode .brand-prayer-hero{ background:linear-gradient(180deg,#ffffff 0%, #f7faf8 100%); border:1px solid rgba(45,122,70,0.12); box-shadow:0 16px 30px rgba(21,34,24,0.06), inset 0 1px 0 rgba(255,255,255,0.92);
 } .brand-signature{ position:relative; z-index:1; display:inline-flex; align-items:baseline; justify-content:center; gap:0; font-weight:900; letter-spacing:-0.045em; line-height:1; margin-top:-2px; background:none; border:none; padding:0; cursor:default; font-family:inherit;
@@ -1838,68 +1838,6 @@ html.light-mode .pro-final-card-title{
   }
 }
 
-
-
-
-
-/* BarakaWay PRO stars — fixed mobile placement above BarakaWay card */
-@media(max-width:700px){
-  .bw-status-stars,
-  .status-stars,
-  .pro-status-stars,
-  .barakaway-status-stars{
-    display:flex !important;
-    align-items:center !important;
-    justify-content:center !important;
-    width:100% !important;
-    height:auto !important;
-    margin:84px auto 14px !important;
-    padding:0 !important;
-    background:transparent !important;
-    border:0 !important;
-    outline:0 !important;
-    box-shadow:none !important;
-    backdrop-filter:none !important;
-    -webkit-backdrop-filter:none !important;
-    position:relative !important;
-    z-index:80 !important;
-    line-height:1 !important;
-    pointer-events:none !important;
-    transform:none !important;
-  }
-
-  .bw-status-stars .star,
-  .status-stars .star,
-  .pro-status-stars .star,
-  .barakaway-status-stars .star,
-  .bw-status-stars span,
-  .status-stars span,
-  .pro-status-stars span,
-  .barakaway-status-stars span{
-    color:#f6c94c !important;
-    font-size:31px !important;
-    font-weight:900 !important;
-    line-height:1 !important;
-    letter-spacing:5px !important;
-    text-shadow:
-      0 0 10px rgba(246,201,76,.75),
-      0 0 24px rgba(246,201,76,.36),
-      0 4px 12px rgba(0,0,0,.45) !important;
-    filter:drop-shadow(0 0 8px rgba(246,201,76,.42)) !important;
-  }
-
-  .brand-prayer-hero{
-    margin-top:0 !important;
-  }
-
-  .brand-prayer-hero .bw-status-stars,
-  .brand-prayer-hero .status-stars,
-  .brand-prayer-hero .pro-status-stars,
-  .brand-prayer-hero .barakaway-status-stars{
-    display:none !important;
-  }
-}
-
 </style>
 <script src="/theme-init.js"></script>
 <link rel="stylesheet" href="/theme.css">
@@ -3104,28 +3042,6 @@ html.light-mode [data-task-meta="article"] *{
 }
 </style>
 
-
-<style id="barakaway-home-status-stars-style">
-/* BarakaWay: mobile PRO/support status stars under the theme switch */
-.bw-mobile-status-stars{display:none;}
-@media(max-width:700px){
-  .bw-mobile-status-stars{
-    display:none;align-items:center;justify-content:center;gap:7px;
-    margin:-10px auto 4px;min-height:30px;padding:0;border-radius:0;
-    width:max-content;max-width:92%;position:relative;z-index:8;overflow:visible;pointer-events:none;
-    letter-spacing:1.5px;font-size:21px;line-height:1;user-select:none;-webkit-tap-highlight-color:transparent;
-    background:transparent !important;
-    border:0 !important;
-    box-shadow:none !important;
-  }
-  .bw-mobile-status-stars.is-visible{display:flex;}
-  .bw-mobile-status-stars::before{display:none !important;}
-  .bw-mobile-status-stars .bw-status-star{position:relative;z-index:1;display:inline-flex;align-items:center;justify-content:center;color:#f6d36b;text-shadow:0 1px 0 rgba(82,54,4,.8),0 0 10px rgba(246,211,107,.42),0 0 22px rgba(215,192,122,.24);filter:drop-shadow(0 2px 5px rgba(0,0,0,.38));}
-  html.light-mode .bw-mobile-status-stars{background:transparent !important;border:0 !important;box-shadow:none !important;}
-  html.light-mode .bw-mobile-status-stars .bw-status-star{color:#b8860b;text-shadow:0 1px 0 rgba(255,255,255,.75),0 0 9px rgba(184,134,11,.22);}
-  body:not(.bw-pro-active) .bw-mobile-status-stars{display:none !important;}
-}
-</style>
 </head>
 <body> <div class="mobile-top-controls"> <button class="icon-btn left" onclick="return bwOpenLanguageIndex(event)" aria-label="Change language"> <svg viewBox="0 0 24 24" aria-hidden="true"> <path d="M12 2a10 10 0 100 20 10 10 0 000-20zm6.92 9h-3.02a15.6 15.6 0 00-1.33-5.01A8.03 8.03 0 0118.92 11zM12 4.04c.89 1.08 1.97 3.22 2.28 6.96H9.72C10.03 7.26 11.11 5.12 12 4.04zM4.99 13h3.02a15.6 15.6 0 001.33 5.01A8.03 8.03 0 014.99 13zM8.1 11H5.08a8.03 8.03 0 014.35-5.01A15.6 15.6 0 008.1 11zm1.62 2h4.56c-.31 3.74-1.39 5.88-2.28 6.96-.89-1.08-1.97-3.22-2.28-6.96zm5.18 5.01A15.6 15.6 0 0015.9 13h3.02a8.03 8.03 0 01-4.02 5.01z"/> </svg> <span class="ripple"></span> </button> <div class="theme-toggle-center"> <span class="theme-toggle-label">Işığı Aç</span> <input type="checkbox" class="theme-switch" id="themeSwitch" aria-label="Toggle theme"> </div> <button class="icon-btn right" onclick="shareApp()" aria-label="Paylaş app"> <svg viewBox="0 0 24 24" aria-hidden="true"> <path d="M18 16a2.99 2.99 0 00-2.39 1.2l-6.7-3.35a3.1 3.1 0 000-1.7l6.7-3.35A3 3 0 1014 6a3.1 3.1 0 00.08.68l-6.7 3.35a3 3 0 100 4.94l6.7 3.35A3 3 0 1018 16z"/> </svg> <span class="ripple"></span> </button>
 </div> <div class="ramadan-wrapper">
@@ -3134,9 +3050,7 @@ html.light-mode [data-task-meta="article"] *{
 </div>
 </div>
 </div> <div class="desktop-top-actions" aria-label="Desktop quick actions"> <div class="desktop-action-left"> <a class="desktop-action-pill" href="#" onclick="return bwOpenLanguageIndex(event)">Dili değiştir</a> </div> <div class="desktop-action-center"> <div class="install-box" id="installBox"> <button id="installBtn" class="install-btn" type="button">Uygulamayı yükle</button> </div> </div> <div class="desktop-action-right"> <div class="desktop-theme-toggle-inner"> <span class="theme-toggle-label">Işığı Aç</span> <input type="checkbox" class="theme-switch" id="desktopThemeSwitch" aria-label="Toggle theme"> </div> </div>
-</div> <div class="container"> <div class="bw-mobile-status-stars" id="bwMobileStatusStars" aria-label="BarakaWay status stars"></div>
-<div class="brand-prayer-hero">
-<button class="brand-signature" id="brandInstallTrigger" type="button" aria-label="BarakaWay"> <span class="brand-letter-accent">B</span><span class="brand-letter-main">araka</span><span class="brand-letter-accent">W</span><span class="brand-letter-main">ay</span> </button> <div class="home-prayer-widget" role="link" tabindex="0" onclick="openPrayerTimesPage(event)" onkeydown="openPrayerTimesPageFromKeyboard(event)" aria-label="Namaz vakitleri sayfasını aç"> <div class="home-prayer-top"> <div class="home-prayer-kicker">Sonraki namaz</div> <div class="home-prayer-location" id="homePrayerLocation">Taşkent, Özbekistan</div> </div> <div class="home-prayer-main"> <div> <div class="home-prayer-name" id="homePrayerName">Sabah</div> <div class="home-prayer-time" id="homePrayerTime">--:--</div> <div class="home-prayer-meta" id="homePrayerMeta">Namaz vakitleri yükleniyor...</div> </div> <div class="home-prayer-countdown"> <div class="home-prayer-countdown-label">Kalan</div> <div id="homePrayerCountdown">--:--:--</div> </div> </div> <div class="home-prayer-actions"> <div class="home-prayer-note"><span>Tam takvim</span><span class="home-prayer-arrow" aria-hidden="true">→</span></div> <button class="home-prayer-share-btn" type="button" onclick="sharePrayerTimes(event)" aria-label="Namaz vakitlerini paylaş" title="Namaz vakitlerini paylaş"> <svg viewBox="0 0 24 24" aria-hidden="true"> <path d="M18 16.08c-.76 0-1.44.3-1.96.77L8.91 12.7c.05-.23.09-.46.09-.7s-.04-.47-.09-.7l7.05-4.11A2.99 2.99 0 1 0 15 5c0 .24.04.47.09.7L8.04 9.81A3 3 0 1 0 8.04 14.2l7.12 4.18c-.04.2-.06.41-.06.62a2.9 2.9 0 1 0 2.9-2.92z"/> </svg> </button> </div> </div>
+</div> <div class="container"> <div class="brand-prayer-hero"> <button class="brand-signature" id="brandInstallTrigger" type="button" aria-label="BarakaWay"> <span class="brand-letter-accent">B</span><span class="brand-letter-main">araka</span><span class="brand-letter-accent">W</span><span class="brand-letter-main">ay</span> </button> <div class="home-prayer-widget" role="link" tabindex="0" onclick="openPrayerTimesPage(event)" onkeydown="openPrayerTimesPageFromKeyboard(event)" aria-label="Namaz vakitleri sayfasını aç"> <div class="home-prayer-top"> <div class="home-prayer-kicker">Sonraki namaz</div> <div class="home-prayer-location" id="homePrayerLocation">Taşkent, Özbekistan</div> </div> <div class="home-prayer-main"> <div> <div class="home-prayer-name" id="homePrayerName">Sabah</div> <div class="home-prayer-time" id="homePrayerTime">--:--</div> <div class="home-prayer-meta" id="homePrayerMeta">Namaz vakitleri yükleniyor...</div> </div> <div class="home-prayer-countdown"> <div class="home-prayer-countdown-label">Kalan</div> <div id="homePrayerCountdown">--:--:--</div> </div> </div> <div class="home-prayer-actions"> <div class="home-prayer-note"><span>Tam takvim</span><span class="home-prayer-arrow" aria-hidden="true">→</span></div> <button class="home-prayer-share-btn" type="button" onclick="sharePrayerTimes(event)" aria-label="Namaz vakitlerini paylaş" title="Namaz vakitlerini paylaş"> <svg viewBox="0 0 24 24" aria-hidden="true"> <path d="M18 16.08c-.76 0-1.44.3-1.96.77L8.91 12.7c.05-.23.09-.46.09-.7s-.04-.47-.09-.7l7.05-4.11A2.99 2.99 0 1 0 15 5c0 .24.04.47.09.7L8.04 9.81A3 3 0 1 0 8.04 14.2l7.12 4.18c-.04.2-.06.41-.06.62a2.9 2.9 0 1 0 2.9-2.92z"/> </svg> </button> </div> </div>
 </div> <div class="tahajjud-alarm-bar" id="tahajjudAlarmBar" aria-label="Teheccüd namazı alarmı"> <div class="tahajjud-alarm-left"> <div class="tahajjud-alarm-icon" aria-hidden="true">🌙</div> <div> <div class="tahajjud-alarm-title">Teheccüd namazı alarmını aç</div> <div class="tahajjud-alarm-meta" id="tahajjudAlarmMeta">Bugün BarakaWay’de</div> </div> </div> <label class="tahajjud-switch" aria-label="Teheccüd alarmını aç veya kapat"> <input type="checkbox" id="tahajjudAlarmToggle"> <span class="tahajjud-slider"></span> </label>
 </div>
 <section class="today-hub" aria-label="Bugün BarakaWay’de"> <div class="today-hub-head"> <div class="today-hub-kicker">Bugün BarakaWay’de</div> <h2 class="today-hub-title">Her gün Allah’a ﷻ bir adım daha yakın</h2> </div> <div class="today-hub-grid"> <a class="today-action today-daily-task" id="dailyArticleLink" href="javascript:void(0)" role="button" aria-label="Uygulamalı günün ayeti" data-task-key="article"> <div class="today-action-top"> <div class="today-action-icon">📖</div> <div class="today-action-arrow today-task-status" id="dailyArticleStatus">→</div> </div> <div> <div class="today-action-title">Günün ayeti</div> <div class="today-action-text" id="dailyArticleTitle">Günün ayeti yükleniyor...</div> </div> <div class="bw-task-compact-meta" id="dailyArticleFixedBadge" data-task-meta="article">7:55</div> </a> <a class="today-action today-daily-task" id="currentAdhkarLink" href="javascript:void(0)" role="button" aria-label="Günün görevi" data-task-key="adhkar"> <div class="today-action-top"> <div class="today-action-icon">🌿</div> <div class="today-action-arrow today-task-status" id="currentAdhkarStatus">→</div> </div> <div> <div class="today-action-title" id="currentAdhkarTitle">Günün görevi</div> <div class="today-action-text" id="currentAdhkarText">Günün görevi yükleniyor...</div> </div> </a> <div class="today-action today-daily-task today-counter-action" id="allahNameCounterCard" role="button" tabindex="0" data-task-key="name" aria-label="Allah’ın ismini tekrar sayacı"> <div class="today-action-top"> <div class="today-action-icon">☝️</div> <div class="today-action-arrow today-task-status" id="allahNameCounterValue">0/100</div> </div> <div> <div class="today-action-title" id="allahNameBugün">Allah’ın ismi</div> <div class="today-action-text" id="allahNameMeaning">Bugün bu ismin anlamını öğreniyoruz.</div> <div class="today-counter-track"><div class="today-counter-fill" id="allahNameCounterFill"></div></div> </div> </div> <div class="today-action today-daily-task today-goal-action" id="dailyGoalCard" role="button" tabindex="0" data-task-key="goal" aria-label="Günlük hedef"> <div class="today-action-top"> <div class="today-action-icon">🎯</div> <div class="today-action-arrow today-task-status" id="dailyGoalStatus">•</div> </div> <div> <div class="today-action-title">Günlük hedef</div> <div class="today-action-text" id="dailyPracticeText">Bir iyiliği sessizce, sözsüz ve gösterişsiz yap.</div> </div> </div> </div> <div class="today-micro-wrap"> <div class="today-action today-daily-task today-micro-action" id="dailyMicroKnowledgeCard" role="button" tabindex="0" data-task-key="micro" aria-label="Günün kısa bilgisi"> <div class="today-action-top"> <div class="today-action-icon">🧠</div> <div class="today-action-arrow today-task-status" id="dailyMicroKnowledgeStatus">?</div> </div> <div> <div class="today-action-title">Günün kısa bilgisi</div> <div class="today-micro-question" id="dailyMicroQuestion">Soru yükleniyor...</div> <div class="micro-options" id="dailyMicroOptions"></div> <div class="micro-answer-box" id="dailyMicroAnswer"></div> </div> </div> </div>
@@ -11720,77 +11634,6 @@ window.addEventListener('load', function(){ setTimeout(controlProVisibility, 120
   window.addEventListener('storage',sync);
   document.addEventListener('click',function(){setTimeout(sync,0);setTimeout(sync,90);},true);
   setInterval(sync,250);
-})();
-</script>
-
-
-<script id="barakaway-home-status-stars-script">
-(function(){
-  function read(key){try{return localStorage.getItem(key)||"";}catch(e){return "";}}
-  function statusStarCount(){
-    var isPro=read('barakaway_pro')==='true';
-    if(!isPro) return 0;
-
-    var plan=String(read('barakaway_pro_plan') || '').toLowerCase().trim();
-    var level=String(read('barakaway_support_level') || '').toLowerCase().trim();
-    var map={supporter:2,patron:3,benefactor:4,legacy:5};
-
-    if(plan==='support' && map[level]) return map[level];
-    return 1;
-  }
-  function renderStatusStars(){
-    var box=document.getElementById('bwMobileStatusStars');
-    if(!box) return;
-    var count=statusStarCount();
-    document.body.classList.toggle('bw-pro-active',count>0);
-    if(count<=0){box.classList.remove('is-visible');box.innerHTML='';box.setAttribute('aria-hidden','true');return;}
-    box.setAttribute('aria-hidden','false');
-    box.classList.add('is-visible');
-    box.innerHTML=Array.from({length:count},function(){return '<span class="bw-status-star" aria-hidden="true">★</span>';}).join('');
-  }
-  if(document.readyState==='loading'){document.addEventListener('DOMContentLoaded',renderStatusStars);}else{renderStatusStars();}
-  window.addEventListener('storage',renderStatusStars);
-  window.addEventListener('barakaway:pro-status-change',renderStatusStars);
-  window.addEventListener('barakaway:support-status-change',renderStatusStars);
-})();
-</script>
-
-
-<script id="bw-status-stars-force-top-v3">
-(function(){
-  function placeStatusStars(){
-    var hero = document.querySelector('.brand-prayer-hero');
-    if(!hero) return;
-
-    var stars = document.querySelector('.bw-mobile-status-stars, .bw-status-stars, .status-stars, .pro-status-stars, .barakaway-status-stars');
-
-    if(!stars){
-      return;
-    }
-
-    if(!stars.classList.contains('bw-mobile-status-stars')) stars.classList.add('bw-status-stars');
-
-    if(stars.parentElement && stars.parentElement.classList && stars.parentElement.classList.contains('brand-prayer-hero')){
-      hero.parentNode.insertBefore(stars, hero);
-      return;
-    }
-
-    if(stars.nextElementSibling !== hero){
-      hero.parentNode.insertBefore(stars, hero);
-    }
-  }
-
-  if(document.readyState === 'loading'){
-    document.addEventListener('DOMContentLoaded', placeStatusStars);
-  }else{
-    placeStatusStars();
-  }
-
-  window.addEventListener('load', placeStatusStars);
-  setTimeout(placeStatusStars, 50);
-  setTimeout(placeStatusStars, 200);
-  setTimeout(placeStatusStars, 700);
-  setTimeout(placeStatusStars, 1500);
 })();
 </script>
 
