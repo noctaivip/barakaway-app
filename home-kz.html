@@ -14822,7 +14822,7 @@ html.light-mode .bw-universal-pro-close{background:#fff;color:#172019;border-col
 var BW_LANG = 'kz';
 var BW_LABELS = {"next": "Келесі", "finish": "Аяқтау", "close": "Жабу", "title": "PRO сұрақ"};
 var BW_RTL = false;
-var BW_RESET_ONCE_KEY = 'bw_reset_once_all_tasks_' + BW_LANG + '_20260530_next_day_v6';
+var BW_RESET_ONCE_KEY = 'bw_reset_once_all_tasks_' + BW_LANG + '_20260530_next_day_v7';
 var BW_PRO_CURSOR_KEY = 'bw_pro_micro_cursor_' + BW_LANG + '_v1';
 /* BW_NEXT_DAY_TEST_RESET_V4 */
 
@@ -15182,6 +15182,226 @@ window.addEventListener('load', function(){ setTimeout(controlProVisibility, 120
 })();
 </script>
 
+
+
+<script id="bw-kz-plus5-authoritative-flow-v64">
+(function(){
+  'use strict';
+  var LANG='kz';
+  var RESET_MARKER='bw_kz_plus5_authoritative_reset_v64';
+  var PRO_DONE_PREFIX='barakaway_pro_micro_done_'+LANG+'_';
+  var PRO_URL='pro-kz.html#micro';
+
+  function dayKey(){
+    var d=new Date();
+    return d.getFullYear()+'-'+String(d.getMonth()+1).padStart(2,'0')+'-'+String(d.getDate()).padStart(2,'0');
+  }
+  function get(k){try{return localStorage.getItem(k);}catch(e){return null;}}
+  function set(k,v){try{localStorage.setItem(k,v);}catch(e){}}
+  function rem(k){try{localStorage.removeItem(k);}catch(e){}}
+  function isPro(){
+    try{
+      var pro=String(get('barakaway_pro')||'').toLowerCase();
+      var plan=String(get('barakaway_pro_plan')||'').toLowerCase();
+      return /^(1|true|yes|active|unlocked|premium|pro)$/.test(pro) || (plan && plan!=='free');
+    }catch(e){return false;}
+  }
+  function mainMicroDone(){
+    var day=dayKey();
+    return get('barakaway_today_'+LANG+'_'+day+'_micro')==='1' ||
+           get('barakaway_micro_answer_'+LANG+'_'+day)!==null;
+  }
+  function proDone(){
+    return get(PRO_DONE_PREFIX+dayKey())==='1';
+  }
+  function wipeForRetestOnce(){
+    try{
+      if(get(RESET_MARKER)==='1') return;
+      var remove=[];
+      for(var i=0;i<localStorage.length;i++){
+        var k=localStorage.key(i)||'';
+        var low=k.toLowerCase();
+        if(
+          low.indexOf('barakaway_today_'+LANG+'_')===0 ||
+          low.indexOf('bw_lang_'+LANG+'__barakaway_today_')===0 ||
+          low.indexOf('barakaway_micro_answer_'+LANG+'_')===0 ||
+          low.indexOf('bw_lang_'+LANG+'__barakaway_micro_answer_')===0 ||
+          low.indexOf('barakaway_pro_micro_done_'+LANG+'_')===0 ||
+          low.indexOf('bw_lang_'+LANG+'__barakaway_pro_micro_done_')===0 ||
+          low.indexOf('barakaway_name_counter_'+LANG+'_')===0 ||
+          low.indexOf('bw_lang_'+LANG+'__barakaway_name_counter_')===0 ||
+          low.indexOf('bw_pro_micro_cursor_'+LANG+'_')===0 ||
+          low.indexOf('bw_lang_'+LANG+'__bw_pro_micro_cursor_')===0 ||
+          low.indexOf('bw_final_done_v2_'+LANG+'_')===0 ||
+          low.indexOf('bw_daily_done_v2_'+LANG+'_')===0
+        ){ remove.push(k); }
+      }
+      remove.forEach(rem);
+      set(RESET_MARKER,'1');
+    }catch(e){}
+  }
+
+  function normalizeQuestion(item){
+    item=item||{};
+    var opts=Array.isArray(item.options)?item.options:(Array.isArray(item.opt)?item.opt:[]);
+    var correct=0;
+    if(typeof item.correct==='number') correct=item.correct;
+    else if(typeof item.answer==='number') correct=item.answer;
+    else if(typeof item.correctIndex==='number') correct=item.correctIndex;
+    correct=Math.max(0,Math.min(Math.max(opts.length-1,0),correct||0));
+    return {q:item.q||item.question||item.title||'', options:opts, correct:correct, meaning:item.meaning||item.explain||item.answerText||item.text||''};
+  }
+  function questionPool(){
+    var src=[];
+    try{ if(Array.isArray(window.MICRO_QUESTIONS)) src=window.MICRO_QUESTIONS; }catch(e){}
+    try{ if(!src.length && Array.isArray(window.MICRO_DATA)) src=window.MICRO_DATA; }catch(e){}
+    try{ if(!src.length && typeof MICRO_QUESTIONS!=='undefined' && Array.isArray(MICRO_QUESTIONS)) src=MICRO_QUESTIONS; }catch(e){}
+    try{ if(!src.length && typeof MICRO_DATA!=='undefined' && Array.isArray(MICRO_DATA)) src=MICRO_DATA; }catch(e){}
+    var seen=Object.create(null);
+    src=src.map(normalizeQuestion).filter(function(x){
+      var q=String(x.q||'').replace(/\s+/g,' ').trim();
+      if(!q || !x.options || x.options.length<2 || seen[q]) return false;
+      seen[q]=1; return true;
+    });
+    if(src.length>=5) return src;
+    return [
+      {q:'Күніне қанша парыз намаз бар?',options:['3','5','6'],correct:1,meaning:'Бес уақыт намаз мұсылманның күнін Алламен байланыстырады.'},
+      {q:'Намаз алдында не істеу керек?',options:['Дәрет алу','Тамақ ішу','Ұйықтау'],correct:0,meaning:'Тазалық — намаздың маңызды шарты.'},
+      {q:'Бисмиллаһ нені білдіреді?',options:['Алланың атымен','Рақмет','Қош бол'],correct:0,meaning:'Жақсы істі Алланың атымен бастау.'},
+      {q:'Садақа тек ақша ма?',options:['Иә','Жоқ','Тек тамақ'],correct:1,meaning:'Жақсы сөз, көмек және күлімсіреу де садақа.'},
+      {q:'Рамазан — ...',options:['Ораза айы','Ойын айы','Сауда айы'],correct:0,meaning:'Рамазан тақуалық пен өзін тәрбиелеуді үйретеді.'}
+    ];
+  }
+  function takeFive(){
+    var all=questionPool();
+    var seed=dayKey().replace(/\D/g,'')*1 || 1;
+    var start=seed%all.length;
+    var out=[];
+    for(var i=0;i<5 && i<all.length;i++) out.push(all[(start+i)%all.length]);
+    return out;
+  }
+  function esc(v){
+    return String(v||'').replace(/[&<>"']/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c];});
+  }
+  function syncPlus5(){
+    var link=document.getElementById('dailyMicroProUpsell');
+    if(!link) return;
+    var ready=mainMicroDone();
+    var done=ready && proDone();
+    link.classList.toggle('is-visible',ready);
+    link.classList.toggle('bw-pro-micro-done',done);
+    link.style.setProperty('display',ready?'flex':'none','important');
+    link.setAttribute('aria-hidden',ready?'false':'true');
+    link.setAttribute('href',isPro()?'javascript:void(0)':PRO_URL);
+    var status=document.getElementById('dailyMicroProStatus') || link.querySelector('.bw-micro-pro-status');
+    if(status){
+      status.textContent='✓';
+      status.style.setProperty('display',done?'inline-flex':'none','important');
+    }
+  }
+  function resetOldProModals(){
+    document.querySelectorAll('.bw-pro-micro-overlay,#bwUniversalProModal').forEach(function(n){n.remove();});
+  }
+  function openFiveQuestions(){
+    if(proDone()){syncPlus5();return;}
+    resetOldProModals();
+    var items=takeFive();
+    var overlay=document.createElement('div');
+    overlay.className='bw-task-modal-overlay bw-pro-micro-overlay is-open';
+    overlay.innerHTML=
+      '<div class="bw-task-modal-card" data-task-key="micro-pro" role="dialog" aria-modal="true" aria-label="PRO сұрақтар">'+
+        '<div class="bw-pro-micro-progress"></div>'+
+        '<h3 class="bw-task-modal-title">PRO сұрақ</h3>'+
+        '<p class="bw-task-modal-text"></p>'+
+        '<div class="bw-pro-micro-options-grid"></div>'+
+        '<div class="bw-pro-micro-answer-note"></div>'+
+        '<button type="button" class="bw-task-complete-btn" disabled>Келесі</button>'+
+        '<button type="button" class="bw-task-close-btn">Жабу</button>'+
+      '</div>';
+    var ix=0, answered=false;
+    var progress=overlay.querySelector('.bw-pro-micro-progress');
+    var qEl=overlay.querySelector('.bw-task-modal-text');
+    var grid=overlay.querySelector('.bw-pro-micro-options-grid');
+    var note=overlay.querySelector('.bw-pro-micro-answer-note');
+    var next=overlay.querySelector('.bw-task-complete-btn');
+    function render(){
+      answered=false;
+      var item=items[ix];
+      progress.textContent=(ix+1)+' / '+items.length;
+      qEl.textContent=item.q;
+      note.textContent='';
+      note.classList.remove('is-visible','show');
+      next.disabled=true;
+      next.textContent=ix<items.length-1?'Келесі':'Аяқтау';
+      grid.innerHTML=item.options.map(function(opt,i){
+        return '<button type="button" class="bw-pro-micro-option-btn" data-index="'+i+'">'+esc(opt)+'</button>';
+      }).join('');
+    }
+    grid.addEventListener('click',function(event){
+      var btn=event.target && event.target.closest ? event.target.closest('.bw-pro-micro-option-btn') : null;
+      if(!btn || answered) return;
+      answered=true;
+      var item=items[ix];
+      var chosen=parseInt(btn.getAttribute('data-index'),10);
+      var correct=Number(item.correct)||0;
+      Array.prototype.slice.call(grid.querySelectorAll('.bw-pro-micro-option-btn')).forEach(function(node,i){
+        node.disabled=true;
+        if(i===correct) node.classList.add('bw-answer-correct','correct');
+        if(i===chosen && i!==correct) node.classList.add('bw-answer-wrong','wrong');
+      });
+      note.innerHTML='<strong>Дұрыс жауап:</strong> '+esc(item.options[correct]||'')+(item.meaning?'<br><strong>Түсіндірме:</strong> '+esc(item.meaning):'');
+      note.classList.add('is-visible','show');
+      next.disabled=false;
+    });
+    next.addEventListener('click',function(){
+      if(next.disabled) return;
+      if(ix<items.length-1){ix++;render();}
+      else{set(PRO_DONE_PREFIX+dayKey(),'1');overlay.remove();syncPlus5();}
+    });
+    overlay.querySelector('.bw-task-close-btn').addEventListener('click',function(){overlay.remove();});
+    overlay.addEventListener('click',function(e){if(e.target===overlay)overlay.remove();});
+    document.body.appendChild(overlay);
+    render();
+  }
+  function replaceAndBind(){
+    var link=document.getElementById('dailyMicroProUpsell');
+    if(!link) return;
+    if(link.dataset.bwKzPlus5Authoritative==='1'){syncPlus5();return;}
+    var cleanLink=link.cloneNode(true);
+    cleanLink.dataset.bwKzPlus5Authoritative='1';
+    link.parentNode.replaceChild(cleanLink,link);
+    cleanLink.addEventListener('click',function(event){
+      syncPlus5();
+      if(!mainMicroDone()){
+        event.preventDefault();event.stopPropagation();if(event.stopImmediatePropagation)event.stopImmediatePropagation();
+        return false;
+      }
+      if(!isPro()){
+        event.preventDefault();event.stopPropagation();if(event.stopImmediatePropagation)event.stopImmediatePropagation();
+        window.location.href=PRO_URL;
+        return false;
+      }
+      event.preventDefault();event.stopPropagation();if(event.stopImmediatePropagation)event.stopImmediatePropagation();
+      openFiveQuestions();
+      return false;
+    },true);
+    syncPlus5();
+  }
+  function init(){
+    wipeForRetestOnce();
+    replaceAndBind();
+    syncPlus5();
+    setTimeout(function(){replaceAndBind();syncPlus5();},80);
+    setTimeout(syncPlus5,350);
+    setTimeout(syncPlus5,1000);
+  }
+  if(document.readyState==='loading') document.addEventListener('DOMContentLoaded',init,{once:true});
+  else init();
+  window.addEventListener('pageshow',init);
+  window.addEventListener('storage',syncPlus5);
+  setInterval(syncPlus5,250);
+})();
+</script>
 
 </body>
 </html>
