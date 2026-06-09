@@ -662,7 +662,7 @@ html.light-mode .adhkar-sticky-toolbar{
   box-shadow:0 14px 34px rgba(28,31,24,.12)!important;
 }
 html.light-mode .adhkar-sticky-toolbar .content-toggle,
-html.light-mode .adhkar-sticky-toolbar .content-toggle span{color:#ffffff!important;-webkit-text-fill-color:#ffffff!important;}
+html.light-mode .adhkar-sticky-toolbar .content-toggle span{color:#111814!important;-webkit-text-fill-color:#111814!important;}
 @media(max-width:720px){
   .adhkar-sticky-toolbar{
     width:calc(100% + 24px)!important;
@@ -704,6 +704,68 @@ html.light-mode .adhkar-sticky-toolbar .content-toggle span{color:#ffffff!import
   .adhkar-sticky-toolbar .content-controls{gap:8px!important;}
   .adhkar-sticky-toolbar .content-toggle{font-size:11px!important;gap:5px!important;}
   .adhkar-sticky-toolbar .content-toggle input{width:16px!important;height:16px!important;min-width:16px!important;min-height:16px!important;}
+}
+</style>
+
+<style id="bw-light-mode-header-controls-final-fix">
+html.light-mode body .adhkar-sticky-toolbar .content-controls,
+html.light-mode body .content-controls{
+  display:flex!important;
+  flex-direction:row!important;
+  flex-wrap:nowrap!important;
+  align-items:center!important;
+  justify-content:center!important;
+  gap:18px!important;
+  width:100%!important;
+  max-width:100%!important;
+  white-space:nowrap!important;
+}
+html.light-mode body .adhkar-sticky-toolbar .content-toggle,
+html.light-mode body .content-controls .content-toggle,
+html.light-mode body .adhkar-sticky-toolbar .content-toggle span,
+html.light-mode body .content-controls .content-toggle span,
+html.light-mode body .adhkar-sticky-toolbar .content-toggle-label-text,
+html.light-mode body .content-controls .content-toggle-label-text{
+  color:#111814!important;
+  -webkit-text-fill-color:#111814!important;
+  opacity:1!important;
+  text-shadow:none!important;
+}
+html.light-mode body .adhkar-sticky-toolbar .content-toggle,
+html.light-mode body .content-controls .content-toggle{
+  display:inline-flex!important;
+  flex:0 0 auto!important;
+  align-items:center!important;
+  justify-content:center!important;
+  gap:7px!important;
+  white-space:nowrap!important;
+  width:auto!important;
+  min-width:0!important;
+}
+html.light-mode body .adhkar-sticky-toolbar .content-toggle input,
+html.light-mode body .content-controls .content-toggle input{
+  flex:0 0 auto!important;
+  -webkit-text-fill-color:initial!important;
+}
+@media(max-width:700px){
+  html.light-mode body .adhkar-sticky-toolbar .content-controls,
+  html.light-mode body .content-controls{
+    flex-direction:row!important;
+    flex-wrap:nowrap!important;
+    gap:11px!important;
+    overflow-x:visible!important;
+  }
+  html.light-mode body .adhkar-sticky-toolbar .content-toggle,
+  html.light-mode body .content-controls .content-toggle{
+    font-size:12px!important;
+    gap:6px!important;
+  }
+}
+@media(max-width:390px){
+  html.light-mode body .adhkar-sticky-toolbar .content-controls,
+  html.light-mode body .content-controls{gap:8px!important;}
+  html.light-mode body .adhkar-sticky-toolbar .content-toggle,
+  html.light-mode body .content-controls .content-toggle{font-size:11px!important;gap:5px!important;}
 }
 </style>
 </head>
@@ -1055,32 +1117,37 @@ loadSurah();
 </script>
 <script id="bw-force-quran-toggle-labels-white">
 (function(){
-  function forceWhite(){
+  function wantedColor(){
+    return document.documentElement.classList.contains('light-mode') ? '#111814' : '#ffffff';
+  }
+  function syncToggleLabelColors(){
+    var color = wantedColor();
     document.querySelectorAll('.adhkar-sticky-toolbar .content-toggle, .content-controls .content-toggle').forEach(function(label){
-      label.style.setProperty('color','#ffffff','important');
-      label.style.setProperty('-webkit-text-fill-color','#ffffff','important');
+      label.style.setProperty('color', color, 'important');
+      label.style.setProperty('-webkit-text-fill-color', color, 'important');
       label.style.setProperty('opacity','1','important');
       Array.prototype.slice.call(label.childNodes).forEach(function(n){
         if(n.nodeType===3 && n.nodeValue.trim()){
           var span=document.createElement('span');
           span.className='content-toggle-label-text';
           span.textContent=n.nodeValue;
-          span.style.setProperty('color','#ffffff','important');
-          span.style.setProperty('-webkit-text-fill-color','#ffffff','important');
+          span.style.setProperty('color', color, 'important');
+          span.style.setProperty('-webkit-text-fill-color', color, 'important');
           span.style.setProperty('opacity','1','important');
           label.replaceChild(span,n);
         }
       });
       label.querySelectorAll('span').forEach(function(span){
-        span.style.setProperty('color','#ffffff','important');
-        span.style.setProperty('-webkit-text-fill-color','#ffffff','important');
+        span.style.setProperty('color', color, 'important');
+        span.style.setProperty('-webkit-text-fill-color', color, 'important');
         span.style.setProperty('opacity','1','important');
       });
     });
   }
-  if(document.readyState==='loading') document.addEventListener('DOMContentLoaded',forceWhite); else forceWhite();
-  window.addEventListener('load',forceWhite);
-  document.addEventListener('scroll',forceWhite,{passive:true});
+  if(document.readyState==='loading') document.addEventListener('DOMContentLoaded',syncToggleLabelColors); else syncToggleLabelColors();
+  window.addEventListener('load',syncToggleLabelColors);
+  document.addEventListener('scroll',syncToggleLabelColors,{passive:true});
+  new MutationObserver(syncToggleLabelColors).observe(document.documentElement,{attributes:true,attributeFilter:['class']});
 })();
 </script>
 </body>
