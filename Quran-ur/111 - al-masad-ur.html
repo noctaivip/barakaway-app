@@ -50,6 +50,7 @@ h1 { text-align:center; font-size:38px; margin:0 0 8px; }
   .ayah-meaning { font-size:16px; }
   .master-btn { width:100%; }
 }
+
 </style>
 <script src="/theme-init.js"></script>
 <link href="/theme.css" rel="stylesheet"/>
@@ -368,8 +369,8 @@ html.light-mode .adhkar-sticky-toolbar{
 html.light-mode .adhkar-sticky-toolbar .content-toggle,
 html.light-mode .adhkar-sticky-toolbar .content-toggle span,
 html.light-mode .adhkar-sticky-toolbar .content-toggle-label-text{
-  color:#ffffff!important;
-  -webkit-text-fill-color:#ffffff!important;
+  color:#24382f!important;
+  -webkit-text-fill-color:#24382f!important;
 }
 @media(max-width:720px){
   .adhkar-sticky-toolbar{
@@ -414,6 +415,50 @@ html.light-mode .adhkar-sticky-toolbar .content-toggle-label-text{
   .adhkar-sticky-toolbar .content-toggle input{width:16px!important;height:16px!important;min-width:16px!important;min-height:16px!important;}
 }
 </style>
+
+<style>
+/* Quran UR light header final fix */
+html.light-mode .adhkar-sticky-toolbar .content-controls,
+html.light-mode body .adhkar-sticky-toolbar .content-controls,
+html.light-mode body .adhkar-sticky-toolbar .content-controls.bw-controls-fixed{
+  display:flex!important;
+  flex-direction:row!important;
+  align-items:center!important;
+  justify-content:center!important;
+  flex-wrap:nowrap!important;
+  gap:18px!important;
+}
+html.light-mode .adhkar-sticky-toolbar .content-toggle,
+html.light-mode body .adhkar-sticky-toolbar .content-toggle{
+  display:inline-flex!important;
+  flex-direction:row!important;
+  align-items:center!important;
+  justify-content:center!important;
+  width:auto!important;
+  min-width:0!important;
+  flex:0 0 auto!important;
+  white-space:nowrap!important;
+  color:#24382f!important;
+  -webkit-text-fill-color:#24382f!important;
+}
+html.light-mode .adhkar-sticky-toolbar .content-toggle span,
+html.light-mode .adhkar-sticky-toolbar .content-toggle-label-text,
+html.light-mode body .adhkar-sticky-toolbar .content-toggle span,
+html.light-mode body .adhkar-sticky-toolbar .content-toggle-label-text{
+  display:inline!important;
+  color:#24382f!important;
+  -webkit-text-fill-color:#24382f!important;
+  opacity:1!important;
+  white-space:nowrap!important;
+}
+@media(max-width:720px){
+  html.light-mode .adhkar-sticky-toolbar .content-controls{gap:11px!important;}
+}
+@media(max-width:390px){
+  html.light-mode .adhkar-sticky-toolbar .content-controls{gap:8px!important;}
+  html.light-mode .adhkar-sticky-toolbar .content-toggle{font-size:11px!important;gap:5px!important;}
+}
+</style>
 </head>
 <body data-surah-arabic="المسد‎" data-surah-meta="The Palm Fiber · سورت 111 · 5 Ayahs · Meccan" data-surah-number="111" data-surah-page-key="Quran-ur/111 - al-masad-ur.html" data-surah-title="Al-Masad">
 <div class="container">
@@ -428,9 +473,9 @@ html.light-mode .adhkar-sticky-toolbar .content-toggle-label-text{
 <button aria-label="مطالعہ" class="surah-page-action" data-surah-page-action="reading" type="button"><svg viewbox="0 0 24 24"><path d="M4 5.5A2.5 2.5 0 0 1 6.5 3H20v17H6.5A2.5 2.5 0 0 0 4 22V5.5z"></path><path d="M8 7h8M8 11h8M8 15h5"></path></svg><span class="surah-page-action-label">مطالعہ</span></button>
 <button aria-label="save" class="surah-page-action" data-surah-page-action="save" type="button"><svg viewbox="0 0 24 24"><path d="M6 4.5A1.5 1.5 0 0 1 7.5 3h9A1.5 1.5 0 0 1 18 4.5V21l-6-3.5L6 21V4.5z"></path></svg><span class="surah-page-action-label">save</span></button>
 </div><div aria-label="متن دکھائیں" class="content-controls">
-<label class="content-toggle"><input checked="" data-layer-toggle="arabic" id="toggleArabic" type="checkbox"/><span class="content-toggle-label-text" style="color:#ffffff!important;-webkit-text-fill-color:#ffffff!important;opacity:1!important">عربی</span></label>
-<label class="content-toggle"><input checked="" data-layer-toggle="translit" id="toggleTranslit" type="checkbox"/><span class="content-toggle-label-text" style="color:#ffffff!important;-webkit-text-fill-color:#ffffff!important;opacity:1!important">تلفظ</span></label>
-<label class="content-toggle"><input checked="" data-layer-toggle="meaning" id="toggleMeaning" type="checkbox"/><span class="content-toggle-label-text" style="color:#ffffff!important;-webkit-text-fill-color:#ffffff!important;opacity:1!important">ترجمہ</span></label>
+<label class="content-toggle"><input checked="" data-layer-toggle="arabic" id="toggleArabic" type="checkbox"/><span class="content-toggle-label-text">عربی</span></label>
+<label class="content-toggle"><input checked="" data-layer-toggle="translit" id="toggleTranslit" type="checkbox"/><span class="content-toggle-label-text">تلفظ</span></label>
+<label class="content-toggle"><input checked="" data-layer-toggle="meaning" id="toggleMeaning" type="checkbox"/><span class="content-toggle-label-text">ترجمہ</span></label>
 </div></div>
 
 <h2><center>المسد‎</center></h2>
@@ -826,10 +871,12 @@ loadSurah();
       spacer.className='adhkar-sticky-spacer';
       toolbar.parentNode.insertBefore(spacer,toolbar);
     }
-    function forceWhiteLabels(){
+    function syncToolbarLabelColors(){
+      var isLight=document.documentElement.classList.contains('light-mode');
+      var labelColor=isLight?'#24382f':'#ffffff';
       toolbar.querySelectorAll('.content-toggle,.content-toggle span,.content-toggle-label-text').forEach(function(el){
-        el.style.setProperty('color','#ffffff','important');
-        el.style.setProperty('-webkit-text-fill-color','#ffffff','important');
+        el.style.setProperty('color',labelColor,'important');
+        el.style.setProperty('-webkit-text-fill-color',labelColor,'important');
         el.style.setProperty('opacity','1','important');
       });
       toolbar.querySelectorAll('.content-toggle input').forEach(function(el){
@@ -843,7 +890,7 @@ loadSurah();
       spacer.style.height='0px';
       var rect=toolbar.getBoundingClientRect();
       startTop=rect.top+(window.pageYOffset||document.documentElement.scrollTop||0);
-      forceWhiteLabels();
+      syncToolbarLabelColors();
     }
     function update(){
       var y=window.pageYOffset||document.documentElement.scrollTop||0;
@@ -860,7 +907,7 @@ loadSurah();
           spacer.style.height='0px';
         }
       }
-      forceWhiteLabels();
+      syncToolbarLabelColors();
     }
     measure(); update();
     window.addEventListener('scroll',update,{passive:true});
