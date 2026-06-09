@@ -695,78 +695,82 @@ html.light-mode .adhkar-sticky-toolbar .content-toggle{color:#ffffff!important;}
 /* BarakaWay fix: Quran toolbar layer labels forced white */
 .adhkar-sticky-toolbar .content-toggle,
 html body .adhkar-sticky-toolbar .content-toggle,
-html.dark-mode .adhkar-sticky-toolbar .content-toggle{
-  color:#ffffff!important;
-  opacity:1!important;
-}
+html.dark-mode .adhkar-sticky-toolbar .content-toggle,
 html.light-mode .adhkar-sticky-toolbar .content-toggle{
-  color:#111814!important;
+  color:#ffffff!important;
   opacity:1!important;
 }
 .adhkar-sticky-toolbar .content-toggle span,
 html body .adhkar-sticky-toolbar .content-toggle span{
-  color:inherit!important;
+  color:#ffffff!important;
   opacity:1!important;
 }
 </style>
 
-<style id="bw-light-mode-content-controls-fix">
+<style id="bw-uz-light-mode-toolbar-final-fix">
+/* Light mode only: match the dark-mode toolbar layout while keeping labels readable. */
+html.light-mode body .content-controls,
+html.light-mode body .content-controls.bw-controls-fixed,
 html.light-mode body .adhkar-sticky-toolbar .content-controls,
-html.light-mode body .content-controls{
+html.light-mode body .adhkar-sticky-toolbar .content-controls.bw-controls-fixed{
   display:flex!important;
   flex-direction:row!important;
   flex-wrap:nowrap!important;
   align-items:center!important;
   justify-content:center!important;
+  gap:18px!important;
 }
-html.light-mode body .adhkar-sticky-toolbar .content-toggle,
 html.light-mode body .content-controls .content-toggle,
-html.light-mode body .adhkar-sticky-toolbar .content-toggle span,
-html.light-mode body .content-controls .content-toggle span,
-html.light-mode body .content-toggle-label-text{
-  color:#111814!important;
-  -webkit-text-fill-color:#111814!important;
-  opacity:1!important;
-  white-space:nowrap!important;
-}
-html.light-mode body .adhkar-sticky-toolbar .content-toggle,
-html.light-mode body .content-controls .content-toggle{
+html.light-mode body .adhkar-sticky-toolbar .content-toggle{
   display:inline-flex!important;
   flex:0 0 auto!important;
-  width:auto!important;
-  min-width:0!important;
   align-items:center!important;
   justify-content:center!important;
-  gap:5px!important;
+  gap:7px!important;
+  white-space:nowrap!important;
+  color:#203126!important;
+  -webkit-text-fill-color:#203126!important;
+  opacity:1!important;
 }
-html.light-mode body .adhkar-sticky-toolbar .content-toggle input,
-html.light-mode body .content-controls .content-toggle input{
-  flex:0 0 auto!important;
+html.light-mode body .content-controls .content-toggle span,
+html.light-mode body .content-controls .content-toggle .content-toggle-label-text,
+html.light-mode body .adhkar-sticky-toolbar .content-toggle span,
+html.light-mode body .adhkar-sticky-toolbar .content-toggle .content-toggle-label-text{
+  color:#203126!important;
+  -webkit-text-fill-color:#203126!important;
+  opacity:1!important;
 }
-@media (max-width:700px){
+html.light-mode body .content-controls .content-toggle input,
+html.light-mode body .adhkar-sticky-toolbar .content-toggle input{
+  -webkit-text-fill-color:initial!important;
+}
+@media(max-width:720px){
+  html.light-mode body .content-controls,
+  html.light-mode body .content-controls.bw-controls-fixed,
   html.light-mode body .adhkar-sticky-toolbar .content-controls,
-  html.light-mode body .content-controls{
-    gap:10px!important;
+  html.light-mode body .adhkar-sticky-toolbar .content-controls.bw-controls-fixed{
+    gap:11px!important;
   }
-  html.light-mode body .adhkar-sticky-toolbar .content-toggle,
-  html.light-mode body .content-controls .content-toggle{
+  html.light-mode body .content-controls .content-toggle,
+  html.light-mode body .adhkar-sticky-toolbar .content-toggle{
     font-size:12px!important;
-    line-height:1!important;
+    gap:6px!important;
   }
 }
-@media (max-width:380px){
+@media(max-width:390px){
+  html.light-mode body .content-controls,
+  html.light-mode body .content-controls.bw-controls-fixed,
   html.light-mode body .adhkar-sticky-toolbar .content-controls,
-  html.light-mode body .content-controls{
-    gap:7px!important;
+  html.light-mode body .adhkar-sticky-toolbar .content-controls.bw-controls-fixed{
+    gap:8px!important;
   }
-  html.light-mode body .adhkar-sticky-toolbar .content-toggle,
-  html.light-mode body .content-controls .content-toggle{
+  html.light-mode body .content-controls .content-toggle,
+  html.light-mode body .adhkar-sticky-toolbar .content-toggle{
     font-size:11px!important;
-    gap:3px!important;
+    gap:5px!important;
   }
 }
 </style>
-
 </head>
 <body data-surah-arabic="الحاقة‎‎‎" data-surah-meta="69-sura · 52 oyat · Makkiy" data-surah-number="69" data-surah-page-key="Quran-uz/69 - al-haqqah-uz.html" data-surah-title="Al-Haqqa">
 <div class="container">
@@ -783,9 +787,9 @@ html.light-mode body .content-controls .content-toggle input{
 <button aria-label="Mavzu" class="surah-page-action" data-surah-page-action="theme" type="button"><svg viewbox="0 0 24 24"><path d="M21 14.5A8.5 8.5 0 0 1 9.5 3 9 9 0 1 0 21 14.5z"></path></svg><span class="surah-page-action-label">Mavzu</span></button>
 </div>
 <div aria-label="Matnni ko‘rsatish" class="content-controls">
-<label class="content-toggle"><input checked="" data-layer-toggle="arabic" id="toggleArabic" type="checkbox"/><span class="content-toggle-label-text">Arabcha</span></label>
-<label class="content-toggle"><input checked="" data-layer-toggle="translit" id="toggleTranslit" type="checkbox"/><span class="content-toggle-label-text">Transliteratsiya</span></label>
-<label class="content-toggle"><input checked="" data-layer-toggle="meaning" id="toggleMeaning" type="checkbox"/><span class="content-toggle-label-text">Tarjima</span></label>
+<label class="content-toggle"><input checked="" data-layer-toggle="arabic" id="toggleArabic" type="checkbox"/><span class="content-toggle-label-text" style="color:#ffffff!important;-webkit-text-fill-color:#ffffff!important;opacity:1!important">Arabcha</span></label>
+<label class="content-toggle"><input checked="" data-layer-toggle="translit" id="toggleTranslit" type="checkbox"/><span class="content-toggle-label-text" style="color:#ffffff!important;-webkit-text-fill-color:#ffffff!important;opacity:1!important">Transliteratsiya</span></label>
+<label class="content-toggle"><input checked="" data-layer-toggle="meaning" id="toggleMeaning" type="checkbox"/><span class="content-toggle-label-text" style="color:#ffffff!important;-webkit-text-fill-color:#ffffff!important;opacity:1!important">Tarjima</span></label>
 </div>
 <h2><center>الحاقة‎‎‎</center></h2>
 <p class="subtitle">69-sura · 52 oyat · Makkiy</p>
@@ -1227,36 +1231,32 @@ loadSurah();
 </script>
 <script id="bw-force-quran-toggle-labels-white">
 (function(){
-  function currentToggleLabelColor(){
-    var root=document.documentElement;
-    return root.classList.contains('light-mode') && !root.classList.contains('dark-mode') ? '#111814' : '#ffffff';
-  }
-  function forceToggleLabels(){
-    var c=currentToggleLabelColor();
+  function forceWhite(){
     document.querySelectorAll('.adhkar-sticky-toolbar .content-toggle, .content-controls .content-toggle').forEach(function(label){
-      label.style.setProperty('color',c,'important');
-      label.style.setProperty('-webkit-text-fill-color',c,'important');
+      label.style.setProperty('color','#ffffff','important');
+      label.style.setProperty('-webkit-text-fill-color','#ffffff','important');
       label.style.setProperty('opacity','1','important');
       label.childNodes.forEach(function(n){
         if(n.nodeType===3 && n.nodeValue.trim()){
           var span=document.createElement('span');
           span.className='content-toggle-label-text';
           span.textContent=n.nodeValue;
+          span.style.setProperty('color','#ffffff','important');
+          span.style.setProperty('-webkit-text-fill-color','#ffffff','important');
+          span.style.setProperty('opacity','1','important');
           label.replaceChild(span,n);
         }
       });
       label.querySelectorAll('span').forEach(function(span){
-        span.style.setProperty('color',c,'important');
-        span.style.setProperty('-webkit-text-fill-color',c,'important');
+        span.style.setProperty('color','#ffffff','important');
+        span.style.setProperty('-webkit-text-fill-color','#ffffff','important');
         span.style.setProperty('opacity','1','important');
-        span.style.setProperty('white-space','nowrap','important');
       });
     });
   }
-  if(document.readyState==='loading') document.addEventListener('DOMContentLoaded',forceToggleLabels); else forceToggleLabels();
-  window.addEventListener('load',forceToggleLabels);
-  document.addEventListener('scroll',forceToggleLabels,{passive:true});
-  document.addEventListener('click',function(){ setTimeout(forceToggleLabels,0); },true);
+  if(document.readyState==='loading') document.addEventListener('DOMContentLoaded',forceWhite); else forceWhite();
+  window.addEventListener('load',forceWhite);
+  document.addEventListener('scroll',forceWhite,{passive:true});
 })();
 </script>
 </body>
