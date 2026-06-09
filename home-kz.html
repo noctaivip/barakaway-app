@@ -14789,7 +14789,7 @@ html.light-mode .bw-universal-pro-close{background:#fff;color:#172019;border-col
 var BW_LANG = 'kz';
 var BW_LABELS = {"next": "Келесі", "finish": "Аяқтау", "close": "Жабу", "title": "PRO сұрақ"};
 var BW_RTL = false;
-var BW_RESET_ONCE_KEY = 'bw_reset_once_all_tasks_' + BW_LANG + '_20260530_next_day_v5';
+var BW_RESET_ONCE_KEY = 'bw_reset_once_all_tasks_' + BW_LANG + '_20260530_next_day_v6';
 var BW_PRO_CURSOR_KEY = 'bw_pro_micro_cursor_' + BW_LANG + '_v1';
 /* BW_NEXT_DAY_TEST_RESET_V4 */
 
@@ -15039,7 +15039,7 @@ function setupProModal(){
     index=0; render(); modal.classList.add('open'); return false;
   }
   function close(){ modal.classList.remove('open'); }
-  nextBtn.addEventListener('click', function(){ if(!answered) return; if(index<pack.length-1){index++; render();} else close(); });
+  nextBtn.addEventListener('click', function(){ if(!answered) return; if(index<pack.length-1){index++; render();} else { try{ localStorage.setItem('barakaway_pro_micro_done_' + BW_LANG + '_' + todayKey(), '1'); }catch(e){} controlProVisibility(); close(); } });
   closeBtn.addEventListener('click', close);
   modal.addEventListener('click', function(e){ if(e.target===modal) close(); });
   trigger.removeAttribute('href'); trigger.removeAttribute('target'); trigger.style.cursor='pointer';
@@ -15156,7 +15156,7 @@ window.addEventListener('load', function(){ setTimeout(controlProVisibility, 120
   'use strict';
   var LANG='kz';
   function todayKey(){var d=new Date();return d.getFullYear()+'-'+String(d.getMonth()+1).padStart(2,'0')+'-'+String(d.getDate()).padStart(2,'0');}
-  function isPro(){try{return localStorage.getItem('barakaway_pro')==='true'||localStorage.getItem('barakaway_premium_unlocked')==='1'||localStorage.getItem('barakaway_premium')==='1';}catch(e){return false;}}
+  function isPro(){try{var pro=localStorage.getItem('barakaway_pro');var plan=localStorage.getItem('barakaway_pro_plan');return /^(1|true|yes|active|unlocked|premium|pro)$/i.test(String(pro||''))||(plan&&String(plan).trim()!==''&&String(plan).trim()!=='free')||localStorage.getItem('barakaway_premium_unlocked')==='1'||localStorage.getItem('barakaway_premium')==='1';}catch(e){return false;}}
   function microDone(){
     var day=todayKey();
     var keys=[
@@ -15179,12 +15179,14 @@ window.addEventListener('load', function(){ setTimeout(controlProVisibility, 120
     var link=document.getElementById('dailyMicroProUpsell');
     if(!link)return;
     var ready=microDone();
+    var done=proExtraDone();
     link.classList.toggle('is-visible',ready);
-    link.classList.toggle('bw-pro-micro-done',proExtraDone());
+    link.classList.toggle('bw-pro-micro-done',done);
+    link.style.display=ready?'flex':'none';
     link.setAttribute('href',isPro()?'javascript:void(0)':'pro-kz.html#micro');
     link.setAttribute('aria-hidden',ready?'false':'true');
     var status=link.querySelector('.bw-micro-pro-status');
-    if(status)status.style.display=proExtraDone()?'inline-flex':'none';
+    if(status){status.textContent='✓';status.style.display=done?'inline-flex':'none';}
   }
   if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',sync,{once:true});else sync();
   window.addEventListener('pageshow',sync);
@@ -15261,6 +15263,61 @@ window.addEventListener('load', function(){ setTimeout(controlProVisibility, 120
   setTimeout(placeStatusStars, 200);
   setTimeout(placeStatusStars, 700);
   setTimeout(placeStatusStars, 1500);
+})();
+</script>
+
+
+<script id="bw-kz-plus5-final-flow-guard-v1">
+(function(){
+  'use strict';
+  var LANG='kz';
+  function todayKey(){var d=new Date();return d.getFullYear()+'-'+String(d.getMonth()+1).padStart(2,'0')+'-'+String(d.getDate()).padStart(2,'0');}
+  function read(k){try{return localStorage.getItem(k);}catch(e){return null;}}
+  function isPro(){try{var pro=read('barakaway_pro');var plan=read('barakaway_pro_plan');return /^(1|true|yes|active|unlocked|premium|pro)$/i.test(String(pro||''))||(plan&&String(plan).trim()!==''&&String(plan).trim()!=='free')||read('barakaway_premium_unlocked')==='1'||read('barakaway_premium')==='1';}catch(e){return false;}}
+  function microDone(){
+    var t=todayKey();
+    var keys=[
+      'barakaway_micro_answer_'+LANG+'_'+t,
+      'barakaway_today_'+LANG+'_'+t+'_micro',
+      'barakaway_today_'+LANG+'_v2_'+t+'_micro',
+      'barakaway_today_'+LANG+'_v3_'+t+'_micro',
+      'barakaway_today_'+LANG+'_final_'+t+'_micro',
+      'bw_final_done_v2_'+LANG+'_'+t+'_micro',
+      'bw_daily_done_v2_'+LANG+'_'+t+'_micro'
+    ];
+    for(var i=0;i<keys.length;i++){var v=read(keys[i]); if(v==='1'||(keys[i].indexOf('micro_answer')!==-1&&v!==null)) return true;}
+    return false;
+  }
+  function proDone(){var t=todayKey();return read('barakaway_pro_micro_done_'+LANG+'_'+t)==='1'||read('barakaway_pro_micro_done_'+t)==='1';}
+  function syncPlus5(){
+    var link=document.getElementById('dailyMicroProUpsell'); if(!link) return;
+    var ready=microDone(), done=proDone();
+    link.classList.toggle('is-visible',ready);
+    link.classList.toggle('bw-pro-micro-done',done);
+    link.style.display=ready?'flex':'none';
+    link.setAttribute('aria-hidden',ready?'false':'true');
+    link.setAttribute('href',isPro()?'javascript:void(0)':'pro-kz.html#micro');
+    var status=document.getElementById('dailyMicroProStatus');
+    if(status){status.textContent='✓';status.style.display=done?'inline-flex':'none';}
+  }
+  document.addEventListener('click',function(e){
+    var link=e.target&&e.target.closest?e.target.closest('#dailyMicroProUpsell'):null;
+    if(!link) return;
+    if(!microDone()){
+      e.preventDefault(); e.stopPropagation(); if(e.stopImmediatePropagation)e.stopImmediatePropagation();
+      syncPlus5(); return false;
+    }
+    if(!isPro()){
+      e.preventDefault(); e.stopPropagation(); if(e.stopImmediatePropagation)e.stopImmediatePropagation();
+      window.location.href='pro-kz.html#micro'; return false;
+    }
+  },true);
+  if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',syncPlus5,{once:true});else syncPlus5();
+  window.addEventListener('load',function(){setTimeout(syncPlus5,60);setTimeout(syncPlus5,500);});
+  window.addEventListener('pageshow',syncPlus5);
+  window.addEventListener('storage',syncPlus5);
+  document.addEventListener('click',function(){setTimeout(syncPlus5,80);setTimeout(syncPlus5,500);},true);
+  setInterval(syncPlus5,350);
 })();
 </script>
 
