@@ -458,6 +458,36 @@ function activeKey() {
 
 '.bottom-app-nav-item[data-nav="favorites"] .bottom-app-nav-label{' +
   'color:inherit !important;' +
+'}' +
+
+'.bottom-app-nav-item[data-nav="chat"] .bottom-app-nav-icon svg,' +
+'.bottom-app-nav-item[data-nav="chat"] .bottom-app-nav-icon svg path{' +
+  'stroke:#d7c07a !important;' +
+  'color:#d7c07a !important;' +
+'}' +
+
+'.bottom-app-nav-item[data-nav="chat"] .bottom-app-nav-label{' +
+  'color:#d7c07a !important;' +
+'}' +
+
+'.bottom-app-nav-item[data-nav="chat"].active,' +
+'.bottom-app-nav-item[data-nav="chat"].is-active{' +
+  'background:linear-gradient(135deg,rgba(215,192,122,.20),rgba(58,130,82,.24)) !important;' +
+  'border:1px solid rgba(215,192,122,.45) !important;' +
+  'box-shadow:inset 0 0 0 1px rgba(255,255,255,.04),0 10px 24px rgba(0,0,0,.22) !important;' +
+'}' +
+
+'.bottom-app-nav-item[data-nav="chat"].active .bottom-app-nav-icon svg,' +
+'.bottom-app-nav-item[data-nav="chat"].is-active .bottom-app-nav-icon svg,' +
+'.bottom-app-nav-item[data-nav="chat"].active .bottom-app-nav-icon svg path,' +
+'.bottom-app-nav-item[data-nav="chat"].is-active .bottom-app-nav-icon svg path{' +
+  'stroke:#d7c07a !important;' +
+  'color:#d7c07a !important;' +
+'}' +
+
+'.bottom-app-nav-item[data-nav="chat"].active .bottom-app-nav-label,' +
+'.bottom-app-nav-item[data-nav="chat"].is-active .bottom-app-nav-label{' +
+  'color:#d7c07a !important;' +
 '}';
 
     document.head.appendChild(style);
