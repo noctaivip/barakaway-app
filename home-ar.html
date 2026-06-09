@@ -4802,6 +4802,28 @@ html.light-mode [data-task-meta="article"] *{
 }
 </style>
 
+
+<style id="barakaway-home-status-stars-style">
+/* BarakaWay: mobile PRO/support status stars under the theme switch */
+.bw-mobile-status-stars{display:none;}
+@media(max-width:700px){
+  .bw-mobile-status-stars{
+    display:none;align-items:center;justify-content:center;gap:6px;
+    margin:-2px auto 8px;min-height:34px;padding:6px 14px;border-radius:999px;
+    width:max-content;max-width:92%;position:relative;z-index:3;overflow:hidden;
+    letter-spacing:1px;font-size:20px;line-height:1;user-select:none;-webkit-tap-highlight-color:transparent;
+    background:linear-gradient(135deg,rgba(215,192,122,.18),rgba(102,198,128,.13),rgba(20,31,42,.62));
+    border:1px solid rgba(215,192,122,.46);
+    box-shadow:0 10px 26px rgba(0,0,0,.28),inset 0 1px 0 rgba(255,255,255,.08),0 0 18px rgba(215,192,122,.18);
+  }
+  .bw-mobile-status-stars.is-visible{display:flex;}
+  .bw-mobile-status-stars::before{content:"";position:absolute;inset:-1px;border-radius:inherit;background:linear-gradient(120deg,transparent 0%,rgba(255,255,255,.16) 45%,transparent 72%);opacity:.55;pointer-events:none;}
+  .bw-mobile-status-stars .bw-status-star{position:relative;z-index:1;display:inline-flex;align-items:center;justify-content:center;color:#f6d36b;text-shadow:0 1px 0 rgba(82,54,4,.8),0 0 10px rgba(246,211,107,.42),0 0 22px rgba(215,192,122,.24);filter:drop-shadow(0 2px 5px rgba(0,0,0,.38));}
+  html.light-mode .bw-mobile-status-stars{background:linear-gradient(135deg,rgba(255,249,231,.92),rgba(238,248,241,.96));border-color:rgba(141,107,22,.32);box-shadow:0 10px 22px rgba(20,34,25,.10),inset 0 1px 0 rgba(255,255,255,.85),0 0 16px rgba(215,192,122,.16);}
+  html.light-mode .bw-mobile-status-stars .bw-status-star{color:#b8860b;text-shadow:0 1px 0 rgba(255,255,255,.75),0 0 9px rgba(184,134,11,.22);}
+  body:not(.bw-pro-active) .bw-mobile-status-stars{display:none !important;}
+}
+</style>
 </head>
 <body>
 <div class="mobile-top-controls">
@@ -4845,7 +4867,8 @@ html.light-mode [data-task-meta="article"] *{
 </div>
 <div class="container">
 <div class="brand-prayer-hero">
-  <button class="brand-signature" id="brandInstallTrigger" type="button" aria-label="BarakaWay">
+  <div class="bw-mobile-status-stars" id="bwMobileStatusStars" aria-label="BarakaWay status stars"></div>
+<button class="brand-signature" id="brandInstallTrigger" type="button" aria-label="BarakaWay">
 <span class="brand-letter-main">Way</span><span class="brand-letter-accent">Baraka</span>
   </button>
 <div aria-label="فتح صفحة مواقيت الصلاة" class="home-prayer-widget" onclick="openPrayerTimesPage(event)" onkeydown="openPrayerTimesPageFromKeyboard(event)" role="link" tabindex="0">
@@ -10652,5 +10675,32 @@ window.addEventListener('load',function(){setTimeout(sync,80);setTimeout(sync,50
 })();
 </script>
 
+
+<script id="barakaway-home-status-stars-script">
+(function(){
+  function read(key){try{return localStorage.getItem(key)||"";}catch(e){return "";}}
+  function statusStarCount(){
+    var isPro=read('barakaway_pro')==='true';
+    if(!isPro) return 0;
+    var level=read('barakaway_support_level');
+    var map={supporter:2,patron:3,benefactor:4,legacy:5};
+    return map[level] || 1;
+  }
+  function renderStatusStars(){
+    var box=document.getElementById('bwMobileStatusStars');
+    if(!box) return;
+    var count=statusStarCount();
+    document.body.classList.toggle('bw-pro-active',count>0);
+    if(count<=0){box.classList.remove('is-visible');box.innerHTML='';box.setAttribute('aria-hidden','true');return;}
+    box.setAttribute('aria-hidden','false');
+    box.classList.add('is-visible');
+    box.innerHTML=Array.from({length:count},function(){return '<span class="bw-status-star" aria-hidden="true">★</span>';}).join('');
+  }
+  if(document.readyState==='loading'){document.addEventListener('DOMContentLoaded',renderStatusStars);}else{renderStatusStars();}
+  window.addEventListener('storage',renderStatusStars);
+  window.addEventListener('barakaway:pro-status-change',renderStatusStars);
+  window.addEventListener('barakaway:support-status-change',renderStatusStars);
+})();
+</script>
 </body>
 </html>
