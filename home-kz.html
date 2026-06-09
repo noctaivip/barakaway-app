@@ -5036,7 +5036,7 @@ html.light-mode [data-task-meta="article"] *{
     </div>
   </div>
 
-<a class="bw-micro-pro-upsell" href="pro-ru.html#micro" id="dailyMicroProUpsell" role="button">
+<a class="bw-micro-pro-upsell" href="pro-kz.html#micro" id="dailyMicroProUpsell" role="button">
   <span class="bw-micro-pro-title">Pro нұсқасында күн сайын +5 сұрақ</span>
   <span class="bw-micro-pro-status" id="dailyMicroProStatus" aria-hidden="true">✓</span>
 </a>
@@ -14276,14 +14276,14 @@ html.dark-mode .bw-pro-micro-option-btn{background:#1d242c;border:1px solid #2a3
   function esc(v){return clean(v).replace(/[&<>\"]/g,function(ch){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[ch];});}
   function todayKey(){var d=new Date();return d.getFullYear()+'-'+String(d.getMonth()+1).padStart(2,'0')+'-'+String(d.getDate()).padStart(2,'0');}
   function dateSeed(){var d=new Date();return d.getFullYear()*10000+(d.getMonth()+1)*100+d.getDate();}
-  function doneKey(){return 'barakaway_pro_micro_done_'+LANG+'_'+todayKey();}
+  function doneKey(){return 'barakaway_pro_micro_completed_v2_'+LANG+'_'+todayKey();}
   function isDone(){try{return localStorage.getItem(doneKey())==='1';}catch(e){return false;}}
   function markDone(){try{localStorage.setItem(doneKey(),'1');}catch(e){}}
   function resetBrokenDoneOnce(){
     try{
       var marker='bw_kz_micro_pro_fix_reset_20260530_v4';
       if(localStorage.getItem(marker)==='1')return;
-      localStorage.removeItem(doneKey());
+      localStorage.removeItem('barakaway_pro_micro_done_'+LANG+'_'+todayKey());
       localStorage.removeItem('barakaway_pro_micro_done_'+todayKey());
       localStorage.setItem(marker,'1');
     }catch(e){}
@@ -14336,7 +14336,7 @@ html.dark-mode .bw-pro-micro-option-btn{background:#1d242c;border:1px solid #2a3
     link.classList.toggle('is-visible', dailyTaskDone('micro'));
     link.classList.toggle('bw-pro-micro-done',done);
     link.setAttribute('aria-label',done?LABELS.ariaDone:LABELS.ariaOpen);
-    link.setAttribute('href',isPro()?'javascript:void(0)':'pro-ru.html#micro');
+    link.setAttribute('href',isPro()?'javascript:void(0)':'pro-kz.html#micro');
     var status=link.querySelector('.bw-micro-pro-status');
     if(!status){
       status=document.createElement('span');
@@ -14853,7 +14853,7 @@ function controlProVisibility(){
   var visible = getMicroDone();
   up.classList.toggle('is-visible', !!visible);
   up.style.display = visible ? 'flex' : 'none';
-  up.setAttribute('href', hasProAccess() ? 'javascript:void(0)' : 'pro-ru.html#micro');
+  up.setAttribute('href', hasProAccess() ? 'javascript:void(0)' : 'pro-kz.html#micro');
 }
 
 function normalizeQuestions(){
@@ -14948,7 +14948,7 @@ function setupProModal(){
   function open(e){
     if(e){ e.preventDefault(); e.stopPropagation(); if(e.stopImmediatePropagation)e.stopImmediatePropagation(); }
     if(!getMicroDone()) { controlProVisibility(); return false; }
-    if(!hasProAccess()) { window.location.href = 'pro-ru.html#micro'; return false; }
+    if(!hasProAccess()) { window.location.href = 'pro-kz.html#micro'; return false; }
     pack = takeFive(); if(!pack.length) return false;
     index=0; render(); modal.classList.add('open'); return false;
   }
@@ -15050,7 +15050,7 @@ window.addEventListener('load', function(){ setTimeout(controlProVisibility, 120
     var visible = taskDone('micro');
     link.classList.toggle('is-visible', visible);
     link.style.display = visible ? 'flex' : 'none';
-    link.setAttribute('href', hasProAccess() ? 'javascript:void(0)' : 'pro-ru.html#micro');
+    link.setAttribute('href', hasProAccess() ? 'javascript:void(0)' : 'pro-kz.html#micro');
     link.classList.toggle('bw-pro-micro-done', visible && proQuestionsDone());
     var status = link.querySelector('.bw-micro-pro-status');
     if(status) status.style.display = (visible && proQuestionsDone()) ? 'inline-flex' : 'none';
@@ -15095,7 +15095,7 @@ window.addEventListener('load', function(){ setTimeout(controlProVisibility, 120
     var ready=microDone();
     link.classList.toggle('is-visible',ready);
     link.classList.toggle('bw-pro-micro-done',proExtraDone());
-    link.setAttribute('href',isPro()?'javascript:void(0)':'pro-ru.html#micro');
+    link.setAttribute('href',isPro()?'javascript:void(0)':'pro-kz.html#micro');
     link.setAttribute('aria-hidden',ready?'false':'true');
     var status=link.querySelector('.bw-micro-pro-status');
     if(status)status.style.display=proExtraDone()?'inline-flex':'none';
@@ -15105,67 +15105,6 @@ window.addEventListener('load', function(){ setTimeout(controlProVisibility, 120
   window.addEventListener('storage',sync);
   document.addEventListener('click',function(){setTimeout(sync,30);setTimeout(sync,250);setTimeout(sync,900);},true);
   setTimeout(sync,100);setTimeout(sync,700);setInterval(sync,500);
-})();
-</script>
-
-<script id="bw-kz-pro-micro-status-link-fix-v1">
-(function(){
-  'use strict';
-  var LANG='kz';
-  function todayKey(){
-    var d=new Date();
-    return d.getFullYear()+'-'+String(d.getMonth()+1).padStart(2,'0')+'-'+String(d.getDate()).padStart(2,'0');
-  }
-  function isPro(){
-    try{return localStorage.getItem('barakaway_pro')==='true';}catch(e){return false;}
-  }
-  function microDone(){
-    var card=document.getElementById('dailyMicroKnowledgeCard');
-    var status=document.getElementById('dailyMicroKnowledgeStatus');
-    if(card){
-      if(card.classList.contains('bw-final-done')||card.classList.contains('bw-task-done')||card.classList.contains('task-done')||card.classList.contains('micro-answered')||card.getAttribute('aria-disabled')==='true')return true;
-    }
-    return !!(status && String(status.textContent||'').replace(/\s+/g,'').trim()==='✓');
-  }
-  function clearNonProDone(){
-    if(isPro())return;
-    try{
-      localStorage.removeItem('barakaway_pro_micro_done_'+todayKey());
-      localStorage.removeItem('barakaway_pro_micro_done_'+LANG+'_'+todayKey());
-    }catch(e){}
-  }
-  function proExtraDone(){
-    if(!isPro())return false;
-    try{return localStorage.getItem('barakaway_pro_micro_done_'+todayKey())==='1'||localStorage.getItem('barakaway_pro_micro_done_'+LANG+'_'+todayKey())==='1';}catch(e){return false;}
-  }
-  function sync(){
-    var link=document.getElementById('dailyMicroProUpsell');
-    if(!link)return;
-    clearNonProDone();
-    var ready=microDone();
-    var done=proExtraDone();
-    link.classList.toggle('is-visible',ready);
-    link.classList.toggle('bw-pro-micro-done',done);
-    link.setAttribute('href',isPro()?'javascript:void(0)':'pro-ru.html#micro');
-    link.setAttribute('aria-hidden',ready?'false':'true');
-    var status=link.querySelector('.bw-micro-pro-status');
-    if(status)status.style.display=done?'inline-flex':'none';
-  }
-  document.addEventListener('click',function(event){
-    var link=event.target&&event.target.closest?event.target.closest('#dailyMicroProUpsell'):null;
-    if(!link)return;
-    sync();
-    if(!isPro()){
-      event.preventDefault();
-      event.stopImmediatePropagation();
-      window.location.href='pro-ru.html#micro';
-    }
-  },true);
-  if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',sync,{once:true});else sync();
-  window.addEventListener('pageshow',sync);
-  window.addEventListener('storage',sync);
-  [50,200,700,1500].forEach(function(t){setTimeout(sync,t);});
-  setInterval(sync,400);
 })();
 </script>
 </body>
