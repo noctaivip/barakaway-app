@@ -15207,6 +15207,16 @@ window.addEventListener('load', function(){ setTimeout(controlProVisibility, 120
     }catch(e){return false;}
   }
   function mainMicroDone(){
+    var card=document.getElementById('dailyMicroKnowledgeCard');
+    var status=document.getElementById('dailyMicroKnowledgeStatus');
+    if(card){
+      var classes=['bw-final-done','bw-task-done','task-done','goal-done','micro-answered','done','completed','is-done'];
+      for(var i=0;i<classes.length;i++){
+        if(card.classList.contains(classes[i])) return true;
+      }
+      if(card.getAttribute('aria-disabled')==='true' || card.getAttribute('data-bw-done')==='1') return true;
+    }
+    if(status && String(status.textContent||'').replace(/\s+/g,'').trim()==='✓') return true;
     var day=dayKey();
     return get('barakaway_today_'+LANG+'_'+day+'_micro')==='1' ||
            get('barakaway_micro_answer_'+LANG+'_'+day)!==null;
