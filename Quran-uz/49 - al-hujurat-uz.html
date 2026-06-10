@@ -771,7 +771,39 @@ html.light-mode body .adhkar-sticky-toolbar .content-toggle input{
   }
 }
 </style>
-<style id="uz-lightmode-text-fix">html.light-mode .content-toggle,html.light-mode .content-toggle span,html.light-mode .content-toggle-label-text{color:#203126!important;-webkit-text-fill-color:#203126!important;}html.light-mode .ayah-translit{color:#111814!important;}html.light-mode .ayah-meaning{color:rgba(17,24,20,.72)!important;}</style></head>
+<style id="uz-lightmode-text-fix">html.light-mode .content-toggle,html.light-mode .content-toggle span,html.light-mode .content-toggle-label-text{color:#203126!important;-webkit-text-fill-color:#203126!important;}html.light-mode .ayah-translit{color:#111814!important;}html.light-mode .ayah-meaning{color:rgba(17,24,20,.72)!important;}</style>
+<style id="uz-lightmode-readable-final-v2">
+/* Final Uzbek light-mode readability fix: labels, transliteration and translation are dark only in light mode. */
+html.light-mode body .content-controls .content-toggle,
+html.light-mode body .content-controls .content-toggle span,
+html.light-mode body .content-controls .content-toggle .content-toggle-label-text,
+html.light-mode body .adhkar-sticky-toolbar .content-toggle,
+html.light-mode body .adhkar-sticky-toolbar .content-toggle span,
+html.light-mode body .adhkar-sticky-toolbar .content-toggle .content-toggle-label-text{
+  color:#203126!important;
+  -webkit-text-fill-color:#203126!important;
+  opacity:1!important;
+}
+html.light-mode body .ayah-translit{
+  color:#111814!important;
+  -webkit-text-fill-color:#111814!important;
+}
+html.light-mode body .ayah-meaning{
+  color:rgba(17,24,20,.78)!important;
+  -webkit-text-fill-color:rgba(17,24,20,.78)!important;
+}
+html.dark-mode body .content-controls .content-toggle,
+html.dark-mode body .content-controls .content-toggle span,
+html.dark-mode body .content-controls .content-toggle .content-toggle-label-text,
+html.dark-mode body .adhkar-sticky-toolbar .content-toggle,
+html.dark-mode body .adhkar-sticky-toolbar .content-toggle span,
+html.dark-mode body .adhkar-sticky-toolbar .content-toggle .content-toggle-label-text{
+  color:#ffffff!important;
+  -webkit-text-fill-color:#ffffff!important;
+  opacity:1!important;
+}
+</style>
+</head>
 <body data-surah-arabic="الحجرات‎‎‎‎" data-surah-meta="49-sura · 18 oyat · Madaniy" data-surah-number="49" data-surah-page-key="Quran-uz/49 - al-hujurat-uz.html" data-surah-title="Al-Hujurot">
 <div class="container">
 <h1>Al-Hujurot</h1>
@@ -787,9 +819,9 @@ html.light-mode body .adhkar-sticky-toolbar .content-toggle input{
 <button aria-label="Mavzu" class="surah-page-action" data-surah-page-action="theme" type="button"><svg viewbox="0 0 24 24"><path d="M21 14.5A8.5 8.5 0 0 1 9.5 3 9 9 0 1 0 21 14.5z"></path></svg><span class="surah-page-action-label">Mavzu</span></button>
 </div>
 <div aria-label="Matnni ko‘rsatish" class="content-controls">
-<label class="content-toggle"><input checked="" data-layer-toggle="arabic" id="toggleArabic" type="checkbox"/><span class="content-toggle-label-text" style="color:#ffffff!important;-webkit-text-fill-color:#ffffff!important;opacity:1!important">Arabcha</span></label>
-<label class="content-toggle"><input checked="" data-layer-toggle="translit" id="toggleTranslit" type="checkbox"/><span class="content-toggle-label-text" style="color:#ffffff!important;-webkit-text-fill-color:#ffffff!important;opacity:1!important">Transliteratsiya</span></label>
-<label class="content-toggle"><input checked="" data-layer-toggle="meaning" id="toggleMeaning" type="checkbox"/><span class="content-toggle-label-text" style="color:#ffffff!important;-webkit-text-fill-color:#ffffff!important;opacity:1!important">Tarjima</span></label>
+<label class="content-toggle"><input checked="" data-layer-toggle="arabic" id="toggleArabic" type="checkbox"/><span class="content-toggle-label-text">Arabcha</span></label>
+<label class="content-toggle"><input checked="" data-layer-toggle="translit" id="toggleTranslit" type="checkbox"/><span class="content-toggle-label-text">Transliteratsiya</span></label>
+<label class="content-toggle"><input checked="" data-layer-toggle="meaning" id="toggleMeaning" type="checkbox"/><span class="content-toggle-label-text">Tarjima</span></label>
 </div>
 <h2><center>الحجرات‎‎‎‎</center></h2>
 <p class="subtitle">49-sura · 18 oyat · Madaniy</p>
@@ -1231,32 +1263,31 @@ loadSurah();
 </script>
 <script id="bw-force-quran-toggle-labels-white">
 (function(){
-  function forceWhite(){
+  function applyToggleLabelColor(){
+    var isLight=document.documentElement.classList.contains('light-mode')&&!document.documentElement.classList.contains('dark-mode');
+    var color=isLight?'#203126':'#ffffff';
     document.querySelectorAll('.adhkar-sticky-toolbar .content-toggle, .content-controls .content-toggle').forEach(function(label){
-      label.style.setProperty('color','#ffffff','important');
-      label.style.setProperty('-webkit-text-fill-color','#ffffff','important');
+      label.style.setProperty('color',color,'important');
+      label.style.setProperty('-webkit-text-fill-color',color,'important');
       label.style.setProperty('opacity','1','important');
       label.childNodes.forEach(function(n){
         if(n.nodeType===3 && n.nodeValue.trim()){
           var span=document.createElement('span');
           span.className='content-toggle-label-text';
           span.textContent=n.nodeValue;
-          span.style.setProperty('color','#ffffff','important');
-          span.style.setProperty('-webkit-text-fill-color','#ffffff','important');
-          span.style.setProperty('opacity','1','important');
           label.replaceChild(span,n);
         }
       });
       label.querySelectorAll('span').forEach(function(span){
-        span.style.setProperty('color','#ffffff','important');
-        span.style.setProperty('-webkit-text-fill-color','#ffffff','important');
+        span.style.setProperty('color',color,'important');
+        span.style.setProperty('-webkit-text-fill-color',color,'important');
         span.style.setProperty('opacity','1','important');
       });
     });
   }
-  if(document.readyState==='loading') document.addEventListener('DOMContentLoaded',forceWhite); else forceWhite();
-  window.addEventListener('load',forceWhite);
-  document.addEventListener('scroll',forceWhite,{passive:true});
+  document.addEventListener('DOMContentLoaded',applyToggleLabelColor);
+  document.addEventListener('click',function(){setTimeout(applyToggleLabelColor,0);},true);
+  new MutationObserver(applyToggleLabelColor).observe(document.documentElement,{attributes:true,attributeFilter:['class']});
 })();
 </script>
 </body>
