@@ -438,6 +438,40 @@ html.light-mode .adhkar-sticky-toolbar .content-toggle span,
 html.light-mode .adhkar-sticky-toolbar .content-toggle-label-text{
   color:#1f2a24!important;
   -webkit-text-fill-color:#1f2a24!important;
+  opacity:1!important;
+}
+html.light-mode .adhkar-sticky-toolbar .content-controls,
+html.light-mode body .adhkar-sticky-toolbar .content-controls,
+html.light-mode body .adhkar-sticky-toolbar .content-controls.bw-controls-fixed{
+  display:flex!important;
+  flex-direction:row!important;
+  flex-wrap:nowrap!important;
+  align-items:center!important;
+  justify-content:center!important;
+  gap:8px!important;
+  height:auto!important;
+  min-height:0!important;
+  padding:0!important;
+}
+html.light-mode .adhkar-sticky-toolbar .content-toggle,
+html.light-mode body .adhkar-sticky-toolbar .content-toggle{
+  display:inline-flex!important;
+  flex-direction:row!important;
+  align-items:center!important;
+  justify-content:center!important;
+  flex:0 1 auto!important;
+  white-space:nowrap!important;
+  color:#1f2a24!important;
+  -webkit-text-fill-color:#1f2a24!important;
+  background:transparent!important;
+  border:0!important;
+  box-shadow:none!important;
+  padding:0!important;
+  margin:0!important;
+}
+html.light-mode .adhkar-sticky-toolbar .content-toggle-label-text{
+  display:inline!important;
+  visibility:visible!important;
 }
 @media(max-width:720px){
   .adhkar-sticky-toolbar{
@@ -500,9 +534,9 @@ html.light-mode .adhkar-sticky-toolbar .content-toggle-label-text{
 <button aria-label="Сақтау" class="surah-page-action" data-surah-page-action="save" type="button"><svg viewbox="0 0 24 24"><path d="M6 4.5A1.5 1.5 0 0 1 7.5 3h9A1.5 1.5 0 0 1 18 4.5V21l-6-3.5L6 21V4.5z"></path></svg><span class="surah-page-action-label">Сақтау</span></button>
 </div>
 <div aria-label="Мәтінді көрсету" class="content-controls">
-<label class="content-toggle"><input checked="" data-layer-toggle="arabic" id="toggleArabic" type="checkbox"/><span class="content-toggle-label-text" >Арабша</span></label>
-<label class="content-toggle"><input checked="" data-layer-toggle="translit" id="toggleTranslit" type="checkbox"/><span class="content-toggle-label-text" >Транскрипция</span></label>
-<label class="content-toggle"><input checked="" data-layer-toggle="meaning" id="toggleMeaning" type="checkbox"/><span class="content-toggle-label-text" >Аударма</span></label>
+<label class="content-toggle"><input checked="" data-layer-toggle="arabic" id="toggleArabic" type="checkbox"/><span class="content-toggle-label-text">Арабша</span></label>
+<label class="content-toggle"><input checked="" data-layer-toggle="translit" id="toggleTranslit" type="checkbox"/><span class="content-toggle-label-text">Транскрипция</span></label>
+<label class="content-toggle"><input checked="" data-layer-toggle="meaning" id="toggleMeaning" type="checkbox"/><span class="content-toggle-label-text">Аударма</span></label>
 </div>
 </div>
 <h2><center>النازعات</center></h2>
@@ -857,9 +891,11 @@ loadSurah();
       }
     }
     function forceWhiteLabels(){
+      var isDark=document.documentElement.classList.contains("dark-mode");
+      var labelColor=isDark?"#ffffff":"#1f2a24";
       toolbar.querySelectorAll(".content-toggle-label-text,.content-toggle span").forEach(function(el){
-        el.style.setProperty("color","#ffffff","important");
-        el.style.setProperty("-webkit-text-fill-color","#ffffff","important");
+        el.style.setProperty("color",labelColor,"important");
+        el.style.setProperty("-webkit-text-fill-color",labelColor,"important");
         el.style.setProperty("opacity","1","important");
       });
     }
