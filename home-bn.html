@@ -4766,6 +4766,58 @@ html.light-mode [data-task-meta="article"] *{
 }
 </style>
 
+
+<style id="barakaway-home-status-stars-style">
+/* BarakaWay: mobile PRO/support status stars under the theme switch */
+.bw-mobile-status-stars{display:none;}
+@media(max-width:700px){
+  .bw-mobile-status-stars{
+    display:none;align-items:center;justify-content:center;gap:7px;
+    margin:-2px auto 8px;min-height:30px;padding:0;border-radius:0;
+    width:max-content;max-width:92%;position:relative;z-index:3;overflow:visible;
+    letter-spacing:1.5px;font-size:21px;line-height:1;user-select:none;-webkit-tap-highlight-color:transparent;
+    background:transparent !important;
+    border:0 !important;
+    box-shadow:none !important;
+  }
+  .bw-mobile-status-stars.is-visible{display:flex;}
+  .bw-mobile-status-stars::before{display:none !important;}
+  .bw-mobile-status-stars .bw-status-star{position:relative;z-index:1;display:inline-flex;align-items:center;justify-content:center;color:#f6d36b;text-shadow:0 1px 0 rgba(82,54,4,.8),0 0 10px rgba(246,211,107,.42),0 0 22px rgba(215,192,122,.24);filter:drop-shadow(0 2px 5px rgba(0,0,0,.38));}
+  html.light-mode .bw-mobile-status-stars{background:transparent !important;border:0 !important;box-shadow:none !important;}
+  html.light-mode .bw-mobile-status-stars .bw-status-star{color:#b8860b;text-shadow:0 1px 0 rgba(255,255,255,.75),0 0 9px rgba(184,134,11,.22);}
+  body:not(.bw-pro-active) .bw-mobile-status-stars{display:none !important;}
+}
+</style>
+<style id="barakaway-status-stars-modal-style">
+.bw-status-modal-overlay{position:fixed;inset:0;z-index:999999;display:none;align-items:center;justify-content:center;padding:22px;background:rgba(7,10,14,.58);backdrop-filter:blur(10px);box-sizing:border-box;}
+.bw-status-modal-overlay.is-open{display:flex;}
+.bw-status-modal{width:min(94vw,430px);border-radius:28px;padding:22px 18px 18px;box-sizing:border-box;position:relative;overflow:hidden;box-shadow:0 26px 70px rgba(0,0,0,.42);}
+html.dark-mode .bw-status-modal{background:linear-gradient(180deg,#19212a 0%,#111820 100%);border:1px solid rgba(246,211,107,.25);color:#eef4f2;}
+html.light-mode .bw-status-modal{background:linear-gradient(180deg,#ffffff 0%,#fff9e8 100%);border:1px solid rgba(184,134,11,.20);color:#172019;}
+.bw-status-modal-close{position:absolute;right:12px;top:10px;width:36px;height:36px;border-radius:50%;border:0;background:rgba(255,255,255,.08);color:inherit;font-size:22px;line-height:1;cursor:pointer;}
+html.light-mode .bw-status-modal-close{background:rgba(23,32,25,.06);}
+.bw-status-modal-title{font-size:21px;line-height:1.16;font-weight:950;letter-spacing:-.03em;margin:0 42px 8px 0;}
+.bw-status-modal-text{font-size:13px;line-height:1.45;font-weight:750;margin:0 0 15px;opacity:.82;}
+.bw-status-modal-current{display:flex;align-items:center;justify-content:space-between;gap:10px;border-radius:20px;padding:13px 14px;margin-bottom:13px;}
+html.dark-mode .bw-status-modal-current{background:rgba(246,211,107,.10);border:1px solid rgba(246,211,107,.20);}
+html.light-mode .bw-status-modal-current{background:rgba(184,134,11,.08);border:1px solid rgba(184,134,11,.16);}
+.bw-status-current-name{font-size:14px;font-weight:950;}
+.bw-status-current-stars{font-size:18px;color:#f6d36b;letter-spacing:1px;text-shadow:0 0 12px rgba(246,211,107,.35);white-space:nowrap;}
+html.light-mode .bw-status-current-stars{color:#b8860b;text-shadow:0 0 9px rgba(184,134,11,.20);}
+.bw-status-level-list{display:grid;gap:8px;}
+.bw-status-level{display:flex;align-items:center;justify-content:space-between;gap:12px;width:100%;min-height:46px;padding:10px 12px;border-radius:16px;text-decoration:none;box-sizing:border-box;transition:transform .16s ease,background .16s ease,border-color .16s ease;}
+html.dark-mode .bw-status-level{background:rgba(255,255,255,.045);border:1px solid rgba(255,255,255,.08);color:#eef4f2;}
+html.light-mode .bw-status-level{background:rgba(23,32,25,.035);border:1px solid rgba(23,32,25,.08);color:#172019;}
+.bw-status-level:hover{transform:translateY(-1px);}
+.bw-status-level.is-active{pointer-events:none;}
+html.dark-mode .bw-status-level.is-active{background:rgba(45,122,70,.20);border-color:rgba(102,198,128,.36);}
+html.light-mode .bw-status-level.is-active{background:rgba(45,122,70,.10);border-color:rgba(45,122,70,.24);}
+.bw-status-level-name{font-size:13px;font-weight:950;}
+.bw-status-level-state{font-size:11px;font-weight:900;opacity:.72;}
+.bw-status-level-stars{font-size:15px;color:#f6d36b;letter-spacing:1px;white-space:nowrap;}
+html.light-mode .bw-status-level-stars{color:#b8860b;}
+.bw-mobile-status-stars{cursor:pointer;}
+</style>
 </head>
 <body>
 <div class="mobile-top-controls">
@@ -4809,6 +4861,7 @@ html.light-mode [data-task-meta="article"] *{
 </div>
 </div>
 <div class="container">
+<div class="bw-mobile-status-stars" id="bwMobileStatusStars" aria-label="BarakaWay status stars"></div>
 <div class="brand-prayer-hero">
 <button aria-label="BarakaWay" class="brand-signature" id="brandInstallTrigger" type="button">
 <span class="brand-letter-accent">B</span><span class="brand-letter-main">araka</span><span class="brand-letter-accent">W</span><span class="brand-letter-main">ay</span>
@@ -14908,6 +14961,94 @@ function init(){
 if(document.readyState === 'loading') document.addEventListener('DOMContentLoaded', init, {once:true});
 else init();
 window.addEventListener('load', function(){ setTimeout(controlProVisibility, 120); setTimeout(controlProVisibility, 600); });
+})();
+</script>
+
+
+<script id="barakaway-home-status-stars-script">
+(function(){
+  function read(key){try{return localStorage.getItem(key)||"";}catch(e){return "";}}
+  function statusStarCount(){
+    var isPro=read('barakaway_pro')==='true';
+    if(!isPro) return 0;
+
+    var plan=String(read('barakaway_pro_plan') || '').toLowerCase().trim();
+    var level=String(read('barakaway_support_level') || '').toLowerCase().trim();
+    var map={supporter:2,patron:3,benefactor:4,legacy:5};
+
+    if(plan==='support' && map[level]) return map[level];
+    return 1;
+  }
+  function renderStatusStars(){
+    var box=document.getElementById('bwMobileStatusStars');
+    if(!box) return;
+    var count=statusStarCount();
+    document.body.classList.toggle('bw-pro-active',count>0);
+    if(count<=0){box.classList.remove('is-visible');box.innerHTML='';box.setAttribute('aria-hidden','true');return;}
+    box.setAttribute('aria-hidden','false');
+    box.classList.add('is-visible');
+    box.innerHTML=Array.from({length:count},function(){return '<span class="bw-status-star" aria-hidden="true">★</span>';}).join('');
+  }
+  if(document.readyState==='loading'){document.addEventListener('DOMContentLoaded',renderStatusStars);}else{renderStatusStars();}
+  window.addEventListener('storage',renderStatusStars);
+  window.addEventListener('barakaway:pro-status-change',renderStatusStars);
+  window.addEventListener('barakaway:support-status-change',renderStatusStars);
+})();
+</script>
+
+<script id="barakaway-status-stars-modal-script">
+(function(){
+  'use strict';
+  var PRO_URL='pro-bn.html#support';
+  var LEVELS=[{key:'pro',name:'Pro',stars:1},{key:'supporter',name:'Supporter',stars:2},{key:'patron',name:'Patron',stars:3},{key:'benefactor',name:'Benefactor',stars:4},{key:'legacy',name:'Legacy Sponsor',stars:5}];
+  function get(k){try{return localStorage.getItem(k)||'';}catch(e){return '';}}
+  function starText(n){return Array.from({length:n},function(){return '★';}).join('');}
+  function currentStars(){var isPro=String(get('barakaway_pro')).toLowerCase()==='true';if(!isPro)return 0;var plan=String(get('barakaway_pro_plan')).toLowerCase().trim();var level=String(get('barakaway_support_level')).toLowerCase().trim();var map={supporter:2,patron:3,benefactor:4,legacy:5};if(plan==='support'&&map[level])return map[level];return 1;}
+  function currentLevel(){var count=currentStars();for(var i=0;i<LEVELS.length;i++){if(LEVELS[i].stars===count)return LEVELS[i];}return LEVELS[0];}
+  function close(){var overlay=document.getElementById('bwStatusStarsModal');if(!overlay)return;overlay.classList.remove('is-open');overlay.setAttribute('aria-hidden','true');}
+  function build(){var old=document.getElementById('bwStatusStarsModal');if(old)return old;var overlay=document.createElement('div');overlay.id='bwStatusStarsModal';overlay.className='bw-status-modal-overlay';overlay.setAttribute('aria-hidden','true');overlay.innerHTML='<div class="bw-status-modal" role="dialog" aria-modal="true" aria-labelledby="bwStatusStarsTitle"><button type="button" class="bw-status-modal-close" data-bw-status-close aria-label="Close">×</button><h3 class="bw-status-modal-title" id="bwStatusStarsTitle">Ваши звёздочки BarakaWay</h3><p class="bw-status-modal-text" id="bwStatusStarsText"></p><div class="bw-status-modal-current"><span class="bw-status-current-name" id="bwStatusCurrentName"></span><span class="bw-status-current-stars" id="bwStatusCurrentStars"></span></div><div class="bw-status-level-list" id="bwStatusLevelList"></div></div>';document.body.appendChild(overlay);overlay.addEventListener('click',function(e){if(e.target===overlay||e.target.closest('[data-bw-status-close]')){e.preventDefault();close();}});document.addEventListener('keydown',function(e){if(e.key==='Escape')close();});return overlay;}
+  function openModal(e){if(e){e.preventDefault();e.stopPropagation();}var overlay=build();var cur=currentLevel();var count=currentStars()||1;var text=document.getElementById('bwStatusStarsText');var name=document.getElementById('bwStatusCurrentName');var stars=document.getElementById('bwStatusCurrentStars');var list=document.getElementById('bwStatusLevelList');if(text)text.textContent='Сейчас у вас '+cur.name+' — '+count+' '+(count===1?'звёздочка':'звёздочки')+'. Более высокий статус даёт больше звёздочек.';if(name)name.textContent='Текущий статус: '+cur.name;if(stars)stars.textContent=starText(count);if(list){list.innerHTML=LEVELS.map(function(level){var active=level.stars===count;var state=active?'Активно':'Повысить статус';return '<a class="bw-status-level'+(active?' is-active':'')+'" href="'+PRO_URL+'" data-bw-status-level="'+level.key+'"><span><span class="bw-status-level-name">'+level.name+'</span><br><span class="bw-status-level-state">'+state+'</span></span><span class="bw-status-level-stars">'+starText(level.stars)+'</span></a>';}).join('');}overlay.classList.add('is-open');overlay.setAttribute('aria-hidden','false');}
+  function bind(){var box=document.getElementById('bwMobileStatusStars');if(!box||box.__bwStatusStarsModalBound)return;box.__bwStatusStarsModalBound=true;box.setAttribute('role','button');box.setAttribute('tabindex','0');box.setAttribute('aria-label','Открыть уровни BarakaWay');box.addEventListener('click',openModal);box.addEventListener('keydown',function(e){if(e.key==='Enter'||e.key===' '){openModal(e);}});}
+  if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',bind);else bind();window.addEventListener('load',bind);window.addEventListener('storage',bind);
+})();
+</script>
+
+
+<script id="bw-status-stars-force-top-v3">
+(function(){
+  function placeStatusStars(){
+    var hero = document.querySelector('.brand-prayer-hero');
+    if(!hero) return;
+
+    var stars = document.querySelector('.bw-status-stars, .status-stars, .pro-status-stars, .barakaway-status-stars');
+
+    if(!stars){
+      return;
+    }
+
+    stars.classList.add('bw-status-stars');
+
+    if(stars.parentElement && stars.parentElement.classList && stars.parentElement.classList.contains('brand-prayer-hero')){
+      hero.parentNode.insertBefore(stars, hero);
+      return;
+    }
+
+    if(stars.nextElementSibling !== hero){
+      hero.parentNode.insertBefore(stars, hero);
+    }
+  }
+
+  if(document.readyState === 'loading'){
+    document.addEventListener('DOMContentLoaded', placeStatusStars);
+  }else{
+    placeStatusStars();
+  }
+
+  window.addEventListener('load', placeStatusStars);
+  setTimeout(placeStatusStars, 50);
+  setTimeout(placeStatusStars, 200);
+  setTimeout(placeStatusStars, 700);
+  setTimeout(placeStatusStars, 1500);
 })();
 </script>
 
