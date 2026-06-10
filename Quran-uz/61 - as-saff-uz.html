@@ -771,48 +771,17 @@ html.light-mode body .adhkar-sticky-toolbar .content-toggle input{
   }
 }
 </style>
-
-<style id="bw-uz-quran-light-text-final-fix">
-/* Final light mode text contrast fix: Arabic, transliteration and meaning */
-html.light-mode body .surah-premium-bismillah,
-body.light-mode .surah-premium-bismillah{
-  color:#111814!important;
-  -webkit-text-fill-color:#111814!important;
-}
-
-html.light-mode body .ayah-card .ayah-arabic,
-body.light-mode .ayah-card .ayah-arabic,
-html.light-mode body.quran-reading-mode .ayah-card .ayah-arabic,
-body.light-mode.quran-reading-mode .ayah-card .ayah-arabic{
-  color:#111814!important;
-  -webkit-text-fill-color:#111814!important;
-}
-
-html.light-mode body .ayah-card .ayah-translit,
-body.light-mode .ayah-card .ayah-translit,
-html.light-mode body.quran-reading-mode .ayah-card .ayah-translit,
-body.light-mode.quran-reading-mode .ayah-card .ayah-translit{
-  color:#24352c!important;
-  -webkit-text-fill-color:#24352c!important;
-}
-
-html.light-mode body .ayah-card .ayah-meaning,
-body.light-mode .ayah-card .ayah-meaning,
-html.light-mode body.quran-reading-mode .ayah-card .ayah-meaning,
-body.light-mode.quran-reading-mode .ayah-card .ayah-meaning{
-  color:#111814!important;
-  -webkit-text-fill-color:#111814!important;
-}
-</style>
-
-<style id="bw-uz-quran-light-text-hard-fix">
-/* HARD FIX: Uzbek Quran light mode text contrast. Covers pages where light mode is represented by html.light-mode, body.light-mode, or by absence of dark-mode. */
+<style id="bw-uz-quran-ru-reference-light-text-fix">
+/* BarakaWay UZ Quran: final light-mode text fix, matched to RU reference behavior.
+   Affects only Quran text layers in actual light UI. Dark mode remains untouched. */
 html.light-mode body .surah-premium-bismillah,
 body.light-mode .surah-premium-bismillah,
+html.bw-quran-actual-light-mode body .surah-premium-bismillah,
 html:not(.dark-mode) body .surah-premium-bismillah,
 body:not(.dark-mode) .surah-premium-bismillah,
 html.light-mode body h2,
 body.light-mode h2,
+html.bw-quran-actual-light-mode body h2,
 html:not(.dark-mode) body h2,
 body:not(.dark-mode) h2{
   color:#111814!important;
@@ -822,10 +791,12 @@ body:not(.dark-mode) h2{
 
 html.light-mode body .ayah-card .ayah-arabic,
 body.light-mode .ayah-card .ayah-arabic,
+html.bw-quran-actual-light-mode body .ayah-card .ayah-arabic,
 html:not(.dark-mode) body .ayah-card .ayah-arabic,
 body:not(.dark-mode) .ayah-card .ayah-arabic,
 html.light-mode body.quran-reading-mode .ayah-card .ayah-arabic,
 body.light-mode.quran-reading-mode .ayah-card .ayah-arabic,
+html.bw-quran-actual-light-mode body.quran-reading-mode .ayah-card .ayah-arabic,
 html:not(.dark-mode) body.quran-reading-mode .ayah-card .ayah-arabic,
 body:not(.dark-mode).quran-reading-mode .ayah-card .ayah-arabic{
   color:#111814!important;
@@ -835,23 +806,27 @@ body:not(.dark-mode).quran-reading-mode .ayah-card .ayah-arabic{
 
 html.light-mode body .ayah-card .ayah-translit,
 body.light-mode .ayah-card .ayah-translit,
+html.bw-quran-actual-light-mode body .ayah-card .ayah-translit,
 html:not(.dark-mode) body .ayah-card .ayah-translit,
 body:not(.dark-mode) .ayah-card .ayah-translit,
 html.light-mode body.quran-reading-mode .ayah-card .ayah-translit,
 body.light-mode.quran-reading-mode .ayah-card .ayah-translit,
+html.bw-quran-actual-light-mode body.quran-reading-mode .ayah-card .ayah-translit,
 html:not(.dark-mode) body.quran-reading-mode .ayah-card .ayah-translit,
 body:not(.dark-mode).quran-reading-mode .ayah-card .ayah-translit{
-  color:#17241d!important;
-  -webkit-text-fill-color:#17241d!important;
+  color:#111814!important;
+  -webkit-text-fill-color:#111814!important;
   text-shadow:none!important;
 }
 
 html.light-mode body .ayah-card .ayah-meaning,
 body.light-mode .ayah-card .ayah-meaning,
+html.bw-quran-actual-light-mode body .ayah-card .ayah-meaning,
 html:not(.dark-mode) body .ayah-card .ayah-meaning,
 body:not(.dark-mode) .ayah-card .ayah-meaning,
 html.light-mode body.quran-reading-mode .ayah-card .ayah-meaning,
 body.light-mode.quran-reading-mode .ayah-card .ayah-meaning,
+html.bw-quran-actual-light-mode body.quran-reading-mode .ayah-card .ayah-meaning,
 html:not(.dark-mode) body.quran-reading-mode .ayah-card .ayah-meaning,
 body:not(.dark-mode).quran-reading-mode .ayah-card .ayah-meaning{
   color:#111814!important;
@@ -859,6 +834,35 @@ body:not(.dark-mode).quran-reading-mode .ayah-card .ayah-meaning{
   text-shadow:none!important;
 }
 </style>
+<script id="bw-uz-quran-actual-light-mode-detector">
+(function(){
+  function rgbLuminance(value){
+    var m=String(value||'').match(/rgba?\(\s*(\d+)[,\s]+(\d+)[,\s]+(\d+)/i);
+    if(!m) return 255;
+    return (0.299*Number(m[1]))+(0.587*Number(m[2]))+(0.114*Number(m[3]));
+  }
+  function applyActualLightClass(){
+    var root=document.documentElement;
+    var body=document.body;
+    if(!body) return;
+    var explicitLight=root.classList.contains('light-mode') || body.classList.contains('light-mode');
+    var explicitDark=root.classList.contains('dark-mode') || body.classList.contains('dark-mode');
+    var bodyBg=window.getComputedStyle(body).backgroundColor;
+    var container=document.querySelector('.container');
+    var containerBg=container ? window.getComputedStyle(container).backgroundColor : bodyBg;
+    var actualLight=explicitLight || rgbLuminance(bodyBg)>210 || rgbLuminance(containerBg)>210 || !explicitDark;
+    root.classList.toggle('bw-quran-actual-light-mode', !!actualLight);
+  }
+  if(document.readyState==='loading'){
+    document.addEventListener('DOMContentLoaded', applyActualLightClass);
+  }else{
+    applyActualLightClass();
+  }
+  window.addEventListener('load', applyActualLightClass);
+  setTimeout(applyActualLightClass, 80);
+  setTimeout(applyActualLightClass, 350);
+})();
+</script>
 </head>
 <body data-surah-arabic="الصف‎‎" data-surah-meta="61-sura · 14 oyat · Madaniy" data-surah-number="61" data-surah-page-key="Quran-uz/61 - as-saff-uz.html" data-surah-title="As-Soff">
 <div class="container">
