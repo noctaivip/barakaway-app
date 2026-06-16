@@ -1,4 +1,4 @@
-/* BarakaWay PRO Glow Toggle — separate switch, no Light/Dark */
+﻿/* BarakaWay PRO Glow Toggle вЂ” separate switch, no Light/Dark */
 (function(){
   const STORAGE_KEY = "barakawayProGlowOff";
 
@@ -90,3 +90,5 @@
     init();
   }
 })();
+
+
