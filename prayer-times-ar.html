@@ -7,7 +7,7 @@ In the name of Allah, the Most Merciful, the Most Compassionate
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<link rel="icon" type="image/png" href="/favicon.png">
+<link rel="icon" type="image/png" href="/favicon.webp">
 <link rel="manifest" href="/manifest.json">
 <meta name="theme-color" content="#2d7a46">
 <meta name="apple-mobile-web-app-capable" content="yes">
@@ -763,9 +763,9 @@ html.light-mode .share-times-btn{
 }
 
 </style>
-<script src="/theme-init.js"></script>
-<link rel="stylesheet" href="/theme.css">
-<link rel="stylesheet" href="/theme-universal.css">
+<script src="theme-init.js"></script>
+<link rel="stylesheet" href="theme.css">
+<link rel="stylesheet" href="theme-universal.css">
 
 <style id="bw-prayer-times-light-mode-fix">
 /* BarakaWay Prayer Times: Light Mode readability polish only. Dark Mode and JS are untouched. */
@@ -989,6 +989,13 @@ html.light-mode .jumuah-box{
 }
 </style>
 
+
+<!-- BARAKAWAY_SITE_FOOTER_STYLE_START -->
+<style>
+.bw-site-footer{margin:56px auto 0;max-width:1280px;padding:0 24px 24px;color:var(--text,#f7faf8);font-family:inherit}.bw-footer-line{display:flex;align-items:center;justify-content:space-between;gap:18px;padding:20px 24px;border:1px solid rgba(215,192,122,.22);border-radius:24px;background:linear-gradient(135deg,rgba(10,18,22,.90),rgba(10,31,23,.82));box-shadow:0 -14px 45px rgba(0,0,0,.18),inset 0 1px 0 rgba(255,255,255,.04)}.bw-footer-brand{display:flex;align-items:center;gap:10px;min-width:max-content;font-size:15px;font-weight:950;letter-spacing:-.03em}.bw-footer-dot{width:8px;height:8px;border-radius:999px;background:#d7c07a;box-shadow:0 0 18px rgba(215,192,122,.44)}.bw-footer-links{display:flex;align-items:center;justify-content:center;gap:10px;flex-wrap:wrap}.bw-footer-links a{display:inline-flex;align-items:center;min-height:34px;padding:8px 12px;border-radius:999px;color:rgba(247,250,248,.82);font-size:13px;font-weight:850;text-decoration:none;border:1px solid transparent;transition:color .2s ease,border-color .2s ease,background .2s ease,transform .2s ease}.bw-footer-links a:hover{color:#f1db91;border-color:rgba(215,192,122,.26);background:rgba(215,192,122,.08);transform:translateY(-1px)}.bw-footer-install{display:inline-flex;align-items:center;justify-content:center;min-height:38px;padding:10px 16px;border-radius:999px;background:linear-gradient(135deg,#49b468,#257941);color:#fff!important;font-size:13px;font-weight:950;text-decoration:none;box-shadow:0 12px 28px rgba(45,122,70,.22);white-space:nowrap}.bw-footer-bottom{margin-top:12px;text-align:center;color:rgba(232,241,235,.52);font-size:12px;font-weight:700}html.light .bw-footer-line,body.light .bw-footer-line,[data-theme="light"] .bw-footer-line{background:linear-gradient(135deg,#ffffff,#eef8f1);border-color:rgba(184,149,63,.26);box-shadow:0 -14px 38px rgba(35,55,45,.10)}html.light .bw-footer-links a,body.light .bw-footer-links a,[data-theme="light"] .bw-footer-links a{color:rgba(16,24,32,.78)}html.light .bw-footer-bottom,body.light .bw-footer-bottom,[data-theme="light"] .bw-footer-bottom{color:rgba(16,24,32,.52)}@media(max-width:760px){.bw-site-footer{margin-top:38px;padding:0 16px 22px}.bw-footer-line{flex-direction:column;align-items:center;text-align:center;padding:20px 16px}.bw-footer-brand{min-width:0}.bw-footer-links{gap:8px}.bw-footer-links a{font-size:12px;padding:8px 10px}.bw-footer-install{width:100%;max-width:260px}}
+</style>
+<!-- BARAKAWAY_SITE_FOOTER_STYLE_END -->
+<link rel="stylesheet" href="desktop-web.css">
 </head>
 <body>
 <div class="container">
@@ -1472,14 +1479,157 @@ async function playNotificationSound(kind, prayerKey, previewMs=0){
   playGeneratedTone(kind, volumeLevel);
 }
 
-async function requestNotificationPermission(){ saveSettings(); if(!('Notification' in window)){ showToast(UI.notification_not_supported); updatePermissionBadge(); return; } const result=await Notification.requestPermission(); updatePermissionBadge(); if(result==='granted'){ scheduleNotifications(); showToast(UI.notifications_saved); } else { showToast(UI.notification_denied_msg); } }
-function clearNotificationSchedules(){ state.notificationTimeouts.forEach(id=>clearTimeout(id)); state.notificationTimeouts=[]; }
-function scheduleNotifications(){ clearNotificationSchedules(); if(!state.timingsRaw) return; if(!('Notification' in window)||Notification.permission!=='granted') return; const s=getSettings(); const now=new Date(); ['Fajr','Dhuhr','Asr','Maghrib','Isha'].forEach(prayer=>{ if(!s.enabled[prayer]) return; const leadValue=Number((s.leadByPrayer||{})[prayer] ?? s.lead ?? 0); const d=parseTodayTimeToDate(state.timingsRaw[prayer]); d.setMinutes(d.getMinutes()-leadValue); const diff=d-now; if(diff<=0) return; const id=setTimeout(()=>{ const title=`${UI.notification_title} — ${prayer}`; const body=leadValue===0?`${UI.time_for} ${prayer}`:`${prayer} ${UI.starts_in} ${leadValue} ${UI.minutes}`; try{ const soundKind=getSelectedSound(); playNotificationSound(soundKind, prayer); new Notification(title,{body, silent:soundKind==='vibrate', requireInteraction:true, vibrate:[900,350,900,350,1200]}); }catch(_){} }, diff); state.notificationTimeouts.push(id); }); }
+const PRAYER_NOTIFICATION_CHANNEL_ID = 'barakaway_prayer_alerts_v2';
+const PRAYER_NOTIFICATION_BASE_ID = 720000;
+
+function getNativeLocalNotifications(){
+  return window.Capacitor?.Plugins?.LocalNotifications || window.LocalNotifications || null;
+}
+function prayerNotificationId(prayer){
+  const index = ['Fajr','Dhuhr','Asr','Maghrib','Isha'].indexOf(prayer);
+  return PRAYER_NOTIFICATION_BASE_ID + (index < 0 ? 0 : index);
+}
+async function ensurePrayerNotificationChannel(){
+  const LocalNotifications = getNativeLocalNotifications();
+  if(!LocalNotifications || typeof LocalNotifications.createChannel !== 'function') return;
+  try{
+    await LocalNotifications.createChannel({
+      id: PRAYER_NOTIFICATION_CHANNEL_ID,
+      name: 'BarakaWay prayer alerts',
+      description: 'Prayer time reminders',
+      importance: 5,
+      visibility: 1,
+      vibration: true,
+      sound: 'fajr_adhan'
+    });
+  }catch(_){}
+}
+async function requestNotificationPermission(){
+  saveSettings();
+  const LocalNotifications = getNativeLocalNotifications();
+  if(LocalNotifications && typeof LocalNotifications.requestPermissions === 'function'){
+    try{
+      const result = await LocalNotifications.requestPermissions();
+      const granted = result && (result.display === 'granted' || result.notifications === 'granted' || result.permission === 'granted');
+      updatePermissionBadge();
+      if(granted){
+        await ensurePrayerNotificationChannel();
+        scheduleNotifications();
+        showToast(UI.notifications_saved);
+      }else{
+        showToast(UI.notification_denied_msg);
+      }
+      return;
+    }catch(_){}
+  }
+  if(!('Notification' in window)){ showToast(UI.notification_not_supported); updatePermissionBadge(); return; }
+  const result=await Notification.requestPermission();
+  updatePermissionBadge();
+  if(result==='granted'){ scheduleNotifications(); showToast(UI.notifications_saved); } else { showToast(UI.notification_denied_msg); }
+}
+function clearNotificationSchedules(){
+  state.notificationTimeouts.forEach(id=>clearTimeout(id));
+  state.notificationTimeouts=[];
+  const LocalNotifications = getNativeLocalNotifications();
+  if(LocalNotifications && typeof LocalNotifications.cancel === 'function'){
+    try{
+      LocalNotifications.cancel({
+        notifications:['Fajr','Dhuhr','Asr','Maghrib','Isha'].map(prayer=>({id:prayerNotificationId(prayer)}))
+      }).catch(()=>{});
+    }catch(_){}
+  }
+}
+function buildPrayerNotification(prayer, atDate, leadValue){
+  const title=`${UI.notification_title} — ${prayer}`;
+  const body=leadValue===0?`${UI.time_for} ${prayer}`:`${prayer} ${UI.starts_in} ${leadValue} ${UI.minutes}`;
+  return {
+    id: prayerNotificationId(prayer),
+    title,
+    body,
+    schedule: { at: atDate, allowWhileIdle: true },
+    channelId: PRAYER_NOTIFICATION_CHANNEL_ID,
+    sound: 'fajr_adhan',
+    ongoing: false,
+    autoCancel: true
+  };
+}
+function scheduleNotifications(){
+  clearNotificationSchedules();
+  if(!state.timingsRaw) return;
+  const s=getSettings();
+  const now=new Date();
+  const LocalNotifications = getNativeLocalNotifications();
+
+  if(LocalNotifications && typeof LocalNotifications.schedule === 'function'){
+    const notifications=[];
+    ['Fajr','Dhuhr','Asr','Maghrib','Isha'].forEach(prayer=>{
+      if(!s.enabled[prayer]) return;
+      const leadValue=Number((s.leadByPrayer||{})[prayer] ?? s.lead ?? 0);
+      const d=parseTodayTimeToDate(state.timingsRaw[prayer]);
+      d.setMinutes(d.getMinutes()-leadValue);
+      while(d<=now) d.setDate(d.getDate()+1);
+      notifications.push(buildPrayerNotification(prayer, d, leadValue));
+    });
+    if(notifications.length){
+      (async()=>{
+        try{
+          await ensurePrayerNotificationChannel();
+          await LocalNotifications.schedule({ notifications });
+        }catch(_){}
+      })();
+    }
+    return;
+  }
+
+  if(!('Notification' in window)||Notification.permission!=='granted') return;
+  ['Fajr','Dhuhr','Asr','Maghrib','Isha'].forEach(prayer=>{
+    if(!s.enabled[prayer]) return;
+    const leadValue=Number((s.leadByPrayer||{})[prayer] ?? s.lead ?? 0);
+    const d=parseTodayTimeToDate(state.timingsRaw[prayer]);
+    d.setMinutes(d.getMinutes()-leadValue);
+    while(d<=now) d.setDate(d.getDate()+1);
+    const diff=d-now;
+    const id=setTimeout(()=>{
+      const title=`${UI.notification_title} — ${prayer}`;
+      const body=leadValue===0?`${UI.time_for} ${prayer}`:`${prayer} ${UI.starts_in} ${leadValue} ${UI.minutes}`;
+      try{
+        const soundKind=getSelectedSound();
+        playNotificationSound(soundKind, prayer);
+        new Notification(title,{body, silent:soundKind==='vibrate', requireInteraction:true, vibrate:[900,350,900,350,1200]});
+      }catch(_){}
+    }, diff);
+    state.notificationTimeouts.push(id);
+  });
+}
 function handleToggleAll(){ const v=toggleAll.checked; document.querySelectorAll('.prayer-toggle').forEach(el=>el.checked=v); saveSettings(); syncToggleAll(); scheduleNotifications(); }
 async function testNotification(){
   if(state.testSoundPlaying){
     stopActiveNotificationSound();
     return;
+  }
+  saveSettings();
+  const LocalNotifications = getNativeLocalNotifications();
+  if(LocalNotifications && typeof LocalNotifications.schedule === 'function'){
+    try{
+      const permission = await LocalNotifications.requestPermissions();
+      const granted = permission && (permission.display === 'granted' || permission.notifications === 'granted' || permission.permission === 'granted');
+      updatePermissionBadge();
+      if(!granted){ showToast(UI.enable_notifications_first); return; }
+      await ensurePrayerNotificationChannel();
+      await LocalNotifications.schedule({
+        notifications:[{
+          id: PRAYER_NOTIFICATION_BASE_ID + 99,
+          title: UI.test_notification_title,
+          body: UI.test_notification_body,
+          schedule:{ at: new Date(Date.now()+1500), allowWhileIdle:true },
+          channelId: PRAYER_NOTIFICATION_CHANNEL_ID,
+          sound:'fajr_adhan',
+          autoCancel:true
+        }]
+      });
+      showToast(UI.sound_preview||UI.test_notification_title);
+      return;
+    }catch(_){}
   }
   if(!('Notification' in window)){ showToast(UI.notification_not_supported); return; }
   if(Notification.permission!=='granted'){
@@ -1487,7 +1637,6 @@ async function testNotification(){
     updatePermissionBadge();
     if(result!=='granted'){ showToast(UI.enable_notifications_first); return; }
   }
-  saveSettings();
   const soundKind=getSelectedSound();
   state.testSoundPlaying = true;
   updateTestNotificationButton(true);
@@ -1589,14 +1738,106 @@ function buildPrayerShareText(payload){return `BarakaWay App — الصلاة، 
 
 https://barakaway.app`;}
 async function createPrayerShareBlob(){const canvas=prayerShareCanvas;if(!canvas)return null;const payload=getPrayerSharePayload();const ctx=canvas.getContext('2d');const w=canvas.width,h=canvas.height;const isLight=document.documentElement.classList.contains('light-mode');const theme=isLight?{bg0:'#f5f7f8',bg1:'#eff6f1',bg2:'#ffffff',glow:'rgba(45,122,70,0.10)',card:'rgba(255,255,255,0.96)',cardStroke:'#dfe8e2',title:'#1f2a22',muted:'#607066',brand:'#2d7a46',row:'#f7faf8',rowStroke:'#e1ebe4',sunriseRow:'#fff7e8',sunriseStroke:'#f1dfb4',sunriseText:'#8b5d00',time:'#1f2a22',footer:'#607066'}:{bg0:'#101418',bg1:'#171d24',bg2:'#163023',glow:'rgba(255,255,255,0.08)',card:'rgba(23,29,36,0.96)',cardStroke:'#2a343d',title:'#f5f7fa',muted:'#c7d3de',brand:'#dff4e6',row:'#1d242c',rowStroke:'#2a343d',sunriseRow:'#2a2417',sunriseStroke:'#5b4a24',sunriseText:'#f3d38a',time:'#f5f7fa',footer:'#c7d3de'};ctx.clearRect(0,0,w,h);const grad=ctx.createLinearGradient(0,0,w,h);grad.addColorStop(0,theme.bg0);grad.addColorStop(0.56,theme.bg1);grad.addColorStop(1,theme.bg2);ctx.fillStyle=grad;ctx.fillRect(0,0,w,h);ctx.fillStyle=theme.glow;ctx.beginPath();ctx.arc(890,180,260,0,Math.PI*2);ctx.fill();ctx.beginPath();ctx.arc(120,1180,340,0,Math.PI*2);ctx.fill();roundedRect(ctx,70,70,w-140,h-140,56);ctx.fillStyle=theme.card;ctx.fill();ctx.strokeStyle=theme.cardStroke;ctx.lineWidth=2;ctx.stroke();ctx.direction='ltr';ctx.textAlign='left';ctx.fillStyle=theme.brand;ctx.font='900 46px system-ui, -apple-system, Segoe UI, sans-serif';ctx.fillText('BarakaWay',118,150);ctx.direction='rtl';ctx.textAlign='right';ctx.fillStyle=theme.title;ctx.font='900 72px system-ui, -apple-system, Segoe UI, sans-serif';ctx.fillText(payload.title,962,248);ctx.fillStyle=theme.muted;ctx.font='700 32px system-ui, -apple-system, Segoe UI, sans-serif';let y=drawWrappedText(ctx,payload.city,962,310,840,42,2)+10;ctx.fillStyle=theme.brand;ctx.font='800 30px system-ui, -apple-system, Segoe UI, sans-serif';ctx.fillText(payload.date,962,y+36);y+=92;payload.prayers.forEach(([name,time],index)=>{const rowY=y+index*126;roundedRect(ctx,118,rowY,844,94,28);ctx.fillStyle=index===1?theme.sunriseRow:theme.row;ctx.fill();ctx.strokeStyle=index===1?theme.sunriseStroke:theme.rowStroke;ctx.lineWidth=1.5;ctx.stroke();ctx.direction='rtl';ctx.textAlign='right';ctx.fillStyle=index===1?theme.sunriseText:theme.brand;ctx.font='900 34px system-ui, -apple-system, Segoe UI, sans-serif';ctx.fillText(name,920,rowY+58);ctx.direction='ltr';ctx.textAlign='left';ctx.fillStyle=theme.time;ctx.font='900 46px system-ui, -apple-system, Segoe UI, sans-serif';ctx.fillText(time||'—',154,rowY+60);});ctx.direction='rtl';ctx.textAlign='right';ctx.fillStyle=theme.footer;ctx.font='700 28px system-ui, -apple-system, Segoe UI, sans-serif';ctx.fillText('جدول الصلاة اليوم',962,1225);ctx.direction='ltr';ctx.textAlign='left';ctx.fillStyle=theme.brand;ctx.font='900 30px system-ui, -apple-system, Segoe UI, sans-serif';ctx.fillText('barakaway.app',118,1225);return await new Promise(resolve=>canvas.toBlob(resolve,'image/png',0.95));}
-async function sharePrayerTimes(){if(!state.timingsRaw){showToast('حمّل أوقات الصلاة أولاً.');return;}const payload=getPrayerSharePayload();const text=buildPrayerShareText(payload);try{const blob=await createPrayerShareBlob();const file=blob?new File([blob],'barakaway-prayer-times.png',{type:'image/png'}):null;if(file&&navigator.canShare&&navigator.canShare({files:[file]})&&navigator.share){await navigator.share({title:'BarakaWay App',text,files:[file]});return;}if(navigator.share){await navigator.share({title:'BarakaWay App',text});return;}await navigator.clipboard.writeText(text);showToast('تم نسخ رابط BarakaWay.');}catch(err){if(err&&err.name==='AbortError')return;try{await navigator.clipboard.writeText(text);showToast('تم نسخ رابط BarakaWay.');}catch(_){showToast(text);}}}
+function getCapacitorPlugin(name){
+  try{
+    if(window.Capacitor && window.Capacitor.Plugins && window.Capacitor.Plugins[name]) return window.Capacitor.Plugins[name];
+    if(window.Capacitor && window.Capacitor[name]) return window.Capacitor[name];
+  }catch(_){ }
+  return null;
+}
+function blobToDataUrl(blob){
+  return new Promise((resolve,reject)=>{
+    const reader=new FileReader();
+    reader.onload=()=>resolve(String(reader.result||''));
+    reader.onerror=reject;
+    reader.readAsDataURL(blob);
+  });
+}
+async function sharePrayerTimesViaCapacitor(blob,text){
+  const Share=getCapacitorPlugin('Share');
+  if(!Share || !blob) return false;
+  const Filesystem=getCapacitorPlugin('Filesystem');
+  if(Filesystem && typeof Filesystem.writeFile==='function'){
+    const dataUrl=await blobToDataUrl(blob);
+    const base64=dataUrl.split(',')[1]||'';
+    const directory=(window.Capacitor && window.Capacitor.FilesystemDirectory && window.Capacitor.FilesystemDirectory.Cache) || 'CACHE';
+    const fileName='barakaway-prayer-times.png';
+    const saved=await Filesystem.writeFile({path:fileName,data:base64,directory});
+    const fileRef=saved && (saved.uri||saved.path);
+    if(fileRef){
+      await Share.share({title:'BarakaWay App',text,files:[fileRef],dialogTitle:'مشاركة أوقات الصلاة'});
+      return true;
+    }
+  }
+  if(typeof Share.share==='function'){
+    await Share.share({title:'BarakaWay App',text,dialogTitle:'مشاركة أوقات الصلاة'});
+    return true;
+  }
+  return false;
+}
+async function sharePrayerTimes(){
+  if(!state.timingsRaw){ showToast('حمّل أوقات الصلاة أولاً.'); return; }
+  const payload=getPrayerSharePayload();
+  const text=buildPrayerShareText(payload);
+  let blob=null;
+  try{
+    blob=await createPrayerShareBlob();
+  }catch(_){
+    blob=null;
+  }
+  try{
+    if(await sharePrayerTimesViaCapacitor(blob,text)) return;
+    const file=blob?new File([blob],'barakaway-prayer-times.png',{type:'image/png'}):null;
+    if(file && navigator.share && navigator.canShare && navigator.canShare({files:[file]})){
+      await navigator.share({title:'BarakaWay App',text,files:[file]});
+      return;
+    }
+    if(blob){
+      const imageUrl=URL.createObjectURL(blob);
+      const link=document.createElement('a');
+      link.href=imageUrl;
+      link.download='barakaway-prayer-times.png';
+      document.body.appendChild(link);
+      link.click();
+      link.remove();
+      setTimeout(()=>URL.revokeObjectURL(imageUrl),3000);
+      showToast('تم إنشاء بطاقة أوقات الصلاة.');
+      return;
+    }
+    if(navigator.share){
+      await navigator.share({title:'BarakaWay App',text});
+      return;
+    }
+    await navigator.clipboard.writeText(text);
+    showToast('تم نسخ رابط BarakaWay.');
+  }catch(err){
+    if(err && err.name==='AbortError') return;
+    try{
+      if(blob){
+        const imageUrl=URL.createObjectURL(blob);
+        window.open(imageUrl,'_blank');
+        showToast('تم إنشاء بطاقة أوقات الصلاة.');
+        return;
+      }
+      await navigator.clipboard.writeText(text);
+      showToast('تم نسخ رابط BarakaWay.');
+    }catch(_){
+      showToast(text);
+    }
+  }
+}
 if(sharePrayerTimesBtn){sharePrayerTimesBtn.addEventListener('click',sharePrayerTimes);}
 
 bootstrap();
 </script>
 <script src="/bottom-nav.js"></script>
+
+<!-- BARAKAWAY_SITE_FOOTER_START --><div data-bw-component-slot="footer"></div><!-- BARAKAWAY_SITE_FOOTER_END -->
+<script src="web-navigation.js?v=no-dua-force-20260616-2"></script>
 </body>
 </html>
+
+
 
 
 
