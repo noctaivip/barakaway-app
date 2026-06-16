@@ -4,6 +4,15 @@
   function safeGet(key){ try{ return localStorage.getItem(key); }catch(e){ return null; } }
   function safeSet(key, value){ try{ localStorage.setItem(key, value); }catch(e){} }
 
+  function syncWindowTheme(theme){
+    try{
+      var selected = theme === 'light' ? 'light' : 'dark';
+      var current = String(window.name || '').replace(/(?:^|;)barakawayTheme=(?:light|dark)(?:;|$)/g, ';');
+      current = current.replace(/^;+|;+$/g, '');
+      window.name = (current ? current + ';' : '') + 'barakawayTheme=' + selected;
+    }catch(e){}
+  }
+
   function getSwitches(){
     return document.querySelectorAll('.theme-switch');
   }
@@ -41,6 +50,7 @@
       document.body.classList.add('dark-mode');
     }
     safeSet('siteTheme','dark');
+    syncWindowTheme('dark');
   }
 
   function setGlowOff(off){
@@ -71,6 +81,8 @@
     }
 
     safeSet('siteTheme', selected);
+    safeSet('theme', selected);
+    syncWindowTheme(selected);
 
     getSwitches().forEach(function(switchEl){
       switchEl.checked = selected === 'light';
@@ -104,7 +116,8 @@
 
   function syncState(){
     if(isQuranSurahPage()){
-      var inherited = safeGet('siteTheme') || safeGet('theme') || (document.documentElement.classList.contains('dark-mode') ? 'dark' : 'light');
+      var nameMatch = String(window.name || '').match(/(?:^|;)barakawayTheme=(light|dark)(?:;|$)/);
+      var inherited = (nameMatch && nameMatch[1]) || safeGet('siteTheme') || safeGet('theme') || (document.documentElement.classList.contains('light-mode') ? 'light' : 'dark');
       inherited = inherited === 'light' ? 'light' : 'dark';
 
       document.documentElement.classList.remove('light-mode','dark-mode');
@@ -131,7 +144,7 @@
       forcePremiumDarkBase();
       setGlowOff(safeGet(GLOW_KEY) === '1');
     }else{
-      applyTheme(safeGet('siteTheme') || 'dark');
+      applyTheme(safeGet('siteTheme') || safeGet('theme') || 'dark');
     }
   }
 
@@ -148,8 +161,10 @@
 
   window.addEventListener('barakaway:premium-theme-change', init);
   window.addEventListener('storage', function(event){
-    if(!event.key || event.key === GLOW_KEY || event.key === 'barakaway_premium_theme' || event.key === 'siteTheme'){
+    if(!event.key || event.key === GLOW_KEY || event.key === 'barakaway_premium_theme' || event.key === 'siteTheme' || event.key === 'theme'){
       init();
     }
   });
 })();
+
+

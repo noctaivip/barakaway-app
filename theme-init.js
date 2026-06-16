@@ -36,6 +36,29 @@
     return PREMIUM_THEMES.indexOf(theme) !== -1 ? theme : "";
   }
 
+  function readStoredSiteTheme(){
+    try {
+      const match = String(window.name || "").match(/(?:^|;)barakawayTheme=(light|dark)(?:;|$)/);
+      if(match && (match[1] === "light" || match[1] === "dark")) return match[1];
+    } catch(e) {}
+
+    const keys = [SITE_THEME_KEY, "theme", "appTheme", "barakaway_theme", "color-theme", "preferred-theme", "app-theme", "barakaway-theme"];
+    for(let i=0;i<keys.length;i++){
+      const value = safeGet(keys[i]);
+      if(value === "light" || value === "dark") return value;
+    }
+    return "dark";
+  }
+
+  function syncWindowTheme(theme){
+    try {
+      const selected = normalizeSiteTheme(theme);
+      let current = String(window.name || "").replace(/(?:^|;)barakawayTheme=(?:light|dark)(?:;|$)/g, ";");
+      current = current.replace(/^;+|;+$/g, "");
+      window.name = (current ? current + ";" : "") + "barakawayTheme=" + selected;
+    } catch(e) {}
+  }
+
   function removeClassesWithPrefix(target, prefix){
     if(!target || !target.classList) return;
     Array.from(target.classList).forEach(function(className){
@@ -45,6 +68,7 @@
 
   function applySiteTheme(theme){
     const selected = normalizeSiteTheme(theme);
+    syncWindowTheme(selected);
     const root = document.documentElement;
     root.classList.remove("light-mode", "dark-mode");
     root.classList.add(selected + "-mode");
@@ -107,7 +131,7 @@
 
   function refresh(){
     if(isQuranSurahPage()){
-      const inheritedTheme = normalizeSiteTheme(safeGet(SITE_THEME_KEY) || safeGet("theme") || "light");
+      const inheritedTheme = normalizeSiteTheme(readStoredSiteTheme());
       applySiteTheme(inheritedTheme);
       applyPremiumTheme("");
       applyGlowState(false);
@@ -124,7 +148,7 @@
       return;
     }
 
-    applySiteTheme(safeGet(SITE_THEME_KEY) || "light");
+    applySiteTheme(readStoredSiteTheme());
     applyPremiumTheme("");
     applyGlowState(false);
   }
@@ -136,6 +160,7 @@
     applySiteTheme: function(theme){
       const selected = normalizePremiumTheme(safeGet(PREMIUM_THEME_KEY) || "") ? "dark" : normalizeSiteTheme(theme);
       safeSet(SITE_THEME_KEY, selected);
+      safeSet("theme", selected);
       applySiteTheme(selected);
       window.dispatchEvent(new CustomEvent("barakaway:site-theme-change", { detail: { theme: selected } }));
     },
@@ -144,6 +169,7 @@
       if(selected){
         safeSet(PREMIUM_THEME_KEY, selected);
         safeSet(SITE_THEME_KEY, "dark");
+        safeSet("theme", "dark");
         applySiteTheme("dark");
       }else{
         safeRemove(PREMIUM_THEME_KEY);
@@ -164,6 +190,33 @@
     }
   };
 
+
+  // Apply the stored site theme immediately to prevent pages with their own
+  // light defaults from opening in the wrong mode.
+  applySiteTheme(readStoredSiteTheme());
+
+  // Keep all legacy theme keys synchronized across Home, Quran, Adhkar, Duas and other pages.
+  (function syncLegacyThemeKeys(){
+    const themeKeys = [SITE_THEME_KEY, "theme", "appTheme", "barakaway_theme", "color-theme", "preferred-theme", "app-theme", "barakaway-theme"];
+    try{
+      const originalSetItem = localStorage.setItem;
+      localStorage.setItem = function(key, value){
+        const result = originalSetItem.apply(this, arguments);
+        if(themeKeys.indexOf(String(key)) !== -1 && (value === "light" || value === "dark")){
+          themeKeys.forEach(function(k){
+            if(k !== key){
+              try{ originalSetItem.call(localStorage, k, value); }catch(e){}
+            }
+          });
+          syncWindowTheme(value);
+          applySiteTheme(value);
+          try{ window.dispatchEvent(new CustomEvent("barakaway:site-theme-change", { detail:{ theme:value } })); }catch(e){}
+        }
+        return result;
+      };
+    }catch(e){}
+  })();
+
   if(document.readyState === "loading"){
     document.addEventListener("DOMContentLoaded", refresh, { once:true });
   }else{
@@ -173,40 +226,7 @@
   window.addEventListener("storage", function(event){
     if(!event.key || event.key === SITE_THEME_KEY || event.key === PREMIUM_THEME_KEY || event.key === GLOW_KEY) refresh();
   });
-
-  if("serviceWorker" in navigator){
-    const registerServiceWorker = function(){
-      navigator.serviceWorker.register("/service-worker.js", { scope:"/" })
-        .then(function(registration){
-          if(registration && typeof registration.update === "function") registration.update().catch(function(){});
-        })
-        .catch(function(){});
-    };
-
-    if(document.readyState === "loading"){
-      document.addEventListener("DOMContentLoaded", registerServiceWorker, { once:true });
-    }else{
-      registerServiceWorker();
-    }
-  }
 })();
 
 
 
-/* Global Android status bar color */
-(function(){
-  function applyThemeColor(){
-    var meta = document.querySelector('meta[name="theme-color"]');
-    if(!meta){
-      meta = document.createElement('meta');
-      meta.setAttribute('name','theme-color');
-      document.head.appendChild(meta);
-    }
-    meta.setAttribute('content','#000000');
-  }
-  if(document.readyState === "loading"){
-    document.addEventListener("DOMContentLoaded", applyThemeColor, { once:true });
-  }else{
-    applyThemeColor();
-  }
-})();
