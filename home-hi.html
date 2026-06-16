@@ -35,31 +35,33 @@ localStorage.setItem(k,'1');
 })();
 </script>
 <script async="" data-goatcounter="https://onedollarexit.goatcounter.com/count" src="//gc.zgo.at/count.js"></script>
-<link href="/favicon.png" rel="icon" type="image/png"/>
+<link href="/favicon.webp" rel="icon" type="image/png"/>
 <link href="/manifest.json" rel="manifest"/>
 <meta content="#2d7a46" name="theme-color"/>
 <meta charset="utf-8"/>
-<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<meta name="viewport" content="width=1200, initial-scale=1.0">
+<link rel="stylesheet" href="desktop-web.css">
 <title>BarakaWay</title>
 <style>
-.ramadan-wrapper{
-max-width:850px;
-margin:auto;
-}
+.ramadan-wrapper{max-width:1160px;margin:0 auto;}
 
 .ramadan-bar{
-background:#2d7a46;
+background:linear-gradient(90deg,#287845,#2f8e52,#287845);
 color:white;
 overflow:hidden;
 white-space:nowrap;
 font-size:14px;
+font-weight:800;
+letter-spacing:.01em;
 border-radius:0 0 8px 8px;
+box-shadow:0 10px 24px rgba(47,142,82,.18);
 }
 
 .ramadan-text{
 display:inline-block;
 padding-left:100%;
-animation:ramadanMove 18s linear infinite;
+animation:ramadanMove 38s linear infinite;
+will-change:transform;
 }
 
 @keyframes ramadanMove{
@@ -2485,153 +2487,6 @@ html.light-mode .today-daily-task.task-done{
 }
 
 
-/* TAHAJJUD ALARM — COMPACT BAR */
-.tahajjud-alarm-bar{
-  margin:-4px 0 18px;
-  padding:13px 15px;
-  border-radius:22px;
-  display:flex;
-  align-items:center;
-  justify-content:space-between;
-  gap:12px;
-  transition:background .25s,border-color .25s,box-shadow .25s,transform .18s ease;
-  border:1.5px solid transparent;
-}
-
-html.dark-mode .tahajjud-alarm-bar{
-  background:linear-gradient(135deg,#201d2a 0%, #171f29 52%, #142b24 100%);
-  border-color:rgba(215,192,122,0.28);
-  box-shadow:0 12px 24px rgba(0,0,0,0.20), inset 0 1px 0 rgba(255,255,255,0.04);
-}
-
-html.light-mode .tahajjud-alarm-bar{
-  background:linear-gradient(135deg,#fffaf0 0%, #ffffff 52%, #eef7f1 100%);
-  border-color:rgba(141,107,22,0.18);
-  box-shadow:0 12px 24px rgba(15,24,18,0.05), inset 0 1px 0 rgba(255,255,255,0.96);
-}
-
-.tahajjud-alarm-left{
-  display:flex;
-  align-items:center;
-  gap:11px;
-  min-width:0;
-}
-
-.tahajjud-alarm-icon{
-  width:38px;
-  height:38px;
-  min-width:38px;
-  border-radius:15px;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  font-size:20px;
-}
-
-html.dark-mode .tahajjud-alarm-icon{
-  background:rgba(215,192,122,0.13);
-}
-
-html.light-mode .tahajjud-alarm-icon{
-  background:#fff4d8;
-}
-
-.tahajjud-alarm-title{
-  font-size:14px;
-  line-height:1.15;
-  font-weight:900;
-  letter-spacing:-0.025em;
-}
-
-html.dark-mode .tahajjud-alarm-title{color:#f5f8f6;}
-html.light-mode .tahajjud-alarm-title{color:#172019;}
-
-.tahajjud-alarm-meta{
-  margin-top:3px;
-  font-size:11px;
-  line-height:1.25;
-  font-weight:700;
-}
-
-html.dark-mode .tahajjud-alarm-meta{color:#aebbb5;}
-html.light-mode .tahajjud-alarm-meta{color:#647268;}
-
-.tahajjud-switch{
-  position:relative;
-  width:54px;
-  height:30px;
-  min-width:54px;
-  display:inline-flex;
-  align-items:center;
-}
-
-.tahajjud-switch input{
-  opacity:0;
-  width:0;
-  height:0;
-}
-
-.tahajjud-slider{
-  position:absolute;
-  cursor:pointer;
-  inset:0;
-  border-radius:999px;
-  transition:background .25s ease, box-shadow .25s ease;
-}
-
-html.dark-mode .tahajjud-slider{
-  background:#303a44;
-  box-shadow:inset 0 1px 0 rgba(255,255,255,.05);
-}
-
-html.light-mode .tahajjud-slider{
-  background:#d7ded9;
-  box-shadow:inset 0 1px 0 rgba(255,255,255,.6);
-}
-
-.tahajjud-slider::before{
-  content:"";
-  position:absolute;
-  height:24px;
-  width:24px;
-  left:3px;
-  top:3px;
-  border-radius:50%;
-  background:#fff;
-  transition:transform .25s ease;
-  box-shadow:0 4px 10px rgba(0,0,0,.18);
-}
-
-.tahajjud-switch input:checked + .tahajjud-slider{
-  background:#2d7a46;
-  box-shadow:0 0 0 3px rgba(45,122,70,.14);
-}
-
-.tahajjud-switch input:checked + .tahajjud-slider::before{
-  transform:translateX(24px);
-}
-
-@media(max-width:700px){
-  .tahajjud-alarm-bar{
-    margin:-2px 0 16px;
-    padding:12px 13px;
-    border-radius:20px;
-  }
-  .tahajjud-alarm-title{
-    font-size:13px;
-  }
-  .tahajjud-alarm-meta{
-    font-size:10.5px;
-  }
-  .tahajjud-alarm-icon{
-    width:36px;
-    height:36px;
-    min-width:36px;
-  }
-}
-
-
-
 /* BARAKAWAY PRO PROMO CARD */
 .baraka-pro-promo{
   position:relative;
@@ -4315,6 +4170,121 @@ html.light-mode .pro-final-card-title{
   }
 }
 
+
+.install-btn{animation:bwPulse 2s ease-in-out infinite!important;}
+.home-prayer-share-btn,.home-prayer-share-btn *{animation:none!important;}
+@keyframes bwPulse{0%,100%{transform:scale(1);}50%{transform:scale(1.05);}}
+/* Desktop prayer hero split: next prayer + compact daily schedule */
+.home-prayer-layout{width:100%;display:grid;grid-template-columns:minmax(0,468px) minmax(0,468px);gap:22px;align-items:stretch;justify-content:center;position:relative;z-index:1;}
+.home-prayer-layout .home-prayer-widget{width:100%;min-height:100%;}
+.home-prayer-day-schedule{position:relative;z-index:1;border-radius:24px;padding:16px 16px 15px;border:1.5px solid transparent;overflow:hidden;min-height:100%;display:flex;flex-direction:column;justify-content:center;}
+html.dark-mode .home-prayer-day-schedule{background:radial-gradient(circle at 92% 8%,rgba(215,192,122,.10),transparent 35%),linear-gradient(135deg,#121f2a 0%,#172532 46%,#112b22 100%);border-color:rgba(107,170,132,.30);box-shadow:0 16px 32px rgba(0,0,0,.24), inset 0 1px 0 rgba(255,255,255,.04);}
+html.light-mode .home-prayer-day-schedule{background:radial-gradient(circle at 92% 8%,rgba(215,192,122,.18),transparent 36%),linear-gradient(135deg,#ffffff 0%,#fbfdfc 46%,#eef6f0 100%);border-color:rgba(45,122,70,.18);box-shadow:0 14px 28px rgba(15,24,18,.08), inset 0 1px 0 rgba(255,255,255,.98);}
+.home-prayer-schedule-head{display:flex;align-items:flex-start;justify-content:space-between;gap:10px;margin-bottom:12px;}
+.home-prayer-schedule-kicker{font-size:10px;font-weight:900;text-transform:uppercase;letter-spacing:1.6px;}
+html.dark-mode .home-prayer-schedule-kicker{color:#d7c07a;}html.light-mode .home-prayer-schedule-kicker{color:#8d6b16;}
+.home-prayer-schedule-title{font-size:18px;font-weight:950;letter-spacing:-.03em;line-height:1.05;}
+html.dark-mode .home-prayer-schedule-title{color:#f7fbff;}html.light-mode .home-prayer-schedule-title{color:#18211b;}
+.home-prayer-schedule-subtitle{font-size:10.5px;font-weight:850;text-align:right;max-width:145px;line-height:1.25;}
+html.dark-mode .home-prayer-schedule-subtitle{color:#aebdcc;}html.light-mode .home-prayer-schedule-subtitle{color:#607066;}
+.home-prayer-schedule-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px;}
+.home-prayer-schedule-row{border-radius:14px;padding:9px 10px;min-height:62px;display:flex;flex-direction:column;justify-content:center;gap:5px;border:1px solid transparent;transition:border-color .2s ease,background .2s ease,transform .2s ease;}
+html.dark-mode .home-prayer-schedule-row{background:rgba(255,255,255,.035);border-color:rgba(255,255,255,.055);}
+html.light-mode .home-prayer-schedule-row{background:rgba(255,255,255,.62);border-color:rgba(45,122,70,.10);}
+.home-prayer-schedule-row.is-next{transform:translateY(-1px);}
+html.dark-mode .home-prayer-schedule-row.is-next{background:linear-gradient(180deg,rgba(32,82,49,.62),rgba(21,52,34,.74));border-color:rgba(102,198,128,.34);box-shadow:0 10px 20px rgba(45,122,70,.14);}
+html.light-mode .home-prayer-schedule-row.is-next{background:linear-gradient(180deg,#effaf2,#ffffff);border-color:rgba(45,122,70,.30);box-shadow:0 10px 20px rgba(45,122,70,.10);}
+.home-prayer-schedule-label{font-size:10.5px;font-weight:950;color:#66c680;line-height:1.1;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
+.home-prayer-schedule-time{font-size:17px;font-weight:950;letter-spacing:-.03em;line-height:1;}
+html.dark-mode .home-prayer-schedule-time{color:#ffffff;}html.light-mode .home-prayer-schedule-time{color:#18211b;}
+@media(max-width:920px){.home-prayer-layout{grid-template-columns:1fr}.home-prayer-schedule-grid{grid-template-columns:repeat(2,minmax(0,1fr));}}
+
+/* === BarakaWay prayer hero equal desktop blocks fix === */
+.brand-prayer-hero{
+  padding:24px 22px 28px !important;
+  gap:14px !important;
+  overflow:hidden !important;
+}
+.home-prayer-layout{
+  width:100% !important;
+  max-width:980px !important;
+  margin:0 auto !important;
+  display:grid !important;
+  grid-template-columns:repeat(2,minmax(0,1fr)) !important;
+  gap:18px !important;
+  align-items:stretch !important;
+  justify-content:center !important;
+}
+.home-prayer-layout .home-prayer-widget,
+.home-prayer-layout .home-prayer-day-schedule{
+  width:100% !important;
+  height:236px !important;
+  min-height:236px !important;
+  max-height:236px !important;
+  margin:0 !important;
+  box-sizing:border-box !important;
+}
+.home-prayer-widget{
+  padding:18px 18px 16px !important;
+}
+.home-prayer-day-schedule{
+  padding:16px !important;
+  display:flex !important;
+  flex-direction:column !important;
+  justify-content:center !important;
+}
+.home-prayer-schedule-head{
+  margin-bottom:10px !important;
+  align-items:flex-start !important;
+}
+.home-prayer-schedule-title{
+  font-size:17px !important;
+  line-height:1.05 !important;
+}
+.home-prayer-schedule-subtitle{
+  font-size:10px !important;
+  line-height:1.15 !important;
+  max-width:132px !important;
+}
+.home-prayer-schedule-grid{
+  display:grid !important;
+  grid-template-columns:repeat(3,minmax(0,1fr)) !important;
+  grid-template-rows:repeat(2,64px) !important;
+  gap:8px !important;
+}
+.home-prayer-schedule-row{
+  min-height:64px !important;
+  height:64px !important;
+  padding:8px 10px !important;
+  border-radius:14px !important;
+}
+.home-prayer-schedule-label{
+  font-size:10px !important;
+}
+.home-prayer-schedule-time{
+  font-size:16px !important;
+}
+@media(max-width:920px){
+  .home-prayer-layout{
+    max-width:468px !important;
+    grid-template-columns:1fr !important;
+  }
+  .home-prayer-layout .home-prayer-widget,
+  .home-prayer-layout .home-prayer-day-schedule{
+    height:auto !important;
+    min-height:0 !important;
+    max-height:none !important;
+  }
+  .home-prayer-schedule-grid{
+    grid-template-columns:repeat(2,minmax(0,1fr)) !important;
+    grid-template-rows:auto !important;
+  }
+  .home-prayer-schedule-row{
+    height:auto !important;
+    min-height:58px !important;
+  }
+}
+
 </style>
 <style id="barakaway-home-nav-upgrade-style">
 /* === Home quick access + bottom navigation upgrade === */
@@ -4635,9 +4605,9 @@ html[class*="premium-theme-"] body:not(.page-themes-pro) input.theme-switch:not(
 }
 
 </style>
-<script src="/theme-init.js"></script>
-<link href="/theme.css" rel="stylesheet"/>
-<link href="/theme-universal.css" rel="stylesheet"/>
+<script src="theme-init.js"></script>
+<link href="theme.css" rel="stylesheet"/>
+<link href="theme-universal.css" rel="stylesheet"/>
 <style id="bw-ru-compact-tasks-polish-final">
 /* ===== RU TODAY TASKS COMPACT UI — POLISHED FINAL ===== */
 .today-hub-grid{
@@ -5543,9 +5513,8 @@ html.light-mode [data-task-meta="article"] *{
 }
 </style>
 
-
 <style id="barakaway-home-status-stars-style">
-/* BarakaWay: mobile PRO/support status stars under the theme switch */
+/* BarakaWay PRO/support stars. Visual-only status indicator; does not affect Home logic. */
 .bw-mobile-status-stars{display:none;}
 @media(max-width:700px){
   .bw-mobile-status-stars{
@@ -5553,19 +5522,19 @@ html.light-mode [data-task-meta="article"] *{
     margin:-2px auto 8px;min-height:30px;padding:0;border-radius:0;
     width:max-content;max-width:92%;position:relative;z-index:3;overflow:visible;
     letter-spacing:1.5px;font-size:21px;line-height:1;user-select:none;-webkit-tap-highlight-color:transparent;
-    background:transparent !important;
-    border:0 !important;
-    box-shadow:none !important;
+    background:transparent !important;border:0 !important;box-shadow:none !important;cursor:pointer;
   }
   .bw-mobile-status-stars.is-visible{display:flex;}
   .bw-mobile-status-stars::before{display:none !important;}
-  .bw-mobile-status-stars .bw-status-star{position:relative;z-index:1;display:inline-flex;align-items:center;justify-content:center;color:#f6d36b;text-shadow:0 1px 0 rgba(82,54,4,.8),0 0 10px rgba(246,211,107,.42),0 0 22px rgba(215,192,122,.24);filter:drop-shadow(0 2px 5px rgba(0,0,0,.38));}
+  .bw-mobile-status-stars .bw-status-star{
+    position:relative;z-index:1;display:inline-flex;align-items:center;justify-content:center;
+    color:#f6d36b;text-shadow:0 1px 0 rgba(82,54,4,.8),0 0 10px rgba(246,211,107,.42),0 0 22px rgba(215,192,122,.24);
+    filter:drop-shadow(0 2px 5px rgba(0,0,0,.38));
+  }
   html.light-mode .bw-mobile-status-stars{background:transparent !important;border:0 !important;box-shadow:none !important;}
   html.light-mode .bw-mobile-status-stars .bw-status-star{color:#b8860b;text-shadow:0 1px 0 rgba(255,255,255,.75),0 0 9px rgba(184,134,11,.22);}
   body:not(.bw-pro-active) .bw-mobile-status-stars{display:none !important;}
 }
-</style>
-<style id="barakaway-status-stars-modal-style">
 .bw-status-modal-overlay{position:fixed;inset:0;z-index:999999;display:none;align-items:center;justify-content:center;padding:22px;background:rgba(7,10,14,.58);backdrop-filter:blur(10px);box-sizing:border-box;}
 .bw-status-modal-overlay.is-open{display:flex;}
 .bw-status-modal{width:min(94vw,430px);border-radius:28px;padding:22px 18px 18px;box-sizing:border-box;position:relative;overflow:hidden;box-shadow:0 26px 70px rgba(0,0,0,.42);}
@@ -5582,10 +5551,9 @@ html.light-mode .bw-status-modal-current{background:rgba(184,134,11,.08);border:
 .bw-status-current-stars{font-size:18px;color:#f6d36b;letter-spacing:1px;text-shadow:0 0 12px rgba(246,211,107,.35);white-space:nowrap;}
 html.light-mode .bw-status-current-stars{color:#b8860b;text-shadow:0 0 9px rgba(184,134,11,.20);}
 .bw-status-level-list{display:grid;gap:8px;}
-.bw-status-level{display:flex;align-items:center;justify-content:space-between;gap:12px;width:100%;min-height:46px;padding:10px 12px;border-radius:16px;text-decoration:none;box-sizing:border-box;transition:transform .16s ease,background .16s ease,border-color .16s ease;}
+.bw-status-level{display:flex;align-items:center;justify-content:space-between;gap:12px;width:100%;min-height:46px;padding:10px 12px;border-radius:16px;text-decoration:none;box-sizing:border-box;}
 html.dark-mode .bw-status-level{background:rgba(255,255,255,.045);border:1px solid rgba(255,255,255,.08);color:#eef4f2;}
 html.light-mode .bw-status-level{background:rgba(23,32,25,.035);border:1px solid rgba(23,32,25,.08);color:#172019;}
-.bw-status-level:hover{transform:translateY(-1px);}
 .bw-status-level.is-active{pointer-events:none;}
 html.dark-mode .bw-status-level.is-active{background:rgba(45,122,70,.20);border-color:rgba(102,198,128,.36);}
 html.light-mode .bw-status-level.is-active{background:rgba(45,122,70,.10);border-color:rgba(45,122,70,.24);}
@@ -5593,7 +5561,131 @@ html.light-mode .bw-status-level.is-active{background:rgba(45,122,70,.10);border
 .bw-status-level-state{font-size:11px;font-weight:900;opacity:.72;}
 .bw-status-level-stars{font-size:15px;color:#f6d36b;letter-spacing:1px;white-space:nowrap;}
 html.light-mode .bw-status-level-stars{color:#b8860b;}
-.bw-mobile-status-stars{cursor:pointer;}
+</style>
+<style id="bw-home-header-cleanup-v1">
+.bw-web-topnav .bw-web-install-cta,
+.bw-web-topnav .bw-web-language{
+  display:none!important;
+}
+.bw-web-topnav__inner{
+  justify-content:flex-end!important;
+}
+.bw-web-brand{
+  margin-right:auto!important;
+}
+.bw-web-links{
+  flex:1 1 auto!important;
+  margin-left:auto!important;
+  justify-content:flex-end!important;
+}
+#installBtn{
+  animation:bwCenterInstallPulse 1.75s ease-in-out infinite;
+}
+@keyframes bwCenterInstallPulse{
+  0%,100%{
+    transform:translateY(0);
+    box-shadow:0 0 0 0 rgba(76,175,106,.40),0 12px 24px rgba(45,122,70,.18);
+  }
+  50%{
+    transform:translateY(-1px);
+    box-shadow:0 0 0 10px rgba(76,175,106,0),0 18px 34px rgba(45,122,70,.30);
+  }
+}
+.icon-btn.right .ripple{
+  display:none!important;
+}
+.icon-btn.right:active .ripple{
+  animation:none!important;
+}
+</style>
+
+<!-- BARAKAWAY_SITE_FOOTER_STYLE_START -->
+<style>
+.bw-site-footer{margin:56px auto 0;max-width:1280px;padding:0 24px 24px;color:var(--text,#f7faf8);font-family:inherit}.bw-footer-line{display:flex;align-items:center;justify-content:space-between;gap:18px;padding:20px 24px;border:1px solid rgba(215,192,122,.22);border-radius:24px;background:linear-gradient(135deg,rgba(10,18,22,.90),rgba(10,31,23,.82));box-shadow:0 -14px 45px rgba(0,0,0,.18),inset 0 1px 0 rgba(255,255,255,.04)}.bw-footer-brand{display:flex;align-items:center;gap:10px;min-width:max-content;font-size:15px;font-weight:950;letter-spacing:-.03em}.bw-footer-dot{width:8px;height:8px;border-radius:999px;background:#d7c07a;box-shadow:0 0 18px rgba(215,192,122,.44)}.bw-footer-links{display:flex;align-items:center;justify-content:center;gap:10px;flex-wrap:wrap}.bw-footer-links a{display:inline-flex;align-items:center;min-height:34px;padding:8px 12px;border-radius:999px;color:rgba(247,250,248,.82);font-size:13px;font-weight:850;text-decoration:none;border:1px solid transparent;transition:color .2s ease,border-color .2s ease,background .2s ease,transform .2s ease}.bw-footer-links a:hover{color:#f1db91;border-color:rgba(215,192,122,.26);background:rgba(215,192,122,.08);transform:translateY(-1px)}.bw-footer-install{display:inline-flex;align-items:center;justify-content:center;min-height:38px;padding:10px 16px;border-radius:999px;background:linear-gradient(135deg,#49b468,#257941);color:#fff!important;font-size:13px;font-weight:950;text-decoration:none;box-shadow:0 12px 28px rgba(45,122,70,.22);white-space:nowrap}.bw-footer-bottom{margin-top:12px;text-align:center;color:rgba(232,241,235,.52);font-size:12px;font-weight:700}html.light .bw-footer-line,body.light .bw-footer-line,[data-theme="light"] .bw-footer-line{background:linear-gradient(135deg,#ffffff,#eef8f1);border-color:rgba(184,149,63,.26);box-shadow:0 -14px 38px rgba(35,55,45,.10)}html.light .bw-footer-links a,body.light .bw-footer-links a,[data-theme="light"] .bw-footer-links a{color:rgba(16,24,32,.78)}html.light .bw-footer-bottom,body.light .bw-footer-bottom,[data-theme="light"] .bw-footer-bottom{color:rgba(16,24,32,.52)}@media(max-width:760px){.bw-site-footer{margin-top:38px;padding:0 16px 22px}.bw-footer-line{flex-direction:column;align-items:center;text-align:center;padding:20px 16px}.bw-footer-brand{min-width:0}.bw-footer-links{gap:8px}.bw-footer-links a{font-size:12px;padding:8px 10px}.bw-footer-install{width:100%;max-width:260px}}
+</style>
+<!-- BARAKAWAY_SITE_FOOTER_STYLE_END -->
+<style id="bw-app-showcase-css-v1">
+.bw-showcase-intro{
+  grid-column:1 / -1;
+  margin:0 0 16px;
+  padding:22px 24px;
+  border-radius:26px;
+  border:1.5px solid rgba(96,147,120,.24);
+}
+html.dark-mode .bw-showcase-intro{
+  background:linear-gradient(135deg,#111b24 0%,#13241f 100%);
+  box-shadow:0 18px 36px rgba(0,0,0,.18), inset 0 1px 0 rgba(255,255,255,.04);
+}
+html.light-mode .bw-showcase-intro{
+  background:linear-gradient(135deg,#ffffff 0%,#f3fbf5 100%);
+  box-shadow:0 18px 36px rgba(15,24,18,.06), inset 0 1px 0 rgba(255,255,255,.9);
+}
+.bw-showcase-kicker{
+  margin-bottom:8px;
+  color:#f0d989;
+  font-size:11px;
+  font-weight:950;
+  letter-spacing:.16em;
+  text-transform:uppercase;
+}
+.bw-showcase-title{
+  color:#69e08a;
+  font-size:21px;
+  font-weight:950;
+  letter-spacing:-.02em;
+}
+.bw-showcase-text{
+  max-width:840px;
+  margin-top:6px;
+  color:#d9e5ee;
+  font-size:14px;
+  font-weight:760;
+  line-height:1.55;
+}
+html.light-mode .bw-showcase-text{color:#26343d;}
+.bw-app-showcase-cta{
+  grid-column:1 / -1;
+}
+.bw-app-showcase-button,.bw-pro-main-button{
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  margin-top:12px;
+  min-height:38px;
+  padding:9px 16px;
+  border-radius:999px;
+  background:linear-gradient(135deg,#49b468,#257941);
+  color:#fff;
+  font-size:13px;
+  font-weight:950;
+  text-decoration:none;
+  box-shadow:0 12px 26px rgba(45,122,70,.24);
+}
+.bw-pro-section-heading{margin-top:22px;}
+.bw-pro-intro{
+  border-color:rgba(215,192,122,.28);
+}
+html.dark-mode .bw-pro-intro{
+  background:
+    radial-gradient(circle at 92% 0%,rgba(215,192,122,.18),transparent 28%),
+    linear-gradient(135deg,#17150e 0%,#18251d 100%);
+}
+html.light-mode .bw-pro-intro{
+  background:
+    radial-gradient(circle at 92% 0%,rgba(215,192,122,.18),transparent 28%),
+    linear-gradient(135deg,#fffaf0 0%,#ffffff 100%);
+}
+.bw-pro-card{
+  border-color:rgba(215,192,122,.26)!important;
+}
+html.dark-mode .bw-pro-card{
+  background:linear-gradient(135deg,#121811 0%,#172118 56%,#10181f 100%)!important;
+}
+html.light-mode .bw-pro-card{
+  background:linear-gradient(135deg,#fffefa 0%,#ffffff 56%,#f5faf6 100%)!important;
+}
+.bw-pro-card .premium-resource-title{color:#ffe08a;}
+.bw-pro-card .premium-resource-text{line-height:1.5;}
 </style>
 </head>
 <body>
@@ -5638,10 +5730,12 @@ html.light-mode .bw-status-level-stars{color:#b8860b;}
 </div>
 <div class="container">
 <div class="bw-mobile-status-stars" id="bwMobileStatusStars" aria-label="BarakaWay status stars"></div>
+
 <div class="brand-prayer-hero">
 <button aria-label="BarakaWay" class="brand-signature" id="brandInstallTrigger" type="button">
 <span class="brand-letter-accent">B</span><span class="brand-letter-main">araka</span><span class="brand-letter-accent">W</span><span class="brand-letter-main">ay</span>
 </button>
+<div class="home-prayer-layout">
 <div aria-label="नमाज़ के समय पेज खोलें" class="home-prayer-widget" onclick="openPrayerTimesPage(event)" onkeydown="openPrayerTimesPageFromKeyboard(event)" role="link" tabindex="0">
 <div class="home-prayer-top">
 <div class="home-prayer-kicker">अगली नमाज़</div>
@@ -5667,19 +5761,17 @@ html.light-mode .bw-status-level-stars{color:#b8860b;}
 </button>
 </div>
 </div>
+<div class="home-prayer-day-schedule" aria-label="नमाज़ का समय">
+<div class="home-prayer-schedule-head"><div><div class="home-prayer-schedule-kicker">आज</div><div class="home-prayer-schedule-title">नमाज़ का समय</div></div><div class="home-prayer-schedule-subtitle">पाँचों नमाज़ों का समय</div></div>
+<div class="home-prayer-schedule-grid">
+<div class="home-prayer-schedule-row" data-home-prayer-row="Sunrise"><div class="home-prayer-schedule-label" data-home-prayer-label="Sunrise">Sunrise</div><div class="home-prayer-schedule-time" data-home-prayer-time="Sunrise">--:--</div></div>
+<div class="home-prayer-schedule-row" data-home-prayer-row="Fajr"><div class="home-prayer-schedule-label" data-home-prayer-label="Fajr">Fajr</div><div class="home-prayer-schedule-time" data-home-prayer-time="Fajr">--:--</div></div>
+<div class="home-prayer-schedule-row" data-home-prayer-row="Dhuhr"><div class="home-prayer-schedule-label" data-home-prayer-label="Dhuhr">Dhuhr</div><div class="home-prayer-schedule-time" data-home-prayer-time="Dhuhr">--:--</div></div>
+<div class="home-prayer-schedule-row" data-home-prayer-row="Asr"><div class="home-prayer-schedule-label" data-home-prayer-label="Asr">Asr</div><div class="home-prayer-schedule-time" data-home-prayer-time="Asr">--:--</div></div>
+<div class="home-prayer-schedule-row" data-home-prayer-row="Maghrib"><div class="home-prayer-schedule-label" data-home-prayer-label="Maghrib">Maghrib</div><div class="home-prayer-schedule-time" data-home-prayer-time="Maghrib">--:--</div></div>
+<div class="home-prayer-schedule-row" data-home-prayer-row="Isha"><div class="home-prayer-schedule-label" data-home-prayer-label="Isha">Isha</div><div class="home-prayer-schedule-time" data-home-prayer-time="Isha">--:--</div></div>
+</div></div>
 </div>
-<div aria-label="तहज्जुद नमाज़ के लिए अलार्म" class="tahajjud-alarm-bar" id="tahajjudAlarmBar">
-<div class="tahajjud-alarm-left">
-<div aria-hidden="true" class="tahajjud-alarm-icon">🌙</div>
-<div>
-<div class="tahajjud-alarm-title">तहज्जुद नमाज़ के लिए अलार्म चालू करें</div>
-<div class="tahajjud-alarm-meta" id="tahajjudAlarmMeta">फ़ज्र से 60 मिनट पहले</div>
-</div>
-</div>
-<label aria-label="तहज्जुद अलार्म चालू या बंद करें" class="tahajjud-switch">
-<input id="tahajjudAlarmToggle" type="checkbox"/>
-<span class="tahajjud-slider"></span>
-</label>
 </div>
 <section aria-label="आज BarakaWay में" class="today-hub">
 <div class="today-hub-head">
@@ -5750,43 +5842,67 @@ html.light-mode .bw-status-level-stars{color:#b8860b;}
 </a>
 </section>
 <div class="home-section-title">
-<h2>त्वरित पहुँच</h2>
-<div class="home-section-note">मुख्य भाग</div>
+<h2>ऐप सुविधाएँ</h2>
+<div class="home-section-note">मोबाइल संस्करण</div>
 </div>
-<div class="premium-resource-grid">
-<a class="premium-resource-card" href="quran-hi.html">
-<div class="premium-resource-icon">📖</div>
-<div><div class="premium-resource-title">क़ुरआन</div><div class="premium-resource-text">सूरह पढ़ना, सहेजना और अल्लाह के शब्दों से दैनिक जुड़ाव।</div></div>
-</a>
-<a class="premium-resource-card" href="holidays-hi.html">
-<div class="premium-resource-icon">🌙</div>
-<div><div class="premium-resource-title">शुभकामनाएँ</div><div class="premium-resource-text">जुमा, रमज़ान और ईद कार्ड्स</div></div>
-</a>
-<a class="premium-resource-card" href="mosques-hi.html">
-<div class="premium-resource-icon">🕌</div>
-<div><div class="premium-resource-title">पास की मस्जिदें</div><div class="premium-resource-text">अपने स्थान के पास नज़दीकी मस्जिदें खोजें।</div></div>
-</a>
-<a class="premium-resource-card" href="qibla-hi.html">
+<div class="bw-showcase-intro bw-app-intro">
+<div class="bw-showcase-kicker">BarakaWay App</div>
+<div class="bw-showcase-title">ऐप में उपलब्ध उपयोगी सुविधाएँ</div>
+<div class="bw-showcase-text">क़िबला, पास की मस्जिदें, बधाइयाँ और तहज्जुद अलार्म BarakaWay मोबाइल ऐप में अधिक सुविधाजनक हैं।</div>
+</div>
+<div class="premium-resource-grid bw-app-features-grid">
+<a class="premium-resource-card bw-feature-card" href="install-app-hi.html">
 <div class="premium-resource-icon">🧭</div>
-<div><div class="premium-resource-title">क़िबला</div><div class="premium-resource-text">नमाज़ के लिए तुरंत दिशा।</div></div>
+<div><div class="premium-resource-title">क़िबला</div><div class="premium-resource-text">नमाज़ की दिशा मोबाइल ऐप में आसानी से देखें।</div></div>
 </a>
-<a class="premium-resource-card" href="prophets-duas-hi.html">
-<div class="premium-resource-icon">🤲</div>
-<div><div class="premium-resource-title">मुस्लिम किला</div><div class="premium-resource-text">सही अर्थ और सम्मान के साथ दुआएँ।</div></div>
+<a class="premium-resource-card bw-feature-card" href="install-app-hi.html">
+<div class="premium-resource-icon">🕌</div>
+<div><div class="premium-resource-title">पास की मस्जिदें</div><div class="premium-resource-text">अपने स्थान के पास मस्जिदें जल्दी खोजें।</div></div>
 </a>
-<a class="premium-resource-card" href="articles-hi.html">
-<div class="premium-resource-icon">✨</div>
-<div><div class="premium-resource-title">लेख</div><div class="premium-resource-text">बिना शोर के छोटे उपयोगी लेख।</div></div>
+<a class="premium-resource-card bw-feature-card" href="install-app-hi.html">
+<div class="premium-resource-icon">🌙</div>
+<div><div class="premium-resource-title">बधाइयाँ</div><div class="premium-resource-text">Jumu‘ah, Ramadan और Eid के लिए सुंदर इस्लामी कार्ड।</div></div>
 </a>
-<a class="premium-resource-card" href="adhkar-hi.html">
-<div class="premium-resource-icon">🌿</div>
-<div><div class="premium-resource-title">अज़कार</div><div class="premium-resource-text">हर दिन पढ़ने के लिए सुबह और शाम के ज़िक्र।</div></div>
+<a class="premium-resource-card bw-feature-card" href="install-app-hi.html">
+<div class="premium-resource-icon">⏰</div>
+<div><div class="premium-resource-title">तहज्जुद अलार्म</div><div class="premium-resource-text">फ़ज्र से पहले रात की नमाज़ के लिए हल्का रिमाइंडर।</div></div>
 </a>
-<a class="premium-resource-card" href="hidden-sadaqa-hi.html">
-<div class="premium-resource-icon">🤍</div>
-<div><div class="premium-resource-title">छुपी हुई सदक़ा</div><div class="premium-resource-text">छुपकर सदक़ा - अल्लाह के लिए, लोगों के लिए नहीं।</div></div>
+<a class="premium-resource-card bw-app-showcase-cta" href="install-app-hi.html">
+<div class="premium-resource-icon">⬇️</div>
+<div><div class="premium-resource-title">BarakaWay का पूरा अनुभव ऐप में</div><div class="premium-resource-text">नमाज़, नोटिफिकेशन, क़िबला, मस्जिदें, बधाइयाँ और तहज्जुद अलार्म मोबाइल ऐप में बेहतर काम करते हैं।</div><div class="bw-app-showcase-button">ऐप इंस्टॉल करें</div></div>
 </a>
 </div>
+
+<div class="home-section-title bw-pro-section-heading">
+<h2>PRO सुविधाएँ</h2>
+<div class="home-section-note">ऐप में प्रीमियम</div>
+</div>
+<div class="bw-showcase-intro bw-pro-intro">
+<div class="bw-showcase-kicker">BarakaWay PRO</div>
+<div class="bw-showcase-title">BarakaWay PRO — for deeper daily benefit</div>
+<div class="bw-showcase-text">Advanced features open inside the app: more spiritual value, personal progress and a refined Islamic experience.</div>
+<a class="bw-pro-main-button" href="pro-hi.html">ऐप में PRO खोलें</a>
+</div>
+<div class="premium-resource-grid bw-pro-features-grid">
+<a class="premium-resource-card bw-pro-card" href="pro-hi.html">
+<div class="premium-resource-icon">📖</div>
+<div><div class="premium-resource-title">Quran Khatm</div><div class="premium-resource-text">A personal Quran reading path: bookmarks, progress tracking and steady daily movement toward completing khatm.</div></div>
+</a>
+<a class="premium-resource-card bw-pro-card" href="pro-hi.html">
+<div class="premium-resource-icon">🤲</div>
+<div><div class="premium-resource-title">Duas through 99 Names</div><div class="premium-resource-text">Deep dua collections for life situations: healing, repentance, debt relief, barakah, happiness and protection.</div></div>
+</a>
+<a class="premium-resource-card bw-pro-card" href="pro-hi.html">
+<div class="premium-resource-icon">✨</div>
+<div><div class="premium-resource-title">Premium Greetings</div><div class="premium-resource-text">Beautiful Islamic GIF animations, cards and messages for Jumu‘ah, Ramadan, Eid and special days.</div></div>
+</a>
+<a class="premium-resource-card bw-pro-card" href="pro-hi.html">
+<div class="premium-resource-icon">👑</div>
+<div><div class="premium-resource-title">Premium Themes</div><div class="premium-resource-text">Elite BarakaWay visual styles: gold, emerald, violet, rose, carbon and kids theme.</div></div>
+</a>
+</div>
+
+
 <div class="home-primary-support">
 <a class="support-project-btn" href="support-project-hi.html"><span class="support-project-btn-shine"></span><span class="support-project-btn-text">परियोजना का समर्थन करें</span></a>
 </div>
@@ -6017,6 +6133,43 @@ async function createHomePrayerShareCardFile(){
   ctx.fillStyle='#dff6e7';ctx.textAlign=loc.isRTL?'left':'right';ctx.fillText(loc.urlText,loc.isRTL?120:780,775);
   return new Promise(function(resolve){c.toBlob(function(blob){resolve(blob?new File([blob],'barakaway-prayer-times.png',{type:'image/png'}):null);},'image/png',0.94);});
 }
+function bwBlobToBase64(blob){
+  return new Promise(function(resolve,reject){
+    const reader=new FileReader();
+    reader.onloadend=function(){
+      const result=String(reader.result||'');
+      resolve(result.indexOf(',')>=0?result.split(',')[1]:result);
+    };
+    reader.onerror=reject;
+    reader.readAsDataURL(blob);
+  });
+}
+function bwCapacitorPlugin(name){
+  return window.Capacitor&&window.Capacitor.Plugins?window.Capacitor.Plugins[name]:null;
+}
+async function bwSharePrayerCardNative(file,title,text,url){
+  const Share=bwCapacitorPlugin('Share');
+  const Filesystem=bwCapacitorPlugin('Filesystem');
+  const isNative=!!(window.Capacitor&&typeof window.Capacitor.isNativePlatform==='function'&&window.Capacitor.isNativePlatform());
+  if(!Share) return false;
+  if(file&&Filesystem&&isNative){
+    const base64=await bwBlobToBase64(file);
+    const path='barakaway-prayer-times-'+Date.now()+'.png';
+    let fileUri='';
+    const writeResult=await Filesystem.writeFile({path:path,data:base64,directory:'CACHE'});
+    if(writeResult&&writeResult.uri) fileUri=writeResult.uri;
+    if(!fileUri&&typeof Filesystem.getUri==='function'){
+      const uriResult=await Filesystem.getUri({path:path,directory:'CACHE'});
+      if(uriResult&&uriResult.uri) fileUri=uriResult.uri;
+    }
+    if(fileUri){
+      await Share.share({title:title,text:text,files:[fileUri],dialogTitle:title});
+      return true;
+    }
+  }
+  await Share.share({title:title,text:text,url:url,dialogTitle:title});
+  return true;
+}
 async function sharePrayerTimes(event){
   if(event){event.preventDefault();event.stopPropagation();}
   const loc=bwHomeShareLocale();
@@ -6024,6 +6177,10 @@ async function sharePrayerTimes(event){
   const url=(window.location&&window.location.origin)?window.location.origin:window.location.href;
   let file=null;
   try{file=await createHomePrayerShareCardFile();}catch(e){file=null;}
+
+  try{
+    if(await bwSharePrayerCardNative(file,loc.title,text,url)) return;
+  }catch(e){}
   if(navigator.share){
     try{
       if(file&&navigator.canShare&&navigator.canShare({files:[file]})){await navigator.share({title:loc.title,text:text,files:[file]});return;}
@@ -6290,6 +6447,8 @@ window.addEventListener("DOMContentLoaded",function(){const installBtn=document.
     nextPrayerTimer = setInterval(tick, 1000);
   }
 
+  function cleanPrayerDisplayTime(value){return String(value || '--:--').split(' ')[0].slice(0,5) || '--:--';}
+  function updateHomePrayerSchedule(timings, nextKey){const keys=['Sunrise','Fajr','Dhuhr','Asr','Maghrib','Isha'];keys.forEach(function(key){const label=document.querySelector('[data-home-prayer-label="'+key+'"]');const time=document.querySelector('[data-home-prayer-time="'+key+'"]');const row=document.querySelector('[data-home-prayer-row="'+key+'"]');if(label) label.textContent=UI.names[key]||key;if(time) time.textContent=timings?cleanPrayerDisplayTime(timings[key]):'--:--';if(row) row.classList.toggle('is-next',!!nextKey&&key===nextKey);});}
   async function fetchPrayerWidget(){
     try{
       const city = (localStorage.getItem('prayer_city') || 'Tashkent').trim();
@@ -6329,13 +6488,13 @@ window.addEventListener("DOMContentLoaded",function(){const installBtn=document.
       elName.textContent = prayerName;
       elTime.textContent = String(timings[next.key] || '--:--').slice(0,5);
       elMeta.textContent = '';
-      setCountdown(next.time);
+      setCountdown(next.time); updateHomePrayerSchedule(timings, next.key);
     }catch(_){
       elLocation.textContent = UI.fallbackLocation;
       elName.textContent = 'फ़ज्र';
       elTime.textContent = '--:--';
       elMeta.textContent = UI.loading;
-      elCountdown.textContent = '--:--:--';
+      elCountdown.textContent = '--:--:--'; updateHomePrayerSchedule(null, null);
     }
   }
 
@@ -13294,170 +13453,100 @@ const TASK_PREFIX = "barakaway_today_hi_";
   }, 1500);
 })();
 </script>
-<script>
+<script src="theme-toggle.js"></script>
+<script src="headerBanner.js"></script>
+<script id="bw-home-header-cleanup-v1">
 (function(){
-  const TOGGLE_KEY = 'barakaway_tahajjud_alarm_enabled_hi_v1';
-  const ALERTED_KEY_PREFIX = 'barakaway_tahajjud_alarm_alerted_hi_';
-  const OFFSET_MINUTES = 60;
+  var installLabels = [
+    "Установить приложение","Install App","Install app","تثبيت التطبيق","Uygulamayı yükle",
+    "Қолданбаны орнату","Ilovani o‘rnatish","Ilovani o'rnatish","Instal Aplikasi",
+    "ऐप इंस्टॉल करें","ایپ انسٹال کریں","অ্যাপ ইনস্টল করুন"
+  ];
+  var languageLabels = [
+    "Язык","Language","اللغة","Dil","Тіл","Til","Bahasa","भाषा","زبان","ভাষা"
+  ];
 
-  const toggle = document.getElementById('tahajjudAlarmToggle');
-  const meta = document.getElementById('tahajjudAlarmMeta');
-  let alarmTimer = null;
-  let metaTimer = null;
-
-  if(!toggle || !meta) return;
-
-  function localDateKey(date){
-    const y = date.getFullYear();
-    const m = String(date.getMonth() + 1).padStart(2, '0');
-    const d = String(date.getDate()).padStart(2, '0');
-    return y + '-' + m + '-' + d;
+  function normalizeText(value){
+    return String(value || "").replace(/\s+/g, " ").trim().toLowerCase();
   }
 
-  function parseTimeToDate(value){
-    const clean = String(value || '').replace(/[^\d:]/g, '').trim();
-    const parts = clean.split(':').map(Number);
-    if(!Number.isFinite(parts[0]) || !Number.isFinite(parts[1])) return null;
-    const d = new Date();
-    d.setHours(parts[0], parts[1], 0, 0);
-    return d;
+  function textMatches(text, list){
+    var clean = normalizeText(text);
+    if(!clean) return false;
+    return list.some(function(label){
+      return clean === normalizeText(label);
+    });
   }
 
-  function getFajrDate(){
-    const timings = window.homePrayerShareState && window.homePrayerShareState.timings;
-    if(!timings || !timings.Fajr) return null;
-
-    const fajr = parseTimeToDate(timings.Fajr);
-    if(!fajr) return null;
-
-    const now = new Date();
-    if(fajr <= now){
-      fajr.setDate(fajr.getDate() + 1);
-    }
-    return fajr;
+  function isHeaderControl(el){
+    if(!el || !el.closest) return false;
+    if(el.closest(".desktop-top-actions,.desktop-action-center,.install-box,.mobile-top-controls")) return false;
+    return !!el.closest(".bw-web-topnav,.bw-web-links,header,nav");
   }
 
-  function getAlarmDate(){
-    const fajr = getFajrDate();
-    if(!fajr) return null;
-    return new Date(fajr.getTime() - OFFSET_MINUTES * 60000);
+  function removeHeaderButtons(){
+    document.querySelectorAll(".bw-web-install-cta,.bw-web-language").forEach(function(el){
+      if(isHeaderControl(el)) el.remove();
+    });
+
+    document.querySelectorAll("header a,header button,nav a,nav button,.bw-web-topnav a,.bw-web-topnav button,.bw-web-links a,.bw-web-links button").forEach(function(el){
+      var text = el.textContent || "";
+      if(textMatches(text, installLabels) || textMatches(text, languageLabels)){
+        if(isHeaderControl(el)) el.remove();
+      }
+    });
+
+    document.querySelectorAll(".bw-web-topnav__inner").forEach(function(el){
+      el.style.justifyContent = "flex-end";
+    });
+    document.querySelectorAll(".bw-web-brand").forEach(function(el){
+      el.style.marginRight = "auto";
+    });
+    document.querySelectorAll(".bw-web-links").forEach(function(el){
+      el.style.marginLeft = "auto";
+      el.style.justifyContent = "flex-end";
+      el.style.flex = "1 1 auto";
+    });
   }
 
-  function formatTime(date){
-    return String(date.getHours()).padStart(2,'0') + ':' + String(date.getMinutes()).padStart(2,'0');
+  if(document.readyState === "loading"){
+    document.addEventListener("DOMContentLoaded", removeHeaderButtons);
+  }else{
+    removeHeaderButtons();
   }
 
-  function playTahajjudSound(){
-    try{
-      const AudioContext = window.AudioContext || window.webkitAudioContext;
-      if(!AudioContext) return;
-      const ctx = new AudioContext();
-      const gain = ctx.createGain();
-      gain.gain.setValueAtTime(0.0001, ctx.currentTime);
-      gain.gain.exponentialRampToValueAtTime(0.16, ctx.currentTime + 0.04);
-      gain.gain.exponentialRampToValueAtTime(0.0001, ctx.currentTime + 1.8);
-      gain.connect(ctx.destination);
-
-      [0, 0.55, 1.1].forEach(function(delay){
-        const osc = ctx.createOscillator();
-        osc.type = 'sine';
-        osc.frequency.setValueAtTime(620, ctx.currentTime + delay);
-        osc.connect(gain);
-        osc.start(ctx.currentTime + delay);
-        osc.stop(ctx.currentTime + delay + 0.32);
-      });
-    }catch(e){}
-  }
-
-  function notifyTahajjud(){
-    const fajr = getFajrDate();
-    const body = fajr
-      ? 'हिंदी पाठ फ़ज्रहिंदी पाठ.'
-      : 'हिंदी पाठ.';
-
-    playTahajjudSound();
-
-    if('Notification' in window && Notification.permission === 'granted'){
-      new Notification('🌙 BarakaWay — हिंदी पाठ', { body: body });
-    }else{
-      alert('🌙 BarakaWay\\n\\n' + body);
-    }
-  }
-
-  function updateMeta(){
-    const enabled = localStorage.getItem(TOGGLE_KEY) === '1';
-    const alarm = getAlarmDate();
-    const fajr = getFajrDate();
-
-    if(!enabled){
-      meta.textContent = 'फ़ज्र से 60 मिनट पहले';
-      return;
-    }
-
-    if(!alarm || !fajr){
-      meta.textContent = 'हिंदी पाठ फ़ज्रहिंदी पाठ...';
-      return;
-    }
-
-    meta.textContent = 'हिंदी पाठ: ' + formatTime(alarm) + ' · फ़ज्र ' + formatTime(fajr);
-  }
-
-  function scheduleAlarm(){
-    if(alarmTimer) clearTimeout(alarmTimer);
-    updateMeta();
-
-    if(localStorage.getItem(TOGGLE_KEY) !== '1') return;
-
-    const alarm = getAlarmDate();
-    if(!alarm) return;
-
-    const now = new Date();
-    const delay = alarm.getTime() - now.getTime();
-    const key = ALERTED_KEY_PREFIX + localDateKey(alarm);
-
-    if(delay <= 0){
-      return;
-    }
-
-    alarmTimer = setTimeout(function(){
-      if(localStorage.getItem(TOGGLE_KEY) !== '1') return;
-      if(localStorage.getItem(key) === '1') return;
-      localStorage.setItem(key, '1');
-      notifyTahajjud();
-      scheduleAlarm();
-    }, Math.min(delay, 2147483647));
-  }
-
-  toggle.checked = localStorage.getItem(TOGGLE_KEY) === '1';
-  updateMeta();
-  scheduleAlarm();
-
-  toggle.addEventListener('change', async function(){
-    localStorage.setItem(TOGGLE_KEY, toggle.checked ? '1' : '0');
-
-    if(toggle.checked && 'Notification' in window && Notification.permission === 'default'){
-      try{ await Notification.requestPermission(); }catch(e){}
-    }
-
-    updateMeta();
-    scheduleAlarm();
-  });
-
-  if(metaTimer) clearInterval(metaTimer);
-  metaTimer = setInterval(function(){
-    updateMeta();
-    scheduleAlarm();
-  }, 60000);
-
-  window.addEventListener('pageshow', function(){
-    updateMeta();
-    scheduleAlarm();
-  });
+  var observer = new MutationObserver(removeHeaderButtons);
+  observer.observe(document.documentElement, {childList:true, subtree:true});
 })();
 </script>
-<script src="/theme-toggle.js"></script>
-<script src="/headerBanner.js"></script>
-<script src="/bottom-nav.js"></script>
+<script src="web-navigation.js?v=no-dua-force-20260616-2"></script>
+<script id="bw-home-header-nav-v2">
+(function(){
+  var items = [["मुख्य", "home-hi.html"], ["कुरआन", "quran-hi.html"], ["अज़कार", "adhkar-hi.html"], ["दुआ", "prophets-duas-hi.html"], ["99 नाम", "names-hi.html"], ["लेख", "articles-hi.html"], ["जीवन", "life-situations-hi.html"], ["क़िला", "prophets-duas-hi.html"], ["Pro", "pro-hi.html"]];
+  function build(){
+    return items.map(function(item){
+      return '<a href="' + item[1] + '">' + item[0] + '</a>';
+    }).join('');
+  }
+  function apply(){
+    var html = build();
+    document.querySelectorAll('.bw-web-links').forEach(function(nav){ nav.innerHTML = html; });
+    document.querySelectorAll('header nav').forEach(function(nav){
+      if(nav.closest('.share-sheet') || nav.closest('.install-help-sheet')) return;
+      var text = (nav.textContent || '').toLowerCase();
+      if(text.indexOf('quran') !== -1 || text.indexOf('коран') !== -1 || text.indexOf('قرآن') !== -1 || text.indexOf('глав') !== -1 || text.indexOf('home') !== -1) {
+        var install = nav.querySelector('.install-btn,.bw-web-install-cta,.install-app,.install');
+        nav.innerHTML = html;
+        if(install) nav.appendChild(install);
+      }
+    });
+  }
+  if(document.readyState === 'loading') document.addEventListener('DOMContentLoaded', apply); else apply();
+  window.addEventListener('load', apply);
+  setTimeout(apply, 120);
+  setTimeout(apply, 600);
+})();
+</script>
 <script>
 (function(){
   const TASK_PREFIX = "barakaway_today_hi_";
@@ -15429,6 +15518,15 @@ html.dark-mode .bw-pro-micro-option-btn{background:#1d242c;border:1px solid #2a3
   'use strict';
   var LANG='hi';
   var DAILY_TOTAL=5;
+  function isPro(){
+    try{
+      var pro=localStorage.getItem('barakaway_pro');
+      var plan=localStorage.getItem('barakaway_pro_plan');
+      if(pro && /^(1|true|yes|active|unlocked|premium|pro)$/i.test(String(pro)))return true;
+      if(plan && String(plan).trim()!=='' && String(plan).trim()!=='free')return true;
+    }catch(e){}
+    return false;
+  }
   var LABELS={
     ariaDone:'आज के PRO प्रश्न पूरे हो गए हैं',
     ariaOpen:'Pro संस्करण में आज के अतिरिक्त 5 प्रश्न',
@@ -15589,8 +15687,10 @@ html.dark-mode .bw-pro-micro-option-btn{background:#1d242c;border:1px solid #2a3
     if(!link||link.dataset.bwProMicroSequenceBound==='1')return;
     link.dataset.bwProMicroSequenceBound='1';
     link.addEventListener('click',function(event){
+      if(!isPro())return;
       event.preventDefault();
       event.stopPropagation();
+      if(event.stopImmediatePropagation)event.stopImmediatePropagation();
       openProSequence();
       return false;
     },true);
@@ -15598,8 +15698,10 @@ html.dark-mode .bw-pro-micro-option-btn{background:#1d242c;border:1px solid #2a3
   document.addEventListener('click',function(event){
     var link=event.target&&event.target.closest?event.target.closest('#dailyMicroProUpsell'):null;
     if(!link)return;
+    if(!isPro())return;
     event.preventDefault();
     event.stopPropagation();
+    if(event.stopImmediatePropagation)event.stopImmediatePropagation();
     openProSequence();
     return false;
   },true);
@@ -16018,93 +16120,306 @@ window.addEventListener('load', function(){ setTimeout(controlProVisibility, 120
 })();
 </script>
 
-
 <script id="barakaway-home-status-stars-script">
 (function(){
+  'use strict';
+  var LEVELS=[
+    {key:'pro',name:'Pro',stars:1},
+    {key:'supporter',name:'Supporter',stars:2},
+    {key:'patron',name:'Patron',stars:3},
+    {key:'benefactor',name:'Benefactor',stars:4},
+    {key:'legacy',name:'Legacy Sponsor',stars:5}
+  ];
+
   function read(key){try{return localStorage.getItem(key)||"";}catch(e){return "";}}
-  function statusStarCount(){
-    var isPro=read('barakaway_pro')==='true';
-    if(!isPro) return 0;
+  function lower(value){return String(value||"").toLowerCase().trim();}
+  function starText(n){return Array.from({length:n},function(){return '★';}).join('');}
 
-    var plan=String(read('barakaway_pro_plan') || '').toLowerCase().trim();
-    var level=String(read('barakaway_support_level') || '').toLowerCase().trim();
-    var map={supporter:2,patron:3,benefactor:4,legacy:5};
-
-    if(plan==='support' && map[level]) return map[level];
-    return 1;
+  function purchaseText(){
+    return [
+      read('barakaway_pro_plan'),
+      read('barakaway_support_level'),
+      read('barakaway_iap_product_id'),
+      read('barakaway_product_id'),
+      read('barakaway_purchase_sku'),
+      read('barakaway_subscription'),
+      read('barakaway_pro_product'),
+      read('barakaway_entitlement'),
+      read('barakaway_last_purchase')
+    ].map(lower).join(' ');
   }
-  function renderStatusStars(){
+
+  function statusStarCount(){
+    var isPro = lower(read('barakaway_pro')) === 'true' || lower(read('barakaway_pro')) === '1' || lower(read('barakaway_pro')) === 'yes';
+    var text = purchaseText();
+
+    if(/legacy|legacy_sponsor|legacy-sponsor|legacy sponsor/.test(text)) return 5;
+    if(/benefactor/.test(text)) return 4;
+    if(/patron/.test(text)) return 3;
+    if(/supporter/.test(text)) return 2;
+    if(/\bsupport\b/.test(text) && !/support_level\s*legacy/.test(text)) return 2;
+    if(/\bpro\b|developer-test|premium/.test(text)) return 1;
+
+    return isPro ? 1 : 0;
+  }
+
+  function ensureBox(){
     var box=document.getElementById('bwMobileStatusStars');
+    if(box) return box;
+    var container=document.querySelector('.container');
+    if(!container) return null;
+    box=document.createElement('div');
+    box.className='bw-mobile-status-stars';
+    box.id='bwMobileStatusStars';
+    box.setAttribute('aria-label','BarakaWay status stars');
+    container.insertBefore(box, container.firstChild);
+    return box;
+  }
+
+  function renderStatusStars(){
+    var box=ensureBox();
     if(!box) return;
     var count=statusStarCount();
     document.body.classList.toggle('bw-pro-active',count>0);
-    if(count<=0){box.classList.remove('is-visible');box.innerHTML='';box.setAttribute('aria-hidden','true');return;}
+    if(count<=0){
+      box.classList.remove('is-visible');
+      box.innerHTML='';
+      box.setAttribute('aria-hidden','true');
+      return;
+    }
     box.setAttribute('aria-hidden','false');
     box.classList.add('is-visible');
     box.innerHTML=Array.from({length:count},function(){return '<span class="bw-status-star" aria-hidden="true">★</span>';}).join('');
+    bindModal();
   }
-  if(document.readyState==='loading'){document.addEventListener('DOMContentLoaded',renderStatusStars);}else{renderStatusStars();}
+
+  function currentLevel(){
+    var count=statusStarCount();
+    for(var i=0;i<LEVELS.length;i++){if(LEVELS[i].stars===count)return LEVELS[i];}
+    return LEVELS[0];
+  }
+
+  function closeModal(){
+    var overlay=document.getElementById('bwStatusStarsModal');
+    if(!overlay) return;
+    overlay.classList.remove('is-open');
+    overlay.setAttribute('aria-hidden','true');
+  }
+
+  function buildModal(){
+    var old=document.getElementById('bwStatusStarsModal');
+    if(old) return old;
+    var overlay=document.createElement('div');
+    overlay.id='bwStatusStarsModal';
+    overlay.className='bw-status-modal-overlay';
+    overlay.setAttribute('aria-hidden','true');
+    overlay.innerHTML='<div class="bw-status-modal" role="dialog" aria-modal="true" aria-labelledby="bwStatusStarsTitle"><button type="button" class="bw-status-modal-close" data-bw-status-close aria-label="Close">×</button><h3 class="bw-status-modal-title" id="bwStatusStarsTitle">BarakaWay status</h3><p class="bw-status-modal-text" id="bwStatusStarsText"></p><div class="bw-status-modal-current"><span class="bw-status-current-name" id="bwStatusCurrentName"></span><span class="bw-status-current-stars" id="bwStatusCurrentStars"></span></div><div class="bw-status-level-list" id="bwStatusLevelList"></div></div>';
+    document.body.appendChild(overlay);
+    overlay.addEventListener('click',function(e){
+      if(e.target===overlay || e.target.closest('[data-bw-status-close]')){e.preventDefault();closeModal();}
+    });
+    document.addEventListener('keydown',function(e){if(e.key==='Escape')closeModal();});
+    return overlay;
+  }
+
+  function openModal(e){
+    if(e){e.preventDefault();e.stopPropagation();}
+    var overlay=buildModal();
+    var cur=currentLevel();
+    var count=statusStarCount()||1;
+    var text=document.getElementById('bwStatusStarsText');
+    var name=document.getElementById('bwStatusCurrentName');
+    var stars=document.getElementById('bwStatusCurrentStars');
+    var list=document.getElementById('bwStatusLevelList');
+    if(text) text.textContent='Current status: '+cur.name+' — '+count+' star'+(count===1?'':'s')+'.';
+    if(name) name.textContent=cur.name;
+    if(stars) stars.textContent=starText(count);
+    if(list){
+      list.innerHTML=LEVELS.map(function(level){
+        var active=level.stars===count;
+        return '<div class="bw-status-level '+(active?'is-active':'')+'"><span><span class="bw-status-level-name">'+level.name+'</span><br><span class="bw-status-level-state">'+(active?'Active':'Available')+'</span></span><span class="bw-status-level-stars">'+starText(level.stars)+'</span></div>';
+      }).join('');
+    }
+    overlay.classList.add('is-open');
+    overlay.setAttribute('aria-hidden','false');
+  }
+
+  function bindModal(){
+    var box=ensureBox();
+    if(!box || box.__bwStatusStarsModalBound) return;
+    box.__bwStatusStarsModalBound=true;
+    box.setAttribute('role','button');
+    box.setAttribute('tabindex','0');
+    box.addEventListener('click',openModal);
+    box.addEventListener('keydown',function(e){if(e.key==='Enter'||e.key===' '){openModal(e);}});
+  }
+
+  function patchStorage(){
+    try{
+      if(window.__BW_STATUS_STARS_STORAGE_PATCHED__) return;
+      window.__BW_STATUS_STARS_STORAGE_PATCHED__=true;
+      var rawSet=Storage.prototype.setItem;
+      var rawRemove=Storage.prototype.removeItem;
+      Storage.prototype.setItem=function(k,v){
+        var result=rawSet.apply(this,arguments);
+        try{if(String(k).indexOf('barakaway_')===0)setTimeout(renderStatusStars,0);}catch(e){}
+        return result;
+      };
+      Storage.prototype.removeItem=function(k){
+        var result=rawRemove.apply(this,arguments);
+        try{if(String(k).indexOf('barakaway_')===0)setTimeout(renderStatusStars,0);}catch(e){}
+        return result;
+      };
+    }catch(e){}
+  }
+
+  function init(){
+    patchStorage();
+    renderStatusStars();
+    setTimeout(renderStatusStars,100);
+    setTimeout(renderStatusStars,600);
+    setTimeout(renderStatusStars,1500);
+  }
+
+  if(document.readyState==='loading') document.addEventListener('DOMContentLoaded',init,{once:true});
+  else init();
+
+  window.addEventListener('load',function(){setTimeout(renderStatusStars,120);});
   window.addEventListener('storage',renderStatusStars);
   window.addEventListener('barakaway:pro-status-change',renderStatusStars);
   window.addEventListener('barakaway:support-status-change',renderStatusStars);
+  window.addEventListener('barakaway:purchase-status-change',renderStatusStars);
 })();
 </script>
 
-<script id="barakaway-status-stars-modal-script">
+<script id="bw-plus5-pro-gate-final-hi">
 (function(){
   'use strict';
-  var PRO_URL='pro-hi.html#support';
-  var LEVELS=[{key:'pro',name:'Pro',stars:1},{key:'supporter',name:'Supporter',stars:2},{key:'patron',name:'Patron',stars:3},{key:'benefactor',name:'Benefactor',stars:4},{key:'legacy',name:'Legacy Sponsor',stars:5}];
-  function get(k){try{return localStorage.getItem(k)||'';}catch(e){return '';}}
-  function starText(n){return Array.from({length:n},function(){return '★';}).join('');}
-  function currentStars(){var isPro=String(get('barakaway_pro')).toLowerCase()==='true';if(!isPro)return 0;var plan=String(get('barakaway_pro_plan')).toLowerCase().trim();var level=String(get('barakaway_support_level')).toLowerCase().trim();var map={supporter:2,patron:3,benefactor:4,legacy:5};if(plan==='support'&&map[level])return map[level];return 1;}
-  function currentLevel(){var count=currentStars();for(var i=0;i<LEVELS.length;i++){if(LEVELS[i].stars===count)return LEVELS[i];}return LEVELS[0];}
-  function close(){var overlay=document.getElementById('bwStatusStarsModal');if(!overlay)return;overlay.classList.remove('is-open');overlay.setAttribute('aria-hidden','true');}
-  function build(){var old=document.getElementById('bwStatusStarsModal');if(old)return old;var overlay=document.createElement('div');overlay.id='bwStatusStarsModal';overlay.className='bw-status-modal-overlay';overlay.setAttribute('aria-hidden','true');overlay.innerHTML='<div class="bw-status-modal" role="dialog" aria-modal="true" aria-labelledby="bwStatusStarsTitle"><button type="button" class="bw-status-modal-close" data-bw-status-close aria-label="Close">×</button><h3 class="bw-status-modal-title" id="bwStatusStarsTitle">Ваши звёздочки BarakaWay</h3><p class="bw-status-modal-text" id="bwStatusStarsText"></p><div class="bw-status-modal-current"><span class="bw-status-current-name" id="bwStatusCurrentName"></span><span class="bw-status-current-stars" id="bwStatusCurrentStars"></span></div><div class="bw-status-level-list" id="bwStatusLevelList"></div></div>';document.body.appendChild(overlay);overlay.addEventListener('click',function(e){if(e.target===overlay||e.target.closest('[data-bw-status-close]')){e.preventDefault();close();}});document.addEventListener('keydown',function(e){if(e.key==='Escape')close();});return overlay;}
-  function openModal(e){if(e){e.preventDefault();e.stopPropagation();}var overlay=build();var cur=currentLevel();var count=currentStars()||1;var text=document.getElementById('bwStatusStarsText');var name=document.getElementById('bwStatusCurrentName');var stars=document.getElementById('bwStatusCurrentStars');var list=document.getElementById('bwStatusLevelList');if(text)text.textContent='Сейчас у вас '+cur.name+' — '+count+' '+(count===1?'звёздочка':'звёздочки')+'. Более высокий статус даёт больше звёздочек.';if(name)name.textContent='Текущий статус: '+cur.name;if(stars)stars.textContent=starText(count);if(list){list.innerHTML=LEVELS.map(function(level){var active=level.stars===count;var state=active?'Активно':'Повысить статус';return '<a class="bw-status-level'+(active?' is-active':'')+'" href="'+PRO_URL+'" data-bw-status-level="'+level.key+'"><span><span class="bw-status-level-name">'+level.name+'</span><br><span class="bw-status-level-state">'+state+'</span></span><span class="bw-status-level-stars">'+starText(level.stars)+'</span></a>';}).join('');}overlay.classList.add('is-open');overlay.setAttribute('aria-hidden','false');}
-  function bind(){var box=document.getElementById('bwMobileStatusStars');if(!box||box.__bwStatusStarsModalBound)return;box.__bwStatusStarsModalBound=true;box.setAttribute('role','button');box.setAttribute('tabindex','0');box.setAttribute('aria-label','Открыть уровни BarakaWay');box.addEventListener('click',openModal);box.addEventListener('keydown',function(e){if(e.key==='Enter'||e.key===' '){openModal(e);}});}
-  if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',bind);else bind();window.addEventListener('load',bind);window.addEventListener('storage',bind);
-})();
-</script>
 
+  var LANG = 'hi';
+  var PRO_URL = 'pro-hi.html#micro';
 
-<script id="bw-status-stars-force-top-v3">
-(function(){
-  function placeStatusStars(){
-    var hero = document.querySelector('.brand-prayer-hero');
-    if(!hero) return;
+  function todayKey(){
+    var d = new Date();
+    return d.getFullYear() + '-' + String(d.getMonth()+1).padStart(2,'0') + '-' + String(d.getDate()).padStart(2,'0');
+  }
 
-    var stars = document.querySelector('.bw-status-stars, .status-stars, .pro-status-stars, .barakaway-status-stars');
+  function isProActive(){
+    try{
+      var values = [
+        localStorage.getItem('barakaway_pro'),
+        localStorage.getItem('barakaway_pro_plan'),
+        localStorage.getItem('barakaway_support_level'),
+        localStorage.getItem('barakaway_iap_product_id'),
+        localStorage.getItem('barakaway_product_id'),
+        localStorage.getItem('barakaway_purchase_sku'),
+        localStorage.getItem('barakaway_subscription'),
+        localStorage.getItem('barakaway_pro_product'),
+        localStorage.getItem('barakaway_entitlement')
+      ].map(function(v){ return String(v || '').toLowerCase().trim(); }).join(' ');
 
-    if(!stars){
-      return;
+      if(/(^|\s)(1|true|yes|active|unlocked|premium|pro|developer-test)(\s|$)/.test(values)) return true;
+      if(/\b(supporter|patron|benefactor|legacy|legacy_sponsor|legacy-sponsor)\b/.test(values)) return true;
+    }catch(e){}
+    return false;
+  }
+
+  function mainMicroDone(){
+    var card = document.getElementById('dailyMicroKnowledgeCard');
+    var status = document.getElementById('dailyMicroKnowledgeStatus');
+
+    if(card){
+      var doneClasses = ['bw-final-done','bw-task-done','task-done','micro-answered','done','completed','is-done'];
+      for(var i=0;i<doneClasses.length;i++){
+        if(card.classList.contains(doneClasses[i])) return true;
+      }
     }
 
-    stars.classList.add('bw-status-stars');
+    if(status && String(status.textContent || '').replace(/\s+/g,'').indexOf('✓') !== -1) return true;
 
-    if(stars.parentElement && stars.parentElement.classList && stars.parentElement.classList.contains('brand-prayer-hero')){
-      hero.parentNode.insertBefore(stars, hero);
-      return;
-    }
+    try{
+      var day = todayKey();
+      var keys = [
+        'bw_final_done_v2_' + LANG + '_' + day + '_micro',
+        'bw_daily_done_v2_' + LANG + '_' + day + '_micro',
+        'barakaway_today_' + LANG + '_' + day + '_micro',
+        'barakaway_today_' + LANG + '_v2_' + day + '_micro',
+        'barakaway_today_' + LANG + '_v3_' + day + '_micro',
+        'barakaway_micro_answer_' + LANG + '_' + day,
+        'barakaway_micro_answer_' + day
+      ];
+      for(var k=0;k<keys.length;k++){
+        var v = localStorage.getItem(keys[k]);
+        if(v === '1' || v === 'true' || (v && String(v).indexOf('selected') !== -1)) return true;
+      }
 
-    if(stars.nextElementSibling !== hero){
-      hero.parentNode.insertBefore(stars, hero);
+      for(var j=0;j<localStorage.length;j++){
+        var key = localStorage.key(j) || '';
+        var low = key.toLowerCase();
+        if(key.indexOf(day) !== -1 && low.indexOf('micro') !== -1){
+          var val = localStorage.getItem(key);
+          if(val === '1' || val === 'true' || (val && String(val).indexOf('selected') !== -1)) return true;
+        }
+      }
+    }catch(e){}
+
+    return false;
+  }
+
+  function syncPlus5Block(){
+    var block = document.getElementById('dailyMicroProUpsell') || document.querySelector('.bw-micro-pro-upsell');
+    if(!block) return;
+
+    var visible = mainMicroDone();
+    block.classList.toggle('is-visible', !!visible);
+    block.style.display = visible ? 'flex' : 'none';
+
+    if(isProActive()){
+      block.setAttribute('href', 'javascript:void(0)');
+      block.setAttribute('aria-label', 'Pro संस्करण में आज के अतिरिक्त 5 प्रश्न');
+    }else{
+      block.setAttribute('href', PRO_URL);
+      block.setAttribute('aria-label', 'Pro सक्रिय करें');
     }
   }
+
+  document.addEventListener('click', function(event){
+    var block = event.target && event.target.closest ? event.target.closest('#dailyMicroProUpsell, .bw-micro-pro-upsell') : null;
+    if(!block) return;
+
+    syncPlus5Block();
+
+    if(!mainMicroDone()){
+      event.preventDefault();
+      event.stopPropagation();
+      if(event.stopImmediatePropagation) event.stopImmediatePropagation();
+      return false;
+    }
+
+    if(!isProActive()){
+      event.preventDefault();
+      event.stopPropagation();
+      if(event.stopImmediatePropagation) event.stopImmediatePropagation();
+      window.location.href = PRO_URL;
+      return false;
+    }
+  }, true);
 
   if(document.readyState === 'loading'){
-    document.addEventListener('DOMContentLoaded', placeStatusStars);
+    document.addEventListener('DOMContentLoaded', syncPlus5Block, {once:true});
   }else{
-    placeStatusStars();
+    syncPlus5Block();
   }
 
-  window.addEventListener('load', placeStatusStars);
-  setTimeout(placeStatusStars, 50);
-  setTimeout(placeStatusStars, 200);
-  setTimeout(placeStatusStars, 700);
-  setTimeout(placeStatusStars, 1500);
+  window.addEventListener('pageshow', syncPlus5Block);
+  window.addEventListener('storage', syncPlus5Block);
+  setInterval(syncPlus5Block, 500);
 })();
 </script>
 
+
+<!-- BARAKAWAY_SITE_FOOTER_START --><div data-bw-component-slot="footer"></div><!-- BARAKAWAY_SITE_FOOTER_END -->
 </body>
 </html>
+
+
