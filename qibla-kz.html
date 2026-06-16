@@ -1,13 +1,14 @@
-﻿<!--
+<!--
 بِسْمِ ٱللَّٰهِ ٱلرَّحْمَـٰنِ ٱلرَّحِيمِ
 In the name of Allah, the Most Merciful, the Most Compassionate
 -->
 <!DOCTYPE html>
+
 <html lang="kz">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Қыбла</title>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Құбыла</title>
 <style>
 
 body{
@@ -636,81 +637,80 @@ html.dark-mode .precision-text{
 }
 
 </style>
-<script src="/theme-init.js"></script>
-<link rel="stylesheet" href="/theme.css">
-<link rel="stylesheet" href="/theme-universal.css">
+<script src="theme-init.js"></script>
+<link href="theme.css" rel="stylesheet"/>
+<link href="theme-universal.css" rel="stylesheet"/>
+
+<!-- BARAKAWAY_SITE_FOOTER_STYLE_START -->
+<style>
+.bw-site-footer{margin:56px auto 0;max-width:1280px;padding:0 24px 24px;color:var(--text,#f7faf8);font-family:inherit}.bw-footer-line{display:flex;align-items:center;justify-content:space-between;gap:18px;padding:20px 24px;border:1px solid rgba(215,192,122,.22);border-radius:24px;background:linear-gradient(135deg,rgba(10,18,22,.90),rgba(10,31,23,.82));box-shadow:0 -14px 45px rgba(0,0,0,.18),inset 0 1px 0 rgba(255,255,255,.04)}.bw-footer-brand{display:flex;align-items:center;gap:10px;min-width:max-content;font-size:15px;font-weight:950;letter-spacing:-.03em}.bw-footer-dot{width:8px;height:8px;border-radius:999px;background:#d7c07a;box-shadow:0 0 18px rgba(215,192,122,.44)}.bw-footer-links{display:flex;align-items:center;justify-content:center;gap:10px;flex-wrap:wrap}.bw-footer-links a{display:inline-flex;align-items:center;min-height:34px;padding:8px 12px;border-radius:999px;color:rgba(247,250,248,.82);font-size:13px;font-weight:850;text-decoration:none;border:1px solid transparent;transition:color .2s ease,border-color .2s ease,background .2s ease,transform .2s ease}.bw-footer-links a:hover{color:#f1db91;border-color:rgba(215,192,122,.26);background:rgba(215,192,122,.08);transform:translateY(-1px)}.bw-footer-install{display:inline-flex;align-items:center;justify-content:center;min-height:38px;padding:10px 16px;border-radius:999px;background:linear-gradient(135deg,#49b468,#257941);color:#fff!important;font-size:13px;font-weight:950;text-decoration:none;box-shadow:0 12px 28px rgba(45,122,70,.22);white-space:nowrap}.bw-footer-bottom{margin-top:12px;text-align:center;color:rgba(232,241,235,.52);font-size:12px;font-weight:700}html.light .bw-footer-line,body.light .bw-footer-line,[data-theme="light"] .bw-footer-line{background:linear-gradient(135deg,#ffffff,#eef8f1);border-color:rgba(184,149,63,.26);box-shadow:0 -14px 38px rgba(35,55,45,.10)}html.light .bw-footer-links a,body.light .bw-footer-links a,[data-theme="light"] .bw-footer-links a{color:rgba(16,24,32,.78)}html.light .bw-footer-bottom,body.light .bw-footer-bottom,[data-theme="light"] .bw-footer-bottom{color:rgba(16,24,32,.52)}@media(max-width:760px){.bw-site-footer{margin-top:38px;padding:0 16px 22px}.bw-footer-line{flex-direction:column;align-items:center;text-align:center;padding:20px 16px}.bw-footer-brand{min-width:0}.bw-footer-links{gap:8px}.bw-footer-links a{font-size:12px;padding:8px 10px}.bw-footer-install{width:100%;max-width:260px}}
+</style>
+<!-- BARAKAWAY_SITE_FOOTER_STYLE_END -->
+<link rel="stylesheet" href="desktop-web.css">
 </head>
 <body>
 <div class="container">
-  <h1>Қыбла</h1>
-  <div class="hero">
-    <div class="panel">
-      <div class="form-grid">
-        <div class="field">
-          <label for="countryInput">Ел</label>
-          <input id="countryInput" class="input" placeholder="Мысалы: Uzbekistan">
-        </div>
-        <div class="field">
-          <label for="cityInput">Қала</label>
-          <input id="cityInput" class="input" list="citySuggestions" placeholder="Мысалы: Tashkent">
-          <datalist id="citySuggestions"></datalist>
-        </div>
-      </div>
-
-      <div class="btn-row">
-        <button class="btn primary" id="searchCityBtn">Қала бойынша табу</button>
-        <button class="btn secondary" id="detectBtn">Автоматты анықтау</button>
-        <button class="btn" id="resetHeadingBtn">Бағытты қалпына келтіру</button>
-      </div>
-
-      <div class="meta-grid">
-        <div class="meta-item">
-          <div class="meta-label">Орналасу</div>
-          <div class="meta-value" id="locationName">Қыбла беті</div>
-        </div>
-        <div class="meta-item">
-          <div class="meta-label">Координаттар</div>
-          <div class="meta-value" id="coordsText">—</div>
-        </div>
-        <div class="meta-item">
-          <div class="meta-label">Қағбаға бағыт</div>
-          <div class="meta-value" id="qiblaAngleText">—</div>
-        </div>
-        <div class="meta-item">
-          <div class="meta-label">Шамамен қашықтық</div>
-          <div class="meta-value" id="distanceText">—</div>
-        </div>
-      </div>
-
-      <div class="badge-row">
-        <span class="badge" id="sensorBadge">Қыбланың нақты бағыты</span>
-        <span class="badge warn" id="hintBadge">Көрсеткі телефон қозғалған сайын жаңарып, әрқашан Қыбла бағытын көрсетеді</span>
-      </div>
-
-      </div>
-
-    <div class="panel qibla-stage">
-      <div class="compass-wrap">
-        <div class="rose-layer" id="compassRose">
-          <div class="compass-base"></div>
-          <div class="compass-ring"></div>
-          <div class="compass-ring secondary"></div>
-
-          <div class="cardinal n">N</div>
-          <div class="cardinal e">E</div>
-          <div class="cardinal s">S</div>
-          <div class="cardinal w">W</div>
-        </div>
-
-        <div class="direction-arrow" id="qiblaArrow"></div>
-        <div class="kaaba-dot"></div>
-      </div>
-    </div>
-  </div>
+<h1>Құбыла</h1>
+<div class="hero">
+<div class="panel">
+<div class="form-grid">
+<div class="field">
+<label for="countryInput">Ел</label>
+<input class="input" id="countryInput" placeholder="ЕлЕлЕл: Uzbekistan"/>
 </div>
-
+<div class="field">
+<label for="cityInput">Қала</label>
+<input class="input" id="cityInput" list="citySuggestions" placeholder="ЕлЕлЕл: Tashkent"/>
+<datalist id="citySuggestions"></datalist>
+</div>
+</div>
+<div class="btn-row">
+<button class="btn primary" id="searchCityBtn">Қала бойынша табу</button>
+<button class="btn secondary" id="detectBtn">Орналасуды анықтау</button>
+<button class="btn" id="resetHeadingBtn">Компасты қалпына келтіру</button>
+</div>
+<div class="meta-grid">
+<div class="meta-item">
+<div class="meta-label">Орналасу</div>
+<div class="meta-value" id="locationName">Қала таңдаңыз</div>
+</div>
+<div class="meta-item">
+<div class="meta-label">Координаттар</div>
+<div class="meta-value" id="coordsText">—</div>
+</div>
+<div class="meta-item">
+<div class="meta-label">Қағбаға бағыт</div>
+<div class="meta-value" id="qiblaAngleText">—</div>
+</div>
+<div class="meta-item">
+<div class="meta-label">Шамамен қашықтық</div>
+<div class="meta-value" id="distanceText">—</div>
+</div>
+</div>
+<div class="badge-row">
+<span class="badge" id="sensorBadge">Компас деректерді күтуде</span>
+<span class="badge warn" id="hintBadge">Геолокацияға рұқсат беріңіз немесе қаланы қолмен таңдаңыз</span>
+</div>
+</div>
+<div class="panel qibla-stage">
+<div class="compass-wrap">
+<div class="rose-layer" id="compassRose">
+<div class="compass-base"></div>
+<div class="compass-ring"></div>
+<div class="compass-ring secondary"></div>
+<div class="cardinal n">N</div>
+<div class="cardinal e">E</div>
+<div class="cardinal s">S</div>
+<div class="cardinal w">W</div>
+</div>
+<div class="direction-arrow" id="qiblaArrow"></div>
+<div class="kaaba-dot"></div>
+</div>
+</div>
+</div>
+</div>
 <script>
-const UI = {"status_default": "Орналасуды күтуде", "status_sensor": "Бағыт датчигі белсенді", "status_manual": "Қолмен режим", "not_supported": "Бағыт датчигі қолдау таппайды", "need_permission": "iPhone құрылғысында қозғалыс датчигіне рұқсат қажет болуы мүмкін", "unknown": "Таңдалмаған", "detect_error": "Орналасуды анықтау мүмкін болмады", "city_required": "Елді де, қаланы да көрсет", "load_error": "Қала бойынша орналасуды жүктеу мүмкін болмады", "accuracy_good": "Компас белсенді · жоғары дәлдік", "accuracy_medium": "Компас белсенді · орташа дәлдік", "accuracy_low": "Компас белсенді · калибрлеу қажет", "tilt_hint": "Телефонды тік ұстап, металл мен магниттерден алыста ұста", "calibration_hint": "Егер көрсеткі дұрыс көрсетпесе — компасты «сегіздік» қозғалысымен калибрле және өзіңді бұр", "geolocation_accuracy": "GPS дәлдігі", "heading_unavailable": "Бұл құрылғыда сенімді компас жоқ. Қыбла бағыты статикалық түрде көрсетіледі"};
+const UI = {"status_default": "Құбыла бағытын анықтау күтілуде", "status_sensor": "Құбыла телефон датчиктері арқылы анықталуда", "status_manual": "Құбыла қолмен таңдалған қала бойынша есептелді", "not_supported": "Бағыт датчигі қолдау көрсетпейді", "need_permission": "iPhone құрылғысында қозғалыс және бағдар датчиктеріне рұқсат беріңіз", "unknown": "Белгісіз", "detect_error": "Бағытты анықтау мүмкін болмады", "city_required": "Ел мен қаланы енгізіңіз.", "load_error": "Құбыла деректерін жүктеу мүмкін болмады", "accuracy_good": "Дәлдік жақсы", "accuracy_medium": "Дәлдік орташа", "accuracy_low": "Дәлдік төмен", "location_ready": "Орналасқан жер анықталды", "location_denied": "Геолокацияға рұқсат берілмеген", "location_error": "Геолокацияны алу мүмкін болмады", "geolocation_accuracy": "GPS дәлдігі", "distance_label": "Қағбаға дейінгі қашықтық", "angle_label": "Құбыла бұрышы", "coords_label": "Координаттар", "manual_ready": "Қала қолмен таңдалды", "manual_not_found": "Қала табылмады", "permission_required": "Геолокацияға рұқсат беріңіз немесе қаланы қолмен таңдаңыз"};
 
 const state = {
   lat: localStorage.getItem('qibla_lat') || '',
@@ -768,7 +768,7 @@ function setLocationUI() {
     document.getElementById('coordsText').textContent = `${Number(state.lat).toFixed(4)}, ${Number(state.lon).toFixed(4)}`;
     const q = computeQibla(Number(state.lat), Number(state.lon));
     document.getElementById('qiblaAngleText').textContent = q.bearing.toFixed(1) + '°';
-    const geoText = state.geolocationAccuracy != null ? ` · ${UI.geolocation_accuracy}: ±${Math.round(state.geolocationAccuracy)} м` : '';
+    const geoText = state.geolocationAccuracy != null ? ` — ${UI.geolocation_accuracy}: ±${Math.round(state.geolocationAccuracy)} м` : '';
     document.getElementById('distanceText').textContent = Math.round(q.distanceKm).toLocaleString() + ' km' + geoText;
     rotateStaticQibla(q.bearing);
   } else {
@@ -808,6 +808,57 @@ function saveLocation() {
 function alertMsg(msg) {
   alert(msg);
 }
+
+function getCapacitorPlatform(){
+  try {
+    if (window.Capacitor && typeof window.Capacitor.getPlatform === 'function') return window.Capacitor.getPlatform();
+  } catch (_) {}
+  return '';
+}
+
+async function getAndroidPackageId(){
+  try {
+    const plugins = window.Capacitor && window.Capacitor.Plugins ? window.Capacitor.Plugins : null;
+    if (plugins && plugins.App && typeof plugins.App.getInfo === 'function') {
+      const info = await plugins.App.getInfo();
+      if (info && info.id) return info.id;
+    }
+  } catch (_) {}
+  return '';
+}
+
+async function openAppLocationSettings(){
+  const platform = getCapacitorPlatform();
+  try {
+    if (platform === 'ios') {
+      window.location.href = 'app-settings:';
+      return true;
+    }
+
+    if (platform === 'android') {
+      const packageId = await getAndroidPackageId();
+      const intentUrls = [];
+      if (packageId) {
+        intentUrls.push('intent://' + packageId + '#Intent;scheme=package;action=android.settings.APPLICATION_DETAILS_SETTINGS;end');
+      }
+      intentUrls.push('intent://settings#Intent;action=android.settings.LOCATION_SOURCE_SETTINGS;end');
+      intentUrls.push('intent://settings#Intent;action=android.settings.SETTINGS;end');
+      window.location.href = intentUrls[0];
+      return true;
+    }
+  } catch (_) {}
+  return false;
+}
+
+async function promptLocationSettings(msg){
+  const text = UI.open_settings_prompt || msg || UI.location_denied || UI.permission_required || UI.detect_error;
+  const shouldOpen = window.confirm(text);
+  if (shouldOpen) {
+    const opened = await openAppLocationSettings();
+    if (!opened) alertMsg(UI.open_settings_manual || UI.permission_required || msg);
+  }
+}
+
 
 async function suggestCities() {
   const city = document.getElementById('cityInput').value.trim();
@@ -1096,53 +1147,161 @@ async function initOrientationIfPossible() {
   }
 }
 
-async function detectLocation() {
-  if (!navigator.geolocation) {
-    alertMsg(UI.detect_error);
-    return;
+async function reverseGeocodeLocation(lat, lon) {
+  try {
+    const controller = new AbortController();
+    const timer = setTimeout(() => controller.abort(), 8000);
+    const res = await fetch(`https://nominatim.openstreetmap.org/reverse?format=jsonv2&lat=${lat}&lon=${lon}`, { signal: controller.signal });
+    clearTimeout(timer);
+    if (!res.ok) throw new Error('Reverse geocode failed');
+    const data = await res.json();
+    const addr = data.address || {};
+    const city = addr.city || addr.town || addr.village || addr.county || '';
+    const country = addr.country || '';
+    return {
+      city,
+      country,
+      name: [city, country].filter(Boolean).join(', ')
+    };
+  } catch (_) {
+    return { city: '', country: '', name: '' };
+  }
+}
+
+function setDetectBusy(isBusy) {
+  const btn = document.getElementById('detectBtn');
+  if (!btn) return;
+  if (!btn.dataset.originalText) btn.dataset.originalText = btn.textContent;
+  btn.disabled = !!isBusy;
+  btn.style.opacity = isBusy ? '.72' : '';
+  btn.textContent = isBusy ? (UI.detecting || UI.status_default || 'Detecting...') : btn.dataset.originalText;
+}
+
+function applyGeoPosition(pos) {
+  const lat = pos.coords.latitude;
+  const lon = pos.coords.longitude;
+
+  state.lat = String(lat);
+  state.lon = String(lon);
+  state.geolocationAccuracy = typeof pos.coords.accuracy === 'number' ? pos.coords.accuracy : null;
+
+  if (!state.locationName) {
+    state.locationName = `${Number(lat).toFixed(4)}, ${Number(lon).toFixed(4)}`;
   }
 
-  const onSuccess = async (pos) => {
-    const lat = pos.coords.latitude;
-    const lon = pos.coords.longitude;
-    state.lat = String(lat);
-    state.lon = String(lon);
-    state.geolocationAccuracy = typeof pos.coords.accuracy === 'number' ? pos.coords.accuracy : null;
+  saveLocation();
+  setLocationUI();
 
-    try {
-      const res = await fetch(`https://nominatim.openstreetmap.org/reverse?format=jsonv2&lat=${lat}&lon=${lon}`);
-      const data = await res.json();
-      const addr = data.address || {};
-      const city = addr.city || addr.town || addr.village || addr.county || '';
-      const country = addr.country || '';
-      state.city = city;
-      state.country = country;
-      state.locationName = [city, country].filter(Boolean).join(', ') || UI.unknown;
-      document.getElementById('cityInput').value = city;
-      document.getElementById('countryInput').value = country;
-    } catch (_) {
-      state.locationName = UI.unknown;
+  const sensorBadge = document.getElementById('sensorBadge');
+  const hintBadge = document.getElementById('hintBadge');
+  if (sensorBadge) {
+    sensorBadge.textContent = UI.location_ready || UI.status_manual || UI.status_default;
+    sensorBadge.className = 'badge';
+  }
+  if (hintBadge) {
+    hintBadge.textContent = UI.calibration_hint || UI.tilt_hint || UI.permission_required || '';
+    hintBadge.className = 'badge warn';
+  }
+
+  initOrientationIfPossible();
+}
+
+function getPositionOnce(options) {
+  return new Promise((resolve, reject) => {
+    navigator.geolocation.getCurrentPosition(resolve, reject, options);
+  });
+}
+
+async function detectLocation(options = {}) {
+  const silent = !!options.silent;
+
+  if (!navigator.geolocation) {
+    if (!silent) alertMsg(UI.location_error || UI.detect_error);
+    const badge = document.getElementById('sensorBadge');
+    if (badge) {
+      badge.textContent = UI.location_error || UI.detect_error;
+      badge.className = 'badge error';
+    }
+    return false;
+  }
+
+  setDetectBusy(true);
+
+  try {
+    if (navigator.permissions && navigator.permissions.query) {
+      try {
+        const perm = await navigator.permissions.query({ name: 'geolocation' });
+        if (perm && perm.state === 'denied') {
+          const msg = UI.location_denied || UI.permission_required || UI.detect_error;
+          if (!silent) await promptLocationSettings(msg);
+          const badge = document.getElementById('sensorBadge');
+          const hint = document.getElementById('hintBadge');
+          if (badge) { badge.textContent = msg; badge.className = 'badge error'; }
+          if (hint) { hint.textContent = UI.permission_required || msg; hint.className = 'badge warn'; }
+          return false;
+        }
+      } catch (_) {}
     }
 
-    saveLocation();
-    setLocationUI();
-    await initOrientationIfPossible();
-  };
+    const primaryOptions = { enableHighAccuracy: true, timeout: 22000, maximumAge: 0 };
+    const fallbackOptions = { enableHighAccuracy: false, timeout: 12000, maximumAge: 600000 };
 
-  navigator.geolocation.getCurrentPosition(onSuccess, () => {
-    alertMsg(UI.detect_error);
-  }, {
-    enableHighAccuracy: true,
-    timeout: 15000,
-    maximumAge: 0
-  });
+    let pos;
+    try {
+      pos = await getPositionOnce(primaryOptions);
+    } catch (_) {
+      pos = await getPositionOnce(fallbackOptions);
+    }
 
-  if (state.watchId == null && navigator.geolocation.watchPosition) {
-    state.watchId = navigator.geolocation.watchPosition(onSuccess, () => {}, {
-      enableHighAccuracy: true,
-      timeout: 15000,
-      maximumAge: 3000
-    });
+    const geo = await reverseGeocodeLocation(pos.coords.latitude, pos.coords.longitude);
+    if (geo.city) {
+      state.city = geo.city;
+      const cityInput = document.getElementById('cityInput');
+      if (cityInput) cityInput.value = geo.city;
+    }
+    if (geo.country) {
+      state.country = geo.country;
+      const countryInput = document.getElementById('countryInput');
+      if (countryInput) countryInput.value = geo.country;
+    }
+    state.locationName = geo.name || `${Number(pos.coords.latitude).toFixed(4)}, ${Number(pos.coords.longitude).toFixed(4)}`;
+
+    applyGeoPosition(pos);
+
+    if (state.watchId != null && navigator.geolocation.clearWatch) {
+      try { navigator.geolocation.clearWatch(state.watchId); } catch (_) {}
+      state.watchId = null;
+    }
+
+    if (navigator.geolocation.watchPosition) {
+      state.watchId = navigator.geolocation.watchPosition((watchPos) => {
+        applyGeoPosition(watchPos);
+      }, () => {}, {
+        enableHighAccuracy: true,
+        timeout: 20000,
+        maximumAge: 5000
+      });
+    }
+
+    return true;
+  } catch (err) {
+    const code = err && typeof err.code === 'number' ? err.code : 0;
+    const msg = code === 1
+      ? (UI.location_denied || UI.permission_required || UI.detect_error)
+      : (UI.location_error || UI.detect_error);
+
+    const badge = document.getElementById('sensorBadge');
+    const hint = document.getElementById('hintBadge');
+    if (badge) { badge.textContent = msg; badge.className = 'badge error'; }
+    if (hint) { hint.textContent = UI.permission_required || msg; hint.className = 'badge warn'; }
+
+    if (!silent) {
+      if (code === 1) await promptLocationSettings(msg);
+      else alertMsg(msg);
+    }
+    return false;
+  } finally {
+    setDetectBusy(false);
   }
 }
 
@@ -1157,32 +1316,42 @@ function resetDirection() {
     state.targetArrowAngle = base;
     renderArrow(base);
     document.getElementById('hintBadge').textContent = UI.calibration_hint;
-    alertMsg('Компас қалпына келтірілді. Дәлдік үшін телефонды «сегіздік» қозғалыспен калибрле.');
+    alertMsg('Құбыла бағыты есептелді. Дәл бағыт үшін телефонды көлденең ұстаңыз.');
   }
 }
 
 function bootstrap() {
+  UI.heading_unavailable = UI.heading_unavailable || UI.not_supported || UI.detect_error || 'Compass unavailable';
+  UI.tilt_hint = UI.tilt_hint || UI.permission_required || UI.need_permission || '';
+  UI.calibration_hint = UI.calibration_hint || UI.tilt_hint || UI.permission_required || '';
+  UI.location_ready = UI.location_ready || UI.status_manual || 'Location detected';
+  UI.location_denied = UI.location_denied || UI.permission_required || UI.detect_error || 'Location permission denied';
+  UI.location_error = UI.location_error || UI.detect_error || 'Could not detect location';
+  UI.detecting = UI.detecting || UI.status_default || 'Detecting...';
+
   document.getElementById('cityInput').addEventListener('input', suggestCities);
   document.getElementById('searchCityBtn').addEventListener('click', searchByCity);
-  document.getElementById('detectBtn').addEventListener('click', detectLocation);
+  document.getElementById('detectBtn').addEventListener('click', () => detectLocation({ silent: false }));
   document.getElementById('resetHeadingBtn').addEventListener('click', resetDirection);
 
   document.getElementById('cityInput').value = state.city || '';
   document.getElementById('countryInput').value = state.country || '';
   setLocationUI();
+
   if (state.lat && state.lon) {
-    setLocationUI();
     initOrientationIfPossible();
+  } else {
+    setTimeout(() => {
+      detectLocation({ silent: true });
+    }, 700);
   }
 }
 
 bootstrap();
 </script>
 <script src="/bottom-nav.js"></script>
+
+<!-- BARAKAWAY_SITE_FOOTER_START --><div data-bw-component-slot="footer"></div><!-- BARAKAWAY_SITE_FOOTER_END -->
+<script src="web-navigation.js?v=no-dua-force-20260616-2"></script>
 </body>
 </html>
-
-
-
-
-
