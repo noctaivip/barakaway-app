@@ -45,9 +45,29 @@
     footer.className='bw-site-footer';
     footer.setAttribute('aria-label','BarakaWay footer');
     footer.setAttribute('data-bw-component','footer');
-    footer.innerHTML='<div class="bw-footer-line"><div class="bw-footer-brand"><span class="bw-footer-dot" aria-hidden="true"></span><span>BarakaWay</span></div><nav class="bw-footer-links" aria-label="'+aria+'">'+links.map(function(l){return '<a href="'+root+l[0]+'">'+l[1]+'</a>';}).join('')+'</nav><a class="bw-footer-install" href="'+root+'install-app-'+lang+'.html">'+install+'</a></div><div class="bw-footer-bottom">© 2026 BarakaWay. '+rights+'</div>';
+    footer.innerHTML='<div class="bw-footer-line"><div class="bw-footer-brand"><span class="bw-footer-dot" aria-hidden="true"></span><span>BarakaWay</span></div><nav class="bw-footer-links" aria-label="'+aria+'">'+links.map(function(l){return '<a href="'+root+l[0]+'">'+l[1]+'</a>';}).join('')+'</nav><a class="bw-footer-install" href="https://play.google.com/store/apps/details?id=app.barakaway.mobile">'+install+'</a></div><div class="bw-footer-bottom">© 2026 BarakaWay. '+rights+'</div>';
     setActiveLinks(footer);
     return footer;
+  }
+
+
+  function removeRequestedLandscapeNotice(){
+    var needles=["BarakaWay "+"web-версия оптимизирована для " + "горизонтального браузера","web-версия оптимизирована для " + "горизонтального браузера"];
+    document.querySelectorAll("body *").forEach(function(el){
+      if(!el || el.children.length) return;
+      var t=(el.textContent||"").replace(/\s+/g," ").trim();
+      if(needles.some(function(n){return t.indexOf(n)!==-1;})){
+        var target=el.closest("section,div,header,aside,p,span")||el;
+        target.style.display="none";
+        target.setAttribute("hidden","hidden");
+      }
+    });
+  }
+  function wireRequestedInstallLinks(){
+    var url="https://play.google.com/store/apps/details?id=app.barakaway.mobile";
+    document.querySelectorAll(".bw-footer-install,.bw-web-install-cta,a[href*='install-app-']").forEach(function(el){
+      el.setAttribute("href",url);
+    });
   }
 
   function init(){
