@@ -5969,7 +5969,7 @@ html.light-mode .bw-pro-card{
 </div>
 <div class="bw-showcase-intro bw-pro-intro">
 <div class="bw-showcase-kicker">BarakaWay PRO</div>
-<div class="bw-showcase-title">BarakaWay PRO — для тех, кто хочет глубже</div>
+<div class="bw-showcase-title">BarakaWay PRO — для тех, кто хочет большего</div>
 <div class="bw-showcase-text">Расширенные функции открываются внутри приложения: больше духовной пользы, персонального прогресса и красивого исламского опыта.</div>
 <a class="bw-pro-main-button" href="pro-ru.html">Открыть PRO в приложении</a>
 </div>
@@ -16451,7 +16451,7 @@ window.addEventListener('storage',syncUpsell);
 <script src="web-navigation.js?v=no-dua-force-20260616-2"></script>
 <script id="bw-home-header-nav-v2">
 (function(){
-  var items = [["Главная", "home-ru.html"], ["Коран", "quran-ru.html"], ["Азкары", "adhkar-ru.html"], ["Дуа", "prophets-duas-ru.html"], ["99 имён", "names-ru.html"], ["Статьи", "articles-ru.html"], ["Жизнь", "life-situations-ru.html"], ["Крепость", "prophets-duas-ru.html"], ["Pro", "pro-ru.html"]];
+  var items = [["Главная", "home-ru.html"], ["Коран", "quran-ru.html"], ["Азкары", "adhkar-ru.html"], ["99 имён", "names-ru.html"], ["Статьи", "articles-ru.html"], ["Жизнь", "life-situations-ru.html"], ["Крепость", "prophets-duas-ru.html"], ["Pro", "pro-ru.html"]];
   function build(){
     return items.map(function(item){
       return '<a href="' + item[1] + '">' + item[0] + '</a>';
@@ -16478,6 +16478,49 @@ window.addEventListener('storage',syncUpsell);
 </script>
 
 <!-- BARAKAWAY_SITE_FOOTER_START --><div data-bw-component-slot="footer"></div><!-- BARAKAWAY_SITE_FOOTER_END -->
+
+<script id="bw-requested-mobile-fixes-20260618">
+(function(){
+  "use strict";
+  var PLAY_URL = "https://play.google.com/store/apps/details?id=app.barakaway.mobile";
+  function removeLandscapeNotice(){
+    var needles = [
+      "BarakaWay " + "web-версия оптимизирована для " + "горизонтального браузера",
+      "web-версия оптимизирована для " + "горизонтального браузера"
+    ];
+    document.querySelectorAll("body *").forEach(function(el){
+      if (!el || el.children.length) return;
+      var text = (el.textContent || "").replace(/\s+/g, " ").trim();
+      if (needles.some(function(n){ return text.indexOf(n) !== -1; })) {
+        var target = el.closest("section,div,header,aside,p,span") || el;
+        target.style.display = "none";
+        target.setAttribute("hidden", "hidden");
+      }
+    });
+  }
+  function wireInstallButtons(){
+    document.querySelectorAll("#installBtn,.bw-footer-install,.bw-web-install-cta,a[href*='install-app-'],button.install-btn").forEach(function(el){
+      if (!el) return;
+      if (el.tagName === "A") el.setAttribute("href", PLAY_URL);
+      el.addEventListener("click", function(e){
+        e.preventDefault();
+        window.location.href = PLAY_URL;
+      }, true);
+    });
+  }
+  document.addEventListener("DOMContentLoaded", function(){
+    removeLandscapeNotice();
+    wireInstallButtons();
+    setTimeout(removeLandscapeNotice, 250);
+    setTimeout(wireInstallButtons, 250);
+    setTimeout(removeLandscapeNotice, 1000);
+  });
+  window.addEventListener("load", function(){
+    removeLandscapeNotice();
+    wireInstallButtons();
+  });
+})();
+</script>
 </body>
 </html>
 
