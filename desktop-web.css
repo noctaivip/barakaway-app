@@ -1,7 +1,6 @@
 /* BarakaWay RU web edition: desktop/browser-only layer */
 :root{--bw-web-max:1280px;--bw-web-pad:clamp(24px,3.2vw,56px);}
-html{min-width:1024px;}
-body{min-width:1024px;padding-bottom:0!important;}
+body{padding-bottom:0!important;}
 .bw-web-shell{width:min(var(--bw-web-max),calc(100% - var(--bw-web-pad)*2));margin:0 auto;}
 .bw-web-topnav{position:sticky;top:0;z-index:5000;backdrop-filter:blur(18px);background:rgba(8,14,12,.82);border-bottom:1px solid rgba(215,181,109,.22);box-shadow:0 18px 46px rgba(0,0,0,.16);}
 html.light-mode .bw-web-topnav{background:rgba(255,252,244,.86);}
@@ -11,9 +10,9 @@ html.light-mode .bw-web-topnav{background:rgba(255,252,244,.86);}
 .bw-web-links{display:flex;align-items:center;gap:8px;margin-left:auto;flex-wrap:wrap;justify-content:flex-end;}
 .bw-web-links a{display:inline-flex;align-items:center;min-height:40px;padding:0 13px;border-radius:999px;text-decoration:none;color:inherit;font-size:13px;font-weight:850;border:1px solid transparent;opacity:.88;}
 .bw-web-links a:hover,.bw-web-links a[aria-current="page"]{opacity:1;border-color:rgba(215,181,109,.30);background:rgba(215,181,109,.12);}
-.bottom-nav,[class*="mobile-nav"],.mobile-theme-toggle,.install-app,.app-install,.pwa-install,.download-app{display:none!important;}
+@media (min-width:1024px){.bottom-nav,[class*="mobile-nav"],.mobile-theme-toggle,.install-app,.app-install,.pwa-install,.download-app{display:none!important;}}
 .container,.page,.wrap,.ramadan-wrapper,main{max-width:min(var(--bw-web-max),calc(100% - var(--bw-web-pad)*2))!important;}
-@media (max-width:1023px){html,body{min-width:1024px;}body::before{content:"BarakaWay web-версия оптимизирована для горизонтального браузера.";display:block;padding:12px 18px;text-align:center;font-weight:800;background:#111814;color:#f0d891;}}
+
 
 
 /* RU web edition: browser-first navigation and app CTA */
@@ -30,92 +29,86 @@ html.light-mode .bw-web-topnav{background:rgba(255,252,244,.86);}
 
 
 
-/* BarakaWay responsive/mobile safety layer */
-html{min-width:0;}
-body{min-width:0;overflow-x:hidden;}
-img,svg,video,canvas,iframe{max-width:100%;}
-*{box-sizing:border-box;}
 
-@media (max-width:1023px){
-  html,body{min-width:0;}
-  body::before{content:none!important;display:none!important;}
-  .bw-web-shell,
-  .bw-web-topnav__inner,
-  .container,.page,.wrap,.ramadan-wrapper,main{
+/* BarakaWay mobile responsive patch - applied only on mobile/tablet widths */
+@media (max-width: 900px){
+  html, body{
+    min-width:0!important;
     width:100%!important;
     max-width:100%!important;
+    overflow-x:hidden!important;
   }
-  .bw-web-topnav__inner{
-    min-height:auto;
-    padding:10px 14px;
-    gap:10px;
-    align-items:stretch;
-    flex-wrap:wrap;
-  }
-  .bw-web-brand{
-    max-width:100%;
-    min-width:0;
-  }
-  .bw-web-brand span{
-    overflow:hidden;
-    text-overflow:ellipsis;
-  }
-  .bw-web-links{
-    width:100%;
-    margin-left:0;
-    justify-content:flex-start;
-    flex-wrap:nowrap;
-    overflow-x:auto;
-    padding-bottom:4px;
-    -webkit-overflow-scrolling:touch;
-    scrollbar-width:none;
-  }
-  .bw-web-links::-webkit-scrollbar{display:none;}
-  .bw-web-links a{
-    flex:0 0 auto;
-    min-height:38px;
-    padding:0 12px;
-    font-size:12px;
-  }
-  .bw-web-app-hero{
-    width:calc(100% - 28px);
-    margin:18px auto;
-    padding:24px 18px;
-    border-radius:24px;
-  }
-  .bw-web-app-hero h1{font-size:clamp(28px,8vw,38px);}
-  .bw-web-app-actions{display:grid;grid-template-columns:1fr;}
-  .bw-web-app-actions a{width:100%;}
-}
+  *, *::before, *::after{box-sizing:border-box;}
+  body{padding-left:0!important;padding-right:0!important;}
+  img, video, canvas, svg, iframe{max-width:100%!important;height:auto!important;}
+  table{display:block!important;width:100%!important;max-width:100%!important;overflow-x:auto!important;border-collapse:collapse;}
+  pre, code{white-space:pre-wrap!important;word-break:break-word!important;}
 
-@media (max-width:760px){
-  .container,.page,.wrap,.ramadan-wrapper,main{
-    padding-left:16px!important;
-    padding-right:16px!important;
-  }
-  h1{font-size:clamp(28px,8.8vw,36px);line-height:1.12;}
-  h2{font-size:clamp(22px,6.5vw,28px);line-height:1.18;}
-  .bw-web-app-grid,
-  .grid,.cards,.generator-grid,.features-grid,.quick-grid,.tools-grid,.stats-grid{
-    grid-template-columns:1fr!important;
-  }
-  .card-actions,.modal-actions,.confirm-actions{
-    grid-template-columns:1fr!important;
-  }
-  table{
-    display:block;
-    width:100%;
-    max-width:100%;
-    overflow-x:auto;
-    -webkit-overflow-scrolling:touch;
-  }
-}
-
-@media (max-width:420px){
-  .container,.page,.wrap,.ramadan-wrapper,main{
+  .bw-web-shell, .bw-web-topnav__inner, .container, .page, .wrap, .wrapper, .content, main, section, article,
+  .ramadan-wrapper, .settings-container, .article-container, .surah-container, .dua-container, .adhkar-container,
+  .favorites-container, .holiday-container, .mosque-container, .prayer-container, .quran-container, .wallet-container{
+    width:calc(100% - 24px)!important;
+    max-width:100%!important;
+    min-width:0!important;
+    margin-left:auto!important;
+    margin-right:auto!important;
     padding-left:12px!important;
     padding-right:12px!important;
   }
-  .bw-web-topnav__inner{padding-left:10px;padding-right:10px;}
-  .bw-web-brand img{width:38px;height:38px;border-radius:12px;}
+
+  .bw-web-topnav{position:sticky!important;top:0!important;}
+  .bw-web-topnav__inner{min-height:64px!important;gap:10px!important;flex-wrap:wrap!important;}
+  .bw-web-brand{max-width:100%!important;white-space:normal!important;font-size:16px!important;}
+  .bw-web-brand img{width:36px!important;height:36px!important;border-radius:12px!important;}
+  .bw-web-links{
+    width:100%!important;
+    margin-left:0!important;
+    justify-content:flex-start!important;
+    flex-wrap:nowrap!important;
+    overflow-x:auto!important;
+    -webkit-overflow-scrolling:touch;
+    padding-bottom:8px!important;
+  }
+  .bw-web-links a{min-height:36px!important;padding:0 11px!important;font-size:12px!important;white-space:nowrap!important;flex:0 0 auto!important;}
+
+  .bw-web-app-hero{width:calc(100% - 24px)!important;margin:18px auto!important;padding:24px 16px!important;border-radius:24px!important;}
+  .bw-web-app-hero h1, h1{font-size:clamp(28px,8vw,38px)!important;line-height:1.08!important;letter-spacing:-.04em!important;}
+  h2{font-size:clamp(22px,6vw,30px)!important;line-height:1.14!important;}
+  h3{font-size:clamp(18px,5vw,24px)!important;line-height:1.18!important;}
+  p, li{font-size:16px;line-height:1.65;}
+
+  .grid, .cards, .card-grid, .features, .feature-grid, .home-grid, .quick-grid, .prayer-grid, .surah-grid,
+  .dua-grid, .adhkar-grid, .article-grid, .articles-grid, .category-grid, .month-grid, .settings-grid,
+  .names-grid, .mosque-grid, .holiday-grid, .tool-grid, .bw-web-app-grid{
+    display:grid!important;
+    grid-template-columns:1fr!important;
+    gap:14px!important;
+  }
+
+  .hero, .card, .panel, .block, .box, .article, .category-panel, .surah-card, .prayer-card, .home-widget,
+  .wallet-support, .wallet-box, .transactions, .intro, .quote, .warning, .modal-card{
+    max-width:100%!important;
+    min-width:0!important;
+    border-radius:22px!important;
+    padding-left:16px!important;
+    padding-right:16px!important;
+  }
+
+  .row, .actions, .buttons, .btn-row, .button-row, .modal-actions, .bw-web-app-actions, .footer, .site-footer{
+    flex-direction:column!important;
+    align-items:stretch!important;
+    gap:10px!important;
+  }
+  button, .btn, .button, input, select, textarea{max-width:100%!important;}
+  .btn, .button, button[type=submit], input[type=submit]{width:100%;}
+
+  .bw-site-footer{width:calc(100% - 24px)!important;max-width:100%!important;padding:0 0 22px!important;}
+  .bw-footer-line{flex-direction:column!important;text-align:center!important;align-items:center!important;padding:18px 14px!important;}
+  .bw-footer-brand{min-width:0!important;white-space:normal!important;}
+}
+
+@media (max-width: 480px){
+  .container, .page, .wrap, .wrapper, .content, main, section, article{width:calc(100% - 16px)!important;padding-left:8px!important;padding-right:8px!important;}
+  .hero, .card, .panel, .block, .box{padding:14px!important;border-radius:20px!important;}
+  .bw-web-app-hero{width:calc(100% - 16px)!important;padding:20px 14px!important;}
 }
