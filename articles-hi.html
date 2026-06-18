@@ -1553,6 +1553,80 @@ html.dark-mode ._removed_group_count{
   .share-spark.right{right:calc(50% - 108px);top:20px}
 }
 
+
+
+/* === FINAL FIX: article CTA arrow-only on mobile/desktop === */
+.article-go a{
+  width:48px !important;
+  height:48px !important;
+  min-width:48px !important;
+  min-height:48px !important;
+  padding:0 !important;
+  gap:0 !important;
+  border-radius:999px !important;
+  display:inline-flex !important;
+  align-items:center !important;
+  justify-content:center !important;
+  color:#13251a !important;
+  border:1px solid rgba(255,238,180,.62) !important;
+  background:linear-gradient(180deg,#fff1b8 0%,#d7b56d 56%,#a87925 100%) !important;
+  box-shadow:0 10px 22px rgba(0,0,0,.30), inset 0 1px 0 rgba(255,255,255,.62) !important;
+  overflow:hidden !important;
+}
+.article-go a span:not(.article-go-arrow){
+  display:none !important;
+}
+.article-go a::before,
+.article-go a::after{
+  display:none !important;
+  content:none !important;
+}
+.article-go-arrow{
+  width:48px !important;
+  height:48px !important;
+  min-width:48px !important;
+  min-height:48px !important;
+  margin:0 !important;
+  display:inline-flex !important;
+  align-items:center !important;
+  justify-content:center !important;
+  color:#13251a !important;
+  background:transparent !important;
+  box-shadow:none !important;
+  font-size:24px !important;
+  line-height:1 !important;
+  font-weight:950 !important;
+}
+.article-go a:hover{
+  background:linear-gradient(180deg,#fff6cc 0%,#e3bd5f 56%,#b58a36 100%) !important;
+  transform:translateY(-1px) !important;
+}
+html.light-mode .article-go a{
+  color:#13251a !important;
+  background:linear-gradient(180deg,#ffffff 0%,#f0d891 56%,#c59b46 100%) !important;
+}
+html.light-mode .article-go a:hover{
+  color:#13251a !important;
+  background:linear-gradient(180deg,#ffffff 0%,#f4dc97 56%,#d7b56d 100%) !important;
+}
+@media(max-width:720px){
+  .article-go a{
+    width:48px !important;
+    height:48px !important;
+    min-width:48px !important;
+    min-height:48px !important;
+    padding:0 !important;
+    font-size:0 !important;
+  }
+  .article-go-arrow{
+    width:48px !important;
+    height:48px !important;
+    min-width:48px !important;
+    min-height:48px !important;
+    font-size:24px !important;
+  }
+}
+
 </style>
 <script src="theme-init.js"></script>
 <link rel="stylesheet" href="theme.css">
