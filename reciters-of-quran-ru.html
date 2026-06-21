@@ -1,0 +1,678 @@
+<!--
+بِسْمِ ٱللَّٰهِ ٱلرَّحْمَـٰنِ ٱلرَّحِيمِ
+In the name of Allah, the Most Merciful, the Most Compassionate
+-->
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<meta name="theme-color" content="#2d7a46">
+<title>Прослушивание Корана — BarakaWay</title>
+<meta name="description" content="Выберите чтеца и слушайте Священный Коран в BarakaWay.">
+<link rel="icon" type="image/png" href="/favicon.webp">
+<link rel="manifest" href="/manifest.json">
+<meta property="og:title" content="Прослушивание Корана — BarakaWay">
+<meta property="og:description" content="Выберите чтеца и слушайте Священный Коран в BarakaWay.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://onedollarexit.com/reciters-of-quran-ru.html">
+<meta property="og:image" content="https://onedollarexit.com/favicon.webp">
+<style>
+:root{
+  --page:#06110f;
+  --panel:#111b20;
+  --panel-2:#0d1518;
+  --gold:#d7b56d;
+  --gold-2:#f0d891;
+  --green:#4caf6a;
+  --green-2:#2d7a46;
+  --text:#f7f7f7;
+  --muted:#cbd5df;
+  --soft:#9aa7b2;
+  --line:rgba(215,181,109,.22);
+  --line-green:rgba(76,175,106,.26);
+  --shadow:0 24px 70px rgba(0,0,0,.36);
+}
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent;}
+html{scroll-behavior:smooth;background:var(--page);}
+body{
+  margin:0;
+  min-height:100vh;
+  font-family:system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",Arial,sans-serif;
+  color:var(--text);
+  background:
+    radial-gradient(circle at 50% -12%,rgba(215,181,109,.16),transparent 36%),
+    radial-gradient(circle at 88% 8%,rgba(76,175,106,.12),transparent 30%),
+    linear-gradient(180deg,#06110f 0%,#0d1718 48%,#06110f 100%);
+}
+a{color:inherit;text-decoration:none;}
+button,input,select{font-family:inherit;}
+.page{width:min(100%,980px);margin:0 auto;padding:22px 18px 122px;}
+.topbar{position:sticky;top:0;z-index:50;display:flex;align-items:center;justify-content:space-between;gap:12px;padding:12px 0 18px;backdrop-filter:blur(18px);-webkit-backdrop-filter:blur(18px);}
+.top-pill{display:inline-flex;align-items:center;justify-content:center;min-height:42px;padding:9px 15px;border-radius:999px;background:rgba(18,25,33,.78);border:1px solid rgba(215,181,109,.18);color:#f7f2d9;font-size:13px;font-weight:900;}
+.hero{position:relative;overflow:hidden;border-radius:38px;padding:42px 32px 34px;background:radial-gradient(circle at 88% 8%,rgba(215,181,109,.16),transparent 27%),radial-gradient(circle at 14% 88%,rgba(76,175,106,.14),transparent 28%),linear-gradient(135deg,#151d26 0%,#101820 50%,#17261f 100%);border:1px solid var(--line);box-shadow:var(--shadow),inset 0 1px 0 rgba(255,255,255,.04);}
+.hero::after{content:"";position:absolute;inset:-40%;background:linear-gradient(115deg,transparent 0%,rgba(255,255,255,.04) 45%,transparent 55%);transform:rotate(8deg);pointer-events:none;}
+.hero-inner{position:relative;z-index:2;}
+.badge{display:inline-flex;align-items:center;gap:9px;padding:9px 15px;border-radius:999px;background:rgba(215,181,109,.10);border:1px solid rgba(215,181,109,.26);color:var(--gold-2);font-size:12px;font-weight:950;letter-spacing:.12em;text-transform:uppercase;}
+h1{margin:20px 0 12px;max-width:780px;font-size:52px;line-height:.98;letter-spacing:-.065em;}
+.hero-text{max-width:690px;color:var(--muted);font-size:17px;line-height:1.65;font-weight:650;}
+.hero-actions{display:flex;flex-wrap:wrap;gap:12px;margin-top:28px;}
+.btn{appearance:none;display:inline-flex;align-items:center;justify-content:center;gap:9px;min-height:52px;padding:14px 21px;border-radius:18px;border:1px solid transparent;font-size:14px;font-weight:950;cursor:pointer;text-decoration:none;transition:transform .18s ease,box-shadow .25s ease,background .25s ease,border-color .25s ease;}
+.btn:hover{transform:translateY(-2px);}.btn:active{transform:scale(.985);}
+.btn-primary{background:linear-gradient(135deg,#f0d891 0%,#d7b56d 42%,#a87d1c 100%);color:#11150f;box-shadow:0 18px 38px rgba(215,181,109,.22);}
+.btn-secondary{background:rgba(20,28,37,.82);color:#f7faf8;border-color:rgba(215,181,109,.18);}
+.btn-green{background:linear-gradient(135deg,#66c680 0%,#2d7a46 100%);color:white;box-shadow:0 18px 38px rgba(76,175,106,.16);}
+.player-panel{margin-top:28px;border-radius:34px;padding:24px;background:radial-gradient(circle at 92% 8%,rgba(215,181,109,.12),transparent 30%),linear-gradient(135deg,#151d26 0%,#101820 56%,#14231b 100%);border:1px solid rgba(215,181,109,.18);box-shadow:0 18px 44px rgba(0,0,0,.24);}
+.player-top{display:grid;grid-template-columns:1fr auto;gap:18px;align-items:center;}
+.current{display:flex;align-items:center;gap:14px;min-width:0;}
+.avatar{width:64px;height:64px;border-radius:22px;display:flex;align-items:center;justify-content:center;background:linear-gradient(135deg,#2d2617,#214330);border:1px solid rgba(215,181,109,.28);font-size:30px;flex:0 0 auto;}
+.current-title{margin:0;font-size:25px;line-height:1.1;letter-spacing:-.04em;}
+.current-subtitle{margin-top:5px;color:#aeb9c5;font-size:13px;font-weight:750;}
+.player-actions{display:flex;gap:10px;flex-wrap:wrap;justify-content:flex-end;}
+.audio-area{margin-top:18px;display:grid;gap:10px;}
+audio{width:100%;height:44px;filter:drop-shadow(0 8px 18px rgba(0,0,0,.22));}
+.audio-status{color:#d3dde6;font-size:12px;font-weight:850;min-height:18px;}
+.quick-panel{margin-top:18px;display:grid;grid-template-columns:1fr 1fr;gap:12px;}
+.field{display:grid;gap:7px;}
+.field label{color:var(--gold-2);font-size:11px;font-weight:950;text-transform:uppercase;letter-spacing:.11em;}
+.select{width:100%;min-height:50px;border-radius:17px;border:1px solid rgba(215,181,109,.20);background:rgba(12,19,23,.78);color:var(--text);padding:0 14px;font-size:14px;font-weight:850;outline:none;}
+.section{margin-top:34px;}
+.section-head{display:flex;align-items:flex-end;justify-content:space-between;gap:16px;margin-bottom:18px;}
+.section-title{margin:0;font-size:32px;line-height:1.08;letter-spacing:-.045em;}
+.section-subtitle{margin:8px 0 0;max-width:620px;color:#aeb9c5;font-size:14px;font-weight:650;line-height:1.6;}
+.section-note{color:var(--gold-2);font-size:12px;font-weight:950;letter-spacing:.08em;text-transform:uppercase;white-space:nowrap;}
+.reciter-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px;}
+.reciter-card{position:relative;overflow:hidden;min-height:172px;border-radius:30px;padding:22px;border:1px solid rgba(255,255,255,.08);background:radial-gradient(circle at 88% 12%,rgba(215,181,109,.10),transparent 30%),linear-gradient(135deg,#151f29 0%,#121a22 54%,#14241f 100%);box-shadow:0 16px 36px rgba(0,0,0,.22),inset 0 1px 0 rgba(255,255,255,.035);cursor:pointer;text-align:left;color:inherit;transition:transform .18s ease,border-color .25s ease,box-shadow .25s ease;}
+.reciter-card:hover{transform:translateY(-3px);border-color:rgba(215,181,109,.28);}
+.reciter-card.selected{border-color:rgba(102,198,128,.52);box-shadow:0 22px 44px rgba(76,175,106,.16),inset 0 1px 0 rgba(255,255,255,.04);}
+.reciter-top{display:flex;align-items:flex-start;justify-content:space-between;gap:14px;}
+.reciter-avatar{width:52px;height:52px;border-radius:20px;display:flex;align-items:center;justify-content:center;background:rgba(215,181,109,.12);border:1px solid rgba(215,181,109,.18);font-size:25px;}
+.reciter-check{display:inline-flex;align-items:center;justify-content:center;min-height:28px;padding:5px 10px;border-radius:999px;background:rgba(76,175,106,.12);border:1px solid rgba(76,175,106,.26);color:#dff7e6;font-size:11px;font-weight:950;letter-spacing:.09em;text-transform:uppercase;}
+.reciter-card h3{margin:18px 0 7px;font-size:22px;line-height:1.08;letter-spacing:-.035em;}
+.reciter-card p{margin:0;color:#b7c1ca;font-size:14px;font-weight:650;line-height:1.5;}
+.ayah-strip{margin-top:22px;display:grid;grid-template-columns:repeat(7,1fr);gap:9px;max-height:310px;overflow:auto;padding-right:4px;}
+.ayah-btn{appearance:none;border:1px solid rgba(181,138,54,.24);background:rgba(255,255,255,.055);color:#f7f2d9;border-radius:16px;min-height:46px;font-size:13px;font-weight:950;cursor:pointer;}
+.ayah-btn.is-playing{background:linear-gradient(135deg,#2d7a46,#4caf6a);color:#fff;border-color:rgba(102,198,128,.44);}
+.toast{position:fixed;left:50%;bottom:94px;z-index:140;transform:translateX(-50%) translateY(14px);opacity:0;pointer-events:none;width:min(92%,460px);padding:14px 16px;border-radius:18px;background:rgba(16,24,32,.94);border:1px solid rgba(102,198,128,.24);color:#eaf7ee;font-size:13px;font-weight:850;text-align:center;box-shadow:0 18px 40px rgba(0,0,0,.35);transition:opacity .25s ease,transform .25s ease;}
+.toast.show{opacity:1;transform:translateX(-50%) translateY(0);}
+html.light-mode body{background:linear-gradient(180deg,#f5f3ea,#f5f3ea)!important;color:#101418!important;}
+html.light-mode .hero,html.light-mode .player-panel{background:radial-gradient(circle at 92% 0%,rgba(181,138,54,.10),transparent 36%),linear-gradient(180deg,#ffffff,#f8fbf7)!important;color:#101418!important;border-color:rgba(181,138,54,.22)!important;box-shadow:0 10px 24px rgba(18,34,24,.07)!important;}
+html.light-mode .top-pill,html.light-mode .btn-secondary,html.light-mode .select{background:#fff;color:#203126;border-color:rgba(181,138,54,.22);}
+html.light-mode .hero-text,html.light-mode .current-subtitle,html.light-mode .section-subtitle,html.light-mode .reciter-card p,html.light-mode .audio-status{color:#526158;}
+html.light-mode .reciter-card{background:linear-gradient(180deg,#ffffff,#f7fbf7);color:#101418;border-color:rgba(181,138,54,.20);box-shadow:0 10px 24px rgba(18,34,24,.07);}
+html.light-mode .ayah-btn{background:#fff;color:#203126;border-color:rgba(181,138,54,.20);}
+@media(max-width:760px){
+  .page{padding:18px 12px 110px;}
+  .topbar{padding-top:8px;}
+  .top-pill{min-height:38px;padding:8px 12px;font-size:12px;}
+  .hero{padding:32px 20px 24px;border-radius:30px;}
+  h1{font-size:39px;}
+  .hero-text{font-size:16px;}
+  .player-top,.section-head{grid-template-columns:1fr;align-items:flex-start;flex-direction:column;}
+  .player-actions{width:100%;justify-content:stretch;}.player-actions .btn{flex:1 1 150px;}
+  .quick-panel{grid-template-columns:1fr;}
+  .reciter-grid{grid-template-columns:1fr;}
+  .hero-actions .btn{width:100%;}
+  .section-title{font-size:28px;}
+  .ayah-strip{grid-template-columns:repeat(4,1fr);}
+}
+@media(max-width:420px){h1{font-size:35px;}.player-panel{padding:18px;border-radius:28px;}.current-title{font-size:22px;}.ayah-strip{grid-template-columns:repeat(3,1fr);}}
+
+
+/* === BarakaWay mobile listening optimization === */
+@media(max-width:760px){
+  html,body{overflow-x:hidden;}
+  body{background:linear-gradient(180deg,#06110f 0%,#0b1415 54%,#06110f 100%)!important;}
+  .page{width:100%;padding:10px 10px calc(104px + env(safe-area-inset-bottom));}
+  .topbar{top:0;margin:0 -10px;padding:8px 10px 10px;background:rgba(6,17,15,.82);border-bottom:1px solid rgba(215,181,109,.10);}
+  .top-pill{min-height:38px;padding:8px 13px;border-radius:999px;font-size:12px;}
+  .hero{border-radius:26px;padding:24px 18px 20px;margin-top:6px;box-shadow:0 18px 48px rgba(0,0,0,.30),inset 0 1px 0 rgba(255,255,255,.04);}
+  .badge{padding:7px 11px;font-size:10.5px;letter-spacing:.10em;}
+  h1{font-size:34px;line-height:1.02;letter-spacing:-.055em;margin:16px 0 9px;}
+  .hero-text{font-size:14.5px;line-height:1.5;max-width:none;}
+  .hero-actions{display:grid;grid-template-columns:1fr 1fr;gap:9px;margin-top:18px;}
+  .hero-actions .btn{width:100%;min-height:46px;padding:11px 10px;border-radius:15px;font-size:12.5px;}
+  .hero-actions .btn-primary{grid-column:1 / -1;}
+
+  .player-panel{position:sticky;top:57px;z-index:45;margin-top:14px;padding:15px;border-radius:24px;background:linear-gradient(135deg,rgba(21,29,38,.98),rgba(16,24,32,.98) 52%,rgba(20,35,27,.98))!important;box-shadow:0 20px 46px rgba(0,0,0,.42);}
+  .player-top{display:grid!important;grid-template-columns:1fr;gap:12px;}
+  .current{gap:10px;align-items:center;}
+  .avatar{width:48px;height:48px;border-radius:17px;font-size:23px;}
+  .current-title{font-size:19px;line-height:1.15;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;}
+  .current-subtitle{font-size:12px;margin-top:3px;}
+  .player-actions{display:grid;width:100%;grid-template-columns:1fr 92px;gap:8px;}
+  .player-actions .btn{min-height:44px;padding:10px 9px;border-radius:14px;font-size:12.5px;}
+  .audio-area{margin-top:12px;gap:7px;}
+  audio{height:38px;}
+  .audio-status{font-size:11.5px;line-height:1.35;}
+  .quick-panel{margin-top:13px;gap:9px;}
+  .field label{font-size:10px;letter-spacing:.09em;}
+  .select{min-height:46px;border-radius:15px;padding:0 12px;font-size:13px;}
+
+  .section{margin-top:26px;}
+  .section-head{display:grid!important;grid-template-columns:1fr;gap:7px;margin-bottom:13px;}
+  .section-title{font-size:25px;line-height:1.08;}
+  .section-subtitle{font-size:13px;line-height:1.45;margin-top:6px;}
+  .section-note{font-size:10.5px;}
+  .reciter-grid{display:flex;gap:10px;overflow-x:auto;scroll-snap-type:x mandatory;padding:0 2px 8px;margin:0 -2px;-webkit-overflow-scrolling:touch;}
+  .reciter-card{flex:0 0 82%;min-height:156px;border-radius:23px;padding:17px;scroll-snap-align:start;}
+  .reciter-avatar{width:44px;height:44px;border-radius:16px;font-size:21px;}
+  .reciter-check{min-height:25px;padding:4px 8px;font-size:9.5px;}
+  .reciter-card h3{font-size:18px;line-height:1.12;margin:14px 0 6px;}
+  .reciter-card p{font-size:12.5px;line-height:1.4;}
+
+  .ayah-strip{grid-template-columns:repeat(5,1fr);gap:7px;max-height:245px;margin-top:16px;padding:1px 2px 4px;}
+  .ayah-btn{min-height:40px;border-radius:13px;font-size:12px;}
+  .toast{bottom:calc(78px + env(safe-area-inset-bottom));width:calc(100% - 24px);font-size:12px;border-radius:16px;padding:12px 14px;}
+}
+@media(max-width:420px){
+  .page{padding-left:9px;padding-right:9px;}
+  h1{font-size:30px;}
+  .hero{padding:22px 16px 18px;border-radius:24px;}
+  .hero-actions{grid-template-columns:1fr;}
+  .hero-actions .btn-primary{grid-column:auto;}
+  .player-panel{top:55px;padding:13px;border-radius:22px;}
+  .player-actions{grid-template-columns:1fr 82px;}
+  .current-title{font-size:18px;}
+  .reciter-card{flex-basis:88%;}
+  .ayah-strip{grid-template-columns:repeat(4,1fr);max-height:232px;}
+  .ayah-btn{min-height:38px;font-size:11.5px;border-radius:12px;}
+}
+@media(max-width:360px){
+  h1{font-size:28px;}
+  .hero-text{font-size:13.5px;}
+  .player-actions{grid-template-columns:1fr;}
+  .ayah-strip{grid-template-columns:repeat(3,1fr);}
+}
+@media(max-width:760px){
+  html.light-mode .topbar{background:rgba(245,243,234,.88);border-bottom-color:rgba(181,138,54,.14);}
+  html.light-mode .player-panel{background:linear-gradient(180deg,#ffffff,#f8fbf7)!important;box-shadow:0 12px 30px rgba(18,34,24,.12)!important;}
+}
+
+</style>
+<script src="/theme-init.js"></script>
+<link rel="stylesheet" href="/theme.css">
+<link rel="stylesheet" href="/theme-universal.css">
+</head>
+<body>
+<div class="page">
+  <header class="topbar">
+    <a class="top-pill" href="home-ru.html" aria-label="Вернуться на главную">← Главная</a>
+  </header>
+
+  <main>
+    <section class="hero" id="top">
+      <div class="hero-inner">
+        <div class="badge">Прослушивание Корана</div>
+        <h1>Слушайте Коран красиво и удобно</h1>
+        <div class="hero-text">Выберите чтеца, включите любую суру и продолжайте слушать Священный Коран в спокойном и чистом интерфейсе BarakaWay.</div>
+        <div class="hero-actions">
+          <button class="btn btn-primary" id="playHero" type="button">▶ Начать слушать</button>
+          <button class="btn btn-secondary" data-scroll="#reciters" type="button">Выбрать чтеца</button>
+          <button class="btn btn-green" id="stopHero" type="button">■ Стоп</button>
+        </div>
+      </div>
+    </section>
+
+    <section class="player-panel" id="player">
+      <div class="player-top">
+        <div class="current">
+          <div class="avatar" id="currentAvatar">🕌</div>
+          <div>
+            <h2 class="current-title" id="currentName">Мишари Рашид аль-Афаси</h2>
+            <div class="current-subtitle" id="currentStyle">Аль-Фатиха · 7 аятов</div>
+          </div>
+        </div>
+        <div class="player-actions">
+          <button class="btn btn-primary" id="playAll" type="button">▶ Вся сура</button>
+          <button class="btn btn-secondary" id="stopAudio" type="button">■ Стоп</button>
+        </div>
+      </div>
+
+      <div class="quick-panel" aria-label="Выбор прослушивания">
+        <div class="field">
+          <label for="surahSelect">Сура</label>
+          <select class="select" id="surahSelect">
+            <option value="001" data-count="7" selected>1. Аль-Фатиха · 7 аятов</option>
+            <option value="002" data-count="286">2. Аль-Бакара · 286 аятов</option>
+            <option value="003" data-count="200">3. Алю Имран · 200 аятов</option>
+            <option value="004" data-count="176">4. Ан-Ниса · 176 аятов</option>
+            <option value="005" data-count="120">5. Аль-Маида · 120 аятов</option>
+            <option value="006" data-count="165">6. Аль-Анам · 165 аятов</option>
+            <option value="007" data-count="206">7. Аль-Араф · 206 аятов</option>
+            <option value="008" data-count="75">8. Аль-Анфаль · 75 аятов</option>
+            <option value="009" data-count="129">9. Ат-Тауба · 129 аятов</option>
+            <option value="010" data-count="109">10. Юнус · 109 аятов</option>
+            <option value="011" data-count="123">11. Худ · 123 аятов</option>
+            <option value="012" data-count="111">12. Юсуф · 111 аятов</option>
+            <option value="013" data-count="43">13. Ар-Раад · 43 аятов</option>
+            <option value="014" data-count="52">14. Ибрахим · 52 аятов</option>
+            <option value="015" data-count="99">15. Аль-Хиджр · 99 аятов</option>
+            <option value="016" data-count="128">16. Ан-Нахль · 128 аятов</option>
+            <option value="017" data-count="111">17. Аль-Исра · 111 аятов</option>
+            <option value="018" data-count="110">18. Аль-Кахф · 110 аятов</option>
+            <option value="019" data-count="98">19. Марьям · 98 аятов</option>
+            <option value="020" data-count="135">20. Та Ха · 135 аятов</option>
+            <option value="021" data-count="112">21. Аль-Анбия · 112 аятов</option>
+            <option value="022" data-count="78">22. Аль-Хадж · 78 аятов</option>
+            <option value="023" data-count="118">23. Аль-Муминун · 118 аятов</option>
+            <option value="024" data-count="64">24. Ан-Нур · 64 аятов</option>
+            <option value="025" data-count="77">25. Аль-Фуркан · 77 аятов</option>
+            <option value="026" data-count="227">26. Аш-Шуара · 227 аятов</option>
+            <option value="027" data-count="93">27. Ан-Намль · 93 аятов</option>
+            <option value="028" data-count="88">28. Аль-Касас · 88 аятов</option>
+            <option value="029" data-count="69">29. Аль-Анкабут · 69 аятов</option>
+            <option value="030" data-count="60">30. Ар-Рум · 60 аятов</option>
+            <option value="031" data-count="34">31. Лукман · 34 аятов</option>
+            <option value="032" data-count="30">32. Ас-Саджда · 30 аятов</option>
+            <option value="033" data-count="73">33. Аль-Ахзаб · 73 аятов</option>
+            <option value="034" data-count="54">34. Саба · 54 аятов</option>
+            <option value="035" data-count="45">35. Фатыр · 45 аятов</option>
+            <option value="036" data-count="83">36. Йа Син · 83 аятов</option>
+            <option value="037" data-count="182">37. Ас-Саффат · 182 аятов</option>
+            <option value="038" data-count="88">38. Сад · 88 аятов</option>
+            <option value="039" data-count="75">39. Аз-Зумар · 75 аятов</option>
+            <option value="040" data-count="85">40. Гафир · 85 аятов</option>
+            <option value="041" data-count="54">41. Фуссилят · 54 аятов</option>
+            <option value="042" data-count="53">42. Аш-Шура · 53 аятов</option>
+            <option value="043" data-count="89">43. Аз-Зухруф · 89 аятов</option>
+            <option value="044" data-count="59">44. Ад-Духан · 59 аятов</option>
+            <option value="045" data-count="37">45. Аль-Джасия · 37 аятов</option>
+            <option value="046" data-count="35">46. Аль-Ахкаф · 35 аятов</option>
+            <option value="047" data-count="38">47. Мухаммад · 38 аятов</option>
+            <option value="048" data-count="29">48. Аль-Фатх · 29 аятов</option>
+            <option value="049" data-count="18">49. Аль-Худжурат · 18 аятов</option>
+            <option value="050" data-count="45">50. Каф · 45 аятов</option>
+            <option value="051" data-count="60">51. Аз-Зарият · 60 аятов</option>
+            <option value="052" data-count="49">52. Ат-Тур · 49 аятов</option>
+            <option value="053" data-count="62">53. Ан-Наджм · 62 аятов</option>
+            <option value="054" data-count="55">54. Аль-Камар · 55 аятов</option>
+            <option value="055" data-count="78">55. Ар-Рахман · 78 аятов</option>
+            <option value="056" data-count="96">56. Аль-Вакиа · 96 аятов</option>
+            <option value="057" data-count="29">57. Аль-Хадид · 29 аятов</option>
+            <option value="058" data-count="22">58. Аль-Муджадиля · 22 аятов</option>
+            <option value="059" data-count="24">59. Аль-Хашр · 24 аятов</option>
+            <option value="060" data-count="13">60. Аль-Мумтахана · 13 аятов</option>
+            <option value="061" data-count="14">61. Ас-Сафф · 14 аятов</option>
+            <option value="062" data-count="11">62. Аль-Джумуа · 11 аятов</option>
+            <option value="063" data-count="11">63. Аль-Мунафикун · 11 аятов</option>
+            <option value="064" data-count="18">64. Ат-Тагабун · 18 аятов</option>
+            <option value="065" data-count="12">65. Ат-Талак · 12 аятов</option>
+            <option value="066" data-count="12">66. Ат-Тахрим · 12 аятов</option>
+            <option value="067" data-count="30">67. Аль-Мульк · 30 аятов</option>
+            <option value="068" data-count="52">68. Аль-Калам · 52 аятов</option>
+            <option value="069" data-count="52">69. Аль-Хакка · 52 аятов</option>
+            <option value="070" data-count="44">70. Аль-Мааридж · 44 аятов</option>
+            <option value="071" data-count="28">71. Нух · 28 аятов</option>
+            <option value="072" data-count="28">72. Аль-Джинн · 28 аятов</option>
+            <option value="073" data-count="20">73. Аль-Муззаммиль · 20 аятов</option>
+            <option value="074" data-count="56">74. Аль-Муддассир · 56 аятов</option>
+            <option value="075" data-count="40">75. Аль-Кияма · 40 аятов</option>
+            <option value="076" data-count="31">76. Аль-Инсан · 31 аятов</option>
+            <option value="077" data-count="50">77. Аль-Мурсалят · 50 аятов</option>
+            <option value="078" data-count="40">78. Ан-Наба · 40 аятов</option>
+            <option value="079" data-count="46">79. Ан-Назиат · 46 аятов</option>
+            <option value="080" data-count="42">80. Абаса · 42 аятов</option>
+            <option value="081" data-count="29">81. Ат-Таквир · 29 аятов</option>
+            <option value="082" data-count="19">82. Аль-Инфитар · 19 аятов</option>
+            <option value="083" data-count="36">83. Аль-Мутаффифин · 36 аятов</option>
+            <option value="084" data-count="25">84. Аль-Иншикак · 25 аятов</option>
+            <option value="085" data-count="22">85. Аль-Бурудж · 22 аятов</option>
+            <option value="086" data-count="17">86. Ат-Тарик · 17 аятов</option>
+            <option value="087" data-count="19">87. Аль-Аля · 19 аятов</option>
+            <option value="088" data-count="26">88. Аль-Гашия · 26 аятов</option>
+            <option value="089" data-count="30">89. Аль-Фаджр · 30 аятов</option>
+            <option value="090" data-count="20">90. Аль-Балад · 20 аятов</option>
+            <option value="091" data-count="15">91. Аш-Шамс · 15 аятов</option>
+            <option value="092" data-count="21">92. Аль-Лайл · 21 аятов</option>
+            <option value="093" data-count="11">93. Ад-Духа · 11 аятов</option>
+            <option value="094" data-count="8">94. Аш-Шарх · 8 аятов</option>
+            <option value="095" data-count="8">95. Ат-Тин · 8 аятов</option>
+            <option value="096" data-count="19">96. Аль-Аляк · 19 аятов</option>
+            <option value="097" data-count="5">97. Аль-Кадр · 5 аятов</option>
+            <option value="098" data-count="8">98. Аль-Баййина · 8 аятов</option>
+            <option value="099" data-count="8">99. Аз-Зальзаля · 8 аятов</option>
+            <option value="100" data-count="11">100. Аль-Адият · 11 аятов</option>
+            <option value="101" data-count="11">101. Аль-Кариа · 11 аятов</option>
+            <option value="102" data-count="8">102. Ат-Такасур · 8 аятов</option>
+            <option value="103" data-count="3">103. Аль-Аср · 3 аятов</option>
+            <option value="104" data-count="9">104. Аль-Хумаза · 9 аятов</option>
+            <option value="105" data-count="5">105. Аль-Филь · 5 аятов</option>
+            <option value="106" data-count="4">106. Курайш · 4 аятов</option>
+            <option value="107" data-count="7">107. Аль-Маун · 7 аятов</option>
+            <option value="108" data-count="3">108. Аль-Каусар · 3 аятов</option>
+            <option value="109" data-count="6">109. Аль-Кафирун · 6 аятов</option>
+            <option value="110" data-count="3">110. Ан-Наср · 3 аятов</option>
+            <option value="111" data-count="5">111. Аль-Масад · 5 аятов</option>
+            <option value="112" data-count="4">112. Аль-Ихлас · 4 аятов</option>
+            <option value="113" data-count="5">113. Аль-Фаляк · 5 аятов</option>
+            <option value="114" data-count="6">114. Ан-Нас · 6 аятов</option>
+          </select>
+        </div>
+        <div class="field">
+          <label for="reciterSelect">Чтец</label>
+          <select class="select" id="reciterSelect"></select>
+        </div>
+      </div>
+
+      <div class="audio-area">
+        <audio id="mainAudio" preload="none" controls></audio>
+        <div class="audio-status" id="audioStatus">Готово к прослушиванию</div>
+      </div>
+
+      <div class="ayah-strip" id="ayahStrip" aria-label="Аяты выбранной суры"></div>
+    </section>
+
+    <section class="section" id="reciters">
+      <div class="section-head">
+        <div>
+          <h2 class="section-title">Выбор чтеца</h2>
+          <p class="section-subtitle">Подберите голос, который ближе вам по темпу и звучанию.</p>
+        </div>
+        <div class="section-note">10 чтецов</div>
+      </div>
+
+      <div class="reciter-grid">
+        <button class="reciter-card selected" data-reciter="alafasy" data-name="Мишари Рашид аль-Афаси" data-style="Мелодичное и ясное чтение" data-avatar="🕌" data-base="https://everyayah.com/data/Alafasy_128kbps/" type="button">
+          <div class="reciter-top"><div class="reciter-avatar">🕌</div><div class="reciter-check">Выбран</div></div>
+          <h3>Мишари Рашид аль-Афаси</h3><p>Мягкое, выразительное и чистое чтение.</p>
+        </button>
+        <button class="reciter-card" data-reciter="abdulbaset" data-name="Абдул-Басит Абдус-Самад" data-style="Классическое чтение муджаввад" data-avatar="📖" data-base="https://everyayah.com/data/Abdul_Basit_Mujawwad_128kbps/" type="button">
+          <div class="reciter-top"><div class="reciter-avatar">📖</div><div class="reciter-check">Выбрать</div></div>
+          <h3>Абдул-Басит Абдус-Самад</h3><p>Глубокое классическое чтение.</p>
+        </button>
+        <button class="reciter-card" data-reciter="sudais" data-name="Абдуррахман ас-Судайс" data-style="Классическое чтение Харама" data-avatar="🕋" data-base="https://everyayah.com/data/Abdurrahmaan_As-Sudais_192kbps/" type="button">
+          <div class="reciter-top"><div class="reciter-avatar">🕋</div><div class="reciter-check">Выбрать</div></div>
+          <h3>Абдуррахман ас-Судайс</h3><p>Узнаваемое чтение Харама.</p>
+        </button>
+        <button class="reciter-card" data-reciter="shuraym" data-name="Сауд аш-Шурайм" data-style="Собранное и мощное чтение" data-avatar="🎧" data-base="https://everyayah.com/data/Saood_ash-Shuraym_128kbps/" type="button">
+          <div class="reciter-top"><div class="reciter-avatar">🎧</div><div class="reciter-check">Выбрать</div></div>
+          <h3>Сауд аш-Шурайм</h3><p>Ровное и уверенное чтение.</p>
+        </button>
+        <button class="reciter-card" data-reciter="minshawi" data-name="Мухаммад Сиддик аль-Миншави" data-style="Спокойное обучающее чтение" data-avatar="🌙" data-base="https://everyayah.com/data/Minshawy_Murattal_128kbps/" type="button">
+          <div class="reciter-top"><div class="reciter-avatar">🌙</div><div class="reciter-check">Выбрать</div></div>
+          <h3>Мухаммад Сиддик аль-Миншави</h3><p>Чёткое и спокойное чтение.</p>
+        </button>
+        <button class="reciter-card" data-reciter="husary" data-name="Махмуд Халиль аль-Хусари" data-style="Размеренное чтение для изучения" data-avatar="✨" data-base="https://everyayah.com/data/Husary_128kbps/" type="button">
+          <div class="reciter-top"><div class="reciter-avatar">✨</div><div class="reciter-check">Выбрать</div></div>
+          <h3>Махмуд Халиль аль-Хусари</h3><p>Отчётливое чтение для внимательного слушания.</p>
+        </button>
+        <button class="reciter-card" data-reciter="maher" data-name="Махер аль-Муайкли" data-style="Спокойное чтение современного Харама" data-avatar="🟢" data-base="https://everyayah.com/data/Maher_AlMuaiqly_64kbps/" type="button">
+          <div class="reciter-top"><div class="reciter-avatar">🟢</div><div class="reciter-check">Выбрать</div></div>
+          <h3>Махер аль-Муайкли</h3><p>Мягкий голос и ровный темп.</p>
+        </button>
+        <button class="reciter-card" data-reciter="ghamdi" data-name="Саад аль-Гамиди" data-style="Глубокое и ясное чтение" data-avatar="💚" data-base="https://everyayah.com/data/Ghamadi_40kbps/" type="button">
+          <div class="reciter-top"><div class="reciter-avatar">💚</div><div class="reciter-check">Выбрать</div></div>
+          <h3>Саад аль-Гамиди</h3><p>Уравновешенное чтение для долгого слушания.</p>
+        </button>
+        <button class="reciter-card" data-reciter="shatri" data-name="Абу Бакр аш-Шатри" data-style="Чистое и лёгкое чтение" data-avatar="🪶" data-base="https://everyayah.com/data/Abu_Bakr_Ash-Shaatree_128kbps/" type="button">
+          <div class="reciter-top"><div class="reciter-avatar">🪶</div><div class="reciter-check">Выбрать</div></div>
+          <h3>Абу Бакр аш-Шатри</h3><p>Плавное чтение с приятной подачей.</p>
+        </button>
+        <button class="reciter-card" data-reciter="yasser" data-name="Ясир ад-Дусари" data-style="Сильное эмоциональное чтение" data-avatar="⭐" data-base="https://everyayah.com/data/Yasser_Ad-Dussary_128kbps/" type="button">
+          <div class="reciter-top"><div class="reciter-avatar">⭐</div><div class="reciter-check">Выбрать</div></div>
+          <h3>Ясир ад-Дусари</h3><p>Выразительный голос для сосредоточенного слушания.</p>
+        </button>
+      </div>
+    </section>
+  </main>
+</div>
+<div class="toast" id="toast"></div>
+<script>
+(function(){
+  const SURAH_LIST = [
+    {number:1, code:"001", name:"Аль-Фатиха", ayahs:7},
+    {number:2, code:"002", name:"Аль-Бакара", ayahs:286},
+    {number:3, code:"003", name:"Алю Имран", ayahs:200},
+    {number:4, code:"004", name:"Ан-Ниса", ayahs:176},
+    {number:5, code:"005", name:"Аль-Маида", ayahs:120},
+    {number:6, code:"006", name:"Аль-Анам", ayahs:165},
+    {number:7, code:"007", name:"Аль-Араф", ayahs:206},
+    {number:8, code:"008", name:"Аль-Анфаль", ayahs:75},
+    {number:9, code:"009", name:"Ат-Тауба", ayahs:129},
+    {number:10, code:"010", name:"Юнус", ayahs:109},
+    {number:11, code:"011", name:"Худ", ayahs:123},
+    {number:12, code:"012", name:"Юсуф", ayahs:111},
+    {number:13, code:"013", name:"Ар-Раад", ayahs:43},
+    {number:14, code:"014", name:"Ибрахим", ayahs:52},
+    {number:15, code:"015", name:"Аль-Хиджр", ayahs:99},
+    {number:16, code:"016", name:"Ан-Нахль", ayahs:128},
+    {number:17, code:"017", name:"Аль-Исра", ayahs:111},
+    {number:18, code:"018", name:"Аль-Кахф", ayahs:110},
+    {number:19, code:"019", name:"Марьям", ayahs:98},
+    {number:20, code:"020", name:"Та Ха", ayahs:135},
+    {number:21, code:"021", name:"Аль-Анбия", ayahs:112},
+    {number:22, code:"022", name:"Аль-Хадж", ayahs:78},
+    {number:23, code:"023", name:"Аль-Муминун", ayahs:118},
+    {number:24, code:"024", name:"Ан-Нур", ayahs:64},
+    {number:25, code:"025", name:"Аль-Фуркан", ayahs:77},
+    {number:26, code:"026", name:"Аш-Шуара", ayahs:227},
+    {number:27, code:"027", name:"Ан-Намль", ayahs:93},
+    {number:28, code:"028", name:"Аль-Касас", ayahs:88},
+    {number:29, code:"029", name:"Аль-Анкабут", ayahs:69},
+    {number:30, code:"030", name:"Ар-Рум", ayahs:60},
+    {number:31, code:"031", name:"Лукман", ayahs:34},
+    {number:32, code:"032", name:"Ас-Саджда", ayahs:30},
+    {number:33, code:"033", name:"Аль-Ахзаб", ayahs:73},
+    {number:34, code:"034", name:"Саба", ayahs:54},
+    {number:35, code:"035", name:"Фатыр", ayahs:45},
+    {number:36, code:"036", name:"Йа Син", ayahs:83},
+    {number:37, code:"037", name:"Ас-Саффат", ayahs:182},
+    {number:38, code:"038", name:"Сад", ayahs:88},
+    {number:39, code:"039", name:"Аз-Зумар", ayahs:75},
+    {number:40, code:"040", name:"Гафир", ayahs:85},
+    {number:41, code:"041", name:"Фуссилят", ayahs:54},
+    {number:42, code:"042", name:"Аш-Шура", ayahs:53},
+    {number:43, code:"043", name:"Аз-Зухруф", ayahs:89},
+    {number:44, code:"044", name:"Ад-Духан", ayahs:59},
+    {number:45, code:"045", name:"Аль-Джасия", ayahs:37},
+    {number:46, code:"046", name:"Аль-Ахкаф", ayahs:35},
+    {number:47, code:"047", name:"Мухаммад", ayahs:38},
+    {number:48, code:"048", name:"Аль-Фатх", ayahs:29},
+    {number:49, code:"049", name:"Аль-Худжурат", ayahs:18},
+    {number:50, code:"050", name:"Каф", ayahs:45},
+    {number:51, code:"051", name:"Аз-Зарият", ayahs:60},
+    {number:52, code:"052", name:"Ат-Тур", ayahs:49},
+    {number:53, code:"053", name:"Ан-Наджм", ayahs:62},
+    {number:54, code:"054", name:"Аль-Камар", ayahs:55},
+    {number:55, code:"055", name:"Ар-Рахман", ayahs:78},
+    {number:56, code:"056", name:"Аль-Вакиа", ayahs:96},
+    {number:57, code:"057", name:"Аль-Хадид", ayahs:29},
+    {number:58, code:"058", name:"Аль-Муджадиля", ayahs:22},
+    {number:59, code:"059", name:"Аль-Хашр", ayahs:24},
+    {number:60, code:"060", name:"Аль-Мумтахана", ayahs:13},
+    {number:61, code:"061", name:"Ас-Сафф", ayahs:14},
+    {number:62, code:"062", name:"Аль-Джумуа", ayahs:11},
+    {number:63, code:"063", name:"Аль-Мунафикун", ayahs:11},
+    {number:64, code:"064", name:"Ат-Тагабун", ayahs:18},
+    {number:65, code:"065", name:"Ат-Талак", ayahs:12},
+    {number:66, code:"066", name:"Ат-Тахрим", ayahs:12},
+    {number:67, code:"067", name:"Аль-Мульк", ayahs:30},
+    {number:68, code:"068", name:"Аль-Калам", ayahs:52},
+    {number:69, code:"069", name:"Аль-Хакка", ayahs:52},
+    {number:70, code:"070", name:"Аль-Мааридж", ayahs:44},
+    {number:71, code:"071", name:"Нух", ayahs:28},
+    {number:72, code:"072", name:"Аль-Джинн", ayahs:28},
+    {number:73, code:"073", name:"Аль-Муззаммиль", ayahs:20},
+    {number:74, code:"074", name:"Аль-Муддассир", ayahs:56},
+    {number:75, code:"075", name:"Аль-Кияма", ayahs:40},
+    {number:76, code:"076", name:"Аль-Инсан", ayahs:31},
+    {number:77, code:"077", name:"Аль-Мурсалят", ayahs:50},
+    {number:78, code:"078", name:"Ан-Наба", ayahs:40},
+    {number:79, code:"079", name:"Ан-Назиат", ayahs:46},
+    {number:80, code:"080", name:"Абаса", ayahs:42},
+    {number:81, code:"081", name:"Ат-Таквир", ayahs:29},
+    {number:82, code:"082", name:"Аль-Инфитар", ayahs:19},
+    {number:83, code:"083", name:"Аль-Мутаффифин", ayahs:36},
+    {number:84, code:"084", name:"Аль-Иншикак", ayahs:25},
+    {number:85, code:"085", name:"Аль-Бурудж", ayahs:22},
+    {number:86, code:"086", name:"Ат-Тарик", ayahs:17},
+    {number:87, code:"087", name:"Аль-Аля", ayahs:19},
+    {number:88, code:"088", name:"Аль-Гашия", ayahs:26},
+    {number:89, code:"089", name:"Аль-Фаджр", ayahs:30},
+    {number:90, code:"090", name:"Аль-Балад", ayahs:20},
+    {number:91, code:"091", name:"Аш-Шамс", ayahs:15},
+    {number:92, code:"092", name:"Аль-Лайл", ayahs:21},
+    {number:93, code:"093", name:"Ад-Духа", ayahs:11},
+    {number:94, code:"094", name:"Аш-Шарх", ayahs:8},
+    {number:95, code:"095", name:"Ат-Тин", ayahs:8},
+    {number:96, code:"096", name:"Аль-Аляк", ayahs:19},
+    {number:97, code:"097", name:"Аль-Кадр", ayahs:5},
+    {number:98, code:"098", name:"Аль-Баййина", ayahs:8},
+    {number:99, code:"099", name:"Аз-Зальзаля", ayahs:8},
+    {number:100, code:"100", name:"Аль-Адият", ayahs:11},
+    {number:101, code:"101", name:"Аль-Кариа", ayahs:11},
+    {number:102, code:"102", name:"Ат-Такасур", ayahs:8},
+    {number:103, code:"103", name:"Аль-Аср", ayahs:3},
+    {number:104, code:"104", name:"Аль-Хумаза", ayahs:9},
+    {number:105, code:"105", name:"Аль-Филь", ayahs:5},
+    {number:106, code:"106", name:"Курайш", ayahs:4},
+    {number:107, code:"107", name:"Аль-Маун", ayahs:7},
+    {number:108, code:"108", name:"Аль-Каусар", ayahs:3},
+    {number:109, code:"109", name:"Аль-Кафирун", ayahs:6},
+    {number:110, code:"110", name:"Ан-Наср", ayahs:3},
+    {number:111, code:"111", name:"Аль-Масад", ayahs:5},
+    {number:112, code:"112", name:"Аль-Ихлас", ayahs:4},
+    {number:113, code:"113", name:"Аль-Фаляк", ayahs:5},
+    {number:114, code:"114", name:"Ан-Нас", ayahs:6}
+  ];
+  const mainAudio = document.getElementById("mainAudio");
+  const currentAvatar = document.getElementById("currentAvatar");
+  const currentName = document.getElementById("currentName");
+  const currentStyle = document.getElementById("currentStyle");
+  const audioStatus = document.getElementById("audioStatus");
+  const toast = document.getElementById("toast");
+  const reciterSelect = document.getElementById("reciterSelect");
+  const surahSelect = document.getElementById("surahSelect");
+  const ayahStrip = document.getElementById("ayahStrip");
+  const reciterCards = Array.from(document.querySelectorAll("[data-reciter]"));
+  let selectedReciter = document.querySelector("[data-reciter].selected");
+  let selectedSurah = SURAH_LIST[0];
+  let queue = [];
+  let queueIndex = 0;
+  let activeButton = null;
+
+  reciterCards.forEach(function(card){
+    const option = document.createElement("option");
+    option.value = card.getAttribute("data-reciter");
+    option.textContent = card.getAttribute("data-name");
+    if(card.classList.contains("selected")){option.selected = true;}
+    reciterSelect.appendChild(option);
+  });
+
+  function showToast(message){
+    toast.textContent = message;
+    toast.classList.add("show");
+    clearTimeout(toast.__timer);
+    toast.__timer = setTimeout(function(){toast.classList.remove("show");},2200);
+  }
+  function pad3(value){return String(value).padStart(3,"0");}
+  function getBase(){return selectedReciter ? selectedReciter.getAttribute("data-base") : "";}
+  function getAyahButtons(){return Array.from(document.querySelectorAll("[data-audio-file]"));}
+  function resetButtons(){
+    getAyahButtons().forEach(function(button){button.classList.remove("is-playing");button.textContent = button.getAttribute("data-label");});
+  }
+  function setActiveButton(button){
+    resetButtons();
+    activeButton = button || null;
+    if(activeButton){activeButton.classList.add("is-playing");activeButton.textContent = "■ Стоп";}
+  }
+  function updateCurrentSubtitle(){
+    currentStyle.textContent = selectedSurah.name + " · " + selectedSurah.ayahs + " аятов · " + selectedReciter.getAttribute("data-style");
+  }
+  function syncReciterCards(){
+    reciterCards.forEach(function(item){
+      const selected = item === selectedReciter;
+      item.classList.toggle("selected", selected);
+      const chip = item.querySelector(".reciter-check");
+      if(chip){chip.textContent = selected ? "Выбран" : "Выбрать";}
+    });
+  }
+  function selectReciter(card, notify){
+    selectedReciter = card;
+    syncReciterCards();
+    reciterSelect.value = card.getAttribute("data-reciter");
+    currentAvatar.textContent = card.getAttribute("data-avatar");
+    currentName.textContent = card.getAttribute("data-name");
+    updateCurrentSubtitle();
+    stopCurrentAudio(false);
+    if(notify){showToast("Выбран чтец: " + card.getAttribute("data-name"));}
+  }
+  function selectSurah(code, notify){
+    selectedSurah = SURAH_LIST.find(function(item){return item.code === code;}) || SURAH_LIST[0];
+    renderAyahs();
+    updateCurrentSubtitle();
+    stopCurrentAudio(false);
+    if(notify){showToast("Выбрана сура: " + selectedSurah.name);}
+  }
+  function buildAudioFile(ayahNumber){
+    return selectedSurah.code + pad3(ayahNumber) + ".mp3";
+  }
+  function renderAyahs(){
+    ayahStrip.innerHTML = "";
+    for(let i = 1; i <= selectedSurah.ayahs; i += 1){
+      const button = document.createElement("button");
+      button.className = "ayah-btn";
+      button.type = "button";
+      button.setAttribute("data-audio-file", buildAudioFile(i));
+      button.setAttribute("data-label", "Аят " + i);
+      button.textContent = "Аят " + i;
+      button.addEventListener("click", function(){
+        if(activeButton === button && !mainAudio.paused){stopCurrentAudio(false);return;}
+        queue = [];
+        queueIndex = 0;
+        playFile(button.getAttribute("data-audio-file"), button);
+      });
+      ayahStrip.appendChild(button);
+    }
+  }
+  function playFile(fileName, button){
+    if(!selectedReciter){showToast("Выберите чтеца.");return;}
+    setActiveButton(button);
+    mainAudio.src = getBase() + fileName;
+    audioStatus.textContent = "Загружается: " + selectedSurah.name + " · " + (button ? button.getAttribute("data-label") : "вся сура");
+    mainAudio.play().catch(function(){audioStatus.textContent = "Не удалось запустить аудио.";resetButtons();});
+  }
+  function stopCurrentAudio(notify){
+    queue = [];
+    queueIndex = 0;
+    mainAudio.pause();
+    mainAudio.removeAttribute("src");
+    mainAudio.load();
+    resetButtons();
+    audioStatus.textContent = "Остановлено";
+    if(notify){showToast("Воспроизведение остановлено.");}
+  }
+  function playQueue(){
+    if(queueIndex >= queue.length){
+      queue = [];
+      queueIndex = 0;
+      resetButtons();
+      audioStatus.textContent = "Сура завершена";
+      return;
+    }
+    const button = queue[queueIndex];
+    playFile(button.getAttribute("data-audio-file"), button);
+  }
+
+  reciterCards.forEach(function(card){card.addEventListener("click",function(){selectReciter(card,true);});});
+  reciterSelect.addEventListener("change",function(){
+    const card = document.querySelector('[data-reciter="' + reciterSelect.value + '"]');
+    if(card){selectReciter(card,true);}
+  });
+  surahSelect.addEventListener("change",function(){selectSurah(surahSelect.value,true);});
+  document.getElementById("playAll").addEventListener("click",function(){queue = getAyahButtons();queueIndex = 0;playQueue();});
+  document.getElementById("playHero").addEventListener("click",function(){document.getElementById("player").scrollIntoView({behavior:"smooth",block:"start"});queue = getAyahButtons();queueIndex = 0;playQueue();});
+  document.getElementById("stopAudio").addEventListener("click",function(){stopCurrentAudio(true);});
+  document.getElementById("stopHero").addEventListener("click",function(){stopCurrentAudio(true);});
+  mainAudio.addEventListener("playing",function(){audioStatus.textContent = "Сейчас звучит: " + currentName.textContent + " · " + selectedSurah.name;});
+  mainAudio.addEventListener("ended",function(){if(queue.length){queueIndex += 1;playQueue();}else{resetButtons();audioStatus.textContent = "Воспроизведение завершено";}});
+  mainAudio.addEventListener("error",function(){audioStatus.textContent = "Аудио не загрузилось. Проверьте соединение или выберите другого чтеца.";resetButtons();});
+  document.querySelectorAll("[data-scroll]").forEach(function(button){button.addEventListener("click",function(){const target=document.querySelector(button.getAttribute("data-scroll"));if(target){target.scrollIntoView({behavior:"smooth",block:"start"});}});});
+  renderAyahs();
+  if(selectedReciter){selectReciter(selectedReciter,false);audioStatus.textContent = "Готово к прослушиванию";}
+})();
+</script>
+<script src="/bottom-nav.js"></script>
+</body>
+</html>
