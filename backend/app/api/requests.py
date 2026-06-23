@@ -16,6 +16,11 @@ REQUEST_SEARCHING = "searching"
 REQUEST_ASSIGNED = "assigned"
 REQUEST_IN_PROGRESS = "in_progress"
 REQUEST_COMPLETED = "completed"
+REQUEST_RATED = "rated"
+
+_FALLBACK_REQUESTS: Dict[int, Dict[str, Any]] = {}
+_FALLBACK_OFFERS: Dict[int, List[Dict[str, Any]]] = {}
+_FALLBACK_RATINGS: Dict[int, Dict[str, Any]] = {}
 
 
 class ServiceRequestCreate(BaseModel):
@@ -49,6 +54,42 @@ class RatingPayload(BaseModel):
     provider_id: int
     rating: conint(ge=1, le=5)
     comment: Optional[str] = None
+
+
+def _store_fallback_request(
+    request_id: int,
+    payload: ServiceRequestCreate,
+    offers: Optional[List[Dict[str, Any]]] = None,
+) -> List[Dict[str, Any]]:
+    fallback_offers = offers or _mock_offers(payload.service_type)
+    _FALLBACK_REQUESTS[request_id] = {
+        "id": request_id,
+        "status": REQUEST_SEARCHING,
+        "provider_id": None,
+        "service_type": payload.service_type,
+        "category": payload.category,
+        "radius_km": payload.radius_km,
+        "dispatch_wave": 1,
+        "broadcast_wave": 1,
+        "next_wave_at": None,
+        "created_at": datetime.now(timezone.utc).isoformat(),
+    }
+    _FALLBACK_OFFERS[request_id] = fallback_offers
+    return fallback_offers
+
+
+def _fallback_offer_for_provider(request_id: int, provider_id: int) -> Optional[Dict[str, Any]]:
+    for offer in _FALLBACK_OFFERS.get(request_id, []):
+        if int(offer.get("provider_id") or 0) == provider_id:
+            return offer
+    return None
+
+
+def _fallback_status(request_id: int) -> Optional[Dict[str, Any]]:
+    request = _FALLBACK_REQUESTS.get(request_id)
+    if not request:
+        return None
+    return dict(request)
 
 
 def _mock_offers(service_type: str) -> List[Dict[str, Any]]:
@@ -276,7 +317,7 @@ def create_request(payload: ServiceRequestCreate, db: Session = Depends(get_db))
         db.rollback()
         request_id = int(datetime.now(timezone.utc).timestamp())
         storage = "fallback"
-        offers = []
+        offers = _store_fallback_request(request_id, payload)
 
     return {
         "request_id": request_id,
@@ -293,6 +334,10 @@ def create_request(payload: ServiceRequestCreate, db: Session = Depends(get_db))
 
 @router.get("/requests/{request_id}")
 def get_request_status(request_id: int, db: Session = Depends(get_db)):
+    fallback = _fallback_status(request_id)
+    if fallback:
+        return fallback
+
     request = db.execute(
         text(
             """
@@ -312,6 +357,9 @@ def get_request_status(request_id: int, db: Session = Depends(get_db)):
 
 @router.get("/requests/{request_id}/offers")
 def get_request_offers(request_id: int, service_type: str = "Сантехника", db: Session = Depends(get_db)):
+    if request_id in _FALLBACK_OFFERS:
+        return {"request_id": request_id, "offers": _FALLBACK_OFFERS[request_id]}
+
     if _table_exists(db, "dispatch_offers"):
         rows = db.execute(
             text(
@@ -352,6 +400,15 @@ def get_request_offers(request_id: int, service_type: str = "Сантехник�
 
 @router.post("/requests/{request_id}/offers/respond")
 def respond_to_request(request_id: int, payload: OfferRespondPayload, db: Session = Depends(get_db)):
+    fallback_offer = _fallback_offer_for_provider(request_id, payload.provider_id)
+    if fallback_offer is not None:
+        fallback_offer["status"] = "responded"
+        if payload.price:
+            fallback_offer["price"] = payload.price
+        if payload.eta is not None:
+            fallback_offer["eta"] = payload.eta
+        return {"request_id": request_id, "provider_id": payload.provider_id, "status": "responded", "storage": "fallback"}
+
     offer = _get_offer_for_provider(db, request_id, payload.provider_id)
     if not offer:
         raise HTTPException(status_code=404, detail="offer_not_found")
@@ -368,6 +425,18 @@ def respond_to_request(request_id: int, payload: OfferRespondPayload, db: Sessio
 
 @router.post("/requests/{request_id}/select")
 def select_provider(request_id: int, payload: SelectProviderPayload, db: Session = Depends(get_db)):
+    fallback = _FALLBACK_REQUESTS.get(request_id)
+    if fallback is not None:
+        if fallback.get("status") not in {REQUEST_SEARCHING, REQUEST_ASSIGNED}:
+            raise HTTPException(status_code=409, detail="request_not_selectable")
+        if fallback.get("provider_id") and int(fallback["provider_id"]) != payload.provider_id:
+            raise HTTPException(status_code=409, detail="already_assigned")
+        fallback["status"] = REQUEST_ASSIGNED
+        fallback["provider_id"] = payload.provider_id
+        for offer in _FALLBACK_OFFERS.get(request_id, []):
+            offer["status"] = "selected" if int(offer.get("provider_id") or 0) == payload.provider_id else "rejected"
+        return {"request_id": request_id, "provider_id": payload.provider_id, "status": REQUEST_ASSIGNED, "storage": "fallback"}
+
     try:
         request = db.execute(
             text(
@@ -458,6 +527,13 @@ def accept_request(request_id: int, provider_id: int, db: Session = Depends(get_
 
 @router.post("/requests/{request_id}/start")
 def start_request(request_id: int, db: Session = Depends(get_db)):
+    fallback = _FALLBACK_REQUESTS.get(request_id)
+    if fallback is not None:
+        if fallback.get("status") != REQUEST_ASSIGNED:
+            raise HTTPException(status_code=409, detail="request_must_be_assigned")
+        fallback["status"] = REQUEST_IN_PROGRESS
+        return {"request_id": request_id, "provider_id": fallback.get("provider_id"), "status": REQUEST_IN_PROGRESS, "storage": "fallback"}
+
     result = db.execute(
         text(
             """
@@ -479,6 +555,17 @@ def start_request(request_id: int, db: Session = Depends(get_db)):
 
 @router.post("/requests/{request_id}/complete")
 def complete_request(request_id: int, payload: CompleteRequestPayload = CompleteRequestPayload(), db: Session = Depends(get_db)):
+    fallback = _FALLBACK_REQUESTS.get(request_id)
+    if fallback is not None:
+        if fallback.get("status") not in {REQUEST_ASSIGNED, REQUEST_IN_PROGRESS, REQUEST_COMPLETED}:
+            raise HTTPException(status_code=409, detail="request_not_completable")
+        provider_id = payload.provider_id or fallback.get("provider_id")
+        if not provider_id:
+            raise HTTPException(status_code=409, detail="provider_not_assigned")
+        fallback["status"] = REQUEST_COMPLETED
+        fallback["provider_id"] = provider_id
+        return {"request_id": request_id, "provider_id": int(provider_id), "status": REQUEST_COMPLETED, "storage": "fallback"}
+
     try:
         request = db.execute(
             text(
@@ -530,6 +617,32 @@ def complete_request(request_id: int, payload: CompleteRequestPayload = Complete
 
 @router.post("/requests/{request_id}/rating")
 def rate_request(request_id: int, payload: RatingPayload, db: Session = Depends(get_db)):
+    fallback = _FALLBACK_REQUESTS.get(request_id)
+    if fallback is not None:
+        if fallback.get("status") != REQUEST_COMPLETED:
+            raise HTTPException(status_code=409, detail="request_must_be_completed")
+        if fallback.get("provider_id") and int(fallback["provider_id"]) != payload.provider_id:
+            raise HTTPException(status_code=409, detail="provider_mismatch")
+        rating_id = len(_FALLBACK_RATINGS) + 1
+        _FALLBACK_RATINGS[request_id] = {
+            "id": rating_id,
+            "request_id": request_id,
+            "client_id": payload.client_id,
+            "provider_id": payload.provider_id,
+            "rating": int(payload.rating),
+            "comment": payload.comment,
+            "created_at": datetime.now(timezone.utc).isoformat(),
+        }
+        fallback["status"] = REQUEST_RATED
+        return {
+            "request_id": request_id,
+            "provider_id": payload.provider_id,
+            "rating_id": rating_id,
+            "rating": int(payload.rating),
+            "status": REQUEST_RATED,
+            "storage": "fallback",
+        }
+
     try:
         request = db.execute(
             text(
