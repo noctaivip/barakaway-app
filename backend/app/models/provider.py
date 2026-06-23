@@ -1,4 +1,4 @@
-from sqlalchemy import Boolean, Column, DateTime, Integer, String
+from sqlalchemy import Boolean, Column, DateTime, Float, Integer, String
 
 from app.db.base_class import Base
 
@@ -20,6 +20,10 @@ class ProviderProfile(Base):
     is_available = Column(Boolean, nullable=True, default=True)
     silent_mode = Column(Boolean, nullable=True, default=False)
     active_jobs = Column(Integer, nullable=True, default=0)
+    completed_jobs = Column(Integer, nullable=True, default=0)
+    rating_count = Column(Integer, nullable=True, default=0)
+    rating_sum = Column(Integer, nullable=True, default=0)
+    average_rating = Column(Float, nullable=True, default=0)
 
     is_online = Column(Boolean, nullable=False, default=False)
     is_busy = Column(Boolean, nullable=False, default=False)

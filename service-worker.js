@@ -1,6 +1,6 @@
 'use strict';
 
-const BUILD = '20260623-14';
+const BUILD = '20260623-15';
 const CACHE_NAME = `taskslocal-production-ru-${BUILD}`;
 const APP_SHELL = [
   '/',

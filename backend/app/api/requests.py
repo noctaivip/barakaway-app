@@ -5,7 +5,7 @@ from typing import Any, Dict, List, Optional
 
 from fastapi import APIRouter, Depends, HTTPException
 from pydantic import BaseModel, Field, conint
-from sqlalchemy import text
+from sqlalchemy import inspect, text
 from sqlalchemy.orm import Session
 
 from app.db.session import get_db
@@ -148,11 +148,48 @@ def _mock_offers(service_type: str) -> List[Dict[str, Any]]:
 
 
 def _table_exists(db: Session, table_name: str) -> bool:
-    row = db.execute(
-        text("SELECT to_regclass(:table_name) AS table_name"),
-        {"table_name": table_name},
-    ).fetchone()
-    return bool(row and row.table_name)
+    try:
+        bind = db.get_bind()
+        if bind.dialect.name == "postgresql":
+            row = db.execute(
+                text("SELECT to_regclass(:table_name) AS table_name"),
+                {"table_name": table_name},
+            ).fetchone()
+            return bool(row and row.table_name)
+        return inspect(bind).has_table(table_name)
+    except Exception:
+        return False
+
+
+
+
+def _record_status_history(
+    db: Session,
+    request_id: int,
+    from_status: Optional[str],
+    to_status: str,
+    actor_type: str = "system",
+    actor_id: Optional[int] = None,
+) -> None:
+    if not _table_exists(db, "request_status_history"):
+        return
+    db.execute(
+        text(
+            """
+            INSERT INTO request_status_history
+                (request_id, from_status, to_status, actor_type, actor_id, created_at)
+            VALUES
+                (:request_id, :from_status, :to_status, :actor_type, :actor_id, NOW())
+            """
+        ),
+        {
+            "request_id": request_id,
+            "from_status": from_status,
+            "to_status": to_status,
+            "actor_type": actor_type,
+            "actor_id": actor_id,
+        },
+    )
 
 
 def _create_initial_dispatch_offers(
@@ -311,6 +348,7 @@ def create_request(payload: ServiceRequestCreate, db: Session = Depends(get_db))
         row = result.fetchone()
         request_id = int(row.id)
         offers = _create_initial_dispatch_offers(db, request_id, payload.service_type)
+        _record_status_history(db, request_id, None, REQUEST_SEARCHING, "client", payload.client_id)
         db.commit()
         storage = "database"
     except Exception:
@@ -496,6 +534,7 @@ def select_provider(request_id: int, payload: SelectProviderPayload, db: Session
             ),
             {"request_id": request_id, "provider_id": payload.provider_id},
         )
+        _record_status_history(db, request_id, request.status, REQUEST_ASSIGNED, "client", payload.provider_id)
 
         if _table_exists(db, "provider_profiles"):
             db.execute(
@@ -549,6 +588,7 @@ def start_request(request_id: int, db: Session = Depends(get_db)):
     if not result:
         db.rollback()
         raise HTTPException(status_code=409, detail="request_must_be_assigned")
+    _record_status_history(db, request_id, REQUEST_ASSIGNED, REQUEST_IN_PROGRESS, "provider", int(result.provider_id))
     db.commit()
     return {"request_id": int(result.id), "provider_id": int(result.provider_id), "status": result.status}
 
@@ -591,6 +631,7 @@ def complete_request(request_id: int, payload: CompleteRequestPayload = Complete
             text("UPDATE service_requests SET status = 'completed' WHERE id = :request_id"),
             {"request_id": request_id},
         )
+        _record_status_history(db, request_id, request.status, REQUEST_COMPLETED, "provider", int(provider_id))
 
         if _table_exists(db, "provider_profiles"):
             db.execute(
@@ -598,11 +639,12 @@ def complete_request(request_id: int, payload: CompleteRequestPayload = Complete
                     """
                     UPDATE provider_profiles
                     SET is_busy = FALSE,
-                        active_jobs = GREATEST(COALESCE(active_jobs, 1) - 1, 0)
+                        active_jobs = GREATEST(COALESCE(active_jobs, 1) - 1, 0),
+                        completed_jobs = COALESCE(completed_jobs, 0) + CASE WHEN :was_completed = FALSE THEN 1 ELSE 0 END
                     WHERE id = :provider_id
                     """
                 ),
-                {"provider_id": provider_id},
+                {"provider_id": provider_id, "was_completed": request.status == REQUEST_COMPLETED},
             )
 
         db.commit()
@@ -685,6 +727,33 @@ def rate_request(request_id: int, payload: RatingPayload, db: Session = Depends(
                 "comment": payload.comment,
             },
         ).fetchone()
+        _record_status_history(db, request_id, request.status, REQUEST_RATED, "client", payload.client_id)
+        if _table_exists(db, "provider_profiles"):
+            db.execute(
+                text(
+                    """
+                    UPDATE provider_profiles
+                    SET rating_count = stats.rating_count,
+                        rating_sum = stats.rating_sum,
+                        average_rating = stats.average_rating
+                    FROM (
+                        SELECT provider_id,
+                               COUNT(*)::INTEGER AS rating_count,
+                               COALESCE(SUM(rating), 0)::INTEGER AS rating_sum,
+                               COALESCE(ROUND(AVG(rating)::numeric, 2), 0)::FLOAT AS average_rating
+                        FROM provider_ratings
+                        WHERE provider_id = :provider_id
+                        GROUP BY provider_id
+                    ) AS stats
+                    WHERE provider_profiles.id = stats.provider_id
+                    """
+                ),
+                {"provider_id": payload.provider_id},
+            )
+        db.execute(
+            text("UPDATE service_requests SET status = 'rated' WHERE id = :request_id"),
+            {"request_id": request_id},
+        )
         db.commit()
         return {
             "request_id": request_id,
