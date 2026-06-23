@@ -555,9 +555,46 @@ function createMockOffers(service) {
 
   return profiles.map((profile, index) => ({
     id: `${Date.now()}-${index}`,
+    provider_id: index + 1,
     service,
     ...profile
   }));
+}
+
+
+async function postLifecycle(endpoint, payload = {}) {
+  if (!API_BASE) return null;
+  const base = API_BASE.replace(/\/$/, '');
+  const response = await fetch(`${base}${endpoint}`, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify(payload)
+  });
+
+  if (!response.ok) {
+    throw new Error(`Backend error ${response.status}`);
+  }
+
+  return response.json();
+}
+
+function activeRequest() {
+  return state.requests[0] || null;
+}
+
+function activeBackendRequestId() {
+  const request = activeRequest();
+  return request?.backend_request_id || request?.id || null;
+}
+
+function markActiveRequestStatus(status, providerId = null) {
+  const request = activeRequest();
+  if (!request) return;
+  request.status = status;
+  if (providerId) request.provider_id = providerId;
+  state.requests[0] = request;
+  saveState();
+  renderLists();
 }
 
 async function postToBackend(payload) {
@@ -830,12 +867,111 @@ function openSpecialistProfile(offerId) {
     <div class="specialist-actions">
       <button class="navy-button" type="button">Написать</button>
       <button class="navy-button" type="button">Позвонить</button>
-      <button class="gold-button" type="button" data-close-specialist>Выбрать специалиста</button>
+      <button class="gold-button" type="button" data-select-specialist="${escapeHtml(item.id)}">Выбрать специалиста</button>
+      <button class="navy-button" type="button" data-start-order="${escapeHtml(item.id)}">Начать заказ</button>
+      <button class="navy-button" type="button" data-complete-order="${escapeHtml(item.id)}">Завершить заказ</button>
+      <button class="gold-button" type="button" data-rate-order="${escapeHtml(item.id)}">Поставить 5★</button>
     </div>
   `;
 
   modal.hidden = false;
   document.body.classList.add('modal-open');
+}
+
+
+function providerIdFromOfferId(offerId) {
+  const rawIndex = state.offers.findIndex((offer, index) => String(offer.id || `legacy-${index}`) === String(offerId));
+  if (rawIndex < 0) return null;
+  const item = normalizeOffer(state.offers[rawIndex], rawIndex);
+  return Number(item.provider_id || item.providerId || rawIndex + 1);
+}
+
+async function selectSpecialist(offerId) {
+  const providerId = providerIdFromOfferId(offerId);
+  const requestIdValue = activeBackendRequestId();
+  if (!providerId || !requestIdValue) {
+    toast('Нет активной заявки для выбора специалиста.');
+    return;
+  }
+
+  markActiveRequestStatus('assigned', providerId);
+  state.offers = state.offers.map((offer, index) => {
+    const item = normalizeOffer(offer, index);
+    return { ...offer, status: String(item.id) === String(offerId) ? 'Выбран исполнителем' : 'Не выбран' };
+  });
+  saveState();
+  renderLists();
+  $('#dispatchState').textContent = 'Исполнитель выбран';
+  addTimeline('ok', 'Исполнитель выбран', `Специалист #${providerId} назначен на заявку.`);
+
+  try {
+    await postLifecycle(`/requests/${requestIdValue}/select`, { provider_id: providerId });
+    addTimeline('ok', 'Backend подтверждение', 'Заявка переведена в assigned.');
+  } catch (error) {
+    addTimeline('warn', 'Backend недоступен', 'Выбор сохранён локально.');
+  }
+
+  closeSpecialistProfile();
+}
+
+async function startOrder(offerId) {
+  const providerId = providerIdFromOfferId(offerId);
+  const requestIdValue = activeBackendRequestId();
+  if (!requestIdValue) return;
+
+  markActiveRequestStatus('in_progress', providerId);
+  $('#dispatchState').textContent = 'В работе';
+  addTimeline('ok', 'Заказ начат', 'Исполнитель приступил к выполнению.');
+
+  try {
+    await postLifecycle(`/requests/${requestIdValue}/start`, {});
+    addTimeline('ok', 'Backend подтверждение', 'Заявка переведена в in_progress.');
+  } catch (error) {
+    addTimeline('warn', 'Backend недоступен', 'Старт заказа сохранён локально.');
+  }
+
+  closeSpecialistProfile();
+}
+
+async function completeOrder(offerId) {
+  const providerId = providerIdFromOfferId(offerId);
+  const requestIdValue = activeBackendRequestId();
+  if (!requestIdValue) return;
+
+  markActiveRequestStatus('completed', providerId);
+  $('#dispatchState').textContent = 'Завершён';
+  addTimeline('ok', 'Заказ завершён', 'Можно оставить рейтинг исполнителю.');
+
+  try {
+    await postLifecycle(`/requests/${requestIdValue}/complete`, { provider_id: providerId });
+    addTimeline('ok', 'Backend подтверждение', 'Заявка переведена в completed.');
+  } catch (error) {
+    addTimeline('warn', 'Backend недоступен', 'Завершение сохранено локально.');
+  }
+
+  closeSpecialistProfile();
+}
+
+async function rateOrder(offerId) {
+  const providerId = providerIdFromOfferId(offerId);
+  const requestIdValue = activeBackendRequestId();
+  if (!providerId || !requestIdValue) return;
+
+  addTimeline('ok', 'Рейтинг отправлен', 'Клиент поставил исполнителю 5★.');
+
+  try {
+    await postLifecycle(`/requests/${requestIdValue}/rating`, {
+      client_id: 1,
+      provider_id: providerId,
+      rating: 5,
+      comment: 'Заказ выполнен успешно.'
+    });
+    addTimeline('ok', 'Backend подтверждение', 'Рейтинг сохранён на сервере.');
+  } catch (error) {
+    addTimeline('warn', 'Backend недоступен', 'Рейтинг сохранён в локальной истории.');
+  }
+
+  closeSpecialistProfile();
 }
 
 function closeSpecialistProfile() {
@@ -847,6 +983,15 @@ function closeSpecialistProfile() {
 
 function setupSpecialistModal() {
   document.addEventListener('click', (event) => {
+    const selectButton = event.target.closest('[data-select-specialist]');
+    const startButton = event.target.closest('[data-start-order]');
+    const completeButton = event.target.closest('[data-complete-order]');
+    const rateButton = event.target.closest('[data-rate-order]');
+
+    if (selectButton) selectSpecialist(selectButton.dataset.selectSpecialist);
+    if (startButton) startOrder(startButton.dataset.startOrder);
+    if (completeButton) completeOrder(completeButton.dataset.completeOrder);
+    if (rateButton) rateOrder(rateButton.dataset.rateOrder);
     if (event.target.closest('[data-close-specialist]')) closeSpecialistProfile();
   });
   document.addEventListener('keydown', (event) => {
