@@ -4896,6 +4896,28 @@ html.light-mode .bw-ai-dialog{background:linear-gradient(180deg,#fff,#f4faf6);co
 @media(max-width:700px){.bw-web-tools{grid-template-columns:1fr;gap:12px;margin:14px 0 20px}.bw-web-tool-card{border-radius:22px;padding:16px}.bw-tasbih-main{grid-template-columns:74px 1fr auto;gap:9px}.bw-tasbih-count{font-size:36px}.bw-tasbih-count span{font-size:21px}.bw-tasbih-add{min-width:78px;padding:0 12px}.bw-ai-card{min-height:104px}.bw-ai-launch{width:58px;height:58px;min-width:58px}}
 @media(max-width:380px){.bw-tasbih-main{grid-template-columns:1fr auto}.bw-tasbih-meta{grid-column:1/-1;flex-direction:row;justify-content:space-between}.bw-tasbih-count{text-align:left}.bw-tasbih-buttons{justify-content:flex-end}}
 </style>
+
+<style id="bw-footer-store-actions-v1">
+.bw-pro-intro > .bw-store-actions{display:none!important;}
+.bw-footer-store-actions{display:flex!important;align-items:center;justify-content:flex-end;gap:10px;flex-wrap:nowrap;margin-left:auto;}
+.bw-footer-store-actions .bw-store-link{min-height:44px;padding:7px 13px;border-radius:14px;}
+.bw-footer-store-actions .bw-store-icon{width:24px;height:24px;flex-basis:24px;}
+.bw-footer-store-actions .bw-store-copy small{font-size:8px;}
+.bw-footer-store-actions .bw-store-copy strong{font-size:13px;}
+@media(max-width:760px){
+  .bw-footer-store-actions{width:100%;justify-content:center;gap:8px;margin-left:0;}
+  .bw-footer-store-actions .bw-store-link{flex:1 1 0;min-width:0;max-width:190px;padding:8px 10px;}
+  .bw-footer-store-actions .bw-store-copy strong{font-size:12px;}
+}
+@media(max-width:390px){
+  .bw-footer-store-actions{gap:6px;}
+  .bw-footer-store-actions .bw-store-link{padding:8px;border-radius:12px;}
+  .bw-footer-store-actions .bw-store-icon{width:21px;height:21px;flex-basis:21px;}
+  .bw-footer-store-actions .bw-store-copy small{font-size:7px;}
+  .bw-footer-store-actions .bw-store-copy strong{font-size:11px;}
+}
+</style>
+
 </head>
 <body>
 
@@ -12334,6 +12356,32 @@ window.addEventListener('load', function(){ setTimeout(controlProVisibility, 120
   render();
 })();
 </script>
+
+<script id="bw-move-store-actions-to-footer-v1">
+(function(){
+  "use strict";
+  function moveStoreButtons(){
+    var actions=document.querySelector('.bw-pro-intro > .bw-store-actions') || document.querySelector('.bw-footer-store-actions');
+    var install=document.querySelector('.bw-footer-install');
+    if(!actions || !install) return false;
+    actions.classList.add('bw-footer-store-actions');
+    actions.removeAttribute('style');
+    install.replaceWith(actions);
+    return true;
+  }
+  function start(){
+    if(moveStoreButtons()) return;
+    var observer=new MutationObserver(function(){
+      if(moveStoreButtons()) observer.disconnect();
+    });
+    observer.observe(document.documentElement,{childList:true,subtree:true});
+    setTimeout(function(){moveStoreButtons();observer.disconnect();},4000);
+  }
+  if(document.readyState==='loading') document.addEventListener('DOMContentLoaded',start); else start();
+  window.addEventListener('load',moveStoreButtons);
+})();
+</script>
+
 </body>
 </html>
 
