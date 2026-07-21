@@ -2660,8 +2660,10 @@ input.addEventListener("input", function(){
     var install=document.querySelector('.bw-footer-install');
     if(existing){if(install) install.remove();return true;}
     if(install){install.insertAdjacentHTML('beforebegin',footerMarkup);install.remove();return true;}
-    var target=document.querySelector('.bw-footer-panel,footer.footer .wrap');
+    var target=document.querySelector('.bw-footer-line,.bw-footer-panel,footer.footer .wrap');
     if(target){target.insertAdjacentHTML('beforeend',footerMarkup);return true;}
+    var slot=document.querySelector('[data-bw-component-slot="footer"]');
+    if(slot)return false;
     if(!document.querySelector('.bw-global-store-footer')){var holder=document.createElement('div');holder.className='bw-global-store-footer';holder.innerHTML=footerMarkup;document.body.appendChild(holder);return true;}
     return false;
   }
