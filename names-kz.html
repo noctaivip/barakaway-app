@@ -1009,6 +1009,17 @@ html.light-mode .premium-categories-wrap[data-pro-state="locked"] .premium-card.
 @media(max-width:760px){.bw-web-topnav__inner,.bw-main-header__inner{flex-wrap:wrap!important}.bw-web-brand,.bw-main-header__brand{min-width:0!important;flex:0 1 auto!important;margin-right:0!important}.bw-header-store-actions{margin-left:auto}.bw-web-links{width:100%!important;order:3}.bw-footer-store-actions{width:100%;justify-content:center;gap:8px;margin-left:0}.bw-footer-store-actions .bw-store-link{flex:1 1 0;min-width:0;max-width:190px;padding:8px 10px}.bw-footer-store-actions .bw-store-copy strong{font-size:12px}.bw-global-store-footer{margin:30px 16px 20px;padding:18px 14px}}
 @media(max-width:390px){.bw-footer-store-actions{gap:6px}.bw-footer-store-actions .bw-store-link{padding:8px;border-radius:12px}.bw-footer-store-actions .bw-store-icon{width:21px;height:21px;flex-basis:21px}.bw-footer-store-actions .bw-store-copy small{font-size:7px}.bw-footer-store-actions .bw-store-copy strong{font-size:11px}}
 </style>
+
+<style id="bw-names-nav-pro-fix-v1">
+/* Navigation feedback */
+.nav-buttons .light{transition:border-color .18s ease,box-shadow .18s ease,transform .12s ease,background .18s ease;color .18s ease}
+.nav-buttons .light:hover{border-color:#d7c07a!important;box-shadow:0 0 0 1px rgba(215,192,122,.18),0 8px 20px rgba(0,0,0,.16);transform:translateY(-1px)}
+.nav-buttons .light:active{border-color:#f0d891!important;background:linear-gradient(180deg,rgba(215,192,122,.18),rgba(215,192,122,.08))!important;box-shadow:inset 0 2px 8px rgba(0,0,0,.22),0 0 0 2px rgba(215,192,122,.16);transform:translateY(1px) scale(.985)}
+.nav-buttons .light:focus-visible{outline:2px solid #d7c07a;outline-offset:3px}
+/* Locked PRO cards remain actionable and open the PRO page */
+.premium-categories-wrap[data-pro-state="locked"] .premium-card{cursor:pointer!important;pointer-events:auto!important}
+.manual-note[hidden]{display:none!important}
+</style>
 </head>
 <body>
 
@@ -1051,7 +1062,7 @@ html.light-mode .premium-categories-wrap[data-pro-state="locked"] .premium-card.
 <button class="light" id="nextBtn">Келесі ›</button>
 </div>
 
-<div class="manual-note" id="playStatus">Алдыңғы/келесі арқылы немесе 1–10 секунд авто режимде оқыңыз.</div>
+<div class="manual-note" id="playStatus" hidden></div>
 </div>
 </div>
 
@@ -1235,7 +1246,7 @@ function initPremiumDescriptionCards(){
   const cards = document.querySelectorAll(".premium-card");
   cards.forEach((card) => {
     card.addEventListener("click", () => {
-      if(!isNamesProActive()) return;
+      if(!isNamesProActive()){ window.location.href = "pro-kz.html"; return; }
       cards.forEach((item) => item.classList.remove("active"));
       card.classList.add("active");
       activePremiumSet = card.dataset.premiumSet || "";
