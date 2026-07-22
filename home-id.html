@@ -15560,9 +15560,11 @@ window.addEventListener('load', function(){ setTimeout(controlProVisibility, 120
 (function(){
   "use strict";
   function moveStoreButtons(){
-    var actions=document.querySelector('.bw-pro-intro > .bw-store-actions') || document.querySelector('.bw-footer-store-actions');
     var install=document.querySelector('.bw-footer-install');
-    if(!actions || !install) return false;
+    if(!install) return !!document.querySelector('.bw-footer-store-actions');
+    var source=document.querySelector('.install-box .bw-store-actions');
+    if(!source) return false;
+    var actions=source.cloneNode(true);
     actions.classList.add('bw-footer-store-actions');
     actions.removeAttribute('style');
     install.replaceWith(actions);
