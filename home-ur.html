@@ -4966,7 +4966,7 @@ html.light-mode .bw-pro-card{
 .bw-pro-card .premium-resource-title{color:#ffe08a;}
 .bw-pro-card .premium-resource-text{line-height:1.5;}
 </style>
-<link rel="stylesheet" href="barakaway-mobile.css?v=socials-mobile-exact-svg-20260722-2">
+<link rel="stylesheet" href="barakaway-mobile.css">
 <style id="bw-home-store-buttons-v1">
 .bw-store-actions{display:flex;align-items:center;justify-content:center;gap:10px;flex-wrap:nowrap;}
 .bw-store-link{display:inline-flex;align-items:center;gap:10px;min-height:52px;padding:8px 16px;border:1px solid rgba(215,181,109,.28);border-radius:15px;background:linear-gradient(180deg,rgba(22,31,28,.96),rgba(11,18,16,.96));color:#fff;text-decoration:none;box-shadow:0 10px 24px rgba(0,0,0,.17),inset 0 1px 0 rgba(255,255,255,.05);transition:transform .18s ease,border-color .18s ease,box-shadow .18s ease;white-space:nowrap;}
@@ -5107,6 +5107,59 @@ justify-content:center!important;
 .bw-ai-dialog-actions .bw-store-icon{width:23px;height:23px;flex-basis:23px;}
 .bw-ai-dialog-actions .bw-store-copy small{font-size:7px;}
 .bw-ai-dialog-actions .bw-store-copy strong{font-size:13px;}
+}
+</style>
+
+<style id="bw-app-availability-badges">
+/* Compact availability label for features that open in the BarakaWay app */
+.bw-app-features-grid .bw-feature-card,
+.bw-pro-features-grid .bw-pro-card{
+  position:relative;
+  padding-top:46px;
+}
+.bw-app-features-grid .bw-feature-card::after,
+.bw-pro-features-grid .bw-pro-card::after{
+  content:attr(data-app-badge);
+  position:absolute;
+  inset-block-start:13px;
+  inset-inline-end:14px;
+  z-index:2;
+  display:inline-flex;
+  align-items:center;
+  min-height:24px;
+  padding:4px 10px;
+  border:1px solid rgba(211,177,83,.52);
+  border-radius:999px;
+  background:linear-gradient(180deg,rgba(36,57,45,.94),rgba(18,36,28,.94));
+  box-shadow:0 5px 14px rgba(0,0,0,.16),inset 0 1px 0 rgba(255,255,255,.10);
+  color:#f5dda0;
+  font-size:11px;
+  font-weight:800;
+  line-height:1;
+  letter-spacing:.015em;
+  white-space:nowrap;
+  pointer-events:none;
+}
+html.light-mode .bw-app-features-grid .bw-feature-card::after,
+html.light-mode .bw-pro-features-grid .bw-pro-card::after{
+  background:linear-gradient(180deg,rgba(255,253,245,.98),rgba(245,239,219,.98));
+  border-color:rgba(170,126,25,.38);
+  box-shadow:0 5px 14px rgba(74,55,12,.09),inset 0 1px 0 rgba(255,255,255,.9);
+  color:#7b5a0c;
+}
+@media(max-width:640px){
+  .bw-app-features-grid .bw-feature-card,
+  .bw-pro-features-grid .bw-pro-card{
+    padding-top:43px;
+  }
+  .bw-app-features-grid .bw-feature-card::after,
+  .bw-pro-features-grid .bw-pro-card::after{
+    inset-block-start:11px;
+    inset-inline-end:11px;
+    min-height:22px;
+    padding:4px 9px;
+    font-size:10px;
+  }
 }
 </style>
 </head>
@@ -5331,19 +5384,19 @@ justify-content:center!important;
 <div class="bw-showcase-text">قبلہ، قریبی مساجد، مبارکبادیں اور تہجد الارم BarakaWay موبائل ایپ میں زیادہ آسان ہیں۔</div>
 </div>
 <div class="premium-resource-grid bw-app-features-grid">
-<a class="premium-resource-card bw-feature-card" href="install-app-ur.html">
+<a class="premium-resource-card bw-feature-card" data-app-badge="ایپ میں" href="install-app-ur.html">
 <div class="premium-resource-icon">🧭</div>
 <div><div class="premium-resource-title">قبلہ</div><div class="premium-resource-text">نماز کی سمت موبائل ایپ میں آسانی سے دیکھیں۔</div></div>
 </a>
-<a class="premium-resource-card bw-feature-card" href="install-app-ur.html">
+<a class="premium-resource-card bw-feature-card" data-app-badge="ایپ میں" href="install-app-ur.html">
 <div class="premium-resource-icon">🕌</div>
 <div><div class="premium-resource-title">قریبی مساجد</div><div class="premium-resource-text">اپنے مقام کے قریب مساجد جلدی تلاش کریں۔</div></div>
 </a>
-<a class="premium-resource-card bw-feature-card" href="install-app-ur.html">
+<a class="premium-resource-card bw-feature-card" data-app-badge="ایپ میں" href="install-app-ur.html">
 <div class="premium-resource-icon">🌙</div>
 <div><div class="premium-resource-title">مبارکبادیں</div><div class="premium-resource-text">جمعہ، رمضان اور عید کے لیے خوبصورت اسلامی کارڈز۔</div></div>
 </a>
-<a class="premium-resource-card bw-feature-card" href="install-app-ur.html">
+<a class="premium-resource-card bw-feature-card" data-app-badge="ایپ میں" href="install-app-ur.html">
 <div class="premium-resource-icon">⏰</div>
 <div><div class="premium-resource-title">تہجد الارم</div><div class="premium-resource-text">فجر سے پہلے رات کی نماز کے لیے نرم یاد دہانی۔</div></div>
 </a>
@@ -5369,19 +5422,19 @@ justify-content:center!important;
 </div>
 </div>
 <div class="premium-resource-grid bw-pro-features-grid">
-<a class="premium-resource-card bw-pro-card" href="pro-ur.html">
+<a class="premium-resource-card bw-pro-card" data-app-badge="ایپ میں" href="pro-ur.html">
 <div class="premium-resource-icon">📖</div>
 <div><div class="premium-resource-title">Quran Khatm</div><div class="premium-resource-text">A personal Quran reading path: bookmarks, progress tracking and steady daily movement toward completing khatm.</div></div>
 </a>
-<a class="premium-resource-card bw-pro-card" href="pro-ur.html">
+<a class="premium-resource-card bw-pro-card" data-app-badge="ایپ میں" href="pro-ur.html">
 <div class="premium-resource-icon">🤲</div>
 <div><div class="premium-resource-title">Duas through 99 Names</div><div class="premium-resource-text">Deep dua collections for life situations: healing, repentance, debt relief, barakah, happiness and protection.</div></div>
 </a>
-<a class="premium-resource-card bw-pro-card" href="pro-ur.html">
+<a class="premium-resource-card bw-pro-card" data-app-badge="ایپ میں" href="pro-ur.html">
 <div class="premium-resource-icon">✨</div>
 <div><div class="premium-resource-title">Premium Greetings</div><div class="premium-resource-text">Beautiful Islamic GIF animations, cards and messages for Jumu‘ah, Ramadan, Eid and special days.</div></div>
 </a>
-<a class="premium-resource-card bw-pro-card" href="pro-ur.html">
+<a class="premium-resource-card bw-pro-card" data-app-badge="ایپ میں" href="pro-ur.html">
 <div class="premium-resource-icon">👑</div>
 <div><div class="premium-resource-title">Premium Themes</div><div class="premium-resource-text">Elite BarakaWay visual styles: gold, emerald, violet, rose, carbon and kids theme.</div></div>
 </a>
@@ -13544,7 +13597,7 @@ const TASK_PREFIX = "barakaway_today_ur_";
   observer.observe(document.documentElement, {childList:true, subtree:true});
 })();
 </script>
-<script src="web-navigation.js?v=socials-mobile-one-row-20260722-1"></script>
+<script src="web-navigation.js?v=no-dua-force-20260616-2"></script>
 <script id="bw-home-header-nav-v2">
 (function(){
   var items = [["صفحہ اول", "home-ur.html"], ["قرآن", "quran-ur.html"], ["اذکار", "adhkar-ur.html"], ["دعا", "prophets-duas-ur.html"], ["99 نام", "names-ur.html"], ["مضامین", "articles-ur.html"], ["زندگی", "life-situations-ur.html"], ["حصن", "prophets-duas-ur.html"], ["Pro", "pro-ur.html"]];
